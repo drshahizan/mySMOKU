@@ -1,0 +1,248 @@
+.fc {
+    .fc-toolbar {
+        @include border-radius(0);
+        @extend .p-b-10;
+        @extend .margin-0;
+        color: var(--font-333);
+        background: transparent; 
+
+        h2 {
+            @extend .font-16;
+            @extend .p-t-5;
+            @extend .margin-0;
+            color: var(--font-777);
+            text-transform: uppercase;
+        }
+        .fc-today-button, .fc-state-default{
+            @include border-radius(0);
+            background: transparent;
+            color: var(--font-777);
+            font-size: $font-size;
+            padding: 5px 18px;
+            height: auto;                
+            border: none;
+            box-shadow: none;
+            text-shadow: none;
+        }        
+    }
+    .fc-view-container {
+        .fc-event {
+            @extend .font-12;
+            color: var(--font-eee);
+            border-radius: $border-radius-small;            
+            border: 0;
+            padding: 3px 5px;
+
+            &.fc-event-end:not(.fc-event-start) {
+                border: 0!important;
+            }
+
+            &:focus,
+            &:hover,
+            &:active {
+                z-index: 1000;
+                color: var(--font-fff);
+
+                .fc-overlay {
+                    @include display-block;
+                }
+            }
+        }
+        .fc-view {
+            &.fc-basic-view,
+            &.fc-agenda {
+                >table {
+                    >thead {
+                        tr {
+                            th,
+                            td {
+                                &.fc-widget-header {
+                                    border: 1px solid var(--border-color);
+                                    padding: 10px;
+                                    color: var(--font-333);
+                                }
+                                &.fc-agenda-gutter {
+                                    @extend .padding-0;
+                                }
+                            }
+                            td {
+                                &.fc-widget-header {
+                                    @extend .padding-0;
+                                }
+                            }
+                        }
+                    }
+                    tbody {
+                        tr {
+                            td {
+                                &.fc-widget-content {
+                                    border: 0;
+                                    border-bottom: 1px solid var(--border-color);
+                                    border-right: 1px solid var(--border-color);
+
+                                    &.fc-state-highlight {
+                                        background: var(--white-color);
+                                    }
+                                }
+                                &.fc-day-number {
+                                    @extend .font-15;
+                                    padding: 5px 10px;
+                                    margin: 5px;
+                                    color: var(--font-333);
+
+                                    &.fc-state-highlight {
+                                        @include border-radius(50%);
+                                        background-color: $red;
+                                        color: var(--font-fff);
+                                        padding: 4px 6px;
+                                        float: right;
+                                    }
+                                }
+                                &:first-child {
+                                    &.fc-widget-content {
+                                        border-left: 1px solid var(--border-color);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .fc-body {
+                    .fc-row .fc-bg {
+                        border-bottom: 1px solid var(--border-color);
+                    }
+                    .fc-row:last-of-type .fc-bg {                        
+                        border-bottom: 0;
+                    }
+                }
+                .fc-agenda-allday {
+                    .fc-agenda-axis,
+                    .fc-agenda-gutter {
+                        @extend .font-12;
+                        border-left: 1px solid var(--border-color);
+                        border-right: 1px solid var(--border-color);
+                        background-color: var(--font-ccc);
+                        color: var(--font-333);
+                        font-weight: $font-weight-300;
+                        padding: 10px 5px;
+                    }
+                }
+                >table {
+                    >tbody {
+                        >tr {
+                            >td {
+                                &.fc-state-highlight {
+                                    background: var(--font-ccc);
+                                }
+                                &.fc-sat {
+                                    border-right: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+                .fc-agenda-slots {
+                    tr {
+                        line-height: 35px;
+                        th {
+                            border-left: 1px solid var(--border-color);
+                            border-right: 1px solid var(--border-color);
+                            background-color: var(--font-ccc);
+                            color: var(--font-333);
+                            font-weight: $font-weight-300;
+                            font-size: 12px;
+                            border: 0;
+                            padding-top: 10px;
+                        }
+                        td.fc-widget-content {
+                            border-bottom: 1px solid var(--border-color);
+                            line-height: 50px;
+
+                            &:last-child {
+                                border-right: 0;
+                            }
+                        }
+                        &.fc-minor {
+                            td.fc-widget-content {
+                                border-bottom: 1px solid var(--border-color);
+                            }
+                        }
+                    }
+                }
+                .fc-agenda-divider {
+                    border: 1px solid var(--border-color);
+                    .fc-agenda-divider-inner {
+                        background-color: var(--font-ccc);
+                        height: 3px;
+                    }
+                }
+            }
+        }
+        .fc-list-view{
+            .fc-list-item{
+                color: var(--font-ccc);
+            }
+        }
+        .fc-other-month{
+            background: var(--body-color);
+        }
+
+        .fc-basic-view .fc-day-number, .fc-basic-view .fc-week-number{
+            float: left;
+            padding: 10px 0 5px 10px;
+        }
+    }
+    .fc-popover{
+        border-radius: $border-radius-large;
+        box-shadow: 0px 10px 50px 0px var(--box-shadow);
+        border: none;
+        padding: 10px;
+
+        .fc-event-container{
+            padding: 0;
+        }
+        .fc-event{
+            padding: 4px 8px;
+            margin: 2px 0px;
+        }
+    
+    }
+    .fc-agendaWeek-view,
+    .fc-agendaDay-view,
+    .fc-listWeek-view{
+        .fc-head{
+            .fc-widget-header{
+                span{
+                    padding: 10px;
+                    display: inline-block;
+                }
+            }
+        }
+    }  
+    .fc-divider{
+       display: none;
+    }
+    .fc-scroller{
+        height: auto !important;
+        overflow: unset !important;
+    }
+    
+}
+
+.fc-unthemed{
+    th{
+        background: var(--border-color);
+    }
+    td, th{
+        border-color: var(--border-color); 
+    }
+    .fc-divider{
+        background: var(--border-color); 
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .fc-toolbar .fc-right{ display: none;}
+    .fc-toolbar .fc-left{ width: 100%; margin-bottom: 15px;}
+    .fc .fc-toolbar .fc-today-button{ float: right;}
+}

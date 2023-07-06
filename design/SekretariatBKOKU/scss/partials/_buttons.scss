@@ -1,0 +1,48 @@
+.btn{
+    @include transition(all .3s ease-in-out);
+    @include border-radius(0);
+    font-size: 14px;
+    font-weight: $font-weight-300;
+    
+    &:hover{
+        @include box-shadow(0 3px 7px 0 var(--box-shadow));
+    }
+    
+    &.btn-primary{
+        border: 0;
+        line-height: 1.6;
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        &:hover{
+            color: var(--font-fff) !important;
+        }
+    }
+    &.btn-outline-primary{
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+	&.btn-round{
+        @include border-radius(50px);
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+    &.btn-default{
+		color: var(--font-555);
+		background-color: var(--card-color);
+		border-color: var(--border-color);
+		padding: 6px 18px;
+		
+		&.btn-sm{
+			padding: 4px 10px;
+		}
+		&:hover{
+			color: var(--font-777);
+			border-color: var(--font-ccc);
+		}
+    }
+    &.btn-dark{
+        background-color: var(--dark-color);
+        border-color: var(--dark-color);
+        color: var(--font-eee);
+    }
+}

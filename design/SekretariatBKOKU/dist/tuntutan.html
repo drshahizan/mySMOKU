@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<title>Sekretariat BKOKU KPT | Permohonan</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="description" content="Mooli Bootstrap 4x admin is super flexible, powerful, clean &amp; modern responsive admin dashboard with unlimited possibilities.">
+<meta name="author" content="GetBootstrap, design by: puffintheme.com">
+
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- VENDOR CSS -->
+<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/vendor/animate-css/vivify.min.css">
+
+<link rel="stylesheet" href="assets/vendor/chartist/css/chartist.min.css">
+<link rel="stylesheet" href="assets/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
+<link rel="stylesheet" href="assets/vendor/c3/c3.min.css"/>
+<link rel="stylesheet" href="assets/vendor/toastr/toastr.min.css">
+<link rel="stylesheet" href="assets/vendor/jvectormap/jquery-jvectormap-2.0.3.min.css"/>
+<link rel="stylesheet" href="assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css">
+<!-- MAIN CSS -->
+<link rel="stylesheet" href="assets/css/mooli.min.css">
+
+</head>
+<body>
+    
+<div id="body" class="theme-cyan">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="m-t-30"><img src="assets/images/icon.svg" width="40" height="40" alt="Mooli"></div>
+            <p>Tunggu Sebentar</p>        
+        </div>
+    </div>
+
+    <!-- Theme Setting -->
+    <div class="themesetting">
+        <a href="javascript:void(0);" class="theme_btn"><i class="fa fa-gear fa-spin"></i></a>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <ul class="choose-skin list-unstyled mb-0">
+                    <li data-theme="green"><div class="green"></div></li>
+                    <li data-theme="orange"><div class="orange"></div></li>
+                    <li data-theme="blush"><div class="blush"></div></li>
+                    <li data-theme="cyan" class="active"><div class="cyan"></div></li>
+                    <li data-theme="timber"><div class="timber"></div></li>
+                    <li data-theme="blue"><div class="blue"></div></li>
+                    <li data-theme="amethyst"><div class="amethyst"></div></li>
+                </ul>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+                <span>Light Sidebar</span>
+                <label class="switch sidebar_light">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+                <span>Gradient</span>
+                <label class="switch gradient_mode">
+                    <input type="checkbox" checked="">
+                    <span class="slider round"></span>
+                </label>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+                <span>Dark Mode</span>
+                <label class="switch dark_mode">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+                <span>RTL version</span>
+                <label class="switch rtl_mode">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </li>
+        </ul>
+        <hr>
+        <div>
+            <a href="javascript:void(0);" class="btn btn-dark btn-block" target="_blank">Buy this item</a>
+            <a href="javascript:void(0);" target="_blank" class="btn btn-primary theme-bg gradient btn-block">View Portfolio</a>
+        </div>
+    </div>
+
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+
+    <div id="wrapper">
+
+        <!-- Page top navbar -->
+        <nav class="navbar navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-left">
+                    <div class="navbar-btn">
+                        <a href="index.html"><img src="assets/images/icon.svg" alt="Mooli Logo" class="img-fluid logo"></a>
+                        <button type="button" class="btn-toggle-offcanvas"><i class="fa fa-align-left"></i></button>
+                    </div>
+                </div>
+                <div class="navbar-right">
+                    <div id="navbar-menu">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                                    <i class="fa fa-bell-o"></i>
+                                    <span class="notification-dot info">4</span>
+                                </a>
+                                <ul class="dropdown-menu feeds_widget mt-0 animation-li-delay">
+                                    <li class="header theme-bg gradient mt-0 text-light">You have 4 New Notifications</li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="mr-4"><i class="fa fa-check text-red"></i></div>
+                                            <div class="feeds-body">
+                                                <h4 class="title text-danger">Issue Fixed <small class="float-right text-muted font-12">9:10 AM</small></h4>
+                                                <small>WE have fix all Design bug with Responsive</small>
+                                            </div>
+                                        </a>
+                                    </li>                               
+                                    <li>
+                                        <a href="#">
+                                            <div class="mr-4"><i class="fa fa-user text-info"></i></div>
+                                            <div class="feeds-body">
+                                                <h4 class="title text-info">New User <small class="float-right text-muted font-12">9:15 AM</small></h4>
+                                                <small>I feel great! Thanks team</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="mr-4"><i class="fa fa-question-circle text-warning"></i></div>
+                                            <div class="feeds-body">
+                                                <h4 class="title text-warning">Server Warning <small class="float-right text-muted font-12">9:17 AM</small></h4>
+                                                <small>Your connection is not private</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="mr-4"><i class="fa fa-thumbs-o-up text-success"></i></div>
+                                            <div class="feeds-body">
+                                                <h4 class="title text-success">2 New Feedback <small class="float-right text-muted font-12">9:22 AM</small></h4>
+                                                <small>It will give a smart finishing to your site</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="hidden-xs"><a href="javascript:void(0);" id="btnFullscreen" class="icon-menu"><i class="fa fa-arrows-alt"></i></a></li>
+                            <li><a href="page-login.html" class="icon-menu"><i class="fa fa-power-off"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="recent_searche" style="display: none;">
+                    <div class="card mb-0">
+                        <div class="header">
+                            <h2>Recent search result</h2>
+                            <ul class="header-dropdown dropdown">
+                                <li><a href="javascript:void(0);">Clear data</a></li>
+                                <li><a href="page-search-results.html"><i class="fa fa-external-link"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item p-l-0 p-r-0">
+                                    <h6><a href="#">Crush it - Bootstrap Admin Application Template &amp; Ui Kit</a></h6>
+                                    <p class="text-muted">It is a long established fact that a reader will be distracted.</p>
+                                    <div class="text-muted font-13">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><span class="badge badge-secondary margin-0">React</span></li>
+                                            <li class="list-inline-item">Dec 27 2020</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- Main left sidebar menu -->
+        <div id="left-sidebar" class="sidebar">
+            <a href="#" class="menu_toggle"><i class="fa fa-angle-left"></i></a>
+            <div class="navbar-brand">
+                <a href="index.html"><img src="assets/images/icon.svg" alt="Mooli Logo" class="img-fluid logo"><span>Sistem BKOKU</span></a>
+                <button type="button" class="btn-toggle-offcanvas btn btn-sm float-right"><i class="fa fa-close"></i></button>
+            </div>
+            <div class="sidebar-scroll">
+                <div class="user-account">
+                    <div class="user_div">
+                        <img src="assets/images/HR.png" class="user-photo" alt="Gambar Profil Sekretariat BKOKU KPT">
+                    </div>
+                    <div class="dropdown">
+                        <span>Sekretariat BKOKU KPT</span>
+                    </div>
+                </div>  
+                <nav id="left-sidebar-nav" class="sidebar-nav">
+                    <ul id="main-menu" class="metismenu animation-li-delay">
+                        <li><a href="index.html"><i class="fa fa-dashboard"></i> <span>Utama</span></a></li>
+                        <li><a href="permohonan.html"><i class="fa fa-files-o"></i> <span>Permohonan</span></a></li>
+                        <li class="active"><a href="tuntutan.html"><i class="fa fa-money"></i> <span>Tuntutan</span></a></li>
+                        <li><a href="laporan.html"><i class="fa fa-list-alt"></i> <span>Laporan</span></a></li>
+                        <li><a href="tetapan.html"><i class="fa fa-cogs"></i> <span>Tetapan</span></a></li>
+                    </ul>
+                </nav>    
+            </div>
+        </div>
+        <!-- Main body part  -->
+        <div id="main-content">
+            <div class="container-fluid">
+                <!-- Page header section  -->
+                <div class="block-header">
+                    <div class="row clearfix">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <h1>Tuntutan</h1>
+                        </div>
+                    </div>
+                </div>        
+                <div class="row clearfix">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>Tuntutan BKOKU</h2>
+                            </div>
+                            <div class="body">
+                                <div class="row clearfix">
+                                   
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="card border-dark">
+                                                <div class="card-body top_counter">
+                                                    <div class="icon bg-warning text-white"><i class="fa fa-pencil-square-o"></i> </div>
+                                                    <div class="content">
+                                                        <span>Draf </span>
+                                                        <h5 class="number mb-0">0</h5>
+                                                    </div>
+                                                </div>                        
+                                            </div>
+                                        </div>
+                            
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="card">
+                                                <div class="card-body top_counter">
+                                                    <div class="icon bg-success text-white"><a href="permohonan.html"></a><i class="fa fa-paper-plane-o"></i></a> </div>
+                                                    <div class="content">
+                                                        <span>Baru</span>
+                                                        <h5 class="number mb-0">1</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="card">
+                                                <div class="card-body top_counter">
+                                                    <div class="icon bg-info text-white"><i class="fa fa-spinner"></i> </div>
+                                                    <div class="content">
+                                                        <span>Sedang Diproses</span>
+                                                        <h5 class="number mb-0">0</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="card">
+                                                <div class="card-body top_counter">
+                                                    <div class="icon bg-danger text-white"><i class="fa fa-check-square-o"></i> </div>
+                                                    <div class="content">
+                                                        <span>Selesai</span>
+                                                        <h5 class="number mb-0">0</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>              
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="row clearfix">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>Tuntutan PPK</h2>
+                            </div>
+                            <div class="body">
+                                <div class="row clearfix">
+                                   
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="card border-dark">
+                                                <div class="card-body top_counter">
+                                                    <div class="icon bg-warning text-white"><i class="fa fa-pencil-square-o"></i> </div>
+                                                    <div class="content">
+                                                        <span>Draf </span>
+                                                        <h5 class="number mb-0">10</h5>
+                                                    </div>
+                                                </div>                        
+                                            </div>
+                                        </div>
+                            
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="card">
+                                                <div class="card-body top_counter">
+                                                    <div class="icon bg-success text-white"><a href="permohonan.html"></a><i class="fa fa-paper-plane-o"></i></a> </div>
+                                                    <div class="content">
+                                                        <span>Baru</span>
+                                                        <h5 class="number mb-0">3</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="card">
+                                                <div class="card-body top_counter">
+                                                    <div class="icon bg-info text-white"><i class="fa fa-spinner"></i> </div>
+                                                    <div class="content">
+                                                        <span>Sedang Diproses</span>
+                                                        <h5 class="number mb-0">0</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="card">
+                                                <div class="card-body top_counter">
+                                                    <div class="icon bg-danger text-white"><i class="fa fa-check-square-o"></i> </div>
+                                                    <div class="content">
+                                                        <span>Selesai</span>
+                                                        <h5 class="number mb-0">0</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>              
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="row clearfix">
+                    <div class="col-12">
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light page_menu">
+                            <!--<a class="navbar-brand" href="#">M.</a>-->
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fa fa-bars text-muted"></i>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item vivify swoopInTop delay-150 active"><a class="nav-link" href="page-invoices.html">Senarai Permohonan</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="body">
+                                <div class="table-responsive invoice_list">
+                                    <table class="table table-hover js-basic-example dataTable">
+                                        <thead>
+                                            <tr> 
+                                                <th style="width: 20px;">Bil</th>
+                                                <th>Senarai Tuntutan</th>
+                                                <th style="width: 120px;">Jenis Tuntutan</th>
+                                                <th style="width: 80px;">Status Tuntutan</th>
+                                                <th style="width: 100px;">Tindakan</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <span>01</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="assets/images/user.png" data-toggle="tooltip" data-placement="top" title="Avatar Name" alt="Avatar" class="rounded-circle w35 h35">
+                                                        <div class="ml-3">
+                                                            <a href="page-invoices-detail.html" title="">Ali Bin Abu</a>
+                                                            <p class="mb-0">alibinabu@graduate.utm.my</p>
+                                                        </div>
+                                                    </div>                                        
+                                                </td>
+                                                <td>BKOKU</td>
+                                                <td><span class="badge badge-success ml-0 mr-0">Baru!</span></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default "title="Print"><i class="fa fa-eye"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-default" title="Delete"><i class="fa fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span>02</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar Name" alt="Avatar" class="rounded-circle w35 h35">
+                                                        <div class="ml-3">
+                                                            <a href="page-invoices-detail.html" title="">Zoe Baker</a>
+                                                            <p class="mb-0">zoe.baker@um.student.my</p>
+                                                        </div>
+                                                    </div>                                        
+                                                </td>
+                                                <td>PPK</td>
+                                                <td><span class="badge badge-success ml-0 mr-0">BARU!</span></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default "title="Print"><i class="fa fa-eye"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-default" title="Delete"><i class="fa fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span>03</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar Name" alt="Avatar" class="rounded-circle w35 h35">
+                                                        <div class="ml-3">
+                                                            <a href="page-invoices-detail.html" title="">Sarah Binti Hashim</a>
+                                                            <p class="mb-0">h.sarah@uitm.edu.com.my</p>
+                                                        </div>
+                                                    </div>                                        
+                                                </td>
+                                                <td>PPK</td>
+                                                <td><span class="badge badge-success ml-0 mr-0">BARU!</span></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default "title="Print"><i class="fa fa-eye"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-default" title="Delete"><i class="fa fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span>04</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="assets/images/xs/avatar4.jpg" data-toggle="tooltip" data-placement="top" title="Avatar Name" alt="Avatar" class="rounded-circle w35 h35">
+                                                        <div class="ml-3">
+                                                            <a href="page-invoices-detail.html" title="">Akmal Bin Mahmod</a>
+                                                            <p class="mb-0">Akmalbinmahmod@usm.edu.com.my</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>PPK</td>
+                                                <td><span class="badge badge-success ml-0 mr-0">Baru</span></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default "title="Print"><i class="fa fa-eye"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-default" title="Delete"><i class="fa fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<!-- Javascript -->
+<script src="assets/bundles/libscripts.bundle.js"></script>    
+<script src="assets/bundles/vendorscripts.bundle.js"></script>
+
+<!-- Vedor js file and create bundle with grunt  --> 
+<script src="assets/bundles/flotscripts.bundle.js"></script><!-- flot charts Plugin Js -->
+<script src="assets/bundles/c3.bundle.js"></script>
+<script src="assets/bundles/apexcharts.bundle.js"></script>
+<script src="assets/bundles/jvectormap.bundle.js"></script>
+<script src="assets/vendor/toastr/toastr.js"></script>
+
+<!-- Project core js file minify with grunt --> 
+<script src="assets/bundles/mainscripts.bundle.js"></script>
+<script src="../js/index.js"></script>
+<!-- Vedor js file and create bundle with grunt  --> 
+<script src="assets/bundles/datatablescripts.bundle.js"></script>
+<script src="../js/pages/tables/invoice.js"></script>
+</body>
+</html>

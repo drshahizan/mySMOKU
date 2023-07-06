@@ -1,0 +1,17 @@
+﻿.note-editor.note-frame{
+    border-color: var(--border-color); 
+    background: var(--card-color);
+
+    .note-editing-area{
+        .note-editable{
+            background: var(--card-color);
+            color: var(--font-color);
+        }
+    }
+    .note-statusbar{
+        background-color: var(--border-color); 
+    }
+    .btn.btn-default{
+        font-size: 12px;
+    }
+}

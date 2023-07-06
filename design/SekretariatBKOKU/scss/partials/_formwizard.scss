@@ -1,0 +1,226 @@
+﻿.wizard {
+
+    .content {
+        @extend .margin-0;
+        overflow-y: auto;
+        background-color: transparent;
+        border: 1px solid var(--border-color);
+        min-height: 245px;
+        border-radius: 0;
+
+        .body {
+            padding: 15px;
+
+            label.error{
+                @extend .margin-0;
+                @extend .font-12;
+                color: $red;
+            }
+
+            input[type="checkbox"]{
+                display: none;
+            }
+            input{
+                border-color: var(--border-color); 
+            }
+            p{
+                @extend .font-15;
+            }
+        }
+    }
+
+    .actions {        
+        @include display-block;
+        @extend .align-right;
+        position: relative;
+        width: 100%;            
+        margin-top: 10px !important;      
+
+        ul{
+            @include inline-block;
+            > li{
+                float: left;
+                margin: 0 !important;
+            }
+        }
+
+        a {
+            @include transition(all .5s ease-out);
+            @include display-block;
+            @include border-radius(0);
+            @extend .m-l-5;
+            text-decoration: none;
+            padding: 0.5em 2em;
+            color: var(--font-fff);
+
+            &:hover, &:active {
+                @include border-radius(35px);
+                @include display-block;
+                text-decoration: none;
+                padding: 0.5em 2em;
+                color: var(--font-fff);
+            }
+        }
+
+        .disabled a {
+            background: var(--font-ccc);
+            color: var(--font-ccc);
+
+            &:hover, &:active {
+                background: var(--font-ccc);
+                color: var(--font-ccc);
+            }
+        }
+    }
+
+    .steps {
+        @include display-block;
+        position: relative;        
+        width: 100%;
+        margin-bottom: 2px;
+
+        a {
+            @include display-block;
+            width: auto;
+            text-decoration: none;
+            margin: 0 2px 0 0;
+            padding: 10px;            
+            border-radius: 0;
+
+            &:hover, &:active {
+                @include display-block;                
+                width: auto;
+                text-decoration: none;
+                margin: 0 2px 0 0;
+                padding: 10px;                
+                border-radius: 0;
+            }
+        }
+
+        .number{
+            font-size: 15px;
+        }
+
+        .disabled a {
+            background: var(--border-color); 
+            color: var(--font-777);
+            cursor: default;
+
+            &:hover, &:active {
+                background: var(--border-color); 
+                color: var(--font-777);
+                cursor: default;
+            }
+        }
+
+        .current a {
+            color: var(--font-fff);
+            background: var(--primary-color);
+            cursor: default;
+
+            &:hover, &:active {
+                color: var(--font-fff);
+                cursor: default;
+            }
+        }
+
+        .done a {
+            color: var(--font-fff);
+            background: var(--primary-color);
+            opacity: 0.7;
+
+            &:hover, &:active {
+                color: var(--font-fff);
+                opacity: 0.7;
+            }
+        }
+
+        > ul > li {
+            width: 25%;
+            float: left;
+
+            &:last-child{
+                a{
+                    margin: 0;
+                }
+            }
+        }        
+    }
+
+    &.vertical {
+        > .steps {
+            @extend .p-r-5;
+            float: left;
+            width: 30%;            
+
+            > ul > li {
+                float: none;
+                width: 100%;
+
+                a{
+                    margin: 0 0 2px 0;
+                }
+            }
+        }
+
+        > .content {
+            float: left;            
+            width: 70%;
+            margin: 0;
+        }
+
+        > .actions {
+            float: right;
+            width: 100%;
+            margin: 0;
+        }        
+    }
+
+    &.step_icon{
+        .steps {
+            @extend .m-b-10;
+            > ul > li {
+                width: auto;
+                text-align: center;
+                a{
+                    width: 40px;
+                    height: 40px;
+                    border-radius: $border-radius-small;
+                } 
+            }
+            .number{
+                display: none;
+            }
+        }
+    }
+}
+
+.wizard_validation{
+    .wizard .steps>ul>li{
+        width: auto !important;
+    }
+}
+
+@include max-screen($break-small - 1px){
+    .wizard {
+        > .steps{
+            > ul > li{
+                width: 100%;
+                margin-bottom: 2px;
+            }
+            a{
+                margin: 0;
+            }
+        }
+        &.wizard.vertical{
+            >.content, >.steps{
+                width: 100%;
+                padding: 0;
+                
+            }
+        }
+    } 
+    .wizard_validation .wizard .steps>ul>li{
+        width: 100% !important;
+    }  
+}
