@@ -1,0 +1,154 @@
+.nav{    
+
+    &.nav-tabs{
+        border-color: var(--border-color); 
+        .nav-item{
+            .nav-link{
+                color: var(--font-color);
+                &.active,
+                &:hover,
+                &:focus{
+                    background-color: var(--border-color); 
+                    color: var(--link-color);
+                    border-color: var(--border-color); 
+                }
+            }
+        }        
+    }
+
+    &.nav-tabs2{
+        > li{
+            > a {
+                @include transition(all .3s ease-in-out);
+                @extend .m-r-5;
+                color: var(--font-555);
+                background-color: transparent;
+                border: 1px solid var(--border-color);
+                padding: 5px 15px;
+                
+                &:hover,
+                &.active{
+                    @include box-shadow(0 5px 10px 0 var(--box-shadow));
+                    background: var(--primary-color);
+                    border-color: var(--border-color); 
+                    color: var(--font-fff) !important;
+                }
+            }
+        }
+    }
+
+    &.nav-tabs3{
+        border-bottom: 1px solid var(--primary-color);
+
+        > li{
+            margin-bottom: -1px; 
+
+            > a {
+                color: var(--font-555);
+                background-color: transparent;
+                position: relative;
+                padding: 5px 20px 15px 20px;
+
+                &:after{
+                    background: var(--body-color);
+                    margin: 0 auto;
+                    content: "";
+                    position: absolute;
+                    width: 14px;
+                    height: 14px;
+                    bottom: -6px;
+                    left: 0;
+                    right: 0;
+                    border-left: 1px solid var(--primary-color);
+                    border-top: 1px solid var(--primary-color);
+                    -webkit-transform: rotate(45deg);
+                    transform: rotate(45deg);
+                    opacity: 0;
+                }
+            
+                &:hover,
+                &:focus,
+                &.active{
+                    color: var(--primary-color);
+                    &:after{
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+        &.white{
+            > li{
+    
+                > a {
+
+                    &:after{
+                        background: var(--card-color);
+                    }
+                }
+            }
+        }
+    }
+
+    &.nav-tabs4{
+        background: var(--primary-color);
+        width: 100%;
+        padding: 5px;
+
+        > li{
+            > a {
+                @include transition(all .3s ease-in-out);
+                color: var(--font-fff);
+                background-color: transparent;
+                position: relative;
+                opacity: .5;
+                padding: 5px 15px;
+                
+                &:hover,
+                &.active{
+                    opacity: 1;
+                    &::after{
+                        content: '\f0d8';
+                        font-family: 'FontAwesome';
+                        position: absolute;
+                        bottom: -17px;
+                        left: 50%;
+                        margin-left: -7px;
+                        font-size: 22px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tab-content{
+    @extend .m-t-15;
+}
+
+.nav-pills{
+
+    > li{
+
+        &.active > a {
+            &,
+            &:hover,
+            &:focus {
+                background-color: var(--font-eee);
+                color: var(--font-color);
+            }
+        }
+
+        > a {
+            color: inherit;
+        }
+    }
+}
+
+.nav-tabs-colored > li.active > a {
+	&,
+	&:hover,
+	&:focus {
+		background-color: var(--font-eee);
+		color: var(--font-color);
+	}
+}

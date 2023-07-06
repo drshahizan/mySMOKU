@@ -1,0 +1,91 @@
+.scrum-body{
+    display: flex;
+    flex-direction: row;
+
+    &.list{
+        flex-direction: column;
+        .scrum-board{
+            &.in-progress{
+                border: 0;
+                margin-top: 20px;
+            }
+        }
+    }
+
+    .scrum-board{
+        flex: 1;
+        padding: 0 20px;         
+
+        &.create{
+            .scrum-task{
+                border-left-color: $info;
+            }
+        }
+        &.in-progress{
+            border-right: 1px solid var(--border-color);
+            border-left: 1px solid var(--border-color);
+            .scrum-task{
+                border-left-color: $orange;
+            }
+        }
+        &.done{
+            .scrum-task{
+                border-left-color: $green;
+            }
+        }
+    }
+    .scrum-task{
+        background-color: var(--font-eee);
+        border: 1px solid var(--border-color);
+        border-left: 2px solid var(--border-color);
+        position: relative;
+        display: block;        
+        margin-bottom: 10px;
+        padding: 10px;
+
+        cursor: all-scroll;
+
+        &.over {
+            border-top: 2px solid $red;
+        }
+        > span{
+            color: var(--font-333);
+            font-weight: $font-weight-700;
+        }
+    }
+
+    .st-description:not(:empty) {
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+    .st-date:not(:empty) {
+        color: var(--font-777);
+        display: inline-block;
+        font-size: 12px;
+    }
+    .st-assignee{
+
+        &:not(:empty) {
+            text-align:right; 
+        }
+
+        > .assignee:not(:empty) {
+            background-color: var(--font-ccc);
+            color: var(--font-555);
+            font-weight: $font-weight-700;
+            text-align: center;
+            display: inline-block;
+            -webkit-user-select: none;
+            height: 28px;
+            font-size: 12px;
+            line-height: 28px;
+            width: 28px;
+        }
+    }
+    
+    .scrum-board-column{
+        margin-top: 15px;
+        min-height: 200px;
+        height: 100%;
+    }
+}

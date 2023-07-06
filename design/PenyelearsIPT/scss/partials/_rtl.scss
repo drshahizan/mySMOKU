@@ -1,0 +1,385 @@
+.left-right{
+    right: 0;
+    left: auto;
+}
+
+.rtl_active{
+    direction: rtl;
+    text-align: right;
+
+    
+
+    &.toggle_menu_active{
+        .sidebar{
+            right: -195px;
+
+            &:hover{
+                right: 0;
+                left: auto;
+
+                .metismenu{
+                    >li i{
+                        left: 10px;
+                        right: auto;
+                    }
+                }
+                .navbar-brand{
+                    text-align: right;
+                }
+                .user-account{
+                    text-align: right;
+                }
+            }
+        }
+        .metismenu{
+            >li i{
+                left: 15px;
+            }
+        }
+        .navbar-brand{
+            text-align: left;
+        }
+        .user-account{
+            text-align: left;
+        }
+        .menu_toggle{
+            .fa-angle-left:before{
+                content: "\f104";
+            }
+        }
+    }
+    &.offcanvas-active{
+        .sidebar{
+            left: auto;
+            right: 0;
+        }
+    }
+
+    .sidebar{
+        @extend .left-right;
+        float: right;
+        border-right: 0 !important;
+        border-left: 3px solid;
+        @include max-screen($break-large) {
+            right: -350px;
+            left: auto;
+        }
+        .navbar-brand span{
+            margin-right: 10px;
+            margin-left: 0;
+        }
+    }
+    .menu_toggle{
+        left: auto;
+        right: 255px;
+        .fa-angle-left:before{
+            content: "\f105";
+        }
+    }
+    #main-content{
+        float: left;
+    }
+    .sticky-note{
+        left: -400px;
+        right: auto;
+        &.open{
+            left: 0;
+            right: auto;
+        }
+        .right_note{
+            right: -10px;
+            left: auto;
+        }
+    }
+    .rightbar{
+        left: -400px;
+        right: auto;
+        &.open{
+            left: 0;
+            right: auto;
+        }
+    }
+    .themesetting{
+        left: -240px;
+        right: auto;
+        &.open{
+            left: 0;
+            right: auto;
+        }
+        .theme_btn{
+            right: -35px;
+            left: auto;
+        }
+    }
+
+    // menu
+    .metismenu{
+        >li i{
+            left: 10px;
+            right: auto;
+            text-align: center;
+        }
+        .has-arrow:after{
+            left: 40px;
+            right: auto;
+        }
+        .collapse::before{
+            right: 21px;
+            left: auto;
+        }
+        ul a{
+            padding: 6px 47px 6px 15px;
+            &::before{
+                right: 19px;
+                left: auto;
+            }
+        }
+    }
+    .navbar-fixed-top{
+        left: 0;
+        right: auto;
+        #navbar-search{
+            .btn{
+                right: 0;
+                left: auto;
+            }
+            .form-control{
+                padding-right: 25px;
+                padding-left: 0;
+            }
+        }
+        .navbar-btn{
+            float: right;
+            border-right: 0;
+            border-left: 1px solid;
+            padding-left: 15px;
+            padding-right: 0;
+            margin-right: 0;
+        }        
+    }
+    .navbar-nav{
+        .dropdown-menu{
+            left: 0;
+            right: auto;
+        }
+        .language_widget img{
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
+
+
+    // component rtl 
+    .mr-2{
+        margin-right: 0 !important;
+        margin-left: .5rem !important;
+    }
+    .mr-3{
+        margin-right: 0 !important;
+        margin-left: 1rem !important;
+    }
+    .ml-2{
+        margin-left: 0 !important;
+        margin-right: .5rem !important;
+    }
+    .ml-3{
+        margin-left: 0 !important;
+        margin-right: 1rem !important;
+    }
+    .border-right{
+        border-right: 0 !important;
+        border-left: 1px solid;
+    }
+    .pr-4, .px-4{
+        padding-left: 1.5rem!important;
+        padding-right: 0!important;
+    }
+    .mr-4, .mx-4 {
+        margin-left: 1.5rem!important;
+        margin-right: 0!important;
+    }
+    .ml-auto, .mx-auto{
+        margin-right: auto!important;
+        margin-left: inherit !important;
+    }
+    .float-right{
+        float: left !important;        
+    }
+    .float-left{
+        float: right !important;        
+    }
+    ul{
+        padding-right: 0;
+    }
+    .dropdown-menu{
+        text-align: right;
+    }
+    .fancy-checkbox{
+        margin-right: 0;
+        margin-left: 10px;
+        input[type="checkbox"]+span:before{
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
+    .nav.nav-tabs2>li{
+        >a{
+            margin-left: 5px;
+            margin-right: 0;            
+        }
+        &:last-child{
+            >a{
+                margin-left: 0;
+            }
+        }
+    }
+    .c_form_group{
+        label{
+            text-align: right;
+        }
+        .input-group-prepend .input-group-text{
+            margin-left: 10px;
+            margin-right: 0;
+        }
+    }
+    .list-inline-item:not(:last-child){
+        margin-right: 0;
+        margin-left: .5rem;
+    }
+
+    // widgets rtl 
+    .card{
+        .header .header-dropdown{
+            left: 20px;
+            right: auto;
+            li .dropdown-menu{
+                left: 0 !important;
+                right: auto !important;
+            }
+        }
+    }
+    .user-account .dropdown{
+        margin-left: 0;
+        margin-right: 10px;
+
+        .dropdown-menu a i{
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
+    .right_chat{
+        .media{
+            .media-object{
+                margin-right: 0;
+                margin-left: 15px;
+            }
+            .status{
+                right: 22px;
+                left: auto;
+            }
+        }
+    }
+    .mail-inbox{
+        .mail-right{
+            border-left: 0;
+            border-right: 1px solid;
+            border-color: rgba($dark, 0.1);
+
+            .mail-list li{
+                .md-right{
+                    span.time{
+                        margin-right: auto;
+                        margin-left: inherit;
+                    }                    
+                }
+                .md-left{
+                    margin-left: 10px;
+                    margin-right: 0;
+                    .fancy-checkbox{
+                        margin-left: 0;
+                    }
+                }
+                &.unread::before{
+                    left: auto;
+                    right: 5px;
+                }
+            }
+            .mail-detail-full .mail-cnt > ul{
+                padding-right: 25px;
+            }
+        }
+        .mail-left{
+            .nav li a{
+                i{
+                    text-align: right;
+                }
+                .badge{
+                    margin-left: 0;
+                    margin-right: auto;
+                }
+            }
+        }
+    }
+    .chatapp_list{
+        right: 0;
+        left: auto;
+    }
+    .chatapp_body{
+        margin-right: 330px;
+        margin-left: 0;
+        border-right: 1px solid;
+        border-color: var(--border-color); 
+        border-left: 0;
+    }
+    .todo_list {
+        .fancy-checkbox input[type="checkbox"]+span{
+            margin-right: 40px;
+            margin-left: 0;
+            &:before{
+                right: -40px;
+                left: auto;
+            }
+        }
+    }
+    .file_folder a{
+        text-align: right;
+    }
+    .timeline{
+        padding-left: 0;
+        padding-right: 15px;
+        .timeline-item{
+            border-left: 0;
+            border-right: 1px solid var(--border-color);
+            > img{
+                right: -18px;
+                left: auto;
+            }
+            ul{
+                li{
+                    padding-right: 25px;
+                    &:before{
+                        left: auto;
+                        right: 0;
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+    }
+
+    // chart
+    .c3, .knob, .apexcharts-canvas{
+        direction: ltr !important;
+    }
+
+    @include min-screen($break-medium){
+        .text-lg-right{
+            text-align: left !important;
+        }
+    }
+    @include min-screen($break-small){
+        .text-md-right{
+            text-align: left !important;
+        }
+    }
+}

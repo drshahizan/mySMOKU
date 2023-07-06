@@ -1,0 +1,37 @@
+.rightbar{
+    @include box-shadow(0 5px 10px 0px var(--box-shadow));
+    @include transition(all .3s ease-in-out);
+    background: var(--card-color);
+    position: fixed;
+    right: -320px;
+    top: 0;
+    width: 300px;    
+    height: 100vh;
+    z-index: 13;
+    padding: 15px 20px;
+
+    &.open{
+        right: 0;
+    }
+
+    &.detail{
+        .chat_detail{
+            display: block;
+        }
+        .chat_list{
+            display: none;
+        }
+    }
+
+    .chat_detail{
+        display: none;        
+        position: relative;
+        overflow-y: auto;
+        height: calc(100vh - 30px);
+        
+        .input-group{
+            position: absolute;
+            bottom: 0;
+        }
+    }
+}
