@@ -1,0 +1,96 @@
+.themesetting{
+    @include transition(all .3s ease-in-out);
+    background: var(--card-color);
+    position: fixed;
+    padding: 15px;
+    bottom: 50px;
+    width: 240px;
+    height: 395px;
+    right: -240px;
+    z-index: 999;
+
+    &.open{
+        right: 0;
+        box-shadow: 0 2px 10px var(--box-shadow);
+        .theme_btn{
+            .fa-magic::before{
+                content: '\f00d';
+            }
+        }
+    }
+    .theme_btn{
+        @include inline-block;
+        @extend .align-center;        
+        background: $dark;
+        color: var(--font-fff);
+        position: absolute;
+        width: 35px;
+        line-height: 35px;
+        left: -35px;
+        border: 0;
+        bottom: 30px;
+    }
+}
+
+ul.choose-skin{
+    @extend .m-b-0;
+    display: flex;
+    justify-content: space-between;
+
+	li{		
+		div{
+            @include transition(all .3s ease-in-out);
+            @include inline-block;
+            height: 25px;
+            width: 20px;
+            overflow: hidden;
+            position: relative;
+
+            &.green{
+                background: $green;
+			}
+            &.orange{
+                background: $orange;
+            }
+			&.cyan{
+                background: $cyan;
+			}			
+			&.blush{
+                background: $blush;
+            }
+			&.timber{
+                background: $timber;
+            }
+			&.blue{
+                background: $blue;
+            }
+			&.amethyst{
+                background: $amethyst;
+            }
+        }
+
+        &.active{
+            div{
+                &::after{
+                    @extend .font-14;
+                    color: var(--font-fff);
+                    position: absolute;
+                    font-family: 'FontAwesome';
+                    content: '\f087';
+                    top: 3px;
+                    left: 4px;
+                }
+            }
+        }
+	}
+}
+
+.recent_searche{
+    @include box-shadow(0px 2px 25px 0px var(--box-shadow));
+    background: var(--body-color);
+    position: absolute;
+    top: 75px;
+    width: calc(100% - 30px);
+    max-width: 1200px;
+    padding: 0;
+}

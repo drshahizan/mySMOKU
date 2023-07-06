@@ -1,0 +1,472 @@
+/* Forms */
+.form-control {
+	@include box-shadow(none);
+	@include border-radius(0);
+	background-color: transparent;
+	height: auto;
+	border-color: var(--border-color); 
+	font-size: $font-size;
+
+	&.round {
+		@include border-radius(50px);
+	}
+
+	&:focus {
+		@include box-shadow(none);
+		background: transparent;
+		outline: none;
+		border-color: var(--primary-color);
+		color: var(--primary-color);
+	}
+
+	&.parsley-error:focus {
+		border-color: darken(#fbf5f5, 18%);
+	}
+
+	&.parsley-success:focus {
+		border-color: darken(#DFF0D8, 16%);
+	}
+}
+
+.c_form_group {
+	border: 1px solid var(--border-color);
+    text-align: left;
+	padding: 10px;
+	label{
+		color: var(--font-777);
+		font-size: 13px;
+		width: 100%;
+
+		a{
+			float: right;
+		}
+	}
+	.form-control{
+		border: 0;
+		padding: 0;
+		&::placeholder {
+			color: var(--font-ccc);
+		}
+	}
+	.input-group-prepend{
+		.input-group-text{
+			margin-right: 10px;
+		}	
+	}
+	.input-group-text{		
+		color: var(--font-777);
+		border: 0;
+		padding: 0;
+	}
+	select.form-control:not([size]):not([multiple]){
+		height: 22px;
+	}
+	&.disabled{
+		background: #e9ecef;
+	}
+}
+
+.input-group-prepend,
+.input-group-append {
+	.input-group-text{
+		background: transparent;
+		border-color: var(--border-color);
+		border-radius: 0;
+	}
+	.btn-outline-secondary{
+		border-color: var(--border-color);
+	}
+}
+
+.custom-select {
+	background-color:transparent;
+	border-color: var(--border-color);
+
+	&:focus{
+		outline: none;
+		color: var(--font-color);
+		background: var(--border-color);
+	}
+}
+
+.custom-file {
+	.custom-file-label{
+		background: transparent;
+		border-color: var(--border-color);
+		&:focus{
+			outline: none;
+			color: var(--font-color);
+			background: var(--border-color);
+		}
+	}
+}
+
+/* fancy checkbox */
+.fancy-checkbox {
+	margin-right: 10px;
+
+	&,
+	label {
+		font-weight: $font-weight-400;
+	}
+
+	input[type="checkbox"] {
+		display: none;
+		
+		+ span {
+			@include inline-block;
+			cursor: pointer;
+			position: relative;
+
+			&:before {				
+				@include inline-block;
+				position: relative;
+				bottom: 1px;
+				width: 20px;
+				height: 20px;
+				margin-right: 10px;
+				content: "";
+				border: 1px solid var(--border-color);
+			}
+		}
+        
+        &:checked + span:before {
+			@extend .font-17;
+			@extend .align-center;
+			font-family: 'FontAwesome';
+			content: '\f0c8';
+			color: var(--primary-color);
+			border-color: var(--primary-color);			
+            line-height: 17px;            
+		}
+	}
+
+	&.custom-color-green input[type="checkbox"] {
+		&:checked + span:before {
+			color: $green;
+			background-color: var(--font-fff);
+		}
+	}
+
+	&.custom-bgcolor-green input[type="checkbox"] {
+		&:checked + span:before {
+			color: var(--font-fff);
+			background-color: $green;
+			border-color: var(--border-color);
+		}
+	}
+}
+
+/*fancy radio */
+.fancy-radio {
+	margin-right: 10px;
+
+	&,
+	label {
+		font-weight: $font-weight-400;
+	}
+
+	input[type="radio"] {
+		display: none;
+		
+		+ span {
+			display: block;
+			cursor: pointer;
+			position: relative;
+
+			i {
+				@include inline-block;
+				@include border-radius(8px);
+				position: relative;
+				bottom: 1px;
+				content: "";
+				border: 1px solid var(--border-color);;
+				width: 18px;
+				height: 18px;
+				margin-right: 5px;
+			}
+		}
+
+		&:checked + span i:after {
+			@include border-radius(50%);
+			display: block;
+			position: relative;
+			top: 3px;
+			left: 3px;
+			content: '';
+			width: 10px;
+			height: 10px;
+			background-color: var(--text-muted);
+		} 
+	}
+
+	&.custom-color-green input[type="radio"] {
+		&:checked + span i:after {
+			background-color: $green;
+		}
+	}
+
+	&.custom-bgcolor-green input[type="radio"] {
+		&:checked + span i {
+			background-color: $green;
+			
+			&:after {
+				background-color: var(--font-fff);
+			} 
+		}
+	}
+}
+.input-group-addon {
+	.fancy-radio,
+	.fancy-checkbox {
+		position: relative;
+		margin: 0;
+		top: 1px;
+	}
+
+	.fancy-radio input[type="radio"] + span i,
+	.fancy-checkbox input[type="checkbox"] + span {
+		margin: 0;
+
+		&:before {
+			margin: 0;
+		}
+	}
+}
+
+.help-block {
+	font-size: 13px;
+	color: var(--text-muted);
+}
+
+/* multiselect checkbox */
+.multiselect-custom + .btn-group ul.multiselect-container {
+	> li {
+		> a {
+            padding: 5px 15px;
+            display: block;
+            outline: none;
+
+			label.checkbox {
+				@extend .font-14;
+                padding: 0;
+
+				&:before {
+					@include inline-block;
+					position: relative;
+					bottom: 1px;
+					content: "";
+					width: 16px;
+					height: 16px;
+					margin-right: 10px;
+					border: 1px solid var(--border-color);
+					background-color: var(--font-eee);
+				}
+
+				input[type="checkbox"] {
+					display: none;
+				}
+			}
+		}
+
+		&.active > a {
+			label.checkbox:before {
+				@extend .font-12;
+				@extend .align-center;
+				font-family: 'FontAwesome';
+				content: '\f00c';
+				color: var(--text-muted);
+				line-height: 15px;
+				background-color: var(--font-ccc);
+			}
+        }
+        &.active{
+            .checkbox{
+                color: var(--font-fff);                
+            }
+        }
+        &:hover{
+            background-color: var(--font-eee);
+        }
+	}
+}
+/* multiselect radio */
+.multiselect-custom + .btn-group ul.multiselect-container {
+	> li {
+		> a {
+            padding: 5px 15px;
+            display: block;
+            outline: none;
+
+			label.radio {				
+                padding: 0;
+
+				&:before {
+					@include inline-block;
+					@include border-radius(8px);
+					position: relative;
+					bottom: 1px;
+					content: "";
+					width: 16px;
+					height: 16px;
+					margin-right: 10px;
+					border: 1px solid var(--font-ccc);
+					background-color: var(--font-eee);
+				}
+
+				input[type="radio"] {
+					display: none;
+				}
+			}
+		}
+
+		&.active > a {
+			label.radio:before {
+				@extend .font-8;
+				@extend .align-center;
+				font-family: 'FontAwesome';
+				content: '\f111';
+				color: var(--text-muted);				
+				line-height: 15px;
+			}
+        }
+
+        &.active{
+            .radio{
+                color: var(--font-fff);                
+            }
+        }
+        
+        &:hover{
+            background-color: var(--font-eee);
+        }
+	}
+}
+.multiselect-search {
+	@include border-right-radius(2px !important);
+}
+
+.btn.multiselect-clear-filter {
+	@include box-shadow(none);
+	position: absolute;
+	border: none;
+	background: transparent;
+	outline: none;
+	top: 2px;
+	right: 0;
+	padding-left: 0;
+	padding-right: 0;
+	z-index: 9 !important;
+
+	&:hover,
+	&:focus {
+		background: transparent;
+		outline: none;
+	}
+}
+
+.multiselect_div {
+
+    > .btn-group{
+
+        display: block;
+
+        .btn{
+            text-align: left;
+			position: relative;
+			background: transparent;
+            width: 100%;
+			border: 0;
+			padding: 0 !important;
+
+			.multiselect-selected-text{
+				color: var(--font-ccc);
+			}
+
+			&:hover,
+			&:focus{
+				box-shadow: none;
+				outline: none;
+            }
+
+            &:after{
+                position: absolute;
+                right: 5px;
+                top: 10px;
+            }
+        }
+        ul{
+            width: 100%;
+        }
+    }
+}
+
+/* Date Picker */
+.datepicker {
+    padding: 10px;
+	font-size: 14px;
+
+	&.datepicker-inline{
+		width: 320px;
+	}
+
+    table{
+        tr td.active {
+            &.active,
+            &.highlighted.active,
+            &.highlighted:active,
+            &.active:active {
+                background-color: var(--secondary-color);
+            }
+		}
+		tr td,
+		tr th{
+			width: 40px;
+    		height: 40px;
+		}
+	}
+}
+.range-to {
+    padding: 4px 10px !important;
+    background: var(--font-eee);
+    margin: 0 !important;
+}
+
+/* parsley js */
+.parsley-errors-list {
+	margin-top: 8px;
+	
+	li {
+		color: $red;
+		font-size: 0.9em;
+		margin-top: 3px;
+	}
+}
+
+input.parsley-error, 
+select.parsley-error, 
+textarea.parsley-error {
+	background-color: var(--font-eee);
+	border-color: var(--border-color);
+}
+
+.md-editor > textarea {
+	padding: 10px;
+}
+
+.dropify-wrapper {
+	@include border-radius(3px);
+	background-color: var(--body-color);
+	border: 1px solid var(--border-color);
+	color: var(--font-999);
+
+	&:hover{
+		background-image: linear-gradient(-45deg, var(--border-color) 20%, transparent 25%, transparent 50%, var(--border-color) 45%, var(--border-color) 70%,transparent 75%,transparent);
+	}
+
+	.dropify-preview {
+		background-color: var(--body-color);
+	}
+}
+
+select.form-control:not([size]):not([multiple]) {height: 36px;}

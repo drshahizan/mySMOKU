@@ -1,0 +1,126 @@
+/* Layout */
+
+#main-content {
+	@include transition(all .3s ease-in-out);
+	width: calc(100% - #{$sidebar-width});
+	float: right;
+	position: relative;
+    margin-top: 75px;
+    padding: 0 20px;
+    	
+	@include max-screen($break-large) {
+		width: 100%;
+		padding:0;
+    }   
+}
+
+html.fullscreen-bg, 
+html.fullscreen-bg body,
+html.fullscreen-bg #wrapper {
+	height: 100%;
+}
+.menu_toggle{
+    @include transition(all .3s ease-in-out);
+    background: var(--primary-gradient);
+    color: var(--font-fff);
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    box-shadow: 0 2px 8px var(--box-shadow);
+    left: 255px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 30px;
+    top: 60px;
+    z-index: 99999;
+
+    &:hover,
+    &:focus,
+    &:active{
+        outline: 0;
+        color: var(--font-fff);
+    }
+}
+.toggle_menu_active{
+    .menu_toggle{
+        .fa-angle-left:before{
+            content: "\f105";
+        }
+    }
+    .navbar-fixed-top{
+        width: calc(100% - 135px);
+    }
+    .sidebar{
+        left: -195px;
+        &:hover{
+            left: 0;
+            .metismenu{
+                .collapse.in,
+                li.header{
+                    display: block;
+                }
+                >li i{
+                    right: 10px;
+                }
+            }
+            .navbar-brand{
+                text-align: left;
+                span{
+                    display: inline-block;
+                }
+            }
+            .user-account{
+                text-align: left;
+                
+                .user_div .user-photo{
+                    width: 40px;
+                }
+                .dropdown{
+                    display: inline-block;
+                }
+            }
+        }
+        .navbar-brand{
+            text-align: right;
+            span{
+                display: none;
+            }
+        }
+    }
+    .user-account{
+        text-align: right;
+        .user_div .user-photo{
+            width: 30px;
+        }
+        .dropdown{
+            display: none;
+        }
+    }
+    .metismenu{
+        li.header{
+            display: none;
+        }
+        .collapse.in{
+            display: none;
+        }
+        >li i{
+            right: 15px;
+        }
+    }
+    
+    #main-content{
+        width: calc(100% - 75px);
+    }
+}
+
+.vertical-align-wrap {
+    position: absolute;
+    display: table;
+	width: 100%;
+	height: 100%;	
+}
+.vertical-align-middle {
+	display: table-cell;
+	vertical-align: middle;
+}

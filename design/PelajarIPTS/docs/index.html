@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+
+<head>
+<title>Mooli | Documentation</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="description" content="Mooli Bootstrap 4x Admin Template">
+<meta name="author" content="www.puffintheme.com">
+
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- VENDOR CSS -->
+<link rel="stylesheet" href="../dist/assets/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../dist/assets/vendor/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../dist/assets/vendor/animate-css/vivify.min.css">
+
+<!-- MAIN CSS -->
+<link rel="stylesheet" href="../dist/assets/css/mooli.min.css">
+<link rel="stylesheet" href="assets/demo.css">
+
+</head>
+<body>
+    
+<div id="body" class="theme-cyan">
+
+    <!-- Theme Setting -->
+    <div class="themesetting">
+        <a href="javascript:void(0);" class="theme_btn"><i class="fa fa-gear fa-spin"></i></a>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <ul class="choose-skin list-unstyled mb-0">
+                    <li data-theme="green"><div class="green"></div></li>
+                    <li data-theme="orange"><div class="orange"></div></li>
+                    <li data-theme="blush"><div class="blush"></div></li>
+                    <li data-theme="cyan" class="active"><div class="cyan"></div></li>
+                    <li data-theme="timber"><div class="timber"></div></li>
+                    <li data-theme="blue"><div class="blue"></div></li>
+                    <li data-theme="amethyst"><div class="amethyst"></div></li>
+                </ul>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+                <span>Light Sidebar</span>
+                <label class="switch sidebar_light">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+                <span>Gradient</span>
+                <label class="switch gradient_mode">
+                    <input type="checkbox" checked="">
+                    <span class="slider round"></span>
+                </label>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+                <span>Dark Mode</span>
+                <label class="switch dark_mode">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+                <span>RTL version</span>
+                <label class="switch rtl_mode">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </li>
+        </ul>
+        <hr>
+        <div>
+            <a href="javascript:void(0);" class="btn btn-dark btn-block" target="_blank">Buy this item</a>
+            <a href="javascript:void(0);" target="_blank" class="btn btn-primary theme-bg gradient btn-block">View Portfolio</a>
+        </div>
+    </div>
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+
+    <div id="wrapper">
+        <div id="left-sidebar" class="sidebar">
+            <a href="#" class="menu_toggle"><i class="fa fa-angle-left"></i></a>
+            <div class="navbar-brand">
+                <a href="../dist/index.html"><img src="../dist/assets/images/icon.svg" alt="Mooli Logo" class="img-fluid logo"><span>Mooli</span></a>
+                <button type="button" class="btn-toggle-offcanvas btn btn-sm float-right"><i class="lnr lnr-menu fa fa-chevron-circle-left"></i></button>
+            </div>
+            <div class="sidebar-scroll">
+                <nav id="left-sidebar-nav" class="sidebar-nav">
+                    <ul id="main-menu" class="metismenu animation-li-delay">
+                        <li class="header">Browse Components</li>
+                        <li class="active"><a href="#Introduction"><i class="fa fa-angle-right"></i><span>Introduction</span></a></li>
+                        <li><a href="#Included"><i class="fa fa-angle-right"></i><span>What's Included</span></a></li>
+                        <li><a href="#NodeJS"><i class="fa fa-angle-right"></i><span>Node JS</span></a></li>
+                        <li><a href="#grunt_file"><i class="fa fa-file-text"></i><span>Grunt File</span></a></li>
+                        <li class="header">Template Structure</li>
+                        <li><a href="#main_content"><i class="fa fa-html5"></i><span>Main Content</span></a></li>
+                        <li><a href="#SCSS"><i class="fa fa-code"></i><span>SCSS Structure</span></a></li>
+                        <li><a href="#javascript"><i class="fa fa-code"></i><span>Java Script</span></a></li>
+                        <li class="header">Other Information</li>
+                        <li><a href="#features"><i class="fa fa-star"></i><span>Main Features</span></a></li>
+                        <li><a href="#Credits"><i class="fa fa-thumbs-o-up"></i><span>Credits</span></a></li>
+                        <li><a href="#CustomerSupport"><i class="fa fa-support"></i><span>Customer Support</span></a></li>
+						<li><a href="#DevelopmentSupport"><i class="fa fa-support"></i><span>Development Support</span></a></li>
+                    </ul>
+                </nav>     
+            </div>
+        </div>
+
+        <div id="main-content">
+            <div class="container">
+                <div class="block-header">
+                    <div class="row clearfix">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <h1>Hi, Welcomeback!</h1>
+                            <span>JustDo Documentation,</span>
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-sm-12 text-lg-right">
+                            <a href="javascript:void(0);" target="_blank" class="btn btn-dark">Buy this item</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row clearfix">
+                    <!-- Introduction  -->
+                    <div class="col-sm-12">
+                        <div class="card" id="Introduction">
+                            <div class="header">
+                                <h2>Introduction</h2>
+                            </div>
+                            <div class="body">
+                                <p>Mooli, a premium quality modern and clean Bootstrap 4x dashboard template using simplicity and minimal design. It is fully responsive built using SASS preprocessor, HTML5, CSS3 and jQuery plugins. It uses most of the helper/utilities classes which are reusable class that makes the page faster and increases the speed of page time load. It can be used for most type of dashboard and app templates like analytics, admin or messenger app for your desktpo or mobile applications. Amazing flexibility and reusability. See the demo.</p>
+                                <p>This part of the doc will help you to quick start your project and will give you a basic idea about how this template work. For you to get start open the template download package.</p>                           
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- What's Included  -->
+                    <div class="col-sm-12">
+                        <div class="card" id="Included">
+                            <div class="header">
+                                <h2>What's Included</h2>
+                            </div>
+                            <div class="body">
+                                <ul class="file-structure">
+                                    <li>
+                                        <span>Mooli /</span>
+                                        <ul>
+                                            <li>
+                                                <span>dist /</span>
+                                                <ul>
+                                                    <li>
+                                                        <span>assets /</span>
+                                                        <ul>
+                                                            <li>bundles /</li>
+                                                            <li>
+                                                                <span>css /</span>
+                                                                <ul>
+                                                                    <li>mooli.min.css</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>images /</li>
+                                                            <li>vendor /</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>index.html</li>
+                                                </ul>
+                                            </li>
+                                            <li>docs /</li>
+                                            <li>fonts /</li>
+                                            <li>
+                                                <span>js /</span>
+                                                <ul>
+                                                    <li>pages</li>
+                                                    <li>widgets</li>
+                                                    <li>common.js</li>
+                                                    <li>index.js</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <li>
+                                                    <span>scss /</span>
+                                                    <ul>
+                                                        <li>base /</li>
+                                                        <li>font /</li>
+                                                        <li>metisMenu /</li>
+                                                        <li>mixins /</li>
+                                                        <li>pages /</li>
+                                                        <li>partials /</li>
+                                                        <li>_main.scss</li>
+                                                    </ul>
+                                                </li>
+                                            </li>
+                                            <li>Gruntfile.js</li>
+                                            <li>.gitignore</li>
+                                            <li>package.json</li>
+                                            <li>package-lock.json</li>
+                                            <li>README.md</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <table class="table table-bordered mt-4">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">File Reference</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>docs.html</td>
+                                            <td>Online documentation</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="wd-30p">index.html</td>
+                                            <td class="wd-70p">Landing page</td>
+                                        </tr>
+                                        <tr>
+                                            <td>_variables.scss</td>
+                                            <td>All variables</td>
+                                        </tr>
+                                        <tr>
+                                            <td>_core.scss</td>
+                                            <td>Create scss variables color code</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gruntfile.js</td>
+                                            <td>Compile scss to css and create js bundles</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Node JS  -->
+                    <div class="col-sm-12">
+                        <div class="card" id="NodeJS">
+                            <div class="header">
+                                <h2>Node JS</h2>
+                            </div>
+                            <div class="body">
+                                <p>Before installing gulp and sass first you must have NodeJs installed, NodeJS will have npm (node packaged modules).</p>
+                                <p>Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js' package ecosystem, npm, is the largest ecosystem of open source libraries in the world.</p>
+                                <p class="mg-b-25">Online Reference: <a href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
+                                <h6 class="tx-color-01">Installing in Mac</h6>
+                                <p>Simply download the <a href="https://nodejs.org/en/#download" target="_blank">Macintosh Installer</a> direct from the nodejs.org web site.</p>
+                                <h6 class="tx-color-01">Installing in Windows</h6>
+                                <p>Simply download the <a href="https://nodejs.org/en/#download" target="_blank">Windows Installer</a> direct from the nodejs.org web site.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grunt File & Installation  -->
+                    <div class="col-sm-12">
+                        <div class="card" id="grunt_file">
+                            <div class="header">
+                                <h2>Grunt File & Installation <small>The JavaScript Task Runner.</small></h2>
+                            </div>
+                            <div class="body">
+                                <p><strong>Installing Grunt:</strong> Run <code>npm install grunt --save-dev</code> command from your teminal to install grunt within your project.</p>
+                                <p><strong>Grunt Sass:</strong> Run <code>grunt sass</code> command from your project directory. It will compile SASS to CSS for the project. This will read the file `assets/scss/filename.scss` and output a plain-css file to `/assets/css/filename.css`. </p>
+                                <p><strong>Grunt JSHint:</strong> Run <code>grunt jshint</code> command from your project directory. It will checks all *.js files under `assetsjs/filename` for common syntax or coding errors using the JSHint utility.</p>
+                                <p><strong>Grunt Sprite:</strong> Run <code>grunt sprite</code> command from your project directory. </p>                        
+                                <p><strong>Further help:</strong> To get more help on the grunt checkout <a href="https://gruntjs.com/getting-started">Grunt</a></p>
+                                <p><strong>Note:</strong> However, any SASS code you write must be able compile via Grunt as well.It will generate pre-compiled javascript templates. Reads all the *.html files from `../js/filename` and outputs `../js/filename.templates.js`. Template.js will contains code of UI design and will be change each time you build solution through above command.</p>
+                                <p><a href="https://gruntjs.com/" target="_blank"><strong>Grunt</strong></a> is a JavaScript task runner, a tool used to automatically perform frequent tasks such as minification, compilation, unit testing, and linting. It uses a command-line interface to run custom tasks defined in a file.</p>
+                            </div>                    
+                        </div>
+                    </div>
+
+                    <!-- Main Content<  -->
+                    <div class="col-sm-12">
+                        <div class="card" id="main_content">
+                            <div class="header">
+                                <h2>Main Content</h2>
+                            </div>
+                            <div class="body">
+<pre><code class="language-html">
+&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+    &lt;title&gt;Mooli | Home&lt;/title&gt;
+    &lt;link rel=&quot;icon&quot; href=&quot;favicon.ico&quot; type=&quot;image/x-icon&quot;&gt;
+    &lt;!-- VENDOR CSS --&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/vendor/bootstrap/css/bootstrap.min.css&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/vendor/font-awesome/css/font-awesome.min.css&quot;&gt;
+    
+    &lt;!-- MAIN CSS --&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/mooli.min.css&quot;&gt;
+    
+    &lt;/head&gt;
+    &lt;body&gt;
+
+        &lt;div class=&quot;theme-cyan&quot;&gt
+    
+            &lt;!-- Page Loader --&gt;
+            &lt;div class=&quot;page-loader-wrapper&quot;&gt;&lt;/div&gt;
+            
+            &lt;!-- Theme Setting --&gt;
+            &lt;div class=&quot;themesetting&quot;&gt;&lt;/div&gt;
+            
+            &lt;!-- Overlay For Sidebars --&gt;
+            &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+            
+            &lt;div id=&quot;wrapper&quot;&gt;
+            
+                &lt;!-- Page top navbar --&gt;
+                &lt;nav class=&quot;navbar navbar-fixed-top&quot;&gt;&lt;/nav&gt;
+            
+                &lt;!-- Main left sidebar menu --&gt;
+                &lt;div id=&quot;left-sidebar&quot; class=&quot;sidebar&quot;&gt;&lt;/div&gt;
+                
+                &lt;!-- Right bar chat  --&gt;
+                &lt;div id=&quot;rightbar&quot; class=&quot;rightbar&quot;&gt;&lt;/div&gt;
+            
+                &lt;!-- Stiky note div  --&gt;
+                &lt;div class=&quot;sticky-note&quot;&gt;&lt;/div&gt;
+            
+                &lt;!-- Main body part  --&gt;
+                &lt;div id=&quot;main-content&quot;&gt;
+                    &lt;div class=&quot;container-fluid&quot;&gt;
+                        &lt;!-- Page header section  --&gt;
+                        &lt;div class=&quot;block-header&quot;&gt;&lt;/div&gt;
+                        &lt;div class=&quot;row clearfix&quot;&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        
+        &lt;!-- Javascript --&gt;
+        &lt;script src=&quot;assets/bundles/libscripts.bundle.js&quot;&gt;&lt;/script&gt;    
+        &lt;script src=&quot;assets/bundles/vendorscripts.bundle.js&quot;&gt;&lt;/script&gt;
+        
+        &lt;!-- Project core js file minify with grunt --&gt; 
+        &lt;script src=&quot;assets/bundles/mainscripts.bundle.js&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;../js/index.js&quot;&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+    
+</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SCSS Structure  -->
+                    <div class="col-sm-12 ">
+                        <div class="card" id="SCSS">
+                            <div class="header">
+                                <h2>SCSS Structure</h2>
+                            </div>
+                            <div class="body">
+                                <p>Please note that all Detail main Web Site, you need to set it up on your project <a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html" class="col-blue" target="_blank">Click Here..</a></p>
+                                <p>main.css is the main CSS file located in assets/css/ folder of the package. Whole CSS file is well indexed with topic and its related code.</p>
+<pre><code class="language-html">
+&lt;!-- START CONTENT --&gt;
+body {
+    @include transition(all .3s ease-in-out);
+    background-color: $body-color;
+    font-weight: $font-weight-400;
+    font-family: $font-family;
+    font-size: $font-size;
+    color: $font-color;    
+}
+a {
+    &amp;:hover,
+    &amp;:focus {
+        color: $link-color-hover;
+        text-decoration: none;
+    }
+}
+&lt;!-- END CONTENT --&gt;
+</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Java Script  -->
+                    <div class="col-sm-12 ">
+                        <div class="card" id="javascript">
+                            <div class="header">
+                                <h2>Java Script</h2>
+                            </div>
+                            <div class="body">
+                                <p>Mooli common.js is the mail javascript file having all the js code. File is located in ../js/ folder. This file code is also well formatted and section in different respective function names.</p>
+                                <p class="m-b-30">Along with this chart library based js code and dashboard based js code are added in separate files for ease of use of user.</p>
+<pre class="prettyprint lang-html linenums">
+&lt;!-- START CONTENT --&gt;
+function initSparkline() {
+    $(&quot;.sparkline&quot;).each(function() {
+        var $this = $(this);
+        $this.sparkline('html', $this.data());
+    });
+
+    // Bar charts using inline values
+    $('.sparkbar').sparkline('html', { type: 'bar' });	
+}
+&lt;!-- END CONTENT --&gt;
+</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Features  -->
+                    <div class="col-sm-12">
+                        <div class="card" id="features">
+                            <div class="header">
+                                <h2>Main Features</h2>
+                            </div>
+                            <div class="body">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6">
+                                        <ul class="main_features">
+                                            <li><strong><a href="https://getbootstrap.com/" target="_blank">Bootstrap</a> 4x</strong></li>
+                                            <li>Latest <strong><a href="https://jquery.com/" target="_blank">jQuery v3.5.1</a></strong></li>
+                                            <li>Built in <strong><a href="http://sass-lang.com/" target="_blank">SASS</a></strong></li>
+                                            <li>Light & Dark Version</li>
+                                            <li>RTL Full support</li>
+                                            <li>Fully Responsive</li>
+                                            <li>Ready to used widget</li>
+                                            <li>Detailed Documentation</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <ul class="main_features">
+                                            <li>Invoice</li>
+                                            <li>User Profile</li>
+                                            <li>Image Gallery</li>
+                                            <li>Timeline</li>
+                                            <li>Summernote</li>
+                                            <li>Markdown</li>                                        
+                                            <li>Many Charts Options</li>                                        
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <ul class="main_features">
+                                            <li>Form Examples</li>
+                                            <li>Form Validation</li>
+                                            <li>Advanced Form Elements</li>
+                                            <li>Form Wizard</li>                                        
+                                            <li>Drag & Drop Upload</li>
+                                            <li>Social</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <ul class="main_features">                                        
+                                            <li>Input Slider</li>                                        
+                                            <li>Date Picker</li>
+                                            <li>Drag & Drop Upload</li>
+                                            <li>Image Cropping</li>
+                                            <li>Sortable & Nestable</li>
+                                            <li>CKEditor</li>
+                                        </ul>
+                                    </div>
+                                </div>                            
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Note:-</strong> jQuery plugin dependencies may relay on used platform and their versions. and
+                                    Works well in all latest browsers like Chrome, Firefox, Safari, Microsoft Edge.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Credits  -->
+                    <div class="col-sm-12 ">
+                        <div class="card" id="Credits">
+                            <div class="header">
+                                <h2>Credits</h2>
+                            </div>
+                            <div class="body">
+                                <table class="table mt-4">
+                                    <tbody>
+                                        <tr>
+                                            <td>Google fonts ( Nanum Gothic ): </td>
+                                            <td><a href="https://fonts.google.com/specimen/Nanum+Gothic">https://fonts.google.com/specimen/Nanum+Gothic</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Font Awesome</td>
+                                            <td><a href="https://fontawesome.com/v4.7.0/">https://fontawesome.com/v4.7.0/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>All Images are used</td>
+                                            <td><a href="https://www.pexels.com/">https://www.pexels.com/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Animation css are used</td>
+                                            <td><a href="http://vivify.mkcreative.cz/" title="">http://vivify.mkcreative.cz/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bootstrap 4x</td>
+                                            <td><a href="http://getbootstrap.com/">http://getbootstrap.com/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jquery</td>
+                                            <td><a href="https://jquery.com/">https://jquery.com/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Datatables</td>
+                                            <td><a href="https://www.datatables.net/">https://www.datatables.net/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Full Calendar</td>
+                                            <td><a href="https://fullcalendar.io/">https://fullcalendar.io/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sparkline</td>
+                                            <td><a href="https://omnipotent.net/jquery.sparkline/">https://omnipotent.net/jquery.sparkline/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vector Maps</td>
+                                            <td><a href="http://jqvmap.com/">http://jqvmap.com/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>jquery steps</td>
+                                            <td><a href="http://www.jquery-steps.com/">http://www.jquery-steps.com/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Image cropper</td>
+                                            <td><a href="https://github.com/fengyuanchen/cropper">https://github.com/fengyuanchen/cropper</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Summernote</td>
+                                            <td><a href="https://summernote.org/">https://summernote.org/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Form Drag & Drop</td>
+                                            <td><a href="https://github.com/JeremyFagis/dropify">https://github.com/JeremyFagis/dropify</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customer Support  -->
+                    <div class="col-sm-12 ">
+                        <div class="card" id="CustomerSupport">
+                            <div class="header">
+                                <h2>Customer Support</h2>
+                            </div>
+                            <div class="body">
+                                <p>You can request for support via email or themeforest item comments.</p>
+                                <p>We will assist you any problem you encounter while buidling your dashboard via this template</p>
+                                <p>We use request help form in comments and email to manage customer support. Soon, as we grow, we will invest and find the best customer support system we can use to serve you better. For the meantime, submit a help request to the link given for any issues and concerns that you have. Don't worry, we will respond to you as quickly as we can. Thank you.</p>
+                                <hr>
+                                <p>© 2020. Mooli Documentation v1.0.0. All Rights Reserved. Created by: <a href="#">PuffinTheme</a></p>
+                            </div>
+                        </div>
+                    </div>
+					
+					<!--Development Support-->
+                    <div class="col-sm-12 ">
+                        <div class="card" id="DevelopmentSupport">
+                            <div class="header">
+                                <h2>Development Support</h2>
+                            </div>
+                            <div class="body">
+                                <p>Thank you for Purchasing Our Template Mooli Angular</p>
+
+								<p><h6 class="font-weight-bold">REGULAR SUPPORT :</h6> You have in template support if you face any issue with the usage of it then you can contact us on below Email ID.</p>
+								
+								<p><h6 class="font-weight-bold">EXTENDED SUPPORT :</h6> Development it is chargeable according to your requirement. For that you need to mail us your requirement on below Email ID.</p>
+								
+								<p><h6 class="font-weight-bold">COST OF SERVICE :</h6> Depends on the hours required. But as you are already using our template we have discounted rates for our template customer. </p>
+								
+								<p><h6 class="font-weight-bold">EXTENDED LICENSE :</h6> With the Extended Support we also include Extended License. So you save much more with your investment than you will with purchasing Regular License and later buying Extended one + Development cost.</p>
+								
+								<p>You will get a quick reply from our team and feel free to contact us. We don’t charge for requirement discussion so don’t worry.</p> 
+								
+								<p><strong>Contact Us : </strong><a href="mailto:puffintheme@gmail.com ">puffintheme@gmail.com</a></p>
+								<p><strong>Skype : </strong><a href="https://join.skype.com/invite/k5rzRbuXyVhc ">puffintheme </a></p>
+                            </div>
+                        </div>
+                    </div>
+					
+                </div>
+            </div>
+        </div>        
+    </div>
+
+</div>
+
+
+<!-- Javascript -->
+<script src="../dist/assets/bundles/libscripts.bundle.js"></script>    
+<script src="../dist/assets/bundles/vendorscripts.bundle.js"></script>
+<script src="../dist/assets/bundles/mainscripts.bundle.js"></script>
+
+<script src="assets/prism.js"></script>
+
+<script>
+    feather.replace();
+
+	$('.metismenu li').click(function(){
+		var $this = $(this);
+		if(!$this.is('active'))
+		{
+			$('.metismenu li').removeClass('active').removeData("top");
+			$this.addClass('active').data("top", $this.offset().top);
+		}
+	});
+	document.createElement('section');
+	var duration = '500',
+    easing = 'swing';
+    
+    // Select all links with hashes
+    $('a[href*="#"]')
+    // Remove links that don't actually link to anything
+    .not('[href="#"]')
+    .not('[href="#0"]')
+    .click(function(event) {
+        // On-page links
+        if (
+        location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
+        && 
+        location.hostname == this.hostname
+        ) {
+        // Figure out element to scroll to
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        // Does a scroll target exist?
+        if (target.length) {
+            // Only prevent default if animation is actually gonna happen
+            event.preventDefault();
+            $('html, body').animate({
+            scrollTop: target.offset().top
+            }, 1000, function() {
+            // Callback after animation
+            // Must change focus!
+            var $target = $(target);
+            $target.focus();
+            if ($target.is(":focus")) { // Checking if the target was focused
+                return false;
+            } else {
+                $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
+                $target.focus(); // Set focus again
+            };
+            });
+        }
+        }
+    });
+</script>
+</body>
+</html>

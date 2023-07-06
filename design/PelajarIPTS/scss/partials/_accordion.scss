@@ -1,0 +1,72 @@
+.accordion{
+	.card-header{
+        @extend .padding-0;
+        border-color: var(--border-color);  
+        
+        .btn{
+            @extend .font-15;
+            @extend .align-left;
+            color: var(--font-777);
+            padding: 10px 20px;
+            width: 100%;
+
+            &:hover,
+            &:focus{
+                box-shadow: none;
+                text-decoration: none;
+            }         
+        }
+    }
+    .collapse{
+        &.show{
+            background: var(--white-color); 
+        }
+    }
+}
+
+.accordion2 {
+    @extend .margin-0;
+    @extend .padding-0;
+	list-style: none;
+    border-top: 1px solid var(--border-color);;
+    
+    .accordion-item {
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 10px;        
+    }
+
+    /* Thumb */
+    .accordion-thumb {
+        @extend .margin-0;
+        @extend .font-16;
+        font-weight: $font-weight-400;
+        padding: .8rem 0;
+        cursor: pointer;        
+        
+        // Chevron
+        &::before {
+            @include transition(all .3s ease-in-out);
+            @include inline-block;            
+            content: "\f138";
+            font-family: 'FontAwesome';            
+        }
+
+        span{
+            @extend .m-l-10;
+        }
+    }
+
+    /* Panel */
+    .accordion-panel {
+        @extend .margin-0;
+        @extend .p-b-10;
+        display: none;
+    }
+
+    /* Active */
+    .accordion-item.is-active {
+        .accordion-thumb::before {
+            content: "\f13a";            
+        }
+    }
+}

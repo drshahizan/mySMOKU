@@ -1,0 +1,52 @@
+a{ color: #5556fd;}
+#main-content{margin-top: 0;}
+.card .body{ font-size: 15px;}
+.main_features li{padding: 5px 0;}
+.prettyprint{ color: #ce1616;}
+#Credits li{ line-height: 30px;}
+
+.file-structure{padding: 0;margin: 0;list-style: none;font-size: 14px; letter-spacing: 2px; line-height: 25px;}
+.file-structure ul {list-style: none;margin: 0;padding: 0 0 0 25px;}
+.file-structure ul li {display: block;position: relative;}
+.file-structure ul li span{ font-weight: 800;}
+.file-structure ul li::before {content: '|--';display: inline-block;margin-right: 5px; color: #c7c7c7;}
+.file-structure ul {list-style: none;margin: 0;padding: 0 0 0 25px;}
+.file-structure ul li {display: block;position: relative;}
+
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+    border: 1px solid #dddddd;
+    background-color: white;
+}
+code[class*="language-"], pre[class*="language-"] {
+    color: #393A34;
+    font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    font-size: 0.95em;
+    line-height: 1.2em;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+.token.tag, .token.selector {
+    color: #800000;
+}
+.token.attr-name, .token.property, .token.regex, .token.entity {
+    color: #ff0000;
+}
+.token.atrule, .token.keyword, .token.attr-value, .language-autohotkey .token.selector, .language-json .token.boolean, .language-json .token.number, code[class*="language-css"] {
+    color: #0000ff;
+}
+.token.punctuation, .token.operator {
+    color: #393A34;
+}
