@@ -9,7 +9,7 @@
 													<div class="px-9 pt-7 card-rounded h-275px w-100 card theme-dark-bg-body"  style="background-color: #32CD32">
 														<!--begin::Heading-->
 														<div class="d-flex flex-stack">
-															<h3 class="m-0 text-white fw-bold fs-2">Permohonan</h3>															
+															<h3 class="m-0 text-white fw-bold fs-2">Permohonan Pelajar</h3>															
 														</div>
 														<div class="d-flex text-center flex-column text-white pt-8">
 															<span class="fw-semibold fs-5">Status</span>
