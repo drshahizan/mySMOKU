@@ -121,7 +121,7 @@
 														<div class="stepper-line h-40px"></div>
 													</div>
 													<!--end::Step 5-->
-													<!--begin::Step 2-->
+													<!--begin::Step 6-->
 													<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
 														<!--begin::Wrapper-->
 														<div class="stepper-wrapper">
@@ -140,11 +140,38 @@
 														</div>
 														<!--end::Wrapper-->
 														<!--begin::Line-->
+														<div class="stepper-line h-40px"></div>
+														<!--end::Line-->
+													</div>
+											
+													<!--end::Step 6-->
+
+													<!--begin::Step 7-->
+													<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
+														<!--begin::Wrapper-->
+														<div class="stepper-wrapper">
+															<!--begin::Icon-->
+															<div class="stepper-icon w-40px h-40px">
+																<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+																<span class="stepper-number">7</span>
+															</div>
+															<!--end::Icon-->
+															<!--begin::Label-->
+															<div class="stepper-label">
+																<h3 class="stepper-title">Selesai Hantarrrrrrrr</h3>
+																<div class="stepper-desc fw-semibold">DONEEEEEEEE</div>
+															</div>
+															<!--end::Label-->
+														</div>
+														<!--end::Wrapper-->
+														<!--begin::Line-->
 														
 														<!--end::Line-->
 													</div>
 											
-													<!--end::Step 5-->
+													<!--end::Step 7-->
+
+
 												</div>
 												<!--end::Nav-->
 											</div>
@@ -683,11 +710,10 @@
 														<!--begin::Heading-->
 														<div class="pb-10 pb-lg-15">
 															<!--begin::Title-->
-															<h2 class="fw-bold text-dark">Billing Details</h2>
+															<h2 class="fw-bold text-dark">Maklumat Akademik</h2>
 															<!--end::Title-->
 															<!--begin::Notice-->
-															<div class="text-muted fw-semibold fs-6">If you need more info, please check out
-															<a href="#" class="text-primary fw-bold">Help Page</a>.</div>
+															<div class="text-muted fw-semibold fs-6">Profil Akademik</div>
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
@@ -695,52 +721,111 @@
 														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
 															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="required">Name On Card</span>
-																<span class="ms-1" data-bs-toggle="tooltip" title="Specify a card holder's name">
-																	<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																		<span class="path3"></span>
-																	</i>
-																</span>
+																<span class="required">No Pendaftaran Pelajar</span>
+																
 															</label>
 															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="" name="card_name" value="Max Doe" />
+															<input type="text" class="form-control form-control-solid" placeholder="AI12345" name="no_pendaftaranpelajar" value="" />
 														</div>
-														<!--end::Input group-->
-														<!--begin::Input group-->
 														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
-															<label class="required fs-6 fw-semibold form-label mb-2">Card Number</label>
+															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																<span class="required">Nama Kursus</span>
+																
+															</label>
 															<!--end::Label-->
-															<!--begin::Input wrapper-->
-															<div class="position-relative">
-																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" placeholder="Enter card number" name="card_number" value="4111 1111 1111 1111" />
-																<!--end::Input-->
-																<!--begin::Card logos-->
-																<div class="position-absolute translate-middle-y top-50 end-0 me-5">
-																	<img src="assets/media/svg/card-logos/visa.svg" alt="" class="h-25px" />
-																	<img src="assets/media/svg/card-logos/mastercard.svg" alt="" class="h-25px" />
-																	<img src="assets/media/svg/card-logos/american-express.svg" alt="" class="h-25px" />
-																</div>
-																<!--end::Card logos-->
-															</div>
-															<!--end::Input wrapper-->
+															<input type="text" class="form-control form-control-solid" placeholder="Sarjana Muda Teknologi Maklumat" name="nama_kursus" value="" />
 														</div>
 														<!--end::Input group-->
+														
+
 														<!--begin::Input group-->
 														<div class="row mb-10">
 															<!--begin::Col-->
-															<div class="col-md-8 fv-row">
+															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">Expiration Date</label>
+																<label class="required fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Row-->
 																<div class="row fv-row">
-																	<!--begin::Col-->
-																	<div class="col-6">
-																		<select name="card_expiry_month" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Month">
+																	<!--begin::Input wrapper-->
+																	<select name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Peringkat Pengajian">
+																			<option></option>
+																			<option value="1">Sijil Asas / Sijil</option>
+																			<option value="2">Diploma</option>
+																			<option value="3">Sarjana Muda</option>
+																			<option value="4">Diploma Lepasan Ijazah</option>
+																			<option value="5">Sarjana</option>
+																			<option value="6">PhD</option>
+																			
+																		</select>																	<!--end::Input wrapper-->
+																</div>
+																<!--end::Row-->
+															</div>
+															<!--end::Col-->
+															<!--begin::Col-->
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Nama Pusat Pengajian</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																		<select name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Nama Pusat Pengajian">
+																			<option></option>
+																			<option value="1">Universiti Malaysia Sabah</option>
+																			<option value="2">Universiti Kebangsaan Malaysia</option>
+																			<option value="3">Universiti Malaya</option>
+																			<option value="4">Universiti Putra Malaysia</option>
+																			<option value="5">Universiti Teknikal Malaysia Melaka</option>
+																			<option value="6">Universiti Sains Malaysia</option>
+																			<option value="7">Universiti Pertahanan Nasional Malaysia</option>
+																			<option value="8">Universiti Tun Hussein Onn Malaysia</option>
+																			<option value="9">Universiti Malaysia Kelantan</option>
+																			<option value="10">Univeristi Utara Malaysia</option>
+																			
+																		</select>																<!--end::Input wrapper-->
+															</div>
+															<!--end::Col-->
+														</div>
+														<!--end::Input group-->
+
+
+														<!--begin::Input group-->
+														<div class="row mb-10">
+															<!--begin::Col-->
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">Tarikh Mula Pengajian</label>
+																<!--end::Label-->
+																	<!--begin::Input wrapper-->
+																	<input type="date" class="form-control form-control-solid" placeholder="" name="tkh_mula" value="" />
+																	<!--end::Input wrapper-->
+															</div>
+															<!--end::Col-->
+															<!--begin::Col-->
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tarikh Tamat Pengajian</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																	<input type="date" class="form-control form-control-solid" placeholder="" name="tkh_tamat" value="" />
+																<!--end::Input wrapper-->
+															</div>
+															<!--end::Col-->
+														</div>
+														<!--end::Input group-->
+
+														<!--begin::Input group-->
+														<div class="row mb-10">
+															<!--begin::Col-->
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">Semester Semasa</label>
+																<!--end::Label-->
+																<!--begin::Row-->
+																<div class="row fv-row">
+																	<!--begin::Input wrapper-->
+																	
+																		<select name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
 																			<option></option>
 																			<option value="1">1</option>
 																			<option value="2">2</option>
@@ -750,89 +835,219 @@
 																			<option value="6">6</option>
 																			<option value="7">7</option>
 																			<option value="8">8</option>
-																			<option value="9">9</option>
-																			<option value="10">10</option>
-																			<option value="11">11</option>
-																			<option value="12">12</option>
+																			
 																		</select>
-																	</div>
-																	<!--end::Col-->
-																	<!--begin::Col-->
-																	<div class="col-6">
-																		<select name="card_expiry_year" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Year">
-																			<option></option>
-																			<option value="2023">2023</option>
-																			<option value="2024">2024</option>
-																			<option value="2025">2025</option>
-																			<option value="2026">2026</option>
-																			<option value="2027">2027</option>
-																			<option value="2028">2028</option>
-																			<option value="2029">2029</option>
-																			<option value="2030">2030</option>
-																			<option value="2031">2031</option>
-																			<option value="2032">2032</option>
-																			<option value="2033">2033</option>
-																		</select>
-																	</div>
-																	<!--end::Col-->
+																	<!--end::Input wrapper-->
 																</div>
 																<!--end::Row-->
 															</div>
 															<!--end::Col-->
 															<!--begin::Col-->
-															<div class="col-md-4 fv-row">
+															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																	<span class="required">CVV</span>
-																	<span class="ms-1" data-bs-toggle="tooltip" title="Enter a card CVV code">
-																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																			<span class="path3"></span>
-																		</i>
-																	</span>
-																</label>
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																<div class="position-relative">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" minlength="3" maxlength="4" placeholder="CVV" name="card_cvv" />
-																	<!--end::Input-->
-																	<!--begin::CVV icon-->
-																	<div class="position-absolute translate-middle-y top-50 end-0 me-3">
-																		<i class="ki-duotone ki-credit-cart fs-2hx">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																		</i>
-																	</div>
-																	<!--end::CVV icon-->
+																	<input type="text" class="form-control form-control-solid" placeholder="Tahun" name="tempoh_pengajian" value="" />
+																	
+																	<!--end::Input wrapper-->
+															</div>
+															<!--end::Col-->
+														</div>
+														<!--end::Input group-->
+
+														<!--begin::Input group-->
+														<div class="row mb-10">
+															<!--begin::Col-->
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">Bil Bulan Persemester</label>
+																<!--end::Label-->
+																<!--begin::Row-->
+																<div class="row fv-row">
+																	<!--begin::Input wrapper-->
+																		<select name="bil_bulanpersem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
+																			<option></option>
+																			<option value="1">1</option>
+																			<option value="2">2</option>
+																			<option value="3">3</option>
+																		</select>
+																	<!--end::Input wrapper-->
 																</div>
+																<!--end::Row-->
+															</div>
+															<!--end::Col-->
+															<!--begin::Col-->
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																		<select name="mod" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
+																			<option></option>
+																			<option value="1">Sepenuh Masa</option>
+																			<option value="2">Separuh Masa</option>
+																			<option value="3">Jarak Jauh</option>
+																			<option value="4">Dalam Talian (Online)</option>
+																		</select>
+																	<!--end::Input wrapper-->
+															</div>
+															<!--end::Col-->
+														</div>
+														<!--end::Input group-->
+
+														<div class="d-flex flex-column mb-7 fv-row">
+															<!--begin::Label-->
+															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																<span class="required">CGPA Terkini</span>
+																
+															</label>
+															<!--end::Label-->
+															<input type="text" class="form-control form-control-solid" placeholder="" name="cgpa" value="" />
+														</div>
+
+														<!--begin::Input group-->
+														<div class="row mb-10">
+															<!--begin::Col-->
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label>
+																<!--end::Label-->
+																<!--begin::Row-->
+																<div class="row fv-row">
+																	<!--begin::Input wrapper-->
+																		<select name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
+																			<option></option>
+																			<option value="1">Biasiswa</option>
+																			<option value="2">Tajaan Majikan</option>
+																			<option value="3">Pinjaman</option>
+																			<option value="3">Sendiri / Tiada Penaja</option>
+																			<option value="3">Lain-lain</option>
+																		</select>
+																	<!--end::Input wrapper-->
+																</div>
+																<!--end::Row-->
+															</div>
+															<!--end::Col-->
+															<!--begin::Col-->
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Lain-lain</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<input type="text" class="form-control form-control-solid" placeholder="" name="sumber_biayalain" value="" />
 																<!--end::Input wrapper-->
 															</div>
 															<!--end::Col-->
 														</div>
 														<!--end::Input group-->
-														<!--begin::Input group-->
-														<div class="d-flex flex-stack">
+
+														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
-															<div class="me-5">
-																<label class="fs-6 fw-semibold form-label">Save Card for further billing?</label>
-																<div class="fs-7 fw-semibold text-muted">If you need more info, please check budget planning</div>
-															</div>
-															<!--end::Label-->
-															<!--begin::Switch-->
-															<label class="form-check form-switch form-check-custom form-check-solid">
-																<input class="form-check-input" type="checkbox" value="1" checked="checked" />
-																<span class="form-check-label fw-semibold text-muted">Save Card</span>
+															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																<span class="required">Nama Penaja</span>
+																
 															</label>
-															<!--end::Switch-->
+															<!--end::Label-->
+															<input type="text" class="form-control form-control-solid" placeholder="JPA" name="nama_penaja" value="" />
 														</div>
-														<!--end::Input group-->
+														
 													</div>
 													<!--end::Wrapper-->
 												</div>
 												<!--end::Step 4-->
+
 												<!--begin::Step 5-->
+												<div data-kt-stepper-element="content">
+													<!--begin::Wrapper-->
+													<div class="w-100">
+														<!--begin::Heading-->
+														<div class="pb-10 pb-lg-15">
+															<!--begin::Title-->
+															<h2 class="fw-bold text-dark">Maklumat Tuntutan</h2>
+															<!--end::Title-->
+															<!--begin::Notice-->
+															<div class="text-muted fw-semibold fs-6">Tuntutan</div>
+															<!--end::Notice-->
+														</div>
+														<!--end::Heading-->
+														
+
+														<!--begin::Input group-->
+														
+														<div class="d-flex flex-column mb-7 fv-row">
+															<!--begin::Label-->
+															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																<span class="required">Jenis Tuntutan</span>
+																
+															</label>
+															<!--end::Label-->
+															<select name="jenis_tuntutan" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Jenis">
+																<option></option>
+																<option value="1">Yuran</option>
+																<option value="2">Elaun Wang Saku</option>
+															</select>
+														</div>
+														
+
+														<div class="d-flex flex-column mb-7 fv-row">
+															<!--begin::Label-->
+															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																<span class="required">Amaun</span>
+																
+															</label>
+															<!--end::Label-->
+															<input type="text" class="form-control form-control-solid" placeholder="RM" name="amaun" value="" />
+														</div>
+
+														
+														
+													</div>
+													<!--end::Wrapper-->
+												</div>
+												<!--end::Step 5-->
+
+												<!--begin::Step 6-->
+												<div data-kt-stepper-element="content">
+													<!--begin::Wrapper-->
+													<div class="w-100">
+														<!--begin::Heading-->
+														<div class="pb-10 pb-lg-15">
+															<!--begin::Title-->
+															<h2 class="fw-bold text-dark">Perakuan dan Pengesahan</h2>
+															<!--end::Title-->
+															<!--begin::Notice-->
+															<div class="text-muted fw-semibold fs-6">Perakuan</div>
+															<!--end::Notice-->
+														</div>
+														<!--end::Heading-->
+														
+														<div class="d-flex flex-column mb-7 fv-row">
+															<!--begin::Label-->
+															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																
+																<span class="required">Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
+																sekiranya maklumat yang diberikan didapati palsu atau tidak benar, pihak kementerian berhak menolak
+																permohonan saya dan menghentikan bantuan kewangan ini kepada saya
+																</span>
+																
+															</label>
+															<!--end::Label-->
+															<input type="text" class="form-control form-control-solid" placeholder="" name="perakuan" value="" />
+														</div>
+
+														
+														
+													</div>
+													<!--end::Wrapper-->
+												</div>
+												<!--end::Step 6-->
+
+
+
+
+
+												<!--begin::Step 7-->
 												<div data-kt-stepper-element="content">
 													<!--begin::Wrapper-->
 													<div class="w-100">
@@ -842,8 +1057,7 @@
 															<h2 class="fw-bold text-dark">Your Are Done!</h2>
 															<!--end::Title-->
 															<!--begin::Notice-->
-															<div class="text-muted fw-semibold fs-6">If you need more info, please
-															<a href="../../demo1/dist/authentication/layouts/corporate/sign-in.html" class="link-primary fw-bold">Sign In</a>.</div>
+															<div class="text-muted fw-semibold fs-6">If you need more info, please......</div>
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
@@ -868,7 +1082,7 @@
 																	<div class="fw-semibold">
 																		<h4 class="text-gray-900 fw-bold">We need your attention!</h4>
 																		<div class="fs-6 text-gray-700">To start using great tools, please,
-																		<a href="../../demo1/dist/utilities/wizards/vertical.html" class="fw-bold">Create Team Platform</a></div>
+																		...</div>
 																	</div>
 																	<!--end::Content-->
 																</div>
@@ -881,7 +1095,7 @@
 													</div>
 													<!--end::Wrapper-->
 												</div>
-												<!--end::Step 5-->
+												<!--end::Step 7-->
 												<!--begin::Actions-->
 												<div class="d-flex flex-stack pt-10">
 													<!--begin::Wrapper-->
@@ -890,7 +1104,7 @@
 														<i class="ki-duotone ki-arrow-left fs-4 me-1">
 															<span class="path1"></span>
 															<span class="path2"></span>
-														</i>Back</button>
+														</i>Kembali</button>
 													</div>
 													<!--end::Wrapper-->
 													<!--begin::Wrapper-->
