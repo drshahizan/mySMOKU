@@ -18,8 +18,8 @@
 															<!--end::Icon-->
 															<!--begin::Label-->
 															<div class="stepper-label">
-																<h3 class="stepper-title">Semakan MQA</h3>
-																<div class="stepper-desc fw-semibold">Semakan</div>
+																<h3 class="stepper-title">Semakan Kelayakan MQA</h3>
+																<div class="stepper-desc fw-semibold">Semak kelayakan syarat permohonan BKOKU</div>
 															</div>
 															<!--end::Label-->
 														</div>
@@ -42,7 +42,7 @@
 															<!--begin::Label-->
 															<div class="stepper-label">
 																<h3 class="stepper-title">Maklumat Peribadi</h3>
-																<div class="stepper-desc fw-semibold">Profil Diri dan Maklumat Waris</div>
+																<div class="stepper-desc fw-semibold">Profil Peribadi Diri</div>
 															</div>
 															<!--end::Label-->
 														</div>
@@ -64,8 +64,8 @@
 															<!--end::Icon-->
 															<!--begin::Label-->
 															<div class="stepper-label">
-																<h3 class="stepper-title">Maklumat Akadmik</h3>
-																<div class="stepper-desc fw-semibold">Akademik</div>
+																<h3 class="stepper-title">Maklumat Waris</h3>
+																<div class="stepper-desc fw-semibold">Profil Waris</div>
 															</div>
 															<!--end::Label-->
 														</div>
@@ -87,11 +87,10 @@
 															<!--end::Icon-->
 															<!--begin::Label-->
 															<div class="stepper-label">
-																<h3 class="stepper-title">Maklumat Tuntutan</h3>
-																<div class="stepper-desc fw-semibold">Tuntutan Yuran dan Elaun Wang Saku</div>
+																<h3 class="stepper-title">Maklumat Akademik</h3>
+																<div class="stepper-desc fw-semibold">Pembelajaran Akademik</div>
 															</div>
 															<!--end::Label-->
-
 														</div>
 														<!--end::Wrapper-->
 														<!--begin::Line-->
@@ -99,8 +98,8 @@
 														<!--end::Line-->
 													</div>
 													<!--end::Step 4-->
-														<!--begin::Step 5-->
-														<div class="stepper-item mark-completed" data-kt-stepper-element="nav">
+													<!--begin::Step 5-->
+													<div class="stepper-item" data-kt-stepper-element="nav">
 														<!--begin::Wrapper-->
 														<div class="stepper-wrapper">
 															<!--begin::Icon-->
@@ -111,13 +110,39 @@
 															<!--end::Icon-->
 															<!--begin::Label-->
 															<div class="stepper-label">
+																<h3 class="stepper-title">Maklumat Tuntutan</h3>
+																<div class="stepper-desc fw-semibold">Yuran Tuntutan dan Elauan Wang Saku</div>
+															</div>
+															<!--end::Label-->
+															
+														</div>
+														<!--end::Wrapper-->
+														<div class="stepper-line h-40px"></div>
+													</div>
+													<!--end::Step 5-->
+													<!--begin::Step 2-->
+													<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
+														<!--begin::Wrapper-->
+														<div class="stepper-wrapper">
+															<!--begin::Icon-->
+															<div class="stepper-icon w-40px h-40px">
+																<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+																<span class="stepper-number">6</span>
+															</div>
+															<!--end::Icon-->
+															<!--begin::Label-->
+															<div class="stepper-label">
 																<h3 class="stepper-title">Perakuan</h3>
-																<div class="stepper-desc fw-semibold">-</div>
+																<div class="stepper-desc fw-semibold">Pengesahan Semua Maklumat</div>
 															</div>
 															<!--end::Label-->
 														</div>
 														<!--end::Wrapper-->
+														<!--begin::Line-->
+														
+														<!--end::Line-->
 													</div>
+											
 													<!--end::Step 5-->
 												</div>
 												<!--end::Nav-->
@@ -147,7 +172,7 @@
 														<div class="fv-row mb-10">
 															
                                     					<!-- <div class="col-lg-12 col-md-12"> -->
-                                      					  <div class="form-group c_form_group">
+                                      					  
 														<label class="form-label required">Nama Institusi</label>
 													<select name="nama_institusi" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 
@@ -162,13 +187,13 @@
                                                 	<option value="UMK">Universiti Malaysia Kelantan</option>
                                                 	<option value="UUM">Univeristi Utara Malaysia</option>
                                             		</select>
-                                        		</div>
+                                        	
 </div>
 <!-- </div> -->
 
 								<div class="fv-row mb-10">
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="form-group c_form_group">
+                                    
+                                        
 										<label class="form-label required">Peringkat</label>
 										<select name="peringkat" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
                                                 <!-- <option value="">Pilih</option> -->
@@ -179,11 +204,10 @@
                                                 <option value="QQQ">Sarjana</option>
                                                 <option value="AAA">Ijazah Kedoktoran</option>
                                             </select>
-                                        </div>
-                                    </div>
+                                      
 								</div>
 								<div class="fv-row mb-10">
-                                    <div class="col-lg-12 col-md-12">
+                                    
 									   <label class="form-label required">Nama Kursus</label>
 															<select name="nama_kursus" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 																<option value="1">Komputer Sains</option>
@@ -193,12 +217,36 @@
 																<option value="4">Limited Liability</option>
 																<option value="5">General Partnership</option>
 															</select>
-                                    </div>
+                                    
 </div>
                                  
                                     <br>
 									<button type="button" class="btn btn-lg btn-success"><i class="fas fa-envelope-open-text fs-4 me-2"></i>Semak</button>
-														
+									<div class="fv-row mb-10">
+															<label class="form-label required">Adakah anda penerima HLP?</label>	
+															<div class="row mb-2" data-kt-buttons="true">
+																	<!--begin::Col-->
+																	<div class="col">
+																		<!--begin::Option-->
+																		<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
+																			<input type="radio" class="btn-check" name="ya" value="1-1" />
+																			<span class="fw-bold fs-3">Ya</span>
+																		</label>
+																		<!--end::Option-->
+																	</div>
+																	<!--end::Col-->
+																	<!--begin::Col-->
+																	<div class="col">
+																		<!--begin::Option-->
+																		<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4 active">
+																			<input type="radio" class="btn-check" name="" checked="checked" value="2-10" />
+																			<span class="fw-bold fs-3">Tidak</span>
+																		</label>
+																		<!--end::Option-->
+																	</div>
+															</div>
+															
+														</div>
 												</div>
 
 </div>
