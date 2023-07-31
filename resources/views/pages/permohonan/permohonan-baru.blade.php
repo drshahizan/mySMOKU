@@ -1,5 +1,5 @@
 <x-default-layout> 
-
+<main class="login-form">
 <div class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid gap-10" id="kt_create_account_stepper">
 										<!--begin::Aside-->
 										<div class="card d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px">
@@ -181,10 +181,11 @@
 										<!--begin::Content-->
 										<div class="card d-flex flex-row-fluid flex-center">
 											<!--begin::Form-->
-											<form action="permohonan.post" method="POST" class="card-body py-20 w-100 mw-xl-700px px-9" novalidate="novalidate" id="kt_create_account_form">
-												
-											<!--begin::Step 1-->
+											<form action="{{ route('permohonan.post') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9">
+											
+												<!--begin::Step 1-->
 												<div class="current" data-kt-stepper-element="content">
+												
 													<!--begin::Wrapper-->
 													<div class="w-100">
 														<!--begin::Heading-->
@@ -193,65 +194,59 @@
 															<h2 class="fw-bold d-flex align-items-center text-dark">Semakan Kelayakan MQA</h2> 
 															<img alt="Logo" src="{{ image('logos/mqalogo.png') }}" class="h-150px app-sidebar-logo-default" />
 															<div class="text-muted fw-semibold fs-6">Panduan Semak Pencarian
-															<p>Carian boleh dilakukan melalui kata kunci/kombinasi kata kunci di bawah:</p>   
-                               							 	<p>(1) Pilih Universiti</p>  
-                                							<p>(2) Pilih Peringkat</p>   
-                                							<p>(3) Pilih Kursus</p></div>
+																<p>Carian boleh dilakukan melalui kata kunci/kombinasi kata kunci di bawah:</p>   
+																<p>(1) Pilih Universiti</p>  
+																<p>(2) Pilih Peringkat</p>   
+																<p>(3) Pilih Kursus</p>
+															</div>
 														</div>
 														<div class="fv-row mb-10">
-															
-                                    					<!-- <div class="col-lg-12 col-md-12"> -->
-                                      					  
-														<label class="form-label required">Nama Institusi</label>
-													<select name="nama_institusi" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-
-                                                	<option value="UMS">Universiti Malaysia Sabah</option>
-                                                	<option value="UKM">Universiti Kebangsaan Malaysia</option>
-                                                	<option value="UM">Universiti Malaya</option>
-                                                	<option value="UPM">Universiti Putra Malaysia</option>
-                                                	<option value="UTeM">Universiti Teknikal Malaysia Melaka</option>
-                                                	<option value="USM">Universiti Sains Malaysia</option>
-                                                	<option value="UPNM">Universiti Pertahanan Nasional Malaysia</option>
-                                                	<option value="UTHM">Universiti Tun Hussein Onn Malaysia</option>
-                                                	<option value="UMK">Universiti Malaysia Kelantan</option>
-                                                	<option value="UUM">Univeristi Utara Malaysia</option>
-                                            		</select>
-                                        	
-</div>
-<!-- </div> -->
-
-								<div class="fv-row mb-10">
-                                    
-                                        
-										<label class="form-label required">Peringkat</label>
-										<select name="peringkat" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-                                                <!-- <option value="">Pilih</option> -->
-                                                <option value="SS">Sijil Kemahiran</option>
-                                                <option value="XX">Diploma</option>
-                                                <option value="SS">Sarjana Muda</option>
-                                                <option value="FF">Diploma Pendidikan</option>
-                                                <option value="QQQ">Sarjana</option>
-                                                <option value="AAA">Ijazah Kedoktoran</option>
-                                            </select>
-                                      
-								</div>
-								<div class="fv-row mb-10">
-                                    
-									   <label class="form-label required">Nama Kursus</label>
-															<select name="nama_kursus" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-																<option value="1">Komputer Sains</option>
-																<option value="1">C Corporation</option>
-																<option value="2">Sole Proprietorship</option>
-																<option value="3">Non-profit</option>
-																<option value="4">Limited Liability</option>
-																<option value="5">General Partnership</option>
+																
+															<label class="form-label required">Nama Institusi</label>
+															<select name="nama_institusi" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+															<option value="UMS">Universiti Malaysia Sabah</option>
+															<option value="UKM">Universiti Kebangsaan Malaysia</option>
+															<option value="UM">Universiti Malaya</option>
+															<option value="UPM">Universiti Putra Malaysia</option>
+															<option value="UTeM">Universiti Teknikal Malaysia Melaka</option>
+															<option value="USM">Universiti Sains Malaysia</option>
+															<option value="UPNM">Universiti Pertahanan Nasional Malaysia</option>
+															<option value="UTHM">Universiti Tun Hussein Onn Malaysia</option>
+															<option value="UMK">Universiti Malaysia Kelantan</option>
+															<option value="UUM">Univeristi Utara Malaysia</option>
 															</select>
-                                    
-</div>
+												
+														</div>
+														<!-- </div> -->
+
+														<div class="fv-row mb-10">
+															<label class="form-label required">Peringkat</label>
+															<select name="peringkat" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+																	<!-- <option value="">Pilih</option> -->
+																	<option value="SS">Sijil Kemahiran</option>
+																	<option value="XX">Diploma</option>
+																	<option value="SS">Sarjana Muda</option>
+																	<option value="FF">Diploma Pendidikan</option>
+																	<option value="QQQ">Sarjana</option>
+																	<option value="AAA">Ijazah Kedoktoran</option>
+															</select>
+														</div>
+														<div class="fv-row mb-10">
+											
+															<label class="form-label required">Nama Kursus</label>
+																	<select name="nama_kursus" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+																		<option value="1">Komputer Sains</option>
+																		<option value="1">C Corporation</option>
+																		<option value="2">Sole Proprietorship</option>
+																		<option value="3">Non-profit</option>
+																		<option value="4">Limited Liability</option>
+																		<option value="5">General Partnership</option>
+																	</select>
+														</div>
                                    
-									<div class="fv-row mb-10">
+														<div class="fv-row mb-10">
 															<label class="form-label required">Adakah anda penerima HLP?</label>	
-															<div class="row mb-2" data-kt-buttons="true">
+															   <div class="row mb-2" data-kt-buttons="true">
 																	<!--begin::Col-->
 																	<div class="col">
 																		<!--begin::Option-->
@@ -271,16 +266,17 @@
 																		</label>
 																		<!--end::Option-->
 																	</div>
-															</div>
+																</div>
 															
 														</div>
 												
-</div>
-</div>
-
+													</div>
+												</div>
 												<!--end::Step 1-->
+													
 												<!--begin::Step 2-->
 												<div data-kt-stepper-element="content">
+												@csrf
 													<!--begin::Wrapper-->
 													<div class="w-100">
 														<!--begin::Heading-->
@@ -525,6 +521,7 @@
 													<!--end::Wrapper-->
 												</div>
 												<!--end::Step 2-->
+
 												<!--begin::Step 3-->
 												<div data-kt-stepper-element="content">
 													<!--begin::Wrapper-->
@@ -704,6 +701,7 @@
 													<!--end::Wrapper-->
 												</div>
 												<!--end::Step 3-->
+
 												<!--begin::Step 4-->
 												<div data-kt-stepper-element="content">
 													<!--begin::Wrapper-->
@@ -1044,10 +1042,6 @@
 												</div>
 												<!--end::Step 6-->
 
-
-
-
-
 												<!--begin::Step 7-->
 												<div data-kt-stepper-element="content">
 													<!--begin::Wrapper-->
@@ -1110,7 +1104,7 @@
 													<!--end::Wrapper-->
 													<!--begin::Wrapper-->
 													<div>
-														<button type="button" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
+														<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
 															<span class="indicator-label">Submit
 															<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
 																<span class="path1"></span>
@@ -1142,7 +1136,7 @@
 						</div>
 
 </div>
-
+</main>
 
 <!--begin::Javascript-->
 

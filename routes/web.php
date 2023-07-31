@@ -31,12 +31,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('/user-management/permissions', PermissionManagementController::class);
     });
 
-    Route::name('permohonan.')->group(function () {
+   /*Route::name('permohonan.')->group(function () {
         //Route::get('/', [PermohonanController::class, 'permohonanbaru']);
         Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
         Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post'); 
         //Route::resource('/user-management/permissions', PermissionManagementController::class);
-    });
+    });*/
+
+    Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
+    Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post'); 
+    
     
 
 
