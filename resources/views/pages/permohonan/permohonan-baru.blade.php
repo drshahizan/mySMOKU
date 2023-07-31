@@ -1,4 +1,5 @@
 <x-default-layout> 
+
 <div class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid gap-10" id="kt_create_account_stepper">
 										<!--begin::Aside-->
 										<div class="card d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px">
@@ -257,190 +258,240 @@
 														<!--begin::Heading-->
 														<div class="pb-10 pb-lg-15">
 															<!--begin::Title-->
-															<h2 class="fw-bold text-dark">Account Info</h2>
+															<h2 class="fw-bold text-dark">Maklumat Peribadi</h2>
 															<!--end::Title-->
 															<!--begin::Notice-->
-															<div class="text-muted fw-semibold fs-6">If you need more info, please check out
-															<a href="#" class="link-primary fw-bold">Help Page</a>.</div>
+															<div class="text-muted fw-semibold fs-6">Profil Diri 
+															</div>
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
 														<!--begin::Input group-->
 														<div class="mb-10 fv-row">
 															<!--begin::Label-->
-															<label class="d-flex align-items-center form-label mb-3">Specify Team Size
-															<span class="ms-1" data-bs-toggle="tooltip" title="Provide your team size to help us setup your billing">
-																<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
-																	<span class="path3"></span>
-																</i>
-															</span></label>
-															<!--end::Label-->
-															<!--begin::Row-->
-															<div class="row mb-2" data-kt-buttons="true">
-																<!--begin::Col-->
-																<div class="col">
-																	<!--begin::Option-->
-																	<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
-																		<input type="radio" class="btn-check" name="account_team_size" value="1-1" />
-																		<span class="fw-bold fs-3">1-1</span>
-																	</label>
-																	<!--end::Option-->
-																</div>
-																<!--end::Col-->
-																<!--begin::Col-->
-																<div class="col">
-																	<!--begin::Option-->
-																	<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4 active">
-																		<input type="radio" class="btn-check" name="account_team_size" checked="checked" value="2-10" />
-																		<span class="fw-bold fs-3">2-10</span>
-																	</label>
-																	<!--end::Option-->
-																</div>
-																<!--end::Col-->
-																<!--begin::Col-->
-																<div class="col">
-																	<!--begin::Option-->
-																	<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
-																		<input type="radio" class="btn-check" name="account_team_size" value="10-50" />
-																		<span class="fw-bold fs-3">10-50</span>
-																	</label>
-																	<!--end::Option-->
-																</div>
-																<!--end::Col-->
-																<!--begin::Col-->
-																<div class="col">
-																	<!--begin::Option-->
-																	<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
-																		<input type="radio" class="btn-check" name="account_team_size" value="50+" />
-																		<span class="fw-bold fs-3">50+</span>
-																	</label>
-																	<!--end::Option-->
-																</div>
-																<!--end::Col-->
-															</div>
-															<!--end::Row-->
-															<!--begin::Hint-->
-															<div class="form-text">Customers will see this shortened version of your statement descriptor</div>
-															<!--end::Hint-->
-														</div>
-														<!--end::Input group-->
-														<!--begin::Input group-->
-														<div class="mb-10 fv-row">
-															<!--begin::Label-->
-															<label class="form-label mb-3">Team Account Name</label>
+															<label class="form-label mb-3">Nama</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid" name="account_name" placeholder="" value="" />
+															<input type="text" class="form-control form-control-lg form-control-solid" name="nama_pelajar" placeholder="" value="" />
 															<!--end::Input-->
 														</div>
 														<!--end::Input group-->
 														<!--begin::Input group-->
-														<div class="mb-0 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center form-label mb-5">Select Account Plan
-															<span class="ms-1" data-bs-toggle="tooltip" title="Monthly billing will be based on your account plan">
-																<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
-																	<span class="path3"></span>
-																</i>
-															</span></label>
-															<!--end::Label-->
-															<!--begin::Options-->
-															<div class="mb-0">
-																<!--begin:Option-->
-																<label class="d-flex flex-stack mb-5 cursor-pointer">
-																	<!--begin:Label-->
-																	<span class="d-flex align-items-center me-2">
-																		<!--begin::Icon-->
-																		<span class="symbol symbol-50px me-6">
-																			<span class="symbol-label">
-																				<i class="ki-duotone ki-bank fs-1 text-gray-600">
-																					<span class="path1"></span>
-																					<span class="path2"></span>
-																				</i>
-																			</span>
-																		</span>
-																		<!--end::Icon-->
-																		<!--begin::Description-->
-																		<span class="d-flex flex-column">
-																			<span class="fw-bold text-gray-800 text-hover-primary fs-5">Company Account</span>
-																			<span class="fs-6 fw-semibold text-muted">Use images to enhance your post flow</span>
-																		</span>
-																		<!--end:Description-->
-																	</span>
-																	<!--end:Label-->
-																	<!--begin:Input-->
-																	<span class="form-check form-check-custom form-check-solid">
-																		<input class="form-check-input" type="radio" name="account_plan" value="1" />
-																	</span>
-																	<!--end:Input-->
-																</label>
-																<!--end::Option-->
-																<!--begin:Option-->
-																<label class="d-flex flex-stack mb-5 cursor-pointer">
-																	<!--begin:Label-->
-																	<span class="d-flex align-items-center me-2">
-																		<!--begin::Icon-->
-																		<span class="symbol symbol-50px me-6">
-																			<span class="symbol-label">
-																				<i class="ki-duotone ki-chart fs-1 text-gray-600">
-																					<span class="path1"></span>
-																					<span class="path2"></span>
-																				</i>
-																			</span>
-																		</span>
-																		<!--end::Icon-->
-																		<!--begin::Description-->
-																		<span class="d-flex flex-column">
-																			<span class="fw-bold text-gray-800 text-hover-primary fs-5">Developer Account</span>
-																			<span class="fs-6 fw-semibold text-muted">Use images to your post time</span>
-																		</span>
-																		<!--end:Description-->
-																	</span>
-																	<!--end:Label-->
-																	<!--begin:Input-->
-																	<span class="form-check form-check-custom form-check-solid">
-																		<input class="form-check-input" type="radio" checked="checked" name="account_plan" value="2" />
-																	</span>
-																	<!--end:Input-->
-																</label>
-																<!--end::Option-->
-																<!--begin:Option-->
-																<label class="d-flex flex-stack mb-0 cursor-pointer">
-																	<!--begin:Label-->
-																	<span class="d-flex align-items-center me-2">
-																		<!--begin::Icon-->
-																		<span class="symbol symbol-50px me-6">
-																			<span class="symbol-label">
-																				<i class="ki-duotone ki-chart-pie-4 fs-1 text-gray-600">
-																					<span class="path1"></span>
-																					<span class="path2"></span>
-																					<span class="path3"></span>
-																				</i>
-																			</span>
-																		</span>
-																		<!--end::Icon-->
-																		<!--begin::Description-->
-																		<span class="d-flex flex-column">
-																			<span class="fw-bold text-gray-800 text-hover-primary fs-5">Testing Account</span>
-																			<span class="fs-6 fw-semibold text-muted">Use images to enhance time travel rivers</span>
-																		</span>
-																		<!--end:Description-->
-																	</span>
-																	<!--end:Label-->
-																	<!--begin:Input-->
-																	<span class="form-check form-check-custom form-check-solid">
-																		<input class="form-check-input" type="radio" name="account_plan" value="3" />
-																	</span>
-																	<!--end:Input-->
-																</label>
-																<!--end::Option-->
+														<div class="row mb-10">
+															<!--begin::Col-->
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">No. Kad Pengenalan</label>
+																<!--end::Label-->
+																<!--begin::Row-->
+																<div class="row fv-row">
+																	<!--begin::Col-->
+																	<div class="col-12">
+																		<input type="text" class="form-control form-control-lg form-control-solid" minlength="12" name="nokp" placeholder="" value="" />
+																	</div>
+																	<!--end::Col-->
+																</div>
+																<!--end::Row-->
 															</div>
-															<!--end::Options-->
+															<div class="col-md-3 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">Tarikh Lahir</label>
+																<!--end::Label-->
+																<!--begin::Row-->
+																<div class="row fv-row">
+																	<!--begin::Col-->
+																	<div class="col-12">
+																		<!--begin::Input-->
+																	<input data-provide="datepicker" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" name="tkh_lahir">
+																	<!--end::Input-->
+																	</div>
+																</div>	
+																</div>
+																<div class="col-md-2 fv-row">
+																<label class="required fs-6 fw-semibold form-label mb-2">Umur</label>
+																<!--end::Label-->
+																<div class="row fv-row">
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="umur" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+																
+																</div>	
+																<div class="col-md-3 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">Jantina</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="jantina" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<!--end::Col-->
+															<!--begin::Col-->
+															
+															<!--end::Col-->
 														</div>
+														<!--begin::Input group-->
+														<div class="row mb-10">
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">No. JKM
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="noJKM" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">Kecacatan
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="kecacatan" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">Bangsa
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="bangsa" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="fv-row mb-10">
+															<!--end::Label-->
+															<label class="form-label">Alamat Rumah</label>
+															<!--end::Label-->
+															<!--begin::Input-->
+															<textarea name="alamat" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
+															<!--end::Input-->
+														</div>
+														<div class="row mb-10">
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">Poskod
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="poskod" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">Bandar
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="bandar" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">Negeri
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="negeri" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<div class="row mb-10">
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">No. Tel(HP)
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="no_tel" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">No. Tel Rumah
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="no_telR" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+														</div>
+														
+														<!--end::Input group-->
+														<!--end::Input group-->
+														<div class="row mb-10">
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">Alamat emel
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="emel" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="required fs-6 fw-semibold form-label mb-2">No. Akaun Bank
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="no_akaun_bank" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+														</div>
+														
 														<!--end::Input group-->
 													</div>
 													<!--end::Wrapper-->
@@ -451,86 +502,176 @@
 													<!--begin::Wrapper-->
 													<div class="w-100">
 														<!--begin::Heading-->
-														<div class="pb-10 pb-lg-12">
+														<div class="pb-10 pb-lg-15">
 															<!--begin::Title-->
-															<h2 class="fw-bold text-dark">Business Details</h2>
+															<h2 class="fw-bold text-dark">Maklumat Waris</h2>
 															<!--end::Title-->
 															<!--begin::Notice-->
-															<div class="text-muted fw-semibold fs-6">If you need more info, please check out
-															<a href="#" class="link-primary fw-bold">Help Page</a>.</div>
+															<div class="text-muted fw-semibold fs-6">Profil Waris
+															</div>
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
 														<!--begin::Input group-->
-														<div class="fv-row mb-10">
+														<div class="mb-10 fv-row">
 															<!--begin::Label-->
-															<label class="form-label required">Business Name</label>
+															<label class="form-label mb-3">Nama</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input name="business_name" class="form-control form-control-lg form-control-solid" value="Keenthemes Inc." />
+															<input type="text" class="form-control form-control-lg form-control-solid" name="nama_waris" placeholder="" value="" />
 															<!--end::Input-->
 														</div>
-														<!--end::Input group-->
-														<!--begin::Input group-->
-														<div class="fv-row mb-10">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center form-label">
-																<span class="required">Shortened Descriptor</span>
-																<span class="lh-1 ms-1" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="&lt;div class=&#039;p-4 rounded bg-light&#039;&gt; &lt;div class=&#039;d-flex flex-stack text-muted mb-4&#039;&gt; &lt;i class=&quot;ki-duotone ki-bank fs-3 me-3&quot;&gt;&lt;span class=&quot;path1&quot;&gt;&lt;/span&gt;&lt;span class=&quot;path2&quot;&gt;&lt;/span&gt;&lt;/i&gt; &lt;div class=&#039;fw-bold&#039;&gt;INCBANK **** 1245 STATEMENT&lt;/div&gt; &lt;/div&gt; &lt;div class=&#039;d-flex flex-stack fw-semibold text-gray-600&#039;&gt; &lt;div&gt;Amount&lt;/div&gt; &lt;div&gt;Transaction&lt;/div&gt; &lt;/div&gt; &lt;div class=&#039;separator separator-dashed my-2&#039;&gt;&lt;/div&gt; &lt;div class=&#039;d-flex flex-stack text-dark fw-bold mb-2&#039;&gt; &lt;div&gt;USD345.00&lt;/div&gt; &lt;div&gt;KEENTHEMES*&lt;/div&gt; &lt;/div&gt; &lt;div class=&#039;d-flex flex-stack text-muted mb-2&#039;&gt; &lt;div&gt;USD75.00&lt;/div&gt; &lt;div&gt;Hosting fee&lt;/div&gt; &lt;/div&gt; &lt;div class=&#039;d-flex flex-stack text-muted&#039;&gt; &lt;div&gt;USD3,950.00&lt;/div&gt; &lt;div&gt;Payrol&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;">
-																	<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																		<span class="path3"></span>
-																	</i>
-																</span>
-															</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input name="business_descriptor" class="form-control form-control-lg form-control-solid" value="KEENTHEMES" />
-															<!--end::Input-->
-															<!--begin::Hint-->
-															<div class="form-text">Customers will see this shortened version of your statement descriptor</div>
-															<!--end::Hint-->
+														<div class="row mb-10">
+															<!--begin::Col-->
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">No. Kad Pengenalan</label>
+																<!--end::Label-->
+																<!--begin::Row-->
+																<div class="row fv-row">
+																	<!--begin::Col-->
+																	<div class="col-12">
+																		<input type="text" class="form-control form-control-lg form-control-solid" name="nokp" placeholder="" value="" />
+																	</div>
+																	<!--end::Col-->
+																</div>
+																<!--end::Row-->
+															</div>
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">No Pasport</label>
+																<!--end::Label-->
+																<!--begin::Row-->
+																<div class="row fv-row">
+																	<!--begin::Col-->
+																	<div class="col-12">
+																		<input type="text" class="form-control form-control-lg form-control-solid" name="noPasport" placeholder="" value="" />
+																	</div>
+																	<!--end::Col-->
+																</div>
+																<!--end::Row-->
+															</div>
 														</div>
-														<!--end::Input group-->
-														<!--begin::Input group-->
-														<div class="fv-row mb-10">
+														<div class="row mb-10 hubungan_row">
 															<!--begin::Label-->
-															<label class="form-label required">Corporation Type</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<select name="business_type" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Select..." data-allow-clear="true" data-hide-search="true">
+															<div class="col-md-6 fv-row hubungan_row">
+															<label class="form-label mb-6">Hubungan Waris</label>
+															<select name="hubungan" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 																<option></option>
-																<option value="1">S Corporation</option>
-																<option value="1">C Corporation</option>
-																<option value="2">Sole Proprietorship</option>
-																<option value="3">Non-profit</option>
-																<option value="4">Limited Liability</option>
-																<option value="5">General Partnership</option>
+																<option value="Ibu">Ibu</option>
+																<option value="Bapa">Bapa</option>
+																<option value="Suami/Isteri">Suami/Isteri</option>
+																<option value="Penjaga">Penjaga</option>
+																<option value="Saudara Kandung">Saudara Kandung</option>
+																<option value="lain-lain">Lain-lain</option>
 															</select>
-															<!--end::Input-->
 														</div>
+															<div class="col-md-6 fv-row nama_waris1">
+															<!--begin::Label-->
+															<label class="form-label mb-6">Lain-lain:</label>
+															<!--end::Label-->
+															<!--begin::Input-->
+															<input type="text" class="form-control form-control-lg form-control-solid nama_waris_input" name="nama_waris1" placeholder="" value="" />
+															<!--end::Input-->													
+															</div>
+														</div>
+														
 														<!--end::Input group-->
 														<!--begin::Input group-->
 														<div class="fv-row mb-10">
 															<!--end::Label-->
-															<label class="form-label">Business Description</label>
+															<label class="form-label">Alamat Rumah</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<textarea name="business_description" class="form-control form-control-lg form-control-solid" rows="3"></textarea>
+															<textarea name="alamatW" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
 															<!--end::Input-->
 														</div>
-														<!--end::Input group-->
-														<!--begin::Input group-->
-														<div class="fv-row mb-0">
-															<!--begin::Label-->
-															<label class="fs-6 fw-semibold form-label required">Contact Email</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input name="business_email" class="form-control form-control-lg form-control-solid" value="corp@support.com" />
-															<!--end::Input-->
+														<div class="row mb-10">
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mb-2">Poskod
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="poskodW" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mb-2">Bandar
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="bandarW" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mb-2">Negeri
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="negeriW" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
 														</div>
 														<!--end::Input group-->
+														<div class="row mb-10">
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mb-2">No. Tel(HP)
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="no_telW" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mb-2">No. Tel Rumah
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="no_telRW" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mb-2">Pendapatan
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="pendapatan" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+														</div>
+					
+										
+													<!--end::Input group-->
 													</div>
 													<!--end::Wrapper-->
 												</div>
@@ -763,7 +904,12 @@
 															<span class="indicator-progress">Please wait...
 															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 														</button>
-														<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Teruskan {!! getIcon('arrow-right', 'fs-3 ms-1 me-0') !!}</button>
+														<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Teruskan
+														<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
+															<span class="path1"></span>
+															<span class="path2"></span>
+														</i>
+														</button>
 													</div>
 													<!--end::Wrapper-->
 												</div>
@@ -782,6 +928,18 @@
 
 </div>
 
+
+<!--begin::Javascript-->
+
+		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+		<script src="assets/js/scripts.bundle.js"></script>
+		<!--end::Global Javascript Bundle-->
+
+		<!--begin::Custom Javascript(used for this page only)-->
+		<script src="assets/js/custom/utilities/modals/create-account.js"></script>
+
+		<!--end::Custom Javascript-->
+		<!--end::Javascript-->
 
 
 
