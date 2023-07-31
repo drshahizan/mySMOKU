@@ -219,9 +219,7 @@
 															</select>
                                     
 </div>
-                                 
-                                    <br>
-									<button type="button" class="btn btn-lg btn-success"><i class="fas fa-envelope-open-text fs-4 me-2"></i>Semak</button>
+                                   
 									<div class="fv-row mb-10">
 															<label class="form-label required">Adakah anda penerima HLP?</label>	
 															<div class="row mb-2" data-kt-buttons="true">
