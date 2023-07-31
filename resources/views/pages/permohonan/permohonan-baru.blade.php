@@ -1,5 +1,5 @@
 <x-default-layout> 
-<main class="login-form">
+
 <div class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid gap-10" id="kt_create_account_stepper">
 										<!--begin::Aside-->
 										<div class="card d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px">
@@ -1136,7 +1136,7 @@
 						</div>
 
 </div>
-</main>
+
 
 <!--begin::Javascript-->
 
