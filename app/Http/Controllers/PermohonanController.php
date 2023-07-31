@@ -50,6 +50,17 @@ class PermohonanController extends Controller
         $check = $this->create($data);
          
         return view('pages.dashboards.index');
+        //return redirect()->back();
+    }
+
+    public function create(array $data)
+    {
+      return Permohonan::create([
+		'nama_pelajar' => $data['nama_pelajar'],
+		'nokp_pelajar' => $data['nokp_pelajar'],
+		'no_akaunbank' => $data['no_akaunbank'],
+		'emel' => $data['emel']
+      ]);
     }
 
 
