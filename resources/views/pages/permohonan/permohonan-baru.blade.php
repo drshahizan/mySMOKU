@@ -763,11 +763,7 @@
 															<span class="indicator-progress">Please wait...
 															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 														</button>
-														<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Teruskan
-														<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i></button>
+														<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Teruskan {!! getIcon('arrow-right', 'fs-3 ms-1 me-0') !!}</button>
 													</div>
 													<!--end::Wrapper-->
 												</div>
