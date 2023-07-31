@@ -247,9 +247,7 @@
 															</div>
 															
 														</div>
-												</div>
-</div>
-
+												
 </div>
 
 												<!--end::Step 1-->
