@@ -181,8 +181,9 @@
 										<!--begin::Content-->
 										<div class="card d-flex flex-row-fluid flex-center">
 											<!--begin::Form-->
-											<form class="card-body py-20 w-100 mw-xl-700px px-9" novalidate="novalidate" id="kt_create_account_form">
-												<!--begin::Step 1-->
+											<form action="permohonan.post" method="POST" class="card-body py-20 w-100 mw-xl-700px px-9" novalidate="novalidate" id="kt_create_account_form">
+												
+											<!--begin::Step 1-->
 												<div class="current" data-kt-stepper-element="content">
 													<!--begin::Wrapper-->
 													<div class="w-100">
@@ -314,7 +315,7 @@
 																<div class="row fv-row">
 																	<!--begin::Col-->
 																	<div class="col-12">
-																		<input type="text" class="form-control form-control-lg form-control-solid" minlength="12" name="nokp" placeholder="" value="" />
+																		<input type="text" class="form-control form-control-lg form-control-solid" minlength="12" name="nokp_pelajar" placeholder="" value="" />
 																	</div>
 																	<!--end::Col-->
 																</div>
@@ -512,7 +513,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_akaun_bank" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="no_akaunbank" placeholder="" value="" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
