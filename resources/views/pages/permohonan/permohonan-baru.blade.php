@@ -249,6 +249,7 @@
 														</div>
 												
 </div>
+</div>
 
 												<!--end::Step 1-->
 												<!--begin::Step 2-->
