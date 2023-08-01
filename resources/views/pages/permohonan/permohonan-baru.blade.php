@@ -1,5 +1,5 @@
 <x-default-layout> 
-
+<main class="login-form">
 <div class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid gap-10" id="kt_create_account_stepper">
 										<!--begin::Aside-->
 										<div class="card d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px">
@@ -326,7 +326,7 @@
 																	<!--begin::Col-->
 																	<div class="col-12">
 																		<!--begin::Input-->
-																	<input data-provide="datepicker" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" name="tkh_lahir">
+																	<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" name="tkh_lahir">
 																	<!--end::Input-->
 																	</div>
 																</div>	
@@ -352,7 +352,11 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="jantina" placeholder="" value="" />
+																	<select name="jantina" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+																		<option></option>
+																		<option value="1">Lelaki</option>
+																		<option value="2">Perempaun</option>
+																	</select>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -398,7 +402,12 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="bangsa" placeholder="" value="" />
+																	<select name="bangsa" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+																		<option></option>
+																		<option value="1">Melayu</option>
+																		<option value="2">India</option>
+																		<option value="3">Cina</option>
+																	</select>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -411,7 +420,7 @@
 															<label class="form-label">Alamat Rumah</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<textarea name="alamat" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
+															<textarea name="alamat1" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
@@ -423,7 +432,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="poskod" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="alamat_poskod" placeholder="" value="" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -449,7 +458,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="negeri" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="alamat_negeri" placeholder="" value="" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -524,6 +533,7 @@
 
 												<!--begin::Step 3-->
 												<div data-kt-stepper-element="content">
+												@csrf	
 													<!--begin::Wrapper-->
 													<div class="w-100">
 														<!--begin::Heading-->
@@ -556,7 +566,7 @@
 																<div class="row fv-row">
 																	<!--begin::Col-->
 																	<div class="col-12">
-																		<input type="text" class="form-control form-control-lg form-control-solid" name="nokp" placeholder="" value="" />
+																		<input type="text" class="form-control form-control-lg form-control-solid" name="nokp_waris" placeholder="" value="" />
 																	</div>
 																	<!--end::Col-->
 																</div>
@@ -581,14 +591,14 @@
 															<!--begin::Label-->
 															<div class="col-md-6 fv-row hubungan_row">
 															<label class="form-label mb-6">Hubungan Waris</label>
-															<select name="hubungan" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+															<select name="hubungan" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 																<option></option>
-																<option value="Ibu">Ibu</option>
-																<option value="Bapa">Bapa</option>
-																<option value="Suami/Isteri">Suami/Isteri</option>
-																<option value="Penjaga">Penjaga</option>
-																<option value="Saudara Kandung">Saudara Kandung</option>
-																<option value="lain-lain">Lain-lain</option>
+																<option value="1">Ibu</option>
+																<option value="2">Bapa</option>
+																<option value="3">Suami/Isteri</option>
+																<option value="4">Penjaga</option>
+																<option value="5">Saudara Kandung</option>
+																<option value="6">Lain-lain</option>
 															</select>
 														</div>
 															<div class="col-md-6 fv-row nama_waris1">
@@ -596,7 +606,7 @@
 															<label class="form-label mb-6">Lain-lain:</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid nama_waris_input" name="nama_waris1" placeholder="" value="" />
+															<input type="text" class="form-control form-control-lg form-control-solid" name="lain_hubungan" placeholder="" value="" />
 															<!--end::Input-->													
 															</div>
 														</div>
@@ -608,7 +618,7 @@
 															<label class="form-label">Alamat Rumah</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<textarea name="alamatW" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
+															<textarea name="alamatW1" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
@@ -620,7 +630,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="poskodW" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="alamatW_poskod" placeholder="" value="" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -633,7 +643,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="bandarW" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="alamatW_bandar" placeholder="" value="" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -646,7 +656,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="negeriW" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="alamatW_negeri" placeholder="" value="" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -1136,7 +1146,7 @@
 						</div>
 
 </div>
-
+</main>
 
 <!--begin::Javascript-->
 
