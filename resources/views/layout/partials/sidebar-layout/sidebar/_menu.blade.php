@@ -8,7 +8,7 @@
 		<div class="menu-item">
 				<a class="menu-link" href="{{ route('dashboard') }}">
 					<span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
-					<span class="menu-title">Laman Utama</span>
+					<span class="menu-title">Laman Utama Pelajar</span>
 				</a>
 		</div>	
 			<div class="menu-item pt-5">
