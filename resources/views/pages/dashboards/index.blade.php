@@ -25,7 +25,7 @@
 															</div>
 															<div class="d-flex align-items-center flex-wrap w-100">
 																<div class="mb-1 pe-3 flex-grow-1">
-																	<a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bold">Sesi Pengajian Pelajar</a>
+																	<a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bold">Sesi Pengajian</a>
 																	<div class="fs-5 text-gray-400 fw-bold">2022/2023</div>
 																</div>
 															</div>
@@ -38,7 +38,7 @@
 															</div>
 															<div class="d-flex align-items-center flex-wrap w-100">
 																<div class="mb-1 pe-3 flex-grow-1">
-																	<a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bold">Semester Pengajian Pelajar</a>
+																	<a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bold">Semester Pengajian</a>
 																	<div class="fs-5 text-gray-400 fw-bold">2</div>
 																</div>				
 															</div>	
