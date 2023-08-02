@@ -7,7 +7,9 @@
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="assets/css/saringan.css">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     </head>
     <body>
     <!-- Main body part  -->
@@ -80,7 +82,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Senarai Saringan Permohonan<small>Tekan ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
+                            <h2>Senarai Saringan Permohonan<br><small>Tekan ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
                             <ul class="header-dropdown dropdown">
                                 
                                 <li><a href="javascript:void(0);" class="full-screen"><i class="fa fa-expand"></i></a></li>
@@ -99,10 +101,9 @@
                         </div>
                         <div class="body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-hover dataTable js-exportable">
+                                <table id="sortTable" class="table table-striped table-hover dataTable js-exportable">
                                     <thead>
-                                        <tr>
-                                        
+                                        <tr>                                        
                                             <th>Nama</th>
                                             <th>ID Permohonan</th>
                                             <th>Jenis Permohonan</th>
@@ -186,10 +187,6 @@
                                             <td><button type="button" class="btn btn-success"> Disokong</button></td>
                                         </tr>
                                     
-                                    
-                                    
-                                    
-                                    
                                     </tbody>
                                 </table>
                             </div>
@@ -200,29 +197,9 @@
             </div>
         </div>
     </div>
-
-    <!-- Javascript -->
-    <script src="assets/bundles/libscripts.bundle.js"></script>    
-    <script src="assets/bundles/vendorscripts.bundle.js"></script>
-
-    <!-- Vedor js file and create bundle with grunt  --> 
-    <script src="assets/bundles/flotscripts.bundle.js"></script><!-- flot charts Plugin Js -->
-    <script src="assets/bundles/c3.bundle.js"></script>
-    <script src="assets/bundles/apexcharts.bundle.js"></script>
-    <script src="assets/bundles/jvectormap.bundle.js"></script>
-    <script src="assets/vendor/toastr/toastr.js"></script>
-    <!-- Project core js file minify with grunt --> 
-    <script src="assets/bundles/mainscripts.bundle.js"></script>
-    <script src="../js/index.js"></script>
-    <!-- Vedor js file and create bundle with grunt  --> 
-
-    <script src="assets/bundles/datatablescripts.bundle.js"></script>
-    <script src="assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
-    <script src="assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
-    <script src="assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js"></script>
-    <script src="assets/vendor/jquery-datatable/buttons/buttons.html5.min.js"></script>
-    <script src="assets/vendor/jquery-datatable/buttons/buttons.print.min.js"></script>
-    <script src="assets/vendor/sweetalert/sweetalert.min.js"></script><!-- SweetAlert Plugin Js --> 
-    <script src="../js/pages/tables/jquery-datatable.js"></script>
+    <script>
+        $('#sortTable').DataTable();
+    </script>
+    
     </body>
 </x-default-layout> 
