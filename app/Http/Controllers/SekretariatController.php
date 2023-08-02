@@ -8,6 +8,6 @@ class SekretariatController extends Controller
 {
     public function sekretariat()
     {
-        return view('pages.sekretariat.home');
+        return view('pages.sekretariat.permohonan.status');
     }
 }
