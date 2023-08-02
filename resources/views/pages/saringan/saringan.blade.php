@@ -28,7 +28,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file"></i></div>
+                                <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file-text"></i></div>
                                 <div class="ml-4">
                                     <span>Jumlah Saringan</span>
                                     <h4 class="mb-0 font-weight-medium">5000</h4>
@@ -54,7 +54,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-check-circle"></i></div>
+                                <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-check"></i></div>
                                 <div class="ml-4">
                                     <span>Disokong</span>
                                     <h4 class="mb-0 font-weight-medium">8</h4>
