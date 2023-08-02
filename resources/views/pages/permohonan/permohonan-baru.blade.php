@@ -158,8 +158,8 @@
 															<!--end::Icon-->
 															<!--begin::Label-->
 															<div class="stepper-label">
-																<h3 class="stepper-title">Selesai Hantarrrrrrrr</h3>
-																<div class="stepper-desc fw-semibold">DONEEEEEEEE</div>
+																<h3 class="stepper-title">Hantar</h3>
+																<div class="stepper-desc fw-semibold">Selesai</div>
 															</div>
 															<!--end::Label-->
 														</div>
@@ -185,7 +185,7 @@
 											
 												<!--begin::Step 1-->
 												<div class="current" data-kt-stepper-element="content">
-												
+												@csrf
 													<!--begin::Wrapper-->
 													<div class="w-100">
 														<!--begin::Heading-->
@@ -203,17 +203,17 @@
 														<div class="fv-row mb-10">
 																
 															<label class="form-label required">Nama Institusi</label>
-															<select name="nama_institusi" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-															<option value="UMS">Universiti Malaysia Sabah</option>
-															<option value="UKM">Universiti Kebangsaan Malaysia</option>
-															<option value="UM">Universiti Malaya</option>
-															<option value="UPM">Universiti Putra Malaysia</option>
-															<option value="UTeM">Universiti Teknikal Malaysia Melaka</option>
-															<option value="USM">Universiti Sains Malaysia</option>
-															<option value="UPNM">Universiti Pertahanan Nasional Malaysia</option>
-															<option value="UTHM">Universiti Tun Hussein Onn Malaysia</option>
-															<option value="UMK">Universiti Malaysia Kelantan</option>
-															<option value="UUM">Univeristi Utara Malaysia</option>
+															<select name="id_institusi" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+															<option value="1">Universiti Malaysia Sabah</option>
+															<option value="2">Universiti Kebangsaan Malaysia</option>
+															<option value="3">Universiti Malaya</option>
+															<option value="4">Universiti Putra Malaysia</option>
+															<option value="5">Universiti Teknikal Malaysia Melaka</option>
+															<option value="6">Universiti Sains Malaysia</option>
+															<option value="7">Universiti Pertahanan Nasional Malaysia</option>
+															<option value="8">Universiti Tun Hussein Onn Malaysia</option>
+															<option value="9">Universiti Malaysia Kelantan</option>
+															<option value="10">Univeristi Utara Malaysia</option>
 															</select>
 												
 														</div>
@@ -221,14 +221,13 @@
 
 														<div class="fv-row mb-10">
 															<label class="form-label required">Peringkat</label>
-															<select name="peringkat" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-																	<!-- <option value="">Pilih</option> -->
-																	<option value="SS">Sijil Kemahiran</option>
-																	<option value="XX">Diploma</option>
-																	<option value="SS">Sarjana Muda</option>
-																	<option value="FF">Diploma Pendidikan</option>
-																	<option value="QQQ">Sarjana</option>
-																	<option value="AAA">Ijazah Kedoktoran</option>
+															<select name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+																<option value="1">Sijil Asas / Sijil</option>
+																<option value="2">Diploma</option>
+																<option value="3">Sarjana Muda</option>
+																<option value="4">Diploma Lepasan Ijazah</option>
+																<option value="5">Sarjana</option>
+																<option value="6">PhD</option>
 															</select>
 														</div>
 														<div class="fv-row mb-10">
@@ -236,11 +235,11 @@
 															<label class="form-label required">Nama Kursus</label>
 																	<select name="nama_kursus" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 																		<option value="1">Komputer Sains</option>
-																		<option value="1">C Corporation</option>
-																		<option value="2">Sole Proprietorship</option>
-																		<option value="3">Non-profit</option>
-																		<option value="4">Limited Liability</option>
-																		<option value="5">General Partnership</option>
+																		<option value="2">C Corporation</option>
+																		<option value="3">Sole Proprietorship</option>
+																		<option value="4">Non-profit</option>
+																		<option value="5">Limited Liability</option>
+																		<option value="6">General Partnership</option>
 																	</select>
 														</div>
                                    
@@ -714,6 +713,7 @@
 
 												<!--begin::Step 4-->
 												<div data-kt-stepper-element="content">
+												@csrf		
 													<!--begin::Wrapper-->
 													<div class="w-100">
 														<!--begin::Heading-->
@@ -968,6 +968,7 @@
 
 												<!--begin::Step 5-->
 												<div data-kt-stepper-element="content">
+												@csrf
 													<!--begin::Wrapper-->
 													<div class="w-100">
 														<!--begin::Heading-->
@@ -1018,6 +1019,8 @@
 
 												<!--begin::Step 6-->
 												<div data-kt-stepper-element="content">
+												@csrf	
+												
 													<!--begin::Wrapper-->
 													<div class="w-100">
 														<!--begin::Heading-->
@@ -1115,7 +1118,7 @@
 													<!--begin::Wrapper-->
 													<div>
 														<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
-															<span class="indicator-label">Submit
+															<span class="indicator-label">Hantar
 															<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
 																<span class="path1"></span>
 																<span class="path2"></span>
