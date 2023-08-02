@@ -44,6 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post'); 
     
     Route::get('saringan', [SaringanController::class, 'saringan']);
+    Route::get('maklumat-pemohon', [SaringanController::class, 'maklumatPemohon'])->name('id');
 
     //SEKRETARIAT
     Route::get('sekretariatSP', [SekretariatController::class, 'statusPermohonan']);

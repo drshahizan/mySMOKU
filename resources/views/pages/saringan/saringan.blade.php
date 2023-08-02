@@ -112,13 +112,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        {{-- <tr>
                                             <td>Ali Bin Abu</td>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">SARJANABKOKU000011</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon'. $row['id_permohonan']) }}" title="">SARJANABKOKU000011</a></td>
                                             <td>BKOKU</td>
                                             <td>7/7/2023</td>
                                             <td><button type="button" class="btn btn-danger"> Belum Disemak </button></td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <td>Ali Bin Abu</td>
                                             <td><a href="{{ url('maklumat-pemohon') }}" title="">SARJANABKOKU000011</a></td>
