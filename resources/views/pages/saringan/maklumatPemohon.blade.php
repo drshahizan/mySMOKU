@@ -13,11 +13,10 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item vivify swoopInTop delay-150 active"><a class="nav-link" href="page-invoices.html">Maklumat Pemohon</a></li>
+                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Pemohon</b></li>
                             </ul>
                             <div class="ml-auto">
-                                <!--<button type="button" class="btn btn-sm btn-default" title="Send Invoice"><i class="fa fa-envelope"></i></button>-->
-                                <button type="button" class="btn btn-sm btn-default" title="Download"><i class="fa fa-file-pdf-o"></i></button>
+                                <button type="button" class="btn btn-sm btn-default" title="Download"><i class="fa fa-download"></i></button>
                                 <button type="button" class="btn btn-sm btn-default" title="Print"><i class="fa fa-print"></i></button>
                                 <button type="button" class="btn btn-sm btn-default" title="Delete"><i class="fa fa-trash"></i></button>
                             </div>
@@ -28,9 +27,9 @@
                     <div class="card">
                         <div class="body">
                             <div class="d-flex align-items-center">
-                                <img src="assets/images/user.png" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar Name">
+                                <img src="https://www.shareicon.net/data/128x128/2016/05/24/770085_man_512x512.png" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar Name">
                                 <div class="ml-3">
-                                    <a href="maklumat-pemohon.html" title="">Ali Bin Abu</a>
+                                    Ali Bin Abu
                                     <p class="mb-0">alibinabu@graduate.utm.my</p>
                                 </div>
                             </div>
@@ -71,11 +70,11 @@
                                         <table class="table table-hover table-bordered mb-5">
                                             <thead class="table-primary">
                                                 <tr>
-                                                    <th style="width: 20px;">Bil</th>                                                        
-                                                    <th style="width: 80px;">Item</th>
-                                                    <th style="width: 10px; text-align: center">Tindakan</th>
-                                                    <th style="width: 80px;">Keputusan Saringan</th>
-                                                    <th style="width: 80px;">Catatan</th>
+                                                    <th style="width: 5%;">Bil</th>                                                        
+                                                    <th style="width: 15%;">Item</th>
+                                                    <th style="width: 10%; text-align: center">Tindakan</th>
+                                                    <th style="width: 25%;">Keputusan Saringan</th>
+                                                    <th style="width: 45%;">Catatan</th>
                                                    
                                                 </tr>
                                             </thead>
@@ -88,14 +87,14 @@
                                                     </td>                                                    
                                              
                                                     <td class="text-center"> 
-                                                        <button type="button" class="btn btn-sm btn-default "title="Saring"><i class="fa fa-search"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-default "title="Saring">Lihat Sini</button>
                                                     <td class="hidden-sm-down">
                                                        
                                                         <div class="form-group c_form_group">
                                                         <select class="form-control">
                                                             <option value="">Pilih</option>
-                                                            <option value="SS">Disokong</option>
-                                                            <option value="XX">Dikembalikan</option>
+                                                            <option value="disokong">Disokong</option>
+                                                            <option value="dikembalikan">Dikembalikan</option>
                                                         </select>
                                                     </div>
                                                     
@@ -114,13 +113,13 @@
                                                        
                                                     </td>
                                                     <td class="text-center"> 
-                                                        <button type="button" class="btn btn-sm btn-default "title="Saring"><i class="fa fa-search"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-default "title="Saring">Lihat Sini</button>
                                                     <td class="hidden-sm-down">
                                                         <div class="form-group c_form_group">
                                                         <select class="form-control">
                                                             <option value="">Pilih</option>
-                                                            <option value="SS">Disokong</option>
-                                                            <option value="XX">Dikembalikan</option>
+                                                            <option value="disokong">Disokong</option>
+                                                            <option value="dikembalikan">Dikembalikan</option>
                                                         </select>
                                                     </div>
                                                     <td><div class="fancy-checkbox">
@@ -138,14 +137,14 @@
                                                         <span>Salinan Dokumen</span>
                                                     </td>
                                                     <td class="text-center"> 
-                                                        <button type="button" class="btn btn-sm btn-default "title="Saring"><i class="fa fa-search"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-default "title="Saring">Lihat Sini</button>
                                                     <td class="hidden-sm-down">
                                                         <!--<div class="col-lg-12 col-md-12">-->
                                                         <div class="form-group c_form_group">
                                                         <select class="form-control">
                                                             <option value="">Pilih</option>
-                                                            <option value="SS">Disokong</option>
-                                                            <option value="XX">Dikembalikan</option>
+                                                            <option value="disokong">Disokong</option>
+                                                            <option value="dekembalikan">Dikembalikan</option>
                                                         </select>
                                                     </div>       
                                                 </td>
@@ -169,9 +168,9 @@
                                 
                                 
                                 <div class="col-md-6 text-right">
-                                    <button class="btn btn-primary theme-bg gradient"><i class="icon-check"></i> Lengkap</button>
-                                    <button class="btn btn-primary theme-bg gradient"><i class="icon-save"></i> Simpan</button>
-                                    <button class="btn btn-primary theme-bg gradient" data-toggle="modal" data-target="#exampleModalCenter"><i class="icon-action-undo"></i> Kembalikan</button>
+                                    <button class="btn btn-primary theme-bg gradient"><i class="fa fa-check"></i> Lengkap</button>
+                                    <button class="btn btn-primary theme-bg gradient"><i class="fa fa-save"></i> Simpan</button>
+                                    <button class="btn btn-primary theme-bg gradient" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-reply"></i> Kembalikan</button>
                                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
