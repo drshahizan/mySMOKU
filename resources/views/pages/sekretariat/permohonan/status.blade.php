@@ -11,74 +11,85 @@
 
     <body>
         <!-- Main body part  -->
-        <div id="main-content">
-            <div class="container-fluid">
-                <div class="block-header">
-                    <div class="row clearfix">
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="header" style="background-color:lightgrey; padding:10px;">
-                                    <h2><b>Status Permohonan BKOKU</b></h2>
-                                </div>
-                                
-                                <div class="body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr style="color: black; font-size:14px; text-align:center;">
-                                                    <th >Nama</th>       
-                                                    <th >ID Tuntutan</th>
-                                                    <th >Tarikh Tuntutan</th>
-                                                    <th >Keputusan Tuntutan</th>
-                                                    <th >Catatan</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr style="color:black">
-                                                    <td>Ali Bin Abu</td> 
-                                                    <td><a href="tuntut-Ali.html">TTBKOKU00012</a></td> 
-                                                    <td>2/7/2023</td>
-                                                    <td> <button type="button" class="btn btn-success "> Layak</button></td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-success btn-round"><i class="icon-check"></i> Dikreditkan pada 12/7/2023</a>
-                                                    </td>
-                                                </tr>
+        <div class="py-3 py-md-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="shadow bg-white p-3">
+                            <div class="card-header" style="background-color:aliceblue; padding:5px;">
+                                <h1><b>Status Permohonan BKOKU</b>
+                            </div>
+                            <hr>
+                            
+                            <div class="card-body">
+                                <form action="" method="GET">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label style="color:black">Tapis mengikut Tarikh</label>
+                                            <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
+                                        </div>
+        
+                                        <div class="col-md-3">
+                                            <label style="color:black">Tapis mengikut Keputusan</label>
+                                            <select name="status" class="form-select">
+                                                <option value="">Pilih Keputusan Tuntutan</option>
+                                                <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
+                                                <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
+                                                <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
+                                            </select>
+                                        </div>
+        
+                                        <div class="col-md-6">
+                                            <br>
+                                            <button type="submit" class="btn btn-primary">Filter</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <hr>
+        
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr style="color:black; font-size:14px; background-color:lightgray;">
+                                                <th>Nama</th>
+                                                <th>ID Tuntutan</th>
+                                                <th>Tarikh Tuntutan</th>
+                                                <th>Keputusan Tuntutan</th>
+                                                <th>Catatan</th>
+                                            </tr>
+                                        </thead>
                                             
+                                        <tbody> 
+                                                <tr>
+                                                    <td style="color:black">Ali Bin Abu</td> 
+                                                    <td><a href="tuntut-Ali.html">TTBKOKU00012</a></td> 
+                                                    <td style="color:black">2/7/2023</td>
+                                                    <td> <button type="button" class="btn btn-success btn-sm"> Layak</button></td>
+                                                    <td style="color:black">Dikreditkan pada 12/7/2023</td>
+                                                </tr>
+
                                                 <tr style="color:black">
                                                     <td>Sarah Binti Md Yunos</td> 
                                                     <td><a href="#">TTBKOKU01012</a></td> 
                                                     <td>4/7/2022</td>
-                                                    <td> <button type="button" class="btn btn-success "> Layak</button></td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-success btn-round"><i class="icon-check"></i> Dikreditkan pada 12/7/2022</a>
-                                                    </td>
+                                                    <td> <button type="button" class="btn btn-danger btn-sm"> Tidak Layak</button></td>
+                                                    <td>Anda tidak disahkan sebagai pelajar OKU</td>
                                                 </tr>
 
-                                                <tr style="color:black">
-                                                    <td> Eng Mei Ying </td>
+                                                <tr>
+                                                    <td style="color:black"> Eng Mei Ying </td>
                                                     <td><a href="#">TTBKOKU90012</a></td>
-                                                    <td>2/2/2022</td>
-                                                    <td> <button type="button" class="btn btn-warning ">Dikembalikan</button></td>
-                                                    <td> Terdapat kesilapan dalam butiran resit </td>
+                                                    <td style="color:black">2/2/2022</td>
+                                                    <td><button type="button" class="btn btn-warning btn-sm"> Dikembalikan</button></td>
+                                                    <td style="color:black"> Terdapat kesilapan dalam butiran resit </td>
                                                 </tr>
-                                                
-                                                <tr style="color:black">
-                                                    <td>Tan Yu Heng</td>
-                                                    <td>
-                                                        <a href="#">TTBKOKU09012</a>
-                                                    </td>
-                                                    <td>2/2/2023</td>
-                                                    <td> <button type="button" class="btn btn-warning ">Dikembalikan</button></td>
-                                                    <td> Terdapat kesilapan dalam butiran salinan resit </td>
-                                                </tr>    
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        </div>   
+                        </div>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
         
