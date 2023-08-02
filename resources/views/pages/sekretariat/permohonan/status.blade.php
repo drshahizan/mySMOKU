@@ -183,32 +183,26 @@
                     <br>
 
                     {{-- Filter section --}}
-                    <div class="row clearfix">
-                        <div class="col-lg-4 col-md-12 col-sm-12">
-                            <h4>Tapis Status Permohonan</h4> 
+                    <div class="row">
+                        <div class="col-md-2 align-right">
+                            <label style="color:black"><b>Tapis Status Permohonan</b>
+                            <select name="status" class="form-select">
+                                <option value="">Semua Status</option>
+                                <option value="Baru" {{Request::get('status') == 'Baru' ? 'selected':'' }} >Baru</option>
+                                <option value="Saringan" {{Request::get('status') == 'Saringan' ? 'selected':'' }} >Saringan</option>
+                                <option value="Disokong" {{Request::get('status') == 'Disokong' ? 'selected':'' }} >Disokong</option>
+                                <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
+                                <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
+                                <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
+                                <option value="Aktif" {{Request::get('status') == 'Aktif' ? 'selected':'' }} >Aktif</option>
+                                <option value="Tidak Aktif" {{Request::get('status') == 'Tidak Aktif' ? 'selected':'' }} >Tidak Aktif</option>
+                            </select>
                         </div>
-
-                        <div class="col-lg-8 col-md-12 col-sm-12 text-lg-right">
-                            <button type="button" class="btn btn-default btn-filter" data-target="all">Semua</button>
-                            <button type="button" class="btn btn-primary btn-filter" data-target="Baru">Baru</button>
-                            <button type="button" class="btn btn-info btn-filter" data-target="Saringan">Saringan</button>
-                            <button type="button" class="btn btn-secondary btn-filter" data-target="Disokong">Disokong</button>
-                            <button type="button" class="btn btn-success btn-filter" data-target="Layak">Layak</button>
-                            <button type="button" class="btn btn-danger btn-filter" data-target="Tidak Layak">Tidak Layak</button>
-                            <button type="button" class="btn btn-warning btn-filter" data-target="Dikembalikan">Dikembalikan</button>
-                            <button type="button" class="btn btn-success btn-filter" data-target="Aktif">Aktif</button>
-                            <button type="button" class="btn btn-danger btn-filter" data-target="Tidak Aktif">Tidak Aktif</button>
+                        <div class="col-md-6">
+                            <br><button type="submit" class="btn btn-primary">Filter</button>
                         </div>
                     </div>
-                    <div class="col-md-3 align-right">
-                        <label style="color:black">Tapis Status Permohonan
-                        <select name="status" class="form-select">
-                            <option value="">Pilih Keputusan Tuntutan</option>
-                            <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
-                            <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
-                            <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
-                        </select>
-                    </div>
+                    <br>
 
                     {{-- Table senarai --}}
                     <div class="row clearfix">
@@ -216,8 +210,7 @@
                         <div class="card bg-clear">
                             <div class="header">
                                 <h2>Senarai Permohonan</h2>
-                                 
-                                <ul class="header-dropdown dropdown">
+                                {{-- <ul class="header-dropdown dropdown">
                                     <li><a href="javascript:void(0);" class="full-screen"><i class="fa fa-expand"></i></a></li>
                                     <li class="dropdown">
                                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
@@ -230,7 +223,7 @@
                                             <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-trash"></i> Delete</a></li>
                                         </ul>
                                     </li>
-                                </ul>
+                                </ul> --}}
                             </div>
                             <div class="body">
                               
