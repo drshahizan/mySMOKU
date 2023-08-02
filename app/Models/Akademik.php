@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class Waris extends Authenticatable
+class Akademik extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
 
-    protected $table = 'waris';
+    protected $table = 'maklumatakademik';
 
     /**
      * The attributes that are mass assignable.
@@ -23,28 +23,28 @@ class Waris extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'nama_waris',
-        'nokp_waris',
-        'alamat1',
-        //'alamat2',
-        //'alamat3',
-        'alamat_poskod',
-        'alamat_bandar',
-        'alamat_negeri',
-        //'alamat_surat1',
-        //'alamat_surat2',
-        //'alamat_surat3',
-        //'alamat_surat_poskod',
-        //'alamat_surat_bandar',
-        //'alamat_surat_negeri',
-        'no_telR',
-        'no_tel',
+        'no_pendaftaranpelajar',
         'nokp_pelajar',
-        'hubungan',
-        'pendapatan',
+        'peringkat_pengajian',
+        'nama_kursus',
+        'id_institusi',
+        'tkh_mula',
+        'tkh_tamat',
+        'sem_semasa',
+        'tempoh_pengajian',
+        'bil_bulanpersem',
+        'mod',
+        'cgpa',
+        'sumber_biaya',
+        'nama_penaja',
+        //'status',
+        //'terimaHLP',
+        //'tkh_maklumat',
+        
         
     ];
 
     
+
     
 }
