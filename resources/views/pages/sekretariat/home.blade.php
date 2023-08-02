@@ -1,0 +1,254 @@
+<x-default-layout>
+    <head>
+        <title>Sekretariat BKOKU KPT</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+        <!-- MAIN CSS -->
+        <link rel="stylesheet" href="assets/css/saringan.css">
+    </head>
+
+    <body>
+
+                <!-- Main left sidebar menu -->
+                <div id="left-sidebar" class="sidebar">
+                    <a href="#" class="menu_toggle"><i class="fa fa-angle-left"></i></a>
+                    <div class="navbar-brand">
+                        <a href="index.html"><img src="assets/images/icon.svg" alt="Mooli Logo" class="img-fluid logo"><span>Sistem BKOKU</span></a>
+                        <button type="button" class="btn-toggle-offcanvas btn btn-sm float-right"><i class="fa fa-close"></i></button>
+                    </div>
+                    <div class="sidebar-scroll">
+                        <div class="user-account">
+                            <div class="user_div">
+                                <img src="assets/images/HR.png" class="user-photo" alt="Gambar Profil Sekretariat BKOKU KPT">
+                            </div>
+                            <div class="dropdown">
+                                <span>Sekretariat BKOKU KPT</span>
+                            </div>
+                        </div>  
+                        <nav id="left-sidebar-nav" class="sidebar-nav">
+                            <ul id="main-menu" class="metismenu animation-li-delay">
+                                <li class="header">Halaman</li>
+                                <li ><a href="index.html"><i class="fa fa-dashboard"></i> <span>Utama</span></a></li>
+                                <li class="header">Permohonan</li>
+                                <li><a href="permohonan.html"><i class="fa fa-files-o"></i> <span>Status</span></a></li>
+                                <li><a href="saring-permohonan.html"><i class="fa fa-folder-o"></i> <span>Saring</span></a></li>
+                                <li><a href="sahkan-permohonan.html"><i class="fa fa-check-circle-o"></i> <span>Pengesahan</span></a></li>
+                                <li><a href="kptsn-mohon.html"><i class="fa fa-list-alt"></i> <span>Keputusan</span></a></li> 
+                                <li><a href="kembali-permohonan.html"><i class="fa fa-mail-reply"></i> <span>Kembalikan</span></a></li>
+                                <li class="header">Tuntutan</li>
+                                <li><a href="tuntutan.html"><i class="fa fa-money"></i> <span>Status</span></a></li>
+                                <li><a href="saring-tuntutan.html"><i class="fa fa-file-o"></i> <span>Saring</span></a></li>
+                                <li><a href="sahkan-tuntutan.html"><i class="fa fa-check-square"></i> <span>Pengesahan</span></a></li>
+                                <li class="active"><a href="kptsn-tuntut.html"><i class="fa fa-list-alt"></i> <span>Keputusan</span></a></li>
+                                <li><a href="kembali-tuntutan.html"><i class="fa fa-mail-reply-all"></i> <span>Kembalikan</span></a></li>
+                                <li class="header">Laporan</li>
+                                <li><a href="laporan.html"><i class="fa fa-list-alt"></i> <span>Laporan</span></a></li>
+                                <li class="header">Tetapan</li>
+                                <li><a href="tetapan.html"><i class="fa fa-cogs"></i> <span>Tetapan</span></a></li>
+                            </ul>
+                        </nav>    
+                    </div>
+                </div>
+
+
+                <!-- Main body part  -->
+                <div id="main-content">
+                    <div class="container-fluid">
+                        <div class="block-header">
+                            <div class="row clearfix">
+                                <div class="col-lg-4 col-md-12 col-sm-12">
+                                    <h1>Status Keputusan Tuntutan</h1>
+                                  
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row clearfix">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2>Keputusan Tuntutan</h2>
+                                    </div>
+                                    <div class="body">
+                                        <div id="chart-pie-kptsn" style="height: 380px"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2>Jumlah Keputusan Tuntutan Terkini</h2>
+                                        <!--<small class="text-muted">Sales Performance for Online and Offline Revenue <a href="">Learn more</a></small>-->
+                                        <ul class="header-dropdown dropdown">
+                                            <li><a href="javascript:void(0);" class="full-screen"><i class="fa fa-expand"></i></a></li>
+                                            <li class="dropdown">
+                                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                                                <ul class="dropdown-menu theme-bg gradient">
+                                                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-eye"></i> View Details</a></li>
+                                                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-share-alt"></i> Share</a></li>
+                                                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-copy"></i> Copy to</a></li>
+                                                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-folder"></i> Move to</a></li>
+                                                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-edit"></i> Rename</a></li>
+                                                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-trash"></i> Delete</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="body">
+                                        <div class="d-flex flex-row">
+                                            <div class="pb-3">
+                                                <h5 class="mb-0">300</h5>
+                                                <small class="text-muted font-11">Jumlah Permohonan Aktif</small>
+                                            </div>
+                                            <div class="pb-3 pl-4 pr-4">
+                                                <h5 class="mb-0">67%</h5>
+                                                <small class="text-muted font-11">Tuntutan Aktif</small>
+                                            </div>
+                                            <div class="pb-3 pl-4 pr-4">
+                                                <h5 class="mb-0">0%</h5>
+                                                <small class="text-muted font-11">Tuntutan Tidak Aktif</small>
+                                            </div>
+                                            <div class="pb-3 pl-4 pr-4">
+                                                <h5 class="mb-0">20%</h5>
+                                                <small class="text-muted font-11">Tuntutan Dikembalikan</small>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <select class="form-control">
+                                                    <option selected="selected">Bulan</option>
+                                                    <option>Hari</option>
+                                                    <option>Tahun</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div id="chart-bar-kptsn" style="height: 300px"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2>Status Permohonan BKOKU</h2>
+                                        <ul class="header-dropdown dropdown">
+                                            
+                                            <li><a href="javascript:void(0);" class="full-screen"><i class="fa fa-expand"></i></a></li>
+                                            <!--<li class="dropdown">
+                                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                                                <ul class="dropdown-menu theme-bg gradient">
+                                                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-eye"></i> View Details</a></li>
+                                                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-share-alt"></i> Share</a></li>
+                                                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-copy"></i> Copy to</a></li>
+                                                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-folder"></i> Move to</a></li>
+                                                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-edit"></i> Rename</a></li>
+                                                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-trash"></i> Delete</a></li>
+                                                </ul>
+                                            </li>-->
+                                        </ul>
+                                    </div>
+                                    <div class="body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover dataTable js-exportable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nama</th>
+                                                        
+                                                        <th>ID Tuntutan</th>
+                                                        <th>Tarikh Tuntutan</th>
+                                                        <th>Keputusan Tuntutan</th>
+                                                        <th>Catatan</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Ali Bin Abu</td> 
+                                                        <td><a href="tuntut-Ali.html">TTBKOKU00012</a></td> 
+                                                        <td>2/7/2023</td>
+                                                        <td> <button type="button" class="btn btn-success "> Layak</button></td>
+                                                        <td>
+                                                            <a href="#" class="btn btn-success btn-round"><i class="icon-check"></i> Dikreditkan pada 12/7/2023</a>
+                                                        </td>
+                                                    </tr>
+                                                   
+                                                    <tr>
+                                                        <td>Sarah Binti Md Yunos</td> 
+                                                        <td><a href="#">TTBKOKU01012</a></td> 
+                                                        <td>4/7/2022</td>
+                                                        <td> <button type="button" class="btn btn-success "> Layak</button></td>
+                                                        <td>
+                                                            <a href="#" class="btn btn-success btn-round"><i class="icon-check"></i> Dikreditkan pada 12/7/2022</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Eng Mei Ying </td>
+                                                        <td><a href="#">TTBKOKU90012</a></td>
+                                                        <td>2/2/2022</td>
+                                                        <td> <button type="button" class="btn btn-warning ">Dikembalikan</button></td>
+                                                        <td> Terdapat kesilapan dalam butiran resit </td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td>
+                                                            Tan Yu Heng
+                                                        </td>
+                                                        <td>
+                                                            <a href="#">TTBKOKU09012</a>
+                                                        </td>
+                                                        <td>
+                                                            2/2/2023
+                                                        </td>
+                                                        
+                                                        <td> <button type="button" class="btn btn-warning ">Dikembalikan</button></td>
+                                                        <td> Terdapat kesilapan dalam butiran salinan resit </td>
+                                                    </tr>
+                                                    
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- Javascript -->
+        <script src="assets/bundles/libscripts.bundle.js"></script>    
+        <script src="assets/bundles/vendorscripts.bundle.js"></script>
+        
+        <!-- Vedor js file and create bundle with grunt  --> 
+        <script src="assets/bundles/flotscripts.bundle.js"></script><!-- flot charts Plugin Js -->
+        <script src="assets/bundles/c3.bundle.js"></script>
+        <script src="assets/bundles/apexcharts.bundle.js"></script>
+        <script src="assets/bundles/jvectormap.bundle.js"></script>
+        <script src="assets/vendor/toastr/toastr.js"></script>
+        
+        <!-- Project core js file minify with grunt --> 
+        <script src="assets/bundles/mainscripts.bundle.js"></script>
+        <script src="../js/index.js"></script>
+        
+        <!-- Vedor js file and create bundle with grunt  --> 
+        <script src="assets/bundles/morrisscripts.bundle.js"></script><!-- Morris Plugin Js -->
+        
+        
+        
+        <!-- Vedor js file and create bundle with grunt  -->    
+        <script src="assets/bundles/datatablescripts.bundle.js"></script>
+        <script src="assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+        <script src="assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+        <script src="assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+        <script src="assets/vendor/jquery-datatable/buttons/buttons.html5.min.js"></script>
+        <script src="assets/vendor/jquery-datatable/buttons/buttons.print.min.js"></script>
+        <script src="assets/vendor/sweetalert/sweetalert.min.js"></script>
+        <!-- SweetAlert Plugin Js --> 
+        <script src="../js/pages/forms/form-wizard.js"></script>
+        <script src="../js/pages/tables/jquery-datatable.js"></script>
+        <script src="../js/pages/charts/morris.js"></script>
+        <script src="../js/pages/charts/c3.js"></script>
+</x-default-layout> 

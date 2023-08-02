@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\SaringanController;
+use App\Http\Controllers\SekretariatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,9 +44,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post'); 
     
     Route::get('saringan', [SaringanController::class, 'saringan']);
+    Route::get('sekretariat', [SekretariatController::class, 'sekretariat']);
     
-
-
 
 });
 
