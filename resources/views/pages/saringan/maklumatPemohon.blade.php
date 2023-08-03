@@ -18,7 +18,7 @@
                             <div class="ml-auto">
                                 <button type="button" class="btn btn-sm btn-default" title="Download"><i class="fa fa-download"></i></button>
                                 <button type="button" class="btn btn-sm btn-default" title="Print"><i class="fa fa-print"></i></button>
-                                <button type="button" class="btn btn-sm btn-default" title="Delete"><i class="fa fa-trash"></i></button>
+                                <button type="button" class="btn btn-sm btn-default" title="Delete" onclick="confirmButton()"><i class="fa fa-trash"></i></button>
                             </div>
                         </div>
                     </nav>
@@ -39,30 +39,6 @@
                                     <p class="m-b-0"><strong>Tarikh Permohonan: </strong> 6/7/2023 </p>
                                     <p><strong>ID Permohonan: </strong> IJAZAHBKOKU0001</p>                                    
                                 </div>
-                                <div class="col-md-6 col-sm-6 text-right">
-                                    <div class="body">
-                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target=".launch-pricing-modal">Catatan</button> <!-- launch-pricing -->
-                                        <div class="modal fade launch-pricing-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">                                            
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                                    </div>
-                                                    <div class="modal-body pricing_page text-center pt-4 mb-4">
-                                                      
-                                                        <div class="form-group c_form_group">
-                                                            <label>Berikan Catatan Anda.</label>
-                                                            <textarea rows="4" type="text" class="form-control" placeholder=""></textarea>
-                                                        </div> 
-                                                        <div class="col-12">
-                                                            
-                                                            <button class="btn btn-success">Hantar</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div></div>
-                                </div>
                             </div>
                             <div class="row clearfix">
                                 <div class="col-md-12">
@@ -71,23 +47,17 @@
                                             <thead class="table-primary">
                                                 <tr>
                                                     <th style="width: 5%;">Bil</th>                                                        
-                                                    <th style="width: 15%;">Item</th>
-                                                    <th style="width: 10%; text-align: center">Tindakan</th>
+                                                    <th style="width: 20%;">Item</th>
                                                     <th style="width: 25%;">Keputusan Saringan</th>
-                                                    <th style="width: 45%;">Catatan</th>
-                                                   
+                                                    <th style="width: 50%;">Catatan</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>1</td>
                                                     <td>
-                                                        <span>Maklumat Profil Diri</span>
-                                                      
-                                                    </td>                                                    
-                                             
-                                                    <td class="text-center"> 
-                                                        <button type="button" class="btn btn-sm btn-default "title="Saring">Lihat Sini</button>
+                                                        <span><a href="{{ url('maklumat-profil-diri') }}" target="_blank">Maklumat Profil Diri</a></span>
+                                                    </td>           
                                                     <td class="hidden-sm-down">
                                                        
                                                         <div class="form-group c_form_group">
@@ -97,23 +67,17 @@
                                                             <option value="dikembalikan">Dikembalikan</option>
                                                         </select>
                                                     </div>
-                                                    
                                                 </td>
                                               <td><div class="form-group c_form_group">
                                                 <label>Berikan Catatan Anda.</label>
                                                 <textarea rows="2" type="text" class="form-control" placeholder=""></textarea>
                                             </div> </td>
-                                                    
-                                                    
                                                 </tr>
                                                 <tr>
                                                     <td>2</td>
                                                     <td>
-                                                        <span>Maklumat Akademik</span>
-                                                       
+                                                        <span><a href="{{ url('maklumat-akademik') }}" target="_blank">Maklumat Akademik</a></span>
                                                     </td>
-                                                    <td class="text-center"> 
-                                                        <button type="button" class="btn btn-sm btn-default "title="Saring">Lihat Sini</button>
                                                     <td class="hidden-sm-down">
                                                         <div class="form-group c_form_group">
                                                         <select class="form-control">
@@ -123,10 +87,7 @@
                                                         </select>
                                                     </div>
                                                     <td><div class="fancy-checkbox">
-                                                      
-                                                            <label><input type="checkbox"><span>Terdapat butiran yang tidak benar dalam Maklumat Akademik</span></label>
-                                                      
-                                                               
+                                                        <label><input type="checkbox"><span>Terdapat butiran yang tidak benar dalam Maklumat Akademik</span></label>
                                                     </div></td>
                                                 </td> 
                                               
@@ -134,10 +95,8 @@
                                                 <tr>
                                                     <td>3</td>
                                                     <td>
-                                                        <span>Salinan Dokumen</span>
+                                                        <span><a href="{{ url('salinan-dokumen') }}" target="_blank">Salinan Dokumen</a></span>
                                                     </td>
-                                                    <td class="text-center"> 
-                                                        <button type="button" class="btn btn-sm btn-default "title="Saring">Lihat Sini</button>
                                                     <td class="hidden-sm-down">
                                                         <!--<div class="col-lg-12 col-md-12">-->
                                                         <div class="form-group c_form_group">
@@ -162,15 +121,12 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-md-6">
-                                    
                                        
                                     </div>
-                                
-                                
                                 <div class="col-md-6 text-right">
-                                    <button class="btn btn-primary theme-bg gradient"><i class="fa fa-check"></i> Lengkap</button>
-                                    <button class="btn btn-primary theme-bg gradient"><i class="fa fa-save"></i> Simpan</button>
-                                    <button class="btn btn-primary theme-bg gradient" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-reply"></i> Kembalikan</button>
+                                    <button class="btn btn-primary theme-bg gradient action-btn"><i class="fa fa-check"></i> Lengkap</button>
+                                    <button class="btn btn-primary theme-bg gradient action-btn"><i class="fa fa-save"></i> Simpan</button>
+                                    <button class="btn btn-primary theme-bg gradient action-btn" data-toggle="modal" data-target="#exampleModalCenter" onclick="confirmButton()"><i class="fa fa-reply"></i> Kembalikan</button>
                                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
@@ -212,4 +168,9 @@
             </div>
         </div>
     </div>
+   <script>
+    function confirmButton() {
+        confirm("Press a button!");
+    }
+   </script>
 </x-default-layout>
