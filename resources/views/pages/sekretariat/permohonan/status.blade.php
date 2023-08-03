@@ -47,13 +47,13 @@
                             <div class="card">
                                 <div class="body">
                                     <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span>14</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span>200</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Saringan<span>1000</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Dikembalikan<span>4</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Disokong<span>2000</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Layak<span>3277</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Tidak Layak<span>2</span></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="btn btn-secondary btn-sm">14</span></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span class="btn btn-primary btn-sm">200</span></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">Saringan<span class="btn btn-info btn-sm">1000</span></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">Dikembalikan<span class="btn btn-warning btn-sm">4</span></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">Disokong<span class="btn btn-sm" style="background-color:cornflowerblue; color:white;">2000</span></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">Layak<span class="btn btn-success btn-sm">3277</span></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">Tidak Layak<span class="btn btn-danger btn-sm">2</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -74,39 +74,36 @@
                                 <div class="tab-content">
                                     <div class="tab-pane show vivify flipInX active" id="Home-new">
                                         <br>
-                                        <h6>Permohonan BKOKU</h6>
+                                        {{-- <h6>Permohonan BKOKU</h6> --}}
                                         <div class="row clearfix">
                                             <div class="col-lg-12 col-md-12">
                                             <div class="card">
                                                 <div class="body">
                                                     <ul class="list-group">
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="badge badge-default">14</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span class="badge badge-primary">2</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Saringan<span class="badge badge-info">1900</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Dikembalikan<span class="badge badge-warning">1400</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Disokong<span class="badge badge-success">2000</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Layak<span class="badge badge-success">1400</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Tidak Layak<span class="badge badge-danger">2</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="btn btn-secondary btn-sm">14</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span class="btn btn-primary btn-sm">2</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Saringan<span class="btn btn-info btn-sm">1900</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Dikembalikan<span class="btn btn-warning btn-sm">1400</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Disokong<span class="btn btn-sm"  style="background-color:cornflowerblue; color:white;">2000</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Layak<span class="btn btn-success btn-sm">1400</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Tidak Layak<span class="btn btn-danger btn-sm">2</span></li>
                                                     </ul>
                                                 </div>
-                                            </div>
-                                            
-                                            </div>
-                                            
-                                            </div>
-                                    
+                                            </div>    
+                                            </div>      
+                                        </div>
                                     </div>    
                                     
                                 
                                     <div class="tab-pane vivify flipInX" id="Profile-new">
                                         <br>
-                                        <h6>Permohonan Program Pendidikan Khas (PPK)</h6>
+                                        {{-- <h6>Permohonan Program Pendidikan Khas (PPK)</h6> --}}
                                         <div class="row clearfix">
                                             <div class="col-lg-12 col-md-12">
                                             <div class="card">
                                                 <div class="body">
                                                     <ul class="list-group">
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="badge badge-default">11</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="badge badge-secondary">11</span></li>
                                                         <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span class="badge badge-primary">2</span></li>
                                                         <li class="list-group-item d-flex justify-content-between align-items-center">Saringan<span class="badge badge-info">1000</span></li>
                                                         <li class="list-group-item d-flex justify-content-between align-items-center">Dikembalikan<span class="badge badge-warning">12</span></li>
@@ -116,11 +113,8 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            
                                             </div>
-                                            
                                             </div>
-                                    
                                     </div>
                                 </div>
                             </div>
@@ -182,69 +176,56 @@
 
                     <br>
 
+                    <!-- Page header2 section  -->
+                    <div class="block-header">
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <h1>Senarai Permohonan</h1>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+
                     {{-- Filter section --}}
-                    <div class="row clearfix">
-                        <div class="col-lg-4 col-md-12 col-sm-12">
-                            <h4>Tapis Status Permohonan</h4> 
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label style="color:black"><b>Tapis Status Permohonan</b>
+                            <select name="status" class="form-select">
+                                <option value="">Semua Status</option>
+                                <option value="Baru" {{Request::get('status') == 'Baru' ? 'selected':'' }} >Baru</option>
+                                <option value="Saringan" {{Request::get('status') == 'Saringan' ? 'selected':'' }} >Saringan</option>
+                                <option value="Disokong" {{Request::get('status') == 'Disokong' ? 'selected':'' }} >Disokong</option>
+                                <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
+                                <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
+                                <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
+                                <option value="Aktif" {{Request::get('status') == 'Aktif' ? 'selected':'' }} >Aktif</option>
+                                <option value="Tidak Aktif" {{Request::get('status') == 'Tidak Aktif' ? 'selected':'' }} >Tidak Aktif</option>
+                            </select>
                         </div>
 
-                        <div class="col-lg-8 col-md-12 col-sm-12 text-lg-right">
-                            <button type="button" class="btn btn-default btn-filter" data-target="all">Semua</button>
-                            <button type="button" class="btn btn-primary btn-filter" data-target="Baru">Baru</button>
-                            <button type="button" class="btn btn-info btn-filter" data-target="Saringan">Saringan</button>
-                            <button type="button" class="btn btn-secondary btn-filter" data-target="Disokong">Disokong</button>
-                            <button type="button" class="btn btn-success btn-filter" data-target="Layak">Layak</button>
-                            <button type="button" class="btn btn-danger btn-filter" data-target="Tidak Layak">Tidak Layak</button>
-                            <button type="button" class="btn btn-warning btn-filter" data-target="Dikembalikan">Dikembalikan</button>
-                            <button type="button" class="btn btn-success btn-filter" data-target="Aktif">Aktif</button>
-                            <button type="button" class="btn btn-danger btn-filter" data-target="Tidak Aktif">Tidak Aktif</button>
+                        <div class="col-md-2">
+                            <label style="color:black"><b>Tapis Jenis Permohonan</b>
+                            <select name="status" class="form-select">
+                                <option value="">Semua Jenis</option>
+                                <option value="BKOKU" {{Request::get('jenis') == 'BKOKU' ? 'selected':'' }} >BKOKU</option>
+                                <option value="PPK" {{Request::get('jenis') == 'PPK' ? 'selected':'' }} >PPK</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 right">
+                            <br><button type="submit" class="btn btn-primary">Filter</button>
                         </div>
                     </div>
-                    <div class="col-md-3 align-right">
-                        <label style="color:black">Tapis Status Permohonan
-                        <select name="status" class="form-select">
-                            <option value="">Pilih Keputusan Tuntutan</option>
-                            <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
-                            <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
-                            <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
-                        </select>
-                    </div>
+                    <br>
 
                     {{-- Table senarai --}}
                     <div class="row clearfix">
                     <div class="col-lg-12">
-                        <div class="card bg-clear">
-                            <div class="header">
-                                <h2>Senarai Permohonan</h2>
-                                 
-                                <ul class="header-dropdown dropdown">
-                                    <li><a href="javascript:void(0);" class="full-screen"><i class="fa fa-expand"></i></a></li>
-                                    <li class="dropdown">
-                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                                        <ul class="dropdown-menu theme-bg gradient">
-                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-eye"></i> View Details</a></li>
-                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-share-alt"></i> Share</a></li>
-                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-copy"></i> Copy to</a></li>
-                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-folder"></i> Move to</a></li>
-                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-edit"></i> Rename</a></li>
-                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-trash"></i> Delete</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="body">
-                              
-                                <table class="table table-hover table-custom spacing">
-                                    <!--<thead>
-                                        <tr> 
-                                            <th>Nama Pemohon</th>
-                                            <th>Jenis Permohonan</th>
-                                            <th>ID Permohonan</th>  
-                                            <th>Status Permohonan</th>
-                                        </tr>
-                                    </thead>-->
+                        <div class="table-responsive">
+                            <div class="body">      
+                                <table class="table table-bordered table-striped">
                                     <thead>
-                                        <tr> 
+                                        <tr style="color: white; background-color:rgb(35, 58, 108);"> 
                                             <th>Nama Pemohon</th>
                                             <th>Jenis Permohonan</th>
                                             <th>ID Permohonan</th>  
@@ -252,7 +233,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr data-status="Saringan">
+                                        <tr>
                                             <td>
                                                 Ali Bin Abu
                                             </td>
@@ -263,9 +244,9 @@
                                                SARJANABKOKU00012
                                             </td>
                                             
-                                            <td>Saringan</td>
+                                            <td><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
                                         </tr>
-                                        <tr data-status="Saringan">
+                                        <tr>
                                             <td>
                                                Sarah Yunos
                                             </td>
@@ -276,7 +257,7 @@
                                                DIPPPK01012
                                             </td>
                                             
-                                            <td>Saringan</td>
+                                            <td><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
                                         </tr>
                                         <tr data-status="Saringan">
                                             <td>
@@ -289,7 +270,7 @@
                                                PHDBKOKU30012
                                             </td>
                                             
-                                            <td>Saringan</td>
+                                            <td><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
                                         </tr>
                                         
                                         <tr data-status="Saringan">
@@ -303,7 +284,7 @@
                                                SARJANAMUDABKOKU90012
                                             </td>
                                             
-                                            <td>Saringan</td>
+                                            <td><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
@@ -317,7 +298,7 @@
                                                DIPPPK80012
                                             </td>
                                             
-                                            <td>Disokong</td>
+                                            <td><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
                                         
                                         <tr data-status="Layak">
@@ -331,7 +312,7 @@
                                                SARJANABKOKU02012
                                             </td>
                                             
-                                            <td>Layak</td>
+                                            <td><button type="button" class="btn btn-success btn-sm">Layak</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
@@ -345,7 +326,7 @@
                                                SARJANAMUDABKOKU66012
                                             </td>
                                             
-                                            <td>Disokong</td>
+                                            <td><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
@@ -359,7 +340,7 @@
                                                SARJANAMUDABKOKU77012
                                             </td>
                                             
-                                            <td>Disokong</td>
+                                            <td><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
                                         
                                         <tr data-status="Tidak Layak">
@@ -373,10 +354,10 @@
                                                SARJANABKOKU03412
                                             </td>
                                             
-                                            <td>Tidak Layak</td>
+                                            <td><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                         </tr>
                                         
-                                        <tr data-status="Tidak Layak">
+                                        {{-- <tr data-status="Tidak Layak">
                                             <td>
                                              Choo Mei Er
                                             </td>
@@ -388,7 +369,7 @@
                                             </td>
                                             
                                             <td>Tidak Layak</td>
-                                        </tr>
+                                        </tr> --}}
                                         
                                         <tr data-status="Baru">
                                             <td>
@@ -401,7 +382,7 @@
                                                SARJANABKOKU22012
                                             </td>
                                             
-                                            <td>Baru</td>
+                                            <td><button type="button" class="btn btn-info btn-sm">Baru</button></td>
                                         </tr>
                                         
                                         <tr data-status="Baru">
@@ -415,7 +396,7 @@
                                                SARJANABKOKU09012
                                             </td>
                                             
-                                            <td>Baru</td>
+                                            <td><button type="button" class="btn btn-info btn-sm">Baru</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
@@ -429,10 +410,10 @@
                                                SARJANABKOKU88012
                                             </td>
                                             
-                                            <td>Disokong</td>
+                                            <td><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
                                         
-                                        <tr data-status="Disokong">
+                                        {{-- <tr data-status="Disokong">
                                             <td>
                                                Gayathri A/P Ganeshnaran
                                             </td>
@@ -458,7 +439,7 @@
                                             </td>
                                             
                                             <td>Disokong</td>
-                                        </tr>
+                                        </tr> --}}
                                         
                                         <tr data-status="Aktif">
                                             <td>
@@ -470,8 +451,7 @@
                                             <td>
                                                SARJANAMUDABKOKU00012
                                             </td>
-                                            
-                                            <td>Aktif</td>
+                                            <td><button type="button" class="btn btn-success btn-sm">Aktif</button></td>
                                         </tr>
                                         
                                         <tr data-status="Dikembalikan">
@@ -485,7 +465,7 @@
                                                SARJANABKOKU50012
                                             </td>
                                             
-                                            <td>Dikembalikan</td>
+                                            <td><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
                                         </tr>
                                         
                                         <tr data-status="Dikembalikan">
@@ -499,10 +479,10 @@
                                                SARJANAMUDABKOKU00012
                                             </td>
                                             
-                                            <td>Dikembalikan</td>
+                                            <td><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
                                         </tr>
                                         
-                                        <tr data-status="Aktif">
+                                        {{-- <tr data-status="Aktif">
                                             <td>
                                                 Puah Chu Er
                                              </td>
@@ -514,9 +494,7 @@
                                              </td>
                                              
                                              <td>Aktif</td>
-                                            
-                                         
-                                        </tr>
+                                        </tr> --}}
                                         
                                         <tr data-status="Aktif">
                                             <td>
@@ -529,7 +507,7 @@
                                                SARJANAMUDABKOKU00012
                                             </td>
                                             
-                                            <td>Aktif</td>
+                                            <td><button type="button" class="btn btn-success btn-sm">Aktif</button></td>
                                         </tr>
                                         
                                         <tr data-status="Tidak Aktif">
@@ -543,7 +521,7 @@
                                                SARJANABKOKU00012
                                             </td>
                                             
-                                            <td>Tidak Aktif</td>
+                                            <td><button type="button" class="btn btn-dark btn-sm">Tidak Aktif</button></td>
                                         </tr>               
                                     </tbody>
                                 </table>

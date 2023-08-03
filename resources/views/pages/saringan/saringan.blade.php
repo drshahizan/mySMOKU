@@ -28,7 +28,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file"></i></div>
+                                <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file-text"></i></div>
                                 <div class="ml-4">
                                     <span>Jumlah Saringan</span>
                                     <h4 class="mb-0 font-weight-medium">5000</h4>
@@ -54,7 +54,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-check-circle"></i></div>
+                                <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-check"></i></div>
                                 <div class="ml-4">
                                     <span>Disokong</span>
                                     <h4 class="mb-0 font-weight-medium">8</h4>
@@ -112,13 +112,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        {{-- <tr>
                                             <td>Ali Bin Abu</td>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">SARJANABKOKU000011</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon'. $row['id_permohonan']) }}" title="">SARJANABKOKU000011</a></td>
                                             <td>BKOKU</td>
                                             <td>7/7/2023</td>
                                             <td><button type="button" class="btn btn-danger"> Belum Disemak </button></td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <td>Ali Bin Abu</td>
                                             <td><a href="{{ url('maklumat-pemohon') }}" title="">SARJANABKOKU000011</a></td>
