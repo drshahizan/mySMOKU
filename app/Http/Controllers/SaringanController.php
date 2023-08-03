@@ -22,4 +22,19 @@ class SaringanController extends Controller
     {
         return view('pages.saringan.maklumatPemohon');
     }
+
+    public function maklumatProfilDiri()
+    {
+        return view('pages.saringan.maklumatProfilDiri');
+    }
+
+    public function maklumatAkademik()
+    {
+        return view('pages.saringan.maklumatAkademik');
+    }
+
+    public function salinanDokumen()
+    {
+        return view('pages.saringan.salinanDokumen');
+    }
 }
