@@ -20,32 +20,7 @@
             </td>
         </tr>
         <tr>
-            <td class="header-part" colspan="3"> A. SEMAKAN KELAYAKAN MQA</td>
-        </tr>
-        <div>
-            <tr class="gap-left">
-                <td class="gap-top" style="width: 16%; padding-left: 20px;">Nama Institusi</td>
-                <td class="gap-top" style="width: 2%">:</td>
-                <td class="gap-top">Universiti Malaysia Sabah</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">Peringkat</td>
-                <td style="width: 2%">:</td>
-                <td>Diploma</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">Nama Kursus</td>
-                <td style="width: 2%">:</td>
-                <td>Komputer Sains</td>
-            </tr>
-            <tr class="gap-left">
-                <td class="gap-bottom" style="width: 16%">Adakah anda penerima HLP?</td>
-                <td class="gap-bottom" style="width: 2%">:</td>
-                <td class="gap-bottom">Ya</td>
-            </tr>
-        </div>
-        <tr>
-            <td class="header-part" colspan="3">B. MAKLUMAT PERIBADI</td>
+            <td class="header-part" colspan="3">A. MAKLUMAT PERIBADI</td>
         </tr>
         <div>
             <tr class="gap-left">
@@ -130,7 +105,7 @@
             </tr>
         </div>
         <tr>
-            <td class="header-part" colspan="3">C. MAKLUMAT WARIS</td>
+            <td class="header-part" colspan="3">B. MAKLUMAT WARIS</td>
         </tr>
         <div>
         <tr class="gap-left">
@@ -195,7 +170,7 @@
         </tr>
     </div>
         <tr>
-            <td class="header-part" colspan="3">D. MAKLUMAT TUTUTAN</td>
+            <td class="header-part" colspan="3">C. MAKLUMAT TUTUTAN</td>
         </tr>
     <div>
         <tr class="gap-left">
@@ -209,7 +184,7 @@
             <td class="gap-bottom"></td>
         </tr>
         </tr>
-            <td class="header-part" colspan="3">E. PERAKUAN</td>
+            <td class="header-part" colspan="3">D. PERAKUAN</td>
         </tr>
         <tr class="gap-left">
             <td colspan="3" class="gap-top gap-bottom">
