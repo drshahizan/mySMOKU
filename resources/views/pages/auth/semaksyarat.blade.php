@@ -13,9 +13,10 @@
             <br>
             <br>
             <h3 class="text-dark fw-bolder mb-3">
-                Semakan Kelayakan
+                Semakan Kelayakan Syarat Daftar Pengguna
             </h3>
         </div>
+       
         <div class="fv-row mb-10">
 			<label class="form-label required">Adakah anda penerima HLP?</label>	
 			<div class="row mb-2" data-kt-buttons="true">
@@ -25,45 +26,95 @@
 				<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
 					<input type="radio" class="btn-check" name="ya" value="ya" />
 							<span class="fw-bold fs-3">Ya</span></label><!--end::Option-->
-																	</div>
-																	<!--end::Col-->
-																	<!--begin::Col-->
-																	<div class="col">
-																		<!--begin::Option-->
-																		<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4 active">
-																			<input type="radio" class="btn-check" name="" checked="checked" value="tidak" />
-																			<span class="fw-bold fs-3">Tidak</span>
-																		</label>
-																		<!--end::Option-->
-																	</div>
-																</div>
+								</div>
+							<div class="col">
+							<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4 active">
+					<input type="radio" class="btn-check" name="tidak" checked="checked" value="tidak" />
+						<span class="fw-bold fs-3">Tidak</span></label>
+						</div>
+				    </div>
 															
-														</div>
-        <!--begin::Heading-->
+				</div>
+
+
+                <div class="fv-row mb-10">
+			<label class="form-label required">Adakah anda penerima Cuti Belajar Bergaji Penuh?</label>	
+			<div class="row mb-2" data-kt-buttons="true">
+			<!--begin::Col-->
+			<div class="col">
+			<!--begin::Option-->
+				<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
+					<input type="radio" class="btn-check" name="ya" value="ya" />
+							<span class="fw-bold fs-3">Ya</span></label><!--end::Option-->
+								</div>
+							<div class="col">
+							<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4 active">
+					<input type="radio" class="btn-check" name="tidak" checked="checked" value="tidak" />
+						<span class="fw-bold fs-3">Tidak</span></label>
+						</div>
+				    </div>
+															
+				</div>
+  
+                <div class="text-center mb-11">
+            <h2 class="text-dark fw-bolder mb-3">
+                Semakan Sistem Maklumat Orang Kurang Upaya (SMOKU)
+            </h2>
+        </div>
+        <div class="text-center mb-11">
+            <img alt="Logo" src="{{ image('logos/mqalogo.png') }}" class="h-100px h-lg-90px"/>
+        </div>
 
         <div class="text-center mb-11">
-            <!--begin::Title-->
-            <!-- <h1 class="text-dark fw-bolder mb-3" > -->
-            <img alt="Logo" src="{{ image('logos/mqalogo.png') }}" class="h-100px h-lg-90px"/>
-          
-                
-           
-        </div>
-
-        <!--begin::Input group--->
-        <div class="fv-row mb-8">
-            <!--begin::Name-->
-            <input type="text" placeholder="Kad Pengenalan" name="name" autocomplete="off" class="form-control bg-transparent"/>
-            <!--end::Name-->
-        </div>
+																
+                                                                <label class="form-label required">Nama Institusi</label>
+                                                                <select name="id_institusi" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+                                                                <option value="1">Universiti Malaysia Sabah</option>
+                                                                <option value="2">Universiti Kebangsaan Malaysia</option>
+                                                                <option value="3">Universiti Malaya</option>
+                                                                <option value="4">Universiti Putra Malaysia</option>
+                                                                <option value="5">Universiti Teknikal Malaysia Melaka</option>
+                                                                <option value="6">Universiti Sains Malaysia</option>
+                                                                <option value="7">Universiti Pertahanan Nasional Malaysia</option>
+                                                                <option value="8">Universiti Tun Hussein Onn Malaysia</option>
+                                                                <option value="9">Universiti Malaysia Kelantan</option>
+                                                                <option value="10">Univeristi Utara Malaysia</option>
+                                                                </select>
+                                                    
+                                                            </div>
+                                                            <!-- </div> -->
+    
+                                                            <div class="fv-row mb-10">
+                                                                <label class="form-label required">Peringkat</label>
+                                                                <select name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+                                                                    <option value="1">Sijil Asas / Sijil</option>
+                                                                    <option value="2">Diploma</option>
+                                                                    <option value="3">Sarjana Muda</option>
+                                                                    <option value="4">Diploma Lepasan Ijazah</option>
+                                                                    <option value="5">Sarjana</option>
+                                                                    <option value="6">PhD</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="fv-row mb-10">
+                                                
+                                                                <label class="form-label required">Nama Kursus</label>
+                                                                        <select name="nama_kursus" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+                                                                            <option value="1">Komputer Sains</option>
+                                                                            <option value="2">C Corporation</option>
+                                                                            <option value="3">Sole Proprietorship</option>
+                                                                            <option value="4">Non-profit</option>
+                                                                            <option value="5">Limited Liability</option>
+                                                                            <option value="6">General Partnership</option>
+                                                                        </select>
+                                                            </div>
 
        
 
 
         <!--begin::Submit button-->
         <div class="d-grid mb-10">
-            <button type="submit" id="kt_sign_up_submit" class="btn btn-primary">
-                @include('partials/general/_button-indicator', ['label' => 'Semakan'])
+            <button type="submit" id="kt_sign_up_submit" class="btn btn-primary"> Semak Kelayakan
+               
             </button>
         </div>
         <!--end::Submit button-->
