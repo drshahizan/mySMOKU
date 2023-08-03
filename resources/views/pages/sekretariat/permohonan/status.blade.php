@@ -47,13 +47,13 @@
                             <div class="card">
                                 <div class="body">
                                     <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span>14</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span>200</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Saringan<span>1000</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Dikembalikan<span>4</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Disokong<span>2000</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Layak<span>3277</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Tidak Layak<span>2</span></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="btn btn-secondary btn-sm">14</span></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span class="btn btn-primary btn-sm">200</span></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">Saringan<span class="btn btn-info btn-sm">1000</span></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">Dikembalikan<span class="btn btn-warning btn-sm">4</span></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">Disokong<span class="btn btn-sm" style="background-color:cornflowerblue; color:white;">2000</span></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">Layak<span class="btn btn-success btn-sm">3277</span></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">Tidak Layak<span class="btn btn-danger btn-sm">2</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -74,19 +74,19 @@
                                 <div class="tab-content">
                                     <div class="tab-pane show vivify flipInX active" id="Home-new">
                                         <br>
-                                        <h6>Permohonan BKOKU</h6>
+                                        {{-- <h6>Permohonan BKOKU</h6> --}}
                                         <div class="row clearfix">
                                             <div class="col-lg-12 col-md-12">
                                             <div class="card">
                                                 <div class="body">
                                                     <ul class="list-group">
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="badge badge-default">14</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span class="badge badge-primary">2</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Saringan<span class="badge badge-info">1900</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Dikembalikan<span class="badge badge-warning">1400</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Disokong<span class="badge badge-success">2000</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Layak<span class="badge badge-success">1400</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Tidak Layak<span class="badge badge-danger">2</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="btn btn-secondary btn-sm">14</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span class="btn btn-primary btn-sm">2</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Saringan<span class="btn btn-info btn-sm">1900</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Dikembalikan<span class="btn btn-warning btn-sm">1400</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Disokong<span class="btn btn-sm"  style="background-color:cornflowerblue; color:white;">2000</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Layak<span class="btn btn-success btn-sm">1400</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Tidak Layak<span class="btn btn-danger btn-sm">2</span></li>
                                                     </ul>
                                                 </div>
                                             </div>    
@@ -97,13 +97,13 @@
                                 
                                     <div class="tab-pane vivify flipInX" id="Profile-new">
                                         <br>
-                                        <h6>Permohonan Program Pendidikan Khas (PPK)</h6>
+                                        {{-- <h6>Permohonan Program Pendidikan Khas (PPK)</h6> --}}
                                         <div class="row clearfix">
                                             <div class="col-lg-12 col-md-12">
                                             <div class="card">
                                                 <div class="body">
                                                     <ul class="list-group">
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="badge badge-default">11</span></li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="badge badge-secondary">11</span></li>
                                                         <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span class="badge badge-primary">2</span></li>
                                                         <li class="list-group-item d-flex justify-content-between align-items-center">Saringan<span class="badge badge-info">1000</span></li>
                                                         <li class="list-group-item d-flex justify-content-between align-items-center">Dikembalikan<span class="badge badge-warning">12</span></li>
@@ -369,7 +369,7 @@
                                             </td>
                                             
                                             <td>Tidak Layak</td>
-                                        </tr>
+                                        </tr> --}}
                                         
                                         <tr data-status="Baru">
                                             <td>
@@ -382,8 +382,8 @@
                                                SARJANABKOKU22012
                                             </td>
                                             
-                                            <td>Baru</td>
-                                        </tr> --}}
+                                            <td><button type="button" class="btn btn-info btn-sm">Baru</button></td>
+                                        </tr>
                                         
                                         <tr data-status="Baru">
                                             <td>
