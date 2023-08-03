@@ -23,7 +23,7 @@ class RegisteredUserController extends Controller
     {
         addJavascriptFile('assets/js/custom/authentication/sign-up/general.js');
 
-        return view('pages.auth.register');
+        return view('pages.auth.daftarlayak');
     }
 
     /**
@@ -37,13 +37,13 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'nokp' => ['required', 'string', 'max:12'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'nokp' => $request->nokp,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'last_login_at' => \Illuminate\Support\Carbon::now()->toDateTimeString(),
