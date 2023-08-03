@@ -16,7 +16,7 @@
                                 <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Pemohon</b></li>
                             </ul>
                             <div class="ml-auto">
-                                <button type="button" class="btn btn-sm btn-default" title="Download"><i class="fa fa-download"></i></button>
+                                <button type="button" class="btn btn-sm btn-default" title="Download" onclick="location.href='{{ url('muat-turun') }}'"><i class="fa fa-download"></i></button>
                                 <button type="button" class="btn btn-sm btn-default" title="Print"><i class="fa fa-print"></i></button>
                                 <button type="button" class="btn btn-sm btn-default" title="Delete" onclick="confirmButton()"><i class="fa fa-trash"></i></button>
                             </div>

@@ -48,7 +48,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('maklumat-profil-diri', [SaringanController::class, 'maklumatProfilDiri'])->name('id');
     Route::get('maklumat-akademik', [SaringanController::class, 'maklumatAkademik'])->name('id');
     Route::get('salinan-dokumen', [SaringanController::class, 'salinanDokumen'])->name('id');
-
+    Route::get('muat-turun', [SaringanController::class, 'muatTurun']);
     //SEKRETARIAT
     Route::get('sekretariatSP', [SekretariatController::class, 'statusPermohonan']);
     Route::get('sekretariatKP', [SekretariatController::class, 'keputusanPermohonan']);
