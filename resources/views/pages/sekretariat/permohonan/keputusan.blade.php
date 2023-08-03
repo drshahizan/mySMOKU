@@ -50,7 +50,7 @@
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped">
                                         <thead>
-                                            <tr style="color:black; font-size:14px; background-color:lightgray;">
+                                            <tr style="color:black; font-size:12px;">
                                                 <th>Nama</th>
                                                 <th>ID Tuntutan</th>
                                                 <th>Tarikh Tuntutan</th>
