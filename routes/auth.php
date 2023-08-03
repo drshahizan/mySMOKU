@@ -6,15 +6,35 @@ use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\DaftarUserController;
+use App\Http\Controllers\Auth\SemakUserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-                ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    /*Route::get('register', [RegisteredUserController::class, 'create'])
+                ->name('register');
+                
+    Route::post('register', [RegisteredUserController::class, 'store']); */
+    Route::get('register', [DaftarUserController::class, 'create'])
+                ->name('register');
+    
+    Route::post('register', [DaftarUserController::class, 'store']);
+
+    
+    Route::get('semaksyarat', [SemakUserController::class, 'create'])
+                ->name('semaksyarat');
+
+    Route::post('semaksyarat', [SemakUserController::class, 'store']); 
+
+    Route::get('daftarlayak', [RegisteredUserController::class, 'create'])
+                ->name('daftarlayak');
+
+    Route::post('daftarlayak', [RegisteredUserController::class, 'store']); 
+    
+    
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
