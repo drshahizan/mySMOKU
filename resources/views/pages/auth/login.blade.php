@@ -8,6 +8,8 @@
             <!--begin::Title-->
             <!-- <h1 class="text-dark fw-bolder mb-3" > -->
             <img alt="Logo" src="{{ image('logos/1.1.png') }}" class="h-100px h-lg-90px"/>
+            <br>
+            <br>
             <img alt="Logo" src="{{ image('logos/3.1.svg') }}" class="h-100px h-lg-70px"/>
                 
             <!-- </h1> -->
