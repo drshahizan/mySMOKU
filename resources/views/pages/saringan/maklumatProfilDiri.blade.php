@@ -16,7 +16,7 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/JATA_NEGARA_MALAYSIA.png/776px-JATA_NEGARA_MALAYSIA.png?18218224030856" alt="jata-negara-malaysia">
                 <br><b class="title"> MAKLUMAT PROFIL DIRI</b>
                 <p><b class="description"> BANTUAN KEWANGAN ORANG KURANG UPAYA <br> (BKOKU)</b> </p> 
-                <br><br><br>
+                <br><br>
             </td>
         </tr>
         <tr>
@@ -195,72 +195,7 @@
         </tr>
     </div>
         <tr>
-            <td class="header-part" colspan="3">D. MAKLUMAT AKADEMIK</td>
-        </tr>
-    <div>
-        <tr class="gap-left">
-            <td style="width: 16%" class="gap-top">No Pendaftaran Pelajar</td>
-            <td style="width: 2%" class="gap-top">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Nama Kursus</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Peringkat Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Nama Pusat Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Tarikh Mula Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Tarikh Tamat Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Semester Semasa</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Tempoh Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Bil Bulan Persemester</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Mod Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Sumber Pembiayaan</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td class="gap-bottom" style="width: 16%">Nama Penaja</td>
-            <td class="gap-bottom" style="width: 2%">:</td>
-            <td class="gap-bottom"></td>
-        </tr>
-    </div>
-        <tr>
-            <td class="header-part" colspan="3">E. MAKLUMAT TUTUTAN</td>
+            <td class="header-part" colspan="3">D. MAKLUMAT TUTUTAN</td>
         </tr>
     <div>
         <tr class="gap-left">
@@ -274,7 +209,7 @@
             <td class="gap-bottom"></td>
         </tr>
         </tr>
-            <td class="header-part" colspan="3">F. PERAKUAN</td>
+            <td class="header-part" colspan="3">E. PERAKUAN</td>
         </tr>
         <tr class="gap-left">
             <td colspan="3" class="gap-top gap-bottom">
