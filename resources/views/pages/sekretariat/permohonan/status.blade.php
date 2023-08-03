@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="assets/css/saringan.css">
+        <link rel="stylesheet" href="assets/css/sekretariat.css">
     </head>
 
     <body>
@@ -26,26 +26,26 @@
                 <div class="row clearfix">
                     <div class="col-lg-6 col-md-12">
                         {{-- Jumlah --}}
-                        <div class="card" style="padding: 20px;">
+                        <div class="card">
                             <div class="header">
                                 <h2>Jumlah Keseluruhan Permohonan</h2>
                             </div>
                             
                             <div class="card-body">
                                 <div class="row text-center">
-                                    <div class="col-6 border-right pb-4 pt-4">
+                                    <div class="col-6 border-right">
                                         <label class="3">Permohonan BKOKU</label>
                                         <h4 class="font-30 font-weight-bold text-col-blue">2,025</h4>
                                     </div>
-                                    <div class="col-6 pb-4 pt-4">
-                                        <label class="mb-0">Permohonan PPK</label>
+                                    <div class="col-6">
+                                        <label class="3">Permohonan PPK</label>
                                         <h4 class="font-30 font-weight-bold text-col-blue">1,254</h4>
                                     </div>
                                 </div>
                             </div>
                                 
-                            <div class="card">
-                                <div class="body">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="card">
                                     <ul class="list-group">
                                         <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="btn btn-secondary btn-sm">14</span></li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span class="btn btn-primary btn-sm">200</span></li>
@@ -57,12 +57,12 @@
                                     </ul>
                                 </div>
                             </div>
-                            </div>
                         </div>
+                    </div>
                     
                     <div class="col-lg-6 col-md-12">
                         {{-- Kategori --}}
-                        <div class="card" style="padding: 20px;">
+                        <div class="card">
                             <div class="header">
                                 <h2>Kategori Permohonan</h2>
                             </div>
@@ -78,7 +78,7 @@
                                         <div class="row clearfix">
                                             <div class="col-lg-12 col-md-12">
                                             <div class="card">
-                                                <div class="body">
+                                                {{-- <div class="body"> --}}
                                                     <ul class="list-group">
                                                         <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="btn btn-secondary btn-sm">14</span></li>
                                                         <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span class="btn btn-primary btn-sm">2</span></li>
@@ -88,7 +88,7 @@
                                                         <li class="list-group-item d-flex justify-content-between align-items-center">Layak<span class="btn btn-success btn-sm">1400</span></li>
                                                         <li class="list-group-item d-flex justify-content-between align-items-center">Tidak Layak<span class="btn btn-danger btn-sm">2</span></li>
                                                     </ul>
-                                                </div>
+                                                {{-- </div> --}}
                                             </div>    
                                             </div>      
                                         </div>
@@ -130,7 +130,8 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="card">
                                 <div class="card-body top_counter">
-                                    <div class="icon bg-success text-black"><i class="fa fa-check-circle-o"></i> </div>
+                                    {{-- <div class="icon bg-success text-black"><i class="fa fa-check-circle-o"></i> </div> --}}
+                                    {{-- <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-check-circle-o"></i></div> --}}
                                     <div class="content" style="text-align: center; color:black">
                                         <span style="font-size:small;">Permohonan Aktif BKOKU</span>
                                         <h5 class="number mb-0">2000</h5>
@@ -141,7 +142,7 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="card">
                                 <div class="card-body top_counter">
-                                    <div class="icon bg-danger text-black"><i class="fa fa-times"></i> </div>
+                                    {{-- <div class="icon bg-danger text-black"><i class="fa fa-times"></i> </div> --}}
                                     <div class="content" style="text-align: center; color:black">
                                         <span style="font-size:small;">Permohonan Tidak Aktif BKOKU</span>
                                         <h5 class="number mb-0">25</h5>
@@ -152,7 +153,7 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="card">
                                 <div class="card-body top_counter">
-                                    <div class="icon bg-success text-black"><i class="fa fa-check-circle-o"></i> </div>
+                                    {{-- <div class="icon bg-success text-black"><i class="fa fa-check-circle-o"></i> </div> --}}
                                     <div class="content" style="text-align: center; color:black">
                                         <span style="font-size:small;">Permohonan Aktif PPK</span>
                                         <h5 class="number mb-0">1200</h5>
@@ -163,7 +164,7 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="card">
                                 <div class="card-body top_counter">
-                                    <div class="icon bg-danger text-black"><i class="fa fa-times"></i> </div>
+                                    {{-- <div class="icon bg-danger text-black"><i class="fa fa-times"></i> </div> --}}
                                     <div class="content" style="text-align: center; color:black">
                                         <span style="font-size:small;">Permohonan Tidak Aktif PPK</span>
                                         <h5 class="number mb-0">54</h5>
@@ -243,22 +244,74 @@
                                             <td>
                                                SARJANABKOKU00012
                                             </td>
-                                            
                                             <td><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
                                         </tr>
-                                        <tr>
+
+                                        <tr data-status="Aktif">
                                             <td>
-                                               Sarah Yunos
+                                                Afiq Hazim Bin Abdul Malik
                                             </td>
                                             <td>
-                                               PPK
+                                                BKOKU
                                             </td>
                                             <td>
-                                               DIPPPK01012
+                                               SARJANAMUDABKOKU00012
                                             </td>
-                                            
-                                            <td><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
+                                            <td><button type="button" class="btn btn-success btn-sm">Aktif</button></td>
                                         </tr>
+
+                                        <tr data-status="Tidak Aktif">
+                                            <td>
+                                                Alia Dania
+                                            </td>
+                                            <td>
+                                                BKOKU
+                                            </td>
+                                            <td>
+                                               SARJANABKOKU00012
+                                            </td>
+                                            <td><button type="button" class="btn btn-dark btn-sm">Tidak Aktif</button></td>
+                                        </tr>  
+
+                                        <tr data-status="Disokong">
+                                            <td>
+                                                Amirah Binti Akmal
+                                            </td>
+                                            <td>
+                                                PPK
+                                            </td>
+                                            <td>
+                                               DIPPPK80012
+                                            </td>
+                                            <td><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                        </tr>
+
+                                        <tr data-status="Baru">
+                                            <td>
+                                                Chai Jing Si
+                                            </td>
+                                            <td>
+                                                BKOKU
+                                            </td>
+                                            <td>
+                                               SARJANABKOKU22012
+                                            </td>
+                                            <td><button type="button" class="btn btn-info btn-sm">Baru</button></td>
+                                        </tr>
+
+                                        <tr data-status="Dikembalikan">
+                                            <td>
+                                                Clarrisa Yong Chu Ni 
+                                            </td>
+                                            <td>
+                                                BKOKU
+                                            </td>
+                                            <td>
+                                               SARJANAMUDABKOKU00012
+                                            </td>
+                                            <td><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
+                                        </tr>
+                                        
                                         <tr data-status="Saringan">
                                             <td>
                                               Eng Mei Ying
@@ -268,6 +321,32 @@
                                             </td>
                                             <td>
                                                PHDBKOKU30012
+                                            </td>
+                                            <td><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                        </tr>
+
+                                        <tr data-status="Tidak Layak">
+                                            <td>
+                                                Ganesan Rao A/L Puven
+                                            </td>
+                                            <td>
+                                                BKOKU
+                                            </td>
+                                            <td>
+                                               SARJANABKOKU03412
+                                            </td>
+                                            <td><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                               Sarah Yunos
+                                            </td>
+                                            <td>
+                                               PPK
+                                            </td>
+                                            <td>
+                                               DIPPPK01012
                                             </td>
                                             
                                             <td><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
@@ -285,20 +364,6 @@
                                             </td>
                                             
                                             <td><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
-                                        </tr>
-                                        
-                                        <tr data-status="Disokong">
-                                            <td>
-                                                Amirah Binti Akmal
-                                            </td>
-                                            <td>
-                                                PPK
-                                            </td>
-                                            <td>
-                                               DIPPPK80012
-                                            </td>
-                                            
-                                            <td><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
                                         
                                         <tr data-status="Layak">
@@ -343,20 +408,6 @@
                                             <td><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
                                         
-                                        <tr data-status="Tidak Layak">
-                                            <td>
-                                                Ganesan Rao A/L Puven
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANABKOKU03412
-                                            </td>
-                                            
-                                            <td><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
-                                        </tr>
-                                        
                                         {{-- <tr data-status="Tidak Layak">
                                             <td>
                                              Choo Mei Er
@@ -370,20 +421,6 @@
                                             
                                             <td>Tidak Layak</td>
                                         </tr> --}}
-                                        
-                                        <tr data-status="Baru">
-                                            <td>
-                                                Chai Jing Si
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANABKOKU22012
-                                            </td>
-                                            
-                                            <td><button type="button" class="btn btn-info btn-sm">Baru</button></td>
-                                        </tr>
                                         
                                         <tr data-status="Baru">
                                             <td>
@@ -441,19 +478,6 @@
                                             <td>Disokong</td>
                                         </tr> --}}
                                         
-                                        <tr data-status="Aktif">
-                                            <td>
-                                                Afiq Hazim Bin Abdul Malik
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANAMUDABKOKU00012
-                                            </td>
-                                            <td><button type="button" class="btn btn-success btn-sm">Aktif</button></td>
-                                        </tr>
-                                        
                                         <tr data-status="Dikembalikan">
                                             <td>
                                                Siti Farah Binti Muazin
@@ -468,19 +492,6 @@
                                             <td><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
                                         </tr>
                                         
-                                        <tr data-status="Dikembalikan">
-                                            <td>
-                                                Clarrisa Yong Chu Ni 
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANAMUDABKOKU00012
-                                            </td>
-                                            
-                                            <td><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
-                                        </tr>
                                         
                                         {{-- <tr data-status="Aktif">
                                             <td>
@@ -494,35 +505,7 @@
                                              </td>
                                              
                                              <td>Aktif</td>
-                                        </tr> --}}
-                                        
-                                        <tr data-status="Aktif">
-                                            <td>
-                                                Afiq Hazim Bin Abdul Malik
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANAMUDABKOKU00012
-                                            </td>
-                                            
-                                            <td><button type="button" class="btn btn-success btn-sm">Aktif</button></td>
-                                        </tr>
-                                        
-                                        <tr data-status="Tidak Aktif">
-                                            <td>
-                                                Alia Dania
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANABKOKU00012
-                                            </td>
-                                            
-                                            <td><button type="button" class="btn btn-dark btn-sm">Tidak Aktif</button></td>
-                                        </tr>               
+                                        </tr> --}}             
                                     </tbody>
                                 </table>
                             </div>

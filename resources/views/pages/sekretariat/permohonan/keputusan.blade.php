@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="assets/css/saringan.css">
+        <link rel="stylesheet" href="assets/css/sekretariat.css">
     </head>
 
     <body>
@@ -51,8 +51,8 @@
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr style="color:black; font-size:12px;">
-                                                <th>Nama</th>
                                                 <th>ID Tuntutan</th>
+                                                <th>Nama</th>
                                                 <th>Tarikh Tuntutan</th>
                                                 <th>Keputusan Tuntutan</th>
                                                 <th>Catatan</th>
@@ -61,24 +61,24 @@
                                             
                                         <tbody> 
                                                 <tr>
-                                                    <td style="color:black">Ali Bin Abu</td> 
                                                     <td><a href="tuntut-Ali.html">TTBKOKU00012</a></td> 
+                                                    <td style="color:black">Ali Bin Abu</td> 
                                                     <td style="color:black">2/7/2023</td>
                                                     <td> <button type="button" class="btn btn-success btn-sm"> Layak</button></td>
-                                                    <td style="color:black">Dikreditkan pada 12/7/2023</td>
+                                                    <td style="color:black">Surat Tawaran</td>
                                                 </tr>
 
                                                 <tr style="color:black">
-                                                    <td>Sarah Binti Md Yunos</td> 
                                                     <td><a href="#">TTBKOKU01012</a></td> 
+                                                    <td>Sarah Binti Md Yunos</td> 
                                                     <td>4/7/2022</td>
                                                     <td> <button type="button" class="btn btn-danger btn-sm"> Tidak Layak</button></td>
                                                     <td>Anda tidak disahkan sebagai pelajar OKU</td>
                                                 </tr>
 
                                                 <tr>
-                                                    <td style="color:black"> Eng Mei Ying </td>
                                                     <td><a href="#">TTBKOKU90012</a></td>
+                                                    <td style="color:black"> Eng Mei Ying </td>
                                                     <td style="color:black">2/2/2022</td>
                                                     <td><button type="button" class="btn btn-warning btn-sm"> Dikembalikan</button></td>
                                                     <td style="color:black"> Terdapat kesilapan dalam butiran resit </td>
