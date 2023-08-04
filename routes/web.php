@@ -40,8 +40,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         //Route::resource('/user-management/permissions', PermissionManagementController::class);
     });*/
 
+    /*Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
+    Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post'); */
+
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
-    Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post'); 
+    
+    Route::post('permohonan', [PermohonanController::class, 'store'])->name('permohonan.post');
     
     Route::get('saringan', [SaringanController::class, 'saringan']);
     Route::get('maklumat-pemohon', [SaringanController::class, 'maklumatPemohon'])->name('id');
