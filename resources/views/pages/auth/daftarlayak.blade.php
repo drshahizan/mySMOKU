@@ -24,7 +24,7 @@
         <!--begin::Input group--->
         <div class="fv-row mb-8">
             <!--begin::nokp-->
-            <input type="text" placeholder="No Kad Pengenalan" name="nokp" autocomplete="off" class="form-control bg-transparent"/>
+            <input type="text" placeholder="No Kad Pengenalan" name="nokp" maxlength="12" autocomplete="off" class="form-control bg-transparent"/>
             <!--end::nokp-->
         </div>
 

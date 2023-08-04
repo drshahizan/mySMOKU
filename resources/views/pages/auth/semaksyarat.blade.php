@@ -19,7 +19,7 @@
        
         <div class="fv-row mb-10">
         @csrf
-			<label class="form-label required">Adakah anda penerima HLP?</label>	
+			<label class="form-label required">Adakah anda penerima Hadiah Latihan Persekutuan?</label>	
 			<div class="row mb-2" data-kt-buttons="true">
 			<!--begin::Col-->
 			<div class="col">
