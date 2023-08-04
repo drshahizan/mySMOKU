@@ -46,6 +46,8 @@ class RegisteredUserController extends Controller
             'nokp' => $request->nokp,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+			'tahap' => '1',
+            'status' => '1',
             'last_login_at' => \Illuminate\Support\Carbon::now()->toDateTimeString(),
             'last_login_ip' => $request->getClientIp()
         ]);
