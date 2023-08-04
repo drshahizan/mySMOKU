@@ -16,101 +16,87 @@ class PermohonanController extends Controller
         return view('pages.permohonan.permohonan-baru');
     }
 
-    public function postPermohonan(Request $request)
-    {  
+
+    public function store(Request $request)
+    {   
         $request->validate([
 			'nama_pelajar' => 'required',
 			'nokp_pelajar' => 'required|unique:pelajar',
 			//'noJKM' => 'required',
-           // 'no_akaunbank' => 'required',
-           // 'emel' => 'required'
+            //'no_akaunbank' => 'required',
+            //'emel' => 'required'
             
         ]);
 
-        $data = $request->all();
-        $check = $this->create($data);
+        $user = Permohonan::create([
+            'nama_pelajar' => $request->nama_pelajar,
+            'nokp_pelajar' => $request->nokp_pelajar,
+            'tkh_lahir' => $request->tkh_lahir,
+            'umur' => $request->umur,
+            'jantina' => $request->jantina,
+            'noJKM' => $request->noJKM,
+            'kecacatan' => $request->kecacatan,
+            'bangsa' => $request->bangsa,
+            'alamat1' => $request->alamat1,
+            'alamat_poskod' => $request->alamat_poskod,
+            'alamat_negeri' => $request->alamat_negeri,
+            'dun' => $request->bandar,
+            'no_tel' => $request->no_tel,
+            'no_telR' => $request->no_telR,
+            'no_akaunbank' => $request->no_akaunbank,
+            'emel' => $request->emel,
+   
+        ]);
 
-        /*$request->validate([
-			'nama_waris' => 'required',
-			'nokp_waris' => 'required|unique:waris',
-            'pendapatan' => 'required'
+        $user = Waris::create([
+            'nama_waris' => $request->nama_waris,
+            'nokp_waris' => $request->nokp_waris,
+            'alamat1' => $request->alamatW1,
+            'alamat_poskod' => $request->alamatW_poskod,
+            'alamat_bandar' => $request->alamatW_bandar,
+            'alamat_negeri' => $request->alamatW_negeri,
+            'no_tel' => $request->no_telW,
+            'no_telR' => $request->no_telRW,
+            'nokp_pelajar' => $request->nokp_pelajar,
+            'hubungan' => $request->hubungan,
+            'pendapatan' => $request->pendapatan,
             
         ]);
 
-        $data = $request->all();
-        $check = $this->create($data);*/
+        $user = Akademik::create([
+            'no_pendaftaranpelajar' => $request->no_pendaftaranpelajar,
+            'nokp_pelajar' => $request->nokp_pelajar,
+            'peringkat_pengajian' => $request->peringkat_pengajian,
+            'nama_kursus' => $request->nama_kursus,
+            'id_institusi' => $request->id_institusi,
+            'tkh_mula' => $request->tkh_mula,
+            'tkh_tamat' => $request->tkh_tamat,
+            'sem_semasa' => $request->sem_semasa,
+            'tempoh_pengajian' => $request->tempoh_pengajian,
+            'bil_bulanpersem' => $request->bil_bulanpersem,
+            'cgpa' => $request->cgpa,
+            'sumber_biaya' => $request->sumber_biaya,
+            'nama_penaja' => $request->nama_penaja,
+            'status' => '1',
+            'terimaHLP' => $request->terimaHLP,
+            'tkh_maklumat' => $request->tkh_maklumat,
+            
+        ]);
 
+        $user = TuntutanPermohonan::create([
+            'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
+            'nokp_pelajar' => $request->nokp_pelajar,
+            'program' => 'BKOKU',
+            'jenis_tuntutan' => $request->jenis_tuntutan,
+            'amaun' => $request->amaun,
+            'perakuan' => $request->perakuan,
+            
+        ]);
+        
+        $user->save();
         return view('pages.dashboards.index');
         //return redirect()->back();
-    }
-
-    public function create(array $data)
-    {
-        $user = Permohonan::create($data);
-        $user->nama_pelajar = $data['nama_pelajar'];
-        $user->nokp_pelajar = $data['nokp_pelajar'];
-        $user->tkh_lahir = $data['tkh_lahir'];
-        $user->umur = $data['umur'];
-        $user->jantina = $data['jantina'];
-        $user->noJKM = $data['noJKM'];
-        $user->kecacatan = $data['kecacatan'];
-        $user->bangsa = $data['bangsa'];
-        $user->alamat1 = $data['alamat1'];
-        $user->alamat_poskod = $data['alamat_poskod'];
-        $user->alamat_negeri = $data['alamat_negeri'];
-        $user->dun = $data['bandar'];
-        $user->no_tel = $data['no_tel'];
-        $user->no_telR = $data['no_telR'];
-        $user->no_akaunbank = $data['no_akaunbank'];
-        $user->emel = $data['emel'];
-
-        $user = Waris::create($data);
-        $user->nama_waris = $data['nama_waris'];
-        $user->nokp_waris = $data['nokp_waris'];
-        $user->alamat1 = $data['alamatW1'];
-        $user->alamat_poskod = $data['alamatW_poskod'];
-        $user->alamat_bandar = $data['alamatW_bandar'];
-        $user->alamat_negeri = $data['alamatW_negeri'];
-        $user->no_tel = $data['no_telW'];
-        $user->no_telR = $data['no_telRW'];
-        $user->nokp_pelajar = $data['nokp_pelajar'];
-        $user->hubungan = $data['hubungan'];
-        $user->pendapatan = $data['pendapatan'];
-
-        $user = Akademik::create($data);
-        $user->no_pendaftaranpelajar = $data['no_pendaftaranpelajar'];
-        $user->nokp_pelajar = $data['nokp_pelajar'];
-        $user->peringkat_pengajian = $data['peringkat_pengajian'];
-        $user->nama_kursus = $data['nama_kursus'];
-        $user->id_institusi = $data['id_institusi'];
-        $user->tkh_mula = $data['tkh_mula'];
-        $user->tkh_tamat = $data['tkh_tamat'];
-        $user->sem_semasa = $data['sem_semasa'];
-        $user->tempoh_pengajian = $data['tempoh_pengajian'];
-        $user->bil_bulanpersem = $data['bil_bulanpersem'];
-        $user->cgpa = $data['cgpa'];
-        $user->sumber_biaya = $data['sumber_biaya'];
-        $user->nama_penaja = $data['nama_penaja'];
-        //$user->status = $data['status'];
-        //$user->terimaHLP = $data['terimaHLP'];
-        //$user->tkh_maklumat = $data['tkh_maklumat'];
-
         
-        $user = TuntutanPermohonan::create($data);
-        $pemohon_id = "kpt123";
-        $user->id_permohonan = $pemohon_id;
-        //$user->id_permohonan = $data['nokp_pelajar'];
-        $user->nokp_pelajar = $data['nokp_pelajar'];
-        //$user->program = $data['program'];
-        $user->jenis_tuntutan = $data['jenis_tuntutan'];
-        $user->amaun = $data['amaun'];
-        $user->perakuan = $data['perakuan'];
-        
-
-
-        //$user->update();
-
-        return $user;
         
 
       

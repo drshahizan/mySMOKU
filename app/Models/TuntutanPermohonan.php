@@ -25,7 +25,7 @@ class TuntutanPermohonan extends Authenticatable
     protected $fillable = [
         'id_permohonan',
         'nokp_pelajar',
-        //'program',
+        'program',
         'jenis_tuntutan',
         'amaun',
         'perakuan',
