@@ -1047,7 +1047,7 @@
 		<!--end::Global Javascript Bundle-->
 
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="assets/js/custom/utilities/modals/create-account.js"></script>
+		<script src="assets/js/custom/utilities/modals/view-permohonan.js"></script>
 
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
