@@ -102,9 +102,12 @@ class PermohonanController extends Controller
       
     }
 
-    public function index(){
+    public function pelajar(){
         $pelajar = Permohonan::all();
-        return view('pages.permohonan.permohonan-baru-view', compact('pelajar'));
+        $waris = Waris::all();
+        $akademik = Akademik::all();
+        $tuntutanpermohonan = TuntutanPermohonan::all();
+        return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan'));
         
     }
 
