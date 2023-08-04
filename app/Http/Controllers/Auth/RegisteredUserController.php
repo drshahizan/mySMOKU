@@ -38,7 +38,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'nokp' => ['required', 'string', 'max:12'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
