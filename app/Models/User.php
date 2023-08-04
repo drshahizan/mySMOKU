@@ -24,6 +24,8 @@ class User extends Authenticatable
         'nokp',
         'email',
         'password',
+        'tahap',
+        'status',
         'last_login_at',
         'last_login_ip',
     ];
