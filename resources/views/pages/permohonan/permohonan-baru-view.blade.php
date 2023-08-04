@@ -181,7 +181,7 @@
 															<label class="form-label mb-3">Nama</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid" name="nama_pelajar" placeholder="" value="{{ $pelajar->nama_pelajar}}" />
+															<input type="text" class="form-control form-control-lg form-control-solid" name="nama_pelajar" placeholder="" value="{{ $pelajar->nama_pelajar}}" readonly/>
 															<!--end::Input-->
 														</div>
 														<!--end::Input group-->
@@ -196,7 +196,7 @@
 																<div class="row fv-row">
 																	<!--begin::Col-->
 																	<div class="col-12">
-																		<input type="text" class="form-control form-control-lg form-control-solid" minlength="12" name="nokp_pelajar" placeholder="" value="{{ $pelajar->nokp_pelajar}}" />
+																		<input type="text" class="form-control form-control-lg form-control-solid" minlength="12" name="nokp_pelajar" placeholder="" value="{{ $pelajar->nokp_pelajar}}" readonly/>
 																	</div>
 																	<!--end::Col-->
 																</div>
@@ -211,7 +211,7 @@
 																	<!--begin::Col-->
 																	<div class="col-12">
 																		<!--begin::Input-->
-																	<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" name="tkh_lahir" value="{{ $pelajar->tkh_lahir}}">
+																	<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" name="tkh_lahir" value="{{ $pelajar->tkh_lahir}}" readonly/>
 																	<!--end::Input-->
 																	</div>
 																</div>	
@@ -223,7 +223,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="umur" placeholder="" value="{{ $pelajar->umur}}" />
+																	<input type="text" class="form-control form-control-solid" name="umur" placeholder="" value="{{ $pelajar->umur}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -237,7 +237,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<select name="jantina" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+																	<select disabled="true"  name="jantina" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 																		<option>{{ $pelajar->jantina}}</option>
 																		<option value="1">Lelaki</option>
 																		<option value="2">Perempaun</option>
@@ -261,7 +261,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="noJKM" placeholder="" value="{{ $pelajar->noJKM}}" />
+																	<input type="text" class="form-control form-control-solid" name="noJKM" placeholder="" value="{{ $pelajar->noJKM}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -274,7 +274,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="kecacatan" placeholder="" value="{{ $pelajar->kecacatan}}" />
+																	<input type="text" class="form-control form-control-solid" name="kecacatan" placeholder="" value="{{ $pelajar->kecacatan}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -287,7 +287,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<select name="bangsa" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+																	<select disabled="true" name="bangsa" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 																		<option>{{ $pelajar->bangsa}}</option>
 																		<option value="1">Melayu</option>
 																		<option value="2">India</option>
@@ -305,7 +305,7 @@
 															<label class="form-label">Alamat Rumah</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<textarea name="alamat1" class="form-control form-control-lg form-control-solid" rows="2" >{{ $pelajar->alamat1}}</textarea>
+															<textarea disabled="true" name="alamat1" class="form-control form-control-lg form-control-solid" rows="2" >{{ $pelajar->alamat1}}</textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
@@ -317,7 +317,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamat_poskod" placeholder="" value="{{ $pelajar->alamat_poskod}}" />
+																	<input type="text" class="form-control form-control-solid" name="alamat_poskod" placeholder="" value="{{ $pelajar->alamat_poskod}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -330,7 +330,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="bandar" placeholder="" value="{{ $pelajar->dun}}" />
+																	<input type="text" class="form-control form-control-solid" name="bandar" placeholder="" value="{{ $pelajar->dun}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -343,7 +343,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamat_negeri" placeholder="" value="{{ $pelajar->alamat_negeri}}"  />
+																	<input type="text" class="form-control form-control-solid" name="alamat_negeri" placeholder="" value="{{ $pelajar->alamat_negeri}}" readonly />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -359,7 +359,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_tel" placeholder="" value="{{ $pelajar->no_tel}}" />
+																	<input type="text" class="form-control form-control-solid" name="no_tel" placeholder="" value="{{ $pelajar->no_tel}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -372,7 +372,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_telR" placeholder="" value="{{ $pelajar->no_telR}}" />
+																	<input type="text" class="form-control form-control-solid" name="no_telR" placeholder="" value="{{ $pelajar->no_telR}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -390,7 +390,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="emel" placeholder="" value="{{ $pelajar->emel}}" />
+																	<input type="text" class="form-control form-control-solid" name="emel" placeholder="" value="{{ $pelajar->emel}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -403,7 +403,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_akaunbank" placeholder="" value="{{ $pelajar->no_akaunbank}}"  />
+																	<input type="text" class="form-control form-control-solid" name="no_akaunbank" placeholder="" value="{{ $pelajar->no_akaunbank}}"  readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -439,7 +439,7 @@
 															<label class="form-label mb-3">Nama</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid" name="nama_waris" placeholder="" value="{{ $waris->nama_waris}}" />
+															<input type="text" class="form-control form-control-lg form-control-solid" name="nama_waris" placeholder="" value="{{ $waris->nama_waris}}" readonly/>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
@@ -452,7 +452,7 @@
 																<div class="row fv-row">
 																	<!--begin::Col-->
 																	<div class="col-12">
-																		<input type="text" class="form-control form-control-lg form-control-solid" name="nokp_waris" placeholder="" value="{{ $waris->nokp_waris}}" />
+																		<input type="text" class="form-control form-control-lg form-control-solid" name="nokp_waris" placeholder="" value="{{ $waris->nokp_waris}}" readonly/>
 																	</div>
 																	<!--end::Col-->
 																</div>
@@ -466,7 +466,7 @@
 																<div class="row fv-row">
 																	<!--begin::Col-->
 																	<div class="col-12">
-																		<input type="text" class="form-control form-control-lg form-control-solid" name="noPasport" placeholder="" value="{{ $waris->noPasport}}"/>
+																		<input type="text" class="form-control form-control-lg form-control-solid" name="noPasport" placeholder="" value="{{ $waris->noPasport}}" readonly/>
 																	</div>
 																	<!--end::Col-->
 																</div>
@@ -477,7 +477,7 @@
 															<!--begin::Label-->
 															<div class="col-md-6 fv-row hubungan_row">
 															<label class="form-label mb-6">Hubungan Waris</label>
-															<select name="hubungan" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+															<select disabled="true" name="hubungan" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 																<option>{{ $waris->hubungan}}</option>
 																<option value="1">Ibu</option>
 																<option value="2">Bapa</option>
@@ -492,7 +492,7 @@
 															<label class="form-label mb-6">Lain-lain:</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid" name="lain_hubungan" placeholder="" value="{{ $waris->lain_hubungan}}" />
+															<input type="text" class="form-control form-control-lg form-control-solid" name="lain_hubungan" placeholder="" value="{{ $waris->lain_hubungan}}" readonly/>
 															<!--end::Input-->													
 															</div>
 														</div>
@@ -504,7 +504,7 @@
 															<label class="form-label">Alamat Rumah</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<textarea name="alamatW1" class="form-control form-control-lg form-control-solid" rows="2">{{ $waris->alamat1}}</textarea>
+															<textarea disabled="true" name="alamatW1" class="form-control form-control-lg form-control-solid" rows="2">{{ $waris->alamat1}}</textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
@@ -516,7 +516,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamatW_poskod" placeholder="" value="{{ $waris->alamat_poskod}}"  />
+																	<input type="text" class="form-control form-control-solid" name="alamatW_poskod" placeholder="" value="{{ $waris->alamat_poskod}}"  readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -529,7 +529,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamatW_bandar" placeholder="" value="{{ $waris->alamat_bandar}}"  />
+																	<input type="text" class="form-control form-control-solid" name="alamatW_bandar" placeholder="" value="{{ $waris->alamat_bandar}}"  readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -542,7 +542,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamatW_negeri" placeholder="" value="{{ $waris->alamat_negeri}}"  />
+																	<input type="text" class="form-control form-control-solid" name="alamatW_negeri" placeholder="" value="{{ $waris->alamat_negeri}}"  readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -558,7 +558,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_telW" placeholder="" value="{{ $waris->no_tel}}"  />
+																	<input type="text" class="form-control form-control-solid" name="no_telW" placeholder="" value="{{ $waris->no_tel}}"  readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -571,7 +571,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_telRW" placeholder="" value="{{ $waris->no_telR}}"/>
+																	<input type="text" class="form-control form-control-solid" name="no_telRW" placeholder="" value="{{ $waris->no_telR}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -584,7 +584,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="pendapatan" placeholder="" value="{{ $waris->pendapatan}}" />
+																	<input type="text" class="form-control form-control-solid" name="pendapatan" placeholder="" value="{{ $waris->pendapatan}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -621,7 +621,7 @@
 																
 															</label>
 															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="AI12345" name="no_pendaftaranpelajar" value="{{ $akademik->no_pendaftaranpelajar}}" />
+															<input type="text" class="form-control form-control-solid" placeholder="AI12345" name="no_pendaftaranpelajar" value="{{ $akademik->no_pendaftaranpelajar}}" readonly/>
 														</div>
 														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
@@ -630,7 +630,7 @@
 																
 															</label>
 															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="Sarjana Muda Teknologi Maklumat" name="nama_kursus" value="{{ $akademik->nama_kursus}}" />
+															<input type="text" class="form-control form-control-solid" placeholder="Sarjana Muda Teknologi Maklumat" name="nama_kursus" value="{{ $akademik->nama_kursus}}" readonly/>
 														</div>
 														<!--end::Input group-->
 														
@@ -645,7 +645,7 @@
 																<!--begin::Row-->
 																<div class="row fv-row">
 																	    <!--begin::Input wrapper-->
-																	    <select name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Peringkat Pengajian">
+																	    <select disabled="true" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Peringkat Pengajian">
 																			<option>{{ $akademik->peringkat_pengajian}}</option>
 																			<option value="1">Sijil Asas / Sijil</option>
 																			<option value="2">Diploma</option>
@@ -666,7 +666,7 @@
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Nama Pusat Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																		<select name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Nama Pusat Pengajian">
+																		<select disabled="true" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Nama Pusat Pengajian">
 																			<option>{{ $akademik->id_institusi}}</option>
 																			<option value="1">Universiti Malaysia Sabah</option>
 																			<option value="2">Universiti Kebangsaan Malaysia</option>
@@ -695,7 +695,7 @@
 																<label class="required fs-6 fw-semibold form-label mb-2">Tarikh Mula Pengajian</label>
 																<!--end::Label-->
 																	<!--begin::Input wrapper-->
-																	<input type="date" class="form-control form-control-solid" placeholder="" name="tkh_mula" value="{{ $akademik->tkh_mula}}" />
+																	<input type="date" class="form-control form-control-solid" placeholder="" name="tkh_mula" value="{{ $akademik->tkh_mula}}" readonly/>
 																	<!--end::Input wrapper-->
 															</div>
 															<!--end::Col-->
@@ -705,7 +705,7 @@
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tarikh Tamat Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																	<input type="date" class="form-control form-control-solid" placeholder="" name="tkh_tamat" value="{{ $akademik->tkh_tamat}}" />
+																	<input type="date" class="form-control form-control-solid" placeholder="" name="tkh_tamat" value="{{ $akademik->tkh_tamat}}" readonly/>
 																<!--end::Input wrapper-->
 															</div>
 															<!--end::Col-->
@@ -723,7 +723,7 @@
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
 																	
-																		<select name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
+																		<select disabled="true" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
 																			<option>{{ $akademik->sem_semasa}}</option>
 																			<option value="1">1</option>
 																			<option value="2">2</option>
@@ -746,7 +746,7 @@
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																	<input type="text" class="form-control form-control-solid" placeholder="Tahun" name="tempoh_pengajian" value="{{ $akademik->tempoh_pengajian}}" />
+																	<input type="text" class="form-control form-control-solid" placeholder="Tahun" name="tempoh_pengajian" value="{{ $akademik->tempoh_pengajian}}" readonly/>
 																	
 																	<!--end::Input wrapper-->
 															</div>
@@ -764,7 +764,7 @@
 																<!--begin::Row-->
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
-																		<select name="bil_bulanpersem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
+																		<select disabled="true" name="bil_bulanpersem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
 																			<option>{{ $akademik->bil_bulanpersem}}</option>
 																			<option value="1">1</option>
 																			<option value="2">2</option>
@@ -781,7 +781,7 @@
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																		<select name="mod" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
+																		<select disabled="true" name="mod" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
 																			<option>{{ $akademik->mod}}</option>
 																			<option value="1">Sepenuh Masa</option>
 																			<option value="2">Separuh Masa</option>
@@ -801,7 +801,7 @@
 																
 															</label>
 															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="" name="cgpa" value="{{ $akademik->cgpa}}" />
+															<input type="text" class="form-control form-control-solid" placeholder="" name="cgpa" value="{{ $akademik->cgpa}}" readonly/>
 														</div>
 
 														<!--begin::Input group-->
@@ -814,7 +814,7 @@
 																<!--begin::Row-->
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
-																		<select name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
+																		<select disabled="true" name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
 																			<option>{{ $akademik->sumber_biaya}}</option>
 																			<option value="1">Biasiswa</option>
 																			<option value="2">Tajaan Majikan</option>
@@ -833,7 +833,7 @@
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Lain-lain</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																<input type="text" class="form-control form-control-solid" placeholder="" name="sumber_biayalain" value="{{ $akademik->sumber_biayalain}}" />
+																<input type="text" class="form-control form-control-solid" placeholder="" name="sumber_biayalain" value="{{ $akademik->sumber_biayalain}}" readonly/>
 																<!--end::Input wrapper-->
 															</div>
 															<!--end::Col-->
@@ -847,7 +847,7 @@
 																
 															</label>
 															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="JPA" name="nama_penaja" value="{{ $akademik->nama_penaja}}" />
+															<input type="text" class="form-control form-control-solid" placeholder="JPA" name="nama_penaja" value="{{ $akademik->nama_penaja}}" readonly/>
 														</div>
 														@endforeach
 													</div>
@@ -880,7 +880,7 @@
 																
 															</label>
 															<!--end::Label-->
-															<select name="jenis_tuntutan" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Jenis">
+															<select disabled="true" name="jenis_tuntutan" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Jenis">
 																<option>{{ $tuntutanpermohonan->jenis_tuntutan}}</option>
 																<option value="1">Yuran</option>
 																<option value="2">Elaun Wang Saku</option>
@@ -895,7 +895,7 @@
 																
 															</label>
 															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="RM" name="amaun" value="{{ $tuntutanpermohonan->amaun}}" />
+															<input type="text" class="form-control form-control-solid" placeholder="RM" name="amaun" value="{{ $tuntutanpermohonan->amaun}}" readonly/>
 														</div>
 
 														
@@ -933,7 +933,7 @@
 																
 															</label>
 															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="" name="perakuan" value="{{ $tuntutanpermohonan->perakuan}}" />
+															<input type="text" class="form-control form-control-solid" placeholder="" name="perakuan" value="{{ $tuntutanpermohonan->perakuan}}" readonly/>
 														</div>
 
 														
@@ -951,10 +951,10 @@
 														<!--begin::Heading-->
 														<div class="pb-8 pb-lg-10">
 															<!--begin::Title-->
-															<h2 class="fw-bold text-dark">Your Are Done!</h2>
+															<h2 class="fw-bold text-dark">Permohonan Anda Telah Dihantar!</h2>
 															<!--end::Title-->
 															<!--begin::Notice-->
-															<div class="text-muted fw-semibold fs-6">If you need more info, please......</div>
+															<div class="text-muted fw-semibold fs-6">Untuk maklumat lanjut, sila......</div>
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
@@ -1006,7 +1006,7 @@
 													<!--end::Wrapper-->
 													<!--begin::Wrapper-->
 													<div>
-														<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
+														<!--<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
 															<span class="indicator-label">Hantar
 															<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
 																<span class="path1"></span>
@@ -1014,7 +1014,7 @@
 															</i></span>
 															<span class="indicator-progress">Please wait...
 															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-														</button>
+														</button>-->
 														<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Teruskan
 														<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
 															<span class="path1"></span>
