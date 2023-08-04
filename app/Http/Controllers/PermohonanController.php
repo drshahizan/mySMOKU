@@ -94,7 +94,8 @@ class PermohonanController extends Controller
         ]);
         
         $user->save();
-        return view('pages.dashboards.index'); // jadi yang ni kena return ke page view
+        //return view('pages.dashboards.index'); // jadi yang ni kena return ke page view
+        return redirect()->route('viewpermohonan');
         //return redirect()->back();
         
         
@@ -102,7 +103,7 @@ class PermohonanController extends Controller
       
     }
 
-    public function pelajar(){
+    public function viewpermohonan(){
         $pelajar = Permohonan::all();
         $waris = Waris::all();
         $akademik = Akademik::all();
