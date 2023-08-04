@@ -94,12 +94,18 @@ class PermohonanController extends Controller
         ]);
         
         $user->save();
-        return view('pages.dashboards.index');
+        return view('pages.dashboards.index'); // jadi yang ni kena return ke page view
         //return redirect()->back();
         
         
 
       
+    }
+
+    public function index(){
+        $pelajar = Permohonan::all();
+        return view('pages.permohonan.permohonan-baru-view', compact('pelajar'));
+        
     }
 
 
