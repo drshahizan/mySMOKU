@@ -45,7 +45,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::post('permohonan', [PermohonanController::class, 'store'])->name('permohonan.post');
-	Route::get('pelajar', [PermohonanController::class, 'index']);
+    Route::get('pelajar', [PermohonanController::class, 'pelajar']);
     
     Route::get('saringan', [SaringanController::class, 'saringan']);
     Route::get('maklumat-pemohon', [SaringanController::class, 'maklumatPemohon'])->name('id');
