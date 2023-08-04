@@ -24,14 +24,14 @@ return new class extends Migration
             $table->date('tkh_tamat');
             $table->string('sem_semasa');
             $table->string('tempoh_pengajian');
-            $table->string('bil_bulapersem');
+            $table->string('bil_bulanpersem');
             $table->string('mod');
             $table->string('cgpa');
             $table->string('sumber_biaya');
             $table->string('nama_penaja');
-            $table->string('status');
-            $table->string('terimaHLP');
-            $table->date('tkh_maklumat');
+            $table->string('status')->nullable();
+            $table->string('terimaHLP')->nullable();
+            $table->date('tkh_maklumat')->nullable();
             $table->timestamps();
         });
     }

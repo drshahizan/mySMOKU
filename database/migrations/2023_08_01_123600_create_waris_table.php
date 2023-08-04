@@ -19,18 +19,18 @@ return new class extends Migration
             $table->string('nokp_waris');
             
             $table->string('alamat1');
-            $table->string('alamat2');
-            $table->string('alamat3');
+            $table->string('alamat2')->nullable();
+            $table->string('alamat3')->nullable();
             $table->string('alamat_poskod');
             $table->string('alamat_bandar');
             $table->string('alamat_negeri');
             
-            $table->string('alamat_surat1');
-            $table->string('alamat_surat2');
-            $table->string('alamat_surat3');
-            $table->string('alamat_surat_poskod');
-            $table->string('alamat_surat_bandar');
-            $table->string('alamat_surat_negeri');
+            $table->string('alamat_surat1')->nullable();
+            $table->string('alamat_surat2')->nullable();
+            $table->string('alamat_surat3')->nullable();
+            $table->string('alamat_surat_poskod')->nullable();
+            $table->string('alamat_surat_bandar')->nullable();
+            $table->string('alamat_surat_negeri')->nullable();
             $table->string('no_telR');
             $table->string('no_tel');
             $table->string('nokp_pelajar');
