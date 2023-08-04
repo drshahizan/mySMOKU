@@ -97,7 +97,9 @@ class PermohonanController extends Controller
 
         
         $user = TuntutanPermohonan::create($data);
-        $user->id_permohonan = $data['nokp_pelajar'];
+        $pemohon_id = "kpt123";
+        $user->id_permohonan = $pemohon_id;
+        //$user->id_permohonan = $data['nokp_pelajar'];
         $user->nokp_pelajar = $data['nokp_pelajar'];
         //$user->program = $data['program'];
         $user->jenis_tuntutan = $data['jenis_tuntutan'];
