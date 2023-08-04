@@ -7,8 +7,9 @@
 											<div class="card-body px-6 px-lg-10 px-xxl-15 py-20">
 												<!--begin::Nav-->
 												<div class="stepper-nav">
+													
 													<!--begin::Step 1-->
-													<div class="stepper-item current" data-kt-stepper-element="nav">
+													<div class="stepper-item" data-kt-stepper-element="nav">
 														<!--begin::Wrapper-->
 														<div class="stepper-wrapper">
 															<!--begin::Icon-->
@@ -19,8 +20,8 @@
 															<!--end::Icon-->
 															<!--begin::Label-->
 															<div class="stepper-label">
-																<h3 class="stepper-title">Semakan Kelayakan MQA</h3>
-																<div class="stepper-desc fw-semibold">Semak kelayakan syarat permohonan BKOKU</div>
+																<h3 class="stepper-title">Maklumat Peribadi</h3>
+																<div class="stepper-desc fw-semibold">Profil Peribadi Diri</div>
 															</div>
 															<!--end::Label-->
 														</div>
@@ -42,8 +43,8 @@
 															<!--end::Icon-->
 															<!--begin::Label-->
 															<div class="stepper-label">
-																<h3 class="stepper-title">Maklumat Peribadi</h3>
-																<div class="stepper-desc fw-semibold">Profil Peribadi Diri</div>
+																<h3 class="stepper-title">Maklumat Waris</h3>
+																<div class="stepper-desc fw-semibold">Profil Waris</div>
 															</div>
 															<!--end::Label-->
 														</div>
@@ -65,8 +66,8 @@
 															<!--end::Icon-->
 															<!--begin::Label-->
 															<div class="stepper-label">
-																<h3 class="stepper-title">Maklumat Waris</h3>
-																<div class="stepper-desc fw-semibold">Profil Waris</div>
+																<h3 class="stepper-title">Maklumat Akademik</h3>
+																<div class="stepper-desc fw-semibold">Pembelajaran Akademik</div>
 															</div>
 															<!--end::Label-->
 														</div>
@@ -88,29 +89,6 @@
 															<!--end::Icon-->
 															<!--begin::Label-->
 															<div class="stepper-label">
-																<h3 class="stepper-title">Maklumat Akademik</h3>
-																<div class="stepper-desc fw-semibold">Pembelajaran Akademik</div>
-															</div>
-															<!--end::Label-->
-														</div>
-														<!--end::Wrapper-->
-														<!--begin::Line-->
-														<div class="stepper-line h-40px"></div>
-														<!--end::Line-->
-													</div>
-													<!--end::Step 4-->
-													<!--begin::Step 5-->
-													<div class="stepper-item" data-kt-stepper-element="nav">
-														<!--begin::Wrapper-->
-														<div class="stepper-wrapper">
-															<!--begin::Icon-->
-															<div class="stepper-icon w-40px h-40px">
-																<i class="ki-duotone ki-check fs-2 stepper-check"></i>
-																<span class="stepper-number">5</span>
-															</div>
-															<!--end::Icon-->
-															<!--begin::Label-->
-															<div class="stepper-label">
 																<h3 class="stepper-title">Maklumat Tuntutan</h3>
 																<div class="stepper-desc fw-semibold">Yuran Tuntutan dan Elauan Wang Saku</div>
 															</div>
@@ -120,15 +98,15 @@
 														<!--end::Wrapper-->
 														<div class="stepper-line h-40px"></div>
 													</div>
-													<!--end::Step 5-->
-													<!--begin::Step 6-->
+													<!--end::Step 4-->
+													<!--begin::Step 5-->
 													<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
 														<!--begin::Wrapper-->
 														<div class="stepper-wrapper">
 															<!--begin::Icon-->
 															<div class="stepper-icon w-40px h-40px">
 																<i class="ki-duotone ki-check fs-2 stepper-check"></i>
-																<span class="stepper-number">6</span>
+																<span class="stepper-number">5</span>
 															</div>
 															<!--end::Icon-->
 															<!--begin::Label-->
@@ -143,17 +121,15 @@
 														<div class="stepper-line h-40px"></div>
 														<!--end::Line-->
 													</div>
-											
-													<!--end::Step 6-->
-
-													<!--begin::Step 7-->
+													<!--end::Step 5-->
+													<!--begin::Step 6-->
 													<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
 														<!--begin::Wrapper-->
 														<div class="stepper-wrapper">
 															<!--begin::Icon-->
 															<div class="stepper-icon w-40px h-40px">
 																<i class="ki-duotone ki-check fs-2 stepper-check"></i>
-																<span class="stepper-number">7</span>
+																<span class="stepper-number">6</span>
 															</div>
 															<!--end::Icon-->
 															<!--begin::Label-->
@@ -168,8 +144,7 @@
 														
 														<!--end::Line-->
 													</div>
-											
-													<!--end::Step 7-->
+													<!--end::Step 6-->
 
 
 												</div>
@@ -185,96 +160,6 @@
 											
 												<!--begin::Step 1-->
 												<div class="current" data-kt-stepper-element="content">
-												@csrf
-													<!--begin::Wrapper-->
-													<div class="w-100">
-														<!--begin::Heading-->
-														<div class="pb-10 pb-lg-15">
-															<!--begin::Title-->
-															<h2 class="fw-bold d-flex align-items-center text-dark">Semakan Kelayakan MQA</h2> 
-															<img alt="Logo" src="{{ image('logos/mqalogo.png') }}" class="h-150px app-sidebar-logo-default" />
-															<div class="text-muted fw-semibold fs-6">Panduan Semak Pencarian
-																<p>Carian boleh dilakukan melalui kata kunci/kombinasi kata kunci di bawah:</p>   
-																<p>(1) Pilih Universiti</p>  
-																<p>(2) Pilih Peringkat</p>   
-																<p>(3) Pilih Kursus</p>
-															</div>
-														</div>
-														<div class="fv-row mb-10">
-																
-															<label class="form-label required">Nama Institusi</label>
-															<select name="id_institusi" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-															<option value="1">Universiti Malaysia Sabah</option>
-															<option value="2">Universiti Kebangsaan Malaysia</option>
-															<option value="3">Universiti Malaya</option>
-															<option value="4">Universiti Putra Malaysia</option>
-															<option value="5">Universiti Teknikal Malaysia Melaka</option>
-															<option value="6">Universiti Sains Malaysia</option>
-															<option value="7">Universiti Pertahanan Nasional Malaysia</option>
-															<option value="8">Universiti Tun Hussein Onn Malaysia</option>
-															<option value="9">Universiti Malaysia Kelantan</option>
-															<option value="10">Univeristi Utara Malaysia</option>
-															</select>
-												
-														</div>
-														<!-- </div> -->
-
-														<div class="fv-row mb-10">
-															<label class="form-label required">Peringkat</label>
-															<select name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-																<option value="1">Sijil Asas / Sijil</option>
-																<option value="2">Diploma</option>
-																<option value="3">Sarjana Muda</option>
-																<option value="4">Diploma Lepasan Ijazah</option>
-																<option value="5">Sarjana</option>
-																<option value="6">PhD</option>
-															</select>
-														</div>
-														<div class="fv-row mb-10">
-											
-															<label class="form-label required">Nama Kursus</label>
-																	<select name="nama_kursus" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-																		<option value="1">Komputer Sains</option>
-																		<option value="2">C Corporation</option>
-																		<option value="3">Sole Proprietorship</option>
-																		<option value="4">Non-profit</option>
-																		<option value="5">Limited Liability</option>
-																		<option value="6">General Partnership</option>
-																	</select>
-														</div>
-                                   
-														<div class="fv-row mb-10">
-															<label class="form-label required">Adakah anda penerima HLP?</label>	
-															   <div class="row mb-2" data-kt-buttons="true">
-																	<!--begin::Col-->
-																	<div class="col">
-																		<!--begin::Option-->
-																		<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
-																			<input type="radio" class="btn-check" name="ya" value="1-1" />
-																			<span class="fw-bold fs-3">Ya</span>
-																		</label>
-																		<!--end::Option-->
-																	</div>
-																	<!--end::Col-->
-																	<!--begin::Col-->
-																	<div class="col">
-																		<!--begin::Option-->
-																		<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4 active">
-																			<input type="radio" class="btn-check" name="" checked="checked" value="2-10" />
-																			<span class="fw-bold fs-3">Tidak</span>
-																		</label>
-																		<!--end::Option-->
-																	</div>
-																</div>
-															
-														</div>
-												
-													</div>
-												</div>
-												<!--end::Step 1-->
-													
-												<!--begin::Step 2-->
-												<div data-kt-stepper-element="content">
 												@csrf
 													<!--begin::Wrapper-->
 													<div class="w-100">
@@ -528,9 +413,9 @@
 													</div>
 													<!--end::Wrapper-->
 												</div>
-												<!--end::Step 2-->
+												<!--end::Step 1-->
 
-												<!--begin::Step 3-->
+												<!--begin::Step 2-->
 												<div data-kt-stepper-element="content">
 												@csrf	
 													<!--begin::Wrapper-->
@@ -709,9 +594,9 @@
 													</div>
 													<!--end::Wrapper-->
 												</div>
-												<!--end::Step 3-->
+												<!--end::Step 2-->
 
-												<!--begin::Step 4-->
+												<!--begin::Step 3-->
 												<div data-kt-stepper-element="content">
 												@csrf		
 													<!--begin::Wrapper-->
@@ -964,9 +849,9 @@
 													</div>
 													<!--end::Wrapper-->
 												</div>
-												<!--end::Step 4-->
+												<!--end::Step 3-->
 
-												<!--begin::Step 5-->
+												<!--begin::Step 4-->
 												<div data-kt-stepper-element="content">
 												@csrf
 													<!--begin::Wrapper-->
@@ -1015,9 +900,9 @@
 													</div>
 													<!--end::Wrapper-->
 												</div>
-												<!--end::Step 5-->
+												<!--end::Step 4-->
 
-												<!--begin::Step 6-->
+												<!--begin::Step 5-->
 												<div data-kt-stepper-element="content">
 												@csrf	
 												
@@ -1053,9 +938,9 @@
 													</div>
 													<!--end::Wrapper-->
 												</div>
-												<!--end::Step 6-->
+												<!--end::Step 5-->
 
-												<!--begin::Step 7-->
+												<!--begin::Step 6-->
 												<div data-kt-stepper-element="content">
 													<!--begin::Wrapper-->
 													<div class="w-100">
@@ -1103,7 +988,7 @@
 													</div>
 													<!--end::Wrapper-->
 												</div>
-												<!--end::Step 7-->
+												<!--end::Step 6-->
 												<!--begin::Actions-->
 												<div class="d-flex flex-stack pt-10">
 													<!--begin::Wrapper-->
