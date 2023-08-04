@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('id_permohonan');
             $table->string('nokp_pelajar');
             $table->string('program');
-            $table->string('jenis_permohonan');
+            $table->string('jenis_tuntutan');
             $table->string('amaun');
             $table->string('perakuan');
             $table->timestamps();
