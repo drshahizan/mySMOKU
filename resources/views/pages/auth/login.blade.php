@@ -19,9 +19,13 @@
             <div class="text-gray-500 fw-semibold fs-6">
                 Log Masuk ke Akaun Anda
             </div>
+            
             <!--end::Subtitle--->
         </div>
         <!--begin::Heading-->
+            @if (session('message'))
+                <div class="alert alert-danger">{{ session('message') }}</div>
+             @endif
 
         <!--begin::Login options-->
         <!-- <div class="row g-3 mb-9"> -->
