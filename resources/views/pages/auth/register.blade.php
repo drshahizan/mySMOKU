@@ -1,7 +1,7 @@
 <x-auth-layout>
 
     <!--begin::Form-->
-    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ route('semaksyarat') }}" action="{{ route('register') }}">
+    <form class="form w-100" novalidate="novalidate" action="{{ route('register') }}" method="post">
         @csrf
         <!--begin::Heading-->
         <div class="text-center mb-11">
@@ -41,8 +41,8 @@
 
         <!--begin::Submit button-->
         <div class="d-grid mb-10">
-            <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
-                @include('partials/general/_button-indicator', ['label' => 'Semak'])
+            <button type="submit"  class="btn btn-primary">
+                Semak
             </button>
         </div>
         <!--end::Submit button-->
