@@ -2,23 +2,51 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Permohonan;
 use App\Models\Waris;
 use App\Models\Akademik;
 use App\Models\TuntutanPermohonan;
+use App\Models\User;
+use Auth;
+
+
 
 class PermohonanController extends Controller
 {
+
+    
     public function permohonan()
     {
-        return view('pages.permohonan.permohonan-baru');
+        /*if (Auth::check())
+        {
+            $id = Auth::user()->id();
+            return $id;
+        }*/
+
+        $pelajar = Permohonan::all()->where('nokp_pelajar', Auth::user()->id());
+        $waris = Waris::all()->where('nokp_pelajar', Auth::user()->id());
+        $akademik = Akademik::all()->where('nokp_pelajar', Auth::user()->id());
+        $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id());
+        if (!$tuntutanpermohonan->isEmpty())
+        {
+            return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan'));
+
+        }
+        else
+        {
+            return view('pages.permohonan.permohonan-baru');
+        }
+        //return view('pages.permohonan.permohonan-baru', compact('pelajar','waris','akademik','tuntutanpermohonan'));
+        
     }
 
 
     public function store(Request $request)
     {   
+        $request->session()->regenerate();
         $request->validate([
 			'nama_pelajar' => 'required',
 			'nokp_pelajar' => 'required|unique:pelajar',
@@ -100,14 +128,14 @@ class PermohonanController extends Controller
         
         
 
-      
+        $request->session()->invalidate();
     }
 
     public function viewpermohonan(){
-        $pelajar = Permohonan::all();
-        $waris = Waris::all();
-        $akademik = Akademik::all();
-        $tuntutanpermohonan = TuntutanPermohonan::all();
+        $pelajar = Permohonan::all()->where('nokp_pelajar', Auth::user()->id());
+        $waris = Waris::all()->where('nokp_pelajar', Auth::user()->id());
+        $akademik = Akademik::all()->where('nokp_pelajar', Auth::user()->id());
+        $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id());
         return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan'));
         
     }
