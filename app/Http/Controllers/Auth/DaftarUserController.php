@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\SemakRequest;
+//use App\Http\Requests\Auth\SemakRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use App\Models\Smoku;
+use DB;
 
 class DaftarUserController extends Controller
 {
@@ -17,50 +18,47 @@ class DaftarUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
-    {
-        addJavascriptFile('assets/js/custom/authentication/daftar/general.js');
-
+    public function create(Request $request)
+    {   
+        //addJavascriptFile('assets/js/custom/authentication/daftar/general.js');
         return view('pages.auth.register');
+
+        
     }
 
-    /**
-     * Handle an incoming authentication request.
-     *
-     * @param  \App\Http\Requests\Auth\SemakRequest  $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(Request $request)
     {
-        //$request->authenticate();
-        $request->session()->regenerate();
-        //return redirect()->intended(RouteServiceProvider::HOME);
+
+        
         $request->validate([
             'nokp' => ['required', 'string'],
             
         ]);
 
-        
+        //$nokp_in = $request->nokp;
+        $nokp_smoku=Smoku::where([
+            ['nokp', '=', $request->nokp],
+            ])->first();
 
-        
+            
+            if ($nokp_smoku != null) {
+                DB::table('smoku')->where('nokp' ,$request->nokp)->update([
+
+                'verify'=>'1'
+    
+                ]);
+
+                return view('pages.auth.semaksyarat');
+            } else {
+
+                //return view('pages.auth.login')->with('successMsg','Maklumat anda tiada dalam semakkan SMOKU');
+                return redirect()->route('login')
+                ->with('message', 'Maklumat anda tiada dalam semakkan SMOKU');
+            }
+
+
     }
 
-    /**
-     * Destroy an authenticated session.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy(Request $request)
-    {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/');
-    }
+    
+    
 }
