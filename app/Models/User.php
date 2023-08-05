@@ -58,4 +58,9 @@ class User extends Authenticatable
 
         return $this->profile_photo_path;
     }
+
+    public function id()
+    {
+        return $this->nokp;
+    }
 }
