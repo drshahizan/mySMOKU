@@ -53,11 +53,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('maklumat-akademik', [SaringanController::class, 'maklumatAkademik'])->name('id');
     Route::get('salinan-dokumen', [SaringanController::class, 'salinanDokumen'])->name('id');
     Route::get('muat-turun', [SaringanController::class, 'muatTurun']);
+    Route::get('send-mail', function () {
+   
+        $details = [
+            'title' => 'Mail from ItSolutionStuff.com',
+            'body' => 'This is for testing email using smtp'
+        ];
+       
+        \Mail::to('ziba0506@gmail.com')->send(new \App\Mail\SaringanMail($details));
+       
+        dd("Email is Sent.");
+    });
     //SEKRETARIAT
     Route::get('sekretariatSP', [SekretariatController::class, 'statusPermohonan']);
     Route::get('sekretariatKP', [SekretariatController::class, 'keputusanPermohonan']);
-    
-
 });
 
 Route::get('/error', function () {
