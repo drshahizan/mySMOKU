@@ -1,4 +1,4 @@
-<x-default-layout>
+<x-default-layout> 
     <head>
     <title>Sekretariat BKOKU KPT | Saringan Permohonan</title>
     <meta charset="utf-8">

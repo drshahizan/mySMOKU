@@ -1,4 +1,4 @@
-<x-default-layout>
+<x-default-layout> 
     <link rel="stylesheet" href="assets/css/saringan.css">
     <!-- Main body part  -->
     <div id="main-content">
@@ -126,7 +126,7 @@
                                 <div class="col-md-6 text-right">
                                     <button class="btn btn-primary theme-bg gradient action-btn"><i class="fa fa-check"></i> Lengkap</button>
                                     <button class="btn btn-primary theme-bg gradient action-btn"><i class="fa fa-save"></i> Simpan</button>
-                                    <button class="btn btn-primary theme-bg gradient action-btn" data-toggle="modal" data-target="#exampleModalCenter" onclick="confirmButton()"><i class="fa fa-reply"></i> Kembalikan</button>
+                                    <a href="{{ url('send-mail') }}"><button class="btn btn-primary theme-bg gradient action-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-reply"></i> Kembalikan</button></a>
                                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
@@ -173,4 +173,4 @@
         confirm("Press a button!");
     }
    </script>
-</x-default-layout>
+</x-default-layout> 
