@@ -102,13 +102,9 @@ class PermohonanController extends Controller
             'sumber_biaya' => $request->sumber_biaya,
             'nama_penaja' => $request->nama_penaja,
             'status' => '1',
-<<<<<<< Updated upstream
-            //'terimaHLP' => $request->terimaHLP,
-            //'tkh_maklumat' => $request->tkh_maklumat,
-=======
+            
             //'terimaHLP' => $request->terimaHLP, 
             //'tkh_maklumat' => $request->tkh_maklumat, 
->>>>>>> Stashed changes
             
         ]);
 

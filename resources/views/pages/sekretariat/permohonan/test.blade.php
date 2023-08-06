@@ -10,7 +10,7 @@
 <meta name="description" content="Bantuan Kewangan Pelajar Orang Kurang Upaya(OKU) Di Institusi Pengajian Tinggi (IPT)">
 <meta name="author" content="Prototype Mockup">
 
-<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="bkoku.ico" type="image/x-icon">
 <!-- VENDOR CSS -->
 <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
