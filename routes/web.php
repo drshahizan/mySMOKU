@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\SaringanController;
 use App\Http\Controllers\SekretariatController;
+use App\Models\Permohonan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,6 +60,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('sekretariatPB', [SekretariatController::class, 'permohonanBaru']);
     Route::get('sekretariatPP', [SekretariatController::class, 'pembaharuanPermohonan']);
     Route::get('sekretariatKP', [SekretariatController::class, 'keputusanPermohonan']);
+    Route::get('suratTawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
 });
 
 //SEKRETARIAT

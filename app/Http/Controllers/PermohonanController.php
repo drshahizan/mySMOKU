@@ -138,10 +138,6 @@ class PermohonanController extends Controller
         return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan'));
         
     }
-
-
-
-
 }
 
 

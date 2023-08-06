@@ -30,7 +30,7 @@
                                     <div class="d-flex align-items-center">
                                         <div class="icon-in-bg bg-indigo text-white rounded-circle" style="padding-left:0;"><i class="fa fa-check"></i></div>
                                         <div class="ml-4">
-                                            <span style="color: black;">Permohonan Aktif BKOKU</span>
+                                            <span style="color: black;"> Aktif BKOKU</span>
                                             <h4 class="mb-0 font-weight-medium">2000</h4>
                                         </div>
                                     </div>
@@ -42,9 +42,9 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-times"></i></div>
+                                        <div class="icon-in-bg bg-azura text-white rounded-circle"><i class="fa fa-times" style="color: white"></i></div>
                                         <div class="ml-4">
-                                            <span style="color: black">Permohonan Tidak Aktif BKOKU</span>
+                                            <span style="color: black"> Tidak Aktif BKOKU</span>
                                             <h4 class="mb-0 font-weight-medium">25</h4>
                                         </div>
                                     </div>
@@ -56,9 +56,9 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-check"></i></div>
+                                        <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-check"></i></div>
                                         <div class="ml-4">
-                                            <span style="color: black">Permohonan Aktif PPK</span>
+                                            <span style="color: black"> Aktif PPK</span>
                                             <h4 class="mb-0 font-weight-medium">1200</h4>
                                         </div>
                                     </div>
@@ -70,9 +70,9 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-times"></i></div>
+                                        <div class="icon-in-bg bg-pink text-white rounded-circle"><i class="fa fa-times" style="color: white"></i></div>
                                         <div class="ml-4">
-                                            <span style="color: black">Permohonan Tidak Aktif PPK</span>
+                                            <span style="color: black"> Tidak Aktif PPK</span>
                                             <h4 class="mb-0 font-weight-medium">54</h4>
                                         </div>
                                     </div>
@@ -82,111 +82,12 @@
                     </div>
                     {{-- End of Small card section --}}
                 </div>
-
+             
                 {{-- Card section --}}
-                <div class="row clearfix">
-                    <div class="col-lg-6 col-md-12">
-                        {{-- Jumlah --}}
-                        <div class="card">
-                            <div class="header">
-                                <h2>Jumlah Keseluruhan Permohonan</h2>
-                            </div>
-                            
-                            <div class="card-body">
-                                <div class="row text-center">
-                                    <div class="col-6 border-right">
-                                        <label class="3">Permohonan BKOKU</label>
-                                        <h4 class="font-30 font-weight-bold text-col-blue">2,025</h4>
-                                    </div>
-                                    <div class="col-6">
-                                        <label class="3">Permohonan PPK</label>
-                                        <h4 class="font-30 font-weight-bold text-col-blue">1,254</h4>
-                                    </div>
-                                </div>
-                            </div>
-                                
-                            <div class="col-lg-12 col-md-12">
-                                <div class="card">
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="btn btn-secondary btn-sm">14</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span class="btn btn-primary btn-sm">200</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Saringan<span class="btn btn-info btn-sm">1000</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Dikembalikan<span class="btn btn-warning btn-sm">4</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Disokong<span class="btn btn-sm" style="background-color:cornflowerblue; color:white;">2000</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Layak<span class="btn btn-success btn-sm">3277</span></li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Tidak Layak<span class="btn btn-danger btn-sm">2</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-6 col-md-12">
-                        {{-- Kategori --}}
-                        <div class="card">
-                            <div class="header">
-                                <h2>Kategori Permohonan</h2>
-                            </div>
-                            <div class="body">
-                                <ul class="nav nav-tabs2">
-                                    <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#Home-new">BKOKU</a></li>
-                                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Profile-new">PPK</a></li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane show vivify flipInX active" id="Home-new">
-                                        <br>
-                                        {{-- <h6>Permohonan BKOKU</h6> --}}
-                                        <div class="row clearfix">
-                                            <div class="col-lg-12 col-md-12">
-                                            <div class="card">
-                                                {{-- <div class="body"> --}}
-                                                    <ul class="list-group">
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="btn btn-secondary btn-sm">14</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span class="btn btn-primary btn-sm">2</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Saringan<span class="btn btn-info btn-sm">1900</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Dikembalikan<span class="btn btn-warning btn-sm">1400</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Disokong<span class="btn btn-sm"  style="background-color:cornflowerblue; color:white;">2000</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Layak<span class="btn btn-success btn-sm">1400</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Tidak Layak<span class="btn btn-danger btn-sm">2</span></li>
-                                                    </ul>
-                                                {{-- </div> --}}
-                                            </div>    
-                                            </div>      
-                                        </div>
-                                    </div>    
-                                    
-                                
-                                    <div class="tab-pane vivify flipInX" id="Profile-new">
-                                        <br>
-                                        {{-- <h6>Permohonan Program Pendidikan Khas (PPK)</h6> --}}
-                                        <div class="row clearfix">
-                                            <div class="col-lg-12 col-md-12">
-                                            <div class="card">
-                                                <div class="body">
-                                                    <ul class="list-group">
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Draf<span class="badge badge-secondary">11</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Baru<span class="badge badge-primary">2</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Saringan<span class="badge badge-info">1000</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Dikembalikan<span class="badge badge-warning">12</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Disokong<span class="badge badge-success">3000</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Layak<span class="badge badge-success">1000</span></li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">Tidak Layak<span class="badge badge-danger">2</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            </div>
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 {{-- End of Card section --}}
 
-                <br>
-
-                {{-- Small card section --}}
+                {{-- Table section --}}
                 <div class="row clearfix">
                     <!-- Page header2 section  -->
                     <div class="block-header">
@@ -281,7 +182,7 @@
                                             <td>
                                                SARJANABKOKU00012
                                             </td>
-                                            <td><button type="button" class="btn btn-dark btn-sm">Tidak Aktif</button></td>
+                                            <td><button type="button" class="btn btn-sm" style="background-color:brown; color:white;">Tidak Aktif</button></td>
                                         </tr>  
 
                                         <tr data-status="Disokong">
@@ -563,3 +464,4 @@
         <script src="../js/pages/charts/morris.js"></script>
         <script src="../js/pages/charts/c3.js"></script>
 </x-default-layout> 
+

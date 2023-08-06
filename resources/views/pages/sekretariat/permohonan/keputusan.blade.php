@@ -66,7 +66,7 @@
                                                     <td>Ali Bin Abu</td> 
                                                     {{-- <td>Surat Tawaran<span style="float: right;"><a href="#" class="fa fa-print" aria-hidden="true" style="font-size:16px;"></a></span></td> --}}
                                                     <td>
-                                                        <a href="SuratTawaran.html" class="btn btn-success btn-round"><i class="icon-printer"></i>Muat Turun Surat Tawaran</a>
+                                                        <a href="{{ url('cetak-surat-tawaran') }}" target="_blank" class="btn btn-success btn-round btn-sm"><i class="icon-printer"></i>Muat Turun Surat Tawaran</a>
                                                     </td>
                                                     <td class="text-center">2/7/2023</td>
                                                     <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
