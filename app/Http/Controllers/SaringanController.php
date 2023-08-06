@@ -39,16 +39,15 @@ class SaringanController extends Controller
         return view('pages.saringan.salinanDokumen');
     }
 
-    public function muatTurun() 
+    public function cetakMaklumatPemohon() 
     {
-        $data = [
-            'imagePath'    => 'https://imgv3.fotor.com/images/blog-richtext-image/part-blurry-image.jpg',
-            'name'         => 'John Doe',
-            'address'      => 'USA',
-            'mobileNumber' => '000000000',
-            'email'        => 'john.doe@email.com'
-        ];
-        $pdf = PDF::loadView('pages.saringan.muatTurunMaklumat', $data);
+        $pdf = PDF::loadView('pages.saringan.cetakMaklumatPemohon');
         return $pdf->stream('maklumat-pemohon.pdf');
+    }
+
+    public function cetakSenaraiPemohon() 
+    {
+        $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon');
+        return $pdf->stream('senarai-pemohon.pdf');
     }
 }

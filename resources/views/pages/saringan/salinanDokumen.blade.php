@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta property="og:type" content="article"/>
     <link rel="stylesheet" href="assets/css/saringan.css">
-
+</head>
 <body>
     <table class="profile-form">
         <tr>
@@ -284,5 +284,6 @@
             </td>
         </tr>
     </div>
+    </table>
 </body>
 </html>

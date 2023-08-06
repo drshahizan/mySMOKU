@@ -16,8 +16,7 @@
                                 <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Pemohon</b></li>
                             </ul>
                             <div class="ml-auto">
-                                <button type="button" class="btn btn-sm btn-default" title="Download" onclick="location.href='{{ url('muat-turun') }}'"><i class="fa fa-download"></i></button>
-                                <button type="button" class="btn btn-sm btn-default" title="Print"><i class="fa fa-print"></i></button>
+                                <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank"><button type="button" class="btn btn-sm btn-default" title="Print"><i class="fa fa-print"></i></button></a>
                                 <button type="button" class="btn btn-sm btn-default" title="Delete" onclick="confirmButton()"><i class="fa fa-trash"></i></button>
                             </div>
                         </div>
@@ -87,7 +86,7 @@
                                                         </select>
                                                     </div>
                                                     <td><div class="fancy-checkbox">
-                                                        <label><input type="checkbox"><span>Terdapat butiran yang tidak benar dalam Maklumat Akademik</span></label>
+                                                        <label><input type="checkbox" value="2"><span>Terdapat butiran yang tidak benar dalam Maklumat Akademik</span></label>
                                                     </div></td>
                                                 </td> 
                                               
@@ -108,8 +107,8 @@
                                                     </div>       
                                                 </td>
                                                 <td>
-                                                        <div class="fancy-checkbox">
-                                                            <label><input type="checkbox"><span>Terdapat butiran yang tidak benar dalam Salinan Dokumen</span></label>
+                                                <div class="fancy-checkbox">
+                                                    <label><input type="checkbox" value="2"><span>Terdapat butiran yang tidak benar dalam Salinan Dokumen</span></label>
                                                 </div></td>
                                               
                                                 </tr>                                                

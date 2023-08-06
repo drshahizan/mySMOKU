@@ -2,9 +2,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Resume</title>
+    <title>Cetak Maklumat Pemohon</title>
     <link rel="stylesheet" href="assets/css/saringan.css">
 </head>
+<style>
+    body{
+        font-size: 12px!important;
+    }
+</style>
 <body>
     <div style="margin: 0 auto;display: block;">
         <table width="100%" border="1" class="profile-form">
