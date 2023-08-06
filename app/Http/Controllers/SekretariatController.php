@@ -57,7 +57,7 @@ class SekretariatController extends Controller
     //     }
     // }
 
-    public function muatTurunSuratTawaran(int $permohonanId)
+    public function muatTurunSuratTawaran()
     {
         // $permohonan = Permohonan::findOrFail('A123');
         // $pengajian = ['maklumatPengajian' => $permohonan];
