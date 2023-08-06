@@ -32,7 +32,7 @@ class SaringanMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mail from ItSolutionStuff.com')
+        return $this->subject('BKOKU: Dokumen Dikembalikan')
                     ->view('pages.saringan.email-dikembalikan');
     }
 }
