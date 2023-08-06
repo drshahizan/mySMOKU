@@ -7,8 +7,8 @@
 	<!--begin::Breadcrumb-->
 	<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
 		<!--begin::Item-->
-		<li class="breadcrumb-item text-muted">
-			<a href="/" class="text-muted text-hover-primary" style="color:darkblue">Laman Utama</a>
+		<li class="breadcrumb-item text-dark">
+			<a href="/" class="text-dark text-hover-primary" style="color:darkblue">Laman Utama</a>
 		</li>
 		<!--end::Item-->
 		<!--begin::Item-->
@@ -17,7 +17,7 @@
 		</li>
 		<!--end::Item-->
 		<!--begin::Item-->
-		<li class="breadcrumb-item text-muted" style="color:darkblue">Permohonan Baru</li>
+		<li class="breadcrumb-item text-dark" style="color:darkblue">Permohonan Baru</li>
 		<!--end::Item-->
 	</ul>
 	<!--end::Breadcrumb-->
@@ -276,6 +276,7 @@
 															<!--end::Col-->
 														</div>
 														<!--begin::Input group-->
+														<div class="separator my-14"></div>
 														<div class="row mb-10">
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->

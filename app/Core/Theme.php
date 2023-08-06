@@ -254,7 +254,7 @@ class Theme
      */
     function includeFavicon()
     {
-        return sprintf('<link rel="shortcut icon" href="%s" />', asset(config('settings.KT_THEME_ASSETS.bkoku')));
+        return sprintf('<link rel="shortcut icon" href="%s" />', asset(config('settings.KT_THEME_ASSETS.favicon')));
     }
 
     /**
