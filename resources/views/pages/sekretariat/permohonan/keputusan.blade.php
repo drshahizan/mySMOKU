@@ -7,6 +7,9 @@
 
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="assets/css/sekretariat.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     </head>
 
     <body>
@@ -16,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="shadow bg-white p-3">
-                            <div class="card-header" style="background-color:aliceblue; padding:5px;">
+                            <div class="card-header">
                                 <h1><b>Keputusan Permohonan BKOKU</b>
                             </div>
                             <hr>
@@ -24,15 +27,15 @@
                             <div class="card-body">
                                 <form action="" method="GET">
                                     <div class="row">
-                                        <div class="col-md-3">
-                                            <label style="color:black">Tapis mengikut Tarikh</label>
+                                        <div class="col-md-2">
+                                            {{-- <label style="color:black">Tapis mengikut Tarikh</label> --}}
                                             <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
                                         </div>
         
-                                        <div class="col-md-3">
-                                            <label style="color:black">Tapis mengikut Keputusan</label>
+                                        <div class="col-md-2">
+                                            {{-- <label style="color:black">Tapis mengikut Keputusan</label> --}}
                                             <select name="status" class="form-select">
-                                                <option value="">Pilih Keputusan Tuntutan</option>
+                                                <option value="">Pilih Keputusan</option>
                                                 <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
                                                 <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
                                                 <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
@@ -40,48 +43,49 @@
                                         </div>
         
                                         <div class="col-md-6">
-                                            <br>
-                                            <button type="submit" class="btn btn-primary">Filter</button>
+                                            <button type="submit" class="btn btn-primary" style="width: 10%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
                                         </div>
                                     </div>
                                 </form>
-                                <hr>
         
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-striped">
+                                    <table id="sortTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr style="color:black; font-size:12px;">
-                                                <th>ID Tuntutan</th>
-                                                <th>Nama</th>
-                                                <th>Tarikh Tuntutan</th>
-                                                <th>Keputusan Tuntutan</th>
-                                                <th>Catatan</th>
+                                                <th style="width: 15%">ID Tuntutan</th>
+                                                <th style="width: 30%">Nama</th>
+                                                <th style="width: 30%">Catatan</th>
+                                                <th style="width: 10%" class="text-center">Tarikh Tuntutan</th>
+                                                <th style="width: 15%" class="text-center">Keputusan Tuntutan</th>
                                             </tr>
                                         </thead>
                                             
                                         <tbody> 
                                                 <tr>
                                                     <td><a href="tuntut-Ali.html">TTBKOKU00012</a></td> 
-                                                    <td style="color:black">Ali Bin Abu</td> 
-                                                    <td style="color:black">2/7/2023</td>
-                                                    <td> <button type="button" class="btn btn-success btn-sm"> Layak</button></td>
-                                                    <td style="color:black">Surat Tawaran</td>
+                                                    <td>Ali Bin Abu</td> 
+                                                    {{-- <td>Surat Tawaran<span style="float: right;"><a href="#" class="fa fa-print" aria-hidden="true" style="font-size:16px;"></a></span></td> --}}
+                                                    <td>
+                                                        <a href="SuratTawaran.html" class="btn btn-success btn-round"><i class="icon-printer"></i>Muat Turun Surat Tawaran</a>
+                                                    </td>
+                                                    <td class="text-center">2/7/2023</td>
+                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
                                                 </tr>
 
-                                                <tr style="color:black">
+                                                <tr>
                                                     <td><a href="#">TTBKOKU01012</a></td> 
-                                                    <td>Sarah Binti Md Yunos</td> 
-                                                    <td>4/7/2022</td>
-                                                    <td> <button type="button" class="btn btn-danger btn-sm"> Tidak Layak</button></td>
-                                                    <td>Anda tidak disahkan sebagai pelajar OKU</td>
+                                                    <td>Sarah Binti Md Yunos</td>
+                                                    <td>Anda tidak disahkan sebagai pelajar OKU</td> 
+                                                    <td class="text-center">4/7/2022</td>
+                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm"> Tidak Layak</button></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td><a href="#">TTBKOKU90012</a></td>
-                                                    <td style="color:black"> Eng Mei Ying </td>
-                                                    <td style="color:black">2/2/2022</td>
-                                                    <td><button type="button" class="btn btn-warning btn-sm"> Dikembalikan</button></td>
-                                                    <td style="color:black"> Terdapat kesilapan dalam butiran resit </td>
+                                                    <td> Eng Mei Ying </td>
+                                                    <td> Terdapat kesilapan dalam butiran resit </td>
+                                                    <td class="text-center">2/2/2022</td>
+                                                    <td class="text-center"><button type="button" class="btn btn-warning btn-sm"> Dikembalikan</button></td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -96,6 +100,10 @@
         <!-- Javascript -->
         <script src="assets/bundles/libscripts.bundle.js"></script>    
         <script src="assets/bundles/vendorscripts.bundle.js"></script>
+
+        <script>
+            $('#sortTable').DataTable();
+        </script>
         
         <!-- Vedor js file and create bundle with grunt  --> 
         <script src="assets/bundles/flotscripts.bundle.js"></script><!-- flot charts Plugin Js -->

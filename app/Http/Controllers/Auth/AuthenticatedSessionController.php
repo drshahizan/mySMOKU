@@ -61,4 +61,23 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+    protected function authenticated()
+    {
+        if(Auth::user()->tahap=='1')
+        {
+            return redirect('pelajar/dashboard')->with('message', 'Selamat Datang ke Laman Utama Pelajar');
+        }
+        else if(Auth::user()->tahap=='2')
+        {
+            return redirect('penyelaras/dashboard')->with('message', 'Selamat Datang ke Laman Utama Penyelaras');
+        }
+        else if(Auth::user()->tahap=='3')
+        {
+            return redirect('pages/sekretariat/dashboard')->with('message', 'Selamat Datang ke Laman Utama Sekretariat');
+        }
+        else{
+            return redirect('pegawai/dashboard')->with('status', 'Selamat Datang ke Laman Utama Pegawai Atasan');
+        }
+    }
 }

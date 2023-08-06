@@ -52,23 +52,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('maklumat-profil-diri', [SaringanController::class, 'maklumatProfilDiri'])->name('id');
     Route::get('maklumat-akademik', [SaringanController::class, 'maklumatAkademik'])->name('id');
     Route::get('salinan-dokumen', [SaringanController::class, 'salinanDokumen'])->name('id');
-    Route::get('cetak-senarai-pemohon', [SaringanController::class, 'cetakSenaraiPemohon']);
-    Route::get('cetak-maklumat-pemohon', [SaringanController::class, 'cetakMaklumatPemohon']);
-    Route::get('send-mail', function () {
+    Route::get('muat-turun', [SaringanController::class, 'muatTurun']);
    
-        $details = [
-            'title' => 'Mail from ItSolutionStuff.com',
-            'body' => 'This is for testing email using smtp'
-        ];
-       
-        \Mail::to('ziba0506@gmail.com')->send(new \App\Mail\SaringanMail($details));
-       
-        dd("Email is Sent.");
-    });
-    //SEKRETARIAT
+    //Permohonan - Sekretariat
     Route::get('sekretariatSP', [SekretariatController::class, 'statusPermohonan']);
+    Route::get('sekretariatPB', [SekretariatController::class, 'permohonanBaru']);
+    Route::get('sekretariatPP', [SekretariatController::class, 'pembaharuanPermohonan']);
     Route::get('sekretariatKP', [SekretariatController::class, 'keputusanPermohonan']);
 });
+
+//SEKRETARIAT
+// Route::prefix('sekretariat')->middleware(['auth','isSekretariat'])->group(function(){
+//     Route::get('sekretariatDashboard', [App\Http\Controllers\SekretariatController::class, 'dashboard'] );
+    
+//     //Permohonan
+//     Route::get('sekretariatSP', [SekretariatController::class, 'statusPermohonan']);
+//     Route::get('sekretariatKP', [SekretariatController::class, 'keputusanPermohonan']);
+// });
 
 Route::get('/error', function () {
     abort(500);

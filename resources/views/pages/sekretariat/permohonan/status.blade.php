@@ -7,6 +7,9 @@
 
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="assets/css/sekretariat.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     </head>
 
     <body>
@@ -16,12 +19,70 @@
                 <!-- Page header section  -->
                 <div class="block-header">
                     <div class="row clearfix">
-                        <div class="col-lg-4 col-md-12 col-sm-12">
-                            <h1>Status Permohonan BKOKU</h1>
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                            <h1>Status Permohonan BKOKU dan PPK</h1>
                         </div>
                         <hr>
+                        {{-- Small Card Section --}}
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon-in-bg bg-indigo text-white rounded-circle" style="padding-left:0;"><i class="fa fa-check"></i></div>
+                                        <div class="ml-4">
+                                            <span style="color: black;">Permohonan Aktif BKOKU</span>
+                                            <h4 class="mb-0 font-weight-medium">2000</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-times"></i></div>
+                                        <div class="ml-4">
+                                            <span style="color: black">Permohonan Tidak Aktif BKOKU</span>
+                                            <h4 class="mb-0 font-weight-medium">25</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-check"></i></div>
+                                        <div class="ml-4">
+                                            <span style="color: black">Permohonan Aktif PPK</span>
+                                            <h4 class="mb-0 font-weight-medium">1200</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-times"></i></div>
+                                        <div class="ml-4">
+                                            <span style="color: black">Permohonan Tidak Aktif PPK</span>
+                                            <h4 class="mb-0 font-weight-medium">54</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    {{-- End of Small card section --}}
                 </div>
+
                 {{-- Card section --}}
                 <div class="row clearfix">
                     <div class="col-lg-6 col-md-12">
@@ -127,56 +188,6 @@
 
                 {{-- Small card section --}}
                 <div class="row clearfix">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body top_counter">
-                                    {{-- <div class="icon bg-success text-black"><i class="fa fa-check-circle-o"></i> </div> --}}
-                                    {{-- <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-check-circle-o"></i></div> --}}
-                                    <div class="content" style="text-align: center; color:black">
-                                        <span style="font-size:small;">Permohonan Aktif BKOKU</span>
-                                        <h5 class="number mb-0">2000</h5>
-                                    </div>
-                                </div>                        
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body top_counter">
-                                    {{-- <div class="icon bg-danger text-black"><i class="fa fa-times"></i> </div> --}}
-                                    <div class="content" style="text-align: center; color:black">
-                                        <span style="font-size:small;">Permohonan Tidak Aktif BKOKU</span>
-                                        <h5 class="number mb-0">25</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body top_counter">
-                                    {{-- <div class="icon bg-success text-black"><i class="fa fa-check-circle-o"></i> </div> --}}
-                                    <div class="content" style="text-align: center; color:black">
-                                        <span style="font-size:small;">Permohonan Aktif PPK</span>
-                                        <h5 class="number mb-0">1200</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body top_counter">
-                                    {{-- <div class="icon bg-danger text-black"><i class="fa fa-times"></i> </div> --}}
-                                    <div class="content" style="text-align: center; color:black">
-                                        <span style="font-size:small;">Permohonan Tidak Aktif PPK</span>
-                                        <h5 class="number mb-0">54</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Small card section --}}
-
-                    <br>
-
                     <!-- Page header2 section  -->
                     <div class="block-header">
                         <div class="row clearfix">
@@ -189,10 +200,10 @@
 
                     {{-- Filter section --}}
                     <div class="row">
-                        <div class="col-md-2">
-                            <label style="color:black"><b>Tapis Status Permohonan</b>
+                        <div class="col-md-3">
+                            {{-- <label style="color:black"><b>Tapis Status Permohonan</b> --}}
                             <select name="status" class="form-select">
-                                <option value="">Semua Status</option>
+                                <option value="">Semua Status Permohonan</option>
                                 <option value="Baru" {{Request::get('status') == 'Baru' ? 'selected':'' }} >Baru</option>
                                 <option value="Saringan" {{Request::get('status') == 'Saringan' ? 'selected':'' }} >Saringan</option>
                                 <option value="Disokong" {{Request::get('status') == 'Disokong' ? 'selected':'' }} >Disokong</option>
@@ -204,17 +215,17 @@
                             </select>
                         </div>
 
-                        <div class="col-md-2">
-                            <label style="color:black"><b>Tapis Jenis Permohonan</b>
+                        <div class="col-md-3">
+                            {{-- <label style="color:black"><b>Tapis Jenis Permohonan</b> --}}
                             <select name="status" class="form-select">
-                                <option value="">Semua Jenis</option>
+                                <option value="">Semua Jenis Permohonan</option>
                                 <option value="BKOKU" {{Request::get('jenis') == 'BKOKU' ? 'selected':'' }} >BKOKU</option>
                                 <option value="PPK" {{Request::get('jenis') == 'PPK' ? 'selected':'' }} >PPK</option>
                             </select>
                         </div>
 
                         <div class="col-md-4 right">
-                            <br><button type="submit" class="btn btn-primary">Filter</button>
+                            <button type="submit" class="btn btn-primary" style="width: 15%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
                         </div>
                     </div>
                     <br>
@@ -224,7 +235,7 @@
                     <div class="col-lg-12">
                         <div class="table-responsive">
                             <div class="body">      
-                                <table class="table table-bordered table-striped">
+                                <table id="sortTable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr style="color: white; background-color:rgb(35, 58, 108);"> 
                                             <th>Nama Pemohon</th>
@@ -518,6 +529,10 @@
         <!-- Javascript -->
         <script src="assets/bundles/libscripts.bundle.js"></script>    
         <script src="assets/bundles/vendorscripts.bundle.js"></script>
+
+        <script>
+            $('#sortTable').DataTable();
+        </script>
         
         <!-- Vedor js file and create bundle with grunt  --> 
         <script src="assets/bundles/flotscripts.bundle.js"></script><!-- flot charts Plugin Js -->

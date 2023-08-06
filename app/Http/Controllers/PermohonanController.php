@@ -10,14 +10,10 @@ use App\Models\Waris;
 use App\Models\Akademik;
 use App\Models\TuntutanPermohonan;
 use App\Models\User;
-use Auth;
-
-
+use Illuminate\Support\Facades\Auth;
 
 class PermohonanController extends Controller
 {
-
-    
     public function permohonan()
     {
         /*if (Auth::check())
@@ -88,7 +84,7 @@ class PermohonanController extends Controller
             'nokp_pelajar' => $request->nokp_pelajar,
             'hubungan' => $request->hubungan,
             'pendapatan' => $request->pendapatan,
-            
+    
         ]);
 
         $user = Akademik::create([
@@ -106,8 +102,13 @@ class PermohonanController extends Controller
             'sumber_biaya' => $request->sumber_biaya,
             'nama_penaja' => $request->nama_penaja,
             'status' => '1',
+<<<<<<< Updated upstream
             //'terimaHLP' => $request->terimaHLP,
             //'tkh_maklumat' => $request->tkh_maklumat,
+=======
+            //'terimaHLP' => $request->terimaHLP, 
+            //'tkh_maklumat' => $request->tkh_maklumat, 
+>>>>>>> Stashed changes
             
         ]);
 
@@ -125,10 +126,8 @@ class PermohonanController extends Controller
         //return view('pages.dashboards.index'); // jadi yang ni kena return ke page view
         return redirect()->route('viewpermohonan');
         //return redirect()->back();
-        
-        
 
-        $request->session()->invalidate();
+        // $request->session()->invalidate();
     }
 
     public function viewpermohonan(){

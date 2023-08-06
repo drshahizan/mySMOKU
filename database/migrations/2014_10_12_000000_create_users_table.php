@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('tahap')->nullable();
+            $table->integer('tahap')->default('1')->comment('1=pelajar, 2=penyelaras, 3=sekretariat, 4=pegawai');
             $table->string('status')->nullable();
             $table->rememberToken();
             $table->timestamps();
