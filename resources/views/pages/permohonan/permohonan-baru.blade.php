@@ -452,6 +452,11 @@
 																</div>
 																<!--end::Input wrapper-->
 															</div>
+															<button type="button" class="btn btn-flex btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_upload">
+															<i class="ki-duotone ki-folder-up fs-2">
+														<span class="path1"></span>
+														<span class="path2"></span>
+													</i>Muat Naik Salinan Bank Penyata</button>
 														</div>
 														
 														<!--end::Input group-->
@@ -1089,7 +1094,7 @@
 
 		<!--begin::Custom Javascript(used for this page only)-->
 		<script src="assets/js/custom/utilities/modals/create-account.js"></script>
-
+		<script src="assets/js/custom/apps/file-manager/list.js"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 
