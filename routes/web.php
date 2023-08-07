@@ -71,8 +71,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
    
     //Permohonan - Sekretariat
     Route::get('sekretariatSP', [SekretariatController::class, 'statusPermohonan']);
-    Route::get('sekretariatPB', [SekretariatController::class, 'permohonanBaru']);
-    Route::get('sekretariatPP', [SekretariatController::class, 'pembaharuanPermohonan']);
+    Route::get('sekretariatPengesahan', [SekretariatController::class, 'pengesahanPermohonan']);
+    Route::get('sekretariatKembalikan', [SekretariatController::class, 'kembalikanPermohonan']);
     Route::get('sekretariatKP', [SekretariatController::class, 'keputusanPermohonan']);
     Route::get('suratTawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
 });

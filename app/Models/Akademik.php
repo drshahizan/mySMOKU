@@ -37,7 +37,7 @@ class Akademik extends Authenticatable
         'cgpa',
         'sumber_biaya',
         'nama_penaja',
-        //'status',
+        'status',
         //'terimaHLP',
         //'tkh_maklumat',
         

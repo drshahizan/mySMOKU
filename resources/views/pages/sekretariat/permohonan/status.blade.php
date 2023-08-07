@@ -138,228 +138,124 @@
                             <div class="body">      
                                 <table id="sortTable" class="table table-bordered table-striped">
                                     <thead>
-                                        <tr style="color: white; background-color:rgb(35, 58, 108);"> 
-                                            <th>Nama Pemohon</th>
-                                            <th>Jenis Permohonan</th>
-                                            <th>ID Permohonan</th>  
-                                            <th>Status Permohonan</th>
+                                        <tr style="color: white; background-color:rgb(35, 58, 108);">
+                                            <th style="width: 25%">ID Permohonan</th> 
+                                            <th style="width: 40%">Nama Pemohon</th>
+                                            <th style="width: 15%">Jenis Permohonan</th>  
+                                            <th class="text-center" style="width: 20%">Status Permohonan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>
-                                                Ali Bin Abu
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANABKOKU00012
-                                            </td>
-                                            <td><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
+                                            <td>SARJANABKOKU00012</td>
+                                            <td>Ali Bin Abu</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
                                         </tr>
 
                                         <tr data-status="Aktif">
-                                            <td>
-                                                Afiq Hazim Bin Abdul Malik
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANAMUDABKOKU00012
-                                            </td>
-                                            <td><button type="button" class="btn btn-success btn-sm">Aktif</button></td>
+                                            <td>SARJANAMUDABKOKU00012</td>
+                                            <td>Afiq Hazim Bin Abdul Malik</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm">Aktif</button></td>
                                         </tr>
 
                                         <tr data-status="Tidak Aktif">
-                                            <td>
-                                                Alia Dania
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANABKOKU00012
-                                            </td>
-                                            <td><button type="button" class="btn btn-sm" style="background-color:brown; color:white;">Tidak Aktif</button></td>
+                                            <td>SARJANABKOKU00012</td>
+                                            <td>Alia Dania</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:brown; color:white;">Tidak Aktif</button></td>
                                         </tr>  
 
                                         <tr data-status="Disokong">
-                                            <td>
-                                                Amirah Binti Akmal
-                                            </td>
-                                            <td>
-                                                PPK
-                                            </td>
-                                            <td>
-                                               DIPPPK80012
-                                            </td>
-                                            <td><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                            <td>DIPPPK80012</td>
+                                            <td>Amirah Binti Akmal</td>
+                                            <td>PPK</td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
 
                                         <tr data-status="Baru">
-                                            <td>
-                                                Chai Jing Si
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANABKOKU22012
-                                            </td>
-                                            <td><button type="button" class="btn btn-info btn-sm">Baru</button></td>
+                                            <td>SARJANABKOKU22012</td>
+                                            <td>Chai Jing Si</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center"><button type="button" class="btn btn-info btn-sm">Baru</button></td>
                                         </tr>
 
                                         <tr data-status="Dikembalikan">
-                                            <td>
-                                                Clarrisa Yong Chu Ni 
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANAMUDABKOKU00012
-                                            </td>
-                                            <td><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
+                                            <td>SARJANAMUDABKOKU00012</td>
+                                            <td>Clarrisa Yong Chu Ni </td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
                                         </tr>
                                         
                                         <tr data-status="Saringan">
-                                            <td>
-                                              Eng Mei Ying
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               PHDBKOKU30012
-                                            </td>
-                                            <td><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                            <td>PHDBKOKU30012</td>
+                                            <td>Eng Mei Ying</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
 
                                         <tr data-status="Tidak Layak">
-                                            <td>
-                                                Ganesan Rao A/L Puven
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANABKOKU03412
-                                            </td>
-                                            <td><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
+                                            <td>SARJANABKOKU03412</td>
+                                            <td>Ganesan Rao A/L Puven</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                               Sarah Yunos
-                                            </td>
-                                            <td>
-                                               PPK
-                                            </td>
-                                            <td>
-                                               DIPPPK01012
-                                            </td>
-                                            
-                                            <td><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
+                                            <td>DIPPPK01012</td>
+                                            <td>Sarah Yunos</td>
+                                            <td>PPK</td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
                                         </tr>
                                         
                                         <tr data-status="Saringan">
-                                            <td>
-                                                Tan Yu Heng
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANAMUDABKOKU90012
-                                            </td>
-                                            
-                                            <td><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
+                                            <td>SARJANAMUDABKOKU90012</td>
+                                            <td>Tan Yu Heng</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
                                         </tr>
                                         
                                         <tr data-status="Layak">
-                                            <td>
-                                               Puah Chu Er
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANABKOKU02012
-                                            </td>
-                                            
-                                            <td><button type="button" class="btn btn-success btn-sm">Layak</button></td>
+                                            <td>SARJANABKOKU02012</td>
+                                            <td>Puah Chu Er</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
-                                            <td>
-                                                Hanisah Binti Yusri
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANAMUDABKOKU66012
-                                            </td>
-                                            
-                                            <td><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                            <td>SARJANAMUDABKOKU66012</td>
+                                            <td>Hanisah Binti Yusri</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
-                                            <td>
-                                                Ramli Bin Sarip
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANAMUDABKOKU77012
-                                            </td>
-                                            
-                                            <td><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                            <td>SARJANAMUDABKOKU77012</td>
+                                            <td>Ramli Bin Sarip</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
-                                        
-                                        {{-- <tr data-status="Tidak Layak">
-                                            <td>
-                                             Choo Mei Er
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANAMUDABKOKU00012
-                                            </td>
-                                            
-                                            <td>Tidak Layak</td>
-                                        </tr> --}}
                                         
                                         <tr data-status="Baru">
-                                            <td>
-                                               Norhayati Binti Sam
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANABKOKU09012
-                                            </td>
-                                            
-                                            <td><button type="button" class="btn btn-info btn-sm">Baru</button></td>
+                                            <td>SARJANABKOKU09012</td>
+                                            <td>Norhayati Binti Sam</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center"><button type="button" class="btn btn-info btn-sm">Baru</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
-                                            <td>
-                                               Shamsiah Binti Yusof
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANABKOKU88012
-                                            </td>
-                                            
-                                            <td><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                            <td>SARJANABKOKU88012</td>
+                                            <td>Shamsiah Binti Yusof</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                        </tr>
+
+                                        <tr data-status="Dikembalikan">
+                                            <td>SARJANABKOKU50012</td>
+                                            <td>Siti Farah Binti Muazin</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
                                         </tr>
                                         
                                         {{-- <tr data-status="Disokong">
@@ -389,21 +285,6 @@
                                             
                                             <td>Disokong</td>
                                         </tr> --}}
-                                        
-                                        <tr data-status="Dikembalikan">
-                                            <td>
-                                               Siti Farah Binti Muazin
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANABKOKU50012
-                                            </td>
-                                            
-                                            <td><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
-                                        </tr>
-                                        
                                         
                                         {{-- <tr data-status="Aktif">
                                             <td>

@@ -19,14 +19,14 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.permohonan.status');
     }
 
-    public function permohonanBaru()
+    public function pengesahanPermohonan()
     {
-        return view('pages.sekretariat.permohonan.baru');
+        return view('pages.sekretariat.permohonan.pengesahan');
     }
 
-    public function pembaharuanPermohonan()
+    public function kembalikanPermohonan()
     {
-        return view('pages.sekretariat.permohonan.pembaharuan');
+        return view('pages.sekretariat.permohonan.kembalikan');
     }
 
     public function keputusanPermohonan()
@@ -35,27 +35,28 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.permohonan.keputusan');
     }
 
-    // public function keputusan(Request $request)
-    // {
-    //     $todayDate = Carbon::now()->format('Y-m-d');
-    //     if($request)
-    //     {
-    //         $keputusanPermohonan = Permohonan::when($request->date != null, function($q) use($request){
-    //                         return $q->whereDate('created_at',$request->date);
-    //                     })
-    //                     ->when($request->keputusan != null, function($q) use($request){
+    public function keputusan(Request $request)
+    {
+        $todayDate = Carbon::now()->format('Y-m-d');
+        $keputusan = ['Layak','Tidak Layak','Dikembalikan'];
+        if($request)
+        {
+            $keputusanPermohonan = Permohonan::when($request->date != null, function($q) use($request){
+                            return $q->whereDate('created_at',$request->date);
+                        })
+                        ->when($request->keputusan != null, function($q) use($request){
 
-    //                         return $q->where('keputusan_message',$request->keputusan);
-    //                     })
-    //                     ->paginate(10);
+                            return $q->where('keputusan_message',$request->keputusan);
+                        })
+                        ->paginate(10);
 
-    //         return view('pages.sekretariat.permohonan.keputusan', compact('keputusanPermohonan'));
-    //     }
-    //     else{
-    //         $keputusanPermohonan = Permohonan::where('user_id')->orderBy('created_at','desc')->paginate();
-    //         return view('pages.sekretariat.permohonan.keputusan', compact('keputusanPermohonan'));
-    //     }
-    // }
+            return view('pages.sekretariat.permohonan.keputusan', compact('keputusanPermohonan'));
+        }
+        else{
+            $keputusanPermohonan = Permohonan::where('user_id')->orderBy('created_at','desc')->paginate();
+            return view('pages.sekretariat.permohonan.keputusan', compact('keputusanPermohonan'));
+        }
+    }
 
     public function muatTurunSuratTawaran()
     {
