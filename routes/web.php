@@ -70,10 +70,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
    
     //Permohonan - Sekretariat
-    Route::get('sekretariatSP', [SekretariatController::class, 'statusPermohonan']);
-    Route::get('sekretariatPengesahan', [SekretariatController::class, 'pengesahanPermohonan']);
+    Route::get('sekretariatStatus', [SekretariatController::class, 'statusPermohonan']);
     Route::get('sekretariatKembalikan', [SekretariatController::class, 'kembalikanPermohonan']);
-    Route::get('sekretariatKP', [SekretariatController::class, 'keputusanPermohonan']);
+    Route::get('sekretariatKeputusan', [SekretariatController::class, 'keputusanPermohonan']);
     Route::get('suratTawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
 });
 
