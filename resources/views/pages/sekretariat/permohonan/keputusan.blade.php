@@ -42,7 +42,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-azura rounded-circle" style="padding-left:0;"><i class="fa fa-close" style="color: white"></i></div>
+                                        <div class="icon-in-bg bg-orange rounded-circle" style="padding-left:0;"><i class="fa fa-close" style="color: white"></i></div>
                                         <div class="ml-4">
                                             <span style="color: black;">Tidak Layak</span>
                                             <h4 class="mb-0 font-weight-medium">1</h4>
@@ -56,7 +56,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-orange rounded-circle" style="padding-left:0;"><i class="fa fa-mail-reply" style="color: white"></i></div>
+                                        <div class="icon-in-bg bg-pink rounded-circle" style="padding-left:0;"><i class="fa fa-mail-reply" style="color: white"></i></div>
                                         <div class="ml-4">
                                             <span style="color: black;">Dikembalikan</span>
                                             <h4 class="mb-0 font-weight-medium">1</h4>

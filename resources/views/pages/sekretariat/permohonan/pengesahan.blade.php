@@ -38,243 +38,212 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-4 col-md-12 col-sm-12">
-                            <h1>Permohonan Baru</h1>
-                          
-                        </div>
-                        <div class="col-lg-8 col-md-12 col-sm-12 text-right">
-                            <div class="body">
-                                <button type="button" class="btn btn-success btn-round" data-toggle="modal" data-target=".launch-pricing-modal">Tambah Pelajar</button> <!-- launch-pricing -->
-                                <div class="modal fade launch-pricing-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">                                            
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                            </div>
-                                            <div class="modal-body pricing_page text-center pt-4 mb-4">
-                                                    <div class="col-lg-12">
-                                                        <div class="card">
-                                                            <div class="header">
-                                                                <h2>Maklumat Pelajar</h2>
-                                                            </div>
-                                                            <div class="body">
-                                                                <div class="form-group c_form_group">
-                                                                    <div class="input-group">
-                                                                        <div class="input-group-prepend">
-                                                                            <span class="input-group-text">Nama</span>
-                                                                        </div>
-                                                                        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group c_form_group">
-                                                                    <div class="input-group">
-                                                                        <div class="input-group-prepend">
-                                                                            <span class="input-group-text">No.Pendaftaran Pelajar/ No.Kad Matrik</span>
-                                                                        </div>
-                                                                        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                                                    </div>
-                                                                </div>
-                                            
-                                                </div> 
-                                                        </div>
-                                                   </div>
-                                
-                                                <div class="col-12">
-                                                    
-                                                    <a href="mohon-baru.html"  class="btn btn-success btn-round">Hantar</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div></div>
-                        </div>
-                        <br>
-                    </div>
-                    <br>
-                 
-                    {{-- <div class="row clearfix">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h2>Permohonan Baru (Keseluruhan)</h2>
-                                <small class="font-12">Jumlah Keseluruhan Permohonan Baru Yang Terkini</small>
-                            </div>
-                            <div class="body">
-                                <div id="chart-donut-d" style="height: 180px"></div>
-                                <div class="mt-2">
-                                    <div class="form-group">
-                                        <label class="d-block">Deraf <span class="float-right">12</span></label>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%; background-color: #2c83b6;"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="d-block">Belum Memohon<span class="float-right">18</span></label>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%; background-color: #a5d8a2;"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="d-block">Telah Dihantar<span class="float-right">15</span></label>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%; background-color: #9367b4;"></div>
-                                        </div>
-                                    </div>
-                                   
-                                </div>
-                            </div>
+                            <h1>Pengesahan Permohonan</h1>
                         </div>
                     </div>
-                   
-                        <div class="col-lg-6 col-md-12">
-                            <div class="card">
-                                <div class="header">
-                                    <h2>Jumlah Keseluruhan Permohonan Yang Dihantar</h2>
-                                    <!--<small class="text-muted">Sales Performance for Online and Offline Revenue <a href="">Learn more</a></small>-->
-                                    <ul class="header-dropdown dropdown">
-                                        <li><a href="javascript:void(0);" class="full-screen"><i class="fa fa-expand"></i></a></li>
-                                        <li class="dropdown">
-                                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                                            <ul class="dropdown-menu theme-bg gradient">
-                                                <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-eye"></i> View Details</a></li>
-                                                <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-share-alt"></i> Share</a></li>
-                                                <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-copy"></i> Copy to</a></li>
-                                                <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-folder"></i> Move to</a></li>
-                                                <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-edit"></i> Rename</a></li>
-                                                <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-trash"></i> Delete</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="body">
-                                    <div class="d-flex flex-row">
-                                        <div class="pb-3">
-                                            <h5 class="mb-0">50</h5>
-                                            <small class="text-muted font-11">Jumlah Didaftarkan</small>
-                                        </div>
-                                        <div class="pb-3 pl-4 pr-4">
-                                            <h5 class="mb-0">27%</h5>
-                                            <small class="text-muted font-11">Deraf</small>
-                                        </div>
-                                        <div class="pb-3">
-                                            <h5 class="mb-0">63%</h5>
-                                            <small class="text-muted font-11">Telah Dihantar</small>
-                                        </div>
-                                        <div class="ml-auto">
-                                            <select class="form-control">
-                                                <option selected="selected">Bulan</option>
-                                                <option>Hari</option>
-                                                <option>Tahun</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div id="bar-chart" style="height: 300px"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
+                </div>        
                 
-                    <div class="row clearfix">
-                        <div class="col-12">
-                            <nav class="navbar navbar-expand-lg navbar-light bg-light page_menu">
-                                <!--<a class="navbar-brand" href="#">M.</a>-->
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                                <i class="fa fa-bars text-muted"></i>
-                                </button>
-                                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                                    <ul class="navbar-nav mr-auto">
-                                        <li class="nav-item vivify swoopInTop delay-150 active"><a class="nav-link" href="">Senarai Pelajar</a></li>
-                                       
-                                    </ul>
-                                   
+             
+                <div class="row clearfix">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file" style="color: white"></i></div>
+                                    <div class="ml-4">
+                                        <span>Jumlah Permohonan</span>
+                                        <h4 class="mb-0 font-weight-medium">700</h4>
+                                    </div>
                                 </div>
-                            </nav>
+                            </div>
                         </div>
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="body">
-                                    <div class="table-responsive invoice_list">
-                                        <table class="table table-hover js-basic-example dataTable">
-                                            <thead>
-                                                <tr> 
-                                                    <th style="width: 20px;">Bil</th>
-                                                    <th>Nama Pelajar</th>
-                                                    <th style="width: 120px;">Kad Pendaftaran Pelajar/ Kad Matrik</th>
-                                                    <th style="width: 80px;">Status Permohonan</th>
-                                                    <th style="width: 100px;">Tindakan</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <span>01</span>
-                                                    </td>
-                                                    <td>
-                                                        <span>Ali Bin Abu</span>
-                                                            
-                                                            
-                                                                                                
-                                                    </td>
-                                                    <td>ACS203009</td>
-                                                    <td> <button type="button" class="btn btn-info ">Belum Memohon</button></td>
-                                                    <td>
-                                                        <a href="permohonan-baru.html" class="btn btn-warning btn-round"><i class="icon-plus"></i> Mohon</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span>02</span>
-                                                    </td>
-                                                    <td>
-                                                        <span>Zoe Baker</span>
-                                                            
-                                                               
-                                                                                              
-                                                    </td>
-                                                    <td>AMS203009</td>
-                                                    <td> <button type="button" class="btn btn-default ">Deraf</button></td>
-                                                    <td>
-                                                        <a href="permohonan-baru.html" class="btn btn-primary btn-round"><i class="icon-pencil"></i> Edit</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span>03</span>
-                                                    </td>
-                                                    <td>   
-                                                        <span>Sarah Binti Hashim</span>                                  
-                                                                                                  
-                                                    </td>
-                                                    <td>CCS202009</td>
-                                                    <td> <button type="button" class="btn btn-info ">Belum Memohon</button></td>
-                                                    <td>
-                                                        <a href="permohonan-baru.html" class="btn btn-warning btn-round"><i class="icon-plus"></i> Mohon</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span>04</span>
-                                                    </td>
-                                                    <td>
-                                                        <span>Akmal Bin Mahmod</span>   
-                                                      
-                                                              
-                                                    </td>
-                                                    <td>ARS201009</td>
-                                                    <td> <button type="button" class="btn btn-success ">Telah Dihantar</button></td>
-                                                    <td>
-                                                        <a href="permohonan-baru.html" class="btn btn-success"><i class="icon-check"></i> Menunggu Keputusan</a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-in-bg bg-azura text-white rounded-circle"><i class="fa fa-check"></i></div>
+                                    <div class="ml-4">
+                                        <span>Layak</span>
+                                        <h4 class="mb-0 font-weight-medium">400</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-warning" style="color: white"></i></div>
+                                    <div class="ml-4">
+                                        <span>Tidak Layak</span>
+                                        <h4 class="mb-0 font-weight-medium">200</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-in-bg bg-pink text-white rounded-circle"><i class="fa fa-reply" style="color: white"></i></div>
+                                    <div class="ml-4">
+                                        <span>Dikembalikan</span>
+                                        <h4 class="mb-0 font-weight-medium">1</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="row clearfix">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>Senarai untuk Pengesahan Permohonan<br><small>Sila lihat pada kolum tindakan untuk pengesahan permohonan</small></h2>
+                                <ul class="header-dropdown dropdown">
+                                    
+                                    <li><a href="javascript:void(0);" class="full-screen"><i class="fa fa-expand"></i></a></li>
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                                        <ul class="dropdown-menu theme-bg gradient">
+                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-eye"></i> View Details</a></li>
+                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-share-alt"></i> Share</a></li>
+                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-copy"></i> Copy to</a></li>
+                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-folder"></i> Move to</a></li>
+                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-edit"></i> Rename</a></li>
+                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-trash"></i> Delete</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover dataTable js-exportable">
+                                        <thead>
+                                            <tr>
+                                                <th><input type="checkbox" name="select_all" value="1" id="example-select-all"></th>
+                                                <th>Nama</th>
+                                                <th>ID Permohonan</th>
+                                                <th>Jenis Permohonan</th>
+                                                <th>Tarikh Permohonan</th>
+                                                <th class="text-center">Status Permohonan</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                               <td><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td>Arina Binti Saleh</td>
+                                                <td><a href="maklumat-pemohon.html" title="">SARJANAMUDABKOKU000011</a></td>
+                                                <td>BKOKU</td>
+                                                <td>7/7/2023</td>
+                                                <td class="text-center"><button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><i class="icon-check"></i> Pengesahan</button>
+                                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Pengesahan Permohonan</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                </div>
+                                                                <div class="modal-body text-center">
+                                                                    <p>Permohonan ini</p>
+                                                                </div>
+                                                                <div class="row clearfix text-center">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="fancy-radio">
+                                                                            <label><input name="lulus" value="male" type="radio"><span><i></i> Layak menerima BKOKU/PPK</span></label>
+                                                                        </div>
+                                                                        <div class="fancy-radio">
+                                                                            <label><input name="tidak_lulus" value="female" type="radio"><span><i></i> Tidak layak menerima BKOKU/PPK</span></label>
+                                                                        </div>
+                                                                        <br>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                                                    <a href="sahkan-permohonan.html" class="btn btn-success btn-round">Ya</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div></td>
+                                              
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td>Choo Mei Ling</td>
+                                                <td><a href="maklumat-pemohon.html" title="">SARJANABKOKU03011</a></td>
+                                                <td>BKOKU</td>
+                                                <td>9/7/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-danger btn-sm"> Tidak Layak</button></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td>Tamila A/P Ganesh</td>
+                                               
+                                                <td><a href="maklumat-pemohon.html" title="">SARJANAMUDABKOKU000011</a></td>
+                                                <td>BKOKU</td>
+                                                <td>9/7/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-info btn-sm"> Kembalikan</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td>Arissa Binti Saleh</td>
+                                                
+                                                <td><a href="maklumat-pemohon.html" title="">DIPLOMABKOKU000011</a></td>
+                                                <td>BKOKU</td>
+                                                <td>7/7/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
+                                            </tr>
+                                          
+                                          
+                                         
+                                        </tbody>
+                                       
+                                    </table>
+                                    <button class="btn btn-warning btn-round" data-toggle="modal" data-target="#exampleModalCenter"><i class="icon-check"></i> Pengesahan</button>
+                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Kembalikan Permohonan</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                </div>
+                                                <div class="modal-body text-center">
+                                                    <p>Pengesahan Permohonan ini</p>
+                                                </div>
+                                                <div class="row clearfix text-center">
+                                                    <div class="col-lg-12">
+                                                        <div class="fancy-radio">
+                                                            <label><input name="lulus" value="male" type="radio"><span><i></i> Layak menerima BKOKU/PPK</span></label>
+                                                        </div>
+                                                        <div class="fancy-radio">
+                                                            <label><input name="tidak_lulus" value="female" type="radio"><span><i></i> Tidak layak menerima BKOKU/PPK</span></label>
+                                                        </div>
+                                                        <br>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                                    <a href="sahkan-permohonan.html"  class="btn btn-success btn-round">Ya</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
             </div>
         </div>
+    
         
         <!-- Javascript -->
         <script src="assets/bundles/libscripts.bundle.js"></script>    
@@ -308,4 +277,5 @@
         <script src="../js/pages/tables/jquery-datatable.js"></script>
         <script src="../js/pages/charts/morris.js"></script>
         <script src="../js/pages/charts/c3.js"></script>
+    </body>
 </x-default-layout> 
