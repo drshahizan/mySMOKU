@@ -14,82 +14,123 @@
 
     <body>
         <!-- Main body part  -->
-        <div class="py-3 py-md-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="shadow bg-white p-3">
-                            <div class="card-header">
-                                <h1><b>Keputusan Permohonan BKOKU</b>
-                            </div>
-                            <hr>
-                            
-                            <div class="card-body">
-                                <form action="" method="GET">
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            {{-- <label style="color:black">Tapis mengikut Tarikh</label> --}}
-                                            <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
-                                        </div>
-        
-                                        <div class="col-md-2">
-                                            {{-- <label style="color:black">Tapis mengikut Keputusan</label> --}}
-                                            <select name="status" class="form-select">
-                                                <option value="">Pilih Keputusan</option>
-                                                <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
-                                                <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
-                                                <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
-                                            </select>
-                                        </div>
-        
-                                        <div class="col-md-6">
-                                            <button type="submit" class="btn btn-primary" style="width: 10%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
+        <div id="main-content">
+            <div class="container-fluid">
+                <div class="block-header">
+                    <div class="row clearfix">
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                            <h1><b>Keputusan Permohonan BKOKU</b></h1>
+                        </div>
+                        <hr>
+
+                        {{-- Card Tile --}}
+                        <div class="col-lg-4 col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon-in-bg bg-indigo text-white rounded-circle" style="padding-left:0;"><i class="fa fa-check"></i></div>
+                                        <div class="ml-4">
+                                            <span style="color: black;">Layak</span>
+                                            <h4 class="mb-0 font-weight-medium">1</h4>
                                         </div>
                                     </div>
-                                </form>
-        
-                                <div class="table-responsive">
-                                    <table id="sortTable" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr style="color:black; font-size:12px;">
-                                                <th style="width: 15%">ID Tuntutan</th>
-                                                <th style="width: 30%">Nama</th>
-                                                <th style="width: 30%">Catatan</th>
-                                                <th style="width: 10%" class="text-center">Tarikh Tuntutan</th>
-                                                <th style="width: 15%" class="text-center">Keputusan Tuntutan</th>
-                                            </tr>
-                                        </thead>
-                                            
-                                        <tbody> 
-                                                <tr>
-                                                    <td><a href="tuntut-Ali.html">TTBKOKU00012</a></td> 
-                                                    <td>Ali Bin Abu</td> 
-                                                    {{-- <td>Surat Tawaran<span style="float: right;"><a href="#" class="fa fa-print" aria-hidden="true" style="font-size:16px;"></a></span></td> --}}
-                                                    <td>
-                                                        <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-success btn-round btn-sm"><i class="fa fa-print"></i>  Muat Turun Surat Tawaran</a>
-                                                    </td>
-                                                    <td class="text-center">2/7/2023</td>
-                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td><a href="#">TTBKOKU01012</a></td> 
-                                                    <td>Sarah Binti Md Yunos</td>
-                                                    <td>Anda tidak disahkan sebagai pelajar OKU</td> 
-                                                    <td class="text-center">4/7/2022</td>
-                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm"> Tidak Layak</button></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td><a href="#">TTBKOKU90012</a></td>
-                                                    <td> Eng Mei Ying </td>
-                                                    <td> Terdapat kesilapan dalam butiran resit </td>
-                                                    <td class="text-center">2/2/2022</td>
-                                                    <td class="text-center"><button type="button" class="btn btn-warning btn-sm"> Dikembalikan</button></td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon-in-bg bg-azura rounded-circle" style="padding-left:0;"><i class="fa fa-close" style="color: white"></i></div>
+                                        <div class="ml-4">
+                                            <span style="color: black;">Tidak Layak</span>
+                                            <h4 class="mb-0 font-weight-medium">1</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon-in-bg bg-orange rounded-circle" style="padding-left:0;"><i class="fa fa-mail-reply" style="color: white"></i></div>
+                                        <div class="ml-4">
+                                            <span style="color: black;">Dikembalikan</span>
+                                            <h4 class="mb-0 font-weight-medium">1</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- End of Card Tile --}}
+                            
+                        <div class="card-body">
+                            <form action="" method="GET">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        {{-- <label style="color:black">Tapis mengikut Tarikh</label> --}}
+                                        <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
+                                    </div>
+    
+                                    <div class="col-md-2">
+                                        {{-- <label style="color:black">Tapis mengikut Keputusan</label> --}}
+                                        <select name="status" class="form-select">
+                                            <option value="">Pilih Keputusan</option>
+                                            <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
+                                            <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
+                                            <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
+                                        </select>
+                                    </div>
+    
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-primary" style="width: 10%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+    
+                            <div class="table-responsive">
+                                <table id="sortTable" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 15%">ID Tuntutan</th>
+                                            <th style="width: 30%">Nama</th>
+                                            <th style="width: 28%">Catatan</th>
+                                            <th style="width: 12%" class="text-center">Tarikh Tuntutan</th>
+                                            <th style="width: 15%" class="text-center">Keputusan Tuntutan</th>
+                                        </tr>
+                                    </thead>
+                                        
+                                    <tbody> 
+                                        <tr>
+                                            <td>TTBKOKU00012</td> 
+                                            <td>Ali Bin Abu</td> 
+                                            <td>
+                                                <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-success btn-round btn-sm"><i class="fa fa-print"></i>  Muat Turun Surat Tawaran</a>
+                                            </td>
+                                            <td class="text-center">2/7/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>TTBKOKU01012</td> 
+                                            <td>Sarah Binti Md Yunos</td>
+                                            <td>Anda tidak disahkan sebagai pelajar OKU</td> 
+                                            <td class="text-center">4/7/2022</td>
+                                            <td class="text-center"><button type="button" class="btn btn-danger btn-sm"> Tidak Layak</button></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>TTBKOKU90012</td>
+                                            <td>Eng Mei Ying </td>
+                                            <td>Terdapat kesilapan dalam butiran resit </td>
+                                            <td class="text-center">2/2/2022</td>
+                                            <td class="text-center"><button type="button" class="btn btn-warning btn-sm"> Dikembalikan</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
