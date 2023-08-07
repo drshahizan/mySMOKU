@@ -17,7 +17,7 @@
                             </ul>
                             <div class="ml-auto">
                                 <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank"><button type="button" class="btn btn-sm btn-default" title="Print"><i class="fa fa-print"></i></button></a>
-                                <button type="button" class="btn btn-sm btn-default" title="Delete" onclick="confirmButton()"><i class="fa fa-trash"></i></button>
+                                {{-- <button type="button" class="btn btn-sm btn-default" title="Delete" onclick="confirmButton()"><i class="fa fa-trash"></i></button> --}}
                             </div>
                         </div>
                     </nav>
@@ -26,7 +26,7 @@
                     <div class="card">
                         <div class="body">
                             <div class="d-flex align-items-center">
-                                <img src="https://www.shareicon.net/data/128x128/2016/05/24/770085_man_512x512.png" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar Name">
+                                <img class="img" src="https://www.shareicon.net/data/128x128/2016/05/24/770085_man_512x512.png" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar Name">
                                 <div class="ml-3">
                                     Ali Bin Abu
                                     <p class="mb-0">alibinabu@graduate.utm.my</p>
