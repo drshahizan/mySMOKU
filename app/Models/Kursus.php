@@ -14,7 +14,7 @@ class Kursus extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
-    protected $table = 'eipts';
+    protected $table = 'kursus';
 
     /**
      * The attributes that are mass assignable.
