@@ -271,7 +271,7 @@
 																	<select name="jantina" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 																		<option></option>
 																		<option value="1">Lelaki</option>
-																		<option value="2">Perempaun</option>
+																		<option value="2">Perempuan</option>
 																	</select>
 																	<!--end::Input-->
 																</div>
