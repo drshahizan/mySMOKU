@@ -44,6 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /*Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post'); */
 
+
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::post('permohonan', [PermohonanController::class, 'store'])->name('permohonan.post');
     Route::get('viewpermohonan', [PermohonanController::class, 'viewpermohonan'])->name('viewpermohonan');
@@ -53,7 +54,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('maklumat-profil-diri', [SaringanController::class, 'maklumatProfilDiri'])->name('id');
     Route::get('maklumat-akademik', [SaringanController::class, 'maklumatAkademik'])->name('id');
     Route::get('salinan-dokumen', [SaringanController::class, 'salinanDokumen'])->name('id');
-    Route::get('muat-turun', [SaringanController::class, 'muatTurun']);
+    Route::get('cetak-senarai-pemohon', [SaringanController::class, 'cetakSenaraiPemohon']);
+    Route::get('cetak-maklumat-pemohon', [SaringanController::class, 'cetakMaklumatPemohon']);
+    Route::get('send-mail', function () {
+   
+        $details = [
+            'title' => 'Mail from ItSolutionStuff.com',
+            'body' => 'This is for testing email using smtp'
+        ];
+       
+        \Mail::to('ziba0506@gmail.com')->send(new \App\Mail\SaringanMail($details));
+       
+        dd("Email is Sent.");
+    });
    
     //Permohonan - Sekretariat
     Route::get('sekretariatSP', [SekretariatController::class, 'statusPermohonan']);
