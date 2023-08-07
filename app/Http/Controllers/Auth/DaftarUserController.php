@@ -48,7 +48,8 @@ class DaftarUserController extends Controller
     
                 ]);
 
-                return view('pages.auth.semaksyarat');
+                //return view('pages.auth.semaksyarat');
+                return redirect()->route('semaksyarat');
             } else {
 
                 //return view('pages.auth.login')->with('successMsg','Maklumat anda tiada dalam semakkan SMOKU');

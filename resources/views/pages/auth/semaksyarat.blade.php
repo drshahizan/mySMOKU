@@ -1,8 +1,8 @@
 <x-auth-layout>
 
     <!--begin::Form-->
-    <form class="form w-100" novalidate="novalidate" id="kt_sign_up_form" data-kt-redirect-url="{{ route('daftarlayak') }}" action="{{ route('semaksyarat') }}">
-        
+    <form class="form w-100"  action="{{ route('semaksyarat') }}" method="post">
+    @csrf
         <!--begin::Heading-->
         <div class="text-center mb-11">
             <!--begin::Title-->
@@ -18,7 +18,7 @@
         </div>
        
         <div class="fv-row mb-10">
-        @csrf
+        
 			<label class="form-label required">Adakah anda penerima Hadiah Latihan Persekutuan?</label>	
 			<div class="row mb-2" data-kt-buttons="true">
 			<!--begin::Col-->
@@ -68,7 +68,7 @@
 
         <div class="fv-row mb-10">
 		@csrf														
-            <label class="form-label required">Nama Institusi</label>
+            <label class="form-label required">Nama Pusat Pengajian</label>
             <select name="id_institusi" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
             <option></option>
             <option value="1">Universiti Malaysia Sabah</option>
@@ -87,7 +87,7 @@
         <!-- </div> -->
 
         <div class="fv-row mb-10">
-            <label class="form-label required">Peringkat</label>
+            <label class="form-label required">Peringkat Pengajian</label>
             <select name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
                 <option></option>
                 <option value="1">Sijil Asas / Sijil</option>
@@ -117,8 +117,8 @@
 
         <!--begin::Submit button-->
         <div class="d-grid mb-10">
-            <button type="submit" id="kt_sign_up_submit" class="btn btn-primary"> Semak Kelayakan
-                @include('partials/general/_button-indicator', ['label' => 'Semak'])
+            <button type="submit"  class="btn btn-primary">
+                Semak
             </button>
         </div>
         <!--end::Submit button-->
