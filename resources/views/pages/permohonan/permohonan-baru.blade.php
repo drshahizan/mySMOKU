@@ -952,14 +952,14 @@
 															</label>
 															<!--end::Label-->
 															<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+    <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"  name="jenis_tuntutan" />
     <label class="form-check-label" for="flexCheckDefaultb" >
         Yuran Tuntutan
     </label>
 </div>
 <br>
 <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+    <input class="form-check-input" type="checkbox" value="2" id="flexCheckDefault"  name="jenis_tuntutan" />
     <label class="form-check-label" for="flexCheckDefault">
         Elaun Wang Saku
     </label>
