@@ -718,7 +718,7 @@
 																<!--begin::Row-->
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
-																	<select name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Peringkat Pengajian">
+																	<select name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																			<option></option>
 																			<option value="1">Sijil Asas / Sijil</option>
 																			<option value="2">Diploma</option>
@@ -738,7 +738,7 @@
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Nama Pusat Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																		<select name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Nama Pusat Pengajian">
+																		<select name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																			<option></option>
 																			<option value="1">Universiti Malaysia Sabah</option>
 																			<option value="2">Universiti Kebangsaan Malaysia</option>
@@ -794,7 +794,7 @@
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
 																	
-																		<select name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="">
+																		<select name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																			<option></option>
 																			<option value="1">1</option>
 																			<option value="2">2</option>
@@ -835,7 +835,7 @@
 																<!--begin::Row-->
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
-																		<select name="bil_bulanpersem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="">
+																		<select name="bil_bulanpersem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																			<option></option>
 																			<option value="4">4</option>
 																			<option value="6">6</option>
@@ -851,7 +851,7 @@
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																		<select name="mod" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="">
+																		<select name="mod" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																			<option></option>
 																			<option value="1">Sepenuh Masa</option>
 																			<option value="2">Separuh Masa</option>
@@ -884,7 +884,7 @@
 																<!--begin::Row-->
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
-																		<select name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="">
+																		<select name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																			<option></option>
 																			<option value="1">Biasiswa</option>
 																			<option value="2">Tajaan Majikan</option>
@@ -965,17 +965,7 @@
     </label>
 </div>
 														</div>
-														
-
-														
-
-														
-
-														
-															
-														
-
-														
+		
 													</div>
 													<!--end::Wrapper-->
 												</div>
@@ -999,17 +989,15 @@
 														<!--end::Heading-->
 														
 														<div class="d-flex flex-column mb-7 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																
-																<span class="required">Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
+														<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+    <label class="form-check-label" for="flexCheckDefault">
+	Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
 																sekiranya maklumat yang diberikan didapati palsu atau tidak benar, pihak kementerian berhak menolak
 																permohonan saya dan menghentikan bantuan kewangan ini kepada saya
-																</span>
-																
-															</label>
-															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="" name="perakuan" value="" />
+    </label>
+</div>
+															
 														</div>
 
 														

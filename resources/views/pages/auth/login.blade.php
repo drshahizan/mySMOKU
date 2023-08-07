@@ -10,6 +10,8 @@
             <img alt="Logo" src="{{ image('logos/1.1.png') }}" class="h-100px h-lg-90px"/>
             <br>
             <br>
+            <br>
+            <br>
             <img alt="Logo" src="{{ image('logos/3.1.svg') }}" class="h-100px h-lg-70px"/>
                 
             <!-- </h1> -->
@@ -17,7 +19,7 @@
 
             <!--begin::Subtitle-->
             <div class="text-gray-500 fw-semibold fs-6">
-                Log Masuk ke Akaun Anda
+                Log Masuk
             </div>
             
             <!--end::Subtitle--->
