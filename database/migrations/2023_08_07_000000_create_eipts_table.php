@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('smoku', function (Blueprint $table) {
+        Schema::create('eipts', function (Blueprint $table) {
             $table->id();
-            $table->string('nokp')->unique();
-            $table->string('nama');
-            $table->integer('verify')->nullable();
+            $table->integer('idipt');
+            $table->string('nama_kursus');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('smoku');
+        Schema::dropIfExists('eipts');
     }
 };
