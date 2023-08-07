@@ -511,7 +511,7 @@
 															<!--begin::Label-->
 															<div class="col-md-6 fv-row hubungan_row">
 															<label class="form-label mb-6">Hubungan Waris</label>
-															<select name="hubungan" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+															<select name="hubungan" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 																<option></option>
 																<option value="1">Ibu</option>
 																<option value="2">Bapa</option>
@@ -521,12 +521,12 @@
 																<option value="6">Lain-lain</option>
 															</select>
 														</div>
-															<div class="col-md-6 fv-row nama_waris1">
+															<div class="col-md-6 fv-row lain_hubungan">
 															<!--begin::Label-->
-															<label class="form-label mb-6">Lain-lain:</label>
+															<label class="form-label mb-6">Sila Nyatakan:</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid" name="lain_hubungan" placeholder="" value="" />
+															<input type="text" class="form-control form-control-lg form-control-solid lain_hubungan_input" name="lain_hubungan" placeholder="" value="" />
 															<!--end::Input-->													
 															</div>
 														</div>
@@ -1084,6 +1084,21 @@
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 
-
+		<script>
+			$(function(){
+				$(".lain_hubungan").hide();
+				$('.hubungan_waris').change(function(){ 
+					var value = $(this).val();
+					if(value == "Lain-lain"){
+						$(".lain_hubungan").show();
+					}else{
+						$(".lain_hubungan_input").val("");
+						$(".lain_hubungan").hide();
+					}
+				});
+				
+			});
+			
+		</script>
 
 </x-default-layout>
