@@ -212,7 +212,7 @@
 														<!--begin::Input group-->
 														<div class="row mb-10">
 															<!--begin::Col-->
-															<div class="col-md-4 fv-row">
+															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">No. Kad Pengenalan</label>
 																<!--end::Label-->
@@ -240,7 +240,7 @@
 																	</div>
 																</div>	
 																</div>
-																<div class="col-md-2 fv-row">
+																<div class="col-md-3 fv-row">
 																<label class=" fs-6 fw-semibold form-label mb-2">Umur</label>
 																<!--end::Label-->
 																<div class="row fv-row">
@@ -254,7 +254,14 @@
 															</div>
 																
 																</div>	
-																<div class="col-md-3 fv-row">
+																
+															<!--end::Col-->
+															<!--begin::Col-->
+															
+															<!--end::Col-->
+														</div>
+														<div class="row mb-10">
+														<div class="col-md-6 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">Jantina</label>
 																<!--end::Label-->
@@ -270,11 +277,25 @@
 																</div>
 																<!--end::Input wrapper-->
 															</div>
-															<!--end::Col-->
-															<!--begin::Col-->
-															
-															<!--end::Col-->
-														</div>
+														<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mb-2">Bangsa
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<select name="bangsa" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+																		<option></option>
+																		<option value="1">Melayu</option>
+																		<option value="2">India</option>
+																		<option value="3">Cina</option>
+																	</select>
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+</div>
 														<!--begin::Input group-->
 														<div class="fv-row mb-10">
 															<!--end::Label-->
@@ -382,7 +403,7 @@
 															<!--end::Notice-->
 														</div>
 														<div class="row mb-10">
-															<div class="col-md-4 fv-row">
+															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">No. JKM
 																</label>
@@ -395,7 +416,7 @@
 																</div>
 																<!--end::Input wrapper-->
 															</div>
-															<div class="col-md-4 fv-row">
+															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
 																<label class="fs-6 fw-semibold form-label mb-2">Kecacatan
 																</label>
@@ -408,24 +429,7 @@
 																</div>
 																<!--end::Input wrapper-->
 															</div>
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
-																<label class="fs-6 fw-semibold form-label mb-2">Bangsa
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<select name="bangsa" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-																		<option></option>
-																		<option value="1">Melayu</option>
-																		<option value="2">India</option>
-																		<option value="3">Cina</option>
-																	</select>
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
+															
 														</div>
 														<!--end::Input group-->
 														<!--begin::Input group-->
@@ -452,15 +456,19 @@
 																</div>
 																<!--end::Input wrapper-->
 															</div>
+															<div class="col-md-6 fv-row">
+															<div class="col-12">
 															<button type="button" class="btn btn-flex btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_upload">
 															<i class="ki-duotone ki-folder-up fs-2">
 														<span class="path1"></span>
 														<span class="path2"></span>
 													</i>Muat Naik Salinan Bank Penyata</button>
 														</div>
-														
+														</div>
+														</div>
 														<!--end::Input group-->
 													</div>
+													
 													<!--end::Wrapper-->
 												</div>
 												<!--end::Step 1-->
@@ -598,7 +606,7 @@
 														</div>
 														<!--end::Input group-->
 														<div class="row mb-10">
-															<div class="col-md-4 fv-row">
+															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
 																<label class="fs-6 fw-semibold form-label mb-2">No. Tel(HP)
 																</label>
@@ -611,7 +619,7 @@
 																</div>
 																<!--end::Input wrapper-->
 															</div>
-															<div class="col-md-4 fv-row">
+															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
 																<label class="fs-6 fw-semibold form-label mb-2">No. Tel Rumah
 																</label>
@@ -624,7 +632,23 @@
 																</div>
 																<!--end::Input wrapper-->
 															</div>
-															<div class="col-md-4 fv-row">
+</div>
+<div class="row mb-10">
+
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mb-2">Pekerjaan
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="pendapatan" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
 																<label class="fs-6 fw-semibold form-label mb-2">Pendapatan
 																</label>
@@ -637,9 +661,9 @@
 																</div>
 																<!--end::Input wrapper-->
 															</div>
-														</div>
+														
 					
-										
+</div>
 													<!--end::Input group-->
 													</div>
 													<!--end::Wrapper-->
@@ -662,10 +686,11 @@
 														</div>
 														<!--end::Heading-->
 														<!--begin::Input group-->
+
 														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
 															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="required">No Pendaftaran Pelajar</span>
+																<span class="">No Pendaftaran Pelajar</span>
 																
 															</label>
 															<!--end::Label-->
@@ -674,7 +699,7 @@
 														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
 															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="required">Nama Kursus</span>
+																<span class="">Nama Kursus</span>
 																
 															</label>
 															<!--end::Label-->
@@ -688,7 +713,7 @@
 															<!--begin::Col-->
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
+																<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Row-->
 																<div class="row fv-row">
@@ -738,7 +763,7 @@
 															<!--begin::Col-->
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">Tarikh Mula Pengajian</label>
+																<label class="fs-6 fw-semibold form-label mb-2">Tarikh Mula Pengajian</label>
 																<!--end::Label-->
 																	<!--begin::Input wrapper-->
 																	<input type="date" class="form-control form-control-solid" placeholder="" name="tkh_mula" value="" />
@@ -763,13 +788,13 @@
 															<!--begin::Col-->
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">Semester Semasa</label>
+																<label class=" fs-6 fw-semibold form-label mb-2">Semester Semasa</label>
 																<!--end::Label-->
 																<!--begin::Row-->
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
 																	
-																		<select name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
+																		<select name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="">
 																			<option></option>
 																			<option value="1">1</option>
 																			<option value="2">2</option>
@@ -792,7 +817,7 @@
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																	<input type="text" class="form-control form-control-solid" placeholder="Tahun" name="tempoh_pengajian" value="" />
+																	<input type="text" class="form-control form-control-solid" placeholder="" name="tempoh_pengajian" value="" />
 																	
 																	<!--end::Input wrapper-->
 															</div>
@@ -805,16 +830,15 @@
 															<!--begin::Col-->
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">Bil Bulan Persemester</label>
+																<label class=" fs-6 fw-semibold form-label mb-2">Bil Bulan Persemester</label>
 																<!--end::Label-->
 																<!--begin::Row-->
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
-																		<select name="bil_bulanpersem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
+																		<select name="bil_bulanpersem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="">
 																			<option></option>
-																			<option value="1">1</option>
-																			<option value="2">2</option>
-																			<option value="3">3</option>
+																			<option value="4">4</option>
+																			<option value="6">6</option>
 																		</select>
 																	<!--end::Input wrapper-->
 																</div>
@@ -827,7 +851,7 @@
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																		<select name="mod" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
+																		<select name="mod" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="">
 																			<option></option>
 																			<option value="1">Sepenuh Masa</option>
 																			<option value="2">Separuh Masa</option>
@@ -843,7 +867,7 @@
 														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
 															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="required">CGPA Terkini</span>
+																<span class="">CGPA Terkini</span>
 																
 															</label>
 															<!--end::Label-->
@@ -855,12 +879,12 @@
 															<!--begin::Col-->
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label>
+																<label class=" fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label>
 																<!--end::Label-->
 																<!--begin::Row-->
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
-																		<select name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Semester">
+																		<select name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="">
 																			<option></option>
 																			<option value="1">Biasiswa</option>
 																			<option value="2">Tajaan Majikan</option>
@@ -889,7 +913,7 @@
 														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
 															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="required">Nama Penaja</span>
+																<span class="">Nama Penaja</span>
 																
 															</label>
 															<!--end::Label-->
@@ -909,10 +933,10 @@
 														<!--begin::Heading-->
 														<div class="pb-10 pb-lg-15">
 															<!--begin::Title-->
-															<h2 class="fw-bold text-dark">Maklumat Tuntutan</h2>
+															<h2 class="fw-bold text-dark">Maklumat Tuntutan Yuran</h2>
 															<!--end::Title-->
 															<!--begin::Notice-->
-															<div class="text-muted fw-semibold fs-6">Tuntutan</div>
+															<div class="text-muted fw-semibold fs-6">Tuntutan Yuran</div>
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
@@ -927,25 +951,30 @@
 																
 															</label>
 															<!--end::Label-->
-															<select name="jenis_tuntutan" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Jenis">
-																<option></option>
-																<option value="1">Yuran</option>
-																<option value="2">Elaun Wang Saku</option>
-															</select>
+															<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+    <label class="form-check-label" for="flexCheckDefaultb" >
+        Yuran Tuntutan
+    </label>
+</div>
+<br>
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+    <label class="form-check-label" for="flexCheckDefault">
+        Elaun Wang Saku
+    </label>
+</div>
 														</div>
 														
 
-														<div class="d-flex flex-column mb-7 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="required">Amaun</span>
-																
-															</label>
-															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="RM" name="amaun" value="" />
-														</div>
+														
 
 														
+
+														
+															
+														
+
 														
 													</div>
 													<!--end::Wrapper-->
@@ -1095,6 +1124,7 @@
 		<!--begin::Custom Javascript(used for this page only)-->
 		<script src="assets/js/custom/utilities/modals/create-account.js"></script>
 		<script src="assets/js/custom/apps/file-manager/list.js"></script>
+		<script src="assets/js/custom/utilities/modals/create-app.js"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 
