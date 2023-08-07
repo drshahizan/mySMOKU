@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->nokp;
     }
+	
+	public function tahap()
+    {
+        return $this->tahap;
+    }
 }
