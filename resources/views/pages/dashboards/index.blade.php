@@ -8,7 +8,7 @@
 	<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
 		<!--begin::Item-->
 		<li class="breadcrumb-item text-muted">
-			<a href="/" class="text-muted text-hover-primary" style="color:darkblue">Laman Utama</a>
+			<a href="/" class="text-dark text-hover-primary" style="color:darkblue">Laman Utama</a>
 		</li>
 		<!--end::Item-->
 		<!--begin::Item-->
@@ -17,7 +17,7 @@
 		</li>
 		<!--end::Item-->
 		<!--begin::Item-->
-		<li class="breadcrumb-item text-muted" style="color:darkblue">Paparan Pemuka</li>
+		<li class="breadcrumb-item text-dark" style="color:darkblue">Paparan Pemuka</li>
 		<!--end::Item-->
 	</ul>
 	<!--end::Breadcrumb-->
