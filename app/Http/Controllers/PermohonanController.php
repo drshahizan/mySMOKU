@@ -98,6 +98,7 @@ class PermohonanController extends Controller
             'sem_semasa' => $request->sem_semasa,
             'tempoh_pengajian' => $request->tempoh_pengajian,
             'bil_bulanpersem' => $request->bil_bulanpersem,
+            'mod' => $request->mod,
             'cgpa' => $request->cgpa,
             'sumber_biaya' => $request->sumber_biaya,
             'nama_penaja' => $request->nama_penaja,
