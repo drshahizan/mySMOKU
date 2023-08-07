@@ -964,6 +964,17 @@
         Elaun Wang Saku
     </label>
 </div>
+<br>
+<br>
+<div class="col-12">
+<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun</label>
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="amaun" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+
+
+
 														</div>
 		
 													</div>
@@ -990,7 +1001,7 @@
 														
 														<div class="d-flex flex-column mb-7 fv-row">
 														<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="perakuan"/>
     <label class="form-check-label" for="flexCheckDefault">
 	Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
 																sekiranya maklumat yang diberikan didapati palsu atau tidak benar, pihak kementerian berhak menolak
