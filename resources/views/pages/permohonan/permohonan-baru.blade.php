@@ -214,7 +214,7 @@
 															<!--begin::Col-->
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">No. Kad Pengenalan</label>
+																<label class=" fs-6 fw-semibold form-label mb-2">No. Kad Pengenalan</label>
 																<!--end::Label-->
 																<!--begin::Row-->
 																<div class="row fv-row">
@@ -228,7 +228,7 @@
 															</div>
 															<div class="col-md-3 fv-row">
 																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">Tarikh Lahir</label>
+																<label class=" fs-6 fw-semibold form-label mb-2">Tarikh Lahir</label>
 																<!--end::Label-->
 																<!--begin::Row-->
 																<div class="row fv-row">
@@ -241,7 +241,7 @@
 																</div>	
 																</div>
 																<div class="col-md-2 fv-row">
-																<label class="required fs-6 fw-semibold form-label mb-2">Umur</label>
+																<label class=" fs-6 fw-semibold form-label mb-2">Umur</label>
 																<!--end::Label-->
 																<div class="row fv-row">
 																<!--begin::Input wrapper-->
@@ -256,7 +256,7 @@
 																</div>	
 																<div class="col-md-3 fv-row">
 																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">Jantina</label>
+																<label class=" fs-6 fw-semibold form-label mb-2">Jantina</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
 																<div class="col-12">
@@ -276,11 +276,115 @@
 															<!--end::Col-->
 														</div>
 														<!--begin::Input group-->
-														<div class="separator my-14"></div>
+														<div class="fv-row mb-10">
+															<!--end::Label-->
+															<label class="form-label">Alamat Rumah</label>
+															<!--end::Label-->
+															<!--begin::Input-->
+															<textarea name="alamat1" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
+															<!--end::Input-->
+														</div>
 														<div class="row mb-10">
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">No. JKM
+																<label class=" fs-6 fw-semibold form-label mb-2">Poskod
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="alamat_poskod" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">Bandar
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="bandar" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">Negeri
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="alamat_negeri" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<div class="row mb-10">
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">No. Tel(HP)
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="no_tel" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">No. Tel Rumah
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="no_telR" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+														</div>
+														
+														<!--end::Input group-->
+														<!--end::Input group-->
+														<div class="row mb-10">
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">Alamat emel
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="emel" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+														<div class="separator my-14"></div>
+														<div class="pb-10 pb-lg-15">
+															<!--begin::Title-->
+															<h2 class="fw-bold text-dark">Maklumat Sistem Maklumat Orang Kurang Upaya (SMOKU)</h2>
+															<!--end::Title-->
+															<!--begin::Notice-->
+															<div class="text-muted fw-semibold fs-6">Jabatan Kebajikan Malaysia 
+															</div>
+															<!--end::Notice-->
+														</div>
+														<div class="row mb-10">
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">No. JKM
 																</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
@@ -293,7 +397,7 @@
 															</div>
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">Kecacatan
+																<label class="fs-6 fw-semibold form-label mb-2">Kecacatan
 																</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
@@ -306,7 +410,7 @@
 															</div>
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">Bangsa
+																<label class="fs-6 fw-semibold form-label mb-2">Bangsa
 																</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
@@ -325,104 +429,10 @@
 														</div>
 														<!--end::Input group-->
 														<!--begin::Input group-->
-														<div class="fv-row mb-10">
-															<!--end::Label-->
-															<label class="form-label">Alamat Rumah</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<textarea name="alamat1" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
-															<!--end::Input-->
-														</div>
-														<div class="row mb-10">
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">Poskod
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamat_poskod" placeholder="" value="" />
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">Bandar
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="bandar" placeholder="" value="" />
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">Negeri
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamat_negeri" placeholder="" value="" />
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
-														</div>
-														<!--end::Input group-->
-														<div class="row mb-10">
-															<div class="col-md-6 fv-row">
-																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">No. Tel(HP)
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_tel" placeholder="" value="" />
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
-															<div class="col-md-6 fv-row">
-																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">No. Tel Rumah
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_telR" placeholder="" value="" />
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
-														</div>
 														
-														<!--end::Input group-->
-														<!--end::Input group-->
-														<div class="row mb-10">
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">Alamat emel
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="emel" placeholder="" value="" />
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
-															<div class="col-md-6 fv-row">
-																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">No. Akaun Bank
+																<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank
 																</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
