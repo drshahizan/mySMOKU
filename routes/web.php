@@ -10,6 +10,7 @@ use App\Http\Controllers\SaringanController;
 use App\Http\Controllers\SekretariatController;
 use App\Models\Permohonan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +64,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'body' => 'This is for testing email using smtp'
         ];
        
-        \Mail::to('ziba0506@gmail.com')->send(new \App\Mail\SaringanMail($details));
+        Mail::to('ziba0506@gmail.com')->send(new \App\Mail\SaringanMail($details));
        
         dd("Email is Sent.");
     });

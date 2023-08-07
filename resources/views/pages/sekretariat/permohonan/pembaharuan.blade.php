@@ -21,12 +21,12 @@
                     <div class="row clearfix">
                         <div class="col-lg-4 col-md-12 col-sm-12">
                             <h1>Pembaharuan Permohonan</h1>
-                          
+                            <hr>
                         </div>
                     </div>
                     <br>
                     <div class="row clearfix">
-                    <div class="col-lg-6 col-md-12">
+                    {{-- <div class="col-lg-6 col-md-12">
                         <div class="card">
                             <div class="header">
                                 <h2>Jumlah Keseluruhan Permohonan</h2>
@@ -81,7 +81,7 @@
                                 <div id="bar-chart" style="height: 300px"></div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="row clearfix">
                     <div class="col-12">

@@ -91,7 +91,7 @@
                     </div>
                     <br>
                  
-                    <div class="row clearfix">
+                    {{-- <div class="row clearfix">
                     <div class="col-lg-6 col-md-12">
                         <div class="card">
                             <div class="header">
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 
                     <div class="row clearfix">
                         <div class="col-12">
