@@ -50,7 +50,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file" style="color: white"></i></div>
-                                    <div class="ml-4">
+                                    <div class="ml-4" style="color: black;">
                                         <span>Jumlah Permohonan</span>
                                         <h4 class="mb-0 font-weight-medium">700</h4>
                                     </div>
@@ -63,7 +63,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="icon-in-bg bg-azura text-white rounded-circle"><i class="fa fa-check"></i></div>
-                                    <div class="ml-4">
+                                    <div class="ml-4" style="color: black;">
                                         <span>Layak</span>
                                         <h4 class="mb-0 font-weight-medium">400</h4>
                                     </div>
@@ -76,7 +76,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-warning" style="color: white"></i></div>
-                                    <div class="ml-4">
+                                    <div class="ml-4" style="color: black;">
                                         <span>Tidak Layak</span>
                                         <h4 class="mb-0 font-weight-medium">200</h4>
                                     </div>
@@ -89,7 +89,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="icon-in-bg bg-pink text-white rounded-circle"><i class="fa fa-reply" style="color: white"></i></div>
-                                    <div class="ml-4">
+                                    <div class="ml-4" style="color: black;">
                                         <span>Dikembalikan</span>
                                         <h4 class="mb-0 font-weight-medium">1</h4>
                                     </div>

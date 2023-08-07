@@ -31,9 +31,9 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file" style="color: white"></i></div>
-                                    <div class="ml-4">
-                                        <span> Permohonan Dikembali</span>
-                                        <h4 class="mb-0 font-weight-medium"> 9</h4>
+                                    <div class="ml-4" style="color: black;">
+                                        <span>Permohonan Dikembali</span>
+                                        <h4 class="mb-0 font-weight-medium">9</h4>
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="icon-in-bg bg-azura text-white rounded-circle"><i class="fa fa-check"></i></div>
-                                    <div class="ml-4">
+                                    <div class="ml-4" style="color: black;">
                                         <span>Permohonan yang layak dimohon semula</span>
                                         <h4 class="mb-0 font-weight-medium">1</h4>
                                     </div>
@@ -57,7 +57,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-exclamation" style="color: white"></i></div>
-                                    <div class="ml-4">
+                                    <div class="ml-4" style="color: black;">
                                         <span>Permohonan yang tidak layak dimohon semula</span>
                                         <h4 class="mb-0 font-weight-medium">1</h4>
                                     </div>
@@ -81,10 +81,9 @@
                                                 <th class="text-center" style="width: 20%">Nama</th>
                                                 <th class="text-center" style="width: 10%">Jenis Permohonan</th>
                                                 <th class="text-center" style="width: 10%">Tarikh Permohonan</th>
-                                                <th class="text-center" style="width: 10%">Tarikh Pembalikan</th>
-                                                <th class="text-center" style="width: 30%">Sebab kembalikan</th>
+                                                <th class="text-center" style="width: 10%">Tarikh Kembalikan</th>
                                                 <th class="text-center" style="width: 20%">Status</th>
-                                               
+                                                <th class="text-center" style="width: 30%">Sebab kembalikan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -94,18 +93,18 @@
                                                 <td class="text-center">BKOKU</td>
                                                 <td class="text-center">2/4/2023</td>
                                                 <td class="text-center">5/5/2023</td>
+                                                <td><div style="color: red;">Tidak layak menerima BKOKU</div></td>
                                                 <td>Pelajar ini didapati menerima biasiswa yang lain tetapi pelajar ini akan dapat elaun wang saku</td>
                                                 {{-- <td><button type="button" class="btn btn-danger btn-sm"> Tidak layak menerima BKOKU</button></td> --}}
-                                                <td><div style="color: red;">Tidak layak menerima BKOKU</div></td>
                                             </tr>
                                             <tr>
                                                 <td>Athira Binti Zainal</td>
                                                 <td class="text-center">PPK</td>
                                                 <td class="text-center">7/4/2023</td>
                                                 <td class="text-center">19/6/2023</td>
+                                                <td><div style="color: green;">Pemohon layak memohon lagi</div></td>
                                                 <td>Pelajar ini didapati menghantar borang yang tidak benar</td>
                                                 {{-- <td><button type="button" class="btn btn-warning btn-sm"> Pemohon layak memohon sekali lagi</button></td> --}}
-                                                <td><div style="color: green;">Pemohon layak memohon lagi</div></td>
                                             </tr>
                                         </tbody>
                                     </table>

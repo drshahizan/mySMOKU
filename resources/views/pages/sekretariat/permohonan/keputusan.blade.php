@@ -19,7 +19,7 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <h1><b>Keputusan Permohonan BKOKU</b></h1>
+                            <h1>Keputusan Permohonan BKOKU</h1>
                         </div>
                         <hr>
 
