@@ -3,36 +3,23 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SaringanMail extends Mailable
 {
     use Queueable, SerializesModels;
-  
-    public $details;
-  
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct($details)
+
+    public $catatan;
+
+    public function __construct($catatan)
     {
-        $this->details = $details;
+        $this->catatan = $catatan;
     }
-  
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
+
     public function build()
     {
-        return $this->subject('BKOKU: Dokumen Dikembalikan')
-                    ->view('pages.saringan.email-dikembalikan');
+       return $this->view('pages.saringan.email-dikembalikan')->with('data', $this->catatan);
     }
 }

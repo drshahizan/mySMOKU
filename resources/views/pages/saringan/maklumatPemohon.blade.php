@@ -39,6 +39,8 @@
                                     <p><strong>ID Permohonan: </strong> IJAZAHBKOKU0001</p>                                    
                                 </div>
                             </div>
+                            <form method="POST" action="{{ url('saring-maklumat-pemohon') }}" id="saring">
+                                {{csrf_field()}}
                             <div class="row clearfix">
                                 <div class="col-md-12">
                                     <div class="table-responsive">
@@ -60,7 +62,7 @@
                                                     <td class="hidden-sm-down">
                                                        
                                                         <div class="form-group c_form_group">
-                                                        <select class="form-control">
+                                                        <select name="maklumat_profil_diri" class="form-control">
                                                             <option value="">Pilih</option>
                                                             <option value="disokong">Disokong</option>
                                                             <option value="dikembalikan">Dikembalikan</option>
@@ -69,7 +71,7 @@
                                                 </td>
                                               <td><div class="form-group c_form_group">
                                                 <label>Berikan Catatan Anda.</label>
-                                                <textarea rows="2" type="text" class="form-control" placeholder=""></textarea>
+                                                <textarea name="catatan_profil_diri" rows="2" type="text" class="form-control" placeholder=""></textarea>
                                             </div> </td>
                                                 </tr>
                                                 <tr>
@@ -79,17 +81,16 @@
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <div class="form-group c_form_group">
-                                                        <select class="form-control">
+                                                        <select name="maklumat_akademik" class="form-control">
                                                             <option value="">Pilih</option>
                                                             <option value="disokong">Disokong</option>
                                                             <option value="dikembalikan">Dikembalikan</option>
                                                         </select>
                                                     </div>
                                                     <td><div class="fancy-checkbox">
-                                                        <label><input type="checkbox" value="2"><span>Terdapat butiran yang tidak benar dalam Maklumat Akademik</span></label>
+                                                        <label><input type="checkbox" name="catatan_maklumat_akademik" value="1"><span>Terdapat butiran yang tidak benar dalam Maklumat Akademik</span></label>
                                                     </div></td>
                                                 </td> 
-                                              
                                                 </tr>
                                                 <tr>
                                                     <td>3</td>
@@ -99,7 +100,7 @@
                                                     <td class="hidden-sm-down">
                                                         <!--<div class="col-lg-12 col-md-12">-->
                                                         <div class="form-group c_form_group">
-                                                        <select class="form-control">
+                                                        <select name="salinan_dokumen" class="form-control">
                                                             <option value="">Pilih</option>
                                                             <option value="disokong">Disokong</option>
                                                             <option value="dekembalikan">Dikembalikan</option>
@@ -108,24 +109,23 @@
                                                 </td>
                                                 <td>
                                                 <div class="fancy-checkbox">
-                                                    <label><input type="checkbox" value="2"><span>Terdapat butiran yang tidak benar dalam Salinan Dokumen</span></label>
+                                                    <label><input type="checkbox" name="catatan_salinan_dokumen" value="2"><span>Terdapat butiran yang tidak benar dalam Salinan Dokumen</span></label>
                                                 </div></td>
-                                              
                                                 </tr>                                                
                                             </tbody>
-                                        
                                         </table>
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="row clearfix">
                                 <div class="col-md-6">
-                                       
                                     </div>
                                 <div class="col-md-6 text-right">
-                                    <button class="btn btn-primary theme-bg gradient action-btn"><i class="fa fa-check"></i> Lengkap</button>
-                                    <button class="btn btn-primary theme-bg gradient action-btn"><i class="fa fa-save"></i> Simpan</button>
-                                    <a href="{{ url('send-mail') }}"><button class="btn btn-primary theme-bg gradient action-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-reply"></i> Kembalikan</button></a>
+                                    <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Lengkap"><i class="fa fa-check"></i> Lengkap</button>
+                                    <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan"><i class="fa fa-save"></i> Simpan</button>
+                                    <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Kembalikan" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-reply"></i> Kembalikan</button>
+                                </form>
                                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">

@@ -57,17 +57,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('salinan-dokumen', [SaringanController::class, 'salinanDokumen'])->name('id');
     Route::get('cetak-senarai-pemohon', [SaringanController::class, 'cetakSenaraiPemohon']);
     Route::get('cetak-maklumat-pemohon', [SaringanController::class, 'cetakMaklumatPemohon']);
-    Route::get('send-mail', function () {
-   
-        $details = [
-            'title' => 'Mail from ItSolutionStuff.com',
-            'body' => 'This is for testing email using smtp'
-        ];
-       
-        Mail::to('ziba0506@gmail.com')->send(new \App\Mail\SaringanMail($details));
-       
-        dd("Email is Sent.");
-    });
+    Route::post('saring-maklumat-pemohon', [SaringanController::class, 'saringMaklumat']);
    
     //Permohonan - Sekretariat
     Route::get('sekretariatStatus', [SekretariatController::class, 'statusPermohonan']);
