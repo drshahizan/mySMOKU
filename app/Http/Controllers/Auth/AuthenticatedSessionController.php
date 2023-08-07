@@ -62,7 +62,7 @@ class AuthenticatedSessionController extends Controller
         return redirect('/');
     }
 
-    protected function authenticated()
+    /*protected function authenticated()
     {
         if(Auth::user()->tahap=='1')
         {
@@ -79,5 +79,5 @@ class AuthenticatedSessionController extends Controller
         else{
             return redirect('pegawai/dashboard')->with('status', 'Selamat Datang ke Laman Utama Pegawai Atasan');
         }
-    }
+    }*/
 }
