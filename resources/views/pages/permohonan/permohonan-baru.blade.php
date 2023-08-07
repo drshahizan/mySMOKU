@@ -429,7 +429,16 @@
 														</div>
 														<!--end::Input group-->
 														<!--begin::Input group-->
-														
+														<div class="separator my-14"></div>
+														<div class="pb-10 pb-lg-15">
+															<!--begin::Title-->
+															<h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
+															<!--end::Title-->
+															<!--begin::Notice-->
+															<div class="text-muted fw-semibold fs-6">Bank Islam 
+															</div>
+															<!--end::Notice-->
+														</div>
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank
@@ -523,7 +532,7 @@
 														</div>
 															<div class="col-md-6 fv-row lain_hubungan">
 															<!--begin::Label-->
-															<label class="form-label mb-6">Sila Nyatakan:</label>
+															<label class="form-label mb-6">(Jika Lain-lain) Sila Nyatakan:</label>
 															<!--end::Label-->
 															<!--begin::Input-->
 															<input type="text" class="form-control form-control-lg form-control-solid lain_hubungan_input" name="lain_hubungan" placeholder="" value="" />
