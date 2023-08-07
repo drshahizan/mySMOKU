@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('smoku', function (Blueprint $table) {
+        Schema::create('bk_infoipts', function (Blueprint $table) {
             $table->id();
-            $table->string('nokp')->unique();
-            $table->string('nama');
-            $table->integer('verify')->nullable();
+            $table->integer('idipt');
+            $table->string('jenis_ipt');
+            $table->string('namaipt');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('smoku');
+        Schema::dropIfExists('bk_infoipts');
     }
 };
