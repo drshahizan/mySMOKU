@@ -61,19 +61,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
    
     //Permohonan - Sekretariat
     Route::get('sekretariatStatus', [SekretariatController::class, 'statusPermohonan']);
-    Route::get('sekretariatKembalikan', [SekretariatController::class, 'kembalikanPermohonan']);
     Route::get('sekretariatKeputusan', [SekretariatController::class, 'keputusanPermohonan']);
     Route::get('suratTawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
+    Route::get('permohonan-dikembalikan', [SekretariatController::class, 'kembalikanPermohonan']);
 });
-
-//SEKRETARIAT
-// Route::prefix('sekretariat')->middleware(['auth','isSekretariat'])->group(function(){
-//     Route::get('sekretariatDashboard', [App\Http\Controllers\SekretariatController::class, 'dashboard'] );
-    
-//     //Permohonan
-//     Route::get('sekretariatSP', [SekretariatController::class, 'statusPermohonan']);
-//     Route::get('sekretariatKP', [SekretariatController::class, 'keputusanPermohonan']);
-// });
 
 Route::get('/error', function () {
     abort(500);

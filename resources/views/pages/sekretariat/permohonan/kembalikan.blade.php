@@ -20,7 +20,7 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-4 col-md-12 col-sm-12">
-                            <h1>Kembalikan Permohonan</h1>
+                            <h1>Permohonan Dikembalikan</h1>
                         </div>
                     </div>
                 </div>        
@@ -71,7 +71,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Permohonan untuk Dikembalikan</h2><hr>
+                                <h2>Senarai Permohonan yang Dikembalikan</h2><hr>
                             </div>
                             <div class="body">
                                 <div class="table-responsive">
@@ -83,7 +83,7 @@
                                                 <th class="text-center" style="width: 10%">Tarikh Permohonan</th>
                                                 <th class="text-center" style="width: 10%">Tarikh Kembalikan</th>
                                                 <th class="text-center" style="width: 20%">Status</th>
-                                                <th class="text-center" style="width: 30%">Sebab kembalikan</th>
+                                                <th class="text-center" style="width: 30%">Sebab</th>
                                             </tr>
                                         </thead>
                                         <tbody>
