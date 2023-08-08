@@ -20,21 +20,21 @@
             <!--end::Subtitle--->
         </div>
         <!--begin::Heading-->
-
+        @foreach ($smoku as $smoku)
         <!--begin::Input group--->
         <div class="fv-row mb-8">
             <!--begin::nokp-->
-            <input type="text" placeholder="No Kad Pengenalan" name="nokp" maxlength="12" autocomplete="off" class="form-control bg-transparent"/>
-            <!--end::nokp-->
+            <input type="text" value="{{($smoku->nokp)}}" placeholder="No Kad Pengenalan" name="nokp" maxlength="12" autocomplete="off" class="form-control bg-transparent" readonly/>
+            <!--end::nokp -->
         </div>
 
         <!--begin::Input group--->
         <div class="fv-row mb-8">
             <!--begin::email-->
-            <input type="text" placeholder="Alamat email" name="email" autocomplete="off" class="form-control bg-transparent"/>
+            <input type="text" value="{{($smoku->email)}}" placeholder="Alamat email" name="email" autocomplete="off" class="form-control bg-transparent" readonly/>
             <!--end::email-->
         </div>
-
+        @endforeach
         <!--begin::Input group-->
         <div class="fv-row mb-8" data-kt-password-meter="true">
             <!--begin::Wrapper-->

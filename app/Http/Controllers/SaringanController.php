@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Mail\SaringanMail;
 use App\Models\Permohonan;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -49,5 +50,45 @@ class SaringanController extends Controller
     {
         $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon');
         return $pdf->stream('senarai-pemohon.pdf');
+    }
+
+    public function saringMaklumat(Request $request) 
+    {
+        if($request->get('submit')=="Lengkap"){
+            //
+        }
+        else if($request->get('submit')=="Simpan"){
+            //
+        }
+        else if($request->get('submit')=="Kembalikan"){
+
+            if($request->get('maklumat_profil_diri')=="dikembalikan"){
+                $catatan1=$request->get('catatan_profil_diri');
+            }
+            else{
+                $catatan1=null;
+            }
+
+            if($request->get('maklumat_akademik')=="dikembalikan"){
+                $catatan2=$request->get('catatan_maklumat_akademik');
+            }
+            else{
+                $catatan2=null;
+            }
+
+            if($request->get('salinan_dokumen')=="dikembalikan"){
+                $catatan3=$request->get('catatan_salinan_dokumen');
+            }
+            else{
+                $catatan3=null;
+            }
+
+            $catatan = [
+                'catatan1'=>$catatan1, 
+                'catatan2'=>$catatan2, 
+                'catatan3'=>$catatan3,
+            ];
+            \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
+        }
     }
 }

@@ -1,8 +1,8 @@
 <x-auth-layout>
 
     <!--begin::Form-->
-    <form class="form w-100" novalidate="novalidate" id="kt_sign_up_form" data-kt-redirect-url="{{ route('daftarlayak') }}" action="{{ route('semaksyarat') }}">
-        
+    <form class="form w-100"  action="{{ route('semaksyarat') }}" method="post">
+    @csrf
         <!--begin::Heading-->
         <div class="text-center mb-11">
             <!--begin::Title-->
@@ -18,7 +18,7 @@
         </div>
        
         <div class="fv-row mb-10">
-        @csrf
+        
 			<label class="form-label required">Adakah anda penerima Hadiah Latihan Persekutuan?</label>	
 			<div class="row mb-2" data-kt-buttons="true">
 			<!--begin::Col-->
@@ -67,48 +67,39 @@
         </div>
 
         <div class="fv-row mb-10">
-		@csrf														
-            <label class="form-label required">Nama Institusi</label>
+															
+            <label class="form-label required">Nama Pusat Pengajian</label>
             <select name="id_institusi" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-            <option></option>
-            <option value="1">Universiti Malaysia Sabah</option>
-            <option value="2">Universiti Kebangsaan Malaysia</option>
-            <option value="3">Universiti Malaya</option>
-            <option value="4">Universiti Putra Malaysia</option>
-            <option value="5">Universiti Teknikal Malaysia Melaka</option>
-            <option value="6">Universiti Sains Malaysia</option>
-            <option value="7">Universiti Pertahanan Nasional Malaysia</option>
-            <option value="8">Universiti Tun Hussein Onn Malaysia</option>
-            <option value="9">Universiti Malaysia Kelantan</option>
-            <option value="10">Univeristi Utara Malaysia</option>
+            @foreach ($ipt as $ipt)	
+            <option></option> 
+            <option value="{{ $ipt->idipt}}">
+            {{ $ipt->namaipt}}
+            </option> 
+            @endforeach
             </select>
-
+        
         </div>
         <!-- </div> -->
 
         <div class="fv-row mb-10">
-            <label class="form-label required">Peringkat</label>
+            <label class="form-label required">Peringkat Pengajian</label>
             <select name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+                @foreach ($peringkat as $peringkat)
                 <option></option>
-                <option value="1">Sijil Asas / Sijil</option>
-                <option value="2">Diploma</option>
-                <option value="3">Sarjana Muda</option>
-                <option value="4">Diploma Lepasan Ijazah</option>
-                <option value="5">Sarjana</option>
-                <option value="6">PhD</option>
+                <option value="{{ $peringkat->kodperingkat}}">{{ $peringkat->peringkat}}</option>
+                @endforeach
             </select>
         </div>
         <div class="fv-row mb-10">
 
             <label class="form-label required">Nama Kursus</label>
                     <select name="nama_kursus" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+                        @foreach ($kursus as $kursus)	    
                         <option></option>
-                        <option value="1">Komputer Sains</option>
-                        <option value="2">C Corporation</option>
-                        <option value="3">Sole Proprietorship</option>
-                        <option value="4">Non-profit</option>
-                        <option value="5">Limited Liability</option>
-                        <option value="6">General Partnership</option>
+                        <option value="{{ $kursus->nama_kursus}}"> 
+                            {{ $kursus->nama_kursus}}
+                        </option>
+                        @endforeach
                     </select>
         </div>
 
@@ -117,8 +108,8 @@
 
         <!--begin::Submit button-->
         <div class="d-grid mb-10">
-            <button type="submit" id="kt_sign_up_submit" class="btn btn-primary"> Semak Kelayakan
-                @include('partials/general/_button-indicator', ['label' => 'Semak'])
+            <button type="submit"  class="btn btn-primary">
+                Semak
             </button>
         </div>
         <!--end::Submit button-->

@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Smoku;
 use DB;
+use session;
 
 class DaftarUserController extends Controller
 {
@@ -48,7 +49,11 @@ class DaftarUserController extends Controller
     
                 ]);
 
-                return view('pages.auth.semaksyarat');
+                //return view('pages.auth.semaksyarat');
+                $nokp_in = $request->nokp;
+                $nokp = $request->session()->put('nokp',$nokp_in);
+                //dd($nokp_in);
+                return redirect()->route('semaksyarat')->with($nokp);
             } else {
 
                 //return view('pages.auth.login')->with('successMsg','Maklumat anda tiada dalam semakkan SMOKU');

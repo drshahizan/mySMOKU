@@ -10,12 +10,11 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class TuntutanPermohonan extends Authenticatable
+class Infoipt extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
-
-    protected $table = 'permohonan';
+    protected $table = 'bk_infoipt';
 
     /**
      * The attributes that are mass assignable.
@@ -23,18 +22,13 @@ class TuntutanPermohonan extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'id_permohonan',
-        'nokp_pelajar',
-        'program',
-        'yuran',
-        'elaun',
-        'amaun',
-        'perakuan',
-        
-        
+        'idipt',
+        'jenis_ipt',
+        'namaipt',
     ];
 
-    
-
-    
+    public function idipt()
+    {
+        return $this->idipt;
+    }
 }

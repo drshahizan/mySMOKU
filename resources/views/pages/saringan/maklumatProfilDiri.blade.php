@@ -168,23 +168,8 @@
             <td class="gap-bottom" style="width: 2%">:</td>
             <td class="gap-bottom"></td>
         </tr>
-    </div>
-        <tr>
-            <td class="header-part" colspan="3">C. MAKLUMAT TUTUTAN</td>
         </tr>
-    <div>
-        <tr class="gap-left">
-            <td style="width: 16%" class="gap-top">Jenis Tuntutan</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td class="gap-bottom" style="width: 16%">Amaun</td>
-            <td class="gap-bottom" style="width: 2%">:</td>
-            <td class="gap-bottom"></td>
-        </tr>
-        </tr>
-            <td class="header-part" colspan="3">D. PERAKUAN</td>
+            <td class="header-part" colspan="3">C. PERAKUAN</td>
         </tr>
         <tr class="gap-left">
             <td colspan="3" class="gap-top gap-bottom">

@@ -14,7 +14,7 @@
         <tr>
             <td class="text-center" colspan="3">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/JATA_NEGARA_MALAYSIA.png/776px-JATA_NEGARA_MALAYSIA.png?18218224030856" alt="jata-negara-malaysia">
-                <br><b class="title"> SALINAN DOKUMEN</b>
+                <br><b class="title">SALINAN DOKUMEN PERMOHONAN</b>
                 <p><b class="description"> BANTUAN KEWANGAN ORANG KURANG UPAYA <br> (BKOKU)</b> </p> 
                 <br><br>
             </td>
@@ -34,14 +34,9 @@
                 <td>Diploma</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 16%">Nama Kursus</td>
-                <td style="width: 2%">:</td>
-                <td>Komputer Sains</td>
-            </tr>
-            <tr class="gap-left">
-                <td class="gap-bottom" style="width: 16%">Adakah anda penerima HLP?</td>
+                <td class="gap-bottom" style="width: 21%">Nama Kursus</td>
                 <td class="gap-bottom" style="width: 2%">:</td>
-                <td class="gap-bottom">Ya</td>
+                <td class="gap-bottom">Komputer Sains</td>
             </tr>
         </div>
         <tr>
@@ -260,7 +255,7 @@
         </tr>
     </div>
         <tr>
-            <td class="header-part" colspan="3">E. MAKLUMAT TUTUTAN</td>
+            <td class="header-part" colspan="3">E. MAKLUMAT TUNTUTAN</td>
         </tr>
     <div>
         <tr class="gap-left">
@@ -273,8 +268,16 @@
             <td class="gap-bottom" style="width: 2%">:</td>
             <td class="gap-bottom"></td>
         </tr>
+        <tr>
+            <td class="header-part" colspan="3">F. HADIAH LATIHAN PERSEKUTUAN (HLP)</td>
         </tr>
-            <td class="header-part" colspan="3">F. PERAKUAN</td>
+        <tr class="gap-left">
+            <td style="width: 21%" class="gap-top gap-bottom">Status</td>
+            <td style="width: 2%" class="gap-top gap-bottom">:</td>
+            <td class="gap-top gap-bottom">Tidak menerima HLP</td>
+        </tr>
+        <tr>
+            <td class="header-part" colspan="3">G. PERAKUAN</td>
         </tr>
         <tr class="gap-left">
             <td colspan="3" class="gap-top gap-bottom">
@@ -283,7 +286,6 @@
                 permohonan saya dan menghentikan bantuan kewangan ini kepada saya.
             </td>
         </tr>
-    </div>
     </table>
 </body>
 </html>

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
+use App\Models\Smoku;
+use session;
 
 class RegisteredUserController extends Controller
 {
@@ -19,11 +21,17 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
+        
         addJavascriptFile('assets/js/custom/authentication/sign-up/general.js');
+        $nokp = $request->session()->get('nokp');
+        //dd($nokp);
 
-        return view('pages.auth.daftarlayak');
+        $smoku = Smoku::all()->where('nokp', $nokp);
+
+        //return view('pages.auth.daftarlayak');
+        return view('pages.auth.daftarlayak', compact('smoku'));
     }
 
     /**

@@ -57,34 +57,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('salinan-dokumen', [SaringanController::class, 'salinanDokumen'])->name('id');
     Route::get('cetak-senarai-pemohon', [SaringanController::class, 'cetakSenaraiPemohon']);
     Route::get('cetak-maklumat-pemohon', [SaringanController::class, 'cetakMaklumatPemohon']);
-    Route::get('send-mail', function () {
-   
-        $details = [
-            'title' => 'Mail from ItSolutionStuff.com',
-            'body' => 'This is for testing email using smtp'
-        ];
-       
-        Mail::to('ziba0506@gmail.com')->send(new \App\Mail\SaringanMail($details));
-       
-        dd("Email is Sent.");
-    });
+    Route::post('saring-maklumat-pemohon', [SaringanController::class, 'saringMaklumat']);
    
     //Permohonan - Sekretariat
-    Route::get('sekretariatSP', [SekretariatController::class, 'statusPermohonan']);
-    Route::get('sekretariatPengesahan', [SekretariatController::class, 'pengesahanPermohonan']);
-    Route::get('sekretariatKembalikan', [SekretariatController::class, 'kembalikanPermohonan']);
-    Route::get('sekretariatKP', [SekretariatController::class, 'keputusanPermohonan']);
+    Route::get('sekretariatStatus', [SekretariatController::class, 'statusPermohonan']);
+    Route::get('sekretariatKeputusan', [SekretariatController::class, 'keputusanPermohonan']);
     Route::get('suratTawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
+    Route::get('permohonan-dikembalikan', [SekretariatController::class, 'kembalikanPermohonan']);
 });
-
-//SEKRETARIAT
-// Route::prefix('sekretariat')->middleware(['auth','isSekretariat'])->group(function(){
-//     Route::get('sekretariatDashboard', [App\Http\Controllers\SekretariatController::class, 'dashboard'] );
-    
-//     //Permohonan
-//     Route::get('sekretariatSP', [SekretariatController::class, 'statusPermohonan']);
-//     Route::get('sekretariatKP', [SekretariatController::class, 'keputusanPermohonan']);
-// });
 
 Route::get('/error', function () {
     abort(500);
