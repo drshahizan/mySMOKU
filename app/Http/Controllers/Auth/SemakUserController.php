@@ -11,11 +11,16 @@ use App\Models\Infoipt;
 use App\Models\PeringkatPengajian;
 use App\Models\Kursus;
 //use DB;
+use session;
+
 
 class SemakUserController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
+        $nokp = $request->session()->get('nokp');
+        //dd($nokp);
+        
         $ipt = Infoipt::all()->sortBy('namaipt');
         $peringkat = PeringkatPengajian::all()->sortBy('kodperingkat');
         $kursus = Kursus::all()->sortBy('nama_kursus');
