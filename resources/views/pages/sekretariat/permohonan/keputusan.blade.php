@@ -19,7 +19,7 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <h1>Keputusan Permohonan BKOKU</h1>
+                            <h1>Keputusan Permohonan BKOKU dan PPK</h1>
                         </div>
                         <hr>
 
@@ -95,11 +95,11 @@
                                 <table id="sortTable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th style="width: 15%">ID Tuntutan</th>
+                                            <th style="width: 15%">ID Permohonan</th>
                                             <th style="width: 30%">Nama</th>
-                                            <th style="width: 28%">Catatan</th>
-                                            <th style="width: 12%" class="text-center">Tarikh Tuntutan</th>
+                                            <th style="width: 12%" class="text-center">Tarikh Permohonan</th>
                                             <th style="width: 15%" class="text-center">Keputusan Permohonan</th>
+                                            <th style="width: 28%">Catatan</th>
                                         </tr>
                                     </thead>
                                         
@@ -107,27 +107,27 @@
                                         <tr>
                                             <td>TTBKOKU00012</td> 
                                             <td>Ali Bin Abu</td> 
+                                            <td class="text-center">2/7/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
                                             <td>
                                                 <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-success btn-round btn-sm"><i class="fa fa-print"></i>  Muat Turun Surat Tawaran</a>
                                             </td>
-                                            <td class="text-center">2/7/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
                                         </tr>
 
                                         <tr>
                                             <td>TTBKOKU01012</td> 
                                             <td>Sarah Binti Md Yunos</td>
-                                            <td>Anda tidak disahkan sebagai pelajar OKU</td> 
                                             <td class="text-center">4/7/2022</td>
                                             <td class="text-center"><button type="button" class="btn btn-danger btn-sm"> Tidak Layak</button></td>
+                                            <td>Anda tidak disahkan sebagai pelajar OKU</td> 
                                         </tr>
 
                                         <tr>
                                             <td>TTBKOKU90012</td>
                                             <td>Eng Mei Ying </td>
-                                            <td>Terdapat kesilapan dalam butiran resit </td>
                                             <td class="text-center">2/2/2022</td>
                                             <td class="text-center"><button type="button" class="btn btn-warning btn-sm"> Dikembalikan</button></td>
+                                            <td>Terdapat kesilapan dalam butiran resit </td>
                                         </tr>
                                     </tbody>
                                 </table>

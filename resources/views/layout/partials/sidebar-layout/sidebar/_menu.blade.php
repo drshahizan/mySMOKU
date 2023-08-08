@@ -103,39 +103,31 @@
 					<span class="menu-title">Laman Utama</span>
 				</a>
 		</div>	
-			<div class="menu-item pt-5">
-				<div class="menu-content">
-					<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
-				</div>
+		{{-- PERMOHONAN --}}
+		<div class="menu-item pt-5">
+			<div class="menu-content">
+				<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
 			</div>
-			<div class="menu-item">
-			<a class="menu-link" href="permohonan">
-			<!-- "{{ route('dashboard') }}" -->
+		</div>
+		<div class="menu-item">
+			<a class="menu-link" href="{{ url('sekretariatStatus') }}">
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-					<span class="menu-title">Status Permohonan</span>
+					<span class="menu-title">Status</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="#">
-			<!-- "{{ route('dashboard') }}" -->
+			<a class="menu-link" href="{{ url('saringan') }}">
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
-					<span class="menu-title">Saring Permohonan</span>
+					<span class="menu-title">Saring</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="#">
-			<!-- "{{ route('dashboard') }}" -->
+			<a class="menu-link" href="{{ url('sekretariatKeputusan') }}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Keputusan Permohonan</span>
+					<span class="menu-title">Keputusan</span>
 			</a>
 		</div>
-		<div class="menu-item">
-			<a class="menu-link" href="#">
-			<!-- "{{ route('dashboard') }}" -->
-					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
-					<span class="menu-title">Kembalikan Permohonan</span>
-			</a>
-		</div>
+		{{-- TUNTUTAN --}}
 		<div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
@@ -145,28 +137,28 @@
 			<a class="menu-link" href="#">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-					<span class="menu-title">Status Tuntutan</span>
+					<span class="menu-title">Status</span>
 			</a>
 		</div>
 		<div class="menu-item">
 			<a class="menu-link" href="#">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
-					<span class="menu-title">Saring Tuntutan</span>
+					<span class="menu-title">Saring</span>
 			</a>
 		</div>
 		<div class="menu-item">
 			<a class="menu-link" href="#">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Pengesahan Tuntutan</span>
+					<span class="menu-title">Pengesahan</span>
 			</a>
 		</div>
 		<div class="menu-item">
 			<a class="menu-link" href="#">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
-					<span class="menu-title">Keputusan Tuntutan</span>
+					<span class="menu-title">Keputusan</span>
 			</a>
 		</div>
 		</div>
@@ -174,22 +166,6 @@
 
 @endif
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
 	</div>
 	<!--end::Menu wrapper-->
 </div>
