@@ -14,9 +14,9 @@
     <div style="margin: 0 auto;display: block;">
         <table width="100%" border="1" class="profile-form">
             <tr>
-                <td class="text-center" colspan="3">
+                <td class="text-center gap-top" colspan="3">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/JATA_NEGARA_MALAYSIA.png/776px-JATA_NEGARA_MALAYSIA.png?18218224030856" alt="jata-negara-malaysia">
-                    <br><b class="title"> SALINAN DOKUMEN</b>
+                    <br> <p><b class="title"> SALINAN DOKUMEN PERMOHONAN</b></p> 
                     <p><b class="description"> BANTUAN KEWANGAN ORANG KURANG UPAYA <br> (BKOKU)</b> </p> 
                     <br><br>
                 </td>
@@ -118,9 +118,9 @@
                 <td></td>
             </tr>
             <tr class="gap-left" style="border-bottom: 1px solid black">
-                <td class="gap-bottom" style="width: 21%">No. Akaun Bank</td>
-                <td class="gap-bottom" style="width: 2%">:</td>
-                <td class="gap-bottom"></td>
+                <td class="gap-bottom" style="width: 21%; height:30px;">No. Akaun Bank</td>
+                <td class="gap-bottom" style="width: 2%; height:30px;">:</td>
+                <td class="gap-bottom" style="height:30px;"></td>
             </tr>
             <tr>
                 <td class="header-part" colspan="3">C. MAKLUMAT WARIS</td>
@@ -262,14 +262,14 @@
                 <td class="gap-bottom"></td>
             </tr>
             <tr>
-                <td class="header-part" colspan="3">F. KELAYAKAN</td>
+                <td class="header-part" colspan="3">F. HADIAH LATIHAN PERSEKUTUAN (HLP)</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 21%" class="gap-top gap-bottom">Status</td>
                 <td style="width: 2%" class="gap-top gap-bottom">:</td>
-                <td class="gap-top gap-bottom">Layak membuat permohonan</td>
+                <td class="gap-top gap-bottom">Tidak menerima HLP</td>
             </tr>
-            </tr>
+            <tr>
                 <td class="header-part" colspan="3">G. PERAKUAN</td>
             </tr>
             <tr class="gap-left">

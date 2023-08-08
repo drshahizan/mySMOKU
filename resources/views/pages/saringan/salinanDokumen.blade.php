@@ -34,9 +34,9 @@
                 <td>Diploma</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 16%">Nama Kursus</td>
-                <td style="width: 2%">:</td>
-                <td>Komputer Sains</td>
+                <td class="gap-bottom" style="width: 21%">Nama Kursus</td>
+                <td class="gap-bottom" style="width: 2%">:</td>
+                <td class="gap-bottom">Komputer Sains</td>
             </tr>
         </div>
         <tr>
@@ -269,15 +269,14 @@
             <td class="gap-bottom"></td>
         </tr>
         <tr>
-            <td class="header-part" colspan="3">F. KELAYAKAN</td>
+            <td class="header-part" colspan="3">F. HADIAH LATIHAN PERSEKUTUAN (HLP)</td>
         </tr>
-    <div>
         <tr class="gap-left">
-            <td style="width: 16%" class="gap-top">Status</td>
-            <td style="width: 2%">:</td>
-            <td>Layak membuat permohonan</td>
+            <td style="width: 21%" class="gap-top gap-bottom">Status</td>
+            <td style="width: 2%" class="gap-top gap-bottom">:</td>
+            <td class="gap-top gap-bottom">Tidak menerima HLP</td>
         </tr>
-        </tr>
+        <tr>
             <td class="header-part" colspan="3">G. PERAKUAN</td>
         </tr>
         <tr class="gap-left">
@@ -287,7 +286,6 @@
                 permohonan saya dan menghentikan bantuan kewangan ini kepada saya.
             </td>
         </tr>
-    </div>
     </table>
 </body>
 </html>
