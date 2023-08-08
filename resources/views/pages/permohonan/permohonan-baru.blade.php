@@ -711,7 +711,7 @@
 														{{-- Upload Surat Tawaran Pengajian --}}
 														<div class="d-flex flex-column mb-7 fv-row">
 															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">Resit</span>
+																<span class="">Surat Tawaran Pengajian</span>
 															</label>
 															<input type="file" id="upload"  hidden/>
 															<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:25%; text-align:center;">

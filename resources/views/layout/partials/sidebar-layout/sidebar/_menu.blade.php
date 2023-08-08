@@ -109,31 +109,21 @@
 				</div>
 			</div>
 			<div class="menu-item">
-			<a class="menu-link" href="permohonan">
-			<!-- "{{ route('dashboard') }}" -->
+			<a class="menu-link" href="{{url('sekretariatStatus')}}">
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-					<span class="menu-title">Status Permohonan</span>
+					<span class="menu-title">Status</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="#">
-			<!-- "{{ route('dashboard') }}" -->
+			<a class="menu-link" href="{{url('saringan')}}">
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
-					<span class="menu-title">Saring Permohonan</span>
+					<span class="menu-title">Saringan</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="#">
-			<!-- "{{ route('dashboard') }}" -->
+			<a class="menu-link" href="{{url('sekretariatKeputusan')}}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Keputusan Permohonan</span>
-			</a>
-		</div>
-		<div class="menu-item">
-			<a class="menu-link" href="#">
-			<!-- "{{ route('dashboard') }}" -->
-					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
-					<span class="menu-title">Kembalikan Permohonan</span>
+					<span class="menu-title">Keputusan</span>
 			</a>
 		</div>
 		<div class="menu-item pt-5">
