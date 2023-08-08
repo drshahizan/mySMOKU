@@ -880,26 +880,32 @@
 																
 															</label>
 															<!--end::Label-->
-															<select disabled="true" name="jenis_tuntutan" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Jenis">
-																<option>{{ $tuntutanpermohonan->jenis_tuntutan}}</option>
-																<option value="1">Yuran</option>
-																<option value="2">Elaun Wang Saku</option>
-															</select>
-														</div>
-														
-
-														<div class="d-flex flex-column mb-7 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="required">Amaun</span>
-																
+															<div class="form-check">
+															<input class="form-check-input" type="checkbox" value="{{ $tuntutanpermohonan->yuran}}" id="flexCheckDefault"  name="yuran" />
+															<label class="form-check-label" for="flexCheckDefaultb" >
+																Yuran
 															</label>
-															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="RM" name="amaun" value="{{ $tuntutanpermohonan->amaun}}" readonly/>
 														</div>
+														<br>
+														<div class="form-check">
+															<input class="form-check-input" type="checkbox" value="{{ $tuntutanpermohonan->elaun}}" id="flexCheckDefault"  name="elaun" />
+															<label class="form-check-label" for="flexCheckDefault">
+																Elaun Wang Saku
+															</label>
+														</div>
+														<br>
+														<br>
+													<div class="col-12">
+													<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun</label>
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="amaun" placeholder="" value="{{ $tuntutanpermohonan->amaun}}" />
+																	<!--end::Input-->
+																</div>
 
-														
-														
+
+
+														</div>
+		
 													</div>
 													<!--end::Wrapper-->
 												</div>
@@ -923,17 +929,15 @@
 														<!--end::Heading-->
 														
 														<div class="d-flex flex-column mb-7 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																
-																<span class="required">Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
+															<div class="form-check">
+																<input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="perakuan"/>
+																<label class="form-check-label" for="flexCheckDefault">
+																Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
 																sekiranya maklumat yang diberikan didapati palsu atau tidak benar, pihak kementerian berhak menolak
 																permohonan saya dan menghentikan bantuan kewangan ini kepada saya
-																</span>
-																
-															</label>
-															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="" name="perakuan" value="{{ $tuntutanpermohonan->perakuan}}" readonly/>
+																</label>
+															</div>
+															
 														</div>
 
 														

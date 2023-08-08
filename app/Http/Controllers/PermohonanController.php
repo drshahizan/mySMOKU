@@ -10,21 +10,35 @@ use App\Models\Waris;
 use App\Models\Akademik;
 use App\Models\TuntutanPermohonan;
 use App\Models\User;
+use App\Models\Smoku;
+use App\Models\Infoipt;
+use App\Models\PeringkatPengajian;
+use App\Models\Kursus;
+use App\Models\Mod;
+use App\Models\Sumberbiaya;
 use Illuminate\Support\Facades\Auth;
 
 class PermohonanController extends Controller
 {
     public function permohonan()
     {
-        /*if (Auth::check())
-        {
-            $id = Auth::user()->id();
-            return $id;
-        }*/
+
+        $smoku = Smoku::join('bk_jantina','bk_jantina.kodjantina','=','smoku.jantina')
+        ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'smoku.bangsa')
+        ->join('bk_hubungan','bk_hubungan.kodhubungan','=','smoku.hubungan')
+        ->get(['smoku.*', 'bk_jantina.jantina', 'bk_bangsa.bangsa', 'bk_hubungan.hubungan'])
+        ->where('nokp', Auth::user()->id());
+        $infoipt = Infoipt::all()->sortBy('namaipt');
+        $peringkat = PeringkatPengajian::all()->sortBy('kodperingkat');
+        $kursus = Kursus::all()->sortBy('nama_kursus');
+        $mod = Mod::all()->sortBy('kodmod');
+        $biaya = Sumberbiaya::all()->sortBy('kodbiaya');
 
         $pelajar = Permohonan::all()->where('nokp_pelajar', Auth::user()->id());
         $waris = Waris::all()->where('nokp_pelajar', Auth::user()->id());
-        $akademik = Akademik::all()->where('nokp_pelajar', Auth::user()->id());
+        $akademik = Akademik::join('bk_mod','bk_mod.kodmod','=','maklumatakademik.mod')
+        ->get(['maklumatakademik.*', 'bk_mod.mod'])
+        ->where('nokp_pelajar', Auth::user()->id());
         $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id());
         if (!$tuntutanpermohonan->isEmpty())
         {
@@ -33,9 +47,10 @@ class PermohonanController extends Controller
         }
         else
         {
-            return view('pages.permohonan.permohonan-baru');
+            //return view('pages.permohonan.permohonan-baru');
+            return view('pages.permohonan.permohonan-baru', compact('smoku','infoipt','peringkat','kursus','mod','biaya'));
         }
-        //return view('pages.permohonan.permohonan-baru', compact('pelajar','waris','akademik','tuntutanpermohonan'));
+        
         
     }
 
@@ -63,8 +78,8 @@ class PermohonanController extends Controller
             'bangsa' => $request->bangsa,
             'alamat1' => $request->alamat1,
             'alamat_poskod' => $request->alamat_poskod,
+            'alamat_bandar' => $request->alamat_bandar,
             'alamat_negeri' => $request->alamat_negeri,
-            'dun' => $request->bandar,
             'no_tel' => $request->no_tel,
             'no_telR' => $request->no_telR,
             'no_akaunbank' => $request->no_akaunbank,
@@ -80,7 +95,7 @@ class PermohonanController extends Controller
             'alamat_bandar' => $request->alamatW_bandar,
             'alamat_negeri' => $request->alamatW_negeri,
             'no_tel' => $request->no_telW,
-            'no_telR' => $request->no_telRW,
+            //'no_telR' => $request->no_telRW,
             'nokp_pelajar' => $request->nokp_pelajar,
             'hubungan' => $request->hubungan,
             'pendapatan' => $request->pendapatan,
@@ -113,7 +128,8 @@ class PermohonanController extends Controller
             'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
             'nokp_pelajar' => $request->nokp_pelajar,
             'program' => 'BKOKU',
-            'jenis_tuntutan' => $request->jenis_tuntutan,
+            'yuran' => $request->yuran,
+            'elaun' => $request->elaun,
             'amaun' => $request->amaun,
             'perakuan' => $request->perakuan,
             

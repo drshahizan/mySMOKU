@@ -199,13 +199,14 @@
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
+														@foreach ($smoku as $smoku)
 														<!--begin::Input group-->
 														<div class="mb-10 fv-row">
 															<!--begin::Label-->
 															<label class="form-label mb-3">Nama</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid" name="nama_pelajar" placeholder="" value="" />
+															<input type="text" class="form-control form-control-lg form-control-solid" name="nama_pelajar" placeholder="" value="{{$smoku->nama}}" />
 															<!--end::Input-->
 														</div>
 														<!--end::Input group-->
@@ -220,7 +221,7 @@
 																<div class="row fv-row">
 																	<!--begin::Col-->
 																	<div class="col-12">
-																		<input type="text" class="form-control form-control-lg form-control-solid" minlength="12" name="nokp_pelajar" placeholder="" value="" />
+																		<input type="text" class="form-control form-control-lg form-control-solid" minlength="12" name="nokp_pelajar" placeholder="" value="{{$smoku->nokp}}" />
 																	</div>
 																	<!--end::Col-->
 																</div>
@@ -235,7 +236,7 @@
 																	<!--begin::Col-->
 																	<div class="col-12">
 																		<!--begin::Input-->
-																	<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" name="tkh_lahir">
+																	<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" name="tkh_lahir" value="{{$smoku->tkh_lahir}}">
 																	<!--end::Input-->
 																	</div>
 																</div>	
@@ -247,7 +248,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="umur" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="umur" placeholder="" value="{{$smoku->umur}}"/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -269,9 +270,7 @@
 																<div class="col-12">
 																	<!--begin::Input-->
 																	<select name="jantina" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-																		<option></option>
-																		<option value="1">Lelaki</option>
-																		<option value="2">Perempuan</option>
+																		<option value="{{$smoku->jantina}}">{{$smoku->jantina}}</option>
 																	</select>
 																	<!--end::Input-->
 																</div>
@@ -286,10 +285,7 @@
 																<div class="col-12">
 																	<!--begin::Input-->
 																	<select name="bangsa" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-																		<option></option>
-																		<option value="1">Melayu</option>
-																		<option value="2">India</option>
-																		<option value="3">Cina</option>
+																		<option value="{{$smoku->bangsa}}">{{$smoku->bangsa}}</option>
 																	</select>
 																	<!--end::Input-->
 																</div>
@@ -302,7 +298,7 @@
 															<label class="form-label">Alamat Rumah</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<textarea name="alamat1" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
+															<textarea name="alamat1" class="form-control form-control-lg form-control-solid" rows="2">{{$smoku->alamat1}}</textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
@@ -314,7 +310,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamat_poskod" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="alamat_poskod" placeholder="" value="{{$smoku->alamat_poskod}}" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -327,7 +323,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="bandar" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="alamat_bandar" placeholder="" value="{{$smoku->alamat_bandar}}"/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -340,7 +336,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamat_negeri" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="alamat_negeri" placeholder="" value="{{$smoku->alamat_negeri}}" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -356,7 +352,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_tel" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="no_tel" placeholder="" value="{{$smoku->no_tel}}" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -369,7 +365,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_telR" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="no_telR" placeholder="" value="{{$smoku->no_telR}}" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -387,7 +383,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="emel" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="emel" placeholder="" value="{{$smoku->email}}" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -411,7 +407,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="noJKM" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="noJKM" placeholder="" value="{{$smoku->noJKM}}"  />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -424,7 +420,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="kecacatan" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="kecacatan" placeholder="" value="{{$smoku->kecacatan}}" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -457,14 +453,14 @@
 																<!--end::Input wrapper-->
 															</div>
 															<div class="col-md-6 fv-row">
-															<div class="col-12">
-															<button type="button" class="btn btn-flex btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_upload">
-															<i class="ki-duotone ki-folder-up fs-2">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>Muat Naik Salinan Bank Penyata</button>
-														</div>
-														</div>
+																<div class="col-12">
+																	<button type="button" class="btn btn-flex btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_upload">
+																	<i class="ki-duotone ki-folder-up fs-2">
+																		<span class="path1"></span>
+																		<span class="path2"></span>
+																	</i>Muat Naik Salinan Bank Penyata</button>
+																</div>
+															</div>
 														</div>
 														<!--end::Input group-->
 													</div>
@@ -495,7 +491,7 @@
 															<label class="form-label mb-3">Nama</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid" name="nama_waris" placeholder="" value="" />
+															<input type="text" class="form-control form-control-lg form-control-solid" name="nama_waris" placeholder="" value="{{$smoku->nama_waris}}"  />
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
@@ -508,7 +504,7 @@
 																<div class="row fv-row">
 																	<!--begin::Col-->
 																	<div class="col-12">
-																		<input type="text" class="form-control form-control-lg form-control-solid" name="nokp_waris" placeholder="" value="" />
+																		<input type="text" class="form-control form-control-lg form-control-solid" name="nokp_waris" placeholder="" value="{{$smoku->nokp_waris}}"  />
 																	</div>
 																	<!--end::Col-->
 																</div>
@@ -534,13 +530,7 @@
 															<div class="col-md-6 fv-row hubungan_row">
 															<label class="form-label mb-6">Hubungan Waris</label>
 															<select name="hubungan" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-																<option></option>
-																<option value="1">Ibu</option>
-																<option value="2">Bapa</option>
-																<option value="3">Suami/Isteri</option>
-																<option value="4">Penjaga</option>
-																<option value="5">Saudara Kandung</option>
-																<option value="6">Lain-lain</option>
+																<option value="{{$smoku->hubungan}}">{{$smoku->hubungan}}</option>
 															</select>
 														</div>
 															<div class="col-md-6 fv-row lain_hubungan">
@@ -614,7 +604,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_telW" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="no_telW" placeholder="" value="{{$smoku->notel_waris}}"  />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -632,8 +622,8 @@
 																</div>
 																<!--end::Input wrapper-->
 															</div>
-</div>
-<div class="row mb-10">
+															</div>
+															<div class="row mb-10">
 
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
@@ -643,7 +633,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="pendapatan" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="pendapatan" placeholder="" value="{{$smoku->pekerjaan_waris}}"  />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -656,13 +646,13 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="pendapatan" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" name="pendapatan" placeholder="" value="{{$smoku->pendapatan_waris}}"  />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
 															</div>
 														
-					
+															@endforeach
 </div>
 													<!--end::Input group-->
 													</div>
@@ -694,7 +684,7 @@
 																
 															</label>
 															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="AI12345" name="no_pendaftaranpelajar" value="" />
+															<input type="text" class="form-control form-control-solid" placeholder="" name="no_pendaftaranpelajar" value="" />
 														</div>
 														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
@@ -703,7 +693,13 @@
 																
 															</label>
 															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="Sarjana Muda Teknologi Maklumat" name="nama_kursus" value="" />
+															<select name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																			@foreach ($kursus as $kursus)
+																			<option></option>
+																			<option value="{{ $kursus->nama_kursus}}">{{ $kursus->nama_kursus}}</option>
+																			@endforeach
+																			
+																		</select>
 														</div>
 														<!--end::Input group-->
 														
@@ -719,13 +715,10 @@
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
 																	<select name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																			@foreach ($peringkat as $peringkat)
 																			<option></option>
-																			<option value="1">Sijil Asas / Sijil</option>
-																			<option value="2">Diploma</option>
-																			<option value="3">Sarjana Muda</option>
-																			<option value="4">Diploma Lepasan Ijazah</option>
-																			<option value="5">Sarjana</option>
-																			<option value="6">PhD</option>
+																			<option value="{{ $peringkat->kodperingkat}}">{{ $peringkat->peringkat}}</option>
+																			@endforeach
 																			
 																		</select>																	<!--end::Input wrapper-->
 																</div>
@@ -737,21 +730,14 @@
 																<!--begin::Label-->
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Nama Pusat Pengajian</label>
 																<!--end::Label-->
-																<!--begin::Input wrapper-->
+																	<!--begin::Input wrapper-->
 																		<select name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																			@foreach ($infoipt as $infoipt)
 																			<option></option>
-																			<option value="1">Universiti Malaysia Sabah</option>
-																			<option value="2">Universiti Kebangsaan Malaysia</option>
-																			<option value="3">Universiti Malaya</option>
-																			<option value="4">Universiti Putra Malaysia</option>
-																			<option value="5">Universiti Teknikal Malaysia Melaka</option>
-																			<option value="6">Universiti Sains Malaysia</option>
-																			<option value="7">Universiti Pertahanan Nasional Malaysia</option>
-																			<option value="8">Universiti Tun Hussein Onn Malaysia</option>
-																			<option value="9">Universiti Malaysia Kelantan</option>
-																			<option value="10">Univeristi Utara Malaysia</option>
-																			
-																		</select>																<!--end::Input wrapper-->
+																			<option value="{{ $infoipt->idipt}}">{{ $infoipt->namaipt}}</option>
+																			@endforeach
+																		</select>
+																	<!--end::Input wrapper-->
 															</div>
 															<!--end::Col-->
 														</div>
@@ -852,11 +838,10 @@
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
 																		<select name="mod" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																			@foreach ($mod as $mod)
 																			<option></option>
-																			<option value="1">Sepenuh Masa</option>
-																			<option value="2">Separuh Masa</option>
-																			<option value="3">Jarak Jauh</option>
-																			<option value="4">Dalam Talian (Online)</option>
+																			<option value="{{ $mod->kodmod}}">{{ $mod->mod}}</option>
+																			@endforeach
 																		</select>
 																	<!--end::Input wrapper-->
 															</div>
@@ -885,12 +870,10 @@
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
 																		<select name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																			@foreach ($biaya as $biaya)
 																			<option></option>
-																			<option value="1">Biasiswa</option>
-																			<option value="2">Tajaan Majikan</option>
-																			<option value="3">Pinjaman</option>
-																			<option value="3">Sendiri / Tiada Penaja</option>
-																			<option value="3">Lain-lain</option>
+																			<option value="{{ $biaya->kodbiaya}}">{{ $biaya->biaya}}</option>
+																			@endforeach
 																		</select>
 																	<!--end::Input wrapper-->
 																</div>
@@ -933,10 +916,10 @@
 														<!--begin::Heading-->
 														<div class="pb-10 pb-lg-15">
 															<!--begin::Title-->
-															<h2 class="fw-bold text-dark">Maklumat Tuntutan Yuran</h2>
+															<h2 class="fw-bold text-dark">Maklumat Tuntutan</h2>
 															<!--end::Title-->
 															<!--begin::Notice-->
-															<div class="text-muted fw-semibold fs-6">Tuntutan Yuran</div>
+															<div class="text-muted fw-semibold fs-6">Tuntutan</div>
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
@@ -952,22 +935,22 @@
 															</label>
 															<!--end::Label-->
 															<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"  name="jenis_tuntutan" />
-    <label class="form-check-label" for="flexCheckDefaultb" >
-        Yuran Tuntutan
-    </label>
-</div>
-<br>
-<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="2" id="flexCheckDefault"  name="jenis_tuntutan" />
-    <label class="form-check-label" for="flexCheckDefault">
-        Elaun Wang Saku
-    </label>
-</div>
-<br>
-<br>
-<div class="col-12">
-<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun</label>
+															<input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"  name="yuran" />
+															<label class="form-check-label" for="flexCheckDefaultb" >
+																Yuran
+															</label>
+														</div>
+														<br>
+														<div class="form-check">
+															<input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"  name="elaun" />
+															<label class="form-check-label" for="flexCheckDefault">
+																Elaun Wang Saku
+															</label>
+														</div>
+														<br>
+														<br>
+													<div class="col-12">
+													<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun</label>
 																	<!--begin::Input-->
 																	<input type="text" class="form-control form-control-solid" name="amaun" placeholder="" value="" />
 																	<!--end::Input-->
@@ -1000,14 +983,14 @@
 														<!--end::Heading-->
 														
 														<div class="d-flex flex-column mb-7 fv-row">
-														<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="perakuan"/>
-    <label class="form-check-label" for="flexCheckDefault">
-	Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
+															<div class="form-check">
+																<input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="perakuan"/>
+																<label class="form-check-label" for="flexCheckDefault">
+																Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
 																sekiranya maklumat yang diberikan didapati palsu atau tidak benar, pihak kementerian berhak menolak
 																permohonan saya dan menghentikan bantuan kewangan ini kepada saya
-    </label>
-</div>
+																</label>
+															</div>
 															
 														</div>
 
