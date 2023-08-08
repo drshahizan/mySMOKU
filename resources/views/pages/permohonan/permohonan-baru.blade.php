@@ -454,11 +454,16 @@
 															</div>
 															<div class="col-md-6 fv-row">
 																<div class="col-12">
-																	<button type="button" class="btn btn-flex btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_upload">
+																	{{-- <button type="button" class="btn btn-flex btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_upload">
 																	<i class="ki-duotone ki-folder-up fs-2">
 																		<span class="path1"></span>
 																		<span class="path2"></span>
-																	</i>Muat Naik Salinan Bank Penyata</button>
+																	</i>Muat Naik Salinan Bank Penyata</button> --}}
+																	<label style="color: black; padding-bottom:8px;">Salinan Bank Penyata</label><br>
+																		<input type="file" id="upload"  hidden/>
+																		<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:40%; text-align:center;">
+																		<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
+																	</label>
 																</div>
 															</div>
 														</div>
@@ -703,6 +708,17 @@
 														</div>
 														<!--end::Input group-->
 														
+														{{-- Upload Surat Tawaran Pengajian --}}
+														<div class="d-flex flex-column mb-7 fv-row">
+															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																<span class="">Resit</span>
+															</label>
+															<input type="file" id="upload"  hidden/>
+															<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:25%; text-align:center;">
+																<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
+															</label>
+														</div>
+														{{-- End - Upload Surat Tawaran Pengajian --}}
 
 														<!--begin::Input group-->
 														<div class="row mb-10">
@@ -926,38 +942,43 @@
 														
 
 														<!--begin::Input group-->
-														
 														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
 															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
 																<span class="required">Jenis Tuntutan</span>
-																
 															</label>
 															<!--end::Label-->
 															<div class="form-check">
-															<input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"  name="yuran" />
-															<label class="form-check-label" for="flexCheckDefaultb" >
-																Yuran
-															</label>
-														</div>
-														<br>
-														<div class="form-check">
-															<input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"  name="elaun" />
-															<label class="form-check-label" for="flexCheckDefault">
-																Elaun Wang Saku
-															</label>
-														</div>
-														<br>
-														<br>
-													<div class="col-12">
-													<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun</label>
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="amaun" placeholder="" value="" />
-																	<!--end::Input-->
-																</div>
-
-
-
+																<input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"  name="yuran" />
+																<label class="form-check-label" for="flexCheckDefaultb" >
+																	Yuran
+																</label>
+															</div>
+															<br>
+															<div class="form-check">
+																<input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"  name="elaun" />
+																<label class="form-check-label" for="flexCheckDefault">
+																	Elaun Wang Saku
+																</label>
+															</div>
+															<br>
+															<br>
+															<div class="col-12">
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun</label>
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="amaun" placeholder="" value="" />
+																<!--end::Input-->
+															</div>
+															{{-- Upload Resit --}}
+															<div class="d-flex flex-column mb-7 fv-row">
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																	<span class="">Resit</span>
+																</label>
+																<input type="file" id="upload"  hidden/>
+																<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:25%; text-align:center;">
+																	<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
+																</label>
+															</div>
 														</div>
 		
 													</div>
