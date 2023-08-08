@@ -26,7 +26,8 @@ class TuntutanPermohonan extends Authenticatable
         'id_permohonan',
         'nokp_pelajar',
         'program',
-        'jenis_tuntutan',
+        'yuran',
+        'elaun',
         'amaun',
         'perakuan',
         
