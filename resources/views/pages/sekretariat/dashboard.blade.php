@@ -30,8 +30,8 @@
                                         <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file" style="color: white"></i></div>
                                         <div class="ml-4">
                                             <span style="color: black; font-size:14px;">Jumlah Keseluruhan Permohonan</span>
-                                            <h4 class="mb-0 font-weight-medium">2000</h4>
-                                            <a href="#" style="text-decoration: underline;">View</a>
+                                            <h4 class="mb-0 font-weight-medium">3000</h4>
+                                            <a href="#" style="text-decoration: underline;">Papar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -45,8 +45,8 @@
                                         <div class="icon-in-bg bg-pink text-white rounded-circle"><i class="fa fa-file" style="color: white"></i></div>
                                         <div class="ml-4">
                                             <span style="color: black; font-size:14px;">Permohonan BKOKU</span>
-                                            <h4 class="mb-0 font-weight-medium">25</h4>
-                                            <a href="#" style="text-decoration: underline;">View</a>
+                                            <h4 class="mb-0 font-weight-medium">1800</h4>
+                                            <a href="#" style="text-decoration: underline;">Papar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -61,7 +61,7 @@
                                         <div class="ml-4">
                                             <span style="color: black; font-size:14px;">Permohonan PPK</span>
                                             <h4 class="mb-0 font-weight-medium">1200</h4>
-                                            <a href="#" style="text-decoration: underline;">View</a>
+                                            <a href="#" style="text-decoration: underline;">Papar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@
                                         <div class="ml-4">
                                             <span style="color: black; font-size:14px;">Jumlah Keseluruhan Saringan</span>
                                             <h4 class="mb-0 font-weight-medium">2000</h4>
-                                            <a href="#" style="text-decoration: underline;">View</a>
+                                            <a href="#" style="text-decoration: underline;">Papar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -95,8 +95,8 @@
                                         <div class="icon-in-bg bg-pink text-white rounded-circle"><i class="fa fa-warning" style="color: white"></i></div>
                                         <div class="ml-4">
                                             <span style="color: black; font-size:14px;">Saringan BKOKU</span>
-                                            <h4 class="mb-0 font-weight-medium">25</h4>
-                                            <a href="#" style="text-decoration: underline;">View</a>
+                                            <h4 class="mb-0 font-weight-medium">800</h4>
+                                            <a href="#" style="text-decoration: underline;">Papar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -111,7 +111,7 @@
                                         <div class="ml-4">
                                             <span style="color: black; font-size:14px;">Saringan PPK</span>
                                             <h4 class="mb-0 font-weight-medium">1200</h4>
-                                            <a href="#" style="text-decoration: underline;">View</a>
+                                            <a href="#" style="text-decoration: underline;">Papar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -144,8 +144,8 @@
                                         <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-mail-reply" style="color: white"></i></div>
                                         <div class="ml-4">
                                             <span style="color: black; font-size:14px;">Permohonan Dikembalikan</span>
-                                            <h4 class="mb-0 font-weight-medium">2000</h4>
-                                            <a href="{{url('permohonan-dikembalikan')}}" style="text-decoration: underline;">View</a>
+                                            <h4 class="mb-0 font-weight-medium">500</h4>
+                                            <a href="{{url('permohonan-dikembalikan')}}" style="text-decoration: underline;">Papar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -159,8 +159,8 @@
                                         <div class="icon-in-bg bg-pink text-white rounded-circle"><i class="fa fa-check" style="color: white"></i></div>
                                         <div class="ml-4">
                                             <span style="color: black; font-size:14px;">Permohonan Layak</span>
-                                            <h4 class="mb-0 font-weight-medium">25</h4>
-                                            <a href="#" style="text-decoration: underline;">View</a>
+                                            <h4 class="mb-0 font-weight-medium">1000</h4>
+                                            <a href="#" style="text-decoration: underline;">Papar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -174,8 +174,8 @@
                                         <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-times" style="color: white"></i></div>
                                         <div class="ml-4">
                                             <span style="color: black; font-size:14px;">Permohonan Tidak Layak</span>
-                                            <h4 class="mb-0 font-weight-medium">1200</h4>
-                                            <a href="#" style="text-decoration: underline;">View</a>
+                                            <h4 class="mb-0 font-weight-medium">500</h4>
+                                            <a href="#" style="text-decoration: underline;">Papar</a>
                                         </div>
                                     </div>
                                 </div>

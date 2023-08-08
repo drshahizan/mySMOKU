@@ -30,7 +30,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file" style="color: white"></i></div>
+                                    <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-mail-reply" style="color: white"></i></div>
                                     <div class="ml-4" style="color: black;">
                                         <span>Permohonan Dikembali</span>
                                         <h4 class="mb-0 font-weight-medium">9</h4>
