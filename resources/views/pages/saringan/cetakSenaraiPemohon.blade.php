@@ -16,6 +16,9 @@
 </style>
 <body>
     <div style="margin: 10px;display: block;">
+        <br>
+        <h2 style="text-align: center">SENARAI SARINGAN PERMOHONAN</h2>
+        <br>
         <table width="100%" style="border: 1px solid black!important;" id="sortTable" class="table table-striped table-hover dataTable js-exportable">
             <thead>
                 <tr>
@@ -34,13 +37,6 @@
                     <td>7/7/2023</td>
                     <td>Belum Disemak</td>
                 </tr> --}}
-                <tr>                                            
-                    <td><a href="{{ url('maklumat-pemohon') }}" title="">SARJANABKOKU000011</a></td>
-                    <td>Mohd Ali Bin Abu Kassim</td>
-                    <td>BKOKU</td>
-                    <td class="text-center">7/7/2023</td>
-                    <td class="text-center">Belum Disemak</td>
-                </tr>
                 <tr>                                            
                     <td><a href="{{ url('maklumat-pemohon') }}" title="">KKPPK000021</a></td>
                     <td>Sarah Binti Yusri</td>
@@ -80,13 +76,6 @@
                     <td class="text-center">Disokong</td>
                 </tr>
                 <tr>
-                    <td><a href="{{ url('maklumat-pemohon') }}" title="">DIPLOMABKOKU002011</a></td>
-                    <td>Choo Mei Ling</td>
-                    <td>BKOKU</td>
-                    <td class="text-center">7/6/2023</td>
-                    <td class="text-center">Dikembalikan</td>
-                </tr>
-                <tr>
                     <td><a href="{{ url('maklumat-pemohon') }}" title="">PHDBKOKU000011</a></td>
                     <td>Ezra Hanisah Binti Md Yunos</td>
                     <td>BKOKU</td>                                    
@@ -105,13 +94,6 @@
                     <td>PPK</td>                                        
                     <td class="text-center">5/7/2023</td>
                     <td class="text-center">Disokong</td>
-                </tr>
-                <tr>
-                    <td><a href="{{ url('maklumat-pemohon') }}" title="">DIPLOMABKOKU002011</a></td>
-                    <td>Shakira Mariam Aqilah Binti Syed Abdul Rahman</td>
-                    <td>BKOKU</td>                                        
-                    <td class="text-center">7/6/2023</td>
-                    <td class="text-center">Dikembalikan</td>
                 </tr>
                 <tr>
                     <td><a href="{{ url('maklumat-pemohon') }}" title="">PHDBKOKU000011</a></td>

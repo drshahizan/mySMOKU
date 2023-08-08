@@ -64,8 +64,8 @@
                                                         <div class="form-group c_form_group">
                                                         <select name="maklumat_profil_diri" class="form-control">
                                                             <option value="">Pilih</option>
-                                                            <option value="disokong">Disokong</option>
-                                                            <option value="dikembalikan">Dikembalikan</option>
+                                                            <option value="lengkap">Lengkap</option>
+                                                            <option value="tak_lengkap">Tidak Lengkap</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -83,8 +83,8 @@
                                                         <div class="form-group c_form_group">
                                                         <select name="maklumat_akademik" class="form-control">
                                                             <option value="">Pilih</option>
-                                                            <option value="disokong">Disokong</option>
-                                                            <option value="dikembalikan">Dikembalikan</option>
+                                                            <option value="lengkap">Lengkap</option>
+                                                            <option value="tak_lengkap">Tidak Lengkap</option>
                                                         </select>
                                                     </div>
                                                     <td><div class="fancy-checkbox">
@@ -102,8 +102,8 @@
                                                         <div class="form-group c_form_group">
                                                         <select name="salinan_dokumen" class="form-control">
                                                             <option value="">Pilih</option>
-                                                            <option value="disokong">Disokong</option>
-                                                            <option value="dikembalikan">Dikembalikan</option>
+                                                            <option value="lengkap">Lengkap</option>
+                                                            <option value="tak_lengkap">Tidak Lengkap</option>
                                                         </select>
                                                     </div>       
                                                 </td>
@@ -122,9 +122,9 @@
                                 <div class="col-md-6">
                                     </div>
                                 <div class="col-md-6 text-right">
-                                    <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Lengkap"><i class="fa fa-check"></i> Lengkap</button>
+                                    <button type="submit" name="submit" class="btn bg-green text-white" value="Disokong"><i class="fa fa-check"></i> Disokong</button>
                                     <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan"><i class="fa fa-save"></i> Simpan</button>
-                                    <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Kembalikan" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-reply"></i> Kembalikan</button>
+                                    <button type="submit" name="submit" class="btn btn-danger" value="Kembalikan" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-reply"></i> Kembalikan</button>
                                 </form>
                                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
