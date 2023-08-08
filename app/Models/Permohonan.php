@@ -35,6 +35,7 @@ class Permohonan extends Authenticatable
         //'alamat2',
         //'alamat3',
         'alamat_poskod',
+		'alamat_bandar',
         'alamat_negeri',
         'dun',
         //'parlimen',
