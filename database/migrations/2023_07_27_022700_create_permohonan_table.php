@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('id_permohonan')->nullable();
             $table->string('nokp_pelajar');
             $table->string('program')->nullable();
-            $table->string('jenis_tuntutan');
+            $table->string('yuran')->nullable();
+            $table->string('elaun')->nullable();
             $table->string('amaun');
             $table->string('perakuan');
             $table->timestamps();
