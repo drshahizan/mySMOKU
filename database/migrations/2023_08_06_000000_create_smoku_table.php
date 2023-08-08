@@ -48,6 +48,7 @@ return new class extends Migration
             $table->string('nama_waris')->nullable();
             $table->string('nokp_waris')->nullable();
             $table->string('pekerjaan_waris')->nullable();
+            $table->string('pendapatan_waris')->nullable();
             $table->string('hubungan')->nullable();
             $table->string('notel_waris')->nullable();
             $table->integer('verify')->nullable();
