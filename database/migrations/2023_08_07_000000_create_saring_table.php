@@ -18,13 +18,13 @@ return new class extends Migration
             $table->string('id_permohonan');
             $table->string('id_sekretariat')->nullable();
             $table->string('nokp');
-            $table->string('suratTawaran')->nullable();
+            $table->boolean('suratTawaran')->nullable();
             $table->string('nota_suratTawaran')->nullable();
-            $table->string('akaunBank')->nullable();
+            $table->boolean('akaunBank')->nullable();
             $table->string('nota_akaunBank')->nullable();
-            $table->string('kepPeperiksaan')->nullable();
+            $table->boolean('kepPeperiksaan')->nullable();
             $table->string('nota_kepPeperiksaan')->nullable();
-            $table->string('invoisResit')->nullable();
+            $table->boolean('invoisResit')->nullable();
             $table->string('nota_invoisResit')->nullable();
             $table->timestamps();
         });
