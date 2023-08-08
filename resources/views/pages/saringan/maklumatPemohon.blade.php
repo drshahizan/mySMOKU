@@ -103,7 +103,7 @@
                                                         <select name="salinan_dokumen" class="form-control">
                                                             <option value="">Pilih</option>
                                                             <option value="disokong">Disokong</option>
-                                                            <option value="dekembalikan">Dikembalikan</option>
+                                                            <option value="dikembalikan">Dikembalikan</option>
                                                         </select>
                                                     </div>       
                                                 </td>
