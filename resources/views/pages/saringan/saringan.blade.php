@@ -119,79 +119,79 @@
                                             <td>Sarah Binti Yusri</td>
                                             <td>PPK</td>                                        
                                             <td class="text-center">5/7/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success"> Disokong</button></td>
+                                            <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
                                         </tr> <tr>                                            
                                             <td><a href="{{ url('maklumat-pemohon') }}" title="">PHDBKOKU000021</a></td>
                                             <td>Aishah Binti Samsudin</td>
                                             <td>BKOKU</td>                                        
                                             <td class="text-center">2/7/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success"> Disokong</button></td>
+                                            <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
                                         </tr> <tr>
                                             <td><a href="{{ url('maklumat-pemohon') }}" title="">DIPBKOKU000021</a></td>
                                             <td>Santosh A/L Ariyaran</td>
                                             <td>BKOKU</td>                                        
                                             <td class="text-center">10/7/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success"> Disokong</button></td>
+                                            <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
                                         </tr> <tr>
                                             <td><a href="{{ url('maklumat-pemohon') }}" title="">SARJANABKOKU000021</a></td>
                                             <td>Ling Kai Jie</td>
                                             <td>BKOKU</td>                                        
                                             <td class="text-center">9/7/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success"> Disokong</button></td>
+                                            <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
                                         </tr> <tr>
                                             <td><a href="{{ url('maklumat-pemohon') }}" title="">KKPPK40021</a></td>
                                             <td>Akmal Bin Kairuddin</td>
                                             <td>PPK</td>                                        
                                             <td class="text-center">7/7/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success"> Disokong</button></td>
+                                            <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
                                         </tr>
                                         <tr>
                                             <td><a href="{{ url('maklumat-pemohon') }}" title="">KKPPK60021</a></td>
                                             <td>Santishwaran A/L Paven</td>
                                             <td>PPK</td>                                        
                                             <td class="text-center">5/7/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success"> Disokong</button></td>
+                                            <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
                                         </tr>
                                         <tr>
                                             <td><a href="{{ url('maklumat-pemohon') }}" title="">DIPLOMABKOKU002011</a></td>
                                             <td>Choo Mei Ling</td>
                                             <td>BKOKU</td>
                                             <td class="text-center">7/6/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning"> Dikembalikan</button></td>
+                                            <td class="text-center"><button type="button" class="btn bg-orange text-white"> Dikembalikan</button></td>
                                         </tr>
                                         <tr>
                                             <td><a href="{{ url('maklumat-pemohon') }}" title="">PHDBKOKU000011</a></td>
                                             <td>Ezra Hanisah Binti Md Yunos</td>
                                             <td>BKOKU</td>                                    
                                             <td class="text-center">9/2/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success"> Disokong</button></td>
+                                            <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
                                         </tr><tr>
                                             <td><a href="{{ url('maklumat-pemohon') }}" title="">KKPPK40021</a></td>
                                             <td>Akmal Bin Kairuddin</td>
                                             <td>PPK</td>                                        
                                             <td class="text-center">7/7/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success"> Disokong</button></td>
+                                            <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
                                         </tr>
                                         <tr>
                                             <td><a href="{{ url('maklumat-pemohon') }}" title="">KKPPK60021</a></td>
                                             <td>Syed Abdul Kassim Hussain Yusof</td>
                                             <td>PPK</td>                                        
                                             <td class="text-center">5/7/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success"> Disokong</button></td>
+                                            <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
                                         </tr>
                                         <tr>
                                             <td><a href="{{ url('maklumat-pemohon') }}" title="">DIPLOMABKOKU002011</a></td>
                                             <td>Shakira Mariam Aqilah Binti Syed Abdul Rahman</td>
                                             <td>BKOKU</td>                                        
                                             <td class="text-center">7/6/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning"> Dikembalikan</button></td>
+                                            <td class="text-center"><button type="button" class="btn bg-orange text-white"> Dikembalikan</button></td>
                                         </tr>
                                         <tr>
                                             <td><a href="{{ url('maklumat-pemohon') }}" title="">PHDBKOKU000011</a></td>
                                             <td>Rahman Mohammed Arshahad Al-dhaqm</td>
                                             <td>BKOKU</td>                                    
                                             <td class="text-center">9/2/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success"> Disokong</button></td>
+                                            <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
                                         </tr>
                                     </tbody>
                                 </table>

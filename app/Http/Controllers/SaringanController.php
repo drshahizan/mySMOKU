@@ -61,26 +61,34 @@ class SaringanController extends Controller
             //
         }
         else if($request->get('submit')=="Kembalikan"){
+
+            if($request->get('maklumat_profil_diri')=="dikembalikan"){
+                $catatan1=$request->get('catatan_profil_diri');
+            }
+            else{
+                $catatan1=null;
+            }
+
+            if($request->get('maklumat_akademik')=="dikembalikan"){
+                $catatan2=$request->get('catatan_maklumat_akademik');
+            }
+            else{
+                $catatan2=null;
+            }
+
+            if($request->get('salinan_dokumen')=="dikembalikan"){
+                $catatan3=$request->get('catatan_salinan_dokumen');
+            }
+            else{
+                $catatan3=null;
+            }
+
             $catatan = [
-                'catatan1'=>$request->get('catatan_profil_diri'), 
-                'catatan2'=>$request->get('catatan_maklumat_akademik'), 
-                'catatan3'=>$request->get('catatan_salinan_dokumen'),
+                'catatan1'=>$catatan1, 
+                'catatan2'=>$catatan2, 
+                'catatan3'=>$catatan3,
             ];
             \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
-            dd("Email is Sent.");
         }
-    }
-
-    public function dikembalikan(Request $request)
-    {
-        $data = [
-            'catatan1'=>'John', 
-            'catatan2'=>'Doe', 
-            'catatan3'=>'john@doe.com',
-        ];
-        dd($data);
-        \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($data));
-       
-        dd("Email is Sent.");
     }
 }
