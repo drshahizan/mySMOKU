@@ -85,25 +85,7 @@
 			</a>
 		</div>
 		</div>
-		<!--end::Menu-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
+		<!--end::Menu-->	
 	</div>
 	<!--end::Menu wrapper-->
 </div>
