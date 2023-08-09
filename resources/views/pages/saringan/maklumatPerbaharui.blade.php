@@ -34,8 +34,8 @@
                             <hr>
                             <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6">
-                                    <p class="m-b-0"><strong>Tarikh Permohonan: </strong> 7/7/2023 </p>
-                                    <p><strong>ID Permohonan: </strong> KPTBKOKUB990404080221</p>                                    
+                                    <p class="m-b-0"><strong>Tarikh Permohonan: </strong> 27/07/2023 </p>
+                                    <p><strong>ID Permohonan: </strong> KPTBKOKU/2/990404080221</p>                                    
                                 </div>
                             </div>
                             <form method="POST" action="{{ url('saring-maklumat-pemohon') }}" id="saring">
