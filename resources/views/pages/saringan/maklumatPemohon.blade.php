@@ -16,7 +16,7 @@
                                 <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Pemohon</b></li>
                             </ul>
                             <div class="ml-auto">
-                                <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank"><button type="button" class="btn btn-sm btn-default" title="Print"><i class="fa fa-print"></i></button></a>
+                                <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank" class="btn btn-primary">Cetak</a>
                                 {{-- <button type="button" class="btn btn-sm btn-default" title="Delete" onclick="confirmButton()"><i class="fa fa-trash"></i></button> --}}
                             </div>
                         </div>
