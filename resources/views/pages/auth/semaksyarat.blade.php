@@ -3,6 +3,10 @@
     <!--begin::Form-->
     <form class="form w-100"  action="{{ route('semaksyarat') }}" method="post">
     @csrf
+
+            @if (session('message'))
+                <div class="alert alert-danger">{{ session('message') }}</div>
+             @endif
         <!--begin::Heading-->
         <div class="text-center mb-11">
             <!--begin::Title-->
