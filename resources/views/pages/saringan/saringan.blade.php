@@ -58,38 +58,38 @@
                                             <td><button class="btn bg-orange text-white"> Belum Disaring </button></td>
                                         </tr> --}}
                                         <tr>                                            
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/950623035672</a></td>
+                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTBKOKU/3/950623035672</a></td>
                                             <td>Wan Nurul Syafiqah Binti Wan Sahak</td>
                                             <td>BKOKU</td>
                                             <td class="text-center">05/07/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
                                         </tr>
                                         <tr>                                            
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/898987890098</a></td>
+                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTBKOKU/3/898987890098</a></td>
                                             <td>Siti Aisyah Binti Ismail</td>
                                             <td>BKOKU</td>
                                             <td class="text-center">07/07/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
                                         </tr>
                                         <tr>                                            
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/900623035672</a></td>
+                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTBKOKU/6/900623035672</a></td>
                                             <td>Wan Aminah Binti Wan Hasan</td>
                                             <td>BKOKU</td>
                                             <td class="text-center">09/07/2023</td>
                                             <td class="text-center"><button class="btn btn-warning"> Sedang Disaring </button></td>
                                         </tr>
                                         <tr>                                            
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/950623098909</a></td>
+                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTBKOKU/2/950623098909</a></td>
                                             <td>Muhammad Aiman Bin Hamid</td>
                                             <td>BKOKU</td>
                                             <td class="text-center">17/07/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
                                         </tr>
                                         <tr>                                            
-                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTBKOKU/2/990404080221</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/990404080221</a></td>
                                             <td>Mohd Ali Bin Abu Kassim</td>
                                             <td>BKOKU</td>
-                                            <td class="text-center">27/07/2023</td>
+                                            <td class="text-center">04/07/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
                                         </tr>
                                         <tr>                                            

@@ -64,6 +64,8 @@ class SaringanController extends Controller
             }
     
             $catatan = [
+                'catatan1'=> null,
+                'catatan2'=> null,
                 'catatan3'=>$catatan3,
             ];
             \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
