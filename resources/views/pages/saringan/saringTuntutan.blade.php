@@ -54,33 +54,9 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td style="text-align:right;">1</td>
+                                                    <td style="text-align:right;">3</td>
                                                     <td>
-                                                        <span><a href="{{ url('maklumat-akademik2') }}" target="_blank">Maklumat Akademik</a></span>
-                                                    </td>
-                                                    <td class="hidden-sm-down">
-                                                        <div class="form-group c_form_group">
-                                                        <select id="maklumat_akademik" name="maklumat_akademik" class="form-control" onchange="select1()">
-                                                            <option value="">Pilih</option>
-                                                            <option value="lengkap">Lengkap</option>
-                                                            <option value="tak_lengkap">Tidak Lengkap</option>
-                                                        </select>
-                                                    </div>
-                                                    <td>
-                                                    <div class="fancy-checkbox">
-                                                        <label>
-                                                            <input id="checkbox1a" type="checkbox" name="catatan_maklumat_akademik" value="1" disabled="disabled"><span> Perkara 1</span><br>
-                                                            <input id="checkbox1b" type="checkbox" name="catatan_maklumat_akademik" value="1" disabled="disabled"><span> Perkara 2</span><br>
-                                                            <input id="checkbox1c" type="checkbox" name="catatan_maklumat_akademik" value="1" disabled="disabled"><span> Perkara 3</span><br>
-                                                            <input id="checkbox1d" type="checkbox" name="catatan_maklumat_akademik" value="1" disabled="disabled"><span> Perkara 4</span>
-                                                        </label>
-                                                    </div></td>
-                                                </td> 
-                                                </tr> 
-                                                <tr>
-                                                    <td style="text-align:right;">2</td>
-                                                    <td>
-                                                        <span><a href="{{ url('salinan-akademik') }}" target="_blank">Salinan Dokumen</a></span>
+                                                        <span><a href="{{ url('salinan-dokumen') }}" target="_blank">Salinan Dokumen</a></span>
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <!--<div class="col-lg-12 col-md-12">-->
@@ -101,7 +77,7 @@
                                                             <input id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Perkara 4</span>
                                                         </label>
                                                     </div></td>
-                                                </tr>                                        
+                                                </tr>                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -155,23 +131,7 @@
             </div>
         </div>
     </div>
-   <script>        
-        function select1(){
-            var catatan1 = document.getElementById('maklumat_akademik').value;
-            if(catatan1=="tak_lengkap"){
-                document.getElementById("checkbox1a").disabled = false;
-                document.getElementById("checkbox1b").disabled = false;
-                document.getElementById("checkbox1c").disabled = false;
-                document.getElementById("checkbox1d").disabled = false;
-            }
-            else{
-                document.getElementById("checkbox1a").disabled = true;
-                document.getElementById("checkbox1b").disabled = true;
-                document.getElementById("checkbox1c").disabled = true;
-                document.getElementById("checkbox1d").disabled = true;
-            }
-        }
-
+   <script> 
         function select3(){
             var catatan1 = document.getElementById('salinan_dokumen').value;
             if(catatan1=="tak_lengkap"){

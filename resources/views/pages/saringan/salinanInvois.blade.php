@@ -10,7 +10,7 @@
             <b style="color: black!important">Invois/Resit</b> 
           </button>
         </h2>
-        <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+        <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFour">
           <div class="accordion-body" style="text-align: center">
             <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="650px"/>
           </div>

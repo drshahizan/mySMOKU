@@ -74,35 +74,31 @@ class SaringanController extends Controller
 
     public function saringMaklumat(Request $request) 
     {
-        if($request->get('submit')=="Disokong"){
-            //
+        if($request->get('maklumat_profil_diri')=="lengkap"&&$request->get('maklumat_akademik')=="lengkap"&&$request->get('salinan_dokumen')=="lengkap"){
+            
         }
-        else if($request->get('submit')=="Simpan"){
-            //
-        }
-        else if($request->get('submit')=="Kembalikan"){
-
+        else{
             if($request->get('maklumat_profil_diri')=="tak_lengkap"){
                 $catatan1=$request->get('catatan_profil_diri');
             }
             else{
                 $catatan1=null;
             }
-
+    
             if($request->get('maklumat_akademik')=="tak_lengkap"){
                 $catatan2=$request->get('catatan_maklumat_akademik');
             }
             else{
                 $catatan2=null;
             }
-
+    
             if($request->get('salinan_dokumen')=="tak_lengkap"){
                 $catatan3=$request->get('catatan_salinan_dokumen');
             }
             else{
                 $catatan3=null;
             }
-
+    
             $catatan = [
                 'catatan1'=>$catatan1, 
                 'catatan2'=>$catatan2, 

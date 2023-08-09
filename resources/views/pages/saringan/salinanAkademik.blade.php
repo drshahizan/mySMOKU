@@ -10,7 +10,7 @@
             <b style="color: black!important">Keputusan Peperiksaan</b> 
             </button>
         </h2>
-        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
             <div class="accordion-body" style="text-align: center">
                 <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="650px"/>
             </div>
