@@ -44,7 +44,7 @@
 														<span class="path3"></span>
 														<span class="path4"></span>
 													</i>
-													<div class="text-gray-100 fw-bold fs-4 mb-2 mt-5">Jumlah Saringan (Keseluruhan)</div>
+													<div class="text-gray-800 fw-bold fs-4 mb-2 mt-5">Jumlah Saringan (Keseluruhan)</div>
 													<div class="fw-semibold text-gray-400">5000</div>
 												</div>
 												<!--end::Body-->
@@ -65,7 +65,7 @@
 														<span class="path6"></span>
 														<span class="path7"></span>
 													</i>
-													<div class="text-gray-100 fw-bold fs-2 mb-2 mt-5">+3000</div>
+													<div class="text-light-800 fw-bold fs-4 mb-2 mt-5">Belum Disemak</div>
 													<div class="fw-semibold text-gray-100">New Customers</div>
 												</div>
 												<!--end::Body-->
@@ -121,12 +121,14 @@
                                             </div>
                                             </div>
                                         </div>
+                                       
                                         <div class="card-body p-0">
 											<!--begin::Table wrapper-->
+                                            <div class ="body">
 											<div class="table-responsive">
 												<!--begin::Table-->
 												<table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold">
-													<thead class="fs-7 text-gray-400 text-uppercase">
+													<thead class=" text-gray-800 mb-1 text-uppercase">
 														<tr>
                                                         <th class="min-w-100px text-center">ID Permohonan</th>                                        
                                                         <th class="min-w-250px">Nama</th>
@@ -136,11 +138,11 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody class="fs-6">
-                                                        <tr>                                          
+                                                <tr>                                          
                                             <td class="text-center"><a href="{{ url('maklumat-pemohon') }}" title="" >980214089182M</a></td>
-                                            <td><b>Mohd Ali Bin Abu Kassim<b></td>
+                                            <td class= "text-gray-800 mb-1"><b>Mohd Ali Bin Abu Kassim<b></td>
                                             <td>BKOKU</td>
-                                            <td class="text-center">7/7/2023</td>
+                                            <td class="text-center text-gray-800  mb-1">7/7/2023</td>
                                             <td class="text-center"><span class="badge badge-light-danger fw-bold px-4 py-3">Belum Disemak</span></td>
                                         </tr>
                                         <tr>                                            
@@ -225,6 +227,7 @@
                                     </tbody>
                                 </table>       
                                     
+</div>
 </div>
 </div>
 </div>
