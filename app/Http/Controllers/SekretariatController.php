@@ -19,10 +19,10 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.permohonan.status');
     }
 
-    public function keputusanPengesahan()
+    public function keputusanSaringan()
     {
 
-        return view('pages.sekretariat.permohonan.pengesahan');
+        return view('pages.sekretariat.permohonan.rekodKeputusan');
     }
     
     public function kembalikanPermohonan()

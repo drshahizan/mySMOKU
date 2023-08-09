@@ -206,7 +206,7 @@
 															<label class="form-label mb-3">Nama</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid" name="nama_pelajar" placeholder="" value="{{$smoku->nama}}" />
+															<input type="text" class="form-control form-control-lg form-control-solid" name="nama_pelajar" placeholder="" value="{{$smoku->nama}}" readonly/>
 															<!--end::Input-->
 														</div>
 														<!--end::Input group-->
@@ -221,7 +221,7 @@
 																<div class="row fv-row">
 																	<!--begin::Col-->
 																	<div class="col-12">
-																		<input type="text" class="form-control form-control-lg form-control-solid" minlength="12" name="nokp_pelajar" placeholder="" value="{{$smoku->nokp}}" />
+																		<input type="text" class="form-control form-control-lg form-control-solid" minlength="12" name="nokp_pelajar" placeholder="" value="{{$smoku->nokp}}" readonly/>
 																	</div>
 																	<!--end::Col-->
 																</div>
@@ -236,7 +236,7 @@
 																	<!--begin::Col-->
 																	<div class="col-12">
 																		<!--begin::Input-->
-																	<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" name="tkh_lahir" value="{{$smoku->tkh_lahir}}">
+																	<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" name="tkh_lahir" value="{{$smoku->tkh_lahir}}" readonly/>
 																	<!--end::Input-->
 																	</div>
 																</div>	
@@ -248,7 +248,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="umur" placeholder="" value="{{$smoku->umur}}"/>
+																	<input type="text" class="form-control form-control-solid" name="umur" placeholder="" value="{{$smoku->umur}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -270,7 +270,7 @@
 																<div class="col-12">
 																	<!--begin::Input-->
 																	<select name="jantina" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-																		<option value="{{$smoku->jantina}}">{{$smoku->jantina}}</option>
+																		<option value="{{$smoku->kodjantina}}">{{$smoku->jantina}}</option>
 																	</select>
 																	<!--end::Input-->
 																</div>
@@ -285,7 +285,7 @@
 																<div class="col-12">
 																	<!--begin::Input-->
 																	<select name="bangsa" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-																		<option value="{{$smoku->bangsa}}">{{$smoku->bangsa}}</option>
+																		<option value="{{$smoku->kodbangsa}}">{{$smoku->bangsa}}</option>
 																	</select>
 																	<!--end::Input-->
 																</div>
@@ -383,7 +383,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="emel" placeholder="" value="{{$smoku->email}}" />
+																	<input type="text" class="form-control form-control-solid" name="emel" placeholder="" value="{{$smoku->email}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -407,7 +407,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="noJKM" placeholder="" value="{{$smoku->noJKM}}"  />
+																	<input type="text" class="form-control form-control-solid" name="noJKM" placeholder="" value="{{$smoku->noJKM}}"  readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -420,7 +420,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="kecacatan" placeholder="" value="{{$smoku->kecacatan}}" />
+																	<input type="text" class="form-control form-control-solid" name="kecacatan" placeholder="" value="{{$smoku->kecacatan}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -535,7 +535,7 @@
 															<div class="col-md-6 fv-row hubungan_row">
 															<label class="form-label mb-6">Hubungan Waris</label>
 															<select name="hubungan" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-																<option value="{{$smoku->hubungan}}">{{$smoku->hubungan}}</option>
+																<option value="{{$smoku->kodhubungan}}">{{$smoku->hubungan}}</option>
 															</select>
 														</div>
 															<div class="col-md-6 fv-row lain_hubungan">
@@ -680,6 +680,7 @@
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
+														@foreach ($akademik as $akademik)
 														<!--begin::Input group-->
 
 														<div class="d-flex flex-column mb-7 fv-row">
@@ -699,12 +700,8 @@
 															</label>
 															<!--end::Label-->
 															<select name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																			@foreach ($kursus as $kursus)
-																			<option></option>
-																			<option value="{{ $kursus->nama_kursus}}">{{ $kursus->nama_kursus}}</option>
-																			@endforeach
-																			
-																		</select>
+																<option value="{{ $akademik->nama_kursus}}">{{ $akademik->nama_kursus}}</option>
+															</select>
 														</div>
 														<!--end::Input group-->
 														
@@ -731,12 +728,9 @@
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
 																	<select name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																			@foreach ($peringkat as $peringkat)
-																			<option></option>
-																			<option value="{{ $peringkat->kodperingkat}}">{{ $peringkat->peringkat}}</option>
-																			@endforeach
-																			
-																		</select>																	<!--end::Input wrapper-->
+																		<option value="{{ $akademik->kodperingkat}}">{{ $akademik->peringkat}}</option>
+																	</select>
+																	<!--end::Input wrapper-->
 																</div>
 																<!--end::Row-->
 															</div>
@@ -748,16 +742,14 @@
 																<!--end::Label-->
 																	<!--begin::Input wrapper-->
 																		<select name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																			@foreach ($infoipt as $infoipt)
-																			<option></option>
-																			<option value="{{ $infoipt->idipt}}">{{ $infoipt->namaipt}}</option>
-																			@endforeach
+																			<option value="{{ $akademik->idipt}}">{{ $akademik->namaipt}}</option>
 																		</select>
 																	<!--end::Input wrapper-->
 															</div>
 															<!--end::Col-->
 														</div>
 														<!--end::Input group-->
+														@endforeach
 
 
 														<!--begin::Input group-->

@@ -60,14 +60,24 @@
     color:rgba(255,255,255,0.7);
 }
 
+.bg-yellow{
+    background:rgb(255, 255, 103);
+    color: rgb(80, 80, 80)!important;
+}
+
 .bg-orange:hover, .bg-orange:active{
-    background:#ff7321!important;
+    background:coral!important;
     color:rgba(255,255,255,0.7)!important;
 }
 
 .bg-green:hover, .bg-green:active{
     background: #00bf36!important;
     color:rgba(255,255,255,0.7)!important;
+}
+
+.bg-yellow:hover, .bg-yellow:active{
+    background:rgb(255, 255, 103);
+    color: rgb(80, 80, 80)!important;
 }
 
 .text-white{
