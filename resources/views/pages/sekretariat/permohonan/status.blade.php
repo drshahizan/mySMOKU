@@ -23,57 +23,102 @@
                             <h1>Status Permohonan BKOKU dan PPK</h1>
                         </div>
                         <hr>
-                        {{-- Small Card Section --}}
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-indigo text-white rounded-circle" style="padding-left:0;"><i class="fa fa-check"></i></div>
-                                        <div class="ml-4">
-                                            <span style="color: black;"> Aktif BKOKU</span>
-                                            <h4 class="mb-0 font-weight-medium">2000</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-azura text-white rounded-circle"><i class="fa fa-times" style="color: white"></i></div>
-                                        <div class="ml-4">
-                                            <span style="color: black"> Tidak Aktif BKOKU</span>
-                                            <h4 class="mb-0 font-weight-medium">25</h4>
+                        <div class="row">
+                        {{-- Small Card Section Level 1--}}
+                            <div class="col-lg-2 col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-in-bg bg-info text-white rounded-circle"><i class="fa fa-bookmark" style="color: white"></i></div>
+                                            <div class="ml-4">
+                                                <span style="color: black;"> Baru</span>
+                                                <h4 class="mb-0 font-weight-medium">1090</h4>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-check"></i></div>
-                                        <div class="ml-4">
-                                            <span style="color: black"> Aktif PPK</span>
-                                            <h4 class="mb-0 font-weight-medium">1200</h4>
+
+                            <div class="col-lg-2 col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-in-bg text-white rounded-circle" style="background-color: coral;"><i class="fa fa-users" style="color: white"></i></div>
+                                            <div class="ml-4">
+                                                <span style="color: black"> Saringan</span>
+                                                <h4 class="mb-0 font-weight-medium">500</h4>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-pink text-white rounded-circle"><i class="fa fa-times" style="color: white"></i></div>
-                                        <div class="ml-4">
-                                            <span style="color: black"> Tidak Aktif PPK</span>
-                                            <h4 class="mb-0 font-weight-medium">54</h4>
+                            
+                            <div class="col-lg-2 col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-in-bg bg-primary text-white rounded-circle"><i class="fa fa-user-check" style="color: white"></i></div>
+                                            <div class="ml-4">
+                                                <span style="color: black"> Disokong</span>
+                                                <h4 class="mb-0 font-weight-medium">2408</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-2 col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-in-bg bg-warning text-white rounded-circle"><i class="fa fa-mail-reply" style="color: white"></i></div>
+                                            <div class="ml-4">
+                                                <span style="color: black"> Dikembalikan</span>
+                                                <h4 class="mb-0 font-weight-medium">54</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-in-bg bg-success text-white rounded-circle"><i class="fa fa-check"></i></div>
+                                            <div class="ml-4">
+                                                <span style="color: black;"> Layak</span>
+                                                <h4 class="mb-0 font-weight-medium">1230</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-in-bg bg-danger text-white rounded-circle"><i class="fa fa-times" style="color: white"></i></div>
+                                            <div class="ml-4">
+                                                <span style="color: black"> Tidak Layak</span>
+                                                <h4 class="mb-0 font-weight-medium">25</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-in-bg text-white rounded-circle" style="background-color: brown"><i class="fa fa-warning" style="color: white"></i></div>
+                                            <div class="ml-4">
+                                                <span style="color: black"> Tidak Aktif</span>
+                                                <h4 class="mb-0 font-weight-medium">195</h4>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -82,10 +127,6 @@
                     </div>
                     {{-- End of Small card section --}}
                 </div>
-             
-                {{-- Card section --}}
-                
-                {{-- End of Card section --}}
 
                 {{-- Table section --}}
                 <div class="row clearfix">
@@ -111,7 +152,6 @@
                                 <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
                                 <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
                                 <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
-                                <option value="Aktif" {{Request::get('status') == 'Aktif' ? 'selected':'' }} >Aktif</option>
                                 <option value="Tidak Aktif" {{Request::get('status') == 'Tidak Aktif' ? 'selected':'' }} >Tidak Aktif</option>
                             </select>
                         </div>
@@ -147,112 +187,112 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>SARJANABKOKU00012</td>
+                                            <td>KPTBKOKUB011221038715</td>
                                             <td>Ali Bin Abu</td>
                                             <td>BKOKU</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:coral; color:white;">Saringan</button></td>
                                         </tr>
 
-                                        <tr data-status="Aktif">
+                                        {{-- <tr data-status="Aktif">
                                             <td>SARJANAMUDABKOKU00012</td>
                                             <td>Afiq Hazim Bin Abdul Malik</td>
                                             <td>BKOKU</td>
                                             <td class="text-center"><button type="button" class="btn btn-success btn-sm">Aktif</button></td>
-                                        </tr>
+                                        </tr> --}}
 
                                         <tr data-status="Tidak Aktif">
-                                            <td>SARJANABKOKU00012</td>
+                                            <td>KPTBKOKUB011221038712</td>
                                             <td>Alia Dania</td>
                                             <td>BKOKU</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:brown; color:white;">Tidak Aktif</button></td>
+                                            <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                         </tr>  
 
                                         <tr data-status="Disokong">
-                                            <td>DIPPPK80012</td>
+                                            <td>KPTPPKB011221038714</td>
                                             <td>Amirah Binti Akmal</td>
                                             <td>PPK</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
 
                                         <tr data-status="Baru">
-                                            <td>SARJANABKOKU22012</td>
+                                            <td>KPTBKOKUB011221038016</td>
                                             <td>Chai Jing Si</td>
                                             <td>BKOKU</td>
                                             <td class="text-center"><button type="button" class="btn btn-info btn-sm">Baru</button></td>
                                         </tr>
 
                                         <tr data-status="Dikembalikan">
-                                            <td>SARJANAMUDABKOKU00012</td>
+                                            <td>KPTBKOKUB011221038712</td>
                                             <td>Clarrisa Yong Chu Ni </td>
                                             <td>BKOKU</td>
                                             <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
                                         </tr>
                                         
                                         <tr data-status="Saringan">
-                                            <td>PHDBKOKU30012</td>
+                                            <td>KPTBKOKUB011221038716</td>
                                             <td>Eng Mei Ying</td>
                                             <td>BKOKU</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
 
                                         <tr data-status="Tidak Layak">
-                                            <td>SARJANABKOKU03412</td>
+                                            <td>KPTBKOKUB011221038717</td>
                                             <td>Ganesan Rao A/L Puven</td>
                                             <td>BKOKU</td>
                                             <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                         </tr>
 
                                         <tr>
-                                            <td>DIPPPK01012</td>
+                                            <td>KPTPPKB011221038718</td>
                                             <td>Sarah Yunos</td>
                                             <td>PPK</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:coral; color:white;">Saringan</button></td>
                                         </tr>
                                         
                                         <tr data-status="Saringan">
-                                            <td>SARJANAMUDABKOKU90012</td>
+                                            <td>KPTBKOKUB991221038716</td>
                                             <td>Tan Yu Heng</td>
                                             <td>BKOKU</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:gray; color:white;">Saringan</button></td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:coral; color:white;">Saringan</button></td>
                                         </tr>
                                         
                                         <tr data-status="Layak">
-                                            <td>SARJANABKOKU02012</td>
+                                            <td>KPTBKOKUB011221033712</td>
                                             <td>Puah Chu Er</td>
                                             <td>BKOKU</td>
                                             <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
-                                            <td>SARJANAMUDABKOKU66012</td>
+                                            <td>KPTBKOKUB011221034712</td>
                                             <td>Hanisah Binti Yusri</td>
                                             <td>BKOKU</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
-                                            <td>SARJANAMUDABKOKU77012</td>
+                                            <td>KPTBKOKUB011221032712</td>
                                             <td>Ramli Bin Sarip</td>
                                             <td>BKOKU</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm btn-success">Layak</button></td>
                                         </tr>
                                         
                                         <tr data-status="Baru">
-                                            <td>SARJANABKOKU09012</td>
+                                            <td>KPTBKOKUB011221038712</td>
                                             <td>Norhayati Binti Sam</td>
                                             <td>BKOKU</td>
                                             <td class="text-center"><button type="button" class="btn btn-info btn-sm">Baru</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
-                                            <td>SARJANABKOKU88012</td>
+                                            <td>KPTBKOKUB011221038712</td>
                                             <td>Shamsiah Binti Yusof</td>
                                             <td>BKOKU</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
 
                                         <tr data-status="Dikembalikan">
-                                            <td>SARJANABKOKU50012</td>
+                                            <td>KPTBKOKUB011221038712</td>
                                             <td>Siti Farah Binti Muazin</td>
                                             <td>BKOKU</td>
                                             <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
