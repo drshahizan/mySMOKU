@@ -27,15 +27,15 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Senarai Saringan Permohonan<br><small>Tekan ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
-                            <ul class="header-dropdown dropdown">
+                            <h2>Senarai Saringan Permohonan<br><small>Klik ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
+                            {{-- <ul class="header-dropdown dropdown">
                                 <li>
                                     <a href="{{ url('cetak-senarai-pemohon') }}" target="_blank" class="btn btn-primary" style="color: white">
                                         <i class="fa fa-print" style="color: white!important"></i> 
                                         Cetak Senarai Pendek
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                         <div class="body">
                             <div class="table-responsive">
@@ -65,7 +65,7 @@
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
                                         </tr>
                                         <tr>                                            
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPKB970204052445</a></td>
+                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTPPKB970204052445</a></td>
                                             <td>Sarah Binti Yusri</td>
                                             <td>PPK</td>                                        
                                             <td class="text-center">5/7/2023</td>

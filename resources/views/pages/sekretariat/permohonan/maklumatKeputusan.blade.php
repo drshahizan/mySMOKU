@@ -6,18 +6,14 @@
             <!-- Page header section  -->
             <div class="row clearfix">
                 <div class="col-12">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light page_menu">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="fa fa-bars text-muted"></i>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Keputusan Permohonan</b></li>
-                            </ul>
-                            {{-- <div class="ml-auto">
-                                <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank"><button type="button" class="btn btn-sm btn-default" title="Print"><i class="fa fa-download"></i></button></a>
-                            </div> --}} 
+                    <nav class="navbar navbar-expand-sm navbar-light bg-light page_menu">
+                        <div class="header">
+                            <h2><b>Rekod Keputusan Permohonan</b></h2>
                         </div>
+
+                        {{-- <div class="ml-auto" style="color:black;">
+                            <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-download"></i> Surat Tawaran</a>
+                        </div> --}}
                     </nav>
                 </div>
 
@@ -26,144 +22,46 @@
                         <div class="body">
                             <div class="d-flex align-items-center">
                                 <img class="img" src="https://www.shareicon.net/data/128x128/2016/05/24/770085_man_512x512.png" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar Name">
-                                <div class="ml-3">
+                                <div class="ml-2" style="padding-top: 10px;">
                                     Ali Bin Abu
                                     <p class="mb-0">alibinabu@graduate.utm.my</p>
                                 </div>
                             </div>
-                            <hr>
+
+                            <hr><br>
+
                             <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6">
                                     <p><strong>ID Permohonan: </strong> KPTBKOKUD020223015001</p>
                                     <p><strong>Tarikh Permohonan: </strong> 02/07/2023 </p>
-                                    <p><strong>Status Permohonan: </strong><span style="color: green;"> Layak</span></p>                                    
+                                    <p><strong>Status Permohonan: </strong> Disokong</p>                                    
                                 </div>
                             </div>
-                            <form method="POST" action="{{ url('saring-maklumat-pemohon') }}" id="saring">
-                                {{csrf_field()}}
-                                <div class="row clearfix">
-                                    <div class="col-md-12">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover table-bordered mb-5">
-                                                <thead class="table-primary">
-                                                    <tr>
-                                                        <th style="width: 5%;">Bil</th>                                                        
-                                                        <th style="width: 20%;">Item</th>
-                                                        <th style="width: 25%;">Keputusan Saringan</th>
-                                                        <th style="width: 50%;">Catatan</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <span><a href="{{ url('maklumat-profil-diri') }}" target="_blank">Maklumat Profil Diri</a></span>
-                                                        </td>           
-                                                        <td class="hidden-sm-down">
-                                                        
-                                                            <div class="form-group c_form_group">
-                                                                <select name="maklumat_profil_diri" class="form-control">
-                                                                    <option value="">Pilih</option>
-                                                                    <option value="lengkap">Lengkap</option>
-                                                                    <option value="tak_lengkap">Tidak Lengkap</option>
-                                                                </select>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="form-group c_form_group">
-                                                                <p>Semua maklumat diberikan adalah benar.</p>
-                                                            </div> 
-                                                        </td>
-                                                    </tr>
 
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>
-                                                            <span><a href="{{ url('maklumat-akademik') }}" target="_blank">Maklumat Akademik</a></span>
-                                                        </td>
-                                                        <td class="hidden-sm-down">
-                                                            <div class="form-group c_form_group">
-                                                            <select name="maklumat_akademik" class="form-control">
-                                                                <option value="">Pilih</option>
-                                                                <option value="lengkap">Lengkap</option>
-                                                                <option value="tak_lengkap">Tidak Lengkap</option>
-                                                            </select>
-                                                            </div>
-                                                        </td> 
-                                                        <td>
-                                                            <div class="fancy-checkbox">
-                                                            <p>Terdapat butiran yang tidak benar dalam Maklumat Akademik</p>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>
-                                                            <span><a href="{{ url('salinan-dokumen') }}" target="_blank">Salinan Dokumen</a></span>
-                                                        </td>
-                                                        <td class="hidden-sm-down">
-                                                            <div class="form-group c_form_group">
-                                                                <select name="salinan_dokumen" class="form-control">
-                                                                    <option value="">Pilih</option>
-                                                                    <option value="lengkap">Lengkap</option>
-                                                                    <option value="tak_lengkap">Tidak Lengkap</option>
-                                                                </select>
-                                                            </div>       
-                                                        </td>
-                                                        <td>
-                                                            <div class="fancy-checkbox">
-                                                                <p>Terdapat butiran yang tidak benar dalam Salinan Dokumen</p>
-                                                            </div>
-                                                        </td>
-                                                    </tr>                                                
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="row clearfix">
-                                    <div class="col-md-12" style="text-align: center">
-                                        <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-success btn-round btn-sm"><i class="fa fa-download"></i> Cetak Surat Tawaran</a>
-                                    </div>
+                           <div class="col-md-6 col-sm-6">
+                            <form action="#" method="POST">
+                                {{-- Kelulusan --}}
+                                <label for="noMesyuarat"><b>No. Mesyuarat:</b></label>
+                                    <input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;">
+                                <label for="tarikh"><b>Tarikh Mesyuarat:</b></label>
+                                    <input type="date" id="tarikh" name="tarikh" style="padding: 5px;"><br><br>
+                                <label><b>Pilih Keputusan: </b></label>
+                                    <select id="keputusan" style="padding: 5px;">
+                                            <option value="">Pilih Keputusan</option>
+                                            <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
+                                            <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
+                                    </select>
+                                <br><br>
+                                <label for="tarikh"><b>Catatan:</b></label>
+                                    <input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; width:500px;">
+                                <br><br>
+                                <div class="submit" style="text-align: right;">
+                                    <button type="submit" class="btn btn-primary text-white">Hantar</button>
                                 </div>
                             </form>
-                                    {{-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Kembalikan Permohonan</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                </div>
-                                                <div class="modal-body text-center">
-                                                    <p>Permohonan ini akan dikembalikan kepada pemohon</p>
-                                                </div>
-                                                <div class="row clearfix">
-                                                    <div class="col-lg-12">
-                                                        <div class="fancy-checkbox">
-                                                            <label><input type="checkbox"><span>Terdapat butiran yang tidak benar dalam Maklumat Profil Diri</span></label>
-                                                        </div>
-                                                        <div class="fancy-checkbox">
-                                                            <label><input type="checkbox" ><span>Terdapat butiran yang tidak benar dalam Maklumat Akademik</span></label>
-                                                        </div>
-                                                        <div class="fancy-checkbox">
-                                                            <label><input type="checkbox"><span>Terdapat butiran yang tidak benar dalam Salinan Dokumen</span></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                                                    <a href="saring-permohonan.html"  class="btn btn-primary theme-bg gradient">Ya</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                </div>
-                            </div> 
+                           </div>
                         </div>
-                    </div>                                       
+                    </div>                                      
                 </div>
             </div>
         </div>

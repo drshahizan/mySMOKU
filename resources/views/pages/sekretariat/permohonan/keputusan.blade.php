@@ -97,45 +97,51 @@
                                         <thead>
                                             <tr>
                                                 <th style="width: 15%">ID Permohonan</th>
-                                                <th style="width: 50%">Nama</th>
-                                                <th style="width: 15%" class="text-center">Tarikh Permohonan</th>
-                                                <th style="width: 20%" class="text-center">Keputusan Permohonan</th>
+                                                <th style="width: 40%">Nama</th>
+                                                <th style="width: 15%">Jenis Permohonan</th>
+                                                <th style="width: 15%" class="text-center">Tarikh Kelulusan</th>
+                                                <th style="width: 15%" class="text-center">Keputusan Permohonan</th>
                                             </tr>
                                         </thead>
                                             
                                         <tbody> 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUD020223015001</a></td> 
+                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/D/020223015001</a></td> 
                                                 <td>Ali Bin Abu</td> 
-                                                <td class="text-center">02/07/2023</td>
+                                                <td>BKOKU</td>
+                                                <td class="text-center">21/07/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB011221038712</a></td> 
-                                                <td>Arina Binti Saleh</td> 
-                                                <td class="text-center">04/07/2023</td>
+                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/PPK/B/011221038712</a></td> 
+                                                <td>Arina Binti Saleh</td>
+                                                <td>PPK</td> 
+                                                <td class="text-center">04/06/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB011221034612</a></td> 
+                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/M/011221034612</a></td> 
                                                 <td>Choo Mei Ling</td> 
+                                                <td>BKOKU</td>
                                                 <td class="text-center">05/07/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB001121035602</a></td> 
+                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/B/001121035602</a></td> 
                                                 <td>Sarah Binti Md Yunos</td>
+                                                <td>BKOKU</td>
                                                 <td class="text-center">12/06/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-danger btn-sm"> Tidak Layak</button></td>
                                                 {{-- <td>Anda tidak disahkan sebagai pelajar OKU</td>  --}}
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB970804110016</a></td>
+                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/PPK/B/970804110016</a></td>
                                                 <td>Tamila A/P Ganesh</td>
+                                                <td>PPK</td>
                                                 <td class="text-center">20/06/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-warning btn-sm"> Dikembalikan</button></td>
                                                 {{-- <td>Terdapat kesilapan dalam butiran resit </td> --}}

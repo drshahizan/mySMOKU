@@ -20,7 +20,7 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <h1>Status Permohonan BKOKU dan PPK</h1>
+                            <h1>Status Permohonan</h1>
                         </div>
                         <hr>
 
@@ -110,7 +110,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-2 col-md-4">
+                            {{-- <div class="col-lg-2 col-md-4">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
@@ -122,7 +122,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     {{-- End of Small card section --}}
@@ -179,10 +179,10 @@
                                 <table id="sortTable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                            <th style="width: 25%">ID Permohonan</th> 
-                                            <th style="width: 40%">Nama Pemohon</th>
+                                            <th style="width: 20%">ID Permohonan</th> 
+                                            <th style="width: 50%">Nama Pemohon</th>
                                             <th style="width: 15%">Jenis Permohonan</th>  
-                                            <th class="text-center" style="width: 20%">Status Permohonan</th>
+                                            <th class="text-center" style="width: 15%">Status Permohonan</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -22,7 +22,7 @@ class SekretariatController extends Controller
     public function keputusanSaringan()
     {
 
-        return view('pages.sekretariat.permohonan.rekodKeputusan');
+        return view('pages.sekretariat.permohonan.kelulusan');
     }
     
     public function kembalikanPermohonan()

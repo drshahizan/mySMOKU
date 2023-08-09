@@ -38,7 +38,9 @@
 														</div>
 														<div class="d-flex text-center flex-column text-white pt-8">
 															<span class="fw-semibold fs-5">Status</span>
-															<span class="fw-bold fs-2x pt-1">Layak</span>
+															@foreach ($status as $status)
+															<span class="fw-bold fs-2x pt-1">{{$status->status}}</span>
+															@endforeach
 														</div>
 													</div>
 													<div class="bg-body shadow-sm card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1" style="margin-top: -125px">
@@ -51,7 +53,7 @@
 															<div class="d-flex align-items-center flex-wrap w-100">
 																<div class="mb-1 pe-3 flex-grow-1">
 																	<a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bold">Sesi Pengajian</a>
-																	<div class="fs-5 text-gray-400 fw-bold">2022/2023</div>
+																	<div class="fs-5 text-gray-400 fw-bold">2023/2024</div>
 																</div>
 															</div>
 														</div>
@@ -64,8 +66,10 @@
 															<div class="d-flex align-items-center flex-wrap w-100">
 																<div class="mb-1 pe-3 flex-grow-1">
 																	<a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bold">Semester Pengajian</a>
-																	<div class="fs-5 text-gray-400 fw-bold">2</div>
-																</div>				
+																	@foreach ($akademik as $akademik)
+																	<div class="fs-5 text-gray-400 fw-bold">{{$akademik->sem_semasa}}</div>
+																	@endforeach	
+																</div>
 															</div>	
 														</div>
 														<div class="d-flex align-items-center mb-6">
@@ -114,7 +118,9 @@
 														<!--begin::Balance-->
 														<div class="d-flex text-center flex-column text-white pt-8">
 															<span class="fw-semibold fs-5">Status</span>
-															<span class="fw-bold fs-2x pt-1">Aktif</span>
+															
+															<span class="fw-bold fs-2x pt-1"></span>
+															
 														</div>
 														<!--end::Balance-->
 													</div>
@@ -133,7 +139,10 @@
 																<!--begin::Title-->
 																<div class="mb-1 pe-3 flex-grow-1">
 																	<a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bold">Status Tuntutan (Terkini)</a>
-																	<div class="fs-5 text-danger-400 fw-bold">Tidak Layak</div>
+																	
+																	<div class="fs-5 text-gray-400 fw-bold"></div>
+																	
+																	
 																</div>
 																<!--end::Title-->
 															</div>
@@ -154,7 +163,9 @@
 																<!--begin::Title-->
 																<div class="mb-1 pe-3 flex-grow-1">
 																	<a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bold">Tarikh Tuntutan (Dibuat)</a>
-																	<div class="fs-5 text-gray-400 fw-bold">24 Julai 2023</div>
+																	
+																	<div class="fs-5 text-gray-400 fw-bold"></div>
+																	
 																</div>
 																<!--end::Title-->
 															</div>
@@ -207,7 +218,9 @@
 														<span class="path4"></span>
 													</i>
 													<div class="text-white fw-bold fs-2 mb-2 mt-5">Program Permohonan</div>
-													<div class="fw-semibold text-white">BKOKU</div>
+													@foreach ($tuntutanpermohonan as $tuntutanpermohonan)
+													<div class="fw-semibold text-white">{{$tuntutanpermohonan->program}}</div>
+													@endforeach	
 												</div>
 												<!--end::Body-->
 											</a>
@@ -219,7 +232,9 @@
 												<div class="card-body">
 												<span class="menu-icon">{!! getIcon('teacher', 'fs-2x') !!}</span>
 													<div class="text-white fw-bold fs-2 mb-2 mt-5">Peringkat Pengajian</div>
-													<div class="fw-semibold text-white">Sarjana Muda</div>
+													@foreach ($sem as $sem)
+													<div class="fw-semibold text-white">{{$sem->peringkat}}</div>
+													@endforeach	
 												</div>
 												<!--end::Body-->
 											</a>
@@ -231,7 +246,9 @@
 												<div class="card-body">
 												<span class="menu-icon">{!! getIcon('calendar', 'fs-2x') !!}</span>
 													<div class="text-white fw-bold fs-2 mb-2 mt-5">Tempoh Penajaan</div>
-													<div class="fw-semibold text-white">24 Julai 2022 hingga 25 Julai 2026</div>
+													
+													<div class="fw-semibold text-white"></div>
+														
 												</div>
 												<!--end::Body-->
 											</a>
