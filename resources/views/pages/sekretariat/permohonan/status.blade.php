@@ -179,166 +179,150 @@
                                 <table id="sortTable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                            <th style="width: 20%">ID Permohonan</th> 
-                                            <th style="width: 50%">Nama Pemohon</th>
-                                            <th style="width: 15%">Jenis Permohonan</th>  
+                                            <th style="width: 20%"><b>ID Permohonan</b></th>                                        
+                                            <th style="width: 30%"><b>Nama</b></th>
+                                            <th style="width: 15%"><b>Jenis Permohonan</b></th>
+                                            <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th> 
                                             <th class="text-center" style="width: 15%">Status Permohonan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>KPTBKOKUB011221038715</td>
-                                            <td>Ali Bin Abu</td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/B/990404080221</a></td>
+                                            <td>Santosh A/L Ariyaran</td>
                                             <td>BKOKU</td>
+                                            <td class="text-center">07/02/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:coral; color:white;">Saringan</button></td>
                                         </tr>
 
-                                        {{-- <tr data-status="Aktif">
-                                            <td>SARJANAMUDABKOKU00012</td>
-                                            <td>Afiq Hazim Bin Abdul Malik</td>
-                                            <td>BKOKU</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm">Aktif</button></td>
-                                        </tr> --}}
-
                                         <tr data-status="Tidak Aktif">
-                                            <td>KPTBKOKUB011221038712</td>
-                                            <td>Alia Dania</td>
-                                            <td>BKOKU</td>
+                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPT/PPK/B/970204052445</a></td>
+                                            <td>Sarah Binti Yusri</td>
+                                            <td>PPK</td>                                        
+                                            <td class="text-center">05/03/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                         </tr>  
 
                                         <tr data-status="Disokong">
-                                            <td>KPTPPKB011221038714</td>
-                                            <td>Amirah Binti Akmal</td>
-                                            <td>PPK</td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/B/980112105666</a></td>
+                                            <td>Aishah Binti Samsudin</td>
+                                            <td>BKOKU</td>                                       
+                                            <td class="text-center">02/03/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
 
                                         <tr data-status="Baru">
-                                            <td>KPTBKOKUB011221038016</td>
-                                            <td>Chai Jing Si</td>
-                                            <td>BKOKU</td>
+                                            <<td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/M/970703041223</a></td>
+                                            <td>Mohd Ali Bin Abu Kassim</td>
+                                            <td>BKOKU</td>                                        
+                                            <td class="text-center">06/08/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-info btn-sm">Baru</button></td>
                                         </tr>
 
                                         <tr data-status="Dikembalikan">
-                                            <td>KPTBKOKUB011221038712</td>
-                                            <td>Clarrisa Yong Chu Ni </td>
-                                            <td>BKOKU</td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/M/960909105668</a></td>
+                                            <td>Ling Kai Jie</td>
+                                            <td>BKOKU</td>                                        
+                                            <td class="text-center">09/04/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
                                         </tr>
                                         
                                         <tr data-status="Saringan">
-                                            <td>KPTBKOKUB011221038716</td>
-                                            <td>Eng Mei Ying</td>
-                                            <td>BKOKU</td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/PPK/M/950804082447</a></td>
+                                            <td>Akmal Bin Kairuddin</td>
+                                            <td>PPK</td>                                        
+                                            <td class="text-center">27/4/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
 
                                         <tr data-status="Tidak Layak">
-                                            <td>KPTBKOKUB011221038717</td>
-                                            <td>Ganesan Rao A/L Puven</td>
-                                            <td>BKOKU</td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/PPK/D/021212050334</a></td>
+                                            <td>Santishwaran A/L Paven</td>
+                                            <td>PPK</td>                                        
+                                            <td class="text-center">05/06/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                         </tr>
 
                                         <tr>
-                                            <td>KPTPPKB011221038718</td>
-                                            <td>Sarah Yunos</td>
-                                            <td>PPK</td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/D/001205034745</a></td>
+                                            <td>Choo Mei Ling</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center">07/06/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:coral; color:white;">Saringan</button></td>
                                         </tr>
                                         
                                         <tr data-status="Saringan">
-                                            <td>KPTBKOKUB991221038716</td>
-                                            <td>Tan Yu Heng</td>
-                                            <td>BKOKU</td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/P/890201065225</a></td>
+                                            <td>Ezra Hanisah Binti Md Yunos</td>
+                                            <td>BKOKU</td>                                    
+                                            <td class="text-center">19/02/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:coral; color:white;">Saringan</button></td>
                                         </tr>
                                         
                                         <tr data-status="Layak">
-                                            <td>KPTBKOKUB011221033712</td>
-                                            <td>Puah Chu Er</td>
-                                            <td>BKOKU</td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/PPK/D/010305058473</a></td>
+                                            <td>Arshahad Bin Kairul Zaman</td>
+                                            <td>PPK</td>                                        
+                                            <td class="text-center">26/05/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
-                                            <td>KPTBKOKUB011221034712</td>
-                                            <td>Hanisah Binti Yusri</td>
-                                            <td>BKOKU</td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/PPK/B/981004045253</a></td>
+                                            <td>Syed Abdul Kassim Hussain Yusof</td>
+                                            <td>PPK</td>                                        
+                                            <td class="text-center">25/05/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
-                                            <td>KPTBKOKUB011221032712</td>
-                                            <td>Ramli Bin Sarip</td>
-                                            <td>BKOKU</td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/D/990201051446</a></td>
+                                            <td>Shakira Mariam Aqilah Binti Syed Abdul Rahman</td>
+                                            <td>BKOKU</td>                                        
+                                            <td class="text-center">07/06/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm btn-success">Layak</button></td>
                                         </tr>
                                         
                                         <tr data-status="Baru">
-                                            <td>KPTBKOKUB011221038712</td>
-                                            <td>Norhayati Binti Sam</td>
-                                            <td>BKOKU</td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/P/940524032341</a></td>
+                                            <td>Rahman Mohammed Arshahad Al-dhaqm</td>
+                                            <td>BKOKU</td>                                    
+                                            <td class="text-center">09/07/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-info btn-sm">Baru</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
-                                            <td>KPTBKOKUB011221038712</td>
-                                            <td>Shamsiah Binti Yusof</td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/B/950623035672</a></td>
+                                            <td>Wan Nurul Syafiqah Binti Wan Sahak</td>
                                             <td>BKOKU</td>
+                                            <td class="text-center">09/08/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
 
                                         <tr data-status="Dikembalikan">
-                                            <td>KPTBKOKUB011221038712</td>
-                                            <td>Siti Farah Binti Muazin</td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/B/890907030098</a></td>
+                                            <td>Siti Aisyah Binti Ismail</td>
                                             <td>BKOKU</td>
+                                            <td class="text-center">21/05/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
+                                        </tr>
+
+                                        <tr data-status="Disokong">
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/PPK/B/900623031672</a></td>
+                                            <td>Wan Aminah Binti Hasan</td>
+                                            <td>PPK</td>
+                                            <td class="text-center">19/04/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                        </tr>
+
+                                        <tr data-status="Dikembalikan">
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/PPK/B/950523098909</a></td>
+                                            <td>Muhammad Aiman Bin Hamid</td>
+                                            <td>PPK</td>
+                                            <td class="text-center">09/07/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
                                         </tr>
                                         
-                                        {{-- <tr data-status="Disokong">
-                                            <td>
-                                               Gayathri A/P Ganeshnaran
-                                            </td>
-                                            <td>
-                                                BKOKU
-                                            </td>
-                                            <td>
-                                               SARJANAMUDABKOKU22012
-                                            </td>
-                                            
-                                            <td>Disokong</td>
-                                        </tr>
-                                        
-                                        <tr data-status="Disokong">
-                                            <td>
-                                               Najwa Binti Hanan
-                                            </td>
-                                            <td>
-                                                PPK
-                                            </td>
-                                            <td>
-                                               DIPPPK00012
-                                            </td>
-                                            
-                                            <td>Disokong</td>
-                                        </tr> --}}
-                                        
-                                        {{-- <tr data-status="Aktif">
-                                            <td>
-                                                Puah Chu Er
-                                             </td>
-                                             <td>
-                                                 BKOKU
-                                             </td>
-                                             <td>
-                                                SARJANABKOKU02012
-                                             </td>
-                                             
-                                             <td>Aktif</td>
-                                        </tr> --}}             
                                     </tbody>
                                 </table>
                             </div>
