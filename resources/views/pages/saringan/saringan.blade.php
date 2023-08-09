@@ -65,7 +65,7 @@
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
                                         </tr>
                                         <tr>                                            
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPKB970204052445</a></td>
+                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTPPKB970204052445</a></td>
                                             <td>Sarah Binti Yusri</td>
                                             <td>PPK</td>                                        
                                             <td class="text-center">5/7/2023</td>

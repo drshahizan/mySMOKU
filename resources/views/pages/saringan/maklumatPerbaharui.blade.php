@@ -56,7 +56,7 @@
                                                 <tr>
                                                     <td style="text-align:right;">1</td>
                                                     <td>
-                                                        <span><a href="{{ url('maklumat-akademik') }}" target="_blank">Maklumat Akademik</a></span>
+                                                        <span><a href="{{ url('maklumat-akademik2') }}" target="_blank">Maklumat Akademik</a></span>
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <div class="form-group c_form_group">

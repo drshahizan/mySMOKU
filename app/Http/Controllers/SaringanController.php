@@ -25,6 +25,11 @@ class SaringanController extends Controller
         return view('pages.saringan.maklumatPemohon');
     }
 
+    public function maklumatPerbaharui()
+    {
+        return view('pages.saringan.maklumatPerbaharui');
+    }
+
     public function maklumatProfilDiri()
     {
         return view('pages.saringan.maklumatProfilDiri');
@@ -33,6 +38,11 @@ class SaringanController extends Controller
     public function maklumatAkademik()
     {
         return view('pages.saringan.maklumatAkademik');
+    }
+
+    public function maklumatAkademik2()
+    {
+        return view('pages.saringan.maklumatAkademik2');
     }
 
     public function salinanDokumen()
