@@ -22,7 +22,7 @@
           <b>Surat Tawaran</b> 
         </button>
       </h2>
-      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
         <div class="accordion-body" style="text-align: center">
             <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="700px"/>
         </div>
@@ -54,11 +54,11 @@
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
             <b>Invois/Resit</b> 
           </button>
         </h2>
-        <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+        <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
           <div class="accordion-body" style="text-align: center">
             <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="700px"/>
           </div>
@@ -66,11 +66,11 @@
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingFive">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
             <b>Maklumat Bank IPTA/IPTS/Kolej Komuniti/Politeknik Atau Pengesahan Semester Pengajian</b> 
           </button>
         </h2>
-        <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+        <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
           <div class="accordion-body" style="text-align: center">
             <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="700px"/>
           </div>
