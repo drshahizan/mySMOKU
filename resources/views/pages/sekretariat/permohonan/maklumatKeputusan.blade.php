@@ -54,8 +54,6 @@
                                 <br><br>
                                 <label for="tarikh"><b>Catatan:</b></label>
                                     <input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; width:500px;">
-                                    {{-- <textarea id="catatan" name="catatan" rows="2" cols="50"></textarea> --}}
-
                                 <br><br>
                                 <div class="submit" style="text-align: right;">
                                     <button type="submit" class="btn btn-primary text-white">Hantar</button>
