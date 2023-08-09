@@ -5,7 +5,7 @@
     @csrf
 
             @if (session('message'))
-                <div class="alert alert-danger">{{ session('message') }}</div>
+                <div class="alert alert-success">{{ session('message') }}</div>
              @endif
         <!--begin::Heading-->
         <div class="text-center mb-11">
