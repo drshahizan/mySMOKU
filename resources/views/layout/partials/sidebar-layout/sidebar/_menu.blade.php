@@ -121,6 +121,12 @@
 			</a>
 		</div>
 		<div class="menu-item">
+			<a class="menu-link" href="{{url('sekretariatPengesahan')}}">
+					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
+					<span class="menu-title">Pengesahan</span>
+			</a>
+		</div>
+		<div class="menu-item">
 			<a class="menu-link" href="{{url('sekretariatKeputusan')}}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Keputusan</span>
