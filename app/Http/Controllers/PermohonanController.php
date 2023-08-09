@@ -16,7 +16,9 @@ use App\Models\PeringkatPengajian;
 use App\Models\Kursus;
 use App\Models\Mod;
 use App\Models\Sumberbiaya;
+use App\Models\Status;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class PermohonanController extends Controller
 {
@@ -26,7 +28,7 @@ class PermohonanController extends Controller
         $smoku = Smoku::join('bk_jantina','bk_jantina.kodjantina','=','smoku.jantina')
         ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'smoku.bangsa')
         ->join('bk_hubungan','bk_hubungan.kodhubungan','=','smoku.hubungan')
-        ->get(['smoku.*', 'bk_jantina.jantina', 'bk_bangsa.bangsa', 'bk_hubungan.hubungan'])
+        ->get(['smoku.*', 'bk_jantina.*', 'bk_bangsa.*', 'bk_hubungan.*'])
         ->where('nokp', Auth::user()->id());
         $infoipt = Infoipt::all()->sortBy('namaipt');
         $peringkat = PeringkatPengajian::all()->sortBy('kodperingkat');
@@ -36,11 +38,14 @@ class PermohonanController extends Controller
 
         $pelajar = Permohonan::all()->where('nokp_pelajar', Auth::user()->id());
         $waris = Waris::all()->where('nokp_pelajar', Auth::user()->id());
-        $akademik = Akademik::join('bk_mod','bk_mod.kodmod','=','maklumatakademik.mod')
-        ->get(['maklumatakademik.*', 'bk_mod.mod'])
+        $akademik = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
+        ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
+        ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*'])
         ->where('nokp_pelajar', Auth::user()->id());
+        //return $akademik;
         $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id());
-        if (!$tuntutanpermohonan->isEmpty())
+        $status = Status::all()->where('nokp_pelajar', Auth::user()->id());
+        if (!$status->isEmpty())
         {
             return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan'));
 
@@ -48,7 +53,7 @@ class PermohonanController extends Controller
         else
         {
             //return view('pages.permohonan.permohonan-baru');
-            return view('pages.permohonan.permohonan-baru', compact('smoku','infoipt','peringkat','kursus','mod','biaya'));
+            return view('pages.permohonan.permohonan-baru', compact('smoku','akademik','infoipt','peringkat','kursus','mod','biaya'));
         }
         
         
@@ -102,7 +107,7 @@ class PermohonanController extends Controller
     
         ]);
 
-        $user = Akademik::create([
+        /*$user = Akademik::create([
             'no_pendaftaranpelajar' => $request->no_pendaftaranpelajar,
             'nokp_pelajar' => $request->nokp_pelajar,
             'peringkat_pengajian' => $request->peringkat_pengajian,
@@ -119,9 +124,23 @@ class PermohonanController extends Controller
             'nama_penaja' => $request->nama_penaja,
             'status' => '1',
             
-            //'terimaHLP' => $request->terimaHLP, 
-            //'tkh_maklumat' => $request->tkh_maklumat, 
-            
+        ]);*/
+
+        DB::table('maklumatakademik')->where('nokp_pelajar' ,$request->nokp_pelajar)
+        ->update([
+
+            'no_pendaftaranpelajar' => $request->no_pendaftaranpelajar,
+            'tkh_mula' => $request->tkh_mula,
+            'tkh_tamat' => $request->tkh_tamat,
+            'sem_semasa' => $request->sem_semasa,
+            'tempoh_pengajian' => $request->tempoh_pengajian,
+            'bil_bulanpersem' => $request->bil_bulanpersem,
+            'mod' => $request->mod,
+            'cgpa' => $request->cgpa,
+            'sumber_biaya' => $request->sumber_biaya,
+            'nama_penaja' => $request->nama_penaja,
+            'status' => '1',
+
         ]);
 
         $user = TuntutanPermohonan::create([
@@ -132,6 +151,13 @@ class PermohonanController extends Controller
             'elaun' => $request->elaun,
             'amaun' => $request->amaun,
             'perakuan' => $request->perakuan,
+            
+        ]);
+
+        $user = Status::create([
+            'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
+            'nokp_pelajar' => $request->nokp_pelajar,
+            'status' => '1',
             
         ]);
         
