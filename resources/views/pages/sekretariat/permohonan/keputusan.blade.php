@@ -91,46 +91,68 @@
                                 </div>
                             </form>
     
-                            <div class="table-responsive">
-                                <table id="sortTable" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 15%">ID Permohonan</th>
-                                            <th style="width: 30%">Nama</th>
-                                            <th style="width: 12%" class="text-center">Tarikh Permohonan</th>
-                                            <th style="width: 15%" class="text-center">Keputusan Permohonan</th>
-                                            <th style="width: 28%">Catatan</th>
-                                        </tr>
-                                    </thead>
-                                        
-                                    <tbody> 
-                                        <tr>
-                                            <td>TTBKOKU00012</td> 
-                                            <td>Ali Bin Abu</td> 
-                                            <td class="text-center">2/7/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
-                                            <td>
-                                                <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-success btn-round btn-sm"><i class="fa fa-print"></i>  Muat Turun Surat Tawaran</a>
-                                            </td>
-                                        </tr>
+                            <div class="body">
+                                <div class="table-responsive">
+                                    <table id="sortTable" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 15%">ID Permohonan</th>
+                                                <th style="width: 50%">Nama</th>
+                                                <th style="width: 15%" class="text-center">Tarikh Permohonan</th>
+                                                <th style="width: 20%" class="text-center">Keputusan Permohonan</th>
+                                                {{-- <th style="width: 28%">Catatan</th> --}}
+                                            </tr>
+                                        </thead>
+                                            
+                                        <tbody> 
+                                            <tr>
+                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUD020223015001</a></td> 
+                                                <td>Ali Bin Abu</td> 
+                                                <td class="text-center">02/07/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
+                                                {{-- <td>
+                                                    <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-success btn-round btn-sm"><i class="fa fa-download"></i>  Muat Turun Surat Tawaran</a>
+                                                </td> --}}
+                                            </tr>
 
-                                        <tr>
-                                            <td>TTBKOKU01012</td> 
-                                            <td>Sarah Binti Md Yunos</td>
-                                            <td class="text-center">4/7/2022</td>
-                                            <td class="text-center"><button type="button" class="btn btn-danger btn-sm"> Tidak Layak</button></td>
-                                            <td>Anda tidak disahkan sebagai pelajar OKU</td> 
-                                        </tr>
+                                            <tr>
+                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB011221038712</a></td> 
+                                                <td>Arina Binti Saleh</td> 
+                                                <td class="text-center">04/07/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
+                                                {{-- <td>
+                                                    <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-success btn-round btn-sm"><i class="fa fa-download"></i>  Muat Turun Surat Tawaran</a>
+                                                </td> --}}
+                                            </tr>
 
-                                        <tr>
-                                            <td>TTBKOKU90012</td>
-                                            <td>Eng Mei Ying </td>
-                                            <td class="text-center">2/2/2022</td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning btn-sm"> Dikembalikan</button></td>
-                                            <td>Terdapat kesilapan dalam butiran resit </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                            <tr>
+                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB011221038712</a></td> 
+                                                <td>Choo Mei Ling</td> 
+                                                <td class="text-center">05/07/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
+                                                {{-- <td>
+                                                    <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-success btn-round btn-sm"><i class="fa fa-download"></i>  Muat Turun Surat Tawaran</a>
+                                                </td> --}}
+                                            </tr>
+
+                                            <tr>
+                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB001121035602</a></td> 
+                                                <td>Sarah Binti Md Yunos</td>
+                                                <td class="text-center">12/06/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-danger btn-sm"> Tidak Layak</button></td>
+                                                {{-- <td>Anda tidak disahkan sebagai pelajar OKU</td>  --}}
+                                            </tr>
+
+                                            <tr>
+                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB970804110016</a></td>
+                                                <td>Tamila A/P Ganesh</td>
+                                                <td class="text-center">20/06/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-warning btn-sm"> Dikembalikan</button></td>
+                                                {{-- <td>Terdapat kesilapan dalam butiran resit </td> --}}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
