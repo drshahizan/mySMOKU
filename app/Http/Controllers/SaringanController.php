@@ -50,6 +50,16 @@ class SaringanController extends Controller
         return view('pages.saringan.salinanDokumen');
     }
 
+    public function salinanInvois()
+    {
+        return view('pages.saringan.salinanInvois');
+    }
+
+    public function salinanAkademik()
+    {
+        return view('pages.saringan.salinanAkademik');
+    }
+
     public function cetakMaklumatPemohon() 
     {
         $pdf = PDF::loadView('pages.saringan.cetakMaklumatPemohon');
