@@ -53,12 +53,14 @@ class DaftarUserController extends Controller
                 $nokp_in = $request->nokp;
                 $nokp = $request->session()->put('nokp',$nokp_in);
                 //dd($nokp_in);
-                return redirect()->route('semaksyarat')->with($nokp);
+                return redirect()->route('semaksyarat')->with($nokp)
+                ->with('message', $nokp_in. ' SAH SEBAGAI OKU BERDAFTAR DENGAN JKM');
             } else {
 
+                $nokp_in = $request->nokp;
                 //return view('pages.auth.login')->with('successMsg','Maklumat anda tiada dalam semakkan SMOKU');
                 return redirect()->route('login')
-                ->with('message', 'Maklumat anda tiada dalam semakkan SMOKU');
+                ->with('message', $nokp_in. ' BUKAN OKU YANG BERDAFTAR DENGAN JKM');
             }
 
 
