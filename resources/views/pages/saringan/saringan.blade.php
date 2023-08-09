@@ -54,93 +54,121 @@
                                             <td>Ali Bin Abu</td>
                                             <td><a href="{{ url('maklumat-pemohon'. $row['id_permohonan']) }}" title="">SARJANABKOKU000011</a></td>
                                             <td>BKOKU</td>
-                                            <td>7/7/2023</td>
+                                            <td>7/07/2023</td>
                                             <td><button class="btn bg-orange text-white"> Belum Disaring </button></td>
                                         </tr> --}}
                                         <tr>                                            
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKUB990404080221</a></td>
-                                            <td>Mohd Ali Bin Abu Kassim</td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/950623035672</a></td>
+                                            <td>Wan Nurul Syafiqah Binti Wan Sahak</td>
                                             <td>BKOKU</td>
-                                            <td class="text-center">7/7/2023</td>
+                                            <td class="text-center">05/07/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
                                         </tr>
                                         <tr>                                            
-                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTPPKB970204052445</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/898987890098</a></td>
+                                            <td>Siti Aisyah Binti Ismail</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center">07/07/2023</td>
+                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
+                                        </tr>
+                                        <tr>                                            
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/900623035672</a></td>
+                                            <td>Wan Aminah Binti Wan Hasan</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center">09/07/2023</td>
+                                            <td class="text-center"><button class="btn btn-warning"> Sedang Disaring </button></td>
+                                        </tr>
+                                        <tr>                                            
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/950623098909</a></td>
+                                            <td>Muhammad Aiman Bin Hamid</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center">17/07/2023</td>
+                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
+                                        </tr>
+                                        <tr>                                            
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/990404080221</a></td>
+                                            <td>Mohd Ali Bin Abu Kassim</td>
+                                            <td>BKOKU</td>
+                                            <td class="text-center">27/07/2023</td>
+                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
+                                        </tr>
+                                        <tr>                                            
+                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTPPK/2/970204052445</a></td>
                                             <td>Sarah Binti Yusri</td>
                                             <td>PPK</td>                                        
-                                            <td class="text-center">5/7/2023</td>
+                                            <td class="text-center">05/07/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-warning"> Sedang Disaring</button></td>
                                         </tr> <tr>                                            
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKUB980112105666</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/980112105666</a></td>
                                             <td>Aishah Binti Samsudin</td>
                                             <td>BKOKU</td>                                       
-                                            <td class="text-center">2/7/2023</td>
+                                            <td class="text-center">02/07/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
                                         </tr> <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKUM970703041223</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/970703041223</a></td>
                                             <td>Santosh A/L Ariyaran</td>
                                             <td>BKOKU</td>                                        
-                                            <td class="text-center">10/7/2023</td>
+                                            <td class="text-center">10/07/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
                                         </tr> <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKUM960909105668</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/960909105668</a></td>
                                             <td>Ling Kai Jie</td>
                                             <td>BKOKU</td>                                        
-                                            <td class="text-center">9/7/2023</td>
+                                            <td class="text-center">09/07/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-warning"> Sedang Disaring</button></td>
                                         </tr> <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPKM950804082447</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/3/950804082447</a></td>
                                             <td>Akmal Bin Kairuddin</td>
                                             <td>PPK</td>                                        
-                                            <td class="text-center">7/7/2023</td>
+                                            <td class="text-center">07/07/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
                                         </tr>
                                         <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPKD021212050334</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/1/021212050334</a></td>
                                             <td>Santishwaran A/L Paven</td>
                                             <td>PPK</td>                                        
-                                            <td class="text-center">5/7/2023</td>
+                                            <td class="text-center">05/07/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
                                         </tr>
                                         <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPKD001205034745</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/1/001205034745</a></td>
                                             <td>Choo Mei Ling</td>
                                             <td>BKOKU</td>
-                                            <td class="text-center">7/6/2023</td>
+                                            <td class="text-center">07/06/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
                                         </tr>
                                         <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKUP890201065225</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/890201065225</a></td>
                                             <td>Ezra Hanisah Binti Md Yunos</td>
                                             <td>BKOKU</td>                                    
-                                            <td class="text-center">9/2/2023</td>
+                                            <td class="text-center">09/02/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
                                         </tr><tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPKD010305058473</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/1/010305058473</a></td>
                                             <td>Arshahad Bin Kairul Zaman</td>
                                             <td>PPK</td>                                        
-                                            <td class="text-center">7/7/2023</td>
+                                            <td class="text-center">07/07/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
                                         </tr>
                                         <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPKB981004045253</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/2/981004045253</a></td>
                                             <td>Syed Abdul Kassim Hussain Yusof</td>
                                             <td>PPK</td>                                        
-                                            <td class="text-center">5/7/2023</td>
+                                            <td class="text-center">05/07/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
                                         </tr>
                                         <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKUD990201051446</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/1/990201051446</a></td>
                                             <td>Shakira Mariam Aqilah Binti Syed Abdul Rahman</td>
                                             <td>BKOKU</td>                                        
-                                            <td class="text-center">7/6/2023</td>
+                                            <td class="text-center">07/06/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
                                         </tr>
                                         <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKUP940524032341</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/940524032341</a></td>
                                             <td>Rahman Mohammed Arshahad Al-dhaqm</td>
                                             <td>BKOKU</td>                                    
-                                            <td class="text-center">9/2/2023</td>
+                                            <td class="text-center">09/02/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
                                         </tr>
                                     </tbody>
