@@ -19,7 +19,7 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <h1>Status Permohonan selepas Saringan</h1>
+                            <h1>Rekod Permohonan</h1>
                         </div>
                         <hr>
 
@@ -39,8 +39,11 @@
 
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Permohonan yang Disokong<br><small>Sila klik pada ID permohonan untuk meluluskan permohonan</small></h2>
-                                <ul class="header-dropdown dropdown">
+                                <h2>Senarai Permohonan untuk Diluluskan<br><small>Sila klik pada ID permohonan untuk meluluskan permohonan</small></h2>
+                                <ul class="header-dropdown dropdown" style="color: black;">
+                                    <li><a href="{{ url('cetak-senarai-pemohon') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-print"></i>  Senarai Pendek</a></li>
+                                </ul>
+                                {{-- <ul class="header-dropdown dropdown">
                                     <li><a href="javascript:void(0);" class="full-screen"><i class="fa fa-expand"></i></a></li>
                                     <li class="dropdown">
                                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
@@ -53,7 +56,7 @@
                                             <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-trash"></i> Delete</a></li>
                                         </ul>
                                     </li>
-                                </ul>
+                                </ul> --}}
                             </div>
                             <div class="body">
                                 <div class="table-responsive">
@@ -72,28 +75,28 @@
                                                 <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUD020223015001</a></td> 
                                                 <td>Ali Bin Abu</td> 
                                                 <td class="text-center">02/07/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-primary btn-sm"> Disokong</button></td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;"> Disokong</button></td>
                                             </tr>
 
                                             <tr>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB011221038712</a></td> 
                                                 <td>Arina Binti Saleh</td> 
                                                 <td class="text-center">04/07/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-primary btn-sm"> Disokong</button></td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;"> Disokong</button></td>
                                             </tr>
 
                                             <tr>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB011221034612</a></td> 
                                                 <td>Choo Mei Ling</td> 
                                                 <td class="text-center">05/07/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-primary btn-sm"> Disokong</button></td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;"> Disokong</button></td>
                                             </tr>
 
                                             <tr>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB001121035602</a></td> 
                                                 <td>Sarah Binti Md Yunos</td>
                                                 <td class="text-center">12/06/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-primary btn-sm"> Disokong</button></td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;"> Disokong</button></td>
                                                 {{-- <td>Anda tidak disahkan sebagai pelajar OKU</td>  --}}
                                             </tr>
 
@@ -101,7 +104,7 @@
                                                 <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB970804110016</a></td>
                                                 <td>Tamila A/P Ganesh</td>
                                                 <td class="text-center">20/06/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-primary btn-sm"> Disokong</button></td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;"> Disokong</button></td>
                                                 {{-- <td>Terdapat kesilapan dalam butiran resit </td> --}}
                                             </tr>
                                         </tbody>

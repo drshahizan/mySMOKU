@@ -107,9 +107,9 @@
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('sekretariatRekodKeputusan')}}">
+			<a class="menu-link" href="{{url('sekretariatKelulusan')}}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Rekod Keputusan</span>
+					<span class="menu-title">Kelulusan</span>
 			</a>
 		</div>
 		<div class="menu-item">
