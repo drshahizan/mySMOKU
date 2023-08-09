@@ -98,7 +98,7 @@
 														<span class="path2"></span>
 													</i>
 													<div class="text-dark fw-bold fs-2 mb-2 mt-5">Dikembalikan</div>
-													<div class="fw-semibold text-white">Milestone Reached</div>
+													<div class="fw-semibold text-dark">2</div>
 												</div>
 												<!--end::Body-->
 											</a>
@@ -124,7 +124,7 @@
                                      
                                         <div class="card-body p-0">
 											<!--begin::Table wrapper-->
-                                            <div class = "body">
+                                            <div class = "body" style= "color:black; padding-left:30px;">
 											<div class="table-responsive">
 												<!--begin::Table-->
 												<table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold">

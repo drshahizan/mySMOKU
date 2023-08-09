@@ -6,11 +6,11 @@
     </div>
     <!--end::Search-->
     <!--begin::Activities-->
-    <div class="app-navbar-item ms-1 ms-md-3">
+    <!-- <div class="app-navbar-item ms-1 ms-md-3"> -->
         <!--begin::Drawer toggle-->
-        <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px" id="kt_activities_toggle">{!! getIcon('chart-simple', 'fs-2 fs-md-1') !!}</div>
+        <!-- <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px" id="kt_activities_toggle">{!! getIcon('chart-simple', 'fs-2 fs-md-1') !!}</div> -->
         <!--end::Drawer toggle-->
-    </div>
+    <!-- </div> -->
     <!--end::Activities-->
     <!--begin::Notifications-->
     <div class="app-navbar-item ms-1 ms-md-3">

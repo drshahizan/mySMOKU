@@ -4,12 +4,12 @@
 	data-kt-search-min-length="2" data-kt-search-enter="enter" data-kt-search-layout="menu" data-kt-menu-trigger="auto"
 	data-kt-menu-overflow="false" data-kt-menu-permanent="true" data-kt-menu-placement="bottom-end">
 	<!--begin::Search toggle-->
-	<div class="d-flex align-items-center" data-kt-search-element="toggle" id="kt_header_search_toggle">
+	<!-- <div class="d-flex align-items-center" data-kt-search-element="toggle" id="kt_header_search_toggle">
 		<div
 			class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px">
 			{!! getIcon('magnifier', 'fs-2 fs-md-1') !!}
 		</div>
-	</div>
+	</div> -->
 	<!--end::Search toggle-->
 	<!--begin::Menu-->
 	<div data-kt-search-element="content" class="menu menu-sub menu-sub-dropdown p-7 w-325px w-md-375px">
