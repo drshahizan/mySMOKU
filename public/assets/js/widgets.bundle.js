@@ -1,5 +1,5 @@
 "use strict";
-//test
+
 // Class definition
 var KTCardsWidget1 = function () {
     // Private methods
