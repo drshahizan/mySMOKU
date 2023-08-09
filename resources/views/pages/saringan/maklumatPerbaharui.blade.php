@@ -13,7 +13,7 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Saring Permohonan</b></li>
+                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Saring Permohonan Yang Diperbaharui</b></li>
                             </ul>
                             {{-- <div class="ml-auto">
                                 <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank" class="btn btn-primary">Cetak</a>

@@ -13,7 +13,7 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Saring Permohonan</b></li>
+                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Saring Tuntutan</b></li>
                             </ul>
                             {{-- <div class="ml-auto">
                                 <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank" class="btn btn-primary">Cetak</a>
@@ -35,7 +35,10 @@
                             <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6">
                                     <p class="m-b-0"><strong>Tarikh Permohonan: </strong> 7/7/2023 </p>
-                                    <p><strong>ID Permohonan: </strong> KPTBKOKUB990404080221</p>                                    
+                                    <p><strong>ID Permohonan: </strong> KPTBKOKUB990404080221</p><br>    
+                                    <p><strong>Maklumat Tuntutan: </strong></p>          
+                                    <p> <b><i>Jenis Tuntutan:</i></b>  Elaun Wang Saku</p> 
+                                    <p> <b><i>Amaun: </i>RM </b><input type="number" value="300" style="width: 80px;"></p>                   
                                 </div>
                             </div>
                             <form method="POST" action="{{ url('saring-maklumat-pemohon') }}" id="saring">
@@ -54,9 +57,9 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td style="text-align:right;">3</td>
+                                                    <td style="text-align:right;">1</td>
                                                     <td>
-                                                        <span><a href="{{ url('salinan-dokumen') }}" target="_blank">Salinan Dokumen</a></span>
+                                                        <span><a href="{{ url('salinan-invois') }}" target="_blank">Salinan Dokumen</a></span>
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <!--<div class="col-lg-12 col-md-12">-->
