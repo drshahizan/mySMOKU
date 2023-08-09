@@ -49,7 +49,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::post('permohonan', [PermohonanController::class, 'store'])->name('permohonan.post');
     Route::get('viewpermohonan', [PermohonanController::class, 'viewpermohonan'])->name('viewpermohonan');
-    Route::get('statuspermohonan', [PermohonanController::class, 'statuspermohonan'])->name('statuspermohonan');
+    Route::get('statuspermohonan', [PermohonanController::class, 'statuspermohonan'])->name('sejarahpermohonan');
     
     Route::get('saringan', [SaringanController::class, 'saringan']);
     Route::get('maklumat-pemohon', [SaringanController::class, 'maklumatPemohon'])->name('id');

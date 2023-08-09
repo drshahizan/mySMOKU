@@ -24,15 +24,9 @@
 					<span class="menu-title">Baru</span>
 			</a>
 		</div>
+	
 		<div class="menu-item">
-			<a class="menu-link" href="{{ route('statuspermohonan') }}">
-			<!-- "{{ route('dashboard') }}" -->
-					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
-					<span class="menu-title">Status</span>
-			</a>
-		</div>
-		<div class="menu-item">
-			<a class="menu-link" href="#">
+			<a class="menu-link" href="{{ route('sejarahpermohonan') }}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Sejarah</span>

@@ -39,14 +39,14 @@
     <!--begin::User menu-->
 	<div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
         <!--begin::Menu wrapper-->
-		<div class="cursor-pointer symbol symbol-35px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-            @if(Auth::user()->profile_photo_url)
+		<div class="cursor-pointer symbol  symbol-35px symbol-2by3" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+            <!-- @if(Auth::user()->profile_photo_url)
                 <img src="{{ \Auth::user()->profile_photo_url }}" class="rounded-3" alt="user" />
-            @else
-                <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', Auth::user()->name) }}">
-                    {{ substr(Auth::user()->name, 0, 11) }}
+            @else -->
+                <div class="symbol-label fs-6 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', Auth::user()->nokp) }}">
+                    {{ substr(Auth::user()->nokp, 0, 1) }}
                 </div>
-            @endif
+            <!-- @endif -->
         </div>
         @include('partials/menus/_user-account-menu')
         <!--end::Menu wrapper-->

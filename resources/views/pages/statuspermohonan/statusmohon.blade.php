@@ -2,7 +2,7 @@
 		<!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->
-	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Status Permohonan</h1>
+	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Sejarah Permohonan</h1>
 	<!--end::Title-->
 	<!--begin::Breadcrumb-->
 	<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -17,7 +17,7 @@
 		</li>
 		<!--end::Item-->
 		<!--begin::Item-->
-		<li class="breadcrumb-item text-dark" style="color:darkblue">Status Permohonan</li>
+		<li class="breadcrumb-item text-dark" style="color:darkblue">Sejarah Permohonan</li>
 		<!--end::Item-->
 	</ul>
 	<!--end::Breadcrumb-->
@@ -30,8 +30,9 @@
 		<thead>
 			<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
 				<th>ID Permohonan</th>
-				<th>Tarikh Permohonan</th>
 				<th>Status Permohonan</th>
+				<th>Tindakan Permohonan</th>
+				<th>Tarikh Kemaskini</th>
 			</tr>
 </thead>
 </tbody>
