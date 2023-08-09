@@ -63,49 +63,117 @@
                                     <table id="sortTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th style="width: 15%">ID Permohonan</th>
-                                                <th style="width: 50%">Nama</th>
-                                                <th style="width: 15%" class="text-center">Tarikh Permohonan</th>
-                                                <th style="width: 20%" class="text-center">Status Permohonan</th>
+                                                <th style="width: 20%"><b>ID Permohonan</b></th>                                        
+                                                <th style="width: 30%"><b>Nama</b></th>
+                                                <th style="width: 15%"><b>Jenis Permohonan</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th> 
+                                                <th class="text-center" style="width: 15%">Status Permohonan</th>
                                             </tr>
                                         </thead>
+                                        
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/BKOKU/B/990404080221</a></td>
+                                                <td>Santosh A/L Ariyaran</td>
+                                                <td>BKOKU</td>
+                                                <td class="text-center">07/02/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                            </tr>
+    
+                                            <tr>
+                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/PPK/B/970204052445</a></td>
+                                                <td>Sarah Binti Yusri</td>
+                                                <td>PPK</td>                                        
+                                                <td class="text-center">05/03/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                            </tr>  
+    
+                                            <tr data-status="Disokong">
+                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/BKOKU/B/980112105666</a></td>
+                                                <td>Aishah Binti Samsudin</td>
+                                                <td>BKOKU</td>                                       
+                                                <td class="text-center">02/03/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                            </tr>
+    
+                                            <tr data-status="Disokong">
+                                                <<td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/BKOKU/M/970703041223</a></td>
+                                                <td>Mohd Ali Bin Abu Kassim</td>
+                                                <td>BKOKU</td>                                        
+                                                <td class="text-center">06/08/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                            </tr>
+    
+                                            <tr data-status="Disokong">
+                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/BKOKU/M/960909105668</a></td>
+                                                <td>Ling Kai Jie</td>
+                                                <td>BKOKU</td>                                        
+                                                <td class="text-center">09/04/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                            </tr>
+    
+                                            <tr data-status="Disokong">
+                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/PPK/D/021212050334</a></td>
+                                                <td>Santishwaran A/L Paven</td>
+                                                <td>PPK</td>                                        
+                                                <td class="text-center">05/06/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                            </tr>
+    
+                                            <tr>
+                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/BKOKU/D/001205034745</a></td>
+                                                <td>Choo Mei Ling</td>
+                                                <td>BKOKU</td>
+                                                <td class="text-center">07/06/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                            </tr>
                                             
-                                        <tbody> 
-                                            <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUD020223015001</a></td> 
-                                                <td>Ali Bin Abu</td> 
-                                                <td class="text-center">02/07/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;"> Disokong</button></td>
+                                            <tr data-status="Disokong">
+                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/BKOKU/P/890201065225</a></td>
+                                                <td>Ezra Hanisah Binti Md Yunos</td>
+                                                <td>BKOKU</td>                                    
+                                                <td class="text-center">19/02/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
-
-                                            <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB011221038712</a></td> 
-                                                <td>Arina Binti Saleh</td> 
-                                                <td class="text-center">04/07/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;"> Disokong</button></td>
+                                            
+                                            <tr data-status="Disokong">
+                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/PPK/B/981004045253</a></td>
+                                                <td>Syed Abdul Kassim Hussain Yusof</td>
+                                                <td>PPK</td>                                        
+                                                <td class="text-center">25/05/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
-
-                                            <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB011221034612</a></td> 
-                                                <td>Choo Mei Ling</td> 
-                                                <td class="text-center">05/07/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;"> Disokong</button></td>
+                                            
+                                            <tr data-status="Disokong">
+                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/BKOKU/P/940524032341</a></td>
+                                                <td>Rahman Mohammed Arshahad Al-dhaqm</td>
+                                                <td>BKOKU</td>                                    
+                                                <td class="text-center">09/07/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
-
-                                            <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB001121035602</a></td> 
-                                                <td>Sarah Binti Md Yunos</td>
-                                                <td class="text-center">12/06/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;"> Disokong</button></td>
-                                                {{-- <td>Anda tidak disahkan sebagai pelajar OKU</td>  --}}
+                                            
+                                            <tr data-status="Disokong">
+                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/BKOKU/B/950623035672</a></td>
+                                                <td>Wan Nurul Syafiqah Binti Wan Sahak</td>
+                                                <td>BKOKU</td>
+                                                <td class="text-center">09/08/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
-
-                                            <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB970804110016</a></td>
-                                                <td>Tamila A/P Ganesh</td>
-                                                <td class="text-center">20/06/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;"> Disokong</button></td>
-                                                {{-- <td>Terdapat kesilapan dalam butiran resit </td> --}}
+    
+                                            <tr data-status="Disokong">
+                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/BKOKU/B/890907030098</a></td>
+                                                <td>Siti Aisyah Binti Ismail</td>
+                                                <td>BKOKU</td>
+                                                <td class="text-center">21/05/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
+                                            </tr>
+    
+                                            <tr data-status="Disokong">
+                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/PPK/B/950523098909</a></td>
+                                                <td>Muhammad Aiman Bin Hamid</td>
+                                                <td>PPK</td>
+                                                <td class="text-center">09/07/2023</td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
