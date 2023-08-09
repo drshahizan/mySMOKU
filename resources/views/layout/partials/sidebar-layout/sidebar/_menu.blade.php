@@ -45,13 +45,6 @@
 					<span class="menu-title">Status</span>
 			</a>
 		</div>
-		<div class="menu-item">
-			<a class="menu-link" href="saringan">
-			<!-- "{{ route('dashboard') }}" -->
-					<span class="menu-icon">{!! getIcon('filter-tablet', 'fs-2') !!}</span>
-					<span class="menu-title">Saringan</span>
-			</a>
-		</div>
 		<div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>

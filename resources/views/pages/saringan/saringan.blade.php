@@ -117,7 +117,7 @@
 											</div>
                                             <div class="card-toolbar">
 												<div class="my-1 me-4">
-                                                <a href="{{ url('cetak-senarai-pemohon') }}" class="btn btn-primary">Cetak</a>
+                                                <a href="{{ url('cetak-senarai-pemohon') }}" target="_blank" class="btn btn-primary">Cetak</a>
                                             </div>
                                             </div>
                                         </div>
