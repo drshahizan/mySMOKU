@@ -22,6 +22,7 @@ class Status extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'nokp_pelajar',
         'id_permohonan',
         //'id_tuntutan',
         'status',
