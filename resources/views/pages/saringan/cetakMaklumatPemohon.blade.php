@@ -15,7 +15,7 @@
         <table width="100%" border="1" class="profile-form">
             <tr>
                 <td class="text-center gap-top" colspan="3">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/JATA_NEGARA_MALAYSIA.png/776px-JATA_NEGARA_MALAYSIA.png?18218224030856" alt="jata-negara-malaysia">
+                    <img src="logoKPT.png" alt="logo-kpt" style="width: 100px!important; height:70px!important;">
                     <br> <p><b class="title"> SALINAN DOKUMEN PERMOHONAN</b></p> 
                     <p><b class="description"> BANTUAN KEWANGAN ORANG KURANG UPAYA <br> (BKOKU)</b> </p> 
                     <br><br>
