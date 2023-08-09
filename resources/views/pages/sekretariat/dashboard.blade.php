@@ -1,6 +1,5 @@
-
-
 <x-default-layout>
+
 <div class="row g-5 g-xl-8">
 										<div class="col-xl-3">
 											<!--begin::Statistics Widget 5-->

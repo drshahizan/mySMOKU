@@ -66,7 +66,7 @@
 														<span class="path7"></span>
 													</i>
 													<div class="text-white fw-bold fs-4 mb-2 mt-5">Belum Disemak</div>
-													<div class="fw-semibold text-gray-100">New Customers</div>
+													<div class="fw-semibold text-gray-100">1</div>
 												</div>
 												<!--end::Body-->
 											</a>
@@ -82,7 +82,7 @@
 														<span class="path2"></span>
 													</i>
 													<div class="text-white fw-bold fs-2 mb-2 mt-5">Disokong</div>
-													<div class="fw-semibold text-white">Milestone Reached</div>
+													<div class="fw-semibold text-white">2000</div>
 												</div>
 												<!--end::Body-->
 											</a>
@@ -141,47 +141,47 @@
                                                 <tr>                                          
                                                 <td class="text-center"><a href="{{ url('maklumat-pemohon') }}" title="" >980214089182M</a></td>
                                                 <td class= "text-gray-800 mb-1"><b>Mohd Ali Bin Abu Kassim<b></td>
-                                                <td>BKOKU</td>
+                                                <td class= "text-gray-800 mb-1">BKOKU</td>
                                                 <td class="text-center text-gray-800  mb-1">7/7/2023</td>
                                                 <td class="text-center"><span class="badge badge-light-danger fw-bold px-4 py-3">Belum Disemak</span></td>
                                                 </tr>
                                                 <tr>                                            
                                                 <td class="text-center"><a href="{{ url('maklumat-pemohon') }}" title="">KKPPK000021</a></td>
-                                                <td>Sarah Binti Yusri</td>
-                                                <td>PPK</td>                                        
+                                                <td class= "text-gray-800 mb-1">Sarah Binti Yusri</td>
+                                                <td class= "text-gray-800 mb-1">PPK</td>                                        
                                                 <td class="text-center">5/7/2023</td>
-                                                <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
+                                                <td class="text-center"><span class="badge badge-light-success fw-bold px-4 py-3">Disokong</span></td>
                                                 </tr> <tr>                                            
                                                 <td class="text-center"><a href="{{ url('maklumat-pemohon') }}" title="">PHDBKOKU000021</a></td>
-                                                <td>Aishah Binti Samsudin</td>
-                                                <td>BKOKU</td>                                        
+                                                <td class= "text-gray-800 mb-1">Aishah Binti Samsudin</td>
+                                                <td class= "text-gray-800 mb-1">BKOKU</td>                                        
                                                 <td class="text-center">2/7/2023</td>
-                                                <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
+                                                <td class="text-center"><span class="badge badge-light-success fw-bold px-4 py-3">Disokong</span></td>
                                                 </tr> <tr>
                                                 <td class="text-center"><a href="{{ url('maklumat-pemohon') }}" title="">DIPBKOKU000021</a></td>
-                                                <td>Santosh A/L Ariyaran</td>
-                                                <td>BKOKU</td>                                        
+                                                <td class= "text-gray-800 mb-1">Santosh A/L Ariyaran</td>
+                                                <td class= "text-gray-800 mb-1">BKOKU</td>                                        
                                                 <td class="text-center">10/7/2023</td>
-                                                <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
+                                                <td class="text-center"><span class="badge badge-light-success fw-bold px-4 py-3">Disokong</span></td>
                                                 </tr> <tr>
                                                 <td class="text-center"><a href="{{ url('maklumat-pemohon') }}" title="">SARJANABKOKU000021</a></td>
-                                                <td>Ling Kai Jie</td>
-                                                <td>BKOKU</td>                                        
+                                                <td class= "text-gray-800 mb-1">Ling Kai Jie</td>
+                                                <td class= "text-gray-800 mb-1">BKOKU</td>                                        
                                                 <td class="text-center">9/7/2023</td>
-                                                <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
+                                                <td class="text-center"><span class="badge badge-light-success fw-bold px-4 py-3">Disokong</span></td>
                                                 </tr> <tr>
                                                 <td class="text-center"><a href="{{ url('maklumat-pemohon') }}" title="">KKPPK40021</a></td>
-                                                <td>Akmal Bin Kairuddin</td>
-                                                <td>PPK</td>                                        
+                                                <td class= "text-gray-800 mb-1">Akmal Bin Kairuddin</td>
+                                                <td class= "text-gray-800 mb-1">PPK</td>                                        
                                                 <td class="text-center">7/7/2023</td>
-                                                <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
+                                                <td class="text-center"><span class="badge badge-light-success fw-bold px-4 py-3">Disokong</span></td>
                                                 </tr>
                                                 <tr>
                                                 <td class="text-center"><a href="{{ url('maklumat-pemohon') }}" title="">KKPPK60021</a></td>
-                                                <td>Santishwaran A/L Paven</td>
-                                                <td>PPK</td>                                        
-                                                <td class="text-center">5/7/2023</td>
-                                                <td class="text-center"><button type="button" class="btn bg-green text-white"> Disokong</button></td>
+                                                <td class= "text-gray-800 mb-1">Santishwaran A/L Paven</td>
+                                                <td class= "text-gray-800 mb-1">PPK</td>                                        
+                                                <td class="text-center ">5/7/2023</td>
+                                                <td class="text-center"><span class="badge badge-light-success fw-bold px-4 py-3">Disokong</span></td>
                                                 </tr>
                                                 <tr>
                                                 <td class="text-center"><a href="{{ url('maklumat-pemohon') }}" title="">DIPLOMABKOKU002011</a></td>

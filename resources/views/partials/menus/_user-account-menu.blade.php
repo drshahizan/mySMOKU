@@ -45,10 +45,10 @@
     <!--end::Menu item-->
     <!--begin::Menu item-->
     <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
-        <a href="#" class="menu-link px-5">
+        <!-- <a href="#" class="menu-link px-5">
             <span class="menu-title">My Subscription</span>
             <span class="menu-arrow"></span>
-        </a>
+        </a> -->
         <!--begin::Menu sub-->
         <div class="menu-sub menu-sub-dropdown w-175px py-4">
             <!--begin::Menu item-->
@@ -173,7 +173,7 @@
     <!--begin::Menu item-->
     <div class="menu-item px-5">
         <a class="button-ajax menu-link px-5" href="#" data-action="{{ route('logout') }}" data-method="post" data-csrf="{{ csrf_token() }}" data-reload="true">
-            Sign Out
+            Log Keluar
         </a>
     </div>
     <!--end::Menu item-->
