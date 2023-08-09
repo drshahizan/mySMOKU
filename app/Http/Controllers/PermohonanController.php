@@ -151,6 +151,11 @@ class PermohonanController extends Controller
         return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan'));
         
     }
+
+    public function statuspermohonan(){
+        return view('pages.statuspermohonan.statusmohon');
+        
+    }
 }
 
 

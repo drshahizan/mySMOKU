@@ -39,7 +39,7 @@
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="#">
+			<a class="menu-link" href="{{ route('statuspermohonan') }}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
 					<span class="menu-title">Status</span>
@@ -80,7 +80,6 @@
 		</div>
 		<div class="menu-item">
 			<a class="menu-link" href="#">
-			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
 					<span class="menu-title">Status</span>
 			</a>
