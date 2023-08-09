@@ -46,7 +46,7 @@
                 </tr> <tr>                                            
                     <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKUB980112105666</a></td>
                     <td>Aishah Binti Samsudin</td>
-                    <td>BKOKU</td>                                        
+                    <td>BKOKU</td>                                       
                     <td class="text-center">2/7/2023</td>
                     <td class="text-center">Disokong</td>
                 </tr> <tr>
@@ -56,7 +56,7 @@
                     <td class="text-center">10/7/2023</td>
                     <td class="text-center">Disokong</td>
                 </tr> <tr>
-                    <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKUP890201065225</a></td>
+                    <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKUM960909105668</a></td>
                     <td>Ling Kai Jie</td>
                     <td>BKOKU</td>                                        
                     <td class="text-center">9/7/2023</td>
@@ -76,14 +76,14 @@
                     <td class="text-center">Disokong</td>
                 </tr>
                 <tr>
-                    <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKUB970204052445</a></td>
+                    <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKUP890201065225</a></td>
                     <td>Ezra Hanisah Binti Md Yunos</td>
                     <td>BKOKU</td>                                    
                     <td class="text-center">9/2/2023</td>
                     <td class="text-center">Disokong</td>
                 </tr><tr>
                     <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPKD010305058473</a></td>
-                    <td>Akmal Bin Kairuddin</td>
+                    <td>Arshahad Bin Kairul Zaman</td>
                     <td>PPK</td>                                        
                     <td class="text-center">7/7/2023</td>
                     <td class="text-center">Disokong</td>
@@ -96,7 +96,7 @@
                     <td class="text-center">Disokong</td>
                 </tr>
                 <tr>
-                    <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKUM940524032341</a></td>
+                    <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKUP940524032341</a></td>
                     <td>Rahman Mohammed Arshahad Al-dhaqm</td>
                     <td>BKOKU</td>                                    
                     <td class="text-center">9/2/2023</td>
