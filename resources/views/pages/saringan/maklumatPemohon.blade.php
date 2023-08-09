@@ -13,12 +13,11 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Pemohon</b></li>
+                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Saring Permohonan</b></li>
                             </ul>
-                            <div class="ml-auto">
+                            {{-- <div class="ml-auto">
                                 <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank" class="btn btn-primary">Cetak</a>
-                                {{-- <button type="button" class="btn btn-sm btn-default" title="Delete" onclick="confirmButton()"><i class="fa fa-trash"></i></button> --}}
-                            </div>
+                            </div> --}}
                         </div>
                     </nav>
                 </div>
@@ -28,15 +27,15 @@
                             <div class="d-flex align-items-center">
                                 <img class="img" src="https://www.shareicon.net/data/128x128/2016/05/24/770085_man_512x512.png" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar Name">
                                 <div class="ml-3">
-                                    Ali Bin Abu
-                                    <p class="mb-0">alibinabu@graduate.utm.my</p>
+                                    Mohd Ali Bin Abu Kassim
+                                    <p class="mb-0">aliabukassim@graduate.utm.my</p>
                                 </div>
                             </div>
                             <hr>
                             <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6">
-                                    <p class="m-b-0"><strong>Tarikh Permohonan: </strong> 6/7/2023 </p>
-                                    <p><strong>ID Permohonan: </strong> IJAZAHBKOKU0001</p>                                    
+                                    <p class="m-b-0"><strong>Tarikh Permohonan: </strong> 7/7/2023 </p>
+                                    <p><strong>ID Permohonan: </strong> KPTBKOKUB990404080221</p>                                    
                                 </div>
                             </div>
                             <form method="POST" action="{{ url('saring-maklumat-pemohon') }}" id="saring">
@@ -47,7 +46,7 @@
                                         <table class="table table-hover table-bordered mb-5">
                                             <thead class="table-primary">
                                                 <tr>
-                                                    <th style="width: 5%;">Bil</th>                                                        
+                                                    <th style="width: 5%; text-align:right;">No.</th>                                                        
                                                     <th style="width: 20%;">Item</th>
                                                     <th style="width: 25%;">Keputusan Saringan</th>
                                                     <th style="width: 50%;">Catatan</th>
@@ -55,7 +54,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>1</td>
+                                                    <td style="text-align:right;">1</td>
                                                     <td>
                                                         <span><a href="{{ url('maklumat-profil-diri') }}" target="_blank">Maklumat Profil Diri</a></span>
                                                     </td>           
@@ -69,13 +68,18 @@
                                                         </select>
                                                     </div>
                                                 </td>
-                                              <td><div class="form-group c_form_group">
-                                                <label>Berikan Catatan Anda.</label>
-                                                <textarea name="catatan_profil_diri" rows="2" type="text" class="form-control" placeholder=""></textarea>
-                                            </div> </td>
+                                                <td>
+                                                    <div class="fancy-checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="catatan_profil_diri" value="1"><span> Perkara 1</span><br>
+                                                            <input type="checkbox" name="catatan_profil_diri" value="1"><span> Perkara 2</span><br>
+                                                            <input type="checkbox" name="catatan_profil_diri" value="1"><span> Perkara 3</span><br>
+                                                            <input type="checkbox" name="catatan_profil_diri" value="1"><span> Perkara 4</span>
+                                                        </label>
+                                                    </div></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>2</td>
+                                                    <td style="text-align:right;">2</td>
                                                     <td>
                                                         <span><a href="{{ url('maklumat-akademik') }}" target="_blank">Maklumat Akademik</a></span>
                                                     </td>
@@ -87,13 +91,19 @@
                                                             <option value="tak_lengkap">Tidak Lengkap</option>
                                                         </select>
                                                     </div>
-                                                    <td><div class="fancy-checkbox">
-                                                        <label><input type="checkbox" name="catatan_maklumat_akademik" value="1"><span>Terdapat butiran yang tidak benar dalam Maklumat Akademik</span></label>
+                                                    <td>
+                                                    <div class="fancy-checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="catatan_maklumat_akademik" value="2"><span> Perkara 1</span><br>
+                                                            <input type="checkbox" name="catatan_maklumat_akademik" value="2"><span> Perkara 2</span><br>
+                                                            <input type="checkbox" name="catatan_maklumat_akademik" value="2"><span> Perkara 3</span><br>
+                                                            <input type="checkbox" name="catatan_maklumat_akademik" value="2"><span> Perkara 4</span>
+                                                        </label>
                                                     </div></td>
                                                 </td> 
                                                 </tr>
                                                 <tr>
-                                                    <td>3</td>
+                                                    <td style="text-align:right;">3</td>
                                                     <td>
                                                         <span><a href="{{ url('salinan-dokumen') }}" target="_blank">Salinan Dokumen</a></span>
                                                     </td>
@@ -108,9 +118,14 @@
                                                     </div>       
                                                 </td>
                                                 <td>
-                                                <div class="fancy-checkbox">
-                                                    <label><input type="checkbox" name="catatan_salinan_dokumen" value="2"><span>Terdapat butiran yang tidak benar dalam Salinan Dokumen</span></label>
-                                                </div></td>
+                                                    <div class="fancy-checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="catatan_salinan_dokumen" value="3"><span> Perkara 1</span><br>
+                                                            <input type="checkbox" name="catatan_salinan_dokumen" value="3"><span> Perkara 2</span><br>
+                                                            <input type="checkbox" name="catatan_salinan_dokumen" value="3"><span> Perkara 3</span><br>
+                                                            <input type="checkbox" name="catatan_salinan_dokumen" value="3"><span> Perkara 4</span>
+                                                        </label>
+                                                    </div></td>
                                                 </tr>                                                
                                             </tbody>
                                         </table>
@@ -122,9 +137,7 @@
                                 <div class="col-md-6">
                                     </div>
                                 <div class="col-md-6 text-right">
-                                    <button type="submit" name="submit" class="btn bg-green text-white" value="Disokong"><i class="fa fa-check"></i> Disokong</button>
-                                    <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan"><i class="fa fa-save"></i> Simpan</button>
-                                    <button type="submit" name="submit" class="btn btn-danger" value="Kembalikan" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-reply"></i> Kembalikan</button>
+                                    <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan">Teruskan</button>
                                 </form>
                                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -145,7 +158,7 @@
                                                             <label><input type="checkbox" ><span>Terdapat butiran yang tidak benar dalam Maklumat Akademik</span></label>
                                                         </div>
                                                         <div class="fancy-checkbox">
-                                                            <label><input type="checkbox"><span>Terdapat butiran yang tidak benar dalam Salinan Dokumen</span></label>
+                                                            <label><input type="checkbox"><span>Perkara </span></label>
                                                         </div>
                                                     </div>
                                                 </div>

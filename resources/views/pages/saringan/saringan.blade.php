@@ -27,15 +27,15 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Senarai Saringan Permohonan<br><small>Tekan ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
-                            <ul class="header-dropdown dropdown">
+                            <h2>Senarai Saringan Permohonan<br><small>Klik ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
+                            {{-- <ul class="header-dropdown dropdown">
                                 <li>
                                     <a href="{{ url('cetak-senarai-pemohon') }}" target="_blank" class="btn btn-primary" style="color: white">
                                         <i class="fa fa-print" style="color: white!important"></i> 
                                         Cetak Senarai Pendek
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                         <div class="body">
                             <div class="table-responsive">
