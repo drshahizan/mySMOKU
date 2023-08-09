@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Infoipt;
 use App\Models\PeringkatPengajian;
 use App\Models\Kursus;
+use App\Models\Akademik;
 //use DB;
 use session;
 
@@ -52,11 +53,15 @@ class SemakUserController extends Controller
                 
             } else {
 
-                /*DB::table('smoku')->where('nokp' ,$request->nokp)->update([
-
-                'verify'=>'1'
-    
-                ]);*/
+                $user = Akademik::create([
+                    'nokp_pelajar' => $request->session()->get('nokp'),
+                    'id_institusi' => $request->id_institusi,
+                    'peringkat_pengajian' => $request->peringkat_pengajian,
+                    'nama_kursus' => $request->nama_kursus,
+                    
+                ]);
+                
+                $user->save();
 
                 return redirect()->route('daftarlayak');
             }
