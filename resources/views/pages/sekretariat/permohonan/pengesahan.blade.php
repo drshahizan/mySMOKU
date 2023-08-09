@@ -43,39 +43,38 @@
                     </div>
                 </div>        
                 
-             
                 <div class="row clearfix">
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-6 col-md-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file" style="color: white"></i></div>
                                     <div class="ml-4" style="color: black;">
-                                        <span>Jumlah Permohonan</span>
-                                        <h4 class="mb-0 font-weight-medium">700</h4>
+                                        <span>Permohonan BKOKU</span>
+                                        <h4 class="mb-0 font-weight-medium">7000</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-6 col-md-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="icon-in-bg bg-azura text-white rounded-circle"><i class="fa fa-check"></i></div>
+                                    <div class="icon-in-bg bg-pink text-white rounded-circle"><i class="fa fa-check"></i></div>
                                     <div class="ml-4" style="color: black;">
-                                        <span>Layak</span>
-                                        <h4 class="mb-0 font-weight-medium">400</h4>
+                                        <span>Permohonan BKOKU</span>
+                                        <h4 class="mb-0 font-weight-medium">3000</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    {{-- <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-warning" style="color: white"></i></div>
+                                    <div class="icon-in-bg bg-danger text-white rounded-circle"><i class="fa fa-warning" style="color: white"></i></div>
                                     <div class="ml-4" style="color: black;">
                                         <span>Tidak Layak</span>
                                         <h4 class="mb-0 font-weight-medium">200</h4>
@@ -88,24 +87,23 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="icon-in-bg bg-pink text-white rounded-circle"><i class="fa fa-reply" style="color: white"></i></div>
+                                    <div class="icon-in-bg bg-warning text-white rounded-circle"><i class="fa fa-reply" style="color: white"></i></div>
                                     <div class="ml-4" style="color: black;">
                                         <span>Dikembalikan</span>
-                                        <h4 class="mb-0 font-weight-medium">1</h4>
+                                        <h4 class="mb-0 font-weight-medium">165</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="row clearfix">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai untuk Pengesahan Permohonan<br><small>Sila lihat pada kolum tindakan untuk pengesahan permohonan</small></h2>
+                                <h2>Senarai Permohonan untuk Disahkan<br><small>Sila tandakan pada kotak untuk mengesahkan permohonan yang disokong</small></h2>
                                 <ul class="header-dropdown dropdown">
-                                    
                                     <li><a href="javascript:void(0);" class="full-screen"><i class="fa fa-expand"></i></a></li>
                                     <li class="dropdown">
                                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
@@ -120,27 +118,29 @@
                                     </li>
                                 </ul>
                             </div>
+
+                            {{-- TABLE --}}
                             <div class="body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-hover dataTable js-exportable">
+                                    <table id="sortTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th><input type="checkbox" name="select_all" value="1" id="example-select-all"></th>
-                                                <th>Nama</th>
-                                                <th>ID Permohonan</th>
-                                                <th>Jenis Permohonan</th>
-                                                <th>Tarikh Permohonan</th>
-                                                <th class="text-center">Status Permohonan</th>
+                                                <th class="text-center" style="width:15%;"><input type="checkbox" name="select_all" value="1" id="example-select-all">  Sahkan Semua</th>
+                                                <th style="width:15%;">ID Permohonan</th>
+                                                <th style="width:40%;">Nama</th>
+                                                <th style="width:15%;">Jenis Permohonan</th>
+                                                <th class="text-center" style="width:15%;">Tarikh Permohonan</th>
+                                                {{-- <th class="text-center">Status Permohonan</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                               <td><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td><a href="maklumat-pemohon.html" title="">KPTBKOKUB011221038712</a></td>
                                                 <td>Arina Binti Saleh</td>
-                                                <td><a href="maklumat-pemohon.html" title="">SARJANAMUDABKOKU000011</a></td>
                                                 <td>BKOKU</td>
-                                                <td>7/7/2023</td>
-                                                <td class="text-center"><button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><i class="icon-check"></i> Pengesahan</button>
+                                                <td class="text-center">07/07/2023</td>
+                                                {{-- <td class="text-center"><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><i class="icon-check"></i> Pengesahan</button> --}}
                                                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
@@ -173,68 +173,65 @@
                                               
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td><a href="maklumat-pemohon.html" title="">KPTBKOKUB011221034612</a></td>
                                                 <td>Choo Mei Ling</td>
-                                                <td><a href="maklumat-pemohon.html" title="">SARJANABKOKU03011</a></td>
                                                 <td>BKOKU</td>
-                                                <td>9/7/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-danger btn-sm"> Tidak Layak</button></td>
-                                                
+                                                <td class="text-center">09/07/2023</td>
+                                                {{-- <td class="text-center"><button type="button" class="btn btn-danger btn-sm"> Tidak Layak</button></td> --}}
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td><a href="maklumat-pemohon.html" title="">KPTBKOKUB970804110016</a></td>
                                                 <td>Tamila A/P Ganesh</td>
-                                               
-                                                <td><a href="maklumat-pemohon.html" title="">SARJANAMUDABKOKU000011</a></td>
                                                 <td>BKOKU</td>
-                                                <td>9/7/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-info btn-sm"> Kembalikan</button></td>
+                                                <td class="text-center">09/07/2023</td>
+                                                {{-- <td class="text-center"><button type="button" class="btn btn-warning btn-sm"> Kembalikan</button></td> --}}
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td><a href="maklumat-pemohon.html" title="">KPTBKOKUB980306082018</a></td>
                                                 <td>Arissa Binti Saleh</td>
-                                                
-                                                <td><a href="maklumat-pemohon.html" title="">DIPLOMABKOKU000011</a></td>
                                                 <td>BKOKU</td>
-                                                <td>7/7/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
+                                                <td class="text-center">07/07/2023</td>
+                                                {{-- <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td> --}}
                                             </tr>
-                                          
-                                          
-                                         
                                         </tbody>
-                                       
                                     </table>
-                                    <button class="btn btn-warning btn-round" data-toggle="modal" data-target="#exampleModalCenter"><i class="icon-check"></i> Pengesahan</button>
-                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Kembalikan Permohonan</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                </div>
-                                                <div class="modal-body text-center">
-                                                    <p>Pengesahan Permohonan ini</p>
-                                                </div>
-                                                <div class="row clearfix text-center">
-                                                    <div class="col-lg-12">
-                                                        <div class="fancy-radio">
-                                                            <label><input name="lulus" value="male" type="radio"><span><i></i> Layak menerima BKOKU/PPK</span></label>
+
+                                    <br><br>
+                                    <div class="pengesahan">
+                                        <button class="btn btn-info btn-round" data-toggle="modal" data-target="#exampleModalCenter"><i class="icon-check"></i> Pengesahan</button>
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Kembalikan Permohonan</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                        <p>Pengesahan Permohonan ini</p>
+                                                    </div>
+                                                    <div class="row clearfix text-center">
+                                                        <div class="col-lg-12">
+                                                            <div class="fancy-radio">
+                                                                <label><input name="lulus" value="male" type="radio"><span><i></i> Layak menerima BKOKU/PPK</span></label>
+                                                            </div>
+                                                            <div class="fancy-radio">
+                                                                <label><input name="tidak_lulus" value="female" type="radio"><span><i></i> Tidak layak menerima BKOKU/PPK</span></label>
+                                                            </div>
+                                                            <br>
                                                         </div>
-                                                        <div class="fancy-radio">
-                                                            <label><input name="tidak_lulus" value="female" type="radio"><span><i></i> Tidak layak menerima BKOKU/PPK</span></label>
-                                                        </div>
-                                                        <br>
+                                                    </div>
+                                                    <br>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                                        <a href="sahkan-permohonan.html"  class="btn btn-success btn-round">Ya</a>
                                                     </div>
                                                 </div>
-                                                <br>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                                                    <a href="sahkan-permohonan.html"  class="btn btn-success btn-round">Ya</a>
-                                                </div>
                                             </div>
-                                        </div>
-                                    </div> 
+                                        </div> 
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -24,6 +24,7 @@ class SekretariatController extends Controller
 
         return view('pages.sekretariat.permohonan.pengesahan');
     }
+    
     public function kembalikanPermohonan()
     {
         return view('pages.sekretariat.permohonan.kembalikan');
@@ -33,6 +34,12 @@ class SekretariatController extends Controller
     {
 
         return view('pages.sekretariat.permohonan.keputusan');
+    }
+
+    public function maklumatKeputusan()
+    {
+
+        return view('pages.sekretariat.permohonan.maklumatKeputusan');
     }
 
     public function keputusan(Request $request)
