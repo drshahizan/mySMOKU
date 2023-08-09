@@ -25,6 +25,11 @@ class SaringanController extends Controller
         return view('pages.saringan.maklumatPemohon');
     }
 
+    public function maklumatPerbaharui()
+    {
+        return view('pages.saringan.maklumatPerbaharui');
+    }
+
     public function maklumatProfilDiri()
     {
         return view('pages.saringan.maklumatProfilDiri');
@@ -35,9 +40,24 @@ class SaringanController extends Controller
         return view('pages.saringan.maklumatAkademik');
     }
 
+    public function maklumatAkademik2()
+    {
+        return view('pages.saringan.maklumatAkademik2');
+    }
+
     public function salinanDokumen()
     {
         return view('pages.saringan.salinanDokumen');
+    }
+
+    public function salinanInvois()
+    {
+        return view('pages.saringan.salinanInvois');
+    }
+
+    public function salinanAkademik()
+    {
+        return view('pages.saringan.salinanAkademik');
     }
 
     public function cetakMaklumatPemohon() 
@@ -54,35 +74,31 @@ class SaringanController extends Controller
 
     public function saringMaklumat(Request $request) 
     {
-        if($request->get('submit')=="Disokong"){
-            //
+        if($request->get('maklumat_profil_diri')=="lengkap"&&$request->get('maklumat_akademik')=="lengkap"&&$request->get('salinan_dokumen')=="lengkap"){
+            
         }
-        else if($request->get('submit')=="Simpan"){
-            //
-        }
-        else if($request->get('submit')=="Kembalikan"){
-
+        else{
             if($request->get('maklumat_profil_diri')=="tak_lengkap"){
                 $catatan1=$request->get('catatan_profil_diri');
             }
             else{
                 $catatan1=null;
             }
-
+    
             if($request->get('maklumat_akademik')=="tak_lengkap"){
                 $catatan2=$request->get('catatan_maklumat_akademik');
             }
             else{
                 $catatan2=null;
             }
-
+    
             if($request->get('salinan_dokumen')=="tak_lengkap"){
                 $catatan3=$request->get('catatan_salinan_dokumen');
             }
             else{
                 $catatan3=null;
             }
-
+    
             $catatan = [
                 'catatan1'=>$catatan1, 
                 'catatan2'=>$catatan2, 
