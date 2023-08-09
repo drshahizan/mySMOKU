@@ -56,36 +56,11 @@
                                                 <tr>
                                                     <td style="text-align:right;">1</td>
                                                     <td>
-                                                        <span><a href="{{ url('maklumat-profil-diri') }}" target="_blank">Maklumat Profil Diri</a></span>
-                                                    </td>           
-                                                    <td class="hidden-sm-down">
-                                                       
-                                                        <div class="form-group c_form_group">
-                                                        <select id="maklumat_profil_diri" name="maklumat_profil_diri" class="form-control" onchange="select1()">
-                                                            <option value="">Pilih</option>
-                                                            <option value="lengkap">Lengkap</option>
-                                                            <option value="tak_lengkap">Tidak Lengkap</option>
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="fancy-checkbox">
-                                                        <label>
-                                                            <input id="checkbox1a" type="checkbox" name="catatan_profil_diri" value="1" disabled="disabled"><span> Perkara 1</span><br>
-                                                            <input id="checkbox1b" type="checkbox" name="catatan_profil_diri" value="1" disabled="disabled"><span> Perkara 2</span><br>
-                                                            <input id="checkbox1c" type="checkbox" name="catatan_profil_diri" value="1" disabled="disabled"><span> Perkara 3</span><br>
-                                                            <input id="checkbox1d" type="checkbox" name="catatan_profil_diri" value="1" disabled="disabled"><span> Perkara 4</span>
-                                                        </label>
-                                                    </div></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align:right;">2</td>
-                                                    <td>
                                                         <span><a href="{{ url('maklumat-akademik') }}" target="_blank">Maklumat Akademik</a></span>
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <div class="form-group c_form_group">
-                                                        <select id="maklumat_akademik" name="maklumat_akademik" class="form-control" onchange="select2()">
+                                                        <select id="maklumat_akademik" name="maklumat_akademik" class="form-control" onchange="select1()">
                                                             <option value="">Pilih</option>
                                                             <option value="lengkap">Lengkap</option>
                                                             <option value="tak_lengkap">Tidak Lengkap</option>
@@ -94,39 +69,14 @@
                                                     <td>
                                                     <div class="fancy-checkbox">
                                                         <label>
-                                                            <input id="checkbox2a" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 1</span><br>
-                                                            <input id="checkbox2b" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 2</span><br>
-                                                            <input id="checkbox2c" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 3</span><br>
-                                                            <input id="checkbox2d" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 4</span>
+                                                            <input id="checkbox1a" type="checkbox" name="catatan_maklumat_akademik" value="1" disabled="disabled"><span> Perkara 1</span><br>
+                                                            <input id="checkbox1b" type="checkbox" name="catatan_maklumat_akademik" value="1" disabled="disabled"><span> Perkara 2</span><br>
+                                                            <input id="checkbox1c" type="checkbox" name="catatan_maklumat_akademik" value="1" disabled="disabled"><span> Perkara 3</span><br>
+                                                            <input id="checkbox1d" type="checkbox" name="catatan_maklumat_akademik" value="1" disabled="disabled"><span> Perkara 4</span>
                                                         </label>
                                                     </div></td>
                                                 </td> 
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align:right;">3</td>
-                                                    <td>
-                                                        <span><a href="{{ url('salinan-dokumen') }}" target="_blank">Salinan Dokumen</a></span>
-                                                    </td>
-                                                    <td class="hidden-sm-down">
-                                                        <!--<div class="col-lg-12 col-md-12">-->
-                                                        <div class="form-group c_form_group">
-                                                        <select id="salinan_dokumen" name="salinan_dokumen" class="form-control" onchange="select3()">
-                                                            <option value="">Pilih</option>
-                                                            <option value="lengkap">Lengkap</option>
-                                                            <option value="tak_lengkap">Tidak Lengkap</option>
-                                                        </select>
-                                                    </div>       
-                                                </td>
-                                                <td>
-                                                    <div class="fancy-checkbox">
-                                                        <label>
-                                                            <input id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Perkara 1</span><br>
-                                                            <input id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Perkara 2</span><br>
-                                                            <input id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Perkara 3</span><br>
-                                                            <input id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Perkara 4</span>
-                                                        </label>
-                                                    </div></td>
-                                                </tr>                                                
+                                                </tr>                                 
                                             </tbody>
                                         </table>
                                     </div>
@@ -182,7 +132,7 @@
     </div>
    <script>        
         function select1(){
-            var catatan1 = document.getElementById('maklumat_profil_diri').value;
+            var catatan1 = document.getElementById('maklumat_akademik').value;
             if(catatan1=="tak_lengkap"){
                 document.getElementById("checkbox1a").disabled = false;
                 document.getElementById("checkbox1b").disabled = false;
@@ -194,38 +144,6 @@
                 document.getElementById("checkbox1b").disabled = true;
                 document.getElementById("checkbox1c").disabled = true;
                 document.getElementById("checkbox1d").disabled = true;
-            }
-        }
-        
-        function select2(){
-            var catatan1 = document.getElementById('maklumat_akademik').value;
-            if(catatan1=="tak_lengkap"){
-                document.getElementById("checkbox2a").disabled = false;
-                document.getElementById("checkbox2b").disabled = false;
-                document.getElementById("checkbox2c").disabled = false;
-                document.getElementById("checkbox2d").disabled = false;
-            }
-            else{
-                document.getElementById("checkbox2a").disabled = true;
-                document.getElementById("checkbox2b").disabled = true;
-                document.getElementById("checkbox2c").disabled = true;
-                document.getElementById("checkbox2d").disabled = true;
-            }
-        }
-
-        function select3(){
-            var catatan1 = document.getElementById('salinan_dokumen').value;
-            if(catatan1=="tak_lengkap"){
-                document.getElementById("checkbox3a").disabled = false;
-                document.getElementById("checkbox3b").disabled = false;
-                document.getElementById("checkbox3c").disabled = false;
-                document.getElementById("checkbox3d").disabled = false;
-            }
-            else{
-                document.getElementById("checkbox3a").disabled = true;
-                document.getElementById("checkbox3b").disabled = true;
-                document.getElementById("checkbox3c").disabled = true;
-                document.getElementById("checkbox3d").disabled = true;
             }
         }
 
