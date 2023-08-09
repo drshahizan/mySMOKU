@@ -136,7 +136,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
-                                                <td><a href="maklumat-pemohon.html" title="">KPTBKOKUB011221038712</a></td>
+                                                <td><a href="{{url('maklumat-keputusan')}}" title="">KPTBKOKUB011221038712</a></td>
                                                 <td>Arina Binti Saleh</td>
                                                 <td>BKOKU</td>
                                                 <td class="text-center">07/07/2023</td>
@@ -174,7 +174,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
-                                                <td><a href="maklumat-pemohon.html" title="">KPTBKOKUB011221034612</a></td>
+                                                <td><a href="{{url('maklumat-keputusan')}}" title="">KPTBKOKUB011221034612</a></td>
                                                 <td>Choo Mei Ling</td>
                                                 <td>BKOKU</td>
                                                 <td class="text-center">09/07/2023</td>
@@ -182,7 +182,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
-                                                <td><a href="maklumat-pemohon.html" title="">KPTBKOKUB970804110016</a></td>
+                                                <td><a href="{{url('maklumat-keputusan')}}" title="">KPTBKOKUB970804110016</a></td>
                                                 <td>Tamila A/P Ganesh</td>
                                                 <td>BKOKU</td>
                                                 <td class="text-center">09/07/2023</td>
@@ -190,7 +190,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
-                                                <td><a href="maklumat-pemohon.html" title="">KPTBKOKUB980306082018</a></td>
+                                                <td><a href="{{url('maklumat-keputusan')}}" title="">KPTBKOKUB980306082018</a></td>
                                                 <td>Arissa Binti Saleh</td>
                                                 <td>BKOKU</td>
                                                 <td class="text-center">07/07/2023</td>
@@ -199,7 +199,8 @@
                                         </tbody>
                                     </table>
 
-                                    <br><br>
+                                    <br>
+
                                     <div class="pengesahan">
                                         <button class="btn btn-info btn-round" data-toggle="modal" data-target="#exampleModalCenter"><i class="icon-check"></i> Pengesahan</button>
                                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
