@@ -28,10 +28,10 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-indigo text-white rounded-circle" style="padding-left:0;"><i class="fa fa-check"></i></div>
+                                        <div class="icon-in-bg bg-success text-white rounded-circle" style="padding-left:0;"><i class="fa fa-check"></i></div>
                                         <div class="ml-4">
                                             <span style="color: black;">Permohonan Layak</span>
-                                            <h4 class="mb-0 font-weight-medium">1</h4>
+                                            <h4 class="mb-0 font-weight-medium">3700</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -42,10 +42,10 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-orange rounded-circle" style="padding-left:0;"><i class="fa fa-close" style="color: white"></i></div>
+                                        <div class="icon-in-bg bg-danger rounded-circle" style="padding-left:0;"><i class="fa fa-close" style="color: white"></i></div>
                                         <div class="ml-4">
                                             <span style="color: black;">Permohonan Tidak Layak</span>
-                                            <h4 class="mb-0 font-weight-medium">1</h4>
+                                            <h4 class="mb-0 font-weight-medium">200</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -56,10 +56,10 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-pink rounded-circle" style="padding-left:0;"><i class="fa fa-mail-reply" style="color: white"></i></div>
+                                        <div class="icon-in-bg bg-warning rounded-circle" style="padding-left:0;"><i class="fa fa-mail-reply" style="color: white"></i></div>
                                         <div class="ml-4">
                                             <span style="color: black;">Permohonan Dikembalikan</span>
-                                            <h4 class="mb-0 font-weight-medium">1</h4>
+                                            <h4 class="mb-0 font-weight-medium">1200</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +100,6 @@
                                                 <th style="width: 50%">Nama</th>
                                                 <th style="width: 15%" class="text-center">Tarikh Permohonan</th>
                                                 <th style="width: 20%" class="text-center">Keputusan Permohonan</th>
-                                                {{-- <th style="width: 28%">Catatan</th> --}}
                                             </tr>
                                         </thead>
                                             
@@ -110,9 +109,6 @@
                                                 <td>Ali Bin Abu</td> 
                                                 <td class="text-center">02/07/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
-                                                {{-- <td>
-                                                    <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-success btn-round btn-sm"><i class="fa fa-download"></i>  Muat Turun Surat Tawaran</a>
-                                                </td> --}}
                                             </tr>
 
                                             <tr>
@@ -120,19 +116,13 @@
                                                 <td>Arina Binti Saleh</td> 
                                                 <td class="text-center">04/07/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
-                                                {{-- <td>
-                                                    <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-success btn-round btn-sm"><i class="fa fa-download"></i>  Muat Turun Surat Tawaran</a>
-                                                </td> --}}
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB011221038712</a></td> 
+                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKUB011221034612</a></td> 
                                                 <td>Choo Mei Ling</td> 
                                                 <td class="text-center">05/07/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
-                                                {{-- <td>
-                                                    <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-success btn-round btn-sm"><i class="fa fa-download"></i>  Muat Turun Surat Tawaran</a>
-                                                </td> --}}
                                             </tr>
 
                                             <tr>

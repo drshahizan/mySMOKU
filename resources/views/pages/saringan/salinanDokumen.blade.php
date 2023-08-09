@@ -7,285 +7,76 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta property="og:type" content="article"/>
-    <link rel="stylesheet" href="assets/css/saringan.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </head>
 <body>
-    <table class="profile-form">
-        <tr>
-            <td class="text-center" colspan="3">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/JATA_NEGARA_MALAYSIA.png/776px-JATA_NEGARA_MALAYSIA.png?18218224030856" alt="jata-negara-malaysia">
-                <br><b class="title">SALINAN DOKUMEN PERMOHONAN</b>
-                <p><b class="description"> BANTUAN KEWANGAN ORANG KURANG UPAYA <br> (BKOKU)</b> </p> 
-                <br><br>
-            </td>
-        </tr>
-        <tr>
-            <td class="header-part" colspan="3"> A. SEMAKAN KELAYAKAN MQA</td>
-        </tr>
-        <div>
-            <tr class="gap-left">
-                <td class="gap-top" style="width: 16%; padding-left: 20px;">Nama Institusi</td>
-                <td class="gap-top" style="width: 2%">:</td>
-                <td class="gap-top">Universiti Malaysia Sabah</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">Peringkat</td>
-                <td style="width: 2%">:</td>
-                <td>Diploma</td>
-            </tr>
-            <tr class="gap-left">
-                <td class="gap-bottom" style="width: 21%">Nama Kursus</td>
-                <td class="gap-bottom" style="width: 2%">:</td>
-                <td class="gap-bottom">Komputer Sains</td>
-            </tr>
+    <br>
+    <h3 style="text-align: center">SALINAN DOKUMEN</h3>
+    <br>
+<!--begin::Accordion-->
+<div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+          <b>Surat Tawaran</b> 
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+        <div class="accordion-body" style="text-align: center">
+            <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="700px"/>
         </div>
-        <tr>
-            <td class="header-part" colspan="3">B. MAKLUMAT PERIBADI</td>
-        </tr>
-        <div>
-            <tr class="gap-left">
-                <td style="width: 16%" class="gap-top">Nama</td>
-                <td style="width: 2%" class="gap-top">:</td>
-                <td class="gap-top"></td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">No. Kad Pengenalan</td>
-                <td style="width: 2%">:</td>
-                <td></td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">Tarikh Lahir</td>
-                <td style="width: 2%">:</td>
-                <td></td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">Umur</td>
-                <td style="width: 2%">:</td>
-                <td></td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">Jantina</td>
-                <td style="width: 2%">:</td>
-                <td></td>
-            </tr>
-            <tr class="gap-left">
-                <td>No. JKM</td>
-                <td style="width: 2%">:</td>
-                <td></td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">Kecacatan</td>
-                <td style="width: 2%">:</td>
-                <td></td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">Bangsa</td>
-                <td style="width: 2%">:</td>
-                <td></td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">Alamat Rumah</td>
-                <td style="width: 2%">:</td>
-                <td></td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">Poskod</td>
-                <td style="width: 2%">:</td>
-                <td></td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">Bandar</td>
-                <td style="width: 2%">:</td>
-                <td></td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">Negeri</td>
-                <td style="width: 2%">:</td>
-                <td></td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">No. Tel(HP)</td>
-                <td style="width: 2%">:</td>
-                <td></td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">No. Tel Rumah</td>
-                <td style="width: 2%">:</td>
-                <td></td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">Alamat Emel</td>
-                <td style="width: 2%">:</td>
-                <td></td>
-            </tr>
-            <tr class="gap-left">
-                <td class="gap-bottom" style="width: 16%">No. Akaun Bank</td>
-                <td class="gap-bottom" style="width: 2%">:</td>
-                <td class="gap-bottom"></td>
-            </tr>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+          <b>No. Akaun Bank Islam</b> 
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+        <div class="accordion-body" style="text-align: center">
+            <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="700px"/>
         </div>
-        <tr>
-            <td class="header-part" colspan="3">C. MAKLUMAT WARIS</td>
-        </tr>
-        <div>
-        <tr class="gap-left">
-            <td style="width: 16%" class="gap-top">Nama </td>
-            <td style="width: 2%" class="gap-top">:</td>
-            <td class="gap-top"></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">No. Kad Pengenalan</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">No Pasport</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Hubungan Waris</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Lain-lain (Sila Nyatakan)</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Alamat Rumah</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Poskod</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Bandar</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Negeri</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">No. Tel(HP)</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">No. Tel Rumah</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td class="gap-bottom" style="width: 16%">Pendapatan</td>
-            <td class="gap-bottom" style="width: 2%">:</td>
-            <td class="gap-bottom"></td>
-        </tr>
+      </div>
     </div>
-        <tr>
-            <td class="header-part" colspan="3">D. MAKLUMAT AKADEMIK</td>
-        </tr>
-    <div>
-        <tr class="gap-left">
-            <td style="width: 16%" class="gap-top">No Pendaftaran Pelajar</td>
-            <td style="width: 2%" class="gap-top">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Nama Kursus</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Peringkat Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Nama Pusat Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Tarikh Mula Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Tarikh Tamat Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Semester Semasa</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Tempoh Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Bil Bulan Persemester</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Mod Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Sumber Pembiayaan</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td class="gap-bottom" style="width: 16%">Nama Penaja</td>
-            <td class="gap-bottom" style="width: 2%">:</td>
-            <td class="gap-bottom"></td>
-        </tr>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+          <b>Keputusan Peperiksaan</b> 
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+        <div class="accordion-body" style="text-align: center">
+            <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="700px"/>
+        </div>
+      </div>
     </div>
-        <tr>
-            <td class="header-part" colspan="3">E. MAKLUMAT TUNTUTAN</td>
-        </tr>
-    <div>
-        <tr class="gap-left">
-            <td style="width: 16%" class="gap-top">Jenis Tuntutan</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td class="gap-bottom" style="width: 16%">Amaun</td>
-            <td class="gap-bottom" style="width: 2%">:</td>
-            <td class="gap-bottom"></td>
-        </tr>
-        <tr>
-            <td class="header-part" colspan="3">F. HADIAH LATIHAN PERSEKUTUAN (HLP)</td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 21%" class="gap-top gap-bottom">Status</td>
-            <td style="width: 2%" class="gap-top gap-bottom">:</td>
-            <td class="gap-top gap-bottom">Tidak menerima HLP</td>
-        </tr>
-        <tr>
-            <td class="header-part" colspan="3">G. PERAKUAN</td>
-        </tr>
-        <tr class="gap-left">
-            <td colspan="3" class="gap-top gap-bottom">
-                Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
-                sekiranya maklumat yang diberikan didapati palsu atau tidak benar, pihak kementerian berhak menolak
-                permohonan saya dan menghentikan bantuan kewangan ini kepada saya.
-            </td>
-        </tr>
-    </table>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+            <b>Invois/Resit</b> 
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+          <div class="accordion-body" style="text-align: center">
+            <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="700px"/>
+          </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+            <b>Maklumat Bank IPTA/IPTS/Kolej Komuniti/Politeknik Atau Pengesahan Semester Pengajian</b> 
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+          <div class="accordion-body" style="text-align: center">
+            <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="700px"/>
+          </div>
+        </div>
+    </div>
+</div>
+<!--end::Accordion-->
 </body>
 </html>

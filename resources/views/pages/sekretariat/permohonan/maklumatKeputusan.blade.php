@@ -1,5 +1,5 @@
 <x-default-layout> 
-    <link rel="stylesheet" href="assets/css/saringan.css">
+    <link rel="stylesheet" href="assets/css/sekretariat.css">
     <!-- Main body part  -->
     <div id="main-content">
         <div class="container-fluid">
@@ -7,21 +7,20 @@
             <div class="row clearfix">
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light page_menu">
-                        <!--<a class="navbar-brand" href="#">M.</a>-->
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fa fa-bars text-muted"></i>
+                            <i class="fa fa-bars text-muted"></i>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Pemohon</b></li>
+                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Keputusan Permohonan</b></li>
                             </ul>
-                            <div class="ml-auto">
-                                <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank"><button type="button" class="btn btn-sm btn-default" title="Print"><i class="fa fa-print"></i></button></a>
-                                {{-- <button type="button" class="btn btn-sm btn-default" title="Delete" onclick="confirmButton()"><i class="fa fa-trash"></i></button> --}}
-                            </div>
+                            {{-- <div class="ml-auto">
+                                <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank"><button type="button" class="btn btn-sm btn-default" title="Print"><i class="fa fa-download"></i></button></a>
+                            </div> --}} 
                         </div>
                     </nav>
                 </div>
+
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="body">
@@ -35,8 +34,9 @@
                             <hr>
                             <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6">
-                                    <p class="m-b-0"><strong>Tarikh Permohonan: </strong> 6/7/2023 </p>
-                                    <p><strong>ID Permohonan: </strong> IJAZAHBKOKU0001</p>                                    
+                                    <p><strong>ID Permohonan: </strong> KPTBKOKUD020223015001</p>
+                                    <p><strong>Tarikh Permohonan: </strong> 02/07/2023 </p>
+                                    <p><strong>Status Permohonan: </strong><span style="color: green;"> Layak</span></p>                                    
                                 </div>
                             </div>
                             <form method="POST" action="{{ url('saring-maklumat-pemohon') }}" id="saring">
@@ -62,18 +62,20 @@
                                                         <td class="hidden-sm-down">
                                                         
                                                             <div class="form-group c_form_group">
-                                                            <select name="maklumat_profil_diri" class="form-control">
-                                                                <option value="">Pilih</option>
-                                                                <option value="lengkap">Lengkap</option>
-                                                                <option value="tak_lengkap">Tidak Lengkap</option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                <td><div class="form-group c_form_group">
-                                                    <label>Berikan Catatan Anda.</label>
-                                                    <textarea name="catatan_profil_diri" rows="2" type="text" class="form-control" placeholder=""></textarea>
-                                                </div> </td>
+                                                                <select name="maklumat_profil_diri" class="form-control">
+                                                                    <option value="">Pilih</option>
+                                                                    <option value="lengkap">Lengkap</option>
+                                                                    <option value="tak_lengkap">Tidak Lengkap</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group c_form_group">
+                                                                <p>Semua maklumat diberikan adalah benar.</p>
+                                                            </div> 
+                                                        </td>
                                                     </tr>
+
                                                     <tr>
                                                         <td>2</td>
                                                         <td>
@@ -86,31 +88,34 @@
                                                                 <option value="lengkap">Lengkap</option>
                                                                 <option value="tak_lengkap">Tidak Lengkap</option>
                                                             </select>
-                                                        </div>
-                                                        <td><div class="fancy-checkbox">
-                                                            <label><input type="checkbox" name="catatan_maklumat_akademik" value="1"><span>Terdapat butiran yang tidak benar dalam Maklumat Akademik</span></label>
-                                                        </div></td>
-                                                    </td> 
+                                                            </div>
+                                                        </td> 
+                                                        <td>
+                                                            <div class="fancy-checkbox">
+                                                            <p>Terdapat butiran yang tidak benar dalam Maklumat Akademik</p>
+                                                            </div>
+                                                        </td>
                                                     </tr>
+
                                                     <tr>
                                                         <td>3</td>
                                                         <td>
                                                             <span><a href="{{ url('salinan-dokumen') }}" target="_blank">Salinan Dokumen</a></span>
                                                         </td>
                                                         <td class="hidden-sm-down">
-                                                            <!--<div class="col-lg-12 col-md-12">-->
                                                             <div class="form-group c_form_group">
-                                                            <select name="salinan_dokumen" class="form-control">
-                                                                <option value="">Pilih</option>
-                                                                <option value="lengkap">Lengkap</option>
-                                                                <option value="tak_lengkap">Tidak Lengkap</option>
-                                                            </select>
-                                                        </div>       
-                                                    </td>
-                                                    <td>
-                                                    <div class="fancy-checkbox">
-                                                        <label><input type="checkbox" name="catatan_salinan_dokumen" value="2"><span>Terdapat butiran yang tidak benar dalam Salinan Dokumen</span></label>
-                                                    </div></td>
+                                                                <select name="salinan_dokumen" class="form-control">
+                                                                    <option value="">Pilih</option>
+                                                                    <option value="lengkap">Lengkap</option>
+                                                                    <option value="tak_lengkap">Tidak Lengkap</option>
+                                                                </select>
+                                                            </div>       
+                                                        </td>
+                                                        <td>
+                                                            <div class="fancy-checkbox">
+                                                                <p>Terdapat butiran yang tidak benar dalam Salinan Dokumen</p>
+                                                            </div>
+                                                        </td>
                                                     </tr>                                                
                                                 </tbody>
                                             </table>
@@ -119,12 +124,12 @@
                                 </div>
                                 
                                 <div class="row clearfix">
-                                    <div class="col-md-6 text-right">
-                                        <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-success btn-round btn-sm"><i class="fa fa-download"></i> Muat Turun Surat Tawaran</a>
+                                    <div class="col-md-12" style="text-align: center">
+                                        <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-success btn-round btn-sm"><i class="fa fa-download"></i> Cetak Surat Tawaran</a>
                                     </div>
                                 </div>
                             </form>
-                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    {{-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -154,10 +159,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-            
+                                    </div> --}}
                                 </div>
-                                
                             </div> 
                         </div>
                     </div>                                       
