@@ -25,10 +25,10 @@
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="#">
+			<a class="menu-link" href="{{ route('statuspermohonan') }}">
 			<!-- "{{ route('dashboard') }}" -->
-					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
-					<span class="menu-title">Kemaskini</span>
+					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
+					<span class="menu-title">Status</span>
 			</a>
 		</div>
 		<div class="menu-item">
@@ -38,13 +38,7 @@
 					<span class="menu-title">Sejarah</span>
 			</a>
 		</div>
-		<div class="menu-item">
-			<a class="menu-link" href="{{ route('statuspermohonan') }}">
-			<!-- "{{ route('dashboard') }}" -->
-					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
-					<span class="menu-title">Status</span>
-			</a>
-		</div>
+		
 		<div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
