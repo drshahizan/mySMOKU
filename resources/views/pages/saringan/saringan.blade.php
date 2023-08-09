@@ -86,7 +86,7 @@
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
                                         </tr>
                                         <tr>                                            
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/990404080221</a></td>
+                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTBKOKU/2/990404080221</a></td>
                                             <td>Mohd Ali Bin Abu Kassim</td>
                                             <td>BKOKU</td>
                                             <td class="text-center">27/07/2023</td>
