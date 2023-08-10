@@ -12,11 +12,11 @@
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     </head>
     {{-- begin alert --}}
-    <div class="alert alert-success" role="alert">
-        Permohonan Telah Disokong
+    <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px">
+        Tuntutan Telah Disokong
     </div>
-    <div class="alert alert-warning" role="alert">
-        Permohonan Telah Dikembalikan
+    <div class="alert alert-warning" role="alert" style="margin: 0px 15px 20px 15px">
+        Tuntutan Telah Dikembalikan
     </div>
     {{-- end alert --}}
     <body>

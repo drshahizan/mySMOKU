@@ -1,6 +1,14 @@
 <x-default-layout> 
     <link rel="stylesheet" href="assets/css/saringan.css">
     <!-- Main body part  -->
+        {{-- begin alert --}}
+        <div class="alert alert-success" role="alert" style="margin: 0px 18px 20px 18px">
+            Permohonan Telah Disokong
+        </div>
+        <div class="alert alert-warning" role="alert" style="margin: 0px 18px 20px 18px">
+            Permohonan Telah Dikembalikan
+        </div>
+        {{-- end alert --}}
     <div id="main-content">
         <div class="container-fluid">
             <!-- Page header section  -->
@@ -42,51 +50,7 @@
                                 </div>
                             </div>
                             <form method="POST" action="{{ url('saring-tuntutan') }}" id="saring">
-                                {{csrf_field()}}
-                            <div class="row clearfix">
-                                <div class="col-md-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover table-bordered mb-5">
-                                            <thead class="table-primary">
-                                                <tr>
-                                                    <th style="width: 5%; text-align:right;">No.</th>                                                        
-                                                    <th style="width: 20%;">Item</th>
-                                                    <th style="width: 25%;">Keputusan Saringan</th>
-                                                    <th style="width: 50%;">Catatan</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td style="text-align:right;">1</td>
-                                                    <td>
-                                                        <span><a href="{{ url('salinan-invois') }}" target="_blank">Salinan Dokumen</a></span>
-                                                    </td>
-                                                    <td class="hidden-sm-down">
-                                                        <!--<div class="col-lg-12 col-md-12">-->
-                                                        <div class="form-group c_form_group">
-                                                        <select id="salinan_dokumen" name="salinan_dokumen" class="form-control" onchange="select3()">
-                                                            <option value="">Pilih</option>
-                                                            <option value="lengkap">Lengkap</option>
-                                                            <option value="tak_lengkap">Tidak Lengkap</option>
-                                                        </select>
-                                                    </div>       
-                                                </td>
-                                                <td>
-                                                    <div class="fancy-checkbox">
-                                                        <label>
-                                                            <input id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Perkara 1</span><br>
-                                                            <input id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Perkara 2</span><br>
-                                                            <input id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Perkara 3</span><br>
-                                                            <input id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Perkara 4</span>
-                                                        </label>
-                                                    </div></td>
-                                                </tr>                                                
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            
+                                {{csrf_field()}}                            
                             <div class="row clearfix">
                                 <div class="col-md-6">
                                     </div>
