@@ -73,6 +73,7 @@ Route::get('saringan', [SaringanController::class, 'saringan']);
     Route::get('sekretariatStatus', [SekretariatController::class, 'statusPermohonan']);
     Route::get('sekretariatKelulusan', [SekretariatController::class, 'keputusanSaringan']);
     Route::get('sekretariatKeputusan', [SekretariatController::class, 'keputusanPermohonan']);
+    Route::post('keputusan', [SekretariatController::class, 'keputusanPermohonan']);
     Route::get('maklumat-keputusan', [SekretariatController::class, 'maklumatKeputusan']);
     Route::get('suratTawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
 

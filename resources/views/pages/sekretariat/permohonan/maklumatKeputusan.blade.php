@@ -39,7 +39,8 @@
                             </div>
 
                            <div class="col-md-6 col-sm-6">
-                            <form action="#" method="POST">
+                            <form action="{{url('keputusan')}}" method="POST">
+                            @csrf
                                 {{-- Kelulusan --}}
                                 <label for="noMesyuarat"><b>No. Mesyuarat:</b></label>
                                     <input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;">

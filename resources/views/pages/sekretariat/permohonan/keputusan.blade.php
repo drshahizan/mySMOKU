@@ -107,9 +107,9 @@
                                         <tbody> 
                                             <tr>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/D/020223015001</a></td> 
-                                                <td>Ali Bin Abu</td> 
+                                                <td>Mohd Ali Bin Abu Kassim</td> 
                                                 <td>BKOKU</td>
-                                                <td class="text-center">21/07/2023</td>
+                                                <td class="text-center">10/08/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
                                             </tr>
 
