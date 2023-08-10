@@ -71,17 +71,17 @@
         <tr class="gap-left">
             <td style="width: 16%">Mod Pengajian</td>
             <td style="width: 2%">:</td>
-            <td>01</td>
+            <td>Sepenuh Masa</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Sumber Pembiayaan</td>
             <td style="width: 2%">:</td>
-            <td>01</td>
+            <td>Biasiswa</td>
         </tr>
         <tr class="gap-left">
             <td class="gap-bottom" style="width: 16%">Nama Penaja</td>
             <td class="gap-bottom" style="width: 2%">:</td>
-            <td class="gap-bottom">ADALAH</td>
+            <td class="gap-bottom">MARA</td>
         </tr>
     </div>
         </tr>
