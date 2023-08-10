@@ -26,7 +26,7 @@
         <tr class="gap-left">
             <td style="width: 16%" class="gap-top">No Pendaftaran Pelajar</td>
             <td style="width: 2%" class="gap-top">:</td>
-            <td>AI12345</td>
+            <td class="gap-top">AI12345</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Nama Kursus</td>
