@@ -946,6 +946,12 @@
 																	Yuran
 																</label>
 															</div>
+															<div class="col-12">
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun</label>
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="amaun" placeholder="" value="" />
+																<!--end::Input-->
+															</div>
 															<br>
 															<div class="form-check">
 																<input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"  name="elaun" />
