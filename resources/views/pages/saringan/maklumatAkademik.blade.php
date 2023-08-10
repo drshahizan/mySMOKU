@@ -22,68 +22,68 @@
         <tr>
             <td class="header-part" colspan="3">A. MAKLUMAT AKADEMIK</td>
         </tr>
-    <div>
-        <tr class="gap-left">
-            <td style="width: 16%" class="gap-top">No Pendaftaran Pelajar</td>
-            <td style="width: 2%" class="gap-top">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Nama Kursus</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Peringkat Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Nama Pusat Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Tarikh Mula Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Tarikh Tamat Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Semester Semasa</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Tempoh Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Bil Bulan Persemester</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Mod Pengajian</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Sumber Pembiayaan</td>
-            <td style="width: 2%">:</td>
-            <td></td>
-        </tr>
-        <tr class="gap-left">
-            <td class="gap-bottom" style="width: 16%">Nama Penaja</td>
-            <td class="gap-bottom" style="width: 2%">:</td>
-            <td class="gap-bottom"></td>
-        </tr>
-    </div>
+        <div>
+            <tr class="gap-left">
+                <td style="width: 16%" class="gap-top">No Pendaftaran Pelajar</td>
+                <td style="width: 2%" class="gap-top">:</td>
+                <td>AI12392</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Nama Kursus</td>
+                <td style="width: 2%">:</td>
+                <td>Bachelor Of Arts In Mobile Media Production</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Peringkat Pengajian</td>
+                <td style="width: 2%">:</td>
+                <td>Sarjana Muda</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Nama Pusat Pengajian</td>
+                <td style="width: 2%">:</td>
+                <td>Asia Pacific University Of Technology And Innovation</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Tarikh Mula Pengajian</td>
+                <td style="width: 2%">:</td>
+                <td>08/08/2023</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Tarikh Tamat Pengajian</td>
+                <td style="width: 2%">:</td>
+                <td>30/08/2023</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Semester Semasa</td>
+                <td style="width: 2%">:</td>
+                <td>06</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Tempoh Pengajian</td>
+                <td style="width: 2%">:</td>
+                <td>02</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Bil Bulan Persemester</td>
+                <td style="width: 2%">:</td>
+                <td>04</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Mod Pengajian</td>
+                <td style="width: 2%">:</td>
+                <td>Jarak Jauh</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Sumber Pembiayaan</td>
+                <td style="width: 2%">:</td>
+                <td>Pinjaman</td>
+            </tr>
+            <tr class="gap-left">
+                <td class="gap-bottom" style="width: 16%">Nama Penaja</td>
+                <td class="gap-bottom" style="width: 2%">:</td>
+                <td class="gap-bottom">JPA</td>
+            </tr>
+        </div>
         </tr>
             <td class="header-part" colspan="3">B. PERAKUAN</td>
         </tr>
