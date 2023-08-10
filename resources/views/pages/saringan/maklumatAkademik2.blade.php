@@ -26,62 +26,62 @@
         <tr class="gap-left">
             <td style="width: 16%" class="gap-top">No Pendaftaran Pelajar</td>
             <td style="width: 2%" class="gap-top">:</td>
-            <td></td>
+            <td>AI12345</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Nama Kursus</td>
             <td style="width: 2%">:</td>
-            <td></td>
+            <td>Bachelor Of Arts In Mobile Media Production</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Peringkat Pengajian</td>
             <td style="width: 2%">:</td>
-            <td></td>
+            <td>Sarjana Muda</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Nama Pusat Pengajian</td>
             <td style="width: 2%">:</td>
-            <td></td>
+            <td>Asia Pacific University Of Technology And Innovation</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Tarikh Mula Pengajian</td>
             <td style="width: 2%">:</td>
-            <td></td>
+            <td>08/08/2023</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Tarikh Tamat Pengajian</td>
             <td style="width: 2%">:</td>
-            <td></td>
+            <td>30/08/2023</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Semester Semasa</td>
             <td style="width: 2%">:</td>
-            <td></td>
+            <td>06</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Tempoh Pengajian</td>
             <td style="width: 2%">:</td>
-            <td></td>
+            <td>02</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Bil Bulan Persemester</td>
             <td style="width: 2%">:</td>
-            <td></td>
+            <td>04</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Mod Pengajian</td>
             <td style="width: 2%">:</td>
-            <td></td>
+            <td>01</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Sumber Pembiayaan</td>
             <td style="width: 2%">:</td>
-            <td></td>
+            <td>01</td>
         </tr>
         <tr class="gap-left">
             <td class="gap-bottom" style="width: 16%">Nama Penaja</td>
             <td class="gap-bottom" style="width: 2%">:</td>
-            <td class="gap-bottom"></td>
+            <td class="gap-bottom">ADALAH</td>
         </tr>
     </div>
         </tr>

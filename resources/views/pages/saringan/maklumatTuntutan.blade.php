@@ -34,7 +34,7 @@
                             <hr>
                             <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6">
-                                    <p class="m-b-0"><strong>Tarikh Permohonan: </strong> 7/7/2023 </p>
+                                    <p class="m-b-0"><strong>Tarikh Permohonan: </strong> 04/07/2023 </p>
                                     <p><strong>ID Permohonan: </strong> KPTBKOKUB990404080221</p><br>    
                                     <p><strong>Maklumat Tuntutan: </strong></p>          
                                     <p> <b><i>Jenis Tuntutan:</i></b>  Elaun Wang Saku</p> 
