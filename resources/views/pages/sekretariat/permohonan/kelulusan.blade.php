@@ -19,7 +19,7 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <h1>Rekod Permohonan</h1>
+                            <h1>Rekod Keputusan Permohonan</h1>
                         </div>
                         <hr>
 
@@ -97,10 +97,10 @@
                                             </tr>
     
                                             <tr data-status="Disokong">
-                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/M/970703041223</a></td>
+                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/4/970703041223</a></td>
                                                 <td>Mohd Ali Bin Abu Kassim</td>
                                                 <td>BKOKU</td>                                        
-                                                <td class="text-center">06/08/2023</td>
+                                                <td class="text-center">08/07/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
     

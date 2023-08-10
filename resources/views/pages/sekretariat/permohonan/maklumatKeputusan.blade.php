@@ -7,11 +7,9 @@
             <div class="row clearfix">
                 <div class="col-12">
                     <nav class="navbar navbar-expand-sm navbar-light bg-light page_menu">
-                        <div class="header">
-                            <h2><b>Rekod Keputusan Permohonan</b></h2>
-                        </div>
+                        <h2 style="padding-top: 5px;"><b>Rekod Keputusan Permohonan</b></h2>
                         {{-- <div class="ml-auto" style="color:black;">
-                            <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-download"></i> Surat Tawaran</a>
+                            <a href="{{ url('surat-tawaran') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-download"></i> Surat Tawaran</a>
                         </div> --}}
                     </nav>
                 </div>
@@ -38,21 +36,22 @@
                             </div>
 
                            <div class="col-md-6 col-sm-6">
-                            <form action="#" method="POST">
+                            <form action="{{ url('hantar-keputusan') }}" method="POST">
+                                {{csrf_field()}}
                                 {{-- Kelulusan --}}
                                 <label for="noMesyuarat"><b>No. Mesyuarat:</b></label>
                                     <input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;">
                                 <label for="tarikh"><b>Tarikh Mesyuarat:</b></label>
                                     <input type="date" id="tarikh" name="tarikh" style="padding: 5px;"><br><br>
                                 <label><b>Pilih Keputusan: </b></label>
-                                    <select id="keputusan" style="padding: 5px;">
+                                    <select id="keputusan" onchange="select1()" style="padding: 5px;">
                                             <option value="">Pilih Keputusan</option>
                                             <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
                                             <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
                                     </select>
                                 <br><br>
                                 <label for="tarikh"><b>Catatan:</b></label>
-                                    <input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; width:500px;">
+                                    <input type="text" id="catatan" name="noMesyuarat" style="padding: 5px; width:500px;">
                                 <br><br>
 
                                 <div class="submit" style="text-align: right;">
@@ -67,9 +66,12 @@
         </div>
     </div>
    <script>
-        function confirmButton() {
-            confirm("Press a button!");
-        }
+    // $("#submitForm").click(function() {
+    //     alert("Emel notifikasi telah dihantar ke pemohon.");
+    // });
+    function confirmButton() {
+        confirm("Press a button!");
+    }
 
         function my_button_click_handler()
         {
