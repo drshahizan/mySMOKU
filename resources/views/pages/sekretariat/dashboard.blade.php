@@ -66,10 +66,10 @@
 																	<!--begin::Stats-->
 																	<div class="m-0">
 																		<!--begin::Number-->
-																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">1689</span>
+																		<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">1689</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
-																		<span class="text-white fw-bold fs-6">Permohonan Aktif</span>
+																		<span class="text-white fw-bold fs-7">Permohonan Aktif</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
 																		
@@ -97,10 +97,10 @@
 																	<!--begin::Stats-->
 																	<div class="m-0">
 																		<!--begin::Number-->
-																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">300</span>
+																		<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">300</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
-																		<span class="text-white fw-bold fs-6">Permohonan Tidak Aktif</span>
+																		<span class="text-white fw-bold fs-7">Permohonan Tidak Aktif</span>
 																		<!--end::Desc-->
 																	</div>
 																	<!--end::Stats-->
@@ -126,10 +126,10 @@
 																	<!--begin::Stats-->
 																	<div class="m-0">
 																		<!--begin::Number-->
-																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">470</span>
+																		<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">470</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
-																		<span class="text-white fw-semibold fs-6">Graduan</span>
+																		<span class="text-white fw-semibold fs-7">Graduan</span>
 																		<!--end::Desc-->
 																	</div>
 																	<!--end::Stats-->
@@ -155,10 +155,10 @@
 																	<!--begin::Stats-->
 																	<div class="m-0">
 																		<!--begin::Number-->
-																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">822</span>
+																		<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">822</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
-																		<span class="text-white fw-semibold fs-6">Menyambung Pelajaran</span>
+																		<span class="text-white fw-semibold fs-7">Menyambung Pelajaran</span>
 																		<!--end::Desc-->
 																	</div>
 																	<!--end::Stats-->
@@ -219,10 +219,10 @@
 																	<!--begin::Stats-->
 																	<div class="m-0">
 																		<!--begin::Number-->
-																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">1689</span>
+																		<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">1689</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
-																		<span class="text-white fw-bold fs-6">Permohonan Aktif</span>
+																		<span class="text-white fw-bold fs-7">Permohonan Aktif</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
 																		
@@ -250,10 +250,10 @@
 																	<!--begin::Stats-->
 																	<div class="m-0">
 																		<!--begin::Number-->
-																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">500</span>
+																		<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">500</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
-																		<span class="text-white fw-bold fs-6">Permohonan Tidak Aktif</span>
+																		<span class="text-white fw-bold fs-7">Permohonan Tidak Aktif</span>
 																		<!--end::Desc-->
 																	</div>
 																	<!--end::Stats-->
@@ -279,10 +279,10 @@
 																	<!--begin::Stats-->
 																	<div class="m-0">
 																		<!--begin::Number-->
-																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">470</span>
+																		<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">300</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
-																		<span class="text-white fw-semibold fs-6">Graduan</span>
+																		<span class="text-white fw-semibold fs-7">Graduan</span>
 																		<!--end::Desc-->
 																	</div>
 																	<!--end::Stats-->
@@ -308,10 +308,10 @@
 																	<!--begin::Stats-->
 																	<div class="m-0">
 																		<!--begin::Number-->
-																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">822</span>
+																		<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">902</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
-																		<span class="text-white fw-semibold fs-6">Menyambung Pelajaran</span>
+																		<span class="text-white fw-semibold fs-7">Menyambung Pelajaran</span>
 																		<!--end::Desc-->
 																	</div>
 																	<!--end::Stats-->
