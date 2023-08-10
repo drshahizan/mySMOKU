@@ -1,78 +1,337 @@
 <x-default-layout>
+	<!--begin::Page title-->
+<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+	<!--begin::Title-->
+	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Utama</h1>
+	<!--end::Title-->
+	<!--begin::Breadcrumb-->
+	<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+		<!--begin::Item-->
+		<li class="breadcrumb-item text-dark" style="color:darkblue">Utama</li>
+			
+		<!--end::Item-->
+		<!--begin::Item-->
+		<li class="breadcrumb-item">
+			<span class="bullet bg-gray-400 w-5px h-2px"></span>
+		</li>
+		<!--end::Item-->
+		<!--begin::Item-->
+		<li class="breadcrumb-item text-dark" style="color:darkblue">Paparan Pemuka</li>
+		<!--end::Item-->
+	</ul>
+	<!--end::Breadcrumb-->
+</div>
+<!--end::Page title-->
+<br>
 
-<div class="row g-5 g-xl-8">
-										<div class="col-xl-3">
-											<!--begin::Statistics Widget 5-->
-											<a href="#" class="card bg-body hoverable card-xl-stretch mb-xl-8">
+<!--begin::Row-->
+<div class="row g-5 g-xl-10">
+										<!--begin::Col-->
+										<div class="col-xl-4 mb-xl-10">
+											<!--begin::Lists Widget 19-->
+											<div class="card card-flush h-xl-100">
+												<!--begin::Heading-->
+												<div class="card-header rounded bgi-no-repeat bgi-size-cover bgi-position-y-top bgi-position-x-center align-items-start h-250px" style="background-image:url('assets/media/svg/shapes/top-green.png" data-bs-theme="light">
+													<!--begin::Title-->
+													<h3 class="card-title align-items-start flex-column text-white pt-15">
+														<span class="fw-bold fs-2x mb-3">Permohonan BKOKU</span>
+														
+													</h3>
+													<!--end::Title-->
+													<!--begin::Toolbar-->
+													
+													<!--end::Toolbar-->
+												</div>
+												<!--end::Heading-->
 												<!--begin::Body-->
-												<div class="card-body">
-													<i class="ki-duotone ki-chart-simple text-primary fs-2x ms-n1">
-														<span class="path1"></span>
-														<span class="path2"></span>
-														<span class="path3"></span>
-														<span class="path4"></span>
-													</i>
-													<div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">500M$</div>
-													<div class="fw-semibold text-gray-400">SAP UI Progress</div>
+												<div class="card-body mt-n20">
+													<!--begin::Stats-->
+													<div class="mt-n20 position-relative">
+														<!--begin::Row-->
+														<div class="row g-3 g-lg-6">
+															<!--begin::Col-->
+															<div class="col-6">
+																<!--begin::Items-->
+																<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #77dd77">
+																	<!--begin::Symbol-->
+																	<div class="symbol symbol-30px me-5 mb-8">
+																		<span class="symbol-label">
+																			<i class="ki-duotone ki-user-tick fs-1 text-dark">
+																				<span class="path1"></span>
+																				<span class="path2"></span>
+																			</i>
+																		</span>
+																	</div>
+																	<!--end::Symbol-->
+																	<!--begin::Stats-->
+																	<div class="m-0">
+																		<!--begin::Number-->
+																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">1689</span>
+																		<!--end::Number-->
+																		<!--begin::Desc-->
+																		<span class="text-white fw-bold fs-6">Permohonan Aktif</span>
+																		<!--end::Number-->
+																		<!--begin::Desc-->
+																		
+																		<!--end::Desc-->
+																	</div>
+																	<!--end::Stats-->
+																</div>
+																<!--end::Items-->
+															</div>
+															<!--end::Col-->
+															<!--begin::Col-->
+															<div class="col-6">
+																<!--begin::Items-->
+																<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #ff6961">
+																	<!--begin::Symbol-->
+																	<div class="symbol symbol-30px me-5 mb-8">
+																		<span class="symbol-label">
+																			<i class="ki-duotone ki-user fs-1 text-dark">
+																				<span class="path1"></span>
+																				<span class="path2"></span>
+																			</i>
+																		</span>
+																	</div>
+																	<!--end::Symbol-->
+																	<!--begin::Stats-->
+																	<div class="m-0">
+																		<!--begin::Number-->
+																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">300</span>
+																		<!--end::Number-->
+																		<!--begin::Desc-->
+																		<span class="text-white fw-bold fs-6">Permohonan Tidak Aktif</span>
+																		<!--end::Desc-->
+																	</div>
+																	<!--end::Stats-->
+																</div>
+																<!--end::Items-->
+															</div>
+															<!--end::Col-->
+															<!--begin::Col-->
+															<div class="col-6">
+																<!--begin::Items-->
+																<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #7ec4cf">
+																	<!--begin::Symbol-->
+																	<div class="symbol symbol-30px me-5 mb-8">
+																		<span class="symbol-label">
+																			<i class="ki-duotone ki-teacher fs-1 text-dark">
+																				<span class="path1"></span>
+																				<span class="path2"></span>
+																				<span class="path3"></span>
+																			</i>
+																		</span>
+																	</div>
+																	<!--end::Symbol-->
+																	<!--begin::Stats-->
+																	<div class="m-0">
+																		<!--begin::Number-->
+																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">470</span>
+																		<!--end::Number-->
+																		<!--begin::Desc-->
+																		<span class="text-white fw-semibold fs-6">Graduan</span>
+																		<!--end::Desc-->
+																	</div>
+																	<!--end::Stats-->
+																</div>
+																<!--end::Items-->
+															</div>
+															<!--end::Col-->
+															<!--begin::Col-->
+															<div class="col-6">
+																<!--begin::Items-->
+																<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #9cadce">
+																	<!--begin::Symbol-->
+																	<div class="symbol symbol-30px me-5 mb-8">
+																		<span class="symbol-label">
+																			<i class="ki-duotone ki-book-open fs-1 text-dark">
+																				<span class="path1"></span>
+																				<span class="path2"></span>
+																				<span class="path3"></span>
+																			</i>
+																		</span>
+																	</div>
+																	<!--end::Symbol-->
+																	<!--begin::Stats-->
+																	<div class="m-0">
+																		<!--begin::Number-->
+																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">822</span>
+																		<!--end::Number-->
+																		<!--begin::Desc-->
+																		<span class="text-white fw-semibold fs-6">Menyambung Pelajaran</span>
+																		<!--end::Desc-->
+																	</div>
+																	<!--end::Stats-->
+																</div>
+																<!--end::Items-->
+															</div>
+															<!--end::Col-->
+														</div>
+														<!--end::Row-->
+													</div>
+													<!--end::Stats-->
 												</div>
 												<!--end::Body-->
-											</a>
-											<!--end::Statistics Widget 5-->
+											</div>
+											<!--end::Lists Widget 19-->
+											
 										</div>
-										<div class="col-xl-3">
-											<!--begin::Statistics Widget 5-->
-											<a href="#" class="card bg-dark hoverable card-xl-stretch mb-xl-8">
+										<!--begin::Row-->
+
+										<!--begin::Col-->
+											<!--begin::Col-->
+											<div class="col-xl-4 mb-xl-10">
+											<!--begin::Lists Widget 19-->
+											<div class="card card-flush h-xl-100">
+												<!--begin::Heading-->
+												<div class="card-header rounded bgi-no-repeat bgi-size-cover bgi-position-y-top bgi-position-x-center align-items-start h-250px" style="background-image:url('assets/media/svg/shapes/top-green.png" data-bs-theme="light">
+													<!--begin::Title-->
+													<h3 class="card-title align-items-start flex-column text-white pt-15">
+														<span class="fw-bold fs-2x mb-3">Permohonan PPK</span>
+														
+													</h3>
+													<!--end::Title-->
+													<!--begin::Toolbar-->
+													
+													<!--end::Toolbar-->
+												</div>
+												<!--end::Heading-->
 												<!--begin::Body-->
-												<div class="card-body">
-													<i class="ki-duotone ki-cheque text-gray-100 fs-2x ms-n1">
-														<span class="path1"></span>
-														<span class="path2"></span>
-														<span class="path3"></span>
-														<span class="path4"></span>
-														<span class="path5"></span>
-														<span class="path6"></span>
-														<span class="path7"></span>
-													</i>
-													<div class="text-gray-100 fw-bold fs-2 mb-2 mt-5">+3000</div>
-													<div class="fw-semibold text-gray-100">New Customers</div>
+												<div class="card-body mt-n20">
+													<!--begin::Stats-->
+													<div class="mt-n20 position-relative">
+														<!--begin::Row-->
+														<div class="row g-3 g-lg-6">
+															<!--begin::Col-->
+															<div class="col-6">
+																<!--begin::Items-->
+																<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #77dd77">
+																	<!--begin::Symbol-->
+																	<div class="symbol symbol-30px me-5 mb-8">
+																		<span class="symbol-label">
+																			<i class="ki-duotone ki-user-tick fs-1 text-dark">
+																				<span class="path1"></span>
+																				<span class="path2"></span>
+																			</i>
+																		</span>
+																	</div>
+																	<!--end::Symbol-->
+																	<!--begin::Stats-->
+																	<div class="m-0">
+																		<!--begin::Number-->
+																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">1689</span>
+																		<!--end::Number-->
+																		<!--begin::Desc-->
+																		<span class="text-white fw-bold fs-6">Permohonan Aktif</span>
+																		<!--end::Number-->
+																		<!--begin::Desc-->
+																		
+																		<!--end::Desc-->
+																	</div>
+																	<!--end::Stats-->
+																</div>
+																<!--end::Items-->
+															</div>
+															<!--end::Col-->
+															<!--begin::Col-->
+															<div class="col-6">
+																<!--begin::Items-->
+																<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #ff6961">
+																	<!--begin::Symbol-->
+																	<div class="symbol symbol-30px me-5 mb-8">
+																		<span class="symbol-label">
+																			<i class="ki-duotone ki-user fs-1 text-dark">
+																				<span class="path1"></span>
+																				<span class="path2"></span>
+																			</i>
+																		</span>
+																	</div>
+																	<!--end::Symbol-->
+																	<!--begin::Stats-->
+																	<div class="m-0">
+																		<!--begin::Number-->
+																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">500</span>
+																		<!--end::Number-->
+																		<!--begin::Desc-->
+																		<span class="text-white fw-bold fs-6">Permohonan Tidak Aktif</span>
+																		<!--end::Desc-->
+																	</div>
+																	<!--end::Stats-->
+																</div>
+																<!--end::Items-->
+															</div>
+															<!--end::Col-->
+															<!--begin::Col-->
+															<div class="col-6">
+																<!--begin::Items-->
+																<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #7ec4cf">
+																	<!--begin::Symbol-->
+																	<div class="symbol symbol-30px me-5 mb-8">
+																		<span class="symbol-label">
+																			<i class="ki-duotone ki-teacher fs-1 text-dark">
+																				<span class="path1"></span>
+																				<span class="path2"></span>
+																				<span class="path3"></span>
+																			</i>
+																		</span>
+																	</div>
+																	<!--end::Symbol-->
+																	<!--begin::Stats-->
+																	<div class="m-0">
+																		<!--begin::Number-->
+																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">470</span>
+																		<!--end::Number-->
+																		<!--begin::Desc-->
+																		<span class="text-white fw-semibold fs-6">Graduan</span>
+																		<!--end::Desc-->
+																	</div>
+																	<!--end::Stats-->
+																</div>
+																<!--end::Items-->
+															</div>
+															<!--end::Col-->
+															<!--begin::Col-->
+															<div class="col-6">
+																<!--begin::Items-->
+																<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #9cadce">
+																	<!--begin::Symbol-->
+																	<div class="symbol symbol-30px me-5 mb-8">
+																		<span class="symbol-label">
+																			<i class="ki-duotone ki-book-open fs-1 text-dark">
+																				<span class="path1"></span>
+																				<span class="path2"></span>
+																				<span class="path3"></span>
+																			</i>
+																		</span>
+																	</div>
+																	<!--end::Symbol-->
+																	<!--begin::Stats-->
+																	<div class="m-0">
+																		<!--begin::Number-->
+																		<span class="text-white fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">822</span>
+																		<!--end::Number-->
+																		<!--begin::Desc-->
+																		<span class="text-white fw-semibold fs-6">Menyambung Pelajaran</span>
+																		<!--end::Desc-->
+																	</div>
+																	<!--end::Stats-->
+																</div>
+																<!--end::Items-->
+															</div>
+															<!--end::Col-->
+														</div>
+														<!--end::Row-->
+													</div>
+													<!--end::Stats-->
 												</div>
 												<!--end::Body-->
-											</a>
-											<!--end::Statistics Widget 5-->
+											</div>
+											<!--end::Lists Widget 19-->
+											
 										</div>
-										<div class="col-xl-3">
-											<!--begin::Statistics Widget 5-->
-											<a href="#" class="card bg-warning hoverable card-xl-stretch mb-xl-8">
-												<!--begin::Body-->
-												<div class="card-body">
-													<i class="ki-duotone ki-briefcase text-white fs-2x ms-n1">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>
-													<div class="text-white fw-bold fs-2 mb-2 mt-5">$50,000</div>
-													<div class="fw-semibold text-white">Milestone Reached</div>
-												</div>
-												<!--end::Body-->
-											</a>
-											<!--end::Statistics Widget 5-->
+											
 										</div>
-										<div class="col-xl-3">
-											<!--begin::Statistics Widget 5-->
-											<a href="#" class="card bg-info hoverable card-xl-stretch mb-5 mb-xl-8">
-												<!--begin::Body-->
-												<div class="card-body">
-													<i class="ki-duotone ki-chart-pie-simple text-white fs-2x ms-n1">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>
-													<div class="text-white fw-bold fs-2 mb-2 mt-5">$50,000</div>
-													<div class="fw-semibold text-white">Milestone Reached</div>
-												</div>
-												<!--end::Body-->
-											</a>
-											<!--end::Statistics Widget 5-->
-										</div>
-									</div>
-									<!--end::Row-->
+</div>
               
+										
 </x-default-layout>
