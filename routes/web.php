@@ -51,7 +51,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('viewpermohonan', [PermohonanController::class, 'viewpermohonan'])->name('viewpermohonan');
     Route::get('statuspermohonan', [PermohonanController::class, 'statuspermohonan'])->name('sejarahpermohonan');
     
-    Route::get('saringan', [SaringanController::class, 'saringan']);
+    
+});
+
+Route::get('saringan', [SaringanController::class, 'saringan']);
     Route::get('maklumat-pemohon', [SaringanController::class, 'maklumatPemohon'])->name('id');
     Route::get('maklumat-perbaharui', [SaringanController::class, 'maklumatPerbaharui'])->name('id');
     Route::get('maklumat-profil-diri', [SaringanController::class, 'maklumatProfilDiri'])->name('id');
@@ -72,7 +75,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('sekretariatKeputusan', [SekretariatController::class, 'keputusanPermohonan']);
     Route::get('maklumat-keputusan', [SekretariatController::class, 'maklumatKeputusan']);
     Route::get('suratTawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
-});
 
 Route::get('/error', function () {
     abort(500);

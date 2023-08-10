@@ -38,10 +38,10 @@
                                     <p><strong>ID Permohonan: </strong> KPTBKOKUB990404080221</p><br>    
                                     <p><strong>Maklumat Tuntutan: </strong></p>          
                                     <p> <b><i>Jenis Tuntutan:</i></b>  Elaun Wang Saku</p> 
-                                    <p> <b><i>Amaun: </i>RM </b><input type="number" value="300" style="width: 80px;"></p>                   
+                                    <p> <b><i>Amaun: </i>RM </b><input type="number" value="5000" style="width: 80px;"></p>                   
                                 </div>
                             </div>
-                            <form method="POST" action="{{ url('saring-maklumat-pemohon') }}" id="saring">
+                            <form method="POST" action="{{ url('saring-tuntutan') }}" id="saring">
                                 {{csrf_field()}}
                             <div class="row clearfix">
                                 <div class="col-md-12">
