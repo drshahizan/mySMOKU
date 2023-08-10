@@ -61,7 +61,7 @@ Route::get('saringan', [SaringanController::class, 'saringan']);
     Route::get('maklumat-akademik', [SaringanController::class, 'maklumatAkademik'])->name('id');
     Route::get('maklumat-akademik2', [SaringanController::class, 'maklumatAkademik2'])->name('id');
     Route::get('maklumat-tuntutan', [SaringanController::class, 'maklumatTuntutan'])->name('id');
-    Route::get('saring-tuntutan', [SaringanController::class, 'saringTuntutan'])->name('id');
+    Route::post('saring-tuntutan', [SaringanController::class, 'saringTuntutan'])->name('id');
     Route::get('salinan-dokumen', [SaringanController::class, 'salinanDokumen'])->name('id');
     Route::get('salinan-invois', [SaringanController::class, 'salinanInvois'])->name('id');
     Route::get('salinan-akademik', [SaringanController::class, 'salinanAkademik'])->name('id');
