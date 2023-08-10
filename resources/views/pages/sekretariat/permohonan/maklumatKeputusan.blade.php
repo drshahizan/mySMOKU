@@ -10,7 +10,6 @@
                         <div class="header">
                             <h2><b>Rekod Keputusan Permohonan</b></h2>
                         </div>
-
                         {{-- <div class="ml-auto" style="color:black;">
                             <a href="{{ url('suratTawaran') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-download"></i> Surat Tawaran</a>
                         </div> --}}

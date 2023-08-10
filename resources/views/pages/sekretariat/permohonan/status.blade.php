@@ -43,7 +43,7 @@
                             <div class="col-lg-2 col-md-4">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-inline-flex">
                                             <div class="icon-in-bg text-white rounded-circle" style="background-color: coral;"><i class="fa fa-users" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black"> Saringan</span>
@@ -82,7 +82,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-2 col-md-2">
+                            <div class="col-lg-2 col-md-4">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
