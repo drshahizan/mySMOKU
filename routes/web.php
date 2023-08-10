@@ -51,17 +51,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('viewpermohonan', [PermohonanController::class, 'viewpermohonan'])->name('viewpermohonan');
     Route::get('statuspermohonan', [PermohonanController::class, 'statuspermohonan'])->name('sejarahpermohonan');
     
-    
-});
-
-Route::get('saringan', [SaringanController::class, 'saringan']);
+    Route::get('saringan', [SaringanController::class, 'saringan']);
     Route::get('maklumat-pemohon', [SaringanController::class, 'maklumatPemohon'])->name('id');
     Route::get('maklumat-perbaharui', [SaringanController::class, 'maklumatPerbaharui'])->name('id');
     Route::get('maklumat-profil-diri', [SaringanController::class, 'maklumatProfilDiri'])->name('id');
     Route::get('maklumat-akademik', [SaringanController::class, 'maklumatAkademik'])->name('id');
     Route::get('maklumat-akademik2', [SaringanController::class, 'maklumatAkademik2'])->name('id');
     Route::get('maklumat-tuntutan', [SaringanController::class, 'maklumatTuntutan'])->name('id');
-    Route::get('saring-tuntutan', [SaringanController::class, 'saringTuntutan'])->name('id');
+    Route::post('saring-tuntutan', [SaringanController::class, 'saringTuntutan'])->name('id');
     Route::get('salinan-dokumen', [SaringanController::class, 'salinanDokumen'])->name('id');
     Route::get('salinan-invois', [SaringanController::class, 'salinanInvois'])->name('id');
     Route::get('salinan-akademik', [SaringanController::class, 'salinanAkademik'])->name('id');
@@ -74,7 +71,10 @@ Route::get('saringan', [SaringanController::class, 'saringan']);
     Route::get('sekretariatKelulusan', [SekretariatController::class, 'keputusanSaringan']);
     Route::get('sekretariatKeputusan', [SekretariatController::class, 'keputusanPermohonan']);
     Route::get('maklumat-keputusan', [SekretariatController::class, 'maklumatKeputusan']);
+    Route::post('keputusan', [SekretariatController::class, 'keputusanPermohonan']);
     Route::get('suratTawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
+    
+});
 
 Route::get('/error', function () {
     abort(500);

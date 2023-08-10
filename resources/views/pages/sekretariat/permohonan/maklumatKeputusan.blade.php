@@ -23,8 +23,8 @@
                             <div class="d-flex align-items-center">
                                 <img class="img" src="https://www.shareicon.net/data/128x128/2016/05/24/770085_man_512x512.png" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar Name">
                                 <div class="ml-2" style="padding-top: 10px;">
-                                    Ali Bin Abu
-                                    <p class="mb-0">alibinabu@graduate.utm.my</p>
+                                    Mohd Ali Bin Abu Kassim
+                                    <p class="mb-0">ali12@graduate.utm.my</p>
                                 </div>
                             </div>
 
@@ -32,14 +32,15 @@
 
                             <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6">
-                                    <p><strong>ID Permohonan: </strong> KPTBKOKUD020223015001</p>
-                                    <p><strong>Tarikh Permohonan: </strong> 02/07/2023 </p>
+                                    <p><strong>ID Permohonan: </strong> KPTBKOKU/4/970703041223</p>
+                                    <p><strong>Tarikh Permohonan: </strong> 06/08/2023 </p>
                                     <p><strong>Status Permohonan: </strong> Disokong</p>                                    
                                 </div>
                             </div>
 
                            <div class="col-md-6 col-sm-6">
-                            <form action="#" method="POST">
+                            <form action="{{url('keputusan')}}" method="POST">
+                                @csrf
                                 {{-- Kelulusan --}}
                                 <label for="noMesyuarat"><b>No. Mesyuarat:</b></label>
                                     <input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;">
@@ -55,8 +56,9 @@
                                 <label for="tarikh"><b>Catatan:</b></label>
                                     <input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; width:500px;">
                                 <br><br>
+
                                 <div class="submit" style="text-align: right;">
-                                    <button type="submit" class="btn btn-primary text-white">Hantar</button>
+                                    <button type="submit" id="submitForm" onclick="my_button_click_handler" class="btn btn-primary text-white">Hantar</button>
                                 </div>
                             </form>
                            </div>
@@ -67,8 +69,13 @@
         </div>
     </div>
    <script>
-    function confirmButton() {
-        confirm("Press a button!");
-    }
+        function confirmButton() {
+            confirm("Press a button!");
+        }
+
+        function my_button_click_handler()
+        {
+            alert('Emel notifikasi telah dihantar ke pemohon.');
+        }
    </script>
 </x-default-layout> 

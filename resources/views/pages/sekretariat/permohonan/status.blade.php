@@ -188,7 +188,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/B/990404080221</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/990404080221</a></td>
                                             <td>Santosh A/L Ariyaran</td>
                                             <td>BKOKU</td>
                                             <td class="text-center">07/02/2023</td>
@@ -196,7 +196,7 @@
                                         </tr>
 
                                         <tr data-status="Tidak Aktif">
-                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPT/PPK/B/970204052445</a></td>
+                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTPPK/3/970204052445</a></td>
                                             <td>Sarah Binti Yusri</td>
                                             <td>PPK</td>                                        
                                             <td class="text-center">05/03/2023</td>
@@ -204,7 +204,7 @@
                                         </tr>  
 
                                         <tr data-status="Disokong">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/B/980112105666</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/980112105666</a></td>
                                             <td>Aishah Binti Samsudin</td>
                                             <td>BKOKU</td>                                       
                                             <td class="text-center">02/03/2023</td>
@@ -212,15 +212,15 @@
                                         </tr>
 
                                         <tr data-status="Baru">
-                                            <<td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/M/970703041223</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/M/970703041223</a></td>
                                             <td>Mohd Ali Bin Abu Kassim</td>
                                             <td>BKOKU</td>                                        
-                                            <td class="text-center">06/08/2023</td>
+                                            <td class="text-center">27/07/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-info btn-sm">Baru</button></td>
                                         </tr>
 
                                         <tr data-status="Dikembalikan">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/M/960909105668</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/960909105668</a></td>
                                             <td>Ling Kai Jie</td>
                                             <td>BKOKU</td>                                        
                                             <td class="text-center">09/04/2023</td>
@@ -228,7 +228,7 @@
                                         </tr>
                                         
                                         <tr data-status="Saringan">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/PPK/M/950804082447</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/6/950804082447</a></td>
                                             <td>Akmal Bin Kairuddin</td>
                                             <td>PPK</td>                                        
                                             <td class="text-center">27/4/2023</td>
@@ -236,7 +236,7 @@
                                         </tr>
 
                                         <tr data-status="Tidak Layak">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/PPK/D/021212050334</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/2/021212050334</a></td>
                                             <td>Santishwaran A/L Paven</td>
                                             <td>PPK</td>                                        
                                             <td class="text-center">05/06/2023</td>
@@ -244,7 +244,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/D/001205034745</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/001205034745</a></td>
                                             <td>Choo Mei Ling</td>
                                             <td>BKOKU</td>
                                             <td class="text-center">07/06/2023</td>
@@ -252,7 +252,7 @@
                                         </tr>
                                         
                                         <tr data-status="Saringan">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/P/890201065225</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/890201065225</a></td>
                                             <td>Ezra Hanisah Binti Md Yunos</td>
                                             <td>BKOKU</td>                                    
                                             <td class="text-center">19/02/2023</td>
@@ -260,7 +260,7 @@
                                         </tr>
                                         
                                         <tr data-status="Layak">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/PPK/D/010305058473</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/2/010305058473</a></td>
                                             <td>Arshahad Bin Kairul Zaman</td>
                                             <td>PPK</td>                                        
                                             <td class="text-center">26/05/2023</td>
@@ -268,7 +268,7 @@
                                         </tr>
                                         
                                         <tr data-status="Disokong">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/PPK/B/981004045253</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/3/981004045253</a></td>
                                             <td>Syed Abdul Kassim Hussain Yusof</td>
                                             <td>PPK</td>                                        
                                             <td class="text-center">25/05/2023</td>
@@ -276,7 +276,7 @@
                                         </tr>
                                         
                                         <tr data-status="Disokong">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/D/990201051446</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/990201051446</a></td>
                                             <td>Shakira Mariam Aqilah Binti Syed Abdul Rahman</td>
                                             <td>BKOKU</td>                                        
                                             <td class="text-center">07/06/2023</td>
@@ -284,7 +284,7 @@
                                         </tr>
                                         
                                         <tr data-status="Baru">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/P/940524032341</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/5/940524032341</a></td>
                                             <td>Rahman Mohammed Arshahad Al-dhaqm</td>
                                             <td>BKOKU</td>                                    
                                             <td class="text-center">09/07/2023</td>
@@ -292,7 +292,7 @@
                                         </tr>
                                         
                                         <tr data-status="Disokong">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/B/950623035672</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/950623035672</a></td>
                                             <td>Wan Nurul Syafiqah Binti Wan Sahak</td>
                                             <td>BKOKU</td>
                                             <td class="text-center">09/08/2023</td>
@@ -300,7 +300,7 @@
                                         </tr>
 
                                         <tr data-status="Dikembalikan">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/BKOKU/B/890907030098</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/890907030098</a></td>
                                             <td>Siti Aisyah Binti Ismail</td>
                                             <td>BKOKU</td>
                                             <td class="text-center">21/05/2023</td>
@@ -308,7 +308,7 @@
                                         </tr>
 
                                         <tr data-status="Disokong">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/PPK/B/900623031672</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/6/900623031672</a></td>
                                             <td>Wan Aminah Binti Hasan</td>
                                             <td>PPK</td>
                                             <td class="text-center">19/04/2023</td>
@@ -316,7 +316,7 @@
                                         </tr>
 
                                         <tr data-status="Dikembalikan">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPT/PPK/B/950523098909</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/4/950523098909</a></td>
                                             <td>Muhammad Aiman Bin Hamid</td>
                                             <td>PPK</td>
                                             <td class="text-center">09/07/2023</td>

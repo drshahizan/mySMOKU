@@ -82,7 +82,7 @@
                                             <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTBKOKU/2/950623098909</a></td>
                                             <td>Muhammad Aiman Bin Hamid</td>
                                             <td>BKOKU</td>
-                                            <td class="text-center">17/07/2023</td>
+                                            <td class="text-center">29/07/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
                                         </tr>
                                         <tr>                                            

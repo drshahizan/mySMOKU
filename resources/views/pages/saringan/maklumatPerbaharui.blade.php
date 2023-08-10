@@ -28,7 +28,7 @@
                                 <img class="img" src="https://www.shareicon.net/data/128x128/2016/05/24/770085_man_512x512.png" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar Name">
                                 <div class="ml-3">
                                     Wan Nurul Syafiqah Binti Wan Sahak
-                                    <p class="mb-0">wannursyafiqah@graduate.utp.my</p>
+                                    <p class="mb-0">wannursyafiqah@graduate.aputi.my</p>
                                 </div>
                             </div>
                             <hr>

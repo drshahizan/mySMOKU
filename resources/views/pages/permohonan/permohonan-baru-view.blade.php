@@ -255,7 +255,7 @@
 														<div class="row mb-10">
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
-																<label class="required fs-6 fw-semibold form-label mb-2">No. JKM
+																<label class="fs-6 fw-semibold form-label mb-2">No. JKM
 																</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
