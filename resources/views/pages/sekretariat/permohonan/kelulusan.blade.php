@@ -97,7 +97,7 @@
                                             </tr>
     
                                             <tr data-status="Disokong">
-                                                <<td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/BKOKU/M/970703041223</a></td>
+                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPT/BKOKU/M/970703041223</a></td>
                                                 <td>Mohd Ali Bin Abu Kassim</td>
                                                 <td>BKOKU</td>                                        
                                                 <td class="text-center">06/08/2023</td>
