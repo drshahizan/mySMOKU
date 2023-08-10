@@ -11,6 +11,14 @@
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     </head>
+    {{-- begin alert --}}
+    <div class="alert alert-success" role="alert">
+        Permohonan Telah Disokong
+    </div>
+    <div class="alert alert-warning" role="alert">
+        Permohonan Telah Dikembalikan
+    </div>
+    {{-- end alert --}}
     <body>
     <!-- Main body part  -->
     <div id="main-content">
