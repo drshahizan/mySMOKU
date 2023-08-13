@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SenaraiPendek;
 use App\Models\Permohonan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SekretariatController extends Controller
 {
@@ -32,8 +34,8 @@ class SekretariatController extends Controller
 
     public function keputusanPermohonan()
     {
-
         return view('pages.sekretariat.permohonan.keputusan');
+        //return redirect('pages.sekretariat.permohonan.keputusan')->with('status','Emel notifikasi telah dihantar ke pemohon.');
     }
 
     public function maklumatKeputusan()
@@ -77,5 +79,10 @@ class SekretariatController extends Controller
 
         $pdf = Pdf::loadView('pages.sekretariat.permohonan.suratTawaran');
         return $pdf->download('SuratTawaran.pdf');
+    }
+
+    public function export() 
+    {
+        return Excel::download(new SenaraiPendek, 'PermohonanDisokong.xlsx');
     }
 }
