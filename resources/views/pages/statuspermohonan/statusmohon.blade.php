@@ -35,13 +35,16 @@
 				<th>Tarikh Kemaskini</th>
 			</tr>
 </thead>
-</tbody>
+<tbody>
+@foreach($permohonan as $permohonan)
 <tr> 
-	<td> @foreach($permohonan as $permohonan)
-                {{$permohonan->id_permohonan}}
-                @endforeach</td>
+	
+                <td>{{$permohonan->id_permohonan}}</td>
+               
 	<td></td>
 	<td></td>
+	@endforeach
+</tbody>
 </table>
 </div>
 
