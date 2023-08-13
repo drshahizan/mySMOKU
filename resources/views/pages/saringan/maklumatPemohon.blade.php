@@ -68,15 +68,10 @@
                                                         </select>
                                                     </div>
                                                 </td>
-                                                <td>
-                                                    <div class="fancy-checkbox">
-                                                        <label>
-                                                            <input id="checkbox1a" type="checkbox" name="catatan_profil_diri" value="1" disabled="disabled"><span> Perkara 1</span><br>
-                                                            <input id="checkbox1b" type="checkbox" name="catatan_profil_diri" value="1" disabled="disabled"><span> Perkara 2</span><br>
-                                                            <input id="checkbox1c" type="checkbox" name="catatan_profil_diri" value="1" disabled="disabled"><span> Perkara 3</span><br>
-                                                            <input id="checkbox1d" type="checkbox" name="catatan_profil_diri" value="1" disabled="disabled"><span> Perkara 4</span>
-                                                        </label>
-                                                    </div></td>
+                                                <td><div class="form-group c_form_group">
+                                                    <label>Berikan Catatan Anda.</label>
+                                                    <textarea rows="2" type="text" class="form-control" placeholder=""></textarea>
+                                                </div> </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align:right;">2</td>
@@ -120,10 +115,10 @@
                                                 <td>
                                                     <div class="fancy-checkbox">
                                                         <label>
-                                                            <input id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Perkara 1</span><br>
-                                                            <input id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Perkara 2</span><br>
-                                                            <input id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Perkara 3</span><br>
-                                                            <input id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Perkara 4</span>
+                                                            <input id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada surat tawaran</span><br>
+                                                            <input id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada penyata bank</span><br>
+                                                            <input id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada resit</span><br>
+                                                            <input id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span>
                                                         </label>
                                                     </div></td>
                                                 </tr>                                                
