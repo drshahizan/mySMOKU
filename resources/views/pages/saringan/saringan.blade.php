@@ -65,9 +65,10 @@
                                         @foreach ($permohonan as $item)
                                         @php
                                             $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                            $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
                                         @endphp
                                         <tr>                                            
-                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">{{$item['id_permohonan']}}</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a></td>
                                             <td>{{$nama_pemohon}}</td>
                                             <td>{{$item['program']}}</td>
                                             <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
