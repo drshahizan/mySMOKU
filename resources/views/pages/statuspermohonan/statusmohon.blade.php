@@ -41,8 +41,9 @@
 	
                 <td>{{$permohonan->id_permohonan}}</td>
                
-	<td></td>
-	<td></td>
+	<td>{{$permohonan->id_permohonan}} </td>
+	<td><a href="#" class="btn btn-primary">Batal</a> </td>
+	<td>{{$permohonan->created_at}}</td>
 	@endforeach
 </tbody>
 </table>
