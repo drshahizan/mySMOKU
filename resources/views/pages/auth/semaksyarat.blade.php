@@ -113,7 +113,7 @@
         <!--begin::Submit button-->
         <div class="d-grid mb-10">
             <button type="submit"  class="btn btn-primary">
-                Semak
+                Seterusnya
             </button>
         </div>
         <!--end::Submit button-->
