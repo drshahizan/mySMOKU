@@ -62,6 +62,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($permohonan as $item)
+                                        @php
+                                            $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                        @endphp
+                                        <tr>                                            
+                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">{{$item['id_permohonan']}}</a></td>
+                                            <td>{{$nama_pemohon}}</td>
+                                            <td>{{$item['program']}}</td>
+                                            <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
+                                        </tr>
+                                        @endforeach
                                         {{-- <tr>
                                             <td>Ali Bin Abu</td>
                                             <td><a href="{{ url('maklumat-pemohon'. $row['id_permohonan']) }}" title="">SARJANABKOKU000011</a></td>
@@ -69,7 +81,7 @@
                                             <td>7/07/2023</td>
                                             <td><button class="btn bg-orange text-white"> Belum Disaring </button></td>
                                         </tr> --}}
-                                        <tr>                                            
+                                        {{-- <tr>                                            
                                             <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTBKOKU/3/950623035672</a></td>
                                             <td>Wan Nurul Syafiqah Binti Wan Sahak</td>
                                             <td>BKOKU</td>
@@ -182,7 +194,7 @@
                                             <td>BKOKU</td>                                    
                                             <td class="text-center">09/02/2023</td>
                                             <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
-                                        </tr>
+                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>

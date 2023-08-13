@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Mail\SaringanMail;
 use App\Models\Permohonan;
+use App\Models\TuntutanPermohonan;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
@@ -10,7 +11,8 @@ class SaringanController extends Controller
 {
     public function saringan()
     {
-        return view('pages.saringan.saringan');
+        $permohonan = TuntutanPermohonan::all();
+        return view('pages.saringan.saringan',compact('permohonan'));
     }
 
     // public function maklumatPemohon($id)
