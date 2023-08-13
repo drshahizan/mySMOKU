@@ -180,7 +180,8 @@ class PermohonanController extends Controller
     }
 
     public function statuspermohonan(){
-        return view('pages.statuspermohonan.statusmohon');
+        $permohonan = Permohonan::all()->where('nokp_pelajar', Auth::user()->id());
+        return view('pages.statuspermohonan.statusmohon', compact('permohonan'));
         
     }
 }

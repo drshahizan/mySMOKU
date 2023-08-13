@@ -37,7 +37,9 @@
 </thead>
 </tbody>
 <tr> 
-	<td></td>
+	<td> @foreach($permohonan as $permohonan)
+                {{$permohonan->id_permohonan}}
+                @endforeach</td>
 	<td></td>
 	<td></td>
 </table>
