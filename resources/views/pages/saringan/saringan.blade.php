@@ -36,6 +36,60 @@
                 </div>
             </div>        
             <div class="row clearfix">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file" style="color: white!important"></i></div>
+                                <div class="ml-4">
+                                    <span style="color: black!important">Jumlah Saringan</span>
+                                    <h4 class="mb-0 font-weight-medium">5000</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-search" style="color: white!important"></i></div>
+                                <div class="ml-4">
+                                    <span style="color: black!important">Belum Disemak</span>
+                                    <h4 class="mb-0 font-weight-medium">4992</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-in-bg bg-green text-white rounded-circle"><i class="fa fa-check-circle" style="color: white!important"></i></div>
+                                <div class="ml-4">
+                                    <span style="color: black!important">Disokong</span>
+                                    <h4 class="mb-0 font-weight-medium">8</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-in-bg bg-yellow text-white rounded-circle"><i class="fa fa-reply-all" style="color: white!important"></i></div>
+                                <div class="ml-4">
+                                    <span style="color: black!important">Dikembalikan</span>
+                                    <h4 class="mb-0 font-weight-medium">259</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">

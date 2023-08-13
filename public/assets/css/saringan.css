@@ -61,8 +61,8 @@
 }
 
 .bg-yellow{
-    background:rgb(255, 255, 103);
-    color: rgb(80, 80, 80)!important;
+    background:#ffc700;
+    color:rgba(255,255,255,0.7);
 }
 
 .bg-orange:hover, .bg-orange:active{
