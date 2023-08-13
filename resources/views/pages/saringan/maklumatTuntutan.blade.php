@@ -2,12 +2,16 @@
     <link rel="stylesheet" href="assets/css/saringan.css">
     <!-- Main body part  -->
         {{-- begin alert --}}
-        <div class="alert alert-success" role="alert" style="margin: 0px 18px 20px 18px">
-            Permohonan Telah Disokong
-        </div>
-        <div class="alert alert-warning" role="alert" style="margin: 0px 18px 20px 18px">
-            Permohonan Telah Dikembalikan
-        </div>
+        @if(\Session::has('disokong'))
+            <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px">
+                {{ \Session::get('disokong') }}
+            </div>
+        @endif
+        @if(\Session::has('dikembalikan'))
+            <div class="alert alert-warning" role="alert" style="margin: 0px 15px 20px 15px">
+                {{ \Session::get('dikembalikan') }}
+            </div>
+        @endif
         {{-- end alert --}}
     <div id="main-content">
         <div class="container-fluid">
