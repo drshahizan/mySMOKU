@@ -53,7 +53,7 @@ class SaringanController extends Controller
     public function saringTuntutan(Request $request)
     {
         if($request->get('salinan_dokumen')=="lengkap"){
-            return redirect('/saringan')->with('disokong', 'Tuntutan Disokong');
+            return redirect('/saringan')->with('disokong', 'Tuntutan Telah Disokong');
         }
         else{
             if($request->get('salinan_dokumen')=="tak_lengkap"){
@@ -69,7 +69,7 @@ class SaringanController extends Controller
                 'catatan3'=>$catatan3,
             ];
             \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
-            return redirect('/saringan')->with('disokong', 'Tuntutan Dikembalikan');
+            return redirect('/saringan')->with('dikembalikan', 'Tuntutan Telah Dikembalikan');
         }
     }
 
@@ -103,7 +103,7 @@ class SaringanController extends Controller
     public function saringMaklumat(Request $request) 
     {
         if($request->get('maklumat_profil_diri')=="lengkap"&&$request->get('maklumat_akademik')=="lengkap"&&$request->get('salinan_dokumen')=="lengkap"){
-            return redirect('/maklumat-tuntutan')->with('disokong', 'Permohonan Disokong');
+            return redirect('/maklumat-tuntutan')->with('disokong', 'Permohonan Telah Disokong');
         }
         else{
             if($request->get('maklumat_profil_diri')=="tak_lengkap"){
@@ -133,7 +133,7 @@ class SaringanController extends Controller
                 'catatan3'=>$catatan3,
             ];
             \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
-            return redirect('/saringan')->with('disokong', 'Permohonan Dikembalikan');
+            return redirect('/saringan')->with('dikembalikan', 'Permohonan Telah Dikembalikan');
         }
     }
 }
