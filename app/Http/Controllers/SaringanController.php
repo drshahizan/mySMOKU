@@ -140,4 +140,11 @@ class SaringanController extends Controller
             return redirect('/saringan')->with('dikembalikan', 'Permohonan Telah Dikembalikan');
         }
     }
+
+    //Tuntutan - Saring
+    public function tuntutanSaring()
+    {
+        $permohonan = TuntutanPermohonan::all();
+        return view('pages.saringan.tuntutanSaring',compact('permohonan'));
+    }
 }

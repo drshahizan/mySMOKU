@@ -200,7 +200,7 @@
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="#">
+			<a class="menu-link" href="{{ url('tuntutan-saring') }}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 					<span class="menu-title">Saring</span>
