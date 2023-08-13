@@ -22,9 +22,11 @@ class SaringanController extends Controller
     //     return view('pages.saringan.maklumatPemohon',compact('permohonan'));
     // }
 
-    public function maklumatPemohon()
+    public function maklumatPemohon($id)
     {
-        return view('pages.saringan.maklumatPemohon');
+        $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
+        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
+        return view('pages.saringan.maklumatPemohon',compact('permohonan','pelajar'));
     }
 
     public function maklumatPerbaharui()

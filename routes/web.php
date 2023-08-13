@@ -52,7 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('statuspermohonan', [PermohonanController::class, 'statuspermohonan'])->name('sejarahpermohonan');
     
     Route::get('saringan', [SaringanController::class, 'saringan']);
-    Route::get('maklumat-pemohon', [SaringanController::class, 'maklumatPemohon'])->name('id');
+    Route::get('maklumat-pemohon/{no_kp}', [SaringanController::class, 'maklumatPemohon'])->name('no_kp');
     Route::get('maklumat-perbaharui', [SaringanController::class, 'maklumatPerbaharui'])->name('id');
     Route::get('maklumat-profil-diri', [SaringanController::class, 'maklumatProfilDiri'])->name('id');
     Route::get('maklumat-akademik', [SaringanController::class, 'maklumatAkademik'])->name('id');

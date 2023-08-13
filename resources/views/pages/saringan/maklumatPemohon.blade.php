@@ -1,5 +1,5 @@
 <x-default-layout> 
-    <link rel="stylesheet" href="assets/css/saringan.css">
+    <link rel="stylesheet" href="/assets/css/saringan.css">
     <!-- Main body part  -->
     <div id="main-content">
         <div class="container-fluid">
@@ -27,15 +27,15 @@
                             <div class="d-flex align-items-center">
                                 <img class="img" src="https://www.shareicon.net/data/128x128/2016/05/24/770085_man_512x512.png" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar Name">
                                 <div class="ml-3">
-                                    Mohd Ali Bin Abu Kassim
-                                    <p class="mb-0">aliabukassim@graduate.aputi.my</p>
+                                    {{$pelajar->nama_pelajar}}
+                                    <p class="mb-0">{{$pelajar->email}}</p>
                                 </div>
                             </div>
                             <hr>
                             <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6">
-                                    <p class="m-b-0"><strong>Tarikh Permohonan: </strong> 04/07/2023 </p>
-                                    <p><strong>ID Permohonan: </strong> KPTBKOKUB990404080221</p>                                    
+                                    <p class="m-b-0"><strong>Tarikh Permohonan: </strong> {{$permohonan->created_at->format('d/m/Y')}} </p>
+                                    <p><strong>ID Permohonan: </strong> {{$permohonan->id_permohonan}} </p>                                    
                                 </div>
                             </div>
                             <form method="POST" action="{{ url('saring-maklumat-pemohon') }}" id="saring">
