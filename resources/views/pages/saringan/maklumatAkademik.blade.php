@@ -7,9 +7,15 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta property="og:type" content="article"/>
-    <link rel="stylesheet" href="assets/css/saringan.css">
+    <link rel="stylesheet" href="/assets/css/saringan.css">
 </head>
 <body>
+    @php
+        $peringkat_pengajian = DB::table('bk_peringkatpengajian')->where('kodperingkat', $akademik->peringkat_pengajian)->value('peringkat');
+        $id_institusi = DB::table('bk_infoipt')->where('idipt', $akademik->id_institusi)->value('namaipt');
+        $mod = DB::table('bk_mod')->where('kodmod', $akademik->mod)->value('mod');
+        $sumber_biaya = DB::table('bk_sumberbiaya')->where('kodbiaya', $akademik->sumber_biaya)->value('biaya');
+    @endphp
     <table class="profile-form">
         <tr>
             <td class="text-center" colspan="3">
@@ -26,62 +32,62 @@
             <tr class="gap-left">
                 <td style="width: 16%" class="gap-top">No Pendaftaran Pelajar</td>
                 <td style="width: 2%" class="gap-top">:</td>
-                <td>AI12392</td>
+                <td class="gap-top">{{$akademik->no_pendaftaranpelajar}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Nama Kursus</td>
                 <td style="width: 2%">:</td>
-                <td>Bachelor Of Arts In Mobile Media Production</td>
+                <td>{{$akademik->nama_kursus}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Peringkat Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>Sarjana Muda</td>
+                <td>{{$peringkat_pengajian}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Nama Pusat Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>Asia Pacific University Of Technology And Innovation</td>
+                <td>{{$id_institusi}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Tarikh Mula Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>08/08/2023</td>
+                <td>{{date('d/m/Y', strtotime($akademik->tkh_mula))}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Tarikh Tamat Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>30/08/2023</td>
+                <td>{{date('d/m/Y', strtotime($akademik->tkh_tamat))}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Semester Semasa</td>
                 <td style="width: 2%">:</td>
-                <td>06</td>
+                <td>{{$akademik->sem_semasa}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Tempoh Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>02</td>
+                <td>{{$akademik->tempoh_pengajian}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Bil Bulan Persemester</td>
                 <td style="width: 2%">:</td>
-                <td>04</td>
+                <td>{{$akademik->bil_bulanpersem}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Mod Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>Jarak Jauh</td>
+                <td>{{$mod}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Sumber Pembiayaan</td>
                 <td style="width: 2%">:</td>
-                <td>Pinjaman</td>
+                <td>{{$sumber_biaya}}</td>
             </tr>
             <tr class="gap-left">
                 <td class="gap-bottom" style="width: 16%">Nama Penaja</td>
                 <td class="gap-bottom" style="width: 2%">:</td>
-                <td class="gap-bottom">JPA</td>
+                <td class="gap-bottom">{{$akademik->nama_penaja}}</td>
             </tr>
         </div>
         </tr>

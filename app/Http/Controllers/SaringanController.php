@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Mail\SaringanMail;
+use App\Models\Akademik;
 use App\Models\Permohonan;
 use App\Models\TuntutanPermohonan;
 use App\Models\Waris;
@@ -15,13 +16,6 @@ class SaringanController extends Controller
         $permohonan = TuntutanPermohonan::all();
         return view('pages.saringan.saringan',compact('permohonan'));
     }
-
-    // public function maklumatPemohon($id)
-    // {
-    //     $id="PHDBKOKU000021";
-    //     $permohonan = Permohonan::where('id_permohonan', $id)->orderBy('id', 'ASC')->get();
-    //     return view('pages.saringan.maklumatPemohon',compact('permohonan'));
-    // }
 
     public function maklumatPemohon($id)
     {
@@ -44,9 +38,8 @@ class SaringanController extends Controller
 
     public function maklumatAkademik($id)
     {
-        $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
-        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
-        return view('pages.saringan.maklumatAkademik',compact('permohonan','pelajar'));
+        $akademik = Akademik::where('nokp_pelajar', $id)->first();
+        return view('pages.saringan.maklumatAkademik',compact('akademik'));
     }
 
     public function maklumatAkademik2()
