@@ -161,7 +161,6 @@ return [
     | needs to guess the correct type based on the extension alone.
     |
     */
-    
     'extension_detector' => [
         'xlsx'     => Excel::XLSX,
         'xlsm'     => Excel::XLSX,
