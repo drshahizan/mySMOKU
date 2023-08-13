@@ -24,6 +24,7 @@ class PeringkatPengajian extends Authenticatable
     protected $fillable = [
         'kodperingkat',
         'peringkat',
+        
     ];
 
     public function id()

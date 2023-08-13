@@ -89,8 +89,10 @@
             <label class="form-label required">Peringkat Pengajian</label>
             <select name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
                 @foreach ($peringkat as $peringkat)
+                @if ($peringkat->kodperingkat != 1 )
                 <option></option>
                 <option value="{{ $peringkat->kodperingkat}}">{{ $peringkat->peringkat}}</option>
+                @endif
                 @endforeach
             </select>
         </div>

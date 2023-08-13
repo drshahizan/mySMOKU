@@ -811,7 +811,7 @@
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																	<input type="text" class="form-control form-control-solid" placeholder="" name="tempoh_pengajian" value="" />
+																	<input type="text" class="form-control form-control-solid" placeholder="" name="tempoh_pengajian" value="" required/>
 																	
 																	<!--end::Input wrapper-->
 															</div>
