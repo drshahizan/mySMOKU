@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Mail\SaringanMail;
 use App\Models\Permohonan;
 use App\Models\TuntutanPermohonan;
+use App\Models\Waris;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
@@ -34,14 +35,18 @@ class SaringanController extends Controller
         return view('pages.saringan.maklumatPerbaharui');
     }
 
-    public function maklumatProfilDiri()
+    public function maklumatProfilDiri($id)
     {
-        return view('pages.saringan.maklumatProfilDiri');
+        $waris = Waris::where('nokp_pelajar', $id)->first();
+        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
+        return view('pages.saringan.maklumatProfilDiri',compact('waris','pelajar'));
     }
 
-    public function maklumatAkademik()
+    public function maklumatAkademik($id)
     {
-        return view('pages.saringan.maklumatAkademik');
+        $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
+        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
+        return view('pages.saringan.maklumatAkademik',compact('permohonan','pelajar'));
     }
 
     public function maklumatAkademik2()
@@ -77,9 +82,11 @@ class SaringanController extends Controller
         }
     }
 
-    public function salinanDokumen()
+    public function salinanDokumen($id)
     {
-        return view('pages.saringan.salinanDokumen');
+        $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
+        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
+        return view('pages.saringan.salinanDokumen',compact('permohonan','pelajar'));
     }
 
     public function salinanInvois()

@@ -54,10 +54,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('saringan', [SaringanController::class, 'saringan']);
     Route::get('maklumat-pemohon/{no_kp}', [SaringanController::class, 'maklumatPemohon'])->name('no_kp');
     Route::get('maklumat-perbaharui', [SaringanController::class, 'maklumatPerbaharui'])->name('id');
-    Route::get('maklumat-profil-diri', [SaringanController::class, 'maklumatProfilDiri'])->name('id');
-    Route::get('maklumat-akademik', [SaringanController::class, 'maklumatAkademik'])->name('id');
+    Route::get('maklumat-profil-diri/{no_kp}', [SaringanController::class, 'maklumatProfilDiri'])->name('no_kp');
+    Route::get('maklumat-akademik/{no_kp}', [SaringanController::class, 'maklumatAkademik'])->name('no_kp');
     Route::get('maklumat-akademik2', [SaringanController::class, 'maklumatAkademik2'])->name('id');
-    Route::get('maklumat-tuntutan', [SaringanController::class, 'maklumatTuntutan'])->name('id');
+    Route::get('maklumat-tuntutan/{no_kp}', [SaringanController::class, 'maklumatTuntutan'])->name('no_kp');
     Route::post('saring-tuntutan', [SaringanController::class, 'saringTuntutan'])->name('id');
     Route::get('salinan-dokumen', [SaringanController::class, 'salinanDokumen'])->name('id');
     Route::get('salinan-invois', [SaringanController::class, 'salinanInvois'])->name('id');

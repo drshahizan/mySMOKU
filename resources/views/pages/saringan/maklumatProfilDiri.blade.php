@@ -7,9 +7,14 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta property="og:type" content="article"/>
-    <link rel="stylesheet" href="assets/css/saringan.css">
+    <link rel="stylesheet" href="/assets/css/saringan.css">
 </head>
 <body>
+    @php
+        $jantina_p = DB::table('bk_jantina')->where('kodjantina', $pelajar->jantina)->value('jantina');
+        $bangsa_p = DB::table('bk_bangsa')->where('kodbangsa', $pelajar->bangsa)->value('bangsa');
+        $hubungan_w = DB::table('bk_hubungan')->where('kodhubungan', $waris->hubungan)->value('hubungan');
+    @endphp
     <table class="profile-form">
         <tr>
             <td class="text-center" colspan="3">
@@ -26,82 +31,82 @@
             <tr class="gap-left">
                 <td style="width: 16%" class="gap-top">Nama</td>
                 <td style="width: 2%" class="gap-top">:</td>
-                <td class="gap-top">Mohd Ali Bin Abu Kassim</td>
+                <td class="gap-top">{{$pelajar->nama_pelajar}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">No. Kad Pengenalan</td>
                 <td style="width: 2%">:</td>
-                <td>990404080221</td>
+                <td>{{$pelajar->nokp_pelajar}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Tarikh Lahir</td>
                 <td style="width: 2%">:</td>
-                <td>04/04/1999</td>
+                <td>{{date('d/m/Y', strtotime($pelajar->tkh_lahir))}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Umur</td>
                 <td style="width: 2%">:</td>
-                <td>24</td>
+                <td>{{$pelajar->umur}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Jantina</td>
                 <td style="width: 2%">:</td>
-                <td>Laki</td>
+                <td>{{$jantina_p}}</td>
             </tr>
             <tr class="gap-left">
                 <td>No. JKM</td>
                 <td style="width: 2%">:</td>
-                <td>PH1230909899</td>
+                <td>{{$pelajar->noJKM}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Kecacatan</td>
                 <td style="width: 2%">:</td>
-                <td>Fizikal</td>
+                <td>{{$pelajar->kecacatan}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Bangsa</td>
                 <td style="width: 2%">:</td>
-                <td>Malayu</td>
+                <td>{{$bangsa_p}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Alamat Rumah</td>
                 <td style="width: 2%">:</td>
-                <td>Taman Sri Stulang 1</td>
+                <td>{{$pelajar->alamat1}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Poskod</td>
                 <td style="width: 2%">:</td>
-                <td>80150</td>
+                <td>{{$pelajar->alamat_poskod}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Bandar</td>
                 <td style="width: 2%">:</td>
-                <td>Johor Bahru</td>
+                <td>{{$pelajar->alamat_bandar}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Negeri</td>
                 <td style="width: 2%">:</td>
-                <td>Johor</td>
+                <td>{{$pelajar->alamat_negeri}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">No. Tel(HP)</td>
                 <td style="width: 2%">:</td>
-                <td>01135679793</td>
+                <td>{{$pelajar->no_tel}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">No. Tel Rumah</td>
                 <td style="width: 2%">:</td>
-                <td>072666260</td>
+                <td>{{$pelajar->no_telR}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Alamat Emel</td>
                 <td style="width: 2%">:</td>
-                <td>aliabukassim@graduate.aputi.my</td>
+                <td>{{$pelajar->emel}}</td>
             </tr>
             <tr class="gap-left">
                 <td class="gap-bottom" style="width: 16%">No. Akaun Bank</td>
                 <td class="gap-bottom" style="width: 2%">:</td>
-                <td class="gap-bottom">0503002347654</td>
+                <td class="gap-bottom">{{$pelajar->no_akaunbank}}</td>
             </tr>
         </div>
         <tr>
@@ -111,12 +116,12 @@
         <tr class="gap-left">
             <td style="width: 16%" class="gap-top">Nama </td>
             <td style="width: 2%" class="gap-top">:</td>
-            <td class="gap-top">Siti Latifah Binti Mohd Yusuf</td>
+            <td class="gap-top">{{$waris->nama_waris}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">No. Kad Pengenalan</td>
             <td style="width: 2%">:</td>
-            <td>610623035672</td>
+            <td>{{$waris->nokp_waris}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">No Pasport</td>
@@ -126,47 +131,42 @@
         <tr class="gap-left">
             <td style="width: 16%">Hubungan Waris</td>
             <td style="width: 2%">:</td>
-            <td>Ibu</td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Lain-lain (Sila Nyatakan)</td>
-            <td style="width: 2%">:</td>
-            <td>-</td>
+            <td>{{$hubungan_w}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Alamat Rumah</td>
             <td style="width: 2%">:</td>
-            <td>Taman Sri Stulang 1</td>
+            <td>{{$waris->alamat1}}1</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Poskod</td>
             <td style="width: 2%">:</td>
-            <td>80150</td>
+            <td>{{$waris->alamat_poskod}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Bandar</td>
             <td style="width: 2%">:</td>
-            <td>Johor Bahru</td>
+            <td>{{$waris->alamat_bandar}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Negeri</td>
             <td style="width: 2%">:</td>
-            <td>Johor</td>
+            <td>{{$waris->alamat_negeri}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">No. Tel(HP)</td>
             <td style="width: 2%">:</td>
-            <td>0196926567</td>
+            <td>{{$waris->no_tel}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">No. Tel Rumah</td>
             <td style="width: 2%">:</td>
-            <td>072666211</td>
+            <td>{{$waris->no_telR}}</td>
         </tr>
         <tr class="gap-left">
             <td class="gap-bottom" style="width: 16%">Pendapatan</td>
             <td class="gap-bottom" style="width: 2%">:</td>
-            <td class="gap-bottom">2000</td>
+            <td class="gap-bottom">{{$waris->pendapatan}}</td>
         </tr>
         </tr>
             <td class="header-part" colspan="3">C. PERAKUAN</td>

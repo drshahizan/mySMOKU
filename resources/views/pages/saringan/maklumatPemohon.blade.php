@@ -56,7 +56,7 @@
                                                 <tr>
                                                     <td style="text-align:right;">1</td>
                                                     <td>
-                                                        <span><a href="{{ url('maklumat-profil-diri') }}" target="_blank">Maklumat Profil Diri</a></span>
+                                                        <span><a href="{{ url('maklumat-profil-diri/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Profil Diri</a></span>
                                                     </td>           
                                                     <td class="hidden-sm-down">
                                                        
@@ -76,7 +76,7 @@
                                                 <tr>
                                                     <td style="text-align:right;">2</td>
                                                     <td>
-                                                        <span><a href="{{ url('maklumat-akademik') }}" target="_blank">Maklumat Akademik</a></span>
+                                                        <span><a href="{{ url('maklumat-akademik/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Akademik</a></span>
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <div class="form-group c_form_group">
@@ -100,7 +100,7 @@
                                                 <tr>
                                                     <td style="text-align:right;">3</td>
                                                     <td>
-                                                        <span><a href="{{ url('salinan-dokumen') }}" target="_blank">Salinan Dokumen</a></span>
+                                                        <span><a href="{{ url('salinan-dokumen/'.$pelajar->nokp_pelajar) }}" target="_blank">Salinan Dokumen</a></span>
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <!--<div class="col-lg-12 col-md-12">-->
