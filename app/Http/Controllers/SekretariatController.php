@@ -32,8 +32,8 @@ class SekretariatController extends Controller
 
     public function keputusanPermohonan()
     {
-
         return view('pages.sekretariat.permohonan.keputusan');
+        //return redirect('pages.sekretariat.permohonan.keputusan')->with('status','Emel notifikasi telah dihantar ke pemohon.');
     }
 
     public function maklumatKeputusan()
