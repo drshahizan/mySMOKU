@@ -166,7 +166,7 @@
 			<div class="menu-item">
 			<a class="menu-link" href="{{url('sekretariatStatus')}}">
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-					<span class="menu-title">Status</span>
+					<span class="menu-title">Keseluruhan</span>
 			</a>
 		</div>
 		<div class="menu-item">

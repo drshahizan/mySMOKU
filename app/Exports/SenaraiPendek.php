@@ -29,7 +29,7 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
     {
         return [
             'A' => 15,
-            'B' => 20,           
+            'B' => 40,           
             'C' => 15,
             'D' => 20,
         ];

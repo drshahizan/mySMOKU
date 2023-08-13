@@ -20,7 +20,11 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <h1>Status Permohonan</h1>
+<<<<<<< Updated upstream
+                            <h1>Senarai Keseluruhan Permohonan</h1>
+=======
+                            <h1>Keseluruhan Permohonan</h1>
+>>>>>>> Stashed changes
                         </div>
                         <hr>
 
@@ -212,7 +216,7 @@
                                         </tr>
 
                                         <tr data-status="Baru">
-                                            <<td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/990404080221</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/990404080221</a></td>
                                             <td>Mohd Ali Bin Abu Kassim</td>
                                             <td>BKOKU</td>                                        
                                             <td class="text-center">27/07/2023</td>

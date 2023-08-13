@@ -81,7 +81,7 @@
         }
    </script>
 
-   <script>
+   {{-- <script>
     @if(session('status'))
         alert('{{session('status')}}');
         swal({
@@ -90,5 +90,5 @@
             icon: "success",
             button: "OK",
         });
-   </script>
+   </script> --}}
 </x-default-layout> 
