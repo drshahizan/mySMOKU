@@ -78,6 +78,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('surat-tawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
     Route::get('cetak-senarai-pemohon', [SekretariatController::class, 'cetakSenaraiPemohonPDF']);
     Route::get('senarai-disokong-excel', [SekretariatController::class, 'cetakSenaraiPemohonExcel']);
+    Route::get('/keputusan', [SekretariatController::class, 'mailKeputusan']);
 
 });
 

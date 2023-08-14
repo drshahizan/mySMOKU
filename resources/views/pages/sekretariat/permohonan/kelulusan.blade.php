@@ -51,6 +51,7 @@
                             <div class="table-responsive">
                                 <div class="body">
                                     <form action="{{ url('hantar-keputusan') }}" method="POST">
+                                        {{csrf_field()}}
                                         <table id="sortTable" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>

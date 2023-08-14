@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Exports\SenaraiPendek;
 use App\Models\Permohonan;
+use App\Mail\mailKeputusan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SekretariatController extends Controller
@@ -92,4 +94,49 @@ class SekretariatController extends Controller
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream('senarai-pemohon.pdf');
     }
+
+    public function mailKeputusan(Request $request)
+    {
+        if($request->get('maklumat_profil_diri')=="lengkap"&&$request->get('maklumat_akademik')=="lengkap"&&$request->get('salinan_dokumen')=="lengkap"){
+            return redirect('/maklumat-tuntutan')->with('disokong', 'Permohonan Telah Disokong');
+        }
+        else{
+            if($request->get('maklumat_profil_diri')=="tak_lengkap"){
+                $catatan1=$request->get('catatan_profil_diri');
+            }
+            else{
+                $catatan1=null;
+            }
+    
+            if($request->get('maklumat_akademik')=="tak_lengkap"){
+                $catatan2=$request->get('catatan_maklumat_akademik');
+            }
+            else{
+                $catatan2=null;
+            }
+    
+            if($request->get('salinan_dokumen')=="tak_lengkap"){
+                $catatan3=$request->get('catatan_salinan_dokumen');
+            }
+            else{
+                $catatan3=null;
+            }
+    
+            $catatan = [
+                'catatan1'=>$catatan1, 
+                'catatan2'=>$catatan2, 
+                'catatan3'=>$catatan3,
+            ];
+        }
+
+        Mail::to("fateennashuha9@gmail.com")->send(new mailKeputusan($catatan));
+        return redirect('/keputusan')->with('message','Emel notifikasi telah dihantar kepada pemohon');
+    }
+
+    // public function mailKeputusan(int $pelajarID)
+    // {
+    //     $pelajar = Permohonan::findOrFail($pelajarID);
+    //     Mail::to("$pelajar->email")->send(new mailKeputusan($pelajar));
+    //      return redirect('pages.sekretariat.permohonan.keputusan')->with('message','Emel notifikasi telah dihantar kepada pemohon');
+    // }
 }

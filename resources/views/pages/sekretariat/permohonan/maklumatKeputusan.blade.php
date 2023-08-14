@@ -60,7 +60,10 @@
                                     <br><br>
 
                                     <div class="submit" style="text-align: right;">
-                                        <button type="submit" id="submitForm" onclick="my_button_click_handler" class="btn btn-primary text-white">Hantar</button>
+                                        <a href="{{url('keputusan')}}" target="_blank" class="btn btn-primary float-end">
+                                            <span>Hantar</span>
+                                        </a>
+                                        {{-- <button type="submit" id="submitForm" onclick="my_button_click_handler" class="btn btn-primary text-white">Hantar</button> --}}
                                     </div>
                                 </form>
                             </div>
