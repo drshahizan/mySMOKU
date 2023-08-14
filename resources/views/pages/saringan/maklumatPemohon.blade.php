@@ -3,7 +3,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!-- Main body part  -->
     <style>
-        table, tr, td{
+        .maklumat, .maklumat td{
             border: none!important;
             padding:4px 8px!important;
         }
@@ -34,7 +34,7 @@
                             <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6">
                                     <br>
-                                    <table>
+                                    <table class="maklumat">
                                         <tr>
                                             <td><strong>Nama</strong></td>
                                             <td>:</td>
