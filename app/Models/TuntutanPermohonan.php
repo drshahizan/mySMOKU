@@ -28,8 +28,7 @@ class TuntutanPermohonan extends Authenticatable
         'program',
         'yuran',
         'elaun',
-        'amaunyuran',
-        'amaunelaun',
+        'amaun',
         'perakuan',
         
         
