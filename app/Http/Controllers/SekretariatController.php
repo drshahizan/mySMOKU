@@ -130,7 +130,7 @@ class SekretariatController extends Controller
         }
 
         Mail::to("fateennashuha9@gmail.com")->send(new mailKeputusan($catatan));
-        return redirect('/keputusan')->with('message','Emel notifikasi telah dihantar kepada pemohon');
+        return redirect('/sekretariatKeputusan')->with('message','Emel notifikasi telah dihantar kepada pemohon');
     }
 
     // public function mailKeputusan(int $pelajarID)
