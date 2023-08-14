@@ -149,8 +149,7 @@ class PermohonanController extends Controller
             'program' => 'BKOKU',
             'yuran' => $request->yuran,
             'elaun' => $request->elaun,
-            'amaunyuran' => $request->amaunyuran,
-            'amaunelaun' => $request->amaunelaun,
+            'amaun' => $request->amaun,
             'perakuan' => $request->perakuan,
             
         ]);
