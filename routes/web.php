@@ -76,8 +76,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('hantar-keputusan', [SekretariatController::class, 'keputusanPermohonan']);
     Route::get('maklumat-keputusan', [SekretariatController::class, 'maklumatKeputusan']);
     Route::get('surat-tawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
-    Route::get('cetak-senarai-pemohon', [SaringanController::class, 'cetakSenaraiPemohon']);
-    Route::get('senarai-disokong-excel', [SekretariatController::class, 'export']);
+    Route::get('cetak-senarai-pemohon', [SekretariatController::class, 'cetakSenaraiPemohonPDF']);
+    Route::get('senarai-disokong-excel', [SekretariatController::class, 'cetakSenaraiPemohonExcel']);
 
 });
 
