@@ -2,6 +2,11 @@
     <head>
         <link rel="stylesheet" href="assets/css/sekretariat.css">
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <style>
+            table, tr, td{
+                border: none!important;
+            }
+        </style>
     </head>
     
     <body>
@@ -22,51 +27,83 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="body">
-                                <div class="d-flex align-items-center">
-                                    <img class="img" src="https://www.shareicon.net/data/128x128/2016/05/24/770085_man_512x512.png" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar Name">
-                                    <div class="ml-2" style="padding-top: 10px;">
-                                        Mohd Ali Bin Abu Kassim
-                                        <p class="mb-0">ali12@graduate.utm.my</p>
-                                    </div>
-                                </div>
-
-                                <hr><br>
-
                                 <div class="row clearfix">
                                     <div class="col-md-6 col-sm-6">
-                                        <p><strong>ID Permohonan: </strong> KPTBKOKU/4/970703041223</p>
-                                        <p><strong>Tarikh Permohonan: </strong> 06/08/2023 </p>
-                                        <p><strong>Status Permohonan: </strong> Disokong</p>                                    
+                                        <br>
+                                        <table class="pemohon">
+                                            <tr>
+                                                <td><strong>Nama </strong></td>
+                                                <td><b>:</b></td>
+                                                <td>Mohd Ali Bin Abu Kassim</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>No. Kad Pengenalan </strong></td>
+                                                <td><b>:</b></td>
+                                                <td>970703041223</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>ID Permohonan </strong></td>
+                                                <td><b>:</b></td>
+                                                <td>KPTBKOKU/4/970703041223</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Tarikh Permohonan </strong></td>
+                                                <td><b>:</b></td>
+                                                <td>06/08/2023</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Status Permohonan </strong></td>
+                                                <td><b>:</b></td>
+                                                <td>Disokong</td>
+                                            </tr>
+                                        </table>
+                                        <p><strong> </strong>  </p>
+                                        <p><strong> </strong> </p>                                    
                                     </div>
                                 </div>
+                            
+                                <hr><br>
 
-                            <div class="col-md-6 col-sm-6">
-                                <form action="{{ url('hantar-keputusan') }}" method="POST">
-                                    {{csrf_field()}}
-                                    {{-- Kelulusan --}}
-                                    <label for="noMesyuarat"><b>No. Mesyuarat:</b></label>
-                                        <input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;">
-                                    <label for="tarikh"><b>Tarikh Mesyuarat:</b></label>
-                                        <input type="date" id="tarikh" name="tarikh" style="padding: 5px;"><br><br>
-                                    <label><b>Pilih Keputusan: </b></label>
-                                        <select id="keputusan" onchange="select1()" style="padding: 5px;">
-                                                <option value="">Pilih Keputusan</option>
-                                                <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
-                                                <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
-                                        </select>
-                                    <br><br>
-                                    <label for="tarikh"><b>Catatan:</b></label>
-                                        <input type="text" id="catatan" name="noMesyuarat" style="padding: 5px; width:500px;">
-                                    <br><br>
-
-                                    <div class="submit" style="text-align: right;">
-                                        <a href="{{url('keputusan')}}" target="_blank" class="btn btn-primary float-end">
-                                            <span>Hantar</span>
-                                        </a>
-                                        {{-- <button type="submit" id="submitForm" onclick="my_button_click_handler" class="btn btn-primary text-white">Hantar</button> --}}
-                                    </div>
-                                </form>
-                            </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <form action="{{ url('hantar-keputusan') }}" method="POST">
+                                        {{csrf_field()}}
+                                        <table>
+                                            <tr>
+                                                <td><b>No. Mesyuarat</b></td>
+                                                <td><b>:</b></td>
+                                                <td><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Tarikh Mesyuarat</b></td>
+                                                <td><b>:</b></td>
+                                                <td><input type="date" id="tarikh" name="tarikh" style="padding: 5px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Pilih Keputusan</b></td>
+                                                <td><b>:</b></td>
+                                                <td>
+                                                    <select id="keputusan" onchange="select1()" style="padding: 5px;">
+                                                        <option value="">Pilih Keputusan</option>
+                                                        <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
+                                                        <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Catatan</b></td>
+                                                <td><b>:</b></td>
+                                                <td><input type="text" id="catatan" name="noMesyuarat" style="padding: 5px; width:500px;"></td>
+                                            </tr>
+                                        </table>
+                                        <br>
+                                        <div class="submit" style="text-align: right;">
+                                            <a href="{{url('keputusan')}}" target="_blank" class="btn btn-primary float-end">
+                                                <span>Hantar</span>
+                                            </a>
+                                            {{-- <button type="submit" id="submitForm" onclick="my_button_click_handler" class="btn btn-primary text-white">Hantar</button> --}}
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>                                      
                     </div>
