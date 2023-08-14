@@ -20,11 +20,7 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-12 col-sm-12">
-<<<<<<< Updated upstream
                             <h1>Senarai Keseluruhan Permohonan</h1>
-=======
-                            <h1>Keseluruhan Permohonan</h1>
->>>>>>> Stashed changes
                         </div>
                         <hr>
 
@@ -183,8 +179,8 @@
                                 <table id="sortTable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                            <th style="width: 20%"><b>ID Permohonan</b></th>                                        
-                                            <th style="width: 30%"><b>Nama</b></th>
+                                            <th style="width: 15%"><b>ID Permohonan</b></th>                                        
+                                            <th style="width: 35%"><b>Nama</b></th>
                                             <th style="width: 15%"><b>Jenis Permohonan</b></th>
                                             <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th> 
                                             <th class="text-center" style="width: 15%">Status Permohonan</th>
