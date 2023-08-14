@@ -62,7 +62,7 @@
                                                     <td class="hidden-sm-down">
                                                        
                                                         <div class="form-group c_form_group">
-                                                        <select id="maklumat_profil_diri" name="maklumat_profil_diri" class="form-control" onchange="select1()" required>
+                                                        <select id="maklumat_profil_diri" name="maklumat_profil_diri" class="form-control" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                             <option value="">Pilih</option>
                                                             <option value="lengkap">Lengkap</option>
                                                             <option value="tak_lengkap">Tidak Lengkap</option>
@@ -71,7 +71,7 @@
                                                 </td>
                                                 <td><div class="form-group c_form_group">
                                                     <label>Berikan Catatan Anda.</label>
-                                                    <textarea id="textarea1" rows="2" type="text" class="form-control" placeholder="" disabled="disabled" required></textarea>
+                                                    <textarea id="textarea1" rows="2" type="text" class="form-control" placeholder="" disabled="disabled" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></textarea>
                                                 </div> </td>
                                                 </tr>
                                                 <tr>
@@ -81,18 +81,19 @@
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <div class="form-group c_form_group">
-                                                        <select id="maklumat_akademik" name="maklumat_akademik" class="form-control" onchange="select2()" required>
+                                                        <select id="maklumat_akademik" name="maklumat_akademik" class="form-control" onchange="select2()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                             <option value="">Pilih</option>
                                                             <option value="lengkap">Lengkap</option>
                                                             <option value="tak_lengkap">Tidak Lengkap</option>
                                                         </select>
                                                     </div>
                                                     <td>
-                                                    <div class="checkbox-group required">
-                                                        <input id="checkbox2a" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled" required><span> Perkara 1</span><br>
-                                                        <input id="checkbox2b" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled" required><span> Perkara 2</span><br>
-                                                        <input id="checkbox2c" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled" required><span> Perkara 3</span><br>
-                                                        <input id="checkbox2d" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled" required><span> Perkara 4</span>
+                                                    <div class="checkbox-group">
+                                                        <input id="checkbox2a" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 1</span><span id="checkedValue"></span><br>
+                                                        <input id="checkbox2b" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 2</span><br>
+                                                        <input id="checkbox2c" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 3</span><br>
+                                                        <input id="checkbox2d" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 4</span>
+                                                        <p id="checkedValue"></p>
                                                     </div></td>
                                                 </td> 
                                                 </tr>
@@ -104,7 +105,7 @@
                                                     <td class="hidden-sm-down">
                                                         <!--<div class="col-lg-12 col-md-12">-->
                                                         <div class="form-group c_form_group">
-                                                        <select id="salinan_dokumen" name="salinan_dokumen" class="form-control" onchange="select3()" required>
+                                                        <select id="salinan_dokumen" name="salinan_dokumen" class="form-control" onchange="select3()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                             <option value="">Pilih</option>
                                                             <option value="lengkap">Lengkap</option>
                                                             <option value="tak_lengkap">Tidak Lengkap</option>
@@ -112,15 +113,16 @@
                                                     </div>       
                                                 </td>
                                                 <td>
-                                                    <div class="checkbox-group required">
-                                                        <input id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled" required><span> Ralat pada surat tawaran</span><br>
-                                                        <input id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled" required><span> Ralat pada penyata bank</span><br>
-                                                        <input id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled" required><span> Ralat pada resit</span><br>
-                                                        <input id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled" required><span> Ralat pada keputusan peperiksaan</span>
+                                                    <div class="checkbox-group">
+                                                        <input id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada surat tawaran</span><span id="checkedValue"></span><br>
+                                                        <input id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada penyata bank</span><br>
+                                                        <input id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada resit</span><br>
+                                                        <input id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span>
                                                     </div></td>
                                                 </tr>                                                
                                             </tbody>
                                         </table>
+                                        <span id="checkedValue"></span>
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +131,7 @@
                                 <div class="col-md-6">
                                     </div>
                                 <div class="col-md-6 text-right">
-                                    <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="checkBtn">Teruskan</button>
+                                    <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan</button>
                                 </form>                                
                             </div> 
                         </div>
@@ -138,19 +140,19 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
-            $('#checkBtn').click(function() {
-                checked = $("input[type=checkbox]:checked").length;
-
-                if(!checked) {
-                    alert("You must check at least one checkbox.");
-                    return false;
-                }
-            });
-        });
-    </script>
     <script> 
+        // var btn = document.getElementById('check');
+        // var msg = document.getElementById('checkedValue');
+        // btn.addEventListener('click', function() {
+        // var len = document.querySelectorAll('.checkbox input[type="checkbox"]:checked').length
+        // if (len <= 0) {
+        //     msg.innerHTML = "&nbsp;<span style='color:red'>Please check at least one</span>";
+        //     alert("Sila klik salah satu pilihan");
+        // } else {
+        //     form.submit();
+        // }
+        // })
+
         function select1(){
             var catatan1 = document.getElementById('maklumat_profil_diri').value;
             if(catatan1=="tak_lengkap"){
