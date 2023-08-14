@@ -79,7 +79,7 @@
                                                 <td><input type="date" id="tarikh" name="tarikh" style="padding: 5px;"></td>
                                             </tr>
                                             <tr>
-                                                <td><b>Pilih Keputusan</b></td>
+                                                <td><b>Keputusan</b></td>
                                                 <td><b>:</b></td>
                                                 <td>
                                                     <select id="keputusan" onchange="select1()" style="padding: 5px;">
