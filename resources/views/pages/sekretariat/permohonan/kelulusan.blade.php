@@ -11,6 +11,7 @@
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
 
     <body>
@@ -45,27 +46,13 @@
                                     <li><a href="{{ url('cetak-senarai-pemohon') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-print"></i> PDF</a></li>
                                     <li><a href="{{ url('senarai-disokong-excel') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-print"></i> Excel</a></li>
                                 </ul>
-                                {{-- <ul class="header-dropdown dropdown">
-                                    <li><a href="javascript:void(0);" class="full-screen"><i class="fa fa-expand"></i></a></li>
-                                    <li class="dropdown">
-                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                                        <ul class="dropdown-menu theme-bg gradient">
-                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-eye"></i> View Details</a></li>
-                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-share-alt"></i> Share</a></li>
-                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-copy"></i> Copy to</a></li>
-                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-folder"></i> Move to</a></li>
-                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-edit"></i> Rename</a></li>
-                                            <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-trash"></i> Delete</a></li>
-                                        </ul>
-                                    </li>
-                                </ul> --}}
                             </div>
                             <div class="body">
                                 <div class="table-responsive">
                                     <table id="sortTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th class="text-center" style="width:5%;"><input type="checkbox" name="select_all" value="1" id="example-select-all"></th>
+                                                <th class="text-center" style="width:5%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
                                                 <th style="width: 15%"><b>ID Permohonan</b></th>                                        
                                                 <th style="width: 50%"><b>Nama</b></th>
                                                 <th style="width: 15%"><b>Jenis Permohonan</b></th>
@@ -75,7 +62,7 @@
                                         
                                         <tbody>
                                             <tr>
-                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="checkbox-1" id="checkbox-1" /></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/3/990404080221</a></td>
                                                 <td>Santosh A/L Ariyaran</td>
                                                 <td>BKOKU</td>
@@ -83,7 +70,7 @@
                                             </tr>
     
                                             <tr>
-                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="checkbox-2" id="checkbox-2" /></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/5/970204052445</a></td>
                                                 <td>Sarah Binti Yusri</td>
                                                 <td>PPK</td>                                        
@@ -91,7 +78,7 @@
                                             </tr>  
     
                                             <tr>
-                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="checkbox-3" id="checkbox-3" /></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/3/980112105666</a></td>
                                                 <td>Aishah Binti Samsudin</td>
                                                 <td>BKOKU</td>                                       
@@ -99,7 +86,7 @@
                                             </tr>
     
                                             <tr>
-                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="checkbox-4" id="checkbox-4" /></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/4/970703041223</a></td>
                                                 <td>Mohd Ali Bin Abu Kassim</td>
                                                 <td>BKOKU</td>                                        
@@ -107,7 +94,7 @@
                                             </tr>
     
                                             <tr>
-                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="checkbox-5" id="checkbox-5" /></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/4/960909105668</a></td>
                                                 <td>Ling Kai Jie</td>
                                                 <td>BKOKU</td>                                        
@@ -115,7 +102,7 @@
                                             </tr>
     
                                             <tr>
-                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="checkbox-6" id="checkbox-6" /></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/2/021212050334</a></td>
                                                 <td>Santishwaran A/L Paven</td>
                                                 <td>PPK</td>                                        
@@ -123,7 +110,7 @@
                                             </tr>
     
                                             <tr>
-                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="checkbox-7" id="checkbox-7" /></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/3/001205034745</a></td>
                                                 <td>Choo Mei Ling</td>
                                                 <td>BKOKU</td>
@@ -131,7 +118,7 @@
                                             </tr>
                                             
                                             <tr>
-                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="checkbox-8" id="checkbox-8" /></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/6/890201065225</a></td>
                                                 <td>Ezra Hanisah Binti Md Yunos</td>
                                                 <td>BKOKU</td>                                    
@@ -139,7 +126,7 @@
                                             </tr>
                                             
                                             <tr>
-                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="checkbox-9" id="checkbox-9" /></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/5/981004045253</a></td>
                                                 <td>Syed Abdul Kassim Hussain Yusof</td>
                                                 <td>PPK</td>                                        
@@ -147,7 +134,7 @@
                                             </tr>
                                             
                                             <tr>
-                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="checkbox-10" id="checkbox-10" /></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/5/940524032341</a></td>
                                                 <td>Rahman Mohammed Arshahad Al-dhaqm</td>
                                                 <td>BKOKU</td>                                    
@@ -155,7 +142,7 @@
                                             </tr>
                                             
                                             <tr>
-                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="checkbox-11" id="checkbox-11" /></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/4/950623035672</a></td>
                                                 <td>Wan Nurul Syafiqah Binti Wan Sahak</td>
                                                 <td>BKOKU</td>
@@ -163,7 +150,7 @@
                                             </tr>
     
                                             <tr>
-                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="checkbox-12" id="checkbox-12" /></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/6/930907030098</a></td>
                                                 <td>Siti Aisyah Binti Ismail</td>
                                                 <td>BKOKU</td>
@@ -171,7 +158,7 @@
                                             </tr>
     
                                             <tr>
-                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
+                                                <td class="text-center"><input type="checkbox" name="checkbox-13" id="checkbox-13" /></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/5/950523098909</a></td>
                                                 <td>Muhammad Aiman Bin Hamid</td>
                                                 <td>PPK</td>
@@ -179,9 +166,9 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <br>
-                                    <div class="pengesahan">
-                                        <button class="btn btn-success btn-round" data-toggle="modal" data-target="#exampleModalCenter"><i class="icon-check"></i>Sahkan Semua</button>
+                                    <br><br>
+                                    <div class="pengesahan" style="text-align: right;">
+                                        <button class="btn btn-success btn-round" data-toggle="modal" data-target="#exampleModalCenter">Sahkan Semua</button>
                                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
@@ -226,6 +213,14 @@
 
         <script>
             $('#sortTable').DataTable();
+
+            function toggle(source) {
+                var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i] != source)
+                        checkboxes[i].checked = source.checked;
+                }
+            }
         </script>
         
         <!-- Vedor js file and create bundle with grunt  --> 
