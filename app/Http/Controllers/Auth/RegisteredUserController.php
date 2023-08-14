@@ -13,6 +13,7 @@ use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use App\Models\Smoku;
 use session;
+use DB;
 
 class RegisteredUserController extends Controller
 {
@@ -27,6 +28,8 @@ class RegisteredUserController extends Controller
         addJavascriptFile('assets/js/custom/authentication/sign-up/general.js');
         $nokp = $request->session()->get('nokp');
         //dd($nokp);
+
+
 
         $smoku = Smoku::all()->where('nokp', $nokp);
 
@@ -49,6 +52,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+        
 
         $user = User::create([
             'nokp' => $request->nokp,
@@ -60,10 +64,20 @@ class RegisteredUserController extends Controller
             'last_login_ip' => $request->getClientIp()
         ]);
 
+        //if ($request->email = null){
+            DB::table('smoku')->where('nokp' ,$request->nokp)
+            ->update([
+
+            'email' => $request->email,
+            
+        ]);
+        //}
+
         event(new Registered($user));
 
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
+        
     }
 }
