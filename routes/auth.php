@@ -24,10 +24,18 @@ Route::middleware('guest')->group(function () {
     Route::post('register', [DaftarUserController::class, 'store']);
 
     
-    Route::get('semaksyarat', [SemakUserController::class, 'create'])
-                ->name('semaksyarat');
+    //Route::get('semaksyarat', [SemakUserController::class, 'create'])
+                //->name('semaksyarat');
 
+    //Route::post('semaksyarat', [SemakUserController::class, 'store']); 
+
+
+    Route::get('semaksyarat', [SemakUserController::class, 'index'])->name('semaksyarat');
+    Route::get('/getPeringkat/{id}', [SemakUserController::class, 'getPeringkat']);
+    Route::get('/getKursus/{kodperingkat}/{id}', [SemakUserController::class, 'getKursus']);
     Route::post('semaksyarat', [SemakUserController::class, 'store']); 
+
+
 
     Route::get('daftarlayak', [RegisteredUserController::class, 'create'])
                 ->name('daftarlayak');
