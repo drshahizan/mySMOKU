@@ -1,5 +1,6 @@
 <x-default-layout> 
     <link rel="stylesheet" href="/assets/css/saringan.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!-- Main body part  -->
     <div id="main-content">
         <div class="container-fluid">
@@ -61,7 +62,7 @@
                                                     <td class="hidden-sm-down">
                                                        
                                                         <div class="form-group c_form_group">
-                                                        <select id="maklumat_profil_diri" name="maklumat_profil_diri" class="form-control" onchange="select1()">
+                                                        <select id="maklumat_profil_diri" name="maklumat_profil_diri" class="form-control" onchange="select1()" required>
                                                             <option value="">Pilih</option>
                                                             <option value="lengkap">Lengkap</option>
                                                             <option value="tak_lengkap">Tidak Lengkap</option>
@@ -70,7 +71,7 @@
                                                 </td>
                                                 <td><div class="form-group c_form_group">
                                                     <label>Berikan Catatan Anda.</label>
-                                                    <textarea rows="2" type="text" class="form-control" placeholder=""></textarea>
+                                                    <textarea id="textarea1" rows="2" type="text" class="form-control" placeholder="" disabled="disabled" required></textarea>
                                                 </div> </td>
                                                 </tr>
                                                 <tr>
@@ -80,20 +81,18 @@
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <div class="form-group c_form_group">
-                                                        <select id="maklumat_akademik" name="maklumat_akademik" class="form-control" onchange="select2()">
+                                                        <select id="maklumat_akademik" name="maklumat_akademik" class="form-control" onchange="select2()" required>
                                                             <option value="">Pilih</option>
                                                             <option value="lengkap">Lengkap</option>
                                                             <option value="tak_lengkap">Tidak Lengkap</option>
                                                         </select>
                                                     </div>
                                                     <td>
-                                                    <div class="fancy-checkbox">
-                                                        <label>
-                                                            <input id="checkbox2a" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 1</span><br>
-                                                            <input id="checkbox2b" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 2</span><br>
-                                                            <input id="checkbox2c" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 3</span><br>
-                                                            <input id="checkbox2d" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 4</span>
-                                                        </label>
+                                                    <div class="checkbox-group required">
+                                                        <input id="checkbox2a" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled" required><span> Perkara 1</span><br>
+                                                        <input id="checkbox2b" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled" required><span> Perkara 2</span><br>
+                                                        <input id="checkbox2c" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled" required><span> Perkara 3</span><br>
+                                                        <input id="checkbox2d" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled" required><span> Perkara 4</span>
                                                     </div></td>
                                                 </td> 
                                                 </tr>
@@ -105,7 +104,7 @@
                                                     <td class="hidden-sm-down">
                                                         <!--<div class="col-lg-12 col-md-12">-->
                                                         <div class="form-group c_form_group">
-                                                        <select id="salinan_dokumen" name="salinan_dokumen" class="form-control" onchange="select3()">
+                                                        <select id="salinan_dokumen" name="salinan_dokumen" class="form-control" onchange="select3()" required>
                                                             <option value="">Pilih</option>
                                                             <option value="lengkap">Lengkap</option>
                                                             <option value="tak_lengkap">Tidak Lengkap</option>
@@ -113,13 +112,11 @@
                                                     </div>       
                                                 </td>
                                                 <td>
-                                                    <div class="fancy-checkbox">
-                                                        <label>
-                                                            <input id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada surat tawaran</span><br>
-                                                            <input id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada penyata bank</span><br>
-                                                            <input id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada resit</span><br>
-                                                            <input id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span>
-                                                        </label>
+                                                    <div class="checkbox-group required">
+                                                        <input id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled" required><span> Ralat pada surat tawaran</span><br>
+                                                        <input id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled" required><span> Ralat pada penyata bank</span><br>
+                                                        <input id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled" required><span> Ralat pada resit</span><br>
+                                                        <input id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled" required><span> Ralat pada keputusan peperiksaan</span>
                                                     </div></td>
                                                 </tr>                                                
                                             </tbody>
@@ -132,42 +129,8 @@
                                 <div class="col-md-6">
                                     </div>
                                 <div class="col-md-6 text-right">
-                                    <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan">Teruskan</button>
-                                </form>
-                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Kembalikan Permohonan</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                </div>
-                                                <div class="modal-body text-center">
-                                                    <p>Permohonan ini akan dikembalikan kepada pemohon</p>
-                                                </div>
-                                                <div class="row clearfix">
-                                                    <div class="col-lg-12">
-                                                        <div class="fancy-checkbox">
-                                                            <label><input id="checkbox" type="checkbox"><span>Terdapat butiran yang tidak benar dalam Maklumat Profil Diri</span></label>
-                                                        </div>
-                                                        <div class="fancy-checkbox">
-                                                            <label><input id="checkbox" type="checkbox" ><span>Terdapat butiran yang tidak benar dalam Maklumat Akademik</span></label>
-                                                        </div>
-                                                        <div class="fancy-checkbox">
-                                                            <label><input id="checkbox" type="checkbox"><span>Perkara </span></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                                                    <a href="saring-permohonan.html"  class="btn btn-primary theme-bg gradient">Ya</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-            
-                                </div>
-                                
+                                    <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="checkBtn">Teruskan</button>
+                                </form>                                
                             </div> 
                         </div>
                     </div>                                       
@@ -175,20 +138,26 @@
             </div>
         </div>
     </div>
-   <script>        
+    <script>
+        $(document).ready(function () {
+            $('#checkBtn').click(function() {
+                checked = $("input[type=checkbox]:checked").length;
+
+                if(!checked) {
+                    alert("You must check at least one checkbox.");
+                    return false;
+                }
+            });
+        });
+    </script>
+    <script> 
         function select1(){
             var catatan1 = document.getElementById('maklumat_profil_diri').value;
             if(catatan1=="tak_lengkap"){
-                document.getElementById("checkbox1a").disabled = false;
-                document.getElementById("checkbox1b").disabled = false;
-                document.getElementById("checkbox1c").disabled = false;
-                document.getElementById("checkbox1d").disabled = false;
+                document.getElementById("textarea1").disabled = false;
             }
             else{
-                document.getElementById("checkbox1a").disabled = true;
-                document.getElementById("checkbox1b").disabled = true;
-                document.getElementById("checkbox1c").disabled = true;
-                document.getElementById("checkbox1d").disabled = true;
+                document.getElementById("textarea1").disabled = true;
             }
         }
         
@@ -215,6 +184,10 @@
                 document.getElementById("checkbox3b").disabled = false;
                 document.getElementById("checkbox3c").disabled = false;
                 document.getElementById("checkbox3d").disabled = false;
+                document.getElementById("checkbox3a").required;
+                document.getElementById("checkbox3b").required;
+                document.getElementById("checkbox3c").required;
+                document.getElementById("checkbox3d").required;
             }
             else{
                 document.getElementById("checkbox3a").disabled = true;
@@ -227,5 +200,5 @@
         function confirmButton() {
             confirm("Press a button!");
         }
-   </script>
+    </script>
 </x-default-layout> 
