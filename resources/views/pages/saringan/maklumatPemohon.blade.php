@@ -89,7 +89,7 @@
                                                     </div>
                                                     <td>
                                                     <div class="checkbox-group">
-                                                        <input class="checkbox1" id="checkbox2a" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 1</span><br>
+                                                        <input class="checkbox1" id="checkbox2a" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled" oninvalid="this.setCustomValidity('Sila tandakan sekurang-kurangnya satu kotak')" oninput="setCustomValidity('')"><span> Perkara 1</span><br>
                                                         <input class="checkbox1" id="checkbox2b" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 2</span><br>
                                                         <input class="checkbox1" id="checkbox2c" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 3</span><br>
                                                         <input class="checkbox1" id="checkbox2d" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 4</span>
@@ -114,7 +114,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="checkbox-group">
-                                                        <input class="checkbox2" id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada surat tawaran</span><br>
+                                                        <input class="checkbox2" id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled" oninvalid="this.setCustomValidity('Sila tandakan sekurang-kurangnya satu kotak')" oninput="setCustomValidity('')"><span> Ralat pada surat tawaran</span><br>
                                                         <input class="checkbox2" id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada penyata bank</span><br>
                                                         <input class="checkbox2" id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada resit</span><br>
                                                         <input class="checkbox2" id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span>
@@ -149,18 +149,14 @@
             else{
                 document.getElementById("checkbox2a").required = true;
             }
-        })
 
-        btn.addEventListener('click', function() {
             if (document.getElementById('checkbox3a').checked||document.getElementById('checkbox3b').checked||document.getElementById('checkbox3c').checked||document.getElementById('checkbox3d').checked) {
                 document.getElementById("checkbox3a").required = false;
             }
             else{
                 document.getElementById("checkbox3a").required = true;
             }
-        })
-
-        
+        })        
 
         function select1(){
             var catatan1 = document.getElementById('maklumat_profil_diri').value;
