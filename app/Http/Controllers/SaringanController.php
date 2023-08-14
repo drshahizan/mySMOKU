@@ -52,11 +52,10 @@ class SaringanController extends Controller
         return view('pages.saringan.maklumatTuntutan');
     }
 
-    public function saringTuntutan(Request $request,$id)
+    public function saringTuntutan(Request $request)
     {
-        $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
-        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
-        return view('pages.saringan.maklumatPemohon',compact('permohonan','pelajar'));
+        $permohonan = TuntutanPermohonan::all();
+        return view('pages.saringan.saringan',compact('permohonan'));
     }
 
     public function salinanDokumen($id)
