@@ -65,120 +65,153 @@
                                     <table id="sortTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th style="width: 20%"><b>ID Permohonan</b></th>                                        
-                                                <th style="width: 30%"><b>Nama</b></th>
+                                                <th class="text-center" style="width:5%;"><input type="checkbox" name="select_all" value="1" id="example-select-all"></th>
+                                                <th style="width: 15%"><b>ID Permohonan</b></th>                                        
+                                                <th style="width: 50%"><b>Nama</b></th>
                                                 <th style="width: 15%"><b>Jenis Permohonan</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th> 
-                                                <th class="text-center" style="width: 15%">Status Permohonan</th>
                                             </tr>
                                         </thead>
                                         
                                         <tbody>
                                             <tr>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/3/990404080221</a></td>
                                                 <td>Santosh A/L Ariyaran</td>
                                                 <td>BKOKU</td>
                                                 <td class="text-center">07/02/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
     
                                             <tr>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/5/970204052445</a></td>
                                                 <td>Sarah Binti Yusri</td>
                                                 <td>PPK</td>                                        
                                                 <td class="text-center">05/03/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>  
     
-                                            <tr data-status="Disokong">
+                                            <tr>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/3/980112105666</a></td>
                                                 <td>Aishah Binti Samsudin</td>
                                                 <td>BKOKU</td>                                       
                                                 <td class="text-center">02/03/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
     
-                                            <tr data-status="Disokong">
+                                            <tr>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/4/970703041223</a></td>
                                                 <td>Mohd Ali Bin Abu Kassim</td>
                                                 <td>BKOKU</td>                                        
                                                 <td class="text-center">08/07/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
     
-                                            <tr data-status="Disokong">
+                                            <tr>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/4/960909105668</a></td>
                                                 <td>Ling Kai Jie</td>
                                                 <td>BKOKU</td>                                        
                                                 <td class="text-center">09/04/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
     
-                                            <tr data-status="Disokong">
+                                            <tr>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/2/021212050334</a></td>
                                                 <td>Santishwaran A/L Paven</td>
                                                 <td>PPK</td>                                        
                                                 <td class="text-center">05/06/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
     
                                             <tr>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/3/001205034745</a></td>
                                                 <td>Choo Mei Ling</td>
                                                 <td>BKOKU</td>
                                                 <td class="text-center">07/06/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
                                             
-                                            <tr data-status="Disokong">
+                                            <tr>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/6/890201065225</a></td>
                                                 <td>Ezra Hanisah Binti Md Yunos</td>
                                                 <td>BKOKU</td>                                    
                                                 <td class="text-center">19/02/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
                                             
-                                            <tr data-status="Disokong">
+                                            <tr>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/5/981004045253</a></td>
                                                 <td>Syed Abdul Kassim Hussain Yusof</td>
                                                 <td>PPK</td>                                        
                                                 <td class="text-center">25/05/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
                                             
-                                            <tr data-status="Disokong">
+                                            <tr>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/5/940524032341</a></td>
                                                 <td>Rahman Mohammed Arshahad Al-dhaqm</td>
                                                 <td>BKOKU</td>                                    
                                                 <td class="text-center">09/07/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
                                             
-                                            <tr data-status="Disokong">
+                                            <tr>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/4/950623035672</a></td>
                                                 <td>Wan Nurul Syafiqah Binti Wan Sahak</td>
                                                 <td>BKOKU</td>
                                                 <td class="text-center">09/08/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
     
-                                            <tr data-status="Disokong">
+                                            <tr>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/6/930907030098</a></td>
                                                 <td>Siti Aisyah Binti Ismail</td>
                                                 <td>BKOKU</td>
                                                 <td class="text-center">21/05/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
     
-                                            <tr data-status="Disokong">
+                                            <tr>
+                                                <td class="text-center"><input type="checkbox" name="select_all" value="1" id="example-select-all"></td>
                                                 <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/5/950523098909</a></td>
                                                 <td>Muhammad Aiman Bin Hamid</td>
                                                 <td>PPK</td>
                                                 <td class="text-center">29/07/2023</td>
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <br>
+                                    <div class="pengesahan">
+                                        <button class="btn btn-success btn-round" data-toggle="modal" data-target="#exampleModalCenter"><i class="icon-check"></i>Sahkan Semua</button>
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Kembalikan Permohonan</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                        <p>Pengesahan Permohonan ini</p>
+                                                    </div>
+                                                    <div class="row clearfix text-center">
+                                                        <div class="col-lg-12">
+                                                            <div class="fancy-radio">
+                                                                <label><input name="lulus" value="male" type="radio"><span><i></i> Layak menerima BKOKU/PPK</span></label>
+                                                            </div>
+                                                            <div class="fancy-radio">
+                                                                <label><input name="tidak_lulus" value="female" type="radio"><span><i></i> Tidak layak menerima BKOKU/PPK</span></label>
+                                                            </div>
+                                                            <br>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                                        <a href="sahkan-permohonan.html"  class="btn btn-success btn-round">Ya</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
