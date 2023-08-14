@@ -89,10 +89,10 @@
                                                     </div>
                                                     <td>
                                                     <div class="checkbox-group">
-                                                        <input id="checkbox2a" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 1</span><span id="checkedValue"></span><br>
-                                                        <input id="checkbox2b" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 2</span><br>
-                                                        <input id="checkbox2c" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 3</span><br>
-                                                        <input id="checkbox2d" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 4</span>
+                                                        <input class="checkbox1" id="checkbox2a" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 1</span><br>
+                                                        <input class="checkbox1" id="checkbox2b" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 2</span><br>
+                                                        <input class="checkbox1" id="checkbox2c" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 3</span><br>
+                                                        <input class="checkbox1" id="checkbox2d" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 4</span>
                                                         <p id="checkedValue"></p>
                                                     </div></td>
                                                 </td> 
@@ -114,10 +114,10 @@
                                                 </td>
                                                 <td>
                                                     <div class="checkbox-group">
-                                                        <input id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada surat tawaran</span><span id="checkedValue"></span><br>
-                                                        <input id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada penyata bank</span><br>
-                                                        <input id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada resit</span><br>
-                                                        <input id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span>
+                                                        <input class="checkbox2" id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada surat tawaran</span><br>
+                                                        <input class="checkbox2" id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada penyata bank</span><br>
+                                                        <input class="checkbox2" id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada resit</span><br>
+                                                        <input class="checkbox2" id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span>
                                                     </div></td>
                                                 </tr>                                                
                                             </tbody>
@@ -141,17 +141,26 @@
         </div>
     </div>
     <script> 
-        // var btn = document.getElementById('check');
-        // var msg = document.getElementById('checkedValue');
-        // btn.addEventListener('click', function() {
-        // var len = document.querySelectorAll('.checkbox input[type="checkbox"]:checked').length
-        // if (len <= 0) {
-        //     msg.innerHTML = "&nbsp;<span style='color:red'>Please check at least one</span>";
-        //     alert("Sila klik salah satu pilihan");
-        // } else {
-        //     form.submit();
-        // }
-        // })
+        var btn = document.getElementById('check');
+        btn.addEventListener('click', function() {
+            if (document.getElementById('checkbox2a').checked||document.getElementById('checkbox2b').checked||document.getElementById('checkbox2c').checked||document.getElementById('checkbox2d').checked) {
+                document.getElementById("checkbox2a").required = false;
+            }
+            else{
+                document.getElementById("checkbox2a").required = true;
+            }
+        })
+
+        btn.addEventListener('click', function() {
+            if (document.getElementById('checkbox3a').checked||document.getElementById('checkbox3b').checked||document.getElementById('checkbox3c').checked||document.getElementById('checkbox3d').checked) {
+                document.getElementById("checkbox3a").required = false;
+            }
+            else{
+                document.getElementById("checkbox3a").required = true;
+            }
+        })
+
+        
 
         function select1(){
             var catatan1 = document.getElementById('maklumat_profil_diri').value;
@@ -186,10 +195,6 @@
                 document.getElementById("checkbox3b").disabled = false;
                 document.getElementById("checkbox3c").disabled = false;
                 document.getElementById("checkbox3d").disabled = false;
-                document.getElementById("checkbox3a").required;
-                document.getElementById("checkbox3b").required;
-                document.getElementById("checkbox3c").required;
-                document.getElementById("checkbox3d").required;
             }
             else{
                 document.getElementById("checkbox3a").disabled = true;
