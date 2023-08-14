@@ -81,8 +81,15 @@ class SekretariatController extends Controller
         return $pdf->download('SuratTawaran.pdf');
     }
 
-    public function export() 
+    public function cetakSenaraiPemohonExcel() 
     {
         return Excel::download(new SenaraiPendek, 'PermohonanDisokong.xlsx');
+    }
+
+    public function cetakSenaraiPemohonPDF() 
+    {
+        $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon');
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('senarai-pemohon.pdf');
     }
 }

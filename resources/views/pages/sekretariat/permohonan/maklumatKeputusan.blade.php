@@ -70,25 +70,25 @@
                 </div>
             </div>
         </div>  
+
+        <script>
+            function confirmButton() {
+                confirm("Press a button!");
+            }
+            function my_button_click_handler(){
+                alert('Emel notifikasi telah dihantar ke pemohon.');
+            }
+       </script>
+    
+       {{-- <script>
+        @if(session('status'))
+            alert('{{session('status')}}');
+            swal({
+                title: "Emel notifikasi telah dihantar ke pemohon.",
+                text: "Klik OK untuk teruskan!",
+                icon: "success",
+                button: "OK",
+            });
+       </script> --}}
     </body>
-
-   <script>
-        function confirmButton() {
-            confirm("Press a button!");
-        }
-        function my_button_click_handler(){
-            alert('Emel notifikasi telah dihantar ke pemohon.');
-        }
-   </script>
-
-   {{-- <script>
-    @if(session('status'))
-        alert('{{session('status')}}');
-        swal({
-            title: "Emel notifikasi telah dihantar ke pemohon.",
-            text: "Klik OK untuk teruskan!",
-            icon: "success",
-            button: "OK",
-        });
-   </script> --}}
 </x-default-layout> 

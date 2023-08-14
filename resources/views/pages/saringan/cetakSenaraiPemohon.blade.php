@@ -17,7 +17,7 @@
 <body>
     <div class="header" style="padding-top: 10px; text-align:center; display:block;">
         <div class="image">
-            <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style=" width:20%; height:10%;">
+            <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style=" width:10%; height:10%;">
         </div>
         <br>
         <div class="tittle" style="font-size: 14px;">
