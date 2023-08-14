@@ -64,7 +64,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('salinan-invois', [SaringanController::class, 'salinanInvois'])->name('id');
     Route::get('salinan-akademik', [SaringanController::class, 'salinanAkademik'])->name('id');
     Route::get('cetak-maklumat-pemohon', [SaringanController::class, 'cetakMaklumatPemohon']);
-    Route::post('saring-maklumat-pemohon', [SaringanController::class, 'saringMaklumat']);
+    Route::post('saring-maklumat-pemohon/{no_kp}', [SaringanController::class, 'saringMaklumat']);
 
     //Saring tuntutan
     Route::get('tuntutan-saring', [SaringanController::class, 'tuntutanSaring']);

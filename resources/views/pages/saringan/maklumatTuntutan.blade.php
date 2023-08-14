@@ -1,15 +1,50 @@
 <x-default-layout> 
-    <link rel="stylesheet" href="assets/css/saringan.css">
+    <link rel="stylesheet" href="/assets/css/saringan.css">
+    <style>
+        table, tr, td{
+            border: none!important;
+            padding:4px 8px!important;
+        }
+        .number{
+            width: 70px!important;
+            text-align: right;
+            padding-right:10px!important; 
+        }
+        .content{
+            width: 220px;
+        }
+        .content2{
+            width: 160px;
+        }
+        .border{
+            border-top: 1px solid black!important;
+            border-bottom: 1px solid black!important;
+            border-left: none!important;
+            border-right: none!important;
+        }
+        input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number]{
+            width: 70px;
+            text-align: right;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 2px;
+        }
+    </style>
     <!-- Main body part  -->
         {{-- begin alert --}}
-        @if(\Session::has('disokong'))
+        @if($status=="Permohonan Telah Disokong")
             <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px">
-                {{ \Session::get('disokong') }}
+                {{ $status }}
             </div>
         @endif
-        @if(\Session::has('dikembalikan'))
+        @if($status=="Permohonan Telah Dikembalikan")
             <div class="alert alert-warning" role="alert" style="margin: 0px 15px 20px 15px">
-                {{ \Session::get('dikembalikan') }}
+                {{ $status }}
             </div>
         @endif
         {{-- end alert --}}
@@ -36,67 +71,78 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="body">
-                            <div class="d-flex align-items-center">
-                                <img class="img" src="https://www.shareicon.net/data/128x128/2016/05/24/770085_man_512x512.png" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar Name">
-                                <div class="ml-3">
-                                    Mohd Ali Bin Abu Kassim
-                                    <p class="mb-0">aliabukassim@graduate.utm.my</p>
-                                </div>
-                            </div>
-                            <hr>
                             <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6">
-                                    <p class="m-b-0"><strong>Tarikh Permohonan: </strong> 04/07/2023 </p>
-                                    <p><strong>ID Permohonan: </strong> KPTBKOKUB990404080221</p><br>    
-                                    <p><strong>Maklumat Tuntutan: </strong></p>          
-                                    <p> <b><i>Jenis Tuntutan:</i></b>  Elaun Wang Saku</p> 
-                                    <p> <b><i>Amaun: </i>RM </b><input type="number" value="5000" style="width: 80px;"></p>                   
+                                    <br>
+                                    <table>
+                                        <tr>
+                                            <td><strong>Nama</strong></td>
+                                            <td>:</td>
+                                            <td>{{$pelajar->nama_pelajar}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>No. Kad Pengenalan</strong></td>
+                                            <td>:</td>
+                                            <td>{{$pelajar->nokp_pelajar}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Tarikh Permohonan</strong></td>
+                                            <td>:</td>
+                                            <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ID Permohonan</strong></td>
+                                            <td>:</td>
+                                            <td>{{$permohonan->id_permohonan}}</td>
+                                        </tr>
+                                    </table>                  
                                 </div>
+                                <hr>
                             </div>
                             <form method="POST" action="{{ url('saring-tuntutan') }}" id="saring">
-                                {{csrf_field()}}                            
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    </div>
+                                {{csrf_field()}}         
+                                <table class="calculation">
+                                    <tr>
+                                        <td colspan="3"><strong>Jumlah Tuntutan:</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content">Jumlah Yuran (RM)</td>
+                                        <td class="content2">2500 x 1 (semester)</td>
+                                        <td class="number">2500</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content">Jumlah Elaun Wang Saku (RM)</td>
+                                        <td class="content2">300 x 6 (bulan)</td>
+                                        <td class="number">1200</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content border" colspan="2">Jumlah Keseluruhan (RM)</td>
+                                        <td class="number border">3700</td>
+                                    </tr>
+                                </table>  
+                                <br>
+                                <table class="calculation">
+                                    <tr>
+                                        <td colspan="3"><strong>Jumlah Layak Tuntutan:</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content">Jumlah Pelajar Tuntut (RM)</td>
+                                        <td class="number">2500</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content">Baki Tuntutan (RM)</td>
+                                        <td class="number">2000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content border">Jumlah Layak Tuntutan (RM)</td>
+                                        <td class="border"><input type="number" name="layak_tuntut" id="layak_tuntut" value="2000"></td>
+                                    </tr>
+                                </table>                                
                                 <div class="col-md-6 text-right">
                                     <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan">Teruskan</button>
-                                </form>
-                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Kembalikan Permohonan</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                </div>
-                                                <div class="modal-body text-center">
-                                                    <p>Permohonan ini akan dikembalikan kepada pemohon</p>
-                                                </div>
-                                                <div class="row clearfix">
-                                                    <div class="col-lg-12">
-                                                        <div class="fancy-checkbox">
-                                                            <label><input id="checkbox" type="checkbox"><span>Terdapat butiran yang tidak benar dalam Maklumat Profil Diri</span></label>
-                                                        </div>
-                                                        <div class="fancy-checkbox">
-                                                            <label><input id="checkbox" type="checkbox" ><span>Terdapat butiran yang tidak benar dalam Maklumat Akademik</span></label>
-                                                        </div>
-                                                        <div class="fancy-checkbox">
-                                                            <label><input id="checkbox" type="checkbox"><span>Perkara </span></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                                                    <a href="saring-permohonan.html"  class="btn btn-primary theme-bg gradient">Ya</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-            
                                 </div>
-                                
-                            </div> 
-                        </div>
+                            </form>                      
+                        </div> 
                     </div>                                       
                 </div>
             </div>
