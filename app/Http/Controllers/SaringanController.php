@@ -13,7 +13,9 @@ class SaringanController extends Controller
 {
     public function saringan()
     {
-        $permohonan = TuntutanPermohonan::all();
+        $permohonan = TuntutanPermohonan::join('statustransaksi','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
+        ->get(['permohonan.*', 'statustransaksi.*'])
+        ->where('status','=','2');
         return view('pages.saringan.saringan',compact('permohonan'));
     }
 
