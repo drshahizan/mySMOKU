@@ -40,7 +40,7 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
     public function columnFormats(): array
     {
         return [
-            'B' => NumberFormat::FORMAT_NUMBER,
+            'B' => '0',
         ];
     }
 

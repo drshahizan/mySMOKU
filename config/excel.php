@@ -208,7 +208,12 @@ return [
     |
     */
     'value_binder' => [
+<<<<<<< Updated upstream
         'default' => PhpOffice\PhpSpreadsheet\Cell\StringValueBinder::class,
+=======
+        // 'default' => Maatwebsite\Excel\DefaultValueBinder::class,
+        'default' => PhpOffice\PhpSpreadsheet\Cell\StringValueBinder::class, 
+>>>>>>> Stashed changes
     ],
 
     'cache' => [

@@ -168,9 +168,9 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <br><br>
+                                        <br>
                                         <div class="pengesahan" style="text-align: right;">
-                                            <button class="btn btn-success btn-round" data-toggle="modal" data-target="#exampleModalCenter" onclick="myinput()">Sahkan Semua</button>
+                                            <button class="btn btn-success btn-round" data-toggle="modal" data-target="#exampleModalCenter" onclick="myinput()">Sahkan</button>
                                         </div>
                                     </form>
                                 </div>
