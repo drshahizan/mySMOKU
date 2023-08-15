@@ -179,7 +179,10 @@ class PermohonanController extends Controller
     }
 
     public function statuspermohonan(){
-        $permohonan = Status::all()->where('nokp_pelajar', Auth::user()->id());
+        $permohonan = Status::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
+        ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
+        ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
+        ->where('nokp_pelajar', Auth::user()->id());
 
         return view('pages.statuspermohonan.statusmohon', compact('permohonan'));
         
