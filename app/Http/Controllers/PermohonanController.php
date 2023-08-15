@@ -62,7 +62,7 @@ class PermohonanController extends Controller
 
     public function store(Request $request)
     {   
-        $request->session()->regenerate();
+        /*$request->session()->regenerate();
         $request->validate([
 			'nama_pelajar' => 'required',
 			'nokp_pelajar' => 'required|unique:pelajar',
@@ -70,7 +70,7 @@ class PermohonanController extends Controller
             //'no_akaunbank' => 'required',
             //'emel' => 'required'
             
-        ]);
+        ]);*/
 
         $user = Permohonan::create([
             'nama_pelajar' => $request->nama_pelajar,
@@ -107,24 +107,6 @@ class PermohonanController extends Controller
     
         ]);
 
-        /*$user = Akademik::create([
-            'no_pendaftaranpelajar' => $request->no_pendaftaranpelajar,
-            'nokp_pelajar' => $request->nokp_pelajar,
-            'peringkat_pengajian' => $request->peringkat_pengajian,
-            'nama_kursus' => $request->nama_kursus,
-            'id_institusi' => $request->id_institusi,
-            'tkh_mula' => $request->tkh_mula,
-            'tkh_tamat' => $request->tkh_tamat,
-            'sem_semasa' => $request->sem_semasa,
-            'tempoh_pengajian' => $request->tempoh_pengajian,
-            'bil_bulanpersem' => $request->bil_bulanpersem,
-            'mod' => $request->mod,
-            'cgpa' => $request->cgpa,
-            'sumber_biaya' => $request->sumber_biaya,
-            'nama_penaja' => $request->nama_penaja,
-            'status' => '1',
-            
-        ]);*/
 
         DB::table('maklumatakademik')->where('nokp_pelajar' ,$request->nokp_pelajar)
         ->update([
@@ -157,7 +139,7 @@ class PermohonanController extends Controller
         $user = Status::create([
             'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
             'nokp_pelajar' => $request->nokp_pelajar,
-            'status' => '1',
+            'status' => '2',
             
         ]);
         
