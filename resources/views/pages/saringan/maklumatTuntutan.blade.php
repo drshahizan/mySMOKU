@@ -5,25 +5,16 @@
             border: none!important;
             padding:4px 8px!important;
         }
-        .number{
-            width: 70px!important;
-            text-align: right;
-            padding-right:10px!important; 
+        .table{
+            width: 80%;
+            table-layout: fixed;
+        }
+        .table2{
+            width: 40%;
+            table-layout: fixed;
         }
         .white{
             color: white!important;
-        }
-        .content{
-            width: 220px;
-        }
-        .content2{
-            width: 160px;
-        }
-        .border{
-            border-top: 1px solid black!important;
-            border-bottom: 1px solid black!important;
-            border-left: none!important;
-            border-right: none!important;
         }
         input::-webkit-outer-spin-button,
             input::-webkit-inner-spin-button {
@@ -31,11 +22,14 @@
             margin: 0;
         }
         input[type=number]{
-            width: 70px;
+            width: 50px;
             text-align: right;
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 2px;
+        }
+        .normal{
+            font-weight: normal;
         }
     </style>
     <!-- Main body part  -->
@@ -88,21 +82,22 @@
                                             <td>{{$pelajar->nokp_pelajar}}</td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Tarikh Permohonan</strong></td>
+                                            <td><strong>Tarikh Tuntutan</strong></td>
                                             <td>:</td>
                                             <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
                                         </tr>
                                         <tr>
-                                            <td><strong>ID Permohonan</strong></td>
+                                            <td><strong>ID Tuntutan</strong></td>
                                             <td>:</td>
                                             <td>{{$permohonan->id_permohonan}}</td>
                                         </tr>
                                     </table>                  
                                 
                                 <hr>
+                                <br>
                                 <table class="maklumat">
                                     <tr>
-                                        <td><strong>Penerangan:</strong></td>
+                                        <td><h5>Pengiraan mengikut jenis tuntutan:</h5></td>
                                     </tr>
                                 </table> 
                                 <form method="POST" action="{{ url('saring-tuntutan') }}" id="saring">
@@ -120,23 +115,23 @@
                                         </thead>
                                         <tbody>
                                             <tr class="font-weight-bolder font-size-lg">
-                                                <td class="text-right pt-7">
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
                                                     Yuran Pengajian
                                                 </td>
-                                                <td class="text-right pt-7">1 (semester)</td>
-                                                <td class="text-right pt-7">RM2500</td>
-                                                <td class="pr-0 pt-7 font-size-h6 font-weight-boldest text-right">RM2500</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">1 (semester)</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM2500</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM2500</td>
                                             </tr>
-                                            <tr class="font-weight-bolder border-bottom-0 font-size-lg">
-                                                <td class="text-right pt-7">
+                                            <tr class="font-weight-bolder font-size-lg">
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
                                                     Wang Saku
                                                 </td>
-                                                <td class="border-top-0 text-right py-4">6 (bulan)</td>
-                                                <td class="border-top-0 text-right py-4">RM300</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">6 (bulan)</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM300</td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM1800</td>
                                             </tr>
-                                            <tr class="font-weight-bolder border-bottom-0 font-size-lg">
-                                                <td colspan="3" class="text-right pt-7">
+                                            <tr class="font-weight-bolder font-size-lg">
+                                                <td colspan="3" class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
                                                     Keseluruhan
                                                 </td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM4300</td>
@@ -144,36 +139,43 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <br>
+                                <table class="maklumat">
+                                    <tr>
+                                        <td><h5>Pengiraan bagi tuntutan yg layak:</h5></td>
+                                    </tr>
+                                </table> 
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table2">
                                         <thead>
                                             <tr>
-                                                <th class="pt-1 pb-9 pl-0 font-weight-bolder text-muted font-size-lg text-uppercase white">Tuntutan</th>
-                                                <th class="pt-1 pb-9 text-right pr-0 font-weight-bolder text-muted font-size-lg text-uppercase white">Jumlah</th>
+                                                <th class="pt-1 pb-9 pl-0 font-weight-bolder text-muted font-size-lg text-uppercase white normal">Tuntutan</th>
+                                                <th class="pt-1 pb-9 text-right pr-0 font-weight-bolder text-muted font-size-lg text-uppercase white normal">Jumlah</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="font-weight-bolder font-size-lg">
-                                                <td class="border-top-0 pl-0 pt-7 d-flex align-items-center">
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
                                                     Pelajar Tuntut
                                                 </td>
-                                                <td class="pr-0 pt-7 font-size-h6 font-weight-boldest text-right">RM2500</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM2500</td>
                                             </tr>
-                                            <tr class="font-weight-bolder border-bottom-0 font-size-lg">
-                                                <td class="border-top-0 pl-0 py-4 d-flex align-items-center">
+                                            <tr class="font-weight-bolder font-size-lg">
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
                                                     Baki
                                                 </td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM1000</td>
                                             </tr>
-                                            <tr class="font-weight-bolder border-bottom-0 font-size-lg">
-                                                <td class="text-right pt-7">
+                                            <tr class="font-weight-bolder font-size-lg">
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
                                                     Layak
                                                 </td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="layak_tuntut" id="layak_tuntut" value="1500"></td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM<input type="number" name="layak_tuntut" id="layak_tuntut" value="1500"></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
+                                <br>
                                 <!--end: Invoice body-->                               
                                 <div class="col-md-6 text-right">
                                     <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan">Teruskan</button>

@@ -6,20 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="assets/css/saringan.css">
+    <link rel="stylesheet" href="/assets/css/saringan.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     </head>
     {{-- begin alert --}}
-    @if(\Session::has('disokong'))
+    @if($status == "Permohonan Telah Disokong")
         <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px">
-            {{ \Session::get('disokong') }}
+            {{ $status }}
         </div>
     @endif
-    @if(\Session::has('dikembalikan'))
+    @if($status == "Permohonan Telah Dikembalikan")
         <div class="alert alert-warning" role="alert" style="margin: 0px 15px 20px 15px">
-            {{ \Session::get('dikembalikan') }}
+            {{ $status }}
+        </div>
+    @endif
+    @if($status == "Tuntutan Telah Disokong")
+        <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px">
+            {{ $status }}
         </div>
     @endif
     {{-- end alert --}}
@@ -55,7 +60,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-search" style="color: white!important"></i></div>
                                 <div class="ml-4">
-                                    <span style="color: black!important">Belum Disemak</span>
+                                    <span style="color: black!important">Belum Disaring</span>
                                     <h4 class="mb-0 font-weight-medium">4992</h4>
                                 </div>
                             </div>
@@ -93,7 +98,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Senarai Saringan Permohonan<br><small>Klik ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
+                            <h2>Senarai Saringan Tuntutan<br><small>Klik ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
                             {{-- <ul class="header-dropdown dropdown">
                                 <li>
                                     <a href="{{ url('cetak-senarai-pemohon') }}" target="_blank" class="btn btn-primary" style="color: white">
@@ -120,13 +125,17 @@
                                         @php
                                             $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
                                             $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
+                                            $status = DB::table('statustransaksi')->where('nokp_pelajar', $item['nokp_pelajar'])->value('status');
+                                            if ($status=2){
+                                                $status='Belum Disaring';
+                                            }
                                         @endphp
                                         <tr>                                            
                                             <td><a href="{{ url('maklumat-pemohon/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a></td>
                                             <td>{{$nama_pemohon}}</td>
                                             <td>{{$item['program']}}</td>
                                             <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
+                                            <td class="text-center"><button class="btn bg-orange text-white">{{$status}}</button></td>
                                         </tr>
                                         @endforeach
                                         {{-- <tr>

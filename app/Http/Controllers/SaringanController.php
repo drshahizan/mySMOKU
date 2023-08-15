@@ -16,7 +16,8 @@ class SaringanController extends Controller
         $permohonan = TuntutanPermohonan::join('statustransaksi','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
         ->get(['permohonan.*', 'statustransaksi.*'])
         ->where('status','=','2');
-        return view('pages.saringan.saringan',compact('permohonan'));
+        $status = null;
+        return view('pages.saringan.saringan',compact('permohonan','status'));
     }
 
     public function maklumatPemohon($id)
@@ -56,8 +57,11 @@ class SaringanController extends Controller
 
     public function saringTuntutan(Request $request)
     {
-        $permohonan = TuntutanPermohonan::all();
-        return view('pages.saringan.saringan',compact('permohonan'));
+        $permohonan = TuntutanPermohonan::join('statustransaksi','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
+        ->get(['permohonan.*', 'statustransaksi.*'])
+        ->where('status','=','2');
+        $status = "Tuntutan Telah Disokong";
+        return view('pages.saringan.saringan',compact('permohonan','status'));
     }
 
     public function salinanDokumen($id)
@@ -125,7 +129,9 @@ class SaringanController extends Controller
                 'catatan3'=>$catatan3,
             ];
             \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
-            $permohonan = TuntutanPermohonan::all();
+            $permohonan = TuntutanPermohonan::join('statustransaksi','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
+            ->get(['permohonan.*', 'statustransaksi.*'])
+            ->where('status','=','2');
             $status = "Permohonan Telah Dikembalikan";
             return view('pages.saringan.saringan',compact('permohonan','status'));
         }
@@ -134,7 +140,10 @@ class SaringanController extends Controller
     //Tuntutan - Saring
     public function tuntutanSaring()
     {
-        $permohonan = TuntutanPermohonan::all();
-        return view('pages.saringan.tuntutanSaring',compact('permohonan'));
+        $permohonan = TuntutanPermohonan::join('statustransaksi','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
+        ->get(['permohonan.*', 'statustransaksi.*'])
+        ->where('status','=','2');
+        $status = null;
+        return view('pages.saringan.tuntutanSaring',compact('permohonan','status'));
     }
 }
