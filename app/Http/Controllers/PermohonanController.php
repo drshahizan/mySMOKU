@@ -165,8 +165,16 @@ class PermohonanController extends Controller
         ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
         ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->id());
+        return view('pages.permohonan.statusmohon', compact('permohonan'));
+        
+    }
 
-        return view('pages.statuspermohonan.statusmohon', compact('permohonan'));
+    public function batalpermohonan(){
+        $permohonan = Status::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
+        ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
+        ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
+        ->where('nokp_pelajar', Auth::user()->id());
+        return view('pages.permohonan.statusmohon', compact('permohonan'));
         
     }
 }
