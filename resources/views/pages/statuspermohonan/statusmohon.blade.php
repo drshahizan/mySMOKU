@@ -26,7 +26,7 @@
 <br>
 
 <div class="table-responsive">
-	<table class="table table-rounded table-striped border gy-7 gs-7">
+	<table class="table table-rounded table-striped border gy-7 gs-7" style="background-color:#FFFFE0;">
 		<thead>
 			<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
 				<th>ID Permohonan</th>
@@ -39,12 +39,13 @@
 @foreach($permohonan as $permohonan)
 <tr> 
 	
-                <td>{{$permohonan->id_permohonan}}</td>
+    <td>{{$permohonan->id_permohonan}}</td>
                
-	<td>{{$permohonan->id_permohonan}} </td>
+	<td>{{$permohonan->status}} </td>
 	<td><a href="#" class="btn btn-primary">Batal</a> </td>
 	<td>{{$permohonan->created_at}}</td>
 	@endforeach
+</tr>
 </tbody>
 </table>
 </div>
