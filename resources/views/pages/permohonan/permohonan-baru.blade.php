@@ -1,4 +1,22 @@
 <x-default-layout> 
+</script>
+<style>
+    /* Some custom styles to beautify this example */
+	.bs-example{
+    	margin: 60px 0;
+    }
+    a, button{
+        margin-right: 30px;
+  	}
+    i{
+        font-size: 22px;
+    }
+</style>
+<script>
+$(document).ready(function(){
+    $('[data-bs-toggle="tooltip"]').tooltip();
+});
+</script>
 		<!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->
@@ -441,8 +459,9 @@
 														</div>
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank
-																</label>
+																<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>
+																
+																
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
 																<div class="col-12">
@@ -459,7 +478,7 @@
 																		<span class="path1"></span>
 																		<span class="path2"></span>
 																	</i>Muat Naik Salinan Bank Penyata</button> --}}
-																	<label style="color: black; padding-bottom:8px;">Salinan Bank Penyata</label><br>
+																	<label style="color: black; padding-bottom:8px;">Salinan Bank Penyata</label> <a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a><br> 
 																		<input type="file" id="upload"  hidden/>
 																		<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:40%; text-align:center;">
 																		<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
@@ -876,7 +895,7 @@
 															<!--begin::Col-->
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label>
+																<label class=" fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label> <a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
 																<!--end::Label-->
 																<!--begin::Row-->
 																<div class="row fv-row">
@@ -908,9 +927,9 @@
 														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
 															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">Nama Penaja</span>
+																<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
 																
-															</label>
+															</label>															
 															<!--end::Label-->
 															<input type="text" class="form-control form-control-solid" placeholder="JPA" name="nama_penaja" value="" />
 														</div>
@@ -1149,15 +1168,7 @@
             }
         }
 
-		/*function select2(){
-            var mod = document.getElementById('mod').value;
-            if(mod=="2"){
-                document.getElementById("elaun").disabled = true;
-            }
-            else{
-                document.getElementById("yuran").disabled = false;
-            }
-        }*/
 		</script>
+
 
 </x-default-layout>
