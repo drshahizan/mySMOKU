@@ -1,7 +1,7 @@
 <x-default-layout> 
     <link rel="stylesheet" href="/assets/css/saringan.css">
     <style>
-        table, tr, td{
+        .maklumat, .maklumat td{
             border: none!important;
             padding:4px 8px!important;
         }
@@ -9,6 +9,9 @@
             width: 70px!important;
             text-align: right;
             padding-right:10px!important; 
+        }
+        .white{
+            color: white!important;
         }
         .content{
             width: 220px;
@@ -71,10 +74,9 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="body">
-                            <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6">
                                     <br>
-                                    <table>
+                                    <table class="maklumat">
                                         <tr>
                                             <td><strong>Nama</strong></td>
                                             <td>:</td>
@@ -96,52 +98,88 @@
                                             <td>{{$permohonan->id_permohonan}}</td>
                                         </tr>
                                     </table>                  
-                                </div>
+                                
                                 <hr>
-                            </div>
-                            <form method="POST" action="{{ url('saring-tuntutan') }}" id="saring">
-                                {{csrf_field()}}         
-                                <table class="calculation">
+                                <table class="maklumat">
                                     <tr>
-                                        <td colspan="3"><strong>Jumlah Tuntutan:</strong></td>
+                                        <td><strong>Penerangan:</strong></td>
                                     </tr>
-                                    <tr>
-                                        <td class="content">Jumlah Yuran (RM)</td>
-                                        <td class="content2">2500 x 1 (semester)</td>
-                                        <td class="number">2500</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="content">Jumlah Elaun Wang Saku (RM)</td>
-                                        <td class="content2">300 x 6 (bulan)</td>
-                                        <td class="number">1200</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="content border" colspan="2">Jumlah Keseluruhan (RM)</td>
-                                        <td class="number border">3700</td>
-                                    </tr>
-                                </table>  
-                                <br>
-                                <table class="calculation">
-                                    <tr>
-                                        <td colspan="3"><strong>Jumlah Layak Tuntutan:</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="content">Jumlah Pelajar Tuntut (RM)</td>
-                                        <td class="number">2500</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="content">Baki Tuntutan (RM)</td>
-                                        <td class="number">2000</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="content border">Jumlah Layak Tuntutan (RM)</td>
-                                        <td class="border"><input type="number" name="layak_tuntut" id="layak_tuntut" value="2000"></td>
-                                    </tr>
-                                </table>                                
+                                </table> 
+                                <form method="POST" action="{{ url('saring-tuntutan') }}" id="saring">
+                                {{csrf_field()}}     
+                                <!--begin: Invoice body-->
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="pt-1 pb-9 pl-0 font-weight-bolder text-muted font-size-lg text-uppercase white">Jenis Tuntutan</th>
+                                                <th class="pt-1 pb-9 text-right font-weight-bolder text-muted font-size-lg text-uppercase white">Tempoh</th>
+                                                <th class="pt-1 pb-9 text-right font-weight-bolder text-muted font-size-lg text-uppercase white">Kadar Tuntutan</th>
+                                                <th class="pt-1 pb-9 text-right pr-0 font-weight-bolder text-muted font-size-lg text-uppercase white">Jumlah</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="font-weight-bolder font-size-lg">
+                                                <td class="text-right pt-7">
+                                                    Yuran Pengajian
+                                                </td>
+                                                <td class="text-right pt-7">1 (semester)</td>
+                                                <td class="text-right pt-7">RM2500</td>
+                                                <td class="pr-0 pt-7 font-size-h6 font-weight-boldest text-right">RM2500</td>
+                                            </tr>
+                                            <tr class="font-weight-bolder border-bottom-0 font-size-lg">
+                                                <td class="text-right pt-7">
+                                                    Wang Saku
+                                                </td>
+                                                <td class="border-top-0 text-right py-4">6 (bulan)</td>
+                                                <td class="border-top-0 text-right py-4">RM300</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM1800</td>
+                                            </tr>
+                                            <tr class="font-weight-bolder border-bottom-0 font-size-lg">
+                                                <td colspan="3" class="text-right pt-7">
+                                                    Keseluruhan
+                                                </td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM4300</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="pt-1 pb-9 pl-0 font-weight-bolder text-muted font-size-lg text-uppercase white">Tuntutan</th>
+                                                <th class="pt-1 pb-9 text-right pr-0 font-weight-bolder text-muted font-size-lg text-uppercase white">Jumlah</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="font-weight-bolder font-size-lg">
+                                                <td class="border-top-0 pl-0 pt-7 d-flex align-items-center">
+                                                    Pelajar Tuntut
+                                                </td>
+                                                <td class="pr-0 pt-7 font-size-h6 font-weight-boldest text-right">RM2500</td>
+                                            </tr>
+                                            <tr class="font-weight-bolder border-bottom-0 font-size-lg">
+                                                <td class="border-top-0 pl-0 py-4 d-flex align-items-center">
+                                                    Baki
+                                                </td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM1000</td>
+                                            </tr>
+                                            <tr class="font-weight-bolder border-bottom-0 font-size-lg">
+                                                <td class="text-right pt-7">
+                                                    Layak
+                                                </td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="layak_tuntut" id="layak_tuntut" value="1500"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!--end: Invoice body-->                               
                                 <div class="col-md-6 text-right">
                                     <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan">Teruskan</button>
                                 </div>
-                            </form>                      
+                                </form>  
+                            </div>                   
                         </div> 
                     </div>                                       
                 </div>
