@@ -165,7 +165,7 @@ class PermohonanController extends Controller
         ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
         ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->id());
-        return view('pages.statuspermohonan.statusmohon', compact('permohonan'));
+        return view('pages.permohonan.statusmohon', compact('permohonan'));
         
     }
 
@@ -174,7 +174,7 @@ class PermohonanController extends Controller
         ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
         ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->id());
-        return view('pages.statuspermohonan.statusmohon', compact('permohonan'));
+        return view('pages.permohonan.statusmohon', compact('permohonan'));
         
     }
 }
