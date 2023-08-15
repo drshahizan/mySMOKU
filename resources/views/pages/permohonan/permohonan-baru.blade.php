@@ -181,7 +181,7 @@
 										<!--begin::Content-->
 										<div class="card d-flex flex-row-fluid flex-center">
 											<!--begin::Form-->
-											<form action="{{ route('permohonan.post') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9">
+											<form id="kt_create_account_form" action="{{ route('permohonan.post') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9">
 											
 												<!--begin::Step 1-->
 												<div class="current" data-kt-stepper-element="content">
@@ -269,7 +269,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<select name="jantina" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+																	<select name="jantina" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 																		<option value="{{$smoku->kodjantina}}">{{$smoku->jantina}}</option>
 																	</select>
 																	<!--end::Input-->
@@ -284,7 +284,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<select name="bangsa" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+																	<select name="bangsa" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 																		<option value="{{$smoku->kodbangsa}}">{{$smoku->bangsa}}</option>
 																	</select>
 																	<!--end::Input-->
@@ -447,7 +447,7 @@
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_akaunbank" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" maxlength="14" name="no_akaunbank" placeholder="" value="" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -798,6 +798,10 @@
 																			<option value="6">6</option>
 																			<option value="7">7</option>
 																			<option value="8">8</option>
+																			<option value="8">9</option>
+																			<option value="8">10</option>
+																			<option value="8">11</option>
+																			<option value="8">12</option>
 																			
 																		</select>
 																	<!--end::Input wrapper-->
@@ -1001,7 +1005,7 @@
 																<label class="form-check-label" for="flexCheckDefault">
 																Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
 																sekiranya maklumat yang diberikan didapati palsu atau tidak benar, pihak kementerian berhak menolak
-																permohonan saya dan menghentikan bantuan kewangan ini kepada saya
+																permohonan saya dan menghentikan bantuan kewangan ini kepada saya.
 																</label>
 															</div>
 															
