@@ -54,25 +54,8 @@ class SaringanController extends Controller
 
     public function saringTuntutan(Request $request)
     {
-        if($request->get('salinan_dokumen')=="lengkap"){
-            return redirect('/saringan')->with('disokong', 'Tuntutan Telah Disokong');
-        }
-        else{
-            if($request->get('salinan_dokumen')=="tak_lengkap"){
-                $catatan3=$request->get('catatan_salinan_dokumen');
-            }
-            else{
-                $catatan3=null;
-            }
-    
-            $catatan = [
-                'catatan1'=> null,
-                'catatan2'=> null,
-                'catatan3'=>$catatan3,
-            ];
-            \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
-            return redirect('/saringan')->with('dikembalikan', 'Tuntutan Telah Dikembalikan');
-        }
+        $permohonan = TuntutanPermohonan::all();
+        return view('pages.saringan.saringan',compact('permohonan'));
     }
 
     public function salinanDokumen($id)
@@ -104,10 +87,13 @@ class SaringanController extends Controller
         return $pdf->stream('senarai-pemohon.pdf');
     }
 
-    public function saringMaklumat(Request $request) 
+    public function saringMaklumat(Request $request,$id) 
     {
         if($request->get('maklumat_profil_diri')=="lengkap"&&$request->get('maklumat_akademik')=="lengkap"&&$request->get('salinan_dokumen')=="lengkap"){
-            return redirect('/maklumat-tuntutan')->with('disokong', 'Permohonan Telah Disokong');
+            $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
+            $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
+            $status = "Permohonan Telah Disokong";
+            return view('pages.saringan.maklumatTuntutan',compact('permohonan','pelajar','status'));
         }
         else{
             if($request->get('maklumat_profil_diri')=="tak_lengkap"){
@@ -137,7 +123,9 @@ class SaringanController extends Controller
                 'catatan3'=>$catatan3,
             ];
             \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
-            return redirect('/saringan')->with('dikembalikan', 'Permohonan Telah Dikembalikan');
+            $permohonan = TuntutanPermohonan::all();
+            $status = "Permohonan Telah Dikembalikan";
+            return view('pages.saringan.saringan',compact('permohonan','status'));
         }
     }
 

@@ -171,7 +171,7 @@
                                         </table>
                                         <br><br>
                                         <div class="pengesahan" style="text-align: right;">
-                                            <button class="btn btn-success btn-round" data-toggle="modal" data-target="#exampleModalCenter">Sahkan Semua</button>
+                                            <button class="btn btn-success btn-round" data-toggle="modal" data-target="#exampleModalCenter" onclick="myinput()">Sahkan Semua</button>
                                         </div>
                                     </form>
                                 </div>
@@ -196,6 +196,41 @@
                         checkboxes[i].checked = source.checked;
                 }
             }
+
+            function myinput(){
+                var no = prompt("No. Mesyuarat:");
+                var tarikh = prompt("Tarikh Mesyuarat:");
+                var keputusan = prompt("Kelulusan:");
+                var catatan = prompt("Catatan:");
+                // <table>
+                //     <tr>
+                //         <td><b>No. Mesyuarat</b></td>
+                //         <td><b>:</b></td>
+                //         <td><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;"></td>
+                //     </tr>
+                //     <tr>
+                //         <td><b>Tarikh Mesyuarat</b></td>
+                //         <td><b>:</b></td>
+                //         <td><input type="date" id="tarikh" name="tarikh" style="padding: 5px;"></td>
+                //     </tr>
+                //     <tr>
+                //         <td><b>Keputusan</b></td>
+                //         <td><b>:</b></td>
+                //         <td>
+                //             <select id="keputusan" onchange="select1()" style="padding: 5px;">
+                //                 <option value="">Pilih Keputusan</option>
+                //                 <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
+                //                 <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
+                //             </select>
+                //         </td>
+                //     </tr>
+                //     <tr>
+                //         <td><b>Catatan</b></td>
+                //         <td><b>:</b></td>
+                //         <td><input type="text" id="catatan" name="noMesyuarat" style="padding: 5px; width:500px;"></td>
+                //     </tr>
+                // </table>
+		    }
         </script>
         
         <!-- Vedor js file and create bundle with grunt  --> 

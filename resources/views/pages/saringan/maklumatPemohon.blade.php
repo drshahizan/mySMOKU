@@ -2,6 +2,12 @@
     <link rel="stylesheet" href="/assets/css/saringan.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!-- Main body part  -->
+    <style>
+        .maklumat, .maklumat td{
+            border: none!important;
+            padding:4px 8px!important;
+        }
+    </style>
     <div id="main-content">
         <div class="container-fluid">
             <!-- Page header section  -->
@@ -25,21 +31,34 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="body">
-                            <div class="d-flex align-items-center">
-                                <img class="img" src="https://www.shareicon.net/data/128x128/2016/05/24/770085_man_512x512.png" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar Name">
-                                <div class="ml-3">
-                                    {{$pelajar->nama_pelajar}}
-                                    <p class="mb-0">{{$pelajar->email}}</p>
-                                </div>
-                            </div>
-                            <hr>
                             <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6">
-                                    <p class="m-b-0"><strong>Tarikh Permohonan: </strong> {{$permohonan->created_at->format('d/m/Y')}} </p>
-                                    <p><strong>ID Permohonan: </strong> {{$permohonan->id_permohonan}} </p>                                    
+                                    <br>
+                                    <table class="maklumat">
+                                        <tr>
+                                            <td><strong>Nama</strong></td>
+                                            <td>:</td>
+                                            <td>{{$pelajar->nama_pelajar}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>No. Kad Pengenalan</strong></td>
+                                            <td>:</td>
+                                            <td>{{$pelajar->nokp_pelajar}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Tarikh Permohonan</strong></td>
+                                            <td>:</td>
+                                            <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ID Permohonan</strong></td>
+                                            <td>:</td>
+                                            <td>{{$permohonan->id_permohonan}}</td>
+                                        </tr>
+                                    </table>                           
                                 </div>
                             </div>
-                            <form method="POST" action="{{ url('saring-maklumat-pemohon') }}" id="saring">
+                            <form method="POST" action="{{ url('saring-maklumat-pemohon/'.$pelajar->nokp_pelajar) }}" id="saring">
                                 {{csrf_field()}}
                             <div class="row clearfix">
                                 <div class="col-md-12">
