@@ -6,20 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="assets/css/saringan.css">
+    <link rel="stylesheet" href="/assets/css/saringan.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     </head>
     {{-- begin alert --}}
-    @if(\Session::has('disokong'))
+    @if($status == "Permohonan Telah Disokong")
         <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px">
-            {{ \Session::get('disokong') }}
+            {{ $status }}
         </div>
     @endif
-    @if(\Session::has('dikembalikan'))
+    @if($status == "Permohonan Telah Dikembalikan")
         <div class="alert alert-warning" role="alert" style="margin: 0px 15px 20px 15px">
-            {{ \Session::get('dikembalikan') }}
+            {{ $status }}
+        </div>
+    @endif
+    @if($status == "Tuntutan Telah Disokong")
+        <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px">
+            {{ $status }}
         </div>
     @endif
     {{-- end alert --}}
@@ -55,7 +60,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-search" style="color: white!important"></i></div>
                                 <div class="ml-4">
-                                    <span style="color: black!important">Belum Disemak</span>
+                                    <span style="color: black!important">Belum Disaring</span>
                                     <h4 class="mb-0 font-weight-medium">4992</h4>
                                 </div>
                             </div>
