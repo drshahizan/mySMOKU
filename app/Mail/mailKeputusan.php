@@ -29,6 +29,6 @@ class mailKeputusan extends Mailable
         $subject = "Keputusan Permohonan Anda";
         return $this->subject($subject)
                     ->with('data', $this->catatan)
-                    ->view('pages.saringan.email-dikembalikan');
+                    ->view('pages.sekretariat.permohonan.emel-kelulusan');
     }
 }
