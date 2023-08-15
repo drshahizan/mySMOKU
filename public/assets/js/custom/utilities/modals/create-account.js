@@ -53,10 +53,10 @@ var KTCreateAccount = function () {
 						KTUtil.scrollTop();
 					} else {
 						Swal.fire({
-							text: "Sorry, looks like there are some errors detected, please try again.",
+							text: "Sila lengkapkan maklumat yang diperlukan.",
 							icon: "error",
 							buttonsStyling: false,
-							confirmButtonText: "Ok, got it!",
+							confirmButtonText: "Ok",
 							customClass: {
 								confirmButton: "btn btn-light"
 							}
@@ -84,7 +84,7 @@ var KTCreateAccount = function () {
 	var handleForm = function() {
 		formSubmitButton.addEventListener('click', function (e) {
 			// Validate form before change stepper step
-			var validator = validations[3]; // get validator for last form
+			var validator = validations[4]; // get validator for last form
 
 			validator.validate().then(function (status) {
 				console.log('validated!');
@@ -151,16 +151,26 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
-					account_type: {
+					'no_akaunbank': {
 						validators: {
 							notEmpty: {
-								message: 'Account type is required'
+								message: 'No. Akaun Bank diperlukan'
+							},
+							digits: {
+								message: 'No. Akaun Bank mesti mengandungi digit sahaja'
+							},
+							stringLength: {
+								min: 14,
+								max: 14,
+								message: 'No. Akaun Bank mesti mengandungi 14 digit sahaja'
 							}
 						}
 					}
+					
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
+					// Bootstrap Framework Integration
 					bootstrap: new FormValidation.plugins.Bootstrap5({
 						rowSelector: '.fv-row',
                         eleInvalidClass: '',
@@ -175,24 +185,31 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
-					'account_team_size': {
+					'alamatW1': {
 						validators: {
 							notEmpty: {
-								message: 'Time size is required'
+								message: 'Alamat rumah diperlukan'
 							}
 						}
 					},
-					'account_name': {
+					'alamatW_poskod': {
 						validators: {
 							notEmpty: {
-								message: 'Account name is required'
+								message: 'Poskod diperlukan'
 							}
 						}
 					},
-					'account_plan': {
+					'alamatW_bandar': {
 						validators: {
 							notEmpty: {
-								message: 'Account plan is required'
+								message: 'Bandar diperlukan'
+							}
+						}
+					},
+					'alamatW_negeri': {
+						validators: {
+							notEmpty: {
+								message: 'Negeri diperlukan'
 							}
 						}
 					}
@@ -214,34 +231,59 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
-					'business_name': {
+					'no_pendaftaranpelajar': {
 						validators: {
 							notEmpty: {
-								message: 'Busines name is required'
+								message: 'No. Pendaftaran Pelajar diperlukan'
 							}
 						}
 					},
-					'business_descriptor': {
+					'tkh_mula': {
 						validators: {
 							notEmpty: {
-								message: 'Busines descriptor is required'
+								message: 'Tarikh Mula diperlukan'
 							}
 						}
 					},
-					'business_type': {
+					'tkh_tamat': {
 						validators: {
 							notEmpty: {
-								message: 'Busines type is required'
+								message: 'Tarikh Mula diperlukan'
 							}
 						}
 					},
-					'business_email': {
+					'sem_semasa': {
 						validators: {
 							notEmpty: {
-								message: 'Busines email is required'
-							},
-							emailAddress: {
-								message: 'The value is not a valid email address'
+								message: 'Semester Semasa diperlukan'
+							}
+						}
+					},
+					'tempoh_pengajian': {
+						validators: {
+							notEmpty: {
+								message: 'Tempoh Pengajian diperlukan'
+							}
+						}
+					},
+					'bil_bulanpersem': {
+						validators: {
+							notEmpty: {
+								message: 'Bil Bulan Persemester diperlukan'
+							}
+						}
+					},
+					'mod': {
+						validators: {
+							notEmpty: {
+								message: 'Mod Pengajian diperlukan'
+							}
+						}
+					},
+					'sumber_biaya': {
+						validators: {
+							notEmpty: {
+								message: 'Sumber Biaya diperlukan'
 							}
 						}
 					}
@@ -263,49 +305,36 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
-					'card_name': {
+					'amaun': {
 						validators: {
 							notEmpty: {
-								message: 'Name on card is required'
+								message: 'Amaun diperlukan'
 							}
 						}
-					},
-					'card_number': {
+					}
+				},
+
+				plugins: {
+					trigger: new FormValidation.plugins.Trigger(),
+					// Bootstrap Framework Integration
+					bootstrap: new FormValidation.plugins.Bootstrap5({
+						rowSelector: '.fv-row',
+                        eleInvalidClass: '',
+                        eleValidClass: ''
+					})
+				}
+			}
+		));
+
+		// Step 5
+		validations.push(FormValidation.formValidation(
+			form,
+			{
+				fields: {
+					'perakuan': {
 						validators: {
 							notEmpty: {
-								message: 'Card member is required'
-							},
-                            creditCard: {
-                                message: 'Card number is not valid'
-                            }
-						}
-					},
-					'card_expiry_month': {
-						validators: {
-							notEmpty: {
-								message: 'Month is required'
-							}
-						}
-					},
-					'card_expiry_year': {
-						validators: {
-							notEmpty: {
-								message: 'Year is required'
-							}
-						}
-					},
-					'card_cvv': {
-						validators: {
-							notEmpty: {
-								message: 'CVV is required'
-							},
-							digits: {
-								message: 'CVV must contain only digits'
-							},
-							stringLength: {
-								min: 3,
-								max: 4,
-								message: 'CVV must contain 3 to 4 digits only'
+								message: 'Perakuan diperlukan'
 							}
 						}
 					}
