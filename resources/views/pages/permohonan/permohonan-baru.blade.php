@@ -849,7 +849,7 @@
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																		<select name="mod" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																		<select name="mod" id="mod"  class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																			@foreach ($mod as $mod)
 																			<option></option>
 																			<option value="{{ $mod->kodmod}}">{{ $mod->mod}}</option>
@@ -881,7 +881,7 @@
 																<!--begin::Row-->
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
-																		<select name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																		<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																			@foreach ($biaya as $biaya)
 																			<option></option>
 																			<option value="{{ $biaya->kodbiaya}}">{{ $biaya->biaya}}</option>
@@ -945,15 +945,15 @@
 															</label>
 															<!--end::Label-->
 															<div class="form-check">
-																<input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"  name="yuran" />
-																<label class="form-check-label" for="flexCheckDefaultb" >
+																<input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" />
+																<label class="form-check-label">
 																	Yuran
 																</label>
 															</div>
 															<br>
 															<div class="form-check">
-																<input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"  name="elaun" />
-																<label class="form-check-label" for="flexCheckDefault">
+																<input class="form-check-input" type="checkbox" value="1" id="elaun"  name="elaun" />
+																<label class="form-check-label">
 																	Elaun Wang Saku
 																</label>
 															</div>
@@ -1128,20 +1128,36 @@
 		<!--end::Javascript-->
 
 		<script>
-			$(function(){
-				$(".lain_hubungan").hide();
-				$('.hubungan_waris').change(function(){ 
-					var value = $(this).val();
-					if(value == "Lain-lain"){
-						$(".lain_hubungan").show();
-					}else{
-						$(".lain_hubungan_input").val("");
-						$(".lain_hubungan").hide();
-					}
-				});
-				
-			});
-			
+			function select1(){
+            var sumber = document.getElementById('sumber_biaya').value;
+			var mod = document.getElementById('mod').value;
+            if(sumber=="1" && mod=="1"){
+                document.getElementById("yuran").disabled = true;
+				document.getElementById("elaun").disabled = false;
+            }
+			else if(sumber!="1" && mod=="2"){
+                document.getElementById("yuran").disabled = false;
+				document.getElementById("elaun").disabled = true;
+            }
+			else if(sumber=="1" && mod=="2"){
+                document.getElementById("yuran").disabled = true;
+				document.getElementById("elaun").disabled = true;
+            }
+            else{
+                document.getElementById("yuran").disabled = false;
+				document.getElementById("elaun").disabled = false;
+            }
+        }
+
+		/*function select2(){
+            var mod = document.getElementById('mod').value;
+            if(mod=="2"){
+                document.getElementById("elaun").disabled = true;
+            }
+            else{
+                document.getElementById("yuran").disabled = false;
+            }
+        }*/
 		</script>
 
 </x-default-layout>
