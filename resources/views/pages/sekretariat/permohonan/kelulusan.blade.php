@@ -169,6 +169,29 @@
                                             </tbody>
                                         </table>
                                         <br>
+                                        {{-- <div class="col-md-6 col-sm-6 text-right">
+                                            <div class="body">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".launch-pricing-modal">Sahkan</button>
+                                                <div class="modal fade launch-pricing-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">                                            
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                            </div>
+                                                            <div class="modal-body pricing_page text-center pt-4 mb-4">
+                                                                <div class="form-group c_form_group">
+                                                                    <label>Berikan Catatan Anda.</label>
+                                                                    <textarea rows="4" type="text" class="form-control" placeholder=""></textarea>
+                                                                </div> 
+                                                                <div class="col-12">
+                                                                    <button class="btn btn-success">Hantar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> --}}
                                         <div class="pengesahan" style="text-align: right;">
                                             <button class="btn btn-success btn-round" data-toggle="modal" data-target="#exampleModalCenter" onclick="myinput()">Sahkan</button>
                                         </div>
@@ -186,8 +209,10 @@
         <script src="assets/bundles/vendorscripts.bundle.js"></script>
 
         <script>
+            //sorting function
             $('#sortTable').DataTable();
 
+            // check all checkboxes at once
             function toggle(source) {
                 var checkboxes = document.querySelectorAll('input[type="checkbox"]');
                 for (var i = 0; i < checkboxes.length; i++) {
@@ -196,6 +221,7 @@
                 }
             }
 
+            //input maklumat for kelulusan
             function myinput(){
                 var no = prompt("No. Mesyuarat:");
                 var tarikh = prompt("Tarikh Mesyuarat:");
@@ -260,4 +286,12 @@
         <script src="../js/pages/tables/jquery-datatable.js"></script>
         <script src="../js/pages/charts/morris.js"></script>
         <script src="../js/pages/charts/c3.js"></script>
+
+        <!-- Javascript -->
+        <script src="assets/bundles/libscripts.bundle.js"></script>    
+        <script src="assets/bundles/vendorscripts.bundle.js"></script>
+
+        <!-- Vedor js file and create bundle with grunt  --> 
+        <!-- Project core js file minify with grunt --> 
+        <script src="assets/bundles/mainscripts.bundle.js"></script>
 </x-default-layout> 

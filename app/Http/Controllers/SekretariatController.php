@@ -28,7 +28,6 @@ class SekretariatController extends Controller
 
     public function keputusanSaringan()
     {
-
         return view('pages.sekretariat.permohonan.kelulusan');
     }
     
@@ -40,12 +39,10 @@ class SekretariatController extends Controller
     public function keputusanPermohonan()
     {
         return view('pages.sekretariat.permohonan.keputusan');
-        //return redirect('pages.sekretariat.permohonan.keputusan')->with('status','Emel notifikasi telah dihantar ke pemohon.');
     }
 
     public function maklumatKeputusan()
     {
-
         return view('pages.sekretariat.permohonan.maklumatKeputusan');
     }
 
@@ -131,7 +128,6 @@ class SekretariatController extends Controller
                 'catatan3'=>$catatan3,
             ];
         }
-
         Mail::to("fateennashuha9@gmail.com")->send(new mailKeputusan($catatan));
         return redirect('/sekretariatKeputusan')->with('message','Emel notifikasi telah dihantar kepada pemohon');
     }

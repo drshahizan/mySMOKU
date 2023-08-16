@@ -38,131 +38,142 @@
     {{-- Table --}}
     <div style="margin: 10px;display: block;">
         <div class="tittle" style="text-align: center; font-size: 14px;">
-            <b>SENARAI PERMOHONAN BKOKU YANG DISOKONG</b>
+            <b>SENARAI PERMOHONAN BKOKU/PPK YANG DISOKONG</b>
         </div>
         <br>
         <table width="100%" style="border: 1px solid black!important;" id="sortTable" class="table table-striped">
             <thead>
                 <tr>
-                    <th style="width: 13%"><b>ID Permohonan</b></th>
-                    <th style="width: 5%"><b>Jenis Kecacatan</b></th>                                        
-                    <th style="width: 15%"><b>Nama</b></th>
-                    <th style="width: 8%"><b>No. Kad Pengenalan</b></th>
-                    <th style="width: 7%"><b>Peringkat Pengajian </b></th>
-                    <th style="width: 20%"><b>Kursus</b></th>
-                    <th style="width: 10%"><b>Institusi Pengajian</b></th>
+                    <td style="width: 3%" class="text-center"><b>No.</b></td>
+                    <th style="width: 15%" class="text-center"><b>ID Permohonan</b></th>
+                    <th style="width: 5%" class="text-center"><b>Jenis Permohonan</b></th>
+                    <th style="width: 20%" class="text-center"><b>Nama</b></th>
+                    <th style="width: 5%" class="text-center"><b>Jenis Kecacatan</b></th>                                        
+                    <th style="width: 5%" class="text-center"><b>Peringkat Pengajian </b></th>
+                    <th style="width: 15%" class="text-center"><b>Nama Kursus</b></th>
+                    <th style="width: 5%" class="text-center"><b>Institusi Pengajian</b></th>
                     <th style="width: 9%" class="text-center"><b>Tarikh Mula Pengajian</b></th>
-                    <th style="width: 13%" class="text-center"><b>Tarikh Tamat Pengajian</b></th>
+                    <th style="width: 18%" class="text-center"><b>Tarikh Tamat Pengajian</b></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>                                            
-                    <td>KPTBKOKUB980112105666</td>
-                    <td>Pendengaran</td>                                       
+                <tr>
+                    <td>1</td>                                            
+                    <td>KPTPPK/3/B980112105666</td>
+                    <td>PPK</td>
                     <td>Aishah Binti Samsudin</td>
-                    <td>020112105666</td>
+                    <td>Pendengaran</td>                                       
                     <td>Sarjana Muda</td>
-                    <td>Business Administration (Hons) in International Business and Finance</td>
-                    <td>Universiti Tunku Abdul Rahman</td>
+                    <td>Bachelor Of Business Administration (Hons) In International Business And Finance</td>
+                    <td>UTAR</td>
                     <td class="text-center">02/07/2020</td>
                     <td class="text-center">20/07/2023</td>
                 </tr> 
-                <tr>                                            
-                    <td>KPTBKOKUM970703041223</td>
-                    <td>penglihatan</td>
+                <tr>
+                    <td>2</td>                                            
+                    <td>KPTBKOKU/2/970703041223</td>
+                    <td>BKOKU</td>
                     <td>Mohd Ali Bin Abu Kassim</td>
-                    <td>030703041223</td>
+                    <td>penglihatan</td>
                     <td>Diploma</td>
-                    <td>Information and Communication Technology</td>
-                    <td>Universiti Antarabangsa Inti</td>
+                    <td>Diploma In Information And Communication Technology</td>
+                    <td>INTI</td>
                     <td class="text-center">03/09/2019</td>
                     <td class="text-center">27/07/2023</td>
                 </tr> 
-                <tr>                                            
-                    <td>KPTBKOKUB970204052445</td>
-                    <td>penglihatan</td>
+                <tr> 
+                    <td>3</td>                                           
+                    <td>KPT/BKOKU/3/970204052445</td>
+                    <td>BKOKU</td>
                     <td>Sarah Binti Yusri</td>
-                    <td>970204052445</td>
+                    <td>penglihatan</td>
                     <td>Sarjana Muda</td>
-                    <td>Science in Psychology</td>
-                    <td>Universiti Teknologi MARA</td>
+                    <td>Bachelor Of Science In Psychology With Management</td>
+                    <td>UiTM(Shah Alam)</td>
                     <td class="text-center">15/09/2019</td>
                     <td class="text-center">05/07/2023</td>
                 </tr> 
                 <tr>
-                    <td>KPTBKOKUM970703041223</td>
-                    <td>fizikal</td>
+                    <td>4</td>
+                    <td>KPT/BKOKU/5/970703041223</td>
+                    <td>BKOKU</td>
                     <td>Santosh A/L Ariyaran</td>
-                    <td>970703041223</td> 
+                    <td>fizikal</td>
                     <td>Sarjana</td>
-                    <td>Science Biotechnology</td>
-                    <td>Universiti Teknologi Petronas</td>                                     
+                    <td>Master Of Science Data Science</td>
+                    <td>UTP</td>                                     
                     <td class="text-center">10/7/2021</td>
                     <td class="text-center">03/08/2024</td>
                 </tr> 
                 <tr>
-                    <td>KPTBKOKUM960909105668</td>
-                    <td>pertuturan</td>                                        
+                    <td>5</td>
+                    <td>KPT/BKOKU/6/960909105668</td>
+                    <td>BKOKU</td>
                     <td>Ling Kai Jie</td>
-                    <td>960909105668</td>
+                    <td>pertuturan</td>                                        
                     <td>Doktor Falsafah</td>
-                    <td>Social Science And Humanities</td>
-                    <td>Universiti Teknologi MARA</td>
+                    <td>Doctor Of Philosophy (Phd) In Social Science And Humanities</td>
+                    <td>UiTM(Shah Alam)</td>
                     <td class="text-center">08/07/2022</td>
                     <td class="text-center">08/07/2024</td>
                 </tr> 
                 <tr>
-                    <td>KPTBKOKUM950804082447</td>
-                    <td>pertuturan</td>                                        
+                    <td>6</td>
+                    <td>KPT/BKOKU/6/950804082447</td>
+                    <td>BKOKU</td>
                     <td>Akmal Bin Kairuddin</td>
-                    <td>950804082447</td>
+                    <td>pertuturan</td>                                        
                     <td>Doktor Falsafah</td>
-                    <td>Creative Industries and Art Practice</td>
-                    <td>Universiti Teknologi Kreatif Limkokwing</td>
+                    <td>Doctor Of Philosophy (Phd) Creative Industries & Art Practice</td>
+                    <td>Universiti Limkokwing</td>
                     <td class="text-center">07/07/2023</td>
                     <td class="text-center">18/07/2025</td>
                 </tr>
                 <tr>
-                    <td>KPTBKOKUD021212050334</td>
-                    <td>pertuturan</td>                                        
+                    <td>7</td>
+                    <td>KPT/BKOKU/3/021212050334</td>
+                    <td>BKOKU</td>
                     <td>Santishwaran A/L Paven</td>
-                    <td>021212050334</td>
+                    <td>pertuturan</td>                                        
                     <td>Sarjana Muda</td>
-                    <td>Computer Science (Computer Network and Security)</td>
-                    <td>Universiti Teknologi Malaysia</td>
+                    <td>Bachelor Of Science Computer Science</td>
+                    <td>UTM(Skudai)</td>
                     <td class="text-center">05/09/2021</td>
                     <td class="text-center">05/08/2025</td>
                 </tr>
                 <tr>
-                    <td>KPTBKOKUP990201065225</td>
-                    <td>Pendengaran</td>                                    
+                    <td>8</td>
+                    <td>KPT/PPK/3/990201065225</td>
+                    <td>PPK</td>
                     <td>Ezra Hanisah Binti Md Yunos</td>
-                    <td>890201065225</td>
+                    <td>Pendengaran</td>                                    
                     <td>Sarjana Muda</td>
-                    <td>Computer Science (Graphics and Multimedia Software)</td>
-                    <td>Universiti Teknologi Malaysia</td>
+                    <td>Bachelor Of Science Computer Science</td>
+                    <td>UTM(Skudai)</td>
                     <td class="text-center">05/09/2020</td>
                     <td class="text-center">05/07/2024</td>
                 </tr>
                 <tr>
-                    <td>KPTBKOKUD010305058473</td>
-                    <td>fizikal</td>                                        
+                    <td>9</td>
+                    <td>KPT/BKOKU/3/010305058473</td>
+                    <td>BKOKU</td>
                     <td>Arshahad Bin Kairul Zaman</td>
-                    <td>010305058473</td>
+                    <td>fizikal</td>                                        
                     <td>Sarjana Muda</td>
-                    <td>Industrial Mathematics</td>
-                    <td>Universiti Teknologi MARA</td>
+                    <td>Bachelor Of Public Administration (Honours)</td>
+                    <td>UiTM(Dungun)</td>
                     <td class="text-center">07/09/2021</td>
                     <td class="text-center">20/07/2025</td>
                 </tr>
                 <tr>
-                    <td>KPTBKOKUB981004045253</td>
-                    <td>Pembelajaran</td>
+                    <td>10</td>
+                    <td>KPT/BKOKU/3/981004045253</td>
+                    <td>BKOKU</td>
                     <td>Syed Abdul Kassim Hussain Yusof</td>
-                    <td>981004045253</td>
+                    <td>Pembelajaran</td>
                     <td>Sarjana Muda</td>
-                    <td>Business Administration (Honours) Healthcare Management</td>
-                    <td>Universiti Teknologi MARA</td>                                        
+                    <td>Bachelor Of Business Administration (Honours) Healthcare Management</td>
+                    <td>UiTM(Shah Alam)</td>                                        
                     <td class="text-center">05/09/2022</td>
                     <td class="text-center">20/07/2025</td>
                 </tr>
