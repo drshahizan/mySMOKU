@@ -17,6 +17,7 @@ use App\Models\Kursus;
 use App\Models\Mod;
 use App\Models\Sumberbiaya;
 use App\Models\Status;
+use App\Models\JenisOku;
 use Illuminate\Support\Facades\Auth;
 use DB;
 
@@ -28,7 +29,8 @@ class PermohonanController extends Controller
         $smoku = Smoku::join('bk_jantina','bk_jantina.kodjantina','=','smoku.jantina')
         ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'smoku.bangsa')
         ->join('bk_hubungan','bk_hubungan.kodhubungan','=','smoku.hubungan')
-        ->get(['smoku.*', 'bk_jantina.*', 'bk_bangsa.*', 'bk_hubungan.*'])
+        ->join('bk_jenisoku','bk_jenisoku.kodoku','=','smoku.kecacatan')
+        ->get(['smoku.*', 'bk_jantina.*', 'bk_bangsa.*', 'bk_hubungan.*', 'bk_jenisoku.*'])
         ->where('nokp', Auth::user()->id());
         $infoipt = Infoipt::all()->sortBy('namaipt');
         $peringkat = PeringkatPengajian::all()->sortBy('kodperingkat');
@@ -36,13 +38,18 @@ class PermohonanController extends Controller
         $mod = Mod::all()->sortBy('kodmod');
         $biaya = Sumberbiaya::all()->sortBy('kodbiaya');
 
-        $pelajar = Permohonan::all()->where('nokp_pelajar', Auth::user()->id());
-        $waris = Waris::all()->where('nokp_pelajar', Auth::user()->id());
+        $pelajar = Permohonan::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
+        //->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
+        //->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
+        ->get(['pelajar.*', 'bk_jantina.*'])
+        ->where('nokp_pelajar', Auth::user()->id());
+        $waris = Waris::join('bk_hubungan','bk_hubungan.kodhubungan','=','waris.hubungan')
+        ->get(['waris.*', 'bk_hubungan.*'])
+        ->where('nokp_pelajar', Auth::user()->id());
         $akademik = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
         ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
         ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*'])
         ->where('nokp_pelajar', Auth::user()->id());
-        //return $akademik;
         $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id());
         $status = Status::all()->where('nokp_pelajar', Auth::user()->id());
         if (!$status->isEmpty())
@@ -133,7 +140,7 @@ class PermohonanController extends Controller
             'elaun' => $request->elaun,
             'amaun' => $request->amaun,
             'perakuan' => $request->perakuan,
-			'status' => '2',
+            'status' => '2',
             
         ]);
 
