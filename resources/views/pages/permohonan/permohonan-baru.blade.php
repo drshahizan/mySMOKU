@@ -143,13 +143,35 @@ $(document).ready(function(){
 													</div>
 													<!--end::Step 4-->
 													<!--begin::Step 5-->
-													<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
+													<div class="stepper-item" data-kt-stepper-element="nav">
 														<!--begin::Wrapper-->
 														<div class="stepper-wrapper">
 															<!--begin::Icon-->
 															<div class="stepper-icon w-40px h-40px">
 																<i class="ki-duotone ki-check fs-2 stepper-check"></i>
 																<span class="stepper-number">5</span>
+															</div>
+															<!--end::Icon-->
+															<!--begin::Label-->
+															<div class="stepper-label">
+																<h3 class="stepper-title">Dokumen</h3>
+																<div class="stepper-desc fw-semibold">Salinan Dokumen</div>
+															</div>
+															<!--end::Label-->
+															
+														</div>
+														<!--end::Wrapper-->
+														<div class="stepper-line h-40px"></div>
+													</div>
+													<!--end::Step 5-->
+													<!--begin::Step 5-->
+													<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
+														<!--begin::Wrapper-->
+														<div class="stepper-wrapper">
+															<!--begin::Icon-->
+															<div class="stepper-icon w-40px h-40px">
+																<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+																<span class="stepper-number">6</span>
 															</div>
 															<!--end::Icon-->
 															<!--begin::Label-->
@@ -172,7 +194,7 @@ $(document).ready(function(){
 															<!--begin::Icon-->
 															<div class="stepper-icon w-40px h-40px">
 																<i class="ki-duotone ki-check fs-2 stepper-check"></i>
-																<span class="stepper-number">6</span>
+																<span class="stepper-number">7</span>
 															</div>
 															<!--end::Icon-->
 															<!--begin::Label-->
@@ -1001,6 +1023,115 @@ $(document).ready(function(){
 													<!--end::Wrapper-->
 												</div>
 												<!--end::Step 4-->
+												<!--begin::Step 5-->
+													<div class="stepper-item" data-kt-stepper-element="nav">
+														<!--begin::Wrapper-->
+														<div class="stepper-wrapper">
+															<!--begin::Icon-->
+															<div class="stepper-icon w-40px h-40px">
+																<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+																<span class="stepper-number">5</span>
+															</div>
+															<!--end::Icon-->
+															<!--begin::Label-->
+															<div class="stepper-label">
+																<h3 class="stepper-title">Dokumen</h3>
+																<div class="stepper-desc fw-semibold">Salinan Dokumen</div>
+															</div>
+															<!--end::Label-->
+															
+														</div>
+														<!--end::Wrapper-->
+														<div class="stepper-line h-40px"></div>
+													</div>
+													<!--end::Step 5-->
+ <!--begin::Step 5-->
+												<div data-kt-stepper-element="content">
+												@csrf
+													<!--begin::Wrapper-->
+													<div class="w-100">
+														<!--begin::Heading-->
+														<div class="pb-10 pb-lg-15">
+															<!--begin::Title-->
+															<h2 class="fw-bold text-dark">Dokumen</h2>
+															<!--end::Title-->
+															<!--begin::Notice-->
+															<div class="text-muted fw-semibold fs-6">Senarai Dokumen</div>
+															<!--end::Notice-->
+														</div>
+														<!--end::Heading-->
+														
+
+														<!--begin::Table-->
+														<table id="kt_file_manager_list" data-kt-filemanager-table="files" class="table align-middle table-row-dashed fs-6 gy-5">
+															<thead>
+																<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+																	
+																	<th class="min-w-250px">Nama</th>
+																	<th class="min-w-10px">Tarikh Kemaskini</th>
+																	<th class="min-w-125px"></th>
+																	<th class="w-125px"></th>
+																</tr>
+															</thead>
+															<tbody class="fw-semibold text-gray-600">
+																<tr>
+																	
+																	<td>
+																		<div class="d-flex align-items-center">
+																			<i class="ki-duotone ki-files fs-2x text-primary me-4"></i>
+																			<a href="#" class="text-gray-800 text-hover-primary">Salinan Penyata Bank</a>
+																		</div>
+																	</td>
+																	<td>15 Apr 2023, 6:05 pm</td>
+																	<td>{{-- Upload Bank --}}
+																	<div class="form-group">
+																		<input type="file" name="akaunBank" placeholder="Choose file" id="file">
+																			@error('file')
+																			<div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+																			@enderror
+																	</div>
+																	</td>
+																	<td class="text-end" data-kt-filemanager-table="action_dropdown">
+																		<div class="d-flex justify-content-end">
+																			
+																			<!--begin::More-->
+																			<div class="ms-2">
+																				<button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+																					<i class="ki-duotone ki-dots-square fs-5 m-0">
+																						<span class="path1"></span>
+																						<span class="path2"></span>
+																						<span class="path3"></span>
+																						<span class="path4"></span>
+																					</i>
+																				</button>
+																				<!--begin::Menu-->
+																				<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-150px py-4" data-kt-menu="true">
+																					<!--begin::Menu item-->
+																					<div class="menu-item px-3">
+																						<a href="#" class="menu-link px-3">Download File</a>
+																					</div>
+																					<!--end::Menu item-->
+																					<!--begin::Menu item-->
+																					<div class="menu-item px-3">
+																						<a href="#" class="menu-link text-danger px-3" data-kt-filemanager-table-filter="delete_row">Delete</a>
+																					</div>
+																					<!--end::Menu item-->
+																				</div>
+																				<!--end::Menu-->
+																			</div>
+																			<!--end::More-->
+																		</div>
+																	</td>
+																</tr>
+
+															</tbody>
+														</table>
+														<!--end::Table-->
+		
+													</div>
+													<!--end::Wrapper-->
+												</div>
+												<!--end::Step 5-->
 
 												<!--begin::Step 5-->
 												<div data-kt-stepper-element="content">
