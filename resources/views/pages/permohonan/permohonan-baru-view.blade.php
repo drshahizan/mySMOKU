@@ -143,13 +143,35 @@ $(document).ready(function(){
 													</div>
 													<!--end::Step 4-->
 													<!--begin::Step 5-->
-													<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
+													<div class="stepper-item" data-kt-stepper-element="nav">
 														<!--begin::Wrapper-->
 														<div class="stepper-wrapper">
 															<!--begin::Icon-->
 															<div class="stepper-icon w-40px h-40px">
 																<i class="ki-duotone ki-check fs-2 stepper-check"></i>
 																<span class="stepper-number">5</span>
+															</div>
+															<!--end::Icon-->
+															<!--begin::Label-->
+															<div class="stepper-label">
+																<h3 class="stepper-title">Dokumen</h3>
+																<div class="stepper-desc fw-semibold">Salinan Dokumen</div>
+															</div>
+															<!--end::Label-->
+															
+														</div>
+														<!--end::Wrapper-->
+														<div class="stepper-line h-40px"></div>
+													</div>
+													<!--end::Step 5-->
+													<!--begin::Step 5-->
+													<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
+														<!--begin::Wrapper-->
+														<div class="stepper-wrapper">
+															<!--begin::Icon-->
+															<div class="stepper-icon w-40px h-40px">
+																<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+																<span class="stepper-number">6</span>
 															</div>
 															<!--end::Icon-->
 															<!--begin::Label-->
@@ -172,7 +194,7 @@ $(document).ready(function(){
 															<!--begin::Icon-->
 															<div class="stepper-icon w-40px h-40px">
 																<i class="ki-duotone ki-check fs-2 stepper-check"></i>
-																<span class="stepper-number">6</span>
+																<span class="stepper-number">7</span>
 															</div>
 															<!--end::Icon-->
 															<!--begin::Label-->
@@ -303,7 +325,7 @@ $(document).ready(function(){
 																<div class="col-12">
 																	<!--begin::Input-->
 																	<select name="bangsa" class="form-select form-select-lg form-select-solid" >
-																		<option value="{{$pelajar->kodbangsa}}">{{$pelajar->bangsa}}</option>
+																		<option value="">{{$pelajar->bangsa}}</option>
 																	</select>
 																	<!--end::Input-->
 																</div>
@@ -460,7 +482,7 @@ $(document).ready(function(){
 														</div>
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>
+																<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
 																
 																
 																<!--end::Label-->
@@ -472,20 +494,7 @@ $(document).ready(function(){
 																</div>
 																<!--end::Input wrapper-->
 															</div>
-															<div class="col-md-6 fv-row">
-																<div class="col-12">
-																	{{-- <button type="button" class="btn btn-flex btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_upload">
-																	<i class="ki-duotone ki-folder-up fs-2">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>Muat Naik Salinan Bank Penyata</button> --}}
-																	<label style="color: black; padding-bottom:8px;">Salinan Bank Penyata</label> <a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a><br> 
-																		<input type="file" id="upload"  hidden/>
-																		<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:40%; text-align:center;">
-																		<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
-																	</label>
-																</div>
-															</div>
+															
 														</div>
 														<!--end::Input group-->
 													</div>
@@ -726,18 +735,6 @@ $(document).ready(function(){
 														</div>
 														<!--end::Input group-->
 														
-														{{-- Upload Surat Tawaran Pengajian --}}
-														<div class="d-flex flex-column mb-7 fv-row">
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">Surat Tawaran Pengajian</span>
-															</label>
-															<input type="file" id="upload"  hidden/>
-															<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:25%; text-align:center;">
-																<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
-															</label>
-														</div>
-														{{-- End - Upload Surat Tawaran Pengajian --}}
-
 														<!--begin::Input group-->
 														<div class="row mb-10">
 															<!--begin::Col-->
@@ -749,7 +746,7 @@ $(document).ready(function(){
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
 																	<select name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																		<option>{{ $akademik->peringkat_pengajian}}</option>
+																		<option>{{$akademik->peringkat}}</option>
 																	</select>
 																	
 																	
@@ -764,8 +761,8 @@ $(document).ready(function(){
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Nama Pusat Pengajian</label>
 																<!--end::Label-->
 																	<!--begin::Input wrapper-->
-																		<select disabled="true" name="id_institusi" class="form-select form-select-solid" data-hide-search="true" data-placeholder="Pilih">
-																			<option>{{ $akademik->id_institusi}}</option>
+																		<select name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																			<option>{{ $akademik->namaipt}}</option>
 																		</select>
 																	<!--end::Input wrapper-->
 															</div>
@@ -860,7 +857,7 @@ $(document).ready(function(){
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																		<select name="mod" class="form-select form-select-solid" data-hide-search="true" data-placeholder="Pilih">
+																		<select name="mod" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																			<option>{{ $akademik->mod}}</option>
 																			
 																		</select>
@@ -892,7 +889,7 @@ $(document).ready(function(){
 																	<!--begin::Input wrapper-->
 																		<select name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																			
-																			<option>{{ $akademik->sumber_biaya}}</option>
+																			<option>{{ $akademik->biaya}}</option>
 																			
 																		</select>
 																		
@@ -974,22 +971,73 @@ $(document).ready(function(){
 																<input type="text" class="form-control form-control-solid" name="amaun" placeholder="" value="{{ $tuntutanpermohonan->amaun}}" readonly/>
 																<!--end::Input-->
 															</div>
-															{{-- Upload Resit --}}
-															<div class="d-flex flex-column mb-7 fv-row">
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																	<span class="">Resit</span>
-																</label>
-																<input type="file" id="upload"  hidden/>
-																<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:25%; text-align:center;">
-																	<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
-																</label>
-															</div>
 														</div>
 		
 													</div>
 													<!--end::Wrapper-->
 												</div>
 												<!--end::Step 4-->
+
+												<!--begin::Step 5-->
+												<div data-kt-stepper-element="content">
+												@csrf
+													<!--begin::Wrapper-->
+													<div class="w-100">
+														<!--begin::Heading-->
+														<div class="pb-10 pb-lg-15">
+															<!--begin::Title-->
+															<h2 class="fw-bold text-dark">Dokumen</h2>
+															<!--end::Title-->
+															<!--begin::Notice-->
+															<div class="text-muted fw-semibold fs-6">Senarai Dokumen</div>
+															<!--end::Notice-->
+														</div>
+														<!--end::Heading-->
+														
+														
+														<!--begin::Table-->
+														<table id="kt_file_manager_list" data-kt-filemanager-table="files" class="table align-middle table-row-dashed fs-6 gy-5">
+															<thead>
+																<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+																	
+																	
+																	<th class="w-250px">Nama</th>
+																	<th class="w-125px"></th>
+																	<th class="w-125px"></th>
+																</tr>
+															</thead>
+															<tbody class="fw-semibold text-gray-600">
+															@foreach($dokumen as $dokumen)
+																<tr>
+																	<td class="text-gray-800">Salinan Penyata Bank</td>
+																	@if($dokumen->akaunBank)
+																	<td><a href="/assets/dokumen/{{$dokumen->akaunBank}}" target="_blank">Papar</a></td>
+																	<td><a href="{{url('/download',$dokumen->akaunBank)}}">Muat Turun</a></td>
+																	@endif
+																</tr>
+																<tr>
+																	<td class="text-gray-800">Salinan Surat Tawaran Pengajian</td>
+																	@if($dokumen->suratTawaran)
+																	<td><a href="/assets/dokumen/{{$dokumen->suratTawaran}}" target="_blank">Papar</a></td>
+																	<td><a href="{{url('/download',$dokumen->suratTawaran)}}">Muat Turun</a></td>
+																	@endif
+																</tr>
+																<tr>
+																	<td class="text-gray-800">Salinan Resit/Invois</td>
+																	@if($dokumen->invoisResit)
+																	<td><a href="/assets/dokumen/{{$dokumen->invoisResit}}" target="_blank">Papar</a></td>
+																	<td><a href="{{url('/download',$dokumen->invoisResit)}}">Muat Turun</a></td>
+																	@endif
+																</tr>
+															@endforeach	
+															</tbody>
+														</table>
+														<!--end::Table-->
+		
+													</div>
+													<!--end::Wrapper-->
+												</div>
+												<!--end::Step 5-->
 
 												<!--begin::Step 5-->
 												<div data-kt-stepper-element="content">
@@ -1034,43 +1082,43 @@ $(document).ready(function(){
 														<!--begin::Heading-->
 														<div class="pb-8 pb-lg-10">
 															<!--begin::Title-->
-															<h2 class="fw-bold text-dark">Permohonan anda telah berjaya dihantar!</h2>
+															<h2 class="fw-bold text-dark">Permohonan Anda Telah Dihantar!</h2>
 															<!--end::Title-->
 															<!--begin::Notice-->
-															<!-- <div class="text-muted fw-semibold fs-6">Untuk maklumat lanjut, sila......</div> -->
+															<div class="text-muted fw-semibold fs-6">Untuk maklumat lanjut, sila......</div>
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
 														<!--begin::Body-->
-														<!-- <div class="mb-0"> -->
+														<div class="mb-0">
 															<!--begin::Text-->
-															<!-- <div class="fs-6 text-gray-600 mb-5">Writing headlines for blog posts is as much an art as it is a science and probably warrants its own post, but for all advise is with what works for your great & amazing audience.</div> -->
+															<div class="fs-6 text-gray-600 mb-5">Writing headlines for blog posts is as much an art as it is a science and probably warrants its own post, but for all advise is with what works for your great & amazing audience.</div>
 															<!--end::Text-->
 															<!--begin::Alert-->
 															<!--begin::Notice-->
-															<!-- <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6"> -->
+															<div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
 																<!--begin::Icon-->
-																<!-- <i class="ki-duotone ki-information fs-2tx text-warning me-4">
+																<i class="ki-duotone ki-information fs-2tx text-warning me-4">
 																	<span class="path1"></span>
 																	<span class="path2"></span>
 																	<span class="path3"></span>
-																</i> -->
+																</i>
 																<!--end::Icon-->
 																<!--begin::Wrapper-->
-																<!-- <div class="d-flex flex-stack flex-grow-1"> -->
+																<div class="d-flex flex-stack flex-grow-1">
 																	<!--begin::Content-->
-																	<!-- <div class="fw-semibold">
+																	<div class="fw-semibold">
 																		<h4 class="text-gray-900 fw-bold">We need your attention!</h4>
 																		<div class="fs-6 text-gray-700">To start using great tools, please,
 																		...</div>
-																	</div> -->
+																	</div>
 																	<!--end::Content-->
-																<!-- </div> -->
+																</div>
 																<!--end::Wrapper-->
-															<!-- </div> -->
+															</div>
 															<!--end::Notice-->
 															<!--end::Alert-->
-														<!-- </div> -->
+														</div>
 														<!--end::Body-->
 													</div>
 													<!--end::Wrapper-->
