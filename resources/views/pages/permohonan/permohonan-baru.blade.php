@@ -1044,10 +1044,10 @@ $(document).ready(function(){
 														<!--begin::Table-->
 														<table id="kt_file_manager_list" data-kt-filemanager-table="files" class="table align-middle table-row-dashed fs-6 gy-5">
 															<thead>
-																<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+																<tr class="text-start text-dark fw-bold fs-7 text-uppercase gs-0">
 																	
 																	<th class="min-w-250px">Nama</th>
-																	<th class="min-w-10px">Tarikh Kemaskini</th>
+																	<!-- <th class="min-w-10px">Tarikh Kemaskini</th> -->
 																	<th class="min-w-125px"></th>
 																	<th class="w-125px"></th>
 																</tr>
@@ -1074,31 +1074,7 @@ $(document).ready(function(){
 																		<div class="d-flex justify-content-end">
 																			
 																			<!--begin::More-->
-																			<div class="ms-2">
-																				<button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-																					<i class="ki-duotone ki-dots-square fs-5 m-0">
-																						<span class="path1"></span>
-																						<span class="path2"></span>
-																						<span class="path3"></span>
-																						<span class="path4"></span>
-																					</i>
-																				</button>
-																				<!--begin::Menu-->
-																				<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-150px py-4" data-kt-menu="true">
-																					<!--begin::Menu item-->
-																					<div class="menu-item px-3">
-																						<a href="#" class="menu-link px-3">Download File</a>
-																					</div>
-																					<!--end::Menu item-->
-																					<!--begin::Menu item-->
-																					<div class="menu-item px-3">
-																						<a href="#" class="menu-link text-danger px-3" data-kt-filemanager-table-filter="delete_row">Delete</a>
-																					</div>
-																					<!--end::Menu item-->
-																				</div>
-																				<!--end::Menu-->
-																			</div>
-																			<!--end::More-->
+																			
 																		</div>
 																	</td>
 																</tr>
