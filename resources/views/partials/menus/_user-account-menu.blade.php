@@ -9,7 +9,9 @@
                     <img alt="Logo" src="{{ Auth::user()->profile_photo_url }}"/>
                 @else
                     <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', Auth::user()->nokp) }}">
-                        {{ substr(Auth::user()->nokp, 0, 1) }}
+                    <!-- <div class="symbol-label fs-3"> -->
+                        {{ substr(Auth::user()->nokp,0,1) }}
+                        <!-- {{ Auth::user()->nokp}} -->
                     </div>
                 @endif
             </div>

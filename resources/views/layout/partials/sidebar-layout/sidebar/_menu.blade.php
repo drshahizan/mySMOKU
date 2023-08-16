@@ -27,9 +27,17 @@
 	
 		<div class="menu-item">
 			<a class="menu-link" href="{{ route('sejarahpermohonan') }}">
-			<!-- "{{ route('dashboard') }}" -->
+			
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Sejarah</span>
+			</a>
+		</div>
+
+		<div class="menu-item">
+			<a class="menu-link" href="{{ route('salinanmaklumat') }}">
+			
+					<span class="menu-icon">{!! getIcon('search', 'fs-2') !!}</span>
+					<span class="menu-title">Test Salinan Maklumat</span>
 			</a>
 		</div>
 		
