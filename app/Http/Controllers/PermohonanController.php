@@ -54,6 +54,10 @@ class PermohonanController extends Controller
         ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*', 'bk_mod.*', 'bk_sumberbiaya.*'])
         ->where('nokp_pelajar', Auth::user()->id());
         $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id());
+        $akademikmqa = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
+        ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
+        ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*'])
+        ->where('nokp_pelajar', Auth::user()->id());
         $status = Status::all()->where('nokp_pelajar', Auth::user()->id());
         $dokumen = Dokumen::all()->where('nokp_pelajar', Auth::user()->id());
         if (!$status->isEmpty())
@@ -64,7 +68,7 @@ class PermohonanController extends Controller
         else
         {
             //return view('pages.permohonan.permohonan-baru');
-            return view('pages.permohonan.permohonan-baru', compact('smoku','akademik','infoipt','peringkat','kursus','mod','biaya'));
+            return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','infoipt','peringkat','kursus','mod','biaya'));
         }
         
         
@@ -161,15 +165,22 @@ class PermohonanController extends Controller
         $data=new dokumen();
         
           
-            $file=$request->akaunBank;
-            $filename=time().'.'.$file->getClientOriginalExtension();
-            $request->akaunBank->move('assets/dokumen',$filename);
+            $akaunBank=$request->akaunBank;
+            $filenameakaunBank=time().'.'.$akaunBank->getClientOriginalExtension();
+            $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
+            $suratTawaran=$request->suratTawaran;
+            $filenamesuratTawaran=time().'.'.$suratTawaran->getClientOriginalExtension();
+            $request->suratTawaran->move('assets/dokumen',$filenamesuratTawaran);
+            $invoisResit=$request->invoisResit;
+            $filenameinvoisResit=time().'.'.$invoisResit->getClientOriginalExtension();
+            $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
             
             $data->id_permohonan='KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar;
             $data->nokp_pelajar=$request->nokp_pelajar;
-            $data->akaunBank=$filename;
-            //$data->name=$request->name;
-            //$data->description=$request->description;
+            $data->akaunBank=$filenameakaunBank;
+            $data->suratTawaran=$filenamesuratTawaran;
+            $data->invoisResit=$filenameinvoisResit;
+            
 
             $data->save();
 
