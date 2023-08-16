@@ -164,7 +164,7 @@ $(document).ready(function(){
 														<div class="stepper-line h-40px"></div>
 													</div>
 													<!--end::Step 5-->
-													<!--begin::Step 5-->
+													<!--begin::Step 6-->
 													<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
 														<!--begin::Wrapper-->
 														<div class="stepper-wrapper">
@@ -186,8 +186,8 @@ $(document).ready(function(){
 														<div class="stepper-line h-40px"></div>
 														<!--end::Line-->
 													</div>
-													<!--end::Step 5-->
-													<!--begin::Step 6-->
+													<!--end::Step 6-->
+													<!--begin::Step 7-->
 													<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
 														<!--begin::Wrapper-->
 														<div class="stepper-wrapper">
@@ -209,7 +209,7 @@ $(document).ready(function(){
 														
 														<!--end::Line-->
 													</div>
-													<!--end::Step 6-->
+													<!--end::Step 7-->
 
 
 												</div>
@@ -1023,29 +1023,8 @@ $(document).ready(function(){
 													<!--end::Wrapper-->
 												</div>
 												<!--end::Step 4-->
-												<!--begin::Step 5-->
-													<div class="stepper-item" data-kt-stepper-element="nav">
-														<!--begin::Wrapper-->
-														<div class="stepper-wrapper">
-															<!--begin::Icon-->
-															<div class="stepper-icon w-40px h-40px">
-																<i class="ki-duotone ki-check fs-2 stepper-check"></i>
-																<span class="stepper-number">5</span>
-															</div>
-															<!--end::Icon-->
-															<!--begin::Label-->
-															<div class="stepper-label">
-																<h3 class="stepper-title">Dokumen</h3>
-																<div class="stepper-desc fw-semibold">Salinan Dokumen</div>
-															</div>
-															<!--end::Label-->
-															
-														</div>
-														<!--end::Wrapper-->
-														<div class="stepper-line h-40px"></div>
-													</div>
-													<!--end::Step 5-->
- <!--begin::Step 5-->
+							
+ 												<!--begin::Step 5-->
 												<div data-kt-stepper-element="content">
 												@csrf
 													<!--begin::Wrapper-->
