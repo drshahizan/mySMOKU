@@ -27,7 +27,7 @@ var KTCreateAccount = function () {
 				formSubmitButton.classList.add('d-inline-block');
 				formContinueButton.classList.add('d-none');
 			} else if (stepperObj.getCurrentStepIndex() === 7) {
-				formSubmitButton.classList.add('d-none');
+				formSubmitButton.classList.remove('d-none');
 				formContinueButton.classList.add('d-none');
 			} else {
 				formSubmitButton.classList.remove('d-inline-block');
