@@ -221,7 +221,7 @@ $(document).ready(function(){
 										<!--begin::Content-->
 										<div class="card d-flex flex-row-fluid flex-center">
 											<!--begin::Form-->
-											<form id="kt_create_account_form" action="{{ route('permohonan.post') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9">
+											<form id="kt_create_account_form" action="{{ route('permohonan.post') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
 											
 												<!--begin::Step 1-->
 												<div class="current" data-kt-stepper-element="content">
@@ -1044,10 +1044,10 @@ $(document).ready(function(){
 														<!--begin::Table-->
 														<table id="kt_file_manager_list" data-kt-filemanager-table="files" class="table align-middle table-row-dashed fs-6 gy-5">
 															<thead>
-																<tr class="text-start text-dark fw-bold fs-7 text-uppercase gs-0">
+																<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 																	
 																	<th class="min-w-250px">Nama</th>
-																	<!-- <th class="min-w-10px">Tarikh Kemaskini</th> -->
+																	<th class="min-w-10px">Tarikh Kemaskini</th>
 																	<th class="min-w-125px"></th>
 																	<th class="w-125px"></th>
 																</tr>
@@ -1064,19 +1064,12 @@ $(document).ready(function(){
 																	<td>15 Apr 2023, 6:05 pm</td>
 																	<td>{{-- Upload Bank --}}
 																	<div class="form-group">
-																		<input type="file" name="akaunBank" placeholder="Choose file" id="file">
-																			@error('file')
-																			<div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-																			@enderror
+									
+																		<input type="file" name="akaunBank" placeholder="Choose file" >
+																			
 																	</div>
 																	</td>
-																	<td class="text-end" data-kt-filemanager-table="action_dropdown">
-																		<div class="d-flex justify-content-end">
-																			
-																			<!--begin::More-->
-																			
-																		</div>
-																	</td>
+																	
 																</tr>
 
 															</tbody>
@@ -1131,43 +1124,43 @@ $(document).ready(function(){
 														<!--begin::Heading-->
 														<div class="pb-8 pb-lg-10">
 															<!--begin::Title-->
-															<h2 class="fw-bold text-dark">Permohonan anda telah berjaya dihantar!</h2>
+															<h2 class="fw-bold text-dark">Your Are Done!</h2>
 															<!--end::Title-->
 															<!--begin::Notice-->
-															<!-- <div class="text-muted fw-semibold fs-6">If you need more info, please......</div> -->
+															<div class="text-muted fw-semibold fs-6">If you need more info, please......</div>
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
 														<!--begin::Body-->
-														<!-- <div class="mb-0"> -->
+														<div class="mb-0">
 															<!--begin::Text-->
-															<!-- <div class="fs-6 text-gray-600 mb-5">Writing headlines for blog posts is as much an art as it is a science and probably warrants its own post, but for all advise is with what works for your great & amazing audience.</div> -->
+															<div class="fs-6 text-gray-600 mb-5">Writing headlines for blog posts is as much an art as it is a science and probably warrants its own post, but for all advise is with what works for your great & amazing audience.</div>
 															<!--end::Text-->
 															<!--begin::Alert-->
 															<!--begin::Notice-->
-															<!-- <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6"> -->
+															<div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
 																<!--begin::Icon-->
-																<!-- <i class="ki-duotone ki-information fs-2tx text-warning me-4">
+																<i class="ki-duotone ki-information fs-2tx text-warning me-4">
 																	<span class="path1"></span>
 																	<span class="path2"></span>
 																	<span class="path3"></span>
-																</i> -->
+																</i>
 																<!--end::Icon-->
 																<!--begin::Wrapper-->
-																<!-- <div class="d-flex flex-stack flex-grow-1"> -->
+																<div class="d-flex flex-stack flex-grow-1">
 																	<!--begin::Content-->
-																	<!-- <div class="fw-semibold">
+																	<div class="fw-semibold">
 																		<h4 class="text-gray-900 fw-bold">We need your attention!</h4>
 																		<div class="fs-6 text-gray-700">To start using great tools, please,
 																		...</div>
-																	</div> -->
+																	</div>
 																	<!--end::Content-->
-																<!-- </div> -->
+																</div>
 																<!--end::Wrapper-->
-															<!-- </div> -->
+															</div>
 															<!--end::Notice-->
 															<!--end::Alert-->
-														<!-- </div> -->
+														</div>
 														<!--end::Body-->
 													</div>
 													<!--end::Wrapper-->
