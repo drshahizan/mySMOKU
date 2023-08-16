@@ -71,18 +71,18 @@
                                             <tr>
                                                 <td><b>No. Mesyuarat</b></td>
                                                 <td><b>:</b></td>
-                                                <td><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;"></td>
+                                                <td><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;" required></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Tarikh Mesyuarat</b></td>
                                                 <td><b>:</b></td>
-                                                <td><input type="date" id="tarikh" name="tarikh" style="padding: 5px;"></td>
+                                                <td><input type="date" id="tarikh" name="tarikh" style="padding: 5px;" required></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Keputusan</b></td>
                                                 <td><b>:</b></td>
                                                 <td>
-                                                    <select id="keputusan" onchange="select1()" style="padding: 5px;">
+                                                    <select id="keputusan" id="keputusan" style="padding: 5px;" required>
                                                         <option value="">Pilih Keputusan</option>
                                                         <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
                                                         <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
@@ -97,11 +97,14 @@
                                         </table>
                                         <br>
                                         <div class="submit" style="text-align: right;">
-                                            <a href="{{url('keputusan')}}" target="_blank" class="btn btn-primary float-end">
+                                            {{-- <a href="{{url('keputusan')}}" target="_blank" class="btn btn-primary float-end" id="submit">
                                                 <span>Hantar</span>
-                                            </a>
-                                            {{-- <button type="submit" id="submitForm" onclick="my_button_click_handler" class="btn btn-primary text-white">Hantar</button> --}}
+                                            </a> --}}
+                                            <button type="submit" id="submit" class="btn btn-primary text-white">Hantar</button>
                                         </div>
+                                        <span role="alert" id="nameError" aria-hidden="true">
+                                            Sila masukkan no. mesyuarat
+                                        </span>
                                     </form>
                                 </div>
                             </div>
@@ -112,13 +115,57 @@
         </div>  
 
         <script>
+            // input validation
+            var btn = document.getElementById('submit');
+            btn.addEventListener('click', function() {
+                if (document.getElementById('noMesyuarat').checked||document.getElementById('checkbox2b').checked||document.getElementById('checkbox2c').checked||document.getElementById('checkbox2d').checked) {
+                    document.getElementById("noMesyuarat").required = false;
+                }
+                else{
+                    document.getElementById("noMesyuarat").required = true;
+                }
+
+                if (document.getElementById('tarikh').checked||document.getElementById('checkbox3b').checked||document.getElementById('checkbox3c').checked||document.getElementById('checkbox3d').checked) {
+                    document.getElementById("tarikh").required = false;
+                }
+                else{
+                    document.getElementById("tarikh").required = true;
+                }
+                if (document.getElementById('keputusan').checked||document.getElementById('checkbox3b').checked||document.getElementById('checkbox3c').checked||document.getElementById('checkbox3d').checked) {
+                    document.getElementById("keputusan").required = false;
+                }
+                else{
+                    document.getElementById("keputusan").required = true;
+                }
+            })      
+
+            // sweet alert
+            $('form').submit(function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: 'hantar-keputusan',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: response.success,
+                        });
+                    },
+                });
+            });
+        </script>
+
+        {{-- <script>
             function confirmButton() {
                 confirm("Press a button!");
             }
             function my_button_click_handler(){
                 alert('Emel notifikasi telah dihantar ke pemohon.');
             }
-       </script>
+       </script> --}}
     
        {{-- <script>
         @if(session('status'))

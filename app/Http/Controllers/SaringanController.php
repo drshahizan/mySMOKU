@@ -136,14 +136,4 @@ class SaringanController extends Controller
             return view('pages.saringan.saringan',compact('permohonan','status'));
         }
     }
-
-    //Tuntutan - Saring
-    public function tuntutanSaring()
-    {
-        $permohonan = TuntutanPermohonan::join('statustransaksi','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
-        ->get(['permohonan.*', 'statustransaksi.*'])
-        ->where('status','=','2');
-        $status = null;
-        return view('pages.saringan.tuntutanSaring',compact('permohonan','status'));
-    }
 }

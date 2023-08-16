@@ -67,9 +67,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('cetak-maklumat-pemohon', [SaringanController::class, 'cetakMaklumatPemohon']);
     Route::post('saring-maklumat-pemohon/{no_kp}', [SaringanController::class, 'saringMaklumat']);
 
-    //Saring tuntutan
-    Route::get('tuntutan-saring', [SaringanController::class, 'tuntutanSaring']);
-   
     //Permohonan - Sekretariat
     Route::get('sekretariatStatus', [SekretariatController::class, 'statusPermohonan']);
     Route::get('sekretariatKelulusan', [SekretariatController::class, 'keputusanSaringan']);
@@ -81,7 +78,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('senarai-disokong-excel', [SekretariatController::class, 'cetakSenaraiPemohonExcel']);
     Route::get('/keputusan', [SekretariatController::class, 'mailKeputusan']);
 
-    
+    //Tuntutan - Sekretariat
+    Route::get('tuntutan-keseluruhan', [SekretariatController::class, 'tuntutanKeseluruhan']);
+    Route::get('tuntutan-saring', [SekretariatController::class, 'tuntutanSaring']);
+    Route::get('tuntutan-kelulusan', [SekretariatController::class, 'tuntutanKelulusan']);
+    Route::get('tuntutan-keputusan', [SekretariatController::class, 'tuntutanKeputusan']);
+
     Route::get('/uploadpage',[PageController::class,'uploadpage']);
     Route::post('/uploadproduct',[PageController::class,'store']);
     Route::get('/show',[PageController::class,'show']);

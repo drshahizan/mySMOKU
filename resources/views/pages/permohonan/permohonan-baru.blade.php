@@ -438,7 +438,8 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="kecacatan" placeholder="" value="{{$smoku->kecacatan}}" readonly/>
+																	<input type="text" class="form-control form-control-solid" placeholder="" value="{{$smoku->kecacatan}}" readonly/>
+																	<input type="hidden" class="form-control form-control-solid" name="kecacatan" placeholder="" value="{{$smoku->kodoku}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->

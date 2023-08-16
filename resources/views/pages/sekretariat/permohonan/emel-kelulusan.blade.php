@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>BKOUKU: Permohonan Dikembalikan</title>
+    <title>BKOUKU: Permohonan Telah Lulus</title>
 </head>
 <body>
     <h3>BKOKU: PERMOHONAN DIKEMBALIKAN</h3>
@@ -39,6 +39,5 @@
     <br>
     <p>Yang Benar,</p>
     <p><b>Mohd Yusuf Bin Sabri Az-Zain</b></p>
-    <p><b>014-56789394</b></p>
 </body>
 </html>

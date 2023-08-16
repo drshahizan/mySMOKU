@@ -84,7 +84,7 @@ var KTCreateAccount = function () {
 	var handleForm = function() {
 		formSubmitButton.addEventListener('click', function (e) {
 			// Validate form before change stepper step
-			var validator = validations[4]; // get validator for last form
+			var validator = validations[5]; // get validator for last form
 
 			validator.validate().then(function (status) {
 				console.log('validated!');
