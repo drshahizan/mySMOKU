@@ -37,6 +37,9 @@
                             <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6">
                                     <br>
+                                    @php
+                                        $akademik = DB::table('maklumatakademik')->where('nokp_pelajar', $pelajar->nokp_pelajar)->first();
+                                    @endphp
                                     <table class="maklumat">
                                         <tr>
                                             <td><strong>Nama</strong></td>
@@ -57,6 +60,11 @@
                                             <td><strong>ID Permohonan</strong></td>
                                             <td>:</td>
                                             <td>{{$permohonan->id_permohonan}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Sesi/Semester</strong></td>
+                                            <td>:</td>
+                                            <td>{{Carbon::now()->year-1}}/{{Carbon::now()->year}}-{{$akademik->sem_semasa}}</td>
                                         </tr>
                                     </table>                           
                                 </div>
