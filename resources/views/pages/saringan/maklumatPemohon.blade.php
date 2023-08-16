@@ -100,7 +100,7 @@
                                                     </div>
                                                 </td>
                                                 <td><div class="form-group c_form_group">
-                                                    <label>Berikan Catatan Anda.</label>
+                                                    <label>Berikan catatan anda.</label>
                                                     <textarea id="textarea1" rows="2" type="text" class="form-control" placeholder="" disabled="disabled" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></textarea>
                                                 </div> </td>
                                                 </tr>
