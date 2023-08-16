@@ -25,14 +25,14 @@ class Dokumen extends Authenticatable
     protected $fillable = [
         'id_permohonan',
         'nokp_pelajar',
-        //'suratTawaran',
-        //'nota_suratTawaran',
+        'suratTawaran',
+        'nota_suratTawaran',
         'akaunBank',
         'nota_akaunBank',
-        //'kepPeperiksaan',
-        //'nota_kepPeperiksaan',
-        //'invoisResit',
-        //'nota_invoisResit',
+        'kepPeperiksaan',
+        'nota_kepPeperiksaan',
+        'invoisResit',
+        'nota_invoisResit',
     ];
 
     public function getPathAttribute($value)  
