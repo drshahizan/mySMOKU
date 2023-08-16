@@ -12,7 +12,7 @@
       </h2>
       <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
         <div class="accordion-body" style="text-align: center">
-            <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="650px"/>
+            <embed src="/assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="650px"/>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
       </h2>
       <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
         <div class="accordion-body" style="text-align: center">
-            <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="650px"/>
+            <embed src="/assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="650px"/>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
       </h2>
       <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
         <div class="accordion-body" style="text-align: center">
-            <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="650px"/>
+            <embed src="/assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="650px"/>
         </div>
       </div>
     </div>
@@ -48,7 +48,7 @@
         </h2>
         <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
           <div class="accordion-body" style="text-align: center">
-            <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="650px"/>
+            <embed src="/assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="650px"/>
           </div>
         </div>
     </div>
@@ -60,7 +60,7 @@
         </h2>
         <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
           <div class="accordion-body" style="text-align: center">
-            <embed src="assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="650px"/>
+            <embed src="/assets/pdf/SURAT TAWARAN BKOKU.pdf" width="90%" height="650px"/>
           </div>
         </div>
     </div>
