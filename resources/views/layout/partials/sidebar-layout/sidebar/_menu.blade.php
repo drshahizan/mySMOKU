@@ -34,7 +34,7 @@
 		</div>
 
 		<div class="menu-item">
-			<a class="menu-link" href="{{ route('salinanmaklumat') }}">
+			<a class="menu-link" href="#">
 			
 					<span class="menu-icon">{!! getIcon('search', 'fs-2') !!}</span>
 					<span class="menu-title">Test Salinan Maklumat</span>
