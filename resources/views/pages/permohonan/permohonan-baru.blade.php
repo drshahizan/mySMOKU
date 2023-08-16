@@ -482,7 +482,7 @@ $(document).ready(function(){
 														</div>
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>
+																<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
 																
 																
 																<!--end::Label-->
@@ -494,20 +494,7 @@ $(document).ready(function(){
 																</div>
 																<!--end::Input wrapper-->
 															</div>
-															<div class="col-md-6 fv-row">
-																<div class="col-12">
-																	{{-- <button type="button" class="btn btn-flex btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_upload">
-																	<i class="ki-duotone ki-folder-up fs-2">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>Muat Naik Salinan Bank Penyata</button> --}}
-																	<label style="color: black; padding-bottom:8px;">Salinan Bank Penyata</label> <a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a><br> 
-																		<input type="file" id="upload"  hidden/>
-																		<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:40%; text-align:center;">
-																		<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
-																	</label>
-																</div>
-															</div>
+															
 														</div>
 														<!--end::Input group-->
 													</div>
@@ -722,7 +709,7 @@ $(document).ready(function(){
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
-														@foreach ($akademik as $akademik)
+														@foreach ($akademikmqa as $akademik)
 														<!--begin::Input group-->
 
 														<div class="d-flex flex-column mb-7 fv-row">
@@ -746,18 +733,6 @@ $(document).ready(function(){
 															</select>
 														</div>
 														<!--end::Input group-->
-														
-														{{-- Upload Surat Tawaran Pengajian --}}
-														<div class="d-flex flex-column mb-7 fv-row">
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">Surat Tawaran Pengajian</span>
-															</label>
-															<input type="file" id="upload"  hidden/>
-															<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:25%; text-align:center;">
-																<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
-															</label>
-														</div>
-														{{-- End - Upload Surat Tawaran Pengajian --}}
 
 														<!--begin::Input group-->
 														<div class="row mb-10">
@@ -1007,16 +982,7 @@ $(document).ready(function(){
 																<input type="text" class="form-control form-control-solid" name="amaun" placeholder="" value="" />
 																<!--end::Input-->
 															</div>
-															{{-- Upload Resit --}}
-															<div class="d-flex flex-column mb-7 fv-row">
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																	<span class="">Resit</span>
-																</label>
-																<input type="file" id="upload"  hidden/>
-																<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:25%; text-align:center;">
-																	<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
-																</label>
-															</div>
+															
 														</div>
 		
 													</div>
@@ -1046,30 +1012,42 @@ $(document).ready(function(){
 															<thead>
 																<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 																	
-																	<th class="min-w-250px">Nama</th>
-																	<th class="min-w-10px">Tarikh Kemaskini</th>
-																	<th class="min-w-125px"></th>
+																	<th class="w-250px">Nama</th>
+																	<th class="w-125px"></th>
 																	<th class="w-125px"></th>
 																</tr>
 															</thead>
 															<tbody class="fw-semibold text-gray-600">
 																<tr>
-																	
+																	<td class="text-gray-800">Salinan Penyata Bank</td>
+																	<td class="text-gray-800"></td>
 																	<td>
-																		<div class="d-flex align-items-center">
-																			<i class="ki-duotone ki-files fs-2x text-primary me-4"></i>
-																			<a href="#" class="text-gray-800 text-hover-primary">Salinan Penyata Bank</a>
-																		</div>
+																		<input type="file" name="akaunBank"/>
+																		{{--<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:100%; text-align:center;">
+																		<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
+																		</label>--}}
 																	</td>
-																	<td>15 Apr 2023, 6:05 pm</td>
-																	<td>{{-- Upload Bank --}}
-																	<div class="form-group">
-									
-																		<input type="file" name="akaunBank" placeholder="Choose file" >
-																			
-																	</div>
+																</tr>
+																<tr>
+																	<td class="text-gray-800">Salinan Surat Tawaran Pengajian</td>
+																	<td class="text-gray-800"></td>
+																	<td>
+																		<input type="file" name="suratTawaran"/>
+																		{{--<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:100%; text-align:center;">
+																		<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
+																		</label>--}}
 																	</td>
+																</tr>
+																<tr>
+																	<td class="text-gray-800">Salinan Resit/Invois</td>
+																	<td class="text-gray-800"></td>
+																	<td>
+																		<input type="file" name="invoisResit"/>
+																		{{--<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:100%; text-align:center;">
+																		<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
+																		</label>--}}
 																	
+																	</td>
 																</tr>
 
 															</tbody>
