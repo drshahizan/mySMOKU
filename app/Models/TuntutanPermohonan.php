@@ -30,6 +30,7 @@ class TuntutanPermohonan extends Authenticatable
         'elaun',
         'amaun',
         'perakuan',
+		'status',
         
         
     ];
