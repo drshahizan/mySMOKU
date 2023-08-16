@@ -21,9 +21,9 @@ class PageController extends Controller
             $data=new product();
         
           
-             $file=$request->file;
+                 $file=$request->file;
                  
-     $filename=time().'.'.$file->getClientOriginalExtension();
+                $filename=time().'.'.$file->getClientOriginalExtension();
  
                  $request->file->move('assets',$filename);
  
