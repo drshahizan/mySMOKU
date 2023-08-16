@@ -37,8 +37,9 @@
 
     {{-- Table --}}
     <div style="margin: 10px;display: block;">
-        <br>
-        <h2 style="text-align: center">SENARAI PERMOHONAN BKOKU YANG DISOKONG</h2>
+        <div class="tittle" style="text-align: center; font-size: 14px;">
+            <b>SENARAI PERMOHONAN BKOKU YANG DISOKONG</b>
+        </div>
         <br>
         <table width="100%" style="border: 1px solid black!important;" id="sortTable" class="table table-striped">
             <thead>

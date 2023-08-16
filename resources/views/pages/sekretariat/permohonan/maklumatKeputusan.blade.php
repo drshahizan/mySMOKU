@@ -112,13 +112,17 @@
         </div>  
 
         <script>
+            
+        </script>
+
+        {{-- <script>
             function confirmButton() {
                 confirm("Press a button!");
             }
             function my_button_click_handler(){
                 alert('Emel notifikasi telah dihantar ke pemohon.');
             }
-       </script>
+       </script> --}}
     
        {{-- <script>
         @if(session('status'))
