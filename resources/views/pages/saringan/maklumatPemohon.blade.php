@@ -7,6 +7,9 @@
             border: none!important;
             padding:4px 8px!important;
         }
+        td{
+            vertical-align: top!important;
+        }
     </style>
     <div id="main-content">
         <div class="container-fluid">
