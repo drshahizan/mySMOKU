@@ -1034,43 +1034,43 @@ $(document).ready(function(){
 														<!--begin::Heading-->
 														<div class="pb-8 pb-lg-10">
 															<!--begin::Title-->
-															<h2 class="fw-bold text-dark">Permohonan Anda Telah Dihantar!</h2>
+															<h2 class="fw-bold text-dark">Permohonan anda telah berjaya dihantar!</h2>
 															<!--end::Title-->
 															<!--begin::Notice-->
-															<div class="text-muted fw-semibold fs-6">Untuk maklumat lanjut, sila......</div>
+															<!-- <div class="text-muted fw-semibold fs-6">Untuk maklumat lanjut, sila......</div> -->
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
 														<!--begin::Body-->
-														<div class="mb-0">
+														<!-- <div class="mb-0"> -->
 															<!--begin::Text-->
-															<div class="fs-6 text-gray-600 mb-5">Writing headlines for blog posts is as much an art as it is a science and probably warrants its own post, but for all advise is with what works for your great & amazing audience.</div>
+															<!-- <div class="fs-6 text-gray-600 mb-5">Writing headlines for blog posts is as much an art as it is a science and probably warrants its own post, but for all advise is with what works for your great & amazing audience.</div> -->
 															<!--end::Text-->
 															<!--begin::Alert-->
 															<!--begin::Notice-->
-															<div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
+															<!-- <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6"> -->
 																<!--begin::Icon-->
-																<i class="ki-duotone ki-information fs-2tx text-warning me-4">
+																<!-- <i class="ki-duotone ki-information fs-2tx text-warning me-4">
 																	<span class="path1"></span>
 																	<span class="path2"></span>
 																	<span class="path3"></span>
-																</i>
+																</i> -->
 																<!--end::Icon-->
 																<!--begin::Wrapper-->
-																<div class="d-flex flex-stack flex-grow-1">
+																<!-- <div class="d-flex flex-stack flex-grow-1"> -->
 																	<!--begin::Content-->
-																	<div class="fw-semibold">
+																	<!-- <div class="fw-semibold">
 																		<h4 class="text-gray-900 fw-bold">We need your attention!</h4>
 																		<div class="fs-6 text-gray-700">To start using great tools, please,
 																		...</div>
-																	</div>
+																	</div> -->
 																	<!--end::Content-->
-																</div>
+																<!-- </div> -->
 																<!--end::Wrapper-->
-															</div>
+															<!-- </div> -->
 															<!--end::Notice-->
 															<!--end::Alert-->
-														</div>
+														<!-- </div> -->
 														<!--end::Body-->
 													</div>
 													<!--end::Wrapper-->
