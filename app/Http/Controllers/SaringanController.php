@@ -5,6 +5,7 @@ use App\Mail\SaringanMail;
 use App\Models\Akademik;
 use App\Models\Permohonan;
 use App\Models\TuntutanPermohonan;
+use App\Models\Waris;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 

@@ -145,9 +145,9 @@ class SekretariatController extends Controller
 
     //TUNTUTAN
 
-    public function tuntutanStatus()
+    public function tuntutanKeseluruhan()
     {
-        return view('pages.sekretariat.tuntutan.status');
+        return view('pages.sekretariat.tuntutan.keseluruhan');
     }
 
     public function tuntutanSaring()
@@ -159,9 +159,9 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.tuntutan.saring',compact('permohonan','status'));
     }
 
-    public function tuntutanPengesahan()
+    public function tuntutanKelulusan()
     {
-        return view('pages.sekretariat.tuntutan.pengesahan');
+        return view('pages.sekretariat.tuntutan.kelulusan');
     }
 
     public function tuntutanKeputusan()

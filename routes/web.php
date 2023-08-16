@@ -79,9 +79,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/keputusan', [SekretariatController::class, 'mailKeputusan']);
 
     //Tuntutan - Sekretariat
-    Route::get('tuntutan-status', [SekretariatController::class, 'tuntutanStatus']);
+    Route::get('tuntutan-keseluruhan', [SekretariatController::class, 'tuntutanKeseluruhan']);
     Route::get('tuntutan-saring', [SekretariatController::class, 'tuntutanSaring']);
-    Route::get('tuntutan-pengesahan', [SekretariatController::class, 'tuntutanPengesahan']);
+    Route::get('tuntutan-kelulusan', [SekretariatController::class, 'tuntutanKelulusan']);
     Route::get('tuntutan-keputusan', [SekretariatController::class, 'tuntutanKeputusan']);
 
     Route::get('/uploadpage',[PageController::class,'uploadpage']);
