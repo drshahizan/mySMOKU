@@ -31,7 +31,7 @@
         <!--begin::Input group--->
         <div class="fv-row mb-8">
             <!--begin::email-->
-            <input type="text" value="{{($smoku->email)}}" placeholder="Alamat email" name="email" autocomplete="off" class="form-control bg-transparent" readonly/>
+            <input type="text" value="{{($smoku->email)}}" placeholder="Alamat email" name="email" autocomplete="off" class="form-control bg-transparent" />
             <!--end::email-->
         </div>
         @endforeach
