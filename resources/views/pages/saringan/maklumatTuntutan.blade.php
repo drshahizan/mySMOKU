@@ -70,6 +70,9 @@
                         <div class="body">
                                 <div class="col-md-6 col-sm-6">
                                     <br>
+                                    @php
+                                        $akademik = DB::table('maklumatakademik')->where('nokp_pelajar', $pelajar->nokp_pelajar)->first();
+                                    @endphp
                                     <table class="maklumat">
                                         <tr>
                                             <td><strong>Nama</strong></td>
@@ -91,6 +94,11 @@
                                             <td>:</td>
                                             <td>{{$permohonan->id_permohonan}}</td>
                                         </tr>
+                                        <tr>
+                                            <td><strong>Sesi/Semester</strong></td>
+                                            <td>:</td>
+                                            <td>{{Carbon::now()->year-1}}/{{Carbon::now()->year}}-{{$akademik->sem_semasa}}</td>
+                                        </tr>
                                     </table>                  
                                 
                                 <hr>
@@ -107,10 +115,10 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Jenis Tuntutan</th>
+                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
                                                 <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Tempoh</th>
-                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Kadar Tuntutan</th>
-                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Jumlah</th>
+                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Kadar Tuntutan (RM)</th>
+                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Jumlah (RM)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -119,22 +127,22 @@
                                                     Yuran Pengajian
                                                 </td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">1 (semester)</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM2500</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM2500</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun, 2)}}</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun, 2)}}</td>
                                             </tr>
                                             <tr class="font-weight-bolder font-size-lg">
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
                                                     Wang Saku
                                                 </td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">6 (bulan)</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM300</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM1800</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{$akademik->bil_bulanpersem}} (bulan)</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">300.00</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($akademik->bil_bulanpersem * 300, 2)}}</td>
                                             </tr>
                                             <tr class="font-weight-bolder font-size-lg">
                                                 <td colspan="3" class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
                                                     Keseluruhan
                                                 </td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM4300</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun + $akademik->bil_bulanpersem * 300, 2)}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -149,8 +157,8 @@
                                     <table class="table2">
                                         <thead>
                                             <tr>
-                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right white">Tuntutan</th>
-                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right white">Jumlah</th>
+                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest white">Tuntutan</th>
+                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right white">Jumlah (RM)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -158,19 +166,19 @@
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
                                                     Pelajar Tuntut
                                                 </td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM2500</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(2500, 2)}}</td>
                                             </tr>
                                             <tr class="font-weight-bolder font-size-lg">
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
                                                     Baki
                                                 </td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM1000</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(1000, 2)}}</td>
                                             </tr>
                                             <tr class="font-weight-bolder font-size-lg">
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
                                                     Layak
                                                 </td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">RM<input type="number" name="layak_tuntut" id="layak_tuntut" value="1500"></td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(1000, 2)}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
