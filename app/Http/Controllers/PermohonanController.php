@@ -133,6 +133,7 @@ class PermohonanController extends Controller
             'elaun' => $request->elaun,
             'amaun' => $request->amaun,
             'perakuan' => $request->perakuan,
+			'status' => '2',
             
         ]);
 
