@@ -11,6 +11,7 @@ use App\Http\Controllers\SekretariatController;
 use App\Models\Permohonan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('cetak-senarai-pemohon', [SekretariatController::class, 'cetakSenaraiPemohonPDF']);
     Route::get('senarai-disokong-excel', [SekretariatController::class, 'cetakSenaraiPemohonExcel']);
     Route::get('/keputusan', [SekretariatController::class, 'mailKeputusan']);
+
+    
+    Route::get('/uploadpage',[PageController::class,'uploadpage']);
+    Route::post('/uploadproduct',[PageController::class,'store']);
+    Route::get('/show',[PageController::class,'show']);
+    Route::get('/download/{file}',[PageController::class,'download']);
+    Route::get('/view/{is}',[PageController::class,'view']);
 
 });
 

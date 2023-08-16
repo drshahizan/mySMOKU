@@ -256,6 +256,11 @@
 										</div>
 									</div>
 </div>
+
+Test Upload Page
+<a class="btn btn-success" href="{{url('/uploadpage')}}">Upload Page</a>
+
+
 									<!--end::Row-->
 									<!--begin::Row-->
 									
