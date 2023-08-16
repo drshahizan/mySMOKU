@@ -28,8 +28,8 @@
             border-radius: 4px;
             padding: 2px;
         }
-        .normal{
-            font-weight: normal;
+        .bold{
+            font-weight: bold!important;
         }
     </style>
     <!-- Main body part  -->
@@ -107,10 +107,10 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th class="pt-1 pb-9 pl-0 font-weight-bolder text-muted font-size-lg text-uppercase white">Jenis Tuntutan</th>
-                                                <th class="pt-1 pb-9 text-right font-weight-bolder text-muted font-size-lg text-uppercase white">Tempoh</th>
-                                                <th class="pt-1 pb-9 text-right font-weight-bolder text-muted font-size-lg text-uppercase white">Kadar Tuntutan</th>
-                                                <th class="pt-1 pb-9 text-right pr-0 font-weight-bolder text-muted font-size-lg text-uppercase white">Jumlah</th>
+                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Jenis Tuntutan</th>
+                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Tempoh</th>
+                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Kadar Tuntutan</th>
+                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Jumlah</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -149,8 +149,8 @@
                                     <table class="table2">
                                         <thead>
                                             <tr>
-                                                <th class="pt-1 pb-9 pl-0 font-weight-bolder text-muted font-size-lg text-uppercase white normal">Tuntutan</th>
-                                                <th class="pt-1 pb-9 text-right pr-0 font-weight-bolder text-muted font-size-lg text-uppercase white normal">Jumlah</th>
+                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right white">Tuntutan</th>
+                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right white">Jumlah</th>
                                             </tr>
                                         </thead>
                                         <tbody>

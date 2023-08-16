@@ -214,6 +214,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
+        'Carbon' => 'Carbon\Carbon',
     ])->toArray(),
 
 ];
