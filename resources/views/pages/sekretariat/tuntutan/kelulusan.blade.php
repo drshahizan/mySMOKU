@@ -40,7 +40,7 @@
 
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Permohonan untuk Diluluskan<br><small>Sila klik pada ID permohonan untuk meluluskan permohonan</small></h2>
+                                <h2>Senarai Tuntutan untuk Diluluskan<br><small>Sila klik pada ID tuntutan untuk meluluskan tuntutan</small></h2>
                                 <ul class="header-dropdown dropdown" style="color: black;">
                                     <li><a href="{{ url('cetak-senarai-pemohon') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-print"></i> PDF</a></li>
                                     <li><a href="{{ url('senarai-disokong-excel') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-print"></i> Excel</a></li>
@@ -58,7 +58,7 @@
                                                     <th style="width: 15%"><b>ID Tuntutan</b></th>                                        
                                                     <th style="width: 50%"><b>Nama</b></th>
                                                     <th style="width: 15%"><b>Jenis Permohonan</b></th>
-                                                    <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th> 
+                                                    <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th> 
                                                 </tr>
                                             </thead>
                                             

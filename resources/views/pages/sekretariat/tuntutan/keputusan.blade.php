@@ -19,7 +19,7 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <h1>Keputusan Permohonan BKOKU dan PPK</h1>
+                            <h1>Keputusan Tuntutan BKOKU dan PPK</h1>
                         </div>
                         <hr>
 
@@ -30,7 +30,7 @@
                                     <div class="d-flex align-items-center">
                                         <div class="icon-in-bg bg-success text-white rounded-circle" style="padding-left:0;"><i class="fa fa-check"></i></div>
                                         <div class="ml-4">
-                                            <span style="color: black;">Permohonan Layak</span>
+                                            <span style="color: black;">Tuntutan Layak</span>
                                             <h4 class="mb-0 font-weight-medium">3700</h4>
                                         </div>
                                     </div>
@@ -44,7 +44,7 @@
                                     <div class="d-flex align-items-center">
                                         <div class="icon-in-bg bg-danger rounded-circle" style="padding-left:0;"><i class="fa fa-close" style="color: white"></i></div>
                                         <div class="ml-4">
-                                            <span style="color: black;">Permohonan Tidak Layak</span>
+                                            <span style="color: black;">Tuntutan Tidak Layak</span>
                                             <h4 class="mb-0 font-weight-medium">200</h4>
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@
                                     <div class="d-flex align-items-center">
                                         <div class="icon-in-bg bg-warning rounded-circle" style="padding-left:0;"><i class="fa fa-mail-reply" style="color: white"></i></div>
                                         <div class="ml-4">
-                                            <span style="color: black;">Permohonan Dikembalikan</span>
+                                            <span style="color: black;">Tuntutan Dikembalikan</span>
                                             <h4 class="mb-0 font-weight-medium">1200</h4>
                                         </div>
                                     </div>
@@ -96,12 +96,12 @@
                                     <table id="sortTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th style="width: 15%">ID Permohonan</th>
+                                                <th style="width: 15%">ID Tuntutan</th>
                                                 <th style="width: 38%">Nama</th>
                                                 <th style="width: 12%">Jenis Permohonan</th>
                                                 <th style="width: 10%">No. Mesyuarat</th>
                                                 <th style="width: 10%" class="text-center">Tarikh Kelulusan</th>
-                                                <th style="width: 15%" class="text-center">Keputusan Permohonan</th>
+                                                <th style="width: 15%" class="text-center">Keputusan Tuntutan</th>
                                             </tr>
                                         </thead>
                                             

@@ -20,7 +20,7 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <h1>Senarai Keseluruhan Permohonan</h1>
+                            <h1>Senarai Keseluruhan Tuntutan</h1>
                         </div>
                         <hr>
 
@@ -134,7 +134,7 @@
                     <div class="block-header">
                         <div class="row clearfix">
                             <div class="col-lg-4 col-md-12 col-sm-12">
-                                <h1>Senarai Permohonan</h1>
+                                <h1>Senarai Tuntutan</h1>
                             </div>
                             <hr>
                         </div>
@@ -145,7 +145,7 @@
                         <div class="col-md-3">
                             {{-- <label style="color:black"><b>Tapis Status Permohonan</b> --}}
                             <select name="status" class="form-select">
-                                <option value="">Semua Status Permohonan</option>
+                                <option value="">Semua Status Tuntutan</option>
                                 <option value="Baru" {{Request::get('status') == 'Baru' ? 'selected':'' }} >Baru</option>
                                 <option value="Saringan" {{Request::get('status') == 'Saringan' ? 'selected':'' }} >Saringan</option>
                                 <option value="Disokong" {{Request::get('status') == 'Disokong' ? 'selected':'' }} >Disokong</option>
@@ -159,7 +159,7 @@
                         <div class="col-md-3">
                             {{-- <label style="color:black"><b>Tapis Jenis Permohonan</b> --}}
                             <select name="status" class="form-select">
-                                <option value="">Semua Jenis Permohonan</option>
+                                <option value="">Semua Jenis Tuntutan</option>
                                 <option value="BKOKU" {{Request::get('jenis') == 'BKOKU' ? 'selected':'' }} >BKOKU</option>
                                 <option value="PPK" {{Request::get('jenis') == 'PPK' ? 'selected':'' }} >PPK</option>
                             </select>
@@ -179,11 +179,11 @@
                                 <table id="sortTable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                            <th style="width: 15%"><b>ID Permohonan</b></th>                                        
+                                            <th style="width: 15%"><b>ID Tuntutan</b></th>                                        
                                             <th style="width: 35%"><b>Nama</b></th>
                                             <th style="width: 15%"><b>Jenis Permohonan</b></th>
-                                            <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th> 
-                                            <th class="text-center" style="width: 15%">Status Permohonan</th>
+                                            <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th> 
+                                            <th class="text-center" style="width: 15%">Status Tuntutan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
