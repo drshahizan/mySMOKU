@@ -18,6 +18,7 @@ use App\Models\Mod;
 use App\Models\Sumberbiaya;
 use App\Models\Status;
 use App\Models\JenisOku;
+use App\Models\Dokumen;
 use Illuminate\Support\Facades\Auth;
 use DB;
 
@@ -39,22 +40,25 @@ class PermohonanController extends Controller
         $biaya = Sumberbiaya::all()->sortBy('kodbiaya');
 
         $pelajar = Permohonan::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
-        //->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
-        //->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
-        ->get(['pelajar.*', 'bk_jantina.*'])
+        ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
+        ->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
+        ->get(['pelajar.*', 'bk_jantina.*','bk_bangsa.*','bk_bangsa.*','bk_jenisoku.*'])
         ->where('nokp_pelajar', Auth::user()->id());
         $waris = Waris::join('bk_hubungan','bk_hubungan.kodhubungan','=','waris.hubungan')
         ->get(['waris.*', 'bk_hubungan.*'])
         ->where('nokp_pelajar', Auth::user()->id());
         $akademik = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
         ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
-        ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*'])
+        ->join('bk_mod','bk_mod.kodmod','=','maklumatakademik.mod')
+        ->join('bk_sumberbiaya','bk_sumberbiaya.kodbiaya','=','maklumatakademik.sumber_biaya')
+        ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*', 'bk_mod.*', 'bk_sumberbiaya.*'])
         ->where('nokp_pelajar', Auth::user()->id());
         $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id());
         $status = Status::all()->where('nokp_pelajar', Auth::user()->id());
+        $dokumen = Dokumen::all()->where('nokp_pelajar', Auth::user()->id());
         if (!$status->isEmpty())
         {
-            return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan'));
+            return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
 
         }
         else
@@ -152,6 +156,25 @@ class PermohonanController extends Controller
         ]);
         
         $user->save();
+
+
+        $data=new dokumen();
+        
+          
+            $file=$request->akaunBank;
+            $filename=time().'.'.$file->getClientOriginalExtension();
+            $request->akaunBank->move('assets/dokumen',$filename);
+            
+            $data->id_permohonan='KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar;
+            $data->nokp_pelajar=$request->nokp_pelajar;
+            $data->akaunBank=$filename;
+            //$data->name=$request->name;
+            //$data->description=$request->description;
+
+            $data->save();
+
+
+
         //return view('pages.dashboards.index'); // jadi yang ni kena return ke page view
         return redirect()->route('viewpermohonan');
         //return redirect()->back();
@@ -160,13 +183,30 @@ class PermohonanController extends Controller
     }
 
     public function viewpermohonan(){
-        $pelajar = Permohonan::all()->where('nokp_pelajar', Auth::user()->id());
+        $pelajar = Permohonan::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
+        ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
+        ->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
+        ->get(['pelajar.*', 'bk_jantina.*','bk_bangsa.*','bk_bangsa.*','bk_jenisoku.*'])
+        ->where('nokp_pelajar', Auth::user()->id());
         $waris = Waris::all()->where('nokp_pelajar', Auth::user()->id());
-        $akademik = Akademik::all()->where('nokp_pelajar', Auth::user()->id());
+        $akademik = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
+        ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
+        ->join('bk_mod','bk_mod.kodmod','=','maklumatakademik.mod')
+        ->join('bk_sumberbiaya','bk_sumberbiaya.kodbiaya','=','maklumatakademik.sumber_biaya')
+        ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*', 'bk_mod.*', 'bk_sumberbiaya.*'])
+        ->where('nokp_pelajar', Auth::user()->id());
         $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id());
-        return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan'));
+        $dokumen = Dokumen::all()->where('nokp_pelajar', Auth::user()->id());
+        return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
         
     }
+
+
+    public function download(Request $request,$file)
+    {   
+        return response()->download(public_path('assets/dokumen/'.$file));
+    }
+ 
 
     public function statuspermohonan(){
         $permohonan = Status::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
