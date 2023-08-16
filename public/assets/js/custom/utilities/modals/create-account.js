@@ -84,7 +84,7 @@ var KTCreateAccount = function () {
 	var handleForm = function() {
 		formSubmitButton.addEventListener('click', function (e) {
 			// Validate form before change stepper step
-			var validator = validations[5]; // get validator for last form
+			var validator = validations[6]; // get validator for last form
 
 			validator.validate().then(function (status) {
 				console.log('validated!');
@@ -325,8 +325,33 @@ var KTCreateAccount = function () {
 				}
 			}
 		));
-
 		// Step 5
+		validations.push(FormValidation.formValidation(
+			form,
+			{
+				fields: {
+					'akaunBank': {
+						validators: {
+							notEmpty: {
+								message: 'Salinan Bank diperlukan'
+							}
+						}
+					}
+				},
+
+				plugins: {
+					trigger: new FormValidation.plugins.Trigger(),
+					// Bootstrap Framework Integration
+					bootstrap: new FormValidation.plugins.Bootstrap5({
+						rowSelector: '.fv-row',
+                        eleInvalidClass: '',
+                        eleValidClass: ''
+					})
+				}
+			}
+		));
+
+		// Step 6
 		validations.push(FormValidation.formValidation(
 			form,
 			{
