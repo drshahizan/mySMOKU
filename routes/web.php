@@ -50,8 +50,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::post('permohonan', [PermohonanController::class, 'store'])->name('permohonan.post');
     Route::get('viewpermohonan', [PermohonanController::class, 'viewpermohonan'])->name('viewpermohonan');
+    Route::get('/download/{file}',[PermohonanController::class,'download']);
     Route::get('statuspermohonan', [PermohonanController::class, 'statuspermohonan'])->name('sejarahpermohonan');
-    
+
+  
     //Saring permohonan
     Route::get('saringan', [SaringanController::class, 'saringan']);
     Route::get('maklumat-pemohon/{no_kp}', [SaringanController::class, 'maklumatPemohon'])->name('no_kp');
@@ -84,11 +86,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan-kelulusan', [SekretariatController::class, 'tuntutanKelulusan']);
     Route::get('tuntutan-keputusan', [SekretariatController::class, 'tuntutanKeputusan']);
 
-    Route::get('/uploadpage',[PageController::class,'uploadpage']);
-    Route::post('/uploadproduct',[PageController::class,'store']);
-    Route::get('/show',[PageController::class,'show']);
-    Route::get('/download/{file}',[PageController::class,'download']);
-    Route::get('/view/{is}',[PageController::class,'view']);
+
 
 });
 
