@@ -80,9 +80,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Tuntutan - Sekretariat
     Route::get('tuntutan-status', [SekretariatController::class, 'tuntutanStatus']);
-    Route::get('tuntutan-saring', [SaringanController::class, 'tuntutanSaring']);
-    Route::get('tuntutan-pengesahan', [SaringanController::class, 'tuntutanPengesahan']);
-    Route::get('tuntutan-keputusan', [SaringanController::class, 'tuntutanKeputusan']);
+    Route::get('tuntutan-saring', [SekretariatController::class, 'tuntutanSaring']);
+    Route::get('tuntutan-pengesahan', [SekretariatController::class, 'tuntutanPengesahan']);
+    Route::get('tuntutan-keputusan', [SekretariatController::class, 'tuntutanKeputusan']);
 
     Route::get('/uploadpage',[PageController::class,'uploadpage']);
     Route::post('/uploadproduct',[PageController::class,'store']);

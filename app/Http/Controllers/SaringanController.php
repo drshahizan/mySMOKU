@@ -5,7 +5,6 @@ use App\Mail\SaringanMail;
 use App\Models\Akademik;
 use App\Models\Permohonan;
 use App\Models\TuntutanPermohonan;
-use App\Models\Waris;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
@@ -135,30 +134,5 @@ class SaringanController extends Controller
             $status = "Permohonan Telah Dikembalikan";
             return view('pages.saringan.saringan',compact('permohonan','status'));
         }
-    }
-
-    public function tuntutanStatus()
-    {
-        return view('pages.sekretariat.tuntutan.status');
-    }
-    
-    //Tuntutan - Saring
-    public function tuntutanSaring()
-    {
-        $permohonan = TuntutanPermohonan::join('statustransaksi','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
-        ->get(['permohonan.*', 'statustransaksi.*'])
-        ->where('status','=','2');
-        $status = null;
-        return view('pages.sekretariat.tuntutan.saring');
-    }
-
-    public function tuntutanPengesahan()
-    {
-        return view('pages.sekretariat.tuntutan.pengesahan');
-    }
-
-    public function tuntutanKeputusan()
-    {
-        return view('pages.sekretariat.tuntutan.keputusan');
     }
 }

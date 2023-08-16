@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Exports\SenaraiPendek;
 use App\Models\Permohonan;
+use App\Models\TuntutanPermohonan;
+use App\Models\Waris;
+use App\Models\Akademik;
 use App\Mail\mailKeputusan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -139,4 +142,30 @@ class SekretariatController extends Controller
     //     Mail::to("$pelajar->email")->send(new mailKeputusan($pelajar));
     //      return redirect('pages.sekretariat.permohonan.keputusan')->with('message','Emel notifikasi telah dihantar kepada pemohon');
     // }
+
+    //TUNTUTAN
+
+    public function tuntutanStatus()
+    {
+        return view('pages.sekretariat.tuntutan.status');
+    }
+
+    public function tuntutanSaring()
+    {
+        $permohonan = TuntutanPermohonan::join('statustransaksi','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
+        ->get(['permohonan.*', 'statustransaksi.*'])
+        ->where('status','=','2');
+        $status = null;
+        return view('pages.sekretariat.tuntutan.saring',compact('permohonan','status'));
+    }
+
+    public function tuntutanPengesahan()
+    {
+        return view('pages.sekretariat.tuntutan.pengesahan');
+    }
+
+    public function tuntutanKeputusan()
+    {
+        return view('pages.sekretariat.tuntutan.keputusan');
+    }
 }

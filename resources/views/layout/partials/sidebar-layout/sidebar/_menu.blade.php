@@ -201,7 +201,7 @@
 				</div>
 			</div>
 			<div class="menu-item">
-			<a class="menu-link" href="#">
+			<a class="menu-link" href="{{ url('tuntutan-status') }}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
 					<span class="menu-title">Status</span>
@@ -215,14 +215,14 @@
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="#">
+			<a class="menu-link" href="{{ url('tuntutan-pengesahan') }}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Pengesahan</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="#">
+			<a class="menu-link" href="{{ url('tuntutan-keputusan') }}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
 					<span class="menu-title">Keputusan</span>
