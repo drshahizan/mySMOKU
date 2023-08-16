@@ -137,6 +137,11 @@ class SaringanController extends Controller
         }
     }
 
+    public function tuntutanStatus()
+    {
+        return view('pages.sekretariat.tuntutan.status');
+    }
+    
     //Tuntutan - Saring
     public function tuntutanSaring()
     {
@@ -144,6 +149,16 @@ class SaringanController extends Controller
         ->get(['permohonan.*', 'statustransaksi.*'])
         ->where('status','=','2');
         $status = null;
-        return view('pages.saringan.tuntutanSaring',compact('permohonan','status'));
+        return view('pages.sekretariat.tuntutan.saring');
+    }
+
+    public function tuntutanPengesahan()
+    {
+        return view('pages.sekretariat.tuntutan.pengesahan');
+    }
+
+    public function tuntutanKeputusan()
+    {
+        return view('pages.sekretariat.tuntutan.keputusan');
     }
 }
