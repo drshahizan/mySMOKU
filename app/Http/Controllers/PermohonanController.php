@@ -166,13 +166,18 @@ class PermohonanController extends Controller
         
           
             $akaunBank=$request->akaunBank;
-            $filenameakaunBank=time().'.'.$akaunBank->getClientOriginalExtension();
+            $name1=$akaunBank->getClientOriginalName();  
+            $filenameakaunBank=$name1.'.'.$akaunBank->getClientOriginalExtension();
             $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
+            
             $suratTawaran=$request->suratTawaran;
-            $filenamesuratTawaran=time().'.'.$suratTawaran->getClientOriginalExtension();
+            $name2=$suratTawaran->getClientOriginalName(); 
+            $filenamesuratTawaran=$name2.'.'.$suratTawaran->getClientOriginalExtension();
             $request->suratTawaran->move('assets/dokumen',$filenamesuratTawaran);
+
             $invoisResit=$request->invoisResit;
-            $filenameinvoisResit=time().'.'.$invoisResit->getClientOriginalExtension();
+            $name3=$invoisResit->getClientOriginalName(); 
+            $filenameinvoisResit=$name3.'.'.$invoisResit->getClientOriginalExtension();
             $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
             
             $data->id_permohonan='KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar;
