@@ -123,14 +123,14 @@
 			<div class="menu-item">
 			<a class="menu-link" href="{{url('tuntutan-wang-saku')}}">
 			<!-- "{{ route('dashboard') }}" -->
-					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
+					<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
 					<span class="menu-title">Wang Saku</span>
 			</a>
 		</div>
 		<div class="menu-item">
 			<a class="menu-link" href="{{url('tuntutan-yuran-pengajian')}}">
 			<!-- "{{ route('dashboard') }}" -->
-					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
+					<span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
 					<span class="menu-title">Yuran Pengajian</span>
 			</a>
 		</div>
