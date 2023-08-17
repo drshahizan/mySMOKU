@@ -41,9 +41,9 @@
                 </div>
             </div> 
             @php
-                $belum_disaring = DB::table('statustransaksi')->where('status', 2)->count();
-                $dikembalikan = DB::table('statustransaksi')->where('status', 5)->count();
-                $disokong = DB::table('statustransaksi')->where('status', 4)->count();
+                $belum_disaring = DB::table('permohonan')->where('status', 2)->count();
+                $dikembalikan = DB::table('permohonan')->where('status', 5)->count();
+                $disokong = DB::table('permohonan')->where('status', 4)->count();
                 $keseluruhan = $belum_disaring + $dikembalikan + $disokong;
             @endphp       
             <div class="row clearfix">
@@ -131,8 +131,8 @@
                                         @php
                                             $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
                                             $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
-                                            $status = DB::table('statustransaksi')->where('nokp_pelajar', $item['nokp_pelajar'])->value('status');
-                                            if ($status=2){
+                                            $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                            if ($item['status']==2){
                                                 $status='Belum Disaring';
                                             }
                                         @endphp
