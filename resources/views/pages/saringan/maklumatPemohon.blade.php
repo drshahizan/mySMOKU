@@ -5,7 +5,7 @@
     <style>
         .maklumat, .maklumat td{
             border: none!important;
-            padding:4px 8px!important;
+            padding:2px 8px!important;
         }
         td{
             vertical-align: top!important;

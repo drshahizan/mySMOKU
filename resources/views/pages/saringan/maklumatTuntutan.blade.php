@@ -3,15 +3,18 @@
     <style>
         .maklumat, .maklumat td{
             border: none!important;
-            padding:4px 8px!important;
+            padding:2px 8px!important;
         }
         .table{
-            width: 60%;
+            width: 45%;
             table-layout: fixed;
         }
         .table2{
-            width: 40%;
+            width: 25%;
             table-layout: fixed;
+        }
+        .table td, .table th, .table2 td, .table2 th{
+            padding: 7px!important;
         }
         .white{
             color: white!important;
@@ -30,6 +33,9 @@
         }
         .bold{
             font-weight: bold!important;
+        }
+        .space{
+            width: 15%;
         }
     </style>
     <!-- Main body part  -->
@@ -77,47 +83,42 @@
                                     @endphp
                                     <table class="maklumat">
                                         <tr>
-                                            <td><strong>Nama</strong></td>
-                                            <td>:</td>
-                                            <td>{{$pelajar->nama_pelajar}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>No. Kad Pengenalan</strong></td>
-                                            <td>:</td>
-                                            <td>{{$pelajar->nokp_pelajar}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Tarikh Tuntutan</strong></td>
-                                            <td>:</td>
-                                            <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
-                                        </tr>
-                                        <tr>
                                             <td><strong>ID Tuntutan</strong></td>
                                             <td>:</td>
                                             <td>{{$permohonan->id_permohonan}}</td>
-                                        </tr>
-                                        <tr>
+                                            <td class="space">&nbsp;</td>
                                             <td><strong>Kursus</strong></td>
                                             <td>:</td>
                                             <td>{{$akademik->nama_kursus}}</td>
                                         </tr>
                                         <tr>
+                                            <td><strong>Nama</strong></td>
+                                            <td>:</td>
+                                            <td>{{$pelajar->nama_pelajar}}</td>
+                                            <td class="space">&nbsp;</td>
                                             <td><strong>Institusi</strong></td>
                                             <td>:</td>
                                             <td>{{$institusi}}</td>
                                         </tr>
                                         <tr>
+                                            <td><strong>No. Kad Pengenalan</strong></td>
+                                            <td>:</td>
+                                            <td>{{$pelajar->nokp_pelajar}}</td>
+                                            <td class="space">&nbsp;</td>
                                             <td><strong>Peringkat</strong></td>
                                             <td>:</td>
                                             <td>{{$peringkat}}</td>
                                         </tr>
                                         <tr>
+                                            <td><strong>Tarikh Tuntutan</strong></td>
+                                            <td>:</td>
+                                            <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
+                                            <td class="space">&nbsp;</td>
                                             <td><strong>Sesi/Semester</strong></td>
                                             <td>:</td>
                                             <td>{{Carbon::now()->year-1}}/{{Carbon::now()->year}}-{{$akademik->sem_semasa}}</td>
                                         </tr>
-                                    </table>                  
-                                
+                                    </table>   
                                 <hr>
                                 <br>
                                 <table class="maklumat">
