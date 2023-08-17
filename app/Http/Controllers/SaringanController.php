@@ -128,7 +128,7 @@ class SaringanController extends Controller
                 'catatan2'=>$catatan2, 
                 'catatan3'=>$catatan3,
             ];
-            Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
+            \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
             $permohonan = TuntutanPermohonan::join('statustransaksi','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
             ->get(['permohonan.*', 'statustransaksi.*'])
             ->where('status','=','2');
