@@ -357,19 +357,6 @@ $(document).ready(function(){
 															</div>
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">Bandar
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamat_bandar" placeholder="" value="{{$smoku->alamat_bandar}}"/>
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">Negeri
 																</label>
 																<!--end::Label-->
@@ -377,6 +364,19 @@ $(document).ready(function(){
 																<div class="col-12">
 																	<!--begin::Input-->
 																	<input type="text" class="form-control form-control-solid" name="alamat_negeri" placeholder="" value="{{$smoku->alamat_negeri}}" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">Bandar
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="alamat_bandar" placeholder="" value="{{$smoku->alamat_bandar}}"/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
