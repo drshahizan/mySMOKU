@@ -124,27 +124,20 @@
 			<a class="menu-link" href="#">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-					<span class="menu-title">Status</span>
+					<span class="menu-title">Keseluruhan</span>
 			</a>
 		</div>
 		<div class="menu-item">
 			<a class="menu-link" href="#">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
-					<span class="menu-title">Saring</span>
+					<span class="menu-title">Baru</span>
 			</a>
 		</div>
 		<div class="menu-item">
 			<a class="menu-link" href="#">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Pengesahan</span>
-			</a>
-		</div>
-		<div class="menu-item">
-			<a class="menu-link" href="#">
-			<!-- "{{ route('dashboard') }}" -->
-					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
 					<span class="menu-title">Keputusan</span>
 			</a>
 		</div>
