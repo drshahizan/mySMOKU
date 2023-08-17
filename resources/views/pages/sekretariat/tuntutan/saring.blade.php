@@ -36,10 +36,16 @@
             <div class="block-header">
                 <div class="row clearfix">
                     <div class="col-lg-4 col-md-12 col-sm-12">
-                        <h1>Saring Tuntutan</h1>
+                        <h1>Saring Permohonan</h1>
                     </div>
                 </div>
-            </div>        
+            </div> 
+            @php
+                $belum_disaring = DB::table('statustransaksi')->where('status', 2)->count();
+                $dikembalikan = DB::table('statustransaksi')->where('status', 5)->count();
+                $disokong = DB::table('statustransaksi')->where('status', 4)->count();
+                $keseluruhan = $belum_disaring + $dikembalikan + $disokong;
+            @endphp       
             <div class="row clearfix">
                 <div class="col-lg-3 col-md-6">
                     <div class="card">
@@ -48,7 +54,7 @@
                                 <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file" style="color: white!important"></i></div>
                                 <div class="ml-4">
                                     <span style="color: black!important">Jumlah Saringan</span>
-                                    <h4 class="mb-0 font-weight-medium">5000</h4>
+                                    <h4 class="mb-0 font-weight-medium">{{$keseluruhan}}</h4>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +67,7 @@
                                 <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-search" style="color: white!important"></i></div>
                                 <div class="ml-4">
                                     <span style="color: black!important">Belum Disaring</span>
-                                    <h4 class="mb-0 font-weight-medium">4992</h4>
+                                    <h4 class="mb-0 font-weight-medium">{{$belum_disaring}}</h4>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +80,7 @@
                                 <div class="icon-in-bg bg-green text-white rounded-circle"><i class="fa fa-check-circle" style="color: white!important"></i></div>
                                 <div class="ml-4">
                                     <span style="color: black!important">Disokong</span>
-                                    <h4 class="mb-0 font-weight-medium">8</h4>
+                                    <h4 class="mb-0 font-weight-medium">{{$disokong}}</h4>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +93,7 @@
                                 <div class="icon-in-bg bg-yellow text-white rounded-circle"><i class="fa fa-reply-all" style="color: white!important"></i></div>
                                 <div class="ml-4">
                                     <span style="color: black!important">Dikembalikan</span>
-                                    <h4 class="mb-0 font-weight-medium">259</h4>
+                                    <h4 class="mb-0 font-weight-medium">{{$dikembalikan}}</h4>
                                 </div>
                             </div>
                         </div>
