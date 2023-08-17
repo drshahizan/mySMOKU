@@ -11,9 +11,19 @@ class PenyelarasController extends Controller
         return view('pages.penyelaras.tuntutan.wangSaku');
     }
 
+    public function maklumatTuntutanWangSaku()
+    {
+        return view('pages.penyelaras.tuntutan.maklumatWangSaku');
+    }
+
     public function tuntutanYuranPengajian()
     {
         return view('pages.penyelaras.tuntutan.yuranPengajian');
+    }
+
+    public function maklumatTuntutanYuranPengajian()
+    {
+        return view('pages.penyelaras.tuntutan.maklumatYuranPengajian');
     }
 
     public function sejarahTuntutan()

@@ -173,13 +173,12 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <br>
+
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-success btn-round float-end" data-bs-toggle="modal" data-bs-target="#pengesahanModal">
+                                        <button type="button" class="btn btn-primary btn-round float-end" data-bs-toggle="modal" data-bs-target="#pengesahanModal">
                                             Sahkan
                                         </button>
-                                        {{-- Bulk Approval
-                                        <a href="#" class="btn btn-success btn-round float-end" data-bs-toggle="modal" data-bs-target="#pengesahanModal">Sahkan</a> --}}
+                                    
                                         {{-- Modal --}}
                                         <div class="modal fade" id="pengesahanModal" tabindex="-1" aria-labelledby="pengesahanModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -212,15 +211,16 @@
                                                             <label for="message-text" class="col-form-label">Catatan:</label>
                                                             <textarea class="form-control" id="message-text"></textarea>
                                                         </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                            <a href="{{ url('hantar-keputusan') }}" class="btn btn-primary btn-round float-end" data-bs-toggle="modal" data-bs-target="#pengesahanModal">Hantar</a>
+                                                            {{-- <button type="button" class="btn btn-primary ajaxstudent-save">Hantar</button> --}}
+                                                        </div>
                                                     </form>
                                                 </div>
-                                                <div class="modal-footer">
-                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                  <button type="button" class="btn btn-primary">Hantar</button>
-                                                </div>
-                                              </div>
+                                              </div> 
                                             </div>
-                                        </div>
+                                        </div>                                        
                                     </form>
                                 </div>
                             </div>
@@ -250,6 +250,13 @@
                 var keputusan = prompt("Kelulusan:");
                 var catatan = prompt("Catatan:");
 		    }
+
+            // submit modal
+            $(document).ready(function() {
+                $(document).on('click','ajaxstudent-save', function(){
+                    alert("Emel notifikasi telah dihantar kepada pemohon");
+                }); 
+            });
         </script>
         
         <!-- Vedor js file and create bundle with grunt  --> 

@@ -83,6 +83,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('cetak-senarai-pemohon', [SekretariatController::class, 'cetakSenaraiPemohonPDF']);
     Route::get('senarai-disokong-excel', [SekretariatController::class, 'cetakSenaraiPemohonExcel']);
     Route::get('/keputusan', [SekretariatController::class, 'mailKeputusan']);
+    Route::get('/generate-qrcode', [SekretariatController::class, 'qrcode']);
 
     //Tuntutan - Sekretariat
     Route::get('tuntutan-keseluruhan', [SekretariatController::class, 'tuntutanKeseluruhan']);
@@ -92,8 +93,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan-keputusan', [SekretariatController::class, 'tuntutanKeputusan']);
 
     //TUntutan - Penyelaras
-    Route::get('tuntutan-yuran-pengajian', [PenyelarasController::class, 'tuntutanYuranPengajian']);
     Route::get('tuntutan-wang-saku', [PenyelarasController::class, 'tuntutanWangSaku']);
+    Route::get('maklumat-tuntutan-wang-saku', [PenyelarasController::class, 'maklumatTuntutanWangSaku']);
+    Route::get('tuntutan-yuran-pengajian', [PenyelarasController::class, 'tuntutanYuranPengajian']);
+    Route::get('maklumat-tuntutan-yuran-pengajian', [PenyelarasController::class, 'maklumatTuntutanYuranPengajian']);
     Route::get('penyelaras-sejarah-tuntutan', [PenyelarasController::class, 'sejarahTuntutan']);
 
 });
