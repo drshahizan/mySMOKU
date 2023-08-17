@@ -20,6 +20,7 @@ class SemakUserController extends Controller
 
     public function index(){
         //$nokp = $request->session()->get('nokp');
+        addJavascriptFile('assets/js/custom/authentication/semak/general.js');
 
         $ipt = Infoipt::orderby("namaipt","asc")
              ->select('idipt','namaipt')
@@ -120,7 +121,7 @@ class SemakUserController extends Controller
                 
                 $user->save();
 
-                return redirect()->route('daftarlayak');
+                //return redirect()->route('daftarlayak');
             }
 
         
