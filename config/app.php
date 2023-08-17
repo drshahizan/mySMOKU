@@ -197,6 +197,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
     ],
 
     /*
@@ -214,6 +215,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'Carbon' => 'Carbon\Carbon',
     ])->toArray(),
 

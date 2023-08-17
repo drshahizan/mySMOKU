@@ -82,6 +82,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('cetak-senarai-pemohon', [SekretariatController::class, 'cetakSenaraiPemohonPDF']);
     Route::get('senarai-disokong-excel', [SekretariatController::class, 'cetakSenaraiPemohonExcel']);
     Route::get('/keputusan', [SekretariatController::class, 'mailKeputusan']);
+    Route::get('/generate-qrcode', [SekretariatController::class, 'qrcode']);
 
     //Tuntutan - Sekretariat
     Route::get('tuntutan-keseluruhan', [SekretariatController::class, 'tuntutanKeseluruhan']);

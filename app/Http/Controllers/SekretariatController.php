@@ -133,12 +133,10 @@ class SekretariatController extends Controller
         return redirect('/sekretariatKeputusan')->with('message','Emel notifikasi telah dihantar kepada pemohon');
     }
 
-    // public function mailKeputusan(int $pelajarID)
-    // {
-    //     $pelajar = Permohonan::findOrFail($pelajarID);
-    //     Mail::to("$pelajar->email")->send(new mailKeputusan($pelajar));
-    //      return redirect('pages.sekretariat.permohonan.keputusan')->with('message','Emel notifikasi telah dihantar kepada pemohon');
-    // }
+    public function qrcode()
+    {
+      return view('pages.sekretariat.permohonan.qrcode');
+    }
 
     //TUNTUTAN
 
