@@ -98,7 +98,7 @@
                                         <tr>
                                             <td>Jumlah Tuntutan (RM)</td>
                                             <td>:</td>
-                                            <td><input type="number" name="jumlah" id="jumlah" value="" placeholder="{{number_format(2500, 2)}}"></td>
+                                            <td><input type="number" name="jumlah" id="jumlah" value="" placeholder="{{number_format(1800, 2)}}"></td>
                                         </tr>
                                         <tr>
                                             <td>Catatan</td>
