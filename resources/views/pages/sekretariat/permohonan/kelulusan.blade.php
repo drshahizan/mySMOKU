@@ -11,6 +11,11 @@
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9">
+        <!-- CSS -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     </head>
 
     <body>
@@ -169,31 +174,52 @@
                                             </tbody>
                                         </table>
                                         <br>
-                                        {{-- <div class="col-md-6 col-sm-6 text-right">
-                                            <div class="body">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".launch-pricing-modal">Sahkan</button>
-                                                <div class="modal fade launch-pricing-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">                                            
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                                            </div>
-                                                            <div class="modal-body pricing_page text-center pt-4 mb-4">
-                                                                <div class="form-group c_form_group">
-                                                                    <label>Berikan Catatan Anda.</label>
-                                                                    <textarea rows="4" type="text" class="form-control" placeholder=""></textarea>
-                                                                </div> 
-                                                                <div class="col-12">
-                                                                    <button class="btn btn-success">Hantar</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-success btn-round float-end" data-bs-toggle="modal" data-bs-target="#pengesahanModal">
+                                            Sahkan
+                                        </button>
+                                        {{-- Bulk Approval
+                                        <a href="#" class="btn btn-success btn-round float-end" data-bs-toggle="modal" data-bs-target="#pengesahanModal">Sahkan</a> --}}
+                                        {{-- Modal --}}
+                                        <div class="modal fade" id="pengesahanModal" tabindex="-1" aria-labelledby="pengesahanModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h1 class="modal-title fs-5" id="pengesahanModalLabel">Rekod Keputusan Permohonan</h1>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
+
+                                                <div class="modal-body">
+                                                    <form  action="{{ url('hantar-keputusan') }}" method="POST">
+                                                        {{csrf_field()}}
+                                                        <div class="mb-3">
+                                                            <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
+                                                            <input type="text" class="form-control" id="no">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
+                                                            <input type="date" id="tarikh" class="form-control">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
+                                                            <select id="keputusan" onchange="select1()" class="form-control">
+                                                                <option value="">Pilih Keputusan</option>
+                                                                <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
+                                                                <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label">Catatan:</label>
+                                                            <textarea class="form-control" id="message-text"></textarea>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                  <button type="button" class="btn btn-primary">Hantar</button>
+                                                </div>
+                                              </div>
                                             </div>
-                                        </div> --}}
-                                        <div class="pengesahan" style="text-align: right;">
-                                            <button class="btn btn-success btn-round" data-toggle="modal" data-target="#exampleModalCenter" onclick="myinput()">Sahkan</button>
                                         </div>
                                     </form>
                                 </div>
@@ -203,10 +229,6 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Javascript -->
-        <script src="assets/bundles/libscripts.bundle.js"></script>    
-        <script src="assets/bundles/vendorscripts.bundle.js"></script>
 
         <script>
             //sorting function
@@ -227,34 +249,6 @@
                 var tarikh = prompt("Tarikh Mesyuarat:");
                 var keputusan = prompt("Kelulusan:");
                 var catatan = prompt("Catatan:");
-                // <table>
-                //     <tr>
-                //         <td><b>No. Mesyuarat</b></td>
-                //         <td><b>:</b></td>
-                //         <td><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;"></td>
-                //     </tr>
-                //     <tr>
-                //         <td><b>Tarikh Mesyuarat</b></td>
-                //         <td><b>:</b></td>
-                //         <td><input type="date" id="tarikh" name="tarikh" style="padding: 5px;"></td>
-                //     </tr>
-                //     <tr>
-                //         <td><b>Keputusan</b></td>
-                //         <td><b>:</b></td>
-                //         <td>
-                //             <select id="keputusan" onchange="select1()" style="padding: 5px;">
-                //                 <option value="">Pilih Keputusan</option>
-                //                 <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
-                //                 <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
-                //             </select>
-                //         </td>
-                //     </tr>
-                //     <tr>
-                //         <td><b>Catatan</b></td>
-                //         <td><b>:</b></td>
-                //         <td><input type="text" id="catatan" name="noMesyuarat" style="padding: 5px; width:500px;"></td>
-                //     </tr>
-                // </table>
 		    }
         </script>
         
@@ -290,8 +284,12 @@
         <!-- Javascript -->
         <script src="assets/bundles/libscripts.bundle.js"></script>    
         <script src="assets/bundles/vendorscripts.bundle.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
-        <!-- Vedor js file and create bundle with grunt  --> 
         <!-- Project core js file minify with grunt --> 
         <script src="assets/bundles/mainscripts.bundle.js"></script>
+
+        <!-- Bootstrap --> 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    </body>
 </x-default-layout> 

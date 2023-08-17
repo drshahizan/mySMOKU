@@ -143,7 +143,6 @@
                     {{-- Filter section --}}
                     <div class="row">
                         <div class="col-md-3">
-                            {{-- <label style="color:black"><b>Tapis Status Permohonan</b> --}}
                             <select name="status" class="form-select">
                                 <option value="">Semua Status Permohonan</option>
                                 <option value="Baru" {{Request::get('status') == 'Baru' ? 'selected':'' }} >Baru</option>
@@ -157,7 +156,6 @@
                         </div>
 
                         <div class="col-md-3">
-                            {{-- <label style="color:black"><b>Tapis Jenis Permohonan</b> --}}
                             <select name="status" class="form-select">
                                 <option value="">Semua Jenis Permohonan</option>
                                 <option value="BKOKU" {{Request::get('jenis') == 'BKOKU' ? 'selected':'' }} >BKOKU</option>

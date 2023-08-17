@@ -2,6 +2,10 @@
     <head>
         <link rel="stylesheet" href="assets/css/sekretariat.css">
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <!-- CSS -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
         <style>
             table, tr, td{
                 border: none!important;
@@ -97,14 +101,8 @@
                                         </table>
                                         <br>
                                         <div class="submit" style="text-align: right;">
-                                            {{-- <a href="{{url('keputusan')}}" target="_blank" class="btn btn-primary float-end" id="submit">
-                                                <span>Hantar</span>
-                                            </a> --}}
                                             <button type="submit" id="submit" class="btn btn-primary text-white">Hantar</button>
                                         </div>
-                                        <span role="alert" id="nameError" aria-hidden="true">
-                                            Sila masukkan no. mesyuarat
-                                        </span>
                                     </form>
                                 </div>
                             </div>
@@ -140,33 +138,17 @@
             })      
 
             // sweet alert
-            $('form').submit(function(event) {
-                event.preventDefault();
-                $.ajax({
-                    url: 'hantar-keputusan',
-                    type: 'POST',
-                    data: $(this).serialize(),
-                    dataType: 'json',
-                    success: function(response) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            text: response.success,
-                        });
-                    },
+            $(btn).ready(function() {
+                alertify.set('notifier','position', 'top-center');
+                alertify.success('Emel notifikasi telah dihantar kepada pemohon');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name+"csrf-token"]').attr('content')
+                    }
                 });
             });
         </script>
-
-        {{-- <script>
-            function confirmButton() {
-                confirm("Press a button!");
-            }
-            function my_button_click_handler(){
-                alert('Emel notifikasi telah dihantar ke pemohon.');
-            }
-       </script> --}}
-    
        {{-- <script>
         @if(session('status'))
             alert('{{session('status')}}');
@@ -177,5 +159,10 @@
                 button: "OK",
             });
        </script> --}}
+
+       <!-- Javascript -->
+       <script src="assets/bundles/libscripts.bundle.js"></script>    
+       <script src="assets/bundles/vendorscripts.bundle.js"></script>
+       <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     </body>
 </x-default-layout> 
