@@ -375,6 +375,43 @@ class PermohonanController extends Controller
         return view('pages.permohonan.statusmohon', compact('permohonan'));
         
     }
+
+    public function delete($nokp){
+
+        //$pelajar = Permohonan::find($nokp);
+        $pelajar = DB::table('pelajar')->where('nokp_pelajar', $nokp)->first();
+        $nokp = $pelajar->nokp_pelajar;
+        //$pelajar->delete(); //delete pelajar
+
+        $permohonan = DB::table('permohonan')->where('nokp_pelajar', $nokp)->first();
+        $id_permohonan = $permohonan->id_permohonan;
+        //$permohonan->delete();
+        DB::table('pelajar')->where('nokp_pelajar',$nokp)->delete();
+        DB::table('permohonan')->where('id_permohonan',$id_permohonan)->delete(); //delete permohonan
+        DB::table('waris')->where('nokp_pelajar',$nokp)->delete();
+        DB::table('maklumatakademik')->where('nokp_pelajar' ,$nokp)
+        ->update([
+
+            'no_pendaftaranpelajar' => NULL,
+            'tkh_mula' => NULL,
+            'tkh_tamat' => NULL,
+            'sem_semasa' => NULL,
+            'tempoh_pengajian' => NULL,
+            'bil_bulanpersem' => NULL,
+            'mod' => NULL,
+            'cgpa' => NULL,
+            'sumber_biaya' => NULL,
+            'nama_penaja' => NULL,
+            'status' => NULL,
+
+        ]);
+
+        DB::table('dokumen')->where('id_permohonan',$id_permohonan)->delete();
+        DB::table('statustransaksi')->where('id_permohonan',$id_permohonan)->delete();
+        
+        return redirect()->route('sejarahpermohonan');
+        
+    }
 }
 
 
