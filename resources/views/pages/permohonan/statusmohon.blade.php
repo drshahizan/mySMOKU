@@ -34,20 +34,19 @@
 				<th>Tindakan Permohonan</th>
 				<th>Tarikh Kemaskini</th>
 			</tr>
-</thead>
-<tbody>
-@foreach($permohonan as $permohonan)
-<tr> 
-	
-    <td>{{$permohonan->id_permohonan}}</td>
-               
-	<td>{{$permohonan->status}} </td>
-	<td><a href="#" class="btn btn-primary">Batal</a> </td>
-	<td>{{$permohonan->created_at}}</td>
-	@endforeach
-</tr>
-</tbody>
-</table>
+		</thead>
+		<tbody>
+		@foreach($permohonan as $permohonan)
+		<tr> 
+			<td>{{$permohonan->id_permohonan}}</td>
+			<td>{{$permohonan->status}} </td>
+			<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>
+			<td>{{$permohonan->created_at->format('d/m/Y')}}</td>
+			
+		</tr>
+		@endforeach
+		</tbody>
+	</table>
 </div>
 
 
