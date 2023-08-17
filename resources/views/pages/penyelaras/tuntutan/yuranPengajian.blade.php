@@ -25,7 +25,7 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <h1>Yuran Pengajian</h1>
+                            <h1>Tuntutan Yuran Pengajian</h1>
                         </div>
                         <hr>
 
