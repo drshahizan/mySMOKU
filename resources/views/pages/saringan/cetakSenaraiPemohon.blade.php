@@ -36,6 +36,9 @@
         .alignright {
             float: right;
         }
+        td.no{
+            text-align: right;
+        }
         /* .header{
             padding-top: 5px; 
             text-align:center; 
@@ -54,7 +57,7 @@
             <b>KEMENTERIAN PENGAJIAN TINGGI</b>
             <br>MINISTRY OF HIGHER EDUCATION<br>
         </div>
-        <div class="alignright" style="padding-top: 15px;">
+        <div class="alignright" style="padding-top: 10px;">
             <table style="border: none!important;">
                 <tr style="border: none!important;">
                     <td style="border: none!important;"><b>No. Mesyuarat </b></td>
@@ -68,12 +71,6 @@
                 </tr>
             </table>
         </div>     
-        {{-- <div class="image">
-            <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style=" width:10%; height:10%;">
-        </div>
-        <div class="tittle" style="font-size: 14px;">
-            <b>KEMENTERIAN PENGAJIAN TINGGI</b>
-        </div> --}}
     </div>
 
     <br><br><br><br><br>
@@ -100,7 +97,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>                                            
+                    <td class="no">1.</td>                                            
                     <td>KPTPPK/3/B980112105666</td>
                     <td>PPK</td>
                     <td>Aishah Binti Samsudin</td>
@@ -112,7 +109,7 @@
                     <td class="text-center">20/07/2023</td>
                 </tr> 
                 <tr>
-                    <td>2</td>                                            
+                    <td class="no">2.</td>                                            
                     <td>KPTBKOKU/2/970703041223</td>
                     <td>BKOKU</td>
                     <td>Mohd Ali Bin Abu Kassim</td>
@@ -124,7 +121,7 @@
                     <td class="text-center">27/07/2023</td>
                 </tr> 
                 <tr> 
-                    <td>3</td>                                           
+                    <td class="no">3.</td>                                           
                     <td>KPT/BKOKU/3/970204052445</td>
                     <td>BKOKU</td>
                     <td>Sarah Binti Yusri</td>
@@ -136,7 +133,7 @@
                     <td class="text-center">05/07/2023</td>
                 </tr> 
                 <tr>
-                    <td>4</td>
+                    <td class="no">4.</td>
                     <td>KPT/BKOKU/5/970703041223</td>
                     <td>BKOKU</td>
                     <td>Santosh A/L Ariyaran</td>
@@ -148,7 +145,7 @@
                     <td class="text-center">03/08/2024</td>
                 </tr> 
                 <tr>
-                    <td>5</td>
+                    <td class="no">5.</td>
                     <td>KPT/BKOKU/6/960909105668</td>
                     <td>BKOKU</td>
                     <td>Ling Kai Jie</td>
@@ -160,7 +157,7 @@
                     <td class="text-center">08/07/2024</td>
                 </tr> 
                 <tr>
-                    <td>6</td>
+                    <td class="no">6.</td>
                     <td>KPT/BKOKU/6/950804082447</td>
                     <td>BKOKU</td>
                     <td>Akmal Bin Kairuddin</td>
@@ -172,7 +169,7 @@
                     <td class="text-center">18/07/2025</td>
                 </tr>
                 <tr>
-                    <td>7</td>
+                    <td class="no">7.</td>
                     <td>KPT/BKOKU/3/021212050334</td>
                     <td>BKOKU</td>
                     <td>Santishwaran A/L Paven</td>
@@ -184,7 +181,7 @@
                     <td class="text-center">05/08/2025</td>
                 </tr>
                 <tr>
-                    <td>8</td>
+                    <td class="no">8.</td>
                     <td>KPT/PPK/3/990201065225</td>
                     <td>PPK</td>
                     <td>Ezra Hanisah Binti Md Yunos</td>
@@ -196,7 +193,7 @@
                     <td class="text-center">05/07/2024</td>
                 </tr>
                 <tr>
-                    <td>9</td>
+                    <td class="no">9.</td>
                     <td>KPT/BKOKU/3/010305058473</td>
                     <td>BKOKU</td>
                     <td>Arshahad Bin Kairul Zaman</td>
@@ -208,7 +205,7 @@
                     <td class="text-center">20/07/2025</td>
                 </tr>
                 <tr>
-                    <td>10</td>
+                    <td class="no">10.</td>
                     <td>KPT/BKOKU/3/981004045253</td>
                     <td>BKOKU</td>
                     <td>Syed Abdul Kassim Hussain Yusof</td>
@@ -222,6 +219,7 @@
             </tbody>
         </table>
     </div>
+    
     <script>
         document.getElementById("text").innerHtml = document.getElementById("text").innerHtml.toLowerCase()
     </script>

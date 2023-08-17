@@ -101,7 +101,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 
-
 Route::get('/error', function () {
     abort(500);
 });
