@@ -1,7 +1,7 @@
 <x-auth-layout>
 
     <!--begin::Form-->
-    <form class="form w-100"  action="{{ route('semaksyarat') }}" method="post">
+    <form class="form w-100" id="kt_sign_up_form" action="{{ route('semaksyarat') }}" data-kt-redirect-url="{{ route('daftarlayak') }}" method="post">
     @csrf
 
             @if (session('message'))
@@ -72,9 +72,9 @@
 
 <!-- institusi Dropdown -->
     <div class="fv-row mb-10">													
-        <label class="form-label required">Nama Pusat Pengajian</label>
-        <select id="id_institusi"  name="id_institusi" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-allow-clear="true" data-hide-search="true">
-            <option value='0'>Pilih</option>
+        <label class="form-label">Nama Pusat Pengajian</label>
+        <select id="id_institusi" name="id_institusi" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-allow-clear="true" data-hide-search="true">
+            <option value="">Pilih</option>
             @foreach ($ipt as $ipt)	
             <option value="{{ $ipt->idipt}}">{{ $ipt->namaipt}}</option> 
             @endforeach
@@ -82,9 +82,9 @@
     </div>
 
     <div class="fv-row mb-10">
-            <label class="form-label required">Peringkat Pengajian</label>
+            <label class="form-label">Peringkat Pengajian</label>
             <select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-allow-clear="true" data-hide-search="true">
-                <option>Pilih</option>
+                <option value="">Pilih</option>
                 @foreach ($kodperingkat as $kodperingkat)	
             <option value="{{ $kodperingkat->kodperingkat}}">{{ $kodperingkat->peringkat}}</option> 
             @endforeach
@@ -93,9 +93,9 @@
 
 
     <div class="fv-row mb-10">
-        <label class="form-label required">Nama Kursus</label>
-        <select id='nama_kursus' name='nama_kursus' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-allow-clear="true" data-hide-search="true">
-            <option value='0'>Pilih</option>
+        <label class="form-label">Nama Kursus</label>
+        <select id='nama_kursus'  name='nama_kursus' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-allow-clear="true" data-hide-search="true">
+            <option value="">Pilih</option>
         </select>
     </div>
 
@@ -204,21 +204,24 @@
 
         <!--begin::Submit button-->
         <div class="d-grid mb-10">
-            <button type="submit"  class="btn btn-primary">
+            {{--<button type="submit"  class="btn btn-primary">
                 Semak
+            </button>--}}
+            <button type="submit" id="kt_sign_up_submit" class="btn btn-primary">
+                @include('partials/general/_button-indicator', ['label' => 'Seterusnya'])
             </button>
         </div>
         <!--end::Submit button-->
 
-        <!--begin::Sign up-->
-        <div class="text-gray-500 text-center fw-semibold fs-6">
+        <!--begin::Sign in-->
+        {{--<div class="text-gray-500 text-center fw-semibold fs-6">
             Mempunyai akaun?
 
             <a href="/login" class="link-primary fw-semibold">
                 Log Masuk
             </a>
-        </div>
-        <!--end::Sign up-->
+        </div>--}}
+        <!--end::Sign in-->
     </form>
     <!--end::Form-->
 
