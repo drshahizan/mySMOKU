@@ -1019,7 +1019,7 @@ $(document).ready(function(){
 															</thead>
 															<tbody class="fw-semibold text-gray-600">
 																<tr>
-																	<td class="text-gray-800">Salinan Penyata Bank</td>
+																	<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
 																	<td class="text-gray-800"></td>
 																	<td>
 																		<input type="file" name="akaunBank"/>
@@ -1029,7 +1029,7 @@ $(document).ready(function(){
 																	</td>
 																</tr>
 																<tr>
-																	<td class="text-gray-800">Salinan Surat Tawaran Pengajian</td>
+																	<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
 																	<td class="text-gray-800"></td>
 																	<td>
 																		<input type="file" name="suratTawaran"/>
@@ -1039,7 +1039,7 @@ $(document).ready(function(){
 																	</td>
 																</tr>
 																<tr>
-																	<td class="text-gray-800">Salinan Resit/Invois</td>
+																	<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/resit.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
 																	<td class="text-gray-800"></td>
 																	<td>
 																		<input type="file" name="invoisResit"/>
