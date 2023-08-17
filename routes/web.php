@@ -52,6 +52,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('permohonan', [PermohonanController::class, 'store'])->name('permohonan.post');
     Route::get('viewpermohonan', [PermohonanController::class, 'viewpermohonan'])->name('viewpermohonan');
     Route::get('/download/{file}',[PermohonanController::class,'download']);
+    Route::get('kemaskini',[PermohonanController::class,'kemaskini'])->name('kemaskini');
+    Route::post('kemaskini', [PermohonanController::class, 'update'])->name('kemaskini.post');
     Route::get('statuspermohonan', [PermohonanController::class, 'statuspermohonan'])->name('sejarahpermohonan');
 
   
