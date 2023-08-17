@@ -41,9 +41,9 @@
                 </div>
             </div> 
             @php
-                $belum_disaring = DB::table('statustransaksi')->where('status', 2)->count();
-                $dikembalikan = DB::table('statustransaksi')->where('status', 5)->count();
-                $disokong = DB::table('statustransaksi')->where('status', 4)->count();
+                $belum_disaring = DB::table('permohonan')->where('status', 2)->count();
+                $dikembalikan = DB::table('permohonan')->where('status', 5)->count();
+                $disokong = DB::table('permohonan')->where('status', 4)->count();
                 $keseluruhan = $belum_disaring + $dikembalikan + $disokong;
             @endphp       
             <div class="row clearfix">

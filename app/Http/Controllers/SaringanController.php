@@ -13,9 +13,11 @@ class SaringanController extends Controller
 {
     public function saringan()
     {
-        $permohonan = TuntutanPermohonan::join('statustransaksi','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
-        ->get(['permohonan.*', 'statustransaksi.*'])
-        ->where('status','=','2');
+        $permohonan = TuntutanPermohonan::where('status', '2')
+        ->orWhere('status', '=','3')
+        ->orWhere('status', '=','4')
+        ->orWhere('status', '=','5')
+        ->get();
         $status = null;
         return view('pages.saringan.saringan',compact('permohonan','status'));
     }
@@ -57,9 +59,11 @@ class SaringanController extends Controller
 
     public function saringTuntutan(Request $request)
     {
-        $permohonan = TuntutanPermohonan::join('statustransaksi','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
-        ->get(['permohonan.*', 'statustransaksi.*'])
-        ->where('status','=','2');
+        $permohonan = TuntutanPermohonan::where('status', '2')
+        ->orWhere('status', '=','3')
+        ->orWhere('status', '=','4')
+        ->orWhere('status', '=','5')
+        ->get();
         $status = "Tuntutan Telah Disokong";
         return view('pages.saringan.saringan',compact('permohonan','status'));
     }
@@ -129,9 +133,11 @@ class SaringanController extends Controller
                 'catatan3'=>$catatan3,
             ];
             \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
-            $permohonan = TuntutanPermohonan::join('statustransaksi','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
-            ->get(['permohonan.*', 'statustransaksi.*'])
-            ->where('status','=','2');
+            $permohonan = TuntutanPermohonan::where('status', '2')
+            ->orWhere('status', '=','3')
+            ->orWhere('status', '=','4')
+            ->orWhere('status', '=','5')
+            ->get();
             $status = "Permohonan Telah Dikembalikan";
             return view('pages.saringan.saringan',compact('permohonan','status'));
         }
