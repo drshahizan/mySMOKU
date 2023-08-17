@@ -8,17 +8,17 @@ class PenyelarasController extends Controller
 {
     public function keseluruhanTuntutan()
     {
-        return view('pages.saringan.salinanAkademik');
+        return view('pages.penyelaras.tuntutan.keseluruhan');
     }
 
     public function tuntutanBaru()
     {
-        return view('pages.saringan.salinanAkademik');
+        return view('pages.penyelaras.tuntutan.baru');
     }
 
     public function keputusanTuntutan()
     {
-        return view('pages.saringan.salinanAkademik');
+        return view('pages.penyelaras.tuntutan.keputusan');
     }
 
 }

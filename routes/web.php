@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\SaringanController;
 use App\Http\Controllers\SekretariatController;
+use App\Http\Controllers\PenyelarasController;
 use App\Models\Permohonan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;

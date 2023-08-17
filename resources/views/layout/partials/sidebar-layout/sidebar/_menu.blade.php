@@ -121,21 +121,21 @@
 				</div>
 			</div>
 			<div class="menu-item">
-			<a class="menu-link" href="#">
+			<a class="menu-link" href="{{url('penyelaras-keseluruhan-tuntutan')}}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
 					<span class="menu-title">Keseluruhan</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="#">
+			<a class="menu-link" href="{{url('penyelaras-tuntutan-baru')}}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 					<span class="menu-title">Baru</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="#">
+			<a class="menu-link" href="{{url('penyelaras-keputusan-tuntutan')}}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Keputusan</span>
