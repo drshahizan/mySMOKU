@@ -23,9 +23,7 @@ class SekretariatController extends Controller
     
     public function statusPermohonan()
     {
-        $keseluruhan = TuntutanPermohonan::join('statustransaksi','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
-        ->get(['permohonan.*', 'statustransaksi.*'])
-        ->all();
+        $keseluruhan = TuntutanPermohonan::all();
         return view('pages.sekretariat.permohonan.status',compact('keseluruhan'));
     }
 
