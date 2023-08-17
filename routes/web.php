@@ -55,6 +55,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('kemaskini',[PermohonanController::class,'kemaskini'])->name('kemaskini');
     Route::post('kemaskini', [PermohonanController::class, 'update'])->name('kemaskini.post');
     Route::get('statuspermohonan', [PermohonanController::class, 'statuspermohonan'])->name('sejarahpermohonan');
+	Route::get('statuspermohonan/{nokp}', [PermohonanController::class, 'delete'])->name('delete');
 
   
     //Saring permohonan
