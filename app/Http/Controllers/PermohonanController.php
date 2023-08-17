@@ -207,7 +207,9 @@ class PermohonanController extends Controller
         ->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
         ->get(['pelajar.*', 'bk_jantina.*','bk_bangsa.*','bk_bangsa.*','bk_jenisoku.*'])
         ->where('nokp_pelajar', Auth::user()->id());
-        $waris = Waris::all()->where('nokp_pelajar', Auth::user()->id());
+        $waris = Waris::join('bk_hubungan','bk_hubungan.kodhubungan','=','waris.hubungan')
+        ->get(['waris.*', 'bk_hubungan.*'])
+        ->where('nokp_pelajar', Auth::user()->id());
         $akademik = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
         ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
         ->join('bk_mod','bk_mod.kodmod','=','maklumatakademik.mod')
@@ -221,9 +223,138 @@ class PermohonanController extends Controller
     }
 
 
-    public function download(Request $request,$file)
-    {   
+    public function download(Request $request,$file){   
         return response()->download(public_path('assets/dokumen/'.$file));
+    }
+
+    public function kemaskini(){
+
+        DB::table('permohonan')->where('nokp_pelajar' ,Auth::user()->id())
+        ->update([
+
+            'status' => '1',
+
+        ]);
+
+        $pelajar = Permohonan::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
+        ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
+        ->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
+        ->get(['pelajar.*', 'bk_jantina.*','bk_bangsa.*','bk_bangsa.*','bk_jenisoku.*'])
+        ->where('nokp_pelajar', Auth::user()->id());
+        $waris = Waris::join('bk_hubungan','bk_hubungan.kodhubungan','=','waris.hubungan')
+        ->get(['waris.*', 'bk_hubungan.*'])
+        ->where('nokp_pelajar', Auth::user()->id());
+        $akademik = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
+        ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
+        ->join('bk_mod','bk_mod.kodmod','=','maklumatakademik.mod')
+        ->join('bk_sumberbiaya','bk_sumberbiaya.kodbiaya','=','maklumatakademik.sumber_biaya')
+        ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*', 'bk_mod.*', 'bk_sumberbiaya.*'])
+        ->where('nokp_pelajar', Auth::user()->id());
+        $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id());
+        $dokumen = Dokumen::all()->where('nokp_pelajar', Auth::user()->id());
+        return view('pages.permohonan.permohonan-baru-kemaskini', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
+        
+    }
+
+    public function update(Request $request)
+    {   
+        DB::table('pelajar')->where('nokp_pelajar' ,$request->nokp_pelajar)
+        ->update([
+
+            'alamat1' => $request->alamat1,
+            'alamat_poskod' => $request->alamat_poskod,
+            'alamat_bandar' => $request->alamat_bandar,
+            'alamat_negeri' => $request->alamat_negeri,
+            'no_tel' => $request->no_tel,
+            'no_telR' => $request->no_telR,
+            'no_akaunbank' => $request->no_akaunbank,
+
+        ]);
+
+        DB::table('waris')->where('nokp_pelajar' ,$request->nokp_pelajar)
+        ->update([
+
+            'nama_waris' => $request->nama_waris,
+            'nokp_waris' => $request->nokp_waris,
+            'alamat1' => $request->alamatW1,
+            'alamat_poskod' => $request->alamatW_poskod,
+            'alamat_bandar' => $request->alamatW_bandar,
+            'alamat_negeri' => $request->alamatW_negeri,
+            'no_tel' => $request->no_telW,
+            'no_telR' => $request->no_telRW,
+            'hubungan' => $request->hubungan,
+            'pendapatan' => $request->pendapatan,
+
+        ]);
+
+        DB::table('maklumatakademik')->where('nokp_pelajar' ,$request->nokp_pelajar)
+        ->update([
+
+            'no_pendaftaranpelajar' => $request->no_pendaftaranpelajar,
+            'tkh_mula' => $request->tkh_mula,
+            'tkh_tamat' => $request->tkh_tamat,
+            //'sem_semasa' => $request->sem_semasa,
+            'tempoh_pengajian' => $request->tempoh_pengajian,
+            //'bil_bulanpersem' => $request->bil_bulanpersem,
+            //'mod' => $request->mod,
+            'cgpa' => $request->cgpa,
+            //'sumber_biaya' => $request->sumber_biaya,
+            'nama_penaja' => $request->nama_penaja,
+            'status' => '1',
+
+        ]);
+
+        DB::table('permohonan')->where('nokp_pelajar' ,$request->nokp_pelajar)
+        ->update([
+
+            'yuran' => $request->yuran,
+            'elaun' => $request->elaun,
+            'amaun' => $request->amaun,
+            'perakuan' => $request->perakuan,
+            'status' => '2',
+
+        ]);
+
+            
+            if($request->hasFile('akaunBank')){
+                $akaunBank=$request->akaunBank;
+                $name1='salinanbank';  
+                $filenameakaunBank=$name1.'_'.$request->nokp_pelajar.'.'.$akaunBank->getClientOriginalExtension();
+                $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
+                DB::table('dokumen')->where('nokp_pelajar' ,$request->nokp_pelajar)
+                ->update([
+                'akaunBank' => $filenameakaunBank,
+                ]);
+            }
+            
+            if($request->hasFile('suratTawaran')){
+                $suratTawaran=$request->suratTawaran;
+                $name2='salinantawaran'; 
+                $filenamesuratTawaran=$name2.'_'.$request->nokp_pelajar.'.'.$suratTawaran->getClientOriginalExtension();
+                $request->suratTawaran->move('assets/dokumen',$filenamesuratTawaran);
+                DB::table('dokumen')->where('nokp_pelajar' ,$request->nokp_pelajar)
+                ->update([
+                'suratTawaran' => $filenamesuratTawaran,
+                ]);
+
+
+            }
+
+            if($request->hasFile('invoisResit')){
+                $invoisResit=$request->invoisResit;
+                $name3='salinanresit';  
+                $filenameinvoisResit=$name3.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
+                $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
+                DB::table('dokumen')->where('nokp_pelajar' ,$request->nokp_pelajar)
+                ->update([
+                'invoisResit' => $filenameinvoisResit,
+                ]);
+        
+            }
+
+
+        return redirect()->route('viewpermohonan');
+        
     }
  
 
