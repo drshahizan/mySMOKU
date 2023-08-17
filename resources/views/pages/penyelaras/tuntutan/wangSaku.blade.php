@@ -1,6 +1,6 @@
 <x-default-layout>
     <head>
-        <title>Sekretariat BKOKU KPT</title>
+        <title>Penyelaras BKOKU KPT</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -10,334 +10,246 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9">
+        <!-- CSS -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     </head>
 
     <body>
         <!-- Main body part  -->
         <div id="main-content">
             <div class="container-fluid">
-                <!-- Page header section  -->
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <h1>Senarai Keseluruhan Tuntutan</h1>
+                            <h1>Tuntutan Wang Saku</h1>
                         </div>
                         <hr>
 
-                        <div class="row">
-                        {{-- Small Card Section Level 1--}}
-                            <div class="col-lg-2 col-md-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="icon-in-bg bg-info text-white rounded-circle"><i class="fa fa-bookmark" style="color: white"></i></div>
-                                            <div class="ml-4">
-                                                <span style="color: black;"> Baru</span>
-                                                <h4 class="mb-0 font-weight-medium">1090</h4>
-                                            </div>
-                                        </div>
+                        {{-- Filter Function --}}
+                            {{-- <form action="" method="GET">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
+                                    </div>
+    
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-primary" style="width: 10%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
                                     </div>
                                 </div>
+                            </form>
+                            --}}
+
+                        <div class="card">
+                            <div class="header">
+                                <h2>Senarai Tuntutan yang Layak untuk Tuntutan Wang Saku<br><small>Sila klik pada ID tuntutan untuk melengkapkan borang Tuntutan Wang Saku</small></h2>
+                                {{-- <ul class="header-dropdown dropdown" style="color: black;">
+                                    <li><a href="{{ url('cetak-senarai-pemohon') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-print"></i> PDF</a></li>
+                                    <li><a href="{{ url('senarai-disokong-excel') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-print"></i> Excel</a></li>
+                                </ul> --}}
                             </div>
 
-                            <div class="col-lg-2 col-md-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-inline-flex">
-                                            <div class="icon-in-bg text-white rounded-circle" style="background-color: coral;"><i class="fa fa-users" style="color: white"></i></div>
-                                            <div class="ml-4">
-                                                <span style="color: black"> Saringan</span>
-                                                <h4 class="mb-0 font-weight-medium">500</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-2 col-md-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="icon-in-bg bg-primary text-white rounded-circle"><i class="fa fa-user-check" style="color: white"></i></div>
-                                            <div class="ml-4">
-                                                <span style="color: black"> Disokong</span>
-                                                <h4 class="mb-0 font-weight-medium">2408</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-2 col-md-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="icon-in-bg bg-warning text-white rounded-circle"><i class="fa fa-mail-reply" style="color: white"></i></div>
-                                            <div class="ml-4">
-                                                <span style="color: black"> Dikembalikan</span>
-                                                <h4 class="mb-0 font-weight-medium">54</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-2 col-md-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="icon-in-bg bg-success text-white rounded-circle"><i class="fa fa-check"></i></div>
-                                            <div class="ml-4">
-                                                <span style="color: black;"> Layak</span>
-                                                <h4 class="mb-0 font-weight-medium">1230</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-2 col-md-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="icon-in-bg bg-danger text-white rounded-circle"><i class="fa fa-times" style="color: white"></i></div>
-                                            <div class="ml-4">
-                                                <span style="color: black"> Tidak Layak</span>
-                                                <h4 class="mb-0 font-weight-medium">25</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- <div class="col-lg-2 col-md-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="icon-in-bg text-white rounded-circle" style="background-color: brown"><i class="fa fa-warning" style="color: white"></i></div>
-                                            <div class="ml-4">
-                                                <span style="color: black"> Tidak Aktif</span>
-                                                <h4 class="mb-0 font-weight-medium">195</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-                        </div>
-                    </div>
-                    {{-- End of Small card section --}}
-                </div>
-
-                {{-- Table section --}}
-                <div class="row clearfix">
-                    <!-- Page header2 section  -->
-                    <div class="block-header">
-                        <div class="row clearfix">
-                            <div class="col-lg-4 col-md-12 col-sm-12">
-                                <h1>Senarai Tuntutan</h1>
-                            </div>
-                            <hr>
-                        </div>
-                    </div>
-
-                    {{-- Filter section --}}
-                    <div class="row">
-                        <div class="col-md-3">
-                            {{-- <label style="color:black"><b>Tapis Status Permohonan</b> --}}
-                            <select name="status" class="form-select">
-                                <option value="">Semua Status Tuntutan</option>
-                                <option value="Baru" {{Request::get('status') == 'Baru' ? 'selected':'' }} >Baru</option>
-                                <option value="Saringan" {{Request::get('status') == 'Saringan' ? 'selected':'' }} >Saringan</option>
-                                <option value="Disokong" {{Request::get('status') == 'Disokong' ? 'selected':'' }} >Disokong</option>
-                                <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
-                                <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
-                                <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
-                                <option value="Tidak Aktif" {{Request::get('status') == 'Tidak Aktif' ? 'selected':'' }} >Tidak Aktif</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-3">
-                            {{-- <label style="color:black"><b>Tapis Jenis Permohonan</b> --}}
-                            <select name="status" class="form-select">
-                                <option value="">Semua Jenis Tuntutan</option>
-                                <option value="BKOKU" {{Request::get('jenis') == 'BKOKU' ? 'selected':'' }} >BKOKU</option>
-                                <option value="PPK" {{Request::get('jenis') == 'PPK' ? 'selected':'' }} >PPK</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-4 right">
-                            <button type="submit" class="btn btn-primary" style="width: 15%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
-                        </div>
-                    </div>
-                    <br>
-
-                    {{-- Table senarai --}}
-                    <div class="row clearfix">
-                    <div class="col-lg-12">
-                        <div class="table-responsive">
-                            <div class="body">      
-                                <table id="sortTable" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                            <th style="width: 15%"><b>ID Tuntutan</b></th>                                        
-                                            <th style="width: 35%"><b>Nama</b></th>
-                                            <th style="width: 15%"><b>Jenis Permohonan</b></th>
-                                            <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th> 
-                                            <th class="text-center" style="width: 15%">Status Tuntutan</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/990404080221</a></td>
-                                            <td>Santosh A/L Ariyaran</td>
-                                            <td>BKOKU</td>
-                                            <td class="text-center">07/02/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:coral; color:white;">Saringan</button></td>
-                                        </tr>
-
-                                        <tr data-status="Tidak Aktif">
-                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTPPK/3/970204052445</a></td>
-                                            <td>Sarah Binti Yusri</td>
-                                            <td>PPK</td>                                        
-                                            <td class="text-center">05/03/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
-                                        </tr>  
-
-                                        <tr data-status="Disokong">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/980112105666</a></td>
-                                            <td>Aishah Binti Samsudin</td>
-                                            <td>BKOKU</td>                                       
-                                            <td class="text-center">02/03/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
-                                        </tr>
-
-                                        <tr data-status="Baru">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/990404080221</a></td>
-                                            <td>Mohd Ali Bin Abu Kassim</td>
-                                            <td>BKOKU</td>                                        
-                                            <td class="text-center">27/07/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-info btn-sm">Baru</button></td>
-                                        </tr>
-
-                                        <tr data-status="Dikembalikan">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/960909105668</a></td>
-                                            <td>Ling Kai Jie</td>
-                                            <td>BKOKU</td>                                        
-                                            <td class="text-center">09/04/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
-                                        </tr>
-                                        
-                                        <tr data-status="Saringan">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/6/950804082447</a></td>
-                                            <td>Akmal Bin Kairuddin</td>
-                                            <td>PPK</td>                                        
-                                            <td class="text-center">27/4/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
-                                        </tr>
-
-                                        <tr data-status="Tidak Layak">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/2/021212050334</a></td>
-                                            <td>Santishwaran A/L Paven</td>
-                                            <td>PPK</td>                                        
-                                            <td class="text-center">05/06/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/001205034745</a></td>
-                                            <td>Choo Mei Ling</td>
-                                            <td>BKOKU</td>
-                                            <td class="text-center">07/06/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:coral; color:white;">Saringan</button></td>
-                                        </tr>
-                                        
-                                        <tr data-status="Saringan">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/890201065225</a></td>
-                                            <td>Ezra Hanisah Binti Md Yunos</td>
-                                            <td>BKOKU</td>                                    
-                                            <td class="text-center">19/02/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:coral; color:white;">Saringan</button></td>
-                                        </tr>
-                                        
-                                        <tr data-status="Layak">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/2/010305058473</a></td>
-                                            <td>Arshahad Bin Kairul Zaman</td>
-                                            <td>PPK</td>                                        
-                                            <td class="text-center">26/05/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td>
-                                        </tr>
-                                        
-                                        <tr data-status="Disokong">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/3/981004045253</a></td>
-                                            <td>Syed Abdul Kassim Hussain Yusof</td>
-                                            <td>PPK</td>                                        
-                                            <td class="text-center">25/05/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
-                                        </tr>
-                                        
-                                        <tr data-status="Disokong">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/990201051446</a></td>
-                                            <td>Shakira Mariam Aqilah Binti Syed Abdul Rahman</td>
-                                            <td>BKOKU</td>                                        
-                                            <td class="text-center">07/06/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm btn-success">Layak</button></td>
-                                        </tr>
-                                        
-                                        <tr data-status="Baru">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/5/940524032341</a></td>
-                                            <td>Rahman Mohammed Arshahad Al-dhaqm</td>
-                                            <td>BKOKU</td>                                    
-                                            <td class="text-center">09/07/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-info btn-sm">Baru</button></td>
-                                        </tr>
-                                        
-                                        <tr data-status="Disokong">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/950623035672</a></td>
-                                            <td>Wan Nurul Syafiqah Binti Wan Sahak</td>
-                                            <td>BKOKU</td>
-                                            <td class="text-center">09/08/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
-                                        </tr>
-
-                                        <tr data-status="Dikembalikan">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/890907030098</a></td>
-                                            <td>Siti Aisyah Binti Ismail</td>
-                                            <td>BKOKU</td>
-                                            <td class="text-center">21/05/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
-                                        </tr>
-
-                                        <tr data-status="Disokong">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/6/900623031672</a></td>
-                                            <td>Wan Aminah Binti Hasan</td>
-                                            <td>PPK</td>
-                                            <td class="text-center">19/04/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
-                                        </tr>
-
-                                        <tr data-status="Dikembalikan">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/4/950523098909</a></td>
-                                            <td>Muhammad Aiman Bin Hamid</td>
-                                            <td>PPK</td>
-                                            <td class="text-center">09/07/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>   
-        </div> 
-
+                            <div class="table-responsive">
+                                <div class="body">
+                                    <form action="{{ url('hantar-keputusan') }}" method="POST">
+                                        {{csrf_field()}}
+                                        <table id="sortTable" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center" style="width:5%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
+                                                    <th style="width: 15%"><b>ID Permohonan</b></th>                                        
+                                                    <th style="width: 50%"><b>Nama</b></th>
+                                                    <th style="width: 15%"><b>Jenis Permohonan</b></th>
+                                                    <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th> 
+                                                </tr>
+                                            </thead>
+                                            
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-center"><input type="checkbox" name="checkbox-1" id="checkbox-1" /></td>
+                                                    <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/3/990404080221</a></td>
+                                                    <td>Santosh A/L Ariyaran</td>
+                                                    <td>BKOKU</td>
+                                                    <td class="text-center">07/02/2023</td>
+                                                </tr>
         
-        <!-- Javascript -->
-        <script src="assets/bundles/libscripts.bundle.js"></script>    
-        <script src="assets/bundles/vendorscripts.bundle.js"></script>
+                                                <tr>
+                                                    <td class="text-center"><input type="checkbox" name="checkbox-2" id="checkbox-2" /></td>
+                                                    <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/5/970204052445</a></td>
+                                                    <td>Sarah Binti Yusri</td>
+                                                    <td>PPK</td>                                        
+                                                    <td class="text-center">05/03/2023</td>
+                                                </tr>  
+        
+                                                <tr>
+                                                    <td class="text-center"><input type="checkbox" name="checkbox-3" id="checkbox-3" /></td>
+                                                    <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/3/980112105666</a></td>
+                                                    <td>Aishah Binti Samsudin</td>
+                                                    <td>BKOKU</td>                                       
+                                                    <td class="text-center">02/03/2023</td>
+                                                </tr>
+        
+                                                <tr>
+                                                    <td class="text-center"><input type="checkbox" name="checkbox-4" id="checkbox-4" /></td>
+                                                    <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/4/970703041223</a></td>
+                                                    <td>Mohd Ali Bin Abu Kassim</td>
+                                                    <td>BKOKU</td>                                        
+                                                    <td class="text-center">08/07/2023</td>
+                                                </tr>
+        
+                                                <tr>
+                                                    <td class="text-center"><input type="checkbox" name="checkbox-5" id="checkbox-5" /></td>
+                                                    <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/4/960909105668</a></td>
+                                                    <td>Ling Kai Jie</td>
+                                                    <td>BKOKU</td>                                        
+                                                    <td class="text-center">09/04/2023</td>
+                                                </tr>
+        
+                                                <tr>
+                                                    <td class="text-center"><input type="checkbox" name="checkbox-6" id="checkbox-6" /></td>
+                                                    <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/2/021212050334</a></td>
+                                                    <td>Santishwaran A/L Paven</td>
+                                                    <td>PPK</td>                                        
+                                                    <td class="text-center">05/06/2023</td>
+                                                </tr>
+        
+                                                <tr>
+                                                    <td class="text-center"><input type="checkbox" name="checkbox-7" id="checkbox-7" /></td>
+                                                    <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/3/001205034745</a></td>
+                                                    <td>Choo Mei Ling</td>
+                                                    <td>BKOKU</td>
+                                                    <td class="text-center">07/06/2023</td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td class="text-center"><input type="checkbox" name="checkbox-8" id="checkbox-8" /></td>
+                                                    <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/6/890201065225</a></td>
+                                                    <td>Ezra Hanisah Binti Md Yunos</td>
+                                                    <td>BKOKU</td>                                    
+                                                    <td class="text-center">19/02/2023</td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td class="text-center"><input type="checkbox" name="checkbox-9" id="checkbox-9" /></td>
+                                                    <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/5/981004045253</a></td>
+                                                    <td>Syed Abdul Kassim Hussain Yusof</td>
+                                                    <td>PPK</td>                                        
+                                                    <td class="text-center">25/05/2023</td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td class="text-center"><input type="checkbox" name="checkbox-10" id="checkbox-10" /></td>
+                                                    <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/5/940524032341</a></td>
+                                                    <td>Rahman Mohammed Arshahad Al-dhaqm</td>
+                                                    <td>BKOKU</td>                                    
+                                                    <td class="text-center">09/07/2023</td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td class="text-center"><input type="checkbox" name="checkbox-11" id="checkbox-11" /></td>
+                                                    <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/4/950623035672</a></td>
+                                                    <td>Wan Nurul Syafiqah Binti Wan Sahak</td>
+                                                    <td>BKOKU</td>
+                                                    <td class="text-center">09/08/2023</td>
+                                                </tr>
+        
+                                                <tr>
+                                                    <td class="text-center"><input type="checkbox" name="checkbox-12" id="checkbox-12" /></td>
+                                                    <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/6/930907030098</a></td>
+                                                    <td>Siti Aisyah Binti Ismail</td>
+                                                    <td>BKOKU</td>
+                                                    <td class="text-center">21/05/2023</td>
+                                                </tr>
+        
+                                                <tr>
+                                                    <td class="text-center"><input type="checkbox" name="checkbox-13" id="checkbox-13" /></td>
+                                                    <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/5/950523098909</a></td>
+                                                    <td>Muhammad Aiman Bin Hamid</td>
+                                                    <td>PPK</td>
+                                                    <td class="text-center">29/07/2023</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <br>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-success btn-round float-end" data-bs-toggle="modal" data-bs-target="#pengesahanModal">
+                                            Sahkan
+                                        </button>
+                                        {{-- Bulk Approval
+                                        <a href="#" class="btn btn-success btn-round float-end" data-bs-toggle="modal" data-bs-target="#pengesahanModal">Sahkan</a> --}}
+                                        {{-- Modal --}}
+                                        <div class="modal fade" id="pengesahanModal" tabindex="-1" aria-labelledby="pengesahanModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h1 class="modal-title fs-5" id="pengesahanModalLabel">Rekod Keputusan Permohonan</h1>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <form  action="{{ url('hantar-keputusan') }}" method="POST">
+                                                        {{csrf_field()}}
+                                                        <div class="mb-3">
+                                                            <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
+                                                            <input type="text" class="form-control" id="no">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
+                                                            <input type="date" id="tarikh" class="form-control">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
+                                                            <select id="keputusan" onchange="select1()" class="form-control">
+                                                                <option value="">Pilih Keputusan</option>
+                                                                <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
+                                                                <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label">Catatan:</label>
+                                                            <textarea class="form-control" id="message-text"></textarea>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                  <button type="button" class="btn btn-primary">Hantar</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script>
+            //sorting function
             $('#sortTable').DataTable();
+
+            // check all checkboxes at once
+            function toggle(source) {
+                var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i] != source)
+                        checkboxes[i].checked = source.checked;
+                }
+            }
+
+            //input maklumat for kelulusan
+            function myinput(){
+                var no = prompt("No. Mesyuarat:");
+                var tarikh = prompt("Tarikh Mesyuarat:");
+                var keputusan = prompt("Kelulusan:");
+                var catatan = prompt("Catatan:");
+		    }
         </script>
         
         <!-- Vedor js file and create bundle with grunt  --> 
@@ -368,5 +280,16 @@
         <script src="../js/pages/tables/jquery-datatable.js"></script>
         <script src="../js/pages/charts/morris.js"></script>
         <script src="../js/pages/charts/c3.js"></script>
-</x-default-layout> 
 
+        <!-- Javascript -->
+        <script src="assets/bundles/libscripts.bundle.js"></script>    
+        <script src="assets/bundles/vendorscripts.bundle.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+        <!-- Project core js file minify with grunt --> 
+        <script src="assets/bundles/mainscripts.bundle.js"></script>
+
+        <!-- Bootstrap --> 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    </body>
+</x-default-layout> 
