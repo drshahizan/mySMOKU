@@ -172,7 +172,7 @@
 				</div>
 			</div>
 			<div class="menu-item">
-			<a class="menu-link" href="{{url('sekretariatStatus')}}">
+			<a class="menu-link" href="{{url('keseluruhanPermohonan')}}">
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
 					<span class="menu-title">Keseluruhan</span>
 			</a>
@@ -184,13 +184,13 @@
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('sekretariatKelulusan')}}">
+			<a class="menu-link" href="{{url('kelulusanPermohonan')}}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Kelulusan</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('sekretariatKeputusan')}}">
+			<a class="menu-link" href="{{url('keputusanPermohonan')}}">
 					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
 					<span class="menu-title">Keputusan</span>
 			</a>

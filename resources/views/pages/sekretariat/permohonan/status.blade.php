@@ -196,7 +196,7 @@
                                             $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
                                         @endphp
                                         <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">{{$id_permohonan}}</a></td>
+                                            <td>{{$id_permohonan}}</td>
                                             <td>{{$nama}}</td>
                                             <td>{{$program}}</td>
                                             <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
