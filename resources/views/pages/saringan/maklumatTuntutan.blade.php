@@ -72,6 +72,8 @@
                                     <br>
                                     @php
                                         $akademik = DB::table('maklumatakademik')->where('nokp_pelajar', $pelajar->nokp_pelajar)->first();
+                                        $institusi = DB::table('bk_infoipt')->where('idipt', $akademik->id_institusi)->value('namaipt');
+                                        $peringkat = DB::table('bk_peringkatpengajian')->where('kodperingkat', $akademik->peringkat_pengajian)->value('peringkat');
                                     @endphp
                                     <table class="maklumat">
                                         <tr>
@@ -93,6 +95,21 @@
                                             <td><strong>ID Tuntutan</strong></td>
                                             <td>:</td>
                                             <td>{{$permohonan->id_permohonan}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Kursus</strong></td>
+                                            <td>:</td>
+                                            <td>{{$akademik->nama_kursus}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Institusi</strong></td>
+                                            <td>:</td>
+                                            <td>{{$institusi}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Peringkat</strong></td>
+                                            <td>:</td>
+                                            <td>{{$peringkat}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Sesi/Semester</strong></td>
