@@ -186,23 +186,31 @@
                                             <th class="text-center" style="width: 15%">Status Permohonan</th>
                                         </tr>
                                     </thead>
+                                    
                                     <tbody>
+                                        @foreach ($keseluruhan as $item)
+                                        @php
+                                            $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
+                                            $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
+                                            $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                            $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                        @endphp
                                         <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/990404080221</a></td>
-                                            <td>Santosh A/L Ariyaran</td>
-                                            <td>BKOKU</td>
-                                            <td class="text-center">07/02/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:coral; color:white;">Saringan</button></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">{{$id_permohonan}}</a></td>
+                                            <td>{{$nama}}</td>
+                                            <td>{{$program}}</td>
+                                            <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{$status}}</button></td>
                                         </tr>
-
-                                        <tr data-status="Tidak Aktif">
+                                        @endforeach
+                                        {{-- <tr data-status="Tidak Aktif">
                                             <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTPPK/3/970204052445</a></td>
                                             <td>Sarah Binti Yusri</td>
                                             <td>PPK</td>                                        
                                             <td class="text-center">05/03/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                         </tr>  
-
+                                        
                                         <tr data-status="Disokong">
                                             <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/980112105666</a></td>
                                             <td>Aishah Binti Samsudin</td>
@@ -321,8 +329,7 @@
                                             <td>PPK</td>
                                             <td class="text-center">09/07/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
-                                        </tr>
-                                        
+                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>

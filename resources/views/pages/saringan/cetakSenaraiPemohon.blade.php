@@ -6,6 +6,16 @@
     <link rel="stylesheet" href="assets/css/style.bundle.css">
     <link rel="stylesheet" href="assets/css/saringan.css">
     <style>
+        table{
+            border: 1px solid black!important;
+            width: 100%;
+        }
+        th{
+            padding-top: 6px!important;
+            padding-bottom: 6px!important;
+            background-color: rgb(35, 58, 108)!important;
+            color: white!important;
+        }
         th,td{
             border: 1px solid black!important;
         }
@@ -13,47 +23,79 @@
             font-size: 11px!important;
         }
         td{
+            vertical-align: top!important;
+            padding-bottom: 6px!important;
             text-transform:capitalize;
         }
         td:first-line {
             text-transform: capitalize;
         }
+        .alignleft {
+            float: left;
+        }
+        .alignright {
+            float: right;
+        }
+        /* .header{
+            padding-top: 5px; 
+            text-align:center; 
+            display:block;
+        } */
     </style>
 </head>
 
 <body>
     {{-- Header --}}
-    <div class="header" style="padding-top: 5px; text-align:center; display:block;">
+    <div class="header">
         <div class="image">
+            <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="width:10%; height:10%; float: left;">
+        </div>
+        <div class="alignleft" style="padding-left: 25px; padding-top:25px; font-size: 12px;">
+            <b>KEMENTERIAN PENGAJIAN TINGGI</b>
+            <br>MINISTRY OF HIGHER EDUCATION<br>
+        </div>
+        <div class="alignright" style="padding-top: 15px;">
+            <table style="border: none!important;">
+                <tr style="border: none!important;">
+                    <td style="border: none!important;"><b>No. Mesyuarat </b></td>
+                    <td style="border: none!important;"><b>:</b></td>
+                    <td style="border: none!important;"><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 10px!important;"></td>
+                </tr>
+                <tr style="border: none!important;">
+                    <td style="border: none!important;"><b>Tarikh Mesyuarat </b></td>
+                    <td style="border: none!important;"><b>:</b></td>
+                    <td style="border: none!important;"><input type="text" id="tarikhMesyuarat" name="tarikhMesyuarat" style="padding: 10px;"></td>
+                </tr>
+            </table>
+        </div>     
+        {{-- <div class="image">
             <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style=" width:10%; height:10%;">
         </div>
-        <br>
         <div class="tittle" style="font-size: 14px;">
             <b>KEMENTERIAN PENGAJIAN TINGGI</b>
-        </div>
+        </div> --}}
     </div>
 
-    <hr style="border:solid 1px black; width: 100%;">
-
+    <br><br><br><br><br>
     {{-- Table --}}
-    <div style="margin: 10px;display: block;">
+    <div style="margin: 10px; display: block;">
         <div class="tittle" style="text-align: center; font-size: 14px;">
             <b>SENARAI PERMOHONAN BKOKU/PPK YANG DISOKONG</b>
         </div>
         <br>
-        <table width="100%" style="border: 1px solid black!important;" id="sortTable" class="table table-striped">
-            <thead>
+        <table id="sortTable" class="table table-striped">
+            <thead class="text-center">
                 <tr>
-                    <td style="width: 3%" class="text-center"><b>No.</b></td>
-                    <th style="width: 15%" class="text-center"><b>ID Permohonan</b></th>
-                    <th style="width: 5%" class="text-center"><b>Jenis Permohonan</b></th>
-                    <th style="width: 20%" class="text-center"><b>Nama</b></th>
-                    <th style="width: 5%" class="text-center"><b>Jenis Kecacatan</b></th>                                        
-                    <th style="width: 5%" class="text-center"><b>Peringkat Pengajian </b></th>
-                    <th style="width: 15%" class="text-center"><b>Nama Kursus</b></th>
-                    <th style="width: 5%" class="text-center"><b>Institusi Pengajian</b></th>
-                    <th style="width: 9%" class="text-center"><b>Tarikh Mula Pengajian</b></th>
-                    <th style="width: 18%" class="text-center"><b>Tarikh Tamat Pengajian</b></th>
+                    <th style="width: 3%"><b>No.</b></th>
+                    <th style="width: 15%"><b>ID Permohonan</b></th>
+                    <th style="width: 5%"><b>Jenis Permohonan</b></th>
+                    <th style="width: 20%"><b>Nama</b></th>
+                    <th style="width: 5%"><b>Jenis Kecacatan</b></th>                                        
+                    <th style="width: 5%"><b>Peringkat Pengajian </b></th>
+                    <th style="width: 15%"><b>Nama Kursus</b></th>
+                    <th style="width: 5%"><b>Institusi Pengajian</b></th>
+                    <th style="width: 9%"><b>Tarikh Mula Pengajian</b></th>
+                    <th style="width: 18%"><b>Tarikh Tamat Pengajian</b></th>
                 </tr>
             </thead>
             <tbody>
