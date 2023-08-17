@@ -89,9 +89,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan-keputusan', [SekretariatController::class, 'tuntutanKeputusan']);
 
     //TUntutan - Penyelaras
-    Route::get('penyelaras-keseluruhan-tuntutan', [PenyelarasController::class, 'keseluruhanTuntutan']);
-    Route::get('penyelaras-tuntutan-baru', [PenyelarasController::class, 'tuntutanBaru']);
-    Route::get('penyelaras-keputusan-tuntutan', [PenyelarasController::class, 'keputusanTuntutan']);
+    Route::get('tuntutan-yuran-pengajian', [PenyelarasController::class, 'tuntutanYuranPengajian']);
+    Route::get('tuntutan-wang-saku', [PenyelarasController::class, 'tuntutanWangSaku']);
+    Route::get('penyelaras-sejarah-tuntutan', [PenyelarasController::class, 'sejarahTuntutan']);
 
 });
 

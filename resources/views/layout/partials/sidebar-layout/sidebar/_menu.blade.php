@@ -121,24 +121,24 @@
 				</div>
 			</div>
 			<div class="menu-item">
-			<a class="menu-link" href="{{url('penyelaras-keseluruhan-tuntutan')}}">
+			<a class="menu-link" href="{{url('tuntutan-wang-saku')}}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-					<span class="menu-title">Keseluruhan</span>
+					<span class="menu-title">Wang Saku</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('penyelaras-tuntutan-baru')}}">
+			<a class="menu-link" href="{{url('tuntutan-yuran-pengajian')}}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
-					<span class="menu-title">Baru</span>
+					<span class="menu-title">Yuran Pengajian</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('penyelaras-keputusan-tuntutan')}}">
+			<a class="menu-link" href="{{url('penyelaras-sejarah-tuntutan')}}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Keputusan</span>
+					<span class="menu-title">Sejarah</span>
 			</a>
 		</div>
 		</div>

@@ -6,19 +6,19 @@ use Illuminate\Http\Request;
 
 class PenyelarasController extends Controller
 {
-    public function keseluruhanTuntutan()
+    public function tuntutanWangSaku()
     {
-        return view('pages.penyelaras.tuntutan.keseluruhan');
+        return view('pages.penyelaras.tuntutan.yuranPengajian');
     }
 
-    public function tuntutanBaru()
+    public function tuntutanYuranPengajian()
     {
-        return view('pages.penyelaras.tuntutan.baru');
+        return view('pages.penyelaras.tuntutan.wangSaku');
     }
 
-    public function keputusanTuntutan()
+    public function sejarahTuntutan()
     {
-        return view('pages.penyelaras.tuntutan.keputusan');
+        return view('pages.penyelaras.tuntutan.sejarah');
     }
 
 }
