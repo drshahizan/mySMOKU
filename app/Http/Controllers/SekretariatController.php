@@ -147,9 +147,11 @@ class SekretariatController extends Controller
 
     public function tuntutanSaring()
     {
-        $permohonan = TuntutanPermohonan::join('statustransaksi','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
-        ->get(['permohonan.*', 'statustransaksi.*'])
-        ->where('status','=','2');
+        $permohonan = TuntutanPermohonan::where('status', '2')
+        ->orWhere('status', '=','3')
+        ->orWhere('status', '=','4')
+        ->orWhere('status', '=','5')
+        ->get();
         $status = null;
         return view('pages.sekretariat.tuntutan.saring',compact('permohonan','status'));
     }

@@ -135,13 +135,24 @@
                                             if ($item['status']==2){
                                                 $status='Belum Disaring';
                                             }
+                                            if ($item['status']==3){
+                                                $status='Sedang Disaring';
+                                            }
                                         @endphp
                                         <tr>                                            
                                             <td><a href="{{ url('maklumat-tuntutan-2/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a></td>
                                             <td>{{$nama_pemohon}}</td>
                                             <td>{{$item['program']}}</td>
                                             <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white">{{$status}}</button></td>
+                                            @if ($item['status']=='2')
+                                            <td class="text-center"><button class="btn bg-orange text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($item['status']=='3')
+                                                <td class="text-center"><button class="btn bg-pink text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($item['status']=='4')
+                                                <td class="text-center"><button class="btn bg-green text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($item['status']=='5')
+                                                <td class="text-center"><button class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                         {{-- <tr>

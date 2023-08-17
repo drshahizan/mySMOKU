@@ -44,10 +44,11 @@
                 $belum_disaring = DB::table('permohonan')->where('status', 2)->count();
                 $dikembalikan = DB::table('permohonan')->where('status', 5)->count();
                 $disokong = DB::table('permohonan')->where('status', 4)->count();
+                // $sedang_disaring = DB::table('permohonan')->where('status', 3)->count();
                 $keseluruhan = $belum_disaring + $dikembalikan + $disokong;
             @endphp       
             <div class="row clearfix">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -60,7 +61,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -73,7 +74,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                {{-- <div class="col-lg-3 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-search" style="color: white!important"></i></div>
+                                <div class="ml-4">
+                                    <span style="color: black!important">Sedang Disaring</span>
+                                    <h4 class="mb-0 font-weight-medium">{{$sedang_disaring}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+                <div class="col-lg-3 col-md-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -86,7 +100,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -131,9 +145,12 @@
                                         @php
                                             $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
                                             $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
-                                            $status = DB::table('statustransaksi')->where('nokp_pelajar', $item['nokp_pelajar'])->value('status');
-                                            if ($status=2){
+                                            $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                            if ($item['status']==2){
                                                 $status='Belum Disaring';
+                                            }
+                                            if ($item['status']==3){
+                                                $status='Sedang Disaring';
                                             }
                                         @endphp
                                         <tr>                                            
@@ -141,7 +158,15 @@
                                             <td>{{$nama_pemohon}}</td>
                                             <td>{{$item['program']}}</td>
                                             <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white">{{$status}}</button></td>
+                                            @if ($item['status']=='2')
+                                                <td class="text-center"><button class="btn bg-orange text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($item['status']=='3')
+                                                <td class="text-center"><button class="btn bg-pink text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($item['status']=='4')
+                                                <td class="text-center"><button class="btn bg-green text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($item['status']=='5')
+                                                <td class="text-center"><button class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                         {{-- <tr>

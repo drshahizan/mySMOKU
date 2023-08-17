@@ -64,6 +64,10 @@
     background:#ffc700;
     color:rgba(255,255,255,0.7);
 }
+.bg-pink:hover, .bg-pink:active{
+    background:#cc547c;
+    color:rgba(255,255,255,0.7)!important;
+}
 
 .bg-orange:hover, .bg-orange:active{
     background:coral!important;

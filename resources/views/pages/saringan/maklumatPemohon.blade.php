@@ -42,6 +42,11 @@
                                     @endphp
                                     <table class="maklumat">
                                         <tr>
+                                            <td><strong>ID Permohonan</strong></td>
+                                            <td>:</td>
+                                            <td>{{$permohonan->id_permohonan}}</td>
+                                        </tr>
+                                        <tr>
                                             <td><strong>Nama</strong></td>
                                             <td>:</td>
                                             <td>{{$pelajar->nama_pelajar}}</td>
@@ -55,11 +60,6 @@
                                             <td><strong>Tarikh Permohonan</strong></td>
                                             <td>:</td>
                                             <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>ID Permohonan</strong></td>
-                                            <td>:</td>
-                                            <td>{{$permohonan->id_permohonan}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Sesi/Semester</strong></td>
