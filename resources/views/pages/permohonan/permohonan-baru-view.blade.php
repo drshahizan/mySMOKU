@@ -225,7 +225,7 @@ $(document).ready(function(){
 											
 												<!--begin::Step 1-->
 												<div class="current" data-kt-stepper-element="content">
-												@csrf
+												
 													<!--begin::Wrapper-->
 													<div class="w-100">
 														<!--begin::Heading-->
@@ -505,7 +505,7 @@ $(document).ready(function(){
 
 												<!--begin::Step 2-->
 												<div data-kt-stepper-element="content">
-												@csrf	
+													
 													<!--begin::Wrapper-->
 													<div class="w-100">
 														<!--begin::Heading-->
@@ -697,7 +697,7 @@ $(document).ready(function(){
 
 												<!--begin::Step 3-->
 												<div data-kt-stepper-element="content">
-												@csrf		
+														
 													<!--begin::Wrapper-->
 													<div class="w-100">
 														<!--begin::Heading-->
@@ -928,7 +928,7 @@ $(document).ready(function(){
 
 												<!--begin::Step 4-->
 												<div data-kt-stepper-element="content">
-												@csrf
+												
 													<!--begin::Wrapper-->
 													<div class="w-100">
 														<!--begin::Heading-->
@@ -980,7 +980,7 @@ $(document).ready(function(){
 
 												<!--begin::Step 5-->
 												<div data-kt-stepper-element="content">
-												@csrf
+												
 													<!--begin::Wrapper-->
 													<div class="w-100">
 														<!--begin::Heading-->
@@ -1041,7 +1041,7 @@ $(document).ready(function(){
 
 												<!--begin::Step 5-->
 												<div data-kt-stepper-element="content">
-												@csrf	
+													
 												
 													<!--begin::Wrapper-->
 													<div class="w-100">
@@ -1137,21 +1137,34 @@ $(document).ready(function(){
 													<!--end::Wrapper-->
 													<!--begin::Wrapper-->
 													<div>
-														<!--<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
-															<span class="indicator-label">Hantar
-															<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
-																<span class="path1"></span>
-																<span class="path2"></span>
-															</i></span>
-															<span class="indicator-progress">Please wait...
-															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-														</button>-->
+													@if($tuntutanpermohonan->status =='2')  
+														{{--<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
+															<span class="indicator-label">Kemaskini</span>
+														</button>--}}
+														<button type="button" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" onclick="confirmFunction()">Kemaskini</button>
 														<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Teruskan
 														<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
 															<span class="path1"></span>
 															<span class="path2"></span>
 														</i>
 														</button>
+													@else
+														{{--<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
+															<span class="indicator-label">Kemaskini
+															<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
+																<span class="path1"></span>
+																<span class="path2"></span>
+															</i></span>
+															<span class="indicator-progress">Please wait...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+														</button>--}}
+														<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Teruskan
+														<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
+															<span class="path1"></span>
+															<span class="path2"></span>
+														</i>
+														</button>	
+													@endif	
 													</div>
 													<!--end::Wrapper-->
 												</div>
@@ -1205,6 +1218,17 @@ $(document).ready(function(){
             }
         }
 
+		</script>
+
+		<script>
+		function confirmFunction() {
+			if (confirm("YEKE NAK KEMASKINI?") == true) {
+				window.location.href = "{{ route('kemaskini')}}";
+			} 
+			/*else {
+				document.getElementById("ColorChanger").style.backgroundColor = "#C0C0C0";
+			}*/
+		}
 		</script>
 
 
