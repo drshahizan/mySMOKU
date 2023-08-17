@@ -10,7 +10,7 @@
             table-layout: fixed;
         }
         .table2{
-            width: 40%;
+            width: 30%;
             table-layout: fixed;
         }
         .white{
@@ -33,18 +33,6 @@
         }
     </style>
     <!-- Main body part  -->
-        {{-- begin alert --}}
-        @if($status=="Permohonan Telah Disokong")
-            <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px">
-                {{ $status }}
-            </div>
-        @endif
-        @if($status=="Permohonan Telah Dikembalikan")
-            <div class="alert alert-warning" role="alert" style="margin: 0px 15px 20px 15px">
-                {{ $status }}
-            </div>
-        @endif
-        {{-- end alert --}}
     <div id="main-content">
         <div class="container-fluid">
             <!-- Page header section  -->
