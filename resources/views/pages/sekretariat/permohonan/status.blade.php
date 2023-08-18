@@ -23,7 +23,14 @@
                             <h1>Senarai Keseluruhan Permohonan</h1>
                         </div>
                         <hr>
-
+                        @php
+                            $baru = DB::table('permohonan')->where('status', 2)->count();
+                            $saringan = DB::table('permohonan')->where('status', 3)->count();
+                            $disokong = DB::table('permohonan')->where('status', 4)->count();
+                            $dikembalikan = DB::table('permohonan')->where('status', 5)->count();
+                            $layak = DB::table('permohonan')->where('status', 6)->count();
+                            $tidak_layak = DB::table('permohonan')->where('status', 7)->count();
+                        @endphp     
                         <div class="row">
                         {{-- Small Card Section Level 1--}}
                             <div class="col-lg-2 col-md-4">
@@ -33,7 +40,7 @@
                                             <div class="icon-in-bg bg-info text-white rounded-circle"><i class="fa fa-bookmark" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black;"> Baru</span>
-                                                <h4 class="mb-0 font-weight-medium">1090</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{$baru}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -47,7 +54,7 @@
                                             <div class="icon-in-bg text-white rounded-circle" style="background-color: coral;"><i class="fa fa-users" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black"> Saringan</span>
-                                                <h4 class="mb-0 font-weight-medium">500</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{$saringan}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -61,7 +68,7 @@
                                             <div class="icon-in-bg bg-primary text-white rounded-circle"><i class="fa fa-user-check" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black"> Disokong</span>
-                                                <h4 class="mb-0 font-weight-medium">2408</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{$disokong}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -75,7 +82,7 @@
                                             <div class="icon-in-bg bg-warning text-white rounded-circle"><i class="fa fa-mail-reply" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black"> Dikembalikan</span>
-                                                <h4 class="mb-0 font-weight-medium">54</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{$dikembalikan}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -89,7 +96,7 @@
                                             <div class="icon-in-bg bg-success text-white rounded-circle"><i class="fa fa-check"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black;"> Layak</span>
-                                                <h4 class="mb-0 font-weight-medium">1230</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{$layak}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -103,7 +110,7 @@
                                             <div class="icon-in-bg bg-danger text-white rounded-circle"><i class="fa fa-times" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black"> Tidak Layak</span>
-                                                <h4 class="mb-0 font-weight-medium">25</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{$tidak_layak}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -198,7 +205,21 @@
                                             <td>{{$nama}}</td>
                                             <td>{{$program}}</td>
                                             <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{$status}}</button></td>
+                                            @if($item['status'] == "1")
+                                                <td class="text-center"><button type="button" class="btn btn-primary btn-sm">{{$status}}</button></td>
+                                            @elseif($item['status'] == "2")
+                                                <td class="text-center"><button type="button" class="btn btn-info btn-sm">BARU</button></td>
+                                            @elseif($item['status'] == "3")
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:coral; color:white;">{{$status}}</button></td>
+                                            @elseif($item['status'] == "4")
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">{{$status}}</button></td>
+                                            @elseif($item['status'] == "5")
+                                                <td class="text-center"><button type="button" class="btn btn-warning btn-sm">{{$status}}</button></td>
+                                            @elseif($item['status'] == "6")
+                                                <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{$status}}</button></td>
+                                            @elseif($item['status'] == "7")
+                                                <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{$status}}</button></td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                         {{-- <tr data-status="Tidak Aktif">

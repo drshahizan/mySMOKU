@@ -92,8 +92,8 @@
 									</div> -->
 									<!--end::Row-->
 
-<!--begin::Row-->
-<div class="row g-5 g-xl-8">
+                                <!--begin::Row-->
+                                <div class="row g-5 g-xl-8">
 										<div class="col-xl-3">
 											<!--begin::Statistics Widget 5-->
 											<a href="#" class="card theme-dark-bg-body"  style="background-color: #4C6085">
@@ -225,16 +225,11 @@
             </button>
              </div>
             </form>
-																	</div>
-									
-																</div>
-																
-																
-															</div>
-														
- </div>
- <!--begin::Row-->
- 
+                </div>
+					</div>
+						</div>
+							</div>
+                                 <!--begin::Row-->
 										<!--begin::Col-->
 										<div class="col-xl-6">
 											<!--begin::Table widget 9-->
