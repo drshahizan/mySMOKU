@@ -33,7 +33,7 @@
                                             <div class="icon-in-bg bg-info text-white rounded-circle"><i class="fa fa-bookmark" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black;">Hantar</span>
-                                                <h4 class="mb-0 font-weight-medium">1090</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{number_format(1090)}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -47,7 +47,7 @@
                                             <div class="icon-in-bg text-white rounded-circle" style="background-color: coral;"><i class="fa fa-users" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black"> Saringan</span>
-                                                <h4 class="mb-0 font-weight-medium">500</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{number_format(500)}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@
                                             <div class="icon-in-bg bg-primary text-white rounded-circle"><i class="fa fa-user-check" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black"> Disokong</span>
-                                                <h4 class="mb-0 font-weight-medium">2408</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{number_format(2408)}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                             <div class="icon-in-bg bg-warning text-white rounded-circle"><i class="fa fa-mail-reply" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black"> Dikembalikan</span>
-                                                <h4 class="mb-0 font-weight-medium">54</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{number_format(54)}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -89,7 +89,7 @@
                                             <div class="icon-in-bg bg-success text-white rounded-circle"><i class="fa fa-check"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black;"> Layak</span>
-                                                <h4 class="mb-0 font-weight-medium">1230</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{number_format(1230)}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -103,7 +103,7 @@
                                             <div class="icon-in-bg bg-danger text-white rounded-circle"><i class="fa fa-times" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black"> Tidak Layak</span>
-                                                <h4 class="mb-0 font-weight-medium">25</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{number_format(25)}}</h4>
                                             </div>
                                         </div>
                                     </div>
