@@ -31,9 +31,9 @@ class PenyelarasController extends Controller
         return view('pages.penyelaras.tuntutan.sejarah');
     }
 
-    public function index()
+    public function permohonanbaru()
     {
-        
+        return view('pages.penyelaras.permohonan.permohonanbaru');
     }
 
 }
