@@ -103,6 +103,92 @@
 										<th style="width: 15%" class="text-center"><b>Status Permohonan</b></th>
 									</tr>
 								</thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTPPK/3/970204052445</a></td>
+                                        <td>Sarah Binti Yusri</td>
+                                        <td class="text-center">05/03/2023</td>
+                                        <td class="text-center"><button type="button" class="btn btn-success btn-sm">Hantar</button></td>
+                                    </tr>  
+                                        
+                                        <tr>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/980112105666</a></td>
+                                            <td>Aishah Binti Samsudin</td>
+                                            <td class="text-center">02/03/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
+                                        </tr>
+
+                                        <tr data-status="Baru">
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/990404080221</a></td>
+                                            <td>Mohd Ali Bin Abu Kassim</td>
+                                            <td class="text-center">27/07/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm">Hantar</button></td>
+                                        </tr>
+
+                                        <tr data-status="Dikembalikan">
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/960909105668</a></td>
+                                            <td>Ling Kai Jie</td>
+                                            <td class="text-center">09/04/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
+                                        </tr>
+                                        
+                                        <tr data-status="Saringan">
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/6/950804082447</a></td>
+                                            <td>Akmal Bin Kairuddin</td>
+                                            <td class="text-center">27/4/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
+                                        </tr>
+
+                                        <tr data-status="Tidak Layak">
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/2/021212050334</a></td>
+                                            <td>Santishwaran A/L Paven</td>
+                                            <td class="text-center">05/06/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/001205034745</a></td>
+                                            <td>Choo Mei Ling</td>
+                                            <td class="text-center">07/06/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
+                                        </tr>
+                                        
+                                        <tr data-status="Saringan">
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/890201065225</a></td>
+                                            <td>Ezra Hanisah Binti Md Yunos</td>
+                                            <td class="text-center">19/02/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:orange; color:white;">Deraf</button></td>
+                                        </tr>
+                                        
+                                        <tr data-status="Layak">
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/2/010305058473</a></td>
+                                            <td>Arshahad Bin Kairul Zaman</td>
+                                            <td class="text-center">26/05/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td>
+                                        </tr>
+                                        
+                                        <tr data-status="Disokong">
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/3/981004045253</a></td>
+                                            <td>Syed Abdul Kassim Hussain Yusof</td>
+                                            <td class="text-center">25/05/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:orange; color:white;">Deraf</button></td>
+                                        </tr>
+                                        
+                                        <tr data-status="Disokong">
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/990201051446</a></td>
+                                            <td>Shakira Mariam Aqilah Binti Syed Abdul Rahman</td>
+                                            <td class="text-center">07/06/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm btn-success">Layak</button></td>
+                                        </tr>
+                                        
+                                        <tr data-status="Baru">
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/5/940524032341</a></td>
+                                            <td>Rahman Mohammed Arshahad Al-dhaqm</td>
+                                            <td class="text-center">09/07/2023</td>
+                                            <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
+                                        </tr>
+                                    </tbody>
 							</table>
 						</div>
 					</div>
