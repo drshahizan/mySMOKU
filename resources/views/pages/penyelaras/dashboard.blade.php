@@ -263,9 +263,9 @@
 															<!--begin::Table head-->
 															<thead>
 																<tr class="fs-7 fw-bold border-0 text-dark">
+																<th class="min-w-150px text-center" colspan="2">ID Permohonan</th>
 																	<th class="min-w-150px text-center" colspan="2">Nama</th>
-																	<th class="min-w-150px text-center" colspan="2">No Matrik</th>
-																	<th class="min-w-150px text-center" colspan="2">ID Permohonan</th>
+																	<!-- <th class="min-w-150px text-center" colspan="2">No Matrik</th> -->
 																	<th class="text-center min-w-150px" colspan="2">Status Permohonan</th>
 																</tr>
 															</thead>
@@ -273,102 +273,81 @@
 															<!--begin::Table body-->
 															<tbody>
 																<tr>
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Mohammad Nik Zariq bin Syed Samiun Hammani</span>
-																	</td>
-																	<td class="pe-0" colspan="2">
-																		<div class="d-flex justify-content-end">
-																			<span class="text-gray-800 fw-bold fs-6 me-1">A24CS0001</span>
-																		</div>
-																	</td>
-																	<td class="" colspan="2">
+																<td class="" colspan="2">
 																		<div class="d-flex justify-content-end">
 																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/140127234321</span>
 																		</div>
+																	</td>
+																	
+																	<td class="" colspan="2">
+																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Mohammad Nik Zariq bin Syed Samiun Hammani</span>
 																	</td>
 																	
 																	<td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td>
 																	
 																</tr>
 																<tr>
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Zahrah binti Syed Sualman Hakiem</span>
-																	</td>
-																	<td class="pe-0" colspan="2">
-																		<div class="d-flex justify-content-end">
-																			<span class="text-gray-800 fw-bold fs-6 me-1">A22CS0231</span>
-																		</div>
-																	</td>
-																	<td class="" colspan="2">
+																<td class="" colspan="2">
 																		<div class="d-flex justify-content-end">
 																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/130127223322</span>
 																		</div>
 																	</td>
+																	<td class="" colspan="2">
+																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Zahrah binti Syed Sualman Hakiem</span>
+																	</td>
+																	
+																	
 																	<td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td>
 																</tr>
 																<tr>
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Cheok Thur Qi </span>
-																	</td>
-																	<td class="pe-0" colspan="2">
-																		<div class="d-flex justify-content-end">
-																			<span class="text-gray-800 fw-bold fs-6 me-1">A22MM3001</span>
-																		</div>
-																	</td>
-																	<td class="" colspan="2">
+																<td class="" colspan="2">
 																		<div class="d-flex justify-content-end">
 																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/2/110127234322</span>
 																		</div>
 																	</td>
+																	<td class="" colspan="2">
+																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Cheok Thur Qi </span>
+																	</td>
+																	
+																	
 																	<td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td>
 																</tr>
 																<tr>
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Mohammad Nik Zariq bin Syed Samiun Hammani</span>
-																	</td>
-																	<td class="pe-0" colspan="2">
+																<td class="" colspan="2">
 																		<div class="d-flex justify-content-end">
-																			<span class="text-gray-800 fw-bold fs-6 me-1">A24CS0001</span>
+																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/080127214421</span>
 																		</div>
 																	</td>
 																	<td class="" colspan="2">
-																		<div class="d-flex justify-content-end">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/140127234321</span>
-																		</div>
+																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Muhamed Jaferi Dzikri bin Rafi</span>
 																	</td>
+																	
+																	
 																	<td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td>
 																</tr>
 																<tr>
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Mohammad Nik Zariq bin Syed Samiun Hammani</span>
-																	</td>
-																	<td class="pe-0" colspan="2">
+																<td class="" colspan="2">
 																		<div class="d-flex justify-content-end">
-																			<span class="text-gray-800 fw-bold fs-6 me-1">A24CS0001</span>
+																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/2/090127239921</span>
 																		</div>
 																	</td>
 																	<td class="" colspan="2">
-																		<div class="d-flex justify-content-end">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/140127234321</span>
-																		</div>
+																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Oong Fan Zhao</span>
 																	</td>
+																	
+																	
 																	<td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td>
 																</tr>
 																<tr>
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Mohammad Nik Zariq bin Syed Samiun Hammani</span>
-																	</td>
-																	<td class="pe-0" colspan="2">
+																<td class="" colspan="2">
 																		<div class="d-flex justify-content-end">
-																			<span class="text-gray-800 fw-bold fs-6 me-1">A24CS0001</span>
+																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/050129094328</span>
 																		</div>
 																	</td>
 																	<td class="" colspan="2">
-																		<div class="d-flex justify-content-end">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/140127234321</span>
-																		</div>
+																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Leong Chao Bik</span>
 																	</td>
-																	<td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
+																	<td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td>
 																</tr>
 															</tbody>
 															<!--end::Table body-->
