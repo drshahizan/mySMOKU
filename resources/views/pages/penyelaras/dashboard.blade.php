@@ -214,7 +214,7 @@
             <!--begin::Input group-"-->
             <div class="col-xs-3">
             <!--begin::Name-->
-            <input type="text" placeholder="No Kad Pengenalan" name="nokp" maxlength="12" autocomplete="off" class="form-control bg-transparent"  value=""/>
+            <input type="text" placeholder="No Kad Pengenalan" name="nokp" maxlength="12" autocomplete="off" class="form-control bg-transparent" style="width: 60%; text-align:center; display: block;margin-left: auto; margin-right: auto;"/>
             <!--end::Name-->
             </div>
 

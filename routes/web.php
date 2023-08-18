@@ -13,6 +13,7 @@ use App\Models\Permohonan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\PageController;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /*
 |--------------------------------------------------------------------------

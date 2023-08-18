@@ -12,7 +12,7 @@
                 <h2>Simple QR Code</h2>
             </div>
             <div class="card-body">
-                {!! QrCode::size(300)->generate('RemoteStack') !!}
+                {!! QrCode::size(200)->generate('pages.sekretariat.permohonan.suratTawaran') !!}
             </div>
         </div>
         <div class="card">
@@ -20,7 +20,7 @@
                 <h2>Color QR Code</h2>
             </div>
             <div class="card-body">
-                {!! QrCode::size(300)->backgroundColor(255,90,0)->generate('RemoteStack') !!}
+                {!! QrCode::size(200)->backgroundColor(255,90,0)->generate('RemoteStack') !!}
             </div>
         </div>
     </div>
