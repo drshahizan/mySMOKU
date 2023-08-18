@@ -170,7 +170,7 @@
 									<!--end::Row-->
 									<!--begin::Row-->
 									<div class="row g-5 g-xl-8">
-									<div class="col-xl-6">
+									<div class="col-xl-4">
 											<!--begin::Engage widget 9-->
 											<div class="card h-lg-100" style="background:  #ffffff )">
 												<!--begin::Body-->
@@ -231,7 +231,7 @@
 							</div>
                                  <!--begin::Row-->
 										<!--begin::Col-->
-										<div class="col-xl-6">
+										<div class="col-xl-8">
 											<!--begin::Table widget 9-->
 											<div class="card card-flush h-xl-100">
 												<!--begin::Header-->
@@ -250,7 +250,8 @@
 												</div>
 												<!--end::Header-->
 												<!--begin::Body-->
-												<div class="card-body py-3">
+												<!-- <div class="card-body py-3"> -->
+												<div class="body">
 													<!--begin::Table container-->
 													<div class="table-responsive">
 														<!--begin::Table-->
@@ -350,7 +351,8 @@
 														<!--end::Table-->
 													</div>
 													<!--end::Table container-->
-												</div>
+												<!-- </div> -->
+</div>
 												<!--end::Body-->
 											</div>
 											<!--end::Table Widget 9-->

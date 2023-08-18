@@ -29,55 +29,61 @@
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     </head>
-    <!--begin::Row-->
-        <div class="row g-5 g-xl-8">
-			<div class="col-xl-4">
-				<a href="#" class="card bg-danger hoverable card-xl-stretch mb-xl-8">					
-					<div class="card-body">
-						<i class="ki-duotone ki-basket text-white fs-2x ms-n1">
-							<span class="path1"></span>
-							<span class="path2"></span>
-							<span class="path3"></span>
-							<span class="path4"></span>
-						</i>
-						<div class="text-white fw-bold fs-2 mb-2 mt-5">Shopping Cart</div>
-						<div class="fw-semibold text-white">Lands, Houses, Ranchos, Farms</div>
-					</div>
-				</a>
-			</div>
-			<div class="col-xl-4">
-				<a href="#" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
-					<div class="card-body">
-						<i class="ki-duotone ki-cheque text-white fs-2x ms-n1">
-							<span class="path1"></span>
-							<span class="path2"></span>
-							<span class="path3"></span>
-							<span class="path4"></span>
-							<span class="path5"></span>
-							<span class="path6"></span>
-							<span class="path7"></span>
-						</i>
-					<div class="text-white fw-bold fs-2 mb-2 mt-5">Appartments</div>
-					<div class="fw-semibold text-white">Flats, Shared Rooms, Duplex</div>
-					</div>
-				</a>				
-			</div>
-			<div class="col-xl-4">
-				<a href="#" class="card bg-success hoverable card-xl-stretch mb-5 mb-xl-8">
-					<div class="card-body">
-						<i class="ki-duotone ki-chart-simple-3 text-white fs-2x ms-n1">
-							<span class="path1"></span>
-							<span class="path2"></span>
-							<span class="path3"></span>
-							<span class="path4"></span>
-						</i>
-						<div class="text-white fw-bold fs-2 mb-2 mt-5">Sales Stats</div>
-						<div class="fw-semibold text-white">50% Increased for FY20</div>
-					</div>
-				</a>
-			</div>
-		</div>
-
+    <div class="row clearfix">
+                <div class="col-lg-3 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file" style="color: white!important"></i></div>
+                                <div class="ml-4">
+                                    <span style="color: black!important">Jumlah Permohonan</span>
+                                    <h4 class="mb-0 font-weight-medium">500</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-search" style="color: white!important"></i></div>
+                                <div class="ml-4">
+                                    <span style="color: black!important">Deraf</span>
+                                    <h4 class="mb-0 font-weight-medium">10</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-in-bg bg-green text-white rounded-circle"><i class="fa fa-check-circle" style="color: white!important"></i></div>
+                                <div class="ml-4">
+                                    <span style="color: black!important">Disokong</span>
+                                    <h4 class="mb-0 font-weight-medium"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-in-bg bg-yellow text-white rounded-circle"><i class="fa fa-reply-all" style="color: white!important"></i></div>
+                                <div class="ml-4">
+                                    <span style="color: black!important">Dikembalikan</span>
+                                    <h4 class="mb-0 font-weight-medium"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
 	
         <div class="row clearfix">
 			<div class="col-lg-12">
