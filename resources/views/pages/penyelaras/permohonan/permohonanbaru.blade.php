@@ -89,7 +89,7 @@
 			<div class="col-lg-12">
 				<div class="card">
 					<div class="header">
-						<h2>Senarai Permohonan Baru</h2>
+						<h2>Senarai Permohonan</h2>
 					</div>
 
 					<div class="body">
