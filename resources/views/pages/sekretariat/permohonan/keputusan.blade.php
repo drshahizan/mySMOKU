@@ -107,7 +107,7 @@
                                             
                                         <tbody> 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/D/020223015001</a></td> 
+                                                <td>KPT/BKOKU/D/020223015001</td> 
                                                 <td>Ali Bin Abu</td> 
                                                 <td>BKOKU</td>
                                                 <td>A12343</td>
@@ -116,7 +116,7 @@
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTPPK/2/011221038712</a></td> 
+                                                <td>KPTPPK/2/011221038712</td> 
                                                 <td>Arina Binti Saleh</td>
                                                 <td>PPK</td>
                                                 <td>A12343</td> 
@@ -125,7 +125,7 @@
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKU/3/011221034612</a></td> 
+                                                <td>KPTBKOKU/3/011221034612</td> 
                                                 <td>Choo Mei Ling</td> 
                                                 <td>BKOKU</td>
                                                 <td>A12343</td> 
@@ -134,7 +134,7 @@
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKU/4/001121035602</a></td> 
+                                                <td>KPTBKOKU/4/001121035602</td> 
                                                 <td>Sarah Binti Md Yunos</td>
                                                 <td>BKOKU</td>
                                                 <td>A12343</td> 
@@ -144,7 +144,7 @@
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTPPK/5/970804110016</a></td>
+                                                <td>KPTPPK/5/970804110016</td>
                                                 <td>Tamila A/P Ganesh</td>
                                                 <td>PPK</td>
                                                 <td>A12352</td> 
@@ -154,7 +154,7 @@
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/4/950623035672</a></td>
+                                                <td>KPTBKOKU/4/950623035672</td>
                                                 <td>Wan Nurul Syafiqah Binti Wan Sahak</td>
                                                 <td>BKOKU</td>
                                                 <td>A12352</td> 
@@ -163,7 +163,7 @@
                                             </tr>
     
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/6/930907030098</a></td>
+                                                <td>KPTBKOKU/6/930907030098</td>
                                                 <td>Siti Aisyah Binti Ismail</td>
                                                 <td>BKOKU</td>
                                                 <td>A12352</td> 
@@ -172,7 +172,7 @@
                                             </tr>
     
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/5/950523098909</a></td>
+                                                <td>KPTPPK/5/950523098909</td>
                                                 <td>Muhammad Aiman Bin Hamid</td>
                                                 <td>PPK</td>
                                                 <td>A12352</td>
