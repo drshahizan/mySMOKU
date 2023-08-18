@@ -35,7 +35,7 @@
         <!-- Default theme -->
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     </head>
-
+<br>
     <body>
         <!-- Main body part  -->
         <div id="main-content">
