@@ -31,4 +31,9 @@ class PenyelarasController extends Controller
         return view('pages.penyelaras.tuntutan.sejarah');
     }
 
+    public function index()
+    {
+        
+    }
+
 }
