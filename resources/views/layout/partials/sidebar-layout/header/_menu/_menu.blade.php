@@ -11,7 +11,7 @@
 			</span> -->
 			<!--end:Menu link-->
 			<!--begin:Menu sub-->
-			<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0 w-100 w-lg-850px"> -->
+			<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0 w-100 w-lg-850px"> 
 				@include(config('settings.KT_THEME_LAYOUT_DIR').'/partials/sidebar-layout/header/_menu/__dashboards')
 			</div>
 			<!--end:Menu sub-->
