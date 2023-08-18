@@ -31,7 +31,7 @@
                                         <div class="icon-in-bg bg-success text-white rounded-circle" style="padding-left:0;"><i class="fa fa-check"></i></div>
                                         <div class="ml-4">
                                             <span style="color: black;">Tuntutan Layak</span>
-                                            <h4 class="mb-0 font-weight-medium">3700</h4>
+                                            <h4 class="mb-0 font-weight-medium">{{number_format(3700)}}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
                                         <div class="icon-in-bg bg-danger rounded-circle" style="padding-left:0;"><i class="fa fa-close" style="color: white"></i></div>
                                         <div class="ml-4">
                                             <span style="color: black;">Tuntutan Tidak Layak</span>
-                                            <h4 class="mb-0 font-weight-medium">200</h4>
+                                            <h4 class="mb-0 font-weight-medium">{{number_format(200)}}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                         <div class="icon-in-bg bg-warning rounded-circle" style="padding-left:0;"><i class="fa fa-mail-reply" style="color: white"></i></div>
                                         <div class="ml-4">
                                             <span style="color: black;">Tuntutan Dikembalikan</span>
-                                            <h4 class="mb-0 font-weight-medium">1200</h4>
+                                            <h4 class="mb-0 font-weight-medium">{{number_format(1230)}}</h4>
                                         </div>
                                     </div>
                                 </div>

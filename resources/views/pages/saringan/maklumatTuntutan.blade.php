@@ -6,7 +6,7 @@
             padding:2px 8px!important;
         }
         .table{
-            width: 45%;
+            width: 48%;
             table-layout: fixed;
         }
         .table2{
