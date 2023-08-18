@@ -155,16 +155,6 @@
                                 <option value="Tidak Aktif" {{Request::get('status') == 'Tidak Aktif' ? 'selected':'' }} >Tidak Aktif</option>
                             </select>
                         </div>
-
-                        <div class="col-md-3">
-                            {{-- <label style="color:black"><b>Tapis Jenis Permohonan</b> --}}
-                            <select name="status" class="form-select">
-                                <option value="">Semua Jenis Tuntutan</option>
-                                <option value="BKOKU" {{Request::get('jenis') == 'BKOKU' ? 'selected':'' }} >BKOKU</option>
-                                <option value="BKOKU" {{Request::get('jenis') == 'BKOKU' ? 'selected':'' }} >BKOKU</option>
-                            </select>
-                        </div>
-
                         <div class="col-md-4 right">
                             <button type="submit" class="btn btn-primary" style="width: 15%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
                         </div>
