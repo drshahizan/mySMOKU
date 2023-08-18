@@ -41,11 +41,6 @@
                                                 <td>Mohd Ali Bin Abu Kassim</td>
                                             </tr>
                                             <tr>
-                                                <td><strong>No. Kad Pengenalan </strong></td>
-                                                <td><b>:</b></td>
-                                                <td>970703041223</td>
-                                            </tr>
-                                            <tr>
                                                 <td><strong>ID Permohonan </strong></td>
                                                 <td><b>:</b></td>
                                                 <td>KPTBKOKU/4/970703041223</td>
