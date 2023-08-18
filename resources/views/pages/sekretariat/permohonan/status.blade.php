@@ -148,32 +148,34 @@
                     </div>
 
                     {{-- Filter section --}}
-                    <div class="row">
-                        <div class="col-md-3">
-                            <select name="status" class="form-select">
-                                <option value="">Semua Status Permohonan</option>
-                                <option value="Baru" {{Request::get('status') == 'Baru' ? 'selected':'' }} >Baru</option>
-                                <option value="Saringan" {{Request::get('status') == 'Saringan' ? 'selected':'' }} >Saringan</option>
-                                <option value="Disokong" {{Request::get('status') == 'Disokong' ? 'selected':'' }} >Disokong</option>
-                                <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
-                                <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
-                                <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
-                                <option value="Tidak Aktif" {{Request::get('status') == 'Tidak Aktif' ? 'selected':'' }} >Tidak Aktif</option>
-                            </select>
-                        </div>
+                    <form action="" method="GET">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <select name="status" class="form-select">
+                                    <option value="">Semua Status Permohonan</option>
+                                    <option value="2" {{Request::get('status') == '2' ? 'selected':'' }} >Baru</option>
+                                    <option value="3" {{Request::get('status') == '3' ? 'selected':'' }} >Saringan</option>
+                                    <option value="4" {{Request::get('status') == '4' ? 'selected':'' }} >Disokong</option>
+                                    <option value="5" {{Request::get('status') == '5' ? 'selected':'' }} >Dikembalikan</option>
+                                    <option value="6" {{Request::get('status') == '6' ? 'selected':'' }} >Layak</option>
+                                    <option value="7" {{Request::get('status') == '7' ? 'selected':'' }} >Tidak Layak</option>
+                                </select>
+                            </div>
 
-                        <div class="col-md-3">
-                            <select name="status" class="form-select">
-                                <option value="">Semua Jenis Permohonan</option>
-                                <option value="BKOKU" {{Request::get('jenis') == 'BKOKU' ? 'selected':'' }} >BKOKU</option>
-                                <option value="PPK" {{Request::get('jenis') == 'PPK' ? 'selected':'' }} >PPK</option>
-                            </select>
-                        </div>
+                            <div class="col-md-3">
+                                <select name="program" class="form-select">
+                                    <option value="">Semua Jenis Permohonan</option>
+                                    <option value="BKOKU" {{Request::get('program') == 'BKOKU' ? 'selected':'' }} >BKOKU</option>
+                                    <option value="PPK" {{Request::get('program') == 'PPK' ? 'selected':'' }} >PPK</option>
+                                </select>
+                            </div>
 
-                        <div class="col-md-4 right">
-                            <button type="submit" class="btn btn-primary" style="width: 15%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
+                            <div class="col-md-4 right">
+                                <button type="submit" class="btn btn-primary" style="width: 15%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+
                     <br>
 
                     {{-- Table senarai --}}
@@ -185,9 +187,9 @@
                                     <thead>
                                         <tr style="color: white; background-color:rgb(35, 58, 108);">
                                             <th style="width: 15%"><b>ID Permohonan</b></th>                                        
-                                            <th style="width: 35%"><b>Nama</b></th>
-                                            <th style="width: 15%"><b>Jenis Permohonan</b></th>
-                                            <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th> 
+                                            <th style="width: 45%"><b>Nama</b></th>
+                                            <th style="width: 12%"><b>Jenis Permohonan</b></th>
+                                            <th style="width: 13%" class="text-center"><b>Tarikh Permohonan</b></th> 
                                             <th class="text-center" style="width: 15%">Status Permohonan</th>
                                         </tr>
                                     </thead>
