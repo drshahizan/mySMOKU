@@ -92,81 +92,68 @@
 									</div> -->
 									<!--end::Row-->
 
-                                <!--begin::Row-->
-                                <div class="row g-5 g-xl-8">
-										<div class="col-xl-3">
-											<!--begin::Statistics Widget 5-->
-											<a href="#" class="card theme-dark-bg-body"  style="background-color: #4C6085">
-												<!--begin::Body-->
-												<div class="card-body">
-													<i class="ki-duotone ki-book text-primary fs-2x ms-n1">
-														<span class="path1"></span>
-														<span class="path2"></span>
-														<span class="path3"></span>
-														<span class="path4"></span>
-													</i>
-													<div class="fw-semibold text-white fs-4 mb-1 mt-1">Permohonan</div>
-													<div class="text-white fw-bold fs-2 mb-1 mt-1">500</div>
-													
-												</div>
-												<!--end::Body-->
-											</a>
-											<!--end::Statistics Widget 5-->
-										</div>
-										<div class="col-xl-3">
-											<!--begin::Statistics Widget 5-->
-											<a href="#" class="card theme-dark-bg-body"  style="background-color: #39A0ED">
-												<!--begin::Body-->
-												<div class="card-body">
-													<i class="ki-duotone ki-cheque text-gray-100 fs-2x ms-n1">
-														<span class="path1"></span>
-														<span class="path2"></span>
-														<span class="path3"></span>
-														<span class="path4"></span>
-														<span class="path5"></span>
-														<span class="path6"></span>
-														<span class="path7"></span>
-													</i>
-													<div class="fw-semibold text-white fs-4 mb-1 mt-1">Aktif</div>
-													<div class="text-white fw-bold fs-2 mb-1 mt-1">400</div>
-												</div>
-												<!--end::Body-->
-											</a>
-											<!--end::Statistics Widget 5-->
-										</div>
-										<div class="col-xl-3">
-											<!--begin::Statistics Widget 5-->
-											<a href="#" class="card theme-dark-bg-body"  style="background-color: #78cdd7">
-												<!--begin::Body-->
-												<div class="card-body">
-													<i class="ki-duotone ki-briefcase text-white fs-2x ms-n1">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>
-													<div class="fw-semibold text-white fs-4 mb-1 mt-1">Tidak Aktif</div>
-													<div class="text-white fw-bold fs-2 mb-1 mt-1">100</div>
-												</div>
-												<!--end::Body-->
-											</a>
-											<!--end::Statistics Widget 5-->
-										</div>
-										<div class="col-xl-3">
-											<!--begin::Statistics Widget 5-->
-											<a href="#" class="card bg-warning hoverable card-xl-stretch mb-5 mb-xl-8">
-												<!--begin::Body-->
-												<div class="card-body">
-													<i class="ki-duotone ki-chart-pie-simple text-white fs-2x ms-n1">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>
-													<div class="fw-semibold text-white fs-4 mb-1 mt-1">Dikembalikan</div>
-													<div class="text-white fw-bold fs-2 mb-1 mt-1">5 </div>
-												</div>
-												<!--end::Body-->
-											</a>
-											<!--end::Statistics Widget 5-->
-										</div>
-									</div>
+									<head>
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/css/saringan.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    </head>
+    <div class="row clearfix">
+                <div class="col-lg-3 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file" style="color: white!important"></i></div>
+                                <div class="ml-4">
+                                    <span style="color: black!important">Jumlah Permohonan</span>
+                                    <h4 class="mb-0 font-weight-medium">500</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-search" style="color: white!important"></i></div>
+                                <div class="ml-4">
+                                    <span style="color: black!important">Deraf</span>
+                                    <h4 class="mb-0 font-weight-medium">10</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-in-bg bg-green text-white rounded-circle"><i class="fa fa-check-circle" style="color: white!important"></i></div>
+                                <div class="ml-4">
+                                    <span style="color: black!important">Hantar</span>
+                                    <h4 class="mb-0 font-weight-medium">23</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-in-bg bg-yellow text-white rounded-circle"><i class="fa fa-reply-all" style="color: white!important"></i></div>
+                                <div class="ml-4">
+                                    <span style="color: black!important">Dikembalikan</span>
+                                    <h4 class="mb-0 font-weight-medium">3</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
 									<!--end::Row-->
 									<!--begin::Row-->
 									<div class="row g-5 g-xl-8">
