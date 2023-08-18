@@ -47,9 +47,9 @@
                                         
                                         <tbody>
                                             <tr>
-                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTPPK/5/970204052445</a></td>
+                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTBKOKU/5/970204052445</a></td>
                                                 <td>Sarah Binti Yusri</td>
-                                                <td>PPK</td>                                        
+                                                <td>BKOKU</td>                                        
                                                 <td class="text-center">05/03/2023</td>
                                             </tr>  
                                             <tr>
@@ -59,9 +59,9 @@
                                                 <td class="text-center">09/04/2023</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTPPK/2/021212050334</a></td>
+                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTBKOKU/2/021212050334</a></td>
                                                 <td>Santishwaran A/L Paven</td>
-                                                <td>PPK</td>                                        
+                                                <td>BKOKU</td>                                        
                                                 <td class="text-center">05/06/2023</td>
                                             </tr>
                                             <tr>
@@ -71,9 +71,9 @@
                                                 <td class="text-center">07/06/2023</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTPPK/5/981004045253</a></td>
+                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTBKOKU/5/981004045253</a></td>
                                                 <td>Syed Abdul Kassim Hussain Yusof</td>
-                                                <td>PPK</td>                                        
+                                                <td>BKOKU</td>                                        
                                                 <td class="text-center">25/05/2023</td>
                                             </tr>
                                             <tr>
@@ -83,9 +83,9 @@
                                                 <td class="text-center">09/08/2023</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTPPK/5/950523098909</a></td>
+                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTBKOKU/5/950523098909</a></td>
                                                 <td>Muhammad Aiman Bin Hamid</td>
-                                                <td>PPK</td>
+                                                <td>BKOKU</td>
                                                 <td class="text-center">29/07/2023</td>
                                             </tr>
                                         </tbody>

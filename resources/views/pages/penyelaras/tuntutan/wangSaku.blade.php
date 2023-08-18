@@ -83,9 +83,9 @@
                                                 <td class="text-center">21/05/2023</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="{{ url('maklumat-tuntutan-wang-saku') }}" title="">KPTPPK/5/950523098909</a></td>
+                                                <td><a href="{{ url('maklumat-tuntutan-wang-saku') }}" title="">KPTBKOKU/5/950523098909</a></td>
                                                 <td>Muhammad Aiman Bin Hamid</td>
-                                                <td>PPK</td>
+                                                <td>BKOKU</td>
                                                 <td class="text-center">29/07/2023</td>
                                             </tr>
                                         </tbody>
