@@ -40,7 +40,7 @@
                                             <tr>
                                                 <th style="width: 15%"><b>ID Tuntutan</b></th>                                        
                                                 <th style="width: 40%"><b>Nama</b></th>
-                                                <th style="width: 10%"><b>Jenis Permohonan</b></th>
+                                                <th style="width: 15%"><b>Jenis Permohonan</b></th>
                                                 <th style="width: 20%"><b>Jenis Tuntutan</b></th>
                                                 <th style="width: 10%" class="text-center"><b>Tarikh Tuntutan</b></th> 
                                             </tr>
@@ -55,9 +55,9 @@
                                                 <td class="text-center">07/02/2023</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTPPK/5/970204052445</a></td>
+                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTBKOKU/5/970204052445</a></td>
                                                 <td>Sarah Binti Yusri</td>
-                                                <td>PPK</td>      
+                                                <td>BKOKU</td>      
                                                 <td>Yuran Pegajian dan Wang Saku</td>                                  
                                                 <td class="text-center">05/03/2023</td>
                                             </tr>  
@@ -83,9 +83,9 @@
                                                 <td class="text-center">09/04/2023</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTPPK/2/021212050334</a></td>
+                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTBKOKU/2/021212050334</a></td>
                                                 <td>Santishwaran A/L Paven</td>
-                                                <td>PPK</td> 
+                                                <td>BKOKU</td> 
                                                 <td>Yuran Pegajian dan Wang Saku</td>                                       
                                                 <td class="text-center">05/06/2023</td>
                                             </tr>
@@ -104,9 +104,9 @@
                                                 <td class="text-center">19/02/2023</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTPPK/5/981004045253</a></td>
+                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTBKOKU/5/981004045253</a></td>
                                                 <td>Syed Abdul Kassim Hussain Yusof</td>
-                                                <td>PPK</td> 
+                                                <td>BKOKU</td> 
                                                 <td>Yuran Pegajian dan Wang Saku</td>                                       
                                                 <td class="text-center">25/05/2023</td>
                                             </tr>
@@ -132,9 +132,9 @@
                                                 <td class="text-center">21/05/2023</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTPPK/5/950523098909</a></td>
+                                                <td><a href="{{ url('maklumat-tuntutan-yuran-pengajian') }}" title="">KPTBKOKU/5/950523098909</a></td>
                                                 <td>Muhammad Aiman Bin Hamid</td>
-                                                <td>PPK</td>
+                                                <td>BKOKU</td>
                                                 <td>Yuran Pegajian dan Wang Saku</td>
                                                 <td class="text-center">29/07/2023</td>
                                             </tr>

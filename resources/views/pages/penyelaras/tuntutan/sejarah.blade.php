@@ -161,7 +161,7 @@
                             <select name="status" class="form-select">
                                 <option value="">Semua Jenis Tuntutan</option>
                                 <option value="BKOKU" {{Request::get('jenis') == 'BKOKU' ? 'selected':'' }} >BKOKU</option>
-                                <option value="PPK" {{Request::get('jenis') == 'PPK' ? 'selected':'' }} >PPK</option>
+                                <option value="BKOKU" {{Request::get('jenis') == 'BKOKU' ? 'selected':'' }} >BKOKU</option>
                             </select>
                         </div>
 
@@ -196,9 +196,9 @@
                                         </tr>
 
                                         <tr data-status="Tidak Aktif">
-                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTPPK/3/970204052445</a></td>
+                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTBKOKU/3/970204052445</a></td>
                                             <td>Sarah Binti Yusri</td>
-                                            <td>PPK</td>                                        
+                                            <td>BKOKU</td>                                        
                                             <td class="text-center">05/03/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                         </tr>  
@@ -228,17 +228,17 @@
                                         </tr>
                                         
                                         <tr data-status="Saringan">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/6/950804082447</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/950804082447</a></td>
                                             <td>Akmal Bin Kairuddin</td>
-                                            <td>PPK</td>                                        
+                                            <td>BKOKU</td>                                        
                                             <td class="text-center">27/4/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
 
                                         <tr data-status="Tidak Layak">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/2/021212050334</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/021212050334</a></td>
                                             <td>Santishwaran A/L Paven</td>
-                                            <td>PPK</td>                                        
+                                            <td>BKOKU</td>                                        
                                             <td class="text-center">05/06/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                         </tr>
@@ -260,17 +260,17 @@
                                         </tr>
                                         
                                         <tr data-status="Layak">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/2/010305058473</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/010305058473</a></td>
                                             <td>Arshahad Bin Kairul Zaman</td>
-                                            <td>PPK</td>                                        
+                                            <td>BKOKU</td>                                        
                                             <td class="text-center">26/05/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/3/981004045253</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/981004045253</a></td>
                                             <td>Syed Abdul Kassim Hussain Yusof</td>
-                                            <td>PPK</td>                                        
+                                            <td>BKOKU</td>                                        
                                             <td class="text-center">25/05/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
@@ -308,17 +308,17 @@
                                         </tr>
 
                                         <tr data-status="Disokong">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/6/900623031672</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/900623031672</a></td>
                                             <td>Wan Aminah Binti Hasan</td>
-                                            <td>PPK</td>
+                                            <td>BKOKU</td>
                                             <td class="text-center">19/04/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
 
                                         <tr data-status="Dikembalikan">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/4/950523098909</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/950523098909</a></td>
                                             <td>Muhammad Aiman Bin Hamid</td>
-                                            <td>PPK</td>
+                                            <td>BKOKU</td>
                                             <td class="text-center">09/07/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
                                         </tr>

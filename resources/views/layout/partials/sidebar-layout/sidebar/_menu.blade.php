@@ -119,8 +119,15 @@
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
 				</div>
-			</div>
-			<div class="menu-item">
+		</div>
+		<div class="menu-item">
+			<a class="menu-link" href="{{url('penyelaras-sejarah-tuntutan')}}">
+			<!-- "{{ route('dashboard') }}" -->
+					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
+					<span class="menu-title">Keseluruhan</span>
+			</a>
+		</div>
+		<div class="menu-item">
 			<a class="menu-link" href="{{url('tuntutan-wang-saku')}}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
@@ -141,13 +148,6 @@
 					<span class="menu-title">Kemaskini</span>
 			</a>
 		</div> 
-		<div class="menu-item">
-			<a class="menu-link" href="{{url('penyelaras-sejarah-tuntutan')}}">
-			<!-- "{{ route('dashboard') }}" -->
-					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Sejarah</span>
-			</a>
-		</div>
 		</div>
 		<!--end::Menu-->
 
