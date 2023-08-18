@@ -147,8 +147,9 @@
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 					<span class="menu-title">Kemaskini</span>
 			</a>
-		</div> 
 		</div>
+		
+		<!-- </div> -->
 		<!--end::Menu-->
 
 @elseif(Auth::user()->tahap=='3')

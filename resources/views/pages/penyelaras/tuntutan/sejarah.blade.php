@@ -32,7 +32,7 @@
                                         <div class="d-flex align-items-center">
                                             <div class="icon-in-bg bg-info text-white rounded-circle"><i class="fa fa-bookmark" style="color: white"></i></div>
                                             <div class="ml-4">
-                                                <span style="color: black;"> Baru</span>
+                                                <span style="color: black;">Hantar</span>
                                                 <h4 class="mb-0 font-weight-medium">{{number_format(1090)}}</h4>
                                             </div>
                                         </div>
