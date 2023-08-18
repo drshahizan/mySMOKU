@@ -63,8 +63,8 @@
                             <div class="d-flex align-items-center">
                                 <div class="icon-in-bg bg-green text-white rounded-circle"><i class="fa fa-check-circle" style="color: white!important"></i></div>
                                 <div class="ml-4">
-                                    <span style="color: black!important">Disokong</span>
-                                    <h4 class="mb-0 font-weight-medium"></h4>
+                                    <span style="color: black!important">Hantar</span>
+                                    <h4 class="mb-0 font-weight-medium">23</h4>
                                 </div>
                             </div>
                         </div>
