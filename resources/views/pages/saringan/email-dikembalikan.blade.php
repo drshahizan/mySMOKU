@@ -7,32 +7,9 @@
     <h3>BKOKU: PERMOHONAN DIKEMBALIKAN</h3>
     <p>Assalammualaikum W.R.T & Salam Sejahtera.</p>
     <p>Dukacita dimaklumkan bahawa permohonan anda dikembalikan semula atas alasan yang dinyatakan di bawah:</p>
-    @php
-        $i=0;    
-    @endphp
-
-    @if ($catatan['catatan1']!=null)
-    @php
-        $i++;    
-    @endphp 
-        <p>
-            {{$i}}.{{$catatan['catatan1']}}
-        </p>
-    @endif
-
-    @if ($catatan['catatan2']!=null)
-    @php
-        $i++;    
-    @endphp
-        <p>{{$i}}. Terdapat butiran yang tidak benar dalam Maklumat Akademik</p>
-    @endif
-
-    @if ($catatan['catatan3']!=null)
-    @php
-        $i++;    
-    @endphp
-    <p>{{$i}}. Terdapat butiran yang tidak benar dalam Salinan Dokumen</p>
-    @endif    
+    @for ($i = 0; $i < count($catatan); $i++)
+        {{$i+1}}. {{$catatan[$i]}}. <br>
+    @endfor   
 
     <br>
     <p>Sekian, Terima Kasih</p>

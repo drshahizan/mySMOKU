@@ -10,6 +10,9 @@
         td{
             vertical-align: top!important;
         }
+        .space{
+            width: 15%;
+        }
     </style>
     <div id="main-content">
         <div class="container-fluid">
@@ -34,7 +37,6 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="body">
-                            <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6">
                                     <br>
                                     @php
@@ -45,30 +47,28 @@
                                             <td><strong>ID Permohonan</strong></td>
                                             <td>:</td>
                                             <td>{{$permohonan->id_permohonan}}</td>
+                                            <td class="space">&nbsp;</td>
+                                            <td><strong>Tarikh Permohonan</strong></td>
+                                            <td>:</td>
+                                            <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Nama</strong></td>
                                             <td>:</td>
                                             <td>{{$pelajar->nama_pelajar}}</td>
+                                            <td class="space">&nbsp;</td>
+                                            <td><strong>Sesi/Semester</strong></td>
+                                            <td>:</td>
+                                            <td>{{Carbon::now()->year-1}}/{{Carbon::now()->year}}-{{$akademik->sem_semasa}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>No. Kad Pengenalan</strong></td>
                                             <td>:</td>
                                             <td>{{$pelajar->nokp_pelajar}}</td>
                                         </tr>
-                                        <tr>
-                                            <td><strong>Tarikh Permohonan</strong></td>
-                                            <td>:</td>
-                                            <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Sesi/Semester</strong></td>
-                                            <td>:</td>
-                                            <td>{{Carbon::now()->year-1}}/{{Carbon::now()->year}}-{{$akademik->sem_semasa}}</td>
-                                        </tr>
                                     </table>                           
                                 </div>
-                            </div>
+                                <br>
                             <form method="POST" action="{{ url('saring-maklumat-pemohon/'.$pelajar->nokp_pelajar) }}" id="saring">
                                 {{csrf_field()}}
                             <div class="row clearfix">
@@ -100,8 +100,8 @@
                                                     </div>
                                                 </td>
                                                 <td><div class="form-group c_form_group">
-                                                    <label>Berikan catatan anda.</label>
-                                                    <textarea id="textarea1" rows="2" type="text" class="form-control" placeholder="" disabled="disabled" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></textarea>
+                                                    <input class="checkbox1a" id="checkbox1a" type="checkbox" name="catatan_maklumat_profil_diri[]" value="Terdapat maklumat yang tidak benar pada Maklumat Profil Diri" disabled="disabled"><span> Terdapat maklumat yang tidak benar pada Maklumat Profil Diri</span><br>
+                                                    <input class="checkbox1b" id="checkbox1b" type="checkbox" name="catatan_maklumat_profil_diri[]" value="Terdapat maklumat yang tidak lengkap pada Maklumat Profil Diri" disabled="disabled"><span> Terdapat maklumat yang tidak lengkap pada Maklumat Profil Diri</span><br>
                                                 </div> </td>
                                                 </tr>
                                                 <tr>
@@ -111,7 +111,8 @@
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <div class="form-group c_form_group">
-                                                        <select id="maklumat_akademik" name="maklumat_akademik" class="form-control" onchange="select2()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                        <select id="maklumat_akademik" name="maklumat_akademik" class="form-control" onchange="select2()"  oninvalid="this.setCustomValidity('Sila tandakan sekurang-kurangnya satu kotak')" oninput="setCustomValidity('')" required>
+                                                            {{-- oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')"  --}}
                                                             <option value="">Pilih</option>
                                                             <option value="lengkap">Lengkap</option>
                                                             <option value="tak_lengkap">Tidak Lengkap</option>
@@ -119,11 +120,8 @@
                                                     </div>
                                                     <td>
                                                     <div class="checkbox-group">
-                                                        <input class="checkbox1" id="checkbox2a" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled" oninvalid="this.setCustomValidity('Sila tandakan sekurang-kurangnya satu kotak')" oninput="setCustomValidity('')"><span> Perkara 1</span><br>
-                                                        <input class="checkbox1" id="checkbox2b" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 2</span><br>
-                                                        <input class="checkbox1" id="checkbox2c" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 3</span><br>
-                                                        <input class="checkbox1" id="checkbox2d" type="checkbox" name="catatan_maklumat_akademik" value="2" disabled="disabled"><span> Perkara 4</span>
-                                                        <p id="checkedValue"></p>
+                                                        <input class="checkbox2a" id="checkbox2a" type="checkbox" name="catatan_maklumat_akademik[]" value="Terdapat maklumat yang tidak benar pada Maklumat Akademik" disabled="disabled"><span> Terdapat maklumat yang tidak benar pada Maklumat Akademik</span><br>
+                                                        <input class="checkbox2b" id="checkbox2b" type="checkbox" name="catatan_maklumat_akademik[]" value="Terdapat maklumat yang tidak lengkap pada Maklumat Akademik" disabled="disabled"><span> Terdapat maklumat yang tidak lengkap pada Maklumat Akademik</span><br>
                                                     </div></td>
                                                 </td> 
                                                 </tr>
@@ -144,10 +142,10 @@
                                                 </td>
                                                 <td>
                                                     <div class="checkbox-group">
-                                                        <input class="checkbox2" id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled" oninvalid="this.setCustomValidity('Sila tandakan sekurang-kurangnya satu kotak')" oninput="setCustomValidity('')"><span> Ralat pada surat tawaran</span><br>
-                                                        <input class="checkbox2" id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada penyata bank</span><br>
-                                                        <input class="checkbox2" id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada resit</span><br>
-                                                        <input class="checkbox2" id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen" value="3" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span>
+                                                        <input class="checkbox3a" id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada surat tawaran" disabled="disabled"><span> Ralat pada surat tawaran</span><br>
+                                                        <input class="checkbox3b" id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada penyata bank" disabled="disabled"><span> Ralat pada penyata bank</span><br>
+                                                        <input class="checkbox3c" id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada resit" disabled="disabled"><span> Ralat pada resit</span><br>
+                                                        <input class="checkbox3d" id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada keputusan peperiksaan" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span>
                                                     </div></td>
                                                 </tr>                                                
                                             </tbody>
@@ -173,7 +171,14 @@
     <script> 
         var btn = document.getElementById('check');
         btn.addEventListener('click', function() {
-            if (document.getElementById('checkbox2a').checked||document.getElementById('checkbox2b').checked||document.getElementById('checkbox2c').checked||document.getElementById('checkbox2d').checked) {
+            if (document.getElementById('checkbox1a').checked||document.getElementById('checkbox1b').checked) {
+                document.getElementById("checkbox1a").required = false;
+            }
+            else{
+                document.getElementById("checkbox1a").required = true;
+            }
+
+            if (document.getElementById('checkbox2a').checked||document.getElementById('checkbox2b').checked) {
                 document.getElementById("checkbox2a").required = false;
             }
             else{
@@ -188,13 +193,16 @@
             }
         })        
 
+        
         function select1(){
             var catatan1 = document.getElementById('maklumat_profil_diri').value;
             if(catatan1=="tak_lengkap"){
-                document.getElementById("textarea1").disabled = false;
+                document.getElementById("checkbox1a").disabled = false;
+                document.getElementById("checkbox1b").disabled = false;
             }
             else{
-                document.getElementById("textarea1").disabled = true;
+                document.getElementById("checkbox1a").disabled = true;
+                document.getElementById("checkbox1b").disabled = true;
             }
         }
         
@@ -203,14 +211,14 @@
             if(catatan1=="tak_lengkap"){
                 document.getElementById("checkbox2a").disabled = false;
                 document.getElementById("checkbox2b").disabled = false;
-                document.getElementById("checkbox2c").disabled = false;
-                document.getElementById("checkbox2d").disabled = false;
+                // document.getElementById("checkbox2c").disabled = false;
+                // document.getElementById("checkbox2d").disabled = false;
             }
             else{
                 document.getElementById("checkbox2a").disabled = true;
                 document.getElementById("checkbox2b").disabled = true;
-                document.getElementById("checkbox2c").disabled = true;
-                document.getElementById("checkbox2d").disabled = true;
+                // document.getElementById("checkbox2c").disabled = true;
+                // document.getElementById("checkbox2d").disabled = true;
             }
         }
 

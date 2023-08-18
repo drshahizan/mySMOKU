@@ -106,32 +106,32 @@ class SaringanController extends Controller
             return view('pages.saringan.maklumatTuntutan',compact('permohonan','pelajar','status'));
         }
         else{
+            $catatan[]="";
+            $n=0;
             if($request->get('maklumat_profil_diri')=="tak_lengkap"){
-                $catatan1=$request->get('catatan_profil_diri');
-            }
-            else{
-                $catatan1=null;
+                $checked = $request->input('catatan_maklumat_profil_diri');
+                for($i=0; $i < count($checked); $i++){
+                    $catatan[$n]=$checked[$i];
+                    $n++;
+                }
             }
     
             if($request->get('maklumat_akademik')=="tak_lengkap"){
-                $catatan2=$request->get('catatan_maklumat_akademik');
-            }
-            else{
-                $catatan2=null;
+                $checked = $request->input('catatan_maklumat_akademik');
+                for($i=0; $i < count($checked); $i++){
+                    $catatan[$n]=$checked[$i];
+                    $n++;
+                }
             }
     
             if($request->get('salinan_dokumen')=="tak_lengkap"){
-                $catatan3=$request->get('catatan_salinan_dokumen');
+                $checked = $request->input('catatan_salinan_dokumen');
+                
+                for($i=0; $i < count($checked); $i++){
+                    $catatan[$n]=$checked[$i];
+                    $n++;
+                }
             }
-            else{
-                $catatan3=null;
-            }
-    
-            $catatan = [
-                'catatan1'=>$catatan1, 
-                'catatan2'=>$catatan2, 
-                'catatan3'=>$catatan3,
-            ];
             \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
             $permohonan = TuntutanPermohonan::where('status', '2')
             ->orWhere('status', '=','3')
