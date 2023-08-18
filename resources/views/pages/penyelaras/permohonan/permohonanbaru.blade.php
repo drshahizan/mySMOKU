@@ -25,6 +25,9 @@
     <head>
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="/assets/css/saringan.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     </head>
     <!--begin::Row-->
         <div class="row g-5 g-xl-8">
@@ -75,12 +78,12 @@
 			</div>
 		</div>
 
-		{{-- Table --}}
+	
         <div class="row clearfix">
 			<div class="col-lg-12">
 				<div class="card">
 					<div class="header">
-						<h2>Senarai Permohonan Baru<br><small>Klik ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
+						<h2>Senarai Permohonan Baru</h2>
 					</div>
 
 					<div class="body">
