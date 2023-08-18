@@ -186,49 +186,49 @@
 																	
 																	<div class="d-flex align-items-center flex-wrap d-grid gap-2"> -->
 																		
-																	<form class="form w-100" novalidate="novalidate" action="{{ route('register')}}" method="post"> 
-          @csrf 
-           <!--begin::Heading-->
-             <div class="text-center mb-11">
-            <!--begin::Title-->
-            <h1 class="text-dark fw-bolder mb-3">
-                Daftar Pelajar
-            </h1>
-            <!--end::Title-->
-            <br>
-            <br>
-            <!--begin::Subtitle-->
-            <h2 class="text-dark fw-bolder mb-3">
-                Semakan Sistem Maklumat Orang Kurang Upaya (SMOKU)
-            </h2>
-            <!--end::Subtitle--->
-             </div>
-         <!--begin::Heading-->
+																	<form class="form w-100" action="{{ route('dashboard')}}" method="post"> 
+																	@csrf 
+																	<!--begin::Heading-->
+																		<div class="text-center mb-11">
+																		<!--begin::Title-->
+																		<h1 class="text-dark fw-bolder mb-3">
+																			Daftar Pelajar
+																		</h1>
+																		<!--end::Title-->
+																		<br>
+																		<br>
+																		<!--begin::Subtitle-->
+																		<h2 class="text-dark fw-bolder mb-3">
+																			Semakan Sistem Maklumat Orang Kurang Upaya (SMOKU)
+																		</h2>
+																		<!--end::Subtitle--->
+																		</div>
+																	<!--begin::Heading-->
 
-            <div class="text-center mb-11">
-            <!--begin::Title-->
-            <!-- <h1 class="text-dark fw-bolder mb-3" > -->
-            <img alt="Logo" src="{{ image('logos/logo.png') }}" class="h-100px h-lg-90px"/>        
-            </div>
+																		<div class="text-center mb-11">
+																		<!--begin::Title-->
+																		<!-- <h1 class="text-dark fw-bolder mb-3" > -->
+																		<img alt="Logo" src="{{ image('logos/logo.png') }}" class="h-100px h-lg-90px"/>        
+																		</div>
 
-            <!--begin::Input group-"-->
-            <div class="col-xs-3">
-            <!--begin::Name-->
-            <input type="text" placeholder="No Kad Pengenalan" name="nokp" maxlength="12" autocomplete="off" class="form-control bg-transparent" style="width: 60%; text-align:center; display: block;margin-left: auto; margin-right: auto;"/>
-            <!--end::Name-->
-            </div>
+																		<!--begin::Input group-"-->
+																		<div class="col-xs-3">
+																		<!--begin::Name-->
+																		<input type="text" placeholder="No Kad Pengenalan" name="nokp" maxlength="12" autocomplete="off" class="form-control bg-transparent" style="width: 60%; text-align:center; display: block;margin-left: auto; margin-right: auto;"/>
+																		<!--end::Name-->
+																		</div>
 
-        <!--begin::Submit button-->
-            <div class="d-flex flex-center mt-15">
-            <button type="submit"  class="btn btn-primary">
-                Daftar
-            </button>
-             </div>
-            </form>
-                </div>
-					</div>
-						</div>
-							</div>
+																	<!--begin::Submit button-->
+																		<div class="d-flex flex-center mt-15">
+																		<button type="submit"  class="btn btn-primary">
+																			Daftar
+																		</button>
+																		</div>
+																		</form>
+																			</div>
+																				</div>
+																					</div>
+																						</div>
                                  <!--begin::Row-->
 										<!--begin::Col-->
 										<div class="col-xl-8">
@@ -242,6 +242,12 @@
 														<span class="text-gray-400 pt-1 fw-semibold fs-6">Program BKOKU</span>
 													</h3>
 													<!--end::Title-->
+													@if (session('message'))
+														<div class="alert alert-success">{{ session('message') }}</div>
+													@endif
+													@if (session('xmessage'))
+														<div class="alert alert-danger">{{ session('xmessage') }}</div>
+													@endif
 													<!--begin::Toolbar-->
 													<!-- <div class="card-toolbar">
 														<a href="#" class="btn btn-sm btn-light">PDF Report</a>
@@ -259,7 +265,7 @@
 															<!--begin::Table head-->
 															<thead>
 																<tr class="fs-7 fw-bold border-0 text-dark">
-																<th class="min-w-150px text-center" colspan="2">ID Permohonan</th>
+																	<th class="min-w-150px text-center" colspan="2">No. Kad Pengenalan</th>
 																	<th class="min-w-150px text-center" colspan="2">Nama</th>
 																	<!-- <th class="min-w-150px text-center" colspan="2">No Matrik</th> -->
 																	<th class="text-center min-w-150px" colspan="2">Status Permohonan</th>
@@ -268,83 +274,20 @@
 															<!--end::Table head-->
 															<!--begin::Table body-->
 															<tbody>
+															@foreach ($smoku as $smoku)
 																<tr>
 																<td class="" colspan="2">
-																		<div class="d-flex justify-content-end">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/140127234321</span>
-																		</div>
+																		<span class="text-dark fw-bold fs-6 me-3">{{ $smoku->nokp}}</span>
 																	</td>
 																	
 																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Mohammad Nik Zariq bin Syed Samiun Hammani</span>
+																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">{{ $smoku->nama}}</span>
 																	</td>
 																	
 																	<td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td>
 																	
 																</tr>
-																<tr>
-																<td class="" colspan="2">
-																		<div class="d-flex justify-content-end">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/130127223322</span>
-																		</div>
-																	</td>
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Zahrah binti Syed Sualman Hakiem</span>
-																	</td>
-																	
-																	
-																	<td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td>
-																</tr>
-																<tr>
-																<td class="" colspan="2">
-																		<div class="d-flex justify-content-end">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/2/110127234322</span>
-																		</div>
-																	</td>
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Cheok Thur Qi </span>
-																	</td>
-																	
-																	
-																	<td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td>
-																</tr>
-																<tr>
-																<td class="" colspan="2">
-																		<div class="d-flex justify-content-end">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/080127214421</span>
-																		</div>
-																	</td>
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Muhamed Jaferi Dzikri bin Rafi</span>
-																	</td>
-																	
-																	
-																	<td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td>
-																</tr>
-																<tr>
-																<td class="" colspan="2">
-																		<div class="d-flex justify-content-end">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/2/090127239921</span>
-																		</div>
-																	</td>
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Oong Fan Zhao</span>
-																	</td>
-																	
-																	
-																	<td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td>
-																</tr>
-																<tr>
-																<td class="" colspan="2">
-																		<div class="d-flex justify-content-end">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/050129094328</span>
-																		</div>
-																	</td>
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Leong Chao Bik</span>
-																	</td>
-																	<td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td>
-																</tr>
+															@endforeach	
 															</tbody>
 															<!--end::Table body-->
 														</table>
