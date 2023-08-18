@@ -60,10 +60,15 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" style="width:5%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
-                                                    <th style="width: 15%"><b>ID Permohonan</b></th>                                        
-                                                    <th style="width: 50%"><b>Nama</b></th>
-                                                    <th style="width: 15%"><b>Jenis Permohonan</b></th>
-                                                    <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th> 
+                                                    <th style="width: 15%"><b>ID Permohonan</b></th>                                                   
+                                                    <th style="width: 10%"><b>Jenis Permohonan</b></th>                                        
+                                                    <th style="width: 15%"><b>Nama</b></th>
+                                                    <th style="width: 10%"><b>Jenis Kecacatan</b></th>
+                                                    <th style="width: 15%"><b>Nama Kurusus</b></th>
+                                                    <th style="width: 10%"><b>Institusi Pengajian</b></th>
+                                                    <th style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
+                                                    <th style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+
                                                 </tr>
                                             </thead>
                                             
@@ -75,7 +80,7 @@
                                                     <td>BKOKU</td>
                                                     <td class="text-center">07/02/2023</td>
                                                 </tr>
-        
+                                                {{--         
                                                 <tr>
                                                     <td class="text-center"><input type="checkbox" name="checkbox-2" id="checkbox-2" /></td>
                                                     <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/5/970204052445</a></td>
@@ -170,7 +175,7 @@
                                                     <td>Muhammad Aiman Bin Hamid</td>
                                                     <td>PPK</td>
                                                     <td class="text-center">29/07/2023</td>
-                                                </tr>
+                                                </tr> --}}
                                             </tbody>
                                         </table>
 
