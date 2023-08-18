@@ -29,29 +29,10 @@
                         </div>
                         <hr>
 
-                        {{-- Filter Function --}}
-                            {{-- <form action="" method="GET">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
-                                    </div>
-    
-                                    <div class="col-md-6">
-                                        <button type="submit" class="btn btn-primary" style="width: 10%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
-                                    </div>
-                                </div>
-                            </form>
-                            --}}
-
                         <div class="card">
                             <div class="header">
                                 <h2>Senarai Pelajar Yang Layak untuk Yuran Pengajian<br><small>Sila klik pada ID tuntutan untuk melengkapkan borang Yuran Pengajian</small></h2>
-                                {{-- <ul class="header-dropdown dropdown" style="color: black;">
-                                    <li><a href="{{ url('cetak-senarai-pemohon') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-print"></i> PDF</a></li>
-                                    <li><a href="{{ url('senarai-disokong-excel') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-print"></i> Excel</a></li>
-                                </ul> --}}
                             </div>
-
                             <div class="table-responsive">
                                 <div class="body">
                                     <table id="sortTable" class="table table-bordered table-striped">
