@@ -149,7 +149,7 @@
 			</a>
 		</div>
 		
-		<!-- </div> -->
+		</div>
 		<!--end::Menu-->
 
 @elseif(Auth::user()->tahap=='3')

@@ -259,8 +259,9 @@
 															<!--begin::Table head-->
 															<thead>
 																<tr class="fs-7 fw-bold border-0 text-dark">
-																<th class="min-w-150px text-center" colspan="2">ID Permohonan</th>
+																
 																	<th class="min-w-150px text-center" colspan="2">Nama</th>
+																	<th class="min-w-150px text-center" colspan="2">No. Kad Pengenalan</th>
 																	<!-- <th class="min-w-150px text-center" colspan="2">No Matrik</th> -->
 																	<th class="text-center min-w-150px" colspan="2">Tarikh Pendaftaran</th>
 																</tr>
@@ -269,14 +270,14 @@
 															<!--begin::Table body-->
 															<tbody>
 																<tr>
-																<td class="" colspan="2">
-																		<div class="d-flex justify-content-center">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/140127234321</span>
-																		</div>
-																	</td>
-																	
+																
 																	<td class="" colspan="2">
 																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Mohammad Nik Zariq bin Syed Samiun Hammani</span>
+																	</td>
+																	<td class="" colspan="2">
+																		<div class="d-flex justify-content-center">
+																			<span class="text-dark fw-bold fs-6 me-3">140127234321</span>
+																		</div>
 																	</td>
 																	
 																	<td class="" colspan="2">
@@ -288,15 +289,15 @@
 																	
 																</tr>
 																<tr>
-																<td class="" colspan="2">
-																		<div class="d-flex justify-content-center">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/130127223322</span>
-																		</div>
-																	</td>
+																
 																	<td class="" colspan="2">
 																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Zahrah binti Syed Sualman</span>
 																	</td>
-																	
+																	<td class="" colspan="2">
+																		<div class="d-flex justify-content-center">
+																			<span class="text-dark fw-bold fs-6 me-3">130127223322</span>
+																		</div>
+																	</td>
 																	<td class="" colspan="2">
 																	<div class="d-flex justify-content-center">
 																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">12/8/2023</span>
@@ -305,15 +306,15 @@
 																	<!-- <td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td> -->
 																</tr>
 																<tr>
-																<td class="" colspan="2">
-																		<div class="d-flex justify-content-center">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/2/110127234322</span>
-																		</div>
-																	</td>
+																
 																	<td class="" colspan="2">
 																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Cheok Thur Qi </span>
 																	</td>
-																	
+																	<td class="" colspan="2">
+																		<div class="d-flex justify-content-center">
+																			<span class="text-dark fw-bold fs-6 me-3">110127234322</span>
+																		</div>
+																	</td>
 																	<td class="" colspan="2">
 																	<div class="d-flex justify-content-center">
 																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">21/7/2023</span>
@@ -322,30 +323,33 @@
 																	<!-- <td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td> -->
 																</tr>
 																<tr>
-																<td class="" colspan="2">
-																		<div class="d-flex justify-content-center">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/080127214421</span>
-																		</div>
-																	</td>
+																
 																	<td class="" colspan="2">
 																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Muhamed Jaferi Dzikri bin Rafi</span>
+																	</td>
+																	<td class="" colspan="2">
+																		<div class="d-flex justify-content-center">
+																			<span class="text-dark fw-bold fs-6 me-3">080127214421</span>
+																		</div>
 																	</td>
 																	<td class="" colspan="2">
 																	<div class="d-flex justify-content-center">
 																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">15/8/2023</span>
 																		</div>
 																	</td>
+
 																	
 																	<!-- <td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td> -->
 																</tr>
 																<tr>
-																<td class="" colspan="2">
-																		<div class="d-flex justify-content-center">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/2/090127239921</span>
-																		</div>
-																	</td>
+																
 																	<td class="" colspan="2">
 																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Oong Fan Zhao</span>
+																	</td>
+																	<td class="" colspan="2">
+																		<div class="d-flex justify-content-center">
+																			<span class="text-dark fw-bold fs-6 me-3">090127239921</span>
+																		</div>
 																	</td>
 																	<td class="" colspan="2">
 																	<div class="d-flex justify-content-center">
@@ -356,13 +360,14 @@
 																	<!-- <td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td> -->
 																</tr>
 																<tr>
-																<td class="" colspan="2">
-																		<div class="d-flex justify-content-center">
-																			<span class="text-dark fw-bold fs-6 me-3">KPTBKOKU/1/050129094328</span>
-																		</div>
-																	</td>
+																
 																	<td class="" colspan="2">
 																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Leong Chao Bik</span>
+																	</td>
+																	<td class="" colspan="2">
+																		<div class="d-flex justify-content-center">
+																			<span class="text-dark fw-bold fs-6 me-3">050129094328</span>
+																		</div>
 																	</td>
 																	<td class="" colspan="2">
 																	<div class="d-flex justify-content-center">
