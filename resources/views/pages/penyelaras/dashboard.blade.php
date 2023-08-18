@@ -92,68 +92,81 @@
 									</div> -->
 									<!--end::Row-->
 
-									<head>
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="/assets/css/saringan.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-    </head>
-    <div class="row clearfix">
-                <div class="col-lg-3 col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-file" style="color: white!important"></i></div>
-                                <div class="ml-4">
-                                    <span style="color: black!important">Jumlah Permohonan</span>
-                                    <h4 class="mb-0 font-weight-medium">500</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-search" style="color: white!important"></i></div>
-                                <div class="ml-4">
-                                    <span style="color: black!important">Deraf</span>
-                                    <h4 class="mb-0 font-weight-medium">10</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="icon-in-bg bg-green text-white rounded-circle"><i class="fa fa-check-circle" style="color: white!important"></i></div>
-                                <div class="ml-4">
-                                    <span style="color: black!important">Hantar</span>
-                                    <h4 class="mb-0 font-weight-medium">23</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="icon-in-bg bg-yellow text-white rounded-circle"><i class="fa fa-reply-all" style="color: white!important"></i></div>
-                                <div class="ml-4">
-                                    <span style="color: black!important">Dikembalikan</span>
-                                    <h4 class="mb-0 font-weight-medium">3</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
+                                <!--begin::Row-->
+                                <div class="row g-5 g-xl-8">
+										<div class="col-xl-3">
+											<!--begin::Statistics Widget 5-->
+											<a href="#" class="card theme-dark-bg-body"  style="background-color: #4C6085">
+												<!--begin::Body-->
+												<div class="card-body">
+													<i class="ki-duotone ki-book text-primary fs-2x ms-n1">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+														<span class="path4"></span>
+													</i>
+													<div class="fw-semibold text-white fs-4 mb-1 mt-1">Permohonan</div>
+													<div class="text-white fw-bold fs-2 mb-1 mt-1">500</div>
+													
+												</div>
+												<!--end::Body-->
+											</a>
+											<!--end::Statistics Widget 5-->
+										</div>
+										<div class="col-xl-3">
+											<!--begin::Statistics Widget 5-->
+											<a href="#" class="card theme-dark-bg-body"  style="background-color: #39A0ED">
+												<!--begin::Body-->
+												<div class="card-body">
+													<i class="ki-duotone ki-cheque text-gray-100 fs-2x ms-n1">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+														<span class="path4"></span>
+														<span class="path5"></span>
+														<span class="path6"></span>
+														<span class="path7"></span>
+													</i>
+													<div class="fw-semibold text-white fs-4 mb-1 mt-1">Aktif</div>
+													<div class="text-white fw-bold fs-2 mb-1 mt-1">400</div>
+												</div>
+												<!--end::Body-->
+											</a>
+											<!--end::Statistics Widget 5-->
+										</div>
+										<div class="col-xl-3">
+											<!--begin::Statistics Widget 5-->
+											<a href="#" class="card theme-dark-bg-body"  style="background-color: #78cdd7">
+												<!--begin::Body-->
+												<div class="card-body">
+													<i class="ki-duotone ki-briefcase text-white fs-2x ms-n1">
+														<span class="path1"></span>
+														<span class="path2"></span>
+													</i>
+													<div class="fw-semibold text-white fs-4 mb-1 mt-1">Tidak Aktif</div>
+													<div class="text-white fw-bold fs-2 mb-1 mt-1">100</div>
+												</div>
+												<!--end::Body-->
+											</a>
+											<!--end::Statistics Widget 5-->
+										</div>
+										<div class="col-xl-3">
+											<!--begin::Statistics Widget 5-->
+											<a href="#" class="card bg-warning hoverable card-xl-stretch mb-5 mb-xl-8">
+												<!--begin::Body-->
+												<div class="card-body">
+													<i class="ki-duotone ki-chart-pie-simple text-white fs-2x ms-n1">
+														<span class="path1"></span>
+														<span class="path2"></span>
+													</i>
+													<div class="fw-semibold text-white fs-4 mb-1 mt-1">Dikembalikan</div>
+													<div class="text-white fw-bold fs-2 mb-1 mt-1">5 </div>
+												</div>
+												<!--end::Body-->
+											</a>
+											<!--end::Statistics Widget 5-->
+										</div>
+									</div>
 									<!--end::Row-->
 									<!--begin::Row-->
 									<div class="row g-5 g-xl-8">
@@ -173,7 +186,6 @@
 																	
 																	<div class="d-flex align-items-center flex-wrap d-grid gap-2"> -->
 																		
-<<<<<<< HEAD
 																	<form class="form w-100" action="{{ route('dashboard')}}" method="post"> 
 																	@csrf 
 																	<!--begin::Heading-->
@@ -192,26 +204,6 @@
 																		<!--end::Subtitle--->
 																		</div>
 																	<!--begin::Heading-->
-=======
-																	<form class="form w-100" novalidate="novalidate" action="{{ route('register')}}" method="post"> 
-          @csrf 
-           <!--begin::Heading-->
-             <div class="text-center mb-11">
-            <!--begin::Title-->
-            <h1 class=" card-label fw-bold text-gray-800">
-                Daftar Pelajar
-            </h1>
-            <!--end::Title-->
-            <br>
-            <br>
-            <!--begin::Subtitle-->
-            <h2 class="text-dark fw-bolder mb-3">
-                Semakan Sistem Maklumat Orang Kurang Upaya (SMOKU)
-            </h2>
-            <!--end::Subtitle--->
-             </div>
-         <!--begin::Heading-->
->>>>>>> 5d39c228e555fe118705e8a48982828e53ef4731
 
 																		<div class="text-center mb-11">
 																		<!--begin::Title-->
@@ -273,15 +265,10 @@
 															<!--begin::Table head-->
 															<thead>
 																<tr class="fs-7 fw-bold border-0 text-dark">
-<<<<<<< HEAD
 																	<th class="min-w-150px text-center" colspan="2">No. Kad Pengenalan</th>
-=======
-																
->>>>>>> 5d39c228e555fe118705e8a48982828e53ef4731
 																	<th class="min-w-150px text-center" colspan="2">Nama</th>
-																	<th class="min-w-150px text-center" colspan="2">No. Kad Pengenalan</th>
 																	<!-- <th class="min-w-150px text-center" colspan="2">No Matrik</th> -->
-																	<th class="text-center min-w-150px" colspan="2">Tarikh Pendaftaran</th>
+																	<th class="text-center min-w-150px" colspan="2">Status Permohonan</th>
 																</tr>
 															</thead>
 															<!--end::Table head-->
@@ -289,123 +276,18 @@
 															<tbody>
 															@foreach ($smoku as $smoku)
 																<tr>
-<<<<<<< HEAD
 																<td class="" colspan="2">
-																		<span class="text-dark fw-bold fs-6 me-3">{{ $smoku->nokp}}</span>
+																			<span class="text-dark fw-bold fs-6 me-3">{{ $smoku->nokp}}</span>
 																	</td>
 																	
-=======
-																
->>>>>>> 5d39c228e555fe118705e8a48982828e53ef4731
 																	<td class="" colspan="2">
 																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">{{ $smoku->nama}}</span>
 																	</td>
-																	<td class="" colspan="2">
-																		<div class="d-flex justify-content-center">
-																			<span class="text-dark fw-bold fs-6 me-3">140127234321</span>
-																		</div>
-																	</td>
 																	
-																	<td class="" colspan="2">
-																	<div class="d-flex justify-content-center">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">26/7/2023</span>
-																		</div>
-																	</td>
-																	<!-- <td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td> -->
+																	<td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td>
 																	
 																</tr>
-<<<<<<< HEAD
 															@endforeach	
-=======
-																<tr>
-																
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Zahrah binti Syed Sualman</span>
-																	</td>
-																	<td class="" colspan="2">
-																		<div class="d-flex justify-content-center">
-																			<span class="text-dark fw-bold fs-6 me-3">130127223322</span>
-																		</div>
-																	</td>
-																	<td class="" colspan="2">
-																	<div class="d-flex justify-content-center">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">12/8/2023</span>
-																		</div>
-																	</td>
-																	<!-- <td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td> -->
-																</tr>
-																<tr>
-																
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Cheok Thur Qi </span>
-																	</td>
-																	<td class="" colspan="2">
-																		<div class="d-flex justify-content-center">
-																			<span class="text-dark fw-bold fs-6 me-3">110127234322</span>
-																		</div>
-																	</td>
-																	<td class="" colspan="2">
-																	<div class="d-flex justify-content-center">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">21/7/2023</span>
-																		</div>
-																	</td>
-																	<!-- <td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td> -->
-																</tr>
-																<tr>
-																
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Muhamed Jaferi Dzikri bin Rafi</span>
-																	</td>
-																	<td class="" colspan="2">
-																		<div class="d-flex justify-content-center">
-																			<span class="text-dark fw-bold fs-6 me-3">080127214421</span>
-																		</div>
-																	</td>
-																	<td class="" colspan="2">
-																	<div class="d-flex justify-content-center">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">15/8/2023</span>
-																		</div>
-																	</td>
-
-																	
-																	<!-- <td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td> -->
-																</tr>
-																<tr>
-																
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Oong Fan Zhao</span>
-																	</td>
-																	<td class="" colspan="2">
-																		<div class="d-flex justify-content-center">
-																			<span class="text-dark fw-bold fs-6 me-3">090127239921</span>
-																		</div>
-																	</td>
-																	<td class="" colspan="2">
-																	<div class="d-flex justify-content-center">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">23/7/2023</span>
-																		</div>
-																	</td>
-																	
-																	<!-- <td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td> -->
-																</tr>
-																<tr>
-																
-																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">Leong Chao Bik</span>
-																	</td>
-																	<td class="" colspan="2">
-																		<div class="d-flex justify-content-center">
-																			<span class="text-dark fw-bold fs-6 me-3">050129094328</span>
-																		</div>
-																	</td>
-																	<td class="" colspan="2">
-																	<div class="d-flex justify-content-center">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">27/7/2023</span>
-																		</div>
-																	</td>
-																	<!-- <td class="text-center"><button class="btn bg-primary text-white">Deraf</button></td> -->
-																</tr>
->>>>>>> 5d39c228e555fe118705e8a48982828e53ef4731
 															</tbody>
 															<!--end::Table body-->
 														</table>
