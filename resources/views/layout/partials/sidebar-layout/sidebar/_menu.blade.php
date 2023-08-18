@@ -141,21 +141,15 @@
 					<span class="menu-title">Yuran Pengajian dan Wang Saku</span>
 			</a>
 		</div>
-		<!-- <div class="menu-item">
+		<div class="menu-item">
 			<a class="menu-link" href="{{url('kemaskini-tuntutan')}}">
 		
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 					<span class="menu-title">Kemaskini</span>
 			</a>
-		</div> -->
-		<div class="menu-item">
-			<a class="menu-link" href="{{url('penyelaras-sejarah-tuntutan')}}">
-			<!-- "{{ route('dashboard') }}" -->
-					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Sejarah</span>
-			</a>
 		</div>
-		</div>
+		
+		<!-- </div> -->
 		<!--end::Menu-->
 
 @elseif(Auth::user()->tahap=='3')
