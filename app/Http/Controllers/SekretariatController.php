@@ -179,11 +179,20 @@ class SekretariatController extends Controller
 
     public function tuntutanKelulusan()
     {
-        return view('pages.sekretariat.tuntutan.kelulusan');
+        $permohonan = TuntutanPermohonan::where('status', '4')
+        ->get();
+        return view('pages.sekretariat.tuntutan.kelulusan', compact('permohonan'));
     }
 
     public function tuntutanKeputusan()
     {
-        return view('pages.sekretariat.tuntutan.keputusan');
+        $permohonan = TuntutanPermohonan::where('status', '2')
+        ->orWhere('status', '=','3')
+        ->orWhere('status', '=','4')
+        ->orWhere('status', '=','5')
+        ->orWhere('status', '=','6')
+        ->orWhere('status', '=','7')
+        ->get();
+        return view('pages.sekretariat.tuntutan.keputusan',compact('permohonan'));
     }
 }

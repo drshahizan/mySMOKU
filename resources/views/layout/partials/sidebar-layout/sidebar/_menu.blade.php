@@ -131,7 +131,7 @@
 			<a class="menu-link" href="{{url('tuntutan-yuran-pengajian')}}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
-					<span class="menu-title">Yuran Pengajian</span>
+					<span class="menu-title">Yuran Pengajian dan Wang Saku</span>
 			</a>
 		</div>
 		<div class="menu-item">
