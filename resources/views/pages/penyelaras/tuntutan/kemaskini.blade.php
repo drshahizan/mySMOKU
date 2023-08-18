@@ -1,10 +1,28 @@
 <x-default-layout>
+        	<!--begin::Page title-->
+<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+	<!--begin::Title-->
+	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Tuntutan</h1>
+	<!--end::Title-->
+	<!--begin::Breadcrumb-->
+	<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+		<!--begin::Item-->
+		<li class="breadcrumb-item text-muted">
+			<a href="/" class="text-dark text-hover-primary" style="color:darkblue">Tuntutan</a>
+		</li>
+		<!--end::Item-->
+		<!--begin::Item-->
+		<li class="breadcrumb-item">
+			<span class="bullet bg-gray-400 w-5px h-2px"></span>
+		</li>
+		<!--end::Item-->
+		<!--begin::Item-->
+		<li class="breadcrumb-item text-dark" style="color:darkblue">Kemaskini Tuntutan</li>
+		<!--end::Item-->
+	</ul>
+	<!--end::Breadcrumb-->
+</div>
     <head>
-        <title>Penyelaras BKOKU KPT</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="assets/css/sekretariat.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
