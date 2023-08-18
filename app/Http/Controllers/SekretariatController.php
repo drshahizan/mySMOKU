@@ -21,10 +21,25 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.dashboard');
     }
     
-    public function statusPermohonan()
+    public function statusPermohonan(Request $request)
     {
         $keseluruhan = TuntutanPermohonan::all();
-        return view('pages.sekretariat.permohonan.status',compact('keseluruhan'));
+        return view('pages.sekretariat.permohonan.status', compact('keseluruhan'));
+
+        // if(!$request)
+        // {
+        //     $keseluruhan = TuntutanPermohonan::when($request->program != null, function($q) use($request){
+        //                     return $q->where('program', $request->program);
+        //                 })
+        //                 ->when($request->status != null, function($q) use($request){
+        //                     return $q->where('status',$request->status);
+        //                 });
+        //     return view('pages.sekretariat.permohonan.status', compact('keseluruhan'));
+        // }
+        // else{
+        //     $keseluruhan = TuntutanPermohonan::all();
+        //     return view('pages.sekretariat.permohonan.status',compact('keseluruhan'));
+        // } 
     }
 
     public function keputusanSaringan()
