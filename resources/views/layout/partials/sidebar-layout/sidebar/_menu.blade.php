@@ -95,22 +95,21 @@
 				</div>
 			</div>
 			<div class="menu-item">
-			<a class="menu-link" href="{{ route('permohonanbaru')}}">
-			<!-- "{{ route('dashboard') }}" -->
+			<a class="menu-link" href="{{ route('keseluruhanpermohonan')}}">
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-					<span class="menu-title">Baru</span>
+					<span class="menu-title">Keseluruhan</span>
 			</a>
 		</div>
 	
 		
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('sekretariatKelulusan')}}">
+			<a class="menu-link" href="{{ route('permohonanbaru')}}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Kelulusan</span>
+					<span class="menu-title">Baru</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('sekretariatKeputusan')}}">
+			<a class="menu-link" href="#">
 					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
 					<span class="menu-title">Keputusan</span>
 			</a>
@@ -119,8 +118,15 @@
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
 				</div>
-			</div>
-			<div class="menu-item">
+		</div>
+		<div class="menu-item">
+			<a class="menu-link" href="{{url('penyelaras-sejarah-tuntutan')}}">
+			<!-- "{{ route('dashboard') }}" -->
+					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
+					<span class="menu-title">Keseluruhan</span>
+			</a>
+		</div>
+		<div class="menu-item">
 			<a class="menu-link" href="{{url('tuntutan-wang-saku')}}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
@@ -136,18 +142,12 @@
 		</div>
 		<div class="menu-item">
 			<a class="menu-link" href="{{url('kemaskini-tuntutan')}}">
-			<!-- "{{ route('dashboard') }}" -->
+		
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 					<span class="menu-title">Kemaskini</span>
 			</a>
 		</div>
-		<div class="menu-item">
-			<a class="menu-link" href="{{url('penyelaras-sejarah-tuntutan')}}">
-			<!-- "{{ route('dashboard') }}" -->
-					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Sejarah</span>
-			</a>
-		</div>
+		
 		</div>
 		<!--end::Menu-->
 

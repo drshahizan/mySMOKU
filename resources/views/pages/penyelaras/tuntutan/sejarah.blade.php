@@ -32,8 +32,8 @@
                                         <div class="d-flex align-items-center">
                                             <div class="icon-in-bg bg-info text-white rounded-circle"><i class="fa fa-bookmark" style="color: white"></i></div>
                                             <div class="ml-4">
-                                                <span style="color: black;"> Baru</span>
-                                                <h4 class="mb-0 font-weight-medium">1090</h4>
+                                                <span style="color: black;">Hantar</span>
+                                                <h4 class="mb-0 font-weight-medium">{{number_format(1090)}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -47,7 +47,7 @@
                                             <div class="icon-in-bg text-white rounded-circle" style="background-color: coral;"><i class="fa fa-users" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black"> Saringan</span>
-                                                <h4 class="mb-0 font-weight-medium">500</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{number_format(500)}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@
                                             <div class="icon-in-bg bg-primary text-white rounded-circle"><i class="fa fa-user-check" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black"> Disokong</span>
-                                                <h4 class="mb-0 font-weight-medium">2408</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{number_format(2408)}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                             <div class="icon-in-bg bg-warning text-white rounded-circle"><i class="fa fa-mail-reply" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black"> Dikembalikan</span>
-                                                <h4 class="mb-0 font-weight-medium">54</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{number_format(54)}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -89,7 +89,7 @@
                                             <div class="icon-in-bg bg-success text-white rounded-circle"><i class="fa fa-check"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black;"> Layak</span>
-                                                <h4 class="mb-0 font-weight-medium">1230</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{number_format(1230)}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -103,7 +103,7 @@
                                             <div class="icon-in-bg bg-danger text-white rounded-circle"><i class="fa fa-times" style="color: white"></i></div>
                                             <div class="ml-4">
                                                 <span style="color: black"> Tidak Layak</span>
-                                                <h4 class="mb-0 font-weight-medium">25</h4>
+                                                <h4 class="mb-0 font-weight-medium">{{number_format(25)}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -155,16 +155,6 @@
                                 <option value="Tidak Aktif" {{Request::get('status') == 'Tidak Aktif' ? 'selected':'' }} >Tidak Aktif</option>
                             </select>
                         </div>
-
-                        <div class="col-md-3">
-                            {{-- <label style="color:black"><b>Tapis Jenis Permohonan</b> --}}
-                            <select name="status" class="form-select">
-                                <option value="">Semua Jenis Tuntutan</option>
-                                <option value="BKOKU" {{Request::get('jenis') == 'BKOKU' ? 'selected':'' }} >BKOKU</option>
-                                <option value="PPK" {{Request::get('jenis') == 'PPK' ? 'selected':'' }} >PPK</option>
-                            </select>
-                        </div>
-
                         <div class="col-md-4 right">
                             <button type="submit" class="btn btn-primary" style="width: 15%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
                         </div>
@@ -196,9 +186,9 @@
                                         </tr>
 
                                         <tr data-status="Tidak Aktif">
-                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTPPK/3/970204052445</a></td>
+                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTBKOKU/3/970204052445</a></td>
                                             <td>Sarah Binti Yusri</td>
-                                            <td>PPK</td>                                        
+                                            <td>BKOKU</td>                                        
                                             <td class="text-center">05/03/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                         </tr>  
@@ -228,17 +218,17 @@
                                         </tr>
                                         
                                         <tr data-status="Saringan">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/6/950804082447</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/950804082447</a></td>
                                             <td>Akmal Bin Kairuddin</td>
-                                            <td>PPK</td>                                        
+                                            <td>BKOKU</td>                                        
                                             <td class="text-center">27/4/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
 
                                         <tr data-status="Tidak Layak">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/2/021212050334</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/021212050334</a></td>
                                             <td>Santishwaran A/L Paven</td>
-                                            <td>PPK</td>                                        
+                                            <td>BKOKU</td>                                        
                                             <td class="text-center">05/06/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                         </tr>
@@ -260,17 +250,17 @@
                                         </tr>
                                         
                                         <tr data-status="Layak">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/2/010305058473</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/010305058473</a></td>
                                             <td>Arshahad Bin Kairul Zaman</td>
-                                            <td>PPK</td>                                        
+                                            <td>BKOKU</td>                                        
                                             <td class="text-center">26/05/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td>
                                         </tr>
                                         
                                         <tr data-status="Disokong">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/3/981004045253</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/981004045253</a></td>
                                             <td>Syed Abdul Kassim Hussain Yusof</td>
-                                            <td>PPK</td>                                        
+                                            <td>BKOKU</td>                                        
                                             <td class="text-center">25/05/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
@@ -308,17 +298,17 @@
                                         </tr>
 
                                         <tr data-status="Disokong">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/6/900623031672</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/6/900623031672</a></td>
                                             <td>Wan Aminah Binti Hasan</td>
-                                            <td>PPK</td>
+                                            <td>BKOKU</td>
                                             <td class="text-center">19/04/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">Disokong</button></td>
                                         </tr>
 
                                         <tr data-status="Dikembalikan">
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/4/950523098909</a></td>
+                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/950523098909</a></td>
                                             <td>Muhammad Aiman Bin Hamid</td>
-                                            <td>PPK</td>
+                                            <td>BKOKU</td>
                                             <td class="text-center">09/07/2023</td>
                                             <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
                                         </tr>

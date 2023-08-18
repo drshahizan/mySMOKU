@@ -96,6 +96,11 @@ class PenyelarasController extends Controller
         return view('pages.penyelaras.tuntutan.maklumatYuranPengajian');
     }
 
+    public function kemaskiniTuntutan()
+    {
+        return view('pages.penyelaras.tuntutan.kemaskini');
+    }
+
     public function sejarahTuntutan()
     {
         return view('pages.penyelaras.tuntutan.sejarah');
@@ -104,6 +109,11 @@ class PenyelarasController extends Controller
     public function permohonanbaru()
     {
         return view('pages.penyelaras.permohonan.permohonanbaru');
+    }
+
+    public function keseluruhanPermohonan()
+    {
+        return view('pages.penyelaras.permohonan.keseluruhanmohon');
     }
 
 }
