@@ -186,7 +186,7 @@
 																	
 																	<div class="d-flex align-items-center flex-wrap d-grid gap-2"> -->
 																		
-																	<form class="form w-100" action="{{ route('dashboard')}}" method="post"> 
+																	<form class="form w-100" action="{{ route('dashboardpenyelaras')}}" method="post"> 
 																	@csrf 
 																	<!--begin::Heading-->
 																		<div class="text-center mb-11">

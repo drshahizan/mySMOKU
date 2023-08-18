@@ -7,6 +7,7 @@ use App\Models\Permohonan;
 use App\Models\Status;
 use App\Models\Akademik;
 use App\Models\TuntutanPermohonan;
+use App\Models\Smoku;
 
 class DashboardController extends Controller
 {
@@ -27,6 +28,7 @@ class DashboardController extends Controller
         ->get(['maklumatakademik.*', 'bk_peringkatpengajian.*'])
         ->where('nokp_pelajar', Auth::user()->id());
         $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id());
+        $smoku = Smoku::all()->where('jenis','=', 'IPTA');
 
 
 
@@ -36,7 +38,7 @@ class DashboardController extends Controller
         }
         else if(Auth::user()->tahap=='2')
         {
-            return view('pages.penyelaras.dashboard')->with('message', 'Selamat Datang ke Laman Utama Penyelaras');
+            return view('pages.penyelaras.dashboard', compact('smoku'))->with('message', 'Selamat Datang ke Laman Utama Penyelaras');
         }
         else if(Auth::user()->tahap=='3')
         {

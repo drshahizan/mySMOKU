@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Smoku;
 use DB;
-use session;
+//use session;
 
 class PenyelarasController extends Controller
 {
-    public function create(Request $request)
+    public function create()
     {   
         $smoku = Smoku::all()->where('jenis','=', 'IPTA');
         return view('pages.penyelaras.dashboard', compact('smoku'));
@@ -63,13 +64,13 @@ class PenyelarasController extends Controller
                 $nokp_in = $request->nokp;
                 $nokp = $request->session()->put('nokp',$nokp_in);
                 //dd($nokp_in);
-                return redirect()->route('dashboard')->with($nokp)
+                return redirect()->route('dashboardpenyelaras')->with($nokp)
                 ->with('message', $nokp_in. ' SAH SEBAGAI OKU BERDAFTAR DENGAN JKM');
             } else {
 
                 $nokp_in = $request->nokp;
                 //return view('pages.auth.login')->with('successMsg','Maklumat anda tiada dalam semakkan SMOKU');
-                return redirect()->route('dashboard')
+                return redirect()->route('dashboardpenyelaras')
                 ->with('xmessage', $nokp_in. ' BUKAN OKU YANG BERDAFTAR DENGAN JKM');
             }
 
