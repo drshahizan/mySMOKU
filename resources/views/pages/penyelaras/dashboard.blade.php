@@ -199,7 +199,7 @@
 																		<br>
 																		<!--begin::Subtitle-->
 																		<h2 class="text-dark fw-bolder mb-3">
-																			Semakan Sistem Maklumat Orang Kurang Upaya (SMOKU)
+																		  Sistem Maklumat Orang Kurang Upaya (SMOKU)
 																		</h2>
 																		<!--end::Subtitle--->
 																		</div>
