@@ -112,9 +112,15 @@ class PenyelarasController extends Controller
         return view('pages.penyelaras.permohonan.permohonanbaru');
     }
 
+   
     public function keseluruhanPermohonan()
     {
         return view('pages.penyelaras.permohonan.keseluruhanmohon');
+    }
+
+    public function borangPermohonanBaru()
+    {
+        return view('pages.penyelaras.permohonan.mohonbaruform');
     }
 
 }

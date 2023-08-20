@@ -1,5 +1,4 @@
 <x-default-layout> 
-</script>
 <style>
     /* Some custom styles to beautify this example */
 	.bs-example{
@@ -17,7 +16,6 @@ $(document).ready(function(){
     $('[data-bs-toggle="tooltip"]').tooltip();
 });
 </script>
-		<!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->
 	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Permohonan</h1>
@@ -25,7 +23,7 @@ $(document).ready(function(){
 	<!--begin::Breadcrumb-->
 	<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
 		<!--begin::Item-->
-		<li class="breadcrumb-item text-dark">
+		<li class="breadcrumb-item text-muted">
 			<a href="/" class="text-dark text-hover-primary" style="color:darkblue">Permohonan</a>
 		</li>
 		<!--end::Item-->
@@ -40,7 +38,6 @@ $(document).ready(function(){
 	</ul>
 	<!--end::Breadcrumb-->
 </div>
-<!--end::Page title-->
 <br>
 <main class="login-form">
 <div class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid gap-10" id="kt_create_account_stepper">
