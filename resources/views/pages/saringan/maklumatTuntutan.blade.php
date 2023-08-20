@@ -81,6 +81,7 @@
                                         $institusi = DB::table('bk_infoipt')->where('idipt', $akademik->id_institusi)->value('namaipt');
                                         $peringkat = DB::table('bk_peringkatpengajian')->where('kodperingkat', $akademik->peringkat_pengajian)->value('peringkat');
                                     @endphp
+                                    <table>
                                     <table class="maklumat">
                                         <tr>
                                             <td><strong>ID Tuntutan</strong></td>
@@ -114,9 +115,9 @@
                                             <td>:</td>
                                             <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
                                             <td class="space">&nbsp;</td>
-                                            <td><strong>Sesi/Semester</strong></td>
+                                            <td><strong>Semester Semasa</strong></td>
                                             <td>:</td>
-                                            <td>{{Carbon::now()->year-1}}/{{Carbon::now()->year}}-{{$akademik->sem_semasa}}</td>
+                                            <td>{{$akademik->sem_semasa}}</td>
                                         </tr>
                                     </table>   
                                 <hr>
@@ -184,7 +185,7 @@
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
                                                     Pelajar Tuntut
                                                 </td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(2500, 2)}}</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun + $akademik->bil_bulanpersem * 300, 2)}}</td>
                                             </tr>
                                             <tr class="font-weight-bolder font-size-lg">
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
@@ -206,7 +207,7 @@
                                 <div class="col-md-6 text-right">
                                     <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan">Teruskan</button>
                                 </div>
-                                </form>  
+                                </form>  </table>
                             </div>                   
                         </div> 
                     </div>                                       

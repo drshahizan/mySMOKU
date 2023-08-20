@@ -57,9 +57,9 @@
                                             <td>:</td>
                                             <td>{{$pelajar->nama_pelajar}}</td>
                                             <td class="space">&nbsp;</td>
-                                            <td><strong>Sesi/Semester</strong></td>
+                                            <td><strong>Semester Semasa</strong></td>
                                             <td>:</td>
-                                            <td>{{Carbon::now()->year-1}}/{{Carbon::now()->year}}-{{$akademik->sem_semasa}}</td>
+                                            <td>{{$akademik->sem_semasa}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>No. Kad Pengenalan</strong></td>
