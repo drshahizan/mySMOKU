@@ -284,7 +284,7 @@
 																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">{{ $smoku->nama}}</span>
 																	</td>
 																	
-																	<td class="text-center"><button class="btn bg-primary text-white"><href="{{ url('borangPermohonanBaru') }}">Deraf</button></td>
+																	<td class="text-center"><a href="{{ url('borangPermohonanBaru') }}"><button class="btn bg-primary text-white">Deraf</button></a></td>
 																	
 																</tr>
 															@endforeach	
