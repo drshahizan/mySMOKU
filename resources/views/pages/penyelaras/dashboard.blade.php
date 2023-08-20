@@ -167,6 +167,7 @@
 											<!--end::Statistics Widget 5-->
 										</div>
 									</div>
+									
 									<!--end::Row-->
 									<!--begin::Row-->
 									<div class="row g-5 g-xl-8">
