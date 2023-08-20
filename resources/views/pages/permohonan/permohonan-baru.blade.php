@@ -246,7 +246,7 @@ $(document).ready(function(){
 															<label class="form-label mb-3">Nama</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid" name="nama_pelajar" placeholder="" value="{{$smoku->nama}}" readonly/>
+															<input type="text" class="form-control form-control-lg form-control-solid"  id="nama_pelajar" name="nama_pelajar" placeholder="" value="{{$smoku->nama}}" readonly/>
 															<!--end::Input-->
 														</div>
 														<!--end::Input group-->
@@ -261,7 +261,7 @@ $(document).ready(function(){
 																<div class="row fv-row">
 																	<!--begin::Col-->
 																	<div class="col-12">
-																		<input type="text" class="form-control form-control-lg form-control-solid" minlength="12" name="nokp_pelajar" placeholder="" value="{{$smoku->nokp}}" readonly/>
+																		<input type="text" class="form-control form-control-lg form-control-solid" minlength="12" id="nokp_pelajar" name="nokp_pelajar" placeholder="" value="{{$smoku->nokp}}" readonly/>
 																	</div>
 																	<!--end::Col-->
 																</div>
@@ -276,7 +276,7 @@ $(document).ready(function(){
 																	<!--begin::Col-->
 																	<div class="col-12">
 																		<!--begin::Input-->
-																	<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" name="tkh_lahir" value="{{$smoku->tkh_lahir}}" readonly/>
+																	<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" id="tkh_lahir" name="tkh_lahir" value="{{$smoku->tkh_lahir}}" readonly/>
 																	<!--end::Input-->
 																	</div>
 																</div>	
@@ -288,7 +288,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="umur" placeholder="" value="{{$smoku->umur}}" readonly/>
+																	<input type="text" class="form-control form-control-solid" id="umur" name="umur" placeholder="" value="{{$smoku->umur}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -309,7 +309,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<select name="jantina" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+																	<select id="jantina" name="jantina" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 																		<option value="{{$smoku->kodjantina}}">{{$smoku->jantina}}</option>
 																	</select>
 																	<!--end::Input-->
@@ -324,7 +324,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<select name="bangsa" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+																	<select id="bangsa" name="bangsa" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 																		<option value="{{$smoku->kodbangsa}}">{{$smoku->bangsa}}</option>
 																	</select>
 																	<!--end::Input-->
@@ -338,7 +338,7 @@ $(document).ready(function(){
 															<label class="form-label">Alamat Rumah</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<textarea name="alamat1" class="form-control form-control-lg form-control-solid" rows="2">{{$smoku->alamat1}}</textarea>
+															<textarea id="alamat1" name="alamat1" class="form-control form-control-lg form-control-solid" rows="2">{{$smoku->alamat1}}</textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
@@ -350,7 +350,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamat_poskod" placeholder="" value="{{$smoku->alamat_poskod}}" />
+																	<input type="text" class="form-control form-control-solid" id="alamat_poskod" name="alamat_poskod" placeholder="" value="{{$smoku->alamat_poskod}}" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -363,7 +363,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamat_negeri" placeholder="" value="{{$smoku->alamat_negeri}}" />
+																	<input type="text" class="form-control form-control-solid" id="alamat_negeri" name="alamat_negeri" placeholder="" value="{{$smoku->alamat_negeri}}" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -376,7 +376,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamat_bandar" placeholder="" value="{{$smoku->alamat_bandar}}"/>
+																	<input type="text" class="form-control form-control-solid" id="alamat_bandar" name="alamat_bandar" placeholder="" value="{{$smoku->alamat_bandar}}"/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -392,7 +392,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_tel" placeholder="" value="{{$smoku->no_tel}}" />
+																	<input type="text" class="form-control form-control-solid" id="no_tel" name="no_tel" placeholder="" value="{{$smoku->no_tel}}" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -405,7 +405,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_telR" placeholder="" value="{{$smoku->no_telR}}" />
+																	<input type="text" class="form-control form-control-solid" id="no_telR" name="no_telR" placeholder="" value="{{$smoku->no_telR}}" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -423,7 +423,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="emel" placeholder="" value="{{$smoku->email}}" readonly/>
+																	<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$smoku->email}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -447,7 +447,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="noJKM" placeholder="" value="{{$smoku->noJKM}}"  readonly/>
+																	<input type="text" class="form-control form-control-solid" id="noJKM" name="noJKM" placeholder="" value="{{$smoku->noJKM}}"  readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -461,7 +461,7 @@ $(document).ready(function(){
 																<div class="col-12">
 																	<!--begin::Input-->
 																	<input type="text" class="form-control form-control-solid" placeholder="" value="{{$smoku->kecacatan}}" readonly/>
-																	<input type="hidden" class="form-control form-control-solid" name="kecacatan" placeholder="" value="{{$smoku->kodoku}}" readonly/>
+																	<input type="hidden" class="form-control form-control-solid" id="kecacatan" name="kecacatan" placeholder="" value="{{$smoku->kodoku}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -489,7 +489,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" maxlength="14" name="no_akaunbank" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaunbank" name="no_akaunbank" placeholder="" value="" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -525,7 +525,7 @@ $(document).ready(function(){
 															<label class="form-label mb-3">Nama</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid" name="nama_waris" placeholder="" value="{{$smoku->nama_waris}}"  />
+															<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" placeholder="" value="{{$smoku->nama_waris}}"  />
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
@@ -538,7 +538,7 @@ $(document).ready(function(){
 																<div class="row fv-row">
 																	<!--begin::Col-->
 																	<div class="col-12">
-																		<input type="text" class="form-control form-control-lg form-control-solid" name="nokp_waris" placeholder="" value="{{$smoku->nokp_waris}}"  />
+																		<input type="text" class="form-control form-control-lg form-control-solid" id="nokp_waris" name="nokp_waris" placeholder="" value="{{$smoku->nokp_waris}}"  />
 																	</div>
 																	<!--end::Col-->
 																</div>
@@ -552,7 +552,7 @@ $(document).ready(function(){
 																<div class="row fv-row">
 																	<!--begin::Col-->
 																	<div class="col-12">
-																		<input type="text" class="form-control form-control-lg form-control-solid" name="noPasport" placeholder="" value="" />
+																		<input type="text" class="form-control form-control-lg form-control-solid" id="noPasport" name="noPasport" placeholder="" value="" />
 																	</div>
 																	<!--end::Col-->
 																</div>
@@ -563,7 +563,7 @@ $(document).ready(function(){
 															<!--begin::Label-->
 															<div class="col-md-6 fv-row hubungan_row">
 															<label class="form-label mb-6">Hubungan Waris</label>
-															<select name="hubungan" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
+															<select id="hubungan" name="hubungan" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
 																<option value="{{$smoku->kodhubungan}}">{{$smoku->hubungan}}</option>
 															</select>
 														</div>
@@ -572,7 +572,7 @@ $(document).ready(function(){
 															<label class="form-label mb-6">(Jika Lain-lain) Sila Nyatakan:</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid lain_hubungan_input" name="lain_hubungan" placeholder="" value="" />
+															<input type="text" class="form-control form-control-lg form-control-solid lain_hubungan_input" id="lain_hubungan" name="lain_hubungan" placeholder="" value="" />
 															<!--end::Input-->													
 															</div>
 														</div>
@@ -584,7 +584,7 @@ $(document).ready(function(){
 															<label class="form-label">Alamat Rumah</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<textarea name="alamatW1" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
+															<textarea id="alamatW1" name="alamatW1" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
@@ -596,7 +596,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamatW_poskod" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" id="alamatW_poskod" name="alamatW_poskod" placeholder="" value="" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -609,7 +609,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamatW_bandar" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" id="alamatW_bandar" name="alamatW_bandar" placeholder="" value="" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -622,7 +622,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamatW_negeri" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" id="alamatW_negeri" name="alamatW_negeri" placeholder="" value="" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -638,7 +638,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_telW" placeholder="" value="{{$smoku->notel_waris}}"  />
+																	<input type="text" class="form-control form-control-solid" id="no_telW" name="no_telW" placeholder="" value="{{$smoku->notel_waris}}"  />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -651,7 +651,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="no_telRW" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" id="no_telRW" name="no_telRW" placeholder="" value="" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -667,7 +667,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="pendapatan" placeholder="" value="{{$smoku->pekerjaan_waris}}"  />
+																	<input type="text" class="form-control form-control-solid" id="pendapatan" name="pendapatan" placeholder="" value="{{$smoku->pekerjaan_waris}}"  />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -680,7 +680,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="pendapatan" placeholder="" value="{{$smoku->pendapatan_waris}}"  />
+																	<input type="text" class="form-control form-control-solid" id="pendapatan" name="pendapatan" placeholder="" value="{{$smoku->pendapatan_waris}}"  />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -719,7 +719,7 @@ $(document).ready(function(){
 																
 															</label>
 															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="" name="no_pendaftaranpelajar" value="" />
+															<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaranpelajar" name="no_pendaftaranpelajar" value="" />
 														</div>
 														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
@@ -728,7 +728,7 @@ $(document).ready(function(){
 																
 															</label>
 															<!--end::Label-->
-															<select name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+															<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																<option value="{{ $akademik->nama_kursus}}">{{ $akademik->nama_kursus}}</option>
 															</select>
 														</div>
@@ -744,7 +744,7 @@ $(document).ready(function(){
 																<!--begin::Row-->
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
-																	<select name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																	<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																		<option value="{{ $akademik->kodperingkat}}">{{ $akademik->peringkat}}</option>
 																	</select>
 																	<!--end::Input wrapper-->
@@ -758,7 +758,7 @@ $(document).ready(function(){
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Nama Pusat Pengajian</label>
 																<!--end::Label-->
 																	<!--begin::Input wrapper-->
-																		<select name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																		<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																			<option value="{{ $akademik->idipt}}">{{ $akademik->namaipt}}</option>
 																		</select>
 																	<!--end::Input wrapper-->
@@ -777,7 +777,7 @@ $(document).ready(function(){
 																<label class="fs-6 fw-semibold form-label mb-2">Tarikh Mula Pengajian</label>
 																<!--end::Label-->
 																	<!--begin::Input wrapper-->
-																	<input type="date" class="form-control form-control-solid" placeholder="" name="tkh_mula" value="" />
+																	<input type="date" class="form-control form-control-solid" placeholder="" id="tkh_mula" name="tkh_mula" value="" />
 																	<!--end::Input wrapper-->
 															</div>
 															<!--end::Col-->
@@ -787,7 +787,7 @@ $(document).ready(function(){
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tarikh Tamat Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																	<input type="date" class="form-control form-control-solid" placeholder="" name="tkh_tamat" value="" />
+																	<input type="date" class="form-control form-control-solid" placeholder="" id="tkh_tamat" name="tkh_tamat" value="" />
 																<!--end::Input wrapper-->
 															</div>
 															<!--end::Col-->
@@ -805,7 +805,7 @@ $(document).ready(function(){
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
 																	
-																		<select name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																		<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																			<option></option>
 																			<option value="1">1</option>
 																			<option value="2">2</option>
@@ -832,7 +832,7 @@ $(document).ready(function(){
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																	<input type="text" class="form-control form-control-solid" placeholder="" name="tempoh_pengajian" value="" required/>
+																	<input type="text" class="form-control form-control-solid" placeholder="" id="tempoh_pengajian" name="tempoh_pengajian" value="" required/>
 																	
 																	<!--end::Input wrapper-->
 															</div>
@@ -850,7 +850,7 @@ $(document).ready(function(){
 																<!--begin::Row-->
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
-																		<select name="bil_bulanpersem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																		<select id="bil_bulanpersem" name="bil_bulanpersem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																			<option></option>
 																			<option value="4">4</option>
 																			<option value="6">6</option>
@@ -885,7 +885,7 @@ $(document).ready(function(){
 																
 															</label>
 															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="" name="cgpa" value="" />
+															<input type="text" class="form-control form-control-solid" placeholder="" id="cgpa" name="cgpa" value="" />
 														</div>
 
 														<!--begin::Input group-->
@@ -915,7 +915,7 @@ $(document).ready(function(){
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Lain-lain</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
-																<input type="text" class="form-control form-control-solid" placeholder="" name="sumber_biayalain" value="" />
+																<input type="text" class="form-control form-control-solid" placeholder="" id="sumber_biayalain" name="sumber_biayalain" value="" />
 																<!--end::Input wrapper-->
 															</div>
 															<!--end::Col-->
@@ -929,7 +929,7 @@ $(document).ready(function(){
 																
 															</label>															
 															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="JPA" name="nama_penaja" value="" />
+															<input type="text" class="form-control form-control-solid" placeholder="JPA" id="nama_penaja" name="nama_penaja" value="" />
 														</div>
 														
 													</div>
@@ -1022,7 +1022,7 @@ $(document).ready(function(){
 																	<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
 																	<td class="text-gray-800"></td>
 																	<td>
-																		<input type="file" name="akaunBank"/>
+																		<input type="file" id="akaunBank" name="akaunBank"/>
 																		{{--<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:100%; text-align:center;">
 																		<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
 																		</label>--}}
@@ -1032,7 +1032,7 @@ $(document).ready(function(){
 																	<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
 																	<td class="text-gray-800"></td>
 																	<td>
-																		<input type="file" name="suratTawaran"/>
+																		<input type="file" id="suratTawaran" name="suratTawaran"/>
 																		{{--<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:100%; text-align:center;">
 																		<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
 																		</label>--}}
@@ -1042,7 +1042,7 @@ $(document).ready(function(){
 																	<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/resit.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
 																	<td class="text-gray-800"></td>
 																	<td>
-																		<input type="file" name="invoisResit"/>
+																		<input type="file" id="invoisResit" name="invoisResit"/>
 																		{{--<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:100%; text-align:center;">
 																		<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
 																		</label>--}}
@@ -1078,8 +1078,8 @@ $(document).ready(function(){
 														
 														<div class="d-flex flex-column mb-7 fv-row">
 															<div class="form-check">
-																<input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="perakuan"/>
-																<label class="form-check-label" for="flexCheckDefault">
+																<input class="form-check-input" type="checkbox" value="1" id="perakuan" name="perakuan"/>
+																<label class="form-check-label" >
 																Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
 																sekiranya maklumat yang diberikan didapati palsu atau tidak benar, pihak kementerian berhak menolak
 																permohonan saya dan menghentikan bantuan kewangan ini kepada saya.
@@ -1166,7 +1166,7 @@ $(document).ready(function(){
 															<span class="indicator-progress">Please wait...
 															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 														</button>
-														<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Teruskan
+														<button type="button" class="btn btn-lg btn-primary save-form" data-kt-stepper-action="next">Teruskan
 														<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
 															<span class="path1"></span>
 															<span class="path2"></span>
@@ -1191,6 +1191,8 @@ $(document).ready(function(){
 </div>
 </main>
 
+
+
 <!--begin::Javascript-->
 
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
@@ -1203,6 +1205,24 @@ $(document).ready(function(){
 		<script src="assets/js/custom/utilities/modals/create-app.js"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
+
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script type="text/javascript">
+   
+			$(".save-form").click(function(e){
+				e.preventDefault();
+				var data = $('#kt_create_account_form').serialize();
+				//alert (data);
+				$.ajax({
+					type: 'post',
+					url: "{{ route('permohonan.post') }}",
+					data: data,
+
+				});
+				
+			});
+		</script>
+
 
 		<script>
 			function select1(){

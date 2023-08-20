@@ -125,23 +125,6 @@ var KTCreateAccount = function () {
 			});
 		});
 
-		// Expiry month. For more info, plase visit the official plugin site: https://select2.org/
-        $(form.querySelector('[name="card_expiry_month"]')).on('change', function() {
-            // Revalidate the field when an option is chosen
-            validations[3].revalidateField('card_expiry_month');
-        });
-
-		// Expiry year. For more info, plase visit the official plugin site: https://select2.org/
-        $(form.querySelector('[name="card_expiry_year"]')).on('change', function() {
-            // Revalidate the field when an option is chosen
-            validations[3].revalidateField('card_expiry_year');
-        });
-
-		// Expiry year. For more info, plase visit the official plugin site: https://select2.org/
-        $(form.querySelector('[name="business_type"]')).on('change', function() {
-            // Revalidate the field when an option is chosen
-            validations[2].revalidateField('business_type');
-        });
 	}
 
 	var initValidation = function () {
