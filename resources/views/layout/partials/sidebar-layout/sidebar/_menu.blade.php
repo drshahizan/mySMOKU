@@ -33,13 +33,13 @@
 			</a>
 		</div>
 
-		<!-- <div class="menu-item">
+		<div class="menu-item">
 			<a class="menu-link" href="#">
 			
 					<span class="menu-icon">{!! getIcon('search', 'fs-2') !!}</span>
-					<span class="menu-title">Test Salinan Maklumat</span>
+					<span class="menu-title">Perbaharui</span>
 			</a>
-		</div> -->
+		</div> 
 		
 		<div class="menu-item pt-5">
 				<div class="menu-content">
@@ -108,12 +108,12 @@
 					<span class="menu-title">Baru</span>
 			</a>
 		</div>
-		<!-- <div class="menu-item">
+		<div class="menu-item">
 			<a class="menu-link" href="#">
 					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
-					<span class="menu-title">Keputusan</span>
+					<span class="menu-title">Perbaharui</span>
 			</a>
-		</div> -->
+		</div>
 		<div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
