@@ -5,12 +5,10 @@
             border: none!important;
             padding:2px 8px!important;
         }
-        .table{
-            width: 48%;
-            table-layout: fixed;
+        .maklumat2, .maklumat2 td{
+            border: none!important;
         }
-        .table2{
-            width: 25%;
+        .table{
             table-layout: fixed;
         }
         .table td, .table th, .table2 td, .table2 th{
@@ -25,17 +23,43 @@
             margin: 0;
         }
         input[type=number]{
-            width: 50px;
+            width: 70px;
             text-align: right;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 2px;
+            border-radius: 6px;
+            padding: 2px 5px;
+            font-size: 13px!important;
+        }
+        select{
+            width: 230px!important;
+            padding: 3px 6px!important;
+            border: 1px solid #ccc!important;
+            border-radius: 6px!important;
+            font-size: 13px!important;
         }
         .bold{
             font-weight: bold!important;
         }
         .space{
             width: 15%;
+        }
+        .red-color{
+            color: red!important;
+        }
+        /* Clearfix (clear floats) */
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        .row {
+            margin-left:-5px;
+            margin-right:-5px;
+        }
+        
+        .column {
+            float: left;
+            width: 50%;
         }
     </style>
     <!-- Main body part  -->
@@ -81,7 +105,6 @@
                                         $institusi = DB::table('bk_infoipt')->where('idipt', $akademik->id_institusi)->value('namaipt');
                                         $peringkat = DB::table('bk_peringkatpengajian')->where('kodperingkat', $akademik->peringkat_pengajian)->value('peringkat');
                                     @endphp
-                                    <table>
                                     <table class="maklumat">
                                         <tr>
                                             <td><strong>ID Tuntutan</strong></td>
@@ -122,92 +145,90 @@
                                     </table>   
                                 <hr>
                                 <br>
-                                <table class="maklumat">
-                                    <tr>
-                                        <td><h5>Pengiraan mengikut jenis tuntutan:</h5></td>
-                                    </tr>
-                                </table> 
-                                <form method="POST" action="{{ url('saring-tuntutan') }}" id="saring">
-                                {{csrf_field()}}     
-                                <!--begin: Invoice body-->
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
-                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Tempoh</th>
-                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Kadar Tuntutan (RM)</th>
-                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Jumlah (RM)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="font-weight-bolder font-size-lg">
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
-                                                    Yuran Pengajian
-                                                </td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">1 (semester)</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun, 2)}}</td>
-                                            </tr>
-                                            <tr class="font-weight-bolder font-size-lg">
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
-                                                    Wang Saku
-                                                </td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{$akademik->bil_bulanpersem}} (bulan)</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">300.00</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($akademik->bil_bulanpersem * 300, 2)}}</td>
-                                            </tr>
-                                            <tr class="font-weight-bolder font-size-lg">
-                                                <td colspan="3" class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
-                                                    Keseluruhan
-                                                </td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun + $akademik->bil_bulanpersem * 300, 2)}}</td>
-                                            </tr>
-                                        </tbody>
+                                <td>
+                                    <form method="POST" action="{{ url('saring-tuntutan') }}" id="saring">
+                                    {{csrf_field()}}     
+                                    <!--begin: Invoice body-->
+                                    
+                                    <table class="maklumat">
+                                        <tr>
+                                            <td><h5>Rekod tuntutan per semester bagi tahun 2023:</h5></td>
+                                        </tr>
+                                    </table> 
+                                <div class="row">
+                                    <div class="column">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Semester</th>
+                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Tuntutan Yuran Pengajian (RM)</th>
+                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Tuntutan Wang Saku (RM)</th>
+                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Keseluruhan (RM)</th>
+                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold white">Baki (RM)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="font-weight-bolder font-size-lg">
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">1</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(1200, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(4*300, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(2400, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(2600, 2)}}</td>
+                                                </tr>
+                                                <tr class="font-weight-bolder font-size-lg">
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">2</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(1000, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(4*300, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(2200, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(400, 2)}}</td>
+                                                </tr>
+                                                <tr class="font-weight-bolder font-size-lg">
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">3</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(4*300, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun+$akademik->bil_bulanpersem*300, 2)}}</td>
+                                                    @if ($permohonan->amaun+$akademik->bil_bulanpersem*300 > 400)
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold red-color">{{number_format(400, 2)}}</td>
+                                                    @else
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold">{{number_format($permohonan->amaun+$akademik->bil_bulanpersem*300, 2)}}</td>
+                                                    @endif
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+                                    <div class="column">
+                                    <br>
+                                    <table class="maklumat2">
+                                        <tr>
+                                            <td colspan="3"><h6>Sila lengkapkan informasi layak tuntut:</h6></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jumlah Layak Tuntut (RM)</td>
+                                            <td>:</td>
+                                            <td><input type="number" name="layak_tuntut" value="{{number_format(400, 2)}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jenis tuntutan yang layak</td>
+                                            <td>:</td>
+                                            <td class="hidden-sm-down">
+                                                <select id="maklumat_profil_diri" name="maklumat_profil_diri" class="form-control" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                    <option value="">Pilih</option>
+                                                    <option value="lengkap">Yuran Pengajian</option>
+                                                    <option value="tak_lengkap">Wang Saku</option>
+                                                    <option value="tak_lengkap">Yuran Pengajian dan Wang Saku</option>
+                                                </select>
+                                            </td>
+                                        </tr>
                                     </table>
+                                    </div>
                                 </div>
-                                <br>
-                                <table class="maklumat">
-                                    <tr>
-                                        <td><h5>Pengiraan bagi tuntutan yg layak:</h5></td>
-                                    </tr>
-                                </table> 
-                                <div class="table-responsive">
-                                    <table class="table2">
-                                        <thead>
-                                            <tr>
-                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest white">Tuntutan</th>
-                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right white">Jumlah (RM)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="font-weight-bolder font-size-lg">
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
-                                                    Pelajar Tuntut
-                                                </td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun + $akademik->bil_bulanpersem * 300, 2)}}</td>
-                                            </tr>
-                                            <tr class="font-weight-bolder font-size-lg">
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
-                                                    Baki
-                                                </td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(1000, 2)}}</td>
-                                            </tr>
-                                            <tr class="font-weight-bolder font-size-lg">
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
-                                                    Layak
-                                                </td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(1000, 2)}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <br>
                                 <!--end: Invoice body-->                               
                                 <div class="col-md-6 text-right">
                                     <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan">Teruskan</button>
                                 </div>
-                                </form>  </table>
+                                </form>  
                             </div>                   
                         </div> 
                     </div>                                       
