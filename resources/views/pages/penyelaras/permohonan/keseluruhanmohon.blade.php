@@ -34,11 +34,6 @@
                 <!-- Page header section  -->
                 <div class="block-header">
                     <div class="row clearfix">
-                        <div class="col-lg-6 col-md-12 col-sm-12">
-                            <h3>Senarai Keseluruhan Permohonan</h3>
-                        </div>
-                        <hr>
-
                         <div class="row">
                         {{-- Small Card Section Level 1--}}
                             <div class="col-lg-2 col-md-4">
@@ -149,7 +144,7 @@
                     <div class="block-header">
                         <div class="row clearfix">
                             <div class="col-lg-4 col-md-12 col-sm-12">
-                                <h3>Senarai Permohonan</h3>
+                                <h3>Senarai Permohonan Keseluruhan</h3>
                             </div>
                             <hr>
                         </div>

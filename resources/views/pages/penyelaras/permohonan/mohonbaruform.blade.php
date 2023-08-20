@@ -24,7 +24,7 @@ $(document).ready(function(){
 	<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
 		<!--begin::Item-->
 		<li class="breadcrumb-item text-muted">
-			<a href="/" class="text-dark text-hover-primary" style="color:darkblue">Permohonan</a>
+			<span class="text-dark text-hover-primary" style="color:darkblue">Permohonan</span>
 		</li>
 		<!--end::Item-->
 		<!--begin::Item-->
