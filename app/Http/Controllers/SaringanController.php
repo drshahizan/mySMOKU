@@ -173,4 +173,12 @@ class SaringanController extends Controller
             return view('pages.saringan.saringan',compact('permohonan','status'));
         }
     }
+
+    public function permohonanTelahDisaring(){
+        $permohonan = TuntutanPermohonan::where('id_permohonan', 'KPTBKOKU/2/950623098909')->first();
+        $id = $permohonan->nokp_pelajar;
+        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
+        $catatan = Saringan::where('id_permohonan', 'KPTBKOKU/2/950623098909')->first();
+        return view('pages.saringan.permohonanTelahDisaring',compact('permohonan','catatan','pelajar'));
+    }
 }
