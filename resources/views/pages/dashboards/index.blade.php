@@ -38,7 +38,7 @@
 														</div>
 														<div class="d-flex text-center flex-column text-white pt-8">
 															<span class="fw-semibold fs-5">Status</span>
-															@foreach ($status as $status)
+															@foreach ($tuntutanpermohonan as $status)
 															<span class="fw-bold fs-2x pt-1">{{$status->status}}</span>
 															@endforeach
 														</div>

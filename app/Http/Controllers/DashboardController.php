@@ -27,7 +27,9 @@ class DashboardController extends Controller
         leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
         ->get(['maklumatakademik.*', 'bk_peringkatpengajian.*'])
         ->where('nokp_pelajar', Auth::user()->id());
-        $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id());
+        $tuntutanpermohonan = TuntutanPermohonan::Join('statusinfo','statusinfo.kodstatus','=','permohonan.status')
+        ->get(['permohonan.*', 'statusinfo.*'])
+        ->where('nokp_pelajar', Auth::user()->id());
         $smoku = Smoku::all()->where('jenis','=', 'IPTA');
 
 
