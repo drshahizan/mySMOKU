@@ -20,6 +20,8 @@ use App\Models\Status;
 use App\Models\JenisOku;
 use App\Models\Dokumen;
 use App\Models\Hubungan;
+use App\Models\Negeri;
+use App\Models\Bandar;
 use Illuminate\Support\Facades\Auth;
 use DB;
 
@@ -71,6 +73,7 @@ class PermohonanController extends Controller
         ->where('nokp_pelajar', Auth::user()->id());
         $status = Status::all()->where('nokp_pelajar', Auth::user()->id());
         $dokumen = Dokumen::all()->where('nokp_pelajar', Auth::user()->id());
+        $negeri = Negeri::orderby("kod","asc")->select('id','nama')->get();
         
         if ($statuspermohonan >= '2')
         {
@@ -78,15 +81,28 @@ class PermohonanController extends Controller
 
         } else if ($statuspermohonan == '1')
         {
-            return view('pages.permohonan.permohonan-baru-kemaskini', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
+            return view('pages.permohonan.permohonan-baru-kemaskini', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen','negeri'));
         }
         else
         {
-            return view('pages.permohonan.permohonan-baru', compact('smoku','hubungan','akademikmqa','infoipt','peringkat','kursus','mod','biaya','pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
+            return view('pages.permohonan.permohonan-baru', compact('smoku','hubungan','akademikmqa','infoipt','peringkat','kursus','mod','biaya','pelajar','waris','akademik','tuntutanpermohonan','dokumen','negeri'));
         }
         
         
     }
+
+     // Fetch records
+   public function getBandar($id=0){
+
+    // Fetch kursus by idipt
+    $bandarData['data'] = Bandar::orderby("nama","asc")
+         ->select('id','nama','negeri')
+         ->where('negeri',$id)
+         ->get();
+
+         return response()->json($bandarData);
+
+}
     
 
     public function store(Request $request)
@@ -292,6 +308,7 @@ class PermohonanController extends Controller
             'yuran' => $request->yuran,
             'elaun' => $request->elaun,
             'amaun' => $request->amaun,
+            'amaunelaun' => $request->amaunelaun,
             'perakuan' => $request->perakuan,
             'status' => '2',
             
