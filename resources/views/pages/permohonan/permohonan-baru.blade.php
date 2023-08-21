@@ -990,10 +990,12 @@ $(document).ready(function(){
 															<!--end::Label-->
 															<div class="row mb-10">
 																<div class="form-check col-6">
-																	<input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" />
-																	<label class="form-check-label">
+																	<!-- <input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" /> -->
+																	<!-- <label class="form-check-label"> -->
+																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
 																		Yuran
 																	</label>
+																	<input class="form-check-input" style="center" type="checkbox" value="1" id="yuran"  name="yuran" />
 																</div>
 																<div class="col-6" id="divamaun">
 																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
