@@ -19,6 +19,7 @@ use App\Models\Sumberbiaya;
 use App\Models\Status;
 use App\Models\JenisOku;
 use App\Models\Dokumen;
+use App\Models\Hubungan;
 use Illuminate\Support\Facades\Auth;
 use DB;
 
@@ -38,6 +39,7 @@ class PermohonanController extends Controller
         $kursus = Kursus::all()->sortBy('nama_kursus');
         $mod = Mod::all()->sortBy('kodmod');
         $biaya = Sumberbiaya::all()->sortBy('kodbiaya');
+        $hubungan = Hubungan::all()->sortBy('kodhubungan');
 
         $pelajar = Permohonan::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
         ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
@@ -54,79 +56,128 @@ class PermohonanController extends Controller
         ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*', 'bk_mod.*', 'bk_sumberbiaya.*'])
         ->where('nokp_pelajar', Auth::user()->id());
         $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id());
+        $tuntutan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id())->first();
+        //return $tuntutan;
+        if ($tuntutan != null){
+            $statuspermohonan =  $tuntutan->status;
+            
+        }else{
+            $statuspermohonan =  '0';
+        }
+        //return $statuspermohonan;
         $akademikmqa = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
         ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
         ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*'])
         ->where('nokp_pelajar', Auth::user()->id());
         $status = Status::all()->where('nokp_pelajar', Auth::user()->id());
         $dokumen = Dokumen::all()->where('nokp_pelajar', Auth::user()->id());
-        if (!$status->isEmpty())
+        
+        if ($statuspermohonan >= '2')
         {
             return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
 
+        } else if ($statuspermohonan == '1')
+        {
+            return view('pages.permohonan.permohonan-baru-kemaskini', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
         }
         else
         {
-            //return view('pages.permohonan.permohonan-baru');
-            return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','infoipt','peringkat','kursus','mod','biaya'));
+            return view('pages.permohonan.permohonan-baru', compact('smoku','hubungan','akademikmqa','infoipt','peringkat','kursus','mod','biaya','pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
         }
         
         
     }
-
+    
 
     public function store(Request $request)
     {   
-        /*$request->session()->regenerate();
-        $request->validate([
-			'nama_pelajar' => 'required',
-			'nokp_pelajar' => 'required|unique:pelajar',
-			//'noJKM' => 'required',
-            //'no_akaunbank' => 'required',
-            //'emel' => 'required'
-            
-        ]);*/
 
-        $user = Permohonan::create([
-            'nama_pelajar' => $request->nama_pelajar,
-            'nokp_pelajar' => $request->nokp_pelajar,
-            'tkh_lahir' => $request->tkh_lahir,
-            'umur' => $request->umur,
-            'jantina' => $request->jantina,
-            'noJKM' => $request->noJKM,
-            'kecacatan' => $request->kecacatan,
-            'bangsa' => $request->bangsa,
-            'alamat1' => $request->alamat1,
-            'alamat_poskod' => $request->alamat_poskod,
-            'alamat_bandar' => $request->alamat_bandar,
-            'alamat_negeri' => $request->alamat_negeri,
-            'no_tel' => $request->no_tel,
-            'no_telR' => $request->no_telR,
-            'no_akaunbank' => $request->no_akaunbank,
-            'emel' => $request->emel,
-   
-        ]);
+        $user = Permohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
+        if ($user === null) {
+            $user = Permohonan::create([
+                'nama_pelajar' => $request->nama_pelajar,
+                'nokp_pelajar' => $request->nokp_pelajar,
+                'tkh_lahir' => $request->tkh_lahir,
+                'umur' => $request->umur,
+                'jantina' => $request->jantina,
+                'noJKM' => $request->noJKM,
+                'kecacatan' => $request->kecacatan,
+                'bangsa' => $request->bangsa,
+                'alamat1' => $request->alamat1,
+                'alamat_poskod' => $request->alamat_poskod,
+                'alamat_bandar' => $request->alamat_bandar,
+                'alamat_negeri' => $request->alamat_negeri,
+                'no_tel' => $request->no_tel,
+                'no_telR' => $request->no_telR,
+                'no_akaunbank' => $request->no_akaunbank,
+                'emel' => $request->emel,
+       
+            ]);
+        }else {
+        DB::table('pelajar')->where('nokp_pelajar' ,$request->nokp_pelajar)
+        ->update([
 
-        $user = Waris::create([
-            'nama_waris' => $request->nama_waris,
-            'nokp_waris' => $request->nokp_waris,
-            'alamat1' => $request->alamatW1,
-            'alamat_poskod' => $request->alamatW_poskod,
-            'alamat_bandar' => $request->alamatW_bandar,
-            'alamat_negeri' => $request->alamatW_negeri,
-            'no_tel' => $request->no_telW,
-            //'no_telR' => $request->no_telRW,
-            'nokp_pelajar' => $request->nokp_pelajar,
-            'hubungan' => $request->hubungan,
-            'pendapatan' => $request->pendapatan,
-    
+                'nama_pelajar' => $request->nama_pelajar,
+                'nokp_pelajar' => $request->nokp_pelajar,
+                'tkh_lahir' => $request->tkh_lahir,
+                'umur' => $request->umur,
+                'jantina' => $request->jantina,
+                'noJKM' => $request->noJKM,
+                'kecacatan' => $request->kecacatan,
+                'bangsa' => $request->bangsa,
+                'alamat1' => $request->alamat1,
+                'alamat_poskod' => $request->alamat_poskod,
+                'alamat_bandar' => $request->alamat_bandar,
+                'alamat_negeri' => $request->alamat_negeri,
+                'no_tel' => $request->no_tel,
+                'no_telR' => $request->no_telR,
+                'no_akaunbank' => $request->no_akaunbank,
+                'emel' => $request->emel,
+
         ]);
+        }
+
+        $waris = Waris::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
+        if ($waris === null) {
+            $user = Waris::create([
+                'nama_waris' => $request->nama_waris,
+                'nokp_waris' => $request->nokp_waris,
+                'alamat1' => $request->alamatW1,
+                'alamat_poskod' => $request->alamatW_poskod,
+                'alamat_bandar' => $request->alamatW_bandar,
+                'alamat_negeri' => $request->alamatW_negeri,
+                'no_tel' => $request->no_telW,
+                //'no_telR' => $request->no_telRW,
+                'nokp_pelajar' => $request->nokp_pelajar,
+                'hubungan' => $request->hubungan,
+                'pendapatan' => $request->pendapatan,
+        
+            ]);
+        }else {
+            DB::table('waris')->where('nokp_pelajar' ,$request->nokp_pelajar)
+        ->update([
+
+                'nama_waris' => $request->nama_waris,
+                'nokp_waris' => $request->nokp_waris,
+                'alamat1' => $request->alamatW1,
+                'alamat_poskod' => $request->alamatW_poskod,
+                'alamat_bandar' => $request->alamatW_bandar,
+                'alamat_negeri' => $request->alamatW_negeri,
+                'no_tel' => $request->no_telW,
+                //'no_telR' => $request->no_telRW,
+                'nokp_pelajar' => $request->nokp_pelajar,
+                'hubungan' => $request->hubungan,
+                'pendapatan' => $request->pendapatan,
+
+        ]);
+        }
 
 
         DB::table('maklumatakademik')->where('nokp_pelajar' ,$request->nokp_pelajar)
         ->update([
 
             'no_pendaftaranpelajar' => $request->no_pendaftaranpelajar,
+            'sesi' => $request->sesi,
             'tkh_mula' => $request->tkh_mula,
             'tkh_tamat' => $request->tkh_tamat,
             'sem_semasa' => $request->sem_semasa,
@@ -139,8 +190,25 @@ class PermohonanController extends Controller
             'status' => '1',
 
         ]);
+       
 
-        $user = TuntutanPermohonan::create([
+        $tuntutanpermohonan = TuntutanPermohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
+        if ($tuntutanpermohonan === null) {
+            $user = TuntutanPermohonan::create([
+                'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
+                'nokp_pelajar' => $request->nokp_pelajar,
+                'program' => 'BKOKU',
+                'yuran' => $request->yuran,
+                'elaun' => $request->elaun,
+                'amaun' => $request->amaun,
+                'perakuan' => $request->perakuan,
+                'status' => '1',
+        
+            ]);
+        }else {
+
+        DB::table('permohonan')->where('nokp_pelajar' ,$request->nokp_pelajar)
+            ->update([
             'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
             'nokp_pelajar' => $request->nokp_pelajar,
             'program' => 'BKOKU',
@@ -148,17 +216,29 @@ class PermohonanController extends Controller
             'elaun' => $request->elaun,
             'amaun' => $request->amaun,
             'perakuan' => $request->perakuan,
-            'status' => '2',
+            'status' => '1',
             
         ]);
+        }
+        $statustransaksi = Status::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
+        if ($statustransaksi === null) {
+            $user = Status::create([
+                'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
+                'nokp_pelajar' => $request->nokp_pelajar,
+                'status' => '1',
+        
+            ]);
+        }else {
 
-        $user = Status::create([
+        DB::table('statustransaksi')->where('nokp_pelajar' ,$request->nokp_pelajar)
+            ->update([
             'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
             'nokp_pelajar' => $request->nokp_pelajar,
-            'status' => '2',
+            'status' => '1',
             
         ]);
-        
+        }
+
         $user->save();
 
 
@@ -194,11 +274,74 @@ class PermohonanController extends Controller
 
 
 
-        //return view('pages.dashboards.index'); // jadi yang ni kena return ke page view
-        return redirect()->route('viewpermohonan');
-        //return redirect()->back();
 
-        // $request->session()->invalidate();
+        return redirect()->route('viewpermohonan');
+
+    }
+
+    public function hantar(Request $request)
+    {   
+
+        $tuntutanpermohonan = TuntutanPermohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
+        if ($tuntutanpermohonan != null) {
+            DB::table('permohonan')->where('nokp_pelajar' ,$request->nokp_pelajar)
+            ->update([
+            'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
+            'nokp_pelajar' => $request->nokp_pelajar,
+            'program' => 'BKOKU',
+            'yuran' => $request->yuran,
+            'elaun' => $request->elaun,
+            'amaun' => $request->amaun,
+            'perakuan' => $request->perakuan,
+            'status' => '2',
+            
+        ]);
+        }
+        
+        $user = Status::create([
+            'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
+            'nokp_pelajar' => $request->nokp_pelajar,
+            'status' => '2',
+    
+        ]);
+        $user->save();
+
+
+        $data=new dokumen();
+        
+          
+            $akaunBank=$request->akaunBank;
+            //$name1=$akaunBank->getClientOriginalName();  
+            $name1='salinanbank';  
+            $filenameakaunBank=$name1.'_'.$request->nokp_pelajar.'.'.$akaunBank->getClientOriginalExtension();
+            $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
+            
+            $suratTawaran=$request->suratTawaran;
+            //$name2=$suratTawaran->getClientOriginalName();
+            $name2='salinantawaran'; 
+            $filenamesuratTawaran=$name2.'_'.$request->nokp_pelajar.'.'.$suratTawaran->getClientOriginalExtension();
+            $request->suratTawaran->move('assets/dokumen',$filenamesuratTawaran);
+
+            $invoisResit=$request->invoisResit;
+            //$name3=$invoisResit->getClientOriginalName();
+            $name3='salinanresit';  
+            $filenameinvoisResit=$name1.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
+            $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
+            
+            $data->id_permohonan='KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar;
+            $data->nokp_pelajar=$request->nokp_pelajar;
+            $data->akaunBank=$filenameakaunBank;
+            $data->suratTawaran=$filenamesuratTawaran;
+            $data->invoisResit=$filenameinvoisResit;
+            
+
+            $data->save();
+
+
+
+
+        return redirect()->route('viewpermohonan');
+
     }
 
     public function viewpermohonan(){
@@ -291,6 +434,7 @@ class PermohonanController extends Controller
         ->update([
 
             'no_pendaftaranpelajar' => $request->no_pendaftaranpelajar,
+            'sesi' => $request->sesi,
             'tkh_mula' => $request->tkh_mula,
             'tkh_tamat' => $request->tkh_tamat,
             //'sem_semasa' => $request->sem_semasa,
@@ -393,6 +537,7 @@ class PermohonanController extends Controller
         ->update([
 
             'no_pendaftaranpelajar' => NULL,
+            'sesi' => NULL,
             'tkh_mula' => NULL,
             'tkh_tamat' => NULL,
             'sem_semasa' => NULL,

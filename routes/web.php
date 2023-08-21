@@ -51,6 +51,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::post('permohonan', [PermohonanController::class, 'store'])->name('permohonan.post');
+    Route::post('hantar', [PermohonanController::class, 'hantar'])->name('hantar');
     Route::get('viewpermohonan', [PermohonanController::class, 'viewpermohonan'])->name('viewpermohonan');
     Route::get('/download/{file}',[PermohonanController::class,'download']);
     Route::get('kemaskini',[PermohonanController::class,'kemaskini'])->name('kemaskini');
@@ -73,6 +74,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('salinan-akademik', [SaringanController::class, 'salinanAkademik'])->name('id');
     Route::get('cetak-maklumat-pemohon', [SaringanController::class, 'cetakMaklumatPemohon']);
     Route::post('saring-maklumat-pemohon/{no_kp}', [SaringanController::class, 'saringMaklumat']);
+    Route::get('permohonan-telah-disaring', [SaringanController::class, 'permohonanTelahDisaring']);
 
     //Permohonan - Sekretariat
     Route::get('keseluruhanPermohonan', [SekretariatController::class, 'statusPermohonan']);

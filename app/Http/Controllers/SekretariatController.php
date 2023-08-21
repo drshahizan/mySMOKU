@@ -11,6 +11,7 @@ use App\Mail\mailKeputusan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -107,9 +108,28 @@ class SekretariatController extends Controller
 
     public function cetakSenaraiPemohonPDF() 
     {
-        $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon');
+        // $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon');
+        // $pdf->setPaper('A4', 'landscape');
+        // return $pdf->stream('senarai-pemohon.pdf');
+        
+        // $pdf = app('dompdf.wrapper');
+        // $pdf->getDomPDF()->set_option("enable_php", true);
+        // $pdf->setPaper('A4', 'landscape');
+        // $data = ['title' => 'Testing Page Number In Body'];
+        // $pdf->loadView('pages.saringan.cetakSenaraiPemohon', $data);
+        // return $pdf->stream('senarai-pemohon.pdf');
+
+        $pdf = App::make('dompdf.wrapper');
+        $data = ['title' => 'Testing Page Number In Body'];
+        $pdf->loadView('pages.saringan.cetakSenaraiPemohon', $data);
         $pdf->setPaper('A4', 'landscape');
-        return $pdf->stream('senarai-pemohon.pdf');
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+
+        $canvas = $dom_pdf ->get_canvas();
+        $canvas->page_text(400, 575, "Page {PAGE_NUM}", null, 8, array(0, 0, 0));
+
+        return $pdf->stream('senarai-pemohon.pdf');;
     }
 
     public function mailKeputusan(Request $request)

@@ -10,12 +10,11 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class Akademik extends Authenticatable
+class Hubungan extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
-
-    protected $table = 'maklumatakademik';
+    protected $table = 'bk_hubungan';
 
     /**
      * The attributes that are mass assignable.
@@ -23,29 +22,8 @@ class Akademik extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'no_pendaftaranpelajar',
-        'nokp_pelajar',
-        'peringkat_pengajian',
-        'sesi',
-        'nama_kursus',
-        'id_institusi',
-        'tkh_mula',
-        'tkh_tamat',
-        'sem_semasa',
-        'tempoh_pengajian',
-        'bil_bulanpersem',
-        'mod',
-        'cgpa',
-        'sumber_biaya',
-        'nama_penaja',
-        'status',
-        //'terimaHLP',
-        //'tkh_maklumat',
-        
-        
+        'kodhubungan',
+        'hubungan',
     ];
 
-    
-
-    
 }
