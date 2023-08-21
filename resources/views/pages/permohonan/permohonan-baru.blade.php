@@ -989,13 +989,13 @@ $(document).ready(function(){
 															</label>
 															<!--end::Label-->
 															<div class="row mb-10">
-																<div class="form-check">
+																<div class="form-check col-6">
 																	<input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" />
 																	<label class="form-check-label">
 																		Yuran
 																	</label>
 																</div>
-																<div class="col-12" id="divamaun">
+																<div class="col-6" id="divamaun">
 																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
 																	<!--begin::Input-->
 																	<input type="text" class="form-control form-control-solid" id="amaun" name="amaun" placeholder="" value="" />
@@ -1003,7 +1003,8 @@ $(document).ready(function(){
 																</div>
 															</div>
 															<br>
-															<div class="form-check">
+															<div class="row mb-10">
+															<div class="form- col-6">
 																<input class="form-check-input" type="checkbox" value="1" id="elaun"  name="elaun" />
 																<label class="form-check-label">
 																	Elaun Wang Saku
@@ -1013,7 +1014,7 @@ $(document).ready(function(){
 															<br>
 															
 															
-															<div class="col-12" id="divamaunelaun">
+															<div class="col-6" id="divamaunelaun">
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
 																<!--begin::Input-->
 																<input type="text" class="form-control form-control-solid" name="amaunelaun" id="amaunelaun" placeholder="" value="" />
@@ -1021,6 +1022,7 @@ $(document).ready(function(){
 															</div>
 															
 														</div>
+</div>
 		
 													</div>
 													<!--end::Wrapper-->
