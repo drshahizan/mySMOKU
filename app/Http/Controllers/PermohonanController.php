@@ -170,24 +170,6 @@ class PermohonanController extends Controller
         ]);
         }
 
-        $akademik = Akademik::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
-        if ($akademik === null) {
-            $user = Akademik::create([
-                'no_pendaftaranpelajar' => $request->no_pendaftaranpelajar,
-                'tkh_mula' => $request->tkh_mula,
-                'tkh_tamat' => $request->tkh_tamat,
-                'sem_semasa' => $request->sem_semasa,
-                'tempoh_pengajian' => $request->tempoh_pengajian,
-                'bil_bulanpersem' => $request->bil_bulanpersem,
-                'mod' => $request->mod,
-                'cgpa' => $request->cgpa,
-                'sumber_biaya' => $request->sumber_biaya,
-                'nama_penaja' => $request->nama_penaja,
-                'status' => '1',
-        
-            ]);
-        }else {
-
 
         DB::table('maklumatakademik')->where('nokp_pelajar' ,$request->nokp_pelajar)
         ->update([
@@ -205,7 +187,7 @@ class PermohonanController extends Controller
             'status' => '1',
 
         ]);
-        }
+       
 
         $tuntutanpermohonan = TuntutanPermohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
         if ($tuntutanpermohonan === null) {
@@ -313,18 +295,12 @@ class PermohonanController extends Controller
         ]);
         }
         
-        $statustransaksi = Status::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
-        if ($statustransaksi === null) {
-
-        DB::table('statustransaksi')->where('nokp_pelajar' ,$request->nokp_pelajar)
-            ->update([
+        $user = Status::create([
             'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
             'nokp_pelajar' => $request->nokp_pelajar,
             'status' => '2',
-            
+    
         ]);
-        }
-
         $user->save();
 
 
