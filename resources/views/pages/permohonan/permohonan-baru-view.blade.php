@@ -604,30 +604,35 @@ $(document).ready(function(){
 															</div>
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
-																<label class="fs-6 fw-semibold form-label mb-2">Bandar
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamatW_bandar" placeholder="" value="{{$waris->alamat_bandar}}" readonly/>
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
 																<label class="fs-6 fw-semibold form-label mb-2">Negeri
 																</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamatW_negeri" placeholder="" value="{{$waris->alamat_negeri}}" readonly/>
+																	<select id="alamatW_negeri" name="alamatW_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+																		<option value="">{{ $waris->namanegeri}}</option> 
+																	</select>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
 															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mb-2">Bandar
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<select id='alamatW_bandar'  name='alamatW_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+																		<option value="">{{ $waris->namabandar}}</option>
+																	</select>																	
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															
 														</div>
 														<!--end::Input group-->
 														<div class="row mb-10">
@@ -965,10 +970,17 @@ $(document).ready(function(){
 															</div>
 															<br>
 															<br>
-															<div class="col-12">
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun</label>
+															<div class="col-12" id="divamaun">
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
 																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="amaun" placeholder="" value="{{ $tuntutanpermohonan->amaun}}" readonly/>
+																<input type="text" class="form-control form-control-solid" id="amaun" name="amaun" placeholder="" value="{{ $tuntutanpermohonan->amaun}}" readonly/>
+																<!--end::Input-->
+															</div>
+															
+															<div class="col-12" id="divamaunelaun">
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="amaunelaun" id="amaunelaun" placeholder="" value="{{ $tuntutanpermohonan->amaunelaun}}" readonly/>
 																<!--end::Input-->
 															</div>
 														</div>
@@ -1195,26 +1207,38 @@ $(document).ready(function(){
 
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
+		
 
 		<script>
 			function select1(){
             var sumber = document.getElementById('sumber_biaya').value;
 			var mod = document.getElementById('mod').value;
+			var bilbulan = document.getElementById('bil_bulanpersem').value;
+			var layak = "300";
+			var total = layak * bilbulan;
             if(sumber=="1" && mod=="1"){
                 document.getElementById("yuran").disabled = true;
+                document.getElementById("divamaun").style.display = "none";
 				document.getElementById("elaun").disabled = false;
+				document.getElementById("amaunelaun").disabled = true;
+				document.getElementById("amaunelaun").value= total;
             }
 			else if(sumber!="1" && mod=="2"){
                 document.getElementById("yuran").disabled = false;
 				document.getElementById("elaun").disabled = true;
+				document.getElementById("divamaunelaun").style.display = "none";
             }
 			else if(sumber=="1" && mod=="2"){
                 document.getElementById("yuran").disabled = true;
 				document.getElementById("elaun").disabled = true;
+				document.getElementById("divamaun").style.display = "none";
+				document.getElementById("divamaunelaun").style.display = "none";
             }
             else{
                 document.getElementById("yuran").disabled = false;
 				document.getElementById("elaun").disabled = false;
+				document.getElementById("amaunelaun").value= total;
+				document.getElementById("amaunelaun").disabled = true;
             }
         }
 

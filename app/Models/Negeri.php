@@ -10,12 +10,11 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class TuntutanPermohonan extends Authenticatable
+class Negeri extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
-
-    protected $table = 'permohonan';
+    protected $table = 'bk_negeri';
 
     /**
      * The attributes that are mass assignable.
@@ -23,20 +22,9 @@ class TuntutanPermohonan extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'id_permohonan',
-        'nokp_pelajar',
-        'program',
-        'yuran',
-        'elaun',
-        'amaun',
-        'amaunelaun',
-        'perakuan',
-		'status',
-        
-        
+        'id',
+        'nama',
+        'kod',
     ];
 
-    
-
-    
 }

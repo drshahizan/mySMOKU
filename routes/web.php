@@ -50,6 +50,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
+    Route::get('/getBandar/{id}', [PermohonanController::class, 'getBandar']);
     Route::post('permohonan', [PermohonanController::class, 'store'])->name('permohonan.post');
     Route::post('hantar', [PermohonanController::class, 'hantar'])->name('hantar');
     Route::get('viewpermohonan', [PermohonanController::class, 'viewpermohonan'])->name('viewpermohonan');

@@ -287,7 +287,7 @@ var KTCreateAccount = function () {
 		validations.push(FormValidation.formValidation(
 			form,
 			{
-				fields: {
+				/*fields: {
 					'amaun': {
 						validators: {
 							notEmpty: {
@@ -295,7 +295,7 @@ var KTCreateAccount = function () {
 							}
 						}
 					}
-				},
+				},*/
 
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
