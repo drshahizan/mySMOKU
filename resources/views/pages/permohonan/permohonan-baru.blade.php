@@ -988,11 +988,19 @@ $(document).ready(function(){
 																<span class="required">Jenis Tuntutan</span>
 															</label>
 															<!--end::Label-->
-															<div class="form-check">
-																<input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" />
-																<label class="form-check-label">
-																	Yuran
-																</label>
+															<div class="row mb-10">
+																<div class="form-check">
+																	<input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" />
+																	<label class="form-check-label">
+																		Yuran
+																	</label>
+																</div>
+																<div class="col-12" id="divamaun">
+																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" id="amaun" name="amaun" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
 															</div>
 															<br>
 															<div class="form-check">
@@ -1003,12 +1011,7 @@ $(document).ready(function(){
 															</div>
 															<br>
 															<br>
-															<div class="col-12" id="divamaun">
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
-																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" id="amaun" name="amaun" placeholder="" value="" />
-																<!--end::Input-->
-															</div>
+															
 															
 															<div class="col-12" id="divamaunelaun">
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
@@ -1319,7 +1322,7 @@ $(document).ready(function(){
                 document.getElementById("yuran").disabled = true;
                 document.getElementById("divamaun").style.display = "none";
 				document.getElementById("elaun").disabled = false;
-				document.getElementById("amaunelaun").disabled = true;
+				//document.getElementById("amaunelaun").disabled = true;
 				document.getElementById("amaunelaun").value= total;
             }
 			else if(sumber!="1" && mod=="2"){
@@ -1337,7 +1340,7 @@ $(document).ready(function(){
                 document.getElementById("yuran").disabled = false;
 				document.getElementById("elaun").disabled = false;
 				document.getElementById("amaunelaun").value= total;
-				document.getElementById("amaunelaun").disabled = true;
+				//document.getElementById("amaunelaun").disabled = true;
             }
         }
 
