@@ -294,6 +294,77 @@ class PermohonanController extends Controller
 
     }
 
+    public function hantar(Request $request)
+    {   
+
+        $tuntutanpermohonan = TuntutanPermohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
+        if ($tuntutanpermohonan != null) {
+            DB::table('permohonan')->where('nokp_pelajar' ,$request->nokp_pelajar)
+            ->update([
+            'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
+            'nokp_pelajar' => $request->nokp_pelajar,
+            'program' => 'BKOKU',
+            'yuran' => $request->yuran,
+            'elaun' => $request->elaun,
+            'amaun' => $request->amaun,
+            'perakuan' => $request->perakuan,
+            'status' => '2',
+            
+        ]);
+        }
+        
+        $statustransaksi = Status::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
+        if ($statustransaksi === null) {
+
+        DB::table('statustransaksi')->where('nokp_pelajar' ,$request->nokp_pelajar)
+            ->update([
+            'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
+            'nokp_pelajar' => $request->nokp_pelajar,
+            'status' => '2',
+            
+        ]);
+        }
+
+        $user->save();
+
+
+        $data=new dokumen();
+        
+          
+            $akaunBank=$request->akaunBank;
+            //$name1=$akaunBank->getClientOriginalName();  
+            $name1='salinanbank';  
+            $filenameakaunBank=$name1.'_'.$request->nokp_pelajar.'.'.$akaunBank->getClientOriginalExtension();
+            $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
+            
+            $suratTawaran=$request->suratTawaran;
+            //$name2=$suratTawaran->getClientOriginalName();
+            $name2='salinantawaran'; 
+            $filenamesuratTawaran=$name2.'_'.$request->nokp_pelajar.'.'.$suratTawaran->getClientOriginalExtension();
+            $request->suratTawaran->move('assets/dokumen',$filenamesuratTawaran);
+
+            $invoisResit=$request->invoisResit;
+            //$name3=$invoisResit->getClientOriginalName();
+            $name3='salinanresit';  
+            $filenameinvoisResit=$name1.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
+            $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
+            
+            $data->id_permohonan='KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar;
+            $data->nokp_pelajar=$request->nokp_pelajar;
+            $data->akaunBank=$filenameakaunBank;
+            $data->suratTawaran=$filenamesuratTawaran;
+            $data->invoisResit=$filenameinvoisResit;
+            
+
+            $data->save();
+
+
+
+
+        return redirect()->route('viewpermohonan');
+
+    }
+
     public function viewpermohonan(){
         $pelajar = Permohonan::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
         ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
