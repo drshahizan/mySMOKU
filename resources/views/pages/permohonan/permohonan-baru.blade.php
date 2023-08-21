@@ -567,7 +567,7 @@ $(document).ready(function(){
 															<select id="hubungan" name="hubungan" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true">
 															
 															@if ($smoku->hubungan)
-															<option >{{$smoku->hubungan}}</option>
+															<option value="{{$smoku->kodhubungan}}">{{$smoku->hubungan}}</option>
 															@endif
 															@foreach ($hubungan as $hubungan)
 															<option  value="{{$hubungan->kodhubungan}}" >{{$hubungan->hubungan}}</option>
@@ -617,7 +617,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<select id="alamatW_negeri" name="alamatW_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-allow-clear="true" data-hide-search="true">
+																	<select id="alamatW_negeri" name="alamatW_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
 																		<option value="">Pilih</option>
 																		@foreach ($negeri as $negeri)	
 																		<option value="{{ $negeri->id}}">{{ $negeri->nama}}</option> 
@@ -635,7 +635,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<select id='alamatW_bandar'  name='alamatW_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-allow-clear="true" data-hide-search="true">
+																	<select id='alamatW_bandar'  name='alamatW_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
 																		<option value="">Pilih</option>
 																	</select>
 																	<!--end::Input-->
