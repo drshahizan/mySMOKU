@@ -740,6 +740,17 @@ $(document).ready(function(){
 																<option value="{{ $akademik->nama_kursus}}">{{ $akademik->nama_kursus}}</option>
 															</select>
 														</div>
+														<div class="d-flex flex-column mb-7 fv-row">
+															<!--begin::Label-->
+															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																<span class="">Nama Pusat Pengajian</span>
+																
+															</label>
+															<!--end::Label-->
+															<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																<option value="{{ $akademik->idipt}}">{{ $akademik->namaipt}}</option>
+															</select>
+														</div>
 														<!--end::Input group-->
 
 														<!--begin::Input group-->
@@ -763,12 +774,12 @@ $(document).ready(function(){
 															<!--begin::Col-->
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Nama Pusat Pengajian</label>
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																<span class="">Sesi Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
+																</label>
 																<!--end::Label-->
 																	<!--begin::Input wrapper-->
-																		<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																			<option value="{{ $akademik->idipt}}">{{ $akademik->namaipt}}</option>
-																		</select>
+																	<input type="text" class="form-control form-control-solid" placeholder="" id="sesi" name="sesi" value="" />
 																	<!--end::Input wrapper-->
 															</div>
 															<!--end::Col-->

@@ -177,6 +177,7 @@ class PermohonanController extends Controller
         ->update([
 
             'no_pendaftaranpelajar' => $request->no_pendaftaranpelajar,
+            'sesi' => $request->sesi,
             'tkh_mula' => $request->tkh_mula,
             'tkh_tamat' => $request->tkh_tamat,
             'sem_semasa' => $request->sem_semasa,
@@ -433,6 +434,7 @@ class PermohonanController extends Controller
         ->update([
 
             'no_pendaftaranpelajar' => $request->no_pendaftaranpelajar,
+            'sesi' => $request->sesi,
             'tkh_mula' => $request->tkh_mula,
             'tkh_tamat' => $request->tkh_tamat,
             //'sem_semasa' => $request->sem_semasa,
@@ -535,6 +537,7 @@ class PermohonanController extends Controller
         ->update([
 
             'no_pendaftaranpelajar' => NULL,
+            'sesi' => NULL,
             'tkh_mula' => NULL,
             'tkh_tamat' => NULL,
             'sem_semasa' => NULL,
