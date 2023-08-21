@@ -54,21 +54,23 @@ class PermohonanController extends Controller
         ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*', 'bk_mod.*', 'bk_sumberbiaya.*'])
         ->where('nokp_pelajar', Auth::user()->id());
         $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id());
+        $statuspermohonan =  $tuntutanpermohonan->first()->status;
+        //return $statuspermohonan;
         $akademikmqa = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
         ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
         ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*'])
         ->where('nokp_pelajar', Auth::user()->id());
         $status = Status::all()->where('nokp_pelajar', Auth::user()->id());
         $dokumen = Dokumen::all()->where('nokp_pelajar', Auth::user()->id());
-        if (!$status->isEmpty())
+
+        if ($statuspermohonan == '2')
         {
             return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
 
         }
         else
         {
-            //return view('pages.permohonan.permohonan-baru');
-            return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','infoipt','peringkat','kursus','mod','biaya'));
+            return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','infoipt','peringkat','kursus','mod','biaya','pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
         }
         
         
