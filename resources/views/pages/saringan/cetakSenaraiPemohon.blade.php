@@ -39,14 +39,16 @@
         td.no{
             text-align: right;
         }
-        page-number:before {
-            content: "Page " counter(page);
+        footer .pagenum:before {
+            content: counter(page);
         }
-        /* .header{
-            padding-top: 5px; 
-            text-align:center; 
-            display:block;
-        } */
+        footer { 
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px; 
+            height: 50px; 
+        }
     </style>
 </head>
 
@@ -76,7 +78,7 @@
         </div>     
     </div>
 
-    <br><br><br><br>
+    <br><br><br><br><br>
     {{-- Table --}}
     <div style="margin: 10px; display: block;">
         <div class="tittle" style="text-align: center; font-size: 14px;">
@@ -341,16 +343,18 @@
                 </tr>
             </tbody>
         </table>
-        {{-- <div id="footer">
-            <div class="page-number"></div>
-        </div> --}}
+        <footer>
+            <div class="pagenum-container" style="float: right">Page
+                <span class="pagenum"></span>
+            </div>
+        </footer>
     </div>
 
     <script>
         document.getElementById("text").innerHtml = document.getElementById("text").innerHtml.toLowerCase();
     </script>
 
-    <script type="text/php">
+    {{-- <script type="text/php">
         if (isset($pdf)) 
         {
             $x = 400;
@@ -364,6 +368,6 @@
             $angle = 0.0;  
             $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
         }
-    </script>
+    </script> --}}
 </body>
 </html>
