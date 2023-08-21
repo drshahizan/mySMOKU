@@ -21,7 +21,11 @@
                 <div class="row clearfix">
                     <div class="col-12">
                         <nav class="navbar navbar-expand-sm navbar-light bg-light page_menu">
-                            <h2 style="padding-top: 5px;"><b>Rekod Keputusan Permohonan</b></h2>
+                            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item vivify swoopInTop delay-150 active"><b>Rekod Keputusan Permohonan</b></li>
+                                </ul>
+                            </div>
                             {{-- <div class="ml-auto" style="color:black;">
                                 <a href="{{ url('surat-tawaran') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-download"></i> Surat Tawaran</a>
                             </div> --}}
