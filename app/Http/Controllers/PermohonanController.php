@@ -557,6 +557,11 @@ class PermohonanController extends Controller
         return redirect()->route('sejarahpermohonan');
         
     }
+
+    public function baharuimohon()
+    {
+        return view('pages.permohonan.baharuimohon');
+    }
 }
 
 
