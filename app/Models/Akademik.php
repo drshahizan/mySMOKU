@@ -26,6 +26,7 @@ class Akademik extends Authenticatable
         'no_pendaftaranpelajar',
         'nokp_pelajar',
         'peringkat_pengajian',
+        'sesi',
         'nama_kursus',
         'id_institusi',
         'tkh_mula',
