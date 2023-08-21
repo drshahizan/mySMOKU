@@ -223,6 +223,10 @@ $(document).ready(function(){
 											<!--begin::Form-->
 											<form action="" class="card-body py-20 w-100 mw-xl-700px px-9">
 											
+											@if (session('message'))
+												<div class="alert alert-success">{{ session('message') }}</div>
+											@endif
+
 												<!--begin::Step 1-->
 												<div class="current" data-kt-stepper-element="content">
 												
