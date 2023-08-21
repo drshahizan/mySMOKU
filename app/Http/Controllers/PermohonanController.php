@@ -54,7 +54,14 @@ class PermohonanController extends Controller
         ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*', 'bk_mod.*', 'bk_sumberbiaya.*'])
         ->where('nokp_pelajar', Auth::user()->id());
         $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id());
-        $statuspermohonan =  $tuntutanpermohonan->first()->status;
+        $tuntutan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->id())->first();
+        //return $tuntutan;
+        if ($tuntutan != null){
+            $statuspermohonan =  $tuntutan->status;
+            
+        }else{
+            $statuspermohonan =  '0';
+        }
         //return $statuspermohonan;
         $akademikmqa = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
         ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
@@ -62,11 +69,14 @@ class PermohonanController extends Controller
         ->where('nokp_pelajar', Auth::user()->id());
         $status = Status::all()->where('nokp_pelajar', Auth::user()->id());
         $dokumen = Dokumen::all()->where('nokp_pelajar', Auth::user()->id());
-
-        if ($statuspermohonan == '2')
+        
+        if ($statuspermohonan >= '2')
         {
             return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
 
+        } else if ($statuspermohonan == '1')
+        {
+            return view('pages.permohonan.permohonan-baru-kemaskini', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
         }
         else
         {
