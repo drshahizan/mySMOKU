@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Mail\SaringanMail;
 use App\Models\Akademik;
 use App\Models\Permohonan;
+use App\Models\Saringan;
 use App\Models\TuntutanPermohonan;
 use App\Models\Waris;
 use Illuminate\Http\Request;
@@ -24,6 +25,10 @@ class SaringanController extends Controller
 
     public function maklumatPemohon($id)
     {
+        TuntutanPermohonan::where('nokp_pelajar', $id)
+            ->update([
+            'status'   =>  3,
+        ]);
         $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
         return view('pages.saringan.maklumatPemohon',compact('permohonan','pelajar'));
@@ -100,6 +105,12 @@ class SaringanController extends Controller
     public function saringMaklumat(Request $request,$id) 
     {
         if($request->get('maklumat_profil_diri')=="lengkap"&&$request->get('maklumat_akademik')=="lengkap"&&$request->get('salinan_dokumen')=="lengkap"){
+            
+            TuntutanPermohonan::where('nokp_pelajar', $id)
+                ->update([
+                'status'   =>  4,
+            ]);
+            
             $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
             $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
             $status = "Permohonan Telah Disokong";
@@ -107,11 +118,15 @@ class SaringanController extends Controller
         }
         else{
             $catatan[]="";
+            $profil="";
+            $akademik = "";
+            $salinan="";
             $n=0;
             if($request->get('maklumat_profil_diri')=="tak_lengkap"){
                 $checked = $request->input('catatan_maklumat_profil_diri');
                 for($i=0; $i < count($checked); $i++){
                     $catatan[$n]=$checked[$i];
+                    $profil= $profil . $checked[$i] . ",";
                     $n++;
                 }
             }
@@ -120,19 +135,35 @@ class SaringanController extends Controller
                 $checked = $request->input('catatan_maklumat_akademik');
                 for($i=0; $i < count($checked); $i++){
                     $catatan[$n]=$checked[$i];
+                    $akademik = $akademik . $checked[$i] . ",";
                     $n++;
                 }
             }
     
             if($request->get('salinan_dokumen')=="tak_lengkap"){
                 $checked = $request->input('catatan_salinan_dokumen');
-                
                 for($i=0; $i < count($checked); $i++){
                     $catatan[$n]=$checked[$i];
+                    $salinan = $salinan . $checked[$i] . ",";
                     $n++;
                 }
             }
             \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
+            $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id_permohonan');
+
+            $catatan = new Saringan([
+                'id_permohonan'           =>  $id_permohonan,
+                'catatan_profilDiri'      =>  $profil,
+                'catatan_akademik'        =>  $akademik,
+                'catatan_salinanDokumen'  =>  $salinan,
+            ]);
+            $catatan->save();
+
+            TuntutanPermohonan::where('nokp_pelajar', $id)
+                ->update([
+                'status'   =>  5,
+            ]);
+
             $permohonan = TuntutanPermohonan::where('status', '2')
             ->orWhere('status', '=','3')
             ->orWhere('status', '=','4')
@@ -141,5 +172,13 @@ class SaringanController extends Controller
             $status = "Permohonan Telah Dikembalikan";
             return view('pages.saringan.saringan',compact('permohonan','status'));
         }
+    }
+
+    public function permohonanTelahDisaring(){
+        $permohonan = TuntutanPermohonan::where('id_permohonan', 'KPTBKOKU/2/950623098909')->first();
+        $id = $permohonan->nokp_pelajar;
+        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
+        $catatan = Saringan::where('id_permohonan', 'KPTBKOKU/2/950623098909')->first();
+        return view('pages.saringan.permohonanTelahDisaring',compact('permohonan','catatan','pelajar'));
     }
 }

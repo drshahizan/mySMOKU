@@ -59,6 +59,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('kemaskini', [PermohonanController::class, 'update'])->name('kemaskini.post');
     Route::get('statuspermohonan', [PermohonanController::class, 'statuspermohonan'])->name('sejarahpermohonan');
 	Route::get('statuspermohonan/{nokp}', [PermohonanController::class, 'delete'])->name('delete');
+    Route::get('baharuimohon', [PermohonanController::class, 'baharuimohon'])->name('baharuimohon');
 
   
     //Saring permohonan
@@ -75,6 +76,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('salinan-akademik', [SaringanController::class, 'salinanAkademik'])->name('id');
     Route::get('cetak-maklumat-pemohon', [SaringanController::class, 'cetakMaklumatPemohon']);
     Route::post('saring-maklumat-pemohon/{no_kp}', [SaringanController::class, 'saringMaklumat']);
+    Route::get('permohonan-telah-disaring', [SaringanController::class, 'permohonanTelahDisaring']);
 
     //Permohonan - Sekretariat
     Route::get('keseluruhanPermohonan', [SekretariatController::class, 'statusPermohonan']);
