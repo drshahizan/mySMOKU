@@ -107,8 +107,15 @@ class SekretariatController extends Controller
 
     public function cetakSenaraiPemohonPDF() 
     {
-        $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon');
+        // $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon');
+        // $pdf->setPaper('A4', 'landscape');
+        // return $pdf->stream('senarai-pemohon.pdf');
+        
+        $pdf = app('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
         $pdf->setPaper('A4', 'landscape');
+        $data = ['title' => 'Testing Page Number In Body'];
+        $pdf->loadView('pages.saringan.cetakSenaraiPemohon', $data);
         return $pdf->stream('senarai-pemohon.pdf');
     }
 
