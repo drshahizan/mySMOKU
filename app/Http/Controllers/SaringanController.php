@@ -24,6 +24,10 @@ class SaringanController extends Controller
 
     public function maklumatPemohon($id)
     {
+        TuntutanPermohonan::where('nokp_pelajar', $id)
+            ->update([
+            'status'   =>  3,
+        ]);
         $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
         return view('pages.saringan.maklumatPemohon',compact('permohonan','pelajar'));
@@ -100,6 +104,12 @@ class SaringanController extends Controller
     public function saringMaklumat(Request $request,$id) 
     {
         if($request->get('maklumat_profil_diri')=="lengkap"&&$request->get('maklumat_akademik')=="lengkap"&&$request->get('salinan_dokumen')=="lengkap"){
+            
+            TuntutanPermohonan::where('nokp_pelajar', $id)
+                ->update([
+                'status'   =>  4,
+            ]);
+            
             $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
             $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
             $status = "Permohonan Telah Disokong";
@@ -133,6 +143,12 @@ class SaringanController extends Controller
                 }
             }
             \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
+
+            TuntutanPermohonan::where('nokp_pelajar', $id)
+                ->update([
+                'status'   =>  5,
+            ]);
+
             $permohonan = TuntutanPermohonan::where('status', '2')
             ->orWhere('status', '=','3')
             ->orWhere('status', '=','4')
