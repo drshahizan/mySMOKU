@@ -563,9 +563,17 @@ $(document).ready(function(){
 															<!--begin::Label-->
 															<div class="col-md-6 fv-row hubungan_row">
 															<label class="form-label mb-6">Hubungan Waris</label>
-															<select id="hubungan" name="hubungan" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true" data-hide-search="true">
-																<option value="{{$smoku->kodhubungan}}">{{$smoku->hubungan}}</option>
+																
+															<select id="hubungan" name="hubungan" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true">
+															
+															@if ($smoku->hubungan)
+															<option >{{$smoku->hubungan}}</option>
+															@endif
+															@foreach ($hubungan as $hubungan)
+															<option  value="{{$hubungan->kodhubungan}}" >{{$hubungan->hubungan}}</option>
+															@endforeach
 															</select>
+															
 														</div>
 															<div class="col-md-6 fv-row lain_hubungan">
 															<!--begin::Label-->

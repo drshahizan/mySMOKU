@@ -19,6 +19,7 @@ use App\Models\Sumberbiaya;
 use App\Models\Status;
 use App\Models\JenisOku;
 use App\Models\Dokumen;
+use App\Models\Hubungan;
 use Illuminate\Support\Facades\Auth;
 use DB;
 
@@ -38,6 +39,7 @@ class PermohonanController extends Controller
         $kursus = Kursus::all()->sortBy('nama_kursus');
         $mod = Mod::all()->sortBy('kodmod');
         $biaya = Sumberbiaya::all()->sortBy('kodbiaya');
+        $hubungan = Hubungan::all()->sortBy('kodhubungan');
 
         $pelajar = Permohonan::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
         ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
@@ -80,7 +82,7 @@ class PermohonanController extends Controller
         }
         else
         {
-            return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','infoipt','peringkat','kursus','mod','biaya','pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
+            return view('pages.permohonan.permohonan-baru', compact('smoku','hubungan','akademikmqa','infoipt','peringkat','kursus','mod','biaya','pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
         }
         
         
