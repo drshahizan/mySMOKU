@@ -316,8 +316,8 @@ class PermohonanController extends Controller
             'yuran' => $request->yuran,
             'elaun' => $request->elaun,
             'amaun' => $request->amaun,
-            'amaunelaun' => $request->amaunelaun,
-            'perakuan' => $request->perakuan,*/
+            'amaunelaun' => $request->amaunelaun,*/
+            'perakuan' => $request->perakuan,
             'status' => '2',
             
         ]);
