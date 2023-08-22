@@ -90,7 +90,7 @@
 																	</tbody>
 																	<!--end::Table body-->
 																	<!--begin::Table foot-->
-																	<!-- <tfoot>
+																	<!-- <tfoot> 
 																		<tr class="border-top border-top-dashed align-top fs-6 fw-bold text-gray-700">
 																			<th class="text-primary">
 																				<button class="btn btn-link py-1" data-kt-element="add-item">Add item</button>
