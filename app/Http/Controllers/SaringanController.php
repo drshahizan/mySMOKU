@@ -175,10 +175,10 @@ class SaringanController extends Controller
     }
 
     public function permohonanTelahDisaring(){
-        $permohonan = TuntutanPermohonan::where('id_permohonan', 'KPTBKOKU/2/950623098909')->first();
+        $permohonan = TuntutanPermohonan::where('id_permohonan', 'KPTBKOKU/2/900123456789')->first();
         $id = $permohonan->nokp_pelajar;
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
-        $catatan = Saringan::where('id_permohonan', 'KPTBKOKU/2/950623098909')->first();
+        $catatan = Saringan::where('id_permohonan', 'KPTBKOKU/2/900123456789')->first();
         return view('pages.saringan.permohonanTelahDisaring',compact('permohonan','catatan','pelajar'));
     }
 }

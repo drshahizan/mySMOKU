@@ -65,11 +65,15 @@
                                             <td><strong>No. Kad Pengenalan</strong></td>
                                             <td>:</td>
                                             <td>{{$pelajar->nokp_pelajar}}</td>
+                                            <td class="space">&nbsp;</td>
+                                            <td><strong>Status</strong></td>
+                                            <td>:</td>
+                                            <td>{{DB::table('statusinfo')->where('kodstatus', $permohonan->status)->value('status')}}</td>
                                         </tr>
                                     </table>                           
                                 </div>
                                 <br>
-                            <form method="POST" action="{{ url('saring-maklumat-pemohon/'.$pelajar->nokp_pelajar) }}" id="saring">
+                            <form method="POST" action="{{ url('tuntutan-telah-disaring/'.$pelajar->nokp_pelajar) }}" id="saring">
                                 {{csrf_field()}}
                             <div class="row clearfix">
                                 <div class="col-md-12">
@@ -88,25 +92,67 @@
                                                     <td style="text-align:right;">1</td>
                                                     <td>
                                                         <span><a href="{{ url('maklumat-profil-diri/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Profil Diri</a></span>
-                                                    </td>           
-                                                    <td class="hidden-sm-down"></td>
-                                                    <td></td>
+                                                    </td>  
+                                                    <td class="hidden-sm-down">
+                                                        @if ($catatan->catatan_profilDiri == null)
+                                                            Lengkap
+                                                        @else
+                                                            Tidak Lengkap
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                            $str = $catatan->catatan_profilDiri;
+                                                            $strArr = explode(",", $str);
+                                                        @endphp
+                                                        @for ($i = 0; $i < count($strArr)-1; $i++)
+                                                           {{$i+1}}. {{$strArr[$i]}} <br>
+                                                        @endfor
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align:right;">2</td>
                                                     <td>
                                                         <span><a href="{{ url('maklumat-akademik/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Akademik</a></span>
                                                     </td>
-                                                    <td class="hidden-sm-down"></td>
-                                                    <td></td>
+                                                    <td class="hidden-sm-down">
+                                                        @if ($catatan->catatan_akademik == null)
+                                                            Lengkap
+                                                        @else
+                                                            Tidak Lengkap
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                            $str = $catatan->catatan_akademik;
+                                                            $strArr = explode(",", $str);
+                                                        @endphp
+                                                        @for ($i = 0; $i < count($strArr)-1; $i++)
+                                                        {{$i+1}}. {{$strArr[$i]}} <br>
+                                                        @endfor
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align:right;">3</td>
                                                     <td>
                                                         <span><a href="{{ url('salinan-dokumen/'.$pelajar->nokp_pelajar) }}" target="_blank">Salinan Dokumen</a></span>
                                                     </td>
-                                                <td class="hidden-sm-down"></td>
-                                                <td></td>
+                                                <td class="hidden-sm-down">
+                                                    @if ($catatan->catatan_salinanDokumen == null)
+                                                        Lengkap
+                                                    @else
+                                                        Tidak Lengkap
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @php
+                                                        $str = $catatan->catatan_salinanDokumen;
+                                                        $strArr = explode(",", $str);
+                                                    @endphp
+                                                    @for ($i = 0; $i < count($strArr)-1; $i++)
+                                                    {{$i+1}}. {{$strArr[$i]}} <br>
+                                                    @endfor
+                                                </td>
                                                 </tr>                                                
                                             </tbody>
                                         </table>
