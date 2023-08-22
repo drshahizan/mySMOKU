@@ -25,7 +25,7 @@
 														<div class="d-flex flex-column align-items-start flex-xxl-row">
 															<!--begin::Input group-->
 															<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
-																<span class="fs-2x fw-bold text-gray-800">Keputusan Peperiksaan Baru</span>
+																<span class="fs-3 fw-bold text-gray-800">Keputusan Peperiksaan Baru</span>
 																<!-- <input type="text" class="form-control form-control-flush fw-bold text-muted fs-3 w-125px" value="2021001" placehoder="..." /> -->
 															</div>
 														</div>
@@ -42,7 +42,7 @@
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" type="number" min="1" name="quantity[]" placeholder="1" value="1" />
+																		<input type="text" class="form-control form-control-solid" placeholder="2"  />
 																	</div>
 																</div>
 																<!--end::Col-->
@@ -63,10 +63,12 @@
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Pengajian</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" type="number" min="1" name="quantity[]" placeholder="1" value="1" />
+																		<input type="text" class="form-control form-control-solid"  placeholder="1"  />
 																	</div>
 																</div>
-																<!--end::Col-->
+																
+															</div>
+															<div class="row gx-10 mb-5">
 																<!--begin::Col-->
 																<div class="col-lg-6">
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">GPA</label>
@@ -75,27 +77,14 @@
 																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
 																	</div>
 																</div>
-																<!--end::Col-->
-															</div>
-															<div class="row gx-10 mb-5">
-																<!--begin::Col-->
 																<div class="col-lg-6">
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">CGPA</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" type="number" min="1" name="quantity[]" placeholder="1" value="1" />
+																		<input type="text" class="form-control form-control-solid"  placeholder="1" />
 																	</div>
 																</div>
-																<!--end::Col-->
-																<!--begin::Col-->
-																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun Pengajian</label>
-																	<!--begin::Input group-->
-																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
-																	</div>
-																</div>
-																<!--end::Col-->
+																
 															</div>
 														
 															<!-- <div class="table-responsive mb-10">
