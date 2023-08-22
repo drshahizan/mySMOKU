@@ -379,7 +379,9 @@ class PermohonanController extends Controller
         ->get(['pelajar.*', 'bk_jantina.*','bk_bangsa.*','bk_bangsa.*','bk_jenisoku.*'])
         ->where('nokp_pelajar', Auth::user()->id());
         $waris = Waris::join('bk_hubungan','bk_hubungan.kodhubungan','=','waris.hubungan')
-        ->get(['waris.*', 'bk_hubungan.*'])
+        ->join('bk_negeri','bk_negeri.id','=','waris.alamat_negeri')
+        ->join('bk_bandar','bk_bandar.id','=','waris.alamat_bandar')
+        ->get(['waris.*', 'bk_hubungan.*', 'bk_negeri.nama as namanegeri', 'bk_bandar.nama as namabandar'])
         ->where('nokp_pelajar', Auth::user()->id());
         $akademik = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
         ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')

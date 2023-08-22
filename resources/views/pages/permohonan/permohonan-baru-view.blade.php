@@ -220,13 +220,12 @@ $(document).ready(function(){
 	<!--begin::Aside-->
 										<!--begin::Content-->
 										<div class="card d-flex flex-row-fluid flex-center">
-											<!--begin::Form-->
-											<form id="kt_create_account_form" action="" class="card-body py-20 w-100 mw-xl-700px px-9">
-											
 											@if (session('message'))
 												<div class="alert alert-success">{{ session('message') }}</div>
 											@endif
-
+											<!--begin::Form-->
+											<form action="" class="card-body py-20 w-100 mw-xl-700px px-9">
+											
 												<!--begin::Step 1-->
 												<div class="current" data-kt-stepper-element="content">
 												
@@ -742,6 +741,19 @@ $(document).ready(function(){
 																<option value="{{ $akademik->nama_kursus}}">{{ $akademik->nama_kursus}}</option>
 															</select>
 														</div>
+														<!--begin::Col-->
+														<div class="d-flex flex-column mb-7 fv-row">
+															<!--begin::Label-->
+															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																<span class="">Nama Pusat Pengajian</span>
+																
+															</label>
+															<!--end::Label-->
+															<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																<option value="{{ $akademik->idipt}}">{{ $akademik->namaipt}}</option>
+															</select>
+														</div>
+															<!--end::Col-->
 														<!--end::Input group-->
 														
 														<!--begin::Input group-->
@@ -767,15 +779,16 @@ $(document).ready(function(){
 															<!--begin::Col-->
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Nama Pusat Pengajian</label>
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																<span class="">Sesi Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
+																</label>
 																<!--end::Label-->
 																	<!--begin::Input wrapper-->
-																		<select name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																			<option>{{ $akademik->namaipt}}</option>
-																		</select>
+																	<input type="text" class="form-control form-control-solid" placeholder="" id="sesi" name="sesi" value="{{$akademik->sesi}}" />
 																	<!--end::Input wrapper-->
 															</div>
 															<!--end::Col-->
+															
 														</div>
 														<!--end::Input group-->
 														
@@ -959,33 +972,43 @@ $(document).ready(function(){
 																<span class="required">Jenis Tuntutan</span>
 															</label>
 															<!--end::Label-->
-															<div class="form-check">
-																<input  disabled class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran"  @if($tuntutanpermohonan->yuran) checked @endif />
-																<label class="form-check-label">
-																	Yuran
-																</label>
-															</div>
-															<br>
-															<div class="form-check">
-																<input  disabled class="form-check-input" type="checkbox" value="1" id="elaun"  name="elaun" @if($tuntutanpermohonan->elaun) checked @endif/>
-																<label class="form-check-label">
-																	Elaun Wang Saku
-																</label>
-															</div>
 															<br>
 															<br>
-															<div class="col-12" id="divamaun">
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
-																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" id="amaun" name="amaun" placeholder="" value="{{ $tuntutanpermohonan->amaun}}" readonly/>
-																<!--end::Input-->
-															</div>
+															<div class="row mb-10">
+																<br>
+																<br>
+																<div class="col-6">
+																	<input  disabled class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran"  @if($tuntutanpermohonan->yuran) checked @endif />
+																	<label class="fs-6 fw-semibold form-label">
+																		Yuran
+																	</label>
+																</div>
+																<div class="col-6" id="divamaun">
+																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" id="amaun" name="amaun" placeholder="" value="{{ $tuntutanpermohonan->amaun}}" readonly/>
+																	<!--end::Input-->
+																</div>
 															
-															<div class="col-12" id="divamaunelaun">
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
-																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="amaunelaun" id="amaunelaun" placeholder="" value="{{ $tuntutanpermohonan->amaunelaun}}" readonly/>
-																<!--end::Input-->
+																
+															</div>
+															<div class="row mb-10">
+																<br>
+																<br>
+																
+																<div class="col-6">
+																	<input  disabled class="form-check-input" type="checkbox" value="1" id="elaun"  name="elaun" @if($tuntutanpermohonan->elaun) checked @endif/>
+																	<label class="fs-6 fw-semibold form-label">
+																		Elaun Wang Saku
+																	</label>
+																</div>
+															
+																<div class="col-6" id="divamaunelaun">
+																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="amaunelaun" id="amaunelaun" placeholder="" value="{{ $tuntutanpermohonan->amaunelaun}}" readonly/>
+																	<!--end::Input-->
+																</div>
 															</div>
 														</div>
 		
@@ -1018,6 +1041,7 @@ $(document).ready(function(){
 																	
 																	
 																	<th class="w-250px">Nama</th>
+																	<th class="w-250px">Catatan</th>
 																	<th class="w-125px"></th>
 																	<th class="w-125px"></th>
 																</tr>
@@ -1027,6 +1051,7 @@ $(document).ready(function(){
 																<tr>
 																	<td class="text-gray-800">Salinan Penyata Bank</td>
 																	@if($dokumen->akaunBank)
+																	<td>{{ $dokumen->nota_akaunBank}}</td>
 																	<td><a href="/assets/dokumen/{{$dokumen->akaunBank}}" target="_blank">Papar</a></td>
 																	<td><a href="{{url('/download',$dokumen->akaunBank)}}">Muat Turun</a></td>
 																	@endif
@@ -1034,6 +1059,7 @@ $(document).ready(function(){
 																<tr>
 																	<td class="text-gray-800">Salinan Surat Tawaran Pengajian</td>
 																	@if($dokumen->suratTawaran)
+																	<td>{{ $dokumen->nota_suratTawaran}}</td>
 																	<td><a href="/assets/dokumen/{{$dokumen->suratTawaran}}" target="_blank">Papar</a></td>
 																	<td><a href="{{url('/download',$dokumen->suratTawaran)}}">Muat Turun</a></td>
 																	@endif
@@ -1041,6 +1067,7 @@ $(document).ready(function(){
 																<tr>
 																	<td class="text-gray-800">Salinan Resit/Invois</td>
 																	@if($dokumen->invoisResit)
+																	<td>{{ $dokumen->nota_invoisResit}}</td>
 																	<td><a href="/assets/dokumen/{{$dokumen->invoisResit}}" target="_blank">Papar</a></td>
 																	<td><a href="{{url('/download',$dokumen->invoisResit)}}">Muat Turun</a></td>
 																	@endif
