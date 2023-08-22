@@ -221,6 +221,13 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
+					'sesi': {
+						validators: {
+							notEmpty: {
+								message: 'Sesi Pengajian diperlukan'
+							}
+						}
+					},
 					'tkh_mula': {
 						validators: {
 							notEmpty: {

@@ -988,14 +988,16 @@ $(document).ready(function(){
 																<span class="required">Jenis Tuntutan</span>
 															</label>
 															<!--end::Label-->
+															<br>
+															<br>
 															<div class="row mb-10">
-																<div class="form-check col-6">
+															<br>
+															<br>
+																<div class="col-6">
 																	<input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" />
-																	<label class="form-check-label">
-																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																	<label class="fs-6 fw-semibold form-label">
 																		Yuran
 																	</label>
-																	<!-- <input class="form-check-input" style="text-align:center; vertical-align:middle" type="checkbox" value="1" id="yuran"  name="yuran" /> -->
 																</div>
 																<div class="col-6" id="divamaun">
 																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
@@ -1006,26 +1008,22 @@ $(document).ready(function(){
 															</div>
 															<br>
 															<div class="row mb-10">
-															<div class="form- col-6">
-																<input class="form-check-input" type="checkbox" value="1" id="elaun"  name="elaun" />
-																<label class="form-check-label">
-																	Elaun Wang Saku
-																</label>
-															</div>
 															<br>
 															<br>
-															
-															
-															<div class="col-6" id="divamaunelaun">
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
-																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="amaunelaun" id="amaunelaun" placeholder="" value="" />
-																<!--end::Input-->
+																<div class="col-6">
+																	<input class="form-check-input" type="checkbox" value="1" id="elaun"  name="elaun" />
+																	<label class="fs-6 fw-semibold form-label">
+																		Elaun Wang Saku
+																	</label>
+																</div>
+																<div class="col-6" id="divamaunelaun">
+																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="amaunelaun" id="amaunelaun" placeholder="" value="" />
+																	<!--end::Input-->
+																</div>
 															</div>
-															
 														</div>
-</div>
-		
 													</div>
 													<!--end::Wrapper-->
 												</div>
