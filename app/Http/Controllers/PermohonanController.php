@@ -362,7 +362,7 @@ class PermohonanController extends Controller
 
 
 
-        return redirect()->route('viewpermohonan')->with('message', 'Permohonan anda telah dihantar.');;
+        return redirect()->route('viewpermohonan')->with('message', 'Permohonan anda telah dihantar.');
 
     }
 
@@ -476,6 +476,7 @@ class PermohonanController extends Controller
             'yuran' => $request->yuran,
             'elaun' => $request->elaun,
             'amaun' => $request->amaun,
+            'amaunelaun' => $request->amaunelaun,
             'perakuan' => $request->perakuan,
             'status' => '2',
 
@@ -519,7 +520,7 @@ class PermohonanController extends Controller
             }
 
 
-        return redirect()->route('viewpermohonan');
+        return redirect()->route('viewpermohonan')->with('message', 'Permohonan anda telah dikemaskini dan dihantar.');
         
     }
  
