@@ -25,7 +25,7 @@
 														<div class="d-flex flex-column align-items-start flex-xxl-row">
 															<!--begin::Input group-->
 															<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
-																<span class="fs-2x fw-bold text-gray-800">Keputusan Peperiksaan Baru</span>
+																<span class="fs-3 fw-bold text-gray-800">Keputusan Peperiksaan Baru</span>
 																<!-- <input type="text" class="form-control form-control-flush fw-bold text-muted fs-3 w-125px" value="2021001" placehoder="..." /> -->
 															</div>
 														</div>
@@ -42,7 +42,7 @@
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" type="number" min="1" name="quantity[]" placeholder="1" value="1" />
+																		<input type="text" class="form-control form-control-solid" placeholder="2"  />
 																	</div>
 																</div>
 																<!--end::Col-->
@@ -56,115 +56,45 @@
 																</div>
 																<!--end::Col-->
 															</div>
-															<!--end::Row-->
-															<!--begin::Table wrapper-->
-															<div class="table-responsive mb-10">
-																<!--begin::Table-->
-																<table class="table g-5 gs-0 mb-0 fw-bold text-gray-700" data-kt-element="items">
-																	<!--begin::Table head-->
-																	<thead>
-																		<tr class="border-bottom fs-6 fw-bold text-gray-700 mb-3">
-																			<th class="min-w-300px w-100px">Salinan Keputusan Pengajian</th>
-																			<th class="min-w-100px w-150px">GPA</th>
-																			<th class="min-w-100px w-150px">CGPA</th>
-																			<th class="min-w-100px w-150px">Tindakan</th>
-																		</tr>
-																	</thead>
-																	<!--end::Table head-->
-																	<!--begin::Table body-->
-																	<tbody>
-																		<tr class="border-bottom border-bottom-dashed" data-kt-element="item">
-																			<td class="pe-7">
-																				<input type="text" class="form-control form-control-solid mb-2" name="name[]" placeholder="Item name" />
-																				<!-- <input type="text" class="form-control form-control-solid" name="description[]" placeholder="Description" /> -->
-																			</td>
-																			<td class="ps-0">
-																				<input class="form-control form-control-solid" type="number" min="1" name="quantity[]" placeholder="1" value="1" data-kt-element="quantity" />
-																			</td>
-																			<td>
-																				<input type="text" class="form-control form-control-solid text-end" name="price[]" placeholder="0.00" value="0.00" data-kt-element="price" />
-																			</td>
-																			<td class="pt-5 text-end">
-																				<button type="button" class="btn btn-sm btn-icon btn-active-color-primary" data-kt-element="remove-item">
-																					<i class="ki-duotone ki-trash fs-3">
-																						<span class="path1"></span>
-																						<span class="path2"></span>
-																						<span class="path3"></span>
-																						<span class="path4"></span>
-																						<span class="path5"></span>
-																					</i>
-																				</button>
-																			</td>
-																		</tr>
-																	</tbody>
-																	<!--end::Table body-->
-																	<!--begin::Table foot-->
-																	<!-- <tfoot> 
-																		<tr class="border-top border-top-dashed align-top fs-6 fw-bold text-gray-700">
-																			<th class="text-primary">
-																				<button class="btn btn-link py-1" data-kt-element="add-item">Add item</button>
-																			</th>
-																			<th colspan="2" class="border-bottom border-bottom-dashed ps-0">
-																				<div class="d-flex flex-column align-items-start">
-																					<div class="fs-5">Subtotal</div>
-																					<button class="btn btn-link py-1" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Coming soon">Add tax</button>
-																					<button class="btn btn-link py-1" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Coming soon">Add discount</button>
-																				</div>
-																			</th>
-																			<th colspan="2" class="border-bottom border-bottom-dashed text-end">$
-																			<span data-kt-element="sub-total">0.00</span></th>
-																		</tr>
-																		<tr class="align-top fw-bold text-gray-700">
-																			<th></th>
-																			<th colspan="2" class="fs-4 ps-0">Total</th>
-																			<th colspan="2" class="text-end fs-4 text-nowrap">$
-																			<span data-kt-element="grand-total">0.00</span></th>
-																		</tr>
-																	</tfoot> -->
-																	<!--end::Table foot-->
-																</table>
+
+															<div class="row gx-10 mb-5">
+																<!--begin::Col-->
+																<div class="col-lg-6">
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Pengajian</label>
+																	<!--begin::Input group-->
+																	<div class="mb-5">
+																		<input type="text" class="form-control form-control-solid"  placeholder="1"  />
+																	</div>
+																</div>
+																
 															</div>
-															<!--end::Table-->
-															<!--begin::Item template-->
-															<table class="table d-none" data-kt-element="item-template">
-																<tr class="border-bottom border-bottom-dashed" data-kt-element="item">
-																	<td class="pe-7">
-																		<input type="text" class="form-control form-control-solid mb-2" name="name[]" placeholder="Item name" />
-																		<input type="text" class="form-control form-control-solid" name="description[]" placeholder="Description" />
-																	</td>
-																	<td class="ps-0">
-																		<input class="form-control form-control-solid" type="number" min="1" name="quantity[]" placeholder="1" data-kt-element="quantity" />
-																	</td>
-																	<td>
-																		<input type="text" class="form-control form-control-solid text-end" name="price[]" placeholder="0.00" data-kt-element="price" />
-																	</td>
-																	<td class="pt-8 text-end">$
-																	<span data-kt-element="total">0.00</span></td>
-																	<td class="pt-5 text-end">
-																		<button type="button" class="btn btn-sm btn-icon btn-active-color-primary" data-kt-element="remove-item">
-																			<i class="ki-duotone ki-trash fs-3">
-																				<span class="path1"></span>
-																				<span class="path2"></span>
-																				<span class="path3"></span>
-																				<span class="path4"></span>
-																				<span class="path5"></span>
-																			</i>
-																		</button>
-																	</td>
-																</tr>
-															</table>
-															<table class="table d-none" data-kt-element="empty-template">
+															<div class="row gx-10 mb-5">
+																<!--begin::Col-->
+																<div class="col-lg-6">
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">GPA</label>
+																	<!--begin::Input group-->
+																	<div class="mb-5">
+																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
+																	</div>
+																</div>
+																<div class="col-lg-6">
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">CGPA</label>
+																	<!--begin::Input group-->
+																	<div class="mb-5">
+																		<input type="text" class="form-control form-control-solid"  placeholder="1" />
+																	</div>
+																</div>
+																
+															</div>
+														
+															
+															<!-- <table class="table d-none" data-kt-element="empty-template">
 																<tr data-kt-element="empty">
 																	<th colspan="5" class="text-muted text-center py-10">No items</th>
 																</tr>
-															</table>
-															<!--end::Item template-->
-															<!--begin::Notes-->
-															<!-- <div class="mb-0">
-																<label class="form-label fs-6 fw-bold text-gray-700">Notes</label>
-																<textarea name="notes" class="form-control form-control-solid" rows="3" placeholder="Thanks for your business"></textarea>
-															</div> -->
-															<!--end::Notes-->
+															</table> -->
+															<a href="#" class="btn btn-success hover-rotate-end">Hantar</a>
+															<a href="#" class="btn btn-danger hover-scale">Batal</a>
 														</div>
 														<!--end::Wrapper-->
 													</form>
@@ -184,7 +114,9 @@
 													<!--begin::Input group-->
 													<div class="mb-10">
 														<!--begin::Label-->
-														<label class="form-label fw-bold fs-6 text-gray-700">Keputusan Peperiksaan</label>
+														<label class="form-label fw-bold fs-4 text-gray-700">Keputusan Peperiksaan</label>
+														<br>
+														<br>
 														<div class="table-responsive">
 														<table class="table table-rounded table-striped border gy-7 gs-7" style="background-color:#FFFFE0;">
 													<thead>
@@ -201,19 +133,7 @@
 </div>
 														
 													</div>
-													<!--end::Input group-->
-													<!--begin::Separator-->
-													<div class="separator separator-dashed mb-8"></div>
-													<!--end::Separator-->
-													<!--begin::Input group-->
-													<div class="mb-8">
-														
-													</div>
-													<!--end::Input group-->
-													<!--begin::Separator-->
-													<div class="separator separator-dashed mb-8"></div>
-													<!--end::Separator-->
-													<!--begin::Actions-->
+													
 													<div class="mb-0">
 														<!--begin::Row-->
 														<div class="row mb-5">
