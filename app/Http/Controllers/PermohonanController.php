@@ -307,29 +307,29 @@ class PermohonanController extends Controller
         if ($tuntutanpermohonan != null) {
             DB::table('permohonan')->where('nokp_pelajar' ,$request->nokp_pelajar)
             ->update([
-            'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
+            /*'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
             'nokp_pelajar' => $request->nokp_pelajar,
             'program' => 'BKOKU',
             'yuran' => $request->yuran,
             'elaun' => $request->elaun,
             'amaun' => $request->amaun,
             'amaunelaun' => $request->amaunelaun,
-            'perakuan' => $request->perakuan,
+            'perakuan' => $request->perakuan,*/
             'status' => '2',
             
         ]);
         }
         
         $user = Status::create([
-            'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
-            'nokp_pelajar' => $request->nokp_pelajar,
+            //'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
+            //'nokp_pelajar' => $request->nokp_pelajar,
             'status' => '2',
     
         ]);
         $user->save();
 
 
-        $data=new dokumen();
+        /*$data=new dokumen();
         
           
             $akaunBank=$request->akaunBank;
@@ -357,7 +357,7 @@ class PermohonanController extends Controller
             $data->invoisResit=$filenameinvoisResit;
             
 
-            $data->save();
+            $data->save();*/
 
 
 
