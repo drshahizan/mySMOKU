@@ -324,10 +324,45 @@ var KTCreateAccount = function () {
 						validators: {
 							notEmpty: {
 								message: 'Salinan Bank diperlukan'
-							}
+							},
+							file: {
+								extension: 'jpeg,jpg,png,pdf',
+								type: 'image/jpeg,image/png,application/pdf',
+								maxSize: 2097152, // 2048 * 1024
+								message: 'Fail yang dipilih tidak sah',
+							},
+						}
+					},
+				
+					'suratTawaran': {
+						validators: {
+							notEmpty: {
+								message: 'Salinan Surat Tawaran diperlukan'
+							},
+							file: {
+								extension: 'jpeg,jpg,png,pdf',
+								type: 'image/jpeg,image/png,application/pdf',
+								maxSize: 2097152, // 2048 * 1024
+								message: 'Fail yang dipilih tidak sah',
+							},
+						}
+					},
+				
+					'invoisResit': {
+						validators: {
+							notEmpty: {
+								message: 'Salinan Resit/Invois diperlukan'
+							},
+							file: {
+								extension: 'jpeg,jpg,png,pdf',
+								type: 'image/jpeg,image/png,application/pdf',
+								maxSize: 2097152, // 2048 * 1024
+								message: 'Fail yang dipilih tidak sah',
+							},
 						}
 					}
 				},
+
 
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),

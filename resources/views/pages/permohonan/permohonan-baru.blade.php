@@ -1052,46 +1052,45 @@ $(document).ready(function(){
 																<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 																	
 																	<th class="w-250px">Nama</th>
-																	<th class="w-125px"></th>
-																	<th class="w-125px"></th>
+																	<th class="w-250px">Dokumen</th>
+																	<th class="w-200px">Catatan</th>
 																</tr>
 															</thead>
 															<tbody class="fw-semibold text-gray-600">
 																<tr>
 																	<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
-																	<td class="text-gray-800"></td>
-																	<td>
-																		<input type="file" id="akaunBank" name="akaunBank"/>
-																		{{--<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:100%; text-align:center;">
-																		<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
-																		</label>--}}
-																	</td>
+																	<td class="fv-row"><input type="file" id="akaunBank" name="akaunBank"/></td>
+																	<td><input type="text" class="form-control form-control-solid" id="nota_akaunBank" name="nota_akaunBank"/></td>
 																</tr>
 																<tr>
 																	<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
-																	<td class="text-gray-800"></td>
-																	<td>
-																		<input type="file" id="suratTawaran" name="suratTawaran"/>
-																		{{--<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:100%; text-align:center;">
-																		<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
-																		</label>--}}
-																	</td>
+																	<td class="fv-row"><input type="file" id="suratTawaran" name="suratTawaran"/></td>
+																	<td><input type="text" class="form-control form-control-solid" id="nota_suratTawaran" name="nota_suratTawaran"/></td>
 																</tr>
 																<tr>
 																	<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/resit.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
-																	<td class="text-gray-800"></td>
-																	<td>
-																		<input type="file" id="invoisResit" name="invoisResit"/>
-																		{{--<label for="upload" style="display: inline-block; background-color:gray; color: white; border-radius: 0.3rem; cursor: pointer; padding:10px; width:100%; text-align:center;">
-																		<i class="fa fa-upload" style="color: white; padding-right:5px;"></i>Muat Naik
-																		</label>--}}
-																	
-																	</td>
+																	<td class="fv-row"><input type="file" id="invoisResit" name="invoisResit"/></td>
+																	<td><input type="text" class="form-control form-control-solid" id="nota_invoisResit" name="nota_invoisResit"/></td>
 																</tr>
 
 															</tbody>
 														</table>
 														<!--end::Table-->
+														<br>
+														<br>
+
+														<div class="pb-10 pb-lg-15">
+															<!--begin::Notice-->
+															<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:red'></i>&nbsp; <a href="https://compressjpeg.com/" target="_blank">Kecilkan saiz fail dokumen disini.</a>
+															</div>
+
+															<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:red'></i>&nbsp; Format fail yang boleh dimuat naik adalah format 
+															'.pdf', '.jpg', '.png' dan '.jpeg'
+															</div>
+															<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:red'></i>&nbsp; Saiz maksimum fail adalah 2 MB.
+															</div>
+															<!--end::Notice-->
+														</div>
 		
 													</div>
 													<!--end::Wrapper-->
