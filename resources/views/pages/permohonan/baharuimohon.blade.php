@@ -205,19 +205,7 @@
 </div>
 														
 													</div>
-													<!--end::Input group-->
-													<!--begin::Separator-->
-													<div class="separator separator-dashed mb-8"></div>
-													<!--end::Separator-->
-													<!--begin::Input group-->
-													<div class="mb-8">
-														
-													</div>
-													<!--end::Input group-->
-													<!--begin::Separator-->
-													<div class="separator separator-dashed mb-8"></div>
-													<!--end::Separator-->
-													<!--begin::Actions-->
+													
 													<div class="mb-0">
 														<!--begin::Row-->
 														<div class="row mb-5">
