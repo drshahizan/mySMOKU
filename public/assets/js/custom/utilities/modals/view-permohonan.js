@@ -27,7 +27,7 @@ var KTCreateAccount = function () {
 				formSubmitButton.classList.add('d-inline-block');
 				formContinueButton.classList.add('d-none');
 			} else if (stepperObj.getCurrentStepIndex() === 8) {
-				formSubmitButton.classList.remove('d-none');
+				formSubmitButton.classList.add('d-none');
 				formContinueButton.classList.add('d-none');
 			} else {
 				formSubmitButton.classList.remove('d-inline-block');
@@ -53,10 +53,10 @@ var KTCreateAccount = function () {
 						KTUtil.scrollTop();
 					} else {
 						Swal.fire({
-							text: "Sorry, looks like there are some errors detected, please try again.",
+							text: "Sila lengkapkan maklumat yang diperlukan.",
 							icon: "error",
 							buttonsStyling: false,
-							confirmButtonText: "Ok, got it!",
+							confirmButtonText: "Ok",
 							customClass: {
 								confirmButton: "btn btn-light"
 							}
@@ -84,7 +84,7 @@ var KTCreateAccount = function () {
 	var handleForm = function() {
 		formSubmitButton.addEventListener('click', function (e) {
 			// Validate form before change stepper step
-			var validator = validations[3]; // get validator for last form
+			var validator = validations[6]; // get validator for last form
 
 			validator.validate().then(function (status) {
 				console.log('validated!');
@@ -125,23 +125,6 @@ var KTCreateAccount = function () {
 			});
 		});
 
-		// Expiry month. For more info, plase visit the official plugin site: https://select2.org/
-        $(form.querySelector('[name="card_expiry_month"]')).on('change', function() {
-            // Revalidate the field when an option is chosen
-            validations[3].revalidateField('card_expiry_month');
-        });
-
-		// Expiry year. For more info, plase visit the official plugin site: https://select2.org/
-        $(form.querySelector('[name="card_expiry_year"]')).on('change', function() {
-            // Revalidate the field when an option is chosen
-            validations[3].revalidateField('card_expiry_year');
-        });
-
-		// Expiry year. For more info, plase visit the official plugin site: https://select2.org/
-        $(form.querySelector('[name="business_type"]')).on('change', function() {
-            // Revalidate the field when an option is chosen
-            validations[2].revalidateField('business_type');
-        });
 	}
 
 	var initValidation = function () {
@@ -151,16 +134,26 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
-					account_type: {
+					'no_akaunbank': {
 						validators: {
 							notEmpty: {
-								message: 'Account type is required'
+								message: 'No. Akaun Bank diperlukan'
+							},
+							digits: {
+								message: 'No. Akaun Bank mesti mengandungi digit sahaja'
+							},
+							stringLength: {
+								min: 14,
+								max: 14,
+								message: 'No. Akaun Bank mesti mengandungi 14 digit sahaja'
 							}
 						}
 					}
+					
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
+					// Bootstrap Framework Integration
 					bootstrap: new FormValidation.plugins.Bootstrap5({
 						rowSelector: '.fv-row',
                         eleInvalidClass: '',
@@ -175,24 +168,31 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
-					'account_team_size': {
+					'alamatW1': {
 						validators: {
 							notEmpty: {
-								message: 'Time size is required'
+								message: 'Alamat rumah diperlukan'
 							}
 						}
 					},
-					'account_name': {
+					'alamatW_poskod': {
 						validators: {
 							notEmpty: {
-								message: 'Account name is required'
+								message: 'Poskod diperlukan'
 							}
 						}
 					},
-					'account_plan': {
+					'alamatW_bandar': {
 						validators: {
 							notEmpty: {
-								message: 'Account plan is required'
+								message: 'Bandar diperlukan'
+							}
+						}
+					},
+					'alamatW_negeri': {
+						validators: {
+							notEmpty: {
+								message: 'Negeri diperlukan'
 							}
 						}
 					}
@@ -214,34 +214,66 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
-					'business_name': {
+					'no_pendaftaranpelajar': {
 						validators: {
 							notEmpty: {
-								message: 'Busines name is required'
+								message: 'No. Pendaftaran Pelajar diperlukan'
 							}
 						}
 					},
-					'business_descriptor': {
+					'sesi': {
 						validators: {
 							notEmpty: {
-								message: 'Busines descriptor is required'
+								message: 'Sesi Pengajian diperlukan'
 							}
 						}
 					},
-					'business_type': {
+					'tkh_mula': {
 						validators: {
 							notEmpty: {
-								message: 'Busines type is required'
+								message: 'Tarikh Mula diperlukan'
 							}
 						}
 					},
-					'business_email': {
+					'tkh_tamat': {
 						validators: {
 							notEmpty: {
-								message: 'Busines email is required'
-							},
-							emailAddress: {
-								message: 'The value is not a valid email address'
+								message: 'Tarikh Mula diperlukan'
+							}
+						}
+					},
+					'sem_semasa': {
+						validators: {
+							notEmpty: {
+								message: 'Semester Semasa diperlukan'
+							}
+						}
+					},
+					'tempoh_pengajian': {
+						validators: {
+							notEmpty: {
+								message: 'Tempoh Pengajian diperlukan'
+							}
+						}
+					},
+					'bil_bulanpersem': {
+						validators: {
+							notEmpty: {
+								message: 'Bil Bulan Persemester diperlukan'
+							}
+						}
+					},
+					'mod': {
+						validators: {
+							notEmpty: {
+								message: 'Mod Pengajian diperlukan'
+							}
+						}
+					},
+					'sumber_biaya': {
+						validators: {
+							notEmpty: {
+								message: 'Sumber Biaya diperlukan'
 							}
 						}
 					}
@@ -262,50 +294,97 @@ var KTCreateAccount = function () {
 		validations.push(FormValidation.formValidation(
 			form,
 			{
+				/*fields: {
+					'amaun': {
+						validators: {
+							notEmpty: {
+								message: 'Amaun diperlukan'
+							}
+						}
+					}
+				},*/
+
+				plugins: {
+					trigger: new FormValidation.plugins.Trigger(),
+					// Bootstrap Framework Integration
+					bootstrap: new FormValidation.plugins.Bootstrap5({
+						rowSelector: '.fv-row',
+                        eleInvalidClass: '',
+                        eleValidClass: ''
+					})
+				}
+			}
+		));
+		// Step 5
+		validations.push(FormValidation.formValidation(
+			form,
+			{
 				fields: {
-					'card_name': {
+					'akaunBank': {
 						validators: {
 							notEmpty: {
-								message: 'Name on card is required'
-							}
-						}
-					},
-					'card_number': {
-						validators: {
-							notEmpty: {
-								message: 'Card member is required'
+								message: 'Salinan Bank diperlukan'
 							},
-                            creditCard: {
-                                message: 'Card number is not valid'
-                            }
-						}
-					},
-					'card_expiry_month': {
-						validators: {
-							notEmpty: {
-								message: 'Month is required'
-							}
-						}
-					},
-					'card_expiry_year': {
-						validators: {
-							notEmpty: {
-								message: 'Year is required'
-							}
-						}
-					},
-					'card_cvv': {
-						validators: {
-							notEmpty: {
-								message: 'CVV is required'
+							file: {
+								extension: 'jpeg,jpg,png,pdf',
+								type: 'image/jpeg,image/png,application/pdf',
+								maxSize: 2097152, // 2048 * 1024
+								message: 'Fail yang dipilih tidak sah',
 							},
-							digits: {
-								message: 'CVV must contain only digits'
+						}
+					},
+				
+					'suratTawaran': {
+						validators: {
+							notEmpty: {
+								message: 'Salinan Surat Tawaran diperlukan'
 							},
-							stringLength: {
-								min: 3,
-								max: 4,
-								message: 'CVV must contain 3 to 4 digits only'
+							file: {
+								extension: 'jpeg,jpg,png,pdf',
+								type: 'image/jpeg,image/png,application/pdf',
+								maxSize: 2097152, // 2048 * 1024
+								message: 'Fail yang dipilih tidak sah',
+							},
+						}
+					},
+				
+					'invoisResit': {
+						validators: {
+							notEmpty: {
+								message: 'Salinan Resit/Invois diperlukan'
+							},
+							file: {
+								extension: 'jpeg,jpg,png,pdf',
+								type: 'image/jpeg,image/png,application/pdf',
+								maxSize: 2097152, // 2048 * 1024
+								message: 'Fail yang dipilih tidak sah',
+							},
+						}
+					}
+				},
+
+
+				plugins: {
+					trigger: new FormValidation.plugins.Trigger(),
+					// Bootstrap Framework Integration
+					bootstrap: new FormValidation.plugins.Bootstrap5({
+						rowSelector: '.fv-row',
+                        eleInvalidClass: '',
+                        eleValidClass: ''
+					})
+				}
+			}
+		));
+
+		// Step 6
+		validations.push(FormValidation.formValidation(
+			form,
+			{
+				fields: {
+					'perakuan': {
+						validators: {
+							notEmpty: {
+								message: 'Perakuan diperlukan'
 							}
 						}
 					}
