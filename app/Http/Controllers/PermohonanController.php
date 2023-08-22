@@ -324,8 +324,8 @@ class PermohonanController extends Controller
         }
         
         $user = Status::create([
-            //'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
-            //'nokp_pelajar' => $request->nokp_pelajar,
+            'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
+            'nokp_pelajar' => $request->nokp_pelajar,
             'status' => '2',
     
         ]);
