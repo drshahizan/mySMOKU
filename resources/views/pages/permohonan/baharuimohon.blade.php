@@ -16,45 +16,10 @@
 														<!--begin::Wrapper-->
 														<div class="d-flex flex-column align-items-start flex-xxl-row">
 															<!--begin::Input group-->
-															<div class="d-flex align-items-center flex-equal fw-row me-4 order-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Specify invoice date">
-																<!--begin::Date-->
-																<div class="fs-6 fw-bold text-gray-700 text-nowrap">Date:</div>
-																<!--end::Date-->
-																<!--begin::Input-->
-																<div class="position-relative d-flex align-items-center w-150px">
-																	<!--begin::Datepicker-->
-																	<input class="form-control form-control-transparent fw-bold pe-5" placeholder="Select date" name="invoice_date" />
-																	<!--end::Datepicker-->
-																	<!--begin::Icon-->
-																	<i class="ki-duotone ki-down fs-4 position-absolute ms-4 end-0"></i>
-																	<!--end::Icon-->
-																</div>
-																<!--end::Input-->
+															<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
+																<span class="fs-2x fw-bold text-gray-800">Keputusan Peperiksaan Baru</span>
+																<!-- <input type="text" class="form-control form-control-flush fw-bold text-muted fs-3 w-125px" value="2021001" placehoder="..." /> -->
 															</div>
-															<!--end::Input group-->
-															<!--begin::Input group-->
-															<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Enter invoice number">
-																<span class="fs-2x fw-bold text-gray-800">Invoice #</span>
-																<input type="text" class="form-control form-control-flush fw-bold text-muted fs-3 w-125px" value="2021001" placehoder="..." />
-															</div>
-															<!--end::Input group-->
-															<!--begin::Input group-->
-															<div class="d-flex align-items-center justify-content-end flex-equal order-3 fw-row" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Specify invoice due date">
-																<!--begin::Date-->
-																<div class="fs-6 fw-bold text-gray-700 text-nowrap">Due Date:</div>
-																<!--end::Date-->
-																<!--begin::Input-->
-																<div class="position-relative d-flex align-items-center w-150px">
-																	<!--begin::Datepicker-->
-																	<input class="form-control form-control-transparent fw-bold pe-5" placeholder="Select date" name="invoice_due_date" />
-																	<!--end::Datepicker-->
-																	<!--begin::Icon-->
-																	<i class="ki-duotone ki-down fs-4 position-absolute end-0 ms-4"></i>
-																	<!--end::Icon-->
-																</div>
-																<!--end::Input-->
-															</div>
-															<!--end::Input group-->
 														</div>
 														<!--end::Top-->
 														<!--begin::Separator-->
@@ -66,42 +31,20 @@
 															<div class="row gx-10 mb-5">
 																<!--begin::Col-->
 																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Bill From</label>
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
 																		<input type="text" class="form-control form-control-solid" placeholder="Name" />
 																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder="Email" />
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="mb-5">
-																		<textarea name="notes" class="form-control form-control-solid" rows="3" placeholder="Who is this invoice from?"></textarea>
-																	</div>
-																	<!--end::Input group-->
 																</div>
 																<!--end::Col-->
 																<!--begin::Col-->
 																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Bill To</label>
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun Pengajian</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
 																		<input type="text" class="form-control form-control-solid" placeholder="Name" />
 																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder="Email" />
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="mb-5">
-																		<textarea name="notes" class="form-control form-control-solid" rows="3" placeholder="What is this invoice for?"></textarea>
-																	</div>
-																	<!--end::Input group-->
 																</div>
 																<!--end::Col-->
 															</div>
@@ -113,11 +56,9 @@
 																	<!--begin::Table head-->
 																	<thead>
 																		<tr class="border-bottom fs-7 fw-bold text-gray-700 text-uppercase">
-																			<th class="min-w-300px w-475px">Item</th>
-																			<th class="min-w-100px w-100px">QTY</th>
-																			<th class="min-w-150px w-150px">Price</th>
-																			<th class="min-w-100px w-150px text-end">Total</th>
-																			<th class="min-w-75px w-75px text-end">Action</th>
+																			<th class="min-w-300px w-100px">Salinan Keputusan Pengajian</th>
+																			<th class="min-w-100px w-150px">GPA</th>
+																			<th class="min-w-100px w-150px">CGPA</th>
 																		</tr>
 																	</thead>
 																	<!--end::Table head-->
@@ -126,7 +67,7 @@
 																		<tr class="border-bottom border-bottom-dashed" data-kt-element="item">
 																			<td class="pe-7">
 																				<input type="text" class="form-control form-control-solid mb-2" name="name[]" placeholder="Item name" />
-																				<input type="text" class="form-control form-control-solid" name="description[]" placeholder="Description" />
+																				<!-- <input type="text" class="form-control form-control-solid" name="description[]" placeholder="Description" /> -->
 																			</td>
 																			<td class="ps-0">
 																				<input class="form-control form-control-solid" type="number" min="1" name="quantity[]" placeholder="1" value="1" data-kt-element="quantity" />
@@ -134,8 +75,6 @@
 																			<td>
 																				<input type="text" class="form-control form-control-solid text-end" name="price[]" placeholder="0.00" value="0.00" data-kt-element="price" />
 																			</td>
-																			<td class="pt-8 text-end text-nowrap">$
-																			<span data-kt-element="total">0.00</span></td>
 																			<td class="pt-5 text-end">
 																				<button type="button" class="btn btn-sm btn-icon btn-active-color-primary" data-kt-element="remove-item">
 																					<i class="ki-duotone ki-trash fs-3">
