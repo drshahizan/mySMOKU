@@ -88,13 +88,10 @@
 															</div>
 														
 															
-															<!-- <table class="table d-none" data-kt-element="empty-template">
-																<tr data-kt-element="empty">
-																	<th colspan="5" class="text-muted text-center py-10">No items</th>
-																</tr>
-															</table> -->
-															<a href="#" class="btn btn-success hover-rotate-end">Hantar</a>
-															<a href="#" class="btn btn-danger hover-scale">Batal</a>
+														
+															<a href="#" class="btn btn-success">Hantar</a>
+															<a href="#" class="btn btn-danger">Batal</a>
+
 														</div>
 														<!--end::Wrapper-->
 													</form>
