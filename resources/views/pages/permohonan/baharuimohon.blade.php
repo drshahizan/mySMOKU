@@ -56,12 +56,52 @@
 																</div>
 																<!--end::Col-->
 															</div>
-															<!--end::Row-->
-															<!--begin::Table wrapper-->
-															<div class="table-responsive mb-10">
-																<!--begin::Table-->
+
+															<div class="row gx-10 mb-5">
+																<!--begin::Col-->
+																<div class="col-lg-6">
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Pengajian</label>
+																	<!--begin::Input group-->
+																	<div class="mb-5">
+																		<input type="text" class="form-control form-control-solid" type="number" min="1" name="quantity[]" placeholder="1" value="1" />
+																	</div>
+																</div>
+																<!--end::Col-->
+																<!--begin::Col-->
+																<div class="col-lg-6">
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">GPA</label>
+																	<!--begin::Input group-->
+																	<div class="mb-5">
+																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
+																	</div>
+																</div>
+																<!--end::Col-->
+															</div>
+															<div class="row gx-10 mb-5">
+																<!--begin::Col-->
+																<div class="col-lg-6">
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">CGPA</label>
+																	<!--begin::Input group-->
+																	<div class="mb-5">
+																		<input type="text" class="form-control form-control-solid" type="number" min="1" name="quantity[]" placeholder="1" value="1" />
+																	</div>
+																</div>
+																<!--end::Col-->
+																<!--begin::Col-->
+																<div class="col-lg-6">
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun Pengajian</label>
+																	<!--begin::Input group-->
+																	<div class="mb-5">
+																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
+																	</div>
+																</div>
+																<!--end::Col-->
+															</div>
+														
+															<!-- <div class="table-responsive mb-10">
+																
 																<table class="table g-5 gs-0 mb-0 fw-bold text-gray-700" data-kt-element="items">
-																	<!--begin::Table head-->
+																	
 																	<thead>
 																		<tr class="border-bottom fs-6 fw-bold text-gray-700 mb-3">
 																			<th class="min-w-300px w-100px">Salinan Keputusan Pengajian</th>
@@ -70,13 +110,12 @@
 																			<th class="min-w-100px w-150px">Tindakan</th>
 																		</tr>
 																	</thead>
-																	<!--end::Table head-->
-																	<!--begin::Table body-->
+																	
 																	<tbody>
 																		<tr class="border-bottom border-bottom-dashed" data-kt-element="item">
 																			<td class="pe-7">
 																				<input type="text" class="form-control form-control-solid mb-2" name="name[]" placeholder="Item name" />
-																				<!-- <input type="text" class="form-control form-control-solid" name="description[]" placeholder="Description" /> -->
+																			
 																			</td>
 																			<td class="ps-0">
 																				<input class="form-control form-control-solid" type="number" min="1" name="quantity[]" placeholder="1" value="1" data-kt-element="quantity" />
@@ -97,36 +136,10 @@
 																			</td>
 																		</tr>
 																	</tbody>
-																	<!--end::Table body-->
-																	<!--begin::Table foot-->
-																	<!-- <tfoot> 
-																		<tr class="border-top border-top-dashed align-top fs-6 fw-bold text-gray-700">
-																			<th class="text-primary">
-																				<button class="btn btn-link py-1" data-kt-element="add-item">Add item</button>
-																			</th>
-																			<th colspan="2" class="border-bottom border-bottom-dashed ps-0">
-																				<div class="d-flex flex-column align-items-start">
-																					<div class="fs-5">Subtotal</div>
-																					<button class="btn btn-link py-1" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Coming soon">Add tax</button>
-																					<button class="btn btn-link py-1" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Coming soon">Add discount</button>
-																				</div>
-																			</th>
-																			<th colspan="2" class="border-bottom border-bottom-dashed text-end">$
-																			<span data-kt-element="sub-total">0.00</span></th>
-																		</tr>
-																		<tr class="align-top fw-bold text-gray-700">
-																			<th></th>
-																			<th colspan="2" class="fs-4 ps-0">Total</th>
-																			<th colspan="2" class="text-end fs-4 text-nowrap">$
-																			<span data-kt-element="grand-total">0.00</span></th>
-																		</tr>
-																	</tfoot> -->
-																	<!--end::Table foot-->
 																</table>
 															</div>
-															<!--end::Table-->
-															<!--begin::Item template-->
-															<table class="table d-none" data-kt-element="item-template">
+															 -->
+															<!-- <table class="table d-none" data-kt-element="item-template">
 																<tr class="border-bottom border-bottom-dashed" data-kt-element="item">
 																	<td class="pe-7">
 																		<input type="text" class="form-control form-control-solid mb-2" name="name[]" placeholder="Item name" />
@@ -152,7 +165,7 @@
 																		</button>
 																	</td>
 																</tr>
-															</table>
+															</table> -->
 															<table class="table d-none" data-kt-element="empty-template">
 																<tr data-kt-element="empty">
 																	<th colspan="5" class="text-muted text-center py-10">No items</th>
@@ -184,7 +197,9 @@
 													<!--begin::Input group-->
 													<div class="mb-10">
 														<!--begin::Label-->
-														<label class="form-label fw-bold fs-6 text-gray-700">Keputusan Peperiksaan</label>
+														<label class="form-label fw-bold fs-4 text-gray-700">Keputusan Peperiksaan</label>
+														<br>
+														<br>
 														<div class="table-responsive">
 														<table class="table table-rounded table-striped border gy-7 gs-7" style="background-color:#FFFFE0;">
 													<thead>
