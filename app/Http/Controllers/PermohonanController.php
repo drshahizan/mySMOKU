@@ -289,6 +289,9 @@ class PermohonanController extends Controller
             $data->akaunBank=$filenameakaunBank;
             $data->suratTawaran=$filenamesuratTawaran;
             $data->invoisResit=$filenameinvoisResit;
+            $data->nota_akaunBank=$request->nota_akaunBank;
+            $data->nota_suratTawaran=$request->nota_suratTawaran;
+            $data->nota_invoisResit=$request->nota_invoisResit;
             
 
             $data->save();
@@ -329,7 +332,7 @@ class PermohonanController extends Controller
         $user->save();
 
 
-        /*$data=new dokumen();
+        $data=new dokumen();
         
           
             $akaunBank=$request->akaunBank;
@@ -355,9 +358,12 @@ class PermohonanController extends Controller
             $data->akaunBank=$filenameakaunBank;
             $data->suratTawaran=$filenamesuratTawaran;
             $data->invoisResit=$filenameinvoisResit;
+            $data->nota_akaunBank=$request->nota_akaunBank;
+            $data->nota_suratTawaran=$request->nota_suratTawaran;
+            $data->nota_invoisResit=$request->nota_invoisResit;
             
 
-            $data->save();*/
+            $data->save();
 
 
 
