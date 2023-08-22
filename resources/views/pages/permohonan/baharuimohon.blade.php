@@ -34,7 +34,7 @@
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder="Name" />
+																		<input type="text" class="form-control form-control-solid" type="number" min="1" name="quantity[]" placeholder="1" value="1" />
 																	</div>
 																</div>
 																<!--end::Col-->
@@ -43,7 +43,7 @@
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun Pengajian</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder="Name" />
+																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
 																	</div>
 																</div>
 																<!--end::Col-->
@@ -55,7 +55,7 @@
 																<table class="table g-5 gs-0 mb-0 fw-bold text-gray-700" data-kt-element="items">
 																	<!--begin::Table head-->
 																	<thead>
-																		<tr class="border-bottom fs-7 fw-bold text-gray-700 text-uppercase">
+																		<tr class="border-bottom fs-6 fw-bold text-gray-700 mb-3">
 																			<th class="min-w-300px w-100px">Salinan Keputusan Pengajian</th>
 																			<th class="min-w-100px w-150px">GPA</th>
 																			<th class="min-w-100px w-150px">CGPA</th>
@@ -90,7 +90,7 @@
 																	</tbody>
 																	<!--end::Table body-->
 																	<!--begin::Table foot-->
-																	<tfoot>
+																	<!-- <tfoot>
 																		<tr class="border-top border-top-dashed align-top fs-6 fw-bold text-gray-700">
 																			<th class="text-primary">
 																				<button class="btn btn-link py-1" data-kt-element="add-item">Add item</button>
@@ -111,7 +111,7 @@
 																			<th colspan="2" class="text-end fs-4 text-nowrap">$
 																			<span data-kt-element="grand-total">0.00</span></th>
 																		</tr>
-																	</tfoot>
+																	</tfoot> -->
 																	<!--end::Table foot-->
 																</table>
 															</div>
@@ -151,10 +151,10 @@
 															</table>
 															<!--end::Item template-->
 															<!--begin::Notes-->
-															<div class="mb-0">
+															<!-- <div class="mb-0">
 																<label class="form-label fs-6 fw-bold text-gray-700">Notes</label>
 																<textarea name="notes" class="form-control form-control-solid" rows="3" placeholder="Thanks for your business"></textarea>
-															</div>
+															</div> -->
 															<!--end::Notes-->
 														</div>
 														<!--end::Wrapper-->
@@ -216,10 +216,10 @@
 														</label>
 														<!--end::Option-->
 														<!--begin::Option-->
-														<label class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack">
+														<!-- <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack">
 															<span class="form-check-label ms-0 fw-bold fs-6 text-gray-700">Notes</span>
 															<input class="form-check-input" type="checkbox" value="" />
-														</label>
+														</label> -->
 														<!--end::Option-->
 													</div>
 													<!--end::Input group-->
