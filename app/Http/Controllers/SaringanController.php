@@ -181,4 +181,10 @@ class SaringanController extends Controller
         $catatan = Saringan::where('id_permohonan', $id_permohonan)->first();
         return view('pages.saringan.permohonanTelahDisaring',compact('permohonan','catatan','pelajar'));
     }
+
+    public function tuntutanTelahDisaring($id){
+        $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
+        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
+        return view('pages.saringan.tuntutanTelahDisaring',compact('permohonan','pelajar'));
+    }
 }
