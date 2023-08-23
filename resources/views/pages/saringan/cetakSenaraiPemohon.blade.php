@@ -222,18 +222,18 @@
                     <td class="text-center">20/07/2025</td>
                 </tr>
                 <tr>
-                    <td class="no">1.</td>                                            
+                    <td class="no">11.</td>                                            
                     <td>KPTPPK/3/B980112105666</td>
                     <td>PPK</td>
                     <td>Aishah Binti Samsudin</td>
                     <td>Pendengaran</td>                                       
                     <td>Sarjana Muda</td>
-                    <td>Bachelor Of Business Administration (Hons) In International Business And Finance</td>
+                    <td>Bachelor Of Business Administration (Hons) In International Business</td>
                     <td>UTAR</td>
                     <td class="text-center">02/07/2020</td>
                     <td class="text-center">20/07/2023</td>
                 </tr> 
-                <tr>
+                {{-- <tr>
                     <td class="no">2.</td>                                            
                     <td>KPTBKOKU/2/970703041223</td>
                     <td>BKOKU</td>
@@ -340,7 +340,7 @@
                     <td>UiTM(Shah Alam)</td>                                        
                     <td class="text-center">05/09/2022</td>
                     <td class="text-center">20/07/2025</td>
-                </tr>
+                </tr> --}}
             </tbody>
         </table>
         <footer>

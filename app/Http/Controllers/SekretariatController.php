@@ -127,7 +127,7 @@ class SekretariatController extends Controller
         $dom_pdf = $pdf->getDomPDF();
 
         $canvas = $dom_pdf ->get_canvas();
-        $canvas->page_text(400, 575, "Page {PAGE_NUM}", null, 8, array(0, 0, 0));
+        $canvas->page_text(400, 570, "Page {PAGE_NUM}", null, 8, array(0, 0, 0));
 
         return $pdf->stream('senarai-pemohon.pdf');;
     }
