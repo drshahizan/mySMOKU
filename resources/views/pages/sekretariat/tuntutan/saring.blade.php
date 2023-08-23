@@ -141,6 +141,7 @@
                                         @endphp
                                         <tr>                                            
                                             <td><a href="{{ url('maklumat-tuntutan-2/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a></td>
+                                            {{-- <td><a href="{{ url('tuntutan-telah-disaring/'.$item['nokp_pelajar']) }}" title="">{{$item['id_permohonan']}}</a></td> --}}
                                             <td>{{$nama_pemohon}}</td>
                                             <td>{{$item['program']}}</td>
                                             <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
