@@ -104,6 +104,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('dashboardpenyelaras', [PenyelarasController::class, 'store']);
     Route::get('keseluruhanPermohonan', [PenyelarasController::class, 'keseluruhanPermohonan'])->name('keseluruhanPermohonan');
     Route::get('borangPermohonanBaru/{id}', [PenyelarasController::class, 'borangPermohonanBaru'])->name('borangPermohonanBaru');
+    Route::post('borangPermohonanBaru', [PenyelarasController::class, 'simpan'])->name('simpan');
+    Route::post('hantar', [PenyelarasController::class, 'hantar'])->name('hantar');
 
     //TUntutan - Penyelaras
     Route::get('tuntutan-wang-saku', [PenyelarasController::class, 'tuntutanWangSaku']);
