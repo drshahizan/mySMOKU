@@ -389,8 +389,7 @@ $(document).ready(function(){
 														<div class="row mb-10">
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">No. Tel(HP)
-																</label>
+																<label class=" fs-6 fw-semibold form-label mb-2">No. Tel(HP)</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
 																<div class="col-12">
@@ -431,7 +430,8 @@ $(document).ready(function(){
 																</div>
 																<!--end::Input wrapper-->
 															</div>
-														<div class="separator my-14"></div>
+															
+														<div class="separator my-5"></div>
 														<div class="pb-10 pb-lg-15">
 															<!--begin::Title-->
 															<h2 class="fw-bold text-dark">Maklumat Sistem Maklumat Orang Kurang Upaya (SMOKU)</h2>
@@ -464,16 +464,16 @@ $(document).ready(function(){
 																<div class="col-12">
 																	<!--begin::Input-->
 																	<input type="text" class="form-control form-control-solid" placeholder="" value="{{$pelajar->kecacatan}}" readonly/>
-																	<input type="hidden" class="form-control form-control-solid" name="kecacatan" placeholder="" value="{{$pelajar->kodoku}}" readonly/>
+																	{{-- <input type="hidden" class="form-control form-control-solid" name="kecacatan" placeholder="" value="{{$pelajar->kodoku}}" readonly/> --}}
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
 															</div>
-															
 														</div>
+														
 														<!--end::Input group-->
 														<!--begin::Input group-->
-														<div class="separator my-14"></div>
+														<div class="separator my-5"></div>
 														<div class="pb-10 pb-lg-15">
 															<!--begin::Title-->
 															<h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
