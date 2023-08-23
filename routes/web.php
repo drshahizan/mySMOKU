@@ -103,7 +103,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboardpenyelaras', [PenyelarasController::class, 'create'])->name('dashboardpenyelaras');
     Route::post('dashboardpenyelaras', [PenyelarasController::class, 'store']);
     Route::get('keseluruhanPermohonan', [PenyelarasController::class, 'keseluruhanPermohonan'])->name('keseluruhanPermohonan');
-    Route::get('borangPermohonanBaru', [PenyelarasController::class, 'borangPermohonanBaru'])->name('borangPermohonanBaru');
+    Route::get('borangPermohonanBaru/{id}', [PenyelarasController::class, 'borangPermohonanBaru'])->name('borangPermohonanBaru');
 
     //TUntutan - Penyelaras
     Route::get('tuntutan-wang-saku', [PenyelarasController::class, 'tuntutanWangSaku']);

@@ -132,14 +132,17 @@ class PenyelarasController extends Controller
         return view('pages.penyelaras.permohonan.keseluruhanmohon');
     }
 
-    public function borangPermohonanBaru()
+    public function borangPermohonanBaru($nokp)
     {
+
+        //$nokp = $request->session()->get('nokp');
+        //dd($nokp);
         $smoku = Smoku::join('bk_jantina','bk_jantina.kodjantina','=','smoku.jantina')
         ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'smoku.bangsa')
         ->join('bk_hubungan','bk_hubungan.kodhubungan','=','smoku.hubungan')
         ->join('bk_jenisoku','bk_jenisoku.kodoku','=','smoku.kecacatan')
         ->get(['smoku.*', 'bk_jantina.*', 'bk_bangsa.*', 'bk_hubungan.*', 'bk_jenisoku.*'])
-        ->where('nokp', Auth::user()->id());
+        ->where('nokp', $nokp);
         $infoipt = Infoipt::all()->sortBy('namaipt');
         $peringkat = PeringkatPengajian::all()->sortBy('kodperingkat');
         $kursus = Kursus::all()->sortBy('nama_kursus');
