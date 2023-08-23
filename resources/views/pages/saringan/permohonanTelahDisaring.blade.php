@@ -73,8 +73,6 @@
                                     </table>                           
                                 </div>
                                 <br>
-                            <form method="POST" action="{{ url('tuntutan-telah-disaring/'.$pelajar->nokp_pelajar) }}" id="saring">
-                                {{csrf_field()}}
                             <div class="row clearfix">
                                 <div class="col-md-12">
                                     <div class="table-responsive">
@@ -92,7 +90,7 @@
                                                     <tr>
                                                         <td style="text-align:right;">1</td>
                                                         <td>
-                                                            <span><a href="{{ url('maklumat-profil-diri/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Profil Diri</a></span>
+                                                            <span><a href="{{ url('maklumat/profil/diri/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Profil Diri</a></span>
                                                         </td>  
                                                         <td class="hidden-sm-down">
                                                             Lengkap
@@ -104,7 +102,7 @@
                                                     <tr>
                                                         <td style="text-align:right;">2</td>
                                                         <td>
-                                                            <span><a href="{{ url('maklumat-akademik/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Akademik</a></span>
+                                                            <span><a href="{{ url('maklumat/akademik/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Akademik</a></span>
                                                         </td>
                                                         <td class="hidden-sm-down">
                                                             Lengkap
@@ -116,7 +114,7 @@
                                                     <tr>
                                                         <td style="text-align:right;">3</td>
                                                         <td>
-                                                            <span><a href="{{ url('salinan-dokumen/'.$pelajar->nokp_pelajar) }}" target="_blank">Salinan Dokumen</a></span>
+                                                            <span><a href="{{ url('salinan/dokumen/'.$pelajar->nokp_pelajar) }}" target="_blank">Salinan Dokumen</a></span>
                                                         </td>
                                                     <td class="hidden-sm-down">
                                                         Lengkap
@@ -141,7 +139,7 @@
                                                     <tr>
                                                         <td style="text-align:right;">1</td>
                                                         <td>
-                                                            <span><a href="{{ url('maklumat-profil-diri/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Profil Diri</a></span>
+                                                            <span><a href="{{ url('maklumat/profil/diri/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Profil Diri</a></span>
                                                         </td>  
                                                         <td class="hidden-sm-down">
                                                             @if ($catatan->catatan_profilDiri == null)
@@ -163,7 +161,7 @@
                                                     <tr>
                                                         <td style="text-align:right;">2</td>
                                                         <td>
-                                                            <span><a href="{{ url('maklumat-akademik/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Akademik</a></span>
+                                                            <span><a href="{{ url('maklumat/akademik/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Akademik</a></span>
                                                         </td>
                                                         <td class="hidden-sm-down">
                                                             @if ($catatan->catatan_akademik == null)
@@ -185,7 +183,7 @@
                                                     <tr>
                                                         <td style="text-align:right;">3</td>
                                                         <td>
-                                                            <span><a href="{{ url('salinan-dokumen/'.$pelajar->nokp_pelajar) }}" target="_blank">Salinan Dokumen</a></span>
+                                                            <span><a href="{{ url('salinan/dokumen/'.$pelajar->nokp_pelajar) }}" target="_blank">Salinan Dokumen</a></span>
                                                         </td>
                                                     <td class="hidden-sm-down">
                                                         @if ($catatan->catatan_salinanDokumen == null)
@@ -216,8 +214,8 @@
                                 <div class="col-md-6">
                                     </div>
                                 <div class="col-md-6 text-right">
-                                   <a href="{{ url('tuntutan/telah/disaring/'.$pelajar->nokp_pelajar) }}"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan</a> </button>
-                                </form>                                
+                                   <a href="{{ url('tuntutan/telah/disaring/'.$pelajar->nokp_pelajar) }}"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </a></button>
+                                                               
                             </div> 
                         </div>
                     </div>                                       
