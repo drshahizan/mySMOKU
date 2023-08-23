@@ -730,15 +730,16 @@
 																<!--end::Heading-->
 																@foreach ($akademikmqa as $akademik)
 																<!--begin::Input group-->
-
 																<div class="d-flex flex-column mb-7 fv-row">
 																	<!--begin::Label-->
 																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																		<span class="">No Pendaftaran Pelajar</span>
+																		<span class="">Nama Pusat Pengajian</span>
 																		
 																	</label>
 																	<!--end::Label-->
-																	<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaranpelajar" name="no_pendaftaranpelajar" value="" />
+																	<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																		<option value="{{ $akademik->idipt}}">{{ $akademik->namaipt}}</option>
+																	</select>
 																</div>
 																<div class="d-flex flex-column mb-7 fv-row">
 																	<!--begin::Label-->
@@ -751,23 +752,13 @@
 																		<option value="{{ $akademik->nama_kursus}}">{{ $akademik->nama_kursus}}</option>
 																	</select>
 																</div>
-																<div class="d-flex flex-column mb-7 fv-row">
-																	<!--begin::Label-->
-																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																		<span class="">Nama Pusat Pengajian</span>
-																		
-																	</label>
-																	<!--end::Label-->
-																	<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																		<option value="{{ $akademik->idipt}}">{{ $akademik->namaipt}}</option>
-																	</select>
-																</div>
-																<!--end::Input group-->
-
+																
+																
+							
 																<!--begin::Input group-->
 																<div class="row mb-10">
 																	<!--begin::Col-->
-																	<div class="col-md-6 fv-row">
+																	<div class="col-md-4 fv-row">
 																		<!--begin::Label-->
 																		<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
 																		<!--end::Label-->
@@ -783,7 +774,7 @@
 																	</div>
 																	<!--end::Col-->
 																	<!--begin::Col-->
-																	<div class="col-md-6 fv-row">
+																	<div class="col-md-4 fv-row">
 																		<!--begin::Label-->
 																		<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
 																		<span class="">Sesi Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
@@ -793,7 +784,15 @@
 																			<input type="text" class="form-control form-control-solid" placeholder="" id="sesi" name="sesi" value="" />
 																			<!--end::Input wrapper-->
 																	</div>
-																	<!--end::Col-->
+																	<div class="col-md-4 fv-row">
+																		<!--begin::Label-->
+																		<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																		<span class="">No Pendaftaran Pelajar</span>
+																		
+																	</label>
+																	<!--end::Label-->
+																	<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaranpelajar" name="no_pendaftaranpelajar" value="" />
+</div>
 																</div>
 																<!--end::Input group-->
 																@endforeach
