@@ -74,24 +74,24 @@
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">GPA</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
+																		<input type="text" class="form-control form-control-solid" placeholder="" />
 																	</div>
 																</div>
 																<div class="col-lg-6">
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">CGPA</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid"  placeholder="1" />
+																		<input type="text" class="form-control form-control-solid"  placeholder="" />
 																	</div>
 																</div>
 																
 															</div>
 														
 															
-														
+															<div class="text-align: center">
 															<a href="#" class="btn btn-success">Hantar</a>
 															<a href="#" class="btn btn-danger">Batal</a>
-
+															</div>
 														</div>
 														<!--end::Wrapper-->
 													</form>
