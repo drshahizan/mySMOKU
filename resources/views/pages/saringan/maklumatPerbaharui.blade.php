@@ -38,7 +38,7 @@
                                     <p><strong>ID Permohonan: </strong> KPTBKOKU/3/950623035672</p>                                    
                                 </div>
                             </div>
-                            <form method="POST" action="{{ url('saring-maklumat-pemohon') }}" id="saring">
+                            <form method="POST" action="{{ url('saring/maklumat/pemohon') }}" id="saring">
                                 {{csrf_field()}}
                             <div class="row clearfix">
                                 <div class="col-md-12">

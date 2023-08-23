@@ -69,7 +69,7 @@
                                     </table>                           
                                 </div>
                                 <br>
-                            <form method="POST" action="{{ url('saring-maklumat-pemohon/'.$pelajar->nokp_pelajar) }}" id="saring">
+                            <form method="POST" action="{{ url('saring/maklumat/pemohon/'.$pelajar->nokp_pelajar) }}" id="saring">
                                 {{csrf_field()}}
                             <div class="row clearfix">
                                 <div class="col-md-12">
@@ -87,7 +87,7 @@
                                                 <tr>
                                                     <td style="text-align:right;">1</td>
                                                     <td>
-                                                        <span><a href="{{ url('maklumat-profil-diri/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Profil Diri</a></span>
+                                                        <span><a href="{{ url('maklumat/profil/diri/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Profil Diri</a></span>
                                                     </td>           
                                                     <td class="hidden-sm-down">
                                                        
@@ -107,7 +107,7 @@
                                                 <tr>
                                                     <td style="text-align:right;">2</td>
                                                     <td>
-                                                        <span><a href="{{ url('maklumat-akademik/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Akademik</a></span>
+                                                        <span><a href="{{ url('maklumat/akademik/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Akademik</a></span>
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <div class="form-group c_form_group">
@@ -128,7 +128,7 @@
                                                 <tr>
                                                     <td style="text-align:right;">3</td>
                                                     <td>
-                                                        <span><a href="{{ url('salinan-dokumen/'.$pelajar->nokp_pelajar) }}" target="_blank">Salinan Dokumen</a></span>
+                                                        <span><a href="{{ url('salinan/dokumen/'.$pelajar->nokp_pelajar) }}" target="_blank">Salinan Dokumen</a></span>
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <!--<div class="col-lg-12 col-md-12">-->
