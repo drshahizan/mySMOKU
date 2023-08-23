@@ -6,7 +6,7 @@
     </div> --}}
     <!--end::Search-->
     <!--begin::Activities-->
-	<div class="app-navbar-item ms-1 ms-md-4">
+	{{-- <div class="app-navbar-item ms-1 ms-md-4">
         <!--begin::Drawer toggle-->
 		<!-- <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px" id="kt_activities_toggle">{!! getIcon('messages', 'fs-2') !!}</div> -->
         <!--end::Drawer toggle-->
@@ -34,7 +34,7 @@
 		<!-- <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">{!! getIcon('element-11', 'fs-2') !!}</div> -->
         @include('partials/menus/_my-apps-menu') 
         <!--end::Menu wrapper-->
-    </div>
+    </div> --}}
     <!--end::My apps links-->
     <!--begin::User menu-->
 	<div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
