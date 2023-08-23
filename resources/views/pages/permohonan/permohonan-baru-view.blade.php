@@ -432,44 +432,43 @@ $(document).ready(function(){
 															</div>
 															
 														<div class="separator my-5"></div>
-														<div class="pb-10 pb-lg-15">
-															<!--begin::Title-->
-															<h2 class="fw-bold text-dark">Maklumat Sistem Maklumat Orang Kurang Upaya (SMOKU)</h2>
-															<!--end::Title-->
-															<!--begin::Notice-->
-															<div class="text-muted fw-semibold fs-6">Jabatan Kebajikan Malaysia 
-															</div>
-															<!--end::Notice-->
-														</div>
-														<div class="row mb-10">
-															<div class="col-md-6 fv-row">
-																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">No. JKM
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="noJKM" placeholder="" value="{{$pelajar->noJKM}}"  readonly/>
-																	<!--end::Input-->
+															<div class="pb-10 pb-lg-15">
+																<!--begin::Title-->
+																<h2 class="fw-bold text-dark">Maklumat Sistem Maklumat Orang Kurang Upaya (SMOKU)</h2>
+																<!--end::Title-->
+																<!--begin::Notice-->
+																<div class="text-muted fw-semibold fs-6">Jabatan Kebajikan Malaysia 
 																</div>
-																<!--end::Input wrapper-->
+																<!--end::Notice-->
 															</div>
-															<div class="col-md-6 fv-row">
-																<!--begin::Label-->
-																<label class="fs-6 fw-semibold form-label mb-2">Kecacatan
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" placeholder="" value="{{$pelajar->kecacatan}}" readonly/>
-																	{{-- <input type="hidden" class="form-control form-control-solid" name="kecacatan" placeholder="" value="{{$pelajar->kodoku}}" readonly/> --}}
-																	<!--end::Input-->
+															<div class="row">
+																<div class="col-md-6 fv-row">
+																	<!--begin::Label-->
+																	<label class=" fs-6 fw-semibold form-label mb-2">No. JKM
+																	</label>
+																	<!--end::Label-->
+																	<!--begin::Input wrapper-->
+																	<div class="col-12">
+																		<!--begin::Input-->
+																		<input type="text" class="form-control form-control-solid" name="noJKM" placeholder="" value="{{$pelajar->noJKM}}"  readonly/>
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input wrapper-->
 																</div>
-																<!--end::Input wrapper-->
+																<div class="col-md-6 fv-row">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold form-label mb-2">Kecacatan</label>
+																	<!--end::Label-->
+																	<!--begin::Input wrapper-->
+																	<div class="col-12">
+																		<!--begin::Input-->
+																		<input type="text" class="form-control form-control-solid" placeholder="" value="{{$pelajar->kecacatan}}" readonly/>
+																		{{-- <input type="hidden" class="form-control form-control-solid" name="kecacatan" placeholder="" value="{{$pelajar->kodoku}}" readonly/> --}}
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input wrapper-->
+																</div>
 															</div>
-														</div>
 														
 														<!--end::Input group-->
 														<!--begin::Input group-->
