@@ -88,7 +88,7 @@
 															</div>
 														
 															
-															<div class="text-align: center">
+															<div class="text-align-center">
 															<a href="#" class="btn btn-success">Hantar</a>
 															<a href="#" class="btn btn-danger">Batal</a>
 															</div>
