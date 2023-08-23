@@ -82,7 +82,8 @@ class PermohonanController extends Controller
         {
             return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
 
-        } else if ($statuspermohonan == '1')
+        } 
+        else if ($statuspermohonan == '1')
         {
             return view('pages.permohonan.permohonan-baru-kemaskini', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen','negeri'));
         }
