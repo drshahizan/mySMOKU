@@ -69,7 +69,7 @@
 																		<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">1689</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
-																		<span class="text-white fw-bold fs-7">Permohonan Aktif</span>
+																		<span class="text-white fw-bold fs-7">Aktif</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
 																		
@@ -100,7 +100,7 @@
 																		<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">300</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
-																		<span class="text-white fw-bold fs-7">Permohonan Tidak Aktif</span>
+																		<span class="text-white fw-bold fs-7">Tidak Aktif</span>
 																		<!--end::Desc-->
 																	</div>
 																	<!--end::Stats-->
@@ -222,7 +222,7 @@
 																		<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">1689</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
-																		<span class="text-white fw-bold fs-7">Permohonan Aktif</span>
+																		<span class="text-white fw-bold fs-7">Aktif</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
 																		
@@ -253,7 +253,7 @@
 																		<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">500</span>
 																		<!--end::Number-->
 																		<!--begin::Desc-->
-																		<span class="text-white fw-bold fs-7">Permohonan Tidak Aktif</span>
+																		<span class="text-white fw-bold fs-7">Tidak Aktif</span>
 																		<!--end::Desc-->
 																	</div>
 																	<!--end::Stats-->
