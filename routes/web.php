@@ -94,7 +94,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Tuntutan - Sekretariat
     Route::get('tuntutan-keseluruhan', [SekretariatController::class, 'tuntutanKeseluruhan']);
     Route::get('tuntutan-saring', [SekretariatController::class, 'tuntutanSaring']);
-    Route::get('maklumat-tuntutan-2/{no_kp}', [SekretariatController::class, 'maklumatTuntutan2'])->name('no_kp');
+    Route::get('maklumat-tuntutan-2/{no_kp}', [SekretariatController::class, 'maklumatTuntutan2'])->name('maklumat.tuntutan2.no_kp');
     Route::get('tuntutan-kelulusan', [SekretariatController::class, 'tuntutanKelulusan']);
     Route::get('tuntutan-keputusan', [SekretariatController::class, 'tuntutanKeputusan']);
 
