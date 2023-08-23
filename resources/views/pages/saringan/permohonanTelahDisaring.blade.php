@@ -216,7 +216,7 @@
                                 <div class="col-md-6">
                                     </div>
                                 <div class="col-md-6 text-right">
-                                    <button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan</button>
+                                   <a href="{{ url('tuntutan-telah-disaring/'.$pelajar->nokp_pelajar) }}"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan</a> </button>
                                 </form>                                
                             </div> 
                         </div>

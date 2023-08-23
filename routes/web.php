@@ -77,6 +77,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('cetak-maklumat-pemohon', [SaringanController::class, 'cetakMaklumatPemohon']);
     Route::post('saring-maklumat-pemohon/{no_kp}', [SaringanController::class, 'saringMaklumat']);
     Route::get('permohonan-telah-disaring/{no_kp}', [SaringanController::class, 'permohonanTelahDisaring'])->name('no_kp');
+    Route::get('tuntutan-telah-disaring/{no_kp}', [SaringanController::class, 'tuntutanTelahDisaring'])->name('no_kp');
 
     //Permohonan - Sekretariat
     Route::get('keseluruhanPermohonan', [SekretariatController::class, 'statusPermohonan']);
