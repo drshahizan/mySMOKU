@@ -133,7 +133,7 @@ $(document).ready(function(){
 															<!--begin::Label-->
 															<div class="stepper-label">
 																<h3 class="stepper-title">Maklumat Tuntutan</h3>
-																<div class="stepper-desc fw-semibold">Yuran Tuntutan dan Elauan Wang Saku</div>
+																<div class="stepper-desc fw-semibold">Tuntutan Yuran dan Elaun Wang Saku</div>
 															</div>
 															<!--end::Label-->
 															
