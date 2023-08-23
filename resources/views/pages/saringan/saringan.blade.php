@@ -44,8 +44,8 @@
                 $belum_disaring = DB::table('permohonan')->where('status', 2)->count();
                 $dikembalikan = DB::table('permohonan')->where('status', 5)->count();
                 $disokong = DB::table('permohonan')->where('status', 4)->count();
-                // $sedang_disaring = DB::table('permohonan')->where('status', 3)->count();
-                $keseluruhan = $belum_disaring + $dikembalikan + $disokong;
+                $sedang_disaring = DB::table('permohonan')->where('status', 3)->count();
+                $keseluruhan = $belum_disaring + $dikembalikan + $disokong + $sedang_disaring;
             @endphp       
             <div class="row clearfix">
                 <div class="col-lg-3 col-md-4">
