@@ -636,7 +636,7 @@ $(document).ready(function(){
 																<div class="col-12">
 																	<!--begin::Input-->
 																	<select id='alamatW_bandar'  name='alamatW_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-																		<option value="111111">Pilih</option>
+																		<option value="">Pilih</option>
 																	</select>
 																	<!--end::Input-->
 																</div>
@@ -1263,7 +1263,7 @@ $(document).ready(function(){
 				// institusi Change
 				$('#alamatW_negeri').change(function(){
 
-							// institusi id
+							// negeri id
 							var id = $(this).val();
 							//alert(id);
 
@@ -1272,7 +1272,8 @@ $(document).ready(function(){
 
 							// AJAX request 
 							$.ajax({
-								url: 'getBandar/'+id,
+								alert(id);
+								url: 'bandar/'+id,
 								type: 'get',
 								dataType: 'json',
 								success: function(response){
@@ -1288,6 +1289,7 @@ $(document).ready(function(){
 
 											var id = response['data'][i].id;
 											var nama = response['data'][i].nama;
+											
 
 											var option = "<option value='"+id+"'>"+nama+"</option>";
 
