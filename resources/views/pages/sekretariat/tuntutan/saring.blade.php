@@ -10,6 +10,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
     </head>
     {{-- begin alert --}}
     @if($status == "Permohonan Telah Disokong")
@@ -116,169 +120,108 @@
                         </div>
                         <div class="body">
                             <div class="table-responsive">
-                                <table id="sortTable" class="table table-striped table-hover dataTable js-exportable">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 17%"><b>ID Tuntutan</b></th>                                        
-                                            <th style="width: 33%"><b>Nama</b></th>
-                                            <th style="width: 15%"><b>Jenis Permohonan</b></th>
-                                            <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
-                                            <th style="width: 15%" class="text-center"><b>Status Saringan</b></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($permohonan as $item)
-                                        @php
-                                            $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                            $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
-                                            $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
-                                            if ($item['status']==2){
-                                                $status='Belum Disaring';
-                                            }
-                                            if ($item['status']==3){
-                                                $status='Sedang Disaring';
-                                            }
-                                        @endphp
-                                        <tr>                                            
-                                            <td><a href="{{ url('maklumat-tuntutan-2/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a></td>
-                                            {{-- <td><a href="{{ url('tuntutan-telah-disaring/'.$item['nokp_pelajar']) }}" title="">{{$item['id_permohonan']}}</a></td> --}}
-                                            <td>{{$nama_pemohon}}</td>
-                                            <td>{{$item['program']}}</td>
-                                            <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                            @if ($item['status']=='2')
-                                            <td class="text-center"><button class="btn bg-orange text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($item['status']=='3')
-                                                <td class="text-center"><button class="btn bg-pink text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($item['status']=='4')
-                                                <td class="text-center"><button class="btn bg-green text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($item['status']=='5')
-                                                <td class="text-center"><button class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
-                                            @endif
-                                        </tr>
-                                        @endforeach
-                                        {{-- <tr>
-                                            <td>Ali Bin Abu</td>
-                                            <td><a href="{{ url('maklumat-pemohon'. $row['id_permohonan']) }}" title="">SARJANABKOKU000011</a></td>
-                                            <td>BKOKU</td>
-                                            <td>7/07/2023</td>
-                                            <td><button class="btn bg-orange text-white"> Belum Disaring </button></td>
-                                        </tr> --}}
-                                        {{-- <tr>                                            
-                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTBKOKU/3/950623035672</a></td>
-                                            <td>Wan Nurul Syafiqah Binti Wan Sahak</td>
-                                            <td>BKOKU</td>
-                                            <td class="text-center">05/07/2023</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
-                                        </tr>
-                                        <tr>                                            
-                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTBKOKU/3/898987890098</a></td>
-                                            <td>Siti Aisyah Binti Ismail</td>
-                                            <td>BKOKU</td>
-                                            <td class="text-center">07/07/2023</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
-                                        </tr>
-                                        <tr>                                            
-                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTBKOKU/6/900623035672</a></td>
-                                            <td>Wan Aminah Binti Wan Hasan</td>
-                                            <td>BKOKU</td>
-                                            <td class="text-center">09/07/2023</td>
-                                            <td class="text-center"><button class="btn btn-warning"> Sedang Disaring </button></td>
-                                        </tr>
-                                        <tr>                                            
-                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTBKOKU/2/950623098909</a></td>
-                                            <td>Muhammad Aiman Bin Hamid</td>
-                                            <td>BKOKU</td>
-                                            <td class="text-center">29/07/2023</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
-                                        </tr>
-                                        <tr>                                            
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/990404080221</a></td>
-                                            <td>Mohd Ali Bin Abu Kassim</td>
-                                            <td>BKOKU</td>
-                                            <td class="text-center">04/07/2023</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring </button></td>
-                                        </tr>
-                                        <tr>                                            
-                                            <td><a href="{{ url('maklumat-perbaharui') }}" title="">KPTPPK/2/970204052445</a></td>
-                                            <td>Sarah Binti Yusri</td>
-                                            <td>PPK</td>                                        
-                                            <td class="text-center">05/07/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning"> Sedang Disaring</button></td>
-                                        </tr> <tr>                                            
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/2/980112105666</a></td>
-                                            <td>Aishah Binti Samsudin</td>
-                                            <td>BKOKU</td>                                       
-                                            <td class="text-center">02/07/2023</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
-                                        </tr> <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/970703041223</a></td>
-                                            <td>Santosh A/L Ariyaran</td>
-                                            <td>BKOKU</td>                                        
-                                            <td class="text-center">10/07/2023</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
-                                        </tr> <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/3/960909105668</a></td>
-                                            <td>Ling Kai Jie</td>
-                                            <td>BKOKU</td>                                        
-                                            <td class="text-center">09/07/2023</td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning"> Sedang Disaring</button></td>
-                                        </tr> <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/3/950804082447</a></td>
-                                            <td>Akmal Bin Kairuddin</td>
-                                            <td>PPK</td>                                        
-                                            <td class="text-center">07/07/2023</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/1/021212050334</a></td>
-                                            <td>Santishwaran A/L Paven</td>
-                                            <td>PPK</td>                                        
-                                            <td class="text-center">05/07/2023</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/1/001205034745</a></td>
-                                            <td>Choo Mei Ling</td>
-                                            <td>BKOKU</td>
-                                            <td class="text-center">07/06/2023</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/890201065225</a></td>
-                                            <td>Ezra Hanisah Binti Md Yunos</td>
-                                            <td>BKOKU</td>                                    
-                                            <td class="text-center">09/02/2023</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
-                                        </tr><tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/1/010305058473</a></td>
-                                            <td>Arshahad Bin Kairul Zaman</td>
-                                            <td>PPK</td>                                        
-                                            <td class="text-center">07/07/2023</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTPPK/2/981004045253</a></td>
-                                            <td>Syed Abdul Kassim Hussain Yusof</td>
-                                            <td>PPK</td>                                        
-                                            <td class="text-center">05/07/2023</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/1/990201051446</a></td>
-                                            <td>Shakira Mariam Aqilah Binti Syed Abdul Rahman</td>
-                                            <td>BKOKU</td>                                        
-                                            <td class="text-center">07/06/2023</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="{{ url('maklumat-pemohon') }}" title="">KPTBKOKU/4/940524032341</a></td>
-                                            <td>Rahman Mohammed Arshahad Al-dhaqm</td>
-                                            <td>BKOKU</td>                                    
-                                            <td class="text-center">09/02/2023</td>
-                                            <td class="text-center"><button class="btn bg-orange text-white"> Belum Disaring</button></td>
-                                        </tr> --}}
-                                    </tbody>
-                                </table>
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                      <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">BKOKU</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                      <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">PPK</button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <table id="sortTable" class="table table-striped table-hover dataTable js-exportable">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 17%"><b>ID Tuntutan</b></th>                                        
+                                                    <th style="width: 33%"><b>Nama</b></th>
+                                                    <th style="width: 15%"><b>Jenis Permohonan</b></th>
+                                                    <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
+                                                    <th style="width: 15%" class="text-center"><b>Status Saringan</b></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($permohonan as $item)
+                                                @php
+                                                    $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                                    $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
+                                                    $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                                    if ($item['status']==2){
+                                                        $status='Belum Disaring';
+                                                    }
+                                                    if ($item['status']==3){
+                                                        $status='Sedang Disaring';
+                                                    }
+                                                @endphp
+                                                @if($item['program']=="BKOKU")
+                                                    <tr>                                            
+                                                        <td><a href="{{ url('maklumat-tuntutan-2/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a></td>
+                                                        {{-- <td><a href="{{ url('tuntutan-telah-disaring/'.$item['nokp_pelajar']) }}" title="">{{$item['id_permohonan']}}</a></td> --}}
+                                                        <td>{{$nama_pemohon}}</td>
+                                                        <td>{{$item['program']}}</td>
+                                                        <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        @if ($item['status']=='2')
+                                                        <td class="text-center"><button class="btn bg-orange text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif ($item['status']=='3')
+                                                            <td class="text-center"><button class="btn bg-pink text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif ($item['status']=='4')
+                                                            <td class="text-center"><button class="btn bg-green text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif ($item['status']=='5')
+                                                            <td class="text-center"><button class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
+                                                        @endif
+                                                    </tr>
+                                                @endif
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <table id="sortTable" class="table table-striped table-hover dataTable js-exportable">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 17%"><b>ID Tuntutan</b></th>                                        
+                                                    <th style="width: 33%"><b>Nama</b></th>
+                                                    <th style="width: 15%"><b>Jenis Permohonan</b></th>
+                                                    <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
+                                                    <th style="width: 15%" class="text-center"><b>Status Saringan</b></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($permohonan as $item)
+                                                @php
+                                                    $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                                    $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
+                                                    $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                                    if ($item['status']==2){
+                                                        $status='Belum Disaring';
+                                                    }
+                                                    if ($item['status']==3){
+                                                        $status='Sedang Disaring';
+                                                    }
+                                                @endphp
+                                                @if($item['program']=="PPK")
+                                                    <tr>                                            
+                                                        <td><a href="{{ url('maklumat-tuntutan-2/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a></td>
+                                                        {{-- <td><a href="{{ url('tuntutan-telah-disaring/'.$item['nokp_pelajar']) }}" title="">{{$item['id_permohonan']}}</a></td> --}}
+                                                        <td>{{$nama_pemohon}}</td>
+                                                        <td>{{$item['program']}}</td>
+                                                        <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        @if ($item['status']=='2')
+                                                        <td class="text-center"><button class="btn bg-orange text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif ($item['status']=='3')
+                                                            <td class="text-center"><button class="btn bg-pink text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif ($item['status']=='4')
+                                                            <td class="text-center"><button class="btn bg-green text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif ($item['status']=='5')
+                                                            <td class="text-center"><button class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
+                                                        @endif
+                                                    </tr>
+                                                @endif
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
