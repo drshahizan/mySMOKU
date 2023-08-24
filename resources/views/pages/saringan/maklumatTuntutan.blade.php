@@ -9,6 +9,7 @@
             border: none!important;
         }
         .table{
+            width: 45%;
             table-layout: fixed;
         }
         .table td, .table th, .table2 td, .table2 th{
