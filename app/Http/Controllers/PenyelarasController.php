@@ -135,12 +135,12 @@ class PenyelarasController extends Controller
         return view('pages.penyelaras.permohonan.keseluruhanmohon');
     }
 
-    public function borangPermohonanBaru($nokp)
+    public function borangPermohonanBaru()
     {
 
         //$nokp = $request->session()->get('nokp_pelajar');
         //dd($nokp);
-        $smoku = Smoku::join('bk_jantina','bk_jantina.kodjantina','=','smoku.jantina')
+        /*$smoku = Smoku::join('bk_jantina','bk_jantina.kodjantina','=','smoku.jantina')
         ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'smoku.bangsa')
         ->join('bk_hubungan','bk_hubungan.kodhubungan','=','smoku.hubungan')
         ->join('bk_jenisoku','bk_jenisoku.kodoku','=','smoku.kecacatan')
@@ -175,8 +175,9 @@ class PenyelarasController extends Controller
         ->where('nokp_pelajar', $nokp);
         $status = Status::all()->where('nokp_pelajar', $nokp);
         $dokumen = Dokumen::all()->where('nokp_pelajar', $nokp);
-        $negeri = Negeri::orderby("kod","asc")->select('id','nama')->get();
-        return view('pages.penyelaras.permohonan.mohonbaruform', compact('smoku','hubungan','akademikmqa','infoipt','peringkat','kursus','mod','biaya','negeri'));
+        $negeri = Negeri::orderby("kod","asc")->select('id','nama')->get();*/
+        //return view('pages.penyelaras.permohonan.mohonbaruform', compact('smoku','hubungan','akademikmqa','infoipt','peringkat','kursus','mod','biaya','negeri'));
+        return view('pages.penyelaras.permohonan.mohonbaruform');
     }
 
     public function simpan(Request $request)
