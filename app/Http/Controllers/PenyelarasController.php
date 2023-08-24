@@ -179,6 +179,19 @@ class PenyelarasController extends Controller
         return view('pages.penyelaras.permohonan.mohonbaruform', compact('smoku','hubungan','akademikmqa','infoipt','peringkat','kursus','mod','biaya','negeri'));
     }
 
+    // Fetch records
+   public function getBandar($id=0){
+
+    // Fetch kursus by idipt
+    $bandarData['data'] = Bandar::orderby("nama","asc")
+         ->select('id','nama','negeri')
+         ->where('negeri',$id)
+         ->get();
+
+         return response()->json($bandarData);
+
+}
+
     public function simpan(Request $request)
     {   
 
