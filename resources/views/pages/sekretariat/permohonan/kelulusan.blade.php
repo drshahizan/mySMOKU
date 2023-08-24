@@ -56,36 +56,94 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" style="width:3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
-                                                    <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
+                                                    <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
                                                     <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                                                    <th class="text-center" style="width: 12%"><b>Jenis Kecacatan</b></th>
+                                                    <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
                                                     {{-- <th class="text-center" style="width: 10%"><b>Tahap Pengajian</b></th> --}}
-                                                    <th class="text-center" style="width: 25%"><b>Nama Kursus</b></th>
-                                                    <th class="text-center" style="width: 5%"><b>Institusi Pengajian</b></th>
+                                                    <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
+                                                    <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
                                                     <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                                                     <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
-
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                <tr>
-                                                    <td class="text-center"><input type="checkbox" name="checkbox-1" id="checkbox-1" /></td>                                           
-                                                    <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTPPK/3/B980112105666</a></td>
-                                                    <td>Aishah Binti Samsudin</td>
-                                                    <td>Pendengaran</td>                                       
-                                                    {{-- <td>Sarjana Muda</td> --}}
-                                                    <td>Bachelor Of Business Administration (Hons) In International Business And Finance</td>
-                                                    <td>UTAR</td>
-                                                    <td class="text-center">02/07/2020</td>
-                                                    <td class="text-center">20/07/2023</td>
-                                                </tr> 
-                                                <tr>
+                                                @php
+                                                    $i=0;
+                                                @endphp
+                                                @foreach ($akademik as $item)
+                                                    {{-- @if ($item['status']=="4") --}}
+                                                        @php
+                                                            $i++;
+                                                            $id_permohonan = DB::table('permohonan')->where('nokp_pelajar', $item['nokp_pelajar'])->value('id_permohonan');
+                                                            $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                                            $jenis_kecacatan = DB::table('pelajar')->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_jenisoku.kecacatan'); //PH,SD
+                                                            $nama_kursus = DB::table('maklumatakademik')->value('nama_kursus');
+                                                            $institusi_pengajian = DB::table('bk_infoipt')->where('idipt', $item['id_institusi'])->value('namaipt');
+                                                            // $mula_pengajian = DB::table('maklumatakademik')->value('tkh_mula');
+                                                            $tamat_pengajian = DB::table('maklumatakademik')->value('tkh_tamat');
+
+                                                            // nama pemohon
+                                                            $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                            $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
+                                                            $words = explode(' ', $text);
+                                                            $result = [];
+                                                            foreach ($words as $word) {
+                                                                if (in_array(Str::lower($word), $conjunctions)) {
+                                                                    $result[] = Str::lower($word);
+                                                                } else {
+                                                                    $result[] = $word;
+                                                                }
+                                                            }
+                                                            $pemohon = implode(' ', $result);
+
+                                                            //nama kursus
+                                                            $text2 = ucwords(strtolower($nama_kursus)); // Assuming you're sending the text as a POST parameter
+                                                            $conjunctions = ['of', 'in', 'and'];
+                                                            $words = explode(' ', $text2);
+                                                            $result = [];
+                                                            foreach ($words as $word) {
+                                                                if (in_array(Str::lower($word), $conjunctions)) {
+                                                                    $result[] = Str::lower($word);
+                                                                } else {
+                                                                    $result[] = $word;
+                                                                }
+                                                            }
+                                                            $kursus = implode(' ', $result);
+
+                                                            //institusi pengajian
+                                                            $text3 = ucwords(strtolower($institusi_pengajian)); // Assuming you're sending the text as a POST parameter
+                                                            $conjunctions = ['of', 'in', 'and'];
+                                                            $words = explode(' ', $text3);
+                                                            $result = [];
+                                                            foreach ($words as $word) {
+                                                                if (in_array(Str::lower($word), $conjunctions)) {
+                                                                    $result[] = Str::lower($word);
+                                                                } else {
+                                                                    $result[] = $word;
+                                                                }
+                                                            }
+                                                            $institusi = implode(' ', $result);
+                                                        @endphp
+                                                        <tr>
+                                                            
+                                                            <td class="text-center"><input type="checkbox" name="checkbox-1" id="checkbox-1" /></td>                                           
+                                                            <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">{{$id_permohonan}}</a></td>
+                                                            <td>{{$pemohon}}</td>
+                                                            <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
+                                                            <td>{{$kursus}}</td>
+                                                            <td>{{$institusi}}</td>
+                                                            <td>{{$item['tkh_mula']}}</td>
+                                                            {{-- <td class="text-center">{{$mula_pengajian->format('d-m-Y')}}</td> --}}
+                                                            <td class="text-center">{{$tamat_pengajian}}</td>
+                                                        </tr>
+                                                    {{-- @endif --}}
+                                                @endforeach 
+                                                {{-- <tr>
                                                     <td class="text-center"><input type="checkbox" name="checkbox-2" id="checkbox-2" /></td>                                          
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKU/2/970703041223</a></td>
                                                     <td>Mohd Ali Bin Abu Kassim</td>
                                                     <td>Penglihatan</td>
-                                                    {{-- <td>Diploma</td> --}}
                                                     <td>Diploma In Information And Communication Technology</td>
                                                     <td>INTI</td>
                                                     <td class="text-center">03/09/2019</td>
@@ -96,7 +154,6 @@
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/3/970204052445</a></td>
                                                     <td>Sarah Binti Yusri</td>
                                                     <td>Penglihatan</td>
-                                                    {{-- <td>Sarjana Muda</td> --}}
                                                     <td>Bachelor Of Science In Psychology With Management</td>
                                                     <td>UiTM(Shah Alam)</td>
                                                     <td class="text-center">15/09/2019</td>
@@ -107,7 +164,6 @@
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/5/970703041223</a></td>
                                                     <td>Santosh A/L Ariyaran</td>
                                                     <td>Fizikal</td>
-                                                    {{-- <td>Sarjana</td> --}}
                                                     <td>Master Of Science Data Science</td>
                                                     <td>UTP</td>                                     
                                                     <td class="text-center">10/7/2021</td>
@@ -118,7 +174,6 @@
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/6/960909105668</a></td>
                                                     <td>Ling Kai Jie</td>
                                                     <td>Pertuturan</td>                                        
-                                                    {{-- <td>Doktor Falsafah</td> --}}
                                                     <td>Doctor Of Philosophy (Phd) In Social Science And Humanities</td>
                                                     <td>UiTM(Shah Alam)</td>
                                                     <td class="text-center">08/07/2022</td>
@@ -129,7 +184,6 @@
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/6/950804082447</a></td>
                                                     <td>Akmal Bin Kairuddin</td>
                                                     <td>Pertuturan</td>                                        
-                                                    {{-- <td>Doktor Falsafah</td> --}}
                                                     <td>Doctor Of Philosophy (Phd) Creative Industries & Art Practice</td>
                                                     <td>Universiti Limkokwing</td>
                                                     <td class="text-center">07/07/2023</td>
@@ -140,7 +194,6 @@
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/3/021212050334</a></td>
                                                     <td>Santishwaran A/L Paven</td>
                                                     <td>Pertuturan</td>                                        
-                                                    {{-- <td>Sarjana Muda</td> --}}
                                                     <td>Bachelor Of Science Computer Science</td>
                                                     <td>UTM</td>
                                                     <td class="text-center">05/09/2021</td>
@@ -151,7 +204,6 @@
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/PPK/3/990201065225</a></td>
                                                     <td>Ezra Hanisah Binti Md Yunos</td>
                                                     <td>Pendengaran</td>                                    
-                                                    {{-- <td>Sarjana Muda</td> --}}
                                                     <td>Bachelor Of Science Computer Science</td>
                                                     <td>UTM</td>
                                                     <td class="text-center">05/09/2020</td>
@@ -162,7 +214,6 @@
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/3/010305058473</a></td>
                                                     <td>Arshahad Bin Kairul Zaman</td>
                                                     <td>Fizikal</td>                                        
-                                                    {{-- <td>Sarjana Muda</td> --}}
                                                     <td>Bachelor Of Public Administration (Honours)</td>
                                                     <td>UiTM(Dungun)</td>
                                                     <td class="text-center">07/09/2021</td>
@@ -173,12 +224,11 @@
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/3/981004045253</a></td>
                                                     <td>Syed Abdul Kassim Hussain Yusof</td>
                                                     <td>Pembelajaran</td>
-                                                    {{-- <td>Sarjana Muda</td> --}}
                                                     <td>Bachelor Of Business Administration (Honours) Healthcare Management</td>
                                                     <td>UiTM(Shah Alam)</td>                                        
                                                     <td class="text-center">05/09/2022</td>
                                                     <td class="text-center">20/07/2025</td>
-                                                </tr>
+                                                </tr> --}}
                                             </tbody>
                                         </table>
 
@@ -228,7 +278,8 @@
                                                 </div>
                                               </div> 
                                             </div>
-                                        </div>                                        
+                                        </div> 
+                                        <br><br>                                       
                                     </form>
                                 </div>
                             </div>
