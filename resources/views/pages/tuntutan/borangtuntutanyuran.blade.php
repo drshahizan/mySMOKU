@@ -100,7 +100,7 @@
 															<br>
 															
 															<div class="d-flex flex-center mt-15">
-															<a href="#" class="btn btn-success">Hantar</a>&nbsp;
+															<a href="#" class="btn btn-success">Hantar</a>&nbsp;&nbsp;&nbsp;
 															
 															<a href="#" class="btn btn-danger">Batal</a>
 															</div>
