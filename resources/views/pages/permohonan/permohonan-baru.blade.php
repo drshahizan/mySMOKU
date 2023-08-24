@@ -757,7 +757,7 @@ $(document).ready(function(){
 														<!--begin::Input group-->
 														<div class="row mb-10">
 															<!--begin::Col-->
-															<div class="col-md-4 fv-row">
+															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
 																<!--end::Label-->
@@ -773,35 +773,7 @@ $(document).ready(function(){
 															</div>
 															<!--end::Col-->
 															<!--begin::Col-->
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">Sesi Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
-																</label>
-																<!--end::Label-->
-																	<!--begin::Input wrapper-->
-																	<input type="text" class="form-control form-control-solid" placeholder="" id="sesi" name="sesi" value="" />
-																	<!--end::Input wrapper-->
-															</div>
-															<!--end::Col-->
-															<div class="col-md-4 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">No Pendaftaran Pelajar</span>
-																
-															</label>
-															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaranpelajar" name="no_pendaftaranpelajar" value="" />
-														</div>
-														</div>
-														<!--end::Input group-->
-														<!-- @endforeach -->
-
-
-														<!--begin::Input group-->
-														<div class="row mb-10">
-															<!--begin::Col-->
-															<div class="col-md-4 fv-row">
+															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
 																<!--end::Label-->
@@ -814,6 +786,53 @@ $(document).ready(function(){
 																		</select>
 																	<!--end::Input wrapper-->
 															</div>
+															
+															<!--end::Col-->
+															
+														</div>
+														<!--end::Input group-->
+														<!-- @endforeach -->
+														<div class="row mb-10">
+														<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																	<input type="text" class="form-control form-control-solid" placeholder="" id="tempoh_pengajian" name="tempoh_pengajian" value="" required/>
+																	
+																	<!--end::Input wrapper-->
+															</div>
+															<!--end::Col-->
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">Bil Bulan Persemester</label>
+																<!--end::Label-->
+																<!--begin::Row-->
+																<div class="row fv-row">
+																	<!--begin::Input wrapper-->
+																		<select id="bil_bulanpersem" name="bil_bulanpersem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																			<option></option>
+																			<option value="4">4</option>
+																			<option value="6">6</option>
+																		</select>
+																	<!--end::Input wrapper-->
+																</div>
+																<!--end::Row-->
+															</div>
+</DIV>
+
+														<!--begin::Input group-->
+														<div class="row mb-10">
+															<!--begin::Col-->
+															<div class="col-md-4 fv-row">
+															<!--begin::Label-->
+															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																<span class="">No Pendaftaran Pelajar</span>
+																
+															</label>
+															<!--end::Label-->
+															<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaranpelajar" name="no_pendaftaranpelajar" value="" />
+														</div>
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
 																<label class="fs-6 fw-semibold form-label mb-2">Tarikh Mula Pengajian</label>
@@ -839,7 +858,17 @@ $(document).ready(function(){
 														<!--begin::Input group-->
 														<div class="row mb-10">
 															<!--begin::Col-->
-															<div class="col-md-3 fv-row">
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																<span class="">Sesi Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
+																</label>
+																<!--end::Label-->
+																	<!--begin::Input wrapper-->
+																	<input type="text" class="form-control form-control-solid" placeholder="" id="sesi" name="sesi" value="" />
+																	<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">Semester Semasa</label>
 																<!--end::Label-->
@@ -867,35 +896,7 @@ $(document).ready(function(){
 																</div>
 																<!--end::Row-->
 															</div>
-															<!--end::Col-->
-															<!--begin::Col-->
-															<div class="col-md-3 fv-row">
-																<!--begin::Label-->
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																	<input type="text" class="form-control form-control-solid" placeholder="" id="tempoh_pengajian" name="tempoh_pengajian" value="" required/>
-																	
-																	<!--end::Input wrapper-->
-															</div>
-															<!--end::Col-->
-															<div class="col-md-3 fv-row">
-																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">Bil Bulan Persemester</label>
-																<!--end::Label-->
-																<!--begin::Row-->
-																<div class="row fv-row">
-																	<!--begin::Input wrapper-->
-																		<select id="bil_bulanpersem" name="bil_bulanpersem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																			<option></option>
-																			<option value="4">4</option>
-																			<option value="6">6</option>
-																		</select>
-																	<!--end::Input wrapper-->
-																</div>
-																<!--end::Row-->
-															</div>
-															<div class="col-md-3 fv-row">
+															<div class="col-md-4 fv-row">
 															<!--begin::Label-->
 															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
 																<span class="">CGPA Terkini</span>
@@ -904,6 +905,10 @@ $(document).ready(function(){
 															<!--end::Label-->
 															<input type="text" class="form-control form-control-solid" placeholder="" id="cgpa" name="cgpa" value="" />
 														</div>
+															<!--end::Col-->
+															<!--begin::Col-->
+															
+															
 														</div>
 														<!--end::Input group-->
 
