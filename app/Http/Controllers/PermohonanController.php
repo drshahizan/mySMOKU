@@ -23,7 +23,7 @@ use App\Models\Hubungan;
 use App\Models\Negeri;
 use App\Models\Bandar;
 use Illuminate\Support\Facades\Auth;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class PermohonanController extends Controller
 {
