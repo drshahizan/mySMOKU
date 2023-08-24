@@ -184,13 +184,13 @@
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('kelulusanPermohonan')}}">
+			<a class="menu-link" href="{{url('permohonan/kelulusan')}}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Kelulusan</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('keputusanPermohonan')}}">
+			<a class="menu-link" href="{{url('permohonan/keputusan')}}">
 					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
 					<span class="menu-title">Keputusan</span>
 			</a>
