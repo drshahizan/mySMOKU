@@ -65,7 +65,7 @@
                                                     <th class="text-center" style="width: 15%"><b>Nama</b></th>
                                                     <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
                                                     {{-- <th class="text-center" style="width: 10%"><b>Tahap Pengajian</b></th> --}}
-                                                    <th class="text-center" style="width: 25%"><b>Nama Kurusus</b></th>
+                                                    <th class="text-center" style="width: 25%"><b>Nama Kursus</b></th>
                                                     <th class="text-center" style="width: 5%"><b>Institusi Pengajian</b></th>
                                                     <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                                                     <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
