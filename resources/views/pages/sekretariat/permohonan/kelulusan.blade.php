@@ -80,9 +80,7 @@
                                                             $jenis_kecacatan = DB::table('pelajar')->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_jenisoku.kecacatan'); //PH,SD
                                                             $nama_kursus = DB::table('maklumatakademik')->value('nama_kursus');
                                                             $institusi_pengajian = DB::table('bk_infoipt')->where('idipt', $item['id_institusi'])->value('namaipt');
-                                                            // $mula_pengajian = DB::table('maklumatakademik')->value('tkh_mula');
-                                                            // $tamat_pengajian = DB::table('maklumatakademik')->value('tkh_tamat');
-
+                                                            
                                                             // nama pemohon
                                                             $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
                                                             $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
@@ -133,7 +131,6 @@
                                                             <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                                                             <td>{{$kursus}}</td>
                                                             <td>{{$institusi}}</td>
-                                                            {{-- <td>{{$item['tkh_mula']->format('d/m/Y')}}</td> --}}
                                                             <td class="text-center">{{date('d/m/Y', strtotime($item['tkh_mula']))}}</td>
                                                             <td class="text-center">{{date('d/m/Y', strtotime($item['tkh_tamat']))}}</td>
                                                         </tr>
