@@ -727,7 +727,7 @@ $(document).ready(function(){
 														<!--end::Heading-->
 														
 														<!--begin::Input group-->
-														{{--<div class="d-flex flex-column mb-7 fv-row">
+														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
 															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
 																<span class="">Nama Pusat Pengajian</span>
@@ -770,7 +770,7 @@ $(document).ready(function(){
 																	<!--end::Input wrapper-->
 																</div>
 																<!--end::Row-->
-															</div>--}}
+															</div>
 															<!--end::Col-->
 															<!--begin::Col-->
 															<div class="col-md-4 fv-row">
