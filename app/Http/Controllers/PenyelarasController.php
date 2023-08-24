@@ -180,7 +180,7 @@ class PenyelarasController extends Controller
     }
 
     // Fetch records
-   public function getBandar($id=0){
+   public function bandar($id=0){
 
     // Fetch kursus by idipt
     $bandarData['data'] = Bandar::orderby("nama","asc")
@@ -275,7 +275,24 @@ class PenyelarasController extends Controller
         ]);
         }
 
-
+        $akademik= Akademik::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
+        if ($akademik === null) {
+            $user = Akademik::create([
+                'no_pendaftaranpelajar' => $request->no_pendaftaranpelajar,
+                'sesi' => $request->sesi,
+                'tkh_mula' => $request->tkh_mula,
+                'tkh_tamat' => $request->tkh_tamat,
+                'sem_semasa' => $request->sem_semasa,
+                'tempoh_pengajian' => $request->tempoh_pengajian,
+                'bil_bulanpersem' => $request->bil_bulanpersem,
+                'mod' => $request->mod,
+                'cgpa' => $request->cgpa,
+                'sumber_biaya' => $request->sumber_biaya,
+                'nama_penaja' => $request->nama_penaja,
+                'status' => '1',
+        
+            ]);
+        }else {
         DB::table('maklumatakademik')->where('nokp_pelajar' ,$request->nokp_pelajar)
         ->update([
 
@@ -293,6 +310,7 @@ class PenyelarasController extends Controller
             'status' => '1',
 
         ]);
+        }
        
 
         $tuntutanpermohonan = TuntutanPermohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
