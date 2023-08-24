@@ -39,14 +39,14 @@
 															<div class="row gx-10 mb-5">
 																<!--begin::Col-->
 																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun Pengajian</label>
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
 																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
 																	</div>
 																</div>
 																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
 																		<input type="text" class="form-control form-control-solid" placeholder="2"  />
