@@ -84,25 +84,9 @@
 																</div>
 																
 															</div>
-															<div class="row gx-10 mb-5">
-																<!--begin::Col-->
-																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">GPA</label>
-																	<!--begin::Input group-->
-																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder="" />
-																	</div>
-																</div>
-																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">CGPA</label>
-																	<!--begin::Input group-->
-																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid"  placeholder="" />
-																	</div>
-																</div>
-																
-															</div>
-														
+															
+															<br>
+															<br>
 															
 															<div class="text-align-center">
 															<a href="#" class="btn btn-success">Hantar</a>
@@ -127,16 +111,16 @@
 													<!--begin::Input group-->
 													<div class="mb-10">
 														<!--begin::Label-->
-														<label class="form-label fw-bold fs-4 text-gray-700">Keputusan Peperiksaan</label>
+														<label class="form-label fw-bold fs-4 text-gray-700">Item Tuntutan</label>
 														<br>
 														<br>
 														<div class="table-responsive">
 														<table class="table table-rounded table-striped border gy-7 gs-7" style="background-color:#FFFFE0;">
 													<thead>
 												<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
-													<th>Tahun</th>
-													<th>Sem</th>
-													<th>Keputusan</th>
+													<th>Bil.</th>
+													<th>Jenis Tuntutan</th>
+													<th></th>
 													<th>Papar</th>
 												</tr>
 												</thead>

@@ -60,21 +60,10 @@
 															<div class="row gx-10 mb-5">
 																<!--begin::Col-->
 																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Pengajian</label>
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Pengajian&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid"  placeholder="1"  />
-																	</div>
-																</div>
-																
-															</div>
-															<div class="row gx-10 mb-5">
-																<!--begin::Col-->
-																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">GPA</label>
-																	<!--begin::Input group-->
-																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder="" />
+                                                                    <input type="file" id="salinan_keputusan" name="salinan_keputusan"/>
 																	</div>
 																</div>
 																<div class="col-lg-6">
@@ -86,7 +75,7 @@
 																</div>
 																
 															</div>
-														
+															
 															
 															<div class="text-align-center">
 															<a href="#" class="btn btn-success">Hantar</a>
