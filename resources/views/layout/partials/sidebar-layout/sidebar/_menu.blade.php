@@ -95,7 +95,7 @@
 				</div>
 			</div>
 			<div class="menu-item">
-			<a class="menu-link" href="{{ route('keseluruhanPermohonan')}}">
+			<a class="menu-link" href="{{ route('keseluruhan-Permohonan')}}">
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
 					<span class="menu-title">Keseluruhan</span>
 			</a>
