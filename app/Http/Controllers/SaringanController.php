@@ -9,6 +9,8 @@ use App\Models\TuntutanPermohonan;
 use App\Models\Waris;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Illuminate\Support\Facades\Mail;
+
 
 class SaringanController extends Controller
 {
@@ -148,7 +150,7 @@ class SaringanController extends Controller
                     $n++;
                 }
             }
-            \Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
+            Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
             $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id_permohonan');
 
             $catatan = new Saringan([

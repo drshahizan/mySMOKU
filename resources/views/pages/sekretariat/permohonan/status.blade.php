@@ -29,15 +29,22 @@
                     </div>
 
                     {{-- Javascript Nav Bar --}}
-                    <nav>
+                    {{-- <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                           <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">BKOKU</a>
                           <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">PPK</a>
                         </div>
+                    </nav> --}}
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                          <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><b>BKOKU</b></button>
+                          <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><b>PPK</b></button>
+                        </div>
                     </nav>
+                    {{-- Content Navigation Bar --}}
                     <div class="tab-content" id="nav-tabContent">
                         {{-- BKOKU --}}
-                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" data-target="#nav-home" aria-labelledby="nav-home-tab">
                             <br><br>
                             {{-- Filter section --}}
                             <form action="" method="GET">
@@ -114,7 +121,7 @@
                         </div>
 
                         {{-- PKK --}}
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" data-target="#nav-profile" aria-labelledby="nav-profile-tab">
                             {{-- Filter section --}}
                             <form action="" method="GET">
                                 <div class="row">
@@ -197,6 +204,20 @@
 
         <script>
             $('#sortTable').DataTable();
+        </script>
+
+        <script>
+            // $('#myTab button[data-target="#nav-home"]').tab('show') // Select tab by name
+            // $('#myTab button[data-target="#nav-profile"]').tab('show') // Select tab by name
+
+            $('button[data-toggle="tab"]').on('#nav-home', function (event) {
+                event.target // newly activated tab
+                event.relatedTarget // previous active tab
+            })
+            $('button[data-toggle="tab"]').on('#nav-profile', function (event) {
+                event.target // newly activated tab
+                event.relatedTarget // previous active tab
+            })
         </script>
         
         <!-- Vedor js file and create bundle with grunt  --> 
