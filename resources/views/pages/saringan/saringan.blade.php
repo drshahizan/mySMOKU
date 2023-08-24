@@ -47,7 +47,7 @@
                 $sedang_disaring = DB::table('permohonan')->where('status', 3)->count();
                 $keseluruhan = $belum_disaring + $dikembalikan + $disokong + $sedang_disaring;
             @endphp       
-            <div class="row clearfix">
+            {{-- <div class="row clearfix">
                 <div class="col-lg-3 col-md-4">
                     <div class="card">
                         <div class="card-body">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-lg-3 col-md-4">
+                <div class="col-lg-3 col-md-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -86,7 +86,7 @@
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
                 <div class="col-lg-3 col-md-4">
                     <div class="card">
                         <div class="card-body">
@@ -113,20 +113,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="row clearfix">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
                             <h2>Senarai Saringan Permohonan<br><small>Klik ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
-                            {{-- <ul class="header-dropdown dropdown">
-                                <li>
-                                    <a href="{{ url('cetak-senarai-pemohon') }}" target="_blank" class="btn btn-primary" style="color: white">
-                                        <i class="fa fa-print" style="color: white!important"></i> 
-                                        Cetak Senarai Pendek
-                                    </a>
-                                </li>
-                            </ul> --}}
                         </div>
                         <div class="body">
                             <div class="table-responsive">
