@@ -150,7 +150,7 @@
                     {{-- Filter section --}}
                     <form action="" method="GET">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <select name="status" class="form-select">
                                     <option value="">Semua Status Permohonan</option>
                                     <option value="2" {{Request::get('status') == '2' ? 'selected':'' }} >Baru</option>
@@ -162,13 +162,13 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-3">
+                            {{-- <div class="col-md-3">
                                 <select name="program" class="form-select">
                                     <option value="">Semua Jenis Permohonan</option>
                                     <option value="BKOKU" {{Request::get('program') == 'BKOKU' ? 'selected':'' }} >BKOKU</option>
                                     <option value="PPK" {{Request::get('program') == 'PPK' ? 'selected':'' }} >PPK</option>
                                 </select>
-                            </div>
+                            </div> --}}
 
                             <div class="col-md-4 right">
                                 <button type="submit" class="btn btn-primary" style="width: 10%; padding-left:7px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
