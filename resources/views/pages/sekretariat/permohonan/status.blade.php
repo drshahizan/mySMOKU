@@ -17,7 +17,7 @@
         <div id="main-content">
             <div class="container-fluid">
                 <!-- Page header section  -->
-                <div class="block-header">
+                {{-- <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-12 col-sm-12">
                             <h1>Senarai Keseluruhan Permohonan</h1>
@@ -33,7 +33,7 @@
                         @endphp     
                         <div class="row">
                         {{-- Small Card Section Level 1--}}
-                            <div class="col-lg-2 col-md-4">
+                            {{-- <div class="col-lg-2 col-md-4">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
@@ -45,9 +45,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="col-lg-2 col-md-4">
+                            {{-- <div class="col-lg-2 col-md-4">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-inline-flex">
@@ -115,7 +115,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             {{-- <div class="col-lg-2 col-md-4">
                                 <div class="card">
@@ -130,10 +130,10 @@
                                     </div>
                                 </div>
                             </div> --}}
-                        </div>
-                    </div>
+                        {{-- </div> --}}
+                    {{-- </div> --}}
                     {{-- End of Small card section --}}
-                </div>
+                {{-- </div> --}}
 
                 {{-- Table section --}}
                 <div class="row clearfix">
@@ -171,7 +171,7 @@
                             </div>
 
                             <div class="col-md-4 right">
-                                <button type="submit" class="btn btn-primary" style="width: 15%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
+                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left:7px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
                             </div>
                         </div>
                     </form>
@@ -188,7 +188,7 @@
                                         <tr style="color: white; background-color:rgb(35, 58, 108);">
                                             <th style="width: 15%"><b>ID Permohonan</b></th>                                        
                                             <th style="width: 45%"><b>Nama</b></th>
-                                            <th style="width: 12%"><b>Jenis Permohonan</b></th>
+                                            <th style="width: 12%" class="text-center"><b>Jenis Permohonan</b></th>
                                             <th style="width: 13%" class="text-center"><b>Tarikh Permohonan</b></th> 
                                             <th class="text-center" style="width: 15%">Status Permohonan</th>
                                         </tr>
@@ -208,19 +208,19 @@
                                             <td>{{$program}}</td>
                                             <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                             @if($item['status'] == "1")
-                                                <td class="text-center"><button type="button" class="btn btn-primary btn-sm">{{$status}}</button></td>
+                                                <td class="text-center"><button type="button" class="btn btn-primary btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                             @elseif($item['status'] == "2")
-                                                <td class="text-center"><button type="button" class="btn btn-info btn-sm">BARU</button></td>
+                                                <td class="text-center"><button type="button" class="btn btn-info btn-sm">Baru</button></td>
                                             @elseif($item['status'] == "3")
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:coral; color:white;">{{$status}}</button></td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:coral; color:white;">{{ucwords(strtolower($status))}}</button></td>
                                             @elseif($item['status'] == "4")
-                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">{{$status}}</button></td>
+                                                <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">{{ucwords(strtolower($status))}}</button></td>
                                             @elseif($item['status'] == "5")
-                                                <td class="text-center"><button type="button" class="btn btn-warning btn-sm">{{$status}}</button></td>
+                                                <td class="text-center"><button type="button" class="btn btn-warning btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                             @elseif($item['status'] == "6")
-                                                <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{$status}}</button></td>
+                                                <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                             @elseif($item['status'] == "7")
-                                                <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{$status}}</button></td>
+                                                <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                             @endif
                                         </tr>
                                         @endforeach
