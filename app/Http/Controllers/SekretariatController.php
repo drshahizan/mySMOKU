@@ -26,7 +26,6 @@ class SekretariatController extends Controller
     {
         $keseluruhan = TuntutanPermohonan::all();
         return view('pages.sekretariat.permohonan.status', compact('keseluruhan'));
-
         // if(!$request)
         // {
         //     $keseluruhan = TuntutanPermohonan::when($request->program != null, function($q) use($request){
@@ -111,14 +110,7 @@ class SekretariatController extends Controller
         // $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon');
         // $pdf->setPaper('A4', 'landscape');
         // return $pdf->stream('senarai-pemohon.pdf');
-        
-        // $pdf = app('dompdf.wrapper');
-        // $pdf->getDomPDF()->set_option("enable_php", true);
-        // $pdf->setPaper('A4', 'landscape');
-        // $data = ['title' => 'Testing Page Number In Body'];
-        // $pdf->loadView('pages.saringan.cetakSenaraiPemohon', $data);
-        // return $pdf->stream('senarai-pemohon.pdf');
-
+     
         $pdf = App::make('dompdf.wrapper');
         $data = ['title' => 'Testing Page Number In Body'];
         $pdf->loadView('pages.saringan.cetakSenaraiPemohon', $data);
@@ -175,7 +167,6 @@ class SekretariatController extends Controller
     }
 
     //TUNTUTAN
-
     public function tuntutanKeseluruhan()
     {
         return view('pages.sekretariat.tuntutan.keseluruhan');

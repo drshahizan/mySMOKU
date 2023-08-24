@@ -636,7 +636,7 @@ $(document).ready(function(){
 																<div class="col-12">
 																	<!--begin::Input-->
 																	<select id='alamatW_bandar'  name='alamatW_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-																		<option value="">Pilih</option>
+																		<option value="111111">Pilih</option>
 																	</select>
 																	<!--end::Input-->
 																</div>
@@ -725,7 +725,7 @@ $(document).ready(function(){
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
-														@foreach ($akademikmqa as $akademik)
+														
 														<!--begin::Input group-->
 														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
@@ -735,7 +735,7 @@ $(document).ready(function(){
 															</label>
 															<!--end::Label-->
 															<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																<option value="{{ $akademik->idipt}}">{{ $akademik->namaipt}}</option>
+																<option value="12555"></option>
 															</select>
 														</div>
 														<div class="d-flex flex-column mb-7 fv-row">
@@ -746,7 +746,7 @@ $(document).ready(function(){
 															</label>
 															<!--end::Label-->
 															<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																<option value="{{ $akademik->nama_kursus}}">{{ $akademik->nama_kursus}}</option>
+																<option value="k"></option>
 															</select>
 														</div>
 														
@@ -765,7 +765,7 @@ $(document).ready(function(){
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
 																	<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																		<option value="{{ $akademik->kodperingkat}}">{{ $akademik->peringkat}}</option>
+																		<option value="1"></option>
 																	</select>
 																	<!--end::Input wrapper-->
 																</div>
@@ -795,7 +795,7 @@ $(document).ready(function(){
 														</div>
 														</div>
 														<!--end::Input group-->
-														<!-- @endforeach -->
+														
 
 
 														<!--begin::Input group-->

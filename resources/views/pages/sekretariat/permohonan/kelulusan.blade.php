@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="assets/css/sekretariat.css">
+        <link rel="stylesheet" href="/assets/css/sekretariat.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
@@ -24,11 +24,6 @@
             <div class="container-fluid">
                 <div class="block-header">
                     <div class="row clearfix">
-                        {{-- <div class="col-lg-6 col-md-12 col-sm-12">
-                            <h1>Senarai Permohonan Disokong</h1>
-                        </div>
-                        <hr> --}}
-
                         {{-- Filter Function --}}
                             {{-- <form action="" method="GET">
                                 <div class="row">
@@ -46,10 +41,10 @@
                         <div class="card">
                             <div class="header">
                                 {{-- <small>Sila klik pada ID permohonan untuk meluluskan permohonan</small> --}}
-                                <h2>Senarai Permohonan untuk Kelulusan JKKBKOKU</h2>
+                                <h1><b>Senarai Permohonan untuk Kelulusan JKKBKOKU</b></h1>
                                 <ul class="header-dropdown dropdown" style="color: black;">
-                                    <li><a href="{{ url('cetak-senarai-pemohon') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-print"></i> PDF</a></li>
-                                    <li><a href="{{ url('senarai-disokong-excel') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-print"></i> Excel</a></li>
+                                    <li><a href="{{ url('cetak-senarai-pemohon') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> PDF</a></li>
+                                    <li><a href="{{ url('senarai-disokong-excel') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-excel" style="color: black;"></i> Excel</a></li>
                                 </ul>
                             </div>
 
@@ -62,9 +57,8 @@
                                                 <tr>
                                                     <th class="text-center" style="width:3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
                                                     <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
-                                                    <th class="text-center" style="width: 7%"><b>Jenis Permohonan</b></th>                                        
-                                                    <th class="text-center" style="width: 15%"><b>Nama</b></th>
-                                                    <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
+                                                    <th class="text-center" style="width: 20%"><b>Nama</b></th>
+                                                    <th class="text-center" style="width: 12%"><b>Jenis Kecacatan</b></th>
                                                     {{-- <th class="text-center" style="width: 10%"><b>Tahap Pengajian</b></th> --}}
                                                     <th class="text-center" style="width: 25%"><b>Nama Kursus</b></th>
                                                     <th class="text-center" style="width: 5%"><b>Institusi Pengajian</b></th>
@@ -78,7 +72,6 @@
                                                 <tr>
                                                     <td class="text-center"><input type="checkbox" name="checkbox-1" id="checkbox-1" /></td>                                           
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTPPK/3/B980112105666</a></td>
-                                                    <td>PPK</td>
                                                     <td>Aishah Binti Samsudin</td>
                                                     <td>Pendengaran</td>                                       
                                                     {{-- <td>Sarjana Muda</td> --}}
@@ -90,7 +83,6 @@
                                                 <tr>
                                                     <td class="text-center"><input type="checkbox" name="checkbox-2" id="checkbox-2" /></td>                                          
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKU/2/970703041223</a></td>
-                                                    <td>BKOKU</td>
                                                     <td>Mohd Ali Bin Abu Kassim</td>
                                                     <td>Penglihatan</td>
                                                     {{-- <td>Diploma</td> --}}
@@ -102,7 +94,6 @@
                                                 <tr> 
                                                     <td class="text-center"><input type="checkbox" name="checkbox-3" id="checkbox-3" /></td>                                           
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/3/970204052445</a></td>
-                                                    <td>BKOKU</td>
                                                     <td>Sarah Binti Yusri</td>
                                                     <td>Penglihatan</td>
                                                     {{-- <td>Sarjana Muda</td> --}}
@@ -114,7 +105,6 @@
                                                 <tr>
                                                     <td class="text-center"><input type="checkbox" name="checkbox-4" id="checkbox-4" /></td>                                           
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/5/970703041223</a></td>
-                                                    <td>BKOKU</td>
                                                     <td>Santosh A/L Ariyaran</td>
                                                     <td>Fizikal</td>
                                                     {{-- <td>Sarjana</td> --}}
@@ -126,7 +116,6 @@
                                                 <tr>
                                                     <td class="text-center"><input type="checkbox" name="checkbox-5" id="checkbox-5" /></td>                                           
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/6/960909105668</a></td>
-                                                    <td>BKOKU</td>
                                                     <td>Ling Kai Jie</td>
                                                     <td>Pertuturan</td>                                        
                                                     {{-- <td>Doktor Falsafah</td> --}}
@@ -138,7 +127,6 @@
                                                 <tr>
                                                     <td class="text-center"><input type="checkbox" name="checkbox-6" id="checkbox-6" /></td>                                           
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/6/950804082447</a></td>
-                                                    <td>BKOKU</td>
                                                     <td>Akmal Bin Kairuddin</td>
                                                     <td>Pertuturan</td>                                        
                                                     {{-- <td>Doktor Falsafah</td> --}}
@@ -150,7 +138,6 @@
                                                 <tr>
                                                     <td class="text-center"><input type="checkbox" name="checkbox-7" id="checkbox-7" /></td>                                           
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/3/021212050334</a></td>
-                                                    <td>BKOKU</td>
                                                     <td>Santishwaran A/L Paven</td>
                                                     <td>Pertuturan</td>                                        
                                                     {{-- <td>Sarjana Muda</td> --}}
@@ -162,7 +149,6 @@
                                                 <tr>
                                                     <td class="text-center"><input type="checkbox" name="checkbox-8" id="checkbox-8" /></td>                                           
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/PPK/3/990201065225</a></td>
-                                                    <td>PPK</td>
                                                     <td>Ezra Hanisah Binti Md Yunos</td>
                                                     <td>Pendengaran</td>                                    
                                                     {{-- <td>Sarjana Muda</td> --}}
@@ -174,7 +160,6 @@
                                                 <tr>
                                                     <td class="text-center"><input type="checkbox" name="checkbox-9" id="checkbox-9" /></td>                                           
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/3/010305058473</a></td>
-                                                    <td>BKOKU</td>
                                                     <td>Arshahad Bin Kairul Zaman</td>
                                                     <td>Fizikal</td>                                        
                                                     {{-- <td>Sarjana Muda</td> --}}
@@ -186,7 +171,6 @@
                                                 <tr>
                                                     <td class="text-center"><input type="checkbox" name="checkbox-10" id="checkbox-10" /></td>                                           
                                                     <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/3/981004045253</a></td>
-                                                    <td>BKOKU</td>
                                                     <td>Syed Abdul Kassim Hussain Yusof</td>
                                                     <td>Pembelajaran</td>
                                                     {{-- <td>Sarjana Muda</td> --}}
