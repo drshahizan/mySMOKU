@@ -39,17 +39,25 @@
 															<div class="row gx-10 mb-5">
 																<!--begin::Col-->
 																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun Pengajian</label>
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
 																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
 																	</div>
+																	<!-- Buat Logic +1 -1, contohnya tahun ini 2023, tahun lepas 2022, jadi 
+																		sesi tahun dia akan keluar 
+															     		2022/2023 (-1)
+																		2023/2024 (+1) -->
 																</div>
 																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder="2"  />
+																	<select id="sem" name="jenis_yuran" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																			<option></option>
+																			<option value="1">1</option>
+																			<option value="2">2</option>					
+																		</select>
 																	</div>
 																</div>
 																<!--end::Col-->
@@ -108,8 +116,8 @@
 														<table class="table table-rounded table-striped border gy-7 gs-7" style="background-color:#FFFFE0;">
 													<thead>
 												<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
-													<th>Sesi Tahun Pengajian</th>
-													<th>Sesi Pengajian</th>
+													<th>Sesi Tahun</th>
+													<th>Sesi Semester</th>
 													<th>Keputusan (CGPA)</th>
 													<th>Papar</th>
 												</tr>
