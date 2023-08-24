@@ -221,7 +221,7 @@ $(document).ready(function(){
 										<!--begin::Content-->
 										<div class="card d-flex flex-row-fluid flex-center">
 											<!--begin::Form-->
-											<form id="p_mohon" action="{{ route('hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
+											<form id="kt_create_account_form" action="{{ route('hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
 											
 												<!--begin::Step 1-->
 												<div class="current" data-kt-stepper-element="content">
@@ -636,7 +636,7 @@ $(document).ready(function(){
 																<div class="col-12">
 																	<!--begin::Input-->
 																	<select id='alamatW_bandar'  name='alamatW_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-																		<option value="">Pilih</option>
+																		<option value="111111">Pilih</option>
 																	</select>
 																	<!--end::Input-->
 																</div>
@@ -725,9 +725,9 @@ $(document).ready(function(){
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
-														@foreach ($akademikmqa as $akademik)
+														
 														<!--begin::Input group-->
-														<div class="d-flex flex-column mb-7 fv-row">
+														{{--<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
 															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
 																<span class="">Nama Pusat Pengajian</span>
@@ -735,7 +735,7 @@ $(document).ready(function(){
 															</label>
 															<!--end::Label-->
 															<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																<option value="{{ $akademik->idipt}}">{{ $akademik->namaipt}}</option>
+																<option value="12555"></option>
 															</select>
 														</div>
 														<div class="d-flex flex-column mb-7 fv-row">
@@ -746,7 +746,7 @@ $(document).ready(function(){
 															</label>
 															<!--end::Label-->
 															<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																<option value="{{ $akademik->nama_kursus}}">{{ $akademik->nama_kursus}}</option>
+																<option value="k"></option>
 															</select>
 														</div>
 														
@@ -765,12 +765,12 @@ $(document).ready(function(){
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
 																	<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																		<option value="{{ $akademik->kodperingkat}}">{{ $akademik->peringkat}}</option>
+																		<option value="1"></option>
 																	</select>
 																	<!--end::Input wrapper-->
 																</div>
 																<!--end::Row-->
-															</div>
+															</div>--}}
 															<!--end::Col-->
 															<!--begin::Col-->
 															<div class="col-md-4 fv-row">
@@ -795,7 +795,7 @@ $(document).ready(function(){
 														</div>
 														</div>
 														<!--end::Input group-->
-														<!-- @endforeach -->
+														
 
 
 														<!--begin::Input group-->
@@ -1230,11 +1230,11 @@ $(document).ready(function(){
 <!--begin::Javascript-->
 
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-		<script src="assets/js/scripts.bundle.js"></script>
+		<script src="/assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="assets/js/custom/utilities/modals/penyelarasmohon.js"></script>
+		<script src="/assets/js/custom/utilities/modals/create-account.js"></script>
 
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
@@ -1244,7 +1244,7 @@ $(document).ready(function(){
    
 			$(".save-form").click(function(e){
 				e.preventDefault();
-				var data = $('#p_mohon').serialize();
+				var data = $('#kt_create_account_form').serialize();
 				//var id = document.getElementById('nokp_pelajar').value;
 				//alert (data);
 				$.ajax({

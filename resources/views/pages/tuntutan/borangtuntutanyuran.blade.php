@@ -25,7 +25,7 @@
 														<div class="d-flex flex-column align-items-start flex-xxl-row">
 															<!--begin::Input group-->
 															<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
-																<span class="fs-3 fw-bold text-gray-800">Borang Tuntutan Yuran Pengajian</span>
+																<span class="fs-3 fw-bold text-gray-800">Borang Tuntutan Yuran</span>
 																<!-- <input type="text" class="form-control form-control-flush fw-bold text-muted fs-3 w-125px" value="2021001" placehoder="..." /> -->
 															</div>
 														</div>
@@ -39,14 +39,14 @@
 															<div class="row gx-10 mb-5">
 																<!--begin::Col-->
 																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun Pengajian</label>
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
 																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
 																	</div>
 																</div>
 																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
 																		<input type="text" class="form-control form-control-solid" placeholder="2"  />
@@ -57,7 +57,7 @@
 
 															<div class="row gx-10 mb-5">
 																<!--begin::Col-->
-                                                                <div class="col-lg-8">
+                                                                <div class="col-lg-12">
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Jenis Yuran</label>
 																	<!--begin::Input group-->
 																	<select id="jenis_yuran" name="jenis_yuran" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
@@ -73,19 +73,21 @@
 																			<option value="Yuran Komputer">Yuran Komputer</option>						
 																		</select>
 																</div>
-																<div class="col-lg-4">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No resit/ invoice</label>
+																
+																</div>
+																<div class="row gx-10 mb-5">
+																<div class="col-lg-12">
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No resit/ invois</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
 																		<input type="text" class="form-control form-control-solid" placeholder=""  />
 																	</div>
 																</div>
-																</div>
-
+</div>
 
 																<div class="row gx-10 mb-5">
 																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Tuntutan Yuran&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Resit/ Invois&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
                                                                     <input type="file" id="yuran_tuntut" name="yuran_tuntut"/>
@@ -98,9 +100,10 @@
 															<br>
 															
 															<div class="d-flex flex-center mt-15">
-															<a href="#" class="btn btn-success">Hantar</a>
+															<a href="#" class="btn btn-success">Hantar</a>&nbsp;&nbsp;&nbsp;
 															
-															<a href="#" class="btn btn-danger">Batal</a></div>
+															<a href="#" class="btn btn-danger">Batal</a>
+															</div>
 														
 														</div>
 														<!--end::Wrapper-->
@@ -128,9 +131,9 @@
 														<table class="table table-rounded table-striped border gy-7 gs-7" style="background-color:#FFFFE0;">
 													<thead>
 												<tr class="fw-semibold fs-6 text-gray-700 border-bottom border-gray-200">
-													<th>Sesi Tahun Pengajian</th>
-													<th>Sesi Pengajian</th>
-													<th>Jenis Yuran Tuntutan</th>
+													<th>Sesi Tahun </th>
+													<th>Semester</th>
+													<th>Jenis Yuran</th>
 													<th>No resit</th>
 													<th>Papar</th>
 												</tr>
