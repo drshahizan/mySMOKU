@@ -44,8 +44,8 @@ class SekretariatController extends Controller
 
     public function keputusanSaringan()
     {
-        $kelulusan = TuntutanPermohonan::all();
-        return view('pages.sekretariat.permohonan.kelulusan', compact('kelulusan'));
+        $akademik = Akademik::all();
+        return view('pages.sekretariat.permohonan.kelulusan', compact('akademik'));
     }
     
     public function kembalikanPermohonan()
