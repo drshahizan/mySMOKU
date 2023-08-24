@@ -39,6 +39,13 @@
 															<div class="row gx-10 mb-5">
 																<!--begin::Col-->
 																<div class="col-lg-6">
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun Pengajian</label>
+																	<!--begin::Input group-->
+																	<div class="mb-5">
+																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
+																	</div>
+																</div>
+																<div class="col-lg-6">
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
@@ -47,13 +54,7 @@
 																</div>
 																<!--end::Col-->
 																<!--begin::Col-->
-																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun Pengajian</label>
-																	<!--begin::Input group-->
-																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
-																	</div>
-																</div>
+																
 																<!--end::Col-->
 															</div>
 
@@ -107,9 +108,9 @@
 														<table class="table table-rounded table-striped border gy-7 gs-7" style="background-color:#FFFFE0;">
 													<thead>
 												<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
-													<th>Tahun</th>
-													<th>Sem</th>
-													<th>Keputusan</th>
+													<th>Sesi Tahun Pengajian</th>
+													<th>Sesi Pengajian</th>
+													<th>Keputusan (CGPA)</th>
 													<th>Papar</th>
 												</tr>
 												</thead>
