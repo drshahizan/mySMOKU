@@ -18,7 +18,7 @@
 											<!--begin::Card-->
 											<div class="card">
 												<!--begin::Card body-->
-												<div class="card-body p-12">
+												<div class="card-body p-10">
 													<!--begin::Form-->
 													<form action="" id="kt_invoice_form">
 														<!--begin::Wrapper-->
@@ -39,27 +39,25 @@
 															<div class="row gx-10 mb-5">
 																<!--begin::Col-->
 																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
-																	<!--begin::Input group-->
-																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder="2"  />
-																	</div>
-																</div>
-																<!--end::Col-->
-																<!--begin::Col-->
-																<div class="col-lg-6">
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun Pengajian</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
 																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
 																	</div>
 																</div>
-																<!--end::Col-->
+																<div class="col-lg-6">
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
+																	<!--begin::Input group-->
+																	<div class="mb-5">
+																		<input type="text" class="form-control form-control-solid" placeholder="2"  />
+																	</div>
+																</div>
+																
 															</div>
 
 															<div class="row gx-10 mb-5">
 																<!--begin::Col-->
-                                                                <div class="col-lg-6">
+                                                                <div class="col-lg-8">
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Jenis Yuran</label>
 																	<!--begin::Input group-->
 																	<select id="jenis_yuran" name="jenis_yuran" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
@@ -75,6 +73,17 @@
 																			<option value="Yuran Komputer">Yuran Komputer</option>						
 																		</select>
 																</div>
+																<div class="col-lg-4">
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No resit/ invoice</label>
+																	<!--begin::Input group-->
+																	<div class="mb-5">
+																		<input type="text" class="form-control form-control-solid" placeholder=""  />
+																	</div>
+																</div>
+																</div>
+
+
+																<div class="row gx-10 mb-5">
 																<div class="col-lg-6">
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Tuntutan Yuran&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
 																	<!--begin::Input group-->
@@ -82,16 +91,17 @@
                                                                     <input type="file" id="yuran_tuntut" name="yuran_tuntut"/>
 																	</div>
 																</div>
-																
-															</div>
+																</div>
+															
 															
 															<br>
 															<br>
 															
-															<div class="text-align-center">
+															<div class="d-flex flex-center mt-15">
 															<a href="#" class="btn btn-success">Hantar</a>
-															<a href="#" class="btn btn-danger">Batal</a>
-															</div>
+															
+															<a href="#" class="btn btn-danger">Batal</a></div>
+														
 														</div>
 														<!--end::Wrapper-->
 													</form>
@@ -117,10 +127,11 @@
 														<div class="table-responsive">
 														<table class="table table-rounded table-striped border gy-7 gs-7" style="background-color:#FFFFE0;">
 													<thead>
-												<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
-													<th>Bil.</th>
-													<th>Jenis Tuntutan</th>
-													<th></th>
+												<tr class="fw-semibold fs-6 text-gray-700 border-bottom border-gray-200">
+													<th>Sesi Tahun Pengajian</th>
+													<th>Sesi Pengajian</th>
+													<th>Jenis Yuran Tuntutan</th>
+													<th>No resit</th>
 													<th>Papar</th>
 												</tr>
 												</thead>
@@ -131,14 +142,7 @@
 														
 													</div>
 													
-													<div class="mb-0">
-														<!--begin::Row-->
-														<div class="row mb-5">
-															
-														</div>
-														<!--end::Row-->
-														
-													</div>
+													
 													<!--end::Actions-->
 												</div>
 												<!--end::Card body-->

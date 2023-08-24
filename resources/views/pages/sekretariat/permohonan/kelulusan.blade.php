@@ -24,10 +24,10 @@
             <div class="container-fluid">
                 <div class="block-header">
                     <div class="row clearfix">
-                        <div class="col-lg-6 col-md-12 col-sm-12">
+                        {{-- <div class="col-lg-6 col-md-12 col-sm-12">
                             <h1>Senarai Permohonan Disokong</h1>
                         </div>
-                        <hr>
+                        <hr> --}}
 
                         {{-- Filter Function --}}
                             {{-- <form action="" method="GET">
@@ -45,7 +45,8 @@
 
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Permohonan untuk Diluluskan<br><small>Sila klik pada ID permohonan untuk meluluskan permohonan</small></h2>
+                                {{-- <small>Sila klik pada ID permohonan untuk meluluskan permohonan</small> --}}
+                                <h2>Senarai Permohonan untuk Kelulusan JKKBKOKU</h2>
                                 <ul class="header-dropdown dropdown" style="color: black;">
                                     <li><a href="{{ url('cetak-senarai-pemohon') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-print"></i> PDF</a></li>
                                     <li><a href="{{ url('senarai-disokong-excel') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-print"></i> Excel</a></li>

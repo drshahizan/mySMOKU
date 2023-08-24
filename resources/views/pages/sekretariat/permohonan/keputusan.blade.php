@@ -19,12 +19,12 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <h1>Keputusan Permohonan BKOKU dan PPK</h1>
+                            <h1>Keputusan Permohonan</h1>
                         </div>
                         <hr>
 
                         {{-- Card Tile --}}
-                        <div class="col-lg-4 col-md-8">
+                        {{-- <div class="col-lg-4 col-md-8">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
@@ -64,18 +64,18 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         {{-- End of Card Tile --}}
                             
                         <div class="card-body">
                             <form action="" method="GET">
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         {{-- <label style="color:black">Tapis mengikut Tarikh</label> --}}
                                         <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
                                     </div>
     
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         {{-- <label style="color:black">Tapis mengikut Keputusan</label> --}}
                                         <select name="status" class="form-select">
                                             <option value="">Pilih Keputusan</option>
@@ -83,10 +83,6 @@
                                             <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
                                             <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
                                         </select>
-                                    </div>
-    
-                                    <div class="col-md-6">
-                                        <button type="submit" class="btn btn-primary" style="width: 10%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
                                     </div>
                                 </div>
                             </form>
