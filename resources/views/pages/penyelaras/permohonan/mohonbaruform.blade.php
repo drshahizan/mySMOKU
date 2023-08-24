@@ -221,7 +221,7 @@ $(document).ready(function(){
 										<!--begin::Content-->
 										<div class="card d-flex flex-row-fluid flex-center">
 											<!--begin::Form-->
-											<form id="kt_create_account_form" action="{{ route('simpan') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
+											<form id="kt_create_account_form" action="{{ route('hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
 											
 												<!--begin::Step 1-->
 												<div class="current" data-kt-stepper-element="content">
@@ -1200,7 +1200,7 @@ $(document).ready(function(){
 															<span class="indicator-progress">Please wait...
 															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 														</button>
-														<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Teruskan
+														<button type="button" class="btn btn-lg btn-primary save-form" data-kt-stepper-action="next">Teruskan
 														<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
 															<span class="path1"></span>
 															<span class="path2"></span>
@@ -1230,13 +1230,11 @@ $(document).ready(function(){
 <!--begin::Javascript-->
 
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-		<script src="assets/js/scripts.bundle.js"></script>
+		<script src="/assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="assets/js/custom/utilities/modals/create-account.js"></script>
-		<script src="assets/js/custom/apps/file-manager/list.js"></script>
-		<script src="assets/js/custom/utilities/modals/create-app.js"></script>
+		<script src="/assets/js/custom/utilities/modals/create-account.js"></script>
 
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
@@ -1244,7 +1242,7 @@ $(document).ready(function(){
 		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<script type="text/javascript">
    
-			/*$(".save-form").click(function(e){
+			$(".save-form").click(function(e){
 				e.preventDefault();
 				var data = $('#kt_create_account_form').serialize();
 				//var id = document.getElementById('nokp_pelajar').value;
@@ -1256,7 +1254,7 @@ $(document).ready(function(){
 
 				});
 				
-			});*/
+			});
 		</script>
 
 <script type='text/javascript'>
