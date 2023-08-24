@@ -157,7 +157,7 @@ class PenyelarasController extends Controller
         ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
         ->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
         ->get(['pelajar.*', 'bk_jantina.*','bk_bangsa.*','bk_bangsa.*','bk_jenisoku.*'])
-        ->where('nokp_pelajar', Auth::user()->id());
+        ->where('nokp_pelajar', $nokp);
         $waris = Waris::join('bk_hubungan','bk_hubungan.kodhubungan','=','waris.hubungan')
         ->get(['waris.*', 'bk_hubungan.*'])
         ->where('nokp_pelajar', $nokp);
@@ -340,20 +340,31 @@ class PenyelarasController extends Controller
             $akaunBank=$request->akaunBank;
             //$name1=$akaunBank->getClientOriginalName();  
             $name1='salinanbank';  
-            $filenameakaunBank=$name1.'_'.$request->nokp_pelajar.'.'.$akaunBank->getClientOriginalExtension();
-            $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
+            $filenameakaunBank = '';
+            if($akaunBank){
+                $filenameakaunBank=$name1.'_'.$request->nokp_pelajar.'.'.$akaunBank->getClientOriginalExtension();
+                $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
+            
+            }
+            
             
             $suratTawaran=$request->suratTawaran;
             //$name2=$suratTawaran->getClientOriginalName();
             $name2='salinantawaran'; 
+            $filenamesuratTawaran = '';
+            if($suratTawaran){
             $filenamesuratTawaran=$name2.'_'.$request->nokp_pelajar.'.'.$suratTawaran->getClientOriginalExtension();
             $request->suratTawaran->move('assets/dokumen',$filenamesuratTawaran);
+            }
 
             $invoisResit=$request->invoisResit;
             //$name3=$invoisResit->getClientOriginalName();
             $name3='salinanresit';  
+            $filenameinvoisResit = '';
+            if($invoisResit){
             $filenameinvoisResit=$name1.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
             $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
+            }
             
             $data->id_permohonan='KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar;
             $data->nokp_pelajar=$request->nokp_pelajar;
@@ -370,7 +381,7 @@ class PenyelarasController extends Controller
 
 
 
-        return redirect()->route('viewpermohonan');
+        return redirect()->route('dashboardpenyelaras');
 
     }
 
