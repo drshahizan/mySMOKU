@@ -66,22 +66,22 @@
 }
 .bg-pink:hover, .bg-pink:active{
     background:#cc547c;
-    color:rgba(255,255,255,0.7)!important;
+    color:white!important;
 }
 
 .bg-orange:hover, .bg-orange:active{
     background:coral!important;
-    color:rgba(255,255,255,0.7)!important;
+    color:white!important;
 }
 
 .bg-green:hover, .bg-green:active{
     background: #00bf36!important;
-    color:rgba(255,255,255,0.7)!important;
+    color:white!important;
 }
 
 .bg-yellow:hover, .bg-yellow:active{
     background:rgb(255, 255, 103);
-    color: rgb(80, 80, 80)!important;
+    color: white!important;
 }
 
 .text-white{
