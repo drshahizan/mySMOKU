@@ -57,7 +57,7 @@
 
 															<div class="row gx-10 mb-5">
 																<!--begin::Col-->
-                                                                <div class="col-lg-7">
+                                                                <div class="col-lg-8">
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Jenis Yuran</label>
 																	<!--begin::Input group-->
 																	<select id="jenis_yuran" name="jenis_yuran" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
@@ -73,7 +73,7 @@
 																			<option value="Yuran Komputer">Yuran Komputer</option>						
 																		</select>
 																</div>
-																<div class="col-lg-5">
+																<div class="col-lg-4">
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No resit/ invoice</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
