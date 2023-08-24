@@ -25,6 +25,17 @@ class SaringanController extends Controller
         return view('pages.saringan.saringan',compact('permohonan','status'));
     }
 
+    public function saringanPPK()
+    {
+        $permohonan = TuntutanPermohonan::where('status', '2')
+        ->orWhere('status', '=','3')
+        ->orWhere('status', '=','4')
+        ->orWhere('status', '=','5')
+        ->get();
+        $status = null;
+        return view('pages.saringan.saringanPPK',compact('permohonan','status'));
+    }
+
     public function maklumatPemohon($id)
     {
         TuntutanPermohonan::where('nokp_pelajar', $id)

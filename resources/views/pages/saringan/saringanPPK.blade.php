@@ -123,13 +123,13 @@
             <!-- navigation tab -->
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="{{ url('saringan') }}"   >
+                    <a class="nav-link" id="home-tab" data-toggle="tab" href="{{ url('saringan') }}"   >
                         <span class="nav-icon"><i class="flaticon2-chat-1"></i></span>
                         <span class="nav-text">BKOKU</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="{{ url('saringan/PPK') }}"  aria-controls="profile" >
+                    <a class="nav-link active" id="profile-tab" data-toggle="tab" href="{{ url('saringan/PPK') }}" >
                         <span class="nav-icon"><i class="flaticon2-layers-1"></i></span>
                         <span class="nav-text">PPK</span>
                     </a>
@@ -162,7 +162,7 @@
                                             $i=0;
                                         @endphp
                                         @foreach ($permohonan as $item)
-                                        @if ($item['program']=="BKOKU")
+                                        @if ($item['program']=="PPK")
                                         @php
                                             $i++;
                                             $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
