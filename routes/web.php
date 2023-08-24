@@ -9,6 +9,8 @@ use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\SaringanController;
 use App\Http\Controllers\SekretariatController;
 use App\Http\Controllers\PenyelarasController;
+
+use App\Http\Controllers\TuntutanController;
 use App\Models\Permohonan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
@@ -105,13 +107,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('keseluruhanPermohonan', [PenyelarasController::class, 'keseluruhanPermohonan'])->name('keseluruhanPermohonan');
     Route::get('borangPermohonanBaru', [PenyelarasController::class, 'borangPermohonanBaru'])->name('borangPermohonanBaru');
 
-    //TUntutan - Penyelaras
+    //Tuntutan - Penyelaras
     Route::get('tuntutan-wang-saku', [PenyelarasController::class, 'tuntutanWangSaku']);
     Route::get('maklumat-tuntutan-wang-saku', [PenyelarasController::class, 'maklumatTuntutanWangSaku']);
     Route::get('tuntutan-yuran-pengajian', [PenyelarasController::class, 'tuntutanYuranPengajian']);
     Route::get('maklumat-tuntutan-yuran-pengajian', [PenyelarasController::class, 'maklumatTuntutanYuranPengajian']);
     Route::get('kemaskini-tuntutan', [PenyelarasController::class, 'kemaskiniTuntutan']);
     Route::get('penyelaras-sejarah-tuntutan', [PenyelarasController::class, 'sejarahTuntutan']);
+
+    //Tuntutan Pelajar 
+    Route::get('borangTuntutanYuran',[TuntutanController::class,'borangtuntutanyuran'])->name('borangTuntutanYuran');
 
 });
 
