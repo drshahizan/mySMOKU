@@ -59,7 +59,6 @@
                                                     <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
                                                     <th class="text-center" style="width: 20%"><b>Nama</b></th>
                                                     <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
-                                                    {{-- <th class="text-center" style="width: 10%"><b>Tahap Pengajian</b></th> --}}
                                                     <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                     <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
                                                     <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
@@ -71,12 +70,13 @@
                                                 @php
                                                     $i=0;
                                                 @endphp
-                                                @foreach ($akademik as $item)
+                                                @foreach ($kelulusan as $item)
                                                     {{-- @if ($item['status']=="4") --}}
                                                         @php
                                                             $i++;
                                                             $id_permohonan = DB::table('permohonan')->where('nokp_pelajar', $item['nokp_pelajar'])->value('id_permohonan');
                                                             $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                                            $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
                                                             $jenis_kecacatan = DB::table('pelajar')->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_jenisoku.kecacatan'); //PH,SD
                                                             $nama_kursus = DB::table('maklumatakademik')->value('nama_kursus');
                                                             $institusi_pengajian = DB::table('bk_infoipt')->where('idipt', $item['id_institusi'])->value('namaipt');
@@ -124,9 +124,8 @@
                                                             $institusi = implode(' ', $result);
                                                         @endphp
                                                         <tr>
-                                                            
                                                             <td class="text-center"><input type="checkbox" name="checkbox-1" id="checkbox-1" /></td>                                           
-                                                            <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">{{$id_permohonan}}</a></td>
+                                                            <td><a href="{{ url('kemaskini/kelulusan/'. $nokp) }}" target="_blank">{{$id_permohonan}}</a></td>
                                                             <td>{{$pemohon}}</td>
                                                             <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                                                             <td>{{$kursus}}</td>
@@ -136,96 +135,6 @@
                                                         </tr>
                                                     {{-- @endif --}}
                                                 @endforeach 
-                                                {{-- <tr>
-                                                    <td class="text-center"><input type="checkbox" name="checkbox-2" id="checkbox-2" /></td>                                          
-                                                    <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKU/2/970703041223</a></td>
-                                                    <td>Mohd Ali Bin Abu Kassim</td>
-                                                    <td>Penglihatan</td>
-                                                    <td>Diploma In Information And Communication Technology</td>
-                                                    <td>INTI</td>
-                                                    <td class="text-center">03/09/2019</td>
-                                                    <td class="text-center">27/07/2023</td>
-                                                </tr> 
-                                                <tr> 
-                                                    <td class="text-center"><input type="checkbox" name="checkbox-3" id="checkbox-3" /></td>                                           
-                                                    <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/3/970204052445</a></td>
-                                                    <td>Sarah Binti Yusri</td>
-                                                    <td>Penglihatan</td>
-                                                    <td>Bachelor Of Science In Psychology With Management</td>
-                                                    <td>UiTM(Shah Alam)</td>
-                                                    <td class="text-center">15/09/2019</td>
-                                                    <td class="text-center">05/07/2023</td>
-                                                </tr> 
-                                                <tr>
-                                                    <td class="text-center"><input type="checkbox" name="checkbox-4" id="checkbox-4" /></td>                                           
-                                                    <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/5/970703041223</a></td>
-                                                    <td>Santosh A/L Ariyaran</td>
-                                                    <td>Fizikal</td>
-                                                    <td>Master Of Science Data Science</td>
-                                                    <td>UTP</td>                                     
-                                                    <td class="text-center">10/7/2021</td>
-                                                    <td class="text-center">03/08/2024</td>
-                                                </tr> 
-                                                <tr>
-                                                    <td class="text-center"><input type="checkbox" name="checkbox-5" id="checkbox-5" /></td>                                           
-                                                    <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/6/960909105668</a></td>
-                                                    <td>Ling Kai Jie</td>
-                                                    <td>Pertuturan</td>                                        
-                                                    <td>Doctor Of Philosophy (Phd) In Social Science And Humanities</td>
-                                                    <td>UiTM(Shah Alam)</td>
-                                                    <td class="text-center">08/07/2022</td>
-                                                    <td class="text-center">08/07/2024</td>
-                                                </tr> 
-                                                <tr>
-                                                    <td class="text-center"><input type="checkbox" name="checkbox-6" id="checkbox-6" /></td>                                           
-                                                    <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/6/950804082447</a></td>
-                                                    <td>Akmal Bin Kairuddin</td>
-                                                    <td>Pertuturan</td>                                        
-                                                    <td>Doctor Of Philosophy (Phd) Creative Industries & Art Practice</td>
-                                                    <td>Universiti Limkokwing</td>
-                                                    <td class="text-center">07/07/2023</td>
-                                                    <td class="text-center">18/07/2025</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><input type="checkbox" name="checkbox-7" id="checkbox-7" /></td>                                           
-                                                    <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/3/021212050334</a></td>
-                                                    <td>Santishwaran A/L Paven</td>
-                                                    <td>Pertuturan</td>                                        
-                                                    <td>Bachelor Of Science Computer Science</td>
-                                                    <td>UTM</td>
-                                                    <td class="text-center">05/09/2021</td>
-                                                    <td class="text-center">05/08/2025</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><input type="checkbox" name="checkbox-8" id="checkbox-8" /></td>                                           
-                                                    <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/PPK/3/990201065225</a></td>
-                                                    <td>Ezra Hanisah Binti Md Yunos</td>
-                                                    <td>Pendengaran</td>                                    
-                                                    <td>Bachelor Of Science Computer Science</td>
-                                                    <td>UTM</td>
-                                                    <td class="text-center">05/09/2020</td>
-                                                    <td class="text-center">05/07/2024</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><input type="checkbox" name="checkbox-9" id="checkbox-9" /></td>                                           
-                                                    <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/3/010305058473</a></td>
-                                                    <td>Arshahad Bin Kairul Zaman</td>
-                                                    <td>Fizikal</td>                                        
-                                                    <td>Bachelor Of Public Administration (Honours)</td>
-                                                    <td>UiTM(Dungun)</td>
-                                                    <td class="text-center">07/09/2021</td>
-                                                    <td class="text-center">20/07/2025</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><input type="checkbox" name="checkbox-10" id="checkbox-10" /></td>                                           
-                                                    <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/3/981004045253</a></td>
-                                                    <td>Syed Abdul Kassim Hussain Yusof</td>
-                                                    <td>Pembelajaran</td>
-                                                    <td>Bachelor Of Business Administration (Honours) Healthcare Management</td>
-                                                    <td>UiTM(Shah Alam)</td>                                        
-                                                    <td class="text-center">05/09/2022</td>
-                                                    <td class="text-center">20/07/2025</td>
-                                                </tr> --}}
                                             </tbody>
                                         </table>
 

@@ -1,6 +1,6 @@
 <x-default-layout> 
     <head>
-        <link rel="stylesheet" href="assets/css/sekretariat.css">
+        <link rel="stylesheet" href="/assets/css/sekretariat.css">
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <!-- CSS -->
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
@@ -39,26 +39,30 @@
                                     <div class="col-md-6 col-sm-6">
                                         <br>
                                         <table class="pemohon">
-                                            <tr>
-                                                <td><strong>Nama </strong></td>
-                                                <td><b>:</b></td>
-                                                <td>Mohd Ali Bin Abu Kassim</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>ID Permohonan </strong></td>
-                                                <td><b>:</b></td>
-                                                <td>KPTBKOKU/4/970703041223</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Tarikh Permohonan </strong></td>
-                                                <td><b>:</b></td>
-                                                <td>06/08/2023</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Status Permohonan </strong></td>
-                                                <td><b>:</b></td>
-                                                <td>Disokong</td>
-                                            </tr>
+                                                @php
+                                                    $nama = DB::table('pelajar')->where('nokp_pelajar', $permohonan['nokp_pelajar'])->value('nama_pelajar');
+                                                    $status = DB::table('statusinfo')->where('kodstatus',$permohonan['status'])->value('status');
+                                                @endphp
+                                                <tr>
+                                                    <td><strong>Nama </strong></td>
+                                                    <td><b>:</b></td>
+                                                    <td>{{$nama}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>ID Permohonan </strong></td>
+                                                    <td><b>:</b></td>
+                                                    <td>{{$permohonan->id_permohonan}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Tarikh Permohonan </strong></td>
+                                                    <td><b>:</b></td>
+                                                    <td>{{$permohonan['created_at']->format('d/m/Y')}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Status Permohonan </strong></td>
+                                                    <td><b>:</b></td>
+                                                    <td>{{$status}}</td>
+                                                </tr>
                                         </table>                               
                                     </div>
                                 </div>

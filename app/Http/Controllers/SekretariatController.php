@@ -42,10 +42,22 @@ class SekretariatController extends Controller
         // } 
     }
 
-    public function keputusanSaringan()
+    public function kelulusanPermohonan()
     {
-        $akademik = Akademik::all();
-        return view('pages.sekretariat.permohonan.kelulusan', compact('akademik'));
+        $kelulusan = Akademik::all();
+        return view('pages.sekretariat.permohonan.kelulusan', compact('kelulusan'));
+    }
+
+    public function kemaskiniKelulusan($id)
+    {
+        $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
+        return view('pages.sekretariat.permohonan.maklumatKelulusan',compact('permohonan'));
+    }
+
+    public function keputusanPermohonan()
+    {
+        $keputusan = Akademik::all();
+        return view('pages.sekretariat.permohonan.keputusan', compact('keputusan'));
     }
     
     public function kembalikanPermohonan()
@@ -53,15 +65,7 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.permohonan.kembalikan');
     }
 
-    public function keputusanPermohonan()
-    {
-        return view('pages.sekretariat.permohonan.keputusan');
-    }
-
-    public function maklumatKeputusan()
-    {
-        return view('pages.sekretariat.permohonan.maklumatKeputusan');
-    }
+    
 
     public function keputusan(Request $request)
     {
