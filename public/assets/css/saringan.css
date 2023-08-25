@@ -289,6 +289,15 @@ th{
     color: black!important;
 }
 
+div.dataTables_length {
+    padding: 10px!important;
+}
+
+div.dataTables_length,
+div.dataTables_filter {
+    padding:10px!important;
+}
+
 /* table.dataTable thead .sorting:before,
 table.dataTable thead .sorting_asc:before,
 table.dataTable thead .sorting_desc:before,
