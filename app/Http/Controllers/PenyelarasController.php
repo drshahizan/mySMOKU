@@ -181,7 +181,7 @@ class PenyelarasController extends Controller
 
     // Fetch records
    public function bandar($id=0){
-
+    dd($id);
     // Fetch kursus by idipt
     $bandarData['data'] = Bandar::orderby("nama","asc")
          ->select('id','nama','negeri')

@@ -1277,6 +1277,7 @@ $(document).ready(function(){
 
 							// AJAX request 
 							$.ajax({
+								alert(id);
 								url: 'getBandar/'+id,
 								type: 'get',
 								dataType: 'json',

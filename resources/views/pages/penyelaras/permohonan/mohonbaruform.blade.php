@@ -636,7 +636,7 @@ $(document).ready(function(){
 																<div class="col-12">
 																	<!--begin::Input-->
 																	<select id='alamatW_bandar'  name='alamatW_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-																		<option value="11111">Pilih</option>
+																		<option value="">Pilih</option>
 																	</select>
 																	<!--end::Input-->
 																</div>
