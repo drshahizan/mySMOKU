@@ -221,7 +221,7 @@ $(document).ready(function(){
 										<!--begin::Content-->
 										<div class="card d-flex flex-row-fluid flex-center">
 											<!--begin::Form-->
-											<form id="kt_create_account_form" action="{{ route('hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
+											<form id="p_mohon" action="{{ route('hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
 											
 												<!--begin::Step 1-->
 												<div class="current" data-kt-stepper-element="content">
@@ -636,7 +636,7 @@ $(document).ready(function(){
 																<div class="col-12">
 																	<!--begin::Input-->
 																	<select id='alamatW_bandar'  name='alamatW_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-																		<option value="">Pilih</option>
+																		<option value="11111">Pilih</option>
 																	</select>
 																	<!--end::Input-->
 																</div>
@@ -735,8 +735,12 @@ $(document).ready(function(){
 															</label>
 															<!--end::Label-->
 															<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																<option value="12555"></option>
+																@foreach ($infoipt as $infoipt)
+																	<option></option>
+																	<option value="{{ $infoipt->idipt}}">{{ $infoipt->namaipt}}</option>
+																@endforeach
 															</select>
+															
 														</div>
 														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
@@ -746,7 +750,10 @@ $(document).ready(function(){
 															</label>
 															<!--end::Label-->
 															<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																<option value="k"></option>
+																@foreach ($kursus as $kursus)
+																	<option></option>
+																	<option value="{{ $kursus->nama_kursus}}">{{ $kursus->nama_kursus}}</option>
+																@endforeach
 															</select>
 														</div>
 														
@@ -765,7 +772,10 @@ $(document).ready(function(){
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
 																	<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																		<option value="1"></option>
+																		@foreach ($peringkat as $peringkat)
+																			<option></option>
+																			<option value="{{ $peringkat->kodperingkat}}">{{ $peringkat->peringkat}}</option>
+																		@endforeach
 																	</select>
 																	<!--end::Input wrapper-->
 																</div>
@@ -1234,7 +1244,7 @@ $(document).ready(function(){
 		<!--end::Global Javascript Bundle-->
 
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="/assets/js/custom/utilities/modals/create-account.js"></script>
+		<script src="/assets/js/custom/utilities/modals/penyelarasmohon.js"></script>
 
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
