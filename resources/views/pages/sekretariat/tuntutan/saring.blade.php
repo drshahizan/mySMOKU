@@ -13,8 +13,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-
     </head>
+    <style>
+        .nav{
+            margin-left: 10px!important;
+        }
+    </style>
     {{-- begin alert --}}
     @if($status == "Permohonan Telah Disokong")
         <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px">
