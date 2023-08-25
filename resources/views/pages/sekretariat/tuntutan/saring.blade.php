@@ -55,7 +55,8 @@
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <div class="body">
                                     <div class="table-responsive">
-                                        <table id="sortTable" class="table table-striped table-hover dataTable js-exportable">
+                                        <br>
+                                        <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
                                                     <th style="width: 17%"><b>ID Tuntutan</b></th>                                        
@@ -103,7 +104,8 @@
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <div class="body">
                                     <div class="table-responsive">
-                                        <table id="sortTable" class="table table-striped table-hover dataTable js-exportable">
+                                        <br>
+                                        <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
                                                     <th style="width: 17%"><b>ID Tuntutan</b></th>                                        
@@ -156,7 +158,8 @@
         </div>
     </div>
     <script>
-        $('#sortTable').DataTable();
+        $('#sortTable1').DataTable();
+        $('#sortTable2').DataTable();
     </script>
     
     </body>
