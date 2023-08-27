@@ -20,8 +20,7 @@ class DashboardController extends Controller
         ->get(['statustransaksi.*', 'statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->id());
         $akademik = Akademik::all()
-        //leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
-        //->get(['maklumatakademik.*', 'bk_peringkatpengajian.*'])
+      
         ->where('nokp_pelajar', Auth::user()->id());
         $sem = Akademik::
         leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
@@ -31,12 +30,16 @@ class DashboardController extends Controller
         ->get(['permohonan.*', 'statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->id());
         $smoku = Smoku::all()->where('jenis','=', 'IPTA');
-
+        $permohonan = Status::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
+        ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
+        ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
+        ->where('nokp_pelajar', Auth::user()->nokp);
+        //return view('pages.permohonan.statusmohon', compact('permohonan'));
 
 
         if(Auth::user()->tahap=='1')
         {
-            return view('pages.dashboards.index', compact('pelajar','status','akademik','sem','tuntutanpermohonan'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
+            return view('pages.dashboards.index', compact('pelajar','status','akademik','sem','tuntutanpermohonan', 'permohonan'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
         }
         else if(Auth::user()->tahap=='2')
         {
