@@ -1245,7 +1245,7 @@ $(document).ready(function(){
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 
-		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 		<script type="text/javascript">
    
 			$(".save-form").click(function(e){
@@ -1260,30 +1260,25 @@ $(document).ready(function(){
 				});
 				
 			});
-		</script>
-
-<script type='text/javascript'>
+		</script> 
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script>
     		$(document).ready(function(){
+				$('#alamatW_negeri').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#alamatW_bandar').find('option').not(':first').remove();
 
-				// institusi Change
-				$('#alamatW_negeri').change(function(){
-
-							// institusi id
-							var id = $(this).val();
-							alert(id);
-
-							// Empty the dropdown
-							$('#alamatW_bandar').find('option').not(':first').remove();
-
-							// AJAX request 
-							$.ajax({
-								alert(id);
-								url: 'getBandar/'+id,
-								type: 'get',
-								dataType: 'json',
-								success: function(response){
-
-									var len = 0;
+					// AJAX request 
+					$.ajax({
+						
+						url: 'getBandar/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
 									if(response['data'] != null){
 										len = response['data'].length;
 									}
@@ -1300,10 +1295,12 @@ $(document).ready(function(){
 											$("#alamatW_bandar").append(option); 
 										}
 									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
 
-								}
-							});
-
+					});
 				});
 
 			});
@@ -1311,10 +1308,10 @@ $(document).ready(function(){
 			$(document).ready(function() {
 			$('.js-example-basic-single').select2();
 			});
-   		</script>
+		</script>
 
 
-<script>
+		<script>
 			function select1(){
             var sumber = document.getElementById('sumber_biaya').value;
 			var mod = document.getElementById('mod').value;

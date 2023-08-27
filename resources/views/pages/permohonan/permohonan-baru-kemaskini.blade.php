@@ -1181,6 +1181,71 @@ $(document).ready(function(){
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		<script type="text/javascript">
+   
+			$(".save-form").click(function(e){
+				e.preventDefault();
+				var data = $('#kt_create_account_form').serialize();
+				//alert (data);
+				$.ajax({
+					type: 'post',
+					url: "{{ route('permohonan.post') }}",
+					data: data,
+
+				});
+				
+			});
+		</script> 
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script>
+    		$(document).ready(function(){
+				$('#alamatW_negeri').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#alamatW_bandar').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: 'getBandar/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var nama = response['data'][i].nama;
+
+											var option = "<option value='"+id+"'>"+nama+"</option>";
+
+											$("#alamatW_bandar").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
+			$(document).ready(function() {
+			$('.js-example-basic-single').select2();
+			});
+		</script>
+
 		<script>
 			function select1(){
             var sumber = document.getElementById('sumber_biaya').value;

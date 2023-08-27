@@ -101,12 +101,12 @@ class PermohonanController extends Controller
     }
 
      // Fetch records
-   public function getBandar($id=0){
+   public function getBandar($idnegeri=0){
 
     // Fetch kursus by idipt
     $bandarData['data'] = Bandar::orderby("nama","asc")
          ->select('id','nama','negeri')
-         ->where('negeri',$id)
+         ->where('negeri',$idnegeri)
          ->get();
 
          return response()->json($bandarData);
