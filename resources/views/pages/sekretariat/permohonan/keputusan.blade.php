@@ -20,7 +20,7 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h1><b>Senarai Keputusan Permohonan</b></h1>
+                                <h2>Senarai Keputusan Permohonan</h2>
                             </div>
 
                             {{-- Card Tile --}}
