@@ -1270,7 +1270,7 @@ $(document).ready(function(){
 
 							// institusi id
 							var id = $(this).val();
-							//alert(id);
+							alert(id);
 
 							// Empty the dropdown
 							$('#alamatW_bandar').find('option').not(':first').remove();

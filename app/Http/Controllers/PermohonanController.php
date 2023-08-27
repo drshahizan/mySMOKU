@@ -51,10 +51,12 @@ class PermohonanController extends Controller
         ->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
         ->get(['pelajar.*', 'bk_jantina.*','bk_bangsa.*','bk_bangsa.*','bk_jenisoku.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
+        //return($pelajar);
         $waris = Waris::join('bk_hubungan','bk_hubungan.kodhubungan','=','waris.hubungan')
-        ->join('bk_negeri','bk_negeri.id','=','waris.alamat_negeri')
-        ->join('bk_bandar','bk_bandar.id','=','waris.alamat_bandar')
+        ->leftjoin('bk_negeri','bk_negeri.id','=','waris.alamat_negeri')
+        ->leftjoin('bk_bandar','bk_bandar.id','=','waris.alamat_bandar')
         ->get(['waris.*', 'bk_hubungan.*', 'bk_negeri.nama as namanegeri', 'bk_bandar.nama as namabandar'])
+        //->get(['waris.*', 'bk_hubungan.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
         //return $waris;
         $akademik = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
@@ -541,7 +543,7 @@ class PermohonanController extends Controller
         $permohonan = Status::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
         ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
         ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
-        ->where('nokp_pelajar', Auth::user()->id);
+        ->where('nokp_pelajar', Auth::user()->nokp);
         return view('pages.permohonan.statusmohon', compact('permohonan'));
         
     }
@@ -550,7 +552,7 @@ class PermohonanController extends Controller
         $permohonan = Status::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
         ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
         ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
-        ->where('nokp_pelajar', Auth::user()->id);
+        ->where('nokp_pelajar', Auth::user()->nokpm);
         return view('pages.permohonan.statusmohon', compact('permohonan'));
         
     }
