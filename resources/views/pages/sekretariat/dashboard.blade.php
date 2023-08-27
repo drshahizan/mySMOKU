@@ -73,8 +73,7 @@
 													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
 														<!--begin::Icon--> 
 														<div class="m-0">
-																			<i class="ki-duotone ki-compass fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span></i>                     
-																	
+															<i class="ki-duotone ki-compass fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span></i>                     
 														</div>                           
 														<!--end::Icon-->
 
@@ -86,9 +85,7 @@
 
 															<!--begin::Follower-->
 															<div class="m-0">
-																					<span class="fw-semibold fs-6 text-gray-400">
-																		Projects                    </span>  
-																
+																<span class="fw-semibold fs-6 text-gray-400">Jumlah</span>  
 															</div>       
 															<!--end::Follower--> 
 														</div>  
@@ -96,9 +93,8 @@
 														
 														<!--begin::Badge--> 
 														<span class="badge badge-light-success fs-base">
-																			<i class="ki-duotone ki-arrow-up fs-5 text-success ms-n1"><span class="path1"></span><span class="path2"></span></i> 
-																					
-															2.1%
+															<a href="#"><span class="path1"></span><span class="path2"></span></a> 
+															Lihat
 														</span>  
 														<!--end::Badge-->                              
 													</div>
@@ -116,8 +112,7 @@
 													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
 														<!--begin::Icon--> 
 														<div class="m-0">
-																			<i class="ki-duotone ki-chart-simple fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>                     
-																	
+															<i class="ki-duotone ki-chart-simple fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>                     
 														</div>                           
 														<!--end::Icon-->
 
@@ -129,9 +124,7 @@
 
 															<!--begin::Follower-->
 															<div class="m-0">
-																					<span class="fw-semibold fs-6 text-gray-400">
-																		Stock Qty                    </span>  
-																
+																<span class="fw-semibold fs-6 text-gray-400">Layak</span>  
 															</div>       
 															<!--end::Follower--> 
 														</div>  
@@ -139,9 +132,8 @@
 														
 														<!--begin::Badge--> 
 														<span class="badge badge-light-success fs-base">
-																			<i class="ki-duotone ki-arrow-up fs-5 text-success ms-n1"><span class="path1"></span><span class="path2"></span></i> 
-																					
-															2.1%
+															<a href="#"><span class="path1"></span><span class="path2"></span></a> 
+															Lihat
 														</span>  
 														<!--end::Badge-->                              
 													</div>
@@ -159,8 +151,7 @@
 													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
 														<!--begin::Icon--> 
 														<div class="m-0">
-																			<i class="ki-duotone ki-abstract-39 fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span></i>                     
-																	
+															<i class="ki-duotone ki-abstract-39 fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span></i>                     
 														</div>                           
 														<!--end::Icon-->
 
@@ -172,9 +163,7 @@
 
 															<!--begin::Follower-->
 															<div class="m-0">
-																					<span class="fw-semibold fs-6 text-gray-400">
-																		Stock Value                    </span>  
-																
+																<span class="fw-semibold fs-6 text-gray-400">Tidak Layak</span>  
 															</div>       
 															<!--end::Follower--> 
 														</div>  
@@ -182,9 +171,8 @@
 														
 														<!--begin::Badge--> 
 														<span class="badge badge-light-danger fs-base">
-																			<i class="ki-duotone ki-arrow-down fs-5 text-danger ms-n1"><span class="path1"></span><span class="path2"></span></i>                  
-																					
-															0.47%
+															<a href="#"><span class="path1"></span><span class="path2"></span></a>                  
+															Lihat
 														</span>  
 														<!--end::Badge-->                              
 													</div>
@@ -202,8 +190,7 @@
 													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
 														<!--begin::Icon--> 
 														<div class="m-0">
-																			<i class="ki-duotone ki-map fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>                     
-																	
+															<i class="ki-duotone ki-map fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>               
 														</div>                           
 														<!--end::Icon-->
 
@@ -215,9 +202,7 @@
 
 															<!--begin::Follower-->
 															<div class="m-0">
-																					<span class="fw-semibold fs-6 text-gray-400">
-																		C APEX                    </span>  
-																
+																<span class="fw-semibold fs-6 text-gray-400">Deraf</span>  
 															</div>       
 															<!--end::Follower--> 
 														</div>  
@@ -225,9 +210,8 @@
 														
 														<!--begin::Badge--> 
 														<span class="badge badge-light-success fs-base">
-																			<i class="ki-duotone ki-arrow-up fs-5 text-success ms-n1"><span class="path1"></span><span class="path2"></span></i> 
-																					
-															2.1%
+															<a href="#"><span class="path1"></span><span class="path2"></span></a> 
+															Lihat
 														</span>  
 														<!--end::Badge-->                              
 													</div>
@@ -247,8 +231,7 @@
 													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
 														<!--begin::Icon--> 
 														<div class="m-0">
-																			<i class="ki-duotone ki-abstract-39 fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span></i>                     
-																	
+															<i class="ki-duotone ki-abstract-39 fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span></i>                     
 														</div>                           
 														<!--end::Icon-->
 
@@ -260,9 +243,7 @@
 
 															<!--begin::Follower-->
 															<div class="m-0">
-																					<span class="fw-semibold fs-6 text-gray-400">
-																		Stock Value                    </span>  
-																
+																<span class="fw-semibold fs-6 text-gray-400">Baharu</span>  
 															</div>       
 															<!--end::Follower--> 
 														</div>  
@@ -270,9 +251,8 @@
 														
 														<!--begin::Badge--> 
 														<span class="badge badge-light-danger fs-base">
-																			<i class="ki-duotone ki-arrow-down fs-5 text-danger ms-n1"><span class="path1"></span><span class="path2"></span></i>                  
-																					
-															0.47%
+															<a href="#"><span class="path1"></span><span class="path2"></span></a>                  
+															Lihat
 														</span>  
 														<!--end::Badge-->                              
 													</div>
@@ -290,8 +270,7 @@
 													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
 														<!--begin::Icon--> 
 														<div class="m-0">
-																			<i class="ki-duotone ki-map fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>                     
-																	
+															<i class="ki-duotone ki-map fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>                     
 														</div>                           
 														<!--end::Icon-->
 
@@ -303,9 +282,7 @@
 
 															<!--begin::Follower-->
 															<div class="m-0">
-																					<span class="fw-semibold fs-6 text-gray-400">
-																		C APEX                    </span>  
-																
+																<span class="fw-semibold fs-6 text-gray-400">Saringan</span>  
 															</div>       
 															<!--end::Follower--> 
 														</div>  
@@ -313,9 +290,8 @@
 														
 														<!--begin::Badge--> 
 														<span class="badge badge-light-success fs-base">
-																			<i class="ki-duotone ki-arrow-up fs-5 text-success ms-n1"><span class="path1"></span><span class="path2"></span></i> 
-																					
-															2.1%
+															<a href="#"><span class="path1"></span><span class="path2"></span></a> 
+															Lihat
 														</span>  
 														<!--end::Badge-->                              
 													</div>
@@ -333,8 +309,7 @@
 													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
 														<!--begin::Icon--> 
 														<div class="m-0">
-																			<i class="ki-duotone ki-abstract-35 fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span></i>                     
-																	
+															<i class="ki-duotone ki-abstract-35 fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span></i>                     
 														</div>                           
 														<!--end::Icon-->
 
@@ -346,9 +321,7 @@
 
 															<!--begin::Follower-->
 															<div class="m-0">
-																					<span class="fw-semibold fs-6 text-gray-400">
-																		OPEX                    </span>  
-																
+																<span class="fw-semibold fs-6 text-gray-400">Disokong</span>  
 															</div>       
 															<!--end::Follower--> 
 														</div>  
@@ -356,9 +329,8 @@
 														
 														<!--begin::Badge--> 
 														<span class="badge badge-light-danger fs-base">
-																			<i class="ki-duotone ki-arrow-down fs-5 text-danger ms-n1"><span class="path1"></span><span class="path2"></span></i>                  
-																					
-															0.647%
+															<a href="#"><span class="path1"></span><span class="path2"></span></a>                  
+															Lihat
 														</span>  
 														<!--end::Badge-->                              
 													</div>
@@ -376,8 +348,7 @@
 													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
 														<!--begin::Icon--> 
 														<div class="m-0">
-																			<i class="ki-duotone ki-abstract-26 fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span></i>                     
-																	
+															<i class="ki-duotone ki-abstract-26 fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span></i>                     
 														</div>                           
 														<!--end::Icon-->
 
@@ -389,9 +360,7 @@
 
 															<!--begin::Follower-->
 															<div class="m-0">
-																					<span class="fw-semibold fs-6 text-gray-400">
-																		Saving                    </span>  
-																
+																<span class="fw-semibold fs-6 text-gray-400">Dikembalikan</span>  
 															</div>       
 															<!--end::Follower--> 
 														</div>  
@@ -399,9 +368,8 @@
 														
 														<!--begin::Badge--> 
 														<span class="badge badge-light-success fs-base">
-																			<i class="ki-duotone ki-arrow-up fs-5 text-success ms-n1"><span class="path1"></span><span class="path2"></span></i> 
-																					
-															2.1%
+															<a href="#"><span class="path1"></span><span class="path2"></span></a> 
+															Lihat
 														</span>  
 														<!--end::Badge-->                              
 													</div>
@@ -425,7 +393,7 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #77dd77">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #1E36A0">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													<span class="symbol-label">
@@ -442,7 +410,7 @@
 													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">1689</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
-													<span class="text-white fw-bold fs-7">Aktif</span>
+													<span class="text-white fw-bold fs-7">Jumlah</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
 													
@@ -457,7 +425,7 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #ff6961">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #26408B">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													<span class="symbol-label">
@@ -474,7 +442,7 @@
 													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">500</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
-													<span class="text-white fw-bold fs-7">Tidak Aktif</span>
+													<span class="text-white fw-bold fs-7">Layak</span>
 													<!--end::Desc-->
 												</div>
 												<!--end::Stats-->
@@ -504,7 +472,7 @@
 													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">300</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
-													<span class="text-white fw-semibold fs-7">Graduan</span>
+													<span class="text-white fw-semibold fs-7">Tidak Layak</span>
 													<!--end::Desc-->
 												</div>
 												<!--end::Stats-->
@@ -516,7 +484,7 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #9cadce">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #A6CFD5">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													<span class="symbol-label">
@@ -534,7 +502,7 @@
 													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">902</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
-													<span class="text-white fw-semibold fs-7">Menyambung Pelajaran</span>
+													<span class="text-white fw-semibold fs-7">Deraf</span>
 													<!--end::Desc-->
 												</div>
 												<!--end::Stats-->
@@ -550,7 +518,7 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #77dd77">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #1E36A0">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													<span class="symbol-label">
@@ -567,7 +535,7 @@
 													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">1689</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
-													<span class="text-white fw-bold fs-7">Aktif</span>
+													<span class="text-white fw-bold fs-7">Baharu</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
 													
@@ -582,7 +550,7 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #ff6961">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #26408B">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													<span class="symbol-label">
@@ -599,7 +567,7 @@
 													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">500</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
-													<span class="text-white fw-bold fs-7">Tidak Aktif</span>
+													<span class="text-white fw-bold fs-7">Saringan</span>
 													<!--end::Desc-->
 												</div>
 												<!--end::Stats-->
@@ -629,7 +597,7 @@
 													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">300</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
-													<span class="text-white fw-semibold fs-7">Graduan</span>
+													<span class="text-white fw-semibold fs-7">Disokong</span>
 													<!--end::Desc-->
 												</div>
 												<!--end::Stats-->
@@ -641,7 +609,7 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #9cadce">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #A6CFD5">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													<span class="symbol-label">
@@ -659,7 +627,7 @@
 													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">902</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
-													<span class="text-white fw-semibold fs-7">Menyambung Pelajaran</span>
+													<span class="text-white fw-semibold fs-7">Dikembalikan</span>
 													<!--end::Desc-->
 												</div>
 												<!--end::Stats-->
