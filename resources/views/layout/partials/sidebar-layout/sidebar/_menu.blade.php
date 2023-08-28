@@ -166,17 +166,17 @@
 					<span class="menu-title">Laman Utama</span>
 				</a>
 		</div>	
-			<div class="menu-item pt-5">
-				<div class="menu-content">
-					<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
-				</div>
+		<div class="menu-item pt-5">
+			<div class="menu-content">
+				<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
 			</div>
-			<div class="menu-item">
-			<a class="menu-link" href="{{url('keseluruhanPermohonan')}}">
-					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-					<span class="menu-title">Keseluruhan</span>
-			</a>
 		</div>
+		{{-- <div class="menu-item">
+		<a class="menu-link" href="{{url('keseluruhanPermohonan')}}">
+				<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
+				<span class="menu-title">Keseluruhan</span>
+		</a>
+		</div> --}}
 		<div class="menu-item">
 			<a class="menu-link" href="{{url('saringan')}}">
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
@@ -196,17 +196,17 @@
 			</a>
 		</div>
 		<div class="menu-item pt-5">
-				<div class="menu-content">
-					<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
-				</div>
+			<div class="menu-content">
+				<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
 			</div>
-			<div class="menu-item">
-			<a class="menu-link" href="{{ url('tuntutan-keseluruhan') }}">
-			<!-- "{{ route('dashboard') }}" -->
-					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-					<span class="menu-title">Keseluruhan</span>
-			</a>
 		</div>
+		{{-- <div class="menu-item">
+		<a class="menu-link" href="{{ url('tuntutan-keseluruhan') }}">
+		<!-- "{{ route('dashboard') }}" -->
+				<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
+				<span class="menu-title">Keseluruhan</span>
+		</a>
+		</div> --}}
 		<div class="menu-item">
 			<a class="menu-link" href="{{ url('tuntutan-saring') }}">
 			<!-- "{{ route('dashboard') }}" -->
