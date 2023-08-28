@@ -153,7 +153,7 @@ class SaringanController extends Controller
             }
             Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
             $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id_permohonan');
-
+            
             $catatan = new Saringan([
                 'id_permohonan'           =>  $id_permohonan,
                 'catatan_profilDiri'      =>  $profil,
@@ -172,7 +172,8 @@ class SaringanController extends Controller
             ->orWhere('status', '=','4')
             ->orWhere('status', '=','5')
             ->get();
-            $status = "Permohonan " .$id_permohonan." telah dikembalikan";
+            
+            $status = "Permohonan telah dikembalikan";
             return view('pages.saringan.saringan',compact('permohonan','status'));
         }
     }

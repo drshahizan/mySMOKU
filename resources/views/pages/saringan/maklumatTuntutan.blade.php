@@ -105,6 +105,47 @@
                                         $akademik = DB::table('maklumatakademik')->where('nokp_pelajar', $pelajar->nokp_pelajar)->first();
                                         $institusi = DB::table('bk_infoipt')->where('idipt', $akademik->id_institusi)->value('namaipt');
                                         $peringkat = DB::table('bk_peringkatpengajian')->where('kodperingkat', $akademik->peringkat_pengajian)->value('peringkat');
+                                        // nama pemohon
+                                        $text = ucwords(strtolower($pelajar->nama_pelajar)); // Assuming you're sending the text as a POST parameter
+                                        $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
+                                        $words = explode(' ', $text);
+                                        $result = [];
+                                        foreach ($words as $word) {
+                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                $result[] = Str::lower($word);
+                                            } else {
+                                                $result[] = $word;
+                                            }
+                                        }
+                                        $pemohon = implode(' ', $result);
+
+                                        //nama kursus
+                                        $text2 = ucwords(strtolower($akademik->nama_kursus)); // Assuming you're sending the text as a POST parameter
+                                        $conjunctions = ['of', 'in', 'and'];
+                                        $words = explode(' ', $text2);
+                                        $result = [];
+                                        foreach ($words as $word) {
+                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                $result[] = Str::lower($word);
+                                            } else {
+                                                $result[] = $word;
+                                            }
+                                        }
+                                        $kursus = implode(' ', $result);
+
+                                        //institusi pengajian
+                                        $text3 = ucwords(strtolower($institusi)); // Assuming you're sending the text as a POST parameter
+                                        $conjunctions = ['of', 'in', 'and'];
+                                        $words = explode(' ', $text3);
+                                        $result = [];
+                                        foreach ($words as $word) {
+                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                $result[] = Str::lower($word);
+                                            } else {
+                                                $result[] = $word;
+                                            }
+                                        }
+                                        $institusi = implode(' ', $result);
                                     @endphp
                                     <table class="maklumat">
                                         <tr>
@@ -114,12 +155,12 @@
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Kursus</strong></td>
                                             <td>:</td>
-                                            <td>{{$akademik->nama_kursus}}</td>
+                                            <td>{{$kursus}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Nama</strong></td>
                                             <td>:</td>
-                                            <td>{{$pelajar->nama_pelajar}}</td>
+                                            <td>{{$pemohon}}</td>
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Institusi</strong></td>
                                             <td>:</td>
@@ -132,7 +173,7 @@
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Peringkat</strong></td>
                                             <td>:</td>
-                                            <td>{{$peringkat}}</td>
+                                            <td>{{ ucwords(strtolower($peringkat))}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Tarikh Tuntutan</strong></td>
@@ -142,6 +183,15 @@
                                             <td><strong>Sesi/Semester</strong></td>
                                             <td>:</td>
                                             <td>{{$akademik->sesi}}-0{{$akademik->sem_semasa}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Status Penajaan</strong></td>
+                                            <td>:</td>
+                                            @if($akademik->nama_penaja!=null)
+                                                <td>Ditaja</td>
+                                            @else
+                                                <td>Tidak Ditaja</td>
+                                            @endif
                                         </tr>
                                     </table>   
                                 <hr>
