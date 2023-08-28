@@ -64,14 +64,15 @@ class SaringanController extends Controller
         return view('pages.saringan.maklumatTuntutan');
     }
 
-    public function saringTuntutan(Request $request)
+    public function saringTuntutan(Request $request,$id)
     {
+        $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id_permohonan');
         $permohonan = TuntutanPermohonan::where('status', '2')
         ->orWhere('status', '=','3')
         ->orWhere('status', '=','4')
         ->orWhere('status', '=','5')
         ->get();
-        $status = "Tuntutan Telah Disokong";
+        $status = "Tuntutan ".$id_permohonan." telah disokong";
         return view('pages.saringan.saringan',compact('permohonan','status'));
     }
 
@@ -115,7 +116,7 @@ class SaringanController extends Controller
             
             $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
             $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
-            $status = "Permohonan Telah Disokong";
+            $status = "Permohonan telah disokong";
             return view('pages.saringan.maklumatTuntutan',compact('permohonan','pelajar','status'));
         }
         else{
@@ -171,7 +172,7 @@ class SaringanController extends Controller
             ->orWhere('status', '=','4')
             ->orWhere('status', '=','5')
             ->get();
-            $status = "Permohonan Telah Dikembalikan";
+            $status = "Permohonan " .$id_permohonan." telah dikembalikan";
             return view('pages.saringan.saringan',compact('permohonan','status'));
         }
     }
