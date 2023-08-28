@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="assets/css/sekretariat.css">
+        <link rel="stylesheet" href="/assets/css/sekretariat.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
@@ -18,65 +18,62 @@
             <div class="container-fluid">
                 <div class="block-header">
                     <div class="row clearfix">
-                        <div class="col-lg-6 col-md-12 col-sm-12">
-                            <h1>Keputusan Tuntutan BKOKU dan PPK</h1>
-                        </div>
-                        <hr>
+                        <div class="card">
+                            <div class="header">
+                                <h2>Senarai Keputusan Permohonan</h2>
+                            </div>
 
-                        {{-- Card Tile --}}
-                        <div class="col-lg-4 col-md-8">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-success text-white rounded-circle" style="padding-left:0;"><i class="fa fa-check"></i></div>
-                                        <div class="ml-4">
-                                            <span style="color: black;">Tuntutan Layak</span>
-                                            <h4 class="mb-0 font-weight-medium">{{number_format(3700)}}</h4>
+                            {{-- Card Tile --}}
+                            {{-- <div class="col-lg-4 col-md-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-in-bg bg-success text-white rounded-circle" style="padding-left:0;"><i class="fa fa-check"></i></div>
+                                            <div class="ml-4">
+                                                <span style="color: black;">Permohonan Layak</span>
+                                                <h4 class="mb-0 font-weight-medium">3700</h4>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-lg-4 col-md-8">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-danger rounded-circle" style="padding-left:0;"><i class="fa fa-close" style="color: white"></i></div>
-                                        <div class="ml-4">
-                                            <span style="color: black;">Tuntutan Tidak Layak</span>
-                                            <h4 class="mb-0 font-weight-medium">{{number_format(200)}}</h4>
+                            <div class="col-lg-4 col-md-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-in-bg bg-danger rounded-circle" style="padding-left:0;"><i class="fa fa-close" style="color: white"></i></div>
+                                            <div class="ml-4">
+                                                <span style="color: black;">Permohonan Tidak Layak</span>
+                                                <h4 class="mb-0 font-weight-medium">200</h4>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-lg-4 col-md-8">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-in-bg bg-warning rounded-circle" style="padding-left:0;"><i class="fa fa-mail-reply" style="color: white"></i></div>
-                                        <div class="ml-4">
-                                            <span style="color: black;">Tuntutan Dikembalikan</span>
-                                            <h4 class="mb-0 font-weight-medium">{{number_format(1230)}}</h4>
+                            <div class="col-lg-4 col-md-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-in-bg bg-warning rounded-circle" style="padding-left:0;"><i class="fa fa-mail-reply" style="color: white"></i></div>
+                                            <div class="ml-4">
+                                                <span style="color: black;">Permohonan Dikembalikan</span>
+                                                <h4 class="mb-0 font-weight-medium">1200</h4>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        {{-- End of Card Tile --}}
+                            </div> --}}
+                            {{-- End of Card Tile --}}
                             
-                        <div class="card-body">
                             <form action="" method="GET">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        {{-- <label style="color:black">Tapis mengikut Tarikh</label> --}}
+                                <div class="row" style="margin-left:15px;">
+                                    <div class="col-md-3">
                                         <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
                                     </div>
     
-                                    <div class="col-md-2">
-                                        {{-- <label style="color:black">Tapis mengikut Keputusan</label> --}}
+                                    <div class="col-md-3">
                                         <select name="status" class="form-select">
                                             <option value="">Pilih Keputusan</option>
                                             <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
@@ -84,59 +81,50 @@
                                             <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
                                         </select>
                                     </div>
-    
-                                    <div class="col-md-6">
-                                        <button type="submit" class="btn btn-primary" style="width: 10%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
-                                    </div>
                                 </div>
                             </form>
-    
+        
                             <div class="body">
                                 <div class="table-responsive">
                                     <table id="sortTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th style="width: 15%">ID Tuntutan</th>
-                                                <th style="width: 38%">Nama</th>
-                                                <th style="width: 12%">Jenis Permohonan</th>
-                                                <th style="width: 10%">No. Mesyuarat</th>
-                                                <th style="width: 10%" class="text-center">Tarikh Kelulusan</th>
-                                                <th style="width: 15%" class="text-center">Keputusan Tuntutan</th>
+                                                <th style="width: 15%">ID Permohonan</th>
+                                                <th style="width: 40%">Nama</th>
+                                                <th style="width: 15%" class="text-center">No. Mesyuarat</th>
+                                                <th style="width: 15%" class="text-center">Tarikh Kelulusan</th>
+                                                <th style="width: 15%" class="text-center">Keputusan Permohonan</th>
                                             </tr>
                                         </thead>
                                             
                                         <tbody> 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPT/BKOKU/D/020223015001</a></td> 
+                                                <td>KPT/BKOKU/D/020223015001</td> 
                                                 <td>Ali Bin Abu</td> 
-                                                <td>BKOKU</td>
                                                 <td>A12343</td>
                                                 <td class="text-center">10/08/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTPPK/2/011221038712</a></td> 
+                                                <td>KPTPPK/2/011221038712</td> 
                                                 <td>Arina Binti Saleh</td>
-                                                <td>PPK</td>
                                                 <td>A12343</td> 
                                                 <td class="text-center">04/06/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKU/3/011221034612</a></td> 
+                                                <td>KPTBKOKU/3/011221034612</td> 
                                                 <td>Choo Mei Ling</td> 
-                                                <td>BKOKU</td>
                                                 <td>A12343</td> 
                                                 <td class="text-center">05/07/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTBKOKU/4/001121035602</a></td> 
+                                                <td>KPTBKOKU/4/001121035602</td> 
                                                 <td>Sarah Binti Md Yunos</td>
-                                                <td>BKOKU</td>
                                                 <td>A12343</td> 
                                                 <td class="text-center">12/06/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-danger btn-sm"> Tidak Layak</button></td>
@@ -144,9 +132,8 @@
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" target="_blank">KPTPPK/5/970804110016</a></td>
+                                                <td>KPTPPK/5/970804110016</td>
                                                 <td>Tamila A/P Ganesh</td>
-                                                <td>PPK</td>
                                                 <td>A12352</td> 
                                                 <td class="text-center">20/06/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
@@ -154,27 +141,24 @@
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/4/950623035672</a></td>
+                                                <td>KPTBKOKU/4/950623035672</td>
                                                 <td>Wan Nurul Syafiqah Binti Wan Sahak</td>
-                                                <td>BKOKU</td>
                                                 <td>A12352</td> 
                                                 <td class="text-center">09/08/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>
                                             </tr>
     
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTBKOKU/6/930907030098</a></td>
+                                                <td>KPTBKOKU/6/930907030098</td>
                                                 <td>Siti Aisyah Binti Ismail</td>
-                                                <td>BKOKU</td>
                                                 <td>A12352</td> 
                                                 <td class="text-center">21/05/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-warning btn-sm">Dikembalikan</button></td>
                                             </tr>
     
                                             <tr>
-                                                <td><a href="{{ url('maklumat-keputusan') }}" title="">KPTPPK/5/950523098909</a></td>
+                                                <td>KPTPPK/5/950523098909</td>
                                                 <td>Muhammad Aiman Bin Hamid</td>
-                                                <td>PPK</td>
                                                 <td>A12352</td>
                                                 <td class="text-center">29/07/2023</td>
                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm"> Layak</button></td>

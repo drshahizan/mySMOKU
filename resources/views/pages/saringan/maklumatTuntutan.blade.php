@@ -152,6 +152,9 @@
                                     <!--begin: Invoice body-->
                                     @php
                                         $jumlah = $permohonan->amaun + $akademik->bil_bulanpersem * 300;
+                                        if($jumlah > 5000){
+                                            $jumlah = 5000;
+                                        }
                                     @endphp
                                     <div class="table-responsive">
                                         <table class="maklumat2">

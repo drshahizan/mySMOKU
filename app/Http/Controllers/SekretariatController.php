@@ -173,7 +173,8 @@ class SekretariatController extends Controller
     //TUNTUTAN
     public function tuntutanKeseluruhan()
     {
-        return view('pages.sekretariat.tuntutan.keseluruhan');
+        $keseluruhan = TuntutanPermohonan::all();
+        return view('pages.sekretariat.tuntutan.keseluruhan', compact('keseluruhan'));
     }
 
     public function tuntutanSaring()
