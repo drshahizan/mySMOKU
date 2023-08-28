@@ -68,7 +68,6 @@
                                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 3%"><b>No.</b></th>
                                                     <th style="width: 17%"><b>ID Permohonan</b></th>                                        
                                                     <th style="width: 50%"><b>Nama</b></th>
                                                     <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
@@ -93,8 +92,7 @@
                                                         $status='Sedang Disaring';
                                                     }
                                                 @endphp
-                                                <tr>
-                                                    <td>{{ $i }}</td>                                      
+                                                <tr>                              
                                                     <td>
                                                         @if($item['status']==4 || $item['status']==5)
                                                             <a href="{{ url('permohonan/telah/disaring/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
@@ -129,7 +127,6 @@
                                             <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width: 2%"><b>No.</b></th>
                                                         <th style="width: 17%"><b>ID Permohonan</b></th>                                        
                                                         <th style="width: 33%"><b>Nama</b></th>
                                                         <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
@@ -154,8 +151,7 @@
                                                             $status='Sedang Disaring';
                                                         }
                                                     @endphp
-                                                    <tr>
-                                                        <td>{{ $i }}</td>                                      
+                                                    <tr>                                 
                                                         <td>
                                                             @if($item['status']==4 || $item['status']==5)
                                                                 <a href="{{ url('permohonan/telah/disaring/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>

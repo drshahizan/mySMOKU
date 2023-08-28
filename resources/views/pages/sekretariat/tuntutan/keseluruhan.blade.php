@@ -129,6 +129,7 @@
                         </div>
                         {{-- PKK --}}
                         <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
+                            <br><br>
                             {{-- Filter section --}}
                             <form action="" method="GET">
                                 <div class="row">
