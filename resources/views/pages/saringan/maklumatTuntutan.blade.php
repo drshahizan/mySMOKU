@@ -147,7 +147,7 @@
                                 <hr>
                                 <br>
                                 <td>
-                                    <form method="POST" action="{{ url('saring/tuntutan') }}" id="saring">
+                                    <form method="POST" action="{{ url('saring/tuntutan/'.$pelajar->nokp_pelajar) }}" id="saring">
                                     {{csrf_field()}}     
                                     <!--begin: Invoice body-->
                                     @php

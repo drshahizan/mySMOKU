@@ -20,6 +20,6 @@ class SaringanMail extends Mailable
 
     public function build()
     {
-       return $this->view('pages.saringan.email-dikembalikan')->with('data', $this->catatan);
+       return $this->view('pages.saringan.email-dikembalikan')->with('data', $this->catatan)->subject("BKOKU: Permohonan Dikembalikan");
     }
 }

@@ -73,7 +73,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('maklumat/akademik/{no_kp}', [SaringanController::class, 'maklumatAkademik'])->name('maklumat.akademik.no_kp');
     Route::get('maklumat/akademik2', [SaringanController::class, 'maklumatAkademik2'])->name('maklumat.akademik2.no_kp');
     Route::get('maklumat/tuntutan/{no_kp}', [SaringanController::class, 'maklumatTuntutan'])->name('maklumat.tuntutan.no_kp');
-    Route::post('saring/tuntutan', [SaringanController::class, 'saringTuntutan']);
+    Route::post('saring/tuntutan/{no_kp}', [SaringanController::class, 'saringTuntutan'])->name('saring.tuntutan.no_kp');
     Route::get('salinan/dokumen/{no_kp}', [SaringanController::class, 'salinanDokumen'])->name('salinan.dokumen.no_kp');
     Route::get('salinan/invois', [SaringanController::class, 'salinanInvois'])->name('salinan.invois.no_kp');
     Route::get('salinan/akademik', [SaringanController::class, 'salinanAkademik'])->name('salinan.akademik.no_kp');

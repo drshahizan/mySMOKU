@@ -13,6 +13,13 @@
         .space{
             width: 15%;
         }
+        input[type=text]{
+            width: 65%;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
     </style>
     <div id="main-content">
         <div class="container-fluid">
@@ -57,9 +64,9 @@
                                             <td>:</td>
                                             <td>{{$pelajar->nama_pelajar}}</td>
                                             <td class="space">&nbsp;</td>
-                                            <td><strong>Semester Semasa</strong></td>
+                                            <td><strong>Sesi/Semester</strong></td>
                                             <td>:</td>
-                                            <td>{{$akademik->sem_semasa}}</td>
+                                            <td>{{$akademik->sesi}}-0{{$akademik->sem_semasa}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>No. Kad Pengenalan</strong></td>
@@ -102,6 +109,7 @@
                                                 <td><div class="form-group c_form_group">
                                                     <input class="checkbox1a" id="checkbox1a" type="checkbox" name="catatan_maklumat_profil_diri[]" value="Terdapat maklumat yang tidak benar pada Maklumat Profil Diri" disabled="disabled"><span> Terdapat maklumat yang tidak benar pada Maklumat Profil Diri</span><br>
                                                     <input class="checkbox1b" id="checkbox1b" type="checkbox" name="catatan_maklumat_profil_diri[]" value="Terdapat maklumat yang tidak lengkap pada Maklumat Profil Diri" disabled="disabled"><span> Terdapat maklumat yang tidak lengkap pada Maklumat Profil Diri</span><br>
+                                                    <input class="checkbox1c" id="checkbox1c" type="checkbox" name="catatan_maklumat_profil_diri[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain1" id="lain1" disabled="disabled"></span><br>
                                                 </div> </td>
                                                 </tr>
                                                 <tr>
@@ -122,6 +130,7 @@
                                                     <div class="checkbox-group">
                                                         <input class="checkbox2a" id="checkbox2a" type="checkbox" name="catatan_maklumat_akademik[]" value="Terdapat maklumat yang tidak benar pada Maklumat Akademik" disabled="disabled"><span> Terdapat maklumat yang tidak benar pada Maklumat Akademik</span><br>
                                                         <input class="checkbox2b" id="checkbox2b" type="checkbox" name="catatan_maklumat_akademik[]" value="Terdapat maklumat yang tidak lengkap pada Maklumat Akademik" disabled="disabled"><span> Terdapat maklumat yang tidak lengkap pada Maklumat Akademik</span><br>
+                                                        <input class="checkbox2c" id="checkbox2c" type="checkbox" name="catatan_maklumat_akademik[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain2" id="lain2" disabled="disabled"></span><br>
                                                     </div></td>
                                                 </td> 
                                                 </tr>
@@ -145,12 +154,12 @@
                                                         <input class="checkbox3a" id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada surat tawaran" disabled="disabled"><span> Ralat pada surat tawaran</span><br>
                                                         <input class="checkbox3b" id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada penyata bank" disabled="disabled"><span> Ralat pada penyata bank</span><br>
                                                         <input class="checkbox3c" id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada resit" disabled="disabled"><span> Ralat pada resit/invois</span><br>
-                                                        <input class="checkbox3d" id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada keputusan peperiksaan" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span>
+                                                        <input class="checkbox3d" id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada keputusan peperiksaan" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span><br>
+                                                        <input class="checkbox3e" id="checkbox3e" type="checkbox" name="catatan_salinan_dokumen[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain3" id="lain3" disabled="disabled"></span>
                                                     </div></td>
                                                 </tr>                                                
                                             </tbody>
                                         </table>
-                                        <span id="checkedValue"></span>
                                     </div>
                                 </div>
                             </div>
@@ -171,21 +180,21 @@
     <script> 
         var btn = document.getElementById('check');
         btn.addEventListener('click', function() {
-            if (document.getElementById('checkbox1a').checked||document.getElementById('checkbox1b').checked) {
+            if (document.getElementById('checkbox1a').checked||document.getElementById('checkbox1b').checked||document.getElementById('checkbox1c').checked) {
                 document.getElementById("checkbox1a").required = false;
             }
             else{
                 document.getElementById("checkbox1a").required = true;
             }
 
-            if (document.getElementById('checkbox2a').checked||document.getElementById('checkbox2b').checked) {
+            if (document.getElementById('checkbox2a').checked||document.getElementById('checkbox2b').checked||document.getElementById('checkbox2c').checked) {
                 document.getElementById("checkbox2a").required = false;
             }
             else{
                 document.getElementById("checkbox2a").required = true;
             }
 
-            if (document.getElementById('checkbox3a').checked||document.getElementById('checkbox3b').checked||document.getElementById('checkbox3c').checked||document.getElementById('checkbox3d').checked) {
+            if (document.getElementById('checkbox3a').checked||document.getElementById('checkbox3b').checked||document.getElementById('checkbox3c').checked||document.getElementById('checkbox3d').checked||document.getElementById('checkbox3e').checked) {
                 document.getElementById("checkbox3a").required = false;
             }
             else{
@@ -199,10 +208,12 @@
             if(catatan1=="tak_lengkap"){
                 document.getElementById("checkbox1a").disabled = false;
                 document.getElementById("checkbox1b").disabled = false;
+                document.getElementById("checkbox1c").disabled = false;
             }
             else{
                 document.getElementById("checkbox1a").disabled = true;
                 document.getElementById("checkbox1b").disabled = true;
+                document.getElementById("checkbox1c").disabled = true;
             }
         }
         
@@ -211,13 +222,13 @@
             if(catatan1=="tak_lengkap"){
                 document.getElementById("checkbox2a").disabled = false;
                 document.getElementById("checkbox2b").disabled = false;
-                // document.getElementById("checkbox2c").disabled = false;
+                document.getElementById("checkbox2c").disabled = false;
                 // document.getElementById("checkbox2d").disabled = false;
             }
             else{
                 document.getElementById("checkbox2a").disabled = true;
                 document.getElementById("checkbox2b").disabled = true;
-                // document.getElementById("checkbox2c").disabled = true;
+                document.getElementById("checkbox2c").disabled = true;
                 // document.getElementById("checkbox2d").disabled = true;
             }
         }
@@ -229,17 +240,52 @@
                 document.getElementById("checkbox3b").disabled = false;
                 document.getElementById("checkbox3c").disabled = false;
                 document.getElementById("checkbox3d").disabled = false;
+                document.getElementById("checkbox3e").disabled = false;
             }
             else{
                 document.getElementById("checkbox3a").disabled = true;
                 document.getElementById("checkbox3b").disabled = true;
                 document.getElementById("checkbox3c").disabled = true;
                 document.getElementById("checkbox3d").disabled = true;
+                document.getElementById("checkbox3e").disabled = true;
             }
         }
+        //enable input text 'lain-lain'
+        document.getElementById("checkbox1c").addEventListener('click', function() {
+            if(document.getElementById("checkbox1c").checked){
+                document.getElementById("lain1").disabled = false;
+            }
+            else{
+                document.getElementById("lain1").disabled = true;
+            }
+        })
+        document.getElementById("checkbox2c").addEventListener('click', function() {
+            if(document.getElementById("checkbox2c").checked){
+                document.getElementById("lain2").disabled = false;
+            }
+            else{
+                document.getElementById("lain2").disabled = true;
+            }
+        })
+        document.getElementById("checkbox3e").addEventListener('click', function() {
+            if(document.getElementById("checkbox3e").checked){
+                document.getElementById("lain3").disabled = false;
+            }
+            else{
+                document.getElementById("lain3").disabled = true;
+            }
+        })
 
-        function confirmButton() {
-            confirm("Press a button!");
-        }
+        //get input text 'lain-lain' value
+        document.getElementById("lain1").addEventListener('input', function() {
+            document.getElementById("checkbox1c").value = document.getElementById("lain1").value;
+        })
+        document.getElementById("lain2").addEventListener('input', function() {
+            document.getElementById("checkbox2c").value = document.getElementById("lain2").value;
+        })
+        document.getElementById("lain3").addEventListener('input', function() {
+            document.getElementById("checkbox3e").value = document.getElementById("lain3").value;
+        })
+        
     </script>
 </x-default-layout> 
