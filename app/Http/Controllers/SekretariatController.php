@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\SenaraiPendek;
 use App\Models\Permohonan;
+use App\Models\Saringan;
 use App\Models\TuntutanPermohonan;
 use App\Models\Waris;
 use App\Models\Akademik;
@@ -51,7 +52,10 @@ class SekretariatController extends Controller
     public function kemaskiniKelulusan($id)
     {
         $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
-        return view('pages.sekretariat.permohonan.maklumatKelulusan',compact('permohonan'));
+        $id_permohonan = $permohonan->id_permohonan;
+        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
+        $catatan = Saringan::where('id_permohonan', $id_permohonan)->first();
+        return view('pages.sekretariat.permohonan.maklumatKelulusan',compact('permohonan','pelajar','catatan'));
     }
 
     public function keputusanPermohonan()

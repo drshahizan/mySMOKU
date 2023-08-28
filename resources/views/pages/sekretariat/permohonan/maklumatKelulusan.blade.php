@@ -7,8 +7,18 @@
         <!-- Default theme -->
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
         <style>
-            table, tr, td{
+            .mesyuarat table, .mesyuarat tr, .mesyuarat td{
                 border: none!important;
+            }
+            .maklumat, .maklumat td{
+            border: none!important;
+            padding:2px 8px!important;
+            }
+            td{
+                vertical-align: top!important;
+            }
+            .space{
+                width: 15%;
             }
         </style>
     </head>
@@ -38,7 +48,7 @@
                                 <div class="row clearfix">
                                     <div class="col-md-6 col-sm-6">
                                         <br>
-                                        <table class="pemohon">
+                                        <table class="maklumat">
                                                 @php
                                                     $nama = DB::table('pelajar')->where('nokp_pelajar', $permohonan['nokp_pelajar'])->value('nama_pelajar');
                                                     $status = DB::table('statusinfo')->where('kodstatus',$permohonan['status'])->value('status');
@@ -47,18 +57,16 @@
                                                     <td><strong>Nama </strong></td>
                                                     <td><b>:</b></td>
                                                     <td>{{$nama}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>ID Permohonan </strong></td>
-                                                    <td><b>:</b></td>
-                                                    <td>{{$permohonan->id_permohonan}}</td>
-                                                </tr>
-                                                <tr>
+                                                    <td class="space">&nbsp;</td>
                                                     <td><strong>Tarikh Permohonan </strong></td>
                                                     <td><b>:</b></td>
                                                     <td>{{$permohonan['created_at']->format('d/m/Y')}}</td>
                                                 </tr>
                                                 <tr>
+                                                    <td><strong>ID Permohonan </strong></td>
+                                                    <td><b>:</b></td>
+                                                    <td>{{$permohonan->id_permohonan}}</td>
+                                                    <td class="space">&nbsp;</td>
                                                     <td><strong>Status Permohonan </strong></td>
                                                     <td><b>:</b></td>
                                                     <td>{{$status}}</td>
@@ -67,19 +75,17 @@
                                     </div>
                                 </div>
                             
-                                {{-- <hr><br> --}}
-
-                                {{-- <div class="row clearfix">
+                                <div class="row clearfix">
                                     <div class="col-md-12">
                                         <div class="table-responsive">
                                             @if($permohonan->status==4)
-                                                <table class="table table-hover table-bordered mb-5">
+                                                <table class="table table-hover table-bordered mb-5" style="border: 2px;">
                                                     <thead class="table-primary">
                                                         <tr>
-                                                            <th style="width: 5%; text-align:right;">No.</th>                                                        
+                                                            <th style="width: 3%; text-align:right;">No.</th>                                                        
                                                             <th style="width: 20%;">Item</th>
-                                                            <th style="width: 25%;">Keputusan Saringan</th>
-                                                            <th style="width: 50%;">Catatan</th>
+                                                            <th style="width: 17%;">Keputusan Saringan</th>
+                                                            <th style="width: 60%;">Catatan</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -201,31 +207,30 @@
                                                     </tbody>
                                                 </table>
                                             @endif
-                                            
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
 
                                 <hr><br>
 
                                 <div class="col-md-6 col-sm-6">
                                     <form action="{{ url('hantar-keputusan') }}" method="POST">
                                         {{csrf_field()}}
-                                        <table>
-                                            <tr>
-                                                <td><b>No. Mesyuarat</b></td>
-                                                <td><b>:</b></td>
-                                                <td><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;" required></td>
+                                        <table class="mesyuarat">
+                                            <tr class="mesyuarat">
+                                                <td class="mesyuarat"><b>No. Mesyuarat</b></td>
+                                                <td class="mesyuarat"><b>:</b></td>
+                                                <td class="mesyuarat"><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;" required></td>
                                             </tr>
-                                            <tr>
-                                                <td><b>Tarikh Mesyuarat</b></td>
-                                                <td><b>:</b></td>
-                                                <td><input type="date" id="tarikh" name="tarikh" style="padding: 5px;" required></td>
+                                            <tr class="mesyuarat">
+                                                <td class="mesyuarat"><b>Tarikh Mesyuarat</b></td>
+                                                <td class="mesyuarat"><b>:</b></td>
+                                                <td class="mesyuarat"><input type="date" id="tarikh" name="tarikh" style="padding: 5px;" required></td>
                                             </tr>
-                                            <tr>
-                                                <td><b>Keputusan</b></td>
-                                                <td><b>:</b></td>
-                                                <td>
+                                            <tr class="mesyuarat">
+                                                <td class="mesyuarat"><b>Keputusan</b></td>
+                                                <td class="mesyuarat"><b>:</b></td>
+                                                <td class="mesyuarat">
                                                     <select id="keputusan" id="keputusan" style="padding: 5px;" required>
                                                         <option value="">Pilih Keputusan</option>
                                                         <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
@@ -233,10 +238,10 @@
                                                     </select>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td><b>Catatan</b></td>
-                                                <td><b>:</b></td>
-                                                <td><input type="text" id="catatan" name="noMesyuarat" style="padding: 5px; width:500px;"></td>
+                                            <tr class="mesyuarat">
+                                                <td class="mesyuarat"><b>Catatan</b></td>
+                                                <td class="mesyuarat"><b>:</b></td>
+                                                <td class="mesyuarat"><input type="text" id="catatan" name="noMesyuarat" style="padding: 5px; width:500px;"></td>
                                             </tr>
                                         </table>
                                         <br>
