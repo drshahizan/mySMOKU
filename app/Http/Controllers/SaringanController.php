@@ -21,8 +21,9 @@ class SaringanController extends Controller
         ->orWhere('status', '=','4')
         ->orWhere('status', '=','5')
         ->get();
+        $status_kod=0;
         $status = null;
-        return view('pages.saringan.saringan',compact('permohonan','status'));
+        return view('pages.saringan.saringan',compact('permohonan','status_kod','status'));
     }
 
     public function maklumatPemohon($id)
@@ -72,8 +73,9 @@ class SaringanController extends Controller
         ->orWhere('status', '=','4')
         ->orWhere('status', '=','5')
         ->get();
-        $status = "Tuntutan ".$id_permohonan." telah disokong";
-        return view('pages.saringan.saringan',compact('permohonan','status'));
+        $status_kod = 3;
+        $status = "Permohonan dan tuntutan ".$id_permohonan." telah disaring dan disokong.";
+        return view('pages.saringan.saringan',compact('permohonan','status_kod','status'));
     }
 
     public function salinanDokumen($id)
@@ -115,9 +117,11 @@ class SaringanController extends Controller
             ]);
             
             $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
+            $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id_permohonan');
             $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
-            $status = "Permohonan telah disokong";
-            return view('pages.saringan.maklumatTuntutan',compact('permohonan','pelajar','status'));
+            $status_kod = 1;
+            $status = "Permohonan ".$id_permohonan." telah disaring dan disokong.";
+            return view('pages.saringan.maklumatTuntutan',compact('permohonan','pelajar','status_kod','status'));
         }
         else{
             $catatan[]="";
@@ -173,8 +177,9 @@ class SaringanController extends Controller
             ->orWhere('status', '=','5')
             ->get();
             
-            $status = "Permohonan telah dikembalikan";
-            return view('pages.saringan.saringan',compact('permohonan','status'));
+            $status_kod = 2;
+            $status = "Permohonan ".$id_permohonan." telah dikembalikan.";
+            return view('pages.saringan.saringan',compact('permohonan','status_kod','status'));
         }
     }
 
