@@ -197,7 +197,7 @@ class SekretariatController extends Controller
     public function tuntutanKelulusan()
     {
         $permohonan = TuntutanPermohonan::where('status', '4')
-        ->get();
+        ->get();$kelulusan = Akademik::all();
         return view('pages.sekretariat.tuntutan.kelulusan', compact('permohonan'));
     }
 

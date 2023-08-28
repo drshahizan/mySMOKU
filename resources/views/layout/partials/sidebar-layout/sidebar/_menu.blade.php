@@ -215,13 +215,6 @@
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{ url('tuntutan-kelulusan') }}">
-			<!-- "{{ route('dashboard') }}" -->
-					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Kelulusan</span>
-			</a>
-		</div>
-		<div class="menu-item">
 			<a class="menu-link" href="{{ url('tuntutan-keputusan') }}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
