@@ -123,7 +123,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('borangTuntutanYuran',[TuntutanController::class,'borangtuntutanyuran'])->name('borangTuntutanYuran');
 
     //Pentadbir
-    Route::get('daftarpengguna', [PentadbirController::class, 'daftar']);
+    Route::get('daftarpengguna', [PentadbirController::class, 'daftar'])->name('daftarpengguna');
 });
 
 Route::get('/error', function () {
