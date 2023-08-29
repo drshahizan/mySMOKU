@@ -15,7 +15,7 @@ var KTCustomersList = function () {
 
         tableRows.forEach(row => {
             const dateRow = row.querySelectorAll('td');
-            const realDate = moment(dateRow[5].innerHTML, "DD MMM YYYY, LT").format(); // select date from 5th column in table
+            const realDate = moment(dateRow[4].innerHTML, "DD MMM YYYY, LT").format(); // select date from 5th column in table
             dateRow[5].setAttribute('data-order', realDate);
         });
 
@@ -25,7 +25,7 @@ var KTCustomersList = function () {
             'order': [],
             'columnDefs': [
                 { orderable: false, targets: 0 }, // Disable ordering on column 0 (checkbox)
-                { orderable: false, targets: 6 }, // Disable ordering on column 6 (actions)
+                { orderable: false, targets: 5 }, // Disable ordering on column 6 (actions)
             ]
         });
 
@@ -50,7 +50,7 @@ var KTCustomersList = function () {
     var handleFilterDatatable = () => {
         // Select filter options
         filterMonth = $('[data-kt-customer-table-filter="month"]');
-        filterPayment = document.querySelectorAll('[data-kt-customer-table-filter="payment_type"] [name="payment_type"]');
+        filterPayment = document.querySelectorAll('[data-kt-customer-table-filter="tahap"] [name="tahap"]');
         const filterButton = document.querySelector('[data-kt-customer-table-filter="filter"]');
 
         // Filter datatable on submit

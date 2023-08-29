@@ -11,8 +11,12 @@ class PentadbirController extends Controller
 {
     public function daftar()
     {
-        $tahap = Tahap::all()->sortBy('kodhubungan');
-        return view('pages.pentadbir.daftarpengguna', compact('tahap'));
+        $user = User::leftjoin('roles','roles.id','=','users.tahap')
+        ->orderBy('users.created_at', 'desc')
+        ->get(['users.*', 'roles.name']);
+
+        $tahap = Tahap::all()->sortBy('id');
+        return view('pages.pentadbir.daftarpengguna', compact('user','tahap'));
     }
 
     public function store(Request $request)

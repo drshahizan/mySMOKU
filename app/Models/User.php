@@ -28,6 +28,8 @@ class User extends Authenticatable
         'password',
         'tahap',
         'status',
+        'created_at',
+        'updated_at',
         'last_login_at',
         'last_login_ip',
     ];

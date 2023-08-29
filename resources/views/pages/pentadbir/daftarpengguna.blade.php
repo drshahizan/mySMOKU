@@ -86,29 +86,41 @@
 										<label class="form-label fs-5 fw-semibold mb-3">Payment Type:</label>
 										<!--end::Label-->
 										<!--begin::Options-->
-										<div class="d-flex flex-column flex-wrap fw-semibold" data-kt-customer-table-filter="payment_type">
+										<div class="d-flex flex-column flex-wrap fw-semibold" data-kt-customer-table-filter="tahap">
 											<!--begin::Option-->
 											<label class="form-check form-check-sm form-check-custom form-check-solid mb-3 me-5">
-												<input class="form-check-input" type="radio" name="payment_type" value="all" checked="checked" />
+												<input class="form-check-input" type="radio" name="tahap" value="all" checked="checked" />
 												<span class="form-check-label text-gray-600">All</span>
 											</label>
 											<!--end::Option-->
 											<!--begin::Option-->
 											<label class="form-check form-check-sm form-check-custom form-check-solid mb-3 me-5">
-												<input class="form-check-input" type="radio" name="payment_type" value="visa" />
-												<span class="form-check-label text-gray-600">Visa</span>
+												<input class="form-check-input" type="radio" name="tahap" value="pelajar" />
+												<span class="form-check-label text-gray-600">Pelajar IPTS</span>
+											</label>
+											<!--end::Option-->
+											<!--begin::Option-->
+											<label class="form-check form-check-sm form-check-custom form-check-solid mb-3 me-5">
+												<input class="form-check-input" type="radio" name="tahap" value="penyelaras" />
+												<span class="form-check-label text-gray-600">Penyelaras</span>
 											</label>
 											<!--end::Option-->
 											<!--begin::Option-->
 											<label class="form-check form-check-sm form-check-custom form-check-solid mb-3">
-												<input class="form-check-input" type="radio" name="payment_type" value="mastercard" />
-												<span class="form-check-label text-gray-600">Mastercard</span>
+												<input class="form-check-input" type="radio" name="tahap" value="sekretariat" />
+												<span class="form-check-label text-gray-600">Sekretariat KPT</span>
+											</label>
+											<!--end::Option-->
+											<!--begin::Option-->
+											<label class="form-check form-check-sm form-check-custom form-check-solid mb-3">
+												<input class="form-check-input" type="radio" name="tahap" value="pegawai" />
+												<span class="form-check-label text-gray-600">Pegawai Atasan KPT</span>
 											</label>
 											<!--end::Option-->
 											<!--begin::Option-->
 											<label class="form-check form-check-sm form-check-custom form-check-solid">
-												<input class="form-check-input" type="radio" name="payment_type" value="american_express" />
-												<span class="form-check-label text-gray-600">American Express</span>
+												<input class="form-check-input" type="radio" name="tahap" value="pentadbir" />
+												<span class="form-check-label text-gray-600">Pentadbir Sistem</span>
 											</label>
 											<!--end::Option-->
 										</div>
@@ -160,16 +172,15 @@
 										<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1" />
 									</div>
 								</th>
-								<th class="min-w-125px">Customer Name</th>
-								<th class="min-w-125px">Email</th>
-								<th class="min-w-125px">Company</th>
-								<th class="min-w-125px">Payment Method</th>
+								<th class="min-w-125px">No. Kad Pengenalan</th>
+								<th class="min-w-125px">Emel</th>
+								<th class="min-w-125px">Tahap</th>
 								<th class="min-w-125px">Created Date</th>
 								<th class="text-end min-w-70px">Actions</th>
 							</tr>
 						</thead>
 						<tbody class="fw-semibold text-gray-600">
-							
+							@foreach ($user as $user)
 							<tr>
 								<td>
 									<div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -177,15 +188,14 @@
 									</div>
 								</td>
 								<td>
-									<a href="../../demo1/dist/apps/customers/view.html" class="text-gray-800 text-hover-primary mb-1">Dan Wilson</a>
+									<a href="../../demo1/dist/apps/customers/view.html" class="text-gray-800 text-hover-primary mb-1">{{ $user->nokp}}</a>
 								</td>
 								<td>
-									<a href="#" class="text-gray-600 text-hover-primary mb-1">dam@consilting.com</a>
+									<a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $user->email}}</a>
 								</td>
-								<td>Trinity Studio</td>
-								<td data-filter="visa">
-								<img src="assets/media/svg/card-logos/visa.svg" class="w-35px me-3" alt="" />**** 1322</td>
-								<td>18 Aug 2020, 3:34 pm</td>
+								<td data-filter="all">{{ $user->name}}</td>
+								
+								<td>{{$user->created_at->format('d/m/Y h:i:sa')}}</td>
 								<td class="text-end">
 									<a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
 									<i class="ki-duotone ki-down fs-5 ms-1"></i></a>
@@ -205,7 +215,7 @@
 									<!--end::Menu-->
 								</td>
 							</tr>
-							
+							@endforeach
 						</tbody>
 					</table>
 					<!--end::Table-->
@@ -288,7 +298,7 @@
 										<label class="fs-6 fw-semibold mb-2">Tahap</label>
 										<!--end::Label-->
 										<!--begin::Input-->
-										<select name="tahap" id="tahap"  class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<select name="tahap" id="tahap"  class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
 											<option></option>
 											@foreach ($tahap as $tahap)
 											<option value="{{ $tahap->id}}">{{ $tahap->name}}</option>
@@ -391,26 +401,38 @@
 									<div class="d-flex flex-column">
 										<!--begin::Radio button-->
 										<label class="form-check form-check-custom form-check-sm form-check-solid mb-3">
-											<input class="form-check-input" type="checkbox" value="1" checked="checked" name="payment_type" />
+											<input class="form-check-input" type="checkbox" value="0" checked="checked" name="tahap" />
 											<span class="form-check-label text-gray-600 fw-semibold">All</span>
 										</label>
 										<!--end::Radio button-->
 										<!--begin::Radio button-->
 										<label class="form-check form-check-custom form-check-sm form-check-solid mb-3">
-											<input class="form-check-input" type="checkbox" value="2" checked="checked" name="payment_type" />
-											<span class="form-check-label text-gray-600 fw-semibold">Visa</span>
+											<input class="form-check-input" type="checkbox" value="1" checked="checked" name="tahap" />
+											<span class="form-check-label text-gray-600 fw-semibold">Pelajar IPTS</span>
 										</label>
 										<!--end::Radio button-->
 										<!--begin::Radio button-->
 										<label class="form-check form-check-custom form-check-sm form-check-solid mb-3">
-											<input class="form-check-input" type="checkbox" value="3" name="payment_type" />
-											<span class="form-check-label text-gray-600 fw-semibold">Mastercard</span>
+											<input class="form-check-input" type="checkbox" value="2" checked="checked" name="tahap" />
+											<span class="form-check-label text-gray-600 fw-semibold">Penyelaras</span>
+										</label>
+										<!--end::Radio button-->
+										<!--begin::Radio button-->
+										<label class="form-check form-check-custom form-check-sm form-check-solid mb-3">
+											<input class="form-check-input" type="checkbox" value="3" name="tahap" />
+											<span class="form-check-label text-gray-600 fw-semibold">Sekretariat KPT</span>
+										</label>
+										<!--end::Radio button-->
+										<!--begin::Radio button-->
+										<label class="form-check form-check-custom form-check-sm form-check-solid mb-3">
+											<input class="form-check-input" type="checkbox" value="4" name="tahap" />
+											<span class="form-check-label text-gray-600 fw-semibold">Pegawai Atasan KPT</span>
 										</label>
 										<!--end::Radio button-->
 										<!--begin::Radio button-->
 										<label class="form-check form-check-custom form-check-sm form-check-solid">
-											<input class="form-check-input" type="checkbox" value="4" name="payment_type" />
-											<span class="form-check-label text-gray-600 fw-semibold">American Express</span>
+											<input class="form-check-input" type="checkbox" value="5" name="tahap" />
+											<span class="form-check-label text-gray-600 fw-semibold">Pentadbir Sistem</span>
 										</label>
 										<!--end::Radio button-->
 									</div>
