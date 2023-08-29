@@ -16,13 +16,7 @@ var KTModalCustomersAdd = function () {
 			form,
 			{
 				fields: {
-                    'name': {
-						validators: {
-							notEmpty: {
-								message: 'Customer name is required'
-							}
-						}
-					},
+                    
                     'email': {
 						validators: {
 							notEmpty: {
@@ -30,55 +24,14 @@ var KTModalCustomersAdd = function () {
 							}
 						}
 					},
-					'first-name': {
+					'nokp': {
 						validators: {
 							notEmpty: {
 								message: 'First name is required'
 							}
 						}
 					},
-					'last-name': {
-						validators: {
-							notEmpty: {
-								message: 'Last name is required'
-							}
-						}
-					},
-					'country': {
-						validators: {
-							notEmpty: {
-								message: 'Country is required'
-							}
-						}
-					},
-					'address1': {
-						validators: {
-							notEmpty: {
-								message: 'Address 1 is required'
-							}
-						}
-					},
-					'city': {
-						validators: {
-							notEmpty: {
-								message: 'City is required'
-							}
-						}
-					},
-					'state': {
-						validators: {
-							notEmpty: {
-								message: 'State is required'
-							}
-						}
-					},
-					'postcode': {
-						validators: {
-							notEmpty: {
-								message: 'Postcode is required'
-							}
-						}
-					}
+					
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
@@ -99,57 +52,73 @@ var KTModalCustomersAdd = function () {
 
 		// Action buttons
 		submitButton.addEventListener('click', function (e) {
-			e.preventDefault();
+            e.preventDefault();
 
-			// Validate form before submit
-			if (validator) {
-				validator.validate().then(function (status) {
-					console.log('validated!');
+            validator.revalidateField('password');
 
-					if (status == 'Valid') {
-						submitButton.setAttribute('data-kt-indicator', 'on');
+            validator.validate().then(function (status) {
+                if (status == 'Valid') {
+                    // Show loading indication
+                    submitButton.setAttribute('data-kt-indicator', 'on');
 
-						// Disable submit button whilst loading
-						submitButton.disabled = true;
+                    // Disable button to avoid multiple click
+                    submitButton.disabled = true;
 
-						setTimeout(function() {
-							submitButton.removeAttribute('data-kt-indicator');
-							
-							Swal.fire({
-								text: "Form has been successfully submitted!",
-								icon: "success",
-								buttonsStyling: false,
-								confirmButtonText: "Ok, got it!",
-								customClass: {
-									confirmButton: "btn btn-primary"
-								}
-							}).then(function (result) {
-								if (result.isConfirmed) {
-									// Hide modal
-									modal.hide();
 
-									// Enable submit button after loading
-									submitButton.disabled = false;
+                    // Check axios library docs: https://axios-http.com/docs/intro
+                    axios.post(submitButton.closest('form').getAttribute('action'), new FormData(form)).then(function (response) {
+                        if (response) {
+                            form.reset();
 
-									// Redirect to customers list page
-									window.location = form.getAttribute("data-kt-redirect");
-								}
-							});							
-						}, 2000);   						
-					} else {
-						Swal.fire({
-							text: "Sorry, looks like there are some errors detected, please try again.",
-							icon: "error",
-							buttonsStyling: false,
-							confirmButtonText: "Ok, got it!",
-							customClass: {
-								confirmButton: "btn btn-primary"
-							}
-						});
-					}
-				});
-			}
-		});
+                            const redirectUrl = form.getAttribute('data-kt-redirect');
+
+                            if (redirectUrl) {
+                                location.href = redirectUrl;
+                            }
+                        } else {
+                            // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                            Swal.fire({
+                                text: "Sorry, looks like there are some errors detected, please try again.",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            });
+                        }
+                    }).catch(function (error) {
+                        Swal.fire({
+                            text: "Sorry, looks like there are some errors detected, please try again hahaha.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn btn-primary"
+                            }
+                        });
+                    }).then(() => {
+                        // Hide loading indication
+                        submitButton.removeAttribute('data-kt-indicator');
+
+                        // Enable button
+                        submitButton.disabled = false;
+                    });
+
+                } else {
+                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                    Swal.fire({
+                        text: "Sila isi maklumat yang diperlukan",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            });
+        });
 
         cancelButton.addEventListener('click', function (e) {
             e.preventDefault();
