@@ -35,6 +35,8 @@ class PentadbirController extends Controller
             ->update([
                 'nokp' => $request->nokp,
                 'email' => $request->email,
+                'tahap' => $request->tahap,
+                'password' => Hash::make($request->password),
                 'status' => '1',
             
         ]);

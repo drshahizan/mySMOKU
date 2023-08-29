@@ -268,7 +268,7 @@
 										</label>
 										<!--end::Label-->
 										<!--begin::Input-->
-										<input type="email" class="form-control form-control-solid" placeholder="" name="email" value="sean@dellito.com" />
+										<input type="email" class="form-control form-control-solid" placeholder="" name="email" value="" />
 										<!--end::Input-->
 									</div>
 									<!--end::Input group-->
