@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Tahap;
 
 class PentadbirController extends Controller
 {
     public function daftar()
     {
-        return view('pages.pentadbir.daftarpengguna');
+        $tahap = Tahap::all()->sortBy('kodhubungan');
+        return view('pages.pentadbir.daftarpengguna', compact('tahap'));
     }
 
     public function store(Request $request)
@@ -21,6 +24,8 @@ class PentadbirController extends Controller
             $user = User::create([
                 'nokp' => $request->nokp,
                 'email' => $request->email,
+                'tahap' => $request->tahap,
+                'password' => Hash::make($request->password),
                 'status' => '1',
         
             ]);

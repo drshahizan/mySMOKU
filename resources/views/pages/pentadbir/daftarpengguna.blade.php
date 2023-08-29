@@ -273,12 +273,37 @@
 									</div>
 									<!--end::Input group-->
 									<!--begin::Input group-->
-									<div class="fv-row mb-15">
+									<div class="fv-row mb-7">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
 										<!--end::Label-->
 										<!--begin::Input-->
 										<input type="text" class="form-control form-control-solid" placeholder="" name="nokp" />
+										<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+									<!--begin::Input group-->
+									<div class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold mb-2">Tahap</label>
+										<!--end::Label-->
+										<!--begin::Input-->
+										<select name="tahap" id="tahap"  class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option></option>
+											@foreach ($tahap as $tahap)
+											<option value="{{ $tahap->id}}">{{ $tahap->name}}</option>
+											@endforeach
+										</select>
+										<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+									<!--begin::Input group-->
+									<div class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold mb-2">Kata Laluan</label>
+										<!--end::Label-->
+										<!--begin::Input-->
+										<input type="text" class="form-control form-control-solid" placeholder="" name="password" />
 										<!--end::Input-->
 									</div>
 									<!--end::Input group-->
