@@ -13,7 +13,43 @@
         .space{
             width: 15%;
         }
+        .white{
+            color: white!important;
+        }
     </style>
+
+    <!--begin::Page title-->
+	<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+		<!--begin::Title-->
+		<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Permohonan</h1>
+		<!--end::Title-->
+		<!--begin::Breadcrumb-->
+		<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+			<!--begin::Item-->
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Permohonan</li>
+			<!--end::Item-->
+			<!--begin::Item-->
+			<li class="breadcrumb-item">
+				<span class="bullet bg-gray-400 w-5px h-2px"></span>
+			</li>
+			<!--end::Item-->
+			<!--begin::Item-->
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Saringan</li>
+			<!--end::Item-->
+            <!--begin::Item-->
+			<li class="breadcrumb-item">
+				<span class="bullet bg-gray-400 w-5px h-2px"></span>
+			</li>
+			<!--end::Item-->
+			<!--begin::Item-->
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Maklumat Permohonan</li>
+			<!--end::Item-->
+		</ul>
+	<!--end::Breadcrumb-->
+	</div>
+	<!--end::Page title-->
+    <br>
+
     <div id="main-content">
         <div class="container-fluid">
             <!-- Page header section  -->
@@ -41,6 +77,19 @@
                                     <br>
                                     @php
                                         $akademik = DB::table('maklumatakademik')->where('nokp_pelajar', $pelajar->nokp_pelajar)->first();
+                                        $status = DB::table('statusinfo')->where('kodstatus', $permohonan->status)->value('status');
+                                        $text = ucwords(strtolower($pelajar->nama_pelajar)); // Assuming you're sending the text as a POST parameter
+                                        $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
+                                        $words = explode(' ', $text);
+                                        $result = [];
+                                        foreach ($words as $word) {
+                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                $result[] = Str::lower($word);
+                                            } else {
+                                                $result[] = $word;
+                                            }
+                                        }
+                                        $pemohon = implode(' ', $result);
                                     @endphp
                                     <table class="maklumat">
                                         <tr>
@@ -55,11 +104,11 @@
                                         <tr>
                                             <td><strong>Nama</strong></td>
                                             <td>:</td>
-                                            <td>{{$pelajar->nama_pelajar}}</td>
+                                            <td>{{$pemohon}}</td>
                                             <td class="space">&nbsp;</td>
-                                            <td><strong>Semester Semasa</strong></td>
+                                            <td><strong>Sesi/Semester</strong></td>
                                             <td>:</td>
-                                            <td>{{$akademik->sem_semasa}}</td>
+                                            <td>{{$akademik->sesi}}-0{{$akademik->sem_semasa}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>No. Kad Pengenalan</strong></td>
@@ -68,7 +117,7 @@
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Status</strong></td>
                                             <td>:</td>
-                                            <td>{{DB::table('statusinfo')->where('kodstatus', $permohonan->status)->value('status')}}</td>
+                                            <td>{{ucwords(strtolower($status))}}</td>
                                         </tr>
                                     </table>                           
                                 </div>
@@ -214,8 +263,11 @@
                                 <div class="col-md-6">
                                     </div>
                                 <div class="col-md-6 text-right">
-                                   <a href="{{ url('tuntutan/telah/disaring/'.$pelajar->nokp_pelajar) }}"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </a></button>
-                                                               
+                                    @if($permohonan->status == 4)
+                                        <a href="{{ url('tuntutan/telah/disaring/'.$pelajar->nokp_pelajar) }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </a></button>
+                                    @else
+                                        <a href="{{ url('saringan') }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </a></button>
+                                    @endif
                             </div> 
                         </div>
                     </div>                                       

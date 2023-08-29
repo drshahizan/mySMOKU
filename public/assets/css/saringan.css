@@ -465,3 +465,17 @@ td button{
     display: none;
 }
 
+/* date range picker */
+.daterangepicker tr td, .daterangepicker th{
+    padding: 0px!important;
+}
+
+.daterangepicker{
+    color: black!important;
+}
+.daterangepicker td.in-range {
+    background-color: #dbe9ff!important;
+    border-color: transparent;
+    color: #000;
+    border-radius: 0;
+}
