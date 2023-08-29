@@ -11,6 +11,7 @@ use App\Http\Controllers\SekretariatController;
 use App\Http\Controllers\PenyelarasController;
 
 use App\Http\Controllers\TuntutanController;
+use App\Http\Controllers\PentadbirController;
 use App\Models\Permohonan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
@@ -121,6 +122,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Tuntutan Pelajar 
     Route::get('borangTuntutanYuran',[TuntutanController::class,'borangtuntutanyuran'])->name('borangTuntutanYuran');
 
+    //Pentadbir
+    Route::get('daftarpengguna', [PentadbirController::class, 'daftar']);
 });
 
 Route::get('/error', function () {

@@ -15,20 +15,20 @@ class DashboardController extends Controller
     {
         addVendors(['amcharts', 'amcharts-maps', 'amcharts-stock']);
 
-        $pelajar = Permohonan::all()->where('nokp_pelajar', Auth::user()->id());
+        $pelajar = Permohonan::all()->where('nokp_pelajar', Auth::user()->nokp);
         $status = Status::leftJoin('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
         ->get(['statustransaksi.*', 'statusinfo.*'])
-        ->where('nokp_pelajar', Auth::user()->id());
+        ->where('nokp_pelajar', Auth::user()->nokp);
         $akademik = Akademik::all()
       
-        ->where('nokp_pelajar', Auth::user()->id());
+        ->where('nokp_pelajar', Auth::user()->nokp);
         $sem = Akademik::
         leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
         ->get(['maklumatakademik.*', 'bk_peringkatpengajian.*'])
-        ->where('nokp_pelajar', Auth::user()->id());
+        ->where('nokp_pelajar', Auth::user()->nokp);
         $tuntutanpermohonan = TuntutanPermohonan::Join('statusinfo','statusinfo.kodstatus','=','permohonan.status')
         ->get(['permohonan.*', 'statusinfo.*'])
-        ->where('nokp_pelajar', Auth::user()->id());
+        ->where('nokp_pelajar', Auth::user()->nokp);
         $smoku = Smoku::all()->where('jenis','=', 'IPTA');
         $permohonan = Status::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
         ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
@@ -49,8 +49,11 @@ class DashboardController extends Controller
         {
             return view('pages.sekretariat.dashboard')->with('message', 'Selamat Datang ke Laman Utama Sekretariat');
         }
+        else if(Auth::user()->tahap=='4'){
+            return view('pages.pegawai.dashboard')->with('message', 'Selamat Datang ke Laman Utama Pegawai Atasan');
+        }
         else{
-            return view('pages.pegawai.dashboard')->with('status', 'Selamat Datang ke Laman Utama Pegawai Atasan');
+            return view('pages.pentadbir.dashboard')->with('message', 'Selamat Datang ke Laman Utama Admin');
         }
     }
 }
