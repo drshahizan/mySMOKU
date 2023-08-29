@@ -13,7 +13,7 @@ use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use App\Models\Smoku;
 use session;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class RegisteredUserController extends Controller
 {
