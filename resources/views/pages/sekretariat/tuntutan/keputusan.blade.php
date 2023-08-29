@@ -7,20 +7,16 @@
 
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="assets/css/saringan.css">
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
-        <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     </head>
 
     <!--begin::Page title-->
@@ -73,20 +69,16 @@
                                     <br><br>
                                     <form action="" method="GET">
                                         <div class="row" style="margin-left:15px;">
-                                            <div class="col-md-3">
-                                                <input type="text" name="dates" id="date" value="01/08/2023 - 15/08/2023" class="form-control"/>
-                                                <script>
-                                                    $('input[name="dates"]').daterangepicker({
-                                                        locale: {
-                                                            format: 'DD/MM/YYYY'
-                                                        }
-                                                    });
-                                                </script>
+                                            <div class="col-md-3 black">
+                                                Dari tarikh: <input type="date" id="min" name="min" value="" class="form-control"> 
                                             </div>
-            
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 black">
+                                                Sehingga: <input type="date" id="max" name="max" value="" class="form-control">
+                                            </div>
+                                            <div class="col-md-3 black">
+                                                Pilih Keputusan:
                                                 <select name="status" class="form-select">
-                                                    <option value="">Pilih Keputusan</option>
+                                                    <option value="">Sila Pilih</option>
                                                     <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
                                                     <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
                                                     <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
@@ -120,7 +112,7 @@
                                                             <td>{{$id_permohonan}}</td>
                                                             <td>{{$nama}}</td>
                                                             <td>{{$program}}</td>
-                                                            <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                            <td class="text-center">{{$item['created_at']->format('Y-m-d')}}</td>
                                                             @if($item['status'] == "6")
                                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif($item['status'] == "7")
@@ -209,10 +201,11 @@
             let minDate, maxDate;
             // Custom filtering function which will search data in column four between two values
             DataTable.ext.search.push(function (settings, data, dataIndex) {
-                let min = minDate.val();
-                let max = maxDate.val();
-                let date = new Date(data[4]);
-            
+                let min = new Date(document.getElementById("min").value).toLocaleDateString();;
+                let max = new Date(document.getElementById("max").value).toLocaleDateString();;
+                
+                let date = new Date(data[3]).toLocaleDateString();
+
                 if (
                     (min === null && max === null) ||
                     (min === null && date <= max) ||
@@ -223,17 +216,13 @@
                 }
                 return false;
             });
-            
-            // Create date inputs
-            minDate = $('#date').data('daterangepicker').startDate;
-            maxDate = $('#date').data('daterangepicker').endDate;
-            
+
             // DataTables initialisation
             let table = new DataTable('#sortTable1');
-            
+
             // Refilter the table
-            document.querySelectorAll('#date').forEach((el) => {
+            document.querySelectorAll('#min, #max').forEach((el) => {
                 el.addEventListener('change', () => table.draw());
-            });
+            });  
         </script>
 </x-default-layout> 
