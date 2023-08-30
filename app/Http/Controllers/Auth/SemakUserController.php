@@ -11,7 +11,7 @@ use App\Models\Infoipt;
 use App\Models\PeringkatPengajian;
 use App\Models\Kursus;
 use App\Models\Akademik;
-use DB;
+use Illuminate\Support\Facades\DB;
 use session;
 
 
