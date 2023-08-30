@@ -77,11 +77,10 @@
                                             </div>
                                             <div class="col-md-3 black">
                                                 Pilih Keputusan:
-                                                <select name="status" class="form-select">
+                                                <select name="status" id="status" class="form-select">
                                                     <option value="">Sila Pilih</option>
-                                                    <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
-                                                    <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
-                                                    <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
+                                                    <option value="Layak">Layak</option>
+                                                    <option value="Tidak Layak">Tidak Layak</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -107,10 +106,22 @@
                                                             $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
                                                             $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
                                                             $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                                            $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
+                                                            $conjunctions = ['bin', 'binti'];
+                                                            $words = explode(' ', $text);
+                                                            $result = [];
+                                                            foreach ($words as $word) {
+                                                                if (in_array(Str::lower($word), $conjunctions)) {
+                                                                    $result[] = Str::lower($word);
+                                                                } else {
+                                                                    $result[] = $word;
+                                                                }
+                                                            }
+                                                            $pemohon = implode(' ', $result);
                                                         @endphp
                                                         <tr>
                                                             <td>{{$id_permohonan}}</td>
-                                                            <td>{{$nama}}</td>
+                                                            <td>{{$pemohon}}</td>
                                                             <td>{{$program}}</td>
                                                             <td class="text-center">{{$item['created_at']->format('Y-m-d')}}</td>
                                                             @if($item['status'] == "6")
@@ -140,7 +151,6 @@
                                                 <select name="status" class="form-select">
                                                     <option value="">Pilih Keputusan</option>
                                                     <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
-                                                    <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
                                                     <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
                                                 </select>
                                             </div>
@@ -167,10 +177,22 @@
                                                             $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
                                                             $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
                                                             $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                                            $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
+                                                            $conjunctions = ['bin', 'binti'];
+                                                            $words = explode(' ', $text);
+                                                            $result = [];
+                                                            foreach ($words as $word) {
+                                                                if (in_array(Str::lower($word), $conjunctions)) {
+                                                                    $result[] = Str::lower($word);
+                                                                } else {
+                                                                    $result[] = $word;
+                                                                }
+                                                            }
+                                                            $pemohon = implode(' ', $result);
                                                         @endphp
                                                         <tr>
                                                             <td>{{$id_permohonan}}</td>
-                                                            <td>{{$nama}}</td>
+                                                            <td>{{$pemohon}}</td>
                                                             <td>{{$program}}</td>
                                                             <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                             @if($item['status'] == "6")
@@ -224,5 +246,10 @@
             document.querySelectorAll('#min, #max').forEach((el) => {
                 el.addEventListener('change', () => table.draw());
             });  
+        </script>
+        <script>
+            var selectedValue= document.getElementById("status").value;   
+            let table = new DataTable('#sortTable1'); 
+            table.columns(4).search(selectedValue).draw();
         </script>
 </x-default-layout> 
