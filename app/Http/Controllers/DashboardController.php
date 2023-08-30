@@ -29,7 +29,11 @@ class DashboardController extends Controller
         $tuntutanpermohonan = TuntutanPermohonan::Join('statusinfo','statusinfo.kodstatus','=','permohonan.status')
         ->get(['permohonan.*', 'statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
-        $smoku = Smoku::all()->where('jenis','=', 'IPTA');
+        //$smoku = Smoku::all()->where('jenis','=', 'IPTA');
+        $smoku = Smoku::leftJoin('permohonan','permohonan.nokp_pelajar','=','smoku.nokp')
+        ->get(['smoku.*', 'permohonan.*'])
+        ->where('status','!=', '2')
+        ->where('jenis','=', 'IPTA');
         $permohonan = Status::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
         ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
         ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
