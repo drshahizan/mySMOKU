@@ -158,6 +158,7 @@ class PenyelarasController extends Controller
         ->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
         ->get(['pelajar.*', 'bk_jantina.*','bk_bangsa.*','bk_bangsa.*','bk_jenisoku.*'])
         ->where('nokp_pelajar', $nokp);
+        //dd($pelajar);
         $waris = Waris::join('bk_hubungan','bk_hubungan.kodhubungan','=','waris.hubungan')
         ->get(['waris.*', 'bk_hubungan.*'])
         ->where('nokp_pelajar', $nokp);
@@ -176,7 +177,7 @@ class PenyelarasController extends Controller
         $status = Status::all()->where('nokp_pelajar', $nokp);
         $dokumen = Dokumen::all()->where('nokp_pelajar', $nokp);
         $negeri = Negeri::orderby("kod","asc")->select('id','nama')->get();
-        return view('pages.penyelaras.permohonan.mohonbaruform', compact('smoku','hubungan','akademikmqa','infoipt','peringkat','kursus','mod','biaya','negeri'));
+        return view('pages.penyelaras.permohonan.mohonbaruform', compact('smoku','pelajar','hubungan','akademikmqa','infoipt','peringkat','kursus','mod','biaya','negeri'));
     }
 
     // Fetch records

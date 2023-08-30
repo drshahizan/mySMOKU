@@ -488,9 +488,11 @@ $(document).ready(function(){
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
 																<div class="col-12">
+																	
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaunbank" name="no_akaunbank" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaunbank" name="no_akaunbank" placeholder="" @foreach($pelajar as $pelajar) @if($pelajar->no_akaunbank)  value="{{$pelajar->no_akaunbank}}" @else value="" @endif @endforeach	/>
 																	<!--end::Input-->
+																	
 																</div>
 																<!--end::Input wrapper-->
 															</div>
@@ -1254,11 +1256,11 @@ $(document).ready(function(){
    
 			$(".save-form").click(function(e){
 				e.preventDefault();
-				var data = $('#kt_create_account_form').serialize();
+				var data = $('#p_mohon').serialize();
 				//alert (data);
 				$.ajax({
 					type: 'post',
-					url: "{{ route('permohonan.post') }}",
+					url: "{{ route('simpan') }}",
 					data: data,
 
 				});
