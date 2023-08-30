@@ -146,7 +146,7 @@ class PenyelarasController extends Controller
         ->join('bk_jenisoku','bk_jenisoku.kodoku','=','smoku.kecacatan')
         ->get(['smoku.*', 'bk_jantina.*', 'bk_bangsa.*', 'bk_hubungan.*', 'bk_jenisoku.*'])
         ->where('nokp', $nokp);
-        $infoipt = Infoipt::all()->sortBy('namaipt');
+        $infoipt = Infoipt::all()->where('jenis_ipt','IPTA')->sortBy('namaipt');
         $peringkat = PeringkatPengajian::all()->sortBy('kodperingkat');
         $kursus = Kursus::all()->sortBy('nama_kursus');
         $mod = Mod::all()->sortBy('kodmod');
@@ -184,14 +184,47 @@ class PenyelarasController extends Controller
    public function bandar($idnegeri){
 
     // Fetch kursus by idipt
-    $loaddataBandar['data'] = Bandar::orderby("nama","asc")
+        $loaddataBandar['data'] = Bandar::orderby("nama","asc")
          ->select('id','nama','negeri')
          ->where('negeri',$idnegeri)
          ->get();
 
          return response()->json($loaddataBandar);
 
-}
+    }
+
+   // Fetch records
+   public function peringkat($ipt=0){
+
+        // Fetch kursus by idipt
+        $peringkatData['data'] = DB::table('kursus')
+        ->select('kursus.kodperingkat','bk_peringkatpengajian.peringkat')
+        ->join('bk_peringkatpengajian', function ($join) {
+            $join->on('kursus.kodperingkat', '=', 'bk_peringkatpengajian.kodperingkat'); 
+        })
+        ->where('idipt',$ipt)
+        ->groupBy('kursus.kodperingkat','bk_peringkatpengajian.peringkat')
+
+        ->get();
+         
+
+         return response()->json($peringkatData);
+
+    }
+    public function kursus($kodperingkat=0,$ipt=0){
+
+        // Fetch kursus by idipt
+        $kursusData['data'] = Kursus::orderby("nama_kursus","asc")
+            ->select('idipt','kodperingkat','nama_kursus')
+            ->where('kodperingkat',$kodperingkat)
+            ->where('idipt',$ipt)
+            
+            //->where(["idipt"=> $ipt, "kodperingkat" => $kodperingkat])
+            ->get();
+
+            return response()->json($kursusData);
+
+    }
 
     public function simpan(Request $request)
     {   
@@ -480,9 +513,9 @@ class PenyelarasController extends Controller
             $data->save();
 
 
+        return redirect()->route('dashboardpenyelaras');
 
-
-        return redirect()->route('viewpermohonan')->with('message', 'Permohonan anda telah dihantar.');
+        //return redirect()->route('viewpermohonan')->with('message', 'Permohonan anda telah dihantar.');
 
     }
 

@@ -727,23 +727,53 @@ $(document).ready(function(){
 															<!--end::Notice-->
 														</div>
 														<!--end::Heading-->
-														
+
 														<!--begin::Input group-->
-														<div class="d-flex flex-column mb-7 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">Nama Pusat Pengajian</span>
-																
-															</label>
-															<!--end::Label-->
-															<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																@foreach ($infoipt as $infoipt)
-																	<option></option>
-																	<option value="{{ $infoipt->idipt}}">{{ $infoipt->namaipt}}</option>
-																@endforeach
-															</select>
-															
+														<div class="row mb-10">
+															<!--begin::Col-->
+															<div class="col-md-7 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																	<span class="">Nama Pusat Pengajian</span>
+																</label>
+																<!--end::Label-->
+																<!--begin::Row-->
+																<div class="row fv-row">
+																	<!--begin::Input wrapper-->
+																	<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																		@foreach ($infoipt as $infoipt)
+																			<option></option>
+																			<option value="{{ $infoipt->idipt}}">{{ $infoipt->namaipt}}</option>
+																		@endforeach
+																	</select>
+																	<!--end::Input wrapper-->
+																</div>
+																<!--end::Row-->
+															</div>
+															<!--end::Col-->
+															<!--begin::Col-->
+															<div class="col-md-5 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
+																<!--end::Label-->
+																<!--begin::Row-->
+																<div class="row fv-row">
+																	<!--begin::Input wrapper-->
+																	<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-allow-clear="true" data-hide-search="true">
+																		<option value="">Pilih</option>
+																		@foreach ($peringkat as $peringkat)	
+																			<option value="{{ $peringkat->kodperingkat}}">{{ $peringkat->peringkat}}</option> 
+																		@endforeach
+																	</select>
+																	<!--end::Input wrapper-->
+																</div>
+																<!--end::Row-->
+															</div>
+															<!--end::Col-->
 														</div>
+														<!--end::Input group-->
+
+														
 														<div class="d-flex flex-column mb-7 fv-row">
 															<!--begin::Label-->
 															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
@@ -751,11 +781,8 @@ $(document).ready(function(){
 																
 															</label>
 															<!--end::Label-->
-															<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																@foreach ($kursus as $kursus)
-																	<option></option>
-																	<option value="{{ $kursus->nama_kursus}}">{{ $kursus->nama_kursus}}</option>
-																@endforeach
+															<select id='nama_kursus'  name='nama_kursus' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-allow-clear="true" data-hide-search="true">
+																<option value="">Pilih</option>
 															</select>
 														</div>
 														
@@ -765,25 +792,8 @@ $(document).ready(function(){
 
 														<!--begin::Input group-->
 														<div class="row mb-10">
-															<!--begin::Col-->
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
-																<!--end::Label-->
-																<!--begin::Row-->
-																<div class="row fv-row">
-																	<!--begin::Input wrapper-->
-																	<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																		@foreach ($peringkat as $peringkat)
-																			<option></option>
-																			<option value="{{ $peringkat->kodperingkat}}">{{ $peringkat->peringkat}}</option>
-																		@endforeach
-																	</select>
-																	<!--end::Input wrapper-->
-																</div>
-																<!--end::Row-->
-															</div>
-															<!--end::Col-->
+															
+															
 															<!--begin::Col-->
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
@@ -797,14 +807,25 @@ $(document).ready(function(){
 															</div>
 															<!--end::Col-->
 															<div class="col-md-4 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">No Pendaftaran Pelajar</span>
-																
-															</label>
-															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaranpelajar" name="no_pendaftaranpelajar" value="" />
-														</div>
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																	<span class="">No Pendaftaran Pelajar</span>
+																</label>
+																<!--end::Label-->
+																<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaranpelajar" name="no_pendaftaranpelajar" value="" />
+															</div>
+
+															<!--begin::Col-->
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																	<input type="text" class="form-control form-control-solid" placeholder="" id="tempoh_pengajian" name="tempoh_pengajian" value="" required/>
+																	<!--end::Input wrapper-->
+															</div>
+															<!--end::Col-->
+														
 														</div>
 														<!--end::Input group-->
 														
@@ -851,7 +872,7 @@ $(document).ready(function(){
 														<!--begin::Input group-->
 														<div class="row mb-10">
 															<!--begin::Col-->
-															<div class="col-md-3 fv-row">
+															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">Semester Semasa</label>
 																<!--end::Label-->
@@ -880,18 +901,8 @@ $(document).ready(function(){
 																<!--end::Row-->
 															</div>
 															<!--end::Col-->
-															<!--begin::Col-->
-															<div class="col-md-3 fv-row">
-																<!--begin::Label-->
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																	<input type="text" class="form-control form-control-solid" placeholder="" id="tempoh_pengajian" name="tempoh_pengajian" value="" required/>
-																	
-																	<!--end::Input wrapper-->
-															</div>
-															<!--end::Col-->
-															<div class="col-md-3 fv-row">
+															
+															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">Bil Bulan Persemester</label>
 																<!--end::Label-->
@@ -907,7 +918,7 @@ $(document).ready(function(){
 																</div>
 																<!--end::Row-->
 															</div>
-															<div class="col-md-3 fv-row">
+															<div class="col-md-4 fv-row">
 															<!--begin::Label-->
 															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
 																<span class="">CGPA Terkini</span>
@@ -1315,6 +1326,113 @@ $(document).ready(function(){
 			$('.js-example-basic-single').select2();
 			});
 		</script>
+
+		<!-- Script -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script type='text/javascript'>
+		$(document).ready(function(){
+
+			// institusi Change
+			$('#id_institusi').change(function(){
+
+				// institusi id
+				var idipt = $(this).val();
+				var kodperingkat = $(this).val();
+				//alert (idipt);
+
+				// Empty the dropdown
+				$('#peringkat_pengajian').find('option').not(':first').remove();
+				$('#nama_kursus').find('option').not(':first').remove();
+
+				// AJAX request 
+				$.ajax({
+					url: '/peringkat/'+idipt,
+					type: 'get',
+					dataType: 'json',
+					success: function(response){
+						//alert('AJAX loaded something');
+
+						var len = 0;
+						if(response['data'] != null){
+							len = response['data'].length;
+						}
+
+						if(len > 0){
+							// Read data and create <option >
+							for(var i=0; i<len; i++){
+
+								var idipt = response['data'][i].idipt;
+								var kodperingkat = response['data'][i].kodperingkat;
+								var peringkat = response['data'][i].peringkat;
+
+								var option = "<option value='"+kodperingkat+"'>"+peringkat+"</option>";
+
+								$("#peringkat_pengajian").append(option); 
+							}
+						}
+
+					},
+					error: function(){
+					alert('AJAX load did not work');
+					}
+				});
+
+			});
+
+			// peringkat Change
+			$('#peringkat_pengajian').change(function(){
+
+			// institusi id
+			var idipt = $(id_institusi).val();
+			var kodperingkat = $(this).val();
+
+			// Empty the dropdown
+			$('#nama_kursus').find('option').not(':first').remove();
+			//alert(idipt);
+
+
+			// AJAX request 
+			$.ajax({
+				url: '/kursus/'+kodperingkat+'/'+idipt,
+				type: 'get',
+				dataType: 'json',
+			
+				success: function(response){
+
+					var len = 0;
+					if(response['data'] != null){
+						len = response['data'].length;
+					}
+
+					if(len > 0){
+						// Read data and create <option >
+						for(var i=0; i<len; i++){
+
+							var idipt = response['data'][i].idipt;
+							var kodperingkat = response['data'][i].kodperingkat;
+							var nama_kursus = response['data'][i].nama_kursus;
+
+							var option = "<option value='"+nama_kursus+"'>"+nama_kursus+"</option>";
+
+							$("#nama_kursus").append(option); 
+							
+						}
+					}
+
+				}
+			});
+
+			});
+
+
+
+		});
+
+		$(document).ready(function() {
+		$('.js-example-basic-single').select2();
+		});
+		</script>
+
 
 
 		<script>

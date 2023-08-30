@@ -108,6 +108,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('keseluruhan-Permohonan', [PenyelarasController::class, 'keseluruhanPermohonan'])->name('keseluruhan-Permohonan');
     Route::get('borangPermohonanBaru/{id}', [PenyelarasController::class, 'borangPermohonanBaru'])->name('borangPermohonanBaru');
     Route::get('/bandar/{idnegeri}', [PenyelarasController::class, 'bandar']);
+    Route::get('/peringkat/{id}', [PenyelarasController::class, 'peringkat']);
+    Route::get('/kursus/{kodperingkat}/{id}', [PenyelarasController::class, 'kursus']);
     Route::post('borangPermohonanBaru', [PenyelarasController::class, 'simpan'])->name('simpan');
     Route::post('hantar', [PenyelarasController::class, 'hantar'])->name('hantar');
 
