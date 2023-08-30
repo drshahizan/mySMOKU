@@ -87,7 +87,7 @@
                                     </form>
                 
                                     <div class="body">
-                                        <div class="table-responsive">
+                                        <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
@@ -148,7 +148,7 @@
                                             </div>
             
                                             <div class="col-md-3">
-                                                <select name="status" class="form-select">
+                                                <select name="status2" class="form-select">
                                                     <option value="">Pilih Keputusan</option>
                                                     <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
                                                     <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
@@ -219,12 +219,12 @@
             $('#sortTable1').DataTable();
             $('#sortTable2').DataTable();
         </script>
-        <script>
+        {{-- <script>
             let minDate, maxDate;
             // Custom filtering function which will search data in column four between two values
             DataTable.ext.search.push(function (settings, data, dataIndex) {
-                let min = new Date(document.getElementById("min").value).toLocaleDateString();;
-                let max = new Date(document.getElementById("max").value).toLocaleDateString();;
+                let min = new Date(document.getElementById("min").value).toLocaleDateString();
+                let max = new Date(document.getElementById("max").value).toLocaleDateString();
                 
                 let date = new Date(data[3]).toLocaleDateString();
 
@@ -246,10 +246,10 @@
             document.querySelectorAll('#min, #max').forEach((el) => {
                 el.addEventListener('change', () => table.draw());
             });  
-        </script>
+        </script> --}}
         <script>
-            var selectedValue= document.getElementById("status").value;   
-            let table = new DataTable('#sortTable1'); 
-            table.columns(4).search(selectedValue).draw();
+           $('#status').on('change', function(){
+            $('#sortTable1').DataTable().search(this.value).draw();
+          }); 
         </script>
 </x-default-layout> 
