@@ -29,11 +29,11 @@ class PenyelarasController extends Controller
 {
     public function create()
     {   
-        $smoku = Smoku::all()->where('jenis','=', 'IPTA');
-        //$smoku = Smoku::join('permohonan','permohonan.nokp_pelajar','=','smoku.nokp')
-        //->get(['smoku.*', 'permohonan.*'])
-        //->where('status','=', '1')
-        //->where('jenis','=', 'IPTA');
+        //$smoku = Smoku::all()->where('jenis','=', 'IPTA');
+        $smoku = Smoku::join('permohonan','permohonan.nokp_pelajar','=','smoku.nokp')
+        ->get(['smoku.*', 'permohonan.*'])
+        ->where('status','=', '1')
+        ->where('jenis','=', 'IPTA');
         //dd($smoku);
         return view('pages.penyelaras.dashboard', compact('smoku'));
 
