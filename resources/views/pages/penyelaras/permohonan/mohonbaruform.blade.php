@@ -1252,7 +1252,7 @@ $(document).ready(function(){
 		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 		<script type="text/javascript">
    
-		/*	$(".save-form").click(function(e){
+			$(".save-form").click(function(e){
 				e.preventDefault();
 				var data = $('#kt_create_account_form').serialize();
 				//alert (data);
@@ -1263,7 +1263,7 @@ $(document).ready(function(){
 
 				});
 				
-			});*/
+			});
 		</script> 
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
@@ -1277,7 +1277,7 @@ $(document).ready(function(){
 					// AJAX request 
 					$.ajax({
 						
-						url: 'bandar/'+idnegeri,
+						url: '/bandar/'+idnegeri,
 						type: 'get',
 						dataType: 'json',
 						success: function(response){

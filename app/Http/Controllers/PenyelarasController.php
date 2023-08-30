@@ -180,15 +180,15 @@ class PenyelarasController extends Controller
     }
 
     // Fetch records
-   public function bandar($idnegeri=0){
+   public function bandar($idnegeri){
 
     // Fetch kursus by idipt
-    $dataBandar['data'] = Bandar::orderby("nama","asc")
+    $loaddataBandar['data'] = Bandar::orderby("nama","asc")
          ->select('id','nama','negeri')
          ->where('negeri',$idnegeri)
          ->get();
 
-         return response()->json($dataBandar);
+         return response()->json($loaddataBandar);
 
 }
 
