@@ -219,7 +219,7 @@
             $('#sortTable1').DataTable();
             $('#sortTable2').DataTable();
         </script>
-        {{-- <script>
+        <script>
             let minDate, maxDate;
             // Custom filtering function which will search data in column four between two values
             DataTable.ext.search.push(function (settings, data, dataIndex) {
@@ -246,10 +246,10 @@
             document.querySelectorAll('#min, #max').forEach((el) => {
                 el.addEventListener('change', () => table.draw());
             });  
-        </script> --}}
-        <script>
+        </script>
+        {{-- <script>
            $('#status').on('change', function(){
             $('#sortTable1').DataTable().search(this.value).draw();
           }); 
-        </script>
+        </script> --}}
 </x-default-layout> 
