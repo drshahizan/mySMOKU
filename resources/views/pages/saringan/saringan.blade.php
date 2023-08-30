@@ -115,6 +115,18 @@
                                                     if ($item['status']==3){
                                                         $status='Sedang Disaring';
                                                     }
+                                                    $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                    $conjunctions = ['bin', 'binti'];
+                                                    $words = explode(' ', $text);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
+                                                        }
+                                                    }
+                                                    $pemohon = implode(' ', $result);
                                                 @endphp
                                                 <tr>                              
                                                     <td>
@@ -124,7 +136,7 @@
                                                             <a href="{{ url('maklumat/pemohon/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
                                                         @endif
                                                     </td>
-                                                    <td>{{$nama_pemohon}}</td>
+                                                    <td>{{$pemohon}}</td>
                                                     <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                         @if ($item['status']=='2')
                                                             <td class="text-center"><button class="btn bg-orange text-white">{{ucwords(strtolower($status))}}</button></td>
@@ -174,6 +186,18 @@
                                                         if ($item['status']==3){
                                                             $status='Sedang Disaring';
                                                         }
+                                                        $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                        $conjunctions = ['bin', 'binti'];
+                                                        $words = explode(' ', $text);
+                                                        $result = [];
+                                                        foreach ($words as $word) {
+                                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                                $result[] = Str::lower($word);
+                                                            } else {
+                                                                $result[] = $word;
+                                                            }
+                                                        }
+                                                        $pemohon = implode(' ', $result);
                                                     @endphp
                                                     <tr>                                 
                                                         <td>
@@ -183,7 +207,7 @@
                                                                 <a href="{{ url('maklumat/pemohon/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
                                                             @endif
                                                         </td>
-                                                        <td>{{$nama_pemohon}}</td>
+                                                        <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                             @if ($item['status']=='2')
                                                                 <td class="text-center"><button class="btn bg-orange text-white">{{ucwords(strtolower($status))}}</button></td>
