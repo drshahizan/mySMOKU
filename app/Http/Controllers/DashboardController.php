@@ -30,7 +30,8 @@ class DashboardController extends Controller
         ->get(['permohonan.*', 'statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
         //$smoku = Smoku::all()->where('jenis','=', 'IPTA');
-        $smoku = Smoku::leftJoin('permohonan','permohonan.nokp_pelajar','=','smoku.nokp')
+        $smoku = Smoku::orderBy('smoku.id','desc')
+        ->leftJoin('permohonan','permohonan.nokp_pelajar','=','smoku.nokp')
         ->get(['smoku.*', 'permohonan.*'])
         ->where('status','!=', '2')
         ->where('jenis','=', 'IPTA');

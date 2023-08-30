@@ -30,7 +30,8 @@ class PenyelarasController extends Controller
     public function create()
     {   
         //$smoku = Smoku::all()->where('jenis','=', 'IPTA');
-        $smoku = Smoku::leftJoin('permohonan','permohonan.nokp_pelajar','=','smoku.nokp')
+        $smoku = Smoku::orderBy('smoku.id','desc')
+        ->leftJoin('permohonan','permohonan.nokp_pelajar','=','smoku.nokp')
         ->get(['smoku.*', 'permohonan.*'])
         ->where('status','!=', '2')
         ->where('jenis','=', 'IPTA');
