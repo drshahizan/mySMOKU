@@ -53,7 +53,7 @@ class DashboardController extends Controller
             return view('pages.pegawai.dashboard')->with('message', 'Selamat Datang ke Laman Utama Pegawai Atasan');
         }
         else{
-            return view('pages.pentadbir.dashboard')->with('message', 'Selamat Datang ke Laman Utama Admin');
+            return view('pages.pentadbir.dashboard')->with('message', 'Selamat Datang ke Laman Utama Pentadbir Sistem');
         }
     }
 }
