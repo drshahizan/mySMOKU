@@ -131,7 +131,13 @@ class PenyelarasController extends Controller
 
     public function permohonanbaru()
     {
-        return view('pages.penyelaras.permohonan.permohonanbaru');
+        $smoku = Smoku::join('permohonan','permohonan.nokp_pelajar','=','smoku.nokp')
+        //->join('maklumatakademik','maklumatakademik.nokp_pelajar','=','smoku.nokp')
+        ->get(['smoku.*', 'permohonan.*'])
+        ->where('status','=', '2')
+        ->where('jenis','=', 'IPTA');
+        //return($smoku);
+        return view('pages.penyelaras.permohonan.permohonanbaru', compact('smoku'));
     }
 
    
