@@ -12,6 +12,12 @@
             table-layout: fixed;
             width: 75%;
         }
+        select{
+            padding: 3px 6px!important;
+            border: 1px solid #ccc!important;
+            border-radius: 6px!important;
+            font-size: 13px!important;
+        }
         .small-td{
             width: 11%;
         }
@@ -32,13 +38,6 @@
             border: 1px solid #ccc;
             border-radius: 6px;
             padding: 2px 5px;
-            font-size: 13px!important;
-        }
-        select{
-            width: 230px!important;
-            padding: 3px 6px!important;
-            border: 1px solid #ccc!important;
-            border-radius: 6px!important;
             font-size: 13px!important;
         }
         .bold{
@@ -172,9 +171,87 @@
                                     </table>   
                                 <hr>
                                 <br>
-                                <td>    
-                                <!--begin: Invoice body-->
+                                <h6>Maklumat resit/invois:</h6>
+                                <br>
                                 <form method="POST" action="{{ url('saringan') }}" id="saring">
+
+                                    <div class="row clearfix">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-bordered mb-5">
+                                                    <thead class="table-primary">
+                                                        <tr>
+                                                            <th style="width: 5%; text-align:right;">No.</th>                                                        
+                                                            <th style="width: 20%;">Item</th>
+                                                            <th style="width: 25%;">Keputusan Saringan</th>
+                                                            <th style="width: 50%;">Catatan</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="text-align:right;">1</td>
+                                                            <td>
+                                                                <span>Resit/Invois 1</span>
+                                                            </td>           
+                                                            <td class="hidden-sm-down">
+                                                                <div class="form-group c_form_group">
+                                                                    <select id="maklumat_profil_diri" name="maklumat_profil_diri" class="form-control" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                        <option value="">Pilih</option>
+                                                                        <option value="lengkap">Lengkap</option>
+                                                                        <option value="tak_lengkap">Tidak Lengkap</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                Yuran Peperiksaan
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align:right;">2</td>
+                                                            <td>
+                                                                <span>Resit/Invois 2</span>
+                                                            </td>
+                                                            <td class="hidden-sm-down">
+                                                                <div class="form-group c_form_group">
+                                                                    <select id="maklumat_akademik" name="maklumat_akademik" class="form-control" onchange="select2()"  oninvalid="this.setCustomValidity('Sila tandakan sekurang-kurangnya satu kotak')" oninput="setCustomValidity('')" required>
+                                                                        {{-- oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')"  --}}
+                                                                        <option value="">Pilih</option>
+                                                                        <option value="lengkap">Lengkap</option>
+                                                                        <option value="tak_lengkap">Tidak Lengkap</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                Yuran Perkhidmatan
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align:right;">3</td>
+                                                            <td>
+                                                                <span>Resit/Invois 3</span>
+                                                            </td>
+                                                            <td class="hidden-sm-down">
+                                                                <div class="form-group c_form_group">
+                                                                    <select id="maklumat_akademik" name="maklumat_akademik" class="form-control" onchange="select3()"  oninvalid="this.setCustomValidity('Sila tandakan sekurang-kurangnya satu kotak')" oninput="setCustomValidity('')" required>
+                                                                        {{-- oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')"  --}}
+                                                                        <option value="">Pilih</option>
+                                                                        <option value="lengkap">Lengkap</option>
+                                                                        <option value="tak_lengkap">Tidak Lengkap</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                            <td class="hidden-sm-down">
+                                                                Yuran Komputer
+                                                            </td>
+                                                        </tr>                                                
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h6>Sejarah tuntutan:</h6>
+                                    <br>
+                                    <!--begin: Invoice body-->
                                     {{csrf_field()}}     
                                     @php
                                         $jumlah = 400;
@@ -183,13 +260,6 @@
                                         }
                                     @endphp
                                     <div class="table-responsive">
-                                        <table class="maklumat2">
-                                            <tr>
-                                                <td>Jumlah Layak Tuntut (RM)</td>
-                                                <td>:</td>
-                                                <td><input type="number" name="layak_tuntut" value="{{$jumlah}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
-                                            </tr>
-                                        </table>
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -227,6 +297,13 @@
                                                     @endif
                                                 </tr>
                                             </tbody>
+                                        </table>
+                                        <table class="maklumat2">
+                                            <tr>
+                                                <td>Jumlah Layak Tuntut (RM)</td>
+                                                <td>:</td>
+                                                <td><input type="number" name="layak_tuntut" value="{{$jumlah}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                            </tr>
                                         </table>
                                     </div>
                                     <br>
