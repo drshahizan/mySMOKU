@@ -86,6 +86,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan/telah/disaring/{no_kp}', [SaringanController::class, 'tuntutanTelahDisaring'])->name('tuntutan.telah.disaring.no_kp');
 
     //Permohonan - Sekretariat
+    Route::get('dashboard/sekretariat', [SekretariatController::class, 'dashboard']);
     Route::get('keseluruhanPermohonan', [SekretariatController::class, 'statusPermohonan']);
     Route::get('permohonan/kelulusan', [SekretariatController::class, 'kelulusanPermohonan']);
     Route::get('permohonan/keputusan', [SekretariatController::class, 'keputusanPermohonan']);

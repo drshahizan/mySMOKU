@@ -47,16 +47,52 @@
 						<div class="header">
 							<h2>Status Keseluruhan Permohonan</h2>
 						</div>
+						{{-- @foreach ($permohonan as $item)
+							@if ($item['program']=="BKOKU")
+								@php
+									$keseluruhanB = DB::table('permohonan')->count();
+									$derafB = DB::table('permohonan')->where('status','=','1')->count();
+									$baharuB = DB::table('permohonan')->where('status','=','2')->count();
+									$saringanB = DB::table('permohonan')->where('status','=','3')->count();
+									$disokongB = DB::table('permohonan')->where('status','=','4')->count();
+									$dikembalikanB = DB::table('permohonan')->where('status','=','5')->count();
+									$layakB = DB::table('permohonan')->where('status','=','6')->count();
+									$tidaklayakB = DB::table('permohonan')->where('status','=','7')->count();
+								@endphp
+							@elseif ($item['program']=="PPK")
+								@php
+									$keseluruhanP = DB::table('permohonan')->count();
+									$derafP = DB::table('permohonan')->where('status','=','1')->count();
+									$baharuP = DB::table('permohonan')->where('status','=','2')->count();
+									$saringanP = DB::table('permohonan')->where('status','=','3')->count();
+									$disokongP = DB::table('permohonan')->where('status','=','4')->count();
+									$dikembalikanP = DB::table('permohonan')->where('status','=','5')->count();
+									$layakP = DB::table('permohonan')->where('status','=','6')->count();
+									$tidaklayakP = DB::table('permohonan')->where('status','=','7')->count();
+								@endphp
+							@endif
+						@endforeach --}}
 
 						@php
-							$keseluruhanB = DB::table('permohonan')->count();
-							$derafB = DB::table('permohonan')->where('status','=','1')->count();
-							$baharuB = DB::table('permohonan')->where('status','=','2')->count();
-							$saringanB = DB::table('permohonan')->where('status','=','3')->count();
-							$disokongB = DB::table('permohonan')->where('status','=','4')->count();
-							$dikembalikanB = DB::table('permohonan')->where('status','=','5')->count();
-							$layakB = DB::table('permohonan')->where('status','=','6')->count();
-							$tidaklayakB = DB::table('permohonan')->where('status','=','7')->count();
+							$keseluruhanB = DB::table('permohonan')->where('program','=','BKOKU')->count();
+							$derafB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','1')->count();
+							$baharuB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','2')->count();
+							$saringanB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','3')->count();
+							$disokongB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','4')->count();
+							$dikembalikanB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','5')->count();
+							$layakB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','6')->count();
+							$tidaklayakB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','7')->count();
+						@endphp
+
+						@php
+							$keseluruhanP = DB::table('permohonan')->where('program','=','PPK')->count();
+							$derafP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','1')->count();
+							$baharuP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','2')->count();
+							$saringanP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','3')->count();
+							$disokongP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','4')->count();
+							$dikembalikanP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','5')->count();
+							$layakP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','6')->count();
+							$tidaklayakP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','7')->count();
 						@endphp
 
 						{{-- top nav bar --}}
@@ -430,10 +466,10 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">1689</span>
+													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$keseluruhanP}}</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
-													<span class="text-white fw-bold fs-7">Jumlah</span>
+													<span class="text-white fw-bold fs-7">Keseluruhan</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
 													<!--end::Desc-->
@@ -461,7 +497,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">500</span>
+													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$layakP}}</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
 													<span class="text-white fw-bold fs-7">Layak</span>
@@ -491,7 +527,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">300</span>
+													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$tidaklayakP}}</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
 													<span class="text-white fw-semibold fs-7">Tidak Layak</span>
@@ -521,7 +557,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">902</span>
+													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$derafP}}</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
 													<span class="text-white fw-semibold fs-7">Deraf</span>
@@ -554,7 +590,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">1689</span>
+													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$baharuP}}</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
 													<span class="text-white fw-bold fs-7">Baharu</span>
@@ -586,7 +622,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">500</span>
+													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$saringanP}}</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
 													<span class="text-white fw-bold fs-7">Saringan</span>
@@ -616,7 +652,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">300</span>
+													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$disokongP}}</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
 													<span class="text-white fw-semibold fs-7">Disokong</span>
@@ -646,7 +682,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">902</span>
+													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$dikembalikanP}}</span>
 													<!--end::Number-->
 													<!--begin::Desc-->
 													<span class="text-white fw-semibold fs-7">Dikembalikan</span>
