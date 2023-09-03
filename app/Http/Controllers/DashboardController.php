@@ -22,15 +22,9 @@ class DashboardController extends Controller
         ->get(['statustransaksi.*', 'statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
         $akademik = Akademik::all()
-      
-<<<<<<< Updated upstream
-        ->where('nokp_pelajar', Auth::user()->nokp);
-        $sem = Akademik::
-        leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
-=======
         ->where('nokp_pelajar', Auth::user()->id());
         $sem = Akademik::leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
->>>>>>> Stashed changes
+
         ->get(['maklumatakademik.*', 'bk_peringkatpengajian.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
         $tuntutanpermohonan = TuntutanPermohonan::Join('statusinfo','statusinfo.kodstatus','=','permohonan.status')
