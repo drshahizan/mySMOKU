@@ -108,9 +108,9 @@
 															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$keseluruhanB}}</span> 
 
 															<div class="m-0">
-																<span class="badge badge-light-info fs-base m-0">
-																	<a href="#"><span class="path1"></span><span class="path2"></span></a> 
-																	Lihat
+																<span class="badge badge-light fs-base m-0">
+																	<a href="#" class="secondary text-black"><span class="path1"></span><span class="path2"></span>Lihat</a> 
+																	
 																</span>  
 															</div>       
 														</div>  
@@ -144,9 +144,8 @@
 															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$derafB}}</span> 
 
 															<div class="m-0">
-																<span class="badge badge-light-warning fs-base m-0">
-																	<a href="#"><span class="path1"></span><span class="path2"></span></a> 
-																	Lihat
+																<span class="badge badge-dark-secondary fs-base m-0">
+																	<a href="#" class="dark-secondary text-turqoise"><span class="path1"></span><span class="path2"></span>Lihat</a> 
 																</span>  
 															</div>       
 														</div>  
@@ -179,9 +178,8 @@
 															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$baharuB}}</span> 
 
 															<div class="m-0">
-																<span class="badge badge-light-info fs-base m-0">
-																	<a href="#"><span class="path1"></span><span class="path2"></span></a> 
-																	Lihat
+																<span class="badge badge-light-primary fs-base m-0">
+																	<a href="#" class="primary text-primary"><span class="path1"></span><span class="path2"></span>Lihat</a> 
 																</span>  
 															</div>       
 														</div>  
@@ -217,8 +215,7 @@
 
 															<div class="m-0">
 																<span class="badge badge-light-warning fs-base m-0">
-																	<a href="#"><span class="path1"></span><span class="path2"></span></a> 
-																	Lihat
+																	<a href="#" class="warning text-warning"><span class="path1"></span><span class="path2"></span>Lihat</a> 
 																</span>  
 															</div>       
 														</div>  
@@ -253,9 +250,8 @@
 															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$disokongB}}</span> 
 
 															<div class="m-0">
-																<span class="badge badge-light-success fs-base m-0">
-																	<a href="#"><span class="path1"></span><span class="path2"></span></a> 
-																	Lihat
+																<span class="badge badge-light-warning fs-base m-0">
+																	<a href="#" class="warning text-warning"><span class="path1"></span><span class="path2"></span>Lihat</a> 
 																</span>  
 															</div>       
 														</div>  
@@ -427,7 +423,7 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #787878">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													{{-- <span class="symbol-label"> --}}
