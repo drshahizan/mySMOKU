@@ -28,10 +28,14 @@ class User extends Authenticatable
         'password',
         'tahap',
         'status',
+<<<<<<< Updated upstream
         'created_at',
         'updated_at',
+=======
+        'profile_photo_path',
+>>>>>>> Stashed changes
         'last_login_at',
-        'last_login_ip',
+        'last_login_ip'
     ];
 
     /**

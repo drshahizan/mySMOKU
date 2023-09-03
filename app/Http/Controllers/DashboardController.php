@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Traits\ToStringFormat;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;  
 use App\Models\User;
 use App\Models\Permohonan;
 use App\Models\Status;
@@ -21,9 +23,14 @@ class DashboardController extends Controller
         ->where('nokp_pelajar', Auth::user()->nokp);
         $akademik = Akademik::all()
       
+<<<<<<< Updated upstream
         ->where('nokp_pelajar', Auth::user()->nokp);
         $sem = Akademik::
         leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
+=======
+        ->where('nokp_pelajar', Auth::user()->id());
+        $sem = Akademik::leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
+>>>>>>> Stashed changes
         ->get(['maklumatakademik.*', 'bk_peringkatpengajian.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
         $tuntutanpermohonan = TuntutanPermohonan::Join('statusinfo','statusinfo.kodstatus','=','permohonan.status')
@@ -40,11 +47,12 @@ class DashboardController extends Controller
         ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
         //return view('pages.permohonan.statusmohon', compact('permohonan'));
+        $user = User::all()->where('nokp',Auth::user()->id());
 
 
         if(Auth::user()->tahap=='1')
         {
-            return view('pages.dashboards.index', compact('pelajar','status','akademik','sem','tuntutanpermohonan', 'permohonan'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
+            return view('pages.dashboards.index', compact('pelajar','status','akademik','sem','tuntutanpermohonan', 'permohonan','user'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
         }
         else if(Auth::user()->tahap=='2')
         {
@@ -60,5 +68,18 @@ class DashboardController extends Controller
         else{
             return view('pages.pentadbir.dashboard')->with('message', 'Selamat Datang ke Laman Utama Pentadbir Sistem');
         }
+    }
+
+    public function store(Request $request)
+    {  
+        // dd($request->hasFile("profile_photo_path"));
+
+        if($request->hasFile('profile_photo_path')){
+            $filename = strval(Auth()->id()) . "_" . $request->profile_photo_path->getClientOriginalName();
+            //dd($filename);
+            $request->profile_photo_path->storeAs('profile_photo_path',$filename,'public');
+            Auth()->user()->update(['profile_photo_path'=>$filename]);
+        }
+        return back()->with('success', 'Avatar updated successfully.');
     }
 }

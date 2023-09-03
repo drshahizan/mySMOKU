@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nokp')->unique();
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('profile_photo_path')->nullable();
             $table->string('password');
             $table->integer('tahap');
             $table->string('status')->nullable();

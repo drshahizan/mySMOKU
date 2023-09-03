@@ -1,4 +1,12 @@
 <x-default-layout> 
+<head>
+   
+   <!-- MAIN CSS -->
+   <link rel="stylesheet" href="/assets/css/saringan.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+   <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+   </head>
 	<!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->
@@ -40,22 +48,33 @@
 													<div class="d-flex flex-center flex-column mb-5">
 														<!--begin::Avatar-->
 														<div class="symbol symbol-150px symbol-circle mb-7">
-															<img src="assets/media/avatars/300-1.jpg" alt="image" />
+															<!-- <img src="assets/media/avatars/300-1.jpg" alt="image" /> -->
+															<?php
+																$profile_picture = "";
+																if(Auth::user()->profile_photo_path !== null){
+																	$profile_picture = Auth::user()->profile_photo_path;
+																}else{
+																	$profile_picture = "default.jpg";
+																}
+																$img_path = "storage/app/public/profile_photo_path/".$profile_picture;
+																// dd($img_path);
+															?>
+															<img class="image rounded-circle" src="{{asset($img_path)}}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
 														</div>
 														<!--end::Avatar-->
 														<!--begin::Name-->
-														<a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1">Max Smith</a>
+														<a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1">Pelajar Demo 1</a>
 														<!--end::Name-->
 														<!--begin::Email-->
-														<a href="#" class="fs-5 fw-semibold text-muted text-hover-primary mb-6">max@kt.com</a>
+														<a href="#" class="fs-5 fw-semibold text-muted text-hover-primary mb-6">pelajardemo1@gmail.com</a>
 														<!--end::Email-->
 													</div>
 													<!--end::Summary-->
 													<!--begin::Details toggle-->
 													<div class="d-flex flex-stack fs-4 py-3">
-														<div class="fw-bold">Details</div>
+														<div class="fw-bold">Maklumat Pelajar</div>
 														<!--begin::Badge-->
-														<div class="badge badge-light-info d-inline">Premium user</div>
+														<!-- <div class="badge badge-light-info d-inline">Premium user</div> -->
 														<!--begin::Badge-->
 													</div>
 													<!--end::Details toggle-->
@@ -63,30 +82,30 @@
 													<!--begin::Details content-->
 													<div class="pb-5 fs-6">
 														<!--begin::Details item-->
-														<div class="fw-bold mt-5">Account ID</div>
-														<div class="text-gray-600">ID-45453423</div>
+														<div class="fw-bold mt-5">No Matrik</div>
+														<div class="text-gray-600">MCS203007</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
-														<div class="fw-bold mt-5">Billing Email</div>
+														<div class="fw-bold mt-5">Alamat Emel</div>
 														<div class="text-gray-600">
-															<a href="#" class="text-gray-600 text-hover-primary">info@keenthemes.com</a>
+															<a href="#" class="text-gray-600 text-hover-primary">pelajardemo1@gmail.com</a>
 														</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
-														<div class="fw-bold mt-5">Delivery Address</div>
-														<div class="text-gray-600">101 Collin Street,
-														<br />Melbourne 3000 VIC
-														<br />Australia</div>
+														<div class="fw-bold mt-5">Nama Kursus</div>
+														<div class="text-gray-600">Master of Philosophy (MPHIL) in Social Science and Humanities</div>
+														<div class="fw-bold mt-5">Mod Pengajian</div>
+														<div class="text-gray-600">Sepenuh Masa
+														</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
-														<div class="fw-bold mt-5">Language</div>
-														<div class="text-gray-600">English</div>
+														
 														<!--begin::Details item-->
 														<!--begin::Details item-->
-														<div class="fw-bold mt-5">Latest Transaction</div>
+														<!-- <div class="fw-bold mt-5">Latest Transaction</div>
 														<div class="text-gray-600">
 															<a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-gray-600 text-hover-primary">#14534</a>
-														</div>
+														</div> -->
 														<!--begin::Details item-->
 													</div>
 													<!--end::Details content-->
@@ -177,8 +196,10 @@
 														<!--begin::Card body-->
 														<div class="card-body pt-0 pb-5">
 															<!--begin::Form-->
-															<form class="form" action="#" id="kt_ecommerce_customer_profile">
+															<!-- <form class="form" action="#" id="kt_ecommerce_customer_profile"> -->
+															<form action="{{route('dashboard.store')}}" method="POST" enctype="multipart/form-data">
 																<!--begin::Input group-->
+																@csrf
 																<div class="mb-7">
 																	<!--begin::Label-->
 																	<label class="fs-6 fw-semibold mb-2">
@@ -209,8 +230,11 @@
 																					<span class="path2"></span>
 																				</i>
 																				<!--begin::Inputs-->
-																				<input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+																				<!-- <form action="{{route('dashboard.store')}}" method="POST" enctype="multipart/form-data"> -->
+                        															
+																				<input type="file" name="profile_photo_path" accept=".png, .jpg, .jpeg" />
 																				<input type="hidden" name="avatar_remove" />
+																				<!-- </form> -->
 																				<!--end::Inputs-->
 																			</label>
 																			<!--end::Edit-->
