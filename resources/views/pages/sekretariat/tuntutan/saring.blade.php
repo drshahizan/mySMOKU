@@ -130,7 +130,7 @@
                                                         @elseif ($item['status']=='3')
                                                             <td class="text-center"><button class="btn bg-pink text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='4')
-                                                            <td class="text-center"><button class="btn bg-green text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><button class="btn btn-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='5')
                                                             <td class="text-center"><button class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
@@ -191,7 +191,7 @@
                                                         @elseif ($item['status']=='3')
                                                             <td class="text-center"><button class="btn bg-pink text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='4')
-                                                            <td class="text-center"><button class="btn bg-green text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><button class="btn btn-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='5')
                                                             <td class="text-center"><button class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif

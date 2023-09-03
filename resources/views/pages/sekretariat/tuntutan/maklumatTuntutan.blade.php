@@ -307,9 +307,11 @@
                                         </table>
                                     </div>
                                     <br>
-                                <!--end: Invoice body-->                               
+                                <!--end: Invoice body-->       
                                 <div class="col-md-6 text-right">
-                                    <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan">Teruskan</button>
+                                    <button type="submit" name="submit" class="btn btn-success text-white" value="Layak"><i class="fa fa-check"></i> Layak</button>
+                                    <button type="submit" name="submit" class="btn btn-warning theme-bg gradient action-btn" value="Kembalikan"><i class="fa fa-reply"></i> Kembalikan</button>
+                                    <button type="submit" name="submit" class="btn btn-danger" value="TidakLayak"><i class="bi bi-x"></i> Tidak Layak</button>
                                 </div>
                                 </form>  
                             </div>                   
