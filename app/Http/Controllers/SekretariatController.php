@@ -200,7 +200,8 @@ class SekretariatController extends Controller
 
     public function tuntutanKeputusan()
     {
-        $permohonan = TuntutanPermohonan::where('status', '=','6')
+        $permohonan = TuntutanPermohonan::where('status', '=','5')
+        ->orWhere('status', '=','6')
         ->orWhere('status', '=','7')
         ->get();
         return view('pages.sekretariat.tuntutan.keputusan',compact('permohonan'));
