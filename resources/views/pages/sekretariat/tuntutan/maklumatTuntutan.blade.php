@@ -49,6 +49,10 @@
         .red-color{
             color: red!important;
         }
+        button{
+            margin: 5px;
+            width:150px!important;
+        }
     </style>
     <!-- Main body part  -->
     <div id="main-content">
@@ -306,7 +310,6 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <br>
                                 <!--end: Invoice body-->       
                                 <div class="col-md-6 text-right">
                                     <button type="submit" name="submit" class="btn btn-success text-white" value="Layak"><i class="fa fa-check"></i> Layak</button>
