@@ -123,7 +123,7 @@
                                                                     
                                                                     // nama pemohon
                                                                     $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
-                                                                    $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
+                                                                    $conjunctions = ['bin', 'binti'];
                                                                     $words = explode(' ', $text);
                                                                     $result = [];
                                                                     foreach ($words as $word) {
