@@ -213,6 +213,15 @@
                                             <td>:</td>
                                             <td>{{$akademik->sesi}}-0{{$akademik->sem_semasa}}</td>
                                         </tr>
+                                        <tr>
+                                            <td><strong>Status Penajaan</strong></td>
+                                            <td>:</td>
+                                            @if($akademik->nama_penaja!=null)
+                                                <td>Ditaja ({{$akademik->nama_penaja}})</td>
+                                            @else
+                                                <td>Tidak Ditaja</td>
+                                            @endif
+                                        </tr>
                                     </table>   
                                 <hr>
                                 <td>
