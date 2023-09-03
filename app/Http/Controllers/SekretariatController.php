@@ -20,8 +20,7 @@ class SekretariatController extends Controller
 {
     public function dashboard()
     {
-        $permohonan = TuntutanPermohonan::all();
-        return view('pages.sekretariat.dashboard', compact('permohonan'));
+        return view('pages.sekretariat.dashboard');
     }
     
     public function statusPermohonan(Request $request)

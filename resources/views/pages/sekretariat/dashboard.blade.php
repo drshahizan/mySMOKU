@@ -47,31 +47,6 @@
 						<div class="header">
 							<h2>Status Keseluruhan Permohonan</h2>
 						</div>
-						{{-- @foreach ($permohonan as $item)
-							@if ($item['program']=="BKOKU")
-								@php
-									$keseluruhanB = DB::table('permohonan')->count();
-									$derafB = DB::table('permohonan')->where('status','=','1')->count();
-									$baharuB = DB::table('permohonan')->where('status','=','2')->count();
-									$saringanB = DB::table('permohonan')->where('status','=','3')->count();
-									$disokongB = DB::table('permohonan')->where('status','=','4')->count();
-									$dikembalikanB = DB::table('permohonan')->where('status','=','5')->count();
-									$layakB = DB::table('permohonan')->where('status','=','6')->count();
-									$tidaklayakB = DB::table('permohonan')->where('status','=','7')->count();
-								@endphp
-							@elseif ($item['program']=="PPK")
-								@php
-									$keseluruhanP = DB::table('permohonan')->count();
-									$derafP = DB::table('permohonan')->where('status','=','1')->count();
-									$baharuP = DB::table('permohonan')->where('status','=','2')->count();
-									$saringanP = DB::table('permohonan')->where('status','=','3')->count();
-									$disokongP = DB::table('permohonan')->where('status','=','4')->count();
-									$dikembalikanP = DB::table('permohonan')->where('status','=','5')->count();
-									$layakP = DB::table('permohonan')->where('status','=','6')->count();
-									$tidaklayakP = DB::table('permohonan')->where('status','=','7')->count();
-								@endphp
-							@endif
-						@endforeach --}}
 
 						@php
 							$keseluruhanB = DB::table('permohonan')->where('program','=','BKOKU')->count();
@@ -455,83 +430,19 @@
 											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #1E36A0">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
-													<span class="symbol-label">
-														<i class="ki-duotone ki-user-tick fs-1 text-dark">
+													{{-- <span class="symbol-label"> --}}
+														<i class="ki-duotone ki-user-tick fs-1 text-light">
 															<span class="path1"></span>
 															<span class="path2"></span>
+															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Keseluruhan</span>
 														</i>
-													</span>
+													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$keseluruhanP}}</span>
-													<!--end::Number-->
-													<!--begin::Desc-->
-													<span class="text-white fw-bold fs-7">Keseluruhan</span>
-													<!--end::Number-->
-													<!--begin::Desc-->
-													<!--end::Desc-->
-												</div>
-												<!--end::Stats-->
-											</div>
-											<!--end::Items-->
-										</div>
-										<!--end::Col-->
-
-										<!--begin::Col-->
-										<div class="col-3">
-											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #26408B">
-												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
-													<span class="symbol-label">
-														<i class="ki-duotone ki-user fs-1 text-dark">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</span>
-												</div>
-												<!--end::Symbol-->
-												<!--begin::Stats-->
-												<div class="m-0">
-													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$layakP}}</span>
-													<!--end::Number-->
-													<!--begin::Desc-->
-													<span class="text-white fw-bold fs-7">Layak</span>
-													<!--end::Desc-->
-												</div>
-												<!--end::Stats-->
-											</div>
-											<!--end::Items-->
-										</div>
-										<!--end::Col-->
-
-										<!--begin::Col-->
-										<div class="col-3">
-											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #7ec4cf">
-												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
-													<span class="symbol-label">
-														<i class="ki-duotone ki-teacher fs-1 text-dark">
-															<span class="path1"></span>
-															<span class="path2"></span>
-															<span class="path3"></span>
-														</i>
-													</span>
-												</div>
-												<!--end::Symbol-->
-												<!--begin::Stats-->
-												<div class="m-0">
-													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$tidaklayakP}}</span>
-													<!--end::Number-->
-													<!--begin::Desc-->
-													<span class="text-white fw-semibold fs-7">Tidak Layak</span>
-													<!--end::Desc-->
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$keseluruhanP}}</span>
+													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -545,23 +456,70 @@
 											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #A6CFD5">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
-													<span class="symbol-label">
-														<i class="ki-duotone ki-book-open fs-1 text-dark">
+													{{-- <span class="symbol-label"> --}}
+														<i class="ki-duotone ki-book-open fs-1 text-light">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
+															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Deraf</span>
 														</i>
-													</span>
+													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$derafP}}</span>
-													<!--end::Number-->
-													<!--begin::Desc-->
-													<span class="text-white fw-semibold fs-7">Deraf</span>
-													<!--end::Desc-->
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$derafP}}</span>
+													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #1E36A0">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+													{{-- <span class="symbol-label"> --}}
+														<i class="ki-duotone ki-user-tick fs-1 text-light">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Baharu</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$baharuP}}</span>
+													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #26408B">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+														<i class="ki-duotone ki-user fs-1 text-light">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Saringan</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$saringanP}}</span>
+													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -576,57 +534,22 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #1E36A0">
-												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
-													<span class="symbol-label">
-														<i class="ki-duotone ki-user-tick fs-1 text-dark">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</span>
-												</div>
-												<!--end::Symbol-->
-												<!--begin::Stats-->
-												<div class="m-0">
-													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$baharuP}}</span>
-													<!--end::Number-->
-													<!--begin::Desc-->
-													<span class="text-white fw-bold fs-7">Baharu</span>
-													<!--end::Number-->
-													<!--begin::Desc-->
-													
-													<!--end::Desc-->
-												</div>
-												<!--end::Stats-->
-											</div>
-											<!--end::Items-->
-										</div>
-										<!--end::Col-->
-
-										<!--begin::Col-->
-										<div class="col-3">
-											<!--begin::Items-->
 											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #26408B">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
-													<span class="symbol-label">
-														<i class="ki-duotone ki-user fs-1 text-dark">
+													{{-- <span class="symbol-label"> --}}
+														<i class="ki-duotone ki-user fs-1 text-light">
 															<span class="path1"></span>
 															<span class="path2"></span>
+															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Layak</span>
 														</i>
-													</span>
+													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$saringanP}}</span>
-													<!--end::Number-->
-													<!--begin::Desc-->
-													<span class="text-white fw-bold fs-7">Saringan</span>
-													<!--end::Desc-->
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$layakP}}</span>
+													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -640,23 +563,45 @@
 											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #7ec4cf">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
-													<span class="symbol-label">
-														<i class="ki-duotone ki-teacher fs-1 text-dark">
+													{{-- <span class="symbol-label"> --}}
+														<i class="ki-duotone ki-teacher fs-1 text-light">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
+															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Tidak Layak</span>
 														</i>
-													</span>
+													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$disokongP}}</span>
-													<!--end::Number-->
-													<!--begin::Desc-->
-													<span class="text-white fw-semibold fs-7">Disokong</span>
-													<!--end::Desc-->
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$tidaklayakP}}</span>
+													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+										
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #7ec4cf">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+														<i class="ki-duotone ki-teacher fs-1 text-light">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Disokong</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$disokongP}}</span>
+													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -670,23 +615,18 @@
 											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #A6CFD5">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
-													<span class="symbol-label">
-														<i class="ki-duotone ki-book-open fs-1 text-dark">
+														<i class="ki-duotone ki-book-open fs-1 text-light">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
+															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Dikembalikan</span>
 														</i>
-													</span>
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<!--begin::Number-->
-													<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">{{$dikembalikanP}}</span>
-													<!--end::Number-->
-													<!--begin::Desc-->
-													<span class="text-white fw-semibold fs-7">Dikembalikan</span>
-													<!--end::Desc-->
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$dikembalikanP}}</span>
+													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
