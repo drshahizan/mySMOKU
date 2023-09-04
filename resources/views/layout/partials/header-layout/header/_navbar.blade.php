@@ -44,16 +44,13 @@
 
     <!--begin::User menu-->
     <div class="app-navbar-item ms-1 ms-md-3" id="kt_header_user_menu_toggle">
-        @php
-            $nama = DB::table('smoku')->where('nokp', Auth::user()->nokp)->value('nama');
-        @endphp
         <!--begin::Menu wrapper-->
         <div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
             @if(Auth::user()->profile_photo_url)
                 <img src="{{Auth::user()->profile_photo_url }}" alt="user"/>
             @else
-                <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', $nama) }}">
-                    {{ substr($nama, 0, 1) }}
+                <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?',  Auth::user()->nokp) }}">
+                    {{ substr( Auth::user()->nokp,0,1) }}
                 </div>
             @endif
         </div>
