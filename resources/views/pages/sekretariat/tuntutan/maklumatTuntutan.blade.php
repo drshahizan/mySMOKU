@@ -186,8 +186,7 @@
                                 <br>
                                 <h6>Maklumat resit/invois:</h6>
                                 <br>
-                                <form method="POST" action="{{ url('saringan') }}" id="saring">
-
+                                <form method="POST" action="{{ url('tuntutan/saring/maklumat/'.$permohonan->id) }}" id="saring">
                                     <div class="row clearfix">
                                         <div class="col-md-12">
                                             <div class="table-responsive">

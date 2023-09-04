@@ -102,6 +102,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan-keseluruhan', [SekretariatController::class, 'tuntutanKeseluruhan']);
     Route::get('tuntutan-saring', [SekretariatController::class, 'tuntutanSaring']);
     Route::get('maklumat-tuntutan-2/{no_kp}', [SekretariatController::class, 'maklumatTuntutan2'])->name('maklumat.tuntutan2.no_kp');
+    Route::post('tuntutan/saring/maklumat/{id}', [SekretariatController::class, 'saringMaklumatTuntutan'])->name('tuntutan.saring.maklumat.id');
     Route::get('tuntutan-keputusan', [SekretariatController::class, 'tuntutanKeputusan']);
 
     //Permohonan - Penyelaras 
