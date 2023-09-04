@@ -102,7 +102,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$keseluruhanB}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -129,7 +129,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$derafB}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -155,7 +155,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$baharuB}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -179,7 +179,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$saringanB}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -208,7 +208,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$disokongB}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -233,7 +233,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$dikembalikanB}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -259,7 +259,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$layakB}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -286,7 +286,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$tidaklayakB}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -651,7 +651,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$keseluruhanP}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -678,7 +678,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$derafP}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -704,7 +704,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$baharuP}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -728,7 +728,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$saringanP}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -757,7 +757,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$disokongP}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -782,7 +782,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$dikembalikanP}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -808,7 +808,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$layakP}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -835,7 +835,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$tidaklayakP}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
