@@ -242,6 +242,27 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
+					'id_institusi': {
+						validators: {
+							notEmpty: {
+								message: 'Nama Pusat Pengajian diperlukan'
+							}
+						}
+					},
+					'peringkat_pengajian': {
+						validators: {
+							notEmpty: {
+								message: 'Peringkat Pengajian diperlukan'
+							}
+						}
+					},
+					'nama_kursus': {
+						validators: {
+							notEmpty: {
+								message: 'Nama Kursus diperlukan'
+							}
+						}
+					},
 					'no_pendaftaranpelajar': {
 						validators: {
 							notEmpty: {

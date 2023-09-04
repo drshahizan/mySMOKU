@@ -609,7 +609,7 @@ $(document).ready(function(){
 															<label class="form-label mb-3">Nama</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" placeholder="" value="{{$smoku->nama_waris}}"  />
+															<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" placeholder="" @foreach($waris as $waris) @if($waris->nama_waris)  value="{{$waris->nama_waris}}" @else value="{{$smoku->nama_waris}}"  @endif  />
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
@@ -622,7 +622,7 @@ $(document).ready(function(){
 																<div class="row fv-row">
 																	<!--begin::Col-->
 																	<div class="col-12">
-																		<input type="text" class="form-control form-control-lg form-control-solid" id="nokp_waris" name="nokp_waris" placeholder="" value="{{$smoku->nokp_waris}}"  />
+																		<input type="text" class="form-control form-control-lg form-control-solid" id="nokp_waris" name="nokp_waris" placeholder="" @if($waris->nokp_waris)  value="{{$waris->nokp_waris}}" @else value="{{$smoku->nokp_waris}}"  @endif />
 																	</div>
 																	<!--end::Col-->
 																</div>
@@ -648,7 +648,7 @@ $(document).ready(function(){
 															<div class="col-md-6 fv-row hubungan_row">
 															<label class="form-label mb-6">Hubungan Waris</label>
 																
-															<select id="hubungan" name="hubungan" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" >
+															<select id="hubungan" name="hubungan" class="form-select form-select-lg form-select-solid" onchange="lainhubungan()" data-control="select2" data-placeholder="Pilih" >
 															
 															@if ($smoku->hubungan)
 															<option value="{{$smoku->kodhubungan}}">{{$smoku->hubungan}}</option>
@@ -659,12 +659,12 @@ $(document).ready(function(){
 															</select>
 															
 														</div>
-															<div class="col-md-6 fv-row lain_hubungan">
+														<div class="col-md-6 fv-row" id="lain_hubungan">
 															<!--begin::Label-->
 															<label class="form-label mb-6">(Jika Lain-lain) Sila Nyatakan:</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid" id="lain_hubungan" name="lain_hubungan" placeholder="" value="" />
+															<input type="text" class="form-control form-control-lg form-control-solid" id="lain_hubungan" name="lain_hubungan" placeholder="" @if($waris->nokp_waris)  value="{{$waris->lain_hubungan}}" @else value="{{$smoku->lain_hubungan}}"  @endif />
 															<!--end::Input-->													
 															</div>
 														</div>
@@ -676,7 +676,7 @@ $(document).ready(function(){
 															<label class="form-label">Alamat Rumah</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<textarea id="alamatW1" name="alamatW1" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
+															<textarea id="alamatW1" name="alamatW1" class="form-control form-control-lg form-control-solid" rows="2">@if($waris->alamat1)  {{$waris->alamat1}} @else  @endif </textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
@@ -722,7 +722,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" id="alamatW_poskod" name="alamatW_poskod" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" id="alamatW_poskod" name="alamatW_poskod" placeholder="" @if($waris->alamat_poskod)  value="{{$waris->alamat_poskod}}" @else value=""  @endif @endforeach />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -842,7 +842,7 @@ $(document).ready(function(){
 																<!--begin::Row-->
 																<div class="row fv-row">
 																	<!--begin::Input wrapper-->
-																	<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-allow-clear="true" data-hide-search="true">
+																	<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-hide-search="true">
 																		<option value="">Pilih</option>
 																		@foreach ($peringkat as $peringkat)	
 																			<option value="{{ $peringkat->kodperingkat}}">{{ $peringkat->peringkat}}</option> 
@@ -864,7 +864,7 @@ $(document).ready(function(){
 																
 															</label>
 															<!--end::Label-->
-															<select id='nama_kursus'  name='nama_kursus' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-allow-clear="true" data-hide-search="true">
+															<select id='nama_kursus'  name='nama_kursus' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
 																<option value="">Pilih</option>
 															</select>
 														</div>
@@ -1544,6 +1544,16 @@ $(document).ready(function(){
 
 
 		<script>
+			function lainhubungan(){
+            var hubungan = document.getElementById('hubungan').value;
+            if(hubungan=="6"){
+                document.getElementById("lain_hubungan").style.display = "inline";
+            }
+            else{
+                document.getElementById("lain_hubungan").style.display = "none";
+            }
+        }
+
 			function select1(){
             var sumber = document.getElementById('sumber_biaya').value;
 			var mod = document.getElementById('mod').value;
