@@ -42,19 +42,15 @@
             $nama = DB::table('smoku')->where('nokp', Auth::user()->nokp)->value('nama');
         @endphp
         <!--begin::Menu wrapper-->
-		<div class="cursor-pointer symbol  symbol-35px symbol-2by3" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-            @if(Auth::user()->profile_photo_url)
-                <img src="{{ Auth::user()->profile_photo_url }}" class="rounded-3" alt="user" />
-            @elseif($nama)
-                <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-primary text-primary', $nama) }}">
-                    {{ substr($nama,0,1) }}
-                </div>
-            @else
-                <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-primary text-primary', Auth::user()->email) }}">
-                    {{ substr(Auth::user()->email,0,1) }}
-                </div>
-            @endif
-        </div>
+        @if($nama)
+            <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-5 text-white" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold;">
+                {{$nama}}
+            </div>
+        @else
+            <div class="cursor-pointer symbol  symbol-35px symbol-2by3 fs-5 text-white" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold;">
+                {{Auth::user()->email}}
+            </div>
+        @endif
         @include('partials/menus/_user-account-menu')
         <!--end::Menu wrapper-->
     </div>

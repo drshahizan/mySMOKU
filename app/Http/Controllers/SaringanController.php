@@ -80,9 +80,8 @@ class SaringanController extends Controller
 
     public function salinanDokumen($id)
     {
-        $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
-        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
-        return view('pages.saringan.salinanDokumen',compact('permohonan','pelajar'));
+        $permohonan = TuntutanPermohonan::where('id', $id)->first();
+        return view('pages.saringan.salinanDokumen',compact('permohonan'));
     }
 
     public function salinanInvois()
