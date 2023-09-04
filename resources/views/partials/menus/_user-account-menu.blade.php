@@ -10,9 +10,13 @@
             <div class="symbol symbol-50px me-5">
                 @if(Auth::user()->profile_photo_path)
                     <img alt="Logo" src="{{ Auth::user()->profile_photo_path }}"/>
-                @else
+                @elseif($nama)
                     <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-primary text-primary', $nama) }}">
                         {{ substr($nama,0,1) }}
+                    </div>
+                @else
+                    <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-primary text-primary', Auth::user()->email) }}">
+                        {{ substr(Auth::user()->email,0,1) }}
                     </div>
                 @endif
             </div>
@@ -28,7 +32,7 @@
     </div>
     <!--end::Menu item-->
     <!--begin::Menu separator-->
-    <div class="separator my-2"></div>
+    {{-- <div class="separator my-2"></div> --}}
     <!--end::Menu separator-->
     <!--begin::Menu item-->
     <!-- <div class="menu-item px-5"> -->

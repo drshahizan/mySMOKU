@@ -45,9 +45,13 @@
 		<div class="cursor-pointer symbol  symbol-35px symbol-2by3" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
             @if(Auth::user()->profile_photo_url)
                 <img src="{{ Auth::user()->profile_photo_url }}" class="rounded-3" alt="user" />
-            @else
+            @elseif($nama)
                 <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-primary text-primary', $nama) }}">
                     {{ substr($nama,0,1) }}
+                </div>
+            @else
+                <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-primary text-primary', Auth::user()->email) }}">
+                    {{ substr(Auth::user()->email,0,1) }}
                 </div>
             @endif
         </div>
@@ -60,7 +64,5 @@
 		<!-- <div class="btn btn-flex btn-icon btn-active-color-primary w-30px h-30px" id="kt_app_header_menu_toggle">{!! getIcon('element-4', 'fs-1') !!}</div> -->
     </div> 
     <!--end::Header menu toggle-->
-	<!--begin::Aside toggle-->
-	<!--end::Header menu toggle-->
 </div>
 <!--end::Navbar-->
