@@ -183,7 +183,7 @@
                                                 <tr>
                                                     <td style="text-align:right;">3</td>
                                                     <td>
-                                                        <span><a href="{{ url('salinan/dokumen/'.$pelajar->nokp_pelajar) }}" target="_blank">Salinan Dokumen</a></span>
+                                                        <span><a href="{{ url('salinan/dokumen/'.$permohonan->id) }}" target="_blank">Salinan Dokumen</a></span>
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <!--<div class="col-lg-12 col-md-12">-->
