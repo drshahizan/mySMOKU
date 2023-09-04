@@ -20,7 +20,8 @@
 												<!--begin::Card body-->
 												<div class="card-body p-12">
 													<!--begin::Form-->
-													<form action="" id="kt_invoice_form">
+													<form action="{{ route('save') }}" method="post" enctype="multipart/form-data">
+														@csrf
 														<!--begin::Wrapper-->
 														<div class="d-flex flex-column align-items-start flex-xxl-row">
 															<!--begin::Input group-->
@@ -39,10 +40,10 @@
 															<div class="row gx-10 mb-5">
 																<!--begin::Col-->
 																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun</label>
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
+																		<input type="text" name="sesi" class="form-control form-control-solid" placeholder="2023/2024" />
 																	</div>
 																	<!-- Buat Logic +1 -1, contohnya tahun ini 2023, tahun lepas 2022, jadi 
 																		sesi tahun dia akan keluar 
@@ -53,7 +54,7 @@
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																	<select id="sem" name="jenis_yuran" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																	<select id="semester" name="semester" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 																			<option></option>
 																			<option value="1">1</option>
 																			<option value="2">2</option>					
@@ -72,14 +73,14 @@
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Pengajian&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-                                                                    <input type="file" id="salinan_keputusan" name="salinan_keputusan"/>
+                                                                    <input type="file" id="kepPeperiksaan" name="kepPeperiksaan"/>
 																	</div>
 																</div>
 																<div class="col-lg-6">
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">CGPA</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid"  placeholder="" />
+																		<input type="text" name="cgpa" class="form-control form-control-solid"  placeholder="" />
 																	</div>
 																</div>
 																
@@ -87,7 +88,9 @@
 															
 															
 															<div class="d-flex flex-center mt-15">
-															<a href="#" class="btn btn-success">Hantar</a>&nbsp;&nbsp;&nbsp;
+																<button type="submit"  class="btn btn-primary">
+																	Simpan
+																</button>&nbsp;&nbsp;&nbsp;
 														
 															<a href="#" class="btn btn-danger">Batal</a>
 															</div>
@@ -113,20 +116,29 @@
 														<label class="form-label fw-bold fs-4 text-gray-700">Keputusan Peperiksaan</label>
 														<br>
 														<br>
-														<div class="table-responsive">
-														<table class="table table-rounded table-striped border gy-7 gs-7" style="background-color:#FFFFE0;">
-													<thead>
-												<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
-													<th>Sesi Tahun</th>
-													<th>Sesi Semester</th>
-													<th>Keputusan (CGPA)</th>
-													<th>Papar</th>
-												</tr>
-												</thead>
-												<tbody>
-</tbody>
-</table>
-</div>
+													<div class="table-responsive">
+													<table class="table table-rounded table-striped border gy-7 gs-7" style="background-color:#FFFFE0;">
+														<thead>
+															<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+																<th>Sesi</th>
+																<th>Semester</th>
+																<th>Keputusan (CGPA)</th>
+																<th>Papar</th>
+															</tr>
+														</thead>
+														<tbody class="fw-semibold text-gray-600">
+															@foreach ($peperiksaan as $peperiksaan)
+															<tr>
+																<td>{{ $peperiksaan->sesi}}</td>
+																<td>{{ $peperiksaan->semester}}</td>
+																<td>{{ $peperiksaan->cgpa}}</td>
+																<td></td>
+																
+															</tr>
+															@endforeach	
+														</tbody>
+													</table>
+												</div>
 														
 													</div>
 													

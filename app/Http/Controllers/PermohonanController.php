@@ -19,6 +19,7 @@ use App\Models\Sumberbiaya;
 use App\Models\Status;
 use App\Models\JenisOku;
 use App\Models\Dokumen;
+use App\Models\Peperiksaan;
 use App\Models\Hubungan;
 use App\Models\Negeri;
 use App\Models\Bandar;
@@ -596,9 +597,42 @@ class PermohonanController extends Controller
     }
 
     public function baharuimohon()
-    {
-        return view('pages.permohonan.baharuimohon');
+    {   
+        $peperiksaan = Peperiksaan::all();
+        return view('pages.permohonan.baharuimohon', compact('peperiksaan'));
     }
+
+    public function save(Request $request)
+    {   
+        
+        $data=new peperiksaan();
+        
+          
+            $kepPeperiksaan=$request->kepPeperiksaan; 
+            //dd($kepPeperiksaan);
+            $name1='kepPeperiksaan';  
+            $filenamekepPeperiksaan=$name1.'_'.$kepPeperiksaan->getClientOriginalExtension();
+            //dd($request->filenamekepPeperiksaan);
+            $request->kepPeperiksaan->move('assets/peperiksaan',$filenamekepPeperiksaan);
+            
+            //$data->nokp_pelajar=$request->nokp_pelajar;
+            $data->sesi=$request->sesi;
+            $data->semester=$request->semester;
+            $data->cgpa=$request->cgpa;
+            $data->kepPeperiksaan=$filenamekepPeperiksaan;
+
+
+            
+
+            $data->save();
+
+
+
+
+        return redirect()->route('baharuimohon')->with('message', 'saveeeeeeeee.');
+
+    }
+
 }
 
 
