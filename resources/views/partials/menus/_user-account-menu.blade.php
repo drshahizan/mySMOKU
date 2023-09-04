@@ -4,16 +4,19 @@
     <div class="menu-item px-3">
         <div class="menu-content d-flex align-items-center px-3">
             @php
-                $nama = DB::table('smoku')->join('users','users.nokp','=','smoku.nokp' )->value('smoku.nama');
+                $nama = DB::table('smoku')->where('nokp', Auth::user()->nokp)->value('nama');
             @endphp
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
                 @if(Auth::user()->profile_photo_path)
                     <img alt="Logo" src="{{ Auth::user()->profile_photo_path }}"/>
+                @elseif($nama)
+                    <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-primary text-primary', $nama) }}">
+                        {{ substr($nama,0,1) }}
+                    </div>
                 @else
-                    <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', Auth::user()->nokp) }}">
-                    <!-- <div class="symbol-label fs-3"> -->
-                        {{ substr(Auth::user()->nama,0,1) }}
+                    <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-primary text-primary', Auth::user()->email) }}">
+                        {{ substr(Auth::user()->email,0,1) }}
                     </div>
                 @endif
             </div>
@@ -21,7 +24,7 @@
 
             <!--begin::Username-->
             <div class="d-flex flex-column">
-                <div class="fw-bold d-flex align-items-center fs-5">{{Auth::user()->nama}}</div>
+                <div class="fw-bold d-flex align-items-center fs-5">{{$nama}}</div>
                 <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
             </div>
             <!--end::Username-->
@@ -29,7 +32,7 @@
     </div>
     <!--end::Menu item-->
     <!--begin::Menu separator-->
-    <div class="separator my-2"></div>
+    {{-- <div class="separator my-2"></div> --}}
     <!--end::Menu separator-->
     <!--begin::Menu item-->
     <!-- <div class="menu-item px-5"> -->
