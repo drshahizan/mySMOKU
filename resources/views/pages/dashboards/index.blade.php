@@ -65,10 +65,21 @@
 														</div>
 														<!--end::Avatar-->
 														<!--begin::Name-->
+														@if(!empty($pelajar))
 														<a href="#" class="fs-3 text-gray-800 text-dark fw-bold mb-1" style="text-align:center">{{$pelajar->nama_pelajar}}</a>
+														@else
+														<a href="#" class="fs-3 text-gray-800 text-dark fw-bold mb-1" style="text-align:center">No Data</a>
+														@endif
 														<!--end::Name-->
 														<!--begin::Email-->
+														@if(!empty($pelajar))
+
 														<a href="#" class="fs-5 fw-semibold text-muted mb-6">{{$pelajar->emel}}</a>
+														@else
+														<a href="#" class="fs-5 fw-semibold text-muted mb-6">No data</a>
+
+														@endif
+
 														<!--end::Email-->
 													</div>
 													<!--end::Summary-->
@@ -90,14 +101,24 @@
 														<!--begin::Details item-->
 														<div class="fw-bold mt-5">Alamat Emel</div>
 														<div class="text-gray-600">
+															@if(!empty($pelajar))
 															<a href="#" class="text-gray-600 text-hover-primary">{{$pelajar->emel}}</a>
+															@else
+															<a href="#" class="text-gray-600 text-hover-primary">No Data</a>
+
+															@endif
 														</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
 														<div class="fw-bold mt-5">Nama Kursus</div>
 														<div class="text-gray-600">{{$akademik->nama_kursus}}</div>
 														<div class="fw-bold mt-5">Mod Pengajian</div>
+														@if(!empty($modpengajian))
 														<div class="text-gray-600">{{$modpengajian->mod}}
+														@else
+														<div class="text-gray-600">No data
+
+														@endif
 														</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->

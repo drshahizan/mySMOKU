@@ -20,11 +20,12 @@ class DashboardController extends Controller
         addVendors(['amcharts', 'amcharts-maps', 'amcharts-stock']);
         $user = Auth()->user();
 
-        $pelajar = Permohonan::where('nokp_pelajar', $user->nokp)->first();
+        $pelajar = Permohonan::where('nokp_pelajar', Auth::user()->nokp)->first();
+        // dd($user->nokp);
         $status = Status::leftJoin('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
         ->get(['statustransaksi.*', 'statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
-        $akademik = Akademik::where('nokp_pelajar', $user->nokp)->first();
+        $akademik = Akademik::where('nokp_pelajar',Auth::user()->nokp)->first();
         $sem = Akademik::leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
         ->get(['maklumatakademik.*', 'bk_peringkatpengajian.*'])
         ->where('nokp_pelajar', Auth::user()->nokp)->first();
