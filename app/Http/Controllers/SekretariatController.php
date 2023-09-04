@@ -199,6 +199,31 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.tuntutan.maklumatTuntutan',compact('permohonan','pelajar'));
     }
 
+    public function saringMaklumatTuntutan(Request $request, $id){
+        $id_permohonan = TuntutanPermohonan::where('id', $id)->value('id_permohonan');
+        $permohonan = TuntutanPermohonan::where('status', '2')
+        ->orWhere('status', '=','3')
+        ->orWhere('status', '=','4')
+        ->orWhere('status', '=','5')
+        ->get();
+
+        if($request->get('submit')=="Layak"){
+            $status_kod=1;
+            $status = "Tuntutan ".$id_permohonan." telah disaring dengan status 'Layak'.";
+        }
+        elseif($request->get('submit')=="TidakLayak"){
+            $status_kod=1;
+            $status = "Tuntutan ".$id_permohonan." telah disaring dengan status 'Tidak Layak'.";
+        }
+        elseif($request->get('submit')=="Kembalikan"){
+            $status_kod=2;
+            $status = "Tuntutan ".$id_permohonan." telah dikembalikan.";
+        }
+        
+        return view('pages.sekretariat.tuntutan.saring',compact('permohonan','status_kod','status'));
+    }
+
+
     public function tuntutanKeputusan()
     {
         $permohonan = TuntutanPermohonan::where('status', '=','5')
