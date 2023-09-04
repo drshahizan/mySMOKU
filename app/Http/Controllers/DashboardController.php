@@ -11,23 +11,25 @@ use App\Models\Akademik;
 use App\Models\TuntutanPermohonan;
 use App\Models\Smoku;
 use Illuminate\Support\Facades\DB;
+use App\Models\Mod;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         addVendors(['amcharts', 'amcharts-maps', 'amcharts-stock']);
+        $user = Auth()->user();
 
-        $pelajar = Permohonan::all()->where('nokp_pelajar', Auth::user()->nokp);
+        $pelajar = Permohonan::where('nokp_pelajar', Auth::user()->nokp)->first();
+        // dd($user->nokp);
         $status = Status::leftJoin('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
         ->get(['statustransaksi.*', 'statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
-        $akademik = Akademik::all()
-        ->where('nokp_pelajar', Auth::user()->nokp);
+        $akademik = Akademik::where('nokp_pelajar',Auth::user()->nokp)->first();
         $sem = Akademik::leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
-
         ->get(['maklumatakademik.*', 'bk_peringkatpengajian.*'])
-        ->where('nokp_pelajar', Auth::user()->nokp);
+        ->where('nokp_pelajar', Auth::user()->nokp)->first();
+        $modpengajian = Mod::where('kodmod', $akademik->mod)->first();
         $tuntutanpermohonan = TuntutanPermohonan::Join('statusinfo','statusinfo.kodstatus','=','permohonan.status')
         ->get(['permohonan.*', 'statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
@@ -47,7 +49,7 @@ class DashboardController extends Controller
 
         if(Auth::user()->tahap=='1')
         {
-            return view('pages.dashboards.index', compact('pelajar','status','akademik','sem','tuntutanpermohonan', 'permohonan','user'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
+            return view('pages.dashboards.index', compact('pelajar','status','akademik','sem','tuntutanpermohonan', 'permohonan','user', 'modpengajian'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
         }
         else if(Auth::user()->tahap=='2')
         {

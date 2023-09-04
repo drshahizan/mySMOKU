@@ -65,10 +65,21 @@
 														</div>
 														<!--end::Avatar-->
 														<!--begin::Name-->
-														<a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1">Pelajar Demo 1</a>
+														@if(!empty($pelajar))
+														<a href="#" class="fs-3 text-gray-800 text-dark fw-bold mb-1" style="text-align:center">{{$pelajar->nama_pelajar}}</a>
+														@else
+														<a href="#" class="fs-3 text-gray-800 text-dark fw-bold mb-1" style="text-align:center">No Data</a>
+														@endif
 														<!--end::Name-->
 														<!--begin::Email-->
-														<a href="#" class="fs-5 fw-semibold text-muted text-hover-primary mb-6">pelajardemo1@gmail.com</a>
+														@if(!empty($pelajar))
+
+														<a href="#" class="fs-5 fw-semibold text-muted mb-6">{{$pelajar->emel}}</a>
+														@else
+														<a href="#" class="fs-5 fw-semibold text-muted mb-6">No data</a>
+
+														@endif
+
 														<!--end::Email-->
 													</div>
 													<!--end::Summary-->
@@ -85,19 +96,29 @@
 													<div class="pb-5 fs-6">
 														<!--begin::Details item-->
 														<div class="fw-bold mt-5">No Matrik</div>
-														<div class="text-gray-600">MCS203007</div>
+														<div class="text-gray-600">{{$akademik->no_pendaftaranpelajar}}</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
 														<div class="fw-bold mt-5">Alamat Emel</div>
 														<div class="text-gray-600">
-															<a href="#" class="text-gray-600 text-hover-primary">pelajardemo1@gmail.com</a>
+															@if(!empty($pelajar))
+															<a href="#" class="text-gray-600 text-hover-primary">{{$pelajar->emel}}</a>
+															@else
+															<a href="#" class="text-gray-600 text-hover-primary">No Data</a>
+
+															@endif
 														</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
 														<div class="fw-bold mt-5">Nama Kursus</div>
-														<div class="text-gray-600">Master of Philosophy (MPHIL) in Social Science and Humanities</div>
+														<div class="text-gray-600">{{$akademik->nama_kursus}}</div>
 														<div class="fw-bold mt-5">Mod Pengajian</div>
-														<div class="text-gray-600">Sepenuh Masa
+														@if(!empty($modpengajian))
+														<div class="text-gray-600">{{$modpengajian->mod}}
+														@else
+														<div class="text-gray-600">No data
+
+														@endif
 														</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->

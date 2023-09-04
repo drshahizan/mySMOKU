@@ -80,7 +80,224 @@
 							{{-- BKOKU --}}
 							<div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
 								<br>
-								<div class="table-responsive">
+								<div class="body">
+									<br>
+									<!--begin::First Row-->
+									<div class="row g-3 g-lg-6">
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Keseluruhan</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$keseluruhanB}}</span>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Deraf</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$derafB}}</span>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Baharu</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$baharuB}}</span>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+														<i class="fas fa-th-list text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Saringan</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$saringanB}}</span>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+
+									<!--begin::Second Row-->
+									<div class="row g-3 g-lg-6">
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #efd06c">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Disokong</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$disokongB}}</span>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+														<i class="fa-solid fa-reply-all text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Dikembalikan</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$dikembalikanB}}</span>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+										
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fas fa-user-check text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Layak</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$layakB}}</span>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Tidak Layak</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$tidaklayakB}}</span>
+													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+								</div>
+
+								{{-- <div class="table-responsive">
 									<div class="body">
 										<div class="row">
 											<!--begin::Jumlah-->
@@ -404,9 +621,9 @@
 												<!--end::Card widget 2-->
 											</div> --}}
 											<!--end::Col-->
-										</div>
+										{{-- </div>
 									</div>
-								</div>
+								</div> --}}
 							</div>
 
 							{{-- PPK --}}
@@ -423,10 +640,10 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													{{-- <span class="symbol-label"> --}}
-														<i class="ki-duotone ki-user-tick fs-1 text-light">
+														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Keseluruhan</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Keseluruhan</span>
 														</i>
 													{{-- </span> --}}
 												</div>
@@ -434,60 +651,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$keseluruhanP}}</span>
-													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
-												</div>
-												<!--end::Stats-->
-											</div>
-											<!--end::Items-->
-										</div>
-										<!--end::Col-->
-
-										<!--begin::Col-->
-										<div class="col-3">
-											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #0ad5ebdc">
-												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
-													{{-- <span class="symbol-label"> --}}
-														<i class="ki-duotone ki-book-open fs-1 text-light">
-															<span class="path1"></span>
-															<span class="path2"></span>
-															<span class="path3"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Deraf</span>
-														</i>
-													{{-- </span> --}}
-												</div>
-												<!--end::Symbol-->
-												<!--begin::Stats-->
-												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$derafP}}</span>
-													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
-												</div>
-												<!--end::Stats-->
-											</div>
-											<!--end::Items-->
-										</div>
-										<!--end::Col-->
-
-										<!--begin::Col-->
-										<div class="col-3">
-											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #186ee6">
-												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
-													{{-- <span class="symbol-label"> --}}
-														<i class="ki-duotone ki-user-tick fs-1 text-light">
-															<span class="path1"></span>
-															<span class="path2"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Baharu</span>
-														</i>
-													{{-- </span> --}}
-												</div>
-												<!--end::Symbol-->
-												<!--begin::Stats-->
-												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$baharuP}}</span>
-													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -501,17 +665,70 @@
 											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
-														<i class="ki-duotone ki-user fs-1 text-light">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Saringan</span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Deraf</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$derafP}}</span>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Baharu</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$baharuP}}</span>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+														<i class="fas fa-th-list text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Saringan</span>
 														</i>
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$saringanP}}</span>
-													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -529,18 +746,18 @@
 											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #efd06c">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
-														<i class="ki-duotone ki-teacher fs-1 text-light">
+														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Disokong</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Disokong</span>
 														</i>
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$disokongP}}</span>
-													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -554,18 +771,18 @@
 											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
-														<i class="ki-duotone ki-book-open fs-1 text-light">
+														<i class="fa-solid fa-reply-all text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Dikembalikan</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Dikembalikan</span>
 														</i>
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$dikembalikanP}}</span>
-													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -580,10 +797,10 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													{{-- <span class="symbol-label"> --}}
-														<i class="ki-duotone ki-user fs-1 text-light">
+														<i class="fas fa-user-check text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Layak</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Layak</span>
 														</i>
 													{{-- </span> --}}
 												</div>
@@ -591,7 +808,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$layakP}}</span>
-													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -606,11 +823,11 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													{{-- <span class="symbol-label"> --}}
-														<i class="ki-duotone ki-teacher fs-1 text-light">
+														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Tidak Layak</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Tidak Layak</span>
 														</i>
 													{{-- </span> --}}
 												</div>
@@ -618,7 +835,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$tidaklayakP}}</span>
-													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -636,312 +853,4 @@
 			</div>
 		</div>
 	</div>
-
-	{{-- <!--begin::Row-->
-	<div class="row g-5 g-xl-10">
-		<!--begin::Col-->
-		<div class="col-xl-4 mb-xl-10">
-			<!--begin::Lists Widget 19-->
-			<div class="card card-flush h-xl-100">
-				<!--begin::Heading BKOKU-->
-				<div class="card-header rounded bgi-no-repeat bgi-size-cover bgi-position-y-top bgi-position-x-center align-items-start h-250px" style="background-image:url('assets/media/svg/shapes/top-green.png" data-bs-theme="light">
-					<!--begin::Title-->
-					<h3 class="card-title align-items-start flex-column text-white pt-15">
-						<span class="fw-bold fs-2x mb-3">Permohonan BKOKU</span>	
-					</h3>
-					<!--end::Title-->
-				</div>
-				<!--end::Heading-->
-
-				<!--begin::Body-->
-				<div class="card-body mt-n20">
-					<!--begin::Stats-->
-					<div class="mt-n20 position-relative">
-						<!--begin::Row-->
-						<div class="row g-3 g-lg-6">
-							<!--begin::Col-->
-							<div class="col-6">
-								<!--begin::Items-->
-								<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #77dd77">
-									<!--begin::Symbol-->
-									<div class="symbol symbol-30px me-5 mb-8">
-										<span class="symbol-label">
-											<i class="ki-duotone ki-user-tick fs-1 text-dark">
-												<span class="path1"></span>
-												<span class="path2"></span>
-											</i>
-										</span>
-									</div>
-									<!--end::Symbol-->
-									<!--begin::Stats-->
-									<div class="m-0">
-										<!--begin::Number-->
-										<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">1689</span>
-										<!--end::Number-->
-										<!--begin::Desc-->
-										<span class="text-white fw-bold fs-7">Aktif</span>
-										<!--end::Number-->
-										<!--begin::Desc-->
-										
-										<!--end::Desc-->
-									</div>
-									<!--end::Stats-->
-								</div>
-								<!--end::Items-->
-							</div>
-							<!--end::Col-->
-							<!--begin::Col-->
-							<div class="col-6">
-								<!--begin::Items-->
-								<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #ff6961">
-									<!--begin::Symbol-->
-									<div class="symbol symbol-30px me-5 mb-8">
-										<span class="symbol-label">
-											<i class="ki-duotone ki-user fs-1 text-dark">
-												<span class="path1"></span>
-												<span class="path2"></span>
-											</i>
-										</span>
-									</div>
-									<!--end::Symbol-->
-									<!--begin::Stats-->
-									<div class="m-0">
-										<!--begin::Number-->
-										<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">300</span>
-										<!--end::Number-->
-										<!--begin::Desc-->
-										<span class="text-white fw-bold fs-7">Tidak Aktif</span>
-										<!--end::Desc-->
-									</div>
-									<!--end::Stats-->
-								</div>
-								<!--end::Items-->
-							</div>
-							<!--end::Col-->
-							<!--begin::Col-->
-							<div class="col-6">
-								<!--begin::Items-->
-								<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #7ec4cf">
-									<!--begin::Symbol-->
-									<div class="symbol symbol-30px me-5 mb-8">
-										<span class="symbol-label">
-											<i class="ki-duotone ki-teacher fs-1 text-dark">
-												<span class="path1"></span>
-												<span class="path2"></span>
-												<span class="path3"></span>
-											</i>
-										</span>
-									</div>
-									<!--end::Symbol-->
-									<!--begin::Stats-->
-									<div class="m-0">
-										<!--begin::Number-->
-										<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">470</span>
-										<!--end::Number-->
-										<!--begin::Desc-->
-										<span class="text-white fw-semibold fs-7">Graduan</span>
-										<!--end::Desc-->
-									</div>
-									<!--end::Stats-->
-								</div>
-								<!--end::Items-->
-							</div>
-							<!--end::Col-->
-							<!--begin::Col-->
-							<div class="col-6">
-								<!--begin::Items-->
-								<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #9cadce">
-									<!--begin::Symbol-->
-									<div class="symbol symbol-30px me-5 mb-8">
-										<span class="symbol-label">
-											<i class="ki-duotone ki-book-open fs-1 text-dark">
-												<span class="path1"></span>
-												<span class="path2"></span>
-												<span class="path3"></span>
-											</i>
-										</span>
-									</div>
-									<!--end::Symbol-->
-									<!--begin::Stats-->
-									<div class="m-0">
-										<!--begin::Number-->
-										<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">822</span>
-										<!--end::Number-->
-										<!--begin::Desc-->
-										<span class="text-white fw-semibold fs-7">Menyambung Pelajaran</span>
-										<!--end::Desc-->
-									</div>
-									<!--end::Stats-->
-								</div>
-								<!--end::Items-->
-							</div>
-							<!--end::Col-->
-						</div>
-						<!--end::Row-->
-					</div>
-					<!--end::Stats-->
-				</div>
-				<!--end::Body-->
-			</div>
-			<!--end::Lists Widget 19-->
-			
-		</div>
-		<!--begin::Row-->
-
-		<!--begin::Col-->
-			<!--begin::Col-->
-			<div class="col-xl-4 mb-xl-10">
-			<!--begin::Lists Widget 19-->
-			<div class="card card-flush h-xl-100">
-				<!--begin::Heading-->
-				<div class="card-header rounded bgi-no-repeat bgi-size-cover bgi-position-y-top bgi-position-x-center align-items-start h-250px" style="background-image:url('assets/media/svg/shapes/top-green.png" data-bs-theme="light">
-					<!--begin::Title-->
-					<h3 class="card-title align-items-start flex-column text-white pt-15">
-						<span class="fw-bold fs-2x mb-3">Permohonan PPK</span>
-						
-					</h3>
-					<!--end::Title-->
-					<!--begin::Toolbar-->
-					
-					<!--end::Toolbar-->
-				</div>
-				<!--end::Heading-->
-				<!--begin::Body-->
-				<div class="card-body mt-n20">
-					<!--begin::Stats-->
-					<div class="mt-n20 position-relative">
-						<!--begin::Row-->
-						<div class="row g-3 g-lg-6">
-							<!--begin::Col-->
-							<div class="col-6">
-								<!--begin::Items-->
-								<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #77dd77">
-									<!--begin::Symbol-->
-									<div class="symbol symbol-30px me-5 mb-8">
-										<span class="symbol-label">
-											<i class="ki-duotone ki-user-tick fs-1 text-dark">
-												<span class="path1"></span>
-												<span class="path2"></span>
-											</i>
-										</span>
-									</div>
-									<!--end::Symbol-->
-									<!--begin::Stats-->
-									<div class="m-0">
-										<!--begin::Number-->
-										<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">1689</span>
-										<!--end::Number-->
-										<!--begin::Desc-->
-										<span class="text-white fw-bold fs-7">Aktif</span>
-										<!--end::Number-->
-										<!--begin::Desc-->
-										
-										<!--end::Desc-->
-									</div>
-									<!--end::Stats-->
-								</div>
-								<!--end::Items-->
-							</div>
-							<!--end::Col-->
-							<!--begin::Col-->
-							<div class="col-6">
-								<!--begin::Items-->
-								<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #ff6961">
-									<!--begin::Symbol-->
-									<div class="symbol symbol-30px me-5 mb-8">
-										<span class="symbol-label">
-											<i class="ki-duotone ki-user fs-1 text-dark">
-												<span class="path1"></span>
-												<span class="path2"></span>
-											</i>
-										</span>
-									</div>
-									<!--end::Symbol-->
-									<!--begin::Stats-->
-									<div class="m-0">
-										<!--begin::Number-->
-										<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">500</span>
-										<!--end::Number-->
-										<!--begin::Desc-->
-										<span class="text-white fw-bold fs-7">Tidak Aktif</span>
-										<!--end::Desc-->
-									</div>
-									<!--end::Stats-->
-								</div>
-								<!--end::Items-->
-							</div>
-							<!--end::Col-->
-							<!--begin::Col-->
-							<div class="col-6">
-								<!--begin::Items-->
-								<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #7ec4cf">
-									<!--begin::Symbol-->
-									<div class="symbol symbol-30px me-5 mb-8">
-										<span class="symbol-label">
-											<i class="ki-duotone ki-teacher fs-1 text-dark">
-												<span class="path1"></span>
-												<span class="path2"></span>
-												<span class="path3"></span>
-											</i>
-										</span>
-									</div>
-									<!--end::Symbol-->
-									<!--begin::Stats-->
-									<div class="m-0">
-										<!--begin::Number-->
-										<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">300</span>
-										<!--end::Number-->
-										<!--begin::Desc-->
-										<span class="text-white fw-semibold fs-7">Graduan</span>
-										<!--end::Desc-->
-									</div>
-									<!--end::Stats-->
-								</div>
-								<!--end::Items-->
-							</div>
-							<!--end::Col-->
-							<!--begin::Col-->
-							<div class="col-6">
-								<!--begin::Items-->
-								<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #9cadce">
-									<!--begin::Symbol-->
-									<div class="symbol symbol-30px me-5 mb-8">
-										<span class="symbol-label">
-											<i class="ki-duotone ki-book-open fs-1 text-dark">
-												<span class="path1"></span>
-												<span class="path2"></span>
-												<span class="path3"></span>
-											</i>
-										</span>
-									</div>
-									<!--end::Symbol-->
-									<!--begin::Stats-->
-									<div class="m-0">
-										<!--begin::Number-->
-										<span class="text-white fw-bolder d-block fs-2x lh-1 ls-n1 mb-1">902</span>
-										<!--end::Number-->
-										<!--begin::Desc-->
-										<span class="text-white fw-semibold fs-7">Menyambung Pelajaran</span>
-										<!--end::Desc-->
-									</div>
-									<!--end::Stats-->
-								</div>
-								<!--end::Items-->
-							</div>
-							<!--end::Col-->
-						</div>
-						<!--end::Row-->
-					</div>
-					<!--end::Stats-->
-				</div>
-				<!--end::Body-->
-			</div>
-			<!--end::Lists Widget 19-->
-			
-		</div>
-			
-		</div>
-	</div>										 --}}
-
-
 </x-default-layout>
