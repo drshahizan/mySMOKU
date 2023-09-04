@@ -134,6 +134,34 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
+					'alamat_surat1': {
+						validators: {
+							notEmpty: {
+								message: 'Alamat surat menyurat diperlukan'
+							}
+						}
+					},
+					'alamat_surat_poskod': {
+						validators: {
+							notEmpty: {
+								message: 'Poskod diperlukan'
+							}
+						}
+					},
+					'alamat_surat_bandar': {
+						validators: {
+							notEmpty: {
+								message: 'Bandar diperlukan'
+							}
+						}
+					},
+					'alamat_surat_negeri': {
+						validators: {
+							notEmpty: {
+								message: 'Negeri diperlukan'
+							}
+						}
+					},
 					'no_akaunbank': {
 						validators: {
 							notEmpty: {
