@@ -13,6 +13,7 @@
     @endphp
 <!--begin::Accordion-->
 <div class="accordion" id="accordionPanelsStayOpenExample">
+  @if(file_exists(public_path().$suratTawaran))
     <div class="accordion-item">
       <h2 class="accordion-header" id="panelsStayOpen-headingOne">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
@@ -25,6 +26,8 @@
         </div>
       </div>
     </div>
+  @endif
+  @if(file_exists(public_path().$akaunBankIslam))
     <div class="accordion-item">
       <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
@@ -33,10 +36,12 @@
       </h2>
       <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
         <div class="accordion-body" style="text-align: center">
-            <embed src="{{$suratTawaran}}" width="90%" height="650px"/>
+            <embed src="{{$akaunBankIslam}}" width="90%" height="650px"/>
         </div>
       </div>
     </div>
+  @endif
+  @if(file_exists(public_path().$keputusanPeperiksaan))
     <div class="accordion-item">
       <h2 class="accordion-header" id="panelsStayOpen-headingThree">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
@@ -45,10 +50,12 @@
       </h2>
       <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
         <div class="accordion-body" style="text-align: center">
-            <embed src="{{$suratTawaran}}" width="90%" height="650px"/>
+            <embed src="{{$keputusanPeperiksaan}}" width="90%" height="650px"/>
         </div>
       </div>
     </div>
+  @endif
+  @if(file_exists(public_path().$invoisResit))
     <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingFour">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
@@ -57,10 +64,12 @@
         </h2>
         <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
           <div class="accordion-body" style="text-align: center">
-            <embed src="{{$suratTawaran}}" width="90%" height="650px"/>
+            <embed src="{{$invoisResit}}" width="90%" height="650px"/>
           </div>
         </div>
     </div>
+  @endif
+  @if(file_exists(public_path().$maklumatBankIPT))
     <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingFive">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
@@ -69,10 +78,11 @@
         </h2>
         <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
           <div class="accordion-body" style="text-align: center">
-            <embed src="{{$suratTawaran}}" width="90%" height="650px"/>
+            <embed src="{{$maklumatBankIPT}}" width="90%" height="650px"/>
           </div>
         </div>
     </div>
+  @endif
 </div>
 <!--end::Accordion-->
 </x-default-layout>

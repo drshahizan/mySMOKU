@@ -203,7 +203,7 @@
                                                         <tr>
                                                             <td style="text-align:right;">1</td>
                                                             <td>
-                                                                <span>Resit/Invois 1</span>
+                                                                <span><a href="{{ url('salinan/dokumen/'.$permohonan->id) }}" target="_blank">Salinan Dokumen</a></span>
                                                             </td>           
                                                             <td class="hidden-sm-down">
                                                                 <div class="form-group c_form_group">
@@ -217,45 +217,7 @@
                                                             <td>
                                                                 Yuran Peperiksaan
                                                             </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="text-align:right;">2</td>
-                                                            <td>
-                                                                <span>Resit/Invois 2</span>
-                                                            </td>
-                                                            <td class="hidden-sm-down">
-                                                                <div class="form-group c_form_group">
-                                                                    <select id="maklumat_akademik" name="maklumat_akademik" class="form-control" onchange="select2()"  oninvalid="this.setCustomValidity('Sila tandakan sekurang-kurangnya satu kotak')" oninput="setCustomValidity('')" required>
-                                                                        {{-- oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')"  --}}
-                                                                        <option value="">Pilih</option>
-                                                                        <option value="lengkap">Lengkap</option>
-                                                                        <option value="tak_lengkap">Tidak Lengkap</option>
-                                                                    </select>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                Yuran Perkhidmatan
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="text-align:right;">3</td>
-                                                            <td>
-                                                                <span>Resit/Invois 3</span>
-                                                            </td>
-                                                            <td class="hidden-sm-down">
-                                                                <div class="form-group c_form_group">
-                                                                    <select id="maklumat_akademik" name="maklumat_akademik" class="form-control" onchange="select3()"  oninvalid="this.setCustomValidity('Sila tandakan sekurang-kurangnya satu kotak')" oninput="setCustomValidity('')" required>
-                                                                        {{-- oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')"  --}}
-                                                                        <option value="">Pilih</option>
-                                                                        <option value="lengkap">Lengkap</option>
-                                                                        <option value="tak_lengkap">Tidak Lengkap</option>
-                                                                    </select>
-                                                                </div>
-                                                            </td>
-                                                            <td class="hidden-sm-down">
-                                                                Yuran Komputer
-                                                            </td>
-                                                        </tr>                                                
+                                                        </tr>                                      
                                                     </tbody>
                                                 </table>
                                             </div>
