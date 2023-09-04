@@ -63,10 +63,10 @@
 														</div>
 														<!--end::Avatar-->
 														<!--begin::Name-->
-														<a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1">Pelajar Demo 1</a>
+														<a href="#" class="fs-3 text-gray-800 text-dark fw-bold mb-1">{{$pelajar->nama_pelajar}}</a>
 														<!--end::Name-->
 														<!--begin::Email-->
-														<a href="#" class="fs-5 fw-semibold text-muted text-hover-primary mb-6">pelajardemo1@gmail.com</a>
+														<a href="#" class="fs-5 fw-semibold text-muted mb-6">{{$pelajar->emel}}</a>
 														<!--end::Email-->
 													</div>
 													<!--end::Summary-->
@@ -83,19 +83,19 @@
 													<div class="pb-5 fs-6">
 														<!--begin::Details item-->
 														<div class="fw-bold mt-5">No Matrik</div>
-														<div class="text-gray-600">MCS203007</div>
+														<div class="text-gray-600">{{$akademik->no_pendaftaranpelajar}}</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
 														<div class="fw-bold mt-5">Alamat Emel</div>
 														<div class="text-gray-600">
-															<a href="#" class="text-gray-600 text-hover-primary">pelajardemo1@gmail.com</a>
+															<a href="#" class="text-gray-600 text-hover-primary">{{$pelajar->emel}}</a>
 														</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
 														<div class="fw-bold mt-5">Nama Kursus</div>
-														<div class="text-gray-600">Master of Philosophy (MPHIL) in Social Science and Humanities</div>
+														<div class="text-gray-600">{{$akademik->nama_kursus}}</div>
 														<div class="fw-bold mt-5">Mod Pengajian</div>
-														<div class="text-gray-600">Sepenuh Masa
+														<div class="text-gray-600">{{$modpengajian->mod}}
 														</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
