@@ -11,7 +11,7 @@
                 @if(Auth::user()->profile_photo_path)
                     <img alt="Logo" src="{{ Auth::user()->profile_photo_path }}"/>
                 @else
-                    <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', $nama) }}">
+                    <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-primary text-primary', $nama) }}">
                         {{ substr($nama,0,1) }}
                     </div>
                 @endif
