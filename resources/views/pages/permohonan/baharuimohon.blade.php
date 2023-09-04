@@ -92,7 +92,7 @@
 																	Simpan
 																</button>&nbsp;&nbsp;&nbsp;
 														
-															<a href="#" class="btn btn-danger">Batal</a>
+															<!--<a href="#" class="btn btn-danger">Batal</a>-->
 															</div>
 														</div>
 														<!--end::Wrapper-->
