@@ -40,6 +40,12 @@
             padding: 2px 5px;
             font-size: 13px!important;
         }
+        textarea{
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 2px 5px;
+            font-size: 13px!important;
+        }
         .bold{
             font-weight: bold!important;
         }
@@ -52,6 +58,9 @@
         button{
             margin: 5px;
             width:150px!important;
+        }
+        .vertical-top{
+            vertical-align: top!important;
         }
     </style>
     <!-- Main body part  -->
@@ -304,18 +313,23 @@
                                         </table>
                                         <table class="maklumat2">
                                             <tr>
-                                                <td>Jumlah Layak Tuntut (RM)</td>
-                                                <td>:</td>
-                                                <td><input type="number" name="layak_tuntut" value="{{$jumlah}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                <td class="vertical-top">Jumlah Layak Tuntut (RM)</td>
+                                                <td class="vertical-top">:</td>
+                                                <td class="vertical-top"><input type="number" name="layak_tuntut" value="{{$jumlah}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="vertical-top">Catatan</td>
+                                                <td class="vertical-top">:</td>
+                                                <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
                                             </tr>
                                         </table>
                                     </div>
-                                <!--end: Invoice body-->       
-                                <div class="col-md-6 text-right">
-                                    <button type="submit" name="submit" class="btn btn-success text-white" value="Layak"><i class="fa fa-check"></i> Layak</button>
-                                    <button type="submit" name="submit" class="btn btn-warning theme-bg gradient action-btn" value="Kembalikan"><i class="fa fa-reply"></i> Kembalikan</button>
-                                    <button type="submit" name="submit" class="btn btn-danger" value="TidakLayak"><i class="bi bi-x"></i> Tidak Layak</button>
-                                </div>
+                                    <!--end: Invoice body-->       
+                                    <div class="col-md-6 text-right">
+                                        <button type="submit" name="submit" class="btn btn-success text-white" value="Layak"><i class="fa fa-check"></i> Layak</button>
+                                        <button type="submit" name="submit" class="btn btn-warning theme-bg gradient action-btn" value="Kembalikan"><i class="fa fa-reply"></i> Kembalikan</button>
+                                        <button type="submit" name="submit" class="btn btn-danger" value="TidakLayak"><i class="bi bi-x"></i> Tidak Layak</button>
+                                    </div>
                                 </form>  
                             </div>                   
                         </div> 

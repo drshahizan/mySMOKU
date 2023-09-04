@@ -36,7 +36,7 @@
     height:45px;
 }
 .bg-pink{
-    background:#f66d9b;
+    background:#fa96b7;
     color:rgba(255,255,255,0.7);
 }
 
@@ -51,11 +51,11 @@
 }
 
 .bg-orange{
-    background:#ff7321;
+    background:#ff9659;
     color:rgba(255,255,255,0.7);
 }
 
-.bg-green{
+/* .bg-green{
     background:#00bf36;
     color:rgba(255,255,255,0.7);
 }
@@ -63,7 +63,7 @@
 .bg-yellow{
     background:#ffc700;
     color:rgba(255,255,255,0.7);
-}
+} */
 .bg-pink:hover, .bg-pink:active{
     background:#cc547c;
     color:white!important;
@@ -74,7 +74,7 @@
     color:white!important;
 }
 
-.bg-green:hover, .bg-green:active{
+/* .bg-green:hover, .bg-green:active{
     background: #00bf36!important;
     color:white!important;
 }
@@ -82,7 +82,7 @@
 .bg-yellow:hover, .bg-yellow:active{
     background:rgb(255, 255, 103);
     color: white!important;
-}
+} */
 
 .text-white{
     color:white!important;
