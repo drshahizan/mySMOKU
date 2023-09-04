@@ -21,7 +21,7 @@
                     <!-- Page header2 section  -->
                     <div class="block-header">
                             <div class="col-lg-4 col-md-12 col-sm-12">
-                                <h1>Senarai Permohonan</h1>
+                                <h2>Senarai Permohonan</h2>
                             </div>
                             <hr>
                     </div>
