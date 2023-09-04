@@ -5,8 +5,6 @@
         <div class="menu-content d-flex align-items-center px-3">
             @php
                 $nama = DB::table('smoku')->join('users','users.nokp','=','smoku.nokp' )->value('smoku.nama');
-                // $ic = Auth::user()->nokp;
-                // $nama = DB::table('smoku')->where('nokp', $ic)->value('nama');
             @endphp
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
@@ -15,7 +13,7 @@
                 @else
                     <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', Auth::user()->nokp) }}">
                     <!-- <div class="symbol-label fs-3"> -->
-                        {{ substr($nama,0,1) }}
+                        {{ substr(Auth::user()->nama,0,1) }}
                     </div>
                 @endif
             </div>
@@ -23,7 +21,7 @@
 
             <!--begin::Username-->
             <div class="d-flex flex-column">
-                <div class="fw-bold d-flex align-items-center fs-5">{{ $nama}}</div>
+                <div class="fw-bold d-flex align-items-center fs-5">{{Auth::user()->nama}}</div>
                 <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
             </div>
             <!--end::Username-->
