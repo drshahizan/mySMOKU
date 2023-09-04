@@ -10,6 +10,7 @@ use App\Models\Status;
 use App\Models\Akademik;
 use App\Models\TuntutanPermohonan;
 use App\Models\Smoku;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -22,7 +23,7 @@ class DashboardController extends Controller
         ->get(['statustransaksi.*', 'statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
         $akademik = Akademik::all()
-        ->where('nokp_pelajar', Auth::user()->id());
+        ->where('nokp_pelajar', Auth::user()->nokp);
         $sem = Akademik::leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
 
         ->get(['maklumatakademik.*', 'bk_peringkatpengajian.*'])
@@ -41,7 +42,7 @@ class DashboardController extends Controller
         ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
         //return view('pages.permohonan.statusmohon', compact('permohonan'));
-        $user = User::all()->where('nokp',Auth::user()->id());
+        $user = User::all()->where('nokp',Auth::user()->nokp);
 
 
         if(Auth::user()->tahap=='1')
@@ -69,10 +70,19 @@ class DashboardController extends Controller
         // dd($request->hasFile("profile_photo_path"));
 
         if($request->hasFile('profile_photo_path')){
-            $filename = strval(Auth()->id()) . "_" . $request->profile_photo_path->getClientOriginalName();
+            
+            $filename = strval(Auth::user()->nokp) . "_" . $request->profile_photo_path->getClientOriginalName();
             //dd($filename);
-            $request->profile_photo_path->storeAs('profile_photo_path',$filename,'public');
-            Auth()->user()->update(['profile_photo_path'=>$filename]);
+            //$request->profile_photo_path->storeAs('profile_photo_path',$filename,'public');
+            $request->profile_photo_path->move('assets/profile_photo_path',$filename);
+            //Auth()->user()->update(['profile_photo_path'=>$filename]);
+            DB::table('users')->where('nokp',Auth::user()->nokp)
+            ->update([
+            'profile_photo_path' => $filename,
+            
+            
+        ]);
+            
         }
         return back()->with('success', 'Avatar updated successfully.');
     }

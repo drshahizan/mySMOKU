@@ -59,7 +59,9 @@
 																// $img_path = "storage/app/public/profile_photo_path/".$profile_picture;
 																// dd($img_path);
 															?>
-															<img class="image rounded-circle" src="/storage/app/public/profile_photo_path/{{ Auth::user()->profile_photo_path }}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+															@foreach($user as $user1)
+															<img class="image rounded-circle" src="assets/profile_photo_path/{{$user1->profile_photo_path}}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+															@endforeach	
 														</div>
 														<!--end::Avatar-->
 														<!--begin::Name-->
@@ -214,6 +216,7 @@
 																	</label>
 																	<!--end::Label-->
 																	<!--begin::Image input wrapper-->
+																	@foreach($user as $user)
 																	<div class="mt-1">
 																		<!--begin::Image input placeholder-->
 																		<style>.image-input-placeholder { background-image: url('assets/media/svg/files/blank-image.svg'); } [data-bs-theme="dark"] .image-input-placeholder { background-image: url('assets/media/svg/files/blank-image-dark.svg'); }</style>
@@ -221,7 +224,7 @@
 																		<!--begin::Image input-->
 																		<div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
 																			<!--begin::Preview existing avatar-->
-																			<div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/avatars/300-1.jpg)"></div>
+																			<div class="image-input-wrapper w-125px h-125px" style="background-image: url('assets/profile_photo_path/{{$user->profile_photo_path}}')"></div>
 																			<!--end::Preview existing avatar-->
 																			<!--begin::Edit-->
 																			<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
@@ -255,6 +258,7 @@
 																			</span>
 																			<!--end::Remove-->
 																		</div>
+																		@endforeach	
 																		<!--end::Image input-->
 																	</div>
 																	<!--end::Image input wrapper-->
@@ -263,7 +267,7 @@
 																<!--begin::Input group-->
 																<div class="fv-row mb-7">
 																	<!--begin::Label-->
-																	<label class="fs-6 fw-semibold mb-2 required">Name</label>
+																	<label class="fs-6 fw-semibold mb-2 required">Nama Pelajar</label>
 																	<!--end::Label-->
 																	<!--begin::Input-->
 																	<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="Max Smith" />
@@ -278,7 +282,7 @@
 																		<div class="fv-row mb-7">
 																			<!--begin::Label-->
 																			<label class="fs-6 fw-semibold mb-2">
-																				<span class="required">General Email</span>
+																				<span class="required">Emel</span>
 																				<span class="ms-1" data-bs-toggle="tooltip" title="Email address must be active">
 																					<i class="ki-duotone ki-information fs-7">
 																						<span class="path1"></span>
@@ -289,35 +293,13 @@
 																			</label>
 																			<!--end::Label-->
 																			<!--begin::Input-->
-																			<input type="email" class="form-control form-control-solid" placeholder="" name="gen_email" value="max@kt.com" />
+																			<input type="email" class="form-control form-control-solid" placeholder="" name="email" value="{{ $user->email}}" />
 																			<!--end::Input-->
 																		</div>
 																		<!--end::Input group-->
 																	</div>
 																	<!--end::Col-->
-																	<!--begin::Col-->
-																	<div class="col">
-																		<!--begin::Input group-->
-																		<div class="fv-row mb-7">
-																			<!--begin::Label-->
-																			<label class="fs-6 fw-semibold mb-2">
-																				<span>Billing Email</span>
-																				<span class="ms-1" data-bs-toggle="tooltip" title="Email address must be active">
-																					<i class="ki-duotone ki-information fs-7">
-																						<span class="path1"></span>
-																						<span class="path2"></span>
-																						<span class="path3"></span>
-																					</i>
-																				</span>
-																			</label>
-																			<!--end::Label-->
-																			<!--begin::Input-->
-																			<input type="email" class="form-control form-control-solid" placeholder="" name="bill_email" value="info@keenthemes.com" />
-																			<!--end::Input-->
-																		</div>
-																		<!--end::Input group-->
-																	</div>
-																	<!--end::Col-->
+																	
 																</div>
 																<!--end::Row-->
 																<div class="d-flex justify-content-end">
