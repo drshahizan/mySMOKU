@@ -53,7 +53,7 @@
             {{ $status }}
         </div>
     @endif
-    @if($status_kod == 3)
+    @if($status_kod == 1)
         <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px; color:black!important;">
             {{ $status }}
         </div>
