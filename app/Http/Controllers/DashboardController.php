@@ -29,7 +29,7 @@ class DashboardController extends Controller
         $sem = Akademik::leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
         ->get(['maklumatakademik.*', 'bk_peringkatpengajian.*'])
         ->where('nokp_pelajar', Auth::user()->nokp)->first();
-        $modpengajian = Mod::where('kodmod', $akademik->mod)->first();
+        // $modpengajian = Mod::where('kodmod', $akademik->mod)->first();
         $tuntutanpermohonan = TuntutanPermohonan::Join('statusinfo','statusinfo.kodstatus','=','permohonan.status')
         ->get(['permohonan.*', 'statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);

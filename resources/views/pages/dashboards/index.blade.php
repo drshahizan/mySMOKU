@@ -113,12 +113,12 @@
 														<div class="fw-bold mt-5">Nama Kursus</div>
 														<div class="text-gray-600">{{$akademik->nama_kursus}}</div>
 														<div class="fw-bold mt-5">Mod Pengajian</div>
-														@if(!empty($modpengajian))
+														{{-- @if(!empty($modpengajian))
 														<div class="text-gray-600">{{$modpengajian->mod}}
 														@else
 														<div class="text-gray-600">No data
 
-														@endif
+														@endif --}}
 														</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
