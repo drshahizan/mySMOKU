@@ -43,7 +43,7 @@
         @endphp
         <!--begin::Menu wrapper-->
 		<div class="cursor-pointer symbol  symbol-35px symbol-2by3" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-            @if(Auth::user()->profile_photo_url)
+            {{-- @if(Auth::user()->profile_photo_url)
                 <img src="{{ Auth::user()->profile_photo_url }}" class="rounded-3" alt="user" />
             @elseif($nama)
                 <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-primary text-primary', $nama) }}">
@@ -53,7 +53,11 @@
                 <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-primary text-primary', Auth::user()->email) }}">
                     {{ substr(Auth::user()->email,0,1) }}
                 </div>
-            @endif
+            @endif --}}
+            @php
+            $nama = DB::table('smoku')->where('nokp', Auth::user()->nokp)->value('nama');
+        @endphp
+            {{$nama}}
         </div>
         @include('partials/menus/_user-account-menu')
         <!--end::Menu wrapper-->
