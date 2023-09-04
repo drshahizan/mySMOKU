@@ -434,7 +434,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$keseluruhanP}}</span>
-													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('keseluruhanPermohonan')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->
 											</div>
