@@ -211,7 +211,7 @@
 														<div class="card-header border-0">
 															<!--begin::Card title-->
 															<div class="card-title">
-																<h2>Profile</h2>
+																<h2>Profil</h2>
 															</div>
 															<!--end::Card title-->
 														</div>
@@ -291,7 +291,7 @@
 																	<label class="fs-6 fw-semibold mb-2 required">Nama Pelajar</label>
 																	<!--end::Label-->
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="Max Smith" />
+																	<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{ $user->nama}}" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input group-->

@@ -65,7 +65,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('statuspermohonan', [PermohonanController::class, 'statuspermohonan'])->name('sejarahpermohonan');
 	Route::get('statuspermohonan/{nokp}', [PermohonanController::class, 'delete'])->name('delete');
     Route::get('baharuimohon', [PermohonanController::class, 'baharuimohon'])->name('baharuimohon');
-
+    Route::post('baharuimohon', [PermohonanController::class, 'save'])->name('save');
   
     //Saring permohonan
     Route::get('saringan', [SaringanController::class, 'saringan']);
