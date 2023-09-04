@@ -640,10 +640,10 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													{{-- <span class="symbol-label"> --}}
-														<i class="ki-duotone ki-user-tick fs-1 text-light">
+														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Keseluruhan</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Keseluruhan</span>
 														</i>
 													{{-- </span> --}}
 												</div>
@@ -662,15 +662,15 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #0ad5ebdc">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													{{-- <span class="symbol-label"> --}}
-														<i class="ki-duotone ki-book-open fs-1 text-light">
+														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Deraf</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Deraf</span>
 														</i>
 													{{-- </span> --}}
 												</div>
@@ -689,14 +689,14 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #186ee6">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													{{-- <span class="symbol-label"> --}}
-														<i class="ki-duotone ki-user-tick fs-1 text-light">
+														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Baharu</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Baharu</span>
 														</i>
 													{{-- </span> --}}
 												</div>
@@ -715,13 +715,13 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
-														<i class="ki-duotone ki-user fs-1 text-light">
+														<i class="fas fa-th-list text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Saringan</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Saringan</span>
 														</i>
 												</div>
 												<!--end::Symbol-->
@@ -746,11 +746,11 @@
 											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #efd06c">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
-														<i class="ki-duotone ki-teacher fs-1 text-light">
+														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Disokong</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Disokong</span>
 														</i>
 												</div>
 												<!--end::Symbol-->
@@ -771,11 +771,11 @@
 											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
-														<i class="ki-duotone ki-book-open fs-1 text-light">
+														<i class="fa-solid fa-reply-all text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Dikembalikan</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Dikembalikan</span>
 														</i>
 												</div>
 												<!--end::Symbol-->
@@ -797,10 +797,10 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													{{-- <span class="symbol-label"> --}}
-														<i class="ki-duotone ki-user fs-1 text-light">
+														<i class="fas fa-user-check text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Layak</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Layak</span>
 														</i>
 													{{-- </span> --}}
 												</div>
@@ -823,11 +823,11 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													{{-- <span class="symbol-label"> --}}
-														<i class="ki-duotone ki-teacher fs-1 text-light">
+														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Tidak Layak</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Tidak Layak</span>
 														</i>
 													{{-- </span> --}}
 												</div>
