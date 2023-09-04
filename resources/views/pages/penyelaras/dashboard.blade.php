@@ -215,7 +215,7 @@
 																		<!--begin::Input group-"-->
 																		<div class="col-xs-3">
 																		<!--begin::Name-->
-																		<input type="text" placeholder="No Kad Pengenalan" name="nokp" maxlength="12" autocomplete="off" class="form-control bg-transparent" style="width: 60%; text-align:center; display: block;margin-left: auto; margin-right: auto;"/>
+																		<input type="text" placeholder="No Kad Pengenalan" name="nokp" maxlength="12" autocomplete="off" class="form-control bg-transparent" style="text-align:center; display: block;margin-left: auto; margin-right: auto;"/>
 																		<!--end::Name-->
 																		</div>
 
@@ -240,7 +240,7 @@
 													<!--begin::Title-->
 													<h3 class="card-title align-items-start flex-column">
 														<span class="card-label fw-bold text-gray-800">Pendaftaran Pelajar</span>
-														<span class="text-gray-400 pt-1 fw-semibold fs-6">Program BKOKU</span>
+														<!--<span class="text-gray-400 pt-1 fw-semibold fs-6">Program BKOKU</span>-->
 													</h3>
 													<!--end::Title-->
 													@if (session('message'))
@@ -276,13 +276,27 @@
 															<!--begin::Table body-->
 															<tbody>
 															@foreach ($smoku as $smoku)
+																@php
+																	$text = ucwords(strtolower($smoku->nama)); 
+																	$conjunctions = ['bin', 'binti'];
+																	$words = explode(' ', $text);
+																	$result = [];
+																	foreach ($words as $word) {
+																		if (in_array(Str::lower($word), $conjunctions)) {
+																			$result[] = Str::lower($word);
+																		} else {
+																			$result[] = $word;
+																		}
+																	}
+																	$pemohon = implode(' ', $result);
+																@endphp
 																<tr>
 																<td class="" colspan="2">
 																			<span class="text-dark fw-bold fs-6 me-3">{{ $smoku->nokp}}</span>
 																	</td>
 																	
 																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">{{ $smoku->nama}}</span>
+																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">{{ $pemohon}}</span>
 																	</td>
 																	
 																	<td class="text-center"><a href="{{route('borangPermohonanBaru',$smoku->nokp)}}"><button class="btn bg-primary text-white">Deraf</button></a></td>
