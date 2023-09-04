@@ -65,7 +65,7 @@
 														</div>
 														<!--end::Avatar-->
 														<!--begin::Name-->
-														<a href="#" class="fs-3 text-gray-800 text-dark fw-bold mb-1">{{$pelajar->nama_pelajar}}</a>
+														<a href="#" class="fs-3 text-gray-800 text-dark fw-bold mb-1" style="text-align:center">{{$pelajar->nama_pelajar}}</a>
 														<!--end::Name-->
 														<!--begin::Email-->
 														<a href="#" class="fs-5 fw-semibold text-muted mb-6">{{$pelajar->emel}}</a>
