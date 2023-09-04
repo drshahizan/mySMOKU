@@ -45,18 +45,16 @@
     <br>
 
     {{-- begin alert --}}
-    @if($status == "Permohonan Telah Disokong")
-        <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px">
+    @if($status_kod == 0)
+     {{-- none --}}
+    @endif
+    @if($status_kod == 2)
+        <div class="alert alert-warning" role="alert" style="margin: 0px 15px 20px 15px; color:black!important;">
             {{ $status }}
         </div>
     @endif
-    @if($status == "Permohonan Telah Dikembalikan")
-        <div class="alert alert-warning" role="alert" style="margin: 0px 15px 20px 15px">
-            {{ $status }}
-        </div>
-    @endif
-    @if($status == "Tuntutan Telah Disokong")
-        <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px">
+    @if($status_kod == 3)
+        <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px; color:black!important;">
             {{ $status }}
         </div>
     @endif
@@ -130,7 +128,7 @@
                                                         @elseif ($item['status']=='3')
                                                             <td class="text-center"><button class="btn bg-pink text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='4')
-                                                            <td class="text-center"><button class="btn bg-green text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><button class="btn btn-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='5')
                                                             <td class="text-center"><button class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
@@ -191,7 +189,7 @@
                                                         @elseif ($item['status']=='3')
                                                             <td class="text-center"><button class="btn bg-pink text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='4')
-                                                            <td class="text-center"><button class="btn bg-green text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><button class="btn btn-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='5')
                                                             <td class="text-center"><button class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif

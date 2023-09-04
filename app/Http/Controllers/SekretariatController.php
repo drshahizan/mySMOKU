@@ -188,8 +188,9 @@ class SekretariatController extends Controller
         ->orWhere('status', '=','4')
         ->orWhere('status', '=','5')
         ->get();
+        $status_kod=0;
         $status = null;
-        return view('pages.sekretariat.tuntutan.saring',compact('permohonan','status'));
+        return view('pages.sekretariat.tuntutan.saring',compact('permohonan','status_kod','status'));
     }
 
     public function maklumatTuntutan2($id){
@@ -200,7 +201,8 @@ class SekretariatController extends Controller
 
     public function tuntutanKeputusan()
     {
-        $permohonan = TuntutanPermohonan::where('status', '=','6')
+        $permohonan = TuntutanPermohonan::where('status', '=','5')
+        ->orWhere('status', '=','6')
         ->orWhere('status', '=','7')
         ->get();
         return view('pages.sekretariat.tuntutan.keputusan',compact('permohonan'));

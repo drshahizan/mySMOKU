@@ -267,7 +267,7 @@ $(document).ready(function(){
 																</div>
 																<!--end::Row-->
 															</div>
-															<div class="col-md-3 fv-row">
+															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">Tarikh Lahir</label>
 																<!--end::Label-->
@@ -281,7 +281,7 @@ $(document).ready(function(){
 																	</div>
 																</div>	
 																</div>
-																<div class="col-md-3 fv-row">
+																<div class="col-md-2 fv-row">
 																<label class=" fs-6 fw-semibold form-label mb-2">Umur</label>
 																<!--end::Label-->
 																<div class="row fv-row">

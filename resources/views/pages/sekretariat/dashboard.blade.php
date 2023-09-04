@@ -108,9 +108,9 @@
 															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$keseluruhanB}}</span> 
 
 															<div class="m-0">
-																<span class="badge badge-light-info fs-base m-0">
-																	<a href="#"><span class="path1"></span><span class="path2"></span></a> 
-																	Lihat
+																<span class="badge badge-light fs-base m-0">
+																	<a href="#" class="secondary text-black"><span class="path1"></span><span class="path2"></span>Lihat</a> 
+																	
 																</span>  
 															</div>       
 														</div>  
@@ -144,9 +144,8 @@
 															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$derafB}}</span> 
 
 															<div class="m-0">
-																<span class="badge badge-light-warning fs-base m-0">
-																	<a href="#"><span class="path1"></span><span class="path2"></span></a> 
-																	Lihat
+																<span class="badge badge-dark-secondary fs-base m-0">
+																	<a href="#" class="dark-secondary text-turqoise"><span class="path1"></span><span class="path2"></span>Lihat</a> 
 																</span>  
 															</div>       
 														</div>  
@@ -179,9 +178,8 @@
 															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$baharuB}}</span> 
 
 															<div class="m-0">
-																<span class="badge badge-light-info fs-base m-0">
-																	<a href="#"><span class="path1"></span><span class="path2"></span></a> 
-																	Lihat
+																<span class="badge badge-light-primary fs-base m-0">
+																	<a href="#" class="primary text-primary"><span class="path1"></span><span class="path2"></span>Lihat</a> 
 																</span>  
 															</div>       
 														</div>  
@@ -217,8 +215,7 @@
 
 															<div class="m-0">
 																<span class="badge badge-light-warning fs-base m-0">
-																	<a href="#"><span class="path1"></span><span class="path2"></span></a> 
-																	Lihat
+																	<a href="#" class="warning text-warning"><span class="path1"></span><span class="path2"></span>Lihat</a> 
 																</span>  
 															</div>       
 														</div>  
@@ -253,9 +250,8 @@
 															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$disokongB}}</span> 
 
 															<div class="m-0">
-																<span class="badge badge-light-success fs-base m-0">
-																	<a href="#"><span class="path1"></span><span class="path2"></span></a> 
-																	Lihat
+																<span class="badge badge-light-warning fs-base m-0">
+																	<a href="#" class="warning text-warning"><span class="path1"></span><span class="path2"></span>Lihat</a> 
 																</span>  
 															</div>       
 														</div>  
@@ -427,7 +423,7 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #1E36A0">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													{{-- <span class="symbol-label"> --}}
@@ -453,7 +449,7 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #A6CFD5">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #0ad5ebdc">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													{{-- <span class="symbol-label"> --}}
@@ -480,7 +476,7 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #1E36A0">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #186ee6">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													{{-- <span class="symbol-label"> --}}
@@ -506,7 +502,7 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #26408B">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 														<i class="ki-duotone ki-user fs-1 text-light">
@@ -534,7 +530,57 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #26408B">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #efd06c">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+														<i class="ki-duotone ki-teacher fs-1 text-light">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Disokong</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$disokongP}}</span>
+													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-5 mb-8">
+														<i class="ki-duotone ki-book-open fs-1 text-light">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Dikembalikan</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$dikembalikanP}}</span>
+													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+										
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													{{-- <span class="symbol-label"> --}}
@@ -560,7 +606,7 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #7ec4cf">
+											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-5 mb-8">
 													{{-- <span class="symbol-label"> --}}
@@ -576,56 +622,6 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$tidaklayakP}}</span>
-													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
-												</div>
-												<!--end::Stats-->
-											</div>
-											<!--end::Items-->
-										</div>
-										<!--end::Col-->
-										
-										<!--begin::Col-->
-										<div class="col-3">
-											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #7ec4cf">
-												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
-														<i class="ki-duotone ki-teacher fs-1 text-light">
-															<span class="path1"></span>
-															<span class="path2"></span>
-															<span class="path3"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Disokong</span>
-														</i>
-												</div>
-												<!--end::Symbol-->
-												<!--begin::Stats-->
-												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$disokongP}}</span>
-													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
-												</div>
-												<!--end::Stats-->
-											</div>
-											<!--end::Items-->
-										</div>
-										<!--end::Col-->
-
-										<!--begin::Col-->
-										<div class="col-3">
-											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #A6CFD5">
-												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
-														<i class="ki-duotone ki-book-open fs-1 text-light">
-															<span class="path1"></span>
-															<span class="path2"></span>
-															<span class="path3"></span>
-															<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Dikembalikan</span>
-														</i>
-												</div>
-												<!--end::Symbol-->
-												<!--begin::Stats-->
-												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$dikembalikanP}}</span>
 													<a href=""><span class="text-white fw-bold fs-7">Lihat</span></a>
 												</div>
 												<!--end::Stats-->

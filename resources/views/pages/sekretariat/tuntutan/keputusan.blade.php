@@ -93,7 +93,6 @@
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th style="width: 15%"><b>ID Tuntutan</b></th>                                        
                                                         <th style="width: 45%"><b>Nama</b></th>
-                                                        <th style="width: 12%" class="text-center"><b>Jenis Tuntutan</b></th>
                                                         <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th> 
                                                         <th class="text-center" style="width: 15%">Status Tuntutan</th>
                                                     </tr>
@@ -122,10 +121,11 @@
                                                         <tr>
                                                             <td>{{$id_permohonan}}</td>
                                                             <td>{{$pemohon}}</td>
-                                                            <td>{{$program}}</td>
                                                             <td class="text-center">{{$item['created_at']->format('Y-m-d')}}</td>
                                                             @if($item['status'] == "6")
                                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=="5")
+                                                                <td class="text-center"><button type="button" class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif($item['status'] == "7")
                                                                 <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                             @endif
@@ -164,7 +164,6 @@
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th style="width: 15%"><b>ID Tuntutan</b></th>                                        
                                                         <th style="width: 45%"><b>Nama</b></th>
-                                                        <th style="width: 12%" class="text-center"><b>Jenis Tuntutan</b></th>
                                                         <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th> 
                                                         <th class="text-center" style="width: 15%">Status Tuntutan</th>
                                                     </tr>
@@ -193,10 +192,11 @@
                                                         <tr>
                                                             <td>{{$id_permohonan}}</td>
                                                             <td>{{$pemohon}}</td>
-                                                            <td>{{$program}}</td>
                                                             <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                             @if($item['status'] == "6")
                                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=="5")
+                                                                <td class="text-center"><button type="button" class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif($item['status'] == "7")
                                                                 <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                             @endif
