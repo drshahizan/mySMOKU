@@ -119,7 +119,7 @@
 														<div class="text-gray-600">No data
 
 														@endif --}}
-														</div>
+														{{-- </div> --}}
 														<!--begin::Details item-->
 														<!--begin::Details item-->
 														
