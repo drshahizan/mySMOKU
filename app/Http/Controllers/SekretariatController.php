@@ -80,7 +80,7 @@ class SekretariatController extends Controller
 
     public function keputusanPermohonan()
     {
-        $keputusan = Akademik::all();
+        $keputusan = TuntutanPermohonan::all();
         return view('pages.sekretariat.permohonan.keputusan', compact('keputusan'));
     }
     
