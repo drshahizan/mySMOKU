@@ -296,7 +296,7 @@
 																	</td>
 																	
 																	<td class="" colspan="2">
-																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">{{ $pemohon}}</span>
+																		<span class="text-gray-800 fw-bold text-center mb-1 fs-6">{{$pemohon}}</span>
 																	</td>
 																	
 																	<td class="text-center"><a href="{{route('borangPermohonanBaru',$smoku->nokp)}}"><button class="btn bg-primary text-white">Deraf</button></a></td>
