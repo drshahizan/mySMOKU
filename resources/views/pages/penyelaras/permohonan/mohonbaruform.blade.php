@@ -335,26 +335,14 @@ $(document).ready(function(){
 														<!--begin::Input group-->
 														<div class="fv-row mb-10">
 															<!--end::Label-->
-															<label class="form-label">Alamat Rumah</label>
+															<label class="form-label">Alamat Tetap</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<textarea id="alamat1" name="alamat1" class="form-control form-control-lg form-control-solid" rows="2">{{$smoku->alamat1}}</textarea>
+															<textarea disabled="true" id="alamat1" name="alamat1" class="form-control form-control-lg form-control-solid" rows="2">{{$smoku->alamat1}}</textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">Poskod
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" id="alamat_poskod" name="alamat_poskod" placeholder="" value="{{$smoku->alamat_poskod}}" />
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
+															
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">Negeri
@@ -363,7 +351,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" id="alamat_negeri" name="alamat_negeri" placeholder="" value="{{$smoku->alamat_negeri}}" />
+																	<input type="text" class="form-control form-control-solid" id="alamat_negeri" name="alamat_negeri" placeholder="" value="{{$smoku->alamat_negeri}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -376,12 +364,104 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" id="alamat_bandar" name="alamat_bandar" placeholder="" value="{{$smoku->alamat_bandar}}"/>
+																	<input type="text" class="form-control form-control-solid" id="alamat_bandar" name="alamat_bandar" placeholder="" value="{{$smoku->alamat_bandar}}" readonly/>
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">Poskod
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" id="alamat_poskod" name="alamat_poskod" placeholder="" value="{{$smoku->alamat_poskod}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
 															</div>
 														</div>
+
+														<!--begin::Input group-->
+														<div class="fv-row mb-7">
+															<!--begin::Wrapper-->
+															<div class="d-flex flex-stack">
+																<!--begin::Label-->
+																<div class="me-5">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold">Use as a Alamat Surat Menyurat?</label>
+																	<!--end::Label-->
+																</div>
+																<!--end::Label-->
+																<!--begin::Switch-->
+																<label class="form-check form-switch form-check-custom form-check-solid">
+																	<!--begin::Input-->
+																	<input class="form-check-input" id="sama" name="sama" id="myCheck" onclick="myFunction()" type="checkbox" value="1" id="kt_modal_update_customer_billing" />
+																	<!--end::Input-->
+																	<!--begin::Label-->
+																	<span class="form-check-label fw-semibold text-muted" for="kt_modal_update_customer_billing">Ya</span>
+																	<!--end::Label-->
+																</label>
+																<!--end::Switch-->
+															</div>
+															<!--begin::Wrapper-->
+														</div>
+														<!--end::Input group-->
+															
+															<!--begin::Alamat Surat-->
+															<div class="fv-row mb-10">
+																<!--end::Label-->
+																<label class="form-label">Alamat Surat Menyurat</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<textarea id="alamat_surat1" name="alamat_surat1" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
+																<!--end::Input-->
+															</div>
+															<div class="row mb-10">
+																
+																<div class="col-md-4 fv-row">
+																	<!--begin::Label-->
+																	<label class=" fs-6 fw-semibold form-label mb-2">Negeri
+																	</label>
+																	<!--end::Label-->
+																	<!--begin::Input wrapper-->
+																	<div class="col-12">
+																		<!--begin::Input-->
+																		<input type="text" class="form-control form-control-solid" id="alamat_surat_negeri" name="alamat_surat_negeri" placeholder="" value="" />
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input wrapper-->
+																</div>
+																<div class="col-md-4 fv-row">
+																	<!--begin::Label-->
+																	<label class=" fs-6 fw-semibold form-label mb-2">Bandar
+																	</label>
+																	<!--end::Label-->
+																	<!--begin::Input wrapper-->
+																	<div class="col-12">
+																		<!--begin::Input-->
+																		<input type="text" class="form-control form-control-solid" id="alamat_surat_bandar" name="alamat_surat_bandar" placeholder="" value=""/>
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input wrapper-->
+																</div>
+																<div class="col-md-4 fv-row">
+																	<!--begin::Label-->
+																	<label class=" fs-6 fw-semibold form-label mb-2">Poskod
+																	</label>
+																	<!--end::Label-->
+																	<!--begin::Input wrapper-->
+																	<div class="col-12">
+																		<!--begin::Input-->
+																		<input type="text" class="form-control form-control-solid" id="alamat_surat_poskod" name="alamat_surat_poskod" placeholder="" value="" />
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input wrapper-->
+																</div>
+															</div>
+
 														<!--end::Input group-->
 														<div class="row mb-10">
 															<div class="col-md-6 fv-row">
@@ -591,7 +671,7 @@ $(document).ready(function(){
 														<!--begin::Input group-->
 														<div class="fv-row mb-10">
 															<!--end::Label-->
-															<label class="form-label">Alamat Rumah</label>
+															<label class="form-label">Alamat Tetap</label>
 															<!--end::Label-->
 															<!--begin::Input-->
 															<textarea id="alamatW1" name="alamatW1" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
@@ -1263,6 +1343,33 @@ $(document).ready(function(){
 		<!--end::Javascript-->
 
 		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		<script type="text/javascript">
+   
+			function myFunction() {
+				var checkBox = document.getElementById("sama");  
+				var alamat1 = document.getElementById("alamat1");
+				var alamat_negeri = document.getElementById("alamat_negeri");
+				var alamat_bandar = document.getElementById("alamat_bandar");
+				var alamat_poskod = document.getElementById("alamat_poskod");
+
+				var alamat_surat1 = document.getElementById("alamat_surat1");
+				var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
+				var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
+				var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
+				if (checkBox.checked == true){
+					alamat_surat1.value=alamat1.value; 
+					alamat_surat_negeri.value=alamat_negeri.value;
+					alamat_surat_bandar.value=alamat_bandar.value;
+					alamat_surat_poskod.value=alamat_poskod.value;
+				} else {
+					alamat_surat1.value="";
+					alamat_surat_negeri.value="";
+					alamat_surat_bandar.value="";
+					alamat_surat_poskod.value="";
+				}
+			}
+		</script> 
+		
 		<script type="text/javascript">
    
 			$(".save-form").click(function(e){
