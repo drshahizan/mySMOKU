@@ -196,7 +196,7 @@
                                                             <th style="width: 5%; text-align:right;">No.</th>                                                        
                                                             <th style="width: 20%;">Item</th>
                                                             <th style="width: 25%;">Keputusan Saringan</th>
-                                                            <th style="width: 50%;">Catatan</th>
+                                                            <th style="width: 50%;">Jenis Tuntutan</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
