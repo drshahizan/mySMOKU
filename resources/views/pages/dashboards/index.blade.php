@@ -50,16 +50,16 @@
 														<div class="symbol symbol-150px symbol-circle mb-7">
 															<!-- <img src="assets/media/avatars/300-1.jpg" alt="image" /> -->
 															<?php
-																$profile_picture = "";
-																if(Auth::user()->profile_photo_path !== null){
-																	$profile_picture = Auth::user()->profile_photo_path;
-																}else{
-																	$profile_picture = "default.jpg";
-																}
-																$img_path = "storage/app/public/profile_photo_path/".$profile_picture;
+																// $profile_picture = "";
+																// if(Auth::user()->profile_photo_path !== null){
+																// 	$profile_picture = Auth::user()->profile_photo_path;
+																// }else{
+																// 	$profile_picture = "default.jpg";
+																// }
+																// $img_path = "storage/app/public/profile_photo_path/".$profile_picture;
 																// dd($img_path);
 															?>
-															<img class="image rounded-circle" src="{{asset($img_path)}}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+															<img class="image rounded-circle" src="/storage/app/public/profile_photo_path/{{ Auth::user()->profile_photo_path }}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
 														</div>
 														<!--end::Avatar-->
 														<!--begin::Name-->
