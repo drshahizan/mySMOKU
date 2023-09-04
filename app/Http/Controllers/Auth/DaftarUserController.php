@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Smoku;
-use DB;
+use Illuminate\Support\Facades\DB;
 use session;
 
 class DaftarUserController extends Controller
