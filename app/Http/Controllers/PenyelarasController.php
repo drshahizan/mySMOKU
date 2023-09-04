@@ -189,7 +189,7 @@ class PenyelarasController extends Controller
         $status = Status::all()->where('nokp_pelajar', $nokp);
         $dokumen = Dokumen::all()->where('nokp_pelajar', $nokp);
         $negeri = Negeri::orderby("kod","asc")->select('id','nama')->get();
-        return view('pages.penyelaras.permohonan.mohonbaruform', compact('smoku','pelajar','hubungan','akademikmqa','infoipt','peringkat','kursus','mod','biaya','negeri'));
+        return view('pages.penyelaras.permohonan.mohonbaruform', compact('smoku','pelajar','hubungan','waris','akademikmqa','infoipt','peringkat','kursus','mod','biaya','negeri'));
     }
 
     // Fetch records
@@ -307,6 +307,7 @@ class PenyelarasController extends Controller
                 //'no_telR' => $request->no_telRW,
                 'nokp_pelajar' => $request->nokp_pelajar,
                 'hubungan' => $request->hubungan,
+                'lain_hubungan' => $request->lain_hubungan,
                 'pendapatan' => $request->pendapatan,
         
             ]);
@@ -324,6 +325,7 @@ class PenyelarasController extends Controller
                 //'no_telR' => $request->no_telRW,
                 'nokp_pelajar' => $request->nokp_pelajar,
                 'hubungan' => $request->hubungan,
+                'lain_hubungan' => $request->lain_hubungan,
                 'pendapatan' => $request->pendapatan,
 
         ]);
@@ -333,6 +335,7 @@ class PenyelarasController extends Controller
         if ($akademik === null) {
             $user = Akademik::create([
                 'no_pendaftaranpelajar' => $request->no_pendaftaranpelajar,
+                'nokp_pelajar' => $request->nokp_pelajar,
                 'sesi' => $request->sesi,
                 'tkh_mula' => $request->tkh_mula,
                 'tkh_tamat' => $request->tkh_tamat,
@@ -351,6 +354,10 @@ class PenyelarasController extends Controller
         ->update([
 
             'no_pendaftaranpelajar' => $request->no_pendaftaranpelajar,
+            'nokp_pelajar' => $request->nokp_pelajar,
+            'id_institusi' => $request->id_institusi,
+            'peringkat_pengajian' => $request->peringkat_pengajian,
+            'nama_kursus' => $request->nama_kursus,
             'sesi' => $request->sesi,
             'tkh_mula' => $request->tkh_mula,
             'tkh_tamat' => $request->tkh_tamat,
