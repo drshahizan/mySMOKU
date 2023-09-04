@@ -46,6 +46,11 @@
     <!--end::Theme mode-->
     <!--begin::User menu-->
     <div class="app-navbar-item ms-1 ms-md-3" id="kt_header_user_menu_toggle">
+        @php
+        $nama = DB::table('smoku')->join('users','users.nokp','=','smoku.nokp' )->value('smoku.nama');
+        // $ic = Auth::user()->nokp;
+        // $nama = DB::table('smoku')->where('nokp', $ic)->value('nama');
+        @endphp
         <!--begin::Menu wrapper-->
         <div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
             @if(Auth::user()->profile_photo_path)

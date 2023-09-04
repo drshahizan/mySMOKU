@@ -3,6 +3,11 @@
     <!--begin::Menu item-->
     <div class="menu-item px-3">
         <div class="menu-content d-flex align-items-center px-3">
+            @php
+                $nama = DB::table('smoku')->join('users','users.nokp','=','smoku.nokp' )->value('smoku.nama');
+                // $ic = Auth::user()->nokp;
+                // $nama = DB::table('smoku')->where('nokp', $ic)->value('nama');
+            @endphp
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
                 @if(Auth::user()->profile_photo_url)
@@ -10,17 +15,15 @@
                 @else
                     <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', Auth::user()->nokp) }}">
                     <!-- <div class="symbol-label fs-3"> -->
-                        {{ substr(Auth::user()->nokp,0,1) }}
-                        <!-- {{ Auth::user()->nokp}} -->
+                        {{ substr($nama,0,1) }}
                     </div>
                 @endif
             </div>
             <!--end::Avatar-->
+
             <!--begin::Username-->
             <div class="d-flex flex-column">
-                <div class="fw-bold d-flex align-items-center fs-5">{{ Auth::user()->nokp}}
-                    <!-- <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span> -->
-                </div>
+                <div class="fw-bold d-flex align-items-center fs-5">{{ $nama}}</div>
                 <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
             </div>
             <!--end::Username-->
