@@ -221,7 +221,7 @@ $(document).ready(function(){
 										<!--begin::Content-->
 										<div class="card d-flex flex-row-fluid flex-center">
 											<!--begin::Form-->
-											<form id="kt_create_account_form" action="{{ route('hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
+											<form id="kt_create_account_form" action="{{ route('hantarpermohonan') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
 											
 												<!--begin::Step 1-->
 												<div class="current" data-kt-stepper-element="content">

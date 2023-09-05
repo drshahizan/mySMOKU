@@ -347,7 +347,7 @@ class PermohonanController extends Controller
 
     }
 
-    public function hantar(Request $request)
+    public function hantarpermohonan(Request $request)
     {   
 
         $tuntutanpermohonan = TuntutanPermohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
@@ -394,7 +394,7 @@ class PermohonanController extends Controller
             $invoisResit=$request->invoisResit;
             //$name3=$invoisResit->getClientOriginalName();
             $name3='salinanresit';  
-            $filenameinvoisResit=$name1.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
+            $filenameinvoisResit=$name3.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
             $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
             
             $data->id_permohonan='KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar;
