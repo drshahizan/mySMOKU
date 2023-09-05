@@ -94,7 +94,15 @@
 																	</div>
 																</div>
 															</div>
-
+															<div class="row gx-10 mb-5">
+																<div class="col-lg-12">
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Jumlah Amaun</label>
+																	<!--begin::Input group-->
+																	<div class="mb-5">
+																		<input type="text" name="amaun_yuran" class="form-control form-control-solid" placeholder=""  />
+																	</div>
+																</div>
+															</div>
 																<div class="row gx-10 mb-5">
 																	<div class="col-lg-12">
 																		<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Resit/ Invois&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
@@ -137,7 +145,7 @@
 															
 															<div class="d-flex flex-center mt-15">
 																<button type="submit"  class="btn btn-primary">
-																	Hantar
+																	Masukkan
 																</button>&nbsp;&nbsp;&nbsp;
 														
 															<!--<a href="#" class="btn btn-danger">Batal</a>-->
@@ -172,8 +180,9 @@
 													{{-- <th>Semester</th> --}}
 													<th>Jenis Yuran</th>
 													<th>No resit</th>
-													<th>Keterangan</th>
+													<th>Perihal</th>
 													<th>Salinan</th>
+													<th>Amaun</th>
 												</tr>
 												</thead>
 												<tbody class="fw-semibold text-gray-600">
@@ -194,8 +203,15 @@
 														
 													</div>
 													
-													
+													{{-- Penambahan 197 right justify button hantar  --}}
 													<!--end::Actions-->
+													<div class="d-flex justify-content-end">
+														<button type="submit"  class="btn btn-primary">
+															Hantar
+														</button>&nbsp;&nbsp;&nbsp;
+												
+													<!--<a href="#" class="btn btn-danger">Batal</a>-->
+													</div>
 												</div>
 												<!--end::Card body-->
 											</div>

@@ -51,20 +51,6 @@
             <div class="container-fluid">
                 <div class="block-header">
                     <div class="row clearfix">
-                        {{-- Filter Function --}}
-                            {{-- <form action="" method="GET">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
-                                    </div>
-    
-                                    <div class="col-md-6">
-                                        <button type="submit" class="btn btn-primary" style="width: 10%;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
-                                    </div>
-                                </div>
-                            </form>
-                            --}}
-
                         <div class="card">
                             <div class="header">
                                 <h2>Senarai Permohonan untuk Kelulusan JKKBKOKU<br><small>Klik ID Permohonan untuk meluluskan permohonan</small></h2>
@@ -110,16 +96,19 @@
                                                         @php
                                                             $i=0;
                                                         @endphp
+                                                        @php
+                                                            require_once app_path('helpers.php'); // Replace with the actual path to your helper file
+                                                        @endphp
+                                                    
                                                         @foreach ($kelulusan as $item)
-                                                            {{-- @if ($item['status']=="4") --}}
+                                                            @if ($item['program']=="BKOKU")
                                                                 @php
                                                                     $i++;
-                                                                    $id_permohonan = DB::table('permohonan')->where('nokp_pelajar', $item['nokp_pelajar'])->value('id_permohonan');
                                                                     $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                                                    $nama_kursus = DB::table('maklumatakademik')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_kursus');
                                                                     $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
                                                                     $jenis_kecacatan = DB::table('pelajar')->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_jenisoku.kecacatan'); //PH,SD
-                                                                    $nama_kursus = DB::table('maklumatakademik')->value('nama_kursus');
-                                                                    $institusi_pengajian = DB::table('bk_infoipt')->where('idipt', $item['id_institusi'])->value('namaipt');
+                                                                    $institusi_pengajian = DB::table('maklumatakademik')->join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_infoipt.namaipt');
                                                                     
                                                                     // nama pemohon
                                                                     $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
@@ -148,6 +137,7 @@
                                                                         }
                                                                     }
                                                                     $kursus = implode(' ', $result);
+                                                                    $namakursus = transformBracketsToCapital($kursus);
 
                                                                     //institusi pengajian
                                                                     $text3 = ucwords(strtolower($institusi_pengajian)); // Assuming you're sending the text as a POST parameter
@@ -162,18 +152,20 @@
                                                                         }
                                                                     }
                                                                     $institusi = implode(' ', $result);
+                                                                    $institusipengajian = transformBracketsToUppercase($institusi);
                                                                 @endphp
+                                                                
                                                                 <tr>
                                                                     <td class="text-center"><input type="checkbox" name="checkbox-1" id="checkbox-1" /></td>                                           
-                                                                    <td><a href="{{ url('kemaskini/kelulusan/'. $nokp) }}" target="_blank">{{$id_permohonan}}</a></td>
+                                                                    <td><a href="{{ url('kemaskini/kelulusan/'. $nokp) }}" target="_blank">{{$item['id_permohonan']}}</a></td>
                                                                     <td>{{$pemohon}}</td>
                                                                     <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                    <td>{{$kursus}}</td>
-                                                                    <td>{{$institusi}}</td>
+                                                                    <td>{{$namakursus}}</td>
+                                                                    <td>{{$institusipengajian}}</td>
                                                                     <td class="text-center">{{date('d/m/Y', strtotime($item['tkh_mula']))}}</td>
                                                                     <td class="text-center">{{date('d/m/Y', strtotime($item['tkh_tamat']))}}</td>
                                                                 </tr>
-                                                            {{-- @endif --}}
+                                                            @endif
                                                         @endforeach 
                                                     </tbody>
                                                 </table>
@@ -256,16 +248,18 @@
                                                         @php
                                                             $i=0;
                                                         @endphp
+                                                        @php
+                                                            require_once app_path('helpers.php'); // Replace with the actual path to your helper file
+                                                        @endphp
                                                         @foreach ($kelulusan as $item)
-                                                            {{-- @if ($item['status']=="4") --}}
+                                                            @if ($item['program']=="PPK")
                                                                 @php
                                                                     $i++;
-                                                                    $id_permohonan = DB::table('permohonan')->where('nokp_pelajar', $item['nokp_pelajar'])->value('id_permohonan');
                                                                     $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                                                    $nama_kursus = DB::table('maklumatakademik')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_kursus');
                                                                     $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
                                                                     $jenis_kecacatan = DB::table('pelajar')->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_jenisoku.kecacatan'); //PH,SD
-                                                                    $nama_kursus = DB::table('maklumatakademik')->value('nama_kursus');
-                                                                    $institusi_pengajian = DB::table('bk_infoipt')->where('idipt', $item['id_institusi'])->value('namaipt');
+                                                                    $institusi_pengajian = DB::table('maklumatakademik')->join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_infoipt.namaipt');
                                                                     
                                                                     // nama pemohon
                                                                     $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
@@ -294,6 +288,7 @@
                                                                         }
                                                                     }
                                                                     $kursus = implode(' ', $result);
+                                                                    $namakursus = transformBracketsToCapital($kursus);
 
                                                                     //institusi pengajian
                                                                     $text3 = ucwords(strtolower($institusi_pengajian)); // Assuming you're sending the text as a POST parameter
@@ -308,18 +303,19 @@
                                                                         }
                                                                     }
                                                                     $institusi = implode(' ', $result);
+                                                                    $institusipengajian = transformBracketsToUppercase($institusi);
                                                                 @endphp
                                                                 <tr>
                                                                     <td class="text-center"><input type="checkbox" name="checkbox-1" id="checkbox-1" /></td>                                           
-                                                                    <td><a href="{{ url('kemaskini/kelulusan/'. $nokp) }}" target="_blank">{{$id_permohonan}}</a></td>
+                                                                    <td><a href="{{ url('kemaskini/kelulusan/'. $nokp) }}" target="_blank">{{$item['id_permohonan']}}</a></td>
                                                                     <td>{{$pemohon}}</td>
                                                                     <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                    <td>{{$kursus}}</td>
-                                                                    <td>{{$institusi}}</td>
+                                                                    <td>{{$namakursus}}</td>
+                                                                    <td>{{$institusipengajian}}</td>
                                                                     <td class="text-center">{{date('d/m/Y', strtotime($item['tkh_mula']))}}</td>
                                                                     <td class="text-center">{{date('d/m/Y', strtotime($item['tkh_tamat']))}}</td>
                                                                 </tr>
-                                                            {{-- @endif --}}
+                                                            @endif
                                                         @endforeach 
                                                     </tbody>
                                                 </table>

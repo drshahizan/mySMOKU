@@ -343,6 +343,7 @@
                 </tr> --}}
             </tbody>
         </table>
+
         <footer>
             <div class="pagenum-container" style="float: right">Page
                 <span class="pagenum"></span>
@@ -353,21 +354,5 @@
     <script>
         document.getElementById("text").innerHtml = document.getElementById("text").innerHtml.toLowerCase();
     </script>
-
-    {{-- <script type="text/php">
-        if (isset($pdf)) 
-        {
-            $x = 400;
-            $y = 10;
-            $text = "Page {PAGE_NUM}";
-            $font = null;
-            $size = 8;
-            $color = array(0,0,0);
-            $word_space = 0.0; 
-            $char_space = 0.0; 
-            $angle = 0.0;  
-            $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
-        }
-    </script> --}}
 </body>
 </html>
