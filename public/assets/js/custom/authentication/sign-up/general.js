@@ -18,7 +18,7 @@ var KTSignupGeneral = function () {
                     'nokp': {
                         validators: {
                             notEmpty: {
-                                message: 'First Name is required'
+                                message: 'No. Kad Pengenalan diperlukan'
                             }
                         }
                     },
@@ -27,22 +27,22 @@ var KTSignupGeneral = function () {
                         validators: {
                             regexp: {
                                 regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: 'The value is not a valid email address',
+                                message: 'Alamat Emel tidak sah',
                             },
                             notEmpty: {
-                                message: 'Email address is required'
+                                message: 'Alamat Emel diperlukan'
                             }
                         }
                     },
                     'password': {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required'
+                                message: 'Kata laluan diperlukan'
                             },
                             callback: {
-                                message: 'Please enter valid password',
+                                message: 'Masukkan kata laluan yang sah',
                                 callback: function (input) {
-                                    if (input.value.length > 0) {
+                                    if (input.value.length > 12) {
                                         return validatePassword();
                                     }
                                 }
@@ -302,7 +302,7 @@ var KTSignupGeneral = function () {
 
         // Handle password input
         form.querySelector('input[name="password"]').addEventListener('input', function () {
-            if (this.value.length > 0) {
+            if (this.value.length > 12) {
                 validator.updateFieldStatus('password', 'NotValidated');
             }
         });

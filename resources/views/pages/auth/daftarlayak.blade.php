@@ -63,7 +63,7 @@
 
             <!--begin::Hint-->
             <div class="text-muted">
-                Gunakan 8 atau lebih aksara dengan gabungan huruf, nombor & simbol.
+                Gunakan 12 atau lebih aksara dengan gabungan huruf, nombor & simbol.
             </div>
             <!--end::Hint-->
         </div>
