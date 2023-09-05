@@ -412,7 +412,7 @@ class PermohonanController extends Controller
 
 
 
-        return redirect()->route('viewpermohonan')->with('message', 'Permohonan anda telah dihantar.');
+        return redirect()->route('dashboard')->with('message', 'Permohonan anda telah dihantar.');
 
     }
 
