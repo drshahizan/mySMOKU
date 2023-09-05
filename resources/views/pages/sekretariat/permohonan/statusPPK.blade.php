@@ -49,12 +49,17 @@
                             </div>
 
                             {{-- Filter section --}}
-                            {{-- <form action="" method="GET">
-                                <div class="row">
-                                    <div class="col-md-4">
+                            <form action="" method="GET">
+                                <div class="row" style="margin-left:15px;">
+                                    <div class="col-md-3">
+                                        <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
+                                    </div>
+    
+                                    <div class="col-md-3">
                                         <select name="status" class="form-select">
                                             <option value="">Semua Status Permohonan</option>
-                                            <option value="2" {{Request::get('status') == '2' ? 'selected':'' }} >Baru</option>
+                                            <option value="1" {{Request::get('status') == '1' ? 'selected':'' }} >Deraf</option>
+                                            <option value="2" {{Request::get('status') == '2' ? 'selected':'' }} >Baharu</option>
                                             <option value="3" {{Request::get('status') == '3' ? 'selected':'' }} >Saringan</option>
                                             <option value="4" {{Request::get('status') == '4' ? 'selected':'' }} >Disokong</option>
                                             <option value="5" {{Request::get('status') == '5' ? 'selected':'' }} >Dikembalikan</option>
@@ -62,12 +67,8 @@
                                             <option value="7" {{Request::get('status') == '7' ? 'selected':'' }} >Tidak Layak</option>
                                         </select>
                                     </div>
-
-                                    <div class="col-md-4 right">
-                                        <button type="submit" class="btn btn-primary" style="width: 10%; padding-left:7px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
-                                    </div>
                                 </div>
-                            </form> --}}
+                            </form>
 
                             <div class="table-responsive">
                                 <div class="body">      
