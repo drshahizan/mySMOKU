@@ -9,7 +9,7 @@
             border: none!important;
         }
         .table{
-            width: 45%;
+            width: 80%;
             table-layout: fixed;
         }
         .table td, .table th, .table2 td, .table2 th{
@@ -241,41 +241,43 @@
                                             $jumlah = 5000;
                                         }
                                     @endphp
+                                    <br>
+                                    <h6>Pengiraan:</h6>
+                                    <br>
                                     <div class="table-responsive">
-                                        <table class="maklumat2">
-                                            <tr>
-                                                <td>Jumlah Layak Tuntut (RM)</td>
-                                                <td>:</td>
-                                                <td><input type="number" name="layak_tuntut" value="{{$jumlah}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
-                                            </tr>
-                                        </table>
                                         <table class="table">
                                             <thead>
                                                 <tr>
                                                     <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
-                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jumlah (RM)</th>
+                                                    <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dituntut (RM)</th>
+                                                    <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr class="font-weight-bolder font-size-lg">
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
-                                                        Yuran Pengajian
-                                                    </td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->amaun - $akademik->bil_bulanpersem * 300, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran" id="yuran" value="{{number_format($permohonan->amaun, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->amaun - $akademik->bil_bulanpersem * 300, 2)}}</td>
                                                 </tr>
                                                 <tr class="font-weight-bolder font-size-lg">
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
-                                                        Wang Saku
-                                                    </td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($akademik->bil_bulanpersem * 300, 2)}}</td>
-                                                </tr>
-                                                <tr class="font-weight-bolder font-size-lg">
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">
-                                                        Keseluruhan
-                                                    </td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun + $akademik->bil_bulanpersem * 300, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran" id="yuran" value="{{number_format($akademik->bil_bulanpersem * 300, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="baki">{{number_format(0, 2)}}</td>
                                                 </tr>
                                             </tbody>
+                                        </table>
+                                        <table class="maklumat2">
+                                            <tr>
+                                                <td>Jumlah tuntutan yang disokong (RM)</td>
+                                                <td>:</td>
+                                                <td><input type="number" name="layak_tuntut" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                            </tr>
                                         </table>
                                     </div>
                                 <!--end: Invoice body-->                               

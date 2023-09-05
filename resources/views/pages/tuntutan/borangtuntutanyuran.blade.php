@@ -6,7 +6,8 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-   </head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
 <!--begin::Content-->
 <div id="kt_app_content" class="app-content flex-column-fluid">
 								<!--begin::Content container-->
@@ -95,13 +96,38 @@
 </div>
 
 																<div class="row gx-10 mb-5">
-																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Resit/ Invois&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
-																	<!--begin::Input group-->
-																	<div class="mb-5">
-                                                                    <input type="file" id="resit" name="resit"/>
+																	<div class="col-lg-6">
+																		<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Resit/ Invois&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
+																		<!--begin::Input group-->
+																		{{--<div class="mb-5">
+																			<input type="file" id="resit" name="resit"/>
+																			
+																		</div>--}}
+													
+																		<div class="input-group control-group img_div form-group col-md-4" >
+																			<input type="file" id="resit" name="resit[]" />
+																			
+																			
+																		</div>
+																		<!-- Add More Button -->
+																		<div class="input-group-btn"> 
+																			<button class="btn btn-link btn-add-more" type="button"><i class="glyphicon glyphicon-plus"></i>Tambah</button>
+																		  </div>
+																		  <!-- End -->
+																		
+																		  <!-- Add More Image upload field  -->
+																		  <div class="clone hide ">
+																			<div class="control-group input-group form-group col-md-4" style="margin-top:10px">
+																			  <input type="file" id="resit" name="resit[]" >
+																			  <div class="input-group-btn"> 
+																				<button class="btn btn-default btn-xs btn-remove" type="button"><i class="glyphicon glyphicon-remove"></i> Batal</button>
+																			  </div>
+																			</div>
+																		  </div>
+																		  <!-- End -->
+
 																	</div>
-																</div>
+																
 																</div>
 															
 															
@@ -4070,7 +4096,22 @@
 	</body>
 	<!--end::Body-->
 
+	<script type="text/javascript">
 
+		$(document).ready(function() {
+	
+		  $(".btn-add-more").click(function(){ 
+			  var html = $(".clone").html();
+			  $(".img_div").after(html);
+		  });
+	
+		  $("body").on("click",".btn-remove",function(){ 
+			  $(this).parents(".control-group").remove();
+		  });
+	
+		});
+	
+	</script>
 
 
 </x-default-layout> 

@@ -70,10 +70,37 @@
                                     <form action="" method="GET">
                                         <div class="row" style="margin-left:15px;">
                                             <div class="col-md-3 black">
-                                                Dari tarikh: <input type="date" id="min" name="min" value="" class="form-control"> 
-                                            </div>
-                                            <div class="col-md-3 black">
-                                                Sehingga: <input type="date" id="max" name="max" value="" class="form-control">
+                                                Pilih Julat Tarikh:
+                                                <input type="text" name="daterange" id="daterange" value="08/01/2023 - 08/30/2023" class="form-control"/>
+                                                <script>
+                                                    $(function() {
+                                                        $('input[name="daterange"]').daterangepicker({
+                                                            opens: 'left'
+                                                        }, function(start, end, label) {
+                                                            // Custom filtering function which will search data in column four between two values
+                                                            DataTable.ext.search.push(function (settings, data, dataIndex) {
+                                                                let min = new Date(start).toLocaleDateString();
+                                                                let max = new Date(end).toLocaleDateString();
+                                                                
+                                                                let date = new Date(data[2]).toLocaleDateString();
+            
+                                                                if (
+                                                                    (min === null && max === null) ||
+                                                                    (min === null && date <= max) ||
+                                                                    (min <= date && max === null) ||
+                                                                    (min <= date && date <= max)
+                                                                ) {
+                                                                    return true;
+                                                                }
+                                                                return false;
+                                                            });
+            
+                                                            // DataTables initialisation
+                                                            let table = new DataTable('#sortTable1');
+                                                            table.draw();
+                                                        });
+                                                    });
+                                                </script>
                                             </div>
                                             <div class="col-md-3 black">
                                                 Pilih Keputusan:
@@ -218,34 +245,10 @@
         <script>
             $('#sortTable1').DataTable();
             $('#sortTable2').DataTable();
+            $('input[name="dates"]').daterangepicker();
         </script>
         <script>
-            let minDate, maxDate;
-            // Custom filtering function which will search data in column four between two values
-            DataTable.ext.search.push(function (settings, data, dataIndex) {
-                let min = new Date(document.getElementById("min").value).toLocaleDateString();
-                let max = new Date(document.getElementById("max").value).toLocaleDateString();
-                
-                let date = new Date(data[3]).toLocaleDateString();
-
-                if (
-                    (min === null && max === null) ||
-                    (min === null && date <= max) ||
-                    (min <= date && max === null) ||
-                    (min <= date && date <= max)
-                ) {
-                    return true;
-                }
-                return false;
-            });
-
-            // DataTables initialisation
-            let table = new DataTable('#sortTable1');
-
-            // Refilter the table
-            document.querySelectorAll('#min, #max').forEach((el) => {
-                el.addEventListener('change', () => table.draw());
-            });  
+            
         </script>
         {{-- <script>
            $('#status').on('change', function(){
