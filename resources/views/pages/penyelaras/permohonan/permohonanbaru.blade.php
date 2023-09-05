@@ -52,10 +52,40 @@
 
                                 <tbody>
                                     @foreach ($smoku as $smoku)
+									@php
+                                    
+										$text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
+										$conjunctions = ['bin', 'binti'];
+										$words = explode(' ', $text);
+										$result = [];
+										foreach ($words as $word) {
+											if (in_array(Str::lower($word), $conjunctions)) {
+												$result[] = Str::lower($word);
+											} else {
+												$result[] = $word;
+											}
+										}
+										$pemohon = implode(' ', $result);
+
+								
+									//institusi pengajian
+									$text3 = ucwords(strtolower($smoku->namaipt)); // Assuming you're sending the text as a POST parameter
+										$conjunctions = ['of', 'in', 'and'];
+										$words = explode(' ', $text3);
+										$result = [];
+										foreach ($words as $word) {
+											if (in_array(Str::lower($word), $conjunctions)) {
+												$result[] = Str::lower($word);
+											} else {
+												$result[] = $word;
+											}
+										}
+										$institusi = implode(' ', $result);
+									@endphp
                                     <tr>
-                                        <td><a href="#" title="">{{ $smoku->id_permohonan}}</a></td>
-                                        <td>{{ $smoku->nama}}</td>
-                                        <td>{{ $smoku->id_institusi}}</td>
+                                        <td><a href="{{route('viewpermohonanbaru',$smoku->nokp)}}">{{ $smoku->id_permohonan}}</a></td>
+                                        <td>{{ $pemohon}}</td>
+                                        <td>{{ $institusi}}</td>
                                         <td class="text-center">{{ $smoku->created_at->format('d/m/Y h:i:sa')}}</td>
                                         <td class="text-center"><button type="button" class="btn btn-success btn-sm">Hantar</button></td>
                                     </tr>  
