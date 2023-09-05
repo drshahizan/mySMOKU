@@ -12,6 +12,7 @@ use App\Models\TuntutanPermohonan;
 use App\Models\Smoku;
 use Illuminate\Support\Facades\DB;
 use App\Models\Mod;
+use App\Models\Tuntutan;
 
 class DashboardController extends Controller
 {
@@ -45,11 +46,12 @@ class DashboardController extends Controller
         ->where('nokp_pelajar', Auth::user()->nokp);
         //return view('pages.permohonan.statusmohon', compact('permohonan'));
         $user = User::all()->where('nokp',Auth::user()->nokp);
+        $tuntutan = Tuntutan::all()->where('nokp',Auth::user()->nokp);
 
 
         if(Auth::user()->tahap=='1')
         {
-            return view('pages.dashboards.index', compact('pelajar','status','akademik','sem','tuntutanpermohonan', 'permohonan','user'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
+            return view('pages.dashboards.index', compact('pelajar','status','akademik','sem','tuntutanpermohonan', 'permohonan','user','tuntutan'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
         }
         else if(Auth::user()->tahap=='2')
         {
