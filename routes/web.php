@@ -93,6 +93,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('permohonan/keputusan', [SekretariatController::class, 'keputusanPermohonan']);
     Route::get('kemaskini/kelulusan/{no_kp}', [SekretariatController::class, 'kemaskiniKelulusan']);
     Route::post('hantar-keputusan', [SekretariatController::class, 'keputusanPermohonan']);
+    Route::get('hantar-keputusan', [SekretariatController::class, 'keputusanPermohonan']);
     Route::get('surat-tawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
     Route::get('cetak-senarai-pemohon', [SekretariatController::class, 'cetakSenaraiPemohonPDF']);
     Route::get('senarai-disokong-excel', [SekretariatController::class, 'cetakSenaraiPemohonExcel']);

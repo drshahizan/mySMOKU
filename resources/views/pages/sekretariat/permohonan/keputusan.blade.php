@@ -104,37 +104,39 @@
                                                 <tbody>
                                                     @foreach ($permohonan as $item)
                                                     @if($item['program']=="BKOKU")
-                                                        @php
-                                                            $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
-                                                            $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
-                                                            $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                            $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
-                                                            $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
-                                                            $conjunctions = ['bin', 'binti'];
-                                                            $words = explode(' ', $text);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
+                                                        @if($item['status']=="6" || $item['status']=="7")
+                                                            @php
+                                                                $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
+                                                                $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
+                                                                $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                                                $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                                                $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
+                                                                $conjunctions = ['bin', 'binti'];
+                                                                $words = explode(' ', $text);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
                                                                 }
-                                                            }
-                                                            $pemohon = implode(' ', $result);
-                                                        @endphp
-                                                        <tr>
-                                                            <td>{{$id_permohonan}}</td>
-                                                            <td>{{$pemohon}}</td>
-                                                            <td class="text-center">AM1234</td>
-                                                            <td class="text-center">{{$item['created_at']->format('Y-m-d')}}</td>
-                                                            @if($item['status'] == "6")
-                                                                <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
-                                                            @elseif ($item['status']=="5")
-                                                                <td class="text-center"><button type="button" class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
-                                                            @elseif($item['status'] == "7")
-                                                                <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
-                                                            @endif
-                                                        </tr>
+                                                                $pemohon = implode(' ', $result);
+                                                            @endphp
+                                                            <tr>
+                                                                <td>{{$id_permohonan}}</td>
+                                                                <td>{{$pemohon}}</td>
+                                                                <td class="text-center">AM1234</td>
+                                                                <td class="text-center">{{$item['created_at']->format('Y-m-d')}}</td>
+                                                                @if($item['status'] == "6")
+                                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                                @elseif ($item['status']=="5")
+                                                                    <td class="text-center"><button type="button" class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
+                                                                @elseif($item['status'] == "7")
+                                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                                @endif
+                                                            </tr>
+                                                        @endif
                                                     @endif
                                                     @endforeach
                                                 </tbody>
@@ -181,37 +183,39 @@
                                                 <tbody>
                                                     @foreach ($permohonan as $item)
                                                     @if($item['program']=="PPK")
-                                                        @php
-                                                            $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
-                                                            $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
-                                                            $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                            $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
-                                                            $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
-                                                            $conjunctions = ['bin', 'binti'];
-                                                            $words = explode(' ', $text);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
+                                                        @if($item['status']=="6" || $item['status']=="7")
+                                                            @php
+                                                                $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
+                                                                $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
+                                                                $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                                                $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                                                $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
+                                                                $conjunctions = ['bin', 'binti'];
+                                                                $words = explode(' ', $text);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
                                                                 }
-                                                            }
-                                                            $pemohon = implode(' ', $result);
-                                                        @endphp
-                                                        <tr>
-                                                            <td>{{$id_permohonan}}</td>
-                                                            <td>{{$pemohon}}</td>
-                                                            <td class="text-center">AM1234</td>
-                                                            <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                                            @if($item['status'] == "6")
-                                                                <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
-                                                            @elseif ($item['status']=="5")
-                                                                <td class="text-center"><button type="button" class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
-                                                            @elseif($item['status'] == "7")
-                                                                <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
-                                                            @endif
-                                                        </tr>
+                                                                $pemohon = implode(' ', $result);
+                                                            @endphp
+                                                            <tr>
+                                                                <td>{{$id_permohonan}}</td>
+                                                                <td>{{$pemohon}}</td>
+                                                                <td class="text-center">AM1234</td>
+                                                                <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                                @if($item['status'] == "6")
+                                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                                @elseif ($item['status']=="5")
+                                                                    <td class="text-center"><button type="button" class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
+                                                                @elseif($item['status'] == "7")
+                                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                                @endif
+                                                            </tr>
+                                                        @endif
                                                     @endif
                                                     @endforeach
                                                 </tbody>

@@ -85,28 +85,28 @@
 																		<input type="text" name="no_resit" class="form-control form-control-solid" placeholder=""  />
 																	</div>
 																</div>
-</div>
-<div class="row gx-10 mb-5">
-	<div class="col-lg-12">
-		<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Keterangan</label>
-		<div class="mb-5">
-			<input type="text" name="sesi" class="form-control form-control-solid" placeholder="Yuran Pengajian Semester 1 2023/2024" />
-</div>
-</div>
-</div>
+															</div>
+															<div class="row gx-10 mb-5">
+																<div class="col-lg-12">
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Perihal</label>
+																	<div class="mb-5">
+																		<input type="text" name="nota_resit" class="form-control form-control-solid" placeholder="Yuran Pengajian Semester 1 2023/2024" />
+																	</div>
+																</div>
+															</div>
 
 																<div class="row gx-10 mb-5">
-																	<div class="col-lg-6">
+																	<div class="col-lg-12">
 																		<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Resit/ Invois&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
 																		<!--begin::Input group-->
-																		<div class="mb-5">
+																		{{--<div class="mb-5">
 																			<input type="file" id="resit" name="resit"/>
 																			
-																		</div>
+																		</div>--}}
 													
-																		{{--<div class="input-group control-group img_div form-group col-md-4" >
-																			<input type="file" id="resit" name="resit" />
-																			
+																		<div class="input-group control-group img_div form-group col-md-11" >
+																			<input type="file" name="resit[]" />
+																			<br>
 																			
 																		</div>
 																		<!-- Add More Button -->
@@ -117,15 +117,15 @@
 																		
 																		  <!-- Add More Image upload field  -->
 																		  <div class="clone hide ">
-																			<div class="control-group input-group form-group col-md-4" style="margin-top:10px">
-																			  <input type="file" id="resit" name="resit[]" >
+																			<div class="control-group input-group form-group col-md-13" style="margin-top:10px">
+																			  <input type="file" name="resit[]" >
 																			  <div class="input-group-btn"> 
-																				<button class="btn btn-default btn-xs btn-remove" type="button"><i class="glyphicon glyphicon-remove"></i> Batal</button>
+																				<button class="btn btn-link btn-xs btn-remove" type="button"><i class="glyphicon glyphicon-remove"></i> Batal</button>
 																			  </div>
 																			</div>
 																		  </div>
 																		  <!-- End -->
-																		  --}}
+																		  
 
 																	</div>
 																

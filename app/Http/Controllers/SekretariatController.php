@@ -52,7 +52,7 @@ class SekretariatController extends Controller
 
     public function kelulusanPermohonan()
     {
-        $kelulusan = Akademik::all();
+        $kelulusan = TuntutanPermohonan::where('status', '=','4')->get();
         return view('pages.sekretariat.permohonan.kelulusan', compact('kelulusan'));
     }
 
@@ -73,8 +73,6 @@ class SekretariatController extends Controller
         ->when($request->status != null, function ($q) use ($request) {
             return $q->where('status', $request->status);
         })
-        ->where('status', '=','6')
-        ->orWhere('status', '=','7')
         ->get();
 
         return view('pages.sekretariat.permohonan.keputusan', compact('permohonan'));
@@ -120,7 +118,9 @@ class SekretariatController extends Controller
         $canvas = $dom_pdf ->get_canvas();
         $canvas->page_text(400, 570, "Page {PAGE_NUM}", null, 8, array(0, 0, 0));
 
-        return $pdf->stream('senarai-pemohon.pdf');;
+        $kelulusan = TuntutanPermohonan::where('status', '4')->get();
+
+        return $pdf->stream('senarai-pemohon.pdf', compact('kelulusan'));;
     }
 
     public function mailKeputusan(Request $request)

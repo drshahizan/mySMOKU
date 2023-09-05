@@ -20,40 +20,45 @@ class TuntutanController extends Controller
     public function savetuntutan(Request $request)
     {   
         
-        $data=new tuntutan();
-        
-            $sesi=$request->sesi;
-            $sem=$request->semester; 
-            $resit=$request->resit; 
-            $nokp = Auth::user()->nokp;
+        //$data=new tuntutan();
 
+            $nokp = Auth::user()->nokp;
+            $permohonan = TuntutanPermohonan::all()->where('nokp_pelajar', '=', $nokp)->first();
+            $idmohon =  $permohonan->id_permohonan;
+            $resit=$request->resit; 
+            
             $wordlist = Tuntutan::where('nokp_pelajar', '<=', $nokp)->get();
             $wordCount = $wordlist->count();
             $running_num =  $wordCount + 1;
 
-            //dd($running_num);
-            $name1='resit';  
-            //$filenamekepPeperiksaan=$name1.'-'.$sesi.'_'.$sem.'.'.$kepPeperiksaan->getClientOriginalExtension();
-            $filenameresit=$name1.'-'.$nokp.'_'.$running_num.'.'.$resit->getClientOriginalExtension();
-            //dd($resit);
-            $request->resit->move('assets/dokumen/tuntutan',$filenameresit);
-            $permohonan = TuntutanPermohonan::all()->where('nokp_pelajar', '=', $nokp)->first();
-            $idmohon =  $permohonan->id_permohonan;
+
+            foreach($resit as $img) {
+				// Upload Orginal Image    
+                $name1='resit';          
+                $filenameresit =$name1.'-'.$nokp.'_'.$running_num.'_'.$img->getClientOriginalName();
+                $img->move('assets/dokumen/tuntutan',$filenameresit);
+                // Save In Database
+                $data=new tuntutan();
+                $data->id_tuntutan=$idmohon.'/'.$running_num;
+                $data->id_permohonan=$idmohon;
+                $data->nokp_pelajar=$nokp;
+                $data->sesi=$request->sesi;
+                $data->sesi=$request->nota_resit;
+                $data->semester=$request->semester;
+                $data->yuran=$request->jenis_yuran;
+                $data->no_resit=$request->no_resit;
+                $data->resit=$filenameresit;
+
+                $data->save();
+			}
+
+            
+
+            
             //dd($idmohon);
-            
-            $data->id_tuntutan=$idmohon.'/'.$running_num;
-            $data->id_permohonan=$idmohon;
-            $data->nokp_pelajar=$nokp;
-            $data->sesi=$request->sesi;
-            $data->semester=$request->semester;
-            $data->yuran=$request->jenis_yuran;
-            $data->no_resit=$request->no_resit;
-            $data->resit=$filenameresit;
-
 
             
-
-            $data->save();
+            
 
 
 
