@@ -133,6 +133,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Tuntutan Pelajar 
     Route::get('borangTuntutanYuran',[TuntutanController::class,'borangtuntutanyuran'])->name('borangTuntutanYuran');
     Route::post('borangTuntutanYuran', [TuntutanController::class, 'savetuntutan'])->name('savetuntutan');
+    Route::get('hantartuntutan', [TuntutanController::class, 'hantartuntutan']);
 
     //Pentadbir
     Route::get('daftarpengguna', [PentadbirController::class, 'daftar'])->name('daftarpengguna');

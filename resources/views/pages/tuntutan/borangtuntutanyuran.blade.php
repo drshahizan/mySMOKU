@@ -118,6 +118,7 @@
 																			
 																		</div>
 																		<!-- Add More Button -->
+																		{{--
 																		<div class="input-group-btn"> 
 																			<button class="btn btn-link btn-add-more" type="button"><i class="glyphicon glyphicon-plus"></i>Tambah</button>
 																		  </div>
@@ -133,7 +134,7 @@
 																			</div>
 																		  </div>
 																		  <!-- End -->
-																		  
+																		  --}}
 
 																	</div>
 																
@@ -193,7 +194,7 @@
 														<td>{{ $tuntutan->yuran}}</td>
 														<td>{{ $tuntutan->no_resit}}</td>
 														<td>{{ $tuntutan->nota_resit}}</td>
-														<td>amaun</td>
+														<td>RM{{ $tuntutan->amaun}}</td>
 														<td><a href="/assets/dokumen/tuntutan/{{$tuntutan->resit}}" target="_blank">Papar</a></td>
 														
 													</tr>
@@ -207,9 +208,9 @@
 													{{-- Penambahan 197 right justify button hantar  --}}
 													<!--end::Actions-->
 													<div class="d-flex justify-content-end">
-														<button type="submit"  class="btn btn-primary">
+														<a href="{{route('hantartuntutan')}}"><button type="submit"  class="btn btn-primary">
 															Hantar
-														</button>&nbsp;&nbsp;&nbsp;
+														</button></a>
 												
 													<!--<a href="#" class="btn btn-danger">Batal</a>-->
 													</div>
