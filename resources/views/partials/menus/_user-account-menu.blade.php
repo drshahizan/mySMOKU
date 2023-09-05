@@ -92,10 +92,9 @@
   
     <!--end::Menu item-->
     <!--begin::Menu item-->
+    
     <div class="menu-item px-5">
-        <a class="button-ajax menu-link px-5" href="#" data-action="#" data-method="post" data-csrf="{{ csrf_token() }}" data-reload="true">
-            Profil Diri
-        </a>
+        <a href="{{ route('profil-diri') }}" class="menu-link px-5">My Profile</a>
     </div>
     <div class="separator my-2"></div>
     <div class="menu-item px-5">
