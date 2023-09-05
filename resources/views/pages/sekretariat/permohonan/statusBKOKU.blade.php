@@ -67,6 +67,10 @@
                                             <option value="7" {{Request::get('status') == '7' ? 'selected':'' }} >Tidak Layak</option>
                                         </select>
                                     </div>
+
+                                    <div class="col-md-4 right">
+                                        <button type="submit" class="btn btn-primary" style="width: 10%; padding-left:10px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
+                                    </div>
                                 </div>
                             </form>
 
