@@ -83,6 +83,7 @@ class PermohonanController extends Controller
         ->where('nokp_pelajar', Auth::user()->nokp);
         $status = Status::all()->where('nokp_pelajar', Auth::user()->nokp);
         $dokumen = Dokumen::all()->where('nokp_pelajar', Auth::user()->nokp);
+       // dd($dokumen);
         $negeri = Negeri::orderby("kod","asc")->select('id','nama')->get();
         
         if ($statuspermohonan >= '2')
@@ -469,7 +470,13 @@ class PermohonanController extends Controller
         ->where('nokp_pelajar', Auth::user()->nokp);
         $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->nokp);
         $dokumen = Dokumen::all()->where('nokp_pelajar', Auth::user()->nokp);
-        return view('pages.permohonan.permohonan-baru-kemaskini', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
+        $infoipt = Infoipt::all()->sortBy('namaipt');
+        $peringkat = PeringkatPengajian::all()->sortBy('kodperingkat');
+        $kursus = Kursus::all()->sortBy('nama_kursus');
+        $mod = Mod::all()->sortBy('kodmod');
+        $biaya = Sumberbiaya::all()->sortBy('kodbiaya');
+        $hubungan = Hubungan::all()->sortBy('kodhubungan');
+        return view('pages.permohonan.permohonan-baru-kemaskini', compact('pelajar','waris','akademik','mod','biaya','tuntutanpermohonan','dokumen'));
         
     }
 
@@ -534,7 +541,50 @@ class PermohonanController extends Controller
 
         ]);
 
+        $user = Status::create([
+            'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
+            'nokp_pelajar' => $request->nokp_pelajar,
+            'status' => '2',
+    
+        ]);
+        $user->save();
+
+        $dokumen = Dokumen::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
+        if ($dokumen === null) {
+
+            $data=new dokumen();
+        
+            $akaunBank=$request->akaunBank;
+            //$name1=$akaunBank->getClientOriginalName();  
+            $name1='salinanbank';  
+            $filenameakaunBank=$name1.'_'.$request->nokp_pelajar.'.'.$akaunBank->getClientOriginalExtension();
+            $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
             
+            $suratTawaran=$request->suratTawaran;
+            //$name2=$suratTawaran->getClientOriginalName();
+            $name2='salinantawaran'; 
+            $filenamesuratTawaran=$name2.'_'.$request->nokp_pelajar.'.'.$suratTawaran->getClientOriginalExtension();
+            $request->suratTawaran->move('assets/dokumen',$filenamesuratTawaran);
+
+            $invoisResit=$request->invoisResit;
+            //$name3=$invoisResit->getClientOriginalName();
+            $name3='salinanresit';  
+            $filenameinvoisResit=$name3.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
+            $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
+            
+            $data->id_permohonan='KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar;
+            $data->nokp_pelajar=$request->nokp_pelajar;
+            $data->akaunBank=$filenameakaunBank;
+            $data->suratTawaran=$filenamesuratTawaran;
+            $data->invoisResit=$filenameinvoisResit;
+            $data->nota_akaunBank=$request->nota_akaunBank;
+            $data->nota_suratTawaran=$request->nota_suratTawaran;
+            $data->nota_invoisResit=$request->nota_invoisResit;
+            
+
+            $data->save();
+        } else {
+
             if($request->hasFile('akaunBank')){
                 $akaunBank=$request->akaunBank;
                 $name1='salinanbank';  
@@ -571,8 +621,49 @@ class PermohonanController extends Controller
         
             }
 
+        
 
-        return redirect()->route('viewpermohonan')->with('message', 'Permohonan anda telah dikemaskini dan dihantar.');
+        }
+
+            
+            /*if($request->hasFile('akaunBank')){
+                $akaunBank=$request->akaunBank;
+                $name1='salinanbank';  
+                $filenameakaunBank=$name1.'_'.$request->nokp_pelajar.'.'.$akaunBank->getClientOriginalExtension();
+                $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
+                DB::table('dokumen')->where('nokp_pelajar' ,$request->nokp_pelajar)
+                ->update([
+                'akaunBank' => $filenameakaunBank,
+                ]);
+            }
+            
+            if($request->hasFile('suratTawaran')){
+                $suratTawaran=$request->suratTawaran;
+                $name2='salinantawaran'; 
+                $filenamesuratTawaran=$name2.'_'.$request->nokp_pelajar.'.'.$suratTawaran->getClientOriginalExtension();
+                $request->suratTawaran->move('assets/dokumen',$filenamesuratTawaran);
+                DB::table('dokumen')->where('nokp_pelajar' ,$request->nokp_pelajar)
+                ->update([
+                'suratTawaran' => $filenamesuratTawaran,
+                ]);
+
+
+            }
+
+            if($request->hasFile('invoisResit')){
+                $invoisResit=$request->invoisResit;
+                $name3='salinanresit';  
+                $filenameinvoisResit=$name3.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
+                $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
+                DB::table('dokumen')->where('nokp_pelajar' ,$request->nokp_pelajar)
+                ->update([
+                'invoisResit' => $filenameinvoisResit,
+                ]);
+        
+            }*/
+
+        return redirect()->route('dashboard')->with('message', 'Permohonan anda telah dikemaskini dan dihantar.');    
+        //return redirect()->route('viewpermohonan')->with('message', 'Permohonan anda telah dikemaskini dan dihantar.');
         
     }
  
