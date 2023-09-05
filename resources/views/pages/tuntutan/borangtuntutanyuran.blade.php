@@ -85,6 +85,14 @@
 																	</div>
 																</div>
 </div>
+<div class="row gx-10 mb-5">
+	<div class="col-lg-12">
+		<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Keterangan</label>
+		<div class="mb-5">
+			<input type="text" name="sesi" class="form-control form-control-solid" placeholder="Yuran Pengajian Semester 1 2023/2024" />
+</div>
+</div>
+</div>
 
 																<div class="row gx-10 mb-5">
 																<div class="col-lg-6">
@@ -118,7 +126,7 @@
 										</div>
 										<!--end::Content-->
 										<!--begin::Sidebar-->
-										<div class="flex-lg-auto min-w-lg-450px">
+										<div class="flex-lg-auto min-w-lg-650px">
 											<!--begin::Card-->
 											<div class="card" data-kt-sticky="true" data-kt-sticky-name="invoice" data-kt-sticky-offset="{default: false, lg: '200px'}" data-kt-sticky-width="{lg: '250px', lg: '300px'}" data-kt-sticky-left="auto" data-kt-sticky-top="150px" data-kt-sticky-animation="false" data-kt-sticky-zindex="95">
 												<!--begin::Card body-->
@@ -137,6 +145,7 @@
 													<th>Semester</th>
 													<th>Jenis Yuran</th>
 													<th>No resit</th>
+													<th>Keterangan</th>
 													<th>Salinan</th>
 												</tr>
 												</thead>
@@ -147,6 +156,7 @@
 														<td>{{ $tuntutan->semester}}</td>
 														<td>{{ $tuntutan->yuran}}</td>
 														<td>{{ $tuntutan->no_resit}}</td>
+														<td>Keterangan</td>
 														<td><a href="/assets/dokumen/tuntutan/{{$tuntutan->resit}}" target="_blank">Papar</a></td>
 														
 													</tr>

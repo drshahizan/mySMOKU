@@ -174,7 +174,7 @@
 														<div class="card-body pt-0 pb-5">
 															<!--begin::Table-->
 															<div class="table-responsive">
-	<table class="table table-rounded table-striped border gy-7 gs-7" style="background-color:#FFFFE0;">
+	<table class="table table-rounded table-striped border gy-7 gs-7" >
 		<thead>
 			<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
 				<th>ID Permohonan</th>
