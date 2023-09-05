@@ -270,7 +270,7 @@ $(document).ready(function(){
 																</div>
 																<!--end::Row-->
 															</div>
-															<div class="col-md-3 fv-row">
+															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">Tarikh Lahir</label>
 																<!--end::Label-->
@@ -284,7 +284,7 @@ $(document).ready(function(){
 																	</div>
 																</div>	
 																</div>
-																<div class="col-md-3 fv-row">
+																<div class="col-md-2 fv-row">
 																<label class=" fs-6 fw-semibold form-label mb-2">Umur</label>
 																<!--end::Label-->
 																<div class="row fv-row">
@@ -338,39 +338,13 @@ $(document).ready(function(){
 														<!--begin::Input group-->
 														<div class="fv-row mb-10">
 															<!--end::Label-->
-															<label class="form-label">Alamat Rumah</label>
+															<label class="form-label">Alamat Tetap</label>
 															<!--end::Label-->
 															<!--begin::Input-->
 															<textarea disabled="true" name="alamat1" class="form-control form-control-lg form-control-solid" rows="2">{{$pelajar->alamat1}}</textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">Poskod
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamat_poskod" placeholder="" value="{{$pelajar->alamat_poskod}}" />
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">Bandar
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamat_bandar" placeholder="" value="{{$pelajar->alamat_bandar}}"/>
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">Negeri
@@ -384,8 +358,114 @@ $(document).ready(function(){
 																</div>
 																<!--end::Input wrapper-->
 															</div>
+															
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">Bandar
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="alamat_bandar" placeholder="" value="{{$pelajar->alamat_bandar}}"/>
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">Poskod
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="alamat_poskod" placeholder="" value="{{$pelajar->alamat_poskod}}" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
 														</div>
 														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="fv-row mb-7">
+															<!--begin::Wrapper-->
+															<div class="d-flex flex-stack">
+																<!--begin::Label-->
+																<div class="me-5">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold">Use as a Alamat Surat Menyurat?</label>
+																	<!--end::Label-->
+																</div>
+																<!--end::Label-->
+																<!--begin::Switch-->
+																<label class="form-check form-switch form-check-custom form-check-solid">
+																	<!--begin::Input-->
+																	<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1" id="kt_modal_update_customer_billing"  @if($pelajar->alamat_surat1)  checked="checked" @else checked=""  @endif/>
+																	<!--end::Input-->
+																	<!--begin::Label-->
+																	<span class="form-check-label fw-semibold text-muted" for="kt_modal_update_customer_billing">Ya</span>
+																	<!--end::Label-->
+																</label>
+																<!--end::Switch-->
+															</div>
+															<!--begin::Wrapper-->
+														</div>
+														<!--end::Input group-->
+														<!--begin::Alamat Surat-->
+														<div class="fv-row mb-10">
+															<!--end::Label-->
+															<label class="form-label">Alamat Surat Menyurat</label>
+															<!--end::Label-->
+															<!--begin::Input-->
+															<textarea id="alamat_surat1" name="alamat_surat1" class="form-control form-control-lg form-control-solid" rows="2">@if($pelajar->alamat_surat1){{$pelajar->alamat_surat1}} @else  @endif </textarea>
+															<!--end::Input-->
+														</div>
+														<div class="row mb-10">
+															
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">Negeri
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" id="alamat_surat_negeri" name="alamat_surat_negeri" placeholder="" @if($pelajar->alamat_surat_negeri)  value="{{$pelajar->alamat_surat_negeri}}" @else value="" @endif />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">Bandar
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" id="alamat_surat_bandar" name="alamat_surat_bandar" placeholder="" @if($pelajar->alamat_surat_bandar)  value="{{$pelajar->alamat_surat_bandar}}" @else value="" @endif />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">Poskod
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" id="alamat_surat_poskod" name="alamat_surat_poskod" placeholder="" @if($pelajar->alamat_surat_poskod)  value="{{$pelajar->alamat_surat_poskod}}" @else value="" @endif/>
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+														</div>
+
+													<!--end::Input group-->
 														<div class="row mb-10">
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
@@ -591,19 +671,7 @@ $(document).ready(function(){
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
-																<label class="fs-6 fw-semibold form-label mb-2">Poskod
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" name="alamatW_poskod" placeholder="" value="{{$waris->alamat_poskod}}" readonly/>
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
+															
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
 																<label class="fs-6 fw-semibold form-label mb-2">Negeri
@@ -630,6 +698,19 @@ $(document).ready(function(){
 																	<select id='alamatW_bandar'  name='alamatW_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
 																		<option value="">{{ $waris->namabandar}}</option>
 																	</select>																	
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mb-2">Poskod
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" name="alamatW_poskod" placeholder="" value="{{$waris->alamat_poskod}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -704,248 +785,257 @@ $(document).ready(function(){
 
 												<!--begin::Step 3-->
 												<div data-kt-stepper-element="content">
-														
-													<!--begin::Wrapper-->
-													<div class="w-100">
-														<!--begin::Heading-->
-														<div class="pb-10 pb-lg-15">
-															<!--begin::Title-->
-															<h2 class="fw-bold text-dark">Maklumat Akademik</h2>
-															<!--end::Title-->
-															<!--begin::Notice-->
-															<div class="text-muted fw-semibold fs-6">Profil Akademik</div>
-															<!--end::Notice-->
-														</div>
-														<!--end::Heading-->
-														@foreach ($akademik as $akademik)
-														<!--begin::Input group-->
-
-														<div class="d-flex flex-column mb-7 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">No Pendaftaran Pelajar</span>
-																
-															</label>
-															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="" name="no_pendaftaranpelajar" value="{{$akademik->no_pendaftaranpelajar}}" readonly/>
-														</div>
-														<div class="d-flex flex-column mb-7 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">Nama Kursus</span>
-																
-															</label>
-															<!--end::Label-->
-															<select disabled="true" name="nama_kursus" class="form-select form-select-solid" data-hide-search="true" data-placeholder="Pilih">
-																<option value="{{ $akademik->nama_kursus}}">{{ $akademik->nama_kursus}}</option>
-															</select>
-														</div>
-														<!--begin::Col-->
-														<div class="d-flex flex-column mb-7 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">Nama Pusat Pengajian</span>
-																
-															</label>
-															<!--end::Label-->
-															<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																<option value="{{ $akademik->idipt}}">{{ $akademik->namaipt}}</option>
-															</select>
-														</div>
-															<!--end::Col-->
-														<!--end::Input group-->
-														
-														<!--begin::Input group-->
-														<div class="row mb-10">
-															<!--begin::Col-->
-															<div class="col-md-6 fv-row">
-																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
-																<!--end::Label-->
-																<!--begin::Row-->
-																<div class="row fv-row">
-																	<!--begin::Input wrapper-->
-																	<select name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																		<option>{{$akademik->peringkat}}</option>
-																	</select>
-																	
-																	
-																	<!--end::Input wrapper-->
-																</div>
-																<!--end::Row-->
+													@csrf		
+														<!--begin::Wrapper-->
+														<div class="w-100">
+															<!--begin::Heading-->
+															<div class="pb-10 pb-lg-15">
+																<!--begin::Title-->
+																<h2 class="fw-bold text-dark">Maklumat Akademik</h2>
+																<!--end::Title-->
+																<!--begin::Notice-->
+																<div class="text-muted fw-semibold fs-6">Profil Akademik</div>
+																<!--end::Notice-->
 															</div>
-															<!--end::Col-->
-															<!--begin::Col-->
-															<div class="col-md-6 fv-row">
+															<!--end::Heading-->
+															@foreach ($akademik as $akademik)
+															<!--begin::Input group-->
+															<div class="d-flex flex-column mb-7 fv-row">
 																<!--begin::Label-->
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">Sesi Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
+																	<span class="">Nama Pusat Pengajian</span>
+																	
 																</label>
 																<!--end::Label-->
-																	<!--begin::Input wrapper-->
-																	<input type="text" class="form-control form-control-solid" placeholder="" id="sesi" name="sesi" value="{{$akademik->sesi}}" />
-																	<!--end::Input wrapper-->
+																<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																	<option value="{{ $akademik->idipt}}">{{ $akademik->namaipt}}</option>
+																</select>
 															</div>
-															<!--end::Col-->
+															<div class="d-flex flex-column mb-7 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																	<span class="">Nama Kursus</span>
+																	
+																</label>
+																<!--end::Label-->
+																<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																	<option value="{{ $akademik->nama_kursus}}">{{ $akademik->nama_kursus}}</option>
+																</select>
+															</div>
 															
-														</div>
-														<!--end::Input group-->
-														
-
-
-														<!--begin::Input group-->
-														<div class="row mb-10">
-															<!--begin::Col-->
-															<div class="col-md-6 fv-row">
-																<!--begin::Label-->
-																<label class="fs-6 fw-semibold form-label mb-2">Tarikh Mula Pengajian</label>
-																<!--end::Label-->
-																	<!--begin::Input wrapper-->
-																	<input type="date" class="form-control form-control-solid" placeholder="" name="tkh_mula" value="{{ $akademik->tkh_mula}}" readonly/>
-																	<!--end::Input wrapper-->
-															</div>
-															<!--end::Col-->
-															<!--begin::Col-->
-															<div class="col-md-6 fv-row">
-																<!--begin::Label-->
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tarikh Tamat Pengajian</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																	<input type="date" class="form-control form-control-solid" placeholder="" name="tkh_tamat" value="{{ $akademik->tkh_tamat}}" readonly/>
-																<!--end::Input wrapper-->
-															</div>
-															<!--end::Col-->
-														</div>
-														<!--end::Input group-->
-
-														<!--begin::Input group-->
-														<div class="row mb-10">
-															<!--begin::Col-->
-															<div class="col-md-6 fv-row">
-																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">Semester Semasa</label>
-																<!--end::Label-->
-																<!--begin::Row-->
-																<div class="row fv-row">
-																	<!--begin::Input wrapper-->
-																	
-																		<select name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																			<option>{{ $akademik->sem_semasa}}</option>
-																			
-																			
+															
+															
+															<!--end::Input group-->
+	
+															<!--begin::Input group-->
+															<div class="row mb-10">
+																<!--begin::Col-->
+																<div class="col-md-6 fv-row">
+																	<!--begin::Label-->
+																	<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
+																	<!--end::Label-->
+																	<!--begin::Row-->
+																	<div class="row fv-row">
+																		<!--begin::Input wrapper-->
+																		<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																			<option value="{{ $akademik->kodperingkat}}">{{ $akademik->peringkat}}</option>
 																		</select>
-																	<!--end::Input wrapper-->
+																		<!--end::Input wrapper-->
+																	</div>
+																	<!--end::Row-->
 																</div>
-																<!--end::Row-->
-															</div>
-															<!--end::Col-->
-															<!--begin::Col-->
-															<div class="col-md-6 fv-row">
-																<!--begin::Label-->
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																	<input type="text" class="form-control form-control-solid" placeholder="" name="tempoh_pengajian" value="{{ $akademik->tempoh_pengajian}}" readonly/>
-																	
-																	<!--end::Input wrapper-->
-															</div>
-															<!--end::Col-->
-														</div>
-														<!--end::Input group-->
-
-														<!--begin::Input group-->
-														<div class="row mb-10">
-															<!--begin::Col-->
-															<div class="col-md-6 fv-row">
-																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">Bil Bulan Persemester</label>
-																<!--end::Label-->
-																<!--begin::Row-->
-																<div class="row fv-row">
+																<!--end::Col-->
+																<!--begin::Col-->
+																<div class="col-md-6 fv-row">
+																	<!--begin::Label-->
+																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
+																	<!--end::Label-->
 																	<!--begin::Input wrapper-->
-																		<select name="bil_bulanpersem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																			<option>{{ $akademik->bil_bulanpersem}}</option>
-																
-																		</select>
-																	<!--end::Input wrapper-->
+																			<select name="mod" id="mod"  class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																				<option value="{{$akademik->kodmod}}">{{$akademik->mod}}</option>
+																			</select>
+																		<!--end::Input wrapper-->
 																</div>
-																<!--end::Row-->
-															</div>
-															<!--end::Col-->
-															<!--begin::Col-->
-															<div class="col-md-6 fv-row">
-																<!--begin::Label-->
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																		<select name="mod" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																			<option>{{ $akademik->mod}}</option>
-																			
-																		</select>
-																	<!--end::Input wrapper-->
-															</div>
-															<!--end::Col-->
-														</div>
-														<!--end::Input group-->
-
-														<div class="d-flex flex-column mb-7 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">CGPA Terkini</span>
 																
-															</label>
-															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="" name="cgpa" value="{{ $akademik->cgpa}}" readonly/>
-														</div>
-
-														<!--begin::Input group-->
-														<div class="row mb-10">
-															<!--begin::Col-->
-															<div class="col-md-6 fv-row">
-																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label> <a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
-																<!--end::Label-->
-																<!--begin::Row-->
-																<div class="row fv-row">
+																<!--end::Col-->
+																
+															</div>
+															<!--end::Input group-->
+															
+															<div class="row mb-10">
+																<div class="col-md-6 fv-row">
+																	<!--begin::Label-->
+																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian</label>
+																	<!--end::Label-->
 																	<!--begin::Input wrapper-->
-																		<select name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-																			
-																			<option>{{ $akademik->biaya}}</option>
-																			
-																		</select>
+																		<input type="text" class="form-control form-control-solid" placeholder="" id="tempoh_pengajian" name="tempoh_pengajian" @if($akademik->tempoh_pengajian)  value="{{$akademik->tempoh_pengajian}}" @else value="" @endif required/>
 																		
+																		<!--end::Input wrapper-->
+																</div>
+																<!--end::Col-->
+																<div class="col-md-6 fv-row">
+																	<!--begin::Label-->
+																	<label class=" fs-6 fw-semibold form-label mb-2">Bil Bulan Persemester</label>
+																	<!--end::Label-->
+																	<!--begin::Row-->
+																	<div class="row fv-row">
+																		<!--begin::Input wrapper-->
+																			<select id="bil_bulanpersem" name="bil_bulanpersem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																				@if ($akademik->bil_bulanpersem)
+																				<option value="{{$akademik->bil_bulanpersem}}">{{$akademik->bil_bulanpersem}}</option>
+																				@endif
+																				<option value="4">4</option>
+																				<option value="6">6</option>
+																			</select>
+																		<!--end::Input wrapper-->
+																	</div>
+																	<!--end::Row-->
+																</div>
+	</DIV>
+	
+															<!--begin::Input group-->
+															<div class="row mb-10">
+																<!--begin::Col-->
+																<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																	<span class="">No Pendaftaran Pelajar</span>
+																	
+																</label>
+																<!--end::Label-->
+																<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaranpelajar" name="no_pendaftaranpelajar" @if($akademik->no_pendaftaranpelajar)  value="{{$akademik->no_pendaftaranpelajar}}" @else value="" @endif />
+															</div>
+																<div class="col-md-4 fv-row">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold form-label mb-2">Tarikh Mula Pengajian</label>
+																	<!--end::Label-->
+																		<!--begin::Input wrapper-->
+																		<input type="date" class="form-control form-control-solid" placeholder="" id="tkh_mula" name="tkh_mula" @if($akademik->tkh_mula)  value="{{$akademik->tkh_mula}}" @else value="" @endif />
+																		<!--end::Input wrapper-->
+																</div>
+																<!--end::Col-->
+																<!--begin::Col-->
+																<div class="col-md-4 fv-row">
+																	<!--begin::Label-->
+																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tarikh Tamat Pengajian</label>
+																	<!--end::Label-->
+																	<!--begin::Input wrapper-->
+																		<input type="date" class="form-control form-control-solid" placeholder="" id="tkh_tamat" name="tkh_tamat" @if($akademik->tkh_tamat)  value="{{$akademik->tkh_tamat}}" @else value="" @endif />
 																	<!--end::Input wrapper-->
 																</div>
-																<!--end::Row-->
+																<!--end::Col-->
 															</div>
-															<!--end::Col-->
-															<!--begin::Col-->
-															<div class="col-md-6 fv-row">
+															<!--end::Input group-->
+	
+															<!--begin::Input group-->
+															<div class="row mb-10">
+																<!--begin::Col-->
+																<div class="col-md-4 fv-row">
+																	<!--begin::Label-->
+																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																	<span class="">Sesi Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
+																	</label>
+																	<!--end::Label-->
+																		<!--begin::Input wrapper-->
+																		<input type="text" class="form-control form-control-solid" placeholder="" id="sesi" name="sesi" @if($akademik->sesi)  value="{{$akademik->sesi}}" @else value="" @endif />
+																		<!--end::Input wrapper-->
+																</div>
+																<div class="col-md-4 fv-row">
+																	<!--begin::Label-->
+																	<label class=" fs-6 fw-semibold form-label mb-2">Semester Semasa</label>
+																	<!--end::Label-->
+																	<!--begin::Row-->
+																	<div class="row fv-row">
+																		<!--begin::Input wrapper-->
+																		
+																			<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																				@if ($akademik->sem_semasa)
+																				<option value="{{$akademik->sem_semasa}}">{{$akademik->sem_semasa}}</option>
+																				@endif
+																				<option value="1">1</option>
+																				<option value="2">2</option>
+																				<option value="3">3</option>
+																				<option value="4">4</option>
+																				<option value="5">5</option>
+																				<option value="6">6</option>
+																				<option value="7">7</option>
+																				<option value="8">8</option>
+																				<option value="9">9</option>
+																				<option value="10">10</option>
+																				<option value="11">11</option>
+																				<option value="12">12</option>
+																				
+																			</select>
+																		<!--end::Input wrapper-->
+																	</div>
+																	<!--end::Row-->
+																</div>
+																<div class="col-md-4 fv-row">
 																<!--begin::Label-->
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Lain-lain</label>
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																	<span class="">CGPA Terkini</span>
+																	
+																</label>
 																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<input type="text" class="form-control form-control-solid" placeholder="" name="sumber_biayalain" value="" />
-																<!--end::Input wrapper-->
+																<input type="text" class="form-control form-control-solid" placeholder="" id="cgpa" name="cgpa" @if($akademik->cgpa)  value="{{$akademik->cgpa}}" @else value="" @endif />
 															</div>
-															<!--end::Col-->
-														</div>
-														<!--end::Input group-->
-
-														<div class="d-flex flex-column mb-7 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
+																<!--end::Col-->
+																<!--begin::Col-->
 																
-															</label>															
-															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="JPA" name="nama_penaja" value="{{ $akademik->nama_penaja}}"  readonly/>
+																
+															</div>
+															<!--end::Input group-->
+	
+															
+	
+															
+	
+															<!--begin::Input group-->
+															<div class="row mb-10">
+																<!--begin::Col-->
+																<div class="col-md-6 fv-row">
+																	<!--begin::Label-->
+																	<label class=" fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label> <a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
+																	<!--end::Label-->
+																	<!--begin::Row-->
+																	<div class="row fv-row">
+																		<!--begin::Input wrapper-->
+																			<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																				<option value="{{$akademik->sumber_biaya}}">{{$akademik->biaya}}</option>
+																				
+																			</select>
+																		<!--end::Input wrapper-->
+																	</div>
+																	<!--end::Row-->
+																</div>
+																<!--end::Col-->
+																<!--begin::Col-->
+																<div class="col-md-6 fv-row">
+																	<!--begin::Label-->
+																	<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Lain-lain</label>
+																	<!--end::Label-->
+																	<!--begin::Input wrapper-->
+																	<input type="text" class="form-control form-control-solid" placeholder="" id="sumber_biayalain" name="sumber_biayalain" value="" />
+																	<!--end::Input wrapper-->
+																</div>
+																<!--end::Col-->
+															</div>
+															<!--end::Input group-->
+	
+															<div class="d-flex flex-column mb-7 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																	<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
+																	
+																</label>															
+																<!--end::Label-->
+																<input type="text" class="form-control form-control-solid" placeholder="JPA" id="nama_penaja" name="nama_penaja" @if($akademik->nama_penaja)  value="{{$akademik->nama_penaja}}" @else value="" @endif />
+															</div>
+														@endforeach	
 														</div>
-														@endforeach
+														<!--end::Wrapper-->
 													</div>
-													<!--end::Wrapper-->
-												</div>
-												<!--end::Step 3-->
+													<!--end::Step 3-->
 
 												<!--begin::Step 4-->
 												<div data-kt-stepper-element="content">
