@@ -9,6 +9,7 @@ use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\SaringanController;
 use App\Http\Controllers\SekretariatController;
 use App\Http\Controllers\PenyelarasController;
+use App\Http\Controllers\ProfilController;
 
 use App\Http\Controllers\TuntutanController;
 use App\Http\Controllers\PentadbirController;
@@ -34,7 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::post('/dashboard', [DashboardController::class, 'store'])->name('dashboard.store');
+    //Route::post('/dashboard', [DashboardController::class, 'store'])->name('dashboard.store');
     
 
     Route::name('user-management.')->group(function () {
@@ -49,7 +50,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post'); 
         //Route::resource('/user-management/permissions', PermissionManagementController::class);
     });*/
-
+    Route::get('profildiri', [ProfilController::class, 'profildiri'])->name('profil-diri');
+    Route::post('profildiri', [ProfilController::class, 'store'])->name('profildiri.store');
     /*Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post'); */
 

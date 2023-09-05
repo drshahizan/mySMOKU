@@ -233,8 +233,9 @@
 														<!--begin::Card body-->
 														<div class="card-body pt-0 pb-5">
 															<!--begin::Form-->
+															{{-- 147 line start store --}}
 															<!-- <form class="form" action="#" id="kt_ecommerce_customer_profile"> -->
-															<form action="{{route('dashboard.store')}}" method="POST" enctype="multipart/form-data">
+															{{-- <form action="{{route('dashboard.store')}}" method="POST" enctype="multipart/form-data"> --}}
 																<!--begin::Input group-->
 																@csrf
 																<div class="mb-7">
@@ -268,8 +269,7 @@
 																					<span class="path2"></span>
 																				</i>
 																				<!--begin::Inputs-->
-																				<!-- <form action="{{route('dashboard.store')}}" method="POST" enctype="multipart/form-data"> -->
-                        															
+																				
 																				<input type="file" name="profile_photo_path" accept=".png, .jpg, .jpeg" />
 																				<input type="hidden" name="avatar_remove" />
 																				<!-- </form> -->
