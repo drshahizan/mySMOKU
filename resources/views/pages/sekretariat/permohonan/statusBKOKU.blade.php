@@ -49,10 +49,10 @@
                             </div>
 
                             {{-- Filter section --}}
-                            <form action="" method="GET">
+                            <form action="{{url('permohonan/BKOKU')}}" method="GET">
                                 <div class="row" style="margin-left:15px;">
                                     <div class="col-md-3">
-                                        <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
+                                        <input type="date" name="date" value="{{Request::get('date') ?? ' '}}" class="form-control"/>
                                     </div>
     
                                     <div class="col-md-3">
@@ -66,6 +66,10 @@
                                             <option value="6" {{Request::get('status') == '6' ? 'selected':'' }} >Layak</option>
                                             <option value="7" {{Request::get('status') == '7' ? 'selected':'' }} >Tidak Layak</option>
                                         </select>
+                                    </div>
+
+                                    <div class="col-md-4 right">
+                                        <button type="submit" class="btn btn-primary" style="width: 10%; padding-left:10px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
                                     </div>
                                 </div>
                             </form>
