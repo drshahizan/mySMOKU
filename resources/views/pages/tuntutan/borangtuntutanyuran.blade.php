@@ -126,7 +126,7 @@
 										</div>
 										<!--end::Content-->
 										<!--begin::Sidebar-->
-										<div class="flex-lg-auto min-w-lg-650px">
+										<div class="flex-lg-auto min-w-lg-500px">
 											<!--begin::Card-->
 											<div class="card" data-kt-sticky="true" data-kt-sticky-name="invoice" data-kt-sticky-offset="{default: false, lg: '200px'}" data-kt-sticky-width="{lg: '250px', lg: '300px'}" data-kt-sticky-left="auto" data-kt-sticky-top="150px" data-kt-sticky-animation="false" data-kt-sticky-zindex="95">
 												<!--begin::Card body-->
@@ -142,7 +142,7 @@
 													<thead>
 												<tr class="fw-semibold fs-6 text-gray-700 border-bottom border-gray-200">
 													<th>Id Tuntutan</th>
-													<th>Semester</th>
+													{{-- <th>Semester</th> --}}
 													<th>Jenis Yuran</th>
 													<th>No resit</th>
 													<th>Keterangan</th>
@@ -153,7 +153,7 @@
 													@foreach ($tuntutan as $tuntutan)
 													<tr>
 														<td>{{ $tuntutan->id_tuntutan}}</td>
-														<td>{{ $tuntutan->semester}}</td>
+														{{-- <td>{{ $tuntutan->semester}}</td> --}}
 														<td>{{ $tuntutan->yuran}}</td>
 														<td>{{ $tuntutan->no_resit}}</td>
 														<td>Keterangan</td>
