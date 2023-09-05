@@ -1135,7 +1135,7 @@ $(document).ready(function(){
 																	
 																	<th class="w-250px">Nama</th>
 																	<th class="w-250px">Dokumen</th>
-																	<th class="w-200px">Catatan</th>
+																	<th class="w-200px">Perihal</th>
 																</tr>
 															</thead>
 															<tbody class="fw-semibold text-gray-600">

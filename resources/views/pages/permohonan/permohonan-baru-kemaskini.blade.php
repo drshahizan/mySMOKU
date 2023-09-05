@@ -1123,6 +1123,7 @@ $(document).ready(function(){
 														
 														<!--begin::Table-->
 														<table id="kt_file_manager_list" data-kt-filemanager-table="files" class="table align-middle table-row-dashed fs-6 gy-5">
+															@if(!$dokumen->isEmpty())
 															<thead>
 																<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 																	
@@ -1133,6 +1134,7 @@ $(document).ready(function(){
 																	<th class="w-125px"></th>
 																</tr>
 															</thead>
+															
 															<tbody class="fw-semibold text-gray-600">
 															@foreach($dokumen as $dokumen)
 																<tr>
@@ -1159,8 +1161,37 @@ $(document).ready(function(){
 																	<td><a href="{{url('/download',$dokumen->invoisResit)}}">Muat Turun</a></td>
 																	@endif
 																</tr>
-															@endforeach	
-															</tbody>
+															@endforeach
+														</tbody>
+															@else
+															<thead>
+																<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+																	
+																	
+																	<th class="w-250px">Nama</th>
+																	<th class="w-250px">Dokumen</th>
+																	<th class="w-200px">Perihal</th>
+																</tr>
+															</thead>
+															<tbody class="fw-semibold text-gray-600">
+															<tr>
+																<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
+																<td class="fv-row"><input type="file" id="akaunBank" name="akaunBank"/></td>
+																<td><input type="text" class="form-control form-control-solid" id="nota_akaunBank" name="nota_akaunBank"/></td>
+															</tr>
+															<tr>
+																<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
+																<td class="fv-row"><input type="file" id="suratTawaran" name="suratTawaran"/></td>
+																<td><input type="text" class="form-control form-control-solid" id="nota_suratTawaran" name="nota_suratTawaran"/></td>
+															</tr>
+															<tr>
+																<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/resit.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
+																<td class="fv-row"><input type="file" id="invoisResit" name="invoisResit"/></td>
+																<td><input type="text" class="form-control form-control-solid" id="nota_invoisResit" name="nota_invoisResit"/></td>
+															</tr>
+														</tbody>
+															@endif	
+															
 														</table>
 														<!--end::Table-->
 		
