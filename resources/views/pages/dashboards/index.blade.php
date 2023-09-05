@@ -184,7 +184,7 @@
 				<th>ID Permohonan</th>
 				<th>Status</th>
 				<th>Tarikh Kemaskini</th>
-				<th>Tindakan</th>
+				{{--<th>Tindakan</th>--}}
 				
 			</tr>
 		</thead>
@@ -194,7 +194,7 @@
 			<td>{{$permohonan->id_permohonan}}</td>
 			<td>{{$permohonan->status}} </td>
 			<td>{{$permohonan->created_at->format('d/m/Y')}}</td>
-			<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>
+			{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
 			
 			
 		</tr>
