@@ -137,7 +137,7 @@
 															
 															<div class="d-flex flex-center mt-15">
 																<button type="submit"  class="btn btn-primary">
-																	Hantar
+																	Masukkan
 																</button>&nbsp;&nbsp;&nbsp;
 														
 															<!--<a href="#" class="btn btn-danger">Batal</a>-->
@@ -194,8 +194,15 @@
 														
 													</div>
 													
-													
+													{{-- Penambahan 197 right justify button hantar  --}}
 													<!--end::Actions-->
+													<div class="d-flex justify-content-end">
+														<button type="submit"  class="btn btn-primary">
+															Hantar
+														</button>&nbsp;&nbsp;&nbsp;
+												
+													<!--<a href="#" class="btn btn-danger">Batal</a>-->
+													</div>
 												</div>
 												<!--end::Card body-->
 											</div>
