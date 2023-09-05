@@ -206,6 +206,10 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.tuntutan.saring',compact('permohonan','status_kod','status'));
     }
 
+    public function keputusanPeperiksaan(){
+        return view('pages.sekretariat.tuntutan.keputusanPeperiksaan');
+    }
+
     public function maklumatTuntutan2($id){
         $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
