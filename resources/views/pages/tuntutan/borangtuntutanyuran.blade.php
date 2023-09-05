@@ -181,8 +181,8 @@
 													<th>Jenis Yuran</th>
 													<th>No resit</th>
 													<th>Perihal</th>
-													<th>Salinan</th>
 													<th>Amaun</th>
+													<th>Salinan</th>
 												</tr>
 												</thead>
 												<tbody class="fw-semibold text-gray-600">
@@ -193,6 +193,7 @@
 														<td>{{ $tuntutan->yuran}}</td>
 														<td>{{ $tuntutan->no_resit}}</td>
 														<td>{{ $tuntutan->nota_resit}}</td>
+														<td>amaun</td>
 														<td><a href="/assets/dokumen/tuntutan/{{$tuntutan->resit}}" target="_blank">Papar</a></td>
 														
 													</tr>
