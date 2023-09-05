@@ -17,17 +17,38 @@ var KTModalCustomersAdd = function () {
 			{
 				fields: {
                     
+                    'nama': {
+						validators: {
+							notEmpty: {
+								message: 'Nama diperlukan'
+							}
+						}
+					},
                     'email': {
 						validators: {
 							notEmpty: {
-								message: 'Customer email is required'
+								message: 'Emel diperlukan'
 							}
 						}
 					},
 					'nokp': {
 						validators: {
 							notEmpty: {
-								message: 'First name is required'
+								message: 'No. Kad Pengenalan diperlukan'
+							}
+						}
+					},
+					'tahap': {
+						validators: {
+							notEmpty: {
+								message: 'Peranan diperlukan'
+							}
+						}
+					},
+					'password': {
+						validators: {
+							notEmpty: {
+								message: 'Kata laluan diperlukan'
 							}
 						}
 					},
@@ -124,12 +145,12 @@ var KTModalCustomersAdd = function () {
             e.preventDefault();
 
             Swal.fire({
-                text: "Are you sure you would like to cancel?",
+                text: "Pasti untuk batal?",
                 icon: "warning",
                 showCancelButton: true,
                 buttonsStyling: false,
-                confirmButtonText: "Yes, cancel it!",
-                cancelButtonText: "No, return",
+                confirmButtonText: "Ya",
+                cancelButtonText: "Tidak",
                 customClass: {
                     confirmButton: "btn btn-primary",
                     cancelButton: "btn btn-active-light"
@@ -140,10 +161,10 @@ var KTModalCustomersAdd = function () {
                     modal.hide(); // Hide modal				
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
-                        text: "Your form has not been cancelled!.",
+                        text: "Belum dibatalkan.",
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "Ok",
                         customClass: {
                             confirmButton: "btn btn-primary",
                         }

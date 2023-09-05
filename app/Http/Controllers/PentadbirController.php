@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Tahap;
+use App\Models\Infoipt;
 
 class PentadbirController extends Controller
 {
@@ -16,7 +17,8 @@ class PentadbirController extends Controller
         ->get(['users.*', 'roles.name']);
 
         $tahap = Tahap::all()->sortBy('id');
-        return view('pages.pentadbir.daftarpengguna', compact('user','tahap'));
+        $infoipt = Infoipt::all()->where('jenis_ipt','IPTA')->sortBy('namaipt');
+        return view('pages.pentadbir.daftarpengguna', compact('user','tahap','infoipt'));
     }
 
     public function store(Request $request)

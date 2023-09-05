@@ -64,31 +64,46 @@
                                     
                                     <tbody>
                                         @foreach ($keseluruhan as $item)
-                                        @php
-                                            $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
-                                            $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
-                                            $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                            $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
-                                        @endphp
+                                            @php
+                                                $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
+                                                $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
+                                                $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                                $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+
+                                                // nama pemohon
+                                                $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
+                                                $conjunctions = ['bin', 'binti'];
+                                                $words = explode(' ', $text);
+                                                $result = [];
+                                                foreach ($words as $word) {
+                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                        $result[] = Str::lower($word);
+                                                    } else {
+                                                        $result[] = $word;
+                                                    }
+                                                }
+                                                $pemohon = implode(' ', $result);
+                                            @endphp
+
                                             @if($item['program']=="BKOKU")
                                                 <tr>
                                                     <td>{{$id_permohonan}}</td>
-                                                    <td>{{$nama}}</td>
+                                                    <td>{{$pemohon}}</td>
                                                     <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                     @if($item['status'] == "1")
-                                                        <td class="text-center"><button type="button" class="btn btn-primary btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                        <td class="text-center"><button type="button" class="btn btn-info text-white">{{ucwords(strtolower($status))}}</button></td>
                                                     @elseif($item['status'] == "2")
-                                                        <td class="text-center"><button type="button" class="btn btn-info btn-sm">Baru</button></td>
+                                                        <td class="text-center"><button type="button" class="btn btn-primary text-white">Baharu</button></td>
                                                     @elseif($item['status'] == "3")
-                                                        <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:coral; color:white;">{{ucwords(strtolower($status))}}</button></td>
+                                                        <td class="text-center"><button type="button" class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
                                                     @elseif($item['status'] == "4")
-                                                        <td class="text-center"><button type="button" class="btn btn-sm" style="background-color:cornflowerblue; color:white;">{{ucwords(strtolower($status))}}</button></td>
+                                                        <td class="text-center"><button type="button" class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
                                                     @elseif($item['status'] == "5")
-                                                        <td class="text-center"><button type="button" class="btn btn-warning btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                        <td class="text-center"><button type="button" class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                     @elseif($item['status'] == "6")
-                                                        <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                        <td class="text-center"><button type="button" class="btn btn-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                     @elseif($item['status'] == "7")
-                                                        <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                        <td class="text-center"><button type="button" class="btn btn-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                     @endif
                                                 </tr>
                                             @endif

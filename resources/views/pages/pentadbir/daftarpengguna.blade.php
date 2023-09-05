@@ -45,108 +45,9 @@
 					<div class="card-toolbar">
 						<!--begin::Toolbar-->
 						<div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-							<!--begin::Filter-->
-							<button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-							<i class="ki-duotone ki-filter fs-2">
-								<span class="path1"></span>
-								<span class="path2"></span>
-							</i>Filter</button>
-							<!--begin::Menu 1-->
-							<div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true" id="kt-toolbar-filter">
-								<!--begin::Header-->
-								<div class="px-7 py-5">
-									<div class="fs-4 text-dark fw-bold">Filter Options</div>
-								</div>
-								<!--end::Header-->
-								<!--begin::Separator-->
-								<div class="separator border-gray-200"></div>
-								<!--end::Separator-->
-								<!--begin::Content-->
-								<div class="px-7 py-5">
-									<!--begin::Input group-->
-									<div class="mb-10">
-										<!--begin::Label-->
-										<label class="form-label fs-5 fw-semibold mb-3">Month:</label>
-										<!--end::Label-->
-										<!--begin::Input-->
-										<select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-customer-table-filter="month" data-dropdown-parent="#kt-toolbar-filter">
-											<option></option>
-											<option value="aug">August</option>
-											<option value="sep">September</option>
-											<option value="oct">October</option>
-											<option value="nov">November</option>
-											<option value="dec">December</option>
-										</select>
-										<!--end::Input-->
-									</div>
-									<!--end::Input group-->
-									<!--begin::Input group-->
-									<div class="mb-10">
-										<!--begin::Label-->
-										<label class="form-label fs-5 fw-semibold mb-3">Payment Type:</label>
-										<!--end::Label-->
-										<!--begin::Options-->
-										<div class="d-flex flex-column flex-wrap fw-semibold" data-kt-customer-table-filter="tahap">
-											<!--begin::Option-->
-											<label class="form-check form-check-sm form-check-custom form-check-solid mb-3 me-5">
-												<input class="form-check-input" type="radio" name="tahap" value="all" checked="checked" />
-												<span class="form-check-label text-gray-600">All</span>
-											</label>
-											<!--end::Option-->
-											<!--begin::Option-->
-											<label class="form-check form-check-sm form-check-custom form-check-solid mb-3 me-5">
-												<input class="form-check-input" type="radio" name="tahap" value="pelajar" />
-												<span class="form-check-label text-gray-600">Pelajar IPTS</span>
-											</label>
-											<!--end::Option-->
-											<!--begin::Option-->
-											<label class="form-check form-check-sm form-check-custom form-check-solid mb-3 me-5">
-												<input class="form-check-input" type="radio" name="tahap" value="penyelaras" />
-												<span class="form-check-label text-gray-600">Penyelaras</span>
-											</label>
-											<!--end::Option-->
-											<!--begin::Option-->
-											<label class="form-check form-check-sm form-check-custom form-check-solid mb-3">
-												<input class="form-check-input" type="radio" name="tahap" value="sekretariat" />
-												<span class="form-check-label text-gray-600">Sekretariat KPT</span>
-											</label>
-											<!--end::Option-->
-											<!--begin::Option-->
-											<label class="form-check form-check-sm form-check-custom form-check-solid mb-3">
-												<input class="form-check-input" type="radio" name="tahap" value="pegawai" />
-												<span class="form-check-label text-gray-600">Pegawai Atasan KPT</span>
-											</label>
-											<!--end::Option-->
-											<!--begin::Option-->
-											<label class="form-check form-check-sm form-check-custom form-check-solid">
-												<input class="form-check-input" type="radio" name="tahap" value="pentadbir" />
-												<span class="form-check-label text-gray-600">Pentadbir Sistem</span>
-											</label>
-											<!--end::Option-->
-										</div>
-										<!--end::Options-->
-									</div>
-									<!--end::Input group-->
-									<!--begin::Actions-->
-									<div class="d-flex justify-content-end">
-										<button type="reset" class="btn btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true" data-kt-customer-table-filter="reset">Reset</button>
-										<button type="submit" class="btn btn-primary" data-kt-menu-dismiss="true" data-kt-customer-table-filter="filter">Apply</button>
-									</div>
-									<!--end::Actions-->
-								</div>
-								<!--end::Content-->
-							</div>
-							<!--end::Menu 1-->
-							<!--end::Filter-->
-							<!--begin::Export-->
-							<button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_customers_export_modal">
-							<i class="ki-duotone ki-exit-up fs-2">
-								<span class="path1"></span>
-								<span class="path2"></span>
-							</i>Export</button>
-							<!--end::Export-->
+							
 							<!--begin::Add customer-->
-							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">Add Customer</button>
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">Tambah Pengguna</button>
 							<!--end::Add customer-->
 						</div>
 						<!--end::Toolbar-->
@@ -174,9 +75,8 @@
 								</th>
 								<th class="min-w-125px">No. Kad Pengenalan</th>
 								<th class="min-w-125px">Emel</th>
-								<th class="min-w-125px">Tahap</th>
-								<th class="min-w-125px">Created Date</th>
-								<th class="text-end min-w-70px">Actions</th>
+								<th class="min-w-125px">Peranan</th>
+								<th class="min-w-125px">Tarikh Daftar</th>
 							</tr>
 						</thead>
 						<tbody class="fw-semibold text-gray-600">
@@ -195,25 +95,8 @@
 								</td>
 								<td data-filter="all">{{ $user->name}}</td>
 								
-								<td>{{$user->created_at->format('d/m/Y h:i:sa')}}</td>
-								<td class="text-end">
-									<a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-									<i class="ki-duotone ki-down fs-5 ms-1"></i></a>
-									<!--begin::Menu-->
-									<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-										<!--begin::Menu item-->
-										<div class="menu-item px-3">
-											<a href="../../demo1/dist/apps/customers/view.html" class="menu-link px-3">View</a>
-										</div>
-										<!--end::Menu item-->
-										<!--begin::Menu item-->
-										<div class="menu-item px-3">
-											<a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-										</div>
-										<!--end::Menu item-->
-									</div>
-									<!--end::Menu-->
-								</td>
+								<td class="text-end">{{$user->created_at->format('d/m/Y h:i:sa')}}</td>
+								
 							</tr>
 							@endforeach
 						</tbody>
@@ -254,28 +137,19 @@
 								<!--begin::Scroll-->
 								<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
 									<!--begin::Input group-->
-									{{--<div class="fv-row mb-7">
+									<div class="fv-row mb-7">
 										<!--begin::Label-->
-										<label class="required fs-6 fw-semibold mb-2">Nama</label>
+										<label class="fs-6 fw-semibold mb-2">Nama</label>
 										<!--end::Label-->
 										<!--begin::Input-->
-										<input type="text" class="form-control form-control-solid" placeholder="" name="nama" value="Sean Bean" />
+										<input type="text" class="form-control form-control-solid" placeholder="" name="nama" value="" />
 										<!--end::Input-->
-									</div>--}}
+									</div>
 									<!--end::Input group-->
 									<!--begin::Input group-->
 									<div class="fv-row mb-7">
 										<!--begin::Label-->
-										<label class="fs-6 fw-semibold mb-2">
-											<span class="required">Email</span>
-											<span class="ms-1" data-bs-toggle="tooltip" title="Email address must be active">
-												<i class="ki-duotone ki-information fs-7">
-													<span class="path1"></span>
-													<span class="path2"></span>
-													<span class="path3"></span>
-												</i>
-											</span>
-										</label>
+										<label class="fs-6 fw-semibold mb-2">Emel</label>
 										<!--end::Label-->
 										<!--begin::Input-->
 										<input type="email" class="form-control form-control-solid" placeholder="" name="email" value="" />
@@ -295,13 +169,38 @@
 									<!--begin::Input group-->
 									<div class="fv-row mb-7">
 										<!--begin::Label-->
-										<label class="fs-6 fw-semibold mb-2">Tahap</label>
+										<label class="fs-6 fw-semibold mb-2">Jawatan</label>
+										<!--end::Label-->
+										<!--begin::Input-->
+										<input type="text" class="form-control form-control-solid" placeholder="" name="jawatan" value="" />
+										<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+									<!--begin::Input group-->
+									<div class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold mb-2">Peranan</label>
 										<!--end::Label-->
 										<!--begin::Input-->
 										<select name="tahap" id="tahap"  class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
 											<option></option>
 											@foreach ($tahap as $tahap)
 											<option value="{{ $tahap->id}}">{{ $tahap->name}}</option>
+											@endforeach
+										</select>
+										<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+									<!--begin::Input group-->
+									<div class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold mb-2">Nama Pusat Pengajian</label>
+										<!--end::Label-->
+										<!--begin::Input-->
+										<select name="id_institusi" id="id_institusi"  class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
+											@foreach ($infoipt as $infoipt)
+												<option></option>
+												<option value="{{ $infoipt->idipt}}">{{ $infoipt->namaipt}}</option>
 											@endforeach
 										</select>
 										<!--end::Input-->
@@ -325,12 +224,12 @@
 							<!--begin::Modal footer-->
 							<div class="modal-footer flex-center">
 								<!--begin::Button-->
-								<button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-light me-3">Discard</button>
+								<button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-light me-3">Kembali</button>
 								<!--end::Button-->
 								<!--begin::Button-->
 								<button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
-									<span class="indicator-label">Submit</span>
-									<span class="indicator-progress">Please wait...
+									<span class="indicator-label">Simpan</span>
+									<span class="indicator-progress">Sila tunggu...
 									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 								</button>
 								<!--end::Button-->
@@ -342,123 +241,7 @@
 				</div>
 			</div>
 			<!--end::Modal - Customers - Add-->
-			<!--begin::Modal - Adjust Balance-->
-			<div class="modal fade" id="kt_customers_export_modal" tabindex="-1" aria-hidden="true">
-				<!--begin::Modal dialog-->
-				<div class="modal-dialog modal-dialog-centered mw-650px">
-					<!--begin::Modal content-->
-					<div class="modal-content">
-						<!--begin::Modal header-->
-						<div class="modal-header">
-							<!--begin::Modal title-->
-							<h2 class="fw-bold">Export Customers</h2>
-							<!--end::Modal title-->
-							<!--begin::Close-->
-							<div id="kt_customers_export_close" class="btn btn-icon btn-sm btn-active-icon-primary">
-								<i class="ki-duotone ki-cross fs-1">
-									<span class="path1"></span>
-									<span class="path2"></span>
-								</i>
-							</div>
-							<!--end::Close-->
-						</div>
-						<!--end::Modal header-->
-						<!--begin::Modal body-->
-						<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-							<!--begin::Form-->
-							<form id="kt_customers_export_form" class="form" action="#">
-								<!--begin::Input group-->
-								<div class="fv-row mb-10">
-									<!--begin::Label-->
-									<label class="fs-5 fw-semibold form-label mb-5">Select Export Format:</label>
-									<!--end::Label-->
-									<!--begin::Input-->
-									<select data-control="select2" data-placeholder="Select a format" data-hide-search="true" name="format" class="form-select form-select-solid">
-										<option value="excell">Excel</option>
-										<option value="pdf">PDF</option>
-										<option value="cvs">CVS</option>
-										<option value="zip">ZIP</option>
-									</select>
-									<!--end::Input-->
-								</div>
-								<!--end::Input group-->
-								<!--begin::Input group-->
-								<div class="fv-row mb-10">
-									<!--begin::Label-->
-									<label class="fs-5 fw-semibold form-label mb-5">Select Date Range:</label>
-									<!--end::Label-->
-									<!--begin::Input-->
-									<input class="form-control form-control-solid" placeholder="Pick a date" name="date" />
-									<!--end::Input-->
-								</div>
-								<!--end::Input group-->
-								<!--begin::Row-->
-								<div class="row fv-row mb-15">
-									<!--begin::Label-->
-									<label class="fs-5 fw-semibold form-label mb-5">Payment Type:</label>
-									<!--end::Label-->
-									<!--begin::Radio group-->
-									<div class="d-flex flex-column">
-										<!--begin::Radio button-->
-										<label class="form-check form-check-custom form-check-sm form-check-solid mb-3">
-											<input class="form-check-input" type="checkbox" value="0" checked="checked" name="tahap" />
-											<span class="form-check-label text-gray-600 fw-semibold">All</span>
-										</label>
-										<!--end::Radio button-->
-										<!--begin::Radio button-->
-										<label class="form-check form-check-custom form-check-sm form-check-solid mb-3">
-											<input class="form-check-input" type="checkbox" value="1" checked="checked" name="tahap" />
-											<span class="form-check-label text-gray-600 fw-semibold">Pelajar IPTS</span>
-										</label>
-										<!--end::Radio button-->
-										<!--begin::Radio button-->
-										<label class="form-check form-check-custom form-check-sm form-check-solid mb-3">
-											<input class="form-check-input" type="checkbox" value="2" checked="checked" name="tahap" />
-											<span class="form-check-label text-gray-600 fw-semibold">Penyelaras</span>
-										</label>
-										<!--end::Radio button-->
-										<!--begin::Radio button-->
-										<label class="form-check form-check-custom form-check-sm form-check-solid mb-3">
-											<input class="form-check-input" type="checkbox" value="3" name="tahap" />
-											<span class="form-check-label text-gray-600 fw-semibold">Sekretariat KPT</span>
-										</label>
-										<!--end::Radio button-->
-										<!--begin::Radio button-->
-										<label class="form-check form-check-custom form-check-sm form-check-solid mb-3">
-											<input class="form-check-input" type="checkbox" value="4" name="tahap" />
-											<span class="form-check-label text-gray-600 fw-semibold">Pegawai Atasan KPT</span>
-										</label>
-										<!--end::Radio button-->
-										<!--begin::Radio button-->
-										<label class="form-check form-check-custom form-check-sm form-check-solid">
-											<input class="form-check-input" type="checkbox" value="5" name="tahap" />
-											<span class="form-check-label text-gray-600 fw-semibold">Pentadbir Sistem</span>
-										</label>
-										<!--end::Radio button-->
-									</div>
-									<!--end::Input group-->
-								</div>
-								<!--end::Row-->
-								<!--begin::Actions-->
-								<div class="text-center">
-									<button type="reset" id="kt_customers_export_cancel" class="btn btn-light me-3">Discard</button>
-									<button type="submit" id="kt_customers_export_submit" class="btn btn-primary">
-										<span class="indicator-label">Submit</span>
-										<span class="indicator-progress">Please wait...
-										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-									</button>
-								</div>
-								<!--end::Actions-->
-							</form>
-							<!--end::Form-->
-						</div>
-						<!--end::Modal body-->
-					</div>
-					<!--end::Modal content-->
-				</div>
-				<!--end::Modal dialog-->
-			</div>
-			<!--end::Modal - New Card-->
+		
 			<!--end::Modals-->
 		</div>
 		<!--end::Content container-->

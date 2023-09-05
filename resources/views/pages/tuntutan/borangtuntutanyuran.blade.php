@@ -20,7 +20,8 @@
 												<!--begin::Card body-->
 												<div class="card-body p-10">
 													<!--begin::Form-->
-													<form action="" id="kt_invoice_form">
+													<form action="{{ route('savetuntutan') }}" method="post" enctype="multipart/form-data">
+														@csrf
 														<!--begin::Wrapper-->
 														<div class="d-flex flex-column align-items-start flex-xxl-row">
 															<!--begin::Input group-->
@@ -39,17 +40,17 @@
 															<div class="row gx-10 mb-5">
 																<!--begin::Col-->
 																<div class="col-lg-6">
-																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Tahun</label>
+																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder="2023/2024" />
+																		<input type="text" name="sesi" class="form-control form-control-solid" placeholder="2023/2024" />
 																	</div>
 																</div>
 																<div class="col-lg-6">
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder="2"  />
+																		<input type="text" name="semester" class="form-control form-control-solid" placeholder="2"  />
 																	</div>
 																</div>
 																
@@ -80,7 +81,7 @@
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No resit/ invois</label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-																		<input type="text" class="form-control form-control-solid" placeholder=""  />
+																		<input type="text" name="no_resit" class="form-control form-control-solid" placeholder=""  />
 																	</div>
 																</div>
 </div>
@@ -90,7 +91,7 @@
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Resit/ Invois&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-                                                                    <input type="file" id="yuran_tuntut" name="yuran_tuntut"/>
+                                                                    <input type="file" id="resit" name="resit"/>
 																	</div>
 																</div>
 																</div>
@@ -100,11 +101,12 @@
 															<br>
 															
 															<div class="d-flex flex-center mt-15">
-															<a href="#" class="btn btn-success">Hantar</a>&nbsp;&nbsp;&nbsp;
-															
-															<a href="#" class="btn btn-danger">Batal</a>
-															</div>
+																<button type="submit"  class="btn btn-primary">
+																	Hantar
+																</button>&nbsp;&nbsp;&nbsp;
 														
+															<!--<a href="#" class="btn btn-danger">Batal</a>-->
+															</div>
 														</div>
 														<!--end::Wrapper-->
 													</form>
@@ -131,17 +133,27 @@
 														<table class="table table-rounded table-striped border gy-7 gs-7" style="background-color:#FFFFE0;">
 													<thead>
 												<tr class="fw-semibold fs-6 text-gray-700 border-bottom border-gray-200">
-													<th>Sesi Tahun </th>
+													<th>Id Tuntutan</th>
 													<th>Semester</th>
 													<th>Jenis Yuran</th>
 													<th>No resit</th>
-													<th>Papar</th>
+													<th>Salinan</th>
 												</tr>
 												</thead>
-												<tbody>
-</tbody>
-</table>
-</div>
+												<tbody class="fw-semibold text-gray-600">
+													@foreach ($tuntutan as $tuntutan)
+													<tr>
+														<td>{{ $tuntutan->id_tuntutan}}</td>
+														<td>{{ $tuntutan->semester}}</td>
+														<td>{{ $tuntutan->yuran}}</td>
+														<td>{{ $tuntutan->no_resit}}</td>
+														<td><a href="/assets/dokumen/tuntutan/{{$tuntutan->resit}}" target="_blank">Papar</a></td>
+														
+													</tr>
+													@endforeach	
+												</tbody>
+												</table>
+												</div>
 														
 													</div>
 													

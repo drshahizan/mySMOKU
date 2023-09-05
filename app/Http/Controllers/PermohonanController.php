@@ -609,13 +609,17 @@ class PermohonanController extends Controller
         
           
             $kepPeperiksaan=$request->kepPeperiksaan; 
-            //dd($kepPeperiksaan);
+            $sem=$request->semester; 
+            $sesi=$request->sesi; 
+            $nokp = Auth::user()->nokp;
+            //dd($nokp);
             $name1='kepPeperiksaan';  
-            $filenamekepPeperiksaan=$name1.'_'.$kepPeperiksaan->getClientOriginalExtension();
+            //$filenamekepPeperiksaan=$name1.'-'.$sesi.'_'.$sem.'.'.$kepPeperiksaan->getClientOriginalExtension();
+            $filenamekepPeperiksaan=$name1.'-'.$nokp.'_'.$sem.'.'.$kepPeperiksaan->getClientOriginalExtension();
             //dd($request->filenamekepPeperiksaan);
             $request->kepPeperiksaan->move('assets/peperiksaan',$filenamekepPeperiksaan);
             
-            //$data->nokp_pelajar=$request->nokp_pelajar;
+            $data->nokp_pelajar=$nokp;
             $data->sesi=$request->sesi;
             $data->semester=$request->semester;
             $data->cgpa=$request->cgpa;

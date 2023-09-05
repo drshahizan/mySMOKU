@@ -92,7 +92,7 @@
 																	Simpan
 																</button>&nbsp;&nbsp;&nbsp;
 														
-															<a href="#" class="btn btn-danger">Batal</a>
+															<!--<a href="#" class="btn btn-danger">Batal</a>-->
 															</div>
 														</div>
 														<!--end::Wrapper-->
@@ -123,7 +123,7 @@
 																<th>Sesi</th>
 																<th>Semester</th>
 																<th>Keputusan (CGPA)</th>
-																<th>Papar</th>
+																<th>Salinan</th>
 															</tr>
 														</thead>
 														<tbody class="fw-semibold text-gray-600">
@@ -132,7 +132,7 @@
 																<td>{{ $peperiksaan->sesi}}</td>
 																<td>{{ $peperiksaan->semester}}</td>
 																<td>{{ $peperiksaan->cgpa}}</td>
-																<td></td>
+																<td><a href="/assets/peperiksaan/{{$peperiksaan->kepPeperiksaan}}" target="_blank">Papar</a></td>
 																
 															</tr>
 															@endforeach	

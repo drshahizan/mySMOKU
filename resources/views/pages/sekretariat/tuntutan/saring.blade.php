@@ -99,7 +99,7 @@
                                                     $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
                                                     $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
                                                     if ($item['status']==2){
-                                                        $status='Belum Disaring';
+                                                        $status='Baharu';
                                                     }
                                                     if ($item['status']==3){
                                                         $status='Sedang Disaring';
@@ -124,13 +124,13 @@
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                         @if ($item['status']=='2')
-                                                        <td class="text-center"><button class="btn bg-orange text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='3')
-                                                            <td class="text-center"><button class="btn bg-pink text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='4')
-                                                            <td class="text-center"><button class="btn btn-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='5')
-                                                            <td class="text-center"><button class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
                                                     </tr>
                                                 @endif
@@ -160,7 +160,7 @@
                                                     $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
                                                     $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
                                                     if ($item['status']==2){
-                                                        $status='Belum Disaring';
+                                                        $status='Baharu';
                                                     }
                                                     if ($item['status']==3){
                                                         $status='Sedang Disaring';
@@ -185,13 +185,13 @@
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                         @if ($item['status']=='2')
-                                                        <td class="text-center"><button class="btn bg-orange text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='3')
-                                                            <td class="text-center"><button class="btn bg-pink text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='4')
-                                                            <td class="text-center"><button class="btn btn-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='5')
-                                                            <td class="text-center"><button class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
                                                     </tr>
                                                 @endif
