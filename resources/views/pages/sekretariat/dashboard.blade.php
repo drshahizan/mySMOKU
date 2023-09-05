@@ -83,26 +83,28 @@
 								<div class="body">
 									<br>
 									<!--begin::First Row-->
-									<div class="row g-3 g-lg-6">
+									<div class="row g-3 g-lg-6" style="text-align: center;">
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
+												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
+														<i class="fas fa-list-ol text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Keseluruhan</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
 														</i>
 													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$keseluruhanB}}</span>
-													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -113,23 +115,25 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
+												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+														<i class="fa-solid fa-file-lines text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Deraf</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
 														</i>
 													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$derafB}}</span>
-													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -140,22 +144,24 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
+												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
+														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Baharu</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
 														</i>
 													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$baharuB}}</span>
-													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -166,20 +172,22 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
+											<div class="px-5 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
-														<i class="fas fa-th-list text-light" style="font-size: 20px;">
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fas fa-th-list text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Saringan</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom:5px; padding-left:5px; font-family:sans-serif;">Sedang Disaring</span>
 														</i>
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$saringanB}}</span>
-													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -190,25 +198,27 @@
 									<!--end::Row-->
 
 									<!--begin::Second Row-->
-									<div class="row g-3 g-lg-6">
+									<div class="row g-3 g-lg-6" style="text-align: center;">
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #efd06c">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
-														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 20px;">
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Disokong</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Disokong</span>
 														</i>
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$disokongB}}</span>
-													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -219,21 +229,23 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
-														<i class="fa-solid fa-reply-all text-light" style="font-size: 20px;">
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fa-solid fa-reply-all text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Dikembalikan</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dikembalikan</span>
 														</i>
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$dikembalikanB}}</span>
-													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -244,22 +256,24 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
+												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fas fa-user-check text-light" style="font-size: 20px;">
+														<i class="fas fa-user-check text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Layak</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
 														</i>
 													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$layakB}}</span>
-													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -270,23 +284,25 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
+												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
+														<i class="fa-solid fa-user-xmark text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Tidak Layak</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
 														</i>
 													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$tidaklayakB}}</span>
-													<a href="{{url('permohonan/BKOKU')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/BKOKU')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -632,26 +648,28 @@
 								<div class="body">
 									<br>
 									<!--begin::First Row-->
-									<div class="row g-3 g-lg-6">
+									<div class="row g-3 g-lg-6" style="text-align: center;">
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
+												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
+														<i class="fas fa-list-ol text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Keseluruhan</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
 														</i>
 													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$keseluruhanP}}</span>
-													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -662,23 +680,25 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
+												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+														<i class="fa-solid fa-file-lines text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Deraf</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
 														</i>
 													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$derafP}}</span>
-													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -689,22 +709,24 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
+												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
+														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Baharu</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
 														</i>
 													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$baharuP}}</span>
-													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -715,20 +737,22 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
-														<i class="fas fa-th-list text-light" style="font-size: 20px;">
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fas fa-th-list text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:cursive;">Saringan</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Sedang Disaring</span>
 														</i>
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$saringanP}}</span>
-													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -739,25 +763,27 @@
 									<!--end::Row-->
 
 									<!--begin::Second Row-->
-									<div class="row g-3 g-lg-6">
+									<div class="row g-3 g-lg-6" style="text-align: center;">
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #efd06c">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
-														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 20px;">
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Disokong</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Disokong</span>
 														</i>
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$disokongP}}</span>
-													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -768,21 +794,23 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
-														<i class="fa-solid fa-reply-all text-light" style="font-size: 20px;">
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fa-solid fa-reply-all text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Dikembalikan</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dikembalikan</span>
 														</i>
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$dikembalikanP}}</span>
-													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -793,22 +821,24 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
+												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fas fa-user-check text-light" style="font-size: 20px;">
+														<i class="fas fa-user-check text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Layak</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
 														</i>
 													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$layakP}}</span>
-													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -819,23 +849,25 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-5 mb-8">
+												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
+														<i class="fa-solid fa-user-xmark text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px; font-family:cursive;">Tidak Layak</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
 														</i>
 													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<span class="text-white fw-bolder d-block fs-3x lh-1 ls-n1 mb-1">{{$tidaklayakP}}</span>
-													<a href="{{url('permohonan/PPK')}}"><span class="text-white fw-bold fs-7">Lihat</span></a>
+													<a href="{{url('permohonan/PPK')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
 												</div>
 												<!--end::Stats-->
 											</div>

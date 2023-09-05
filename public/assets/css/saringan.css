@@ -84,6 +84,26 @@
     color: white!important;
 } */
 
+.bg-baharu, .bg-baharu:hover, .bg-baharu:active{
+    background:#186ee6!important;
+    color:white!important;
+}
+
+.bg-sedang-disaring, .bg-sedang-disaring:hover, .bg-sedang-disaring:active{
+    background:#ea40acdc!important;
+    color:white!important;
+}
+
+.bg-disokong, .bg-disokong:hover, .bg-disokong:active{
+    background:#efd06c!important;
+    color:white!important;
+}
+
+.bg-dikembalikan, .bg-dikembalikan:hover, .bg-dikembalikan:active{
+    background:#d75b50!important;
+    color:white!important;
+}
+
 .text-white{
     color:white!important;
 }
