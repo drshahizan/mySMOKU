@@ -37,9 +37,11 @@ class DaftarUserController extends Controller
         ]);
 
         //$nokp_in = $request->nokp;
-        $nokp_smoku=Smoku::where([
-            ['nokp', '=', $request->nokp],
-            ])->first();
+        $nokp_smoku=Smoku::where([['nokp', '=', $request->nokp]])
+        ->orWhere('noJKM','=', $request->nokp)
+        ->first();
+
+         //dd($nokp_smoku);   
 
             
             if ($nokp_smoku != null) {
@@ -51,8 +53,11 @@ class DaftarUserController extends Controller
 
                 //return view('pages.auth.semaksyarat');
                 $nokp_in = $request->nokp;
-                $nokp = $request->session()->put('nokp',$nokp_in);
                 //dd($nokp_in);
+                $nokpornojkm = Smoku::where('nokp', $nokp_in)->orWhere('noJKM','=', $nokp_in)->first();
+                //$nokp = $request->session()->put('nokp',$nokp_in);
+                $nokp =  $nokpornojkm->nokp;
+                //dd($nokp);
                 return redirect()->route('semaksyarat')->with($nokp)
                 ->with('message', $nokp_in. ' SAH SEBAGAI OKU BERDAFTAR DENGAN JKM');
             } else {

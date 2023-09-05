@@ -24,6 +24,7 @@ class SemakUserController extends Controller
 
         $ipt = Infoipt::orderby("namaipt","asc")
              ->select('idipt','namaipt')
+             ->where('jenis_ipt','=','IPTS')
              ->get();
         $kodperingkat = PeringkatPengajian::orderby("peringkat","asc")
              ->select('kodperingkat','peringkat')
