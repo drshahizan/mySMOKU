@@ -221,7 +221,7 @@ $(document).ready(function(){
 										<!--begin::Content-->
 										<div class="card d-flex flex-row-fluid flex-center">
 											<!--begin::Form-->
-											<form id="kt_create_account_form" action="{{ route('hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
+											<form id="kt_create_account_form" action="{{ route('hantarpermohonan') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
 											
 												<!--begin::Step 1-->
 												<div class="current" data-kt-stepper-element="content">
@@ -267,7 +267,7 @@ $(document).ready(function(){
 																</div>
 																<!--end::Row-->
 															</div>
-															<div class="col-md-3 fv-row">
+															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">Tarikh Lahir</label>
 																<!--end::Label-->
@@ -281,7 +281,7 @@ $(document).ready(function(){
 																	</div>
 																</div>	
 																</div>
-																<div class="col-md-3 fv-row">
+																<div class="col-md-2 fv-row">
 																<label class=" fs-6 fw-semibold form-label mb-2">Umur</label>
 																<!--end::Label-->
 																<div class="row fv-row">
@@ -335,26 +335,14 @@ $(document).ready(function(){
 														<!--begin::Input group-->
 														<div class="fv-row mb-10">
 															<!--end::Label-->
-															<label class="form-label">Alamat Rumah</label>
+															<label class="form-label">Alamat Tetap</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<textarea id="alamat1" name="alamat1" class="form-control form-control-lg form-control-solid" rows="2">{{$smoku->alamat1}}</textarea>
+															<textarea id="alamat1" name="alamat1" class="form-control form-control-lg form-control-solid" rows="2" readonly>{{$smoku->alamat1}}</textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
-																<label class=" fs-6 fw-semibold form-label mb-2">Poskod
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" id="alamat_poskod" name="alamat_poskod" placeholder="" value="{{$smoku->alamat_poskod}}" />
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
+															
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">Negeri
@@ -363,7 +351,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" id="alamat_negeri" name="alamat_negeri" placeholder="" value="{{$smoku->alamat_negeri}}" />
+																	<input type="text" class="form-control form-control-solid" id="alamat_negeri" name="alamat_negeri" placeholder="" value="{{$smoku->alamat_negeri}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -376,12 +364,104 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" id="alamat_bandar" name="alamat_bandar" placeholder="" value="{{$smoku->alamat_bandar}}"/>
+																	<input type="text" class="form-control form-control-solid" id="alamat_bandar" name="alamat_bandar" placeholder="" value="{{$smoku->alamat_bandar}}" readonly/>
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class=" fs-6 fw-semibold form-label mb-2">Poskod
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" id="alamat_poskod" name="alamat_poskod" placeholder="" value="{{$smoku->alamat_poskod}}" readonly/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
 															</div>
 														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="fv-row mb-7">
+															<!--begin::Wrapper-->
+															<div class="d-flex flex-stack">
+																<!--begin::Label-->
+																<div class="me-5">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold">Use as a Alamat Surat Menyurat?</label>
+																	<!--end::Label-->
+																</div>
+																<!--end::Label-->
+																<!--begin::Switch-->
+																<label class="form-check form-switch form-check-custom form-check-solid">
+																	<!--begin::Input-->
+																	<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1" id="kt_modal_update_customer_billing" @foreach($pelajar as $pelajar1) @if($pelajar1->alamat_surat1)  checked="checked" @else checked=""  @endif @endforeach />
+																	<!--end::Input-->
+																	<!--begin::Label-->
+																	<span class="form-check-label fw-semibold text-muted" for="kt_modal_update_customer_billing">Ya</span>
+																	<!--end::Label-->
+																</label>
+																<!--end::Switch-->
+															</div>
+															<!--begin::Wrapper-->
+														</div>
+														<!--end::Input group-->
+															
+															<!--begin::Alamat Surat-->
+															<div class="fv-row mb-10">
+																<!--end::Label-->
+																<label class="form-label">Alamat Surat Menyurat</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<textarea id="alamat_surat1" name="alamat_surat1" class="form-control form-control-lg form-control-solid" rows="2">@foreach($pelajar as $pelajar1)@if($pelajar1->alamat_surat1){{$pelajar1->alamat_surat1}} @else  @endif @endforeach </textarea>
+																<!--end::Input-->
+															</div>
+															<div class="row mb-10">
+																
+																<div class="col-md-4 fv-row">
+																	<!--begin::Label-->
+																	<label class=" fs-6 fw-semibold form-label mb-2">Negeri
+																	</label>
+																	<!--end::Label-->
+																	<!--begin::Input wrapper-->
+																	<div class="col-12">
+																		<!--begin::Input-->
+																		<input type="text" class="form-control form-control-solid" id="alamat_surat_negeri" name="alamat_surat_negeri" placeholder="" @foreach($pelajar as $pelajar1) @if($pelajar1->alamat_surat_negeri)  value="{{$pelajar1->alamat_surat_negeri}}" @else value="" @endif @endforeach />
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input wrapper-->
+																</div>
+																<div class="col-md-4 fv-row">
+																	<!--begin::Label-->
+																	<label class=" fs-6 fw-semibold form-label mb-2">Bandar
+																	</label>
+																	<!--end::Label-->
+																	<!--begin::Input wrapper-->
+																	<div class="col-12">
+																		<!--begin::Input-->
+																		<input type="text" class="form-control form-control-solid" id="alamat_surat_bandar" name="alamat_surat_bandar" placeholder="" @foreach($pelajar as $pelajar1) @if($pelajar1->alamat_surat_bandar)  value="{{$pelajar1->alamat_surat_bandar}}" @else value="" @endif @endforeach />
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input wrapper-->
+																</div>
+																<div class="col-md-4 fv-row">
+																	<!--begin::Label-->
+																	<label class=" fs-6 fw-semibold form-label mb-2">Poskod
+																	</label>
+																	<!--end::Label-->
+																	<!--begin::Input wrapper-->
+																	<div class="col-12">
+																		<!--begin::Input-->
+																		<input type="text" class="form-control form-control-solid" id="alamat_surat_poskod" name="alamat_surat_poskod" placeholder="" @foreach($pelajar as $pelajar1) @if($pelajar1->alamat_surat_poskod)  value="{{$pelajar1->alamat_surat_poskod}}" @else value="" @endif @endforeach />
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input wrapper-->
+																</div>
+															</div>
+
 														<!--end::Input group-->
 														<div class="row mb-10">
 															<div class="col-md-6 fv-row">
@@ -489,7 +569,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaunbank" name="no_akaunbank" placeholder="" value="" />
+																	<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaunbank" name="no_akaunbank" placeholder="" @foreach($pelajar as $pelajar) @if($pelajar->no_akaunbank)  value="{{$pelajar->no_akaunbank}}" @else value="" @endif @endforeach	/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -559,12 +639,12 @@ $(document).ready(function(){
 																<!--end::Row-->
 															</div>
 														</div>
-														<div class="row mb-10 hubungan_row">
+														<div class="row mb-10">
 															<!--begin::Label-->
-															<div class="col-md-6 fv-row hubungan_row">
+															<div class="col-md-6 fv-row">
 															<label class="form-label mb-6">Hubungan Waris</label>
 																
-															<select id="hubungan" name="hubungan" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" data-allow-clear="true">
+															<select id="hubungan" name="hubungan" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih">
 															
 															@if ($smoku->hubungan)
 															<option value="{{$smoku->kodhubungan}}">{{$smoku->hubungan}}</option>
@@ -575,12 +655,12 @@ $(document).ready(function(){
 															</select>
 															
 														</div>
-															<div class="col-md-6 fv-row lain_hubungan">
+															<div class="col-md-6 fv-row">
 															<!--begin::Label-->
 															<label class="form-label mb-6">(Jika Lain-lain) Sila Nyatakan:</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid lain_hubungan_input" id="lain_hubungan" name="lain_hubungan" placeholder="" value="" />
+															<input type="text" class="form-control form-control-lg form-control-solid" id="lain_hubungan" name="lain_hubungan" placeholder="" value="" />
 															<!--end::Input-->													
 															</div>
 														</div>
@@ -589,26 +669,14 @@ $(document).ready(function(){
 														<!--begin::Input group-->
 														<div class="fv-row mb-10">
 															<!--end::Label-->
-															<label class="form-label">Alamat Rumah</label>
+															<label class="form-label">Alamat Tetap</label>
 															<!--end::Label-->
 															<!--begin::Input-->
 															<textarea id="alamatW1" name="alamatW1" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
-																<label class="fs-6 fw-semibold form-label mb-2">Poskod
-																</label>
-																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																<div class="col-12">
-																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" id="alamatW_poskod" name="alamatW_poskod" placeholder="" value="" />
-																	<!--end::Input-->
-																</div>
-																<!--end::Input wrapper-->
-															</div>
+															
 															<div class="col-md-4 fv-row">
 																<!--begin::Label-->
 																<label class="fs-6 fw-semibold form-label mb-2">Negeri
@@ -638,6 +706,19 @@ $(document).ready(function(){
 																	<select id='alamatW_bandar'  name='alamatW_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
 																		<option value="">Pilih</option>
 																	</select>
+																	<!--end::Input-->
+																</div>
+																<!--end::Input wrapper-->
+															</div>
+															<div class="col-md-4 fv-row">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mb-2">Poskod
+																</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<div class="col-12">
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" id="alamatW_poskod" name="alamatW_poskod" placeholder="" value="" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -793,7 +874,7 @@ $(document).ready(function(){
 														<!--end::Input group-->
 														<!-- @endforeach -->
 														<div class="row mb-10">
-														<div class="col-md-6 fv-row">
+															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
 																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian</label>
 																<!--end::Label-->
@@ -1263,6 +1344,30 @@ $(document).ready(function(){
 		</script> 
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
+			function myFunction() {
+			var checkBox = document.getElementById("sama");  
+			var alamat1 = document.getElementById("alamat1");
+			var alamat_negeri = document.getElementById("alamat_negeri");
+			var alamat_bandar = document.getElementById("alamat_bandar");
+			var alamat_poskod = document.getElementById("alamat_poskod");
+
+			var alamat_surat1 = document.getElementById("alamat_surat1");
+			var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
+			var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
+			var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
+			if (checkBox.checked == true){
+				alamat_surat1.value=alamat1.value; 
+				alamat_surat_negeri.value=alamat_negeri.value;
+				alamat_surat_bandar.value=alamat_bandar.value;
+				alamat_surat_poskod.value=alamat_poskod.value;
+			} else {
+				alamat_surat1.value="";
+				alamat_surat_negeri.value="";
+				alamat_surat_bandar.value="";
+				alamat_surat_poskod.value="";
+			}
+		}	
+
     		$(document).ready(function(){
 				$('#alamatW_negeri').on('change', function() {
 					var idnegeri = $(this).val();

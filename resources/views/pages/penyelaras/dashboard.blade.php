@@ -244,10 +244,10 @@
 													</h3>
 													<!--end::Title-->
 													@if (session('message'))
-														<div class="alert alert-success">{{ session('message') }}</div>
+														<div class="alert alert-success" style="color:black;">{{ session('message') }}</div>
 													@endif
 													@if (session('xmessage'))
-														<div class="alert alert-danger">{{ session('xmessage') }}</div>
+														<div class="alert alert-danger" style="color:black;">{{ session('xmessage') }}</div>
 													@endif
 													<!--begin::Toolbar-->
 													<!-- <div class="card-toolbar">

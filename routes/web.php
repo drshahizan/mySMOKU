@@ -56,8 +56,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::get('/getBandar/{id}', [PermohonanController::class, 'getBandar']);
-    Route::post('permohonan', [PermohonanController::class, 'store'])->name('permohonan.post');
-    Route::post('hantar', [PermohonanController::class, 'hantar'])->name('hantar');
+    Route::post('permohonan', [PermohonanController::class, 'simpanmohon'])->name('permohonan.post');
+    Route::post('hantarpermohonan', [PermohonanController::class, 'hantarpermohonan'])->name('hantarpermohonan');
     Route::get('viewpermohonan', [PermohonanController::class, 'viewpermohonan'])->name('viewpermohonan');
     Route::get('/download/{file}',[PermohonanController::class,'download']);
     Route::get('kemaskini',[PermohonanController::class,'kemaskini'])->name('kemaskini');
@@ -102,6 +102,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Tuntutan - Sekretariat
     Route::get('tuntutan-keseluruhan', [SekretariatController::class, 'tuntutanKeseluruhan']);
     Route::get('tuntutan-saring', [SekretariatController::class, 'tuntutanSaring']);
+    Route::get('tuntutan/keputusan/peperiksaan', [SekretariatController::class, 'keputusanPeperiksaan']);
     Route::get('maklumat-tuntutan-2/{no_kp}', [SekretariatController::class, 'maklumatTuntutan2'])->name('maklumat.tuntutan2.no_kp');
     Route::post('tuntutan/saring/maklumat/{id}', [SekretariatController::class, 'saringMaklumatTuntutan'])->name('tuntutan.saring.maklumat.id');
     Route::get('tuntutan-keputusan', [SekretariatController::class, 'tuntutanKeputusan']);

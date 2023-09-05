@@ -162,6 +162,10 @@
 													<!--begin::Card-->
 													<div class="card pt-4 mb-6 mb-xl-9">
 														<!--begin::Card header-->
+														@if (session('message'))
+															<div class="alert alert-success" style="color:black; text-align: center;">{{ session('message') }}</div>
+														@endif
+
 														<div class="card-header border-0">
 															<!--begin::Card title-->
 															<div class="card-title">
@@ -171,16 +175,17 @@
 														</div>
 														<!--end::Card header-->
 														<!--begin::Card body-->
-														<div class="card-body pt-0 pb-5">
+														<div class="body">
 															<!--begin::Table-->
 															<div class="table-responsive">
-	<table class="table table-rounded table-striped border gy-7 gs-7" >
+	<table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
 		<thead>
-			<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+			<tr>
 				<th>ID Permohonan</th>
-				<th>Status Permohonan</th>
-				<th>Tindakan Permohonan</th>
+				<th>Status</th>
 				<th>Tarikh Kemaskini</th>
+				<th>Tindakan</th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -188,8 +193,9 @@
 		<tr> 
 			<td>{{$permohonan->id_permohonan}}</td>
 			<td>{{$permohonan->status}} </td>
-			<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>
 			<td>{{$permohonan->created_at->format('d/m/Y')}}</td>
+			<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>
+			
 			
 		</tr>
 		@endforeach

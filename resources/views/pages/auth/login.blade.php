@@ -26,7 +26,7 @@
         </div>
         <!--begin::Heading-->
             @if (session('message'))
-                <div class="alert alert-danger">{{ session('message') }}</div>
+                <div class="alert alert-danger" style="color:black; text-align: center;">{{ session('message') }}</div>
              @endif
 
         <!--begin::Login options-->

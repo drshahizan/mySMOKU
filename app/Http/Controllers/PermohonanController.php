@@ -60,12 +60,13 @@ class PermohonanController extends Controller
         //->get(['waris.*', 'bk_hubungan.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
         //return $waris;
-        $akademik = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
-        ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
-        ->join('bk_mod','bk_mod.kodmod','=','maklumatakademik.mod')
-        ->join('bk_sumberbiaya','bk_sumberbiaya.kodbiaya','=','maklumatakademik.sumber_biaya')
+        $akademik = Akademik::leftJoin('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
+        ->leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
+        ->leftJoin('bk_mod','bk_mod.kodmod','=','maklumatakademik.mod')
+        ->leftJoin('bk_sumberbiaya','bk_sumberbiaya.kodbiaya','=','maklumatakademik.sumber_biaya')
         ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*', 'bk_mod.*', 'bk_sumberbiaya.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
+        //dd($akademik);
         $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->nokp);
         $tuntutan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->nokp)->first();
         //return $tuntutan;
@@ -91,7 +92,7 @@ class PermohonanController extends Controller
         } 
         else if ($statuspermohonan == '1')
         {
-            return view('pages.permohonan.permohonan-baru-kemaskini', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen','negeri'));
+            return view('pages.permohonan.permohonan-baru-kemaskini', compact('smoku','hubungan','akademikmqa','infoipt','peringkat','kursus','mod','biaya','pelajar','waris','akademik','tuntutanpermohonan','dokumen','negeri'));
         }
         else
         {
@@ -115,7 +116,7 @@ class PermohonanController extends Controller
 }
     
 
-    public function store(Request $request)
+    public function simpanmohon(Request $request)
     {   
 
         $user = Permohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
@@ -130,9 +131,13 @@ class PermohonanController extends Controller
                 'kecacatan' => $request->kecacatan,
                 'bangsa' => $request->bangsa,
                 'alamat1' => $request->alamat1,
-                'alamat_poskod' => $request->alamat_poskod,
-                'alamat_bandar' => $request->alamat_bandar,
                 'alamat_negeri' => $request->alamat_negeri,
+                'alamat_bandar' => $request->alamat_bandar,
+                'alamat_poskod' => $request->alamat_poskod,
+                'alamat_surat1' => $request->alamat_surat1,
+                'alamat_surat_negeri' => $request->alamat_surat_negeri,
+                'alamat_surat_bandar' => $request->alamat_surat_bandar,
+                'alamat_surat_poskod' => $request->alamat_surat_poskod,
                 'no_tel' => $request->no_tel,
                 'no_telR' => $request->no_telR,
                 'no_akaunbank' => $request->no_akaunbank,
@@ -152,9 +157,13 @@ class PermohonanController extends Controller
                 'kecacatan' => $request->kecacatan,
                 'bangsa' => $request->bangsa,
                 'alamat1' => $request->alamat1,
-                'alamat_poskod' => $request->alamat_poskod,
-                'alamat_bandar' => $request->alamat_bandar,
                 'alamat_negeri' => $request->alamat_negeri,
+                'alamat_bandar' => $request->alamat_bandar,
+                'alamat_poskod' => $request->alamat_poskod,
+                'alamat_surat1' => $request->alamat_surat1,
+                'alamat_surat_negeri' => $request->alamat_surat_negeri,
+                'alamat_surat_bandar' => $request->alamat_surat_bandar,
+                'alamat_surat_poskod' => $request->alamat_surat_poskod,
                 'no_tel' => $request->no_tel,
                 'no_telR' => $request->no_telR,
                 'no_akaunbank' => $request->no_akaunbank,
@@ -269,10 +278,11 @@ class PermohonanController extends Controller
 
         $user->save();
 
+        $dokumen = Dokumen::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
+        if ($dokumen === null) {
 
-        $data=new dokumen();
+            $data=new dokumen();
         
-          
             $akaunBank=$request->akaunBank;
             //$name1=$akaunBank->getClientOriginalName();  
             $name1='salinanbank';  
@@ -288,7 +298,7 @@ class PermohonanController extends Controller
             $invoisResit=$request->invoisResit;
             //$name3=$invoisResit->getClientOriginalName();
             $name3='salinanresit';  
-            $filenameinvoisResit=$name1.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
+            $filenameinvoisResit=$name3.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
             $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
             
             $data->id_permohonan='KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar;
@@ -302,6 +312,33 @@ class PermohonanController extends Controller
             
 
             $data->save();
+        } else {
+
+            $akaunBank=$request->akaunBank;
+            $name1='salinanbank';  
+            $filenameakaunBank=$name1.'_'.$request->nokp_pelajar.'.'.$akaunBank->getClientOriginalExtension();
+            $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
+            
+            $suratTawaran=$request->suratTawaran;
+            $name2='salinantawaran'; 
+            $filenamesuratTawaran=$name2.'_'.$request->nokp_pelajar.'.'.$suratTawaran->getClientOriginalExtension();
+            $request->suratTawaran->move('assets/dokumen',$filenamesuratTawaran);
+
+            $invoisResit=$request->invoisResit;
+            $name3='salinanresit';  
+            $filenameinvoisResit=$name3.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
+            $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
+                
+            DB::table('dokumen')->where('nokp_pelajar' ,$request->nokp_pelajar)
+            ->update([
+            'akaunBank' => $filenameakaunBank,
+            'suratTawaran' => $filenamesuratTawaran,
+            'invoisResit' => $filenameinvoisResit,
+            ]);
+
+        
+
+        }
 
 
 
@@ -310,7 +347,7 @@ class PermohonanController extends Controller
 
     }
 
-    public function hantar(Request $request)
+    public function hantarpermohonan(Request $request)
     {   
 
         $tuntutanpermohonan = TuntutanPermohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
@@ -357,7 +394,7 @@ class PermohonanController extends Controller
             $invoisResit=$request->invoisResit;
             //$name3=$invoisResit->getClientOriginalName();
             $name3='salinanresit';  
-            $filenameinvoisResit=$name1.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
+            $filenameinvoisResit=$name3.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
             $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
             
             $data->id_permohonan='KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar;
@@ -375,7 +412,7 @@ class PermohonanController extends Controller
 
 
 
-        return redirect()->route('viewpermohonan')->with('message', 'Permohonan anda telah dihantar.');
+        return redirect()->route('dashboard')->with('message', 'Permohonan anda telah dihantar.');
 
     }
 
@@ -441,10 +478,10 @@ class PermohonanController extends Controller
         DB::table('pelajar')->where('nokp_pelajar' ,$request->nokp_pelajar)
         ->update([
 
-            'alamat1' => $request->alamat1,
-            'alamat_poskod' => $request->alamat_poskod,
-            'alamat_bandar' => $request->alamat_bandar,
-            'alamat_negeri' => $request->alamat_negeri,
+            'alamat_surat1' => $request->alamat_surat1,
+            'alamat_surat_negeri' => $request->alamat_surat_negeri,
+            'alamat_surat_bandar' => $request->alamat_surat_bandar,
+            'alamat_surat_poskod' => $request->alamat_surat_poskod,
             'no_tel' => $request->no_tel,
             'no_telR' => $request->no_telR,
             'no_akaunbank' => $request->no_akaunbank,
