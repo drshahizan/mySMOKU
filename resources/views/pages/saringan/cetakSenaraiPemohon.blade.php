@@ -39,15 +39,11 @@
         td.no{
             text-align: right;
         }
-        footer .pagenum:before {
-            content: counter(page);
-        }
-        footer { 
-            position: fixed; 
-            bottom: -60px; 
-            left: 0px; 
-            right: 0px; 
-            height: 50px; 
+        .page-number-container {
+            position: absolute;
+            bottom: 10px; /* Adjust the vertical position as needed */
+            right: 550px; /* Adjust the horizontal position as needed */
+            font-size: 12px;
         }
     </style>
 </head>
@@ -79,280 +75,147 @@
     </div>
 
     <br><br><br><br><br>
-    {{-- Table --}}
     <div style="margin: 10px; display: block;">
         <div class="tittle" style="text-align: center; font-size: 14px;">
             <b>SENARAI PERMOHONAN BKOKU/PPK YANG DISOKONG</b>
         </div>
         <br>
+        {{-- Table --}}
         <table id="sortTable" class="table table-striped">
             <thead class="text-center">
                 <tr>
                     <th style="width: 3%"><b>No.</b></th>
-                    <th style="width: 15%"><b>ID Permohonan</b></th>
-                    <th style="width: 5%"><b>Jenis Permohonan</b></th>
+                    <th style="width: 12%"><b>ID Permohonan</b></th>
+                    {{-- <th style="width: 5%"><b>Jenis Permohonan</b></th> --}}
                     <th style="width: 20%"><b>Nama</b></th>
-                    <th style="width: 5%"><b>Jenis Kecacatan</b></th>                                        
-                    <th style="width: 5%"><b>Peringkat Pengajian </b></th>
-                    <th style="width: 15%"><b>Nama Kursus</b></th>
-                    <th style="width: 5%"><b>Institusi Pengajian</b></th>
-                    <th style="width: 9%"><b>Tarikh Mula Pengajian</b></th>
-                    <th style="width: 18%"><b>Tarikh Tamat Pengajian</b></th>
+                    <th style="width: 10%"><b>Jenis Kecacatan</b></th>                                        
+                    {{-- <th style="width: 10%"><b>Peringkat Pengajian </b></th> --}}
+                    <th style="width: 20%"><b>Nama Kursus</b></th>
+                    <th style="width: 15%"><b>Institusi Pengajian</b></th>
+                    <th style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
+                    <th style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="no">1.</td>                                            
-                    <td>KPTPPK/3/B980112105666</td>
-                    <td>PPK</td>
-                    <td>Aishah Binti Samsudin</td>
-                    <td>Pendengaran</td>                                       
-                    <td>Sarjana Muda</td>
-                    <td>Bachelor Of Business Administration (Hons) In International Business And Finance</td>
-                    <td>UTAR</td>
-                    <td class="text-center">02/07/2020</td>
-                    <td class="text-center">20/07/2023</td>
-                </tr> 
-                <tr>
-                    <td class="no">2.</td>                                            
-                    <td>KPTBKOKU/2/970703041223</td>
-                    <td>BKOKU</td>
-                    <td>Mohd Ali Bin Abu Kassim</td>
-                    <td>penglihatan</td>
-                    <td>Diploma</td>
-                    <td>Diploma In Information And Communication Technology</td>
-                    <td>INTI</td>
-                    <td class="text-center">03/09/2019</td>
-                    <td class="text-center">27/07/2023</td>
-                </tr> 
-                <tr> 
-                    <td class="no">3.</td>                                           
-                    <td>KPT/BKOKU/3/970204052445</td>
-                    <td>BKOKU</td>
-                    <td>Sarah Binti Yusri</td>
-                    <td>penglihatan</td>
-                    <td>Sarjana Muda</td>
-                    <td>Bachelor Of Science In Psychology With Management</td>
-                    <td>UiTM(Shah Alam)</td>
-                    <td class="text-center">15/09/2019</td>
-                    <td class="text-center">05/07/2023</td>
-                </tr> 
-                <tr>
-                    <td class="no">4.</td>
-                    <td>KPT/BKOKU/5/970703041223</td>
-                    <td>BKOKU</td>
-                    <td>Santosh A/L Ariyaran</td>
-                    <td>fizikal</td>
-                    <td>Sarjana</td>
-                    <td>Master Of Science Data Science</td>
-                    <td>UTP</td>                                     
-                    <td class="text-center">10/7/2021</td>
-                    <td class="text-center">03/08/2024</td>
-                </tr> 
-                <tr>
-                    <td class="no">5.</td>
-                    <td>KPT/BKOKU/6/960909105668</td>
-                    <td>BKOKU</td>
-                    <td>Ling Kai Jie</td>
-                    <td>pertuturan</td>                                        
-                    <td>Doktor Falsafah</td>
-                    <td>Doctor Of Philosophy (Phd) In Social Science And Humanities</td>
-                    <td>UiTM(Shah Alam)</td>
-                    <td class="text-center">08/07/2022</td>
-                    <td class="text-center">08/07/2024</td>
-                </tr> 
-                <tr>
-                    <td class="no">6.</td>
-                    <td>KPT/BKOKU/6/950804082447</td>
-                    <td>BKOKU</td>
-                    <td>Akmal Bin Kairuddin</td>
-                    <td>pertuturan</td>                                        
-                    <td>Doktor Falsafah</td>
-                    <td>Doctor Of Philosophy (Phd) Creative Industries & Art Practice</td>
-                    <td>Universiti Limkokwing</td>
-                    <td class="text-center">07/07/2023</td>
-                    <td class="text-center">18/07/2025</td>
-                </tr>
-                <tr>
-                    <td class="no">7.</td>
-                    <td>KPT/BKOKU/3/021212050334</td>
-                    <td>BKOKU</td>
-                    <td>Santishwaran A/L Paven</td>
-                    <td>pertuturan</td>                                        
-                    <td>Sarjana Muda</td>
-                    <td>Bachelor Of Science Computer Science</td>
-                    <td>UTM(Skudai)</td>
-                    <td class="text-center">05/09/2021</td>
-                    <td class="text-center">05/08/2025</td>
-                </tr>
-                <tr>
-                    <td class="no">8.</td>
-                    <td>KPT/PPK/3/990201065225</td>
-                    <td>PPK</td>
-                    <td>Ezra Hanisah Binti Md Yunos</td>
-                    <td>Pendengaran</td>                                    
-                    <td>Sarjana Muda</td>
-                    <td>Bachelor Of Science Computer Science</td>
-                    <td>UTM(Skudai)</td>
-                    <td class="text-center">05/09/2020</td>
-                    <td class="text-center">05/07/2024</td>
-                </tr>
-                <tr>
-                    <td class="no">9.</td>
-                    <td>KPT/BKOKU/3/010305058473</td>
-                    <td>BKOKU</td>
-                    <td>Arshahad Bin Kairul Zaman</td>
-                    <td>fizikal</td>                                        
-                    <td>Sarjana Muda</td>
-                    <td>Bachelor Of Public Administration (Honours)</td>
-                    <td>UiTM(Dungun)</td>
-                    <td class="text-center">07/09/2021</td>
-                    <td class="text-center">20/07/2025</td>
-                </tr>
-                <tr>
-                    <td class="no">10.</td>
-                    <td>KPT/BKOKU/3/981004045253</td>
-                    <td>BKOKU</td>
-                    <td>Syed Abdul Kassim Hussain Yusof</td>
-                    <td>Pembelajaran</td>
-                    <td>Sarjana Muda</td>
-                    <td>Bachelor Of Business Administration (Honours) Healthcare Management</td>
-                    <td>UiTM(Shah Alam)</td>                                        
-                    <td class="text-center">05/09/2022</td>
-                    <td class="text-center">20/07/2025</td>
-                </tr>
-                <tr>
-                    <td class="no">11.</td>                                            
-                    <td>KPTPPK/3/B980112105666</td>
-                    <td>PPK</td>
-                    <td>Aishah Binti Samsudin</td>
-                    <td>Pendengaran</td>                                       
-                    <td>Sarjana Muda</td>
-                    <td>Bachelor Of Business Administration (Hons) In International Business</td>
-                    <td>UTAR</td>
-                    <td class="text-center">02/07/2020</td>
-                    <td class="text-center">20/07/2023</td>
-                </tr> 
-                {{-- <tr>
-                    <td class="no">2.</td>                                            
-                    <td>KPTBKOKU/2/970703041223</td>
-                    <td>BKOKU</td>
-                    <td>Mohd Ali Bin Abu Kassim</td>
-                    <td>penglihatan</td>
-                    <td>Diploma</td>
-                    <td>Diploma In Information And Communication Technology</td>
-                    <td>INTI</td>
-                    <td class="text-center">03/09/2019</td>
-                    <td class="text-center">27/07/2023</td>
-                </tr> 
-                <tr> 
-                    <td class="no">3.</td>                                           
-                    <td>KPT/BKOKU/3/970204052445</td>
-                    <td>BKOKU</td>
-                    <td>Sarah Binti Yusri</td>
-                    <td>penglihatan</td>
-                    <td>Sarjana Muda</td>
-                    <td>Bachelor Of Science In Psychology With Management</td>
-                    <td>UiTM(Shah Alam)</td>
-                    <td class="text-center">15/09/2019</td>
-                    <td class="text-center">05/07/2023</td>
-                </tr> 
-                <tr>
-                    <td class="no">4.</td>
-                    <td>KPT/BKOKU/5/970703041223</td>
-                    <td>BKOKU</td>
-                    <td>Santosh A/L Ariyaran</td>
-                    <td>fizikal</td>
-                    <td>Sarjana</td>
-                    <td>Master Of Science Data Science</td>
-                    <td>UTP</td>                                     
-                    <td class="text-center">10/7/2021</td>
-                    <td class="text-center">03/08/2024</td>
-                </tr> 
-                <tr>
-                    <td class="no">5.</td>
-                    <td>KPT/BKOKU/6/960909105668</td>
-                    <td>BKOKU</td>
-                    <td>Ling Kai Jie</td>
-                    <td>pertuturan</td>                                        
-                    <td>Doktor Falsafah</td>
-                    <td>Doctor Of Philosophy (Phd) In Social Science And Humanities</td>
-                    <td>UiTM(Shah Alam)</td>
-                    <td class="text-center">08/07/2022</td>
-                    <td class="text-center">08/07/2024</td>
-                </tr> 
-                <tr>
-                    <td class="no">6.</td>
-                    <td>KPT/BKOKU/6/950804082447</td>
-                    <td>BKOKU</td>
-                    <td>Akmal Bin Kairuddin</td>
-                    <td>pertuturan</td>                                        
-                    <td>Doktor Falsafah</td>
-                    <td>Doctor Of Philosophy (Phd) Creative Industries & Art Practice</td>
-                    <td>Universiti Limkokwing</td>
-                    <td class="text-center">07/07/2023</td>
-                    <td class="text-center">18/07/2025</td>
-                </tr>
-                <tr>
-                    <td class="no">7.</td>
-                    <td>KPT/BKOKU/3/021212050334</td>
-                    <td>BKOKU</td>
-                    <td>Santishwaran A/L Paven</td>
-                    <td>pertuturan</td>                                        
-                    <td>Sarjana Muda</td>
-                    <td>Bachelor Of Science Computer Science</td>
-                    <td>UTM(Skudai)</td>
-                    <td class="text-center">05/09/2021</td>
-                    <td class="text-center">05/08/2025</td>
-                </tr>
-                <tr>
-                    <td class="no">8.</td>
-                    <td>KPT/PPK/3/990201065225</td>
-                    <td>PPK</td>
-                    <td>Ezra Hanisah Binti Md Yunos</td>
-                    <td>Pendengaran</td>                                    
-                    <td>Sarjana Muda</td>
-                    <td>Bachelor Of Science Computer Science</td>
-                    <td>UTM(Skudai)</td>
-                    <td class="text-center">05/09/2020</td>
-                    <td class="text-center">05/07/2024</td>
-                </tr>
-                <tr>
-                    <td class="no">9.</td>
-                    <td>KPT/BKOKU/3/010305058473</td>
-                    <td>BKOKU</td>
-                    <td>Arshahad Bin Kairul Zaman</td>
-                    <td>fizikal</td>                                        
-                    <td>Sarjana Muda</td>
-                    <td>Bachelor Of Public Administration (Honours)</td>
-                    <td>UiTM(Dungun)</td>
-                    <td class="text-center">07/09/2021</td>
-                    <td class="text-center">20/07/2025</td>
-                </tr>
-                <tr>
-                    <td class="no">10.</td>
-                    <td>KPT/BKOKU/3/981004045253</td>
-                    <td>BKOKU</td>
-                    <td>Syed Abdul Kassim Hussain Yusof</td>
-                    <td>Pembelajaran</td>
-                    <td>Sarjana Muda</td>
-                    <td>Bachelor Of Business Administration (Honours) Healthcare Management</td>
-                    <td>UiTM(Shah Alam)</td>                                        
-                    <td class="text-center">05/09/2022</td>
-                    <td class="text-center">20/07/2025</td>
-                </tr> --}}
+                @php
+                    $i=0;
+                @endphp
+                @php
+                    require_once app_path('helpers.php'); // Replace with the actual path to your helper file
+                @endphp
+            
+                @foreach ($kelulusan as $item)
+                        @php
+                            $i++;
+                            $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                            $nama_kursus = DB::table('maklumatakademik')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_kursus');
+                            $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
+                            $jenis_kecacatan = DB::table('pelajar')->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_jenisoku.kecacatan'); //PH,SD
+                            $institusi_pengajian = DB::table('maklumatakademik')->join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_infoipt.namaipt');
+                            
+                            // nama pemohon
+                            $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                            $conjunctions = ['bin', 'binti'];
+                            $words = explode(' ', $text);
+                            $result = [];
+                            foreach ($words as $word) {
+                                if (in_array(Str::lower($word), $conjunctions)) {
+                                    $result[] = Str::lower($word);
+                                } else {
+                                    $result[] = $word;
+                                }
+                            }
+                            $pemohon = implode(' ', $result);
+
+                            //nama kursus
+                            $text2 = ucwords(strtolower($nama_kursus)); // Assuming you're sending the text as a POST parameter
+                            $conjunctions = ['of', 'in', 'and'];
+                            $words = explode(' ', $text2);
+                            $result = [];
+                            foreach ($words as $word) {
+                                if (in_array(Str::lower($word), $conjunctions)) {
+                                    $result[] = Str::lower($word);
+                                } else {
+                                    $result[] = $word;
+                                }
+                            }
+                            $kursus = implode(' ', $result);
+                            $namakursus = transformBracketsToCapital($kursus);
+
+                            //institusi pengajian
+                            $text3 = ucwords(strtolower($institusi_pengajian)); // Assuming you're sending the text as a POST parameter
+                            $conjunctions = ['of', 'in', 'and'];
+                            $words = explode(' ', $text3);
+                            $result = [];
+                            foreach ($words as $word) {
+                                if (in_array(Str::lower($word), $conjunctions)) {
+                                    $result[] = Str::lower($word);
+                                } else {
+                                    $result[] = $word;
+                                }
+                            }
+                            $institusi = implode(' ', $result);
+                            $institusipengajian = transformBracketsToUppercase($institusi);
+                        @endphp
+                        
+                        <tr>
+                            <td class="text-center">{{$i}}</td>                                           
+                            <td><a href="{{ url('kemaskini/kelulusan/'. $nokp) }}" target="_blank">{{$item['id_permohonan']}}</a></td>
+                            <td>{{$pemohon}}</td>
+                            <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
+                            <td>{{$namakursus}}</td>
+                            <td>{{$institusipengajian}}</td>
+                            <td class="text-center">{{date('d/m/Y', strtotime($item['tkh_mula']))}}</td>
+                            <td class="text-center">{{date('d/m/Y', strtotime($item['tkh_tamat']))}}</td>
+                        </tr>
+                @endforeach 
             </tbody>
         </table>
 
-        <footer>
-            <div class="pagenum-container" style="float: right">Page
-                <span class="pagenum"></span>
-            </div>
-        </footer>
+        <?php
+            $pageNumber = 1; // Initialize the page number
+        ?>
+
+        <!-- Page number container -->
+        <div class="page-number-container">
+            Page: {{ $pageNumber }}
+        </div>
+
+        <?php
+            $pageNumber++; // Increment the page number
+        ?>
     </div>
 
     <script>
         document.getElementById("text").innerHtml = document.getElementById("text").innerHtml.toLowerCase();
     </script>
+
+    <script>
+        // Get all pages in the PDF
+        const pages = document.querySelectorAll('.page');
+
+        // Get the page number container
+        const pageNumberContainer = document.querySelector('.page-number');
+
+        // Function to update the page number when a new page is displayed
+        const updatePageNumber = () => {
+            const currentPage = Array.from(pages).findIndex(page => page.style.display !== 'none') + 1;
+            const totalPages = pages.length;
+            pageNumberContainer.textContent = `${currentPage} of ${totalPages}`;
+        };
+
+        // Attach an event listener to execute the function when the PDF is loaded
+        window.addEventListener('DOMContentLoaded', () => {
+            // Update the page number when the PDF is loaded
+            updatePageNumber();
+        });
+
+        // Attach an event listener to execute the function when a new page is displayed
+        document.addEventListener('pagechanged', () => {
+            // Update the page number when a new page is displayed
+            updatePageNumber();
+        });
+    </script>
+
 </body>
 </html>

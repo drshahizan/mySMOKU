@@ -102,26 +102,33 @@ class SekretariatController extends Controller
         return Excel::download(new SenaraiPendek, 'PermohonanDisokong.xlsx');
     }
 
+    // public function cetakSenaraiPemohonPDF() 
+    // {
+    //     // $pdf = App::make('dompdf.wrapper');
+    //     // $data = ['title' => 'Testing Page Number In Body'];
+    //     // $pdf->loadView('pages.saringan.cetakSenaraiPemohon', $data);
+    //     // $pdf->setPaper('A4', 'landscape');
+    //     // $pdf->output();
+    //     // $dom_pdf = $pdf->getDomPDF();
+
+    //     // $canvas = $dom_pdf ->get_canvas();
+    //     // $canvas->page_text(400, 570, "Page {PAGE_NUM}", null, 8, array(0, 0, 0));
+
+    //     //$kelulusan = TuntutanPermohonan::where('status', '4')->get();
+    //     //$pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon', compact('kelulusan'));
+    //     //return $pdf->stream('senarai-pemohon.pdf');
+    // }
+
     public function cetakSenaraiPemohonPDF() 
     {
-        // $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon');
-        // $pdf->setPaper('A4', 'landscape');
-        // return $pdf->stream('senarai-pemohon.pdf');
-     
-        $pdf = App::make('dompdf.wrapper');
-        $data = ['title' => 'Testing Page Number In Body'];
-        $pdf->loadView('pages.saringan.cetakSenaraiPemohon', $data);
-        $pdf->setPaper('A4', 'landscape');
-        $pdf->output();
-        $dom_pdf = $pdf->getDomPDF();
-
-        $canvas = $dom_pdf ->get_canvas();
-        $canvas->page_text(400, 570, "Page {PAGE_NUM}", null, 8, array(0, 0, 0));
-
         $kelulusan = TuntutanPermohonan::where('status', '4')->get();
 
-        return $pdf->stream('senarai-pemohon.pdf', compact('kelulusan'));;
+        $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon', compact('kelulusan'))
+            ->setPaper('A4', 'landscape'); 
+
+        return $pdf->stream('senarai-pemohon.pdf');
     }
+
 
     public function mailKeputusan(Request $request)
     {
