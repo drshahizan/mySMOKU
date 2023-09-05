@@ -59,16 +59,22 @@
 																// $img_path = "storage/app/public/profile_photo_path/".$profile_picture;
 																// dd($img_path);
 															?>
+															@if(Auth::user()->profile_photo_path !== null)
 															@foreach($user as $user1)
 															<img class="image rounded-circle" src="assets/profile_photo_path/{{$user1->profile_photo_path}}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
-															@endforeach	
+															@endforeach
+															@else
+															<img class="image rounded-circle" src="assets/profile_photo_path/default.png" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+															@endif
 														</div>
 														<!--end::Avatar-->
 														<!--begin::Name-->
 														@if(!empty($pelajar))
 														<a href="#" class="fs-3 text-gray-800 text-dark fw-bold mb-1" style="text-align:center">{{$pelajar->nama_pelajar}}</a>
 														@else
-														<a href="#" class="fs-3 text-gray-800 text-dark fw-bold mb-1" style="text-align:center">No Data</a>
+														@foreach($user as $user1)
+														<a href="#" class="fs-3 text-gray-800 text-dark fw-bold mb-1" style="text-align:center">{{$user1->nama}}</a>
+														@endforeach	
 														@endif
 														<!--end::Name-->
 														<!--begin::Email-->
@@ -76,8 +82,9 @@
 
 														<a href="#" class="fs-5 fw-semibold text-muted mb-6">{{$pelajar->emel}}</a>
 														@else
-														<a href="#" class="fs-5 fw-semibold text-muted mb-6">No data</a>
-
+														@foreach($user as $user1)
+														<a href="#" class="fs-5 fw-semibold text-muted mb-6">{{$user1->email}}</a>
+														@endforeach
 														@endif
 
 														<!--end::Email-->
@@ -104,8 +111,9 @@
 															@if(!empty($pelajar))
 															<a href="#" class="text-gray-600 text-hover-primary">{{$pelajar->emel}}</a>
 															@else
-															<a href="#" class="text-gray-600 text-hover-primary">No Data</a>
-
+															@foreach($user as $user1)
+															<a href="#" class="text-gray-600 text-hover-primary">{{$user1->email}}</a>
+															@endforeach
 															@endif
 														</div>
 														<!--begin::Details item-->
