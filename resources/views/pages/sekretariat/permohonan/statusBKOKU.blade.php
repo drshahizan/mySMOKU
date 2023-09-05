@@ -13,103 +13,123 @@
     </head>
 
     <body>
+        <!--begin::Page title-->
+	    <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+		<!--begin::Title-->
+		<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Laman Utama</h1>
+		<!--end::Title-->
+		<!--begin::Breadcrumb-->
+		<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+			<!--begin::Item-->
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Laman Utama</li>
+			<!--end::Item-->
+			<!--begin::Item-->
+			<li class="breadcrumb-item">
+				<span class="bullet bg-gray-400 w-5px h-2px"></span>
+			</li>
+			<!--end::Item-->
+			<!--begin::Item-->
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Senarai</li>
+			<!--end::Item-->
+		</ul>
+        <!--end::Breadcrumb-->
+        </div>
+        <!--end::Page title-->
+
+        <br>
+
         <!-- Main body part  -->
         <div id="main-content">
             <div class="container-fluid">
-                {{-- Table section --}}
-                <div class="row clearfix">
-                    <!-- Page header2 section  -->
-                    <div class="block-header">
-                        <div class="col-lg-4 col-md-12 col-sm-12">
-                            <h2>Senarai Permohonan BKOKU</h2>
-                        </div>
-                        <hr>
-                    </div>
-
-                        {{-- Filter section --}}
-                        {{-- <form action="" method="GET">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <select name="status" class="form-select">
-                                        <option value="">Semua Status Permohonan</option>
-                                        <option value="2" {{Request::get('status') == '2' ? 'selected':'' }} >Baru</option>
-                                        <option value="3" {{Request::get('status') == '3' ? 'selected':'' }} >Saringan</option>
-                                        <option value="4" {{Request::get('status') == '4' ? 'selected':'' }} >Disokong</option>
-                                        <option value="5" {{Request::get('status') == '5' ? 'selected':'' }} >Dikembalikan</option>
-                                        <option value="6" {{Request::get('status') == '6' ? 'selected':'' }} >Layak</option>
-                                        <option value="7" {{Request::get('status') == '7' ? 'selected':'' }} >Tidak Layak</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-md-4 right">
-                                    <button type="submit" class="btn btn-primary" style="width: 10%; padding-left:7px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
-                                </div>
-                            </div>
-                        </form> --}}
-
-                    {{-- Table senarai --}}
+                <div class="block-header">
                     <div class="row clearfix">
-                        <div class="col-lg-12">
-                        <div class="table-responsive">
-                            <div class="body">      
-                                <table id="sortTable" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                            <th style="width: 15%"><b>ID Permohonan</b></th>                                        
-                                            <th style="width: 45%"><b>Nama</b></th>
-                                            <th style="width: 13%" class="text-center"><b>Tarikh Permohonan</b></th> 
-                                            <th class="text-center" style="width: 15%">Status Permohonan</th>
-                                        </tr>
-                                    </thead>
-                                    
-                                    <tbody>
-                                        @foreach ($keseluruhan as $item)
-                                            @php
-                                                $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
-                                                $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
-                                                $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                        <div class="card">
+                            <div class="header">
+                                <h2>Senarai Permohonan BKOKU</h2>
+                            </div>
 
-                                                // nama pemohon
-                                                $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
-                                                $conjunctions = ['bin', 'binti'];
-                                                $words = explode(' ', $text);
-                                                $result = [];
-                                                foreach ($words as $word) {
-                                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                                        $result[] = Str::lower($word);
-                                                    } else {
-                                                        $result[] = $word;
+                            {{-- Filter section --}}
+                            {{-- <form action="" method="GET">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <select name="status" class="form-select">
+                                            <option value="">Semua Status Permohonan</option>
+                                            <option value="2" {{Request::get('status') == '2' ? 'selected':'' }} >Baru</option>
+                                            <option value="3" {{Request::get('status') == '3' ? 'selected':'' }} >Saringan</option>
+                                            <option value="4" {{Request::get('status') == '4' ? 'selected':'' }} >Disokong</option>
+                                            <option value="5" {{Request::get('status') == '5' ? 'selected':'' }} >Dikembalikan</option>
+                                            <option value="6" {{Request::get('status') == '6' ? 'selected':'' }} >Layak</option>
+                                            <option value="7" {{Request::get('status') == '7' ? 'selected':'' }} >Tidak Layak</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-4 right">
+                                        <button type="submit" class="btn btn-primary" style="width: 10%; padding-left:7px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
+                                    </div>
+                                </div>
+                            </form> --}}
+
+                            <div class="table-responsive">
+                                <div class="body">      
+                                    <table id="sortTable" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr style="color: white; background-color:rgb(35, 58, 108);">
+                                                <th style="width: 15%"><b>ID Permohonan</b></th>                                        
+                                                <th style="width: 45%"><b>Nama</b></th>
+                                                <th style="width: 13%" class="text-center"><b>Tarikh Permohonan</b></th> 
+                                                <th class="text-center" style="width: 15%">Status Permohonan</th>
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody>
+                                            @foreach ($keseluruhan as $item)
+                                                @php
+                                                    $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
+                                                    $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
+                                                    $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                                    $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+
+                                                    // nama pemohon
+                                                    $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
+                                                    $conjunctions = ['bin', 'binti'];
+                                                    $words = explode(' ', $text);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
+                                                        }
                                                     }
-                                                }
-                                                $pemohon = implode(' ', $result);
-                                            @endphp
+                                                    $pemohon = implode(' ', $result);
+                                                @endphp
 
-                                            @if($item['program']=="BKOKU")
-                                                <tr>
-                                                    <td>{{$id_permohonan}}</td>
-                                                    <td>{{$pemohon}}</td>
-                                                    <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                                    @if($item['status'] == "1")
-                                                        <td class="text-center"><button type="button" class="btn btn-info text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                    @elseif($item['status'] == "2")
-                                                        <td class="text-center"><button type="button" class="btn btn-primary text-white">Baharu</button></td>
-                                                    @elseif($item['status'] == "3")
-                                                        <td class="text-center"><button type="button" class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                    @elseif($item['status'] == "4")
-                                                        <td class="text-center"><button type="button" class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                    @elseif($item['status'] == "5")
-                                                        <td class="text-center"><button type="button" class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                    @elseif($item['status'] == "6")
-                                                        <td class="text-center"><button type="button" class="btn btn-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                    @elseif($item['status'] == "7")
-                                                        <td class="text-center"><button type="button" class="btn btn-danger text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                    @endif
-                                                </tr>
-                                            @endif
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                                @if($item['program']=="BKOKU")
+                                                    <tr>
+                                                        <td>{{$id_permohonan}}</td>
+                                                        <td>{{$pemohon}}</td>
+                                                        <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        @if($item['status'] == "1")
+                                                            <td class="text-center"><button type="button" class="btn btn-info text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif($item['status'] == "2")
+                                                            <td class="text-center"><button type="button" class="btn btn-primary text-white">Baharu</button></td>
+                                                        @elseif($item['status'] == "3")
+                                                            <td class="text-center"><button type="button" class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif($item['status'] == "4")
+                                                            <td class="text-center"><button type="button" class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif($item['status'] == "5")
+                                                            <td class="text-center"><button type="button" class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif($item['status'] == "6")
+                                                            <td class="text-center"><button type="button" class="btn btn-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif($item['status'] == "7")
+                                                            <td class="text-center"><button type="button" class="btn btn-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @endif
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -127,9 +147,6 @@
         </script>
 
         <script>
-            // $('#myTab button[data-target="#nav-home"]').tab('show') // Select tab by name
-            // $('#myTab button[data-target="#nav-profile"]').tab('show') // Select tab by name
-
             $('button[data-toggle="tab"]').on('#nav-home', function (event) {
                 event.target // newly activated tab
                 event.relatedTarget // previous active tab
