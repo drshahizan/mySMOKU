@@ -126,7 +126,7 @@
 										</div>
 										<!--end::Content-->
 										<!--begin::Sidebar-->
-										<div class="flex-lg-auto min-w-lg-400px">
+										{{-- <div class="flex-lg-auto min-w-lg-400px"> --}}
 											<!--begin::Card-->
 											<div class="card" data-kt-sticky="true" data-kt-sticky-name="invoice" data-kt-sticky-offset="{default: false, lg: '200px'}" data-kt-sticky-width="{lg: '250px', lg: '300px'}" data-kt-sticky-left="auto" data-kt-sticky-top="150px" data-kt-sticky-animation="false" data-kt-sticky-zindex="95">
 												<!--begin::Card body-->
@@ -173,7 +173,7 @@
 												<!--end::Card body-->
 											</div>
 											<!--end::Card-->
-										</div>
+										{{-- </div> --}}
 										<!--end::Sidebar-->
 									</div>
 									<!--end::Layout-->
