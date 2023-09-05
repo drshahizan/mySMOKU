@@ -125,23 +125,6 @@ var KTCreateAccount = function () {
 			});
 		});
 
-		// Expiry month. For more info, plase visit the official plugin site: https://select2.org/
-        $(form.querySelector('[name="card_expiry_month"]')).on('change', function() {
-            // Revalidate the field when an option is chosen
-            validations[3].revalidateField('card_expiry_month');
-        });
-
-		// Expiry year. For more info, plase visit the official plugin site: https://select2.org/
-        $(form.querySelector('[name="card_expiry_year"]')).on('change', function() {
-            // Revalidate the field when an option is chosen
-            validations[3].revalidateField('card_expiry_year');
-        });
-
-		// Expiry year. For more info, plase visit the official plugin site: https://select2.org/
-        $(form.querySelector('[name="business_type"]')).on('change', function() {
-            // Revalidate the field when an option is chosen
-            validations[2].revalidateField('business_type');
-        });
 	}
 
 	var initValidation = function () {
@@ -151,6 +134,34 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
+					'alamat_surat1': {
+						validators: {
+							notEmpty: {
+								message: 'Alamat surat menyurat diperlukan'
+							}
+						}
+					},
+					'alamat_surat_poskod': {
+						validators: {
+							notEmpty: {
+								message: 'Poskod diperlukan'
+							}
+						}
+					},
+					'alamat_surat_bandar': {
+						validators: {
+							notEmpty: {
+								message: 'Bandar diperlukan'
+							}
+						}
+					},
+					'alamat_surat_negeri': {
+						validators: {
+							notEmpty: {
+								message: 'Negeri diperlukan'
+							}
+						}
+					},
 					'no_akaunbank': {
 						validators: {
 							notEmpty: {
@@ -238,6 +249,13 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
+					'sesi': {
+						validators: {
+							notEmpty: {
+								message: 'Sesi Pengajian diperlukan'
+							}
+						}
+					},
 					'tkh_mula': {
 						validators: {
 							notEmpty: {
@@ -304,7 +322,7 @@ var KTCreateAccount = function () {
 		validations.push(FormValidation.formValidation(
 			form,
 			{
-				fields: {
+				/*fields: {
 					'amaun': {
 						validators: {
 							notEmpty: {
@@ -312,7 +330,7 @@ var KTCreateAccount = function () {
 							}
 						}
 					}
-				},
+				},*/
 
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
@@ -334,10 +352,45 @@ var KTCreateAccount = function () {
 						validators: {
 							notEmpty: {
 								message: 'Salinan Bank diperlukan'
-							}
+							},
+							file: {
+								extension: 'jpeg,jpg,png,pdf',
+								type: 'image/jpeg,image/png,application/pdf',
+								maxSize: 2097152, // 2048 * 1024
+								message: 'Fail yang dipilih tidak sah',
+							},
+						}
+					},
+				
+					'suratTawaran': {
+						validators: {
+							notEmpty: {
+								message: 'Salinan Surat Tawaran diperlukan'
+							},
+							file: {
+								extension: 'jpeg,jpg,png,pdf',
+								type: 'image/jpeg,image/png,application/pdf',
+								maxSize: 2097152, // 2048 * 1024
+								message: 'Fail yang dipilih tidak sah',
+							},
+						}
+					},
+				
+					'invoisResit': {
+						validators: {
+							notEmpty: {
+								message: 'Salinan Resit/Invois diperlukan'
+							},
+							file: {
+								extension: 'jpeg,jpg,png,pdf',
+								type: 'image/jpeg,image/png,application/pdf',
+								maxSize: 2097152, // 2048 * 1024
+								message: 'Fail yang dipilih tidak sah',
+							},
 						}
 					}
 				},
+
 
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
