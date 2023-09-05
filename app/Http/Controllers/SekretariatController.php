@@ -67,36 +67,16 @@ class SekretariatController extends Controller
 
     public function keputusanPermohonan()
     {
-        $keputusan = TuntutanPermohonan::all();
-        return view('pages.sekretariat.permohonan.keputusan', compact('keputusan'));
+        $permohonan = TuntutanPermohonan::where('status', '=','5')
+        ->orWhere('status', '=','6')
+        ->orWhere('status', '=','7')
+        ->get();
+        return view('pages.sekretariat.permohonan.keputusan', compact('permohonan'));
     }
     
     public function kembalikanPermohonan()
     {
         return view('pages.sekretariat.permohonan.kembalikan');
-    }
-
-    public function keputusan(Request $request)
-    {
-        $todayDate = Carbon::now()->format('Y-m-d');
-        $keputusan = ['Layak','Tidak Layak','Dikembalikan'];
-        if($request)
-        {
-            $keputusanPermohonan = Permohonan::when($request->date != null, function($q) use($request){
-                            return $q->whereDate('created_at',$request->date);
-                        })
-                        ->when($request->keputusan != null, function($q) use($request){
-
-                            return $q->where('keputusan_message',$request->keputusan);
-                        })
-                        ->paginate(10);
-
-            return view('pages.sekretariat.permohonan.keputusan', compact('keputusanPermohonan'));
-        }
-        else{
-            $keputusanPermohonan = Permohonan::where('user_id')->orderBy('created_at','desc')->paginate();
-            return view('pages.sekretariat.permohonan.keputusan', compact('keputusanPermohonan'));
-        }
     }
 
     public function muatTurunSuratTawaran()
