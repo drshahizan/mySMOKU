@@ -326,44 +326,6 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        {{-- <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white small-td">Semester</th>
-                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Tuntutan Yuran Pengajian (RM)</th>
-                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Tuntutan Wang Saku (RM)</th>
-                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Keseluruhan (RM)</th>
-                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="font-weight-bolder font-size-lg">
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">1</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(1200, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(4*300, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(2400, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(2600, 2)}}</td>
-                                                </tr>
-                                                <tr class="font-weight-bolder font-size-lg">
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">2</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(1000, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(4*300, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(2200, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(400, 2)}}</td>
-                                                </tr>
-                                                <tr class="font-weight-bolder font-size-lg">
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">3</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(4*300, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun+$akademik->bil_bulanpersem*300, 2)}}</td>
-                                                    @if ($permohonan->amaun+$akademik->bil_bulanpersem*300 > 400)
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold red-color">{{number_format(400, 2)}}</td>
-                                                    @else
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right bold">{{number_format($permohonan->amaun+$akademik->bil_bulanpersem*300, 2)}}</td>
-                                                    @endif
-                                                </tr>
-                                            </tbody>
-                                        </table> --}}
                                         <table class="maklumat2">
                                             <tr>
                                                 <td class="vertical-top">Jumlah Layak Tuntut (RM)</td>
@@ -376,7 +338,7 @@
                                                 <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
                                             </tr>
                                             <tr>
-                                                <td>Keputusan akhir:</td>
+                                                <td>Keputusan akhir</td>
                                                 <td>:</td>
                                                 <td class="hidden-sm-down">
                                                     <div class="form-group c_form_group">
@@ -394,9 +356,6 @@
                                     <!--end: Invoice body-->       
                                     <div class="col-md-6 text-right">
                                         <button type="submit" class="btn btn-primary theme-bg gradient action-btn" value="Hantar" id="check">Hantar</button>
-                                        {{-- <button type="submit" name="submit" class="btn btn-success text-white" value="Layak"><i class="fa fa-check"></i> Layak</button>
-                                        <button type="submit" name="submit" class="btn btn-warning theme-bg gradient action-btn" value="Kembalikan"><i class="fa fa-reply"></i> Kembalikan</button>
-                                        <button type="submit" name="submit" class="btn btn-danger" value="TidakLayak"><i class="bi bi-x"></i> Tidak Layak</button> --}}
                                     </div>
                                 </form>  
                             </div>                   
