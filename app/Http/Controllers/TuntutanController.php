@@ -29,7 +29,8 @@ class TuntutanController extends Controller
             
             $wordlist = Tuntutan::where('nokp_pelajar', '<=', $nokp)->get();
             $wordCount = $wordlist->count();
-            $running_num =  $wordCount + 1;
+            //$running_num =  $wordCount + 1; //sebab nak guna satu id je
+            $running_num =  2; // try duluuu
 
 
             foreach($resit as $img) {
@@ -43,7 +44,7 @@ class TuntutanController extends Controller
                 $data->id_permohonan=$idmohon;
                 $data->nokp_pelajar=$nokp;
                 $data->sesi=$request->sesi;
-                $data->sesi=$request->nota_resit;
+                $data->nota_resit=$request->nota_resit;
                 $data->semester=$request->semester;
                 $data->yuran=$request->jenis_yuran;
                 $data->no_resit=$request->no_resit;

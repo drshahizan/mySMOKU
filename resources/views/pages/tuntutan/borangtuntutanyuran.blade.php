@@ -192,7 +192,7 @@
 														{{-- <td>{{ $tuntutan->semester}}</td> --}}
 														<td>{{ $tuntutan->yuran}}</td>
 														<td>{{ $tuntutan->no_resit}}</td>
-														<td>Keterangan</td>
+														<td>{{ $tuntutan->nota_resit}}</td>
 														<td><a href="/assets/dokumen/tuntutan/{{$tuntutan->resit}}" target="_blank">Papar</a></td>
 														
 													</tr>
