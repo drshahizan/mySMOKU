@@ -145,7 +145,7 @@
 															
 															<div class="d-flex flex-center mt-15">
 																<button type="submit"  class="btn btn-primary">
-																	Masukkan
+																	Simpan
 																</button>&nbsp;&nbsp;&nbsp;
 														
 															<!--<a href="#" class="btn btn-danger">Batal</a>-->
