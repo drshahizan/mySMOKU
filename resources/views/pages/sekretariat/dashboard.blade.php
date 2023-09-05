@@ -87,9 +87,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-list-ol text-light" style="font-size: 25px;">
 															<span class="path1"></span>
@@ -115,9 +115,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-lines text-light" style="font-size: 25px;">
 															<span class="path1"></span>
@@ -144,9 +144,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 25px;">
 															<span class="path1"></span>
@@ -172,9 +172,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 														<i class="fas fa-th-list text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
@@ -202,9 +202,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
@@ -229,9 +229,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 														<i class="fa-solid fa-reply-all text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
@@ -256,9 +256,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-user-check text-light" style="font-size: 25px;">
 															<span class="path1"></span>
@@ -284,9 +284,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-user-xmark text-light" style="font-size: 25px;">
 															<span class="path1"></span>
@@ -652,9 +652,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-list-ol text-light" style="font-size: 25px;">
 															<span class="path1"></span>
@@ -680,9 +680,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-lines text-light" style="font-size: 25px;">
 															<span class="path1"></span>
@@ -709,9 +709,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 25px;">
 															<span class="path1"></span>
@@ -737,9 +737,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 														<i class="fas fa-th-list text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
@@ -767,9 +767,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
@@ -794,9 +794,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 														<i class="fa-solid fa-reply-all text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
@@ -821,9 +821,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-user-check text-light" style="font-size: 25px;">
 															<span class="path1"></span>
@@ -849,9 +849,9 @@
 										<!--begin::Col-->
 										<div class="col-3">
 											<!--begin::Items-->
-											<div class="px-6 pt-7 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
-												<div class="symbol symbol-30px me-3 mb-3">
+												<div class="symbol symbol-30px me-3 mb-5">
 													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-user-xmark text-light" style="font-size: 25px;">
 															<span class="path1"></span>
