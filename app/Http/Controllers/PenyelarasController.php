@@ -132,13 +132,38 @@ class PenyelarasController extends Controller
 
     public function permohonanbaru()
     {
-        $smoku = Smoku::join('permohonan','permohonan.nokp_pelajar','=','smoku.nokp')
-        //->join('maklumatakademik','maklumatakademik.nokp_pelajar','=','smoku.nokp')
-        ->get(['smoku.*', 'permohonan.*'])
-        ->where('status','=', '2')
-        ->where('jenis','=', 'IPTA');
+        $smoku = Smoku::leftJoin('permohonan','permohonan.nokp_pelajar','=','smoku.nokp')
+        ->leftJoin('maklumatakademik','maklumatakademik.nokp_pelajar','=','smoku.nokp')
+        ->leftJoin('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
+        ->where('permohonan.status','=', '2')
+        ->where('jenis','=', 'IPTA')
+        ->get(['smoku.*', 'permohonan.*', 'maklumatakademik.*', 'bk_infoipt.namaipt']);
+        
         //return($smoku);
         return view('pages.penyelaras.permohonan.permohonanbaru', compact('smoku'));
+    }
+
+    public function viewpermohonanbaru($nokp){
+        $pelajar = Permohonan::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
+        ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
+        ->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
+        ->get(['pelajar.*', 'bk_jantina.*','bk_bangsa.*','bk_bangsa.*','bk_jenisoku.*'])
+        ->where('nokp_pelajar', $nokp);
+        $waris = Waris::join('bk_hubungan','bk_hubungan.kodhubungan','=','waris.hubungan')
+        ->join('bk_negeri','bk_negeri.id','=','waris.alamat_negeri')
+        ->join('bk_bandar','bk_bandar.id','=','waris.alamat_bandar')
+        ->get(['waris.*', 'bk_hubungan.*', 'bk_negeri.nama as namanegeri', 'bk_bandar.nama as namabandar'])
+        ->where('nokp_pelajar', $nokp);
+        $akademik = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
+        ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
+        ->join('bk_mod','bk_mod.kodmod','=','maklumatakademik.mod')
+        ->join('bk_sumberbiaya','bk_sumberbiaya.kodbiaya','=','maklumatakademik.sumber_biaya')
+        ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*', 'bk_mod.*', 'bk_sumberbiaya.*'])
+        ->where('nokp_pelajar', $nokp);
+        $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', $nokp);
+        $dokumen = Dokumen::all()->where('nokp_pelajar', $nokp);
+        return view('pages.penyelaras.permohonan.mohonbaruform-view', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
+        
     }
 
    
