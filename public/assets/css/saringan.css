@@ -486,7 +486,7 @@ td button{
 }
 
 /* date range picker */
-/* .daterangepicker tr td, .daterangepicker th{
+.daterangepicker tr td, .daterangepicker th{
     padding: 0px!important;
 }
 
@@ -498,7 +498,7 @@ td button{
     border-color: transparent;
     color: #000;
     border-radius: 0;
-} */
+}
 
 .date tr td{
     padding: 0px!important;
