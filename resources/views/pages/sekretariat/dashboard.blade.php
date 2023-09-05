@@ -86,7 +86,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fas fa-list-ol text-light" style="font-size: 25px;">
+														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
@@ -114,7 +114,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fa-solid fa-file-lines text-light" style="font-size: 25px;">
+														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
@@ -143,7 +143,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 25px;">
+														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
@@ -170,7 +170,7 @@
 											<div class="px-5 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-														<i class="fas fa-th-list text-light" style="font-size: 25px;">
+														<i class="fas fa-th-list text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom:5px; padding-left:5px; font-family:sans-serif;">Sedang Disaring</span>
@@ -200,7 +200,7 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 25px;">
+														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
@@ -227,7 +227,7 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-														<i class="fa-solid fa-reply-all text-light" style="font-size: 25px;">
+														<i class="fa-solid fa-reply-all text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
@@ -255,7 +255,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fas fa-user-check text-light" style="font-size: 25px;">
+														<i class="fas fa-user-check text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
@@ -283,7 +283,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fa-solid fa-user-xmark text-light" style="font-size: 25px;">
+														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
@@ -651,7 +651,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fas fa-list-ol text-light" style="font-size: 25px;">
+														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
@@ -679,7 +679,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fa-solid fa-file-lines text-light" style="font-size: 25px;">
+														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
@@ -708,7 +708,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 25px;">
+														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
@@ -735,7 +735,7 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-														<i class="fas fa-th-list text-light" style="font-size: 25px;">
+														<i class="fas fa-th-list text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Sedang Disaring</span>
@@ -765,7 +765,7 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 25px;">
+														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
@@ -792,7 +792,7 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-														<i class="fa-solid fa-reply-all text-light" style="font-size: 25px;">
+														<i class="fa-solid fa-reply-all text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
@@ -820,7 +820,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fas fa-user-check text-light" style="font-size: 25px;">
+														<i class="fas fa-user-check text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
@@ -848,7 +848,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fa-solid fa-user-xmark text-light" style="font-size: 25px;">
+														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>

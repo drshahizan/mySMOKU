@@ -77,10 +77,9 @@
             
                                             <div class="col-md-3">
                                                 <select name="status" class="form-select">
-                                                    <option value="">Pilih Keputusan</option>
-                                                    <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
-                                                    <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
-                                                    <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
+                                                    <option value="">Pilih Semua Keputusan</option>
+                                                    <option value="6" {{Request::get('status') == '6' ? 'selected':'' }} >Layak</option>
+                                                    <option value="7" {{Request::get('status') == '7' ? 'selected':'' }} >Tidak Layak</option>
                                                 </select>
                                             </div>
 
@@ -155,10 +154,9 @@
             
                                             <div class="col-md-3">
                                                 <select name="status" class="form-select">
-                                                    <option value="">Pilih Keputusan</option>
-                                                    <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
-                                                    <option value="Dikembalikan" {{Request::get('status') == 'Dikembalikan' ? 'selected':'' }} >Dikembalikan</option>
-                                                    <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
+                                                    <option value="">Pilih Semua Keputusan</option>
+                                                    <option value="6" {{Request::get('status') == '6' ? 'selected':'' }} >Layak</option>
+                                                    <option value="7" {{Request::get('status') == '7' ? 'selected':'' }} >Tidak Layak</option>
                                                 </select>
                                             </div>
 
