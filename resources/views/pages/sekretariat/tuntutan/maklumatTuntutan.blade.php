@@ -192,6 +192,11 @@
                                 <br>
                                 <h6>Maklumat tuntutan:</h6>
                                 <br>
+                                @php
+                                    $str = $permohonan->id_permohonan;
+                                    $id_permohonan = str_replace('/', '-', $str);
+                                    $invoisResit = "/assets/dokumen/permohonan/salinan_invoisResit_".$id_permohonan.".pdf";
+                                @endphp
                                 <form method="POST" action="{{ url('tuntutan/saring/maklumat/'.$permohonan->id) }}" id="saring">
                                     <div class="row clearfix">
                                         <div class="col-md-12">
@@ -209,7 +214,7 @@
                                                         <tr>
                                                             <td style="text-align:right;">1</td>
                                                             <td>
-                                                                <span><a href="{{ url('salinan/dokumen/'.$permohonan->id) }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                                <span><a href="{{ url('/assets/dokumen/permohonan/salinan_invoisResit_'.$id_permohonan.'.pdf') }}" target="_blank">Keputusan Peperiksaan</a></span>
                                                             </td>           
                                                             <td class="hidden-sm-down">
                                                                 <div class="form-group c_form_group">
@@ -227,7 +232,7 @@
                                                         <tr>
                                                             <td style="text-align:right;">2</td>
                                                             <td>
-                                                                <span><a href="{{ url('salinan/dokumen/'.$permohonan->id) }}" target="_blank">Invois/resit 1</a></span>
+                                                                <span><a href="{{ url($invoisResit) }}" target="_blank">Invois/resit 1</a></span>
                                                             </td>           
                                                             <td class="hidden-sm-down">
                                                                 <div class="form-group c_form_group">
@@ -245,7 +250,7 @@
                                                         <tr>
                                                             <td style="text-align:right;">3</td>
                                                             <td>
-                                                                <span><a href="{{ url('salinan/dokumen/'.$permohonan->id) }}" target="_blank">Invois/resit 2</a></span>
+                                                                <span><a href="{{ url($invoisResit) }}" target="_blank">Invois/resit 2</a></span>
                                                             </td>           
                                                             <td class="hidden-sm-down">
                                                                 <div class="form-group c_form_group">
@@ -263,7 +268,7 @@
                                                         <tr>
                                                             <td style="text-align:right;">4</td>
                                                             <td>
-                                                                <span><a href="{{ url('salinan/dokumen/'.$permohonan->id) }}" target="_blank">Invois/resit 3</a></span>
+                                                                <span><a href="{{ url($invoisResit) }}" target="_blank">Invois/resit 3</a></span>
                                                             </td>           
                                                             <td class="hidden-sm-down">
                                                                 <div class="form-group c_form_group">
@@ -363,7 +368,7 @@
                                             <tr>
                                                 <td class="vertical-top">Jumlah Layak Tuntut (RM)</td>
                                                 <td class="vertical-top">:</td>
-                                                <td class="vertical-top"><input type="number" name="layak_tuntut" value="{{$jumlah}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                <td class="vertical-top"><input type="number" name="layak_tuntut" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                             </tr>
                                             <tr>
                                                 <td class="vertical-top">Catatan</td>
@@ -375,11 +380,11 @@
                                                 <td>:</td>
                                                 <td class="hidden-sm-down">
                                                     <div class="form-group c_form_group">
-                                                        <select id="invois" name="invois" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                        <select id="keputusan" name="submit" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                             <option value="">Pilih</option>
-                                                            <option value="lengkap">Dikembalikan</option>
-                                                            <option value="tak_lengkap">Layak</option>
-                                                            <option value="tak_lengkap">Tidak Layak</option>
+                                                            <option value="Kembalikan">Kembalikan</option>
+                                                            <option value="Layak">Layak</option>
+                                                            <option value="TidakLayak">Tidak Layak</option>
                                                         </select>
                                                     </div>
                                                 </td>
