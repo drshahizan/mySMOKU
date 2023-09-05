@@ -178,7 +178,7 @@
 														<i class="fas fa-th-list text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:sans-serif;">Saringan</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:sans-serif;">Disaring</span>
 														</i>
 												</div>
 												<!--end::Symbol-->
@@ -743,7 +743,7 @@
 														<i class="fas fa-th-list text-light" style="font-size: 25px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
-															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:sans-serif;">Saringan</span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:10px; font-family:sans-serif;">Disaring</span>
 														</i>
 												</div>
 												<!--end::Symbol-->
