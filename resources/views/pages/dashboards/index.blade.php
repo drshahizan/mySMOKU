@@ -336,20 +336,7 @@
 																	<!--end::Col-->
 																	
 																</div>
-																<!--end::Row-->
-																<div class="d-flex justify-content-end">
-																	<!--begin::Button-->
-																	<button type="submit" id="kt_ecommerce_customer_profile_submit" class="btn btn-light-primary">
-																		<span class="indicator-label">Save</span>
-																		<span class="indicator-progress">Please wait...
-																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-																	</button>
-																	<!--end::Button-->
-																</div>
-															</form>
-															<!--end::Form-->
-														</div>
-														<!--end::Card body-->
+																
 													</div>
 													<!--end::Card-->
 													<!--begin::Card-->
