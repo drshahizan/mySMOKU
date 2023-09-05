@@ -328,7 +328,7 @@
                                         </table>
                                         <table class="maklumat2">
                                             <tr>
-                                                <td class="vertical-top">Jumlah Layak Tuntut (RM)</td>
+                                                <td class="vertical-top">Jumlah tuntutan yang disokong (RM)</td>
                                                 <td class="vertical-top">:</td>
                                                 <td class="vertical-top"><input type="number" name="layak_tuntut" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                             </tr>
