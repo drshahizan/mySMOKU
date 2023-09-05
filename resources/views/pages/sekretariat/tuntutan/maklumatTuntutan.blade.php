@@ -10,7 +10,7 @@
         }
         .table{
             table-layout: fixed;
-            width: 75%;
+            width: 80%;
         }
         select{
             padding: 3px 6px!important;
@@ -33,7 +33,7 @@
             margin: 0;
         }
         input[type=number]{
-            width: 70px;
+            width: 80px;
             text-align: right;
             border: 1px solid #ccc;
             border-radius: 6px;
@@ -62,6 +62,12 @@
         .vertical-top{
             vertical-align: top!important;
         }
+        /* .th-yellow{
+            background-color: #a27a00!important;
+        }
+        .th-green{
+            background-color: #007842!important;
+        } */
     </style>
     <!-- Main body part  -->
     <div id="main-content">
@@ -184,7 +190,7 @@
                                     </table>   
                                 <hr>
                                 <br>
-                                <h6>Maklumat resit/invois:</h6>
+                                <h6>Maklumat tuntutan:</h6>
                                 <br>
                                 <form method="POST" action="{{ url('tuntutan/saring/maklumat/'.$permohonan->id) }}" id="saring">
                                     <div class="row clearfix">
@@ -196,18 +202,18 @@
                                                             <th style="width: 5%; text-align:right;">No.</th>                                                        
                                                             <th style="width: 20%;">Item</th>
                                                             <th style="width: 25%;">Keputusan Saringan</th>
-                                                            <th style="width: 50%;">Jenis Yuran</th>
+                                                            <th style="width: 50%;">Perihal</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr>
                                                             <td style="text-align:right;">1</td>
                                                             <td>
-                                                                <span><a href="{{ url('salinan/dokumen/'.$permohonan->id) }}" target="_blank">Invois/resit 1</a></span>
+                                                                <span><a href="{{ url('salinan/dokumen/'.$permohonan->id) }}" target="_blank">Keputusan Peperiksaan</a></span>
                                                             </td>           
                                                             <td class="hidden-sm-down">
                                                                 <div class="form-group c_form_group">
-                                                                    <select id="invois" name="invois" class="form-control" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                    <select id="invois" name="invois" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                                         <option value="">Pilih</option>
                                                                         <option value="lengkap">Lengkap</option>
                                                                         <option value="tak_lengkap">Tidak Lengkap</option>
@@ -215,17 +221,35 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                Yuran Peperiksaan
+                                                                Sesi/semester {{$akademik->sesi}}-0{{$akademik->sem_semasa}}
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="text-align:right;">1</td>
+                                                            <td style="text-align:right;">2</td>
+                                                            <td>
+                                                                <span><a href="{{ url('salinan/dokumen/'.$permohonan->id) }}" target="_blank">Invois/resit 1</a></span>
+                                                            </td>           
+                                                            <td class="hidden-sm-down">
+                                                                <div class="form-group c_form_group">
+                                                                    <select id="invois" name="invois" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                        <option value="">Pilih</option>
+                                                                        <option value="lengkap">Lengkap</option>
+                                                                        <option value="tak_lengkap">Tidak Lengkap</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                Kad Matrik
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align:right;">3</td>
                                                             <td>
                                                                 <span><a href="{{ url('salinan/dokumen/'.$permohonan->id) }}" target="_blank">Invois/resit 2</a></span>
                                                             </td>           
                                                             <td class="hidden-sm-down">
                                                                 <div class="form-group c_form_group">
-                                                                    <select id="invois" name="invois" class="form-control" onchange="select2()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                    <select id="invois" name="invois" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                                         <option value="">Pilih</option>
                                                                         <option value="lengkap">Lengkap</option>
                                                                         <option value="tak_lengkap">Tidak Lengkap</option>
@@ -237,13 +261,13 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="text-align:right;">1</td>
+                                                            <td style="text-align:right;">4</td>
                                                             <td>
                                                                 <span><a href="{{ url('salinan/dokumen/'.$permohonan->id) }}" target="_blank">Invois/resit 3</a></span>
                                                             </td>           
                                                             <td class="hidden-sm-down">
                                                                 <div class="form-group c_form_group">
-                                                                    <select id="invois" name="invois" class="form-control" onchange="select3()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                    <select id="invois" name="invois" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                                         <option value="">Pilih</option>
                                                                         <option value="lengkap">Lengkap</option>
                                                                         <option value="tak_lengkap">Tidak Lengkap</option>
@@ -259,12 +283,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h6>Tuntutan:</h6>
+                                    <h6>Pengiraan:</h6>
                                     <br>
                                     <!--begin: Invoice body-->
                                     {{csrf_field()}}     
                                     @php
-                                        $jumlah = 400;
+                                        $jumlah = 600+1800;
                                         if($jumlah > 5000){
                                             $jumlah = 5000;
                                         }
@@ -274,10 +298,10 @@
                                             <thead>
                                                 <tr>
                                                     <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
-                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dituntut (RM)</th>
-                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
-                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
-                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                                    <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dituntut (RM)</th>
+                                                    <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -285,15 +309,15 @@
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(1200, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(600, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(2600, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran" id="yuran" value="{{number_format(600, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(100, 2)}}</td>
                                                 </tr>
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(1300, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(100, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(1800, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran" id="yuran" value="{{number_format(1800, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="baki">{{number_format(0, 2)}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -351,7 +375,7 @@
                                                 <td>:</td>
                                                 <td class="hidden-sm-down">
                                                     <div class="form-group c_form_group">
-                                                        <select id="invois" name="invois" class="form-control" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                        <select id="invois" name="invois" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                             <option value="">Pilih</option>
                                                             <option value="lengkap">Dikembalikan</option>
                                                             <option value="tak_lengkap">Layak</option>
