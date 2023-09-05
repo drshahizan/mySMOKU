@@ -35,7 +35,7 @@ class TuntutanController extends Controller
             $name1='resit';  
             //$filenamekepPeperiksaan=$name1.'-'.$sesi.'_'.$sem.'.'.$kepPeperiksaan->getClientOriginalExtension();
             $filenameresit=$name1.'-'.$nokp.'_'.$running_num.'.'.$resit->getClientOriginalExtension();
-            //dd($request->filenamekepPeperiksaan);
+            //dd($resit);
             $request->resit->move('assets/dokumen/tuntutan',$filenameresit);
             $permohonan = TuntutanPermohonan::all()->where('nokp_pelajar', '=', $nokp)->first();
             $idmohon =  $permohonan->id_permohonan;

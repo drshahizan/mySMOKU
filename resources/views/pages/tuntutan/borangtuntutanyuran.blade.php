@@ -99,13 +99,13 @@
 																	<div class="col-lg-6">
 																		<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Resit/ Invois&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
 																		<!--begin::Input group-->
-																		{{--<div class="mb-5">
+																		<div class="mb-5">
 																			<input type="file" id="resit" name="resit"/>
 																			
-																		</div>--}}
+																		</div>
 													
-																		<div class="input-group control-group img_div form-group col-md-4" >
-																			<input type="file" id="resit" name="resit[]" />
+																		{{--<div class="input-group control-group img_div form-group col-md-4" >
+																			<input type="file" id="resit" name="resit" />
 																			
 																			
 																		</div>
@@ -125,6 +125,7 @@
 																			</div>
 																		  </div>
 																		  <!-- End -->
+																		  --}}
 
 																	</div>
 																
