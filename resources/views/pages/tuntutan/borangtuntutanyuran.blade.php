@@ -180,8 +180,9 @@
 													{{-- <th>Semester</th> --}}
 													<th>Jenis Yuran</th>
 													<th>No resit</th>
-													<th>Keterangan</th>
+													<th>Perihal</th>
 													<th>Salinan</th>
+													<th>Amaun</th>
 												</tr>
 												</thead>
 												<tbody class="fw-semibold text-gray-600">
