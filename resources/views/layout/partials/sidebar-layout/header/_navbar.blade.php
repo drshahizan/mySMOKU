@@ -40,10 +40,15 @@
 	<div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
         @php
             $nama = DB::table('smoku')->where('nokp', Auth::user()->nokp)->value('nama');
+            $fullname = Auth::user()->nama;
         @endphp
         <!--begin::Menu wrapper-->
-        @if($nama)
-            <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-5 text-white" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold;">
+        @if($fullname)
+            <div class="cursor-pointer symbol  symbol-35px symbol-2by3 fs-5 text-white" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold;">
+                {{$fullname}}
+            </div>
+        @elseif($nama)
+            <div class="cursor-pointer symbol  symbol-35px symbol-2by3 fs-5 text-white" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold;">
                 {{$nama}}
             </div>
         @else
