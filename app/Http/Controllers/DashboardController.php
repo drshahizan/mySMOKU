@@ -46,7 +46,8 @@ class DashboardController extends Controller
         ->where('nokp_pelajar', Auth::user()->nokp);
         //return view('pages.permohonan.statusmohon', compact('permohonan'));
         $user = User::all()->where('nokp',Auth::user()->nokp);
-        $tuntutan = Tuntutan::all()->where('nokp',Auth::user()->nokp);
+        $tuntutan = Tuntutan::where('nokp_pelajar',Auth::user()->nokp)->get();
+        
 
 
         if(Auth::user()->tahap=='1')
