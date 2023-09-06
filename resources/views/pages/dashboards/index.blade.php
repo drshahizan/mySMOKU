@@ -231,7 +231,8 @@
 															<!--end::Card title-->
 														</div>
 														<div class="body">
-														<table class="table table-rounded table-striped border gy-7 gs-7">
+															<div class="table-responsive">
+														<table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
 															<thead>
 														<tr class="fw-semibold fs-6 text-gray-700 border-bottom border-gray-200">
 															<th>Id Tuntutan</th>
@@ -261,6 +262,7 @@
 
 													</div>		
 													</div>
+												</div>
 													
 											</div>
 										
