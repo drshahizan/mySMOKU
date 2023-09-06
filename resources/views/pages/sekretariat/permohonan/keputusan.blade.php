@@ -127,7 +127,7 @@
                                                                 <td>{{$id_permohonan}}</td>
                                                                 <td>{{$pemohon}}</td>
                                                                 <td class="text-center">AM1234</td>
-                                                                <td class="text-center">{{$item['created_at']->format('Y-m-d')}}</td>
+                                                                <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                                 @if($item['status'] == "6")
                                                                     <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif ($item['status']=="5")
@@ -139,6 +139,11 @@
                                                         @endif
                                                     @endif
                                                     @endforeach
+                                                            <td>B/6/900623035672</td>
+                                                            <td>Wan Aminah binti Wan Hasan</td>
+                                                            <td class="text-center">AM1234</td>
+                                                            <td class="text-center">06/09/2023</td>
+                                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td>
                                                 </tbody>
                                             </table>
                                         </div>
