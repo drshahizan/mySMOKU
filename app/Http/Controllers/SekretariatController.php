@@ -36,6 +36,19 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.permohonan.statusBKOKU', compact('keseluruhan'));
     }
 
+    public function filterStatusPermohonanBKOKU(Request $request, $status)
+    {
+        // Use $status parameter to filter the applications
+        $keseluruhan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
+            return $q->whereDate('created_at', $request->date);
+        })
+        ->when($status != null, function ($q) use ($status) {
+            return $q->where('status', $status);
+        })
+        ->get();
+
+        return view('pages.sekretariat.permohonan.statusBKOKU', compact('keseluruhan'));
+    }
 
     public function statusPermohonanPPK(Request $request)
     {
@@ -44,6 +57,20 @@ class SekretariatController extends Controller
         })
         ->when($request->status != null, function ($q) use ($request) {
             return $q->where('status', $request->status);
+        })
+        ->get();
+
+        return view('pages.sekretariat.permohonan.statusPPK', compact('keseluruhan'));
+    }
+
+    public function filterStatusPermohonanPPK(Request $request, $status)
+    {
+        // Use $status parameter to filter the applications
+        $keseluruhan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
+            return $q->whereDate('created_at', $request->date);
+        })
+        ->when($status != null, function ($q) use ($status) {
+            return $q->where('status', $status);
         })
         ->get();
 
