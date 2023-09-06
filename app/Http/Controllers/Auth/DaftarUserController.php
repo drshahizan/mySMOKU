@@ -45,7 +45,9 @@ class DaftarUserController extends Controller
 
             
             if ($nokp_smoku != null) {
-                DB::table('smoku')->where('nokp' ,$request->nokp)->update([
+                DB::table('smoku')->where('nokp' ,$request->nokp)
+                ->orWhere('noJKM','=', $request->nokp)
+                ->update([
 
                 'verify'=>'1'
     

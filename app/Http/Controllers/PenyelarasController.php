@@ -50,13 +50,16 @@ class PenyelarasController extends Controller
         ]);
 
         //$nokp_in = $request->nokp;
-        $nokp_smoku=Smoku::where([
-            ['nokp', '=', $request->nokp],
-            ])->first();
+        $nokp_smoku=Smoku::where([['nokp', '=', $request->nokp]])
+        ->orWhere('noJKM','=', $request->nokp)
+        ->first();
+        //dd($nokp_smoku); 
 
             
             if ($nokp_smoku != null) {
-                DB::table('smoku')->where('nokp' ,$request->nokp)->update([
+                DB::table('smoku')->where('nokp' ,$request->nokp)
+                ->orWhere('noJKM','=', $request->nokp)
+                ->update([
 
                 'verify'=>'1',
                 'jenis'=>'IPTA',
@@ -85,8 +88,11 @@ class PenyelarasController extends Controller
 
                 //return view('pages.auth.semaksyarat');
                 $nokp_in = $request->nokp;
-                $nokp = $request->session()->put('nokp',$nokp_in);
-                //dd($nokp_in);
+                $nokpornojkm = Smoku::where('nokp', $nokp_in)->orWhere('noJKM','=', $nokp_in)->first();
+                //$nokp = $request->session()->put('nokp',$nokp_in);
+                $nokp1 =  $nokpornojkm->nokp;
+                $nokp = $request->session()->put('nokp',$nokp1);
+                //dd($nokp1);
                 return redirect()->route('dashboardpenyelaras')->with($nokp)
                 ->with('message', $nokp_in. ' SAH SEBAGAI OKU BERDAFTAR DENGAN JKM');
             } else {
@@ -177,10 +183,10 @@ class PenyelarasController extends Controller
 
         //$nokp = $request->session()->get('nokp_pelajar');
         //dd($nokp);
-        $smoku = Smoku::join('bk_jantina','bk_jantina.kodjantina','=','smoku.jantina')
-        ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'smoku.bangsa')
-        ->join('bk_hubungan','bk_hubungan.kodhubungan','=','smoku.hubungan')
-        ->join('bk_jenisoku','bk_jenisoku.kodoku','=','smoku.kecacatan')
+        $smoku = Smoku::leftJoin('bk_jantina','bk_jantina.kodjantina','=','smoku.jantina')
+        ->leftJoin('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'smoku.bangsa')
+        ->leftJoin('bk_hubungan','bk_hubungan.kodhubungan','=','smoku.hubungan')
+        ->leftJoin('bk_jenisoku','bk_jenisoku.kodoku','=','smoku.kecacatan')
         ->get(['smoku.*', 'bk_jantina.*', 'bk_bangsa.*', 'bk_hubungan.*', 'bk_jenisoku.*'])
         ->where('nokp', $nokp);
         $infoipt = Infoipt::all()->where('jenis_ipt','IPTA')->sortBy('namaipt');
@@ -190,25 +196,25 @@ class PenyelarasController extends Controller
         $biaya = Sumberbiaya::all()->sortBy('kodbiaya');
         $hubungan = Hubungan::all()->sortBy('kodhubungan');
 
-        $pelajar = Permohonan::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
-        ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
-        ->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
+        $pelajar = Permohonan::leftJoin('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
+        ->leftJoin('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
+        ->leftJoin('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
         ->get(['pelajar.*', 'bk_jantina.*','bk_bangsa.*','bk_bangsa.*','bk_jenisoku.*'])
         ->where('nokp_pelajar', $nokp);
         //dd($pelajar);
-        $waris = Waris::join('bk_hubungan','bk_hubungan.kodhubungan','=','waris.hubungan')
+        $waris = Waris::leftJoin('bk_hubungan','bk_hubungan.kodhubungan','=','waris.hubungan')
         ->get(['waris.*', 'bk_hubungan.*'])
         ->where('nokp_pelajar', $nokp);
         //dd($waris);
-        $akademik = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
-        ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
-        ->join('bk_mod','bk_mod.kodmod','=','maklumatakademik.mod')
-        ->join('bk_sumberbiaya','bk_sumberbiaya.kodbiaya','=','maklumatakademik.sumber_biaya')
+        $akademik = Akademik::leftJoin('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
+        ->leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
+        ->leftJoin('bk_mod','bk_mod.kodmod','=','maklumatakademik.mod')
+        ->leftJoin('bk_sumberbiaya','bk_sumberbiaya.kodbiaya','=','maklumatakademik.sumber_biaya')
         ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*', 'bk_mod.*', 'bk_sumberbiaya.*'])
         ->where('nokp_pelajar', $nokp);
         $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', $nokp);
-        $akademikmqa = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
-        ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
+        $akademikmqa = Akademik::leftJoin('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
+        ->leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
         ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*'])
         ->where('nokp_pelajar', $nokp);
         $status = Status::all()->where('nokp_pelajar', $nokp);

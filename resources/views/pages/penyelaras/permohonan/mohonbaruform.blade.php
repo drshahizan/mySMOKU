@@ -609,7 +609,7 @@ $(document).ready(function(){
 															<label class="form-label mb-3">Nama</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" placeholder="" @foreach($waris as $waris) @if($waris->nama_waris)  value="{{$waris->nama_waris}}" @else value="{{$smoku->nama_waris}}"  @endif  />
+															<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" placeholder="" value="{{$smoku->nama_waris}}" />
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
@@ -622,7 +622,7 @@ $(document).ready(function(){
 																<div class="row fv-row">
 																	<!--begin::Col-->
 																	<div class="col-12">
-																		<input type="text" class="form-control form-control-lg form-control-solid" id="nokp_waris" name="nokp_waris" placeholder="" @if($waris->nokp_waris)  value="{{$waris->nokp_waris}}" @else value="{{$smoku->nokp_waris}}"  @endif />
+																		<input type="text" class="form-control form-control-lg form-control-solid" id="nokp_waris" name="nokp_waris" placeholder="" value="{{$smoku->nokp_waris}}" />
 																	</div>
 																	<!--end::Col-->
 																</div>
@@ -664,7 +664,7 @@ $(document).ready(function(){
 															<label class="form-label mb-6">(Jika Lain-lain) Sila Nyatakan:</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="form-control form-control-lg form-control-solid" id="lain_hubungan" name="lain_hubungan" placeholder="" @if($waris->nokp_waris)  value="{{$waris->lain_hubungan}}" @else value="{{$smoku->lain_hubungan}}"  @endif />
+															<input type="text" class="form-control form-control-lg form-control-solid" id="lain_hubungan" name="lain_hubungan" placeholder="" value="{{$smoku->lain_hubungan}}" />
 															<!--end::Input-->													
 															</div>
 														</div>
@@ -676,7 +676,7 @@ $(document).ready(function(){
 															<label class="form-label">Alamat Rumah</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<textarea id="alamatW1" name="alamatW1" class="form-control form-control-lg form-control-solid" rows="2">@if($waris->alamat1)  {{$waris->alamat1}} @else  @endif </textarea>
+															<textarea id="alamatW1" name="alamatW1" class="form-control form-control-lg form-control-solid" rows="2"> </textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
@@ -722,7 +722,7 @@ $(document).ready(function(){
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" id="alamatW_poskod" name="alamatW_poskod" placeholder="" @if($waris->alamat_poskod)  value="{{$waris->alamat_poskod}}" @else value=""  @endif @endforeach />
+																	<input type="text" class="form-control form-control-solid" id="alamatW_poskod" name="alamatW_poskod" placeholder="" value="" />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
