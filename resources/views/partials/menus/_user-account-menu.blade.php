@@ -103,7 +103,7 @@
     <!--begin::Menu item-->
     
     <div class="menu-item px-5">
-        <a href="{{ route('profil-diri') }}" class="menu-link px-5">My Profile</a>
+        <a href="{{ route('profil-diri') }}" class="menu-link px-5">Profil Diri</a>
     </div>
     <div class="separator my-2"></div>
     <div class="menu-item px-5">
