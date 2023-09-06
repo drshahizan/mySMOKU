@@ -102,8 +102,8 @@
 													<!--begin::Details content-->
 													<div class="pb-5 fs-6">
 														<!--begin::Details item-->
-														<div class="fw-bold mt-5">No Matrik</div>
-														<div class="text-gray-600">{{$akademik->no_pendaftaranpelajar}}</div>
+														{{-- <div class="fw-bold mt-5">No Matrik</div>
+														<div class="text-gray-600">{{$akademik->no_pendaftaranpelajar}}</div> --}}
 														<!--begin::Details item-->
 														<!--begin::Details item-->
 														<div class="fw-bold mt-5">Alamat Emel</div>
@@ -170,7 +170,9 @@
 													<!--begin::Card-->
 													<div class="card pt-4 mb-6 mb-xl-9">
 														<!--begin::Card header-->
-													
+														@if (session('message'))
+														<div class="alert alert-success" style="color:black; text-align: center;">{{ session('message') }}</div>
+													@endif
 
 														<div class="card-header border-0">
 															<!--begin::Card title-->
@@ -231,7 +233,8 @@
 															<!--end::Card title-->
 														</div>
 														<div class="body">
-														<table class="table table-rounded table-striped border gy-7 gs-7">
+															<div class="table-responsive">
+														<table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
 															<thead>
 														<tr class="fw-semibold fs-6 text-gray-700 border-bottom border-gray-200">
 															<th>Id Tuntutan</th>
@@ -261,6 +264,7 @@
 
 													</div>		
 													</div>
+												</div>
 													
 											</div>
 										
