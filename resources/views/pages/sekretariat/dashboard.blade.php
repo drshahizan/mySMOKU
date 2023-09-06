@@ -125,7 +125,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('status.permohonan', ['status' => '1']) }}">
+													<a href="{{ route('statusB.permohonan', ['status' => '1']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -153,7 +153,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('status.permohonan', ['status' => '2']) }}">
+													<a href="{{ route('statusB.permohonan', ['status' => '2']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -179,7 +179,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('status.permohonan', ['status' => '3']) }}">
+													<a href="{{ route('statusB.permohonan', ['status' => '3']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -210,7 +210,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('status.permohonan', ['status' => '4']) }}">
+													<a href="{{ route('statusB.permohonan', ['status' => '4']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -237,7 +237,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('status.permohonan', ['status' => '5']) }}">
+													<a href="{{ route('statusB.permohonan', ['status' => '5']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -265,7 +265,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('status.permohonan', ['status' => '6']) }}">
+													<a href="{{ route('statusB.permohonan', ['status' => '6']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -294,7 +294,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('status.permohonan', ['status' => '7']) }}">
+													<a href="{{ route('statusB.permohonan', ['status' => '7']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -307,334 +307,6 @@
 									</div>
 									<!--end::Row-->
 								</div>
-
-								{{-- <div class="table-responsive">
-									<div class="body">
-										<div class="row">
-											<!--begin::Jumlah-->
-											<div class="col-sm-6 col-xl-3 mb-xl-10">
-												<!--begin::Card widget 2-->
-												<div class="card h-lg-100">
-													<!--begin::Body-->
-													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
-														<!--begin::Icon--> 
-														<div class="m-0">
-															<i class="ki-duotone ki-compass fs-2hx text-gray-600">
-																<span class="path1"></span>
-																<span class="path2"></span>
-																<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Keseluruhan</span>
-															</i>
-														</div>                           
-														<!--end::Icon-->
-
-														<!--begin::Section--> 
-														<div class="d-flex flex-column my-7">
-															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$keseluruhanB}}</span> 
-
-															<div class="m-0">
-																<span class="badge badge-light fs-base m-0">
-																	<a href="#" class="secondary text-black"><span class="path1"></span><span class="path2"></span>Lihat</a> 
-																	
-																</span>  
-															</div>       
-														</div>  
-														<!--end::Section-->                                  
-													</div>
-													<!--end::Body-->
-												</div>
-												<!--end::Card widget 2-->
-											</div>
-											<!--end::Col-->
-
-											<!--begin::Deraf-->
-											<div class="col-sm-6 col-xl-3 mb-xl-10">
-												<!--begin::Card widget 2-->
-												<div class="card h-lg-100">
-													<!--begin::Body-->
-													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
-														<!--begin::Icon--> 
-														<div class="m-0">
-															<i class="ki-duotone ki-map fs-2hx text-gray-600">
-																<span class="path1"></span>
-																<span class="path2"></span>
-																<span class="path3"></span>
-																<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Deraf</span>
-															</i>               
-														</div>                           
-														<!--end::Icon-->
-
-														<!--begin::Section--> 
-														<div class="d-flex flex-column my-7">
-															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$derafB}}</span> 
-
-															<div class="m-0">
-																<span class="badge badge-dark-secondary fs-base m-0">
-																	<a href="#" class="dark-secondary text-turqoise"><span class="path1"></span><span class="path2"></span>Lihat</a> 
-																</span>  
-															</div>       
-														</div>  
-														<!--end::Section-->                                
-													</div>
-													<!--end::Body-->
-												</div>
-												<!--end::Card widget 2-->
-											</div>
-											<!--end::Col-->
-
-											<!--begin::Baharu-->
-											<div class="col-sm-6 col-xl-3 mb-xl-10">
-												<!--begin::Card widget 2-->
-												<div class="card h-lg-100">
-													<!--begin::Body-->
-													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
-														<!--begin::Icon--> 
-														<div class="m-0">
-															<i class="ki-duotone ki-compass fs-2hx text-gray-600">
-																<span class="path1"></span>
-																<span class="path2"></span>
-																<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Baharu</span>
-															</i>
-														</div>                           
-														<!--end::Icon-->
-
-														<!--begin::Section--> 
-														<div class="d-flex flex-column my-7">
-															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$baharuB}}</span> 
-
-															<div class="m-0">
-																<span class="badge badge-light-primary fs-base m-0">
-																	<a href="#" class="primary text-primary"><span class="path1"></span><span class="path2"></span>Lihat</a> 
-																</span>  
-															</div>       
-														</div>  
-														<!--end::Section-->                                  
-													</div>
-													<!--end::Body-->
-												</div>
-												<!--end::Card widget 2-->
-											</div>
-											<!--end::Col-->
-
-											<!--begin::Saringan-->
-											<div class="col-sm-6 col-xl-3 mb-xl-10">
-												<!--begin::Card widget 2-->
-												<div class="card h-lg-100">
-													<!--begin::Body-->
-													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
-														<!--begin::Icon--> 
-														<div class="m-0">
-															<i class="ki-duotone ki-chart-simple fs-2hx text-gray-600">
-																<span class="path1"></span>
-																<span class="path2"></span>
-																<span class="path3"></span>
-																<span class="path4"></span>
-																<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Saringan</span>
-															</i>                     
-														</div>                           
-														<!--end::Icon-->
-
-														<!--begin::Section--> 
-														<div class="d-flex flex-column my-7">
-															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$saringanB}}</span> 
-
-															<div class="m-0">
-																<span class="badge badge-light-warning fs-base m-0">
-																	<a href="#" class="warning text-warning"><span class="path1"></span><span class="path2"></span>Lihat</a> 
-																</span>  
-															</div>       
-														</div>  
-														<!--end::Section-->                            
-													</div>
-													<!--end::Body-->
-												</div>
-												<!--end::Card widget 2-->
-											</div>
-											<!--end::Col-->
-										</div>
-
-										<div class="row">
-											<!--begin::Disokong-->
-											<div class="col-sm-6 col-xl-3 mb-xl-10">
-												<!--begin::Card widget 2-->
-												<div class="card h-lg-100">
-													<!--begin::Body-->
-													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
-														<!--begin::Icon--> 
-														<div class="m-0">
-															<i class="ki-duotone ki-abstract-35 fs-2hx text-gray-600">
-																<span class="path1"></span>
-																<span class="path2"></span>
-																<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Disokong</span>
-															</i>                     
-														</div>                           
-														<!--end::Icon-->
-
-														 <!--begin::Section--> 
-														<div class="d-flex flex-column my-7">
-															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$disokongB}}</span> 
-
-															<div class="m-0">
-																<span class="badge badge-light-warning fs-base m-0">
-																	<a href="#" class="warning text-warning"><span class="path1"></span><span class="path2"></span>Lihat</a> 
-																</span>  
-															</div>       
-														</div>  
-														<!--end::Section-->                              
-													</div>
-													<!--end::Body-->
-												</div>
-												<!--end::Card widget 2-->
-											</div>
-											<!--end::Col-->
-
-											<!--begin::Dikembalikan-->
-											<div class="col-sm-6 col-xl-3 mb-xl-10">
-												<!--begin::Card widget 2-->
-												<div class="card h-lg-100">
-													<!--begin::Body-->
-													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
-														<!--begin::Icon--> 
-														<div class="m-0">
-															<i class="ki-duotone ki-abstract-26 fs-2hx text-gray-600">
-																<span class="path1"></span>
-																<span class="path2"></span>
-																<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Dikembalikan</span>
-															</i>                     
-														</div>                           
-														<!--end::Icon-->
-
-														<!--begin::Section--> 
-														<div class="d-flex flex-column my-7">
-															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$dikembalikanB}}</span> 
-
-															<div class="m-0">
-																<span class="badge badge-light-danger fs-base m-0">
-																	<a href="#"><span class="path1"></span><span class="path2"></span></a> 
-																	Lihat
-																</span>  
-															</div>       
-														</div>  
-														<!--end::Section-->                               
-													</div>
-													<!--end::Body-->
-												</div>
-												<!--end::Card widget 2-->
-											</div>
-											<!--end::Col-->
-
-											<!--begin::Layak-->
-											<div class="col-sm-6 col-xl-3 mb-xl-10">
-												<!--begin::Card widget 2-->
-												<div class="card h-lg-100">
-													<!--begin::Body-->
-													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
-														<!--begin::Icon--> 
-														<div class="m-0">
-															<i class="ki-duotone ki-chart-simple fs-2hx text-gray-600">
-																<span class="path1"></span>
-																<span class="path2"></span>
-																<span class="path3"></span>
-																<span class="path4"></span>
-																<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Layak</span>
-															</i>                     
-														</div>                           
-														<!--end::Icon-->
-
-														<!--begin::Section--> 
-														<div class="d-flex flex-column my-7">
-															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$layakB}}</span> 
-
-															<div class="m-0">
-																<span class="badge badge-light-success fs-base m-0">
-																	<a href="#"><span class="path1"></span><span class="path2"></span></a> 
-																	Lihat
-																</span>  
-															</div>       
-														</div>  
-														<!--end::Section-->                            
-													</div>
-													<!--end::Body-->
-												</div>
-												<!--end::Card widget 2-->
-											</div>
-											<!--end::Col-->
-
-											<!--begin::Tidak Layak-->
-											<div class="col-sm-6 col-xl-3 mb-xl-10">      
-												<!--begin::Card widget 2-->
-												<div class="card h-lg-100">
-													<!--begin::Body-->
-													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
-														<!--begin::Icon--> 
-														<div class="m-0">
-															<i class="ki-duotone ki-abstract-39 fs-2hx text-gray-600">
-																<span class="path1"></span>
-																<span class="path2"></span>
-																<span class="fs-1 fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:20px;">Tidak Layak</span>
-															</i>                     
-														</div>                           
-														<!--end::Icon-->
-
-														<!--begin::Section--> 
-														<div class="d-flex flex-column my-7">
-															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">{{$tidaklayakB}}</span> 
-
-															<div class="m-0">
-																<span class="badge badge-light-danger fs-base m-0">
-																	<a href="#"><span class="path1"></span><span class="path2"></span></a> 
-																	Lihat
-																</span>  
-															</div>       
-														</div>  
-														<!--end::Section-->                                
-													</div>
-													<!--end::Body-->
-												</div>
-												<!--end::Card widget 2-->
-											</div>
-											<!--end::Col-->
-
-											<!--begin::Col-->
-											{{-- <div class="col-sm-6 col-xl-3 mb-5 mb-xl-10">
-												<!--begin::Card widget 2-->
-												<div class="card h-lg-100">
-													<!--begin::Body-->
-													<div class="card-body d-flex justify-content-between align-items-start flex-column">         
-														<!--begin::Icon--> 
-														<div class="m-0">
-															<i class="ki-duotone ki-abstract-26 fs-2hx text-gray-600"><span class="path1"></span><span class="path2"></span></i>                     
-														</div>                           
-														<!--end::Icon-->
-
-														<!--begin::Section--> 
-														<div class="d-flex flex-column my-7">
-															<!--begin::Number-->           
-															<span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">106M</span> 
-															<!--end::Number--> 
-
-															<!--begin::Follower-->
-															<div class="m-0">
-																<span class="fw-semibold fs-6 text-gray-400">Dikembalikan</span>  
-															</div>       
-															<!--end::Follower--> 
-														</div>  
-														<!--end::Section-->          
-														
-														<!--begin::Badge--> 
-														<span class="badge badge-light-success fs-base">
-															<a href="#"><span class="path1"></span><span class="path2"></span></a> 
-															Lihat
-														</span>  
-														<!--end::Badge-->                              
-													</div>
-													<!--end::Body-->
-												</div>
-												<!--end::Card widget 2-->
-											</div> --}}
-											<!--end::Col-->
-										{{-- </div>
-									</div>
-								</div> --}}
 							</div>
 
 							{{-- PPK --}}
@@ -690,7 +362,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('status.permohonan', ['status' => '1']) }}">
+													<a href="{{ route('statusP.permohonan', ['status' => '1']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -718,7 +390,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('status.permohonan', ['status' => '2']) }}">
+													<a href="{{ route('statusP.permohonan', ['status' => '2']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -744,7 +416,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('status.permohonan', ['status' => '3']) }}">
+													<a href="{{ route('statusP.permohonan', ['status' => '3']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -775,7 +447,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('status.permohonan', ['status' => '4']) }}">
+													<a href="{{ route('statusP.permohonan', ['status' => '4']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -802,7 +474,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('status.permohonan', ['status' => '5']) }}">
+													<a href="{{ route('statusP.permohonan', ['status' => '5']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -830,7 +502,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('status.permohonan', ['status' => '6']) }}">
+													<a href="{{ route('statusP.permohonan', ['status' => '6']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -859,7 +531,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('status.permohonan', ['status' => '7']) }}">
+													<a href="{{ route('statusP.permohonan', ['status' => '7']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>

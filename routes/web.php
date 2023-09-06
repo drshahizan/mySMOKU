@@ -90,9 +90,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Permohonan - Sekretariat
     Route::get('dashboard/sekretariat', [SekretariatController::class, 'dashboard']);
     Route::get('permohonan/BKOKU', [SekretariatController::class, 'statusPermohonanBKOKU']);
-    Route::get('/status/{status}', [SekretariatController::class, 'filterStatusPermohonanBKOKU'])->name('status.permohonan');
+    Route::get('/BKOKU/status/{status}', [SekretariatController::class, 'filterStatusPermohonanBKOKU'])->name('statusB.permohonan');
+    // Route::get('/status/{status}', [SekretariatController::class, 'filterStatusPermohonanBKOKU'])->name('statusB.permohonan');
     Route::get('permohonan/PPK', [SekretariatController::class, 'statusPermohonanPPK']);
-    Route::get('/status/{status}', [SekretariatController::class, 'filterStatusPermohonanPPK'])->name('status.permohonan');
+    Route::get('/PPK/status/{status}', [SekretariatController::class, 'filterStatusPermohonanPPK'])->name('statusP.permohonan');
+    // Route::get('/status/{status}', [SekretariatController::class, 'filterStatusPermohonanPPK'])->name('statusP.permohonan');
     Route::get('permohonan/kelulusan', [SekretariatController::class, 'kelulusanPermohonan']);
     Route::get('permohonan/keputusan', [SekretariatController::class, 'keputusanPermohonan']);
     Route::get('kemaskini/kelulusan/{no_kp}', [SekretariatController::class, 'kemaskiniKelulusan']);
