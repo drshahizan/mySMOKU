@@ -102,8 +102,8 @@
 													<!--begin::Details content-->
 													<div class="pb-5 fs-6">
 														<!--begin::Details item-->
-														<div class="fw-bold mt-5">No Matrik</div>
-														<div class="text-gray-600">{{$akademik->no_pendaftaranpelajar}}</div>
+														{{-- <div class="fw-bold mt-5">No Matrik</div>
+														<div class="text-gray-600">{{$akademik->no_pendaftaranpelajar}}</div> --}}
 														<!--begin::Details item-->
 														<!--begin::Details item-->
 														<div class="fw-bold mt-5">Alamat Emel</div>
