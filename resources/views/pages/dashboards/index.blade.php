@@ -170,7 +170,9 @@
 													<!--begin::Card-->
 													<div class="card pt-4 mb-6 mb-xl-9">
 														<!--begin::Card header-->
-													
+														@if (session('message'))
+														<div class="alert alert-success" style="color:black; text-align: center;">{{ session('message') }}</div>
+													@endif
 
 														<div class="card-header border-0">
 															<!--begin::Card title-->
