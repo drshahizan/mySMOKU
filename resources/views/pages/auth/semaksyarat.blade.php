@@ -2,7 +2,7 @@
 
     <!--begin::Form-->
     <form class="form w-100" id="kt_sign_up_form" action="{{ route('semaksyarat') }}" data-kt-redirect-url="{{ route('daftarlayak') }}" method="post">
-    @csrf
+        @csrf
 
             @if (session('message'))
                 <div class="alert alert-success" style="color:black; text-align: center;">{{ session('message') }}</div>
@@ -70,34 +70,34 @@
             <img alt="Logo" src="{{ image('logos/mqalogo.png') }}" class="h-100px h-lg-90px"/>
         </div>
 
-<!-- institusi Dropdown -->
-    <div class="fv-row mb-10">													
-        <label class="form-label">Nama Pusat Pengajian</label>
-        <select id="id_institusi" name="id_institusi" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-            <option value="">Pilih</option>
-            @foreach ($ipt as $ipt)	
-            <option value="{{ $ipt->idipt}}">{{ $ipt->namaipt}}</option> 
-            @endforeach
-        </select>
-    </div>
-
-    <div class="fv-row mb-10">
-            <label class="form-label">Peringkat Pengajian</label>
-            <select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-hide-search="true">
+        <!-- institusi Dropdown -->
+        <div class="fv-row mb-10">													
+            <label class="form-label">Nama Pusat Pengajian</label>
+            <select id="id_institusi" name="id_institusi" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
                 <option value="">Pilih</option>
-                @foreach ($kodperingkat as $kodperingkat)	
-            <option value="{{ $kodperingkat->kodperingkat}}">{{ $kodperingkat->peringkat}}</option> 
-            @endforeach
+                @foreach ($ipt as $ipt)	
+                <option value="{{ $ipt->idipt}}">{{ $ipt->namaipt}}</option> 
+                @endforeach
             </select>
-    </div>
+        </div>
+
+        <div class="fv-row mb-10">
+                <label class="form-label">Peringkat Pengajian</label>
+                <select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-hide-search="true">
+                    <option value="">Pilih</option>
+                    @foreach ($kodperingkat as $kodperingkat)	
+                <option value="{{ $kodperingkat->kodperingkat}}">{{ $kodperingkat->peringkat}}</option> 
+                @endforeach
+                </select>
+        </div>
 
 
-    <div class="fv-row mb-10">
-        <label class="form-label">Nama Kursus</label>
-        <select id='nama_kursus'  name='nama_kursus' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-            <option value="">Pilih</option>
-        </select>
-    </div>
+        <div class="fv-row mb-10">
+            <label class="form-label">Nama Kursus</label>
+            <select id='nama_kursus'  name='nama_kursus' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+                <option value="">Pilih</option>
+            </select>
+        </div>
 
     <!-- Script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
