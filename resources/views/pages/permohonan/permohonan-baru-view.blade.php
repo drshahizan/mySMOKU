@@ -387,39 +387,35 @@ $(document).ready(function(){
 																<!--end::Input wrapper-->
 															</div>
 														</div>
-														<!--end::Input group-->
-														<!--begin::Input group-->
-														<div class="fv-row mb-7">
-															<!--begin::Wrapper-->
-															<div class="d-flex flex-stack">
-																<!--begin::Label-->
-																<div class="me-5">
-																	<!--begin::Label-->
-																	<label class="fs-6 fw-semibold">Use as a Alamat Surat Menyurat?</label>
-																	<!--end::Label-->
-																</div>
-																<!--end::Label-->
-																<!--begin::Switch-->
-																<label class="form-check form-switch form-check-custom form-check-solid">
-																	<!--begin::Input-->
-																	<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1" id="kt_modal_update_customer_billing"  @if($pelajar->alamat_surat1)  checked="checked" @else checked=""  @endif/>
-																	<!--end::Input-->
-																	<!--begin::Label-->
-																	<span class="form-check-label fw-semibold text-muted" for="kt_modal_update_customer_billing">Ya</span>
-																	<!--end::Label-->
-																</label>
-																<!--end::Switch-->
-															</div>
-															<!--begin::Wrapper-->
-														</div>
-														<!--end::Input group-->
+														
 														<!--begin::Alamat Surat-->
 														<div class="fv-row mb-10">
 															<!--end::Label-->
 															<label class="form-label">Alamat Surat Menyurat</label>
 															<!--end::Label-->
+															<!--begin::Input group-->
+															<div class="fv-row mb-7">
+																<!--begin::Wrapper-->
+																<div class="d-flex flex-stack">
+																	<!--begin::Label-->
+																	<div class="me-5">
+																		<!--begin::Input-->
+																		<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1"  @foreach($pelajar as $pelajar1) @if($pelajar1->alamat_surat1)  checked="checked" @else checked=""  @endif @endforeach />
+																		<!--end::Input-->
+																		<!--begin::Label-->
+																		<label class="form-label">Sama seperti Alamat Tetap</label>
+																		<!--end::Label-->
+																	<!--end::Switch-->
+																	</div>
+																	<!--end::Label-->
+																	
+																</div>
+																<!--begin::Wrapper-->
+															</div>
+															<!--end::Input group-->
+
 															<!--begin::Input-->
-															<textarea id="alamat_surat1" name="alamat_surat1" class="form-control form-control-lg form-control-solid" rows="2">@if($pelajar->alamat_surat1){{$pelajar->alamat_surat1}} @else  @endif </textarea>
+															<textarea id="alamat_surat1" name="alamat_surat1" class="form-control form-control-lg form-control-solid" rows="2">@foreach($pelajar as $pelajar1)@if($pelajar1->alamat_surat1){{$pelajar1->alamat_surat1}} @else  @endif @endforeach </textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
