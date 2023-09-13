@@ -16,7 +16,7 @@ var KTCustomersList = function () {
         tableRows.forEach(row => {
             const dateRow = row.querySelectorAll('td');
             const realDate = moment(dateRow[3].innerHTML, "DD MMM YYYY, LT").format(); // select date from 5th column in table
-            dateRow[4].setAttribute('data-order', realDate);
+            dateRow[6].setAttribute('data-order', realDate);
         });
 
         // Init datatable --- more info on datatables: https://datatables.net/manual/
@@ -25,7 +25,7 @@ var KTCustomersList = function () {
             'order': [],
             'columnDefs': [
                 { orderable: false, targets: 0 }, // Disable ordering on column 0 (checkbox)
-                { orderable: false, targets: 4 }, // Disable ordering on column 6 (actions)
+                { orderable: false, targets: 6 }, // Disable ordering on column 6 (actions)
             ]
         });
 
