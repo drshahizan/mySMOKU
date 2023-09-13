@@ -19,18 +19,21 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
     */
     public function collection()
     {
-        // $kelulusan = TuntutanPermohonan::where('status', '4')->get();
-        $senarai_pendek = DB::select("SELECT a.id_permohonan, d.nama_pelajar, b.no_pendaftaranpelajar, e.kecacatan, b.nama_kursus, c.namaipt, b.tkh_mula, b.tkh_tamat  
-        FROM permohonan a 
-        INNER JOIN maklumatakademik b ON b.nokp_pelajar = a.nokp_pelajar 
-        INNER JOIN bk_infoipt c ON c.idipt = b.id_institusi
-        INNER JOIN pelajar d ON d.nokp_pelajar = a.nokp_pelajar
-        INNER JOIN bk_jenisoku e ON e.kodoku = d.kecacatan");
+        // $senarai_pendek = DB::select("SELECT a.id_permohonan, d.nama_pelajar, b.no_pendaftaranpelajar, e.kecacatan, b.nama_kursus, c.namaipt, b.tkh_mula, b.tkh_tamat  
+        // FROM permohonan a 
+        // INNER JOIN maklumatakademik b ON b.nokp_pelajar = a.nokp_pelajar 
+        // INNER JOIN bk_infoipt c ON c.idipt = b.id_institusi
+        // INNER JOIN pelajar d ON d.nokp_pelajar = a.nokp_pelajar
+        // INNER JOIN bk_jenisoku e ON e.kodoku = d.kecacatan");
+        $senarai_pendek = DB::table('permohonan as a')
+        ->where('a.status', 4)
+        ->select('a.id_permohonan', 'd.nama_pelajar', 'b.no_pendaftaranpelajar', 'e.kecacatan', 'b.nama_kursus', 'c.namaipt', 'b.tkh_mula', 'b.tkh_tamat')
+        ->join('maklumatakademik as b', 'b.nokp_pelajar', '=', 'a.nokp_pelajar')
+        ->join('bk_infoipt as c', 'c.idipt', '=', 'b.id_institusi')
+        ->join('pelajar as d', 'd.nokp_pelajar', '=', 'a.nokp_pelajar')
+        ->join('bk_jenisoku as e', 'e.kodoku', '=', 'd.kecacatan')
+        ->get();
 
-
-        // $senarai_pendek = DB::select("SELECT b.nama_pelajar, a.no_pendaftaranpelajar, a.nokp_pelajar, a.peringkat_pengajian, a.nama_kursus, a.tkh_mula, a.tkh_tamat  
-        // FROM maklumatakedamik a 
-        // INNER JOIN pelajar b ON b.nokp_pelajar = a.nokp_pelajar ");
         return collect($senarai_pendek);
     }
 
