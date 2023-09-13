@@ -41,8 +41,8 @@
         }
         .page-number-container {
             position: absolute;
-            bottom: 10px; /* Adjust the vertical position as needed */
-            right: 550px; /* Adjust the horizontal position as needed */
+            bottom: 10px; 
+            right: 550px; 
             font-size: 12px;
         }
     </style>
@@ -86,7 +86,6 @@
                 <tr>
                     <th style="width: 3%"><b>No.</b></th>
                     <th style="width: 12%"><b>ID Permohonan</b></th>
-                    {{-- <th style="width: 5%"><b>Jenis Permohonan</b></th> --}}
                     <th style="width: 20%"><b>Nama</b></th>
                     <th style="width: 10%"><b>Jenis Kecacatan</b></th>                                        
                     {{-- <th style="width: 10%"><b>Peringkat Pengajian </b></th> --}}
