@@ -260,7 +260,7 @@
                                         <tr>
                                             <td><b>Tarikh Mesyuarat</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="date" id="tarikh" name="tarikh" style="padding: 5px;" required></td>
+                                            <td><input type="date" id="tarikhMesyuarat" name="tarikhMesyuarat" style="padding: 5px;" required></td>
                                         </tr>
                                         <tr>
                                             <td><b>Keputusan</b></td>
@@ -278,7 +278,7 @@
                                         <tr>
                                             <td><b>Catatan</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="catatan" name="noMesyuarat" style="padding: 5px; width:500px;"></td>
+                                            <td><input type="text" id="catatan" name="catatan" style="padding: 5px; width:500px;"></td>
                                         </tr>
                                     </table>
                                     <br>

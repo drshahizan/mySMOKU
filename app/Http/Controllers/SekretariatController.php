@@ -9,6 +9,7 @@ use App\Models\TuntutanPermohonan;
 use App\Models\Waris;
 use App\Models\Akademik;
 use App\Mail\mailKeputusan;
+use App\Models\Kelulusan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -100,18 +101,37 @@ class SekretariatController extends Controller
 
     public function kemaskiniKelulusan(Request $request,$id)
     {
+        $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id');
+
         if($request->get('keputusan')=="Lulus"){
 
             TuntutanPermohonan::where('nokp_pelajar', $id)
                 ->update([
                 'status'   =>  6,
             ]);
+            
+            $info_mesyuarat = new Kelulusan([
+                'id_permohonan' =>  $id_permohonan,
+                'no_mesyuarat'  =>  $request->get('noMesyuarat'),
+                'keputusan'  =>  $request->get('keputusan'),
+                'catatan'  =>  $request->get('catatan'),
+            ]);
+            $info_mesyuarat->save();
         }
         else{
             TuntutanPermohonan::where('nokp_pelajar', $id)
                 ->update([
                 'status'   =>  7,
             ]);
+
+            $info_mesyuarat = new Kelulusan([
+                'id_permohonan' =>  $id_permohonan,
+                'no_mesyuarat'  =>  $request->get('noMesyuarat'),
+                'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
+                'keputusan'  =>  $request->get('keputusan'),
+                'catatan'  =>  $request->get('catatan'),
+            ]);
+            $info_mesyuarat->save();
         }
 
         $permohonan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
