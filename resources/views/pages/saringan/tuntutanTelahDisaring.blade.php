@@ -1,4 +1,4 @@
-<x-default-layout> 
+<x-default-layout>
     <link rel="stylesheet" href="/assets/css/saringan.css">
     <style>
         .maklumat, .maklumat td{
@@ -9,7 +9,7 @@
             border: none!important;
         }
         .table{
-            width: 80%;
+            width: 90%;
             table-layout: fixed;
             margin-left:5px!important;
         }
@@ -92,7 +92,7 @@
 	</div>
 	<!--end::Page title-->
     <br>
-    
+
     <!-- Main body part  -->
     <div id="main-content">
         <div class="container-fluid">
@@ -211,10 +211,10 @@
                                                 <td>Tidak Ditaja</td>
                                             @endif
                                         </tr>
-                                    </table>   
+                                    </table>
                                 <hr>
                                     <form method="POST" action="{{ url('saring/tuntutan') }}" id="saring">
-                                    {{csrf_field()}}     
+                                    {{csrf_field()}}
                                     <!--begin: Invoice body-->
                                     @php
                                         $jumlah = $permohonan->amaun + $akademik->bil_bulanpersem * 300;
@@ -231,11 +231,15 @@
                                                     <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
                                                     <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
                                                     <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dibayar (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->amaun - $akademik->bil_bulanpersem * 300, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->amaun - $akademik->bil_bulanpersem * 300, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun, 2)}}</td>
@@ -247,6 +251,8 @@
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($akademik->bil_bulanpersem * 300, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="baki">{{number_format(0, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($akademik->bil_bulanpersem * 300, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="baki">{{number_format(0, 2)}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -256,18 +262,23 @@
                                                 <td>:</td>
                                                 <td>{{number_format($jumlah, 2)}}</td>
                                             </tr>
+                                            <tr>
+                                                <td>Jumlah tuntutan yang dibayar (RM)</td>
+                                                <td>:</td>
+                                                <td>{{number_format($jumlah, 2)}}</td>
+                                            </tr>
                                         </table>
                                     </div>
-                                <!--end: Invoice body-->                               
+                                <!--end: Invoice body-->
                                 <div class="col-md-6 text-right">
                                     <a href="{{ url('saringan') }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </a></button>
                                 </div>
-                                </form>  
-                            </div>                   
-                        </div> 
-                    </div>                                       
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</x-default-layout> 
+</x-default-layout>

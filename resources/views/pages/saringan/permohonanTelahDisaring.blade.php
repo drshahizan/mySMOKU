@@ -1,4 +1,4 @@
-<x-default-layout> 
+<x-default-layout>
     <link rel="stylesheet" href="/assets/css/saringan.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!-- Main body part  -->
@@ -76,6 +76,13 @@
                                 <div class="col-md-6 col-sm-6">
                                     <br>
                                     @php
+                                        if($permohonan->status==4){
+                                            $tarikh_status = DB::table('statustransaksi')->where('id_permohonan', $permohonan->id_permohonan)->where('status', 4)->value('created_at');
+                                        }
+                                        elseif($permohonan->status==5){
+                                            $tarikh_status = DB::table('statustransaksi')->where('id_permohonan',$permohonan->id_permohonan)->where('status', 5)->value('created_at');
+                                        }
+
                                         $akademik = DB::table('maklumatakademik')->where('nokp_pelajar', $pelajar->nokp_pelajar)->first();
                                         $status = DB::table('statusinfo')->where('kodstatus', $permohonan->status)->value('status');
                                         $text = ucwords(strtolower($pelajar->nama_pelajar)); // Assuming you're sending the text as a POST parameter
@@ -117,9 +124,9 @@
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Status</strong></td>
                                             <td>:</td>
-                                            <td>{{ucwords(strtolower($status))}}</td>
+                                            <td>{{ucwords(strtolower($status))}} ({{date('d/m/Y', strtotime($tarikh_status))}})</td>
                                         </tr>
-                                    </table>                           
+                                    </table>
                                 </div>
                                 <br>
                             <div class="row clearfix">
@@ -129,7 +136,7 @@
                                             <table class="table table-hover table-bordered mb-5">
                                                 <thead class="table-primary">
                                                     <tr>
-                                                        <th style="width: 5%; text-align:right;">No.</th>                                                        
+                                                        <th style="width: 5%; text-align:right;">No.</th>
                                                         <th style="width: 20%;">Item</th>
                                                         <th style="width: 25%;">Keputusan Saringan</th>
                                                         <th style="width: 50%;">Catatan</th>
@@ -140,7 +147,7 @@
                                                         <td style="text-align:right;">1</td>
                                                         <td>
                                                             <span><a href="{{ url('maklumat/profil/diri/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Profil Diri</a></span>
-                                                        </td>  
+                                                        </td>
                                                         <td class="hidden-sm-down">
                                                             Lengkap
                                                         </td>
@@ -171,14 +178,14 @@
                                                     <td>
                                                        &nbsp;
                                                     </td>
-                                                    </tr>                                                
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         @elseif($permohonan->status==5)
                                             <table class="table table-hover table-bordered mb-5">
                                                 <thead class="table-primary">
                                                     <tr>
-                                                        <th style="width: 5%; text-align:right;">No.</th>                                                        
+                                                        <th style="width: 5%; text-align:right;">No.</th>
                                                         <th style="width: 20%;">Item</th>
                                                         <th style="width: 25%;">Keputusan Saringan</th>
                                                         <th style="width: 50%;">Catatan</th>
@@ -189,7 +196,7 @@
                                                         <td style="text-align:right;">1</td>
                                                         <td>
                                                             <span><a href="{{ url('maklumat/profil/diri/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Profil Diri</a></span>
-                                                        </td>  
+                                                        </td>
                                                         <td class="hidden-sm-down">
                                                             @if ($catatan->catatan_profilDiri == null)
                                                                 Lengkap
@@ -250,15 +257,15 @@
                                                         {{$i+1}}. {{$strArr[$i]}} <br>
                                                         @endfor
                                                     </td>
-                                                    </tr>                                                
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         @endif
-                                        
+
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row clearfix">
                                 <div class="col-md-6">
                                     </div>
@@ -268,11 +275,11 @@
                                     @else
                                         <a href="{{ url('saringan') }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </a></button>
                                     @endif
-                            </div> 
+                            </div>
                         </div>
-                    </div>                                       
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</x-default-layout> 
+</x-default-layout>

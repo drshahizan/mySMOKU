@@ -5,6 +5,7 @@ use App\Mail\SaringanMail;
 use App\Models\Akademik;
 use App\Models\Permohonan;
 use App\Models\Saringan;
+use App\Models\Status;
 use App\Models\TuntutanPermohonan;
 use App\Models\Waris;
 use Illuminate\Http\Request;
@@ -115,6 +116,15 @@ class SaringanController extends Controller
                 'status'   =>  4,
             ]);
 
+            $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id_permohonan');
+
+            $status_trans = new Status([
+                'nokp_pelajar'  =>  $id,
+                'id_permohonan' =>  $id_permohonan,
+                'status'        =>  4,
+            ]);
+            $status_trans->save();
+
             $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
             $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id_permohonan');
             $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
@@ -167,6 +177,13 @@ class SaringanController extends Controller
                 ->update([
                 'status'   =>  5,
             ]);
+
+            $status_trans = new Status([
+                'nokp_pelajar'  =>  $id,
+                'id_permohonan' =>  $id_permohonan,
+                'status'        =>  5,
+            ]);
+            $status_trans->save();
 
             $permohonan = TuntutanPermohonan::where('status', '2')
             ->orWhere('status', '=','3')

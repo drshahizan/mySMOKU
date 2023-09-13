@@ -9,7 +9,7 @@
             border: none!important;
         }
         .table{
-            width: 80%;
+            width: 90%;
             table-layout: fixed;
         }
         .table td, .table th, .table2 td, .table2 th{
@@ -275,7 +275,12 @@
                                             <tr>
                                                 <td>Jumlah tuntutan yang disokong (RM)</td>
                                                 <td>:</td>
-                                                <td><input type="number" name="layak_tuntut" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                <td><input type="number" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jumlah tuntutan yang dibayar (RM)</td>
+                                                <td>:</td>
+                                                <td><input type="number" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                             </tr>
                                         </table>
                                     </div>
