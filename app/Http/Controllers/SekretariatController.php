@@ -271,7 +271,7 @@ class SekretariatController extends Controller
     }
 
     public function sejSenaraiTuntutan(){
-        $permohonan = TuntutanPermohonan::all();
+        $permohonan = TuntutanPermohonan::where('status', '!=','4')->get();
         return view('pages.sekretariat.tuntutan.sejarah_tuntutan',compact('permohonan'));
     }
 }
