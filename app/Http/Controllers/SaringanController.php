@@ -94,33 +94,31 @@ class SaringanController extends Controller
         return view('pages.saringan.salinanAkademik');
     }
 
-    public function cetakMaklumatPemohon() 
+    public function cetakMaklumatPemohon()
     {
         $pdf = PDF::loadView('pages.saringan.cetakMaklumatPemohon');
         return $pdf->stream('maklumat-pemohon.pdf');
     }
 
-    public function cetakSenaraiPemohon() 
+    public function cetakSenaraiPemohon()
     {
         $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon');
         return $pdf->stream('senarai-pemohon.pdf');
     }
 
-    public function saringMaklumat(Request $request,$id) 
+    public function saringMaklumat(Request $request,$id)
     {
         if($request->get('maklumat_profil_diri')=="lengkap"&&$request->get('maklumat_akademik')=="lengkap"&&$request->get('salinan_dokumen')=="lengkap"){
-            
+
             TuntutanPermohonan::where('nokp_pelajar', $id)
                 ->update([
                 'status'   =>  4,
             ]);
-            
+
             $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
             $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id_permohonan');
             $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
-            $status_kod = 1;
-            $status = "Permohonan ".$id_permohonan." telah disaring dan disokong.";
-            return view('pages.saringan.maklumatTuntutan',compact('permohonan','pelajar','status_kod','status'));
+            return view('pages.saringan.maklumatTuntutan',compact('permohonan','pelajar'));
         }
         else{
             $catatan[]="";
@@ -136,7 +134,7 @@ class SaringanController extends Controller
                     $n++;
                 }
             }
-    
+
             if($request->get('maklumat_akademik')=="tak_lengkap"){
                 $checked = $request->input('catatan_maklumat_akademik');
                 for($i=0; $i < count($checked); $i++){
@@ -145,7 +143,7 @@ class SaringanController extends Controller
                     $n++;
                 }
             }
-    
+
             if($request->get('salinan_dokumen')=="tak_lengkap"){
                 $checked = $request->input('catatan_salinan_dokumen');
                 for($i=0; $i < count($checked); $i++){
@@ -156,7 +154,7 @@ class SaringanController extends Controller
             }
             Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
             $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id_permohonan');
-            
+
             $catatan = new Saringan([
                 'id_permohonan'           =>  $id_permohonan,
                 'catatan_profilDiri'      =>  $profil,
@@ -175,7 +173,7 @@ class SaringanController extends Controller
             ->orWhere('status', '=','4')
             ->orWhere('status', '=','5')
             ->get();
-            
+
             $status_kod = 2;
             $status = "Permohonan ".$id_permohonan." telah dikembalikan.";
             return view('pages.saringan.saringan',compact('permohonan','status_kod','status'));
