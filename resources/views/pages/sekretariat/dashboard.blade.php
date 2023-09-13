@@ -326,7 +326,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
+														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
@@ -603,7 +603,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
 													{{-- <span class="symbol-label"> --}}
-														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
+														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
