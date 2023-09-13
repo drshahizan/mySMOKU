@@ -249,39 +249,41 @@
                             <hr><br>
 
                             <div class="col-md-6 col-sm-6">
-                                <form action="{{ url('hantar-keputusan') }}" method="POST">
+                                <form action="{{ url('keputusan/'.$pelajar->nokp_pelajar) }}" method="POST" id="kelulusan">
                                     {{csrf_field()}}
-                                    <table class="mesyuarat">
-                                        <tr class="mesyuarat" style="border: none!important;">
-                                            <td class="mesyuarat" style="border: none!important;"><b>No. Mesyuarat</b></td>
-                                            <td class="mesyuarat" style="border: none!important;"><b>:</b></td>
-                                            <td class="mesyuarat" style="border: none!important;"><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;" required></td>
+                                    <table>
+                                        <tr>
+                                            <td><b>No. Mesyuarat</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;" required></td>
                                         </tr>
-                                        <tr class="mesyuarat" style="border: none!important;">
-                                            <td class="mesyuarat" style="border: none!important;"><b>Tarikh Mesyuarat</b></td>
-                                            <td class="mesyuarat" style="border: none!important;"><b>:</b></td>
-                                            <td class="mesyuarat" style="border: none!important;"><input type="date" id="tarikh" name="tarikh" style="padding: 5px;" required></td>
+                                        <tr>
+                                            <td><b>Tarikh Mesyuarat</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="date" id="tarikh" name="tarikh" style="padding: 5px;" required></td>
                                         </tr>
-                                        <tr class="mesyuarat" style="border: none!important;">
-                                            <td class="mesyuarat" style="border: none!important;"><b>Keputusan</b></td>
-                                            <td class="mesyuarat" style="border: none!important;"><b>:</b></td>
-                                            <td class="mesyuarat" style="border: none!important;">
-                                                <select id="keputusan" id="keputusan" style="padding: 5px;" required>
+                                        <tr>
+                                            <td><b>Keputusan</b></td>
+                                            <td><b>:</b></td>
+                                            <td>
+                                                <select id="keputusan" name="keputusan" style="padding: 6px;" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required required>
                                                     <option value="">Pilih Keputusan</option>
-                                                    <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
-                                                    <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
+                                                    <option value="Lulus">Lulus</option>
+                                                    <option value="Tidak Lulus">Tidak Lulus</option>
+                                                    {{-- <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
+                                                    <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option> --}}
                                                 </select>
                                             </td>
                                         </tr>
-                                        <tr class="mesyuarat" style="border: none!important;">
-                                            <td class="mesyuarat" style="border: none!important;"><b>Catatan</b></td>
-                                            <td class="mesyuarat" style="border: none!important;"><b>:</b></td>
-                                            <td class="mesyuarat" style="border: none!important;"><input type="text" id="catatan" name="noMesyuarat" style="padding: 5px; width:500px;"></td>
+                                        <tr>
+                                            <td><b>Catatan</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="catatan" name="noMesyuarat" style="padding: 5px; width:500px;"></td>
                                         </tr>
                                     </table>
                                     <br>
                                     <div class="submit" style="text-align: right;">
-                                        <button type="submit" id="submit" class="btn btn-primary text-white">Hantar</button>
+                                        <button type="submit" id="submit" value="submit" class="btn btn-primary text-white">Hantar</button>
                                     </div>
                                 </form>
                             </div>
@@ -292,24 +294,25 @@
         </div>
     </div>  
 
+    <!-- Javascript -->
     <script>
         // input validation
         var btn = document.getElementById('submit');
         btn.addEventListener('click', function() {
-            if (document.getElementById('noMesyuarat').checked||document.getElementById('checkbox2b').checked||document.getElementById('checkbox2c').checked||document.getElementById('checkbox2d').checked) {
+            if (document.getElementById('noMesyuarat').checked) {
                 document.getElementById("noMesyuarat").required = false;
             }
             else{
                 document.getElementById("noMesyuarat").required = true;
             }
 
-            if (document.getElementById('tarikh').checked||document.getElementById('checkbox3b').checked||document.getElementById('checkbox3c').checked||document.getElementById('checkbox3d').checked) {
+            if (document.getElementById('tarikh').checked) {
                 document.getElementById("tarikh").required = false;
             }
             else{
                 document.getElementById("tarikh").required = true;
             }
-            if (document.getElementById('keputusan').checked||document.getElementById('checkbox3b').checked||document.getElementById('checkbox3c').checked||document.getElementById('checkbox3d').checked) {
+            if (document.getElementById('keputusan').checked) {
                 document.getElementById("keputusan").required = false;
             }
             else{
@@ -329,18 +332,7 @@
             });
         });
     </script>
-       {{-- <script>
-        @if(session('status'))
-            alert('{{session('status')}}');
-            swal({
-                title: "Emel notifikasi telah dihantar ke pemohon.",
-                text: "Klik OK untuk teruskan!",
-                icon: "success",
-                button: "OK",
-            });
-       </script> --}}
 
-       <!-- Javascript -->
     <script src="assets/bundles/libscripts.bundle.js"></script>    
     <script src="assets/bundles/vendorscripts.bundle.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>

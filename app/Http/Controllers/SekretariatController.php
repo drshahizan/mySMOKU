@@ -98,8 +98,21 @@ class SekretariatController extends Controller
         return $pdf->stream('senarai-pemohon.pdf');
     }
 
-    public function kemaskiniKelulusan($id)
+    public function kemaskiniKelulusan(Request $request,$id)
     {
+        if($request->get('maklumat_profil_diri')=="Lulus"){
+
+            TuntutanPermohonan::where('nokp_pelajar', $id)
+                ->update([
+                'status'   =>  6,
+            ]);
+        }
+        else{
+            TuntutanPermohonan::where('nokp_pelajar', $id)
+                ->update([
+                'status'   =>  7,
+            ]);
+        }
         $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
         $id_permohonan = $permohonan->id_permohonan;
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();

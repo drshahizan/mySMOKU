@@ -19,12 +19,6 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
     */
     public function collection()
     {
-        // $senarai_pendek = DB::select("SELECT a.id_permohonan, d.nama_pelajar, b.no_pendaftaranpelajar, e.kecacatan, b.nama_kursus, c.namaipt, b.tkh_mula, b.tkh_tamat  
-        // FROM permohonan a 
-        // INNER JOIN maklumatakademik b ON b.nokp_pelajar = a.nokp_pelajar 
-        // INNER JOIN bk_infoipt c ON c.idipt = b.id_institusi
-        // INNER JOIN pelajar d ON d.nokp_pelajar = a.nokp_pelajar
-        // INNER JOIN bk_jenisoku e ON e.kodoku = d.kecacatan");
         $senarai_pendek = DB::table('permohonan as a')
         ->where('a.status', 4)
         ->select('a.id_permohonan', 'd.nama_pelajar', 'b.no_pendaftaranpelajar', 'e.kecacatan', 'b.nama_kursus', 'c.namaipt', 'b.tkh_mula', 'b.tkh_tamat')

@@ -143,7 +143,6 @@
                                                         <span><a href="{{ url('maklumat/profil/diri/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Profil Diri</a></span>
                                                     </td>           
                                                     <td class="hidden-sm-down">
-                                                       
                                                         <div class="form-group c_form_group">
                                                         <select id="maklumat_profil_diri" name="maklumat_profil_diri" class="form-control" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                             <option value="">Pilih</option>
@@ -151,12 +150,14 @@
                                                             <option value="tak_lengkap">Tidak Lengkap</option>
                                                         </select>
                                                     </div>
-                                                </td>
-                                                <td><div class="form-group c_form_group">
-                                                    <input class="checkbox1a" id="checkbox1a" type="checkbox" name="catatan_maklumat_profil_diri[]" value="Terdapat maklumat yang tidak benar pada Maklumat Profil Diri" disabled="disabled"><span> Terdapat maklumat yang tidak benar pada Maklumat Profil Diri</span><br>
-                                                    <input class="checkbox1b" id="checkbox1b" type="checkbox" name="catatan_maklumat_profil_diri[]" value="Terdapat maklumat yang tidak lengkap pada Maklumat Profil Diri" disabled="disabled"><span> Terdapat maklumat yang tidak lengkap pada Maklumat Profil Diri</span><br>
-                                                    <input class="checkbox1c" id="checkbox1c" type="checkbox" name="catatan_maklumat_profil_diri[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain1" id="lain1" disabled="disabled"></span><br>
-                                                </div> </td>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group c_form_group">
+                                                            <input class="checkbox1a" id="checkbox1a" type="checkbox" name="catatan_maklumat_profil_diri[]" value="Terdapat maklumat yang tidak benar pada Maklumat Profil Diri" disabled="disabled"><span> Terdapat maklumat yang tidak benar pada Maklumat Profil Diri</span><br>
+                                                            <input class="checkbox1b" id="checkbox1b" type="checkbox" name="catatan_maklumat_profil_diri[]" value="Terdapat maklumat yang tidak lengkap pada Maklumat Profil Diri" disabled="disabled"><span> Terdapat maklumat yang tidak lengkap pada Maklumat Profil Diri</span><br>
+                                                            <input class="checkbox1c" id="checkbox1c" type="checkbox" name="catatan_maklumat_profil_diri[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain1" id="lain1" disabled="disabled"></span><br>
+                                                        </div> 
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align:right;">2</td>
