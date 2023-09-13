@@ -100,7 +100,7 @@ class SekretariatController extends Controller
 
     public function kemaskiniKelulusan(Request $request,$id)
     {
-        if($request->get('maklumat_profil_diri')=="Lulus"){
+        if($request->get('keputusan')=="Lulus"){
 
             TuntutanPermohonan::where('nokp_pelajar', $id)
                 ->update([
@@ -113,6 +113,20 @@ class SekretariatController extends Controller
                 'status'   =>  7,
             ]);
         }
+
+        $permohonan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
+            return $q->whereDate('created_at', $request->date);
+        })
+        ->when($request->status != null, function ($q) use ($request) {
+            return $q->where('status', $request->status);
+        })
+        ->get();
+
+        return view('pages.sekretariat.permohonan.keputusan', compact('permohonan'));
+    }
+
+    public function lihatKelulusan($id)
+    {
         $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
         $id_permohonan = $permohonan->id_permohonan;
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
@@ -125,7 +139,7 @@ class SekretariatController extends Controller
         Mail::to("fateennashuha9@gmail.com")->send(new mailKeputusan('test'));
         return redirect('/sekretariatKeputusan')->with('message','Emel notifikasi telah dihantar kepada pemohon');
     }
-    
+
     public function keputusanPermohonan(Request $request)
     {
         $permohonan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
