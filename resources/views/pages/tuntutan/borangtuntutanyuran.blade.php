@@ -431,18 +431,18 @@
 											</tr>
 											</thead>
 											<tbody class="fw-semibold text-gray-600">
-												@foreach ($tuntutan as $tuntutan)
+												
 												<tr>
-													<td>{{ $tuntutan->id_tuntutan}}</td>
+													<td></td>
 													{{-- <td>{{ $tuntutan->semester}}</td> --}}
-													<td>{{ $tuntutan->yuran}}</td>
-													<td>{{ $tuntutan->no_resit}}</td>
-													<td>{{ $tuntutan->nota_resit}}</td>
-													<td>RM{{ $tuntutan->amaun}}</td>
-													<td><a href="/assets/dokumen/tuntutan/{{$tuntutan->resit}}" target="_blank">Papar</a></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td>RM</td>
+													<td><a href="" target="_blank">Papar</a></td>
 													
 												</tr>
-												@endforeach	
+												
 											</tbody>
 											</table>
 											</div>
