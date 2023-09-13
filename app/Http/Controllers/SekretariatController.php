@@ -64,7 +64,7 @@ class SekretariatController extends Controller
 
         return view('pages.sekretariat.permohonan.statusBKOKU', compact('keseluruhan'));
     }
-   
+
     public function statusPermohonanPPK(Request $request)
     {
         $keseluruhan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
@@ -119,7 +119,7 @@ class SekretariatController extends Controller
 
         return view('pages.sekretariat.permohonan.keputusan', compact('permohonan'));
     }
-    
+
     public function kembalikanPermohonan()
     {
         return view('pages.sekretariat.permohonan.kembalikan');
@@ -139,12 +139,12 @@ class SekretariatController extends Controller
         return $pdf->download('SuratTawaran.pdf');
     }
 
-    public function cetakSenaraiPemohonExcel() 
+    public function cetakSenaraiPemohonExcel()
     {
         return Excel::download(new SenaraiPendek, 'PermohonanDisokong.xlsx');
     }
 
-    // public function cetakSenaraiPemohonPDF() 
+    // public function cetakSenaraiPemohonPDF()
     // {
     //     // $pdf = App::make('dompdf.wrapper');
     //     // $data = ['title' => 'Testing Page Number In Body'];
@@ -161,12 +161,12 @@ class SekretariatController extends Controller
     //     //return $pdf->stream('senarai-pemohon.pdf');
     // }
 
-    public function cetakSenaraiPemohonPDF() 
+    public function cetakSenaraiPemohonPDF()
     {
         $kelulusan = TuntutanPermohonan::where('status', '4')->get();
 
         $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon', compact('kelulusan'))
-            ->setPaper('A4', 'landscape'); 
+            ->setPaper('A4', 'landscape');
 
         return $pdf->stream('senarai-pemohon.pdf');
     }
@@ -184,24 +184,24 @@ class SekretariatController extends Controller
             else{
                 $catatan1=null;
             }
-    
+
             if($request->get('maklumat_akademik')=="tak_lengkap"){
                 $catatan2=$request->get('catatan_maklumat_akademik');
             }
             else{
                 $catatan2=null;
             }
-    
+
             if($request->get('salinan_dokumen')=="tak_lengkap"){
                 $catatan3=$request->get('catatan_salinan_dokumen');
             }
             else{
                 $catatan3=null;
             }
-    
+
             $catatan = [
-                'catatan1'=>$catatan1, 
-                'catatan2'=>$catatan2, 
+                'catatan1'=>$catatan1,
+                'catatan2'=>$catatan2,
                 'catatan3'=>$catatan3,
             ];
         }
@@ -220,8 +220,6 @@ class SekretariatController extends Controller
     {
         $permohonan = TuntutanPermohonan::where('status', '2')
         ->orWhere('status', '=','3')
-        ->orWhere('status', '=','4')
-        ->orWhere('status', '=','5')
         ->get();
         $status_kod=0;
         $status = null;
@@ -258,7 +256,7 @@ class SekretariatController extends Controller
             $status_kod=2;
             $status = "Tuntutan ".$id_permohonan." telah dikembalikan.";
         }
-        
+
         return view('pages.sekretariat.tuntutan.saring',compact('permohonan','status_kod','status'));
     }
 
