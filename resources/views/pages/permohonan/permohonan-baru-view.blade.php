@@ -400,7 +400,7 @@ $(document).ready(function(){
 																	<!--begin::Label-->
 																	<div class="me-5">
 																		<!--begin::Input-->
-																		<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1"  @foreach($pelajar as $pelajar1) @if($pelajar1->alamat_surat1)  checked="checked" @else checked=""  @endif @endforeach />
+																		<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1" @if($pelajar->alamat_surat1)  checked="checked" @else checked=""  @endif />
 																		<!--end::Input-->
 																		<!--begin::Label-->
 																		<label class="form-label">Sama seperti Alamat Tetap</label>
@@ -413,9 +413,8 @@ $(document).ready(function(){
 																<!--begin::Wrapper-->
 															</div>
 															<!--end::Input group-->
-
 															<!--begin::Input-->
-															<textarea id="alamat_surat1" name="alamat_surat1" class="form-control form-control-lg form-control-solid" rows="2">@foreach($pelajar as $pelajar1)@if($pelajar1->alamat_surat1){{$pelajar1->alamat_surat1}} @else  @endif @endforeach </textarea>
+															<textarea id="alamat_surat1" name="alamat_surat1" class="form-control form-control-lg form-control-solid" rows="2">@if($pelajar->alamat_surat1){{$pelajar->alamat_surat1}} @else  @endif </textarea>
 															<!--end::Input-->
 														</div>
 														<div class="row mb-10">
