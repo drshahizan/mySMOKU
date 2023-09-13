@@ -36,7 +36,7 @@
 				<div class="row clearfix">
 					<div class="card">
 						<div class="header">
-							<h2>Status Keseluruhan Permohonan</h2>
+							<h2>Bilangan Permohonan dan Tuntutan<br><small>Sila klik tab BKOKU atau PPK untuk lihat</small></h2>
 						</div>
 
 						@php
@@ -48,6 +48,7 @@
 							$dikembalikanB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','5')->count();
 							$layakB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','6')->count();
 							$tidaklayakB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','7')->count();
+							$dibayarB = DB::table('maklumattuntutan')->join('permohonan', 'permohonan.nokp_pelajar', '=', 'maklumattuntutan.nokp_pelajar')->where('maklumattuntutan.status', '=', 9)->where('permohonan.program','=','BKOKU')->count();
 						@endphp
 
 						@php
@@ -59,24 +60,27 @@
 							$dikembalikanP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','5')->count();
 							$layakP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','6')->count();
 							$tidaklayakP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','7')->count();
+							$dibayarP = DB::table('maklumattuntutan')->join('permohonan', 'permohonan.nokp_pelajar', '=', 'maklumattuntutan.nokp_pelajar')->where('maklumattuntutan.status', '=', 9)->where('permohonan.program','=','PPK')->count();
 						@endphp
 
 						{{-- top nav bar --}}
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
 							<li class="nav-item" role="presentation">
-								<button class="nav-link active" id="bkoku-tab" data-toggle="tab" data-target="#bkoku" type="button" role="tab" aria-controls="bkoku" aria-selected="true"><b>BKOKU</b></button>
+								<button class="nav-link active" id="bkoku-tab" data-toggle="tab" data-target="#bkoku" type="button" role="tab" aria-controls="bkoku" aria-selected="true">BKOKU</button>
 							</li>
 							<li class="nav-item" role="presentation">
-								<button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false"><b>PPK</b></button>
+								<button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="myTabContent">
 							{{-- BKOKU --}}
 							<div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
-								<br>
+								{{-- Permohonan --}}
+								<div class="header">
+									<h2>Permohonan BKOKU</h2>
+								</div>
 								<div class="body">
-									<br>
 									<!--begin::First Row-->
 									<div class="row g-3 g-lg-6" style="text-align: center;">
 										<!--begin::Col-->
@@ -307,13 +311,53 @@
 									</div>
 									<!--end::Row-->
 								</div>
+
+								{{-- Tuntutan --}}
+								<div class="header">
+									<h2>Tuntutan BKOKU</h2>
+								</div>
+								<div class="body">
+									<!--begin::First Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{url('permohonan/BKOKU')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+								</div>
 							</div>
 
 							{{-- PPK --}}
 							<div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-								<br>
+								{{-- Permohonan --}}
+								<div class="header">
+									<h2>Permohonan PPK</h2>
+								</div>
 								<div class="body">
-									<br>
 									<!--begin::First Row-->
 									<div class="row g-3 g-lg-6" style="text-align: center;">
 										<!--begin::Col-->
@@ -544,9 +588,46 @@
 									</div>
 									<!--end::Row-->
 								</div>
+
+								{{-- Tuntutan --}}
+								<div class="header">
+									<h2>Tuntutan PPK</h2>
+								</div>
+								<div class="body">
+									<!--begin::First Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
+										<!--begin::Col-->
+										<div class="col-3">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{url('permohonan/BKOKU')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
