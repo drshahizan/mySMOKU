@@ -392,28 +392,25 @@ $(document).ready(function(){
 																<label class="form-label">Alamat Surat Menyurat</label>
 																<!--end::Label-->
 																<!--begin::Input group-->
-														<div class="fv-row mb-7">
-															<!--begin::Wrapper-->
-															<div class="d-flex flex-stack">
-																<!--begin::Label-->
-																<div class="me-5">
-																	<!--begin::Label-->
-																	<label class="form-label">Sama seperti Alamat Tetap?
-																	<!--begin::Input-->
-																	<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1"  @foreach($pelajar as $pelajar1) @if($pelajar1->alamat_surat1)  checked="checked" @else checked=""  @endif @endforeach />
-																	<!--end::Input-->
-																	<!--begin::Label-->
-																	<span class="form-check-label fw-semibold text-muted" for="kt_modal_update_customer_billing">Ya</span>
-																	<!--end::Label-->
-																	</label>
-																<!--end::Switch-->
+																<div class="fv-row mb-7">
+																	<!--begin::Wrapper-->
+																	<div class="d-flex flex-stack">
+																		<!--begin::Label-->
+																		<div class="me-5">
+																			<!--begin::Input-->
+																			<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1"  @foreach($pelajar as $pelajar1) @if($pelajar1->alamat_surat1)  checked="checked" @else checked=""  @endif @endforeach />
+																			<!--end::Input-->
+																			<!--begin::Label-->
+																			<label class="form-label">Sama seperti Alamat Tetap</label>
+																			<!--end::Label-->
+																		<!--end::Switch-->
+																		</div>
+																		<!--end::Label-->
+																		
+																	</div>
+																	<!--begin::Wrapper-->
 																</div>
-																<!--end::Label-->
-																
-															</div>
-															<!--begin::Wrapper-->
-														</div>
-														<!--end::Input group-->
+																<!--end::Input group-->
 
 																<!--begin::Input-->
 																<textarea id="alamat_surat1" name="alamat_surat1" class="form-control form-control-lg form-control-solid" rows="2">@foreach($pelajar as $pelajar1)@if($pelajar1->alamat_surat1){{$pelajar1->alamat_surat1}} @else  @endif @endforeach </textarea>
@@ -758,7 +755,7 @@ $(document).ready(function(){
 
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="fs-6 fw-semibold form-label mb-2">Pekerjaan
+																<label class="fs-6 fw-semibold form-label mb-2">Pekerjaan Waris
 																</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
@@ -771,13 +768,13 @@ $(document).ready(function(){
 															</div>
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="fs-6 fw-semibold form-label mb-2">Pendapatan
+																<label class="fs-6 fw-semibold form-label mb-2">Pendapatan Waris
 																</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
 																<div class="col-12">
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" id="pendapatan" name="pendapatan" placeholder="" value="{{$smoku->pendapatan_waris}}"  />
+																	<input type="text" class="form-control form-control-solid" id="pendapatan" name="pendapatan" placeholder="" value=""  />
 																	<!--end::Input-->
 																</div>
 																<!--end::Input wrapper-->
@@ -876,11 +873,18 @@ $(document).ready(function(){
 														<div class="row mb-10">
 															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian</label>
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
 																<!--end::Label-->
-																<!--begin::Input wrapper-->
-																	<input type="text" class="form-control form-control-solid" placeholder="" id="tempoh_pengajian" name="tempoh_pengajian" value="" required/>
-																	
+																	<!--begin::Input wrapper-->
+																	<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
+																		<option></option>
+																		<option value="1">1</option>
+																		<option value="2">2</option>
+																		<option value="2.5">2.5</option>
+																		<option value="3">3</option>
+																		<option value="3.5">3.5</option>
+																		<option value="4">4</option>
+																	</select>
 																	<!--end::Input wrapper-->
 															</div>
 															<!--end::Col-->
@@ -900,23 +904,45 @@ $(document).ready(function(){
 																</div>
 																<!--end::Row-->
 															</div>
-</DIV>
+														</div>
+
+														<div class="row mb-10">
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																<span class="">Sesi Pengajian Semasa</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
+																</label>
+																<!--end::Label-->
+																	<!--begin::Input wrapper-->
+																	<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																		<option></option>
+																		<option value="2022/2023">2022/2023</option>
+																		<option value="2023/2024">2023/2024</option>
+																		<option value="2024/2025">2024/2025</option>
+																	</select>
+																	<!--end::Input wrapper-->
+															</div>
+															<!--end::Col-->
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																	<span class="">No Pendaftaran Pelajar</span>
+																	
+																</label>
+																<!--end::Label-->
+																<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaranpelajar" name="no_pendaftaranpelajar" value="" />
+															</div>
+														</div>
 
 														<!--begin::Input group-->
 														<div class="row mb-10">
 															<!--begin::Col-->
-															<div class="col-md-4 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">No Pendaftaran Pelajar</span>
-																
-															</label>
-															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaranpelajar" name="no_pendaftaranpelajar" value="" />
-														</div>
-															<div class="col-md-4 fv-row">
+															
+															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="fs-6 fw-semibold form-label mb-2">Tarikh Mula Pengajian</label>
+																<label class="fs-6 fw-semibold form-label mb-2">
+																	<span class="">Tarikh Mula Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
+																</label>
 																<!--end::Label-->
 																	<!--begin::Input wrapper-->
 																	<input type="date" class="form-control form-control-solid" placeholder="" id="tkh_mula" name="tkh_mula" value="" />
@@ -924,9 +950,11 @@ $(document).ready(function(){
 															</div>
 															<!--end::Col-->
 															<!--begin::Col-->
-															<div class="col-md-4 fv-row">
+															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tarikh Tamat Pengajian</label>
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																	<span class="">Tarikh Tamat Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
+																</label>
 																<!--end::Label-->
 																<!--begin::Input wrapper-->
 																	<input type="date" class="form-control form-control-solid" placeholder="" id="tkh_tamat" name="tkh_tamat" value="" />
@@ -939,17 +967,8 @@ $(document).ready(function(){
 														<!--begin::Input group-->
 														<div class="row mb-10">
 															<!--begin::Col-->
-															<div class="col-md-4 fv-row">
-																<!--begin::Label-->
-																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">Sesi Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
-																</label>
-																<!--end::Label-->
-																	<!--begin::Input wrapper-->
-																	<input type="text" class="form-control form-control-solid" placeholder="" id="sesi" name="sesi" value="" />
-																	<!--end::Input wrapper-->
-															</div>
-															<div class="col-md-4 fv-row">
+															
+															<div class="col-md-6 fv-row">
 																<!--begin::Label-->
 																<label class=" fs-6 fw-semibold form-label mb-2">Semester Semasa</label>
 																<!--end::Label-->
@@ -977,7 +996,7 @@ $(document).ready(function(){
 																</div>
 																<!--end::Row-->
 															</div>
-															<div class="col-md-4 fv-row">
+															<div class="col-md-6 fv-row">
 															<!--begin::Label-->
 															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
 																<span class="">CGPA Terkini</span>
@@ -1031,15 +1050,40 @@ $(document).ready(function(){
 														</div>
 														<!--end::Input group-->
 
-														<div class="d-flex flex-column mb-7 fv-row">
-															<!--begin::Label-->
-															<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-																<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
-																
-															</label>															
-															<!--end::Label-->
-															<input type="text" class="form-control form-control-solid" placeholder="JPA" id="nama_penaja" name="nama_penaja" value="" />
+														<!--begin::Input group-->
+														<div class="row mb-10">
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+																	<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
+																	
+																</label>															
+																<!--end::Label-->
+																<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+																	<option></option>
+																	<option value="JPA">JPA</option>
+																	<option value="PTPTN">PTPTN</option>
+																	<option value="MARA">MARA</option>
+																	<option value="PETRONAS">PETRONAS</option>
+																	<option value="SHELL">SHELL</option>
+																	<option value="YAYASAN TNB">YAYASAN TNB</option>
+																	<option value="DRB-HICOM">DRB-HICOM</option>
+																	<option value="BANK NEGARA">BANK NEGARA</option>
+																	<option value="LAIN-LAIN">LAIN-LAIN</option>
+																</select>
+															</div>
+															<!--begin::Col-->
+															<div class="col-md-6 fv-row">
+																<!--begin::Label-->
+																<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Lain-lain</label>
+																<!--end::Label-->
+																<!--begin::Input wrapper-->
+																<input type="text" class="form-control form-control-solid" placeholder="" id="penaja_lain" name="penaja_lain" value="" />
+																<!--end::Input wrapper-->
+															</div>
+															<!--end::Col-->
 														</div>
+														<!--end::Input group-->
 														
 													</div>
 													<!--end::Wrapper-->
