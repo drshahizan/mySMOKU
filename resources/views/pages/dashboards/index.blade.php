@@ -223,7 +223,7 @@
 													<div class="card pt-4 mb-6 mb-xl-9">
 														@if (session('message'))
 														<div class="alert alert-success" style="color:black; text-align: center;">{{ session('message') }}</div>
-													@endif
+														@endif
 														<!--begin::Card header-->
 														<div class="card-header border-0">
 															<!--begin::Card title-->
@@ -236,30 +236,26 @@
 															<div class="table-responsive">
 														<table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
 															<thead>
-														<tr class="fw-semibold fs-6 text-gray-700 border-bottom border-gray-200">
-															<th>Id Tuntutan</th>
-															{{-- <th>Semester</th> --}}
-															<th>Jenis Yuran</th>
-															<th>No resit</th>
-															<th>Perihal</th>
-															<th>Amaun</th>
-															<th>Salinan</th>
-														</tr>
-														</thead>
-														<tbody class="fw-semibold text-gray-600">
-															@foreach ($tuntutan as $tuntutan)
-															<tr>
-																<td>{{ $tuntutan->id_tuntutan}}</td>
-																{{-- <td>{{ $tuntutan->semester}}</td> --}}
-																<td>{{ $tuntutan->yuran}}</td>
-																<td>{{ $tuntutan->no_resit}}</td>
-																<td>{{ $tuntutan->nota_resit}}</td>
-																<td>RM{{ $tuntutan->amaun}}</td>
-																<td><a href="/assets/dokumen/tuntutan/{{$tuntutan->resit}}" target="_blank">Papar</a></td>
-																
-															</tr>
-															@endforeach	
-														</tbody>
+																<tr>
+																	<th>ID Tuntutan</th>
+																	<th>Status</th>
+																	<th>Tarikh Kemaskini</th>
+																	{{--<th>Tindakan</th>--}}
+																	
+																</tr>
+															</thead>
+															<tbody>
+																@foreach($tuntutan as $tuntutan)
+																<tr> 
+																	<td>{{$tuntutan->id_tuntutan}}</td>
+																	<td>{{ucwords(strtolower($tuntutan->status))}}</td>
+																	<td>{{$tuntutan->created_at->format('d/m/Y h:i:sa')}}</td>
+																	{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
+																	
+																	
+																</tr>
+																@endforeach
+																</tbody>
 														</table>
 
 													</div>		

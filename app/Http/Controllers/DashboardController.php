@@ -12,7 +12,7 @@ use App\Models\TuntutanPermohonan;
 use App\Models\Smoku;
 use Illuminate\Support\Facades\DB;
 use App\Models\Mod;
-use App\Models\Tuntutan;
+use App\Models\StatusTuntutan;
 
 class DashboardController extends Controller
 {
@@ -46,7 +46,10 @@ class DashboardController extends Controller
         ->where('nokp_pelajar', Auth::user()->nokp);
         //return view('pages.permohonan.statusmohon', compact('permohonan'));
         $user = User::all()->where('nokp',Auth::user()->nokp);
-        $tuntutan = Tuntutan::where('nokp_pelajar',Auth::user()->nokp)->get();
+        $tuntutan = StatusTuntutan::orderBy('statustransaksituntutan.status','desc')
+        ->join('statusinfo','statusinfo.kodstatus','=','statustransaksituntutan.status')
+        ->get(['statustransaksituntutan.*','statusinfo.*'])
+        ->where('nokp_pelajar',Auth::user()->nokp);
         
 
 

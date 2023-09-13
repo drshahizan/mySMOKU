@@ -51,11 +51,11 @@
                             {{-- Filter section --}}
                             <form action="" method="GET">
                                 <div class="row" style="margin-left:15px;">
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
                                     </div>
     
-                                    <div class="col-md-3">
+                                    {{-- <div class="col-md-3">
                                         <select name="status" class="form-select">
                                             <option value="">Semua Status Permohonan</option>
                                             <option value="1" {{Request::get('status') == '1' ? 'selected':'' }} >Deraf</option>
@@ -66,7 +66,7 @@
                                             <option value="6" {{Request::get('status') == '6' ? 'selected':'' }} >Layak</option>
                                             <option value="7" {{Request::get('status') == '7' ? 'selected':'' }} >Tidak Layak</option>
                                         </select>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-md-4 right">
                                         <button type="submit" class="btn btn-primary" style="width: 10%; padding-left:10px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>

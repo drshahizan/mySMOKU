@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Tuntutan;
 use App\Models\TuntutanPermohonan;
 use App\Models\Status;
+use App\Models\StatusTuntutan;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,11 +57,26 @@ class TuntutanController extends Controller
                 $data->save();
 			}
 
-            
+            $statustransaksi = StatusTuntutan::where('nokp_pelajar', '=', $nokp)->first();
+            if ($statustransaksi === null) {
+            $statustransaksi = StatusTuntutan::create([
+                'id_tuntutan' => $idmohon.'/'.$running_num,
+                'nokp_pelajar' => $nokp,
+                'status' => '1',
+        
+                ]);
+            }else {
 
+            DB::table('statustransaksituntutan')->where('nokp_pelajar' ,$nokp)
+                ->update([
+                'id_tuntutan' => $idmohon.'/'.$running_num,
+                'nokp_pelajar' => $nokp,
+                'status' => '1',
+                
+            ]);
+            }
             
-            //dd($idmohon);
-
+            $statustransaksi->save();
             
             
 
@@ -86,13 +102,18 @@ class TuntutanController extends Controller
         ]);
         }
         $tuntutan->save();
+
+        //$tuntutan = Tuntutan::all()->where('nokp_pelajar', '=', $nokp)->first();
+        $idtuntutan =  $tuntutan->id_tuntutan;
+        //dd($idtuntutan);
         
-        /*$user = Status::create([
-            'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
-            'nokp_pelajar' => $request->nokp_pelajar,
+        $user = StatusTuntutan::create([
+            'id_tuntutan' => $idtuntutan,
+            'nokp_pelajar' => $nokp,
             'status' => '2',
     
-        ]);*/
+        ]);
+        $user->save();
         
         return redirect()->route('dashboard')->with('message', 'Tuntutan anda telah dihantar.');
 
