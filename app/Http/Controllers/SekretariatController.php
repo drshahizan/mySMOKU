@@ -36,21 +36,6 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.permohonan.statusBKOKU', compact('keseluruhan'));
     }
 
-    // public function filterStatusPermohonanBKOKU(Request $request, $status)
-    // {
-    //     // Use $status parameter to filter the applications
-    //     $keseluruhan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
-    //         return $q->whereDate('created_at', $request->date);
-    //     })
-    //     ->when($status != null, function ($q) use ($status) {
-    //         return $q->where('status', $status);
-    //     })
-    //     ->get();
-
-    //     dd($status);
-    //     return view('pages.sekretariat.permohonan.statusBKOKU', compact('keseluruhan'));
-    // }
-
     public function filterStatusPermohonanBKOKU(Request $request, $status)
     {
         // Use $status parameter to filter the applications
@@ -98,6 +83,21 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.permohonan.kelulusan', compact('kelulusan'));
     }
 
+    public function cetakSenaraiPemohonExcel()
+    {
+        return Excel::download(new SenaraiPendek, 'PermohonanDisokong.xlsx');
+    }
+
+    public function cetakSenaraiPemohonPDF()
+    {
+        $kelulusan = TuntutanPermohonan::where('status', '4')->get();
+
+        $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon', compact('kelulusan'))
+            ->setPaper('A4', 'landscape');
+
+        return $pdf->stream('senarai-pemohon.pdf');
+    }
+
     public function kemaskiniKelulusan($id)
     {
         $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
@@ -107,6 +107,12 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.permohonan.maklumatKelulusan',compact('permohonan','pelajar','catatan'));
     }
 
+    public function mailKeputusan()
+    {
+        Mail::to("fateennashuha9@gmail.com")->send(new mailKeputusan('test'));
+        return redirect('/sekretariatKeputusan')->with('message','Emel notifikasi telah dihantar kepada pemohon');
+    }
+    
     public function keputusanPermohonan(Request $request)
     {
         $permohonan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
@@ -139,83 +145,7 @@ class SekretariatController extends Controller
         return $pdf->download('SuratTawaran.pdf');
     }
 
-    public function cetakSenaraiPemohonExcel()
-    {
-        return Excel::download(new SenaraiPendek, 'PermohonanDisokong.xlsx');
-    }
-
-    // public function cetakSenaraiPemohonPDF()
-    // {
-    //     // $pdf = App::make('dompdf.wrapper');
-    //     // $data = ['title' => 'Testing Page Number In Body'];
-    //     // $pdf->loadView('pages.saringan.cetakSenaraiPemohon', $data);
-    //     // $pdf->setPaper('A4', 'landscape');
-    //     // $pdf->output();
-    //     // $dom_pdf = $pdf->getDomPDF();
-
-    //     // $canvas = $dom_pdf ->get_canvas();
-    //     // $canvas->page_text(400, 570, "Page {PAGE_NUM}", null, 8, array(0, 0, 0));
-
-    //     //$kelulusan = TuntutanPermohonan::where('status', '4')->get();
-    //     //$pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon', compact('kelulusan'));
-    //     //return $pdf->stream('senarai-pemohon.pdf');
-    // }
-
-    public function cetakSenaraiPemohonPDF()
-    {
-        $kelulusan = TuntutanPermohonan::where('status', '4')->get();
-
-        $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon', compact('kelulusan'))
-            ->setPaper('A4', 'landscape');
-
-        return $pdf->stream('senarai-pemohon.pdf');
-    }
-
-
-    public function mailKeputusan(Request $request)
-    {
-        if($request->get('maklumat_profil_diri')=="lengkap"&&$request->get('maklumat_akademik')=="lengkap"&&$request->get('salinan_dokumen')=="lengkap"){
-            return redirect('/maklumat-tuntutan')->with('disokong', 'Permohonan Telah Disokong');
-        }
-        else{
-            if($request->get('maklumat_profil_diri')=="tak_lengkap"){
-                $catatan1=$request->get('catatan_profil_diri');
-            }
-            else{
-                $catatan1=null;
-            }
-
-            if($request->get('maklumat_akademik')=="tak_lengkap"){
-                $catatan2=$request->get('catatan_maklumat_akademik');
-            }
-            else{
-                $catatan2=null;
-            }
-
-            if($request->get('salinan_dokumen')=="tak_lengkap"){
-                $catatan3=$request->get('catatan_salinan_dokumen');
-            }
-            else{
-                $catatan3=null;
-            }
-
-            $catatan = [
-                'catatan1'=>$catatan1,
-                'catatan2'=>$catatan2,
-                'catatan3'=>$catatan3,
-            ];
-        }
-        Mail::to("fateennashuha9@gmail.com")->send(new mailKeputusan($catatan));
-        return redirect('/sekretariatKeputusan')->with('message','Emel notifikasi telah dihantar kepada pemohon');
-    }
-
-    public function qrcode()
-    {
-      return view('pages.sekretariat.permohonan.qrcode');
-    }
-
     //TUNTUTAN
-
     public function tuntutanSaring()
     {
         $permohonan = TuntutanPermohonan::where('status', '2')
