@@ -269,4 +269,9 @@ class SekretariatController extends Controller
         ->get();
         return view('pages.sekretariat.tuntutan.keputusan',compact('permohonan'));
     }
+
+    public function sejSenaraiTuntutan(){
+        $permohonan = TuntutanPermohonan::all();
+        return view('pages.sekretariat.tuntutan.sejarah_tuntutan',compact('permohonan'));
+    }
 }
