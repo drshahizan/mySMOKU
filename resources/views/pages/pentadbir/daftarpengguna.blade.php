@@ -146,7 +146,7 @@
 													<!--begin::Modal body-->
 													<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 														<!--begin::Form-->
-														<form id="kt_modal_new_card_form" class="form" action="#">
+														<form class="form" id="kt_modal_new_card_form" action="{{ route('daftarpengguna.post') }}" method="post">
 															@csrf
 															<!--begin::Scroll-->
 															
@@ -187,7 +187,7 @@
 																	<label class="fs-6 fw-semibold mb-2">Peranan</label>
 																	<!--end::Label-->
 																	<!--begin::Input-->
-																	<select name="tahap" id="tahap" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
+																	<select name="tahap" id="tahap" class="form-select form-select-solid js-example-basic-single" data-control="select2" data-placeholder="Pilih">
 																		@foreach($tahap as $tahap1)
 																			<option value="{{ $tahap1->id }}" {{$user->tahap == $tahap1->id  ? 'selected' : ''}}>{{ $tahap1->name}}</option>
 																		@endforeach
@@ -198,7 +198,7 @@
 																															
 																@if ($user->tahap =='2')
 																<!--begin::Input group-->
-																<div class="fv-row mb-7">
+																<div class="fv-row mb-7" id="div_ipt">
 																	<!--begin::Label-->
 																	<label class="fs-6 fw-semibold mb-2">Nama Pusat Pengajian</label>
 																	<!--end::Label-->
@@ -212,6 +212,23 @@
 																</div>
 																<!--end::Input group-->
 																@endif
+
+																<script>
+																	$(document).ready(function(){
+																		$('#tahap').on('change', function() {
+																		if ( this.value == '2'){
+																			$("#div_ipt").show();
+																		}
+																		else {
+																			$("#div_ipt").hide();
+																		}
+																		});
+																	});
+																	$(document).ready(function() {
+																	$('.js-example-basic-single').select2();
+																	});
+																	
+																</script>
 
 																@if ($user->tahap !='1')
 																<!--begin::Input group-->
@@ -335,33 +352,25 @@
 										<!--end::Input-->
 									</div>
 									<!--end::Input group-->
-									<!--begin::Input group-->
-									<div class="fv-row mb-7">
-										<!--begin::Label-->
-										<label class="fs-6 fw-semibold mb-2">Jawatan</label>
-										<!--end::Label-->
-										<!--begin::Input-->
-										<input type="text" class="form-control form-control-solid" placeholder="" name="jawatan" value="" />
-										<!--end::Input-->
-									</div>
-									<!--end::Input group-->
+									
 									<!--begin::Input group-->
 									<div class="fv-row mb-7">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold mb-2">Peranan</label>
 										<!--end::Label-->
 										<!--begin::Input-->
-										<select name="tahap" id="tahap"  class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
-											<option></option>
+										<select name="tahap" id="pilihtahap" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
 											@foreach ($tahap as $tahap)
-											<option value="{{ $tahap->id}}">{{ $tahap->name}}</option>
+											<option></option>
+											<option value="{{$tahap->id}}">{{$tahap->name}}</option>
 											@endforeach
 										</select>
 										<!--end::Input-->
 									</div>
 									<!--end::Input group-->
+									
 									<!--begin::Input group-->
-									<div class="fv-row mb-7">
+									<div class="fv-row mb-7" id="div_id_institusi">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold mb-2">Nama Pusat Pengajian</label>
 										<!--end::Label-->
@@ -372,6 +381,29 @@
 												<option value="{{ $infoipt->idipt}}">{{ $infoipt->namaipt}}</option>
 											@endforeach
 										</select>
+										<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+									<script>
+										$(document).ready(function(){
+											$('#pilihtahap').on('change', function() {
+											if ( this.value == '2'){
+												$("#div_id_institusi").show();
+											}
+											else {
+												$("#div_id_institusi").hide();
+											}
+											});
+										});
+										
+									</script>
+									<!--begin::Input group-->
+									<div class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold mb-2">Jawatan</label>
+										<!--end::Label-->
+										<!--begin::Input-->
+										<input type="text" class="form-control form-control-solid" placeholder="" name="jawatan" value="" />
 										<!--end::Input-->
 									</div>
 									<!--end::Input group-->
@@ -433,9 +465,7 @@
 <script src="assets/js/custom/utilities/modals/users-search.js"></script>
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
-<script>
-
-</script>
+	
 
 
 

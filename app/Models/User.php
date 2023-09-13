@@ -28,6 +28,8 @@ class User extends Authenticatable
         'email',
         'password',
         'tahap',
+        'jawatan',
+        'id_institusi',
         'status',
         'created_at',
         'updated_at',
