@@ -33,6 +33,16 @@ class SaringanController extends Controller
             ->update([
             'status'   =>  3,
         ]);
+
+        $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id_permohonan');
+
+        $status_trans = new Status([
+            'nokp_pelajar'  =>  $id,
+            'id_permohonan' =>  $id_permohonan,
+            'status'        =>  3,
+        ]);
+        $status_trans->save();
+
         $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
         return view('pages.saringan.maklumatPemohon',compact('permohonan','pelajar'));
@@ -209,5 +219,10 @@ class SaringanController extends Controller
         $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
         return view('pages.saringan.tuntutanTelahDisaring',compact('permohonan','pelajar'));
+    }
+
+    public function sejSenaraiPermohonan(){
+        $permohonan = TuntutanPermohonan::all();
+        return view('pages.saringan.sejarah_permohonan',compact('permohonan'));
     }
 }

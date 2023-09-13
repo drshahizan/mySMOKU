@@ -11,7 +11,7 @@
 					<span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
 					<span class="menu-title">Laman Utama</span>
 				</a>
-		</div>	
+		</div>
 			<div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
@@ -24,10 +24,10 @@
 					<span class="menu-title">Baru</span>
 			</a>
 		</div>
-	
+
 		<div class="menu-item">
 			<a class="menu-link" href="{{ route('sejarahpermohonan') }}">
-			
+
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Sejarah</span>
 			</a>
@@ -35,12 +35,12 @@
 
 		<div class="menu-item">
 			<a class="menu-link" href="{{ route('baharuimohon') }}">
-			
+
 					<span class="menu-icon">{!! getIcon('update-file', 'fs-2') !!}</span>
 					<span class="menu-title">Perbaharui</span>
 			</a>
-		</div> 
-		
+		</div>
+
 		<div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
@@ -88,7 +88,7 @@
 					<span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
 					<span class="menu-title">Laman Utama</span>
 				</a>
-		</div>	
+		</div>
 			<div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
@@ -100,8 +100,8 @@
 					<span class="menu-title">Keseluruhan</span>
 			</a>
 		</div>
-	
-		
+
+
 		<div class="menu-item">
 			<a class="menu-link" href="{{ route('permohonanbaru')}}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
@@ -142,12 +142,12 @@
 		</div>
 		<div class="menu-item">
 			<a class="menu-link" href="{{url('kemaskini-tuntutan')}}">
-		
+
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 					<span class="menu-title">Kemaskini</span>
 			</a>
 		</div>
-		
+
 		</div>
 		<!--end::Menu-->
 
@@ -165,7 +165,7 @@
 					<span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
 					<span class="menu-title">Laman Utama</span>
 				</a>
-		</div>	
+		</div>
 		<div class="menu-item pt-5">
 			<div class="menu-content">
 				<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
@@ -189,6 +189,12 @@
 					<span class="menu-title">Keputusan</span>
 			</a>
 		</div>
+        <div class="menu-item">
+            <a class="menu-link" href="{{url('permohonan/sejarah/senarai-permohonan')}}">
+                <span class="menu-icon">{!! getIcon('watch', 'fs-2') !!}</span>
+                <span class="menu-title">Sejarah</span>
+            </a>
+        </div>
 		<div class="menu-item pt-5">
 			<div class="menu-content">
 				<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
@@ -215,6 +221,12 @@
 					<span class="menu-title">Keputusan</span>
 			</a>
 		</div>
+        <div class="menu-item">
+            <a class="menu-link" href="{{url('tuntutan/sejarah/senarai-tuntutan')}}">
+                <span class="menu-icon">{!! getIcon('watch', 'fs-2') !!}</span>
+                <span class="menu-title">Sejarah</span>
+            </a>
+        </div>
 		</div>
 		<!--end::Menu-->
 
@@ -232,24 +244,24 @@
 								<span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
 								<span class="menu-title">Laman Utama</span>
 							</a>
-					</div>	
+					</div>
 					<div class="menu-item pt-5">
 						<div class="menu-content">
 							<span class="menu-heading fw-bold text-uppercase fs-7">Pentadbir Sistem</span>
 						</div>
 					</div>
-					
+
 					<div class="menu-item">
 						<a class="menu-link" href="{{url('daftarpengguna')}}">
 								<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 								<span class="menu-title">Daftar Pengguna</span>
 						</a>
 					</div>
-				
+
 				</div>
 			<!--end::Menu-->
 @endif
-		
+
 	</div>
 	<!--end::Menu wrapper-->
 </div>

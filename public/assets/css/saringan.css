@@ -104,6 +104,16 @@
     color:white!important;
 }
 
+.bg-batal, .bg-batal:hover, .bg-batal:active{
+    background: gray !important;
+    color:white!important;
+}
+
+.bg-dibayar, .bg-dibayar:hover, .bg-dibayar:active{
+    background:#0ca1ab!important;
+    color:white!important;
+}
+
 .text-white{
     color:white!important;
 }
@@ -286,17 +296,17 @@ table{
     border-collapse: collapse!important;
     border: 1px solid #ddd !important;
 }
-  
+
 td,th{
     vertical-align: middle!important;
     color: black!important;
     border: 1px solid #ddd !important;
     padding: 8px!important;
 }
-  
+
 table>thead>tr:nth-child(even){background-color: #f2f2f2!important;}
 table>thead>tr:hover {background-color: #ddd!important;}
-  
+
 th{
     padding-top: 12px!important;
     padding-bottom: 12px!important;

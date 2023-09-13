@@ -36,7 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     //Route::post('/dashboard', [DashboardController::class, 'store'])->name('dashboard.store');
-    
+
 
     Route::name('user-management.')->group(function () {
         Route::resource('/user-management/users', UserManagementController::class);
@@ -47,7 +47,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
    /*Route::name('permohonan.')->group(function () {
         //Route::get('/', [PermohonanController::class, 'permohonanbaru']);
         Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
-        Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post'); 
+        Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post');
         //Route::resource('/user-management/permissions', PermissionManagementController::class);
     });*/
     Route::get('profildiri', [ProfilController::class, 'profildiri'])->name('profil-diri');
@@ -68,7 +68,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('statuspermohonan/{nokp}', [PermohonanController::class, 'delete'])->name('delete');
     Route::get('baharuimohon', [PermohonanController::class, 'baharuimohon'])->name('baharuimohon');
     Route::post('baharuimohon', [PermohonanController::class, 'save'])->name('save');
-  
+
     //Saring permohonan
     Route::get('saringan', [SaringanController::class, 'saringan']);
     Route::get('saringan/PPK', [SaringanController::class, 'saringanPPK']);
@@ -86,6 +86,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('saring/maklumat/pemohon/{no_kp}', [SaringanController::class, 'saringMaklumat']);
     Route::get('permohonan/telah/disaring/{no_kp}', [SaringanController::class, 'permohonanTelahDisaring'])->name('permohonan.telah.disaring.no_kp');
     Route::get('tuntutan/telah/disaring/{no_kp}', [SaringanController::class, 'tuntutanTelahDisaring'])->name('tuntutan.telah.disaring.no_kp');
+    Route::get('permohonan/sejarah/senarai-permohonan', [SaringanController::class, 'sejSenaraiPermohonan']);
 
     //Permohonan - Sekretariat
     Route::get('dashboard/sekretariat', [SekretariatController::class, 'dashboard']);
@@ -113,8 +114,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('maklumat-tuntutan-2/{no_kp}', [SekretariatController::class, 'maklumatTuntutan2'])->name('maklumat.tuntutan2.no_kp');
     Route::post('tuntutan/saring/maklumat/{id}', [SekretariatController::class, 'saringMaklumatTuntutan'])->name('tuntutan.saring.maklumat.id');
     Route::get('tuntutan-keputusan', [SekretariatController::class, 'tuntutanKeputusan']);
+    Route::get('tuntutan/sejarah/senarai-tuntutan', [SekretariatController::class, 'sejSenaraiTuntutan']);
 
-    //Permohonan - Penyelaras 
+    //Permohonan - Penyelaras
     Route::get('permohonanbaru', [PenyelarasController::class, 'permohonanbaru'])->name('permohonanbaru');
     Route::get('dashboardpenyelaras', [PenyelarasController::class, 'create'])->name('dashboardpenyelaras');
     Route::post('dashboardpenyelaras', [PenyelarasController::class, 'store']);
@@ -136,7 +138,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('kemaskini-tuntutan', [PenyelarasController::class, 'kemaskiniTuntutan']);
     Route::get('penyelaras-sejarah-tuntutan', [PenyelarasController::class, 'sejarahTuntutan']);
 
-    //Tuntutan Pelajar 
+    //Tuntutan Pelajar
     Route::get('borangTuntutanYuran',[TuntutanController::class,'borangtuntutanyuran'])->name('borangTuntutanYuran');
     Route::post('borangTuntutanYuran', [TuntutanController::class, 'savetuntutan'])->name('savetuntutan');
     Route::get('hantartuntutan', [TuntutanController::class, 'hantartuntutan'])->name('hantartuntutan');;
