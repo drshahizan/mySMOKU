@@ -12,7 +12,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        
+
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
@@ -81,9 +81,9 @@
                                                             DataTable.ext.search.push(function (settings, data, dataIndex) {
                                                                 let min = new Date(start).toLocaleDateString();
                                                                 let max = new Date(end).toLocaleDateString();
-                                                                
+
                                                                 let date = new Date(data[2]).toLocaleDateString();
-            
+
                                                                 if (
                                                                     (min === null && max === null) ||
                                                                     (min === null && date <= max) ||
@@ -94,7 +94,7 @@
                                                                 }
                                                                 return false;
                                                             });
-            
+
                                                             // DataTables initialisation
                                                             let table = new DataTable('#sortTable1');
                                                             table.draw();
@@ -112,15 +112,15 @@
                                             </div>
                                         </div>
                                     </form>
-                
+
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 15%"><b>ID Tuntutan</b></th>                                        
+                                                        <th style="width: 15%"><b>ID Tuntutan</b></th>
                                                         <th style="width: 45%"><b>Nama</b></th>
-                                                        <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th> 
+                                                        <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th>
                                                         <th class="text-center" style="width: 15%">Status Tuntutan</th>
                                                     </tr>
                                                 </thead>
@@ -152,7 +152,7 @@
                                                             @if($item['status'] == "6")
                                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=="5")
-                                                                <td class="text-center"><button type="button" class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
+                                                                <td class="text-center"><button type="button" class="btn bg-dikembalikan">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif($item['status'] == "7")
                                                                 <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                             @endif
@@ -163,7 +163,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
 
                                 {{-- PKK --}}
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
@@ -173,7 +173,7 @@
                                             <div class="col-md-3">
                                                 <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
                                             </div>
-            
+
                                             <div class="col-md-3">
                                                 <select name="status2" class="form-select">
                                                     <option value="">Pilih Keputusan</option>
@@ -183,15 +183,15 @@
                                             </div>
                                         </div>
                                     </form>
-                
+
                                     <div class="body">
                                         <div class="table-responsive">
                                             <table id="sortTable2" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 15%"><b>ID Tuntutan</b></th>                                        
+                                                        <th style="width: 15%"><b>ID Tuntutan</b></th>
                                                         <th style="width: 45%"><b>Nama</b></th>
-                                                        <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th> 
+                                                        <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th>
                                                         <th class="text-center" style="width: 15%">Status Tuntutan</th>
                                                     </tr>
                                                 </thead>
@@ -223,7 +223,7 @@
                                                             @if($item['status'] == "6")
                                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=="5")
-                                                                <td class="text-center"><button type="button" class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
+                                                                <td class="text-center"><button type="button" class="btn bg-dikembalikan">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif($item['status'] == "7")
                                                                 <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                             @endif
@@ -248,11 +248,11 @@
             $('input[name="dates"]').daterangepicker();
         </script>
         <script>
-            
+
         </script>
         {{-- <script>
            $('#status').on('change', function(){
             $('#sortTable1').DataTable().search(this.value).draw();
-          }); 
+          });
         </script> --}}
-</x-default-layout> 
+</x-default-layout>
