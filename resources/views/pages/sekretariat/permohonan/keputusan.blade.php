@@ -78,6 +78,7 @@
                                             <div class="col-md-3">
                                                 <select name="status" class="form-select">
                                                     <option value="">Pilih Semua Keputusan</option>
+                                                    <option value="6" {{Request::get('status') == '5' ? 'selected':'' }} >Dikembalikan</option>
                                                     <option value="6" {{Request::get('status') == '6' ? 'selected':'' }} >Layak</option>
                                                     <option value="7" {{Request::get('status') == '7' ? 'selected':'' }} >Tidak Layak</option>
                                                 </select>
@@ -104,7 +105,7 @@
                                                 <tbody>
                                                     @foreach ($permohonan as $item)
                                                     @if($item['program']=="BKOKU")
-                                                        @if($item['status']=="6" || $item['status']=="7")
+                                                        @if($item['status']=="5" || $item['status']=="6" || $item['status']=="7")
                                                             @php
                                                                 $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
                                                                 $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
@@ -131,7 +132,7 @@
                                                                 @if($item['status'] == "6")
                                                                     <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif ($item['status']=="5")
-                                                                    <td class="text-center"><button type="button" class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
+                                                                    <td class="text-center"><button type="button" class="btn btn-sm text-white" style="background-color: #d75b50">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif($item['status'] == "7")
                                                                     <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @endif
@@ -139,11 +140,11 @@
                                                         @endif
                                                     @endif
                                                     @endforeach
-                                                            <td>B/6/900623035672</td>
+                                                            {{-- <td>B/6/900623035672</td>
                                                             <td>Wan Aminah binti Wan Hasan</td>
                                                             <td class="text-center">AM1234</td>
                                                             <td class="text-center">06/09/2023</td>
-                                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td>
+                                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td> --}}
                                                 </tbody>
                                             </table>
                                         </div>
