@@ -99,12 +99,25 @@ class SekretariatController extends Controller
         return $pdf->stream('senarai-pemohon.pdf');
     }
 
+    public function lihatKelulusan($id)
+    {
+        $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
+        $id_permohonan = $permohonan->id_permohonan;
+        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
+        $catatan = Saringan::where('id_permohonan', $id_permohonan)->first();
+        return view('pages.sekretariat.permohonan.maklumatKelulusan',compact('permohonan','pelajar','catatan'));
+    }
+
     public function kemaskiniKelulusan(Request $request,$id)
     {
+<<<<<<< Updated upstream
         $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id');
 
         if($request->get('keputusan')=="Lulus"){
 
+=======
+        if($request->get('keputusan')=="Lulus"){
+>>>>>>> Stashed changes
             TuntutanPermohonan::where('nokp_pelajar', $id)
                 ->update([
                 'status'   =>  6,
@@ -151,7 +164,7 @@ class SekretariatController extends Controller
         $id_permohonan = $permohonan->id_permohonan;
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
         $catatan = Saringan::where('id_permohonan', $id_permohonan)->first();
-        return view('pages.sekretariat.permohonan.maklumatKelulusan',compact('permohonan','pelajar','catatan'));
+        return view('pages.sekretariat.permohonan.keputusan',compact('permohonan','pelajar','catatan'));
     }
 
     public function mailKeputusan()

@@ -144,11 +144,6 @@
                                                         @endif
                                                     @endif
                                                     @endforeach
-                                                            {{-- <td>B/6/900623035672</td>
-                                                            <td>Wan Aminah binti Wan Hasan</td>
-                                                            <td class="text-center">AM1234</td>
-                                                            <td class="text-center">06/09/2023</td>
-                                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td> --}}
                                                 </tbody>
                                             </table>
                                         </div>
