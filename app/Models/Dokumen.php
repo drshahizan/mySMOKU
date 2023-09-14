@@ -2,29 +2,18 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Storage;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Model;
 
-class Dokumen extends Authenticatable
+class Dokumen extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-    use HasRoles;
-    protected $table = 'dokumen';
-    public $directory="public/dokumen/";  
+    use HasFactory;
+    protected $table = 'permohonan_dokumen'; 
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'id_permohonan',
-        'nokp_pelajar',
+        'smoku_id',
+        'no_rujukan_permohonan',
+        'id_sekretariat',
         'suratTawaran',
         'nota_suratTawaran',
         'akaunBank',
@@ -34,11 +23,4 @@ class Dokumen extends Authenticatable
         'invoisResit',
         'nota_invoisResit',
     ];
-
-    public function getPathAttribute($value)  
-    {  
-    return $this->directory.$value;  
-    }  
-
-    
 }

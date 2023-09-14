@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Mod extends Model
+class SejarahPermohonan extends Model
 {
     use HasFactory;
-    protected $table = 'bk_mod';
+    protected $table = 'sejarah_permohonan';
 
     protected $fillable = [
-        'kodmod',
-        'mod',
+        'smoku_id',
+        'no_rujukan_permohonan',
+        'status',
     ];
 }

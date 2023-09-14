@@ -2,33 +2,17 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Storage;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Model;
 
-class PeringkatPengajian extends Authenticatable
+class PeringkatPengajian extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-    use HasRoles;
-    protected $table = 'bk_peringkatpengajian';
+    use HasFactory;
+    protected $table = 'bk_peringkat_pengajian';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'kodperingkat',
+        'kod_peringkat',
         'peringkat',
         
     ];
-
-    public function id()
-    {
-        return $this->kodperingkat;
-    }
 }

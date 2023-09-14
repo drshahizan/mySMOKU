@@ -2,35 +2,38 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Storage;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Model;
 
-class Smoku extends Authenticatable
+class Smoku extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-    use HasRoles;
+    use HasFactory;
     protected $table = 'smoku';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'nokp',
-        'noJKM',
+        'no_kp',
+        'no_id_tentera',
+        'nama',
+        'no_daftar_oku',
+        'kategori',
+        'jantina',
+        'tarikh_lahir',
+        'umur',
+        'keturunan',
+        'tel_rumah',
+        'tel_bimbit',
         'email',
-        'last_login_at',
-        'last_login_ip',
+        'pekerjaan',
+        'pendapatan',
+        'status_pekerjaan',
+        'alamat_tetap',
+        'alamat_surat_menyurat',
+        'parlimen',
+        'dun',
+        'nama_waris',
+        'tel_bimbit_waris',
+        'hubungan_waris',
+        'pekerjaan_waris',
+        'pendapatan_waris',
     ];
-
-    public function id()
-    {
-        return $this->nokp;
-    }
 }

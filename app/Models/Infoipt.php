@@ -2,33 +2,17 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Storage;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Model;
 
-class Infoipt extends Authenticatable
+class InfoIpt extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-    use HasRoles;
-    protected $table = 'bk_infoipt';
+    use HasFactory;
+    protected $table = 'bk_info_institusi';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'idipt',
-        'jenis_ipt',
-        'namaipt',
+        'id_institusi',
+        'jenis_isntitusi',
+        'nama_institusi',
     ];
-
-    public function idipt()
-    {
-        return $this->idipt;
-    }
 }

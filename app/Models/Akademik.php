@@ -2,50 +2,33 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Storage;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Model;
 
-class Akademik extends Authenticatable
+class Akademik extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-    use HasRoles;
+    use HasFactory;
+    protected $table = 'smoku_akademik';
 
-    protected $table = 'maklumatakademik';
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'no_pendaftaranpelajar',
-        'nokp_pelajar',
+        'smoku_id',
+        'no_pendaftaran_pelajar',
         'peringkat_pengajian',
-        'sesi',
         'nama_kursus',
         'id_institusi',
-        'tkh_mula',
-        'tkh_tamat',
+        'sesi',
+        'tarikh_mula',
+        'tarikh_tamat',
         'sem_semasa',
         'tempoh_pengajian',
-        'bil_bulanpersem',
+        'bil_bulan_per_sem',
         'mod',
         'cgpa',
         'sumber_biaya',
         'nama_penaja',
         'status',
-        //'terimaHLP',
-        //'tkh_maklumat',
         
         
     ];
 
-    
-
-    
 }
