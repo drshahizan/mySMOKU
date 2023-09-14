@@ -3,85 +3,57 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
+
 use App\Models\Infoipt;
 use App\Models\PeringkatPengajian;
 use App\Models\Kursus;
 use App\Models\Akademik;
-use Illuminate\Support\Facades\DB;
-use session;
+
 
 
 class SemakUserController extends Controller
 {
 
     public function index(){
-        //$nokp = $request->session()->get('nokp');
+
         addJavascriptFile('assets/js/custom/authentication/semak/general.js');
 
-        $ipt = Infoipt::orderby("namaipt","asc")
-             ->select('idipt','namaipt')
-             ->where('jenis_ipt','=','IPTS')
+        $ipt = InfoIpt::orderby("nama_institusi","asc")
+             ->where('jenis_institusi','=','IPTS')
              ->get();
         $kodperingkat = PeringkatPengajian::orderby("peringkat","asc")
-             ->select('kodperingkat','peringkat')
-             ->get();
+            ->get();
 
-        // Load index view
         return view('pages.auth.semaksyarat')
         ->with("ipt",$ipt)
-        ->with("kodperingkat",$kodperingkat);
+        ->with("kod_peringkat",$kodperingkat);
    }
 
-   // Fetch records
+
    public function getPeringkat($ipt=0){
 
-        // Fetch kursus by idipt
-        $peringkatData['data'] = DB::table('kursus')
-            //->join('bk_peringkatpengajian', 'kursus.kodperingkat', '=', 'bk_peringkatpengajian.kodperingkat')
-            ->select('kursus.kodperingkat','bk_peringkatpengajian.peringkat')
-            ->join('bk_peringkatpengajian', function ($join) {
-                $join->on('kursus.kodperingkat', '=', 'bk_peringkatpengajian.kodperingkat'); 
-            })
-            ->where('idipt',$ipt)
-            ->groupBy('kursus.kodperingkat','bk_peringkatpengajian.peringkat')
-
+        $peringkatData['data'] = Kursus::select('bk_kursus.kod_peringkat','bk_peringkat_pengajian.peringkat')
+            ->join('bk_peringkat_pengajian', function ($join) {
+                $join->on('bk_kursus.kod_peringkat', '=', 'bk_peringkat_pengajian.kod_peringkat'); })
+            ->where('id_institusi',$ipt)
+            ->groupBy('bk_kursus.kod_peringkat','bk_peringkat_pengajian.peringkat')
             ->get();
-             
+            return response()->json($peringkatData);
 
-             return response()->json($peringkatData);
+    }
 
-   }
-   public function getKursus($kodperingkat=0,$ipt=0){
+    public function getKursus($kodperingkat=0,$ipt=0){
 
-        // Fetch kursus by idipt
         $kursusData['data'] = Kursus::orderby("nama_kursus","asc")
-             ->select('idipt','kodperingkat','nama_kursus')
-             ->where('kodperingkat',$kodperingkat)
-             ->where('idipt',$ipt)
-             
-             //->where(["idipt"=> $ipt, "kodperingkat" => $kodperingkat])
-             ->get();
+            ->where('kod_peringkat',$kodperingkat)
+            ->where('id_institusi',$ipt)
+            ->get();
+    
+            return response()->json($kursusData);
+    
+    }
 
-             return response()->json($kursusData);
-
-   }
-
-    /*public function create(Request $request)
-    {
-        $nokp = $request->session()->get('nokp');
-        //dd($nokp);
-        
-        $ipt = Infoipt::all()->sortBy('namaipt');
-        $peringkat = PeringkatPengajian::all()->sortBy('kodperingkat');
-        $kursus = Kursus::all()->sortBy('nama_kursus');
-
-        return view('pages.auth.semaksyarat', compact('ipt','peringkat','kursus'));
-
-    }*/
     public function store(Request $request)
     {
         $request->validate([
@@ -95,10 +67,6 @@ class SemakUserController extends Controller
 
             $terimHLP = $request->terimHLP;
             $cuti = $request->cuti;
-            $id_institusi = $request->id_institusi;
-            $peringkat_pengajian = $request->peringkat_pengajian;
-            $nama_kursus = $request->nama_kursus;
-
             
             if ($terimHLP == 'ya') {
                 return redirect()->route('login')
@@ -113,7 +81,7 @@ class SemakUserController extends Controller
             else {
 
                 $user = Akademik::create([
-                    'nokp_pelajar' => $request->session()->get('nokp'),
+                    'smoku_id' => $request->session()->get('id'),
                     'id_institusi' => $request->id_institusi,
                     'peringkat_pengajian' => $request->peringkat_pengajian,
                     'nama_kursus' => $request->nama_kursus,
