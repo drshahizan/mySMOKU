@@ -37,8 +37,4 @@ class Smoku extends Model
         'pendapatan_waris',
     ];
 
-    public function id()
-    {
-        return $this->id;
-    }
 }
