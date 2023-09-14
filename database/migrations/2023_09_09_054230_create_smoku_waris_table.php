@@ -16,11 +16,13 @@ return new class extends Migration
             $table->unsignedBigInteger('smoku_id');
             $table->string('nama_waris');
             $table->string('no_kp_waris');
+            $table->string('no_pasport_waris')->nullable();
             $table->string('alamat_tetap_waris');
             $table->string('tel_bimbit_waris');
             $table->string('hubungan_waris');
             $table->string('hubungan_lain_waris')->nullable();
-            $table->string('pendapatan_waris');
+            $table->string('pekerjaan_waris')->nullable();
+            $table->string('pendapatan_waris')->nullable();
             $table->foreign('smoku_id')
               ->references('id')->on('smoku')->onDelete('cascade');
             $table->timestamps();

@@ -27,7 +27,9 @@ return new class extends Migration
             $table->string('mod')->nullable();
             $table->string('cgpa')->nullable();
             $table->integer('sumber_biaya')->nullable();
-            $table->string('nama_penaja')->nullable();
+            $table->string('sumber_lain')->nullable();
+            $table->integer('nama_penaja')->nullable();
+            $table->string('penaja_lain')->nullable();
             $table->string('status')->nullable();
             $table->foreign('smoku_id')
               ->references('id')->on('smoku')->onDelete('cascade');

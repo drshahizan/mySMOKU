@@ -12,7 +12,7 @@ class Bandar extends Model
 
     protected $fillable = [
         'id',
-        'nama',
-        'negeri',
+        'bandar',
+        'negeri_id',
     ];
 }

@@ -5,18 +5,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Permohonan;
+use App\Models\ButiranPelajar;
 use App\Models\Waris;
 use App\Models\Akademik;
-use App\Models\TuntutanPermohonan;
+use App\Models\Permohonan;
 use App\Models\User;
 use App\Models\Smoku;
 use App\Models\Infoipt;
 use App\Models\PeringkatPengajian;
 use App\Models\Kursus;
 use App\Models\Mod;
-use App\Models\Sumberbiaya;
-use App\Models\Status;
+use App\Models\SumberBiaya;
+use App\Models\Penaja;
+use App\Models\SejarahPermohonan;
+use App\Models\SejarahTuntutan;
 use App\Models\JenisOku;
 use App\Models\Dokumen;
 use App\Models\Peperiksaan;
@@ -32,7 +34,7 @@ class PermohonanController extends Controller
     public function permohonan()
     {
 
-        $smoku = Smoku::join('bk_jantina','bk_jantina.kodjantina','=','smoku.jantina')
+        /*$smoku = Smoku::join('bk_jantina','bk_jantina.kodjantina','=','smoku.jantina')
         ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'smoku.bangsa')
         ->join('bk_hubungan','bk_hubungan.kodhubungan','=','smoku.hubungan')
         ->join('bk_jenisoku','bk_jenisoku.kodoku','=','smoku.kecacatan')
@@ -97,8 +99,27 @@ class PermohonanController extends Controller
         }
         else
         {
-            return view('pages.permohonan.permohonan-baru', compact('smoku','hubungan','akademikmqa','infoipt','peringkat','kursus','mod','biaya','pelajar','waris','akademik','tuntutanpermohonan','dokumen','negeri'));
-        }
+            return view('pages.permohonan.permohonan-baru');
+        }*/
+
+        $smoku = Smoku::join('bk_jantina','bk_jantina.kod_jantina','=','smoku.jantina')
+        ->join('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
+        ->join('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
+        ->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
+        ->get(['smoku.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
+        ->where('no_kp', Auth::user()->no_kp);
+        //dd($smoku);
+        $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        $akademikmqa = Akademik::join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
+        ->join('bk_peringkat_pengajian','bk_peringkat_pengajian.kod_peringkat','=','smoku_akademik.peringkat_pengajian')
+        ->get(['smoku_akademik.*', 'bk_info_institusi.*', 'bk_peringkat_pengajian.*'])
+        ->where('smoku_id',$smoku_id->id);
+        $mod = Mod::all()->sortBy('kod_mod');
+        $biaya = SumberBiaya::all()->sortBy('kod_biaya');
+        $penaja = Penaja::all()->sortBy('kod_penaja');
+        $hubungan = Hubungan::all()->sortBy('kod_hubungan');
+        $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri')->get();
+        return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri'));
         
         
     }
@@ -106,23 +127,22 @@ class PermohonanController extends Controller
      // Fetch records
    public function getBandar($idnegeri=0){
 
-    // Fetch kursus by idipt
-    $bandarData['data'] = Bandar::orderby("nama","asc")
-         ->select('id','nama','negeri')
-         ->where('negeri',$idnegeri)
+        // Fetch kursus by idipt
+        $bandarData['data'] = Bandar::orderby("bandar","asc")
+         ->select('id','bandar','negeri_id')
+         ->where('negeri_id',$idnegeri)
          ->get();
 
          return response()->json($bandarData);
 
-}
-    
+    }
 
     public function simpanmohon(Request $request)
     {   
 
-        $user = Permohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
+        $user = ButiranPelajar::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
         if ($user === null) {
-            $user = Permohonan::create([
+            $user = ButiranPelajar::create([
                 'nama_pelajar' => $request->nama_pelajar,
                 'nokp_pelajar' => $request->nokp_pelajar,
                 'tkh_lahir' => $request->tkh_lahir,
@@ -228,9 +248,9 @@ class PermohonanController extends Controller
         ]);
        
 
-        $tuntutanpermohonan = TuntutanPermohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
+        $tuntutanpermohonan = Permohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
         if ($tuntutanpermohonan === null) {
-            $user = TuntutanPermohonan::create([
+            $user = Permohonan::create([
                 'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
                 'nokp_pelajar' => $request->nokp_pelajar,
                 'program' => 'BKOKU',
@@ -258,9 +278,9 @@ class PermohonanController extends Controller
             
         ]);
         }
-        $statustransaksi = Status::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
+        $statustransaksi = SejarahPermohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
         if ($statustransaksi === null) {
-            $user = Status::create([
+            $user = SejarahPermohonan::create([
                 'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
                 'nokp_pelajar' => $request->nokp_pelajar,
                 'status' => '1',
@@ -351,7 +371,7 @@ class PermohonanController extends Controller
     public function hantarpermohonan(Request $request)
     {   
 
-        $tuntutanpermohonan = TuntutanPermohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
+        $tuntutanpermohonan = Permohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
         if ($tuntutanpermohonan != null) {
             DB::table('permohonan')->where('nokp_pelajar' ,$request->nokp_pelajar)
             ->update([
@@ -368,7 +388,7 @@ class PermohonanController extends Controller
         ]);
         }
         
-        $user = Status::create([
+        $user = SejarahPermohonan::create([
             'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
             'nokp_pelajar' => $request->nokp_pelajar,
             'status' => '2',
@@ -418,7 +438,7 @@ class PermohonanController extends Controller
     }
 
     public function viewpermohonan(){
-        $pelajar = Permohonan::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
+        $pelajar = ButiranPelajar::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
         ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
         ->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
         ->get(['pelajar.*', 'bk_jantina.*','bk_bangsa.*','bk_bangsa.*','bk_jenisoku.*'])
@@ -434,7 +454,7 @@ class PermohonanController extends Controller
         ->join('bk_sumberbiaya','bk_sumberbiaya.kodbiaya','=','maklumatakademik.sumber_biaya')
         ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*', 'bk_mod.*', 'bk_sumberbiaya.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
-        $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->nokp);
+        $tuntutanpermohonan = Permohonan::all()->where('nokp_pelajar', Auth::user()->nokp);
         $dokumen = Dokumen::all()->where('nokp_pelajar', Auth::user()->nokp);
         return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
         
@@ -454,7 +474,7 @@ class PermohonanController extends Controller
 
         ]);
 
-        $pelajar = Permohonan::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
+        $pelajar = ButiranPelajar::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
         ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
         ->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
         ->get(['pelajar.*', 'bk_jantina.*','bk_bangsa.*','bk_bangsa.*','bk_jenisoku.*'])
@@ -468,13 +488,13 @@ class PermohonanController extends Controller
         ->join('bk_sumberbiaya','bk_sumberbiaya.kodbiaya','=','maklumatakademik.sumber_biaya')
         ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*', 'bk_mod.*', 'bk_sumberbiaya.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
-        $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', Auth::user()->nokp);
+        $tuntutanpermohonan = Permohonan::all()->where('nokp_pelajar', Auth::user()->nokp);
         $dokumen = Dokumen::all()->where('nokp_pelajar', Auth::user()->nokp);
-        $infoipt = Infoipt::all()->sortBy('namaipt');
+        $infoipt = InfoIpt::all()->sortBy('namaipt');
         $peringkat = PeringkatPengajian::all()->sortBy('kodperingkat');
         $kursus = Kursus::all()->sortBy('nama_kursus');
         $mod = Mod::all()->sortBy('kodmod');
-        $biaya = Sumberbiaya::all()->sortBy('kodbiaya');
+        $biaya = SumberBiaya::all()->sortBy('kodbiaya');
         $hubungan = Hubungan::all()->sortBy('kodhubungan');
         return view('pages.permohonan.permohonan-baru-kemaskini', compact('pelajar','waris','akademik','mod','biaya','tuntutanpermohonan','dokumen'));
         
@@ -541,7 +561,7 @@ class PermohonanController extends Controller
 
         ]);
 
-        $user = Status::create([
+        $user = SejarahPermohonan::create([
             'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
             'nokp_pelajar' => $request->nokp_pelajar,
             'status' => '2',
@@ -669,7 +689,7 @@ class PermohonanController extends Controller
  
 
     public function statuspermohonan(){
-        $permohonan = Status::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
+        $permohonan = SejarahPermohonan::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
         ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
         ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
@@ -678,7 +698,7 @@ class PermohonanController extends Controller
     }
 
     public function batalpermohonan(){
-        $permohonan = Status::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
+        $permohonan = SejarahPermohonan::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
         ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
         ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokpm);

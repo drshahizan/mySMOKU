@@ -134,7 +134,7 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
-					'alamat_surat1': {
+					'alamat_surat': {
 						validators: {
 							notEmpty: {
 								message: 'Alamat surat menyurat diperlukan'
@@ -145,6 +145,14 @@ var KTCreateAccount = function () {
 						validators: {
 							notEmpty: {
 								message: 'Poskod diperlukan'
+							},
+							digits: {
+								message: 'Poskod mesti mengandungi digit sahaja'
+							},
+							stringLength: {
+								min: 5,
+								max: 5,
+								message: 'Poskod mesti mengandungi 5 digit sahaja'
 							}
 						}
 					},
@@ -162,7 +170,7 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
-					'no_akaunbank': {
+					'no_akaun_bank': {
 						validators: {
 							notEmpty: {
 								message: 'No. Akaun Bank diperlukan'
@@ -196,10 +204,17 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
+					'no_kp_waris': {
+						validators: {
+							notEmpty: {
+								message: 'No. Kad Pengenalan diperlukan'
+							}
+						}
+					},
 					'alamatW1': {
 						validators: {
 							notEmpty: {
-								message: 'Alamat rumah diperlukan'
+								message: 'Alamat Tetap diperlukan'
 							}
 						}
 					},
@@ -207,6 +222,14 @@ var KTCreateAccount = function () {
 						validators: {
 							notEmpty: {
 								message: 'Poskod diperlukan'
+							},
+							digits: {
+								message: 'Poskod mesti mengandungi digit sahaja'
+							},
+							stringLength: {
+								min: 5,
+								max: 5,
+								message: 'Poskod mesti mengandungi 5 digit sahaja'
 							}
 						}
 					},
@@ -221,6 +244,13 @@ var KTCreateAccount = function () {
 						validators: {
 							notEmpty: {
 								message: 'Negeri diperlukan'
+							}
+						}
+					},
+					'pendapatan_waris': {
+						validators: {
+							notEmpty: {
+								message: 'Pendapatan Bulanan Waris diperlukan'
 							}
 						}
 					}
@@ -242,7 +272,7 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
-					'no_pendaftaranpelajar': {
+					'no_pendaftaran_pelajar': {
 						validators: {
 							notEmpty: {
 								message: 'No. Pendaftaran Pelajar diperlukan'
@@ -256,14 +286,14 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
-					'tkh_mula': {
+					'tarikh_mula': {
 						validators: {
 							notEmpty: {
 								message: 'Tarikh Mula diperlukan'
 							}
 						}
 					},
-					'tkh_tamat': {
+					'tarikh_tamat': {
 						validators: {
 							notEmpty: {
 								message: 'Tarikh Mula diperlukan'
@@ -284,7 +314,7 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
-					'bil_bulanpersem': {
+					'bil_bulan_per_sem': {
 						validators: {
 							notEmpty: {
 								message: 'Bil Bulan Persemester diperlukan'
