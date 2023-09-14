@@ -65,7 +65,7 @@
         <!--begin::Input group--->
         <div class="fv-row mb-8">
             <!--begin::Email-->
-            <input type="text" placeholder="Masukkan no. Kad Pengenalan" name="nokp" maxlength="12" autocomplete="off" class="form-control bg-transparent" value=""/>
+            <input type="text" placeholder="Masukkan no. Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" class="form-control bg-transparent" value=""/>
             <!--end::Email-->
         </div>
 
