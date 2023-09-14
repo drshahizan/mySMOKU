@@ -32,7 +32,7 @@
         <!--begin::Input group--->
         <div class="fv-row mb-8">
             <!--begin::Name-->
-            <input type="text" placeholder="No Kad Pengenalan atau No. JKM" name="nokp" maxlength="12" autocomplete="off" class="form-control bg-transparent"  value=""/>
+            <input type="text" placeholder="No Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" class="form-control bg-transparent"  value=""/>
             <!--end::Name-->
         </div>
 
