@@ -8,35 +8,33 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('saring', function (Blueprint $table) {
+        Schema::create('permohonan_dokumen', function (Blueprint $table) {
             $table->id();
-            $table->string('id_permohonan');
+            $table->unsignedBigInteger('permohonan_id');
+            $table->string('no_rujukan_permohonan');
             $table->string('id_sekretariat')->nullable();
-            $table->string('nokp');
-            $table->boolean('suratTawaran')->nullable();
+            $table->string('suratTawaran')->nullable();
             $table->string('nota_suratTawaran')->nullable();
-            $table->boolean('akaunBank')->nullable();
+            $table->string('akaunBank')->nullable();
             $table->string('nota_akaunBank')->nullable();
-            $table->boolean('kepPeperiksaan')->nullable();
+            $table->string('kepPeperiksaan')->nullable();
             $table->string('nota_kepPeperiksaan')->nullable();
-            $table->boolean('invoisResit')->nullable();
+            $table->string('invoisResit')->nullable();
             $table->string('nota_invoisResit')->nullable();
+            $table->foreign('permohonan_id')
+              ->references('id')->on('permohonan')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('saring');
+        Schema::dropIfExists('permohonan_dokumen');
     }
 };

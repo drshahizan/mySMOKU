@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('saringan', function (Blueprint $table) {
+        Schema::create('bk_jenis_oku', function (Blueprint $table) {
             $table->id();
-            $table->string('id_permohonan')->nullable();
-            $table->string('catatan_profilDiri')->nullable();
-            $table->string('catatan_akademik')->nullable();
-            $table->string('catatan_salinanDokumen')->nullable();
+            $table->string('kod_oku');
+            $table->string('kecacatan');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('saringan');
+        Schema::dropIfExists('bk_jenis_oku');
     }
 };

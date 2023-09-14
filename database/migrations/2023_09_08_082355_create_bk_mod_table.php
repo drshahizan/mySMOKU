@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users_verify', function (Blueprint $table) {
+        Schema::create('bk_mod', function (Blueprint $table) {
             $table->id();
-            $table->string('token');
+            $table->string('kod_mod');
+            $table->string('mod');
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users_verify');
+        Schema::dropIfExists('bk_mod');
     }
 };

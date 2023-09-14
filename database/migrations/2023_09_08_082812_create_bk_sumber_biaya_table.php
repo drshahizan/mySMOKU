@@ -8,27 +8,22 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('bk_infoipt', function (Blueprint $table) {
+        Schema::create('bk_sumber_biaya', function (Blueprint $table) {
             $table->id();
-            $table->integer('idipt');
-            $table->string('jenis_ipt');
-            $table->string('namaipt');
+            $table->integer('kod_biaya');
+            $table->string('biaya');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('bk_infoipt');
+        Schema::dropIfExists('bk_sumber_biaya');
     }
 };
