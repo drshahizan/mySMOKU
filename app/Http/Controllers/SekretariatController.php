@@ -39,7 +39,6 @@ class SekretariatController extends Controller
 
     public function filterStatusPermohonanBKOKU(Request $request, $status)
     {
-        // Use $status parameter to filter the applications
         $keseluruhan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
@@ -66,7 +65,6 @@ class SekretariatController extends Controller
 
     public function filterStatusPermohonanPPK(Request $request, $status)
     {
-        // Use $status parameter to filter the applications
         $keseluruhan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
@@ -121,6 +119,7 @@ class SekretariatController extends Controller
             $info_mesyuarat = new Kelulusan([
                 'id_permohonan' =>  $id_permohonan,
                 'no_mesyuarat'  =>  $request->get('noMesyuarat'),
+                'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
                 'keputusan'  =>  $request->get('keputusan'),
                 'catatan'  =>  $request->get('catatan'),
             ]);

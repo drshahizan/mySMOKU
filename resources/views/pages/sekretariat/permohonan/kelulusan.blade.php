@@ -109,6 +109,8 @@
                                                                     $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
                                                                     $jenis_kecacatan = DB::table('pelajar')->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_jenisoku.kecacatan'); //PH,SD
                                                                     $institusi_pengajian = DB::table('maklumatakademik')->join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_infoipt.namaipt');
+                                                                    $tarikh_mula = DB::table('maklumatakademik')->where('nokp_pelajar', $item['nokp_pelajar'])->value('tkh_mula');
+                                                                    $tarikh_tamat = DB::table('maklumatakademik')->where('nokp_pelajar', $item['nokp_pelajar'])->value('tkh_tamat');
                                                                     
                                                                     // nama pemohon
                                                                     $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
@@ -162,8 +164,8 @@
                                                                     <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                                                                     <td>{{$namakursus}}</td>
                                                                     <td>{{$institusipengajian}}</td>
-                                                                    <td class="text-center">{{date('d/m/Y', strtotime($item['tkh_mula']))}}</td>
-                                                                    <td class="text-center">{{date('d/m/Y', strtotime($item['tkh_tamat']))}}</td>
+                                                                    <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                                                    <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                                 </tr>
                                                             @endif
                                                         @endforeach 
