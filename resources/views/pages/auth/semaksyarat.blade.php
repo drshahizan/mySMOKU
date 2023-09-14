@@ -76,7 +76,7 @@
             <select id="id_institusi" name="id_institusi" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
                 <option value="">Pilih</option>
                 @foreach ($ipt as $ipt)	
-                <option value="{{ $ipt->idipt}}">{{ $ipt->namaipt}}</option> 
+                <option value="{{ $ipt->id_institusi}}">{{ $ipt->nama_institusi}}</option> 
                 @endforeach
             </select>
         </div>
@@ -85,9 +85,9 @@
                 <label class="form-label">Peringkat Pengajian</label>
                 <select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-hide-search="true">
                     <option value="">Pilih</option>
-                    @foreach ($kodperingkat as $kodperingkat)	
-                <option value="{{ $kodperingkat->kodperingkat}}">{{ $kodperingkat->peringkat}}</option> 
-                @endforeach
+                    @foreach ($kod_peringkat as $kod_peringkat)	
+                    <option value="{{ $kod_peringkat->kod_peringkat}}">{{ $kod_peringkat->peringkat}}</option> 
+                    @endforeach
                 </select>
         </div>
 
@@ -99,7 +99,8 @@
             </select>
         </div>
 
-    <!-- Script -->
+            <!-- Script -->
+    <script src="assets/js/custom/authentication/semak/general.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type='text/javascript'>
     $(document).ready(function(){
@@ -108,8 +109,9 @@
         $('#id_institusi').change(function(){
 
              // institusi id
-             var idipt = $(this).val();
-             var kodperingkat = $(this).val();
+             var id_institusi = $(this).val();
+             var kod_peringkat = $(this).val();
+             
 
              // Empty the dropdown
              $('#peringkat_pengajian').find('option').not(':first').remove();
@@ -117,7 +119,7 @@
 
              // AJAX request 
              $.ajax({
-                 url: 'getPeringkat/'+idipt,
+                 url: 'getPeringkat/'+id_institusi,
                  type: 'get',
                  dataType: 'json',
                  success: function(response){
@@ -131,11 +133,11 @@
                           // Read data and create <option >
                           for(var i=0; i<len; i++){
 
-                               var idipt = response['data'][i].idipt;
-                               var kodperingkat = response['data'][i].kodperingkat;
+                               var id_institusi = response['data'][i].id_institusi;
+                               var kod_peringkat = response['data'][i].kod_peringkat;
                                var peringkat = response['data'][i].peringkat;
 
-                               var option = "<option value='"+kodperingkat+"'>"+peringkat+"</option>";
+                               var option = "<option value='"+kod_peringkat+"'>"+peringkat+"</option>";
 
                                $("#peringkat_pengajian").append(option); 
                           }
@@ -150,8 +152,8 @@
         $('#peringkat_pengajian').change(function(){
 
         // institusi id
-        var idipt = $(id_institusi).val();
-        var kodperingkat = $(this).val();
+        var id_ins = $(id_institusi).val();
+        var kod_peringkat = $(this).val();
 
         // Empty the dropdown
        // $('#peringkat_pengajian').find('option').not(':first').remove();
@@ -161,7 +163,7 @@
 
         // AJAX request 
         $.ajax({
-            url: 'getKursus/'+kodperingkat+'/'+idipt,
+            url: 'getKursus/'+kod_peringkat+'/'+id_ins,
             type: 'get',
             dataType: 'json',
            
@@ -176,8 +178,8 @@
                     // Read data and create <option >
                     for(var i=0; i<len; i++){
 
-                        var idipt = response['data'][i].idipt;
-                        var kodperingkat = response['data'][i].kodperingkat;
+                        var id_ins = response['data'][i].id_institusi;
+                        var kod_peringkat = response['data'][i].kod_peringkat;
                         var nama_kursus = response['data'][i].nama_kursus;
 
                         var option = "<option value='"+nama_kursus+"'>"+nama_kursus+"</option>";
@@ -198,9 +200,9 @@
 
     $(document).ready(function() {
     $('.js-example-basic-single').select2();
-});
-    </script>
+    });
 
+    </script>
 
         <!--begin::Submit button-->
         <div class="d-grid mb-10">
@@ -211,18 +213,11 @@
                 @include('partials/general/_button-indicator', ['label' => 'Seterusnya'])
             </button>
         </div>
-        <!--end::Submit button-->
-
-        <!--begin::Sign in-->
-        {{--<div class="text-gray-500 text-center fw-semibold fs-6">
-            Mempunyai akaun?
-
-            <a href="/login" class="link-primary fw-semibold">
-                Log Masuk
-            </a>
-        </div>--}}
-        <!--end::Sign in-->
+        
     </form>
     <!--end::Form-->
+
+
+
 
 </x-auth-layout>
