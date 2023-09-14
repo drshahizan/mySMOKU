@@ -12,13 +12,13 @@ use Illuminate\Queue\SerializesModels;
 class mailKeputusan extends Mailable
 {
     use Queueable, SerializesModels;
-    public $catatan;
+    public $message;
     /**
      * Create a new message instance.
      */
-    public function __construct($catatan)
+    public function __construct($message)
     {
-        $this->catatan = $catatan;
+        $this->message = $message;
     }
 
     /**
@@ -28,7 +28,7 @@ class mailKeputusan extends Mailable
     {
         $subject = "Keputusan Permohonan Anda";
         return $this->subject($subject)
-                    ->with('data', $this->catatan)
+                    ->with('data', $this->message)
                     ->view('pages.sekretariat.permohonan.emel-kelulusan');
     }
 }

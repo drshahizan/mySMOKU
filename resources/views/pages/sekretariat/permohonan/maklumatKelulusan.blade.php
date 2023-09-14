@@ -270,8 +270,6 @@
                                                     <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus">Lulus</option>
                                                     <option value="Tidak Lulus">Tidak Lulus</option>
-                                                    {{-- <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
-                                                    <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option> --}}
                                                 </select>
                                             </td>
                                         </tr>

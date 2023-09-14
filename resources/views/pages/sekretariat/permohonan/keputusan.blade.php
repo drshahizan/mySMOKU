@@ -44,6 +44,11 @@
     <br>
 
     <body>
+        @if($notifikasi!=NULL)
+            <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px; color:black!important;">
+                {{ $notifikasi }}
+            </div>
+        @endif
         <!-- Main body part  -->
         <div id="main-content">
             <div class="container-fluid">

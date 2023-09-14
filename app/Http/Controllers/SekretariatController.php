@@ -113,8 +113,6 @@ class SekretariatController extends Controller
         $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id');
 
         if($request->get('keputusan')=="Lulus"){
-
-        
             TuntutanPermohonan::where('nokp_pelajar', $id)
                 ->update([
                 'status'   =>  6,
@@ -152,14 +150,12 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        return view('pages.sekretariat.permohonan.keputusan', compact('permohonan'));
-    }
+        $id_permohonan2 = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id_permohonan');
 
-
-    public function mailKeputusan()
-    {
-        Mail::to("fateennashuha9@gmail.com")->send(new mailKeputusan('test'));
-        return redirect('/sekretariatKeputusan')->with('message','Emel notifikasi telah dihantar kepada pemohon');
+        $notifikasi = "Emel notifikasi telah dihantar kepada ".$id_permohonan2;
+        $message = 'Test message';
+        Mail::to("fateennashuha9@gmail.com")->send(new mailKeputusan($message));
+        return view('pages.sekretariat.permohonan.keputusan', compact('permohonan','notifikasi'));
     }
 
     public function keputusanPermohonan(Request $request)
@@ -172,7 +168,8 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        return view('pages.sekretariat.permohonan.keputusan', compact('permohonan'));
+        $notifikasi = NULL;
+        return view('pages.sekretariat.permohonan.keputusan', compact('permohonan','notifikasi'));
     }
 
     public function kembalikanPermohonan()
