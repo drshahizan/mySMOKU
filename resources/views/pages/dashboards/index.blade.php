@@ -82,42 +82,20 @@
 													<!--begin::Details content-->
 													<div class="pb-5 fs-6">
 														<!--begin::Details item-->
-														{{-- <div class="fw-bold mt-5">No Matrik</div>
-														<div class="text-gray-600">{{$akademik->no_pendaftaranpelajar}}</div> --}}
-														<!--begin::Details item-->
-														<!--begin::Details item-->
 														<div class="fw-bold mt-5">Alamat Emel</div>
 														<div class="text-gray-600">
-															{{--@if(!empty($pelajar))
+															@if(!empty($pelajar))
 															<a href="#" class="text-gray-600 text-hover-primary">{{$pelajar->emel}}</a>
 															@else
 															@foreach($user as $user1)
 															<a href="#" class="text-gray-600 text-hover-primary">{{$user1->email}}</a>
 															@endforeach
-															@endif--}}
+															@endif
 														</div>
 														<!--begin::Details item-->
-														<!--begin::Details item-->
 														<div class="fw-bold mt-5">Nama Kursus</div>
-														<div class="text-gray-600"></div>
-														{{-- <div class="fw-bold mt-5">Mod Pengajian</div> --}}
-														{{-- @if(!empty($modpengajian))
-														<div class="text-gray-600">{{$modpengajian->mod}}
-														@else
-														<div class="text-gray-600">No data
-
-														@endif --}}
-														{{-- </div> --}}
-														<!--begin::Details item-->
-														<!--begin::Details item-->
+														<div class="text-gray-600">{{$akademik->nama_kursus}}</div>
 														
-														<!--begin::Details item-->
-														<!--begin::Details item-->
-														<!-- <div class="fw-bold mt-5">Latest Transaction</div>
-														<div class="text-gray-600">
-															<a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-gray-600 text-hover-primary">#14534</a>
-														</div> -->
-														<!--begin::Details item-->
 													</div>
 													<!--end::Details content-->
 												</div>

@@ -36,4 +36,9 @@ class Smoku extends Model
         'pekerjaan_waris',
         'pendapatan_waris',
     ];
+
+    public function id()
+    {
+        return $this->id;
+    }
 }
