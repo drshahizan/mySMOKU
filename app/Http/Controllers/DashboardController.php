@@ -45,18 +45,19 @@ class DashboardController extends Controller
         ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
         //return view('pages.permohonan.statusmohon', compact('permohonan'));
-        $user = User::all()->where('nokp',Auth::user()->nokp);
+        
         $tuntutan = StatusTuntutan::orderBy('statustransaksituntutan.status','desc')
         ->join('statusinfo','statusinfo.kodstatus','=','statustransaksituntutan.status')
         ->get(['statustransaksituntutan.*','statusinfo.*'])
         ->where('nokp_pelajar',Auth::user()->nokp);*/
+        $user = User::all()->where('no_kp',Auth::user()->no_kp);
         
 
 
         if(Auth::user()->tahap=='1')
         {
             //return view('pages.dashboards.index', compact('pelajar','status','akademik','sem','tuntutanpermohonan', 'permohonan','user','tuntutan'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
-            return view('pages.dashboards.index')->with('message', 'Selamat Datang ke Laman Utama Pelajar');
+            return view('pages.dashboards.index', compact('user'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
         }
         else if(Auth::user()->tahap=='2')
         {

@@ -47,55 +47,35 @@
 													<!--begin::Summary-->
 													<div class="d-flex flex-center flex-column mb-5">
 														<!--begin::Avatar-->
-														<div class="symbol symbol-150px symbol-circle mb-7">
-															<!-- <img src="assets/media/avatars/300-1.jpg" alt="image" /> -->
-															<?php
-																// $profile_picture = "";
-																// if(Auth::user()->profile_photo_path !== null){
-																// 	$profile_picture = Auth::user()->profile_photo_path;
-																// }else{
-																// 	$profile_picture = "default.jpg";
-																// }
-																// $img_path = "storage/app/public/profile_photo_path/".$profile_picture;
-																// dd($img_path);
-															?>
-															{{--@if(Auth::user()->profile_photo_path !== null)
-															@foreach($user as $user1)
-															<img class="image rounded-circle" src="assets/profile_photo_path/{{$user1->profile_photo_path}}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
-															@endforeach
-															@else--}}
-															<img class="image rounded-circle" src="assets/profile_photo_path/default.png" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
-															{{--@endif--}}
-														</div>
-														<!--end::Avatar-->
-														<!--begin::Name-->
-														{{--@if(!empty($pelajar))
-														<a href="#" class="fs-3 text-gray-800 text-dark fw-bold mb-1" style="text-align:center">{{$pelajar->nama_pelajar}}</a>
-														@else
 														@foreach($user as $user1)
-														<a href="#" class="fs-3 text-gray-800 text-dark fw-bold mb-1" style="text-align:center">{{$user1->nama}}</a>
-														@endforeach	
-														@endif
-														<!--end::Name-->
-														<!--begin::Email-->
-														@if(!empty($pelajar))
-
-														<a href="#" class="fs-5 fw-semibold text-muted mb-6">{{$pelajar->emel}}</a>
-														@else
-														@foreach($user as $user1)
-														<a href="#" class="fs-5 fw-semibold text-muted mb-6">{{$user1->email}}</a>
+															<div class="symbol symbol-150px symbol-circle mb-7">
+																@if(Auth::user()->profile_photo_path !== null)
+																<img class="image rounded-circle" src="assets/profile_photo_path/{{$user1->profile_photo_path}}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+																@else
+																<img class="image rounded-circle" src="assets/profile_photo_path/default.png" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+																@endif
+															</div>
+															<!--end::Avatar-->
+															<!--begin::Name-->
+															@if(!empty($pelajar))
+															<div class="fs-5 text-gray-800 text-dark fw-bold mb-1">{{$pelajar->nama_pelajar}}</div>
+															@else
+															<div class="fs-5 text-gray-800 text-dark fw-bold mb-1">{{$user1->nama}}</div>
+															@endif
+															<!--end::Name-->
+															<!--begin::Email-->
+															@if(!empty($pelajar))
+															<div class="fs-5 fw-semibold text-muted mb-6">{{$pelajar->emel}}</div>
+															@else
+															<div class="fs-5 fw-semibold text-muted mb-6">{{$user1->email}}</div>
+															@endif
+															<!--end::Email-->
 														@endforeach
-														@endif--}}
-
-														<!--end::Email-->
 													</div>
 													<!--end::Summary-->
 													<!--begin::Details toggle-->
 													<div class="d-flex flex-stack fs-4 py-3">
 														<div class="fw-bold">Maklumat Pelajar</div>
-														<!--begin::Badge-->
-														<!-- <div class="badge badge-light-info d-inline">Premium user</div> -->
-														<!--begin::Badge-->
 													</div>
 													<!--end::Details toggle-->
 													<div class="separator separator-dashed my-3"></div>
