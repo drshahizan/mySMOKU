@@ -4,7 +4,7 @@
     <div class="menu-item px-3">
         <div class="menu-content d-flex align-items-center px-3">
             @php
-                $nama = DB::table('smoku')->where('nokp', Auth::user()->nokp)->value('nama');
+                $nama = DB::table('smoku')->where('no_kp', Auth::user()->no_kp)->value('nama');
                 $nama2 = Auth::user()->nama;
             @endphp
             <!--begin::Avatar-->

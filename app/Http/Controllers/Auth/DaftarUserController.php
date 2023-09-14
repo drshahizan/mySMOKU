@@ -71,8 +71,10 @@ class DaftarUserController extends Controller
                 $nokp_in = $request->no_kp;
                 $smoku = Smoku::where('no_kp', $nokp_in)->first();
                 $id =  $smoku->id;
+                $no_kp =  $smoku->no_kp;
                 $smoku_id = $request->session()->put('id',$id);
-                return redirect()->route('semaksyarat')->with($smoku_id)
+                $no_kp = $request->session()->put('no_kp',$no_kp);
+                return redirect()->route('semaksyarat')->with($smoku_id,$no_kp)
                 ->with('message', $nokp_in. ' SAH SEBAGAI OKU BERDAFTAR DENGAN JKM');
             } else {
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +12,6 @@ use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use App\Models\Smoku;
 use session;
-use Illuminate\Support\Facades\DB;
 
 class RegisteredUserController extends Controller
 {
@@ -26,14 +24,11 @@ class RegisteredUserController extends Controller
     {
         
         addJavascriptFile('assets/js/custom/authentication/sign-up/general.js');
-        $nokp = $request->session()->get('nokp');
-        //dd($nokp);
 
+        $nokp = $request->session()->get('no_kp');
+        $smoku = Smoku::all()->where('no_kp', $nokp);
+        //dd($smoku);
 
-
-        $smoku = Smoku::all()->where('nokp', $nokp);
-
-        //return view('pages.auth.daftarlayak');
         return view('pages.auth.daftarlayak', compact('smoku'));
     }
 
@@ -48,7 +43,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nokp' => ['required', 'string', 'max:12'],
+            'no_kp' => ['required', 'string', 'max:12'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -56,23 +51,20 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'nama' => $request->nama,
-            'nokp' => $request->nokp,
+            'no_kp' => $request->no_kp,
             'email' => $request->email,
             'password' => Hash::make($request->password),
 			'tahap' => '1',
             'status' => '1',
-            'last_login_at' => \Illuminate\Support\Carbon::now()->toDateTimeString(),
-            'last_login_ip' => $request->getClientIp()
         ]);
 
-        //if ($request->email = null){
-            DB::table('smoku')->where('nokp' ,$request->nokp)
+        //UPDATE EMAIL IF EMAIL SMOKU NULL
+            Smoku::where('no_kp' ,$request->no_kp)
             ->update([
 
             'email' => $request->email,
             
         ]);
-        //}
 
         event(new Registered($user));
 

@@ -30,7 +30,7 @@
 
         <div class="fv-row mb-8">
             <!--begin::nokp-->
-            <input type="text" value="{{($smoku->nokp)}}" placeholder="No Kad Pengenalan" name="nokp" maxlength="12" autocomplete="off" class="form-control bg-transparent" readonly/>
+            <input type="text" value="{{($smoku->no_kp)}}" placeholder="No Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" class="form-control bg-transparent" readonly/>
             <!--end::nokp -->
         </div>
 

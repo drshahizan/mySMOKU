@@ -39,7 +39,7 @@
     <!--begin::User menu-->
 	<div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
         @php
-            $nama = DB::table('smoku')->where('nokp', Auth::user()->nokp)->value('nama');
+            $nama = DB::table('smoku')->where('no_kp', Auth::user()->no_kp)->value('nama');
             $fullname = Auth::user()->nama;
         @endphp
         <!--begin::Menu wrapper-->

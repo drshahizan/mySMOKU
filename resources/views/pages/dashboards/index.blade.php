@@ -59,17 +59,17 @@
 																// $img_path = "storage/app/public/profile_photo_path/".$profile_picture;
 																// dd($img_path);
 															?>
-															@if(Auth::user()->profile_photo_path !== null)
+															{{--@if(Auth::user()->profile_photo_path !== null)
 															@foreach($user as $user1)
 															<img class="image rounded-circle" src="assets/profile_photo_path/{{$user1->profile_photo_path}}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
 															@endforeach
-															@else
+															@else--}}
 															<img class="image rounded-circle" src="assets/profile_photo_path/default.png" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
-															@endif
+															{{--@endif--}}
 														</div>
 														<!--end::Avatar-->
 														<!--begin::Name-->
-														@if(!empty($pelajar))
+														{{--@if(!empty($pelajar))
 														<a href="#" class="fs-3 text-gray-800 text-dark fw-bold mb-1" style="text-align:center">{{$pelajar->nama_pelajar}}</a>
 														@else
 														@foreach($user as $user1)
@@ -85,7 +85,7 @@
 														@foreach($user as $user1)
 														<a href="#" class="fs-5 fw-semibold text-muted mb-6">{{$user1->email}}</a>
 														@endforeach
-														@endif
+														@endif--}}
 
 														<!--end::Email-->
 													</div>
@@ -108,18 +108,18 @@
 														<!--begin::Details item-->
 														<div class="fw-bold mt-5">Alamat Emel</div>
 														<div class="text-gray-600">
-															@if(!empty($pelajar))
+															{{--@if(!empty($pelajar))
 															<a href="#" class="text-gray-600 text-hover-primary">{{$pelajar->emel}}</a>
 															@else
 															@foreach($user as $user1)
 															<a href="#" class="text-gray-600 text-hover-primary">{{$user1->email}}</a>
 															@endforeach
-															@endif
+															@endif--}}
 														</div>
 														<!--begin::Details item-->
 														<!--begin::Details item-->
 														<div class="fw-bold mt-5">Nama Kursus</div>
-														<div class="text-gray-600">{{$akademik->nama_kursus}}</div>
+														<div class="text-gray-600"></div>
 														{{-- <div class="fw-bold mt-5">Mod Pengajian</div> --}}
 														{{-- @if(!empty($modpengajian))
 														<div class="text-gray-600">{{$modpengajian->mod}}
@@ -197,16 +197,16 @@
 			</tr>
 		</thead>
 		<tbody>
-		@foreach($permohonan as $permohonan)
+		
 		<tr> 
-			<td>{{$permohonan->id_permohonan}}</td>
-			<td>{{ucwords(strtolower($permohonan->status))}}</td>
-			<td>{{$permohonan->created_at->format('d/m/Y h:i:sa')}}</td>
+			<td></td>
+			<td></td>
+			<td></td>
 			{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
 			
 			
 		</tr>
-		@endforeach
+		
 		</tbody>
 	</table>
 </div>
@@ -245,16 +245,16 @@
 																</tr>
 															</thead>
 															<tbody>
-																@foreach($tuntutan as $tuntutan)
+																
 																<tr> 
-																	<td>{{$tuntutan->id_tuntutan}}</td>
-																	<td>{{ucwords(strtolower($tuntutan->status))}}</td>
-																	<td>{{$tuntutan->created_at->format('d/m/Y h:i:sa')}}</td>
+																	<td></td>
+																	<td></td>
+																	<td></td>
 																	{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
 																	
 																	
 																</tr>
-																@endforeach
+																
 																</tbody>
 														</table>
 

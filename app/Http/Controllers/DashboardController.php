@@ -19,7 +19,7 @@ class DashboardController extends Controller
     public function index()
     {
         addVendors(['amcharts', 'amcharts-maps', 'amcharts-stock']);
-        $user = Auth()->user();
+        /*$user = Auth()->user();
 
         $pelajar = Permohonan::where('nokp_pelajar', Auth::user()->nokp)->first();
         // dd($user->nokp);
@@ -49,13 +49,14 @@ class DashboardController extends Controller
         $tuntutan = StatusTuntutan::orderBy('statustransaksituntutan.status','desc')
         ->join('statusinfo','statusinfo.kodstatus','=','statustransaksituntutan.status')
         ->get(['statustransaksituntutan.*','statusinfo.*'])
-        ->where('nokp_pelajar',Auth::user()->nokp);
+        ->where('nokp_pelajar',Auth::user()->nokp);*/
         
 
 
         if(Auth::user()->tahap=='1')
         {
-            return view('pages.dashboards.index', compact('pelajar','status','akademik','sem','tuntutanpermohonan', 'permohonan','user','tuntutan'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
+            //return view('pages.dashboards.index', compact('pelajar','status','akademik','sem','tuntutanpermohonan', 'permohonan','user','tuntutan'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
+            return view('pages.dashboards.index')->with('message', 'Selamat Datang ke Laman Utama Pelajar');
         }
         else if(Auth::user()->tahap=='2')
         {

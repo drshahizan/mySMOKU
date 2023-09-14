@@ -15,7 +15,7 @@ var KTSignupGeneral = function () {
             form,
             {
                 fields: {
-                    'nokp': {
+                    'no_kp': {
                         validators: {
                             notEmpty: {
                                 message: 'No. Kad Pengenalan diperlukan'
@@ -161,7 +161,7 @@ var KTSignupGeneral = function () {
             form,
             {
                 fields: {
-                    'nokp': {
+                    'no_kp': {
                         validators: {
                             notEmpty: {
                                 message: 'No Kad Pengenalan diperlukan'
