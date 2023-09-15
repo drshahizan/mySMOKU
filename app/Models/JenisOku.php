@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class JenisOku extends Model
 {
     use HasFactory;
-    protected $table = 'bk_jenisoku';
+    protected $table = 'bk_jenis_oku';
 
     protected $fillable = [
         'id',
-        'kodoku',
-        'jenisoku',
+        'kod_oku',
+        'kecacatan',
     ];
 }

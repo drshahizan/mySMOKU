@@ -14,16 +14,9 @@ return new class extends Migration
         Schema::create('permohonan_dokumen', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('permohonan_id');
-            $table->string('no_rujukan_permohonan');
-            $table->string('id_sekretariat')->nullable();
-            $table->string('suratTawaran')->nullable();
-            $table->string('nota_suratTawaran')->nullable();
-            $table->string('akaunBank')->nullable();
-            $table->string('nota_akaunBank')->nullable();
-            $table->string('kepPeperiksaan')->nullable();
-            $table->string('nota_kepPeperiksaan')->nullable();
-            $table->string('invoisResit')->nullable();
-            $table->string('nota_invoisResit')->nullable();
+            $table->string('id_dokumen');
+            $table->string('dokumen');
+            $table->string('catatan');
             $table->foreign('permohonan_id')
               ->references('id')->on('permohonan')->onDelete('cascade');
             $table->timestamps();

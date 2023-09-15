@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('amaun_yuran');
             $table->string('wang_saku');
             $table->string('amaun_wang_saku');
-            $table->string('perakuan');
+            $table->string('perakuan')->nullable();
+            $table->integer('status');
             $table->foreign('smoku_id')
               ->references('id')->on('smoku')->onDelete('cascade');
             $table->timestamps();

@@ -17,12 +17,15 @@ class ButiranPelajar extends Model
      */
     protected $fillable = [
         'smoku_id',
+        'alamat_tetap_negeri',
+        'alamat_tetap_bandar',
+        'alamat_tetap_poskod',
         'alamat_surat',
-        'alamat_surat_poskod',
-        'alamat_surat_bandar',
         'alamat_surat_negeri',
-        'no_tel_rumah',
-        'no_tel_hp',
+        'alamat_surat_bandar',
+        'alamat_surat_poskod',
+        'tel_bimbit',
+        'tel_rumah',
         'emel',
         'no_akaun_bank',
         

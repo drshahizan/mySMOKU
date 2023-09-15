@@ -14,17 +14,17 @@ return new class extends Migration
         Schema::create('smoku_butiran_pelajar', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('smoku_id');
-            $table->string('alamat_tetap_poskod');
-            $table->string('alamat_tetap_bandar');
-            $table->string('alamat_tetap_negeri');
+            $table->string('alamat_tetap_poskod')->nullable();
+            $table->string('alamat_tetap_bandar')->nullable();
+            $table->string('alamat_tetap_negeri')->nullable();
             $table->string('alamat_surat');
             $table->string('alamat_surat_poskod');
             $table->string('alamat_surat_bandar');
             $table->string('alamat_surat_negeri');
             $table->string('no_akaun_bank');
             $table->string('emel');
-            $table->string('no_tel_hp');
-            $table->string('no_tel_rumah')->nullable();
+            $table->string('tel_bimbit');
+            $table->string('tel_rumah')->nullable();
             $table->foreign('smoku_id')
               ->references('id')->on('smoku')->onDelete('cascade');
             $table->timestamps();

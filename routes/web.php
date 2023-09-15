@@ -58,8 +58,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::get('/getBandar/{id}', [PermohonanController::class, 'getBandar']);
-    Route::post('permohonan', [PermohonanController::class, 'simpanmohon'])->name('permohonan.post');
-    Route::post('hantarpermohonan', [PermohonanController::class, 'hantarpermohonan'])->name('hantarpermohonan');
+    Route::post('permohonan', [PermohonanController::class, 'simpanPermohonan'])->name('permohonan.simpan');
+    Route::post('permohonan/hantar', [PermohonanController::class, 'hantarPermohonan'])->name('permohonan.hantar');
     Route::get('viewpermohonan', [PermohonanController::class, 'viewpermohonan'])->name('viewpermohonan');
     Route::get('/download/{file}',[PermohonanController::class,'download']);
     Route::get('kemaskini',[PermohonanController::class,'kemaskini'])->name('kemaskini');

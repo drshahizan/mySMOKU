@@ -10,22 +10,33 @@ class Akademik extends Model
     use HasFactory;
     protected $table = 'smoku_akademik';
 
+    public function infoInstitusi()
+    {
+        return $this->belongsTo('App\Models\InfoIpt', 'id_institusi', 'id_institusi');
+    }
+
+    public function peringkatPengajian()
+    {
+        return $this->belongsTo('App\Models\PeringkatPengajian', 'peringkat_pengajian', 'kod_peringkat');
+    }
+
     protected $fillable = [
         'smoku_id',
-        'no_pendaftaran_pelajar',
+        'id_institusi',
         'peringkat_pengajian',
         'nama_kursus',
-        'id_institusi',
+        'mod',
+        'tempoh_pengajian',
+        'bil_bulan_per_sem',
         'sesi',
+        'no_pendaftaran_pelajar',
         'tarikh_mula',
         'tarikh_tamat',
         'sem_semasa',
-        'tempoh_pengajian',
-        'bil_bulan_per_sem',
-        'mod',
-        'cgpa',
         'sumber_biaya',
+        'sumber_lain',
         'nama_penaja',
+        'penaja_lain',
         'status',
         
         

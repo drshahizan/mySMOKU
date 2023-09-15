@@ -22,11 +22,11 @@ var KTCreateAccount = function () {
 
 		// Stepper change event
 		stepperObj.on('kt.stepper.changed', function (stepper) {
-			if (stepperObj.getCurrentStepIndex() === 6) {
+			if (stepperObj.getCurrentStepIndex() === 6) { //6
 				formSubmitButton.classList.remove('d-none');
 				formSubmitButton.classList.add('d-inline-block');
 				formContinueButton.classList.add('d-none');
-			} else if (stepperObj.getCurrentStepIndex() === 7) {
+			} else if (stepperObj.getCurrentStepIndex() === 7) { //7
 				formSubmitButton.classList.add('d-none');
 				formContinueButton.classList.add('d-none');
 			} else {
@@ -442,7 +442,7 @@ var KTCreateAccount = function () {
 					'perakuan': {
 						validators: {
 							notEmpty: {
-								message: 'Perakuan diperlukan'
+								message: 'Anda mesti bersetuju dengan terma dan syarat'
 							}
 						}
 					}

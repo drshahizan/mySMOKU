@@ -14,9 +14,15 @@ class Waris extends Model
         'smoku_id',
         'nama_waris',
         'no_kp_waris',
-        'alamat_tetap_waris',
-        'tel_bimbit_waris',
+        'no_pasport_waris',
         'hubungan_waris',
+        'hubungan_lain_waris',
+        'alamat_waris',
+        'alamat_negeri_waris',
+        'alamat_bandar_waris',
+        'alamat_poskod_waris',
+        'tel_bimbit_waris',
+        'pekerjaan_waris',
         'pendapatan_waris',
         
     ];

@@ -11,16 +11,9 @@ class Dokumen extends Model
     protected $table = 'permohonan_dokumen'; 
 
     protected $fillable = [
-        'smoku_id',
-        'no_rujukan_permohonan',
-        'id_sekretariat',
-        'suratTawaran',
-        'nota_suratTawaran',
-        'akaunBank',
-        'nota_akaunBank',
-        'kepPeperiksaan',
-        'nota_kepPeperiksaan',
-        'invoisResit',
-        'nota_invoisResit',
+        'permohonan_id',
+        'id_dokumen',
+        'dokumen',
+        'catatan',
     ];
 }

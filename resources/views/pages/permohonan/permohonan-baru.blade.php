@@ -164,7 +164,7 @@
 				</div>
 				<!--end::Step 5-->
 				<!--begin::Step 6-->
-				<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
+				<div class="stepper-item" data-kt-stepper-element="nav">
 					<!--begin::Wrapper-->
 					<div class="stepper-wrapper">
 						<!--begin::Icon-->
@@ -217,7 +217,7 @@
 		<!--begin::Content-->
 		<div class="card d-flex flex-row-fluid flex-center">
 			<!--begin::Form-->
-			<form id="kt_create_account_form" action="{{ route('hantarpermohonan') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
+			<form id="kt_create_account_form" action="{{ route('permohonan.hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
 			
 				<!--begin::Step 1-->
 				<div class="current" data-kt-stepper-element="content">
@@ -302,7 +302,7 @@
 								<div class="col-12">
 									<!--begin::Input-->
 									<select id="jantina" name="jantina" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true">
-										<option value="{{$smoku->kod_jantina}}">{{$smoku->jantina}}</option>
+										<option value="{{ $smoku->kod_jantina }}">{{ $smoku->jantina }}</option>
 									</select>
 									<!--end::Input-->
 								</div>
@@ -463,7 +463,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="no_telR" name="no_telR" placeholder="" value="{{$smoku->no_telR}}" />
+									<input type="text" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{$smoku->tel_rumah}}" />
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -602,7 +602,7 @@
 								<div class="row fv-row">
 									<!--begin::Col-->
 									<div class="col-12">
-										<input type="text" class="form-control form-control-lg form-control-solid" id="no_pasport" name="no_pasport" placeholder="" value="" />
+										<input type="text" class="form-control form-control-lg form-control-solid" id="no_pasport_waris" name="no_pasport_waris" placeholder="" value="" />
 									</div>
 									<!--end::Col-->
 								</div>
@@ -636,7 +636,7 @@
 								<label class="form-label mb-6">(Jika Lain-lain) Sila Nyatakan:</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="text" class="form-control form-control-lg form-control-solid" id="lain_hubungan" name="lain_hubungan" placeholder="" value="" />
+								<input type="text" class="form-control form-control-lg form-control-solid" id="hubungan_lain_waris" name="hubungan_lain_waris" placeholder="" value="" />
 								<!--end::Input-->													
 							</div>
 							
@@ -647,7 +647,7 @@
 							<label class="form-label">Alamat Tetap</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<textarea id="alamatW1" name="alamatW1" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
+							<textarea id="alamat_waris" name="alamat_waris" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
@@ -659,7 +659,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="alamatW_negeri" name="alamatW_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+									<select id="alamat_negeri_waris" name="alamat_negeri_waris" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
 										<option value="">Pilih</option>
 										@foreach ($negeri as $negeri)	
 										<option value="{{ $negeri->id}}">{{ $negeri->negeri}}</option> 
@@ -676,7 +676,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='alamatW_bandar'  name='alamatW_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+									<select id='alamat_bandar_waris' name='alamat_bandar_waris' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
 										<option value="">Pilih</option>
 									</select>
 									<!--end::Input-->
@@ -690,7 +690,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" maxlength="5" class="form-control form-control-solid" id="alamatW_poskod" name="alamatW_poskod" placeholder="" value="" />
+									<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_poskod_waris" name="alamat_poskod_waris" placeholder="" value="" />
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -865,7 +865,7 @@
 									
 								</label>
 								<!--end::Label-->
-								<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaranpelajar" name="no_pendaftaranpelajar" value="" />
+								<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="" />
 							</div>
 						</div>
 						<!--begin::Input group-->
@@ -1023,7 +1023,7 @@
 							<div class="row mb-10">
 								<br>
 								<br>
-								<div class="col-6">
+								<div class="col-6" id="divyuran">
 									<input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" onclick="return false" checked/>
 									<label class="fs-6 fw-semibold form-label">
 										Yuran
@@ -1032,7 +1032,7 @@
 								<div class="col-6" id="divamaun">
 									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" placeholder="" readonly/>
+									<input type="text" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" placeholder="" value="" readonly/>
 									<!--end::Input-->
 								</div>
 							</div>
@@ -1040,7 +1040,7 @@
 							<div class="row mb-10">
 								<br>
 								<br>
-								<div class="col-6">
+								<div class="col-6" id="divelaun">
 									<input class="form-check-input" type="checkbox" value="1" id="wang_saku"  name="wang_saku" onclick="return false" checked/>
 									<label class="fs-6 fw-semibold form-label">
 										Elaun Wang Saku
@@ -1049,7 +1049,7 @@
 								<div class="col-6" id="divamaunelaun">
 									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" placeholder="" readonly/>
+									<input type="text" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" placeholder="" value="" readonly/>
 									<!--end::Input-->
 								</div>
 							</div>
@@ -1075,46 +1075,99 @@
 						</div>
 						<!--end::Heading-->
 						<!--begin::Table-->
-						<table id="kt_file_manager_list" data-kt-filemanager-table="files" class="table align-middle table-row-dashed fs-6 gy-5">
+						<table class="table table-row-dashed fs-6 gy-5">
 							<thead>
 								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-									
-									<th class="w-300px">Nama</th>
-									<th class="w-250px">Dokumen</th>
-									<th class="w-200px">Perihal</th>
+									<th class="min-w-100px">Nama</th>
+									<th class="min-w-100px">Dokumen</th>
+									<th class="w-100px">Catatan</th>
 								</tr>
 							</thead>
-							<tbody class="fw-semibold text-gray-600">
+							<tbody class="fw-semibold text-gray-600" >
 								<tr>
-									<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
-									<td class="fv-row"><input type="file" id="akaunBank" name="akaunBank"/></td>
-									<td><input type="text" class="form-control form-control-solid" id="nota_akaunBank" name="nota_akaunBank"/></td>
+									<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
+									<td><textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea></td>
 								</tr>
 								<tr>
-									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
-									<td class="fv-row"><input type="file" id="suratTawaran" name="suratTawaran"/></td>
-									<td><input type="text" class="form-control form-control-solid" id="nota_suratTawaran" name="nota_suratTawaran"/></td>
+									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
+									<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
 								</tr>
 								<tr>
-									<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/resit.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
-									<td class="fv-row"><input type="file" id="invoisResit" name="invoisResit"/></td>
-									<td><input type="text" class="form-control form-control-solid" id="nota_invoisResit" name="nota_invoisResit"/></td>
+									<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/resit.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="invoisResit" name="invoisResit"/></td>
+									<td><textarea type="text" class="form-control form-control-sm" id="nota_invoisResit" rows="1" name="nota_invoisResit"></textarea></td>
 								</tr>
-
 							</tbody>
 						</table>
 						<!--end::Table-->
+						<!--begin::Table-->
+						<table class="table table-row-dashed fs-6 gy-5">
+							<thead>
+								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+									<th class="min-w-50px"></th>
+									<th class="min-w-500px"></th>
+								</tr>
+							</thead>
+
+							<tbody class="fw-semibold text-gray-600">
+								<tr>
+									<td>
+										<!-- Add More Button -->
+										<button class="btn btn-success btn-sm btn-add-more" type="button">+</button>
+										<!-- End -->
+									</td>
+									<td class="input-group control-group img_div form-group col-md-10">
+										Resit/Invois Tambahan (Jika Ada)
+									</td>
+								</tr>
+								<tr>
+									<!-- Add More Image upload field  -->
+									<td class="clone" style="display:none">
+										<div class="control-group input-group">
+											<input type="file" id="dokumen[]" name="dokumen[]" class="form-control form-control-sm">
+											&nbsp;
+											&nbsp;
+											<textarea type="text" class="form-control form-control-sm" id="catatan[]" rows="1" name="catatan[]"></textarea>
+											&nbsp;
+											<button class="btn btn-danger btn-sm btn-remove" type="button">x</button>
+										</div>
+									</td>
+									<!-- End -->	
+								</tr>
+							</tbody>
+						</table>
+						<!--end::Table-->
+						{{-- <div class="input-group control-group img_div form-group col-md-4" >
+							<input type="file" id="profileImage[]" name="profileImage[]" class="form-control">
+							<!-- Add More Button -->
+							<div class="input-group-btn"> 
+							  <button class="btn btn-success btn-add-more" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
+							</div>
+							<!-- End -->
+						</div> --}}
+						<!-- Add More Image upload field  -->
+						{{-- <div class="clone hide ">
+							<div class="control-group input-group form-group col-md-4" style="margin-top:10px">
+								<input type="file" id="profileImage[]" name="profileImage[]" class="form-control">
+								<div class="input-group-btn"> 
+								<button class="btn btn-danger btn-remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+								</div>
+							</div>
+						</div> --}}
+						<!-- End -->
 						<br>
 						<br>
 						<div class="pb-10 pb-lg-15">
 							<!--begin::Notice-->
-							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:red'></i>&nbsp; <a href="https://compressjpeg.com/" target="_blank">Gunakan kemudahan di sini untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
+							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; <a href="https://compressjpeg.com/" target="_blank">Gunakan kemudahan di sini untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
 							</div>
 
-							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:red'></i>&nbsp; Format fail yang boleh dimuat naik adalah format 
+							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; Format fail yang boleh dimuat naik adalah format 
 							'.pdf', '.jpg', '.png' dan '.jpeg'
 							</div>
-							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:red'></i>&nbsp; Saiz maksimum fail adalah 2 MB.
+							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; Saiz maksimum fail adalah 2 MB.
 							</div>
 							<!--end::Notice-->
 						</div>
@@ -1133,22 +1186,17 @@
 							<!--begin::Title-->
 							<h2 class="fw-bold text-dark">Perakuan dan Pengesahan</h2>
 							<!--end::Title-->
-							<!--begin::Notice-->
-							<div class="text-muted fw-semibold fs-6">Perakuan</div>
-							<!--end::Notice-->
 						</div>
 						<!--end::Heading-->
-						
 						<div class="d-flex flex-column mb-7 fv-row">
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" value="1" id="perakuan" name="perakuan"/>
-								<label class="form-check-label" >
+								<label style="color:black;font-size:18px; text-align: justify;" class="form-check-label" >
 								Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
 								sekiranya maklumat yang diberikan didapati palsu atau tidak benar, pihak kementerian berhak menolak
 								permohonan saya dan menghentikan bantuan kewangan ini kepada saya.
 								</label>
 							</div>
-							
 						</div>
 					</div>
 					<!--end::Wrapper-->
@@ -1162,44 +1210,10 @@
 						<!--begin::Heading-->
 						<div class="pb-8 pb-lg-10">
 							<!--begin::Title-->
-							<h2 class="fw-bold text-dark">Your Are Done!</h2>
+							<h2 class="fw-bold text-dark">Permohonan anda telah dihantar.</h2>
 							<!--end::Title-->
-							<!--begin::Notice-->
-							<div class="text-muted fw-semibold fs-6">If you need more info, please......</div>
-							<!--end::Notice-->
 						</div>
 						<!--end::Heading-->
-						<!--begin::Body-->
-						<div class="mb-0">
-							<!--begin::Text-->
-							<div class="fs-6 text-gray-600 mb-5">Writing headlines for blog posts is as much an art as it is a science and probably warrants its own post, but for all advise is with what works for your great & amazing audience.</div>
-							<!--end::Text-->
-							<!--begin::Alert-->
-							<!--begin::Notice-->
-							<div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
-								<!--begin::Icon-->
-								<i class="ki-duotone ki-information fs-2tx text-warning me-4">
-									<span class="path1"></span>
-									<span class="path2"></span>
-									<span class="path3"></span>
-								</i>
-								<!--end::Icon-->
-								<!--begin::Wrapper-->
-								<div class="d-flex flex-stack flex-grow-1">
-									<!--begin::Content-->
-									<div class="fw-semibold">
-										<h4 class="text-gray-900 fw-bold">We need your attention!</h4>
-										<div class="fs-6 text-gray-700">To start using great tools, please,
-										...</div>
-									</div>
-									<!--end::Content-->
-								</div>
-								<!--end::Wrapper-->
-							</div>
-							<!--end::Notice-->
-							<!--end::Alert-->
-						</div>
-						<!--end::Body-->
 					</div>
 					<!--end::Wrapper-->
 				</div>
@@ -1217,13 +1231,13 @@
 					<!--end::Wrapper-->
 					<!--begin::Wrapper-->
 					<div>
-						<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
+						<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" onclick="if(!this.form.perakuan.checked){alert('Anda mesti bersetuju dengan terma dan syarat.');return false}">
 							<span class="indicator-label">Hantar
 							<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
 								<span class="path1"></span>
 								<span class="path2"></span>
 							</i></span>
-							<span class="indicator-progress">Please wait...
+							<span class="indicator-progress">Sila tunggu...
 							<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 						</button>
 						<button type="button" class="btn btn-lg btn-primary save-form" data-kt-stepper-action="next">Teruskan
@@ -1268,8 +1282,9 @@
 				//alert (data);
 				$.ajax({
 					type: 'post',
-					url: "{{ route('permohonan.post') }}",
+					url: "{{ route('permohonan.simpan') }}",
 					data: data,
+           			
 
 				});
 				
@@ -1302,11 +1317,11 @@
 		}	
 
     		$(document).ready(function(){
-				$('#alamatW_negeri').on('change', function() {
+				$('#alamat_negeri_waris').on('change', function() {
 					var idnegeri = $(this).val();
 					//alert(id);
 					// Empty the dropdown
-					$('#alamatW_bandar').find('option').not(':first').remove();
+					$('#alamat_bandar_waris').find('option').not(':first').remove();
 
 					// AJAX request 
 					$.ajax({
@@ -1330,7 +1345,7 @@
 
 											var option = "<option value='"+id+"'>"+bandar+"</option>";
 
-											$("#alamatW_bandar").append(option); 
+											$("#alamat_bandar_waris").append(option); 
 										}
 									}
 							}, 
@@ -1397,6 +1412,27 @@
 					$("#tarikh_tamat").val('');
 				}
 			}
+
+
+			//TAMBAH UPLOAD FILE
+			// $("#tambahresit").hide();
+			// function onButtonClick() {
+			// 	$("#tambahresit").show();
+			// }
+			$(document).ready(function() {
+ 
+			$(".btn-add-more").click(function(){ 
+				var html = $(".clone").html();
+				$(".img_div").after(html);
+			});
+
+			$("body").on("click",".btn-remove",function(){ 
+				$(this).parents(".control-group").remove();
+			});
+
+			});
+			
+			
 		</script>
 
 
@@ -1409,19 +1445,19 @@
 			var layak = "300";
 			var total = layak * bilbulan;
             if(sumber=="1" && mod=="1"){
-                document.getElementById("yuran").disabled = true;
+                document.getElementById("divyuran").style.display = "none";
                 document.getElementById("divamaun").style.display = "none";
 				document.getElementById("wang_saku").disabled = false;
 				document.getElementById("amaun_wang_saku").value= total;
             }
 			else if(sumber!="1" && mod=="2"){
                 document.getElementById("yuran").disabled = false;
-				document.getElementById("wang_saku").disabled = true;
+				document.getElementById("divelaun").style.display = "none";
 				document.getElementById("divamaunelaun").style.display = "none";
             }
 			else if(sumber=="1" && mod=="2"){
-                document.getElementById("yuran").disabled = true;
-				document.getElementById("wang_saku").disabled = true;
+                document.getElementById("divyuran").style.display = "none";
+				document.getElementById("divelaun").style.display = "none";
 				document.getElementById("divamaun").style.display = "none";
 				document.getElementById("divamaunelaun").style.display = "none";
             }

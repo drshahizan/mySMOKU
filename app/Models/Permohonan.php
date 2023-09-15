@@ -19,6 +19,7 @@ class Permohonan extends Model
         'wang_saku',
         'amaun_wang_saku',
         'perakuan',
-
+        'status',
+        
     ];
 }
