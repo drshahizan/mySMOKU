@@ -141,77 +141,48 @@ class PermohonanController extends Controller
     {   
 
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        //dd($smoku_id);
-        $pelajar = ButiranPelajar::where('smoku_id', '=', $smoku_id->id)->first();
-        if ($pelajar === null) {
-            $mohon = ButiranPelajar::create([
-                'smoku_id' => $smoku_id->id,
-                'alamat_surat' => $request->alamat_surat,
-                'alamat_surat_negeri' => $request->alamat_surat_negeri,
-                'alamat_surat_bandar' => $request->alamat_surat_bandar,
-                'alamat_surat_poskod' => $request->alamat_surat_poskod,
-                'tel_bimbit' => $request->tel_bimbit,
-                'tel_rumah' => $request->tel_rumah,
-                'no_akaun_bank' => $request->no_akaun_bank,
-                'emel' => $request->emel
+        // Retrieve or create a ButiranPelajar record based on smoku_id
+        $butiranPelajar = ButiranPelajar::firstOrNew(['smoku_id' => $smoku_id->id]);
 
-            ]);
-        }else {
-        ButiranPelajar::where('smoku_id' ,$smoku_id->id)
-            ->update([
-                'smoku_id' => $smoku_id->id,
-                'alamat_surat' => $request->alamat_surat,
-                'alamat_surat_negeri' => $request->alamat_surat_negeri,
-                'alamat_surat_bandar' => $request->alamat_surat_bandar,
-                'alamat_surat_poskod' => $request->alamat_surat_poskod,
-                'tel_bimbit' => $request->tel_bimbit,
-                'tel_rumah' => $request->tel_rumah,
-                'no_akaun_bank' => $request->no_akaun_bank,
-                'emel' => $request->emel
+        // Set the attributes
+        $butiranPelajar->alamat_surat = $request->alamat_surat;
+        $butiranPelajar->alamat_surat_negeri = $request->alamat_surat_negeri;
+        $butiranPelajar->alamat_surat_bandar = $request->alamat_surat_bandar;
+        $butiranPelajar->alamat_surat_poskod = $request->alamat_surat_poskod;
+        $butiranPelajar->tel_bimbit = $request->tel_bimbit;
+        $butiranPelajar->tel_rumah = $request->tel_rumah;
+        $butiranPelajar->no_akaun_bank = $request->no_akaun_bank;
+        $butiranPelajar->emel = $request->emel;
 
-            ]);
-        }
+        // Save the record
+        $butiranPelajar->save();
 
-        $waris = Waris::where('smoku_id', '=', $smoku_id->id)->first();
-        if ($waris === null) {
-            $mohon = Waris::create([
-                'smoku_id' => $smoku_id->id,
-                'nama_waris' => $request->nama_waris,
-                'no_kp_waris' => $request->no_kp_waris,
-                'no_pasport_waris' => $request->no_pasport_waris,
-                'hubungan_waris' => $request->hubungan_waris,
-                'hubungan_lain_waris' => $request->hubungan_lain_waris,
-                'tel_bimbit_waris' => $request->tel_bimbit_waris,
-                'alamat_waris' => $request->alamat_waris,
-                'alamat_negeri_waris' => $request->alamat_negeri_waris,
-                'alamat_bandar_waris' => $request->alamat_bandar_waris,
-                'alamat_poskod_waris' => $request->alamat_poskod_waris,
-                'pekerjaan_waris' => $request->pekerjaan_waris,
-                'pendapatan_waris' => $request->pendapatan_waris,
-        
-            ]);
-        }else {
-            Waris::where('smoku_id', $smoku_id->id)
-            ->update([
-                'smoku_id' => $smoku_id->id,
-                'nama_waris' => $request->nama_waris,
-                'no_kp_waris' => $request->no_kp_waris,
-                'no_pasport_waris' => $request->no_pasport_waris,
-                'hubungan_waris' => $request->hubungan_waris,
-                'hubungan_lain_waris' => $request->hubungan_lain_waris,
-                'tel_bimbit_waris' => $request->tel_bimbit_waris,
-                'alamat_waris' => $request->alamat_waris,
-                'alamat_negeri_waris' => $request->alamat_negeri_waris,
-                'alamat_bandar_waris' => $request->alamat_bandar_waris,
-                'alamat_poskod_waris' => $request->alamat_poskod_waris,
-                'pekerjaan_waris' => $request->pekerjaan_waris,
-                'pendapatan_waris' => $request->pendapatan_waris,
 
-            ]);
-        }
+        // Retrieve or create a Waris record based on smoku_id
+        $waris = Waris::firstOrNew(['smoku_id' => $smoku_id->id]);
 
-        Akademik::where('smoku_id' ,$smoku_id->id)
-            ->update([
+        // Set the attributes
+        $waris->nama_waris = $request->nama_waris;
+        $waris->no_kp_waris = $request->no_kp_waris;
+        $waris->no_pasport_waris = $request->no_pasport_waris;
+        $waris->hubungan_waris = $request->hubungan_waris;
+        $waris->hubungan_lain_waris = $request->hubungan_lain_waris;
+        $waris->tel_bimbit_waris = $request->tel_bimbit_waris;
+        $waris->alamat_waris = $request->alamat_waris;
+        $waris->alamat_negeri_waris = $request->alamat_negeri_waris;
+        $waris->alamat_bandar_waris = $request->alamat_bandar_waris;
+        $waris->alamat_poskod_waris = $request->alamat_poskod_waris;
+        $waris->pekerjaan_waris = $request->pekerjaan_waris;
+        $waris->pendapatan_waris = $request->pendapatan_waris;
+
+        // Save the record
+        $waris->save();
+
+
+        // Update or create an Akademik record based on smoku_id
+        Akademik::updateOrCreate(
+            ['smoku_id' => $smoku_id->id],
+            [
                 'mod' => $request->mod,
                 'tempoh_pengajian' => $request->tempoh_pengajian,
                 'bil_bulan_per_sem' => $request->bil_bulan_per_sem,
@@ -225,61 +196,36 @@ class PermohonanController extends Controller
                 'nama_penaja' => $request->nama_penaja,
                 'penaja_lain' => $request->penaja_lain,
                 'status' => '1',
-
-        ]);
+            ]
+        );
        
-        $permohonan_tuntut = Permohonan::where('smoku_id', '=', $smoku_id->id)->first();
-        if ($permohonan_tuntut === null) {
-            $mohon = Permohonan::create([
-                'smoku_id' => $smoku_id->id,
-                'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
-                'program' => 'BKOKU',
-                'yuran' => $request->yuran,
-                'amaun_yuran' => $request->amaun_yuran,
-                'wang_saku' => $request->wang_saku,
-                'amaun_wang_saku' => $request->amaun_wang_saku,
-                'perakuan' => $request->perakuan,
-                'status' => '1',
-        
-            ]);
-        }else {
+        // Retrieve or create a Permohonan record based on smoku_id
+        $permohonan = Permohonan::firstOrNew(['smoku_id' => $smoku_id->id]);
 
-        Permohonan::where('smoku_id' ,$smoku_id->id)
-            ->update([
-                'smoku_id' => $smoku_id->id,
-                'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
-                'program' => 'BKOKU',
-                'yuran' => $request->yuran,
-                'amaun_yuran' => $request->amaun_yuran,
-                'wang_saku' => $request->wang_saku,
-                'amaun_wang_saku' => $request->amaun_wang_saku,
-                'perakuan' => $request->perakuan,
-                'status' => '1',
-            
-            ]);
-        }
+        // Set the attributes
+        $permohonan->no_rujukan_permohonan = 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp;
+        $permohonan->program = 'BKOKU';
+        $permohonan->yuran = $request->yuran;
+        $permohonan->amaun_yuran = $request->amaun_yuran;
+        $permohonan->wang_saku = $request->wang_saku;
+        $permohonan->amaun_wang_saku = $request->amaun_wang_saku;
+        $permohonan->perakuan = $request->perakuan;
+        $permohonan->status = '1';
+
+        // Save the record
+        $permohonan->save();
 
         $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
-        $sejarah = SejarahPermohonan::where('smoku_id', '=', $smoku_id->id)->first();
-        if ($sejarah === null) {
-            $mohon = SejarahPermohonan::create([
-                'smoku_id' => $smoku_id->id,
-                'permohonan_id' => $permohonan_id->id,
-                'status' => '1',
-        
-            ]);
-        }else {
+        // Retrieve or create a SejarahPermohonan record based on smoku_id
+        $sejarah = SejarahPermohonan::firstOrNew(['smoku_id' => $smoku_id->id]);
 
-        SejarahPermohonan::where('smoku_id' ,$smoku_id->id)
-            ->update([
-                'smoku_id' => $smoku_id->id,
-                'permohonan_id' => $permohonan_id->id,
-                'status' => '1',
-            
-            ]);
-        }
+        // Set the attributes
+        $sejarah->permohonan_id = $permohonan_id->id;
+        $sejarah->status = '1';
 
-        $mohon->save();
+        // Save the record
+        $sejarah->save();
+
 
         //$dokumen = Dokumen::where('smoku_id', '=', $smoku_id->id)->first();
         $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
@@ -307,7 +253,6 @@ class PermohonanController extends Controller
         }
 
         $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
-        
         $mohon = SejarahPermohonan::create([
             'permohonan_id' => $permohonan_id->id,
             'smoku_id' => $smoku_id->id,
