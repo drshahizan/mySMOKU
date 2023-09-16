@@ -50,25 +50,29 @@ class DashboardController extends Controller
         ->join('statusinfo','statusinfo.kodstatus','=','statustransaksituntutan.status')
         ->get(['statustransaksituntutan.*','statusinfo.*'])
         ->where('nokp_pelajar',Auth::user()->nokp);*/
-        $user = User::all()->where('no_kp',Auth::user()->no_kp);
-        // $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        
+        //dd($smoku_id->id);
         
         // //$permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
         
         
         
-        // $permohonan = Permohonan::join('sejarah_permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
-        // ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
-        // ->get(['sejarah_permohonan.*','permohonan.*','bk_status.status'])
-        // ->where('smoku_id',$smoku_id->id);
-        // //dd($permohonan);
-        // $akademik = Akademik::where('smoku_id',$smoku_id->id)->first();
+        
 
 
         if(Auth::user()->tahap=='1')
         {
+            $user = User::all()->where('no_kp',Auth::user()->no_kp);
+            $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+            $permohonan = Permohonan::join('sejarah_permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
+            ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
+            ->get(['sejarah_permohonan.*','permohonan.*','bk_status.status'])
+            ->where('smoku_id',$smoku_id->id);
+            // //dd($permohonan);
+            $akademik = Akademik::all()->where('smoku_id',$smoku_id->id)->first();
+
             //return view('pages.dashboards.index', compact('pelajar','status','akademik','sem','tuntutanpermohonan', 'permohonan','user','tuntutan'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
-            return view('pages.dashboards.index', compact('user'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
+            return view('pages.dashboards.index', compact('user','permohonan','akademik'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
         }
         else if(Auth::user()->tahap=='2')
         {

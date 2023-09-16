@@ -92,7 +92,12 @@
 							</div>
 							<!--begin::Details item-->
 							<div class="fw-bold mt-5">Nama Kursus</div>
-							{{-- <div class="text-gray-600">{{$akademik->nama_kursus}}</div> --}}
+							@if(!empty($akademik))
+							<div class="text-gray-600">{{$akademik->nama_kursus}}</div>
+								@else
+								<div class="fs-5 fw-semibold text-muted mb-6">Tiada</div>
+								@endif
+							
 						</div>
 						<!--end::Details content-->
 					</div>
@@ -147,14 +152,14 @@
 											</tr>
 										</thead>
 										<tbody>
-											{{-- @foreach($permohonan as $permohonan) --}}
+											@foreach($permohonan as $permohonan)
 											<tr> 
-												{{-- <td>{{$permohonan->no_rujukan_permohonan}}</td>
+												<td>{{$permohonan->no_rujukan_permohonan}}</td>
 												<td>{{ucwords(strtolower($permohonan->status))}}</td>
-												<td>{{$permohonan->created_at->format('d/m/Y h:i:sa')}}</td> --}}
+												<td>{{$permohonan->created_at->format('d/m/Y h:i:sa')}}</td>
 												{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
 											</tr>
-											{{-- @endforeach --}}
+											@endforeach
 										</tbody>
 									</table>
 								</div>
