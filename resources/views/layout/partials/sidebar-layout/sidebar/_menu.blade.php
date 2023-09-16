@@ -172,7 +172,7 @@
 			</div>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('saringan')}}">
+			<a class="menu-link" href="{{url('permohonan/sekretariat/saringan/senarai-permohonan')}}">
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 					<span class="menu-title">Saringan</span>
 			</a>

@@ -1,4 +1,4 @@
-<x-default-layout> 
+<x-default-layout>
     <head>
     <title>Sekretariat BKOKU KPT | Saringan Permohonan</title>
     <meta charset="utf-8">
@@ -14,7 +14,7 @@
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     </head>
-    
+
     <style>
         .nav{
             margin-left: 10px!important;
@@ -71,7 +71,7 @@
                         <div class="header">
                             <h2>Senarai Saringan Permohonan<br><small>Klik ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
                         </div>
-                    
+
                         {{-- top nav bar --}}
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -82,7 +82,7 @@
                             </li>
                         </ul>
 
-                        
+
                         <div class="tab-content" id="myTabContent">
                             {{-- BKOKU --}}
                             <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
@@ -92,7 +92,7 @@
                                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 17%"><b>ID Permohonan</b></th>                                        
+                                                    <th style="width: 17%"><b>ID Permohonan</b></th>
                                                     <th style="width: 50%"><b>Nama</b></th>
                                                     <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
                                                     <th style="width: 15%" class="text-center"><b>Status Saringan</b></th>
@@ -128,12 +128,12 @@
                                                     }
                                                     $pemohon = implode(' ', $result);
                                                 @endphp
-                                                <tr>                              
+                                                <tr>
                                                     <td>
                                                         @if($item['status']==4 || $item['status']==5)
                                                             <a href="{{ url('permohonan/telah/disaring/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
                                                         @else
-                                                            <a href="{{ url('maklumat/pemohon/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
+                                                            <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
                                                         @endif
                                                     </td>
                                                     <td>{{$pemohon}}</td>
@@ -163,7 +163,7 @@
                                             <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width: 17%"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 17%"><b>ID Permohonan</b></th>
                                                         <th style="width: 33%"><b>Nama</b></th>
                                                         <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
                                                         <th style="width: 15%" class="text-center"><b>Status Saringan</b></th>
@@ -199,12 +199,12 @@
                                                         }
                                                         $pemohon = implode(' ', $result);
                                                     @endphp
-                                                    <tr>                                 
+                                                    <tr>
                                                         <td>
                                                             @if($item['status']==4 || $item['status']==5)
                                                                 <a href="{{ url('permohonan/telah/disaring/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
                                                             @else
-                                                                <a href="{{ url('maklumat/pemohon/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
+                                                                <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
                                                             @endif
                                                         </td>
                                                         <td>{{$pemohon}}</td>
@@ -240,7 +240,7 @@
                                         <thead>
                                             <tr>
                                                 <th style="width: 3%"><b>No.</b></th>
-                                                <th style="width: 17%"><b>ID Permohonan</b></th>                                        
+                                                <th style="width: 17%"><b>ID Permohonan</b></th>
                                                 <th style="width: 50%"><b>Nama</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Status Saringan</b></th>
@@ -265,12 +265,12 @@
                                                 }
                                             @endphp
                                             <tr>
-                                                <td>{{ $i }}</td>                                      
+                                                <td>{{ $i }}</td>
                                                 <td>
                                                     @if($item['status']==4 || $item['status']==5)
                                                         <a href="{{ url('permohonan/telah/disaring/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
                                                     @else
-                                                        <a href="{{ url('maklumat/pemohon/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
+                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
                                                     @endif
                                                 </td>
                                                 <td>{{$nama_pemohon}}</td>
@@ -296,7 +296,7 @@
                         </div>
                     </div>
                 </div>
-            
+
             </div>
         </div>
     </div>
@@ -304,6 +304,6 @@
         $('#sortTable1').DataTable();
         $('#sortTable2').DataTable();
     </script>
-    
+
     </body>
-</x-default-layout> 
+</x-default-layout>
