@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;  
 use App\Models\User;
 use App\Models\Permohonan;
-use App\Models\Status;
+use App\Models\SejarahPermohonan;
 use App\Models\Akademik;
 use App\Models\TuntutanPermohonan;
 use App\Models\Smoku;
@@ -52,17 +52,19 @@ class DashboardController extends Controller
         ->where('nokp_pelajar',Auth::user()->nokp);*/
         $user = User::all()->where('no_kp',Auth::user()->no_kp);
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        //$id_permohonan = $smoku_id->id;
-        
+        $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
         $akademik = Akademik::where('smoku_id',$smoku_id->id)->first();
-        //dd($akademik);
+        $permohonan = SejarahPermohonan::join('permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
+        ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
+        ->get(['sejarah_permohonan.*','permohonan.*','bk_status.status'])
+        ->where('permohonan_id', $permohonan_id->id);
         
 
 
         if(Auth::user()->tahap=='1')
         {
             //return view('pages.dashboards.index', compact('pelajar','status','akademik','sem','tuntutanpermohonan', 'permohonan','user','tuntutan'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
-            return view('pages.dashboards.index', compact('user','akademik'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
+            return view('pages.dashboards.index', compact('user','akademik','permohonan'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
         }
         else if(Auth::user()->tahap=='2')
         {

@@ -38,18 +38,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Route::post('/dashboard', [DashboardController::class, 'store'])->name('dashboard.store');
 
 
-    Route::name('user-management.')->group(function () {
-        Route::resource('/user-management/users', UserManagementController::class);
-        Route::resource('/user-management/roles', RoleManagementController::class);
-        Route::resource('/user-management/permissions', PermissionManagementController::class);
-    });
-
-   /*Route::name('permohonan.')->group(function () {
-        //Route::get('/', [PermohonanController::class, 'permohonanbaru']);
-        Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
-        Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post');
-        //Route::resource('/user-management/permissions', PermissionManagementController::class);
-    });*/
     Route::get('profildiri', [ProfilController::class, 'profildiri'])->name('profil-diri');
     Route::post('profildiri', [ProfilController::class, 'store'])->name('profildiri.store');
     /*Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');

@@ -147,11 +147,16 @@
 											</tr>
 										</thead>
 										<tbody>
+											@foreach($permohonan as $permohonan)
 											<tr> 
-												<td></td>
-												<td></td>
-												<td></td>
+												<td>{{$permohonan->no_rujukan_permohonan}}</td>
+												<td>{{ucwords(strtolower($permohonan->status))}}</td>
+												<td>{{$permohonan->created_at->format('d/m/Y h:i:sa')}}</td>
+												{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
+												
+												
 											</tr>
+											@endforeach
 										</tbody>
 									</table>
 								</div>
