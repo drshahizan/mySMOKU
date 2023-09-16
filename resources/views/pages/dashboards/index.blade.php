@@ -153,8 +153,6 @@
 												<td>{{ucwords(strtolower($permohonan->status))}}</td>
 												<td>{{$permohonan->created_at->format('d/m/Y h:i:sa')}}</td>
 												{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
-												
-												
 											</tr>
 											@endforeach
 										</tbody>

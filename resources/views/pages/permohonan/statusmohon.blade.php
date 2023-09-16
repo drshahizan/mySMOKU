@@ -1,13 +1,12 @@
 <x-default-layout> 
 <head>
-   
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="/assets/css/saringan.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-    </head>
-		<!--begin::Page title-->
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="/assets/css/saringan.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+</head>
+<!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->
 	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Sejarah Permohonan</h1>
@@ -34,13 +33,13 @@
 <br>
 
 <div class="table-responsive">
-	<table class="table table-rounded table-striped border gy-7 gs-7" style="background-color:#FFFFE0;">
+	<table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
 		<thead>
-			<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+			<tr>
 				<th>ID Permohonan</th>
 				<th>Status Permohonan</th>
-				<th>Tindakan Permohonan</th>
 				<th>Tarikh Kemaskini</th>
+				<th>Tindakan Permohonan</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -48,9 +47,8 @@
 		<tr> 
 			<td>{{$permohonan->no_rujukan_permohonan}}</td>
 			<td>{{ucwords(strtolower($permohonan->status))}}</td>
-			<td><a href="{{ route('delete',  $permohonan->permohonan_id) }}" class="btn btn-primary">Batal</a> </td>
 			<td>{{$permohonan->created_at->format('d/m/Y h:i:sa')}}</td>
-			
+			<td><a href="{{ route('delete',  $permohonan->permohonan_id) }}" class="btn btn-primary btn-sm">Batal</a></td>
 		</tr>
 		@endforeach
 		</tbody>
