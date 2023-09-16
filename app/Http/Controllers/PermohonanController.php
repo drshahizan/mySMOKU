@@ -119,7 +119,17 @@ class PermohonanController extends Controller
         $penaja = Penaja::all()->sortBy('kod_penaja');
         $hubungan = Hubungan::all()->sortBy('kod_hubungan');
         $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri')->get();
-        return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri'));
+        $permohonan = Permohonan::where('smoku_id', $smoku_id->id)->first();
+
+        if ($permohonan && $permohonan->status == '2') {
+            return view('pages.permohonan.permohonan-baru-view');
+
+        } else {
+            //$userHasSubmittedForm = false;
+            return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri'));
+
+        }
+        
         
         
     }

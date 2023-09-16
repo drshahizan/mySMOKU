@@ -334,7 +334,7 @@
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
-							<div class="col-md-4 fv-row">
+							<div class="col-md-5 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
 								<!--end::Label-->
@@ -359,7 +359,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-4 fv-row">
+							<div class="col-md-3 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Poskod
 								</label>
@@ -414,10 +414,9 @@
 									</div>
 									<!--end::Input wrapper-->
 								</div>
-								<div class="col-md-4 fv-row">
+								<div class="col-md-5 fv-row">
 									<!--begin::Label-->
-									<label class=" fs-6 fw-semibold form-label mb-2">Bandar
-									</label>
+									<label class=" fs-6 fw-semibold form-label mb-2">Bandar</label>
 									<!--end::Label-->
 									<!--begin::Input wrapper-->
 									<div class="col-12">
@@ -427,10 +426,9 @@
 									</div>
 									<!--end::Input wrapper-->
 								</div>
-								<div class="col-md-4 fv-row">
+								<div class="col-md-3 fv-row">
 									<!--begin::Label-->
-									<label class=" fs-6 fw-semibold form-label mb-2">Poskod
-									</label>
+									<label class=" fs-6 fw-semibold form-label mb-2">Poskod</label>
 									<!--end::Label-->
 									<!--begin::Input wrapper-->
 									<div class="col-12">
