@@ -225,7 +225,7 @@
                                     </table>
                                 <hr>
                                 <td>
-                                    <form method="POST" action="{{ url('saring/tuntutan/'.$pelajar->nokp_pelajar) }}" id="saring">
+                                    <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-tuntutan/'.$pelajar->nokp_pelajar) }}" id="saring">
                                     {{csrf_field()}}
                                     <!--begin: Invoice body-->
                                     @php

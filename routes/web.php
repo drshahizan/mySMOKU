@@ -57,22 +57,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('baharuimohon', [PermohonanController::class, 'baharuimohon'])->name('baharuimohon');
     Route::post('baharuimohon', [PermohonanController::class, 'save'])->name('save');
 
-    //Permohonan-Sekretariat-Saringan
+    //Permohonan - Sekretariat - Saringan
     Route::get('permohonan/sekretariat/saringan/senarai-permohonan', [SaringanController::class, 'senaraiPermohonan']);
     Route::get('permohonan/sekretariat/saringan/maklumat-permohonan/{id}', [SaringanController::class, 'maklumatPermohonan'])->name('maklumat.permohonan.id');
-    Route::get('maklumat/profil/diri/{no_kp}', [SaringanController::class, 'maklumatProfilDiri'])->name('maklumat.profil.diri.no_kp');
-    Route::get('maklumat/akademik/{no_kp}', [SaringanController::class, 'maklumatAkademik'])->name('maklumat.akademik.no_kp');
-    Route::get('maklumat/akademik2', [SaringanController::class, 'maklumatAkademik2'])->name('maklumat.akademik2.no_kp');
-    Route::get('maklumat/tuntutan/{no_kp}', [SaringanController::class, 'maklumatTuntutan'])->name('maklumat.tuntutan.no_kp');
-    Route::post('saring/tuntutan/{no_kp}', [SaringanController::class, 'saringTuntutan'])->name('saring.tuntutan.no_kp');
-    Route::get('salinan/dokumen/{id}', [SaringanController::class, 'salinanDokumen'])->name('salinan.dokumen.id');
-    Route::get('salinan/invois', [SaringanController::class, 'salinanInvois'])->name('salinan.invois.no_kp');
-    Route::get('salinan/akademik', [SaringanController::class, 'salinanAkademik'])->name('salinan.akademik.no_kp');
-    Route::get('cetak/maklumat/pemohon', [SaringanController::class, 'cetakMaklumatPemohon']);
-    Route::post('saring/maklumat/pemohon/{no_kp}', [SaringanController::class, 'saringMaklumat']);
-    Route::get('permohonan/telah/disaring/{no_kp}', [SaringanController::class, 'permohonanTelahDisaring'])->name('permohonan.telah.disaring.no_kp');
-    Route::get('tuntutan/telah/disaring/{no_kp}', [SaringanController::class, 'tuntutanTelahDisaring'])->name('tuntutan.telah.disaring.no_kp');
-    Route::get('permohonan/sejarah/senarai-permohonan', [SaringanController::class, 'sejSenaraiPermohonan']);
+    Route::get('permohonan/sekretariat/saringan/maklumat-profil-diri/{id}', [SaringanController::class, 'maklumatProfilDiri'])->name('maklumat.profil.diri.id');
+    Route::get('permohonan/sekretariat/saringan/maklumat-akademik/{id}', [SaringanController::class, 'maklumatAkademik'])->name('maklumat.akademik.id');
+    Route::get('permohonan/sekretariat/saringan/maklumat-tuntutan/{id}', [SaringanController::class, 'maklumatTuntutan'])->name('maklumat.tuntutan.id');
+    Route::post('permohonan/sekretariat/saringan/saring-tuntutan/{id}', [SaringanController::class, 'saringTuntutan'])->name('saring.tuntutan.id');
+    Route::get('permohonan/sekretariat/saringan/salinan-dokumen/{id}', [SaringanController::class, 'salinanDokumen'])->name('salinan.dokumen.id');
+    Route::post('permohonan/sekretariat/saringan/saring-permohonan/{id}', [SaringanController::class, 'saringPermohonan'])->name('saring.tuntutan.id');;
+    Route::get('permohonan/sekretariat/saringan/papar-permohonan/{id}', [SaringanController::class, 'paparPermohonan'])->name('papar.permohonan.id');
+    Route::get('permohonan/sekretariat/saringan/papar-tuntutan/{id}', [SaringanController::class, 'paparTuntutan'])->name('papar.tuntutan.id');
+
+    //Permohonan - Sekretariat - Sejarah
+    Route::get('permohonan/sekretariat/sejarah/senarai-permohonan', [SaringanController::class, 'sejarahPermohonan']);
 
     //Permohonan - Sekretariat
     Route::get('dashboard/sekretariat', [SekretariatController::class, 'dashboard']);
@@ -89,14 +87,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('senarai-disokong-excel', [SekretariatController::class, 'cetakSenaraiPemohonExcel']);
     Route::get('/generate-qrcode', [SekretariatController::class, 'qrcode']);
 
-    //Tuntutan - Sekretariat
-    Route::get('tuntutan-keseluruhan', [SekretariatController::class, 'tuntutanKeseluruhan']);
-    Route::get('tuntutan-saring', [SekretariatController::class, 'tuntutanSaring']);
-    Route::get('tuntutan/keputusan/peperiksaan', [SekretariatController::class, 'keputusanPeperiksaan']);
-    Route::get('maklumat-tuntutan-2/{no_kp}', [SekretariatController::class, 'maklumatTuntutan2'])->name('maklumat.tuntutan2.no_kp');
-    Route::post('tuntutan/saring/maklumat/{id}', [SekretariatController::class, 'saringMaklumatTuntutan'])->name('tuntutan.saring.maklumat.id');
-    Route::get('tuntutan-keputusan', [SekretariatController::class, 'tuntutanKeputusan']);
-    Route::get('tuntutan/sejarah/senarai-tuntutan', [SekretariatController::class, 'sejSenaraiTuntutan']);
+    //Tuntutan - Sekretariat - Saringan
+    Route::get('tuntutan/sekretariat/saringan/senarai_tuntutan', [SekretariatController::class, 'senaraiTuntutanKedua']);
+    Route::get('tuntutan/sekretariat/saringan/keputusan-peperiksaan', [SekretariatController::class, 'keputusanPeperiksaan']);
+    Route::get('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/{id}', [SekretariatController::class, 'maklumatTuntutanKedua'])->name('maklumat.tuntutan.kedua.id');
+    Route::post('tuntutan/sekretariat/saringan/saring-tuntutan-kedua/{id}', [SekretariatController::class, 'saringTuntutanKedua'])->name('saring.tuntutan.kedua.id');
+
+    //Tuntutan - Sekretariat - Keputusan
+    Route::get('tuntutan/sekretariat/keputusan/keputusan-tuntutan', [SekretariatController::class, 'keputusanTuntutan']);
+
+    //Tuntutan - Sekretariat - Sejarah
+    Route::get('tuntutan/sekretariat/sejarah/sejarah-tuntutan', [SekretariatController::class, 'sejarahTuntutan']);
+
+
 
     //Permohonan - Penyelaras
     Route::get('permohonanbaru', [PenyelarasController::class, 'permohonanbaru'])->name('permohonanbaru');

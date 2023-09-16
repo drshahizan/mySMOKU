@@ -115,7 +115,7 @@ class SekretariatController extends Controller
                 ->update([
                 'status'   =>  6,
             ]);
-            
+
             $info_mesyuarat = new Kelulusan([
                 'id_permohonan' =>  $id_permohonan,
                 'no_mesyuarat'  =>  $request->get('noMesyuarat'),
@@ -191,7 +191,7 @@ class SekretariatController extends Controller
     }
 
     //TUNTUTAN
-    public function tuntutanSaring()
+    public function senaraiTuntutanKedua()
     {
         $permohonan = TuntutanPermohonan::where('status', '2')
         ->orWhere('status', '=','3')
@@ -205,13 +205,13 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.tuntutan.keputusanPeperiksaan');
     }
 
-    public function maklumatTuntutan2($id){
+    public function maklumatTuntutanKedua($id){
         $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
         return view('pages.sekretariat.tuntutan.maklumatTuntutan',compact('permohonan','pelajar'));
     }
 
-    public function saringMaklumatTuntutan(Request $request, $id){
+    public function saringTuntutanKedua(Request $request, $id){
         $id_permohonan = TuntutanPermohonan::where('id', $id)->value('id_permohonan');
         $permohonan = TuntutanPermohonan::where('status', '2')
         ->orWhere('status', '=','3')
@@ -236,7 +236,7 @@ class SekretariatController extends Controller
     }
 
 
-    public function tuntutanKeputusan()
+    public function keputusanTuntutan()
     {
         $permohonan = TuntutanPermohonan::where('status', '=','5')
         ->orWhere('status', '=','6')
@@ -245,7 +245,7 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.tuntutan.keputusan',compact('permohonan'));
     }
 
-    public function sejSenaraiTuntutan(){
+    public function sejarahTuntutan(){
         $permohonan = TuntutanPermohonan::where('status', '!=','4')->get();
         return view('pages.sekretariat.tuntutan.sejarah_tuntutan',compact('permohonan'));
     }

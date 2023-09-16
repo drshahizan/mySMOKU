@@ -190,7 +190,7 @@
 			</a>
 		</div>
         <div class="menu-item">
-            <a class="menu-link" href="{{url('permohonan/sejarah/senarai-permohonan')}}">
+            <a class="menu-link" href="{{url('permohonan/sekretariat/sejarah/senarai-permohonan')}}">
                 <span class="menu-icon">{!! getIcon('watch', 'fs-2') !!}</span>
                 <span class="menu-title">Sejarah</span>
             </a>
@@ -208,21 +208,21 @@
 		</a>
 		</div> --}}
 		<div class="menu-item">
-			<a class="menu-link" href="{{ url('tuntutan-saring') }}">
+			<a class="menu-link" href="{{ url('tuntutan/sekretariat/saringan/senarai_tuntutan') }}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 					<span class="menu-title">Saringan</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{ url('tuntutan-keputusan') }}">
+			<a class="menu-link" href="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('status', 'fs-2') !!}</span>
 					<span class="menu-title">Keputusan</span>
 			</a>
 		</div>
         <div class="menu-item">
-            <a class="menu-link" href="{{url('tuntutan/sejarah/senarai-tuntutan')}}">
+            <a class="menu-link" href="{{url('tuntutan/sekretariat/sejarah/sejarah-tuntutan')}}">
                 <span class="menu-icon">{!! getIcon('watch', 'fs-2') !!}</span>
                 <span class="menu-title">Sejarah</span>
             </a>

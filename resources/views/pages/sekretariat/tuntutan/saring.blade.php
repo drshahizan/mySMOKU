@@ -1,4 +1,4 @@
-<x-default-layout> 
+<x-default-layout>
     <head>
     <title>Sekretariat BKOKU KPT | Saringan Tuntutan</title>
     <meta charset="utf-8">
@@ -86,7 +86,7 @@
                                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 17%"><b>ID Tuntutan</b></th>                                        
+                                                    <th style="width: 17%"><b>ID Tuntutan</b></th>
                                                     <th><b>Nama</b></th>
                                                     <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
                                                     <th style="width: 15%" class="text-center"><b>Status Saringan</b></th>
@@ -118,8 +118,8 @@
                                                     $pemohon = implode(' ', $result);
                                                 @endphp
                                                 @if($item['program']=="BKOKU")
-                                                    <tr>                                            
-                                                        <td><a href="{{ url('maklumat-tuntutan-2/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a></td>
+                                                    <tr>
+                                                        <td><a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a></td>
                                                         {{-- <td><a href="{{ url('tuntutan-telah-disaring/'.$item['nokp_pelajar']) }}" title="">{{$item['id_permohonan']}}</a></td> --}}
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
@@ -147,7 +147,7 @@
                                         <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 17%"><b>ID Tuntutan</b></th>                                        
+                                                    <th style="width: 17%"><b>ID Tuntutan</b></th>
                                                     <th><b>Nama</b></th>
                                                     <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
                                                     <th style="width: 15%" class="text-center"><b>Status Saringan</b></th>
@@ -179,8 +179,8 @@
                                                     $pemohon = implode(' ', $result);
                                                 @endphp
                                                 @if($item['program']=="PPK")
-                                                    <tr>                                            
-                                                        <td><a href="{{ url('maklumat-tuntutan-2/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a></td>
+                                                    <tr>
+                                                        <td><a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a></td>
                                                         {{-- <td><a href="{{ url('tuntutan-telah-disaring/'.$item['nokp_pelajar']) }}" title="">{{$item['id_permohonan']}}</a></td> --}}
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
@@ -204,7 +204,7 @@
                             </div>
                     </div>
                 </div>
-            
+
             </div>
         </div>
     </div>
@@ -212,6 +212,6 @@
         $('#sortTable1').DataTable();
         $('#sortTable2').DataTable();
     </script>
-    
+
     </body>
-</x-default-layout> 
+</x-default-layout>

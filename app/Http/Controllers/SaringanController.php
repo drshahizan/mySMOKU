@@ -79,7 +79,7 @@ class SaringanController extends Controller
         return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status'));
     }
 
-    public function saringMaklumat(Request $request,$id)
+    public function saringPermohonan(Request $request,$id)
     {
         if($request->get('maklumat_profil_diri')=="lengkap"&&$request->get('maklumat_akademik')=="lengkap"&&$request->get('salinan_dokumen')=="lengkap"){
 
@@ -169,7 +169,7 @@ class SaringanController extends Controller
         }
     }
 
-    public function permohonanTelahDisaring($id){
+    public function paparPermohonan($id){
         $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
         $id_permohonan = $permohonan->id_permohonan;
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
@@ -177,13 +177,13 @@ class SaringanController extends Controller
         return view('permohonan.sekretariat.saringan.papar_permohonan',compact('permohonan','catatan','pelajar'));
     }
 
-    public function tuntutanTelahDisaring($id){
+    public function paparTuntutan($id){
         $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
         return view('permohonan.sekretariat.saringan.papar_tuntutan',compact('permohonan','pelajar'));
     }
 
-    public function sejSenaraiPermohonan(){
+    public function sejarahPermohonan(){
         $permohonan = TuntutanPermohonan::all();
         return view('permohonan.sekretariat.sejarah.sejarah_permohonan',compact('permohonan'));
     }
