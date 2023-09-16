@@ -57,11 +57,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('baharuimohon', [PermohonanController::class, 'baharuimohon'])->name('baharuimohon');
     Route::post('baharuimohon', [PermohonanController::class, 'save'])->name('save');
 
-    //Saring permohonan
-    Route::get('saringan', [SaringanController::class, 'saringan']);
-    Route::get('saringan/PPK', [SaringanController::class, 'saringanPPK']);
-    Route::get('maklumat/pemohon/{no_kp}', [SaringanController::class, 'maklumatPemohon'])->name('maklumat.permohonan.no_kp');
-    Route::get('maklumat/perbaharui', [SaringanController::class, 'maklumatPerbaharui'])->name('maklumat.pembaharui.no_kp');
+    //Permohonan-Sekretariat-Saringan
+    Route::get('permohonan/sekretariat/saringan/senarai-permohonan', [SaringanController::class, 'senaraiPermohonan']);
+    Route::get('permohonan/sekretariat/saringan/maklumat-permohonan/{id}', [SaringanController::class, 'maklumatPermohonan'])->name('maklumat.permohonan.id');
     Route::get('maklumat/profil/diri/{no_kp}', [SaringanController::class, 'maklumatProfilDiri'])->name('maklumat.profil.diri.no_kp');
     Route::get('maklumat/akademik/{no_kp}', [SaringanController::class, 'maklumatAkademik'])->name('maklumat.akademik.no_kp');
     Route::get('maklumat/akademik2', [SaringanController::class, 'maklumatAkademik2'])->name('maklumat.akademik2.no_kp');

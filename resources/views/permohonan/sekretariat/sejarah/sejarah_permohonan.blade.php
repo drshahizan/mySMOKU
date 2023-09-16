@@ -117,7 +117,7 @@
                                                             @if($item['status']==4 || $item['status']==5)
                                                                 <a href="{{ url('permohonan/telah/disaring/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
                                                             @else
-                                                                <a href="{{ url('maklumat/pemohon/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
+                                                                <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
                                                             @endif
                                                         </td>
                                                         <td>{{$pemohon}}</td>
@@ -198,7 +198,7 @@
                                                             @if($item['status']==4 || $item['status']==5)
                                                                 <a href="{{ url('permohonan/telah/disaring/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
                                                             @else
-                                                                <a href="{{ url('maklumat/pemohon/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
+                                                                <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
                                                             @endif
                                                         </td>
                                                         <td>{{$pemohon}}</td>
@@ -274,7 +274,7 @@
                                             @if($item['status']==4 || $item['status']==5)
                                                 <a href="{{ url('permohonan/telah/disaring/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
                                             @else
-                                                <a href="{{ url('maklumat/pemohon/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
+                                                <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
                                             @endif
                                         </td>
                                         <td>{{$nama_pemohon}}</td>
