@@ -120,28 +120,28 @@
 				</div>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('penyelaras-sejarah-tuntutan')}}">
+			<a class="menu-link" href="{{url('tuntutan/sekretariat/sejarah/sejarah-tuntutan')}}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
 					<span class="menu-title">Keseluruhan</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('tuntutan-wang-saku')}}">
+			<a class="menu-link" href="{{url('tuntutan/sekretariat/wang-saku/senarai-tuntutan')}}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
 					<span class="menu-title">Wang Saku</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('tuntutan-yuran-pengajian')}}">
+			<a class="menu-link" href="{{url('tuntutan/sekretariat/yuran-dan-wang-saku/senarai-tuntutan')}}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
 					<span class="menu-title">Yuran Pengajian dan Wang Saku</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('kemaskini-tuntutan')}}">
+			<a class="menu-link" href="{{url('tuntutan/sekretariat/kemaskini/kemaskini-tuntutan')}}">
 
 					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 					<span class="menu-title">Kemaskini</span>

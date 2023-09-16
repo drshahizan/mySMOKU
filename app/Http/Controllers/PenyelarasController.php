@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\DB;
 class PenyelarasController extends Controller
 {
     public function create()
-    {   
+    {
         //$smoku = Smoku::all()->where('jenis','=', 'IPTA');
         $smoku = Smoku::orderBy('smoku.id','desc')
         ->leftJoin('permohonan','permohonan.nokp_pelajar','=','smoku.nokp')
@@ -38,24 +38,24 @@ class PenyelarasController extends Controller
         //dd($smoku);
         return view('pages.penyelaras.dashboard', compact('smoku'));
 
-        
+
     }
     public function store(Request $request)
     {
 
-        
+
         $request->validate([
             'nokp' => ['required', 'string'],
-            
+
         ]);
 
         //$nokp_in = $request->nokp;
         $nokp_smoku=Smoku::where([['nokp', '=', $request->nokp]])
         ->orWhere('noJKM','=', $request->nokp)
         ->first();
-        //dd($nokp_smoku); 
+        //dd($nokp_smoku);
 
-            
+
             if ($nokp_smoku != null) {
                 DB::table('smoku')->where('nokp' ,$request->nokp)
                 ->orWhere('noJKM','=', $request->nokp)
@@ -63,7 +63,7 @@ class PenyelarasController extends Controller
 
                 'verify'=>'1',
                 'jenis'=>'IPTA',
-    
+
                 ]);
 
                 /*$user = Permohonan::create([
@@ -83,7 +83,7 @@ class PenyelarasController extends Controller
                     'no_telR' => $request->no_telR,
                     'no_akaunbank' => $request->no_akaunbank,
                     'emel' => $request->emel,
-           
+
                 ]);*/
 
                 //return view('pages.auth.semaksyarat');
@@ -106,34 +106,34 @@ class PenyelarasController extends Controller
 
     }
 
-    public function tuntutanWangSaku()
+    public function senaraiTuntutanW()
     {
-        return view('pages.penyelaras.tuntutan.wangSaku');
+        return view('tuntutan.penyelaras.wang_saku.senarai_tuntutan');
     }
 
-    public function maklumatTuntutanWangSaku()
+    public function maklumatTuntutanW()
     {
-        return view('pages.penyelaras.tuntutan.maklumatWangSaku');
+        return view('tuntutan.penyelaras.wang_saku.maklumat_tuntutan');
     }
 
-    public function tuntutanYuranPengajian()
+    public function senaraiTuntutanYW()
     {
-        return view('pages.penyelaras.tuntutan.yuranPengajian');
+        return view('tuntutan.penyelaras.yuran_dan_wang_saku.senarai_tuntutan');
     }
 
-    public function maklumatTuntutanYuranPengajian()
+    public function maklumatTuntutanYW()
     {
-        return view('pages.penyelaras.tuntutan.maklumatYuranPengajian');
+        return view('tuntutan.penyelaras.yuran_dan_wang_saku.maklumat_tuntutan');
     }
 
     public function kemaskiniTuntutan()
     {
-        return view('pages.penyelaras.tuntutan.kemaskini');
+        return view('tuntutan.penyelaras.kemaskini.kemaskini_tuntutan');
     }
 
     public function sejarahTuntutan()
     {
-        return view('pages.penyelaras.tuntutan.sejarah');
+        return view('tuntutan.penyelaras.sejarah.sejarah_tuntutan');
     }
 
     public function permohonanbaru()
@@ -144,7 +144,7 @@ class PenyelarasController extends Controller
         ->where('permohonan.status','=', '2')
         ->where('jenis','=', 'IPTA')
         ->get(['smoku.*', 'permohonan.*', 'maklumatakademik.*', 'bk_infoipt.namaipt']);
-        
+
         //return($smoku);
         return view('pages.penyelaras.permohonan.permohonanbaru', compact('smoku'));
     }
@@ -169,10 +169,10 @@ class PenyelarasController extends Controller
         $tuntutanpermohonan = TuntutanPermohonan::all()->where('nokp_pelajar', $nokp);
         $dokumen = Dokumen::all()->where('nokp_pelajar', $nokp);
         return view('pages.penyelaras.permohonan.mohonbaruform-view', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
-        
+
     }
 
-   
+
     public function keseluruhanPermohonan()
     {
         return view('pages.penyelaras.permohonan.keseluruhanmohon');
@@ -243,13 +243,13 @@ class PenyelarasController extends Controller
         $peringkatData['data'] = DB::table('kursus')
         ->select('kursus.kodperingkat','bk_peringkatpengajian.peringkat')
         ->join('bk_peringkatpengajian', function ($join) {
-            $join->on('kursus.kodperingkat', '=', 'bk_peringkatpengajian.kodperingkat'); 
+            $join->on('kursus.kodperingkat', '=', 'bk_peringkatpengajian.kodperingkat');
         })
         ->where('idipt',$ipt)
         ->groupBy('kursus.kodperingkat','bk_peringkatpengajian.peringkat')
 
         ->get();
-         
+
 
          return response()->json($peringkatData);
 
@@ -261,7 +261,7 @@ class PenyelarasController extends Controller
             ->select('idipt','kodperingkat','nama_kursus')
             ->where('kodperingkat',$kodperingkat)
             ->where('idipt',$ipt)
-            
+
             //->where(["idipt"=> $ipt, "kodperingkat" => $kodperingkat])
             ->get();
 
@@ -270,7 +270,7 @@ class PenyelarasController extends Controller
     }
 
     public function simpan(Request $request)
-    {   
+    {
 
         $user = Permohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
         if ($user === null) {
@@ -295,7 +295,7 @@ class PenyelarasController extends Controller
                 'no_telR' => $request->no_telR,
                 'no_akaunbank' => $request->no_akaunbank,
                 'emel' => $request->emel,
-       
+
             ]);
         }else {
         DB::table('pelajar')->where('nokp_pelajar' ,$request->nokp_pelajar)
@@ -340,7 +340,7 @@ class PenyelarasController extends Controller
                 'hubungan' => $request->hubungan,
                 'lain_hubungan' => $request->lain_hubungan,
                 'pendapatan' => $request->pendapatan,
-        
+
             ]);
         }else {
             DB::table('waris')->where('nokp_pelajar' ,$request->nokp_pelajar)
@@ -378,7 +378,7 @@ class PenyelarasController extends Controller
                 'sumber_biaya' => $request->sumber_biaya,
                 'nama_penaja' => $request->nama_penaja,
                 'status' => '1',
-        
+
             ]);
         }else {
         DB::table('maklumatakademik')->where('nokp_pelajar' ,$request->nokp_pelajar)
@@ -403,7 +403,7 @@ class PenyelarasController extends Controller
 
         ]);
         }
-       
+
 
         $tuntutanpermohonan = TuntutanPermohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
         if ($tuntutanpermohonan === null) {
@@ -417,7 +417,7 @@ class PenyelarasController extends Controller
                 'amaunelaun' => $request->amaunelaun,
                 'perakuan' => $request->perakuan,
                 'status' => '1',
-        
+
             ]);
         }else {
 
@@ -432,7 +432,7 @@ class PenyelarasController extends Controller
             'amaunelaun' => $request->amaunelaun,
             'perakuan' => $request->perakuan,
             'status' => '1',
-            
+
         ]);
         }
         $statustransaksi = Status::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
@@ -441,7 +441,7 @@ class PenyelarasController extends Controller
                 'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
                 'nokp_pelajar' => $request->nokp_pelajar,
                 'status' => '1',
-        
+
             ]);
         }else {
 
@@ -450,7 +450,7 @@ class PenyelarasController extends Controller
             'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
             'nokp_pelajar' => $request->nokp_pelajar,
             'status' => '1',
-            
+
         ]);
         }
 
@@ -458,22 +458,22 @@ class PenyelarasController extends Controller
 
 
         $data=new dokumen();
-        
-          
+
+
             $akaunBank=$request->akaunBank;
-            //$name1=$akaunBank->getClientOriginalName();  
-            $name1='salinanbank';  
+            //$name1=$akaunBank->getClientOriginalName();
+            $name1='salinanbank';
             $filenameakaunBank = '';
             if($akaunBank){
                 $filenameakaunBank=$name1.'_'.$request->nokp_pelajar.'.'.$akaunBank->getClientOriginalExtension();
                 $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
-            
+
             }
-            
-            
+
+
             $suratTawaran=$request->suratTawaran;
             //$name2=$suratTawaran->getClientOriginalName();
-            $name2='salinantawaran'; 
+            $name2='salinantawaran';
             $filenamesuratTawaran = '';
             if($suratTawaran){
             $filenamesuratTawaran=$name2.'_'.$request->nokp_pelajar.'.'.$suratTawaran->getClientOriginalExtension();
@@ -482,13 +482,13 @@ class PenyelarasController extends Controller
 
             $invoisResit=$request->invoisResit;
             //$name3=$invoisResit->getClientOriginalName();
-            $name3='salinanresit';  
+            $name3='salinanresit';
             $filenameinvoisResit = '';
             if($invoisResit){
             $filenameinvoisResit=$name1.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
             $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
             }
-            
+
             $data->id_permohonan='KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar;
             $data->nokp_pelajar=$request->nokp_pelajar;
             $data->akaunBank=$filenameakaunBank;
@@ -497,7 +497,7 @@ class PenyelarasController extends Controller
             $data->nota_akaunBank=$request->nota_akaunBank;
             $data->nota_suratTawaran=$request->nota_suratTawaran;
             $data->nota_invoisResit=$request->nota_invoisResit;
-            
+
 
             $data->save();
 
@@ -509,7 +509,7 @@ class PenyelarasController extends Controller
     }
 
     public function hantar(Request $request)
-    {   
+    {
 
         $tuntutanpermohonan = TuntutanPermohonan::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
         if ($tuntutanpermohonan != null) {
@@ -524,40 +524,40 @@ class PenyelarasController extends Controller
             'amaunelaun' => $request->amaunelaun,*/
             'perakuan' => $request->perakuan,
             'status' => '2',
-            
+
         ]);
         }
-        
+
         $user = Status::create([
             'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
             'nokp_pelajar' => $request->nokp_pelajar,
             'status' => '2',
-    
+
         ]);
         $user->save();
 
 
         $data=new dokumen();
-        
-          
+
+
             $akaunBank=$request->akaunBank;
-            //$name1=$akaunBank->getClientOriginalName();  
-            $name1='salinanbank';  
+            //$name1=$akaunBank->getClientOriginalName();
+            $name1='salinanbank';
             $filenameakaunBank=$name1.'_'.$request->nokp_pelajar.'.'.$akaunBank->getClientOriginalExtension();
             $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
-            
+
             $suratTawaran=$request->suratTawaran;
             //$name2=$suratTawaran->getClientOriginalName();
-            $name2='salinantawaran'; 
+            $name2='salinantawaran';
             $filenamesuratTawaran=$name2.'_'.$request->nokp_pelajar.'.'.$suratTawaran->getClientOriginalExtension();
             $request->suratTawaran->move('assets/dokumen',$filenamesuratTawaran);
 
             $invoisResit=$request->invoisResit;
             //$name3=$invoisResit->getClientOriginalName();
-            $name3='salinanresit';  
+            $name3='salinanresit';
             $filenameinvoisResit=$name1.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
             $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
-            
+
             $data->id_permohonan='KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar;
             $data->nokp_pelajar=$request->nokp_pelajar;
             $data->akaunBank=$filenameakaunBank;
@@ -566,7 +566,7 @@ class PenyelarasController extends Controller
             $data->nota_akaunBank=$request->nota_akaunBank;
             $data->nota_suratTawaran=$request->nota_suratTawaran;
             $data->nota_invoisResit=$request->nota_invoisResit;
-            
+
 
             $data->save();
 
