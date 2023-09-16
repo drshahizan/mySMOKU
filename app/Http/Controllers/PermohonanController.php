@@ -558,14 +558,14 @@ class PermohonanController extends Controller
  
 
     public function sejarahPermohonan(){
-        $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
-        $permohonan = Permohonan::join('sejarah_permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
-        ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
-        ->get(['sejarah_permohonan.*','permohonan.*','bk_status.status'])
-        ->where('smoku_id', $smoku_id->id);
-        //dd($permohonan);
-        return view('pages.permohonan.statusmohon', compact('permohonan'));
+        // $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        // //$permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
+        // $permohonan = Permohonan::join('sejarah_permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
+        // ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
+        // ->get(['sejarah_permohonan.*','permohonan.*','bk_status.*'])
+        // ->where('smoku_id', $smoku_id->id);
+        // //dd($permohonan);
+        return view('pages.permohonan.statusmohon');
         
     }
 
