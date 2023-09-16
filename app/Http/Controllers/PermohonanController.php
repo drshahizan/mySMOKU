@@ -557,11 +557,14 @@ class PermohonanController extends Controller
     }
  
 
-    public function statuspermohonan(){
-        $permohonan = SejarahPermohonan::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
-        ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
-        ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
-        ->where('nokp_pelajar', Auth::user()->nokp);
+    public function sejarahPermohonan(){
+        $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
+        $permohonan = Permohonan::join('sejarah_permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
+        ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
+        ->get(['sejarah_permohonan.*','permohonan.*','bk_status.status'])
+        ->where('smoku_id', $smoku_id->id);
+        //dd($permohonan);
         return view('pages.permohonan.statusmohon', compact('permohonan'));
         
     }
@@ -609,7 +612,7 @@ class PermohonanController extends Controller
         DB::table('dokumen')->where('id_permohonan',$id_permohonan)->delete();
         DB::table('statustransaksi')->where('id_permohonan',$id_permohonan)->delete();
         
-        return redirect()->route('sejarahpermohonan');
+        return redirect()->route('permohonan.sejarah');
         
     }
 

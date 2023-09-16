@@ -26,7 +26,7 @@
 		</div>
 
 		<div class="menu-item">
-			<a class="menu-link" href="{{ route('sejarahpermohonan') }}">
+			<a class="menu-link" href="{{ route('permohonan.sejarah') }}">
 
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Sejarah</span>
