@@ -211,7 +211,7 @@ class SekretariatController extends Controller
     }
 
     public function saringTuntutanKedua(Request $request, $id){
-        $id_permohonan = Permohonan::where('id', $id)->value('id_permohonan');
+        $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
         $permohonan = Permohonan::where('status', '2')
         ->orWhere('status', '=','3')
         ->orWhere('status', '=','4')
@@ -220,15 +220,15 @@ class SekretariatController extends Controller
 
         if($request->get('submit')=="Layak"){
             $status_kod=1;
-            $status = "Tuntutan ".$id_permohonan." telah disaring dengan status 'Layak'.";
+            $status = "Tuntutan ".$no_rujukan_permohonan." telah disaring dengan status 'Layak'.";
         }
         elseif($request->get('submit')=="TidakLayak"){
             $status_kod=1;
-            $status = "Tuntutan ".$id_permohonan." telah disaring dengan status 'Tidak Layak'.";
+            $status = "Tuntutan ".$no_rujukan_permohonan." telah disaring dengan status 'Tidak Layak'.";
         }
         elseif($request->get('submit')=="Kembalikan"){
             $status_kod=2;
-            $status = "Tuntutan ".$id_permohonan." telah dikembalikan.";
+            $status = "Tuntutan ".$no_rujukan_permohonan." telah dikembalikan.";
         }
 
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('permohonan','status_kod','status'));
