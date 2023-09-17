@@ -54,17 +54,18 @@ class SaringanController extends Controller
 
     public function maklumatProfilDiri($id)
     {
-        $waris = Waris::where('smoku_id', $id)->first();
-        $pelajar = ButiranPelajar::where('smoku_id', $id)->first();
-        $smoku = Smoku::where('id', $id)->first();
+        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+        $waris = Waris::where('smoku_id', $smoku_id)->first();
+        $pelajar = ButiranPelajar::where('smoku_id', $smoku_id)->first();
+        $smoku = Smoku::where('id', $smoku_id)->first();
         return view('permohonan.sekretariat.saringan.maklumat_profil_diri',compact('waris','pelajar','smoku'));
     }
 
     public function maklumatAkademik($id)
     {
-        $akademik = Akademik::where('smoku_id', $id)->first();
-        $smoku = Smoku::where('id', $id)->first();
-        return view('permohonan.sekretariat.saringan.maklumat_akademik',compact('akademik','smoku'));
+        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('permohonan.sekretariat.saringan.maklumat_akademik',compact('akademik',));
     }
 
     public function maklumatTuntutan()
