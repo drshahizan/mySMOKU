@@ -18,6 +18,9 @@
 </div>
 <!--end::Page title-->
 <br>
+@if (session('message'))
+	<div class="alert alert-success" style="color:black; text-align: center;">{{ session('message') }}</div>
+@endif
 
 <div class="table-responsive">
 	<!--begin::Content-->
@@ -205,7 +208,7 @@
 																	<!--begin::Input-->
 																	<select name="id_institusi" id="id_institusi" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
 																		@foreach ($infoipt as $infoipt2)
-																		<option value="{{ $infoipt2->idipt}}" {{$user->id_isntitusi == $infoipt2->idipt ? 'selected' : ''}}>{{ $infoipt2->namaipt}}</option>
+																		<option value="{{ $infoipt2->id_institusi}}" {{$user->id_institusi == $infoipt2->id_institusi ? 'selected' : ''}}>{{ $infoipt2->nama_institusi}}</option>
 																		@endforeach
 																	</select>
 																	<!--end::Input-->
@@ -300,7 +303,7 @@
 					<!--begin::Modal content-->
 					<div class="modal-content">
 						<!--begin::Form-->
-						<form class="form" action="{{ route('daftarpengguna.post') }}" id="kt_modal_add_customer_form" data-kt-redirect="{{ route('daftarpengguna') }}" method="post">
+						<form class="form" action="{{ route('daftarpengguna.post') }}"  data-kt-redirect="{{ route('daftarpengguna') }}" method="post">
 							@csrf
 							<!--begin::Modal header-->
 							<div class="modal-header" id="kt_modal_add_customer_header">

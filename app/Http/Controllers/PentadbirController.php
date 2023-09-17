@@ -8,6 +8,9 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\InfoIpt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailDaftarPengguna;
+
 
 class PentadbirController extends Controller
 {
@@ -41,10 +44,10 @@ class PentadbirController extends Controller
             ]);
         }else {
 
-        DB::table('users')->where('nokp' ,$request->nokp)
+        User::where('no_kp' ,$request->no_kp)
             ->update([
                 'nama' => $request->nama,
-                'nokp' => $request->nokp,
+                'no_kp' => $request->no_kp,
                 'email' => $request->email,
                 'tahap' => $request->tahap,
                 'jawatan' => $request->jawatan,
@@ -55,8 +58,16 @@ class PentadbirController extends Controller
         ]);
         }
 
+        
+        
+
         $user->save();
-        return redirect()->route('daftarpengguna');
+
+        $email = $request->email;
+        $no_kp = $request->no_kp;
+
+        Mail::to($email)->send(new mailDaftarPengguna($email,$no_kp));
+        return redirect()->route('daftarpengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' .$request->nama);
 
 
     }
