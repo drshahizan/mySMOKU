@@ -104,13 +104,13 @@
                                                             @if ($item['program']=="BKOKU")
                                                                 @php
                                                                     $i++;
-                                                                    $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                                    $nama_kursus = DB::table('maklumatakademik')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_kursus');
-                                                                    $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
-                                                                    $jenis_kecacatan = DB::table('pelajar')->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_jenisoku.kecacatan'); //PH,SD
-                                                                    $institusi_pengajian = DB::table('maklumatakademik')->join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_infoipt.namaipt');
-                                                                    $tarikh_mula = DB::table('maklumatakademik')->where('nokp_pelajar', $item['nokp_pelajar'])->value('tkh_mula');
-                                                                    $tarikh_tamat = DB::table('maklumatakademik')->where('nokp_pelajar', $item['nokp_pelajar'])->value('tkh_tamat');
+                                                                    $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                                    $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
+                                                                    $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                                                                    $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
+                                                                    $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                                    $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
+                                                                    $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
                                                                     
                                                                     // nama pemohon
                                                                     $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
@@ -159,7 +159,7 @@
                                                                 
                                                                 <tr>
                                                                     <td class="text-center"><input type="checkbox" name="checkbox-1" id="checkbox-1" /></td>                                           
-                                                                    <td><a href="{{ url('kemaskini/kelulusan/'. $nokp) }}" target="_blank">{{$item['id_permohonan']}}</a></td>
+                                                                    <td><a href="{{ url('kemaskini/kelulusan/'. $nokp) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
                                                                     <td>{{$pemohon}}</td>
                                                                     <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                                                                     <td>{{$namakursus}}</td>
