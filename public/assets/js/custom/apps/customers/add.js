@@ -31,7 +31,7 @@ var KTModalCustomersAdd = function () {
 							}
 						}
 					},
-					'nokp': {
+					'no_kp': {
 						validators: {
 							notEmpty: {
 								message: 'No. Kad Pengenalan diperlukan'

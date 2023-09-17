@@ -26,6 +26,8 @@ class User extends Authenticatable
         'email_verified_at',
         'password',
         'tahap',
+        'jawatan',
+        'id_institusi',
         'status',
         'remember_token',
         'profile_photo_path',
