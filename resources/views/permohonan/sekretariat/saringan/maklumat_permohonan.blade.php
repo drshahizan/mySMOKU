@@ -121,7 +121,7 @@
                                     </table>
                                 </div>
                                 <br>
-                            <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$smoku->id) }}" id="saring">
+                            <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$permohonan->id) }}" id="saring">
                                 {{csrf_field()}}
                             <div class="row clearfix">
                                 <div class="col-md-12">
@@ -177,8 +177,8 @@
                                                         <input class="checkbox2a" id="checkbox2a" type="checkbox" name="catatan_maklumat_akademik[]" value="Terdapat maklumat yang tidak benar pada Maklumat Akademik" disabled="disabled"><span> Terdapat maklumat yang tidak benar pada Maklumat Akademik</span><br>
                                                         <input class="checkbox2b" id="checkbox2b" type="checkbox" name="catatan_maklumat_akademik[]" value="Terdapat maklumat yang tidak lengkap pada Maklumat Akademik" disabled="disabled"><span> Terdapat maklumat yang tidak lengkap pada Maklumat Akademik</span><br>
                                                         <input class="checkbox2c" id="checkbox2c" type="checkbox" name="catatan_maklumat_akademik[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain2" id="lain2" disabled="disabled"></span><br>
-                                                    </div></td>
-                                                </td>
+                                                    </div>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align:right;">3</td>
@@ -193,16 +193,17 @@
                                                             <option value="lengkap">Lengkap</option>
                                                             <option value="tak_lengkap">Tidak Lengkap</option>
                                                         </select>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="checkbox-group">
-                                                        <input class="checkbox3a" id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada surat tawaran" disabled="disabled"><span> Ralat pada surat tawaran</span><br>
-                                                        <input class="checkbox3b" id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada penyata bank" disabled="disabled"><span> Ralat pada penyata bank</span><br>
-                                                        <input class="checkbox3c" id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada resit" disabled="disabled"><span> Ralat pada resit/invois</span><br>
-                                                        <input class="checkbox3d" id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada keputusan peperiksaan" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span><br>
-                                                        <input class="checkbox3e" id="checkbox3e" type="checkbox" name="catatan_salinan_dokumen[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain3" id="lain3" disabled="disabled"></span>
-                                                    </div></td>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox-group">
+                                                            <input class="checkbox3a" id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada surat tawaran" disabled="disabled"><span> Ralat pada surat tawaran</span><br>
+                                                            <input class="checkbox3b" id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada penyata bank" disabled="disabled"><span> Ralat pada penyata bank</span><br>
+                                                            <input class="checkbox3c" id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada resit" disabled="disabled"><span> Ralat pada resit/invois</span><br>
+                                                            <input class="checkbox3d" id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada keputusan peperiksaan" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span><br>
+                                                            <input class="checkbox3e" id="checkbox3e" type="checkbox" name="catatan_salinan_dokumen[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain3" id="lain3" disabled="disabled"></span>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>

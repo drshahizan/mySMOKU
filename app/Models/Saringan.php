@@ -11,6 +11,7 @@ class Saringan extends Model
     protected $table = 'permohonan_saringan';
 
     protected $fillable = [
+        'permohonan_id',
         'no_rujukan_permohonan',
         'catatan_profil_diri',
         'catatan_akademik',

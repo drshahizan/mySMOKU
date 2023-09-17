@@ -77,15 +77,14 @@
                                     <br>
                                     @php
                                         if($permohonan->status==4){
-                                            $tarikh_status = DB::table('statustransaksi')->where('id_permohonan', $permohonan->id_permohonan)->where('status', 4)->value('created_at');
+                                            $tarikh_status = DB::table('sejarah_permohonan')->where('permohonan_id', $permohonan->id)->where('status', 4)->value('created_at');
                                         }
                                         elseif($permohonan->status==5){
-                                            $tarikh_status = DB::table('statustransaksi')->where('id_permohonan',$permohonan->id_permohonan)->where('status', 5)->value('created_at');
+                                            $tarikh_status = DB::table('sejarah_permohonan')->where('permohonan_id',$permohonan->id)->where('status', 5)->value('created_at');
                                         }
 
-                                        $akademik = DB::table('maklumatakademik')->where('nokp_pelajar', $pelajar->nokp_pelajar)->first();
-                                        $status = DB::table('statusinfo')->where('kodstatus', $permohonan->status)->value('status');
-                                        $text = ucwords(strtolower($pelajar->nama_pelajar)); // Assuming you're sending the text as a POST parameter
+                                        $status = DB::table('bk_status')->where('kod_status', $permohonan->status)->value('status');
+                                        $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
                                         $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
                                         $words = explode(' ', $text);
                                         $result = [];
@@ -102,7 +101,7 @@
                                         <tr>
                                             <td><strong>ID Permohonan</strong></td>
                                             <td>:</td>
-                                            <td>{{$permohonan->id_permohonan}}</td>
+                                            <td>{{$permohonan->no_rujukan_permohonan}}</td>
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Tarikh Permohonan</strong></td>
                                             <td>:</td>
@@ -120,7 +119,7 @@
                                         <tr>
                                             <td><strong>No. Kad Pengenalan</strong></td>
                                             <td>:</td>
-                                            <td>{{$pelajar->nokp_pelajar}}</td>
+                                            <td>{{$smoku->no_kp}}</td>
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Status</strong></td>
                                             <td>:</td>
@@ -146,7 +145,7 @@
                                                     <tr>
                                                         <td style="text-align:right;">1</td>
                                                         <td>
-                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Profil Diri</a></span>
+                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$permohonan->id) }}" target="_blank">Maklumat Profil Diri</a></span>
                                                         </td>
                                                         <td class="hidden-sm-down">
                                                             Lengkap
@@ -158,7 +157,7 @@
                                                     <tr>
                                                         <td style="text-align:right;">2</td>
                                                         <td>
-                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Akademik</a></span>
+                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$permohonan->id) }}" target="_blank">Maklumat Akademik</a></span>
                                                         </td>
                                                         <td class="hidden-sm-down">
                                                             Lengkap
@@ -195,10 +194,10 @@
                                                     <tr>
                                                         <td style="text-align:right;">1</td>
                                                         <td>
-                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Profil Diri</a></span>
+                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$permohonan->id) }}" target="_blank">Maklumat Profil Diri</a></span>
                                                         </td>
                                                         <td class="hidden-sm-down">
-                                                            @if ($catatan->catatan_profilDiri == null)
+                                                            @if ($catatan->catatan_profil_diri == null)
                                                                 Lengkap
                                                             @else
                                                                 Tidak Lengkap
@@ -206,7 +205,7 @@
                                                         </td>
                                                         <td>
                                                             @php
-                                                                $str = $catatan->catatan_profilDiri;
+                                                                $str = $catatan->catatan_profil_diri;
                                                                 $strArr = explode(",", $str);
                                                             @endphp
                                                             @for ($i = 0; $i < count($strArr)-1; $i++)
@@ -217,7 +216,7 @@
                                                     <tr>
                                                         <td style="text-align:right;">2</td>
                                                         <td>
-                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Akademik</a></span>
+                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$permohonan->id) }}" target="_blank">Maklumat Akademik</a></span>
                                                         </td>
                                                         <td class="hidden-sm-down">
                                                             @if ($catatan->catatan_akademik == null)
@@ -242,7 +241,7 @@
                                                             <span><a href="{{ url('permohonan/sekretariat/saringan/salinan-dokumen/'.$permohonan->id) }}" target="_blank">Salinan Dokumen</a></span>
                                                         </td>
                                                     <td class="hidden-sm-down">
-                                                        @if ($catatan->catatan_salinanDokumen == null)
+                                                        @if ($catatan->catatan_salinan_dokumen == null)
                                                             Lengkap
                                                         @else
                                                             Tidak Lengkap
@@ -250,7 +249,7 @@
                                                     </td>
                                                     <td>
                                                         @php
-                                                            $str = $catatan->catatan_salinanDokumen;
+                                                            $str = $catatan->catatan_salinan_dokumen;
                                                             $strArr = explode(",", $str);
                                                         @endphp
                                                         @for ($i = 0; $i < count($strArr)-1; $i++)
@@ -271,7 +270,7 @@
                                     </div>
                                 <div class="col-md-6 text-right">
                                     @if($permohonan->status == 4)
-                                        <a href="{{ url('permohonan/sekretariat/saringan/papar-tuntutan/'.$pelajar->nokp_pelajar) }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </a></button>
+                                        <a href="{{ url('permohonan/sekretariat/saringan/papar-tuntutan/'.$permohonan->id) }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </a></button>
                                     @else
                                         <a href="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </a></button>
                                     @endif

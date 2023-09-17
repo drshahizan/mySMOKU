@@ -120,11 +120,11 @@
                                 <div class="col-md-6 col-sm-6">
                                     <br>
                                     @php
-                                        $akademik = DB::table('maklumatakademik')->where('nokp_pelajar', $pelajar->nokp_pelajar)->first();
-                                        $institusi = DB::table('bk_infoipt')->where('idipt', $akademik->id_institusi)->value('namaipt');
-                                        $peringkat = DB::table('bk_peringkatpengajian')->where('kodperingkat', $akademik->peringkat_pengajian)->value('peringkat');
+                                        $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
+                                        $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
+                                        $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja)->value('penaja');
                                         // nama pemohon
-                                        $text = ucwords(strtolower($pelajar->nama_pelajar)); // Assuming you're sending the text as a POST parameter
+                                        $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
                                         $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
                                         $words = explode(' ', $text);
                                         $result = [];
@@ -152,7 +152,7 @@
                                         $kursus = implode(' ', $result);
 
                                         //institusi pengajian
-                                        $text3 = ucwords(strtolower($institusi)); // Assuming you're sending the text as a POST parameter
+                                        $text3 = ucwords(strtolower($nama_institusi)); // Assuming you're sending the text as a POST parameter
                                         $conjunctions = ['of', 'in', 'and'];
                                         $words = explode(' ', $text3);
                                         $result = [];
@@ -169,7 +169,7 @@
                                         <tr>
                                             <td><strong>ID Tuntutan</strong></td>
                                             <td>:</td>
-                                            <td>{{$pemohon}}</td>
+                                            <td>{{$permohonan->no_rujukan_permohonan}}</td>
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Kursus</strong></td>
                                             <td>:</td>
@@ -178,7 +178,7 @@
                                         <tr>
                                             <td><strong>Nama</strong></td>
                                             <td>:</td>
-                                            <td>{{$pelajar->nama_pelajar}}</td>
+                                            <td>{{$pemohon}}</td>
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Institusi</strong></td>
                                             <td>:</td>
@@ -187,7 +187,7 @@
                                         <tr>
                                             <td><strong>No. Kad Pengenalan</strong></td>
                                             <td>:</td>
-                                            <td>{{$pelajar->nokp_pelajar}}</td>
+                                            <td>{{$smoku->no_kp}}</td>
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Peringkat</strong></td>
                                             <td>:</td>
@@ -206,7 +206,7 @@
                                             <td><strong>Status Penajaan</strong></td>
                                             <td>:</td>
                                             @if($akademik->nama_penaja!=null)
-                                                <td>Ditaja ({{$akademik->nama_penaja}})</td>
+                                                <td>Ditaja ({{$nama_penaja}})</td>
                                             @else
                                                 <td>Tidak Ditaja</td>
                                             @endif
@@ -217,7 +217,7 @@
                                     {{csrf_field()}}
                                     <!--begin: Invoice body-->
                                     @php
-                                        $jumlah = $permohonan->amaun + $akademik->bil_bulanpersem * 300;
+                                        $jumlah = $permohonan->amaun_yuran + $akademik->bil_bulanpersem * 300;
                                     @endphp
                                     <br>
                                     <h6>Pengiraan:</h6>
@@ -238,12 +238,12 @@
                                             <tbody>
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->amaun - $akademik->bil_bulanpersem * 300, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->amaun - $akademik->bil_bulanpersem * 300, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->amaun - $akademik->bil_bulanpersem * 300, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->amaun_yuran - $akademik->bil_bulanpersem * 300, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->amaun_yuran - $akademik->bil_bulanpersem * 300, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->amaun_yuran - $akademik->bil_bulanpersem * 300, 2)}}</td>
                                                 </tr>
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>

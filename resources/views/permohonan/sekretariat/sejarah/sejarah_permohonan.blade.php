@@ -53,7 +53,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Sejarah Permohonan<br><small>Klik ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
+                            <h2>Sejarah Permohonan<br><small>Klik ID Permohonan untuk melakukan melihat rekod permohonan</small></h2>
                         </div>
 
                         {{-- top nav bar --}}
