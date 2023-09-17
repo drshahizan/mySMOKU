@@ -35,11 +35,7 @@ class DashboardController extends Controller
         ->get(['permohonan.*', 'statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokp);
         //$smoku = Smoku::all()->where('jenis','=', 'IPTA');
-        $smoku = Smoku::orderBy('smoku.id','desc')
-        ->leftJoin('permohonan','permohonan.nokp_pelajar','=','smoku.nokp')
-        ->get(['smoku.*', 'permohonan.*'])
-        ->where('status','!=', '2')
-        ->where('jenis','=', 'IPTA');
+        
         $permohonan = Status::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
         ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
         ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
@@ -54,7 +50,11 @@ class DashboardController extends Controller
         //dd($smoku_id->id);
         
         // //$permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
-        
+        $smoku = Smoku::orderBy('smoku.id','desc')
+        ->leftJoin('permohonan','permohonan.id','=','smoku.id')
+        ->get(['smoku.*', 'permohonan.*'])
+        ->where('status','!=', '2')
+        ->where('jenis','=', 'IPTA');
 
         if(Auth::user()->tahap=='1')
         {
