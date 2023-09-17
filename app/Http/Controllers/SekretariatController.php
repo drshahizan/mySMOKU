@@ -198,17 +198,17 @@ class SekretariatController extends Controller
         ->get();
         $status_kod=0;
         $status = null;
-        return view('pages.sekretariat.tuntutan.saring',compact('permohonan','status_kod','status'));
+        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('permohonan','status_kod','status'));
     }
 
     public function keputusanPeperiksaan(){
-        return view('pages.sekretariat.tuntutan.keputusanPeperiksaan');
+        return view('tuntutan.sekretariat.saringan.keputusan_peperiksaan');
     }
 
     public function maklumatTuntutanKedua($id){
         $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
-        return view('pages.sekretariat.tuntutan.maklumatTuntutan',compact('permohonan','pelajar'));
+        return view('tuntutan.sekretariat.saringan.maklumat_tuntutan',compact('permohonan','pelajar'));
     }
 
     public function saringTuntutanKedua(Request $request, $id){
@@ -232,7 +232,7 @@ class SekretariatController extends Controller
             $status = "Tuntutan ".$id_permohonan." telah dikembalikan.";
         }
 
-        return view('pages.sekretariat.tuntutan.saring',compact('permohonan','status_kod','status'));
+        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('permohonan','status_kod','status'));
     }
 
 
@@ -242,11 +242,11 @@ class SekretariatController extends Controller
         ->orWhere('status', '=','6')
         ->orWhere('status', '=','7')
         ->get();
-        return view('pages.sekretariat.tuntutan.keputusan',compact('permohonan'));
+        return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan',compact('permohonan'));
     }
 
     public function sejarahTuntutan(){
         $permohonan = TuntutanPermohonan::where('status', '!=','4')->get();
-        return view('pages.sekretariat.tuntutan.sejarah_tuntutan',compact('permohonan'));
+        return view('tuntutan.sekretariat.sejarah.sejarah_tuntutan',compact('permohonan'));
     }
 }
