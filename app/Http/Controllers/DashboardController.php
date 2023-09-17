@@ -55,10 +55,6 @@ class DashboardController extends Controller
         
         // //$permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
         
-        
-        
-        
-
 
         if(Auth::user()->tahap=='1')
         {

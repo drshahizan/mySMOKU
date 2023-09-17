@@ -30,7 +30,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 |
 */
 
-//Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/', [DashboardController::class, 'index']);
 
@@ -138,7 +138,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
     Route::get('daftarpengguna', [PentadbirController::class, 'daftar'])->name('daftarpengguna');
     Route::post('daftarpengguna', [PentadbirController::class, 'store'])->name('daftarpengguna.post');
 
- //});
+ });
 
 Route::get('/error', function () {
     abort(500);
