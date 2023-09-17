@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\URL;
 
 class maildaftarPengguna extends Mailable
 {
@@ -28,12 +29,19 @@ class maildaftarPengguna extends Mailable
      */
     public function build()
     {
+        $verificationUrl = URL::temporarySignedRoute(
+            'verification.verify',
+            now()->addMinutes(60), // Adjust the expiration time as needed
+            ['id' => $this->no_kp, 'hash' => sha1($this->email)]
+        );
+
         $subject = "Daftar Pengguna Sistem BKOKU";
         return $this->subject($subject)
                     ->view('pages.pentadbir.emel-daftar')
                     ->with([
                         'email' => $this->email,
                         'no_kp' => $this->no_kp,
+                        'verificationUrl' => $verificationUrl,
                     ]);
                     
     }

@@ -53,6 +53,16 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+         // Check if the user's email is verified
+            $user = Auth::user();
+
+            if (!$user->email_verified_at) {
+                Auth::logout(); // Log the user out if email is not verified
+                throw ValidationException::withMessages([
+                    'no_kp' => trans('auth.email_not_verified'),
+                ]);
+            }
+
         RateLimiter::clear($this->throttleKey());
     }
 
@@ -78,6 +88,7 @@ class LoginRequest extends FormRequest
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
+            'email_verified_at' => trans('auth.email_not_verified'), // Add this line
         ]);
     }
 

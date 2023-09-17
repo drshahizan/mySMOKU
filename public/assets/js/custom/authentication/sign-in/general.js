@@ -14,7 +14,7 @@ var KTSigninGeneral = function () {
             form,
             {
                 fields: {
-                    'nokp': {
+                    'no_kp': {
                         validators: {
                             notEmpty: {
                                 message: 'No Kad Pengenalan diperlukan'

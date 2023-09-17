@@ -15,7 +15,7 @@
     <p>Alamat E-mel : {{$email}}
     <br>
     <p>Sila klik disini atau masukkan URL di bawah untuk mengaktifkan akaun
-        anda di </p>
+        anda di {{$verificationUrl}}</p>
     <br>
     <p>Jika ada sebarang pertanyaan, sila hubungi khidmat pelanggan di talian 03-8888 1616
         atau e-mel ke biasiswabkoku@mohe.gov.my </p>

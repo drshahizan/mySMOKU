@@ -27,7 +27,25 @@
         <!--begin::Heading-->
             @if (session('message'))
                 <div class="alert alert-danger" style="color:black; text-align: center;">{{ session('message') }}</div>
-             @endif
+            @endif
+
+            @if(session('notifikasi'))
+                <div class="alert alert-success" style="color:black; text-align: center;">
+                    {{ session('notifikasi') }}
+                </div>
+            @endif
+
+            @if(session('success'))
+                <div class="alert alert-success" style="color:black; text-align: center;">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger" style="color:black; text-align: center;">
+                    {{ session('error') }}
+                </div>
+            @endif
 
         <!--begin::Login options-->
         <!-- <div class="row g-3 mb-9"> -->

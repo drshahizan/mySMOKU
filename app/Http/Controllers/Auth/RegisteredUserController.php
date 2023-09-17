@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use App\Models\Smoku;
-use session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailDaftarPengguna;
 
 class RegisteredUserController extends Controller
 {
@@ -65,12 +66,17 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             
         ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
         
+        //TUTUP NI SEBAB NANTI DIA REDIRECT TO DASHBOARD
+        // event(new Registered($user));
+        // Auth::login($user);
+        // return redirect(RouteServiceProvider::HOME);
+
+        //$user->save();
+        $email = $request->email;
+        $no_kp = $request->no_kp;
+
+        Mail::to($email)->send(new mailDaftarPengguna($email,$no_kp));
+        return redirect()->route('login')->with('notifikasi', 'Sila semak emel '.$email.' untuk pengesahan akaun.');
     }
 }
