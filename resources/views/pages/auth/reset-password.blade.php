@@ -12,13 +12,13 @@
         <div class="text-center mb-10">
             <!--begin::Title-->
             <h1 class="text-dark fw-bolder mb-3">
-                New Password
+                Kata Laluan Baru
             </h1>
             <!--end::Title-->
 
             <!--begin::Link-->
             <div class="text-gray-500 fw-semibold fs-6">
-                Enter your new password.
+                Masukkan kata laluan baru anda.
             </div>
             <!--end::Link-->
         </div>
@@ -52,7 +52,7 @@
 
             <!--begin::Hint-->
             <div class="text-muted">
-                Use 8 or more characters with a mix of letters, numbers & symbols.
+                Gunakan 12 atau lebih aksara dengan gabungan huruf, nombor & simbol.
             </div>
             <!--end::Hint-->
         </div>
@@ -72,9 +72,9 @@
                 <input class="form-check-input" type="checkbox" name="toc" value="1"/>
 
                 <label class="form-check-label fw-semibold text-gray-700 fs-6">
-                    I Agree &
+                    Saya Setuju &
 
-                    <a href="#" class="ms-1 link-primary">Terms and conditions</a>.
+                    <a href="#" class="ms-1 link-primary">Terma dan syarat</a>.
                 </label>
             </div>
         </div>
@@ -83,10 +83,10 @@
         <!--begin::Actions-->
         <div class="d-flex flex-wrap justify-content-center pb-lg-0">
             <button type="button" id="kt_new_password_submit" class="btn btn-primary me-4">
-                @include('partials/general/_button-indicator', ['label' => 'Submit'])
+                @include('partials/general/_button-indicator', ['label' => 'Hantar'])
             </button>
 
-            <a href="{{ route('login') }}" class="btn btn-light">Cancel</a>
+            <a href="{{ route('login') }}" class="btn btn-light">Batal</a>
         </div>
         <!--end::Actions-->
     </form>

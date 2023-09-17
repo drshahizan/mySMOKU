@@ -7,13 +7,13 @@
         <div class="text-center mb-10">
             <!--begin::Title-->
             <h1 class="text-dark fw-bolder mb-3">
-                Forgot Password ?
+                Lupa Kata Laluan ?
             </h1>
             <!--end::Title-->
 
             <!--begin::Link-->
             <div class="text-gray-500 fw-semibold fs-6">
-                Enter your email to reset your password.
+                Masukkan alamat emel anda untuk menetapkan semula kata laluan anda.
             </div>
             <!--end::Link-->
         </div>
@@ -29,10 +29,10 @@
         <!--begin::Actions-->
         <div class="d-flex flex-wrap justify-content-center pb-lg-0">
             <button type="button" id="kt_password_reset_submit" class="btn btn-primary me-4">
-                @include('partials/general/_button-indicator', ['label' => 'Submit'])
+                @include('partials/general/_button-indicator', ['label' => 'Hantar'])
             </button>
 
-            <a href="/login" class="btn btn-light">Cancel</a>
+            <a href="/login" class="btn btn-light">Batal</a>
         </div>
         <!--end::Actions-->
     </form>
