@@ -78,7 +78,7 @@ class SekretariatController extends Controller
     public function kelulusanPermohonan()
     {
         $kelulusan = Permohonan::where('status', '=','4')->get();
-        return view('pages.sekretariat.permohonan.kelulusan', compact('kelulusan'));
+        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan'));
     }
 
     public function cetakSenaraiPemohonExcel()
@@ -90,10 +90,10 @@ class SekretariatController extends Controller
     {
         $kelulusan = Permohonan::where('status', '4')->get();
 
-        $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon', compact('kelulusan'))
+        $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_pdf', compact('kelulusan'))
             ->setPaper('A4', 'landscape');
 
-        return $pdf->stream('senarai-pemohon.pdf');
+        return $pdf->stream('Senarai-Permohonan-Disokong.pdf');
     }
 
     public function lihatKelulusan($id)

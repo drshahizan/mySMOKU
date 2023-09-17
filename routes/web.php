@@ -83,8 +83,8 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
     Route::post('keputusan/{no_kp}', [SekretariatController::class, 'kemaskiniKelulusan']);
     Route::get('permohonan/keputusan', [SekretariatController::class, 'keputusanPermohonan']);
     Route::get('surat-tawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
-    Route::get('cetak-senarai-pemohon', [SekretariatController::class, 'cetakSenaraiPemohonPDF']);
-    Route::get('senarai-disokong-excel', [SekretariatController::class, 'cetakSenaraiPemohonExcel']);
+    Route::get('permohonan/senarai-disokong-pdf', [SekretariatController::class, 'cetakSenaraiPemohonPDF'])->name('senarai.disokong.pdf');
+    Route::get('permohonan/senarai-disokong-excel', [SekretariatController::class, 'cetakSenaraiPemohonExcel'])->name('senarai.disokong.excel');
     Route::get('/generate-qrcode', [SekretariatController::class, 'qrcode']);
 
     //Tuntutan - Sekretariat - Saringan

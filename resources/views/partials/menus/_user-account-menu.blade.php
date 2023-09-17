@@ -38,70 +38,8 @@
         </div>
     </div>
     <!--end::Menu item-->
-    <!--begin::Menu separator-->
-    {{-- <div class="separator my-2"></div> --}}
-    <!--end::Menu separator-->
-    <!--begin::Menu item-->
-    <!-- <div class="menu-item px-5"> -->
-        <!-- <a href="#" class="menu-link px-5">My Profile</a> -->
-    <!-- </div> -->
-    <!--end::Menu item-->
-    <!--begin::Menu item-->
-    <!-- <div class="menu-item px-5"> -->
-        <!-- <a href="#" class="menu-link px-5"> -->
-            <!-- <span class="menu-text">My Projects</span> -->
-            <!-- <span class="menu-badge"> -->
-                <!-- <span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span> -->
-            <!-- </span> -->
-        <!-- </a> -->
-    <!-- </div> -->
-    <!--end::Menu item-->
-    <!--begin::Menu item-->
-    <!-- <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0"> -->
-        <!-- <a href="#" class="menu-link px-5">
-            <span class="menu-title">My Subscription</span>
-            <span class="menu-arrow"></span>
-        </a> -->
-        <!--begin::Menu sub-->
-        <!-- <div class="menu-sub menu-sub-dropdown w-175px py-4"> -->
-            <!--begin::Menu item-->
-            <!-- <div class="menu-item px-3"> -->
-                <!-- <a href="#" class="menu-link px-5">Referrals</a> -->
-            <!-- </div> -->
-            <!--end::Menu item-->
-            <!--begin::Menu item-->
-            <!-- <div class="menu-item px-3"> -->
-                <!-- <a href="#" class="menu-link px-5">Billing</a> -->
-            <!-- </div> -->
-            <!--end::Menu item-->
-            <!--begin::Menu item-->
-            <!-- <div class="menu-item px-3"> -->
-                <!-- <a href="#" class="menu-link px-5">Payments</a> -->
-            <!-- </div> -->
-            <!--end::Menu item-->
-            <!--begin::Menu item-->
-            <!-- <div class="menu-item px-3"> -->
-                <!-- <a href="#" class="menu-link d-flex flex-stack px-5">Statements -->
-                    <!-- <span class="ms-2 lh-0" data-bs-toggle="tooltip" title="View your statements">{!! getIcon('information-5', 'fs-5') !!}</span></a> -->
-            <!-- </div> -->
-            <!--end::Menu item-->
-            <!--begin::Menu separator-->
-            <!-- <div class="separator my-2"></div> -->
-            <!--end::Menu separator-->
-            
-            <!--end::Menu item-->
-        <!-- </div> -->
-        <!--end::Menu sub-->
-<!-- </div> -->
-    <!--end::Menu item-->
-    <!--begin::Menu item-->
-
-    <!--end::Menu item-->
-    <!--begin::Menu item-->
-  
-    <!--end::Menu item-->
-    <!--begin::Menu item-->
     
+    <!--begin::Menu item-->
     <div class="menu-item px-5">
         <a href="{{ route('profil-diri') }}" class="menu-link px-5">Profil Diri</a>
     </div>
