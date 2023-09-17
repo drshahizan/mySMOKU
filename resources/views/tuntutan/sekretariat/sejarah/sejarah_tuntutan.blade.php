@@ -24,12 +24,12 @@
     <!--begin::Page title-->
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <!--begin::Title-->
-        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Tuntutan</h1>
+        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Permohonan</h1>
         <!--end::Title-->
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Tuntutan</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Permohonan</li>
             <!--end::Item-->
             <!--begin::Item-->
             <li class="breadcrumb-item">
@@ -53,7 +53,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Sejarah Tuntutan<br><small>Klik ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
+                            <h2>Sejarah Permohonan<br><small>Klik ID Permohonan untuk melakukan melihat rekod permohonan</small></h2>
                         </div>
 
                         {{-- top nav bar --}}
@@ -76,9 +76,9 @@
                                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
-                                                <th style="width: 17%"><b>ID Tuntutan</b></th>
+                                                <th style="width: 17%"><b>ID Permohonan</b></th>
                                                 <th style="width: 50%"><b>Nama</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
                                             </tr>
                                             </thead>
@@ -90,9 +90,8 @@
                                                 @if ($item['program']=="BKOKU")
                                                     @php
                                                         $i++;
-                                                        $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                        $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
-                                                        $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                                        $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                        $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
                                                             $status='Baharu';
                                                         }
@@ -114,11 +113,7 @@
                                                     @endphp
                                                     <tr>
                                                         <td>
-                                                            @if($item['status']==4 || $item['status']==5)
-                                                                <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
-                                                            @else
-                                                                <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
-                                                            @endif
+                                                            <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                         </td>
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
@@ -128,6 +123,8 @@
                                                             <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='3')
                                                             <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif ($item['status']=='4')
+                                                            <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='5')
                                                             <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='6')
@@ -158,7 +155,7 @@
                                                 <th style="width: 17%"><b>ID Permohonan</b></th>
                                                 <th style="width: 33%"><b>Nama</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Status Saringan</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -169,9 +166,8 @@
                                                 @if ($item['program']=="PPK")
                                                     @php
                                                         $i++;
-                                                        $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                        $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
-                                                        $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                                        $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                        $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
                                                             $status='Baharu';
                                                         }
@@ -193,11 +189,7 @@
                                                     @endphp
                                                     <tr>
                                                         <td>
-                                                            @if($item['status']==4 || $item['status']==5)
-                                                                <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
-                                                            @else
-                                                                <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
-                                                            @endif
+                                                            <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                         </td>
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
@@ -207,6 +199,8 @@
                                                             <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='3')
                                                             <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif ($item['status']=='4')
+                                                            <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='5')
                                                             <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='6')
@@ -230,75 +224,7 @@
                     </div>
                 </div>
             </div>
-
-            {{-- PPK --}}
-            <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-                <br>
-                <div class="body">
-                    <div class="table-responsive">
-                        <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
-                            <thead>
-                            <tr>
-                                <th style="width: 3%"><b>No.</b></th>
-                                <th style="width: 17%"><b>ID Permohonan</b></th>
-                                <th style="width: 50%"><b>Nama</b></th>
-                                <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
-                                <th style="width: 15%" class="text-center"><b>Status Saringan</b></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @php
-                                $i=0;
-                            @endphp
-                            @foreach ($permohonan as $item)
-                                @if ($item['program']=="PPK")
-                                    @php
-                                        $i++;
-                                        $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                        $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
-                                        $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
-                                        if ($item['status']==2){
-                                            $status='Baharu';
-                                        }
-                                        if ($item['status']==3){
-                                            $status='Sedang Disaring';
-                                        }
-                                    @endphp
-                                    <tr>
-                                        <td>{{ $i }}</td>
-                                        <td>
-                                            @if($item['status']==4 || $item['status']==5)
-                                                <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
-                                            @else
-                                                <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
-                                            @endif
-                                        </td>
-                                        <td>{{$nama_pemohon}}</td>
-                                        <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                        @if ($item['status']=='2')
-                                            <td class="text-center"><button class="btn bg-orange text-white">{{ucwords(strtolower($status))}}</button></td>
-                                        @elseif ($item['status']=='3')
-                                            <td class="text-center"><button class="btn bg-pink text-white">{{ucwords(strtolower($status))}}</button></td>
-                                        @elseif ($item['status']=='4')
-                                            <td class="text-center"><button class="btn bg-green text-white">{{ucwords(strtolower($status))}}</button></td>
-                                        @elseif ($item['status']=='5')
-                                            <td class="text-center"><button class="btn btn-warning">{{ucwords(strtolower($status))}}</button></td>
-                                        @endif
-                                    </tr>
-                                @endif
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
-    </div>
-    </div>
-
-    </div>
-    </div>
     </div>
     <script>
         $('#sortTable1').DataTable();

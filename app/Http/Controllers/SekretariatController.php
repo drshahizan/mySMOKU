@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\SenaraiPendek;
 use App\Models\Permohonan;
 use App\Models\Saringan;
+use App\Models\Smoku;
 use App\Models\Waris;
 use App\Models\Akademik;
 use App\Mail\mailKeputusan;
@@ -232,9 +233,11 @@ class SekretariatController extends Controller
     }
 
     public function maklumatTuntutanKedua($id){
-        $permohonan = Permohonan::where('nokp_pelajar', $id)->first();
-        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
-        return view('tuntutan.sekretariat.saringan.maklumat_tuntutan',compact('permohonan','pelajar'));
+        $permohonan = Permohonan::where('id', $id)->first();
+        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('tuntutan.sekretariat.saringan.maklumat_tuntutan',compact('permohonan','smoku','akademik'));
     }
 
     public function saringTuntutanKedua(Request $request, $id){
