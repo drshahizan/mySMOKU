@@ -9,6 +9,7 @@ use App\Models\Waris;
 use App\Models\Akademik;
 use App\Mail\mailKeputusan;
 use App\Models\Kelulusan;
+use App\Models\Tuntutan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -33,7 +34,7 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        return view('dashboard.sekretariat.statusBKOKU', compact('permohonan'));
+        return view('dashboard.sekretariat.senarai_permohonan_BKOKU', compact('permohonan'));
     }
 
     public function filterStatusPermohonanBKOKU(Request $request, $status)
@@ -46,7 +47,20 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        return view('dashboard.sekretariat.statusBKOKU', compact('permohonan'));
+        return view('dashboard.sekretariat.senarai_permohonan_BKOKU', compact('permohonan'));
+    }
+
+    public function bilanganTuntutanBKOKU(Request $request)
+    {
+        $tuntutan = Tuntutan::when($request->date != null, function ($q) use ($request) {
+            return $q->whereDate('created_at', $request->date);
+        })
+        ->when($request->status != null, function ($q) use ($request) {
+            return $q->where('status', $request->status);
+        })
+        ->get();
+
+        return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
     }
 
     public function statusPermohonanPPK(Request $request)
@@ -59,7 +73,7 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        return view('dashboard.sekretariat.statusPPK', compact('permohonan'));
+        return view('dashboard.sekretariat.senarai_permohonan_PPK', compact('permohonan'));
     }
 
     public function filterStatusPermohonanPPK(Request $request, $status)
@@ -72,7 +86,20 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        return view('dashboard.sekretariat.statusPPK', compact('permohonan'));
+        return view('dashboard.sekretariat.senarai_permohonan_PPK', compact('permohonan'));
+    }
+
+    public function bilanganTuntutanPPK(Request $request)
+    {
+        $tuntutan = Tuntutan::when($request->date != null, function ($q) use ($request) {
+            return $q->whereDate('created_at', $request->date);
+        })
+        ->when($request->status != null, function ($q) use ($request) {
+            return $q->where('status', $request->status);
+        })
+        ->get();
+
+        return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
     }
 
     public function kelulusanPermohonan()
@@ -116,7 +143,7 @@ class SekretariatController extends Controller
             ]);
 
             $info_mesyuarat = new Kelulusan([
-                'id_permohonan' =>  $id_permohonan,
+                'permohonan_id' =>  $id_permohonan,
                 'no_mesyuarat'  =>  $request->get('noMesyuarat'),
                 'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
                 'keputusan'  =>  $request->get('keputusan'),

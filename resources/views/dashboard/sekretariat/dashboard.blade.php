@@ -100,7 +100,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{url('permohonan/BKOKU')}}">
+													<a href="{{url('sekretariat/permohonan/BKOKU/keseluruhan')}}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -336,7 +336,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{url('permohonan/BKOKU')}}">
+													<a href="{{url('sekretariat/tuntutan/BKOKU/dibayar')}}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -377,7 +377,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{url('permohonan/PPK')}}">
+													<a href="{{url('sekretariat/permohonan/PPK/keseluruhan')}}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -613,7 +613,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{url('permohonan/BKOKU')}}">
+													<a href="{{url('sekretariat/tuntutan/PPK/dibayar')}}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>

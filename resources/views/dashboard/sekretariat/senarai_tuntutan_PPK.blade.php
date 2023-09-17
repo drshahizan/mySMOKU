@@ -23,13 +23,18 @@
 			<!--begin::Item-->
 			<li class="breadcrumb-item text-dark" style="color:darkblue">Laman Utama</li>
 			<!--end::Item-->
-			<!--begin::Item-->
+			
+            <!--begin::Item-->
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Senarai Tuntutan</li>
+			<!--end::Item-->
+            <!--begin::Item-->
 			<li class="breadcrumb-item">
 				<span class="bullet bg-gray-400 w-5px h-2px"></span>
 			</li>
 			<!--end::Item-->
-			<!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">Senarai PPK</li>
+            
+            <!--begin::Item-->
+			<li class="breadcrumb-item text-dark" style="color:darkblue">PPK</li>
 			<!--end::Item-->
 		</ul>
         <!--end::Breadcrumb-->
@@ -87,10 +92,10 @@
                                         </thead>
                                         
                                         <tbody>
-                                            @foreach ($permohonan as $item)
+                                            @foreach ($tuntutan as $item)
                                                 @php
                                                     // nama pemohon
-                                                    $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                                    $nama = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                     $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
                                                     $conjunctions = ['bin', 'binti'];
                                                     $words = explode(' ', $text);
@@ -105,7 +110,7 @@
                                                     $pemohon = implode(' ', $result);
 
                                                     //status permohonan
-                                                    $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                                    $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                 @endphp
 
                                                 @if($item['program']=="PPK")

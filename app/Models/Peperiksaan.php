@@ -17,6 +17,5 @@ class Peperiksaan extends Model
         'cgpa',
         'kepPeperiksaan',
         'nota_kepPeperiksaan',
-
     ];
 }
