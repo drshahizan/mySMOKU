@@ -91,7 +91,7 @@
 								@endphp
 								<tr>
 									<td>{{ $nama_user}}</td>
-									<td>{{ $user->nokp}}</td>
+									<td>{{ $user->no_kp}}</td>
 									<td>{{ $user->email}}</td>
 									<td>{{ $user->name}}</td>
 									<td>{{$user->created_at->format('d/m/Y h:i:sa')}}</td>
@@ -107,7 +107,7 @@
 										<!--begin::Toolbar-->
 										<div class="d-flex">
 											<!--begin::Edit-->
-											<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card{{$user->nokp}}">
+											<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card{{$user->no_kp}}">
 												<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit">
 													<i class="ki-duotone bi bi-pencil fs-3"></i>
 												</span>
@@ -123,7 +123,7 @@
 										
 									</td>
 									<!--begin::Modal - Customers - Edit-->
-										<div class="modal fade" id="kt_modal_new_card{{$user->nokp}}" tabindex="-1" aria-hidden="true">
+										<div class="modal fade" id="kt_modal_new_card{{$user->no_kp}}" tabindex="-1" aria-hidden="true">
 											<!--begin::Modal dialog-->
 											<div class="modal-dialog modal-dialog-centered mw-650px">
 												<!--begin::Modal content-->
@@ -177,7 +177,7 @@
 																	<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
 																	<!--end::Label-->
 																	<!--begin::Input-->
-																	<input type="text" class="form-control form-control-solid" placeholder="" name="nokp" value="{{$user->nokp}}"/>
+																	<input type="text" class="form-control form-control-solid" placeholder="" name="no_kp" value="{{$user->no_kp}}"/>
 																	<!--end::Input-->
 																</div>
 																<!--end::Input group-->
@@ -348,7 +348,7 @@
 										<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
 										<!--end::Label-->
 										<!--begin::Input-->
-										<input type="text" class="form-control form-control-solid" placeholder="" name="nokp" />
+										<input type="text" class="form-control form-control-solid" placeholder="" name="no_kp" />
 										<!--end::Input-->
 									</div>
 									<!--end::Input group-->
@@ -378,7 +378,7 @@
 										<select name="id_institusi" id="id_institusi"  class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
 											@foreach ($infoipt as $infoipt)
 												<option></option>
-												<option value="{{ $infoipt->idipt}}">{{ $infoipt->namaipt}}</option>
+												<option value="{{ $infoipt->id_institusi}}">{{ $infoipt->nama_institusi}}</option>
 											@endforeach
 										</select>
 										<!--end::Input-->
