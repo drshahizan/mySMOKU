@@ -48,7 +48,7 @@
 							$dikembalikanB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','5')->count();
 							$layakB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','6')->count();
 							$tidaklayakB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','7')->count();
-							$dibayarB = DB::table('maklumattuntutan')->join('permohonan', 'permohonan.nokp_pelajar', '=', 'maklumattuntutan.nokp_pelajar')->where('maklumattuntutan.status', '=', 8)->where('permohonan.program','=','BKOKU')->count();
+							$dibayarB = DB::table('tuntutan')->join('permohonan', 'permohonan.smoku_id', '=', 'tuntutan.smoku_id')->where('tuntutan.status', '=', 8)->where('permohonan.program','=','BKOKU')->count();
 						@endphp
 
 						@php
@@ -60,7 +60,7 @@
 							$dikembalikanP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','5')->count();
 							$layakP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','6')->count();
 							$tidaklayakP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','7')->count();
-							$dibayarP = DB::table('maklumattuntutan')->join('permohonan', 'permohonan.nokp_pelajar', '=', 'maklumattuntutan.nokp_pelajar')->where('maklumattuntutan.status', '=', 8)->where('permohonan.program','=','PPK')->count();
+							$dibayarP = DB::table('tuntutan')->join('permohonan', 'permohonan.smoku_id', '=', 'tuntutan.smoku_id')->where('tuntutan.status', '=', 8)->where('permohonan.program','=','PPK')->count();
 						@endphp
 
 						{{-- top nav bar --}}

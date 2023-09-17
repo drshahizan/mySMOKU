@@ -137,7 +137,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Pentadbir
     Route::get('daftarpengguna', [PentadbirController::class, 'daftar'])->name('daftarpengguna');
     Route::post('daftarpengguna', [PentadbirController::class, 'store'])->name('daftarpengguna.post');
-});
+ });
 
 Route::get('/error', function () {
     abort(500);

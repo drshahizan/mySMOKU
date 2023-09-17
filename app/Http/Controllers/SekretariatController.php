@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Exports\SenaraiPendek;
 use App\Models\Permohonan;
 use App\Models\Saringan;
-use App\Models\TuntutanPermohonan;
 use App\Models\Waris;
 use App\Models\Akademik;
 use App\Mail\mailKeputusan;
@@ -21,12 +20,12 @@ class SekretariatController extends Controller
 {
     public function dashboard()
     {
-        return view('pages.sekretariat.dashboard');
+        return view('dashboard.sekretariat.dashboard');
     }
 
     public function statusPermohonanBKOKU(Request $request)
     {
-        $keseluruhan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
+        $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
         ->when($request->status != null, function ($q) use ($request) {
@@ -34,12 +33,12 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        return view('pages.sekretariat.permohonan.statusBKOKU', compact('keseluruhan'));
+        return view('dashboard.sekretariat.statusBKOKU', compact('permohonan'));
     }
 
     public function filterStatusPermohonanBKOKU(Request $request, $status)
     {
-        $keseluruhan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
+        $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
         ->when($status != null, function ($q) use ($status) {
@@ -47,12 +46,12 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        return view('pages.sekretariat.permohonan.statusBKOKU', compact('keseluruhan'));
+        return view('dashboard.sekretariat.statusBKOKU', compact('permohonan'));
     }
 
     public function statusPermohonanPPK(Request $request)
     {
-        $keseluruhan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
+        $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
         ->when($request->status != null, function ($q) use ($request) {
@@ -60,12 +59,12 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        return view('pages.sekretariat.permohonan.statusPPK', compact('keseluruhan'));
+        return view('dashboard.sekretariat.statusPPK', compact('permohonan'));
     }
 
     public function filterStatusPermohonanPPK(Request $request, $status)
     {
-        $keseluruhan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
+        $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
         ->when($status != null, function ($q) use ($status) {
@@ -73,12 +72,12 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        return view('pages.sekretariat.permohonan.statusPPK', compact('keseluruhan'));
+        return view('dashboard.sekretariat.statusPPK', compact('permohonan'));
     }
 
     public function kelulusanPermohonan()
     {
-        $kelulusan = TuntutanPermohonan::where('status', '=','4')->get();
+        $kelulusan = Permohonan::where('status', '=','4')->get();
         return view('pages.sekretariat.permohonan.kelulusan', compact('kelulusan'));
     }
 
@@ -89,7 +88,7 @@ class SekretariatController extends Controller
 
     public function cetakSenaraiPemohonPDF()
     {
-        $kelulusan = TuntutanPermohonan::where('status', '4')->get();
+        $kelulusan = Permohonan::where('status', '4')->get();
 
         $pdf = PDF::loadView('pages.saringan.cetakSenaraiPemohon', compact('kelulusan'))
             ->setPaper('A4', 'landscape');
@@ -99,7 +98,7 @@ class SekretariatController extends Controller
 
     public function lihatKelulusan($id)
     {
-        $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
+        $permohonan = Permohonan::where('nokp_pelajar', $id)->first();
         $id_permohonan = $permohonan->id_permohonan;
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
         $catatan = Saringan::where('id_permohonan', $id_permohonan)->first();
@@ -108,10 +107,10 @@ class SekretariatController extends Controller
 
     public function kemaskiniKelulusan(Request $request,$id)
     {
-        $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id');
+        $id_permohonan = Permohonan::where('nokp_pelajar', $id)->value('id');
 
         if($request->get('keputusan')=="Lulus"){
-            TuntutanPermohonan::where('nokp_pelajar', $id)
+            Permohonan::where('nokp_pelajar', $id)
                 ->update([
                 'status'   =>  6,
             ]);
@@ -126,7 +125,7 @@ class SekretariatController extends Controller
             $info_mesyuarat->save();
         }
         else{
-            TuntutanPermohonan::where('nokp_pelajar', $id)
+            Permohonan::where('nokp_pelajar', $id)
                 ->update([
                 'status'   =>  7,
             ]);
@@ -141,7 +140,7 @@ class SekretariatController extends Controller
             $info_mesyuarat->save();
         }
 
-        $permohonan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
+        $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
         ->when($request->status != null, function ($q) use ($request) {
@@ -149,7 +148,7 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        $id_permohonan2 = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id_permohonan');
+        $id_permohonan2 = Permohonan::where('nokp_pelajar', $id)->value('id_permohonan');
 
         $notifikasi = "Emel notifikasi telah dihantar kepada ".$id_permohonan2;
         $message = 'Test message';
@@ -159,7 +158,7 @@ class SekretariatController extends Controller
 
     public function keputusanPermohonan(Request $request)
     {
-        $permohonan = TuntutanPermohonan::when($request->date != null, function ($q) use ($request) {
+        $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
         ->when($request->status != null, function ($q) use ($request) {
@@ -193,7 +192,7 @@ class SekretariatController extends Controller
     //TUNTUTAN
     public function senaraiTuntutanKedua()
     {
-        $permohonan = TuntutanPermohonan::where('status', '2')
+        $permohonan = Permohonan::where('status', '2')
         ->orWhere('status', '=','3')
         ->get();
         $status_kod=0;
@@ -206,14 +205,14 @@ class SekretariatController extends Controller
     }
 
     public function maklumatTuntutanKedua($id){
-        $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
+        $permohonan = Permohonan::where('nokp_pelajar', $id)->first();
         $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
         return view('tuntutan.sekretariat.saringan.maklumat_tuntutan',compact('permohonan','pelajar'));
     }
 
     public function saringTuntutanKedua(Request $request, $id){
-        $id_permohonan = TuntutanPermohonan::where('id', $id)->value('id_permohonan');
-        $permohonan = TuntutanPermohonan::where('status', '2')
+        $id_permohonan = Permohonan::where('id', $id)->value('id_permohonan');
+        $permohonan = Permohonan::where('status', '2')
         ->orWhere('status', '=','3')
         ->orWhere('status', '=','4')
         ->orWhere('status', '=','5')
@@ -238,7 +237,7 @@ class SekretariatController extends Controller
 
     public function keputusanTuntutan()
     {
-        $permohonan = TuntutanPermohonan::where('status', '=','5')
+        $permohonan = Permohonan::where('status', '=','5')
         ->orWhere('status', '=','6')
         ->orWhere('status', '=','7')
         ->get();
@@ -246,7 +245,7 @@ class SekretariatController extends Controller
     }
 
     public function sejarahTuntutan(){
-        $permohonan = TuntutanPermohonan::where('status', '!=','4')->get();
+        $permohonan = Permohonan::where('status', '!=','4')->get();
         return view('tuntutan.sekretariat.sejarah.sejarah_tuntutan',compact('permohonan'));
     }
 }

@@ -29,7 +29,7 @@
 			</li>
 			<!--end::Item-->
 			<!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">Senarai</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Senarai PPK</li>
 			<!--end::Item-->
 		</ul>
         <!--end::Breadcrumb-->
@@ -87,14 +87,10 @@
                                         </thead>
                                         
                                         <tbody>
-                                            @foreach ($keseluruhan as $item)
+                                            @foreach ($permohonan as $item)
                                                 @php
-                                                    $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
-                                                    $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
-                                                    $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                    $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
-
                                                     // nama pemohon
+                                                    $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
                                                     $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
                                                     $conjunctions = ['bin', 'binti'];
                                                     $words = explode(' ', $text);
@@ -107,11 +103,14 @@
                                                         }
                                                     }
                                                     $pemohon = implode(' ', $result);
+
+                                                    //status permohonan
+                                                    $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
                                                 @endphp
 
                                                 @if($item['program']=="PPK")
                                                     <tr>
-                                                        <td>{{$id_permohonan}}</td>
+                                                        <td>{{$item->no_rujukan_permohonan}}</td>
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                         @if($item['status'] == "1")
@@ -161,34 +160,5 @@
                 event.relatedTarget // previous active tab
             })
         </script>
-        
-        <!-- Vedor js file and create bundle with grunt  --> 
-        <script src="assets/bundles/flotscripts.bundle.js"></script><!-- flot charts Plugin Js -->
-        <script src="assets/bundles/c3.bundle.js"></script>
-        <script src="assets/bundles/apexcharts.bundle.js"></script>
-        <script src="assets/bundles/jvectormap.bundle.js"></script>
-        <script src="assets/vendor/toastr/toastr.js"></script>
-        
-        <!-- Project core js file minify with grunt --> 
-        <script src="assets/bundles/mainscripts.bundle.js"></script>
-        <script src="../js/index.js"></script>
-        
-        <!-- Vedor js file and create bundle with grunt  --> 
-        <script src="assets/bundles/morrisscripts.bundle.js"></script><!-- Morris Plugin Js -->
-        
-        <!-- Vedor js file and create bundle with grunt  -->    
-        <script src="assets/bundles/datatablescripts.bundle.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.html5.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.print.min.js"></script>
-        <script src="assets/vendor/sweetalert/sweetalert.min.js"></script>
-
-        <!-- SweetAlert Plugin Js --> 
-        <script src="../js/pages/forms/form-wizard.js"></script>
-        <script src="../js/pages/tables/jquery-datatable.js"></script>
-        <script src="../js/pages/charts/morris.js"></script>
-        <script src="../js/pages/charts/c3.js"></script>
 </x-default-layout> 
 
