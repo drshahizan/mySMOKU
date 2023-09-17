@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Cetak Senarai Pemohon</title>
+    <title>Senarai Permohonan Disokong</title>
     <link rel="stylesheet" href="assets/css/style.bundle.css">
     <link rel="stylesheet" href="assets/css/saringan.css">
     <style>
@@ -88,7 +88,6 @@
                     <th style="width: 12%"><b>ID Permohonan</b></th>
                     <th style="width: 20%"><b>Nama</b></th>
                     <th style="width: 10%"><b>Jenis Kecacatan</b></th>                                        
-                    {{-- <th style="width: 10%"><b>Peringkat Pengajian </b></th> --}}
                     <th style="width: 20%"><b>Nama Kursus</b></th>
                     <th style="width: 15%"><b>Institusi Pengajian</b></th>
                     <th style="width: 10%"><b>Tarikh Mula Pengajian</b></th>

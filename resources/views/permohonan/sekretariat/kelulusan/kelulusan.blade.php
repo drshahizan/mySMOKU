@@ -55,8 +55,8 @@
                             <div class="header">
                                 <h2>Senarai Permohonan untuk Kelulusan JKKBKOKU<br><small>Klik ID Permohonan untuk meluluskan permohonan</small></h2>
                                 <ul class="header-dropdown dropdown" style="color: black;">
-                                    <li><a href="{{ url('cetak-senarai-pemohon') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> PDF</a></li>
-                                    <li><a href="{{ url('senarai-disokong-excel') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-excel" style="color: black;"></i> Excel</a></li>
+                                    <li><a href="{{ route('senarai.disokong.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> PDF</a></li>
+                                    <li><a href="{{ route('senarai.disokong.excel') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-excel" style="color: black;"></i> Excel</a></li>
                                 </ul>
                             </div>
 

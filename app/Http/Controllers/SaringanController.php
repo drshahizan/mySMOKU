@@ -177,7 +177,7 @@ class SaringanController extends Controller
     }
 
     public function paparPermohonan($id){
-        $permohonan = ermohonan::where('id', $id)->first();
+        $permohonan = Permohonan::where('id', $id)->first();
         $smoku_id = $permohonan->smoku_id;
         $pelajar = ButiranPelajar::where('smoku_id', $smoku_id)->first();
         $smoku = Smoku::where('id', $smoku_id)->first();

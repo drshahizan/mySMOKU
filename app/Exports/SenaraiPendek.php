@@ -21,11 +21,11 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
     {
         $senarai_pendek = DB::table('permohonan as a')
         ->where('a.status', 4)
-        ->select('a.id_permohonan', 'd.nama_pelajar', 'b.no_pendaftaranpelajar', 'e.kecacatan', 'b.nama_kursus', 'c.namaipt', 'b.tkh_mula', 'b.tkh_tamat')
-        ->join('maklumatakademik as b', 'b.nokp_pelajar', '=', 'a.nokp_pelajar')
-        ->join('bk_infoipt as c', 'c.idipt', '=', 'b.id_institusi')
-        ->join('pelajar as d', 'd.nokp_pelajar', '=', 'a.nokp_pelajar')
-        ->join('bk_jenisoku as e', 'e.kodoku', '=', 'd.kecacatan')
+        ->select('a.no_rujukan_permohonan', 'd.nama', 'b.no_pendaftaran_pelajar', 'e.kecacatan', 'b.nama_kursus', 'c.nama_institusi', 'b.tarikh_mula', 'b.tarikh_tamat')
+        ->join('smoku_akademik as b', 'b.smoku_id', '=', 'a.smoku_id')
+        ->join('bk_info_institusi as c', 'c.id_institusi', '=', 'b.id_institusi')
+        ->join('smoku as d', 'd.id', '=', 'a.smoku_id')
+        ->join('bk_jenis_oku as e', 'e.kod_oku', '=', 'd.kategori')
         ->get();
 
         return collect($senarai_pendek);
