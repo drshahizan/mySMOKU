@@ -11,17 +11,18 @@
 </head>
 <body>
     @php
-        $peringkat_pengajian = DB::table('bk_peringkatpengajian')->where('kodperingkat', $akademik->peringkat_pengajian)->value('peringkat');
-        $id_institusi = DB::table('bk_infoipt')->where('idipt', $akademik->id_institusi)->value('namaipt');
-        $mod = DB::table('bk_mod')->where('kodmod', $akademik->mod)->value('mod');
-        $sumber_biaya = DB::table('bk_sumberbiaya')->where('kodbiaya', $akademik->sumber_biaya)->value('biaya');
+        $peringkat_pengajian = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
+        $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
+        $mod = DB::table('bk_mod')->where('kod_mod', $akademik->mod)->value('mod');
+        $sumber_biaya = DB::table('bk_sumber_biaya')->where('kod_biaya', $akademik->sumber_biaya)->value('biaya');
+        $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja)->value('penaja');
     @endphp
     <table class="profile-form">
         <tr>
             <td class="text-center" colspan="3">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/JATA_NEGARA_MALAYSIA.png/776px-JATA_NEGARA_MALAYSIA.png?18218224030856" alt="jata-negara-malaysia">
                 <br><b class="title"> MAKLUMAT AKADEMIK</b>
-                <p><b class="description"> BANTUAN KEWANGAN ORANG KURANG UPAYA <br> (BKOKU)</b> </p> 
+                <p><b class="description"> BANTUAN KEWANGAN ORANG KURANG UPAYA <br> (BKOKU)</b> </p>
                 <br><br>
             </td>
         </tr>
@@ -32,7 +33,7 @@
             <tr class="gap-left">
                 <td style="width: 16%" class="gap-top">No Pendaftaran Pelajar</td>
                 <td style="width: 2%" class="gap-top">:</td>
-                <td class="gap-top">{{$akademik->no_pendaftaranpelajar}}</td>
+                <td class="gap-top">{{$akademik->no_pendaftaran_pelajar}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Nama Kursus</td>
@@ -47,17 +48,17 @@
             <tr class="gap-left">
                 <td style="width: 16%">Nama Pusat Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>{{$id_institusi}}</td>
+                <td>{{$nama_institusi}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Tarikh Mula Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>{{date('d/m/Y', strtotime($akademik->tkh_mula))}}</td>
+                <td>{{date('d/m/Y', strtotime($akademik->tarikh_mula))}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Tarikh Tamat Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>{{date('d/m/Y', strtotime($akademik->tkh_tamat))}}</td>
+                <td>{{date('d/m/Y', strtotime($akademik->tarikh_tamat))}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Semester Semasa</td>
@@ -72,7 +73,7 @@
             <tr class="gap-left">
                 <td style="width: 16%">Bil Bulan Persemester</td>
                 <td style="width: 2%">:</td>
-                <td>{{$akademik->bil_bulanpersem}}</td>
+                <td>{{$akademik->bil_bulan_per_sem}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Mod Pengajian</td>
@@ -87,7 +88,7 @@
             <tr class="gap-left">
                 <td class="gap-bottom" style="width: 16%">Nama Penaja</td>
                 <td class="gap-bottom" style="width: 2%">:</td>
-                <td class="gap-bottom">{{$akademik->nama_penaja}}</td>
+                <td class="gap-bottom">{{$nama_penaja}}</td>
             </tr>
         </div>
         </tr>

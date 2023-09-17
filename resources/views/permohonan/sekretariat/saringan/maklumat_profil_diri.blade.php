@@ -11,16 +11,16 @@
 </head>
 <body>
     @php
-        $jantina_p = DB::table('bk_jantina')->where('kodjantina', $pelajar->jantina)->value('jantina');
-        $bangsa_p = DB::table('bk_bangsa')->where('kodbangsa', $pelajar->bangsa)->value('bangsa');
-        $hubungan_w = DB::table('bk_hubungan')->where('kodhubungan', $waris->hubungan)->value('hubungan');
+        $jantina_p = DB::table('bk_jantina')->where('kod_jantina', $smoku->jantina)->value('jantina');
+        $keturunan_p = DB::table('bk_keturunan')->where('kod_keturunan', $smoku->keturunan)->value('keturunan');
+        $hubungan_w = DB::table('bk_hubungan')->where('kod_hubungan', $waris->hubungan_waris)->value('hubungan');
     @endphp
     <table class="profile-form">
         <tr>
             <td class="text-center" colspan="3">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/JATA_NEGARA_MALAYSIA.png/776px-JATA_NEGARA_MALAYSIA.png?18218224030856" alt="jata-negara-malaysia">
                 <br><b class="title"> MAKLUMAT PROFIL DIRI</b>
-                <p><b class="description"> BANTUAN KEWANGAN ORANG KURANG UPAYA <br> (BKOKU)</b> </p> 
+                <p><b class="description"> BANTUAN KEWANGAN ORANG KURANG UPAYA <br> (BKOKU)</b> </p>
                 <br><br>
             </td>
         </tr>
@@ -31,22 +31,22 @@
             <tr class="gap-left">
                 <td style="width: 16%" class="gap-top">Nama</td>
                 <td style="width: 2%" class="gap-top">:</td>
-                <td class="gap-top">{{$pelajar->nama_pelajar}}</td>
+                <td class="gap-top">{{$smoku->nama}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">No. Kad Pengenalan</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pelajar->nokp_pelajar}}</td>
+                <td>{{$smoku->no_kp}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Tarikh Lahir</td>
                 <td style="width: 2%">:</td>
-                <td>{{date('d/m/Y', strtotime($pelajar->tkh_lahir))}}</td>
+                <td>{{date('d/m/Y', strtotime($smoku->tarikh_lahir))}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Umur</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pelajar->umur}}</td>
+                <td>{{$smoku->umur}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Jantina</td>
@@ -54,59 +54,49 @@
                 <td>{{$jantina_p}}</td>
             </tr>
             <tr class="gap-left">
-                <td>No. JKM</td>
+                <td>No. Daftar OKU</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pelajar->noJKM}}</td>
+                <td>{{$smoku->no_daftar_oku}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Kecacatan</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pelajar->kecacatan}}</td>
+                <td>{{$smoku->kategori}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Bangsa</td>
                 <td style="width: 2%">:</td>
-                <td>{{$bangsa_p}}</td>
+                <td>{{$keturunan_p}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 16%">Alamat Rumah</td>
+                <td style="width: 16%">Alamat Tetap</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pelajar->alamat1}}</td>
+                <td>{{$smoku->alamat_tetap}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 16%">Poskod</td>
+                <td style="width: 16%">Alamat Surat-menyurat</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pelajar->alamat_poskod}}</td>
+                <td>{{$smoku->alamat_surat_menyurat}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 16%">Bandar</td>
+                <td style="width: 16%">No. Tel (HP)</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pelajar->alamat_bandar}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">Negeri</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pelajar->alamat_negeri}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">No. Tel(HP)</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pelajar->no_tel}}</td>
+                <td>{{$smoku->tel_bimbit}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">No. Tel Rumah</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pelajar->no_telR}}</td>
+                <td>{{$smoku->tel_rumah}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Alamat Emel</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pelajar->emel}}</td>
+                <td>{{$smoku->email}}</td>
             </tr>
             <tr class="gap-left">
                 <td class="gap-bottom" style="width: 16%">No. Akaun Bank</td>
                 <td class="gap-bottom" style="width: 2%">:</td>
-                <td class="gap-bottom">{{$pelajar->no_akaunbank}}</td>
+                <td class="gap-bottom">{{$pelajar->no_akaun_bank}}</td>
             </tr>
         </div>
         <tr>
@@ -121,12 +111,12 @@
         <tr class="gap-left">
             <td style="width: 16%">No. Kad Pengenalan</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->nokp_waris}}</td>
+            <td>{{$waris->no_kp_waris}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">No Pasport</td>
             <td style="width: 2%">:</td>
-            <td>-</td>
+            <td>{{$waris->no_pasport_waris}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Hubungan Waris</td>
@@ -136,37 +126,37 @@
         <tr class="gap-left">
             <td style="width: 16%">Alamat Rumah</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->alamat1}}1</td>
+            <td>{{$waris->alamat_waris}}1</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Poskod</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->alamat_poskod}}</td>
+            <td>{{$waris->alamat_poskod_waris}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Bandar</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->alamat_bandar}}</td>
+            <td>{{$waris->alamat_bandar_waris}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Negeri</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->alamat_negeri}}</td>
+            <td>{{$waris->alamat_negeri_waris}}</td>
         </tr>
         <tr class="gap-left">
-            <td style="width: 16%">No. Tel(HP)</td>
+            <td style="width: 16%">No. Tel (HP)</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->no_tel}}</td>
+            <td>{{$waris->tel_bimbit_waris}}</td>
         </tr>
         <tr class="gap-left">
-            <td style="width: 16%">No. Tel Rumah</td>
+            <td style="width: 16%">Pekerjaan</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->no_telR}}</td>
+            <td>{{$waris->pekerjaan_waris}}</td>
         </tr>
         <tr class="gap-left">
-            <td class="gap-bottom" style="width: 16%">Pendapatan</td>
+            <td class="gap-bottom" style="width: 16%">Pendapatan Bulanan (RM)</td>
             <td class="gap-bottom" style="width: 2%">:</td>
-            <td class="gap-bottom">{{$waris->pendapatan}}</td>
+            <td class="gap-bottom">{{$waris->pendapatan_waris}}</td>
         </tr>
         </tr>
             <td class="header-part" colspan="3">C. PERAKUAN</td>

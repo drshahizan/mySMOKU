@@ -121,7 +121,7 @@
                                     </table>
                                 </div>
                                 <br>
-                            <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$smoku->no_kp) }}" id="saring">
+                            <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$smoku->id) }}" id="saring">
                                 {{csrf_field()}}
                             <div class="row clearfix">
                                 <div class="col-md-12">
@@ -139,7 +139,7 @@
                                                 <tr>
                                                     <td style="text-align:right;">1</td>
                                                     <td>
-                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$smoku->no_kp) }}" target="_blank">Maklumat Profil Diri</a></span>
+                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$permohonan->id) }}" target="_blank">Maklumat Profil Diri</a></span>
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <div class="form-group c_form_group">
@@ -161,7 +161,7 @@
                                                 <tr>
                                                     <td style="text-align:right;">2</td>
                                                     <td>
-                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$smoku->no_kp) }}" target="_blank">Maklumat Akademik</a></span>
+                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$permohonan->id) }}" target="_blank">Maklumat Akademik</a></span>
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <div class="form-group c_form_group">

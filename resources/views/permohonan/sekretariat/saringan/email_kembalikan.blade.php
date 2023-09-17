@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>BKOUKU: Permohonan Dikembalikan</title>
+    <title>BKOKU: Permohonan Dikembalikan</title>
 </head>
 <body>
     <h3>BKOKU: PERMOHONAN DIKEMBALIKAN</h3>
@@ -9,7 +9,7 @@
     <p>Dukacita dimaklumkan bahawa permohonan anda dikembalikan semula atas alasan yang dinyatakan di bawah:</p>
     @for ($i = 0; $i < count($catatan); $i++)
         {{$i+1}}. {{$catatan[$i]}}. <br>
-    @endfor   
+    @endfor
 
     <br>
     <p>Sekian, Terima Kasih</p>
