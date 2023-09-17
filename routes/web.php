@@ -90,8 +90,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('permohonan/keputusan', [SekretariatController::class, 'keputusanPermohonan']);
 
     //Permohonan - Sekretariat - Sejarah
-    Route::get('permohonan/sekretariat/sejarah/senarai-permohonan', [SaringanController::class, 'sejarahPermohonan']);
-   
+    Route::get('permohonan/sekretariat/sejarah/sejarah-permohonan', [SaringanController::class, 'sejarahPermohonan']);
+
     //Tuntutan - Sekretariat - Saringan
     Route::get('tuntutan/sekretariat/saringan/senarai_tuntutan', [SekretariatController::class, 'senaraiTuntutanKedua']);
     Route::get('tuntutan/sekretariat/saringan/keputusan-peperiksaan', [SekretariatController::class, 'keputusanPeperiksaan']);
@@ -121,18 +121,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     //Tuntutan - Penyelaras - Wang Saku
-    Route::get('tuntutan/sekretariat/wang-saku/senarai-tuntutan', [PenyelarasController::class, 'tuntutanWangSaku']);
-    Route::get('tuntutan/sekretariat/wang-saku/maklumat-tuntutan', [PenyelarasController::class, 'maklumatTuntutanWangSaku']);
+    Route::get('tuntutan/penyelaras/wang-saku/senarai-tuntutan', [PenyelarasController::class, 'tuntutanWangSaku']);
+    Route::get('tuntutan/penyelaras/wang-saku/maklumat-tuntutan', [PenyelarasController::class, 'maklumatTuntutanWangSaku']);
 
     //Tuntutan - Penyelaras - Yuran Dan Wang Saku
-    Route::get('tuntutan/sekretariat/yuran-dan-wang-saku/senarai-tuntutan', [PenyelarasController::class, 'tuntutanYuranPengajian']);
-    Route::get('tuntutan/sekretariat/yuran-dan-wang-saku/maklumat-tuntutan', [PenyelarasController::class, 'maklumatTuntutanYuranPengajian']);
+    Route::get('tuntutan/penyelaras/yuran-dan-wang-saku/senarai-tuntutan', [PenyelarasController::class, 'tuntutanYuranPengajian']);
+    Route::get('tuntutan/penyelaras/yuran-dan-wang-saku/maklumat-tuntutan', [PenyelarasController::class, 'maklumatTuntutanYuranPengajian']);
 
     //Tuntutan - Penyelaras - Kemaskini
-    Route::get('tuntutan/sekretariat/kemaskini/kemaskini-tuntutan', [PenyelarasController::class, 'kemaskiniTuntutan']);
+    Route::get('tuntutan/penyelaras/kemaskini/kemaskini-tuntutan', [PenyelarasController::class, 'kemaskiniTuntutan']);
 
     //Tuntutan - Penyelaras - Sejarah
-    Route::get('tuntutan/sekretariat/sejarah/sejarah-tuntutan', [PenyelarasController::class, 'sejarahTuntutan']);
+    Route::get('tuntutan/penyelaras/sejarah/sejarah-tuntutan', [PenyelarasController::class, 'sejarahTuntutan']);
 
     //Tuntutan Pelajar
     Route::get('borangTuntutanYuran',[TuntutanController::class,'borangtuntutanyuran'])->name('borangTuntutanYuran');
