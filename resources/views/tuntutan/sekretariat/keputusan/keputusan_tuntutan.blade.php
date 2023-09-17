@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="assets/css/saringan.css">
+        <link rel="stylesheet" href="/assets/css/saringan.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -128,11 +128,9 @@
                                                     @foreach ($permohonan as $item)
                                                     @if($item['program']=="BKOKU")
                                                         @php
-                                                            $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
-                                                            $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
-                                                            $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                            $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
-                                                            $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
+                                                            $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                            $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+                                                            $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
                                                             $conjunctions = ['bin', 'binti'];
                                                             $words = explode(' ', $text);
                                                             $result = [];
@@ -146,7 +144,7 @@
                                                             $pemohon = implode(' ', $result);
                                                         @endphp
                                                         <tr>
-                                                            <td>{{$id_permohonan}}</td>
+                                                            <td>{{$item['no_rujukan_permohonan']}}</td>
                                                             <td>{{$pemohon}}</td>
                                                             <td class="text-center">{{$item['created_at']->format('Y-m-d')}}</td>
                                                             @if($item['status'] == "6")
@@ -199,11 +197,9 @@
                                                     @foreach ($permohonan as $item)
                                                     @if($item['program']=="PPK")
                                                         @php
-                                                            $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
-                                                            $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
-                                                            $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                            $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
-                                                            $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
+                                                            $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                            $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+                                                            $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
                                                             $conjunctions = ['bin', 'binti'];
                                                             $words = explode(' ', $text);
                                                             $result = [];
@@ -217,7 +213,7 @@
                                                             $pemohon = implode(' ', $result);
                                                         @endphp
                                                         <tr>
-                                                            <td>{{$id_permohonan}}</td>
+                                                            <td>{{$item['no_rujukan_permohonan']}}</td>
                                                             <td>{{$pemohon}}</td>
                                                             <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                             @if($item['status'] == "6")
