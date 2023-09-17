@@ -105,14 +105,16 @@
                 @foreach ($kelulusan as $item)
                         @php
                             $i++;
-                            $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                            $nama_kursus = DB::table('smoku_akademik')->where('id', $item['smoku_id'])->value('nama_kursus');
+                            $pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                            $kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
                             $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                            $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori' )->where('id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan'); //PH,SD
-                            $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                            $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
+                            $institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                            $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
+                            $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
                             
                             // nama pemohon
-                            $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                            $text = ucwords(strtolower($pemohon)); // Assuming you're sending the text as a POST parameter
                             $conjunctions = ['bin', 'binti'];
                             $words = explode(' ', $text);
                             $result = [];
@@ -123,10 +125,10 @@
                                     $result[] = $word;
                                 }
                             }
-                            $pemohon = implode(' ', $result);
+                            $nama_pemohon = implode(' ', $result);
 
                             //nama kursus
-                            $text2 = ucwords(strtolower($nama_kursus)); // Assuming you're sending the text as a POST parameter
+                            $text2 = ucwords(strtolower($kursus)); // Assuming you're sending the text as a POST parameter
                             $conjunctions = ['of', 'in', 'and'];
                             $words = explode(' ', $text2);
                             $result = [];
@@ -137,11 +139,11 @@
                                     $result[] = $word;
                                 }
                             }
-                            $kursus = implode(' ', $result);
-                            $namakursus = transformBracketsToCapital($kursus);
+                            $namaKursus = implode(' ', $result);
+                            $nama_kursus = transformBracketsToCapital($namaKursus);
 
                             //institusi pengajian
-                            $text3 = ucwords(strtolower($institusi_pengajian)); // Assuming you're sending the text as a POST parameter
+                            $text3 = ucwords(strtolower($institusi)); // Assuming you're sending the text as a POST parameter
                             $conjunctions = ['of', 'in', 'and'];
                             $words = explode(' ', $text3);
                             $result = [];
@@ -152,19 +154,19 @@
                                     $result[] = $word;
                                 }
                             }
-                            $institusi = implode(' ', $result);
-                            $institusipengajian = transformBracketsToUppercase($institusi);
+                            $institusiPengajian = implode(' ', $result);
+                            $institusi_pengajian = transformBracketsToUppercase($institusiPengajian);
                         @endphp
                         
                         <tr>
                             <td class="text-center">{{$i}}</td>                                           
-                            <td><a href="{{ url('kemaskini/kelulusan/'. $nokp) }}" target="_blank">{{$item['id_permohonan']}}</a></td>
-                            <td>{{$pemohon}}</td>
+                            <td><a href="{{ url('kemaskini/kelulusan/'. $nokp) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                            <td>{{$nama_pemohon}}</td>
                             <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                            <td>{{$namakursus}}</td>
-                            <td>{{$institusipengajian}}</td>
-                            <td class="text-center">{{date('d/m/Y', strtotime($item['tkh_mula']))}}</td>
-                            <td class="text-center">{{date('d/m/Y', strtotime($item['tkh_tamat']))}}</td>
+                            <td>{{$nama_kursus}}</td>
+                            <td>{{$institusi_pengajian}}</td>
+                            <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                            <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                         </tr>
                 @endforeach 
             </tbody>
