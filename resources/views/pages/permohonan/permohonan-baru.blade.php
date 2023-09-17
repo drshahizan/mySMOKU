@@ -11,7 +11,6 @@
 			font-size: 22px;
 		}
 	</style>
-	
 	<script>
 	$(document).ready(function(){
 		$('[data-bs-toggle="tooltip"]').tooltip();
