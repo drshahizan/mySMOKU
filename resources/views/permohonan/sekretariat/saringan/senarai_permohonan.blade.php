@@ -106,9 +106,9 @@
                                                 @if ($item['program']=="BKOKU")
                                                 @php
                                                     $i++;
-                                                    $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                    $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
-                                                    $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                                    $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                    $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                                                    $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                     if ($item['status']==2){
                                                         $status='Baharu';
                                                     }
@@ -131,9 +131,9 @@
                                                 <tr>
                                                     <td>
                                                         @if($item['status']==4 || $item['status']==5)
-                                                            <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
+                                                            <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['smoku_id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                         @else
-                                                            <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
+                                                            <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['smoku_id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                         @endif
                                                     </td>
                                                     <td>{{$pemohon}}</td>
@@ -177,9 +177,8 @@
                                                     @if ($item['program']=="PPK")
                                                     @php
                                                         $i++;
-                                                        $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                        $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
-                                                        $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                                        $$nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                        $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
                                                             $status='Baharu';
                                                         }
@@ -202,9 +201,9 @@
                                                     <tr>
                                                         <td>
                                                             @if($item['status']==4 || $item['status']==5)
-                                                                <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
+                                                                <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['smoku_id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                             @else
-                                                                <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
+                                                                <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['smoku_id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                             @endif
                                                         </td>
                                                         <td>{{$pemohon}}</td>
@@ -268,9 +267,9 @@
                                                 <td>{{ $i }}</td>
                                                 <td>
                                                     @if($item['status']==4 || $item['status']==5)
-                                                        <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
+                                                        <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['smoku_id']) }}" title="">{{$item['id_permohonan']}}</a>
                                                     @else
-                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $nokp) }}" title="">{{$item['id_permohonan']}}</a>
+                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['smoku_id']) }}" title="">{{$item['id_permohonan']}}</a>
                                                     @endif
                                                 </td>
                                                 <td>{{$nama_pemohon}}</td>

@@ -80,9 +80,8 @@
                                 <div class="col-md-6 col-sm-6">
                                     <br>
                                     @php
-                                        $akademik = DB::table('maklumatakademik')->where('nokp_pelajar', $pelajar->nokp_pelajar)->first();
                                         // nama pemohon
-                                        $text = ucwords(strtolower($pelajar->nama_pelajar)); // Assuming you're sending the text as a POST parameter
+                                        $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
                                         $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
                                         $words = explode(' ', $text);
                                         $result = [];
@@ -99,7 +98,7 @@
                                         <tr>
                                             <td><strong>ID Permohonan</strong></td>
                                             <td>:</td>
-                                            <td>{{$permohonan->id_permohonan}}</td>
+                                            <td>{{$permohonan->no_rujukan_permohonan}}</td>
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Tarikh Permohonan</strong></td>
                                             <td>:</td>
@@ -117,12 +116,12 @@
                                         <tr>
                                             <td><strong>No. Kad Pengenalan</strong></td>
                                             <td>:</td>
-                                            <td>{{$pelajar->nokp_pelajar}}</td>
+                                            <td>{{$smoku->no_kp}}</td>
                                         </tr>
                                     </table>
                                 </div>
                                 <br>
-                            <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$pelajar->nokp_pelajar) }}" id="saring">
+                            <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$smoku->no_kp) }}" id="saring">
                                 {{csrf_field()}}
                             <div class="row clearfix">
                                 <div class="col-md-12">
@@ -140,7 +139,7 @@
                                                 <tr>
                                                     <td style="text-align:right;">1</td>
                                                     <td>
-                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Profil Diri</a></span>
+                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$smoku->no_kp) }}" target="_blank">Maklumat Profil Diri</a></span>
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <div class="form-group c_form_group">
@@ -162,7 +161,7 @@
                                                 <tr>
                                                     <td style="text-align:right;">2</td>
                                                     <td>
-                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$pelajar->nokp_pelajar) }}" target="_blank">Maklumat Akademik</a></span>
+                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$smoku->no_kp) }}" target="_blank">Maklumat Akademik</a></span>
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         <div class="form-group c_form_group">

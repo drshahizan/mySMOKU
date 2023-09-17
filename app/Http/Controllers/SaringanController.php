@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 use App\Mail\SaringanMail;
 use App\Models\Akademik;
+use App\Models\ButiranPelajar;
 use App\Models\Permohonan;
 use App\Models\Saringan;
+use App\Models\SejarahPermohonan;
+use App\Models\Smoku;
 use App\Models\Status;
-use App\Models\TuntutanPermohonan;
 use App\Models\Waris;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -17,7 +19,7 @@ class SaringanController extends Controller
 {
     public function senaraiPermohonan()
     {
-        $permohonan = TuntutanPermohonan::where('status', '2')
+        $permohonan = Permohonan::where('status', '2')
         ->orWhere('status', '=','3')
         ->orWhere('status', '=','4')
         ->orWhere('status', '=','5')
@@ -29,23 +31,25 @@ class SaringanController extends Controller
 
     public function maklumatPermohonan($id)
     {
-        TuntutanPermohonan::where('nokp_pelajar', $id)
+        Permohonan::where('id', $id)
             ->update([
             'status'   =>  3,
         ]);
 
-        $id_permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->value('id_permohonan');
+        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
 
-        $status_trans = new Status([
-            'nokp_pelajar'  =>  $id,
-            'id_permohonan' =>  $id_permohonan,
+        $status_rekod = new SejarahPermohonan([
+            'smoku_id'      =>  $smoku_id,
+            'permohonan_id' =>  $id,
             'status'        =>  3,
         ]);
-        $status_trans->save();
+        $status_rekod->save();
 
-        $permohonan = TuntutanPermohonan::where('nokp_pelajar', $id)->first();
-        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
-        return view('permohonan.sekretariat.saringan.maklumat_permohonan',compact('permohonan','pelajar'));
+        $permohonan = Permohonan::where('id', $id)->first();
+        $pelajar = ButiranPelajar::where('smoku_id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        return view('permohonan.sekretariat.saringan.maklumat_permohonan',compact('permohonan','pelajar','akademik','smoku'));
     }
 
     public function maklumatProfilDiri($id)
