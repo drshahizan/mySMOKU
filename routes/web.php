@@ -69,24 +69,29 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('permohonan/sekretariat/saringan/papar-permohonan/{id}', [SaringanController::class, 'paparPermohonan'])->name('papar.permohonan.id');
     Route::get('permohonan/sekretariat/saringan/papar-tuntutan/{id}', [SaringanController::class, 'paparTuntutan'])->name('papar.tuntutan.id');
 
-    //Permohonan - Sekretariat - Sejarah
-    Route::get('permohonan/sekretariat/sejarah/senarai-permohonan', [SaringanController::class, 'sejarahPermohonan']);
-
-    //Permohonan - Sekretariat
+    //Permohonan - Sekretariat - Dashboard
     Route::get('dashboard/sekretariat', [SekretariatController::class, 'dashboard']);
-    Route::get('permohonan/BKOKU', [SekretariatController::class, 'statusPermohonanBKOKU']);
-    Route::get('/BKOKU/status/{status}', [SekretariatController::class, 'filterStatusPermohonanBKOKU'])->name('statusB.permohonan');
-    Route::get('permohonan/PPK', [SekretariatController::class, 'statusPermohonanPPK']);
-    Route::get('/PPK/status/{status}', [SekretariatController::class, 'filterStatusPermohonanPPK'])->name('statusP.permohonan');
+    Route::get('sekretariat/permohonan/BKOKU/keseluruhan', [SekretariatController::class, 'statusPermohonanBKOKU']);
+    Route::get('sekretariat/permohonan/BKOKU/status/{status}', [SekretariatController::class, 'filterStatusPermohonanBKOKU'])->name('statusB.permohonan');
+    Route::get('sekretariat/tuntutan/BKOKU/dibayar', [SekretariatController::class, 'bilanganTuntutanBKOKU']);
+    Route::get('sekretariat/permohonan/PPK/keseluruhan', [SekretariatController::class, 'statusPermohonanPPK']);
+    Route::get('sekretariat/permohonan/PPK/status/{status}', [SekretariatController::class, 'filterStatusPermohonanPPK'])->name('statusP.permohonan');
+    Route::get('sekretariat/tuntutan/PPK/dibayar', [SekretariatController::class, 'bilanganTuntutanPPK']);
+
+    //Permohonan - Sekretariat - Kelulusan
     Route::get('permohonan/kelulusan', [SekretariatController::class, 'kelulusanPermohonan']);
     Route::get('kemaskini/kelulusan/{no_kp}', [SekretariatController::class, 'lihatKelulusan']);
     Route::post('keputusan/{no_kp}', [SekretariatController::class, 'kemaskiniKelulusan']);
-    Route::get('permohonan/keputusan', [SekretariatController::class, 'keputusanPermohonan']);
-    Route::get('surat-tawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
     Route::get('permohonan/senarai-disokong-pdf', [SekretariatController::class, 'cetakSenaraiPemohonPDF'])->name('senarai.disokong.pdf');
     Route::get('permohonan/senarai-disokong-excel', [SekretariatController::class, 'cetakSenaraiPemohonExcel'])->name('senarai.disokong.excel');
-    Route::get('/generate-qrcode', [SekretariatController::class, 'qrcode']);
+    Route::get('surat-tawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
 
+    //Permohonan - Sekretariat - Keputusan
+    Route::get('permohonan/keputusan', [SekretariatController::class, 'keputusanPermohonan']);
+
+    //Permohonan - Sekretariat - Sejarah
+    Route::get('permohonan/sekretariat/sejarah/senarai-permohonan', [SaringanController::class, 'sejarahPermohonan']);
+   
     //Tuntutan - Sekretariat - Saringan
     Route::get('tuntutan/sekretariat/saringan/senarai_tuntutan', [SekretariatController::class, 'senaraiTuntutanKedua']);
     Route::get('tuntutan/sekretariat/saringan/keputusan-peperiksaan', [SekretariatController::class, 'keputusanPeperiksaan']);

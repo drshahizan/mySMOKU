@@ -23,13 +23,18 @@
 			<!--begin::Item-->
 			<li class="breadcrumb-item text-dark" style="color:darkblue">Laman Utama</li>
 			<!--end::Item-->
-			<!--begin::Item-->
+			
+            <!--begin::Item-->
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Senarai Permohonan</li>
+			<!--end::Item-->
+            <!--begin::Item-->
 			<li class="breadcrumb-item">
 				<span class="bullet bg-gray-400 w-5px h-2px"></span>
 			</li>
 			<!--end::Item-->
-			<!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">Senarai BKOKU</li>
+            
+            <!--begin::Item-->
+			<li class="breadcrumb-item text-dark" style="color:darkblue">PPK</li>
 			<!--end::Item-->
 		</ul>
         <!--end::Breadcrumb-->
@@ -45,14 +50,14 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Permohonan BKOKU</h2>
+                                <h2>Senarai Permohonan PPK</h2>
                             </div>
 
                             {{-- Filter section --}}
-                            <form action="{{url('permohonan/BKOKU')}}" method="GET">
+                            <form action="" method="GET">
                                 <div class="row" style="margin-left:15px;">
                                     <div class="col-md-2">
-                                        <input type="date" name="date" value="{{Request::get('date') ?? ' '}}" class="form-control"/>
+                                        <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
                                     </div>
     
                                     {{-- <div class="col-md-3">
@@ -90,7 +95,7 @@
                                             @foreach ($permohonan as $item)
                                                 @php
                                                     // nama pemohon
-                                                    $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                                    $nama = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                     $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
                                                     $conjunctions = ['bin', 'binti'];
                                                     $words = explode(' ', $text);
@@ -105,10 +110,10 @@
                                                     $pemohon = implode(' ', $result);
 
                                                     //status permohonan
-                                                    $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                                    $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                 @endphp
 
-                                                @if($item['program']=="BKOKU")
+                                                @if($item['program']=="PPK")
                                                     <tr>
                                                         <td>{{$item->no_rujukan_permohonan}}</td>
                                                         <td>{{$pemohon}}</td>
