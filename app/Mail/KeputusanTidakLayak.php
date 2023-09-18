@@ -9,9 +9,10 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class mailKeputusan extends Mailable
+class KeputusanTidakLayak extends Mailable
 {
     use Queueable, SerializesModels;
+
     public $message;
     /**
      * Create a new message instance.
@@ -29,6 +30,6 @@ class mailKeputusan extends Mailable
         $subject = "Keputusan Permohonan Anda";
         return $this->subject($subject)
                     ->with('data', $this->message)
-                    ->view('pages.sekretariat.permohonan.emel-kelulusan');
+                    ->view('permohonan.sekretariat.kelulusan.emel_tidak_lulus');
     }
 }

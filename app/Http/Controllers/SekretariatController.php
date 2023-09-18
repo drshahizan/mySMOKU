@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Exports\SenaraiPendek;
+use App\Mail\KeputusanLayak;
+use App\Mail\KeputusanTidakLayak;
 use App\Models\Permohonan;
 use App\Models\Saringan;
 use App\Models\Smoku;
 use App\Models\Waris;
 use App\Models\Akademik;
-use App\Mail\mailKeputusan;
 use App\Models\Kelulusan;
 use App\Models\Tuntutan;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -134,6 +135,7 @@ class SekretariatController extends Controller
     {
         $permohonan_id = Permohonan::where('smoku_id', $id)->value('id');
 
+        //send & update database
         if($request->get('keputusan')=="Lulus"){
             Permohonan::where('smoku_id', $id)
                 ->update([
@@ -148,6 +150,10 @@ class SekretariatController extends Controller
                 'catatan'  =>  $request->get('catatan'),
             ]);
             $info_mesyuarat->save();
+
+            //emel notifikasi
+            $message = 'Test message';
+            Mail::to("fateennashuha9@gmail.com")->send(new KeputusanLayak($message));
         }
         else{
             Permohonan::where('smoku_id', $id)
@@ -163,8 +169,13 @@ class SekretariatController extends Controller
                 'catatan'  =>  $request->get('catatan'),
             ]);
             $info_mesyuarat->save();
+
+            //emel notifikasi
+            $message = 'Test message';
+            Mail::to("fateennashuha9@gmail.com")->send(new KeputusanTidakLayak($message));
         }
 
+        //filter
         $keputusan = Permohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
@@ -173,12 +184,12 @@ class SekretariatController extends Controller
         })
         ->get();
 
+        //notification
+        $kelulusan = $request->get('keputusan');
         $id_permohonan = Permohonan::where('smoku_id', $id)->value('no_rujukan_permohonan');
         $notifikasi = "Emel notifikasi telah dihantar kepada ".$id_permohonan;
-        $message = 'Test message';
-        Mail::to("fateennashuha9@gmail.com")->send(new mailKeputusan($message));
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'));
     }
 
     public function senaraiKeputusanPermohonan(Request $request)

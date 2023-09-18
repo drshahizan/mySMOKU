@@ -45,10 +45,17 @@
 
     <body>
         @if($notifikasi!=NULL)
-            <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px; color:black!important;">
-                {{ $notifikasi }}
-            </div>
+            @if($kelulusan=="Lulus")
+                <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px; color:black!important;">
+                    {{ $notifikasi }}
+                </div>
+            @elseif($kelulusan=="Tidak Lulus")
+                <div class="alert alert-danger" role="alert" style="margin: 0px 15px 20px 15px; color:black!important;">
+                    {{ $notifikasi }}
+                </div>
+            @endif
         @endif
+
         <!-- Main body part  -->
         <div id="main-content">
             <div class="container-fluid">
