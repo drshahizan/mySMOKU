@@ -159,7 +159,7 @@
                                                                 
                                                                 <tr>
                                                                     <td class="text-center"><input type="checkbox" name="checkbox-1" id="checkbox-1" /></td>                                           
-                                                                    <td><a href="{{ url('kemaskini/kelulusan/'. $nokp) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                                    <td><a href="{{ url('permohonan/sekretariat/kelulusan/'. $nokp) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
                                                                     <td>{{$pemohon}}</td>
                                                                     <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                                                                     <td>{{$namakursus}}</td>
