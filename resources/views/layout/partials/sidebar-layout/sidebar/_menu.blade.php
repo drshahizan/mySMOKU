@@ -106,7 +106,7 @@
 				</div>
 			</div>
 			<div class="menu-item">
-			<a class="menu-link" href="{{ route('keseluruhan-Permohonan')}}">
+			<a class="menu-link" href="{{ route('senarai.permohonanKeseluruhan')}}">
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
 					<span class="menu-title">Keseluruhan</span>
 			</a>
@@ -114,7 +114,7 @@
 
 
 		<div class="menu-item">
-			<a class="menu-link" href="{{ route('permohonanbaru')}}">
+			<a class="menu-link" href="{{ route('senarai.permohonanBaharu')}}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Baru</span>
 			</a>

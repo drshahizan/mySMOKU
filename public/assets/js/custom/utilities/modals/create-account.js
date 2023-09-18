@@ -134,7 +134,7 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
-					'alamat_surat': {
+					'alamat_surat_menyurat': {
 						validators: {
 							notEmpty: {
 								message: 'Alamat surat menyurat diperlukan'

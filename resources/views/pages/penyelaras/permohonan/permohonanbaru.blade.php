@@ -16,7 +16,7 @@
 		</li>
 		<!--end::Item-->
 		<!--begin::Item-->
-		<li class="breadcrumb-item text-dark" style="color:darkblue">Permohonan Baru</li>
+		<li class="breadcrumb-item text-dark" style="color:darkblue">Permohonan Baharu</li>
 		<!--end::Item-->
 	</ul>
 	<!--end::Breadcrumb-->
@@ -36,7 +36,6 @@
 					<div class="header">
 						<h2>Senarai Permohonan</h2>
 					</div>
-
 					<div class="body">
 						<div class="table-responsive">
 							<table id="sortTable" class="table table-striped table-hover dataTable js-exportable">
@@ -49,11 +48,9 @@
 										<th style="width: 15%" class="text-center"><b>Status Permohonan</b></th>
 									</tr>
 								</thead>
-
                                 <tbody>
                                     @foreach ($smoku as $smoku)
 									@php
-                                    
 										$text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
 										$conjunctions = ['bin', 'binti'];
 										$words = explode(' ', $text);
@@ -66,10 +63,9 @@
 											}
 										}
 										$pemohon = implode(' ', $result);
-
 								
-									//institusi pengajian
-									$text3 = ucwords(strtolower($smoku->namaipt)); // Assuming you're sending the text as a POST parameter
+										//institusi pengajian
+										$text3 = ucwords(strtolower($smoku->nama_institusi)); // Assuming you're sending the text as a POST parameter
 										$conjunctions = ['of', 'in', 'and'];
 										$words = explode(' ', $text3);
 										$result = [];
@@ -83,7 +79,7 @@
 										$institusi = implode(' ', $result);
 									@endphp
                                     <tr>
-                                        <td><a href="{{route('viewpermohonanbaru',$smoku->nokp)}}">{{ $smoku->id_permohonan}}</a></td>
+                                        <td><a href="{{route('viewpermohonanbaru',$smoku->smoku_id)}}">{{ $smoku->no_rujukan_permohonan}}</a></td>
                                         <td>{{ $pemohon}}</td>
                                         <td>{{ $institusi}}</td>
                                         <td class="text-center">{{ $smoku->created_at->format('d/m/Y h:i:sa')}}</td>

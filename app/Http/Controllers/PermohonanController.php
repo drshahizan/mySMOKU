@@ -84,10 +84,8 @@ class PermohonanController extends Controller
         
     }
 
-     // Fetch records
-   public function getBandar($idnegeri=0){
+    public function getBandar($idnegeri=0){
 
-        // Fetch kursus by idipt
         $bandarData['data'] = Bandar::orderby("bandar","asc")
          ->select('id','bandar','negeri_id')
          ->where('negeri_id',$idnegeri)
@@ -105,7 +103,7 @@ class PermohonanController extends Controller
         $butiranPelajar = ButiranPelajar::firstOrNew(['smoku_id' => $smoku_id->id]);
 
         // Set the attributes
-        $butiranPelajar->alamat_surat = $request->alamat_surat;
+        $butiranPelajar->alamat_surat_menyurat = $request->alamat_surat_menyurat;
         $butiranPelajar->alamat_surat_negeri = $request->alamat_surat_negeri;
         $butiranPelajar->alamat_surat_bandar = $request->alamat_surat_bandar;
         $butiranPelajar->alamat_surat_poskod = $request->alamat_surat_poskod;

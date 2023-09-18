@@ -397,7 +397,7 @@
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input-->
-								<textarea id="alamat_surat" name="alamat_surat" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
+								<textarea id="alamat_surat_menyurat" name="alamat_surat_menyurat" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
 								<!--end::Input-->
 							</div>
 							<div class="row mb-10">
@@ -1296,17 +1296,17 @@
 			var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
 			var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
 
-			var alamat_surat = document.getElementById("alamat_surat");
+			var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
 			var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
 			var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
 			var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
 			if (checkBox.checked == true){
-				alamat_surat.value=alamat_tetap.value; 
+				alamat_surat_menyurat.value=alamat_tetap.value; 
 				alamat_surat_negeri.value=alamat_tetap_negeri.value;
 				alamat_surat_bandar.value=alamat_tetap_bandar.value;
 				alamat_surat_poskod.value=alamat_tetap_poskod.value;
 			} else {
-				alamat_surat.value="";
+				alamat_surat_menyurat.value="";
 				alamat_surat_negeri.value="";
 				alamat_surat_bandar.value="";
 				alamat_surat_poskod.value="";

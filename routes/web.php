@@ -109,16 +109,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     //Permohonan - Penyelaras
-    Route::get('permohonanbaru', [PenyelarasController::class, 'permohonanbaru'])->name('permohonanbaru');
-    Route::get('dashboardpenyelaras', [PenyelarasController::class, 'create'])->name('dashboardpenyelaras');
-    Route::post('dashboardpenyelaras', [PenyelarasController::class, 'store']);
-    Route::get('keseluruhan-Permohonan', [PenyelarasController::class, 'keseluruhanPermohonan'])->name('keseluruhan-Permohonan');
-    Route::get('borangPermohonanBaru/{id}', [PenyelarasController::class, 'borangPermohonanBaru'])->name('borangPermohonanBaru');
+    Route::get('penyelaras/dashboard', [PenyelarasController::class, 'index'])->name('penyelaras.dashboard');
+    Route::post('penyelaras/dashboard', [PenyelarasController::class, 'store']);
+    Route::get('penyelaras/permohonan/baharu/{id}', [PenyelarasController::class, 'permohonanBaharu'])->name('penyelaras.permohonan.baharu');
     Route::get('/bandar/{idnegeri}', [PenyelarasController::class, 'bandar']);
     Route::get('/peringkat/{id}', [PenyelarasController::class, 'peringkat']);
     Route::get('/kursus/{kodperingkat}/{id}', [PenyelarasController::class, 'kursus']);
-    Route::post('borangPermohonanBaru', [PenyelarasController::class, 'simpan'])->name('simpan');
+    Route::post('penyelarasbaharu', [PenyelarasController::class, 'simpan'])->name('simpan');
     Route::post('hantar', [PenyelarasController::class, 'hantar'])->name('hantar');
+    Route::get('penyelaras/senarai/permohonan/baharu', [PenyelarasController::class, 'senaraiPermohonanBaharu'])->name('senarai.permohonanBaharu');
+    Route::get('penyelaras/senarai/permohonan/keseluruhan', [PenyelarasController::class, 'senaraiPermohonanKeseluruhan'])->name('senarai.permohonanKeseluruhan');
+
     Route::get('viewpermohonanbaru/{id}', [PenyelarasController::class, 'viewpermohonanbaru'])->name('viewpermohonanbaru');
 
 
