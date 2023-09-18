@@ -113,7 +113,7 @@
                                                     @endphp
                                                     <tr>
                                                         <td>
-                                                            <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                            <a href="{{ url('permohonan/sekretariat/sejarah/rekod-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                         </td>
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>

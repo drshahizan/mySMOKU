@@ -108,7 +108,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Tuntutan - Sekretariat - Sejarah
     Route::get('tuntutan/sekretariat/sejarah/sejarah-tuntutan', [SekretariatController::class, 'sejarahTuntutan']);
-    Route::get('tuntutan/sekretariat/sejarah/maklumat-tuntutan/{id}', [SekretariatController::class, 'sejarahMaklumatTuntutan'])->name('sejarah.maklumat.tuntutan.id');
+    Route::get('tuntutan/sekretariat/sejarah/rekod-tuntutan/{id}', [SaringanController::class, 'rekodTuntutan'])->name('rekod.permohonan.id');
+    Route::get('tuntutan/sekretariat/sejarah/papar-tuntutan/{id}', [SaringanController::class, 'paparRekodTuntutan'])->name('papar.rekod.permohonan.id');
+    Route::get('tuntutan/sekretariat/sejarah/papar-saringan/{id}', [SaringanController::class, 'paparRekodSaringanTuntutan'])->name('papar.rekod.saringan.tuntutan.id');
 
 
 
