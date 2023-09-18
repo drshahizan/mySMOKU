@@ -108,7 +108,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Tuntutan - Sekretariat - Sejarah
     Route::get('tuntutan/sekretariat/sejarah/sejarah-tuntutan', [SekretariatController::class, 'sejarahTuntutan']);
-    Route::get('tuntutan/sekretariat/sejarah/maklumat-tuntutan/{id}', [SekretariatController::class, 'sejarahMaklumatTuntutan'])->name('sejarah.maklumat.tuntutan.id');
+    Route::get('tuntutan/sekretariat/sejarah/rekod-tuntutan/{id}', [SaringanController::class, 'rekodTuntutan'])->name('rekod.permohonan.id');
+    Route::get('tuntutan/sekretariat/sejarah/papar-tuntutan/{id}', [SaringanController::class, 'paparRekodTuntutan'])->name('papar.rekod.permohonan.id');
+    Route::get('tuntutan/sekretariat/sejarah/papar-saringan/{id}', [SaringanController::class, 'paparRekodSaringanTuntutan'])->name('papar.rekod.saringan.tuntutan.id');
 
 
 
@@ -158,8 +160,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     //Tuntutan Pelajar
-    Route::get('borangTuntutanYuran',[TuntutanController::class,'borangtuntutanyuran'])->name('borangTuntutanYuran');
-    Route::post('borangTuntutanYuran', [TuntutanController::class, 'savetuntutan'])->name('savetuntutan');
+    Route::get('tuntutan/baharu',[TuntutanController::class,'tuntutanBaharu'])->name('tuntutan.baharu');
+    Route::post('tuntutan/baharu', [TuntutanController::class, 'simpanTuntutan'])->name('simpan.tuntutan');
     Route::get('hantartuntutan', [TuntutanController::class, 'hantartuntutan'])->name('hantartuntutan');;
 
     //Pentadbir

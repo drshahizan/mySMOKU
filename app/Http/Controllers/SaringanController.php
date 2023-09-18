@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Mail\SaringanMail;
 use App\Models\Akademik;
 use App\Models\ButiranPelajar;
+use App\Models\Kelulusan;
 use App\Models\Permohonan;
 use App\Models\Saringan;
 use App\Models\SejarahPermohonan;
@@ -212,27 +213,28 @@ class SaringanController extends Controller
     }
 
     public function paparRekodPermohonan($id){
-        $permohonan = Permohonan::where('id', $id)->first();
+        $sejarah_p = SejarahPermohonan::where('id', $id)->first();
+        $permohonan = Permohonan::where('id', $sejarah_p->permohonan_id)->first();
         $smoku_id = $permohonan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
-        $catatan = Saringan::where('permohonan_id', $id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('permohonan.sekretariat.saringan.papar_permohonan',compact('permohonan','catatan','smoku','akademik'));
+        return view('permohonan.sekretariat.sejarah.papar_permohonan',compact('permohonan','smoku','akademik','sejarah_p'));
     }
     public function paparRekodSaringan($id){
-        $permohonan = Permohonan::where('id', $id)->first();
+        $sejarah_p = SejarahPermohonan::where('id', $id)->first();
+        $permohonan = Permohonan::where('id', $sejarah_p->permohonan_id)->first();
         $smoku_id = $permohonan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
-        $catatan = Saringan::where('permohonan_id', $id)->first();
+        $catatan = Saringan::where('permohonan_id', $sejarah_p->permohonan_id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('permohonan.sekretariat.saringan.papar_permohonan',compact('permohonan','catatan','smoku','akademik'));
+        return view('permohonan.sekretariat.sejarah.papar_saringan',compact('permohonan','catatan','smoku','akademik','sejarah_p'));
     }
     public function paparRekodKelulusan($id){
         $permohonan = Permohonan::where('id', $id)->first();
         $smoku_id = $permohonan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
-        $catatan = Kelulusan::where('permohonan_id', $id)->first();
+        $kelulusan = Kelulusan::where('permohonan_id', $id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('permohonan.sekretariat.saringan.papar_permohonan',compact('permohonan','catatan','smoku','akademik'));
+        return view('permohonan.sekretariat.sejarah.papar_kelulusan',compact('permohonan','kelulusan','smoku','akademik'));
     }
 }

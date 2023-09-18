@@ -12,7 +12,7 @@ class SejarahTuntutan extends Model
 
     protected $fillable = [
         'smoku_id',
-        'no_rujukan_tuntutan',
+        'tuntutan_id',
         'status',
     ];
 }

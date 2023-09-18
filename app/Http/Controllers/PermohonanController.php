@@ -68,10 +68,11 @@ class PermohonanController extends Controller
         ->get(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
         ->where('smoku_id', $smoku_id->id);
 
-        $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
-        //dd($dokumen);
+        
 
         if ($permohonan && $permohonan->status == '2') {
+            $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
+            //dd($dokumen);
             return view('pages.permohonan.permohonan-baru-view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen'));
 
         } else {

@@ -82,23 +82,23 @@
                                             @endphp
                                             <tr>
                                                 @if ($item['status']=='1')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-permohonan/'.$item['id'])}}">{{$permohonan->no_rujukan_permohonan}}</a></td>
+                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-permohonan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
                                                 @elseif ($item['status']=='2')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-permohonan/'.$item['id'])}}">{{$permohonan->no_rujukan_permohonan}}</a></td>
+                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-permohonan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
                                                 @elseif ($item['status']=='3')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-permohonan/'.$item['id'])}}">{{$permohonan->no_rujukan_permohonan}}</a></td>
+                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-permohonan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
                                                 @elseif ($item['status']=='4')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}">{{$permohonan->no_rujukan_permohonan}}</a></td>
+                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
                                                 @elseif ($item['status']=='5')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}">{{$permohonan->no_rujukan_permohonan}}</a></td>
+                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
                                                 @elseif ($item['status']=='6')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-kelulusan/'.$item['id'])}}">{{$permohonan->no_rujukan_permohonan}}</a></td>
+                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-kelulusan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
                                                 @elseif ($item['status']=='7')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-kelulusan/'.$item['id'])}}">{{$permohonan->no_rujukan_permohonan}}</a></td>
+                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-kelulusan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
                                                 @elseif ($item['status']=='8')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}">{{$permohonan->no_rujukan_permohonan}}</a></td>
+                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
                                                 @elseif ($item['status']=='9')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-permohonan/'.$item['id'])}}">{{$permohonan->no_rujukan_permohonan}}</a></td>
+                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-permohonan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
                                                 @endif
                                                 <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                 @if ($item['status']=='1')

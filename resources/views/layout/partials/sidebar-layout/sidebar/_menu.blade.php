@@ -54,7 +54,7 @@
 				</div>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="{{ route('borangTuntutanYuran') }}">
+				<a class="menu-link" href="{{ route('tuntutan.baharu') }}">
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
 					<span class="menu-title">Baru</span>
 				</a>

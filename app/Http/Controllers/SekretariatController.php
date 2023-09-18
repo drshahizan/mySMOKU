@@ -286,4 +286,31 @@ class SekretariatController extends Controller
         $permohonan = Permohonan::where('status', '!=','4')->get();
         return view('tuntutan.sekretariat.sejarah.sejarah_tuntutan',compact('permohonan'));
     }
+
+    public function rekodTuntutan($id){
+        $permohonan = Permohonan::where('id', $id)->first();
+        $smoku_id = $permohonan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        $sejarah_p = SejarahPermohonan::where('permohonan_id', $id)->orderBy('created_at', 'desc')->get();
+        return view('tuntutan.sekretariat.sejarah.rekod_tuntutan',compact('permohonan','akademik','smoku','sejarah_p'));
+    }
+
+    public function paparRekodTuntutan($id){
+        $sejarah_p = SejarahPermohonan::where('id', $id)->first();
+        $permohonan = Permohonan::where('id', $sejarah_p->permohonan_id)->first();
+        $smoku_id = $permohonan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('tuntutan.sekretariat.sejarah.papar_tuntutan',compact('permohonan','smoku','akademik','sejarah_p'));
+    }
+    public function paparRekodSaringan($id){
+        $sejarah_p = SejarahPermohonan::where('id', $id)->first();
+        $permohonan = Permohonan::where('id', $sejarah_p->permohonan_id)->first();
+        $smoku_id = $permohonan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $catatan = Saringan::where('permohonan_id', $sejarah_p->permohonan_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('tuntutan.sekretariat.sejarah.papar_saringan',compact('permohonan','catatan','smoku','akademik','sejarah_p'));
+    }
 }
