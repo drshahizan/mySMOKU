@@ -108,18 +108,19 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($permohonan as $item)
+                                                    @foreach ($keputusan as $item)
                                                     @if($item['program']=="BKOKU")
                                                         @if($item['status']=="5" || $item['status']=="6" || $item['status']=="7")
                                                             @php
-                                                                $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
-                                                                $kelulusan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id');
-                                                                $no_mesyuarat = DB::table('permohonan_kelulusan')->where('id_permohonan', $kelulusan)->value('no_mesyuarat');
-                                                                $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                                $tarikh = DB::table('permohonan_kelulusan')->where('id_permohonan', $kelulusan)->value('tarikh_mesyuarat');
-                                                                $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+                                                                //$id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
+                                                                //$kelulusan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id');
+                                                                $no_mesyuarat = DB::table('permohonan_kelulusan')->where('permohonan_id', $item['id'])->value('no_mesyuarat');
+                                                                $nama = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                                //$nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                                                $tarikh = DB::table('permohonan_kelulusan')->where('permohonan_id', $item['id'])->value('tarikh_mesyuarat');
+                                                                $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
 
-                                                                $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
+                                                                $text = ucwords(strtolower($nama));
                                                                 $conjunctions = ['bin', 'binti'];
                                                                 $words = explode(' ', $text);
                                                                 $result = [];
@@ -131,10 +132,9 @@
                                                                     }
                                                                 }
                                                                 $pemohon = implode(' ', $result);
-                                                                //dd($no_mesyuarat);
                                                             @endphp
                                                             <tr>
-                                                                <td>{{$id_permohonan}}</td>
+                                                                <td>{{$item->no_rujukan_permohonan}}</td>
                                                                 <td>{{$pemohon}}</td>
                                                                 <td class="text-center">{{$no_mesyuarat}}</td>
                                                                 <td class="text-center">{{date('d/m/Y', strtotime($tarikh))}}</td>
@@ -191,15 +191,21 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($permohonan as $item)
+                                                    @foreach ($keputusan as $item)
                                                     @if($item['program']=="PPK")
                                                         @if($item['status']=="6" || $item['status']=="7")
                                                             @php
-                                                                $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
-                                                                $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
-                                                                $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                                $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
-                                                                $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
+                                                                // $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
+                                                                // $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
+                                                                // $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
+                                                                // $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
+
+                                                                $no_mesyuarat = DB::table('permohonan_kelulusan')->where('permohonan_id', $item['id'])->value('no_mesyuarat');
+                                                                $nama = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                                $tarikh = DB::table('permohonan_kelulusan')->where('permohonan_id', $item['id'])->value('tarikh_mesyuarat');
+                                                                $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+
+                                                                $text = ucwords(strtolower($nama)); 
                                                                 $conjunctions = ['bin', 'binti'];
                                                                 $words = explode(' ', $text);
                                                                 $result = [];
@@ -213,7 +219,7 @@
                                                                 $pemohon = implode(' ', $result);
                                                             @endphp
                                                             <tr>
-                                                                <td>{{$id_permohonan}}</td>
+                                                                <td>{{$item->no_rujukan_permohonan}}</td>
                                                                 <td>{{$pemohon}}</td>
                                                                 <td class="text-center">AM1234</td>
                                                                 <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>

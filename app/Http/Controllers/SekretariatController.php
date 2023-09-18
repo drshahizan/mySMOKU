@@ -165,7 +165,7 @@ class SekretariatController extends Controller
             $info_mesyuarat->save();
         }
 
-        $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
+        $keputusan = Permohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
         ->when($request->status != null, function ($q) use ($request) {
@@ -173,17 +173,17 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        $id_permohonan = Permohonan::where('smoku_id', $id)->value('id');
-
+        $id_permohonan = Permohonan::where('smoku_id', $id)->value('no_rujukan_permohonan');
         $notifikasi = "Emel notifikasi telah dihantar kepada ".$id_permohonan;
         $message = 'Test message';
         Mail::to("fateennashuha9@gmail.com")->send(new mailKeputusan($message));
-        return view('pages.sekretariat.permohonan.keputusan', compact('permohonan','notifikasi'));
+
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi'));
     }
 
     public function senaraiKeputusanPermohonan(Request $request)
     {
-        $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
+        $keputusan = Permohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
         ->when($request->status != null, function ($q) use ($request) {
@@ -192,7 +192,7 @@ class SekretariatController extends Controller
         ->get();
 
         $notifikasi = NULL;
-        return view('pages.sekretariat.permohonan.keputusan', compact('permohonan','notifikasi'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi'));
     }
 
     public function kembalikanPermohonan()
