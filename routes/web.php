@@ -80,8 +80,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Permohonan - Sekretariat - Kelulusan
     Route::get('permohonan/sekretariat/kelulusan', [SekretariatController::class, 'senaraiKelulusanPermohonan']);
-    Route::get('permohonan/sekretariat/kelulusan/{no_kp}', [SekretariatController::class, 'maklumatKelulusanPermohonan']);
-    Route::post('permohonan/sekretariat/keputusan/{no_kp}', [SekretariatController::class, 'hantarKeputusanPermohonan']);
+    Route::get('permohonan/sekretariat/kelulusan/{smoku_id}', [SekretariatController::class, 'maklumatKelulusanPermohonan']);
+    Route::post('permohonan/sekretariat/hantar/keputusan/{smoku_id}', [SekretariatController::class, 'hantarKeputusanPermohonan']);
     Route::get('permohonan/senarai-disokong-pdf', [SekretariatController::class, 'cetakSenaraiPemohonPDF'])->name('senarai.disokong.pdf');
     Route::get('permohonan/senarai-disokong-excel', [SekretariatController::class, 'cetakSenaraiPemohonExcel'])->name('senarai.disokong.excel');
     Route::get('surat-tawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);

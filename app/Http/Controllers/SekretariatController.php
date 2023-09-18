@@ -132,16 +132,16 @@ class SekretariatController extends Controller
 
     public function hantarKeputusanPermohonan(Request $request,$id)
     {
-        $id_permohonan = Permohonan::where('nokp_pelajar', $id)->value('id');
+        $permohonan_id = Permohonan::where('smoku_id', $id)->value('id');
 
         if($request->get('keputusan')=="Lulus"){
-            Permohonan::where('nokp_pelajar', $id)
+            Permohonan::where('smoku_id', $id)
                 ->update([
                 'status'   =>  6,
             ]);
 
             $info_mesyuarat = new Kelulusan([
-                'permohonan_id' =>  $id_permohonan,
+                'permohonan_id' =>  $permohonan_id,
                 'no_mesyuarat'  =>  $request->get('noMesyuarat'),
                 'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
                 'keputusan'  =>  $request->get('keputusan'),
@@ -150,13 +150,13 @@ class SekretariatController extends Controller
             $info_mesyuarat->save();
         }
         else{
-            Permohonan::where('nokp_pelajar', $id)
+            Permohonan::where('smoku_id', $id)
                 ->update([
                 'status'   =>  7,
             ]);
 
             $info_mesyuarat = new Kelulusan([
-                'id_permohonan' =>  $id_permohonan,
+                'permohonan_id' =>  $permohonan_id,
                 'no_mesyuarat'  =>  $request->get('noMesyuarat'),
                 'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
                 'keputusan'  =>  $request->get('keputusan'),
@@ -173,9 +173,9 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        $id_permohonan2 = Permohonan::where('nokp_pelajar', $id)->value('id_permohonan');
+        $id_permohonan = Permohonan::where('smoku_id', $id)->value('id');
 
-        $notifikasi = "Emel notifikasi telah dihantar kepada ".$id_permohonan2;
+        $notifikasi = "Emel notifikasi telah dihantar kepada ".$id_permohonan;
         $message = 'Test message';
         Mail::to("fateennashuha9@gmail.com")->send(new mailKeputusan($message));
         return view('pages.sekretariat.permohonan.keputusan', compact('permohonan','notifikasi'));
