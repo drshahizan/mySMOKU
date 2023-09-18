@@ -103,7 +103,7 @@ class SekretariatController extends Controller
         return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
     }
 
-    public function kelulusanPermohonan()
+    public function senaraiKelulusanPermohonan()
     {
         $kelulusan = Permohonan::where('status', '=','4')->get();
         return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan'));
@@ -124,27 +124,24 @@ class SekretariatController extends Controller
         return $pdf->stream('Senarai-Permohonan-Disokong.pdf');
     }
 
-    public function lihatKelulusan($id)
+    public function maklumatKelulusanPermohonan($id)
     {
-        $permohonan = Permohonan::where('nokp_pelajar', $id)->first();
-        $id_permohonan = $permohonan->id_permohonan;
-        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
-        $catatan = Saringan::where('id_permohonan', $id_permohonan)->first();
-        return view('pages.sekretariat.permohonan.maklumatKelulusan',compact('permohonan','pelajar','catatan'));
+        $permohonan = Permohonan::where('id', $id)->first();
+        return view('permohonan.sekretariat.kelulusan.maklumat_kelulusan',compact('permohonan'));
     }
 
-    public function kemaskiniKelulusan(Request $request,$id)
+    public function hantarKeputusanPermohonan(Request $request,$id)
     {
-        $id_permohonan = Permohonan::where('nokp_pelajar', $id)->value('id');
+        $permohonan_id = Permohonan::where('smoku_id', $id)->value('id');
 
         if($request->get('keputusan')=="Lulus"){
-            Permohonan::where('nokp_pelajar', $id)
+            Permohonan::where('smoku_id', $id)
                 ->update([
                 'status'   =>  6,
             ]);
 
             $info_mesyuarat = new Kelulusan([
-                'permohonan_id' =>  $id_permohonan,
+                'permohonan_id' =>  $permohonan_id,
                 'no_mesyuarat'  =>  $request->get('noMesyuarat'),
                 'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
                 'keputusan'  =>  $request->get('keputusan'),
@@ -153,13 +150,13 @@ class SekretariatController extends Controller
             $info_mesyuarat->save();
         }
         else{
-            Permohonan::where('nokp_pelajar', $id)
+            Permohonan::where('smoku_id', $id)
                 ->update([
                 'status'   =>  7,
             ]);
 
             $info_mesyuarat = new Kelulusan([
-                'id_permohonan' =>  $id_permohonan,
+                'permohonan_id' =>  $permohonan_id,
                 'no_mesyuarat'  =>  $request->get('noMesyuarat'),
                 'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
                 'keputusan'  =>  $request->get('keputusan'),
@@ -168,7 +165,7 @@ class SekretariatController extends Controller
             $info_mesyuarat->save();
         }
 
-        $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
+        $keputusan = Permohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
         ->when($request->status != null, function ($q) use ($request) {
@@ -176,17 +173,17 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        $id_permohonan2 = Permohonan::where('nokp_pelajar', $id)->value('id_permohonan');
-
-        $notifikasi = "Emel notifikasi telah dihantar kepada ".$id_permohonan2;
+        $id_permohonan = Permohonan::where('smoku_id', $id)->value('no_rujukan_permohonan');
+        $notifikasi = "Emel notifikasi telah dihantar kepada ".$id_permohonan;
         $message = 'Test message';
         Mail::to("fateennashuha9@gmail.com")->send(new mailKeputusan($message));
-        return view('pages.sekretariat.permohonan.keputusan', compact('permohonan','notifikasi'));
+
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi'));
     }
 
-    public function keputusanPermohonan(Request $request)
+    public function senaraiKeputusanPermohonan(Request $request)
     {
-        $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
+        $keputusan = Permohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
         ->when($request->status != null, function ($q) use ($request) {
@@ -195,7 +192,7 @@ class SekretariatController extends Controller
         ->get();
 
         $notifikasi = NULL;
-        return view('pages.sekretariat.permohonan.keputusan', compact('permohonan','notifikasi'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi'));
     }
 
     public function kembalikanPermohonan()
