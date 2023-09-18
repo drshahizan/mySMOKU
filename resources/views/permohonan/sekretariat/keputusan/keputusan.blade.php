@@ -112,11 +112,8 @@
                                                     @if($item['program']=="BKOKU")
                                                         @if($item['status']=="5" || $item['status']=="6" || $item['status']=="7")
                                                             @php
-                                                                //$id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
-                                                                //$kelulusan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id');
                                                                 $no_mesyuarat = DB::table('permohonan_kelulusan')->where('permohonan_id', $item['id'])->value('no_mesyuarat');
                                                                 $nama = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                                //$nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
                                                                 $tarikh = DB::table('permohonan_kelulusan')->where('permohonan_id', $item['id'])->value('tarikh_mesyuarat');
                                                                 $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
 
@@ -195,11 +192,6 @@
                                                     @if($item['program']=="PPK")
                                                         @if($item['status']=="6" || $item['status']=="7")
                                                             @php
-                                                                // $id_permohonan = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('id_permohonan');
-                                                                // $program = DB::table('permohonan')->where('id_permohonan', $item['id_permohonan'])->value('program');
-                                                                // $nama = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                                // $status = DB::table('statusinfo')->where('kodstatus', $item['status'])->value('status');
-
                                                                 $no_mesyuarat = DB::table('permohonan_kelulusan')->where('permohonan_id', $item['id'])->value('no_mesyuarat');
                                                                 $nama = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                                 $tarikh = DB::table('permohonan_kelulusan')->where('permohonan_id', $item['id'])->value('tarikh_mesyuarat');
@@ -240,7 +232,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -255,33 +246,4 @@
              $('#sortTable1').DataTable();
             $('#sortTable2').DataTable();
         </script>
-        
-        <!-- Vedor js file and create bundle with grunt  --> 
-        <script src="assets/bundles/flotscripts.bundle.js"></script><!-- flot charts Plugin Js -->
-        <script src="assets/bundles/c3.bundle.js"></script>
-        <script src="assets/bundles/apexcharts.bundle.js"></script>
-        <script src="assets/bundles/jvectormap.bundle.js"></script>
-        <script src="assets/vendor/toastr/toastr.js"></script>
-        
-        <!-- Project core js file minify with grunt --> 
-        <script src="assets/bundles/mainscripts.bundle.js"></script>
-        <script src="../js/index.js"></script>
-        
-        <!-- Vedor js file and create bundle with grunt  --> 
-        <script src="assets/bundles/morrisscripts.bundle.js"></script><!-- Morris Plugin Js -->
-        
-        <!-- Vedor js file and create bundle with grunt  -->    
-        <script src="assets/bundles/datatablescripts.bundle.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.html5.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.print.min.js"></script>
-        <script src="assets/vendor/sweetalert/sweetalert.min.js"></script>
-
-        <!-- SweetAlert Plugin Js --> 
-        <script src="../js/pages/forms/form-wizard.js"></script>
-        <script src="../js/pages/tables/jquery-datatable.js"></script>
-        <script src="../js/pages/charts/morris.js"></script>
-        <script src="../js/pages/charts/c3.js"></script>
 </x-default-layout> 
