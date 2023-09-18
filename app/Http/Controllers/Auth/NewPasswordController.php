@@ -9,59 +9,83 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class NewPasswordController extends Controller
 {
-    /**
-     * Display the password reset view.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
-     */
-    public function create(Request $request)
+    
+    public function create(Request $request, $token)
     {
-        addJavascriptFile('assets/js/custom/authentication/reset-password/new-password.js');
+        // Step 1: Retrieve the token from the URL query parameters
+        $token = $token;
+        
+        // Step 2: Query the password_resets table to find the token
+        $reset = DB::table('password_resets')
+            ->where('token', $token)
+            ->first();
+        $email = $reset ->email;
+        //dd($email);    
 
-        return view('pages.auth.reset-password', ['request' => $request]);
+        // Step 3: Check if a matching record was found and validate the token
+        if (!$reset || empty($reset->email)) {
+            // Handle invalid token or token not found (display an error message)
+            return redirect()->route('password.reset')->with('error', 'Invalid token or token not found.');
+        }
+
+        // Check if the token has expired (e.g., within a certain time limit)
+        $expirationTime = config('auth.passwords.users.expire');
+        if (now()->subMinutes($expirationTime) > $reset->created_at) {
+            // Handle token expiration (display an error message)
+            return redirect()->route('password.reset')->with('error', 'Token has expired. Please request a new one.');
+        }
+
+        // Step 4: Token is valid, show the password reset form
+        return view('pages.auth.reset-password', ['token' => $token, 'email' =>  $email]);
     }
 
-    /**
-     * Handle an incoming new password request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request)
+
+    public function updatePassword(Request $request)
     {
-        $request->validate([
-            'token' => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        // Step 5: Handle the password update logic (when the user submits the new password)
+        // Ensure that the provided token is valid before allowing password update
+        $validator = Validator::make($request->all(), [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:8',
         ]);
 
-        // Here we will attempt to reset the user's password. If it is successful we
-        // will update the password on an actual user model and persist it to the
-        // database. Otherwise we will parse the error and return the response.
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user) use ($request) {
-                $user->forceFill([
-                    'password' => Hash::make($request->password),
-                    'remember_token' => Str::random(60),
-                ])->save();
+        // Check if the validation fails
+        if ($validator->fails()) {
+            throw ValidationException::withMessages($validator->errors()->toArray());
+        }
 
-                event(new PasswordReset($user));
-            }
-        );
+        // Verify the token again and ensure it matches the user's email
+        $reset = DB::table('password_resets')
+            ->where('token', $request->input('token'))
+            ->where('email', $request->input('email'))
+            ->first();
+        $user = User::where('email', '=', $request->input('email'))->first();    
 
-        // If the password was successfully reset, we will redirect the user back to
-        // the application's home authenticated view. If there is an error we can
-        // redirect them back to where they came from with their error message.
-        return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
+        if (!$reset || empty($reset->email)) {
+            // Handle invalid token or token not found (display an error message)
+            return redirect()->route('password.reset')->with('error', 'Token tidak sah atau token tidak dijumpai.');
+        }
+
+        // Check if the token has expired (e.g., within a certain time limit)
+        $expirationTime = config('auth.passwords.users.expire');
+        if (now()->subMinutes($expirationTime) > $reset->created_at) {
+            // Handle token expiration (display an error message)
+            return redirect()->route('password.reset')->with('error', 'Token telah tamat tempoh. Sila minta yang baru.');
+        }
+
+        // Token is valid; update the user's password and delete the token
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        // Redirect to a success page or login page after successful password reset
+        return redirect()->route('login')->with('success', 'Set semula kata laluan berjaya. Anda kini boleh log masuk dengan kata laluan baru anda.');
     }
 }

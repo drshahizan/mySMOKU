@@ -1,12 +1,12 @@
 <x-auth-layout>
 
     <!--begin::Form-->
-    <form class="form w-100" novalidate="novalidate" id="kt_new_password_form" data-kt-redirect-url="{{ route('login') }}" action="{{ route('password.update') }}">
+    <form class="form w-100" novalidate="novalidate" id="kt_new_password_form" data-kt-redirect-url="{{ route('login') }}" action="{{ route('password.update') }}" method="POST">
         @csrf
 
         <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->get('token') }}">
-        <input type="hidden" name="email" value="{{ old('email', $request->email) }}">
+        <input type="hidden" name="token" value="{{ $token }}">
+        <input type="hidden" name="email" value="{{ $email }}">
 
         <!--begin::Heading-->
         <div class="text-center mb-10">
@@ -52,7 +52,7 @@
 
             <!--begin::Hint-->
             <div class="text-muted">
-                Gunakan 12 atau lebih aksara dengan gabungan huruf, nombor & simbol.
+                Gunakan 12 atau lebih aksara dengan gabungan huruf, nombor, & simbol.
             </div>
             <!--end::Hint-->
         </div>
@@ -74,7 +74,7 @@
                 <label class="form-check-label fw-semibold text-gray-700 fs-6">
                     Saya Setuju &
 
-                    <a href="#" class="ms-1 link-primary">Terma dan syarat</a>.
+                    <a href="#" class="ms-1 link-primary">Terma & syarat.</a>.
                 </label>
             </div>
         </div>
@@ -82,7 +82,7 @@
 
         <!--begin::Actions-->
         <div class="d-flex flex-wrap justify-content-center pb-lg-0">
-            <button type="button" id="kt_new_password_submit" class="btn btn-primary me-4">
+            <button type="submit" id="kt_new_password_submit" class="btn btn-primary me-4">
                 @include('partials/general/_button-indicator', ['label' => 'Hantar'])
             </button>
 
@@ -90,6 +90,7 @@
         </div>
         <!--end::Actions-->
     </form>
+    
     <!--end::Form-->
 
 </x-auth-layout>

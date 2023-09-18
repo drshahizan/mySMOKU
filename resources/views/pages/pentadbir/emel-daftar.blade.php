@@ -14,7 +14,7 @@
     <p>Nombor Kad Pengenalan : {{$no_kp}}
     <p>Alamat E-mel : {{$email}}
     <br>
-    <p>Sila klik disini atau masukkan URL di bawah untuk mengaktifkan akaun
+    <p>Sila klik <a href="{{$verificationUrl}}">disini</a> atau masukkan URL di bawah untuk mengaktifkan akaun
         anda di {{$verificationUrl}}</p>
     <br>
     <p>Jika ada sebarang pertanyaan, sila hubungi khidmat pelanggan di talian 03-8888 1616

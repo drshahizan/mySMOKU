@@ -47,6 +47,12 @@
                 </div>
             @endif
 
+            @if(session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+
         <!--begin::Login options-->
         <!-- <div class="row g-3 mb-9"> -->
             <!--begin::Col-->

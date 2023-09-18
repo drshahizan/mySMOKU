@@ -17,10 +17,10 @@ var KTAuthNewPassword = function() {
                     'password': {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required'
+                                message: 'Kata laluan diperlukan.'
                             },
                             callback: {
-                                message: 'Please enter valid password',
+                                message: 'Sila masukkan kata laluan yang sah.',
                                 callback: function(input) {
                                     if (input.value.length > 0) {
                                         return validatePassword();
@@ -32,20 +32,20 @@ var KTAuthNewPassword = function() {
                     'confirm-password': {
                         validators: {
                             notEmpty: {
-                                message: 'The password confirmation is required'
+                                message: 'Pengesahan kata laluan diperlukan.'
                             },
                             identical: {
                                 compare: function() {
                                     return form.querySelector('[name="password"]').value;
                                 },
-                                message: 'The password and its confirm are not the same'
+                                message: 'Kata laluan dan pengesahannya tidak sama.'
                             }
                         }
                     },
                     'toc': {
                         validators: {
                             notEmpty: {
-                                message: 'You must accept the terms and conditions'
+                                message: 'Anda perlu menerima syarat-syarat dan terma-terma.'
                             }
                         }
                     }
@@ -66,7 +66,7 @@ var KTAuthNewPassword = function() {
         );
 
         form.querySelector('input[name="password"]').addEventListener('input', function() {
-            if (this.value.length > 0) {
+            if (this.value.length > 12) {
                 validator.updateFieldStatus('password', 'NotValidated');
             }
         });
@@ -97,10 +97,10 @@ var KTAuthNewPassword = function() {
 
                         // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                         Swal.fire({
-                            text: "You have successfully reset your password!",
+                            text: "Anda telah berjaya menetapkan semula kata laluan anda",
                             icon: "success",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
+                            confirmButtonText: "Ok",
                             customClass: {
                                 confirmButton: "btn btn-primary"
                             }
@@ -121,10 +121,10 @@ var KTAuthNewPassword = function() {
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        text: "Maaf, nampaknya terdapat beberapa ralat yang dikesan. Sila cuba lagi.",
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "Ok",
                         customClass: {
                             confirmButton: "btn btn-primary"
                         }
@@ -165,10 +165,10 @@ var KTAuthNewPassword = function() {
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
-                                text: "Sorry, the email is incorrect, please try again.",
+                                text: "Maaf, emel ini tidak betul. Sila cuba lagi.",
                                 icon: "error",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "Ok",
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 }
@@ -176,10 +176,10 @@ var KTAuthNewPassword = function() {
                         }
                     }).catch(function (error) {
                         Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            text: "Maaf haha, terdapat beberapa ralat yang dikesan. Sila cuba lagi.",
                             icon: "error",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
+                            confirmButtonText: "Ok",
                             customClass: {
                                 confirmButton: "btn btn-primary"
                             }
@@ -194,10 +194,10 @@ var KTAuthNewPassword = function() {
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        text: "Sila masukkan maklumat yang diperlukan.",
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "Ok",
                         customClass: {
                             confirmButton: "btn btn-primary"
                         }
