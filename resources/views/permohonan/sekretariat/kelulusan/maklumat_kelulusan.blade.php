@@ -81,8 +81,8 @@
                                     <br>
                                     <table class="maklumat">
                                             @php
-                                                $nama = DB::table('pelajar')->where('nokp_pelajar', $permohonan['nokp_pelajar'])->value('nama_pelajar');
-                                                $status = DB::table('statusinfo')->where('kodstatus',$permohonan['status'])->value('status');
+                                                $nama = DB::table('smoku')->where('id', $permohonan['smoku_id'])->value('nama');
+                                                $status = DB::table('bk_status')->where('kod_status',$permohonan['status'])->value('status');
                                             @endphp
                                             <tr>
                                                 <td><strong>Nama </strong></td>
@@ -98,7 +98,7 @@
                                             <tr>
                                                 <td><strong>ID Permohonan </strong></td>
                                                 <td><b>:</b></td>
-                                                <td>{{$permohonan->id_permohonan}}</td>
+                                                <td>{{$permohonan->no_rujukan_permohonan}}</td>
                                                 <td class="space">&nbsp;</td>
                                             </tr>
                                             <tr>
@@ -113,7 +113,7 @@
                             <hr><br>
 
                             <div class="col-md-6 col-sm-6">
-                                <form action="{{ url('permohonan/sekretariat/keputusan/'.$pelajar->nokp_pelajar) }}" method="POST" id="kelulusan">
+                                <form action="{{ url('permohonan/sekretariat/keputusan/'.$permohonan->smoku_id) }}" method="POST" id="kelulusan">
                                     {{csrf_field()}}
                                     <table>
                                         <tr>

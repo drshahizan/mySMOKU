@@ -103,7 +103,7 @@ class SekretariatController extends Controller
         return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
     }
 
-    public function kelulusanPermohonan()
+    public function senaraiKelulusanPermohonan()
     {
         $kelulusan = Permohonan::where('status', '=','4')->get();
         return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan'));
@@ -124,16 +124,13 @@ class SekretariatController extends Controller
         return $pdf->stream('Senarai-Permohonan-Disokong.pdf');
     }
 
-    public function lihatKelulusan($id)
+    public function maklumatKelulusanPermohonan($id)
     {
-        $permohonan = Permohonan::where('nokp_pelajar', $id)->first();
-        $id_permohonan = $permohonan->id_permohonan;
-        $pelajar = Permohonan::where('nokp_pelajar', $id)->first();
-        $catatan = Saringan::where('id_permohonan', $id_permohonan)->first();
-        return view('pages.sekretariat.permohonan.maklumatKelulusan',compact('permohonan','pelajar','catatan'));
+        $permohonan = Permohonan::where('id', $id)->first();
+        return view('permohonan.sekretariat.kelulusan.maklumat_kelulusan',compact('permohonan'));
     }
 
-    public function kemaskiniKelulusan(Request $request,$id)
+    public function hantarKeputusanPermohonan(Request $request,$id)
     {
         $id_permohonan = Permohonan::where('nokp_pelajar', $id)->value('id');
 
@@ -184,7 +181,7 @@ class SekretariatController extends Controller
         return view('pages.sekretariat.permohonan.keputusan', compact('permohonan','notifikasi'));
     }
 
-    public function keputusanPermohonan(Request $request)
+    public function senaraiKeputusanPermohonan(Request $request)
     {
         $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);

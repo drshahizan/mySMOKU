@@ -106,7 +106,7 @@
                                                                     $i++;
                                                                     $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                                     $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
-                                                                    $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                                                                    $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
                                                                     $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
                                                                     $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
                                                                     $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
@@ -159,7 +159,7 @@
                                                                 
                                                                 <tr>
                                                                     <td class="text-center"><input type="checkbox" name="checkbox-1" id="checkbox-1" /></td>                                           
-                                                                    <td><a href="{{ url('permohonan/sekretariat/kelulusan/'. $nokp) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                                    <td><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
                                                                     <td>{{$pemohon}}</td>
                                                                     <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                                                                     <td>{{$namakursus}}</td>
