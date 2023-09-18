@@ -10,7 +10,7 @@
 	<!--begin::Content-->
 	<div id="kt_app_content" class="app-content flex-column-fluid">
 		<!--begin::Content container-->
-		<div id="kt_app_content_container" class="app-container container-xl">
+		<div id="kt_app_content_container" class="app-container container-xl" style="width:80%">
 			<!--begin::Layout-->
 			<div class="d-flex flex-column flex-lg-row">
 				<!--begin::Content-->
@@ -31,7 +31,7 @@
 								</div>
 								<!--end::Top-->
 
-								<br><hr>
+								<br>
 
 								<table class="table table-bordered table-striped">
 									<thead>
