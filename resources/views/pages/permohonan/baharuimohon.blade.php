@@ -74,7 +74,7 @@
 																	<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Pengajian&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
 																	<!--begin::Input group-->
 																	<div class="mb-5">
-                                                                    <input type="file" id="kepPeperiksaan" name="kepPeperiksaan"/>
+                                                                    	<input type="file" id="kepPeperiksaan" name="kepPeperiksaan"/>
 																	</div>
 																</div>
 																<div class="col-lg-6">

@@ -24,8 +24,8 @@
 				</a>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="{{ route('baharuimohon') }}">
-					<span class="menu-icon">{!! getIcon('update-file', 'fs-2') !!}</span>
+				<a class="menu-link" href="{{ url('tamatPengajian') }}">
+					<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
 					<span class="menu-title">Lapor Diri Tamat Pengajian</span>
 				</a>
 			</div>
@@ -45,12 +45,6 @@
 				<a class="menu-link" href="{{ route('permohonan.sejarah') }}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Sejarah</span>
-				</a>
-			</div>
-			<div class="menu-item">
-				<a class="menu-link" href="{{ route('baharuimohon') }}">
-					<span class="menu-icon">{!! getIcon('update-file', 'fs-2') !!}</span>
-					<span class="menu-title">Perbaharui</span>
 				</a>
 			</div>
 

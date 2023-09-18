@@ -43,7 +43,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /*Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post'); */
 
-
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::get('/getBandar/{id}', [PermohonanController::class, 'getBandar']);
     Route::post('permohonan', [PermohonanController::class, 'simpanPermohonan'])->name('permohonan.simpan');
@@ -56,6 +55,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('statuspermohonan/{id}', [PermohonanController::class, 'delete'])->name('delete');
     Route::get('baharuimohon', [PermohonanController::class, 'baharuimohon'])->name('baharuimohon');
     Route::post('baharuimohon', [PermohonanController::class, 'save'])->name('save');
+    Route::get('tamatPengajian', [PermohonanController::class, 'tamatPengajian'])->name('tamatPengajian');
+
 
     //Permohonan - Sekretariat - Saringan
     Route::get('permohonan/sekretariat/saringan/senarai-permohonan', [SaringanController::class, 'senaraiPermohonan']);
