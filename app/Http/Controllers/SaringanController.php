@@ -202,11 +202,13 @@ class SaringanController extends Controller
         return view('permohonan.sekretariat.sejarah.sejarah_permohonan',compact('permohonan'));
     }
 
-    public function sejarahMaklumatPermohonan($id){
+    public function rekodPermohonan($id){
         $permohonan = Permohonan::where('id', $id)->first();
-        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+        $smoku_id = $permohonan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('permohonan.sekretariat.sejarah.maklumat_permohonan',compact('permohonan','akademik','smoku'));
+        $sejarah_p = SejarahPermohonan::where('permohonan_id', $id)->orderBy('created_at', 'desc')->get();
+        return view('permohonan.sekretariat.sejarah.rekod_permohonan',compact('permohonan','akademik','smoku','sejarah_p'));
     }
+
 }

@@ -19,7 +19,7 @@
                             1
                         </button>
                         <div class="step-title">
-                            First Step
+                            Permohonan
                         </div>
                     </div>
                     <div class="step-item">
@@ -28,7 +28,7 @@
                             2
                         </button>
                         <div class="step-title">
-                            Second Step
+                            Saringan
                         </div>
                     </div>
                     <div class="step-item">
@@ -37,7 +37,16 @@
                             3
                         </button>
                         <div class="step-title">
-                            Third Step
+                            Kelulusan
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            4
+                        </button>
+                        <div class="step-title">
+                            Keputusan
                         </div>
                     </div>
                 </div>
@@ -65,12 +74,7 @@
                     </div>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div class="card-body">
-                            CodeHim is one of the BEST developer websites that provide web designers and developers with a simple way to preview and download a variety of free code & scripts.<br>
-                            <p class="text-muted">nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
-                                beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-                                lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-                                probably haven't heard of them accusamus labore sustainable VHS.</p>
+                            @include('permohonan.sekretariat.sejarah.papar_rekod_saringan')
                         </div>
                     </div>
                 </div>
@@ -79,6 +83,23 @@
 
                     </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                         data-bs-parent="#accordionExample">
+                        <div class="card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                            squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
+                            nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+                            single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
+                            beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
+                            lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
+                            probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div  id="headingFour">
+
+                    </div>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
                          data-bs-parent="#accordionExample">
                         <div class="card-body">
                             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
