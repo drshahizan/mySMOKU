@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('tuntutan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('smoku_id');
-            $table->integer('no_rujukan_tuntutan');
+            $table->string('no_rujukan_tuntutan');
             $table->string('jenis_yuran');
             $table->string('no_resit');
             $table->string('resit');
             $table->string('nota_resit');
             $table->string('amaun');
-            $table->string('baki');
+            $table->string('baki')->nullable();
             $table->string('sesi');
             $table->string('semester');
             $table->string('status');

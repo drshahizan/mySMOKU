@@ -160,8 +160,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     //Tuntutan Pelajar
-    Route::get('borangTuntutanYuran',[TuntutanController::class,'borangtuntutanyuran'])->name('borangTuntutanYuran');
-    Route::post('borangTuntutanYuran', [TuntutanController::class, 'savetuntutan'])->name('savetuntutan');
+    Route::get('tuntutan/baharu',[TuntutanController::class,'tuntutanBaharu'])->name('tuntutan.baharu');
+    Route::post('tuntutan/baharu', [TuntutanController::class, 'simpanTuntutan'])->name('simpan.tuntutan');
     Route::get('hantartuntutan', [TuntutanController::class, 'hantartuntutan'])->name('hantartuntutan');;
 
     //Pentadbir
