@@ -79,9 +79,23 @@ class DashboardController extends Controller
         else if(Auth::user()->tahap=='4'){
             return view('pages.pegawai.dashboard')->with('message', 'Selamat Datang ke Laman Utama Pegawai Atasan');
         }
-        else{
-            return view('pages.pentadbir.dashboard')->with('message', 'Selamat Datang ke Laman Utama Pentadbir Sistem');
+        else if(Auth::user()->tahap=='5'){
+            return view('pages.pentadbir.dashboard')->with('message', 'Selamat Datang ke Laman Utama Pegawai Atasan');
         }
+        
+        else if(Auth::user()->tahap=='6'){
+            $smoku = Smoku::orderBy('smoku.id','desc')
+                ->leftJoin('permohonan','permohonan.nokp_pelajar','=','smoku.nokp')
+                ->get(['smoku.*', 'permohonan.*'])
+                ->where('status','!=', '2')
+                ->where('jenis','=', 'PPK');
+                // ->where('jenis_penyelaras','=', 2);
+            return view('pages.penyelarasppk.dashboard', compact('smoku'));
+        }
+        else{
+            return view('page.auth.login')->with('message', 'Unauthorized');
+        }
+       
     }
 
     public function store(Request $request)

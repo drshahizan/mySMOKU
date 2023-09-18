@@ -112,7 +112,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 
-    //Permohonan - Penyelaras
+    //Permohonan - Penyelaras BKOKU
     Route::get('penyelaras/dashboard', [PenyelarasController::class, 'index'])->name('penyelaras.dashboard');
     Route::post('penyelaras/dashboard', [PenyelarasController::class, 'store']);
     Route::get('penyelaras/permohonan/baharu/{id}', [PenyelarasController::class, 'permohonanBaharu'])->name('penyelaras.permohonan.baharu');
@@ -127,19 +127,35 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('viewpermohonanbaru/{id}', [PenyelarasController::class, 'viewpermohonanbaru'])->name('viewpermohonanbaru');
 
 
-    //Tuntutan - Penyelaras - Wang Saku
+    //Tuntutan - Penyelaras BKOKU - Wang Saku
     Route::get('tuntutan/penyelaras/wang-saku/senarai-tuntutan', [PenyelarasController::class, 'tuntutanWangSaku']);
     Route::get('tuntutan/penyelaras/wang-saku/maklumat-tuntutan', [PenyelarasController::class, 'maklumatTuntutanWangSaku']);
 
-    //Tuntutan - Penyelaras - Yuran Dan Wang Saku
+    //Tuntutan - Penyelaras BKOKU- Yuran Dan Wang Saku
     Route::get('tuntutan/penyelaras/yuran-dan-wang-saku/senarai-tuntutan', [PenyelarasController::class, 'tuntutanYuranPengajian']);
     Route::get('tuntutan/penyelaras/yuran-dan-wang-saku/maklumat-tuntutan', [PenyelarasController::class, 'maklumatTuntutanYuranPengajian']);
 
-    //Tuntutan - Penyelaras - Kemaskini
+    //Tuntutan - Penyelaras BKOKU - Kemaskini
     Route::get('tuntutan/penyelaras/kemaskini/kemaskini-tuntutan', [PenyelarasController::class, 'kemaskiniTuntutan']);
 
-    //Tuntutan - Penyelaras - Sejarah
+    //Tuntutan - Penyelaras BKOKU - Sejarah
     Route::get('tuntutan/penyelaras/sejarah/sejarah-tuntutan', [PenyelarasController::class, 'sejarahTuntutan']);
+
+    //Permohonan - Penyelaras PPK 
+    //Permohonan - Penyelaras PPK
+    Route::get('permohonanbaruppk', [PenyelarasPPKController::class, 'permohonanbaruppk'])->name('permohonanbaruppk');
+    Route::get('dashboardpenyelarasppk', [PenyelarasPPKController::class,'create'])->name('dashboardpenyelarasppk');
+    Route::post('dashboardpenyelarasppk', [PenyelarasPPKController::class, 'store']);
+    Route::get('keseluruhan-PermohonanPPK', [PenyelarasPPKController::class, 'keseluruhanPermohonanPPK'])->name('keseluruhan-PermohonanPPK');
+    Route::get('borangPermohonanBaruPPK/{id}', [PenyelarasPPKController::class, 'borangPermohonanBaruPPK'])->name('borangPermohonanBaruPPK');
+    Route::get('/bandar/{idnegeri}', [PenyelarasPPKController::class, 'bandar']);
+    Route::get('/peringkat/{id}', [PenyelarasPPKController::class, 'peringkat']);
+    Route::get('/kursus/{kodperingkat}/{id}', [PenyelarasPPKController::class, 'kursus']);
+    Route::post('borangPermohonanBaruPPK', [PenyelarasPPKController::class, 'simpan'])->name('simpanpermohonanppk');
+    Route::post('hantarpermohonanppk', [PenyelarasPPKController::class, 'hantar'])->name('hantarpermohonanppk');
+    Route::get('viewpermohonanbaruppk/{id}', [PenyelarasPPKController::class, 'viewpermohonanbaruppk'])->name('viewpermohonanbaruppk');
+
+
 
     //Tuntutan Pelajar
     Route::get('borangTuntutanYuran',[TuntutanController::class,'borangtuntutanyuran'])->name('borangTuntutanYuran');
@@ -149,6 +165,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Pentadbir
     Route::get('daftarpengguna', [PentadbirController::class, 'daftar'])->name('daftarpengguna');
     Route::post('daftarpengguna', [PentadbirController::class, 'store'])->name('daftarpengguna.post');
+
 
  });
 
