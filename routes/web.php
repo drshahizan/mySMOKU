@@ -91,6 +91,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Permohonan - Sekretariat - Sejarah
     Route::get('permohonan/sekretariat/sejarah/sejarah-permohonan', [SaringanController::class, 'sejarahPermohonan']);
+    Route::get('permohonan/sekretariat/sejarah/maklumat-permohonan/{id}', [SaringanController::class, 'sejarahMaklumatPermohonan'])->name('sejarah.maklumat.permohonan.id');
 
     //Tuntutan - Sekretariat - Saringan
     Route::get('tuntutan/sekretariat/saringan/senarai_tuntutan', [SekretariatController::class, 'senaraiTuntutanKedua']);
@@ -103,6 +104,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Tuntutan - Sekretariat - Sejarah
     Route::get('tuntutan/sekretariat/sejarah/sejarah-tuntutan', [SekretariatController::class, 'sejarahTuntutan']);
+    Route::get('tuntutan/sekretariat/sejarah/maklumat-tuntutan/{id}', [SekretariatController::class, 'sejarahMaklumatTuntutan'])->name('sejarah.maklumat.tuntutan.id');
 
 
 
