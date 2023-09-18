@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>BKOUKU: Permohonan Telah Lulus</title>
+    <title>BKOUKU: Keputusan Permohonan</title>
 </head>
 <body>
-    <h3>BKOKU: PERMOHONAN DIKEMBALIKAN</h3>
+    <h3>BKOKU: PERMOHONAN ANDA LULUS</h3>
     <p>Assalammualaikum W.R.T & Salam Sejahtera.</p>
     
    

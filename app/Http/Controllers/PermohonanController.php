@@ -622,10 +622,8 @@ class PermohonanController extends Controller
 
     public function save(Request $request)
     {   
-        
         $data=new peperiksaan();
         
-          
             $kepPeperiksaan=$request->kepPeperiksaan; 
             $sem=$request->semester; 
             $sesi=$request->sesi; 
@@ -643,18 +641,16 @@ class PermohonanController extends Controller
             $data->cgpa=$request->cgpa;
             $data->kepPeperiksaan=$filenamekepPeperiksaan;
 
-
-            
-
             $data->save();
 
-
-
-
         return redirect()->route('baharuimohon')->with('message', 'saveeeeeeeee.');
-
     }
 
+    public function tamatPengajian()
+    {   
+        $peperiksaan = Peperiksaan::all();
+        return view('pages.permohonan.lapor_tamat_pengajian', compact('peperiksaan'));
+    }
 }
 
 

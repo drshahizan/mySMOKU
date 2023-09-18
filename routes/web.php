@@ -43,7 +43,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /*Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post'); */
 
-
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::get('/getBandar/{id}', [PermohonanController::class, 'getBandar']);
     Route::post('permohonan', [PermohonanController::class, 'simpanPermohonan'])->name('permohonan.simpan');
@@ -56,6 +55,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('statuspermohonan/{id}', [PermohonanController::class, 'delete'])->name('delete');
     Route::get('baharuimohon', [PermohonanController::class, 'baharuimohon'])->name('baharuimohon');
     Route::post('baharuimohon', [PermohonanController::class, 'save'])->name('save');
+    Route::get('tamatPengajian', [PermohonanController::class, 'tamatPengajian'])->name('tamatPengajian');
+
 
     //Permohonan - Sekretariat - Saringan
     Route::get('permohonan/sekretariat/saringan/senarai-permohonan', [SaringanController::class, 'senaraiPermohonan']);
@@ -91,7 +92,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Permohonan - Sekretariat - Sejarah
     Route::get('permohonan/sekretariat/sejarah/sejarah-permohonan', [SaringanController::class, 'sejarahPermohonan']);
-    Route::get('permohonan/sekretariat/sejarah/maklumat-permohonan/{id}', [SaringanController::class, 'sejarahMaklumatPermohonan'])->name('sejarah.maklumat.permohonan.id');
+    Route::get('permohonan/sekretariat/sejarah/rekod-permohonan/{id}', [SaringanController::class, 'rekodPermohonan'])->name('rekod.permohonan.id');
+    Route::get('permohonan/sekretariat/sejarah/papar-permohonan/{id}', [SaringanController::class, 'paparRekodPermohonan'])->name('papar.rekod.permohonan.id');
+    Route::get('permohonan/sekretariat/sejarah/papar-saringan/{id}', [SaringanController::class, 'paparRekodSaringan'])->name('papar.rekod.saringan.id');
+    Route::get('permohonan/sekretariat/sejarah/papar-kelulusan/{id}', [SaringanController::class, 'paparRekodKelulusan'])->name('papar.rekod.kelulusan.id');
 
     //Tuntutan - Sekretariat - Saringan
     Route::get('tuntutan/sekretariat/saringan/senarai_tuntutan', [SekretariatController::class, 'senaraiTuntutanKedua']);
