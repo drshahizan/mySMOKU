@@ -13,6 +13,7 @@ use App\Models\Bandar;
 use App\Models\InfoIpt;
 use App\Models\PeringkatPengajian;
 use App\Models\Kursus;
+use App\Models\Mod;
 use App\Models\Sumberbiaya;
 use App\Models\Penaja;
 use App\Models\ButiranPelajar;
@@ -362,5 +363,38 @@ class PenyelarasPPKController extends Controller
 
         //dd($smoku);
         return view('permohonan.penyelaras_ppk.permohonanbaru', compact('smoku'));
+    }
+
+    public function viewPermohonan($id){
+
+        //$smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        $akademikmqa = Akademik::join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
+        ->join('bk_peringkat_pengajian','bk_peringkat_pengajian.kod_peringkat','=','smoku_akademik.peringkat_pengajian')
+        ->get(['smoku_akademik.*', 'bk_info_institusi.*', 'bk_peringkat_pengajian.*'])
+        ->where('smoku_id',$id);
+
+        $mod = Mod::all()->sortBy('kod_mod');
+        $biaya = SumberBiaya::all()->sortBy('kod_biaya');
+        $penaja = Penaja::all()->sortBy('kod_penaja');
+        $hubungan = Hubungan::all()->sortBy('kod_hubungan');
+        $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri')->get();
+        $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
+        $institusi = InfoIpt::orderby("id","asc")->select('id_institusi','nama_institusi')->get();
+        $peringkat = PeringkatPengajian::orderby("id","asc")->select('kod_peringkat','peringkat')->get();
+        $permohonan = Permohonan::where('smoku_id', $id)->first();
+
+        $butiranPelajar = ButiranPelajar::join('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
+        ->join('smoku_waris','smoku_waris.smoku_id','=','smoku_butiran_pelajar.smoku_id')
+        ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku_butiran_pelajar.smoku_id')
+        ->join('permohonan','permohonan.smoku_id','=','smoku_butiran_pelajar.smoku_id')
+        ->join('bk_jantina','bk_jantina.kod_jantina','=','smoku.jantina')
+        ->join('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
+        ->join('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
+        ->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
+        ->get(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
+        ->where('smoku_id', $id);
+        $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
+        return view('permohonan.penyelaras_ppk.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen'));
+
     }
 }

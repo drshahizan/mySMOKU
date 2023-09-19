@@ -156,12 +156,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('penyelaras/ppk/baharu', [PenyelarasPPKController::class, 'simpan'])->name('ppk.simpan');
     Route::post('ppk/hantar', [PenyelarasPPKController::class, 'hantar'])->name('ppk.hantar');
     Route::get('penyelaras/ppk/senarai/permohonan-baharu', [PenyelarasPPKController::class, 'senaraiPermohonanBaharu'])->name('senarai.ppk.permohonanBaharu');
+    Route::get('penyelaras/ppk/view-permohonan/{id}', [PenyelarasPPKController::class, 'viewPermohonan'])->name('penyelaras.ppk.view.permohonan');
 
     
     Route::get('keseluruhan-PermohonanPPK', [PenyelarasPPKController::class, 'keseluruhanPermohonanPPK'])->name('keseluruhan-PermohonanPPK');
     Route::get('borangPermohonanBaruPPK/{id}', [PenyelarasPPKController::class, 'borangPermohonanBaruPPK'])->name('borangPermohonanBaruPPK');
 
-    Route::get('viewpermohonanbaruppk/{id}', [PenyelarasPPKController::class, 'viewpermohonanbaruppk'])->name('viewpermohonanbaruppk');
 
 
 
