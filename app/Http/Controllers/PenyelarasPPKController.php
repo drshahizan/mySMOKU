@@ -147,6 +147,7 @@ class PenyelarasPPKController extends Controller
     {
         $smoku = Smoku::where('no_kp', '=', $request->no_kp)->first();
         $id = $smoku->id;
+        $nokp_pelajar = $smoku->no_kp;
         $butiranPelajar = ButiranPelajar::firstOrNew(['smoku_id' => $id]);
 
         // Set the attributes
@@ -211,7 +212,7 @@ class PenyelarasPPKController extends Controller
         $permohonan = Permohonan::firstOrNew(['smoku_id' => $id]);
 
         // Set the attributes
-        $permohonan->no_rujukan_permohonan = 'P'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp;
+        $permohonan->no_rujukan_permohonan = 'P'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar;
         $permohonan->program = 'PPK';
         $permohonan->wang_saku = $request->wang_saku;
         $permohonan->amaun_wang_saku = $request->amaun_wang_saku;
