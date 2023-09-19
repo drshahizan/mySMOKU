@@ -119,9 +119,7 @@ class SekretariatController extends Controller
     public function cetakSenaraiPemohonPDF()
     {
         $kelulusan = Permohonan::where('status', '4')->get();
-
         $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
-
         return $pdf->stream('Senarai-Permohonan-Disokong.pdf');
     }
 
@@ -192,31 +190,16 @@ class SekretariatController extends Controller
         return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'));
     }
 
-    // public function senaraiKeputusanPermohonan(Request $request)
-    // {
-    //     $kelulusan = Kelulusan::when($request->has('date'), function ($q) use ($request) {
-    //             return $q->whereDate('tarikh_mesyuarat', $request->input('date'));
-    //         })
-    //         ->when($request->has('status'), function ($q) use ($request) {
-    //             return $q->where('keputusan', $request->input('status'));
-    //         })
-    //         ->get();
-
-    //     $keputusan = Permohonan::where('status','6')->orWhere('status', '=','7')->get();
-
-    //     $notifikasi = NULL;
-    //     return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan','keputusan','notifikasi'));
-    // }
-
     public function senaraiKeputusanPermohonan(Request $request)
     {
-        $kelulusan = Kelulusan::when($request->has('date'), function ($q) use ($request) {
-                return $q->whereDate('tarikh_mesyuarat', $request->input('date'));
-            })
-            ->when($request->has('status'), function ($q) use ($request) {
-                return $q->where('keputusan', $request->input('status'));
-            })
-            ->get();
+
+        $kelulusan = Kelulusan::when($request->date != null, function ($q) use ($request) {
+            return $q->whereDate('tarikh_mesyuarat', $request->date);
+        })
+        ->when($request->status != null, function ($q) use ($request) {
+            return $q->where('keputusan', $request->status);
+        })
+        ->get();
 
         $notifikasi = null;
         return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi'));

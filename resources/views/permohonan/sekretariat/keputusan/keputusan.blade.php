@@ -81,25 +81,6 @@
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br><br>
-                                    {{-- <form action="{{url('permohonan/sekretariat/keputusan')}}" method="GET">
-                                        <div class="row" style="margin-left:15px;">
-                                            <div class="col-md-3">
-                                                <input type="date" name="date" value="{{Request::get('tarikh_mesyuarat')?? ' '}}" class="form-control"/>
-                                            </div>
-            
-                                            <div class="col-md-3">
-                                                <select name="status" class="form-select">
-                                                    <option value="">Pilih Semua Keputusan</option>
-                                                    <option value="6" {{Request::get('keputusan') == '6' ? 'selected':'' }} >Layak</option>
-                                                    <option value="7" {{Request::get('keputusan') == '7' ? 'selected':'' }} >Tidak Layak</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-md-4 right">
-                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left:10px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
-                                            </div>
-                                        </div>
-                                    </form> --}}
                                     <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
                                         <div class="row" style="margin-left: 15px;">
                                             <div class="col-md-3">
@@ -122,7 +103,6 @@
                                         </div>
                                     </form>                                    
                                     
-                
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable1" class="table table-bordered table-striped">
@@ -179,7 +159,7 @@
                                 {{-- PKK --}}
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <br><br>
-                                    <form action="" method="GET">
+                                    {{-- <form action="" method="GET">
                                         <div class="row" style="margin-left:15px;">
                                             <div class="col-md-3">
                                                 <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
@@ -197,7 +177,7 @@
                                                 <button type="submit" class="btn btn-primary" style="width: 10%; padding-left:10px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
                                             </div>
                                         </div>
-                                    </form>
+                                    </form> --}}
                 
                                     {{-- <div class="body">
                                         <div class="table-responsive">

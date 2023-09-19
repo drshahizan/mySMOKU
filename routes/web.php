@@ -91,7 +91,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Permohonan - Sekretariat - Keputusan
     Route::get('permohonan/sekretariat/keputusan', [SekretariatController::class, 'senaraiKeputusanPermohonan']);
-    Route::get('/records/filter', [SekretariatController::class, 'senaraiKeputusan'])->name('records.filter');
 
     //Permohonan - Sekretariat - Sejarah
     Route::get('permohonan/sekretariat/sejarah/sejarah-permohonan', [SaringanController::class, 'sejarahPermohonan']);
