@@ -9,10 +9,12 @@ use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\SaringanController;
 use App\Http\Controllers\SekretariatController;
 use App\Http\Controllers\PenyelarasController;
+use App\Http\Controllers\PenyelarasPPKController;
 use App\Http\Controllers\ProfilController;
 
 use App\Http\Controllers\TuntutanController;
 use App\Http\Controllers\PentadbirController;
+use App\Http\Controllers\PegawaiController;
 use App\Models\Permohonan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
@@ -145,8 +147,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Permohonan - Penyelaras PPK 
     
+    Route::get('penyelaras/ppk/dashboard', [PenyelarasPPKController::class,'index'])->name('penyelaras.ppk.dashboard');
     Route::get('permohonanbaruppk', [PenyelarasPPKController::class, 'permohonanbaruppk'])->name('permohonanbaruppk');
-    Route::get('dashboardpenyelarasppk', [PenyelarasPPKController::class,'create'])->name('dashboardpenyelarasppk');
     Route::post('dashboardpenyelarasppk', [PenyelarasPPKController::class, 'store']);
     Route::get('keseluruhan-PermohonanPPK', [PenyelarasPPKController::class, 'keseluruhanPermohonanPPK'])->name('keseluruhan-PermohonanPPK');
     Route::get('borangPermohonanBaruPPK/{id}', [PenyelarasPPKController::class, 'borangPermohonanBaruPPK'])->name('borangPermohonanBaruPPK');
@@ -165,8 +167,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('hantartuntutan', [TuntutanController::class, 'hantartuntutan'])->name('hantartuntutan');;
 
     //Pentadbir
+    Route::get('pentadbir/dashboard', [PentadbirController::class,'index'])->name('pentadbir.dashboard');
     Route::get('daftarpengguna', [PentadbirController::class, 'daftar'])->name('daftarpengguna');
     Route::post('daftarpengguna', [PentadbirController::class, 'store'])->name('daftarpengguna.post');
+
+    //Pegawai
+    Route::get('pegawai/dashboard', [PegawaiController::class,'index'])->name('pegawai.dashboard');
 
 
  });

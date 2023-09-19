@@ -19,41 +19,6 @@ class DashboardController extends Controller
     public function index()
     {
         addVendors(['amcharts', 'amcharts-maps', 'amcharts-stock']);
-        /*$user = Auth()->user();
-
-        $pelajar = Permohonan::where('nokp_pelajar', Auth::user()->nokp)->first();
-        // dd($user->nokp);
-        $status = Status::leftJoin('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
-        ->get(['statustransaksi.*', 'statusinfo.*'])
-        ->where('nokp_pelajar', Auth::user()->nokp);
-        
-        $sem = Akademik::leftJoin('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
-        ->get(['maklumatakademik.*', 'bk_peringkatpengajian.*'])
-        ->where('nokp_pelajar', Auth::user()->nokp)->first();
-        // $modpengajian = Mod::where('kodmod', $akademik->mod)->first();
-        $tuntutanpermohonan = TuntutanPermohonan::Join('statusinfo','statusinfo.kodstatus','=','permohonan.status')
-        ->get(['permohonan.*', 'statusinfo.*'])
-        ->where('nokp_pelajar', Auth::user()->nokp);
-        //$smoku = Smoku::all()->where('jenis','=', 'IPTA');
-        
-        $permohonan = Status::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
-        ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
-        ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
-        ->where('nokp_pelajar', Auth::user()->nokp);
-        //return view('pages.permohonan.statusmohon', compact('permohonan'));
-        
-        $tuntutan = StatusTuntutan::orderBy('statustransaksituntutan.status','desc')
-        ->join('statusinfo','statusinfo.kodstatus','=','statustransaksituntutan.status')
-        ->get(['statustransaksituntutan.*','statusinfo.*'])
-        ->where('nokp_pelajar',Auth::user()->nokp);*/
-        
-
-        $smoku = Smoku::orderBy('smoku.id','desc')
-        ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
-        ->leftJoin('permohonan','permohonan.smoku_id','=','smoku.id')
-        ->get(['smoku.*', 'smoku_penyelaras.*', 'permohonan.*'])
-        ->where('penyelaras_id','=', Auth::user()->id)
-        ->where('status','!=', '2');
 
         if(Auth::user()->tahap=='1')
         {
@@ -65,46 +30,33 @@ class DashboardController extends Controller
             ->where('smoku_id',$smoku_id->id);
             // //dd($permohonan);
             $akademik = Akademik::all()->where('smoku_id',$smoku_id->id)->first();
-
+            
             return view('pages.dashboards.index', compact('user','permohonan','akademik'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
         }
         else if(Auth::user()->tahap=='2')
         {
-            return view('pages.penyelaras.dashboard', compact('smoku'))->with('message', 'Selamat Datang ke Laman Utama Penyelaras');
+            return redirect()->route('penyelaras.dashboard');
         }
         else if(Auth::user()->tahap=='3')
         {
             return view('dashboard.sekretariat.dashboard')->with('message', 'Selamat Datang ke Laman Utama Sekretariat');
         }
-        else if(Auth::user()->tahap=='4'){
-            return view('pages.pegawai.dashboard')->with('message', 'Selamat Datang ke Laman Utama Pegawai Atasan');
+        else if(Auth::user()->tahap=='4')
+        {
+            return redirect()->route('pegawai.dashboard');
         }
-        else if(Auth::user()->tahap=='5'){
-            return view('pages.pentadbir.dashboard')->with('message', 'Selamat Datang ke Laman Utama Pegawai Atasan');
+        else if(Auth::user()->tahap=='5')
+        {
+            return redirect()->route('pentadbir.dashboard');
         }
         else 
-            return view('dashboard.penyelaras_ppk.dashboard')->with('message', 'Selamat Datang ke Laman Utama Penyelaras PPK');
-        }
         
-        // else if(Auth::user()->tahap=='6'){
-        //     $smoku = Smoku::orderBy('smoku.id','desc')
-        //         ->leftJoin('permohonan','permohonan.nokp_pelajar','=','smoku.nokp')
-        //         ->get(['smoku.*', 'permohonan.*'])
-        //         ->where('status','!=', '2')
-        //         ->where('jenis','=', 'PPK');
-        //         // ->where('jenis_penyelaras','=', 2);
-        //     return view('pages.penyelarasppk.dashboard', compact('smoku'));
-        // }
-        // else{
-        //     return view('page.auth.login')->with('message', 'Unauthorized');
-        // }
-    
+            return redirect()->route('penyelaras.ppk.dashboard');
+        }
 
-    
 
     public function store(Request $request)
     {  
-        // dd($request->hasFile("profile_photo_path"));
 
         if($request->hasFile('profile_photo_path')){
             

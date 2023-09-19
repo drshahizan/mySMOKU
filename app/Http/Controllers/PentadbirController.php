@@ -14,6 +14,13 @@ use App\Mail\MailDaftarPengguna;
 
 class PentadbirController extends Controller
 {
+    public function index()
+    {
+           
+        return view('dashboard.pentadbir.dashboard');
+
+    }
+    
     public function daftar()
     {
         $user = User::leftjoin('roles','roles.id','=','users.tahap')
