@@ -120,8 +120,7 @@ class SekretariatController extends Controller
     {
         $kelulusan = Permohonan::where('status', '4')->get();
 
-        $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_pdf', compact('kelulusan'))
-            ->setPaper('A4', 'landscape');
+        $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
 
         return $pdf->stream('Senarai-Permohonan-Disokong.pdf');
     }
@@ -193,42 +192,35 @@ class SekretariatController extends Controller
         return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'));
     }
 
+    // public function senaraiKeputusanPermohonan(Request $request)
+    // {
+    //     $kelulusan = Kelulusan::when($request->has('date'), function ($q) use ($request) {
+    //             return $q->whereDate('tarikh_mesyuarat', $request->input('date'));
+    //         })
+    //         ->when($request->has('status'), function ($q) use ($request) {
+    //             return $q->where('keputusan', $request->input('status'));
+    //         })
+    //         ->get();
+
+    //     $keputusan = Permohonan::where('status','6')->orWhere('status', '=','7')->get();
+
+    //     $notifikasi = NULL;
+    //     return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan','keputusan','notifikasi'));
+    // }
+
     public function senaraiKeputusanPermohonan(Request $request)
     {
-        $kelulusan = Kelulusan::when($request->date != null, function ($q) use ($request) {
-            return $q->whereDate('tarikh_mesyuarat', $request->date);
-        })
-        ->when($request->status != null, function ($q) use ($request) {
-            return $q->where('keputusan', $request->status);
-        })
-        ->get();
+        $kelulusan = Kelulusan::when($request->has('date'), function ($q) use ($request) {
+                return $q->whereDate('tarikh_mesyuarat', $request->input('date'));
+            })
+            ->when($request->has('status'), function ($q) use ($request) {
+                return $q->where('keputusan', $request->input('status'));
+            })
+            ->get();
 
-        $keputusan = Permohonan::where('status','6')->orWhere('status', '=','7')->get();
-
-        $notifikasi = NULL;
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan','keputusan','notifikasi'));
+        $notifikasi = null;
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi'));
     }
-
-    // public function senaraiKeputusan(Request $request)
-    // {
-    //     $date = $request->input('date');
-    //     $dateRange = $request->has('date_range');
-
-    //     if ($dateRange) {
-    //         // Filter by a date range
-    //         $startDate = $request->input('start_date');
-    //         $endDate = $request->input('end_date');
-
-    //         $keputusan = Kelulusan::whereBetween('tarikh_mesyuarat', [$startDate, $endDate])->get();
-    //     } else {
-    //         // Filter by a single date
-    //         $keputusan = Kelulusan::whereDate('tarikh_mesyuarat', $date)->get();
-    //     }
-
-    //     dd($keputusan);
-    //     $notifikasi = NULL;
-    //     return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan', 'notifikasi'));
-    // }
 
     public function kembalikanPermohonan()
     {

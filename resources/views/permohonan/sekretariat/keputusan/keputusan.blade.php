@@ -81,17 +81,17 @@
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br><br>
-                                    <form action="{{url('permohonan/sekretariat/keputusan')}}" method="GET">
+                                    {{-- <form action="{{url('permohonan/sekretariat/keputusan')}}" method="GET">
                                         <div class="row" style="margin-left:15px;">
                                             <div class="col-md-3">
-                                                <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
+                                                <input type="date" name="date" value="{{Request::get('tarikh_mesyuarat')?? ' '}}" class="form-control"/>
                                             </div>
             
                                             <div class="col-md-3">
                                                 <select name="status" class="form-select">
                                                     <option value="">Pilih Semua Keputusan</option>
-                                                    <option value="6" {{Request::get('status') == '6' ? 'selected':'' }} >Layak</option>
-                                                    <option value="7" {{Request::get('status') == '7' ? 'selected':'' }} >Tidak Layak</option>
+                                                    <option value="6" {{Request::get('keputusan') == '6' ? 'selected':'' }} >Layak</option>
+                                                    <option value="7" {{Request::get('keputusan') == '7' ? 'selected':'' }} >Tidak Layak</option>
                                                 </select>
                                             </div>
 
@@ -99,7 +99,29 @@
                                                 <button type="submit" class="btn btn-primary" style="width: 10%; padding-left:10px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
                                             </div>
                                         </div>
-                                    </form>
+                                    </form> --}}
+                                    <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
+                                        <div class="row" style="margin-left: 15px;">
+                                            <div class="col-md-3">
+                                                <input type="date" name="date" value="{{ Request::get('date') }}" class="form-control" />
+                                            </div>
+                                    
+                                            <div class="col-md-3">
+                                                <select name="status" class="form-select">
+                                                    <option value="">Pilih Semua Keputusan</option>
+                                                    <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
+                                                    <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
+                                                </select>
+                                            </div>
+                                    
+                                            <div class="col-md-4 right">
+                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>                                    
+                                    
                 
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
@@ -114,43 +136,39 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($keputusan as $item)
-                                                    @if($item['program']=="BKOKU")
-                                                        {{-- @if($item['status']=="5" || $item['status']=="6" || $item['status']=="7") --}}
-                                                            @php
-                                                                $no_mesyuarat = DB::table('permohonan_kelulusan')->where('permohonan_id', $item['id'])->value('no_mesyuarat');
-                                                                $nama = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                                $tarikh = DB::table('permohonan_kelulusan')->where('permohonan_id', $item['id'])->value('tarikh_mesyuarat');
-                                                                $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+                                                    @foreach ($kelulusan as $item)
+                                                        @php
+                                                            $id_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
+                                                            $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku.nama');
+                                                            $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
 
-                                                                $text = ucwords(strtolower($nama));
-                                                                $conjunctions = ['bin', 'binti'];
-                                                                $words = explode(' ', $text);
-                                                                $result = [];
-                                                                foreach ($words as $word) {
-                                                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                                                        $result[] = Str::lower($word);
-                                                                    } else {
-                                                                        $result[] = $word;
-                                                                    }
+                                                            $text = ucwords(strtolower($nama));
+                                                            $conjunctions = ['bin', 'binti'];
+                                                            $words = explode(' ', $text);
+                                                            $result = [];
+                                                            foreach ($words as $word) {
+                                                                if (in_array(Str::lower($word), $conjunctions)) {
+                                                                    $result[] = Str::lower($word);
+                                                                } else {
+                                                                    $result[] = $word;
                                                                 }
-                                                                $pemohon = implode(' ', $result);
-                                                            @endphp
+                                                            }
+                                                            $pemohon = implode(' ', $result);
+                                                        @endphp
+
+                                                        @if($program == "BKOKU")
                                                             <tr>
-                                                                <td>{{$item->no_rujukan_permohonan}}</td>
+                                                                <td>{{$id_permohonan}}</td>
                                                                 <td>{{$pemohon}}</td>
-                                                                <td class="text-center">{{$no_mesyuarat}}</td>
-                                                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh))}}</td>
-                                                                @if($item['status'] == "6")
-                                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
-                                                                @elseif ($item['status']=="5")
-                                                                    <td class="text-center"><button type="button" class="btn btn-sm text-white" style="background-color: #d75b50">{{ucwords(strtolower($status))}}</button></td>
-                                                                @elseif($item['status'] == "7")
-                                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                                <td class="text-center">{{$item->no_mesyuarat}}</td>
+                                                                <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
+                                                                @if($item->keputusan == "Lulus")
+                                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{$item->keputusan}}</button></td>
+                                                                @elseif($item->keputusan == "Tidak Lulus")
+                                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{$item->keputusan}}</button></td>
                                                                 @endif
                                                             </tr>
-                                                        {{-- @endif --}}
-                                                    @endif
+                                                        @endif
                                                     @endforeach
                                                 </tbody>
                                             </table>
@@ -181,7 +199,7 @@
                                         </div>
                                     </form>
                 
-                                    <div class="body">
+                                    {{-- <div class="body">
                                         <div class="table-responsive">
                                             <table id="sortTable2" class="table table-bordered table-striped">
                                                 <thead>
@@ -194,7 +212,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($keputusan as $item)
+                                                    @foreach ($kelulusan as $item)
                                                     @if($item['program']=="PPK")
                                                         @if($item['status']=="6" || $item['status']=="7")
                                                             @php
@@ -235,7 +253,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
