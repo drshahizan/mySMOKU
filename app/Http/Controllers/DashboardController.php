@@ -50,9 +50,8 @@ class DashboardController extends Controller
             return redirect()->route('pentadbir.dashboard');
         }
         else 
-        
             return redirect()->route('penyelaras.ppk.dashboard');
-        }
+    }
 
 
     public function store(Request $request)
