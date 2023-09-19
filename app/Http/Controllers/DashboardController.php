@@ -79,7 +79,10 @@ class DashboardController extends Controller
         else if(Auth::user()->tahap=='4'){
             return view('pages.pegawai.dashboard')->with('message', 'Selamat Datang ke Laman Utama Pegawai Atasan');
         }
-        else if(Auth::user()->tahap=='5'){
+        // else if(Auth::user()->tahap=='5'){
+        //     return view('pages.pentadbir.dashboard')->with('message', 'Selamat Datang ke Laman Utama Pegawai Atasan');
+        // }
+        else 
             return view('pages.pentadbir.dashboard')->with('message', 'Selamat Datang ke Laman Utama Pegawai Atasan');
         }
         
@@ -92,10 +95,11 @@ class DashboardController extends Controller
         //         // ->where('jenis_penyelaras','=', 2);
         //     return view('pages.penyelarasppk.dashboard', compact('smoku'));
         // }
-        else{
-            return view('page.auth.login')->with('message', 'Unauthorized');
-        }
-    }
+        // else{
+        //     return view('page.auth.login')->with('message', 'Unauthorized');
+        // }
+    
+
     
 
     public function store(Request $request)

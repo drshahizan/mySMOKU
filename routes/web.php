@@ -108,8 +108,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Tuntutan - Sekretariat - Sejarah
     Route::get('tuntutan/sekretariat/sejarah/sejarah-tuntutan', [SekretariatController::class, 'sejarahTuntutan']);
-    Route::get('tuntutan/sekretariat/sejarah/rekod-tuntutan/{id}', [SaringanController::class, 'rekodTuntutan'])->name('rekod.permohonan.id');
-    Route::get('tuntutan/sekretariat/sejarah/papar-tuntutan/{id}', [SaringanController::class, 'paparRekodTuntutan'])->name('papar.rekod.permohonan.id');
+    Route::get('tuntutan/sekretariat/sejarah/rekod-tuntutan/{id}', [SaringanController::class, 'rekodTuntutan'])->name('rekod.tuntutan.id');
+    Route::get('tuntutan/sekretariat/sejarah/papar-tuntutan/{id}', [SaringanController::class, 'paparRekodTuntutan'])->name('papar.rekod.tuntutan.id');
     Route::get('tuntutan/sekretariat/sejarah/papar-saringan/{id}', [SaringanController::class, 'paparRekodSaringanTuntutan'])->name('papar.rekod.saringan.tuntutan.id');
 
 
@@ -144,7 +144,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan/penyelaras/sejarah/sejarah-tuntutan', [PenyelarasController::class, 'sejarahTuntutan']);
 
     //Permohonan - Penyelaras PPK 
-    //Permohonan - Penyelaras PPK
+    
     Route::get('permohonanbaruppk', [PenyelarasPPKController::class, 'permohonanbaruppk'])->name('permohonanbaruppk');
     Route::get('dashboardpenyelarasppk', [PenyelarasPPKController::class,'create'])->name('dashboardpenyelarasppk');
     Route::post('dashboardpenyelarasppk', [PenyelarasPPKController::class, 'store']);
