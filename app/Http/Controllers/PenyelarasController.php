@@ -39,7 +39,7 @@ class PenyelarasController extends Controller
             ->where('status','!=', '2');
         //dd($smoku);    
 
-        return view('pages.penyelaras.dashboard', compact('smoku'));
+        return view('dashboard.penyelaras_bkoku.dashboard', compact('smoku'));
 
     }
 
