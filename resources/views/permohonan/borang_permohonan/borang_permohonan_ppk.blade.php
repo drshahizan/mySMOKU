@@ -1,1451 +1,1568 @@
 <x-default-layout> 
-    <style>
-        /* Some custom styles to beautify this example */
-        .bs-example{
-            margin: 60px 0;
-        }
-        a, button{
-            margin-right: 30px;
-          }
-        i{
-            font-size: 22px;
-        }
-    </style>
-    
-    <script>
-    $(document).ready(function(){
-        $('[data-bs-toggle="tooltip"]').tooltip();
-    });
-    </script>
-            <!--begin::Page title-->
-    <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-        <!--begin::Title-->
-        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Permohonan</h1>
-        <!--end::Title-->
-        <!--begin::Breadcrumb-->
-        <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-            <!--begin::Item-->
-            <li class="breadcrumb-item text-dark">
-                <span class="text-dark text-hover-primary" style="color:darkblue">Permohonan</span>
-            </li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item">
-                <span class="bullet bg-gray-400 w-5px h-2px"></span>
-            </li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Borang Permohonan Baru</li>
-            <!--end::Item-->
-        </ul>
-        <!--end::Breadcrumb-->
-    </div>
-    <!--end::Page title-->
-    <br>
-    <main class="login-form">
-    <div class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid gap-10" id="kt_create_account_stepper">
-                                            <!--begin::Aside-->
-                                            <div class="card d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px">
-                                                <!--begin::Wrapper-->
-                                                <div class="card-body px-6 px-lg-10 px-xxl-15 py-20">
-                                                    <!--begin::Nav-->
-                                                    <div class="stepper-nav">
-                                                        
-                                                        <!--begin::Step 1-->
-                                                        <div class="stepper-item" data-kt-stepper-element="nav">
-                                                            <!--begin::Wrapper-->
-                                                            <div class="stepper-wrapper">
-                                                                <!--begin::Icon-->
-                                                                <div class="stepper-icon w-40px h-40px">
-                                                                    <i class="ki-duotone ki-check fs-2 stepper-check"></i>
-                                                                    <span class="stepper-number">1</span>
-                                                                </div>
-                                                                <!--end::Icon-->
-                                                                <!--begin::Label-->
-                                                                <div class="stepper-label">
-                                                                    <h3 class="stepper-title">Maklumat Peribadi</h3>
-                                                                    <div class="stepper-desc fw-semibold">Profil Peribadi Diri</div>
-                                                                </div>
-                                                                <!--end::Label-->
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                            <!--begin::Line-->
-                                                            <div class="stepper-line h-40px"></div>
-                                                            <!--end::Line-->
-                                                        </div>
-                                                        <!--end::Step 1-->
-                                                        <!--begin::Step 2-->
-                                                        <div class="stepper-item" data-kt-stepper-element="nav">
-                                                            <!--begin::Wrapper-->
-                                                            <div class="stepper-wrapper">
-                                                                <!--begin::Icon-->
-                                                                <div class="stepper-icon w-40px h-40px">
-                                                                    <i class="ki-duotone ki-check fs-2 stepper-check"></i>
-                                                                    <span class="stepper-number">2</span>
-                                                                </div>
-                                                                <!--end::Icon-->
-                                                                <!--begin::Label-->
-                                                                <div class="stepper-label">
-                                                                    <h3 class="stepper-title">Maklumat Waris</h3>
-                                                                    <div class="stepper-desc fw-semibold">Profil Waris</div>
-                                                                </div>
-                                                                <!--end::Label-->
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                            <!--begin::Line-->
-                                                            <div class="stepper-line h-40px"></div>
-                                                            <!--end::Line-->
-                                                        </div>
-                                                        <!--end::Step 2-->
-                                                        <!--begin::Step 3-->
-                                                        <div class="stepper-item" data-kt-stepper-element="nav">
-                                                            <!--begin::Wrapper-->
-                                                            <div class="stepper-wrapper">
-                                                                <!--begin::Icon-->
-                                                                <div class="stepper-icon w-40px h-40px">
-                                                                    <i class="ki-duotone ki-check fs-2 stepper-check"></i>
-                                                                    <span class="stepper-number">3</span>
-                                                                </div>
-                                                                <!--end::Icon-->
-                                                                <!--begin::Label-->
-                                                                <div class="stepper-label">
-                                                                    <h3 class="stepper-title">Maklumat Akademik</h3>
-                                                                    <div class="stepper-desc fw-semibold">Pembelajaran Akademik</div>
-                                                                </div>
-                                                                <!--end::Label-->
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                            <!--begin::Line-->
-                                                            <div class="stepper-line h-40px"></div>
-                                                            <!--end::Line-->
-                                                        </div>
-                                                        <!--end::Step 3-->
-                                                        <!--begin::Step 4-->
-                                                        <div class="stepper-item" data-kt-stepper-element="nav">
-                                                            <!--begin::Wrapper-->
-                                                            <div class="stepper-wrapper">
-                                                                <!--begin::Icon-->
-                                                                <div class="stepper-icon w-40px h-40px">
-                                                                    <i class="ki-duotone ki-check fs-2 stepper-check"></i>
-                                                                    <span class="stepper-number">4</span>
-                                                                </div>
-                                                                <!--end::Icon-->
-                                                                <!--begin::Label-->
-                                                                <div class="stepper-label">
-                                                                    <h3 class="stepper-title">Dokumen</h3>
-                                                                    <div class="stepper-desc fw-semibold">Salinan Dokumen</div>
-                                                                </div>
-                                                                <!--end::Label-->
-                                                                
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                            <div class="stepper-line h-40px"></div>
-                                                        </div>
-                                                        <!--end::Step 5-->
-                                                        <!--begin::Step 6-->
-                                                        <div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
-                                                            <!--begin::Wrapper-->
-                                                            <div class="stepper-wrapper">
-                                                                <!--begin::Icon-->
-                                                                <div class="stepper-icon w-40px h-40px">
-                                                                    <i class="ki-duotone ki-check fs-2 stepper-check"></i>
-                                                                    <span class="stepper-number">5</span>
-                                                                </div>
-                                                                <!--end::Icon-->
-                                                                <!--begin::Label-->
-                                                                <div class="stepper-label">
-                                                                    <h3 class="stepper-title">Perakuan</h3>
-                                                                    <div class="stepper-desc fw-semibold">Pengesahan Semua Maklumat</div>
-                                                                </div>
-                                                                <!--end::Label-->
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                            <!--begin::Line-->
-                                                            <div class="stepper-line h-40px"></div>
-                                                            <!--end::Line-->
-                                                        </div>
-                                                        <!--end::Step 6-->
-                                                        <!--begin::Step 7-->
-                                                        <div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
-                                                            <!--begin::Wrapper-->
-                                                            <div class="stepper-wrapper">
-                                                                <!--begin::Icon-->
-                                                                <div class="stepper-icon w-40px h-40px">
-                                                                    <i class="ki-duotone ki-check fs-2 stepper-check"></i>
-                                                                    <span class="stepper-number">6</span>
-                                                                </div>
-                                                                <!--end::Icon-->
-                                                                <!--begin::Label-->
-                                                                <div class="stepper-label">
-                                                                    <h3 class="stepper-title">Hantar</h3>
-                                                                    <div class="stepper-desc fw-semibold">Selesai</div>
-                                                                </div>
-                                                                <!--end::Label-->
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                            <!--begin::Line-->
-                                                            
-                                                            <!--end::Line-->
-                                                        </div>
-                                                        <!--end::Step 7-->
-    
-    
-                                                    </div>
-                                                    <!--end::Nav-->
-                                                </div>
-                                                <!--end::Wrapper-->
-                                            </div>
-        <!--begin::Aside-->
-                                            <!--begin::Content-->
-                                            <div class="card d-flex flex-row-fluid flex-center">
-                                                <!--begin::Form-->
-                                                <form id="p_mohonppk" action="{{ route('hantarpermohonanppk') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
-                                                
-                                                    <!--begin::Step 1-->
-                                                    <div class="current" data-kt-stepper-element="content">
-                                                    @csrf
-                                                        <!--begin::Wrapper-->
-                                                        <div class="w-100">
-                                                            <!--begin::Heading-->
-                                                            <div class="pb-10 pb-lg-15">
-                                                                <!--begin::Title-->
-                                                                <h2 class="fw-bold text-dark">Maklumat Peribadi</h2>
-                                                                <!--end::Title-->
-                                                                <!--begin::Notice-->
-                                                                <div class="text-muted fw-semibold fs-6">Profil Diri 
-                                                                </div>
-                                                                <!--end::Notice-->
-                                                            </div>
-                                                            <!--end::Heading-->
-                                                            @foreach ($smoku as $smoku)
-                                                            <!--begin::Input group-->
-                                                            <div class="mb-10 fv-row">
-                                                                <!--begin::Label-->
-                                                                <label class="form-label mb-3">Nama</label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Input-->
-                                                                <input type="text" class="form-control form-control-lg form-control-solid"  id="nama_pelajar" name="nama_pelajar" placeholder="" value="{{$smoku->nama}}" readonly/>
-                                                                <!--end::Input-->
-                                                            </div>
-                                                            <!--end::Input group-->
-                                                            <!--begin::Input group-->
-                                                            <div class="row mb-10">
-                                                                <!--begin::Col-->
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">No. Kad Pengenalan</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Row-->
-                                                                    <div class="row fv-row">
-                                                                        <!--begin::Col-->
-                                                                        <div class="col-12">
-                                                                            <input type="text" class="form-control form-control-lg form-control-solid" minlength="12" id="nokp_pelajar" name="nokp_pelajar" placeholder="" value="{{$smoku->nokp}}" readonly/>
-                                                                        </div>
-                                                                        <!--end::Col-->
-                                                                    </div>
-                                                                    <!--end::Row-->
-                                                                </div>
-                                                                <div class="col-md-4 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">Tarikh Lahir</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Row-->
-                                                                    <div class="row fv-row">
-                                                                        <!--begin::Col-->
-                                                                        <div class="col-12">
-                                                                            <!--begin::Input-->
-                                                                        <input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" id="tkh_lahir" name="tkh_lahir" value="{{$smoku->tkh_lahir}}" readonly/>
-                                                                        <!--end::Input-->
-                                                                        </div>
-                                                                    </div>	
-                                                                    </div>
-                                                                    <div class="col-md-2 fv-row">
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">Umur</label>
-                                                                    <!--end::Label-->
-                                                                    <div class="row fv-row">
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" id="umur" name="umur" placeholder="" value="{{$smoku->umur}}" readonly/>
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                    
-                                                                    </div>	
-                                                                    
-                                                                <!--end::Col-->
-                                                                <!--begin::Col-->
-                                                                
-                                                                <!--end::Col-->
-                                                            </div>
-                                                            <div class="row mb-10">
-                                                            <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">Jantina</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <select id="jantina" name="jantina" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true">
-                                                                            <option value="{{$smoku->kodjantina}}">{{$smoku->jantina}}</option>
-                                                                        </select>
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                            <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold form-label mb-2">Bangsa
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <select id="bangsa" name="bangsa" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true">
-                                                                            <option value="{{$smoku->kodbangsa}}">{{$smoku->bangsa}}</option>
-                                                                        </select>
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-    </div>
-                                                            <!--begin::Input group-->
-                                                            <div class="fv-row mb-10">
-                                                                <!--end::Label-->
-                                                                <label class="form-label">Alamat Tetap</label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Input-->
-                                                                <textarea id="alamat1" name="alamat1" class="form-control form-control-lg form-control-solid" rows="2" readonly>{{$smoku->alamat1}}</textarea>
-                                                                <!--end::Input-->
-                                                            </div>
-                                                            <div class="row mb-10">
-                                                                
-                                                                <div class="col-md-4 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">Negeri
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" id="alamat_negeri" name="alamat_negeri" placeholder="" value="{{$smoku->alamat_negeri}}" readonly/>
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                <div class="col-md-4 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">Bandar
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" id="alamat_bandar" name="alamat_bandar" placeholder="" value="{{$smoku->alamat_bandar}}" readonly/>
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                <div class="col-md-4 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">Poskod
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" id="alamat_poskod" name="alamat_poskod" placeholder="" value="{{$smoku->alamat_poskod}}" readonly/>
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Input group-->
-    
-                                                            <!--begin::Input group-->
-                                                            <div class="fv-row mb-7">
-                                                                <!--begin::Wrapper-->
-                                                                <div class="d-flex flex-stack">
-                                                                    <!--begin::Label-->
-                                                                    <div class="me-5">
-                                                                        <!--begin::Label-->
-                                                                        <label class="fs-6 fw-semibold">Use as a Alamat Surat Menyurat?</label>
-                                                                        <!--end::Label-->
-                                                                    </div>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Switch-->
-                                                                    <label class="form-check form-switch form-check-custom form-check-solid">
-                                                                        <!--begin::Input-->
-                                                                        <input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1" id="kt_modal_update_customer_billing" @foreach($pelajar as $pelajar1) @if($pelajar1->alamat_surat1)  checked="checked" @else checked=""  @endif @endforeach />
-                                                                        <!--end::Input-->
-                                                                        <!--begin::Label-->
-                                                                        <span class="form-check-label fw-semibold text-muted" for="kt_modal_update_customer_billing">Ya</span>
-                                                                        <!--end::Label-->
-                                                                    </label>
-                                                                    <!--end::Switch-->
-                                                                </div>
-                                                                <!--begin::Wrapper-->
-                                                            </div>
-                                                            <!--end::Input group-->
-                                                                
-                                                                <!--begin::Alamat Surat-->
-                                                                <div class="fv-row mb-10">
-                                                                    <!--end::Label-->
-                                                                    <label class="form-label">Alamat Surat Menyurat</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input-->
-                                                                    <textarea id="alamat_surat1" name="alamat_surat1" class="form-control form-control-lg form-control-solid" rows="2">@foreach($pelajar as $pelajar1) @if($pelajar1->alamat_surat1)  {{$pelajar1->alamat_surat1}} @else  @endif @endforeach </textarea>
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <div class="row mb-10">
-                                                                    
-                                                                    <div class="col-md-4 fv-row">
-                                                                        <!--begin::Label-->
-                                                                        <label class=" fs-6 fw-semibold form-label mb-2">Negeri
-                                                                        </label>
-                                                                        <!--end::Label-->
-                                                                        <!--begin::Input wrapper-->
-                                                                        <div class="col-12">
-                                                                            <!--begin::Input-->
-                                                                            <input type="text" class="form-control form-control-solid" id="alamat_surat_negeri" name="alamat_surat_negeri" placeholder="" @foreach($pelajar as $pelajar1) @if($pelajar1->alamat_surat_negeri)  value="{{$pelajar1->alamat_surat_negeri}}" @else value="" @endif @endforeach />
-                                                                            <!--end::Input-->
-                                                                        </div>
-                                                                        <!--end::Input wrapper-->
-                                                                    </div>
-                                                                    <div class="col-md-4 fv-row">
-                                                                        <!--begin::Label-->
-                                                                        <label class=" fs-6 fw-semibold form-label mb-2">Bandar
-                                                                        </label>
-                                                                        <!--end::Label-->
-                                                                        <!--begin::Input wrapper-->
-                                                                        <div class="col-12">
-                                                                            <!--begin::Input-->
-                                                                            <input type="text" class="form-control form-control-solid" id="alamat_surat_bandar" name="alamat_surat_bandar" placeholder="" @foreach($pelajar as $pelajar1) @if($pelajar1->alamat_surat_bandar)  value="{{$pelajar1->alamat_surat_bandar}}" @else value="" @endif @endforeach />
-                                                                            <!--end::Input-->
-                                                                        </div>
-                                                                        <!--end::Input wrapper-->
-                                                                    </div>
-                                                                    <div class="col-md-4 fv-row">
-                                                                        <!--begin::Label-->
-                                                                        <label class=" fs-6 fw-semibold form-label mb-2">Poskod
-                                                                        </label>
-                                                                        <!--end::Label-->
-                                                                        <!--begin::Input wrapper-->
-                                                                        <div class="col-12">
-                                                                            <!--begin::Input-->
-                                                                            <input type="text" class="form-control form-control-solid" id="alamat_surat_poskod" name="alamat_surat_poskod" placeholder="" @foreach($pelajar as $pelajar1) @if($pelajar1->alamat_surat_poskod)  value="{{$pelajar1->alamat_surat_poskod}}" @else value="" @endif @endforeach />
-                                                                            <!--end::Input-->
-                                                                        </div>
-                                                                        <!--end::Input wrapper-->
-                                                                    </div>
-                                                                </div>
-    
-                                                            <!--end::Input group-->
-    
-                                                            <div class="row mb-10">
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">No. Tel(HP)
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" id="no_tel" name="no_tel" placeholder="" value="{{$smoku->no_tel}}" />
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">No. Tel Rumah
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" id="no_telR" name="no_telR" placeholder="" value="{{$smoku->no_telR}}" />
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                            </div>
-                                                            
-                                                            <!--end::Input group-->
-                                                            <!--end::Input group-->
-                                                            <div class="row mb-10">
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">Alamat emel
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$smoku->email}}" readonly/>
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                            <div class="separator my-14"></div>
-                                                            <div class="pb-10 pb-lg-15">
-                                                                <!--begin::Title-->
-                                                                <h2 class="fw-bold text-dark">Maklumat Sistem Maklumat Orang Kurang Upaya (SMOKU)</h2>
-                                                                <!--end::Title-->
-                                                                <!--begin::Notice-->
-                                                                <div class="text-muted fw-semibold fs-6">Jabatan Kebajikan Malaysia 
-                                                                </div>
-                                                                <!--end::Notice-->
-                                                            </div>
-                                                            <div class="row mb-10">
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">No. JKM
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" id="noJKM" name="noJKM" placeholder="" value="{{$smoku->noJKM}}"  readonly/>
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold form-label mb-2">Kecacatan
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" placeholder="" value="{{$smoku->kecacatan}}" readonly/>
-                                                                        <input type="hidden" class="form-control form-control-solid" id="kecacatan" name="kecacatan" placeholder="" value="{{$smoku->kodoku}}" readonly/>
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                
-                                                            </div>
-                                                            <!--end::Input group-->
-                                                            <!--begin::Input group-->
-                                                            <div class="separator my-14"></div>
-                                                            <div class="pb-10 pb-lg-15">
-                                                                <!--begin::Title-->
-                                                                <h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
-                                                                <!--end::Title-->
-                                                                <!--begin::Notice-->
-                                                                <div class="text-muted fw-semibold fs-6">Bank Islam 
-                                                                </div>
-                                                                <!--end::Notice-->
-                                                            </div>
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="16113020138680"><i class="fa-solid fa-circle-info"></i></a>
-                                                                    
-                                                                    
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaunbank" name="no_akaunbank" placeholder="" @foreach($pelajar as $pelajar) @if($pelajar->no_akaunbank)  value="{{$pelajar->no_akaunbank}}" @else value="" @endif @endforeach	/>
-                                                                        <!--end::Input-->
-                                                                        
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                
-                                                            </div>
-                                                            <!--end::Input group-->
-                                                        </div>
-                                                        
-                                                        <!--end::Wrapper-->
-                                                    </div>
-                                                    <!--end::Step 1-->
-    
-                                                    <!--begin::Step 2-->
-                                                    <div data-kt-stepper-element="content">
-                                                    @csrf	
-                                                        <!--begin::Wrapper-->
-                                                        <div class="w-100">
-                                                            <!--begin::Heading-->
-                                                            <div class="pb-10 pb-lg-15">
-                                                                <!--begin::Title-->
-                                                                <h2 class="fw-bold text-dark">Maklumat Waris</h2>
-                                                                <!--end::Title-->
-                                                                <!--begin::Notice-->
-                                                                <div class="text-muted fw-semibold fs-6">Profil Waris
-                                                                </div>
-                                                                <!--end::Notice-->
-                                                            </div>
-                                                            <!--end::Heading-->
-                                                            <!--begin::Input group-->
-                                                            <div class="mb-10 fv-row">
-                                                                <!--begin::Label-->
-                                                                <label class="form-label mb-3">Nama</label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Input-->
-                                                                <input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" placeholder="" value="{{$smoku->nama_waris}}" />
-                                                                <!--end::Input-->
-                                                            </div>
-                                                            <div class="row mb-10">
-                                                                <!--begin::Col-->
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">No. Kad Pengenalan</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Row-->
-                                                                    <div class="row fv-row">
-                                                                        <!--begin::Col-->
-                                                                        <div class="col-12">
-                                                                            <input type="text" class="form-control form-control-lg form-control-solid" id="nokp_waris" name="nokp_waris" placeholder="" value="{{$smoku->nokp_waris}}" />
-                                                                        </div>
-                                                                        <!--end::Col-->
-                                                                    </div>
-                                                                    <!--end::Row-->
-                                                                </div>
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">No Pasport</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Row-->
-                                                                    <div class="row fv-row">
-                                                                        <!--begin::Col-->
-                                                                        <div class="col-12">
-                                                                            <input type="text" class="form-control form-control-lg form-control-solid" id="noPasport" name="noPasport" placeholder="" value="" />
-                                                                        </div>
-                                                                        <!--end::Col-->
-                                                                    </div>
-                                                                    <!--end::Row-->
-                                                                </div>
-                                                            </div>
-                                                            <div class="row mb-10 hubungan_row">
-                                                                <!--begin::Label-->
-                                                                <div class="col-md-6 fv-row hubungan_row">
-                                                                <label class="form-label mb-6">Hubungan Waris</label>
-                                                                    
-                                                                <select id="hubungan" name="hubungan" class="form-select form-select-lg form-select-solid" onchange="lainhubungan()" data-control="select2" data-placeholder="Pilih" >
-                                                                
-                                                                @if ($smoku->hubungan)
-                                                                <option value="{{$smoku->kodhubungan}}">{{$smoku->hubungan}}</option>
-                                                                @endif
-                                                                @foreach ($hubungan as $hubungan)
-                                                                <option  value="{{$hubungan->kodhubungan}}" >{{$hubungan->hubungan}}</option>
-                                                                @endforeach
-                                                                </select>
-                                                                
-                                                            </div>
-                                                            <div class="col-md-6 fv-row" id="lain_hubungan">
-                                                                <!--begin::Label-->
-                                                                <label class="form-label mb-6">(Jika Lain-lain) Sila Nyatakan:</label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Input-->
-                                                                <input type="text" class="form-control form-control-lg form-control-solid" id="lain_hubungan" name="lain_hubungan" placeholder="" value="{{$smoku->lain_hubungan}}" />
-                                                                <!--end::Input-->													
-                                                                </div>
-                                                            </div>
-                                                            
-                                                            <!--end::Input group-->
-                                                            <!--begin::Input group-->
-                                                            <div class="fv-row mb-10">
-                                                                <!--end::Label-->
-                                                                <label class="form-label">Alamat Rumah</label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Input-->
-                                                                <textarea id="alamatW1" name="alamatW1" class="form-control form-control-lg form-control-solid" rows="2"> </textarea>
-                                                                <!--end::Input-->
-                                                            </div>
-                                                            <div class="row mb-10">
-                                                                
-                                                                <div class="col-md-4 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold form-label mb-2">Negeri
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <select id="alamatW_negeri" name="alamatW_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-                                                                            <option value="">Pilih</option>
-                                                                            @foreach ($negeri as $negeri)	
-                                                                            <option value="{{ $negeri->id}}">{{ $negeri->nama}}</option> 
-                                                                            @endforeach
-                                                                        </select>
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                <div class="col-md-4 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold form-label mb-2">Bandar
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <select id='alamatW_bandar'  name='alamatW_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-                                                                            <option value="">Pilih</option>
-                                                                        </select>
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                <div class="col-md-4 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold form-label mb-2">Poskod
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" id="alamatW_poskod" name="alamatW_poskod" placeholder="" value="" />
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                
-                                                            </div>
-                                                            <!--end::Input group-->
-                                                            <div class="row mb-10">
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold form-label mb-2">No. Tel(HP)
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" id="no_telW" name="no_telW" placeholder="" value="{{$smoku->notel_waris}}"  />
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold form-label mb-2">No. Tel Rumah
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" id="no_telRW" name="no_telRW" placeholder="" value="" />
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                </div>
-                                                                <div class="row mb-10">
-    
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold form-label mb-2">Pekerjaan
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" id="pekerjaan" name="pekerjaan" placeholder="" value="{{$smoku->pekerjaan_waris}}"  />
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold form-label mb-2">Pendapatan
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <div class="col-12">
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" id="pendapatan" name="pendapatan" placeholder="" value="{{$smoku->pendapatan_waris}}"  />
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                            
-                                                                @endforeach
-    </div>
-                                                        <!--end::Input group-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </div>
-                                                    <!--end::Step 2-->
-    
-                                                    <!--begin::Step 3-->
-                                                    <div data-kt-stepper-element="content">
-                                                    @csrf		
-                                                        <!--begin::Wrapper-->
-                                                        <div class="w-100">
-                                                            <!--begin::Heading-->
-                                                            <div class="pb-10 pb-lg-15">
-                                                                <!--begin::Title-->
-                                                                <h2 class="fw-bold text-dark">Maklumat Akademik</h2>
-                                                                <!--end::Title-->
-                                                                <!--begin::Notice-->
-                                                                <div class="text-muted fw-semibold fs-6">Profil Akademik</div>
-                                                                <!--end::Notice-->
-                                                            </div>
-                                                            <!--end::Heading-->
-    
-                                                            <!--begin::Input group-->
-                                                            <div class="row mb-10">
-                                                                <!--begin::Col-->
-                                                                <div class="col-md-7 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                                                                        <span class="">Nama Pusat Pengajian</span>
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Row-->
-                                                                    <div class="row fv-row">
-                                                                        <!--begin::Input wrapper-->
-                                                                        <select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-                                                                            @foreach ($infoipt as $infoipt)
-                                                                                <option></option>
-                                                                                <option value="{{ $infoipt->idipt}}">{{ $infoipt->namaipt}}</option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                        <!--end::Input wrapper-->
-                                                                    </div>
-                                                                    <!--end::Row-->
-                                                                </div>
-                                                                <!--end::Col-->
-                                                                <!--begin::Col-->
-                                                                <div class="col-md-5 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Row-->
-                                                                    <div class="row fv-row">
-                                                                        <!--begin::Input wrapper-->
-                                                                        <select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-hide-search="true">
-                                                                            <option value="">Pilih</option>
-                                                                            @foreach ($peringkat as $peringkat)	
-                                                                                <option value="{{ $peringkat->kodperingkat}}">{{ $peringkat->peringkat}}</option> 
-                                                                            @endforeach
-                                                                        </select>
-                                                                        <!--end::Input wrapper-->
-                                                                    </div>
-                                                                    <!--end::Row-->
-                                                                </div>
-                                                                <!--end::Col-->
-                                                            </div>
-                                                            <!--end::Input group-->
-    
-                                                            
-                                                            <div class="d-flex flex-column mb-7 fv-row">
-                                                                <!--begin::Label-->
-                                                                <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                                                                    <span class="">Nama Kursus</span>
-                                                                    
-                                                                </label>
-                                                                <!--end::Label-->
-                                                                <select id='nama_kursus'  name='nama_kursus' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-                                                                    <option value="">Pilih</option>
-                                                                </select>
-                                                            </div>
-                                                            
-                                                            
-                                                            
-                                                            <!--end::Input group-->
-    
-                                                            <!--begin::Input group-->
-                                                            <div class="row mb-10">
-                                                                
-                                                                
-                                                                <!--begin::Col-->
-                                                                <div class="col-md-4 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                                                                    <span class="">Sesi Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                        <!--begin::Input wrapper-->
-                                                                        <input type="text" class="form-control form-control-solid" placeholder="" id="sesi" name="sesi" value="" />
-                                                                        <!--end::Input wrapper-->
-                                                                </div>
-                                                                <!--end::Col-->
-                                                                <div class="col-md-4 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                                                                        <span class="">No Pendaftaran Pelajar</span>
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaranpelajar" name="no_pendaftaranpelajar" value="" />
-                                                                </div>
-    
-                                                                <!--begin::Col-->
-                                                                <div class="col-md-4 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                        <input type="number" class="form-control form-control-solid" placeholder="" id="tempoh_pengajian" name="tempoh_pengajian" value="" />
-                                                                        <!--end::Input wrapper-->
-                                                                </div>
-                                                                <!--end::Col-->
-                                                            
-                                                            </div>
-                                                            <!--end::Input group-->
-                                                            
-    
-    
-                                                            <!--begin::Input group-->
-                                                            <div class="row mb-10">
-                                                                <!--begin::Col-->
-                                                                <div class="col-md-4 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold form-label mb-2">Tarikh Mula Pengajian</label>
-                                                                    <!--end::Label-->
-                                                                        <!--begin::Input wrapper-->
-                                                                        <input type="date" class="form-control form-control-solid" placeholder="" id="tkh_mula" name="tkh_mula" value="" />
-                                                                        <!--end::Input wrapper-->
-                                                                </div>
-                                                                <!--end::Col-->
-                                                                <!--begin::Col-->
-                                                                <div class="col-md-4 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tarikh Tamat Pengajian</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                        <input type="date" class="form-control form-control-solid" placeholder="" id="tkh_tamat" name="tkh_tamat" value="" />
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                <!--end::Col-->
-                                                            </div>
-                                                            <!--end::Input group-->
-    
-                                                            <!--begin::Input group-->
-                                                            <div class="row mb-10">
-                                                                <!--begin::Col-->
-                                                                <div class="col-md-4 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">Semester Semasa</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Row-->
-                                                                    <div class="row fv-row">
-                                                                        <!--begin::Input wrapper-->
-                                                                        
-                                                                            <select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-                                                                                <option></option>
-                                                                                <option value="1">1</option>
-                                                                                <option value="2">2</option>
-                                                                                <option value="3">3</option>
-                                                                                <option value="4">4</option> 
-                                                                            </select>
-                                                                        <!--end::Input wrapper-->
-                                                                    </div>
-                                                                    <!--end::Row-->
-                                                                </div>
-                                                                <!--end::Col-->
-                                                            </div>
-                                                            <!--end::Input group-->
-    
-                                                            
-    
-                                                            
-    
-                                                            <!--begin::Input group-->
-                                                            <div class="row mb-10">
-                                                                <!--begin::Col-->
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class=" fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label> <a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Row-->
-                                                                    <div class="row fv-row">
-                                                                        <!--begin::Input wrapper-->
-                                                                            <select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-                                                                                @foreach ($biaya as $biaya)
-                                                                                <option></option>
-                                                                                <option value="{{ $biaya->kodbiaya}}">{{ $biaya->biaya}}</option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                        <!--end::Input wrapper-->
-                                                                    </div>
-                                                                    <!--end::Row-->
-                                                                </div>
-                                                                <!--end::Col-->
-                                                                <!--begin::Col-->
-                                                                <div class="col-md-6 fv-row">
-                                                                    <!--begin::Label-->
-                                                                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Lain-lain</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input wrapper-->
-                                                                    <input type="text" class="form-control form-control-solid" placeholder="" id="sumber_biayalain" name="sumber_biayalain" value="" />
-                                                                    <!--end::Input wrapper-->
-                                                                </div>
-                                                                <!--end::Col-->
-                                                            </div>
-                                                            <!--end::Input group-->
-    
-                                                            <div class="d-flex flex-column mb-7 fv-row">
-                                                                <!--begin::Label-->
-                                                                <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                                                                    <span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
-                                                                    
-                                                                </label>															
-                                                                <!--end::Label-->
-                                                                <input type="text" class="form-control form-control-solid" placeholder="JPA" id="nama_penaja" name="nama_penaja" value="" />
-                                                            </div>
-                                                            
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </div>
-                                                    <!--end::Step 3-->
-                                                    <!--begin::Step 4-->
-                                                    <div data-kt-stepper-element="content">
-                                                    @csrf
-                                                        <!--begin::Wrapper-->
-                                                        <div class="w-100">
-                                                            <!--begin::Heading-->
-                                                            <div class="pb-10 pb-lg-15">
-                                                                <!--begin::Title-->
-                                                                <h2 class="fw-bold text-dark">Dokumen</h2>
-                                                                <!--end::Title-->
-                                                                <!--begin::Notice-->
-                                                                <div class="text-muted fw-semibold fs-6">Senarai Dokumen</div>
-                                                                <!--end::Notice-->
-                                                            </div>
-                                                            <!--end::Heading-->
-                                                    
-                                                            <!--begin::Table-->
-                                                            <table id="kt_file_manager_list" data-kt-filemanager-table="files" class="table align-middle table-row-dashed fs-6 gy-5">
-                                                                <thead>
-                                                                    <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                                                                        
-                                                                        <th class="w-250px">Nama</th>
-                                                                        <th class="w-250px">Dokumen</th>
-                                                                        <th class="w-200px">Catatan</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody class="fw-semibold text-gray-600">
-                                                                    <tr>
-                                                                        <td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
-                                                                        <td class="fv-row"><input type="file" id="akaunBank" name="akaunBank"/></td>
-                                                                        <td><input type="text" class="form-control form-control-solid" id="nota_akaunBank" name="nota_akaunBank"/></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></td>
-                                                                        <td class="fv-row"><input type="file" id="suratTawaran" name="suratTawaran"/></td>
-                                                                        <td><input type="text" class="form-control form-control-solid" id="nota_suratTawaran" name="nota_suratTawaran"/></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                            <!--end::Table-->
-                                                            <br>
-                                                            <br>
-    
-                                                            <div class="pb-10 pb-lg-15">
-                                                                <!--begin::Notice-->
-                                                                <div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:red'></i>&nbsp; <a href="https://compressjpeg.com/" target="_blank">Kecilkan saiz fail dokumen disini.</a>
-                                                                </div>
-    
-                                                                <div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:red'></i>&nbsp; Format fail yang boleh dimuat naik adalah format 
-                                                                '.pdf', '.jpg', '.png' dan '.jpeg'
-                                                                </div>
-                                                                <div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:red'></i>&nbsp; Saiz maksimum fail adalah 2 MB.
-                                                                </div>
-                                                                <!--end::Notice-->
-                                                            </div>
-            
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </div>
-                                                    <!--end::Step 5-->
-    
-                                                    <!--begin::Step 5-->
-                                                    <div data-kt-stepper-element="content">
-                                                    @csrf	
-                                                    
-                                                        <!--begin::Wrapper-->
-                                                        <div class="w-100">
-                                                            <!--begin::Heading-->
-                                                            <div class="pb-10 pb-lg-15">
-                                                                <!--begin::Title-->
-                                                                <h2 class="fw-bold text-dark">Perakuan dan Pengesahan</h2>
-                                                                <!--end::Title-->
-                                                                <!--begin::Notice-->
-                                                                <div class="text-muted fw-semibold fs-6">Perakuan</div>
-                                                                <!--end::Notice-->
-                                                            </div>
-                                                            <!--end::Heading-->
-                                                            
-                                                            <div class="d-flex flex-column mb-7 fv-row">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" value="1" id="perakuan" name="perakuan"/>
-                                                                    <label class="form-check-label" >
-                                                                    Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
-                                                                    sekiranya maklumat yang diberikan didapati palsu atau tidak benar, pihak kementerian berhak menolak
-                                                                    permohonan saya dan menghentikan bantuan kewangan ini kepada saya.
-                                                                    </label>
-                                                                </div>
-                                                                
-                                                            </div>
-    
-                                                            
-                                                            
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </div>
-                                                    <!--end::Step 5-->
-    
-                                                    <!--begin::Step 6-->
-                                                    <div data-kt-stepper-element="content">
-                                                        <!--begin::Wrapper-->
-                                                        <div class="w-100">
-                                                            <!--begin::Heading-->
-                                                            <div class="pb-8 pb-lg-10">
-                                                                <!--begin::Title-->
-                                                                <h2 class="fw-bold text-dark">Your Are Done!</h2>
-                                                                <!--end::Title-->
-                                                                <!--begin::Notice-->
-                                                                <div class="text-muted fw-semibold fs-6">If you need more info, please......</div>
-                                                                <!--end::Notice-->
-                                                            </div>
-                                                            <!--end::Heading-->
-                                                            <!--begin::Body-->
-                                                            <div class="mb-0">
-                                                                <!--begin::Text-->
-                                                                <div class="fs-6 text-gray-600 mb-5">Writing headlines for blog posts is as much an art as it is a science and probably warrants its own post, but for all advise is with what works for your great & amazing audience.</div>
-                                                                <!--end::Text-->
-                                                                <!--begin::Alert-->
-                                                                <!--begin::Notice-->
-                                                                <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
-                                                                    <!--begin::Icon-->
-                                                                    <i class="ki-duotone ki-information fs-2tx text-warning me-4">
-                                                                        <span class="path1"></span>
-                                                                        <span class="path2"></span>
-                                                                        <span class="path3"></span>
-                                                                    </i>
-                                                                    <!--end::Icon-->
-                                                                    <!--begin::Wrapper-->
-                                                                    <div class="d-flex flex-stack flex-grow-1">
-                                                                        <!--begin::Content-->
-                                                                        <div class="fw-semibold">
-                                                                            <h4 class="text-gray-900 fw-bold">We need your attention!</h4>
-                                                                            <div class="fs-6 text-gray-700">To start using great tools, please,
-                                                                            ...</div>
-                                                                        </div>
-                                                                        <!--end::Content-->
-                                                                    </div>
-                                                                    <!--end::Wrapper-->
-                                                                </div>
-                                                                <!--end::Notice-->
-                                                                <!--end::Alert-->
-                                                            </div>
-                                                            <!--end::Body-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </div>
-                                                    <!--end::Step 6-->
-                                                    <!--begin::Actions-->
-                                                    <div class="d-flex flex-stack pt-10">
-                                                        <!--begin::Wrapper-->
-                                                        <div class="mr-2">
-                                                            <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
-                                                            <i class="ki-duotone ki-arrow-left fs-4 me-1">
-                                                                <span class="path1"></span>
-                                                                <span class="path2"></span>
-                                                            </i>Kembali</button>
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                        <!--begin::Wrapper-->
-                                                        <div>
-                                                            <button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
-                                                                <span class="indicator-label">Hantar
-                                                                <i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
-                                                                    <span class="path1"></span>
-                                                                    <span class="path2"></span>
-                                                                </i></span>
-                                                                <span class="indicator-progress">Please wait...
-                                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                            </button>
-                                                            <button type="button" class="btn btn-lg btn-primary save-form" data-kt-stepper-action="next">Teruskan
-                                                            <i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
-                                                                <span class="path1"></span>
-                                                                <span class="path2"></span>
-                                                            </i>
-                                                            </button>
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </div>
-                                                    <!--end::Actions-->
-                                                </form>
-                                                <!--end::Form-->
-                                            </div>
-                                            <!--end::Content-->
-                                        </div>
-                                        <!--end::Stepper-->
-                                    </div>
-                                    <!--end::Content container-->
-                                </div>
-                                <!--end::Content-->
-                            </div>
-    
-    </div>
-    </main>
-    
-    
-    
-    <!--begin::Javascript-->
-    
-            <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-            <script src="/assets/js/scripts.bundle.js"></script>
-            <!--end::Global Javascript Bundle-->
-    
-            <!--begin::Custom Javascript(used for this page only)-->
-            <script src="/assets/js/custom/utilities/modals/penyelarasmohon.js"></script>
-    
-            <!--end::Custom Javascript-->
-            <!--end::Javascript-->
-    
-            <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-            <script type="text/javascript">
-       
-                $(".save-form").click(function(e){
-                    e.preventDefault();
-                    var data = $('#p_mohonppk').serialize();
-                    //alert (data);
-                    $.ajax({
-                        type: 'post',
-                        url: "{{ route('simpanpermohonanppk') }}",
-                        data: data,
-    
-                    });
-                    
-                });
-            </script> 
-            <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-            <script>
-    
-            function myFunction() {
-                var checkBox = document.getElementById("sama");  
-                var alamat1 = document.getElementById("alamat1");
-                var alamat_negeri = document.getElementById("alamat_negeri");
-                var alamat_bandar = document.getElementById("alamat_bandar");
-                var alamat_poskod = document.getElementById("alamat_poskod");
-    
-                var alamat_surat1 = document.getElementById("alamat_surat1");
-                var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
-                var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
-                var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
-                if (checkBox.checked == true){
-                    alamat_surat1.value=alamat1.value; 
-                    alamat_surat_negeri.value=alamat_negeri.value;
-                    alamat_surat_bandar.value=alamat_bandar.value;
-                    alamat_surat_poskod.value=alamat_poskod.value;
-                } else {
-                    alamat_surat1.value="";
-                    alamat_surat_negeri.value="";
-                    alamat_surat_bandar.value="";
-                    alamat_surat_poskod.value="";
-                }
-            }	
-    
-                $(document).ready(function(){
-                    $('#alamatW_negeri').on('change', function() {
-                        var idnegeri = $(this).val();
-                        //alert(idnegeri);
-                        // Empty the dropdown
-                        $('#alamatW_bandar').find('option').not(':first').remove();
-    
-                        // AJAX request 
-                        $.ajax({
-                            
-                            url: '/bandar/'+idnegeri,
-                            type: 'get',
-                            dataType: 'json',
-                            success: function(response){
-                                //alert('AJAX loaded something');
-                                var len = 0;
-                                        if(response['data'] != null){
-                                            len = response['data'].length;
-                                        }
-    
-                                        if(len > 0){
-                                            // Read data and create <option >
-                                            for(var i=0; i<len; i++){
-    
-                                                var id = response['data'][i].id;
-                                                var nama = response['data'][i].nama;
-    
-                                                var option = "<option value='"+id+"'>"+nama+"</option>";
-    
-                                                $("#alamatW_bandar").append(option); 
-                                            }
-                                        }
-                                }, 
-                                error: function(){
-                                alert('AJAX load did not work');
-                                }
-    
-                        });
-                    });
-    
-                });
-    
-                $(document).ready(function() {
-                $('.js-example-basic-single').select2();
-                });
-            </script>
-    
-            <!-- Script -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-            <script type='text/javascript'>
-            $(document).ready(function(){
-    
-                // institusi Change
-                $('#id_institusi').change(function(){
-    
-                    // institusi id
-                    var idipt = $(this).val();
-                    var kodperingkat = $(this).val();
-                    //alert (idipt);
-    
-                    // Empty the dropdown
-                    $('#peringkat_pengajian').find('option').not(':first').remove();
-                    $('#nama_kursus').find('option').not(':first').remove();
-    
-                    // AJAX request 
-                    $.ajax({
-                        url: '/peringkat/'+idipt,
-                        type: 'get',
-                        dataType: 'json',
-                        success: function(response){
-                            //alert('AJAX loaded something');
-    
-                            var len = 0;
-                            if(response['data'] != null){
-                                len = response['data'].length;
-                            }
-    
-                            if(len > 0){
-                                // Read data and create <option >
-                                for(var i=0; i<len; i++){
-    
-                                    var idipt = response['data'][i].idipt;
-                                    var kodperingkat = response['data'][i].kodperingkat;
-                                    var peringkat = response['data'][i].peringkat;
-    
-                                    var option = "<option value='"+kodperingkat+"'>"+peringkat+"</option>";
-    
-                                    $("#peringkat_pengajian").append(option); 
-                                }
-                            }
-    
-                        },
-                        error: function(){
-                        alert('AJAX load did not work');
-                        }
-                    });
-    
-                });
-    
-                // peringkat Change
-                $('#peringkat_pengajian').change(function(){
-    
-                // institusi id
-                var idipt = $(id_institusi).val();
-                var kodperingkat = $(this).val();
-    
-                // Empty the dropdown
-                $('#nama_kursus').find('option').not(':first').remove();
-                //alert(idipt);
-    
-    
-                // AJAX request 
-                $.ajax({
-                    url: '/kursus/'+kodperingkat+'/'+idipt,
-                    type: 'get',
-                    dataType: 'json',
-                
-                    success: function(response){
-    
-                        var len = 0;
-                        if(response['data'] != null){
-                            len = response['data'].length;
-                        }
-    
-                        if(len > 0){
-                            // Read data and create <option >
-                            for(var i=0; i<len; i++){
-    
-                                var idipt = response['data'][i].idipt;
-                                var kodperingkat = response['data'][i].kodperingkat;
-                                var nama_kursus = response['data'][i].nama_kursus;
-    
-                                var option = "<option value='"+nama_kursus+"'>"+nama_kursus+"</option>";
-    
-                                $("#nama_kursus").append(option); 
-                                
-                            }
-                        }
-    
-                    }
-                });
-    
-                });
-    
-    
-    
-            });
-    
-            $(document).ready(function() {
-            $('.js-example-basic-single').select2();
-            });
-            </script>
-    
-    
-    
-            <script>
-                function lainhubungan(){
-                var hubungan = document.getElementById('hubungan').value;
-                if(hubungan=="6"){
-                    document.getElementById("lain_hubungan").style.display = "inline";
-                }
-                else{
-                    document.getElementById("lain_hubungan").style.display = "none";
-                }
+	<style>
+		/* Some custom styles to beautify this example */
+		.bs-example{
+			margin: 60px 0;
+		}
+		a, button{
+			margin-right: 30px;
+		  }
+		i{
+			font-size: 22px;
+		}
+	</style>
+	<script>
+	$(document).ready(function(){
+		$('[data-bs-toggle="tooltip"]').tooltip();
+	});
+	</script>	
+
+<!--begin::Page title-->
+<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+	<!--begin::Title-->
+	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Permohonan</h1>
+	<!--end::Title-->
+	<!--begin::Breadcrumb-->
+	<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+		<!--begin::Item-->
+		<li class="breadcrumb-item text-dark">
+			<span class="text-dark text-hover-primary" style="color:darkblue">Permohonan</span>
+		</li>
+		<!--end::Item-->
+		<!--begin::Item-->
+		<li class="breadcrumb-item">
+			<span class="bullet bg-gray-400 w-5px h-2px"></span>
+		</li>
+		<!--end::Item-->
+		<!--begin::Item-->
+		<li class="breadcrumb-item text-dark" style="color:darkblue">Borang Permohonan Baru</li>
+		<!--end::Item-->
+	</ul>
+	<!--end::Breadcrumb-->
+</div>
+<!--end::Page title-->
+<br>
+<div class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid gap-10" id="kt_create_account_stepper">
+	<!--begin::Aside-->
+	<div class="card d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px">
+		<!--begin::Wrapper-->
+		<div class="card-body px-6 px-lg-10 px-xxl-15 py-20">
+			<!--begin::Nav-->
+			<div class="stepper-nav">
+				<!--begin::Step 1-->
+				<div class="stepper-item" data-kt-stepper-element="nav">
+					<!--begin::Wrapper-->
+					<div class="stepper-wrapper">
+						<!--begin::Icon-->
+						<div class="stepper-icon w-40px h-40px">
+							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+							<span class="stepper-number">1</span>
+						</div>
+						<!--end::Icon-->
+						<!--begin::Label-->
+						<div class="stepper-label">
+							<h3 class="stepper-title">Maklumat Peribadi</h3>
+							<div class="stepper-desc fw-semibold">Profil Peribadi Diri</div>
+						</div>
+						<!--end::Label-->
+					</div>
+					<!--end::Wrapper-->
+					<!--begin::Line-->
+					<div class="stepper-line h-40px"></div>
+					<!--end::Line-->
+				</div>
+				<!--end::Step 1-->
+				<!--begin::Step 2-->
+				<div class="stepper-item" data-kt-stepper-element="nav">
+					<!--begin::Wrapper-->
+					<div class="stepper-wrapper">
+						<!--begin::Icon-->
+						<div class="stepper-icon w-40px h-40px">
+							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+							<span class="stepper-number">2</span>
+						</div>
+						<!--end::Icon-->
+						<!--begin::Label-->
+						<div class="stepper-label">
+							<h3 class="stepper-title">Maklumat Waris</h3>
+							<div class="stepper-desc fw-semibold">Profil Waris</div>
+						</div>
+						<!--end::Label-->
+					</div>
+					<!--end::Wrapper-->
+					<!--begin::Line-->
+					<div class="stepper-line h-40px"></div>
+					<!--end::Line-->
+				</div>
+				<!--end::Step 2-->
+				<!--begin::Step 3-->
+				<div class="stepper-item" data-kt-stepper-element="nav">
+					<!--begin::Wrapper-->
+					<div class="stepper-wrapper">
+						<!--begin::Icon-->
+						<div class="stepper-icon w-40px h-40px">
+							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+							<span class="stepper-number">3</span>
+						</div>
+						<!--end::Icon-->
+						<!--begin::Label-->
+						<div class="stepper-label">
+							<h3 class="stepper-title">Maklumat Akademik</h3>
+							<div class="stepper-desc fw-semibold">Pembelajaran Akademik</div>
+						</div>
+						<!--end::Label-->
+					</div>
+					<!--end::Wrapper-->
+					<!--begin::Line-->
+					<div class="stepper-line h-40px"></div>
+					<!--end::Line-->
+				</div>
+				<!--end::Step 3-->
+				<!--begin::Step 4-->
+				<div class="stepper-item" data-kt-stepper-element="nav">
+					<!--begin::Wrapper-->
+					<div class="stepper-wrapper">
+						<!--begin::Icon-->
+						<div class="stepper-icon w-40px h-40px">
+							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+							<span class="stepper-number">4</span>
+						</div>
+						<!--end::Icon-->
+						<!--begin::Label-->
+						<div class="stepper-label">
+							<h3 class="stepper-title">Maklumat Tuntutan</h3>
+							<div class="stepper-desc fw-semibold">Tuntutan Yuran dan Elaun Wang Saku</div>
+						</div>
+						<!--end::Label-->
+						
+					</div>
+					<!--end::Wrapper-->
+					<div class="stepper-line h-40px"></div>
+				</div>
+				<!--end::Step 4-->
+				<!--begin::Step 5-->
+				<div class="stepper-item" data-kt-stepper-element="nav">
+					<!--begin::Wrapper-->
+					<div class="stepper-wrapper">
+						<!--begin::Icon-->
+						<div class="stepper-icon w-40px h-40px">
+							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+							<span class="stepper-number">5</span>
+						</div>
+						<!--end::Icon-->
+						<!--begin::Label-->
+						<div class="stepper-label">
+							<h3 class="stepper-title">Dokumen</h3>
+							<div class="stepper-desc fw-semibold">Salinan Dokumen</div>
+						</div>
+						<!--end::Label-->
+						
+					</div>
+					<!--end::Wrapper-->
+					<div class="stepper-line h-40px"></div>
+				</div>
+				<!--end::Step 5-->
+				<!--begin::Step 6-->
+				<div class="stepper-item" data-kt-stepper-element="nav">
+					<!--begin::Wrapper-->
+					<div class="stepper-wrapper">
+						<!--begin::Icon-->
+						<div class="stepper-icon w-40px h-40px">
+							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+							<span class="stepper-number">6</span>
+						</div>
+						<!--end::Icon-->
+						<!--begin::Label-->
+						<div class="stepper-label">
+							<h3 class="stepper-title">Perakuan</h3>
+							<div class="stepper-desc fw-semibold">Pengesahan Semua Maklumat</div>
+						</div>
+						<!--end::Label-->
+					</div>
+					<!--end::Wrapper-->
+					<!--begin::Line-->
+					<div class="stepper-line h-40px"></div>
+					<!--end::Line-->
+				</div>
+				<!--end::Step 6-->
+				<!--begin::Step 7-->
+				<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
+					<!--begin::Wrapper-->
+					<div class="stepper-wrapper">
+						<!--begin::Icon-->
+						<div class="stepper-icon w-40px h-40px">
+							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+							<span class="stepper-number">7</span>
+						</div>
+						<!--end::Icon-->
+						<!--begin::Label-->
+						<div class="stepper-label">
+							<h3 class="stepper-title">Hantar</h3>
+							<div class="stepper-desc fw-semibold">Selesai</div>
+						</div>
+						<!--end::Label-->
+					</div>
+					<!--end::Wrapper-->
+					<!--begin::Line-->
+					<!--end::Line-->
+				</div>
+				<!--end::Step 7-->
+			</div>
+			<!--end::Nav-->
+		</div>
+		<!--end::Wrapper-->
+	</div>
+	<!--end::Aside-->
+		<!--begin::Content-->
+		<div class="card d-flex flex-row-fluid flex-center">
+			<!--begin::Form-->
+			<form id="kt_create_account_form" action="{{ route('hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
+				<!--begin::Step 1-->
+				<div class="current" data-kt-stepper-element="content">
+				@csrf
+					<!--begin::Wrapper-->
+					<div class="w-100">
+						<!--begin::Heading-->
+						<div class="pb-10 pb-lg-15">
+							<!--begin::Title-->
+							<h2 class="fw-bold text-dark">Maklumat Peribadi</h2>
+							<!--end::Title-->
+							<!--begin::Notice-->
+							<div class="text-muted fw-semibold fs-6">Profil Diri</div>
+							<!--end::Notice-->
+						</div>
+						<!--end::Heading-->
+						@foreach ($smoku as $smoku)
+						<!--begin::Input group-->
+						<div class="mb-10 fv-row">
+							<!--begin::Label-->
+							<label class="form-label mb-3">Nama</label>
+							<!--end::Label-->
+							<!--begin::Input-->
+							<input type="text" class="form-control form-control-lg form-control-solid"  id="nama_pelajar" name="nama_pelajar" placeholder="" value="{{$smoku->nama}}" readonly/>
+							<!--end::Input-->
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="row mb-10">
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Kad Pengenalan</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Col-->
+									<div class="col-12">
+										<input type="text" class="form-control form-control-lg form-control-solid" maxlength="12" id="no_kp" name="no_kp" placeholder="" value="{{$smoku->no_kp}}" readonly/>
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Tarikh Lahir</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Col-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" id="tkh_lahir" name="tkh_lahir" value="{{$smoku->tarikh_lahir}}" readonly/>
+										<!--end::Input-->
+									</div>
+								</div>	
+							</div>
+							<div class="col-md-2 fv-row">
+								<label class=" fs-6 fw-semibold form-label mb-2">Umur</label>
+								<!--end::Label-->
+								<div class="row fv-row">
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="text" class="form-control form-control-solid" id="umur" name="umur" placeholder="" value="{{$smoku->umur}}" readonly/>
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+							</div>	
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Jantina</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id="jantina" name="jantina" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true">
+										<option value="{{ $smoku->kod_jantina }}">{{ $smoku->jantina }}</option>
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">Keturunan</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id="bangsa" name="bangsa" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true">
+										<option value="{{$smoku->kod_keturunan}}">{{$smoku->keturunan}}</option>
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="fv-row mb-10">
+							<!--end::Label-->
+							<label class="form-label">Alamat Tetap</label>
+							<!--end::Label-->
+							<!--begin::Input-->
+							<textarea id="alamat_tetap" name="alamat_tetap" class="form-control form-control-lg form-control-solid" rows="2" readonly>{{$smoku->alamat_tetap}}</textarea>
+							<!--end::Input-->
+						</div>
+						<div class="row mb-10">
+							<div class="col-md-5 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="alamat_tetap_negeri" name="alamat_tetap_negeri" placeholder="" value="" readonly/>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Bandar
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="alamat_tetap_bandar" name="alamat_tetap_bandar" placeholder="" value="" readonly/>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-3 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Poskod
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="alamat_tetap_poskod" name="alamat_tetap_poskod" placeholder="" value=""/>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+							<!--begin::Alamat Surat-->
+							<div class="fv-row mb-10">
+								<!--end::Label-->
+								<label class="form-label">Alamat Surat Menyurat</label>
+								<!--end::Label-->
+								<!--begin::Input group-->
+								<div class="fv-row mb-7">
+									<!--begin::Wrapper-->
+									<div class="d-flex flex-stack">
+										<!--begin::Label-->
+										<div class="me-5">
+											<!--begin::Input-->
+											<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-label">Sama seperti Alamat Tetap</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Label-->
+									</div>
+									<!--begin::Wrapper-->
+								</div>
+								<!--end::Input group-->
+								<!--begin::Input-->
+								<textarea id="alamat_surat_menyurat" name="alamat_surat_menyurat" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
+								<!--end::Input-->
+							</div>
+							<div class="row mb-10">
+								<div class="col-md-4 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="text" class="form-control form-control-solid" id="alamat_surat_negeri" name="alamat_surat_negeri" placeholder="" value=""  />
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+								<div class="col-md-5 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">Bandar</label>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="text" class="form-control form-control-solid" id="alamat_surat_bandar" name="alamat_surat_bandar" placeholder="" value=""/>
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+								<div class="col-md-3 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">Poskod</label>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_surat_poskod" name="alamat_surat_poskod" placeholder="" value="" />
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+							</div>
+						<!--end::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Tel Bimbit</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{$smoku->tel_bimbit}}" />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Tel Rumah
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{$smoku->tel_rumah}}" />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+						<!--end::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Alamat emel</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$smoku->email}}" readonly/>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="separator my-14"></div>
+							<div class="pb-10 pb-lg-15">
+								<!--begin::Title-->
+								<h2 class="fw-bold text-dark">Maklumat Sistem Maklumat Orang Kurang Upaya (SMOKU)</h2>
+								<!--end::Title-->
+								<!--begin::Notice-->
+								<div class="text-muted fw-semibold fs-6">Jabatan Kebajikan Malaysia</div>
+								<!--end::Notice-->
+							</div>
+							<div class="row mb-10">
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">No. JKM
+									</label>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="text" class="form-control form-control-solid" id="no_daftar_oku" name="no_daftar_oku" placeholder="" value="{{$smoku->no_daftar_oku}}"  readonly/>
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="fs-6 fw-semibold form-label mb-2">Kategori Kecacatan
+									</label>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="text" class="form-control form-control-solid" placeholder="" value="{{$smoku->kecacatan}}" readonly/>
+										<input type="hidden" class="form-control form-control-solid" id="kecacatan" name="kecacatan" placeholder="" value="{{$smoku->kod_oku}}" readonly/>
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="separator my-14"></div>
+							<div class="pb-10 pb-lg-15">
+							<!--begin::Title-->
+							<h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
+							<!--end::Title-->
+							<!--begin::Notice-->
+							<div class="text-muted fw-semibold fs-6">Bank Islam 
+							</div>
+							<!--end::Notice-->
+							</div>
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="16113020138680"><i class="fa-solid fa-circle-info"></i></a>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaun_bank" name="no_akaun_bank" placeholder="" value=""/>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+					</div>
+					
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Step 1-->
+
+				<!--begin::Step 2-->
+				<div  data-kt-stepper-element="content">
+				@csrf	
+					<!--begin::Wrapper-->
+					<div class="w-100">
+						<!--begin::Heading-->
+						<div class="pb-10 pb-lg-15">
+							<!--begin::Title-->
+							<h2 class="fw-bold text-dark">Maklumat Waris</h2>
+							<!--end::Title-->
+							<!--begin::Notice-->
+							<div class="text-muted fw-semibold fs-6">Profil Waris</div>
+							<!--end::Notice-->
+						</div>
+						<!--end::Heading-->
+						<!--begin::Input group-->
+						<div class="mb-10 fv-row">
+							<!--begin::Label-->
+							<label class="form-label mb-3">Nama</label>
+							<!--end::Label-->
+							<!--begin::Input-->
+							<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" placeholder="" value="{{$smoku->nama_waris}}"  />
+							<!--end::Input-->
+						</div>
+						<div class="row mb-10">
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Kad Pengenalan</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Col-->
+									<div class="col-12">
+										<input type="text" class="form-control form-control-lg form-control-solid" maxlength="12" id="no_kp_waris" name="no_kp_waris" placeholder="" value=""  />
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">No Pasport</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Col-->
+									<div class="col-12">
+										<input type="text" class="form-control form-control-lg form-control-solid" id="no_pasport_waris" name="no_pasport_waris" placeholder="" value="" />
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+							</div>
+						</div>
+						<div class="row mb-10">
+							<!--begin::Label-->
+							<div class="col-md-6 fv-row">
+								<label class="form-label mb-6">Hubungan Waris</label>
+								<select id="hubungan_waris" name="hubungan_waris" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih">
+									@foreach ($hubungan as $hubungan)
+									<option value="{{$hubungan->kod_hubungan}}" {{$smoku->hubungan_waris == $hubungan->kod_hubungan ? 'selected' : ''}}>{{ $hubungan->hubungan}}</option>
+									@endforeach
+								</select>
+							</div>
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="form-label mb-6">No. Tel Bimbit</label>
+								<!--end::Label-->
+								<!--begin::Input-->
+								<input type="text" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{$smoku->tel_bimbit_waris}}"  />
+								<!--end::Input-->
+							</div>
+							
+						</div>
+						<!--end::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-6 fv-row" id="div_waris_lain">
+								<!--begin::Label-->
+								<label class="form-label mb-6">(Jika Lain-lain) Sila Nyatakan:</label>
+								<!--end::Label-->
+								<!--begin::Input-->
+								<input type="text" class="form-control form-control-lg form-control-solid" id="hubungan_lain_waris" name="hubungan_lain_waris" placeholder="" value="" />
+								<!--end::Input-->													
+							</div>
+							
+						</div>
+						<!--begin::Input group-->
+						<div class="fv-row mb-10">
+							<!--end::Label-->
+							<label class="form-label">Alamat Tetap</label>
+							<!--end::Label-->
+							<!--begin::Input-->
+							<textarea id="alamat_waris" name="alamat_waris" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
+							<!--end::Input-->
+						</div>
+						<div class="row mb-10">
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">Negeri
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id="alamat_negeri_waris" name="alamat_negeri_waris" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+										<option value="">Pilih</option>
+										@foreach ($negeri as $negeri)	
+										<option value="{{ $negeri->id}}">{{ $negeri->negeri}}</option> 
+										@endforeach
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">Bandar</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id='alamat_bandar_waris' name='alamat_bandar_waris' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+										<option value="">Pilih</option>
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">Poskod</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_poskod_waris" name="alamat_poskod_waris" placeholder="" value="" />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+						
+						<div class="row mb-10">
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">Pekerjaan Waris
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="pekerjaan_waris" name="pekerjaan_waris" placeholder="" value="{{$smoku->pekerjaan_waris}}"  />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">Pendapatan Bulanan Waris</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Nilai tanpa .00"><i class="fa-solid fa-circle-info"></i></a>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="pendapatan_waris" name="pendapatan_waris" placeholder="RM" value=""  />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Step 2-->
+				@endforeach
+
+				<!--begin::Step 3-->
+				<div data-kt-stepper-element="content">
+				@csrf		
+					<!--begin::Wrapper-->
+					<div class="w-100">
+						<!--begin::Heading-->
+						<div class="pb-10 pb-lg-15">
+							<!--begin::Title-->
+							<h2 class="fw-bold text-dark">Maklumat Akademik</h2>
+							<!--end::Title-->
+							<!--begin::Notice-->
+							<div class="text-muted fw-semibold fs-6">Profil Akademik</div>
+							<!--end::Notice-->
+						</div>
+						<!--end::Heading-->
+						<!--begin::Input group-->
+						<div class="d-flex flex-column mb-7 fv-row">
+							<!--begin::Label-->
+							<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+								<span class="">Nama Pusat Pengajian</span>
+							</label>
+							<!--end::Label-->
+							<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+								@foreach ($infoipt as $infoipt)
+									<option></option>
+									<option value="{{ $infoipt->id_institusi}}">{{ $infoipt->nama_institusi}}</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="d-flex flex-column mb-7 fv-row">
+							<!--begin::Label-->
+							<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+								<span class="">Nama Kursus</span>
+							</label>
+							<!--end::Label-->
+							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+								<option value=""></option>
+							</select>
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="row mb-10">
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Input wrapper-->
+									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option value=""></option>
+									</select>
+									<!--end::Input wrapper-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::Col-->
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+									@foreach ($mod as $mod)
+									<option></option>
+									<option value="{{$mod->kod_mod}}">{{$mod->mod}}</option>
+									@endforeach
+								</select>
+								<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
+								<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
+										<option></option>
+										<option value="1">1</option>
+										<option value="1.5">1.5</option>
+										<option value="2">2</option>
+										<option value="2.5">2.5</option>
+										<option value="3">3</option>
+										<option value="3.5">3.5</option>
+										<option value="4">4</option>
+									</select>
+									<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Bil Bulan Persemester</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Input wrapper-->
+										<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option></option>
+											<option value="4">4</option>
+											<option value="6">6</option>
+										</select>
+									<!--end::Input wrapper-->
+								</div>
+								<!--end::Row-->
+							</div>
+						</div>
+						<div class="row mb-10">
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+								<span class="">Sesi Pengajian Semasa</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
+								</label>
+								<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option></option>
+										<option value="2023/2024">2023/2024</option>
+										<option value="2024/2025">2024/2025</option>
+									</select>
+									<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+									<span class="">No Pendaftaran Pelajar</span>
+									
+								</label>
+								<!--end::Label-->
+								<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="" />
+							</div>
+						</div>
+						<!--begin::Input group-->
+						<div class="row mb-10">
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">
+									<span class="">Tarikh Mula Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
+								</label>
+								<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" value="" />
+									<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+									<span class="">Tarikh Tamat Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" onchange=dateCheck() value="" />
+								<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="row mb-10">
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Semester Semasa</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Input wrapper-->
+									
+										<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option></option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											
+										</select>
+									<!--end::Input wrapper-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="row mb-10">
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label> <a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Input wrapper-->
+										<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											@foreach ($biaya as $biaya)
+											<option></option>
+											<option value="{{ $biaya->kod_biaya}}">{{ $biaya->biaya}}</option>
+											@endforeach
+										</select>
+									<!--end::Input wrapper-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::Col-->
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row" id="div_biaya_lain">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">(Jika Lain-lain) Sila Nyatakan:</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<input type="text" class="form-control form-control-solid" placeholder="" id="sumber_lain" name="sumber_lain" value="" />
+								<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
+								</label>															
+								<!--end::Label-->
+								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+									@foreach ($penaja as $penaja)
+										<option></option>
+										<option value="{{ $penaja->kod_penaja}}">{{ $penaja->penaja}}</option>
+									@endforeach
+								</select>
+							</div>
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row" id="div_penaja_lain">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">(Jika Lain-lain) Sila Nyatakan:</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<input type="text" class="form-control form-control-solid" placeholder="" id="penaja_lain" name="penaja_lain" value="" />
+								<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Step 3-->
+
+				<!--begin::Step 4-->
+				<div data-kt-stepper-element="content">
+				@csrf
+					<!--begin::Wrapper-->
+					<div class="w-100">
+						<!--begin::Heading-->
+						<div class="pb-10 pb-lg-15">
+							<!--begin::Title-->
+							<h2 class="fw-bold text-dark">Maklumat Tuntutan</h2>
+							<!--end::Title-->
+							<!--begin::Notice-->
+							<div class="text-muted fw-semibold fs-6">Tuntutan</div>
+							<!--end::Notice-->
+						</div>
+						<!--end::Heading-->
+						<!--begin::Input group-->
+						<div class="d-flex flex-column mb-7 fv-row">
+							<!--begin::Label-->
+							<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+								<span class="required">Jenis Tuntutan</span>
+							</label>
+							<!--end::Label-->
+							<br>
+							<br>
+							<div class="row mb-10">
+								<br>
+								<br>
+								<div class="col-6" id="divyuran">
+									<input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" onclick="return false" checked/>
+									<label class="fs-6 fw-semibold form-label">
+										Yuran
+									</label>
+								</div>
+								<div class="col-6" id="divamaun">
+									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" placeholder="" value="" readonly/>
+									<!--end::Input-->
+								</div>
+							</div>
+							<br>
+							<div class="row mb-10">
+								<br>
+								<br>
+								<div class="col-6" id="divelaun">
+									<input class="form-check-input" type="checkbox" value="1" id="wang_saku"  name="wang_saku" onclick="return false" checked/>
+									<label class="fs-6 fw-semibold form-label">
+										Elaun Wang Saku
+									</label>
+								</div>
+								<div class="col-6" id="divamaunelaun">
+									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" placeholder="" value="" readonly/>
+									<!--end::Input-->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Step 4-->
+
+				<!--begin::Step 5-->
+				<div data-kt-stepper-element="content">
+				@csrf
+					<!--begin::Wrapper-->
+					<div class="w-100">
+						<!--begin::Heading-->
+						<div class="pb-10 pb-lg-15">
+							<!--begin::Title-->
+							<h2 class="fw-bold text-dark">Dokumen</h2>
+							<!--end::Title-->
+							<!--begin::Notice-->
+							<div class="text-muted fw-semibold fs-6">Senarai Dokumen</div>
+							<!--end::Notice-->
+						</div>
+						<!--end::Heading-->
+						<!--begin::Table-->
+						<table class="table table-row-dashed fs-6 gy-5">
+							<thead>
+								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+									<th class="min-w-100px">Nama</th>
+									<th class="min-w-100px">Dokumen</th>
+									<th class="w-100px">Catatan</th>
+								</tr>
+							</thead>
+							<tbody class="fw-semibold text-gray-600" >
+								<tr>
+									<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
+									<td><textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea></td>
+								</tr>
+								<tr>
+									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
+									<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
+								</tr>
+								<tr>
+									<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/resit.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="invoisResit" name="invoisResit"/></td>
+									<td><textarea type="text" class="form-control form-control-sm" id="nota_invoisResit" rows="1" name="nota_invoisResit"></textarea></td>
+								</tr>
+							</tbody>
+						</table>
+						<!--end::Table-->
+						<!--begin::Table-->
+						<table class="table table-row-dashed fs-6 gy-5">
+							<thead>
+								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+									<th class="min-w-50px"></th>
+									<th class="min-w-500px"></th>
+								</tr>
+							</thead>
+
+							<tbody class="fw-semibold text-gray-600">
+								<tr>
+									<td>
+										<!-- Add More Button -->
+										<button class="btn btn-success btn-sm btn-add-more" type="button">+</button>
+										<!-- End -->
+									</td>
+									<td class="input-group control-group img_div form-group col-md-10">
+										Resit/Invois Tambahan (Jika Ada)
+									</td>
+								</tr>
+								<tr>
+									<!-- Add More Image upload field  -->
+									<td class="clone" style="display:none">
+										<div class="control-group input-group">
+											<input type="file" id="dokumen[]" name="dokumen[]" class="form-control form-control-sm">
+											&nbsp;
+											&nbsp;
+											<textarea type="text" class="form-control form-control-sm" id="catatan[]" rows="1" name="catatan[]"></textarea>
+											&nbsp;
+											<button class="btn btn-danger btn-sm btn-remove" type="button">x</button>
+										</div>
+									</td>
+									<!-- End -->	
+								</tr>
+							</tbody>
+						</table>
+						<!--end::Table-->
+						{{-- <div class="input-group control-group img_div form-group col-md-4" >
+							<input type="file" id="profileImage[]" name="profileImage[]" class="form-control">
+							<!-- Add More Button -->
+							<div class="input-group-btn"> 
+							  <button class="btn btn-success btn-add-more" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
+							</div>
+							<!-- End -->
+						</div> --}}
+						<!-- Add More Image upload field  -->
+						{{-- <div class="clone hide ">
+							<div class="control-group input-group form-group col-md-4" style="margin-top:10px">
+								<input type="file" id="profileImage[]" name="profileImage[]" class="form-control">
+								<div class="input-group-btn"> 
+								<button class="btn btn-danger btn-remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+								</div>
+							</div>
+						</div> --}}
+						<!-- End -->
+						<br>
+						<br>
+						<div class="pb-10 pb-lg-15">
+							<!--begin::Notice-->
+							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; <a href="https://compressjpeg.com/" target="_blank">Gunakan kemudahan di sini untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
+							</div>
+
+							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; Format fail yang boleh dimuat naik adalah format 
+							'.pdf', '.jpg', '.png' dan '.jpeg'
+							</div>
+							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; Saiz maksimum fail adalah 2 MB.
+							</div>
+							<!--end::Notice-->
+						</div>
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Step 5-->
+
+				<!--begin::Step 6-->
+				<div data-kt-stepper-element="content">
+				@csrf	
+					<!--begin::Wrapper-->
+					<div class="w-100">
+						<!--begin::Heading-->
+						<div class="pb-10 pb-lg-15">
+							<!--begin::Title-->
+							<h2 class="fw-bold text-dark">Perakuan dan Pengesahan</h2>
+							<!--end::Title-->
+						</div>
+						<!--end::Heading-->
+						<div class="d-flex flex-column mb-7 fv-row">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="1" id="perakuan" name="perakuan"/>
+								<label style="color:black;font-size:18px; text-align: justify;" class="form-check-label" >
+								Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
+								sekiranya maklumat yang diberikan didapati palsu atau tidak benar, pihak kementerian berhak menolak
+								permohonan saya dan menghentikan bantuan kewangan ini kepada saya.
+								</label>
+							</div>
+						</div>
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Step 6-->
+
+				<!--begin::Step 7-->
+				<div data-kt-stepper-element="content">
+					<!--begin::Wrapper-->
+					<div class="w-100">
+						<!--begin::Heading-->
+						<div class="pb-8 pb-lg-10">
+							<!--begin::Title-->
+							<h2 class="fw-bold text-dark">Permohonan anda telah dihantar.</h2>
+							<!--end::Title-->
+						</div>
+						<!--end::Heading-->
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Step 7-->
+				<!--begin::Actions-->
+				<div class="d-flex flex-stack pt-10">
+					<!--begin::Wrapper-->
+					<div class="mr-2">
+						<button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
+						<i class="ki-duotone ki-arrow-left fs-4 me-1">
+							<span class="path1"></span>
+							<span class="path2"></span>
+						</i>Kembali</button>
+					</div>
+					<!--end::Wrapper-->
+					<!--begin::Wrapper-->
+					<div>
+						<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" onclick="if(!this.form.perakuan.checked){alert('Anda mesti bersetuju dengan terma dan syarat.');return false}">
+							<span class="indicator-label">Hantar
+							<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
+								<span class="path1"></span>
+								<span class="path2"></span>
+							</i></span>
+							<span class="indicator-progress">Sila tunggu...
+							<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+						</button>
+						<button type="button" class="btn btn-lg btn-primary save-form" data-kt-stepper-action="next">Teruskan
+						<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
+							<span class="path1"></span>
+							<span class="path2"></span>
+						</i>
+						</button>
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Actions-->
+			</form>
+			<!--end::Form-->
+		</div>
+		<!--end::Content-->
+									
+
+</div>
+
+
+
+<!--begin::Javascript-->
+
+		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+		<script src="/assets/js/scripts.bundle.js"></script>
+		<!--end::Global Javascript Bundle-->
+
+		<!--begin::Custom Javascript(used for this page only)-->
+		<script src="/assets/js/custom/utilities/modals/create-account.js"></script>
+		<!--end::Custom Javascript-->
+		<!--end::Javascript-->
+
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		<script type="text/javascript">
+   
+			$(".save-form").click(function(e){
+				e.preventDefault();
+				var data = $('#kt_create_account_form').serialize();
+				//alert (data);
+				$.ajax({
+					type: 'post',
+					url: "{{ route('simpan') }}",
+					data: data,
+
+				});
+				
+			});
+		</script> 
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script>
+			function myFunction() {
+			var checkBox = document.getElementById("sama");  
+			var alamat_tetap = document.getElementById("alamat_tetap");
+			var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
+			var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
+			var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
+
+			var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
+			var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
+			var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
+			var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
+			if (checkBox.checked == true){
+				alamat_surat_menyurat.value=alamat_tetap.value; 
+				alamat_surat_negeri.value=alamat_tetap_negeri.value;
+				alamat_surat_bandar.value=alamat_tetap_bandar.value;
+				alamat_surat_poskod.value=alamat_tetap_poskod.value;
+			} else {
+				alamat_surat_menyurat.value="";
+				alamat_surat_negeri.value="";
+				alamat_surat_bandar.value="";
+				alamat_surat_poskod.value="";
+			}
+		}	
+
+    		$(document).ready(function(){
+				$('#alamat_negeri_waris').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#alamat_bandar_waris').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: '/bandar/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var bandar = response['data'][i].bandar;
+
+											var option = "<option value='"+id+"'>"+bandar+"</option>";
+
+											$("#alamat_bandar_waris").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
+			$(document).ready(function() {
+			$('.js-example-basic-single').select2();
+			});
+		</script>
+
+		<script>
+			//WARIS LAIN-LAIN
+			$(document).ready(function(){
+				$("#div_waris_lain").hide();
+				$('#hubungan_waris').on('change', function() {
+				if ( this.value == '6'){
+					$("#div_waris_lain").show();
+				}
+				else {
+					$("#div_waris_lain").hide();
+				}
+				});
+			});
+
+			//SUMBER BIAYA LAIN-LAIN
+			$(document).ready(function(){
+				$("#div_biaya_lain").hide();
+				$('#sumber_biaya').on('change', function() {
+				if ( this.value == '5'){
+					$("#div_biaya_lain").show();
+				}
+				else {
+					$("#div_biaya_lain").hide();
+				}
+				});
+			});
+
+			//PENAJA LAIN-LAIN
+			$(document).ready(function(){
+				$("#div_penaja_lain").hide();
+				$('#nama_penaja').on('change', function() {
+				if ( this.value == '9'){
+					$("#div_penaja_lain").show();
+				}
+				else {
+					$("#div_penaja_lain").hide();
+				}
+				});
+			});
+
+			function dateCheck(){
+				let startDate = new Date($("#tarikh_mula").val());
+				let endDate = new Date($("#tarikh_tamat").val());
+
+				if(startDate > endDate) {
+					alert("Tarikh Tamat Pengajian perlu lebih besar daripada Tarikh Mula Pengajian");
+					$("#tarikh_tamat").val('');
+				}
+			}
+
+
+			//TAMBAH UPLOAD FILE
+			// $("#tambahresit").hide();
+			// function onButtonClick() {
+			// 	$("#tambahresit").show();
+			// }
+			$(document).ready(function() {
+ 
+			$(".btn-add-more").click(function(){ 
+				var html = $(".clone").html();
+				$(".img_div").after(html);
+			});
+
+			$("body").on("click",".btn-remove",function(){ 
+				$(this).parents(".control-group").remove();
+			});
+
+			});
+			
+			
+		</script>
+		<script type='text/javascript'>
+			$(document).ready(function(){
+	
+				// institusi Change
+				$('#id_institusi').change(function(){
+	
+					// institusi id
+					var id_institusi = $(this).val();
+					//alert (id_institusi);
+	
+					// Empty the dropdown
+					$('#peringkat_pengajian').find('option').not(':first').remove();
+					$('#nama_kursus').find('option').not(':first').remove();
+	
+					// AJAX request 
+					$.ajax({
+						url: '/peringkat/'+id_institusi,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+	
+							var len = 0;
+							if(response['data'] != null){
+								len = response['data'].length;
+							}
+	
+							if(len > 0){
+								// Read data and create <option >
+								for(var i=0; i<len; i++){
+	
+									var id_institusi = response['data'][i].id_institusi;
+									var kod_peringkat = response['data'][i].kod_peringkat;
+									var peringkat = response['data'][i].peringkat;
+	
+									var option = "<option value='"+kod_peringkat+"'>"+peringkat+"</option>";
+	
+									$("#peringkat_pengajian").append(option); 
+								}
+							}
+	
+						},
+						error: function(){
+						alert('AJAX load did not work');
+						}
+					});
+	
+				});
+	
+				// peringkat Change
+				$('#peringkat_pengajian').change(function(){
+	
+				// institusi id
+				var idipt = $(id_institusi).val();
+				var kodperingkat = $(this).val();
+	
+				// Empty the dropdown
+				$('#nama_kursus').find('option').not(':first').remove();
+				//alert(idipt);
+	
+	
+				// AJAX request 
+				$.ajax({
+					url: '/kursus/'+kodperingkat+'/'+idipt,
+					type: 'get',
+					dataType: 'json',
+				
+					success: function(response){
+	
+						var len = 0;
+						if(response['data'] != null){
+							len = response['data'].length;
+						}
+	
+						if(len > 0){
+							// Read data and create <option >
+							for(var i=0; i<len; i++){
+	
+								var id_institusi = response['data'][i].id_institusi;
+								var kod_peringkat = response['data'][i].kod_peringkat;
+								var nama_kursus = response['data'][i].nama_kursus;
+	
+								var option = "<option value='"+nama_kursus+"'>"+nama_kursus+"</option>";
+	
+								$("#nama_kursus").append(option); 
+								
+							}
+						}
+	
+					}
+				});
+	
+				});
+		
+			});
+
+			</script>
+
+
+		<script>
+			function select1(){
+            var sumber = document.getElementById('sumber_biaya').value;
+			var mod = document.getElementById('mod').value;
+			var bilbulan = document.getElementById('bil_bulan_per_sem').value;
+			var layakyuran = "5000";
+			var layak = "300";
+			var total = layak * bilbulan;
+            if(sumber=="1" && mod=="1"){
+                document.getElementById("divyuran").style.display = "none";
+                document.getElementById("divamaun").style.display = "none";
+				document.getElementById("wang_saku").disabled = false;
+				document.getElementById("amaun_wang_saku").value= total;
             }
-    
-                // function select1(){
-                // var sumber = document.getElementById('sumber_biaya').value;
-                // var mod = document.getElementById('mod').value;
-                // var bilbulan = document.getElementById('bil_bulanpersem').value;
-                // var layak = "300";
-                // var total = layak * bilbulan;
-                // if(sumber=="1" && mod=="1"){
-                //     document.getElementById("yuran").disabled = true;
-                //     document.getElementById("divamaun").style.display = "none";
-                //     document.getElementById("elaun").disabled = false;
-                //     //document.getElementById("amaunelaun").disabled = true;
-                //     document.getElementById("amaunelaun").value= total;
-                // }
-                // else if(sumber!="1" && mod=="2"){
-                //     document.getElementById("yuran").disabled = false;
-                //     document.getElementById("elaun").disabled = true;
-                //     document.getElementById("divamaunelaun").style.display = "none";
-                // }
-                // else if(sumber=="1" && mod=="2"){
-                //     document.getElementById("yuran").disabled = true;
-                //     document.getElementById("elaun").disabled = true;
-                //     document.getElementById("divamaun").style.display = "none";
-                //     document.getElementById("divamaunelaun").style.display = "none";
-                // }
-                // else{
-                //     document.getElementById("yuran").disabled = false;
-                //     document.getElementById("elaun").disabled = false;
-                //     document.getElementById("amaunelaun").value= total;
-                //     //document.getElementById("amaunelaun").disabled = true;
-                // }
-            // }
-    
-            </script>
-    
-            
-    
-    
-    </x-default-layout>
+			else if(sumber!="1" && mod=="2"){
+                document.getElementById("yuran").disabled = false;
+				document.getElementById("divelaun").style.display = "none";
+				document.getElementById("divamaunelaun").style.display = "none";
+            }
+			else if(sumber=="1" && mod=="2"){
+                document.getElementById("divyuran").style.display = "none";
+				document.getElementById("divelaun").style.display = "none";
+				document.getElementById("divamaun").style.display = "none";
+				document.getElementById("divamaunelaun").style.display = "none";
+            }
+            else{
+                document.getElementById("yuran").disabled = false;
+				document.getElementById("amaun_yuran").value= layakyuran;
+				document.getElementById("wang_saku").disabled = false;
+				document.getElementById("amaun_wang_saku").value= total;
+            }
+        }
+
+		</script>
+
+		
+
+
+</x-default-layout>
