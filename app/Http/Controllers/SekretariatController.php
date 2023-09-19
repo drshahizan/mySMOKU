@@ -7,6 +7,7 @@ use App\Mail\KeputusanLayak;
 use App\Mail\KeputusanTidakLayak;
 use App\Models\Permohonan;
 use App\Models\Saringan;
+use App\Models\SejarahPermohonan;
 use App\Models\Smoku;
 use App\Models\Waris;
 use App\Models\Akademik;
@@ -212,12 +213,12 @@ class SekretariatController extends Controller
     // {
     //     $date = $request->input('date');
     //     $dateRange = $request->has('date_range');
-        
+
     //     if ($dateRange) {
     //         // Filter by a date range
     //         $startDate = $request->input('start_date');
     //         $endDate = $request->input('end_date');
-            
+
     //         $keputusan = Kelulusan::whereBetween('tarikh_mesyuarat', [$startDate, $endDate])->get();
     //     } else {
     //         // Filter by a single date
@@ -327,7 +328,7 @@ class SekretariatController extends Controller
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
         return view('tuntutan.sekretariat.sejarah.papar_tuntutan',compact('permohonan','smoku','akademik','sejarah_p'));
     }
-    public function paparRekodSaringan($id){
+    public function paparRekodSaringanTuntutan($id){
         $sejarah_p = SejarahPermohonan::where('id', $id)->first();
         $permohonan = Permohonan::where('id', $sejarah_p->permohonan_id)->first();
         $smoku_id = $permohonan->smoku_id;
