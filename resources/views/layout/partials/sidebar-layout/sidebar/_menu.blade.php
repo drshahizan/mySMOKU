@@ -292,7 +292,7 @@
 
 
 		<div class="menu-item">
-			<a class="menu-link" href="{{ route('permohonanbaruppk')}}">
+			<a class="menu-link" href="{{ route('senarai.ppk.permohonanBaharu')}}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Baru</span>
 			</a>

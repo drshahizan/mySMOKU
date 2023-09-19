@@ -147,15 +147,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Permohonan - Penyelaras PPK 
     Route::get('penyelaras/ppk/dashboard', [PenyelarasPPKController::class,'index'])->name('penyelaras.ppk.dashboard');
-    Route::post('penyelaras/dashboard', [PenyelarasPPKController::class, 'store']);
-    Route::get('permohonanbaruppk', [PenyelarasPPKController::class, 'permohonanbaruppk'])->name('permohonanbaruppk');
-    Route::get('keseluruhan-PermohonanPPK', [PenyelarasPPKController::class, 'keseluruhanPermohonanPPK'])->name('keseluruhan-PermohonanPPK');
-    Route::get('borangPermohonanBaruPPK/{id}', [PenyelarasPPKController::class, 'borangPermohonanBaruPPK'])->name('borangPermohonanBaruPPK');
+    Route::post('penyelaras/ppk/dashboard', [PenyelarasPPKController::class, 'store']);
+    Route::get('penyelaras/ppk/permohonan/baharu/{id}', [PenyelarasPPKController::class, 'permohonanBaharu'])->name('penyelaras.ppk.permohonan.baharu');
     Route::get('/bandar/{idnegeri}', [PenyelarasPPKController::class, 'bandar']);
     Route::get('/peringkat/{id}', [PenyelarasPPKController::class, 'peringkat']);
     Route::get('/kursus/{kodperingkat}/{id}', [PenyelarasPPKController::class, 'kursus']);
-    Route::post('borangPermohonanBaruPPK', [PenyelarasPPKController::class, 'simpan'])->name('simpanpermohonanppk');
-    Route::post('hantarpermohonanppk', [PenyelarasPPKController::class, 'hantar'])->name('hantarpermohonanppk');
+    Route::post('penyelaras/ppk/baharu', [PenyelarasPPKController::class, 'simpan'])->name('ppk.simpan');
+    Route::post('ppk/hantar', [PenyelarasPPKController::class, 'hantar'])->name('ppk.hantar');
+    Route::get('penyelaras/ppk/senarai/permohonan-baharu', [PenyelarasPPKController::class, 'senaraiPermohonanBaharu'])->name('senarai.ppk.permohonanBaharu');
+
+    
+    Route::get('keseluruhan-PermohonanPPK', [PenyelarasPPKController::class, 'keseluruhanPermohonanPPK'])->name('keseluruhan-PermohonanPPK');
+    Route::get('borangPermohonanBaruPPK/{id}', [PenyelarasPPKController::class, 'borangPermohonanBaruPPK'])->name('borangPermohonanBaruPPK');
+
     Route::get('viewpermohonanbaruppk/{id}', [PenyelarasPPKController::class, 'viewpermohonanbaruppk'])->name('viewpermohonanbaruppk');
 
 

@@ -216,7 +216,7 @@
 		<!--begin::Content-->
 		<div class="card d-flex flex-row-fluid flex-center">
 			<!--begin::Form-->
-			<form id="kt_create_account_form" action="{{ route('hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
+			<form id="kt_create_account_form" action="{{ route('ppk.hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
 				<!--begin::Step 1-->
 				<div class="current" data-kt-stepper-element="content">
 				@csrf
@@ -400,7 +400,7 @@
 								<!--end::Input-->
 							</div>
 							<div class="row mb-10">
-								<div class="col-md-4 fv-row">
+								<div class="col-md-5 fv-row">
 									<!--begin::Label-->
 									<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
 									<!--end::Label-->
@@ -412,7 +412,7 @@
 									</div>
 									<!--end::Input wrapper-->
 								</div>
-								<div class="col-md-5 fv-row">
+								<div class="col-md-4 fv-row">
 									<!--begin::Label-->
 									<label class=" fs-6 fw-semibold form-label mb-2">Bandar</label>
 									<!--end::Label-->
@@ -647,7 +647,7 @@
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
-							<div class="col-md-4 fv-row">
+							<div class="col-md-5 fv-row">
 								<!--begin::Label-->
 								<label class="fs-6 fw-semibold form-label mb-2">Negeri
 								</label>
@@ -679,7 +679,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-4 fv-row">
+							<div class="col-md-3 fv-row">
 								<!--begin::Label-->
 								<label class="fs-6 fw-semibold form-label mb-2">Poskod</label>
 								<!--end::Label-->
@@ -744,19 +744,40 @@
 						</div>
 						<!--end::Heading-->
 						<!--begin::Input group-->
-						<div class="d-flex flex-column mb-7 fv-row">
-							<!--begin::Label-->
-							<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-								<span class="">Nama Pusat Pengajian</span>
-							</label>
-							<!--end::Label-->
-							<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-								@foreach ($infoipt as $infoipt)
-									<option></option>
-									<option value="{{ $infoipt->id_institusi}}">{{ $infoipt->nama_institusi}}</option>
-								@endforeach
-							</select>
+						<div class="row mb-10">
+							<!--begin::Col-->
+							<div class="col-md-7 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+									<span class="">Nama Pusat Pengajian</span>
+								</label>
+								<!--end::Label-->
+								<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+									@foreach ($infoipt as $infoipt)
+										<option></option>
+										<option value="{{ $infoipt->id_institusi}}">{{ $infoipt->nama_institusi}}</option>
+									@endforeach
+								</select>
+							</div>
+							<!--end::Col-->
+							<!--begin::Col-->
+							<div class="col-md-5 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Input wrapper-->
+									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option value=""></option>
+									</select>
+									<!--end::Input wrapper-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::Col-->
 						</div>
+						<!--end::Input group-->
 						<div class="d-flex flex-column mb-7 fv-row">
 							<!--begin::Label-->
 							<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
@@ -773,75 +794,6 @@
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
-								<!--end::Label-->
-								<!--begin::Row-->
-								<div class="row fv-row">
-									<!--begin::Input wrapper-->
-									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-										<option value=""></option>
-									</select>
-									<!--end::Input wrapper-->
-								</div>
-								<!--end::Row-->
-							</div>
-							<!--end::Col-->
-							<!--begin::Col-->
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
-								<!--end::Label-->
-								<!--begin::Input wrapper-->
-								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-									@foreach ($mod as $mod)
-									<option></option>
-									<option value="{{$mod->kod_mod}}">{{$mod->mod}}</option>
-									@endforeach
-								</select>
-								<!--end::Input wrapper-->
-							</div>
-							<!--end::Col-->
-						</div>
-						<!--end::Input group-->
-						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
-								<!--end::Label-->
-									<!--begin::Input wrapper-->
-									<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
-										<option></option>
-										<option value="1">1</option>
-										<option value="1.5">1.5</option>
-										<option value="2">2</option>
-										<option value="2.5">2.5</option>
-										<option value="3">3</option>
-										<option value="3.5">3.5</option>
-										<option value="4">4</option>
-									</select>
-									<!--end::Input wrapper-->
-							</div>
-							<!--end::Col-->
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Bil Bulan Persemester</label>
-								<!--end::Label-->
-								<!--begin::Row-->
-								<div class="row fv-row">
-									<!--begin::Input wrapper-->
-										<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-											<option></option>
-											<option value="4">4</option>
-											<option value="6">6</option>
-										</select>
-									<!--end::Input wrapper-->
-								</div>
-								<!--end::Row-->
-							</div>
-						</div>
-						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
 								<span class="">Sesi Pengajian Semasa</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
 								</label>
@@ -855,6 +807,24 @@
 									<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+									
+									<option></option>
+									<option value="1">SEPENUH MASA</option>
+									
+								</select>
+								<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						<div class="row mb-10">
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
@@ -863,6 +833,56 @@
 								</label>
 								<!--end::Label-->
 								<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="" />
+							</div>
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
+								<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
+										<option></option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+									</select>
+									<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+						</div>
+						<div class="row mb-10">
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Semester Semasa</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Input wrapper-->
+										<select id="sem_semasa" name="sem_semasa" onchange="select1()" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option></option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+										</select>
+									<!--end::Input wrapper-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Bil Bulan Persemester</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Input wrapper-->
+										<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option></option>
+											<option value="6">6</option>
+										</select>
+									<!--end::Input wrapper-->
+								</div>
+								<!--end::Row-->
 							</div>
 						</div>
 						<!--begin::Input group-->
@@ -874,9 +894,9 @@
 									<span class="">Tarikh Mula Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
 								</label>
 								<!--end::Label-->
-									<!--begin::Input wrapper-->
-									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" value="" />
-									<!--end::Input wrapper-->
+								<!--begin::Input wrapper-->
+								<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" value="" />
+								<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
 							<!--begin::Col-->
@@ -887,42 +907,8 @@
 								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" onchange=dateCheck() value="" />
+								<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" onchange=dateCheck() value="" />
 								<!--end::Input wrapper-->
-							</div>
-							<!--end::Col-->
-						</div>
-						<!--end::Input group-->
-						<!--begin::Input group-->
-						<div class="row mb-10">
-							<!--begin::Col-->
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Semester Semasa</label>
-								<!--end::Label-->
-								<!--begin::Row-->
-								<div class="row fv-row">
-									<!--begin::Input wrapper-->
-									
-										<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-											<option></option>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-											<option value="7">7</option>
-											<option value="8">8</option>
-											<option value="9">9</option>
-											<option value="10">10</option>
-											<option value="11">11</option>
-											<option value="12">12</option>
-											
-										</select>
-									<!--end::Input wrapper-->
-								</div>
-								<!--end::Row-->
 							</div>
 							<!--end::Col-->
 						</div>
@@ -937,7 +923,7 @@
 								<!--begin::Row-->
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
-										<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 											@foreach ($biaya as $biaya)
 											<option></option>
 											<option value="{{ $biaya->kod_biaya}}">{{ $biaya->biaya}}</option>
@@ -987,7 +973,6 @@
 							<!--end::Col-->
 						</div>
 						<!--end::Input group-->
-						
 					</div>
 					<!--end::Wrapper-->
 				</div>
@@ -1001,10 +986,10 @@
 						<!--begin::Heading-->
 						<div class="pb-10 pb-lg-15">
 							<!--begin::Title-->
-							<h2 class="fw-bold text-dark">Maklumat Tuntutan</h2>
+							<h2 class="fw-bold text-dark">Maklumat Bayaran</h2>
 							<!--end::Title-->
 							<!--begin::Notice-->
-							<div class="text-muted fw-semibold fs-6">Tuntutan</div>
+							<div class="text-muted fw-semibold fs-6">Bayaran</div>
 							<!--end::Notice-->
 						</div>
 						<!--end::Heading-->
@@ -1012,27 +997,10 @@
 						<div class="d-flex flex-column mb-7 fv-row">
 							<!--begin::Label-->
 							<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-								<span class="required">Jenis Tuntutan</span>
+								<span class="required">Kadar Bayaran</span>
 							</label>
 							<!--end::Label-->
 							<br>
-							<br>
-							<div class="row mb-10">
-								<br>
-								<br>
-								<div class="col-6" id="divyuran">
-									<input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" onclick="return false" checked/>
-									<label class="fs-6 fw-semibold form-label">
-										Yuran
-									</label>
-								</div>
-								<div class="col-6" id="divamaun">
-									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
-									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" placeholder="" value="" readonly/>
-									<!--end::Input-->
-								</div>
-							</div>
 							<br>
 							<div class="row mb-10">
 								<br>
@@ -1135,30 +1103,12 @@
 								</tr>
 							</tbody>
 						</table>
-						<!--end::Table-->
-						{{-- <div class="input-group control-group img_div form-group col-md-4" >
-							<input type="file" id="profileImage[]" name="profileImage[]" class="form-control">
-							<!-- Add More Button -->
-							<div class="input-group-btn"> 
-							  <button class="btn btn-success btn-add-more" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-							</div>
-							<!-- End -->
-						</div> --}}
-						<!-- Add More Image upload field  -->
-						{{-- <div class="clone hide ">
-							<div class="control-group input-group form-group col-md-4" style="margin-top:10px">
-								<input type="file" id="profileImage[]" name="profileImage[]" class="form-control">
-								<div class="input-group-btn"> 
-								<button class="btn btn-danger btn-remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-								</div>
-							</div>
-						</div> --}}
-						<!-- End -->
 						<br>
 						<br>
 						<div class="pb-10 pb-lg-15">
 							<!--begin::Notice-->
-							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; <a href="https://compressjpeg.com/" target="_blank">Gunakan kemudahan di sini untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
+							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp;
+								Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a> untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
 							</div>
 
 							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; Format fail yang boleh dimuat naik adalah format 
@@ -1250,9 +1200,7 @@
 			</form>
 			<!--end::Form-->
 		</div>
-		<!--end::Content-->
-									
-
+		<!--end::Content-->									
 </div>
 
 
@@ -1277,7 +1225,7 @@
 				//alert (data);
 				$.ajax({
 					type: 'post',
-					url: "{{ route('simpan') }}",
+					url: "{{ route('ppk.simpan') }}",
 					data: data,
 
 				});
@@ -1529,34 +1477,18 @@
 
 		<script>
 			function select1(){
-            var sumber = document.getElementById('sumber_biaya').value;
-			var mod = document.getElementById('mod').value;
-			var bilbulan = document.getElementById('bil_bulan_per_sem').value;
-			var layakyuran = "5000";
-			var layak = "300";
-			var total = layak * bilbulan;
-            if(sumber=="1" && mod=="1"){
-                document.getElementById("divyuran").style.display = "none";
-                document.getElementById("divamaun").style.display = "none";
-				document.getElementById("wang_saku").disabled = false;
-				document.getElementById("amaun_wang_saku").value= total;
+            var sem_semasa = document.getElementById('sem_semasa').value;
+			var amaunsem1 = "3660";
+			var amaunlain = "3360";
+
+            if(sem_semasa=="1"){
+
+				document.getElementById("amaun_wang_saku").value= amaunsem1;
             }
-			else if(sumber!="1" && mod=="2"){
-                document.getElementById("yuran").disabled = false;
-				document.getElementById("divelaun").style.display = "none";
-				document.getElementById("divamaunelaun").style.display = "none";
-            }
-			else if(sumber=="1" && mod=="2"){
-                document.getElementById("divyuran").style.display = "none";
-				document.getElementById("divelaun").style.display = "none";
-				document.getElementById("divamaun").style.display = "none";
-				document.getElementById("divamaunelaun").style.display = "none";
-            }
+
             else{
-                document.getElementById("yuran").disabled = false;
-				document.getElementById("amaun_yuran").value= layakyuran;
-				document.getElementById("wang_saku").disabled = false;
-				document.getElementById("amaun_wang_saku").value= total;
+                
+				document.getElementById("amaun_wang_saku").value= amaunlain;
             }
         }
 

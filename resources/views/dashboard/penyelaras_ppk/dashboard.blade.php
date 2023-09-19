@@ -41,7 +41,7 @@
                     <!--begin::Row-->
                     <div class="row align-items-center">
                         <!--begin::form-->
-                        <form class="form w-100" action="{{ route('penyelaras.dashboard')}}" method="post"> 
+                        <form class="form w-100" action="{{ route('penyelaras.ppk.dashboard')}}" method="post"> 
                         @csrf 
                             <!--begin::Heading-->
                             <div class="text-center mb-11">
@@ -142,7 +142,7 @@
                                     <td class="" colspan="2">
                                         <span class="text-gray-800 fw-bold text-center mb-1 fs-6">{{$pemohon}}</span>
                                     </td>
-                                    <td class="text-center"><a href="{{route('penyelaras.permohonan.baharu',$smoku->smoku_id)}}">
+                                    <td class="text-center"><a href="{{route('penyelaras.ppk.permohonan.baharu',$smoku->smoku_id)}}">
                                         <button class="btn bg-primary text-white">Deraf</button></a>
                                     </td>
                                 </tr>

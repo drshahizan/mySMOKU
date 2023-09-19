@@ -16,10 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('smoku_id');
             $table->string('no_rujukan_permohonan');
             $table->string('program');
-            $table->string('yuran');
-            $table->string('amaun_yuran');
-            $table->string('wang_saku');
-            $table->string('amaun_wang_saku');
+            $table->string('yuran')->nullable();
+            $table->string('amaun_yuran')->nullable();
+            $table->string('wang_saku')->nullable();
+            $table->string('amaun_wang_saku')->nullable();
             $table->string('perakuan')->nullable();
             $table->integer('status');
             $table->foreign('smoku_id')

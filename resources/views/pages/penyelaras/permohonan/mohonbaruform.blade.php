@@ -731,265 +731,264 @@
 				<!--begin::Step 3-->
 				<div data-kt-stepper-element="content">
 				@csrf		
-					<!--begin::Wrapper-->
-					<div class="w-100">
-						<!--begin::Heading-->
-						<div class="pb-10 pb-lg-15">
-							<!--begin::Title-->
-							<h2 class="fw-bold text-dark">Maklumat Akademik</h2>
-							<!--end::Title-->
-							<!--begin::Notice-->
-							<div class="text-muted fw-semibold fs-6">Profil Akademik</div>
-							<!--end::Notice-->
-						</div>
-						<!--end::Heading-->
-						<!--begin::Input group-->
-						<div class="d-flex flex-column mb-7 fv-row">
-							<!--begin::Label-->
-							<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-								<span class="">Nama Pusat Pengajian</span>
-							</label>
-							<!--end::Label-->
-							<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-								@foreach ($infoipt as $infoipt)
-									<option></option>
-									<option value="{{ $infoipt->id_institusi}}">{{ $infoipt->nama_institusi}}</option>
-								@endforeach
-							</select>
-						</div>
-						<div class="d-flex flex-column mb-7 fv-row">
-							<!--begin::Label-->
-							<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-								<span class="">Nama Kursus</span>
-							</label>
-							<!--end::Label-->
-							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-								<option value=""></option>
-							</select>
-						</div>
-						<!--end::Input group-->
-						<!--begin::Input group-->
-						<div class="row mb-10">
-							<!--begin::Col-->
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
-								<!--end::Label-->
-								<!--begin::Row-->
-								<div class="row fv-row">
-									<!--begin::Input wrapper-->
-									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-										<option value=""></option>
-									</select>
-									<!--end::Input wrapper-->
-								</div>
-								<!--end::Row-->
+						<!--begin::Wrapper-->
+						<div class="w-100">
+							<!--begin::Heading-->
+							<div class="pb-10 pb-lg-15">
+								<!--begin::Title-->
+								<h2 class="fw-bold text-dark">Maklumat Akademik</h2>
+								<!--end::Title-->
+								<!--begin::Notice-->
+								<div class="text-muted fw-semibold fs-6">Profil Akademik</div>
+								<!--end::Notice-->
 							</div>
-							<!--end::Col-->
-							<!--begin::Col-->
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
-								<!--end::Label-->
-								<!--begin::Input wrapper-->
-								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-									@foreach ($mod as $mod)
-									<option></option>
-									<option value="{{$mod->kod_mod}}">{{$mod->mod}}</option>
-									@endforeach
-								</select>
-								<!--end::Input wrapper-->
-							</div>
-							<!--end::Col-->
-						</div>
-						<!--end::Input group-->
-						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
-								<!--end::Label-->
-									<!--begin::Input wrapper-->
-									<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
-										<option></option>
-										<option value="1">1</option>
-										<option value="1.5">1.5</option>
-										<option value="2">2</option>
-										<option value="2.5">2.5</option>
-										<option value="3">3</option>
-										<option value="3.5">3.5</option>
-										<option value="4">4</option>
-									</select>
-									<!--end::Input wrapper-->
-							</div>
-							<!--end::Col-->
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Bil Bulan Persemester</label>
-								<!--end::Label-->
-								<!--begin::Row-->
-								<div class="row fv-row">
-									<!--begin::Input wrapper-->
-										<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+							<!--end::Heading-->
+							<!--begin::Input group-->
+							<div class="row mb-10">
+								<!--begin::Col-->
+								<div class="col-md-7 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+										<span class="">Nama Pusat Pengajian</span>
+									</label>
+									<!--end::Label-->
+									<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										@foreach ($infoipt as $infoipt)
 											<option></option>
-											<option value="4">4</option>
-											<option value="6">6</option>
-										</select>
-									<!--end::Input wrapper-->
+											<option value="{{ $infoipt->id_institusi}}">{{ $infoipt->nama_institusi}}</option>
+										@endforeach
+									</select>
 								</div>
-								<!--end::Row-->
+								<!--end::Col-->
+								<!--begin::Col-->
+								<div class="col-md-5 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
+									<!--end::Label-->
+									<!--begin::Row-->
+									<div class="row fv-row">
+										<!--begin::Input wrapper-->
+										<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option value=""></option>
+										</select>
+										<!--end::Input wrapper-->
+									</div>
+									<!--end::Row-->
+								</div>
+								<!--end::Col-->
 							</div>
-						</div>
-						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
+							<!--end::Input group-->
+							<div class="d-flex flex-column mb-7 fv-row">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-								<span class="">Sesi Pengajian Semasa</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
+									<span class="">Nama Kursus</span>
 								</label>
 								<!--end::Label-->
+								<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+									<option value=""></option>
+								</select>
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="row mb-10">
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+									<span class="">Sesi Pengajian Semasa</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
+									</label>
+									<!--end::Label-->
+										<!--begin::Input wrapper-->
+										<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option></option>
+											<option value="2023/2024">2023/2024</option>
+											<option value="2024/2025">2024/2025</option>
+										</select>
+										<!--end::Input wrapper-->
+								</div>
+								<!--end::Col-->
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
+									<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+									<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										@foreach ($mod as $mod)
 										<option></option>
-										<option value="2023/2024">2023/2024</option>
-										<option value="2024/2025">2024/2025</option>
+										<option value="{{$mod->kod_mod}}">{{$mod->mod}}</option>
+										@endforeach
 									</select>
 									<!--end::Input wrapper-->
+								</div>
+								<!--end::Col-->
 							</div>
-							<!--end::Col-->
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">No Pendaftaran Pelajar</span>
-									
-								</label>
-								<!--end::Label-->
-								<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="" />
+							<!--end::Input group-->
+							<div class="row mb-10">
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+										<span class="">No Pendaftaran Pelajar</span>
+										
+									</label>
+									<!--end::Label-->
+									<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="" />
+								</div>
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
+									<!--end::Label-->
+										<!--begin::Input wrapper-->
+										<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
+											<option></option>
+											<option value="1">1</option>
+											<option value="1.5">1.5</option>
+											<option value="2">2</option>
+											<option value="2.5">2.5</option>
+											<option value="3">3</option>
+											<option value="3.5">3.5</option>
+											<option value="4">4</option>
+										</select>
+										<!--end::Input wrapper-->
+								</div>
+								<!--end::Col-->
 							</div>
-						</div>
-						<!--begin::Input group-->
-						<div class="row mb-10">
-							<!--begin::Col-->
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class="fs-6 fw-semibold form-label mb-2">
-									<span class="">Tarikh Mula Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
-								</label>
-								<!--end::Label-->
+							<div class="row mb-10">
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">Semester Semasa</label>
+									<!--end::Label-->
+									<!--begin::Row-->
+									<div class="row fv-row">
+										<!--begin::Input wrapper-->
+											<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+												<option></option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="8">8</option>
+												<option value="9">9</option>
+												<option value="10">10</option>
+												<option value="11">11</option>
+												<option value="12">12</option>
+											</select>
+										<!--end::Input wrapper-->
+									</div>
+									<!--end::Row-->
+								</div>
+								<!--end::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">Bil Bulan Persemester</label>
+									<!--end::Label-->
+									<!--begin::Row-->
+									<div class="row fv-row">
+										<!--begin::Input wrapper-->
+											<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+												<option></option>
+												<option value="4">4</option>
+												<option value="6">6</option>
+											</select>
+										<!--end::Input wrapper-->
+									</div>
+									<!--end::Row-->
+								</div>
+							</div>
+							<!--begin::Input group-->
+							<div class="row mb-10">
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="fs-6 fw-semibold form-label mb-2">
+										<span class="">Tarikh Mula Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
+									</label>
+									<!--end::Label-->
 									<!--begin::Input wrapper-->
 									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" value="" />
 									<!--end::Input wrapper-->
-							</div>
-							<!--end::Col-->
-							<!--begin::Col-->
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">Tarikh Tamat Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
-								</label>
-								<!--end::Label-->
-								<!--begin::Input wrapper-->
+								</div>
+								<!--end::Col-->
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+										<span class="">Tarikh Tamat Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
+									</label>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
 									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" onchange=dateCheck() value="" />
-								<!--end::Input wrapper-->
-							</div>
-							<!--end::Col-->
-						</div>
-						<!--end::Input group-->
-						<!--begin::Input group-->
-						<div class="row mb-10">
-							<!--begin::Col-->
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Semester Semasa</label>
-								<!--end::Label-->
-								<!--begin::Row-->
-								<div class="row fv-row">
-									<!--begin::Input wrapper-->
-									
-										<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-											<option></option>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-											<option value="7">7</option>
-											<option value="8">8</option>
-											<option value="9">9</option>
-											<option value="10">10</option>
-											<option value="11">11</option>
-											<option value="12">12</option>
-											
-										</select>
 									<!--end::Input wrapper-->
 								</div>
-								<!--end::Row-->
+								<!--end::Col-->
 							</div>
-							<!--end::Col-->
-						</div>
-						<!--end::Input group-->
-						<!--begin::Input group-->
-						<div class="row mb-10">
-							<!--begin::Col-->
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label> <a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
-								<!--end::Label-->
-								<!--begin::Row-->
-								<div class="row fv-row">
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="row mb-10">
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label> <a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
+									<!--end::Label-->
+									<!--begin::Row-->
+									<div class="row fv-row">
+										<!--begin::Input wrapper-->
+											<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+												@foreach ($biaya as $biaya)
+												<option></option>
+												<option value="{{ $biaya->kod_biaya}}">{{ $biaya->biaya}}</option>
+												@endforeach
+											</select>
+										<!--end::Input wrapper-->
+									</div>
+									<!--end::Row-->
+								</div>
+								<!--end::Col-->
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row" id="div_biaya_lain">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">(Jika Lain-lain) Sila Nyatakan:</label>
+									<!--end::Label-->
 									<!--begin::Input wrapper-->
-										<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-											@foreach ($biaya as $biaya)
-											<option></option>
-											<option value="{{ $biaya->kod_biaya}}">{{ $biaya->biaya}}</option>
-											@endforeach
-										</select>
+									<input type="text" class="form-control form-control-solid" placeholder="" id="sumber_lain" name="sumber_lain" value="" />
 									<!--end::Input wrapper-->
 								</div>
-								<!--end::Row-->
+								<!--end::Col-->
 							</div>
-							<!--end::Col-->
-							<!--begin::Col-->
-							<div class="col-md-6 fv-row" id="div_biaya_lain">
-								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">(Jika Lain-lain) Sila Nyatakan:</label>
-								<!--end::Label-->
-								<!--begin::Input wrapper-->
-								<input type="text" class="form-control form-control-solid" placeholder="" id="sumber_lain" name="sumber_lain" value="" />
-								<!--end::Input wrapper-->
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="row mb-10">
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+										<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
+									</label>															
+									<!--end::Label-->
+									<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										@foreach ($penaja as $penaja)
+											<option></option>
+											<option value="{{ $penaja->kod_penaja}}">{{ $penaja->penaja}}</option>
+										@endforeach
+									</select>
+								</div>
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row" id="div_penaja_lain">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">(Jika Lain-lain) Sila Nyatakan:</label>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<input type="text" class="form-control form-control-solid" placeholder="" id="penaja_lain" name="penaja_lain" value="" />
+									<!--end::Input wrapper-->
+								</div>
+								<!--end::Col-->
 							</div>
-							<!--end::Col-->
+							<!--end::Input group-->
 						</div>
-						<!--end::Input group-->
-						<!--begin::Input group-->
-						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
-								</label>															
-								<!--end::Label-->
-								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-									@foreach ($penaja as $penaja)
-										<option></option>
-										<option value="{{ $penaja->kod_penaja}}">{{ $penaja->penaja}}</option>
-									@endforeach
-								</select>
-							</div>
-							<!--begin::Col-->
-							<div class="col-md-6 fv-row" id="div_penaja_lain">
-								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">(Jika Lain-lain) Sila Nyatakan:</label>
-								<!--end::Label-->
-								<!--begin::Input wrapper-->
-								<input type="text" class="form-control form-control-solid" placeholder="" id="penaja_lain" name="penaja_lain" value="" />
-								<!--end::Input wrapper-->
-							</div>
-							<!--end::Col-->
-						</div>
-						<!--end::Input group-->
-						
-					</div>
-					<!--end::Wrapper-->
+						<!--end::Wrapper-->
 				</div>
 				<!--end::Step 3-->
 
