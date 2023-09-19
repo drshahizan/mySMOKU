@@ -32,9 +32,15 @@ class TuntutanController extends Controller
         
         $resit = $request->resit; 
         
-        $itemtututan = Tuntutan::where('smoku_id', '<=', $id)->get();
+        $itemtututan = SejarahTuntutan::where('smoku_id', '<=', $id)
+            ->groupBy('tuntutan_id')
+            ->selectRaw('tuntutan_id, count(id) AS bilangan') 
+            ->get();
+
+        //dd($itemtututan);
         $wordCount = $itemtututan->count();
-        $running_num =  $wordCount + 1; //sebab nak guna satu id je
+        $running_num =  $wordCount; //sebab nak guna satu id je
+        //dd($running_num);
         $no_rujukan_tuntutan =  $no_rujukan_permohonan.'/'.$running_num; // try duluuu
 
 
