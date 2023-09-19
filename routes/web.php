@@ -127,9 +127,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('penyelarasbaharu', [PenyelarasController::class, 'simpan'])->name('simpan');
     Route::post('hantar', [PenyelarasController::class, 'hantar'])->name('hantar');
     Route::get('penyelaras/senarai/permohonan/baharu', [PenyelarasController::class, 'senaraiPermohonanBaharu'])->name('senarai.permohonanBaharu');
+    Route::get('penyelaras/view-permohonan/{id}', [PenyelarasController::class, 'viewPermohonan'])->name('penyelaras.view.permohonan');
     Route::get('penyelaras/senarai/permohonan/keseluruhan', [PenyelarasController::class, 'senaraiPermohonanKeseluruhan'])->name('senarai.permohonanKeseluruhan');
-
-    Route::get('viewpermohonanbaru/{id}', [PenyelarasController::class, 'viewpermohonanbaru'])->name('viewpermohonanbaru');
 
 
     //Tuntutan - Penyelaras BKOKU - Wang Saku

@@ -79,7 +79,7 @@
 										$institusi = implode(' ', $result);
 									@endphp
                                     <tr>
-                                        <td><a href="{{route('viewpermohonanbaru',$smoku->smoku_id)}}">{{ $smoku->no_rujukan_permohonan}}</a></td>
+                                        <td><a href="{{route('penyelaras.view.permohonan',$smoku->smoku_id)}}">{{ $smoku->no_rujukan_permohonan}}</a></td>
                                         <td>{{ $pemohon}}</td>
                                         <td>{{ $institusi}}</td>
                                         <td class="text-center">{{ $smoku->created_at->format('d/m/Y h:i:sa')}}</td>
