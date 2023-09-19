@@ -29,8 +29,11 @@ class SekretariatController extends Controller
 
     public function statusPermohonanBKOKU(Request $request)
     {
-        $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
-            return $q->whereDate('created_at', $request->date);
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('created_at', [$startDate, $endDate]);
         })
         ->when($request->status != null, function ($q) use ($request) {
             return $q->where('status', $request->status);
@@ -42,11 +45,22 @@ class SekretariatController extends Controller
 
     public function filterStatusPermohonanBKOKU(Request $request, $status)
     {
-        $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
-            return $q->whereDate('created_at', $request->date);
+        // $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
+        //     return $q->whereDate('created_at', $request->date);
+        // })
+        // ->when($status != null, function ($q) use ($status) {
+        //     return $q->where('status', $status);
+        // })
+        // ->get();
+
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('created_at', [$startDate, $endDate]);
         })
-        ->when($status != null, function ($q) use ($status) {
-            return $q->where('status', $status);
+        ->when($request->status != null, function ($q) use ($request) {
+            return $q->where('status', $request->status);
         })
         ->get();
 
@@ -55,8 +69,11 @@ class SekretariatController extends Controller
 
     public function bilanganTuntutanBKOKU(Request $request)
     {
-        $tuntutan = Tuntutan::when($request->date != null, function ($q) use ($request) {
-            return $q->whereDate('created_at', $request->date);
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $tuntutan = Tuntutan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('created_at', [$startDate, $endDate]);
         })
         ->when($request->status != null, function ($q) use ($request) {
             return $q->where('status', $request->status);
@@ -68,8 +85,19 @@ class SekretariatController extends Controller
 
     public function statusPermohonanPPK(Request $request)
     {
-        $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
-            return $q->whereDate('created_at', $request->date);
+        // $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
+        //     return $q->whereDate('created_at', $request->date);
+        // })
+        // ->when($request->status != null, function ($q) use ($request) {
+        //     return $q->where('status', $request->status);
+        // })
+        // ->get();
+
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('created_at', [$startDate, $endDate]);
         })
         ->when($request->status != null, function ($q) use ($request) {
             return $q->where('status', $request->status);
@@ -81,11 +109,14 @@ class SekretariatController extends Controller
 
     public function filterStatusPermohonanPPK(Request $request, $status)
     {
-        $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
-            return $q->whereDate('created_at', $request->date);
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('created_at', [$startDate, $endDate]);
         })
-        ->when($status != null, function ($q) use ($status) {
-            return $q->where('status', $status);
+        ->when($request->status != null, function ($q) use ($request) {
+            return $q->where('status', $request->status);
         })
         ->get();
 
@@ -94,8 +125,11 @@ class SekretariatController extends Controller
 
     public function bilanganTuntutanPPK(Request $request)
     {
-        $tuntutan = Tuntutan::when($request->date != null, function ($q) use ($request) {
-            return $q->whereDate('created_at', $request->date);
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $tuntutan = Tuntutan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('created_at', [$startDate, $endDate]);
         })
         ->when($request->status != null, function ($q) use ($request) {
             return $q->where('status', $request->status);
