@@ -194,17 +194,40 @@ class SekretariatController extends Controller
 
     public function senaraiKeputusanPermohonan(Request $request)
     {
-        $keputusan = Permohonan::when($request->date != null, function ($q) use ($request) {
-            return $q->whereDate('created_at', $request->date);
+        $kelulusan = Kelulusan::when($request->date != null, function ($q) use ($request) {
+            return $q->whereDate('tarikh_mesyuarat', $request->date);
         })
         ->when($request->status != null, function ($q) use ($request) {
-            return $q->where('status', $request->status);
+            return $q->where('keputusan', $request->status);
         })
         ->get();
 
+        $keputusan = Permohonan::where('status','6')->orWhere('status', '=','7')->get();
+
         $notifikasi = NULL;
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan','keputusan','notifikasi'));
     }
+
+    // public function senaraiKeputusan(Request $request)
+    // {
+    //     $date = $request->input('date');
+    //     $dateRange = $request->has('date_range');
+        
+    //     if ($dateRange) {
+    //         // Filter by a date range
+    //         $startDate = $request->input('start_date');
+    //         $endDate = $request->input('end_date');
+            
+    //         $keputusan = Kelulusan::whereBetween('tarikh_mesyuarat', [$startDate, $endDate])->get();
+    //     } else {
+    //         // Filter by a single date
+    //         $keputusan = Kelulusan::whereDate('tarikh_mesyuarat', $date)->get();
+    //     }
+
+    //     dd($keputusan);
+    //     $notifikasi = NULL;
+    //     return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan', 'notifikasi'));
+    // }
 
     public function kembalikanPermohonan()
     {

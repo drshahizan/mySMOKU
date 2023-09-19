@@ -54,7 +54,7 @@
                             </div>
 
                             {{-- Filter section --}}
-                            <form action="" method="GET">
+                            <form action="{{url('sekretariat/tuntutan/PPK/dibayar')}}" method="GET">
                                 <div class="row" style="margin-left:15px;">
                                     <div class="col-md-2">
                                         <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>

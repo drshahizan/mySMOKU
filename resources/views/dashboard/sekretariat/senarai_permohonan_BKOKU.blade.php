@@ -59,7 +59,7 @@
                             </div>
 
                             {{-- Filter section --}}
-                            <form action="{{url('permohonan/BKOKU')}}" method="GET">
+                            <form action="{{url('sekretariat/permohonan/BKOKU/keseluruhan')}}" method="GET">
                                 <div class="row" style="margin-left:15px;">
                                     <div class="col-md-2">
                                         <input type="date" name="date" value="{{Request::get('date') ?? ' '}}" class="form-control"/>

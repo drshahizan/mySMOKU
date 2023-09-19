@@ -81,7 +81,7 @@
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br><br>
-                                    <form action="" method="GET">
+                                    <form action="{{url('permohonan/sekretariat/keputusan')}}" method="GET">
                                         <div class="row" style="margin-left:15px;">
                                             <div class="col-md-3">
                                                 <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
@@ -90,7 +90,6 @@
                                             <div class="col-md-3">
                                                 <select name="status" class="form-select">
                                                     <option value="">Pilih Semua Keputusan</option>
-                                                    <option value="6" {{Request::get('status') == '5' ? 'selected':'' }} >Dikembalikan</option>
                                                     <option value="6" {{Request::get('status') == '6' ? 'selected':'' }} >Layak</option>
                                                     <option value="7" {{Request::get('status') == '7' ? 'selected':'' }} >Tidak Layak</option>
                                                 </select>
@@ -117,7 +116,7 @@
                                                 <tbody>
                                                     @foreach ($keputusan as $item)
                                                     @if($item['program']=="BKOKU")
-                                                        @if($item['status']=="5" || $item['status']=="6" || $item['status']=="7")
+                                                        {{-- @if($item['status']=="5" || $item['status']=="6" || $item['status']=="7") --}}
                                                             @php
                                                                 $no_mesyuarat = DB::table('permohonan_kelulusan')->where('permohonan_id', $item['id'])->value('no_mesyuarat');
                                                                 $nama = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
@@ -150,7 +149,7 @@
                                                                     <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @endif
                                                             </tr>
-                                                        @endif
+                                                        {{-- @endif --}}
                                                     @endif
                                                     @endforeach
                                                 </tbody>
