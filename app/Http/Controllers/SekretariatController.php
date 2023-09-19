@@ -192,19 +192,22 @@ class SekretariatController extends Controller
 
     public function senaraiKeputusanPermohonan(Request $request)
     {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
 
-        $kelulusan = Kelulusan::when($request->date != null, function ($q) use ($request) {
-            return $q->whereDate('tarikh_mesyuarat', $request->date);
+        $kelulusan = Kelulusan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('tarikh_mesyuarat', [$startDate, $endDate]);
         })
-        ->when($request->status != null, function ($q) use ($request) {
+        ->when($request->status, function ($q) use ($request) {
             return $q->where('keputusan', $request->status);
         })
         ->get();
 
         $notifikasi = null;
+
         return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi'));
     }
-
+    
     public function kembalikanPermohonan()
     {
         return view('pages.sekretariat.permohonan.kembalikan');
