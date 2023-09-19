@@ -83,7 +83,7 @@ class DashboardController extends Controller
             return view('pages.pentadbir.dashboard')->with('message', 'Selamat Datang ke Laman Utama Pegawai Atasan');
         }
         else 
-            return view('pages.pentadbir.dashboard')->with('message', 'Selamat Datang ke Laman Utama Pegawai Atasan');
+            return view('dashboard.penyelaras_ppk.dashboard')->with('message', 'Selamat Datang ke Laman Utama Penyelaras PPK');
         }
         
         // else if(Auth::user()->tahap=='6'){

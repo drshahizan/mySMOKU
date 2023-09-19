@@ -322,21 +322,7 @@
 					<span class="menu-title">Wang Saku</span>
 			</a>
 		</div>
-		<div class="menu-item">
-			<a class="menu-link" href="{{url('tuntutan-yuran-pengajian')}}">
 		
-					<span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
-					<span class="menu-title">Yuran Pengajian dan Wang Saku</span>
-			</a>
-		</div>
-		<div class="menu-item">
-			<a class="menu-link" href="{{url('kemaskini-tuntutan')}}">
-
-					<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
-					<span class="menu-title">Kemaskini</span>
-			</a>
-		</div>
-
 		</div>
 		<!--end::Menu-->
 
