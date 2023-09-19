@@ -123,7 +123,7 @@
                                 <tr>
                                     <td><b>Tarikh Mesyuarat</b></td>
                                     <td><b>:</b></td>
-                                    <td>{{$kelulusan->tarikh_mesyuarat}}</td>
+                                    <td>{{date('d/m/Y', strtotime($kelulusan->tarikh_mesyuarat))}}</td>
                                 </tr>
                                 <tr>
                                     <td><b>Keputusan</b></td>
