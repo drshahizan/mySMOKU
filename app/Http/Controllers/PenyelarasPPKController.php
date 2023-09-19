@@ -31,9 +31,9 @@ class PenyelarasPPKController extends Controller
         $smoku = Smoku::orderBy('smoku.id','desc')
             ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
             ->leftJoin('permohonan','permohonan.smoku_id','=','smoku.id')
-            ->get(['smoku.*', 'smoku_penyelaras.*', 'permohonan.*'])
+            ->get(['smoku.*', 'smoku_penyelaras.*', 'permohonan.status'])
             ->where('penyelaras_id','=', Auth::user()->id)
-            ->where('status','!=', '2');
+            ->where('status','<', '2');
         //dd($smoku);    
 
         return view('dashboard.penyelaras_ppk.dashboard', compact('smoku'));
