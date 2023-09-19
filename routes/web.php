@@ -157,12 +157,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('ppk/hantar', [PenyelarasPPKController::class, 'hantar'])->name('ppk.hantar');
     Route::get('penyelaras/ppk/senarai/permohonan-baharu', [PenyelarasPPKController::class, 'senaraiPermohonanBaharu'])->name('senarai.ppk.permohonanBaharu');
     Route::get('penyelaras/ppk/view-permohonan/{id}', [PenyelarasPPKController::class, 'viewPermohonan'])->name('penyelaras.ppk.view.permohonan');
-
-    
-    Route::get('keseluruhan-PermohonanPPK', [PenyelarasPPKController::class, 'keseluruhanPermohonanPPK'])->name('keseluruhan-PermohonanPPK');
-    Route::get('borangPermohonanBaruPPK/{id}', [PenyelarasPPKController::class, 'borangPermohonanBaruPPK'])->name('borangPermohonanBaruPPK');
-
-
+    Route::get('penyelaras/ppk/senarai/permohonan-keseluruhan', [PenyelarasPPKController::class, 'senaraiPermohonanKeseluruhan'])->name('senarai.ppk.permohonanKeseluruhan');
 
 
     //Tuntutan Pelajar

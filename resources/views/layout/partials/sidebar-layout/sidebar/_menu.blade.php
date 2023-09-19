@@ -284,7 +284,7 @@
 				</div>
 			</div>
 			<div class="menu-item">
-			<a class="menu-link" href="{{ route('keseluruhan-PermohonanPPK')}}">
+			<a class="menu-link" href="{{ route('senarai.ppk.permohonanKeseluruhan')}}">
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
 					<span class="menu-title">Keseluruhan</span>
 			</a>

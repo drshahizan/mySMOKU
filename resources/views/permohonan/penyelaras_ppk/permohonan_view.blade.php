@@ -131,8 +131,8 @@
 						<!--end::Icon-->
 						<!--begin::Label-->
 						<div class="stepper-label">
-							<h3 class="stepper-title">Maklumat Tuntutan</h3>
-							<div class="stepper-desc fw-semibold">Tuntutan Yuran dan Elaun Wang Saku</div>
+							<h3 class="stepper-title">Maklumat Bayaran</h3>
+							<div class="stepper-desc fw-semibold">Bayaran</div>
 						</div>
 						<!--end::Label-->
 						
