@@ -93,9 +93,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($permohonan as $item)
+                                                @foreach ($tuntutan as $item)
                                                 @php
-                                                    $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                    $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
+                                                    $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                     if ($item['status']==2){
                                                         $status='Baharu';
@@ -115,10 +116,11 @@
                                                         }
                                                     }
                                                     $pemohon = implode(' ', $result);
+
                                                 @endphp
-                                                @if($item['program']=="BKOKU")
+                                                @if($permohonan->program=="BKOKU")
                                                     <tr>
-                                                        <td><a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'.$item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                        <td><a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'.$item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a></td>
                                                         {{-- <td><a href="{{ url('tuntutan-telah-disaring/'.$item['nokp_pelajar']) }}" title="">{{$item['no_rujukan_permohonan']}}</a></td> --}}
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
@@ -153,9 +155,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($permohonan as $item)
+                                                @foreach ($tuntutan as $item)
                                                 @php
-                                                    $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                    $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
+                                                    $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                     if ($item['status']==2){
                                                         $status='Baharu';
@@ -178,7 +181,7 @@
                                                 @endphp
                                                 @if($item['program']=="PPK")
                                                     <tr>
-                                                        <td><a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'.$item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                        <td><a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'.$item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a></td>
                                                         {{-- <td><a href="{{ url('tuntutan-telah-disaring/'.$item['nokp_pelajar']) }}" title="">{{$item['no_rujukan_permohonan']}}</a></td> --}}
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
