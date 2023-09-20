@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Tuntutan;
+use App\Models\TuntutanItem;
 use App\Models\Permohonan;
 use App\Models\Smoku;
 use App\Models\SejarahTuntutan;
@@ -15,7 +16,11 @@ class TuntutanController extends Controller
     public function tuntutanBaharu()
     {   
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        $tuntutan = Tuntutan::all()->where('smoku_id', $smoku_id->id);
+        $tuntutan = Tuntutan::join('tuntutan_item','tuntutan_item.tuntutan_id','=','tuntutan.id')
+        ->get(['tuntutan.*', 'tuntutan_item.*'])
+        ->where('smoku_id', $smoku_id->id)
+        ->where('status', 1);
+        //dd($tuntutan);
         return view('pages.tuntutan.borangtuntutanyuran', compact('tuntutan'));
         
     }
@@ -24,70 +29,104 @@ class TuntutanController extends Controller
     {   
         
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        $id = $smoku_id->id;
-        $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
-        $idmohon = $permohonan->id;
+        $permohonan = Permohonan::all()->where('smoku_id', '=', $smoku_id->id)->first();
         $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
-        //dd($no_rujukan_permohonan);
-        
-        $resit = $request->resit; 
-        
-        $itemtututan = SejarahTuntutan::where('smoku_id', '<=', $id)
-            ->groupBy('tuntutan_id')
-            ->selectRaw('tuntutan_id, count(id) AS bilangan') 
+
+        $biltuntutan = Tuntutan::where('smoku_id', '<=', $smoku_id->id)
+            ->groupBy('no_rujukan_tuntutan')
+            ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan') 
             ->get();
 
-        //dd($itemtututan);
-        $wordCount = $itemtututan->count();
-        $running_num =  $wordCount; //sebab nak guna satu id je
-        //dd($running_num);
+        $bil = $biltuntutan->count();
+        $running_num =  $bil + 1; //sebab nak guna satu id je
         $no_rujukan_tuntutan =  $no_rujukan_permohonan.'/'.$running_num; // try duluuu
 
-
-        foreach($resit as $img) {
-                     
-            $filenameresit =$img->getClientOriginalName();
-            $img->move('assets/dokumen/tuntutan',$filenameresit);
-            // Save In Database
-            $data=new tuntutan();
-            $data->smoku_id=$id;
-            $data->no_rujukan_tuntutan=$no_rujukan_tuntutan;
-            $data->jenis_yuran=$request->jenis_yuran;
-            $data->no_resit=$request->no_resit;
-            $data->resit=$filenameresit;
-            $data->nota_resit=$request->nota_resit;
-            $data->amaun=$request->amaun_yuran;
-            $data->sesi=$request->sesi;
-            $data->semester=$request->semester;
-            $data->status=1;
-
-            $data->save();
-        }
-
-            $tuntutan = Tuntutan::where('smoku_id', '=', $id)->first();
-            
-            $tuntutan_id = $tuntutan->id;
-            //dd($tuntutan_id);
-            $statustuntutan = SejarahTuntutan::where('tuntutan_id', '=', $tuntutan_id)->first();
-            if ($statustuntutan === null) {
-            $statustuntutan = SejarahTuntutan::create([
-                'tuntutan_id' => $tuntutan_id,
-                'smoku_id' => $id,
+        //simpan dalam table tuntutan_item
+        $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
+            ->where('permohonan_id', '=', $permohonan->id)
+            ->first();
+        if ($tuntutan === null) {
+            $tuntutan = Tuntutan::create([
+                'smoku_id' => $smoku_id->id,
+                'permohonan_id' => $permohonan->id,
+                'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
+                'sesi' => $request->sesi,
+                'semester' => $request->semester,
                 'status' => '1',
-        
-                ]);
-            }else {
-
-            SejarahTuntutan::where('smoku_id' ,$id)
+            ]);
+        }
+       /*else {
+            Tuntutan::where('smoku_id', '=', $smoku_id->id)
+                ->where('permohonan_id', '=', $permohonan->id)
                 ->update([
-                'tuntutan_id' => $tuntutan_id,
-                'smoku_id' => $id,
+                'smoku_id' => $smoku_id->id,
+                'permohonan_id' => $permohonan->id,
+                'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
+                'sesi' => $request->sesi,
+                'semester' => $request->semester,
                 'status' => '1',
                 
             ]);
+
+        }*/
+
+        $tuntutan->save();
+
+        //simpan dalam table tuntutan_item
+        $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
+            ->where('permohonan_id', '=', $permohonan->id)
+            ->first();
+
+        $resit = $request->resit;
+        $counter = 1; 
+
+        foreach($resit as $resit) {
+                     
+            $filenameresit =$resit->getClientOriginalName();
+            $uniqueFilename = $counter . '_' . $filenameresit;
+
+            // Append increment to the filename until it's unique
+            while (file_exists('assets/dokumen/tuntutan/' . $uniqueFilename)) {
+                $counter++;
+                $uniqueFilename = $counter . '_' . $filenameresit;
             }
+            $resit->move('assets/dokumen/tuntutan',$uniqueFilename);
+
+            $data=new tuntutanitem();
+            $data->tuntutan_id=$tuntutan->id;
+            $data->jenis_yuran=$request->jenis_yuran;
+            $data->no_resit=$request->no_resit;
+            $data->resit=$uniqueFilename;
+            $data->nota_resit=$request->nota_resit;
+            $data->amaun=$request->amaun_yuran;
+            $data->save();
+
+            $counter++;
+        }
+
             
-            $statustuntutan->save();
+        //simpan dalam table sejarah_tuntutan
+        $sejarahtuntutan = SejarahTuntutan::where('tuntutan_id', '=', $tuntutan->id)->first();
+        if ($sejarahtuntutan === null) {
+            $sejarahtuntutan = SejarahTuntutan::create([
+                'tuntutan_id' => $tuntutan->id,
+                'smoku_id' => $smoku_id->id,
+                'status' => '1',
+        
+            ]);
+
+        }else{
+
+            SejarahTuntutan::where('tuntutan_id', '=', $tuntutan->id)
+                ->update([
+                'tuntutan_id' => $tuntutan->id,
+                'smoku_id' => $smoku_id->id,
+                'status' => '1',
+                
+            ]);
+        }
+        
+        $sejarahtuntutan->save();
             
         return redirect()->route('tuntutan.baharu')->with('message', 'simpan.');
 
@@ -95,27 +134,30 @@ class TuntutanController extends Controller
 
     public function hantartuntutan(Request $request)
     {   
-        $nokp = Auth::user()->nokp;
+        $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        $permohonan = Permohonan::all()->where('smoku_id', '=', $smoku_id->id)->first();
 
-        $tuntutan = Tuntutan::where('nokp_pelajar', '=', $nokp)->first();
+        $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)->first();
         if ($tuntutan != null) {
-            DB::table('maklumattuntutan')->where('nokp_pelajar' ,$nokp)
+            Tuntutan::where('smoku_id' ,$smoku_id->id)
             ->update([
-            
-            //'perakuan' => $request->perakuan,
+
+            'wang_saku' => $request->wang_saku,
+            'amaun_wang_saku' => $request->amaun_wang_saku,
             'status' => '2',
             
         ]);
         }
         $tuntutan->save();
 
-        //$tuntutan = Tuntutan::all()->where('nokp_pelajar', '=', $nokp)->first();
-        $idtuntutan =  $tuntutan->id_tuntutan;
-        //dd($idtuntutan);
+        //simpan dalam table tuntutan_item
+        $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
+            ->where('permohonan_id', '=', $permohonan->id)
+            ->first();
         
         $user = SejarahTuntutan::create([
-            'id_tuntutan' => $idtuntutan,
-            'nokp_pelajar' => $nokp,
+            'tuntutan_id' => $tuntutan->id,
+            'smoku_id' => $smoku_id->id,
             'status' => '2',
     
         ]);

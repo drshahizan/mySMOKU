@@ -131,30 +131,28 @@
 					<!--begin::Input group-->
 					<div class="mb-10">
 						<!--begin::Label-->
-						<label class="form-label fw-bold fs-4 text-gray-700">Item Tuntutan</label>
+						<label class="form-label fw-bold fs-4 text-700">Item Tuntutan</label>
 						<br>
 						<br>
-						<div class="table-responsive">
-							<table class="table table-rounded table-striped border gy-7 gs-7" style="background-color:#FFFFE0;">
+						<div class="table-responsive" id="itemtuntutan">
+							<table class="table table-rounded table-striped border gy-7 gs-7">
 								<thead>
 									<tr class="fw-semibold fs-6 text-gray-700 border-bottom border-gray-200">
-										<th>Id Tuntutan</th>
+										<th>Bil</th>
 										<th>Jenis Yuran</th>
-										<th>No resit</th>
+										<th>No. Resit</th>
 										<th>Perihal</th>
 										<th>Amaun</th>
-										<th>Salinan</th>
 									</tr>
 								</thead>
 								<tbody class="fw-semibold text-gray-600">
-									@foreach ($tuntutan as $tuntutan)
+									@foreach ($tuntutan as $key => $tuntutan)
 									<tr>
-										<td>{{ $tuntutan->no_rujukan_tuntutan}}</td>
+										<td>{{ $key + 1 }}.</td>
 										<td>{{ $tuntutan->jenis_yuran}}</td>
-										<td>{{ $tuntutan->no_resit}}</td>
+										<td><a href="/assets/dokumen/tuntutan/{{$tuntutan->resit}}" target="_blank">{{ $tuntutan->no_resit}}</a></td>
 										<td>{{ $tuntutan->nota_resit}}</td>
-										<td>RM{{ $tuntutan->amaun}}</td>
-										<td><a href="/assets/dokumen/tuntutan/{{$tuntutan->resit}}" target="_blank">Papar</a></td>
+										<td id="amaun">RM {{ $tuntutan->amaun}}</td>
 									</tr>
 									@endforeach	
 								</tbody>
@@ -163,17 +161,9 @@
 					</div>
 					<!--begin::Item-->
 					<div class="d-flex flex-stack">
-						<div class="d-flex">
-							<img src="assets/media/logos/icons8-ringgit-64.png" class="w-40px me-3" alt="" />
-							<div class="d-flex flex-column">
-								<div class="fs-6 text-dark text-hover-primary fw-bold">Elaun Wang Saku</div>
-							</div>
-						</div>
-						<div class="d-flex justify-content-end">
-							<div class="form-check form-check-solid form-check-custom form-switch">
-								<input class="form-check-input w-45px h-30px" type="checkbox" id="slackswitch" />
-								<label class="form-check-label" for="slackswitch"></label>
-							</div>
+						<div class="me-5">
+							<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" />
+							<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
 						</div>
 					</div>
 					<!--end::Item-->
@@ -183,14 +173,13 @@
 						<!--begin::Content-->
 						<div class="fw-semibold">
 							<div class="fs-6 text-dark">Jumlah Elaun Wang Saku </div>
-								<!--Buat calculation tarik db, yang detect bulan per semester x RM 300-->
 						</div>
 						<!--end::Content-->
 					</div>
 					<!--end::Wrapper-->
-					<div class="d-flex flex-stack flex-grow-1">
+					<div class="d-flex">
 						<span class="input-group-text">RM</span>
-						<input type="text" class="form-control"/>
+						<input type="text" id="amaun_wang_saku" name="amaun_wang_saku" class="input-group-text" style="width: 100%;">
 					</div>
 					<div class="fs-6 fw-semibold text-gray-400">
 						Elaun wang saku akan bertukar mengikut kadar bayaran tuntutan yuran dalam satu sesi pengajian
@@ -200,14 +189,13 @@
 					<div class="d-flex flex-stack flex-grow-1">
 						<!--begin::Content-->
 						<div class="fw-semibold">
-							<div class="fs-6 text-dark">Jumlah Keseluruhan Tuntutan </div>
-								<!--Buat calculation tarik db, kira jumlah semua (tuntutan yuran + wang saku) -->
+							<div class="fs-6 text-dark">Jumlah Keseluruhan Tuntutan</div>
 						</div>
 						<!--end::Content-->
 					</div>
-					<div class="d-flex flex-stack flex-grow-1">
+					<div class="d-flex">
 						<span class="input-group-text">RM</span>
-						<input type="text" class="form-control"/>
+						<input type="text" id="jumlah" name="jumlah" class="input-group-text" style="width: 100%;"/>
 					</div>
 					<br>
 					<br>
@@ -411,20 +399,44 @@
 <!--end::Javascript-->
 
 
-<script type="text/javascript">
+<script>
+/*
+function myFunction() {
+	var checkBox = document.getElementById("wang_saku");	
+	var bilbulan = document.getElementById('bil_bulan_per_sem').value; //nanti tambah bil_bulan_per_sem
+	var layak = "300";
+	var total = layak * bilbulan; //nanti tambah bil_bulan_per_sem
+	if(checkBox.checked == true){
+		document.getElementById("amaun_wang_saku").value= total;
+	}
+	else {
+		document.getElementById("amaun_wang_saku").value="";
+	}
 
-	$(document).ready(function() {
+}
 
-		$(".btn-add-more").click(function(){ 
-			var html = $(".clone").html();
-			$(".img_div").after(html);
-		});
+// Initialize a variable to store the total
+var totalAmaun = 0;
 
-		$("body").on("click",".btn-remove",function(){ 
-			$(this).parents(".control-group").remove();
-		});
+// Query the table rows using the correct selector
+var rows = document.querySelectorAll("table.itemtuntutan tbody tr");
 
-	});
+for (var i = 0; i < rows.length; i++) {
+    var amaunCell = rows[i].querySelector("td#amaun");
+    if (amaunCell) {
+        var amaunText = amaunCell.textContent.trim();
+        var amaunValue = parseFloat(amaunText.replace("RM", "")) || 0;
+        totalAmaun += amaunValue;
+    }
+}
+
+
+
+var amaun_yuran = parseFloat(document.getElementById('amaun').value) || 0; // Parse the value to a number, default to 0 if it's not a valid number
+var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; // Parse the value to a number, default to 0 if it's not a valid number
+var jumlah = amaun_yuran + amaun_wang_saku;
+document.getElementById("jumlah").textContent = "Total: RM" + totalAmaun.toFixed(2);
+*/
 
 </script>
 

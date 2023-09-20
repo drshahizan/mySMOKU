@@ -14,18 +14,19 @@ return new class extends Migration
         Schema::create('tuntutan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('smoku_id');
+            $table->unsignedBigInteger('permohonan_id');
             $table->string('no_rujukan_tuntutan');
-            $table->string('jenis_yuran');
-            $table->string('no_resit');
-            $table->string('resit');
-            $table->string('nota_resit');
-            $table->string('amaun');
-            $table->string('baki')->nullable();
             $table->string('sesi');
             $table->string('semester');
             $table->string('status');
+            $table->string('wang_saku')->nullable();
+            $table->string('amaun_wang_saku')->nullable();
+            $table->string('jumlah')->nullable();
+            $table->string('baki')->nullable();
             $table->foreign('smoku_id')
               ->references('id')->on('smoku')->onDelete('cascade');
+            $table->foreign('permohonan_id')
+              ->references('id')->on('permohonan')->onDelete('cascade');
             $table->timestamps();
         });
     }

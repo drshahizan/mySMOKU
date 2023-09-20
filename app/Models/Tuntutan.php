@@ -12,16 +12,15 @@ class Tuntutan extends Model
 
     protected $fillable = [
         'id',
-        'no_rujukan_tuntutan',
         'smoku_id',
-        'jenis_yuran',
-        'no_resit',
-        'resit',
-        'nota_resit',
-        'amaun',
-        'baki',
+        'permohonan_id',
+        'no_rujukan_tuntutan',
         'sesi',
         'semester',
+        'wang_saku',
+        'amaun_wang_saku',
+        'jumlah',
+        'baki',
         'status',
 
     ];
