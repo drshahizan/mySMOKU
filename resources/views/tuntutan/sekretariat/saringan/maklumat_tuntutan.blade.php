@@ -145,7 +145,7 @@
                                         <tr>
                                             <td><strong>ID Tuntutan</strong></td>
                                             <td>:</td>
-                                            <td>{{$permohonan->no_rujukan_permohonan}}</td>
+                                            <td>{{$tuntutan->no_rujukan_tuntutan}}</td>
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Kursus</strong></td>
                                             <td>:</td>
@@ -158,7 +158,7 @@
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Institusi</strong></td>
                                             <td>:</td>
-                                            <td>{{$nama_institusi}}</td>
+                                            <td>{{$institusi}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>No. Kad Pengenalan</strong></td>
