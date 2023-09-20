@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Permohonan;
 use App\Models\SejarahPermohonan;
+use App\Models\Tuntutan;
 use App\Models\Akademik;
 use App\Models\TuntutanPermohonan;
 use App\Models\Smoku;
@@ -24,14 +25,22 @@ class DashboardController extends Controller
         {
             $user = User::all()->where('no_kp',Auth::user()->no_kp);
             $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-            $permohonan = Permohonan::join('sejarah_permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
+            $permohonan = Permohonan::orderby("sejarah_permohonan.created_at","desc")
+            ->join('sejarah_permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
             ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
             ->get(['sejarah_permohonan.*','permohonan.*','bk_status.status'])
             ->where('smoku_id',$smoku_id->id);
             // //dd($permohonan);
             $akademik = Akademik::all()->where('smoku_id',$smoku_id->id)->first();
+
+            $tuntutan = Tuntutan::orderby("sejarah_tuntutan.created_at","desc")
+            ->join('sejarah_tuntutan','sejarah_tuntutan.tuntutan_id','=','tuntutan.id')
+            ->join('bk_status','bk_status.kod_status','=','sejarah_tuntutan.status')
+            ->get(['sejarah_tuntutan.*','tuntutan.*','bk_status.status'])
+            ->where('smoku_id',$smoku_id->id);
+            //dd($tuntutan);
             
-            return view('pages.dashboards.index', compact('user','permohonan','akademik'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
+            return view('pages.dashboards.index', compact('user','permohonan','akademik','tuntutan'))->with('message', 'Selamat Datang ke Laman Utama Pelajar');
         }
         else if(Auth::user()->tahap=='2')
         {

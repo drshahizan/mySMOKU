@@ -196,11 +196,14 @@
 											</tr>
 										</thead>
 										<tbody>
+											@foreach($tuntutan as $tuntutan)
 											<tr> 
-												<td></td>
-												<td></td>
-												<td></td>
+												<td>{{$tuntutan->no_rujukan_tuntutan}}</td>
+												<td>{{ucwords(strtolower($tuntutan->status))}}</td>
+												<td>{{$tuntutan->created_at->format('d/m/Y h:i:sa')}}</td>
+												{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
 											</tr>
+											@endforeach
 										</tbody>
 									</table>
 								</div>		
