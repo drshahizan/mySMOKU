@@ -165,7 +165,9 @@ class SekretariatController extends Controller
 
     public function hantarKeputusanPermohonan(Request $request,$id)
     {
+        //$id is the id in "permohonan" table
         $permohonan_id = Permohonan::where('smoku_id', $id)->value('id');
+        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
 
         //send & update database
         if($request->get('keputusan')=="Lulus"){
@@ -182,6 +184,14 @@ class SekretariatController extends Controller
                 'catatan'  =>  $request->get('catatan'),
             ]);
             $info_mesyuarat->save();
+
+            //update sejarah permohonan 
+            $sejarah = new SejarahPermohonan([
+                'smoku_id'      =>  $smoku_id,
+                'permohonan_id' =>  $permohonan_id,
+                'status'        =>  6,
+            ]);
+            $sejarah->save();
 
             //emel notifikasi
             $message = 'Test message';
@@ -202,13 +212,21 @@ class SekretariatController extends Controller
             ]);
             $info_mesyuarat->save();
 
+            //update sejarah permohonan 
+            $sejarah = new SejarahPermohonan([
+                'smoku_id'      =>  $smoku_id,
+                'permohonan_id' =>  $id,
+                'status'        =>  7,
+            ]);
+            $sejarah->save();
+
             //emel notifikasi
             $message = 'Test message';
             Mail::to("fateennashuha9@gmail.com")->send(new KeputusanTidakLayak($message));
         }
 
         //filter
-        $keputusan = Permohonan::when($request->date != null, function ($q) use ($request) {
+        $kelulusan = Permohonan::when($request->date != null, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
         ->when($request->status != null, function ($q) use ($request) {
@@ -216,12 +234,12 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        //notification
-        $kelulusan = $request->get('keputusan');
-        $id_permohonan = Permohonan::where('smoku_id', $id)->value('no_rujukan_permohonan');
-        $notifikasi = "Emel notifikasi telah dihantar kepada ".$id_permohonan;
+         //notification
+         $keputusan = $request->get('keputusan');
+         $id_permohonan = Permohonan::where('smoku_id', $id)->value('no_rujukan_permohonan');
+         $notifikasi = "Emel notifikasi telah dihantar kepada ".$id_permohonan;
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'));
+         return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'));
     }
 
     public function senaraiKeputusanPermohonan(Request $request)

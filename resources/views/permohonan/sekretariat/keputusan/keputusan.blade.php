@@ -45,11 +45,11 @@
 
     <body>
         @if($notifikasi!=NULL)
-            @if($kelulusan=="Lulus")
+            @if($keputusan=="Lulus")
                 <div class="alert alert-success" role="alert" style="margin: 0px 15px 20px 15px; color:black!important;">
                     {{ $notifikasi }}
                 </div>
-            @elseif($kelulusan=="Tidak Lulus")
+            @elseif($keputusan=="Tidak Lulus")
                 <div class="alert alert-danger" role="alert" style="margin: 0px 15px 20px 15px; color:black!important;">
                     {{ $notifikasi }}
                 </div>
