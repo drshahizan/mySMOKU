@@ -82,6 +82,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('sekretariat/tuntutan/PPK/dibayar', [SekretariatController::class, 'bilanganTuntutanPPK']);
 
     //Permohonan - Sekretariat - Kelulusan
+    Route::post('/bulk-approval', [SekretariatController::class, 'bulkApproval'])->name('bulk.approval');
     Route::get('permohonan/sekretariat/kelulusan', [SekretariatController::class, 'senaraiKelulusanPermohonan']);
     Route::get('permohonan/sekretariat/kelulusan/{smoku_id}', [SekretariatController::class, 'maklumatKelulusanPermohonan']);
     Route::post('permohonan/sekretariat/hantar/keputusan/{smoku_id}', [SekretariatController::class, 'hantarKeputusanPermohonan']);

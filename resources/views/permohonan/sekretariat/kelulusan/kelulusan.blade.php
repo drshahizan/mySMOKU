@@ -76,8 +76,8 @@
                                     <br>
                                     <div class="table-responsive">
                                         <div class="body">
-                                            <form action="{{ url('hantar-keputusan') }}" method="POST">
-                                                {{csrf_field()}}
+                                            {{-- <form action="{{ url('hantar-keputusan') }}" method="POST"> --}}
+                                                {{-- {{csrf_field()}} --}}
                                                 <table id="sortTable1" class="table table-bordered table-striped">
                                                     <thead>
                                                         <tr>
@@ -158,7 +158,7 @@
                                                                 @endphp
                                                                 
                                                                 <tr>
-                                                                    <td class="text-center"><input type="checkbox" name="checkbox-1" id="checkbox-1" /></td>                                           
+                                                                    <td class="text-center"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
                                                                     <td><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
                                                                     <td>{{$pemohon}}</td>
                                                                     <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
@@ -180,47 +180,47 @@
                                                 {{-- Modal --}}
                                                 <div class="modal fade" id="pengesahanModal" tabindex="-1" aria-labelledby="pengesahanModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabel">Rekod Keputusan Permohonan</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="pengesahanModalLabel">Rekod Keputusan Permohonan</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
 
-                                                        <div class="modal-body">
-                                                            <form  action="{{ url('hantar-keputusan') }}" method="POST">
-                                                                {{csrf_field()}}
-                                                                <div class="mb-3">
-                                                                    <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
-                                                                    <input type="text" class="form-control" id="no">
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
-                                                                    <input type="date" id="tarikh" class="form-control">
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
-                                                                    <select id="keputusan" onchange="select1()" class="form-control">
-                                                                        <option value="">Pilih Keputusan</option>
-                                                                        <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
-                                                                        <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="message-text" class="col-form-label">Catatan:</label>
-                                                                    <textarea class="form-control" id="message-text"></textarea>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                                    <a href="{{ url('hantar-keputusan') }}" class="btn btn-primary btn-round float-end" data-bs-toggle="modal" data-bs-target="#pengesahanModal">Hantar</a>
-                                                                    {{-- <button type="button" class="btn btn-primary ajaxstudent-save">Hantar</button> --}}
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div> 
+                                                            <div class="modal-body">
+                                                                <form action="{{ route('bulk.approval') }}" method="POST">
+                                                                    {{csrf_field()}}
+                                                                    <div class="mb-3">
+                                                                        <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
+                                                                        <input type="text" class="form-control" id="noMesyuarat" name="noMesyuarat">
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
+                                                                        <input type="date" class="form-control" id="tarikhMesyuarat" name="tarikhMesyuarat">
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
+                                                                        <select onchange="select1()" class="form-control" id="keputusan" name="keputusan">
+                                                                            <option value="">Pilih Keputusan</option>
+                                                                            <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
+                                                                            <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="message-text" class="col-form-label">Catatan:</label>
+                                                                        <textarea class="form-control" id="catatan" name="catatan"></textarea>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                        <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                                        {{-- <a href="{{ url('hantar-keputusan') }}" class="btn btn-primary btn-round float-end" data-bs-toggle="modal" data-bs-target="#pengesahanModal">Hantar</a> --}}
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div> 
                                                     </div>
                                                 </div> 
                                                 <br><br>                                       
-                                            </form>
+                                            {{-- </form> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -230,8 +230,8 @@
                                     <br>
                                     <div class="table-responsive">
                                         <div class="body">
-                                            <form action="{{ url('hantar-keputusan') }}" method="POST">
-                                                {{csrf_field()}}
+                                            {{-- <form action="{{ route('bulk.approval') }}" method="POST"> --}}
+                                                {{-- {{csrf_field()}} --}}
                                                 <table id="sortTable2" class="table table-bordered table-striped">
                                                     <thead>
                                                         <tr>
@@ -253,72 +253,76 @@
                                                         @php
                                                             require_once app_path('helpers.php'); // Replace with the actual path to your helper file
                                                         @endphp
+
                                                         @foreach ($kelulusan as $item)
-                                                            @if ($item['program']=="PPK")
-                                                                @php
-                                                                    $i++;
-                                                                    $nama_pemohon = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_pelajar');
-                                                                    $nama_kursus = DB::table('maklumatakademik')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nama_kursus');
-                                                                    $nokp = DB::table('pelajar')->where('nokp_pelajar', $item['nokp_pelajar'])->value('nokp_pelajar');
-                                                                    $jenis_kecacatan = DB::table('pelajar')->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_jenisoku.kecacatan'); //PH,SD
-                                                                    $institusi_pengajian = DB::table('maklumatakademik')->join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi' )->where('nokp_pelajar', $item['nokp_pelajar'])->value('bk_infoipt.namaipt');
-                                                                    
-                                                                    // nama pemohon
-                                                                    $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
-                                                                    $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
-                                                                    $words = explode(' ', $text);
-                                                                    $result = [];
-                                                                    foreach ($words as $word) {
-                                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                                            $result[] = Str::lower($word);
-                                                                        } else {
-                                                                            $result[] = $word;
-                                                                        }
+                                                        @if ($item['program']=="PPK")
+                                                            @php
+                                                                $i++;
+                                                                $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                                $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
+                                                                $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                                                                $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
+                                                                $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                                $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
+                                                                $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
+                                                                
+                                                                // nama pemohon
+                                                                $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                                $conjunctions = ['bin', 'binti'];
+                                                                $words = explode(' ', $text);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
                                                                     }
-                                                                    $pemohon = implode(' ', $result);
+                                                                }
+                                                                $pemohon = implode(' ', $result);
 
-                                                                    //nama kursus
-                                                                    $text2 = ucwords(strtolower($nama_kursus)); // Assuming you're sending the text as a POST parameter
-                                                                    $conjunctions = ['of', 'in', 'and'];
-                                                                    $words = explode(' ', $text2);
-                                                                    $result = [];
-                                                                    foreach ($words as $word) {
-                                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                                            $result[] = Str::lower($word);
-                                                                        } else {
-                                                                            $result[] = $word;
-                                                                        }
+                                                                //nama kursus
+                                                                $text2 = ucwords(strtolower($nama_kursus)); // Assuming you're sending the text as a POST parameter
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text2);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
                                                                     }
-                                                                    $kursus = implode(' ', $result);
-                                                                    $namakursus = transformBracketsToCapital($kursus);
+                                                                }
+                                                                $kursus = implode(' ', $result);
+                                                                $namakursus = transformBracketsToCapital($kursus);
 
-                                                                    //institusi pengajian
-                                                                    $text3 = ucwords(strtolower($institusi_pengajian)); // Assuming you're sending the text as a POST parameter
-                                                                    $conjunctions = ['of', 'in', 'and'];
-                                                                    $words = explode(' ', $text3);
-                                                                    $result = [];
-                                                                    foreach ($words as $word) {
-                                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                                            $result[] = Str::lower($word);
-                                                                        } else {
-                                                                            $result[] = $word;
-                                                                        }
+                                                                //institusi pengajian
+                                                                $text3 = ucwords(strtolower($institusi_pengajian)); // Assuming you're sending the text as a POST parameter
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text3);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
                                                                     }
-                                                                    $institusi = implode(' ', $result);
-                                                                    $institusipengajian = transformBracketsToUppercase($institusi);
-                                                                @endphp
-                                                                <tr>
-                                                                    <td class="text-center"><input type="checkbox" name="checkbox-1" id="checkbox-1" /></td>                                           
-                                                                    <td><a href="{{ url('kemaskini/kelulusan/'. $nokp) }}" target="_blank">{{$item['id_permohonan']}}</a></td>
-                                                                    <td>{{$pemohon}}</td>
-                                                                    <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                    <td>{{$namakursus}}</td>
-                                                                    <td>{{$institusipengajian}}</td>
-                                                                    <td class="text-center">{{date('d/m/Y', strtotime($item['tkh_mula']))}}</td>
-                                                                    <td class="text-center">{{date('d/m/Y', strtotime($item['tkh_tamat']))}}</td>
-                                                                </tr>
-                                                            @endif
-                                                        @endforeach 
+                                                                }
+                                                                $institusi = implode(' ', $result);
+                                                                $institusipengajian = transformBracketsToUppercase($institusi);
+                                                            @endphp
+                                                            
+                                                            <tr>
+                                                                <td class="text-center"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
+                                                                <td><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                                <td>{{$pemohon}}</td>
+                                                                <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
+                                                                <td>{{$namakursus}}</td>
+                                                                <td>{{$institusipengajian}}</td>
+                                                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach 
                                                     </tbody>
                                                 </table>
 
@@ -330,46 +334,47 @@
                                                 {{-- Modal --}}
                                                 <div class="modal fade" id="pengesahanModal" tabindex="-1" aria-labelledby="pengesahanModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabel">Rekod Keputusan Permohonan</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="pengesahanModalLabel">Rekod Keputusan Permohonan</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
 
-                                                        <div class="modal-body">
-                                                            <form  action="{{ url('hantar-keputusan') }}" method="POST">
-                                                                {{csrf_field()}}
-                                                                <div class="mb-3">
-                                                                    <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
-                                                                    <input type="text" class="form-control" id="no">
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
-                                                                    <input type="date" id="tarikh" class="form-control">
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
-                                                                    <select id="keputusan" onchange="select1()" class="form-control">
-                                                                        <option value="">Pilih Keputusan</option>
-                                                                        <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
-                                                                        <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="message-text" class="col-form-label">Catatan:</label>
-                                                                    <textarea class="form-control" id="message-text"></textarea>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                                    <a href="{{ url('hantar-keputusan') }}" class="btn btn-primary btn-round float-end" data-bs-toggle="modal" data-bs-target="#pengesahanModal">Hantar</a>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div> 
+                                                            <div class="modal-body">
+                                                                <form action="{{ route('bulk.approval') }}" method="POST">
+                                                                    {{csrf_field()}}
+                                                                    <div class="mb-3">
+                                                                        <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
+                                                                        <input type="text" class="form-control" id="noMesyuarat" name="noMesyuarat">
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
+                                                                        <input type="date" class="form-control" id="tarikhMesyuarat" name="tarikhMesyuarat">
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
+                                                                        <select id="keputusan" name="keputusan" onchange="select1()" class="form-control">
+                                                                            <option value="">Pilih Keputusan</option>
+                                                                            <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
+                                                                            <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="message-text" class="col-form-label">Catatan:</label>
+                                                                        <textarea class="form-control" id="catatan" name="catatan"></textarea>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                        <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                                        {{-- <a href="{{ url('hantar-keputusan') }}" class="btn btn-primary btn-round float-end" data-bs-toggle="modal" data-bs-target="#pengesahanModal">Hantar</a> --}}
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div> 
                                                     </div>
                                                 </div> 
                                                 <br><br>                                       
-                                            </form>
+                                            {{-- </form> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -385,29 +390,48 @@
             $('#sortTable1').DataTable();
             $('#sortTable2').DataTable();
 
+
+            // function toggle(source) {
+            //     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            //     for (var i = 0; i < checkboxes.length; i++) {
+            //         if (checkboxes[i] != source)
+            //             checkboxes[i].checked = source.checked;
+            //     }
+            // }
+
+
             // check all checkboxes at once
             function toggle(source) {
-                var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
                 for (var i = 0; i < checkboxes.length; i++) {
-                    if (checkboxes[i] != source)
-                        checkboxes[i].checked = source.checked;
+                    checkboxes[i].checked = source.checked;
                 }
             }
 
             //input maklumat for kelulusan
-            function myinput(){
-                var no = prompt("No. Mesyuarat:");
-                var tarikh = prompt("Tarikh Mesyuarat:");
-                var keputusan = prompt("Kelulusan:");
-                var catatan = prompt("Catatan:");
-		    }
+            // function myinput(){
+            //     var no = prompt("No. Mesyuarat:");
+            //     var tarikh = prompt("Tarikh Mesyuarat:");
+            //     var keputusan = prompt("Kelulusan:");
+            //     var catatan = prompt("Catatan:");
+
+            //     // Set values in the modal input fields
+            //     document.getElementById("no").value = no;
+            //     document.getElementById("tarikh").value = tarikh;
+            //     document.getElementById("keputusan").value = keputusan;
+            //     document.getElementById("catatan").value = catatan;
+
+            //     // Open the modal
+            //     $('#pengesahanModal').modal('show');
+		    // }
 
             // submit modal
-            $(document).ready(function() {
-                $(document).on('click','ajaxstudent-save', function(){
-                    alert("Emel notifikasi telah dihantar kepada pemohon");
-                }); 
-            });
+            // $(document).ready(function() {
+            //     $(document).on('click','ajaxstudent-save', function(e){
+            //         e.preventDefault();                                             // Prevent the default form submission
+            //         alert("Emel notifikasi telah dihantar kepada semua pemohon");   // Send alert nitifcation
+            //     }); 
+            // });
         </script>
         
         <!-- Vedor js file and create bundle with grunt  --> 

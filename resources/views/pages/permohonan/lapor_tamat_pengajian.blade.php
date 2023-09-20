@@ -41,7 +41,7 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td>Salinan Ijazah (Surat Senat)</td>
+											<td>Sijil Tamat Pelajar / Surat Senat</td>
 											<td><input type="file" id="suratSenat" name="suratSenat"/></td>
 										</tr>
 										<tr>
