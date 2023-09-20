@@ -144,6 +144,7 @@ class TuntutanController extends Controller
 
             'wang_saku' => $request->wang_saku,
             'amaun_wang_saku' => $request->amaun_wang_saku,
+            'jumlah' => $request->jumlah,
             'status' => '2',
             
         ]);
