@@ -18,6 +18,10 @@ class Permohonan extends Model
         'amaun_yuran',
         'wang_saku',
         'amaun_wang_saku',
+        'yuran_disokong',
+        'yuran_dibayar',
+        'wang_saku_disokong',
+        'wang_saku_dibayar',
         'perakuan',
         'status',
     ];

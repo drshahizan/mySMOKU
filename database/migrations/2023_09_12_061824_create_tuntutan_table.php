@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('status');
             $table->string('wang_saku')->nullable();
             $table->string('amaun_wang_saku')->nullable();
+            $table->string('yuran_disokong')->nullable();
+            $table->string('yuran_dibayar')->nullable();
+            $table->string('wang_saku_disokong')->nullable();
+            $table->string('wang_saku_dibayar')->nullable();
             $table->string('jumlah')->nullable();
             $table->string('baki')->nullable();
             $table->foreign('smoku_id')
