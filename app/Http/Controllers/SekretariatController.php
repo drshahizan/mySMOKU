@@ -303,43 +303,42 @@ class SekretariatController extends Controller
     // }
 
     public function bulkApproval(Request $request)
-{
-    // Get the selected item IDs from the form
-    $selectedItemIds = $request->input('selected_items');
+    {
+        // Get the selected item IDs from the form
+        $selectedItemIds = $request->input('selected_items');
 
-    // Loop through $selectedItemIds and update the database accordingly
-    foreach ($selectedItemIds as $itemId) {
-        $item = Permohonan::find($itemId);
+        // Loop through $selectedItemIds and update the database accordingly
+        foreach ($selectedItemIds as $itemId) {
+            $item = Permohonan::find($itemId);
 
-        if ($item) {
-            // Update the 'Permohonan' model's status
-            $item->update([
-                'status' => 6,
-            ]);
+            if ($item) {
+                // Update the 'Permohonan' model's status
+                $item->update([
+                    'status' => 6,
+                ]);
 
-            // Create a 'Kelulusan' record
-            Kelulusan::create([
-                'permohonan_id' => $item->id,
-                'no_mesyuarat' => $request->input('noMesyuarat'),
-                'tarikh_mesyuarat' => $request->input('tarikhMesyuarat'),
-                'keputusan' => $request->input('keputusan'),
-                'catatan' => $request->input('catatan'),
-            ]);
+                // Create a 'Kelulusan' record
+                Kelulusan::create([
+                    'permohonan_id' => $item->id,
+                    'no_mesyuarat' => $request->input('noMesyuarat'),
+                    'tarikh_mesyuarat' => $request->input('tarikhMesyuarat'),
+                    'keputusan' => $request->input('keputusan'),
+                    'catatan' => $request->input('catatan'),
+                ]);
 
-            // Create a 'SejarahPermohonan' record
-            SejarahPermohonan::create([
-                'smoku_id' => $item->smoku_id,
-                'permohonan_id' => $item->id,
-                'status' => 6,
-            ]);
+                // Create a 'SejarahPermohonan' record
+                SejarahPermohonan::create([
+                    'smoku_id' => $item->smoku_id,
+                    'permohonan_id' => $item->id,
+                    'status' => 6,
+                ]);
+            }
         }
+
+        view('permohonan.sekretariat.keputusan.keputusan');
+        // Redirect to a success page or another route
+        //return redirect()->route('permohonan/sekretariat/keputusan');
     }
-
-    view('permohonan.sekretariat.keputusan.keputusan');
-    // Redirect to a success page or another route
-    //return redirect()->route('permohonan/sekretariat/keputusan');
-}
-
 
     public function senaraiKeputusanPermohonan(Request $request)
     {

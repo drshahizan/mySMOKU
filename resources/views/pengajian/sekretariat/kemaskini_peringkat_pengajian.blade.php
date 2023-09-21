@@ -68,48 +68,27 @@
                             <div class="tab-content" id="myTabContent">
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
-                                    {{-- <br><br>
-                                    <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
-                                        <div class="row" style="margin-left: 15px;">
-                                            <div class="col-md-2">
-                                                <label for="start_date"><b>Dari:</b></label>
-                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
-                                            </div>
-                                    
-                                            <div class="col-md-2">
-                                                <label for="end_date"><b>Hingga:</b></label>
-                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                            </div>
-                                    
-                                            <div class="col-md-4 right">
-                                                <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
-                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form> --}}
-                                    
                                     <br>
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 15%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 45%"><b>Nama</b></th>
-                                                        <th style="width: 10%" class="text-center"><b>No. Mesyuarat</b></th>
-                                                        <th style="width: 15%" class="text-center"><b>Tarikh Kemaskini Keputusan</b></th> 
-                                                        <th class="text-center" style="width: 15%">Status Permohonan</th>
+                                                        <th style="width: 5%" class="text-center"><b>No.</b></th>                                        
+                                                        <th style="width: 40%"><b>Nama</b></th>
+                                                        <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
+                                                        <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
+                                                        <th class="text-center" style="width: 25%">Peringkat Pengajian</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @php
+                                                        $i=1;
+                                                    @endphp
+
                                                     @foreach ($permohonan as $item)
                                                         @php
-                                                            $id_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
-                                                            $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku.nama');
-                                                            $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
-
+                                                            $nama = DB::table('smoku')->where('id',$item['smoku_id'])->value('nama');
                                                             $text = ucwords(strtolower($nama));
                                                             $conjunctions = ['bin', 'binti'];
                                                             $words = explode(' ', $text);
@@ -124,17 +103,32 @@
                                                             $pemohon = implode(' ', $result);
                                                         @endphp
 
-                                                        @if($program == "BKOKU")
+                                                        @if($item['program'] == "BKOKU")
                                                             <tr>
-                                                                <td>{{$id_permohonan}}</td>
+                                                                <td class="text-center">{{$i++}}</td>
                                                                 <td>{{$pemohon}}</td>
-                                                                <td class="text-center">{{$item->no_mesyuarat}}</td>
-                                                                <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                                                                @if($item->keputusan == "Lulus")
-                                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{$item->keputusan}}</button></td>
-                                                                @elseif($item->keputusan == "Tidak Lulus")
-                                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{$item->keputusan}}</button></td>
-                                                                @endif
+                                                                <td class="text-center">
+                                                                    <button type="button" class="btn btn-info">Lihat
+                                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <button type="button" class="btn btn-info">Lihat
+                                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <select id="keputusan" name="keputusan" style="padding: 6px;" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                        <option value="">Kemaskini</option>
+                                                                        <option value="Lulus">Sijil</option>
+                                                                        <option value="Tidak Lulus">Diploma</option>
+                                                                        <option value="Lulus">Sarjana Muda</option>
+                                                                        <option value="Tidak Lulus">Diploma Lepasan Ijazah</option>
+                                                                        <option value="Lulus">Ijazah Sarjana</option>
+                                                                        <option value="Tidak Lulus">Doktor Falsafah</option>
+                                                                    </select>
+                                                                    <i class='fas fa-check-square' style='color:green; font-size:35px; vertical-align:middle;'></i>
+                                                                </td>
                                                             </tr>
                                                         @endif
                                                     @endforeach
@@ -146,48 +140,27 @@
 
                                 {{-- PKK --}}
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-                                    {{-- <br><br>
-                                    <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
-                                        <div class="row" style="margin-left: 15px;">
-                                            <div class="col-md-2">
-                                                <label for="start_date"><b>Dari:</b></label>
-                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
-                                            </div>
-                                    
-                                            <div class="col-md-2">
-                                                <label for="end_date"><b>Hingga:</b></label>
-                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                            </div>
-                                    
-                                            <div class="col-md-4 right">
-                                                <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
-                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>   --}}
-                
                                     <br>
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 15%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 45%"><b>Nama</b></th>
-                                                        <th style="width: 10%" class="text-center"><b>No. Mesyuarat</b></th>
-                                                        <th style="width: 15%" class="text-center"><b>Tarikh Kemaskini Keputusan</b></th> 
-                                                        <th class="text-center" style="width: 15%">Status Permohonan</th>
+                                                        <th style="width: 5%" class="text-center"><b>No.</b></th>                                        
+                                                        <th style="width: 40%"><b>Nama</b></th>
+                                                        <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
+                                                        <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
+                                                        <th class="text-center" style="width: 25%">Peringkat Pengajian</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @php
+                                                        $i=1;
+                                                    @endphp
+
                                                     @foreach ($permohonan as $item)
                                                         @php
-                                                            $id_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
-                                                            $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku.nama');
-                                                            $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
-
+                                                            $nama = DB::table('smoku')->where('id',$item['smoku_id'])->value('nama');
                                                             $text = ucwords(strtolower($nama));
                                                             $conjunctions = ['bin', 'binti'];
                                                             $words = explode(' ', $text);
@@ -202,17 +175,32 @@
                                                             $pemohon = implode(' ', $result);
                                                         @endphp
 
-                                                        @if($program == "PPK")
+                                                        @if($item['program'] == "PPK")
                                                             <tr>
-                                                                <td>{{$id_permohonan}}</td>
+                                                                <td class="text-center">{{$i++}}</td>
                                                                 <td>{{$pemohon}}</td>
-                                                                <td class="text-center">{{$item->no_mesyuarat}}</td>
-                                                                <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                                                                @if($item->keputusan == "Lulus")
-                                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{$item->keputusan}}</button></td>
-                                                                @elseif($item->keputusan == "Tidak Lulus")
-                                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{$item->keputusan}}</button></td>
-                                                                @endif
+                                                                <td class="text-center">
+                                                                    <button type="button" class="btn btn-info">Lihat
+                                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <button type="button" class="btn btn-info">Lihat
+                                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <select id="keputusan" name="keputusan" style="padding: 6px;" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                        <option value="">Kemaskini</option>
+                                                                        <option value="Lulus">Sijil</option>
+                                                                        <option value="Tidak Lulus">Diploma</option>
+                                                                        <option value="Lulus">Sarjana Muda</option>
+                                                                        <option value="Tidak Lulus">Diploma Lepasan Ijazah</option>
+                                                                        <option value="Lulus">Ijazah Sarjana</option>
+                                                                        <option value="Tidak Lulus">Doktor Falsafah</option>
+                                                                    </select>
+                                                                    <i class='fas fa-check-square' style='color:green; font-size:35px; vertical-align:middle;'></i>
+                                                                </td>
                                                             </tr>
                                                         @endif
                                                     @endforeach

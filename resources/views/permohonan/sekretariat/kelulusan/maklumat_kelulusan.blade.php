@@ -130,7 +130,7 @@
                                             <td><b>Keputusan</b></td>
                                             <td><b>:</b></td>
                                             <td>
-                                                <select id="keputusan" name="keputusan" style="padding: 6px;" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required required>
+                                                <select id="keputusan" name="keputusan" style="padding: 6px;" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required>
                                                     <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus">Lulus</option>
                                                     <option value="Tidak Lulus">Tidak Lulus</option>
