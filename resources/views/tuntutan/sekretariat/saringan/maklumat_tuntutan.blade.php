@@ -293,9 +293,19 @@
                                     <!--begin: Invoice body-->
                                     {{csrf_field()}}
                                     @php
-                                        $jumlah = 600+1800;
+                                        if($permohonan->amaun_yuran == null){
+                                            $permohonan->amaun_yuran = 0;
+                                        }
+                                        if($permohonan->amaun_wang_saku == null){
+                                            $permohonan->amaun_wang_saku = 0;
+                                        }
+                                        $jumlah = $permohonan->amaun_yuran + $permohonan->amaun_wang_saku;
+                                        $baki_y = 5000 - $jumlah;
                                         if($jumlah > 5000){
                                             $jumlah = 5000;
+                                        }
+                                        if($baki_y < 0){
+                                            $baki_y = 0;
                                         }
                                     @endphp
                                     <div class="table-responsive">
@@ -314,20 +324,20 @@
                                             <tbody>
                                             <tr class="font-weight-bolder font-size-lg">
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->amaun - $akademik->bil_bulanpersem * 300, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong" value="{{number_format($permohonan->amaun, 2, '.', '')}}"></td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong">{{number_format(5000 - $permohonan->amaun - $akademik->bil_bulanpersem * 300, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong" value="{{number_format($permohonan->amaun, 2, '.', '')}}"></td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_disokong">{{number_format(5000 - $permohonan->amaun - $akademik->bil_bulanpersem * 300, 2)}}</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong">{{number_format($baki_y, 2)}}</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar">{{number_format($baki_y, 2)}}</td>
                                             </tr>
                                             <tr class="font-weight-bolder font-size-lg">
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($akademik->bil_bulanpersem * 300, 2)}}</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($akademik->bil_bulanpersem * 300, 2, '.', '')}}"></td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar">{{number_format(0, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar" value="{{number_format($akademik->bil_bulanpersem * 300, 2, '.', '')}}"></td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_disokong">{{number_format(0, 2)}}</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_dibayar">{{number_format(0, 2)}}</td>
                                             </tr>
                                             </tbody>
@@ -336,12 +346,12 @@
                                             <tr>
                                                 <td class="vertical-top">Jumlah tuntutan yang disokong (RM)</td>
                                                 <td class="vertical-top">:</td>
-                                                <td class="vertical-top"><input type="number" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                <td class="vertical-top"><input type="number" id="jumlah_disokong" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                             </tr>
                                             <tr>
                                                 <td class="vertical-top">Jumlah tuntutan yang dibayar (RM)</td>
                                                 <td class="vertical-top">:</td>
-                                                <td class="vertical-top"><input type="number" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                <td class="vertical-top"><input type="number" id="jumlah_dibayar" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                             </tr>
                                             <tr>
                                                 <td class="vertical-top">Catatan</td>
@@ -376,4 +386,33 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById("yuran_disokong").addEventListener("input", Sokong);
+        document.getElementById("yuran_dibayar").addEventListener("input", Bayar);
+        document.getElementById("w_saku_disokong").addEventListener("input", Sokong);
+        document.getElementById("w_saku_dibayar").addEventListener("input", Bayar);
+
+        function Sokong(){
+            var yuran = document.getElementById('yuran_disokong').value;
+            var w_saku = document.getElementById('w_saku_disokong').value;
+            var baki = 5000 - yuran - w_saku;
+            var jumlah = parseFloat(w_saku) + parseFloat(yuran);
+            baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
+                minimumFractionDigits: 2
+            });
+            document.getElementById('y_baki_disokong').innerHTML = baki;
+            document.getElementById('jumlah_disokong').value= parseFloat(jumlah).toFixed(2);
+        }
+        function Bayar(){
+            var yuran = document.getElementById('yuran_dibayar').value;
+            var w_saku = document.getElementById('w_saku_dibayar').value;
+            var baki = 5000 - yuran - w_saku;
+            var jumlah = parseFloat(yuran) + parseFloat(w_saku);
+            baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
+                minimumFractionDigits: 2
+            });
+            document.getElementById('y_baki_dibayar').innerHTML = baki;
+            document.getElementById('jumlah_dibayar').value= parseFloat(jumlah).toFixed(2);
+        }
+    </script>
 </x-default-layout>

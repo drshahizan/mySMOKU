@@ -308,58 +308,32 @@
         </div>
     </div>
    <script>
-       document.getElementById("yuran_disokong").addEventListener("input", ySokong);
-       document.getElementById("yuran_dibayar").addEventListener("input", yBayar);
-       document.getElementById("w_saku_disokong").addEventListener("input", wSokong);
-       document.getElementById("w_saku_dibayar").addEventListener("input", wBayar);
+       document.getElementById("yuran_disokong").addEventListener("input", Sokong);
+       document.getElementById("yuran_dibayar").addEventListener("input", Bayar);
+       document.getElementById("w_saku_disokong").addEventListener("input", Sokong);
+       document.getElementById("w_saku_dibayar").addEventListener("input", Bayar);
 
-       function ySokong(){
+       function Sokong(){
            var yuran = document.getElementById('yuran_disokong').value;
            var w_saku = document.getElementById('w_saku_disokong').value;
            var baki = 5000 - yuran - w_saku;
-           var jumlah = yuran + w_saku;
+           var jumlah = parseFloat(w_saku) + parseFloat(yuran);
            baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                minimumFractionDigits: 2
            });
-
            document.getElementById('y_baki_disokong').innerHTML = baki;
-           document.getElementById('jumlah_disokong').value= jumlah;
+           document.getElementById('jumlah_disokong').value= parseFloat(jumlah).toFixed(2);
        }
-       function yBayar(){
+       function Bayar(){
            var yuran = document.getElementById('yuran_dibayar').value;
            var w_saku = document.getElementById('w_saku_dibayar').value;
            var baki = 5000 - yuran - w_saku;
-           var jumlah = yuran + w_saku;
+           var jumlah = parseFloat(yuran) + parseFloat(w_saku);
            baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                minimumFractionDigits: 2
            });
-           jumlah = jumlah.toFixed(2);
            document.getElementById('y_baki_dibayar').innerHTML = baki;
-           document.getElementById('jumlah_dibayar').value= jumlah;
-       }
-       function wSokong(){
-           var yuran = document.getElementById('yuran_disokong').value;
-           var w_saku = document.getElementById('w_saku_disokong').value;
-           var baki = 5000 - yuran - w_saku;
-           var jumlah = yuran + w_saku;
-           baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
-               minimumFractionDigits: 2
-           });
-           jumlah = jumlah.toFixed(2);
-           document.getElementById('y_baki_disokong').innerHTML = baki;
-           document.getElementById('jumlah_disokong').value= jumlah;
-       }
-       function wBayar(){
-           var yuran = document.getElementById('yuran_dibayar').value;
-           var w_saku = document.getElementById('w_saku_dibayar').value;
-           var baki = 5000 - yuran - w_saku;
-           var jumlah = yuran + w_saku;
-           baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
-               minimumFractionDigits: 2
-           });
-           jumlah = jumlah.toFixed(2);
-           document.getElementById('y_baki_dibayar').innerHTML = baki;
-           document.getElementById('jumlah_dibayar').value= jumlah;
+           document.getElementById('jumlah_dibayar').value= parseFloat(jumlah).toFixed(2);
        }
    </script>
 </x-default-layout>
