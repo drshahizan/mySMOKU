@@ -76,21 +76,21 @@
                                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
-                                                <th style="width: 17%"><b>ID Permohonan</b></th>
+                                                <th style="width: 17%"><b>ID Tuntutan</b></th>
                                                 <th style="width: 50%"><b>Nama</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @php
-                                                $i=0;
-                                            @endphp
-                                            @foreach ($permohonan as $item)
-                                                @if ($item['program']=="BKOKU")
+                                                @php
+                                                    $i=0;
+                                                @endphp
+                                                @foreach ($tuntutan as $item)
                                                     @php
                                                         $i++;
-                                                        $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                        $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
+                                                        $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
                                                             $status='Baharu';
@@ -111,9 +111,10 @@
                                                         }
                                                         $pemohon = implode(' ', $result);
                                                     @endphp
+                                                    @if ($permohonan->program=="BKOKU")
                                                     <tr>
                                                         <td>
-                                                            <a href="{{ url('permohonan/sekretariat/sejarah/rekod-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                            <a href="{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
                                                         </td>
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
@@ -152,21 +153,21 @@
                                         <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
-                                                <th style="width: 17%"><b>ID Permohonan</b></th>
+                                                <th style="width: 17%"><b>ID Tuntutan</b></th>
                                                 <th style="width: 33%"><b>Nama</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @php
-                                                $i=0;
-                                            @endphp
-                                            @foreach ($permohonan as $item)
-                                                @if ($item['program']=="PPK")
+                                                @php
+                                                    $i=0;
+                                                @endphp
+                                                @foreach ($tuntutan as $item)
                                                     @php
                                                         $i++;
-                                                        $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                        $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
+                                                        $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
                                                             $status='Baharu';
@@ -187,9 +188,10 @@
                                                         }
                                                         $pemohon = implode(' ', $result);
                                                     @endphp
+                                                    @if ($permohonan->program=="PPK")
                                                     <tr>
                                                         <td>
-                                                            <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                            <a href="{{ url('tuntutan/sekretariat/saringan/rekod-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
                                                         </td>
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
