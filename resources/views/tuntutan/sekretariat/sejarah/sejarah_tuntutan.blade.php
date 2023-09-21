@@ -24,12 +24,12 @@
     <!--begin::Page title-->
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <!--begin::Title-->
-        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Permohonan</h1>
+        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Tuntutan</h1>
         <!--end::Title-->
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Permohonan</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Tuntutan</li>
             <!--end::Item-->
             <!--begin::Item-->
             <li class="breadcrumb-item">
@@ -53,7 +53,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Sejarah Permohonan<br><small>Klik ID Permohonan untuk melakukan melihat rekod permohonan</small></h2>
+                            <h2>Sejarah Tuntutan<br><small>Klik ID Tuntutan untuk melakukan melihat rekod tuntutan</small></h2>
                         </div>
 
                         {{-- top nav bar --}}

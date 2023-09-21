@@ -76,7 +76,7 @@
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
         <!--begin::Item-->
-        <li class="breadcrumb-item text-dark" style="color:darkblue">Permohonan</li>
+        <li class="breadcrumb-item text-dark" style="color:darkblue">Tuntutan</li>
         <!--end::Item-->
         <!--begin::Item-->
         <li class="breadcrumb-item">
@@ -92,7 +92,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-dark" style="color:darkblue">Rekod Maklumat Permohonan</li>
+        <li class="breadcrumb-item text-dark" style="color:darkblue">Rekod Maklumat Tuntutan</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->

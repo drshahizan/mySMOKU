@@ -293,14 +293,11 @@
                                     <!--begin: Invoice body-->
                                     {{csrf_field()}}
                                     @php
-                                        if($tuntutan->amaun_yuran == null){
-                                            $tuntutan->amaun_yuran = 0;
-                                        }
                                         if($tuntutan->amaun_wang_saku == null){
                                             $tuntutan->amaun_wang_saku = 0;
                                         }
-                                        $jumlah = $tuntutan->amaun_yuran + $tuntutan->amaun_wang_saku;
-                                        $baki_y = $permohonan->baki - $jumlah;
+                                        $jumlah = $tuntutan->amaun_wang_saku;
+                                        $baki_y = $tuntutan->baki - $jumlah;
                                         if($jumlah > 5000){
                                             $jumlah = 5000;
                                         }
