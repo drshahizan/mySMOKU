@@ -217,6 +217,7 @@
 		<div class="card d-flex flex-row-fluid flex-center">
 			<!--begin::Form-->
 			<form id="kt_create_account_form" action="{{ route('ppk.hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
+			{{-- <form action="{{ route('ppk.hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data"> --}}
 				<!--begin::Step 1-->
 				<div class="current" data-kt-stepper-element="content">
 				@csrf
@@ -730,7 +731,7 @@
 
 				<!--begin::Step 3-->
 				<div data-kt-stepper-element="content">
-				@csrf		
+				@csrf
 					<!--begin::Wrapper-->
 					<div class="w-100">
 						<!--begin::Heading-->
@@ -815,7 +816,6 @@
 								<!--begin::Input wrapper-->
 								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 									
-									<option></option>
 									<option value="1">SEPENUH MASA</option>
 									
 								</select>
@@ -877,7 +877,6 @@
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
 										<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-											<option></option>
 											<option value="6">6</option>
 										</select>
 									<!--end::Input wrapper-->
@@ -1188,6 +1187,7 @@
 							<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 						</button>
 						<button type="button" class="btn btn-lg btn-primary save-form" data-kt-stepper-action="next">Teruskan
+						{{-- <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Teruskan --}}
 						<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
 							<span class="path1"></span>
 							<span class="path2"></span>
