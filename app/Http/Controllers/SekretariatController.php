@@ -139,6 +139,12 @@ class SekretariatController extends Controller
         return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
     }
 
+    public function kemaskiniPeringkatPengajian()
+    {
+        $permohonan = Permohonan::all();
+        return view('pengajian.sekretariat.kemaskini_peringkat_pengajian', compact('permohonan'));
+    }
+
     public function senaraiKelulusanPermohonan()
     {
         $kelulusan = Permohonan::where('status', '=','4')->get();

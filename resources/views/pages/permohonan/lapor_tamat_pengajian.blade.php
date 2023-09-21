@@ -55,7 +55,7 @@
 												</div>
 					
 												<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp; 
-													Format fail yang boleh dimuat naik adalah format '.pdf', '.jpg', '.png' dan '.jpeg'
+													Format fail yang boleh dimuat naik adalah format '.pdf', '.jpg', '.png' dan '.jpeg'.
 												</div>
 
 												<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp; 
