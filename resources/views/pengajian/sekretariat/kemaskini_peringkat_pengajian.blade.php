@@ -74,7 +74,7 @@
                                             <table id="sortTable1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 5%" class="text-center"><b>No.</b></th>                                        
+                                                        <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>                                        
                                                         <th style="width: 40%"><b>Nama</b></th>
                                                         <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
                                                         <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
@@ -83,7 +83,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @php
-                                                        $i=1;
+                                                        $i=0;
                                                     @endphp
 
                                                     @foreach ($permohonan as $item)
@@ -105,7 +105,7 @@
 
                                                         @if($item['program'] == "BKOKU")
                                                             <tr>
-                                                                <td class="text-center">{{$i++}}</td>
+                                                                <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
                                                                 <td>{{$pemohon}}</td>
                                                                 <td class="text-center">
                                                                     <button type="button" class="btn btn-info">Lihat
@@ -146,7 +146,7 @@
                                             <table id="sortTable1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 5%" class="text-center"><b>No.</b></th>                                        
+                                                        <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>                                        
                                                         <th style="width: 40%"><b>Nama</b></th>
                                                         <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
                                                         <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
@@ -155,7 +155,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @php
-                                                        $i=1;
+                                                        $t=0;
                                                     @endphp
 
                                                     @foreach ($permohonan as $item)
@@ -177,7 +177,7 @@
 
                                                         @if($item['program'] == "PPK")
                                                             <tr>
-                                                                <td class="text-center">{{$i++}}</td>
+                                                                <td class="text-center" data-no="{{ $t++ }}">{{$t++}}</td>
                                                                 <td>{{$pemohon}}</td>
                                                                 <td class="text-center">
                                                                     <button type="button" class="btn btn-info">Lihat
@@ -221,7 +221,40 @@
         <script src="assets/bundles/vendorscripts.bundle.js"></script>
 
         <script>
-             $('#sortTable1').DataTable();
-            $('#sortTable2').DataTable();
+            $(document).ready(function() {
+                var table = $('#sortTable1').DataTable({
+                    "columnDefs": [
+                        {
+                            "targets": 'no-sort',
+                            "orderable": false
+                        }
+                    ],
+                });
+
+                // Disable sorting for the "No" column
+                table.on('order.dt', function() {
+                    table.column(0, { order: 'applied' }).nodes().each(function(cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
+            });
+
+            $(document).ready(function() {
+                var table = $('#sortTable2').DataTable({
+                    "columnDefs": [
+                        {
+                            "targets": 'no-sort',
+                            "orderable": false
+                        }
+                    ],
+                });
+
+                // Disable sorting for the "No" column
+                table.on('order.dt', function() {
+                    table.column(0, { order: 'applied' }).nodes().each(function(cell, i) {
+                        cell.innerHTML = t + 1;
+                    });
+                }).draw();
+            });
         </script>
 </x-default-layout> 
