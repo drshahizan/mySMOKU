@@ -239,6 +239,22 @@
                 }).draw();
             });
 
-            //$('#sortTable2').DataTable();
+            $(document).ready(function() {
+                var table = $('#sortTable2').DataTable({
+                    "columnDefs": [
+                        {
+                            "targets": 'no-sort',
+                            "orderable": false
+                        }
+                    ],
+                });
+
+                // Disable sorting for the "No" column
+                table.on('order.dt', function() {
+                    table.column(0, { order: 'applied' }).nodes().each(function(cell, i) {
+                        cell.innerHTML = t + 1;
+                    });
+                }).draw();
+            });
         </script>
 </x-default-layout> 
