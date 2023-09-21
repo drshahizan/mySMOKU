@@ -320,7 +320,8 @@
 				</div>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('penyelaras-sejarah-tuntutan')}}">
+			{{-- <a class="menu-link" href="{{url('penyelaras-sejarah-tuntutan')}}"> --}}
+				<a class="menu-link" href="#">
 			
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
 					<span class="menu-title">Keseluruhan</span>
