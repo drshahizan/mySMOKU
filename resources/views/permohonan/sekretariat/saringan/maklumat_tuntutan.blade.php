@@ -286,12 +286,12 @@
                                             <tr>
                                                 <td>Jumlah tuntutan yang disokong (RM)</td>
                                                 <td>:</td>
-                                                <td><input type="number" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                <td><input type="number" id="jumlah_disokong" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                             </tr>
                                             <tr>
                                                 <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                 <td>:</td>
-                                                <td><input type="number" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                <td><input type="number" id="jumlah_dibayar" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -308,14 +308,58 @@
         </div>
     </div>
    <script>
-       document.getElementById("yuran_disokong").addEventListener("input", myFunction);
-       document.getElementById("yuran_dibayar").addEventListener("input", myFunction);
-       document.getElementById("w_saku_disokong").addEventListener("input", myFunction);
-       document.getElementById("w_saku_dibayar").addEventListener("input", myFunction);
+       document.getElementById("yuran_disokong").addEventListener("input", ySokong);
+       document.getElementById("yuran_dibayar").addEventListener("input", yBayar);
+       document.getElementById("w_saku_disokong").addEventListener("input", wSokong);
+       document.getElementById("w_saku_dibayar").addEventListener("input", wBayar);
 
-       function myFunction() {
-           
-           document.getElementById("demo").innerHTML = "The value of the input field was changed.";
+       function ySokong(){
+           var yuran = document.getElementById('yuran_disokong').value;
+           var w_saku = document.getElementById('w_saku_disokong').value;
+           var baki = 5000 - yuran - w_saku;
+           var jumlah = yuran + w_saku;
+           baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
+               minimumFractionDigits: 2
+           });
+
+           document.getElementById('y_baki_disokong').innerHTML = baki;
+           document.getElementById('jumlah_disokong').value= jumlah;
+       }
+       function yBayar(){
+           var yuran = document.getElementById('yuran_dibayar').value;
+           var w_saku = document.getElementById('w_saku_dibayar').value;
+           var baki = 5000 - yuran - w_saku;
+           var jumlah = yuran + w_saku;
+           baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
+               minimumFractionDigits: 2
+           });
+           jumlah = jumlah.toFixed(2);
+           document.getElementById('y_baki_dibayar').innerHTML = baki;
+           document.getElementById('jumlah_dibayar').value= jumlah;
+       }
+       function wSokong(){
+           var yuran = document.getElementById('yuran_disokong').value;
+           var w_saku = document.getElementById('w_saku_disokong').value;
+           var baki = 5000 - yuran - w_saku;
+           var jumlah = yuran + w_saku;
+           baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
+               minimumFractionDigits: 2
+           });
+           jumlah = jumlah.toFixed(2);
+           document.getElementById('y_baki_disokong').innerHTML = baki;
+           document.getElementById('jumlah_disokong').value= jumlah;
+       }
+       function wBayar(){
+           var yuran = document.getElementById('yuran_dibayar').value;
+           var w_saku = document.getElementById('w_saku_dibayar').value;
+           var baki = 5000 - yuran - w_saku;
+           var jumlah = yuran + w_saku;
+           baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
+               minimumFractionDigits: 2
+           });
+           jumlah = jumlah.toFixed(2);
+           document.getElementById('y_baki_dibayar').innerHTML = baki;
+           document.getElementById('jumlah_dibayar').value= jumlah;
        }
    </script>
 </x-default-layout>
