@@ -51,12 +51,27 @@
                                     <tbody>
                                         
                                         <tr>
-                                            <td><a href="">P/</a></td>
-                                            <td>404</td>
-                                            <td>404</td>
-                                            <td class="text-center">404</td>
-                                            <td class="text-center"><button class="btn bg-batal text-white">Belum Mohon</button></td> 
+                                            <td><a href="">P/1/020202015888/2</a></td>
+                                            <td>Nurul Atiqah Binti Hashim</td>
+                                            <td>Politeknik Ibrahim Sultan  </td>
+                                            <td class="text-center">21/9/2022 - 22/9/2024</td>
+                                            <td class="text-center"><button class="btn bg-warning text-white">Dalam Saringan</button></td> 
                                         </tr>  
+                                        <tr>
+                                            <td><a href="">P/1/021010147896/3</a></td>
+                                            <td>Ariana Binti Mahadir</td>
+                                            <td>Politeknik Ibrahim Sultan</td>
+                                            <td class="text-center">18/1/2022 - 17/1/2024</td>
+                                            <td class="text-center"><button class="btn bg-success text-white">Telah Dibayar</button></td> 
+                                        </tr>  
+                                        <tr>
+                                            <td><a href="">P/1/020810015901/4</a></td>
+                                            <td>Mohd Syafiq Bin Amiluddin</td>
+                                            <td>Politeknik Ibrahim Sultan  </td>
+                                            <td class="text-center">18/1/2021 - 17/1/2023</td>
+                                            <td class="text-center"><button class="btn bg-success text-white">Telah Dibayar</button></td> 
+                                        </tr>  
+                                       
                                        
                                     </tbody>
                                 </table>
