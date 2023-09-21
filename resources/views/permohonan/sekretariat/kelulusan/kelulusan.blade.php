@@ -383,16 +383,6 @@
             $('#sortTable1').DataTable();
             $('#sortTable2').DataTable();
 
-
-            // function toggle(source) {
-            //     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            //     for (var i = 0; i < checkboxes.length; i++) {
-            //         if (checkboxes[i] != source)
-            //             checkboxes[i].checked = source.checked;
-            //     }
-            // }
-
-
             // check all checkboxes at once
             function toggle(source) {
                 var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
@@ -400,31 +390,6 @@
                     checkboxes[i].checked = source.checked;
                 }
             }
-
-            //input maklumat for kelulusan
-            // function myinput(){
-            //     var no = prompt("No. Mesyuarat:");
-            //     var tarikh = prompt("Tarikh Mesyuarat:");
-            //     var keputusan = prompt("Kelulusan:");
-            //     var catatan = prompt("Catatan:");
-
-            //     // Set values in the modal input fields
-            //     document.getElementById("no").value = no;
-            //     document.getElementById("tarikh").value = tarikh;
-            //     document.getElementById("keputusan").value = keputusan;
-            //     document.getElementById("catatan").value = catatan;
-
-            //     // Open the modal
-            //     $('#pengesahanModal').modal('show');
-		    // }
-
-            // submit modal
-            // $(document).ready(function() {
-            //     $(document).on('click','ajaxstudent-save', function(e){
-            //         e.preventDefault();                                             // Prevent the default form submission
-            //         alert("Emel notifikasi telah dihantar kepada semua pemohon");   // Send alert nitifcation
-            //     }); 
-            // });
         </script>
         
         <!-- Vedor js file and create bundle with grunt  --> 
