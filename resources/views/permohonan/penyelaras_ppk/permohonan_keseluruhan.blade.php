@@ -16,7 +16,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Permohonan Baharu</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Keseluruhan</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
