@@ -50,15 +50,15 @@
 										</tr>
 										<tr>
 											<td colspan="2">
-												<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp;
+												<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange; font-size:15px;'></i>&nbsp;
 													Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a> untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
 												</div>
 					
-												<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; 
+												<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp; 
 													Format fail yang boleh dimuat naik adalah format '.pdf', '.jpg', '.png' dan '.jpeg'
 												</div>
 
-												<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; 
+												<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp; 
 													Saiz maksimum fail adalah 2 MB.
 												</div>
 											</td>
@@ -73,9 +73,9 @@
 									<tbody>
 										<tr>
 											<td colspan="2">
-												<input class="form-check-input" type="checkbox" style="height:18px; width:20px;" value="1" id="perakuan" name="perakuan"/>
-												<b>Saya mengaku bahawa maklumat dan dokumen yang disertakan adalah betul dan benar dan bertanggungjawab ke atas maklumat dan dokumen tersebut. 
-												Saya memahami bahawa saya boleh dikenakan tindakan sekiranya mana-mana maklumat dan/atau dokumen yang disertakan adalah tidak benar.</b>
+												<input type="checkbox" value="1" id="perakuan" name="perakuan"/>
+												Saya mengaku bahawa maklumat dan dokumen yang disertakan adalah betul dan benar dan bertanggungjawab ke atas maklumat dan dokumen tersebut. 
+												Saya memahami bahawa saya boleh dikenakan tindakan sekiranya mana-mana maklumat dan/atau dokumen yang disertakan adalah tidak benar.
 											</td>
 										</tr>
 									</tbody>
