@@ -408,4 +408,16 @@ class PenyelarasPPKController extends Controller
 
         return view('permohonan.penyelaras_ppk.permohonan_keseluruhan', compact('smoku'));
     }
+    
+    public function senaraiTuntutanKeseluruhan()
+    {
+        return view('tuntutan.penyelaras_ppk.tuntutan_keseluruhan');
+    }
+
+    public function senaraiTuntutanBaharu()
+    {
+        return view('tuntutan.penyelaras_ppk.tuntutanbaru');
+    }
+
+
 }

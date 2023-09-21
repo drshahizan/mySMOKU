@@ -321,17 +321,17 @@
 		</div>
 		<div class="menu-item">
 			{{-- <a class="menu-link" href="{{url('penyelaras-sejarah-tuntutan')}}"> --}}
-				<a class="menu-link" href="#">
+				<a class="menu-link" href="{{route('senarai.ppk.tuntutanKeseluruhan')}}">
 			
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
 					<span class="menu-title">Keseluruhan</span>
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('tuntutan-wang-saku')}}">
+			<a class="menu-link" href="{{route('senarai.ppk.tuntutanBaharu')}}">
 			
 					<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
-					<span class="menu-title">Wang Saku</span>
+					<span class="menu-title">Baru</span>
 			</a>
 		</div>
 		
