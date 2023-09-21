@@ -84,7 +84,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('sekretariat/kemaskini/peringkat/pengajian', [SekretariatController::class, 'kemaskiniPeringkatPengajian'])->name('peringkat.pengajian');
 
     //Permohonan - Sekretariat - Kelulusan
-    Route::post('/bulk-approval', [SekretariatController::class, 'bulkApproval'])->name('bulk.approval');
+    Route::post('permohonan/sekretariat/hantar/bulk-approval', [SekretariatController::class, 'bulkApproval'])->name('bulk.approval');
     Route::get('permohonan/sekretariat/kelulusan', [SekretariatController::class, 'senaraiKelulusanPermohonan']);
     Route::get('permohonan/sekretariat/kelulusan/{smoku_id}', [SekretariatController::class, 'maklumatKelulusanPermohonan']);
     Route::post('permohonan/sekretariat/hantar/keputusan/{smoku_id}', [SekretariatController::class, 'hantarKeputusanPermohonan']);
