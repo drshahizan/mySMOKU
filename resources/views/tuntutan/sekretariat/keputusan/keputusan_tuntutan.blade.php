@@ -125,10 +125,10 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($permohonan as $item)
-                                                    @if($item['program']=="BKOKU")
+                                                    @foreach ($tuntutan as $item)
                                                         @php
-                                                            $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                            $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
+                                                            $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                             $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                             $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
                                                             $conjunctions = ['bin', 'binti'];
@@ -143,8 +143,9 @@
                                                             }
                                                             $pemohon = implode(' ', $result);
                                                         @endphp
+                                                        @if($permohonan->program=="BKOKU")
                                                         <tr>
-                                                            <td>{{$item['no_rujukan_permohonan']}}</td>
+                                                            <td>{{$item['no_rujukan_tuntutan']}}</td>
                                                             <td>{{$pemohon}}</td>
                                                             <td class="text-center">{{$item['created_at']->format('Y-m-d')}}</td>
                                                             @if($item['status'] == "6")
@@ -194,10 +195,10 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($permohonan as $item)
-                                                    @if($item['program']=="PPK")
+                                                    @foreach ($tuntutan as $item)
                                                         @php
-                                                            $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                            $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
+                                                            $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                             $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                             $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
                                                             $conjunctions = ['bin', 'binti'];
@@ -212,8 +213,9 @@
                                                             }
                                                             $pemohon = implode(' ', $result);
                                                         @endphp
+                                                        @if($permohonan->program=="PPK")
                                                         <tr>
-                                                            <td>{{$item['no_rujukan_permohonan']}}</td>
+                                                            <td>{{$item['no_rujukan_tuntutan']}}</td>
                                                             <td>{{$pemohon}}</td>
                                                             <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                             @if($item['status'] == "6")
