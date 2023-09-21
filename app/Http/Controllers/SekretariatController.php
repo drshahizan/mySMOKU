@@ -223,7 +223,7 @@ class SekretariatController extends Controller
             //update sejarah permohonan
             $sejarah = new SejarahPermohonan([
                 'smoku_id'      =>  $id,
-                'permohonan_id' =>  $id,
+                'permohonan_id' =>  $permohonan_id,
                 'status'        =>  7,
             ]);
             $sejarah->save();
@@ -234,13 +234,22 @@ class SekretariatController extends Controller
         }
 
         //filter
-        $kelulusan = Permohonan::when($request->date != null, function ($q) use ($request) {
-            return $q->whereDate('created_at', $request->date);
-        })
-        ->when($request->status != null, function ($q) use ($request) {
-            return $q->where('status', $request->status);
-        })
-        ->get();
+//        $kelulusan = Permohonan::when($request->date != null, function ($q) use ($request) {
+//            return $q->whereDate('created_at', $request->date);
+//        })
+//        ->when($request->status != null, function ($q) use ($request) {
+//            return $q->where('status', $request->status);
+//        })
+            $startDate = $request->input('start_date');
+            $endDate = $request->input('end_date');
+
+            $kelulusan = Kelulusan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+                return $q->whereBetween('tarikh_mesyuarat', [$startDate, $endDate]);
+            })
+                ->when($request->status, function ($q) use ($request) {
+                    return $q->where('keputusan', $request->status);
+                })
+                ->get();
 
          //notification
          $keputusan = $request->get('keputusan');
