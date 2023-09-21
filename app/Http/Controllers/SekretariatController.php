@@ -173,9 +173,9 @@ class SekretariatController extends Controller
 
     public function hantarKeputusanPermohonan(Request $request,$id)
     {
-        //$id is the id in "permohonan" table
+        //$id is the permohonan_id in "permohonan" table
         $permohonan_id = Permohonan::where('smoku_id', $id)->value('id');
-        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+        //$smoku_id = Permohonan::where('id', $id)->value('smoku_id');
 
         //send & update database
         if($request->get('keputusan')=="Lulus"){
@@ -195,7 +195,7 @@ class SekretariatController extends Controller
 
             //update sejarah permohonan
             $sejarah = new SejarahPermohonan([
-                'smoku_id'      =>  $smoku_id,
+                'smoku_id'      =>  $id,
                 'permohonan_id' =>  $permohonan_id,
                 'status'        =>  6,
             ]);
@@ -222,7 +222,7 @@ class SekretariatController extends Controller
 
             //update sejarah permohonan
             $sejarah = new SejarahPermohonan([
-                'smoku_id'      =>  $smoku_id,
+                'smoku_id'      =>  $id,
                 'permohonan_id' =>  $id,
                 'status'        =>  7,
             ]);
