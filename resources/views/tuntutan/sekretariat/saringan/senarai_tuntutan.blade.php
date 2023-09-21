@@ -179,7 +179,7 @@
                                                     }
                                                     $pemohon = implode(' ', $result);
                                                 @endphp
-                                                @if($item['program']=="PPK")
+                                                @if($permohonan->program=="PPK")
                                                     <tr>
                                                         <td><a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'.$item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a></td>
                                                         {{-- <td><a href="{{ url('tuntutan-telah-disaring/'.$item['nokp_pelajar']) }}" title="">{{$item['no_rujukan_permohonan']}}</a></td> --}}
