@@ -179,7 +179,7 @@
                                     @endphp
                                     <table class="maklumat">
                                         <tr>
-                                            <td><strong>ID Tuntutan</strong></td>
+                                            <td><strong>ID Permohonan</strong></td>
                                             <td>:</td>
                                             <td>{{$permohonan->no_rujukan_permohonan}}</td>
                                             <td class="space">&nbsp;</td>
@@ -230,9 +230,19 @@
                                     {{csrf_field()}}
                                     <!--begin: Invoice body-->
                                     @php
-                                        $jumlah = $permohonan->amaun_yuran + $akademik->bil_bulanpersem * 300;
+                                        if($permohonan->amaun_yuran == null){
+                                            $permohonan->amaun_yuran = 0;
+                                        }
+                                        if($permohonan->amaun_wang_saku == null){
+                                            $permohonan->amaun_wang_saku = 0;
+                                        }
+                                        $jumlah = $permohonan->amaun_yuran + $permohonan->amaun_wang_saku;
+                                        $baki_y = 5000 - $jumlah;
                                         if($jumlah > 5000){
                                             $jumlah = 5000;
+                                        }
+                                        if($baki_y < 0){
+                                            $baki_y = 0;
                                         }
                                     @endphp
                                     <br>
@@ -255,19 +265,19 @@
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->amaun_yuran - $akademik->bil_bulanpersem * 300, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong">{{number_format(5000 - $permohonan->amaun_yuran - $akademik->bil_bulanpersem * 300, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_disokong">{{number_format(5000 - $permohonan->amaun_yuran - $akademik->bil_bulanpersem * 300, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong">{{number_format($baki_y, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar">{{number_format($baki_y, 2)}}</td>
                                                 </tr>
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($akademik->bil_bulanpersem * 300, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($akademik->bil_bulanpersem * 300, 2, '.', '')}}"></td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar">{{number_format(0, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar" value="{{number_format($akademik->bil_bulanpersem * 300, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_disokong">{{number_format(0, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_dibayar">{{number_format(0, 2)}}</td>
                                                 </tr>
                                             </tbody>
@@ -298,24 +308,14 @@
         </div>
     </div>
    <script>
-        function select3(){
-            var catatan1 = document.getElementById('salinan_dokumen').value;
-            if(catatan1=="tak_lengkap"){
-                document.getElementById("checkbox3a").disabled = false;
-                document.getElementById("checkbox3b").disabled = false;
-                document.getElementById("checkbox3c").disabled = false;
-                document.getElementById("checkbox3d").disabled = false;
-            }
-            else{
-                document.getElementById("checkbox3a").disabled = true;
-                document.getElementById("checkbox3b").disabled = true;
-                document.getElementById("checkbox3c").disabled = true;
-                document.getElementById("checkbox3d").disabled = true;
-            }
-        }
+       document.getElementById("yuran_disokong").addEventListener("input", myFunction);
+       document.getElementById("yuran_dibayar").addEventListener("input", myFunction);
+       document.getElementById("w_saku_disokong").addEventListener("input", myFunction);
+       document.getElementById("w_saku_dibayar").addEventListener("input", myFunction);
 
-        function confirmButton() {
-            confirm("Press a button!");
-        }
+       function myFunction() {
+           
+           document.getElementById("demo").innerHTML = "The value of the input field was changed.";
+       }
    </script>
 </x-default-layout>
