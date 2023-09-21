@@ -250,148 +250,92 @@ class SekretariatController extends Controller
          return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'));
     }
 
+    public function bulkApproval(Request $request)
+    {
+        // Get the selected item IDs from the form
+        $selectedItemIds = $request->input('selected_items');
 
-    // public function bulkApproval(Request $request)
-    // {
-    //     // Get the selected item IDs from the form
-    //     $selectedItemIds = $request->input('selected_items');
+        if ($selectedItemIds !== null)
+        {
+            // Loop through $selectedItemIds and update the database accordingly
+            foreach ($selectedItemIds as $itemId) {
+                //$itemId is the permohonan id
+                $item = Permohonan::find($itemId);
+                //$email = DB::table('users')->where('id', $item['smoku_id'])->value('email');
 
-    //     // Perform bulk approval for the selected items
-    //     // Loop through $selectedItemIds and update the database accordingly
+                if ($item) {
+                    if($request->get('keputusan')=="Lulus"){
+                        // Update the 'Permohonan' model's status
+                        $item->update([
+                            'status' => 6,
+                        ]);
 
-    //     // Example:
-    //     foreach ($selectedItemIds as $itemId) {
-    //         // Assuming you have an 'Item' model and you want to update the 'approved' status
-    //         $item = Permohonan::find($itemId);
+                        // Create a 'Kelulusan' record
+                        Kelulusan::create([
+                            'permohonan_id' => $item->id,
+                            'no_mesyuarat' => $request->input('noMesyuarat'),
+                            'tarikh_mesyuarat' => $request->input('tarikhMesyuarat'),
+                            'keputusan' => $request->input('keputusan'),
+                            'catatan' => $request->input('catatan'),
+                        ]);
 
-    //         $permohonan_id = Permohonan::where('smoku_id', $item)->value('id');
-    //         $smoku_id = Permohonan::where('id', $item)->value('smoku_id');
+                        // Create a 'SejarahPermohonan' record
+                        SejarahPermohonan::create([
+                            'smoku_id' => $item->smoku_id,
+                            'permohonan_id' => $item->id,
+                            'status' => 6,
+                        ]);
 
-    //         if ($item) {
-    //             // $item->update([
-    //             //     'approved' => true,
-    //             // ]);
+                        //emel notifikasi layak
+                        $message = 'Test message';
+                        Mail::to("fateennashuha9@gmail.com")->send(new KeputusanLayak($message));
+                    }
+                    else{
+                        // Update the 'Permohonan' model's status
+                        $item->update([
+                            'status' => 7,
+                        ]);
 
-    //             // Add code to record approval details, send email notifications, etc.
-    //             Permohonan::where('smoku_id', $item)
-    //                 ->update([
-    //                 'status'   =>  6,
-    //             ]);
+                        // Create a 'Kelulusan' record
+                        Kelulusan::create([
+                            'permohonan_id' => $item->id,
+                            'no_mesyuarat' => $request->input('noMesyuarat'),
+                            'tarikh_mesyuarat' => $request->input('tarikhMesyuarat'),
+                            'keputusan' => $request->input('keputusan'),
+                            'catatan' => $request->input('catatan'),
+                        ]);
 
-    //             $info_mesyuarat = new Kelulusan([
-    //                 'permohonan_id' =>  $permohonan_id,
-    //                 'no_mesyuarat'  =>  $request->get('noMesyuarat'),
-    //                 'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
-    //                 'keputusan'  =>  $request->get('keputusan'),
-    //                 'catatan'  =>  $request->get('catatan'),
-    //             ]);
-    //             $info_mesyuarat->save();
+                        // Create a 'SejarahPermohonan' record
+                        SejarahPermohonan::create([
+                            'smoku_id' => $item->smoku_id,
+                            'permohonan_id' => $item->id,
+                            'status' => 7,
+                        ]);
 
-    //             //update sejarah permohonan
-    //             $sejarah = new SejarahPermohonan([
-    //                 'smoku_id'      =>  $smoku_id,
-    //                 'permohonan_id' =>  $permohonan_id,
-    //                 'status'        =>  6,
-    //             ]);
-    //             $sejarah->save();
-    //         }
-    //     }
+                        //emel notifikasi tidak layak
+                        $message = 'Test message';
+                        Mail::to("fateennashuha9@gmail.com")->send(new KeputusanTidakLayak($message));
+                    }
+                }
+            }
+        }
 
-    //     $keputusan = $request->get('keputusan');
-    //     $notifikasi = "Emel notifikasi telah dihantar kepada semua pemohon";
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
 
-    //     return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'));
-    //     // Redirect back with a success message
-    //     //return redirect()->back()->with('success', 'Bulk approval completed.');
-    // }
+        $kelulusan = Kelulusan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('tarikh_mesyuarat', [$startDate, $endDate]);
+        })
+        ->when($request->status, function ($q) use ($request) {
+            return $q->where('keputusan', $request->status);
+        })
+        ->get();
 
-//
-//    public function bulkApproval(Request $request)
-//    {
-//        // Get the selected item IDs from the form
-//        $selectedItemIds = $request->input('selected_items');
-//
-//        if ($selectedItemIds !== null)
-//        {
-//            // Loop through $selectedItemIds and update the database accordingly
-//            foreach ($selectedItemIds as $itemId) {
-//                //$itemId is the permohonan id
-//                $item = Permohonan::find($itemId);
-//                //$email = DB::table('users')->where('id', $item['smoku_id'])->value('email');
-//
-//                if ($item) {
-//                    if($request->get('keputusan')=="Lulus"){
-//                        // Update the 'Permohonan' model's status
-//                        $item->update([
-//                            'status' => 6,
-//                        ]);
-//
-//                        // Create a 'Kelulusan' record
-//                        Kelulusan::create([
-//                            'permohonan_id' => $item->id,
-//                            'no_mesyuarat' => $request->input('noMesyuarat'),
-//                            'tarikh_mesyuarat' => $request->input('tarikhMesyuarat'),
-//                            'keputusan' => $request->input('keputusan'),
-//                            'catatan' => $request->input('catatan'),
-//                        ]);
-//
-//                        // Create a 'SejarahPermohonan' record
-//                        SejarahPermohonan::create([
-//                            'smoku_id' => $item->smoku_id,
-//                            'permohonan_id' => $item->id,
-//                            'status' => 6,
-//                        ]);
-//
-//                        //emel notifikasi layak
-//                        $message = 'Test message';
-//                        Mail::to("fateennashuha9@gmail.com")->send(new KeputusanLayak($message));
-//                    }
-//                    else{
-//                        // Update the 'Permohonan' model's status
-//                        $item->update([
-//                            'status' => 7,
-//                        ]);
-//
-//                        // Create a 'Kelulusan' record
-//                        Kelulusan::create([
-//                            'permohonan_id' => $item->id,
-//                            'no_mesyuarat' => $request->input('noMesyuarat'),
-//                            'tarikh_mesyuarat' => $request->input('tarikhMesyuarat'),
-//                            'keputusan' => $request->input('keputusan'),
-//                            'catatan' => $request->input('catatan'),
-//                        ]);
-//
-//                        // Create a 'SejarahPermohonan' record
-//                        SejarahPermohonan::create([
-//                            'smoku_id' => $item->smoku_id,
-//                            'permohonan_id' => $item->id,
-//                            'status' => 7,
-//                        ]);
-//
-//                        //emel notifikasi tidak layak
-//                        $message = 'Test message';
-//                        Mail::to("fateennashuha9@gmail.com")->send(new KeputusanTidakLayak($message));
-//                    }
-//                }
-//            }
-//        }
-//
-//        $startDate = $request->input('start_date');
-//        $endDate = $request->input('end_date');
-//
-//        $kelulusan = Kelulusan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-//            return $q->whereBetween('tarikh_mesyuarat', [$startDate, $endDate]);
-//        })
-//        ->when($request->status, function ($q) use ($request) {
-//            return $q->where('keputusan', $request->status);
-//        })
-//        ->get();
-//
-//        $keputusan = $request->get('keputusan');
-//        $notifikasi = "Emel notifikasi telah dihantar kepada semua pemohon ";
-//
-//        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'))->with('error', 'An error occurred while processing the request.');
-//    }
+        $keputusan = $request->get('keputusan');
+        $notifikasi = "Emel notifikasi telah dihantar kepada semua pemohon ";
+
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'))->with('error', 'An error occurred while processing the request.');
+    }
 
     public function senaraiKeputusanPermohonan(Request $request)
     {

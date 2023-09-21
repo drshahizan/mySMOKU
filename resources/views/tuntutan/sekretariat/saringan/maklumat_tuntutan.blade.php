@@ -293,14 +293,14 @@
                                     <!--begin: Invoice body-->
                                     {{csrf_field()}}
                                     @php
-                                        if($permohonan->amaun_yuran == null){
-                                            $permohonan->amaun_yuran = 0;
+                                        if($tuntutan->amaun_yuran == null){
+                                            $tuntutan->amaun_yuran = 0;
                                         }
-                                        if($permohonan->amaun_wang_saku == null){
-                                            $permohonan->amaun_wang_saku = 0;
+                                        if($tuntutan->amaun_wang_saku == null){
+                                            $tuntutan->amaun_wang_saku = 0;
                                         }
-                                        $jumlah = $permohonan->amaun_yuran + $permohonan->amaun_wang_saku;
-                                        $baki_y = 5000 - $jumlah;
+                                        $jumlah = $tuntutan->amaun_yuran + $tuntutan->amaun_wang_saku;
+                                        $baki_y = $permohonan->baki - $jumlah;
                                         if($jumlah > 5000){
                                             $jumlah = 5000;
                                         }
@@ -324,20 +324,20 @@
                                             <tbody>
                                             <tr class="font-weight-bolder font-size-lg">
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_yuran, 2)}}</td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong" value="{{number_format($tuntutan->amaun_yuran, 2, '.', '')}}"></td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong">{{number_format($baki_y, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($tuntutan->amaun_yuran, 2, '.', '')}}"></td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar">{{number_format($baki_y, 2)}}</td>
                                             </tr>
                                             <tr class="font-weight-bolder font-size-lg">
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_wang_saku, 2)}}</td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_disokong">{{number_format(0, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_dibayar">{{number_format(0, 2)}}</td>
                                             </tr>
                                             </tbody>
