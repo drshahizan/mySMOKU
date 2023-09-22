@@ -88,11 +88,11 @@
                                 <tbody class="fw-semibold text-gray-600">
                                     
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>P/1/020202015888</td>
+                                        <td>Nurul Atiqah Binti Hashim</td>
+                                        <td>Sijil Kemahiran Hotel Dan Katering</td>
+                                        <td>21/9/2022 - 22/9/2024</td>
+                                        <td>Aktif</td>
                                         <td>
                                             
                                             <!--begin::Toolbar-->
@@ -107,6 +107,11 @@
                                               
                                             </div>
                                             <!--end::Toolbar-->
+                                            
+                                        </td>
+                                       
+                                            
+                                            
                                             
                                         </td>
                                         <!--begin::Modal - Customers - Edit-->
@@ -154,7 +159,11 @@
                                                                         <label class="fs-6 fw-semibold mb-2">Semester</label>
                                                                         <!--end::Label-->
                                                                         <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" placeholder="" name="" value="" />
+                                                                        <select name="status" id="status" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
+                                                                            <option value="1" >2</option>
+                                                                            <option value="2" >3</option>
+                                                                            <option value="2" >4</option>
+                                                                        </select>
                                                                         <!--end::Input-->
                                                                     </div>
                                                                     <!--end::Input group-->
@@ -164,59 +173,16 @@
                                                                         <label class="fs-6 fw-semibold mb-2">Salinan Keputusan Pengajian</label>
                                                                         <!--end::Label-->
                                                                         <!--begin::Input-->
-                                                                        <input type="text" class="form-control form-control-solid" placeholder="" name="no_kp" value=""/>
+                                                                        <input type="file" class="form-control form-control-sm" id="" name="salinan_keputusan"/></td>
                                                                         <!--end::Input-->
                                                                     </div>
-                                                                    <!--end::Input group-->
-                                                                    <!--begin::Input group-->
-                                                                    <div class="fv-row mb-7">
-                                                                        <!--begin::Label-->
-                                                                        <label class="fs-6 fw-semibold mb-2">Peranan</label>
-                                                                        <!--end::Label-->
-                                                                        <!--begin::Input-->
-                                                                        <select name="tahap" id="tahap" class="form-select form-select-solid js-example-basic-single" data-control="select2" data-placeholder="Pilih">
-                                                                           
-                                                                        </select>
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input group-->
-                                                                                                                                
-                                                                   
-    
-                                                                    <script>
-                                                                        $(document).ready(function(){
-                                                                            $('#tahap').on('change', function() {
-                                                                            if ( this.value == '2'){
-                                                                                $("#div_ipt").show();
-                                                                            }
-                                                                            else {
-                                                                                $("#div_ipt").hide();
-                                                                            }
-                                                                            });
-                                                                        });
-                                                                        $(document).ready(function() {
-                                                                        $('.js-example-basic-single').select2();
-                                                                        });
-                                                                        
-                                                                    </script>
-    
-                                                                   
-    
-                                                                    <!--begin::Input group-->
-                                                                    <div class="fv-row mb-7">
-                                                                        <!--begin::Label-->
-                                                                        <label class="fs-6 fw-semibold mb-2">Status</label>
-                                                                        <!--end::Label-->
-                                                                        <!--begin::Input-->
-                                                                        <select name="status" id="status" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
-                                                                            <option value="1" >AKTIF</option>
-                                                                            <option value="2" >TIDAK AKTIF</option>
-                                                                        </select>
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                    <!--end::Input group-->
                                                                     
-                                                                    
+                                                                    <div class="col-6" id="divelaun">
+                                                                        <input class="form-check-input" type="checkbox" value="1" id="wang_saku"  name="wang_saku" onclick="return false" checked/>
+                                                                        <label class="fs-6 fw-semibold form-label">
+                                                                            Tuntut Elaun Wang Saku
+                                                                        </label>
+                                                                    </div>     
                                                                 </div>
                                                                 <!--end::Scroll-->
                                                                 
@@ -224,7 +190,7 @@
                                                                 <div class="text-center pt-15">
                                                                     {{--<button type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Discard</button>--}}
                                                                     <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
-                                                                        <span class="indicator-label">Simpan</span>
+                                                                        <span class="indicator-label">Hantar</span>
                                                                         <span class="indicator-progress">Sila tunggu...
                                                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                                                     </button>
@@ -242,6 +208,145 @@
                                         <!--end::Modal - Customers - Edit-->
                                     </tr>
                                   
+
+                                    
+                                        <tr>
+                                        <td>P/1/021010147896</td>
+                                        <td>Ariana Binti Mahadir</td>
+                                        <td>Sijil Kemahiran Rekabentuk Fesyen Dan Pakaian</td>
+                                        <td>18/1/2022 - 17/1/2024</td>
+                                        <td>Aktif</td>
+                                        <td>
+                                            
+                                            <!--begin::Toolbar-->
+                                            <div class="d-flex">
+                                                <!--begin::Edit-->
+                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">
+                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit">
+                                                        <i class="ki-duotone bi bi-pencil fs-3"></i>
+                                                    </span>
+                                                </a>
+                                                <!--end::Edit-->
+                                              
+                                            </div>
+                                            <!--end::Toolbar-->
+                                            
+                                        </td>
+                                        <div class="modal fade" id="kt_modal_new_card" tabindex="-1" aria-hidden="true">
+                                            <!--begin::Modal dialog-->
+                                            <div class="modal-dialog modal-dialog-centered mw-650px">
+                                                <!--begin::Modal content-->
+                                                <div class="modal-content">
+                                                    <!--begin::Modal header-->
+                                                    <div class="modal-header">
+                                                        <!--begin::Modal title-->
+                                                        <h2>Keputusan Peperiksaan Baru</h2>
+                                                        <!--end::Modal title-->
+                                                        <!--begin::Close-->
+                                                        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                                            <i class="ki-duotone ki-cross fs-1">
+                                                                <span class="path1"></span>
+                                                                <span class="path2"></span>
+                                                            </i>
+                                                        </div>
+                                                        <!--end::Close-->
+                                                    </div>
+                                                    <!--end::Modal header-->
+                                                    <!--begin::Modal body-->
+                                                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                                                        <!--begin::Form-->
+                                                        <form class="form" id="kt_modal_new_card_form" action="" method="post">
+                                                            @csrf
+                                                            <!--begin::Scroll-->
+                                                            
+                                                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+                                                                <!--begin::Input group-->
+                                                                <div class="fv-row mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="fs-6 fw-semibold mb-2">Sesi Pengajian</label>
+                                                                    <!--end::Label-->
+                                                                    <!--begin::Input-->
+                                                                    <input type="text" class="form-control form-control-solid" placeholder="" name="" value="2023/2024" />
+                                                                    <!--end::Input-->
+                                                                </div>
+                                                                <!--end::Input group-->
+                                                                <!--begin::Input group-->
+                                                                <div class="fv-row mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="fs-6 fw-semibold mb-2">Semester</label>
+                                                                    <!--end::Label-->
+                                                                    <!--begin::Input-->
+                                                                    <select name="status" id="status" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
+                                                                        <option value="1" >2</option>
+                                                                        <option value="2" >3</option>
+                                                                        <option value="2" >4</option>
+                                                                    </select>
+                                                                    <!--end::Input-->
+                                                                </div>
+                                                                <!--end::Input group-->
+                                                                <!--begin::Input group-->
+                                                                <div class="fv-row mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="fs-6 fw-semibold mb-2">Salinan Keputusan Pengajian</label>
+                                                                    <!--end::Label-->
+                                                                    <!--begin::Input-->
+                                                                    <input type="file" class="form-control form-control-sm" id="" name="salinan_keputusan"/></td>
+                                                                    <!--end::Input-->
+                                                                </div>
+                                                                
+                                                                <div class="col-6" id="divelaun">
+                                                                    <input class="form-check-input" type="checkbox" value="1" id="wang_saku"  name="wang_saku" onclick="return false" checked/>
+                                                                    <label class="fs-6 fw-semibold form-label">
+                                                                        Tuntut Elaun Wang Saku
+                                                                    </label>
+                                                                </div>     
+                                                            </div>
+                                                            <!--end::Scroll-->
+                                                            
+                                                            <!--begin::Actions-->
+                                                            <div class="text-center pt-15">
+                                                                {{--<button type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Discard</button>--}}
+                                                                <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+                                                                    <span class="indicator-label">Hantar</span>
+                                                                    <span class="indicator-progress">Sila tunggu...
+                                                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                                </button>
+                                                            </div>
+                                                            <!--end::Actions-->
+                                                        </form>
+                                                        <!--end::Form-->
+                                                    </div>
+                                                    <!--end::Modal body-->
+                                                </div>
+                                                <!--end::Modal content-->
+                                            </div>
+                                            <!--end::Modal dialog-->
+                                        </div>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>P/1/020810015901</td>
+                                        <td>Mohd Syafiq Bin Amiluddin</td>
+                                        <td>Sijil Kemahiran Rekabentuk Grafik</td>
+                                        <td>18/1/2021 - 17/1/2023</td>
+                                        <td>Selesai Pengajian</td>
+                                        <td>
+                                            
+                                            <!--begin::Toolbar-->
+                                            <div class="d-flex">
+                                                <!--begin::Edit-->
+                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#">
+                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Tamat Pengajian">
+                                                        <i class="ki-duotone bi bi-pencil fs-3"></i>
+                                                    </span>
+                                                </a>
+                                                <!--end::Edit-->
+                                              
+                                            </div>
+                                            <!--end::Toolbar-->
+                                            
+                                        </td>
                                 </tbody>
                             </table>
                         </div>
@@ -252,150 +357,7 @@
                 <!--end::Card-->
                 <!--begin::Modals-->
                 
-                <!--begin::Modal - Customers - Add-->
-                <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
-                    <!--begin::Modal dialog-->
-                    <div class="modal-dialog modal-dialog-centered mw-650px">
-                        <!--begin::Modal content-->
-                        <div class="modal-content">
-                            <!--begin::Form-->
-                            <form class="form" action=""  data-kt-redirect="" method="post">
-                                @csrf
-                                <!--begin::Modal header-->
-                                <div class="modal-header" id="kt_modal_add_customer_header">
-                                    <!--begin::Modal title-->
-                                    <h2 class="fw-bold">Tambah Pengguna</h2>
-                                    <!--end::Modal title-->
-                                    <!--begin::Close-->
-                                    <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary">
-                                        <i class="ki-duotone ki-cross fs-1">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                        </i>
-                                    </div>
-                                    <!--end::Close-->
-                                </div>
-                                <!--end::Modal header-->
-                                <!--begin::Modal body-->
-                                <div class="modal-body py-10 px-lg-17">
-                                    
-                                    <!--begin::Scroll-->
-                                    <div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
-                                        <!--begin::Input group-->
-                                        <div class="fv-row mb-7">
-                                            <!--begin::Label-->
-                                            <label class="fs-6 fw-semibold mb-2">Nama</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="text" class="form-control form-control-solid" placeholder="" name="nama" value="" />
-                                            <!--end::Input-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        <!--begin::Input group-->
-                                        <div class="fv-row mb-7">
-                                            <!--begin::Label-->
-                                            <label class="fs-6 fw-semibold mb-2">Emel</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="email" class="form-control form-control-solid" placeholder="" name="email" value="" />
-                                            <!--end::Input-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        <!--begin::Input group-->
-                                        <div class="fv-row mb-7">
-                                            <!--begin::Label-->
-                                            <label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="text" class="form-control form-control-solid" placeholder="" name="no_kp" />
-                                            <!--end::Input-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        
-                                        <!--begin::Input group-->
-                                        <div class="fv-row mb-7">
-                                            <!--begin::Label-->
-                                            <label class="fs-6 fw-semibold mb-2">Peranan</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <select name="tahap" id="pilihtahap" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
-                                                
-                                            </select>
-                                            <!--end::Input-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        
-                                        <!--begin::Input group-->
-                                        <div class="fv-row mb-7" id="div_id_institusi">
-                                            <!--begin::Label-->
-                                            <label class="fs-6 fw-semibold mb-2">Nama Pusat Pengajian</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <select name="id_institusi" id="id_institusi"  class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
-                                               
-                                            </select>
-                                            <!--end::Input-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        <script>
-                                            $(document).ready(function(){
-                                                $('#pilihtahap').on('change', function() {
-                                                if ( this.value == '2'){
-                                                    $("#div_id_institusi").show();
-                                                }
-                                                else {
-                                                    $("#div_id_institusi").hide();
-                                                }
-                                                });
-                                            });
-                                            
-                                        </script>
-                                        <!--begin::Input group-->
-                                        <div class="fv-row mb-7">
-                                            <!--begin::Label-->
-                                            <label class="fs-6 fw-semibold mb-2">Jawatan</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="text" class="form-control form-control-solid" placeholder="" name="jawatan" value="" />
-                                            <!--end::Input-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        <!--begin::Input group-->
-                                        <div class="fv-row mb-7">
-                                            <!--begin::Label-->
-                                            <label class="fs-6 fw-semibold mb-2">Kata Laluan</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="text" class="form-control form-control-solid" placeholder="" name="password" />
-                                            <!--end::Input-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        
-                                    </div>
-                                    <!--end::Scroll-->
-                                </div>
-                                <!--end::Modal body-->
-                                <!--begin::Modal footer-->
-                                <div class="modal-footer flex-center">
-                                    <!--begin::Button-->
-                                    <button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-light me-3">Kembali</button>
-                                    <!--end::Button-->
-                                    <!--begin::Button-->
-                                    <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
-                                        <span class="indicator-label">Simpan</span>
-                                        <span class="indicator-progress">Sila tunggu...
-                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    </button>
-                                    <!--end::Button-->
-                                </div>
-                                <!--end::Modal footer-->
-                            </form>
-                            <!--end::Form-->
-                        </div>
-                    </div>
-                </div>
-                <!--end::Modal - Customers - Add-->
-            
+               
                 <!--end::Modals-->
             </div>
             <!--end::Content container-->
