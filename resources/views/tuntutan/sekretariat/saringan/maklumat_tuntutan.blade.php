@@ -394,7 +394,7 @@
             baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                 minimumFractionDigits: 2
             });
-            document.getElementById('y_baki_disokong').innerHTML = baki;
+            document.getElementById('w_baki_disokong').innerHTML = baki;
             document.getElementById('jumlah_disokong').value= parseFloat(jumlah).toFixed(2);
         }
         function Bayar(){
@@ -405,7 +405,7 @@
             baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                 minimumFractionDigits: 2
             });
-            document.getElementById('y_baki_dibayar').innerHTML = baki;
+            document.getElementById('w_baki_dibayar').innerHTML = baki;
             document.getElementById('jumlah_dibayar').value= parseFloat(jumlah).toFixed(2);
         }
     </script>
