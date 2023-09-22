@@ -197,7 +197,7 @@
                                     $id_permohonan = str_replace('/', '-', $str);
                                     $invoisResit = "/assets/dokumen/permohonan/salinan_invoisResit_".$id_permohonan.".pdf";
                                 @endphp
-                                <form method="POST" action="{{ url('tuntutan/sekretariat/saringan/saring-tuntutan-kedua/'.$permohonan->id) }}" id="saring">
+                                <form method="POST" action="{{ url('tuntutan/sekretariat/saringan/saring-tuntutan-kedua/'.$tuntutan->id) }}" id="saring">
                                     <div class="row clearfix">
                                         <div class="col-md-12">
                                             <div class="table-responsive">

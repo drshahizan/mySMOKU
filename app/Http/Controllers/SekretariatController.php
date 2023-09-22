@@ -415,15 +415,51 @@ class SekretariatController extends Controller
         ->orWhere('status', '=','5')
         ->get();
 
+        $permohonan_id = Tuntutan::where('id', $id)->value('permohonan_id');
+        $smoku_id = Permohonan::where('id', $permohonan_id)->value('smoku_id');
         if($request->get('submit')=="Layak"){
+            Tuntutan::where('id', $id)
+                ->update([
+                    'status'   =>  6,
+                ]);
+
+            $status_rekod = new SejarahPermohonan([
+                'smoku_id'      =>  $smoku_id,
+                'permohonan_id' =>  $permohonan_id,
+                'status'        =>  6,
+            ]);
+            $status_rekod->save();
+
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Layak'.";
         }
         elseif($request->get('submit')=="TidakLayak"){
+            Tuntutan::where('id', $id)
+                ->update([
+                    'status'   =>  7,
+                ]);
+
+            $status_rekod = new SejarahPermohonan([
+                'smoku_id'      =>  $smoku_id,
+                'permohonan_id' =>  $permohonan_id,
+                'status'        =>  7,
+            ]);
+            $status_rekod->save();
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Tidak Layak'.";
         }
         elseif($request->get('submit')=="Kembalikan"){
+            Tuntutan::where('id', $id)
+                ->update([
+                    'status'   =>  5,
+                ]);
+
+            $status_rekod = new SejarahPermohonan([
+                'smoku_id'      =>  $smoku_id,
+                'permohonan_id' =>  $permohonan_id,
+                'status'        =>  5,
+            ]);
+            $status_rekod->save();
             $status_kod=2;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah dikembalikan.";
         }
