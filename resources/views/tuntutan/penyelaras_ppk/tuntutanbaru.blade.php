@@ -100,7 +100,12 @@
                                                 <!--begin::Edit-->
                                                 <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">
                                                     <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit">
-                                                        <i class="ki-duotone bi bi-pencil fs-3"></i>
+                                                        <i class="ki-solid ki-pencil text-dark fs-2"></i>
+                                                    </span>
+                                                </a>
+                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">
+                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Lihat">
+                                                        <i class="ki-solid ki-search-list text-dark fs-2"></i>
                                                     </span>
                                                 </a>
                                                 <!--end::Edit-->
@@ -223,9 +228,15 @@
                                                 <!--begin::Edit-->
                                                 <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">
                                                     <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit">
-                                                        <i class="ki-duotone bi bi-pencil fs-3"></i>
+                                                        <i class="ki-solid ki-pencil text-dark fs-2"></i>
                                                     </span>
                                                 </a>
+                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">
+                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Lihat">
+                                                        <i class="ki-solid ki-search-list text-dark fs-2"></i>
+                                                    </span>
+                                                </a>
+                                                 
                                                 <!--end::Edit-->
                                               
                                             </div>
