@@ -64,6 +64,10 @@
                         <div class="card">
                             <div class="header">
                                 <h2>Senarai Keputusan Permohonan</h2>
+                                <ul class="header-dropdown dropdown" style="color: black;">
+                                    <li><a href="{{ route('senarai.keputusan.BKOKU.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> BKOKU</a></li>
+                                    <li><a href="{{ route('senarai.keputusan.PPK.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> PPK</a></li>
+                                </ul>
                             </div>
 
                             {{-- Javascript Nav Bar --}}
@@ -93,23 +97,27 @@
                                                 <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                             </div>
                                     
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <label for="end_date"><b>Keputusan:</b></label>
                                                 <select name="status" class="form-select">
-                                                    <option value="">Pilih Semua Keputusan</option>
+                                                    <option value="">Semua Keputusan</option>
                                                     <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
                                                     <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
                                             </div>
                                     
-                                            <div class="col-md-4 right">
+                                            <div class="col-md-4">
                                                 <br>
                                                 <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
+
+                                            {{-- <div class="col-md-2" style="padding-top:20px; padding-left:65px;">
+                                                <a href="{{ route('senarai.disokong.pdf') }}" target="_blank" class="btn btn-secondary btn-round"><i class="fa fa-file-pdf" style="color: black;"></i> PDF</a>
+                                            </div> --}}
                                         </div>
-                                    </form>                                    
+                                    </form>   
                                     
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">

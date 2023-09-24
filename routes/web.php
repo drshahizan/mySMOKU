@@ -88,12 +88,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('permohonan/sekretariat/kelulusan', [SekretariatController::class, 'senaraiKelulusanPermohonan']);
     Route::get('permohonan/sekretariat/kelulusan/{permohonan_id}', [SekretariatController::class, 'maklumatKelulusanPermohonan']);
     Route::post('permohonan/sekretariat/hantar/keputusan/{permohonan_id}', [SekretariatController::class, 'hantarKeputusanPermohonan']);
-    Route::get('permohonan/senarai-disokong-pdf', [SekretariatController::class, 'cetakSenaraiPemohonPDF'])->name('senarai.disokong.pdf');
-    Route::get('permohonan/senarai-disokong-excel', [SekretariatController::class, 'cetakSenaraiPemohonExcel'])->name('senarai.disokong.excel');
+    Route::get('senarai-permohonan-disokong-pdf', [SekretariatController::class, 'cetakSenaraiPemohonPDF'])->name('senarai.disokong.pdf');
+    Route::get('senarai-permohonan-disokong-excel', [SekretariatController::class, 'cetakSenaraiPemohonExcel'])->name('senarai.disokong.excel');
     Route::get('surat-tawaran', [SekretariatController::class, 'muatTurunSuratTawaran']);
 
     //Permohonan - Sekretariat - Keputusan
     Route::get('permohonan/sekretariat/keputusan', [SekretariatController::class, 'senaraiKeputusanPermohonan']);
+    Route::get('senarai-keputusan-permohonan-BKOKU-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanBKOKU'])->name('senarai.keputusan.BKOKU.pdf');
+    Route::get('senarai-keputusan-permohonan-PPK-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanPPK'])->name('senarai.keputusan.PPK.pdf');
 
     //Permohonan - Sekretariat - Sejarah
     Route::get('permohonan/sekretariat/sejarah/sejarah-permohonan', [SaringanController::class, 'sejarahPermohonan']);

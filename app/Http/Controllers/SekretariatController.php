@@ -245,7 +245,6 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        //notification
         $keputusan = $request->get('keputusan');
         $id_permohonan = Permohonan::where('smoku_id', $id)->value('no_rujukan_permohonan');
         $notifikasi = "Emel notifikasi telah dihantar kepada ".$id_permohonan;
@@ -358,6 +357,20 @@ class SekretariatController extends Controller
         return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi'));
     }
 
+    public function cetakKeputusanPermohonanBKOKU()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')->get();
+        $pdf = PDF::loadView('permohonan.sekretariat.keputusan.senarai_keputusan_BKOKU_pdf', compact('permohonan'))->setPaper('A4', 'landscape');
+        return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU.pdf');
+    }
+
+    public function cetakKeputusanPermohonanPPK()
+    {
+        $permohonan = Permohonan::where('program', 'PPK')->get();
+        $pdf = PDF::loadView('permohonan.sekretariat.keputusan.senarai_keputusan_PPK_pdf', compact('permohonan'))->setPaper('A4', 'landscape');
+        return $pdf->stream('Senarai-Keputusan-Permohonan-PPK.pdf');
+    }
+
     public function muatTurunSuratTawaran()
     {
         // $permohonan = Permohonan::findOrFail('A123');
@@ -371,6 +384,7 @@ class SekretariatController extends Controller
         $pdf = Pdf::loadView('pages.sekretariat.permohonan.suratTawaran');
         return $pdf->download('SuratTawaran.pdf');
     }
+
 
     //TUNTUTAN
     public function senaraiTuntutanKedua()
