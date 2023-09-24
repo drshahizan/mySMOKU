@@ -253,7 +253,7 @@ class SekretariatController extends Controller
         return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'));
     }
 
-    public function bulkApproval(Request $request)
+    public function hantarSemuaKeputusanPermohonan(Request $request)
     {
         // Get the selected item IDs from the form
         $selectedItemIds = $request->input('selected_items');

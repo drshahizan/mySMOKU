@@ -80,7 +80,7 @@
                             <div class="tab-content" id="myTabContent">
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
-                                    <br><br>
+                                    <br>
                                     <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
                                         <div class="row" style="margin-left: 15px;">
                                             <div class="col-md-2">
@@ -151,9 +151,9 @@
                                                                 <td class="text-center">{{$item->no_mesyuarat}}</td>
                                                                 <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
                                                                 @if($item->keputusan == "Lulus")
-                                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{$item->keputusan}}</button></td>
+                                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td>
                                                                 @elseif($item->keputusan == "Tidak Lulus")
-                                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{$item->keputusan}}</button></td>
+                                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                                                 @endif
                                                             </tr>
                                                         @endif
@@ -166,7 +166,7 @@
 
                                 {{-- PKK --}}
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-                                    <br><br>
+                                    <br>
                                     <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
                                         <div class="row" style="margin-left: 15px;">
                                             <div class="col-md-2">
@@ -199,7 +199,7 @@
                 
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable1" class="table table-bordered table-striped">
+                                            <table id="sortTable2" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th style="width: 15%"><b>ID Permohonan</b></th>                                        
@@ -237,9 +237,9 @@
                                                                 <td class="text-center">{{$item->no_mesyuarat}}</td>
                                                                 <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
                                                                 @if($item->keputusan == "Lulus")
-                                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{$item->keputusan}}</button></td>
+                                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td>
                                                                 @elseif($item->keputusan == "Tidak Lulus")
-                                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{$item->keputusan}}</button></td>
+                                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                                                 @endif
                                                             </tr>
                                                         @endif
@@ -261,7 +261,7 @@
         <script src="assets/bundles/vendorscripts.bundle.js"></script>
 
         <script>
-             $('#sortTable1').DataTable();
+            $('#sortTable1').DataTable();
             $('#sortTable2').DataTable();
         </script>
 </x-default-layout> 
