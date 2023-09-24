@@ -1,21 +1,6 @@
 
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {!! printHtmlAttributes('html') !!}>
-<!--begin::Head-->
-<head>
-    <title>{{ config('app.name', 'SistemBKOKU') }}</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta property="og:type" content="article"/>
-    <link rel="stylesheet" href="/assets/css/style.bundle.css">
-    <link rel="stylesheet" href="/assets/css/saringan.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-</head>
+<link rel="stylesheet" href="/assets/css/saringan.css">
 <style>
-    body{
-        margin: 20px!important;
-    }
     .maklumat, .maklumat td{
         border: none!important;
         padding:2px 8px!important;
@@ -24,12 +9,17 @@
         border: none!important;
     }
     .table{
-        width: 60%;
         table-layout: fixed;
-        margin-left:5px!important;
+        width: 90%;
     }
-    h6{
-        margin-left:5px!important;
+    select{
+        padding: 3px 6px!important;
+        border: 1px solid #ccc!important;
+        border-radius: 6px!important;
+        font-size: 13px!important;
+    }
+    .small-td{
+        width: 11%;
     }
     .table td, .table th, .table2 td, .table2 th{
         padding: 7px!important;
@@ -43,18 +33,17 @@
         margin: 0;
     }
     input[type=number]{
-        width: 70px;
+        width: 80px;
         text-align: right;
         border: 1px solid #ccc;
         border-radius: 6px;
         padding: 2px 5px;
         font-size: 13px!important;
     }
-    select{
-        width: 230px!important;
-        padding: 3px 6px!important;
-        border: 1px solid #ccc!important;
-        border-radius: 6px!important;
+    textarea{
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 2px 5px;
         font-size: 13px!important;
     }
     .bold{
@@ -66,39 +55,21 @@
     .red-color{
         color: red!important;
     }
+    button{
+        margin: 5px;
+        width:150px!important;
+    }
+    .vertical-top{
+        vertical-align: top!important;
+    }
+    /* .th-yellow{
+        background-color: #a27a00!important;
+    }
+    .th-green{
+        background-color: #007842!important;
+    } */
 </style>
-<body>
-<!--begin::Page title-->
-<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-    <!--begin::Title-->
-    <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Permohonan</h1>
-    <!--end::Title-->
-    <!--begin::Breadcrumb-->
-    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-        <!--begin::Item-->
-        <li class="breadcrumb-item text-dark" style="color:darkblue">Tuntutan</li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="breadcrumb-item">
-            <span class="bullet bg-gray-400 w-5px h-2px"></span>
-        </li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="breadcrumb-item text-dark" style="color:darkblue">Sejarah</li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="breadcrumb-item">
-            <span class="bullet bg-gray-400 w-5px h-2px"></span>
-        </li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="breadcrumb-item text-dark" style="color:darkblue">Rekod Maklumat Tuntutan</li>
-        <!--end::Item-->
-    </ul>
-    <!--end::Breadcrumb-->
-</div>
-<!--end::Page title-->
-<br>
+<!-- Main body part  -->
 <div id="main-content">
     <div class="container-fluid">
         <!-- Page header section  -->
@@ -111,7 +82,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item vivify swoopInTop delay-150 active"><b>Saring Permohonan</b></li>
+                            <li class="nav-item vivify swoopInTop delay-150 active"><b>Saring Tuntutan</b></li>
                         </ul>
                         {{-- <div class="ml-auto">
                             <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank" class="btn btn-primary">Cetak</a>
@@ -123,14 +94,12 @@
                 <div class="card">
                     <div class="body">
                         <div class="col-md-6 col-sm-6">
+                            <br>
                             @php
-                                $status = DB::table('bk_status')->where('kod_status', $sejarah_p->status)->value('status');
-                                if ($sejarah_p->status==2){
-                                    $status='Baharu';
-                                }
-                                if ($sejarah_p->status==3){
-                                    $status='Sedang Disaring';
-                                }
+                                $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
+                                $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
+                                $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja)->value('penaja');
+                                // nama pemohon
                                 $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
                                 $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
                                 $words = explode(' ', $text);
@@ -143,79 +112,145 @@
                                     }
                                 }
                                 $pemohon = implode(' ', $result);
+
+                                //nama kursus
+                                $text2 = ucwords(strtolower($akademik->nama_kursus)); // Assuming you're sending the text as a POST parameter
+                                $conjunctions = ['of', 'in', 'and'];
+                                $words = explode(' ', $text2);
+                                $result = [];
+                                foreach ($words as $word) {
+                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                        $result[] = Str::lower($word);
+                                    } else {
+                                        $result[] = $word;
+                                    }
+                                }
+                                $kursus = implode(' ', $result);
+
+                                //institusi pengajian
+                                $text3 = ucwords(strtolower($nama_institusi)); // Assuming you're sending the text as a POST parameter
+                                $conjunctions = ['of', 'in', 'and'];
+                                $words = explode(' ', $text3);
+                                $result = [];
+                                foreach ($words as $word) {
+                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                        $result[] = Str::lower($word);
+                                    } else {
+                                        $result[] = $word;
+                                    }
+                                }
+                                $institusi = implode(' ', $result);
                             @endphp
-                            <br>
                             <table class="maklumat">
                                 <tr>
-                                    <td><strong>ID Permohonan</strong></td>
+                                    <td><strong>ID Tuntutan</strong></td>
                                     <td>:</td>
-                                    <td>{{$permohonan->no_rujukan_permohonan}}</td>
+                                    <td>{{$tuntutan->no_rujukan_tuntutan}}</td>
                                     <td class="space">&nbsp;</td>
-                                    <td><strong>Tarikh Permohonan</strong></td>
+                                    <td><strong>Kursus</strong></td>
                                     <td>:</td>
-                                    <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
+                                    <td>{{$kursus}}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Nama</strong></td>
                                     <td>:</td>
                                     <td>{{$pemohon}}</td>
                                     <td class="space">&nbsp;</td>
-                                    <td><strong>Sesi/Semester</strong></td>
+                                    <td><strong>Institusi</strong></td>
                                     <td>:</td>
-                                    <td>{{$akademik->sesi}}-0{{$akademik->sem_semasa}}</td>
+                                    <td>{{$institusi}}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>No. Kad Pengenalan</strong></td>
                                     <td>:</td>
                                     <td>{{$smoku->no_kp}}</td>
                                     <td class="space">&nbsp;</td>
-                                    <td><strong>Status</strong></td>
+                                    <td><strong>Peringkat</strong></td>
                                     <td>:</td>
-                                    <td>{{ucwords(strtolower($status))}} ({{date('d/m/Y', strtotime($sejarah_p->created_at))}})</td>
+                                    <td>{{ucwords(strtolower($peringkat))}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tarikh Tuntutan</strong></td>
+                                    <td>:</td>
+                                    <td>{{$tuntutan->created_at->format('d/m/Y')}}</td>
+                                    <td class="space">&nbsp;</td>
+                                    <td><strong>Sesi/Semester</strong></td>
+                                    <td>:</td>
+                                    <td>{{$akademik->sesi}}-0{{$akademik->sem_semasa}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Status Penajaan</strong></td>
+                                    <td>:</td>
+                                    @if($akademik->nama_penaja!=null)
+                                        <td>Ditaja ({{$nama_penaja}})</td>
+                                    @else
+                                        <td>Tidak Ditaja</td>
+                                    @endif
                                 </tr>
                             </table>
-                        </div>
-                        <br>
-                        <div class="row clearfix">
-                            <div class="col-md-12">
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-bordered mb-5">
-                                        <thead class="table-primary">
-                                        <tr>
-                                            <th style="width: 5%; text-align:right;">No.</th>
-                                            <th style="width: 55%;">Item</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td style="text-align:right;">1</td>
-                                            <td>
-                                                <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$permohonan->id) }}" target="_blank">Maklumat Profil Diri</a></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:right;">2</td>
-                                            <td>
-                                                <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$permohonan->id) }}" target="_blank">Maklumat Akademik</a></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:right;">3</td>
-                                            <td>
-                                                <span><a href="{{ url('permohonan/sekretariat/saringan/salinan-dokumen/'.$permohonan->id) }}" target="_blank">Salinan Dokumen</a></span>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                            <hr>
+                            <br>
+                            <h6>Maklumat tuntutan:</h6>
+                            <br>
+                            @php
+                                $i = 2;
+                                $invoisResit = "/assets/dokumen/tuntutan/salinan_invoisResit_KPTBKOKU-2-989876543210.pdf";
+                            @endphp
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-bordered mb-5">
+                                            <thead class="table-primary">
+                                            <tr>
+                                                <th style="width: 5%;">No.</th>
+                                                <th style="width: 20%;">Item</th>
+                                                <th style="width: 15%;">Keputusan Saringan</th>
+                                                <th style="width: 20%;">No. Resit</th>
+                                                <th style="width: 40%;">Perihal</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td style="text-align:right;">1</td>
+                                                <td>
+                                                    <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan') }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                </td>
+                                                <td>
+                                                    Disokong
+                                                </td>
+                                                <td>
+                                                    -
+                                                </td>
+                                                <td>
+                                                    Keseluruhan keputusan peperiksaan
+                                                </td>
+                                            </tr>
+                                            @foreach($tuntutan_item as $item)
+                                                <tr>
+                                                    <td style="text-align:right;">{{$i++}}</td>
+                                                    <td>
+                                                        <span><a href="{{ url($invoisResit) }}" target="_blank">{{$item['jenis_yuran']}}</a></span>
+                                                    </td>
+                                                    <td>
+                                                        Disokong
+                                                    </td>
+                                                    <td>
+                                                        {{$item['no_resit']}}
+                                                    </td>
+                                                    <td>
+                                                        {{$item['nota_resit']}}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</body>
-</html>

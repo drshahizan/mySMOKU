@@ -193,9 +193,10 @@
                                 <h6>Maklumat tuntutan:</h6>
                                 <br>
                                 @php
+                                    $i = 2;
                                     $str = $permohonan->id_permohonan;
                                     $id_permohonan = str_replace('/', '-', $str);
-                                    $invoisResit = "/assets/dokumen/permohonan/salinan_invoisResit_".$id_permohonan.".pdf";
+                                    $invoisResit = "/assets/dokumen/tuntutan/salinan_invoisResit_KPTBKOKU-2-989876543210.pdf";
                                 @endphp
                                 <form method="POST" action="{{ url('tuntutan/sekretariat/saringan/saring-tuntutan-kedua/'.$tuntutan->id) }}" id="saring">
                                     <div class="row clearfix">
@@ -206,8 +207,9 @@
                                                         <tr>
                                                             <th style="width: 5%;">No.</th>
                                                             <th style="width: 20%;">Item</th>
-                                                            <th style="width: 25%;">Keputusan Saringan</th>
-                                                            <th style="width: 50%;">Perihal</th>
+                                                            <th style="width: 15%;">Keputusan Saringan</th>
+                                                            <th style="width: 20%;">No. Resit</th>
+                                                            <th style="width: 40%;">Perihal</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -226,17 +228,21 @@
                                                                 </div>
                                                             </td>
                                                             <td>
+                                                                -
+                                                            </td>
+                                                            <td>
                                                                 Keseluruhan keputusan peperiksaan
                                                             </td>
                                                         </tr>
+                                                        @foreach($tuntutan_item as $item)
                                                         <tr>
-                                                            <td style="text-align:right;">2</td>
+                                                            <td style="text-align:right;">{{$i++}}</td>
                                                             <td>
-                                                                <span><a href="{{ url($invoisResit) }}" target="_blank">Invois/resit 1</a></span>
+                                                                <span><a href="{{ url($invoisResit) }}" target="_blank">{{$item['jenis_yuran']}}</a></span>
                                                             </td>
                                                             <td class="hidden-sm-down">
                                                                 <div class="form-group c_form_group">
-                                                                    <select id="invois" name="invois" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                    <select id="invois[]" name="invois[]" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                                         <option value="">Pilih</option>
                                                                         <option value="lengkap">Lengkap</option>
                                                                         <option value="tak_lengkap">Tidak Lengkap</option>
@@ -244,45 +250,13 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                Kad matrik
+                                                                {{$item['no_resit']}}
+                                                            </td>
+                                                            <td>
+                                                                {{$item['nota_resit']}}
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td style="text-align:right;">3</td>
-                                                            <td>
-                                                                <span><a href="{{ url($invoisResit) }}" target="_blank">Invois/resit 2</a></span>
-                                                            </td>
-                                                            <td class="hidden-sm-down">
-                                                                <div class="form-group c_form_group">
-                                                                    <select id="invois" name="invois" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
-                                                                        <option value="">Pilih</option>
-                                                                        <option value="lengkap">Lengkap</option>
-                                                                        <option value="tak_lengkap">Tidak Lengkap</option>
-                                                                    </select>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                Yuran peperiksaan
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="text-align:right;">4</td>
-                                                            <td>
-                                                                <span><a href="{{ url($invoisResit) }}" target="_blank">Invois/resit 3</a></span>
-                                                            </td>
-                                                            <td class="hidden-sm-down">
-                                                                <div class="form-group c_form_group">
-                                                                    <select id="invois" name="invois" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
-                                                                        <option value="">Pilih</option>
-                                                                        <option value="lengkap">Lengkap</option>
-                                                                        <option value="tak_lengkap">Tidak Lengkap</option>
-                                                                    </select>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                Yuran perpustakaan
-                                                            </td>
-                                                        </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -292,82 +266,216 @@
                                     <br>
                                     <!--begin: Invoice body-->
                                     {{csrf_field()}}
-                                    @php
-                                        if($tuntutan->amaun_wang_saku == null){
-                                            $tuntutan->amaun_wang_saku = 0;
-                                        }
-                                        $jumlah = $tuntutan->amaun_wang_saku;
-                                        $baki_y = $tuntutan->baki - $jumlah;
-                                        if($jumlah > 5000){
-                                            $jumlah = 5000;
-                                        }
-                                    @endphp
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
-                                                <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dituntut (RM)</th>
-                                                <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
-                                                <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
-                                                <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
-                                                <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dibayar (RM)</th>
-                                                <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr class="font-weight-bolder font-size-lg">
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_yuran, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong" value="{{number_format($tuntutan->amaun_yuran, 2, '.', '')}}"></td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong">{{number_format(0, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($tuntutan->amaun_yuran, 2, '.', '')}}"></td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar">{{number_format(0, 2)}}</td>
-                                            </tr>
-                                            <tr class="font-weight-bolder font-size-lg">
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_wang_saku, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_disokong">{{number_format($baki_y, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_dibayar">{{number_format($baki_y, 2)}}</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <table class="maklumat2">
-                                            <tr>
-                                                <td class="vertical-top">Jumlah tuntutan yang disokong (RM)</td>
-                                                <td class="vertical-top">:</td>
-                                                <td class="vertical-top"><input type="number" id="jumlah_disokong" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="vertical-top">Jumlah tuntutan yang dibayar (RM)</td>
-                                                <td class="vertical-top">:</td>
-                                                <td class="vertical-top"><input type="number" id="jumlah_dibayar" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="vertical-top">Catatan</td>
-                                                <td class="vertical-top">:</td>
-                                                <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Keputusan akhir</td>
-                                                <td>:</td>
-                                                <td class="hidden-sm-down">
-                                                    <div class="form-group c_form_group">
-                                                        <select id="keputusan" name="submit" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
-                                                            <option value="">Pilih</option>
-                                                            <option value="Kembalikan">Kembalikan</option>
-                                                            <option value="Layak">Layak</option>
-                                                            <option value="TidakLayak">Tidak Layak</option>
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                                    @if($permohonan->program == "BKOKU" && $permohonan->yuran == "1")
+                                        <!--begin: Invoice body-->
+                                        @php
+                                            if($permohonan->amaun_yuran == null){
+                                                $permohonan->amaun_yuran = 0;
+                                            }
+                                            if($permohonan->amaun_wang_saku == null){
+                                                $permohonan->amaun_wang_saku = 0;
+                                            }
+                                            $jumlah = $permohonan->amaun_yuran + $permohonan->amaun_wang_saku;
+                                            $baki_y = 5000 - $jumlah;
+                                        @endphp
+                                        <br>
+                                        <h6>Pengiraan:</h6>
+                                        <br>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
+                                                    <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dituntut (RM)</th>
+                                                    <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dibayar (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="font-weight-bolder font-size-lg">
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong">{{number_format($baki_y, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar">{{number_format($baki_y, 2)}}</td>
+                                                </tr>
+                                                <tr class="font-weight-bolder font-size-lg">
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_disokong">{{number_format(0, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_dibayar">{{number_format(0, 2)}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="maklumat2">
+                                                <tr>
+                                                    <td>Jumlah tuntutan yang disokong (RM)</td>
+                                                    <td>:</td>
+                                                    <td><input type="number" id="jumlah_disokong" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jumlah tuntutan yang dibayar (RM)</td>
+                                                    <td>:</td>
+                                                    <td><input type="number" id="jumlah_dibayar" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <script>
+                                            document.getElementById("yuran_disokong").addEventListener("input", SokongY);
+                                            document.getElementById("yuran_dibayar").addEventListener("input", BayarY);
+                                            document.getElementById("w_saku_disokong").addEventListener("input", SokongY);
+                                            document.getElementById("w_saku_dibayar").addEventListener("input", BayarY);
+                                            function SokongY(){
+                                                var yuran = document.getElementById('yuran_disokong').value;
+                                                var w_saku = document.getElementById('w_saku_disokong').value;
+                                                var baki = 5000 - yuran - w_saku;
+                                                var jumlah = parseFloat(w_saku) + parseFloat(yuran);
+                                                baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
+                                                    minimumFractionDigits: 2
+                                                });
+                                                document.getElementById('y_baki_disokong').innerHTML = baki;
+                                                document.getElementById('jumlah_disokong').value= parseFloat(jumlah).toFixed(2);
+                                            }
+                                            function BayarY(){
+                                                var yuran = document.getElementById('yuran_dibayar').value;
+                                                var w_saku = document.getElementById('w_saku_dibayar').value;
+                                                var baki = 5000 - yuran - w_saku;
+                                                var jumlah = parseFloat(yuran) + parseFloat(w_saku);
+                                                baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
+                                                    minimumFractionDigits: 2
+                                                });
+                                                document.getElementById('y_baki_dibayar').innerHTML = baki;
+                                                document.getElementById('jumlah_dibayar').value= parseFloat(jumlah).toFixed(2);
+                                            }
+                                        </script>
+                                    @elseif($permohonan->program == "BKOKU" && $permohonan->yuran == NULL)
+                                        @php
+                                            if($permohonan->amaun_wang_saku == null){
+                                                $permohonan->amaun_wang_saku = 0;
+                                            }
+                                            $jumlah = $permohonan->amaun_wang_saku;
+                                        @endphp
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
+                                                    <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dituntut (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dibayar (RM)</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="font-weight-bolder font-size-lg">
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong_2" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar_2" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="maklumat2">
+                                                <tr>
+                                                    <td>Jumlah tuntutan yang disokong (RM)</td>
+                                                    <td>:</td>
+                                                    <td><input type="number" id="jumlah_disokong_2" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jumlah tuntutan yang dibayar (RM)</td>
+                                                    <td>:</td>
+                                                    <td><input type="number" id="jumlah_dibayar_2" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <script>
+                                            document.getElementById("w_saku_disokong_2").addEventListener("input", SokongW);
+                                            document.getElementById("w_saku_dibayar_2").addEventListener("input", BayarW);
+                                            function SokongW(){
+                                                var w_saku = document.getElementById('w_saku_disokong_2').value;
+                                                w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
+                                                    minimumFractionDigits: 2
+                                                });
+                                                document.getElementById('jumlah_disokong_2').value= parseFloat(w_saku).toFixed(2);
+                                            }
+                                            function BayarW(){
+                                                var w_saku = document.getElementById('w_saku_dibayar_2').value;
+                                                w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
+                                                    minimumFractionDigits: 2
+                                                });
+                                                document.getElementById('jumlah_dibayar_2').value= parseFloat(w_saku).toFixed(2);
+                                            }
+                                        </script>
+
+                                    @elseif($permohonan->program == "PPK")
+                                        @php
+                                            if($permohonan->amaun_wang_saku == null){
+                                                $permohonan->amaun_wang_saku = 0;
+                                            }
+                                            $jumlah = $permohonan->amaun_wang_saku;
+                                        @endphp
+                                        <br>
+                                        <h6>Pengiraan:</h6>
+                                        <br>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
+                                                    <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dituntut (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dibayar (RM)</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="font-weight-bolder font-size-lg">
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong_ppk" id="w_saku_disokong_ppk" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar_ppk" id="w_saku_dibayar_ppk" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="maklumat2">
+                                                <tr>
+                                                    <td>Jumlah tuntutan yang disokong (RM)</td>
+                                                    <td>:</td>
+                                                    <td><input type="number" id="jumlah_disokong_ppk" name="jumlah_disokong_ppk" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jumlah tuntutan yang dibayar (RM)</td>
+                                                    <td>:</td>
+                                                    <td><input type="number" id="jumlah_dibayar_ppk" name="jumlah_dibayar_ppk" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <script>
+                                            document.getElementById("w_saku_disokong_ppk").addEventListener("input", SokongPPK);
+                                            document.getElementById("w_saku_dibayar_ppk").addEventListener("input", BayarPPK);
+
+                                            function SokongPPK(){
+                                                var w_saku = document.getElementById('w_saku_disokong_ppk').value;
+                                                w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
+                                                    minimumFractionDigits: 2
+                                                });
+                                                document.getElementById('jumlah_disokong_ppk').value= parseFloat(w_saku).toFixed(2);
+                                            }
+                                            function BayarPPK(){
+                                                var w_saku = document.getElementById('w_saku_dibayar_ppk').value;
+                                                w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
+                                                    minimumFractionDigits: 2
+                                                });
+                                                document.getElementById('jumlah_dibayar_ppk').value= parseFloat(w_saku).toFixed(2);
+                                            }
+                                        </script>
+                                    @endif
                                     <!--end: Invoice body-->
                                     <div class="col-md-6 text-right">
                                         <button type="submit" class="btn btn-primary theme-bg gradient action-btn" value="Hantar" id="check">Hantar</button>
@@ -380,33 +488,4 @@
             </div>
         </div>
     </div>
-    <script>
-        document.getElementById("yuran_disokong").addEventListener("input", Sokong);
-        document.getElementById("yuran_dibayar").addEventListener("input", Bayar);
-        document.getElementById("w_saku_disokong").addEventListener("input", Sokong);
-        document.getElementById("w_saku_dibayar").addEventListener("input", Bayar);
-
-        function Sokong(){
-            var yuran = document.getElementById('yuran_disokong').value;
-            var w_saku = document.getElementById('w_saku_disokong').value;
-            var baki = 5000 - yuran - w_saku;
-            var jumlah = parseFloat(w_saku) + parseFloat(yuran);
-            baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
-                minimumFractionDigits: 2
-            });
-            document.getElementById('w_baki_disokong').innerHTML = baki;
-            document.getElementById('jumlah_disokong').value= parseFloat(jumlah).toFixed(2);
-        }
-        function Bayar(){
-            var yuran = document.getElementById('yuran_dibayar').value;
-            var w_saku = document.getElementById('w_saku_dibayar').value;
-            var baki = 5000 - yuran - w_saku;
-            var jumlah = parseFloat(yuran) + parseFloat(w_saku);
-            baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
-                minimumFractionDigits: 2
-            });
-            document.getElementById('w_baki_dibayar').innerHTML = baki;
-            document.getElementById('jumlah_dibayar').value= parseFloat(jumlah).toFixed(2);
-        }
-    </script>
 </x-default-layout>
