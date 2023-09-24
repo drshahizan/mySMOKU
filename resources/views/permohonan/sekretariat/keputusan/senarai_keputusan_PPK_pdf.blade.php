@@ -79,42 +79,34 @@
         <div class="tittle" style="text-align: center; font-size: 14px;">
             <b>SENARAI KEPUTUSAN PERMOHONAN BKOKU</b>
         </div>
+
         <br>
+
         {{-- Table --}}
-        <table id="sortTable" class="table table-striped">
-            <thead class="text-center">
-                <tr>
-                    <th style="width: 3%"><b>No.</b></th>
-                    <th style="width: 12%"><b>ID Permohonan</b></th>
-                    <th style="width: 20%"><b>Nama</b></th>
-                    <th style="width: 10%"><b>Jenis Kecacatan</b></th>                                        
-                    <th style="width: 20%"><b>Nama Kursus</b></th>
-                    <th style="width: 15%"><b>Institusi Pengajian</b></th>
-                    <th style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
-                    <th style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+        <table class="table table-striped">
+            <thead>
+                <tr style="color: white; background-color:rgb(35, 58, 108);">
+                    <th class="text-center" style="width: 5%">No.</th>
+                    <th style="width: 15%"><b>ID Permohonan</b></th>                                        
+                    <th style="width: 40%"><b>Nama</b></th>
+                    <th style="width: 10%" class="text-center"><b>No. Mesyuarat</b></th>
+                    <th style="width: 15%" class="text-center"><b>Tarikh Kemaskini Keputusan</b></th> 
+                    <th class="text-center" style="width: 15%">Status Permohonan</th>
                 </tr>
             </thead>
             <tbody>
                 @php
-                    $i=0;
-                @endphp
-                @php
+                    $i = 1;
                     require_once app_path('helpers.php'); // Replace with the actual path to your helper file
                 @endphp
-            
+
                 @foreach ($permohonan as $item)
                     @php
-                        $i++;
-                        $pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                        $kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
-                        $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                        $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
-                        $institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
-                        $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
-                        $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
-                        
-                        // nama pemohon
-                        $text = ucwords(strtolower($pemohon)); // Assuming you're sending the text as a POST parameter
+                        $id_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
+                        $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku.nama');
+                        $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
+
+                        $text = ucwords(strtolower($nama));
                         $conjunctions = ['bin', 'binti'];
                         $words = explode(' ', $text);
                         $result = [];
@@ -125,52 +117,24 @@
                                 $result[] = $word;
                             }
                         }
-                        $nama_pemohon = implode(' ', $result);
-
-                        //nama kursus
-                        $text2 = ucwords(strtolower($kursus)); // Assuming you're sending the text as a POST parameter
-                        $conjunctions = ['of', 'in', 'and'];
-                        $words = explode(' ', $text2);
-                        $result = [];
-                        foreach ($words as $word) {
-                            if (in_array(Str::lower($word), $conjunctions)) {
-                                $result[] = Str::lower($word);
-                            } else {
-                                $result[] = $word;
-                            }
-                        }
-                        $namaKursus = implode(' ', $result);
-                        $nama_kursus = transformBracketsToCapital($namaKursus);
-
-                        //institusi pengajian
-                        $text3 = ucwords(strtolower($institusi)); // Assuming you're sending the text as a POST parameter
-                        $conjunctions = ['of', 'in', 'and'];
-                        $words = explode(' ', $text3);
-                        $result = [];
-                        foreach ($words as $word) {
-                            if (in_array(Str::lower($word), $conjunctions)) {
-                                $result[] = Str::lower($word);
-                            } else {
-                                $result[] = $word;
-                            }
-                        }
-                        $institusiPengajian = implode(' ', $result);
-                        $institusi_pengajian = transformBracketsToUppercase($institusiPengajian);
+                        $pemohon = implode(' ', $result);
                     @endphp
-                        
-                    @if($item['status'==6] || $item['status'==7])
+
+                    @if($program == "PPK")
                         <tr>
-                            <td class="text-center">{{$i}}</td>                                           
-                            <td><a href="{{ url('kemaskini/kelulusan/'. $nokp) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
-                            <td>{{$nama_pemohon}}</td>
-                            <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                            <td>{{$nama_kursus}}</td>
-                            <td>{{$institusi_pengajian}}</td>
-                            <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                            <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                            <td class="text-center">{{$i++}}</td>
+                            <td>{{$id_permohonan}}</td>
+                            <td>{{$pemohon}}</td>
+                            <td class="text-center">{{$item->no_mesyuarat}}</td>
+                            <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
+                            @if($item->keputusan == "Lulus")
+                                <td class="text-center">Layak</td>
+                            @elseif($item->keputusan == "Tidak Lulus")
+                                <td class="text-center">Tidak Layak</td>
+                            @endif
                         </tr>
                     @endif
-                @endforeach 
+                @endforeach            
             </tbody>
         </table>
 
