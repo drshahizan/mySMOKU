@@ -376,13 +376,7 @@ class SekretariatController extends Controller
     {
         // Get the "permohonan" data based on $permohonanId
         $permohonan = Permohonan::where('id', $permohonanId)->first();
-
-        if (!$permohonan) {
-            return redirect()->back()->with('error', 'Permohonan not found.');
-        }
-
         $pdf = PDF::loadView('permohonan.sekretariat.keputusan.surat_tawaran', compact('permohonan'));
-
         return $pdf->download('SuratTawaran_'.$permohonanId.'.pdf');
     }
 
