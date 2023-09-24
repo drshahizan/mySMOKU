@@ -143,7 +143,7 @@
                                     <br>
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable1" class="table table-bordered table-striped">
+                                            <table id="sortTable2" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>                                        
@@ -155,7 +155,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @php
-                                                        $t=0;
+                                                        $i=0;
                                                     @endphp
 
                                                     @foreach ($permohonan as $item)
@@ -177,7 +177,7 @@
 
                                                         @if($item['program'] == "PPK")
                                                             <tr>
-                                                                <td class="text-center" data-no="{{ $t++ }}">{{$t++}}</td>
+                                                                <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
                                                                 <td>{{$pemohon}}</td>
                                                                 <td class="text-center">
                                                                     <button type="button" class="btn btn-info">Lihat
@@ -252,9 +252,10 @@
                 // Disable sorting for the "No" column
                 table.on('order.dt', function() {
                     table.column(0, { order: 'applied' }).nodes().each(function(cell, i) {
-                        cell.innerHTML = t + 1;
+                        cell.innerHTML = i + 1;
                     });
                 }).draw();
             });
+
         </script>
 </x-default-layout> 

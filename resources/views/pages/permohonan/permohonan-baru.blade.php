@@ -1158,7 +1158,7 @@
 						<br>
 						<div class="pb-10 pb-lg-15">
 							<!--begin::Notice-->
-							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp;
+							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange;'></i>
 								Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a> untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
 							</div>
 
