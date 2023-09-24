@@ -233,23 +233,16 @@ class SekretariatController extends Controller
             Mail::to("fateennashuha9@gmail.com")->send(new KeputusanTidakLayak($message));
         }
 
-        //filter
-//        $kelulusan = Permohonan::when($request->date != null, function ($q) use ($request) {
-//            return $q->whereDate('created_at', $request->date);
-//        })
-//        ->when($request->status != null, function ($q) use ($request) {
-//            return $q->where('status', $request->status);
-//        })
-            $startDate = $request->input('start_date');
-            $endDate = $request->input('end_date');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
 
-            $kelulusan = Kelulusan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-                return $q->whereBetween('tarikh_mesyuarat', [$startDate, $endDate]);
-            })
-                ->when($request->status, function ($q) use ($request) {
-                    return $q->where('keputusan', $request->status);
-                })
-                ->get();
+        $kelulusan = Kelulusan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('tarikh_mesyuarat', [$startDate, $endDate]);
+        })
+        ->when($request->status, function ($q) use ($request) {
+            return $q->where('keputusan', $request->status);
+        })
+        ->get();
 
          //notification
          $keputusan = $request->get('keputusan');
@@ -362,11 +355,6 @@ class SekretariatController extends Controller
         $notifikasi = null;
 
         return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi'));
-    }
-
-    public function kembalikanPermohonan()
-    {
-        return view('pages.sekretariat.permohonan.kembalikan');
     }
 
     public function muatTurunSuratTawaran()
