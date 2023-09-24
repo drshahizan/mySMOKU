@@ -332,13 +332,14 @@
                                                     </tr>
                                                 </table>
                                             </div>
+                                        scr
+                                        
                                     @elseif($permohonan->program == "PPK")
                                             @php
                                                 if($permohonan->amaun_wang_saku == null){
                                                     $permohonan->amaun_wang_saku = 0;
                                                 }
                                                 $jumlah = $permohonan->amaun_wang_saku;
-                                                $baki_y = 5000 - $jumlah;
                                             @endphp
                                             <br>
                                             <h6>Pengiraan:</h6>
@@ -357,8 +358,8 @@
                                                     <tr class="font-weight-bolder font-size-lg">
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong_ppk" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar_ppk" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong_ppk" id="w_saku_disokong_ppk" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar_ppk" id="w_saku_dibayar_ppk" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -366,12 +367,12 @@
                                                     <tr>
                                                         <td>Jumlah tuntutan yang disokong (RM)</td>
                                                         <td>:</td>
-                                                        <td><input type="number" id="jumlah_disokong_ppk" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                        <td><input type="number" id="jumlah_disokong_ppk" name="jumlah_disokong_ppk" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                         <td>:</td>
-                                                        <td><input type="number" id="jumlah_dibayar_ppk" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                        <td><input type="number" id="jumlah_dibayar_ppk" name="jumlah_dibayar_ppk" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -393,46 +394,6 @@
        document.getElementById("yuran_dibayar").addEventListener("input", BayarY);
        document.getElementById("w_saku_disokong").addEventListener("input", SokongY);
        document.getElementById("w_saku_dibayar").addEventListener("input", BayarY);
-
-       document.getElementById("yuran_disokong_2").addEventListener("input", SokongW);
-       document.getElementById("yuran_dibayar_2").addEventListener("input", BayarW);
-
-       document.getElementById("w_saku_disokong_2").addEventListener("input", SokongW);
-       document.getElementById("w_saku_dibayar_2").addEventListener("input", BayarW);
-
-       document.getElementById("w_saku_disokong_ppk").addEventListener("input", SokongPPK);
-       document.getElementById("w_saku_dibayar_ppk").addEventListener("input", BayarPPK);
-
-       function SokongW(){
-           var w_saku = document.getElementById('w_saku_disokong_2').value;
-           w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
-               minimumFractionDigits: 2
-           });
-           document.getElementById('jumlah_disokong_2').value= parseFloat(w_saku).toFixed(2);
-       }
-       function BayarW(){
-           var w_saku = document.getElementById('w_saku_dibayar_2').value;
-           w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
-               minimumFractionDigits: 2
-           });
-           document.getElementById('jumlah_dibayar_2').value= parseFloat(w_saku).toFixed(2);
-       }
-
-       function SokongPPK(){
-           var w_saku = document.getElementById('w_saku_disokong_ppk').value;
-           w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
-               minimumFractionDigits: 2
-           });
-           document.getElementById('jumlah_disokong_ppk').value= parseFloat(w_saku).toFixed(2);
-       }
-       function BayarPPK(){
-           var w_saku = document.getElementById('w_saku_dibayar_ppk').value;
-           w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
-               minimumFractionDigits: 2
-           });
-           document.getElementById('jumlah_dibayar_ppk').value= parseFloat(w_saku).toFixed(2);
-       }
-
        function SokongY(){
            var yuran = document.getElementById('yuran_disokong').value;
            var w_saku = document.getElementById('w_saku_disokong').value;
@@ -455,5 +416,42 @@
            document.getElementById('y_baki_dibayar').innerHTML = baki;
            document.getElementById('jumlah_dibayar').value= parseFloat(jumlah).toFixed(2);
        }
+
+       document.getElementById("w_saku_disokong_2").addEventListener("input", SokongW);
+       document.getElementById("w_saku_dibayar_2").addEventListener("input", BayarW);
+       function SokongW(){
+           var w_saku = document.getElementById('w_saku_disokong_2').value;
+           w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
+               minimumFractionDigits: 2
+           });
+           document.getElementById('jumlah_disokong_2').value= parseFloat(w_saku).toFixed(2);
+       }
+       function BayarW(){
+           var w_saku = document.getElementById('w_saku_dibayar_2').value;
+           w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
+               minimumFractionDigits: 2
+           });
+           document.getElementById('jumlah_dibayar_2').value= parseFloat(w_saku).toFixed(2);
+       }
+
+       document.getElementById("w_saku_disokong_ppk").addEventListener("input", SokongPPK);
+       document.getElementById("w_saku_dibayar_ppk").addEventListener("input", BayarPPK);
+
+       function SokongPPK(){
+           var w_saku = document.getElementById('w_saku_disokong_ppk').value;
+           w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
+               minimumFractionDigits: 2
+           });
+           document.getElementById('jumlah_disokong_ppk').value= parseFloat(w_saku).toFixed(2);
+       }
+       function BayarPPK(){
+           var w_saku = document.getElementById('w_saku_dibayar_ppk').value;
+           w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
+               minimumFractionDigits: 2
+           });
+           document.getElementById('jumlah_dibayar_ppk').value= parseFloat(w_saku).toFixed(2);
+       }
+
+
    </script>
 </x-default-layout>
