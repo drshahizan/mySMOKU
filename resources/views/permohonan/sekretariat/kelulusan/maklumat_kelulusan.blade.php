@@ -113,7 +113,7 @@
                             <hr><br>
 
                             <div class="col-md-6 col-sm-6">
-                                <form action="{{ url('permohonan/sekretariat/hantar/keputusan/'.$permohonan->smoku_id) }}" method="POST" id="kelulusan">
+                                <form action="{{ url('permohonan/sekretariat/hantar/keputusan/'.$permohonan->id) }}" method="POST" id="kelulusan">
                                     {{csrf_field()}}
                                     <table>
                                         <tr>

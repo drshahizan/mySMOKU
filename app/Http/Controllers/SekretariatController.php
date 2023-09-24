@@ -173,19 +173,18 @@ class SekretariatController extends Controller
 
     public function hantarKeputusanPermohonan(Request $request,$id)
     {
-        //$id is the permohonan_id in "permohonan" table
-        $permohonan_id = Permohonan::where('smoku_id', $id)->value('id');
-        //$smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
 
-        //send & update database
         if($request->get('keputusan')=="Lulus"){
-            Permohonan::where('smoku_id', $id)
+            //update permohonan table
+            Permohonan::where('id', $id)
                 ->update([
                 'status'   =>  6,
             ]);
 
+            //send & update permohonan_kelulusan table
             $info_mesyuarat = new Kelulusan([
-                'permohonan_id' =>  $permohonan_id,
+                'permohonan_id' =>  $id,
                 'no_mesyuarat'  =>  $request->get('noMesyuarat'),
                 'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
                 'keputusan'  =>  $request->get('keputusan'),
@@ -193,10 +192,10 @@ class SekretariatController extends Controller
             ]);
             $info_mesyuarat->save();
 
-            //update sejarah permohonan
+            //update sejarah_permohonan table
             $sejarah = new SejarahPermohonan([
-                'smoku_id'      =>  $id,
-                'permohonan_id' =>  $permohonan_id,
+                'smoku_id'      =>  $smoku_id,
+                'permohonan_id' =>  $id,
                 'status'        =>  6,
             ]);
             $sejarah->save();
@@ -206,13 +205,15 @@ class SekretariatController extends Controller
             Mail::to("fateennashuha9@gmail.com")->send(new KeputusanLayak($message));
         }
         else{
-            Permohonan::where('smoku_id', $id)
+            //update permohonan table
+            Permohonan::where('id', $id)
                 ->update([
                 'status'   =>  7,
             ]);
 
+            //send & update permohonan_kelulusan table
             $info_mesyuarat = new Kelulusan([
-                'permohonan_id' =>  $permohonan_id,
+                'permohonan_id' =>  $id,
                 'no_mesyuarat'  =>  $request->get('noMesyuarat'),
                 'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
                 'keputusan'  =>  $request->get('keputusan'),
@@ -220,10 +221,10 @@ class SekretariatController extends Controller
             ]);
             $info_mesyuarat->save();
 
-            //update sejarah permohonan
+            //update sejarah permohonan table
             $sejarah = new SejarahPermohonan([
-                'smoku_id'      =>  $id,
-                'permohonan_id' =>  $permohonan_id,
+                'smoku_id'      =>  $smoku_id,
+                'permohonan_id' =>  $id,
                 'status'        =>  7,
             ]);
             $sejarah->save();
@@ -244,12 +245,12 @@ class SekretariatController extends Controller
         })
         ->get();
 
-         //notification
-         $keputusan = $request->get('keputusan');
-         $id_permohonan = Permohonan::where('smoku_id', $id)->value('no_rujukan_permohonan');
-         $notifikasi = "Emel notifikasi telah dihantar kepada ".$id_permohonan;
+        //notification
+        $keputusan = $request->get('keputusan');
+        $id_permohonan = Permohonan::where('smoku_id', $id)->value('no_rujukan_permohonan');
+        $notifikasi = "Emel notifikasi telah dihantar kepada ".$id_permohonan;
 
-         return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'));
     }
 
     public function bulkApproval(Request $request)
