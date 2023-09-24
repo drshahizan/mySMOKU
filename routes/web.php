@@ -96,6 +96,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('permohonan/sekretariat/keputusan', [SekretariatController::class, 'senaraiKeputusanPermohonan']);
     Route::get('senarai-keputusan-permohonan-BKOKU-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanBKOKU'])->name('senarai.keputusan.BKOKU.pdf');
     Route::get('senarai-keputusan-permohonan-PPK-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanPPK'])->name('senarai.keputusan.PPK.pdf');
+    Route::get('/surat-tawaran/{permohonanId}', [SekretariatController::class, 'muatTurunSuratTawaran'])->name('generate-pdf');
 
     //Permohonan - Sekretariat - Sejarah
     Route::get('permohonan/sekretariat/sejarah/sejarah-permohonan', [SaringanController::class, 'sejarahPermohonan']);

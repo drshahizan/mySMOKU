@@ -372,18 +372,18 @@ class SekretariatController extends Controller
         return $pdf->stream('Senarai-Keputusan-Permohonan-PPK.pdf');
     }
 
-    public function muatTurunSuratTawaran()
+    public function muatTurunSuratTawaran($permohonanId)
     {
-        // $permohonan = Permohonan::findOrFail('A123');
-        // $pengajian = ['maklumatPengajian' => $permohonan];
+        // Get the "permohonan" data based on $permohonanId
+        $permohonan = Permohonan::where('id', $permohonanId)->first();
 
-        // $pdf = Pdf::loadView('pages.sekretariat.permohonan.suratTawaran', $permohonan);
-        // $todayDate = Carbon::now()->format('d-m-Y');
+        if (!$permohonan) {
+            return redirect()->back()->with('error', 'Permohonan not found.');
+        }
 
-        // return $pdf->download('SuratTawaran-'.A123.'-'.$todayDate.'.pdf');
+        $pdf = PDF::loadView('permohonan.sekretariat.keputusan.surat_tawaran', compact('permohonan'));
 
-        $pdf = Pdf::loadView('pages.sekretariat.permohonan.suratTawaran');
-        return $pdf->download('SuratTawaran.pdf');
+        return $pdf->download('SuratTawaran_'.$permohonanId.'.pdf');
     }
 
 

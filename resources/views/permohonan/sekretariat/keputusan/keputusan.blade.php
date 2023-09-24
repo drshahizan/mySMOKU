@@ -97,7 +97,7 @@
                                                 <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                             </div>
                                     
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <label for="end_date"><b>Keputusan:</b></label>
                                                 <select name="status" class="form-select">
                                                     <option value="">Semua Keputusan</option>
@@ -158,8 +158,15 @@
                                                                 <td>{{$pemohon}}</td>
                                                                 <td class="text-center">{{$item->no_mesyuarat}}</td>
                                                                 <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
+                                                                {{-- <div class="ml-auto" style="color:black;">
+                                                                    <a href="{{ url('surat-tawaran') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-download"></i> Surat Tawaran</a>
+                                                                </div> --}}
                                                                 @if($item->keputusan == "Lulus")
-                                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td>
+                                                                    <td class="text-center">
+                                                                        <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
+                                                                            <i class="fa fa-download custom-white-icon" style="color: white !important;"></i> Layak
+                                                                        </a>
+                                                                    </td>
                                                                 @elseif($item->keputusan == "Tidak Lulus")
                                                                     <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                                                 @endif

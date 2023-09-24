@@ -67,9 +67,6 @@
                                 <li class="nav-item vivify swoopInTop delay-150 active"><b>Rekod Keputusan Permohonan</b></li>
                             </ul>
                         </div>
-                        {{-- <div class="ml-auto" style="color:black;">
-                            <a href="{{ url('surat-tawaran') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-download"></i> Surat Tawaran</a>
-                        </div> --}}
                     </nav>
                 </div>
 

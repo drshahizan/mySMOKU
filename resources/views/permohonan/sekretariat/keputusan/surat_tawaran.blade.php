@@ -15,15 +15,25 @@
             <br>MALAYSIA
         </div>
         <hr>
-        <p><span style="float: right">Rujukan Kami : KPT - 000101140417<br>
-        Tarikh : 26 April 2022</span></p>
-        <br>
-        <p><b>ALI BIN ABU</b><br>
-        <b>NO.KP:  000101140417</b><br>
+        <p>
+            <span style="float: right">Rujukan Kami : KPT - 000101140417<br>
+            Tarikh : 26 April 2022</span><br>
+        </p>
+
+        @php
+            $nama = DB::table('smoku')->where('id',$permohonan['smoku_id'])->value('smoku.nama');
+            $no_kp = DB::table('smoku')->where('id',$permohonan['smoku_id'])->value('smoku.no_kp');
+        @endphp
+
+        <p>
+            <b>{{$nama}}</b><br>
+            <b>{{$no_kp}}</b><br>
             3, JALAN CHENGAL 1 <br>
             SAUJANA UTAMA 2 <br>
             47000 SUNGAI BULOH <br>
-            SELANGOR</p>
+            SELANGOR
+        </p>
+        
         <br>
         <p>Tuan/Puan,</p>
         <br>
