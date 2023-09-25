@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('wang_saku_dibayar')->nullable();
             $table->string('jumlah')->nullable();
             $table->string('baki')->nullable();
+            $table->string('baki_disokong')->nullable();
+            $table->string('baki_diluluskan')->nullable();
             $table->foreign('smoku_id')
               ->references('id')->on('smoku')->onDelete('cascade');
             $table->foreign('permohonan_id')
