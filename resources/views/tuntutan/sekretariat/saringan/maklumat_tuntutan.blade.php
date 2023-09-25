@@ -266,7 +266,7 @@
                                     <br>
                                     <!--begin: Invoice body-->
                                     {{csrf_field()}}
-                                    @if($permohonan->program == "BKOKU" && $permohonan->yuran == "1")
+                                    @if($permohonan->program == "BKOKU" && $permohonan->yuran == "1" && $permohonan->wang_saku == "1")
                                         <!--begin: Invoice body-->
                                         @php
                                             if($permohonan->amaun_yuran == null){
@@ -413,7 +413,79 @@
                                                 document.getElementById('jumlah_dibayar_2').value= parseFloat(w_saku).toFixed(2);
                                             }
                                         </script>
-
+                                    @elseif($permohonan->program == "BKOKU" && $permohonan->wang_saku == NULL)
+                                        @php
+                                            if($permohonan->amaun_wang_saku == null){
+                                                $permohonan->amaun_wang_saku = 0;
+                                            }
+                                            $jumlah = $permohonan->amaun_yuran;
+                                            $baki_y = 5000 - $jumlah;
+                                        @endphp
+                                        <br>
+                                        <h6>Pengiraan:</h6>
+                                        <br>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
+                                                    <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dituntut (RM)</th>
+                                                    <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dibayar (RM)</th>
+                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="font-weight-bolder font-size-lg">
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong">{{number_format($baki_y, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar">{{number_format($baki_y, 2)}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="maklumat2">
+                                                <tr>
+                                                    <td>Jumlah tuntutan yang disokong (RM)</td>
+                                                    <td>:</td>
+                                                    <td><input type="number" id="jumlah_disokong" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jumlah tuntutan yang dibayar (RM)</td>
+                                                    <td>:</td>
+                                                    <td><input type="number" id="jumlah_dibayar" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <script>
+                                            document.getElementById("yuran_disokong").addEventListener("input", SokongY);
+                                            document.getElementById("yuran_dibayar").addEventListener("input", BayarY);
+                                            function SokongY(){
+                                                var yuran = document.getElementById('yuran_disokong').value;
+                                                var baki = 5000 - yuran;
+                                                var jumlah = parseFloat(w_saku) + parseFloat(yuran);
+                                                baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
+                                                    minimumFractionDigits: 2
+                                                });
+                                                document.getElementById('y_baki_disokong').innerHTML = baki;
+                                                document.getElementById('jumlah_disokong').value= parseFloat(jumlah).toFixed(2);
+                                            }
+                                            function BayarY(){
+                                                var yuran = document.getElementById('yuran_dibayar').value;
+                                                var baki = 5000 - yuran;
+                                                var jumlah = parseFloat(yuran) + parseFloat(w_saku);
+                                                baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
+                                                    minimumFractionDigits: 2
+                                                });
+                                                document.getElementById('y_baki_dibayar').innerHTML = baki;
+                                                document.getElementById('jumlah_dibayar').value= parseFloat(jumlah).toFixed(2);
+                                            }
+                                        </script>
                                     @elseif($permohonan->program == "PPK")
                                         @php
                                             if($permohonan->amaun_wang_saku == null){
