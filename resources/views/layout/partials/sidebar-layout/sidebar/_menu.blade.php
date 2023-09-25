@@ -125,7 +125,7 @@
 				</div>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('tuntutan/penyelaras/sejarah/sejarah-tuntutan')}}">
+			<a class="menu-link" href="{{ route('senarai.tuntutanKeseluruhan')}}">
 			<!-- "{{ route('dashboard') }}" -->
 					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
 					<span class="menu-title">Keseluruhan</span>

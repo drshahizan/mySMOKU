@@ -145,7 +145,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan/penyelaras/kemaskini/kemaskini-tuntutan', [PenyelarasController::class, 'kemaskiniTuntutan']);
 
     //Tuntutan - Penyelaras BKOKU - Sejarah
-    Route::get('tuntutan/penyelaras/sejarah/sejarah-tuntutan', [PenyelarasController::class, 'sejarahTuntutan']);
+    Route::get('tuntutan/penyelaras/tuntutan-keseluruhan/tuntutan-keseluruhan', [PenyelarasController::class, 'tuntutanKeseluruhan'])->name('senarai.tuntutanKeseluruhan');
 
     //Permohonan - Penyelaras PPK
     Route::get('penyelaras/ppk/dashboard', [PenyelarasPPKController::class,'index'])->name('penyelaras.ppk.dashboard');
