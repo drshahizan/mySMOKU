@@ -376,7 +376,8 @@ class SekretariatController extends Controller
     {
         // Get the "permohonan" data based on $permohonanId
         $permohonan = Permohonan::where('id', $permohonanId)->first();
-        $pdf = PDF::loadView('permohonan.sekretariat.keputusan.surat_tawaran', compact('permohonan'));
+        $todayDate = Carbon::now()->format('d-m-Y');
+        $pdf = PDF::loadView('permohonan.sekretariat.keputusan.surat_tawaran', compact('permohonan','todayDate'));
         return $pdf->download('SuratTawaran_'.$permohonanId.'.pdf');
     }
 
