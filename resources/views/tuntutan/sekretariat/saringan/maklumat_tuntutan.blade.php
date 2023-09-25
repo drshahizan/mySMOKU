@@ -278,9 +278,6 @@
                                             $jumlah = $permohonan->amaun_yuran + $permohonan->amaun_wang_saku;
                                             $baki_y = 5000 - $jumlah;
                                         @endphp
-                                        <br>
-                                        <h6>Pengiraan:</h6>
-                                        <br>
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -325,6 +322,25 @@
                                                     <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                     <td>:</td>
                                                     <td><input type="number" id="jumlah_dibayar" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="vertical-top">Catatan</td>
+                                                    <td class="vertical-top">:</td>
+                                                    <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Keputusan akhir</td>
+                                                    <td>:</td>
+                                                    <td class="hidden-sm-down">
+                                                        <div class="form-group c_form_group">
+                                                            <select id="keputusan" name="submit" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                <option value="">Pilih</option>
+                                                                <option value="Kembalikan">Kembalikan</option>
+                                                                <option value="Layak">Layak</option>
+                                                                <option value="TidakLayak">Tidak Layak</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -393,6 +409,25 @@
                                                     <td>:</td>
                                                     <td><input type="number" id="jumlah_dibayar_2" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                 </tr>
+                                                <tr>
+                                                    <td class="vertical-top">Catatan</td>
+                                                    <td class="vertical-top">:</td>
+                                                    <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Keputusan akhir</td>
+                                                    <td>:</td>
+                                                    <td class="hidden-sm-down">
+                                                        <div class="form-group c_form_group">
+                                                            <select id="keputusan" name="submit" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                <option value="">Pilih</option>
+                                                                <option value="Kembalikan">Kembalikan</option>
+                                                                <option value="Layak">Layak</option>
+                                                                <option value="TidakLayak">Tidak Layak</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </div>
                                         <script>
@@ -400,16 +435,12 @@
                                             document.getElementById("w_saku_dibayar_2").addEventListener("input", BayarW);
                                             function SokongW(){
                                                 var w_saku = document.getElementById('w_saku_disokong_2').value;
-                                                w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
-                                                    minimumFractionDigits: 2
-                                                });
+                                                w_saku = parseFloat(w_saku);
                                                 document.getElementById('jumlah_disokong_2').value= parseFloat(w_saku).toFixed(2);
                                             }
                                             function BayarW(){
                                                 var w_saku = document.getElementById('w_saku_dibayar_2').value;
-                                                w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
-                                                    minimumFractionDigits: 2
-                                                });
+                                                w_saku = parseFloat(w_saku);
                                                 document.getElementById('jumlah_dibayar_2').value= parseFloat(w_saku).toFixed(2);
                                             }
                                         </script>
@@ -421,9 +452,6 @@
                                             $jumlah = $permohonan->amaun_yuran;
                                             $baki_y = 5000 - $jumlah;
                                         @endphp
-                                        <br>
-                                        <h6>Pengiraan:</h6>
-                                        <br>
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -442,10 +470,10 @@
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong">{{number_format($baki_y, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar">{{number_format($baki_y, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong_3" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong_3">{{number_format($baki_y, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar_3" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar_3">{{number_format($baki_y, 2)}}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -453,37 +481,56 @@
                                                 <tr>
                                                     <td>Jumlah tuntutan yang disokong (RM)</td>
                                                     <td>:</td>
-                                                    <td><input type="number" id="jumlah_disokong" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                    <td><input type="number" id="jumlah_disokong_3" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                     <td>:</td>
-                                                    <td><input type="number" id="jumlah_dibayar" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                    <td><input type="number" id="jumlah_dibayar_3" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="vertical-top">Catatan</td>
+                                                    <td class="vertical-top">:</td>
+                                                    <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Keputusan akhir</td>
+                                                    <td>:</td>
+                                                    <td class="hidden-sm-down">
+                                                        <div class="form-group c_form_group">
+                                                            <select id="keputusan" name="submit" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                <option value="">Pilih</option>
+                                                                <option value="Kembalikan">Kembalikan</option>
+                                                                <option value="Layak">Layak</option>
+                                                                <option value="TidakLayak">Tidak Layak</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             </table>
                                         </div>
                                         <script>
-                                            document.getElementById("yuran_disokong").addEventListener("input", SokongY);
-                                            document.getElementById("yuran_dibayar").addEventListener("input", BayarY);
+                                            document.getElementById("yuran_disokong_3").addEventListener("input", SokongY);
+                                            document.getElementById("yuran_dibayar_3").addEventListener("input", BayarY);
                                             function SokongY(){
-                                                var yuran = document.getElementById('yuran_disokong').value;
+                                                var yuran = document.getElementById('yuran_disokong_3').value;
                                                 var baki = 5000 - yuran;
-                                                var jumlah = parseFloat(w_saku) + parseFloat(yuran);
+                                                var jumlah = parseFloat(yuran);
                                                 baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                                                     minimumFractionDigits: 2
                                                 });
-                                                document.getElementById('y_baki_disokong').innerHTML = baki;
-                                                document.getElementById('jumlah_disokong').value= parseFloat(jumlah).toFixed(2);
+                                                document.getElementById('y_baki_disokong_3').innerHTML = baki;
+                                                document.getElementById('jumlah_disokong_3').value= parseFloat(jumlah).toFixed(2);
                                             }
                                             function BayarY(){
-                                                var yuran = document.getElementById('yuran_dibayar').value;
+                                                var yuran = document.getElementById('yuran_dibayar_3').value;
                                                 var baki = 5000 - yuran;
-                                                var jumlah = parseFloat(yuran) + parseFloat(w_saku);
+                                                var jumlah = parseFloat(yuran);
                                                 baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                                                     minimumFractionDigits: 2
                                                 });
-                                                document.getElementById('y_baki_dibayar').innerHTML = baki;
-                                                document.getElementById('jumlah_dibayar').value= parseFloat(jumlah).toFixed(2);
+                                                document.getElementById('y_baki_dibayar_3').innerHTML = baki;
+                                                document.getElementById('jumlah_dibayar_3').value= parseFloat(jumlah).toFixed(2);
                                             }
                                         </script>
                                     @elseif($permohonan->program == "PPK")
@@ -493,9 +540,6 @@
                                             }
                                             $jumlah = $permohonan->amaun_wang_saku;
                                         @endphp
-                                        <br>
-                                        <h6>Pengiraan:</h6>
-                                        <br>
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -510,8 +554,8 @@
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong_ppk" id="w_saku_disokong_ppk" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar_ppk" id="w_saku_dibayar_ppk" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong_ppk" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar_ppk" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -519,12 +563,31 @@
                                                 <tr>
                                                     <td>Jumlah tuntutan yang disokong (RM)</td>
                                                     <td>:</td>
-                                                    <td><input type="number" id="jumlah_disokong_ppk" name="jumlah_disokong_ppk" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                    <td><input type="number" id="jumlah_disokong_ppk" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                     <td>:</td>
-                                                    <td><input type="number" id="jumlah_dibayar_ppk" name="jumlah_dibayar_ppk" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                    <td><input type="number" id="jumlah_dibayar_ppk" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="vertical-top">Catatan</td>
+                                                    <td class="vertical-top">:</td>
+                                                    <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Keputusan akhir</td>
+                                                    <td>:</td>
+                                                    <td class="hidden-sm-down">
+                                                        <div class="form-group c_form_group">
+                                                            <select id="keputusan" name="submit" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                <option value="">Pilih</option>
+                                                                <option value="Kembalikan">Kembalikan</option>
+                                                                <option value="Layak">Layak</option>
+                                                                <option value="TidakLayak">Tidak Layak</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -534,16 +597,12 @@
 
                                             function SokongPPK(){
                                                 var w_saku = document.getElementById('w_saku_disokong_ppk').value;
-                                                w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
-                                                    minimumFractionDigits: 2
-                                                });
+                                                w_saku = parseFloat(w_saku);
                                                 document.getElementById('jumlah_disokong_ppk').value= parseFloat(w_saku).toFixed(2);
                                             }
                                             function BayarPPK(){
                                                 var w_saku = document.getElementById('w_saku_dibayar_ppk').value;
-                                                w_saku = Number(parseFloat(w_saku).toFixed(2)).toLocaleString('en', {
-                                                    minimumFractionDigits: 2
-                                                });
+                                                w_saku = parseFloat(w_saku);
                                                 document.getElementById('jumlah_dibayar_ppk').value= parseFloat(w_saku).toFixed(2);
                                             }
                                         </script>
