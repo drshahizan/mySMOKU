@@ -252,7 +252,11 @@
                                                                 <td class="text-center">{{$item->no_mesyuarat}}</td>
                                                                 <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
                                                                 @if($item->keputusan == "Lulus")
-                                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm">Layak</button></td>
+                                                                    <td class="text-center">
+                                                                        <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
+                                                                            <i class="fa fa-download custom-white-icon" style="color: white !important;"></i> Layak
+                                                                        </a>
+                                                                    </td>
                                                                 @elseif($item->keputusan == "Tidak Lulus")
                                                                     <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
                                                                 @endif

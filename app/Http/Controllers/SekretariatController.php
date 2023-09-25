@@ -376,7 +376,8 @@ class SekretariatController extends Controller
     {
         // Get the "permohonan" data based on $permohonanId
         $permohonan = Permohonan::where('id', $permohonanId)->first();
-        $pdf = PDF::loadView('permohonan.sekretariat.keputusan.surat_tawaran', compact('permohonan'));
+        $todayDate = Carbon::now()->format('d-m-Y');
+        $pdf = PDF::loadView('permohonan.sekretariat.keputusan.surat_tawaran', compact('permohonan','todayDate'));
         return $pdf->download('SuratTawaran_'.$permohonanId.'.pdf');
     }
 
@@ -416,10 +417,20 @@ class SekretariatController extends Controller
 
         $permohonan_id = Tuntutan::where('id', $id)->value('permohonan_id');
         $smoku_id = Permohonan::where('id', $permohonan_id)->value('smoku_id');
+
         if($request->get('submit')=="Layak"){
             Tuntutan::where('id', $id)
                 ->update([
                     'status'   =>  6,
+                ]);
+
+            Tuntutan::where('id', $id)
+                ->update([
+                    'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
+                    'yuran_disokong'        =>  $request->get('yuran_disokong'),
+                    'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
+                    'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                    'status'                =>  4,
                 ]);
 
             $status_rekod = new SejarahPermohonan([

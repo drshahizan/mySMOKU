@@ -431,9 +431,16 @@ class PenyelarasController extends Controller
         return view('tuntutan.penyelaras.kemaskini.kemaskini_tuntutan');
     }
 
-    public function sejarahTuntutan()
+    public function tuntutanKeseluruhan()
     {
-        return view('tuntutan.penyelaras.sejarah.sejarah_tuntutan');
+    $smoku = Smoku::leftJoin('permohonan','permohonan.smoku_id','=','smoku.id')
+    ->leftJoin('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
+    ->leftJoin('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
+    ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
+    ->where('penyelaras_id','=', Auth::user()->id)
+    ->get(['smoku.*', 'permohonan.*', 'bk_info_institusi.nama_institusi']);
+   
+        return view('tuntutan.penyelaras.tuntutan_keseluruhan.tuntutan_keseluruhan',compact('smoku'));
     }
 
     public function viewpermohonanbaru($nokp){

@@ -77,6 +77,24 @@ class SaringanController extends Controller
 
     public function saringTuntutan(Request $request,$id)
     {
+        Permohonan::where('id', $id)
+            ->update([
+                'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
+                'yuran_disokong'        =>  $request->get('yuran_disokong'),
+                'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
+                'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                'status'                =>  4,
+            ]);
+
+        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+
+        $status_rekod = new SejarahPermohonan([
+            'smoku_id'      =>  $smoku_id,
+            'permohonan_id' =>  $id,
+            'status'        =>  4,
+        ]);
+        $status_rekod->save();
+
         $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
         $permohonan = Permohonan::where('status', '2')
         ->orWhere('status', '=','3')
@@ -91,20 +109,6 @@ class SaringanController extends Controller
     public function saringPermohonan(Request $request,$id)
     {
         if($request->get('maklumat_profil_diri')=="lengkap"&&$request->get('maklumat_akademik')=="lengkap"&&$request->get('salinan_dokumen')=="lengkap"){
-
-            Permohonan::where('id', $id)
-                ->update([
-                'status'   =>  4,
-            ]);
-
-            $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
-
-            $status_rekod = new SejarahPermohonan([
-                'smoku_id'      =>  $smoku_id,
-                'permohonan_id' =>  $id,
-                'status'        =>  4,
-            ]);
-            $status_rekod->save();
 
             $permohonan = Permohonan::where('id', $id)->first();
             $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
