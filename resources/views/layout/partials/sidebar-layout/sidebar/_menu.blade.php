@@ -272,6 +272,18 @@
 								<span class="menu-title">Daftar Pengguna</span>
 						</a>
 					</div>
+					<div class="menu-item">
+						<a class="menu-link" href="{{url('pentadbir/api-connection')}}">
+								<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
+								<span class="menu-title">Semak API</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a class="menu-link" href="{{url('pentadbir/alamat')}}">
+								<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
+								<span class="menu-title">Alamat Kementerian</span>
+						</a>
+					</div>
 
 				</div>
 			<!--end::Menu-->

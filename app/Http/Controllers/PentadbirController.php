@@ -10,6 +10,7 @@ use App\Models\InfoIpt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailDaftarPengguna;
+use GuzzleHttp\Client;
 
 
 class PentadbirController extends Controller
@@ -78,6 +79,54 @@ class PentadbirController extends Controller
 
 
     }
+
+    public function checkConnectionSmoku()
+    {
+        try {
+            $headers = [
+                'Cache-Control' => 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer knhnxYoATGLiN5WxErU6SVVw8c9xhw09vQ3KRPkOtcH3O0CYh21wDA4CsypX',
+            ];
+
+            $client = new Client();
+            $url = 'https://oku-staging.jkm.gov.my/api/oku/000212101996';
+            $response = $client->get($url, ['headers' => $headers]);
+
+            $statusCode = $response->getStatusCode();
+            $responseContent = $response->getBody()->getContents();
+            //dd($statusCode);
+
+            // Check if the status code indicates success (usually 2xx)
+            if ($statusCode >= 200 && $statusCode < 300) {
+                // API connection is successful
+                $data = json_decode($responseContent, true);
+
+                return view('pages.pentadbir.semakkan_api', [
+                    'success' => 'Sambungan API berjaya',
+                    'data' => $data,
+                ]);
+            } else {
+                // Handle API error
+                return view('pages.pentadbir.semakkan_api', [
+                    'error' => 'Permintaan API gagal dengan kod status: ' . $statusCode,
+                ]);
+            }
+        } catch (\Exception $e) {
+            // Handle other exceptions (e.g., network errors)
+            return view('pages.pentadbir.semakkan_api', [
+                'error' => 'Ralat dikesan: ' . $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function alamat()
+    {
+           
+        return view('pages.pentadbir.alamat');
+
+    }
+
     
 
 }
