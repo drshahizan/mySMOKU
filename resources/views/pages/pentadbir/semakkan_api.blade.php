@@ -23,44 +23,67 @@
 	<div id="kt_app_content" class="app-content flex-column-fluid">
 		<!--begin::Content container-->
 		<div id="kt_app_content_container" class="app-container container-xxl">
-			
-			<!--begin::Table-->
-			<table class="table table-row-dashed fs-6 gy-5">
-				<thead>
-					<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-						<th class="min-w-100px">API</th>
-						<th class="min-w-100px">Status</th>
-						<th class="w-100px">Semak</th>
-					</tr>
-				</thead>
-				<tbody class="fw-semibold text-gray-600" >
-					<tr>
-						<td class="text-gray-800">SMOKU</td>
-						<td> 
-							@if(isset($error))
-								<p style="color: red;">Ralat: {{ $error }}</p>
-							@endif
-				
-							@if(isset($success))
-								<p style="color: green;">Berjaya: {{ $success }}</p>
-							@endif
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="text-gray-800">MQA</td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="text-gray-800">ESP</td>
-						<td></td>
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
-			<!--end::Table-->
-			
+			<!--begin::Card-->
+			<div class="card">
+				<!--begin::Card header-->
+				<div class="card-header border-0 pt-6">
+					<!--begin::Card title-->
+					<div class="card-title">
+						<!--begin::Search-->
+						<div class="d-flex align-items-center position-relative my-1">
+							<i>
+								<span class="path1"></span>
+								<span class="path2"></span>
+							</i>
+							
+						</div>
+						<!--end::Search-->
+					</div>
+					<!--begin::Card title-->
+				</div>
+				<!--end::Card header-->
+				<!--begin::Card body-->
+				<div class="card-body pt-0">	
+					<!--begin::Table-->
+					<table class="table table-row-dashed fs-6 gy-5">
+						<thead>
+							<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+								<th class="min-w-100px">API</th>
+								<th class="min-w-100px">Status</th>
+								<th class="w-100px">Semak</th>
+							</tr>
+						</thead>
+						<tbody class="fw-semibold text-gray-600" >
+							<tr>
+								<td class="text-gray-800">SMOKU</td>
+								<td> 
+									@if(isset($error))
+										<p style="color: red;">Ralat: {{ $error }}</p>
+									@endif
+						
+									@if(isset($success))
+										<p style="color: green;">Berjaya: {{ $success }}</p>
+									@endif
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td class="text-gray-800">MQA</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td class="text-gray-800">ESP</td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					<!--end::Table-->
+				</div>
+				<!--end::Card body-->
+			</div>
+			<!--end::Card-->	
 		</div>
 		<!--end::Content container-->
 	</div>

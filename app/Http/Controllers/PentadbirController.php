@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\InfoIpt;
+use App\Models\MaklumatKementerian;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailDaftarPengguna;
@@ -122,6 +123,30 @@ class PentadbirController extends Controller
 
     public function alamat()
     {
+        $maklumat = MaklumatKementerian::get();
+           
+        return view('pages.pentadbir.alamat', compact('maklumat'));
+
+    }
+
+    public function save(Request $request)
+    {
+        $maklumat = MaklumatKementerian::create([
+            'nama_kementerian_bm' => $request->nama_kementerian_bm,
+            'nama_kementerian_bi' => $request->nama_kementerian_bi,
+            'nama_bahagian_bm' => $request->nama_bahagian_bm,
+            'nama_bahagian_bi' => $request->nama_bahagian_bi,
+            'alamat1' => $request->alamat1,
+            'alamat2' => $request->alamat2,
+            'poskod' => $request->poskod,
+            'negeri' => $request->negeri,
+            'negara' => $request->negara,
+            'tel' => $request->tel,
+            'hotline' => $request->hotline,
+            'faks' => $request->faks,
+    
+        ]);
+        $maklumat->save();
            
         return view('pages.pentadbir.alamat');
 

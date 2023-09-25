@@ -175,6 +175,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('daftarpengguna', [PentadbirController::class, 'store'])->name('daftarpengguna.post');
     Route::get('pentadbir/api-connection', [PentadbirController::class, 'checkConnectionSmoku'])->name('smoku.api');
     Route::get('pentadbir/alamat', [PentadbirController::class, 'alamat'])->name('alamat');
+    Route::post('pentadbir/alamat', [PentadbirController::class, 'save'])->name('alamat.save');
 
     //Pegawai
     Route::get('pegawai/dashboard', [PegawaiController::class,'index'])->name('pegawai.dashboard');
