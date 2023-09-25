@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Exports\SenaraiPendek;
 use App\Mail\KeputusanLayak;
 use App\Mail\KeputusanTidakLayak;
+use App\Mail\TuntutanDikembalikan;
+use App\Mail\TuntutanLayak;
+use App\Mail\TuntutanTidakLayak;
 use App\Models\Permohonan;
 use App\Models\Saringan;
 use App\Models\SejarahPermohonan;
@@ -398,6 +401,12 @@ class SekretariatController extends Controller
     }
 
     public function maklumatTuntutanKedua($id){
+
+        Tuntutan::where('id', $id)
+            ->update([
+                'status'   =>  3,
+            ]);
+
         $tuntutan = Tuntutan::where('id', $id)->first();
         $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
@@ -440,6 +449,8 @@ class SekretariatController extends Controller
             ]);
             $status_rekod->save();
 
+            $catatan = "testing";
+            Mail::to('ziba0506@gmail.com')->send(new TuntutanLayak($catatan));
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Layak'.";
         }
@@ -455,6 +466,10 @@ class SekretariatController extends Controller
                 'status'        =>  7,
             ]);
             $status_rekod->save();
+
+            $catatan = "testing";
+            Mail::to('ziba0506@gmail.com')->send(new TuntutanTidakLayak($catatan));
+
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Tidak Layak'.";
         }
@@ -470,6 +485,10 @@ class SekretariatController extends Controller
                 'status'        =>  5,
             ]);
             $status_rekod->save();
+
+            $catatan = "testing";
+            Mail::to('ziba0506@gmail.com')->send(new TuntutanDikembalikan($catatan));
+
             $status_kod=2;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah dikembalikan.";
         }
