@@ -214,7 +214,7 @@
                                     </table>
                                 <hr>
                                         <!--begin: Invoice body-->
-                                        @if($permohonan->program == "BKOKU" && $permohonan->yuran == "1")
+                                        @if($permohonan->program == "BKOKU" && $permohonan->yuran == "1" && $permohonan->wang_saku == "1")
                                             @php
                                                 if($permohonan->amaun_yuran == null){
                                                     $permohonan->amaun_yuran = 0;
@@ -301,6 +301,55 @@
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table class="maklumat2">
+                                                    <tr>
+                                                        <td>Jumlah tuntutan yang disokong (RM)</td>
+                                                        <td>:</td>
+                                                        <td>{{number_format($jumlah, 2)}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jumlah tuntutan yang dibayar (RM)</td>
+                                                        <td>:</td>
+                                                        <td>{{number_format($jumlah, 2)}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        @elseif($permohonan->program == "BKOKU" && $permohonan->wang_saku == NULL)
+                                            @php
+                                                if($permohonan->amaun_yuran == null){
+                                                    $permohonan->amaun_yuran = 0;
+                                                }
+                                                $jumlah = $permohonan->amaun_yuran + $permohonan->amaun_wang_saku;
+                                                $baki_y = 5000 - $jumlah;
+                                            @endphp
+                                            <br>
+                                            <h6>Pengiraan:</h6>
+                                            <br>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
+                                                        <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dituntut (RM)</th>
+                                                        <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                                        <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
+                                                        <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                                        <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dibayar (RM)</th>
+                                                        <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr class="font-weight-bolder font-size-lg">
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
