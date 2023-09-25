@@ -17,6 +17,7 @@ class Tuntutan extends Model
         'no_rujukan_tuntutan',
         'sesi',
         'semester',
+        'yuran',
         'wang_saku',
         'amaun_wang_saku',
         'yuran_disokong',
