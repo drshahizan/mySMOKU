@@ -217,9 +217,8 @@
 		<div class="card d-flex flex-row-fluid flex-center">
 			<!--begin::Form-->
 			<form id="kt_create_account_form" action="{{ route('ppk.hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
-			{{-- <form action="{{ route('ppk.hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data"> --}}
 				<!--begin::Step 1-->
-				<div class="current" data-kt-stepper-element="content">
+				{{-- <div class="current" data-kt-stepper-element="content">
 				@csrf
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -548,11 +547,11 @@
 					</div>
 					
 					<!--end::Wrapper-->
-				</div>
+				</div> --}}
 				<!--end::Step 1-->
 
 				<!--begin::Step 2-->
-				<div  data-kt-stepper-element="content">
+				{{-- <div  data-kt-stepper-element="content">
 				@csrf	
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -725,12 +724,12 @@
 						<!--end::Input group-->
 					</div>
 					<!--end::Wrapper-->
-				</div>
+				</div> --}}
 				<!--end::Step 2-->
-				@endforeach
+				{{-- @endforeach --}}
 
 				<!--begin::Step 3-->
-				<div data-kt-stepper-element="content">
+				{{-- <div data-kt-stepper-element="content">
 				@csrf
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -974,11 +973,11 @@
 						<!--end::Input group-->
 					</div>
 					<!--end::Wrapper-->
-				</div>
+				</div> --}}
 				<!--end::Step 3-->
 
 				<!--begin::Step 4-->
-				<div data-kt-stepper-element="content">
+				{{-- <div data-kt-stepper-element="content">
 				@csrf
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -1020,11 +1019,11 @@
 						</div>
 					</div>
 					<!--end::Wrapper-->
-				</div>
+				</div> --}}
 				<!--end::Step 4-->
 
 				<!--begin::Step 5-->
-				<div data-kt-stepper-element="content">
+				<div class="current"  data-kt-stepper-element="content">
 				@csrf
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -1058,56 +1057,15 @@
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
 								</tr>
-								<tr>
-									<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/resit.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
-									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="invoisResit" name="invoisResit"/></td>
-									<td><textarea type="text" class="form-control form-control-sm" id="nota_invoisResit" rows="1" name="nota_invoisResit"></textarea></td>
-								</tr>
 							</tbody>
 						</table>
 						<!--end::Table-->
-						<!--begin::Table-->
-						<table class="table table-row-dashed fs-6 gy-5">
-							<thead>
-								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-									<th class="min-w-50px"></th>
-									<th class="min-w-500px"></th>
-								</tr>
-							</thead>
-
-							<tbody class="fw-semibold text-gray-600">
-								<tr>
-									<td>
-										<!-- Add More Button -->
-										<button class="btn btn-success btn-sm btn-add-more" type="button">+</button>
-										<!-- End -->
-									</td>
-									<td class="input-group control-group img_div form-group col-md-10">
-										Resit/Invois Tambahan (Jika Ada)
-									</td>
-								</tr>
-								<tr>
-									<!-- Add More Image upload field  -->
-									<td class="clone" style="display:none">
-										<div class="control-group input-group">
-											<input type="file" id="dokumen[]" name="dokumen[]" class="form-control form-control-sm">
-											&nbsp;
-											&nbsp;
-											<textarea type="text" class="form-control form-control-sm" id="catatan[]" rows="1" name="catatan[]"></textarea>
-											&nbsp;
-											<button class="btn btn-danger btn-sm btn-remove" type="button">x</button>
-										</div>
-									</td>
-									<!-- End -->	
-								</tr>
-							</tbody>
-						</table>
-						<br>
+						
 						<br>
 						<div class="pb-10 pb-lg-15">
 							<!--begin::Notice-->
-							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp;
-								Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a> untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
+							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange; font-size:15px;'></i>&nbsp;
+								Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a>untuk mengurangkan saiz fail sebelum memuat naik fail.
 							</div>
 
 							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; Format fail yang boleh dimuat naik adalah format 
@@ -1187,7 +1145,6 @@
 							<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 						</button>
 						<button type="button" class="btn btn-lg btn-primary save-form" data-kt-stepper-action="next">Teruskan
-						{{-- <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Teruskan --}}
 						<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
 							<span class="path1"></span>
 							<span class="path2"></span>
