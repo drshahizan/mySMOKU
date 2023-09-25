@@ -27,6 +27,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
     </head>
     <br>
                                  
@@ -89,12 +90,7 @@
                         <!--<span class="text-gray-400 pt-1 fw-semibold fs-6">Program BKOKU</span>-->
                     </h3>
                     <!--end::Title-->
-                    @if (session('message'))
-                        <div class="alert alert-success" style="color:black;">{{ session('message') }}</div>
-                    @endif
-                    @if (session('xmessage'))
-                        <div class="alert alert-danger" style="color:black;">{{ session('xmessage') }}</div>
-                    @endif
+                   
                 </div>
                 <!--end::Header-->
                 <!--begin::Body-->
@@ -106,15 +102,17 @@
                             <!--begin::Table head-->
                             <thead>
                                 <tr class="fs-7 fw-bold border-0 text-dark">
-                                    <th class="min-w-150px text-center" colspan="2">No. Kad Pengenalan</th>
-                                    <th class="min-w-150px text-center" colspan="2">Nama</th>
+                                    <th>Bil</th>
+                                    <th class="min-w-150px" colspan="2">No. Kad Pengenalan</th>
+                                    <th class="min-w-150px" colspan="2">No. Kad JKM</th>
+                                    <th class="min-w-150px" colspan="2">Nama</th>
                                     <th class="text-center min-w-150px" colspan="2">Status Permohonan</th>
                                 </tr>
                             </thead>
                             <!--end::Table head-->
                             <!--begin::Table body-->
                             <tbody>
-                                @foreach ($smoku as $smoku)
+                                @foreach ($smoku as $key => $smoku)
                                     @php
                                     $text = ucwords(strtolower($smoku->nama)); 
                                     $conjunctions = ['bin', 'binti'];
@@ -130,8 +128,14 @@
                                     $pemohon = implode(' ', $result);
                                     @endphp
                                 <tr>
+                                    <td>
+                                        <span class="text-dark fw-bold fs-6 me-3">{{ $key + 1 }}. </span>
+                                    </td>
                                     <td class="" colspan="2">
                                         <span class="text-dark fw-bold fs-6 me-3">{{ $smoku->no_kp}}</span>
+                                    </td>
+                                    <td class="" colspan="2">
+                                        <span class="text-dark fw-bold fs-6 me-3">{{ $smoku->no_daftar_oku}}</span>
                                     </td>
                                     <td class="" colspan="2">
                                         <span class="text-gray-800 fw-bold text-center mb-1 fs-6">{{$pemohon}}</span>
@@ -156,6 +160,28 @@
                 $('#sortTable').DataTable();
             </script>
         </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        // Check if there is a flash message
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berjaya!',
+                text: ' {!! session('success') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+        @if(session('failed'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Tidak Berjaya!',
+                text: ' {!! session('failed') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+    </script>
     
     </x-default-layout>
     

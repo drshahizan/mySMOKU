@@ -50,7 +50,7 @@ class PenyelarasPPKController extends Controller
         
         if($smoku != null){
             $kodoku = $smoku->kategori;
-            if ($smoku != null && $kodoku ==='DE') {
+            if ($smoku != null && ($kodoku ==='DE' || $kodoku ==='DD')) {
                 DB::table('smoku_penyelaras')->insert([
                     'smoku_id' => $smoku->id,
                     'penyelaras_id' => Auth::user()->id,
@@ -65,12 +65,12 @@ class PenyelarasPPKController extends Controller
                 $no_kp = $request->session()->put('no_kp',$no_kp);
 
                 return redirect()->route('penyelaras.ppk.dashboard')->with($smoku_id,$no_kp)
-                    ->with('message', $request->no_kp. ' SAH SEBAGAI OKU BERDAFTAR DENGAN JKM & DALAM KATEGORI OKU PENDENGARAN');
+                    ->with('success', $request->no_kp. ' Sah sebagai OKU berdaftar dengan JKM & dalam kategori OKU pendengaran');
 
-            } else if ($kodoku !='DE') {
+            } else if ($kodoku !='DE' || $kodoku !='DD') {
 
                 return redirect()->route('penyelaras.ppk.dashboard')
-                    ->with('xmessage', $request->no_kp. ' BUKAN DALAM KATEGORI OKU PENDENGARAN');
+                    ->with('failed', $request->no_kp. ' Bukan dalam kategori OKU pendengaran');
             }
 
         }
@@ -78,7 +78,7 @@ class PenyelarasPPKController extends Controller
         else {
 
             return redirect()->route('penyelaras.ppk.dashboard')
-                ->with('xmessage', $request->no_kp. ' BUKAN OKU YANG BERDAFTAR DENGAN JKM');
+                ->with('failed', $request->no_kp. ' Bukan OKU yang berdaftar dengan JKM');
         }
     }
 
