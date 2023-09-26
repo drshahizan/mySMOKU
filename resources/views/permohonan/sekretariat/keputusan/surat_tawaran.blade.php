@@ -147,23 +147,20 @@
             $program = DB::table('smoku_akademik')->where('smoku_id', $permohonan['smoku_id'])->value('nama_kursus');
             $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $permohonan['smoku_id'])->value('tarikh_mula');
             $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $permohonan['smoku_id'])->value('tarikh_tamat');
-            $mod = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_info_institusi.nama_institusi');
-            $institusi = DB::table('smoku_akademik')->join('bk_mod','bk_mod.kod_mod','=','smoku_akademik.mod' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_mod.mod');
+            $institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_info_institusi.nama_institusi');
+            $mod = DB::table('smoku_akademik')->join('bk_mod','bk_mod.kod_mod','=','smoku_akademik.mod' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_mod.mod');
         @endphp
 
-        <p>
-            <b>{{$nama}}</b><br>
-            <b>{{$no_kp}}</b><br>
-            3, JALAN CHENGAL 1 <br>
-            SAUJANA UTAMA 2 <br>
-            47000 SUNGAI BULOH <br>
-            SELANGOR
-        </p>
+        <div class="penerima" style="width: 40%">
+            <b>{{$nama}}</b>
+            <br><b>NO.KP : {{$no_kp}}</b>
+            <br>{{$alamat}}
+        </div>
             
         <br>
         <p>Tuan/Puan,</p>
         <br>
-        <h3>TAWARAN PROGRAM BANTUAN KEWANGAN PELAJAR OKU DI INSTITUT
+        <h3>TAWARAN PROGRAM BANTUAN KEWANGAN PELAJAR OKU DI INSTITUSI
             PENGAJIAN TINGGI (IPT) KEMENTERIAN PENGAJIAN TINGGI (KPT)</h3>
         <br>
         <p>Sukacita di maklumkan bahawa tuan/puan telah ditawarkan pembiayaan Program Bantuan
@@ -219,7 +216,7 @@
         <p><b>“BERKHIDMAT UNTUK NEGARA”</b></p>
         <br>
         <p>Saya yang menjalankan amanah,</p>
-        <p><b>Setiausaha Bahagian<br>
+        <p><b>Setiausaha<br>
             Bahagian Biasiswa<br>
             b.p. Ketua Setiausaha<br>
             Kementerian Pengajian Tinggi</b>
