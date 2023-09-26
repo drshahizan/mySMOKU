@@ -41,7 +41,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('profildiri', [ProfilController::class, 'profildiri'])->name('profil-diri');
-    Route::post('profildiri', [ProfilController::class, 'store'])->name('profildiri.store');
+    Route::post('profil/simpan', [ProfilController::class, 'simpanProfil'])->name('simpan.profil');
     /*Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post'); */
 
