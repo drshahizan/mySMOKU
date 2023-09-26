@@ -1,5 +1,16 @@
-
-<link rel="stylesheet" href="/assets/css/saringan.css">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {!! printHtmlAttributes('html') !!}>
+<!--begin::Head-->
+<head>
+    <title>{{ config('app.name', 'SistemBKOKU') }}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:type" content="article"/>
+    <link rel="stylesheet" href="/assets/css/style.bundle.css">
+    <link rel="stylesheet" href="/assets/css/saringan.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
 <style>
     .maklumat, .maklumat td{
         border: none!important;
@@ -69,6 +80,7 @@
         background-color: #007842!important;
     } */
 </style>
+<body>
 <!-- Main body part  -->
 <div id="main-content">
     <div class="container-fluid">
@@ -204,7 +216,6 @@
                                             <tr>
                                                 <th style="width: 5%;">No.</th>
                                                 <th style="width: 20%;">Item</th>
-                                                <th style="width: 15%;">Keputusan Saringan</th>
                                                 <th style="width: 20%;">No. Resit</th>
                                                 <th style="width: 40%;">Perihal</th>
                                             </tr>
@@ -214,9 +225,6 @@
                                                 <td style="text-align:right;">1</td>
                                                 <td>
                                                     <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan') }}" target="_blank">Keputusan Peperiksaan</a></span>
-                                                </td>
-                                                <td>
-                                                    Disokong
                                                 </td>
                                                 <td>
                                                     -
@@ -230,9 +238,6 @@
                                                     <td style="text-align:right;">{{$i++}}</td>
                                                     <td>
                                                         <span><a href="{{ url($invoisResit) }}" target="_blank">{{$item['jenis_yuran']}}</a></span>
-                                                    </td>
-                                                    <td>
-                                                        Disokong
                                                     </td>
                                                     <td>
                                                         {{$item['no_resit']}}
@@ -254,3 +259,5 @@
         </div>
     </div>
 </div>
+</body>
+</html>
