@@ -43,74 +43,17 @@
                                         <tr>
                                             <th style="width: 17%"><b>ID Tuntutan</b></th>                                        
                                             <th style="width: 33%"><b>Nama</b></th>
-                                            <th style="width: 33%"><b>Item Tuntutan</b></th>
                                             <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
                                             <th style="width: 15%" class="text-center"><b>Status Tuntutan</b></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($smoku as $smoku)
-                                        @php
-                                            $status = DB::table('bk_status')->where('kod_status', $smoku->status)->value('status');
-                                                        if ($smoku->status==2){
-                                                            $status='Baharu';
-                                                        }
-                                                        if ($smoku->status==3){
-                                                            $status='Sedang Disaring';
-                                                        }
-                                            $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
-                                            $conjunctions = ['bin', 'binti'];
-                                            $words = explode(' ', $text);
-                                            $result = [];
-                                            foreach ($words as $word) {
-                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                    $result[] = Str::lower($word);
-                                                } else {
-                                                    $result[] = $word;
-                                                }
-                                            }
-                                            $pemohon = implode(' ', $result);
-                                    
-                                            //institusi pengajian
-                                            $text3 = ucwords(strtolower($smoku->nama_institusi)); // Assuming you're sending the text as a POST parameter
-                                            $conjunctions = ['of', 'in', 'and'];
-                                            $words = explode(' ', $text3);
-                                            $result = [];
-                                            foreach ($words as $word) {
-                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                    $result[] = Str::lower($word);
-                                                } else {
-                                                    $result[] = $word;
-                                                }
-                                            }
-                                            $institusi = implode(' ', $result);
-                                        @endphp
+                                        @foreach ($tuntutan as $tuntutan)
                                         <tr>
-                                            <td><a href="@if ($smoku->no_rujukan_permohonan !=null) {{route('penyelaras.view.permohonan',$smoku->smoku_id)}} @endif">{{ $smoku->no_rujukan_permohonan}}</a></td>
-                                            <td>{{ $pemohon}}</td>
-                                            <td>{{ $institusi}}</td>
-                                            <td class="text-center">@if ($smoku->created_at !=null) {{ $smoku->created_at->format('d/m/Y h:i:sa')}} @endif</td>
-                                            @if ($smoku->status=='1')
-                                                <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($smoku->status=='2')
-                                                <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($smoku->status=='3')
-                                                <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($smoku->status=='4')
-                                                <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($smoku->status=='5')
-                                                <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($smoku->status=='6')
-                                                <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($smoku->status=='7')
-                                                <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($smoku->status=='8')
-                                                <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($smoku->status=='9')
-                                                <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @else
-                                                <td class="text-center"><button class="btn bg-batal text-white">Belum Mohon</button></td>
-                                            @endif
+                                            <td>{{ $tuntutan->no_rujukan_tuntutan}}</a></td>
+                                            <td></td>
+                                            <td>{{ $tuntutan->jenis_yuran}}</td>
+                                            <td></td>
                                         </tr>  
                                         @endforeach	
                                     </tbody>

@@ -23,6 +23,7 @@ use App\Models\Dokumen;
 use App\Models\Hubungan;
 use App\Models\Negeri;
 use App\Models\Bandar;
+use App\Models\Tuntutan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 //use session;
@@ -433,14 +434,13 @@ class PenyelarasController extends Controller
 
     public function tuntutanKeseluruhan()
     {
-    $smoku = Smoku::leftJoin('permohonan','permohonan.smoku_id','=','smoku.id')
-    ->leftJoin('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
-    ->leftJoin('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-    ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
-    ->where('penyelaras_id','=', Auth::user()->id)
-    ->get(['smoku.*', 'permohonan.*', 'bk_info_institusi.nama_institusi']);
-   
-        return view('tuntutan.penyelaras.tuntutan_keseluruhan.tuntutan_keseluruhan',compact('smoku'));
+    $tuntutan = Tuntutan::leftJoin('smoku','smoku.id','=','tuntutan.smoku_id')
+    //->leftJoin('tuntutan_item','tuntutan_item.tuntutan_id','=','tuntutan.id')
+    //->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
+    //->where('penyelaras_id','=', Auth::user()->id)
+    ->get(['tuntutan.*']);
+        //dd($tuntutan);
+        return view('tuntutan.penyelaras.tuntutan_keseluruhan.tuntutan_keseluruhan',compact('tuntutan'));
     }
 
     public function viewpermohonanbaru($nokp){
