@@ -6,22 +6,25 @@ use App\Models\TuntutanItem;
 use App\Models\Permohonan;
 use App\Models\Smoku;
 use App\Models\SejarahTuntutan;
+use App\Models\Akademik;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class TuntutanController extends Controller
 {
     public function tuntutanBaharu()
     {   
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        $permohonan = Permohonan::where('smoku_id',$smoku_id->id)->first();
         $tuntutan = Tuntutan::join('tuntutan_item','tuntutan_item.tuntutan_id','=','tuntutan.id')
         ->get(['tuntutan.*', 'tuntutan_item.*'])
         ->where('smoku_id', $smoku_id->id)
+        //->where('permohonan_id', $permohonan->id)
         ->where('status', 1);
-        //dd($tuntutan);
-        return view('pages.tuntutan.borangtuntutanyuran', compact('tuntutan'));
+        $akademik = Akademik::where('smoku_id',$smoku_id->id)->first();
+        
+        return view('pages.tuntutan.borang_tuntutan', compact('permohonan','tuntutan','akademik'));
         
     }
 
@@ -52,6 +55,7 @@ class TuntutanController extends Controller
                 'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
                 'sesi' => $request->sesi,
                 'semester' => $request->semester,
+                'yuran' => '1',
                 'status' => '1',
             ]);
         }
@@ -132,7 +136,7 @@ class TuntutanController extends Controller
 
     }
 
-    public function hantartuntutan(Request $request)
+    public function hantarTuntutan(Request $request)
     {   
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
         $permohonan = Permohonan::all()->where('smoku_id', '=', $smoku_id->id)->first();
