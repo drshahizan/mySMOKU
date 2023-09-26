@@ -11,7 +11,7 @@ class Peperiksaan extends Model
     protected $table = 'permohonan_peperiksaan';
     
     protected $fillable = [
-        'smoku_id',
+        'permohonan_id',
         'sesi',
         'semester',
         'cgpa',

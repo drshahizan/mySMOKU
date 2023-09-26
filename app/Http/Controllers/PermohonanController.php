@@ -615,36 +615,46 @@ class PermohonanController extends Controller
         
     }
 
-    public function baharuimohon()
+    public function kemaskiniKeputusan()
     {   
         $peperiksaan = Peperiksaan::all();
-        return view('pages.permohonan.baharuimohon', compact('peperiksaan'));
+        return view('pages.permohonan.kemaskini_keputusan_peperiksaan', compact('peperiksaan'));
     }
 
     public function save(Request $request)
     {   
-        $data=new peperiksaan();
         
-            $kepPeperiksaan=$request->kepPeperiksaan; 
-            $sem=$request->semester; 
-            $sesi=$request->sesi; 
-            $nokp = Auth::user()->nokp;
-            //dd($nokp);
-            $name1='kepPeperiksaan';  
-            //$filenamekepPeperiksaan=$name1.'-'.$sesi.'_'.$sem.'.'.$kepPeperiksaan->getClientOriginalExtension();
-            $filenamekepPeperiksaan=$name1.'-'.$nokp.'_'.$sem.'.'.$kepPeperiksaan->getClientOriginalExtension();
-            //dd($request->filenamekepPeperiksaan);
-            $request->kepPeperiksaan->move('assets/peperiksaan',$filenamekepPeperiksaan);
+        $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        $permohonan = Permohonan::all()->where('smoku_id', '=', $smoku_id->id)->first();
+
+        $kepPeperiksaan=$request->kepPeperiksaan;
+        $counter = 1; 
+
+        foreach($kepPeperiksaan as $kepPeperiksaan) {
+        
+            $filenamekepP =$kepPeperiksaan->getClientOriginalName();  
+            $uniqueFilename = $counter . '_' . $filenamekepP;
+
+            // Append increment to the filename until it's unique
+            while (file_exists('assets/dokumen/peperiksaan/' . $uniqueFilename)) {
+                $counter++;
+                $uniqueFilename = $counter . '_' . $filenamekepP;
+            }
+            $kepPeperiksaan->move('assets/dokumen/peperiksaan',$uniqueFilename);
+
             
-            $data->nokp_pelajar=$nokp;
+            $data=new peperiksaan();
+            $data->permohonan_id=$permohonan->id;
             $data->sesi=$request->sesi;
             $data->semester=$request->semester;
             $data->cgpa=$request->cgpa;
-            $data->kepPeperiksaan=$filenamekepPeperiksaan;
-
+            $data->kepPeperiksaan=$uniqueFilename;
             $data->save();
 
-        return redirect()->route('baharuimohon')->with('message', 'saveeeeeeeee.');
+            $counter++;
+        }    
+
+        return redirect()->route('kemaskini.keputusan');
     }
 
     public function tamatPengajian()

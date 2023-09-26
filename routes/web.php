@@ -55,8 +55,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('kemaskini', [PermohonanController::class, 'update'])->name('kemaskini.post');
     Route::get('sejarahpermohonan', [PermohonanController::class, 'sejarahPermohonan'])->name('permohonan.sejarah');
 	Route::get('statuspermohonan/{id}', [PermohonanController::class, 'delete'])->name('delete');
-    Route::get('baharuimohon', [PermohonanController::class, 'baharuimohon'])->name('baharuimohon');
-    Route::post('baharuimohon', [PermohonanController::class, 'save'])->name('save');
+    Route::get('kemaskini/keputusan', [PermohonanController::class, 'kemaskiniKeputusan'])->name('kemaskini.keputusan');
+    Route::post('kemaskini/keputusan', [PermohonanController::class, 'save'])->name('save');
     Route::get('lapor/tamat/pengajian', [PermohonanController::class, 'tamatPengajian'])->name('tamat.pengajian');
 
     //Permohonan - Sekretariat - Saringan

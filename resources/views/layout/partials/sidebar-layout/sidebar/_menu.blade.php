@@ -18,7 +18,7 @@
 				</div>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="{{ route('baharuimohon') }}">
+				<a class="menu-link" href="{{ route('kemaskini.keputusan') }}">
 					<span class="menu-icon">{!! getIcon('update-file', 'fs-2') !!}</span>
 					<span class="menu-title">Kemaskini Keputusan Peperiksaan</span>
 				</a>
