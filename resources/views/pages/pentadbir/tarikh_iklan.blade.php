@@ -9,12 +9,11 @@
 <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
 </head>
-		<!--begin::Page title-->
+<!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->
 	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Set Tarikh Iklan</h1>
 	<!--end::Title-->
-	
 </div>
 <br>
 <!--end::Page title-->
@@ -35,7 +34,6 @@
 								<span class="path1"></span>
 								<span class="path2"></span>
 							</i>
-							
 						</div>
 						<!--end::Search-->
 					</div>
@@ -93,8 +91,6 @@
 							<!--end::Input group-->
 						</div>
 						@endforeach
-
-						
 						<!--begin::action-->
 						<div class="modal-footer flex-center">
 							<!--begin::Button-->
@@ -120,18 +116,7 @@
 </div>
 
 <!--begin::Javascript-->
-<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 
-<script src="assets/js/scripts.bundle.js"></script>
-<!--end::Global Javascript Bundle-->
-
-<!--begin::Custom Javascript(used for this page only)-->
-<script src="assets/js/custom/apps/customers/list/export.js"></script>
-<script src="assets/js/custom/apps/customers/list/list.js"></script>
-<script src="assets/js/custom/apps/customers/add.js"></script>
-<script src="assets/js/custom/utilities/modals/new-card.js"></script>
-<script src="assets/js/custom/utilities/modals/users-search.js"></script>
-<!--end::Custom Javascript-->
 <!--end::Javascript-->
 	
 

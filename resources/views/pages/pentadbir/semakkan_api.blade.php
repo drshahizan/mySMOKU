@@ -50,7 +50,6 @@
 							<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 								<th class="min-w-100px">API</th>
 								<th class="min-w-100px">Status</th>
-								<th class="w-100px">Semak</th>
 							</tr>
 						</thead>
 						<tbody class="fw-semibold text-gray-600" >
@@ -65,16 +64,13 @@
 										<p style="color: green;">Berjaya: {{ $success }}</p>
 									@endif
 								</td>
-								<td></td>
 							</tr>
 							<tr>
 								<td class="text-gray-800">MQA</td>
 								<td></td>
-								<td></td>
 							</tr>
 							<tr>
 								<td class="text-gray-800">ESP</td>
-								<td></td>
 								<td></td>
 							</tr>
 						</tbody>
@@ -88,22 +84,10 @@
 		<!--end::Content container-->
 	</div>
 	<!--end::Content-->
-	
 </div>
 
 <!--begin::Javascript-->
-<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 
-<script src="assets/js/scripts.bundle.js"></script>
-<!--end::Global Javascript Bundle-->
-
-<!--begin::Custom Javascript(used for this page only)-->
-<script src="assets/js/custom/apps/customers/list/export.js"></script>
-<script src="assets/js/custom/apps/customers/list/list.js"></script>
-<script src="assets/js/custom/apps/customers/add.js"></script>
-<script src="assets/js/custom/utilities/modals/new-card.js"></script>
-<script src="assets/js/custom/utilities/modals/users-search.js"></script>
-<!--end::Custom Javascript-->
 <!--end::Javascript-->
 	
 
