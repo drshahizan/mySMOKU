@@ -131,27 +131,45 @@ class PentadbirController extends Controller
 
     public function save(Request $request)
     {
-        $maklumat = MaklumatKementerian::create([
-            'nama_kementerian_bm' => $request->nama_kementerian_bm,
-            'nama_kementerian_bi' => $request->nama_kementerian_bi,
-            'nama_bahagian_bm' => $request->nama_bahagian_bm,
-            'nama_bahagian_bi' => $request->nama_bahagian_bi,
-            'alamat1' => $request->alamat1,
-            'alamat2' => $request->alamat2,
-            'poskod' => $request->poskod,
-            'negeri' => $request->negeri,
-            'negara' => $request->negara,
-            'tel' => $request->tel,
-            'hotline' => $request->hotline,
-            'faks' => $request->faks,
-    
-        ]);
-        $maklumat->save();
+        $maklumat = MaklumatKementerian::first();
+
+        if ($maklumat === null) {
+            $maklumat = MaklumatKementerian::create([
+                'nama_kementerian_bm' => $request->nama_kementerian_bm,
+                'nama_kementerian_bi' => $request->nama_kementerian_bi,
+                'nama_bahagian_bm' => $request->nama_bahagian_bm,
+                'nama_bahagian_bi' => $request->nama_bahagian_bi,
+                'alamat1' => $request->alamat1,
+                'alamat2' => $request->alamat2,
+                'poskod' => $request->poskod,
+                'negeri' => $request->negeri,
+                'negara' => $request->negara,
+                'tel' => $request->tel,
+                'hotline' => $request->hotline,
+                'faks' => $request->faks,
+            ]);
+        } else {
+            $maklumat->update([
+                'nama_kementerian_bm' => $request->nama_kementerian_bm,
+                'nama_kementerian_bi' => $request->nama_kementerian_bi,
+                'nama_bahagian_bm' => $request->nama_bahagian_bm,
+                'nama_bahagian_bi' => $request->nama_bahagian_bi,
+                'alamat1' => $request->alamat1,
+                'alamat2' => $request->alamat2,
+                'poskod' => $request->poskod,
+                'negeri' => $request->negeri,
+                'negara' => $request->negara,
+                'tel' => $request->tel,
+                'hotline' => $request->hotline,
+                'faks' => $request->faks,
+            ]);
+        }
+
            
-        return view('pages.pentadbir.alamat');
+        return redirect()->route('alamat');
 
+    
     }
-
     
 
 }
