@@ -16,8 +16,8 @@
     </head>
 
     <style>
-        .nav{
-            margin-left: 10px!important;
+        body{
+            margin: 20px!important;
         }
     </style>
 
@@ -86,8 +86,6 @@
                                             @elseif ($item['status']=='2')
                                                 <td><a href="{{url('tuntutan/sekretariat/sejarah/papar-tuntutan/'.$item['id'])}}" target="_blank">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
                                             @elseif ($item['status']=='3')
-                                                <td><a href="{{url('tuntutan/sekretariat/sejarah/papar-tuntutan/'.$item['id'])}}" target="_blank">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
-                                            @elseif ($item['status']=='4')
                                                 <td><a href="{{url('tuntutan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}" target="_blank">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
                                             @elseif ($item['status']=='5')
                                                 <td><a href="{{url('tuntutan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}" target="_blank">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
