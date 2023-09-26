@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('bk_tarikh_iklan', function (Blueprint $table) {
             $table->id();
             $table->date('tarikh_mula');
+            $table->time('masa_mula');
             $table->date('tarikh_tamat');
+            $table->time('masa_tamat');
             $table->timestamps();
         });
     }

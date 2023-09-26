@@ -12,6 +12,8 @@ class TarikhIklan extends Model
 
     protected $fillable = [
         'tarikh_mula',
+        'masa_mula',
         'tarikh_tamat',
+        'masa_tamat',
     ];
 }

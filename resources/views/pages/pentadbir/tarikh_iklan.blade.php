@@ -62,10 +62,32 @@
 							<!--begin::Input group-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
+								<label class="fs-6 fw-semibold mb-2">Masa Mula</label>
+								<!--end::Label-->
+								<!--begin::Input-->
+								<input type="time" class="form-control form-control-solid" name="masa_mula" value="{{$tarikh->masa_mula}}" />
+								<!--end::Input-->
+							</div>
+							<!--end::Input group-->
+						</div>
+						<div class="row mb-10">
+							<!--begin::Input group-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
 								<label class="fs-6 fw-semibold mb-2">Tarikh Tamat</label>
 								<!--end::Label-->
 								<!--begin::Input-->
 								<input type="date" class="form-control form-control-solid" name="tarikh_tamat" value="{{$tarikh->tarikh_tamat}}" />
+								<!--end::Input-->
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold mb-2">Masa Tamat</label>
+								<!--end::Label-->
+								<!--begin::Input-->
+								<input type="time" class="form-control form-control-solid" name="masa_tamat" value="{{$tarikh->masa_tamat}}" />
 								<!--end::Input-->
 							</div>
 							<!--end::Input group-->
