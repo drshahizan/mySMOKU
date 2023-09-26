@@ -176,6 +176,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('pentadbir/api-connection', [PentadbirController::class, 'checkConnectionSmoku'])->name('smoku.api');
     Route::get('pentadbir/alamat', [PentadbirController::class, 'alamat'])->name('alamat');
     Route::post('pentadbir/alamat', [PentadbirController::class, 'save'])->name('alamat.save');
+    Route::get('pentadbir/tarikh', [PentadbirController::class, 'tarikh'])->name('tarikh');
+    Route::post('pentadbir/tarikh', [PentadbirController::class, 'simpanTarikh'])->name('simpan.tarikh');
 
     //Pegawai
     Route::get('pegawai/dashboard', [PegawaiController::class,'index'])->name('pegawai.dashboard');

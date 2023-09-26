@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\InfoIpt;
 use App\Models\MaklumatKementerian;
+use App\Models\TarikhIklan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailDaftarPengguna;
@@ -167,6 +168,36 @@ class PentadbirController extends Controller
 
            
         return redirect()->route('alamat');
+
+    
+    }
+
+    public function tarikh()
+    {
+        $tarikh = TarikhIklan::get();
+           
+        return view('pages.pentadbir.tarikh_iklan', compact('tarikh'));
+
+    }
+
+    public function simpanTarikh(Request $request)
+    {
+        $tarikh = TarikhIklan::first();
+
+        if ($tarikh === null) {
+            $tarikh = TarikhIklan::create([
+                'tarikh_mula' => $request->tarikh_mula,
+                'tarikh_tamat' => $request->tarikh_tamat,
+            ]);
+        } else {
+            $tarikh->update([
+                'tarikh_mula' => $request->tarikh_mula,
+                'tarikh_tamat' => $request->tarikh_tamat,
+            ]);
+        }
+
+           
+        return redirect()->route('tarikh');
 
     
     }
