@@ -19,6 +19,8 @@ use App\Models\Akademik;
 use App\Models\Kelulusan;
 use App\Models\Tuntutan;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
@@ -380,9 +382,48 @@ class SekretariatController extends Controller
         // Get the "permohonan" data based on $permohonanId
         $permohonan = Permohonan::where('id', $permohonanId)->first();
         $todayDate = Carbon::now()->format('d-m-Y');
-        $pdf = PDF::loadView('permohonan.sekretariat.keputusan.surat_tawaran', compact('permohonan','todayDate'));
-        return $pdf->download('SuratTawaran_'.$permohonanId.'.pdf');
+        
+        // Load the view into an HTML string
+        $html = view('permohonan.sekretariat.keputusan.surat_tawaran', compact('permohonan', 'todayDate'))->render();
+
+        // Create Dompdf options
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        
+        // Set the chroot to the public directory
+        $options->set('chroot', public_path());
+
+        // Create Dompdf instance with options
+        $pdf = new Dompdf($options);
+
+        // Load HTML into Dompdf
+        $pdf->loadHtml($html);
+
+        // Set paper size and orientation
+        $pdf->setPaper('A4', 'portrait');
+
+        // Render the PDF
+        $pdf->render();
+
+        // Get the total number of pages
+        $totalPages = $pdf->getCanvas()->get_page_count();
+
+        // Add page numbers using CSS
+        $pdf->getCanvas()->page_text(275, 800, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
+
+        // Stream the PDF
+        return $pdf->stream('SuratTawaran_'.$permohonanId.'.pdf');
     }
+
+    // public function muatTurunSuratTawaran($permohonanId)
+    // {
+    //     // Get the "permohonan" data based on $permohonanId
+    //     $permohonan = Permohonan::where('id', $permohonanId)->first();
+    //     $todayDate = Carbon::now()->format('d-m-Y');
+    //     $pdf = PDF::loadView('permohonan.sekretariat.keputusan.surat_tawaran', compact('permohonan','todayDate'));
+    //     return $pdf->download('SuratTawaran_'.$permohonanId.'.pdf');
+    // }
 
 
     //TUNTUTAN
