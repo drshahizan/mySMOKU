@@ -6,39 +6,118 @@
             } 
         
             body {
-                margin: 0.5cm;
+                margin: 0.3cm;
                 font-size:14px;
                 font-family: Arial, sans-serif;
                 line-height: 1.15;
-                background-image:url('logoKPT.png'); 
+                /* background-image:url('logoKPT.png');  */
                 background-size: 450px 300px; 
                 background-position:center; 
                 background-repeat: no-repeat; 
                 background-attachment: fixed; 
             }
 
-            .container{
-                position: relative;
+            .parentSpace{
+                width: 100%;
+                display:inherit;
             }
+            .left {
+                float: left;
+                width: 60%;
+            }
+            .right {
+                float: right;
+                width: 20%;
+            }
+
+            /* .contact-info {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            } */
         </style>        
     </head>
 
     <body>
-        <div class="container">
-            <div class="image">
-                <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="height: 100px; width: 150px; padding-top:5px; float: left;">
+        <div class="parentSpace">
+            <div class="left">
+                <div class="logo" style="margin-top:10px; float: left;">
+                    <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="height: 100px; width: 150px;">
+                </div>
+
+                <div class="address" style="padding-left: 150px; font-size: 12px; margin-top:0%;">
+                    <b>KEMENTERIAN PENDIDIKAN TINGGI</b>
+                    <br>MINISTRY OF HIGHER EDUCATION
+                    <br>
+                    <br>Bahagian Biasiswa
+                    <br>Scholarship Division
+                    <br>Aras 2, No.2, Menara 2,
+                    <br>Jalan P5/6, Presint 5
+                    <br>62200 Putrajaya
+                    <br>Malaysia
+                </div>
             </div>
-            <div class="tittle" style="padding-left: 160px; font-size: 11px;"><b>KEMENTERIAN PENDIDIKAN TINGGI</b>
-                <br>MINISTRY OF HIGHER EDUCATION
-                <br>
-                <br>Bahagian Biasiswa
-                <br>Scholarship Division
-                <br>Aras 2, No.2, Menara 2,
-                <br>Jalan P5/6, Presint 5
-                <br>62200 Putrajaya
-                <br>Malaysia
+
+            <div class="right" style="font-size: 11px; margin-top:75px;">
+                <table>
+                    <tr>
+                        <td>Tel</td>
+                        <td>:</td>
+                        <td>603-8870 9000</td>
+                    </tr>
+                    <tr>
+                        <td>Hotline</td>
+                        <td>:</td>
+                        <td>603-8888 1616</td>
+                    </tr>
+                    <tr>
+                        <td>Faks</td>
+                        <td>:</td>
+                        <td>603-8870 6839</td>
+                    </tr>
+                </table>
             </div>
+        </div>
+
+            {{-- <div class="row">
+                <div class="image">
+                    <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="height: 100px; width: 150px; padding-top:5px; float: left;">
+                </div>
+                <div class="address" style="padding-left: 160px; font-size: 11px;"><b>KEMENTERIAN PENDIDIKAN TINGGI</b>
+                    <br>MINISTRY OF HIGHER EDUCATION
+                    <br>
+                    <br>Bahagian Biasiswa
+                    <br>Scholarship Division
+                    <br>Aras 2, No.2, Menara 2,
+                    <br>Jalan P5/6, Presint 5
+                    <br>62200 Putrajaya
+                    <br>Malaysia
+
+                    <div class="contact-info" style="float: right;">
+                        <table>
+                            <tr>
+                                <td>Tel</td>
+                                <td>:</td>
+                                <td>603-8870 9000</td>
+                            </tr>
+                            <tr>
+                                <td>Hotline</td>
+                                <td>:</td>
+                                <td>603-8888 1616</td>
+                            </tr>
+                            <tr>
+                                <td>Faks</td>
+                                <td>:</td>
+                                <td>603-8870 6839</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div> --}}
+           
+            <br><br><br><br><br><br><br><br>
             <hr>
+
             <p>
                 <span style="float: right">
                     Rujukan Kami : KPT - 000101140417<br>
@@ -139,6 +218,5 @@
                 Bahagian Hal Ehwal Pelajar<br>
                 UNIVERSITI TEKNOLOGI MARA, SHAH ALAM
             </p>
-        </div>
     </body>
 </html>
