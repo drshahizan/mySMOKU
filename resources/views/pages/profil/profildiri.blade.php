@@ -13,14 +13,14 @@
         <div class="card-body pt-0 pb-5">
             <!--begin::Form-->
             <!-- <form class="form" action="#" id="kt_ecommerce_customer_profile"> -->
-            <form action="{{route('profildiri.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('simpan.profil')}}" method="POST" enctype="multipart/form-data">
                 <!--begin::Input group-->
                 @csrf
                 <div class="mb-7">
                     <!--begin::Label-->
                     <label class="fs-6 fw-semibold mb-2">
-                        <span>Update Avatar</span>
-                        <span class="ms-1" data-bs-toggle="tooltip" title="Allowed file types: png, jpg, jpeg.">
+                        <span>Gambar Profil</span>
+                        <span class="ms-1" data-bs-toggle="tooltip" title="Jenis fail yang dibenarkan: png, jpg, jpeg.">
                             <i class="ki-duotone ki-information fs-7">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
@@ -41,22 +41,19 @@
                             <div class="image-input-wrapper w-125px h-125px" style="background-image: url('assets/profile_photo_path/{{$user->profile_photo_path}}')"></div>
                             <!--end::Preview existing avatar-->
                             <!--begin::Edit-->
-                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Kemaskini gambar">
                                 <i class="ki-duotone ki-pencil fs-7">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
-                                <!--begin::Inputs-->
-                                <!-- <form action="{{route('profildiri.store')}}" method="POST" enctype="multipart/form-data"> -->
-                                    
+                                <!--begin::Inputs-->                                    
                                 <input type="file" name="profile_photo_path" accept=".png, .jpg, .jpeg" />
                                 <input type="hidden" name="avatar_remove" />
-                                <!-- </form> -->
                                 <!--end::Inputs-->
                             </label>
                             <!--end::Edit-->
                             <!--begin::Cancel-->
-                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Batal gambar">
                                 <i class="ki-duotone ki-cross fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -64,7 +61,7 @@
                             </span>
                             <!--end::Cancel-->
                             <!--begin::Remove-->
-                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Padam gambar">
                                 <i class="ki-duotone ki-cross fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -97,7 +94,7 @@
                             <!--begin::Label-->
                             <label class="fs-6 fw-semibold mb-2">
                                 <span class="required">Emel</span>
-                                <span class="ms-1" data-bs-toggle="tooltip" title="Email address must be active">
+                                <span class="ms-1" data-bs-toggle="tooltip" title="Alamat emel mesti aktif.">
                                     <i class="ki-duotone ki-information fs-7">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -119,8 +116,8 @@
                 <div class="d-flex justify-content-end">
                     <!--begin::Button-->
                     <button type="submit" id="kt_ecommerce_customer_profile_submit" class="btn btn-light-primary">
-                        <span class="indicator-label">Save</span>
-                        <span class="indicator-progress">Please wait...
+                        <span class="indicator-label">Simpan</span>
+                        <span class="indicator-progress">Sila tunggu...
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                     </button>
                     <!--end::Button-->
