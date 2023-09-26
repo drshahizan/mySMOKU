@@ -387,14 +387,35 @@
 										<!--end::Input-->
 									</div>
 									<!--end::Input group-->
+									<!--begin::Input group-->
+									<div class="fv-row mb-7" id="div_id_institusippk">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold mb-2">Nama Pusat Pengajian</label>
+										<!--end::Label-->
+										<!--begin::Input-->
+										<select name="id_institusi" id="id_institusippk"  class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
+											@foreach ($infoppk as $infoppk)
+												<option></option>
+												<option value="{{ $infoppk->id_institusi}}">{{ $infoppk->nama_institusi}}</option>
+											@endforeach
+										</select>
+										<!--end::Input-->
+									</div>
+									<!--end::Input group-->
 									<script>
 										$(document).ready(function(){
 											$('#pilihtahap').on('change', function() {
 											if ( this.value == '2'){
 												$("#div_id_institusi").show();
+												$("#div_id_institusippk").hide();
+											} else if (this.value == '6'){
+												$("#div_id_institusi").hide();
+												$("#div_id_institusippk").show();
+
 											}
 											else {
 												$("#div_id_institusi").hide();
+												$("#div_id_institusippk").hide();
 											}
 											});
 										});
