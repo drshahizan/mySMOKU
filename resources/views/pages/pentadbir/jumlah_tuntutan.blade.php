@@ -78,7 +78,7 @@
 						</div>
 						<div class="row mb-10">
 							<!--begin::Input group-->
-							<div class="col-md-6 fv-row">
+							<div class="col-md-6 fv-row" id="div_semester">
 								<!--begin::Label-->
 								<label class="fs-6 fw-semibold mb-2">Semester</label>
 								<!--end::Label-->
@@ -190,6 +190,17 @@
         });
 
     });
+
+
+	$(document).ready(function(){
+	$('#program').on('change', function() {
+	if ( this.value == 'PPK'){
+		$("#div_semester").show();
+	} else {
+		$("#div_semester").hide();
+	}
+	});
+});
 </script>
 
 
