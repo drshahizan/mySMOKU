@@ -254,7 +254,7 @@
 																	<!--begin::Input-->
 																	<select name="status" id="status" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
 																		<option value="1" {{$user->status == 1  ? 'selected' : ''}}>AKTIF</option>
-																		<option value="2" {{$user->status == 0  ? 'selected' : ''}}>TIDAK AKTIF</option>
+																		<option value="0" {{$user->status == 0  ? 'selected' : ''}}>TIDAK AKTIF</option>
 																	</select>
 																	<!--end::Input-->
 																</div>

@@ -227,14 +227,14 @@ class PentadbirController extends Controller
             'semester' => $request->semester,
             'jumlah' => $request->jumlah,
         ]);
-    } else {
-        $jumlah->update([
-            'program' => $request->program,
-            'jenis' => $request->jenis,
-            'semester' => $request->semester,
-            'jumlah' => $request->jumlah,
-        ]);
-    }
+        } else {
+            $jumlah->update([
+                'program' => $request->program,
+                'jenis' => $request->jenis,
+                'semester' => $request->semester,
+                'jumlah' => $request->jumlah,
+            ]);
+        }
         
         return redirect()->route('jumlah.tuntutan');
     

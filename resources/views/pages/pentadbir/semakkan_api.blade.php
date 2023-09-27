@@ -57,7 +57,7 @@
 								<td class="text-gray-800">SMOKU</td>
 								<td> 
 									@if(isset($error))
-										<p style="color: red;">Ralat: {{ $error }}</p>
+										<p style="color: red;"> {{ $error }}</p>
 									@endif
 						
 									@if(isset($success))
