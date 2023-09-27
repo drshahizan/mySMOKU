@@ -76,16 +76,18 @@ class PentadbirController extends Controller
         ]);
         }
 
-        
-        
-
         $user->save();
 
-        $email = $request->email;
-        $no_kp = $request->no_kp;
+        if($request->status == 1){
 
-        Mail::to($email)->send(new mailDaftarPengguna($email,$no_kp));
-        return redirect()->route('daftarpengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' .$request->nama);
+            $email = $request->email;
+            $no_kp = $request->no_kp;
+            Mail::to($email)->send(new mailDaftarPengguna($email,$no_kp));
+            return redirect()->route('daftarpengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' .$request->nama);
+        }
+
+        
+        return redirect()->route('daftarpengguna');
 
 
     }
