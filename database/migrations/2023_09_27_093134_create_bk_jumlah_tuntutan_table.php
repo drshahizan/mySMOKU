@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bk_tarikh_iklan', function (Blueprint $table) {
+        Schema::create('bk_jumlah_tuntutan', function (Blueprint $table) {
             $table->id();
-            $table->date('tarikh_mula');
-            $table->time('masa_mula');
-            $table->date('tarikh_tamat');
-            $table->time('masa_tamat');
-            $table->string('catatan')->nullable();
+            $table->string('program');
+            $table->time('jumlah');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bk_tarikh_iklan');
+        Schema::dropIfExists('bk_jumlah_tuntutan');
     }
 };

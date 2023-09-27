@@ -45,7 +45,7 @@
 					<!--begin::Form-->
 					<form class="form" action="{{ route('simpan.tarikh') }}" method="post">
 						@csrf
-						@foreach ($tarikh as $tarikh)
+						
 						<div class="row mb-10">
 							<!--begin::Input group-->
 							<div class="col-md-6 fv-row">
@@ -53,7 +53,7 @@
 								<label class="fs-6 fw-semibold mb-2">Tarikh Mula</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="date" class="form-control form-control-solid" name="tarikh_mula" value="{{$tarikh->tarikh_mula}}" />
+								<input type="date" class="form-control form-control-solid" name="tarikh_mula" value="" />
 								<!--end::Input-->
 							</div>
 							<!--end::Input group-->
@@ -63,7 +63,7 @@
 								<label class="fs-6 fw-semibold mb-2">Masa Mula</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="time" class="form-control form-control-solid" name="masa_mula" value="{{$tarikh->masa_mula}}" />
+								<input type="time" class="form-control form-control-solid" name="masa_mula" value="" />
 								<!--end::Input-->
 							</div>
 							<!--end::Input group-->
@@ -75,7 +75,7 @@
 								<label class="fs-6 fw-semibold mb-2">Tarikh Tamat</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="date" class="form-control form-control-solid" name="tarikh_tamat" value="{{$tarikh->tarikh_tamat}}" />
+								<input type="date" class="form-control form-control-solid" name="tarikh_tamat" value="" />
 								<!--end::Input-->
 							</div>
 							<!--end::Input group-->
@@ -85,12 +85,23 @@
 								<label class="fs-6 fw-semibold mb-2">Masa Tamat</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="time" class="form-control form-control-solid" name="masa_tamat" value="{{$tarikh->masa_tamat}}" />
+								<input type="time" class="form-control form-control-solid" name="masa_tamat" value="" />
 								<!--end::Input-->
 							</div>
 							<!--end::Input group-->
 						</div>
-						@endforeach
+						<!--begin::Input group-->
+						<div class="col-md-6 fv-row">
+							<!--begin::Label-->
+							<label class="fs-6 fw-semibold mb-2">Catatan</label>
+							<!--end::Label-->
+							<!--begin::Input-->
+							<input type="text" class="form-control form-control-solid" name="catatan" value="" />
+							<!--end::Input-->
+						</div>
+						<!--end::Input group-->
+						
+						<br>
 						<!--begin::action-->
 						<div class="modal-footer flex-center">
 							<!--begin::Button-->
@@ -104,6 +115,34 @@
 						<!--end::action-->
 					</form>
 					<!--end::Form-->
+				</div>
+				<!--end::Card body-->
+				<!--begin::Card body-->
+				<div class="card-body pt-0">
+					<!--begin::Table-->
+					<div class="table-responsive">
+						<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+							<thead>
+								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+									<th class="min-w-125px">Tarikh Mula</th>
+									<th class="min-w-125px">Tarikh Tamat</th>
+									<th class="min-w-125px">Catatan</th>
+									
+								</tr>
+							</thead>
+							<tbody class="fw-semibold text-gray-600">
+								@foreach ($tarikh as $tarikh)
+								<tr>
+									<td>{{ $tarikh->tarikh_mula}}</td>
+									<td>{{ $tarikh->tarikh_tamat}}</td>
+									<td>{{ $tarikh->catatan}}</td>
+	
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+					<!--end::Table-->
 				</div>
 				<!--end::Card body-->
 			</div>

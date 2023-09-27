@@ -189,21 +189,15 @@ class PentadbirController extends Controller
     {
         $tarikh = TarikhIklan::first();
 
-        if ($tarikh === null) {
+        
             $tarikh = TarikhIklan::create([
                 'tarikh_mula' => $request->tarikh_mula,
                 'masa_mula' => $request->masa_mula,
                 'tarikh_tamat' => $request->tarikh_tamat,
                 'masa_tamat' => $request->masa_tamat,
+                'catatan' => $request->catatan,
             ]);
-        } else {
-            $tarikh->update([
-                'tarikh_mula' => $request->tarikh_mula,
-                'masa_mula' => $request->masa_mula,
-                'tarikh_tamat' => $request->tarikh_tamat,
-                'masa_tamat' => $request->masa_tamat,
-            ]);
-        }
+        
 
            
         return redirect()->route('tarikh');

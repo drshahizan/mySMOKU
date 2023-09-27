@@ -15,5 +15,6 @@ class TarikhIklan extends Model
         'masa_mula',
         'tarikh_tamat',
         'masa_tamat',
+        'catatan',
     ];
 }
