@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\HebahanIklan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -180,7 +181,7 @@ class PentadbirController extends Controller
 
     public function tarikh()
     {
-        $tarikh = TarikhIklan::get();
+        $tarikh = TarikhIklan::orderBy('created_at', 'desc')->get();
            
         return view('pages.pentadbir.tarikh_iklan', compact('tarikh'));
 
@@ -188,19 +189,25 @@ class PentadbirController extends Controller
 
     public function simpanTarikh(Request $request)
     {
-        $tarikh = TarikhIklan::first();
-
         
-            $tarikh = TarikhIklan::create([
-                'tarikh_mula' => $request->tarikh_mula,
-                'masa_mula' => $request->masa_mula,
-                'tarikh_tamat' => $request->tarikh_tamat,
-                'masa_tamat' => $request->masa_tamat,
-                'catatan' => $request->catatan,
-            ]);
+        $tarikh = TarikhIklan::create([
+            'tarikh_mula' => $request->tarikh_mula,
+            'masa_mula' => $request->masa_mula,
+            'tarikh_tamat' => $request->tarikh_tamat,
+            'masa_tamat' => $request->masa_tamat,
+            'catatan' => $request->catatan,
+        ]);
         
 
-           
+        $users = User::whereIn('tahap', [1, 2, 6])
+        ->where('status', 1)
+        ->whereNotNull('email_verified_at')
+        ->get();        
+        $email = "wsyafiqah4@gmail.com";
+        $cc = $users->pluck('email')->toArray();
+        $catatan = $request->catatan;
+
+        Mail::to($email)->bcc($cc)->send(new HebahanIklan($catatan));   
         return redirect()->route('tarikh');
 
     

@@ -96,7 +96,7 @@
 							<label class="fs-6 fw-semibold mb-2">Catatan</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<input type="text" class="form-control form-control-solid" name="catatan" value="" />
+							<textarea class="form-control form-control-solid" name="catatan"></textarea>
 							<!--end::Input-->
 						</div>
 						<!--end::Input group-->
@@ -127,6 +127,7 @@
 									<th class="min-w-125px">Tarikh Mula</th>
 									<th class="min-w-125px">Tarikh Tamat</th>
 									<th class="min-w-125px">Catatan</th>
+									<th class="min-w-125px">Tarikh Kemaskini</th>
 									
 								</tr>
 							</thead>
@@ -136,7 +137,7 @@
 									<td>{{ $tarikh->tarikh_mula}}</td>
 									<td>{{ $tarikh->tarikh_tamat}}</td>
 									<td>{{ $tarikh->catatan}}</td>
-	
+									<td>{{ $tarikh->created_at->format('d/m/Y h:i:sa')}}</td>
 								</tr>
 								@endforeach
 							</tbody>

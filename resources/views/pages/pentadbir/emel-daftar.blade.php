@@ -4,7 +4,7 @@
     <title>BKOKU: Daftar Pengguna Sistem</title>
 </head>
 <body>
-    <h3>SitemBKOKU: Pengaktifan Akaun Sistem BKOKU dan PPK</h3>
+    <h3>SistemBKOKU: Pengaktifan Akaun Sistem BKOKU dan PPK</h3>
     <p>Assalammualaikum W.R.T & Salam Sejahtera.</p>
     <br>
     <p>Adalah dimaklumkan bahawa pendaftaran akaun anda telah diterima.</p>
