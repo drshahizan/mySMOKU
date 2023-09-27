@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('bk_jumlah_tuntutan', function (Blueprint $table) {
             $table->id();
             $table->string('program');
-            $table->time('jumlah');
+            $table->string('jenis');
+            $table->string('semester')->nullable();
+            $table->string('jumlah');
             $table->timestamps();
         });
     }

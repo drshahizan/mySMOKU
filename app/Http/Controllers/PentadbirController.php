@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\InfoIpt;
 use App\Models\MaklumatKementerian;
 use App\Models\TarikhIklan;
+use App\Models\JumlahTuntutan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailDaftarPengguna;
@@ -202,6 +203,40 @@ class PentadbirController extends Controller
            
         return redirect()->route('tarikh');
 
+    
+    }
+
+    public function jumlahTuntutan()
+    {
+        $jumlah = JumlahTuntutan::get();
+           
+        return view('pages.pentadbir.jumlah_tuntutan', compact('jumlah'));
+
+    }
+
+    public function simpanJumlah(Request $request)
+    {
+        $jumlah = JumlahTuntutan::where('program', $request->program)
+        ->where('jenis', $request->jenis)
+        ->where('semester', $request->semester)
+        ->first();
+        if ($jumlah === null) {
+        $jumlah = JumlahTuntutan::create([
+            'program' => $request->program,
+            'jenis' => $request->jenis,
+            'semester' => $request->semester,
+            'jumlah' => $request->jumlah,
+        ]);
+    } else {
+        $jumlah->update([
+            'program' => $request->program,
+            'jenis' => $request->jenis,
+            'semester' => $request->semester,
+            'jumlah' => $request->jumlah,
+        ]);
+    }
+        
+        return redirect()->route('jumlah.tuntutan');
     
     }
     

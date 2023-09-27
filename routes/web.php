@@ -179,6 +179,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('pentadbir/alamat', [PentadbirController::class, 'save'])->name('alamat.save');
     Route::get('pentadbir/tarikh', [PentadbirController::class, 'tarikh'])->name('tarikh');
     Route::post('pentadbir/tarikh', [PentadbirController::class, 'simpanTarikh'])->name('simpan.tarikh');
+    Route::get('pentadbir/jumlah-tuntutan', [PentadbirController::class, 'jumlahTuntutan'])->name('jumlah.tuntutan');
+    Route::post('pentadbir/jumlah-tuntutan', [PentadbirController::class, 'simpanJumlah'])->name('simpan.jumlah');
 
     //Pegawai
     Route::get('pegawai/dashboard', [PegawaiController::class,'index'])->name('pegawai.dashboard');

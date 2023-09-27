@@ -296,6 +296,12 @@
 								<span class="menu-title">Set Tarikh Iklan</span>
 						</a>
 					</div>
+					<div class="menu-item">
+						<a class="menu-link" href="{{url('pentadbir/jumlah-tuntutan')}}">
+								<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
+								<span class="menu-title">Set Jumlah Tuntutan</span>
+						</a>
+					</div>
 
 
 				</div>
