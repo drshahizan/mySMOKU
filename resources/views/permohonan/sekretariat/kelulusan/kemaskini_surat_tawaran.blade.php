@@ -19,6 +19,12 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9">
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+        <style>
+            table, tr, td{
+                border: none !important;
+            }
+        </style>
     </head>
 
     <!--begin::Page title-->
@@ -37,7 +43,15 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Kelulusan</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Kemaskini</li>
+            <!--end::Item-->
+            <!--begin::Item-->
+            <li class="breadcrumb-item">
+                <span class="bullet bg-gray-400 w-5px h-2px"></span>
+            </li>
+            <!--end::Item-->
+            <!--begin::Item-->
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Surat Tawaran</li>
             <!--end::Item-->
         </ul>
     <!--end::Breadcrumb-->
@@ -53,13 +67,77 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Permohonan untuk Kelulusan JKKBKOKU<br><small>Klik ID Permohonan untuk meluluskan permohonan</small></h2>
-                                <ul class="header-dropdown dropdown" style="color: black;">
-                                    <li><a href="{{ route('senarai.disokong.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> PDF</a></li>
-                                    <li><a href="{{ route('senarai.disokong.excel') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-excel" style="color: black;"></i> Excel</a></li>
-                                </ul>
+                                <h2>Surat Tawaran<br><small>Kemaskini maklumat dalam surat tawaran untuk dihantarkan kepada pemohon.</small></h2>
                             </div>
 
+                            <div class="card-body" style="padding: 0px 10px 20px 10px;">
+                                <form action="{{ route('save') }}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <table>
+                                        <tr>
+                                            <td><b>Nama</b></td>
+                                            <td><b>:</b></td>
+                                            <td>SOFEA AINA BINTI MUHAMMAD AMIR</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>No. Kad Pengenalan</b></td>
+                                            <td><b>:</b></td>
+                                            <td>950623031212</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Alamat</b></td>
+                                            <td><b>:</b></td>
+                                            <td>B 8/5/4 KUARTERS PDRM FLAT PADANG, HILIRAN 21100 KUALA TERENGGANU,TERENGGANU</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>No. Rujukan</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="noRujukan" name="noRujukan" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Tajuk</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="noRujukan" name="noRujukan" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Isi Kandungan 1</b></td>
+                                            <td><b>:</b></td>
+                                            <td><textarea name="kandungan1" id="kandungan1" cols="120" rows="5"></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Isi Kandungan 2</b></td>
+                                            <td><b>:</b></td>
+                                            <td><textarea name="kandungan2" id="kandungan2" cols="120" rows="5"></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Isi Kandungan 3</b></td>
+                                            <td><b>:</b></td>
+                                            <td><textarea name="kandungan3" id="kandungan3" cols="120" rows="5"></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Penutup 1</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="penutup1" name="penutup1" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Penutup 2</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="penutup2" name="penutup2" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Penutup 3</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="penutup3" name="penutup3" style="width: 100%"></td>
+                                        </tr>
+                                    </table>
+
+                                    <div class="d-flex flex-center mt-5">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            Hantar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
