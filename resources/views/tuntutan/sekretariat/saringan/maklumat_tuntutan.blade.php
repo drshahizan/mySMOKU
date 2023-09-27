@@ -266,17 +266,26 @@
                                     <br>
                                     <!--begin: Invoice body-->
                                     {{csrf_field()}}
-                                    @if($permohonan->program == "BKOKU" && $permohonan->yuran == "1" && $permohonan->wang_saku == "1")
+                                    inp
+                                    @if($permohonan->program == "BKOKU" && $tuntutan->yuran == "1" && $tuntutan->wang_saku == "1")
                                         <!--begin: Invoice body-->
                                         @php
-                                            if($permohonan->amaun_yuran == null){
-                                                $permohonan->amaun_yuran = 0;
+                                            $yuran = 0;
+                                            foreach ($tuntutan_item as $item){
+                                                if($item['amaun'] == null){
+                                                    $item['amaun'] = 0;
+                                                    $yuran = $yuran + $item['amaun'];
+                                                }
+                                                else{
+                                                    $yuran = $yuran + $item['amaun'];
+                                                }
                                             }
-                                            if($permohonan->amaun_wang_saku == null){
-                                                $permohonan->amaun_wang_saku = 0;
+
+                                            if($tuntutan->amaun_wang_saku == null){
+                                                $tuntutan->amaun_wang_saku = 0;
                                             }
-                                            $jumlah = $permohonan->amaun_yuran + $permohonan->amaun_wang_saku;
-                                            $baki_y = 5000 - $jumlah;
+                                            $jumlah = $yuran + $tuntutan->amaun_wang_saku;
+                                            $baki_y = $tuntutan->baki - $jumlah;
                                         @endphp
                                         <div class="table-responsive">
                                             <table class="table">
@@ -294,20 +303,20 @@
                                                 <tbody>
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($yuran, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong" value="{{number_format($yuran, 2, '.', '')}}"></td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong">{{number_format($baki_y, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($yuran, 2, '.', '')}}"></td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar">{{number_format($baki_y, 2)}}</td>
                                                 </tr>
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_wang_saku, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_disokong">{{number_format(0, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_dibayar">{{number_format(0, 2)}}</td>
                                                 </tr>
                                                 </tbody>
@@ -352,7 +361,7 @@
                                             function SokongY(){
                                                 var yuran = document.getElementById('yuran_disokong').value;
                                                 var w_saku = document.getElementById('w_saku_disokong').value;
-                                                var baki = 5000 - yuran - w_saku;
+                                                var baki = $tuntutan->baki - yuran - w_saku;
                                                 var jumlah = parseFloat(w_saku) + parseFloat(yuran);
                                                 baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                                                     minimumFractionDigits: 2
@@ -363,7 +372,7 @@
                                             function BayarY(){
                                                 var yuran = document.getElementById('yuran_dibayar').value;
                                                 var w_saku = document.getElementById('w_saku_dibayar').value;
-                                                var baki = 5000 - yuran - w_saku;
+                                                var baki = $tuntutan->baki - yuran - w_saku;
                                                 var jumlah = parseFloat(yuran) + parseFloat(w_saku);
                                                 baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                                                     minimumFractionDigits: 2
@@ -372,12 +381,12 @@
                                                 document.getElementById('jumlah_dibayar').value= parseFloat(jumlah).toFixed(2);
                                             }
                                         </script>
-                                    @elseif($permohonan->program == "BKOKU" && $permohonan->yuran == NULL)
+                                    @elseif($permohonan->program == "BKOKU" && $tuntutan->yuran == NULL)
                                         @php
-                                            if($permohonan->amaun_wang_saku == null){
-                                                $permohonan->amaun_wang_saku = 0;
+                                            if($tuntutan->amaun_wang_saku == null){
+                                                $tuntutan->amaun_wang_saku = 0;
                                             }
-                                            $jumlah = $permohonan->amaun_wang_saku;
+                                            $jumlah = $tuntutan->amaun_wang_saku;
                                         @endphp
                                         <div class="table-responsive">
                                             <table class="table">
@@ -392,9 +401,9 @@
                                                 <tbody>
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong_2" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar_2" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_wang_saku, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong_2" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar_2" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -444,13 +453,20 @@
                                                 document.getElementById('jumlah_dibayar_2').value= parseFloat(w_saku).toFixed(2);
                                             }
                                         </script>
-                                    @elseif($permohonan->program == "BKOKU" && $permohonan->wang_saku == NULL)
+                                    @elseif($permohonan->program == "BKOKU" && $tuntutan->wang_saku == NULL)
                                         @php
-                                            if($permohonan->amaun_wang_saku == null){
-                                                $permohonan->amaun_wang_saku = 0;
+                                            $yuran = 0;
+                                            foreach ($tuntutan_item as $item){
+                                                if($item['amaun'] == null){
+                                                    $item['amaun'] = 0;
+                                                    $yuran = $yuran + $item['amaun'];
+                                                }
+                                                else{
+                                                    $yuran = $yuran + $item['amaun'];
+                                                }
                                             }
-                                            $jumlah = $permohonan->amaun_yuran;
-                                            $baki_y = 5000 - $jumlah;
+                                            $jumlah = $yuran;
+                                            $baki_y = $tuntutan->baki - $jumlah;
                                         @endphp
                                         <div class="table-responsive">
                                             <table class="table">
@@ -468,11 +484,11 @@
                                                 <tbody>
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($yuran, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong_3" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong_3" value="{{number_format($yuran, 2, '.', '')}}"></td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong_3">{{number_format($baki_y, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar_3" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar_3" value="{{number_format($yuran, 2, '.', '')}}"></td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar_3">{{number_format($baki_y, 2)}}</td>
                                                 </tr>
                                                 </tbody>
@@ -514,7 +530,7 @@
                                             document.getElementById("yuran_dibayar_3").addEventListener("input", BayarY);
                                             function SokongY(){
                                                 var yuran = document.getElementById('yuran_disokong_3').value;
-                                                var baki = 5000 - yuran;
+                                                var baki = $tuntutan->baki - yuran;
                                                 var jumlah = parseFloat(yuran);
                                                 baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                                                     minimumFractionDigits: 2
@@ -524,7 +540,7 @@
                                             }
                                             function BayarY(){
                                                 var yuran = document.getElementById('yuran_dibayar_3').value;
-                                                var baki = 5000 - yuran;
+                                                var baki = $tuntutan->baki - yuran;
                                                 var jumlah = parseFloat(yuran);
                                                 baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                                                     minimumFractionDigits: 2
@@ -535,10 +551,10 @@
                                         </script>
                                     @elseif($permohonan->program == "PPK")
                                         @php
-                                            if($permohonan->amaun_wang_saku == null){
-                                                $permohonan->amaun_wang_saku = 0;
+                                            if($tuntutan->amaun_wang_saku == null){
+                                                $tuntutan->amaun_wang_saku = 0;
                                             }
-                                            $jumlah = $permohonan->amaun_wang_saku;
+                                            $jumlah = $tuntutan->amaun_wang_saku;
                                         @endphp
                                         <div class="table-responsive">
                                             <table class="table">
@@ -553,9 +569,9 @@
                                                 <tbody>
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong_ppk" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar_ppk" value="{{number_format($permohonan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_wang_saku, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong_ppk" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar_ppk" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
