@@ -266,7 +266,7 @@
                                     <br>
                                     <!--begin: Invoice body-->
                                     {{csrf_field()}}
-                                    inp
+                                    <input type="hidden" value="{{$tuntutan->baki}}">
                                     @if($permohonan->program == "BKOKU" && $tuntutan->yuran == "1" && $tuntutan->wang_saku == "1")
                                         <!--begin: Invoice body-->
                                         @php
