@@ -65,7 +65,7 @@
 					<div class="table-responsive">
 						<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
 							<thead>
-								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+								<tr class="text-start text-gray-400 fw-bold fs-7 gs-0">
 									<th class="min-w-125px">Nama</th>
 									<th class="min-w-125px">No. Kad Pengenalan</th>
 									<th class="min-w-125px">Emel</th>
@@ -111,16 +111,11 @@
 										<div class="d-flex">
 											<!--begin::Edit-->
 											<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card{{$user->no_kp}}">
-												<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit">
+												<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
 													<i class="ki-duotone bi bi-pencil fs-3"></i>
 												</span>
 											</a>
 											<!--end::Edit-->
-											<!--begin::Delete-->
-											<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Delete" data-kt-customer-payment-method="delete">
-												<i class="ki-duotone bi bi-trash fs-3"></i>
-											</a>
-											<!--end::Delete-->
 										</div>
 										<!--end::Toolbar-->
 										

@@ -47,7 +47,7 @@
 					<!--begin::Table-->
 					<table class="table table-row-dashed fs-6 gy-5">
 						<thead>
-							<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+							<tr class="text-start text-gray-400 fw-bold fs-7 gs-0">
 								<th class="min-w-100px">API</th>
 								<th class="min-w-100px">Status</th>
 							</tr>
