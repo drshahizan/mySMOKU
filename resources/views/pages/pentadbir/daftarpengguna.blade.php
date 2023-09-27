@@ -17,11 +17,6 @@
 	
 </div>
 <!--end::Page title-->
-<br>
-@if (session('message'))
-	<div class="alert alert-success" style="color:black; text-align: center;">{{ session('message') }}</div>
-@endif
-
 <div class="table-responsive">
 	<!--begin::Content-->
 	<div id="kt_app_content" class="app-content flex-column-fluid">
@@ -485,7 +480,18 @@
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 	
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        // Check if there is a flash message
+        @if(session('message'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berjaya!',
+                text: ' {!! session('message') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+    </script>
 
 
 
