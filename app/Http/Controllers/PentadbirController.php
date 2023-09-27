@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailDaftarPengguna;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 
 class PentadbirController extends Controller
@@ -198,16 +199,32 @@ class PentadbirController extends Controller
             'catatan' => $request->catatan,
         ]);
         
-
+        $catatan = $request->catatan;
         $users = User::whereIn('tahap', [1, 2, 6])
         ->where('status', 1)
         ->whereNotNull('email_verified_at')
         ->get();        
         $email = "wsyafiqah4@gmail.com";
-        $cc = $users->pluck('email')->toArray();
-        $catatan = $request->catatan;
+        $bcc = $users->pluck('email')->toArray();
+        // Validate each email address
+        $invalidEmails = [];
+        foreach ($bcc as $bcc) {
+            if (!filter_var($bcc, FILTER_VALIDATE_EMAIL)) {
+                $invalidEmails[] = $bcc;
+            }
+        }
+        if (empty($invalidEmails)) {
+            Mail::to($email)->bcc($bcc)->send(new HebahanIklan($catatan)); 
+        } else {
+            foreach ($invalidEmails as $invalidEmail) {
+                 Log::error('Invalid email address: ' . $invalidEmail);
+            }
+        }
 
-        Mail::to($email)->bcc($cc)->send(new HebahanIklan($catatan));   
+
+        
+
+          
         return redirect()->route('tarikh');
 
     
