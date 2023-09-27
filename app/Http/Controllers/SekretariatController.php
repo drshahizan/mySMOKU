@@ -410,7 +410,7 @@ class SekretariatController extends Controller
         $totalPages = $pdf->getCanvas()->get_page_count();
 
         // Add page numbers using CSS
-        $pdf->getCanvas()->page_text(275, 800, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
+        $pdf->getCanvas()->page_text(290, 800, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
 
         // Stream the PDF
         return $pdf->stream('SuratTawaran_'.$permohonanId.'.pdf');
@@ -420,7 +420,7 @@ class SekretariatController extends Controller
     {
         return view('permohonan.sekretariat.kelulusan.kemaskini_surat_tawaran');
     }
-    
+
     // public function muatTurunSuratTawaran($permohonanId)
     // {
     //     // Get the "permohonan" data based on $permohonanId

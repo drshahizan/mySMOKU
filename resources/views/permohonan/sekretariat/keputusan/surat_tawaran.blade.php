@@ -57,7 +57,7 @@
                 background-position: center;
                 background-repeat: no-repeat;
                 background-attachment: fixed;
-                opacity: 0.3;
+                opacity: 0.2;
                 z-index: -1; /* Place behind content */
             }
 
