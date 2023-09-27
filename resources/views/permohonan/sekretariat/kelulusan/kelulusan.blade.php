@@ -74,8 +74,8 @@
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br>
-                                    <div class="table-responsive">
-                                        <div class="body">
+                                    <div class="body">
+                                        <div class="table-responsive">
                                             <form action="{{ route('bulk.approval') }}" method="POST">
                                                 {{csrf_field()}}
                                                 <table id="sortTable1" class="table table-bordered table-striped">
@@ -224,11 +224,11 @@
                                 {{-- PPK --}}
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <br>
-                                    <div class="table-responsive">
-                                        <div class="body">
+                                    <div class="body">
+                                        <div class="table-responsive">
                                             <form action="{{ route('bulk.approval') }}" method="POST">
                                                 {{csrf_field()}}
-                                                <table id="sortTable1" class="table table-bordered table-striped">
+                                                <table id="sortTable2" class="table table-bordered table-striped">
                                                     <thead>
                                                         <tr>
                                                             <th class="text-center" style="width:3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
