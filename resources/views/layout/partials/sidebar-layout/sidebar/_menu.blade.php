@@ -210,6 +210,12 @@
                 <span class="menu-title">Sejarah</span>
             </a>
         </div>
+		<div class="menu-item">
+            <a class="menu-link" href="{{url('permohonan/sekretariat/kemaskini/surat/tawaran')}}">
+                <span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
+                <span class="menu-title">Surat Tawaran</span>
+            </a>
+        </div>
 		<div class="menu-item pt-5">
 			<div class="menu-content">
 				<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>

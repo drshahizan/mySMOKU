@@ -41,8 +41,8 @@
         }
         .page-number-container {
             position: absolute;
-            bottom: 10px; 
-            right: 550px; 
+            bottom: 20px; 
+            right: 390px; 
             font-size: 12px;
         }
     </style>
@@ -52,32 +52,27 @@
     {{-- Header --}}
     <div class="header">
         <div class="image">
-            <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="width:10%; height:10%; float: left;">
+            <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="width:10%; height:5%; float: left;">
         </div>
-        <div class="alignleft" style="padding-left: 25px; padding-top:25px; font-size: 12px;">
+        <div class="alignleft" style="padding-left: 25px; padding-top:15px; font-size: 12px;">
             <b>KEMENTERIAN PENDIDIKAN TINGGI</b>
             <br>MINISTRY OF HIGHER EDUCATION<br>
         </div>
         <div class="alignright" style="padding-top: 10px;">
             <table style="border: none!important;">
-                {{-- <tr style="border: none!important;">
-                    <td style="border: none!important;"><b>No. Mesyuarat </b></td>
-                    <td style="border: none!important;"><b>:</b></td>
-                    <td style="border: none!important;"><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 10px!important;"></td>
-                </tr> --}}
                 <tr style="border: none!important; font-size:12px;">
-                    <td style="border: none!important;"><b>Tarikh Mesyuarat </b></td>
+                    <td style="border: none!important;"><b>Tarikh Cetak </b></td>
                     <td style="border: none!important;"><b>:</b></td>
-                    <td style="border: none!important;"><input type="text" id="tarikhMesyuarat" name="tarikhMesyuarat" style="padding: 10px;"></td>
+                    <td style="border: none!important;"><input type="text" id="tarikhMesyuarat" name="tarikhMesyuarat" style="padding: 10px; vertical-align:middle;"></td>
                 </tr>
             </table>
         </div>     
     </div>
 
-    <br><br><br><br><br>
+    <br><br><br>
     <div style="margin: 10px; display: block;">
         <div class="tittle" style="text-align: center; font-size: 14px;">
-            <b>SENARAI KEPUTUSAN PERMOHONAN BKOKU</b>
+            <b>SENARAI KEPUTUSAN PERMOHONAN PPK</b>
         </div>
 
         <br>
@@ -144,7 +139,7 @@
 
         <!-- Page number container -->
         <div class="page-number-container">
-            Page: {{ $pageNumber }}
+            {{ $pageNumber }}
         </div>
 
         <?php
