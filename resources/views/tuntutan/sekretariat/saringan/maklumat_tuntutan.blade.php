@@ -407,7 +407,7 @@
                                                 </tr>
                                                 </tbody>
                                             </table>
-                                            <table class="maklumat2">
+                                            <table class="table table-striped table-hover dataTable js-exportable">
                                                 <tr>
                                                     <td>Jumlah tuntutan yang disokong (RM)</td>
                                                     <td>:</td>

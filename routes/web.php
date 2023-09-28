@@ -5,6 +5,7 @@ use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KemaskiniController;
 use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\SaringanController;
 use App\Http\Controllers\SekretariatController;
@@ -58,6 +59,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('kemaskini/keputusan', [PermohonanController::class, 'kemaskiniKeputusan'])->name('kemaskini.keputusan');
     Route::post('kemaskini/keputusan', [PermohonanController::class, 'save'])->name('save');
     Route::get('lapor/tamat/pengajian', [PermohonanController::class, 'tamatPengajian'])->name('tamat.pengajian');
+
+    //Kemaskini - Sekretariat - Emel
+    Route::get('kemaskini/sekretariat/emel/tuntutan/kemaskini-tidak-layak', [KemaskiniController::class, 'kemaskiniTidakLayak']);
 
     //Permohonan - Sekretariat - Saringan
     Route::get('permohonan/sekretariat/saringan/senarai-permohonan', [SaringanController::class, 'senaraiPermohonan']);
@@ -161,7 +165,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/ppk/view-permohonan/{id}', [PenyelarasPPKController::class, 'viewPermohonan'])->name('penyelaras.ppk.view.permohonan');
     Route::get('penyelaras/ppk/senarai/permohonan-keseluruhan', [PenyelarasPPKController::class, 'senaraiPermohonanKeseluruhan'])->name('senarai.ppk.permohonanKeseluruhan');
 
-    //Tuntutan - Penyelaras PPK 
+    //Tuntutan - Penyelaras PPK
     Route::get('penyelaras/ppk/senarai/tuntutan-keseluruhan', [PenyelarasPPKController::class, 'senaraiTuntutanKeseluruhan'])->name('senarai.ppk.tuntutanKeseluruhan');
     Route::get('penyelaras/ppk/senarai/tuntutan-baharu', [PenyelarasPPKController::class, 'senaraiTuntutanBaharu'])->name('senarai.ppk.tuntutanBaharu');
 
