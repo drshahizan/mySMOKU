@@ -60,8 +60,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('kemaskini/keputusan', [PermohonanController::class, 'save'])->name('save');
     Route::get('lapor/tamat/pengajian', [PermohonanController::class, 'tamatPengajian'])->name('tamat.pengajian');
 
-    //Kemaskini - Sekretariat - Emel
+    //Kemaskini - Sekretariat - Emel -Tuntutan
+    Route::get('kemaskini/sekretariat/emel/permohonan/kemaskini-dikembalikan', [KemaskiniController::class, 'pKemaskiniDikembalikan']);
+    //Kemaskini - Sekretariat - Emel -Tuntutan
     Route::get('kemaskini/sekretariat/emel/tuntutan/kemaskini-tidak-layak', [KemaskiniController::class, 'kemaskiniTidakLayak']);
+    Route::get('kemaskini/sekretariat/emel/tuntutan/kemaskini-layak', [KemaskiniController::class, 'kemaskiniLayak']);
+    Route::get('kemaskini/sekretariat/emel/tuntutan/kemaskini-dikembalikan', [KemaskiniController::class, 'kemaskiniDikembalikan']);
 
     //Permohonan - Sekretariat - Saringan
     Route::get('permohonan/sekretariat/saringan/senarai-permohonan', [SaringanController::class, 'senaraiPermohonan']);
