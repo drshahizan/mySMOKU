@@ -389,18 +389,18 @@ class PermohonanController extends Controller
         Permohonan::where('smoku_id' ,$smoku_id->id)
         ->update([
 
-           // 'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
+            // 'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
             'program' => 'BKOKU',
             'yuran' => $request->yuran,
             'amaun_yuran' => $request->amaun_yuran,
             'wang_saku' => $request->wang_saku,
             'amaun_wang_saku' => $request->amaun_wang_saku,
             'perakuan' => $request->perakuan,
-            'status' => '1',
+            // 'status' => '1',
 
         ]);
 
-        $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
+        /*$permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
         SejarahPermohonan::where('smoku_id' ,$smoku_id->id)
         ->where('permohonan_id' ,$permohonan_id->id)
         ->update([
@@ -408,7 +408,7 @@ class PermohonanController extends Controller
             'permohonan_id' => $permohonan_id->id,
             'status' => '1',
 
-        ]);
+        ]);*/
         
     }
  
