@@ -25,10 +25,10 @@ class DashboardController extends Controller
         {
             $user = User::all()->where('no_kp',Auth::user()->no_kp);
             $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-            $permohonan = Permohonan::orderby("sejarah_permohonan.created_at","desc")
-            ->join('sejarah_permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
+            $permohonan = SejarahPermohonan::orderby("sejarah_permohonan.created_at","desc")
+            ->join('permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
             ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
-            ->get(['sejarah_permohonan.*','permohonan.*','bk_status.status'])
+            ->get(['sejarah_permohonan.*','permohonan.no_rujukan_permohonan','bk_status.status'])
             ->where('smoku_id',$smoku_id->id);
             //dd($permohonan);
             $akademik = Akademik::all()->where('smoku_id',$smoku_id->id)->first();
