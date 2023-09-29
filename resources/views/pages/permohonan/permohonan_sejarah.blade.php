@@ -37,17 +37,26 @@
 		<thead>
 			<tr>
 				<th>ID Permohonan</th>
+				<th>Tarikh Permohonan</th>
 				<th>Status Permohonan</th>
-				<th>Tarikh Kemaskini</th>
-				<th>Tindakan Permohonan</th>
 			</tr>
 		</thead>
 		<tbody>
 		{{-- @foreach($permohonan as $permohonan) --}}
 		<tr> 
 			<td>{{$permohonan->no_rujukan_permohonan}}</td>
-			<td>{{ucwords(strtolower($permohonan->status))}}</td>
 			<td>{{$permohonan->updated_at->format('d/m/Y h:i:sa')}}</td>
+			@if($permohonan->status == "LAYAK")
+				<td class="text-center">
+					<a href="{{ route('generate-pdf', ['permohonanId' => $permohonan->id]) }}" class="btn btn-success btn-round btn-sm">
+						<i class="fa fa-download custom-white-icon" style="color: white !important;"></i> Layak
+					</a>
+				</td>
+			@elseif($permohonan->status == "TIDAK LAYAK")
+				<td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
+			@else
+			<td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($permohonan->status))}}</button></td>
+			@endif
 			{{-- <td><a href="{{ route('delete',  $permohonan->permohonan_id) }}" class="btn btn-primary btn-sm">Batal</a></td> --}}
 		</tr>
 		{{-- @endforeach --}}
