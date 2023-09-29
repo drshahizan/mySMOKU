@@ -295,40 +295,6 @@ class PermohonanController extends Controller
         return response()->download(public_path('assets/dokumen/permohonan/'.$file));
     }
 
-    public function kemaskini(){
-
-        DB::table('permohonan')->where('nokp_pelajar' ,Auth::user()->nokp)
-        ->update([
-
-            'status' => '1',
-
-        ]);
-
-        $pelajar = ButiranPelajar::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
-        ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
-        ->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
-        ->get(['pelajar.*', 'bk_jantina.*','bk_bangsa.*','bk_bangsa.*','bk_jenisoku.*'])
-        ->where('nokp_pelajar', Auth::user()->nokp);
-        $waris = Waris::join('bk_hubungan','bk_hubungan.kodhubungan','=','waris.hubungan')
-        ->get(['waris.*', 'bk_hubungan.*'])
-        ->where('nokp_pelajar', Auth::user()->nokp);
-        $akademik = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
-        ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
-        ->join('bk_mod','bk_mod.kodmod','=','maklumatakademik.mod')
-        ->join('bk_sumberbiaya','bk_sumberbiaya.kodbiaya','=','maklumatakademik.sumber_biaya')
-        ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*', 'bk_mod.*', 'bk_sumberbiaya.*'])
-        ->where('nokp_pelajar', Auth::user()->nokp);
-        $tuntutanpermohonan = Permohonan::all()->where('nokp_pelajar', Auth::user()->nokp);
-        $dokumen = Dokumen::all()->where('nokp_pelajar', Auth::user()->nokp);
-        $infoipt = InfoIpt::all()->sortBy('namaipt');
-        $peringkat = PeringkatPengajian::all()->sortBy('kodperingkat');
-        $kursus = Kursus::all()->sortBy('nama_kursus');
-        $mod = Mod::all()->sortBy('kodmod');
-        $biaya = SumberBiaya::all()->sortBy('kodbiaya');
-        $hubungan = Hubungan::all()->sortBy('kodhubungan');
-        return view('pages.permohonan.permohonan-baru-kemaskini', compact('pelajar','waris','akademik','mod','biaya','tuntutanpermohonan','dokumen'));
-        
-    }
 
     public function kemaskiniPermohonan(Request $request)
     {   
@@ -410,17 +376,20 @@ class PermohonanController extends Controller
         
     }
  
-
     public function sejarahPermohonan(){
-        // $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        // //$permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
-        // $permohonan = Permohonan::join('sejarah_permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
-        // ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
-        // ->get(['sejarah_permohonan.*','permohonan.*','bk_status.*'])
-        // ->where('smoku_id', $smoku_id->id);
-        // //dd($permohonan);
-        return view('pages.permohonan.statusmohon');
-        
+        $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
+        $permohonan = Permohonan::join('bk_status', 'bk_status.kod_status', '=', 'permohonan.status')
+            ->get(['permohonan.*', 'bk_status.status'])
+            ->where('smoku_id', $smoku_id->id)
+            ->first();
+        //dd($permohonan);    
+
+        if ($permohonan !== null) {
+            return view('pages.permohonan.permohonan_sejarah', compact('permohonan'));
+        } else {
+            return back()->with('message', 'Tiada permohonan lama.');
+        }
+
     }
 
     public function batalpermohonan(){
@@ -428,7 +397,7 @@ class PermohonanController extends Controller
         ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
         ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
         ->where('nokp_pelajar', Auth::user()->nokpm);
-        return view('pages.permohonan.statusmohon', compact('permohonan'));
+        return view('pages.permohonan.permohonan_sejarah', compact('permohonan'));
         
     }
 
