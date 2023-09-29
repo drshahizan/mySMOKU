@@ -42,7 +42,7 @@
     <!--end::App-->
     <style>
         .announcement-box {
-            background-color: rgba(204, 231, 238, 0.895); /* Background color with 80% opacity (adjust as needed) */
+            background-color: rgba(254, 255, 255, 0.895); /* Background color with 80% opacity (adjust as needed) */
             padding: 20px; /* Padding around the content inside the box */
             border-radius: 10px; /* Optional: Rounded corners for the box */
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2); /* Optional: Box shadow for a subtle depth effect */
