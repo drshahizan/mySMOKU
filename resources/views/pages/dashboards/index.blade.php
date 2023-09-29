@@ -155,7 +155,13 @@
 											@foreach($permohonan as $permohonan)
 											<tr> 
 												<td>{{$permohonan->no_rujukan_permohonan}}</td>
-												<td>{{ucwords(strtolower($permohonan->status))}}</td>
+												<td>
+													{{-- @if ($permohonan->status == "DERAF")
+														<a href="{{ route('permohonan') }}" class="btn btn-primary btn-sm">{{ ucwords(strtolower($permohonan->status)) }}</a>
+													@else --}}
+														{{ ucwords(strtolower($permohonan->status)) }}
+													{{-- @endif --}}
+												</td>												
 												<td>{{$permohonan->created_at->format('d/m/Y h:i:sa')}}</td>
 												{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
 											</tr>

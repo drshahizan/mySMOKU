@@ -1469,7 +1469,7 @@
 
 		</script>
 
-		
+<!--end::Javascript-->		
 
 
 </x-default-layout>

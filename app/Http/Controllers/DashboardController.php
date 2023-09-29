@@ -30,7 +30,7 @@ class DashboardController extends Controller
             ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
             ->get(['sejarah_permohonan.*','permohonan.*','bk_status.status'])
             ->where('smoku_id',$smoku_id->id);
-            // //dd($permohonan);
+            //dd($permohonan);
             $akademik = Akademik::all()->where('smoku_id',$smoku_id->id)->first();
 
             $tuntutan = Tuntutan::orderby("sejarah_tuntutan.created_at","desc")

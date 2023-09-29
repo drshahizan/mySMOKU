@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('smoku_waris', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('smoku_id');
-            $table->string('nama_waris');
-            $table->string('no_kp_waris');
+            $table->string('nama_waris')->nullable();
+            $table->string('no_kp_waris')->nullable();
             $table->string('no_pasport_waris')->nullable();
-            $table->string('alamat_waris');
-            $table->string('alamat_negeri_waris');
-            $table->string('alamat_bandar_waris');
-            $table->string('alamat_poskod_waris');
-            $table->string('tel_bimbit_waris');
-            $table->string('hubungan_waris');
+            $table->string('alamat_waris')->nullable();
+            $table->string('alamat_negeri_waris')->nullable();
+            $table->string('alamat_bandar_waris')->nullable();
+            $table->string('alamat_poskod_waris')->nullable();
+            $table->string('tel_bimbit_waris')->nullable();
+            $table->string('hubungan_waris')->nullable();
             $table->string('hubungan_lain_waris')->nullable();
             $table->string('pekerjaan_waris')->nullable();
             $table->string('pendapatan_waris')->nullable();

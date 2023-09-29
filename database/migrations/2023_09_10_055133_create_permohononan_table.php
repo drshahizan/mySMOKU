@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('baki_disokong')->nullable();
             $table->string('baki_diluluskan')->nullable();
             $table->string('perakuan')->nullable();
-            $table->integer('status');
+            $table->integer('status')->nullable();
             $table->foreign('smoku_id')
               ->references('id')->on('smoku')->onDelete('cascade');
             $table->timestamps();

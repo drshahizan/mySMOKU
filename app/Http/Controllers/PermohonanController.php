@@ -70,10 +70,9 @@ class PermohonanController extends Controller
 
         
 
-        if ($permohonan && $permohonan->status == '2') {
-            $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
-            //dd($dokumen);
-            return view('pages.permohonan.permohonan-baru-view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen'));
+        if ($permohonan && $permohonan->status >= '1') {
+            $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
+            return view('pages.permohonan.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen'));
 
         } else {
             //$userHasSubmittedForm = false;
@@ -85,7 +84,8 @@ class PermohonanController extends Controller
         
     }
 
-    public function getBandar($idnegeri=0){
+    public function getBandar($idnegeri=0)
+    {
 
         $bandarData['data'] = Bandar::orderby("bandar","asc")
          ->select('id','bandar','negeri_id')
@@ -100,10 +100,9 @@ class PermohonanController extends Controller
     {   
 
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        // Retrieve or create a ButiranPelajar record based on smoku_id
+
         $butiranPelajar = ButiranPelajar::firstOrNew(['smoku_id' => $smoku_id->id]);
 
-        // Set the attributes
         $butiranPelajar->alamat_surat_menyurat = $request->alamat_surat_menyurat;
         $butiranPelajar->alamat_surat_negeri = $request->alamat_surat_negeri;
         $butiranPelajar->alamat_surat_bandar = $request->alamat_surat_bandar;
@@ -113,14 +112,10 @@ class PermohonanController extends Controller
         $butiranPelajar->no_akaun_bank = $request->no_akaun_bank;
         $butiranPelajar->emel = $request->emel;
 
-        // Save the record
         $butiranPelajar->save();
 
-
-        // Retrieve or create a Waris record based on smoku_id
         $waris = Waris::firstOrNew(['smoku_id' => $smoku_id->id]);
 
-        // Set the attributes
         $waris->nama_waris = $request->nama_waris;
         $waris->no_kp_waris = $request->no_kp_waris;
         $waris->no_pasport_waris = $request->no_pasport_waris;
@@ -134,7 +129,6 @@ class PermohonanController extends Controller
         $waris->pekerjaan_waris = $request->pekerjaan_waris;
         $waris->pendapatan_waris = $request->pendapatan_waris;
 
-        // Save the record
         $waris->save();
 
 
@@ -158,10 +152,8 @@ class PermohonanController extends Controller
             ]
         );
        
-        // Retrieve or create a Permohonan record based on smoku_id
         $permohonan = Permohonan::firstOrNew(['smoku_id' => $smoku_id->id]);
 
-        // Set the attributes
         $permohonan->no_rujukan_permohonan = 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp;
         $permohonan->program = 'BKOKU';
         $permohonan->yuran = $request->yuran;
@@ -171,18 +163,14 @@ class PermohonanController extends Controller
         $permohonan->perakuan = $request->perakuan;
         $permohonan->status = '1';
 
-        // Save the record
         $permohonan->save();
 
         $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
-        // Retrieve or create a SejarahPermohonan record based on smoku_id
         $sejarah = SejarahPermohonan::firstOrNew(['smoku_id' => $smoku_id->id]);
 
-        // Set the attributes
         $sejarah->permohonan_id = $permohonan_id->id;
         $sejarah->status = '1';
 
-        // Save the record
         $sejarah->save();
 
 
@@ -305,30 +293,6 @@ class PermohonanController extends Controller
 
     }
 
-    public function viewpermohonan(){
-        $pelajar = ButiranPelajar::join('bk_jantina','bk_jantina.kodjantina','=','pelajar.jantina')
-        ->join('bk_bangsa', 'bk_bangsa.kodbangsa', '=', 'pelajar.bangsa')
-        ->join('bk_jenisoku','bk_jenisoku.kodoku','=','pelajar.kecacatan')
-        ->get(['pelajar.*', 'bk_jantina.*','bk_bangsa.*','bk_bangsa.*','bk_jenisoku.*'])
-        ->where('nokp_pelajar', Auth::user()->nokp);
-        $waris = Waris::join('bk_hubungan','bk_hubungan.kodhubungan','=','waris.hubungan')
-        ->join('bk_negeri','bk_negeri.id','=','waris.alamat_negeri')
-        ->join('bk_bandar','bk_bandar.id','=','waris.alamat_bandar')
-        ->get(['waris.*', 'bk_hubungan.*', 'bk_negeri.nama as namanegeri', 'bk_bandar.nama as namabandar'])
-        ->where('nokp_pelajar', Auth::user()->nokp);
-        $akademik = Akademik::join('bk_infoipt','bk_infoipt.idipt','=','maklumatakademik.id_institusi')
-        ->join('bk_peringkatpengajian','bk_peringkatpengajian.kodperingkat','=','maklumatakademik.peringkat_pengajian')
-        ->join('bk_mod','bk_mod.kodmod','=','maklumatakademik.mod')
-        ->join('bk_sumberbiaya','bk_sumberbiaya.kodbiaya','=','maklumatakademik.sumber_biaya')
-        ->get(['maklumatakademik.*', 'bk_infoipt.*', 'bk_peringkatpengajian.*', 'bk_mod.*', 'bk_sumberbiaya.*'])
-        ->where('nokp_pelajar', Auth::user()->nokp);
-        $tuntutanpermohonan = Permohonan::all()->where('nokp_pelajar', Auth::user()->nokp);
-        $dokumen = Dokumen::all()->where('nokp_pelajar', Auth::user()->nokp);
-        return view('pages.permohonan.permohonan-baru-view', compact('pelajar','waris','akademik','tuntutanpermohonan','dokumen'));
-        
-    }
-
-
     public function download(Request $request,$file){   
         return response()->download(public_path('assets/dokumen/permohonan/'.$file));
     }
@@ -368,190 +332,83 @@ class PermohonanController extends Controller
         
     }
 
-    public function update(Request $request)
+    public function kemaskiniPermohonan(Request $request)
     {   
-        DB::table('pelajar')->where('nokp_pelajar' ,$request->nokp_pelajar)
+        $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        ButiranPelajar::where('smoku_id' ,$smoku_id->id)
         ->update([
 
-            'alamat_surat1' => $request->alamat_surat1,
-            'alamat_surat_negeri' => $request->alamat_surat_negeri,
-            'alamat_surat_bandar' => $request->alamat_surat_bandar,
-            'alamat_surat_poskod' => $request->alamat_surat_poskod,
-            'no_tel' => $request->no_tel,
-            'no_telR' => $request->no_telR,
-            'no_akaunbank' => $request->no_akaunbank,
+                'alamat_surat_menyurat' => $request->alamat_surat_menyurat,
+                'alamat_surat_negeri' => $request->alamat_surat_negeri,
+                'alamat_surat_bandar' => $request->alamat_surat_bandar,
+                'alamat_surat_poskod' => $request->alamat_surat_poskod,
+                'tel_bimbit' => $request->tel_bimbit,
+                'tel_rumah' => $request->tel_rumah,
+                'no_akaun_bank' => $request->no_akaun_bank,
+                'emel' => $request->emel,
 
         ]);
 
-        DB::table('waris')->where('nokp_pelajar' ,$request->nokp_pelajar)
+        Waris::where('smoku_id' ,$smoku_id->id)
         ->update([
 
             'nama_waris' => $request->nama_waris,
-            'nokp_waris' => $request->nokp_waris,
-            'alamat1' => $request->alamatW1,
-            'alamat_poskod' => $request->alamatW_poskod,
-            'alamat_bandar' => $request->alamatW_bandar,
-            'alamat_negeri' => $request->alamatW_negeri,
-            'no_tel' => $request->no_telW,
-            'no_telR' => $request->no_telRW,
-            'hubungan' => $request->hubungan,
-            'pendapatan' => $request->pendapatan,
+            'no_kp_waris' => $request->no_kp_waris,
+            'no_pasport_waris' => $request->no_pasport_waris,
+            'hubungan_waris' => $request->hubungan_waris,
+            'hubungan_lain_waris' => $request->hubungan_lain_waris,
+            'tel_bimbit_waris' => $request->tel_bimbit_waris,
+            'alamat_waris' => $request->alamat_waris,
+            'alamat_negeri_waris' => $request->alamat_negeri_waris,
+            'alamat_bandar_waris' => $request->alamat_bandar_waris,
+            'alamat_poskod_waris' => $request->alamat_poskod_waris,
+            'pekerjaan_waris' => $request->pekerjaan_waris,
+            'pendapatan_waris' => $request->pendapatan_waris,
 
         ]);
 
-        DB::table('maklumatakademik')->where('nokp_pelajar' ,$request->nokp_pelajar)
+        Akademik::where('smoku_id' ,$smoku_id->id)
         ->update([
 
-            'no_pendaftaranpelajar' => $request->no_pendaftaranpelajar,
-            'sesi' => $request->sesi,
-            'tkh_mula' => $request->tkh_mula,
-            'tkh_tamat' => $request->tkh_tamat,
-            //'sem_semasa' => $request->sem_semasa,
+            'mod' => $request->mod,
             'tempoh_pengajian' => $request->tempoh_pengajian,
-            //'bil_bulanpersem' => $request->bil_bulanpersem,
-            //'mod' => $request->mod,
-            'cgpa' => $request->cgpa,
-            //'sumber_biaya' => $request->sumber_biaya,
+            'bil_bulan_per_sem' => $request->bil_bulan_per_sem,
+            'sesi' => $request->sesi,
+            'no_pendaftaran_pelajar' => $request->no_pendaftaran_pelajar,
+            'tarikh_mula' => $request->tarikh_mula,
+            'tarikh_tamat' => $request->tarikh_tamat,
+            'sem_semasa' => $request->sem_semasa,
+            'sumber_biaya' => $request->sumber_biaya,
+            'sumber_lain' => $request->sumber_lain,
             'nama_penaja' => $request->nama_penaja,
+            'penaja_lain' => $request->penaja_lain,
             'status' => '1',
 
         ]);
 
-        DB::table('permohonan')->where('nokp_pelajar' ,$request->nokp_pelajar)
+        Permohonan::where('smoku_id' ,$smoku_id->id)
         ->update([
 
+           // 'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
+            'program' => 'BKOKU',
             'yuran' => $request->yuran,
-            'elaun' => $request->elaun,
-            'amaun' => $request->amaun,
-            'amaunelaun' => $request->amaunelaun,
+            'amaun_yuran' => $request->amaun_yuran,
+            'wang_saku' => $request->wang_saku,
+            'amaun_wang_saku' => $request->amaun_wang_saku,
             'perakuan' => $request->perakuan,
-            'status' => '2',
+            'status' => '1',
 
         ]);
 
-        $user = SejarahPermohonan::create([
-            'id_permohonan' => 'KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar,
-            'nokp_pelajar' => $request->nokp_pelajar,
-            'status' => '2',
-    
+        $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
+        SejarahPermohonan::where('smoku_id' ,$smoku_id->id)
+        ->where('permohonan_id' ,$permohonan_id->id)
+        ->update([
+
+            'permohonan_id' => $permohonan_id->id,
+            'status' => '1',
+
         ]);
-        $user->save();
-
-        $dokumen = Dokumen::where('nokp_pelajar', '=', $request->nokp_pelajar)->first();
-        if ($dokumen === null) {
-
-            $data=new dokumen();
-        
-            $akaunBank=$request->akaunBank;
-            //$name1=$akaunBank->getClientOriginalName();  
-            $name1='salinanbank';  
-            $filenameakaunBank=$name1.'_'.$request->nokp_pelajar.'.'.$akaunBank->getClientOriginalExtension();
-            $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
-            
-            $suratTawaran=$request->suratTawaran;
-            //$name2=$suratTawaran->getClientOriginalName();
-            $name2='salinantawaran'; 
-            $filenamesuratTawaran=$name2.'_'.$request->nokp_pelajar.'.'.$suratTawaran->getClientOriginalExtension();
-            $request->suratTawaran->move('assets/dokumen',$filenamesuratTawaran);
-
-            $invoisResit=$request->invoisResit;
-            //$name3=$invoisResit->getClientOriginalName();
-            $name3='salinanresit';  
-            $filenameinvoisResit=$name3.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
-            $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
-            
-            $data->id_permohonan='KPTBKOKU'.'/'.$request->peringkat_pengajian.'/'.$request->nokp_pelajar;
-            $data->nokp_pelajar=$request->nokp_pelajar;
-            $data->akaunBank=$filenameakaunBank;
-            $data->suratTawaran=$filenamesuratTawaran;
-            $data->invoisResit=$filenameinvoisResit;
-            $data->nota_akaunBank=$request->nota_akaunBank;
-            $data->nota_suratTawaran=$request->nota_suratTawaran;
-            $data->nota_invoisResit=$request->nota_invoisResit;
-            
-
-            $data->save();
-        } else {
-
-            if($request->hasFile('akaunBank')){
-                $akaunBank=$request->akaunBank;
-                $name1='salinanbank';  
-                $filenameakaunBank=$name1.'_'.$request->nokp_pelajar.'.'.$akaunBank->getClientOriginalExtension();
-                $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
-                DB::table('dokumen')->where('nokp_pelajar' ,$request->nokp_pelajar)
-                ->update([
-                'akaunBank' => $filenameakaunBank,
-                ]);
-            }
-            
-            if($request->hasFile('suratTawaran')){
-                $suratTawaran=$request->suratTawaran;
-                $name2='salinantawaran'; 
-                $filenamesuratTawaran=$name2.'_'.$request->nokp_pelajar.'.'.$suratTawaran->getClientOriginalExtension();
-                $request->suratTawaran->move('assets/dokumen',$filenamesuratTawaran);
-                DB::table('dokumen')->where('nokp_pelajar' ,$request->nokp_pelajar)
-                ->update([
-                'suratTawaran' => $filenamesuratTawaran,
-                ]);
-
-
-            }
-
-            if($request->hasFile('invoisResit')){
-                $invoisResit=$request->invoisResit;
-                $name3='salinanresit';  
-                $filenameinvoisResit=$name3.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
-                $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
-                DB::table('dokumen')->where('nokp_pelajar' ,$request->nokp_pelajar)
-                ->update([
-                'invoisResit' => $filenameinvoisResit,
-                ]);
-        
-            }
-
-        
-
-        }
-
-            
-            /*if($request->hasFile('akaunBank')){
-                $akaunBank=$request->akaunBank;
-                $name1='salinanbank';  
-                $filenameakaunBank=$name1.'_'.$request->nokp_pelajar.'.'.$akaunBank->getClientOriginalExtension();
-                $request->akaunBank->move('assets/dokumen',$filenameakaunBank);
-                DB::table('dokumen')->where('nokp_pelajar' ,$request->nokp_pelajar)
-                ->update([
-                'akaunBank' => $filenameakaunBank,
-                ]);
-            }
-            
-            if($request->hasFile('suratTawaran')){
-                $suratTawaran=$request->suratTawaran;
-                $name2='salinantawaran'; 
-                $filenamesuratTawaran=$name2.'_'.$request->nokp_pelajar.'.'.$suratTawaran->getClientOriginalExtension();
-                $request->suratTawaran->move('assets/dokumen',$filenamesuratTawaran);
-                DB::table('dokumen')->where('nokp_pelajar' ,$request->nokp_pelajar)
-                ->update([
-                'suratTawaran' => $filenamesuratTawaran,
-                ]);
-
-
-            }
-
-            if($request->hasFile('invoisResit')){
-                $invoisResit=$request->invoisResit;
-                $name3='salinanresit';  
-                $filenameinvoisResit=$name3.'_'.$request->nokp_pelajar.'.'.$invoisResit->getClientOriginalExtension();
-                $request->invoisResit->move('assets/dokumen',$filenameinvoisResit);
-                DB::table('dokumen')->where('nokp_pelajar' ,$request->nokp_pelajar)
-                ->update([
-                'invoisResit' => $filenameinvoisResit,
-                ]);
-        
-            }*/
-
-        return redirect()->route('dashboard')->with('message', 'Permohonan anda telah dikemaskini dan dihantar.');    
-        //return redirect()->route('viewpermohonan')->with('message', 'Permohonan anda telah dikemaskini dan dihantar.');
         
     }
  
