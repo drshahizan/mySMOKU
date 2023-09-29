@@ -1,27 +1,28 @@
 <x-auth-layout>
 
+@section('announcement')
+    <h2>Hebahan</h2>
+    <p>{!! $catatan !!}</p> 
+@endsection
+
     <!--begin::Form-->
     <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ route('dashboard') }}" action="{{ route('login') }}">
-        @csrf
+    @csrf
         <!--begin::Heading-->
         <div class="text-center mb-11">
-            <!--begin::Title-->
-            <!-- <h1 class="text-dark fw-bolder mb-3" > -->
+            <!--begin::Logo-->
             <img alt="Logo" src="{{ image('logos/1.1.png') }}" class="h-100px h-lg-90px"/>
             <br>
             <br>
             <br>
             <br>
             <img alt="Logo" src="{{ image('logos/3.1.svg') }}" class="h-100px h-lg-70px"/>
-                
-            <!-- </h1> -->
-            <!--end::Title-->
+            <!--end::Logo-->
 
             <!--begin::Subtitle-->
             <div class="text-gray-500 fw-semibold fs-6">
                 Log Masuk
             </div>
-            
             <!--end::Subtitle--->
         </div>
         <!--begin::Heading-->
@@ -53,47 +54,12 @@
                 </div>
             @endif
 
-        <!--begin::Login options-->
-        <!-- <div class="row g-3 mb-9"> -->
-            <!--begin::Col-->
-            <!-- <div class="col-md-6"> -->
-                <!--begin::Google link--->
-                <!-- <a href="{{ url('/auth/redirect/google') }}?redirect_uri={{ url()->current() }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-                    <img alt="Logo" src="{{ image('svg/brand-logos/google-icon.svg') }}" class="h-15px me-3"/>
-                    Sign in with Google
-                </a> -->
-                <!--end::Google link--->
-            <!-- </div> -->
-            <!--end::Col-->
-
-            <!--begin::Col-->
-            <!-- <div class="col-md-6"> -->
-                <!--begin::Google link--->
-                <!-- <a href="{{ url('/auth/redirect/apple') }}?redirect_uri={{ url()->current() }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-                    <img alt="Logo" src="{{ image('svg/brand-logos/apple-black.svg') }}" class="theme-light-show h-15px me-3"/>
-                    <img alt="Logo" src="{{ image('svg/brand-logos/apple-black-dark.svg') }}" class="theme-dark-show h-15px me-3"/>
-                    Sign in with Apple
-                </a> -->
-                <!--end::Google link--->
-            <!-- </div> -->
-            <!--end::Col-->
-        <!-- </div> -->
-        <!--end::Login options-->
-
-        <!--begin::Separator-->
-        <!-- <div class="separator separator-content my-14">
-            <span class="w-125px text-gray-500 fw-semibold fs-7">Log Masuk ke Akaun Anda</span>
-        </div> -->
-        <!--end::Separator-->
-
         <!--begin::Input group--->
         <div class="fv-row mb-8">
             <!--begin::Email-->
             <input type="text" placeholder="Masukkan No. Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" class="form-control bg-transparent" value=""/>
             <!--end::Email-->
         </div>
-
-        <!--end::Input group--->
         <div class="fv-row mb-3">
             <!--begin::Password-->
             <input type="password" placeholder="Masukkan Kata Laluan" name="password" autocomplete="off" class="form-control bg-transparent" value=""/>

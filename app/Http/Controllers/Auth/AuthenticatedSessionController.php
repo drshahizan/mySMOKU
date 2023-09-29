@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\TarikhIklan;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -18,8 +19,10 @@ class AuthenticatedSessionController extends Controller
     public function create()
     {
         addJavascriptFile('assets/js/custom/authentication/sign-in/general.js');
+        $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
+        $catatan = $iklan->catatan;
 
-        return view('pages.auth.login');
+        return view('pages.auth.login', compact('catatan'));
     }
 
     /**
