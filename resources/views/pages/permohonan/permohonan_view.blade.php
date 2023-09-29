@@ -398,7 +398,7 @@
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input-->
-								<textarea id="alamat_surat_menyurat" name="alamat_surat_menyurat" class="form-control form-control-lg form-control-solid" rows="2" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) && $butiranPelajar->alamat_surat_menyurat !== null ? 'readonly' : '' }}>{{$butiranPelajar->alamat_surat_menyurat}}</textarea>
+								<textarea id="alamat_surat_menyurat" name="alamat_surat_menyurat" class="form-control form-control-lg form-control-solid" rows="2" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) && $butiranPelajar->alamat_surat_menyurat !== null ? 'readonly' : '' }}>{{$butiranPelajar->alamat_surat_menyurat}}</textarea>
 								<!--end::Input-->
 							</div>
 							<div class="row mb-10">
@@ -539,7 +539,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaun_bank" name="no_akaun_bank" placeholder="" value="{{ $butiranPelajar->no_akaun_bank }}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaun_bank" name="no_akaun_bank" placeholder="" value="{{ $butiranPelajar->no_akaun_bank }}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -572,7 +572,7 @@
 							<label class="form-label mb-3">Nama</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" placeholder="" value="{{$butiranPelajar->nama_waris}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+							<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" placeholder="" value="{{$butiranPelajar->nama_waris}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
@@ -585,7 +585,7 @@
 								<div class="row fv-row">
 									<!--begin::Col-->
 									<div class="col-12">
-										<input type="text" class="form-control form-control-lg form-control-solid" maxlength="12" id="no_kp_waris" name="no_kp_waris" placeholder="" value="{{$butiranPelajar->no_kp_waris}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+										<input type="text" class="form-control form-control-lg form-control-solid" maxlength="12" id="no_kp_waris" name="no_kp_waris" placeholder="" value="{{$butiranPelajar->no_kp_waris}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									</div>
 									<!--end::Col-->
 								</div>
@@ -599,7 +599,7 @@
 								<div class="row fv-row">
 									<!--begin::Col-->
 									<div class="col-12">
-										<input type="text" class="form-control form-control-lg form-control-solid" id="no_pasport_waris" name="no_pasport_waris" placeholder="" value="{{$butiranPelajar->no_pasport_waris}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+										<input type="text" class="form-control form-control-lg form-control-solid" id="no_pasport_waris" name="no_pasport_waris" placeholder="" value="{{$butiranPelajar->no_pasport_waris}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									</div>
 									<!--end::Col-->
 								</div>
@@ -610,7 +610,7 @@
 							<!--begin::Label-->
 							<div class="col-md-6 fv-row">
 								<label class="form-label mb-6">Hubungan Waris</label>
-								<select id="hubungan_waris" name="hubungan_waris" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+								<select id="hubungan_waris" name="hubungan_waris" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 									@foreach ($hubungan as $hubungan)
 										<option value="{{$hubungan->kod_hubungan}}" {{$butiranPelajar->hubungan_waris == $hubungan->kod_hubungan ? 'selected' : ''}}>{{ $hubungan->hubungan}}</option>
 									@endforeach
@@ -621,7 +621,7 @@
 								<label class="form-label mb-6">No. Tel Bimbit</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="text" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{$butiranPelajar->tel_bimbit_waris}}"  {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+								<input type="text" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{$butiranPelajar->tel_bimbit_waris}}"  {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 								<!--end::Input-->
 							</div>
 							
@@ -633,7 +633,7 @@
 								<label class="form-label mb-6">(Jika Lain-lain) Sila Nyatakan:</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="text" class="form-control form-control-lg form-control-solid" id="hubungan_lain_waris" name="hubungan_lain_waris" placeholder="" value="{{$butiranPelajar->hubungan_lain_waris}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+								<input type="text" class="form-control form-control-lg form-control-solid" id="hubungan_lain_waris" name="hubungan_lain_waris" placeholder="" value="{{$butiranPelajar->hubungan_lain_waris}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 								<!--end::Input-->													
 							</div>
 							
@@ -644,7 +644,7 @@
 							<label class="form-label">Alamat Tetap</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<textarea id="alamat_waris" name="alamat_waris" class="form-control form-control-lg form-control-solid" rows="2" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}> {{$butiranPelajar->alamat_waris}}</textarea>
+							<textarea id="alamat_waris" name="alamat_waris" class="form-control form-control-lg form-control-solid" rows="2" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}> {{$butiranPelajar->alamat_waris}}</textarea>
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
@@ -656,7 +656,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="alamat_negeri_waris" name="alamat_negeri_waris" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+									<select id="alamat_negeri_waris" name="alamat_negeri_waris" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 										<option value="">Pilih</option>
 										@foreach ($negeri as $negeri)
 										<option value="{{$negeri->id}}" {{$butiranPelajar->alamat_negeri_waris == $negeri->id ? 'selected' : ''}}>{{ $negeri->negeri}}</option>
@@ -673,7 +673,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='alamat_bandar_waris' name='alamat_bandar_waris' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+									<select id='alamat_bandar_waris' name='alamat_bandar_waris' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 										<option value="">Pilih</option>
 										@foreach ($bandar as $bandar)
 										<option value="{{$bandar->id}}" {{$butiranPelajar->alamat_bandar_waris == $bandar->id ? 'selected' : ''}}>{{ $bandar->bandar}}</option>
@@ -690,7 +690,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_poskod_waris" name="alamat_poskod_waris" placeholder="" value="{{$butiranPelajar->alamat_poskod_waris}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_poskod_waris" name="alamat_poskod_waris" placeholder="" value="{{$butiranPelajar->alamat_poskod_waris}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -707,7 +707,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="pekerjaan_waris" name="pekerjaan_waris" placeholder="" value="{{$butiranPelajar->pekerjaan_waris}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="text" class="form-control form-control-solid" id="pekerjaan_waris" name="pekerjaan_waris" placeholder="" value="{{$butiranPelajar->pekerjaan_waris}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -719,7 +719,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="pendapatan_waris" name="pendapatan_waris" placeholder="RM" value="{{$butiranPelajar->pendapatan_waris}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="text" class="form-control form-control-solid" id="pendapatan_waris" name="pendapatan_waris" placeholder="RM" value="{{$butiranPelajar->pendapatan_waris}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -796,7 +796,7 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 									<option value="">Pilih</option>
 									@foreach ($mod as $mod)
 									<option value="{{$mod->kod_mod}}" {{$butiranPelajar->mod == $mod->kod_mod ? 'selected' : ''}}>{{ $mod->mod}}</option>
@@ -813,7 +813,7 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" required {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+									<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" required {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 										<option value="">Pilih</option>
 										@if(!empty($butiranPelajar->tempoh_pengajian))
 											<option value="{{$butiranPelajar->tempoh_pengajian}}" selected>{{$butiranPelajar->tempoh_pengajian}}</option>
@@ -837,7 +837,7 @@
 								<!--begin::Row-->
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
-										<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+										<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 											<option value="">Pilih</option>
 											@if(!empty($butiranPelajar->bil_bulan_per_sem))
 												<option value="{{$butiranPelajar->bil_bulan_per_sem}}" selected>{{$butiranPelajar->bil_bulan_per_sem}}</option>
@@ -859,7 +859,7 @@
 								</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+									<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 										<option value="">Pilih</option>
 										@if(!empty($butiranPelajar->sesi))
 											<option value="{{$butiranPelajar->sesi}}" selected>{{$butiranPelajar->sesi}}</option>
@@ -878,7 +878,7 @@
 									
 								</label>
 								<!--end::Label-->
-								<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="{{$butiranPelajar->no_pendaftaran_pelajar}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+								<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="{{$butiranPelajar->no_pendaftaran_pelajar}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 							</div>
 						</div>
 						<!--begin::Input group-->
@@ -891,7 +891,7 @@
 								</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" value="{{$butiranPelajar->tarikh_mula}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" value="{{$butiranPelajar->tarikh_mula}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
@@ -903,7 +903,7 @@
 								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" onchange=dateCheck() value="{{$butiranPelajar->tarikh_tamat}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" onchange=dateCheck() value="{{$butiranPelajar->tarikh_tamat}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 								<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
@@ -919,7 +919,7 @@
 								<!--begin::Row-->
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
-										<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+										<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 											<option value="">Pilih</option>
 											@if(!empty($butiranPelajar->tempoh_pengajian))
 												<option value="{{$butiranPelajar->tempoh_pengajian}}" selected>{{$butiranPelajar->tempoh_pengajian}}</option>
@@ -950,7 +950,7 @@
 								<!--begin::Row-->
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
-										<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+										<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 											<option value="">Pilih</option>
 											@foreach ($biaya as $biaya)
 											<option value="{{$biaya->kod_biaya}}" {{$butiranPelajar->sumber_biaya == $biaya->kod_biaya ? 'selected' : ''}}>{{ $biaya->biaya}}</option>
@@ -967,7 +967,7 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">(Jika Lain-lain) Sila Nyatakan:</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-								<input type="text" class="form-control form-control-solid" placeholder="" id="sumber_lain" name="sumber_lain" value="{{$butiranPelajar->sumber_lain}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+								<input type="text" class="form-control form-control-solid" placeholder="" id="sumber_lain" name="sumber_lain" value="{{$butiranPelajar->sumber_lain}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 								<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
@@ -981,7 +981,7 @@
 									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a>
 								</label>															
 								<!--end::Label-->
-								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 									<option value="">Pilih</option>
 									@foreach ($penaja as $penaja)
 									<option value="{{$penaja->kod_penaja}}" {{$butiranPelajar->nama_penaja == $penaja->kod_penaja ? 'selected' : ''}}>{{ $penaja->penaja}}</option>
@@ -994,7 +994,7 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">(Jika Lain-lain) Sila Nyatakan:</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-								<input type="text" class="form-control form-control-solid" placeholder="" id="penaja_lain" name="penaja_lain" value="{{$butiranPelajar->penaja_lain}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+								<input type="text" class="form-control form-control-solid" placeholder="" id="penaja_lain" name="penaja_lain" value="{{$butiranPelajar->penaja_lain}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 								<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
@@ -1216,6 +1216,7 @@
 					<!--end::Wrapper-->
 					<!--begin::Wrapper-->
 					<div>
+						@if (in_array($permohonan->status, [1, 2, 5]))
 						<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" onclick="if(!this.form.perakuan.checked){alert('Anda mesti bersetuju dengan terma dan syarat.');return false}">
 							<span class="indicator-label">Hantar
 							<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
@@ -1225,6 +1226,9 @@
 							<span class="indicator-progress">Sila tunggu...
 							<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 						</button>
+						
+						@endif
+
 						<button type="button" class="btn btn-lg btn-primary save-next-button" data-kt-stepper-action="next">Teruskan
 						<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
 							<span class="path1"></span>
