@@ -7,7 +7,7 @@
     <h3>SistemBKOKU: Hebahan Iklan Permohonan BKOKU dan PPK</h3>
     <p>Assalammualaikum W.R.T & Salam Sejahtera.</p>
     <br>
-    <p>{{$catatan}}
+    <p>{!! $catatan !!} 
     <br>
     <br>
     <br>

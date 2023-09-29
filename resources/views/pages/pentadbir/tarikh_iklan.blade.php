@@ -3,6 +3,7 @@
 
 <!-- MAIN CSS -->
 <link rel="stylesheet" href="/assets/css/saringan.css">
+<script src="https://cdn.tiny.cloud/1/v736541al0ntzh14edk63z19dzyqs1xn2bkc5em78rv1yeis/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
@@ -96,7 +97,7 @@
 							<label class="fs-6 fw-semibold mb-2">Catatan</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<textarea class="form-control form-control-solid" name="catatan"></textarea>
+							<textarea class="form-control form-control-solid" name="catatan" id="catatan"></textarea>
 							<!--end::Input-->
 						</div>
 						<!--end::Input group-->
@@ -136,7 +137,7 @@
 								<tr>
 									<td>{{ $tarikh->tarikh_mula}}</td>
 									<td>{{ $tarikh->tarikh_tamat}}</td>
-									<td>{{ $tarikh->catatan}}</td>
+									<td>{!! $tarikh->catatan !!}</td>
 									<td>{{ $tarikh->created_at->format('d/m/Y h:i:sa')}}</td>
 								</tr>
 								@endforeach
@@ -156,6 +157,17 @@
 </div>
 
 <!--begin::Javascript-->
+<script>
+	tinymce.init({
+	  selector: '#catatan', // Replace with the ID or class of your textarea
+	  plugins: 'autolink lists link image charmap print preview',
+	  toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+	  height: 300 // Set the height of the editor
+	});
+
+	var editorContent = tinymce.get('catatan').getContent();
+
+</script>
 
 <!--end::Javascript-->
 	

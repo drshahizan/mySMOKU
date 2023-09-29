@@ -184,8 +184,8 @@ class PentadbirController extends Controller
 
     public function tarikh()
     {
-        $tarikh = TarikhIklan::orderBy('created_at', 'desc')->get();
-           
+        $tarikh = TarikhIklan::orderBy('created_at', 'desc')->get(); 
+
         return view('pages.pentadbir.tarikh_iklan', compact('tarikh'));
 
     }
@@ -222,9 +222,6 @@ class PentadbirController extends Controller
                  Log::error('Invalid email address: ' . $invalidEmail);
             }
         }
-
-
-        
 
           
         return redirect()->route('tarikh');
