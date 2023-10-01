@@ -67,28 +67,13 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h2>Surat Tawaran<br><small>Kemaskini maklumat dalam surat tawaran untuk dihantarkan kepada pemohon.</small></h2>
+                                <h2>Kemaskini Surat Tawaran<br><small>Kemaskini maklumat dalam surat tawaran untuk dihantarkan kepada pemohon.</small></h2>
                             </div>
 
                             <div class="card-body" style="padding: 0px 10px 20px 10px;">
                                 <form action="{{ route('save') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <table>
-                                        <tr>
-                                            <td><b>Nama</b></td>
-                                            <td><b>:</b></td>
-                                            <td>SOFEA AINA BINTI MUHAMMAD AMIR</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>No. Kad Pengenalan</b></td>
-                                            <td><b>:</b></td>
-                                            <td>950623031212</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>Alamat</b></td>
-                                            <td><b>:</b></td>
-                                            <td>B 8/5/4 KUARTERS PDRM FLAT PADANG, HILIRAN 21100 KUALA TERENGGANU,TERENGGANU</td>
-                                        </tr>
                                         <tr>
                                             <td><b>No. Rujukan</b></td>
                                             <td><b>:</b></td>
@@ -97,7 +82,12 @@
                                         <tr>
                                             <td><b>Tajuk</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="noRujukan" name="noRujukan" style="width: 100%"></td>
+                                            <td><input type="text" id="tajuk" name="tajuk" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Tujuan</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="tujuan" name="tujuan" style="width: 100%"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Isi Kandungan 1</b></td>
@@ -125,15 +115,50 @@
                                             <td><input type="text" id="penutup2" name="penutup2" style="width: 100%"></td>
                                         </tr>
                                         <tr>
-                                            <td><b>Penutup 3</b></td>
+                                            <td><b>Penutup 3.1</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup3" name="penutup3" style="width: 100%"></td>
+                                            <td><input type="text" id="penutup3_1" name="penutup3_1" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Penutup 3.2</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="penutup3_2" name="penutup3_2" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Penutup 3.3</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="penutup3_3" name="penutup3_3" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Penutup 3.4</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="penutup3_4" name="penutup3_4" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Penutup 4.1</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="penutup4_1" name="penutup4_1" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Penutup 4.2</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="penutup4_2" name="penutup4_2" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Penutup 4.4</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="penutup4_3" name="penutup4_3" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Penutup 4.4</b></td>
+                                            <td><b>:</b></td>
+                                            <td><input type="text" id="penutup4_4" name="penutup4_4" style="width: 100%"></td>
                                         </tr>
                                     </table>
 
                                     <div class="d-flex flex-center mt-5">
                                         <button type="submit" class="btn btn-primary btn-sm">
-                                            Hantar
+                                            Kemaskini
                                         </button>
                                     </div>
                                 </form>

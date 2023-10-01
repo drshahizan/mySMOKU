@@ -13,13 +13,22 @@ return new class extends Migration
     {
         Schema::create('permohonan_surat_tawaran', function (Blueprint $table) {
             $table->id();
+            $table->string('no_rujukan');
             $table->string('tajuk');
-            $table->string('kandungan1');
-            $table->string('kandungan2');
-            $table->string('kandungan3');
+            $table->string('tujuan');
+            $table->longText('kandungan1');
+            $table->longText('kandungan2');
+            $table->longText('kandungan3');
             $table->string('penutup1');
             $table->string('penutup2');
-            $table->string('penutup3');
+            $table->string('penutup3_1');
+            $table->string('penutup3_2');
+            $table->string('penutup3_3');
+            $table->string('penutup3_4');
+            $table->string('penutup4_1');
+            $table->string('penutup4_2');
+            $table->string('penutup4_3');
+            $table->string('penutup4_4');
             $table->timestamps();
         });
     }
