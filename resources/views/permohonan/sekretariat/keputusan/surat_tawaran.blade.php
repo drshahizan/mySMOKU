@@ -1,41 +1,5 @@
 <html lang="en">
     <head>
-        {{-- <style>
-            @page {
-                size: A4;
-            } 
-        
-            body {
-                margin: 0.3cm;
-                font-size:14px;
-                font-family: Arial, sans-serif;
-                line-height: 1.15;
-                /* background-image:url('logoKPT.png');  */
-                background-size: 450px 300px; 
-                background-position:center; 
-                background-repeat: no-repeat; 
-                background-attachment: fixed; 
-            }
-
-            .parentSpace{
-                width: 100%;
-                display:inherit;
-            }
-            .left {
-                float: left;
-                width: 60%;
-            }
-            .right {
-                float: right;
-                width: 20%;
-            }
-
-            /* .contact-info {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            } */
-        </style>         --}}
         <style>
             @page {
                 size: A4;
@@ -161,7 +125,7 @@
         <p>Tuan/Puan,</p>
         <br>
         <h3>TAWARAN PROGRAM BANTUAN KEWANGAN PELAJAR OKU DI INSTITUSI
-            PENGAJIAN TINGGI (IPT) KEMENTERIAN PENGAJIAN TINGGI (KPT)</h3>
+            PENGAJIAN TINGGI (IPT) KEMENTERIAN PENDIDIKAN TINGGI (KPT)</h3>
         <br>
         <p>Sukacita di maklumkan bahawa tuan/puan telah ditawarkan pembiayaan Program Bantuan
             Kewangan Pelajar OKU di Kementerian Pengajian Tinggi untuk mengikuti kursus berikut :-</p>

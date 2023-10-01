@@ -17,14 +17,13 @@ use App\Models\TuntutanItem;
 use App\Models\Waris;
 use App\Models\Akademik;
 use App\Models\Kelulusan;
+use App\Models\SuratTawaran;
 use App\Models\Tuntutan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -418,18 +417,9 @@ class SekretariatController extends Controller
 
     public function kemaskiniSuratTawaran()
     {
-        return view('permohonan.sekretariat.kelulusan.kemaskini_surat_tawaran');
+        $kandungan = SuratTawaran::all();
+        return view('permohonan.sekretariat.kelulusan.kemaskini_surat_tawaran', compact('kandungan'));
     }
-
-    // public function muatTurunSuratTawaran($permohonanId)
-    // {
-    //     // Get the "permohonan" data based on $permohonanId
-    //     $permohonan = Permohonan::where('id', $permohonanId)->first();
-    //     $todayDate = Carbon::now()->format('d-m-Y');
-    //     $pdf = PDF::loadView('permohonan.sekretariat.keputusan.surat_tawaran', compact('permohonan','todayDate'));
-    //     return $pdf->download('SuratTawaran_'.$permohonanId.'.pdf');
-    // }
-
 
     //TUNTUTAN
     public function senaraiTuntutanKedua()

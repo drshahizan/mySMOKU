@@ -74,91 +74,88 @@
                                 <form action="{{ route('save') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <table>
+                                        @foreach($kandungan as $surat)
                                         <tr>
                                             <td><b>No. Rujukan</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="noRujukan" name="noRujukan" style="width: 100%"></td>
+                                            <td><input type="text" id="noRujukan" name="noRujukan" style="width: 100%" value="{{$surat->no_rujukan}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Tajuk</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="tajuk" name="tajuk" style="width: 100%"></td>
+                                            <td><input type="text" id="tajuk" name="tajuk" style="width: 100%" value="{{$surat->tajuk}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Tujuan</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="tujuan" name="tujuan" style="width: 100%"></td>
+                                            <td><textarea name="kandungan1" id="kandungan1" cols="120" rows="2">{{$surat->tujuan}}</textarea></td>
                                         </tr>
                                         <tr>
                                             <td><b>Isi Kandungan 1</b></td>
                                             <td><b>:</b></td>
-                                            <td><textarea name="kandungan1" id="kandungan1" cols="120" rows="5"></textarea></td>
+                                            <td><textarea name="kandungan1" id="kandungan1" cols="120" rows="5">{{$surat->kandungan1}}</textarea></td>
                                         </tr>
                                         <tr>
                                             <td><b>Isi Kandungan 2</b></td>
                                             <td><b>:</b></td>
-                                            <td><textarea name="kandungan2" id="kandungan2" cols="120" rows="5"></textarea></td>
+                                            <td><textarea name="kandungan2" id="kandungan2" cols="120" rows="5">{{$surat->kandungan2}}</textarea></td>
                                         </tr>
                                         <tr>
                                             <td><b>Isi Kandungan 3</b></td>
                                             <td><b>:</b></td>
-                                            <td><textarea name="kandungan3" id="kandungan3" cols="120" rows="5"></textarea></td>
+                                            <td><textarea name="kandungan3" id="kandungan3" cols="120" rows="5">{{$surat->kandungan3}}</textarea></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 1</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup1" name="penutup1" style="width: 100%"></td>
+                                            <td><input type="text" id="penutup1" name="penutup1" style="width: 100%" value="{{$surat->penutup1}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 2</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup2" name="penutup2" style="width: 100%"></td>
+                                            <td><input type="text" id="penutup2" name="penutup2" style="width: 100%" value="{{$surat->penutup2}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 3.1</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup3_1" name="penutup3_1" style="width: 100%"></td>
+                                            <td><input type="text" id="penutup3_1" name="penutup3_1" style="width: 100%" value="{{$surat->penutup3_1}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 3.2</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup3_2" name="penutup3_2" style="width: 100%"></td>
+                                            <td><input type="text" id="penutup3_2" name="penutup3_2" style="width: 100%" value="{{$surat->penutup3_2}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 3.3</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup3_3" name="penutup3_3" style="width: 100%"></td>
+                                            <td><input type="text" id="penutup3_3" name="penutup3_3" style="width: 100%" value="{{$surat->penutup3_3}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 3.4</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup3_4" name="penutup3_4" style="width: 100%"></td>
+                                            <td><input type="text" id="penutup3_4" name="penutup3_4" style="width: 100%" value="{{$surat->penutup3_4}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 4.1</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup4_1" name="penutup4_1" style="width: 100%"></td>
+                                            <td><input type="text" id="penutup4_1" name="penutup4_1" style="width: 100%" value="{{$surat->penutup4_1}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 4.2</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup4_2" name="penutup4_2" style="width: 100%"></td>
+                                            <td><input type="text" id="penutup4_2" name="penutup4_2" style="width: 100%" value="{{$surat->penutup4_2}}"></td>
                                         </tr>
                                         <tr>
-                                            <td><b>Penutup 4.4</b></td>
+                                            <td><b>Penutup 4.3</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup4_3" name="penutup4_3" style="width: 100%"></td>
+                                            <td><input type="text" id="penutup4_3" name="penutup4_3" style="width: 100%" value="{{$surat->penutup4_3}}"></td>
                                         </tr>
-                                        <tr>
-                                            <td><b>Penutup 4.4</b></td>
-                                            <td><b>:</b></td>
-                                            <td><input type="text" id="penutup4_4" name="penutup4_4" style="width: 100%"></td>
-                                        </tr>
+                                        @endforeach
                                     </table>
 
                                     <div class="d-flex flex-center mt-5">
                                         <button type="submit" class="btn btn-primary btn-sm">
-                                            Kemaskini
+                                            Lihat
                                         </button>
                                     </div>
                                 </form>
@@ -168,56 +165,5 @@
                 </div>
             </div>
         </div>
-
-        <script>
-            //sorting function
-            $('#sortTable1').DataTable();
-            $('#sortTable2').DataTable();
-
-            // check all checkboxes at once
-            function toggle(source) {
-                var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
-                for (var i = 0; i < checkboxes.length; i++) {
-                    checkboxes[i].checked = source.checked;
-                }
-            }
-        </script>
-        
-        <!-- Vedor js file and create bundle with grunt  --> 
-        <script src="assets/bundles/flotscripts.bundle.js"></script><!-- flot charts Plugin Js -->
-        <script src="assets/bundles/c3.bundle.js"></script>
-        <script src="assets/bundles/apexcharts.bundle.js"></script>
-        <script src="assets/bundles/jvectormap.bundle.js"></script>
-        <script src="assets/vendor/toastr/toastr.js"></script>
-        
-        <!-- Project core js file minify with grunt --> 
-        <script src="assets/bundles/mainscripts.bundle.js"></script>
-        <script src="../js/index.js"></script>
-        
-        <!-- Vedor js file and create bundle with grunt  --> 
-        <script src="assets/bundles/morrisscripts.bundle.js"></script><!-- Morris Plugin Js -->
-        
-        <!-- Vedor js file and create bundle with grunt  -->    
-        <script src="assets/bundles/datatablescripts.bundle.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.html5.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.print.min.js"></script>
-        <script src="assets/vendor/sweetalert/sweetalert.min.js"></script>
-
-        <!-- SweetAlert Plugin Js --> 
-        <script src="../js/pages/forms/form-wizard.js"></script>
-        <script src="../js/pages/tables/jquery-datatable.js"></script>
-        <script src="../js/pages/charts/morris.js"></script>
-        <script src="../js/pages/charts/c3.js"></script>
-
-        <!-- Javascript -->
-        <script src="assets/bundles/libscripts.bundle.js"></script>    
-        <script src="assets/bundles/vendorscripts.bundle.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
-        <!-- Bootstrap --> 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     </body>
 </x-default-layout> 

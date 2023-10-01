@@ -27,8 +27,8 @@ return new class extends Migration
             $table->string('penutup3_4');
             $table->string('penutup4_1');
             $table->string('penutup4_2');
-            $table->string('penutup4_3');
-            $table->string('penutup4_4');
+            $table->string('penutup4_3')->nullable();
+            $table->string('penutup4_4')->nullable();
             $table->timestamps();
         });
     }
