@@ -1,4 +1,9 @@
 <x-auth-layout>
+    
+@section('announcement')
+    <h2>Hebahan</h2>
+    <p>{!! $catatan !!}</p> 
+@endsection      
 
     <!--begin::Form-->
     <form class="form w-100" id="kt_sign_up_form" action="{{ route('semaksyarat') }}" data-kt-redirect-url="{{ route('daftarlayak') }}" method="post">

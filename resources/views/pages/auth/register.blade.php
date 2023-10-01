@@ -1,4 +1,9 @@
 <x-auth-layout>
+   
+@section('announcement')
+    <h2>Hebahan</h2>
+    <p>{!! $catatan !!}</p> 
+@endsection  
 
     <!--begin::Form-->
     <form class="form w-100" novalidate="novalidate" action="{{ route('register') }}" method="post">

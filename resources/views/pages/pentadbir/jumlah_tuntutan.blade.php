@@ -86,7 +86,9 @@
 								<select name="semester" id="semester" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
 									<option value=""></option>
 									<option value="1">1</option>
-									<option value="2-4">2-4</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
 								</select>
 								<!--end::Input-->
 							</div>

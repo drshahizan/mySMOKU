@@ -9,6 +9,7 @@ use App\Models\Infoipt;
 use App\Models\PeringkatPengajian;
 use App\Models\Kursus;
 use App\Models\Akademik;
+use App\Models\TarikhIklan;
 
 
 
@@ -18,6 +19,8 @@ class SemakUserController extends Controller
     public function index(){
 
         addJavascriptFile('assets/js/custom/authentication/semak/general.js');
+        $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
+        $catatan = $iklan->catatan ?? "";
 
         $ipt = InfoIpt::orderby("nama_institusi","asc")
              ->where('jenis_institusi','=','IPTS')
@@ -25,7 +28,7 @@ class SemakUserController extends Controller
         $kodperingkat = PeringkatPengajian::orderby("peringkat","asc")
             ->get();
 
-        return view('pages.auth.semaksyarat')
+        return view('pages.auth.semaksyarat', compact('catatan'))
         ->with("ipt",$ipt)
         ->with("kod_peringkat",$kodperingkat);
    }

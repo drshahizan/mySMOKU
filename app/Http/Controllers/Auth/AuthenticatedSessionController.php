@@ -20,7 +20,7 @@ class AuthenticatedSessionController extends Controller
     {
         addJavascriptFile('assets/js/custom/authentication/sign-in/general.js');
         $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
-        $catatan = $iklan->catatan;
+        $catatan = $iklan->catatan ?? "";
 
         return view('pages.auth.login', compact('catatan'));
     }
