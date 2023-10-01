@@ -71,92 +71,88 @@
                             </div>
 
                             <div class="card-body" style="padding: 0px 10px 20px 10px;">
-                                <form action="{{ route('save') }}" method="post" enctype="multipart/form-data">
+                                <form action="{{ route('preview', ['suratTawaranId' => $suratTawaran->id]) }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <table>
-                                        @foreach($kandungan as $surat)
                                         <tr>
                                             <td><b>No. Rujukan</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="noRujukan" name="noRujukan" style="width: 100%" value="{{$surat->no_rujukan}}"></td>
+                                            <td><input type="text" id="noRujukan" name="noRujukan" style="width: 100%" value="{{$suratTawaran->no_rujukan}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Tajuk</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="tajuk" name="tajuk" style="width: 100%" value="{{$surat->tajuk}}"></td>
+                                            <td><input type="text" id="tajuk" name="tajuk" style="width: 100%" value="{{$suratTawaran->tajuk}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Tujuan</b></td>
                                             <td><b>:</b></td>
-                                            <td><textarea name="kandungan1" id="kandungan1" cols="120" rows="2">{{$surat->tujuan}}</textarea></td>
+                                            <td><textarea name="kandungan1" id="kandungan1" cols="120" rows="2">{{$suratTawaran->tujuan}}</textarea></td>
                                         </tr>
                                         <tr>
                                             <td><b>Isi Kandungan 1</b></td>
                                             <td><b>:</b></td>
-                                            <td><textarea name="kandungan1" id="kandungan1" cols="120" rows="5">{{$surat->kandungan1}}</textarea></td>
+                                            <td><textarea name="kandungan1" id="kandungan1" cols="120" rows="5">{{$suratTawaran->kandungan1}}</textarea></td>
                                         </tr>
                                         <tr>
                                             <td><b>Isi Kandungan 2</b></td>
                                             <td><b>:</b></td>
-                                            <td><textarea name="kandungan2" id="kandungan2" cols="120" rows="5">{{$surat->kandungan2}}</textarea></td>
+                                            <td><textarea name="kandungan2" id="kandungan2" cols="120" rows="5">{{$suratTawaran->kandungan2}}</textarea></td>
                                         </tr>
                                         <tr>
                                             <td><b>Isi Kandungan 3</b></td>
                                             <td><b>:</b></td>
-                                            <td><textarea name="kandungan3" id="kandungan3" cols="120" rows="5">{{$surat->kandungan3}}</textarea></td>
+                                            <td><textarea name="kandungan3" id="kandungan3" cols="120" rows="5">{{$suratTawaran->kandungan3}}</textarea></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 1</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup1" name="penutup1" style="width: 100%" value="{{$surat->penutup1}}"></td>
+                                            <td><input type="text" id="penutup1" name="penutup1" style="width: 100%" value="{{$suratTawaran->penutup1}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 2</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup2" name="penutup2" style="width: 100%" value="{{$surat->penutup2}}"></td>
+                                            <td><input type="text" id="penutup2" name="penutup2" style="width: 100%" value="{{$suratTawaran->penutup2}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 3.1</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup3_1" name="penutup3_1" style="width: 100%" value="{{$surat->penutup3_1}}"></td>
+                                            <td><input type="text" id="penutup3_1" name="penutup3_1" style="width: 100%" value="{{$suratTawaran->penutup3_1}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 3.2</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup3_2" name="penutup3_2" style="width: 100%" value="{{$surat->penutup3_2}}"></td>
+                                            <td><input type="text" id="penutup3_2" name="penutup3_2" style="width: 100%" value="{{$suratTawaran->penutup3_2}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 3.3</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup3_3" name="penutup3_3" style="width: 100%" value="{{$surat->penutup3_3}}"></td>
+                                            <td><input type="text" id="penutup3_3" name="penutup3_3" style="width: 100%" value="{{$suratTawaran->penutup3_3}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 3.4</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup3_4" name="penutup3_4" style="width: 100%" value="{{$surat->penutup3_4}}"></td>
+                                            <td><input type="text" id="penutup3_4" name="penutup3_4" style="width: 100%" value="{{$suratTawaran->penutup3_4}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 4.1</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup4_1" name="penutup4_1" style="width: 100%" value="{{$surat->penutup4_1}}"></td>
+                                            <td><input type="text" id="penutup4_1" name="penutup4_1" style="width: 100%" value="{{$suratTawaran->penutup4_1}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 4.2</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup4_2" name="penutup4_2" style="width: 100%" value="{{$surat->penutup4_2}}"></td>
+                                            <td><input type="text" id="penutup4_2" name="penutup4_2" style="width: 100%" value="{{$suratTawaran->penutup4_2}}"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Penutup 4.3</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="penutup4_3" name="penutup4_3" style="width: 100%" value="{{$surat->penutup4_3}}"></td>
+                                            <td><input type="text" id="penutup4_3" name="penutup4_3" style="width: 100%" value="{{$suratTawaran->penutup4_3}}"></td>
                                         </tr>
-                                        @endforeach
                                     </table>
 
                                     <div class="d-flex flex-center mt-5">
-                                        <button type="submit" class="btn btn-primary btn-sm">
-                                            Lihat
-                                        </button>
+                                        <button type="submit" class="btn btn-primary btn-sm">Preview Changes</button>
                                     </div>
                                 </form>
                             </div>

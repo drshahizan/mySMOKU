@@ -415,10 +415,54 @@ class SekretariatController extends Controller
         return $pdf->stream('SuratTawaran_'.$permohonanId.'.pdf');
     }
 
-    public function kemaskiniSuratTawaran()
+    //Step 1: Editing Data - Allow users to view and edit the current data.
+    public function editSuratTawaran()
     {
-        $kandungan = SuratTawaran::all();
-        return view('permohonan.sekretariat.kelulusan.kemaskini_surat_tawaran', compact('kandungan'));
+        $suratTawaran = SuratTawaran::first();
+        return view('permohonan.sekretariat.kemaskini.surat_tawaran', compact('suratTawaran'));
+    }
+
+
+    //Step 2: Preview Changes - Show users a preview of the changes they made.
+    public function previewSuratTawaran($suratTawaranId)
+    {
+        $suratTawaran = SuratTawaran::find($suratTawaranId);
+
+        if (!$suratTawaran) {
+            abort(404);
+        }
+
+        return view('permohonan.sekretariat.kemaskini.preview_surat_tawaran', compact('suratTawaran'))->with('editMode', true);
+    }
+
+
+    //Step 3: Confirm and Update - Allow users to confirm and update the data in the database.
+    public function confirmUpdateSuratTawaran(Request $request)
+    {
+        // Validate the form data
+        $validatedData = $request->validate([
+            'noRujukan' => 'required',
+            'tajuk' => 'required',
+            // Add validation rules for other fields
+        ]);
+
+        // Retrieve the SuratTawaran record you want to update
+        $suratTawaran = SuratTawaran::find($request->input('suratTawaranId'));
+
+        if (!$suratTawaran) {
+            abort(404);
+        }
+
+        // Update the record with the new values
+        $suratTawaran->noRujukan = $validatedData['noRujukan'];
+        $suratTawaran->tajuk = $validatedData['tajuk'];
+        // Update other fields as needed
+
+        // Save the updated record
+        $suratTawaran->save();
+
+        // Redirect back to the form with a success message
+        return redirect()->route('preview')->with('success', 'Surat Tawaran telah dikemaskini.');
     }
 
     //TUNTUTAN

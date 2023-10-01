@@ -90,9 +90,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('sekretariat/permohonan/PPK/status/{status}', [SekretariatController::class, 'filterStatusPermohonanPPK'])->name('statusP.permohonan');
     Route::get('sekretariat/tuntutan/PPK/dibayar', [SekretariatController::class, 'bilanganTuntutanPPK']);
 
-    //Permohonan - Sekretariat - Kemaskini
+    //Kemaskini - Sekretariat - Pengajian
     Route::get('sekretariat/kemaskini/peringkat/pengajian', [SekretariatController::class, 'kemaskiniPeringkatPengajian'])->name('peringkat.pengajian');
-    Route::get('permohonan/sekretariat/kemaskini/surat/tawaran', [SekretariatController::class, 'kemaskiniSuratTawaran']);
+
+    //Kemaskini - Sekretariat - Surat Tawaran
+    Route::get('permohonan/sekretariat/kemaskini/surat/tawaran', [SekretariatController::class, 'editSuratTawaran']);
+    Route::post('permohonan/sekretariat/kemaskini/surat/tawaran/preview/{suratTawaranId}', [SekretariatController::class, 'previewSuratTawaran'])->name('preview');
+    Route::post('permohonan/sekretariat/kemaskini/surat/tawaran/update', [SekretariatController::class, 'confirmUpdateSuratTawaran'])->name('update');
 
     //Permohonan - Sekretariat - Kelulusan
     Route::post('permohonan/sekretariat/hantar/semua', [SekretariatController::class, 'hantarSemuaKeputusanPermohonan'])->name('bulk.approval');
