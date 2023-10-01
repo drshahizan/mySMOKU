@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Smoku;
+use App\Models\TarikhIklan;
 use GuzzleHttp\Client;
 
 class DaftarUserController extends Controller
 {
     public function create(Request $request)
     {   
-        return view('pages.auth.register');
+        $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
+        $catatan = $iklan->catatan ?? "";
+        return view('pages.auth.register', compact('catatan'));
     }
 
     public function semak(Request $request)
