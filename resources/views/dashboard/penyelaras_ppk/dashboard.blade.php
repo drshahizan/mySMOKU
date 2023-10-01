@@ -103,10 +103,10 @@
                             <thead>
                                 <tr class="fs-7 fw-bold border-0 text-dark">
                                     <th>Bil</th>
-                                    <th class="min-w-150px" colspan="2">No. Kad Pengenalan</th>
-                                    <th class="min-w-150px" colspan="2">No. Kad JKM</th>
-                                    <th class="min-w-150px" colspan="2">Nama</th>
-                                    <th class="text-center min-w-150px" colspan="2">Status Permohonan</th>
+                                    <th class="min-w-100px" colspan="2">No. Kad Pengenalan</th>
+                                    <th class="min-w-100px" colspan="2">No. Kad JKM</th>
+                                    <th class="min-w-120px" colspan="2">Nama</th>
+                                    <th class="text-center min-w-80px" colspan="2">Status</th>
                                 </tr>
                             </thead>
                             <!--end::Table head-->
@@ -129,16 +129,16 @@
                                     @endphp
                                 <tr>
                                     <td>
-                                        <span class="text-dark fw-bold fs-6 me-3">{{ $key + 1 }}. </span>
+                                        <span class="text-dark fs-6 me-3">{{ $key + 1 }}. </span>
                                     </td>
                                     <td class="" colspan="2">
-                                        <span class="text-dark fw-bold fs-6 me-3">{{ $smoku->no_kp}}</span>
+                                        <span class="text-dark fs-6 me-3">{{ $smoku->no_kp}}</span>
                                     </td>
                                     <td class="" colspan="2">
-                                        <span class="text-dark fw-bold fs-6 me-3">{{ $smoku->no_daftar_oku}}</span>
+                                        <span class="text-dark fs-6 me-3">{{ $smoku->no_daftar_oku}}</span>
                                     </td>
                                     <td class="" colspan="2">
-                                        <span class="text-gray-800 fw-bold text-center mb-1 fs-6">{{$pemohon}}</span>
+                                        <span class="text-dark fs-6 me-3">{{$pemohon}}</span>
                                     </td>
                                     <td class="text-center"><a href="{{route('penyelaras.ppk.permohonan.baharu',$smoku->smoku_id)}}">
                                         <button class="btn bg-primary text-white">Belum Mohon</button></a>

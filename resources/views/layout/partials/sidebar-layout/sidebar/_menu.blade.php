@@ -110,7 +110,7 @@
 		<div class="menu-item">
 			<a class="menu-link" href="{{ route('senarai.permohonanBaharu')}}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Baru</span>
+					<span class="menu-title">Baharu</span>
 			</a>
 		</div>
 		<div class="menu-item">
@@ -342,7 +342,7 @@
 		<div class="menu-item">
 			<a class="menu-link" href="{{ route('senarai.ppk.permohonanBaharu')}}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Baru</span>
+					<span class="menu-title">Baharu</span>
 			</a>
 		</div>
 		{{-- <div class="menu-item">
@@ -368,7 +368,7 @@
 			<a class="menu-link" href="{{route('senarai.ppk.tuntutanBaharu')}}">
 
 					<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
-					<span class="menu-title">Baru</span>
+					<span class="menu-title">Baharu</span>
 			</a>
 		</div>
 
