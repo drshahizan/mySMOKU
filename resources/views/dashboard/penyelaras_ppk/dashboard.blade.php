@@ -141,7 +141,12 @@
                                         <span class="text-dark fs-6 me-3">{{$pemohon}}</span>
                                     </td>
                                     <td class="text-center"><a href="{{route('penyelaras.ppk.permohonan.baharu',$smoku->smoku_id)}}">
-                                        <button class="btn bg-primary text-white">Belum Mohon</button></a>
+                                        @if ($smoku->status == 1)
+                                            <button class="btn bg-batal text-white">Deraf</button></a>
+                                        @else 
+                                            <button class="btn bg-primary text-white">Belum Mohon</button></a>
+                                        @endif
+                                        
                                     </td>
                                 </tr>
                                 @endforeach	

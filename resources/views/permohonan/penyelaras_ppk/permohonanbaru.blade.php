@@ -79,11 +79,11 @@
 										$institusi = implode(' ', $result);
 									@endphp
                                     <tr>
-                                        <td><a href="{{route('penyelaras.ppk.view.permohonan',$smoku->smoku_id)}}">{{ $smoku->no_rujukan_permohonan}}</a></td>
+                                        <td><a href="{{route('penyelaras.ppk.permohonan.baharu',$smoku->smoku_id)}}">{{ $smoku->no_rujukan_permohonan}}</a></td>
                                         <td>{{ $pemohon}}</td>
                                         <td>{{ $institusi}}</td>
                                         <td class="text-center">{{ $smoku->created_at->format('d/m/Y h:i:sa')}}</td>
-                                        <td class="text-center"><button type="button" class="btn btn-success btn-sm">Hantar</button></td>
+                                        <td class="text-center"><button type="button" class="btn bg-info text-white">Baharu</button></td>
                                     </tr>  
                                     @endforeach	
                                 </tbody>

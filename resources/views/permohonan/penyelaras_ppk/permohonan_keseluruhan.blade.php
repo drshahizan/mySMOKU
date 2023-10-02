@@ -86,7 +86,7 @@
                                             $institusi = implode(' ', $result);
                                         @endphp
                                         <tr>
-                                            <td><a href="@if ($smoku->no_rujukan_permohonan !=null) {{route('penyelaras.ppk.view.permohonan',$smoku->smoku_id)}} @endif">{{ $smoku->no_rujukan_permohonan}}</a></td>
+                                            <td><a href="@if ($smoku->no_rujukan_permohonan !=null) {{route('penyelaras.ppk.permohonan.baharu',$smoku->smoku_id)}} @endif">{{ $smoku->no_rujukan_permohonan}}</a></td>
                                             <td>{{ $pemohon}}</td>
                                             <td>{{ $institusi}}</td>
                                             <td class="text-center">@if ($smoku->created_at !=null) {{ $smoku->created_at->format('d/m/Y h:i:sa')}} @endif</td>

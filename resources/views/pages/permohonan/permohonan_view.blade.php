@@ -815,16 +815,18 @@
 									<!--begin::Input wrapper-->
 									<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" required {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 										<option value="">Pilih</option>
-										@if(!empty($butiranPelajar->tempoh_pengajian))
-											<option value="{{$butiranPelajar->tempoh_pengajian}}" selected>{{$butiranPelajar->tempoh_pengajian}}</option>
+										@if(empty($butiranPelajar->tempoh_pengajian))
+											@for($i = 1; $i <= 4; $i += 0.5)
+												<option value="{{ ($i == (int)$i) ? (int)$i : $i }}">{{ ($i == (int)$i) ? (int)$i : number_format($i, 1) }}</option>
+											@endfor
 										@else
-											<option value="1">1</option>
-											<option value="1.5">1.5</option>
-											<option value="2">2</option>
-											<option value="2.5">2.5</option>
-											<option value="3">3</option>
-											<option value="3.5">3.5</option>
-											<option value="4">4</option>
+											@for($i = 1; $i <= 4; $i += 0.5)
+												@if($butiranPelajar->tempoh_pengajian == ($i == (int)$i ? (int)$i : number_format($i, 1)))
+													<option value="{{ ($i == (int)$i) ? (int)$i : $i }}" selected>{{ ($i == (int)$i) ? (int)$i : number_format($i, 1) }}</option>
+												@else
+													<option value="{{ ($i == (int)$i) ? (int)$i : $i }}">{{ ($i == (int)$i) ? (int)$i : number_format($i, 1) }}</option>
+												@endif
+											@endfor
 										@endif
 									</select>
 									<!--end::Input wrapper-->
@@ -861,11 +863,27 @@
 									<!--begin::Input wrapper-->
 									<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 										<option value="">Pilih</option>
-										@if(!empty($butiranPelajar->sesi))
-											<option value="{{$butiranPelajar->sesi}}" selected>{{$butiranPelajar->sesi}}</option>
+										@if(empty($butiranPelajar->sesi))
+											@php
+												$currentYear = date('Y');
+											@endphp
+											@for($year = $currentYear; $year <= ($currentYear + 1); $year++)
+												@php
+													$sesi = $year . '/' . ($year + 1);
+												@endphp
+												<option value="{{ $sesi }}">{{ $sesi }}</option>
+											@endfor
 										@else
-											<option value="2023/2024">2023/2024</option>
-											<option value="2024/2025">2024/2025</option>
+											@for($year = date('Y'); $year <= (date('Y') + 1); $year++)
+												@php
+													$sesi = $year . '/' . ($year + 1);
+												@endphp
+												@if($butiranPelajar->sesi == $sesi)
+													<option value="{{ $sesi }}" selected>{{ $sesi }}</option>
+												@else
+													<option value="{{ $sesi }}">{{ $sesi }}</option>
+												@endif
+											@endfor
 										@endif
 									</select>
 									<!--end::Input wrapper-->
@@ -921,16 +939,27 @@
 									<!--begin::Input wrapper-->
 										<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 											<option value="">Pilih</option>
-											@if(!empty($butiranPelajar->tempoh_pengajian))
-												<option value="{{$butiranPelajar->tempoh_pengajian}}" selected>{{$butiranPelajar->tempoh_pengajian}}</option>
-											@else
+											@if(empty($butiranPelajar->sem_semasa))
 												<option value="1">1</option>
-												<option value="1.5">1.5</option>
 												<option value="2">2</option>
-												<option value="2.5">2.5</option>
 												<option value="3">3</option>
-												<option value="3.5">3.5</option>
 												<option value="4">4</option>
+												<option value="5">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="8">8</option>
+												<option value="9">9</option>
+												<option value="10">10</option>
+												<option value="11">11</option>
+												<option value="12">12</option>
+											@else
+												@for($i = 1; $i <= 12; $i++)
+													@if($butiranPelajar->sem_semasa == $i)
+														<option value="{{ $i }}" selected>{{ $i }}</option>
+													@else
+														<option value="{{ $i }}">{{ $i }}</option>
+													@endif
+												@endfor
 											@endif
 										</select>
 									<!--end::Input wrapper-->
