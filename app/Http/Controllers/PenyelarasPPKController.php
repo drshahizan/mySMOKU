@@ -440,7 +440,7 @@ class PenyelarasPPKController extends Controller
         ->get(['smoku.*', 'permohonan.*', 'smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
 
         //dd($smoku);
-        return view('permohonan.penyelaras_ppk.permohonanbaru', compact('smoku'));
+        return view('permohonan.penyelaras_ppk.senarai_baharu', compact('smoku'));
     }
 
     // public function viewPermohonan($id)
@@ -484,7 +484,7 @@ class PenyelarasPPKController extends Controller
         ->where('penyelaras_id','=', Auth::user()->id)
         ->get(['smoku.*', 'permohonan.*', 'bk_info_institusi.nama_institusi']);
 
-        return view('permohonan.penyelaras_ppk.permohonan_keseluruhan', compact('smoku'));
+        return view('permohonan.penyelaras_ppk.senarai_keseluruhan', compact('smoku'));
     }
     
     public function senaraiTuntutanKeseluruhan()
