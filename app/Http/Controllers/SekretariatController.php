@@ -443,7 +443,19 @@ class SekretariatController extends Controller
         $validatedData = $request->validate([
             'noRujukan' => 'required',
             'tajuk' => 'required',
-            // Add validation rules for other fields
+            'tujuan' => 'required',
+            'kandungan1' => 'required',
+            'kandungan2' => 'required',
+            'kandungan3' => 'required',
+            'pentup1' => 'required',
+            'penutup2' => 'required',
+            'penutup3_1' => 'required',
+            'penutup3_2' => 'required',
+            'penutup3_3' => 'required',
+            'penutup3_4' => 'required',
+            'penutup4_1' => 'required',
+            'penutup4_2' => 'required',
+            'penutup4_3' => 'required',
         ]);
 
         // Retrieve the SuratTawaran record you want to update
@@ -456,7 +468,19 @@ class SekretariatController extends Controller
         // Update the record with the new values
         $suratTawaran->noRujukan = $validatedData['noRujukan'];
         $suratTawaran->tajuk = $validatedData['tajuk'];
-        // Update other fields as needed
+        $suratTawaran->tujuan = $validatedData['tujuan'];
+        $suratTawaran->kandungan1 = $validatedData['kandungan1'];
+        $suratTawaran->kandungan2 = $validatedData['kandungan2'];
+        $suratTawaran->kandungan3 = $validatedData['kandungan3'];
+        $suratTawaran->penutup1 = $validatedData['penutup1'];
+        $suratTawaran->penutup2 = $validatedData['penutup2'];
+        $suratTawaran->penutup3_1 = $validatedData['penutup3_1'];
+        $suratTawaran->penutup3_2 = $validatedData['penutup3_2'];
+        $suratTawaran->penutup3_3 = $validatedData['penutup3_3'];
+        $suratTawaran->penutup3_4 = $validatedData['penutup3_4'];
+        $suratTawaran->penutup4_1 = $validatedData['penutup4_1'];
+        $suratTawaran->penutup4_2 = $validatedData['penutup4_2'];
+        $suratTawaran->penutup4_3 = $validatedData['penutup4_3'];
 
         // Save the updated record
         $suratTawaran->save();
