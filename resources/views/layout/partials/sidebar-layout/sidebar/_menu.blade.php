@@ -182,7 +182,7 @@
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{url('permohonan/sekretariat/kemaskini/surat/tawaran')}}">
+			<a class="menu-link" href="{{ route('view') }}">
 				<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
 				<span class="menu-title">Surat Tawaran</span>
 			</a>
