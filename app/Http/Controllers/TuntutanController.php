@@ -156,9 +156,9 @@ class TuntutanController extends Controller
         $tuntutan->save();
 
         //simpan dalam table tuntutan_item
-        $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
-            ->where('permohonan_id', '=', $permohonan->id)
-            ->first();
+        // $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
+        //     //->where('permohonan_id', '=', $permohonan->id) //salah ni
+        //     ->first();
         
         $user = SejarahTuntutan::create([
             'tuntutan_id' => $tuntutan->id,

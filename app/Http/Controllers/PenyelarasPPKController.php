@@ -22,6 +22,9 @@ use App\Models\Akademik;
 use App\Models\Permohonan;
 use App\Models\SejarahPermohonan;
 use App\Models\Dokumen;
+use App\Models\Peperiksaan;
+use App\Models\Tuntutan;
+use App\Models\SejarahTuntutan;
 
 
 class PenyelarasPPKController extends Controller
@@ -117,7 +120,7 @@ class PenyelarasPPKController extends Controller
         if ($permohonan && $permohonan->status >= '1') {
             return view('permohonan.penyelaras_ppk.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen'));
         } else {
-            return view('permohonan.penyelaras_ppk.borang_permohonan_ppk', compact('smoku','hubungan','infoipt','peringkat','kursus','biaya','penaja','negeri'));
+            return view('permohonan.penyelaras_ppk.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','kursus','biaya','penaja','negeri'));
         }
     }
 
@@ -462,7 +465,93 @@ class PenyelarasPPKController extends Controller
 
     public function senaraiTuntutanBaharu()
     {
-        return view('tuntutan.penyelaras_ppk.tuntutanbaru');
+        $layak = Smoku::join('permohonan','permohonan.smoku_id','=','smoku.id')
+        ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
+        ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
+        ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
+        ->where('penyelaras_id','=', Auth::user()->id)
+        ->where('permohonan.status', 6) 
+        ->get(['smoku.*', 'permohonan.no_rujukan_permohonan', 'permohonan.status as permohonan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
+        //dd($layak);
+
+        
+
+        return view('tuntutan.penyelaras_ppk.tuntutan_baharu', compact('layak'));
+    }
+
+    public function hantarTuntutan(Request $request, $id)
+    {
+        $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
+
+        //simpan dalam table peperiksaan
+        $kepPeperiksaan=$request->kepPeperiksaan;
+        $counter = 1; 
+
+        //foreach($kepPeperiksaan as $kepPeperiksaan) {
+        
+            $filenamekepP =$kepPeperiksaan->getClientOriginalName();  
+            $uniqueFilename = $counter . '_' . $filenamekepP;
+
+            // Append increment to the filename until it's unique
+            while (file_exists('assets/dokumen/peperiksaan/' . $uniqueFilename)) {
+                $counter++;
+                $uniqueFilename = $counter . '_' . $filenamekepP;
+            }
+            $kepPeperiksaan->move('assets/dokumen/peperiksaan',$uniqueFilename);
+
+            
+            $data=new peperiksaan();
+            $data->permohonan_id=$permohonan->id;
+            $data->sesi=$request->sesi;
+            $data->semester=$request->semester;
+            $data->cgpa=$request->cgpa;
+            $data->kepPeperiksaan=$uniqueFilename;
+            $data->save();
+
+            $counter++;
+        //} 
+
+        $biltuntutan = Tuntutan::where('smoku_id', '<=', $id)
+            ->groupBy('no_rujukan_tuntutan')
+            ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan') 
+            ->get();
+
+        $bil = $biltuntutan->count();
+        $running_num =  $bil + 1; //sebab nak guna satu id je
+        $no_rujukan_tuntutan =  $permohonan->no_rujukan_permohonan.'/'.$running_num; // try duluuu
+
+        //simpan dalam table tuntutan
+        $tuntutan = Tuntutan::where('smoku_id', '=', $id)
+            ->where('permohonan_id', '=', $permohonan->id)
+            ->first();
+        if ($tuntutan === null) {
+            $tuntutan = Tuntutan::create([
+                'smoku_id' => $id,
+                'permohonan_id' => $permohonan->id,
+                'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
+                'sesi' => $request->sesi,
+                'semester' => $request->semester,    
+                'wang_saku' => $request->wang_saku,
+                'amaun_wang_saku' => $request->amaun_wang_saku,
+                'status' => '2',
+            ]);
+        }
+        $tuntutan->save();
+
+        //simpan dalam table sejarah
+        // $tuntutan = Tuntutan::where('smoku_id', '=', $id)
+        //     ->where('permohonan_id', '=', $permohonan->id)
+        //     ->first();
+        
+        $sejarah = SejarahTuntutan::create([
+            'tuntutan_id' => $tuntutan->id,
+            'smoku_id' => $id,
+            'status' => '2',
+    
+        ]);
+        $sejarah->save();
+        
+        return redirect()->route('senarai.ppk.tuntutanBaharu')->with('message', 'Tuntutan pelajar telah dihantar.');
     }
 
 
