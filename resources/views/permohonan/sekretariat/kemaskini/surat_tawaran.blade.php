@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="card-body" style="padding: 0px 10px 20px 10px;">
-                                <form action="{{ route('preview', ['suratTawaranId' => $suratTawaran->id]) }}" method="post" enctype="multipart/form-data">
+                                <form action="{{ route('preview', ['suratTawaranId' => $suratTawaran->id]) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <table>
                                         <tr>
@@ -75,7 +75,7 @@
                                         <tr>
                                             <td><b>Tujuan</b></td>
                                             <td><b>:</b></td>
-                                            <td><textarea name="kandungan1" id="kandungan1" cols="120" rows="2">{{$suratTawaran->tujuan}}</textarea></td>
+                                            <td><textarea name="tujuan" id="tujuan" cols="120" rows="2">{{$suratTawaran->tujuan}}</textarea></td>
                                         </tr>
                                         <tr>
                                             <td><b>Isi Kandungan 1</b></td>
