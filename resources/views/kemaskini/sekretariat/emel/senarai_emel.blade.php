@@ -6,6 +6,7 @@
 
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="/assets/css/sekretariat.css">
+        <link rel="stylesheet" href="/assets/css/saringan.css">
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -43,75 +44,80 @@
                             <div class="row g-3 g-lg-6" style="text-align: center;">
                                 <!--begin::Col-->
                                 <div class="col-3">
-                                    <!--begin::Items-->
-                                    <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
-                                        <!--begin::Symbol-->
-                                        <div class="symbol symbol-30px me-0 mb-5">
-                                            {{-- <span class="symbol-label"> --}}
-                                            <i class="fas fa-list-ol text-light" style="font-size: 20px;">
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Permohonan Dikembalikan</span>
-                                            </i>
-                                            {{-- </span> --}}
+                                    <a href="{{url('kemaskini/sekretariat/emel/BKOKU/permohonan/kemaskini-dikembalikan')}}">
+                                        <!--begin::Items-->
+                                        <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-orange">
+                                            <!--begin::Symbol-->
+                                            <div class="symbol symbol-30px me-0 mb-5 justify-content-center align-items-center">
+                                                {{-- <p class="symbol-label"> --}}
+                                                <i class="fa-solid fa-reply text-light" style="font-size: 35px;"></i><br><br>
+                                                <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px;">Permohonan Dikembalikan</p>
+                                                {{-- </p> --}}
+                                            </div>
+                                            <!--end::Symbol-->
                                         </div>
-                                        <!--end::Symbol-->
-                                    </div>
-                                    <!--end::Items-->
+                                        <!--end::Items-->
+                                    </a>
                                 </div>
                                 <!--end::Col-->
 
-                                <!--begin::Col-->
-                                <div class="col-3">
-                                    <!--begin::Items-->
-                                    <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
-                                        <!--begin::Symbol-->
-                                        <div class="symbol symbol-30px me-0 mb-5">
-                                            {{-- <span class="symbol-label"> --}}
-                                            <i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tuntutan Dikembalikan</span>
-                                            </i>
-                                            {{-- </span> --}}
-                                        </div>
-                                        <!--end::Symbol-->
-                                    </div>
-                                    <!--end::Items-->
-                                </div>
-                                <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-3">
 
-                                <!--begin::Col-->
-                                <div class="col-3">
-                                    <!--begin::Items-->
-                                    <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
-                                        <!--begin::Symbol-->
-                                        <div class="symbol symbol-30px me-0 mb-5">
-                                            {{-- <span class="symbol-label"> --}}
-                                            <i class="fas fa-user-check text-light" style="font-size: 20px;">
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tuntutan Layak</span>
-                                            </i>
-                                            {{-- </span> --}}
-                                        </div>
-                                        <!--end::Symbol-->
+                                        <a href="{{url('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-dikembalikan')}}">
+                                            <!--begin::Items-->
+                                            <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-dikembalikan">
+                                                <!--begin::Symbol-->
+                                                <div class="symbol symbol-30px me-0 mb-5">
+                                                    {{-- <p class="symbol-label"> --}}
+                                                    <i class="fa-solid fa-reply-all text-light" style="font-size: 35px;"></i><br><br>
+                                                    <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px;">Tuntutan Dikembalikan</p>
+                                                    {{-- </p> --}}
+                                                </div>
+                                                <!--end::Symbol-->
+                                            </div>
+                                            <!--end::Items-->
+                                        </a>
                                     </div>
-                                    <!--end::Items-->
-                                </div>
-                                <!--end::Col-->
+                                    <!--end::Col-->
 
-                                <!--begin::Col-->
-                                <div class="col-3">
-                                    <!--begin::Items-->
-                                    <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
-                                        <!--begin::Symbol-->
-                                        <div class="symbol symbol-30px me-0 mb-5">
-                                            {{-- <span class="symbol-label"> --}}
-                                            <i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tuntutan Tidak Layak</span>
-                                            </i>
-                                            {{-- </span> --}}
-                                        </div>
-                                        <!--end::Symbol-->
+                                    <!--begin::Col-->
+                                    <div class="col-3">
+                                        <a href="{{url('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-layak')}}">
+                                            <!--begin::Items-->
+                                            <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+                                                <!--begin::Symbol-->
+                                                <div class="symbol symbol-30px me-0 mb-5">
+                                                    {{-- <p class="symbol-label"> --}}
+                                                    <i class="fas fa-user-check text-light" style="font-size: 35px;"></i><br><br>
+                                                    <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px;">Tuntutan Layak</p>
+                                                    {{-- </p> --}}
+                                                </div>
+                                                <!--end::Symbol-->
+                                            </div>
+                                            <!--end::Items-->
+                                        </a>
                                     </div>
-                                    <!--end::Items-->
-                                </div>
-                                <!--end::Col-->
+                                    <!--end::Col-->
+
+                                    <!--begin::Col-->
+                                    <div class="col-3">
+                                        <a href="{{url('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-tidak-layak')}}">
+                                        <!--begin::Items-->
+                                        <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+                                            <!--begin::Symbol-->
+                                            <div class="symbol symbol-30px me-0 mb-5">
+                                                {{-- <p class="symbol-label"> --}}
+                                                <i class="fa-solid fa-user-xmark text-light" style="font-size: 35px;"></i><br><br>
+                                                <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Tuntutan Tidak Layak</p>
+                                                {{-- </p> --}}
+                                            </div>
+                                            <!--end::Symbol-->
+                                        </div>
+                                        <!--end::Items-->
+                                        </a>
+                                    </div>
+                                    <!--end::Col-->
                             </div>
                             <!--end::Row-->
                         </div>
@@ -125,73 +131,77 @@
                             <div class="row g-3 g-lg-6" style="text-align: center;">
                                 <!--begin::Col-->
                                 <div class="col-3">
+                                    <a href="{{url('kemaskini/sekretariat/emel/PPK/permohonan/kemaskini-dikembalikan')}}">
                                     <!--begin::Items-->
-                                    <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
+                                    <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-orange">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-30px me-0 mb-5">
-                                            {{-- <span class="symbol-label"> --}}
-                                            <i class="fas fa-list-ol text-light" style="font-size: 20px;">
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Permohonan Dikembalikan</span>
-                                            </i>
-                                            {{-- </span> --}}
+                                            {{-- <p class="symbol-label"> --}}
+                                            <i class="fa-solid fa-reply text-light" style="font-size: 35px;"></i><br><br>
+                                            <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Permohonan Dikembalikan</p>
+                                            {{-- </p> --}}
                                         </div>
                                         <!--end::Symbol-->
                                     </div>
                                     <!--end::Items-->
+                                    </a>
                                 </div>
                                 <!--end::Col-->
 
                                 <!--begin::Col-->
                                 <div class="col-3">
+                                    <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-dikembalikan')}}">
                                     <!--begin::Items-->
-                                    <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
+                                    <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-dikembalikan">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-30px me-0 mb-5">
-                                            {{-- <span class="symbol-label"> --}}
-                                            <i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tuntutan Dikembalikan</span>
-                                            </i>
-                                            {{-- </span> --}}
+                                            {{-- <p class="symbol-label"> --}}
+                                            <i class="fa-solid fa-reply-all text-light" style="font-size: 35px;"></i><br><br>
+                                            <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Tuntutan Dikembalikan</p>
+                                            {{-- </p> --}}
                                         </div>
                                         <!--end::Symbol-->
                                     </div>
                                     <!--end::Items-->
+                                    </a>
                                 </div>
                                 <!--end::Col-->
 
                                 <!--begin::Col-->
                                 <div class="col-3">
+                                    <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-dikembalikan')}}">
                                     <!--begin::Items-->
                                     <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-30px me-0 mb-5">
-                                            {{-- <span class="symbol-label"> --}}
-                                            <i class="fas fa-user-check text-light" style="font-size: 20px;">
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tuntutan Layak</span>
-                                            </i>
-                                            {{-- </span> --}}
+                                            {{-- <p class="symbol-label"> --}}
+                                            <i class="fas fa-user-check text-light" style="font-size: 35px;"></i><br><br>
+                                            <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Tuntutan Layak</p>
+                                            {{-- </p> --}}
                                         </div>
                                         <!--end::Symbol-->
                                     </div>
                                     <!--end::Items-->
+                                    </a>
                                 </div>
                                 <!--end::Col-->
 
                                 <!--begin::Col-->
                                 <div class="col-3">
+                                    <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-dikembalikan')}}">
                                     <!--begin::Items-->
                                     <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-30px me-0 mb-5">
-                                            {{-- <span class="symbol-label"> --}}
-                                            <i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tuntutan Tidak Layak</span>
-                                            </i>
-                                            {{-- </span> --}}
+                                            {{-- <p class="symbol-label"> --}}
+                                            <i class="fa-solid fa-user-xmark text-light" style="font-size: 35px;"></i><br><br>
+                                            <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Tuntutan Tidak Layak</p>
+                                            {{-- </p> --}}
                                         </div>
                                         <!--end::Symbol-->
                                     </div>
                                     <!--end::Items-->
+                                    </a>
                                 </div>
                                 <!--end::Col-->
                             </div>

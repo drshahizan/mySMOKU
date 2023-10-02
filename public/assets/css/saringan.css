@@ -51,7 +51,7 @@
 }
 
 .bg-orange{
-    background:#ff9659;
+    background:#ff9659!important;
     color:rgba(255,255,255,0.7);
 }
 
@@ -70,7 +70,7 @@
 }
 
 .bg-orange:hover, .bg-orange:active{
-    background:coral!important;
+    background:#ff9659!important;
     color:white!important;
 }
 

@@ -10,16 +10,28 @@ class KemaskiniController extends Controller
         return view('kemaskini.sekretariat.emel.senarai_emel');
     }
 
-    public function kemaskiniTidakLayak(){
+    public function kemaskiniTidakLayakBKOKU(){
         return view('kemaskini.sekretariat.emel.tuntutan.kemaskini_tidak_layak');
     }
-    public function kemaskiniLayak(){
+    public function kemaskiniLayakBKOKU(){
         return view('kemaskini.sekretariat.emel.tuntutan.kemaskini_layak');
     }
-    public function kemaskiniDikembalikan(){
+    public function kemaskiniDikembalikanBKOKU(){
         return view('kemaskini.sekretariat.emel.tuntutan.kemaskini_dikembalikan');
     }
-    public function pKemaskiniDikembalikan(){
+    public function pKemaskiniDikembalikanBKOKU(){
+        return view('kemaskini.sekretariat.emel.permohonan.kemaskini_dikembalikan');
+    }
+    public function kemaskiniTidakLayakPPK(){
+        return view('kemaskini.sekretariat.emel.tuntutan.kemaskini_tidak_layak');
+    }
+    public function kemaskiniLayakPPK(){
+        return view('kemaskini.sekretariat.emel.tuntutan.kemaskini_layak');
+    }
+    public function kemaskiniDikembalikanPPK(){
+        return view('kemaskini.sekretariat.emel.tuntutan.kemaskini_dikembalikan');
+    }
+    public function pKemaskiniDikembalikanPPK(){
         return view('kemaskini.sekretariat.emel.permohonan.kemaskini_dikembalikan');
     }
 }

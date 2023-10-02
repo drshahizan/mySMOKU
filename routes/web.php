@@ -61,13 +61,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Kemaskini - Sekretariat - Emel
     Route::get('kemaskini/sekretariat/emel/senarai-emel', [KemaskiniController::class, 'senaraiEmel']);
 
-    //Kemaskini - Sekretariat - Emel - Permohonan
-    Route::get('kemaskini/sekretariat/emel/permohonan/kemaskini-dikembalikan', [KemaskiniController::class, 'pKemaskiniDikembalikan']);
+    //Kemaskini - Sekretariat - Emel - BKOKU - Permohonan
+    Route::get('kemaskini/sekretariat/emel/BKOKU/permohonan/kemaskini-dikembalikan', [KemaskiniController::class, 'pKemaskiniDikembalikanBKOKU']);
 
-    //Kemaskini - Sekretariat - Emel -Tuntutan
-    Route::get('kemaskini/sekretariat/emel/tuntutan/kemaskini-tidak-layak', [KemaskiniController::class, 'kemaskiniTidakLayak']);
-    Route::get('kemaskini/sekretariat/emel/tuntutan/kemaskini-layak', [KemaskiniController::class, 'kemaskiniLayak']);
-    Route::get('kemaskini/sekretariat/emel/tuntutan/kemaskini-dikembalikan', [KemaskiniController::class, 'kemaskiniDikembalikan']);
+    //Kemaskini - Sekretariat - Emel - BKOKU - Tuntutan
+    Route::get('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-tidak-layak', [KemaskiniController::class, 'kemaskiniTidakLayakBKOKU']);
+    Route::get('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-layak', [KemaskiniController::class, 'kemaskiniLayakBKOKU']);
+    Route::get('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-dikembalikan', [KemaskiniController::class, 'kemaskiniDikembalikanBKOKU']);
+
+    //Kemaskini - Sekretariat - Emel - PPK - Permohonan
+    Route::get('kemaskini/sekretariat/emel/PPK/permohonan/kemaskini-dikembalikan', [KemaskiniController::class, 'pKemaskiniDikembalikanPPK']);
+
+    //Kemaskini - Sekretariat - Emel - PPK - Tuntutan
+    Route::get('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-tidak-layak', [KemaskiniController::class, 'kemaskiniTidakLayakPPK']);
+    Route::get('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-layak', [KemaskiniController::class, 'kemaskiniLayakPPK']);
+    Route::get('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-dikembalikan', [KemaskiniController::class, 'kemaskiniDikembalikanPPK']);
 
     //Permohonan - Sekretariat - Saringan
     Route::get('permohonan/sekretariat/saringan/senarai-permohonan', [SaringanController::class, 'senaraiPermohonan']);
