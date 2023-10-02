@@ -10,7 +10,7 @@
 
         <style>
             .card{
-                padding: 40px;
+                padding: 30px;
                 font-family: Arial, sans-serif;
                 font-size: 14px;
                 color: black;
@@ -128,8 +128,8 @@
                                     <input type="hidden" name="suratTawaranId" value="{{ $suratTawaran->id }}">
                                     <p>
                                         <span style="float: right">
-                                            Rujukan Kami : KPT - 000101140417<br>
-                                            Tarikh : tarikh kelulusan <br>
+                                            Rujukan Kami : KPT - <input type="text" id="noRujukan" name="noRujukan" style="width: 50%" value="{{$suratTawaran->no_rujukan}}"><br>
+                                            Tarikh : xxxxxxxxx <br>
                                         </span>
                                     </p>
 
@@ -146,8 +146,7 @@
                                     <br>
                                     <h4><input type="text" id="tajuk" name="tajuk" style="width: 100%" value="{{ strtoupper($suratTawaran->tajuk) }}"></h4>
                                     <br>
-                                    <p>Sukacita di maklumkan bahawa tuan/puan telah ditawarkan pembiayaan Program Bantuan
-                                        Kewangan Pelajar OKU di Kementerian Pengajian Tinggi untuk mengikuti kursus berikut :-</p>
+                                    <p><textarea name="kandungan1" id="kandungan1" cols="153" rows="2">{{$suratTawaran->tujuan}} :-</textarea></p>
                                     <br>
 
                                     <table>
@@ -177,40 +176,37 @@
                                     </table>
                                     
                                     <br>
-                                    <div class="main-content" style="text-align:justify;">
-                                        <p>2. Bantuan ini berkuatkuasa mulai <b> hingga .</b>
-                                            Walaubagaimanapun, sekiranya kursus yang diikuti tamat lebih awal sebelum tempoh tersebut,
-                                            tuan/puan dikehendaki untuk memaklumkan ke Bahagian ini dengan kadar segera. Tempoh
-                                            tajaan ini adalah tertakluk kepada surat tawaran asal institusi pengajian dan tidak melebihi
-                                            tempoh maksimum penajaan.</p><br>
-                                        <p>3. Untuk pengetahuan pihak tuan/puan, penetapan kadar bayaran adalah berdasarkan tuntutan
-                                            tahun kalendar akademik pelajar dan IPT serta tidak melebihi <b>RM 5000.00 setahun</b>. 
-                                            Ini bermakna tempoh yang layak adalah bermula dari tuntutan pertama dibuat dalam tahun
-                                            semasa. Tuntutan untuk semester yang telah berlalu adalah tidak dibenarkan.</p><br>
-                                        <p>4. Kerajaan berhak meminda terma-terma tawaran <b>BKOKU</b> ini dari semasa ke semasa.
-                                            Kerajaan juga berhak menarik balik tawaran ini sekiranya tuan/puan didapati melanggar mana-mana terma seperti yang telah ditetapkan.</p>
+                                    <div class="main-content">
+                                        <p>2. Bantuan ini berkuatkuasa mulai <b>xxxxxxxxx hingga xxxxxxxxx.</b>
+                                            <textarea name="kandungan1" id="kandungan1" cols="153" rows="3">{{$suratTawaran->kandungan1}}</textarea>
+                                        </p>
+                                        <br>
+                                        <p><textarea name="kandungan2" id="kandungan2" cols="153" rows="3">3.{{$suratTawaran->kandungan2}}</textarea></p>
+                                        <br>
+                                        <p><textarea name="kandungan3" id="kandungan3" cols="153" rows="3">4.{{$suratTawaran->kandungan3}}</textarea></p>
                                     </div>
                                     <br>
                                     
                                     <p>Sekian, terima kasih.</p>
                                     <br>
-                                    <p><b>“PRIHATIN RAKYAT : DARURAT MEMERANGI COVID-19”</b></p>
+                                    <p><input type="text" id="penutup1" name="penutup1" style="width: 50%; font-weight:bold" value="“{{$suratTawaran->penutup1}}”"></p>
                                     <br>
-                                    <p><b>“BERKHIDMAT UNTUK NEGARA”</b></p>
+                                    <p><input type="text" id="penutup2" name="penutup2" style="width: 50%; font-weight:bold" value="“{{$suratTawaran->penutup2}}”"></p>
                                     <br>
                                     <p>Saya yang menjalankan amanah,</p>
-                                    <p><b>Setiausaha<br>
-                                        Bahagian Biasiswa<br>
-                                        b.p. Ketua Setiausaha<br>
-                                        Kementerian Pengajian Tinggi</b>
+                                    <p>
+                                        <input type="text" id="penutup3_1" name="penutup3_1" style="width: 30%; font-weight:bold" value="{{$suratTawaran->penutup3_1}}"><br>
+                                        <input type="text" id="penutup3_2" name="penutup3_2" style="width: 30%; font-weight:bold" value="{{$suratTawaran->penutup3_2}}"><br>
+                                        <input type="text" id="penutup3_3" name="penutup3_3" style="width: 30%; font-weight:bold" value="b.p. {{$suratTawaran->penutup3_3}}"><br>
+                                        <input type="text" id="penutup3_4" name="penutup3_4" style="width: 30%; font-weight:bold" value="{{$suratTawaran->penutup3_4}}">
                                     </p>
                                     <br>
                                     <p><div style="text-align: center;">Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>
                                     <br>
                                     <p>s.k :<br>
-                                        Unit Kebajikan<br>
-                                        Bahagian Hal Ehwal Pelajar<br>
-                                        UNIVERSITI TEKNOLOGI MARA, SHAH ALAM
+                                        <input type="text" id="penutup4_1" name="penutup4_1" style="width: 30%" value="{{$suratTawaran->penutup4_1}}"><br>
+                                        <input type="text" id="penutup4_2" name="penutup4_2" style="width: 30%" value="{{$suratTawaran->penutup4_2}}"><br>
+                                        <input type="text" id="penutup4_3" name="penutup4_3" style="width: 30%" value="{{$suratTawaran->penutup4_3}}">
                                     </p>
 
                                     <input type="hidden" name="suratTawaranId" value="{{ $suratTawaran->id }}">
