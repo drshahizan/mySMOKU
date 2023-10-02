@@ -416,7 +416,7 @@ class SekretariatController extends Controller
     }
 
     //Step 1: Editing Data - Allow users to view and edit the current data.
-    public function editSuratTawaran()
+    public function viewSuratTawaran()
     {
         $suratTawaran = SuratTawaran::first();
         return view('permohonan.sekretariat.kemaskini.surat_tawaran', compact('suratTawaran'));
@@ -432,12 +432,12 @@ class SekretariatController extends Controller
             abort(404);
         }
 
-        return view('permohonan.sekretariat.kemaskini.preview_surat_tawaran', compact('suratTawaran'))->with('editMode', true);
+        return view('permohonan.sekretariat.kemaskini.surat_tawaran_diubah', compact('suratTawaran'));
     }
 
 
     //Step 3: Confirm and Update - Allow users to confirm and update the data in the database.
-    public function confirmUpdateSuratTawaran(Request $request)
+    public function sendSuratTawaran(Request $request)
     {
         // Validate the form data
         $validatedData = $request->validate([
@@ -486,7 +486,14 @@ class SekretariatController extends Controller
         $suratTawaran->save();
 
         // Redirect back to the form with a success message
-        return redirect()->route('preview')->with('success', 'Surat Tawaran telah dikemaskini.');
+        return redirect()->route('update')->with('success', 'Surat Tawaran telah dikemaskini.');
+    }
+
+    //Step 4: Final latest view - Allow users to view the updated version of "Surat Tawaran"
+    public function updatedSuratTawaran()
+    {
+        $suratTawaran = SuratTawaran::first();
+        return view('permohonan.sekretariat.kemaskini.surat_tawaran_terkini', compact('suratTawaran'));
     }
 
     //TUNTUTAN

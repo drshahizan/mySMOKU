@@ -122,7 +122,7 @@
                                
                             <hr>
 
-                            <form action="{{ route('update', ['suratTawaranId' => $suratTawaran->id]) }}" method="POST">
+                            <form action="{{ route('send', ['suratTawaranId' => $suratTawaran->id]) }}" method="POST">
                                 @csrf
                                 <p>
                                     <span style="float: right">
@@ -207,7 +207,6 @@
                                     <input type="text" id="penutup4_3" name="penutup4_3" style="width: 30%" value="{{$suratTawaran->penutup4_3}}">
                                 </p>
 
-                                <input type="hidden" name="suratTawaranId" value="{{ $suratTawaran->id }}">
                                 <div class="d-flex flex-center mt-5 mb-5">
                                     <button type="submit" class="btn btn-primary btn-sm">Confirm and Update</button>
                                 </div>
