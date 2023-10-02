@@ -169,7 +169,7 @@
 
                                 <!--begin::Col-->
                                 <div class="col-3">
-                                    <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-dikembalikan')}}">
+                                    <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-layak')}}">
                                     <!--begin::Items-->
                                     <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
                                         <!--begin::Symbol-->
@@ -188,7 +188,7 @@
 
                                 <!--begin::Col-->
                                 <div class="col-3">
-                                    <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-dikembalikan')}}">
+                                    <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-tidak-layak')}}">
                                     <!--begin::Items-->
                                     <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
                                         <!--begin::Symbol-->
