@@ -32,12 +32,16 @@ class PenyelarasController extends Controller
 {
     public function index()
     {
-        $smoku = Smoku::orderBy('smoku.id','desc')
-            ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
-            ->leftJoin('permohonan','permohonan.smoku_id','=','smoku.id')
-            ->get(['smoku.*', 'smoku_penyelaras.*', 'permohonan.status'])
-            ->where('penyelaras_id','=', Auth::user()->id)
-            ->where('status','<', '2');
+        $smoku = Smoku::join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'smoku.id')
+            ->leftJoin('permohonan', 'permohonan.smoku_id', '=', 'smoku.id')
+            ->where('penyelaras_id', '=', Auth::user()->id)
+            ->where(function ($query) {
+                $query->where('permohonan.status', '<', '2')
+                    ->orWhereNull('permohonan.status');
+            })
+            ->select('smoku.*', 'smoku_penyelaras.*', 'permohonan.status')
+            ->get();
+
         //dd($smoku);    
 
         return view('dashboard.penyelaras_bkoku.dashboard', compact('smoku'));
@@ -66,12 +70,12 @@ class PenyelarasController extends Controller
                 $smoku_id = $request->session()->put('id',$id);
                 $no_kp = $request->session()->put('no_kp',$no_kp);
                 return redirect()->route('penyelaras.dashboard')->with($smoku_id,$no_kp)
-                ->with('message', $no_kp. ' SAH SEBAGAI OKU BERDAFTAR DENGAN JKM');
+                ->with('success', $no_kp. ' SAH SEBAGAI OKU BERDAFTAR DENGAN JKM');
             } 
             else {
                 $nokp_in = $request->nokp;
                 return redirect()->route('penyelaras.dashboard')
-                ->with('xmessage', $nokp_in. ' BUKAN OKU YANG BERDAFTAR DENGAN JKM');
+                ->with('failed', $nokp_in. ' BUKAN OKU YANG BERDAFTAR DENGAN JKM');
             }
     }
 

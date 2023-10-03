@@ -473,17 +473,20 @@ class PenyelarasPPKController extends Controller
         ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
         ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
         ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
+        ->leftjoin('tuntutan','tuntutan.permohonan_id','=','permohonan.id')
         ->where('penyelaras_id','=', Auth::user()->id)
         ->where('permohonan.status', 6) 
+        ->where(function ($query) {
+            $query->where('tuntutan.status', '<', '2')
+                ->orWhereNull('tuntutan.status');
+        })
         ->get(['smoku.*', 'permohonan.no_rujukan_permohonan', 'permohonan.status as permohonan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
         //dd($layak);
-
-        
 
         return view('tuntutan.penyelaras_ppk.tuntutan_baharu', compact('layak'));
     }
 
-    public function hantarTuntutan(Request $request, $id)
+    public function hantarKeputusanPeperiksaan(Request $request, $id)
     {
         $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
 
@@ -491,31 +494,35 @@ class PenyelarasPPKController extends Controller
         $kepPeperiksaan=$request->kepPeperiksaan;
         $counter = 1; 
 
-        //foreach($kepPeperiksaan as $kepPeperiksaan) {
-        
-            $filenamekepP =$kepPeperiksaan->getClientOriginalName();  
-            $uniqueFilename = $counter . '_' . $filenamekepP;
+        $filenamekepP =$kepPeperiksaan->getClientOriginalName();  
+        $uniqueFilename = $counter . '_' . $filenamekepP;
 
-            // Append increment to the filename until it's unique
-            while (file_exists('assets/dokumen/peperiksaan/' . $uniqueFilename)) {
-                $counter++;
-                $uniqueFilename = $counter . '_' . $filenamekepP;
-            }
-            $kepPeperiksaan->move('assets/dokumen/peperiksaan',$uniqueFilename);
-
-            
-            $data=new peperiksaan();
-            $data->permohonan_id=$permohonan->id;
-            $data->sesi=$request->sesi;
-            $data->semester=$request->semester;
-            $data->cgpa=$request->cgpa;
-            $data->kepPeperiksaan=$uniqueFilename;
-            $data->save();
-
+        // Append increment to the filename until it's unique
+        while (file_exists('assets/dokumen/peperiksaan/' . $uniqueFilename)) {
             $counter++;
-        //} 
+            $uniqueFilename = $counter . '_' . $filenamekepP;
+        }
+        $kepPeperiksaan->move('assets/dokumen/peperiksaan',$uniqueFilename);
 
-        $biltuntutan = Tuntutan::where('smoku_id', '<=', $id)
+        
+        $data=new peperiksaan();
+        $data->permohonan_id=$permohonan->id;
+        $data->sesi=$request->sesi;
+        $data->semester=$request->semester;
+        $data->cgpa=$request->cgpa;
+        $data->kepPeperiksaan=$uniqueFilename;
+        $data->save();
+
+        $counter++;
+        
+        return redirect()->route('senarai.ppk.tuntutanBaharu')->with('message', 'Keputusan peperiksaan pelajar telah di simpan.');
+    }
+
+    public function hantarTuntutan(Request $request, $id)
+    {
+        $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
+
+        $biltuntutan = Tuntutan::where('smoku_id', '=', $id)
             ->groupBy('no_rujukan_tuntutan')
             ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan') 
             ->get();
@@ -542,11 +549,6 @@ class PenyelarasPPKController extends Controller
         }
         $tuntutan->save();
 
-        //simpan dalam table sejarah
-        // $tuntutan = Tuntutan::where('smoku_id', '=', $id)
-        //     ->where('permohonan_id', '=', $permohonan->id)
-        //     ->first();
-        
         $sejarah = SejarahTuntutan::create([
             'tuntutan_id' => $tuntutan->id,
             'smoku_id' => $id,
@@ -555,7 +557,12 @@ class PenyelarasPPKController extends Controller
         ]);
         $sejarah->save();
         
-        return redirect()->route('senarai.ppk.tuntutanBaharu')->with('message', 'Tuntutan pelajar telah dihantar.');
+        return redirect()->route('senarai.ppk.tuntutanBaharu')->with('message', 'Tuntutan pelajar telah di hantar.');
+    }
+
+    public function sejarahTuntutan(){
+        $tuntutan = Tuntutan::where('status', '!=','4')->get();
+        return view('tuntutan.penyelaras_ppk.sejarah_tuntutan',compact('tuntutan'));
     }
 
 

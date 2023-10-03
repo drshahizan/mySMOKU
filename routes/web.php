@@ -187,7 +187,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Tuntutan - Penyelaras PPK
     Route::get('penyelaras/ppk/senarai/tuntutan-keseluruhan', [PenyelarasPPKController::class, 'senaraiTuntutanKeseluruhan'])->name('senarai.ppk.tuntutanKeseluruhan');
     Route::get('penyelaras/ppk/senarai/tuntutan-baharu', [PenyelarasPPKController::class, 'senaraiTuntutanBaharu'])->name('senarai.ppk.tuntutanBaharu');
+    Route::post('ppk/hantar/keputusan/{id}', [PenyelarasPPKController::class, 'hantarKeputusanPeperiksaan'])->name('ppk.keputusan.hantar');
     Route::post('ppk/hantar/{id}', [PenyelarasPPKController::class, 'hantarTuntutan'])->name('ppk.tuntutan.hantar');
+    Route::get('penyelaras/ppk/sejarah/sejarah-tuntutan', [PenyelarasPPKController::class, 'sejarahTuntutan'])->name('ppk.sejarah.tuntutan');
+
 
     //Tuntutan Pelajar
     Route::get('tuntutan/baharu',[TuntutanController::class,'tuntutanBaharu'])->name('tuntutan.baharu');

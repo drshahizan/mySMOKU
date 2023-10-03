@@ -366,9 +366,14 @@
 		</div>
 		<div class="menu-item">
 			<a class="menu-link" href="{{route('senarai.ppk.tuntutanBaharu')}}">
-
-					<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
-					<span class="menu-title">Baharu</span>
+				<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
+				<span class="menu-title">Baharu</span>
+			</a>
+		</div>
+		<div class="menu-item">
+			<a class="menu-link" href="{{route('ppk.sejarah.tuntutan')}}">
+				<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
+				<span class="menu-title">Sejarah</span>
 			</a>
 		</div>
 
