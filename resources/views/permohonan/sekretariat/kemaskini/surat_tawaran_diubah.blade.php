@@ -122,7 +122,7 @@
                                
                             <hr>
 
-                            <form action="{{ route('send', ['suratTawaranId' => $suratTawaran->id]) }}" method="POST">
+                            <form action="{{ route('send', ['suratTawaranId' => $suratTawaran->id]) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <p>
                                     <span style="float: right">
@@ -208,7 +208,7 @@
                                 </p>
 
                                 <div class="d-flex flex-center mt-5 mb-5">
-                                    <button type="submit" class="btn btn-primary btn-sm">Confirm and Update</button>
+                                    <button type="submit" class="btn btn-primary btn-sm">Kemaskini</button>
                                 </div>
                             </form>
                         </div>

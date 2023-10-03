@@ -182,7 +182,7 @@
 			</a>
 		</div>
 		<div class="menu-item">
-			<a class="menu-link" href="{{ route('view') }}">
+			<a class="menu-link" href="{{ route('preview') }}">
 				<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
 				<span class="menu-title">Surat Tawaran</span>
 			</a>
