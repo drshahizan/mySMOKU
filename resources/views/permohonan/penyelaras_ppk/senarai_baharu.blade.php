@@ -1,4 +1,14 @@
-<x-default-layout> 
+<x-default-layout>
+<head>
+	<!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/css/saringan.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+</head>	 
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->
 	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Permohonan</h1>
@@ -22,13 +32,7 @@
 	<!--end::Breadcrumb-->
 </div>
 <br>
-    <head>
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="/assets/css/saringan.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-    </head>
+    
 
         <div class="row clearfix">
 			<div class="col-lg-12">
@@ -38,7 +42,7 @@
 					</div>
 					<div class="body">
 						<div class="table-responsive">
-							<table id="sortTable" class="table table-striped table-hover dataTable js-exportable">
+							<table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
 								<thead>
 									<tr>
 										<th style="width: 17%"><b>ID Permohonan</b></th>                                        
@@ -93,5 +97,9 @@
 					{{-- End of Body --}}
 				</div>
 			</div>
-		</div>                             
+		</div>
+		<script>
+			$('#sortTable1').DataTable();
+			$('#sortTable2').DataTable();
+		</script>		                             
 </x-default-layout> 
