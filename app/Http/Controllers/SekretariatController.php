@@ -17,6 +17,7 @@ use App\Models\TuntutanItem;
 use App\Models\Waris;
 use App\Models\Akademik;
 use App\Models\Kelulusan;
+use App\Models\MaklumatKementerian;
 use App\Models\SuratTawaran;
 use App\Models\Tuntutan;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -380,10 +381,11 @@ class SekretariatController extends Controller
     {
         // Get the "permohonan" data based on $permohonanId
         $permohonan = Permohonan::where('id', $permohonanId)->first();
-        $todayDate = Carbon::now()->format('d-m-Y');
+        $maklumat_kementerian = MaklumatKementerian::first();
+        $kandungan_surat = SuratTawaran::first();
         
         // Load the view into an HTML string
-        $html = view('permohonan.sekretariat.keputusan.surat_tawaran', compact('permohonan', 'todayDate'))->render();
+        $html = view('permohonan.sekretariat.keputusan.surat_tawaran', compact('permohonan', 'maklumat_kementerian','kandungan_surat'))->render();
 
         // Create Dompdf options
         $options = new Options();
@@ -474,12 +476,13 @@ class SekretariatController extends Controller
     public function updatedSuratTawaran($suratTawaranId)
     {
         $suratTawaran = SuratTawaran::find($suratTawaranId);
+        $maklumat_kementerian = MaklumatKementerian::first();
 
         if (!$suratTawaran) {
             abort(404); // Handle the case where the record is not found
         }
 
-        return view('permohonan.sekretariat.kemaskini.surat_tawaran_terkini', compact('suratTawaran'));
+        return view('permohonan.sekretariat.kemaskini.surat_tawaran_terkini', compact('suratTawaran','maklumat_kementerian'));
     }
 
     // public function updatedSuratTawaran()

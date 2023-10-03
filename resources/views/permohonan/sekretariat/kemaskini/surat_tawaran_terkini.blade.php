@@ -87,15 +87,14 @@
                                     </div>
                     
                                     <div class="address" style="padding-left: 150px; margin-top:0%;">
-                                        <b>KEMENTERIAN PENDIDIKAN TINGGI</b>
-                                        <br>MINISTRY OF HIGHER EDUCATION
-                                        <br>
-                                        <br>Bahagian Biasiswa
-                                        <br>Scholarship Division
-                                        <br>Aras 2, No.2, Menara 2,
-                                        <br>Jalan P5/6, Presint 5
-                                        <br>62200 Putrajaya
-                                        <br>Malaysia
+                                        <b>{{$maklumat_kementerian->nama_kementerian_bm}}</b>
+                                        <br>{{$maklumat_kementerian->nama_kementerian_bi}}<br>
+                                        <br>{{$maklumat_kementerian->nama_bahagian_bm}}
+                                        <br>{{$maklumat_kementerian->nama_bahagian_bi}}
+                                        <br>{{$maklumat_kementerian->alamat1}}
+                                        <br>{{$maklumat_kementerian->alamat2}}
+                                        <br>{{$maklumat_kementerian->poskod}} {{$maklumat_kementerian->negeri}}
+                                        <br>{{$maklumat_kementerian->negara}}
                                     </div>
                                 </div>
                     
@@ -104,17 +103,17 @@
                                         <tr>
                                             <td style="line-height: 0;">Tel</td>
                                             <td style="line-height: 0;">:</td>
-                                            <td style="line-height: 0;">603-8870 9000</td>
+                                            <td style="line-height: 0;">{{$maklumat_kementerian->tel}}</td>
                                         </tr>
                                         <tr>
                                             <td style="line-height: 0;">Hotline</td>
                                             <td style="line-height: 0;">:</td>
-                                            <td style="line-height: 0;">603-8888 0606</td>
+                                            <td style="line-height: 0;">{{$maklumat_kementerian->hotline}}</td>
                                         </tr>
                                         <tr>
                                             <td style="line-height: 0;">Faks</td>
                                             <td style="line-height: 0;">:</td>
-                                            <td style="line-height: 0;">603-8870 6839</td>
+                                            <td style="line-height: 0;">{{$maklumat_kementerian->faks}}</td>
                                         </tr>
                                     </table>
                                 </div>
