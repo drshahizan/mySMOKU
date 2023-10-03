@@ -112,7 +112,7 @@
                             <!--end::Table head-->
                             <!--begin::Table body-->
                             <tbody>
-                                @foreach ($smoku as $key => $smoku)
+                                @foreach ($smoku as $smoku)
                                     @php
                                     $text = ucwords(strtolower($smoku->nama)); 
                                     $conjunctions = ['bin', 'binti'];
@@ -129,7 +129,7 @@
                                     @endphp
                                 <tr>
                                     <td>
-                                        <span class="text-dark fs-6 me-3">{{ $key + 1 }}. </span>
+                                        <span class="text-dark fs-6 me-3">{{ $loop->iteration }}. </span>
                                     </td>
                                     <td class="" colspan="2">
                                         <span class="text-dark fs-6 me-3">{{ $smoku->no_kp}}</span>
