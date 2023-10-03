@@ -96,6 +96,7 @@
         <br><br><br><br><br><br><br><br><hr>
 
         @php
+            $tarikh_kelulusan = DB::table('permohonan_kelulusan')->where('permohonan_id',$permohonan['id'])->value('tarikh_mesyuarat');
             $nama = DB::table('smoku')->where('id',$permohonan['smoku_id'])->value('smoku.nama');
             $no_kp = DB::table('smoku')->where('id',$permohonan['smoku_id'])->value('smoku.no_kp');
             $alamat = DB::table('smoku')->where('id',$permohonan['smoku_id'])->value('smoku.alamat_tetap');
@@ -109,7 +110,7 @@
         <p>
             <span style="float: right">
                 Rujukan Kami : KPT - {{$kandungan_surat->no_rujukan}}<br>
-                Tarikh : <br>
+                Tarikh : {{date('d/m/Y', strtotime($tarikh_kelulusan))}}<br>
             </span>
         </p>
 
