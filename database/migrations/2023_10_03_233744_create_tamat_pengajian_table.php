@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('tamat_pengajian', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('smoku_id');
-            $table->string('sijil_tamat'); // Store the file name
-            $table->string('transkrip'); // Store the file name
+            $table->unsignedBigInteger('permohonan_id');
+            $table->string('sijil_tamat'); 
+            $table->string('transkrip'); 
             $table->string('perakuan')->nullable();
             $table->timestamps();
         });

@@ -12,6 +12,7 @@ class TamatPengajian extends Model
 
     protected $fillable = [
         'smoku_id',
+        'permohonan_id',
         'sijil_tamat',
         'transkrip',
         'perakuan',
