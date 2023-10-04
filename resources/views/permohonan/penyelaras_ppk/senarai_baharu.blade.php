@@ -32,74 +32,72 @@
 	<!--end::Breadcrumb-->
 </div>
 <br>
-    
-
-        <div class="row clearfix">
-			<div class="col-lg-12">
-				<div class="card">
-					<div class="header">
-						<h2>Senarai Permohonan</h2>
-					</div>
-					<div class="body">
-						<div class="table-responsive">
-							<table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
-								<thead>
-									<tr>
-										<th style="width: 17%"><b>ID Permohonan</b></th>                                        
-										<th style="width: 33%"><b>Nama</b></th>
-										<th style="width: 33%"><b>Institusi</b></th>
-										<th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
-										<th style="width: 15%" class="text-center"><b>Status Permohonan</b></th>
-									</tr>
-								</thead>
-                                <tbody>
-                                    @foreach ($smoku as $smoku)
-									@php
-										$text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
-										$conjunctions = ['bin', 'binti'];
-										$words = explode(' ', $text);
-										$result = [];
-										foreach ($words as $word) {
-											if (in_array(Str::lower($word), $conjunctions)) {
-												$result[] = Str::lower($word);
-											} else {
-												$result[] = $word;
-											}
-										}
-										$pemohon = implode(' ', $result);
-								
-										//institusi pengajian
-										$text3 = ucwords(strtolower($smoku->nama_institusi)); // Assuming you're sending the text as a POST parameter
-										$conjunctions = ['of', 'in', 'and'];
-										$words = explode(' ', $text3);
-										$result = [];
-										foreach ($words as $word) {
-											if (in_array(Str::lower($word), $conjunctions)) {
-												$result[] = Str::lower($word);
-											} else {
-												$result[] = $word;
-											}
-										}
-										$institusi = implode(' ', $result);
-									@endphp
-                                    <tr>
-                                        <td><a href="{{route('penyelaras.ppk.permohonan.baharu',$smoku->smoku_id)}}">{{ $smoku->no_rujukan_permohonan}}</a></td>
-                                        <td>{{ $pemohon}}</td>
-                                        <td>{{ $institusi}}</td>
-                                        <td class="text-center">{{ $smoku->created_at->format('d/m/Y h:i:sa')}}</td>
-                                        <td class="text-center"><button type="button" class="btn bg-info text-white">Baharu</button></td>
-                                    </tr>  
-                                    @endforeach	
-                                </tbody>
-							</table>
-						</div>
-					</div>
-					{{-- End of Body --}}
+<div class="row clearfix">
+	<div class="col-lg-12">
+		<div class="card">
+			<div class="header">
+				<h2>Senarai Permohonan<br><small>Klik ID Permohonan untuk melakukan melihat rekod permohonan</small></h2>
+			</div>
+			<div class="body">
+				<div class="table-responsive">
+					<table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
+						<thead>
+							<tr>
+								<th style="width: 17%"><b>ID Permohonan</b></th>                                        
+								<th style="width: 33%"><b>Nama</b></th>
+								<th style="width: 33%"><b>Institusi</b></th>
+								<th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
+								<th style="width: 15%" class="text-center"><b>Status Permohonan</b></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach ($smoku as $smoku)
+							@php
+								$text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
+								$conjunctions = ['bin', 'binti'];
+								$words = explode(' ', $text);
+								$result = [];
+								foreach ($words as $word) {
+									if (in_array(Str::lower($word), $conjunctions)) {
+										$result[] = Str::lower($word);
+									} else {
+										$result[] = $word;
+									}
+								}
+								$pemohon = implode(' ', $result);
+						
+								//institusi pengajian
+								$text3 = ucwords(strtolower($smoku->nama_institusi)); // Assuming you're sending the text as a POST parameter
+								$conjunctions = ['of', 'in', 'and'];
+								$words = explode(' ', $text3);
+								$result = [];
+								foreach ($words as $word) {
+									if (in_array(Str::lower($word), $conjunctions)) {
+										$result[] = Str::lower($word);
+									} else {
+										$result[] = $word;
+									}
+								}
+								$institusi = implode(' ', $result);
+							@endphp
+							<tr>
+								<td><a href="{{route('penyelaras.ppk.permohonan.baharu',$smoku->smoku_id)}}">{{ $smoku->no_rujukan_permohonan}}</a></td>
+								<td>{{ $pemohon}}</td>
+								<td>{{ $institusi}}</td>
+								<td class="text-center">{{ $smoku->created_at->format('d/m/Y h:i:sa')}}</td>
+								<td class="text-center"><button type="button" class="btn bg-info text-white">Baharu</button></td>
+							</tr>  
+							@endforeach	
+						</tbody>
+					</table>
 				</div>
 			</div>
+			{{-- End of Body --}}
 		</div>
-		<script>
-			$('#sortTable1').DataTable();
-			$('#sortTable2').DataTable();
-		</script>		                             
+	</div>
+</div>
+<script>
+	$('#sortTable1').DataTable();
+	$('#sortTable2').DataTable();
+</script>		                             
 </x-default-layout> 
