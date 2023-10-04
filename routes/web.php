@@ -161,6 +161,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/bkoku/sejarah/papar-permohonan/{id}', [PenyelarasController::class, 'paparRekodPermohonan'])->name('bkoku.papar.rekod.permohonan');
     Route::get('penyelaras/bkoku/sejarah/permohonan/papar-saringan/{id}', [PenyelarasController::class, 'paparRekodSaringan'])->name('bkoku.papar.rekod.saringan');
     Route::get('penyelaras/bkoku/sejarah/permohonan/papar-kelulusan/{id}', [PenyelarasController::class, 'paparRekodKelulusan'])->name('bkoku.papar.rekod.kelulusan');
+    Route::get('penyelaras/bkoku/maklumat-profil-diri/{id}', [SaringanController::class, 'maklumatProfilDiri'])->name('bkoku.papar.maklumat.diri');
+    Route::get('penyelaras/bkoku/maklumat-akademik/{id}', [SaringanController::class, 'maklumatAkademik'])->name('bkoku.papar.maklumat.akademik');
+    Route::get('penyelaras/bkoku/salinan-dokumen/{id}', [SaringanController::class, 'salinanDokumen'])->name('bkoku.papar.salinan.dokumen');
+
 
     //Tuntutan - Penyelaras BKOKU
     Route::get('penyelaras/bkoku/senarai/tuntutan-baharu', [PenyelarasController::class, 'senaraiTuntutanBaharu'])->name('senarai.bkoku.tuntutanBaharu');
@@ -191,6 +195,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/ppk/sejarah/papar-permohonan/{id}', [PenyelarasPPKController::class, 'paparRekodPermohonan'])->name('ppk.papar.rekod.permohonan');
     Route::get('penyelaras/ppk/sejarah/permohonan/papar-saringan/{id}', [PenyelarasPPKController::class, 'paparRekodSaringan'])->name('ppk.papar.rekod.saringan');
     Route::get('penyelaras/ppk/sejarah/permohonan/papar-kelulusan/{id}', [PenyelarasPPKController::class, 'paparRekodKelulusan'])->name('ppk.papar.rekod.kelulusan');
+    Route::get('penyelaras/ppk/maklumat-profil-diri/{id}', [SaringanController::class, 'maklumatProfilDiri'])->name('ppk.papar.maklumat.diri');
+    Route::get('penyelaras/ppk/maklumat-akademik/{id}', [SaringanController::class, 'maklumatAkademik'])->name('ppk.papar.maklumat.akademik');
+    Route::get('penyelaras/ppk/salinan-dokumen/{id}', [SaringanController::class, 'salinanDokumen'])->name('ppk.papar.salinan.dokumen');
 
     //Tuntutan - Penyelaras PPK
     Route::get('penyelaras/ppk/senarai/tuntutan-baharu', [PenyelarasPPKController::class, 'senaraiTuntutanBaharu'])->name('senarai.ppk.tuntutanBaharu');
