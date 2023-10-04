@@ -73,9 +73,8 @@ class SaringanController extends Controller
 
     public function salinanDokumen($id)
     {
-        $keputusan = Peperiksaan::where('permohonan_id', $id)->first();
         $dokumen = Dokumen::where('permohonan_id', $id)->get();
-        return view('permohonan.sekretariat.saringan.salinan_dokumen',compact('dokumen','keputusan'));
+        return view('permohonan.sekretariat.saringan.salinan_dokumen',compact('dokumen'));
     }
 
     public function saringTuntutan(Request $request,$id)

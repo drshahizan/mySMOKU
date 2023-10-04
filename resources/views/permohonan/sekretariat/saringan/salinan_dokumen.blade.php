@@ -4,23 +4,6 @@
     <br>
     <!--begin::Accordion-->
     <div class="accordion" id="accordionPanelsStayOpenExample">
-        @if($keputusan != NULL)
-            @php
-                $dokumen_path = "/assets/dokumen/keputusanPeperiksaan/".$keputusan->kepPeperiksaan;
-            @endphp
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
-                        <b style="color: black!important">Keputusan Peperiksaan</b>
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
-                    <div class="accordion-body" style="text-align: center">
-                        <embed src="{{$dokumen_path}}" width="90%" height="650px"/>
-                    </div>
-                </div>
-            </div>
-        @endif
         @php $i=1; $n=1;@endphp
         @foreach($dokumen as $item)
             @php
@@ -51,6 +34,7 @@
                     </h2>
                     <div id="panelsStayOpen-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading{{$i}}">
                         <div class="accordion-body" style="text-align: center">
+                            <p>Catatan: {{$item['catatan']}}</p>
                             <embed src="{{$dokumen_path}}" width="90%" height="650px"/>
                         </div>
                     </div>
