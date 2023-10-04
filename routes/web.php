@@ -158,20 +158,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/view-permohonan/{id}', [PenyelarasController::class, 'viewPermohonan'])->name('penyelaras.view.permohonan');
     Route::get('penyelaras/senarai/permohonan/keseluruhan', [PenyelarasController::class, 'senaraiPermohonanKeseluruhan'])->name('senarai.permohonanKeseluruhan');
 
-
-    //Tuntutan - Penyelaras BKOKU - Wang Saku
-    Route::get('tuntutan/penyelaras/wang-saku/senarai-tuntutan', [PenyelarasController::class, 'tuntutanWangSaku']);
-    Route::get('tuntutan/penyelaras/wang-saku/maklumat-tuntutan', [PenyelarasController::class, 'maklumatTuntutanWangSaku']);
-
-    //Tuntutan - Penyelaras BKOKU- Yuran Dan Wang Saku
-    Route::get('tuntutan/penyelaras/yuran-dan-wang-saku/senarai-tuntutan', [PenyelarasController::class, 'tuntutanYuranPengajian']);
-    Route::get('tuntutan/penyelaras/yuran-dan-wang-saku/maklumat-tuntutan', [PenyelarasController::class, 'maklumatTuntutanYuranPengajian']);
-
-    //Tuntutan - Penyelaras BKOKU - Kemaskini
-    Route::get('tuntutan/penyelaras/kemaskini/kemaskini-tuntutan', [PenyelarasController::class, 'kemaskiniTuntutan']);
-
-    //Tuntutan - Penyelaras BKOKU - Sejarah
-    Route::get('tuntutan/penyelaras/tuntutan-keseluruhan/tuntutan-keseluruhan', [PenyelarasController::class, 'tuntutanKeseluruhan'])->name('senarai.tuntutanKeseluruhan');
+    //Tuntutan - Penyelaras BKOKU
+    Route::get('penyelaras/bkoku/senarai/tuntutan-baharu', [PenyelarasController::class, 'senaraiTuntutanBaharu'])->name('senarai.bkoku.tuntutanBaharu');
+    Route::get('bkoku/kemaskini/keputusan/{id}', [PenyelarasController::class, 'kemaskiniKeputusan'])->name('bkoku.kemaskini.keputusan');
+    Route::post('bkoku/hantar/keputusan/{id}', [PenyelarasController::class, 'hantarKeputusanPeperiksaan'])->name('bkoku.keputusan.hantar');
+    Route::get('bkoku/tuntutan/baharu/{id}',[PenyelarasController::class,'tuntutanBaharu'])->name('bkoku.tuntutan.baharu');
+    Route::post('bkoku/simpan/{id}', [PenyelarasController::class, 'simpanTuntutan'])->name('bkoku.simpan.tuntutan');
+    Route::post('bkoku/hantar/{id}', [PenyelarasController::class, 'hantarTuntutan'])->name('bkoku.hantar.tuntutan');
+    Route::get('penyelaras/bkoku/sejarah/sejarah-tuntutan', [PenyelarasController::class, 'sejarahTuntutan'])->name('bkoku.sejarah.tuntutan');
+    Route::get('penyelaras/bkoku/sejarah/rekod-tuntutan/{id}', [PenyelarasController::class, 'rekodTuntutan'])->name('bkoku.rekod.tuntutan');
+    Route::get('penyelaras/bkoku/sejarah/papar-tuntutan/{id}', [PenyelarasController::class, 'paparRekodTuntutan'])->name('bkoku.papar.rekod');
+    Route::get('penyelaras/bkoku/sejarah/keputusan-peperiksaan/{id}', [PenyelarasController::class, 'keputusanPeperiksaan'])->name('bkoku.papar.peperiksaan');
+    Route::get('penyelaras/bkoku/sejarah/papar-saringan/{id}', [PenyelarasController::class, 'paparRekodSaringanTuntutan'])->name('bkoku.papar.saringan.tuntutan');
 
     //Permohonan - Penyelaras PPK
     Route::get('penyelaras/ppk/dashboard', [PenyelarasPPKController::class,'index'])->name('penyelaras.ppk.dashboard');
