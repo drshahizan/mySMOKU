@@ -101,7 +101,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('sekretariat/tuntutan/PPK/dibayar', [SekretariatController::class, 'bilanganTuntutanPPK']);
 
     //Kemaskini - Sekretariat - Pengajian
-    Route::get('sekretariat/kemaskini/peringkat/pengajian', [SekretariatController::class, 'kemaskiniPeringkatPengajian'])->name('peringkat.pengajian');
+    Route::get('sekretariat/kemaskini/peringkat/pengajian', [SekretariatController::class, 'peringkatPengajian'])->name('peringkat.pengajian');
+    Route::post('sekretariat/hantar/kemaskini/peringkat/pengajian/{id}', [SekretariatController::class, 'kemaskiniPeringkatPengajian'])->name('kemaskini.peringkat.pengajian');
 
     //Kemaskini - Sekretariat - Surat Tawaran
     //Route::get('kemaskini/sekretariat/surat/tawaran', [SekretariatController::class, 'viewSuratTawaran'])->name('view');

@@ -75,11 +75,11 @@
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>                                        
-                                                        <th style="width: 30%"><b>Nama</b></th>
+                                                        <th style="width: 35%"><b>Nama</b></th>
                                                         <th style="width: 15%" class="text-center"><b>Peringkat Pengajian</b></th>
-                                                        <th style="width: 13%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
-                                                        <th style="width: 12%" class="text-center"><b>Salinan Transkrip</b></th> 
-                                                        <th class="text-center" style="width: 25%">Kemaskini</th>
+                                                        <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
+                                                        <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
+                                                        <th class="text-center" style="width: 15%">Kemaskini</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -122,16 +122,18 @@
                                                                     <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    <select id="keputusan" name="keputusan" style="padding: 6px;" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required>
-                                                                        <option value="">Kemaskini</option>
-                                                                        <option value="Lulus">Sijil</option>
-                                                                        <option value="Tidak Lulus">Diploma</option>
-                                                                        <option value="Lulus">Sarjana Muda</option>
-                                                                        <option value="Tidak Lulus">Diploma Lepasan Ijazah</option>
-                                                                        <option value="Lulus">Ijazah Sarjana</option>
-                                                                        <option value="Tidak Lulus">Doktor Falsafah</option>
-                                                                    </select>
-                                                                    <i class='fas fa-check-square' style='color:green; font-size:35px; vertical-align:middle;'></i>
+                                                                    <form action="{{ route('kemaskini.peringkat.pengajian', $item->smoku_id) }}" method="post">
+                                                                        @csrf
+                                                                        <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
+                                                                            <option value="">Kemaskini</option>
+                                                                            <option value="1">Sijil</option>
+                                                                            <option value="2">Diploma</option>
+                                                                            <option value="3">Sarjana Muda</option>
+                                                                            <option value="4">Diploma Lepasan Ijazah</option>
+                                                                            <option value="5">Ijazah Sarjana</option>
+                                                                            <option value="6">Doktor Falsafah</option>
+                                                                        </select>
+                                                                    </form>
                                                                 </td>
                                                             </tr>
                                                         @endif
@@ -151,11 +153,11 @@
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>                                        
-                                                        <th style="width: 30%"><b>Nama</b></th>
+                                                        <th style="width: 35%"><b>Nama</b></th>
                                                         <th style="width: 15%" class="text-center"><b>Peringkat Pengajian</b></th>
-                                                        <th style="width: 13%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
-                                                        <th style="width: 12%" class="text-center"><b>Salinan Transkrip</b></th> 
-                                                        <th class="text-center" style="width: 25%">Kemaskini</th>
+                                                        <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
+                                                        <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
+                                                        <th class="text-center" style="width: 15%">Kemaskini</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -198,16 +200,18 @@
                                                                     <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    <select id="keputusan" name="keputusan" style="padding: 6px;" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required>
-                                                                        <option value="">Kemaskini</option>
-                                                                        <option value="Lulus">Sijil</option>
-                                                                        <option value="Tidak Lulus">Diploma</option>
-                                                                        <option value="Lulus">Sarjana Muda</option>
-                                                                        <option value="Tidak Lulus">Diploma Lepasan Ijazah</option>
-                                                                        <option value="Lulus">Ijazah Sarjana</option>
-                                                                        <option value="Tidak Lulus">Doktor Falsafah</option>
-                                                                    </select>
-                                                                    <i class='fas fa-check-square' style='color:green; font-size:35px; vertical-align:middle;'></i>
+                                                                    <form action="{{ route('kemaskini.peringkat.pengajian', $item->smoku_id) }}" method="post">
+                                                                        @csrf
+                                                                        <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
+                                                                            <option value="">Kemaskini</option>
+                                                                            <option value="1">Sijil</option>
+                                                                            <option value="2">Diploma</option>
+                                                                            <option value="3">Sarjana Muda</option>
+                                                                            <option value="4">Diploma Lepasan Ijazah</option>
+                                                                            <option value="5">Ijazah Sarjana</option>
+                                                                            <option value="6">Doktor Falsafah</option>
+                                                                        </select>
+                                                                    </form>
                                                                 </td>
                                                             </tr>
                                                         @endif
@@ -227,6 +231,27 @@
         <!-- Javascript -->
         <script src="assets/bundles/libscripts.bundle.js"></script>    
         <script src="assets/bundles/vendorscripts.bundle.js"></script>
+
+        <script>
+            function submitForm(selectElement) {
+                // Get the selected value
+                const selectedValue = selectElement.value;
+        
+                // Find the associated form
+                const form = selectElement.closest('form');
+        
+                // Set the selected value as a hidden input
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'peringkat_pengajian'; // Change to your desired input name
+                input.value = selectedValue;
+                form.appendChild(input);
+        
+                // Submit the form
+                form.submit();
+            }
+        </script>
+        
 
         <script>
             $(document).ready(function() {
@@ -264,6 +289,5 @@
                     });
                 }).draw();
             });
-
         </script>
 </x-default-layout> 

@@ -132,10 +132,28 @@ class SekretariatController extends Controller
         return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
     }
 
-    public function kemaskiniPeringkatPengajian()
+    public function peringkatPengajian()
     {
         $pengajian = TamatPengajian::all();
         return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('pengajian'));
+    }
+    // public function kemaskiniPeringkatPengajian()
+    // {
+    //     $pengajian = TamatPengajian::all();
+    //     return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('pengajian'));
+    // }
+
+    public function kemaskiniPeringkatPengajian(Request $request, $id)
+    {
+        // Find the record in the smoku_akademik table
+        $smokuAkademik = Akademik::where('smoku_id', $id)->first();
+
+        // Update the "Peringkat Pengajian" column
+        $smokuAkademik->peringkat_pengajian = $request->peringkat_pengajian;
+        $smokuAkademik->save();
+
+        // Redirect back to the same page with a success message
+        return redirect()->back()->with('success', 'Peringkat Pengajian updated successfully.');
     }
 
     public function senaraiKelulusanPermohonan()
