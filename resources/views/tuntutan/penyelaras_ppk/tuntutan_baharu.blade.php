@@ -41,18 +41,18 @@
     <div class="col-lg-12">
         <!--begin::Card-->
         <div class="card">
-            <!--begin::Card title-->
+            <!--begin::Header-->
             <div class="header">
                 <h2>Senarai Tuntutan Baharu</h2>
             </div>
-            <!--begin::Card title-->
+            <!--end::Header-->
             <!--begin::Card body-->
             <div class="body">
                 <!--begin::Table-->
                 <div class="table-responsive">
                     <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                         <thead>
-                            <tr class="text-start text-gray-400 fw-bold fs-7 gs-0">
+                            <tr>
                                 <th>ID Permohonan</th>
                                 <th>Nama Pelajar</th>
                                 <th>Nama Kursus</th>
@@ -61,7 +61,7 @@
                                 <th>Tindakan</th>
                             </tr>
                         </thead>
-                        <tbody class="fw-semibold text-gray-600">
+                        <tbody>
                             @foreach ($layak as $layak)
                                 @php
                                     $status = DB::table('bk_status')->where('kod_status', $layak->permohonan_status)->value('status');
@@ -330,7 +330,6 @@
                                     <!--end::Modal dialog-->
                                 </div>
                                 <!--end::Modal Tuntutan-->
-                                
                             </tr>
                             @endforeach
                         </tbody>
