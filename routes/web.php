@@ -60,6 +60,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Kemaskini - Sekretariat - Emel
     Route::get('kemaskini/sekretariat/emel/senarai-emel', [KemaskiniController::class, 'senaraiEmel']);
+    Route::post('kemaskini/sekretariat/emel/kemaskini/{id}', [KemaskiniController::class, 'kemaskiniEmel'])->name('kemaskini.sekretariat.emel.kemaskini.id');
 
     //Kemaskini - Sekretariat - Emel - BKOKU - Permohonan
     Route::get('kemaskini/sekretariat/emel/BKOKU/permohonan/kemaskini-dikembalikan', [KemaskiniController::class, 'pKemaskiniDikembalikanBKOKU']);

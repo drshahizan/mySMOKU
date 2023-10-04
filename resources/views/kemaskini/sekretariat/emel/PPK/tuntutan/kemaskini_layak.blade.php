@@ -101,7 +101,8 @@
                         <div class="body">
                             <div class="col-md-6 col-sm-6">
                                 <br>
-                                <form>
+                                <form method="POST" action="{{ url('kemaskini/sekretariat/emel/kemaskini/'.$emel->emel_id) }}">
+                                    {{csrf_field()}}
                                     <div class="table-responsive">
                                         <table class="maklumat2">
                                             <tr>
