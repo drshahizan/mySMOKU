@@ -25,6 +25,8 @@ use App\Models\Dokumen;
 use App\Models\Peperiksaan;
 use App\Models\Tuntutan;
 use App\Models\SejarahTuntutan;
+use App\Models\Kelulusan;
+use App\Models\Saringan;
 
 
 class PenyelarasPPKController extends Controller
@@ -450,23 +452,6 @@ class PenyelarasPPKController extends Controller
         return view('permohonan.penyelaras_ppk.senarai_baharu', compact('smoku'));
     }
 
-    public function senaraiPermohonanKeseluruhan()
-    {
-        $smoku = Smoku::leftJoin('permohonan','permohonan.smoku_id','=','smoku.id')
-        ->leftJoin('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
-        ->leftJoin('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-        ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
-        ->where('penyelaras_id','=', Auth::user()->id)
-        ->get(['smoku.*', 'permohonan.*', 'bk_info_institusi.nama_institusi']);
-
-        return view('permohonan.penyelaras_ppk.senarai_keseluruhan', compact('smoku'));
-    }
-    
-    public function senaraiTuntutanKeseluruhan()
-    {
-        return view('tuntutan.penyelaras_ppk.tuntutan_keseluruhan');
-    }
-
     public function senaraiTuntutanBaharu()
     {
         $layak = Smoku::join('permohonan','permohonan.smoku_id','=','smoku.id')
@@ -590,7 +575,8 @@ class PenyelarasPPKController extends Controller
         return view('tuntutan.penyelaras_ppk.papar_tuntutan',compact('permohonan','tuntutan','smoku','akademik','sejarah_t'));
     }
 
-    public function keputusanPeperiksaan($id){
+    public function keputusanPeperiksaan($id)
+    {
         $permohonan = Permohonan::where('smoku_id', $id)->first();
         $akademik = Akademik::where('smoku_id', $id)->first();
         $peperiksaan = Peperiksaan::where('permohonan_id', $permohonan->id)->get();
@@ -599,7 +585,8 @@ class PenyelarasPPKController extends Controller
         return view('tuntutan.penyelaras_ppk.keputusan_peperiksaan',compact('akademik','permohonan','peperiksaan'));
     }
 
-    public function paparRekodSaringanTuntutan($id){
+    public function paparRekodSaringanTuntutan($id)
+    {
         $sejarah_t = SejarahTuntutan::where('id', $id)->first();
         $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
@@ -607,6 +594,53 @@ class PenyelarasPPKController extends Controller
         $smoku = Smoku::where('id', $smoku_id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
         return view('tuntutan.penyelaras_ppk.papar_saringan',compact('permohonan','tuntutan','smoku','akademik','sejarah_t'));
+    }
+
+    public function sejarahPermohonan()
+    {
+        $permohonan = Permohonan::where('status', '!=','4')->get();
+        return view('permohonan.penyelaras_ppk.sejarah_permohonan',compact('permohonan'));
+    }
+
+    public function rekodPermohonan($id)
+    {
+        $permohonan = Permohonan::where('id', $id)->first();
+        $smoku_id = $permohonan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        $sejarah_p = SejarahPermohonan::where('permohonan_id', $id)->orderBy('created_at', 'desc')->get();
+        return view('permohonan.penyelaras_ppk.rekod_permohonan',compact('permohonan','akademik','smoku','sejarah_p'));
+    }
+
+    public function paparRekodPermohonan($id)
+    {
+        $sejarah_p = SejarahPermohonan::where('id', $id)->first();
+        $permohonan = Permohonan::where('id', $sejarah_p->permohonan_id)->first();
+        $smoku_id = $permohonan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('permohonan.penyelaras_ppk.papar_permohonan',compact('permohonan','smoku','akademik','sejarah_p'));
+    }
+
+    public function paparRekodSaringan($id)
+    {
+        $sejarah_p = SejarahPermohonan::where('id', $id)->first();
+        $permohonan = Permohonan::where('id', $sejarah_p->permohonan_id)->first();
+        $smoku_id = $permohonan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $catatan = Saringan::where('permohonan_id', $sejarah_p->permohonan_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('permohonan.penyelaras_ppk.papar_saringan',compact('permohonan','catatan','smoku','akademik','sejarah_p'));
+    }
+
+    public function paparRekodKelulusan($id)
+    {
+        $sejarah_p = SejarahPermohonan::where('id', $id)->first();
+        $permohonan = Permohonan::where('id', $sejarah_p->permohonan_id)->first();
+        $smoku_id = $permohonan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $kelulusan = Kelulusan::where('permohonan_id', $sejarah_p->permohonan_id)->first();
+        return view('permohonan.penyelaras_ppk.papar_kelulusan',compact('permohonan','kelulusan','smoku','sejarah_p'));
     }
 
 

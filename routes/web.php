@@ -183,10 +183,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/penyelaras/ppk/permohonan/baharu', [PenyelarasPPKController::class, 'kemaskini'])->name('ppk.kemaskini');
     Route::post('ppk/hantar', [PenyelarasPPKController::class, 'hantar'])->name('ppk.hantar');
     Route::get('penyelaras/ppk/senarai/permohonan-baharu', [PenyelarasPPKController::class, 'senaraiPermohonanBaharu'])->name('senarai.ppk.permohonanBaharu');
-    Route::get('penyelaras/ppk/senarai/permohonan-keseluruhan', [PenyelarasPPKController::class, 'senaraiPermohonanKeseluruhan'])->name('senarai.ppk.permohonanKeseluruhan');
+    Route::get('penyelaras/ppk/sejarah/sejarah-permohonan', [PenyelarasPPKController::class, 'sejarahPermohonan'])->name('ppk.sejarah.permohonan');
+    Route::get('penyelaras/ppk/sejarah/rekod-permohonan/{id}', [PenyelarasPPKController::class, 'rekodPermohonan'])->name('ppk.rekod.permohonan');
+    Route::get('penyelaras/ppk/sejarah/papar-permohonan/{id}', [PenyelarasPPKController::class, 'paparRekodPermohonan'])->name('ppk.papar.rekod.permohonan');
+    Route::get('penyelaras/ppk/sejarah/permohonan/papar-saringan/{id}', [PenyelarasPPKController::class, 'paparRekodSaringan'])->name('ppk.papar.rekod.saringan');
+    Route::get('penyelaras/ppk/sejarah/permohonan/papar-kelulusan/{id}', [PenyelarasPPKController::class, 'paparRekodKelulusan'])->name('ppk.papar.rekod.kelulusan');
 
     //Tuntutan - Penyelaras PPK
-    Route::get('penyelaras/ppk/senarai/tuntutan-keseluruhan', [PenyelarasPPKController::class, 'senaraiTuntutanKeseluruhan'])->name('senarai.ppk.tuntutanKeseluruhan');
     Route::get('penyelaras/ppk/senarai/tuntutan-baharu', [PenyelarasPPKController::class, 'senaraiTuntutanBaharu'])->name('senarai.ppk.tuntutanBaharu');
     Route::post('ppk/hantar/keputusan/{id}', [PenyelarasPPKController::class, 'hantarKeputusanPeperiksaan'])->name('ppk.keputusan.hantar');
     Route::post('ppk/hantar/{id}', [PenyelarasPPKController::class, 'hantarTuntutan'])->name('ppk.tuntutan.hantar');
