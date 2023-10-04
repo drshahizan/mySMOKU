@@ -198,9 +198,7 @@
                                     <input type="text" id="penutup3_3" name="penutup3_3" style="width: 30%; font-weight:bold" value="b.p. {{$suratTawaran->penutup3_3}}"><br>
                                     <input type="text" id="penutup3_4" name="penutup3_4" style="width: 30%; font-weight:bold" value="{{$suratTawaran->penutup3_4}}">
                                 </p>
-                                <br>
                                 <p><div style="text-align: center;">Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>
-                                <br>
                                 <p>s.k :<br>
                                     <input type="text" id="penutup4_1" name="penutup4_1" style="width: 30%" value="{{$suratTawaran->penutup4_1}}"><br>
                                     <input type="text" id="penutup4_2" name="penutup4_2" style="width: 30%" value="{{$suratTawaran->penutup4_2}}"><br>

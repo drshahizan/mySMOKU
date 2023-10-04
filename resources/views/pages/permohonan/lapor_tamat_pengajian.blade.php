@@ -20,7 +20,7 @@
 						<!--begin::Card body-->
 						<div class="card-body p-12">
 							<!--begin::Form-->
-							<form action="{{ route('save') }}" method="post" enctype="multipart/form-data">
+							<form action="{{ route('hantar.tamat.pengajian') }}" method="post" enctype="multipart/form-data">
 								@csrf
 								<!--begin::Wrapper-->
 								<div class="d-flex flex-column align-items-start flex-xl-row">
@@ -30,41 +30,60 @@
 									</div>
 								</div>
 								<!--end::Top-->
-
+							
 								<br>
-
+							
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
 											<th colspan="2" class="text-center">Dokumen Lampiran Lapor Diri</th>
 										</tr>
 									</thead>
+							
 									<tbody>
+										{{-- SIJIL TAMAT / SENAT --}}
 										<tr>
-											<td>Sijil Tamat Pengajian / Surat Senat</td>
-											<td><input type="file" id="suratSenat" name="suratSenat"/></td>
+											<td>Sijil Tamat Pengajian / Surat Senat&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
+											<td>
+												<input type="file" id="sijilTamat" name="sijilTamat[]" required/>
+												@if(session()->has('uploadedSijilTamat'))
+													@foreach(session('uploadedSijilTamat') as $sijil)
+														<a href="{{ asset('assets/dokumen/sijil_tamat/' . $sijil) }}" target="_blank">{{ $sijil }}</a>
+													@endforeach
+												@endif
+											</td>
 										</tr>
+							
+										{{-- TRANSKRIP --}}
 										<tr>
-											<td>Salinan Transkrip</td>
-											<td><input type="file" id="transkrip" name="transkrip"/></td>
+											<td>Salinan Transkrip&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
+											<td>
+												<input type="file" id="transkrip" name="transkrip[]" required/>
+												@if(session()->has('uploadedTranskrip'))
+													@foreach(session('uploadedTranskrip') as $transkrip)
+														<a href="{{ asset('assets/dokumen/salinan_transkrip/' . $transkrip) }}" target="_blank">{{ $transkrip }}</a>
+													@endforeach
+												@endif
+											</td>
 										</tr>
+							
 										<tr>
 											<td colspan="2">
 												<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange; font-size:15px;'></i>&nbsp;
 													Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a> untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
 												</div>
-					
+							
 												<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp; 
-													Format fail yang boleh dimuat naik adalah format '.pdf', '.jpg', '.png' dan '.jpeg'.
+													Format fail yang boleh dimuat naik adalah format '.pdf', '.jpg', '.png', dan '.jpeg'.
 												</div>
-
+							
 												<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp; 
 													Saiz maksimum fail adalah 2 MB.
 												</div>
 											</td>
 										</tr>
 									</tbody>
-
+							
 									<thead>
 										<tr>
 											<th colspan="2" class="text-center">Pengakuan Pelajar</th>
@@ -73,20 +92,20 @@
 									<tbody>
 										<tr>
 											<td colspan="2">
-												<input type="checkbox" value="1" id="perakuan" name="perakuan"/>
+												<input type="checkbox" value="1" id="perakuan" name="perakuan" @if(session('perakuan') == 1) checked @endif required/>
 												Saya mengaku bahawa maklumat dan dokumen yang disertakan adalah betul dan benar dan bertanggungjawab ke atas maklumat dan dokumen tersebut. 
 												Saya memahami bahawa saya boleh dikenakan tindakan sekiranya mana-mana maklumat dan/atau dokumen yang disertakan adalah tidak benar.
-											</td>
+											</td>											
 										</tr>
 									</tbody>
 								</table>
-
+							
 								<div class="d-flex flex-center mt-15">
 									<button type="submit" class="btn btn-primary btn-sm">
 										Simpan
 									</button>
 								</div>
-							</form>
+							</form>							
 							<!--end::Form-->
 						</div>
 						<!--end::Card body-->

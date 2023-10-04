@@ -57,6 +57,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('kemaskini/keputusan', [PermohonanController::class, 'kemaskiniKeputusan'])->name('kemaskini.keputusan');
     Route::post('kemaskini/keputusan', [PermohonanController::class, 'save'])->name('save');
     Route::get('lapor/tamat/pengajian', [PermohonanController::class, 'tamatPengajian'])->name('tamat.pengajian');
+    Route::post('hantar/dokumen/tamat/pengajian', [PermohonanController::class, 'hantarTamatPengajian'])->name('hantar.tamat.pengajian');
 
     //Kemaskini - Sekretariat - Emel
     Route::get('kemaskini/sekretariat/emel/senarai-emel', [KemaskiniController::class, 'senaraiEmel']);
@@ -106,7 +107,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Route::get('kemaskini/sekretariat/surat/tawaran', [SekretariatController::class, 'viewSuratTawaran'])->name('view');
     Route::get('kemaskini/sekretariat/surat/tawaran/preview', [SekretariatController::class, 'previewSuratTawaran'])->name('preview');
     Route::post('kemaskini/sekretariat/surat/tawaran/send/{suratTawaranId}', [SekretariatController::class, 'sendSuratTawaran'])->name('send');
-    Route::get('test-redirect', [SekretariatController::class, 'testRedirect'])->name('testRedirect');
     // Route::get('kemaskini/sekretariat/surat/tawaran/update/{suratTawaranId}', [SekretariatController::class, 'updatedSuratTawaran'])->name('update');
 
     //Permohonan - Sekretariat - Kelulusan
