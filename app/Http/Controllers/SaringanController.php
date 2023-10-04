@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use App\Mail\SaringanMail;
 use App\Models\Akademik;
 use App\Models\ButiranPelajar;
+use App\Models\Dokumen;
 use App\Models\Kelulusan;
+use App\Models\Peperiksaan;
 use App\Models\Permohonan;
 use App\Models\Saringan;
 use App\Models\SejarahPermohonan;
@@ -71,8 +73,9 @@ class SaringanController extends Controller
 
     public function salinanDokumen($id)
     {
-        $permohonan = Permohonan::where('id', $id)->first();
-        return view('permohonan.sekretariat.saringan.salinan_dokumen',compact('permohonan'));
+        $keputusan = Peperiksaan::where('permohonan_id', $id)->first();
+        $dokumen = Dokumen::where('permohonan_id', $id)->get();
+        return view('permohonan.sekretariat.saringan.salinan_dokumen',compact('dokumen','keputusan'));
     }
 
     public function saringTuntutan(Request $request,$id)

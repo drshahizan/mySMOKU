@@ -2,87 +2,65 @@
     <br>
     <h3>Salinan Dokumen Pemohon</h3>
     <br>
-    @php
-      $str = $permohonan->id_permohonan;
-      $id_permohonan = str_replace('/', '-', $str);
-      $suratTawaran = "/assets/dokumen/permohonan/salinan_suratTawaran_".$id_permohonan.".pdf";
-      $akaunBankIslam = "/assets/dokumen/permohonan/salinan_akaunBankIslam_".$id_permohonan.".pdf";
-      $keputusanPeperiksaan = "/assets/dokumen/permohonan/salinan_keputusanPeperiksaan_".$id_permohonan.".pdf";
-      $invoisResit = "/assets/dokumen/permohonan/salinan_invoisResit_".$id_permohonan.".pdf";
-      $maklumatBankIPT = "/assets/dokumen/permohonan/salinan_maklumatBankIPT_".$id_permohonan.".pdf";
-    @endphp
-<!--begin::Accordion-->
-<div class="accordion" id="accordionPanelsStayOpenExample">
-  @if(file_exists(public_path().$suratTawaran))
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
-          <b style="color: black!important">Surat Tawaran</b> 
-        </button>
-      </h2>
-      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
-        <div class="accordion-body" style="text-align: center">
-            <embed src="{{$suratTawaran}}" width="90%" height="650px"/>
-        </div>
-      </div>
+    <!--begin::Accordion-->
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        @if($keputusan != NULL)
+            @php
+                $dokumen_path = "/assets/dokumen/keputusanPeperiksaan/".$keputusan->kepPeperiksaan;
+            @endphp
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                        <b style="color: black!important">Keputusan Peperiksaan</b>
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body" style="text-align: center">
+                        <embed src="{{$dokumen_path}}" width="90%" height="650px"/>
+                    </div>
+                </div>
+            </div>
+        @endif
+        @php $i=1; $n=1;@endphp
+        @foreach($dokumen as $item)
+            @php
+            //$str = $permohonan->id_permohonan;
+            //$id_permohonan = str_replace('/', '-', $str);
+              $dokumen_path = "/assets/dokumen/permohonan/".$item['dokumen'];
+              if ($item['id_dokumen'] == 1){
+                $dokumen_name = "Surat Tawaran";
+              }
+              elseif ($item['id_dokumen'] == 2){
+                $dokumen_name = "No. Akaun Bank Islam";
+              }
+              elseif ($item['id_dokumen'] == 3){
+                $dokumen_name = "Invois/Resit";
+              }
+              elseif ($item['id_dokumen'] == 4){
+                $dokumen_name = "Dokumen Tambahan ".$n;
+                $n++;
+              }
+
+              $i++;
+            @endphp
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-heading{{$i}}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{$i}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{$i}}">
+                            <b style="color: black!important">{{$dokumen_name}}</b>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading{{$i}}">
+                        <div class="accordion-body" style="text-align: center">
+                            <embed src="{{$dokumen_path}}" width="90%" height="650px"/>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
     </div>
-  @endif
-  @if(file_exists(public_path().$akaunBankIslam))
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-          <b style="color: black!important">No. Akaun Bank Islam</b> 
-        </button>
-      </h2>
-      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-        <div class="accordion-body" style="text-align: center">
-            <embed src="{{$akaunBankIslam}}" width="90%" height="650px"/>
-        </div>
-      </div>
-    </div>
-  @endif
-  @if(file_exists(public_path().$keputusanPeperiksaan))
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-          <b style="color: black!important">Keputusan Peperiksaan</b> 
-        </button>
-      </h2>
-      <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-        <div class="accordion-body" style="text-align: center">
-            <embed src="{{$keputusanPeperiksaan}}" width="90%" height="650px"/>
-        </div>
-      </div>
-    </div>
-  @endif
-  @if(file_exists(public_path().$invoisResit))
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
-            <b style="color: black!important">Invois/Resit</b> 
-          </button>
-        </h2>
-        <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
-          <div class="accordion-body" style="text-align: center">
-            <embed src="{{$invoisResit}}" width="90%" height="650px"/>
-          </div>
-        </div>
-    </div>
-  @endif
-  @if(file_exists(public_path().$maklumatBankIPT))
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingFive">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
-            <b style="color: black!important">Maklumat Bank IPTA/IPTS/Kolej Komuniti/Politeknik Atau Pengesahan Semester Pengajian</b> 
-          </button>
-        </h2>
-        <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
-          <div class="accordion-body" style="text-align: center">
-            <embed src="{{$maklumatBankIPT}}" width="90%" height="650px"/>
-          </div>
-        </div>
-    </div>
-  @endif
-</div>
-<!--end::Accordion-->
+    <!--end::Accordion-->
 </x-default-layout>
+
+
+
+
+
