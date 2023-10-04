@@ -115,7 +115,12 @@
                                                         @elseif ($item['status']=='5')
                                                             <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='6')
-                                                            <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center">
+                                                                <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
+                                                                    <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak
+                                                                </a>
+                                                            </td>
+                                                            {{-- <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td> --}}
                                                         @elseif ($item['status']=='7')
                                                             <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
@@ -140,7 +145,14 @@
     <script>
         $('#sortTable1').DataTable();
         $('#sortTable2').DataTable();
+        
     </script>
+    <style>
+        .custom-width-btn {
+            width: 130px; 
+            height: 30px;
+        }
+    </style>
 
     </body>
 </x-default-layout>

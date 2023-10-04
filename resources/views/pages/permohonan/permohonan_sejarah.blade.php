@@ -48,7 +48,7 @@
 			<td>{{$permohonan->updated_at->format('d/m/Y h:i:sa')}}</td>
 			@if($permohonan->status == "LAYAK")
 				<td class="text-center">
-					<a href="{{ route('generate-pdf', ['permohonanId' => $permohonan->id]) }}" class="btn btn-success btn-round btn-sm">
+					<a href="{{ route('generate-pdf', ['permohonanId' => $permohonan->id]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
 						<i class="fa fa-download custom-white-icon" style="color: white !important;"></i> Layak
 					</a>
 				</td>
@@ -65,7 +65,12 @@
 </div>
 
 
-
+<style>
+	.custom-width-btn {
+		width: 130px; 
+		height: 30px;
+	}
+</style>
 
 
 
