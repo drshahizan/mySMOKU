@@ -103,7 +103,7 @@
                                                     @if ($permohonan->program=="BKOKU")
                                                     <tr>
                                                         <td>
-                                                            <a href="{{ route('ppk.rekod.tuntutan', $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                            <a href="{{ route('bkoku.rekod.tuntutan', $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
                                                         </td>
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
