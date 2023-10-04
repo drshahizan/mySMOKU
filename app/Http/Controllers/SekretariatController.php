@@ -135,7 +135,7 @@ class SekretariatController extends Controller
     public function kemaskiniPeringkatPengajian()
     {
         $pengajian = TamatPengajian::all();
-        return view('pengajian.sekretariat.kemaskini_peringkat_pengajian', compact('pengajian'));
+        return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('pengajian'));
     }
 
     public function senaraiKelulusanPermohonan()
