@@ -156,8 +156,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('penyelarasbaharu', [PenyelarasController::class, 'simpan'])->name('simpan');
     Route::post('hantar', [PenyelarasController::class, 'hantar'])->name('hantar');
     Route::get('penyelaras/senarai/permohonan/baharu', [PenyelarasController::class, 'senaraiPermohonanBaharu'])->name('senarai.permohonanBaharu');
-    Route::get('penyelaras/view-permohonan/{id}', [PenyelarasController::class, 'viewPermohonan'])->name('penyelaras.view.permohonan');
-    Route::get('penyelaras/senarai/permohonan/keseluruhan', [PenyelarasController::class, 'senaraiPermohonanKeseluruhan'])->name('senarai.permohonanKeseluruhan');
+    Route::get('penyelaras/bkoku/sejarah/sejarah-permohonan', [PenyelarasController::class, 'sejarahPermohonan'])->name('bkoku.sejarah.permohonan');
+    Route::get('penyelaras/bkoku/sejarah/rekod-permohonan/{id}', [PenyelarasController::class, 'rekodPermohonan'])->name('bkoku.rekod.permohonan');
+    Route::get('penyelaras/bkoku/sejarah/papar-permohonan/{id}', [PenyelarasController::class, 'paparRekodPermohonan'])->name('bkoku.papar.rekod.permohonan');
+    Route::get('penyelaras/bkoku/sejarah/permohonan/papar-saringan/{id}', [PenyelarasController::class, 'paparRekodSaringan'])->name('bkoku.papar.rekod.saringan');
+    Route::get('penyelaras/bkoku/sejarah/permohonan/papar-kelulusan/{id}', [PenyelarasController::class, 'paparRekodKelulusan'])->name('bkoku.papar.rekod.kelulusan');
 
     //Tuntutan - Penyelaras BKOKU
     Route::get('penyelaras/bkoku/senarai/tuntutan-baharu', [PenyelarasController::class, 'senaraiTuntutanBaharu'])->name('senarai.bkoku.tuntutanBaharu');

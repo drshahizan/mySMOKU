@@ -100,19 +100,13 @@
 				</div>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="{{ route('senarai.permohonanKeseluruhan')}}">
-					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-					<span class="menu-title">Keseluruhan</span>
-				</a>
-			</div>
-			<div class="menu-item">
 				<a class="menu-link" href="{{ route('senarai.permohonanBaharu')}}">
 					<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
 					<span class="menu-title">Baharu</span>
 				</a>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="#">
+				<a class="menu-link" href="{{ route('bkoku.sejarah.permohonan')}}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Sejarah</span>
 				</a>
