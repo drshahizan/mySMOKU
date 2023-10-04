@@ -484,6 +484,10 @@ class PermohonanController extends Controller
 
     public function tamatPengajian()
     {   
+        $user = Auth::user();
+        $smoku = Smoku::where('no_kp', $user->no_kp)->first();
+        $permohonan = Permohonan::where('smoku_id', $smoku->id)->first();
+
         return view('pages.permohonan.lapor_tamat_pengajian');
     }
 

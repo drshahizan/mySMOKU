@@ -86,7 +86,7 @@
                                                         $i=0;
                                                     @endphp
 
-                                                    @foreach ($permohonan as $item)
+                                                    @foreach ($pengajian as $item)
                                                         @php
                                                             $nama = DB::table('smoku')->where('id',$item['smoku_id'])->value('nama');
                                                             $text = ucwords(strtolower($nama));
@@ -101,21 +101,22 @@
                                                                 }
                                                             }
                                                             $pemohon = implode(' ', $result);
+                                                            $program = DB::table('permohonan')->where('smoku_id',$item['smoku_id'])->value('program');
                                                         @endphp
 
-                                                        @if($item['program'] == "BKOKU")
+                                                        @if($program == "BKOKU")
                                                             <tr>
                                                                 <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
                                                                 <td>{{$pemohon}}</td>
                                                                 <td class="text-center">
-                                                                    <button type="button" class="btn btn-info">Lihat
-                                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
-                                                                    </button>
+                                                                    <a href="{{ asset('assets/dokumen/sijil_tamat/' . $item->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
+                                                                    Lihat
+                                                                    <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    <button type="button" class="btn btn-info">Lihat
-                                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
-                                                                    </button>
+                                                                    <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $item->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
+                                                                    Lihat
+                                                                    <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
                                                                 </td>
                                                                 <td class="text-center">
                                                                     <select id="keputusan" name="keputusan" style="padding: 6px;" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required>
@@ -158,7 +159,7 @@
                                                         $i=0;
                                                     @endphp
 
-                                                    @foreach ($permohonan as $item)
+                                                    @foreach ($pengajian as $item)
                                                         @php
                                                             $nama = DB::table('smoku')->where('id',$item['smoku_id'])->value('nama');
                                                             $text = ucwords(strtolower($nama));
@@ -173,21 +174,22 @@
                                                                 }
                                                             }
                                                             $pemohon = implode(' ', $result);
+                                                            $program = DB::table('permohonan')->where('smoku_id',$item['smoku_id'])->value('program');
                                                         @endphp
 
-                                                        @if($item['program'] == "PPK")
+                                                        @if($program == "PPK")
                                                             <tr>
                                                                 <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
                                                                 <td>{{$pemohon}}</td>
                                                                 <td class="text-center">
-                                                                    <button type="button" class="btn btn-info">Lihat
-                                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
-                                                                    </button>
+                                                                    <a href="{{ asset('assets/dokumen/sijil_tamat/' . $item->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
+                                                                        Lihat
+                                                                    <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    <button type="button" class="btn btn-info">Lihat
-                                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
-                                                                    </button>
+                                                                    <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $item->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
+                                                                        Lihat
+                                                                    <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
                                                                 </td>
                                                                 <td class="text-center">
                                                                     <select id="keputusan" name="keputusan" style="padding: 6px;" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required>

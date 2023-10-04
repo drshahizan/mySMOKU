@@ -19,6 +19,7 @@ use App\Models\Akademik;
 use App\Models\Kelulusan;
 use App\Models\MaklumatKementerian;
 use App\Models\SuratTawaran;
+use App\Models\TamatPengajian;
 use App\Models\Tuntutan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Dompdf;
@@ -53,14 +54,6 @@ class SekretariatController extends Controller
 
     public function filterStatusPermohonanBKOKU(Request $request, $status)
     {
-        // $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
-        //     return $q->whereDate('created_at', $request->date);
-        // })
-        // ->when($status != null, function ($q) use ($status) {
-        //     return $q->where('status', $status);
-        // })
-        // ->get();
-
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
@@ -93,14 +86,6 @@ class SekretariatController extends Controller
 
     public function statusPermohonanPPK(Request $request)
     {
-        // $permohonan = Permohonan::when($request->date != null, function ($q) use ($request) {
-        //     return $q->whereDate('created_at', $request->date);
-        // })
-        // ->when($request->status != null, function ($q) use ($request) {
-        //     return $q->where('status', $request->status);
-        // })
-        // ->get();
-
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
@@ -149,8 +134,8 @@ class SekretariatController extends Controller
 
     public function kemaskiniPeringkatPengajian()
     {
-        $permohonan = Permohonan::all();
-        return view('pengajian.sekretariat.kemaskini_peringkat_pengajian', compact('permohonan'));
+        $pengajian = TamatPengajian::all();
+        return view('pengajian.sekretariat.kemaskini_peringkat_pengajian', compact('pengajian'));
     }
 
     public function senaraiKelulusanPermohonan()
