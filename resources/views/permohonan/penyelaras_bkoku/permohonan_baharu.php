@@ -1135,29 +1135,13 @@
 							</tbody>
 						</table>
 						<!--end::Table-->
-						{{-- <div class="input-group control-group img_div form-group col-md-4" >
-							<input type="file" id="profileImage[]" name="profileImage[]" class="form-control">
-							<!-- Add More Button -->
-							<div class="input-group-btn"> 
-							  <button class="btn btn-success btn-add-more" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-							</div>
-							<!-- End -->
-						</div> --}}
-						<!-- Add More Image upload field  -->
-						{{-- <div class="clone hide ">
-							<div class="control-group input-group form-group col-md-4" style="margin-top:10px">
-								<input type="file" id="profileImage[]" name="profileImage[]" class="form-control">
-								<div class="input-group-btn"> 
-								<button class="btn btn-danger btn-remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-								</div>
-							</div>
-						</div> --}}
-						<!-- End -->
 						<br>
 						<br>
 						<div class="pb-10 pb-lg-15">
 							<!--begin::Notice-->
-							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; <a href="https://compressjpeg.com/" target="_blank">Gunakan kemudahan di sini untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
+							<div class="text-dark fw-semibold fs-6">
+								<i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp;
+								Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a>untuk mengurangkan saiz fail sebelum memuat naik fail.
 							</div>
 
 							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; Format fail yang boleh dimuat naik adalah format 

@@ -91,20 +91,35 @@ class PenyelarasController extends Controller
             ->where('smoku.id', $id)
             ->get(['smoku.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*']);
 
-        $mod = Mod::all()->sortBy('kod_mod');
-        $biaya = SumberBiaya::all()->sortBy('kod_biaya');
+        $biaya = SumberBiaya::all()->where('kod_biaya','!=','2')->sortBy('kod_biaya');
         $penaja = Penaja::all()->sortBy('kod_penaja');
         $hubungan = Hubungan::all()->sortBy('kod_hubungan');
         $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri')->get();
+        $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
 
         $infoipt = InfoIpt::all()->where('jenis_institusi','IPTA')->sortBy('nama_institusi');
         $peringkat = PeringkatPengajian::all()->sortBy('kod_peringkat');
         $kursus = Kursus::all()->sortBy('nama_kursus');
         $mod = Mod::all()->sortBy('kod_mod');
-        $biaya = Sumberbiaya::all()->sortBy('kod_biaya');
-        $hubungan = Hubungan::all()->sortBy('kod_hubungan');
 
-        return view('pages.penyelaras.permohonan.mohonbaruform', compact('smoku','hubungan','infoipt','peringkat','kursus','mod','biaya','penaja','negeri'));
+        $permohonan = Permohonan::where('smoku_id', $id)->first();
+        $butiranPelajar = ButiranPelajar::join('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
+        ->join('smoku_waris','smoku_waris.smoku_id','=','smoku_butiran_pelajar.smoku_id')
+        ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku_butiran_pelajar.smoku_id')
+        ->join('permohonan','permohonan.smoku_id','=','smoku_butiran_pelajar.smoku_id')
+        ->join('bk_jantina','bk_jantina.kod_jantina','=','smoku.jantina')
+        ->join('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
+        ->join('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
+        ->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
+        ->get(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
+        ->where('smoku_id', $id);
+        $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
+
+        if ($permohonan && $permohonan->status >= '1') {
+            return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen'));
+        } else {
+            return view('permohonan.penyelaras_bkoku.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','kursus','biaya','penaja','negeri'));
+        }
     }
 
     public function bandar($idnegeri)
@@ -367,7 +382,7 @@ class PenyelarasController extends Controller
         ->get(['smoku.*', 'permohonan.*', 'smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
 
         //dd($smoku);
-        return view('pages.penyelaras.permohonan.permohonanbaru', compact('smoku'));
+        return view('permohonan.penyelaras_bkoku.senarai_baharu', compact('smoku'));
     }
 
     public function viewPermohonan($id)
