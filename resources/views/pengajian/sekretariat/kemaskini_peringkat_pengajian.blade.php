@@ -75,10 +75,11 @@
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>                                        
-                                                        <th style="width: 40%"><b>Nama</b></th>
-                                                        <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
-                                                        <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
-                                                        <th class="text-center" style="width: 25%">Peringkat Pengajian</th>
+                                                        <th style="width: 30%"><b>Nama</b></th>
+                                                        <th style="width: 15%" class="text-center"><b>Peringkat Pengajian</b></th>
+                                                        <th style="width: 13%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
+                                                        <th style="width: 12%" class="text-center"><b>Salinan Transkrip</b></th> 
+                                                        <th class="text-center" style="width: 25%">Kemaskini</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -102,12 +103,14 @@
                                                             }
                                                             $pemohon = implode(' ', $result);
                                                             $program = DB::table('permohonan')->where('smoku_id',$item['smoku_id'])->value('program');
+                                                            $peringkat = DB::table('smoku_akademik')->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')->where('smoku_akademik.smoku_id',$item['smoku_id'])->value('bk_peringkat_pengajian.peringkat')
                                                         @endphp
 
                                                         @if($program == "BKOKU")
                                                             <tr>
                                                                 <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
                                                                 <td>{{$pemohon}}</td>
+                                                                <td>{{ucwords(strtolower($peringkat))}}</td>
                                                                 <td class="text-center">
                                                                     <a href="{{ asset('assets/dokumen/sijil_tamat/' . $item->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
                                                                     Lihat
@@ -148,10 +151,11 @@
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>                                        
-                                                        <th style="width: 40%"><b>Nama</b></th>
-                                                        <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
-                                                        <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
-                                                        <th class="text-center" style="width: 25%">Peringkat Pengajian</th>
+                                                        <th style="width: 30%"><b>Nama</b></th>
+                                                        <th style="width: 15%" class="text-center"><b>Peringkat Pengajian</b></th>
+                                                        <th style="width: 13%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
+                                                        <th style="width: 12%" class="text-center"><b>Salinan Transkrip</b></th> 
+                                                        <th class="text-center" style="width: 25%">Kemaskini</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -175,12 +179,14 @@
                                                             }
                                                             $pemohon = implode(' ', $result);
                                                             $program = DB::table('permohonan')->where('smoku_id',$item['smoku_id'])->value('program');
+                                                            $peringkat = DB::table('smoku_akademik')->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')->where('smoku_akademik.smoku_id',$item['smoku_id'])->value('bk_peringkat_pengajian.peringkat')
                                                         @endphp
 
                                                         @if($program == "PPK")
                                                             <tr>
                                                                 <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
                                                                 <td>{{$pemohon}}</td>
+                                                                <td>{{ucwords(strtolower($peringkat))}}</td>
                                                                 <td class="text-center">
                                                                     <a href="{{ asset('assets/dokumen/sijil_tamat/' . $item->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
                                                                         Lihat
