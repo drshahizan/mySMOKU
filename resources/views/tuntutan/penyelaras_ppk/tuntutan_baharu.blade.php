@@ -106,7 +106,7 @@
                                     <!--begin::Toolbar-->
                                     <div class="d-flex">
                                         <!--begin::Edit-->
-                                        <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_peperiksaan{{$layak->smoku_id}}">
+                                        <a href="{{ route('bkoku.kemaskini.keputusan', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3">
                                             <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Keputusan Peperiksaan">
                                                 <i class="ki-solid ki-pencil text-dark fs-2"></i>
                                             </span>

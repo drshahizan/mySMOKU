@@ -471,6 +471,15 @@ class PenyelarasPPKController extends Controller
         return view('tuntutan.penyelaras_ppk.tuntutan_baharu', compact('layak'));
     }
 
+    public function kemaskiniKeputusan($id)
+    {   
+        $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
+        $smoku_id = $id;
+        $peperiksaan = Peperiksaan::all()->where('permohonan_id', '=', $permohonan->id);
+
+        return view('tuntutan.penyelaras_ppk.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id'));
+    }
+
     public function hantarKeputusanPeperiksaan(Request $request, $id)
     {
         $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
