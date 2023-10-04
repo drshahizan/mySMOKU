@@ -14,19 +14,19 @@
 			</div>
 			<div class="menu-item pt-5">
 				<div class="menu-content">
-					<span class="menu-heading fw-bold text-uppercase fs-7">Pengajian</span>
+					<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
 				</div>
 			</div>
 			<div class="menu-item">
 				<a class="menu-link" href="{{ route('kemaskini.keputusan') }}">
 					<span class="menu-icon">{!! getIcon('update-file', 'fs-2') !!}</span>
-					<span class="menu-title">Kemaskini Keputusan Peperiksaan</span>
+					<span class="menu-title">Keputusan Peperiksaan</span>
 				</a>
 			</div>
 			<div class="menu-item">
 				<a class="menu-link" href="{{ route('tamat.pengajian') }}">
 					<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
-					<span class="menu-title">Lapor Diri Tamat Pengajian</span>
+					<span class="menu-title">Lapor Tamat Pengajian</span>
 				</a>
 			</div>
 

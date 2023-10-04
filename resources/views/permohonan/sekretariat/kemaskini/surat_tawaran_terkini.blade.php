@@ -184,9 +184,10 @@
                                 
                                 <p>Sekian, terima kasih.</p>
                                 <br>
-                                <p>“{{$suratTawaran->penutup1}}”</p>
+                                <p>{{$suratTawaran->penutup1}}</p>
+                                <p>{{$suratTawaran->penutup4_4}}</p>
                                 <br>
-                                <p>“{{$suratTawaran->penutup2}}”</p>
+                                <p>{{$suratTawaran->penutup2}}</p>
                                 <br>
                                 <p>Saya yang menjalankan amanah,</p>
                                 <p>

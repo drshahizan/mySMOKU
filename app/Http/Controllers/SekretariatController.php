@@ -137,22 +137,14 @@ class SekretariatController extends Controller
         $pengajian = TamatPengajian::all();
         return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('pengajian'));
     }
-    // public function kemaskiniPeringkatPengajian()
-    // {
-    //     $pengajian = TamatPengajian::all();
-    //     return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('pengajian'));
-    // }
 
     public function kemaskiniPeringkatPengajian(Request $request, $id)
     {
-        // Find the record in the smoku_akademik table
         $smokuAkademik = Akademik::where('smoku_id', $id)->first();
 
-        // Update the "Peringkat Pengajian" column
         $smokuAkademik->peringkat_pengajian = $request->peringkat_pengajian;
         $smokuAkademik->save();
 
-        // Redirect back to the same page with a success message
         return redirect()->back()->with('success', 'Peringkat Pengajian updated successfully.');
     }
 
@@ -427,73 +419,43 @@ class SekretariatController extends Controller
         return view('permohonan.sekretariat.kemaskini.surat_tawaran_diubah', compact('suratTawaran'));
     }
 
-
-    //Step 2: Preview Changes - Show users a preview of the changes they made.
-    // public function previewSuratTawaran($suratTawaranId)
-    // {
-    //     $suratTawaran = SuratTawaran::find($suratTawaranId);
-
-    //     if (!$suratTawaran) {
-    //         abort(404);
-    //     }
-
-    //     return view('permohonan.sekretariat.kemaskini.surat_tawaran_diubah', compact('suratTawaran'));
-    // }
-
-
-    //Step 3: Confirm and Update - Allow users to confirm and update the data in the database.
+    //Step 2: Editing Data - Allow users to send the updated data.
     public function sendSuratTawaran(Request $request, $suratTawaranId)
     {
-        // Validate the form data
-        $validatedData = $request->validate([
-            'noRujukan' => 'required|string',
-            'tajuk' => 'required|string',
-            'tujuan' => 'required|string',
-            'kandungan1' => 'required|string|max:65535',
-            'kandungan2' => 'required|string|max:65535',
-            'kandungan3' => 'required|string|max:65535',
-            'pentup1' => 'required|string',
-            'penutup2' => 'required|string',
-            'penutup3_1' => 'required|string',
-            'penutup3_2' => 'required|string',
-            'penutup3_3' => 'required|string',
-            'penutup3_4' => 'required|string',
-            'penutup4_1' => 'required|string',
-            'penutup4_2' => 'required|string',
-            'penutup4_3' => 'required|string',
-        ]);
+        $existingRecord = SuratTawaran::where('id', $suratTawaranId)->first();
+        
+        if ($existingRecord) {
+            $existingRecord->no_rujukan = $request->noRujukan;
+            $existingRecord->tajuk = $request->tajuk;
+            $existingRecord->tujuan = $request->tujuan;
+            $existingRecord->kandungan1 = $request->kandungan1;
+            $existingRecord->kandungan2 = $request->kandungan2;
+            $existingRecord->kandungan3 = $request->kandungan3;
+            $existingRecord->penutup1 = $request->penutup1;
+            $existingRecord->penutup2 = $request->penutup2;
+            $existingRecord->penutup3_1 = $request->penutup3_1;
+            $existingRecord->penutup3_2 = $request->penutup3_2;
+            $existingRecord->penutup3_3 = $request->penutup3_3;
+            $existingRecord->penutup3_4 = $request->penutup3_4;
+            $existingRecord->penutup4_1 = $request->penutup4_1;
+            $existingRecord->penutup4_2 = $request->penutup4_2;
+            $existingRecord->penutup4_4 = $request->penutup4_3;
+            $existingRecord->penutup4_4 = $request->penutup4_4;
+            $existingRecord->save();
+        } 
 
-        // Find the SuratTawaran record by ID
-        $suratTawaran = SuratTawaran::find($suratTawaranId);
-
-        // Update the SuratTawaran record with the validated data
-        $suratTawaran->update($validatedData);
-
-        // Redirect to the final view with a success message
-        // return view('permohonan.sekretariat.kemaskini.surat_tawaran_terkini', compact('suratTawaran'))
-        // ->with('success', 'Surat Tawaran updated successfully.');
         return redirect()->route('update', ['suratTawaranId' => $suratTawaranId])->with('success', 'Surat Tawaran telah dikemaskini.');
     }
 
-    //Step 4: Final latest view - Allow users to view the updated version of "Surat Tawaran"
+    //Step 3: Final latest view - Allow users to view the updated version of "Surat Tawaran"
     public function updatedSuratTawaran($suratTawaranId)
     {
         $suratTawaran = SuratTawaran::find($suratTawaranId);
         $maklumat_kementerian = MaklumatKementerian::first();
 
-        if (!$suratTawaran) {
-            abort(404); // Handle the case where the record is not found
-        }
-
         return view('permohonan.sekretariat.kemaskini.surat_tawaran_terkini', compact('suratTawaran','maklumat_kementerian'));
     }
-
-    // public function updatedSuratTawaran()
-    // {
-    //     dd("Inside updatedSuratTawaran method");
-    //     $suratTawaran = SuratTawaran::first();
-    //     return view('permohonan.sekretariat.kemaskini.surat_tawaran_terkini', compact('suratTawaran'));
-    // }
+    
 
     //TUNTUTAN
     public function senaraiTuntutanKedua()

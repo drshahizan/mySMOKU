@@ -105,10 +105,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('sekretariat/hantar/kemaskini/peringkat/pengajian/{id}', [SekretariatController::class, 'kemaskiniPeringkatPengajian'])->name('kemaskini.peringkat.pengajian');
 
     //Kemaskini - Sekretariat - Surat Tawaran
-    //Route::get('kemaskini/sekretariat/surat/tawaran', [SekretariatController::class, 'viewSuratTawaran'])->name('view');
     Route::get('kemaskini/sekretariat/surat/tawaran/preview', [SekretariatController::class, 'previewSuratTawaran'])->name('preview');
     Route::post('kemaskini/sekretariat/surat/tawaran/send/{suratTawaranId}', [SekretariatController::class, 'sendSuratTawaran'])->name('send');
-    // Route::get('kemaskini/sekretariat/surat/tawaran/update/{suratTawaranId}', [SekretariatController::class, 'updatedSuratTawaran'])->name('update');
+    Route::get('kemaskini/sekretariat/surat/tawaran/update/{suratTawaranId}', [SekretariatController::class, 'updatedSuratTawaran'])->name('update');
 
     //Permohonan - Sekretariat - Kelulusan
     Route::post('permohonan/sekretariat/hantar/semua', [SekretariatController::class, 'hantarSemuaKeputusanPermohonan'])->name('bulk.approval');

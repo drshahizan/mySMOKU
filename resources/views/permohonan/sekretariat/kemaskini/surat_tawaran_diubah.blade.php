@@ -187,9 +187,10 @@
                                 
                                 <p>Sekian, terima kasih.</p>
                                 <br>
-                                <p><input type="text" id="penutup1" name="penutup1" style="width: 50%; font-weight:bold" value="“{{$suratTawaran->penutup1}}”"></p>
+                                <p><input type="text" id="penutup1" name="penutup1" style="width: 50%; font-weight:bold" value="{{$suratTawaran->penutup1}}"></p>
+                                <p><input type="text" id="penutup4_4" name="penutup4_4" style="width: 50%; font-weight:bold" value="{{$suratTawaran->penutup4_4}}"></p>
                                 <br>
-                                <p><input type="text" id="penutup2" name="penutup2" style="width: 50%; font-weight:bold" value="“{{$suratTawaran->penutup2}}”"></p>
+                                <p><input type="text" id="penutup2" name="penutup2" style="width: 50%; font-weight:bold" value="{{$suratTawaran->penutup2}}"></p>
                                 <br>
                                 <p>Saya yang menjalankan amanah,</p>
                                 <p>
