@@ -107,22 +107,27 @@
                                             <tr>
                                                 <td class="vertical-top w-13">Subjek</td>
                                                 <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top"><input type="number" class="form-control" id="jumlah_disokong_ppk" name="jumlah_disokong" value="" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                <td class="vertical-top"><input type="text" class="form-control" id="subjek" name="subjek" value="{{$emel->subjek}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                             </tr>
                                             <tr>
                                                 <td class="vertical-top w-13">Pendahuluan</td>
                                                 <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3" class="form-control"></textarea></td>
+                                                <td class="vertical-top"><textarea style="white-space: pre-line" name="pendahuluan" id="pendahuluan" cols="30" rows="3" class="form-control" value="{{$emel->pendahuluan}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>{{$emel->pendahuluan}}</textarea></td>
                                             </tr>
                                             <tr>
                                                 <td class="vertical-top w-13">Isi Kandungan</td>
                                                 <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3" class="form-control"></textarea></td>
+                                                <td class="vertical-top"><textarea name="isi_kandungan" id="isi_kandungan" cols="30" rows="3" class="form-control" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>{{$emel->isi_kandungan}}</textarea></td>
                                             </tr>
                                             <tr>
                                                 <td class="vertical-top w-13">Penutup</td>
                                                 <td class="vertical-top v">:</td>
-                                                <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3" class="form-control"></textarea></td>
+                                                <td class="vertical-top"><textarea name="penutup" id="penutup" cols="30" rows="3" class="form-control" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>{{$emel->penutup}}</textarea></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="vertical-top w-13">Disediakan Oleh:</td>
+                                                <td class="vertical-top v">:</td>
+                                                <td class="vertical-top"><textarea name="d_oleh" id="d_oleh" cols="30" rows="3" class="form-control" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>{{$emel->disediakan_oleh}}</textarea></td>
                                             </tr>
                                         </table>
                                     </div>

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Emel extends Model
 {
     use HasFactory;
+
+    protected $table = 'bk_emel';
+
+    protected $fillable = [
+        'jenis_emel',
+    ];
 }
