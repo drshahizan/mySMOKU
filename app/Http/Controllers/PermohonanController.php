@@ -552,18 +552,18 @@ class PermohonanController extends Controller
     }
 
     public function sejarahTuntutan(){
-        $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
-        $permohonan = Permohonan::join('bk_status', 'bk_status.kod_status', '=', 'permohonan.status')
-            ->get(['permohonan.*', 'bk_status.status'])
-            ->where('smoku_id', $smoku_id->id)
-            ->first();
-        //dd($permohonan);    
+        // $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
+        // $permohonan = Permohonan::join('bk_status', 'bk_status.kod_status', '=', 'permohonan.status')
+        //     ->get(['permohonan.*', 'bk_status.status'])
+        //     ->where('smoku_id', $smoku_id->id)
+        //     ->first();
+        // //dd($permohonan);    
 
-        if ($permohonan !== null) {
-            return view('pages.permohonan.permohonan_sejarah', compact('permohonan'));
-        } else {
-            return back()->with('message', 'Tiada permohonan lama.');
-        }
+        // if ($permohonan !== null) {
+        //     return view('pages.permohonan.permohonan_sejarah', compact('permohonan'));
+        // } else {
+        //     return back()->with('message', 'Tiada permohonan lama.');
+        // }
 
     }
 }
