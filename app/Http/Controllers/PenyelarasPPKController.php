@@ -121,9 +121,10 @@ class PenyelarasPPKController extends Controller
         ->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
         ->get(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
         ->where('smoku_id', $id);
-        $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
+        
 
         if ($permohonan && $permohonan->status >= '1') {
+            $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
             return view('permohonan.penyelaras_ppk.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen'));
         } else {
             return view('permohonan.penyelaras_ppk.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','kursus','biaya','penaja','negeri'));
