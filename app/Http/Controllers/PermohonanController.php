@@ -441,8 +441,11 @@ class PermohonanController extends Controller
     }
 
     public function kemaskiniKeputusan()
-    {   
-        $peperiksaan = Peperiksaan::all();
+    {
+        $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
+        $permohonan = Permohonan::all()->where('smoku_id', '=', $smoku_id->id)->first();
+        $peperiksaan = Peperiksaan::all()->where('permohonan_id', '=', $permohonan->id);   
+
         return view('pages.permohonan.kemaskini_keputusan_peperiksaan', compact('peperiksaan'));
     }
 
