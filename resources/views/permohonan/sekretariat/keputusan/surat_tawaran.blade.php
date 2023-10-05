@@ -166,9 +166,9 @@
         
         <p>Sekian, terima kasih.</p>
         <br>
-        <p><b>“{{$kandungan_surat->penutup1}}”</b></p>
+        <p><b>{{$kandungan_surat->penutup1}}</b></p>
         <br>
-        <p><b>“{{$kandungan_surat->penutup2}}”</b></p>
+        <p><b>{{$kandungan_surat->penutup2}}</b></p>
         <br>
         <p>Saya yang menjalankan amanah,</p>
         <p> {{$kandungan_surat->penutup3_1}} <br>
