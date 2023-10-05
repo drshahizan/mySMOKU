@@ -194,9 +194,6 @@
                                 <br>
                                 @php
                                     $i = 2;
-                                    $str = $permohonan->id_permohonan;
-                                    $id_permohonan = str_replace('/', '-', $str);
-                                    $invoisResit = "/assets/dokumen/tuntutan/salinan_invoisResit_KPTBKOKU-2-989876543210.pdf";
                                 @endphp
                                 <form method="POST" action="{{ url('tuntutan/sekretariat/saringan/saring-tuntutan-kedua/'.$tuntutan->id) }}" id="saring">
                                     <div class="row clearfix">
@@ -235,6 +232,9 @@
                                                             </td>
                                                         </tr>
                                                         @foreach($tuntutan_item as $item)
+                                                            @php
+                                                                $invoisResit = "/assets/dokumen/tuntutan/".$item['resit'];
+                                                            @endphp
                                                         <tr>
                                                             <td style="text-align:right;">{{$i++}}</td>
                                                             <td>
