@@ -116,6 +116,18 @@
 					<span class="menu-title">Sejarah</span>
 				</a>
 			</div>
+
+			<div class="menu-item pt-5">
+				<div class="menu-content">
+					<span class="menu-heading fw-bold text-uppercase fs-7">Muat Naik</span>
+				</div>
+			</div>
+			<div class="menu-item">
+				<a class="menu-link" href="{{ route('penyelaras.dokumen')}}">
+					<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
+					<span class="menu-title">Dokumen ESP</span>
+				</a>
+			</div>
 		
 		</div>
 		<!--end::Menu-->

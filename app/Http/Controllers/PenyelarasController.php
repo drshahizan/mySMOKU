@@ -25,6 +25,7 @@ use App\Models\Dokumen;
 use App\Models\Hubungan;
 use App\Models\Negeri;
 use App\Models\Bandar;
+use App\Models\DokumenESP;
 use App\Models\Tuntutan;
 use App\Models\TuntutanItem;
 use App\Models\SejarahTuntutan;
@@ -713,6 +714,14 @@ class PenyelarasController extends Controller
         $smoku = Smoku::where('id', $smoku_id)->first();
         $kelulusan = Kelulusan::where('permohonan_id', $sejarah_p->permohonan_id)->first();
         return view('permohonan.penyelaras_bkoku.papar_kelulusan',compact('permohonan','kelulusan','smoku','sejarah_p'));
+    }
+
+    public function dokumenESP()
+    {   
+        
+        $dokumen = DokumenESP::all();
+
+        return view('dokumen.penyelaras.dokumen', compact('dokumen'));
     }
   
 

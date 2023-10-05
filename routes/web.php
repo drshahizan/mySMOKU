@@ -145,6 +145,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan/sekretariat/sejarah/papar-tuntutan/{id}', [SekretariatController::class, 'paparRekodTuntutan'])->name('papar.rekod.tuntutan.id');
     Route::get('tuntutan/sekretariat/sejarah/papar-saringan/{id}', [SekretariatController::class, 'paparRekodSaringanTuntutan'])->name('papar.rekod.saringan.tuntutan.id');
 
+    //Dokumen - Penyelaras 
+    Route::get('penyelaras/bkoku/dokumen/esp', [PenyelarasController::class, 'dokumenESP'])->name('penyelaras.dokumen');
+
     //Permohonan - Penyelaras BKOKU
     Route::get('penyelaras/dashboard', [PenyelarasController::class, 'index'])->name('penyelaras.dashboard');
     Route::post('penyelaras/dashboard', [PenyelarasController::class, 'store']);
@@ -212,7 +215,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Tuntutan Pelajar
     Route::get('tuntutan/baharu',[TuntutanController::class,'tuntutanBaharu'])->name('tuntutan.baharu');
-    Route::post('tuntutan/baharu', [TuntutanController::class, 'simpanTuntutan'])->name('simpan.tuntutan');
+    Route::post('tuntutan/baharu', [TuntutanController::class, 'simpanTuntutan'])->name('pelajar.simpan.tuntutan');
     Route::post('tuntutan/hantar', [TuntutanController::class, 'hantarTuntutan'])->name('hantar.tuntutan');
 
     //Pentadbir

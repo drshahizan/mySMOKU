@@ -19,7 +19,7 @@
 					<!--begin::Card body-->
 					<div class="card-body p-8">
 						<!--begin::Form-->
-						<form action="{{ route('simpan.tuntutan') }}" method="post" enctype="multipart/form-data">
+						<form action="{{ route('pelajar.simpan.tuntutan') }}" method="post" enctype="multipart/form-data">
 							@csrf
 							<!--begin::Wrapper-->
 							<div class="d-flex flex-column align-items-start flex-xxl-row">
@@ -153,9 +153,9 @@
 										</tr>
 									</thead>
 									<tbody class="fw-semibold text-gray-600">
-										@foreach ($tuntutan as $key => $tuntutan)
+										@foreach ($tuntutan as $tuntutan)
 										<tr>
-											<td>{{ $key + 1 }}.</td>
+											<td>{{ $loop->iteration }}.</td>
 											<td>{{ $tuntutan->jenis_yuran}}</td>
 											<td><a href="/assets/dokumen/tuntutan/{{$tuntutan->resit}}" target="_blank">{{ $tuntutan->no_resit}}</a></td>
 											<td>{{ $tuntutan->nota_resit}}</td>
