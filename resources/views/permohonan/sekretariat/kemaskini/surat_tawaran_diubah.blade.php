@@ -179,9 +179,9 @@
                                         <textarea name="kandungan1" id="kandungan1" cols="153" rows="3">{{$suratTawaran->kandungan1}}</textarea>
                                     </p>
                                     <br>
-                                    <p><textarea name="kandungan2" id="kandungan2" cols="153" rows="3">3.{{$suratTawaran->kandungan2}}</textarea></p>
+                                    <p>3. <textarea name="kandungan2" id="kandungan2" cols="153" rows="3">{{$suratTawaran->kandungan2}}</textarea></p>
                                     <br>
-                                    <p><textarea name="kandungan3" id="kandungan3" cols="153" rows="3">4.{{$suratTawaran->kandungan3}}</textarea></p>
+                                    <p>4. <textarea name="kandungan3" id="kandungan3" cols="153" rows="3">{{$suratTawaran->kandungan3}}</textarea></p>
                                 </div>
                                 <br>
                                 
@@ -196,7 +196,7 @@
                                 <p>
                                     <input type="text" id="penutup3_1" name="penutup3_1" style="width: 30%; font-weight:bold" value="{{$suratTawaran->penutup3_1}}"><br>
                                     <input type="text" id="penutup3_2" name="penutup3_2" style="width: 30%; font-weight:bold" value="{{$suratTawaran->penutup3_2}}"><br>
-                                    <input type="text" id="penutup3_3" name="penutup3_3" style="width: 30%; font-weight:bold" value="b.p. {{$suratTawaran->penutup3_3}}"><br>
+                                    <input type="text" id="penutup3_3" name="penutup3_3" style="width: 30%; font-weight:bold" value="{{$suratTawaran->penutup3_3}}"><br>
                                     <input type="text" id="penutup3_4" name="penutup3_4" style="width: 30%; font-weight:bold" value="{{$suratTawaran->penutup3_4}}">
                                 </p>
                                 <p><div style="text-align: center;">Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>

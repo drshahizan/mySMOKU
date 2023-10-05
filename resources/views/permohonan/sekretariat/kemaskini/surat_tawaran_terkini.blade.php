@@ -174,7 +174,7 @@
                                 
                                 <br>
                                 <div class="main-content">
-                                    <p>2. Bantuan ini berkuatkuasa mulai <b>xxxxxxxxx hingga xxxxxxxxx.</b>{{$suratTawaran->kandungan1}}</p>
+                                    <p>2. Bantuan ini berkuatkuasa mulai <b>xxxxxxxxx hingga xxxxxxxxx.</b> {{$suratTawaran->kandungan1}}</p>
                                     <br>
                                     <p>3. {{$suratTawaran->kandungan2}}</p>
                                     <br>
@@ -193,7 +193,7 @@
                                 <p>
                                     {{$suratTawaran->penutup3_1}} <br>
                                     {{$suratTawaran->penutup3_2}} <br>
-                                    b.p. {{$suratTawaran->penutup3_3}} <br>
+                                    {{$suratTawaran->penutup3_3}} <br>
                                     {{$suratTawaran->penutup3_4}} <br>
                                     
                                 </p>
