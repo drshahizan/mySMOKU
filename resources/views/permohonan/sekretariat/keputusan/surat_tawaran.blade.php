@@ -173,7 +173,7 @@
         <p>Saya yang menjalankan amanah,</p>
         <p> {{$kandungan_surat->penutup3_1}} <br>
             {{$kandungan_surat->penutup3_2}} <br>
-        b.p.{{$kandungan_surat->penutup3_3}} <br>
+            {{$kandungan_surat->penutup3_3}} <br>
             {{$kandungan_surat->penutup3_4}} <br>
         </p>
         <br>
