@@ -122,25 +122,22 @@
 				<div class="card-body pt-0">
 					<!--begin::Table-->
 					<div class="table-responsive">
-						<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+						<table class="table align-center table-row-dashed fs-6 gy-5" id="kt_customers_table">
 							<thead>
-								<tr class="text-start text-gray-400 fw-bold fs-7 gs-0">
-									<th class="min-w-125px">Tarikh Mula</th>
-									<th class="min-w-125px">Tarikh Tamat</th>
-									<th class="min-w-125px">Catatan</th>
-									<th class="min-w-125px">Tarikh Kemaskini</th>
-									
+								<tr class="text-start align-center text-gray-400 fw-bold fs-7 gs-0">
+									<th class="min-w-125px align-center">Tarikh Mula</th>
+									<th class="min-w-125px align-center">Tarikh Tamat</th>
+									<th class="min-w-125px align-center">Catatan</th>
+									<th class="min-w-125px align-center">Tarikh Kemaskini</th>
 								</tr>
 							</thead>
 							<tbody class="fw-semibold text-gray-600">
-								@foreach ($tarikh as $tarikh)
 								<tr>
 									<td>{{ $tarikh->tarikh_mula}}</td>
 									<td>{{ $tarikh->tarikh_tamat}}</td>
-									<td>{!! $tarikh->catatan !!}</td>
+									<td class="align-left">{!! $tarikh->catatan !!}</td>
 									<td>{{ $tarikh->created_at->format('d/m/Y h:i:sa')}}</td>
 								</tr>
-								@endforeach
 							</tbody>
 						</table>
 					</div>
@@ -171,7 +168,15 @@
 
 <!--end::Javascript-->
 	
+<style>
+.align-center {
+    text-align: center;
+}
 
+.align-left {
+	text-align: left;
+}
+</style>
 
 
 

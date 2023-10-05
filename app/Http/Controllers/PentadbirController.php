@@ -184,9 +184,9 @@ class PentadbirController extends Controller
 
     public function tarikh()
     {
-        $tarikh = TarikhIklan::orderBy('created_at', 'desc')->get(); 
+        $tarikh = TarikhIklan::orderBy('created_at', 'desc')->first(); 
 
-        return view('pages.pentadbir.tarikh_iklan', compact('tarikh'));
+        return view('kemaskini.pentadbir.tarikh_iklan', compact('tarikh'));
 
     }
 
