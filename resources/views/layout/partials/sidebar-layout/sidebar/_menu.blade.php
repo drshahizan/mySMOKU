@@ -42,7 +42,7 @@
 				</a>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="{{ route('permohonan.sejarah') }}">
+				<a class="menu-link" href="{{ route('pelajar.sejarah.permohonan') }}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Sejarah</span>
 				</a>
@@ -60,7 +60,7 @@
 				</a>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="#">
+				<a class="menu-link" href="{{ route('pelajar.sejarah.tuntutan') }}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Sejarah</span>
 				</a>

@@ -24,7 +24,7 @@ class TuntutanController extends Controller
         ->where('status', 1);
         $akademik = Akademik::where('smoku_id',$smoku_id->id)->first();
         
-        return view('pages.tuntutan.borang_tuntutan', compact('permohonan','tuntutan','akademik'));
+        return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan','tuntutan','akademik'));
         
     }
 
@@ -170,5 +170,18 @@ class TuntutanController extends Controller
         
         return redirect()->route('dashboard')->with('message', 'Tuntutan anda telah dihantar.');
 
+    }
+
+    public function sejarahTuntutan()
+    {
+        $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        $permohonan = Permohonan::where('smoku_id', '=', $smoku_id->id)->first();
+        $tuntutan = Tuntutan::where('tuntutan.status', '!=', '4')
+        ->where('tuntutan.smoku_id', '=', $smoku_id->id)
+        ->where('tuntutan.permohonan_id', '=', $permohonan->id)
+        ->get();
+        //dd($tuntutan);
+
+        return view('tuntutan.pelajar.sejarah_tuntutan',compact('tuntutan'));
     }
 }

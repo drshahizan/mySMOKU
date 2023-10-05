@@ -43,22 +43,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('profildiri', [ProfilController::class, 'profildiri'])->name('profil-diri');
     Route::post('profil/simpan', [ProfilController::class, 'simpanProfil'])->name('simpan.profil');
-    /*Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
-    Route::post('post-permohonan', [PermohonanController::class, 'postPermohonan'])->name('permohonan.post'); */
 
+    //Permohonan Pelajar
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::get('/getBandar/{id}', [PermohonanController::class, 'getBandar']);
     Route::post('permohonan/baharu', [PermohonanController::class, 'simpanPermohonan'])->name('permohonan.simpan');
     Route::post('permohonan/hantar', [PermohonanController::class, 'hantarPermohonan'])->name('permohonan.hantar');
     Route::get('/download/{file}',[PermohonanController::class,'download']);
     Route::post('/permohonan', [PermohonanController::class, 'kemaskiniPermohonan'])->name('kemaskini.post');
-    Route::get('permohonan/sejarah', [PermohonanController::class, 'sejarahPermohonan'])->name('permohonan.sejarah');
 	Route::get('statuspermohonan/{id}', [PermohonanController::class, 'delete'])->name('delete');
     Route::get('kemaskini/keputusan', [PermohonanController::class, 'kemaskiniKeputusan'])->name('kemaskini.keputusan');
     Route::post('kemaskini/keputusan', [PermohonanController::class, 'save'])->name('save');
     Route::get('lapor/tamat/pengajian', [PermohonanController::class, 'tamatPengajian'])->name('tamat.pengajian');
     Route::post('hantar/dokumen/tamat/pengajian', [PermohonanController::class, 'hantarTamatPengajian'])->name('hantar.tamat.pengajian');
+    Route::get('permohonan/sejarah/sejarah-permohonan', [PermohonanController::class, 'sejarahPermohonan'])->name('pelajar.sejarah.permohonan');
 
+    //Tuntutan Pelajar
+    Route::get('tuntutan/baharu',[TuntutanController::class,'tuntutanBaharu'])->name('tuntutan.baharu');
+    Route::post('tuntutan/baharu', [TuntutanController::class, 'simpanTuntutan'])->name('pelajar.simpan.tuntutan');
+    Route::post('tuntutan/hantar', [TuntutanController::class, 'hantarTuntutan'])->name('hantar.tuntutan');
+    Route::get('tuntutan/sejarah/sejarah-tuntutan', [TuntutanController::class, 'sejarahTuntutan'])->name('pelajar.sejarah.tuntutan');
+    
+    
     //Kemaskini - Sekretariat - Emel
     Route::get('kemaskini/sekretariat/emel/senarai-emel', [KemaskiniController::class, 'senaraiEmel']);
     Route::post('kemaskini/sekretariat/emel/kemaskini/{id}', [KemaskiniController::class, 'kemaskiniEmel'])->name('kemaskini.sekretariat.emel.kemaskini.id');
@@ -211,12 +217,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/ppk/sejarah/papar-tuntutan/{id}', [PenyelarasPPKController::class, 'paparRekodTuntutan'])->name('ppk.papar.rekod');
     Route::get('penyelaras/ppk/sejarah/keputusan-peperiksaan/{id}', [PenyelarasPPKController::class, 'keputusanPeperiksaan'])->name('ppk.papar.peperiksaan');
     Route::get('penyelaras/ppk/sejarah/papar-saringan/{id}', [PenyelarasPPKController::class, 'paparRekodSaringanTuntutan'])->name('ppk.papar.saringan.tuntutan');
-
-
-    //Tuntutan Pelajar
-    Route::get('tuntutan/baharu',[TuntutanController::class,'tuntutanBaharu'])->name('tuntutan.baharu');
-    Route::post('tuntutan/baharu', [TuntutanController::class, 'simpanTuntutan'])->name('pelajar.simpan.tuntutan');
-    Route::post('tuntutan/hantar', [TuntutanController::class, 'hantarTuntutan'])->name('hantar.tuntutan');
 
     //Pentadbir
     Route::get('pentadbir/dashboard', [PentadbirController::class,'index'])->name('pentadbir.dashboard');
