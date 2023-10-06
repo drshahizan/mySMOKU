@@ -126,14 +126,14 @@
 				<div class="card-body pt-0">
 					<!--begin::Table-->
 					<div class="table-responsive">
-						<table class="table align-middle table-row-dashed fs-6 gy-5" id="myTable">
+						<table class="table align-center table-row-dashed fs-6 gy-5" id="myTable">
 							<thead>
-								<tr class="text-start text-gray-400 fw-bold fs-7 gs-0">
-									<th class="min-w-125px">Program</th>
-									<th class="min-w-125px">Jenis</th>
-									<th class="min-w-125px">Semester</th>
-									<th class="min-w-125px">Jumlah</th>
-									<th class="min-w-125px">Tarikh Kemaskini</th>
+								<tr class="text-start align-center text-gray-400 fw-bold fs-7 gs-0">
+									<th class="min-w-125px align-center">Program</th>
+									<th class="min-w-125px align-center">Jenis</th>
+									<th class="min-w-125px align-center">Semester</th>
+									<th class="min-w-125px align-center">Jumlah</th>
+									<th class="min-w-125px align-center">Tarikh Kemaskini</th>
 								</tr>
 							</thead>
 							<tbody class="fw-semibold text-gray-600">
@@ -143,7 +143,7 @@
 									<td>{{ $jumlah->jenis}}</td>
 									<td>{{ $jumlah->semester}}</td>
 									<td>RM {{ $jumlah->jumlah}}</td>
-									<td>{{ $jumlah->updated_at->format('d/m/Y h:i:sa')}}</td>
+									<td>{{ $jumlah->updated_at->format('d/m/Y')}}</td>
 	
 								</tr>
 								@endforeach
@@ -208,7 +208,12 @@
 
 <!--end::Javascript-->
 	
-
+<style>
+	.align-center {
+		text-align: center;
+	}
+	
+</style>
 
 
 

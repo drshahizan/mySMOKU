@@ -233,7 +233,7 @@ class PentadbirController extends Controller
     {
         $jumlah = JumlahTuntutan::get();
            
-        return view('pages.pentadbir.jumlah_tuntutan', compact('jumlah'));
+        return view('kemaskini.pentadbir.jumlah_tuntutan', compact('jumlah'));
 
     }
 
