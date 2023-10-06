@@ -292,7 +292,8 @@ class PermohonanController extends Controller
 
     }
 
-    public function download(Request $request,$file){   
+    public function download(Request $request,$file)
+    {   
         return response()->download(public_path('assets/dokumen/permohonan/'.$file));
     }
 
@@ -381,13 +382,13 @@ class PermohonanController extends Controller
     {
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
         $permohonan = Permohonan::where('smoku_id', $smoku_id->id)
-            ->get();
+            ->first();
         //dd($permohonan);    
 
-        if ($permohonan !== null) {
+        if ($permohonan) {
             return view('permohonan.pelajar.sejarah_permohonan', compact('permohonan'));
         } else {
-            return back()->with('message', 'Tiada permohonan lama.');
+            return redirect()->route('dashboard')->with('permohonan', 'Tiada permohonan lama.');
         }
 
     }
@@ -442,10 +443,19 @@ class PermohonanController extends Controller
     public function kemaskiniKeputusan()
     {
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
-        $permohonan = Permohonan::all()->where('smoku_id', '=', $smoku_id->id)->first();
-        $peperiksaan = Peperiksaan::all()->where('permohonan_id', '=', $permohonan->id);   
+        $permohonan = Permohonan::where('smoku_id', $smoku_id->id)->first();
 
-        return view('pages.permohonan.kemaskini_keputusan_peperiksaan', compact('peperiksaan'));
+        if ($permohonan) {
+            $peperiksaan = Peperiksaan::where('permohonan_id', $permohonan->id)->get();
+            
+            return view('pages.permohonan.kemaskini_keputusan_peperiksaan', compact('peperiksaan'));
+        
+        } else {
+
+            return redirect()->route('dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
+        
+        }
+
     }
 
     public function save(Request $request)

@@ -128,9 +128,6 @@
 						<!--begin::Card-->
 						<div class="card pt-4 mb-6 mb-xl-9">
 							<!--begin::Card header-->
-							@if (session('message'))
-								<div class="alert alert-success" style="color:black; text-align: center;">{{ session('message') }}</div>
-							@endif
 							<div class="card-header border-0">
 								<!--begin::Card title-->
 								<div class="card-title">
@@ -143,18 +140,19 @@
 							<div class="body">
 								<!--begin::Table-->
 								<div class="table-responsive">
-									<table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
+									<table id="sortTable2" class="table text-center table-striped table-hover dataTable js-exportable">
 										<thead>
 											<tr>
-												<th>ID Permohonan</th>
-												<th>Status</th>
-												<th>Tarikh Kemaskini</th>
+												<th class="text-center">ID Permohonan</th>
+												<th class="text-center">Tarikh Kemaskini</th>
+												<th class="text-center">Status</th>
 											</tr>
 										</thead>
 										<tbody>
 											@foreach($permohonan as $permohonan)
 											<tr> 
 												<td>{{$permohonan->no_rujukan_permohonan}}</td>
+												<td>{{$permohonan->created_at->format('d/m/Y')}}</td>
 												<td>
 													{{-- @if ($permohonan->status == "DERAF")
 														<a href="{{ route('permohonan') }}" class="btn btn-primary btn-sm">{{ ucwords(strtolower($permohonan->status)) }}</a>
@@ -162,7 +160,6 @@
 														{{ ucwords(strtolower($permohonan->status)) }}
 													{{-- @endif --}}
 												</td>												
-												<td>{{$permohonan->created_at->format('d/m/Y h:i:sa')}}</td>
 												{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
 											</tr>
 											@endforeach
@@ -180,9 +177,6 @@
 					<div class="tab-pane fade" id="kt_ecommerce_customer_general" role="tabpanel">
 						<!--begin::Card-->
 						<div class="card pt-4 mb-6 mb-xl-9">
-							@if (session('message'))
-							<div class="alert alert-success" style="color:black; text-align: center;">{{ session('message') }}</div>
-							@endif
 							<!--begin::Card header-->
 							<div class="card-header border-0">
 								<!--begin::Card title-->
@@ -193,20 +187,20 @@
 							</div>
 							<div class="body">
 								<div class="table-responsive">
-									<table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
+									<table id="sortTable2" class="table text-center table-striped table-hover dataTable js-exportable">
 										<thead>
 											<tr>
-												<th>ID Tuntutan</th>
-												<th>Status</th>
-												<th>Tarikh Kemaskini</th>
+												<th class="text-center">ID Tuntutan</th>
+												<th class="text-center">Tarikh Kemaskini</th>
+												<th class="text-center">Status</th>
 											</tr>
 										</thead>
 										<tbody>
 											@foreach($tuntutan as $tuntutan)
 											<tr> 
 												<td>{{$tuntutan->no_rujukan_tuntutan}}</td>
+												<td>{{$tuntutan->created_at->format('d/m/Y')}}</td>
 												<td>{{ucwords(strtolower($tuntutan->status))}}</td>
-												<td>{{$tuntutan->created_at->format('d/m/Y h:i:sa')}}</td>
 												{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
 											</tr>
 											@endforeach
@@ -220,7 +214,27 @@
 			</div>
 		</div>
 	<div>
-</div>			
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	@if(session('message'))
+		Swal.fire({
+			icon: 'success',
+			title: 'Berjaya!',
+			text: ' {!! session('message') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+	@if(session('permohonan'))
+		Swal.fire({
+			icon: 'error',
+			title: 'Tiada Permohonan!',
+			text: ' {!! session('permohonan') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+</script>
 
 
 </x-default-layout>

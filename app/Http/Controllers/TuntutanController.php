@@ -15,16 +15,33 @@ class TuntutanController extends Controller
 {
     public function tuntutanBaharu()
     {   
-        $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        $permohonan = Permohonan::where('smoku_id',$smoku_id->id)->first();
-        $tuntutan = Tuntutan::join('tuntutan_item','tuntutan_item.tuntutan_id','=','tuntutan.id')
-        ->get(['tuntutan.*', 'tuntutan_item.*'])
-        ->where('smoku_id', $smoku_id->id)
-        //->where('permohonan_id', $permohonan->id)
-        ->where('status', 1);
-        $akademik = Akademik::where('smoku_id',$smoku_id->id)->first();
+        $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
+        $permohonan = Permohonan::where('smoku_id', $smoku_id->id)
+            ->where('status', 6)
+            ->first();
+        //dd($permohonan);   
+
+        if ($permohonan) {
+            $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
+                ->where('permohonan_id', $permohonan->id)
+                ->first(['tuntutan.*']);
+
+                if ($tuntutan && $tuntutan->status == 1) {
+                    $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
+                } else {
+                    // Handle the case where no matching record is found or status is not 1
+                    $tuntutan_item = collect(); // An empty collection
+                }
+               
+            $akademik = Akademik::where('smoku_id', $smoku_id->id)->first();
+            
+            return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item', 'akademik'));
         
-        return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan','tuntutan','akademik'));
+        } else {
+
+            return redirect()->route('dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
+        }
+
         
     }
 
@@ -174,12 +191,24 @@ class TuntutanController extends Controller
 
     public function sejarahTuntutan()
     {
-        $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        $permohonan = Permohonan::where('smoku_id', '=', $smoku_id->id)->first();
-        $tuntutan = Tuntutan::where('tuntutan.status', '!=', '4')
-        ->where('tuntutan.smoku_id', '=', $smoku_id->id)
-        ->where('tuntutan.permohonan_id', '=', $permohonan->id)
-        ->get();
+        $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
+
+        if ($smoku_id) {
+            $permohonan = Permohonan::where('smoku_id', '=', $smoku_id->id)->first();
+
+            if ($permohonan) {
+                $tuntutan = Tuntutan::where('tuntutan.status', '!=', '4')
+                    ->where('tuntutan.smoku_id', '=', $smoku_id->id)
+                    ->where('tuntutan.permohonan_id', '=', $permohonan->id)
+                    ->get();
+
+            } else {
+
+                return redirect()->route('dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
+
+            }
+        }
+
         //dd($tuntutan);
 
         return view('tuntutan.pelajar.sejarah_tuntutan',compact('tuntutan'));

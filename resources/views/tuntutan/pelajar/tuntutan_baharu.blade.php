@@ -153,13 +153,13 @@
 										</tr>
 									</thead>
 									<tbody class="fw-semibold text-gray-600">
-										@foreach ($tuntutan as $tuntutan)
+										@foreach ($tuntutan_item as $tuntutan_item)
 										<tr>
 											<td>{{ $loop->iteration }}.</td>
-											<td>{{ $tuntutan->jenis_yuran}}</td>
-											<td><a href="/assets/dokumen/tuntutan/{{$tuntutan->resit}}" target="_blank">{{ $tuntutan->no_resit}}</a></td>
-											<td>{{ $tuntutan->nota_resit}}</td>
-											<td id="amaun">RM {{ $tuntutan->amaun}}</td>
+											<td>{{ $tuntutan_item->jenis_yuran}}</td>
+											<td><a href="/assets/dokumen/tuntutan/{{$tuntutan_item->resit}}" target="_blank">{{ $tuntutan_item->no_resit}}</a></td>
+											<td>{{ $tuntutan_item->nota_resit}}</td>
+											<td id="amaun">RM {{ $tuntutan_item->amaun}}</td>
 										</tr>
 										@endforeach	
 									</tbody>

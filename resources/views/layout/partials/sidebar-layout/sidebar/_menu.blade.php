@@ -41,12 +41,12 @@
 					<span class="menu-title">Baharu</span>
 				</a>
 			</div>
-			{{-- <div class="menu-item">
+			<div class="menu-item">
 				<a class="menu-link" href="{{ route('pelajar.sejarah.permohonan') }}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Sejarah</span>
 				</a>
-			</div> --}}
+			</div>
 
 			<div class="menu-item pt-5">
 				<div class="menu-content">
@@ -59,12 +59,12 @@
 					<span class="menu-title">Baharu</span>
 				</a>
 			</div>
-			{{-- <div class="menu-item">
+			<div class="menu-item">
 				<a class="menu-link" href="{{ route('pelajar.sejarah.tuntutan') }}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Sejarah</span>
 				</a>
-			</div> --}}
+			</div>
 		</div>
 		<!--end::Menu-->
 
