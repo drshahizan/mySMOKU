@@ -174,8 +174,10 @@ class SekretariatController extends Controller
 
     public function hantarKeputusanPermohonan(Request $request,$id)
     {
+        //$id refers to permohonan id
         $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
-
+        $existingRecord = Kelulusan::where('permohonan_id', $id)->first();
+        
         if($request->get('keputusan')=="Lulus"){
             //update permohonan table
             Permohonan::where('id', $id)
@@ -183,15 +185,25 @@ class SekretariatController extends Controller
                 'status'   =>  6,
             ]);
 
-            //send & update permohonan_kelulusan table
-            $info_mesyuarat = new Kelulusan([
-                'permohonan_id' =>  $id,
-                'no_mesyuarat'  =>  $request->get('noMesyuarat'),
-                'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
-                'keputusan'  =>  $request->get('keputusan'),
-                'catatan'  =>  $request->get('catatan'),
-            ]);
-            $info_mesyuarat->save();
+            if ($existingRecord) {
+                //update the respective row in permohonan_kelulusan table
+                $existingRecord->no_mesyuarat = $request->noMesyuarat;
+                $existingRecord->tarikh_mesyuarat = $request->tarikhMesyuarat;
+                $existingRecord->keputusan = $request->keputusan;
+                $existingRecord->catatan = $request->catatan;
+                $existingRecord->save();
+            }
+            else{
+                //create new row in permohonan_kelulusan table
+                $info_mesyuarat = new Kelulusan([
+                    'permohonan_id' =>  $id,
+                    'no_mesyuarat'  =>  $request->get('noMesyuarat'),
+                    'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
+                    'keputusan'  =>  $request->get('keputusan'),
+                    'catatan'  =>  $request->get('catatan'),
+                ]);
+                $info_mesyuarat->save();
+            }
 
             //update sejarah_permohonan table
             $sejarah = new SejarahPermohonan([
@@ -212,15 +224,25 @@ class SekretariatController extends Controller
                 'status'   =>  7,
             ]);
 
-            //send & update permohonan_kelulusan table
-            $info_mesyuarat = new Kelulusan([
-                'permohonan_id' =>  $id,
-                'no_mesyuarat'  =>  $request->get('noMesyuarat'),
-                'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
-                'keputusan'  =>  $request->get('keputusan'),
-                'catatan'  =>  $request->get('catatan'),
-            ]);
-            $info_mesyuarat->save();
+            if ($existingRecord) {
+                //update the respective row in permohonan_kelulusan table
+                $existingRecord->no_mesyuarat = $request->noMesyuarat;
+                $existingRecord->tarikh_mesyuarat = $request->tarikhMesyuarat;
+                $existingRecord->keputusan = $request->keputusan;
+                $existingRecord->catatan = $request->catatan;
+                $existingRecord->save();
+            }
+            else{
+                //create new row in permohonan_kelulusan table
+                $info_mesyuarat = new Kelulusan([
+                    'permohonan_id' =>  $id,
+                    'no_mesyuarat'  =>  $request->get('noMesyuarat'),
+                    'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
+                    'keputusan'  =>  $request->get('keputusan'),
+                    'catatan'  =>  $request->get('catatan'),
+                ]);
+                $info_mesyuarat->save();
+            }
 
             //update sejarah permohonan table
             $sejarah = new SejarahPermohonan([

@@ -116,18 +116,18 @@
                                         <tr>
                                             <td><b>No. Mesyuarat</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; margin-right:50px;" required></td>
+                                            <td><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; width:40%;" required></td>
                                         </tr>
                                         <tr>
                                             <td><b>Tarikh Mesyuarat</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="date" id="tarikhMesyuarat" name="tarikhMesyuarat" style="padding: 5px;" required></td>
+                                            <td><input type="date" id="tarikhMesyuarat" name="tarikhMesyuarat" style="padding: 5px; width:40%;" required></td>
                                         </tr>
                                         <tr>
                                             <td><b>Keputusan</b></td>
                                             <td><b>:</b></td>
                                             <td>
-                                                <select id="keputusan" name="keputusan" style="padding: 6px;" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required>
+                                                <select id="keputusan" name="keputusan" style="padding: 7px; width:40%;" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required>
                                                     <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus">Lulus</option>
                                                     <option value="Tidak Lulus">Tidak Lulus</option>
@@ -137,7 +137,7 @@
                                         <tr>
                                             <td><b>Catatan</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="catatan" name="catatan" style="padding: 5px; width:500px;"></td>
+                                            <td><textarea name="catatan" id="catatan" cols="50" rows="3"></textarea></td>
                                         </tr>
                                     </table>
                                     <br>

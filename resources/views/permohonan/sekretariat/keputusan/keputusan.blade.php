@@ -158,17 +158,16 @@
                                                                 <td>{{$pemohon}}</td>
                                                                 <td class="text-center">{{$item->no_mesyuarat}}</td>
                                                                 <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                                                                {{-- <div class="ml-auto" style="color:black;">
-                                                                    <a href="{{ url('surat-tawaran') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-download"></i> Surat Tawaran</a>
-                                                                </div> --}}
                                                                 @if($item->keputusan == "Lulus")
                                                                     <td class="text-center">
                                                                         <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
-                                                                            <i class="fa fa-download custom-white-icon" style="color: white !important;"></i> Layak
+                                                                            <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
                                                                         </a>
                                                                     </td>
                                                                 @elseif($item->keputusan == "Tidak Lulus")
-                                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
+                                                                    <td class="text-center">
+                                                                        <div class="btn btn-danger btn-round btn-sm" style="width: 43%; padding-left:0%; padding-right:0%;">Tidak Layak</div>
+                                                                    </td>
                                                                 @endif
                                                             </tr>
                                                         @endif
@@ -254,11 +253,13 @@
                                                                 @if($item->keputusan == "Lulus")
                                                                     <td class="text-center">
                                                                         <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
-                                                                            <i class="fa fa-download custom-white-icon" style="color: white !important;"></i> Layak
+                                                                            <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
                                                                         </a>
                                                                     </td>
                                                                 @elseif($item->keputusan == "Tidak Lulus")
-                                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm">Tidak Layak</button></td>
+                                                                    <td class="text-center">
+                                                                        <div class="btn btn-danger btn-round btn-sm" style="width: 43%; padding-left:0%; padding-right:0%;">Tidak Layak</div>
+                                                                    </td>
                                                                 @endif
                                                             </tr>
                                                         @endif
