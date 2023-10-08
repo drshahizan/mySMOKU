@@ -33,6 +33,12 @@
         .vertical-top{
             vertical-align: top!important;
         }
+        .btn-sm{
+            width:100px!important;
+        }
+        .bi-eye-fill{
+            color: black!important;
+        }
     </style>
 
     <!--begin::Page title-->
@@ -93,6 +99,11 @@
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item vivify swoopInTop delay-150 active"><b>Emel Permohonan Dikembalikan</b></li>
                             </ul>
+                            <div class="ml-auto">
+                                <a href="{{url('')}}">
+                                    <button type="button" class="btn btn-sm btn-default" title="Print"><i class="bi bi-eye-fill">&nbsp;&nbsp;Lihat Sini</i></button>
+                                </a>
+                            </div>
                         </div>
                     </nav>
                 </div>
