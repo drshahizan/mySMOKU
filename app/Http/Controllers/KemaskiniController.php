@@ -81,4 +81,9 @@ class KemaskiniController extends Controller
             return view('kemaskini.sekretariat.emel.BKOKU.tuntutan.kemaskini_tidak_layak',compact('emel'));
         }
     }
+    public function paparEmel($id){
+        $emel = EmelKemaskini::where('emel_id',$id)->first();
+        return view('kemaskini.sekretariat.emel.papar_emel',compact('emel'));
+    }
+
 }

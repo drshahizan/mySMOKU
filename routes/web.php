@@ -63,11 +63,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('tuntutan/baharu', [TuntutanController::class, 'simpanTuntutan'])->name('pelajar.simpan.tuntutan');
     Route::post('tuntutan/hantar', [TuntutanController::class, 'hantarTuntutan'])->name('hantar.tuntutan');
     Route::get('tuntutan/sejarah/sejarah-tuntutan', [TuntutanController::class, 'sejarahTuntutan'])->name('pelajar.sejarah.tuntutan');
-    
-    
+
+
     //Kemaskini - Sekretariat - Emel
     Route::get('kemaskini/sekretariat/emel/senarai-emel', [KemaskiniController::class, 'senaraiEmel']);
     Route::post('kemaskini/sekretariat/emel/kemaskini/{id}', [KemaskiniController::class, 'kemaskiniEmel'])->name('kemaskini.sekretariat.emel.kemaskini.id');
+    Route::get('kemaskini/sekretariat/emel/papar-emel/{id}', [KemaskiniController::class, 'paparEmel'])->name('kemaskini.sekretariat.emel.papar.id');
 
     //Kemaskini - Sekretariat - Emel - BKOKU - Permohonan
     Route::get('kemaskini/sekretariat/emel/BKOKU/permohonan/kemaskini-dikembalikan', [KemaskiniController::class, 'pKemaskiniDikembalikanBKOKU']);
@@ -151,7 +152,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan/sekretariat/sejarah/papar-tuntutan/{id}', [SekretariatController::class, 'paparRekodTuntutan'])->name('papar.rekod.tuntutan.id');
     Route::get('tuntutan/sekretariat/sejarah/papar-saringan/{id}', [SekretariatController::class, 'paparRekodSaringanTuntutan'])->name('papar.rekod.saringan.tuntutan.id');
 
-    //Dokumen - Penyelaras 
+    //Dokumen - Penyelaras
     Route::get('penyelaras/bkoku/dokumen/esp', [PenyelarasController::class, 'dokumenESP'])->name('penyelaras.dokumen');
 
     //Permohonan - Penyelaras BKOKU

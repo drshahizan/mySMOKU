@@ -33,7 +33,7 @@
         .vertical-top{
             vertical-align: top!important;
         }
-        .btn-sm{
+        .my-btn{
             width:100px!important;
         }
         .bi-eye-fill{
@@ -100,8 +100,8 @@
                                 <li class="nav-item vivify swoopInTop delay-150 active"><b>Emel Permohonan Dikembalikan</b></li>
                             </ul>
                             <div class="ml-auto">
-                                <a href="{{url('')}}">
-                                    <button type="button" class="btn btn-sm btn-default" title="Print"><i class="bi bi-eye-fill">&nbsp;&nbsp;Lihat Sini</i></button>
+                                <a href="{{url('kemaskini/sekretariat/emel/papar-emel/'.$emel->emel_id)}}" target="_blank">
+                                    <button type="button" class="btn btn-sm my-btn btn-default" title="Print"><i class="bi bi-eye-fill">&nbsp;&nbsp;Lihat Sini</i></button>
                                 </a>
                             </div>
                         </div>
