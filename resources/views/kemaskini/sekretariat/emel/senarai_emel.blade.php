@@ -36,176 +36,290 @@
             <div class="block-header">
                 <div class="row clearfix">
                     <div class="card">
-                        <div class="header">
-                            <h2>Kategori BKOKU</h2>
-                        </div>
-                        <div class="body">
-                            <!--begin::First Row-->
-                            <div class="row g-3 g-lg-6" style="text-align: center;">
-                                <!--begin::Col-->
-                                <div class="col-3">
-                                    <a href="{{url('kemaskini/sekretariat/emel/BKOKU/permohonan/kemaskini-dikembalikan')}}">
-                                        <!--begin::Items-->
-                                        <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-orange">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-30px me-0 mb-5 justify-content-center align-items-center">
-                                                {{-- <p class="symbol-label"> --}}
-                                                <i class="fa-solid fa-reply text-light" style="font-size: 35px;"></i><br><br>
-                                                <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px;">Permohonan Dikembalikan</p>
-                                                {{-- </p> --}}
-                                            </div>
-                                            <!--end::Symbol-->
+
+                        {{-- top nav bar --}}
+						<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+							<li class="nav-item" role="presentation">
+								<button class="nav-link active" id="bkoku-tab" data-toggle="tab" data-target="#bkoku" type="button" role="tab" aria-controls="bkoku" aria-selected="true">BKOKU</button>
+							</li>
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
+							</li>
+						</ul>
+
+                        <div class="tab-content" id="myTabContent">
+							{{-- BKOKU --}}
+							<div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
+								{{-- Permohonan --}}
+								<div class="header">
+									<h2>Permohonan</h2>
+								</div>
+                                <div class="body">
+                                    <!--begin::First Row-->
+                                    <div class="row g-3 g-lg-6" style="text-align: center;">
+                                        <!--begin::Col-->
+                                        <div class="col-4">
+                                            <a href="{{url('kemaskini/sekretariat/emel/BKOKU/permohonan/kemaskini-dikembalikan')}}">
+                                                <!--begin::Items-->
+                                                <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-orange">
+                                                    <!--begin::Symbol-->
+                                                    <div class="symbol symbol-30px me-0 mb-5 justify-content-center align-items-center">
+                                                        {{-- <p class="symbol-label"> --}}
+                                                        <i class="fa-solid fa-reply text-light" style="font-size: 35px;"></i><br><br>
+                                                        <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px;">Permohonan Dikembalikan</p>
+                                                        {{-- </p> --}}
+                                                    </div>
+                                                    <!--end::Symbol-->
+                                                </div>
+                                                <!--end::Items-->
+                                            </a>
                                         </div>
-                                        <!--end::Items-->
-                                    </a>
+                                        <!--end::Col-->
+
+                                        <!--begin::Col-->
+                                        <div class="col-4">
+                                            <a href="{{url('kemaskini/sekretariat/emel/BKOKU/permohonan/kemaskini-layak')}}">
+                                                <!--begin::Items-->
+                                                <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-success">
+                                                    <!--begin::Symbol-->
+                                                    <div class="symbol symbol-30px me-0 mb-5">
+                                                        {{-- <p class="symbol-label"> --}}
+                                                        <i class="fas fa-user-check text-light" style="font-size: 35px;"></i><br><br>
+                                                        <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px;">Permohonan Layak</p>
+                                                        {{-- </p> --}}
+                                                    </div>
+                                                    <!--end::Symbol-->
+                                                </div>
+                                                <!--end::Items-->
+                                            </a>
+                                        </div>
+                                        <!--end::Col-->
+
+                                        <!--begin::Col-->
+                                        <div class="col-4">
+                                            <a href="{{url('kemaskini/sekretariat/emel/BKOKU/permohonan/kemaskini-tidak-layak')}}">
+                                            <!--begin::Items-->
+                                            <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-danger">
+                                                <!--begin::Symbol-->
+                                                <div class="symbol symbol-30px me-0 mb-5">
+                                                    {{-- <p class="symbol-label"> --}}
+                                                    <i class="fa-solid fa-user-xmark text-light" style="font-size: 35px;"></i><br><br>
+                                                    <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Permohonan Tidak Layak</p>
+                                                    {{-- </p> --}}
+                                                </div>
+                                                <!--end::Symbol-->
+                                            </div>
+                                            <!--end::Items-->
+                                            </a>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
                                 </div>
-                                <!--end::Col-->
 
-                                    <!--begin::Col-->
-                                    <div class="col-3">
-
-                                        <a href="{{url('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-dikembalikan')}}">
+                                {{-- Tuntutan --}}
+                                <div class="header">
+                                    <h2>Tuntutan</h2>
+                                </div>
+                                <div class="body">
+                                    <!--begin::First Row-->
+                                    <div class="row g-3 g-lg-6" style="text-align: center;">
+                                        <!--begin::Col-->
+                                        <div class="col-4">
+                                            <a href="{{url('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-dikembalikan')}}">
                                             <!--begin::Items-->
                                             <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-dikembalikan">
                                                 <!--begin::Symbol-->
                                                 <div class="symbol symbol-30px me-0 mb-5">
                                                     {{-- <p class="symbol-label"> --}}
                                                     <i class="fa-solid fa-reply-all text-light" style="font-size: 35px;"></i><br><br>
-                                                    <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px;">Tuntutan Dikembalikan</p>
+                                                    <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Tuntutan Dikembalikan</p>
                                                     {{-- </p> --}}
                                                 </div>
                                                 <!--end::Symbol-->
                                             </div>
                                             <!--end::Items-->
-                                        </a>
-                                    </div>
-                                    <!--end::Col-->
+                                            </a>
+                                        </div>
+                                        <!--end::Col-->
 
-                                    <!--begin::Col-->
-                                    <div class="col-3">
-                                        <a href="{{url('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-layak')}}">
+                                        <!--begin::Col-->
+                                        <div class="col-4">
+                                            <a href="{{url('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-layak')}}">
                                             <!--begin::Items-->
                                             <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-success">
                                                 <!--begin::Symbol-->
                                                 <div class="symbol symbol-30px me-0 mb-5">
                                                     {{-- <p class="symbol-label"> --}}
                                                     <i class="fas fa-user-check text-light" style="font-size: 35px;"></i><br><br>
-                                                    <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px;">Tuntutan Layak</p>
+                                                    <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Tuntutan Layak</p>
                                                     {{-- </p> --}}
                                                 </div>
                                                 <!--end::Symbol-->
                                             </div>
                                             <!--end::Items-->
-                                        </a>
-                                    </div>
-                                    <!--end::Col-->
+                                            </a>
+                                        </div>
+                                        <!--end::Col-->
 
-                                    <!--begin::Col-->
-                                    <div class="col-3">
-                                        <a href="{{url('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-tidak-layak')}}">
-                                        <!--begin::Items-->
-                                        <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-danger">
-                                            <!--begin::Symbol-->
-                                            <div class="symbol symbol-30px me-0 mb-5">
-                                                {{-- <p class="symbol-label"> --}}
-                                                <i class="fa-solid fa-user-xmark text-light" style="font-size: 35px;"></i><br><br>
-                                                <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Tuntutan Tidak Layak</p>
-                                                {{-- </p> --}}
+                                        <!--begin::Col-->
+                                        <div class="col-4">
+                                            <a href="{{url('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-tidak-layak')}}">
+                                            <!--begin::Items-->
+                                            <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-danger">
+                                                <!--begin::Symbol-->
+                                                <div class="symbol symbol-30px me-0 mb-5">
+                                                    {{-- <p class="symbol-label"> --}}
+                                                    <i class="fa-solid fa-user-xmark text-light" style="font-size: 35px;"></i><br><br>
+                                                    <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Tuntutan Tidak Layak</p>
+                                                    {{-- </p> --}}
+                                                </div>
+                                                <!--end::Symbol-->
                                             </div>
-                                            <!--end::Symbol-->
+                                            <!--end::Items-->
+                                            </a>
                                         </div>
-                                        <!--end::Items-->
-                                        </a>
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
+                                    <!--end::Row-->
+                                </div>
                             </div>
-                            <!--end::Row-->
-                        </div>
 
-                        {{-- PPK --}}
-                        <div class="header">
-                            <h2>Kategori PPK</h2>
-                        </div>
-                        <div class="body">
-                            <!--begin::First Row-->
-                            <div class="row g-3 g-lg-6" style="text-align: center;">
-                                <!--begin::Col-->
-                                <div class="col-3">
-                                    <a href="{{url('kemaskini/sekretariat/emel/PPK/permohonan/kemaskini-dikembalikan')}}">
-                                    <!--begin::Items-->
-                                    <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-orange">
-                                        <!--begin::Symbol-->
-                                        <div class="symbol symbol-30px me-0 mb-5">
-                                            {{-- <p class="symbol-label"> --}}
-                                            <i class="fa-solid fa-reply text-light" style="font-size: 35px;"></i><br><br>
-                                            <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Permohonan Dikembalikan</p>
-                                            {{-- </p> --}}
+                            <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
+								<div class="header">
+									<h2>Permohonan</h2>
+								</div>
+                                {{-- Permohonan --}}
+                                <div class="body">
+                                    <!--begin::First Row-->
+                                    <div class="row g-3 g-lg-6" style="text-align: center;">
+                                        <!--begin::Col-->
+                                        <div class="col-4">
+                                            <a href="{{url('kemaskini/sekretariat/emel/PPK/permohonan/kemaskini-dikembalikan')}}">
+                                                <!--begin::Items-->
+                                                <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-orange">
+                                                    <!--begin::Symbol-->
+                                                    <div class="symbol symbol-30px me-0 mb-5 justify-content-center align-items-center">
+                                                        {{-- <p class="symbol-label"> --}}
+                                                        <i class="fa-solid fa-reply text-light" style="font-size: 35px;"></i><br><br>
+                                                        <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px;">Permohonan Dikembalikan</p>
+                                                        {{-- </p> --}}
+                                                    </div>
+                                                    <!--end::Symbol-->
+                                                </div>
+                                                <!--end::Items-->
+                                            </a>
                                         </div>
-                                        <!--end::Symbol-->
-                                    </div>
-                                    <!--end::Items-->
-                                    </a>
-                                </div>
-                                <!--end::Col-->
+                                        <!--end::Col-->
 
-                                <!--begin::Col-->
-                                <div class="col-3">
-                                    <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-dikembalikan')}}">
-                                    <!--begin::Items-->
-                                    <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-dikembalikan">
-                                        <!--begin::Symbol-->
-                                        <div class="symbol symbol-30px me-0 mb-5">
-                                            {{-- <p class="symbol-label"> --}}
-                                            <i class="fa-solid fa-reply-all text-light" style="font-size: 35px;"></i><br><br>
-                                            <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Tuntutan Dikembalikan</p>
-                                            {{-- </p> --}}
+                                        <!--begin::Col-->
+                                        <div class="col-4">
+                                            <a href="{{url('kemaskini/sekretariat/emel/PPK/permohonan/kemaskini-layak')}}">
+                                                <!--begin::Items-->
+                                                <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-success">
+                                                    <!--begin::Symbol-->
+                                                    <div class="symbol symbol-30px me-0 mb-5">
+                                                        {{-- <p class="symbol-label"> --}}
+                                                        <i class="fas fa-user-check text-light" style="font-size: 35px;"></i><br><br>
+                                                        <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px;">Permohonan Layak</p>
+                                                        {{-- </p> --}}
+                                                    </div>
+                                                    <!--end::Symbol-->
+                                                </div>
+                                                <!--end::Items-->
+                                            </a>
                                         </div>
-                                        <!--end::Symbol-->
-                                    </div>
-                                    <!--end::Items-->
-                                    </a>
-                                </div>
-                                <!--end::Col-->
+                                        <!--end::Col-->
 
-                                <!--begin::Col-->
-                                <div class="col-3">
-                                    <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-layak')}}">
-                                    <!--begin::Items-->
-                                    <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-success">
-                                        <!--begin::Symbol-->
-                                        <div class="symbol symbol-30px me-0 mb-5">
-                                            {{-- <p class="symbol-label"> --}}
-                                            <i class="fas fa-user-check text-light" style="font-size: 35px;"></i><br><br>
-                                            <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Tuntutan Layak</p>
-                                            {{-- </p> --}}
+                                        <!--begin::Col-->
+                                        <div class="col-4">
+                                            <a href="{{url('kemaskini/sekretariat/emel/PPK/permohonan/kemaskini-tidak-layak')}}">
+                                            <!--begin::Items-->
+                                            <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-danger">
+                                                <!--begin::Symbol-->
+                                                <div class="symbol symbol-30px me-0 mb-5">
+                                                    {{-- <p class="symbol-label"> --}}
+                                                    <i class="fa-solid fa-user-xmark text-light" style="font-size: 35px;"></i><br><br>
+                                                    <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Permohonan Tidak Layak</p>
+                                                    {{-- </p> --}}
+                                                </div>
+                                                <!--end::Symbol-->
+                                            </div>
+                                            <!--end::Items-->
+                                            </a>
                                         </div>
-                                        <!--end::Symbol-->
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Items-->
-                                    </a>
+                                    <!--end::Row-->
                                 </div>
-                                <!--end::Col-->
 
-                                <!--begin::Col-->
-                                <div class="col-3">
-                                    <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-tidak-layak')}}">
-                                    <!--begin::Items-->
-                                    <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-danger">
-                                        <!--begin::Symbol-->
-                                        <div class="symbol symbol-30px me-0 mb-5">
-                                            {{-- <p class="symbol-label"> --}}
-                                            <i class="fa-solid fa-user-xmark text-light" style="font-size: 35px;"></i><br><br>
-                                            <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Tuntutan Tidak Layak</p>
-                                            {{-- </p> --}}
-                                        </div>
-                                        <!--end::Symbol-->
-                                    </div>
-                                    <!--end::Items-->
-                                    </a>
+                                {{-- Tuntutan --}}
+                                <div class="header">
+                                    <h2>Tuntutan</h2>
                                 </div>
-                                <!--end::Col-->
+                                <div class="body">
+                                    <!--begin::First Row-->
+                                    <div class="row g-3 g-lg-6" style="text-align: center;">
+                                        <!--begin::Col-->
+                                        <div class="col-4">
+                                            <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-dikembalikan')}}">
+                                            <!--begin::Items-->
+                                            <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-dikembalikan">
+                                                <!--begin::Symbol-->
+                                                <div class="symbol symbol-30px me-0 mb-5">
+                                                    {{-- <p class="symbol-label"> --}}
+                                                    <i class="fa-solid fa-reply-all text-light" style="font-size: 35px;"></i><br><br>
+                                                    <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Tuntutan Dikembalikan</p>
+                                                    {{-- </p> --}}
+                                                </div>
+                                                <!--end::Symbol-->
+                                            </div>
+                                            <!--end::Items-->
+                                            </a>
+                                        </div>
+                                        <!--end::Col-->
+
+                                        <!--begin::Col-->
+                                        <div class="col-4">
+                                            <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-layak')}}">
+                                            <!--begin::Items-->
+                                            <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-success">
+                                                <!--begin::Symbol-->
+                                                <div class="symbol symbol-30px me-0 mb-5">
+                                                    {{-- <p class="symbol-label"> --}}
+                                                    <i class="fas fa-user-check text-light" style="font-size: 35px;"></i><br><br>
+                                                    <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Tuntutan Layak</p>
+                                                    {{-- </p> --}}
+                                                </div>
+                                                <!--end::Symbol-->
+                                            </div>
+                                            <!--end::Items-->
+                                            </a>
+                                        </div>
+                                        <!--end::Col-->
+
+                                        <!--begin::Col-->
+                                        <div class="col-4">
+                                            <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-tidak-layak')}}">
+                                            <!--begin::Items-->
+                                            <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-danger">
+                                                <!--begin::Symbol-->
+                                                <div class="symbol symbol-30px me-0 mb-5">
+                                                    {{-- <p class="symbol-label"> --}}
+                                                    <i class="fa-solid fa-user-xmark text-light" style="font-size: 35px;"></i><br><br>
+                                                    <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px; ">Tuntutan Tidak Layak</p>
+                                                    {{-- </p> --}}
+                                                </div>
+                                                <!--end::Symbol-->
+                                            </div>
+                                            <!--end::Items-->
+                                            </a>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
                             </div>
-                            <!--end::Row-->
                         </div>
                     </div>
                 </div>

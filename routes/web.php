@@ -64,7 +64,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('tuntutan/hantar', [TuntutanController::class, 'hantarTuntutan'])->name('hantar.tuntutan');
     Route::get('tuntutan/sejarah/sejarah-tuntutan', [TuntutanController::class, 'sejarahTuntutan'])->name('pelajar.sejarah.tuntutan');
 
-
     //Kemaskini - Sekretariat - Emel
     Route::get('kemaskini/sekretariat/emel/senarai-emel', [KemaskiniController::class, 'senaraiEmel']);
     Route::post('kemaskini/sekretariat/emel/kemaskini/{id}', [KemaskiniController::class, 'kemaskiniEmel'])->name('kemaskini.sekretariat.emel.kemaskini.id');
@@ -72,6 +71,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Kemaskini - Sekretariat - Emel - BKOKU - Permohonan
     Route::get('kemaskini/sekretariat/emel/BKOKU/permohonan/kemaskini-dikembalikan', [KemaskiniController::class, 'pKemaskiniDikembalikanBKOKU']);
+    Route::get('kemaskini/sekretariat/emel/BKOKU/permohonan/kemaskini-layak', [KemaskiniController::class, 'pKemaskiniLayakBKOKU']);
+    Route::get('kemaskini/sekretariat/emel/BKOKU/permohonan/kemaskini-tidak-layak', [KemaskiniController::class, 'pKemaskiniTidakLayakBKOKU']);
 
     //Kemaskini - Sekretariat - Emel - BKOKU - Tuntutan
     Route::get('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-tidak-layak', [KemaskiniController::class, 'kemaskiniTidakLayakBKOKU']);
@@ -80,6 +81,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Kemaskini - Sekretariat - Emel - PPK - Permohonan
     Route::get('kemaskini/sekretariat/emel/PPK/permohonan/kemaskini-dikembalikan', [KemaskiniController::class, 'pKemaskiniDikembalikanPPK']);
+    Route::get('kemaskini/sekretariat/emel/PPK/permohonan/kemaskini-layak', [KemaskiniController::class, 'pKemaskiniLayakPPK']);
+    Route::get('kemaskini/sekretariat/emel/PPK/permohonan/kemaskini-tidak-layak', [KemaskiniController::class, 'pKemaskiniTidakLayakPPK']);
 
     //Kemaskini - Sekretariat - Emel - PPK - Tuntutan
     Route::get('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-tidak-layak', [KemaskiniController::class, 'kemaskiniTidakLayakPPK']);
