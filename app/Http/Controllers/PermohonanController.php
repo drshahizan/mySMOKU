@@ -99,7 +99,7 @@ class PermohonanController extends Controller
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
 
         Smoku::updateOrCreate(
-            ['smoku_id' => $smoku_id->id],
+            ['id' => $smoku_id->id],
             [
                 'umur' => $request->umur,
             ]
@@ -380,8 +380,8 @@ class PermohonanController extends Controller
     public function sejarahPermohonan()
     {
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
-        $permohonan = Permohonan::where('smoku_id', $smoku_id->id)
-            ->first();
+        $permohonan = Permohonan::all()->where('smoku_id', $smoku_id->id);
+            //->first();
         //dd($permohonan);    
 
         if ($permohonan) {

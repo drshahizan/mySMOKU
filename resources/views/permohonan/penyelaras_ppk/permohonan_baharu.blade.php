@@ -838,7 +838,7 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
+									<select id="tempoh_pengajian" name="tempoh_pengajian" onchange=dateCheck() class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
 										<option></option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -893,7 +893,7 @@
 								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-								<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" value="" />
+								<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" onchange=dateCheck() value="" />
 								<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
@@ -905,7 +905,7 @@
 								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-								<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" onchange=dateCheck() value="" />
+								<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" value="" />
 								<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
@@ -1305,11 +1305,18 @@
 			function dateCheck(){
 				let startDate = new Date($("#tarikh_mula").val());
 				let endDate = new Date($("#tarikh_tamat").val());
+				var studyPeriod = parseFloat(document.getElementById("tempoh_pengajian").value);
 
-				if(startDate > endDate) {
-					alert("Tarikh Tamat Pengajian perlu lebih besar daripada Tarikh Mula Pengajian");
-					$("#tarikh_tamat").val('');
+				if (!isNaN(studyPeriod)) {
+				//alert(studyPeriod);
+				 	endDate.setFullYear(startDate.getFullYear() + Math.floor(studyPeriod));
+
+				 	var remainingMonths = (studyPeriod - Math.floor(studyPeriod)) * 12;
+				 	endDate.setMonth(startDate.getMonth() + Math.floor(remainingMonths));
+
+				 	document.getElementById("tarikh_tamat").valueAsDate = endDate;
 				}
+
 			}
 
 

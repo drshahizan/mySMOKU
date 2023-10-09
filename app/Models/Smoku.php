@@ -10,26 +10,6 @@ class Smoku extends Model
     use HasFactory;
     protected $table = 'smoku';
 
-    public function jantina()
-    {
-        return $this->belongsTo('App\Models\Jantina', 'jantina', 'kod_jantina');
-    }
-
-    public function keturunan()
-    {
-        return $this->belongsTo('App\Models\Keturunan', 'keturunan', 'kod_keturunan');
-    }
-
-    public function hubungan()
-    {
-        return $this->belongsTo('App\Models\Hubungan', 'hubungan_waris', 'kod_hubungan');
-    }
-
-    public function jenisOku()
-    {
-        return $this->belongsTo('App\Models\JenisOku', 'kategori', 'kod_oku');
-    }
-
     protected $fillable = [
         'no_kp',
         'no_id_tentera',
