@@ -4,13 +4,13 @@
     <title>{{$emel->subjek}}</title>
 </head>
 <body>
-<h3>{{$emel->subjek}}</h3>
-<p>{{$emel->pendahuluan}}</p>
-<p>{{$emel->isi_kandungan}}</p>
+<h3>{!! nl2br(e($emel->subjek)) !!}</h3>
+<p>{!! nl2br(e($emel->pendahuluan)) !!}</p>
+<p>{!! nl2br(e($emel->isi_kandungan)) !!}</p>
 
 <br>
-<p>{{$emel->penutup}}</p>
+<p>{!! nl2br(e($emel->penutup)) !!}</p>
 <br>
-{!!$emel->disediakan_oleh!!}
+{!! nl2br(e($emel->disediakan_oleh)) !!}
 </body>
 </html>
