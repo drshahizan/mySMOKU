@@ -140,13 +140,72 @@ class SekretariatController extends Controller
 
     public function kemaskiniPeringkatPengajian(Request $request, $id)
     {
-        $smokuAkademik = Akademik::where('smoku_id', $id)->first();
+        // Retrieve the existing Akademik record if it exists
+        $existingRecord = Akademik::where('smoku_id', $id)
+            ->where('peringkat_pengajian', $request->peringkat_pengajian)
+            ->first();
 
-        $smokuAkademik->peringkat_pengajian = $request->peringkat_pengajian;
-        $smokuAkademik->save();
+        if ($existingRecord) {
+            // Update the existing record
+            $existingRecord->update([
+                'no_pendaftaran_pelajar' => NULL,
+                'peringkat_pengajian' => $request->peringkat_pengajian,
+                'nama_kursus' => NULL,
+                'id_institusi' => NULL,
+                'sesi' => NULL,
+                'tarikh_mula' => NULL,
+                'tarikh_tamat' => NULL,
+                'sem_semasa' => NULL,
+                'tempoh_pengajian' => NULL,
+                'bil_bulan_per_sem' => NULL,
+                'mod' => NULL,
+                'cgpa' => NULL,
+                'sumber_biaya' => NULL,
+                'sumber_lain' => NULL,
+                'nama_penaja' => NULL,
+                'penaja_lain' => NULL,
+                'status' => '1',
+            ]);
+        } 
+        else {
+            // Create a new record in smoku_akademik
+            $newRecord = new Akademik([
+                'smoku_id' => $id, // Use the actual smoku_id, not the model instance
+                'no_pendaftaran_pelajar' => NULL,
+                'peringkat_pengajian' => $request->peringkat_pengajian,
+                'nama_kursus' => NULL,
+                'id_institusi' => NULL,
+                'sesi' => NULL,
+                'tarikh_mula' => NULL,
+                'tarikh_tamat' => NULL,
+                'sem_semasa' => NULL,
+                'tempoh_pengajian' => NULL,
+                'bil_bulan_per_sem' => NULL,
+                'mod' => NULL,
+                'cgpa' => NULL,
+                'sumber_biaya' => NULL,
+                'sumber_lain' => NULL,
+                'nama_penaja' => NULL,
+                'penaja_lain' => NULL,
+                'status' => '1',
+            ]);
+
+            $newRecord->save();
+        }
 
         return redirect()->back()->with('success', 'Peringkat Pengajian updated successfully.');
     }
+
+    // public function kemaskiniPeringkatPengajian(Request $request, $id)
+    // {
+    //     //$id is the smoku id
+    //     $smokuAkademik = Akademik::where('smoku_id', $id)->first();
+
+    //     $smokuAkademik->peringkat_pengajian = $request->peringkat_pengajian;
+    //     $smokuAkademik->save();
+
+    //     return redirect()->back()->with('success', 'Peringkat Pengajian updated successfully.');
+    // }
 
     public function senaraiKelulusanPermohonan()
     {

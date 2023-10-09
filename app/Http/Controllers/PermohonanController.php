@@ -78,9 +78,7 @@ class PermohonanController extends Controller
             return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri'));
 
         }
-        
-        
-        
+
     }
 
     public function getBandar($idnegeri=0)
@@ -176,9 +174,6 @@ class PermohonanController extends Controller
         //$dokumen = Dokumen::where('smoku_id', '=', $smoku_id->id)->first();
         $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
         //UPLOAD DOKUMEN BY JAVASCRIPT
-
-
-
 
         return redirect()->route('viewpermohonan');
 
@@ -284,9 +279,6 @@ class PermohonanController extends Controller
             } else {
                 // Handle cases where $dokumen or $catatan are not valid arrays
             }
-
-
-
 
         return redirect()->route('dashboard')->with('message', 'Permohonan anda telah dihantar.');
 
@@ -460,7 +452,6 @@ class PermohonanController extends Controller
 
     public function save(Request $request)
     {   
-        
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
         $permohonan = Permohonan::all()->where('smoku_id', '=', $smoku_id->id)->first();
 
@@ -559,8 +550,6 @@ class PermohonanController extends Controller
 
         return redirect()->route('tamat.pengajian')->with('success', 'Dokumen lapor diri tamat pengajian telah dihantar.');
     }
-
-    
 }
 
 
