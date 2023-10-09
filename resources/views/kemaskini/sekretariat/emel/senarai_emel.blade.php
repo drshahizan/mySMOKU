@@ -46,7 +46,7 @@
                                 <div class="col-3">
                                     <a href="{{url('kemaskini/sekretariat/emel/BKOKU/permohonan/kemaskini-dikembalikan')}}">
                                         <!--begin::Items-->
-                                        <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-orange">
+                                        <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-orange">
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-30px me-0 mb-5 justify-content-center align-items-center">
                                                 {{-- <p class="symbol-label"> --}}
@@ -66,7 +66,7 @@
 
                                         <a href="{{url('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-dikembalikan')}}">
                                             <!--begin::Items-->
-                                            <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-dikembalikan">
+                                            <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-dikembalikan">
                                                 <!--begin::Symbol-->
                                                 <div class="symbol symbol-30px me-0 mb-5">
                                                     {{-- <p class="symbol-label"> --}}
@@ -85,7 +85,7 @@
                                     <div class="col-3">
                                         <a href="{{url('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-layak')}}">
                                             <!--begin::Items-->
-                                            <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+                                            <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-success">
                                                 <!--begin::Symbol-->
                                                 <div class="symbol symbol-30px me-0 mb-5">
                                                     {{-- <p class="symbol-label"> --}}
@@ -104,7 +104,7 @@
                                     <div class="col-3">
                                         <a href="{{url('kemaskini/sekretariat/emel/BKOKU/tuntutan/kemaskini-tidak-layak')}}">
                                         <!--begin::Items-->
-                                        <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+                                        <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-danger">
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-30px me-0 mb-5">
                                                 {{-- <p class="symbol-label"> --}}
@@ -133,7 +133,7 @@
                                 <div class="col-3">
                                     <a href="{{url('kemaskini/sekretariat/emel/PPK/permohonan/kemaskini-dikembalikan')}}">
                                     <!--begin::Items-->
-                                    <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-orange">
+                                    <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-orange">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-30px me-0 mb-5">
                                             {{-- <p class="symbol-label"> --}}
@@ -152,7 +152,7 @@
                                 <div class="col-3">
                                     <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-dikembalikan')}}">
                                     <!--begin::Items-->
-                                    <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-dikembalikan">
+                                    <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-dikembalikan">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-30px me-0 mb-5">
                                             {{-- <p class="symbol-label"> --}}
@@ -171,7 +171,7 @@
                                 <div class="col-3">
                                     <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-layak')}}">
                                     <!--begin::Items-->
-                                    <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+                                    <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-success">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-30px me-0 mb-5">
                                             {{-- <p class="symbol-label"> --}}
@@ -190,7 +190,7 @@
                                 <div class="col-3">
                                     <a href="{{url('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-tidak-layak')}}">
                                     <!--begin::Items-->
-                                    <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+                                    <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-danger">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-30px me-0 mb-5">
                                             {{-- <p class="symbol-label"> --}}
