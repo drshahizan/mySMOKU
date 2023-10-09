@@ -14,14 +14,18 @@ class TuntutanTidakLayak extends Mailable
     use Queueable, SerializesModels;
 
     public $catatan;
+    public $emel;
+    public $subjek;
 
-    public function __construct($catatan)
+    public function __construct($catatan,$emel)
     {
         $this->catatan = $catatan;
+        $this->catatan = $emel;
+        $this->subjek = $emel->subjek;
     }
 
     public function build()
     {
-        return $this->view('tuntutan.sekretariat.saringan.email_tidak_layak')->with('data', $this->catatan)->subject("BKOKU: Tuntutan Tidak Layak");
+        return $this->view('tuntutan.sekretariat.saringan.email_tidak_layak')->with('data', $this->catatan)->with('emel', $this->emel)->subject("BKOKU: Tuntutan Tidak Layak");
     }
 }

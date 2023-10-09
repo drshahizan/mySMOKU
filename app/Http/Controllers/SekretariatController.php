@@ -611,6 +611,7 @@ class SekretariatController extends Controller
         $no_rujukan_tuntutan= Tuntutan::where('id', $id)->value('no_rujukan_tuntutan');
         $permohonan_id = Tuntutan::where('id', $id)->value('permohonan_id');
         $smoku_id = Permohonan::where('id', $permohonan_id)->value('smoku_id');
+        $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
 
         if($request->get('submit')=="Layak"){
             Tuntutan::where('id', $id)
@@ -636,7 +637,7 @@ class SekretariatController extends Controller
 
             $catatan = "testing";
             $emel = EmelKemaskini::where('emel_id',5)->first();
-            Mail::to('ziba0506@gmail.com')->send(new TuntutanLayak($catatan,$emel));
+            Mail::to($smoku_emel)->send(new TuntutanLayak($catatan,$emel));
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Layak'.";
         }
@@ -655,7 +656,7 @@ class SekretariatController extends Controller
 
             $catatan = "testing";
             $emel = EmelKemaskini::where('emel_id',6)->first();
-            Mail::to('ziba0506@gmail.com')->send(new TuntutanTidakLayak($catatan,$emel));
+            Mail::to($smoku_emel)->send(new TuntutanTidakLayak($catatan,$emel));
 
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Tidak Layak'.";
@@ -675,7 +676,7 @@ class SekretariatController extends Controller
 
             $catatan = "testing";
             $emel = EmelKemaskini::where('emel_id',4)->first();
-            Mail::to('ziba0506@gmail.com')->send(new TuntutanDikembalikan($catatan,$emel));
+            Mail::to($smoku_emel)->send(new TuntutanDikembalikan($catatan,$emel));
 
             $status_kod=2;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah dikembalikan.";

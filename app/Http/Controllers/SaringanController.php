@@ -111,6 +111,8 @@ class SaringanController extends Controller
 
     public function saringPermohonan(Request $request,$id)
     {
+        $permohonan = Permohonan::where('id', $id)->first();
+        $smoku_emel =Smoku::where('id', $permohonan->smoku_id)->value('email');
         if($request->get('maklumat_profil_diri')=="lengkap"&&$request->get('maklumat_akademik')=="lengkap"&&$request->get('salinan_dokumen')=="lengkap"){
 
             $permohonan = Permohonan::where('id', $id)->first();
@@ -152,7 +154,7 @@ class SaringanController extends Controller
                 }
             }
             $emel = EmelKemaskini::where('emel_id',1)->first();
-            Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan,$emel));
+            Mail::to($smoku_emel)->send(new SaringanMail($catatan,$emel));
             $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
 
             $catatan = new Saringan([
