@@ -18,12 +18,12 @@ class SaringanMail extends Mailable
     public function __construct($catatan,$emel)
     {
         $this->catatan = $catatan;
-        $this->catatan = $emel;
+        $this->emel = $emel;
         $this->subjek = $emel->subjek;
     }
 
     public function build()
     {
-       return $this->view('permohonan.sekretariat.saringan.email_kembalikan')->with('data', $this->catatan)->with('emel', $this->emel)->subject("BKOKU: Permohonan Dikembalikan");
+       return $this->view('permohonan.sekretariat.saringan.email_kembalikan')->with('data', $this->catatan)->with('emel', $this->emel)->subject($this->subjek);
     }
 }
