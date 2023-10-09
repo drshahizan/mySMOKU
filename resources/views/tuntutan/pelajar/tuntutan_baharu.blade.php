@@ -174,7 +174,7 @@
 							@if ($permohonan->wang_saku == '1')
 							<div class="d-flex flex-stack">
 								<div class="me-5">
-									<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" @if($tuntutan->wang_saku !== null) checked @endif/>
+									<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" @if(optional($tuntutan)->wang_saku !== null) checked @endif/>
 									<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
 								</div>
 							</div>
@@ -192,7 +192,7 @@
 							<div class="d-flex">
 								<span class="input-group-text">RM</span>
 								<input type="hidden" id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="input-group-text" style="width: 100%;" value="{{$akademik->bil_bulan_per_sem}}"/>
-								<input type="text" id="amaun_wang_saku" name="amaun_wang_saku" class="input-group-text" style="width: 100%;" value="{{$tuntutan->amaun_wang_saku}}" readonly/>
+								<input type="text" id="amaun_wang_saku" name="amaun_wang_saku" class="input-group-text" style="width: 100%;" value="{{ $tuntutan->amaun_wang_saku ?? '' }}" readonly/>
 							</div>
 							@endif
 							<br>
