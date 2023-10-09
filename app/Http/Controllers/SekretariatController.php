@@ -236,6 +236,7 @@ class SekretariatController extends Controller
         //$id refers to permohonan id
         $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
         $existingRecord = Kelulusan::where('permohonan_id', $id)->first();
+        $studentEmail = Smoku::where('id', $smoku_id)->value('email');
         
         if($request->get('keputusan')=="Lulus"){
             //update permohonan table
@@ -274,7 +275,8 @@ class SekretariatController extends Controller
 
             //emel notifikasi
             $message = 'Test message';
-            Mail::to("fateennashuha9@gmail.com")->send(new KeputusanLayak($message));
+            Mail::to($studentEmail)->send(new KeputusanLayak($message));
+            //Mail::to("fateennashuha9@gmail.com")->send(new KeputusanLayak($message));
         }
         else{
             //update permohonan table
@@ -313,7 +315,8 @@ class SekretariatController extends Controller
 
             //emel notifikasi
             $message = 'Test message';
-            Mail::to("fateennashuha9@gmail.com")->send(new KeputusanTidakLayak($message));
+            Mail::to($studentEmail)->send(new KeputusanTidakLayak($message));
+            //Mail::to("fateennashuha9@gmail.com")->send(new KeputusanTidakLayak($message));
         }
 
         $startDate = $request->input('start_date');

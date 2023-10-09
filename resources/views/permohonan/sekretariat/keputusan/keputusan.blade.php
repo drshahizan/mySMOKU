@@ -88,17 +88,17 @@
                                     <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
                                         <div class="row" style="margin-left: 15px;">
                                             <div class="col-md-2">
-                                                <label for="start_date"><b>Dari:</b></label>
+                                                <label for="start_date">Dari:</label>
                                                 <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                             </div>
                                     
                                             <div class="col-md-2">
-                                                <label for="end_date"><b>Hingga:</b></label>
+                                                <label for="end_date">Hingga:</label>
                                                 <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                             </div>
                                     
                                             <div class="col-md-3">
-                                                <label for="end_date"><b>Keputusan:</b></label>
+                                                <label for="end_date">Pilih Keputusan:</label>
                                                 <select name="status" class="form-select">
                                                     <option value="">Semua Keputusan</option>
                                                     <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
@@ -166,7 +166,7 @@
                                                                     </td>
                                                                 @elseif($item->keputusan == "Tidak Lulus")
                                                                     <td class="text-center">
-                                                                        <div class="btn btn-danger btn-round btn-sm" style="width: 43%; padding-left:0%; padding-right:0%;">Tidak Layak</div>
+                                                                        <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
                                                                     </td>
                                                                 @endif
                                                             </tr>

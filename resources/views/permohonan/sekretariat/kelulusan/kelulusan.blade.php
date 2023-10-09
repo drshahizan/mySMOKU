@@ -75,149 +75,147 @@
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br>
                                     <div class="body">
-                                        <div class="table-responsive">
-                                            <form action="{{ route('bulk.approval') }}" method="POST">
-                                                {{csrf_field()}}
-                                                <table id="sortTable1" class="table table-bordered table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="text-center" style="width:3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
-                                                            <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
-                                                            <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                                                            <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
-                                                            <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
-                                                            <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                            <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
-                                                            <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
-                                                        </tr>
-                                                    </thead>
+                                        <form action="{{ route('bulk.approval') }}" method="POST">
+                                            {{csrf_field()}}
+                                            <table id="sortTable1" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" style="width:3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
+                                                        <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
+                                                        <th class="text-center" style="width: 20%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
+                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+                                                    </tr>
+                                                </thead>
 
-                                                    <tbody>
-                                                        @php
-                                                            $i=0;
-                                                        @endphp
-                                                        @php
-                                                            require_once app_path('helpers.php'); // Replace with the actual path to your helper file
-                                                        @endphp
-                                                    
-                                                        @foreach ($kelulusan as $item)
-                                                            @if ($item['program']=="BKOKU")
-                                                                @php
-                                                                    $i++;
-                                                                    $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                                    $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
-                                                                    $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                                                                    $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
-                                                                    $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
-                                                                    $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
-                                                                    $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
-                                                                    
-                                                                    // nama pemohon
-                                                                    $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
-                                                                    $conjunctions = ['bin', 'binti'];
-                                                                    $words = explode(' ', $text);
-                                                                    $result = [];
-                                                                    foreach ($words as $word) {
-                                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                                            $result[] = Str::lower($word);
-                                                                        } else {
-                                                                            $result[] = $word;
-                                                                        }
-                                                                    }
-                                                                    $pemohon = implode(' ', $result);
-
-                                                                    //nama kursus
-                                                                    $text2 = ucwords(strtolower($nama_kursus)); // Assuming you're sending the text as a POST parameter
-                                                                    $conjunctions = ['of', 'in', 'and'];
-                                                                    $words = explode(' ', $text2);
-                                                                    $result = [];
-                                                                    foreach ($words as $word) {
-                                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                                            $result[] = Str::lower($word);
-                                                                        } else {
-                                                                            $result[] = $word;
-                                                                        }
-                                                                    }
-                                                                    $kursus = implode(' ', $result);
-                                                                    $namakursus = transformBracketsToCapital($kursus);
-
-                                                                    //institusi pengajian
-                                                                    $text3 = ucwords(strtolower($institusi_pengajian)); // Assuming you're sending the text as a POST parameter
-                                                                    $conjunctions = ['of', 'in', 'and'];
-                                                                    $words = explode(' ', $text3);
-                                                                    $result = [];
-                                                                    foreach ($words as $word) {
-                                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                                            $result[] = Str::lower($word);
-                                                                        } else {
-                                                                            $result[] = $word;
-                                                                        }
-                                                                    }
-                                                                    $institusi = implode(' ', $result);
-                                                                    $institusipengajian = transformBracketsToUppercase($institusi);
-                                                                @endphp
+                                                <tbody>
+                                                    @php
+                                                        $i=0;
+                                                    @endphp
+                                                    @php
+                                                        require_once app_path('helpers.php'); // Replace with the actual path to your helper file
+                                                    @endphp
+                                                
+                                                    @foreach ($kelulusan as $item)
+                                                        @if ($item['program']=="BKOKU")
+                                                            @php
+                                                                $i++;
+                                                                $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                                $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
+                                                                $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                                                                $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
+                                                                $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                                $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
+                                                                $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
                                                                 
-                                                                <tr>
-                                                                    <td class="text-center"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
-                                                                    <td><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
-                                                                    <td>{{$pemohon}}</td>
-                                                                    <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                    <td>{{$namakursus}}</td>
-                                                                    <td>{{$institusipengajian}}</td>
-                                                                    <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                                                                    <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
-                                                                </tr>
-                                                            @endif
-                                                        @endforeach 
-                                                    </tbody>
-                                                </table>
+                                                                // nama pemohon
+                                                                $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                                $conjunctions = ['bin', 'binti'];
+                                                                $words = explode(' ', $text);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $pemohon = implode(' ', $result);
 
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-primary btn-round float-end" data-bs-toggle="modal" data-bs-target="#pengesahanModal">
-                                                    Sahkan
-                                                </button>
-                                            
-                                                {{-- Modal --}}
-                                                <div class="modal fade" id="pengesahanModal" tabindex="-1" aria-labelledby="pengesahanModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="pengesahanModalLabel">Rekod Keputusan Permohonan</h1>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
+                                                                //nama kursus
+                                                                $text2 = ucwords(strtolower($nama_kursus)); // Assuming you're sending the text as a POST parameter
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text2);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $kursus = implode(' ', $result);
+                                                                $namakursus = transformBracketsToCapital($kursus);
 
-                                                            <div class="modal-body">
-                                                                <div class="mb-3">
-                                                                    <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
-                                                                    <input type="text" class="form-control" id="noMesyuarat" name="noMesyuarat">
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
-                                                                    <input type="date" class="form-control" id="tarikhMesyuarat" name="tarikhMesyuarat">
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
-                                                                    <select onchange="select1()" class="form-control" id="keputusan" name="keputusan">
-                                                                        <option value="">Pilih Keputusan</option>
-                                                                        <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
-                                                                        <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="message-text" class="col-form-label">Catatan:</label>
-                                                                    <textarea class="form-control" id="catatan" name="catatan"></textarea>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                                    <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
-                                                                </div>
+                                                                //institusi pengajian
+                                                                $text3 = ucwords(strtolower($institusi_pengajian)); // Assuming you're sending the text as a POST parameter
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text3);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $institusi = implode(' ', $result);
+                                                                $institusipengajian = transformBracketsToUppercase($institusi);
+                                                            @endphp
+                                                            
+                                                            <tr>
+                                                                <td class="text-center"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
+                                                                <td><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                                <td>{{$pemohon}}</td>
+                                                                <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
+                                                                <td>{{$namakursus}}</td>
+                                                                <td>{{$institusipengajian}}</td>
+                                                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach 
+                                                </tbody>
+                                            </table>
+
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModal">
+                                                Sahkan
+                                            </button>
+                                        
+                                            {{-- Modal --}}
+                                            <div class="modal fade" id="pengesahanModal" tabindex="-1" aria-labelledby="pengesahanModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabel">Rekod Keputusan Permohonan</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
+                                                                <input type="text" class="form-control" id="noMesyuarat" name="noMesyuarat">
                                                             </div>
-                                                        </div> 
-                                                    </div>
-                                                </div> 
-                                                <br><br>                                       
-                                            </form>
-                                        </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
+                                                                <input type="date" class="form-control" id="tarikhMesyuarat" name="tarikhMesyuarat">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
+                                                                <select onchange="select1()" class="form-control" id="keputusan" name="keputusan">
+                                                                    <option value="">Pilih Keputusan</option>
+                                                                    <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
+                                                                    <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Catatan:</label>
+                                                                <textarea class="form-control" id="catatan" name="catatan"></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div> 
+                                            <br><br>                                       
+                                        </form>
                                     </div>
                                 </div>
 
@@ -225,149 +223,147 @@
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <br>
                                     <div class="body">
-                                        <div class="table-responsive">
-                                            <form action="{{ route('bulk.approval') }}" method="POST">
-                                                {{csrf_field()}}
-                                                <table id="sortTable2" class="table table-bordered table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="text-center" style="width:3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
-                                                            <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
-                                                            <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                                                            <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
-                                                            <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
-                                                            <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                            <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
-                                                            <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
-                                                        </tr>
-                                                    </thead>
+                                        <form action="{{ route('bulk.approval') }}" method="POST">
+                                            {{csrf_field()}}
+                                            <table id="sortTable2" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" style="width:3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
+                                                        <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
+                                                        <th class="text-center" style="width: 20%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
+                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+                                                    </tr>
+                                                </thead>
 
-                                                    <tbody>
-                                                        @php
-                                                            $i=0;
-                                                        @endphp
-                                                        @php
-                                                            require_once app_path('helpers.php'); // Replace with the actual path to your helper file
-                                                        @endphp
-                                                    
-                                                        @foreach ($kelulusan as $item)
-                                                            @if ($item['program']=="PPK")
-                                                                @php
-                                                                    $i++;
-                                                                    $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                                    $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
-                                                                    $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                                                                    $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
-                                                                    $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
-                                                                    $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
-                                                                    $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
-                                                                    
-                                                                    // nama pemohon
-                                                                    $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
-                                                                    $conjunctions = ['bin', 'binti'];
-                                                                    $words = explode(' ', $text);
-                                                                    $result = [];
-                                                                    foreach ($words as $word) {
-                                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                                            $result[] = Str::lower($word);
-                                                                        } else {
-                                                                            $result[] = $word;
-                                                                        }
-                                                                    }
-                                                                    $pemohon = implode(' ', $result);
-
-                                                                    //nama kursus
-                                                                    $text2 = ucwords(strtolower($nama_kursus)); // Assuming you're sending the text as a POST parameter
-                                                                    $conjunctions = ['of', 'in', 'and'];
-                                                                    $words = explode(' ', $text2);
-                                                                    $result = [];
-                                                                    foreach ($words as $word) {
-                                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                                            $result[] = Str::lower($word);
-                                                                        } else {
-                                                                            $result[] = $word;
-                                                                        }
-                                                                    }
-                                                                    $kursus = implode(' ', $result);
-                                                                    $namakursus = transformBracketsToCapital($kursus);
-
-                                                                    //institusi pengajian
-                                                                    $text3 = ucwords(strtolower($institusi_pengajian)); // Assuming you're sending the text as a POST parameter
-                                                                    $conjunctions = ['of', 'in', 'and'];
-                                                                    $words = explode(' ', $text3);
-                                                                    $result = [];
-                                                                    foreach ($words as $word) {
-                                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                                            $result[] = Str::lower($word);
-                                                                        } else {
-                                                                            $result[] = $word;
-                                                                        }
-                                                                    }
-                                                                    $institusi = implode(' ', $result);
-                                                                    $institusipengajian = transformBracketsToUppercase($institusi);
-                                                                @endphp
+                                                <tbody>
+                                                    @php
+                                                        $i=0;
+                                                    @endphp
+                                                    @php
+                                                        require_once app_path('helpers.php'); // Replace with the actual path to your helper file
+                                                    @endphp
+                                                
+                                                    @foreach ($kelulusan as $item)
+                                                        @if ($item['program']=="PPK")
+                                                            @php
+                                                                $i++;
+                                                                $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                                $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
+                                                                $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                                                                $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
+                                                                $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                                $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
+                                                                $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
                                                                 
-                                                                <tr>
-                                                                    <td class="text-center"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
-                                                                    <td><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
-                                                                    <td>{{$pemohon}}</td>
-                                                                    <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                    <td>{{$namakursus}}</td>
-                                                                    <td>{{$institusipengajian}}</td>
-                                                                    <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                                                                    <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
-                                                                </tr>
-                                                            @endif
-                                                        @endforeach 
-                                                    </tbody>
-                                                </table>
+                                                                // nama pemohon
+                                                                $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                                $conjunctions = ['bin', 'binti'];
+                                                                $words = explode(' ', $text);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $pemohon = implode(' ', $result);
 
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-primary btn-round float-end" data-bs-toggle="modal" data-bs-target="#pengesahanModal">
-                                                    Sahkan
-                                                </button>
-                                            
-                                                {{-- Modal --}}
-                                                <div class="modal fade" id="pengesahanModal" tabindex="-1" aria-labelledby="pengesahanModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="pengesahanModalLabel">Rekod Keputusan Permohonan</h1>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
+                                                                //nama kursus
+                                                                $text2 = ucwords(strtolower($nama_kursus)); // Assuming you're sending the text as a POST parameter
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text2);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $kursus = implode(' ', $result);
+                                                                $namakursus = transformBracketsToCapital($kursus);
 
-                                                            <div class="modal-body">
-                                                                <div class="mb-3">
-                                                                    <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
-                                                                    <input type="text" class="form-control" id="noMesyuarat" name="noMesyuarat">
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
-                                                                    <input type="date" class="form-control" id="tarikhMesyuarat" name="tarikhMesyuarat">
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
-                                                                    <select onchange="select1()" class="form-control" id="keputusan" name="keputusan">
-                                                                        <option value="">Pilih Keputusan</option>
-                                                                        <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
-                                                                        <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="message-text" class="col-form-label">Catatan:</label>
-                                                                    <textarea class="form-control" id="catatan" name="catatan"></textarea>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                                    <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
-                                                                </div>
+                                                                //institusi pengajian
+                                                                $text3 = ucwords(strtolower($institusi_pengajian)); // Assuming you're sending the text as a POST parameter
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text3);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $institusi = implode(' ', $result);
+                                                                $institusipengajian = transformBracketsToUppercase($institusi);
+                                                            @endphp
+                                                            
+                                                            <tr>
+                                                                <td class="text-center"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
+                                                                <td><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                                <td>{{$pemohon}}</td>
+                                                                <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
+                                                                <td>{{$namakursus}}</td>
+                                                                <td>{{$institusipengajian}}</td>
+                                                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach 
+                                                </tbody>
+                                            </table>
+
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModal">
+                                                Sahkan
+                                            </button>
+                                        
+                                            {{-- Modal --}}
+                                            <div class="modal fade" id="pengesahanModal" tabindex="-1" aria-labelledby="pengesahanModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabel">Rekod Keputusan Permohonan</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
+                                                                <input type="text" class="form-control" id="noMesyuarat" name="noMesyuarat">
                                                             </div>
-                                                        </div> 
-                                                    </div>
-                                                </div> 
-                                                <br><br>                                       
-                                            </form>                                    
-                                        </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
+                                                                <input type="date" class="form-control" id="tarikhMesyuarat" name="tarikhMesyuarat">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
+                                                                <select onchange="select1()" class="form-control" id="keputusan" name="keputusan">
+                                                                    <option value="">Pilih Keputusan</option>
+                                                                    <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
+                                                                    <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Catatan:</label>
+                                                                <textarea class="form-control" id="catatan" name="catatan"></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div> 
+                                            <br><br>                                       
+                                        </form>                                    
                                     </div>
                                 </div>
                             </div>
