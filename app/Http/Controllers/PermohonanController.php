@@ -98,6 +98,13 @@ class PermohonanController extends Controller
 
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
 
+        Smoku::updateOrCreate(
+            ['smoku_id' => $smoku_id->id],
+            [
+                'umur' => $request->umur,
+            ]
+        );
+
         $butiranPelajar = ButiranPelajar::firstOrNew(['smoku_id' => $smoku_id->id]);
 
         $butiranPelajar->alamat_surat_menyurat = $request->alamat_surat_menyurat;

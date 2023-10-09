@@ -1071,7 +1071,10 @@
 								<div class="col-6" id="divamaun">
 									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" placeholder="" value="{{$butiranPelajar->amaun_yuran}}" readonly/>
+									<div class="d-flex">
+										<span class="input-group-text">RM</span>
+										<input type="number" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" onchange="select1()" placeholder="" value="{{$butiranPelajar->amaun_yuran}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									</div>
 									<!--end::Input-->
 								</div>
 							</div>
@@ -1088,7 +1091,10 @@
 								<div class="col-6" id="divamaunelaun">
 									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" placeholder="" value="{{$butiranPelajar->amaun_wang_saku}}" readonly/>
+									<div class="d-flex">
+										<span class="input-group-text">RM</span>
+										<input type="text" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" placeholder="" value="{{$butiranPelajar->amaun_wang_saku}}" readonly/>
+									</div>
 									<!--end::Input-->
 								</div>
 							</div>
@@ -1454,36 +1460,64 @@
 
 		<script>
 			function select1(){
-            var sumber = document.getElementById('sumber_biaya').value;
-			var mod = document.getElementById('mod').value;
-			var bilbulan = document.getElementById('bil_bulan_per_sem').value;
-			var layakyuran = "5000";
-			var layak = "300";
-			var total = layak * bilbulan;
-            if(sumber=="1" && mod=="1"){
-                document.getElementById("divyuran").style.display = "none";
-                document.getElementById("divamaun").style.display = "none";
-				document.getElementById("wang_saku").disabled = false;
-				document.getElementById("amaun_wang_saku").value= total;
-            }
-			else if(sumber!="1" && mod=="2"){
-                document.getElementById("yuran").disabled = false;
-				document.getElementById("divelaun").style.display = "none";
-				document.getElementById("divamaunelaun").style.display = "none";
-            }
-			else if(sumber=="1" && mod=="2"){
-                document.getElementById("divyuran").style.display = "none";
-				document.getElementById("divelaun").style.display = "none";
-				document.getElementById("divamaun").style.display = "none";
-				document.getElementById("divamaunelaun").style.display = "none";
-            }
-            else{
-                document.getElementById("yuran").disabled = false;
-				document.getElementById("amaun_yuran").value= layakyuran;
-				document.getElementById("wang_saku").disabled = false;
-				document.getElementById("amaun_wang_saku").value= total;
-            }
-        }
+				var sumber = document.getElementById('sumber_biaya').value;
+				var mod = document.getElementById('mod').value;
+				var bilbulan = document.getElementById('bil_bulan_per_sem').value;
+				var yuranInput = document.getElementById('amaun_yuran');
+				var yuran = parseFloat(yuranInput.value).toFixed(2);
+
+				// Define the maximum limit for 'amaun_yuran'
+				var maxLimit = 5000;
+
+				if (yuran > maxLimit) {
+					yuranInput.value = '';
+					alert('Ralat: Amaun Yuran tidak boleh lebih RM' + maxLimit);
+					return;
+				}
+				var wang_saku_perbulan = "300";
+				
+				var wang_saku = wang_saku_perbulan * bilbulan;
+				var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
+
+				if(sumber=="1" && mod=="1"){
+					document.getElementById("divyuran").style.display = "none";
+					document.getElementById("divamaun").style.display = "none";
+					document.getElementById("wang_saku").disabled = false;
+					document.getElementById("amaun_wang_saku").value= wang_saku;
+				}
+				else if(sumber!="1" && mod=="2"){
+					document.getElementById("yuran").disabled = false;
+					document.getElementById("divelaun").style.display = "none";
+					document.getElementById("divamaunelaun").style.display = "none";
+				}
+				else if(sumber=="1" && mod=="2"){
+					document.getElementById("divyuran").style.display = "none";
+					document.getElementById("divelaun").style.display = "none";
+					document.getElementById("divamaun").style.display = "none";
+					document.getElementById("divamaunelaun").style.display = "none";
+				}
+				else{
+					document.getElementById("yuran").disabled = false;
+					document.getElementById("wang_saku").disabled = false;
+
+					if (total <= 5000) {
+						document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
+						console.log("Total amount is within the limit: " + parseFloat(total));
+					} else {
+
+						var baki_wang_saku = 5000 - yuran;
+						if (!isNaN(baki_wang_saku)) {
+							document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
+							console.log("Total amount exceeds the limit: " + parseFloat(total));
+						} else {
+							document.getElementById("amaun_wang_saku").value = "";
+							console.log("Invalid input. Cannot calculate total amount.");
+						}
+
+					}
+					
+				}
+			}
 
 		</script>
 

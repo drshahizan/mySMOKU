@@ -281,8 +281,26 @@
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
 									<div class="col-12">
+										@php
+											// Extract birthdate from IC number (Assuming YYMMDD format)
+											$birthYear = substr($smoku->no_kp, 0, 2);
+											$birthMonth = substr($smoku->no_kp, 2, 2);
+											$birthDay = substr($smoku->no_kp, 4, 2);
+
+											// Assume a default birth century (e.g., 1900 for years 00-99)
+											$birthYear = ($birthYear >= 0 && $birthYear <= 21) ? 2000 + $birthYear : 1900 + $birthYear;
+
+											// Get the current date
+											$currentYear = date('Y');
+											$currentMonth = date('m');
+											$currentDay = date('d');
+
+											// Calculate age
+											$age = $currentYear - $birthYear - (($currentMonth < $birthMonth || ($currentMonth == $birthMonth && $currentDay < $birthDay)) ? 1 : 0);
+										
+										@endphp
 										<!--begin::Input-->
-										<input type="text" class="form-control form-control-solid" id="umur" name="umur" placeholder="" value="{{$smoku->umur}}" readonly/>
+										<input type="text" class="form-control form-control-solid" id="umur" name="umur" placeholder="" value="{{$age}}" readonly/>
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
@@ -809,7 +827,7 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
+									<select id="tempoh_pengajian" name="tempoh_pengajian" onchange=dateCheck() class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
 										<option></option>
 										<option value="1">1</option>
 										<option value="1.5">1.5</option>
@@ -875,7 +893,7 @@
 								</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" value="" />
+									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" onchange=dateCheck() value="" />
 									<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
@@ -887,7 +905,7 @@
 								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" onchange=dateCheck() value="" />
+									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" value="" />
 								<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
@@ -962,7 +980,7 @@
 						<!--end::Input group-->
 						<!--begin::Input group-->
 						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
+							<div class="col-md-6 fv-row" id="div_nama_penaja">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
 									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
@@ -1029,7 +1047,10 @@
 								<div class="col-6" id="divamaun">
 									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" placeholder="" value="" readonly/>
+									<div class="d-flex">
+										<span class="input-group-text">RM</span>
+										<input type="number" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" onchange="select1()" placeholder="" value=""/>
+									</div>
 									<!--end::Input-->
 								</div>
 							</div>
@@ -1046,7 +1067,10 @@
 								<div class="col-6" id="divamaunelaun">
 									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" placeholder="" value="" readonly/>
+									<div class="d-flex">
+										<span class="input-group-text">RM</span>
+										<input type="text" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" placeholder="" value="" readonly/>
+									</div>
 									<!--end::Input-->
 								</div>
 							</div>
@@ -1238,7 +1262,8 @@
 							<span class="indicator-progress">Sila tunggu...
 							<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 						</button>
-						<button type="button" class="btn btn-lg btn-primary save-form" data-kt-stepper-action="next">Teruskan
+						{{-- <button type="button" class="btn btn-lg btn-primary save-form" data-kt-stepper-action="next">Teruskan --}}
+						<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Teruskan
 						<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
 							<span class="path1"></span>
 							<span class="path2"></span>
@@ -1382,8 +1407,12 @@
 				if ( this.value == '5'){
 					$("#div_biaya_lain").show();
 				}
+				else if (this.value == '4'){
+					$("#div_nama_penaja").hide();
+				}
 				else {
 					$("#div_biaya_lain").hide();
+					$("#div_nama_penaja").show();
 				}
 				});
 			});
@@ -1401,14 +1430,22 @@
 				});
 			});
 
+
 			function dateCheck(){
 				let startDate = new Date($("#tarikh_mula").val());
 				let endDate = new Date($("#tarikh_tamat").val());
+				var studyPeriod = parseFloat(document.getElementById("tempoh_pengajian").value);
 
-				if(startDate > endDate) {
-					alert("Tarikh Tamat Pengajian perlu lebih besar daripada Tarikh Mula Pengajian");
-					$("#tarikh_tamat").val('');
+				if (!isNaN(studyPeriod)) {
+				//alert(studyPeriod);
+				 	endDate.setFullYear(startDate.getFullYear() + Math.floor(studyPeriod));
+
+				 	var remainingMonths = (studyPeriod - Math.floor(studyPeriod)) * 12;
+				 	endDate.setMonth(startDate.getMonth() + Math.floor(remainingMonths));
+
+				 	document.getElementById("tarikh_tamat").valueAsDate = endDate;
 				}
+
 			}
 
 
@@ -1436,36 +1473,64 @@
 
 		<script>
 			function select1(){
-            var sumber = document.getElementById('sumber_biaya').value;
-			var mod = document.getElementById('mod').value;
-			var bilbulan = document.getElementById('bil_bulan_per_sem').value;
-			var layakyuran = "5000";
-			var layak = "300";
-			var total = layak * bilbulan;
-            if(sumber=="1" && mod=="1"){
-                document.getElementById("divyuran").style.display = "none";
-                document.getElementById("divamaun").style.display = "none";
-				document.getElementById("wang_saku").disabled = false;
-				document.getElementById("amaun_wang_saku").value= total;
-            }
-			else if(sumber!="1" && mod=="2"){
-                document.getElementById("yuran").disabled = false;
-				document.getElementById("divelaun").style.display = "none";
-				document.getElementById("divamaunelaun").style.display = "none";
-            }
-			else if(sumber=="1" && mod=="2"){
-                document.getElementById("divyuran").style.display = "none";
-				document.getElementById("divelaun").style.display = "none";
-				document.getElementById("divamaun").style.display = "none";
-				document.getElementById("divamaunelaun").style.display = "none";
-            }
-            else{
-                document.getElementById("yuran").disabled = false;
-				document.getElementById("amaun_yuran").value= layakyuran;
-				document.getElementById("wang_saku").disabled = false;
-				document.getElementById("amaun_wang_saku").value= total;
-            }
-        }
+				var sumber = document.getElementById('sumber_biaya').value;
+				var mod = document.getElementById('mod').value;
+				var bilbulan = document.getElementById('bil_bulan_per_sem').value;
+				var yuranInput = document.getElementById('amaun_yuran');
+				var yuran = parseFloat(yuranInput.value).toFixed(2);
+
+				// Define the maximum limit for 'amaun_yuran'
+				var maxLimit = 5000;
+
+				if (yuran > maxLimit) {
+					yuranInput.value = '';
+					alert('Ralat: Amaun Yuran tidak boleh lebih RM' + maxLimit);
+					return;
+				}
+				var wang_saku_perbulan = "300";
+				
+				var wang_saku = wang_saku_perbulan * bilbulan;
+				var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
+
+				if(sumber=="1" && mod=="1"){
+					document.getElementById("divyuran").style.display = "none";
+					document.getElementById("divamaun").style.display = "none";
+					document.getElementById("wang_saku").disabled = false;
+					document.getElementById("amaun_wang_saku").value= wang_saku;
+				}
+				else if(sumber!="1" && mod=="2"){
+					document.getElementById("yuran").disabled = false;
+					document.getElementById("divelaun").style.display = "none";
+					document.getElementById("divamaunelaun").style.display = "none";
+				}
+				else if(sumber=="1" && mod=="2"){
+					document.getElementById("divyuran").style.display = "none";
+					document.getElementById("divelaun").style.display = "none";
+					document.getElementById("divamaun").style.display = "none";
+					document.getElementById("divamaunelaun").style.display = "none";
+				}
+				else{
+					document.getElementById("yuran").disabled = false;
+					document.getElementById("wang_saku").disabled = false;
+
+					if (total <= 5000) {
+						document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
+						console.log("Total amount is within the limit: " + parseFloat(total));
+					} else {
+
+						var baki_wang_saku = 5000 - yuran;
+						if (!isNaN(baki_wang_saku)) {
+							document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
+							console.log("Total amount exceeds the limit: " + parseFloat(total));
+						} else {
+							document.getElementById("amaun_wang_saku").value = "";
+							console.log("Invalid input. Cannot calculate total amount.");
+						}
+
+					}
+					
+				}
+			}
 
 		</script>
 

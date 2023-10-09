@@ -211,14 +211,14 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
-					'alamatW1': {
+					'alamat_waris': {
 						validators: {
 							notEmpty: {
 								message: 'Alamat Tetap diperlukan'
 							}
 						}
 					},
-					'alamatW_poskod': {
+					'alamat_poskod_waris': {
 						validators: {
 							notEmpty: {
 								message: 'Poskod diperlukan'
@@ -233,14 +233,14 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
-					'alamatW_bandar': {
+					'alamat_bandar_waris': {
 						validators: {
 							notEmpty: {
 								message: 'Bandar diperlukan'
 							}
 						}
 					},
-					'alamatW_negeri': {
+					'alamat_negeri_waris': {
 						validators: {
 							notEmpty: {
 								message: 'Negeri diperlukan'
