@@ -112,7 +112,7 @@
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
                                                                 
                                                                 // nama pemohon
-                                                                $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                                $text = ucwords(strtolower($nama_pemohon)); 
                                                                 $conjunctions = ['bin', 'binti'];
                                                                 $words = explode(' ', $text);
                                                                 $result = [];
@@ -126,7 +126,7 @@
                                                                 $pemohon = implode(' ', $result);
 
                                                                 //nama kursus
-                                                                $text2 = ucwords(strtolower($nama_kursus)); // Assuming you're sending the text as a POST parameter
+                                                                $text2 = ucwords(strtolower($nama_kursus)); 
                                                                 $conjunctions = ['of', 'in', 'and'];
                                                                 $words = explode(' ', $text2);
                                                                 $result = [];
@@ -141,7 +141,7 @@
                                                                 $namakursus = transformBracketsToCapital($kursus);
 
                                                                 //institusi pengajian
-                                                                $text3 = ucwords(strtolower($institusi_pengajian)); // Assuming you're sending the text as a POST parameter
+                                                                $text3 = ucwords(strtolower($institusi_pengajian)); 
                                                                 $conjunctions = ['of', 'in', 'and'];
                                                                 $words = explode(' ', $text3);
                                                                 $result = [];
@@ -172,16 +172,16 @@
                                             </table>
 
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModal">
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU">
                                                 Sahkan
                                             </button>
                                         
                                             {{-- Modal --}}
-                                            <div class="modal fade" id="pengesahanModal" tabindex="-1" aria-labelledby="pengesahanModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="pengesahanModalBKOKU" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabel">Rekod Keputusan Permohonan</h1>
+                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU">Rekod Keputusan Permohonan</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
 
@@ -260,7 +260,7 @@
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
                                                                 
                                                                 // nama pemohon
-                                                                $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                                $text = ucwords(strtolower($nama_pemohon)); 
                                                                 $conjunctions = ['bin', 'binti'];
                                                                 $words = explode(' ', $text);
                                                                 $result = [];
@@ -274,7 +274,7 @@
                                                                 $pemohon = implode(' ', $result);
 
                                                                 //nama kursus
-                                                                $text2 = ucwords(strtolower($nama_kursus)); // Assuming you're sending the text as a POST parameter
+                                                                $text2 = ucwords(strtolower($nama_kursus)); 
                                                                 $conjunctions = ['of', 'in', 'and'];
                                                                 $words = explode(' ', $text2);
                                                                 $result = [];
@@ -289,7 +289,7 @@
                                                                 $namakursus = transformBracketsToCapital($kursus);
 
                                                                 //institusi pengajian
-                                                                $text3 = ucwords(strtolower($institusi_pengajian)); // Assuming you're sending the text as a POST parameter
+                                                                $text3 = ucwords(strtolower($institusi_pengajian)); 
                                                                 $conjunctions = ['of', 'in', 'and'];
                                                                 $words = explode(' ', $text3);
                                                                 $result = [];
@@ -320,16 +320,16 @@
                                             </table>
 
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModal">
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalPPK">
                                                 Sahkan
                                             </button>
                                         
                                             {{-- Modal --}}
-                                            <div class="modal fade" id="pengesahanModal" tabindex="-1" aria-labelledby="pengesahanModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="pengesahanModalPPK" tabindex="-1" aria-labelledby="pengesahanModalLabelPPK" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabel">Rekod Keputusan Permohonan</h1>
+                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelPPK">Rekod Keputusan Permohonan</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
 

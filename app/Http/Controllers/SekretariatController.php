@@ -276,7 +276,6 @@ class SekretariatController extends Controller
             //emel notifikasi
             $message = 'Test message';
             Mail::to($studentEmail)->send(new KeputusanLayak($message));
-            //Mail::to("fateennashuha9@gmail.com")->send(new KeputusanLayak($message));
         }
         else{
             //update permohonan table
@@ -316,7 +315,6 @@ class SekretariatController extends Controller
             //emel notifikasi
             $message = 'Test message';
             Mail::to($studentEmail)->send(new KeputusanTidakLayak($message));
-            //Mail::to("fateennashuha9@gmail.com")->send(new KeputusanTidakLayak($message));
         }
 
         $startDate = $request->input('start_date');
@@ -342,16 +340,21 @@ class SekretariatController extends Controller
         // Get the selected item IDs from the form
         $selectedItemIds = $request->input('selected_items');
 
-        if ($selectedItemIds !== null)
-        {
-            // Loop through $selectedItemIds and update the database accordingly
+        if ($selectedItemIds !== null){
+
+            // Initialize an array to store student email addresses
+            $studentEmails = [];
+
             foreach ($selectedItemIds as $itemId) {
-                //$itemId is the permohonan id
+
+                // item is find the permohonan id
                 $item = Permohonan::find($itemId);
-                //$email = DB::table('users')->where('id', $item['smoku_id'])->value('email');
 
-                if ($item) {
-                    if($request->get('keputusan')=="Lulus"){
+                if ($item) 
+                {
+                    // Check if keputusan is "Lulus"
+                    if($request->get('keputusan')=="Lulus")
+                    {
                         // Update the 'Permohonan' model's status
                         $item->update([
                             'status' => 6,
@@ -373,11 +376,23 @@ class SekretariatController extends Controller
                             'status' => 6,
                         ]);
 
-                        //emel notifikasi layak
-                        $message = 'Test message';
-                        Mail::to("fateennashuha9@gmail.com")->send(new KeputusanLayak($message));
+                        // Send email notifications to all student email addresses
+                        $studentEmail = Smoku::where('id', $item->smoku_id)->value('email');
+                        if ($studentEmail) {
+                            $studentEmails[] = $studentEmail;
+                        }
+
+                        foreach ($studentEmails as $studentEmail) {
+                            $message = 'Test message';
+                            Mail::to($studentEmail)->send(new KeputusanLayak($message));
+                        }
+
+                        // Emel notifikasi layak
+                        // $message = 'Test message';
+                        // Mail::to("fateennashuha9@gmail.com")->send(new KeputusanLayak($message));
                     }
-                    else{
+                    else
+                    {
                         // Update the 'Permohonan' model's status
                         $item->update([
                             'status' => 7,
@@ -399,9 +414,20 @@ class SekretariatController extends Controller
                             'status' => 7,
                         ]);
 
-                        //emel notifikasi tidak layak
-                        $message = 'Test message';
-                        Mail::to("fateennashuha9@gmail.com")->send(new KeputusanTidakLayak($message));
+                        // Send email notifications to all student email addresses
+                        $studentEmail = Smoku::where('id', $item->smoku_id)->value('email');
+                        if ($studentEmail) {
+                            $studentEmails[] = $studentEmail;
+                        }
+
+                        foreach ($studentEmails as $studentEmail) {
+                            $message = 'Test message';
+                            Mail::to($studentEmail)->send(new KeputusanLayak($message));
+                        }
+
+                        // Emel notifikasi tidak layak
+                        // $message = 'Test message';
+                        // Mail::to("fateennashuha9@gmail.com")->send(new KeputusanTidakLayak($message));
                     }
                 }
             }
@@ -419,7 +445,7 @@ class SekretariatController extends Controller
         ->get();
 
         $keputusan = $request->get('keputusan');
-        $notifikasi = "Emel notifikasi telah dihantar kepada semua pemohon ";
+        $notifikasi = "Emel notifikasi telah dihantar kepada semua pemohon.";
 
         return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'))->with('error', 'An error occurred while processing the request.');
     }
