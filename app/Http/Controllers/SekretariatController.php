@@ -8,6 +8,7 @@ use App\Mail\KeputusanTidakLayak;
 use App\Mail\TuntutanDikembalikan;
 use App\Mail\TuntutanLayak;
 use App\Mail\TuntutanTidakLayak;
+use App\Models\EmelKemaskini;
 use App\Models\Permohonan;
 use App\Models\Saringan;
 use App\Models\SejarahPermohonan;
@@ -166,7 +167,7 @@ class SekretariatController extends Controller
                 'penaja_lain' => NULL,
                 'status' => '1',
             ]);
-        } 
+        }
         else {
             // Create a new record in smoku_akademik
             $newRecord = new Akademik([
@@ -237,7 +238,7 @@ class SekretariatController extends Controller
         $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
         $existingRecord = Kelulusan::where('permohonan_id', $id)->first();
         $studentEmail = Smoku::where('id', $smoku_id)->value('email');
-        
+
         if($request->get('keputusan')=="Lulus"){
             //update permohonan table
             Permohonan::where('id', $id)
@@ -350,7 +351,7 @@ class SekretariatController extends Controller
                 // item is find the permohonan id
                 $item = Permohonan::find($itemId);
 
-                if ($item) 
+                if ($item)
                 {
                     // Check if keputusan is "Lulus"
                     if($request->get('keputusan')=="Lulus")
@@ -488,7 +489,7 @@ class SekretariatController extends Controller
         $permohonan = Permohonan::where('id', $permohonanId)->first();
         $maklumat_kementerian = MaklumatKementerian::first();
         $kandungan_surat = SuratTawaran::first();
-        
+
         // Load the view into an HTML string
         $html = view('permohonan.sekretariat.keputusan.surat_tawaran', compact('permohonan', 'maklumat_kementerian','kandungan_surat'))->render();
 
@@ -496,7 +497,7 @@ class SekretariatController extends Controller
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
         $options->set('isPhpEnabled', true);
-        
+
         // Set the chroot to the public directory
         $options->set('chroot', public_path());
 
@@ -533,7 +534,7 @@ class SekretariatController extends Controller
     public function sendSuratTawaran(Request $request, $suratTawaranId)
     {
         $existingRecord = SuratTawaran::where('id', $suratTawaranId)->first();
-        
+
         if ($existingRecord) {
             $existingRecord->no_rujukan = $request->noRujukan;
             $existingRecord->tajuk = $request->tajuk;
@@ -552,7 +553,7 @@ class SekretariatController extends Controller
             $existingRecord->penutup4_4 = $request->penutup4_3;
             $existingRecord->penutup4_4 = $request->penutup4_4;
             $existingRecord->save();
-        } 
+        }
 
         return redirect()->route('update', ['suratTawaranId' => $suratTawaranId])->with('success', 'Surat Tawaran telah dikemaskini.');
     }
@@ -565,7 +566,7 @@ class SekretariatController extends Controller
 
         return view('permohonan.sekretariat.kemaskini.surat_tawaran_terkini', compact('suratTawaran','maklumat_kementerian'));
     }
-    
+
 
     //TUNTUTAN
     public function senaraiTuntutanKedua()
@@ -634,7 +635,8 @@ class SekretariatController extends Controller
             $status_rekod->save();
 
             $catatan = "testing";
-            Mail::to('ziba0506@gmail.com')->send(new TuntutanLayak($catatan));
+            $emel = EmelKemaskini::where('emel_id',5)->first();
+            Mail::to('ziba0506@gmail.com')->send(new TuntutanLayak($catatan,$emel));
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Layak'.";
         }
@@ -652,7 +654,8 @@ class SekretariatController extends Controller
             $status_rekod->save();
 
             $catatan = "testing";
-            Mail::to('ziba0506@gmail.com')->send(new TuntutanTidakLayak($catatan));
+            $emel = EmelKemaskini::where('emel_id',6)->first();
+            Mail::to('ziba0506@gmail.com')->send(new TuntutanTidakLayak($catatan,$emel));
 
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Tidak Layak'.";
@@ -671,7 +674,8 @@ class SekretariatController extends Controller
             $status_rekod->save();
 
             $catatan = "testing";
-            Mail::to('ziba0506@gmail.com')->send(new TuntutanDikembalikan($catatan));
+            $emel = EmelKemaskini::where('emel_id',4)->first();
+            Mail::to('ziba0506@gmail.com')->send(new TuntutanDikembalikan($catatan,$emel));
 
             $status_kod=2;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah dikembalikan.";

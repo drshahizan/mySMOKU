@@ -5,6 +5,7 @@ use App\Mail\SaringanMail;
 use App\Models\Akademik;
 use App\Models\ButiranPelajar;
 use App\Models\Dokumen;
+use App\Models\EmelKemaskini;
 use App\Models\Kelulusan;
 use App\Models\Peperiksaan;
 use App\Models\Permohonan;
@@ -150,7 +151,8 @@ class SaringanController extends Controller
                     $n++;
                 }
             }
-            Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan));
+            $emel = EmelKemaskini::where('emel_id',1)->first();
+            Mail::to('ziba0506@gmail.com')->send(new SaringanMail($catatan,$emel));
             $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
 
             $catatan = new Saringan([
