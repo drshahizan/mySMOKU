@@ -65,7 +65,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">BKOKU</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">PPK</li>
             <!--end::Item-->
             <!--begin::Item-->
             <li class="breadcrumb-item">
@@ -81,7 +81,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Dikembalikan</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Tidak Layak</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -100,7 +100,7 @@
                                 <li class="nav-item vivify swoopInTop delay-150 active"><b>Emel Permohonan Dikembalikan</b></li>
                             </ul>
                             <div class="ml-auto">
-                                <a href="{{url('kemaskini/sekretariat/emel/papar-emel/'.$emel->emel_id)}}" target="_blank">
+                                <a href="{{url('kemaskini/sekretariat/emel/papar-emel/'.$emel->id)}}" target="_blank">
                                     <button type="button" class="btn btn-sm my-btn btn-default" title="Print"><i class="bi bi-eye-fill">&nbsp;&nbsp;Lihat Sini</i></button>
                                 </a>
                             </div>
@@ -112,7 +112,7 @@
                         <div class="body">
                             <div class="col-md-6 col-sm-6">
                                 <br>
-                                <form method="POST" action="{{ url('kemaskini/sekretariat/emel/kemaskini/'.$emel->emel_id) }}">
+                                <form method="POST" action="{{ url('kemaskini/sekretariat/emel/kemaskini/'.$emel->id) }}">
                                     {{csrf_field()}}
                                     <div class="table-responsive">
                                         <table class="maklumat2">
