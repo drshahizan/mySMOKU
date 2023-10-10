@@ -43,10 +43,14 @@ class PermohonanController extends Controller
         ->where('no_kp', Auth::user()->no_kp);
         
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        $akademikmqa = Akademik::join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-        ->join('bk_peringkat_pengajian','bk_peringkat_pengajian.kod_peringkat','=','smoku_akademik.peringkat_pengajian')
-        ->get(['smoku_akademik.*', 'bk_info_institusi.*', 'bk_peringkat_pengajian.*'])
-        ->where('smoku_id',$smoku_id->id);
+        $akademikmqa = Akademik::leftJoin('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
+        ->leftJoin('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')
+        ->where('smoku_id', $smoku_id->id)
+        ->where('smoku_akademik.status', 1)
+        ->select('smoku_akademik.*', 'bk_info_institusi.*', 'bk_peringkat_pengajian.*', 'smoku_akademik.status as akademik_status')
+        ->first();
+
+        //dd($akademikmqa);
 
         $mod = Mod::all()->sortBy('kod_mod');
         $biaya = SumberBiaya::all()->sortBy('kod_biaya');
@@ -55,6 +59,7 @@ class PermohonanController extends Controller
         $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri')->get();
         $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
         $institusi = InfoIpt::orderby("id","asc")->select('id_institusi','nama_institusi')->get();
+        $infoipt = InfoIpt::all()->where('jenis_institusi','IPTS')->sortBy('nama_institusi');
         $peringkat = PeringkatPengajian::orderby("id","asc")->select('kod_peringkat','peringkat')->get();
         $permohonan = Permohonan::where('smoku_id', $smoku_id->id)->first();
 
@@ -66,14 +71,25 @@ class PermohonanController extends Controller
         ->join('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
         ->join('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
         ->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
-        ->get(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
-        ->where('smoku_id', $smoku_id->id);
+        ->get(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*','smoku_akademik.status as akademik_status'])
+        ->where('smoku_id', $smoku_id->id)
+        ->where('akademik_status', 1)->first();
+        //dd($butiranPelajar);
+        
+
+        
 
         if ($permohonan && $permohonan->status >= '1') {
+            if ($butiranPelajar->akademik_status == 1) {
+            
+            
+                return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri'));
+    
+            }
             $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
             return view('pages.permohonan.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan'));
-
-        } else {
+            
+        }else {
             //$userHasSubmittedForm = false;
             return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri'));
 
@@ -90,6 +106,34 @@ class PermohonanController extends Controller
          ->get();
 
          return response()->json($bandarData);
+
+    }
+
+    public function peringkat($ipt=0)
+    {
+
+        $peringkatData['data'] = Kursus::select('bk_kursus.kod_peringkat','bk_peringkat_pengajian.peringkat')
+            ->join('bk_peringkat_pengajian', function ($join) {
+                $join->on('bk_kursus.kod_peringkat', '=', 'bk_peringkat_pengajian.kod_peringkat');
+            })
+            ->where('id_institusi',$ipt)
+            ->groupBy('bk_kursus.kod_peringkat','bk_peringkat_pengajian.peringkat')
+            ->get();
+
+        return response()->json($peringkatData);
+
+    }
+
+    public function kursus($kodperingkat=0,$ipt=0)
+    {
+
+        $kursusData['data'] = Kursus::orderby("nama_kursus","asc")
+            ->select('id_institusi','kod_peringkat','nama_kursus')
+            ->where('kod_peringkat',$kodperingkat)
+            ->where('id_institusi',$ipt)
+            ->get();
+
+        return response()->json($kursusData);
 
     }
 
@@ -138,7 +182,7 @@ class PermohonanController extends Controller
 
         // Update or create an Akademik record based on smoku_id
         Akademik::updateOrCreate(
-            ['smoku_id' => $smoku_id->id],
+            ['smoku_id' => $smoku_id->id, 'status' => 1], // Condition to find the record
             [
                 'mod' => $request->mod,
                 'tempoh_pengajian' => $request->tempoh_pengajian,
@@ -156,26 +200,64 @@ class PermohonanController extends Controller
             ]
         );
        
-        $permohonan = Permohonan::firstOrNew(['smoku_id' => $smoku_id->id]);
+        // Find the Permohonan record with the specified smoku_id
+        //$permohonan = Permohonan::where('smoku_id', $smoku_id->id)->first();
+        Permohonan::updateOrCreate(
+            ['smoku_id' => $smoku_id->id, 'status' => 1], // Condition to find the record
+            [
+                'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
+                'program' => 'BKOKU',
+                'yuran' => $request->yuran,
+                'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
+                'wang_saku' => $request->wang_saku,
+                'amaun_wang_saku' => $request->amaun_wang_saku,
+                'perakuan' => $request->perakuan,
+                'status' => '1',
+            ]
+        );
 
-        $permohonan->no_rujukan_permohonan = 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp;
-        $permohonan->program = 'BKOKU';
-        $permohonan->yuran = $request->yuran;
-        $permohonan->amaun_yuran = number_format($request->amaun_yuran, 2, '.', '');
-        $permohonan->wang_saku = $request->wang_saku;
-        $permohonan->amaun_wang_saku = $request->amaun_wang_saku;
-        $permohonan->perakuan = $request->perakuan;
-        $permohonan->status = '1';
+        // if ($permohonan) {
+        //     // Check if the status is equal to 6
+        //     if ($permohonan->status == 6) {
+                
+        //         $newPermohonan = new Permohonan();
+        //         $newPermohonan->smoku_id = $smoku_id->id;
+        //         $newPermohonan->no_rujukan_permohonan = 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp;
+        //         $newPermohonan->program = 'BKOKU';
+        //         $newPermohonan->yuran = $request->yuran;
+        //         $newPermohonan->amaun_yuran = number_format($request->amaun_yuran, 2, '.', '');
+        //         $newPermohonan->wang_saku = $request->wang_saku;
+        //         $newPermohonan->amaun_wang_saku = $request->amaun_wang_saku;
+        //         $newPermohonan->perakuan = $request->perakuan;
+        //         $newPermohonan->status = '1';
 
-        $permohonan->save();
+        //         $newPermohonan->save();
+        //     } else {
+        //         // Update the existing Permohonan record if the status is not 6
+        //         $permohonan->no_rujukan_permohonan = 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp;
+        //         $permohonan->program = 'BKOKU';
+        //         $permohonan->yuran = $request->yuran;
+        //         $permohonan->amaun_yuran = number_format($request->amaun_yuran, 2, '.', '');
+        //         $permohonan->wang_saku = $request->wang_saku;
+        //         $permohonan->amaun_wang_saku = $request->amaun_wang_saku;
+        //         $permohonan->perakuan = $request->perakuan;
+        //         $permohonan->status = '1';
 
-        $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
-        $sejarah = SejarahPermohonan::firstOrNew(['smoku_id' => $smoku_id->id]);
+        //         $permohonan->save();
+        //     }
+        // }
 
-        $sejarah->permohonan_id = $permohonan_id->id;
-        $sejarah->status = '1';
 
-        $sejarah->save();
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
+        SejarahPermohonan::updateOrCreate(
+            ['smoku_id' => $smoku_id->id, 'permohonan_id' => $permohonan_id->id], // Condition to find the record
+            [
+                'permohonan_id' => $permohonan_id->id,
+                'status' => '1',
+            ]
+        );
+
+
 
 
         //$dokumen = Dokumen::where('smoku_id', '=', $smoku_id->id)->first();
@@ -189,7 +271,7 @@ class PermohonanController extends Controller
     public function hantarPermohonan(Request $request)
     {   
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        $permohonan = Permohonan::where('smoku_id', '=', $smoku_id->id)->first();
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
         if ($permohonan != null) {
             Permohonan::where('smoku_id' ,$smoku_id->id)
             ->update([
@@ -200,7 +282,7 @@ class PermohonanController extends Controller
             
         }
 
-        $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
         $mohon = SejarahPermohonan::create([
             'permohonan_id' => $permohonan_id->id,
             'smoku_id' => $smoku_id->id,
@@ -210,7 +292,7 @@ class PermohonanController extends Controller
         $mohon->save();
 
 
-        $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
 
         // Generate a running number (you can use your logic here)
         $runningNumber = rand(1000, 9999);

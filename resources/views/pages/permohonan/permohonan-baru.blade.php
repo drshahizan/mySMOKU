@@ -762,7 +762,6 @@
 							<!--end::Notice-->
 						</div>
 						<!--end::Heading-->
-						@foreach ($akademikmqa as $akademik)
 						<!--begin::Input group-->
 						<div class="d-flex flex-column mb-7 fv-row">
 							<!--begin::Label-->
@@ -771,8 +770,15 @@
 							</label>
 							<!--end::Label-->
 							<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-								<option value="{{ $akademik->id_institusi}}">{{ $akademik->nama_institusi}}</option>
-							</select>
+								@if($akademikmqa && $akademikmqa->id_institusi)
+								   <option value="{{ $akademikmqa->id_institusi }}">{{ $akademikmqa->nama_institusi }}</option>
+								@else
+								   @foreach ($infoipt as $infoipt)
+									  <option></option>
+									  <option value="{{ $infoipt->id_institusi }}">{{ $infoipt->nama_institusi }}</option>
+								   @endforeach
+								@endif
+							 </select>							 
 						</div>
 						<div class="d-flex flex-column mb-7 fv-row">
 							<!--begin::Label-->
@@ -781,7 +787,11 @@
 							</label>
 							<!--end::Label-->
 							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-								<option value="{{ $akademik->nama_kursus}}">{{ $akademik->nama_kursus}}</option>
+								@if($akademikmqa && $akademikmqa->nama_kursus)
+									<option value="{{ $akademikmqa->nama_kursus}}">{{ $akademikmqa->nama_kursus}}</option>
+								@else
+									<option value=""></option>
+								@endif
 							</select>
 						</div>
 						<!--end::Input group-->
@@ -796,8 +806,13 @@
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
 									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-										<option value="{{ $akademik->kod_peringkat}}">{{ $akademik->peringkat}}</option>
+										@if($akademikmqa && $akademikmqa->kod_peringkat)
+											<option value="{{ $akademikmqa->kod_peringkat }}" selected>{{ $akademikmqa->peringkat }}</option>
+										@else
+											<option value=""></option>
+										@endif
 									</select>
+									
 									<!--end::Input wrapper-->
 								</div>
 								<!--end::Row-->
@@ -820,7 +835,6 @@
 							<!--end::Col-->
 						</div>
 						<!--end::Input group-->
-						@endforeach
 						<div class="row mb-10">
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
@@ -1476,6 +1490,59 @@
 			
 			
 		</script>
+
+<script type='text/javascript'>
+	$(document).ready(function(){
+		var kodperingkat = document.getElementById('peringkat_pengajian').value;
+		//alert (kodperingkat);
+		// institusi Change
+		$('#id_institusi').change(function(){
+
+			// institusi id
+			var idipt = $(id_institusi).val();
+			
+
+			// Empty the dropdown
+			//$('#peringkat_pengajian').find('option').not(':first').remove();
+			$('#nama_kursus').find('option').not(':first').remove();
+
+			// AJAX request 
+		$.ajax({
+			url: 'kursus/'+kodperingkat+'/'+idipt,
+			type: 'get',
+			dataType: 'json',
+		
+			success: function(response){
+
+				var len = 0;
+				if(response['data'] != null){
+					len = response['data'].length;
+				}
+
+				if(len > 0){
+					// Read data and create <option >
+					for(var i=0; i<len; i++){
+
+						var id_institusi = response['data'][i].id_institusi;
+						var kod_peringkat = response['data'][i].kod_peringkat;
+						var nama_kursus = response['data'][i].nama_kursus;
+
+						var option = "<option value='"+nama_kursus+"'>"+nama_kursus+"</option>";
+
+						$("#nama_kursus").append(option); 
+						
+					}
+				}
+
+			}
+		});
+
+		});
+
+
+	});
+
+	</script>
 
 
 		<script>

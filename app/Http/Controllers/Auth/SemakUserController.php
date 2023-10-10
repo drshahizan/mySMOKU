@@ -88,6 +88,7 @@ class SemakUserController extends Controller
                     'id_institusi' => $request->id_institusi,
                     'peringkat_pengajian' => $request->peringkat_pengajian,
                     'nama_kursus' => $request->nama_kursus,
+                    'status' => 1,
                     
                 ]);
                 
