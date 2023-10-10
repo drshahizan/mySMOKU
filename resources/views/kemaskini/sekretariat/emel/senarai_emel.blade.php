@@ -61,7 +61,7 @@
                                         <div class="col-4">
                                             <a href="{{url('kemaskini/sekretariat/emel/BKOKU/permohonan/kemaskini-dikembalikan')}}">
                                                 <!--begin::Items-->
-                                                <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-orange">
+                                                <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-dikembalikan">
                                                     <!--begin::Symbol-->
                                                     <div class="symbol symbol-30px me-0 mb-5 justify-content-center align-items-center">
                                                         {{-- <p class="symbol-label"> --}}
@@ -197,7 +197,7 @@
                                         <div class="col-4">
                                             <a href="{{url('kemaskini/sekretariat/emel/PPK/permohonan/kemaskini-dikembalikan')}}">
                                                 <!--begin::Items-->
-                                                <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-orange">
+                                                <div class="px-8 pt-8 card-rounded h-110px w-70 card theme-dark-bg-body bg-dikembalikan">
                                                     <!--begin::Symbol-->
                                                     <div class="symbol symbol-30px me-0 mb-5 justify-content-center align-items-center">
                                                         {{-- <p class="symbol-label"> --}}
