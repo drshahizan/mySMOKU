@@ -1,15 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Mail\TuntutanHantar;
 use App\Models\Tuntutan;
 use App\Models\TuntutanItem;
 use App\Models\Permohonan;
 use App\Models\Smoku;
 use App\Models\SejarahTuntutan;
 use App\Models\Akademik;
-
+use App\Models\EmelKemaskini;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class TuntutanController extends Controller
 {
@@ -186,6 +190,16 @@ class TuntutanController extends Controller
     
         ]);
         $user->save();
+
+        //emel kepada sekretariat
+        $user_sekretariat = User::where('tahap',3)->first();
+        $cc = $user_sekretariat->email;
+
+        $catatan = "testing";
+        $emel = EmelKemaskini::where('emel_id',7)->first();
+        //dd($cc);
+        //dd($emel);
+        Mail::to($smoku_id->email)->cc($cc)->send(new TuntutanHantar($catatan,$emel));
         
         return redirect()->route('dashboard')->with('message', 'Tuntutan anda telah dihantar.');
 

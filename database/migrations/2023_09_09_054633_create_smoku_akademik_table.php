@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('smoku_id');
             $table->string('no_pendaftaran_pelajar')->nullable();
             $table->string('peringkat_pengajian');
-            $table->string('nama_kursus');
-            $table->integer('id_institusi');
+            $table->string('nama_kursus')->nullable();
+            $table->integer('id_institusi')->nullable();
             $table->string('sesi')->nullable();
             $table->date('tarikh_mula')->nullable();
             $table->date('tarikh_tamat')->nullable();

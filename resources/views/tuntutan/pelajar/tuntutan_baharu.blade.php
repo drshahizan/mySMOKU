@@ -123,7 +123,7 @@
 								</div>
 								<br>
 								<div class="d-flex flex-center mt-15">
-									<button type="submit" class="btn btn-primary" @if ($tuntutan->status >= 2) disabled @endif>
+									<button type="submit" class="btn btn-primary" @if ($tuntutan && $tuntutan->status >= 2) disabled @endif>
 										Simpan
 									</button>&nbsp;&nbsp;&nbsp;
 								</div>
@@ -223,7 +223,7 @@
 							<br>
 							<!--end::Actions-->
 							<div class="d-flex justify-content-end">
-								<button type="submit" class="btn btn-primary" @if ($tuntutan->status >= 2) disabled @endif>
+								<button type="submit" class="btn btn-primary" @if ($tuntutan && $tuntutan->status >= 2) disabled @endif>
 									Hantar
 								</button>
 							</div>
