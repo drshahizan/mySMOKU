@@ -10,16 +10,6 @@ class Akademik extends Model
     use HasFactory;
     protected $table = 'smoku_akademik';
 
-    public function infoInstitusi()
-    {
-        return $this->belongsTo('App\Models\InfoIpt', 'id_institusi', 'id_institusi');
-    }
-
-    public function peringkatPengajian()
-    {
-        return $this->belongsTo('App\Models\PeringkatPengajian', 'peringkat_pengajian', 'kod_peringkat');
-    }
-
     protected $fillable = [
         'smoku_id',
         'id_institusi',

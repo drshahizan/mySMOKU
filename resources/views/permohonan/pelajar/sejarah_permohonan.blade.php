@@ -67,6 +67,7 @@
                                             <tr>
                                                 <th style="width: 17%"><b>ID Permohonan</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Peringkat Pengajian</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
                                             </tr>
                                             </thead>
@@ -75,17 +76,32 @@
                                                     $i=0;
                                                 @endphp
                                                 @foreach ($permohonan as $item)
+                                                {{-- @foreach($akademik as $akademikItem) --}}
                                                     @php
                                                         $i++;
-                                                        $permohonan = DB::table('permohonan')->where('id', $item['id'])->first();
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+                                                        //$peringkat_pengajian = DB::table('smoku_akademik')->where('smoku_id', $item->smoku_id)->pluck('peringkat_pengajian')->toArray();
+                                                        //dd($akademik);
+                                                        
+                                                        
                                                     @endphp
-                                                    @if ($permohonan->program=="BKOKU")
+                                                    {{-- @if ($permohonan->program=="BKOKU") --}}
                                                     <tr>
                                                         <td>
                                                             {{$item['no_rujukan_permohonan']}}
                                                         </td>
                                                         <td class="text-center">{{$item['updated_at']->format('d/m/Y')}}</td>
+                                                        
+                                                        <td class="text-center">
+                                                            
+                                                                {{-- @php
+                                                                    $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademikItem['peringkat_pengajian'])->value('peringkat');
+                                                                @endphp
+                                                                {{ ucwords(strtolower($peringkat)) }}<br> --}}
+                                                            
+                                                        </td>
+                                                        
+
                                                         @if ($item['status']=='1')
                                                             <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='2')
@@ -97,7 +113,11 @@
                                                         @elseif ($item['status']=='5')
                                                             <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='6')
-                                                            <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center">
+                                                                <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
+                                                                    <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak
+                                                                </a>
+                                                            </td>
                                                         @elseif ($item['status']=='7')
                                                             <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
@@ -106,7 +126,8 @@
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
                                                     </tr>
-                                                @endif
+                                                {{-- @endif --}}
+                                                {{-- @endforeach --}}
                                             @endforeach
                                             </tbody>
                                         </table>
@@ -123,6 +144,13 @@
         $('#sortTable1').DataTable();
         $('#sortTable2').DataTable();
     </script>
+
+<style>
+    .custom-width-btn {
+        width: 130px; 
+        height: 30px;
+    }
+</style>
 
     </body>
 </x-default-layout>

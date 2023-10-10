@@ -184,6 +184,8 @@ class PermohonanController extends Controller
         Akademik::updateOrCreate(
             ['smoku_id' => $smoku_id->id, 'status' => 1], // Condition to find the record
             [
+                'id_institusi' => $request->id_institusi,
+                'nama_kursus' => $request->nama_kursus,
                 'mod' => $request->mod,
                 'tempoh_pengajian' => $request->tempoh_pengajian,
                 'bil_bulan_per_sem' => $request->bil_bulan_per_sem,
@@ -273,7 +275,7 @@ class PermohonanController extends Controller
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
         if ($permohonan != null) {
-            Permohonan::where('smoku_id' ,$smoku_id->id)
+            Permohonan::where('smoku_id' ,$smoku_id->id)->where('permohonan_id' ,$permohonan->id)
             ->update([
                 'perakuan' => $request->perakuan,
                 'status' => '2',
@@ -462,12 +464,16 @@ class PermohonanController extends Controller
     public function sejarahPermohonan()
     {
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
-        $permohonan = Permohonan::all()->where('smoku_id', $smoku_id->id);
-            //->first();
+        $permohonan = Permohonan::orderBy('permohonan.id', 'asc')
+            //->join('smoku_akademik','permohonan.smoku_id','smoku_akademik.smoku_id')
+            ->where('permohonan.smoku_id', $smoku_id->id)
+            ->get(['permohonan.*']);   
+
+        $akademik = Akademik::where('smoku_id', $smoku_id->id)->get(); 
         //dd($permohonan);    
 
         if ($permohonan) {
-            return view('permohonan.pelajar.sejarah_permohonan', compact('permohonan'));
+            return view('permohonan.pelajar.sejarah_permohonan', compact('permohonan','akademik'));
         } else {
             return redirect()->route('dashboard')->with('permohonan', 'Tiada permohonan lama.');
         }
