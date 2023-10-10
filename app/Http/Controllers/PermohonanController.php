@@ -464,16 +464,19 @@ class PermohonanController extends Controller
     public function sejarahPermohonan()
     {
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
-        $permohonan = Permohonan::orderBy('permohonan.id', 'asc')
-            //->join('smoku_akademik','permohonan.smoku_id','smoku_akademik.smoku_id')
-            ->where('permohonan.smoku_id', $smoku_id->id)
-            ->get(['permohonan.*']);   
+        // $permohonan = Smoku::join('permohonan','permohonan.smoku_id','=','smoku.id')
+        // ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
+        // ->get(['permohonan.*'])
+        // ->where('smoku_id', $smoku_id->id);
+        // dd($permohonan);
+        $permohonan = Permohonan::orderBy('id', 'asc')
+            ->where('smoku_id', $smoku_id->id)
+            ->get();
 
-        $akademik = Akademik::where('smoku_id', $smoku_id->id)->get(); 
-        //dd($permohonan);    
+        //$akademik = Akademik::where('smoku_id', $smoku_id->id)->get();
 
         if ($permohonan) {
-            return view('permohonan.pelajar.sejarah_permohonan', compact('permohonan','akademik'));
+            return view('permohonan.pelajar.sejarah_permohonan', compact('permohonan'));
         } else {
             return redirect()->route('dashboard')->with('permohonan', 'Tiada permohonan lama.');
         }

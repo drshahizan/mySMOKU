@@ -98,7 +98,7 @@
                                                                     $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademikItem['peringkat_pengajian'])->value('peringkat');
                                                                 @endphp
                                                                 {{ ucwords(strtolower($peringkat)) }}<br> --}}
-                                                            
+                                                               
                                                         </td>
                                                         
 
