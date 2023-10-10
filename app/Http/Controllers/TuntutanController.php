@@ -26,6 +26,8 @@ class TuntutanController extends Controller
                 ->where('permohonan_id', $permohonan->id)
                 ->first(['tuntutan.*']);
 
+            //dd($tuntutan);    
+
                 if ($tuntutan && $tuntutan->status == 1) {
                     $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
                 } else {
@@ -119,7 +121,7 @@ class TuntutanController extends Controller
             $data->no_resit=$request->no_resit;
             $data->resit=$uniqueFilename;
             $data->nota_resit=$request->nota_resit;
-            $data->amaun=$request->amaun_yuran;
+            $data->amaun=number_format($request->amaun_yuran, 2, '.', '');
             $data->save();
 
             $counter++;

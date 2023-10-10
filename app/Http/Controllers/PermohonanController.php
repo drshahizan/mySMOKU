@@ -161,7 +161,7 @@ class PermohonanController extends Controller
         $permohonan->no_rujukan_permohonan = 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp;
         $permohonan->program = 'BKOKU';
         $permohonan->yuran = $request->yuran;
-        $permohonan->amaun_yuran = $request->amaun_yuran;
+        $permohonan->amaun_yuran = number_format($request->amaun_yuran, 2, '.', '');
         $permohonan->wang_saku = $request->wang_saku;
         $permohonan->amaun_wang_saku = $request->amaun_wang_saku;
         $permohonan->perakuan = $request->perakuan;
@@ -357,7 +357,7 @@ class PermohonanController extends Controller
             // 'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
             'program' => 'BKOKU',
             'yuran' => $request->yuran,
-            'amaun_yuran' => $request->amaun_yuran,
+            'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
             'wang_saku' => $request->wang_saku,
             'amaun_wang_saku' => $request->amaun_wang_saku,
             'perakuan' => $request->perakuan,

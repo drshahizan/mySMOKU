@@ -799,10 +799,17 @@
 								</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-										<option></option>
-										<option value="2023/2024">2023/2024</option>
-										<option value="2024/2025">2024/2025</option>
+									<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true">
+										<option value="">Pilih</option>
+											@php
+												$currentYear = date('Y');
+											@endphp
+											@for($year = $currentYear; $year <= ($currentYear + 1); $year++)
+												@php
+													$sesi = $year . '/' . ($year + 1);
+												@endphp
+												<option value="{{ $sesi }}">{{ $sesi }}</option>
+											@endfor
 									</select>
 									<!--end::Input wrapper-->
 							</div>
