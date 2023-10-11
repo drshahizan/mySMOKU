@@ -62,8 +62,10 @@ class PermohonanController extends Controller
         $infoipt = InfoIpt::all()->where('jenis_institusi','IPTS')->sortBy('nama_institusi');
         $peringkat = PeringkatPengajian::orderby("id","asc")->select('kod_peringkat','peringkat')->get();
         $permohonan = Permohonan::where('smoku_id', $smoku_id->id)->first();
-
-        $butiranPelajar = ButiranPelajar::join('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
+        $tamat_pengajian = TamatPengajian::where('permohonan_id', $permohonan->id)->first();
+        //dd($tamat_pengajian);
+        $butiranPelajar = ButiranPelajar::orderBy('permohonan.id', 'desc')
+        ->join('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
         ->join('smoku_waris','smoku_waris.smoku_id','=','smoku_butiran_pelajar.smoku_id')
         ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku_butiran_pelajar.smoku_id')
         ->join('permohonan','permohonan.smoku_id','=','smoku_butiran_pelajar.smoku_id')
@@ -73,24 +75,45 @@ class PermohonanController extends Controller
         ->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
         ->get(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*','smoku_akademik.status as akademik_status'])
         ->where('smoku_id', $smoku_id->id)
-        ->where('akademik_status', 1)->first();
+        ->where('akademik_status', 1);
         //dd($butiranPelajar);
-        
-
-        
 
         if ($permohonan && $permohonan->status >= '1') {
-            if ($butiranPelajar->akademik_status == 1) {
-            
+            $permohonan_baru = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku_id->id)->first();
+            //dd($permohonan_baru);
+            if ($tamat_pengajian && $permohonan_baru->status < '1') {
             
                 return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri'));
-    
+
+            }else if ($tamat_pengajian && $permohonan_baru->status >= '1'){
+
+                $butiranPelajar = ButiranPelajar::join('smoku', 'smoku.id', '=', 'smoku_butiran_pelajar.smoku_id')
+                    ->join('smoku_waris', 'smoku_waris.smoku_id', '=', 'smoku.id')
+                    ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku_butiran_pelajar.smoku_id')
+                    ->join('permohonan', 'permohonan.smoku_id', '=', 'smoku_butiran_pelajar.smoku_id')
+                    ->join('bk_jantina', 'bk_jantina.kod_jantina', '=', 'smoku.jantina')
+                    ->join('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
+                    //->join('bk_hubungan', 'bk_hubungan.kod_hubungan', '=', 'smoku.hubungan_waris')
+                    ->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')
+                    ->where('smoku.id', $smoku_id->id)
+                    ->where('smoku_akademik.status', 1)
+                    ->where('permohonan.status','!=', 6)
+                    ->select(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','bk_jantina.*', 'bk_keturunan.*','permohonan.*'])
+                    ->get();
+
+                //dd($butiranPelajar);
+
+                $dokumen = Dokumen::where('permohonan_id', $permohonan_baru->id)->get();
+                return view('pages.permohonan.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan'));
+
             }
+
+
             $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
             return view('pages.permohonan.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan'));
             
         }else {
-            //$userHasSubmittedForm = false;
+
             return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri'));
 
         }
@@ -416,7 +439,7 @@ class PermohonanController extends Controller
 
         ]);
 
-        Akademik::where('smoku_id' ,$smoku_id->id)
+        Akademik::where('smoku_id' ,$smoku_id->id)->where('status' ,1)
         ->update([
 
             'mod' => $request->mod,
@@ -435,18 +458,15 @@ class PermohonanController extends Controller
 
         ]);
 
-        Permohonan::where('smoku_id' ,$smoku_id->id)
+        Permohonan::where('smoku_id' ,$smoku_id->id)->where('status'.'!=' ,6)
         ->update([
 
-            // 'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
-            'program' => 'BKOKU',
             'yuran' => $request->yuran,
             'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
             'wang_saku' => $request->wang_saku,
             'amaun_wang_saku' => $request->amaun_wang_saku,
             'perakuan' => $request->perakuan,
-            // 'status' => '1',
-
+           
         ]);
 
         /*$permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();

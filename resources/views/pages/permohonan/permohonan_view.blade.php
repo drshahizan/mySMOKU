@@ -813,7 +813,7 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" required {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+									<select id="tempoh_pengajian" name="tempoh_pengajian" onchange=dateCheck() class="form-select form-select-solid" data-control="select2" data-hide-search="true" required {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 										<option value="">Pilih</option>
 										@if(empty($butiranPelajar->tempoh_pengajian))
 											@for($i = 1; $i <= 4; $i += 0.5)
@@ -909,7 +909,7 @@
 								</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" value="{{$butiranPelajar->tarikh_mula}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" onchange=dateCheck() value="{{$butiranPelajar->tarikh_mula}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
@@ -921,7 +921,7 @@
 								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" onchange=dateCheck() value="{{$butiranPelajar->tarikh_tamat}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" value="{{$butiranPelajar->tarikh_tamat}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 								<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
@@ -1004,7 +1004,7 @@
 						<!--end::Input group-->
 						<!--begin::Input group-->
 						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
+							<div class="col-md-6 fv-row" id="div_nama_penaja">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
 									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a>
@@ -1406,8 +1406,12 @@
 				if ( this.value == '5'){
 					$("#div_biaya_lain").show();
 				}
+				else if (this.value == '4'){
+					$("#div_nama_penaja").hide();
+				}
 				else {
 					$("#div_biaya_lain").hide();
+					$("#div_nama_penaja").show();
 				}
 				});
 			});
@@ -1428,11 +1432,18 @@
 			function dateCheck(){
 				let startDate = new Date($("#tarikh_mula").val());
 				let endDate = new Date($("#tarikh_tamat").val());
+				var studyPeriod = parseFloat(document.getElementById("tempoh_pengajian").value);
 
-				if(startDate > endDate) {
-					alert("Tarikh Tamat Pengajian perlu lebih besar daripada Tarikh Mula Pengajian");
-					$("#tarikh_tamat").val('');
+				if (!isNaN(studyPeriod)) {
+				//alert(studyPeriod);
+				 	endDate.setFullYear(startDate.getFullYear() + Math.floor(studyPeriod));
+
+				 	var remainingMonths = (studyPeriod - Math.floor(studyPeriod)) * 12;
+				 	endDate.setMonth(startDate.getMonth() + Math.floor(remainingMonths));
+
+				 	document.getElementById("tarikh_tamat").valueAsDate = endDate;
 				}
+
 			}
 
 
