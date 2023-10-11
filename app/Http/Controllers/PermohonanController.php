@@ -79,13 +79,17 @@ class PermohonanController extends Controller
         //dd($butiranPelajar);
 
         if ($permohonan && $permohonan->status >= '1') {
-            $permohonan_baru = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku_id->id)->first();
+            $permohonan_baru = Permohonan::orderBy('id', 'desc')
+            ->where('smoku_id', $smoku_id->id)
+            ->where('status','!=', 6)->first();
             //dd($permohonan_baru);
-            if ($tamat_pengajian && $permohonan_baru->status < '1') {
+            if ($tamat_pengajian && !$permohonan_baru) {
+                //dd('sini');
             
                 return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri'));
 
             }else if ($tamat_pengajian && $permohonan_baru->status >= '1'){
+                //dd('situ');
 
                 $butiranPelajar = ButiranPelajar::join('smoku', 'smoku.id', '=', 'smoku_butiran_pelajar.smoku_id')
                     ->join('smoku_waris', 'smoku_waris.smoku_id', '=', 'smoku.id')
