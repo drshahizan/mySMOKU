@@ -133,11 +133,56 @@ class SekretariatController extends Controller
         return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
     }
 
+    // public function peringkatPengajian()
+    // {
+    //     $pengajian = TamatPengajian::all();
+    //     return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('pengajian'));
+    // }
+
+    // public function peringkatPengajian()
+    // {
+    //     $recordsBKOKU = TamatPengajian::join('smoku_akademik','smoku_akademik.smoku_id','=','tamat_pengajian.smoku_id')
+    //     ->join('permohonan', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
+    //     ->join('smoku', 'smoku_akademik.smoku_id', '=', 'smoku.id') 
+    //     ->where('permohonan.program', 'BKOKU') 
+    //     ->where('smoku_akademik.status', 1)
+    //     ->select('smoku_akademik.*', 'smoku.nama')
+    //     ->get();
+
+    //     $recordsPPK = TamatPengajian::join('smoku_akademik','smoku_akademik.smoku_id','=','tamat_pengajian.smoku_id')
+    //         ->join('permohonan', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
+    //         ->join('smoku', 'smoku_akademik.smoku_id', '=', 'smoku.id') 
+    //         ->where('permohonan.program', 'PPK') 
+    //         ->where('smoku_akademik.status', 1)
+    //         ->select('smoku_akademik.*', 'smoku.nama')
+    //         ->get();
+
+    //     return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsBKOKU','recordsPPK'));
+    // }
+
     public function peringkatPengajian()
     {
-        $pengajian = TamatPengajian::all();
-        return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('pengajian'));
+        $recordsBKOKU = TamatPengajian::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
+            ->join('permohonan', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
+            ->join('smoku', 'smoku_akademik.smoku_id', '=', 'smoku.id') 
+            ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat') 
+            ->where('permohonan.program', 'BKOKU') 
+            ->where('smoku_akademik.status', 1)
+            ->select('smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
+            ->get();
+
+        $recordsPPK = TamatPengajian::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
+            ->join('permohonan', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
+            ->join('smoku', 'smoku_akademik.smoku_id', '=', 'smoku.id') 
+            ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat') 
+            ->where('permohonan.program', 'PPK') 
+            ->where('smoku_akademik.status', 1)
+            ->select('smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
+            ->get();
+
+        return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsBKOKU','recordsPPK'));
     }
+
 
     public function kemaskiniPeringkatPengajian(Request $request, $id)
     {
@@ -174,7 +219,6 @@ class SekretariatController extends Controller
                 'penaja_lain' => NULL,
                 'status' => 1, // Set the status as 1 for the new record
             ]);
-
             $newRecord->save();
         }
 

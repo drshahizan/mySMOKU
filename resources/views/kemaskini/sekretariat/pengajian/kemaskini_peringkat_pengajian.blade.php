@@ -87,10 +87,9 @@
                                                         $i=0;
                                                     @endphp
 
-                                                    @foreach ($pengajian as $item)
+                                                    @foreach ($recordsBKOKU as $items)
                                                         @php
-                                                            $nama = DB::table('smoku')->where('id',$item['smoku_id'])->value('nama');
-                                                            $text = ucwords(strtolower($nama));
+                                                            $text = ucwords(strtolower($items->nama));
                                                             $conjunctions = ['bin', 'binti'];
                                                             $words = explode(' ', $text);
                                                             $result = [];
@@ -102,42 +101,37 @@
                                                                 }
                                                             }
                                                             $pemohon = implode(' ', $result);
-                                                            $program = DB::table('permohonan')->where('smoku_id',$item['smoku_id'])->value('program');
-                                                            $status = DB::table('smoku_akademik')->where('smoku_id',$item['smoku_id'])->value('status');
-                                                            $peringkat = DB::table('smoku_akademik')->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')->where('smoku_akademik.smoku_id',$item['smoku_id'])->value('bk_peringkat_pengajian.peringkat')
                                                         @endphp
 
-                                                        @if ($program == "BKOKU")
-                                                            <tr>
-                                                                <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
-                                                                <td>{{$pemohon}}</td>
-                                                                <td>{{ucwords(strtolower($peringkat))}}</td>
-                                                                <td class="text-center">
-                                                                    <a href="{{ asset('assets/dokumen/sijil_tamat/' . $item->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
-                                                                    Lihat
-                                                                    <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $item->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
-                                                                    Lihat
-                                                                    <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <form action="{{ route('kemaskini.peringkat.pengajian', $item->smoku_id) }}" method="post">
-                                                                        @csrf
-                                                                        <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
-                                                                            <option value="">Kemaskini</option>
-                                                                            <option value="1">Sijil</option>
-                                                                            <option value="2">Diploma</option>
-                                                                            <option value="3">Sarjana Muda</option>
-                                                                            <option value="4">Diploma Lepasan Ijazah</option>
-                                                                            <option value="5">Ijazah Sarjana</option>
-                                                                            <option value="6">Doktor Falsafah</option>
-                                                                        </select>
-                                                                    </form>
-                                                                </td>
-                                                            </tr>
-                                                        @endif
+                                                        <tr>
+                                                            <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
+                                                            <td>{{$pemohon}}</td>
+                                                            <td>{{ucwords(strtolower($items->peringkat))}}</td>
+                                                            <td class="text-center">
+                                                                <a href="{{ asset('assets/dokumen/sijil_tamat/' . $items->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
+                                                                Lihat
+                                                                <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $items->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
+                                                                Lihat
+                                                                <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <form action="{{ route('kemaskini.peringkat.pengajian', $items->smoku_id) }}" method="post">
+                                                                    @csrf
+                                                                    <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
+                                                                        <option value="">Kemaskini</option>
+                                                                        <option value="1">Sijil</option>
+                                                                        <option value="2">Diploma</option>
+                                                                        <option value="3">Sarjana Muda</option>
+                                                                        <option value="4">Diploma Lepasan Ijazah</option>
+                                                                        <option value="5">Ijazah Sarjana</option>
+                                                                        <option value="6">Doktor Falsafah</option>
+                                                                    </select>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
                                                     @endforeach
                                                 </tbody>
                                             </table>
@@ -166,10 +160,9 @@
                                                         $i=0;
                                                     @endphp
 
-                                                    @foreach ($pengajian as $item)
+                                                    @foreach ($recordsPPK as $item)
                                                         @php
-                                                            $nama = DB::table('smoku')->where('id',$item['smoku_id'])->value('nama');
-                                                            $text = ucwords(strtolower($nama));
+                                                            $text = ucwords(strtolower($item->nama));
                                                             $conjunctions = ['bin', 'binti'];
                                                             $words = explode(' ', $text);
                                                             $result = [];
@@ -181,42 +174,37 @@
                                                                 }
                                                             }
                                                             $pemohon = implode(' ', $result);
-                                                            $program = DB::table('permohonan')->where('smoku_id',$item['smoku_id'])->value('program');
-                                                            $status = DB::table('smoku_akademik')->where('smoku_id',$item['smoku_id'])->value('status');
-                                                            $peringkat = DB::table('smoku_akademik')->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')->where('smoku_akademik.smoku_id',$item['smoku_id'])->value('bk_peringkat_pengajian.peringkat')
                                                         @endphp
 
-                                                        @if($program == "PPK")
-                                                            <tr>
-                                                                <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
-                                                                <td>{{$pemohon}}</td>
-                                                                <td>{{ucwords(strtolower($peringkat))}}</td>
-                                                                <td class="text-center">
-                                                                    <a href="{{ asset('assets/dokumen/sijil_tamat/' . $item->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
-                                                                        Lihat
-                                                                    <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $item->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
-                                                                        Lihat
-                                                                    <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <form action="{{ route('kemaskini.peringkat.pengajian', $item->smoku_id) }}" method="post">
-                                                                        @csrf
-                                                                        <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
-                                                                            <option value="">Kemaskini</option>
-                                                                            <option value="1">Sijil</option>
-                                                                            <option value="2">Diploma</option>
-                                                                            <option value="3">Sarjana Muda</option>
-                                                                            <option value="4">Diploma Lepasan Ijazah</option>
-                                                                            <option value="5">Ijazah Sarjana</option>
-                                                                            <option value="6">Doktor Falsafah</option>
-                                                                        </select>
-                                                                    </form>
-                                                                </td>
-                                                            </tr>
-                                                        @endif
+                                                        <tr>
+                                                            <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
+                                                            <td>{{$pemohon}}</td>
+                                                            <td>{{ucwords(strtolower($item->peringkat))}}</td>
+                                                            <td class="text-center">
+                                                                <a href="{{ asset('assets/dokumen/sijil_tamat/' . $item->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
+                                                                    Lihat
+                                                                <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $item->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
+                                                                    Lihat
+                                                                <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <form action="{{ route('kemaskini.peringkat.pengajian', $item->smoku_id) }}" method="post">
+                                                                    @csrf
+                                                                    <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
+                                                                        <option value="">Kemaskini</option>
+                                                                        <option value="1">Sijil</option>
+                                                                        <option value="2">Diploma</option>
+                                                                        <option value="3">Sarjana Muda</option>
+                                                                        <option value="4">Diploma Lepasan Ijazah</option>
+                                                                        <option value="5">Ijazah Sarjana</option>
+                                                                        <option value="6">Doktor Falsafah</option>
+                                                                    </select>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
                                                     @endforeach
                                                 </tbody>
                                             </table>

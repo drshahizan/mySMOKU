@@ -28,8 +28,6 @@ class Akademik extends Model
         'nama_penaja',
         'penaja_lain',
         'status',
-        
-        
     ];
 
 }
