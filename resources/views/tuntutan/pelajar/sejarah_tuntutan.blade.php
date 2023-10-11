@@ -67,25 +67,32 @@
                                             <tr>
                                                 <th style="width: 17%"><b>ID Tuntutan</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Peringkat Pengajian</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                @php
-                                                    $i=0;
-                                                @endphp
+                                                
                                                 @foreach ($tuntutan as $item)
                                                     @php
-                                                        $i++;
-                                                        $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+
+                                                        $no_rujukan_tuntutan = $item['no_rujukan_tuntutan'];
+
+                                                        // Extract peringkat pengajian value using regular expression
+                                                        preg_match('/\/(\d+)\//', $no_rujukan_tuntutan, $matches);
+
+                                                        // $matches[1] will contain the extracted peringkat pengajian value
+                                                        $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null;
+                                                        $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
+                                                    
                                                     @endphp
-                                                    @if ($permohonan->program=="BKOKU")
+                                                    
                                                     <tr>
-                                                        <td>
-                                                            {{$item['no_rujukan_tuntutan']}}
-                                                        </td>
-                                                        <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        <td>{{$item['no_rujukan_tuntutan']}}</td>
+                                                        <td class="text-center">{{$item['updated_at']->format('d/m/Y')}}</td>
+                                                        <td class="text-center">{{ $peringkat }}</td>
+                                                        
                                                         @if ($item['status']=='1')
                                                             <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='2')
@@ -106,8 +113,8 @@
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
                                                     </tr>
-                                                @endif
-                                            @endforeach
+                                                
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

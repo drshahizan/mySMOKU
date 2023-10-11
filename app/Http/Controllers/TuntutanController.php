@@ -20,12 +20,12 @@ class TuntutanController extends Controller
     public function tuntutanBaharu()
     {   
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
-        $permohonan = Permohonan::where('smoku_id', $smoku_id->id)
-            ->where('status', 6)
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku_id->id)
+            //->where('status', 6)
             ->first();
-        //dd($permohonan);   
+        //dd($permohonan->status);   
 
-        if ($permohonan) {
+        if ($permohonan && $permohonan->status ==6) {
             $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
                 ->where('permohonan_id', $permohonan->id)
                 ->first(['tuntutan.*']);
@@ -43,6 +43,8 @@ class TuntutanController extends Controller
             
             return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item', 'akademik'));
         
+        } else if ($permohonan && $permohonan->status !=6) {
+            return redirect()->route('dashboard')->with('permohonan', 'Permohonan anda masih dalam semakan.');
         } else {
 
             return redirect()->route('dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
