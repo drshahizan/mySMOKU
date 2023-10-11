@@ -262,7 +262,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <form method="POST" action="{{ url('permohonan/sekretariat/sejarah/hantar-saringan/'.$sejarah_p->id) }}" id="saring">
+                            <form method="POST" action="{{ url('permohonan/sekretariat/sejarah/hantar-saringan/'.$sejarah_t->id) }}" id="saring">
                                 {{csrf_field()}}
                                 @if($tuntutan->program == "BKOKU" && $tuntutan->yuran == "1" && $tuntutan->wang_saku == "1")
                                     <!--begin: Invoice body-->

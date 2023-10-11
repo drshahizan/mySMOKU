@@ -716,34 +716,34 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.sejarah.papar_saringan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
     }
 
-ublic function kemaskiniSaringan($id){
-    $sejarah_t = SejarahTuntutan::where('id', $id)->first();
-    $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
-    $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
-    $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
-    $smoku_id = $tuntutan->smoku_id;
-    $smoku = Smoku::where('id', $smoku_id)->first();
-    $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-    return view('tuntutan.sekretariat.sejarah.kemaskini_saringan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
-}
+    public function kemaskiniSaringan($id){
+        $sejarah_t = SejarahTuntutan::where('id', $id)->first();
+        $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
+        $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
+        $smoku_id = $tuntutan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('tuntutan.sekretariat.sejarah.kemaskini_saringan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
+    }
 
-ublic function hantarSaringan(Request $request, $id){
-    $t_id = SejarahTuntutan::where('id', $id)->value('tuntutan_id');
-    Tuntutan::where('id', $id)
-        ->update([
-            'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
-            'yuran_disokong'        =>  $request->get('yuran_disokong'),
-            'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
-            'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
-        ]);
+    public function hantarSaringan(Request $request, $id){
+        $t_id = SejarahTuntutan::where('id', $id)->value('tuntutan_id');
+        Tuntutan::where('id', $id)
+            ->update([
+                'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
+                'yuran_disokong'        =>  $request->get('yuran_disokong'),
+                'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
+                'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+            ]);
 
-    $sejarah_t = SejarahTuntutan::where('id', $id)->first();
-    $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
-    $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
-    $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
-    $smoku_id = $tuntutan->smoku_id;
-    $smoku = Smoku::where('id', $smoku_id)->first();
-    $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-    return view('tuntutan.sekretariat.sejarah.papar_saringan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
-}
+        $sejarah_t = SejarahTuntutan::where('id', $id)->first();
+        $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
+        $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
+        $smoku_id = $tuntutan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('tuntutan.sekretariat.sejarah.papar_saringan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
+    }
 }
