@@ -358,7 +358,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="alamat_tetap_negeri" name="alamat_tetap_negeri" placeholder="" value="" readonly/>
+									<input type="text" class="form-control form-control-solid" id="alamat_tetap_negeri" name="alamat_tetap_negeri" placeholder="" value="{{$smoku->alamat_tetap_negeri}}" readonly/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -371,7 +371,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="alamat_tetap_bandar" name="alamat_tetap_bandar" placeholder="" value="" readonly/>
+									<input type="text" class="form-control form-control-solid" id="alamat_tetap_bandar" name="alamat_tetap_bandar" placeholder="" value="{{$smoku->alamat_tetap_bandar}}" readonly/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -384,7 +384,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="alamat_tetap_poskod" name="alamat_tetap_poskod" placeholder="" value=""/>
+									<input type="text" class="form-control form-control-solid" id="alamat_tetap_poskod" name="alamat_tetap_poskod" placeholder="" value="{{$smoku->alamat_tetap_poskod}}"/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
