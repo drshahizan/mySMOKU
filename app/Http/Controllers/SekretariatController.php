@@ -141,37 +141,21 @@ class SekretariatController extends Controller
 
     public function kemaskiniPeringkatPengajian(Request $request, $id)
     {
-        // Retrieve the existing Akademik record if it exists
-        $existingRecord = Akademik::where('smoku_id', $id)
-            ->where('peringkat_pengajian', $request->peringkat_pengajian)
-            ->first();
+        // Check if the request with the given have same "smoku_id" and "peringkat_pengajian" exists
+        $existingRecord = Akademik::where('smoku_id', $id)->where('peringkat_pengajian', $request->peringkat_pengajian)->first();
+        // Check if the request have same smok_id only but different "peringkat_pengajian"
+        $existStudent = Akademik::where('smoku_id', $id)->first();
 
         if ($existingRecord) {
-            // Update the existing record
-            $existingRecord->update([
-                'no_pendaftaran_pelajar' => NULL,
-                'peringkat_pengajian' => $request->peringkat_pengajian,
-                'nama_kursus' => NULL,
-                'id_institusi' => NULL,
-                'sesi' => NULL,
-                'tarikh_mula' => NULL,
-                'tarikh_tamat' => NULL,
-                'sem_semasa' => NULL,
-                'tempoh_pengajian' => NULL,
-                'bil_bulan_per_sem' => NULL,
-                'mod' => NULL,
-                'cgpa' => NULL,
-                'sumber_biaya' => NULL,
-                'sumber_lain' => NULL,
-                'nama_penaja' => NULL,
-                'penaja_lain' => NULL,
-                'status' => '1',
-            ]);
+            $existingRecord->update(['peringkat_pengajian' => $request->peringkat_pengajian,]);
         }
-        else {
-            // Create a new record in smoku_akademik
+        else{
+            // Update the existing record's "status" to 0
+            $existStudent->update(['status' => 0]);
+
+            // Create a new record with the specified "status" as 1
             $newRecord = new Akademik([
-                'smoku_id' => $id, // Use the actual smoku_id, not the model instance
+                'smoku_id' => $id,
                 'no_pendaftaran_pelajar' => NULL,
                 'peringkat_pengajian' => $request->peringkat_pengajian,
                 'nama_kursus' => NULL,
@@ -188,7 +172,7 @@ class SekretariatController extends Controller
                 'sumber_lain' => NULL,
                 'nama_penaja' => NULL,
                 'penaja_lain' => NULL,
-                'status' => '1',
+                'status' => 1, // Set the status as 1 for the new record
             ]);
 
             $newRecord->save();
