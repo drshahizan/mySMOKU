@@ -92,7 +92,7 @@
                                                     <tr>
                                                         <td>{{$item['no_rujukan_permohonan']}}</td>
                                                         <td class="text-center">{{$item['updated_at']->format('d/m/Y')}}</td>
-                                                        <td class="text-center">{{ $peringkat }}</td>
+                                                        <td class="text-center">{{ucwords(strtolower($peringkat))}}</td>
 
                                                         @if ($item['status']=='1')
                                                             <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
