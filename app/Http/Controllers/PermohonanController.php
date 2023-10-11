@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Controllers\Controller;
+use App\Mail\PermohonanHantar;
 use Illuminate\Http\Request;
 use App\Models\ButiranPelajar;
 use App\Models\Waris;
@@ -25,10 +26,11 @@ use App\Models\Peperiksaan;
 use App\Models\Hubungan;
 use App\Models\Negeri;
 use App\Models\Bandar;
+use App\Models\EmelKemaskini;
 use App\Models\TamatPengajian;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Mail;
 
 class PermohonanController extends Controller
 {
@@ -62,8 +64,7 @@ class PermohonanController extends Controller
         $infoipt = InfoIpt::all()->where('jenis_institusi','IPTS')->sortBy('nama_institusi');
         $peringkat = PeringkatPengajian::orderby("id","asc")->select('kod_peringkat','peringkat')->get();
         $permohonan = Permohonan::where('smoku_id', $smoku_id->id)->first();
-        $tamat_pengajian = TamatPengajian::where('permohonan_id', $permohonan->id)->first();
-        //dd($tamat_pengajian);
+        
         $butiranPelajar = ButiranPelajar::orderBy('permohonan.id', 'desc')
         ->join('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
         ->join('smoku_waris','smoku_waris.smoku_id','=','smoku_butiran_pelajar.smoku_id')
@@ -79,6 +80,8 @@ class PermohonanController extends Controller
         //dd($butiranPelajar);
 
         if ($permohonan && $permohonan->status >= '1') {
+            $tamat_pengajian = TamatPengajian::where('permohonan_id', $permohonan->id)->first();
+            //dd($tamat_pengajian);
             $permohonan_baru = Permohonan::orderBy('id', 'desc')
             ->where('smoku_id', $smoku_id->id)
             ->where('status','!=', 6)->first();
@@ -302,7 +305,7 @@ class PermohonanController extends Controller
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
         if ($permohonan != null) {
-            Permohonan::where('smoku_id' ,$smoku_id->id)->where('permohonan_id' ,$permohonan->id)
+            Permohonan::where('smoku_id' ,$smoku_id->id)->where('id' ,$permohonan->id)
             ->update([
                 'perakuan' => $request->perakuan,
                 'status' => '2',
@@ -398,6 +401,16 @@ class PermohonanController extends Controller
                 // Handle cases where $dokumen or $catatan are not valid arrays
             }
 
+        //emel kepada sekretariat
+        $user_sekretariat = User::where('tahap',3)->first();
+        $cc = $user_sekretariat->email;
+
+        $catatan = "testing";
+        $emel = EmelKemaskini::where('emel_id',8)->first();
+        //dd($cc);
+        //dd($emel);
+        Mail::to($smoku_id->email)->cc($cc)->send(new PermohonanHantar($catatan,$emel));
+            
         return redirect()->route('dashboard')->with('message', 'Permohonan anda telah dihantar.');
 
     }

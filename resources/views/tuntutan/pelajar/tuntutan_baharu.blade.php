@@ -170,7 +170,7 @@
 											<td>{{ $tuntutan_item->jenis_yuran}}</td>
 											<td><a href="/assets/dokumen/tuntutan/{{$tuntutan_item->resit}}" target="_blank">{{ $tuntutan_item->no_resit}}</a></td>
 											<td>{{ $tuntutan_item->nota_resit}}</td>
-											<td id="amaun">RM {{number_format($tuntutan_item->amaun, 2, '.', '')}}</td>
+											<td id="amaun" class="text-right">RM {{number_format($tuntutan_item->amaun, 2, '.', '')}}</td>
 										</tr>
 										@endforeach	
 									</tbody>
