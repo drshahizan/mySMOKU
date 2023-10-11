@@ -72,35 +72,27 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                @php
-                                                    $i=0;
-                                                @endphp
+                                                
                                                 @foreach ($permohonan as $item)
-                                                {{-- @foreach($akademik as $akademikItem) --}}
+                                                
                                                     @php
-                                                        $i++;
+                                                        
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                        //$peringkat_pengajian = DB::table('smoku_akademik')->where('smoku_id', $item->smoku_id)->pluck('peringkat_pengajian')->toArray();
-                                                        //dd($akademik);
-                                                        
-                                                        
+
+                                                        $no_rujukan_permohonan = $item['no_rujukan_permohonan'];
+
+                                                        // Extract peringkat pengajian value using regular expression
+                                                        preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches);
+
+                                                        // $matches[1] will contain the extracted peringkat pengajian value
+                                                        $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null;
+                                                        $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
                                                     @endphp
-                                                    {{-- @if ($permohonan->program=="BKOKU") --}}
+                                                    
                                                     <tr>
-                                                        <td>
-                                                            {{$item['no_rujukan_permohonan']}}
-                                                        </td>
+                                                        <td>{{$item['no_rujukan_permohonan']}}</td>
                                                         <td class="text-center">{{$item['updated_at']->format('d/m/Y')}}</td>
-                                                        
-                                                        <td class="text-center">
-                                                            
-                                                                {{-- @php
-                                                                    $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademikItem['peringkat_pengajian'])->value('peringkat');
-                                                                @endphp
-                                                                {{ ucwords(strtolower($peringkat)) }}<br> --}}
-                                                               
-                                                        </td>
-                                                        
+                                                        <td class="text-center">{{ $peringkat }}</td>
 
                                                         @if ($item['status']=='1')
                                                             <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
@@ -126,8 +118,7 @@
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
                                                     </tr>
-                                                {{-- @endif --}}
-                                                {{-- @endforeach --}}
+                                                
                                             @endforeach
                                             </tbody>
                                         </table>
