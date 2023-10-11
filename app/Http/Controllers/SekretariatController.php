@@ -144,23 +144,14 @@ class SekretariatController extends Controller
             ->select('smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
             ->get();
 
-        $recordsPPK = TamatPengajian::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
-            ->join('permohonan', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
-            ->join('smoku', 'smoku_akademik.smoku_id', '=', 'smoku.id') 
-            ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat') 
-            ->where('permohonan.program', 'PPK') 
-            ->where('smoku_akademik.status', 1)
-            ->select('smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
-            ->get();
-
-        return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsBKOKU','recordsPPK'));
+        return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsBKOKU'));
     }
 
     public function kemaskiniPeringkatPengajian(Request $request, $id)
     {
-        // Check if the request with the given have same "smoku_id" and "peringkat_pengajian" exists
+        // Check if the send request have same "smoku_id" and "peringkat_pengajian" in db
         $existingRecord = Akademik::where('smoku_id', $id)->where('peringkat_pengajian', $request->peringkat_pengajian)->first();
-        // Check if the request have same smok_id only but different "peringkat_pengajian"
+        // Check if there are two same smoku_id only but different "peringkat_pengajian" between exist record and new record
         $existStudent = Akademik::where('smoku_id', $id)->first();
 
         if ($existingRecord) {
