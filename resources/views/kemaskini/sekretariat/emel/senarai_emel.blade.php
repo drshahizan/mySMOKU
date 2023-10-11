@@ -65,7 +65,7 @@
                                                     <!--begin::Symbol-->
                                                     <div class="symbol symbol-30px me-0 mb-5 justify-content-center align-items-center">
                                                         {{-- <p class="symbol-label"> --}}
-                                                        <i class="fa-solid fa-reply text-light" style="font-size: 35px;"></i><br><br>
+                                                        <i class="fa-solid fa-reply-all text-light" style="font-size: 35px;"></i><br><br>
                                                         <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px;">Permohonan Dikembalikan</p>
                                                         {{-- </p> --}}
                                                     </div>
@@ -201,7 +201,7 @@
                                                     <!--begin::Symbol-->
                                                     <div class="symbol symbol-30px me-0 mb-5 justify-content-center align-items-center">
                                                         {{-- <p class="symbol-label"> --}}
-                                                        <i class="fa-solid fa-reply text-light" style="font-size: 35px;"></i><br><br>
+                                                        <i class="fa-solid fa-reply-all text-light" style="font-size: 35px;"></i><br><br>
                                                         <p class="fw-semibold me-1 align-self-center text-light" style="padding-bottom: 5px; padding-left:5px; font-size: 14px;">Permohonan Dikembalikan</p>
                                                         {{-- </p> --}}
                                                     </div>

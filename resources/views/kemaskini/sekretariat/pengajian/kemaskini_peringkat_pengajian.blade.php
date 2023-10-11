@@ -51,165 +51,75 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Permohonan untuk Dikemaskini Peringkat Pengajian<br><small>Sila lihat dokumen yang dimuat naik sebagai pengesahan sebelum mengemaskini peringkat pengajian pemohon.</small></h2>
+                                <h2>Senarai Permohonan BKOKU untuk Dikemaskini Peringkat Pengajian<br><small>Sila lihat dokumen yang dimuat naik sebagai pengesahan sebelum mengemaskini peringkat pengajian pemohon.</small></h2>
                             </div>
 
-                            {{-- Javascript Nav Bar --}}
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="bkoku-tab" data-toggle="tab" data-target="#bkoku" type="button" role="tab" aria-controls="bkoku" aria-selected="true">BKOKU</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
-                                </li>
-                            </ul>
+                            <div class="body">
+                                <div class="table-responsive" id="table-responsive">
+                                    <table id="sortTable1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr style="color: white; background-color:rgb(35, 58, 108);">
+                                                <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>                                        
+                                                <th style="width: 35%"><b>Nama</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Peringkat Pengajian</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
+                                                <th class="text-center" style="width: 15%">Kemaskini</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $i=0;
+                                            @endphp
 
-                            {{-- Content Navigation Bar --}}
-                            <div class="tab-content" id="myTabContent">
-                                {{-- BKOKU --}}
-                                <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
-                                    <br>
-                                    <div class="body">
-                                        <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable1" class="table table-bordered table-striped">
-                                                <thead>
-                                                    <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>                                        
-                                                        <th style="width: 35%"><b>Nama</b></th>
-                                                        <th style="width: 15%" class="text-center"><b>Peringkat Pengajian</b></th>
-                                                        <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
-                                                        <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
-                                                        <th class="text-center" style="width: 15%">Kemaskini</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @php
-                                                        $i=0;
-                                                    @endphp
+                                            @foreach ($recordsBKOKU as $items)
+                                                @php
+                                                    $text = ucwords(strtolower($items->nama));
+                                                    $conjunctions = ['bin', 'binti'];
+                                                    $words = explode(' ', $text);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
+                                                        }
+                                                    }
+                                                    $pemohon = implode(' ', $result);
+                                                @endphp
 
-                                                    @foreach ($recordsBKOKU as $items)
-                                                        @php
-                                                            $text = ucwords(strtolower($items->nama));
-                                                            $conjunctions = ['bin', 'binti'];
-                                                            $words = explode(' ', $text);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
-                                                            }
-                                                            $pemohon = implode(' ', $result);
-                                                        @endphp
-
-                                                        <tr>
-                                                            <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
-                                                            <td>{{$pemohon}}</td>
-                                                            <td>{{ucwords(strtolower($items->peringkat))}}</td>
-                                                            <td class="text-center">
-                                                                <a href="{{ asset('assets/dokumen/sijil_tamat/' . $items->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
-                                                                Lihat
-                                                                <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $items->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
-                                                                Lihat
-                                                                <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <form action="{{ route('kemaskini.peringkat.pengajian', $items->smoku_id) }}" method="post">
-                                                                    @csrf
-                                                                    <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
-                                                                        <option value="">Kemaskini</option>
-                                                                        <option value="1">Sijil</option>
-                                                                        <option value="2">Diploma</option>
-                                                                        <option value="3">Sarjana Muda</option>
-                                                                        <option value="4">Diploma Lepasan Ijazah</option>
-                                                                        <option value="5">Ijazah Sarjana</option>
-                                                                        <option value="6">Doktor Falsafah</option>
-                                                                    </select>
-                                                                </form>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div> 
-
-                                {{-- PKK --}}
-                                <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-                                    <br>
-                                    <div class="body">
-                                        <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable2" class="table table-bordered table-striped">
-                                                <thead>
-                                                    <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>                                        
-                                                        <th style="width: 35%"><b>Nama</b></th>
-                                                        <th style="width: 15%" class="text-center"><b>Peringkat Pengajian</b></th>
-                                                        <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
-                                                        <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
-                                                        <th class="text-center" style="width: 15%">Kemaskini</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @php
-                                                        $i=0;
-                                                    @endphp
-
-                                                    @foreach ($recordsPPK as $item)
-                                                        @php
-                                                            $text = ucwords(strtolower($item->nama));
-                                                            $conjunctions = ['bin', 'binti'];
-                                                            $words = explode(' ', $text);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
-                                                            }
-                                                            $pemohon = implode(' ', $result);
-                                                        @endphp
-
-                                                        <tr>
-                                                            <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
-                                                            <td>{{$pemohon}}</td>
-                                                            <td>{{ucwords(strtolower($item->peringkat))}}</td>
-                                                            <td class="text-center">
-                                                                <a href="{{ asset('assets/dokumen/sijil_tamat/' . $item->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
-                                                                    Lihat
-                                                                <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $item->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
-                                                                    Lihat
-                                                                <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <form action="{{ route('kemaskini.peringkat.pengajian', $item->smoku_id) }}" method="post">
-                                                                    @csrf
-                                                                    <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
-                                                                        <option value="">Kemaskini</option>
-                                                                        <option value="1">Sijil</option>
-                                                                        <option value="2">Diploma</option>
-                                                                        <option value="3">Sarjana Muda</option>
-                                                                        <option value="4">Diploma Lepasan Ijazah</option>
-                                                                        <option value="5">Ijazah Sarjana</option>
-                                                                        <option value="6">Doktor Falsafah</option>
-                                                                    </select>
-                                                                </form>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                                <tr>
+                                                    <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
+                                                    <td>{{$pemohon}}</td>
+                                                    <td>{{ucwords(strtolower($items->peringkat))}}</td>
+                                                    <td class="text-center">
+                                                        <a href="{{ asset('assets/dokumen/sijil_tamat/' . $items->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
+                                                        Lihat
+                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $items->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
+                                                        Lihat
+                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <form action="{{ route('kemaskini.peringkat.pengajian', $items->smoku_id) }}" method="post">
+                                                            @csrf
+                                                            <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
+                                                                <option value="">Kemaskini</option>
+                                                                <option value="1">Sijil</option>
+                                                                <option value="2">Diploma</option>
+                                                                <option value="3">Sarjana Muda</option>
+                                                                <option value="4">Diploma Lepasan Ijazah</option>
+                                                                <option value="5">Ijazah Sarjana</option>
+                                                                <option value="6">Doktor Falsafah</option>
+                                                            </select>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -242,7 +152,6 @@
             }
         </script>
         
-
         <script>
             $(document).ready(function() {
                 var table = $('#sortTable1').DataTable({
@@ -261,23 +170,6 @@
                     });
                 }).draw();
             });
-
-            $(document).ready(function() {
-                var table = $('#sortTable2').DataTable({
-                    "columnDefs": [
-                        {
-                            "targets": 'no-sort',
-                            "orderable": false
-                        }
-                    ],
-                });
-
-                // Disable sorting for the "No" column
-                table.on('order.dt', function() {
-                    table.column(0, { order: 'applied' }).nodes().each(function(cell, i) {
-                        cell.innerHTML = i + 1;
-                    });
-                }).draw();
-            });
         </script>
+    </body>
 </x-default-layout> 

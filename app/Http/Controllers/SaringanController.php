@@ -247,4 +247,25 @@ class SaringanController extends Controller
         $kelulusan = Kelulusan::where('permohonan_id', $sejarah_p->permohonan_id)->first();
         return view('permohonan.sekretariat.sejarah.papar_kelulusan',compact('permohonan','kelulusan','smoku','sejarah_p'));
     }
+
+    public function kemaskiniSaringan($id){
+        $sejarah_p = SejarahPermohonan::where('id', $id)->first();
+        $permohonan = Permohonan::where('id', $sejarah_p->permohonan_id)->first();
+        $smoku_id = $permohonan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $catatan = Saringan::where('permohonan_id', $sejarah_p->permohonan_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('permohonan.sekretariat.sejarah.papar_saringan',compact('permohonan','catatan','smoku','akademik','sejarah_p'));
+    }
+
+    public function hantarSaringan($id){
+        $sejarah_p = SejarahPermohonan::where('id', $id)->first();
+        $permohonan = Permohonan::where('id', $sejarah_p->permohonan_id)->first();
+        $smoku_id = $permohonan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $catatan = Saringan::where('permohonan_id', $sejarah_p->permohonan_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('permohonan.sekretariat.sejarah.papar_saringan',compact('permohonan','catatan','smoku','akademik','sejarah_p'));
+    }
+
 }
