@@ -22,12 +22,12 @@
     <!--begin::Page title-->
 	<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 		<!--begin::Title-->
-		<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Pengajian</h1>
+		<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Kemaskini</h1>
 		<!--end::Title-->
 		<!--begin::Breadcrumb-->
 		<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
 			<!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">Pengajian</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Kemaskini</li>
 			<!--end::Item-->
 			<!--begin::Item-->
 			<li class="breadcrumb-item">
@@ -35,7 +35,7 @@
 			</li>
 			<!--end::Item-->
 			<!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">Kemaskini Peringkat</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Peringkat Pengajian</li>
 			<!--end::Item-->
 		</ul>
 	<!--end::Breadcrumb-->
@@ -103,10 +103,11 @@
                                                             }
                                                             $pemohon = implode(' ', $result);
                                                             $program = DB::table('permohonan')->where('smoku_id',$item['smoku_id'])->value('program');
+                                                            $status = DB::table('smoku_akademik')->where('smoku_id',$item['smoku_id'])->value('status');
                                                             $peringkat = DB::table('smoku_akademik')->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')->where('smoku_akademik.smoku_id',$item['smoku_id'])->value('bk_peringkat_pengajian.peringkat')
                                                         @endphp
 
-                                                        @if($program == "BKOKU")
+                                                        @if ($program == "BKOKU")
                                                             <tr>
                                                                 <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
                                                                 <td>{{$pemohon}}</td>
@@ -181,6 +182,7 @@
                                                             }
                                                             $pemohon = implode(' ', $result);
                                                             $program = DB::table('permohonan')->where('smoku_id',$item['smoku_id'])->value('program');
+                                                            $status = DB::table('smoku_akademik')->where('smoku_id',$item['smoku_id'])->value('status');
                                                             $peringkat = DB::table('smoku_akademik')->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')->where('smoku_akademik.smoku_id',$item['smoku_id'])->value('bk_peringkat_pengajian.peringkat')
                                                         @endphp
 
