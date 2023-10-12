@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('dokumen_esp', function (Blueprint $table) {
             $table->id();
-            $table->string('id_dokumen');
             $table->string('dokumen1');
             $table->string('dokumen2');
             $table->string('dokumen3');

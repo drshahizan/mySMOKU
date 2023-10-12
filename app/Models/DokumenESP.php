@@ -11,7 +11,6 @@ class DokumenESP extends Model
     protected $table = 'dokumen_esp'; 
 
     protected $fillable = [
-        'id_dokumen',
         'dokumen1',
         'dokumen2',
         'dokumen3',

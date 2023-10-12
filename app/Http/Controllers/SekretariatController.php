@@ -8,6 +8,7 @@ use App\Mail\KeputusanTidakLayak;
 use App\Mail\TuntutanDikembalikan;
 use App\Mail\TuntutanLayak;
 use App\Mail\TuntutanTidakLayak;
+use App\Models\DokumenESP;
 use App\Models\EmelKemaskini;
 use App\Models\Permohonan;
 use App\Models\Saringan;
@@ -567,6 +568,12 @@ class SekretariatController extends Controller
 
         // Stream the PDF
         return $pdf->stream('SuratTawaran_'.$permohonanId.'.pdf');
+    }
+
+    public function dokumenESP()
+    {   
+        $dokumen = DokumenESP::all();
+        return view('dokumen.sekretariat.dokumen', compact('dokumen'));
     }
 
 

@@ -163,12 +163,19 @@
 				<span class="menu-title">Surat Tawaran</span>
 			</a>
 		</div>
-			<div class="menu-item">
-				<a class="menu-link" href="{{url('kemaskini/sekretariat/emel/senarai-emel')}}">
-					<span class="menu-icon">{!! getIcon('send', 'fs-2') !!}</span>
-					<span class="menu-title">Emel</span>
-				</a>
-			</div>
+		<div class="menu-item">
+			<a class="menu-link" href="{{url('kemaskini/sekretariat/emel/senarai-emel')}}">
+				<span class="menu-icon">{!! getIcon('send', 'fs-2') !!}</span>
+				<span class="menu-title">Emel</span>
+			</a>
+		</div>
+		<div class="menu-item">
+			<a class="menu-link" href="{{ route('sekretariat.dokumenESP')}}">
+				<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
+				<span class="menu-title">Dokumen ESP</span>
+			</a>
+		</div>
+
 		<div class="menu-item pt-5">
 			<div class="menu-content">
 				<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
@@ -198,18 +205,12 @@
                 <span class="menu-title">Sejarah</span>
             </a>
         </div>
+
 		<div class="menu-item pt-5">
 			<div class="menu-content">
 				<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
 			</div>
 		</div>
-		{{-- <div class="menu-item">
-		<a class="menu-link" href="{{ url('tuntutan-keseluruhan') }}">
-		<!-- "{{ route('dashboard') }}" -->
-				<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-				<span class="menu-title">Keseluruhan</span>
-		</a>
-		</div> --}}
 		<div class="menu-item">
 			<a class="menu-link" href="{{ url('tuntutan/sekretariat/saringan/senarai_tuntutan') }}">
 			<!-- "{{ route('dashboard') }}" -->

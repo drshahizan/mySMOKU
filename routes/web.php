@@ -121,6 +121,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('kemaskini/sekretariat/surat/tawaran/send/{suratTawaranId}', [SekretariatController::class, 'sendSuratTawaran'])->name('send');
     Route::get('kemaskini/sekretariat/surat/tawaran/update/{suratTawaranId}', [SekretariatController::class, 'updatedSuratTawaran'])->name('update');
 
+    //Dokumen - Sekretariat
+    Route::get('sekretariat/muat-naik/dokumen/esp', [SekretariatController::class, 'dokumenESP'])->name('sekretariat.dokumenESP');
+    //Route::post('sekretariat/hantar/kemaskini/peringkat/pengajian/{id}', [SekretariatController::class, 'kemaskiniPeringkatPengajian'])->name('kemaskini.peringkat.pengajian');
+
     //Permohonan - Sekretariat - Kelulusan
     Route::post('permohonan/sekretariat/hantar/semua', [SekretariatController::class, 'hantarSemuaKeputusanPermohonan'])->name('bulk.approval');
     Route::get('permohonan/sekretariat/kelulusan', [SekretariatController::class, 'senaraiKelulusanPermohonan']);
@@ -161,6 +165,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan/sekretariat/sejarah/kemaskini-saringan/{id}', [SekretariatController::class, 'kemaskiniSaringan'])->name('kemaskini.saringan.tuntutan.id');
 
     Route::post('tuntutan/sekretariat/sejarah/hantar-saringan/{id}', [SekretariatController::class, 'hantarSaringan'])->name('hantar.saringan.tuntutan.id');
+    
     //Dokumen - Penyelaras
     Route::get('penyelaras/bkoku/dokumen/esp', [PenyelarasController::class, 'dokumenESP'])->name('penyelaras.dokumen');
 
