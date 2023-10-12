@@ -217,10 +217,10 @@
                                                             </td>
                                                             <td class="hidden-sm-down">
                                                                 <div class="form-group c_form_group">
-                                                                    <select id="invois" name="invois" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                    <select id="peperiksaan" name="peperiksaan" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                                         <option value="">Pilih</option>
-                                                                        <option value="lengkap">Lengkap</option>
-                                                                        <option value="tak_lengkap">Tidak Lengkap</option>
+                                                                        <option value="Lengkap">Lengkap</option>
+                                                                        <option value="Tidak Lengkap">Tidak Lengkap</option>
                                                                     </select>
                                                                 </div>
                                                             </td>
@@ -244,8 +244,8 @@
                                                                 <div class="form-group c_form_group">
                                                                     <select id="invois[]" name="invois[]" class="form-control" onchange="select()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                                         <option value="">Pilih</option>
-                                                                        <option value="lengkap">Lengkap</option>
-                                                                        <option value="tak_lengkap">Tidak Lengkap</option>
+                                                                        <option value="Lengkap">Lengkap</option>
+                                                                        <option value="Tidak lengkap">Tidak Lengkap</option>
                                                                     </select>
                                                                 </div>
                                                             </td>

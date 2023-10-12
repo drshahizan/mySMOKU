@@ -12,6 +12,7 @@ use App\Models\DokumenESP;
 use App\Models\EmelKemaskini;
 use App\Models\Permohonan;
 use App\Models\Saringan;
+use App\Models\SaringanTuntutan;
 use App\Models\SejarahPermohonan;
 use App\Models\SejarahTuntutan;
 use App\Models\Smoku;
@@ -571,7 +572,7 @@ class SekretariatController extends Controller
     }
 
     public function dokumenESP()
-    {   
+    {
         $dokumen = DokumenESP::all();
         return view('dokumen.sekretariat.dokumen', compact('dokumen'));
     }
@@ -621,6 +622,7 @@ class SekretariatController extends Controller
         $permohonan_id = Tuntutan::where('id', $id)->value('permohonan_id');
         $smoku_id = Permohonan::where('id', $permohonan_id)->value('smoku_id');
         $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
+        $tuntutan_item =TuntutanItem::where('tuntutan_id', $id)->get();
 
         if($request->get('submit')=="Layak"){
             Tuntutan::where('id', $id)
@@ -636,6 +638,24 @@ class SekretariatController extends Controller
                     'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
                     'status'                =>  6,
                 ]);
+
+            $i=0;
+            $invois = $request->get('invois');
+            foreach($tuntutan_item as $item){
+                TuntutanItem::where('tuntutan_id', $item['id'])
+                    ->update([
+                        'kep_saringan'      =>  $invois[$i],
+                    ]);
+                $i++;
+            }
+
+            $saringan = new SaringanTuntutan([
+                'tuntutan_id'               =>  $id,
+                'saringan_kep_peperiksaan'  =>  $request->get('peperiksaan'),
+                'catatan'                   =>  $request->get('catatan'),
+                'status'                    =>  6,
+            ]);
+            $saringan->save();
 
             $status_rekod = new SejarahTuntutan([
                 'smoku_id'      =>  $smoku_id,
@@ -656,6 +676,24 @@ class SekretariatController extends Controller
                     'status'   =>  7,
                 ]);
 
+            $i=0;
+            $invois = $request->get('invois');
+            foreach($tuntutan_item as $item){
+                TuntutanItem::where('tuntutan_id', $item['id'])
+                    ->update([
+                        'kep_saringan'      =>  $invois[$i],
+                    ]);
+                $i++;
+            }
+
+            $saringan = new SaringanTuntutan([
+                'tuntutan_id'               =>  $id,
+                'saringan_kep_peperiksaan'  =>  $request->get('peperiksaan'),
+                'catatan'                   =>  $request->get('catatan'),
+                'status'                    =>  7,
+            ]);
+            $saringan->save();
+
             $status_rekod = new SejarahTuntutan([
                 'smoku_id'      =>  $smoku_id,
                 'tuntutan_id'   =>  $id,
@@ -675,6 +713,24 @@ class SekretariatController extends Controller
                 ->update([
                     'status'   =>  5,
                 ]);
+
+            $i=0;
+            $invois = $request->get('invois');
+            foreach($tuntutan_item as $item){
+                TuntutanItem::where('id', $item['id'])
+                    ->update([
+                        'kep_saringan'      =>  $invois[$i],
+                    ]);
+                $i++;
+            }
+
+            $saringan = new SaringanTuntutan([
+                'tuntutan_id'               =>  $id,
+                'saringan_kep_peperiksaan'  =>  $request->get('peperiksaan'),
+                'catatan'                   =>  $request->get('catatan'),
+                'status'                    =>  5,
+            ]);
+            $saringan->save();
 
             $status_rekod = new SejarahTuntutan([
                 'smoku_id'      =>  $smoku_id,
