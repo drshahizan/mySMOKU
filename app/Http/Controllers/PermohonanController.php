@@ -622,14 +622,14 @@ class PermohonanController extends Controller
         $smoku = Smoku::where('no_kp', $user->no_kp)->first();
         $permohonan = Permohonan::where('smoku_id', $smoku->id)->first();
 
-        return view('pages.permohonan.lapor_tamat_pengajian');
+        return view('pages.permohonan.lapor_tamat_pengajian',compact('permohonan'));
     }
 
     public function hantarTamatPengajian(Request $request)
     {
         $user = Auth::user();
         $smoku = Smoku::where('no_kp', $user->no_kp)->first();
-        $permohonan = Permohonan::where('smoku_id', $smoku->id)->first();
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->id)->first();
 
         if (!$smoku || !$permohonan) {
             return redirect()->route('tamat.pengajian')->with('error', 'Permohonan tidak ditemui.');
