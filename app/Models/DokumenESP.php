@@ -12,7 +12,9 @@ class DokumenESP extends Model
 
     protected $fillable = [
         'id_dokumen',
-        'dokumen',
+        'dokumen1',
+        'dokumen2',
+        'dokumen3',
         'catatan',
     ];
 }

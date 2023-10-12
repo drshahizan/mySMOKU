@@ -53,24 +53,20 @@
 								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 									<th>Nama</th>
 									<th>Dokumen</th>
-									<th>Catatan</th>
 								</tr>
 							</thead>
 							<tbody class="fw-semibold text-gray-600" >
 								<tr>
 									<td class="text-gray-800">Dokumen satu&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
-									<td><textarea type="text" class="form-control form-control-sm" id="1" rows="1" name="1"></textarea></td>
 								</tr>
 								<tr>
 									<td class="text-gray-800">Dokumen dua&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
-									<td><textarea type="text" class="form-control form-control-sm" id="2" rows="1" name="2"></textarea></td>
 								</tr>
 								<tr>
 									<td class="text-gray-800">Dokumen tiga&nbsp;<a href="/assets/contoh/resit.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="invoisResit" name="invoisResit"/></td>
-									<td><textarea type="text" class="form-control form-control-sm" id="3" rows="1" name="3"></textarea></td>
 								</tr>
 							</tbody>
 						</table>
@@ -80,7 +76,7 @@
 					
 						<div class="modal-footer flex-center">
 							<button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
-								<span class="indicator-label">Simpan</span>
+								<span class="indicator-label">Hantar</span>
 								<span class="indicator-progress">Sila tunggu...
 									<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
 								</span>
@@ -89,35 +85,6 @@
 					</form>
 					
 					<!--end::Form-->
-				</div>
-				<!--end::Card body-->
-				<!--begin::Card body-->
-				<div class="card-body pt-0">
-					<!--begin::Table-->
-					<div class="table-responsive">
-						<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
-							<thead>
-								<tr class="text-start text-gray-400 fw-bold fs-7 gs-0">
-									<th class="min-w-125px">Bil.</th>
-									<th class="min-w-125px">Dokumen</th>
-									<th class="min-w-125px">Catatan</th>
-									<th class="min-w-125px">Tarikh Kemaskini</th>
-									
-								</tr>
-							</thead>
-							<tbody class="fw-semibold text-gray-600">
-								{{-- @foreach ($tarikh as $tarikh) --}}
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								{{-- @endforeach --}}
-							</tbody>
-						</table>
-					</div>
-					<!--end::Table-->
 				</div>
 				<!--end::Card body-->
 			</div>
