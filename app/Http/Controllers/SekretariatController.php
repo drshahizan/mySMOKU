@@ -136,12 +136,15 @@ class SekretariatController extends Controller
     public function peringkatPengajian()
     {
         $recordsBKOKU = TamatPengajian::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
-            ->join('permohonan', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
             ->join('smoku', 'smoku_akademik.smoku_id', '=', 'smoku.id')
             ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat')
-            ->where('permohonan.program', 'BKOKU')
             ->where('smoku_akademik.status', 1)
-            ->select('smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
+            ->whereIn('smoku_akademik.smoku_id', function ($query) {
+                $query->select('smoku_id')
+                    ->from('permohonan')
+                    ->where('program', 'BKOKU');
+            })
+            ->select('tamat_pengajian.*','smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
             ->get();
 
         return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsBKOKU'));
