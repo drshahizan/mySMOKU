@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('permohonan_surat_tawaran', function (Blueprint $table) {
             $table->id();
-            $table->string('no_rujukan');
+            $table->string('no_rujukan')->nullable();
             $table->string('tajuk');
             $table->string('tujuan');
             $table->longText('kandungan1');

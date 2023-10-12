@@ -87,15 +87,14 @@
                                     </div>
                     
                                     <div class="address" style="padding-left: 150px; margin-top:0%;">
-                                        <b>KEMENTERIAN PENDIDIKAN TINGGI</b>
-                                        <br>MINISTRY OF HIGHER EDUCATION
-                                        <br>
-                                        <br>Bahagian Biasiswa
-                                        <br>Scholarship Division
-                                        <br>Aras 2, No.2, Menara 2,
-                                        <br>Jalan P5/6, Presint 5
-                                        <br>62200 Putrajaya
-                                        <br>Malaysia
+                                        <b>{{$maklumat_kementerian->nama_kementerian_bm}}</b>
+                                        <br>{{$maklumat_kementerian->nama_kementerian_bi}}<br>
+                                        <br>{{$maklumat_kementerian->nama_bahagian_bm}}
+                                        <br>{{$maklumat_kementerian->nama_bahagian_bi}}
+                                        <br>{{$maklumat_kementerian->alamat1}}
+                                        <br>{{$maklumat_kementerian->alamat2}}
+                                        <br>{{$maklumat_kementerian->poskod}} {{$maklumat_kementerian->negeri}}
+                                        <br>{{$maklumat_kementerian->negara}}
                                     </div>
                                 </div>
                     
@@ -104,17 +103,17 @@
                                         <tr>
                                             <td style="line-height: 0;">Tel</td>
                                             <td style="line-height: 0;">:</td>
-                                            <td style="line-height: 0;">603-8870 9000</td>
+                                            <td style="line-height: 0;">{{$maklumat_kementerian->tel}}</td>
                                         </tr>
                                         <tr>
                                             <td style="line-height: 0;">Hotline</td>
                                             <td style="line-height: 0;">:</td>
-                                            <td style="line-height: 0;">603-8888 0606</td>
+                                            <td style="line-height: 0;">{{$maklumat_kementerian->hotline}}</td>
                                         </tr>
                                         <tr>
                                             <td style="line-height: 0;">Faks</td>
                                             <td style="line-height: 0;">:</td>
-                                            <td style="line-height: 0;">603-8870 6839</td>
+                                            <td style="line-height: 0;">{{$maklumat_kementerian->faks}}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -122,11 +121,11 @@
                                
                             <hr>
 
-                            <form action="{{ route('send', ['suratTawaranId' => $suratTawaran->id]) }}" method="POST" enctype="multipart/form-data">
+                            <form action="#" method="GET">
                                 @csrf
                                 <p>
                                     <span style="float: right">
-                                        Rujukan Kami : KPT - <input type="text" id="noRujukan" name="noRujukan" style="width: 40%" value="{{$suratTawaran->no_rujukan}}"><br>
+                                        No Rujukan Kami : KPT - xxxxxxxxx<br>
                                         Tarikh : xxxxxxxxx <br>
                                     </span>
                                 </p>
@@ -142,9 +141,9 @@
                                 <br>
                                 <p>Tuan/Puan,</p>
                                 <br>
-                                <h4><input type="text" id="tajuk" name="tajuk" style="width: 100%" value="{{ strtoupper($suratTawaran->tajuk) }}"></h4>
+                                <h4>{{ strtoupper($suratTawaran->tajuk) }}</h4>
                                 <br>
-                                <p><textarea name="tujuan" id="tujuan" cols="153" rows="2">{{$suratTawaran->tujuan}} :-</textarea></p>
+                                <p>{{$suratTawaran->tujuan}}</p>
                                 <br>
 
                                 <table>
@@ -175,40 +174,37 @@
                                 
                                 <br>
                                 <div class="main-content">
-                                    <p>2. Bantuan ini berkuatkuasa mulai <b>xxxxxxxxx hingga xxxxxxxxx.</b>
-                                        <textarea name="kandungan1" id="kandungan1" cols="153" rows="3">{{$suratTawaran->kandungan1}}</textarea>
-                                    </p>
+                                    <p>2. Bantuan ini berkuatkuasa mulai <b>xxxxxxxxx hingga xxxxxxxxx.</b> {{$suratTawaran->kandungan1}}</p>
                                     <br>
-                                    <p>3. <textarea name="kandungan2" id="kandungan2" cols="153" rows="3">{{$suratTawaran->kandungan2}}</textarea></p>
+                                    <p>3. {{$suratTawaran->kandungan2}}</p>
                                     <br>
-                                    <p>4. <textarea name="kandungan3" id="kandungan3" cols="153" rows="3">{{$suratTawaran->kandungan3}}</textarea></p>
+                                    <p>4. {{$suratTawaran->kandungan3}}</p>
                                 </div>
                                 <br>
                                 
                                 <p>Sekian, terima kasih.</p>
                                 <br>
-                                <p><input type="text" id="penutup1" name="penutup1" style="width: 50%; font-weight:bold" value="{{$suratTawaran->penutup1}}"></p>
-                                <p><input type="text" id="penutup4_4" name="penutup4_4" style="width: 50%; font-weight:bold" value="{{$suratTawaran->penutup4_4}}"></p>
+                                <p>{{$suratTawaran->penutup1}}</p>
+                                <p>{{$suratTawaran->penutup4_4}}</p>
                                 <br>
-                                <p><input type="text" id="penutup2" name="penutup2" style="width: 50%; font-weight:bold" value="{{$suratTawaran->penutup2}}"></p>
+                                <p>{{$suratTawaran->penutup2}}</p>
                                 <br>
                                 <p>Saya yang menjalankan amanah,</p>
                                 <p>
-                                    <input type="text" id="penutup3_1" name="penutup3_1" style="width: 30%; font-weight:bold" value="{{$suratTawaran->penutup3_1}}"><br>
-                                    <input type="text" id="penutup3_2" name="penutup3_2" style="width: 30%; font-weight:bold" value="{{$suratTawaran->penutup3_2}}"><br>
-                                    <input type="text" id="penutup3_3" name="penutup3_3" style="width: 30%; font-weight:bold" value="{{$suratTawaran->penutup3_3}}"><br>
-                                    <input type="text" id="penutup3_4" name="penutup3_4" style="width: 30%; font-weight:bold" value="{{$suratTawaran->penutup3_4}}">
+                                    {{$suratTawaran->penutup3_1}} <br>
+                                    {{$suratTawaran->penutup3_2}} <br>
+                                    {{$suratTawaran->penutup3_3}} <br>
+                                    {{$suratTawaran->penutup3_4}} <br>
+                                    
                                 </p>
+                                <br>
                                 <p><div style="text-align: center;">Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>
+                                <br>
                                 <p>s.k :<br>
-                                    <input type="text" id="penutup4_1" name="penutup4_1" style="width: 30%" value="{{$suratTawaran->penutup4_1}}"><br>
-                                    <input type="text" id="penutup4_2" name="penutup4_2" style="width: 30%" value="{{$suratTawaran->penutup4_2}}"><br>
-                                    <input type="text" id="penutup4_3" name="penutup4_3" style="width: 30%" value="{{$suratTawaran->penutup4_3}}">
+                                    {{$suratTawaran->penutup4_1}} <br>
+                                    {{$suratTawaran->penutup4_2}} <br>
+                                    {{$suratTawaran->penutup4_3}} <br>
                                 </p>
-
-                                <div class="d-flex flex-center mt-5 mb-5">
-                                    <button type="submit" class="btn btn-primary btn-sm">Kemaskini</button>
-                                </div>
                             </form>
                         </div>
                     </div>

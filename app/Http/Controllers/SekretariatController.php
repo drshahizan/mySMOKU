@@ -209,6 +209,51 @@ class SekretariatController extends Controller
         return redirect()->back()->with('success', 'Peringkat Pengajian updated successfully.');
     }
 
+    //Step 1: Editing Data - Allow users to view and edit the current data.
+    public function previewSuratTawaran()
+    {
+        $suratTawaran = SuratTawaran::first();
+        $maklumat_kementerian = MaklumatKementerian::first();
+
+        return view('kemaskini.sekretariat.surat_tawaran.kemaskini', compact('suratTawaran','maklumat_kementerian'));
+    }
+
+    //Step 2: Editing Data - Allow users to send the updated data.
+    public function sendSuratTawaran(Request $request, $suratTawaranId)
+    {
+        $existingRecord = SuratTawaran::where('id', $suratTawaranId)->first();
+
+        if ($existingRecord) {
+            $existingRecord->tajuk = $request->tajuk;
+            $existingRecord->tujuan = $request->tujuan;
+            $existingRecord->kandungan1 = $request->kandungan1;
+            $existingRecord->kandungan2 = $request->kandungan2;
+            $existingRecord->kandungan3 = $request->kandungan3;
+            $existingRecord->penutup1 = $request->penutup1;
+            $existingRecord->penutup2 = $request->penutup2;
+            $existingRecord->penutup3_1 = $request->penutup3_1;
+            $existingRecord->penutup3_2 = $request->penutup3_2;
+            $existingRecord->penutup3_3 = $request->penutup3_3;
+            $existingRecord->penutup3_4 = $request->penutup3_4;
+            $existingRecord->penutup4_1 = $request->penutup4_1;
+            $existingRecord->penutup4_2 = $request->penutup4_2;
+            $existingRecord->penutup4_4 = $request->penutup4_3;
+            $existingRecord->penutup4_4 = $request->penutup4_4;
+            $existingRecord->save();
+        }
+
+        return redirect()->route('update', ['suratTawaranId' => $suratTawaranId])->with('success', 'Surat Tawaran telah dikemaskini.');
+    }
+
+    //Step 3: Final latest view - Allow users to view the updated version of "Surat Tawaran"
+    public function updatedSuratTawaran($suratTawaranId)
+    {
+        $suratTawaran = SuratTawaran::find($suratTawaranId);
+        $maklumat_kementerian = MaklumatKementerian::first();
+
+        return view('kemaskini.sekretariat.surat_tawaran.terkini', compact('suratTawaran','maklumat_kementerian'));
+    }
+
     public function senaraiKelulusanPermohonan()
     {
         $kelulusan = Permohonan::where('status', '=','4')->get();
@@ -522,50 +567,6 @@ class SekretariatController extends Controller
 
         // Stream the PDF
         return $pdf->stream('SuratTawaran_'.$permohonanId.'.pdf');
-    }
-
-    //Step 1: Editing Data - Allow users to view and edit the current data.
-    public function previewSuratTawaran()
-    {
-        $suratTawaran = SuratTawaran::first();
-        return view('permohonan.sekretariat.kemaskini.surat_tawaran_diubah', compact('suratTawaran'));
-    }
-
-    //Step 2: Editing Data - Allow users to send the updated data.
-    public function sendSuratTawaran(Request $request, $suratTawaranId)
-    {
-        $existingRecord = SuratTawaran::where('id', $suratTawaranId)->first();
-
-        if ($existingRecord) {
-            $existingRecord->no_rujukan = $request->noRujukan;
-            $existingRecord->tajuk = $request->tajuk;
-            $existingRecord->tujuan = $request->tujuan;
-            $existingRecord->kandungan1 = $request->kandungan1;
-            $existingRecord->kandungan2 = $request->kandungan2;
-            $existingRecord->kandungan3 = $request->kandungan3;
-            $existingRecord->penutup1 = $request->penutup1;
-            $existingRecord->penutup2 = $request->penutup2;
-            $existingRecord->penutup3_1 = $request->penutup3_1;
-            $existingRecord->penutup3_2 = $request->penutup3_2;
-            $existingRecord->penutup3_3 = $request->penutup3_3;
-            $existingRecord->penutup3_4 = $request->penutup3_4;
-            $existingRecord->penutup4_1 = $request->penutup4_1;
-            $existingRecord->penutup4_2 = $request->penutup4_2;
-            $existingRecord->penutup4_4 = $request->penutup4_3;
-            $existingRecord->penutup4_4 = $request->penutup4_4;
-            $existingRecord->save();
-        }
-
-        return redirect()->route('update', ['suratTawaranId' => $suratTawaranId])->with('success', 'Surat Tawaran telah dikemaskini.');
-    }
-
-    //Step 3: Final latest view - Allow users to view the updated version of "Surat Tawaran"
-    public function updatedSuratTawaran($suratTawaranId)
-    {
-        $suratTawaran = SuratTawaran::find($suratTawaranId);
-        $maklumat_kementerian = MaklumatKementerian::first();
-
-        return view('permohonan.sekretariat.kemaskini.surat_tawaran_terkini', compact('suratTawaran','maklumat_kementerian'));
     }
 
 
