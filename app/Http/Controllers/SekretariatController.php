@@ -686,8 +686,6 @@ class SekretariatController extends Controller
 
         $tuntutan = Tuntutan::where('status', '2')
             ->orWhere('status', '=','3')
-            ->orWhere('status', '=','4')
-            ->orWhere('status', '=','5')
             ->get();
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status'));
     }
@@ -751,7 +749,7 @@ class SekretariatController extends Controller
 
     public function hantarSaringan(Request $request, $id){
         $t_id = SejarahTuntutan::where('id', $id)->value('tuntutan_id');
-        Tuntutan::where('id', $id)
+        Tuntutan::where('id', $t_id)
             ->update([
                 'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
                 'yuran_disokong'        =>  $request->get('yuran_disokong'),
