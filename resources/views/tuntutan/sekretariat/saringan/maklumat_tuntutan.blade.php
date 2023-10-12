@@ -264,9 +264,7 @@
                                     </div>
                                     <h6>Pengiraan:</h6>
                                     <br>
-                                    <!--begin: Invoice body-->
                                     {{csrf_field()}}
-                                    <input type="hidden" value="{{$tuntutan->baki}}">
                                     @if($permohonan->program == "BKOKU" && $tuntutan->yuran == "1" && $tuntutan->wang_saku == "1")
                                         <!--begin: Invoice body-->
                                         @php
@@ -287,6 +285,7 @@
                                             $jumlah = $yuran + $tuntutan->amaun_wang_saku;
                                             $baki_y = $tuntutan->baki - $jumlah;
                                         @endphp
+                                        <input type="hidden" name="baki_y" id="baki_y" value="{{$tuntutan->baki}}">
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -361,7 +360,8 @@
                                             function SokongY(){
                                                 var yuran = document.getElementById('yuran_disokong').value;
                                                 var w_saku = document.getElementById('w_saku_disokong').value;
-                                                var baki = $tuntutan->baki - yuran - w_saku;
+                                                var baki_y = document.getElementById('baki_y').value;
+                                                var baki = baki_y - yuran - w_saku;
                                                 var jumlah = parseFloat(w_saku) + parseFloat(yuran);
                                                 baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                                                     minimumFractionDigits: 2
@@ -372,7 +372,8 @@
                                             function BayarY(){
                                                 var yuran = document.getElementById('yuran_dibayar').value;
                                                 var w_saku = document.getElementById('w_saku_dibayar').value;
-                                                var baki = $tuntutan->baki - yuran - w_saku;
+                                                var baki_y = document.getElementById('baki_y').value;
+                                                var baki = baki_y - yuran - w_saku;
                                                 var jumlah = parseFloat(yuran) + parseFloat(w_saku);
                                                 baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                                                     minimumFractionDigits: 2
@@ -468,6 +469,7 @@
                                             $jumlah = $yuran;
                                             $baki_y = $tuntutan->baki - $jumlah;
                                         @endphp
+                                        <input type="hidden" name="baki_y" id="baki_y" value="{{$tuntutan->baki}}">
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -530,7 +532,8 @@
                                             document.getElementById("yuran_dibayar_3").addEventListener("input", BayarY);
                                             function SokongY(){
                                                 var yuran = document.getElementById('yuran_disokong_3').value;
-                                                var baki = $tuntutan->baki - yuran;
+                                                var baki_y = document.getElementById('baki_y').value;
+                                                var baki = baki_y - yuran;
                                                 var jumlah = parseFloat(yuran);
                                                 baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                                                     minimumFractionDigits: 2
@@ -540,7 +543,8 @@
                                             }
                                             function BayarY(){
                                                 var yuran = document.getElementById('yuran_dibayar_3').value;
-                                                var baki = $tuntutan->baki - yuran;
+                                                var baki_y = document.getElementById('baki_y').value;
+                                                var baki = baki_y - yuran;
                                                 var jumlah = parseFloat(yuran);
                                                 baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                                                     minimumFractionDigits: 2

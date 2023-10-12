@@ -275,17 +275,25 @@
                                     <h6>Pengiraan:</h6>
                                     <br>
                                     <!--begin: Invoice body-->
-                                    @if($permohonan->program == "BKOKU" && $permohonan->yuran == "1" && $permohonan->wang_saku == "1")
-                                        @php
-                                            if($tuntutan->amaun_yuran == null){
-                                                $tuntutan->amaun_yuran = 0;
+                                    @if($permohonan->program == "BKOKU" && $tuntutan->yuran == "1" && $tuntutan->wang_saku == "1")
+                                    @php
+                                        $yuran = 0;
+                                        foreach ($tuntutan_item as $item){
+                                            if($item['amaun'] == null){
+                                                $item['amaun'] = 0;
+                                                $yuran = $yuran + $item['amaun'];
                                             }
-                                            if($tuntutan->amaun_wang_saku == null){
-                                                $tuntutan->amaun_wang_saku = 0;
+                                            else{
+                                                $yuran = $yuran + $item['amaun'];
                                             }
-                                            $jumlah = $tuntutan->amaun_yuran + $tuntutan->amaun_wang_saku;
-                                            $baki_y = 5000 - $jumlah;
-                                        @endphp
+                                        }
+
+                                        if($tuntutan->amaun_wang_saku == null){
+                                            $tuntutan->amaun_wang_saku = 0;
+                                        }
+                                        $jumlah = $yuran + $tuntutan->amaun_wang_saku;
+                                        $baki_y = $tuntutan->baki - $jumlah;
+                                    @endphp
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -302,7 +310,7 @@
                                                 <tbody>
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_yuran, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($yuran, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->yuran_disokong, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $tuntutan->yuran_disokong - $tuntutan->wang_saku_disokong, 2)}}</td>
@@ -333,7 +341,7 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                    @elseif($permohonan->program == "BKOKU" && $permohonan->yuran == NULL)
+                                    @elseif($permohonan->program == "BKOKU" && $tuntutan->yuran == NULL)
                                         @php
                                             if($tuntutan->amaun_wang_saku == null){
                                                 $tuntutan->amaun_wang_saku = 0;
@@ -372,14 +380,21 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                    @elseif($permohonan->program == "BKOKU" && $permohonan->wang_saku == NULL)
-                                        @php
-                                            if($tuntutan->amaun_yuran == null){
-                                                $tuntutan->amaun_yuran = 0;
+                                    @elseif($permohonan->program == "BKOKU" && $tuntutan->wang_saku == NULL)
+                                    @php
+                                        $yuran = 0;
+                                        foreach ($tuntutan_item as $item){
+                                            if($item['amaun'] == null){
+                                                $item['amaun'] = 0;
+                                                $yuran = $yuran + $item['amaun'];
                                             }
-                                            $jumlah = $tuntutan->amaun_yuran + $tuntutan->amaun_wang_saku;
-                                            $baki_y = 5000 - $jumlah;
-                                        @endphp
+                                            else{
+                                                $yuran = $yuran + $item['amaun'];
+                                            }
+                                        }
+                                        $jumlah = $yuran;
+                                        $baki_y = $tuntutan->baki - $jumlah;
+                                    @endphp
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -396,7 +411,7 @@
                                                 <tbody>
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_yuran, 2)}}</td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($yuran, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->yuran_disokong, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $tuntutan->yuran_disokong, 2)}}</td>
