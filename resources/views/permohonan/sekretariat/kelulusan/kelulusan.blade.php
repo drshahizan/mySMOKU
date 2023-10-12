@@ -40,7 +40,7 @@
             <li class="breadcrumb-item text-dark" style="color:darkblue">Kelulusan</li>
             <!--end::Item-->
         </ul>
-    <!--end::Breadcrumb-->
+        <!--end::Breadcrumb-->
     </div>
     <!--end::Page title-->
     <br>
