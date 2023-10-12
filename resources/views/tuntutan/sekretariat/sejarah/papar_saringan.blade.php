@@ -124,6 +124,7 @@
                                     $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                     $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
                                     $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja)->value('penaja');
+                                    $status_tuntutan = DB::table('bk_status')->where('kod_status', $saringan->status)->value('status');
                                     // nama pemohon
                                     $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
                                     $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
@@ -241,7 +242,7 @@
                                                             <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan') }}" target="_blank">Keputusan Peperiksaan</a></span>
                                                         </td>
                                                         <td>
-                                                            lengkap
+                                                            {{$saringan->saringan_kep_peperiksaan}}
                                                         </td>
                                                         <td>
                                                             -
@@ -257,7 +258,7 @@
                                                                 <span><a href="{{ url($invoisResit) }}" target="_blank">{{$item['jenis_yuran']}}</a></span>
                                                             </td>
                                                             <td>
-                                                                 Lengkap
+                                                                {{$item['kep_saringan']}}
                                                             </td>
                                                             <td>
                                                                 {{$item['no_resit']}}
@@ -339,6 +340,16 @@
                                                     <td>:</td>
                                                     <td>{{number_format($tuntutan->yuran_dibayar + $tuntutan->wang_saku_dibayar, 2)}}</td>
                                                 </tr>
+                                                <tr>
+                                                    <td>Catatan</td>
+                                                    <td>:</td>
+                                                    <td>{{$saringan->catatan}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Keputusan Akhir</td>
+                                                    <td>:</td>
+                                                    <td>{{ucwords(strtolower($status_tuntutan))}}</td>
+                                                </tr>
                                             </table>
                                         </div>
                                     @elseif($permohonan->program == "BKOKU" && $tuntutan->yuran == NULL)
@@ -377,6 +388,16 @@
                                                     <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                     <td>:</td>
                                                     <td>{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Catatan</td>
+                                                    <td>:</td>
+                                                    <td>{{$saringan->catatan}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Keputusan Akhir</td>
+                                                    <td>:</td>
+                                                    <td>{{ucwords(strtolower($status_tuntutan))}}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -431,6 +452,16 @@
                                                     <td>:</td>
                                                     <td>{{number_format($tuntutan->yuran_dibayar, 2)}}</td>
                                                 </tr>
+                                                <tr>
+                                                    <td>Catatan</td>
+                                                    <td>:</td>
+                                                    <td>{{$saringan->catatan}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Keputusan Akhir</td>
+                                                    <td>:</td>
+                                                    <td>{{ucwords(strtolower($status_tuntutan))}}</td>
+                                                </tr>
                                             </table>
                                         </div>
                                     @elseif($permohonan->program == "PPK")
@@ -469,6 +500,16 @@
                                                     <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                     <td>:</td>
                                                     <td>{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Catatan</td>
+                                                    <td>:</td>
+                                                    <td>{{$saringan->catatan}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Keputusan Akhir</td>
+                                                    <td>:</td>
+                                                    <td>{{ucwords(strtolower($status_tuntutan))}}</td>
                                                 </tr>
                                             </table>
                                         </div>
