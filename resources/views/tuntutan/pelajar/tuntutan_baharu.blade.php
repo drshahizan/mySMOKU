@@ -160,7 +160,7 @@
 											<th class="text-center">Jenis Yuran</th>
 											<th class="text-center">No. Resit</th>
 											<th class="text-center">Perihal</th>
-											<th class="text-center">Amaun</th>
+											<th class="text-center">RM</th>
 										</tr>
 									</thead>
 									<tbody class="fw-semibold text-center text-gray-600">
@@ -170,7 +170,7 @@
 											<td>{{ $tuntutan_item->jenis_yuran}}</td>
 											<td><a href="/assets/dokumen/tuntutan/{{$tuntutan_item->resit}}" target="_blank">{{ $tuntutan_item->no_resit}}</a></td>
 											<td>{{ $tuntutan_item->nota_resit}}</td>
-											<td id="amaun" class="text-right">RM {{number_format($tuntutan_item->amaun, 2, '.', '')}}</td>
+											<td id="amaun" class="text-right">{{number_format($tuntutan_item->amaun, 2, '.', '')}}</td>
 										</tr>
 										@endforeach	
 									</tbody>
@@ -266,7 +266,7 @@ function myFunction() {
 		var amaunCell = rows[i].querySelector("td#amaun");
 		if (amaunCell) {
 			var amaunText = amaunCell.textContent.trim();
-			var amaunValue = parseFloat(amaunText.replace("RM", "")) || 0;
+			var amaunValue = parseFloat(amaunText) || 0;
 			totalAmaun += amaunValue;
 		}
 	}
@@ -280,7 +280,7 @@ function myFunction() {
 
 	if (total_yuran > maxLimit) {
 		yuranInput.value = '';
-		alert('Ralat: Amaun Yuran tidak boleh lebih RM' + maxLimit);
+		alert('Ralat: Amaun Yuran tidak boleh lebih RM ' + maxLimit);
 		return;
 	}
 
@@ -324,7 +324,7 @@ for (var i = 0; i < rows.length; i++) {
 	var amaunCell = rows[i].querySelector("td#amaun");
 	if (amaunCell) {
 		var amaunText = amaunCell.textContent.trim();
-		var amaunValue = parseFloat(amaunText.replace("RM", "")) || 0;
+		var amaunValue = parseFloat(amaunText) || 0;
 		totalAmaun += amaunValue;
 	}
 }

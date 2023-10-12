@@ -20,10 +20,12 @@ class TuntutanController extends Controller
     public function tuntutanBaharu()
     {   
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
-        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku_id->id)
-            //->where('status', 6)
-            ->first();
-        //dd($permohonan->status);   
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku_id->id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id->id)
+        ->where('smoku_akademik.status', 1)
+        ->select('smoku_akademik.*')
+        ->first();
+        //dd($akademik);   
 
         if ($permohonan && $permohonan->status ==6) {
             $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
