@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('tuntutan_saringan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tuntutan_id');
+            $table->string('keputusan_akhir');
+            $table->string('catatan');
             $table->foreign('tuntutan_id')
-              ->references('id')->on('tuntutan')->onDelete('cascade');
+                ->references('id')->on('tuntutan')->onDelete('cascade');
             $table->timestamps();
         });
     }
