@@ -76,7 +76,8 @@ class PermohonanController extends Controller
         ->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
         ->get(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*','smoku_akademik.status as akademik_status'])
         ->where('smoku_id', $smoku_id->id)
-        ->where('akademik_status', 1);
+        ->where('akademik_status', 1)
+        ->first();
         //dd($butiranPelajar);
 
         if ($permohonan && $permohonan->status >= '1') {
@@ -86,27 +87,28 @@ class PermohonanController extends Controller
             ->where('smoku_id', $smoku_id->id)
             ->where('status','!=', 6)->first();
             //dd($permohonan_baru);
-            if ($tamat_pengajian && !$permohonan_baru) {
-                //dd('sini');
+            if ($tamat_pengajian && $permohonan_baru->status < '1') {
+               // dd('sini');
             
                 return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri'));
 
             }else if ($tamat_pengajian && $permohonan_baru->status >= '1'){
-                //dd('situ');
+               // dd('situ');
 
-                $butiranPelajar = ButiranPelajar::join('smoku', 'smoku.id', '=', 'smoku_butiran_pelajar.smoku_id')
+                $butiranPelajar = ButiranPelajar::orderBy('permohonan.id', 'desc')
+                    ->join('smoku', 'smoku.id', '=', 'smoku_butiran_pelajar.smoku_id')
                     ->join('smoku_waris', 'smoku_waris.smoku_id', '=', 'smoku.id')
                     ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku_butiran_pelajar.smoku_id')
                     ->join('permohonan', 'permohonan.smoku_id', '=', 'smoku_butiran_pelajar.smoku_id')
                     ->join('bk_jantina', 'bk_jantina.kod_jantina', '=', 'smoku.jantina')
                     ->join('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
-                    //->join('bk_hubungan', 'bk_hubungan.kod_hubungan', '=', 'smoku.hubungan_waris')
+                    ->join('bk_hubungan', 'bk_hubungan.kod_hubungan', '=', 'smoku.hubungan_waris')
                     ->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')
                     ->where('smoku.id', $smoku_id->id)
                     ->where('smoku_akademik.status', 1)
                     ->where('permohonan.status','!=', 6)
-                    ->select(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','bk_jantina.*', 'bk_keturunan.*','permohonan.*'])
-                    ->get();
+                    ->select(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','bk_jantina.*', 'bk_keturunan.*','permohonan.*','bk_hubungan.*'])
+                    ->first();
 
                 //dd($butiranPelajar);
 

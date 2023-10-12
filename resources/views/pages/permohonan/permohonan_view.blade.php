@@ -219,7 +219,7 @@
 			<!--begin::Form-->
 			<form id="kt_create_account_form" action="{{ route('permohonan.hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
 				
-				@foreach ($butiranPelajar as $butiranPelajar)
+				{{-- @foreach ($butiranPelajar as $butiranPelajar) --}}
 				<!--begin::Step 1-->
 				<div class="current" data-kt-stepper-element="content">
 				@csrf
@@ -1221,7 +1221,7 @@
 					<!--end::Wrapper-->
 				</div>
 				<!--end::Step 6-->
-				@endforeach
+				{{-- @endforeach --}}
 
 				<!--begin::Step 7-->
 				<div data-kt-stepper-element="content">
