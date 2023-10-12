@@ -133,6 +133,23 @@ class SekretariatController extends Controller
         return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
     }
 
+    // public function peringkatPengajian()
+    // {
+    //     $recordsBKOKU = TamatPengajian::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
+    //         ->join('smoku', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+    //         ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat')
+    //         ->where('smoku_akademik.status', 1)
+    //         ->whereIn('smoku_akademik.smoku_id', function ($query) {
+    //             $query->select('smoku_id')
+    //                 ->from('permohonan')
+    //                 ->where('program', 'BKOKU');
+    //         })
+    //         ->select('tamat_pengajian.*','smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
+    //         ->get();
+
+    //     return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsBKOKU'));
+    // }
+
     public function peringkatPengajian()
     {
         $recordsBKOKU = TamatPengajian::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
@@ -141,10 +158,11 @@ class SekretariatController extends Controller
             ->where('smoku_akademik.status', 1)
             ->whereIn('smoku_akademik.smoku_id', function ($query) {
                 $query->select('smoku_id')
-                    ->from('permohonan')
-                    ->where('program', 'BKOKU');
+                      ->from('permohonan')
+                      ->where('program', 'BKOKU');
             })
-            ->select('tamat_pengajian.*','smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
+            ->select('tamat_pengajian.*', 'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
+            ->whereRaw('tamat_pengajian.id = (SELECT MAX(id) FROM tamat_pengajian WHERE smoku_id = smoku_akademik.smoku_id)')
             ->get();
 
         return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsBKOKU'));
