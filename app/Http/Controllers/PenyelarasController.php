@@ -718,11 +718,9 @@ class PenyelarasController extends Controller
 
     public function dokumenESP()
     {   
-        
         $dokumen = DokumenESP::all();
 
         return view('dokumen.penyelaras.dokumen', compact('dokumen'));
     }
-  
 
 }

@@ -51,23 +51,41 @@
 						<table class="table table-row-dashed fs-6 gy-5">
 							<thead>
 								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-									<th>Nama</th>
-									<th>Dokumen</th>
+									<th class="text-center" style="width: 20%">Nama</th>
+									<th class="text-center" style="width: 60%">Muat Naik Dokumen</th>
+									<th class="text-center" style="width: 20%">Muat Turun Dokumen</th>
 								</tr>
 							</thead>
 							<tbody class="fw-semibold text-gray-600" >
-								<tr>
-									<td class="text-gray-800">Dokumen satu&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
-									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
-								</tr>
-								<tr>
-									<td class="text-gray-800">Dokumen dua&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
-									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
-								</tr>
-								<tr>
-									<td class="text-gray-800">Dokumen tiga&nbsp;<a href="/assets/contoh/resit.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
-									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="invoisResit" name="invoisResit"/></td>
-								</tr>
+								@foreach ($dokumen as $item)
+									<tr>
+										<td class="text-gray-800">Dokumen satu&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
+										<td class="text-center">
+											<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $item->dokumen1) }}" target="_blank" class="btn btn-secondary btn-sm">
+											Lihat
+											<i class='fas fa-eye' style='font-size:10px; padding-left:20px;'></i>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-gray-800">Dokumen dua&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
+										<td class="text-center">
+											<a href="{{ asset('assets/dokumen/esp/dokumen2/' . $item->dokumen2) }}" target="_blank" class="btn btn-secondary btn-sm">
+											Lihat
+											<i class='fas fa-eye' style='font-size:10px; padding-left:20px;'></i>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-gray-800">Dokumen tiga&nbsp;<a href="/assets/contoh/resit.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="invoisResit" name="invoisResit"/></td>
+										<td class="text-center">
+											<a href="{{ asset('assets/dokumen/esp/dokumen3/' . $item->dokumen3) }}" target="_blank" class="btn btn-secondary btn-sm">
+											Lihat
+											<i class='fas fa-eye' style='font-size:10px; padding-left:20px;'></i>
+										</td>
+									</tr>
+								@endforeach
 							</tbody>
 						</table>
 						<!--end::Table-->
