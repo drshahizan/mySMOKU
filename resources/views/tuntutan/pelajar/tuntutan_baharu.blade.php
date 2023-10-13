@@ -36,7 +36,7 @@
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 										<div class="mb-5">
-											<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
 												<option></option>
 													@php
 														$currentYear = date('Y');
@@ -54,7 +54,7 @@
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 										<!--begin::Input group-->
 										<div class="mb-5">
-											<select id="semester" name="semester" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<select id="semester" name="semester" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
 												<option></option>
 												<option value="1">1</option>					
 												<option value="2">2</option>					
@@ -70,7 +70,7 @@
 									<div class="col-lg-12">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Jenis Yuran</label>
 										<!--begin::Input group-->
-										<select id="jenis_yuran" name="jenis_yuran" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<select id="jenis_yuran" name="jenis_yuran" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
 											<option></option>
 											<option value="Yuran Pengajian">Yuran Pengajian</option>
 											<option value="Yuran Pendaftaran Pengajian">Yuran Pendaftaran Pengajian</option>
@@ -91,7 +91,7 @@
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No resit/ invois</label>
 										<!--begin::Input group-->
 										<div class="mb-5">
-											<input type="text" name="no_resit" class="form-control form-control-solid" placeholder=""  />
+											<input type="text" name="no_resit" class="form-control form-control-solid" placeholder="" required/>
 										</div>
 									</div>
 								</div>
@@ -99,7 +99,7 @@
 									<div class="col-lg-12">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Perihal</label>
 										<div class="mb-5">
-											<input type="text" name="nota_resit" class="form-control form-control-solid" placeholder="Yuran Pengajian Semester 1 2023/2024" />
+											<input type="text" name="nota_resit" class="form-control form-control-solid" placeholder="Yuran Pengajian Semester 1 2023/2024" required/>
 										</div>
 									</div>
 								</div>
@@ -107,8 +107,9 @@
 									<div class="col-lg-12">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Jumlah Amaun</label>
 										<!--begin::Input group-->
-										<div class="mb-5">
-											<input type="number" id="amaun_yuran" name="amaun_yuran" onchange="myFunction()" class="form-control form-control-solid" placeholder="" step="0.01" inputmode="decimal" />
+										<div class="d-flex">
+											<span class="input-group-text">RM</span>
+											<input type="number" id="amaun_yuran" name="amaun_yuran" onchange="myFunction()" class="form-control form-control-solid" placeholder="" step="0.01" inputmode="decimal" required/>
 										</div>
 									</div>
 								</div>
@@ -116,7 +117,7 @@
 									<div class="col-lg-12">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Resit/ Invois&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></label>
 										<div class="input-group control-group img_div form-group col-md-11" >
-											<input type="file" name="resit[]" />
+											<input type="file" name="resit[]" required/>
 											<br>
 										</div>
 									</div>
@@ -223,7 +224,8 @@
 							<br>
 							<!--end::Actions-->
 							<div class="d-flex justify-content-end">
-								<button type="submit" class="btn btn-primary" @if ($tuntutan && $tuntutan->status >= 2) disabled @endif>
+								{{-- <button type="submit" class="btn btn-primary" @if ($tuntutan && $tuntutan->status >= 2) disabled @endif> --}}
+								<button type="submit" class="btn btn-primary">
 									Hantar
 								</button>
 							</div>

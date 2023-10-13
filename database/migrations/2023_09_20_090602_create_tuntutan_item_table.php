@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('resit');
             $table->string('nota_resit');
             $table->string('amaun');
-            $table->string('kep_saringan');
+            $table->string('kep_saringan')->nullable();
             $table->foreign('tuntutan_id')
               ->references('id')->on('tuntutan')->onDelete('cascade');
             $table->timestamps();

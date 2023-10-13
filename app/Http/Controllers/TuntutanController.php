@@ -27,7 +27,8 @@ class TuntutanController extends Controller
         ->select('smoku_akademik.*')
         ->first();
         //dd($akademik->bil_bulan_per_sem);
-        //$existingResult = Peperiksaan::where('smoku_id', $smoku_id->id)->first();
+
+        //$existingRecord = Peperiksaan::where('smoku_id', $smoku_id->id)->first();
 
            
 
