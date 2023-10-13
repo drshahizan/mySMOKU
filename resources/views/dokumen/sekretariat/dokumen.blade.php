@@ -62,14 +62,14 @@
 								<thead>
 									<tr>
 										<th>Item</th>
-										<th>Dokumen</th>
+										<th>Borang</th>
 									</tr>
 								</thead>
 
 								<tbody>
 									{{-- DOKUMEN 1 --}}
 									<tr>
-										<td>Dokumen 1&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
+										<td>SBB 1&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
 										<td>
 											<input type="file" id="dokumen1" name="dokumen1[]" required/>
 											@if(session()->has('uploadedDokumen1'))
@@ -82,7 +82,7 @@
 						
 									{{-- DOKUMEN 2 --}}
 									<tr>
-										<td>Dokumen 2&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
+										<td>SBB 2&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
 										<td>
 											<input type="file" id="dokumen2" name="dokumen2[]" required/>
 											@if(session()->has('uploadedDokumen2'))
@@ -95,7 +95,7 @@
 
 									{{-- DOKUMEN 3 --}}
 									<tr>
-										<td>Dokumen 3&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
+										<td>SBB 3&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
 										<td>
 											<input type="file" id="dokumen3" name="dokumen3[]" required/>
 											@if(session()->has('uploadedDokumen3'))
@@ -113,7 +113,7 @@
 											</div>
 						
 											<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp; 
-												Format fail yang boleh dimuat naik adalah format '.pdf', '.jpg', '.png', dan '.jpeg'.
+												Format fail yang boleh dimuat naik adalah format '.pdf', '.xls', '.xlsx'.
 											</div>
 						
 											<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp; 

@@ -51,19 +51,19 @@
 						<table class="table table-row-dashed fs-6 gy-5">
 							<thead>
 								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-									<th class="text-center" style="width: 20%">Nama</th>
-									<th class="text-center" style="width: 60%">Muat Naik Dokumen</th>
-									<th class="text-center" style="width: 20%">Muat Turun Dokumen</th>
+									<th class="text-center" style="width: 20%">Item</th>
+									<th class="text-center" style="width: 60%">Muat Naik Borang</th>
+									<th class="text-center" style="width: 20%">Muat Turun Borang</th>
 								</tr>
 							</thead>
 							<tbody class="fw-semibold text-gray-600" >
 								<tr>
-									<td class="text-gray-800">Dokumen satu&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="text-gray-800">SBB 1&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
 									<td class="fv-row">
 										<input type="file" class="form-control form-control-sm" name="dokumen1"/>
-										@if ($item->dokumen1)
+										{{-- @if ($item->dokumen1)
 											<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $item->dokumen1) }}" target="_blank">{{ $item->dokumen1 }}</a>
-										@endif
+										@endif --}}
 									</td>
 									<td class="text-center">
 										<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $item->dokumen1) }}" target="_blank" class="btn btn-secondary btn-sm">
@@ -74,12 +74,12 @@
 								</tr>
 
 								<tr>
-									<td class="text-gray-800">Dokumen kedau&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="text-gray-800">SBB 2&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
 									<td class="fv-row">
 										<input type="file" class="form-control form-control-sm" name="dokumen2"/>
-										@if ($item->dokumen2)
+										{{-- @if ($item->dokumen2)
 											<a href="{{ asset('assets/dokumen/esp/dokumen2/' . $item->dokumen2) }}" target="_blank">{{ $item->dokumen2 }}</a>
-										@endif
+										@endif --}}
 									</td>
 									<td class="text-center">
 										<a href="{{ asset('assets/dokumen/esp/dokumen2/' . $item->dokumen2) }}" target="_blank" class="btn btn-secondary btn-sm">
@@ -90,18 +90,34 @@
 								</tr>
 
 								<tr>
-									<td class="text-gray-800">Dokumen satu&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="text-gray-800">SBB 3&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
 									<td class="fv-row">
 										<input type="file" class="form-control form-control-sm" name="dokumen3"/>
-										@if ($item->dokumen3)
+										{{-- @if ($item->dokumen3)
 											<a href="{{ asset('assets/dokumen/esp/dokumen3/' . $item->dokumen3) }}" target="_blank">{{ $item->dokumen3 }}</a>
-										@endif
+										@endif --}}
 									</td>
 									<td class="text-center">
 										<a href="{{ asset('assets/dokumen/esp/dokumen3/' . $item->dokumen3) }}" target="_blank" class="btn btn-secondary btn-sm">
 											Lihat
 											<i class='fas fa-eye' style='font-size:10px; padding-left:20px;'></i>
 										</a>
+									</td>
+								</tr>
+
+								<tr>
+									<td colspan="3">
+										<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange; font-size:15px;'></i>&nbsp;
+											Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a> untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
+										</div>
+					
+										<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp; 
+											Format fail yang boleh dimuat naik adalah format '.pdf', '.xls', '.xlsx'.
+										</div>
+					
+										<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp; 
+											Saiz maksimum fail adalah 2 MB.
+										</div>
 									</td>
 								</tr>
 							</tbody>
