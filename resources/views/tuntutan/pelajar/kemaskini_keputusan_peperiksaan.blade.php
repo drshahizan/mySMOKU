@@ -22,7 +22,7 @@
 							@csrf
 							<div class="d-flex flex-column align-items-start flex-xxl-row">
 								<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
-									<span class="fs-3 fw-bold text-gray-800">Keputusan Peperiksaan Baru</span>
+									<span class="fs-3 fw-bold text-gray-800">Kemaskini Keputusan Peperiksaan</span>
 								</div>
 							</div>
 							<br>
@@ -34,13 +34,24 @@
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 										<div class="mb-5">
-											<input type="text" name="sesi" class="form-control form-control-solid" placeholder="2023/2024" />
+											<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
+												<option></option>
+													@php
+														$currentYear = date('Y');
+													@endphp
+													@for($year = $currentYear - 1; $year <= ($currentYear + 1); $year++)
+														@php
+															$sesi = $year . '/' . ($year + 1);
+														@endphp
+														<option value="{{ $sesi }}">{{ $sesi }}</option>
+													@endfor
+											</select>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 										<div class="mb-5">
-											<select id="semester" name="semester" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<select id="semester" name="semester" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
 												<option></option>
 												<option value="1">1</option>
 												<option value="2">2</option>					
@@ -53,16 +64,20 @@
 								<!--end::Row-->
 								<!--begin::Row-->
 								<div class="row gx-10 mb-5">
-									<div class="col-lg-6">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Pengajian&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
+									<div class="col-lg-10">
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Pengajian&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="Contoh"><i class="fa-solid fa-circle-info"></i></a></label>
 										<div class="mb-5">
-											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan[]"/>
+											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan[]" required/>
 										</div>
 									</div>
+								</div>
+								<!--end::Row-->
+								<!--begin::Row-->
+								<div class="row gx-10 mb-5">
 									<div class="col-lg-6">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">CGPA</label>
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">CGPA&nbsp;<a href="#" data-bs-toggle="tooltip" title="3.50"><i class="fa-solid fa-circle-info"></i></a></label>
 										<div class="mb-5">
-											<input type="text" name="cgpa" class="form-control form-control-solid"  placeholder="" />
+											<input type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="" required/>
 										</div>
 									</div>
 								</div>

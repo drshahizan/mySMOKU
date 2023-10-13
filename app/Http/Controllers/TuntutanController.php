@@ -10,6 +10,7 @@ use App\Models\Smoku;
 use App\Models\SejarahTuntutan;
 use App\Models\Akademik;
 use App\Models\EmelKemaskini;
+use App\Models\Peperiksaan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,9 +26,15 @@ class TuntutanController extends Controller
         ->where('smoku_akademik.status', 1)
         ->select('smoku_akademik.*')
         ->first();
-        //dd($akademik);   
+        //dd($akademik->bil_bulan_per_sem);
+        //$existingResult = Peperiksaan::where('smoku_id', $smoku_id->id)->first();
+
+           
 
         if ($permohonan && $permohonan->status ==6) {
+
+            
+
             $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
                 ->where('permohonan_id', $permohonan->id)
                 ->first(['tuntutan.*']);
