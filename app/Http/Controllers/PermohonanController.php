@@ -90,7 +90,7 @@ class PermohonanController extends Controller
             if ($tamat_pengajian && $permohonan_baru->status < '1') {
                // dd('sini');
             
-                return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri'));
+                return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri'));
 
             }else if ($tamat_pengajian && $permohonan_baru->status >= '1'){
                // dd('situ');
@@ -113,17 +113,17 @@ class PermohonanController extends Controller
                 //dd($butiranPelajar);
 
                 $dokumen = Dokumen::where('permohonan_id', $permohonan_baru->id)->get();
-                return view('pages.permohonan.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan'));
+                return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan'));
 
             }
 
 
             $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
-            return view('pages.permohonan.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan'));
+            return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan'));
             
         }else {
 
-            return view('pages.permohonan.permohonan-baru', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri'));
+            return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri'));
 
         }
 
@@ -571,7 +571,7 @@ class PermohonanController extends Controller
         if ($permohonan) {
             $peperiksaan = Peperiksaan::where('permohonan_id', $permohonan->id)->get();
             
-            return view('pages.permohonan.kemaskini_keputusan_peperiksaan', compact('peperiksaan'));
+            return view('tuntutan.pelajar.kemaskini_keputusan_peperiksaan', compact('peperiksaan'));
         
         } else {
 
