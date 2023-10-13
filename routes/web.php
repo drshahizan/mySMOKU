@@ -123,7 +123,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Dokumen - Sekretariat
     Route::get('sekretariat/muat-naik/dokumen/esp', [SekretariatController::class, 'dokumenESP'])->name('sekretariat.dokumenESP');
-    //Route::post('sekretariat/hantar/kemaskini/peringkat/pengajian/{id}', [SekretariatController::class, 'kemaskiniPeringkatPengajian'])->name('kemaskini.peringkat.pengajian');
+    Route::post('sekretariat/hantar/dokumen/esp', [SekretariatController::class, 'hantarDokumenESP'])->name('hantar.dokumen.esp');
 
     //Permohonan - Sekretariat - Kelulusan
     Route::post('permohonan/sekretariat/hantar/semua', [SekretariatController::class, 'hantarSemuaKeputusanPermohonan'])->name('bulk.approval');

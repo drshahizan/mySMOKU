@@ -45,7 +45,7 @@
 					<!--begin::Card body-->
 					<div class="card-body p-12">
 						<!--begin::Form-->
-						<form action="#" method="post" enctype="multipart/form-data">
+						<form action="{{ route('hantar.dokumen.esp') }}" method="post" enctype="multipart/form-data">
 							@csrf
 							<!--begin::Wrapper-->
 							<div class="d-flex flex-column align-items-start flex-xl-row">
@@ -71,12 +71,12 @@
 									<tr>
 										<td>Dokumen 1&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
 										<td>
-											<input type="file" id="sijilTamat" name="sijilTamat[]" required/>
-											{{-- @if(session()->has('uploadedSijilTamat'))
-												@foreach(session('uploadedSijilTamat') as $sijil)
-													<a href="{{ asset('assets/dokumen/sijil_tamat/' . $sijil) }}" target="_blank">{{ $sijil }}</a>
+											<input type="file" id="dokumen1" name="dokumen1[]" required/>
+											@if(session()->has('uploadedDokumen1'))
+												@foreach(session('uploadedDokumen1') as $doc1)
+													<a href="{{ asset('assets/dokumen/esp/dokumen1' . $doc1) }}" target="_blank">{{ $doc1 }}</a>
 												@endforeach
-											@endif --}}
+											@endif
 										</td>
 									</tr>
 						
@@ -84,12 +84,12 @@
 									<tr>
 										<td>Dokumen 2&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
 										<td>
-											<input type="file" id="transkrip" name="transkrip[]" required/>
-											{{-- @if(session()->has('uploadedTranskrip'))
-												@foreach(session('uploadedTranskrip') as $transkrip)
-													<a href="{{ asset('assets/dokumen/salinan_transkrip/' . $transkrip) }}" target="_blank">{{ $transkrip }}</a>
+											<input type="file" id="dokumen2" name="dokumen2[]" required/>
+											@if(session()->has('uploadedDokumen2'))
+												@foreach(session('uploadedDokumen2') as $doc2)
+													<a href="{{ asset('assets/dokumen/esp/dokumen2' . $doc2) }}" target="_blank">{{ $doc2 }}</a>
 												@endforeach
-											@endif --}}
+											@endif
 										</td>
 									</tr>
 
@@ -97,12 +97,12 @@
 									<tr>
 										<td>Dokumen 3&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
 										<td>
-											<input type="file" id="transkrip" name="transkrip[]" required/>
-											{{-- @if(session()->has('uploadedTranskrip'))
-												@foreach(session('uploadedTranskrip') as $transkrip)
-													<a href="{{ asset('assets/dokumen/salinan_transkrip/' . $transkrip) }}" target="_blank">{{ $transkrip }}</a>
+											<input type="file" id="dokumen3" name="dokumen3[]" required/>
+											@if(session()->has('uploadedDokumen3'))
+												@foreach(session('uploadedDokumen3') as $doc3)
+													<a href="{{ asset('assets/dokumen/esp/dokumen3' . $doc3) }}" target="_blank">{{ $doc3 }}</a>
 												@endforeach
-											@endif --}}
+											@endif
 										</td>
 									</tr>
 						

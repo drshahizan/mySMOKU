@@ -435,10 +435,6 @@ class SekretariatController extends Controller
                             $message = 'Test message';
                             Mail::to($studentEmail)->send(new KeputusanLayak($message));
                         }
-
-                        // Emel notifikasi layak
-                        // $message = 'Test message';
-                        // Mail::to("fateennashuha9@gmail.com")->send(new KeputusanLayak($message));
                     }
                     else
                     {
@@ -471,12 +467,8 @@ class SekretariatController extends Controller
 
                         foreach ($studentEmails as $studentEmail) {
                             $message = 'Test message';
-                            Mail::to($studentEmail)->send(new KeputusanLayak($message));
+                            Mail::to($studentEmail)->send(new KeputusanTidakLayak($message));
                         }
-
-                        // Emel notifikasi tidak layak
-                        // $message = 'Test message';
-                        // Mail::to("fateennashuha9@gmail.com")->send(new KeputusanTidakLayak($message));
                     }
                 }
             }
@@ -577,6 +569,49 @@ class SekretariatController extends Controller
         return view('dokumen.sekretariat.dokumen', compact('dokumen'));
     }
 
+    public function hantarDokumenESP(Request $request)
+    {
+        $dokumen1 = $request->file('dokumen1');
+        $dokumen2 = $request->file('dokumen2');
+        $dokumen3 = $request->file('dokumen3');
+        
+        $uploadedDokumen1 = [];
+        $uploadedDokumen2 = [];
+        $uploadedDokumen3 = [];
+    
+        if ($dokumen1 && $dokumen2 && $dokumen3) {
+            foreach ($dokumen1 as $key => $doc1) {
+                $uniqueFilenameDokumen1 = uniqid() . '_' . $doc1->getClientOriginalName();
+                $doc1->move('assets/dokumen/esp/dokumen1', $uniqueFilenameDokumen1);
+                $uploadedDokumen1[] = $uniqueFilenameDokumen1;
+    
+                $uniqueFilenameDokumen2 = uniqid() . '_' . $dokumen2[$key]->getClientOriginalName();
+                $dokumen2[$key]->move('assets/dokumen/esp/dokumen2', $uniqueFilenameDokumen2);
+                $uploadedDokumen2[] = $uniqueFilenameDokumen2;
+    
+                $uniqueFilenameDokumen3 = uniqid() . '_' . $dokumen3[$key]->getClientOriginalName();
+                $dokumen3[$key]->move('assets/dokumen/esp/dokumen3', $uniqueFilenameDokumen3);
+                $uploadedDokumen3[] = $uniqueFilenameDokumen3;
+    
+                // Create a new record
+                $dokumenESP = new DokumenESP();
+                $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
+                $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
+                $dokumenESP->dokumen3 = $uniqueFilenameDokumen3;
+                // $dokumenESP->catatan = $request->catatan;
+                $dokumenESP->save();
+            }
+        }
+    
+        // Store the uploaded file names or URLs in the session
+        session()->put('uploadedDokumen1', $uploadedDokumen1);
+        session()->put('uploadedDokumen2', $uploadedDokumen2);
+        session()->put('uploadedDokumen3', $uploadedDokumen3);
+        // session()->put('catatan', $request->input('catatan'));
+    
+        return redirect()->route('sekretariat.dokumenESP');
+    }
+    
 
     //TUNTUTAN
     public function senaraiTuntutanKedua()
