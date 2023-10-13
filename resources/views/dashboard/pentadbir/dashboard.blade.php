@@ -1,6 +1,6 @@
 <x-default-layout>
     <h1>Selamat Datang, Admin</h1>
-    <br>
+    {{-- <br>
     <!--begin::Row-->
     <div class="row">
         <div class="col-sm-6 col-xl-2 mb-xl-10">
@@ -8,9 +8,11 @@
             <div class="card bg-light-success h-lg-100">
                 <!--begin::Body-->
                 <div class="card-body my-3">
+                    <i class="bi bi-person-circle text-success fs-3x"></i>
+                    <br>
                     <a href="#" class="card-title fw-bold text-success fs-6">Jumlah Pengguna</a>
                     <div class="py-1">
-                        <i class="bi bi-person-circle text-success fs-3x"></i>
+
                             <span class="text-dark fs-3x  fw-bold me-2">15%</span>
                      </div>
                 </div>
@@ -303,5 +305,5 @@
         </div>
         <!--end::Card widget 2-->
     </div>
-    <!--end::Col-->
+    <!--end::Col--> --}}
 </x-default-layout>
