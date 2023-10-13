@@ -41,12 +41,12 @@
 					<!--begin::Card title-->
 				</div>
 				<!--end::Card header-->
+
 				<!--begin::Card body-->
-				<div class="card-body pt-0">	
-					<!--begin::Form-->
-					<form class="form" action="" method="post" enctype="multipart/form-data">
+				<div class="card-body pt-0">
+					@foreach ($dokumen as $item)
+					<form class="form" action="{{ route('penyelaras.hantar.dokumen', ['id' => $item->id ]) }}" method="post" enctype="multipart/form-data">
 						@csrf
-					
 						<!--begin::Table-->
 						<table class="table table-row-dashed fs-6 gy-5">
 							<thead>
@@ -57,35 +57,53 @@
 								</tr>
 							</thead>
 							<tbody class="fw-semibold text-gray-600" >
-								@foreach ($dokumen as $item)
-									<tr>
-										<td class="text-gray-800">Dokumen satu&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
-										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
-										<td class="text-center">
-											<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $item->dokumen1) }}" target="_blank" class="btn btn-secondary btn-sm">
+								<tr>
+									<td class="text-gray-800">Dokumen satu&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="fv-row">
+										<input type="file" class="form-control form-control-sm" name="dokumen1"/>
+										@if ($item->dokumen1)
+											<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $item->dokumen1) }}" target="_blank">{{ $item->dokumen1 }}</a>
+										@endif
+									</td>
+									<td class="text-center">
+										<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $item->dokumen1) }}" target="_blank" class="btn btn-secondary btn-sm">
 											Lihat
 											<i class='fas fa-eye' style='font-size:10px; padding-left:20px;'></i>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-gray-800">Dokumen dua&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
-										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
-										<td class="text-center">
-											<a href="{{ asset('assets/dokumen/esp/dokumen2/' . $item->dokumen2) }}" target="_blank" class="btn btn-secondary btn-sm">
+										</a>
+									</td>
+								</tr>
+
+								<tr>
+									<td class="text-gray-800">Dokumen kedau&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="fv-row">
+										<input type="file" class="form-control form-control-sm" name="dokumen2"/>
+										@if ($item->dokumen2)
+											<a href="{{ asset('assets/dokumen/esp/dokumen2/' . $item->dokumen2) }}" target="_blank">{{ $item->dokumen2 }}</a>
+										@endif
+									</td>
+									<td class="text-center">
+										<a href="{{ asset('assets/dokumen/esp/dokumen2/' . $item->dokumen2) }}" target="_blank" class="btn btn-secondary btn-sm">
 											Lihat
 											<i class='fas fa-eye' style='font-size:10px; padding-left:20px;'></i>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-gray-800">Dokumen tiga&nbsp;<a href="/assets/contoh/resit.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
-										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="invoisResit" name="invoisResit"/></td>
-										<td class="text-center">
-											<a href="{{ asset('assets/dokumen/esp/dokumen3/' . $item->dokumen3) }}" target="_blank" class="btn btn-secondary btn-sm">
+										</a>
+									</td>
+								</tr>
+
+								<tr>
+									<td class="text-gray-800">Dokumen satu&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="fv-row">
+										<input type="file" class="form-control form-control-sm" name="dokumen3"/>
+										@if ($item->dokumen3)
+											<a href="{{ asset('assets/dokumen/esp/dokumen3/' . $item->dokumen3) }}" target="_blank">{{ $item->dokumen3 }}</a>
+										@endif
+									</td>
+									<td class="text-center">
+										<a href="{{ asset('assets/dokumen/esp/dokumen3/' . $item->dokumen3) }}" target="_blank" class="btn btn-secondary btn-sm">
 											Lihat
 											<i class='fas fa-eye' style='font-size:10px; padding-left:20px;'></i>
-										</td>
-									</tr>
-								@endforeach
+										</a>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 						<!--end::Table-->
@@ -101,8 +119,7 @@
 							</button>
 						</div>
 					</form>
-					
-					<!--end::Form-->
+					@endforeach
 				</div>
 				<!--end::Card body-->
 			</div>
@@ -113,24 +130,5 @@
 	<!--end::Content-->
 	
 </div>
-
-<!--begin::Javascript-->
-<script>
-	// tinymce.init({
-	//   selector: '#catatan', // Replace with the ID or class of your textarea
-	//   plugins: 'autolink lists link image charmap print preview',
-	//   toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-	//   height: 300 // Set the height of the editor
-	// });
-
-	// var editorContent = tinymce.get('catatan').getContent();
-
-</script>
-
-<!--end::Javascript-->
 	
-
-
-
-
 </x-default-layout>
