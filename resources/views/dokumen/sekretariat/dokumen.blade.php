@@ -51,7 +51,7 @@
 							<div class="d-flex flex-column align-items-start flex-xl-row">
 								<!--begin::Input group-->
 								<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
-									<span class="fs-3 fw-bold text-gray-800">Muat Naik Dokumen ESP</span>
+									<span class="fs-3 fw-bold text-gray-800">Muat Naik Dokumen</span>
 								</div>
 							</div>
 							<!--end::Top-->
@@ -62,14 +62,14 @@
 								<thead>
 									<tr>
 										<th>Item</th>
-										<th>Borang</th>
+										<th>Borang Salur Peruntukan Program BKOKU</th>
 									</tr>
 								</thead>
 
 								<tbody>
 									{{-- DOKUMEN 1 --}}
 									<tr>
-										<td>SBB 1&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
+										<td>SPBB 1&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
 										<td>
 											<input type="file" id="dokumen1" name="dokumen1[]" required/>
 											@if(session()->has('uploadedDokumen1'))
@@ -82,7 +82,7 @@
 						
 									{{-- DOKUMEN 2 --}}
 									<tr>
-										<td>SBB 2&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
+										<td>SPBB 2&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
 										<td>
 											<input type="file" id="dokumen2" name="dokumen2[]" required/>
 											@if(session()->has('uploadedDokumen2'))
@@ -95,7 +95,7 @@
 
 									{{-- DOKUMEN 3 --}}
 									<tr>
-										<td>SBB 3&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
+										<td>SPBB 3&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
 										<td>
 											<input type="file" id="dokumen3" name="dokumen3[]" required/>
 											@if(session()->has('uploadedDokumen3'))
