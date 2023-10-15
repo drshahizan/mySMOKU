@@ -31,6 +31,12 @@
             padding: 2px 5px;
             font-size: 13px!important;
         }
+        textarea{
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 2px 5px;
+            font-size: 13px!important;
+        }
         select{
             width: 230px!important;
             padding: 3px 6px!important;
@@ -61,6 +67,9 @@
         .column {
             float: left;
             width: 50%;
+        }
+        .vertical-top{
+            vertical-align: top!important;
         }
     </style>
 
@@ -288,6 +297,11 @@
                                                     <td>:</td>
                                                     <td><input type="number" id="jumlah_dibayar" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                 </tr>
+                                                <tr>
+                                                    <td class="vertical-top">Catatan</td>
+                                                    <td class="vertical-top">:</td>
+                                                    <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
+                                                </tr>
                                             </table>
                                         </div>
                                         <script>
@@ -358,6 +372,11 @@
                                                     <td>:</td>
                                                     <td><input type="number" id="jumlah_dibayar_2" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                 </tr>
+                                                <tr>
+                                                    <td class="vertical-top">Catatan</td>
+                                                    <td class="vertical-top">:</td>
+                                                    <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
+                                                </tr>
                                             </table>
                                         </div>
                                         <script>
@@ -420,6 +439,11 @@
                                                         <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                         <td>:</td>
                                                         <td><input type="number" id="jumlah_dibayar_3" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="vertical-top">Catatan</td>
+                                                        <td class="vertical-top">:</td>
+                                                        <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -486,6 +510,11 @@
                                                     <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                     <td>:</td>
                                                     <td><input type="number" id="jumlah_dibayar_ppk" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="vertical-top">Catatan</td>
+                                                    <td class="vertical-top">:</td>
+                                                    <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
                                                 </tr>
                                             </table>
                                         </div>

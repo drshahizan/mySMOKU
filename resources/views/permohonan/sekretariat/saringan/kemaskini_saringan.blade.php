@@ -54,6 +54,15 @@
         .my-btn,.my-btn:hover{
             background-color: #3E97FFFF;
         }
+        textarea{
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 2px 5px;
+            font-size: 13px!important;
+        }
+        .vertical-top{
+            vertical-align: top!important;
+        }
     </style>
 <body>
 <!--begin::Page title-->
@@ -273,6 +282,11 @@
                                                 <td>:</td>
                                                 <td><input type="number" id="jumlah_dibayar" name="jumlah_dibayar" value="{{number_format($permohonan->yuran_dibayar+$permohonan->wang_saku_dibayar, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                             </tr>
+                                            <tr>
+                                                <td class="vertical-top">Catatan</td>
+                                                <td class="vertical-top">:</td>
+                                                <td class="vertical-top">{{$permohonan->catatan_disokong}}</td>
+                                            </tr>
                                         </table>
                                     </div>
                                     <script>
@@ -343,6 +357,11 @@
                                                 <td>:</td>
                                                 <td><input type="number" id="jumlah_dibayar_2" name="jumlah_dibayar" value="{{number_format($permohonan->wang_saku_dibayar, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                             </tr>
+                                            <tr>
+                                                <td class="vertical-top">Catatan</td>
+                                                <td class="vertical-top">:</td>
+                                                <td class="vertical-top">{{$permohonan->catatan_disokong}}</td>
+                                            </tr>
                                         </table>
                                     </div>
                                     <script>
@@ -405,6 +424,11 @@
                                                 <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                 <td>:</td>
                                                 <td><input type="number" id="jumlah_dibayar_3" name="jumlah_dibayar" value="{{number_format($permohonan->yuran_dibayar, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="vertical-top">Catatan</td>
+                                                <td class="vertical-top">:</td>
+                                                <td class="vertical-top">{{$permohonan->catatan_disokong}}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -471,6 +495,11 @@
                                                 <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                 <td>:</td>
                                                 <td><input type="number" id="jumlah_dibayar_ppk" name="jumlah_dibayar" value="{{number_format($permohonan->wang_saku_dibayar, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="vertical-top">Catatan</td>
+                                                <td class="vertical-top">:</td>
+                                                <td class="vertical-top">{{$permohonan->catatan_disokong}}</td>
                                             </tr>
                                         </table>
                                     </div>

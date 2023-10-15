@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Permohonan extends Model
 {
     use HasFactory;
-    protected $table = 'permohonan'; 
+    protected $table = 'permohonan';
 
     protected $fillable = [
         'smoku_id',
-        'no_rujukan_permohonan',        
+        'no_rujukan_permohonan',
         'program',
         'yuran',
         'amaun_yuran',
@@ -22,6 +22,8 @@ class Permohonan extends Model
         'yuran_dibayar',
         'wang_saku_disokong',
         'wang_saku_dibayar',
+        'catatan_disokong',
+        'catatan_dibayar',
         'perakuan',
         'status',
     ];

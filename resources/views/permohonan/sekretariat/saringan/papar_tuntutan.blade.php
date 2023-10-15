@@ -51,6 +51,15 @@
         .red-color{
             color: red!important;
         }
+        textarea{
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 2px 5px;
+            font-size: 13px!important;
+        }
+        .vertical-top{
+            vertical-align: top!important;
+        }
     </style>
 
     <!--begin::Page title-->
@@ -283,6 +292,11 @@
                                                         <td>:</td>
                                                         <td>{{number_format($permohonan->yuran_dibayar + $permohonan->wang_saku_dibayar, 2)}}</td>
                                                     </tr>
+                                                    <tr>
+                                                        <td class="vertical-top">Catatan</td>
+                                                        <td class="vertical-top">:</td>
+                                                        <td class="vertical-top">{{$permohonan->catatan_disokong}}</td>
+                                                    </tr>
                                                 </table>
                                             </div>
                                         @elseif($permohonan->program == "BKOKU" && $permohonan->yuran == NULL)
@@ -324,6 +338,11 @@
                                                         <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                         <td>:</td>
                                                         <td>{{number_format($permohonan->wang_saku_dibayar, 2)}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="vertical-top">Catatan</td>
+                                                        <td class="vertical-top">:</td>
+                                                        <td class="vertical-top">{{$permohonan->catatan_disokong}}</td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -374,6 +393,11 @@
                                                         <td>:</td>
                                                         <td>{{number_format($permohonan->yuran_dibayar, 2)}}</td>
                                                     </tr>
+                                                    <tr>
+                                                        <td class="vertical-top">Catatan</td>
+                                                        <td class="vertical-top">:</td>
+                                                        <td class="vertical-top">{{$permohonan->catatan_disokong}}</td>
+                                                    </tr>
                                                 </table>
                                             </div>
                                         @elseif($permohonan->program == "PPK")
@@ -415,6 +439,11 @@
                                                         <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                         <td>:</td>
                                                         <td>{{number_format($permohonan->wang_saku_dibayar, 2)}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="vertical-top">Catatan</td>
+                                                        <td class="vertical-top">:</td>
+                                                        <td class="vertical-top">{{$permohonan->catatan_disokong}}</td>
                                                     </tr>
                                                 </table>
                                             </div>

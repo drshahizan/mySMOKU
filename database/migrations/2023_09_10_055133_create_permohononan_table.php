@@ -26,7 +26,9 @@ return new class extends Migration
             $table->string('wang_saku_dibayar')->nullable();
             $table->string('baki')->nullable();
             $table->string('baki_disokong')->nullable();
-            $table->string('baki_diluluskan')->nullable();
+            $table->string('baki_dibayar')->nullable();
+            $table->string('catatan_disokong')->nullable();
+            $table->string('catatan_dibayar')->nullable();
             $table->string('perakuan')->nullable();
             $table->integer('status')->nullable();
             $table->foreign('smoku_id')
