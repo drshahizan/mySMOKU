@@ -109,7 +109,7 @@
 
         <p>
             <span style="float: right">
-                Rujukan Kami : KPT - {{$kandungan_surat->no_rujukan}}<br>
+                Rujukan Kami : KPT - {{$no_kp}}<br>
                 Tarikh : {{date('d/m/Y', strtotime($tarikh_kelulusan))}}<br>
             </span>
         </p>
