@@ -17,16 +17,33 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
     /**
     * @return \Illuminate\Support\Collection
     */
+    private $programCode; 
+
+    public function __construct($programCode)
+    {
+        $this->programCode = $programCode;
+    }
+
     public function collection()
     {
         $senarai_pendek = DB::table('permohonan as a')
-        ->where('a.status', 4)
-        ->select('a.no_rujukan_permohonan', 'd.nama', 'b.no_pendaftaran_pelajar', 'e.kecacatan', 'b.nama_kursus', 'c.nama_institusi', 'b.tarikh_mula', 'b.tarikh_tamat')
-        ->join('smoku_akademik as b', 'b.smoku_id', '=', 'a.smoku_id')
-        ->join('bk_info_institusi as c', 'c.id_institusi', '=', 'b.id_institusi')
-        ->join('smoku as d', 'd.id', '=', 'a.smoku_id')
-        ->join('bk_jenis_oku as e', 'e.kod_oku', '=', 'd.kategori')
-        ->get();
+            ->where('a.status', 4)
+            ->where('a.program', $this->programCode)
+            ->select(
+                'a.no_rujukan_permohonan', 
+                'd.nama',
+                'b.no_pendaftaran_pelajar',
+                'e.kecacatan',
+                'b.nama_kursus',
+                'c.nama_institusi',
+                'b.tarikh_mula',
+                'b.tarikh_tamat'
+            )
+            ->join('smoku_akademik as b', 'b.smoku_id', '=', 'a.smoku_id')
+            ->join('bk_info_institusi as c', 'c.id_institusi', '=', 'b.id_institusi')
+            ->join('smoku as d', 'd.id', '=', 'a.smoku_id')
+            ->join('bk_jenis_oku as e', 'e.kod_oku', '=', 'd.kategori')
+            ->get();
 
         return collect($senarai_pendek);
     }
@@ -60,14 +77,15 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
     public function map($row): array
     {
         return [
-            $row->id_permohonan,
-            $row->nama_pelajar,
-            $row->no_pendaftaranpelajar,
+            // Update this to match with column name in database
+            $row->no_rujukan_permohonan, 
+            $row->nama,
+            $row->no_pendaftaran_pelajar,
             $row->kecacatan,
             $row->nama_kursus,
-            $row->namaipt,
-            \Carbon\Carbon::parse($row->tkh_mula)->format('d/m/Y'),
-            \Carbon\Carbon::parse($row->tkh_tamat)->format('d/m/Y'),
+            $row->nama_institusi,
+            \Carbon\Carbon::parse($row->tarikh_mula)->format('d/m/Y'),
+            \Carbon\Carbon::parse($row->tarikh_tamat)->format('d/m/Y'),
         ];
     }
 

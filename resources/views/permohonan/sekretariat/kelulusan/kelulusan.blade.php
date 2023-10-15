@@ -54,10 +54,6 @@
                         <div class="card">
                             <div class="header">
                                 <h2>Senarai Permohonan untuk Kelulusan JKKBKOKU<br><small>Klik ID Permohonan untuk meluluskan permohonan</small></h2>
-                                <ul class="header-dropdown dropdown" style="color: black;">
-                                    <li><a href="{{ route('senarai.disokong.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> PDF</a></li>
-                                    <li><a href="{{ route('senarai.disokong.excel') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-excel" style="color: black;"></i> Excel</a></li>
-                                </ul>
                             </div>
 
                             {{-- top nav bar --}}
@@ -74,6 +70,33 @@
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br>
+                                    <form action="#" method="GET">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <select name="status" class="form-select" style="margin-left: 20px">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                    <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
+                                                    <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
+                                                </select>
+                                            </div>
+                                    
+                                            <div class="col-md-5" style="margin-left: 10px; margin-right:80px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 6%; padding-left: 6px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                </button>
+                                            </div>
+
+                                            <div class="col-md-3" style="padding-left: 80px;">
+                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PDF
+                                                </a>
+                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-excel" style="color: black;"></i> Excel
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </form>  
+
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
@@ -222,6 +245,33 @@
                                 {{-- PPK --}}
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <br>
+                                    <form action="#" method="GET">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <select name="status" class="form-select" style="margin-left: 20px">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                    <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
+                                                    <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
+                                                </select>
+                                            </div>
+                                    
+                                            <div class="col-md-5" style="margin-left: 10px; margin-right:80px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 6%; padding-left: 6px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                </button>
+                                            </div>
+
+                                            <div class="col-md-3" style="padding-left: 80px;">
+                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PDF
+                                                </a>
+                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-excel" style="color: black;"></i> Excel
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </form>  
+
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}

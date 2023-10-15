@@ -301,15 +301,19 @@ class SekretariatController extends Controller
         return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan'));
     }
 
-    public function cetakSenaraiPemohonExcel()
+    public function cetakSenaraiPemohonExcel($programCode)
     {
-        return Excel::download(new SenaraiPendek, 'PermohonanDisokong.xlsx');
+        return Excel::download(new SenaraiPendek($programCode), 'PermohonanDisokong.xlsx');
     }
 
-    public function cetakSenaraiPemohonPDF()
+    public function cetakSenaraiPemohonPDF($programCode)
     {
-        $kelulusan = Permohonan::where('status', '4')->get();
+        $kelulusan = Permohonan::where('status', '4')
+            ->where('program', $programCode)
+            ->get();
+
         $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
+
         return $pdf->stream('Senarai-Permohonan-Disokong.pdf');
     }
 
