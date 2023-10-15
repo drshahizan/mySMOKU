@@ -29,6 +29,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -138,13 +139,13 @@ class SekretariatController extends Controller
     // public function peringkatPengajian()
     // {
     //     $recordsBKOKU = TamatPengajian::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
-    //         ->join('smoku', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+    //         ->join('smoku', 'tamat_pengajian.smoku_id', '=', 'smoku.id')
     //         ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat')
     //         ->where('smoku_akademik.status', 1)
     //         ->whereIn('smoku_akademik.smoku_id', function ($query) {
     //             $query->select('smoku_id')
-    //                 ->from('permohonan')
-    //                 ->where('program', 'BKOKU');
+    //                   ->from('permohonan')
+    //                   ->where('program', 'BKOKU');
     //         })
     //         ->select('tamat_pengajian.*','smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
     //         ->get();
@@ -154,17 +155,17 @@ class SekretariatController extends Controller
 
     public function peringkatPengajian()
     {
-        $recordsBKOKU = TamatPengajian::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
-            ->join('smoku', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+        $recordsBKOKU = TamatPengajian::select('tamat_pengajian.*', 'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
+            ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
+            ->join('smoku', 'tamat_pengajian.smoku_id', '=', 'smoku.id')
             ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat')
-            ->where('smoku_akademik.status', 1)
             ->whereIn('smoku_akademik.smoku_id', function ($query) {
                 $query->select('smoku_id')
-                      ->from('permohonan')
-                      ->where('program', 'BKOKU');
+                    ->from('permohonan')
+                    ->where('program', 'BKOKU');
             })
-            ->select('tamat_pengajian.*', 'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
-            ->whereRaw('tamat_pengajian.id = (SELECT MAX(id) FROM tamat_pengajian WHERE smoku_id = smoku_akademik.smoku_id)')
+            ->where('smoku_akademik.status', 1)
+            ->whereRaw('(tamat_pengajian.created_at, smoku_akademik.smoku_id) IN (SELECT MAX(created_at), smoku_id FROM tamat_pengajian GROUP BY smoku_id)')
             ->get();
 
         return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsBKOKU'));
@@ -172,44 +173,90 @@ class SekretariatController extends Controller
 
     public function kemaskiniPeringkatPengajian(Request $request, $id)
     {
-        // Check if the send request have same "smoku_id" and "peringkat_pengajian" in db
-        $existingRecord = Akademik::where('smoku_id', $id)->where('peringkat_pengajian', $request->peringkat_pengajian)->first();
-        // Check if there are two same smoku_id only but different "peringkat_pengajian" between exist record and new record
-        $existStudent = Akademik::where('smoku_id', $id)->first();
+        // Find the latest 'peringkat_pengajian' for this 'smoku_id'
+        $latestPeringkatPengajian = Akademik::where('smoku_id', $id)
+            ->orderBy('created_at', 'desc') // Assuming you have a 'created_at' column
+            ->first();
 
-        if ($existingRecord) {
-            $existingRecord->update(['peringkat_pengajian' => $request->peringkat_pengajian,]);
-        }
-        else{
-            // Update the existing record's "status" to 0
-            $existStudent->update(['status' => 0]);
+        //dd($latestPeringkatPengajian);
 
-            // Create a new record with the specified "status" as 1
-            $newRecord = new Akademik([
-                'smoku_id' => $id,
-                'no_pendaftaran_pelajar' => NULL,
-                'peringkat_pengajian' => $request->peringkat_pengajian,
-                'nama_kursus' => NULL,
-                'id_institusi' => NULL,
-                'sesi' => NULL,
-                'tarikh_mula' => NULL,
-                'tarikh_tamat' => NULL,
-                'sem_semasa' => NULL,
-                'tempoh_pengajian' => NULL,
-                'bil_bulan_per_sem' => NULL,
-                'mod' => NULL,
-                'cgpa' => NULL,
-                'sumber_biaya' => NULL,
-                'sumber_lain' => NULL,
-                'nama_penaja' => NULL,
-                'penaja_lain' => NULL,
-                'status' => 1, // Set the status as 1 for the new record
-            ]);
-            $newRecord->save();
+        if ($latestPeringkatPengajian) {
+            // Update the latest record's 'status' to 1
+            $latestPeringkatPengajian->update(['status' => 0]);
+
+            // // Set 'status' to 0 for the previous records with the same 'smoku_id'
+            // Akademik::where('smoku_id', $id)
+            //     ->where('id', '!=', $latestPeringkatPengajian->id)
+            //     ->update(['status' => 0]);
         }
+
+        // Create a new record with the specified "status" as 1
+        $newRecord = new Akademik([
+            'smoku_id' => $id,
+            'no_pendaftaran_pelajar' => null,
+            'peringkat_pengajian' => $request->peringkat_pengajian,
+            'nama_kursus' => NULL,
+            'id_institusi' => NULL,
+            'sesi' => NULL,
+            'tarikh_mula' => NULL,
+            'tarikh_tamat' => NULL,
+            'sem_semasa' => NULL,
+            'tempoh_pengajian' => NULL,
+            'bil_bulan_per_sem' => NULL,
+            'mod' => NULL,
+            'cgpa' => NULL,
+            'sumber_biaya' => NULL,
+            'sumber_lain' => NULL,
+            'nama_penaja' => NULL,
+            'penaja_lain' => NULL,
+            'status' => 1,
+        ]);
+        $newRecord->save();
 
         return redirect()->back()->with('success', 'Peringkat Pengajian updated successfully.');
     }
+
+
+    // public function kemaskiniPeringkatPengajian(Request $request, $id)
+    // {
+    //     // Check if the send request have same "smoku_id" and "peringkat_pengajian" in db
+    //     $existingRecord = Akademik::where('smoku_id', $id)->where('peringkat_pengajian', $request->peringkat_pengajian)->first();
+    //     // Check if there are two same smoku_id only but different "peringkat_pengajian" between exist record and new record
+    //     $existStudent = Akademik::where('smoku_id', $id)->first();
+
+    //     if ($existingRecord) {
+    //         $existingRecord->update(['peringkat_pengajian' => $request->peringkat_pengajian,]);
+    //     }
+    //     else{
+    //         // Update the existing record's "status" to 0
+    //         $existStudent->update(['status' => 0]);
+
+    //         // Create a new record with the specified "status" as 1
+    //         $newRecord = new Akademik([
+    //             'smoku_id' => $id,
+    //             'no_pendaftaran_pelajar' => NULL,
+    //             'peringkat_pengajian' => $request->peringkat_pengajian,
+    //             'nama_kursus' => NULL,
+    //             'id_institusi' => NULL,
+    //             'sesi' => NULL,
+    //             'tarikh_mula' => NULL,
+    //             'tarikh_tamat' => NULL,
+    //             'sem_semasa' => NULL,
+    //             'tempoh_pengajian' => NULL,
+    //             'bil_bulan_per_sem' => NULL,
+    //             'mod' => NULL,
+    //             'cgpa' => NULL,
+    //             'sumber_biaya' => NULL,
+    //             'sumber_lain' => NULL,
+    //             'nama_penaja' => NULL,
+    //             'penaja_lain' => NULL,
+    //             'status' => 1, // Set the status as 1 for the new record
+    //         ]);
+    //         $newRecord->save();
+    //     }
+
+    //     return redirect()->back()->with('success', 'Peringkat Pengajian updated successfully.');
+    // }
 
     //Step 1: Editing Data - Allow users to view and edit the current data.
     public function previewSuratTawaran()
