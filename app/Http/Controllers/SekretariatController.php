@@ -178,16 +178,9 @@ class SekretariatController extends Controller
             ->orderBy('created_at', 'desc') // Assuming you have a 'created_at' column
             ->first();
 
-        //dd($latestPeringkatPengajian);
-
         if ($latestPeringkatPengajian) {
             // Update the latest record's 'status' to 1
             $latestPeringkatPengajian->update(['status' => 0]);
-
-            // // Set 'status' to 0 for the previous records with the same 'smoku_id'
-            // Akademik::where('smoku_id', $id)
-            //     ->where('id', '!=', $latestPeringkatPengajian->id)
-            //     ->update(['status' => 0]);
         }
 
         // Create a new record with the specified "status" as 1
@@ -215,7 +208,6 @@ class SekretariatController extends Controller
 
         return redirect()->back()->with('success', 'Peringkat Pengajian updated successfully.');
     }
-
 
     // public function kemaskiniPeringkatPengajian(Request $request, $id)
     // {
