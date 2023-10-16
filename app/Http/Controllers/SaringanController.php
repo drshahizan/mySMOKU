@@ -86,6 +86,9 @@ class SaringanController extends Controller
                 'yuran_disokong'        =>  $request->get('yuran_disokong'),
                 'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
                 'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                'baki'                  =>  $request->get('baki'),
+                'baki_disokong'         =>  $request->get('baki_disokong'),
+                'baki_dibayar'          =>  $request->get('baki_dibayar'),
                 'catatan_disokong'      =>  $request->get('catatan'),
                 'status'                =>  4,
             ]);
