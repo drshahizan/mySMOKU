@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('smoku_butiran_pelajar', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('smoku_id');
+            $table->string('negeri_lahir')->nullable();
+            $table->string('agama')->nullable();
+            $table->string('alamat_tetap')->nullable();
             $table->string('alamat_tetap_poskod')->nullable();
             $table->string('alamat_tetap_bandar')->nullable();
             $table->string('alamat_tetap_negeri')->nullable();
