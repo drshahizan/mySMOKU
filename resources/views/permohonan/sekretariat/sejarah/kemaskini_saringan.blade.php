@@ -443,8 +443,6 @@
                             <hr>
                             <form method="POST" action="{{ url('permohonan/sekretariat/sejarah/hantar-saringan/'.$sejarah_p->id) }}" id="saring">
                                 {{csrf_field()}}
-                                <input type="hidden" name="baki_disokong" id="baki_disokong" value="">
-                                <input type="hidden" name="baki_dibayar" id="baki_dibayar" value="">
                                 @if($permohonan->program == "BKOKU" && $permohonan->yuran == "1" && $permohonan->wang_saku == "1")
                                     <!--begin: Invoice body-->
                                     @php

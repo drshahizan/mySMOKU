@@ -286,7 +286,10 @@
                                             $jumlah = $yuran + $tuntutan->amaun_wang_saku;
                                             $baki_y = $permohonan->baki_dibayar - $jumlah;
                                         @endphp
+                                        <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
                                         <input type="hidden" name="baki_y" id="baki_y" value="{{$permohonan->baki_dibayar}}">
+                                        <input type="hidden" name="baki_disokong" id="baki_disokong" value="">
+                                        <input type="hidden" name="baki_dibayar" id="baki_dibayar" value="">
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -305,18 +308,18 @@
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($yuran, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong" value="{{number_format($yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" step="0.01" name="yuran_disokong" id="yuran_disokong" value="{{number_format($yuran, 2, '.', '')}}"></td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong">{{number_format($baki_y, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" step="0.01" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($yuran, 2, '.', '')}}"></td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar">{{number_format($baki_y, 2)}}</td>
                                                 </tr>
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_wang_saku, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" step="0.01" name="w_saku_disokong" id="w_saku_disokong" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_disokong">{{number_format(0, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" step="0.01" name="w_saku_dibayar" id="w_saku_dibayar" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="w_baki_dibayar">{{number_format(0, 2)}}</td>
                                                 </tr>
                                                 </tbody>
@@ -325,12 +328,12 @@
                                                 <tr>
                                                     <td>Jumlah tuntutan yang disokong (RM)</td>
                                                     <td>:</td>
-                                                    <td><input type="number" id="jumlah_disokong" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                    <td><input type="number" step="0.01" id="jumlah_disokong" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                     <td>:</td>
-                                                    <td><input type="number" id="jumlah_dibayar" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                    <td><input type="number" step="0.01" id="jumlah_dibayar" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="vertical-top">Catatan</td>
@@ -369,6 +372,7 @@
                                                 });
                                                 document.getElementById('y_baki_disokong').innerHTML = baki;
                                                 document.getElementById('jumlah_disokong').value= parseFloat(jumlah).toFixed(2);
+                                                document.getElementById('baki_disokong').value= 5000 - yuran - w_saku;
                                             }
                                             function BayarY(){
                                                 var yuran = document.getElementById('yuran_dibayar').value;
@@ -381,6 +385,7 @@
                                                 });
                                                 document.getElementById('y_baki_dibayar').innerHTML = baki;
                                                 document.getElementById('jumlah_dibayar').value= parseFloat(jumlah).toFixed(2);
+                                                document.getElementById('baki_dibayar').value= 5000 - yuran - w_saku;
                                             }
                                         </script>
                                     @elseif($permohonan->program == "BKOKU" && $tuntutan->yuran == NULL)
@@ -390,6 +395,9 @@
                                             }
                                             $jumlah = $tuntutan->amaun_wang_saku;
                                         @endphp
+                                        <input type="hidden" name="baki" id="baki" value="NULL">
+                                        <input type="hidden" name="baki_disokong" id="baki_disokong_2" value="NULL">
+                                        <input type="hidden" name="baki_dibayar" id="baki_dibayar_2" value="NULL">
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -404,8 +412,8 @@
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_wang_saku, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong_2" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar_2" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" step="0.01" name="w_saku_disokong" id="w_saku_disokong_2" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" step="0.01" name="w_saku_dibayar" id="w_saku_dibayar_2" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -413,12 +421,12 @@
                                                 <tr>
                                                     <td>Jumlah tuntutan yang disokong (RM)</td>
                                                     <td>:</td>
-                                                    <td><input type="number" id="jumlah_disokong_2" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                    <td><input type="number" step="0.01" id="jumlah_disokong_2" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                     <td>:</td>
-                                                    <td><input type="number" id="jumlah_dibayar_2" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                    <td><input type="number" step="0.01" id="jumlah_dibayar_2" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="vertical-top">Catatan</td>
@@ -470,6 +478,10 @@
                                             $jumlah = $yuran;
                                             $baki_y = $permohonan->baki_dibayar - $jumlah;
                                         @endphp
+                                        <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
+                                        <input type="hidden" name="baki_y" id="baki_y_2" value="{{$permohonan->baki_dibayar}}">
+                                        <input type="hidden" name="baki_disokong" id="baki_disokong_3" value="">
+                                        <input type="hidden" name="baki_dibayar" id="baki_dibayar_3" value="">
                                         <input type="hidden" name="baki_y" id="baki_y" value="{{$permohonan->baki_dibayar}}">
                                         <div class="table-responsive">
                                             <table class="table">
@@ -489,9 +501,9 @@
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($yuran, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_disokong" id="yuran_disokong_3" value="{{number_format($yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" step="0.01" name="yuran_disokong" id="yuran_disokong_3" value="{{number_format($yuran, 2, '.', '')}}"></td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong_3">{{number_format($baki_y, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="yuran_dibayar" id="yuran_dibayar_3" value="{{number_format($yuran, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" step="0.01" name="yuran_dibayar" id="yuran_dibayar_3" value="{{number_format($yuran, 2, '.', '')}}"></td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar_3">{{number_format($baki_y, 2)}}</td>
                                                 </tr>
                                                 </tbody>
@@ -500,12 +512,12 @@
                                                 <tr>
                                                     <td>Jumlah tuntutan yang disokong (RM)</td>
                                                     <td>:</td>
-                                                    <td><input type="number" id="jumlah_disokong_3" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                    <td><input type="number" step="0.01" id="jumlah_disokong_3" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                     <td>:</td>
-                                                    <td><input type="number" id="jumlah_dibayar_3" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                    <td><input type="number" step="0.01" id="jumlah_dibayar_3" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="vertical-top">Catatan</td>
@@ -533,7 +545,7 @@
                                             document.getElementById("yuran_dibayar_3").addEventListener("input", BayarY);
                                             function SokongY(){
                                                 var yuran = document.getElementById('yuran_disokong_3').value;
-                                                var baki_y = document.getElementById('baki_y').value;
+                                                var baki_y = document.getElementById('baki_y_2').value;
                                                 var baki = baki_y - yuran;
                                                 var jumlah = parseFloat(yuran);
                                                 baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
@@ -541,10 +553,11 @@
                                                 });
                                                 document.getElementById('y_baki_disokong_3').innerHTML = baki;
                                                 document.getElementById('jumlah_disokong_3').value= parseFloat(jumlah).toFixed(2);
+                                                document.getElementById('baki_disokong_3').value= 5000 - yuran;
                                             }
                                             function BayarY(){
                                                 var yuran = document.getElementById('yuran_dibayar_3').value;
-                                                var baki_y = document.getElementById('baki_y').value;
+                                                var baki_y = document.getElementById('baki_y_2').value;
                                                 var baki = baki_y - yuran;
                                                 var jumlah = parseFloat(yuran);
                                                 baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
@@ -552,6 +565,7 @@
                                                 });
                                                 document.getElementById('y_baki_dibayar_3').innerHTML = baki;
                                                 document.getElementById('jumlah_dibayar_3').value= parseFloat(jumlah).toFixed(2);
+                                                document.getElementById('baki_dibayar_3').value= 5000 - yuran;
                                             }
                                         </script>
                                     @elseif($permohonan->program == "PPK")
@@ -561,6 +575,9 @@
                                             }
                                             $jumlah = $tuntutan->amaun_wang_saku;
                                         @endphp
+                                        <input type="hidden" name="baki" id="baki" value="NULL">
+                                        <input type="hidden" name="baki_disokong" id="baki_disokong_ppk" value="NULL">
+                                        <input type="hidden" name="baki_dibayar" id="baki_dibayar_ppk" value="NULL">
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -575,8 +592,8 @@
                                                 <tr class="font-weight-bolder font-size-lg">
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_wang_saku, 2)}}</td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_disokong" id="w_saku_disokong_ppk" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
-                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" name="w_saku_dibayar" id="w_saku_dibayar_ppk" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" step="0.01" name="w_saku_disokong" id="w_saku_disokong_ppk" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
+                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" step="0.01" name="w_saku_dibayar" id="w_saku_dibayar_ppk" value="{{number_format($tuntutan->amaun_wang_saku, 2, '.', '')}}"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -584,12 +601,12 @@
                                                 <tr>
                                                     <td>Jumlah tuntutan yang disokong (RM)</td>
                                                     <td>:</td>
-                                                    <td><input type="number" id="jumlah_disokong_ppk" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                    <td><input type="number" step="0.01" id="jumlah_disokong_ppk" name="jumlah_disokong" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                     <td>:</td>
-                                                    <td><input type="number" id="jumlah_dibayar_ppk" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                    <td><input type="number" step="0.01" id="jumlah_dibayar_ppk" name="jumlah_dibayar" value="{{number_format($jumlah, 2, '.', '')}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="vertical-top">Catatan</td>
