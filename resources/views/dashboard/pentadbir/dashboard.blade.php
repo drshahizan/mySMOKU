@@ -1,6 +1,6 @@
 <x-default-layout>
     <h1>Selamat Datang, Admin</h1>
-    {{-- <br>
+    <br>
     <!--begin::Row-->
     <div class="row">
         <div class="col-sm-6 col-xl-2 mb-xl-10">
@@ -12,7 +12,6 @@
                     <br>
                     <a href="#" class="card-title fw-bold text-success fs-6">Jumlah Pengguna</a>
                     <div class="py-1">
-
                             <span class="text-dark fs-3x  fw-bold me-2">15%</span>
                      </div>
                 </div>
@@ -22,7 +21,7 @@
         </div>
         <div class="col-xl-3">
             <!--begin: Statistics Widget 6-->
-            <div class="card bg-light-warning card-xl-stretch mb-xl-8">
+            <div class="card bg-light-warning h-lg-1008">
                 <!--begin::Body-->
                 <div class="card-body my-3">
                     <a href="#" class="card-title fw-bold text-warning fs-5 mb-3 d-block">Company Finance</a>
@@ -38,7 +37,7 @@
         </div>
         <div class="col-xl-3">
             <!--begin: Statistics Widget 6-->
-            <div class="card bg-light-primary card-xl-stretch mb-5 mb-xl-8">
+            <div class="card bg-light-primary h-lg-1008">
                 <!--begin::Body-->
                 <div class="card-body my-3">
                     <a href="#" class="card-title fw-bold text-primary fs-5 mb-3 d-block">Marketing Analysis</a>
@@ -305,5 +304,5 @@
         </div>
         <!--end::Card widget 2-->
     </div>
-    <!--end::Col--> --}}
+    <!--end::Col-->
 </x-default-layout>
