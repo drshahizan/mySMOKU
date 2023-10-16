@@ -82,15 +82,19 @@ class PermohonanController extends Controller
 
         if ($permohonan && $permohonan->status >= '1') {
             $tamat_pengajian = TamatPengajian::orderBy('id', 'desc')->where('permohonan_id', $permohonan->id)->first();
-            $permohonan_baru = Permohonan::orderBy('id', 'desc')
-            ->where('smoku_id', $smoku_id->id)
-            ->where('id','!=', $tamat_pengajian->permohonan_id)
-            ->first();
-            if ($permohonan_baru) {
+            
+            if ($tamat_pengajian) {
 
-                if ($tamat_pengajian && $permohonan_baru->status >= '1'){
+                $permohonan_baru = Permohonan::orderBy('id', 'desc')
+                        ->where('smoku_id', $smoku_id->id)
+                        ->where('id','!=', $tamat_pengajian->permohonan_id)
+                        ->first();
+
+                //dd($permohonan_baru);        
+
+                if ($permohonan_baru !== null){
                     //dd('situ');
-    
+
                     $butiranPelajar = ButiranPelajar::orderBy('permohonan.id', 'desc')
                         ->join('smoku', 'smoku.id', '=', 'smoku_butiran_pelajar.smoku_id')
                         ->join('smoku_waris', 'smoku_waris.smoku_id', '=', 'smoku.id')
@@ -111,19 +115,13 @@ class PermohonanController extends Controller
                     $dokumen = Dokumen::where('permohonan_id', $permohonan_baru->id)->get();
                     return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan'));
     
+                }else{
+                     //dd('sini');
+                     return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri'));
                 }
    
-            }else{
-                if ($tamat_pengajian) {
-                    //dd('sini');
-                
-                    return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri'));
-    
-                }
             }
 
-            
-            
 
             $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
             return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan'));
