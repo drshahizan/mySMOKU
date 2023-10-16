@@ -26,6 +26,7 @@ use App\Models\Peperiksaan;
 use App\Models\Hubungan;
 use App\Models\Negeri;
 use App\Models\Bandar;
+use App\Models\Agama;
 use App\Models\EmelKemaskini;
 use App\Models\TamatPengajian;
 use Illuminate\Support\Facades\Auth;
@@ -60,6 +61,7 @@ class PermohonanController extends Controller
         $hubungan = Hubungan::all()->sortBy('kod_hubungan');
         $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri')->get();
         $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
+        $agama = Agama::orderby("id","asc")->select('id','agama')->get();
         $institusi = InfoIpt::orderby("id","asc")->select('id_institusi','nama_institusi')->get();
         $infoipt = InfoIpt::all()->where('jenis_institusi','IPTS')->sortBy('nama_institusi');
         $peringkat = PeringkatPengajian::orderby("id","asc")->select('kod_peringkat','peringkat')->get();
@@ -124,11 +126,11 @@ class PermohonanController extends Controller
 
 
             $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
-            return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan'));
+            return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','agama','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan'));
             
         }else {
 
-            return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri'));
+            return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri','bandar','agama'));
 
         }
 
@@ -188,6 +190,12 @@ class PermohonanController extends Controller
 
         $butiranPelajar = ButiranPelajar::firstOrNew(['smoku_id' => $smoku_id->id]);
 
+        $butiranPelajar->negeri_lahir = $request->negeri_lahir;
+        $butiranPelajar->agama = $request->agama;
+        $butiranPelajar->alamat_tetap = $request->alamat_tetap;
+        $butiranPelajar->alamat_tetap_negeri = $request->alamat_tetap_negeri;
+        $butiranPelajar->alamat_tetap_bandar = $request->alamat_tetap_bandar;
+        $butiranPelajar->alamat_tetap_poskod = $request->alamat_tetap_poskod;
         $butiranPelajar->alamat_surat_menyurat = $request->alamat_surat_menyurat;
         $butiranPelajar->alamat_surat_negeri = $request->alamat_surat_negeri;
         $butiranPelajar->alamat_surat_bandar = $request->alamat_surat_bandar;
@@ -249,7 +257,7 @@ class PermohonanController extends Controller
                 'yuran' => $request->yuran,
                 'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
                 'wang_saku' => $request->wang_saku,
-                'amaun_wang_saku' => $request->amaun_wang_saku,
+                'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
                 'perakuan' => $request->perakuan,
                 'status' => '1',
             ]

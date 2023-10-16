@@ -247,7 +247,7 @@
 						<!--begin::Input group-->
 						<div class="row mb-10">
 							<!--begin::Col-->
-							<div class="col-md-6 fv-row">
+							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">No. Kad Pengenalan</label>
 								<!--end::Label-->
@@ -261,7 +261,7 @@
 								</div>
 								<!--end::Row-->
 							</div>
-							<div class="col-md-4 fv-row">
+							<div class="col-md-3 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Tarikh Lahir</label>
 								<!--end::Label-->
@@ -271,6 +271,25 @@
 									<div class="col-12">
 										<!--begin::Input-->
 										<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" id="tkh_lahir" name="tkh_lahir" value="{{$smoku->tarikh_lahir}}" readonly/>
+										<!--end::Input-->
+									</div>
+								</div>	
+							</div>
+							<div class="col-md-3 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Negeri Lahir</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Col-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<select id="negeri_lahir" name="negeri_lahir" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+											<option value="">Pilih</option>
+											@foreach ($negeri as $negerilahir)	
+											<option value="{{ $negerilahir->id}}">{{ $negerilahir->negeri}}</option> 
+											@endforeach
+										</select>
 										<!--end::Input-->
 									</div>
 								</div>	
@@ -311,7 +330,7 @@
 						<!--end::Input group-->
 						<!--begin::Input group-->
 						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
+							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Jantina</label>
 								<!--end::Label-->
@@ -325,7 +344,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-6 fv-row">
+							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
 								<label class="fs-6 fw-semibold form-label mb-2">Keturunan</label>
 								<!--end::Label-->
@@ -334,6 +353,23 @@
 									<!--begin::Input-->
 									<select id="bangsa" name="bangsa" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true">
 										<option value="{{$smoku->kod_keturunan}}">{{$smoku->keturunan}}</option>
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Agama</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id="agama" name="agama" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true">
+										<option value="">Pilih</option>
+										@foreach ($agama as $agama)	
+										<option value="{{ $agama->id}}">{{ $agama->agama}}</option> 
+										@endforeach
 									</select>
 									<!--end::Input-->
 								</div>
@@ -358,7 +394,12 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="alamat_tetap_negeri" name="alamat_tetap_negeri" placeholder="" value="{{$smoku->alamat_tetap_negeri}}" readonly/>
+									<select id="alamat_tetap_negeri" name="alamat_tetap_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+										<option value="">Pilih</option>
+										@foreach ($negeri as $negeritetap)	
+										<option value="{{ $negeritetap->id}}">{{ $negeritetap->negeri}}</option> 
+										@endforeach
+									</select>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -371,7 +412,9 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="alamat_tetap_bandar" name="alamat_tetap_bandar" placeholder="" value="{{$smoku->alamat_tetap_bandar}}" readonly/>
+									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+										<option value="">Pilih</option>
+									</select>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -384,7 +427,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="alamat_tetap_poskod" name="alamat_tetap_poskod" placeholder="" value="{{$smoku->alamat_tetap_poskod}}"/>
+									<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_tetap_poskod" name="alamat_tetap_poskod" placeholder="" value="{{$smoku->alamat_tetap_poskod}}"/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -426,7 +469,12 @@
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<input type="text" class="form-control form-control-solid" id="alamat_surat_negeri" name="alamat_surat_negeri" placeholder="" value=""  />
+										<select id="alamat_surat_negeri" name="alamat_surat_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+											<option value="">Pilih</option>
+											@foreach ($negeri as $negerisurat)	
+											<option value="{{ $negerisurat->id}}">{{ $negerisurat->negeri}}</option> 
+											@endforeach
+										</select>
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
@@ -438,7 +486,12 @@
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<input type="text" class="form-control form-control-solid" id="alamat_surat_bandar" name="alamat_surat_bandar" placeholder="" value=""/>
+										<select id='alamat_surat_bandar' name='alamat_surat_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+											<option value="">Pilih</option>
+											@foreach ($bandar as $bandar)	
+											<option value="{{ $bandar->id}}">{{ $bandar->bandar}}</option> 
+											@endforeach
+										</select>
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
@@ -1070,7 +1123,7 @@
 									<!--begin::Input-->
 									<div class="d-flex">
 										<span class="input-group-text">RM</span>
-										<input type="number" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" onchange="select1()" placeholder="" value=""/>
+										<input type="number" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" onchange="select1()" placeholder="" step="0.01" inputmode="decimal" value=""/>
 									</div>
 									<!--end::Input-->
 								</div>
@@ -1090,7 +1143,7 @@
 									<!--begin::Input-->
 									<div class="d-flex">
 										<span class="input-group-text">RM</span>
-										<input type="text" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" placeholder="" value="" readonly/>
+										<input type="number" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
 									</div>
 									<!--end::Input-->
 								</div>
@@ -1352,13 +1405,104 @@
 				alamat_surat_negeri.value=alamat_tetap_negeri.value;
 				alamat_surat_bandar.value=alamat_tetap_bandar.value;
 				alamat_surat_poskod.value=alamat_tetap_poskod.value;
+				// Trigger select2 update
+				$(alamat_surat_negeri).trigger('change.select2');
+        		$(alamat_surat_bandar).trigger('change.select2');
 			} else {
 				alamat_surat_menyurat.value="";
 				alamat_surat_negeri.value="";
 				alamat_surat_bandar.value="";
 				alamat_surat_poskod.value="";
+				// Trigger select2 update
+				$(alamat_surat_negeri).trigger('change.select2');
+        		$(alamat_surat_bandar).trigger('change.select2');
 			}
 		}	
+
+
+			$(document).ready(function(){
+				$('#alamat_tetap_negeri').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#alamat_tetap_bandar').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: 'getBandar/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var bandar = response['data'][i].bandar;
+
+											var option = "<option value='"+id+"'>"+bandar+"</option>";
+
+											$("#alamat_tetap_bandar").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
+			// $(document).ready(function(){
+			// 	$('#alamat_surat_negeri').on('change', function() {
+			// 		var idnegeri = $(this).val();
+			// 		//alert(id);
+			// 		// Empty the dropdown
+			// 		$('#alamat_surat_bandar').find('option').not(':first').remove();
+
+			// 		// AJAX request 
+			// 		$.ajax({
+						
+			// 			url: 'getBandar/'+idnegeri,
+			// 			type: 'get',
+			// 			dataType: 'json',
+			// 			success: function(response){
+			// 				//alert('AJAX loaded something');
+			// 				var len = 0;
+			// 						if(response['data'] != null){
+			// 							len = response['data'].length;
+			// 						}
+
+			// 						if(len > 0){
+			// 							// Read data and create <option >
+			// 							for(var i=0; i<len; i++){
+
+			// 								var id = response['data'][i].id;
+			// 								var bandar = response['data'][i].bandar;
+
+			// 								var option = "<option value='"+id+"'>"+bandar+"</option>";
+
+			// 								$("#alamat_surat_bandar").append(option); 
+			// 							}
+			// 						}
+			// 				}, 
+			// 				error: function(){
+			// 				alert('AJAX load did not work');
+			// 				}
+
+			// 		});
+			// 	});
+
+			// });
 
     		$(document).ready(function(){
 				$('#alamat_negeri_waris').on('change', function() {

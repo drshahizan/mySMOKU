@@ -134,6 +134,35 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
+					'alamat_tetap_negeri': {
+						validators: {
+							notEmpty: {
+								message: 'Negeri diperlukan'
+							}
+						}
+					},
+					'alamat_tetap_bandar': {
+						validators: {
+							notEmpty: {
+								message: 'Bandar diperlukan'
+							}
+						}
+					},
+					'alamat_tetap_poskod': {
+						validators: {
+							notEmpty: {
+								message: 'Poskod diperlukan'
+							},
+							digits: {
+								message: 'Poskod mesti mengandungi digit sahaja'
+							},
+							stringLength: {
+								min: 5,
+								max: 5,
+								message: 'Poskod mesti mengandungi 5 digit sahaja'
+							}
+						}
+					},
 					'alamat_surat_menyurat': {
 						validators: {
 							notEmpty: {
@@ -167,6 +196,20 @@ var KTCreateAccount = function () {
 						validators: {
 							notEmpty: {
 								message: 'Negeri diperlukan'
+							}
+						}
+					},
+					'negeri_lahir': {
+						validators: {
+							notEmpty: {
+								message: 'Negeri Lahir diperlukan'
+							}
+						}
+					},
+					'agama': {
+						validators: {
+							notEmpty: {
+								message: 'Agama diperlukan'
 							}
 						}
 					},
