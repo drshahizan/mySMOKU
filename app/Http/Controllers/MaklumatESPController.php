@@ -13,7 +13,8 @@ class MaklumatESPController extends Controller
         
         $data = DB::select('
                 SELECT a.no_kp as nokp, a.nama, DATE_FORMAT(a.tarikh_lahir, "%d/%m/%Y") AS tarikh_lahir, d.negeri_lahir, a.jantina
-                , d.agama, a.keturunan, "M01" as warganegara, a.alamat_tetap as alamat1, "" as alamat2
+                , LEFT(f.agama, 1) AS agama
+                , a.keturunan, "M01" as warganegara, a.alamat_tetap as alamat1, "" as alamat2
                 , d.alamat_tetap_poskod as poskod, d.alamat_tetap_bandar as bandar, d.alamat_tetap_negeri as negeri, d.tel_bimbit as telefon_hp
                 , d.alamat_surat_menyurat as alamat01, "" as alamat02, "" as alamat03, "" as telefon_o
                 , CASE WHEN b.program = "BKOKU" THEN "OKU" ELSE "PPK" END as program
@@ -34,6 +35,7 @@ class MaklumatESPController extends Controller
                 INNER JOIN smoku_akademik c ON c.smoku_id = a.id 
                 INNER JOIN smoku_butiran_pelajar d ON d.smoku_id = a.id
                 INNER JOIN bk_peringkat_pengajian e ON e.kod_peringkat = c.peringkat_pengajian
+                INNER JOIN bk_agama f ON f.id = d.agama
                 WHERE c.status = 1 AND b.status = 6
                 and a.no_kp=950623031212
             ');
