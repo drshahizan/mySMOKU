@@ -68,5 +68,7 @@ class Kernel extends HttpKernel
         'isPenyelaras' => App\Http\Middleware\PenyelarasMiddleware::class,
         'isSekretariat' => App\Http\Middleware\SekretariatMiddleware::class,
         'isPegawai' => App\Http\Middleware\PegawaiMiddleware::class,
+
+        'api.token' => \App\Http\Middleware\ApiTokenMiddleware::class,
     ];
 }

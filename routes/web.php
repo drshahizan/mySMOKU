@@ -4,8 +4,10 @@ use App\Http\Controllers\Apps\PermissionManagementController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Auth\SocialiteController;
+use App\Http\Controllers\MaklumatESPController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KemaskiniController;
+use App\Http\Controllers\MaklumatESP;
 use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\SaringanController;
 use App\Http\Controllers\SekretariatController;
@@ -32,8 +34,17 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//api esp
+//Route::middleware('api.token')->group(function () {
+
+    Route::get('/maklumatESP', [MaklumatESPController::class, 'index']);
+    
+//});
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
+    
 
     Route::get('/', [DashboardController::class, 'index']);
 

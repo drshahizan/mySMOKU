@@ -29,9 +29,6 @@ return new class extends Migration
             $table->string('pendapatan')->nullable();
             $table->string('status_pekerjaan')->nullable();
             $table->string('alamat_tetap');
-            $table->string('alamat_tetap_poskod')->nullable();
-            $table->string('alamat_tetap_bandar')->nullable();
-            $table->string('alamat_tetap_negeri')->nullable();
             $table->string('alamat_surat_menyurat')->nullable();
             $table->string('parlimen')->nullable();
             $table->string('dun')->nullable();
