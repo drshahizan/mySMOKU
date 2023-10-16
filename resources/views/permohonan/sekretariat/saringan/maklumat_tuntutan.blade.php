@@ -322,7 +322,7 @@
                                                 });
                                                 document.getElementById('y_baki_disokong').innerHTML = baki;
                                                 document.getElementById('jumlah_disokong').value= parseFloat(jumlah).toFixed(2);
-                                                document.getElementById('baki_disokong').value= 5000 - yuran;
+                                                document.getElementById('baki_disokong').value= 5000 - yuran - w_saku;
                                             }
                                             function BayarY(){
                                                 var yuran = document.getElementById('yuran_dibayar').value;
@@ -334,7 +334,7 @@
                                                 });
                                                 document.getElementById('y_baki_dibayar').innerHTML = baki;
                                                 document.getElementById('jumlah_dibayar').value= parseFloat(jumlah).toFixed(2);
-                                                document.getElementById('baki_dibayar').value= 5000 - yuran;
+                                                document.getElementById('baki_dibayar').value= 5000 - yuran - w_saku;
                                             }
                                         </script>
                                     @elseif($permohonan->program == "BKOKU" && $permohonan->yuran == NULL)
