@@ -329,6 +329,7 @@
                                         }
                                         $jumlah = $permohonan->amaun_wang_saku;
                                     @endphp
+                                    <input type="hidden" name="baki" id="baki" value="NULL">
                                     <br>
                                     <h6>Pengiraan:</h6>
                                     <br>
@@ -471,6 +472,7 @@
                                         }
                                         $jumlah = $permohonan->amaun_wang_saku;
                                     @endphp
+                                    <input type="hidden" name="baki" id="baki" value="NULL">
                                     <br>
                                     <h6>Pengiraan:</h6>
                                     <br>
