@@ -275,6 +275,7 @@
                                     </div>
                                     <h6>Pengiraan:</h6>
                                     <br>
+                                    <p>Baki Terdahulu: {{$permohonan->baki_dibayar}}</p>
                                     <!--begin: Invoice body-->
                                     @if($permohonan->program == "BKOKU" && $tuntutan->yuran == "1" && $tuntutan->wang_saku == "1")
                                     @php
@@ -293,7 +294,7 @@
                                             $tuntutan->amaun_wang_saku = 0;
                                         }
                                         $jumlah = $yuran + $tuntutan->amaun_wang_saku;
-                                        $baki_y = $tuntutan->baki - $jumlah;
+                                        $baki_y = $permohonan->baki_dibayar - $jumlah;
                                     @endphp
                                         <div class="table-responsive">
                                             <table class="table">
@@ -414,7 +415,7 @@
                                             }
                                         }
                                         $jumlah = $yuran;
-                                        $baki_y = $tuntutan->baki - $jumlah;
+                                        $baki_y = $permohonan->baki_dibayar - $jumlah;
                                     @endphp
                                         <div class="table-responsive">
                                             <table class="table">

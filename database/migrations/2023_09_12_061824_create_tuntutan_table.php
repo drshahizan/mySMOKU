@@ -19,17 +19,17 @@ return new class extends Migration
             $table->string('sesi');
             $table->string('semester');
             $table->string('status');
-            $table->string('yuran')->nullable();
-            $table->string('wang_saku')->nullable();
-            $table->string('amaun_wang_saku')->nullable();
-            $table->string('yuran_disokong')->nullable();
-            $table->string('yuran_dibayar')->nullable();
-            $table->string('wang_saku_disokong')->nullable();
-            $table->string('wang_saku_dibayar')->nullable();
-            $table->string('jumlah')->nullable();
-            $table->string('baki')->nullable();
-            $table->string('baki_disokong')->nullable();
-            $table->string('baki_diluluskan')->nullable();
+            $table->float('yuran')->nullable();
+            $table->float('wang_saku')->nullable();
+            $table->float('amaun_wang_saku')->nullable();
+            $table->float('yuran_disokong')->nullable();
+            $table->float('yuran_dibayar')->nullable();
+            $table->float('wang_saku_disokong')->nullable();
+            $table->float('wang_saku_dibayar')->nullable();
+            $table->float('jumlah')->nullable();
+            $table->float('baki')->nullable();
+            $table->float('baki_disokong')->nullable();
+            $table->float('baki_dibayar')->nullable();
             $table->foreign('smoku_id')
               ->references('id')->on('smoku')->onDelete('cascade');
             $table->foreign('permohonan_id')

@@ -617,25 +617,25 @@ class SekretariatController extends Controller
         $dokumen1 = $request->file('dokumen1');
         $dokumen2 = $request->file('dokumen2');
         $dokumen3 = $request->file('dokumen3');
-        
+
         $uploadedDokumen1 = [];
         $uploadedDokumen2 = [];
         $uploadedDokumen3 = [];
-    
+
         if ($dokumen1 && $dokumen2 && $dokumen3) {
             foreach ($dokumen1 as $key => $doc1) {
                 $uniqueFilenameDokumen1 = uniqid() . '_' . $doc1->getClientOriginalName();
                 $doc1->move('assets/dokumen/esp/dokumen1', $uniqueFilenameDokumen1);
                 $uploadedDokumen1[] = $uniqueFilenameDokumen1;
-    
+
                 $uniqueFilenameDokumen2 = uniqid() . '_' . $dokumen2[$key]->getClientOriginalName();
                 $dokumen2[$key]->move('assets/dokumen/esp/dokumen2', $uniqueFilenameDokumen2);
                 $uploadedDokumen2[] = $uniqueFilenameDokumen2;
-    
+
                 $uniqueFilenameDokumen3 = uniqid() . '_' . $dokumen3[$key]->getClientOriginalName();
                 $dokumen3[$key]->move('assets/dokumen/esp/dokumen3', $uniqueFilenameDokumen3);
                 $uploadedDokumen3[] = $uniqueFilenameDokumen3;
-    
+
                 // Create a new record
                 $dokumenESP = new DokumenESP();
                 $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
@@ -645,16 +645,16 @@ class SekretariatController extends Controller
                 $dokumenESP->save();
             }
         }
-    
+
         // Store the uploaded file names or URLs in the session
         session()->put('uploadedDokumen1', $uploadedDokumen1);
         session()->put('uploadedDokumen2', $uploadedDokumen2);
         session()->put('uploadedDokumen3', $uploadedDokumen3);
         // session()->put('catatan', $request->input('catatan'));
-    
+
         return redirect()->route('sekretariat.dokumenESP');
     }
-    
+
 
     //TUNTUTAN
     public function senaraiTuntutanKedua()
@@ -714,6 +714,9 @@ class SekretariatController extends Controller
                     'yuran_disokong'        =>  $request->get('yuran_disokong'),
                     'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
                     'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                    'baki'                  =>  $request->get('baki'),
+                    'baki_dibayar'          =>  $request->get('baki_dibayar'),
+                    'baki_disokong'         =>  $request->get('baki_disokong'),
                     'status'                =>  6,
                 ]);
 
@@ -751,7 +754,14 @@ class SekretariatController extends Controller
         elseif($request->get('submit')=="TidakLayak"){
             Tuntutan::where('id', $id)
                 ->update([
-                    'status'   =>  7,
+                    'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
+                    'yuran_disokong'        =>  $request->get('yuran_disokong'),
+                    'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
+                    'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                    'baki'                  =>  $request->get('baki'),
+                    'baki_dibayar'          =>  $request->get('baki_dibayar'),
+                    'baki_disokong'         =>  $request->get('baki_disokong'),
+                    'status'                =>  7,
                 ]);
 
             $i=0;
@@ -789,7 +799,14 @@ class SekretariatController extends Controller
         elseif($request->get('submit')=="Kembalikan"){
             Tuntutan::where('id', $id)
                 ->update([
-                    'status'   =>  5,
+                    'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
+                    'yuran_disokong'        =>  $request->get('yuran_disokong'),
+                    'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
+                    'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                    'baki'                  =>  $request->get('baki'),
+                    'baki_dibayar'          =>  $request->get('baki_dibayar'),
+                    'baki_disokong'         =>  $request->get('baki_disokong'),
+                    'status'                =>  5,
                 ]);
 
             $i=0;
