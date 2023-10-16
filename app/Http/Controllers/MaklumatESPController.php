@@ -25,7 +25,7 @@ class MaklumatESPController extends Controller
                 , CONCAT(
                     SUBSTRING_INDEX(c.sesi, "/", 1) + c.tempoh_pengajian
                 ) AS sesi_tamat
-                , c.id_institusi as institusi, c.nama_kursus as kursus
+                , g.institusi_esp as institusi, c.nama_kursus as kursus
                 , c.tarikh_tamat as tarikh_tamat
                 , d.no_akaun_bank as no_akaun
                 , a.nama as nama_akaun, 101 as kod_bank, "BANK ISLAM (M) BHD." as nama_bank
@@ -33,6 +33,7 @@ class MaklumatESPController extends Controller
                 FROM smoku a 
                 INNER JOIN permohonan b ON b.smoku_id = a.id
                 INNER JOIN smoku_akademik c ON c.smoku_id = a.id 
+                INNER JOIN bk_info_institusi g ON g.id_institusi = c.id_institusi 
                 INNER JOIN smoku_butiran_pelajar d ON d.smoku_id = a.id
                 INNER JOIN bk_peringkat_pengajian e ON e.kod_peringkat = c.peringkat_pengajian
                 INNER JOIN bk_agama f ON f.id = d.agama
