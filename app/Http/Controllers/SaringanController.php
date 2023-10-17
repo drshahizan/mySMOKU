@@ -311,4 +311,56 @@ class SaringanController extends Controller
         return view('permohonan.sekretariat.saringan.papar_tuntutan',compact('permohonan','smoku','akademik'));
     }
 
+    //pembayaran
+    public function senaraiPembayaran()
+    {
+        $permohonan = Permohonan::where('status', '6')
+            ->orWhere('status', '=','8')
+            ->get();
+        $status_kod=0;
+        $status = null;
+        return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status'));
+    }
+
+    public function maklumatPembayaran($id)
+    {
+        $permohonan = Permohonan::where('id', $id)->first();
+        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('permohonan.sekretariat.pembayaran.maklumat_pembayaran',compact('permohonan','smoku','akademik'));
+    }
+
+    public function saringPembayaran(Request $request,$id)
+    {
+        Permohonan::where('id', $id)
+            ->update([
+                'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
+                'yuran_disokong'        =>  $request->get('yuran_disokong'),
+                'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
+                'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                'baki'                  =>  $request->get('baki'),
+                'baki_disokong'         =>  $request->get('baki_disokong'),
+                'baki_dibayar'          =>  $request->get('baki_dibayar'),
+                'catatan_disokong'      =>  $request->get('catatan'),
+                'status'                =>  8,
+            ]);
+
+        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+
+        $status_rekod = new SejarahPermohonan([
+            'smoku_id'      =>  $smoku_id,
+            'permohonan_id' =>  $id,
+            'status'        =>  8,
+        ]);
+        $status_rekod->save();
+
+        $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
+        $permohonan = Permohonan::where('status', '6')
+            ->orWhere('status', '=','8')
+            ->get();
+        $status_kod = 3;
+        $status = "Permohonan ".$no_rujukan_permohonan." telah dibayar.";
+        return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status'));
+    }
 }
