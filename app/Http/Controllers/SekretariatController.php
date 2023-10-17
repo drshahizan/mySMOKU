@@ -991,7 +991,19 @@ class SekretariatController extends Controller
             ->get();
         $status_kod=0;
         $status = null;
-        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status'));
+        return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status'));
+    }
+
+    public function maklumatPembayaran($id){
+
+        $tuntutan = Tuntutan::where('id', $id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
+        $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $smoku_id = Permohonan::where('id', $tuntutan->permohonan_id)->value('smoku_id');
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+
+        return view('tuntutan.sekretariat.pembayaran.maklumat',compact('permohonan','smoku','akademik','tuntutan','tuntutan_item'));
     }
 
     public function saringPembayaran(Request $request, $id){
@@ -1021,7 +1033,7 @@ class SekretariatController extends Controller
         $tuntutan = Tuntutan::where('status', '6')
             ->orWhere('status', '=','8')
             ->get();
-        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status'));
+        return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status'));
     }
 
     public function paparPembayaran($id){
@@ -1033,7 +1045,7 @@ class SekretariatController extends Controller
         $smoku_id = $tuntutan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('tuntutan.sekretariat.sejarah.papar_saringan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
+        return view('tuntutan.sekretariat.pembayaran.papar',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
     }
 
     public function kemaskiniPembayaran($id){
@@ -1044,7 +1056,7 @@ class SekretariatController extends Controller
         $smoku_id = $tuntutan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('tuntutan.sekretariat.sejarah.kemaskini_saringan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
+        return view('tuntutan.sekretariat.pembayaran.kemaskini',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
     }
 
     public function hantarPembayaran(Request $request, $id){
@@ -1064,6 +1076,6 @@ class SekretariatController extends Controller
         $smoku_id = $tuntutan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('tuntutan.sekretariat.sejarah.papar_saringan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
+        return view('tuntutan.sekretariat.pembayaran.senarai',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
     }
 }
