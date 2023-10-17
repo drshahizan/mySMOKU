@@ -241,6 +241,20 @@
     <!--end::Content-->
   </div>
 
+  <script>
+    //sorting function
+    $('#sortTable1').DataTable();
+    $('#sortTable2').DataTable();
+
+    // check all checkboxes at once
+    function toggle(source) {
+        var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = source.checked;
+        }
+    }
+  </script>
+
 <!--begin::Javascript-->
 
 <!--end::Javascript-->
