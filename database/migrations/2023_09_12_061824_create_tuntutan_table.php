@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('sesi');
             $table->string('semester');
             $table->string('status');
-            $table->float('yuran')->nullable();
-            $table->float('wang_saku')->nullable();
+            $table->string('yuran')->nullable();
+            $table->string('wang_saku')->nullable();
             $table->float('amaun_wang_saku')->nullable();
             $table->float('yuran_disokong')->nullable();
             $table->float('yuran_dibayar')->nullable();
