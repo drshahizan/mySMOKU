@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permohonan;
 use App\Models\Smoku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,10 @@ class MaklumatESPController extends Controller
     public function index()
     {
         
+        $kelulusan = Permohonan::where('status', '=','6')->get();
+        //dd($kelulusan);
+
+
         $data = 
         DB::select
             ('
@@ -50,7 +55,7 @@ class MaklumatESPController extends Controller
         $jsonContent = $data->getContent();
 
 
-        return view('esp.hantar_esp', compact('jsonContent'));
+        return view('esp.hantar_esp', compact('kelulusan','jsonContent'));
             
         
     }
