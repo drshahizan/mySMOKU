@@ -621,16 +621,16 @@ class SekretariatController extends Controller
             'dokumen1.*.required' => 'Sila pilih fail untuk SPBB1.',
             'dokumen1.*.mimes' => 'Format fail bagi SPBB1 mestilah pdf, xls, atau xlsx sahaja.',
             'dokumen1.*.max' => 'Saiz maksimum fail adalah 2 MB.',
-            
+
             'dokumen2.*.required' => 'Sila pilih fail untuk SPBB2.',
             'dokumen2.*.mimes' => 'Format fail bagi SPBB2 mestilah pdf, xls, atau xlsx sahaja.',
             'dokumen2.*.max' => 'Saiz maksimum fail adalah 2 MB.',
-            
+
             'dokumen3.*.required' => 'Sila pilih fail untuk SPBB3.',
             'dokumen3.*.mimes' => 'Format fail bagi SPBB3 mestilah pdf, xls, atau xlsx sahaja.',
             'dokumen3.*.max' => 'Saiz maksimum fail adalah 2 MB.',
         ];
-        
+
         $validator = Validator::make($request->all(), [
             'dokumen1.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
             'dokumen2.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
@@ -654,7 +654,7 @@ class SekretariatController extends Controller
                 $uploadedDokumen1[] = $uniqueFilenameDokumen1;
             }
         }
-        
+
         if ($request->hasFile('dokumen2')) {
             foreach ($request->file('dokumen2') as $key => $doc2) {
                 $uniqueFilenameDokumen2 = uniqid() . '_' . $doc2->getClientOriginalName();
@@ -662,7 +662,7 @@ class SekretariatController extends Controller
                 $uploadedDokumen2[] = $uniqueFilenameDokumen2;
             }
         }
-        
+
         if ($request->hasFile('dokumen3')) {
             foreach ($request->file('dokumen3') as $key => $doc3) {
                 $uniqueFilenameDokumen3 = uniqid() . '_' . $doc3->getClientOriginalName();
@@ -670,7 +670,7 @@ class SekretariatController extends Controller
                 $uploadedDokumen3[] = $uniqueFilenameDokumen3;
             }
         }
-        
+
         $dokumenESP = new DokumenESP();
         $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
         $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
@@ -691,25 +691,25 @@ class SekretariatController extends Controller
     //     $dokumen1 = $request->file('dokumen1');
     //     $dokumen2 = $request->file('dokumen2');
     //     $dokumen3 = $request->file('dokumen3');
-        
+
     //     $uploadedDokumen1 = [];
     //     $uploadedDokumen2 = [];
     //     $uploadedDokumen3 = [];
-    
+
     //     if ($dokumen1 && $dokumen2 && $dokumen3) {
     //         foreach ($dokumen1 as $key => $doc1) {
     //             $uniqueFilenameDokumen1 = uniqid() . '_' . $doc1->getClientOriginalName();
     //             $doc1->move('assets/dokumen/esp/dokumen1', $uniqueFilenameDokumen1);
     //             $uploadedDokumen1[] = $uniqueFilenameDokumen1;
-    
+
     //             $uniqueFilenameDokumen2 = uniqid() . '_' . $dokumen2[$key]->getClientOriginalName();
     //             $dokumen2[$key]->move('assets/dokumen/esp/dokumen2', $uniqueFilenameDokumen2);
     //             $uploadedDokumen2[] = $uniqueFilenameDokumen2;
-    
+
     //             $uniqueFilenameDokumen3 = uniqid() . '_' . $dokumen3[$key]->getClientOriginalName();
     //             $dokumen3[$key]->move('assets/dokumen/esp/dokumen3', $uniqueFilenameDokumen3);
     //             $uploadedDokumen3[] = $uniqueFilenameDokumen3;
-    
+
     //             // Create a new record
     //             $dokumenESP = new DokumenESP();
     //             $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
@@ -719,16 +719,16 @@ class SekretariatController extends Controller
     //             $dokumenESP->save();
     //         }
     //     }
-    
+
     //     // Store the uploaded file names or URLs in the session
     //     session()->put('uploadedDokumen1', $uploadedDokumen1);
     //     session()->put('uploadedDokumen2', $uploadedDokumen2);
     //     session()->put('uploadedDokumen3', $uploadedDokumen3);
     //     // session()->put('catatan', $request->input('catatan'));
-    
+
     //     return redirect()->route('sekretariat.dokumenESP');
     // }
-    
+
 
     //TUNTUTAN
     public function senaraiTuntutanKedua()
@@ -964,6 +964,90 @@ class SekretariatController extends Controller
     }
 
     public function hantarSaringan(Request $request, $id){
+        $t_id = SejarahTuntutan::where('id', $id)->value('tuntutan_id');
+        Tuntutan::where('id', $t_id)
+            ->update([
+                'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
+                'yuran_disokong'        =>  $request->get('yuran_disokong'),
+                'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
+                'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+            ]);
+
+        $sejarah_t = SejarahTuntutan::where('id', $id)->first();
+        $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
+        $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
+        $smoku_id = $tuntutan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('tuntutan.sekretariat.sejarah.papar_saringan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
+    }
+
+    //Pembayaran
+    public function senaraiPembayaran()
+    {
+        $tuntutan = Tuntutan::where('status', '6')
+            ->orWhere('status', '=','8')
+            ->get();
+        $status_kod=0;
+        $status = null;
+        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status'));
+    }
+
+    public function saringPembayaran(Request $request, $id){
+        $no_rujukan_tuntutan= Tuntutan::where('id', $id)->value('no_rujukan_tuntutan');
+        $permohonan_id = Tuntutan::where('id', $id)->value('permohonan_id');
+        $smoku_id = Permohonan::where('id', $permohonan_id)->value('smoku_id');
+
+        Tuntutan::where('id', $id)
+            ->update([
+                'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
+                'yuran_disokong'        =>  $request->get('yuran_disokong'),
+                'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
+                'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                'status'                =>  8,
+            ]);
+
+        $status_rekod = new SejarahTuntutan([
+            'smoku_id'      =>  $smoku_id,
+            'tuntutan_id'   =>  $id,
+            'status'        =>  8,
+        ]);
+        $status_rekod->save();
+
+        $status_kod=1;
+        $status = "Tuntutan ".$no_rujukan_tuntutan." telah dibayar.";
+
+        $tuntutan = Tuntutan::where('status', '6')
+            ->orWhere('status', '=','8')
+            ->get();
+        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status'));
+    }
+
+    public function paparPembayaran($id){
+        $sejarah_t = SejarahTuntutan::where('id', $id)->first();
+        $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
+        $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $saringan = SaringanTuntutan::where('tuntutan_id', $sejarah_t->tuntutan_id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
+        $smoku_id = $tuntutan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('tuntutan.sekretariat.sejarah.papar_saringan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
+    }
+
+    public function kemaskiniPembayaran($id){
+        $sejarah_t = SejarahTuntutan::where('id', $id)->first();
+        $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
+        $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
+        $smoku_id = $tuntutan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('tuntutan.sekretariat.sejarah.kemaskini_saringan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
+    }
+
+    public function hantarPembayaran(Request $request, $id){
         $t_id = SejarahTuntutan::where('id', $id)->value('tuntutan_id');
         Tuntutan::where('id', $t_id)
             ->update([
