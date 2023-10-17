@@ -643,6 +643,8 @@ class SekretariatController extends Controller
                 ->withInput();
         }
 
+        $dokumenESP = DokumenESP::first(); // Retrieve the first record
+
         $uploadedDokumen1 = [];
         $uploadedDokumen2 = [];
         $uploadedDokumen3 = [];
@@ -671,63 +673,27 @@ class SekretariatController extends Controller
             }
         }
 
-        $dokumenESP = new DokumenESP();
-        $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
-        $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
-        $dokumenESP->dokumen3 = $uniqueFilenameDokumen3;
-        // $dokumenESP->catatan = $request->catatan;
-        $dokumenESP->save();
+        // If a record with the user's identifier exists, update it; otherwise, create a new one
+        if ($dokumenESP) {
+            $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
+            $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
+            $dokumenESP->dokumen3 = $uniqueFilenameDokumen3;
+            $dokumenESP->save();
+        } else {
+            $dokumenESP = new DokumenESP();
+            $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
+            $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
+            $dokumenESP->dokumen3 = $uniqueFilenameDokumen3;
+            $dokumenESP->save();
+        }
 
         // Store the uploaded file names or URLs in the session
         session()->put('uploadedDokumen1', $uploadedDokumen1);
         session()->put('uploadedDokumen2', $uploadedDokumen2);
         session()->put('uploadedDokumen3', $uploadedDokumen3);
 
-        return redirect()->route('sekretariat.dokumenESP');
+        return redirect()->route('sekretariat.dokumenESP')->with('success', 'Semua fail SPBB telah berjaya dikemaskini.');
     }
-
-    // public function hantarDokumenESP(Request $request)
-    // {
-    //     $dokumen1 = $request->file('dokumen1');
-    //     $dokumen2 = $request->file('dokumen2');
-    //     $dokumen3 = $request->file('dokumen3');
-
-    //     $uploadedDokumen1 = [];
-    //     $uploadedDokumen2 = [];
-    //     $uploadedDokumen3 = [];
-
-    //     if ($dokumen1 && $dokumen2 && $dokumen3) {
-    //         foreach ($dokumen1 as $key => $doc1) {
-    //             $uniqueFilenameDokumen1 = uniqid() . '_' . $doc1->getClientOriginalName();
-    //             $doc1->move('assets/dokumen/esp/dokumen1', $uniqueFilenameDokumen1);
-    //             $uploadedDokumen1[] = $uniqueFilenameDokumen1;
-
-    //             $uniqueFilenameDokumen2 = uniqid() . '_' . $dokumen2[$key]->getClientOriginalName();
-    //             $dokumen2[$key]->move('assets/dokumen/esp/dokumen2', $uniqueFilenameDokumen2);
-    //             $uploadedDokumen2[] = $uniqueFilenameDokumen2;
-
-    //             $uniqueFilenameDokumen3 = uniqid() . '_' . $dokumen3[$key]->getClientOriginalName();
-    //             $dokumen3[$key]->move('assets/dokumen/esp/dokumen3', $uniqueFilenameDokumen3);
-    //             $uploadedDokumen3[] = $uniqueFilenameDokumen3;
-
-    //             // Create a new record
-    //             $dokumenESP = new DokumenESP();
-    //             $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
-    //             $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
-    //             $dokumenESP->dokumen3 = $uniqueFilenameDokumen3;
-    //             // $dokumenESP->catatan = $request->catatan;
-    //             $dokumenESP->save();
-    //         }
-    //     }
-
-    //     // Store the uploaded file names or URLs in the session
-    //     session()->put('uploadedDokumen1', $uploadedDokumen1);
-    //     session()->put('uploadedDokumen2', $uploadedDokumen2);
-    //     session()->put('uploadedDokumen3', $uploadedDokumen3);
-    //     // session()->put('catatan', $request->input('catatan'));
-
-    //     return redirect()->route('sekretariat.dokumenESP');
-    // }
 
 
     //TUNTUTAN

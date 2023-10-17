@@ -33,8 +33,15 @@
 					</div>
 					<!--end::Card header-->
 
+					@if(session('success'))
+						<div class="alert alert-success" style="width: 90%; margin: 0 auto;">
+							{{ session('success') }}
+						</div>
+						<br>
+					@endif
+
 					@if ($errors->any())
-						<div class="alert alert-danger" style="width: 60%; margin: 0 auto;">
+						<div class="alert alert-danger" style="width: 90%; margin: 0 auto;">
 							@foreach ($errors->all() as $error)
 								<li>{{ $error }}</li>
 							@endforeach
@@ -52,8 +59,8 @@
 								<thead>
 									<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 										<th class="text-center" style="width: 15%">Item</th>
-										<th class="text-center" style="width: 20%">Muat Turun Borang</th>
-										<th class="text-center" style="width: 65%">Muat Naik Borang</th>
+										<th class="text-center" style="width: 25%">Muat Turun Borang</th>
+										<th class="text-center" style="width: 60%">Muat Naik Borang</th>
 									</tr>
 								</thead>
 								<tbody class="fw-semibold text-gray-600" >
