@@ -31,6 +31,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SekretariatController extends Controller
@@ -539,7 +540,8 @@ class SekretariatController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $kelulusan = Kelulusan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+        $kelulusan = Kelulusan::orderBy('created_at', 'desc')
+        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('tarikh_mesyuarat', [$startDate, $endDate]);
         })
         ->when($request->status, function ($q) use ($request) {
@@ -614,47 +616,119 @@ class SekretariatController extends Controller
 
     public function hantarDokumenESP(Request $request)
     {
-        $dokumen1 = $request->file('dokumen1');
-        $dokumen2 = $request->file('dokumen2');
-        $dokumen3 = $request->file('dokumen3');
+        // Validate the uploaded files
+        $customMessages = [
+            'dokumen1.*.required' => 'Sila pilih fail untuk SPBB1.',
+            'dokumen1.*.mimes' => 'Format fail bagi SPBB1 mestilah pdf, xls, atau xlsx sahaja.',
+            'dokumen1.*.max' => 'Saiz maksimum fail adalah 2 MB.',
+            
+            'dokumen2.*.required' => 'Sila pilih fail untuk SPBB2.',
+            'dokumen2.*.mimes' => 'Format fail bagi SPBB2 mestilah pdf, xls, atau xlsx sahaja.',
+            'dokumen2.*.max' => 'Saiz maksimum fail adalah 2 MB.',
+            
+            'dokumen3.*.required' => 'Sila pilih fail untuk SPBB3.',
+            'dokumen3.*.mimes' => 'Format fail bagi SPBB3 mestilah pdf, xls, atau xlsx sahaja.',
+            'dokumen3.*.max' => 'Saiz maksimum fail adalah 2 MB.',
+        ];
+        
+        $validator = Validator::make($request->all(), [
+            'dokumen1.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen2.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen3.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
+        ], $customMessages);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         $uploadedDokumen1 = [];
         $uploadedDokumen2 = [];
         $uploadedDokumen3 = [];
 
-        if ($dokumen1 && $dokumen2 && $dokumen3) {
-            foreach ($dokumen1 as $key => $doc1) {
+        if ($request->hasFile('dokumen1')) {
+            foreach ($request->file('dokumen1') as $key => $doc1) {
                 $uniqueFilenameDokumen1 = uniqid() . '_' . $doc1->getClientOriginalName();
                 $doc1->move('assets/dokumen/esp/dokumen1', $uniqueFilenameDokumen1);
                 $uploadedDokumen1[] = $uniqueFilenameDokumen1;
-
-                $uniqueFilenameDokumen2 = uniqid() . '_' . $dokumen2[$key]->getClientOriginalName();
-                $dokumen2[$key]->move('assets/dokumen/esp/dokumen2', $uniqueFilenameDokumen2);
-                $uploadedDokumen2[] = $uniqueFilenameDokumen2;
-
-                $uniqueFilenameDokumen3 = uniqid() . '_' . $dokumen3[$key]->getClientOriginalName();
-                $dokumen3[$key]->move('assets/dokumen/esp/dokumen3', $uniqueFilenameDokumen3);
-                $uploadedDokumen3[] = $uniqueFilenameDokumen3;
-
-                // Create a new record
-                $dokumenESP = new DokumenESP();
-                $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
-                $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
-                $dokumenESP->dokumen3 = $uniqueFilenameDokumen3;
-                // $dokumenESP->catatan = $request->catatan;
-                $dokumenESP->save();
             }
         }
+        
+        if ($request->hasFile('dokumen2')) {
+            foreach ($request->file('dokumen2') as $key => $doc2) {
+                $uniqueFilenameDokumen2 = uniqid() . '_' . $doc2->getClientOriginalName();
+                $doc2->move('assets/dokumen/esp/dokumen2', $uniqueFilenameDokumen2);
+                $uploadedDokumen2[] = $uniqueFilenameDokumen2;
+            }
+        }
+        
+        if ($request->hasFile('dokumen3')) {
+            foreach ($request->file('dokumen3') as $key => $doc3) {
+                $uniqueFilenameDokumen3 = uniqid() . '_' . $doc3->getClientOriginalName();
+                $doc3->move('assets/dokumen/esp/dokumen3', $uniqueFilenameDokumen3);
+                $uploadedDokumen3[] = $uniqueFilenameDokumen3;
+            }
+        }
+        
+        $dokumenESP = new DokumenESP();
+        $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
+        $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
+        $dokumenESP->dokumen3 = $uniqueFilenameDokumen3;
+        // $dokumenESP->catatan = $request->catatan;
+        $dokumenESP->save();
 
         // Store the uploaded file names or URLs in the session
         session()->put('uploadedDokumen1', $uploadedDokumen1);
         session()->put('uploadedDokumen2', $uploadedDokumen2);
         session()->put('uploadedDokumen3', $uploadedDokumen3);
-        // session()->put('catatan', $request->input('catatan'));
 
         return redirect()->route('sekretariat.dokumenESP');
     }
 
+    // public function hantarDokumenESP(Request $request)
+    // {
+    //     $dokumen1 = $request->file('dokumen1');
+    //     $dokumen2 = $request->file('dokumen2');
+    //     $dokumen3 = $request->file('dokumen3');
+        
+    //     $uploadedDokumen1 = [];
+    //     $uploadedDokumen2 = [];
+    //     $uploadedDokumen3 = [];
+    
+    //     if ($dokumen1 && $dokumen2 && $dokumen3) {
+    //         foreach ($dokumen1 as $key => $doc1) {
+    //             $uniqueFilenameDokumen1 = uniqid() . '_' . $doc1->getClientOriginalName();
+    //             $doc1->move('assets/dokumen/esp/dokumen1', $uniqueFilenameDokumen1);
+    //             $uploadedDokumen1[] = $uniqueFilenameDokumen1;
+    
+    //             $uniqueFilenameDokumen2 = uniqid() . '_' . $dokumen2[$key]->getClientOriginalName();
+    //             $dokumen2[$key]->move('assets/dokumen/esp/dokumen2', $uniqueFilenameDokumen2);
+    //             $uploadedDokumen2[] = $uniqueFilenameDokumen2;
+    
+    //             $uniqueFilenameDokumen3 = uniqid() . '_' . $dokumen3[$key]->getClientOriginalName();
+    //             $dokumen3[$key]->move('assets/dokumen/esp/dokumen3', $uniqueFilenameDokumen3);
+    //             $uploadedDokumen3[] = $uniqueFilenameDokumen3;
+    
+    //             // Create a new record
+    //             $dokumenESP = new DokumenESP();
+    //             $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
+    //             $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
+    //             $dokumenESP->dokumen3 = $uniqueFilenameDokumen3;
+    //             // $dokumenESP->catatan = $request->catatan;
+    //             $dokumenESP->save();
+    //         }
+    //     }
+    
+    //     // Store the uploaded file names or URLs in the session
+    //     session()->put('uploadedDokumen1', $uploadedDokumen1);
+    //     session()->put('uploadedDokumen2', $uploadedDokumen2);
+    //     session()->put('uploadedDokumen3', $uploadedDokumen3);
+    //     // session()->put('catatan', $request->input('catatan'));
+    
+    //     return redirect()->route('sekretariat.dokumenESP');
+    // }
+    
 
     //TUNTUTAN
     public function senaraiTuntutanKedua()
@@ -714,9 +788,6 @@ class SekretariatController extends Controller
                     'yuran_disokong'        =>  $request->get('yuran_disokong'),
                     'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
                     'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
-                    'baki'                  =>  $request->get('baki'),
-                    'baki_dibayar'          =>  $request->get('baki_dibayar'),
-                    'baki_disokong'         =>  $request->get('baki_disokong'),
                     'status'                =>  6,
                 ]);
 
@@ -754,14 +825,7 @@ class SekretariatController extends Controller
         elseif($request->get('submit')=="TidakLayak"){
             Tuntutan::where('id', $id)
                 ->update([
-                    'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
-                    'yuran_disokong'        =>  $request->get('yuran_disokong'),
-                    'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
-                    'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
-                    'baki'                  =>  $request->get('baki'),
-                    'baki_dibayar'          =>  $request->get('baki_dibayar'),
-                    'baki_disokong'         =>  $request->get('baki_disokong'),
-                    'status'                =>  7,
+                    'status'   =>  7,
                 ]);
 
             $i=0;
@@ -799,14 +863,7 @@ class SekretariatController extends Controller
         elseif($request->get('submit')=="Kembalikan"){
             Tuntutan::where('id', $id)
                 ->update([
-                    'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
-                    'yuran_disokong'        =>  $request->get('yuran_disokong'),
-                    'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
-                    'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
-                    'baki'                  =>  $request->get('baki'),
-                    'baki_dibayar'          =>  $request->get('baki_dibayar'),
-                    'baki_disokong'         =>  $request->get('baki_disokong'),
-                    'status'                =>  5,
+                    'status'   =>  5,
                 ]);
 
             $i=0;

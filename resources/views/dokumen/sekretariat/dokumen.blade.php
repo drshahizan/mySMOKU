@@ -47,16 +47,23 @@
 						<!--begin::Form-->
 						<form action="{{ route('hantar.dokumen.esp') }}" method="post" enctype="multipart/form-data">
 							@csrf
-							<!--begin::Wrapper-->
 							<div class="d-flex flex-column align-items-start flex-xl-row">
-								<!--begin::Input group-->
 								<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
 									<span class="fs-3 fw-bold text-gray-800">Borang Salur Peruntukan Program BKOKU</span>
 								</div>
 							</div>
-							<!--end::Top-->
 						
 							<br>
+
+							@if ($errors->any())
+								<div class="alert alert-danger">
+									<ul>
+										@foreach ($errors->all() as $error)
+											<li>{{ $error }}</li>
+										@endforeach
+									</ul>
+								</div>
+							@endif
 						
 							<table class="table table-bordered table-striped">
 								<thead>
@@ -74,7 +81,7 @@
 											<input type="file" id="dokumen1" name="dokumen1[]" required/>
 											@if(session()->has('uploadedDokumen1'))
 												@foreach(session('uploadedDokumen1') as $doc1)
-													<a href="{{ asset('assets/dokumen/esp/dokumen1' . $doc1) }}" target="_blank">{{ $doc1 }}</a>
+													<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $doc1) }}" target="_blank">{{ $doc1 }}</a>
 												@endforeach
 											@endif
 										</td>
@@ -87,7 +94,7 @@
 											<input type="file" id="dokumen2" name="dokumen2[]" required/>
 											@if(session()->has('uploadedDokumen2'))
 												@foreach(session('uploadedDokumen2') as $doc2)
-													<a href="{{ asset('assets/dokumen/esp/dokumen2' . $doc2) }}" target="_blank">{{ $doc2 }}</a>
+													<a href="{{ asset('assets/dokumen/esp/dokumen2/' . $doc2) }}" target="_blank">{{ $doc2 }}</a>
 												@endforeach
 											@endif
 										</td>
@@ -100,7 +107,7 @@
 											<input type="file" id="dokumen3" name="dokumen3[]" required/>
 											@if(session()->has('uploadedDokumen3'))
 												@foreach(session('uploadedDokumen3') as $doc3)
-													<a href="{{ asset('assets/dokumen/esp/dokumen3' . $doc3) }}" target="_blank">{{ $doc3 }}</a>
+													<a href="{{ asset('assets/dokumen/esp/dokumen3/' . $doc3) }}" target="_blank">{{ $doc3 }}</a>
 												@endforeach
 											@endif
 										</td>

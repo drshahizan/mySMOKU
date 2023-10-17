@@ -1,9 +1,7 @@
 <x-default-layout>
     <head>
-        <title>Sekretariat BKOKU KPT</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+       <!-- Javascript -->
+        <script src="https://cdn.tiny.cloud/1/v736541al0ntzh14edk63z19dzyqs1xn2bkc5em78rv1yeis/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="/assets/css/sekretariat.css">
@@ -178,6 +176,10 @@
                                         <textarea name="kandungan1" id="kandungan1" cols="153" rows="3">{{$suratTawaran->kandungan1}}</textarea>
                                     </p>
                                     <br>
+                                    {{-- <div class="col-md-6 fv-row">
+                                        <label class="fs-6 fw-semibold mb-2">3.</label>
+                                        <textarea class="form-control form-control-solid" name="kandungan2" id="kandungan2">{{$suratTawaran->kandungan2}}</textarea>
+                                    </div> --}}
                                     <p>3. <textarea name="kandungan2" id="kandungan2" cols="153" rows="3">{{$suratTawaran->kandungan2}}</textarea></p>
                                     <br>
                                     <p>4. <textarea name="kandungan3" id="kandungan3" cols="153" rows="3">{{$suratTawaran->kandungan3}}</textarea></p>
@@ -214,5 +216,16 @@
                 </div>
             </div>
         </div>
+
+        <!--begin::Javascript-->
+        {{-- <script>
+            tinymce.init({
+            selector: '#kandungan2', // Replace with the ID or class of your textarea
+            plugins: 'autolink lists link image charmap print preview',
+            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            height: 300 // Set the height of the editor
+            });
+            var editorContent = tinymce.get('kandungan2').getContent();
+        </script> --}}
     </body>
 </x-default-layout> 

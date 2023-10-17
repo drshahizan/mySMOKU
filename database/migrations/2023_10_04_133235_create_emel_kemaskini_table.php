@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('emel_id');
             $table->string('subjek')->nullable();
             $table->string('pendahuluan')->nullable();
-            $table->string('isi_kandungan')->nullable();
+            $table->longText('isi_kandungan')->nullable();
             $table->string('penutup')->nullable();
             $table->string('disediakan_oleh')->nullable();
             $table->foreign('emel_id')->references('id')->on('bk_emel')->onDelete('cascade');

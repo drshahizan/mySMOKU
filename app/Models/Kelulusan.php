@@ -9,6 +9,8 @@ class Kelulusan extends Model
 {
     use HasFactory;
 
+    public $timestamps = true;
+
     protected $table = 'permohonan_kelulusan';
 
     protected $fillable = [

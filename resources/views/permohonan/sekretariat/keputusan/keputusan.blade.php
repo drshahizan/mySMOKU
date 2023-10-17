@@ -112,10 +112,6 @@
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
-
-                                            {{-- <div class="col-md-2" style="padding-top:20px; padding-left:65px;">
-                                                <a href="{{ route('senarai.disokong.pdf') }}" target="_blank" class="btn btn-secondary btn-round"><i class="fa fa-file-pdf" style="color: black;"></i> PDF</a>
-                                            </div> --}}
                                         </div>
                                     </form>   
                                     
@@ -125,9 +121,10 @@
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th style="width: 15%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 45%"><b>Nama</b></th>
-                                                        <th style="width: 10%" class="text-center"><b>No. Mesyuarat</b></th>
-                                                        <th style="width: 15%" class="text-center"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th style="width: 33%"><b>Nama</b></th>
+                                                        <th style="width: 15%"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
+                                                        <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
                                                         <th class="text-center" style="width: 15%">Status Permohonan</th>
                                                     </tr>
                                                 </thead>
@@ -136,6 +133,8 @@
                                                         @php
                                                             $id_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
                                                             $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku.nama');
+                                                            $peringkat = DB::table('permohonan')->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku_akademik.peringkat_pengajian');
+                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat',$peringkat)->value('peringkat');
                                                             $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
 
                                                             $text = ucwords(strtolower($nama));
@@ -156,6 +155,7 @@
                                                             <tr>
                                                                 <td>{{$id_permohonan}}</td>
                                                                 <td>{{$pemohon}}</td>
+                                                                <td>{{ucwords(strtolower($nama_peringkat))}}</td>
                                                                 <td class="text-center">{{$item->no_mesyuarat}}</td>
                                                                 <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
                                                                 @if($item->keputusan == "Lulus")
@@ -169,6 +169,7 @@
                                                                         <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
                                                                     </td>
                                                                 @endif
+                                                                <td hidden>{{$item->created_at}}</td>
                                                             </tr>
                                                         @endif
                                                     @endforeach
@@ -217,9 +218,10 @@
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th style="width: 15%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 45%"><b>Nama</b></th>
-                                                        <th style="width: 10%" class="text-center"><b>No. Mesyuarat</b></th>
-                                                        <th style="width: 15%" class="text-center"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th style="width: 33%"><b>Nama</b></th>
+                                                        <th style="width: 15%"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
+                                                        <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
                                                         <th class="text-center" style="width: 15%">Status Permohonan</th>
                                                     </tr>
                                                 </thead>
@@ -228,6 +230,8 @@
                                                         @php
                                                             $id_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
                                                             $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku.nama');
+                                                            $peringkat = DB::table('permohonan')->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku_akademik.peringkat_pengajian');
+                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat',$peringkat)->value('peringkat');
                                                             $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
 
                                                             $text = ucwords(strtolower($nama));
@@ -248,6 +252,7 @@
                                                             <tr>
                                                                 <td>{{$id_permohonan}}</td>
                                                                 <td>{{$pemohon}}</td>
+                                                                <td>{{ucwords(strtolower($nama_peringkat))}}</td>
                                                                 <td class="text-center">{{$item->no_mesyuarat}}</td>
                                                                 <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
                                                                 @if($item->keputusan == "Lulus")
@@ -279,7 +284,7 @@
         <!-- Javascript -->
         <script src="assets/bundles/libscripts.bundle.js"></script>    
         <script src="assets/bundles/vendorscripts.bundle.js"></script>
-
+        
         <script>
             $('#sortTable1').DataTable();
             $('#sortTable2').DataTable();
