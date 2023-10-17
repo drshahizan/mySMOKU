@@ -140,7 +140,9 @@
                                             <td><textarea name="catatan" id="catatan" cols="50" rows="3"></textarea></td>
                                         </tr>
                                     </table>
+
                                     <br>
+
                                     <div class="submit" style="text-align: right;">
                                         <button type="submit" id="submit" value="submit" class="btn btn-primary text-white">Hantar</button>
                                     </div>
@@ -188,6 +190,17 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name+"csrf-token"]').attr('content')
                 }
+            });
+        });
+
+        $(document).ready(function() {
+            $(".btn-add-more").click(function(){ 
+                var html = $(".clone").html();
+                $(".img_div").after(html);
+            });
+
+            $("body").on("click",".btn-remove",function(){ 
+                $(this).parents(".control-group").remove();
             });
         });
     </script>

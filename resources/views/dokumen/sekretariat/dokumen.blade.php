@@ -56,12 +56,10 @@
 							<br>
 
 							@if ($errors->any())
-								<div class="alert alert-danger">
-									<ul>
-										@foreach ($errors->all() as $error)
-											<li>{{ $error }}</li>
-										@endforeach
-									</ul>
+								<div class="alert alert-danger" style="width: 60%; margin: 0 auto;">
+									@foreach ($errors->all() as $error)
+										<li>{{ $error }}</li>
+									@endforeach
 								</div>
 							@endif
 						

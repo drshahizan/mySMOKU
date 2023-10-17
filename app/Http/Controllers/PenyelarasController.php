@@ -32,6 +32,7 @@ use App\Models\SejarahTuntutan;
 use App\Models\Peperiksaan;
 use App\Models\Saringan;
 use App\Models\Kelulusan;
+use Illuminate\Support\Facades\Validator;
 
 
 class PenyelarasController extends Controller
@@ -727,32 +728,61 @@ class PenyelarasController extends Controller
         // Check if a record with the given identifier exists
         $dokumenESP = DokumenESP::find($id);
 
-        // Get the uploaded files
-        $dokumen1 = $request->file('dokumen1');
-        $dokumen2 = $request->file('dokumen2');
-        $dokumen3 = $request->file('dokumen3');
+        // Define custom error messages
+        $customMessages = [
+            'dokumen1.required' => 'Sila pilih fail untuk SPBB1.',
+            'dokumen1.mimes' => 'Format fail bagi SPBB1 mestilah pdf, xls, atau xlsx sahaja.',
+            'dokumen1.max' => 'Saiz maksimum fail adalah 2 MB.',
+
+            'dokumen2.required' => 'Sila pilih fail untuk SPBB2.',
+            'dokumen2.mimes' => 'Format fail bagi SPBB2 mestilah pdf, xls, atau xlsx sahaja.',
+            'dokumen2.max' => 'Saiz maksimum fail adalah 2 MB.',
+
+            'dokumen3.required' => 'Sila pilih fail untuk SPBB3.',
+            'dokumen3.mimes' => 'Format fail bagi SPBB3 mestilah pdf, xls, atau xlsx sahaja.',
+            'dokumen3.max' => 'Saiz maksimum fail adalah 2 MB.',
+        ];
+
+        // Define validation rules
+        $rules = [
+            'dokumen1' => 'required|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen2' => 'required|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen3' => 'required|mimes:pdf,xls,xlsx|max:2048',
+        ];
+
+        // Validate the uploaded files with custom error messages
+        $validator = Validator::make($request->all(), $rules, $customMessages);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         // Initialize arrays to store uploaded file names
         $uploadedDokumen1 = [];
         $uploadedDokumen2 = [];
         $uploadedDokumen3 = [];
 
-        if ($dokumen1) {
+        if ($request->hasFile('dokumen1')) {
             // Handle dokumen1 upload
+            $dokumen1 = $request->file('dokumen1');
             $uniqueFilenameDokumen1 = uniqid() . '_' . $dokumen1->getClientOriginalName();
             $dokumen1->move('assets/dokumen/esp/dokumen1', $uniqueFilenameDokumen1);
             $uploadedDokumen1[] = $uniqueFilenameDokumen1;
         }
 
-        if ($dokumen2) {
+        if ($request->hasFile('dokumen2')) {
             // Handle dokumen2 upload
+            $dokumen2 = $request->file('dokumen2');
             $uniqueFilenameDokumen2 = uniqid() . '_' . $dokumen2->getClientOriginalName();
             $dokumen2->move('assets/dokumen/esp/dokumen2', $uniqueFilenameDokumen2);
             $uploadedDokumen2[] = $uniqueFilenameDokumen2;
         }
 
-        if ($dokumen3) {
+        if ($request->hasFile('dokumen3')) {
             // Handle dokumen3 upload
+            $dokumen3 = $request->file('dokumen3');
             $uniqueFilenameDokumen3 = uniqid() . '_' . $dokumen3->getClientOriginalName();
             $dokumen3->move('assets/dokumen/esp/dokumen3', $uniqueFilenameDokumen3);
             $uploadedDokumen3[] = $uniqueFilenameDokumen3;
@@ -783,49 +813,64 @@ class PenyelarasController extends Controller
         return redirect()->route('penyelaras.dokumen');
     }
 
-    // public function penyelarasHantarDokumenESP(Request $request, $id)
+    // public function pHantarDokumenESP(Request $request, $id)
     // {
     //     // Check if a record with the given identifier exists
     //     $dokumenESP = DokumenESP::find($id);
-        
+
+    //     // Get the uploaded files
     //     $dokumen1 = $request->file('dokumen1');
     //     $dokumen2 = $request->file('dokumen2');
     //     $dokumen3 = $request->file('dokumen3');
-        
+
+    //     // Initialize arrays to store uploaded file names
     //     $uploadedDokumen1 = [];
     //     $uploadedDokumen2 = [];
     //     $uploadedDokumen3 = [];
-    
-    //     if ($dokumen1 && $dokumen2 && $dokumen3) {
-    //         foreach ($dokumen1 as $key => $doc1) {
-    //             $uniqueFilenameDokumen1 = uniqid() . '_' . $doc1->getClientOriginalName();
-    //             $doc1->move('assets/dokumen/esp/dokumen1', $uniqueFilenameDokumen1);
-    //             $uploadedDokumen1[] = $uniqueFilenameDokumen1;
-    
-    //             $uniqueFilenameDokumen2 = uniqid() . '_' . $dokumen2[$key]->getClientOriginalName();
-    //             $dokumen2[$key]->move('assets/dokumen/esp/dokumen2', $uniqueFilenameDokumen2);
-    //             $uploadedDokumen2[] = $uniqueFilenameDokumen2;
-    
-    //             $uniqueFilenameDokumen3 = uniqid() . '_' . $dokumen3[$key]->getClientOriginalName();
-    //             $dokumen3[$key]->move('assets/dokumen/esp/dokumen3', $uniqueFilenameDokumen3);
-    //             $uploadedDokumen3[] = $uniqueFilenameDokumen3;
-    
-    //             // Update or create the record
-    //             $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
-    //             $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
-    //             $dokumenESP->dokumen3 = $uniqueFilenameDokumen3;
-    //             $dokumenESP->save();
-    //             // $dokumenESP->catatan = $request->catatan;
-    //         }
+
+    //     if ($dokumen1) {
+    //         // Handle dokumen1 upload
+    //         $uniqueFilenameDokumen1 = uniqid() . '_' . $dokumen1->getClientOriginalName();
+    //         $dokumen1->move('assets/dokumen/esp/dokumen1', $uniqueFilenameDokumen1);
+    //         $uploadedDokumen1[] = $uniqueFilenameDokumen1;
     //     }
-    
+
+    //     if ($dokumen2) {
+    //         // Handle dokumen2 upload
+    //         $uniqueFilenameDokumen2 = uniqid() . '_' . $dokumen2->getClientOriginalName();
+    //         $dokumen2->move('assets/dokumen/esp/dokumen2', $uniqueFilenameDokumen2);
+    //         $uploadedDokumen2[] = $uniqueFilenameDokumen2;
+    //     }
+
+    //     if ($dokumen3) {
+    //         // Handle dokumen3 upload
+    //         $uniqueFilenameDokumen3 = uniqid() . '_' . $dokumen3->getClientOriginalName();
+    //         $dokumen3->move('assets/dokumen/esp/dokumen3', $uniqueFilenameDokumen3);
+    //         $uploadedDokumen3[] = $uniqueFilenameDokumen3;
+    //     }
+
+    //     // Update the record with the uploaded file names
+    //     if (!empty($uploadedDokumen1)) {
+    //         $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
+    //     }
+
+    //     if (!empty($uploadedDokumen2)) {
+    //         $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
+    //     }
+
+    //     if (!empty($uploadedDokumen3)) {
+    //         $dokumenESP->dokumen3 = $uniqueFilenameDokumen3;
+    //     }
+
+    //     // Save the record
+    //     $dokumenESP->save();
+
     //     // Store the uploaded file names or URLs in the session
     //     session()->put('uploadedDokumen1', $uploadedDokumen1);
     //     session()->put('uploadedDokumen2', $uploadedDokumen2);
     //     session()->put('uploadedDokumen3', $uploadedDokumen3);
-    //     // session()->put('catatan', $request->input('catatan'));
-    
+
+    //     // Redirect to the desired route
     //     return redirect()->route('penyelaras.dokumen');
     // }
-
 }

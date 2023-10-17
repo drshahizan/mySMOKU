@@ -33,6 +33,15 @@
 					</div>
 					<!--end::Card header-->
 
+					@if ($errors->any())
+						<div class="alert alert-danger" style="width: 60%; margin: 0 auto;">
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</div>
+						<br><br>
+					@endif
+
 					<!--begin::Card body-->
 					<div class="card-body pt-0">
 						@foreach ($dokumen as $item)
@@ -58,9 +67,6 @@
 										</td>
 										<td class="fv-row">
 											<input type="file" class="form-control form-control-sm" name="dokumen1"/>
-											{{-- @if ($item->dokumen1)
-												<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $item->dokumen1) }}" target="_blank">{{ $item->dokumen1 }}</a>
-											@endif --}}
 										</td>
 									</tr>
 
@@ -74,9 +80,6 @@
 										</td>
 										<td class="fv-row">
 											<input type="file" class="form-control form-control-sm" name="dokumen2"/>
-											{{-- @if ($item->dokumen2)
-												<a href="{{ asset('assets/dokumen/esp/dokumen2/' . $item->dokumen2) }}" target="_blank">{{ $item->dokumen2 }}</a>
-											@endif --}}
 										</td>
 									</tr>
 
@@ -90,9 +93,6 @@
 										</td>
 										<td class="fv-row">
 											<input type="file" class="form-control form-control-sm" name="dokumen3"/>
-											{{-- @if ($item->dokumen3)
-												<a href="{{ asset('assets/dokumen/esp/dokumen3/' . $item->dokumen3) }}" target="_blank">{{ $item->dokumen3 }}</a>
-											@endif --}}
 										</td>
 									</tr>
 
@@ -137,5 +137,4 @@
 	<!--end::Content container-->
 </div>
 <!--end::Content-->
-	
 </x-default-layout>
