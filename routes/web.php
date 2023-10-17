@@ -38,7 +38,6 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 //Route::middleware('api.token')->group(function () {
 
     Route::get('/maklumatESP', [MaklumatESPController::class, 'index']);
-
 //});
 
 
