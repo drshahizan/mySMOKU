@@ -159,7 +159,7 @@
 		</div>
 		<div class="menu-item">
 			<a class="menu-link" href="{{ route('preview') }}">
-				<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
+				<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
 				<span class="menu-title">Surat Tawaran</span>
 			</a>
 		</div>
@@ -171,7 +171,7 @@
 		</div>
 		<div class="menu-item">
 			<a class="menu-link" href="{{ route('sekretariat.dokumenESP')}}">
-				<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
+				<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
 				<span class="menu-title">Dokumen ESP</span>
 			</a>
 		</div>
@@ -193,6 +193,12 @@
 					<span class="menu-title">Kelulusan</span>
 			</a>
 		</div>
+        <div class="menu-item">
+            <a class="menu-link" href="{{url('permohonan/sekretariat/pembayaran/senarai')}}">
+                <span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
+                <span class="menu-title">Pembayaran</span>
+            </a>
+        </div>
 		<div class="menu-item">
 			<a class="menu-link" href="{{url('permohonan/sekretariat/keputusan')}}">
 					<span class="menu-icon">{!! getIcon('check-square', 'fs-2') !!}</span>
@@ -218,6 +224,12 @@
 					<span class="menu-title">Saringan</span>
 			</a>
 		</div>
+        <div class="menu-item">
+            <a class="menu-link" href="{{url('tuntutan/sekretariat/pembayaran/senarai')}}">
+                <span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
+                <span class="menu-title">Pembayaran</span>
+            </a>
+        </div>
 		<div class="menu-item">
 			<a class="menu-link" href="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}">
 			<!-- "{{ route('dashboard') }}" -->

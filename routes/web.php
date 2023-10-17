@@ -119,7 +119,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Permohonan - Sekretariat - Pembayaran
     Route::get('permohonan/sekretariat/pembayaran/senarai', [SaringanController::class, 'senaraiPembayaran']);
     Route::get('permohonan/sekretariat/pembayaran/maklumat/{id}', [SaringanController::class, 'maklumatPembayaran'])->name('maklumat.pembayaran.id');
-    Route::post('permohonan/sekretariat/pembayaran/saring/{id}', [SaringanController::class, 'saringPembayaran'])->name('saring.permohonan.id');;
+    Route::post('permohonan/sekretariat/pembayaran/saring/{id}', [SaringanController::class, 'saringPembayaran'])->name('saring.pembayaran.id');;
     Route::get('permohonan/sekretariat/pembayaran/papar/{id}', [SaringanController::class, 'paparPembayaran'])->name('papar.pembayaran.id');
     Route::get('permohonan/sekretariat/pembayaran/kemaskini/{id}', [SaringanController::class, 'kemaskiniPembayaran'])->name('kemaskini.pembayaran.id');
     Route::get('permohonan/sekretariat/pembayaran/hantar/{id}', [SaringanController::class, 'hantarPembayaran'])->name('hantar.pembayaran.id');
@@ -179,7 +179,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Permohonan - Sekretariat - Pembayaran
     Route::get('tuntutan/sekretariat/pembayaran/senarai', [SekretariatController::class, 'senaraiPembayaran']);
     Route::get('tuntutan/sekretariat/pembayaran/maklumat/{id}', [SekretariatController::class, 'maklumatPembayaran'])->name('t.maklumat.pembayaran.id');
-    Route::post('tuntutan/sekretariat/pembayaran/saring/{id}', [SekretariatController::class, 'saringPembayaran'])->name('t.saring.permohonan.id');;
+    Route::post('tuntutan/sekretariat/pembayaran/saring/{id}', [SekretariatController::class, 'saringPembayaran'])->name('t.saring.pembayaran.id');;
     Route::get('tuntutan/sekretariat/pembayaran/papar/{id}', [SekretariatController::class, 'paparPembayaran'])->name('t.papar.pembayaran.id');
     Route::get('tuntutan/sekretariat/pembayaran/kemaskini/{id}', [SekretariatController::class, 'kemaskiniPembayaran'])->name('t.kemaskini.pembayaran.id');
     Route::get('tuntutan/sekretariat/pembayaran/hantar/{id}', [SekretariatController::class, 'hantarPembayaran'])->name('t.hantar.pembayaran.id');

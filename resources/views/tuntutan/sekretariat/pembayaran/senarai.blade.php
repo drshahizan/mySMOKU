@@ -36,7 +36,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Saringan</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Pembayaran</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -68,7 +68,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Senarai Saringan Tuntutan<br><small>Klik ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
+                            <h2>Senarai Pembayaran<br><small>Klik ID Permohonan untuk melakukan pembayaran</small></h2>
                         </div>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -151,7 +151,7 @@
                                                 <th style="width: 17%"><b>ID Tuntutan</b></th>
                                                 <th><b>Nama</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Status Saringan</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Status</b></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -181,18 +181,19 @@
                                                 @endphp
                                                 @if($permohonan->program=="PPK")
                                                     <tr>
-                                                        <td><a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'.$item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a></td>
-                                                        {{-- <td><a href="{{ url('tuntutan-telah-disaring/'.$item['nokp_pelajar']) }}" title="">{{$item['no_rujukan_permohonan']}}</a></td> --}}
+                                                        <td>
+                                                            @if($item['status']==6)
+                                                                <a href="{{ url('tuntutan/sekretariat/pembayaran/maklumat/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                            @else
+                                                                <a href="{{ url('tuntutan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                            @endif
+                                                        </td>
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                                        @if ($item['status']=='2')
-                                                            <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='3')
-                                                            <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='4')
-                                                            <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='5')
-                                                            <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @if ($item['status']=='6')
+                                                            <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif ($item['status']=='8')
+                                                            <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
                                                     </tr>
                                                 @endif
