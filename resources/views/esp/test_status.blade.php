@@ -139,17 +139,23 @@
           <!--begin::Card body-->
           <div class="card-body pt-0">
             <!--begin::Form-->
-            <form class="form" action="http://bkokudev.mohe.gov.my/statusESP" method="post">
+            <form class="form" action="http://127.0.0.1:8000/statusESP" method="post">
                 
                 <textarea name="data" id="data" rows="10" cols="50">
-                  [
-                    {
-                      "nokp" : "870807012377",
-                      "id_permohonan" : "B/2/870807012377",
-                      "tarikh_transaksi" : "08/10/2023",
-                      "amount" : "3000"
-                    }
-                  ]
+[
+  {
+    "nokp" : "870807012377",
+    "id_permohonan" : "B/2/870807012377",
+    "tarikh_transaksi" : "08/10/2023",
+    "amount" : "3000"
+  },
+  {
+    "nokp" : "980807012377",
+    "id_permohonan" : "B/2/980807012377",
+    "tarikh_transaksi" : "08/10/2023",
+    "amount" : "2000"
+  }
+]
                 </textarea>
                 <!--begin::action-->
                 <div class="footer">

@@ -86,12 +86,19 @@ class MaklumatESPController extends Controller
 
     public function receiveData(Request $request)
     {
-    $data = $request->all(); // Get all data from the request
+        $data = $request->all(); // Get all data from the request
 
-    $jsonData = json_decode($data['data'], true);
-    //dd($dataArray);
-    //return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $data], 200);
-    return view('esp.kemaskini_status_esp', compact('jsonData'));
+        // dd($data);
+
+        $contentTypeHeader = $request->header('Content-Type');
+        if (strpos($contentTypeHeader, 'application/json') !== false) {
+            return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $data], 200);
+        } else {
+            $jsonData = json_decode($data['data'], true);
+            return view('esp.kemaskini_status_esp', compact('jsonData'));
+        }
+        
+    
     }
 
     public function test(){
