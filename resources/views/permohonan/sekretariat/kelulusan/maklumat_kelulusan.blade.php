@@ -52,18 +52,7 @@
     <!-- Main body part  -->
     <div id="main-content">
         <div class="container-fluid">
-            <!-- Page header section  -->
             <div class="row clearfix">
-                {{-- <div class="col-12">
-                    <nav class="navbar navbar-expand-sm navbar-light bg-light page_menu">
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown" style="background-color: rgb(35, 58, 108)!important;">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item vivify swoopInTop delay-150 active text-white"><b>Rekod Keputusan Permohonan</b></li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div> --}}
-
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="body p-5">
