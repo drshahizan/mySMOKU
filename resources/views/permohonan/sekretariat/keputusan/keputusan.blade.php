@@ -131,12 +131,16 @@
                                                 <tbody>
                                                     @foreach ($kelulusan as $item)
                                                         @php
-                                                            $id_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
+                                                            $no_rujukan_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
                                                             $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku.nama');
-                                                            $peringkat = DB::table('permohonan')->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku_akademik.peringkat_pengajian');
-                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat',$peringkat)->value('peringkat');
                                                             $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
 
+                                                            //peringkat pengajian
+                                                            preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches); // Extract peringkat pengajian value using regular expression
+                                                            $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null; // $matches[1] will contain the extracted peringkat pengajian value
+                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
+                                                         
+                                                            //nama pelajar
                                                             $text = ucwords(strtolower($nama));
                                                             $conjunctions = ['bin', 'binti'];
                                                             $words = explode(' ', $text);
@@ -153,7 +157,7 @@
 
                                                         @if($program == "BKOKU")
                                                             <tr>
-                                                                <td>{{$id_permohonan}}</td>
+                                                                <td>{{$no_rujukan_permohonan}}</td>
                                                                 <td>{{$pemohon}}</td>
                                                                 <td>{{ucwords(strtolower($nama_peringkat))}}</td>
                                                                 <td class="text-center">{{$item->no_mesyuarat}}</td>
