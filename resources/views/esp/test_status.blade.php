@@ -139,7 +139,7 @@
           <!--begin::Card body-->
           <div class="card-body pt-0">
             <!--begin::Form-->
-            <form class="form" action="http://127.0.0.1:8000/statusESP" method="post">
+            <form class="form" action="http://bkokudev.mohe.gov.my/statusESP" method="post">
                 
                 <textarea name="data" id="data" rows="10" cols="50">
 [
