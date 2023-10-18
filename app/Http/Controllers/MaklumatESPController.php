@@ -30,17 +30,19 @@ class MaklumatESPController extends Controller
                 , d.alamat_tetap_poskod as poskod, d.alamat_tetap_bandar as bandar, d.alamat_tetap_negeri as negeri, d.tel_bimbit as telefon_hp
                 , d.alamat_surat_menyurat as alamat01, "" as alamat02, "" as alamat03, "" as telefon_o
                 , CASE WHEN b.program = "BKOKU" THEN "OKU" ELSE "PPK" END as program
-                , e.kod_esp as peringkat, YEAR(c.tarikh_mula) as tahun_tawar, YEAR(c.tarikh_mula) as tahun_taja 
-                , c.tempoh_pengajian * 12 as tempoh_taja
-                , c.tarikh_mula as tarikh_taja
+                , e.kod_esp as peringkat
+                , DATE_FORMAT(c.tarikh_mula, "%d/%m/%Y") AS tahun_tawar
+                , DATE_FORMAT(c.tarikh_mula, "%d/%m/%Y") AS tahun_taja 
+                , "48" as tempoh_taja
+                , DATE_FORMAT(c.tarikh_mula, "%d/%m/%Y") AS tarikh_taja
                 , SUBSTRING_INDEX(c.sesi, "/", 1) AS sesi_mula
                 , CONCAT(
                     SUBSTRING_INDEX(c.sesi, "/", 1) + c.tempoh_pengajian
                 ) AS sesi_tamat
                 , g.institusi_esp as institusi, c.nama_kursus as kursus
-                , c.tarikh_tamat as tarikh_tamat
+                , DATE_FORMAT(c.tarikh_tamat, "%d/%m/%Y") AS tarikh_tamat
                 , d.no_akaun_bank as no_akaun
-                , a.nama as nama_akaun, 101 as kod_bank, "BANK ISLAM (M) BHD." as nama_bank
+                , a.nama as nama_akaun, "101" as kod_bank, "BANK ISLAM (M) BHD." as nama_bank
                 , b.no_rujukan_permohonan as id_permohonan 
                 FROM smoku a 
                 INNER JOIN permohonan b ON b.smoku_id = a.id
@@ -53,8 +55,9 @@ class MaklumatESPController extends Controller
                 and a.no_kp=950623031212
             ');
 
-
+        //dd($data);
         $data=response()->json($data);
+        
         $jsonContent = $data->getContent();
 
 
