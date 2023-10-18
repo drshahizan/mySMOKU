@@ -82,13 +82,10 @@ class SaringanController extends Controller
     {
         Permohonan::where('id', $id)
             ->update([
-                'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
                 'yuran_disokong'        =>  $request->get('yuran_disokong'),
-                'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
                 'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
                 'baki'                  =>  $request->get('baki'),
                 'baki_disokong'         =>  $request->get('baki_disokong'),
-                'baki_dibayar'          =>  $request->get('baki_dibayar'),
                 'catatan_disokong'      =>  $request->get('catatan'),
                 'status'                =>  4,
             ]);
@@ -252,6 +249,7 @@ class SaringanController extends Controller
         return view('permohonan.sekretariat.sejarah.papar_kelulusan',compact('permohonan','kelulusan','smoku','sejarah_p'));
     }
 
+    //Kemaskini Sejarah Saringan
     public function kemaskiniSaringan($id){
         $sejarah_p = SejarahPermohonan::where('id', $id)->first();
         $permohonan = Permohonan::where('id', $sejarah_p->permohonan_id)->first();
@@ -292,15 +290,13 @@ class SaringanController extends Controller
         return view('permohonan.sekretariat.saringan.kemaskini_saringan',compact('permohonan','smoku','akademik'));
     }
 
+    //Kemaskini Permohonan - Saringan
     public function hantarSaringanP(Request $request,$id){
         Permohonan::where('id', $id)
             ->update([
-                'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
                 'yuran_disokong'        =>  $request->get('yuran_disokong'),
-                'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
                 'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
                 'baki_disokong'         =>  $request->get('baki_disokong'),
-                'baki_dibayar'          =>  $request->get('baki_dibayar'),
             ]);
 
         $permohonan = Permohonan::where('id', $id)->first();
