@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class MaklumatESPController extends Controller
 {
@@ -60,142 +61,46 @@ class MaklumatESPController extends Controller
         
     }
 
-
-
-
-    // public function index()
-    // {
-    //     try {
-    //         $data = 
-    //         // DB::select('
-    //         //     SELECT a.no_kp as nokp, a.nama, DATE_FORMAT(a.tarikh_lahir, "%d/%m/%Y") AS tarikh_lahir, d.negeri_lahir, a.jantina
-    //         //     , LEFT(f.agama, 1) AS agama
-    //         //     , a.keturunan, "M01" as warganegara, a.alamat_tetap as alamat1, "" as alamat2
-    //         //     , d.alamat_tetap_poskod as poskod, d.alamat_tetap_bandar as bandar, d.alamat_tetap_negeri as negeri, d.tel_bimbit as telefon_hp
-    //         //     , d.alamat_surat_menyurat as alamat01, "" as alamat02, "" as alamat03, "" as telefon_o
-    //         //     , CASE WHEN b.program = "BKOKU" THEN "OKU" ELSE "PPK" END as program
-    //         //     , e.kod_esp as peringkat, YEAR(c.tarikh_mula) as tahun_tawar, YEAR(c.tarikh_mula) as tahun_taja 
-    //         //     , c.tempoh_pengajian * 12 as tempoh_taja
-    //         //     , c.tarikh_mula as tarikh_taja
-    //         //     , SUBSTRING_INDEX(c.sesi, "/", 1) AS sesi_mula
-    //         //     , CONCAT(
-    //         //         SUBSTRING_INDEX(c.sesi, "/", 1) + c.tempoh_pengajian
-    //         //     ) AS sesi_tamat
-    //         //     , g.institusi_esp as institusi, c.nama_kursus as kursus
-    //         //     , c.tarikh_tamat as tarikh_tamat
-    //         //     , d.no_akaun_bank as no_akaun
-    //         //     , a.nama as nama_akaun, 101 as kod_bank, "BANK ISLAM (M) BHD." as nama_bank
-    //         //     , b.no_rujukan_permohonan as id_permohonan 
-    //         //     FROM smoku a 
-    //         //     INNER JOIN permohonan b ON b.smoku_id = a.id
-    //         //     INNER JOIN smoku_akademik c ON c.smoku_id = a.id 
-    //         //     INNER JOIN bk_info_institusi g ON g.id_institusi = c.id_institusi 
-    //         //     INNER JOIN smoku_butiran_pelajar d ON d.smoku_id = a.id
-    //         //     INNER JOIN bk_peringkat_pengajian e ON e.kod_peringkat = c.peringkat_pengajian
-    //         //     INNER JOIN bk_agama f ON f.id = d.agama
-    //         //     WHERE c.status = 1 AND b.status = 6
-    //         //     and a.no_kp=950623031212
-    //         // ');
-
-    //         //data contoh
-    //         [
-    //             "nokp" => "810807065753",
-    //             "nama"=> "Jane Smith",
-    //             "tarikh_lahir"=> "07/08/1981",
-    //             "negeri_lahir"=> "12",
-    //             "jantina"=> "F",
-    //             "agama"=> "L",
-    //             "keturunan"=> "02",
-    //             "warganegara"=> "M01",
-    //             "alamat1"=> "456 Oak Avenue",
-    //             "alamat2"=> "Suite 2C",
-    //             "poskod"=> "54321",
-    //             "bandar"=> "Townsville",
-    //             "negeri"=> "12",
-    //             "telefon_hp"=> "0123456789",
-    //             "alamat01"=> "789 Pine Street",
-    //             "alamat02"=> "Unit 3D",
-    //             "alamat03"=> "",
-    //             "telefon_o"=> "0341086893",
-    //             "program"=> "OKU",
-    //             "peringkat"=> "13",
-    //             "tahun_tawar"=> "2024",
-    //             "tahun_taja"=> "2024",
-    //             "tempoh_taja"=> "24",
-    //             "tarikh_taja"=> "15/08/2024",
-    //             "sesi_mula"=> "2024",
-    //             "sesi_tamat"=> "2026",
-    //             "institut"=> "M0100856",
-    //             "kursus"=> "MBA",
-    //             "tarikh_tamat"=> "30/05/2026",
-    //             "no_akaun"=> "4015020581670",
-    //             "nama_akaun"=> "Jane Smith",
-    //             "kod_bank"=> "101",
-    //             "nama_bank"=> "BANK ISLAM (M) BHD."
-              
-    //         ];
-    //         //dd($data);
-            
-    //         // API endpoint URL
-    //         $url = "http://espbstg.mohe.gov.my/api/studentsInfo.php";
-
-
-    //         // Send the POST request
-    //         $response = Http::withHeaders([
-    //             'Content-Type' => 'application/json', 
-    //         ])->post($url, $data);
-
-    //         // Get the response from the API
-    //         $status = $response->status();
-    //         $content = $response->body();
-
-    //         dd($content);
-
-    //         // Handle the response as needed
-    //         if ($status == 200) {
-    //             // Successful response
-    //             dd(json_decode($content));
-    //         } else {
-    //             // Handle error response
-    //             dd('Error: ' . $content);
-    //         }
-    //     } catch (\Exception $e) {
-    //         // Handle exceptions (database query failure, HTTP request failure, etc.)
-    //         Log::error($e->getMessage());
-    //         dd('Error: ' . $e->getMessage());
-    //     }
-    // }
-
-
-    public function sendJsonToApi()
+    public function kemaskiniStatusESP()
     {
         $data = [
-            [
-                'nokp' => '870807012377',
-                'nama' => 'John Doe',
-                'tarikh_lahir' => '08/07/1987',
-            ],
-            [
-                'nokp' => '810807065753',
-                'nama' => 'Jane Smith',
-                'tarikh_lahir' => '07/08/1981',
-            ],
-        ];
-
-        // Convert the data to JSON
-        $jsonData = json_encode($data);
-        //dd($jsonData);
-
-        // Make the HTTP request to the API
-        $response = Http::post('http://espbstg.mohe.gov.my/api/studentsInfo.php', [
-            'json' => $jsonData,
-        ]);
-
-        // Get the response from the API
-        $apiResponse = $response->json();
-
-        return response()->json($apiResponse);
+                    [
+                        'nokp' => '870807012377',
+                        'id_permohonan' => 'B/2/870807012377',
+                        'tarikh_transaksi' => '08/10/2023',
+                        'amount' => '3000',
+                    ],
+                    [
+                        'nokp' => '870807012377',
+                        'id_permohonan' => 'B/2/870807012377',
+                        'tarikh_transaksi' => '08/10/2023',
+                        'amount' => '2000',
+                    ],
+                ];
+        
+                // Convert the data to JSON
+                //$jsonData = json_encode($data);
+                //dd($jsonData);
+        return view('esp.kemaskini_status_esp', compact('data'));
     }
+
+    public function receiveData(Request $request)
+    {
+    $data = $request->all(); // Get all data from the request
+
+    // Generate CSRF token
+    //$csrfToken = csrf_token();
+
+    // Process the data as needed
+    // In this example, we'll just return the received data and the CSRF token
+    return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $data], 200);
+    }
+
+    public function test(){
+        $token = Str::random(60);
+        return response()->json(['token' => $token], 200);
+    }
+
 
     public function store(Request $request)
     {
