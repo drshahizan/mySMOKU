@@ -15,7 +15,9 @@ class MaklumatESPController extends Controller
     public function index()
     {
         
-        $kelulusan = Permohonan::where('status', '=','6')->get();
+        $kelulusan = Permohonan::where('status', '=','6')
+        ->where('no_rujukan_permohonan', '=','B/2/950623031212')
+        ->get();
         //dd($kelulusan);
 
 
@@ -61,28 +63,28 @@ class MaklumatESPController extends Controller
         
     }
 
-    public function kemaskiniStatusESP()
-    {
-        $data = [
-                    [
-                        'nokp' => '870807012377',
-                        'id_permohonan' => 'B/2/870807012377',
-                        'tarikh_transaksi' => '08/10/2023',
-                        'amount' => '3000',
-                    ],
-                    [
-                        'nokp' => '870807012377',
-                        'id_permohonan' => 'B/2/870807012377',
-                        'tarikh_transaksi' => '08/10/2023',
-                        'amount' => '2000',
-                    ],
-                ];
+    // public function kemaskiniStatusESP()
+    // {
+    //     $data = [
+    //                 [
+    //                     'nokp' => '870807012377',
+    //                     'id_permohonan' => 'B/2/870807012377',
+    //                     'tarikh_transaksi' => '08/10/2023',
+    //                     'amount' => '3000',
+    //                 ],
+    //                 [
+    //                     'nokp' => '870807012377',
+    //                     'id_permohonan' => 'B/2/870807012377',
+    //                     'tarikh_transaksi' => '08/10/2023',
+    //                     'amount' => '2000',
+    //                 ],
+    //             ];
         
-                // Convert the data to JSON
-                //$jsonData = json_encode($data);
-                //dd($jsonData);
-        return view('esp.kemaskini_status_esp', compact('data'));
-    }
+    //             // Convert the data to JSON
+    //             //$jsonData = json_encode($data);
+    //             //dd($jsonData);
+    //     return view('esp.kemaskini_status_esp', compact('data'));
+    // }
 
     public function receiveData(Request $request)
     {
