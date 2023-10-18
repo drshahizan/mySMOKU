@@ -24,7 +24,7 @@
     <h1>Received JSON Data</h1>
     <div class="json-container" id="json-container">
 
-        @foreach($data as $person)
+        @foreach($jsonData as $person)
             <p>IC Number: {{ $person['nokp'] }}</p>
             <p>ID Permohonan: {{ $person['id_permohonan'] }}</p>
             <p>Tarikh Transaksi: {{ $person['tarikh_transaksi'] }}</p>

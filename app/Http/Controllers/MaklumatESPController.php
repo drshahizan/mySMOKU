@@ -88,17 +88,16 @@ class MaklumatESPController extends Controller
     {
     $data = $request->all(); // Get all data from the request
 
-    // Generate CSRF token
-    //$csrfToken = csrf_token();
-
-    // Process the data as needed
-    // In this example, we'll just return the received data and the CSRF token
-    return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $data], 200);
+    $jsonData = json_decode($data['data'], true);
+    //dd($dataArray);
+    //return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $data], 200);
+    return view('esp.kemaskini_status_esp', compact('jsonData'));
     }
 
     public function test(){
-        $token = Str::random(60);
-        return response()->json(['token' => $token], 200);
+        //$token = Str::random(60);
+        //return response()->json(['token' => $token], 200);
+        return view('esp.test_status');
     }
 
 
