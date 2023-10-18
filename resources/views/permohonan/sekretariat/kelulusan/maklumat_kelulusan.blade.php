@@ -1,11 +1,5 @@
 <x-default-layout> 
 <head>
-    <link rel="stylesheet" href="/assets/css/sekretariat.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <!-- CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-    <!-- Default theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     <style>
         
         table, td, tr{
@@ -60,22 +54,27 @@
         <div class="container-fluid">
             <!-- Page header section  -->
             <div class="row clearfix">
-                <div class="col-12">
+                {{-- <div class="col-12">
                     <nav class="navbar navbar-expand-sm navbar-light bg-light page_menu">
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown" style="background-color: rgb(35, 58, 108)!important;">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Rekod Keputusan Permohonan</b></li>
+                                <li class="nav-item vivify swoopInTop delay-150 active text-white"><b>Rekod Keputusan Permohonan</b></li>
                             </ul>
                         </div>
                     </nav>
-                </div>
+                </div> --}}
 
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="body">
+                        <div class="body p-5">
                             <div class="row clearfix">
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="header" style="background-color: rgb(35, 58, 108)!important; padding:10px; width:100%;">
+                                        <div class="nav-item vivify swoopInTop active text-white"><b>Rekod Keputusan Permohonan</b></div>
+                                    </div>
+
                                     <br>
+
                                     <table class="maklumat">
                                             @php
                                                 $nama = DB::table('smoku')->where('id', $permohonan['smoku_id'])->value('nama');
@@ -116,18 +115,18 @@
                                         <tr>
                                             <td><b>No. Mesyuarat</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; width:40%;" required></td>
+                                            <td><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; width:150px;" required></td>
                                         </tr>
                                         <tr>
                                             <td><b>Tarikh Mesyuarat</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="date" id="tarikhMesyuarat" name="tarikhMesyuarat" style="padding: 5px; width:40%;" required></td>
+                                            <td><input type="date" id="tarikhMesyuarat" name="tarikhMesyuarat" style="padding: 5px; width:150px;" required></td>
                                         </tr>
                                         <tr>
                                             <td><b>Keputusan</b></td>
                                             <td><b>:</b></td>
                                             <td>
-                                                <select id="keputusan" name="keputusan" style="padding: 7px; width:40%;" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required>
+                                                <select id="keputusan" name="keputusan" style="padding: 7px; width:150px;" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required>
                                                     <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus">Lulus</option>
                                                     <option value="Tidak Lulus">Tidak Lulus</option>
@@ -137,13 +136,18 @@
                                         <tr>
                                             <td><b>Catatan</b></td>
                                             <td><b>:</b></td>
-                                            <td><textarea name="catatan" id="catatan" cols="50" rows="3"></textarea></td>
+                                            <td>
+                                                <div id="catatan-container">
+                                                    <div class="catatan-row">
+                                                        <input type="text" id="catatan" name="catatan[]" style="padding: 5px; width:300px; margin-right:4px;" required>
+                                                        <button type="button" class="add-catatan-button" onclick="addCatatanField(this)">+</button>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </table>
 
-                                    <br>
-
-                                    <div class="submit" style="text-align: right;">
+                                    <div class="submit mt-15 mb-10" style="text-align: right;">
                                         <button type="submit" id="submit" value="submit" class="btn btn-primary text-white">Hantar</button>
                                     </div>
                                 </form>
@@ -181,28 +185,35 @@
             }
         })      
 
-        // sweet alert
-        $(btn).ready(function() {
-            alertify.set('notifier','position', 'top-center');
-            alertify.success('Emel notifikasi telah dihantar kepada pemohon');
+        //add catatan
+        function addCatatanField(button) {
+            var catatanContainer = document.getElementById('catatan-container');
+            var newCatatanRow = document.createElement('div');
+            newCatatanRow.className = 'catatan-row';
+            var newCatatanField = document.createElement('input');
+            newCatatanField.type = 'text';
+            newCatatanField.name = 'catatan[]';
+            newCatatanField.style.padding = '5px';
+            newCatatanField.style.width = '300px';
+            newCatatanField.style.marginTop = '5px';
+            newCatatanField.required = true;
+            newCatatanRow.appendChild(newCatatanField);
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name+"csrf-token"]').attr('content')
-                }
-            });
-        });
+            // Create a new remove button with spacing
+            var removeCatatanButton = document.createElement('button');
+            removeCatatanButton.textContent = '-';
+            removeCatatanButton.onclick = function() { removeCatatanField(removeCatatanButton); };
+            removeCatatanButton.style.marginLeft = '8px';
+            removeCatatanButton.style.width = '24px';
+            newCatatanRow.appendChild(removeCatatanButton);
 
-        $(document).ready(function() {
-            $(".btn-add-more").click(function(){ 
-                var html = $(".clone").html();
-                $(".img_div").after(html);
-            });
+            catatanContainer.appendChild(newCatatanRow);
+        }
 
-            $("body").on("click",".btn-remove",function(){ 
-                $(this).parents(".control-group").remove();
-            });
-        });
+        function removeCatatanField(button) {
+            var catatanContainer = document.getElementById('catatan-container');
+            catatanContainer.removeChild(button.parentNode);
+        }
     </script>
 
     <script src="assets/bundles/libscripts.bundle.js"></script>    
