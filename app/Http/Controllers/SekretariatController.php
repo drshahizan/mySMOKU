@@ -324,91 +324,60 @@ class SekretariatController extends Controller
         return view('permohonan.sekretariat.kelulusan.maklumat_kelulusan',compact('permohonan'));
     }
 
-    public function hantarKeputusanPermohonan(Request $request,$id)
+    public function hantarKeputusanPermohonan(Request $request, $id)
     {
-        //$id refers to permohonan id
+        // $id refers to permohonan id
         $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
         $existingRecord = Kelulusan::where('permohonan_id', $id)->first();
         $studentEmail = Smoku::where('id', $smoku_id)->value('email');
 
-        if($request->get('keputusan')=="Lulus"){
-            //update permohonan table
-            Permohonan::where('id', $id)
-                ->update([
-                'status'   =>  6,
+        $keputusan = $request->get('keputusan');
+
+        if ($keputusan == "Lulus") {
+            // Update permohonan table
+            Permohonan::where('id', $id)->update([
+                'status' => 6,
             ]);
-
-            if ($existingRecord) {
-                //update the respective row in permohonan_kelulusan table
-                $existingRecord->no_mesyuarat = $request->noMesyuarat;
-                $existingRecord->tarikh_mesyuarat = $request->tarikhMesyuarat;
-                $existingRecord->keputusan = $request->keputusan;
-                $existingRecord->catatan = $request->catatan;
-                $existingRecord->save();
-            }
-            else{
-                //create new row in permohonan_kelulusan table
-                $info_mesyuarat = new Kelulusan([
-                    'permohonan_id' =>  $id,
-                    'no_mesyuarat'  =>  $request->get('noMesyuarat'),
-                    'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
-                    'keputusan'  =>  $request->get('keputusan'),
-                    'catatan'  =>  $request->get('catatan'),
-                ]);
-                $info_mesyuarat->save();
-            }
-
-            //update sejarah_permohonan table
-            $sejarah = new SejarahPermohonan([
-                'smoku_id'      =>  $smoku_id,
-                'permohonan_id' =>  $id,
-                'status'        =>  6,
+        } else {
+            // Update permohonan table
+            Permohonan::where('id', $id)->update([
+                'status' => 7,
             ]);
-            $sejarah->save();
-
-            //emel notifikasi
-            $message = 'Test message';
-            Mail::to($studentEmail)->send(new KeputusanLayak($message));
         }
-        else{
-            //update permohonan table
-            Permohonan::where('id', $id)
-                ->update([
-                'status'   =>  7,
+
+        // Create an array to store catatan values
+        $catatanArray = $request->get('catatan');
+
+        if ($existingRecord) {
+            // Update the respective row in permohonan_kelulusan table
+            $existingRecord->no_mesyuarat = $request->noMesyuarat;
+            $existingRecord->tarikh_mesyuarat = $request->tarikhMesyuarat;
+            $existingRecord->keputusan = $keputusan;
+            $existingRecord->catatan = implode(', ', $catatanArray); // Save catatan values as a comma-separated string
+            $existingRecord->save();
+        } else {
+            // Create a new row in permohonan_kelulusan table
+            $info_mesyuarat = new Kelulusan([
+                'permohonan_id' => $id,
+                'no_mesyuarat' => $request->get('noMesyuarat'),
+                'tarikh_mesyuarat' => $request->get('tarikhMesyuarat'),
+                'keputusan' => $keputusan,
+                'catatan' => implode(', ', $catatanArray), // Save catatan values as a comma-separated string
             ]);
-
-            if ($existingRecord) {
-                //update the respective row in permohonan_kelulusan table
-                $existingRecord->no_mesyuarat = $request->noMesyuarat;
-                $existingRecord->tarikh_mesyuarat = $request->tarikhMesyuarat;
-                $existingRecord->keputusan = $request->keputusan;
-                $existingRecord->catatan = $request->catatan;
-                $existingRecord->save();
-            }
-            else{
-                //create new row in permohonan_kelulusan table
-                $info_mesyuarat = new Kelulusan([
-                    'permohonan_id' =>  $id,
-                    'no_mesyuarat'  =>  $request->get('noMesyuarat'),
-                    'tarikh_mesyuarat'  =>  $request->get('tarikhMesyuarat'),
-                    'keputusan'  =>  $request->get('keputusan'),
-                    'catatan'  =>  $request->get('catatan'),
-                ]);
-                $info_mesyuarat->save();
-            }
-
-            //update sejarah permohonan table
-            $sejarah = new SejarahPermohonan([
-                'smoku_id'      =>  $smoku_id,
-                'permohonan_id' =>  $id,
-                'status'        =>  7,
-            ]);
-            $sejarah->save();
-
-            //emel notifikasi
-            $message = 'Test message';
-            Mail::to($studentEmail)->send(new KeputusanTidakLayak($message));
+            $info_mesyuarat->save();
         }
+
+        // Update sejarah_permohonan table
+        $sejarah = new SejarahPermohonan([
+            'smoku_id' => $smoku_id,
+            'permohonan_id' => $id,
+            'status' => $keputusan == "Lulus" ? 6 : 7,
+        ]);
+        $sejarah->save();
+
+        // Email notification
+        $message = 'Test message';
+        Mail::to($studentEmail)->send($keputusan == "Lulus" ? new KeputusanLayak($message) : new KeputusanTidakLayak($message));
 
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
@@ -416,17 +385,17 @@ class SekretariatController extends Controller
         $kelulusan = Kelulusan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('tarikh_mesyuarat', [$startDate, $endDate]);
         })
-        ->when($request->status, function ($q) use ($request) {
-            return $q->where('keputusan', $request->status);
+        ->when($keputusan, function ($q) use ($keputusan) {
+            return $q->where('keputusan', $keputusan);
         })
         ->get();
 
-        $keputusan = $request->get('keputusan');
-        $id_permohonan = Permohonan::where('smoku_id', $id)->value('no_rujukan_permohonan');
-        $notifikasi = "Emel notifikasi telah dihantar kepada ".$id_permohonan;
+        $id_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
+        $notifikasi = "Emel notifikasi telah dihantar kepada " . $id_permohonan;
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan', 'notifikasi', 'kelulusan'));
     }
+
 
     public function hantarSemuaKeputusanPermohonan(Request $request)
     {
