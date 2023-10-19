@@ -264,7 +264,7 @@
                                     </div>
                                     <h6>Pengiraan:</h6>
                                     <br>
-                                    <p>Baki Terdahulu: {{$permohonan->baki_dibayar}}</p>
+                                    <p>Baki Terdahulu (RM) : {{number_format($permohonan->baki_dibayar, 2)}}</p>
                                     {{csrf_field()}}
                                     @if($permohonan->program == "BKOKU" && $tuntutan->yuran == "1" && $tuntutan->wang_saku == "1")
                                         <!--begin: Invoice body-->

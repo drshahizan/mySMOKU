@@ -1005,13 +1005,13 @@ class SekretariatController extends Controller
                 'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
             ]);
 
-        $sejarah_t = SejarahTuntutan::where('id', $id)->first();
-        $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
-        $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
-        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
-        $smoku_id = $tuntutan->smoku_id;
-        $smoku = Smoku::where('id', $smoku_id)->first();
-        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('tuntutan.sekretariat.pembayaran.senarai',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
+        $no_rujukan_tuntutan= Tuntutan::where('id', $id)->value('no_rujukan_tuntutan');
+        $status_kod=1;
+        $status = "Tuntutan ".$no_rujukan_tuntutan." berjaya dikemaskini.";
+
+        $tuntutan = Tuntutan::where('status', '6')
+            ->orWhere('status', '=','8')
+            ->get();
+        return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status'));
     }
 }
