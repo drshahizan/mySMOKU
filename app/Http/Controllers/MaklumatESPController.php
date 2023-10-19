@@ -43,7 +43,7 @@ class MaklumatESPController extends Controller
                 , DATE_FORMAT(c.tarikh_tamat, "%d/%m/%Y") AS tarikh_tamat
                 , d.no_akaun_bank as no_akaun
                 , a.nama as nama_akaun, "101" as kod_bank, "BANK ISLAM (M) BHD." as nama_bank
-                , b.no_rujukan_permohonan as id_permohonan 
+               
                 FROM smoku a 
                 INNER JOIN permohonan b ON b.smoku_id = a.id
                 INNER JOIN smoku_akademik c ON c.smoku_id = a.id 

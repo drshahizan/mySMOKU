@@ -142,7 +142,7 @@
             <form class="form" action="http://espbstg.mohe.gov.my/api/studentsInfo.php" method="post">
                 
                 <textarea name="data" id="data" rows="10" cols="50">
-                    {{$jsonContent}}
+{{$jsonContent}}
                     {{-- [
                       {
                         "nokp": "1234567890",
