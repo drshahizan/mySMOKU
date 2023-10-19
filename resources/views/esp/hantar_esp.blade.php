@@ -175,8 +175,8 @@
 	"tarikh_tamat":"30/09/2027",
 	"no_akaun":"99999999999999",
 	"nama_akaun":"SOFEA AINA BINTI MUHAMMAD AMIR",
-	"kod_bank":"101",
-	"nama_bank":"BANK ISLAM (M) BHD.",
+	"kod_bank":"45",
+	"nama_bank":"BANK ISLAM MALAYSIA BERHAD",
 	"id_permohonan":"B/2/950623031212"
 },
   
@@ -212,8 +212,8 @@
 	"tarikh_tamat":"30/09/2027",
 	"no_akaun":"99999999999999",
 	"nama_akaun":"SOFEA AINA BINTI MUHAMMAD AMIR",
-	"kod_bank":"101",
-	"nama_bank":"BANK ISLAM (M) BHD.",
+	"kod_bank":"45",
+	"nama_bank":"BANK ISLAM MALAYSIA BERHAD",
 	"id_permohonan":"B/2/920623011905"
 }]
                 </textarea>
