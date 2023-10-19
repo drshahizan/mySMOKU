@@ -380,16 +380,18 @@ class SaringanController extends Controller
                 'yuran_disokong'        =>  $request->get('yuran_disokong'),
                 'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
                 'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                'baki'                  =>  $request->get('baki'),
                 'baki_disokong'         =>  $request->get('baki_disokong'),
                 'baki_dibayar'          =>  $request->get('baki_dibayar'),
+                'catatan_dibayar'       =>  $request->get('catatan'),
             ]);
 
-        $permohonan = Permohonan::where('id', $id)->first();
-        $status_kod = 3;
-        $status = "Pembayaran bagi permohonan ".$permohonan->no_rujukan_permohonan." berjaya dikemaskini.";
+        $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
         $permohonan = Permohonan::where('status', '6')
             ->orWhere('status', '=','8')
             ->get();
+        $status_kod = 3;
+        $status = "Pembayaran ".$no_rujukan_permohonan." telah dikemaskini.";
         return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status'));
     }
 }

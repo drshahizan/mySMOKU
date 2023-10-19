@@ -223,7 +223,7 @@
                                             <td>Tidak Ditaja</td>
                                         @endif
                                         <td class="space">&nbsp;</td>
-                                        <td><strong>Tarikh Tuntutan</strong></td>
+                                        <td><strong>Tarikh Bayaran</strong></td>
                                         <td>:</td>
                                         <td>{{date('d/m/Y', strtotime($tkh_bayaran))}}</td>
                                     </tr>
