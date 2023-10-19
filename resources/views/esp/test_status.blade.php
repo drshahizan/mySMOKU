@@ -144,17 +144,12 @@
                 <textarea name="data" id="data" rows="10" cols="50">
 [
   {
-    "nokp" : "870807012377",
-    "id_permohonan" : "B/2/870807012377",
-    "tarikh_transaksi" : "08/10/2023",
-    "amount" : "3000"
+    "nokp" : "950623031212",
+    "id_permohonan" : "B/2/950623031212",
+    "tarikh_transaksi" : "19/10/2023",
+    "amount" : "200"
   },
-  {
-    "nokp" : "980807012377",
-    "id_permohonan" : "B/2/980807012377",
-    "tarikh_transaksi" : "08/10/2023",
-    "amount" : "2000"
-  }
+
 ]
                 </textarea>
                 <!--begin::action-->
