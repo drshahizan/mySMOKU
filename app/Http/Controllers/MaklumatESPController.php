@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Permohonan;
 use App\Models\Smoku;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -16,53 +17,85 @@ class MaklumatESPController extends Controller
     {
         
         $kelulusan = Permohonan::where('status', '=','6')
-        ->where('no_rujukan_permohonan', '=','B/2/950623031212')
+
+        //->where('no_rujukan_permohonan', '=','B/2/950623031212')
         ->get();
-        //dd($kelulusan);
 
-
-        $data = 
-        DB::select
-            ('
-                SELECT a.no_kp as nokp, a.nama, DATE_FORMAT(a.tarikh_lahir, "%d/%m/%Y") AS tarikh_lahir, d.negeri_lahir, a.jantina
-                , LEFT(f.agama, 1) AS agama
-                , a.keturunan, "M01" as warganegara, a.alamat_tetap as alamat1, "" as alamat2
-                , d.alamat_tetap_poskod as poskod, d.alamat_tetap_bandar as bandar, d.alamat_tetap_negeri as negeri, d.tel_bimbit as telefon_hp
-                , d.alamat_surat_menyurat as alamat01, "" as alamat02, "" as alamat03, "" as telefon_o
-                , CASE WHEN b.program = "BKOKU" THEN "OKU" ELSE "PPK" END as program
-                , e.kod_esp as peringkat
-                , DATE_FORMAT(c.tarikh_mula, "%d/%m/%Y") AS tahun_tawar
-                , DATE_FORMAT(c.tarikh_mula, "%d/%m/%Y") AS tahun_taja 
-                , "48" as tempoh_taja
-                , DATE_FORMAT(c.tarikh_mula, "%d/%m/%Y") AS tarikh_taja
-                , SUBSTRING_INDEX(c.sesi, "/", 1) AS sesi_mula
-                , CONCAT(
-                    SUBSTRING_INDEX(c.sesi, "/", 1) + c.tempoh_pengajian
-                ) AS sesi_tamat
-                , g.institusi_esp as institut
-                , "J0307" as kursus
-                , DATE_FORMAT(c.tarikh_tamat, "%d/%m/%Y") AS tarikh_tamat
-                , d.no_akaun_bank as no_akaun
-                , a.nama as nama_akaun, "45" as kod_bank, "BANK ISLAM MALAYSIA BERHAD" as nama_bank
-                , b.no_rujukan_permohonan as id_permohonan 
-                FROM smoku a 
-                INNER JOIN permohonan b ON b.smoku_id = a.id
-                INNER JOIN smoku_akademik c ON c.smoku_id = a.id 
-                INNER JOIN bk_info_institusi g ON g.id_institusi = c.id_institusi 
-                INNER JOIN smoku_butiran_pelajar d ON d.smoku_id = a.id
-                INNER JOIN bk_peringkat_pengajian e ON e.kod_peringkat = c.peringkat_pengajian
-                INNER JOIN bk_agama f ON f.id = d.agama
-                WHERE c.status = 1 AND b.status = 6
-                and a.no_kp=950623031212
-            ');
-
-        //dd($data);
-        $data=response()->json($data);
         
-        $jsonContent = $data->getContent();
+
+        return view('esp.hantar_esp', compact('kelulusan'));
+            
+        
+    }
+
+    public function hantar(Request $request)
+    {
+
+        $selectAll = $request->input('selectAll');
+        $selectedNokps = $request->input('selectedNokps');
+
+        $query = DB::table('smoku as a')
+            ->join('permohonan as b', 'b.smoku_id', '=', 'a.id')
+            ->join('smoku_akademik as c', 'c.smoku_id', '=', 'a.id')
+            ->join('bk_info_institusi as g', 'g.id_institusi', '=', 'c.id_institusi')
+            ->join('smoku_butiran_pelajar as d', 'd.smoku_id', '=', 'a.id')
+            ->join('bk_peringkat_pengajian as e', 'e.kod_peringkat', '=', 'c.peringkat_pengajian')
+            ->leftJoin('bk_agama as f', 'f.id', '=', 'd.agama')
+            ->select(
+                'a.no_kp as nokp',
+                'a.nama',
+                DB::raw('DATE_FORMAT(a.tarikh_lahir, "%d/%m/%Y") AS tarikh_lahir'),
+                'd.negeri_lahir',
+                'a.jantina',
+                DB::raw('LEFT(f.agama, 1) AS agama'),
+                'a.keturunan',
+                DB::raw('"M01" as warganegara'),
+                'a.alamat_tetap as alamat1',
+                DB::raw('"" as alamat2'),
+                'd.alamat_tetap_poskod as poskod',
+                'd.alamat_tetap_bandar as bandar',
+                'd.alamat_tetap_negeri as negeri',
+                'd.tel_bimbit as telefon_hp',
+                'd.alamat_surat_menyurat as alamat01',
+                DB::raw('"" as alamat02'),
+                DB::raw('"" as alamat03'),
+                DB::raw('"" as telefon_o'),
+                DB::raw('CASE WHEN b.program = "BKOKU" THEN "OKU" ELSE "PPK" END as program'),
+                'e.kod_esp as peringkat',
+                DB::raw('DATE_FORMAT(c.tarikh_mula, "%d/%m/%Y") AS tahun_tawar'),
+                DB::raw('DATE_FORMAT(c.tarikh_mula, "%d/%m/%Y") AS tahun_taja'),
+                DB::raw('CONCAT( c.tempoh_pengajian * 12) as tempoh_taja'),
+                DB::raw('DATE_FORMAT(c.tarikh_mula, "%d/%m/%Y") AS tarikh_taja'),
+                DB::raw('SUBSTRING_INDEX(c.sesi, "/", 1) AS sesi_mula'),
+                DB::raw('CONCAT(SUBSTRING_INDEX(c.sesi, "/", 1) + c.tempoh_pengajian) AS sesi_tamat'),
+                'g.institusi_esp as institut',
+                DB::raw('"J0307" as kursus'),
+                DB::raw('DATE_FORMAT(c.tarikh_tamat, "%d/%m/%Y") AS tarikh_tamat'),
+                'd.no_akaun_bank as no_akaun',
+                'a.nama as nama_akaun',
+                DB::raw('"45" as kod_bank'),
+                DB::raw('"BANK ISLAM MALAYSIA BERHAD" as nama_bank'),
+                'b.no_rujukan_permohonan as id_permohonan',
+                'a.email',
+                DB::raw('DATE_FORMAT(c.tarikh_tamat, "%d/%m/%Y") AS tamat_cuti'),
+            );
+        
+        if ($selectAll === true) {
+            // Fetch all relevant data without filtering by specific no_kp values
+            $data = $query->where('c.status', '=', 1)
+                ->where('b.status', '=', 6)
+                ->get();
+        } else {
+            // Fetch data based on selected no_kp values
+            $data = $query->whereIn('a.no_kp', $selectedNokps)
+                ->where('c.status', '=', 1)
+                ->where('b.status', '=', 6)
+                ->get();
+        }    
 
 
-        return view('esp.hantar_esp', compact('kelulusan','jsonContent'));
+        return response()->json(['data' => $data]);
+        
             
         
     }
@@ -94,23 +127,34 @@ class MaklumatESPController extends Controller
     {
         $data = $request->all(); // Get all data from the request
 
-        // dd($data);
+        $dataField = $data[0]; 
 
-        $contentTypeHeader = $request->header('Content-Type');
-        if (strpos($contentTypeHeader, 'application/json') !== false) {
-            return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $data], 200);
-        } else {
-            $jsonData = json_decode($data['data'], true);
-            return view('esp.kemaskini_status_esp', compact('jsonData'));
-        }
+        $no_kp = $dataField['nokp'];
+        $no_rujukan_permohonan = $dataField['id_permohonan'];
+        $date = DateTime::createFromFormat('d/m/Y', $dataField['tarikh_transaksi']);
+        $formattedDate = $date->format('Y-m-d');
+
+        $smoku = Smoku::where('no_kp', $no_kp)->first();
+
+        DB::table('permohonan')->where('smoku_id', $smoku->id)->where('no_rujukan_permohonan', $no_rujukan_permohonan)
+            ->update([
+                'yuran_dibayar' => number_format($dataField['amount'], 2, '.', ''),
+                'tarikh_transaksi' => $formattedDate,
+                'status' => 8,
+            ]);
+
+       
+        return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $data], 200);
+        
         
     
     }
 
-    public function test(){
-        //$token = Str::random(60);
-        //return response()->json(['token' => $token], 200);
-        return view('esp.test_status');
+    public function statusDibayar(){
+
+        $kelulusan = Permohonan::where('status', '=','8')->get();
+
+        return view('esp.status_dibayar', compact('kelulusan'));
     }
 
 

@@ -7,6 +7,7 @@
   <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
   <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   
   </head>
       <!--begin::Page title-->
@@ -49,7 +50,9 @@
               <table class="table align-center table-row-dashed fs-6 gy-5" id="kt_customers_table">
                 <thead>
                   <tr class="text-start align-center text-gray-400 fw-bold fs-7 gs-0">
-                    <th class="text-center" style="width:3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
+                    <th class="text-center" style="width:3%;">
+                      <input type="checkbox" name="select-all" id="select-all" onclick="toggleSelectAll();" />
+                    </th>
                     <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
                     <th class="text-center" style="width: 20%"><b>Nama</b></th>
                     <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
@@ -65,62 +68,62 @@
                   @endphp
                   @foreach ($kelulusan as $item)
 
-                  @php
-                    $i++;
-                    $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                    $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
-                    $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                    $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
-                    $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
-                    $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
-                    $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
-                    
-                    // nama pemohon
-                    $text = ucwords(strtolower($nama_pemohon)); 
-                    $conjunctions = ['bin', 'binti'];
-                    $words = explode(' ', $text);
-                    $result = [];
-                    foreach ($words as $word) {
-                        if (in_array(Str::lower($word), $conjunctions)) {
-                            $result[] = Str::lower($word);
-                        } else {
-                            $result[] = $word;
-                        }
-                    }
-                    $pemohon = implode(' ', $result);
+                    @php
+                      $i++;
+                      $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                      $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
+                      $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                      $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
+                      $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                      $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
+                      $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
+                      
+                      // nama pemohon
+                      $text = ucwords(strtolower($nama_pemohon)); 
+                      $conjunctions = ['bin', 'binti'];
+                      $words = explode(' ', $text);
+                      $result = [];
+                      foreach ($words as $word) {
+                          if (in_array(Str::lower($word), $conjunctions)) {
+                              $result[] = Str::lower($word);
+                          } else {
+                              $result[] = $word;
+                          }
+                      }
+                      $pemohon = implode(' ', $result);
 
-                    //nama kursus
-                    $text2 = ucwords(strtolower($nama_kursus)); 
-                    $conjunctions = ['of', 'in', 'and'];
-                    $words = explode(' ', $text2);
-                    $result = [];
-                    foreach ($words as $word) {
-                        if (in_array(Str::lower($word), $conjunctions)) {
-                            $result[] = Str::lower($word);
-                        } else {
-                            $result[] = $word;
-                        }
-                    }
-                    $kursus = implode(' ', $result);
-                    $namakursus = transformBracketsToCapital($kursus);
+                      //nama kursus
+                      $text2 = ucwords(strtolower($nama_kursus)); 
+                      $conjunctions = ['of', 'in', 'and'];
+                      $words = explode(' ', $text2);
+                      $result = [];
+                      foreach ($words as $word) {
+                          if (in_array(Str::lower($word), $conjunctions)) {
+                              $result[] = Str::lower($word);
+                          } else {
+                              $result[] = $word;
+                          }
+                      }
+                      $kursus = implode(' ', $result);
+                      $namakursus = transformBracketsToCapital($kursus);
 
-                    //institusi pengajian
-                    $text3 = ucwords(strtolower($institusi_pengajian)); 
-                    $conjunctions = ['of', 'in', 'and'];
-                    $words = explode(' ', $text3);
-                    $result = [];
-                    foreach ($words as $word) {
-                        if (in_array(Str::lower($word), $conjunctions)) {
-                            $result[] = Str::lower($word);
-                        } else {
-                            $result[] = $word;
-                        }
-                    }
-                    $institusi = implode(' ', $result);
-                    $institusipengajian = transformBracketsToUppercase($institusi);
-                @endphp
+                      //institusi pengajian
+                      $text3 = ucwords(strtolower($institusi_pengajian)); 
+                      $conjunctions = ['of', 'in', 'and'];
+                      $words = explode(' ', $text3);
+                      $result = [];
+                      foreach ($words as $word) {
+                          if (in_array(Str::lower($word), $conjunctions)) {
+                              $result[] = Str::lower($word);
+                          } else {
+                              $result[] = $word;
+                          }
+                      }
+                      $institusi = implode(' ', $result);
+                      $institusipengajian = transformBracketsToUppercase($institusi);
+                    @endphp
                   <tr>
-                    <td class="text-center"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>
+                    <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
                     <td>{{ $item->no_rujukan_permohonan}}</td>
                     <td>{{$pemohon}}</td>
                     <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
@@ -143,7 +146,7 @@
                 
                 <textarea name="data" id="data" rows="10" cols="50">
 {{-- {{$jsonContent}} --}}
-[{
+{{-- [{
 	"nokp":"950623031212",
 	"nama":"SOFEA AINA BINTI MUHAMMAD AMIR",
 	"tarikh_lahir":"23/06/1995",
@@ -215,8 +218,9 @@
 	"kod_bank":"45",
 	"nama_bank":"BANK ISLAM MALAYSIA BERHAD",
 	"id_permohonan":"B/2/920623011905"
-}]
+}] --}}
                 </textarea>
+                
                 <!--begin::action-->
                 <div class="footer">
                   <!--begin::Button-->
@@ -245,14 +249,103 @@
     $('#sortTable1').DataTable();
     $('#sortTable2').DataTable();
 
-    // check all checkboxes at once
-    function toggle(source) {
-        var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].checked = source.checked;
-        }
-    }
   </script>
+
+<!-- Your existing JavaScript code -->
+<script>
+
+
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+function toggleSelectAll() {
+    var selectAllCheckbox = document.getElementById('select-all');
+    var isChecked = selectAllCheckbox.checked;
+
+    // Get all checkboxes in the table
+    var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
+
+    // Set the checked property of all checkboxes to match the "Select All" checkbox
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = isChecked;
+    });
+
+    // Prepare an array to hold selected no_kp values
+    var selectedNokps = [];
+
+    // If "Select All" checkbox is checked, set the selectAll parameter to true
+    var selectAll = isChecked;
+
+    // Loop through all checkboxes and get selected nokp values
+    checkboxes.forEach(function(checkbox) {
+        if (checkbox.checked) {
+            selectedNokps.push(checkbox.value);
+        }
+    });
+
+    // Send selectedNokps and selectAll to the controller via AJAX
+    $.ajax({
+        type: "POST",
+        url: "{{ route('maklumat.esp') }}",
+        data: {
+            selectedNokps: selectedNokps,
+            selectAll: selectAll
+        },
+        success: function(response) {
+            // Handle the response from the controller here
+            var jsonData = response.data;
+            var jsonString = JSON.stringify(jsonData, null, 2);
+            $('#data').val(jsonString);
+        },
+        error: function(xhr, status, error) {
+            // Handle AJAX errors here if needed
+            console.error(xhr.responseText);
+        }
+    });
+}
+
+  // jQuery script to handle checkbox selection and update textarea
+  $(document).ready(function() {
+    // Event listener for checkbox change
+    $('.select-checkbox').change(function() {
+        var selectedNokps = [];
+
+        // Loop through all checkboxes and get selected nokp values
+        $('.select-checkbox:checked').each(function() {
+            selectedNokps.push($(this).val());
+        });
+
+        // Send selectedNokps to the controller via AJAX
+        $.ajax({
+            type: "POST",
+            url: "{{ route('maklumat.esp') }}",
+            data: {
+                selectedNokps: selectedNokps
+            },
+            success: function(response) {
+                // Handle the response from the controller here
+                var jsonData = response.data;
+
+                // Convert the jsonData array to a JSON string
+                var jsonString = JSON.stringify(jsonData, null, 2);
+
+                // Update the textarea with the JSON data
+                $('#data').val(jsonString);
+            },
+            error: function(xhr, status, error) {
+                // Handle AJAX errors here if needed
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+
+
+</script>
+
 
 <!--begin::Javascript-->
 
