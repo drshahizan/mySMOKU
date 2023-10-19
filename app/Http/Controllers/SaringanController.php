@@ -264,12 +264,9 @@ class SaringanController extends Controller
         $p_id = SejarahPermohonan::where('id', $id)->value('permohonan_id');
         Permohonan::where('id', $p_id)
             ->update([
-                'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
                 'yuran_disokong'        =>  $request->get('yuran_disokong'),
-                'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
                 'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
                 'baki_disokong'         =>  $request->get('baki_disokong'),
-                'baki_dibayar'          =>  $request->get('baki_dibayar'),
             ]);
 
         $sejarah_p = SejarahPermohonan::where('id', $id)->first();

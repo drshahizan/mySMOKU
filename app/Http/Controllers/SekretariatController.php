@@ -905,7 +905,6 @@ class SekretariatController extends Controller
             ->update([
                 'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
                 'yuran_disokong'        =>  $request->get('yuran_disokong'),
-                'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
                 'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
             ]);
 
