@@ -127,23 +127,24 @@ class MaklumatESPController extends Controller
     {
         $data = $request->all(); // Get all data from the request
 
-        $dataField = $data[0]; 
+        //$dataField = $data[0];
 
-        $no_kp = $dataField['nokp'];
-        $no_rujukan_permohonan = $dataField['id_permohonan'];
-        $date = DateTime::createFromFormat('d/m/Y', $dataField['tarikh_transaksi']);
-        $formattedDate = $date->format('Y-m-d');
+        foreach ($data as $dataField) {
+            $no_kp = $dataField['nokp'];
+            $no_rujukan_permohonan = $dataField['id_permohonan'];
+            $date = DateTime::createFromFormat('d/m/Y', $dataField['tarikh_transaksi']);
+            $formattedDate = $date->format('Y-m-d');
 
-        $smoku = Smoku::where('no_kp', $no_kp)->first();
+            $smoku = Smoku::where('no_kp', $no_kp)->first();
 
-        DB::table('permohonan')->where('smoku_id', $smoku->id)->where('no_rujukan_permohonan', $no_rujukan_permohonan)
-            ->update([
-                'yuran_dibayar' => number_format($dataField['amount'], 2, '.', ''),
-                'tarikh_transaksi' => $formattedDate,
-                'status' => 8,
-            ]);
+            DB::table('permohonan')->where('smoku_id', $smoku->id)->where('no_rujukan_permohonan', $no_rujukan_permohonan)
+                ->update([
+                    'yuran_dibayar' => number_format($dataField['amount'], 2, '.', ''),
+                    'tarikh_transaksi' => $formattedDate,
+                    'status' => 8,
+                ]);
 
-       
+        }
         return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $data], 200);
         
         
