@@ -129,7 +129,7 @@
                                             <tr>
                                                 <td class="vertical-top w-13">Isi Kandungan</td>
                                                 <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top"><textarea name="isi_kandungan" id="isi_kandungan" cols="30" rows="3" class="form-control" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>{{$emel->isi_kandungan}}</textarea></td>
+                                                <td class="vertical-top"><textarea name="isi_kandungan1" id="isi_kandungan1" cols="30" rows="3" class="form-control" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>{{$emel->isi_kandungan1}}</textarea></td>
                                             </tr>
                                             <tr>
                                                 <td class="vertical-top w-13">Penutup</td>

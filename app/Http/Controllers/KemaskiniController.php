@@ -79,7 +79,8 @@ class KemaskiniController extends Controller
             ->update([
                 'subjek'            => $request->get('subjek'),
                 'pendahuluan'       => $request->get('pendahuluan'),
-                'isi_kandungan'     => $request->get('isi_kandungan'),
+                'isi_kandungan1'    => $request->get('isi_kandungan1'),
+                'isi_kandungan2'    => $request->get('isi_kandungan2'),
                 'penutup'           => $request->get('penutup'),
                 'disediakan_oleh'   => $request->get('d_oleh'),
             ]);

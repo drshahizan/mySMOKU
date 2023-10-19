@@ -15,7 +15,8 @@ class EmelKemaskini extends Model
         'emel_id',
         'subjek',
         'pendahuluan',
-        'isi_kandungan',
+        'isi_kandungan1',
+        'isi_kandungan2',
         'penutup',
         'disediakan_oleh',
     ];
