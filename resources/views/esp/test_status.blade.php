@@ -150,6 +150,13 @@
     "amount" : "200"
   },
 
+  {
+    "nokp" : "920623011905",
+    "id_permohonan" : "B/2/920623011905",
+    "tarikh_transaksi" : "19/10/2023",
+    "amount" : "800"
+  }
+
 ]
                 </textarea>
                 <!--begin::action-->
