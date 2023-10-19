@@ -89,7 +89,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Saringan</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Pembayaran</li>
             <!--end::Item-->
             <!--begin::Item-->
             <li class="breadcrumb-item">
@@ -97,15 +97,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Maklumat Permohonan</li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item">
-                <span class="bullet bg-gray-400 w-5px h-2px"></span>
-            </li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Maklumat Tuntutan</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Maklumat Pembayaran</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -246,12 +238,16 @@
                                                 if($permohonan->amaun_wang_saku == null){
                                                     $permohonan->amaun_wang_saku = 0;
                                                 }
+                                                if($permohonan->baki_dibayar == null){
+                                                    $permohonan->baki_dibayar = $permohonan->baki_disokong;
+                                                }
                                                 $jumlah = $permohonan->amaun_yuran + $permohonan->amaun_wang_saku;
                                                 $baki_y = 5000 - $jumlah;
+
                                             @endphp
                                             <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
-                                            <input type="hidden" name="baki_disokong" id="baki_disokong" value="">
-                                            <input type="hidden" name="baki_dibayar" id="baki_dibayar" value="">
+                                            <input type="hidden" name="baki_disokong" id="baki_disokong" value="{{$permohonan->baki_disokong}}">
+                                            <input type="hidden" name="baki_dibayar" id="baki_dibayar" value="{{$permohonan->baki_dibayar}}">
                                             <br>
                                             <h6>Pengiraan:</h6>
                                             <br>
@@ -406,12 +402,15 @@
                                                 if($permohonan->amaun_wang_saku == null){
                                                     $permohonan->amaun_wang_saku = 0;
                                                 }
+                                                if($permohonan->baki_dibayar == null){
+                                                    $permohonan->baki_dibayar = $permohonan->baki_disokong;
+                                                }
                                                 $jumlah = $permohonan->amaun_yuran;
                                                 $baki_y = 5000 - $jumlah;
                                             @endphp
                                             <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
-                                            <input type="hidden" name="baki_disokong" id="baki_disokong_3" value="">
-                                            <input type="hidden" name="baki_dibayar" id="baki_dibayar_3" value="">
+                                            <input type="hidden" name="baki_disokong" id="baki_disokong_3" value="{{$permohonan->baki_disokong}}">
+                                            <input type="hidden" name="baki_dibayar" id="baki_dibayar_3" value="{{$permohonan->baki_dibayar}}">
                                             <br>
                                             <h6>Pengiraan:</h6>
                                             <br>
