@@ -246,11 +246,14 @@
                                             if($permohonan->amaun_wang_saku == null){
                                                 $permohonan->amaun_wang_saku = 0;
                                             }
+                                            if($permohonan->baki_disokong == null){
+                                                $permohonan->baki_disokong = $permohonan->baki;
+                                            }
                                             $jumlah = $permohonan->amaun_yuran + $permohonan->amaun_wang_saku;
                                             $baki_y = 5000 - $jumlah;
                                         @endphp
                                             <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
-                                            <input type="hidden" name="baki_disokong" id="baki_disokong" value="">
+                                            <input type="hidden" name="baki_disokong" id="baki_disokong" value="{{$permohonan->baki_disokong}}">
 {{--                                            <input type="hidden" name="baki_dibayar" id="baki_dibayar" value="">--}}
                                         <br>
                                         <h6>Pengiraan:</h6>
@@ -274,7 +277,7 @@
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" step="0.01" name="yuran_disokong" id="yuran_disokong" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong">{{number_format($baki_y, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong">{{number_format($permohonan->baki_disokong, 2)}}</td>
 {{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" step="0.01" name="yuran_dibayar" id="yuran_dibayar" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>--}}
 {{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar">{{number_format($baki_y, 2)}}</td>--}}
                                                     </tr>
@@ -406,11 +409,14 @@
                                                 if($permohonan->amaun_wang_saku == null){
                                                     $permohonan->amaun_wang_saku = 0;
                                                 }
+                                                if($permohonan->baki_disokong == null){
+                                                    $permohonan->baki_disokong = $permohonan->baki;
+                                                }
                                                 $jumlah = $permohonan->amaun_yuran;
                                                 $baki_y = 5000 - $jumlah;
                                             @endphp
                                             <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
-                                            <input type="hidden" name="baki_disokong" id="baki_disokong_3" value="">
+                                            <input type="hidden" name="baki_disokong" id="baki_disokong_3" value="{{$permohonan->baki_disokong}}">
 {{--                                            <input type="hidden" name="baki_dibayar" id="baki_dibayar_3" value="">--}}
                                             <br>
                                             <h6>Pengiraan:</h6>
@@ -434,7 +440,7 @@
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" step="0.01" name="yuran_disokong" id="yuran_disokong_3" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong_3">{{number_format($baki_y, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_disokong_3">{{number_format($permohonan->baki_disokong, 2)}}</td>
 {{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right"><input type="number" step="0.01" name="yuran_dibayar" id="yuran_dibayar_3" value="{{number_format($permohonan->amaun_yuran, 2, '.', '')}}"></td>--}}
 {{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right" id="y_baki_dibayar_3">{{number_format($baki_y, 2)}}</td>--}}
                                                     </tr>
