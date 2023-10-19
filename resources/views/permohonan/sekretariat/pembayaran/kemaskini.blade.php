@@ -227,8 +227,8 @@
                                 </table>
                                 <hr>
                                 <td>
-                                    <form method="POST" action="{{ url('permohonan/sekretariat/pembayaran/saring/'.$permohonan->id) }}" id="saring">
-                                        {{csrf_field()}}
+                                    <form method="POST" action="{{ url('permohonan/sekretariat/pembayaran/hantar/'.$permohonan->id) }}" id="saring">
+
                                         @if($permohonan->program == "BKOKU" && $permohonan->yuran == "1" && $permohonan->wang_saku == "1")
                                             <!--begin: Invoice body-->
                                             @php

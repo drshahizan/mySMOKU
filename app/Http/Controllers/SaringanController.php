@@ -335,7 +335,7 @@ class SaringanController extends Controller
                 'baki'                  =>  $request->get('baki'),
                 'baki_disokong'         =>  $request->get('baki_disokong'),
                 'baki_dibayar'          =>  $request->get('baki_dibayar'),
-                'catatan_disokong'      =>  $request->get('catatan'),
+                'catatan_dibayar'       =>  $request->get('catatan'),
                 'status'                =>  8,
             ]);
 
@@ -362,7 +362,7 @@ class SaringanController extends Controller
         $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
         $smoku = Smoku::where('id', $smoku_id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('permohonan.sekretariat.saringan.papar_tuntutan',compact('permohonan','akademik','smoku'));
+        return view('permohonan.sekretariat.pembayaran.papar',compact('permohonan','akademik','smoku'));
     }
 
     public function kemaskiniPembayaran($id){
@@ -370,7 +370,7 @@ class SaringanController extends Controller
         $smoku_id = $permohonan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('permohonan.sekretariat.saringan.kemaskini_saringan',compact('permohonan','smoku','akademik'));
+        return view('permohonan.sekretariat.pembayaran.kemaskini',compact('permohonan','smoku','akademik'));
     }
 
     public function hantarPembayaran(Request $request,$id){
@@ -385,10 +385,11 @@ class SaringanController extends Controller
             ]);
 
         $permohonan = Permohonan::where('id', $id)->first();
-        $smoku_id = $permohonan->smoku_id;
-        $smoku = Smoku::where('id', $smoku_id)->first();
-        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-
-        return view('permohonan.sekretariat.saringan.papar_tuntutan',compact('permohonan','smoku','akademik'));
+        $status_kod = 3;
+        $status = "Pembayaran bagi permohonan ".$permohonan->no_rujukan_permohonan." berjaya dikemaskini.";
+        $permohonan = Permohonan::where('status', '6')
+            ->orWhere('status', '=','8')
+            ->get();
+        return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status'));
     }
 }
