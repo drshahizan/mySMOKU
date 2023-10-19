@@ -40,7 +40,7 @@ class MaklumatESPController extends Controller
                     SUBSTRING_INDEX(c.sesi, "/", 1) + c.tempoh_pengajian
                 ) AS sesi_tamat
                 , g.institusi_esp as institut
-                , "MBA" as kursus
+                , "J0307" as kursus
                 , DATE_FORMAT(c.tarikh_tamat, "%d/%m/%Y") AS tarikh_tamat
                 , d.no_akaun_bank as no_akaun
                 , a.nama as nama_akaun, "45" as kod_bank, "BANK ISLAM MALAYSIA BERHAD" as nama_bank
