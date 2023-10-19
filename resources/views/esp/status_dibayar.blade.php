@@ -1,5 +1,5 @@
 
-<x-default-layout> 
+{{-- <x-default-layout>  --}}
   <head>
   
     <!-- MAIN CSS -->
@@ -162,4 +162,4 @@
   
   
   
-  </x-default-layout>
+  {{-- </x-default-layout> --}}
