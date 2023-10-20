@@ -129,6 +129,7 @@ class MaklumatESPController extends Controller
         $contentTypeHeader = $request->header('Content-Type');
         if (strpos($contentTypeHeader, 'application/json') !== false) {
             $jsonString = $request->json()->all();
+            $responses = [];
 
             foreach ($jsonString as $jsonString) {
                 $no_kp = $jsonString['nokp'];
@@ -139,22 +140,43 @@ class MaklumatESPController extends Controller
                 $smoku = Smoku::where('no_kp', $no_kp)->first();
                 // Check if $smoku is null
                 if ($smoku === null) {
-                    return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $jsonString, 'BKOKU tiada data nokp' => $no_kp], 200);
-                }
+                    $responses[] = [
+                        'nokp' => $no_kp,
+                        'id_permohonan' => $no_rujukan_permohonan,
+                        'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
+                        'amaun' => $jsonString['amount'],
+                        'status' => 'Tiada data dalam BKOKU'
+                    ];
+                } else {
 
-                DB::table('permohonan')->where('smoku_id', $smoku->id)->where('no_rujukan_permohonan', $no_rujukan_permohonan)
+                    DB::table('permohonan')->where('smoku_id', $smoku->id)->where('no_rujukan_permohonan', $no_rujukan_permohonan)
                     ->update([
                         'yuran_dibayar' => number_format($jsonString['amount'], 2, '.', ''),
                         'tarikh_transaksi' => $formattedDate,
                         'status' => 8,
                     ]);
 
+                    $responses[] = [
+                        'nokp' => $no_kp,
+                        'id_permohonan' => $no_rujukan_permohonan,
+                        'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
+                        'amaun' => $jsonString['amount'],
+                        'status' => 'Data diterima'
+                    ];   
+
+                }
+
+                 
+
             }          
 
-            return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $jsonString], 200);
+            return response()->json(['received_data' => $responses], 200);
+
         } else {
             $jsonString = $request->input('data');
             $data = json_decode($jsonString);
+            $responses = [];
+
             if (is_array($data)) {
                 foreach ($data as $dataField) {
                    
@@ -166,24 +188,39 @@ class MaklumatESPController extends Controller
                     $smoku = Smoku::where('no_kp', $no_kp)->first();
                     // Check if $smoku is null
                     if ($smoku === null) {
-                        return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $jsonString, 'BKOKU tiada data nokp' => $no_kp], 200);
-                    }
-    
-                    DB::table('permohonan')->where('smoku_id', $smoku->id)->where('no_rujukan_permohonan', $no_rujukan_permohonan)
+                        $responses[] = [
+                            'nokp' => $no_kp,
+                            'id_permohonan' => $no_rujukan_permohonan,
+                            'tarikh_transaksi' => $dataField->tarikh_transaksi,
+                            'amaun' => $dataField->amount,
+                            'status' => 'BKOKU tiada data nokp'
+                        ];
+                    }else{
+
+                        DB::table('permohonan')->where('smoku_id', $smoku->id)->where('no_rujukan_permohonan', $no_rujukan_permohonan)
                         ->update([
                             'yuran_dibayar' => number_format($dataField->amount, 2, '.', ''),
                             'tarikh_transaksi' => $formattedDate,
                             'status' => 8,
                         ]);
-    
+
+                        $responses[] = [
+                            'nokp' => $no_kp,
+                            'id_permohonan' => $no_rujukan_permohonan,
+                            'tarikh_transaksi' => $dataField->tarikh_transaksi,
+                            'amaun' => $dataField->amount,
+                            'status' => 'DATA DITERIMA'
+                        ];
+
+                    }
                 }
+                return response()->json(['received_data' => $responses], 200);
+                
             } else {
                 return response()->json(['error' => 'Invalid data format'], 400);
             }  
         }
 
-          
-        return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $data], 200);
         
         
     
