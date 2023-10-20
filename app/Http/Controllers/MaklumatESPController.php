@@ -129,6 +129,24 @@ class MaklumatESPController extends Controller
         $contentTypeHeader = $request->header('Content-Type');
         if (strpos($contentTypeHeader, 'application/json') !== false) {
             $jsonString = $request->json()->all();
+
+            foreach ($jsonString as $jsonString) {
+                $no_kp = $jsonString['nokp'];
+                $no_rujukan_permohonan = $jsonString['id_permohonan'];
+                $date = DateTime::createFromFormat('d/m/Y', $jsonString['tarikh_transaksi']);
+                $formattedDate = $date->format('Y-m-d');
+
+                $smoku = Smoku::where('no_kp', $no_kp)->first();
+
+                DB::table('permohonan')->where('smoku_id', $smoku->id)->where('no_rujukan_permohonan', $no_rujukan_permohonan)
+                    ->update([
+                        'yuran_dibayar' => number_format($jsonString['amount'], 2, '.', ''),
+                        'tarikh_transaksi' => $formattedDate,
+                        'status' => 8,
+                    ]);
+
+            }          
+
             return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $jsonString], 200);
         } else {
             $jsonString = $request->input('data');
