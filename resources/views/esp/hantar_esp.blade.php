@@ -344,6 +344,31 @@ function toggleSelectAll() {
 });
 
 
+// document.addEventListener("DOMContentLoaded", function() {
+//     // Get the submit button by its ID
+//     var submitButton = document.getElementById("kt_modal_add_customer_submit");
+
+//     // Add event listener to the submit button
+//     submitButton.addEventListener("click", function(event) {
+//         // Prevent the default form submission behavior
+//         event.preventDefault();
+
+//         // Show a confirmation popup
+//         var confirmed = confirm("Pasti?");
+
+//         // Check if the user confirmed
+//         if (confirmed) {
+//             // You can perform form validation or any other necessary tasks here
+
+//             // Redirect to another page
+//             window.location.href = "{{ route('maklumat.esp') }}"; // Replace this URL with the desired redirect URL
+//         } else {
+//             // If the user cancels, do nothing or handle it accordingly
+//         }
+//     });
+// });
+
+
 </script>
 
 

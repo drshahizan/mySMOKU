@@ -69,7 +69,7 @@ class MaklumatESPController extends Controller
                 DB::raw('SUBSTRING_INDEX(c.sesi, "/", 1) AS sesi_mula'),
                 DB::raw('CONCAT(SUBSTRING_INDEX(c.sesi, "/", 1) + c.tempoh_pengajian) AS sesi_tamat'),
                 'g.institusi_esp as institut',
-                DB::raw('"J0307" as kursus'),
+                'c.nama_kursus as kursus',
                 DB::raw('DATE_FORMAT(c.tarikh_tamat, "%d/%m/%Y") AS tarikh_tamat'),
                 'd.no_akaun_bank as no_akaun',
                 'a.nama as nama_akaun',
@@ -77,7 +77,7 @@ class MaklumatESPController extends Controller
                 DB::raw('"BANK ISLAM MALAYSIA BERHAD" as nama_bank'),
                 'b.no_rujukan_permohonan as id_permohonan',
                 'a.email',
-                DB::raw('DATE_FORMAT(c.tarikh_tamat, "%d/%m/%Y") AS tamat_cuti'),
+                DB::raw('"J0307" as kursus'),
             );
         
         if ($selectAll === true) {
@@ -100,28 +100,6 @@ class MaklumatESPController extends Controller
         
     }
 
-    // public function kemaskiniStatusESP()
-    // {
-    //     $data = [
-    //                 [
-    //                     'nokp' => '870807012377',
-    //                     'id_permohonan' => 'B/2/870807012377',
-    //                     'tarikh_transaksi' => '08/10/2023',
-    //                     'amount' => '3000',
-    //                 ],
-    //                 [
-    //                     'nokp' => '870807012377',
-    //                     'id_permohonan' => 'B/2/870807012377',
-    //                     'tarikh_transaksi' => '08/10/2023',
-    //                     'amount' => '2000',
-    //                 ],
-    //             ];
-        
-    //             // Convert the data to JSON
-    //             //$jsonData = json_encode($data);
-    //             //dd($jsonData);
-    //     return view('esp.kemaskini_status_esp', compact('data'));
-    // }
 
     public function receiveData(Request $request)
     {
