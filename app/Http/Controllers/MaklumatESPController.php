@@ -125,30 +125,48 @@ class MaklumatESPController extends Controller
 
     public function receiveData(Request $request)
     {
-        $data = $request->all(); // Get all data from the request
-
-        //$dataField = $data[0];
-
-        foreach ($data as $dataField) {
-            $no_kp = $dataField['nokp'];
-            $no_rujukan_permohonan = $dataField['id_permohonan'];
-            $date = DateTime::createFromFormat('d/m/Y', $dataField['tarikh_transaksi']);
-            $formattedDate = $date->format('Y-m-d');
-
-            $smoku = Smoku::where('no_kp', $no_kp)->first();
-
-            DB::table('permohonan')->where('smoku_id', $smoku->id)->where('no_rujukan_permohonan', $no_rujukan_permohonan)
-                ->update([
-                    'yuran_dibayar' => number_format($dataField['amount'], 2, '.', ''),
-                    'tarikh_transaksi' => $formattedDate,
-                    'status' => 8,
-                ]);
-
+        
+        $contentTypeHeader = $request->header('Content-Type');
+        if (strpos($contentTypeHeader, 'application/json') !== false) {
+            $jsonString = $request->json()->all();
+            return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $jsonString], 200);
+        } else {
+            $jsonString = $request->input('data');
+            $data = json_decode($jsonString);
+            if (is_array($data)) {
+                foreach ($data as $dataField) {
+                   
+                    $no_kp = $dataField->nokp;
+                    $no_rujukan_permohonan = $dataField->id_permohonan;
+                    $date = DateTime::createFromFormat('d/m/Y', $dataField->tarikh_transaksi);
+                    $formattedDate = $date->format('Y-m-d');
+    
+                    $smoku = Smoku::where('no_kp', $no_kp)->first();
+    
+                    DB::table('permohonan')->where('smoku_id', $smoku->id)->where('no_rujukan_permohonan', $no_rujukan_permohonan)
+                        ->update([
+                            'yuran_dibayar' => number_format($dataField->amount, 2, '.', ''),
+                            'tarikh_transaksi' => $formattedDate,
+                            'status' => 8,
+                        ]);
+    
+                }
+            } else {
+                return response()->json(['error' => 'Invalid data format'], 400);
+            }  
         }
+
+          
         return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $data], 200);
         
         
     
+    }
+
+    public function test(){
+
+
+        return view('esp.test_hantar');
     }
 
     public function statusDibayar(){
