@@ -137,6 +137,10 @@ class MaklumatESPController extends Controller
                 $formattedDate = $date->format('Y-m-d');
 
                 $smoku = Smoku::where('no_kp', $no_kp)->first();
+                // Check if $smoku is null
+                if ($smoku === null) {
+                    return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $jsonString, 'BKOKU tiada data nokp' => $no_kp], 200);
+                }
 
                 DB::table('permohonan')->where('smoku_id', $smoku->id)->where('no_rujukan_permohonan', $no_rujukan_permohonan)
                     ->update([
@@ -160,6 +164,10 @@ class MaklumatESPController extends Controller
                     $formattedDate = $date->format('Y-m-d');
     
                     $smoku = Smoku::where('no_kp', $no_kp)->first();
+                    // Check if $smoku is null
+                    if ($smoku === null) {
+                        return response()->json(['message' => 'DATA DITERIMA', 'received_data' => $jsonString, 'BKOKU tiada data nokp' => $no_kp], 200);
+                    }
     
                     DB::table('permohonan')->where('smoku_id', $smoku->id)->where('no_rujukan_permohonan', $no_rujukan_permohonan)
                         ->update([
