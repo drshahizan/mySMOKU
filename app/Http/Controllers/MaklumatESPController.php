@@ -16,10 +16,7 @@ class MaklumatESPController extends Controller
     public function index()
     {
         
-        $kelulusan = Permohonan::where('status', '=','6')
-
-        //->where('no_rujukan_permohonan', '=','B/2/950623031212')
-        ->get();
+        $kelulusan = Permohonan::where('status', '=','6')->get();
 
         
 
@@ -41,6 +38,7 @@ class MaklumatESPController extends Controller
             ->join('smoku_butiran_pelajar as d', 'd.smoku_id', '=', 'a.id')
             ->join('bk_peringkat_pengajian as e', 'e.kod_peringkat', '=', 'c.peringkat_pengajian')
             ->leftJoin('bk_agama as f', 'f.id', '=', 'd.agama')
+            ->leftJoin('maklumat_bank as h', 'g.id_institusi', '=', 'h.institusi_id')
             ->select(
                 'a.no_kp as nokp',
                 'a.nama',
@@ -71,8 +69,9 @@ class MaklumatESPController extends Controller
                 'g.institusi_esp as institut',
                 'c.nama_kursus as kursus',
                 DB::raw('DATE_FORMAT(c.tarikh_tamat, "%d/%m/%Y") AS tarikh_tamat'),
-                'd.no_akaun_bank as no_akaun',
-                'a.nama as nama_akaun',
+                DB::raw('IF(g.jenis_institusi = "IPTS", d.no_akaun_bank, h.no_akaun) as no_akaun'),
+                DB::raw('IF(g.jenis_institusi = "IPTS", a.nama, h.nama_akaun) as nama_akaun'),
+                
                 DB::raw('"45" as kod_bank'),
                 DB::raw('"BANK ISLAM MALAYSIA BERHAD" as nama_bank'),
                 'b.no_rujukan_permohonan as id_permohonan',
@@ -92,7 +91,6 @@ class MaklumatESPController extends Controller
                 ->where('b.status', '=', 6)
                 ->get();
         }    
-
 
         return response()->json(['data' => $data]);
         
