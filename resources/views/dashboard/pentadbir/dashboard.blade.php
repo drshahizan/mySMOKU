@@ -25,8 +25,8 @@
             <h3 class="card-title">Jumlah Pengguna  &nbsp; <i class="bi bi-people-fill  fs-2qx"></i></h3>
 
             <div class="card-toolbar">
-                <button type="button" class="btn btn-sm btn-primary">
-                    Daftar
+                    <a href="{{ route('daftarpengguna.post')}}"class="btn btn-primary"><i class="bi bi-person-fill-add fs-4 me-2"></i>Tambah Penggguna</a>
+
                 </button>
             </div>
         </div>
@@ -86,7 +86,7 @@
         </div>
         <div class="card-footer">
             <div class="d-flex flex-center">
-            <a href="#" class="btn btn-primary"><i class="bi bi-person-video2 fs-4 me-2"></i> Lihat Semua</a>
+            <a href="{{ route('daftarpengguna')}}"class="btn btn-primary"><i class="bi bi-person-video2 fs-4 me-2"></i> Lihat Semua</a>
             </div>
         </div>
     </div>

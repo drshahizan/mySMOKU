@@ -1,4 +1,22 @@
-<x-default-layout> 
+<x-default-layout>
+     <!--begin::Page title-->
+	<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+		<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Daftar Pengguna</h1>
+		<!--begin::Breadcrumb-->
+		<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Laman Utama</li>
+			<li class="breadcrumb-item">
+				<span class="bullet bg-gray-400 w-5px h-2px"></span>
+			</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Daftar Pengguna</li>
+		</ul>
+		<!--end::Breadcrumb-->
+	</div>
+	<!--end::Page title-->
+
+
+    <br>
+    <!--begin::Row-->
 <head>
 
 <!-- MAIN CSS -->
@@ -9,13 +27,7 @@
 <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
 </head>
-		<!--begin::Page title-->
-<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-	<!--begin::Title-->
-	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Daftar Pengguna</h1>
-	<!--end::Title-->
-	
-</div>
+<div class="card shadow-sm">
 <!--end::Page title-->
 <div class="table-responsive">
 	<!--begin::Content-->
@@ -23,7 +35,7 @@
 		<!--begin::Content container-->
 		<div id="kt_app_content_container" class="app-container container-xxl">
 			<!--begin::Card-->
-			<div class="card">
+			{{-- <div class="card"> --}}
 				<!--begin::Card header-->
 				<div class="card-header border-0 pt-6">
 					<!--begin::Card title-->
@@ -34,7 +46,7 @@
 								<span class="path1"></span>
 								<span class="path2"></span>
 							</i>
-							
+
 						</div>
 						<!--end::Search-->
 					</div>
@@ -43,13 +55,13 @@
 					<div class="card-toolbar">
 						<!--begin::Toolbar-->
 						<div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-							
+
 							<!--begin::Add customer-->
 							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">Tambah Pengguna</button>
 							<!--end::Add customer-->
 						</div>
 						<!--end::Toolbar-->
-						
+
 					</div>
 					<!--end::Card toolbar-->
 				</div>
@@ -73,7 +85,7 @@
 							<tbody class="fw-semibold text-gray-600">
 								@foreach ($user as $user)
 								@php
-									
+
 									$text = ucwords(strtolower($user->nama)); // Assuming you're sending the text as a POST parameter
 									$conjunctions = ['bin', 'binti'];
 									$words = explode(' ', $text);
@@ -101,7 +113,7 @@
 										@endif
 									</td>
 									<td>
-										
+
 										<!--begin::Toolbar-->
 										<div class="d-flex">
 											<!--begin::Edit-->
@@ -113,7 +125,7 @@
 											<!--end::Edit-->
 										</div>
 										<!--end::Toolbar-->
-										
+
 									</td>
 									<!--begin::Modal - Customers - Edit-->
 										<div class="modal fade" id="kt_modal_new_card{{$user->no_kp}}" tabindex="-1" aria-hidden="true">
@@ -142,7 +154,7 @@
 														<form class="form" id="kt_modal_new_card_form" action="{{ route('daftarpengguna.post') }}" method="post">
 															@csrf
 															<!--begin::Scroll-->
-															
+
 															<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
 																<!--begin::Input group-->
 																<div class="fv-row mb-7">
@@ -188,7 +200,7 @@
 																	<!--end::Input-->
 																</div>
 																<!--end::Input group-->
-																															
+
 																@if ($user->tahap =='2')
 																<!--begin::Input group-->
 																<div class="fv-row mb-7" id="div_ipt">
@@ -220,7 +232,7 @@
 																	$(document).ready(function() {
 																	$('.js-example-basic-single').select2();
 																	});
-																	
+
 																</script>
 
 																@if ($user->tahap !='1')
@@ -249,11 +261,11 @@
 																	<!--end::Input-->
 																</div>
 																<!--end::Input group-->
-																
-																
+
+
 															</div>
 															<!--end::Scroll-->
-															
+
 															<!--begin::Actions-->
 															<div class="text-center pt-15">
 																{{--<button type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Discard</button>--}}
@@ -282,10 +294,10 @@
 					<!--end::Table-->
 				</div>
 				<!--end::Card body-->
-			</div>
+			{{-- </div> --}}
 			<!--end::Card-->
 			<!--begin::Modals-->
-			
+
 			<!--begin::Modal - Customers - Add-->
 			<div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
 				<!--begin::Modal dialog-->
@@ -312,7 +324,7 @@
 							<!--end::Modal header-->
 							<!--begin::Modal body-->
 							<div class="modal-body py-10 px-lg-17">
-								
+
 								<!--begin::Scroll-->
 								<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
 									<!--begin::Input group-->
@@ -345,7 +357,7 @@
 										<!--end::Input-->
 									</div>
 									<!--end::Input group-->
-									
+
 									<!--begin::Input group-->
 									<div class="fv-row mb-7">
 										<!--begin::Label-->
@@ -361,7 +373,7 @@
 										<!--end::Input-->
 									</div>
 									<!--end::Input group-->
-									
+
 									<!--begin::Input group-->
 									<div class="fv-row mb-7" id="div_id_institusi">
 										<!--begin::Label-->
@@ -409,7 +421,7 @@
 											}
 											});
 										});
-										
+
 									</script>
 									<!--begin::Input group-->
 									<div class="fv-row mb-7">
@@ -431,7 +443,7 @@
 										<!--end::Input-->
 									</div>
 									<!--end::Input group-->
-									
+
 								</div>
 								<!--end::Scroll-->
 							</div>
@@ -456,13 +468,14 @@
 				</div>
 			</div>
 			<!--end::Modal - Customers - Add-->
-		
+
 			<!--end::Modals-->
 		</div>
 		<!--end::Content container-->
 	</div>
 	<!--end::Content-->
-	
+
+</div>
 </div>
 
 <!--begin::Javascript-->
@@ -479,7 +492,7 @@
 <script src="assets/js/custom/utilities/modals/users-search.js"></script>
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
-	
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
         // Check if there is a flash message
