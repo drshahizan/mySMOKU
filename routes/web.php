@@ -179,6 +179,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan/sekretariat/saringan/keputusan-peperiksaan', [SekretariatController::class, 'keputusanPeperiksaan']);
     Route::get('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/{id}', [SekretariatController::class, 'maklumatTuntutanKedua'])->name('maklumat.tuntutan.kedua.id');
     Route::post('tuntutan/sekretariat/saringan/saring-tuntutan-kedua/{id}', [SekretariatController::class, 'saringTuntutanKedua'])->name('saring.tuntutan.kedua.id');
+    Route::get('tuntutan/sekretariat/saringan/papar-tuntutan/{id}', [SekretariatController::class, 'paparTuntutanKedua'])->name('papar.tuntutan.kedua.id');
+    Route::get('tuntutan/sekretariat/saringan/kemaskini-tuntutan/{id}', [SekretariatController::class, 'kemaskiniTuntutan'])->name('kemaskini.tuntutan.id');
+    Route::post('tuntutan/sekretariat/saringan/hantar-tuntutan/{id}', [SekretariatController::class, 'hantarTuntutan'])->name('hantar.tuntutan.id');
 
     //Permohonan - Sekretariat - Pembayaran
     Route::get('tuntutan/sekretariat/pembayaran/senarai', [SekretariatController::class, 'senaraiPembayaran']);
