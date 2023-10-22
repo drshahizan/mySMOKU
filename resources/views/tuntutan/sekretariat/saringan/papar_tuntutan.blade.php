@@ -510,6 +510,9 @@
                                 </div>
                             @endif
                             <!--end: Invoice body-->
+                            <div class="col-md-6 text-right">
+                                <a href="{{ url('tuntutan/sekretariat/saringan/senarai_tuntutan') }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </button></a>
+                            </div>
                         </div>
                     </div>
                 </div>
