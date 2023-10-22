@@ -385,13 +385,13 @@ class SekretariatController extends Controller
         // Split the comma-separated string into an array
         $catatanArray = explode(', ', $catatan);
 
-
         // Email notification
         $studentEmail = Smoku::where('id', $smoku_id)->value('email');
         $emailLulus = EmelKemaskini::where("emel_id",2)->first();
         $emailTidakLulus = EmelKemaskini::where("emel_id",3)->first();
         Mail::to($studentEmail)->send($keputusan == "Lulus" ? new KeputusanLayak($emailLulus) : new KeputusanTidakLayak($emailTidakLulus,$catatanArray));
 
+        // Filter kelulusan
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
@@ -403,6 +403,7 @@ class SekretariatController extends Controller
         })
         ->get();
 
+        // Pop up notification
         $id_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
         $notifikasi = "Emel notifikasi telah dihantar kepada " . $id_permohonan;
 
@@ -423,6 +424,8 @@ class SekretariatController extends Controller
 
                 // item is find the permohonan id
                 $item = Permohonan::find($itemId);
+                // Retrieve the item and existing record
+                $existingRecord = Kelulusan::where('permohonan_id', $itemId)->first();
 
                 if ($item)
                 {
@@ -452,13 +455,13 @@ class SekretariatController extends Controller
 
                         // Send email notifications to all student email addresses
                         $studentEmail = Smoku::where('id', $item->smoku_id)->value('email');
+                        $emailLulus = EmelKemaskini::where("emel_id",2)->first();
                         if ($studentEmail) {
                             $studentEmails[] = $studentEmail;
                         }
 
                         foreach ($studentEmails as $studentEmail) {
-                            $message = 'Test message';
-                            Mail::to($studentEmail)->send(new KeputusanLayak($message));
+                            Mail::to($studentEmail)->send(new KeputusanLayak($emailLulus));
                         }
                     }
                     else
@@ -489,16 +492,25 @@ class SekretariatController extends Controller
                         if ($studentEmail) {
                             $studentEmails[] = $studentEmail;
                         }
+                        
+                        // Check if $existingRecord is defined and not null
+                        if ($existingRecord) {
+                            $catatan = $existingRecord->catatan;
+                        }
+
+                        // Split the comma-separated string into an array
+                        $catatanArray = explode(', ', $catatan);
 
                         foreach ($studentEmails as $studentEmail) {
-                            $message = 'Test message';
-                            Mail::to($studentEmail)->send(new KeputusanTidakLayak($message));
+                            $emailTidakLulus = EmelKemaskini::where("emel_id",3)->first();
+                            Mail::to($studentEmail)->send(new KeputusanTidakLayak($emailTidakLulus, $catatanArray));
                         }
                     }
                 }
             }
         }
 
+        // Filter kelulusan
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
@@ -510,6 +522,7 @@ class SekretariatController extends Controller
         })
         ->get();
 
+        // Pop up notification
         $keputusan = $request->get('keputusan');
         $notifikasi = "Emel notifikasi telah dihantar kepada semua pemohon.";
 
