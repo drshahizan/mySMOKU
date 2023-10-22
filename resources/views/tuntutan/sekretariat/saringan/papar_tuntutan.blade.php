@@ -12,6 +12,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <style>
+    body{
+        margin: 20px!important;
+    }
     .maklumat, .maklumat td{
         border: none!important;
         padding:2px 8px!important;
@@ -96,9 +99,19 @@
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item vivify swoopInTop delay-150 active"><b>Saring Tuntutan</b></li>
                         </ul>
-                        {{-- <div class="ml-auto">
-                            <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank" class="btn btn-primary">Cetak</a>
-                        </div> --}}
+                        <div class="ml-auto">
+                            <a href="{{url('tuntutan/sekretariat/saringan/kemaskini-tuntutan/'.$sejarah_t->id)}}">
+                                <button type="button" class="btn btn-sm my-btn btn-default" title="Kemaskini">
+                                    <i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                        </svg>
+                                        &nbsp;&nbsp;Kemaskini
+                                    </i>
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 </nav>
             </div>
@@ -108,10 +121,10 @@
                         <div class="col-md-6 col-sm-6">
                             <br>
                             @php
-                                $status = DB::table('bk_status')->where('kod_status', $sejarah_p->status)->value('status');
                                 $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                 $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
                                 $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja)->value('penaja');
+                                $status_tuntutan = DB::table('bk_status')->where('kod_status', $saringan->status)->value('status');
                                 // nama pemohon
                                 $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
                                 $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
@@ -199,10 +212,6 @@
                                     @else
                                         <td>Tidak Ditaja</td>
                                     @endif
-                                    <td class="space">&nbsp;</td>
-                                    <td><strong>Status</strong></td>
-                                    <td>:</td>
-                                    <td>{{ucwords(strtolower($status))}} ({{date('d/m/Y', strtotime($sejarah_p->created_at))}})</td>
                                 </tr>
                             </table>
                             <hr>
@@ -221,6 +230,7 @@
                                             <tr>
                                                 <th style="width: 5%;">No.</th>
                                                 <th style="width: 20%;">Item</th>
+                                                <th style="width: 15%;">Keputusan Saringan</th>
                                                 <th style="width: 20%;">No. Resit</th>
                                                 <th style="width: 40%;">Perihal</th>
                                             </tr>
@@ -230,6 +240,9 @@
                                                 <td style="text-align:right;">1</td>
                                                 <td>
                                                     <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan') }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                </td>
+                                                <td>
+                                                    {{$saringan->saringan_kep_peperiksaan}}
                                                 </td>
                                                 <td>
                                                     -
@@ -245,6 +258,9 @@
                                                         <span><a href="{{ url($invoisResit) }}" target="_blank">{{$item['jenis_yuran']}}</a></span>
                                                     </td>
                                                     <td>
+                                                        {{$item['kep_saringan']}}
+                                                    </td>
+                                                    <td>
                                                         {{$item['no_resit']}}
                                                     </td>
                                                     <td>
@@ -257,6 +273,249 @@
                                     </div>
                                 </div>
                             </div>
+                            <h6>Pengiraan:</h6>
+                            <br>
+                            <p>Baki Terdahulu: {{$permohonan->baki_dibayar}}</p>
+                            <!--begin: Invoice body-->
+                            @if($permohonan->program == "BKOKU" && $tuntutan->yuran == "1" && $tuntutan->wang_saku == "1")
+                                @php
+                                    $yuran = 0;
+                                    foreach ($tuntutan_item as $item){
+                                        if($item['amaun'] == null){
+                                            $item['amaun'] = 0;
+                                            $yuran = $yuran + $item['amaun'];
+                                        }
+                                        else{
+                                            $yuran = $yuran + $item['amaun'];
+                                        }
+                                    }
+
+                                    if($tuntutan->amaun_wang_saku == null){
+                                        $tuntutan->amaun_wang_saku = 0;
+                                    }
+                                    $jumlah = $yuran + $tuntutan->amaun_wang_saku;
+                                    $baki_y = $permohonan->baki_dibayar - $jumlah;
+                                @endphp
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
+                                            <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dituntut (RM)</th>
+                                            <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                            <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
+                                            <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                            {{--                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dibayar (RM)</th>--}}
+                                            {{--                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>--}}
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="font-weight-bolder font-size-lg">
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($yuran, 2)}}</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->yuran_disokong, 2)}}</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $tuntutan->yuran_disokong - $tuntutan->wang_saku_disokong, 2)}}</td>
+                                            {{--                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->yuran_dibayar, 2)}}</td>--}}
+                                            {{--                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $tuntutan->yuran_dibayar - $tuntutan->wang_saku_dibayar, 2)}}</td>--}}
+                                        </tr>
+                                        <tr class="font-weight-bolder font-size-lg">
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_wang_saku, 2)}}</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->wang_saku_disokong, 2)}}</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
+                                            {{--                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>--}}
+                                            {{--                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>--}}
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="maklumat2">
+                                        <tr>
+                                            <td>Jumlah tuntutan yang disokong (RM)</td>
+                                            <td>:</td>
+                                            <td>{{number_format($tuntutan->yuran_disokong + $tuntutan->wang_saku_disokong, 2)}}</td>
+                                        </tr>
+                                        {{--                                                <tr>--}}
+                                        {{--                                                    <td>Jumlah tuntutan yang dibayar (RM)</td>--}}
+                                        {{--                                                    <td>:</td>--}}
+                                        {{--                                                    <td>{{number_format($tuntutan->yuran_dibayar + $tuntutan->wang_saku_dibayar, 2)}}</td>--}}
+                                        {{--                                                </tr>--}}
+                                        <tr>
+                                            <td>Catatan</td>
+                                            <td>:</td>
+                                            <td>{{$saringan->catatan}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Keputusan Akhir</td>
+                                            <td>:</td>
+                                            <td>{{ucwords(strtolower($status_tuntutan))}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            @elseif($permohonan->program == "BKOKU" && $tuntutan->yuran == NULL)
+                                @php
+                                    if($tuntutan->amaun_wang_saku == null){
+                                        $tuntutan->amaun_wang_saku = 0;
+                                    }
+                                    $jumlah = $tuntutan->amaun_wang_saku;
+                                @endphp
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
+                                            <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dituntut (RM)</th>
+                                            <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
+                                            {{--                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dibayar (RM)</th>--}}
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="font-weight-bolder font-size-lg">
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_wang_saku, 2)}}</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->wang_saku_disokong, 2)}}</td>
+                                            {{--                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>--}}
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="maklumat2">
+                                        <tr>
+                                            <td>Jumlah tuntutan yang disokong (RM)</td>
+                                            <td>:</td>
+                                            <td>{{number_format($tuntutan->wang_saku_disokong, 2)}}</td>
+                                        </tr>
+                                        {{--                                                <tr>--}}
+                                        {{--                                                    <td>Jumlah tuntutan yang dibayar (RM)</td>--}}
+                                        {{--                                                    <td>:</td>--}}
+                                        {{--                                                    <td>{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>--}}
+                                        {{--                                                </tr>--}}
+                                        <tr>
+                                            <td>Catatan</td>
+                                            <td>:</td>
+                                            <td>{{$saringan->catatan}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Keputusan Akhir</td>
+                                            <td>:</td>
+                                            <td>{{ucwords(strtolower($status_tuntutan))}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            @elseif($permohonan->program == "BKOKU" && $tuntutan->wang_saku == NULL)
+                                @php
+                                    $yuran = 0;
+                                    foreach ($tuntutan_item as $item){
+                                        if($item['amaun'] == null){
+                                            $item['amaun'] = 0;
+                                            $yuran = $yuran + $item['amaun'];
+                                        }
+                                        else{
+                                            $yuran = $yuran + $item['amaun'];
+                                        }
+                                    }
+                                    $jumlah = $yuran;
+                                    $baki_y = $permohonan->baki_dibayar - $jumlah;
+                                @endphp
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
+                                            <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dituntut (RM)</th>
+                                            <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                            <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
+                                            <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
+                                            {{--                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dibayar (RM)</th>--}}
+                                            {{--                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>--}}
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="font-weight-bolder font-size-lg">
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($yuran, 2)}}</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->yuran_disokong, 2)}}</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $tuntutan->yuran_disokong, 2)}}</td>
+                                            {{--                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->yuran_dibayar, 2)}}</td>--}}
+                                            {{--                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $tuntutan->yuran_dibayar, 2)}}</td>--}}
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="maklumat2">
+                                        <tr>
+                                            <td>Jumlah tuntutan yang disokong (RM)</td>
+                                            <td>:</td>
+                                            <td>{{number_format($tuntutan->yuran_disokong, 2)}}</td>
+                                        </tr>
+                                        {{--                                                <tr>--}}
+                                        {{--                                                    <td>Jumlah tuntutan yang dibayar (RM)</td>--}}
+                                        {{--                                                    <td>:</td>--}}
+                                        {{--                                                    <td>{{number_format($tuntutan->yuran_dibayar, 2)}}</td>--}}
+                                        {{--                                                </tr>--}}
+                                        <tr>
+                                            <td>Catatan</td>
+                                            <td>:</td>
+                                            <td>{{$saringan->catatan}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Keputusan Akhir</td>
+                                            <td>:</td>
+                                            <td>{{ucwords(strtolower($status_tuntutan))}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            @elseif($permohonan->program == "PPK")
+                                @php
+                                    if($tuntutan->amaun_wang_saku == null){
+                                        $tuntutan->amaun_wang_saku = 0;
+                                    }
+                                    $jumlah = $tuntutan->amaun_wang_saku;
+                                @endphp
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
+                                            <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dituntut (RM)</th>
+                                            <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
+                                            {{--                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dibayar (RM)</th>--}}
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="font-weight-bolder font-size-lg">
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_wang_saku, 2)}}</td>
+                                            <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->wang_saku_disokong, 2)}}</td>
+                                            {{--                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>--}}
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="maklumat2">
+                                        <tr>
+                                            <td>Jumlah tuntutan yang disokong (RM)</td>
+                                            <td>:</td>
+                                            <td>{{number_format($tuntutan->wang_saku_disokong, 2)}}</td>
+                                        </tr>
+                                        {{--                                                <tr>--}}
+                                        {{--                                                    <td>Jumlah tuntutan yang dibayar (RM)</td>--}}
+                                        {{--                                                    <td>:</td>--}}
+                                        {{--                                                    <td>{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>--}}
+                                        {{--                                                </tr>--}}
+                                        <tr>
+                                            <td>Catatan</td>
+                                            <td>:</td>
+                                            <td>{{$saringan->catatan}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Keputusan Akhir</td>
+                                            <td>:</td>
+                                            <td>{{ucwords(strtolower($status_tuntutan))}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            @endif
+                            <!--end: Invoice body-->
                         </div>
                     </div>
                 </div>
@@ -266,3 +525,4 @@
 </div>
 </body>
 </html>
+

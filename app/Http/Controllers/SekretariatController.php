@@ -492,7 +492,7 @@ class SekretariatController extends Controller
                         if ($studentEmail) {
                             $studentEmails[] = $studentEmail;
                         }
-                        
+
                         // Check if $existingRecord is defined and not null
                         if ($existingRecord) {
                             $catatan = $existingRecord->catatan;
@@ -695,6 +695,9 @@ class SekretariatController extends Controller
     {
         $tuntutan = Tuntutan::where('status', '2')
         ->orWhere('status', '=','3')
+        ->orWhere('status', '=','5')
+        ->orWhere('status', '=','6')
+        ->orWhere('status', '=','7')
         ->get();
         $status_kod=0;
         $status = null;
@@ -861,6 +864,9 @@ class SekretariatController extends Controller
 
         $tuntutan = Tuntutan::where('status', '2')
             ->orWhere('status', '=','3')
+            ->orWhere('status', '=','5')
+            ->orWhere('status', '=','6')
+            ->orWhere('status', '=','7')
             ->get();
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status'));
     }
@@ -875,6 +881,52 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan',compact('tuntutan'));
     }
 
+    //Papar Tuntutan Telah Disaring
+    public function paparTuntutanKedua($id){
+        $sejarah_t = SejarahTuntutan::where('id', $id)->first();
+        $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
+        $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $saringan = SaringanTuntutan::where('tuntutan_id', $sejarah_t->tuntutan_id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
+        $smoku_id = $tuntutan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('tuntutan.sekretariat.saringan.papar_tuntutan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
+    }
+
+    public function kemaskiniTuntutan($id){
+        $sejarah_t = SejarahTuntutan::where('id', $id)->first();
+        $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
+        $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $saringan = SaringanTuntutan::where('tuntutan_id', $sejarah_t->tuntutan_id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
+        $smoku_id = $tuntutan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('tuntutan.sekretariat.saringan.kemaskini_tuntutan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
+    }
+
+    public function hantarTuntutan(Request $request, $id){
+        $t_id = SejarahTuntutan::where('id', $id)->value('tuntutan_id');
+        Tuntutan::where('id', $t_id)
+            ->update([
+                'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
+                'yuran_disokong'        =>  $request->get('yuran_disokong'),
+                'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+            ]);
+
+        $sejarah_t = SejarahTuntutan::where('id', $id)->first();
+        $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
+        $saringan = SaringanTuntutan::where('tuntutan_id', $sejarah_t->tuntutan_id)->first();
+        $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
+        $smoku_id = $tuntutan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('tuntutan.sekretariat.saringan.papar_tuntutan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
+    }
+
+    //Sejarah
     public function sejarahTuntutan(){
         $tuntutan = Tuntutan::where('status', '!=','4')->get();
         return view('tuntutan.sekretariat.sejarah.sejarah_tuntutan',compact('tuntutan'));
