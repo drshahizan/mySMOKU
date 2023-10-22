@@ -374,11 +374,23 @@ class SekretariatController extends Controller
         ]);
         $sejarah->save();
 
+        // Initialize $catatan with an empty string
+        $catatan = '';
+
+        // Check if $existingRecord is defined and not null
+        if ($existingRecord) {
+            $catatan = implode(', ', $catatanArray);
+        }
+
+        // Split the comma-separated string into an array
+        $catatanArray = explode(', ', $catatan);
+
+
         // Email notification
         $studentEmail = Smoku::where('id', $smoku_id)->value('email');
         $emailLulus = EmelKemaskini::where("emel_id",2)->first();
         $emailTidakLulus = EmelKemaskini::where("emel_id",3)->first();
-        Mail::to($studentEmail)->send($keputusan == "Lulus" ? new KeputusanLayak($emailLulus) : new KeputusanTidakLayak($emailTidakLulus));
+        Mail::to($studentEmail)->send($keputusan == "Lulus" ? new KeputusanLayak($emailLulus) : new KeputusanTidakLayak($emailTidakLulus,$catatanArray));
 
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');

@@ -14,12 +14,14 @@ class KeputusanTidakLayak extends Mailable
     use Queueable, SerializesModels;
 
     public $emailTidakLulus;
+    public $catatanArray;
     /**
      * Create a new message instance.
      */
-    public function __construct($email)
+    public function __construct($email,$catatan)
     {
         $this->emailTidakLulus = $email;
+        $this->catatanArray = $catatan;
     }
 
     /**
