@@ -635,7 +635,7 @@ class PermohonanController extends Controller
         $smoku = Smoku::where('no_kp', $user->no_kp)->first();
         $permohonan = Permohonan::where('smoku_id', $smoku->id)->first();
 
-        return view('pages.permohonan.lapor_tamat_pengajian',compact('permohonan'));
+        return view('permohonan.pelajar.lapor_tamat_pengajian',compact('permohonan'));
     }
 
     public function hantarTamatPengajian(Request $request)

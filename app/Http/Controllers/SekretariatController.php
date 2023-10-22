@@ -329,7 +329,6 @@ class SekretariatController extends Controller
         // $id refers to permohonan id
         $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
         $existingRecord = Kelulusan::where('permohonan_id', $id)->first();
-        $studentEmail = Smoku::where('id', $smoku_id)->value('email');
 
         $keputusan = $request->get('keputusan');
 
@@ -376,8 +375,10 @@ class SekretariatController extends Controller
         $sejarah->save();
 
         // Email notification
-        $message = 'Test message';
-        Mail::to($studentEmail)->send($keputusan == "Lulus" ? new KeputusanLayak($message) : new KeputusanTidakLayak($message));
+        $studentEmail = Smoku::where('id', $smoku_id)->value('email');
+        $emailLulus = EmelKemaskini::where("emel_id",2)->first();
+        $emailTidakLulus = EmelKemaskini::where("emel_id",3)->first();
+        Mail::to($studentEmail)->send($keputusan == "Lulus" ? new KeputusanLayak($emailLulus) : new KeputusanTidakLayak($emailTidakLulus));
 
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
@@ -395,7 +396,6 @@ class SekretariatController extends Controller
 
         return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan', 'notifikasi', 'kelulusan'));
     }
-
 
     public function hantarSemuaKeputusanPermohonan(Request $request)
     {

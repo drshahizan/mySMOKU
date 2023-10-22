@@ -13,13 +13,13 @@ class KeputusanTidakLayak extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $message;
+    public $emailTidakLulus;
     /**
      * Create a new message instance.
      */
-    public function __construct($message)
+    public function __construct($email)
     {
-        $this->message = $message;
+        $this->emailTidakLulus = $email;
     }
 
     /**
@@ -29,7 +29,6 @@ class KeputusanTidakLayak extends Mailable
     {
         $subject = "Keputusan Permohonan Anda";
         return $this->subject($subject)
-                    ->with('data', $this->message)
                     ->view('permohonan.sekretariat.kelulusan.emel_tidak_lulus');
     }
 }

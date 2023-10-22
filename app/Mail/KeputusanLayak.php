@@ -13,13 +13,13 @@ class KeputusanLayak extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $message;
+    public $emailLulus;
     /**
      * Create a new message instance.
      */
-    public function __construct($message)
+    public function __construct($email)
     {
-        $this->message = $message;
+        $this->emailLulus = $email;
     }
 
     /**
@@ -29,7 +29,6 @@ class KeputusanLayak extends Mailable
     {
         $subject = "Keputusan Permohonan Anda";
         return $this->subject($subject)
-                    ->with('data', $this->message)
-                    ->view('permohonan.sekretariat.kelulusan.emel_lulus');
+            ->view('permohonan.sekretariat.kelulusan.emel_lulus');
     }
 }
