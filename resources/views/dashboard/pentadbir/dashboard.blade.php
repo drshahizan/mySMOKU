@@ -1,308 +1,137 @@
 <x-default-layout>
-    <h1>Selamat Datang, Admin</h1>
+    <!--begin::Page title-->
+	<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+		<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Laman Utama</h1>
+		<!--begin::Breadcrumb-->
+		<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Laman Utama</li>
+			<li class="breadcrumb-item">
+				<span class="bullet bg-gray-400 w-5px h-2px"></span>
+			</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Paparan Pemuka</li>
+		</ul>
+		<!--end::Breadcrumb-->
+	</div>
+	<!--end::Page title-->
+
+
     <br>
     <!--begin::Row-->
-    <div class="row">
-        <div class="col-sm-6 col-xl-2 mb-xl-10">
-            <!--begin: Statistics Widget 6-->
-            <div class="card bg-light-success h-lg-100">
-                <!--begin::Body-->
-                <div class="card-body my-3">
-                    <i class="bi bi-person-circle text-success fs-3x"></i>
-                    <br>
-                    <a href="#" class="card-title fw-bold text-success fs-6">Jumlah Pengguna</a>
-                    <div class="py-1">
-                            <span class="text-dark fs-3x  fw-bold me-2">15%</span>
-                     </div>
-                </div>
-                <!--end:: Body-->
-            </div>
-            <!--end: Statistics Widget 6-->
-        </div>
-        <div class="col-xl-3">
-            <!--begin: Statistics Widget 6-->
-            <div class="card bg-light-warning h-lg-1008">
-                <!--begin::Body-->
-                <div class="card-body my-3">
-                    <a href="#" class="card-title fw-bold text-warning fs-5 mb-3 d-block">Company Finance</a>
-                    <div class="py-1">
-                        <span class="text-dark fs-1 fw-bold me-2">15%</span>
-                        <span class="fw-semibold text-muted fs-7">48k Goal</span>
-                    </div>
 
-                </div>
-                <!--end:: Body-->
-            </div>
-            <!--end: Statistics Widget 6-->
-        </div>
-        <div class="col-xl-3">
-            <!--begin: Statistics Widget 6-->
-            <div class="card bg-light-primary h-lg-1008">
-                <!--begin::Body-->
-                <div class="card-body my-3">
-                    <a href="#" class="card-title fw-bold text-primary fs-5 mb-3 d-block">Marketing Analysis</a>
-                    <div class="py-1">
-                        <span class="text-dark fs-1 fw-bold me-2">76%</span>
-                        <span class="fw-semibold text-muted fs-7">400k Impressions</span>
-                    </div>
 
-                </div>
-                <!--end:: Body-->
-            </div>
-            <!--end: Statistics Widget 6-->
-        </div>
-        <div class="col-xl-3">
-            <!--begin: Statistics Widget 6-->
-            <div class="card bg-light-primary card-xl-stretch mb-5 mb-xl-8">
-                <!--begin::Body-->
-                <div class="card-body my-3">
-                    <a href="#" class="card-title fw-bold text-primary fs-5 mb-3 d-block">Marketing Analysis</a>
-                    <div class="py-1">
-                        <span class="text-dark fs-1 fw-bold me-2">76%</span>
-                        <span class="fw-semibold text-muted fs-7">400k Impressions</span>
-                    </div>
 
-                </div>
-                <!--end:: Body-->
-            </div>
-    </div>
-    <!--end::Row-->
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">Jumlah Pengguna  &nbsp; <i class="bi bi-people-fill  fs-2qx"></i></h3>
 
-    <!--begin::Col-->
-    <div class="col-sm-6 col-xl-2 mb-xl-10">
-        <!--begin::Card widget 2-->
-        <div class="card h-lg-100">
-            <!--begin::Body-->
-            <div class="card-body d-flex justify-content-between align-items-start flex-column">
-                <!--begin::Icon-->
-                <div class="m-0">
-                    <i class="ki-duotone ki-chart-simple fs-2hx text-gray-600">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                        <span class="path3"></span>
-                        <span class="path4"></span>
-                    </i>
-                </div>
-                <!--end::Icon-->
-                <!--begin::Section-->
-                <div class="d-flex flex-column my-7">
-                    <!--begin::Number-->
-                    <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">27,5M</span>
-                    <!--end::Number-->
-                    <!--begin::Follower-->
-                    <div class="m-0">
-                        <span class="fw-semibold fs-6 text-gray-400">Stock Qty</span>
-                    </div>
-                    <!--end::Follower-->
-                </div>
-                <!--end::Section-->
-                <!--begin::Badge-->
-                <span class="badge badge-light-success fs-base">
-                <i class="ki-duotone ki-arrow-up fs-5 text-success ms-n1">
-                    <span class="path1"></span>
-                    <span class="path2"></span>
-                </i>2.1%</span>
-                <!--end::Badge-->
+            <div class="card-toolbar">
+                <button type="button" class="btn btn-sm btn-primary">
+                    Daftar
+                </button>
             </div>
-            <!--end::Body-->
         </div>
-        <!--end::Card widget 2-->
-    </div>
-    <!--end::Col-->
-    <!--begin::Col-->
-    <div class="col-sm-6 col-xl-2 mb-xl-10">
-        <!--begin::Card widget 2-->
-        <div class="card h-lg-100">
-            <!--begin::Body-->
-            <div class="card-body d-flex justify-content-between align-items-start flex-column">
-                <!--begin::Icon-->
-                <div class="m-0">
-                    <i class="ki-duotone ki-abstract-39 fs-2hx text-gray-600">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                    </i>
-                </div>
-                <!--end::Icon-->
-                <!--begin::Section-->
-                <div class="d-flex flex-column my-7">
-                    <!--begin::Number-->
-                    <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">149M</span>
-                    <!--end::Number-->
-                    <!--begin::Follower-->
-                    <div class="m-0">
-                        <span class="fw-semibold fs-6 text-gray-400">Stock Value</span>
+        <div class="card-body">
+           	<!--begin::Stats-->
+               <div class="row">
+                <!--begin::Col-->
+                <div class="col">
+                    @php
+                        $count_sekretariat = DB::table('users')->where('tahap', 3)->count();
+                    @endphp
+                    <div class="card card-border border-info flex-center min-w-175px my-3 p-6">
+                        <span class="fs-4 fw-semibold text-primary pb-1 px-2">Sekretariat KPT</span>
+                        <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
+                        <span data-kt-countup="true" data-kt-countup-value="{{$count_sekretariat}}">0</span></span>
                     </div>
-                    <!--end::Follower-->
                 </div>
-                <!--end::Section-->
-                <!--begin::Badge-->
-                <span class="badge badge-light-danger fs-base">
-                <i class="ki-duotone ki-arrow-down fs-5 text-danger ms-n1">
-                    <span class="path1"></span>
-                    <span class="path2"></span>
-                </i>0.47%</span>
-                <!--end::Badge-->
-            </div>
-            <!--end::Body-->
-        </div>
-        <!--end::Card widget 2-->
-    </div>
-    <!--end::Col-->
-    <!--begin::Col-->
-    <div class="col-sm-6 col-xl-2 mb-xl-10">
-        <!--begin::Card widget 2-->
-        <div class="card h-lg-100">
-            <!--begin::Body-->
-            <div class="card-body d-flex justify-content-between align-items-start flex-column">
-                <!--begin::Icon-->
-                <div class="m-0">
-                    <i class="ki-duotone ki-map fs-2hx text-gray-600">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                        <span class="path3"></span>
-                    </i>
-                </div>
-                <!--end::Icon-->
-                <!--begin::Section-->
-                <div class="d-flex flex-column my-7">
-                    <!--begin::Number-->
-                    <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">89M</span>
-                    <!--end::Number-->
-                    <!--begin::Follower-->
-                    <div class="m-0">
-                        <span class="fw-semibold fs-6 text-gray-400">C APEX</span>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col">
+                    @php
+                        $count_penyelaras_bkoku = DB::table('users')->where('tahap', 2)->count();
+                    @endphp
+                    <div class="card card-border border-info flex-center min-w-175px my-3 p-6">
+                        <span class="fs-4 fw-semibold text-primary pb-1 px-2">Penyelaras BKOKU IPT</span>
+                        <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
+                        <span data-kt-countup="true" data-kt-countup-value="{{$count_penyelaras_bkoku}}">0</span></span>
                     </div>
-                    <!--end::Follower-->
                 </div>
-                <!--end::Section-->
-                <!--begin::Badge-->
-                <span class="badge badge-light-success fs-base">
-                <i class="ki-duotone ki-arrow-up fs-5 text-success ms-n1">
-                    <span class="path1"></span>
-                    <span class="path2"></span>
-                </i>2.1%</span>
-                <!--end::Badge-->
-            </div>
-            <!--end::Body-->
-        </div>
-        <!--end::Card widget 2-->
-    </div>
-    <!--end::Col-->
-    <!--begin::Col-->
-    <div class="col-sm-6 col-xl-2 mb-5 mb-xl-10">
-        <!--begin::Card widget 2-->
-        <div class="card h-lg-100">
-            <!--begin::Body-->
-            <div class="card-body d-flex justify-content-between align-items-start flex-column">
-                <!--begin::Icon-->
-                <div class="m-0">
-                    <i class="ki-duotone ki-abstract-35 fs-2hx text-gray-600">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                    </i>
-                </div>
-                <!--end::Icon-->
-                <!--begin::Section-->
-                <div class="d-flex flex-column my-7">
-                    <!--begin::Number-->
-                    <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">72.4%</span>
-                    <!--end::Number-->
-                    <!--begin::Follower-->
-                    <div class="m-0">
-                        <span class="fw-semibold fs-6 text-gray-400">OPEX</span>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col">
+                    @php
+                        $count_penyelaras_ppk = DB::table('users')->where('tahap', 6)->count();
+                    @endphp
+                    <div class="card card-border border-info flex-center min-w-175px my-3 p-6">
+                        <span class="fs-4 fw-semibold text-primary pb-1 px-2">Penyelaras PPK IPT</span>
+                        <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
+                        <span data-kt-countup="true" data-kt-countup-value="{{$count_penyelaras_ppk}}">0</span></span>
                     </div>
-                    <!--end::Follower-->
                 </div>
-                <!--end::Section-->
-                <!--begin::Badge-->
-                <span class="badge badge-light-danger fs-base">
-                <i class="ki-duotone ki-arrow-down fs-5 text-danger ms-n1">
-                    <span class="path1"></span>
-                    <span class="path2"></span>
-                </i>0.647%</span>
-                <!--end::Badge-->
-            </div>
-            <!--end::Body-->
-        </div>
-        <!--end::Card widget 2-->
-    </div>
-    <!--end::Col-->
-    <!--begin::Col-->
-    <div class="col-sm-6 col-xl-2 mb-5 mb-xl-10">
-        <!--begin::Card widget 2-->
-        <div class="card h-lg-100">
-            <!--begin::Body-->
-            <div class="card-body d-flex justify-content-between align-items-start flex-column">
-                <!--begin::Icon-->
-                <div class="m-0">
-                    <i class="ki-duotone ki-abstract-26 fs-2hx text-gray-600">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                    </i>
-                </div>
-                <!--end::Icon-->
-                <!--begin::Section-->
-                <div class="d-flex flex-column my-7">
-                    <!--begin::Number-->
-                    <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">106M</span>
-                    <!--end::Number-->
-                    <!--begin::Follower-->
-                    <div class="m-0">
-                        <span class="fw-semibold fs-6 text-gray-400">Saving</span>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col">
+                    @php
+                        $count_pegawai = DB::table('users')->where('tahap', 4)->count();
+                    @endphp
+                    <div class="card card-border border-info flex-center min-w-175px my-3 p-6">
+                        <span class="fs-4 fw-semibold text-primary pb-1 px-2">Pengawai Atasan KPT</span>
+                        <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
+                        <span data-kt-countup="true" data-kt-countup-value="{{$count_pegawai}}">0</span></span>
                     </div>
-                    <!--end::Follower-->
                 </div>
-                <!--end::Section-->
-                <!--begin::Badge-->
-                <span class="badge badge-light-success fs-base">
-                <i class="ki-duotone ki-arrow-up fs-5 text-success ms-n1">
-                    <span class="path1"></span>
-                    <span class="path2"></span>
-                </i>2.1%</span>
-                <!--end::Badge-->
+                <!--end::Col-->
             </div>
-            <!--end::Body-->
+
         </div>
-        <!--end::Card widget 2-->
+        <div class="card-footer">
+            <div class="d-flex flex-center">
+            <a href="#" class="btn btn-primary"><i class="bi bi-person-video2 fs-4 me-2"></i> Lihat Semua</a>
+            </div>
+        </div>
     </div>
-    <!--end::Col-->
-    <!--begin::Col-->
-    <div class="col-sm-6 col-xl-2 mb-5 mb-xl-10">
-        <!--begin::Card widget 2-->
-        <div class="card h-lg-100">
-            <!--begin::Body-->
-            <div class="card-body d-flex justify-content-between align-items-start flex-column">
-                <!--begin::Icon-->
-                <div class="m-0">
-                    <i class="ki-duotone ki-abstract-26 fs-2hx text-gray-600">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                    </i>
-                </div>
-                <!--end::Icon-->
-                <!--begin::Section-->
-                <div class="d-flex flex-column my-7">
-                    <!--begin::Number-->
-                    <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">106M</span>
-                    <!--end::Number-->
-                    <!--begin::Follower-->
-                    <div class="m-0">
-                        <span class="fw-semibold fs-6 text-gray-400">Saving</span>
+
+    {{-- <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">Jumlah Pelajar  &nbsp; <i class="bi bi-people-fill  fs-2qx"></i></h3>
+
+            <div class="card-toolbar">
+                <button type="button" class="btn btn-sm btn-primary">
+                    Daftar
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+           	<!--begin::Stats-->
+               <div class="row">
+                <!--begin::Col-->
+                <div class="col">
+                    <div class="card card-border border-info flex-center min-w-175px my-3 p-6">
+                        <span class="fs-4 fw-semibold text-primary pb-1 px-2">Pelajar IPTA</span>
+                        <span class="fs-lg-2tx fw-bold d-flex justify-content-center">$
+                        <span data-kt-countup="true" data-kt-countup-value="63,240.00">0</span></span>
                     </div>
-                    <!--end::Follower-->
                 </div>
-                <!--end::Section-->
-                <!--begin::Badge-->
-                <span class="badge badge-light-success fs-base">
-                <i class="ki-duotone ki-arrow-up fs-5 text-success ms-n1">
-                    <span class="path1"></span>
-                    <span class="path2"></span>
-                </i>2.1%</span>
-                <!--end::Badge-->
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col">
+                    <div class="card card-border border-info flex-center min-w-175px my-3 p-6">
+                        <span class="fs-4 fw-semibold text-primary pb-1 px-2">Pelajar IPTS</span>
+                        <span class="fs-lg-2tx fw-bold d-flex justify-content-center">$
+                        <span data-kt-countup="true" data-kt-countup-value="8,530.00">0</span></span>
+                    </div>
+                </div>
+                <!--end::Col-->
+
             </div>
-            <!--end::Body-->
+
         </div>
-        <!--end::Card widget 2-->
-    </div>
-    <!--end::Col-->
+        <div class="card-footer">
+            <div class="d-flex flex-center">
+            <a href="#" class="btn btn-primary"><i class="bi bi-person-video2 fs-4 me-2"></i> Lihat Semua</a>
+            </div>
+        </div>
+    </div> --}}
+</div>
+
 </x-default-layout>
