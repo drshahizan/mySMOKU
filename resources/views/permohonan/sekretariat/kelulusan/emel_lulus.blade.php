@@ -1,28 +1,12 @@
 <html>
-    <head>
-        <title>BKOKU: Keputusan Permohonan</title>
-        <style>
-            .number {
-                display: inline-block;
-                width: 2em; 
-                text-align: right;
-            }
-        
-            .content {
-                display: inline-block;
-                margin-left: 1em; 
-            }
-        </style>        
-    </head>
-
     <body>
         <h3>{{ $emailLulus->subjek }}</h3>
-        <p>{{ $emailLulus->pendahuluan }}</p>
+        <p><b>{{ $emailLulus->pendahuluan }}</b></p>
+        <br>
         <p>Tuan/Puan,</p>
         <br>
         <p>
-            <span class="number">2.</span>
-            <span class="content">{{ $emailLulus->isi_kandungan1 }}</span>
+            2.<span style="margin-left: 30px;">{{ $emailLulus->isi_kandungan1 }}</span>
         </p>
         <br>
         <p>{{ $emailLulus->penutup }}</p>
