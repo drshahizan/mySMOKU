@@ -883,11 +883,11 @@ class SekretariatController extends Controller
 
     //Papar Tuntutan Telah Disaring
     public function paparTuntutanKedua($id){
-        $sejarah_t = SejarahTuntutan::where('id', $id)->first();
-        $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
+        $tuntutan = Tuntutan::where('id', $id)->first();
+        $sejarah_t = SejarahTuntutan::where('tuntutan_id', $id)->where('status', $tuntutan->status)->first();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
-        $saringan = SaringanTuntutan::where('tuntutan_id', $sejarah_t->tuntutan_id)->first();
-        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
+        $saringan = SaringanTuntutan::where('tuntutan_id', $id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
         $smoku_id = $tuntutan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();

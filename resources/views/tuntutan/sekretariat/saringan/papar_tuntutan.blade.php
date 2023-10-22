@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {!! printHtmlAttributes('html') !!}>
-<!--begin::Head-->
-<head>
-    <title>{{ config('app.name', 'SistemBKOKU') }}</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta property="og:type" content="article"/>
-    <link rel="stylesheet" href="/assets/css/style.bundle.css">
+<x-default-layout>
     <link rel="stylesheet" href="/assets/css/saringan.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-</head>
 <style>
     body{
         margin: 20px!important;
@@ -124,6 +113,7 @@
                                 $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                 $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
                                 $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja)->value('penaja');
+                                $status = DB::table('bk_status')->where('kod_status', $sejarah_t->status)->value('status');
                                 $status_tuntutan = DB::table('bk_status')->where('kod_status', $saringan->status)->value('status');
                                 // nama pemohon
                                 $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
@@ -212,6 +202,10 @@
                                     @else
                                         <td>Tidak Ditaja</td>
                                     @endif
+                                    <td class="space">&nbsp;</td>
+                                    <td><strong>Status</strong></td>
+                                    <td>:</td>
+                                    <td>{{ucwords(strtolower($status))}} ({{date('d/m/Y', strtotime($sejarah_t->created_at))}})</td>
                                 </tr>
                             </table>
                             <hr>
@@ -524,5 +518,5 @@
     </div>
 </div>
 </body>
-</html>
+</x-default-layout>
 
