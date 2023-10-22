@@ -27,7 +27,7 @@ class KeputusanLayak extends Mailable
      */
     public function build()
     {
-        $subject = "Keputusan Permohonan Anda";
+        $subject = "Keputusan Permohonan Bantuan Khas OKU";
         return $this->subject($subject)
             ->view('permohonan.sekretariat.kelulusan.emel_lulus');
     }
