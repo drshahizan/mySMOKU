@@ -52,9 +52,7 @@
 [
   {
     "nokp": "950623031212",
-    "id_permohonan": "B/2/950623031212",
-    "tarikh_transaksi": "23/10/2023",
-    "amaun": "200"
+    "id_permohonan": "B/2/950623031212"
   }
 ]  
                 </textarea>

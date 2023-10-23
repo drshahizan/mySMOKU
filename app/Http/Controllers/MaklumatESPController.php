@@ -223,8 +223,7 @@ class MaklumatESPController extends Controller
         }
         
         $queryString = http_build_query($parameters);
-        dd($queryString);
-
+        
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json'
