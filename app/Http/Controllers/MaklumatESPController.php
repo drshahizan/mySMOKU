@@ -101,11 +101,26 @@ class MaklumatESPController extends Controller
 
     public function receiveData(Request $request)
     {
+        $logDirectory = 'storage/logs/esp';
+        $logFilename = 'log_BayaranTuntutanIndividu_' . date('Y-m-d') . '.log';
+        $logPath = $logDirectory . $logFilename;
+
+        $message = 'API call started';
+        $logMessage = date('H:i:s') . ' - ' . $message . PHP_EOL;
+        if (file_exists($logPath)) {
+            file_put_contents($logPath, $logMessage, FILE_APPEND);
+        } else {
+            if (!is_dir($logDirectory)) {
+                mkdir($logDirectory);
+            }
+            file_put_contents($logPath, $logMessage);
+        }
         
         $contentTypeHeader = $request->header('Content-Type');
         //dd($contentTypeHeader);
         if (strpos($contentTypeHeader, 'application/json') !== false) {
             $jsonString = $request->json()->all();
+            
             
             $responses = [];
 
@@ -114,7 +129,7 @@ class MaklumatESPController extends Controller
                 $no_rujukan_permohonan = $jsonString['id_permohonan'];
                 $date = DateTime::createFromFormat('d/m/Y', $jsonString['tarikh_transaksi']);
                 $formattedDate = $date->format('Y-m-d');
-
+                
                 $smoku = Smoku::where('no_kp', $jsonString['nokp'])->first();
                 // Check if $smoku is null
                 if ($smoku === null) {
@@ -163,9 +178,19 @@ class MaklumatESPController extends Controller
 
             } 
             
-            
+            if ($responses) {
+                // echo "API Response: " . $response;
+                file_put_contents($logPath, 'req: ' . PHP_EOL . json_encode($jsonString, JSON_PRETTY_PRINT) . PHP_EOL, FILE_APPEND);
+                file_put_contents($logPath, 'res: ' . PHP_EOL . json_encode($responses, JSON_PRETTY_PRINT) . PHP_EOL, FILE_APPEND);
 
-            return response()->json(['helooooo' => $responses], 200);
+                return response()->json(['helooooo' => $responses], 200);
+            } else {
+                // echo "Failed to connect to the API.";
+                file_put_contents($logPath, 'Failed', FILE_APPEND);
+
+            }
+
+            
 
         } else {
             $jsonString = $request->input('data');
@@ -182,12 +207,12 @@ class MaklumatESPController extends Controller
                     $date = DateTime::createFromFormat('d/m/Y', $dataField->tarikh_transaksi);
                     $formattedDate = $date->format('Y-m-d');
     
-                    $smoku = Smoku::where('no_kp', $no_kp)->first();
+                    $smoku = Smoku::where('no_kp', $dataField->nokp)->first();
                     // Check if $smoku is null
                     if ($smoku === null) {
                         $responses[] = [
-                            'nokp' => $no_kp,
-                            'id_permohonan' => $no_rujukan_permohonan,
+                            'nokp' => $dataField->nokp,
+                            'id_permohonan' => $dataField->id_permohonan,
                             'tarikh_transaksi' => $dataField->tarikh_transaksi,
                             'amaun' => $dataField->amount,
                             'status' => 'BKOKU tiada data nokp'
@@ -196,7 +221,7 @@ class MaklumatESPController extends Controller
 
                         $affectedRows = DB::table('permohonan')
                             ->where('smoku_id', $smoku->id)
-                            ->where('no_rujukan_permohonan', $no_rujukan_permohonan)
+                            ->where('no_rujukan_permohonan', $dataField->id_permohonan)
                             ->update([
                                 'yuran_dibayar' => number_format($dataField->amount, 2, '.', ''),
                                 'tarikh_transaksi' => $formattedDate,
@@ -206,8 +231,8 @@ class MaklumatESPController extends Controller
                         if ($affectedRows > 0) {
                             // Data was updated successfully
                             $responses[] = [
-                                'nokp' => $no_kp,
-                                'id_permohonan' => $no_rujukan_permohonan,
+                                'nokp' => $dataField->nokp,
+                                'id_permohonan' => $dataField->id_permohonan,
                                 'tarikh_transaksi' => $dataField->tarikh_transaksi,
                                 'amaun' => $dataField->amount,
                                 'status' => 'DATA DITERIMA dan dikemaskini'
@@ -215,8 +240,8 @@ class MaklumatESPController extends Controller
                         } else {
                             // Data was not updated
                             $responses[] = [
-                                'nokp' => $no_kp,
-                                'id_permohonan' => $no_rujukan_permohonan,
+                                'nokp' => $dataField->no_kp,
+                                'id_permohonan' => $dataField->id_permohonan,
                                 'tarikh_transaksi' => $dataField->tarikh_transaksi,
                                 'amaun' => $dataField->amount,
                                 'status' => 'DATA TIDAK DIKEMASKINI lahhhh'
@@ -226,7 +251,17 @@ class MaklumatESPController extends Controller
 
                     }
                 }
-                return response()->json(['errorrrrrrrr' => $responses], 200);
+                if ($responses) {
+                    // echo "API Response: " . $response;
+                    file_put_contents($logPath, 'req: ' . PHP_EOL . json_encode($jsonString, JSON_PRETTY_PRINT) . PHP_EOL, FILE_APPEND);
+                    file_put_contents($logPath, 'res: ' . PHP_EOL . json_encode($responses, JSON_PRETTY_PRINT) . PHP_EOL, FILE_APPEND);
+
+                    return response()->json(['data diterima' => $responses], 200);
+                } else {
+                    // echo "Failed to connect to the API.";
+                    file_put_contents($logPath, 'Failed', FILE_APPEND);
+
+                }
                 
             } else {
                 return response()->json(['error' => 'Invalid data format'], 400);
