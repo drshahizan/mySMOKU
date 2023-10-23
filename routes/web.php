@@ -43,6 +43,8 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
     Route::post('/statusESP', [MaklumatESPController::class, 'receiveData']);
     Route::get('/statusESP/dibayar', [MaklumatESPController::class, 'statusDibayar']);
     Route::get('/test/api', [MaklumatESPController::class, 'test']);
+    Route::get('/requery', [MaklumatESPController::class, 'testrequery']);
+    Route::post('/requery', [MaklumatESPController::class, 'makeApiRequest'])->name('requery.esp');
 //});
 
 
