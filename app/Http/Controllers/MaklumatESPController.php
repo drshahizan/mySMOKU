@@ -101,10 +101,16 @@ class MaklumatESPController extends Controller
 
     public function receiveData(Request $request)
     {
+        //$jsonString = $request->input('data');
+        //$jsonString = $request->json()->all();
+       // $data = json_decode($jsonString);
+        
         
         $contentTypeHeader = $request->header('Content-Type');
+        //dd($contentTypeHeader);
         if (strpos($contentTypeHeader, 'application/json') !== false) {
             $jsonString = $request->json()->all();
+            
             $responses = [];
 
             foreach ($jsonString as $jsonString) {
@@ -125,20 +131,35 @@ class MaklumatESPController extends Controller
                     ];
                 } else {
 
-                    DB::table('permohonan')->where('smoku_id', $smoku->id)->where('no_rujukan_permohonan', $no_rujukan_permohonan)
-                    ->update([
-                        'yuran_dibayar' => number_format($jsonString['amount'], 2, '.', ''),
-                        'tarikh_transaksi' => $formattedDate,
-                        'status' => 8,
-                    ]);
+                    $affectedRows = DB::table('permohonan')
+                        ->where('smoku_id', $smoku->id)
+                        ->where('no_rujukan_permohonan', $no_rujukan_permohonan)
+                        ->update([
+                            'yuran_dibayar' => number_format($jsonString['amount'], 2, '.', ''),
+                            'tarikh_transaksi' => $formattedDate,
+                            'status' => 8,
+                        ]);
 
-                    $responses[] = [
-                        'nokp' => $no_kp,
-                        'id_permohonan' => $no_rujukan_permohonan,
-                        'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
-                        'amaun' => $jsonString['amount'],
-                        'status' => 'Data diterima'
-                    ];   
+                    if ($affectedRows > 0) {
+                        // Data was updated successfully
+                        $responses[] = [
+                            'nokp' => $no_kp,
+                            'id_permohonan' => $no_rujukan_permohonan,
+                            'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
+                            'amaun' => $jsonString['amount'],
+                            'status' => 'Data diterima dan update'
+                        ];
+                    } else {
+                        // Data was not updated
+                        $responses[] = [
+                            'nokp' => $no_kp,
+                            'id_permohonan' => $no_rujukan_permohonan,
+                            'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
+                            'amaun' => $jsonString['amount'],
+                            'status' => 'Data tidak diupdate'
+                        ];
+                    }
+  
 
                 }
 
@@ -151,6 +172,8 @@ class MaklumatESPController extends Controller
         } else {
             $jsonString = $request->input('data');
             $data = json_decode($jsonString);
+
+
             $responses = [];
 
             if (is_array($data)) {
@@ -173,20 +196,35 @@ class MaklumatESPController extends Controller
                         ];
                     }else{
 
-                        DB::table('permohonan')->where('smoku_id', $smoku->id)->where('no_rujukan_permohonan', $no_rujukan_permohonan)
-                        ->update([
-                            'yuran_dibayar' => number_format($dataField->amount, 2, '.', ''),
-                            'tarikh_transaksi' => $formattedDate,
-                            'status' => 8,
-                        ]);
+                        $affectedRows = DB::table('permohonan')
+                            ->where('smoku_id', $smoku->id)
+                            ->where('no_rujukan_permohonan', $no_rujukan_permohonan)
+                            ->update([
+                                'yuran_dibayar' => number_format($dataField->amount, 2, '.', ''),
+                                'tarikh_transaksi' => $formattedDate,
+                                'status' => 8,
+                            ]);
 
-                        $responses[] = [
-                            'nokp' => $no_kp,
-                            'id_permohonan' => $no_rujukan_permohonan,
-                            'tarikh_transaksi' => $dataField->tarikh_transaksi,
-                            'amaun' => $dataField->amount,
-                            'status' => 'DATA DITERIMA'
-                        ];
+                        if ($affectedRows > 0) {
+                            // Data was updated successfully
+                            $responses[] = [
+                                'nokp' => $no_kp,
+                                'id_permohonan' => $no_rujukan_permohonan,
+                                'tarikh_transaksi' => $dataField->tarikh_transaksi,
+                                'amaun' => $dataField->amount,
+                                'status' => 'DATA DITERIMA dan dikemaskini'
+                            ];
+                        } else {
+                            // Data was not updated
+                            $responses[] = [
+                                'nokp' => $no_kp,
+                                'id_permohonan' => $no_rujukan_permohonan,
+                                'tarikh_transaksi' => $dataField->tarikh_transaksi,
+                                'amaun' => $dataField->amount,
+                                'status' => 'DATA TIDAK DIKEMASKINI lahhhh'
+                            ];
+                        }
+
 
                     }
                 }
