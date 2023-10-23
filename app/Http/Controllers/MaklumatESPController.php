@@ -223,8 +223,12 @@ class MaklumatESPController extends Controller
         }
         
         $queryString = http_build_query($parameters);
+        dd($queryString);
 
         $curl = curl_init();
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json'
+        ]);
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_URL, 'http://espbstg.mohe.gov.my/api/studentsStatus.php');
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
