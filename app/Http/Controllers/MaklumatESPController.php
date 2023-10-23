@@ -124,7 +124,7 @@ class MaklumatESPController extends Controller
                 return response()->json(['error' => 'Invalid or empty JSON data.'], 400);
             }
             $responses = [];
-            //dd($jsonData);
+            // dd($jsonData);
         
             foreach ($jsonData as $json) {
                 // Validate the presence of required keys in $json
@@ -178,7 +178,7 @@ class MaklumatESPController extends Controller
         
             return response()->json(['responsesssss' => $responses], 200);
         } catch (Exception $e) {
-            return response()->json(['error' => $responses], 400);
+            return response()->json(['error' => $jsonData], 400);
         }
         
     
