@@ -6,7 +6,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-  <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+  <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
   
   </head>
       <!--begin::Page title-->
@@ -48,14 +48,15 @@
             <form class="form" action="http://bkokudev.mohe.gov.my/statusESP" method="post">
                 
                 <textarea name="data" id="data" rows="10" cols="50">
-[
+
   {
-    "nokp" : "900623142223",
-    "id_permohonan" : "B/2/900623142223",
+    "nokp" : "950623031212",
+    "id_permohonan" : "B/2/950623031212",
     "tarikh_transaksi" : "23/10/2023",
-    "amount" : "2000"
+    "amount" : "100"
   }
-]
+  
+                  
                 </textarea>
                 <!--begin::action-->
                 <div class="footer">
@@ -79,33 +80,21 @@
     <!--end::Content-->
   </div>
   <script>
-    document.getElementById('json-form').addEventListener('submit', function(event) {
-        // Prevent the form from submitting normally
-        event.preventDefault();
+    fetch('http://bkokudev.mohe.gov.my/statusESP', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        data: JSON.parse(document.getElementById('data').value)
+    })
+})
+.then(response => response.json())
+.then(data => {
+    console.log(data);
+})
+.catch(error => {
+    console.error('Error:', error);
+});
 
-        // Get the form data as a JSON object
-        var form = document.getElementById('json-form');
-        var formData = new FormData(form);
-        var jsonData = {};
-        formData.forEach(function(value, key){
-            jsonData[key] = value;
-        });
-
-        // Set the Content-Type header to application/json
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', form.action, true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        
-        // Convert JSON object to JSON string
-        var jsonDataString = JSON.stringify(jsonData);
-
-        // Send the JSON data as the request body
-        xhr.send(jsonDataString);
-
-        // Handle the response here if needed
-        xhr.onload = function() {
-            // Handle the response from the server
-            console.log(xhr.responseText);
-        };
-    });
 </script>
