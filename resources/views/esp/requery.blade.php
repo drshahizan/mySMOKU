@@ -51,9 +51,9 @@
                 <textarea name="data" id="data" rows="10" cols="50">
 [
   {
-    "nokp": "950623031212",
+    "noic": "950623031212",
     "id_permohonan": "B/2/950623031212",
-    "id_tuntutan" => "",
+    "id_tuntutan": ""
   }
 ]  
                 </textarea>
