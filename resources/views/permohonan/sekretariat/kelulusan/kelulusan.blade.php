@@ -264,10 +264,10 @@
                                             </div>
 
                                             <div class="col-md-3" style="padding-left: 80px;">
-                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
-                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a>
                                             </div>
