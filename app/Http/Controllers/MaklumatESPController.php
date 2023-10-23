@@ -161,7 +161,15 @@ class MaklumatESPController extends Controller
 
                  
 
-            }          
+            } 
+            
+            $responses[] = [
+                'nokp' => $jsonString['nokp'],
+                'id_permohonan' => $jsonString['id_permohonan'],
+                'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
+                'amaun' => $jsonString['amount'],
+                'status' => 'test test'
+            ];
 
             return response()->json(['helooooo' => $responses], 200);
 
