@@ -101,10 +101,6 @@ class MaklumatESPController extends Controller
 
     public function receiveData(Request $request)
     {
-        //$jsonString = $request->input('data');
-        //$jsonString = $request->json()->all();
-       // $data = json_decode($jsonString);
-        
         
         $contentTypeHeader = $request->header('Content-Type');
         //dd($contentTypeHeader);
@@ -228,7 +224,7 @@ class MaklumatESPController extends Controller
 
                     }
                 }
-                return response()->json(['received_data' => $responses], 200);
+                return response()->json(['errorrrrrrrr' => $responses], 200);
                 
             } else {
                 return response()->json(['error' => 'Invalid data format'], 400);
