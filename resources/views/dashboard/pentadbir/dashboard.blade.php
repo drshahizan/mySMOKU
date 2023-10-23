@@ -14,46 +14,34 @@
 	</div>
 	<!--end::Page title-->
 
-
     <br>
-    <!--begin::Row-->
 
-
-
+    <!--begin::First Row-->
     <div class="card shadow-sm">
         <div class="card-header">
-            <h3 class="card-title">Jumlah Pengguna  &nbsp; <i class="bi bi-people-fill  fs-2qx"></i></h3>
+            <h2 class="card-title">
+                <i class="bi bi-people-fill fs-2qx"></i>
+                &nbsp;&nbsp;Jumlah Pengguna
+            </h2>
 
             <div class="card-toolbar">
-                    <a href="{{ route('daftarpengguna.post')}}"class="btn btn-primary"><i class="bi bi-person-fill-add fs-4 me-2"></i>Tambah Penggguna</a>
-
-                </button>
+                <a href="{{ route('daftarpengguna')}}"class="btn btn-primary btn-sm"><i class="bi bi-person-video2 fs-4 me-2"></i> Lihat Semua</a>
             </div>
         </div>
+
         <div class="card-body">
            	<!--begin::Stats-->
                <div class="row">
                 <!--begin::Col-->
                 <div class="col">
                     @php
-                        $count_sekretariat = DB::table('users')->where('tahap', 3)->count();
-                    @endphp
-                    <div class="card card-border border-info flex-center min-w-175px my-3 p-6">
-                        <span class="fs-4 fw-semibold text-primary pb-1 px-2">Sekretariat KPT</span>
-                        <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
-                        <span data-kt-countup="true" data-kt-countup-value="{{$count_sekretariat}}">0</span></span>
-                    </div>
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col">
-                    @php
                         $count_penyelaras_bkoku = DB::table('users')->where('tahap', 2)->count();
                     @endphp
-                    <div class="card card-border border-info flex-center min-w-175px my-3 p-6">
-                        <span class="fs-4 fw-semibold text-primary pb-1 px-2">Penyelaras BKOKU IPT</span>
+                    <div class="card card-border border-success flex-center min-w-175px my-3 p-6">
+                        <span class="fs-4 fw-semibold pb-1 px-2">Penyelaras BKOKU IPT</span>
                         <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
-                        <span data-kt-countup="true" data-kt-countup-value="{{$count_penyelaras_bkoku}}">0</span></span>
+                            <span data-kt-countup="true" data-kt-countup-value="{{$count_penyelaras_bkoku}}">{{$count_penyelaras_bkoku}}</span>
+                        </span>
                     </div>
                 </div>
                 <!--end::Col-->
@@ -62,10 +50,24 @@
                     @php
                         $count_penyelaras_ppk = DB::table('users')->where('tahap', 6)->count();
                     @endphp
-                    <div class="card card-border border-info flex-center min-w-175px my-3 p-6">
-                        <span class="fs-4 fw-semibold text-primary pb-1 px-2">Penyelaras PPK IPT</span>
+                    <div class="card card-border border-danger flex-center min-w-175px my-3 p-6">
+                        <span class="fs-4 fw-semibold pb-1 px-2">Penyelaras PPK IPT</span>
                         <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
-                        <span data-kt-countup="true" data-kt-countup-value="{{$count_penyelaras_ppk}}">0</span></span>
+                            <span data-kt-countup="true" data-kt-countup-value="{{$count_penyelaras_ppk}}">{{$count_penyelaras_ppk}}</span>
+                        </span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col">
+                    @php
+                        $count_sekretariat = DB::table('users')->where('tahap', 3)->count();
+                    @endphp
+                    <div class="card card-border border-warning flex-center min-w-175px my-3 p-6">
+                        <span class="fs-4 fw-semibold pb-1 px-2">Sekretariat KPT</span>
+                        <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
+                            <span data-kt-countup="true" data-kt-countup-value="{{$count_sekretariat}}">{{$count_sekretariat}}</span>
+                        </span>
                     </div>
                 </div>
                 <!--end::Col-->
@@ -75,22 +77,20 @@
                         $count_pegawai = DB::table('users')->where('tahap', 4)->count();
                     @endphp
                     <div class="card card-border border-info flex-center min-w-175px my-3 p-6">
-                        <span class="fs-4 fw-semibold text-primary pb-1 px-2">Pengawai Atasan KPT</span>
+                        <span class="fs-4 fw-semibold pb-1 px-2">Pengawai Atasan KPT</span>
                         <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
-                        <span data-kt-countup="true" data-kt-countup-value="{{$count_pegawai}}">0</span></span>
+                            <span data-kt-countup="true" data-kt-countup-value="{{$count_pegawai}}">{{$count_pegawai}}</span>
+                        </span>
                     </div>
                 </div>
                 <!--end::Col-->
             </div>
-
-        </div>
-        <div class="card-footer">
-            <div class="d-flex flex-center">
-            <a href="{{ route('daftarpengguna')}}"class="btn btn-primary"><i class="bi bi-person-video2 fs-4 me-2"></i> Lihat Semua</a>
-            </div>
         </div>
     </div>
 
+    <br>
+
+    <!--begin::Second Row-->
     {{-- <div class="card shadow-sm">
         <div class="card-header">
             <h3 class="card-title">Jumlah Pelajar  &nbsp; <i class="bi bi-people-fill  fs-2qx"></i></h3>
@@ -122,16 +122,7 @@
                     </div>
                 </div>
                 <!--end::Col-->
-
-            </div>
-
-        </div>
-        <div class="card-footer">
-            <div class="d-flex flex-center">
-            <a href="#" class="btn btn-primary"><i class="bi bi-person-video2 fs-4 me-2"></i> Lihat Semua</a>
             </div>
         </div>
     </div> --}}
-</div>
-
 </x-default-layout>

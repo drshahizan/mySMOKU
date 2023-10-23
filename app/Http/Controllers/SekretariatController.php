@@ -19,6 +19,7 @@ use App\Models\Smoku;
 use App\Models\TuntutanItem;
 use App\Models\Waris;
 use App\Models\Akademik;
+use App\Models\InfoIpt;
 use App\Models\Kelulusan;
 use App\Models\MaklumatKementerian;
 use App\Models\SuratTawaran;
@@ -137,23 +138,6 @@ class SekretariatController extends Controller
         return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
     }
 
-    // public function peringkatPengajian()
-    // {
-    //     $recordsBKOKU = TamatPengajian::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
-    //         ->join('smoku', 'tamat_pengajian.smoku_id', '=', 'smoku.id')
-    //         ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat')
-    //         ->where('smoku_akademik.status', 1)
-    //         ->whereIn('smoku_akademik.smoku_id', function ($query) {
-    //             $query->select('smoku_id')
-    //                   ->from('permohonan')
-    //                   ->where('program', 'BKOKU');
-    //         })
-    //         ->select('tamat_pengajian.*','smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
-    //         ->get();
-
-    //     return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsBKOKU'));
-    // }
-
     public function peringkatPengajian()
     {
         $recordsBKOKU = TamatPengajian::select('tamat_pengajian.*', 'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
@@ -210,47 +194,6 @@ class SekretariatController extends Controller
         return redirect()->back()->with('success', 'Peringkat Pengajian updated successfully.');
     }
 
-    // public function kemaskiniPeringkatPengajian(Request $request, $id)
-    // {
-    //     // Check if the send request have same "smoku_id" and "peringkat_pengajian" in db
-    //     $existingRecord = Akademik::where('smoku_id', $id)->where('peringkat_pengajian', $request->peringkat_pengajian)->first();
-    //     // Check if there are two same smoku_id only but different "peringkat_pengajian" between exist record and new record
-    //     $existStudent = Akademik::where('smoku_id', $id)->first();
-
-    //     if ($existingRecord) {
-    //         $existingRecord->update(['peringkat_pengajian' => $request->peringkat_pengajian,]);
-    //     }
-    //     else{
-    //         // Update the existing record's "status" to 0
-    //         $existStudent->update(['status' => 0]);
-
-    //         // Create a new record with the specified "status" as 1
-    //         $newRecord = new Akademik([
-    //             'smoku_id' => $id,
-    //             'no_pendaftaran_pelajar' => NULL,
-    //             'peringkat_pengajian' => $request->peringkat_pengajian,
-    //             'nama_kursus' => NULL,
-    //             'id_institusi' => NULL,
-    //             'sesi' => NULL,
-    //             'tarikh_mula' => NULL,
-    //             'tarikh_tamat' => NULL,
-    //             'sem_semasa' => NULL,
-    //             'tempoh_pengajian' => NULL,
-    //             'bil_bulan_per_sem' => NULL,
-    //             'mod' => NULL,
-    //             'cgpa' => NULL,
-    //             'sumber_biaya' => NULL,
-    //             'sumber_lain' => NULL,
-    //             'nama_penaja' => NULL,
-    //             'penaja_lain' => NULL,
-    //             'status' => 1, // Set the status as 1 for the new record
-    //         ]);
-    //         $newRecord->save();
-    //     }
-
-    //     return redirect()->back()->with('success', 'Peringkat Pengajian updated successfully.');
-    // }
-
     //Step 1: Editing Data - Allow users to view and edit the current data.
     public function previewSuratTawaran()
     {
@@ -299,7 +242,8 @@ class SekretariatController extends Controller
     public function senaraiKelulusanPermohonan()
     {
         $kelulusan = Permohonan::where('status', '=','4')->get();
-        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan'));
+        $institusiPengajian = InfoIpt::all();
+        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan','institusiPengajian'));
     }
 
     public function cetakSenaraiPemohonExcel($programCode)

@@ -22,9 +22,7 @@ class PentadbirController extends Controller
 {
     public function index()
     {
-           
         return view('dashboard.pentadbir.dashboard');
-
     }
     
     public function daftar()
@@ -39,14 +37,10 @@ class PentadbirController extends Controller
                
 
         return view('pages.pentadbir.daftarpengguna', compact('user', 'tahap', 'infoipt','infoppk'));
-
-
     }
 
     public function store(Request $request)
     {   
-       
-
         $user = User::where('no_kp', '=', $request->no_kp)->first();
         if ($user === null) {
             $user = User::create([
@@ -86,10 +80,7 @@ class PentadbirController extends Controller
             return redirect()->route('daftarpengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' .$request->nama);
         }
 
-        
         return redirect()->route('daftarpengguna');
-
-
     }
 
     public function checkConnectionSmoku()
@@ -137,7 +128,6 @@ class PentadbirController extends Controller
         $maklumat = MaklumatKementerian::get();
            
         return view('pages.pentadbir.alamat', compact('maklumat'));
-
     }
 
     public function save(Request $request)
@@ -175,11 +165,8 @@ class PentadbirController extends Controller
                 'faks' => $request->faks,
             ]);
         }
-
-           
+ 
         return redirect()->route('alamat');
-
-    
     }
 
     public function tarikh()
@@ -187,7 +174,6 @@ class PentadbirController extends Controller
         $tarikh = TarikhIklan::orderBy('created_at', 'desc')->first(); 
 
         return view('kemaskini.pentadbir.tarikh_iklan', compact('tarikh'));
-
     }
 
     public function simpanTarikh(Request $request)
@@ -221,11 +207,8 @@ class PentadbirController extends Controller
                  Log::error('Invalid email address: ' . $invalidEmail);
             }
         }
-
-          
+  
         return redirect()->route('tarikh');
-
-    
     }
 
     public function jumlahTuntutan()
@@ -233,7 +216,6 @@ class PentadbirController extends Controller
         $jumlah = JumlahTuntutan::get();
            
         return view('kemaskini.pentadbir.jumlah_tuntutan', compact('jumlah'));
-
     }
 
     public function simpanJumlah(Request $request)
@@ -259,8 +241,5 @@ class PentadbirController extends Controller
         }
         
         return redirect()->route('jumlah.tuntutan');
-    
     }
-    
-
 }
