@@ -202,6 +202,40 @@ class MaklumatESPController extends Controller
     
     }
 
+    public function testrequery(){
+
+
+        return view('esp.requery');
+    }
+
+    function makeApiRequest(Request $request) {
+        $jsonData = $request->input('data');
+        $parameters = json_decode($jsonData, true); // Decode JSON data
+
+        //dd($parameters);
+    
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            // Handle JSON decoding error
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid JSON data received.'
+            ], 400); // 400 Bad Request status code indicates a client error
+        }
+    
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_URL, 'http://espbstg.mohe.gov.my/api/studentsStatus.php');
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $parameters);
+        $result = curl_exec($curl);
+        curl_close($curl);
+    
+        // Handle the result or return it, depending on your use case
+        return $result;
+    }
+    
+
+
     public function test(){
 
 
