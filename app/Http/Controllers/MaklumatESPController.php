@@ -165,7 +165,7 @@ class MaklumatESPController extends Controller
             } 
             
             if ($responses) {
-                 echo "API Response: " . $responses;
+                //  echo "API Response: " . $responses;
 
                 return response()->json(['helooooo' => $responses], 200);
             } else {
@@ -236,7 +236,7 @@ class MaklumatESPController extends Controller
                     }
                 }
                 if ($responses) {
-                     echo "API Response: " . $responses;
+                    //  echo "API Response: " . $responses;
 
                     return response()->json(['data diterima' => $responses], 200);
                 } else {
