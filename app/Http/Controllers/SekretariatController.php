@@ -239,13 +239,24 @@ class SekretariatController extends Controller
         return view('kemaskini.sekretariat.surat_tawaran.terkini', compact('suratTawaran','maklumat_kementerian'));
     }
 
-    public function senaraiKelulusanPermohonan()
+    public function senaraiKelulusanPermohonan(Request $request)
     {
-        $kelulusan = Permohonan::where('status', '=','4')->get();
-        $institusiPengajian = InfoIpt::all();
-        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan','institusiPengajian'));
-    }
+        $query = Permohonan::select('permohonan.*') // Select all columns from the 'permohonan' table
+            ->where('permohonan.status', '=', '4'); // Specify the 'status' column belongs to 'permohonan'
 
+        if ($request->has('institusi')) {
+            $selectedInstitusi = $request->input('institusi');
+            $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
+        }
+
+        $kelulusan = $query->get();
+        $institusiPengajian = InfoIpt::all();
+
+        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan', 'institusiPengajian'));
+    }
+        
     public function cetakSenaraiPemohonExcel($programCode)
     {
         return Excel::download(new SenaraiPendek($programCode), 'PermohonanDisokong.xlsx');
