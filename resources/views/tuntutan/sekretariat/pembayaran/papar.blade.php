@@ -94,7 +94,7 @@
                             <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Pembayaran</b></li>
                         </ul>
                         <div class="ml-auto">
-                            <a href="{{url('tuntutan/sekretariat/pembayaran/kemaskini/'.$sejarah_t->id)}}">
+                            <a href="{{url('tuntutan/sekretariat/pembayaran/kemaskini/'.$tuntutan->id)}}">
                                 <button type="button" class="btn btn-sm my-btn btn-default" title="Kemaskini">
                                     <i>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

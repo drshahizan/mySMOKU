@@ -1050,31 +1050,28 @@ class SekretariatController extends Controller
     }
 
     public function paparPembayaran($id){
-        $sejarah_t = SejarahTuntutan::where('id', $id)->first();
-        $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
+        $tuntutan = Tuntutan::where('id', $id)->first();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
-        $saringan = SaringanTuntutan::where('tuntutan_id', $sejarah_t->tuntutan_id)->first();
-        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
+        $saringan = SaringanTuntutan::where('tuntutan_id', $id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
         $smoku_id = $tuntutan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('tuntutan.sekretariat.pembayaran.papar',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
+        return view('tuntutan.sekretariat.pembayaran.papar',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','saringan'));
     }
 
     public function kemaskiniPembayaran($id){
-        $sejarah_t = SejarahTuntutan::where('id', $id)->first();
-        $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
+        $tuntutan = Tuntutan::where('id', $id)->first();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
-        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
         $smoku_id = $tuntutan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('tuntutan.sekretariat.pembayaran.kemaskini',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
+        return view('tuntutan.sekretariat.pembayaran.kemaskini',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik'));
     }
 
     public function hantarPembayaran(Request $request, $id){
-        $t_id = SejarahTuntutan::where('id', $id)->value('tuntutan_id');
-        Tuntutan::where('id', $t_id)
+        Tuntutan::where('id', $id)
             ->update([
                 'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
                 'yuran_disokong'        =>  $request->get('yuran_disokong'),
