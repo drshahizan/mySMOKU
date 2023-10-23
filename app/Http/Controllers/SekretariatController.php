@@ -963,6 +963,18 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.sejarah.papar_saringan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
     }
 
+    public function paparRekodPembayaran($id){
+        $sejarah_t = SejarahTuntutan::where('id', $id)->first();
+        $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
+        $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $saringan = SaringanTuntutan::where('tuntutan_id', $sejarah_t->tuntutan_id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
+        $smoku_id = $tuntutan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('tuntutan.sekretariat.sejarah.papar_pembayaran',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','saringan','sejarah_t'));
+    }
+
     public function kemaskiniSaringan($id){
         $sejarah_t = SejarahTuntutan::where('id', $id)->first();
         $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();

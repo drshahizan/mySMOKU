@@ -24,12 +24,12 @@
     <!--begin::Page title-->
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <!--begin::Title-->
-        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Permohonan</h1>
+        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Tuntutan</h1>
         <!--end::Title-->
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Permohonan</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Tuntutan</li>
             <!--end::Item-->
             <!--begin::Item-->
             <li class="breadcrumb-item">
@@ -53,14 +53,14 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Sejarah Permohonan <br><small> Klik ID Permohonan untuk melihat maklumat lanjut rekod permohonan</small></h2>
+                            <h2>Sejarah Tuntutan <br><small> Klik ID Tuntutan untuk melihat maklumat lanjut rekod tuntutan</small></h2>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                     <thead>
                                     <tr>
-                                        <th style="width: 50%"><b>ID Permohonan</b></th>
+                                        <th style="width: 50%"><b>ID Tuntutan</b></th>
                                         <th style="width: 15%" class="text-center"><b>Tarikh</b></th>
                                         <th style="width: 15%" class="text-center"><b>Status</b></th>
                                     </tr>
@@ -94,7 +94,7 @@
                                             @elseif ($item['status']=='7')
                                                 <td><a href="{{url('tuntutan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}" target="_blank">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
                                             @elseif ($item['status']=='8')
-                                                <td><a href="{{url('tuntutan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}" target="_blank">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
+                                                <td><a href="{{url('tuntutan/sekretariat/sejarah/papar-pembayaran/'.$item['id'])}}" target="_blank">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
                                             @elseif ($item['status']=='9')
                                                 <td><a href="{{url('tuntutan/sekretariat/sejarah/papar-tuntutan/'.$item['id'])}}" target="_blank">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
                                             @endif
