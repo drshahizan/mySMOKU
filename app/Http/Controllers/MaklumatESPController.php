@@ -240,7 +240,7 @@ class MaklumatESPController extends Controller
                         } else {
                             // Data was not updated
                             $responses[] = [
-                                'nokp' => $dataField->no_kp,
+                                'nokp' => $dataField->nokp,
                                 'id_permohonan' => $dataField->id_permohonan,
                                 'tarikh_transaksi' => $dataField->tarikh_transaksi,
                                 'amaun' => $dataField->amount,
