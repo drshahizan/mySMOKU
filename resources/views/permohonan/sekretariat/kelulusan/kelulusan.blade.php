@@ -73,10 +73,11 @@
                                     <form action="#" method="GET">
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <select name="status" class="form-select" style="margin-left: 20px">
+                                                <select name="institusi" class="form-select" style="margin-left: 20px">
                                                     <option value="">Pilih Institusi Pengajian</option>
-                                                    <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
-                                                    <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
+                                                    @foreach ($institusiPengajian as $institusi)
+                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->nama_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                     
@@ -248,10 +249,11 @@
                                     <form action="#" method="GET">
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <select name="status" class="form-select" style="margin-left: 20px">
+                                                <select name="institusi" class="form-select" style="margin-left: 20px">
                                                     <option value="">Pilih Institusi Pengajian</option>
-                                                    <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
-                                                    <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
+                                                    @foreach ($institusiPengajian as $institusi)
+                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->nama_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                     
