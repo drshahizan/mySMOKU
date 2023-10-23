@@ -45,7 +45,7 @@
           <!--begin::Card body-->
           <div class="card-body pt-0">
             <!--begin::Form-->
-            <form class="form" action="{{ route('requery.esp') }}" method="post">
+            <form class="form" action="http://espbstg.mohe.gov.my/api/studentsStatus.php" method="post">
               @csrf
                 
                 <textarea name="data" id="data" rows="10" cols="50">
