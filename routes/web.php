@@ -169,6 +169,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('permohonan/sekretariat/sejarah/sejarah-permohonan', [SaringanController::class, 'sejarahPermohonan']);
     Route::get('permohonan/sekretariat/sejarah/rekod-permohonan/{id}', [SaringanController::class, 'rekodPermohonan'])->name('rekod.permohonan.id');
     Route::get('permohonan/sekretariat/sejarah/papar-permohonan/{id}', [SaringanController::class, 'paparRekodPermohonan'])->name('papar.rekod.permohonan.id');
+    Route::get('permohonan/sekretariat/sejarah/papar-pembayaran/{id}', [SaringanController::class, 'paparRekodPembayaran'])->name('papar.rekod.pembayaran.id');
     Route::get('permohonan/sekretariat/sejarah/papar-saringan/{id}', [SaringanController::class, 'paparRekodSaringan'])->name('papar.rekod.saringan.id');
     Route::get('permohonan/sekretariat/sejarah/papar-kelulusan/{id}', [SaringanController::class, 'paparRekodKelulusan'])->name('papar.rekod.kelulusan.id');
     Route::get('permohonan/sekretariat/sejarah/kemaskini-saringan/{id}', [SaringanController::class, 'kemaskiniSaringan'])->name('kemaskini.saringan.id');

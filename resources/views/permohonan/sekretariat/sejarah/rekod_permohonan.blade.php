@@ -96,7 +96,7 @@
                                                 @elseif ($item['status']=='7')
                                                     <td><a href="{{url('permohonan/sekretariat/sejarah/papar-kelulusan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
                                                 @elseif ($item['status']=='8')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
+                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-pembayaran/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
                                                 @elseif ($item['status']=='9')
                                                     <td><a href="{{url('permohonan/sekretariat/sejarah/papar-permohonan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
                                                 @endif
