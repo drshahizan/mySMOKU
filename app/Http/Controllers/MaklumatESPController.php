@@ -221,12 +221,14 @@ class MaklumatESPController extends Controller
                 'message' => 'Invalid JSON data received.'
             ], 400); // 400 Bad Request status code indicates a client error
         }
-    
+        
+        $queryString = http_build_query($parameters);
+
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_URL, 'http://espbstg.mohe.gov.my/api/studentsStatus.php');
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $parameters);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $queryString);
         $result = curl_exec($curl);
         curl_close($curl);
     
