@@ -115,12 +115,12 @@ class MaklumatESPController extends Controller
                 $date = DateTime::createFromFormat('d/m/Y', $jsonString['tarikh_transaksi']);
                 $formattedDate = $date->format('Y-m-d');
 
-                $smoku = Smoku::where('no_kp', $no_kp)->first();
+                $smoku = Smoku::where('no_kp', $jsonString['nokp'])->first();
                 // Check if $smoku is null
                 if ($smoku === null) {
                     $responses[] = [
-                        'nokp' => $no_kp,
-                        'id_permohonan' => $no_rujukan_permohonan,
+                        'nokp' => $jsonString['nokp'],
+                        'id_permohonan' => $jsonString['id_permohonan'],
                         'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
                         'amaun' => $jsonString['amount'],
                         'status' => 'Tiada data dalam BKOKU'
@@ -129,7 +129,7 @@ class MaklumatESPController extends Controller
 
                     $affectedRows = DB::table('permohonan')
                         ->where('smoku_id', $smoku->id)
-                        ->where('no_rujukan_permohonan', $no_rujukan_permohonan)
+                        ->where('no_rujukan_permohonan', $jsonString['id_permohonan'])
                         ->update([
                             'yuran_dibayar' => number_format($jsonString['amount'], 2, '.', ''),
                             'tarikh_transaksi' => $formattedDate,
@@ -139,8 +139,8 @@ class MaklumatESPController extends Controller
                     if ($affectedRows > 0) {
                         // Data was updated successfully
                         $responses[] = [
-                            'nokp' => $no_kp,
-                            'id_permohonan' => $no_rujukan_permohonan,
+                            'nokp' => $jsonString['nokp'],
+                            'id_permohonan' => $jsonString['id_permohonan'],
                             'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
                             'amaun' => $jsonString['amount'],
                             'status' => 'Data diterima dan update'
@@ -148,8 +148,8 @@ class MaklumatESPController extends Controller
                     } else {
                         // Data was not updated
                         $responses[] = [
-                            'nokp' => $no_kp,
-                            'id_permohonan' => $no_rujukan_permohonan,
+                            'nokp' => $jsonString['nokp'],
+                            'id_permohonan' => $jsonString['id_permohonan'],
                             'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
                             'amaun' => $jsonString['amount'],
                             'status' => 'Data tidak diupdate'
@@ -163,13 +163,7 @@ class MaklumatESPController extends Controller
 
             } 
             
-            $responses[] = [
-                'nokp' => $jsonString['nokp'],
-                'id_permohonan' => $jsonString['id_permohonan'],
-                'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
-                'amaun' => $jsonString['amount'],
-                'status' => 'test test'
-            ];
+            
 
             return response()->json(['helooooo' => $responses], 200);
 
