@@ -103,12 +103,11 @@ class MaklumatESPController extends Controller
     {
         
         $contentTypeHeader = $request->header('Content-Type');
-        //dd($contentTypeHeader);
         if (strpos($contentTypeHeader, 'application/json') !== false) {
             $jsonString = $request->json()->all();
             
             
-            $responses = [];
+            //$responses = [];
 
             foreach ($jsonString as $jsonString) {
                 $no_kp = $jsonString['nokp'];
@@ -181,7 +180,7 @@ class MaklumatESPController extends Controller
             $data = json_decode($jsonString);
 
 
-            $responses = [];
+            //$responses = [];
 
             if (is_array($data)) {
                 foreach ($data as $dataField) {
