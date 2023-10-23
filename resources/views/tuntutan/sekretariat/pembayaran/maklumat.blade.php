@@ -211,6 +211,12 @@
                                                     $yuran = $yuran + $item['amaun'];
                                                 }
                                             }
+                                            if($tuntutan->yuran_dibayar == null){
+                                                $tuntutan->yuran_dibayar = $tuntutan->yuran_disokong;
+                                            }
+                                            if($tuntutan->wang_saku_dibayar == null){
+                                                $tuntutan->wang_saku_dibayar = $tuntutan->wang_saku_disokong;
+                                            }
                                             if($tuntutan->baki_dibayar == null){
                                                 $tuntutan->baki_dibayar = $tuntutan->baki_disokong;
                                             }
@@ -315,6 +321,9 @@
                                             if($tuntutan->amaun_wang_saku == null){
                                                 $tuntutan->amaun_wang_saku = 0;
                                             }
+                                            if($tuntutan->wang_saku_dibayar == null){
+                                                $tuntutan->wang_saku_dibayar = $tuntutan->wang_saku_disokong;
+                                            }
                                             $jumlah = $tuntutan->amaun_wang_saku;
                                         @endphp
                                         <input type="hidden" name="baki" id="baki" value="NULL">
@@ -383,6 +392,9 @@
                                                 else{
                                                     $yuran = $yuran + $item['amaun'];
                                                 }
+                                            }
+                                            if($tuntutan->yuran_dibayar == null){
+                                                $tuntutan->yuran_dibayar = $tuntutan->yuran_disokong;
                                             }
                                             if($tuntutan->baki_dibayar == null){
                                                 $tuntutan->baki_dibayar = $tuntutan->baki_disokong;
@@ -471,6 +483,12 @@
                                         @php
                                             if($tuntutan->amaun_wang_saku == null){
                                                 $tuntutan->amaun_wang_saku = 0;
+                                            }
+                                            if($tuntutan->yuran_dibayar == null){
+                                                $tuntutan->yuran_dibayar = $tuntutan->yuran_disokong;
+                                            }
+                                            if($tuntutan->wang_saku_dibayar == null){
+                                                $tuntutan->wang_saku_dibayar = $tuntutan->wang_saku_disokong;
                                             }
                                             $jumlah = $tuntutan->amaun_wang_saku;
                                         @endphp

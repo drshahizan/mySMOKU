@@ -747,10 +747,9 @@ class SekretariatController extends Controller
 
             Tuntutan::where('id', $id)
                 ->update([
-                    'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
                     'yuran_disokong'        =>  $request->get('yuran_disokong'),
-                    'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
                     'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                    'baki_disokong'    =>  $request->get('w_saku_disokong'),
                     'status'                =>  6,
                 ]);
 
@@ -1030,6 +1029,8 @@ class SekretariatController extends Controller
                 'yuran_disokong'        =>  $request->get('yuran_disokong'),
                 'wang_saku_dibayar'     =>  $request->get('w_saku_dibayar'),
                 'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                'baki_dibayar'          =>  $request->get('w_saku_dibayar'),
+                'baki_disokong'         =>  $request->get('w_saku_disokong'),
                 'status'                =>  8,
             ]);
 
