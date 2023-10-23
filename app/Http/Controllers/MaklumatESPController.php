@@ -178,17 +178,17 @@ class MaklumatESPController extends Controller
 
             } 
             
-            if ($responses) {
-                // echo "API Response: " . $response;
-                // file_put_contents($logPath, 'req: ' . PHP_EOL . json_encode($jsonString, JSON_PRETTY_PRINT) . PHP_EOL, FILE_APPEND);
-                // file_put_contents($logPath, 'res: ' . PHP_EOL . json_encode($responses, JSON_PRETTY_PRINT) . PHP_EOL, FILE_APPEND);
+            // if ($responses) {
+            //     // echo "API Response: " . $response;
+            //     file_put_contents($logPath, 'req: ' . PHP_EOL . json_encode($jsonString, JSON_PRETTY_PRINT) . PHP_EOL, FILE_APPEND);
+            //     file_put_contents($logPath, 'res: ' . PHP_EOL . json_encode($responses, JSON_PRETTY_PRINT) . PHP_EOL, FILE_APPEND);
 
                 return response()->json(['helooooo' => $responses], 200);
-            } else {
-                // echo "Failed to connect to the API.";
-                // file_put_contents($logPath, 'Failed', FILE_APPEND);
-
-            }
+            // } else {
+            //     // echo "Failed to connect to the API.";
+            //     file_put_contents($logPath, 'Failed', FILE_APPEND);
+ 
+            // }
 
             
 
@@ -251,17 +251,17 @@ class MaklumatESPController extends Controller
 
                     }
                 }
-                if ($responses) {
-                    // echo "API Response: " . $response;
-                    // file_put_contents($logPath, 'req: ' . PHP_EOL . json_encode($jsonString, JSON_PRETTY_PRINT) . PHP_EOL, FILE_APPEND);
-                    // file_put_contents($logPath, 'res: ' . PHP_EOL . json_encode($responses, JSON_PRETTY_PRINT) . PHP_EOL, FILE_APPEND);
+                // if ($responses) {
+                //     // echo "API Response: " . $response;
+                //     file_put_contents($logPath, 'req: ' . PHP_EOL . json_encode($jsonString, JSON_PRETTY_PRINT) . PHP_EOL, FILE_APPEND);
+                //     file_put_contents($logPath, 'res: ' . PHP_EOL . json_encode($responses, JSON_PRETTY_PRINT) . PHP_EOL, FILE_APPEND);
 
                     return response()->json(['data diterima' => $responses], 200);
-                } else {
-                    // echo "Failed to connect to the API.";
-                    // file_put_contents($logPath, 'Failed', FILE_APPEND);
+                // } else {
+                //     // echo "Failed to connect to the API.";
+                //     file_put_contents($logPath, 'Failed', FILE_APPEND);
 
-                }
+                // }
                 
             } else {
                 return response()->json(['error' => 'Invalid data format'], 400);
