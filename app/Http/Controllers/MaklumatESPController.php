@@ -102,8 +102,27 @@ class MaklumatESPController extends Controller
     public function receiveData(Request $request)
     {
         try {
-            //$jsonData = $request->input('data');
-            $jsonData = json_decode($request->input('data'), true);
+            // Check the Content-Type header
+            $contentType = $request->header('Content-Type');
+
+            // Initialize $jsonData
+            $jsonData = null;
+
+            // Handle JSON data
+            if (strpos($contentType, 'application/json') !== false) {
+                // If Content-Type is application/json, parse JSON data from the request body
+                $jsonData = $request->json()->all();
+            }
+            // Handle form field or query parameter data
+            elseif ($request->has('data')) {
+                // If 'data' parameter exists, use it as the JSON data
+                $jsonData = json_decode($request->input('data'), true);
+            }
+
+            // Check if $jsonData is valid
+            if ($jsonData === null || empty($jsonData)) {
+                return response()->json(['error' => 'Invalid or empty JSON data.'], 400);
+            }
             $responses = [];
             //dd($jsonData);
         
