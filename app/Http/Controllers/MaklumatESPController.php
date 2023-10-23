@@ -178,7 +178,7 @@ class MaklumatESPController extends Controller
         
             return response()->json(['responsesssss' => $responses], 200);
         } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 400);
+            return response()->json(['error' => $responses], 400);
         }
         
     
