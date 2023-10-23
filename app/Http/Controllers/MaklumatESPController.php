@@ -163,7 +163,7 @@ class MaklumatESPController extends Controller
 
             }          
 
-            return response()->json(['received_data' => $responses], 200);
+            return response()->json(['helooooo' => $responses], 200);
 
         } else {
             $jsonString = $request->input('data');
