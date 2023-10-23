@@ -100,89 +100,78 @@ class MaklumatESPController extends Controller
     }
 
     public function receiveData(Request $request)
-    {
-        try {
-            // Check the Content-Type header
-            $contentType = $request->header('Content-Type');
+{
+    // Check the Content-Type header and parse JSON data
+    $jsonData = $this->parseJsonData($request);
+    try {
+        
 
-            // Initialize $jsonData
-            $jsonData = null;
+        // Validate the presence of required keys in $jsonData
+        $this->validateJsonData($jsonData);
+ 
 
-            // Handle JSON data
-            if (strpos($contentType, 'application/json') !== false) {
-                // If Content-Type is application/json, parse JSON data from the request body
-                $jsonData = $request->json()->all();
-            }
-            // Handle form field or query parameter data
-            elseif ($request->has('data')) {
-                // If 'data' parameter exists, use it as the JSON data
-                $jsonData = json_decode($request->input('data'), true);
-            }
+        // If successful, prepare success response
+        $response = [
+            'status' => 'success',
+            'message' => 'Data diterima dan diproses dengan jaya.',
+            'data' => $this->formatDataWithTypes($jsonData)
+        ];
 
-            // Check if $jsonData is valid
-            if ($jsonData === null || empty($jsonData)) {
-                return response()->json(['error' => 'Invalid or empty JSON data.'], 400);
-            }
-            $responses = [];
-            // dd($jsonData);
-        
-            foreach ($jsonData as $json) {
-                // Validate the presence of required keys in $json
-                if (!isset($json['nokp'], $json['id_permohonan'], $json['tarikh_transaksi'], $json['amount'])) {
-                    throw new Exception('Invalid JSON format. Missing required fields.');
-                }
-        
-                // Format date
-                $date = DateTime::createFromFormat('d/m/Y', $json['tarikh_transaksi']);
-                $formattedDate = $date->format('Y-m-d');
-        
-                // Retrieve Smoku record
-                $smoku = Smoku::where('no_kp', $json['nokp'])->first();
+        return response()->json($response, 200);
+    } catch (\Exception $e) {
+        // If there's an error, prepare error response
+        $response = [
+            'status' => 'error',
+            'message' => $e->getMessage(),
+            'data' => $this->formatDataWithTypes($jsonData) // Include the input data in the error response if needed
+        ];
 
-        
-                // Check if Smoku record exists
-                if ($smoku === null) {
-                    $responses[] = [
-                        'nokp' => $json['nokp'],
-                        'id_permohonan' => $json['id_permohonan'],
-                        'tarikh_transaksi' => $json['tarikh_transaksi'],
-                        'amaun' => $json['amount'],
-                        'status' => 'Tiada data dalam BKOKU'
-                    ];
-                } else {
-                    // Update database record
-                    $affectedRows = DB::table('permohonan')
-                        ->where('smoku_id', $smoku->id)
-                        ->where('no_rujukan_permohonan', $json['id_permohonan'])
-                        ->update([
-                            'yuran_dibayar' => number_format($json['amount'], 2, '.', ''),
-                            'tarikh_transaksi' => $formattedDate,
-                            'status' => 8,
-                        ]);
-        
-                    if ($affectedRows > 0) {
-                        $status = 'Data diterima dan update';
-                    } else {
-                        $status = 'Data tidak diupdate';
-                    }
-        
-                    $responses[] = [
-                        'nokp' => $json['nokp'],
-                        'id_permohonan' => $json['id_permohonan'],
-                        'tarikh_transaksi' => $json['tarikh_transaksi'],
-                        'amaun' => $json['amount'],
-                        'status' => $status
-                    ];
-                }
-            }
-        
-            return response()->json(['responsesssss' => $responses], 200);
-        } catch (Exception $e) {
-            return response()->json(['error' => $jsonData], 400);
-        }
-        
-    
+        return response()->json($response, 400);
     }
+}
+
+private function parseJsonData(Request $request)
+{
+    $contentType = $request->header('Content-Type');
+    $jsonData = null;
+
+    if (strpos($contentType, 'application/json') !== false) {
+        // If Content-Type is application/json, parse JSON data from the request body
+        $jsonData = $request->json()->all();
+    } elseif ($request->has('data')) {
+        // If 'data' parameter exists, use it as the JSON data
+        $jsonData = json_decode($request->input('data'), true);
+    }
+
+    // Check if $jsonData is valid
+    if ($jsonData === null || empty($jsonData)) {
+        throw new \Exception('Invalid or empty JSON data.');
+    }
+
+    return $jsonData;
+}
+
+private function validateJsonData($jsonData)
+{
+    // Validate the presence of required keys in $jsonData
+    if (!isset($jsonData['nokp'], $jsonData['id_permohonan'], $jsonData['tarikh_transaksi'], $jsonData['amount'])) {
+        throw new \Exception('Invalid JSON format. Missing required fields.');
+    }
+}
+
+private function formatDataWithTypes($jsonData)
+{
+    $formattedData = [];
+
+    foreach ($jsonData as $key => $value) {
+        $formattedData[$key] = [
+            'value' => $value,
+            'type' => gettype($value)
+        ];
+    }
+
+    return $formattedData;
+}
 
 
     // public function receiveData(Request $request)
