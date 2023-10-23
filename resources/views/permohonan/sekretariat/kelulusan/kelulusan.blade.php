@@ -70,10 +70,10 @@
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br>
-                                    <form action="#" method="GET">
+                                    <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
                                         <div class="row">
-                                            <div class="col-md-3">
-                                                <select name="institusi" class="form-select" style="margin-left: 20px">
+                                            <div class="col-md-5">
+                                                <select name="institusi" class="form-select" style="margin-left: 20px;">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiPengajian as $institusi)
                                                         <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->nama_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
@@ -81,8 +81,8 @@
                                                 </select>
                                             </div>
                                     
-                                            <div class="col-md-5" style="margin-left: 10px; margin-right:80px;">
-                                                <button type="submit" class="btn btn-primary" style="width: 6%; padding-left: 6px;">
+                                            <div class="col-md-3" style="margin-left: 10px; margin-right:80px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 12%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
@@ -246,10 +246,10 @@
                                 {{-- PPK --}}
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <br>
-                                    <form action="#" method="GET">
+                                    <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
                                         <div class="row">
-                                            <div class="col-md-3">
-                                                <select name="institusi" class="form-select" style="margin-left: 20px">
+                                            <div class="col-md-5">
+                                                <select name="institusi" class="form-select" style="margin-left: 20px;">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiPengajian as $institusi)
                                                         <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->nama_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
@@ -257,17 +257,17 @@
                                                 </select>
                                             </div>
                                     
-                                            <div class="col-md-5" style="margin-left: 10px; margin-right:80px;">
-                                                <button type="submit" class="btn btn-primary" style="width: 6%; padding-left: 6px;">
+                                            <div class="col-md-3" style="margin-left: 10px; margin-right:80px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 12%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
 
                                             <div class="col-md-3" style="padding-left: 80px;">
-                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
-                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a>
                                             </div>
