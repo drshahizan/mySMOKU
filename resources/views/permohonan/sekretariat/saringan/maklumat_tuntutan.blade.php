@@ -246,11 +246,11 @@
                                             if($permohonan->amaun_wang_saku == null){
                                                 $permohonan->amaun_wang_saku = 0;
                                             }
-                                            if($permohonan->baki_disokong == null){
-                                                $permohonan->baki_disokong = $permohonan->baki;
-                                            }
                                             $jumlah = $permohonan->amaun_yuran + $permohonan->amaun_wang_saku;
                                             $baki_y = 5000 - $jumlah;
+                                            if($permohonan->baki_disokong == null){
+                                                $permohonan->baki_disokong = $baki_y;
+                                            }
                                         @endphp
                                             <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
                                             <input type="hidden" name="baki_disokong" id="baki_disokong" value="{{$permohonan->baki_disokong}}">
@@ -409,11 +409,11 @@
                                                 if($permohonan->amaun_wang_saku == null){
                                                     $permohonan->amaun_wang_saku = 0;
                                                 }
-                                                if($permohonan->baki_disokong == null){
-                                                    $permohonan->baki_disokong = $permohonan->baki;
-                                                }
                                                 $jumlah = $permohonan->amaun_yuran;
                                                 $baki_y = 5000 - $jumlah;
+                                                if($permohonan->baki_disokong == null){
+                                                    $permohonan->baki_disokong = $baki_y;
+                                                }
                                             @endphp
                                             <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
                                             <input type="hidden" name="baki_disokong" id="baki_disokong_3" value="{{$permohonan->baki_disokong}}">

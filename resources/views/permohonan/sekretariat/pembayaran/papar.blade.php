@@ -238,6 +238,15 @@
                                         if($permohonan->amaun_wang_saku == null){
                                             $permohonan->amaun_wang_saku = 0;
                                         }
+                                        if($permohonan->yuran_dibayar == null){
+                                            $permohonan->yuran_dibayar = $permohonan->yuran_disokong;
+                                        }
+                                        if($permohonan->wang_saku_dibayar == null){
+                                            $permohonan->wang_saku_dibayar = $permohonan->wang_saku_disokong;
+                                        }
+                                        if($permohonan->baki_dibayar == null){
+                                            $permohonan->baki_dibayar = $permohonan->baki_disokong;
+                                        }
                                         $jumlah = $permohonan->amaun_yuran + $permohonan->amaun_wang_saku;
                                         $baki_y = 5000 - $jumlah;
                                     @endphp
@@ -263,9 +272,9 @@
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->yuran_disokong, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->yuran_disokong - $permohonan->wang_saku_disokong, 2)}}</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->baki_disokong, 2)}}</td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->yuran_dibayar, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->yuran_dibayar - $permohonan->wang_saku_dibayar, 2)}}</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->baki_dibayar, 2)}}</td>
                                             </tr>
                                             <tr class="font-weight-bolder font-size-lg">
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
@@ -300,6 +309,12 @@
                                     @php
                                         if($permohonan->amaun_wang_saku == null){
                                             $permohonan->amaun_wang_saku = 0;
+                                        }
+                                        if($permohonan->wang_saku_dibayar == null){
+                                            $permohonan->wang_saku_dibayar = $permohonan->wang_saku_disokong;
+                                        }
+                                        if($permohonan->baki_dibayar == null){
+                                            $permohonan->baki_dibayar = $permohonan->baki_disokong;
                                         }
                                         $jumlah = $permohonan->amaun_wang_saku;
                                     @endphp
@@ -348,6 +363,12 @@
                                         if($permohonan->amaun_yuran == null){
                                             $permohonan->amaun_yuran = 0;
                                         }
+                                        if($permohonan->yuran_dibayar == null){
+                                            $permohonan->yuran_dibayar = $permohonan->yuran_disokong;
+                                        }
+                                        if($permohonan->baki_dibayar == null){
+                                            $permohonan->baki_dibayar = $permohonan->baki_disokong;
+                                        }
                                         $jumlah = $permohonan->amaun_yuran + $permohonan->amaun_wang_saku;
                                         $baki_y = 5000 - $jumlah;
                                     @endphp
@@ -373,9 +394,9 @@
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->yuran_disokong, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->yuran_disokong, 2)}}</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->baki_disokong, 2)}}</td>
                                                 <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->yuran_dibayar, 2)}}</td>
-                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $permohonan->yuran_dibayar, 2)}}</td>
+                                                <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->baki_dibayar, 2)}}</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -401,6 +422,12 @@
                                     @php
                                         if($permohonan->amaun_wang_saku == null){
                                             $permohonan->amaun_wang_saku = 0;
+                                        }
+                                        if($permohonan->wang_saku_dibayar == null){
+                                            $permohonan->wang_saku_dibayar = $permohonan->wang_saku_disokong;
+                                        }
+                                        if($permohonan->baki_dibayar == null){
+                                            $permohonan->baki_dibayar = $permohonan->baki_disokong;
                                         }
                                         $jumlah = $permohonan->amaun_wang_saku;
                                     @endphp
@@ -447,7 +474,7 @@
                                 @endif
                                 <!--end: Invoice body-->
                                 <div class="col-md-6 text-right">
-                                    <a href="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </button></a>
+                                    <a href="{{ url('permohonan/sekretariat/pembayaran/senarai') }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </button></a>
                                 </div>
                             </div>
                         </div>

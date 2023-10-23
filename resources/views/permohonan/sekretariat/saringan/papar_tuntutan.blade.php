@@ -139,7 +139,7 @@
                                 <div class="col-md-6 col-sm-6">
                                     <br>
                                     @php
-                                        $status = DB::table('bk_status')->where('kod_status', $sejarah_p->status)->value('status');
+                                        $status = DB::table('bk_status')->where('kod_status', $permohonan->status)->value('status');
                                         $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                         $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
                                         $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja)->value('penaja');
@@ -233,7 +233,7 @@
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Status</strong></td>
                                             <td>:</td>
-                                            <td>{{ucwords(strtolower($status))}} ({{date('d/m/Y', strtotime($sejarah_p->created_at))}})</td>
+                                            <td>{{ucwords(strtolower($status))}} ({{date('d/m/Y', strtotime($permohonan->updated_at))}})</td>
                                         </tr>
                                     </table>
                                 <hr>
