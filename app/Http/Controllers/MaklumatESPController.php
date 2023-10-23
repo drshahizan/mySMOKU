@@ -111,7 +111,7 @@ class MaklumatESPController extends Controller
             file_put_contents($logPath, $logMessage, FILE_APPEND);
         } else {
             if (!is_dir($logDirectory)) {
-                mkdir($logDirectory);
+                mkdir($logDirectory, 0755, true);
             }
             file_put_contents($logPath, $logMessage);
         }
