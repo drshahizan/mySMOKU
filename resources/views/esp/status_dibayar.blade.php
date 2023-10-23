@@ -47,7 +47,7 @@
             <div class="card-body pt-0">
               <!--begin::Table-->
               <div class="table-responsive">
-                <table class="table align-center table-row-dashed fs-6 gy-5" id="kt_customers_table">
+                <table class="table align-center table-row-dashed fs-6 gy-5" id="sortTable1">
                   <thead>
                     <tr class="text-start align-center text-gray-400 fw-bold fs-7 gs-0">
                       <th class="text-center">Bil</th>
@@ -147,8 +147,7 @@
   
     <script>
       //sorting function
-      $('#sortTable1').DataTable();
-      $('#sortTable2').DataTable();
+      // $('#sortTable1').DataTable();
   
     </script>
   
