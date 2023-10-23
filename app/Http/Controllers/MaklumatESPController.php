@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Permohonan;
 use App\Models\Smoku;
 use DateTime;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -98,161 +99,227 @@ class MaklumatESPController extends Controller
         
     }
 
-
     public function receiveData(Request $request)
     {
+        try {
+            //$jsonData = $request->input('data');
+            $jsonData = json_decode($request->input('data'), true);
+            $responses = [];
+            //dd($jsonData);
         
-        $contentTypeHeader = $request->header('Content-Type');
-        if (strpos($contentTypeHeader, 'application/json') !== false) {
-            $jsonString = $request->json()->all();
-            
-            
-            //$responses = [];
-
-            foreach ($jsonString as $jsonString) {
-                $no_kp = $jsonString['nokp'];
-                $no_rujukan_permohonan = $jsonString['id_permohonan'];
-                $date = DateTime::createFromFormat('d/m/Y', $jsonString['tarikh_transaksi']);
+            foreach ($jsonData as $json) {
+                // Validate the presence of required keys in $json
+                if (!isset($json['nokp'], $json['id_permohonan'], $json['tarikh_transaksi'], $json['amount'])) {
+                    throw new Exception('Invalid JSON format. Missing required fields.');
+                }
+        
+                // Format date
+                $date = DateTime::createFromFormat('d/m/Y', $json['tarikh_transaksi']);
                 $formattedDate = $date->format('Y-m-d');
-                
-                $smoku = Smoku::where('no_kp', $jsonString['nokp'])->first();
-                // Check if $smoku is null
+        
+                // Retrieve Smoku record
+                $smoku = Smoku::where('no_kp', $json['nokp'])->first();
+
+        
+                // Check if Smoku record exists
                 if ($smoku === null) {
                     $responses[] = [
-                        'nokp' => $jsonString['nokp'],
-                        'id_permohonan' => $jsonString['id_permohonan'],
-                        'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
-                        'amaun' => $jsonString['amount'],
+                        'nokp' => $json['nokp'],
+                        'id_permohonan' => $json['id_permohonan'],
+                        'tarikh_transaksi' => $json['tarikh_transaksi'],
+                        'amaun' => $json['amount'],
                         'status' => 'Tiada data dalam BKOKU'
                     ];
                 } else {
-
+                    // Update database record
                     $affectedRows = DB::table('permohonan')
                         ->where('smoku_id', $smoku->id)
-                        ->where('no_rujukan_permohonan', $jsonString['id_permohonan'])
+                        ->where('no_rujukan_permohonan', $json['id_permohonan'])
                         ->update([
-                            'yuran_dibayar' => number_format($jsonString['amount'], 2, '.', ''),
+                            'yuran_dibayar' => number_format($json['amount'], 2, '.', ''),
                             'tarikh_transaksi' => $formattedDate,
                             'status' => 8,
                         ]);
-
-                    if ($affectedRows > 0) {
-                        // Data was updated successfully
-                        $responses[] = [
-                            'nokp' => $jsonString['nokp'],
-                            'id_permohonan' => $jsonString['id_permohonan'],
-                            'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
-                            'amaun' => $jsonString['amount'],
-                            'status' => 'Data diterima dan update'
-                        ];
-                    } else {
-                        // Data was not updated
-                        $responses[] = [
-                            'nokp' => $jsonString['nokp'],
-                            'id_permohonan' => $jsonString['id_permohonan'],
-                            'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
-                            'amaun' => $jsonString['amount'],
-                            'status' => 'Data tidak diupdate'
-                        ];
-                    }
-  
-
-                }
-
-                 
-
-            } 
-            
-            if ($responses) {
-                //  echo "API Response: " . $responses;
-
-                return response()->json(['helooooo' => $responses], 200);
-            } else {
-                 echo "Failed to connect to the API.";
-               
- 
-            }
-
-            
-
-        } else {
-            $jsonString = $request->input('data');
-            $data = json_decode($jsonString);
-
-
-            //$responses = [];
-
-            if (is_array($data)) {
-                foreach ($data as $dataField) {
-                   
-                    $no_kp = $dataField->nokp;
-                    $no_rujukan_permohonan = $dataField->id_permohonan;
-                    $date = DateTime::createFromFormat('d/m/Y', $dataField->tarikh_transaksi);
-                    $formattedDate = $date->format('Y-m-d');
-    
-                    $smoku = Smoku::where('no_kp', $dataField->nokp)->first();
-                    // Check if $smoku is null
-                    if ($smoku === null) {
-                        $responses[] = [
-                            'nokp' => $dataField->nokp,
-                            'id_permohonan' => $dataField->id_permohonan,
-                            'tarikh_transaksi' => $dataField->tarikh_transaksi,
-                            'amaun' => $dataField->amount,
-                            'status' => 'BKOKU tiada data nokp'
-                        ];
-                    }else{
-
-                        $affectedRows = DB::table('permohonan')
-                            ->where('smoku_id', $smoku->id)
-                            ->where('no_rujukan_permohonan', $dataField->id_permohonan)
-                            ->update([
-                                'yuran_dibayar' => number_format($dataField->amount, 2, '.', ''),
-                                'tarikh_transaksi' => $formattedDate,
-                                'status' => 8,
-                            ]);
-
-                        if ($affectedRows > 0) {
-                            // Data was updated successfully
-                            $responses[] = [
-                                'nokp' => $dataField->nokp,
-                                'id_permohonan' => $dataField->id_permohonan,
-                                'tarikh_transaksi' => $dataField->tarikh_transaksi,
-                                'amaun' => $dataField->amount,
-                                'status' => 'DATA DITERIMA dan dikemaskini'
-                            ];
-                        } else {
-                            // Data was not updated
-                            $responses[] = [
-                                'nokp' => $dataField->nokp,
-                                'id_permohonan' => $dataField->id_permohonan,
-                                'tarikh_transaksi' => $dataField->tarikh_transaksi,
-                                'amaun' => $dataField->amount,
-                                'status' => 'DATA TIDAK DIKEMASKINI lahhhh'
-                            ];
-                        }
-
-
-                    }
-                }
-                if ($responses) {
-                    //  echo "API Response: " . $responses;
-
-                    return response()->json(['data diterima' => $responses], 200);
-                } else {
-                     echo "Failed to connect to the API.";
-                   
-
-                }
-                
-            } else {
-                return response()->json(['error' => 'Invalid data format'], 400);
-            }  
-        }
-
         
+                    if ($affectedRows > 0) {
+                        $status = 'Data diterima dan update';
+                    } else {
+                        $status = 'Data tidak diupdate';
+                    }
+        
+                    $responses[] = [
+                        'nokp' => $json['nokp'],
+                        'id_permohonan' => $json['id_permohonan'],
+                        'tarikh_transaksi' => $json['tarikh_transaksi'],
+                        'amaun' => $json['amount'],
+                        'status' => $status
+                    ];
+                }
+            }
+        
+            return response()->json(['responsesssss' => $responses], 200);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
         
     
     }
+
+
+    // public function receiveData(Request $request)
+    // {
+        
+    //     $contentTypeHeader = $request->header('Content-Type');
+    //     if (strpos($contentTypeHeader, 'application/json') !== false) {
+    //         $jsonString = $request->json()->all();
+            
+            
+    //         //$responses = [];
+
+    //         foreach ($jsonString as $jsonString) {
+    //             $no_kp = $jsonString['nokp'];
+    //             $no_rujukan_permohonan = $jsonString['id_permohonan'];
+    //             $date = DateTime::createFromFormat('d/m/Y', $jsonString['tarikh_transaksi']);
+    //             $formattedDate = $date->format('Y-m-d');
+                
+    //             $smoku = Smoku::where('no_kp', $jsonString['nokp'])->first();
+    //             // Check if $smoku is null
+    //             if ($smoku === null) {
+    //                 $responses[] = [
+    //                     'nokp' => $jsonString['nokp'],
+    //                     'id_permohonan' => $jsonString['id_permohonan'],
+    //                     'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
+    //                     'amaun' => $jsonString['amount'],
+    //                     'status' => 'Tiada data dalam BKOKU'
+    //                 ];
+    //             } else {
+
+    //                 $affectedRows = DB::table('permohonan')
+    //                     ->where('smoku_id', $smoku->id)
+    //                     ->where('no_rujukan_permohonan', $jsonString['id_permohonan'])
+    //                     ->update([
+    //                         'yuran_dibayar' => number_format($jsonString['amount'], 2, '.', ''),
+    //                         'tarikh_transaksi' => $formattedDate,
+    //                         'status' => 8,
+    //                     ]);
+
+    //                 if ($affectedRows > 0) {
+    //                     // Data was updated successfully
+    //                     $responses[] = [
+    //                         'nokp' => $jsonString['nokp'],
+    //                         'id_permohonan' => $jsonString['id_permohonan'],
+    //                         'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
+    //                         'amaun' => $jsonString['amount'],
+    //                         'status' => 'Data diterima dan update'
+    //                     ];
+    //                 } else {
+    //                     // Data was not updated
+    //                     $responses[] = [
+    //                         'nokp' => $jsonString['nokp'],
+    //                         'id_permohonan' => $jsonString['id_permohonan'],
+    //                         'tarikh_transaksi' => $jsonString['tarikh_transaksi'],
+    //                         'amaun' => $jsonString['amount'],
+    //                         'status' => 'Data tidak diupdate'
+    //                     ];
+    //                 }
+  
+
+    //             }
+
+                 
+
+    //         } 
+            
+    //         if ($responses) {
+    //             //  echo "API Response: " . $responses;
+
+    //             return response()->json(['helooooo' => $responses], 200);
+    //         } else {
+    //              echo "Failed to connect to the API.";
+               
+ 
+    //         }
+
+            
+
+    //     } else {
+    //         $jsonString = $request->input('data');
+    //         $data = json_decode($jsonString);
+
+
+    //         //$responses = [];
+
+    //         if (is_array($data)) {
+    //             foreach ($data as $dataField) {
+                   
+    //                 $no_kp = $dataField->nokp;
+    //                 $no_rujukan_permohonan = $dataField->id_permohonan;
+    //                 $date = DateTime::createFromFormat('d/m/Y', $dataField->tarikh_transaksi);
+    //                 $formattedDate = $date->format('Y-m-d');
+    
+    //                 $smoku = Smoku::where('no_kp', $dataField->nokp)->first();
+    //                 // Check if $smoku is null
+    //                 if ($smoku === null) {
+    //                     $responses[] = [
+    //                         'nokp' => $dataField->nokp,
+    //                         'id_permohonan' => $dataField->id_permohonan,
+    //                         'tarikh_transaksi' => $dataField->tarikh_transaksi,
+    //                         'amaun' => $dataField->amount,
+    //                         'status' => 'BKOKU tiada data nokp'
+    //                     ];
+    //                 }else{
+
+    //                     $affectedRows = DB::table('permohonan')
+    //                         ->where('smoku_id', $smoku->id)
+    //                         ->where('no_rujukan_permohonan', $dataField->id_permohonan)
+    //                         ->update([
+    //                             'yuran_dibayar' => number_format($dataField->amount, 2, '.', ''),
+    //                             'tarikh_transaksi' => $formattedDate,
+    //                             'status' => 8,
+    //                         ]);
+
+    //                     if ($affectedRows > 0) {
+    //                         // Data was updated successfully
+    //                         $responses[] = [
+    //                             'nokp' => $dataField->nokp,
+    //                             'id_permohonan' => $dataField->id_permohonan,
+    //                             'tarikh_transaksi' => $dataField->tarikh_transaksi,
+    //                             'amaun' => $dataField->amount,
+    //                             'status' => 'DATA DITERIMA dan dikemaskini'
+    //                         ];
+    //                     } else {
+    //                         // Data was not updated
+    //                         $responses[] = [
+    //                             'nokp' => $dataField->nokp,
+    //                             'id_permohonan' => $dataField->id_permohonan,
+    //                             'tarikh_transaksi' => $dataField->tarikh_transaksi,
+    //                             'amaun' => $dataField->amount,
+    //                             'status' => 'DATA TIDAK DIKEMASKINI lahhhh'
+    //                         ];
+    //                     }
+
+
+    //                 }
+    //             }
+    //             if ($responses) {
+    //                 //  echo "API Response: " . $responses;
+
+    //                 return response()->json(['data diterima' => $responses], 200);
+    //             } else {
+    //                  echo "Failed to connect to the API.";
+                   
+
+    //             }
+                
+    //         } else {
+    //             return response()->json(['error' => 'Invalid data format'], 400);
+    //         }  
+    //     }
+
+        
+        
+    
+    // }
 
     public function testrequery(){
 
