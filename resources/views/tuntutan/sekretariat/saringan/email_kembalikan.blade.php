@@ -7,19 +7,20 @@
 
 <p>{!! nl2br(str_replace(" ", '&nbsp;',$emel->pendahuluan)) !!}</p>
 <p>{!! nl2br(str_replace(" ", '&nbsp;',$emel->isi_kandungan1)) !!}</p>
-<ol>
-    @for ($i = 0; $i < count($tuntutan_item); $i++)
-        @if($tuntutan_item['kep_saringan']!="Lengkap")
-            <li>{{$tuntutan_item['jenis_yuran']}} ({{$tuntutan_item['no_resit']}}) tidak lengkap. </li>
+<ol type="i">
+    @foreach ($tuntutan_item as $item)
+        @if($item['kep_saringan']=="Tidak lengkap")
+            <li>{{$item['jenis_yuran']}} ({{$item['no_resit']}}) tidak lengkap. </li>
         @endif
-    @endfor
-    @if($saringan['saringan_kep_peperiksaan']!="Lengkap")
+    @endforeach
+    @if($saringan->saringan_kep_peperiksaan=="Tidak Lengkap")
         <li>Keputusan peperiksaan tidak lengkap.</li>
     @endif
+        <li>{{$saringan->catatan}}</li>
 </ol>
 <br>
 
-<p>{!! nl2br(str_replace(" ", '&nbsp;',$emel->isi_kandungan)) !!}</p>
+<p>{!! nl2br(str_replace(" ", '&nbsp;',$emel->isi_kandungan2)) !!}</p>
 <br>
 <p>{!! nl2br(str_replace(" ", '&nbsp;',$emel->penutup)) !!}</p>
 <br>
