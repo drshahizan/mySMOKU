@@ -2,39 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MaklumatKursusMQA;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Http;
 
 class MaklumatKursusController extends Controller
 {
 
 
-public function index(Request $request)
-{
-    $client = new Client();
-    $url = 'http://10.29.216.151/api/bkoku/request-MQR';
+    public function index()
+    {
+        $response = Http::post('http://10.29.216.151/api/bkoku/request-MQR');
 
-    try {
-        $response = $client->get($url);
-        $statusCode = $response->getStatusCode();
-        $data = json_decode($response->getBody()->getContents(), true);
+        if ($response->successful()) {
+            $data = json_decode($response->body(), true);
 
-        if ($statusCode == 200 && isset($data['data'])) {
-            $dataField = $data['data'];
-            dd($dataField);
+            if (isset($data['dataMQR'])) {
+                foreach ($data['dataMQR'] as $item) {
+                    MaklumatKursusMQA::create($item); // Assuming $item is an associative array containing your data
+                }
+                return response()->json(['message' => 'Data inserted successfully'], 200);
+            } else {
+                return response()->json(['error' => 'Invalid API response format'], 500);
+            }
         } else {
-            // Handle unexpected response status code or missing 'data' field
-            // You might want to log an error or return an appropriate response.
-        }
-    } catch (RequestException $e) {
-        if ($e->hasResponse()) {
-            $statusCode = $e->getResponse()->getStatusCode();
-            // Handle different response status codes here, e.g., 405 Method Not Allowed
-        } else {
-            // Handle other request exceptions
+            return response()->json(['error' => 'Unable to fetch data from API'], $response->status());
         }
     }
-}
+
+
 
 }
