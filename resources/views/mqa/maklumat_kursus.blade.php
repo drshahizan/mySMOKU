@@ -6,7 +6,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-  <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+  <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
   
   </head>
@@ -148,9 +148,12 @@
 								<span class="">Nama Kursus</span>
 							</label>
 							<!--end::Label-->
-							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-								
-									<option value=""></option>
+							<select id="nama_program" name="nama_program" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+								<option></option>
+                @foreach ($kursus as $kursus)
+									
+									<option value="{{$kursus->NoRujProg}}">{{$kursus->NamaProgBM}}</option>
+									@endforeach
 								
 							</select>
 						</div>
@@ -165,9 +168,15 @@
     <!--end::Content-->
   </div>
 
+  
+
   <script>
     //sorting function
     //$('#sortTable1').DataTable();
+
+    $(document).ready(function() {
+			$('.js-example-basic-single').select2();
+			});
 
   </script>
 

@@ -47,6 +47,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
     Route::get('/requery', [MaklumatESPController::class, 'testrequery']);
 
     Route::get('/maklumat/kursus', [MaklumatKursusController::class, 'index']);
+    Route::get('/testmqa/api', [MaklumatKursusController::class, 'test']);
 //});
 
 

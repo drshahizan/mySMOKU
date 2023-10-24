@@ -21,11 +21,15 @@ class MaklumatKursusController extends Controller
             if (isset($data['dataMQR'])) {
                 $counter = 0;
                 foreach ($data['dataMQR'] as $item) {
-                    if ($counter < 10) {
+                    if ($counter < 500) {
+                        // MaklumatKursusMQA::updateOrInsert(
+                        //     ['NoRujProg' => $item['NoRujProg']], 
+                        //     $item 
+                        // );
                         MaklumatKursusMQA::create($item);
-                        $counter++;
+                       $counter++;
                     } else {
-                        break; // Break the loop after inserting 10 records
+                       break; // Break the loop after inserting 10 records
                     }
                 }
                 return response()->json(['message' => 'Data inserted successfully'], 200);
@@ -43,6 +47,12 @@ class MaklumatKursusController extends Controller
         } else {
             return response()->json(['error' => 'Unable to fetch data from API'], $response->status());
         }
+    }
+
+    public function test(){
+
+        $kursus = MaklumatKursusMQA::all()->sortBy('NamaProgBM');
+        return view('mqa.maklumat_kursus', compact('kursus'));
     }
 
 }
