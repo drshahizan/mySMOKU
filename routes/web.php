@@ -8,6 +8,7 @@ use App\Http\Controllers\MaklumatESPController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KemaskiniController;
 use App\Http\Controllers\MaklumatESP;
+use App\Http\Controllers\MaklumatKursusController;
 use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\SaringanController;
 use App\Http\Controllers\SekretariatController;
@@ -44,6 +45,8 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
     Route::get('/statusESP/dibayar', [MaklumatESPController::class, 'statusDibayar']);
     Route::get('/test/api', [MaklumatESPController::class, 'test']);
     Route::get('/requery', [MaklumatESPController::class, 'testrequery']);
+
+    Route::get('/maklumat/kursus', [MaklumatKursusController::class, 'index']);
 //});
 
 
