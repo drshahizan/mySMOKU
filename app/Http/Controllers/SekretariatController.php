@@ -775,7 +775,7 @@ class SekretariatController extends Controller
             $i=0;
             $invois = $request->get('invois');
             foreach($tuntutan_item as $item){
-                TuntutanItem::where('tuntutan_id', $item['id'])
+                TuntutanItem::where('id', $item['id'])
                     ->update([
                         'kep_saringan'      =>  $invois[$i],
                     ]);
