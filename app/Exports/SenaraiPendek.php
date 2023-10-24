@@ -17,18 +17,26 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
     /**
     * @return \Illuminate\Support\Collection
     */
-    private $programCode; 
+    private $programCode;
+    private $filters;
 
-    public function __construct($programCode)
+    public function __construct($programCode, $filters)
     {
         $this->programCode = $programCode;
+        $this->filters = $filters;
     }
 
     public function collection()
     {
         $senarai_pendek = DB::table('permohonan as a')
             ->where('a.status', 4)
-            ->where('a.program', $this->programCode)
+            ->where('a.program', $this->programCode);
+            
+        if (isset($this->filters['institusi'])) {
+            $senarai_pendek->where('c.id_institusi', $this->filters['institusi']);
+        }
+
+        $senarai_pendek = $senarai_pendek
             ->select(
                 'a.no_rujukan_permohonan', 
                 'd.nama',
@@ -97,12 +105,12 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
                 $event->sheet->getStyle('A1:' . $event->sheet->getHighestColumn() . '1')->applyFromArray([
                     'font' => [
                         'bold' => true,
-                        'color' => ['rgb' => '000000'], // Header font color 
+                        'color' => ['rgb' => 'FFFFFF'], // Header font color 
                         'size' => 12, // Header font size
                     ],
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                        'startColor' => ['rgb' => 'ADD8E6'], // Header background color 
+                        'startColor' => ['rgb' => '00094B'], // Header background color 
                     ],
                 ]);
             },

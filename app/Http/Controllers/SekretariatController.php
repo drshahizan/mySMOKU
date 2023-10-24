@@ -239,13 +239,49 @@ class SekretariatController extends Controller
         return view('kemaskini.sekretariat.surat_tawaran.terkini', compact('suratTawaran','maklumat_kementerian'));
     }
 
+    // public function senaraiKelulusanPermohonan(Request $request)
+    // {
+    //     $query = Permohonan::select('permohonan.*') // Select all columns from the 'permohonan' table
+    //         ->where('permohonan.status', '=', '4'); // Specify the 'status' column belongs to 'permohonan'
+
+    //     if ($request->has('institusi')) {
+    //         $selectedInstitusi = $request->input('institusi');
+    //         $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+    //             ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+    //             ->where('smoku_akademik.id_institusi', $selectedInstitusi);
+    //     }
+
+    //     $kelulusan = $query->get();
+    //     $institusiPengajian = InfoIpt::all();
+
+    //     return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan', 'institusiPengajian'));
+    // }
+        
+    // public function cetakSenaraiPemohonExcel($programCode)
+    // {
+    //     return Excel::download(new SenaraiPendek($programCode), 'PermohonanDisokong.xlsx');
+    // }
+
+    // public function cetakSenaraiPemohonPDF($programCode)
+    // {
+    //     $kelulusan = Permohonan::where('status', '4')
+    //         ->where('program', $programCode)
+    //         ->get();
+
+    //     $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
+
+    //     return $pdf->stream('Senarai-Permohonan-Disokong.pdf');
+    // }
+
     public function senaraiKelulusanPermohonan(Request $request)
     {
-        $query = Permohonan::select('permohonan.*') // Select all columns from the 'permohonan' table
-            ->where('permohonan.status', '=', '4'); // Specify the 'status' column belongs to 'permohonan'
+        $filters = $request->only(['institusi']); // Adjust the filter names as per your form
 
-        if ($request->has('institusi')) {
-            $selectedInstitusi = $request->input('institusi');
+        $query = Permohonan::select('permohonan.*')
+            ->where('permohonan.status', '=', '4');
+
+        if (isset($filters['institusi'])) {
+            $selectedInstitusi = $filters['institusi'];
             $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
                 ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
                 ->where('smoku_akademik.id_institusi', $selectedInstitusi);
@@ -254,25 +290,49 @@ class SekretariatController extends Controller
         $kelulusan = $query->get();
         $institusiPengajian = InfoIpt::all();
 
-        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan', 'institusiPengajian'));
+        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan', 'institusiPengajian', 'filters'));
     }
+
+    public function cetakSenaraiPemohonPDF(Request $request, $programCode)
+    {
+        $filters = $request->only(['institusi']); // Adjust the filter names as per your form
+
+        $query = Permohonan::where('permohonan.status', '4')
+                            ->where('permohonan.program', $programCode);
         
-    public function cetakSenaraiPemohonExcel($programCode)
-    {
-        return Excel::download(new SenaraiPendek($programCode), 'PermohonanDisokong.xlsx');
-    }
-
-    public function cetakSenaraiPemohonPDF($programCode)
-    {
-        $kelulusan = Permohonan::where('status', '4')
-            ->where('program', $programCode)
-            ->get();
-
+        if (isset($filters['institusi']) ) {
+            $selectedInstitusi = $filters['institusi'];
+            $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
+        }
+        
+        $kelulusan = $query->get();
+    
         $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
 
         return $pdf->stream('Senarai-Permohonan-Disokong.pdf');
     }
 
+    public function cetakSenaraiPemohonExcel(Request $request, $programCode)
+    {
+        $filters = $request->only(['institusi']);
+
+        $query = Permohonan::where('permohonan.status', '4')
+                            ->where('permohonan.program', $programCode);
+
+        if (isset($filters['institusi']) && !empty($filters['institusi'])) {
+            $selectedInstitusi = $filters['institusi'];
+            $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
+        }
+
+        $kelulusan = $query->get();
+
+        return Excel::download(new SenaraiPendek($programCode, $filters), 'PermohonanDisokong.xlsx');
+    }
+    
     public function maklumatKelulusanPermohonan($id)
     {
         $permohonan = Permohonan::where('id', $id)->first();
