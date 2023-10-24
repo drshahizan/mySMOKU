@@ -51,7 +51,7 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Keputusan Tuntutan<br><small>Klik ID Permohonan untuk melihat maklumat tuntutan</small></h2>
+                                <h2>Senarai Keputusan Tuntutan<br><small>Sila gunakan fungsi filter untuk menapis data yang ingin dipaparkan sahaja.</small></h2>
                             </div>
                             {{-- Javascript Nav Bar --}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -118,15 +118,17 @@
                                             <table id="sortTable1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 15%"><b>ID Tuntutan</b></th>
-                                                        <th style="width: 45%"><b>Nama</b></th>
-                                                        <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th>
+                                                        <th style="width: 13%"><b>ID Tuntutan</b></th>
+                                                        <th style="width: 40%"><b>Nama</b></th>
+                                                        <th style="width: 15%"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 17%"><b>Tarikh Kemaskini Keputusan</b></th>
                                                         <th class="text-center" style="width: 15%">Status Tuntutan</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($tuntutan as $item)
                                                         @php
+                                                            $no_ruj_tuntutan = $item->no_rujukan_tuntutan;
                                                             $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
                                                             $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                             $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
@@ -142,11 +144,18 @@
                                                                 }
                                                             }
                                                             $pemohon = implode(' ', $result);
+
+                                                            //peringkat pengajian
+                                                            preg_match('/\/(\d+)\//', $no_ruj_tuntutan, $matches); // Extract peringkat pengajian value using regular expression
+                                                            $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null; // $matches[1] will contain the extracted peringkat pengajian value
+                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
                                                         @endphp
+
                                                         @if($permohonan->program=="BKOKU")
                                                         <tr>
-                                                            <td>{{$item['no_rujukan_tuntutan']}}</td>
+                                                            <td>{{$no_ruj_tuntutan}}</td>
                                                             <td>{{$pemohon}}</td>
+                                                            <td>{{ucwords(strtolower($nama_peringkat))}}</td>
                                                             <td class="text-center">{{$item['created_at']->format('Y-m-d')}}</td>
                                                             @if($item['status'] == "6")
                                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
