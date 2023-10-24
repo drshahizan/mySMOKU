@@ -63,7 +63,7 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Keputusan Permohonan</h2>
+                                <h2>Senarai Keputusan Permohonan<br><small>Sila gunakan fungsi filter untuk menapis data yang ingin dipaparkan sahaja.</small></h2>
                                 <ul class="header-dropdown dropdown" style="color: black;">
                                     <li><a href="{{ route('senarai.keputusan.BKOKU.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> BKOKU</a></li>
                                     <li><a href="{{ route('senarai.keputusan.PPK.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> PPK</a></li>

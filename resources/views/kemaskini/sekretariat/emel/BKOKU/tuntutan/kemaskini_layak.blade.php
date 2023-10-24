@@ -127,9 +127,14 @@
                                                 <td class="vertical-top"><textarea style="white-space: pre-line" name="pendahuluan" id="pendahuluan" cols="30" rows="3" class="form-control" value="{{$emel->pendahuluan}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>{{$emel->pendahuluan}}</textarea></td>
                                             </tr>
                                             <tr>
-                                                <td class="vertical-top w-13">Isi Kandungan</td>
+                                                <td class="vertical-top w-13">Isi Kandungan 1</td>
                                                 <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top"><textarea name="isi_kandungan1" id="isi_kandungan1" cols="30" rows="3" class="form-control" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>{{$emel->isi_kandungan1}}</textarea></td>
+                                                <td class="vertical-top"><textarea name="isi_kandungan1" id="isi_kandungan1" cols="30" rows="3" class="form-control">{{$emel->isi_kandungan1}}</textarea></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="vertical-top w-13">Isi Kandungan 2</td>
+                                                <td class="vertical-top w-3">:</td>
+                                                <td class="vertical-top"><textarea name="isi_kandungan2" id="isi_kandungan2" cols="30" rows="3" class="form-control">{{$emel->isi_kandungan2}}</textarea></td>
                                             </tr>
                                             <tr>
                                                 <td class="vertical-top w-13">Penutup</td>

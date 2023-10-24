@@ -76,7 +76,7 @@
                                                 <select name="institusi" class="form-select" style="margin-left: 20px;">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiPengajian as $institusi)
-                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->nama_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -87,13 +87,13 @@
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-3" style="padding-left: 80px;">
-                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                            <div class="col-md-3" style="padding-left: 80px;">  
+                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
-                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
-                                                </a>
+                                                </a>                                                
                                             </div>
                                         </div>
                                     </form>  
@@ -252,7 +252,7 @@
                                                 <select name="institusi" class="form-select" style="margin-left: 20px;">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiPengajian as $institusi)
-                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->nama_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -264,12 +264,12 @@
                                             </div>
 
                                             <div class="col-md-3" style="padding-left: 80px;">
-                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'PPK'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
-                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'PPK'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
-                                                </a>
+                                                </a>                         
                                             </div>
                                         </div>
                                     </form>  
