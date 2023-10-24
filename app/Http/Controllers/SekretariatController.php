@@ -584,6 +584,7 @@ class SekretariatController extends Controller
         return $pdf->stream('SuratTawaran_'.$permohonanId.'.pdf');
     }
 
+    //KEMASKINI
     public function dokumenESP()
     {
         $dokumen = DokumenESP::all();
@@ -853,6 +854,7 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status'));
     }
 
+    //Keputusan
     public function keputusanTuntutan()
     {
         $tuntutan = Tuntutan::where('status', '=','5')
