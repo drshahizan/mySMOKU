@@ -37,6 +37,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class SekretariatController extends Controller
 {
+    //PERMOHONAN
     public function dashboard()
     {
         return view('dashboard.sekretariat.dashboard');
@@ -730,7 +731,7 @@ class SekretariatController extends Controller
                 ->update([
                     'yuran_disokong'        =>  $request->get('yuran_disokong'),
                     'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
-                    'baki_disokong'    =>  $request->get('w_saku_disokong'),
+                    'baki_disokong'         =>  $request->get('w_saku_disokong'),
                     'status'                =>  6,
                 ]);
 
@@ -850,7 +851,6 @@ class SekretariatController extends Controller
             ->get();
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status'));
     }
-
 
     public function keputusanTuntutan()
     {
