@@ -68,7 +68,6 @@
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br><br>
                                     <form action="{{route('keputusan.tuntutan')}}" method="GET">
-                                        @php header("Cache-Control: no-cache, must-revalidate"); @endphp
                                         <div class="row" style="margin-left:15px;">
                                             <div class="col-md-3 black">
                                                 Pilih Julat Tarikh:
