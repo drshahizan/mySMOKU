@@ -716,7 +716,8 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.saringan.maklumat_tuntutan',compact('permohonan','smoku','akademik','tuntutan','tuntutan_item'));
     }
 
-    public function saringTuntutanKedua(Request $request, $id){
+    public function saringTuntutanKedua(Request $request, $id)
+    {
         $no_rujukan_tuntutan= Tuntutan::where('id', $id)->value('no_rujukan_tuntutan');
         $permohonan_id = Tuntutan::where('id', $id)->value('permohonan_id');
         $smoku_id = Permohonan::where('id', $permohonan_id)->value('smoku_id');
