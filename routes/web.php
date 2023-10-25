@@ -38,7 +38,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 //api esp
 //Route::middleware('api.token')->group(function () {
 
-    Route::get('/maklumatESP', [MaklumatESPController::class, 'index']);
+    Route::get('/maklumatESP', [MaklumatESPController::class, 'index'])->name('permohonan.esp');
     Route::post('/maklumatESP', [MaklumatESPController::class, 'hantar'])->name('maklumat.esp');
     Route::get('/kemaskiniESP', [MaklumatESPController::class, 'kemaskiniStatusESP']);
     Route::post('/statusESP', [MaklumatESPController::class, 'receiveData']);

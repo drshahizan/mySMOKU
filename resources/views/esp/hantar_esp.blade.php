@@ -429,9 +429,9 @@ function toggleSelectAll(tab) {
 
 </script>
 <style>
-  /* #data {
+  #data {
     display: none;
-  } */
+  }
 </style>
 
 
