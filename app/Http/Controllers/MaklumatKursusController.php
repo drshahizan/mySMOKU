@@ -19,18 +19,18 @@ class MaklumatKursusController extends Controller
             $data = json_decode($response->body(), true);
 
             if (isset($data['dataMQR'])) {
-                $counter = 0;
+                // $counter = 0;
                 foreach ($data['dataMQR'] as $item) {
-                    if ($counter < 500) {
-                        // MaklumatKursusMQA::updateOrInsert(
-                        //     ['NoRujProg' => $item['NoRujProg']], 
-                        //     $item 
-                        // );
-                        MaklumatKursusMQA::create($item);
-                       $counter++;
-                    } else {
-                       break; // Break the loop after inserting 10 records
-                    }
+                    // if ($counter < 500) {
+                        MaklumatKursusMQA::updateOrInsert(
+                            ['NoRujProg' => $item['NoRujProg']], 
+                            $item 
+                        );
+                        //MaklumatKursusMQA::create($item);
+                    //    $counter++;
+                    // } else {
+                    //    break; // Break the loop after inserting 10 records
+                    // }
                 }
                 return response()->json(['message' => 'Data inserted successfully'], 200);
             } else {
