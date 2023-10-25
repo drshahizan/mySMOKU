@@ -54,6 +54,11 @@ class PentadbirController extends Controller
                 'status' => '1',
         
             ]);
+            
+        $email = $request->email;
+        $no_kp = $request->no_kp;
+        Mail::to($email)->send(new mailDaftarPengguna($email,$no_kp));
+        return redirect()->route('daftarpengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' .$request->nama);    
         }else {
 
         User::where('no_kp' ,$request->no_kp)
