@@ -86,16 +86,26 @@
                                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
-                                                <th style="width: 17%"><b>ID Tuntutan</b></th>
-                                                <th><b>Nama</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Status Saringan</b></th>
+                                                <th style="width: 10%"><b>ID Tuntutan</b></th>
+                                                <th style="width: 20%"><b>Nama</b></th>
+                                                <th style="width: 21%"><b>Nama Kursus</b></th>
+                                                <th style="width: 25%"><b>Institusi Pengajian</b></th>
+                                                <th style="width: 8%" class="text-center"><b>Tarikh Tuntutan</b></th>
+                                                <th style="width: 8%" class="text-center"><b>Tarikh Dibayar</b></th>
+                                                <th style="width: 8%" class="text-center"><b>Status</b></th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @foreach ($tuntutan as $item)
                                                 @php
                                                     $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
+
+                                                    $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
+                                                    $peringkat = $rujukan[1];
+                                                    $akademik = DB::table('smoku_akademik')->where('smoku_id', $permohonan->smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+                                                    $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
+                                                    $tkh_bayaran = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', 8)->value('created_at');
+
                                                     $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                     if ($item['status']==2){
@@ -117,6 +127,34 @@
                                                     }
                                                     $pemohon = implode(' ', $result);
 
+                                                    //nama kursus
+                                                    $text2 = ucwords(strtolower($akademik->nama_kursus));
+                                                    $conjunctions = ['of', 'in', 'and'];
+                                                    $words = explode(' ', $text2);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
+                                                        }
+                                                    }
+                                                    $kursus = implode(' ', $result);
+
+                                                    //institusi pengajian
+                                                    $text3 = ucwords(strtolower($nama_institusi));
+                                                    $conjunctions = ['of', 'in', 'and'];
+                                                    $words = explode(' ', $text3);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
+                                                        }
+                                                    }
+                                                    $institusi = implode(' ', $result);
+
                                                 @endphp
                                                 @if($permohonan->program=="BKOKU")
                                                     <tr>
@@ -129,7 +167,10 @@
 {{--                                                            @endif--}}
                                                         </td>
                                                         <td>{{$pemohon}}</td>
+                                                        <td>{{$kursus}}</td>
+                                                        <td>{{$institusi}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        <td class="text-center">{{date('d/m/Y', strtotime($tkh_bayaran))}}</td>
                                                         @if ($item['status']=='6')
                                                             <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
@@ -150,16 +191,26 @@
                                         <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
-                                                <th style="width: 17%"><b>ID Tuntutan</b></th>
-                                                <th><b>Nama</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Status</b></th>
+                                                <th style="width: 10%"><b>ID Tuntutan</b></th>
+                                                <th style="width: 20%"><b>Nama</b></th>
+                                                <th style="width: 21%"><b>Nama Kursus</b></th>
+                                                <th style="width: 25%"><b>Institusi Pengajian</b></th>
+                                                <th style="width: 8%" class="text-center"><b>Tarikh Tuntutan</b></th>
+                                                <th style="width: 8%" class="text-center"><b>Tarikh Dibayar</b></th>
+                                                <th style="width: 8%" class="text-center"><b>Status</b></th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @foreach ($tuntutan as $item)
                                                 @php
                                                     $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
+
+                                                    $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
+                                                    $peringkat = $rujukan[1];
+                                                    $akademik = DB::table('smoku_akademik')->where('smoku_id', $permohonan->smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+                                                    $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
+                                                    $tkh_bayaran = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', 8)->value('created_at');
+
                                                     $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                     if ($item['status']==2){
@@ -180,6 +231,34 @@
                                                         }
                                                     }
                                                     $pemohon = implode(' ', $result);
+
+                                                    //nama kursus
+                                                    $text2 = ucwords(strtolower($akademik->nama_kursus));
+                                                    $conjunctions = ['of', 'in', 'and'];
+                                                    $words = explode(' ', $text2);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
+                                                        }
+                                                    }
+                                                    $kursus = implode(' ', $result);
+
+                                                    //institusi pengajian
+                                                    $text3 = ucwords(strtolower($nama_institusi));
+                                                    $conjunctions = ['of', 'in', 'and'];
+                                                    $words = explode(' ', $text3);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
+                                                        }
+                                                    }
+                                                    $institusi = implode(' ', $result);
                                                 @endphp
                                                 @if($permohonan->program=="PPK")
                                                     <tr>
@@ -192,7 +271,10 @@
 {{--                                                            @endif--}}
                                                         </td>
                                                         <td>{{$pemohon}}</td>
+                                                        <td>{{$kursus}}</td>
+                                                        <td>{{$institusi}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        <td class="text-center">{{date('d/m/Y', strtotime($tkh_bayaran))}}</td>
                                                         @if ($item['status']=='6')
                                                             <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
