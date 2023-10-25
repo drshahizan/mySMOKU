@@ -762,8 +762,15 @@ class SekretariatController extends Controller
             ]);
             $status_rekod->save();
 
-            $emel = EmelKemaskini::where('emel_id',5)->first();
-            Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
+            $program = Permohonan::where('id', $permohonan_id)->value('program');
+            if($program=="BKOKU"){
+                $emel = EmelKemaskini::where('emel_id',5)->first();
+                Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
+            }
+            elseif($program=="PPK"){
+                $emel = EmelKemaskini::where('emel_id',11)->first();
+                Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
+            }
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Layak'.";
         }
@@ -800,8 +807,16 @@ class SekretariatController extends Controller
 
             $saringan = SaringanTuntutan::where('tuntutan_id',$id)->first();
             $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
-            $emel = EmelKemaskini::where('emel_id',6)->first();
-            Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+
+            $program = Permohonan::where('id', $permohonan_id)->value('program');
+            if($program=="BKOKU"){
+                $emel = EmelKemaskini::where('emel_id',6)->first();
+                Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+            }
+            elseif($program=="PPK"){
+                $emel = EmelKemaskini::where('emel_id',12)->first();
+                Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+            }
 
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Tidak Layak'.";
@@ -839,8 +854,16 @@ class SekretariatController extends Controller
 
             $saringan = SaringanTuntutan::where('tuntutan_id',$id)->first();
             $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
-            $emel = EmelKemaskini::where('emel_id',4)->first();
-            Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+
+            $program = Permohonan::where('id', $permohonan_id)->value('program');
+            if($program=="BKOKU"){
+                $emel = EmelKemaskini::where('emel_id',4)->first();
+                Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+            }
+            elseif($program=="PPK"){
+                $emel = EmelKemaskini::where('emel_id',10)->first();
+                Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+            }
 
             $status_kod=2;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah dikembalikan.";

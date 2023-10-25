@@ -154,8 +154,17 @@ class SaringanController extends Controller
                     $n++;
                 }
             }
-            $emel = EmelKemaskini::where('emel_id',1)->first();
-            Mail::to($smoku_emel)->send(new SaringanMail($catatan,$emel));
+
+            $program = Permohonan::where('id', $id)->value('program');
+            if($program=="BKOKU"){
+                $emel = EmelKemaskini::where('emel_id',1)->first();
+                Mail::to($smoku_emel)->send(new SaringanMail($catatan,$emel));
+            }
+            elseif($program=="PPK"){
+                $emel = EmelKemaskini::where('emel_id',7)->first();
+                Mail::to($smoku_emel)->send(new SaringanMail($catatan,$emel));
+            }
+
             $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
 
             $catatan = new Saringan([
