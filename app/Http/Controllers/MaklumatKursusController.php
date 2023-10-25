@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Models\MaklumatKursusMQA;
@@ -13,6 +14,8 @@ class MaklumatKursusController extends Controller
 {
     public function index()
     {
+        set_time_limit(1200);
+
         $response = Http::post('http://10.29.216.151/api/bkoku/request-MQR');
 
         if ($response->successful()) {
