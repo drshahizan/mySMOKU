@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('tahap');
             $table->string('jawatan')->nullable();
             $table->integer('id_institusi')->nullable();
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
