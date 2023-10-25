@@ -82,7 +82,7 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Saring Tuntutan</b></li>
+                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Pembayaran</b></li>
                             </ul>
                             {{-- <div class="ml-auto">
                                 <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank" class="btn btn-primary">Cetak</a>
@@ -279,7 +279,7 @@
                                                 <tr>
                                                     <td class="vertical-top">Catatan</td>
                                                     <td class="vertical-top">:</td>
-                                                    <td class="vertical-top"><textarea name="catatan" id="catatan_dibayar" cols="30" rows="3">{{$tuntutan->catatan_dibayar}}</textarea></td>
+                                                    <td class="vertical-top"><textarea name="catatan_dibayar" id="catatan_dibayar" cols="30" rows="3">{{$tuntutan->catatan_dibayar}}</textarea></td>
                                                 </tr>
 
                                             </table>
@@ -362,7 +362,7 @@
                                                 <tr>
                                                     <td class="vertical-top">Catatan</td>
                                                     <td class="vertical-top">:</td>
-                                                    <td class="vertical-top"><textarea name="catatan" id="catatan_dibayar" cols="30" rows="3">{{$tuntutan->catatan_dibayar}}</textarea></td>
+                                                    <td class="vertical-top"><textarea name="catatan_dibayar" id="catatan_dibayar" cols="30" rows="3">{{$tuntutan->catatan_dibayar}}</textarea></td>
                                                 </tr>
 
                                             </table>
@@ -446,7 +446,7 @@
                                                 <tr>
                                                     <td class="vertical-top">Catatan</td>
                                                     <td class="vertical-top">:</td>
-                                                    <td class="vertical-top"><textarea name="catatan" id="catatan_dibayar" cols="30" rows="3">{{$tuntutan->catatan_dibayar}}</textarea></td>
+                                                    <td class="vertical-top"><textarea name="catatan_dibayar" id="catatan_dibayar" cols="30" rows="3">{{$tuntutan->catatan_dibayar}}</textarea></td>
                                                 </tr>
 
                                             </table>
@@ -528,7 +528,7 @@
                                                 <tr>
                                                     <td class="vertical-top">Catatan</td>
                                                     <td class="vertical-top">:</td>
-                                                    <td class="vertical-top"><textarea name="catatan" id="catatan_dibayar" cols="30" rows="3">{{$tuntutan->catatan_dibayar}}</textarea></td>
+                                                    <td class="vertical-top"><textarea name="catatan_dibayar" id="catatan_dibayar" cols="30" rows="3">{{$tuntutan->catatan_dibayar}}</textarea></td>
                                                 </tr>
 
                                             </table>
