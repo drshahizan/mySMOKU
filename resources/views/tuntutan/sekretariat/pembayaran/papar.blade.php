@@ -282,13 +282,13 @@
                                         <td>:</td>
                                         <td>{{number_format($tuntutan->yuran_dibayar + $tuntutan->wang_saku_dibayar, 2)}}</td>
                                         </tr>
-                                        <tr>
-                                            @if($saringan->catatan!=null)
+                                        @if($tuntutan->catatan_dibayar!=null)
+                                            <tr>
                                                 <td>Catatan</td>
                                                 <td>:</td>
-                                                <td>{{$saringan->catatan}}</td>
-                                            @endif
-                                        </tr>
+                                                <td>{{$tuntutan->catatan_dibayar}}</td>
+                                            </tr>
+                                        @endif
                                     </table>
                                 </div>
                             @elseif($permohonan->program == "BKOKU" && $tuntutan->yuran == NULL)
@@ -328,13 +328,13 @@
                                         <td>:</td>
                                         <td>{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>
                                         </tr>
-                                        <tr>
-                                            @if($saringan->catatan!=null)
+                                        @if($tuntutan->catatan_dibayar!=null)
+                                            <tr>
                                                 <td>Catatan</td>
                                                 <td>:</td>
-                                                <td>{{$saringan->catatan}}</td>
-                                            @endif
-                                        </tr>
+                                                <td>{{$tuntutan->catatan_dibayar}}</td>
+                                            </tr>
+                                        @endif
                                     </table>
                                 </div>
                             @elseif($permohonan->program == "BKOKU" && $tuntutan->wang_saku == NULL)
@@ -388,13 +388,13 @@
                                         <td>:</td>
                                         <td>{{number_format($tuntutan->yuran_dibayar, 2)}}</td>
                                         </tr>
-                                        <tr>
-                                            @if($saringan->catatan!=null)
+                                        @if($tuntutan->catatan_dibayar!=null)
+                                            <tr>
                                                 <td>Catatan</td>
                                                 <td>:</td>
-                                                <td>{{$saringan->catatan}}</td>
-                                            @endif
-                                        </tr>
+                                                <td>{{$tuntutan->catatan_dibayar}}</td>
+                                            </tr>
+                                        @endif
                                     </table>
                                 </div>
                             @elseif($permohonan->program == "PPK")
@@ -434,13 +434,13 @@
                                         <td>:</td>
                                         <td>{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>
                                         </tr>
-                                        <tr>
-                                            @if($saringan->catatan!=null)
+                                        @if($tuntutan->catatan_dibayar!=null)
+                                            <tr>
                                                 <td>Catatan</td>
                                                 <td>:</td>
-                                                <td>{{$saringan->catatan}}</td>
-                                            @endif
-                                        </tr>
+                                                <td>{{$tuntutan->catatan_dibayar}}</td>
+                                            </tr>
+                                        @endif
                                     </table>
                                 </div>
                             @endif

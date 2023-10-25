@@ -279,7 +279,7 @@
                                                 <tr>
                                                     <td class="vertical-top">Catatan</td>
                                                     <td class="vertical-top">:</td>
-                                                    <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
+                                                    <td class="vertical-top"><textarea name="catatan" id="catatan_dibayar" cols="30" rows="3">{{$tuntutan->catatan_dibayar}}</textarea></td>
                                                 </tr>
 
                                             </table>
@@ -362,7 +362,7 @@
                                                 <tr>
                                                     <td class="vertical-top">Catatan</td>
                                                     <td class="vertical-top">:</td>
-                                                    <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
+                                                    <td class="vertical-top"><textarea name="catatan" id="catatan_dibayar" cols="30" rows="3">{{$tuntutan->catatan_dibayar}}</textarea></td>
                                                 </tr>
 
                                             </table>
@@ -446,7 +446,7 @@
                                                 <tr>
                                                     <td class="vertical-top">Catatan</td>
                                                     <td class="vertical-top">:</td>
-                                                    <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
+                                                    <td class="vertical-top"><textarea name="catatan" id="catatan_dibayar" cols="30" rows="3">{{$tuntutan->catatan_dibayar}}</textarea></td>
                                                 </tr>
 
                                             </table>
@@ -528,7 +528,7 @@
                                                 <tr>
                                                     <td class="vertical-top">Catatan</td>
                                                     <td class="vertical-top">:</td>
-                                                    <td class="vertical-top"><textarea name="catatan" id="catatan" cols="30" rows="3"></textarea></td>
+                                                    <td class="vertical-top"><textarea name="catatan" id="catatan_dibayar" cols="30" rows="3">{{$tuntutan->catatan_dibayar}}</textarea></td>
                                                 </tr>
 
                                             </table>

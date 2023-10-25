@@ -1080,6 +1080,7 @@ class SekretariatController extends Controller
                 'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
                 'baki_dibayar'          =>  $request->get('w_saku_dibayar'),
                 'baki_disokong'         =>  $request->get('w_saku_disokong'),
+                'catatan_dibayar'          =>  $request->get('catatan_dibayar'),
                 'status'                =>  8,
             ]);
 

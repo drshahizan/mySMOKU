@@ -28,6 +28,7 @@ class Tuntutan extends Model
         'baki',
         'baki_disokong',
         'baki_dibayar',
+        'catatan_dibayar',
         'status',
 
     ];
