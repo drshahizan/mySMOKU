@@ -31,6 +31,7 @@ use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
@@ -855,14 +856,68 @@ class SekretariatController extends Controller
     }
 
     //Keputusan
-    public function keputusanTuntutan()
+    // public function keputusanTuntutan(Request $request)
+    // {
+    //     $dateRange = $request->input('daterange');
+    //     $status = $request->input('status');
+
+    //     // You can update this query to filter by both date range and status
+    //     $tuntutanQuery = Tuntutan::where('status', '5')
+    //         ->orWhere('status', '6')
+    //         ->orWhere('status', '7');
+
+    //     if (!empty($dateRange)) {
+    //         // Convert the date range format to "YYYY-MM-DD"
+    //         list($start, $end) = explode(' - ', $dateRange);
+    //         $startDate = date('Y-m-d', strtotime(str_replace('/', '-', $start)));
+    //         $endDate = date('Y-m-d', strtotime(str_replace('/', '-', $end)));
+    
+    //         $tuntutanQuery->whereBetween('created_at', [$startDate, $endDate]);
+    //     }
+
+    //     if (!empty($status)) {
+    //         $tuntutanQuery->where('status', $status);
+    //     }
+
+    //     $tuntutan = $tuntutanQuery->get();
+
+    //     return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan', compact('tuntutan'));
+    // }
+
+    public function keputusanTuntutan(Request $request)
     {
-        $tuntutan = Tuntutan::where('status', '=','5')
-        ->orWhere('status', '=','6')
-        ->orWhere('status', '=','7')
-        ->get();
-        return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan',compact('tuntutan'));
+        $dateRange = $request->input('daterange');
+        $status = $request->input('status');
+
+        // You can update this query to filter by both date range and status
+        $tuntutanQuery = Tuntutan::where('status', '5')
+            ->orWhere('status', '6')
+            ->orWhere('status', '7');
+
+        if (!empty($dateRange)) {
+            // Convert the date range format to "YYYY-MM-DD"
+            list($start, $end) = explode(' - ', $dateRange);
+            $startDate = date('Y-m-d', strtotime(str_replace('/', '-', $start)));
+            $endDate = date('Y-m-d', strtotime(str_replace('/', '-', $end)));
+
+            // Log the SQL query and bindings
+            Log::info('Generated SQL query:', [
+                'query' => $tuntutanQuery->whereBetween('created_at', [$startDate, $endDate])->toSql(),
+                'bindings' => $tuntutanQuery->getBindings(),
+            ]);
+
+            $tuntutanQuery->whereBetween('created_at', [$startDate, $endDate]);
+        }
+
+        if (!empty($status)) {
+            $tuntutanQuery->where('status', $status);
+        }
+
+        $tuntutan = $tuntutanQuery->get();
+
+        return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan', compact('tuntutan'));
     }
+
 
     //Papar Tuntutan Telah Disaring
     public function paparTuntutanKedua($id){

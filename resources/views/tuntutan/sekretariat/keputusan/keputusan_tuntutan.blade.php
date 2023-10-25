@@ -67,47 +67,21 @@
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br><br>
-                                    <form action="" method="GET">
+                                    <form action="{{route('keputusan.tuntutan')}}" method="GET">
+                                        @php header("Cache-Control: no-cache, must-revalidate"); @endphp
                                         <div class="row" style="margin-left:15px;">
                                             <div class="col-md-3 black">
                                                 Pilih Julat Tarikh:
-                                                <input type="text" name="daterange" id="daterange" value="08/01/2023 - 08/30/2023" class="form-control"/>
-                                                <script>
-                                                    $(function() {
-                                                        $('input[name="daterange"]').daterangepicker({
-                                                            opens: 'left'
-                                                        }, function(start, end, label) {
-                                                            // Custom filtering function which will search data in column four between two values
-                                                            DataTable.ext.search.push(function (settings, data, dataIndex) {
-                                                                let min = new Date(start).toLocaleDateString();
-                                                                let max = new Date(end).toLocaleDateString();
-
-                                                                let date = new Date(data[2]).toLocaleDateString();
-
-                                                                if (
-                                                                    (min === null && max === null) ||
-                                                                    (min === null && date <= max) ||
-                                                                    (min <= date && max === null) ||
-                                                                    (min <= date && date <= max)
-                                                                ) {
-                                                                    return true;
-                                                                }
-                                                                return false;
-                                                            });
-
-                                                            // DataTables initialisation
-                                                            let table = new DataTable('#sortTable1');
-                                                            table.draw();
-                                                        });
-                                                    });
-                                                </script>
+                                                <input type="text" name="daterange" id="daterange" value="{{ Request::get('daterange') }}" class="form-control"/>
                                             </div>
+
                                             <div class="col-md-3 black">
                                                 Pilih Keputusan:
                                                 <select name="status" id="status" class="form-select">
                                                     <option value="">Sila Pilih</option>
                                                     <option value="Layak">Layak</option>
                                                     <option value="Tidak Layak">Tidak Layak</option>
+                                                    <option value="Dikembalikan">Dikembalikan</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -156,7 +130,7 @@
                                                             <td>{{$no_ruj_tuntutan}}</td>
                                                             <td>{{$pemohon}}</td>
                                                             <td>{{ucwords(strtolower($nama_peringkat))}}</td>
-                                                            <td class="text-center">{{$item['created_at']->format('Y-m-d')}}</td>
+                                                            <td class="text-center">{{$item['created_at']->format('d-m-Y')}}</td>
                                                             @if($item['status'] == "6")
                                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=="5")
@@ -179,7 +153,7 @@
                                     <form action="" method="GET">
                                         <div class="row" style="margin-left:15px;">
                                             <div class="col-md-3">
-                                                <input type="date" name="date" value="{{Request::get('date')?? ' '}}" class="form-control"/>
+                                                <input type="daterange" name="daterange" id="daterange" value="{{ Request::get('daterange') }}" class="form-control"/>
                                             </div>
 
                                             <div class="col-md-3">
@@ -259,16 +233,63 @@
         </div>
 
         <script>
-            $('#sortTable1').DataTable();
             $('#sortTable2').DataTable();
-            $('input[name="dates"]').daterangepicker();
+            //$('input[name="daterange"]').daterangepicker();
         </script>
-        <script>
 
+        <script>
+            $(document).ready(function() {
+                var table = $('#sortTable1').DataTable();
+
+                $('#daterange').daterangepicker({
+                    opens: 'left',
+                    locale: {
+                        format: 'DD/MM/YYYY' // Set the desired format for the date range picker
+                    }
+                }, function(start, end, label) {
+                    var startDate = start.format('YYYY-MM-DD'); // Convert to match your table format
+                    var endDate = end.format('YYYY-MM-DD');     // Convert to match your table format
+
+                    // Use column(3) if that's the column containing your date data.
+                    // Make sure the date format matches the format in your table.
+                    table.column(3).search(startDate + ' - ' + endDate).draw();
+                });
+
+                $('#status').on('change', function() {
+                    var status = $(this).val();
+
+                    // Use column(4) if that's the column containing your status data.
+                    table.column(4).search(status).draw();
+                });
+            });
         </script>
+
         {{-- <script>
-           $('#status').on('change', function(){
-            $('#sortTable1').DataTable().search(this.value).draw();
-          });
-        </script> --}}
+            $(document).ready(function() {
+                var table = $('#sortTable1').DataTable();
+
+                $('#daterange').daterangepicker({
+                    opens: 'left',
+                }, function(start, end, label) {
+                    var startDate = start.format('YYYY-MM-DD');
+                    var endDate = end.format('YYYY-MM-DD');
+
+                    console.log('startDate: ' + startDate); // Add this line
+                    console.log('endDate: ' + endDate);     // Add this line
+
+                    // Use column(3) if that's the column containing your date data.
+                    // Make sure the date format matches the format in your table.
+                    table.column(3).search(startDate + ' - ' + endDate).draw();
+                });
+
+                $('#status').on('change', function() {
+                    var status = $(this).val();
+
+                    console.log('status: ' + status); // Add this line
+
+                    // Use column(4) if that's the column containing your status data.
+                    table.column(4).search(status).draw();
+                });
+            });
+        </script>                       --}}
 </x-default-layout>
