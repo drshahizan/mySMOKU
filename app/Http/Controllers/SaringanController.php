@@ -317,9 +317,7 @@ class SaringanController extends Controller
     //pembayaran
     public function senaraiPembayaran()
     {
-        $permohonan = Permohonan::where('status', '6')
-            ->orWhere('status', '=','8')
-            ->get();
+        $permohonan = Permohonan::where('status', '8')->get();
         $status_kod=0;
         $status = null;
         return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status'));
@@ -359,9 +357,7 @@ class SaringanController extends Controller
         $status_rekod->save();
 
         $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
-        $permohonan = Permohonan::where('status', '6')
-            ->orWhere('status', '=','8')
-            ->get();
+        $permohonan = Permohonan::where('status', '8')->get();
         $status_kod = 3;
         $status = "Permohonan ".$no_rujukan_permohonan." telah dibayar.";
         return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status'));
@@ -397,9 +393,7 @@ class SaringanController extends Controller
             ]);
 
         $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
-        $permohonan = Permohonan::where('status', '6')
-            ->orWhere('status', '=','8')
-            ->get();
+        $permohonan = Permohonan::where('status', '8')->get();
         $status_kod = 3;
         $status = "Pembayaran ".$no_rujukan_permohonan." telah dikemaskini.";
         return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status'));

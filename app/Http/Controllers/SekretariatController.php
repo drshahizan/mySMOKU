@@ -871,7 +871,7 @@ class SekretariatController extends Controller
     //         list($start, $end) = explode(' - ', $dateRange);
     //         $startDate = date('Y-m-d', strtotime(str_replace('/', '-', $start)));
     //         $endDate = date('Y-m-d', strtotime(str_replace('/', '-', $end)));
-    
+
     //         $tuntutanQuery->whereBetween('created_at', [$startDate, $endDate]);
     //     }
 
@@ -1049,9 +1049,7 @@ class SekretariatController extends Controller
     //Pembayaran
     public function senaraiPembayaran()
     {
-        $tuntutan = Tuntutan::where('status', '6')
-            ->orWhere('status', '=','8')
-            ->get();
+        $tuntutan = Tuntutan::where('status', '8')->get();
         $status_kod=0;
         $status = null;
         return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status'));
@@ -1095,9 +1093,7 @@ class SekretariatController extends Controller
         $status_kod=1;
         $status = "Tuntutan ".$no_rujukan_tuntutan." telah dibayar.";
 
-        $tuntutan = Tuntutan::where('status', '6')
-            ->orWhere('status', '=','8')
-            ->get();
+        $tuntutan = Tuntutan::where('status', '8')->get();
         return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status'));
     }
 
@@ -1135,9 +1131,7 @@ class SekretariatController extends Controller
         $status_kod=1;
         $status = "Tuntutan ".$no_rujukan_tuntutan." berjaya dikemaskini.";
 
-        $tuntutan = Tuntutan::where('status', '6')
-            ->orWhere('status', '=','8')
-            ->get();
+        $tuntutan = Tuntutan::where('status', '8')->get();
         return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status'));
     }
 }

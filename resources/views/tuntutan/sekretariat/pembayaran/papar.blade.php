@@ -283,9 +283,11 @@
                                         <td>{{number_format($tuntutan->yuran_dibayar + $tuntutan->wang_saku_dibayar, 2)}}</td>
                                         </tr>
                                         <tr>
-                                            <td>Catatan</td>
-                                            <td>:</td>
-                                            <td>{{$saringan->catatan}}</td>
+                                            @if($saringan->catatan!=null)
+                                                <td>Catatan</td>
+                                                <td>:</td>
+                                                <td>{{$saringan->catatan}}</td>
+                                            @endif
                                         </tr>
                                     </table>
                                 </div>
@@ -327,9 +329,11 @@
                                         <td>{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>
                                         </tr>
                                         <tr>
-                                            <td>Catatan</td>
-                                            <td>:</td>
-                                            <td>{{$saringan->catatan}}</td>
+                                            @if($saringan->catatan!=null)
+                                                <td>Catatan</td>
+                                                <td>:</td>
+                                                <td>{{$saringan->catatan}}</td>
+                                            @endif
                                         </tr>
                                     </table>
                                 </div>
@@ -385,9 +389,11 @@
                                         <td>{{number_format($tuntutan->yuran_dibayar, 2)}}</td>
                                         </tr>
                                         <tr>
-                                            <td>Catatan</td>
-                                            <td>:</td>
-                                            <td>{{$saringan->catatan}}</td>
+                                            @if($saringan->catatan!=null)
+                                                <td>Catatan</td>
+                                                <td>:</td>
+                                                <td>{{$saringan->catatan}}</td>
+                                            @endif
                                         </tr>
                                     </table>
                                 </div>
@@ -429,9 +435,11 @@
                                         <td>{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>
                                         </tr>
                                         <tr>
-                                            <td>Catatan</td>
-                                            <td>:</td>
-                                            <td>{{$saringan->catatan}}</td>
+                                            @if($saringan->catatan!=null)
+                                                <td>Catatan</td>
+                                                <td>:</td>
+                                                <td>{{$saringan->catatan}}</td>
+                                            @endif
                                         </tr>
                                     </table>
                                 </div>

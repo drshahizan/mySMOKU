@@ -121,11 +121,12 @@
                                                 @if($permohonan->program=="BKOKU")
                                                     <tr>
                                                         <td>
-                                                            @if($item['status']==6)
-                                                                <a href="{{ url('tuntutan/sekretariat/pembayaran/maklumat/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @else
-                                                                <a href="{{ url('tuntutan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @endif
+                                                            <a href="{{ url('tuntutan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+{{--                                                            @if($item['status']==6)--}}
+{{--                                                                <a href="{{ url('tuntutan/sekretariat/pembayaran/maklumat/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>--}}
+{{--                                                            @else--}}
+{{--                                                                <a href="{{ url('tuntutan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>--}}
+{{--                                                            @endif--}}
                                                         </td>
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
@@ -183,11 +184,12 @@
                                                 @if($permohonan->program=="PPK")
                                                     <tr>
                                                         <td>
-                                                            @if($item['status']==6)
-                                                                <a href="{{ url('tuntutan/sekretariat/pembayaran/maklumat/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @else
-                                                                <a href="{{ url('tuntutan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @endif
+                                                            <a href="{{ url('tuntutan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+{{--                                                            @if($item['status']==6)--}}
+{{--                                                                <a href="{{ url('tuntutan/sekretariat/pembayaran/maklumat/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>--}}
+{{--                                                            @else--}}
+{{--                                                                <a href="{{ url('tuntutan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>--}}
+{{--                                                            @endif--}}
                                                         </td>
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
