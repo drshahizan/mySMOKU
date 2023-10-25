@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>BKOKU: Daftar Pengguna Sistem</title>
+    <title>SistemBKOKU: Daftar Pengguna Sistem</title>
 </head>
 <body>
-    <h3>SistemBKOKU: Pengaktifan Akaun Sistem BKOKU dan PPK</h3>
-    <p>Assalammualaikum W.R.T & Salam Sejahtera.</p>
+    <h3>PENDAFTARAN AKAUN PENGGUNA BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU) / PROGRAM PENDIDIKAN KHAS (PPK) </h3>
+    <p>Assalamualaikum WBT & Salam Sejahtera,</p>
     <br>
-    <p>Adalah dimaklumkan bahawa pendaftaran akaun anda telah diterima.</p>
+    <p>Tuan/Puan,</p>
+    <br>
+    <p>Dimaklumkan bahawa pendaftaran akaun tuan/puan telah diterima. 
+        Maklumat untuk mendaftar masuk ke dalam sistem BKOKU adalah seperti berikut:</p>
     
-    <p>Di bawah adalah maklumat daripada permintaan pendaftaran akaun SistemBKOKU anda.</p>
     <br>
     <p>Nombor Kad Pengenalan : {{$no_kp}}
     <p>Alamat E-mel : {{$email}}
@@ -17,13 +19,14 @@
     <p>Sila klik <a href="{{$verificationUrl}}">disini</a> atau masukkan URL di bawah untuk mengaktifkan akaun
         anda di {{$verificationUrl}}</p>
     <br>
-    <p>Jika ada sebarang pertanyaan, sila hubungi khidmat pelanggan di talian 03-8888 1616
-        atau e-mel ke biasiswabkoku@mohe.gov.my </p>
+    <p>Jika mempunyai sebarang pertanyaan, sila hubungi <i>hotline</i> BKOKU di talian 03-8888 1616 atau e-mel ke bkoku@mohe.gov.my. </p>
    
     <p>Untuk maklumat lanjut, sila layari https://biasiswa.mohe.gov.my/ </p>
     <br>
-    <p>Sekian, terima kasih</p>
+    <p>Sekian, terima kasih.</p>
     <br>
-    <p><b>Pentadbir Sistem BKOKU dan PPK</b></p>
+    <p><b>Unit Bantuan Kewangan OKU/Program Pendidikan Khas</b></p>
+    <p><b>Bahagian Biasiswa</b></p>
+    <p><b>Kementerian Pendidikan Tinggi</b></p>
 </body>
 </html>
