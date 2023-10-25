@@ -141,7 +141,7 @@
 				</div>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="{{ route('penyelaras.dokumen')}}">
+				<a class="menu-link" href="{{ route('maklumat.bank')}}">
 					<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
 					<span class="menu-title">Maklumat Bank Universiti</span>
 				</a>
