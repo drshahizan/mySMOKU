@@ -816,13 +816,44 @@ class PenyelarasController extends Controller
 
     public function maklumatBank()
     {   
-        $bank = MaklumatBank::all();
-        return view('kemaskini.penyelaras.maklumat_bank', compact('bank'));
+        $user = auth()->user();
+        $id = $user->id_institusi;
+        $bank = MaklumatBank::where('institusi_id', $id)->first();
+
+        // Check if a record exists, and if not, create a new one
+        if (!$bank) {
+            $bank = new MaklumatBank();
+            $bank->institusi_id = $id;
+            $bank->nama_akaun = ''; // Provide a default value for 'nama_akaun'
+            $bank->no_akaun = '';   // Provide a default value for 'no_akaun'
+        }
+
+        return view('kemaskini.penyelaras.maklumat_bank', compact('user','bank'));
     }
 
-    public function kemaskiniMaklumatBank(Request $request)
-    {   
-        $bank = MaklumatBank::all();
-        return view('kemaskini.penyelaras.maklumat_bank', compact('bank'));
+    public function kemaskiniMaklumatBank(Request $request, $id)
+    {
+        // Check if a record with the specified institusi_id exists
+        $bank = MaklumatBank::where('institusi_id', $id)->first();
+        // Check the id of institusi for the respective user
+        $user = auth()->user();
+
+        if ($bank) {
+            // If the record exists, update it
+            $bank->update([
+                'nama_akaun' => $request->input('nama_bank'),
+                'no_akaun' => $request->input('no_acc'),
+            ]);
+        } else {
+            // If the record doesn't exist, create a new one
+            MaklumatBank::create([
+                'institusi_id' => $id, // Make sure to set the institusi_id here
+                'nama_akaun' => $request->input('nama_bank'),
+                'no_akaun' => $request->input('no_acc'),
+            ]);
+        }
+
+        return view('kemaskini.penyelaras.maklumat_bank', compact('bank','user'));
     }
+
 }

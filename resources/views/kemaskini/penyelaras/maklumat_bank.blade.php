@@ -6,7 +6,7 @@
             border: none!important;
         }
         .w-13{
-            width: 17% !important;
+            width: 22% !important;
         }
         .w-3{
             width: 3% !important;
@@ -19,7 +19,7 @@
             color: white!important;
         }
         input{
-            width: 80%!important;
+            width: 75%!important;
         }
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -73,24 +73,28 @@
                         <div class="body">
                             <div class="col-md-6 col-sm-6">
                                 <br>
-                                <form method="POST" action="#">
+                                <form method="POST" action="{{route('kemaskini.bank', ['id' => $bank->institusi_id ])}}">
                                     {{csrf_field()}}
                                     <div class="table-responsive">
+                                        @php
+                                            $id_uni = $user->id_institusi;
+                                            $nama_uni = DB::table('bk_info_institusi')->where('id_institusi', $id_uni)->value('nama_institusi');
+                                        @endphp
                                         <table class="maklumat">
                                             <tr>
                                                 <td class="vertical-top w-13">Nama Institusi</td>
                                                 <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top"><input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                <td class="vertical-top"><input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{$nama_uni}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                             </tr>
                                             <tr>
                                                 <td class="vertical-top w-13">Nama Akaun Bank</td>
                                                 <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top"><input type="text" class="form-control" id="nama_bank" name="nama_bank" value="" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                <td class="vertical-top"><input type="text" class="form-control" id="nama_bank" name="nama_bank" value="{{$bank->nama_akaun}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                             </tr>
                                             <tr>
-                                                <td class="vertical-top w-13">No. Akaun</td>
+                                                <td class="vertical-top w-13">No. Akaun Bank Islam</td>
                                                 <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top"><input type="text" class="form-control" id="no_acc" name="no_acc" value="" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                <td class="vertical-top"><input type="text" class="form-control" id="no_acc" name="no_acc" value="{{$bank->no_akaun}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
                                             </tr>
                                         </table>
                                     </div>
