@@ -53,8 +53,6 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-
-
     Route::get('/', [DashboardController::class, 'index']);
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -209,9 +207,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan/sekretariat/sejarah/kemaskini-saringan/{id}', [SekretariatController::class, 'kemaskiniSaringan'])->name('kemaskini.saringan.tuntutan.id');
     Route::post('tuntutan/sekretariat/sejarah/hantar-saringan/{id}', [SekretariatController::class, 'hantarSaringan'])->name('hantar.saringan.tuntutan.id');
 
-    //Dokumen - Penyelaras
-    Route::get('penyelaras/bkoku/dokumen/esp', [PenyelarasController::class, 'dokumenESP'])->name('penyelaras.dokumen');
-    Route::post('penyelaras/hantar/dokumen/esp/{id}', [PenyelarasController::class, 'pHantarDokumenESP'])->name('penyelaras.hantar.dokumen');
+    //Penyaluran - Penyelaras 
+    Route::get('penyaluran/penyelaras/bkoku/dokumen/spbb', [PenyelarasController::class, 'dokumenESP'])->name('penyelaras.dokumen');
+    Route::post('penyaluran/penyelaras/hantar/dokumen/spbb/{id}', [PenyelarasController::class, 'pHantarDokumenESP'])->name('penyelaras.hantar.dokumen');
+
+    //Kemaskini - Penyelaras
+    Route::get('kemaskini/penyelaras/maklumat/bank', [PenyelarasController::class, 'maklumatBank'])->name('maklumat.bank');
+    Route::post('kemaskini/penyelaras/hantar/maklumat/bank/{id}', [PenyelarasController::class, 'kemaskiniMaklumatBank'])->name('kemaskini.bank');
 
     //Permohonan - Penyelaras BKOKU
     Route::get('penyelaras/dashboard', [PenyelarasController::class, 'index'])->name('penyelaras.dashboard');
@@ -231,7 +233,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/bkoku/maklumat-profil-diri/{id}', [SaringanController::class, 'maklumatProfilDiri'])->name('bkoku.papar.maklumat.diri');
     Route::get('penyelaras/bkoku/maklumat-akademik/{id}', [SaringanController::class, 'maklumatAkademik'])->name('bkoku.papar.maklumat.akademik');
     Route::get('penyelaras/bkoku/salinan-dokumen/{id}', [SaringanController::class, 'salinanDokumen'])->name('bkoku.papar.salinan.dokumen');
-
 
     //Tuntutan - Penyelaras BKOKU
     Route::get('penyelaras/bkoku/senarai/tuntutan-baharu', [PenyelarasController::class, 'senaraiTuntutanBaharu'])->name('senarai.bkoku.tuntutanBaharu');

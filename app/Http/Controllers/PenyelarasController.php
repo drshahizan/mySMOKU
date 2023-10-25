@@ -32,6 +32,7 @@ use App\Models\SejarahTuntutan;
 use App\Models\Peperiksaan;
 use App\Models\Saringan;
 use App\Models\Kelulusan;
+use App\Models\MaklumatBank;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -811,5 +812,17 @@ class PenyelarasController extends Controller
 
         // Redirect to the desired route
         return redirect()->route('penyelaras.dokumen')->with('success', 'Semua fail SPBB telah berjaya dikemaskini.');
+    }
+
+    public function maklumatBank()
+    {   
+        $bank = MaklumatBank::all();
+        return view('kemaskini.penyelaras.maklumat_bank', compact('bank'));
+    }
+
+    public function kemaskiniMaklumatBank(Request $request)
+    {   
+        $bank = MaklumatBank::all();
+        return view('kemaskini.penyelaras.maklumat_bank', compact('bank'));
     }
 }
