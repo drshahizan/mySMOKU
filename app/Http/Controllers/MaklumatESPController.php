@@ -18,6 +18,7 @@ class MaklumatESPController extends Controller
     {
         
         $kelulusan = Permohonan::where('status', '=','6')->get();
+        // dd($kelulusan);
 
         
 
@@ -40,25 +41,28 @@ class MaklumatESPController extends Controller
             ->join('bk_peringkat_pengajian as e', 'e.kod_peringkat', '=', 'c.peringkat_pengajian')
             ->leftJoin('bk_agama as f', 'f.id', '=', 'd.agama')
             ->leftJoin('maklumat_bank as h', 'g.id_institusi', '=', 'h.institusi_id')
+            ->leftJoin('bk_negeri as i', 'i.id', '=', 'd.negeri_lahir')
+            ->leftJoin('bk_bandar as j', 'j.id', '=', 'd.alamat_tetap_bandar')
+            ->leftJoin('bk_negeri as k', 'k.id', '=', 'd.alamat_tetap_negeri')
             ->select(
                 'a.no_kp as nokp',
                 'a.nama',
                 DB::raw('DATE_FORMAT(a.tarikh_lahir, "%d/%m/%Y") AS tarikh_lahir'),
-                'd.negeri_lahir',
+                'i.kod_negeri_esp as negeri_lahir',
                 'a.jantina',
                 DB::raw('LEFT(f.agama, 1) AS agama'),
-                'a.keturunan',
+                DB::raw('LPAD(a.keturunan, 2, "0") as keturunan'),
                 DB::raw('"M01" as warganegara'),
                 'a.alamat_tetap as alamat1',
                 DB::raw('"" as alamat2'),
                 'd.alamat_tetap_poskod as poskod',
-                'd.alamat_tetap_bandar as bandar',
-                'd.alamat_tetap_negeri as negeri',
+                'j.bandar as bandar',
+                'k.kod_negeri_esp as negeri',
                 'd.tel_bimbit as telefon_hp',
                 'd.alamat_surat_menyurat as alamat01',
                 DB::raw('"" as alamat02'),
                 DB::raw('"" as alamat03'),
-                DB::raw('"" as telefon_o'),
+                'd.tel_rumah as telefon_o',
                 DB::raw('CASE WHEN b.program = "BKOKU" THEN "OKU" ELSE "PPK" END as program'),
                 'e.kod_esp as peringkat',
                 DB::raw('DATE_FORMAT(c.tarikh_mula, "%d/%m/%Y") AS tahun_tawar'),
@@ -72,26 +76,32 @@ class MaklumatESPController extends Controller
                 DB::raw('DATE_FORMAT(c.tarikh_tamat, "%d/%m/%Y") AS tarikh_tamat'),
                 DB::raw('IF(g.jenis_institusi = "IPTS", d.no_akaun_bank, h.no_akaun) as no_akaun'),
                 DB::raw('IF(g.jenis_institusi = "IPTS", a.nama, h.nama_akaun) as nama_akaun'),
-                
                 DB::raw('"45" as kod_bank'),
                 DB::raw('"BANK ISLAM MALAYSIA BERHAD" as nama_bank'),
                 'b.no_rujukan_permohonan as id_permohonan',
+                DB::raw('"" as id_tuntutan'),
                 'a.email',
-                DB::raw('"J0307" as kursus'),
+                DB::raw('"J0307" as bidang'),
             );
         
-        if ($selectAll === true) {
-            // Fetch all relevant data without filtering by specific no_kp values
-            $data = $query->where('c.status', '=', 1)
-                ->where('b.status', '=', 6)
+            // Define common conditions
+            $query = $query->where('c.status', '=', 1)
+            ->where('b.status', '=', 6);
+
+            if ($selectAll === true) {
+                // Fetch all relevant data without filtering by specific no_kp values
+                $data = $query->get();
+                
+            } else {
+                // Fetch data based on selected no_kp values
+                $data = $query->whereIn('a.no_kp', $selectedNokps)
                 ->get();
-        } else {
-            // Fetch data based on selected no_kp values
-            $data = $query->whereIn('a.no_kp', $selectedNokps)
-                ->where('c.status', '=', 1)
-                ->where('b.status', '=', 6)
-                ->get();
-        }    
+                
+            }
+
+
+
+
 
         return response()->json(['data' => $data]);
         
@@ -147,8 +157,13 @@ class MaklumatESPController extends Controller
         }
 
         // Check if $jsonData is valid
-        if ($jsonData === null || empty($jsonData)) {
-            throw new \Exception('Invalid or empty JSON data.');
+        if ($jsonData !== null) {
+            // Check if $jsonData is empty or not a valid JSON object or array
+            if (empty($jsonData) || !is_array($jsonData) && !is_object($jsonData)) {
+                throw new \Exception('Invalid or empty JSON data.');
+            }
+        } else {
+            throw new \Exception('JSON data is null.');
         }
 
         return $jsonData;
@@ -157,7 +172,7 @@ class MaklumatESPController extends Controller
     private function validateJsonData($jsonData)
     {
         // Validate the presence of required keys in $jsonData
-        if (!isset($jsonData['nokp'], $jsonData['id_permohonan'], $jsonData['tarikh_transaksi'], $jsonData['amount'])) {
+        if (!isset($jsonData['nokp'], $jsonData['id_permohonan'], $jsonData['tarikh_transaksi'])) {
             throw new \Exception('Invalid JSON format. Missing required fields.');
         }
     }
@@ -206,7 +221,9 @@ class MaklumatESPController extends Controller
                             'nokp' => $jsonData['nokp'],
                             'id_permohonan' => $jsonData['id_permohonan'],
                             'tarikh_transaksi' => $jsonData['tarikh_transaksi'],
-                            'amaun' => $jsonData['amount'],
+                            'id_tuntutan' => $jsonData['id_tuntutan'],
+                            'yuran_dibayar' => $jsonData['yuran_dibayar'],
+                            'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'],
                             'status' => 'Tiada data dalam BKOKU'
                         ];
                     } else {
@@ -215,7 +232,8 @@ class MaklumatESPController extends Controller
                             ->where('smoku_id', $smoku->id)
                             ->where('no_rujukan_permohonan', $jsonData['id_permohonan'])
                             ->update([
-                                'yuran_dibayar' => number_format($jsonData['amount'], 2, '.', ''),
+                                'yuran_dibayar' => $jsonData['yuran_dibayar'] !== null ? number_format($jsonData['yuran_dibayar'], 2, '.', '') : null,
+                                'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'] !== null ? number_format($jsonData['wang_saku_dibayar'], 2, '.', '') : null,
                                 'tarikh_transaksi' => $formattedDate,
                                 'status' => 8,
                             ]);
@@ -227,7 +245,9 @@ class MaklumatESPController extends Controller
                                 'nokp' => $jsonData['nokp'],
                                 'id_permohonan' => $jsonData['id_permohonan'],
                                 'tarikh_transaksi' => $jsonData['tarikh_transaksi'],
-                                'amaun' => $jsonData['amount'],
+                                'id_tuntutan' => $jsonData['id_tuntutan'],
+                                'yuran_dibayar' => $jsonData['yuran_dibayar'],
+                                'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'],
                                 'status' => 'Data diterima dan update'
                             ];
                         } else {
@@ -236,7 +256,9 @@ class MaklumatESPController extends Controller
                                 'nokp' => $jsonData['nokp'],
                                 'id_permohonan' => $jsonData['id_permohonan'],
                                 'tarikh_transaksi' => $jsonData['tarikh_transaksi'],
-                                'amaun' => $jsonData['amount'],
+                                'id_tuntutan' => $jsonData['id_tuntutan'],
+                                'yuran_dibayar' => $jsonData['yuran_dibayar'],
+                                'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'],
                                 'status' => 'Data tidak diupdate'
                             ];
                         }
