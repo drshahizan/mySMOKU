@@ -110,5 +110,4 @@
             </div>
         </div>
     </div>
-
 </x-default-layout>
