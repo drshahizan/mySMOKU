@@ -9,18 +9,23 @@ class MaklumatKursusMQA extends Model
 {
     use HasFactory;
     protected $table = 'bk_kursus_mqa';
-
+    
     protected $fillable = [
-        'NoRujProg',
-        'NoSiriSijil',
-        'NamaProgBM',
-        'NamaProgBI',
-        'KodNEC',
-        'BidangProgram',
-        'PeringkatKelayakan',
-        'KaedahPengendalian',
-        'TarikhAkrMula',
-        'TarikhAkrTamat',
+        'no_rujukan',
+        'no_sijil',
+        'nama_kursus',
+        'nama_kursus_bi',
+        'kod_nec',
+        'bidang',
+        'kod_peringkat',
+        'kod_pengendalian',
+        'kaedah_pengendalian',
+        'tarikh_mula',
+        'tarikh_tamat',
+        'id_institusi',
+        'nama_institusi',
+        'nama_institusi_bi',
+        'institusi_penganugerahan',
         'BilMingguPjg',
         'BilMingguPndk',
         'BilSemPjg',
@@ -36,8 +41,5 @@ class MaklumatKursusMQA extends Model
         'PMonth',
         'PYearTo',
         'PMonthTo',
-        'IdAgensi',
-        'NamaAgensiBM',
-        'NamaAgensiBI',
     ];
 }
