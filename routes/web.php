@@ -131,7 +131,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('permohonan/sekretariat/pembayaran/kemaskini/{id}', [SaringanController::class, 'kemaskiniPembayaran'])->name('kemaskini.pembayaran.id');
     Route::post('permohonan/sekretariat/pembayaran/hantar/{id}', [SaringanController::class, 'hantarPembayaran'])->name('hantar.pembayaran.id');
 
-
     //Permohonan - Sekretariat - Dashboard
     Route::get('dashboard/sekretariat', [SekretariatController::class, 'dashboard']);
     Route::get('sekretariat/permohonan/BKOKU/keseluruhan', [SekretariatController::class, 'statusPermohonanBKOKU']);
@@ -150,7 +149,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('kemaskini/sekretariat/surat/tawaran/send/{suratTawaranId}', [SekretariatController::class, 'sendSuratTawaran'])->name('send');
     Route::get('kemaskini/sekretariat/surat/tawaran/update/{suratTawaranId}', [SekretariatController::class, 'updatedSuratTawaran'])->name('update');
 
-    //Dokumen - Sekretariat
+    //Penyaluran - Sekretariat - Dokumen SPPB
     Route::get('sekretariat/muat-naik/dokumen/sppb', [SekretariatController::class, 'muatNaikDokumenSPPB'])->name('sekretariat.muat-naik.SPPB');
     Route::post('sekretariat/hantar/dokumen/sppb', [SekretariatController::class, 'hantarDokumenSPPB'])->name('sekretariat.hantar.SPPB');
     Route::get('sekretariat/muat-turun/dokumen/sppb', [SekretariatController::class, 'muatTurunDokumenSPPB'])->name('sekretariat.muat-turun.SPPB');
@@ -208,13 +207,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan/sekretariat/sejarah/kemaskini-saringan/{id}', [SekretariatController::class, 'kemaskiniSaringan'])->name('kemaskini.saringan.tuntutan.id');
     Route::post('tuntutan/sekretariat/sejarah/hantar-saringan/{id}', [SekretariatController::class, 'hantarSaringan'])->name('hantar.saringan.tuntutan.id');
 
-    //Penyaluran - Penyelaras 
-    Route::get('penyaluran/penyelaras/bkoku/dokumen/spbb', [PenyelarasController::class, 'dokumenESP'])->name('penyelaras.dokumen');
-    Route::post('penyaluran/penyelaras/hantar/dokumen/spbb/{id}', [PenyelarasController::class, 'pHantarDokumenESP'])->name('penyelaras.hantar.dokumen');
-
-    //Kemaskini - Penyelaras
-    Route::get('kemaskini/penyelaras/maklumat/bank', [PenyelarasController::class, 'maklumatBank'])->name('maklumat.bank');
-    Route::post('kemaskini/penyelaras/hantar/maklumat/bank/{id}', [PenyelarasController::class, 'kemaskiniMaklumatBank'])->name('kemaskini.bank');
+    //Penyaluran - Penyelaras - Dokumen SPPB
+    Route::get('penyelaras/penyaluran/muat-turun/borang/spbb', [PenyelarasController::class, 'muatTurunBorangSPPB'])->name('penyelaras.muat-turun.SPPB');
+    Route::get('penyelaras/penyaluran/muat-naik/borang/spbb', [PenyelarasController::class, 'muatNaikBorangSPPB'])->name('penyelaras.muat-naik.SPPB');
+    Route::post('penyelaras/penyaluran/hantar/borang/spbb/{id}', [PenyelarasController::class, 'hantarBorangSPPB'])->name('penyelaras.kemaskini.SPPB');
+    
+    //Kemaskini - Penyelaras - Maklumat Bank
+    Route::get('penyelaras/kemaskini/maklumat/bank', [PenyelarasController::class, 'maklumatBank'])->name('maklumat.bank');
+    Route::post('penyelaras/kemaskini/hantar/maklumat/bank/{id}', [PenyelarasController::class, 'kemaskiniMaklumatBank'])->name('kemaskini.bank');
 
     //Permohonan - Penyelaras BKOKU
     Route::get('penyelaras/dashboard', [PenyelarasController::class, 'index'])->name('penyelaras.dashboard');

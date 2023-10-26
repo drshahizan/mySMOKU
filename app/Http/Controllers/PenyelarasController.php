@@ -718,13 +718,19 @@ class PenyelarasController extends Controller
         return view('permohonan.penyelaras_bkoku.papar_kelulusan',compact('permohonan','kelulusan','smoku','sejarah_p'));
     }
 
-    public function dokumenESP()
+    public function muatTurunBorangSPPB()
     {   
         $dokumen = DokumenESP::all();
-        return view('dokumen.penyelaras.dokumen', compact('dokumen'));
+        return view('dokumen.penyelaras.muat_turun_dokumen', compact('dokumen'));
     }
 
-    public function pHantarDokumenESP(Request $request, $id)
+    public function muatNaikBorangSPPB()
+    {   
+        $dokumen = DokumenESP::all();
+        return view('dokumen.penyelaras.muat_naik_dokumen', compact('dokumen'));
+    }
+
+    public function hantarBorangSPPB(Request $request, $id)
     {
         // Check if a record with the given identifier exists
         $dokumenESP = DokumenESP::find($id);
@@ -824,8 +830,8 @@ class PenyelarasController extends Controller
         if (!$bank) {
             $bank = new MaklumatBank();
             $bank->institusi_id = $id;
-            $bank->nama_akaun = ''; // Provide a default value for 'nama_akaun'
-            $bank->no_akaun = '';   // Provide a default value for 'no_akaun'
+            $bank->nama_akaun = ''; 
+            $bank->no_akaun = '';  
         }
 
         return view('kemaskini.penyelaras.maklumat_bank', compact('user','bank'));
@@ -847,7 +853,7 @@ class PenyelarasController extends Controller
         } else {
             // If the record doesn't exist, create a new one
             MaklumatBank::create([
-                'institusi_id' => $id, // Make sure to set the institusi_id here
+                'institusi_id' => $id, 
                 'nama_akaun' => $request->input('nama_bank'),
                 'no_akaun' => $request->input('no_acc'),
             ]);

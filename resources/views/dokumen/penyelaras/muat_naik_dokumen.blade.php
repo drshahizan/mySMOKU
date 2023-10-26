@@ -26,7 +26,7 @@
 						<div class="d-flex flex-column align-items-start flex-xl-row">
 							<!--begin::Input group-->
 							<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
-								<span class="fs-3 fw-bold text-gray-800">Borang Salur Peruntukan Program BKOKU</span>
+								<span class="fs-3 fw-bold text-gray-800">Muat Naik Borang Salur Peruntukan Program BKOKU</span>
 							</div>
 						</div>
 						<!--end::Top-->
@@ -52,7 +52,7 @@
 					<!--begin::Card body-->
 					<div class="card-body pt-0">
 						@foreach ($dokumen as $item)
-						<form class="form" action="{{ route('penyelaras.hantar.dokumen', ['id' => $item->id ]) }}" method="post" enctype="multipart/form-data">
+						<form class="form" action="{{ route('penyelaras.kemaskini.SPPB', ['id' => $item->id ]) }}" method="post" enctype="multipart/form-data">
 							@csrf
 							<!--begin::Table-->
 							<table class="table table-row-dashed fs-6 gy-5">
