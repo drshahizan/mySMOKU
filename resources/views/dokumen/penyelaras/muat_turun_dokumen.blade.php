@@ -52,7 +52,7 @@
 					<!--begin::Card body-->
 					<div class="card-body pt-0">
 						@foreach ($dokumen as $item)
-						<form class="form" action="{{ route('penyelaras.hantar.dokumen', ['id' => $item->id ]) }}" method="post" enctype="multipart/form-data">
+						<form class="form" action="#" method="GET" enctype="multipart/form-data">
 							@csrf
 							<!--begin::Table-->
 							<table class="table table-row-dashed fs-6 gy-5">

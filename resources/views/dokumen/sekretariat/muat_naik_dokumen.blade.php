@@ -45,7 +45,7 @@
 					<!--begin::Card body-->
 					<div class="card-body p-12">
 						<!--begin::Form-->
-						<form action="{{ route('hantar.dokumen.SPPB') }}" method="post" enctype="multipart/form-data">
+						<form action="{{ route('sekretariat.hantar.SPPB') }}" method="post" enctype="multipart/form-data">
 							@csrf
 							<div class="d-flex flex-column align-items-start flex-xl-row">
 								<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
