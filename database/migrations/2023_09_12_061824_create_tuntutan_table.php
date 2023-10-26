@@ -31,6 +31,7 @@ return new class extends Migration
             $table->float('baki_disokong')->nullable();
             $table->float('baki_dibayar')->nullable();
             $table->string('catatan_dibayar')->nullable();
+            $table->date('tarikh_transaksi')->nullable();
             $table->foreign('smoku_id')
               ->references('id')->on('smoku')->onDelete('cascade');
             $table->foreign('permohonan_id')
