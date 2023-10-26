@@ -269,13 +269,13 @@
 				</div>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="{{ route('sekretariat.dokumenESP')}}">
+				<a class="menu-link" href="{{ route('muat-turun.dokumen.SPPB')}}">
 					<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
 					<span class="menu-title">Muat Turun SPBB</span>
 				</a>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="{{ route('sekretariat.dokumenESP')}}">
+				<a class="menu-link" href="{{ route('muat-naik.dokumen.SPPB')}}">
 					<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
 					<span class="menu-title">Muat Naik SPBB</span>
 				</a>

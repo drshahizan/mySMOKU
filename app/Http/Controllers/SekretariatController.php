@@ -586,13 +586,13 @@ class SekretariatController extends Controller
     }
 
     //KEMASKINI
-    public function dokumenESP()
+    public function muatNaikDokumenSPPB()
     {
         $dokumen = DokumenESP::all();
-        return view('dokumen.sekretariat.dokumen', compact('dokumen'));
+        return view('dokumen.sekretariat.muat_naik_dokumen', compact('dokumen'));
     }
 
-    public function hantarDokumenESP(Request $request)
+    public function hantarDokumenSPPB(Request $request)
     {
         // Validate the uploaded files
         $customMessages = [
@@ -671,6 +671,12 @@ class SekretariatController extends Controller
         session()->put('uploadedDokumen3', $uploadedDokumen3);
 
         return redirect()->route('sekretariat.dokumenESP')->with('success', 'Semua fail SPBB telah berjaya dikemaskini.');
+    }
+
+    public function muatTurunDokumenSPPB()
+    {
+        $dokumen = DokumenESP::all();
+        return view('dokumen.sekretariat.muat_turun_dokumen', compact('dokumen'));
     }
 
 

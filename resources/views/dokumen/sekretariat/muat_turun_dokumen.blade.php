@@ -12,12 +12,12 @@
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->
-	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Muat Naik</h1>
+	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Muat Turun</h1>
 	<!--end::Title-->
 	<!--begin::Breadcrumb-->
 	<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
 		<!--begin::Item-->
-		<li class="breadcrumb-item text-dark" style="color:darkblue">Muat Naik</li>
+		<li class="breadcrumb-item text-dark" style="color:darkblue">Muat Turun</li>
 		<!--end::Item-->
 		<!--begin::Item-->
 		<li class="breadcrumb-item">
@@ -45,7 +45,7 @@
 					<!--begin::Card body-->
 					<div class="card-body p-12">
 						<!--begin::Form-->
-						<form action="{{ route('hantar.dokumen.esp') }}" method="post" enctype="multipart/form-data">
+						<form action="#" method="GET" enctype="multipart/form-data">
 							@csrf
 							<div class="d-flex flex-column align-items-start flex-xl-row">
 								<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
