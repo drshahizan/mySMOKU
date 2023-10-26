@@ -181,7 +181,7 @@
                                                         <td>{{$kursus}}</td>
                                                         <td>{{$institusi}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                                        <td class="text-center">{{date('d/m/Y', strtotime($tkh_bayaran))}}</td>
+                                                        <td class="text-center">{{date('d/m/Y', strtotime($item['tarikh_transaksi']))}}</td>
                                                         @if ($item['status']=='6')
                                                             <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
@@ -292,7 +292,7 @@
                                                         <td>{{$kursus}}</td>
                                                         <td>{{$institusi}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                                        <td class="text-center">{{date('d/m/Y', strtotime($tkh_bayaran))}}</td>
+                                                        <td class="text-center">{{date('d/m/Y', strtotime($item['tarikh_transaksi']))}}</td>
                                                         @if ($item['status']=='6')
                                                             <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
