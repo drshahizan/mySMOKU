@@ -205,7 +205,7 @@
 						<span class="menu-title">Kelulusan</span>
 				</a>
 			</div>
-			
+
 			<div class="menu-item">
 				<a class="menu-link" href="{{url('permohonan/sekretariat/keputusan')}}">
 						<span class="menu-icon">{!! getIcon('check-square', 'fs-2') !!}</span>
@@ -214,7 +214,7 @@
 			</div>
 			<div class="menu-item">
 				<a class="menu-link" href="{{ route('permohonan.esp')}}">
-						<span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
+						<span class="menu-icon">{!! getIcon('square-brackets', 'fs-2') !!}</span>
 						<span class="menu-title">Hantar ESP</span>
 				</a>
 			</div>
