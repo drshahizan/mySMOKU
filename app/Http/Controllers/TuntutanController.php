@@ -12,6 +12,7 @@ use App\Models\Akademik;
 use App\Models\EmelKemaskini;
 use App\Models\Peperiksaan;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -26,34 +27,61 @@ class TuntutanController extends Controller
         ->where('smoku_akademik.status', 1)
         ->select('smoku_akademik.*')
         ->first();
-        //dd($akademik->bil_bulan_per_sem);
 
-        //$existingRecord = Peperiksaan::where('smoku_id', $smoku_id->id)->first();
+        $currentDate = Carbon::now();
+        $tarikhMula = Carbon::parse($akademik->tarikh_mula);
+        $tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
+        if($akademik->bil_bulan_per_sem == 6){
+            $bilSem = 2;
+        } else {
+            $bilSem = 3;
+        }
+         
+        $semSemasa = $akademik->sem_semasa;
+        $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
 
-           
+        if ($permohonan && $permohonan->status ==8) {
 
-        if ($permohonan && $permohonan->status ==6) {
+            if ($currentDate->greaterThan($tarikhNextSem)) {
 
-            
+                while ($semSemasa <= $totalSemesters) {
+                     //semak dah upload result ke belum
+                    $result = Peperiksaan::where('permohonan_id', $permohonan->id)
+                    ->where('sesi', $akademik->sesi)
+                    ->where('semester', $semSemasa)
+                    ->first();
+                    if($result == null){
+                        return redirect()->route('kemaskini.keputusan')->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
+                    }
+                    //dd('hehe');
+                
+                    // Increment $semSemasa for the next iteration
+                    $semSemasa = $semSemasa + 1;
 
-            $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
-                ->where('permohonan_id', $permohonan->id)
-                ->first(['tuntutan.*']);
+                    $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
+                        ->where('permohonan_id', $permohonan->id)
+                        ->first(['tuntutan.*']);
 
-            //dd($tuntutan);    
+                    //dd($tuntutan);    
 
-                if ($tuntutan && $tuntutan->status == 1) {
-                    $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
-                } else {
-                    // Handle the case where no matching record is found or status is not 1
-                    $tuntutan_item = collect(); // An empty collection
+                        if ($tuntutan && $tuntutan->status == 1) {
+                            $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
+                        } else {
+                            // Handle the case where no matching record is found or status is not 1
+                            $tuntutan_item = collect(); // An empty collection
+                        }
+                    
+                    $akademik = Akademik::where('smoku_id', $smoku_id->id)->first();
+                    
+                    return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item', 'akademik'));
+
                 }
-               
-            $akademik = Akademik::where('smoku_id', $smoku_id->id)->first();
-            
-            return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item', 'akademik'));
+
+            } else {
+                return redirect()->route('dashboard')->with('sem', 'tak habis sem lagii niiiii.');
+            }
         
-        } else if ($permohonan && $permohonan->status !=6) {
+        } else if ($permohonan && $permohonan->status !=8) {
             return redirect()->route('dashboard')->with('permohonan', 'Permohonan anda masih dalam semakan.');
         } else {
 

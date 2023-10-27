@@ -29,6 +29,7 @@ use App\Models\Bandar;
 use App\Models\Agama;
 use App\Models\EmelKemaskini;
 use App\Models\TamatPengajian;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -585,13 +586,14 @@ class PermohonanController extends Controller
     public function kemaskiniKeputusan()
     {
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
-        $permohonan = Permohonan::where('smoku_id', $smoku_id->id)->first();
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku_id->id)->first();
 
         if ($permohonan) {
-            $peperiksaan = Peperiksaan::where('permohonan_id', $permohonan->id)->get();
             
-            return view('tuntutan.pelajar.kemaskini_keputusan_peperiksaan', compact('peperiksaan'));
-        
+            $peperiksaan = Peperiksaan::where('permohonan_id', $permohonan->id)->get();
+     
+            return view('tuntutan.pelajar.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan'));
+            
         } else {
 
             return redirect()->route('dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');

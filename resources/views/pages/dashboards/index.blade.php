@@ -234,6 +234,14 @@
 			confirmButtonText: 'OK'
 		});
 	@endif
+	@if(session('sem'))
+		Swal.fire({
+			icon: 'error',
+			title: 'Tidak Berjaya!',
+			text: ' {!! session('sem') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
 </script>
 
 
