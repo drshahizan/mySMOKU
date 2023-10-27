@@ -28,6 +28,50 @@
 								</div>
 							</div>
 							<br>
+							@php
+
+								$currentDate = Carbon::now();
+								$tarikhMula = Carbon::parse($akademik->tarikh_mula);
+								$tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
+								if($akademik->bil_bulan_per_sem == 6){
+									$bilSem = 2;
+								} else {
+									$bilSem = 3;
+								}
+								
+								$semSemasa = $akademik->sem_semasa;
+								$totalSemesters = $akademik->tempoh_pengajian * $bilSem;
+								$currentYear = date('Y');
+								$sesiSemasa = $currentYear . '/' . ($currentYear + 1);
+
+								if (!$tuntutan) {
+									// No record found, handle the case as needed
+
+								} else {
+									$ada = DB::table('tuntutan')
+										->where('permohonan_id', $tuntutan->permohonan_id)
+										->orderBy('id', 'desc')
+										->first();
+
+									//dd($ada);	
+
+									if ($ada->semester >= $bilSem) {
+										$sesiSemasa = ($currentYear + 1) . '/' . ($currentYear + 2);
+										$semSemasa = 1; // Reset semester for the next academic year
+									}
+									 else {
+										$semSemasa = $ada->semester + 1;
+									}
+
+								}
+
+								//nak tahu baki sesi semasa
+								$yuran = $permohonan->yuran_dibayar;
+								$wang = $permohonan->wang_saku_dibayar;
+								$baki_total = 5000 - $yuran - $wang;
+								//dd($baki_total);
+
+							@endphp
 							<!--begin::Wrapper-->
 							<div class="mb-0">
 								<!--begin::Row-->
@@ -37,8 +81,8 @@
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 										<div class="mb-5">
 											<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
-												<option></option>
-													@php
+												<option value={{$sesiSemasa}}>{{$sesiSemasa}}</option>
+													{{-- @php
 														$currentYear = date('Y');
 													@endphp
 													@for($year = $currentYear; $year <= ($currentYear + 1); $year++)
@@ -46,7 +90,7 @@
 															$sesi = $year . '/' . ($year + 1);
 														@endphp
 														<option value="{{ $sesi }}">{{ $sesi }}</option>
-													@endfor
+													@endfor --}}
 											</select>
 										</div>
 									</div>
@@ -55,10 +99,7 @@
 										<!--begin::Input group-->
 										<div class="mb-5">
 											<select id="semester" name="semester" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
-												<option></option>
-												<option value="1">1</option>					
-												<option value="2">2</option>					
-												<option value="3">3</option>					
+												<option value={{$semSemasa}}>{{$semSemasa}}</option>					
 											</select>
 										</div>
 									</div>
@@ -109,6 +150,7 @@
 										<!--begin::Input group-->
 										<div class="d-flex">
 											<span class="input-group-text">RM</span>
+											<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
 											<input type="number" id="amaun_yuran" name="amaun_yuran" onchange="myFunction()" class="form-control form-control-solid" placeholder="" step="0.01" inputmode="decimal" required/>
 										</div>
 									</div>
@@ -278,24 +320,26 @@ function myFunction() {
 	var total_yuran = (parseFloat(yuran) + parseFloat(totalAmaun)).toFixed(2);
 
 	// Define the maximum limit for 'amaun_yuran'
-	var maxLimit = 5000;
+	var baki_total = document.getElementById('baki_total');
+	var maxLimit = parseFloat(baki_total.value);
+
 
 	if (total_yuran > maxLimit) {
 		yuranInput.value = '';
-		alert('Ralat: Amaun Yuran tidak boleh lebih RM ' + maxLimit);
+		alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM '+ maxLimit +' bagi satu sesi pengajian. ' );
 		return;
 	}
 
 	var total = (parseFloat(wang_saku) + parseFloat(totalAmaun)).toFixed(2);
 
     if (checkBox.checked == true) {
-		if (total <= 5000) {
+		if (total <= maxLimit) {
 			document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
 			var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
 			document.getElementById("jumlah").value = (amaun_wang_saku + totalAmaun).toFixed(2);
 			console.log("Total amount is within the limit: " + parseFloat(total));
 		} else {
-			var baki_wang_saku = 5000 - totalAmaun;
+			var baki_wang_saku = maxLimit - totalAmaun;
 			if (!isNaN(baki_wang_saku)) {
 				document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
 				console.log("Total amount exceeds the limit: " + parseFloat(total));

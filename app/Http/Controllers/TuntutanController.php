@@ -60,18 +60,21 @@ class TuntutanController extends Controller
 
                     $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
                         ->where('permohonan_id', $permohonan->id)
+                        ->orderBy('tuntutan.id', 'desc')
                         ->first(['tuntutan.*']);
 
                     //dd($tuntutan);    
 
-                        if ($tuntutan && $tuntutan->status == 1) {
-                            $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
-                        } else {
-                            // Handle the case where no matching record is found or status is not 1
-                            $tuntutan_item = collect(); // An empty collection
-                        }
+                    if ($tuntutan && $tuntutan->status == 1) {
+                        $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
+                    } else {
+                        // Handle the case where no matching record is found or status is not 1
+                        $tuntutan_item = collect(); // An empty collection
+                        return redirect()->route('dashboard')->with('sem', 'Tuntutan anda masih dalam semakan.');
+                    }
                     
-                    $akademik = Akademik::where('smoku_id', $smoku_id->id)->first();
+                    $akademik = Akademik::where('smoku_id', $smoku_id->id)
+                        ->where('smoku_akademik.status', 1)->first();
                     
                     return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item', 'akademik'));
 
@@ -236,7 +239,7 @@ class TuntutanController extends Controller
         $cc = $user_sekretariat->email;
 
         $catatan = "testing";
-        $emel = EmelKemaskini::where('emel_id',7)->first();
+        $emel = EmelKemaskini::where('emel_id',14)->first();
         //dd($cc);
         //dd($emel);
         Mail::to($smoku_id->email)->cc($cc)->send(new TuntutanHantar($catatan,$emel));
