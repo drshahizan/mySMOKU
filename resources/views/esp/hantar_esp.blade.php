@@ -76,16 +76,16 @@
                 <div class="card-body pt-0">
                   <!--begin::Table-->
                   <div class="table-responsive">
-                    <table class="table align-center table-row-dashed fs-6 gy-5" id="sortTable1">
+                    <table id="sortTable1" class="table table-bordered table-striped">
                       <thead>
-                        <tr class="text-start align-center text-gray-400 fw-bold fs-7 gs-0">
+                        <tr>
                           <th class="text-center" style="width:3%;">
                             <input type="checkbox" name="select-all" id="select-all-bkoku" onclick="toggleSelectAll('bkoku');" />
                           </th>
-                          <th style="width: 10%"><b>ID Permohonan</b></th>                                                   
-                          <th style="width: 20%"><b>Nama</b></th>
-                          <th style="width: 17%"><b>Nama Kursus</b></th>
-                          <th style="width: 20%"><b>Institusi Pengajian</b></th>
+                          <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
+                          <th class="text-center" style="width: 20%"><b>Nama</b></th>
+                          <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
+                          <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
                           <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                           <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
                         </tr>
@@ -155,10 +155,10 @@
                           @if($program == "BKOKU")  
                             <tr>
                               <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
-                              <td>{{ $bkoku->no_rujukan_permohonan}}</td>
-                              <td>{{$pemohon}}</td>
-                              <td>{{$namakursus}}</td>
-                              <td>{{$institusipengajian}}</td>
+                              <td class="text-center">{{ $bkoku->no_rujukan_permohonan}}</td>
+                              <td class="text-center">{{$pemohon}}</td>
+                              <td class="text-center">{{$namakursus}}</td>
+                              <td class="text-center">{{$institusipengajian}}</td>
                               <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                               <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                             </tr>
@@ -178,16 +178,16 @@
                 <div class="card-body pt-0">
                   <!--begin::Table-->
                   <div class="table-responsive">
-                    <table class="table align-center table-row-dashed fs-6 gy-5" id="sortTable2">
+                    <table id="sortTable2"  class="table table-bordered table-striped">
                       <thead>
-                        <tr class="text-start align-center text-gray-400 fw-bold fs-7 gs-0">
+                        <tr>
                           <th class="text-center" style="width:3%;">
                             <input type="checkbox" name="select-all" id="select-all-ppk" onclick="toggleSelectAll('ppk');" />
                           </th>
-                          <th style="width: 10%"><b>ID Permohonan</b></th>                                                   
-                          <th style="width: 20%"><b>Nama</b></th>
-                          <th style="width: 17%"><b>Nama Kursus</b></th>
-                          <th style="width: 20%"><b>Institusi Pengajian</b></th>
+                          <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
+                          <th class="text-center" style="width: 20%"><b>Nama</b></th>
+                          <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
+                          <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
                           <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                           <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
                         </tr>
@@ -256,10 +256,10 @@
                           @if($program == "PPK")
                             <tr>
                               <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
-                              <td>{{ $item->no_rujukan_permohonan}}</td>
-                              <td>{{$pemohon}}</td>
-                              <td>{{$namakursus}}</td>
-                              <td>{{$institusipengajian}}</td>
+                              <td class="text-center">{{ $item->no_rujukan_permohonan}}</td>
+                              <td class="text-center">{{$pemohon}}</td>
+                              <td class="text-center">{{$namakursus}}</td>
+                              <td class="text-center">{{$institusipengajian}}</td>
                               <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                               <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                             </tr>
