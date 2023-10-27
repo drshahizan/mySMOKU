@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Permohonan;
+use App\Models\SejarahPermohonan;
 use App\Models\Smoku;
 use DateTime;
 use Exception;
@@ -237,6 +238,14 @@ class MaklumatESPController extends Controller
                                 'tarikh_transaksi' => $formattedDate,
                                 'status' => 8,
                             ]);
+
+                        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku->id)->first();    
+                        SejarahPermohonan::create([
+                            'smoku_id' => $smoku->id,
+                            'permohonan_id' => $permohonan_id->id,
+                            'status' => 8, 
+                        ]);
+                        
 
                         // Prepare the response based on the update result
                         if ($affectedRows > 0) {
