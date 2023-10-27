@@ -365,7 +365,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="agama" name="agama" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true">
+									<select id="agama" name="agama" class="form-select form-select-lg form-select-solid" data-control="select2" data-hide-search="true">
 										<option value="">Pilih</option>
 										@foreach ($agama as $agama)	
 										<option value="{{ $agama->id}}">{{ $agama->agama}}</option> 
@@ -383,7 +383,7 @@
 							<label class="form-label">Alamat Tetap</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<textarea id="alamat_tetap" name="alamat_tetap" class="form-control form-control-lg form-control-solid" rows="2" readonly>{{$smoku->alamat_tetap}}</textarea>
+							<textarea id="alamat_tetap" name="alamat_tetap" class="form-control form-control-lg form-control-solid" rows="2">{{$smoku->alamat_tetap}}</textarea>
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
@@ -787,7 +787,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="pendapatan_waris" name="pendapatan_waris" placeholder="RM" value=""  />
+									<input type="number" class="form-control form-control-solid" id="pendapatan_waris" name="pendapatan_waris" placeholder="RM" value=""  />
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -1234,24 +1234,6 @@
 							</tbody>
 						</table>
 						<!--end::Table-->
-						{{-- <div class="input-group control-group img_div form-group col-md-4" >
-							<input type="file" id="profileImage[]" name="profileImage[]" class="form-control">
-							<!-- Add More Button -->
-							<div class="input-group-btn"> 
-							  <button class="btn btn-success btn-add-more" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-							</div>
-							<!-- End -->
-						</div> --}}
-						<!-- Add More Image upload field  -->
-						{{-- <div class="clone hide ">
-							<div class="control-group input-group form-group col-md-4" style="margin-top:10px">
-								<input type="file" id="profileImage[]" name="profileImage[]" class="form-control">
-								<div class="input-group-btn"> 
-								<button class="btn btn-danger btn-remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-								</div>
-							</div>
-						</div> --}}
-						<!-- End -->
 						<br>
 						<br>
 						<div class="pb-10 pb-lg-15">

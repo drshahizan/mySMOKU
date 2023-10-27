@@ -76,7 +76,7 @@ class PermohonanController extends Controller
         ->join('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
         ->join('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
         ->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
-        ->get(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*','smoku_akademik.status as akademik_status'])
+        ->get(['smoku_butiran_pelajar.*','smoku_butiran_pelajar.alamat_tetap as alamat_tetap_baru','smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*','smoku_akademik.status as akademik_status'])
         ->where('smoku_id', $smoku_id->id)
         ->where('akademik_status', 1)
         ->first();
@@ -421,7 +421,7 @@ class PermohonanController extends Controller
         $cc = $user_sekretariat->email;
 
         $catatan = "testing";
-        $emel = EmelKemaskini::where('emel_id',8)->first();
+        $emel = EmelKemaskini::where('emel_id',13)->first();
         //dd($cc);
         //dd($emel);
         Mail::to($smoku_id->email)->cc($cc)->send(new PermohonanHantar($catatan,$emel));
@@ -442,6 +442,12 @@ class PermohonanController extends Controller
         ButiranPelajar::where('smoku_id' ,$smoku_id->id)
         ->update([
 
+                'negeri_lahir' => $request->negeri_lahir,
+                'agama' => $request->agama,
+                'alamat_tetap' => $request->alamat_tetap,
+                'alamat_tetap_negeri' => $request->alamat_tetap_negeri,
+                'alamat_tetap_bandar' => $request->alamat_tetap_bandar,
+                'alamat_tetap_poskod' => $request->alamat_tetap_poskod,
                 'alamat_surat_menyurat' => $request->alamat_surat_menyurat,
                 'alamat_surat_negeri' => $request->alamat_surat_negeri,
                 'alamat_surat_bandar' => $request->alamat_surat_bandar,
