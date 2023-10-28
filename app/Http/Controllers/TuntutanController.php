@@ -31,6 +31,7 @@ class TuntutanController extends Controller
         $currentDate = Carbon::now();
         $tarikhMula = Carbon::parse($akademik->tarikh_mula);
         $tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
+
         if($akademik->bil_bulan_per_sem == 6){
             $bilSem = 2;
         } else {
@@ -43,6 +44,7 @@ class TuntutanController extends Controller
         if ($permohonan && $permohonan->status ==8) {
 
             if ($currentDate->greaterThan($tarikhNextSem)) {
+                // dd('sini');
 
                 while ($semSemasa <= $totalSemesters) {
                      //semak dah upload result ke belum
@@ -67,10 +69,12 @@ class TuntutanController extends Controller
 
                     if ($tuntutan && $tuntutan->status == 1) {
                         $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
-                    } else {
-                        // Handle the case where no matching record is found or status is not 1
-                        $tuntutan_item = collect(); // An empty collection
+                    } 
+                    else if ($tuntutan && $tuntutan->status != 8){
                         return redirect()->route('dashboard')->with('sem', 'Tuntutan anda masih dalam semakan.');
+                    }
+                    else {
+                        $tuntutan_item = collect(); // An empty collection
                     }
                     
                     $akademik = Akademik::where('smoku_id', $smoku_id->id)
@@ -81,6 +85,7 @@ class TuntutanController extends Controller
                 }
 
             } else {
+                // dd('situ');
                 return redirect()->route('dashboard')->with('sem', 'tak habis sem lagii niiiii.');
             }
         
