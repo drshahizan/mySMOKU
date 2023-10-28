@@ -432,10 +432,10 @@ class PenyelarasController extends Controller
         ->leftjoin('tuntutan','tuntutan.permohonan_id','=','permohonan.id')
         ->where('penyelaras_id','=', Auth::user()->id)
         ->where('permohonan.status', 8) 
-        ->where(function ($query) {
-            $query->where('tuntutan.status', '<', '2')
-                ->orWhereNull('tuntutan.status');
-        })
+        // ->where(function ($query) {
+        //     $query->where('tuntutan.status', '<', '2')
+        //         ->orWhereNull('tuntutan.status');
+        // })
         ->get(['smoku.*', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'permohonan.status as permohonan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
         //dd($layak);
 
