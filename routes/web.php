@@ -38,13 +38,17 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 //api esp
 //Route::middleware('api.token')->group(function () {
 
-    Route::get('/maklumatESP', [MaklumatESPController::class, 'index'])->name('permohonan.esp');
-    Route::post('/maklumatESP', [MaklumatESPController::class, 'hantar'])->name('maklumat.esp');
+    Route::get('/permohonanESP', [MaklumatESPController::class, 'permohonan'])->name('permohonan.esp');
+    Route::post('/permohonanESP', [MaklumatESPController::class, 'hantar'])->name('maklumat.esp');
     Route::get('/kemaskiniESP', [MaklumatESPController::class, 'kemaskiniStatusESP']);
     Route::post('/statusESP', [MaklumatESPController::class, 'receiveData']);
     Route::get('/statusESP/dibayar', [MaklumatESPController::class, 'statusDibayar']);
     Route::get('/test/api', [MaklumatESPController::class, 'test']);
     Route::get('/requery', [MaklumatESPController::class, 'testrequery']);
+
+    Route::get('/tuntutanESP', [MaklumatESPController::class, 'tuntutan'])->name('tuntutan.esp');
+    Route::post('/tuntutanESP', [MaklumatESPController::class, 'hantarTuntutan'])->name('maklumat_tuntutan.esp');
+
 
     Route::get('/maklumat/MQR', [MaklumatKursusController::class, 'index']);
     Route::get('/maklumat/MQAPA', [MaklumatKursusController::class, 'MQAPA']);

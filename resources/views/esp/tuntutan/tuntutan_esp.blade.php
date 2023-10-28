@@ -83,6 +83,7 @@
                             <input type="checkbox" name="select-all" id="select-all-bkoku" onclick="toggleSelectAll('bkoku');" />
                           </th>
                           <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
+                          <th class="text-center" style="width: 10%"><b>ID Tuntutan</b></th>                                                   
                           <th class="text-center" style="width: 20%"><b>Nama</b></th>
                           <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                           <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
@@ -156,6 +157,7 @@
                             <tr>
                               <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
                               <td class="text-center">{{ $bkoku->no_rujukan_permohonan}}</td>
+                              <td class="text-center">{{ $bkoku->no_rujukan_tuntutan}}</td>
                               <td class="text-center">{{$pemohon}}</td>
                               <td class="text-center">{{$namakursus}}</td>
                               <td class="text-center">{{$institusipengajian}}</td>
@@ -185,6 +187,7 @@
                             <input type="checkbox" name="select-all" id="select-all-ppk" onclick="toggleSelectAll('ppk');" />
                           </th>
                           <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
+                          <th class="text-center" style="width: 10%"><b>ID Tuntutan</b></th>                                                   
                           <th class="text-center" style="width: 20%"><b>Nama</b></th>
                           <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                           <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
@@ -257,6 +260,7 @@
                             <tr>
                               <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
                               <td class="text-center">{{ $item->no_rujukan_permohonan}}</td>
+                              <td class="text-center">{{ $item->no_rujukan_tuntutan}}</td>
                               <td class="text-center">{{$pemohon}}</td>
                               <td class="text-center">{{$namakursus}}</td>
                               <td class="text-center">{{$institusipengajian}}</td>
@@ -341,7 +345,7 @@ function toggleSelectAll(tab) {
     // Send selectedNokps to the controller via AJAX
     $.ajax({
         type: "POST",
-        url: "{{ route('maklumat.esp') }}",
+        url: "{{ route('maklumat_tuntutan.esp') }}",
         data: {
             selectedNokps: selectedNokps
         },
@@ -386,7 +390,7 @@ function toggleSelectAll(tab) {
             // Send selectedNokps to the controller via AJAX
             $.ajax({
                 type: "POST",
-                url: "{{ route('maklumat.esp') }}",
+                url: "{{ route('maklumat_tuntutan.esp') }}",
                 data: {
                     selectedNokps: selectedNokps
                 },

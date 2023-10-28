@@ -215,7 +215,7 @@
 			<div class="menu-item">
 				<a class="menu-link" href="{{ route('permohonan.esp')}}">
 						<span class="menu-icon">{!! getIcon('square-brackets', 'fs-2') !!}</span>
-						<span class="menu-title">Hantar ESP</span>
+						<span class="menu-title">Maklumat ESP</span>
 				</a>
 			</div>
 			<div class="menu-item">
@@ -244,18 +244,25 @@
 				</a>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="{{url('tuntutan/sekretariat/pembayaran/senarai')}}">
-					<span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
-					<span class="menu-title">Pembayaran</span>
-				</a>
-			</div>
-			<div class="menu-item">
 				<a class="menu-link" href="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}">
 				<!-- "{{ route('dashboard') }}" -->
 						<span class="menu-icon">{!! getIcon('check-square', 'fs-2') !!}</span>
 						<span class="menu-title">Keputusan</span>
 				</a>
 			</div>
+			<div class="menu-item">
+				<a class="menu-link" href="{{ route('tuntutan.esp')}}">
+						<span class="menu-icon">{!! getIcon('square-brackets', 'fs-2') !!}</span>
+						<span class="menu-title">Maklumat ESP</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a class="menu-link" href="{{url('tuntutan/sekretariat/pembayaran/senarai')}}">
+					<span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
+					<span class="menu-title">Pembayaran</span>
+				</a>
+			</div>
+			
 			<div class="menu-item">
 				<a class="menu-link" href="{{url('tuntutan/sekretariat/sejarah/sejarah-tuntutan')}}">
 					<span class="menu-icon">{!! getIcon('watch', 'fs-2') !!}</span>
