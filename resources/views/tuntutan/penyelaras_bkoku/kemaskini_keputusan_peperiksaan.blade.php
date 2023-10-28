@@ -145,6 +145,25 @@
 						
 		
 <!--begin::Javascript-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	@if(session('success'))
+		Swal.fire({
+			icon: 'success',
+			title: 'Berjaya!',
+			text: ' {!! session('success') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+	@if(session('error'))
+		Swal.fire({
+			icon: 'error',
+			title: 'Tidak Berjaya!',
+			text: ' {!! session('error') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+</script>
 <!--end::Javascript-->
 
 

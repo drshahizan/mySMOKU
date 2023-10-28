@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Mail\PermohonanHantar;
+use App\Mail\TuntutanHantar;
 use App\Models\Agama;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -36,6 +37,7 @@ use App\Models\Peperiksaan;
 use App\Models\Saringan;
 use App\Models\Kelulusan;
 use App\Models\MaklumatBank;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -429,12 +431,12 @@ class PenyelarasController extends Controller
         ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
         ->leftjoin('tuntutan','tuntutan.permohonan_id','=','permohonan.id')
         ->where('penyelaras_id','=', Auth::user()->id)
-        ->where('permohonan.status', 6) 
+        ->where('permohonan.status', 8) 
         ->where(function ($query) {
             $query->where('tuntutan.status', '<', '2')
                 ->orWhereNull('tuntutan.status');
         })
-        ->get(['smoku.*', 'permohonan.no_rujukan_permohonan', 'permohonan.status as permohonan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
+        ->get(['smoku.*', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'permohonan.status as permohonan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
         //dd($layak);
 
         return view('tuntutan.penyelaras_bkoku.tuntutan_baharu', compact('layak'));
@@ -489,9 +491,70 @@ class PenyelarasController extends Controller
         ->where('smoku_id', $id)
         ->where('status', 1);
         $smoku_id = $id;
-        $akademik = Akademik::where('smoku_id',$id)->first();
-        
-        return view('tuntutan.penyelaras_bkoku.borang_tuntutan', compact('permohonan','tuntutan','smoku_id','akademik'));
+        $akademik = Akademik::where('smoku_id',$id)
+            ->where('smoku_akademik.status', 1)
+            ->first();
+
+        $currentDate = Carbon::now();
+        $tarikhMula = Carbon::parse($akademik->tarikh_mula);
+        $tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
+
+        if($akademik->bil_bulan_per_sem == 6){
+            $bilSem = 2;
+        } else {
+            $bilSem = 3;
+        }
+            
+        $semSemasa = $akademik->sem_semasa;
+        $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
+        if ($permohonan && $permohonan->status ==8) {  
+            if ($currentDate->greaterThan($tarikhNextSem)) {
+                //dd($id);
+                while ($semSemasa <= $totalSemesters) {
+                    //semak dah upload result ke belum
+                   $result = Peperiksaan::where('permohonan_id', $permohonan->id)
+                   ->where('sesi', $akademik->sesi)
+                   ->where('semester', $semSemasa)
+                   ->first();
+                   if($result == null){
+                       return redirect()->route('bkoku.kemaskini.keputusan', ['id' => $id])->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
+                   }
+                   //dd('hehe');
+               
+                   // Increment $semSemasa for the next iteration
+                   $semSemasa = $semSemasa + 1;
+
+                   $tuntut = Tuntutan::where('smoku_id', $id)
+                       ->where('permohonan_id', $permohonan->id)
+                       ->orderBy('tuntutan.id', 'desc')
+                       ->first(['tuntutan.*']);
+
+                   //dd($tuntutan);    
+
+                   if ($tuntut && $tuntut->status == 1) {
+                       $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntut->id)->get();
+                   } 
+                   else if ($tuntut && $tuntut->status != 8){
+                       return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('sem', 'Tuntutan anda masih dalam semakan.');
+                   }
+                   else {
+                       $tuntutan_item = collect(); // An empty collection
+                   }
+                   
+                   $akademik = Akademik::where('smoku_id', $id)
+                       ->where('smoku_akademik.status', 1)->first();
+
+                    return view('tuntutan.penyelaras_bkoku.borang_tuntutan', compact('permohonan','tuntut','tuntutan', 'tuntutan_item','smoku_id','akademik'));
+                }
+            } else {
+                return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('sem', 'tak habis sem lagii niiiii.');
+            }    
+
+        } else if ($permohonan && $permohonan->status !=8) {
+            return redirect()->route('dashboard')->with('permohonan', 'Permohonan anda masih dalam semakan.');
+        } else {
+            return redirect()->route('dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
+        }
         
     }
 
@@ -501,7 +564,8 @@ class PenyelarasController extends Controller
         $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
         $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
 
-        $biltuntutan = Tuntutan::where('smoku_id', '<=', $id)
+        // $biltuntutan = Tuntutan::where('smoku_id', '<=', $id)
+        $biltuntutan = Tuntutan::where('smoku_id', '=', $id)
             ->groupBy('no_rujukan_tuntutan')
             ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan') 
             ->get();
@@ -635,6 +699,19 @@ class PenyelarasController extends Controller
     
         ]);
         $sejarah->save();
+
+        //emel kepada sekretariat
+        $user_sekretariat = User::where('tahap',3)->first();
+        $cc = $user_sekretariat->email;
+
+        //emel kepada penyelaras
+        $user = User::where('no_kp',Auth::user()->no_kp)->first();
+
+        $catatan = "testing";
+        $emel = EmelKemaskini::where('emel_id',14)->first();
+        //dd($cc);
+        //dd($emel);
+        Mail::to($user->email)->cc($cc)->send(new TuntutanHantar($catatan,$emel));
         
         return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('message', 'Tuntutan pelajar telah di hantar.');
     }

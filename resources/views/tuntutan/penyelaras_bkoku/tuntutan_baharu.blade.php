@@ -103,6 +103,7 @@
                                 </td>
                                 <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                 <td>
+
                                     <!--begin::Toolbar-->
                                     <div class="d-flex">
                                         <!--begin::Edit-->
@@ -139,5 +140,34 @@
     $('#sortTable1').DataTable();
     $('#sortTable2').DataTable();
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	@if(session('message'))
+		Swal.fire({
+			icon: 'success',
+			title: 'Berjaya!',
+			text: ' {!! session('message') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+	@if(session('permohonan'))
+		Swal.fire({
+			icon: 'error',
+			title: 'Tiada Permohonan!',
+			text: ' {!! session('permohonan') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+	@if(session('sem'))
+		Swal.fire({
+			icon: 'error',
+			title: 'Tidak Berjaya!',
+			text: ' {!! session('sem') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+</script>
+
 <!--end::Javascript-->     
 </x-default-layout>

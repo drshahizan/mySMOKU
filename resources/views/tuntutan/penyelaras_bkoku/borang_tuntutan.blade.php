@@ -28,6 +28,54 @@
 								</div>
 							</div>
 							<br>
+							@php
+
+								$currentDate = Carbon::now();
+								$tarikhMula = Carbon::parse($akademik->tarikh_mula);
+								$tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
+								if($akademik->bil_bulan_per_sem == 6){
+									$bilSem = 2;
+								} else {
+									$bilSem = 3;
+								}
+								
+								$semSemasa = $akademik->sem_semasa;
+								$totalSemesters = $akademik->tempoh_pengajian * $bilSem;
+								$currentYear = date('Y');
+								$sesiSemasa = $currentYear . '/' . ($currentYear + 1);
+  
+
+								if (!$tuntut) {
+									// No record found, handle the case as needed
+
+								} else {
+									$ada = DB::table('tuntutan')
+										->where('permohonan_id', $permohonan->id)
+										->orderBy('id', 'desc')
+										->first();
+
+									//dd($ada);	
+
+									if ($ada->semester >= $bilSem) {
+										$sesiSemasa = ($currentYear + 1) . '/' . ($currentYear + 2);
+										$semSemasa = 1; // Reset semester for the next academic year
+									}else if ($ada->status != 8){
+										$semSemasa = $ada->semester;
+
+									}
+									else {
+										$semSemasa = $ada->semester + 1;
+									}
+
+								}
+
+								//nak tahu baki sesi semasa
+								$yuran = $permohonan->yuran_dibayar;
+								$wang = $permohonan->wang_saku_dibayar;
+								$baki_total = 5000 - $yuran - $wang;
+								//dd($baki_total);
+
+							@endphp
 							<!--begin::Wrapper-->
 							<div class="mb-0">
 								<!--begin::Row-->
@@ -37,8 +85,8 @@
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 										<div class="mb-5">
 											<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true">
-												<option value="">Pilih</option>
-													@php
+												<option value={{$sesiSemasa}}>{{$sesiSemasa}}</option>
+													{{-- @php
 														$currentYear = date('Y');
 													@endphp
 													@for($year = $currentYear; $year <= ($currentYear + 1); $year++)
@@ -46,7 +94,7 @@
 															$sesi = $year . '/' . ($year + 1);
 														@endphp
 														<option value="{{ $sesi }}">{{ $sesi }}</option>
-													@endfor
+													@endfor --}}
 											</select>
 										</div>
 									</div>
@@ -55,10 +103,7 @@
 										<!--begin::Input group-->
 										<div class="mb-5">
 											<select id="semester" name="semester" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-												<option></option>
-												<option value="1">1</option>					
-												<option value="2">2</option>					
-												<option value="3">3</option>										
+												<option value={{$semSemasa}}>{{$semSemasa}}</option>										
 											</select>
 										</div>
 									</div>
@@ -108,7 +153,8 @@
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Jumlah Amaun</label>
 										<!--begin::Input group-->
 										<div class="mb-5">
-											<input type="text" name="amaun_yuran" class="form-control form-control-solid" placeholder=""  />
+											<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
+											<input type="number" id="amaun_yuran" name="amaun_yuran" onchange="myFunction()" class="form-control form-control-solid" placeholder="" step="0.01" inputmode="decimal" required/>
 										</div>
 									</div>
 								</div>
@@ -164,13 +210,13 @@
 										</tr>
 									</thead>
 									<tbody class="fw-semibold text-gray-600">
-										@foreach ($tuntutan as $tuntutan)
+										@foreach ($tuntutan_item as $tuntutan_item)
 										<tr>
 											<td>{{ $loop->iteration }}.</td>
-											<td>{{ $tuntutan->jenis_yuran}}</td>
-											<td><a href="/assets/dokumen/tuntutan/{{$tuntutan->resit}}" target="_blank">{{ $tuntutan->no_resit}}</a></td>
-											<td>{{ $tuntutan->nota_resit}}</td>
-											<td id="amaun">RM {{ $tuntutan->amaun}}</td>
+											<td>{{ $tuntutan_item->jenis_yuran}}</td>
+											<td><a href="/assets/dokumen/tuntutan/{{$tuntutan_item->resit}}" target="_blank">{{ $tuntutan_item->no_resit}}</a></td>
+											<td>{{ $tuntutan_item->nota_resit}}</td>
+											<td id="amaun" class="text-right">{{number_format($tuntutan_item->amaun, 2, '.', '')}}</td>
 										</tr>
 										@endforeach	
 									</tbody>
@@ -247,56 +293,93 @@
 
 <script>
 
-function myFunction() {
-    var checkBox = document.getElementById("wang_saku");
-    var bilbulan = parseInt(document.getElementById('bil_bulan_per_sem').value); // Convert to integer
-    var layak = 300;
-    var total = layak * bilbulan;
-
+	function myFunction() {
+	
+		var checkBox = document.getElementById("wang_saku");
+		var bilbulan = parseInt(document.getElementById('bil_bulan_per_sem').value); // Convert to integer
+		var wang_saku_perbulan = 300;
+		
+		var wang_saku = wang_saku_perbulan * bilbulan;
+		
+	
+		// Initialize a variable to store the total
+		var totalAmaun = 0;
+	
+		// Query the table rows using the correct selector
+		var rows = document.querySelectorAll("table#itemtuntutan tbody tr");
+	
+		for (var i = 0; i < rows.length; i++) {
+			var amaunCell = rows[i].querySelector("td#amaun");
+			if (amaunCell) {
+				var amaunText = amaunCell.textContent.trim();
+				var amaunValue = parseFloat(amaunText) || 0;
+				totalAmaun += amaunValue;
+			}
+		}
+	
+		var yuranInput = document.getElementById('amaun_yuran');
+		var yuran = parseFloat(yuranInput.value).toFixed(2);
+		var total_yuran = (parseFloat(yuran) + parseFloat(totalAmaun)).toFixed(2);
+	
+		// Define the maximum limit for 'amaun_yuran'
+		var baki_total = document.getElementById('baki_total');
+		var maxLimit = parseFloat(baki_total.value);
+	
+	
+		if (total_yuran > maxLimit) {
+			yuranInput.value = '';
+			alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM '+ maxLimit +' bagi satu sesi pengajian. ' );
+			return;
+		}
+	
+		var total = (parseFloat(wang_saku) + parseFloat(totalAmaun)).toFixed(2);
+	
+		if (checkBox.checked == true) {
+			if (total <= maxLimit) {
+				document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
+				var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
+				document.getElementById("jumlah").value = (amaun_wang_saku + totalAmaun).toFixed(2);
+				console.log("Total amount is within the limit: " + parseFloat(total));
+			} else {
+				var baki_wang_saku = maxLimit - totalAmaun;
+				if (!isNaN(baki_wang_saku)) {
+					document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
+					console.log("Total amount exceeds the limit: " + parseFloat(total));
+					var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
+					document.getElementById("jumlah").value = (baki_wang_saku + totalAmaun).toFixed(2);
+				} else {
+					document.getElementById("amaun_wang_saku").value = "";
+					console.log("Invalid input. Cannot calculate total amount.");
+				}
+			}
+			//document.getElementById("amaun_wang_saku").value = total.toFixed(2);
+			// var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
+			// document.getElementById("jumlah").value = (amaun_wang_saku + totalAmaun).toFixed(2);
+		} else {
+			document.getElementById("amaun_wang_saku").value = "";
+			document.getElementById("jumlah").value = totalAmaun.toFixed(2);
+		}
+	}
+	
+	
 	// Initialize a variable to store the total
 	var totalAmaun = 0;
-
+	
 	// Query the table rows using the correct selector
 	var rows = document.querySelectorAll("table#itemtuntutan tbody tr");
-
+	
 	for (var i = 0; i < rows.length; i++) {
 		var amaunCell = rows[i].querySelector("td#amaun");
 		if (amaunCell) {
 			var amaunText = amaunCell.textContent.trim();
-			var amaunValue = parseFloat(amaunText.replace("RM", "")) || 0;
+			var amaunValue = parseFloat(amaunText) || 0;
 			totalAmaun += amaunValue;
 		}
 	}
-
-    if (checkBox.checked == true) {
-        document.getElementById("amaun_wang_saku").value = total.toFixed(2);
-		var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
-		document.getElementById("jumlah").value = (amaun_wang_saku + totalAmaun).toFixed(2);
-    } else {
-        document.getElementById("amaun_wang_saku").value = "";
-		document.getElementById("jumlah").value = totalAmaun.toFixed(2);
-    }
-}
-
-
-// Initialize a variable to store the total
-var totalAmaun = 0;
-
-// Query the table rows using the correct selector
-var rows = document.querySelectorAll("table#itemtuntutan tbody tr");
-
-for (var i = 0; i < rows.length; i++) {
-	var amaunCell = rows[i].querySelector("td#amaun");
-	if (amaunCell) {
-		var amaunText = amaunCell.textContent.trim();
-		var amaunValue = parseFloat(amaunText.replace("RM", "")) || 0;
-		totalAmaun += amaunValue;
-	}
-}
-
-document.getElementById("jumlah").value = totalAmaun.toFixed(2);
-
-
+	
+	document.getElementById("jumlah").value = totalAmaun.toFixed(2);
+	
+	myFunction();
 </script>
 
 
