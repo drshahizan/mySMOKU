@@ -416,5 +416,18 @@ class MaklumatESPController extends Controller
         return view('esp.status_dibayar', compact('kelulusan'));
     }
 
+    public function statusDibayarTuntutan(){
+
+        $kelulusan = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+            ->where('tuntutan.status', '=', '8')
+            ->select('tuntutan.*', 'permohonan.no_rujukan_permohonan AS no_rujukan_permohonan')
+            ->get();
+
+        //dd($kelulusan);
+
+
+        return view('esp.status_dibayar_tuntutan', compact('kelulusan'));
+    }
+
 
 }

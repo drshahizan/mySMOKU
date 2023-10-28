@@ -48,7 +48,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
     Route::get('/tuntutanESP', [MaklumatESPController::class, 'tuntutan'])->name('tuntutan.esp');
     Route::post('/tuntutanESP', [MaklumatESPController::class, 'hantarTuntutan'])->name('maklumat_tuntutan.esp');
-
+    Route::get('/statusESP/dibayar/tuntutan', [MaklumatESPController::class, 'statusDibayarTuntutan']);
 
     Route::get('/maklumat/MQR', [MaklumatKursusController::class, 'index']);
     Route::get('/maklumat/MQAPA', [MaklumatKursusController::class, 'MQAPA']);

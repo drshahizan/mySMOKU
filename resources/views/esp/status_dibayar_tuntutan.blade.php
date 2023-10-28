@@ -52,6 +52,7 @@
                     <tr class="text-start align-center text-gray-400 fw-bold fs-7 gs-0">
                       <th class="text-center">Bil</th>
                       <th class="text-center"><b>ID Permohonan</b></th>                                                   
+                      <th class="text-center"><b>ID Tuntutan</b></th>                                                   
                       <th class="text-center"><b>Nama</b></th>
                       <th class="text-center"><b>Nama Kursus</b></th>
                       <th class="text-center"><b>Institusi Pengajian</b></th>
@@ -124,11 +125,12 @@
                     <tr>
                       <td>{{ $loop->iteration }}.</td>
                       <td>{{ $item->no_rujukan_permohonan}}</td>
+                      <td>{{ $item->no_rujukan_tuntutan}}</td>
                       <td>{{$pemohon}}</td>                                    
                       <td>{{$namakursus}}</td>
                       <td>{{$institusipengajian}}</td>
-                      <td>RM {{$item->yuran_dibayar}}</td>
-                      <td>RM {{$item->wang_saku_dibayar}}</td>
+                      <td>RM {{number_format($item->yuran_dibayar, 2)}}</td>
+                      <td>RM {{number_format($item->wang_saku_dibayar, 2)}}</td>
                       <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_transaksi))}}</td>
                       <td>{{$status}}</td>
                     </tr>
