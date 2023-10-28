@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('alamat_surat_poskod');
             $table->string('alamat_surat_bandar');
             $table->string('alamat_surat_negeri');
-            $table->string('no_akaun_bank');
+            $table->string('no_akaun_bank')->nullable();
             $table->string('emel');
             $table->string('tel_bimbit');
             $table->string('tel_rumah')->nullable();

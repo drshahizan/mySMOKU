@@ -1,4 +1,12 @@
 <x-default-layout>
+    <head>
+        <link rel="stylesheet" href="/assets/css/saringan.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    </head>    
     <!--begin::Page title-->
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <!--begin::Title-->
@@ -22,13 +30,7 @@
         </ul>
         <!--end::Breadcrumb-->
     </div>
-    <head>
-        <link rel="stylesheet" href="/assets/css/saringan.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
-    </head>
+    
     <br>
                                  
     <!--begin::Row-->
@@ -98,15 +100,15 @@
                     <!--begin::Table container-->
                     <div class="table-responsive">
                         <!--begin::Table-->
-                        <table id="sortTable" class="table table-striped table-hover dataTable js-exportable">
+                        <table id="sortTable1" class="table table-bordered table-striped">
                             <!--begin::Table head-->
                             <thead>
-                                <tr class="fs-7 fw-bold border-0 text-dark">
-                                    <th>Bil</th>
-                                    <th class="min-w-100px" colspan="2">No. Kad Pengenalan</th>
-                                    <th class="min-w-100px" colspan="2">No. Kad JKM</th>
-                                    <th class="min-w-120px" colspan="2">Nama</th>
-                                    <th class="text-center min-w-80px" colspan="2">Status</th>
+                                <tr>
+                                    <th class="text-center">Bil</th>
+                                    <th class="text-center">No. Kad Pengenalan</th>
+                                    <th class="text-center">No. Kad JKM</th>
+                                    <th class="text-center">Nama</th>
+                                    <th class="text-center">Status</th>
                                 </tr>
                             </thead>
                             <!--end::Table head-->
@@ -128,25 +130,16 @@
                                     $pemohon = implode(' ', $result);
                                     @endphp
                                 <tr>
-                                    <td>
-                                        <span class="text-dark fs-6 me-3">{{ $loop->iteration }}. </span>
-                                    </td>
-                                    <td class="" colspan="2">
-                                        <span class="text-dark fs-6 me-3">{{ $smoku->no_kp}}</span>
-                                    </td>
-                                    <td class="" colspan="2">
-                                        <span class="text-dark fs-6 me-3">{{ $smoku->no_daftar_oku}}</span>
-                                    </td>
-                                    <td class="" colspan="2">
-                                        <span class="text-dark fs-6 me-3">{{$pemohon}}</span>
-                                    </td>
+                                    <td class="text-center">{{ $loop->iteration }}.</td>
+                                    <td class="text-center">{{ $smoku->no_kp}}</td>
+                                    <td class="text-center">{{ $smoku->no_daftar_oku}}</td>
+                                    <td class="text-center">{{$pemohon}}</td>
                                     <td class="text-center"><a href="{{route('penyelaras.permohonan.baharu',$smoku->smoku_id)}}">
                                         @if ($smoku->status == 1)
-                                            <button class="btn bg-batal text-white">Deraf</button></a>
+                                            <button class="btn bg-info text-white">Deraf</button></a>
                                         @else 
                                             <button class="btn bg-primary text-white">Belum Mohon</button></a>
                                         @endif
-                                        
                                     </td>
                                 </tr>
                                 @endforeach	
@@ -162,7 +155,7 @@
             <!--end::Table Widget 9-->
         </div>
         </div> <script>
-                $('#sortTable').DataTable();
+                $('#sortTable1').DataTable();
             </script>
         </div>
 

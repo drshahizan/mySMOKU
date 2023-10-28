@@ -1344,7 +1344,7 @@
 					<!--end::Wrapper-->
 					<!--begin::Wrapper-->
 					<div>
-						@if (in_array($permohonan->status, [1, 2, 5]))
+						@if (in_array($permohonan->status, [1, 5]))
 						<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" onclick="if(!this.form.perakuan.checked){alert('Sila tandakan kotak untuk perakuan dan pengesahan.');return false}">
 							<span class="indicator-label">Hantar
 							<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
@@ -1623,7 +1623,7 @@
 
 				if (yuran > maxLimit) {
 					yuranInput.value = '';
-					alert('Ralat: Amaun Yuran tidak boleh lebih RM' + maxLimit);
+					alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' bagi satu sesi pengajian.' );
 					return;
 				}
 				var wang_saku_perbulan = "300";

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PermohonanHantar;
+use App\Models\Agama;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -26,6 +28,7 @@ use App\Models\Hubungan;
 use App\Models\Negeri;
 use App\Models\Bandar;
 use App\Models\DokumenESP;
+use App\Models\EmelKemaskini;
 use App\Models\Tuntutan;
 use App\Models\TuntutanItem;
 use App\Models\SejarahTuntutan;
@@ -33,6 +36,7 @@ use App\Models\Peperiksaan;
 use App\Models\Saringan;
 use App\Models\Kelulusan;
 use App\Models\MaklumatBank;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -101,7 +105,7 @@ class PenyelarasController extends Controller
         $hubungan = Hubungan::all()->sortBy('kod_hubungan');
         $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri')->get();
         $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
-
+        $agama = Agama::orderby("id","asc")->select('id','agama')->get();
         $infoipt = InfoIpt::all()->where('jenis_institusi','IPTA')->sortBy('nama_institusi');
         $peringkat = PeringkatPengajian::all()->sortBy('kod_peringkat');
         $kursus = Kursus::all()->sortBy('nama_kursus');
@@ -116,14 +120,15 @@ class PenyelarasController extends Controller
         ->join('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
         ->join('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
         ->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
-        ->get(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
+        ->get(['smoku_butiran_pelajar.*','smoku_butiran_pelajar.alamat_tetap as alamat_tetap_baru','smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
         ->where('smoku_id', $id);
-        $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
+        
 
         if ($permohonan && $permohonan->status >= '1') {
-            return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen'));
+            $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
+            return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen','agama'));
         } else {
-            return view('permohonan.penyelaras_bkoku.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','kursus','biaya','penaja','negeri'));
+            return view('permohonan.penyelaras_bkoku.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','mod','kursus','biaya','penaja','negeri','bandar','agama'));
         }
     }
 
@@ -172,16 +177,29 @@ class PenyelarasController extends Controller
         $smoku = Smoku::where('no_kp', '=', $request->no_kp)->first();
         $id = $smoku->id;
         $nokp_pelajar = $smoku->no_kp;
+
+        Smoku::updateOrCreate(
+            ['id' => $id],
+            [
+                'umur' => $request->umur,
+            ]
+        );
+
         $butiranPelajar = ButiranPelajar::firstOrNew(['smoku_id' => $id]);
 
-        // Set the attributes
+        $butiranPelajar->negeri_lahir = $request->negeri_lahir;
+        $butiranPelajar->agama = $request->agama;
+        $butiranPelajar->alamat_tetap = $request->alamat_tetap;
+        $butiranPelajar->alamat_tetap_negeri = $request->alamat_tetap_negeri;
+        $butiranPelajar->alamat_tetap_bandar = $request->alamat_tetap_bandar;
+        $butiranPelajar->alamat_tetap_poskod = $request->alamat_tetap_poskod;
         $butiranPelajar->alamat_surat_menyurat = $request->alamat_surat_menyurat;
         $butiranPelajar->alamat_surat_negeri = $request->alamat_surat_negeri;
         $butiranPelajar->alamat_surat_bandar = $request->alamat_surat_bandar;
         $butiranPelajar->alamat_surat_poskod = $request->alamat_surat_poskod;
         $butiranPelajar->tel_bimbit = $request->tel_bimbit;
         $butiranPelajar->tel_rumah = $request->tel_rumah;
-        $butiranPelajar->no_akaun_bank = $request->no_akaun_bank;
+        //$butiranPelajar->no_akaun_bank = $request->no_akaun_bank;
         $butiranPelajar->emel = $request->emel;
 
         // Save the record
@@ -239,9 +257,9 @@ class PenyelarasController extends Controller
         $permohonan->no_rujukan_permohonan = 'B'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar;
         $permohonan->program = 'BKOKU';
         $permohonan->yuran = $request->yuran;
-        $permohonan->amaun_yuran = $request->amaun_yuran;
+        $permohonan->amaun_yuran = number_format($request->amaun_yuran, 2, '.', '');
         $permohonan->wang_saku = $request->wang_saku;
-        $permohonan->amaun_wang_saku = $request->amaun_wang_saku;
+        $permohonan->amaun_wang_saku = number_format($request->amaun_wang_saku, 2, '.', '');
         $permohonan->perakuan = $request->perakuan;
         $permohonan->status = '1';
 
@@ -372,7 +390,20 @@ class PenyelarasController extends Controller
                 // Handle cases where $dokumen or $catatan are not valid arrays
             }
 
-        return redirect()->route('penyelaras.dashboard')->with('message', 'Permohonan pelajar telah dihantar.');
+        //emel kepada sekretariat
+        $user_sekretariat = User::where('tahap',3)->first();
+        $cc = $user_sekretariat->email;
+
+        //emel kepada penyelaras
+        $user = User::where('no_kp',Auth::user()->no_kp)->first();
+
+        $catatan = "testing";
+        $emel = EmelKemaskini::where('emel_id',13)->first();
+        //dd($cc,$user->email);
+
+        Mail::to($user->email)->cc($cc)->send(new PermohonanHantar($catatan,$emel));    
+
+        return redirect()->route('penyelaras.dashboard')->with('success', 'Permohonan pelajar telah dihantar.');
 
     }
 

@@ -246,7 +246,7 @@
 						<!--begin::Input group-->
 						<div class="row mb-10">
 							<!--begin::Col-->
-							<div class="col-md-6 fv-row">
+							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">No. Kad Pengenalan</label>
 								<!--end::Label-->
@@ -260,7 +260,7 @@
 								</div>
 								<!--end::Row-->
 							</div>
-							<div class="col-md-4 fv-row">
+							<div class="col-md-3 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Tarikh Lahir</label>
 								<!--end::Label-->
@@ -274,14 +274,51 @@
 									</div>
 								</div>	
 							</div>
+							<div class="col-md-3 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Negeri Lahir</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Col-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<select id="negeri_lahir" name="negeri_lahir" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+											<option value="">Pilih</option>
+											@foreach ($negeri as $negerilahir)	
+											<option value="{{ $negerilahir->id}}">{{ $negerilahir->negeri}}</option> 
+											@endforeach
+										</select>
+										<!--end::Input-->
+									</div>
+								</div>	
+							</div>
 							<div class="col-md-2 fv-row">
 								<label class=" fs-6 fw-semibold form-label mb-2">Umur</label>
 								<!--end::Label-->
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
 									<div class="col-12">
+										@php
+											// Extract birthdate from IC number (Assuming YYMMDD format)
+											$birthYear = substr($smoku->no_kp, 0, 2);
+											$birthMonth = substr($smoku->no_kp, 2, 2);
+											$birthDay = substr($smoku->no_kp, 4, 2);
+
+											// Assume a default birth century (e.g., 1900 for years 00-99)
+											$birthYear = ($birthYear >= 0 && $birthYear <= 21) ? 2000 + $birthYear : 1900 + $birthYear;
+
+											// Get the current date
+											$currentYear = date('Y');
+											$currentMonth = date('m');
+											$currentDay = date('d');
+
+											// Calculate age
+											$age = $currentYear - $birthYear - (($currentMonth < $birthMonth || ($currentMonth == $birthMonth && $currentDay < $birthDay)) ? 1 : 0);
+										
+										@endphp
 										<!--begin::Input-->
-										<input type="text" class="form-control form-control-solid" id="umur" name="umur" placeholder="" value="{{$smoku->umur}}" readonly/>
+										<input type="text" class="form-control form-control-solid" id="umur" name="umur" placeholder="" value="{{$age}}" readonly/>
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
@@ -292,7 +329,7 @@
 						<!--end::Input group-->
 						<!--begin::Input group-->
 						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
+							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Jantina</label>
 								<!--end::Label-->
@@ -306,7 +343,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-6 fv-row">
+							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
 								<label class="fs-6 fw-semibold form-label mb-2">Keturunan</label>
 								<!--end::Label-->
@@ -320,6 +357,23 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Agama</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id="agama" name="agama" class="form-select form-select-lg form-select-solid" data-control="select2" data-hide-search="true">
+										<option value="">Pilih</option>
+										@foreach ($agama as $agama)	
+										<option value="{{ $agama->id}}">{{ $agama->agama}}</option> 
+										@endforeach
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
 						</div>
 						<!--end::Input group-->
 						<!--begin::Input group-->
@@ -328,7 +382,7 @@
 							<label class="form-label">Alamat Tetap</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<textarea id="alamat_tetap" name="alamat_tetap" class="form-control form-control-lg form-control-solid" rows="2" readonly>{{$smoku->alamat_tetap}}</textarea>
+							<textarea id="alamat_tetap" name="alamat_tetap" class="form-control form-control-lg form-control-solid" rows="2">{{$smoku->alamat_tetap}}</textarea>
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
@@ -339,7 +393,12 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="alamat_tetap_negeri" name="alamat_tetap_negeri" placeholder="" value="" readonly/>
+									<select id="alamat_tetap_negeri" name="alamat_tetap_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+										<option value="">Pilih</option>
+										@foreach ($negeri as $negeritetap)	
+										<option value="{{ $negeritetap->id}}">{{ $negeritetap->negeri}}</option> 
+										@endforeach
+									</select>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -352,7 +411,9 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="alamat_tetap_bandar" name="alamat_tetap_bandar" placeholder="" value="" readonly/>
+									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+										<option value="">Pilih</option>
+									</select>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -365,7 +426,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="alamat_tetap_poskod" name="alamat_tetap_poskod" placeholder="" value=""/>
+									<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_tetap_poskod" name="alamat_tetap_poskod" placeholder="" value=""/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -407,7 +468,12 @@
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<input type="text" class="form-control form-control-solid" id="alamat_surat_negeri" name="alamat_surat_negeri" placeholder="" value=""  />
+										<select id="alamat_surat_negeri" name="alamat_surat_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+											<option value="">Pilih</option>
+											@foreach ($negeri as $negerisurat)	
+											<option value="{{ $negerisurat->id}}">{{ $negerisurat->negeri}}</option> 
+											@endforeach
+										</select>
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
@@ -419,7 +485,12 @@
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<input type="text" class="form-control form-control-solid" id="alamat_surat_bandar" name="alamat_surat_bandar" placeholder="" value=""/>
+										<select id='alamat_surat_bandar' name='alamat_surat_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+											<option value="">Pilih</option>
+											@foreach ($bandar as $bandar)	
+											<option value="{{ $bandar->id}}">{{ $bandar->bandar}}</option> 
+											@endforeach
+										</select>
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
@@ -519,29 +590,6 @@
 								</div>
 							</div>
 							<!--end::Input group-->
-							<!--begin::Input group-->
-							<div class="separator my-14"></div>
-							<div class="pb-10 pb-lg-15">
-							<!--begin::Title-->
-							<h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
-							<!--end::Title-->
-							<!--begin::Notice-->
-							<div class="text-muted fw-semibold fs-6">Bank Islam 
-							</div>
-							<!--end::Notice-->
-							</div>
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="16113020138680"><i class="fa-solid fa-circle-info"></i></a>
-								<!--end::Label-->
-								<!--begin::Input wrapper-->
-								<div class="col-12">
-									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaun_bank" name="no_akaun_bank" placeholder="" value=""/>
-									<!--end::Input-->
-								</div>
-								<!--end::Input wrapper-->
-							</div>
 						</div>
 						<!--end::Input group-->
 					</div>
@@ -715,7 +763,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="pendapatan_waris" name="pendapatan_waris" placeholder="RM" value=""  />
+									<input type="number" class="form-control form-control-solid" id="pendapatan_waris" name="pendapatan_waris" placeholder="RM" value=""  />
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -752,7 +800,7 @@
 										<span class="">Nama Pusat Pengajian</span>
 									</label>
 									<!--end::Label-->
-									<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+									<select id="id_institusi" name="id_institusi" class="form-select form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 										@foreach ($infoipt as $infoipt)
 											<option></option>
 											<option value="{{ $infoipt->id_institusi}}">{{ $infoipt->nama_institusi}}</option>
@@ -784,7 +832,7 @@
 									<span class="">Nama Kursus</span>
 								</label>
 								<!--end::Label-->
-								<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+								<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 									<option value=""></option>
 								</select>
 							</div>
@@ -962,7 +1010,7 @@
 							<!--end::Input group-->
 							<!--begin::Input group-->
 							<div class="row mb-10">
-								<div class="col-md-6 fv-row">
+								<div class="col-md-6 fv-row" id="div_nama_penaja">
 									<!--begin::Label-->
 									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
 										<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
@@ -1030,7 +1078,7 @@
 									<!--begin::Input-->
 									<div class="d-flex">
 										<span class="input-group-text">RM</span>
-										<input type="number" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" onchange="select1()" placeholder="" value=""/>
+										<input type="number" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" onchange="select1()" placeholder="" step="0.01" inputmode="decimal" value=""/>
 									</div>
 									<!--end::Input-->
 								</div>
@@ -1050,7 +1098,7 @@
 									<!--begin::Input-->
 									<div class="d-flex">
 										<span class="input-group-text">RM</span>
-										<input type="text" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" placeholder="" value="" readonly/>
+										<input type="number" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
 									</div>
 									<!--end::Input-->
 								</div>
@@ -1291,13 +1339,60 @@
 				alamat_surat_negeri.value=alamat_tetap_negeri.value;
 				alamat_surat_bandar.value=alamat_tetap_bandar.value;
 				alamat_surat_poskod.value=alamat_tetap_poskod.value;
+				// Trigger select2 update
+				$(alamat_surat_negeri).trigger('change.select2');
+        		$(alamat_surat_bandar).trigger('change.select2');
 			} else {
 				alamat_surat_menyurat.value="";
 				alamat_surat_negeri.value="";
 				alamat_surat_bandar.value="";
 				alamat_surat_poskod.value="";
+				// Trigger select2 update
+				$(alamat_surat_negeri).trigger('change.select2');
+        		$(alamat_surat_bandar).trigger('change.select2');
 			}
 		}	
+			$(document).ready(function(){
+				$('#alamat_tetap_negeri').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#alamat_tetap_bandar').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: '/bandar/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var bandar = response['data'][i].bandar;
+
+											var option = "<option value='"+id+"'>"+bandar+"</option>";
+
+											$("#alamat_tetap_bandar").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
 
     		$(document).ready(function(){
 				$('#alamat_negeri_waris').on('change', function() {
@@ -1367,8 +1462,12 @@
 				if ( this.value == '5'){
 					$("#div_biaya_lain").show();
 				}
+				else if (this.value == '4'){
+					$("#div_nama_penaja").hide();
+				}
 				else {
 					$("#div_biaya_lain").hide();
+					$("#div_nama_penaja").show();
 				}
 				});
 			});
@@ -1536,7 +1635,7 @@
 
 				if (yuran > maxLimit) {
 					yuranInput.value = '';
-					alert('Ralat: Amaun Yuran tidak boleh lebih RM' + maxLimit);
+					alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' bagi satu sesi pengajian.' );
 					return;
 				}
 				var wang_saku_perbulan = "300";

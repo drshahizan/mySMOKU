@@ -1684,7 +1684,7 @@
 
 				if (yuran > maxLimit) {
 					yuranInput.value = '';
-					alert('Ralat: Amaun Yuran tidak boleh lebih RM' + maxLimit);
+					alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' bagi satu sesi pengajian.' );
 					return;
 				}
 				var wang_saku_perbulan = "300";
