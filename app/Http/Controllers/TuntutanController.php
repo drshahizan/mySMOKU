@@ -101,7 +101,8 @@ class TuntutanController extends Controller
         $permohonan = Permohonan::all()->where('smoku_id', '=', $smoku_id->id)->first();
         $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
 
-        $biltuntutan = Tuntutan::where('smoku_id', '<=', $smoku_id->id)
+        // $biltuntutan = Tuntutan::where('smoku_id', '<=', $smoku_id->id)
+        $biltuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
             ->groupBy('no_rujukan_tuntutan')
             ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan') 
             ->get();
