@@ -588,8 +588,9 @@ class SekretariatController extends Controller
     //KEMASKINI
     public function muatNaikDokumenSPPB()
     {
+        $institusiPengajian = InfoIpt::all();
         $dokumen = DokumenESP::all();
-        return view('dokumen.sekretariat.muat_naik_dokumen', compact('dokumen'));
+        return view('dokumen.sekretariat.muat_naik_dokumen', compact('institusiPengajian','dokumen'));
     }
 
     public function hantarDokumenSPPB(Request $request)
