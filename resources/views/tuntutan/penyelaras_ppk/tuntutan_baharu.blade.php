@@ -53,12 +53,12 @@
                     <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                         <thead>
                             <tr>
-                                <th>ID Permohonan</th>
-                                <th>Nama Pelajar</th>
-                                <th>Nama Kursus</th>
-                                <th>Tempoh Penajaan</th>
-                                <th>Status</th>
-                                <th>Tindakan</th>
+                                <th class="text-center">ID Permohonan</th>
+                                <th class="text-center">Nama Pelajar</th>
+                                <th class="text-center">Nama Kursus</th>
+                                <th class="text-center">Tempoh Penajaan</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Tindakan</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -94,17 +94,23 @@
                                     $kursus = implode(' ', $result);
                                 @endphp
                             <tr>
-                                <td>{{ $layak->no_rujukan_permohonan}}</td>
-                                <td>{{ $pemohon}}</td>
-                                <td>{{ $kursus}}</td>
-                                <td>
+                                <td class="text-center">{{ $layak->no_rujukan_permohonan}}</td>
+                                <td class="text-center">{{ $pemohon}}</td>
+                                <td class="text-center">{{ $kursus}}</td>
+                                <td class="text-center">
                                     {{ \Carbon\Carbon::createFromFormat('Y-m-d', $layak->tarikh_mula)->format('d/m/Y') }} - 
                                     {{ \Carbon\Carbon::createFromFormat('Y-m-d', $layak->tarikh_tamat)->format('d/m/Y') }}
                                 </td>
-                                <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                <td>
+                                @if($status != null)
+                                    <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                
+                                @else
+                                    <td class="text-center"></td>
+                                
+                                @endif
+                                <td class="text-center">
                                     <!--begin::Toolbar-->
-                                    <div class="d-flex">
+                                    <div>
                                         <!--begin::Edit-->
                                         <a href="{{ route('bkoku.kemaskini.keputusan', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3">
                                             <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Keputusan Peperiksaan">
