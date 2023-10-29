@@ -446,9 +446,18 @@ class PenyelarasController extends Controller
     {   
         $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
         $smoku_id = $id;
-        $peperiksaan = Peperiksaan::all()->where('permohonan_id', '=', $permohonan->id);
+        //$peperiksaan = Peperiksaan::all()->where('permohonan_id', '=', $permohonan->id);
+        if ($permohonan) {
+            
+            $peperiksaan = Peperiksaan::where('permohonan_id', $permohonan->id)->get();
 
-        return view('tuntutan.penyelaras_bkoku.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id'));
+            return view('tuntutan.penyelaras_bkoku.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan'));
+        
+        } else {
+
+            return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
+        
+        }
     }
 
     public function hantarKeputusanPeperiksaan(Request $request, $id)
@@ -535,7 +544,7 @@ class PenyelarasController extends Controller
                        $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntut->id)->get();
                    } 
                    else if ($tuntut && $tuntut->status != 8){
-                       return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('sem', 'Tuntutan anda masih dalam semakan.');
+                       return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('sem', 'Tuntutan pelajar masih dalam semakan.');
                    }
                    else {
                        $tuntutan_item = collect(); // An empty collection

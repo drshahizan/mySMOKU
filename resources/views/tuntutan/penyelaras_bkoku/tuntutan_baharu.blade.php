@@ -101,9 +101,9 @@
                                     {{ \Carbon\Carbon::createFromFormat('Y-m-d', $layak->tarikh_mula)->format('d/m/Y') }} - 
                                     {{ \Carbon\Carbon::createFromFormat('Y-m-d', $layak->tarikh_tamat)->format('d/m/Y') }}
                                 </td>
-                                @if($status != null){
+                                @if($status != null)
                                     <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                }
+                                
                                 @else
                                     <td class="text-center"></td>
                                 
