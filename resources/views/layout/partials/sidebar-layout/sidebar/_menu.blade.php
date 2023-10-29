@@ -166,30 +166,6 @@
 
 			<div class="menu-item pt-5">
 				<div class="menu-content">
-					<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
-				</div>
-			</div>
-			<div class="menu-item">
-				<a class="menu-link" href="{{ route('peringkat.pengajian') }}">
-					<span class="menu-icon">{!! getIcon('teacher', 'fs-2') !!}</span>
-					<span class="menu-title">Peringkat Pengajian</span>
-				</a>
-			</div>
-			<div class="menu-item">
-				<a class="menu-link" href="{{ route('preview') }}">
-					<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
-					<span class="menu-title">Surat Tawaran</span>
-				</a>
-			</div>
-			<div class="menu-item">
-				<a class="menu-link" href="{{url('kemaskini/sekretariat/emel/senarai-emel')}}">
-					<span class="menu-icon">{!! getIcon('send', 'fs-2') !!}</span>
-					<span class="menu-title">Emel</span>
-				</a>
-			</div>
-
-			<div class="menu-item pt-5">
-				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
 				</div>
 			</div>
@@ -262,7 +238,6 @@
 					<span class="menu-title">Pembayaran</span>
 				</a>
 			</div>
-			
 			<div class="menu-item">
 				<a class="menu-link" href="{{url('tuntutan/sekretariat/sejarah/sejarah-tuntutan')}}">
 					<span class="menu-icon">{!! getIcon('watch', 'fs-2') !!}</span>
@@ -272,19 +247,43 @@
 
 			<div class="menu-item pt-5">
 				<div class="menu-content">
-					<span class="menu-heading fw-bold text-uppercase fs-7">Penyaluran</span>
+					<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
 				</div>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="{{ route('sekretariat.muat-turun.SPPB')}}">
-					<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
-					<span class="menu-title">Muat Turun SPBB</span>
+				<a class="menu-link" href="{{ route('peringkat.pengajian') }}">
+					<span class="menu-icon">{!! getIcon('teacher', 'fs-2') !!}</span>
+					<span class="menu-title">Peringkat Pengajian</span>
 				</a>
+			</div>
+			<div class="menu-item">
+				<a class="menu-link" href="{{ route('preview') }}">
+					<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
+					<span class="menu-title">Surat Tawaran</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a class="menu-link" href="{{url('kemaskini/sekretariat/emel/senarai-emel')}}">
+					<span class="menu-icon">{!! getIcon('send', 'fs-2') !!}</span>
+					<span class="menu-title">Emel</span>
+				</a>
+			</div>
+
+			<div class="menu-item pt-5">
+				<div class="menu-content">
+					<span class="menu-heading fw-bold text-uppercase fs-7">Penyaluran</span>
+				</div>
 			</div>
 			<div class="menu-item">
 				<a class="menu-link" href="{{ route('sekretariat.muat-naik.SPPB')}}">
 					<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
 					<span class="menu-title">Muat Naik SPBB</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a class="menu-link" href="{{ route('sekretariat.muat-turun.SPPB')}}">
+					<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
+					<span class="menu-title">Muat Turun SPBB</span>
 				</a>
 			</div>
 		</div>

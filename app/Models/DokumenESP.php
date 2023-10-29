@@ -12,6 +12,7 @@ class DokumenESP extends Model
 
     protected $fillable = [
         'user_id',
+        'institusi_id',
         'no_rujukan',
         'id_dokumen',
         'dokumen',

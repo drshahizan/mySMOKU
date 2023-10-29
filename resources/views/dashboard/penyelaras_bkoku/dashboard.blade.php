@@ -80,6 +80,7 @@
             </div>
         </div>
         <!--end::Col-->
+        
         <!--begin::Col-->
         <div class="col-xl-8">
             <!--begin::Table widget 9-->
