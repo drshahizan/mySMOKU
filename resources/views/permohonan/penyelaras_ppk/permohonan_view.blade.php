@@ -248,7 +248,7 @@
 						<!--begin::Input group-->
 						<div class="row mb-10">
 							<!--begin::Col-->
-							<div class="col-md-6 fv-row">
+							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">No. Kad Pengenalan</label>
 								<!--end::Label-->
@@ -262,7 +262,7 @@
 								</div>
 								<!--end::Row-->
 							</div>
-							<div class="col-md-4 fv-row">
+							<div class="col-md-3 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Tarikh Lahir</label>
 								<!--end::Label-->
@@ -272,6 +272,25 @@
 									<div class="col-12">
 										<!--begin::Input-->
 										<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" id="tkh_lahir" name="tkh_lahir" value="{{$butiranPelajar->tarikh_lahir}}" readonly/>
+										<!--end::Input-->
+									</div>
+								</div>	
+							</div>
+							<div class="col-md-3 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Negeri Lahir</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Col-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<select id="negeri_lahir" name="negeri_lahir" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+											@foreach ($negeri as $negerilahir)
+											<option value="{{$negerilahir->id}}" {{$butiranPelajar->negeri_lahir == $negerilahir->id ? 'selected' : ''}}>{{ $negerilahir->negeri}}</option>
+											@endforeach
+										</select>
+										
 										<!--end::Input-->
 									</div>
 								</div>	
@@ -294,7 +313,7 @@
 						<!--end::Input group-->
 						<!--begin::Input group-->
 						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
+							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Jantina</label>
 								<!--end::Label-->
@@ -308,7 +327,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-6 fv-row">
+							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
 								<label class="fs-6 fw-semibold form-label mb-2">Keturunan</label>
 								<!--end::Label-->
@@ -322,6 +341,22 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Agama</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id="agama" name="agama" class="form-select form-select-lg form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+										@foreach ($agama as $agama)
+											<option value="{{$agama->id}}" {{$butiranPelajar->agama == $agama->id ? 'selected' : ''}}>{{ $agama->agama}}</option>
+										@endforeach
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
 						</div>
 						<!--end::Input group-->
 						<!--begin::Input group-->
@@ -330,7 +365,7 @@
 							<label class="form-label">Alamat Tetap</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<textarea id="alamat_tetap" name="alamat_tetap" class="form-control form-control-lg form-control-solid" rows="2" readonly>{{$butiranPelajar->alamat_tetap}}</textarea>
+							<textarea id="alamat_tetap" name="alamat_tetap" class="form-control form-control-lg form-control-solid" rows="2" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>{{$butiranPelajar->alamat_tetap_baru}}</textarea>
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
@@ -341,7 +376,11 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="alamat_tetap_negeri" name="alamat_tetap_negeri" placeholder="" value="" readonly/>
+									<select id="alamat_tetap_negeri" name="alamat_tetap_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>{{$butiranPelajar->alamat_tetap_baru}}>
+										@foreach ($negeri as $negeritetap)	
+										<option value="{{$negeritetap->id}}" {{$butiranPelajar->alamat_tetap_negeri == $negeritetap->id ? 'selected' : ''}}>{{ $negeritetap->negeri}}</option>
+										@endforeach
+									</select>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -354,7 +393,12 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="alamat_tetap_bandar" name="alamat_tetap_bandar" placeholder="" value="" readonly/>
+									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+										<option value="">Pilih</option>
+										@foreach ($bandar as $bandartetap)	
+										<option value="{{$bandartetap->id}}" {{$butiranPelajar->alamat_tetap_bandar == $bandartetap->id ? 'selected' : ''}}>{{ $bandartetap->bandar}}</option>
+										@endforeach
+									</select>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -367,7 +411,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="alamat_tetap_poskod" name="alamat_tetap_poskod" placeholder="" value=""/>
+									<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_tetap_poskod" name="alamat_tetap_poskod" placeholder="" value="{{$butiranPelajar->alamat_tetap_poskod}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -386,7 +430,7 @@
 										<!--begin::Label-->
 										<div class="me-5">
 											<!--begin::Input-->
-											<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1" @if($butiranPelajar->alamat_surat_menyurat == $butiranPelajar->alamat_tetap) checked @endif  {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) && $butiranPelajar->alamat_surat_menyurat !== null ? 'readonly' : '' }}/>
+											<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1" @if($butiranPelajar->alamat_surat_menyurat == $butiranPelajar->alamat_tetap) checked @endif />
 											<!--end::Input-->
 											<!--begin::Label-->
 											<label class="form-label">Sama seperti Alamat Tetap</label>
@@ -398,7 +442,7 @@
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input-->
-								<textarea id="alamat_surat_menyurat" name="alamat_surat_menyurat" class="form-control form-control-lg form-control-solid" rows="2" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) && $butiranPelajar->alamat_surat_menyurat !== null ? 'readonly' : '' }}>{{$butiranPelajar->alamat_surat_menyurat}}</textarea>
+								<textarea id="alamat_surat_menyurat" name="alamat_surat_menyurat" class="form-control form-control-lg form-control-solid" rows="2" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) && $butiranPelajar->alamat_surat_menyurat !== null ? 'readonly' : '' }}>{{$butiranPelajar->alamat_surat_menyurat}}</textarea>
 								<!--end::Input-->
 							</div>
 							<div class="row mb-10">
@@ -409,7 +453,12 @@
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<input type="text" class="form-control form-control-solid" id="alamat_surat_negeri" name="alamat_surat_negeri" placeholder="" value="{{$butiranPelajar->alamat_surat_negeri}}"  {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+										<select id="alamat_surat_negeri" name="alamat_surat_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+											<option value="">Pilih</option>
+											@foreach ($negeri as $negerisurat)	
+											<option value="{{$negerisurat->id}}" {{$butiranPelajar->alamat_surat_negeri == $negerisurat->id ? 'selected' : ''}}>{{ $negerisurat->negeri}}</option>
+											@endforeach
+										</select>
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
@@ -421,7 +470,12 @@
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<input type="text" class="form-control form-control-solid" id="alamat_surat_bandar" name="alamat_surat_bandar" placeholder="" value="{{$butiranPelajar->alamat_surat_bandar}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+										<select id='alamat_surat_bandar' name='alamat_surat_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+											<option value="">Pilih</option>
+											@foreach ($bandar as $bandarsurat)	
+											<option value="{{$bandarsurat->id}}" {{$butiranPelajar->alamat_surat_bandar == $bandarsurat->id ? 'selected' : ''}}>{{ $bandarsurat->bandar}}</option>
+											@endforeach
+										</select>
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
@@ -433,7 +487,7 @@
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_surat_poskod" name="alamat_surat_poskod" placeholder="" value="{{$butiranPelajar->alamat_surat_poskod}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+										<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_surat_poskod" name="alamat_surat_poskod" placeholder="" value="{{$butiranPelajar->alamat_surat_poskod}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
@@ -448,7 +502,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{$butiranPelajar->tel_bimbit}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="text" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{$butiranPelajar->tel_bimbit}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -461,7 +515,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{$butiranPelajar->tel_rumah}}" readonly/>
+									<input type="text" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{$butiranPelajar->tel_rumah}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -521,29 +575,7 @@
 								</div>
 							</div>
 							<!--end::Input group-->
-							<!--begin::Input group-->
-							<div class="separator my-14"></div>
-							<div class="pb-10 pb-lg-15">
-							<!--begin::Title-->
-							<h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
-							<!--end::Title-->
-							<!--begin::Notice-->
-							<div class="text-muted fw-semibold fs-6">Bank Islam 
-							</div>
-							<!--end::Notice-->
-							</div>
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="16113020138680"><i class="fa-solid fa-circle-info"></i></a>
-								<!--end::Label-->
-								<!--begin::Input wrapper-->
-								<div class="col-12">
-									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaun_bank" name="no_akaun_bank" placeholder="" value="{{$butiranPelajar->no_akaun_bank}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
-									<!--end::Input-->
-								</div>
-								<!--end::Input wrapper-->
-							</div>
+							
 						</div>
 						<!--end::Input group-->
 					</div>
@@ -719,7 +751,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="pendapatan_waris" name="pendapatan_waris" placeholder="RM" value="{{$butiranPelajar->pendapatan_waris}}" {{ in_array($butiranPelajar->status, [3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="number" class="form-control form-control-solid" id="pendapatan_waris" name="pendapatan_waris" placeholder="RM" value="{{$butiranPelajar->pendapatan_waris}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -989,7 +1021,8 @@
 						<!--end::Input group-->
 						<!--begin::Input group-->
 						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
+							@if ($butiranPelajar->sumber_biaya != '4')
+							<div class="col-md-6 fv-row" id="div_nama_penaja">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
 									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a>
@@ -1001,6 +1034,7 @@
 									@endforeach
 								</select>
 							</div>
+							@endif
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row" id="div_penaja_lain">
 								<!--begin::Label-->
@@ -1054,7 +1088,10 @@
 								<div class="col-6" id="divamaunelaun">
 									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" placeholder="" value="{{$butiranPelajar->amaun_wang_saku}}" readonly/>
+									<div class="d-flex">
+										<span class="input-group-text">RM</span>
+										<input type="number" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" placeholder="" value="{{$butiranPelajar->amaun_wang_saku}}" readonly/>
+									</div>
 									<!--end::Input-->
 								</div>
 							</div>
@@ -1206,8 +1243,8 @@
 					<!--end::Wrapper-->
 					<!--begin::Wrapper-->
 					<div>
-					@if(in_array($butiranPelajar->status, [1, 2, 5]))  
-					<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" onclick="if(!this.form.perakuan.checked){alert('Anda mesti bersetuju dengan terma dan syarat.');return false}">
+					@if(in_array($butiranPelajar->status, [1, 5]))  
+					<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" onclick="if(!this.form.perakuan.checked){alert('Sila tandakan kotak untuk perakuan dan pengesahan.');return false}">
 						<span class="indicator-label">Hantar
 						<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
 							<span class="path1"></span>
@@ -1284,13 +1321,61 @@
 				alamat_surat_negeri.value=alamat_tetap_negeri.value;
 				alamat_surat_bandar.value=alamat_tetap_bandar.value;
 				alamat_surat_poskod.value=alamat_tetap_poskod.value;
+				// Trigger select2 update
+				$(alamat_surat_negeri).trigger('change.select2');
+        		$(alamat_surat_bandar).trigger('change.select2');
 			} else {
 				alamat_surat_menyurat.value="";
 				alamat_surat_negeri.value="";
 				alamat_surat_bandar.value="";
 				alamat_surat_poskod.value="";
+				// Trigger select2 update
+				$(alamat_surat_negeri).trigger('change.select2');
+        		$(alamat_surat_bandar).trigger('change.select2');
 			}
-		}	
+		}
+
+			$(document).ready(function(){
+				$('#alamat_tetap_negeri').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#alamat_tetap_bandar').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: 'getBandar/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var bandar = response['data'][i].bandar;
+
+											var option = "<option value='"+id+"'>"+bandar+"</option>";
+
+											$("#alamat_tetap_bandar").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
 
     		$(document).ready(function(){
 				$('#alamat_negeri_waris').on('change', function() {
@@ -1360,8 +1445,12 @@
 				if ( this.value == '5'){
 					$("#div_biaya_lain").show();
 				}
+				else if (this.value == '4'){
+					$("#div_nama_penaja").hide();
+				}
 				else {
 					$("#div_biaya_lain").hide();
+					$("#div_nama_penaja").show();
 				}
 				});
 			});

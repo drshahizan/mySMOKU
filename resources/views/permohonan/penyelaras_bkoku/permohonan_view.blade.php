@@ -514,7 +514,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{$butiranPelajar->tel_rumah}}" readonly/>
+									<input type="text" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{$butiranPelajar->tel_rumah}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->

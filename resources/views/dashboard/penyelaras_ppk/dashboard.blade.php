@@ -98,15 +98,15 @@
                     <!--begin::Table container-->
                     <div class="table-responsive">
                         <!--begin::Table-->
-                        <table id="sortTable" class="table table-striped table-hover dataTable js-exportable">
+                        <table id="sortTable" class="table table-bordered table-striped">
                             <!--begin::Table head-->
                             <thead>
-                                <tr class="fs-7 fw-bold border-0 text-dark">
-                                    <th>Bil</th>
-                                    <th class="min-w-100px" colspan="2">No. Kad Pengenalan</th>
-                                    <th class="min-w-100px" colspan="2">No. Kad JKM</th>
-                                    <th class="min-w-120px" colspan="2">Nama</th>
-                                    <th class="text-center min-w-80px" colspan="2">Status</th>
+                                <tr>
+                                    <th class="text-center">Bil</th>
+                                    <th class="text-center">No. Kad Pengenalan</th>
+                                    <th class="text-center">No. Kad JKM</th>
+                                    <th class="text-center">Nama</th>
+                                    <th class="text-center">Status</th>
                                 </tr>
                             </thead>
                             <!--end::Table head-->
@@ -128,21 +128,13 @@
                                     $pemohon = implode(' ', $result);
                                     @endphp
                                 <tr>
-                                    <td>
-                                        <span class="text-dark fs-6 me-3">{{ $loop->iteration }}. </span>
-                                    </td>
-                                    <td class="" colspan="2">
-                                        <span class="text-dark fs-6 me-3">{{ $smoku->no_kp}}</span>
-                                    </td>
-                                    <td class="" colspan="2">
-                                        <span class="text-dark fs-6 me-3">{{ $smoku->no_daftar_oku}}</span>
-                                    </td>
-                                    <td class="" colspan="2">
-                                        <span class="text-dark fs-6 me-3">{{$pemohon}}</span>
-                                    </td>
+                                    <td class="text-center">{{ $loop->iteration }}.</td>
+                                    <td class="text-center">{{ $smoku->no_kp}}</td>
+                                    <td class="text-center">{{ $smoku->no_daftar_oku}}</td>
+                                    <td class="text-center">{{$pemohon}}</td>
                                     <td class="text-center"><a href="{{route('penyelaras.ppk.permohonan.baharu',$smoku->smoku_id)}}">
                                         @if ($smoku->status == 1)
-                                            <button class="btn bg-batal text-white">Deraf</button></a>
+                                            <button class="btn bg-info text-white">Deraf</button></a>
                                         @else 
                                             <button class="btn bg-primary text-white">Belum Mohon</button></a>
                                         @endif
