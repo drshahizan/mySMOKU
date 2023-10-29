@@ -104,9 +104,9 @@
                                 @if($status != null){
                                     <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                 }
-                                @else{
+                                @else
                                     <td class="text-center"></td>
-                                }
+                                
                                 @endif
                                 
                                 <td class="text-center">
