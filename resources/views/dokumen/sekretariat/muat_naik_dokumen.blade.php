@@ -58,111 +58,121 @@
 	<br>
 
 	<!--begin::Content-->
-<div id="kt_app_content" class="app-content flex-column-fluid">
-    <!--begin::Content container-->
-    <div id="kt_app_content_container" class="app-container container-xl" style="width:90%">
-        <!--begin::Layout-->
-        <div class="d-flex flex-column flex-lg-row">
-            <!--begin::Content-->
-            <div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
-                <!--begin::Card-->
-                <div class="card">
-                    <!--begin::Card body 1-->
-                    <div class="card-body p-20">
-                        <!--begin::Form-->
-                        <form action="{{ route('sekretariat.hantar.SPPB') }}" method="post" enctype="multipart/form-data">
-                            @csrf
-                            <div class="d-flex flex-column align-items-start flex-xl-row">
-                                <div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4"
-                                    data-bs-toggle="tooltip" data-bs-trigger="hover">
-                                    <span class="fs-3 fw-bold text-gray-800">Borang Salur Peruntukan Program BKOKU</span>
-                                </div>
-                            </div>
-                            <br>
+	<div id="kt_app_content" class="app-content flex-column-fluid">
+		<!--begin::Content container-->
+		<div id="kt_app_content_container" class="app-container container-xl" style="width:90%">
+			<!--begin::Layout-->
+			<div class="d-flex flex-column flex-lg-row">
+				<!--begin::Content-->
+				<div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
+					<!--begin::Card-->
+					<div class="card">
+						<!--begin::Card body 1-->
+						<div class="card-body p-20">
+							<!--begin::Form-->
+							<form action="{{ route('sekretariat.hantar.SPPB') }}" method="post" enctype="multipart/form-data">
+								@csrf
+								<div class="d-flex flex-column align-items-start flex-xl-row">
+									<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4"
+										data-bs-toggle="tooltip" data-bs-trigger="hover">
+										<span class="fs-3 fw-bold text-gray-800">Borang Salur Peruntukan Program BKOKU</span>
+									</div>
+								</div>
+								<br>
 
-                            @if(session('success'))
-                            <div class="alert alert-success" style="width: 90%; margin: 0 auto;">
-                                {{ session('success') }}
-                            </div>
-                            <br>
-                            @endif
+								@if(session('success'))
+								<div class="alert alert-success" style="width: 90%; margin: 0 auto;">
+									{{ session('success') }}
+								</div>
+								<br>
+								@endif
 
-                            @if ($errors->any())
-                            <div class="alert alert-danger" style="width: 90%; margin: 0 auto;">
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </div>
-                            <br><br>
-                            @endif
+								@if ($errors->any())
+								<div class="alert alert-danger" style="width: 90%; margin: 0 auto;">
+									@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+									@endforeach
+								</div>
+								<br><br>
+								@endif
 
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 25%">Item</th>
-                                        <th style="width: 75%">Pilih</th>
-                                    </tr>
-                                </thead>
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th style="width: 25%">Item</th>
+											<th style="width: 75%">Pilih</th>
+										</tr>
+									</thead>
 
-                                <tbody>
-									{{-- NAMA INSTITUSI --}}
-                                    <tr>
-										<td>Nama Institusi</td>
-                                        <td>
-                                            <select name="institusi" style="padding: 5px;">
-                                                <option value="">Pilih Institusi Pengajian</option>
-                                                @foreach ($institusiPengajian as $institusi)
-                                                <option value="{{ $institusi->id_institusi }}"
-                                                    {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>
-                                                    {{ $institusi->nama_institusi }}</option>
-                                                @endforeach
-                                            </select>
-                                        </td>
-                                    </tr>
+									<tbody>
+										{{-- NAMA INSTITUSI --}}
+										<tr>
+											<td>Nama Institusi</td>
+											<td>
+												{{-- <select name="institusi" style="padding: 5px;">
+													<option value="">Pilih Institusi Pengajian</option>
+													@foreach ($institusiPengajian as $institusi)
+													<option value="{{ $institusi->id_institusi }}"
+														{{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>
+														{{ $institusi->nama_institusi }}
+													</option>
+													@endforeach
+												</select> --}}
+												<select name="institusi_id" style="padding: 5px;">
+													<option value="">Pilih Institusi Pengajian</option>
+													@foreach ($institusiPengajian as $institusi)
+													<option value="{{ $institusi->id_institusi }}" {{ old('institusi_id') == $institusi->id_institusi ? 'selected' : '' }}>
+														{{ $institusi->nama_institusi }}
+													</option>
+													@endforeach
+												</select>												
+											</td>
+										</tr>
 
-									{{-- DOKUMEN SPPB --}}
-									<tr>
-										<td>Dokumen SPBB</td>
-										<td>
-											<div id="file-input-container">
-												<!-- File input fields for SPPB1 -->
-												<div class="d-flex">
-													<div class="file-input">
-														<input type="file" name="dokumen1[]" required multiple />
+										{{-- DOKUMEN SPPB --}}
+										<tr>
+											<td>Dokumen SPBB</td>
+											<td>
+												<div id="file-input-container">
+													<!-- File input fields for SPPB1 -->
+													<div class="d-flex">
+														<div class="file-input">
+															<input type="file" name="dokumen1[]" required multiple />
+														</div>
+														<button id="add-file-input" class="btn btn-warning btn-sm" style="font-size: 12px; padding: 4px 10px;">+</button>
 													</div>
-													<button id="add-file-input" class="btn btn-warning btn-sm" style="font-size: 12px; padding: 4px 10px;">+</button>
+												</div>																						
+											</td>
+										</tr>
+										
+										<tr>
+											<td colspan="2">
+												<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange; font-size:15px;'></i>&nbsp;
+													Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a>
+													untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
 												</div>
-											</div>																						
-                                        </td>
-									</tr>
-                                    
-                                    <tr>
-                                        <td colspan="2">
-                                            <div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange; font-size:15px;'></i>&nbsp;
-                                                Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a>
-                                                untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
-                                            </div>
 
-                                            <div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp;
-                                                Format fail yang boleh dimuat naik adalah format '.pdf', '.xls', '.xlsx'.
-                                            </div>
+												<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp;
+													Format fail yang boleh dimuat naik adalah format '.pdf', '.xls', '.xlsx'.
+												</div>
 
-                                            <div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp;
-                                                Saiz maksimum fail adalah 2 MB.
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+												<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp;
+													Saiz maksimum fail adalah 2 MB.
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 
-                            <div class="modal-footer flex-center">
-                                <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
-									<span class="indicator-label">Hantar</span>
-								</button>
-							</div>
-						</form>
+								<div class="modal-footer text-center mt-3">
+									<button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
+										<span class="indicator-label">Hantar</span>
+									</button>
+								</div>
+							</form>
+						</div>
+						<!--end::Card body 1-->
 					</div>
-					<!--end::Card body 1-->
 				</div>
 			</div>
 		</div>
@@ -196,5 +206,18 @@
 				fileInputIndex++;
 			});
 		});
-	</script>				
+	</script>
+	
+	<script>
+		$(document).ready(function () {
+			$('#institusi').on('change', function () {
+				var selectedInstitusiId = $(this).val();
+				// Update the form action URL with the selected ID
+				var formAction = "{{ route('sekretariat.hantar.SPPB', ['institusiId' => 'selectedInstitusiId']) }}";
+				formAction = formAction.replace('selectedInstitusiId', selectedInstitusiId);
+				$('#sppbForm').attr('action', formAction);
+			});
+		});
+	</script>
+	
 </x-default-layout>
