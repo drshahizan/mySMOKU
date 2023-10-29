@@ -436,7 +436,7 @@ class PenyelarasController extends Controller
         //     $query->where('tuntutan.status', '<', '2')
         //         ->orWhereNull('tuntutan.status');
         // })
-        ->get(['smoku.*', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'permohonan.status as permohonan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
+        ->get(['smoku.*', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
         //dd($layak);
 
         return view('tuntutan.penyelaras_bkoku.tuntutan_baharu', compact('layak'));
