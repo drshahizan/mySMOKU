@@ -49,12 +49,25 @@
                 
                 <textarea name="data" id="data" rows="10" cols="50">
 
-  {
-    "nokp" : "950623031212",
-    "id_permohonan" : "B/2/950623031212",
-    "tarikh_transaksi" : "23/10/2023",
-    "amount" : "100"
-  }
+                  
+                    {
+                       "nokp" : "930623015673",
+                       "id_permohonan" : "B/3/930623015673",
+                       "tarikh_transaksi" : "23/10/2023",
+                       "id_tuntutan" : "B/3/930623015673/1",
+                       "yuran_dibayar" : "800.70",
+                       "wang_saku_dibayar" : "999.30"
+                     },
+                     {
+                       "nokp" : "920623011673",
+                       "id_permohonan" : "B/2/920623011673",
+                       "tarikh_transaksi" : "23/10/2023",
+                       "id_tuntutan" : "B/2/920623011673/1",
+                       "yuran_dibayar" : "600.70",
+                       "wang_saku_dibayar" : "599.30"
+                     }
+                   
+                     
   
                   
                 </textarea>
