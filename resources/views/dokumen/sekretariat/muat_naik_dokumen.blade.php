@@ -1,8 +1,5 @@
 <x-default-layout> 
 	<head>
-	<!-- MAIN CSS -->
-		{{-- <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" /> --}}
-
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
@@ -68,7 +65,7 @@
 					<!--begin::Card-->
 					<div class="card">
 						<!--begin::Card body 1-->
-						<div class="card-body p-20">
+						<div class="card-body pt-10 p-20">
 							<!--begin::Form-->
 							<form action="{{ route('sekretariat.hantar.SPPB') }}" method="post" enctype="multipart/form-data">
 								@csrf
@@ -165,8 +162,8 @@
 						<!--end::Card body 1-->
 
 						<!--begin::Card body 2-->
-						<div class="card-body p-20">
-							<table class="table table-bordered table-striped">
+						<div class="card-body p-20 pt-0">
+							<table id="sortTable1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
 										<th class="text-center" style="width: 5%">No</th>
@@ -174,29 +171,38 @@
 										<th class="text-center" style="width: 25%">Dokumen</th>
 									</tr>
 								</thead>
-
+						
 								<tbody>
 									@php
-										$i=0;
+									$i = 0;
 									@endphp
-									<tr>
-										<td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
-										<td>nama institusi</td>
-										<td class="text-center">
-											<a href="#" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
-												Lihat <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
-											</a>
-										</td>
-									</tr>
+
+									@foreach ($dokumen as $doc)
+										@php
+											$id = $doc->institusi_id;
+											$nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $id)->value('nama_institusi');
+										@endphp
+										<tr>
+											<td class="text-center" data-no="{{ $i++ }}">{{ $i }}</td>
+											<td>{{ $nama_institusi }}</td>
+											<td class="text-center">
+												<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $doc->dokumen) }}" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
+													Lihat <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
+												</a>
+											</td>
+										</tr>
+										@endforeach
 								</tbody>
 							</table>
 						</div>
 						<!--end::Card body 2-->
 					</div>
+					<!--end::Card-->
 				</div>
 			</div>
 		</div>
 	</div>
+	<!--end::Content-->
 						
 	<script>
 		document.addEventListener("DOMContentLoaded", function () {
@@ -236,26 +242,6 @@
 				formAction = formAction.replace('selectedInstitusiId', selectedInstitusiId);
 				$('#sppbForm').attr('action', formAction);
 			});
-		});
-	</script>
-
-	<script>
-		$(document).ready(function() {
-			var table = $('#sortTable1').DataTable({
-				"columnDefs": [
-					{
-						"targets": 'no-sort',
-						"orderable": false
-					}
-				],
-			});
-
-			// Disable sorting for the "No" column
-			table.on('order.dt', function() {
-				table.column(0, { order: 'applied' }).nodes().each(function(cell, i) {
-					cell.innerHTML = i + 1;
-				});
-			}).draw();
 		});
 	</script>
 </x-default-layout>

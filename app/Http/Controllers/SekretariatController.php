@@ -700,7 +700,8 @@ class SekretariatController extends Controller
 
     public function muatTurunDokumenSPPB()
     {
-        $dokumen = DokumenESP::all();
+        // Order by created date in descending order
+        $dokumen = DokumenESP::orderBy('created_at', 'desc')->get(); 
         return view('dokumen.sekretariat.muat_turun_dokumen', compact('dokumen'));
     }
 
