@@ -241,7 +241,7 @@ td,th{
     vertical-align: middle!important;
     color: black!important;
     border: 1px solid #ddd !important;
-    padding: 10px!important;
+    padding: 5px!important;
 }
   
 table>thead>tr:nth-child(even){background-color: #f2f2f2!important;}
@@ -264,12 +264,12 @@ th{
 }
 
 .ml-auto .btn{
-    padding: 7px!important;
+    padding: 5px!important;
 }
 
 .ml-auto .btn:hover{
     background-color: white!important;
-    padding: 7px!important;
+    padding: 5px!important;
 }
 
 .img{

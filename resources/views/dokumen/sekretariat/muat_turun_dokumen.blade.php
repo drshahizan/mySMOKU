@@ -51,8 +51,9 @@
 									<thead>
 										<tr>
 											<th class="text-center" style="width: 5%">No</th>
-											<th class="text-center" style="width: 75%">Institusi</th>
-											<th class="text-center" style="width: 20%">Dokumen</th>
+											<th class="text-center" style="width: 60%">Institusi</th>
+											<th class="text-center" style="width: 20%">Tarikh Dokumen Dikemaskini</th>
+											<th class="text-center" style="width: 15%">Dokumen</th>
 										</tr>
 									</thead>
 							
@@ -69,8 +70,9 @@
 											<tr>
 												<td class="text-center" data-no="{{ $i++ }}">{{ $i }}</td>
 												<td>{{ $nama_institusi }}</td>
+												<td class="text-center">{{date('d/m/Y', strtotime($doc->updated_at))}}</td>
 												<td class="text-center">
-													<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $doc->dokumen) }}" class="btn btn-info btn-sm" style="width: 70%; height:30px; margin: 0 auto;">
+													<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $doc->dokumen) }}" class="btn btn-info btn-sm" style="width: 80%; margin: 0 auto;">
 														Lihat <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
 													</a>
 												</td>
