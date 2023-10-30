@@ -109,21 +109,12 @@
 										<tr>
 											<td>Nama Institusi</td>
 											<td>
-												{{-- <select name="institusi" style="padding: 5px;">
-													<option value="">Pilih Institusi Pengajian</option>
-													@foreach ($institusiPengajian as $institusi)
-													<option value="{{ $institusi->id_institusi }}"
-														{{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>
-														{{ $institusi->nama_institusi }}
-													</option>
-													@endforeach
-												</select> --}}
 												<select name="institusi_id" style="padding: 5px;">
 													<option value="">Pilih Institusi Pengajian</option>
 													@foreach ($institusiPengajian as $institusi)
-													<option value="{{ $institusi->id_institusi }}" {{ old('institusi_id') == $institusi->id_institusi ? 'selected' : '' }}>
-														{{ $institusi->nama_institusi }}
-													</option>
+														<option value="{{ $institusi->id_institusi }}" {{ old('institusi_id') == $institusi->id_institusi ? 'selected' : '' }}>
+															{{ $institusi->nama_institusi }}
+														</option>
 													@endforeach
 												</select>												
 											</td>
@@ -210,10 +201,9 @@
 	
 	<script>
 		$(document).ready(function () {
-			$('#institusi').on('change', function () {
+			$('#institusi_id').on('change', function () {
 				var selectedInstitusiId = $(this).val();
-				// Update the form action URL with the selected ID
-				var formAction = "{{ route('sekretariat.hantar.SPPB', ['institusiId' => 'selectedInstitusiId']) }}";
+				var formAction = "{{ route('sekretariat.hantar.SPPB') }}";
 				formAction = formAction.replace('selectedInstitusiId', selectedInstitusiId);
 				$('#sppbForm').attr('action', formAction);
 			});
