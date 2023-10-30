@@ -239,7 +239,6 @@
         <script>
             $(document).ready(function() {
                 var table = $('#sortTable1').DataTable();
-
                 $('#daterange').daterangepicker({
                     opens: 'left',
                     locale: {
