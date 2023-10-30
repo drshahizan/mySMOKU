@@ -305,8 +305,9 @@ class MaklumatESPController extends Controller
                     // Format the DateTime object as 'Y-m-d'
                     $formattedDate = $date->format('Y-m-d');
 
+                    $nokpValues = $jsonData['nokp'];
                     // Loop through each nokp value
-                    foreach ($jsonData['nokp'] as $nokp) {
+                    foreach ($nokpValues as $nokp) {
 
                         $smoku = Smoku::where('no_kp', $nokp)->first();
                         
