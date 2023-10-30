@@ -29,68 +29,41 @@
 </style>
     <body>
         <h3>Keputusan Peperiksaan Mengikut Sesi/Semester</h3>
-        {{-- @php
-            $str = $permohonan->id_permohonan;
-            $id_permohonan = str_replace('/', '-', $str);
-            $suratTawaran = "/assets/dokumen/permohonan/salinan_suratTawaran_".$id_permohonan.".pdf";
-            $akaunBankIslam = "/assets/dokumen/permohonan/salinan_akaunBankIslam_".$id_permohonan.".pdf";
-            $keputusanPeperiksaan = "/assets/dokumen/permohonan/salinan_keputusanPeperiksaan_".$id_permohonan.".pdf";
-            $invoisResit = "/assets/dokumen/permohonan/salinan_invoisResit_".$id_permohonan.".pdf";
-            $maklumatBankIPT = "/assets/dokumen/permohonan/salinan_maklumatBankIPT_".$id_permohonan.".pdf";
-        @endphp --}}
+         @php
+            $i=1;
+        @endphp
         <div class="border">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="sem1-tab" data-toggle="tab" data-target="#sem1" type="button" role="tab" aria-controls="sem1" aria-selected="true">2020/2021-01</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="sem2-tab" data-toggle="tab" data-target="#sem2" type="button" role="tab" aria-controls="sem2" aria-selected="false">2020/2021-02</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="sem3-tab" data-toggle="tab" data-target="#sem3" type="button" role="tab" aria-controls="sem3" aria-selected="false">2021/2022-01</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="sem4-tab" data-toggle="tab" data-target="#sem4" type="button" role="tab" aria-controls="sem4" aria-selected="false">2021/2022-02</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="sem5-tab" data-toggle="tab" data-target="#sem5" type="button" role="tab" aria-controls="sem5" aria-selected="false">2022/2023-01</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="sem6-tab" data-toggle="tab" data-target="#sem6" type="button" role="tab" aria-controls="sem6" aria-selected="false">2022/2023-02</button>
-                </li>
+                @foreach($peperiksaan as $item)
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="sem{{$i}}-tab" data-toggle="tab" data-target="#sem{{$i}}" type="button" role="tab" aria-controls="sem{{$i}}" aria-selected="true">
+                            {{$item['sesi']}}-{{$item['semester']}}
+                        </button>
+                    </li>
+                    @php
+                        $i++;
+                    @endphp
+                @endforeach
             </ul>
+        @php
+            $n=1;
+        @endphp
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fadeshow active" id="sem1" role="tabpanel" aria-labelledby="sem1-tab">
-                    <div style="text-align: center">
-                        <embed src="/assets/dokumen/keputusanPeperiksaan/keputusanPeperiksaan.pdf#zoom=90" width="70%" height="605px"/>
+                @foreach($peperiksaan as $item)
+                    <div class="tab-pane fadeshow" id="sem{{$n}}" role="tabpanel" aria-labelledby="sem{{$n}}-tab">
+                        <div style="text-align: center">
+                            <embed src="/assets/dokumen/keputusanPeperiksaan/{{$item['kepPeperiksaan']}}#zoom=90" width="70%" height="605px"/>
+                        </div>
                     </div>
-                </div>
-                <div class="tab-pane fade" id="sem2" role="tabpanel" aria-labelledby="sem2-tab">
-                    <div style="text-align: center">
-                        <embed src="/assets/dokumen/keputusanPeperiksaan/keputusanPeperiksaan.pdf#zoom=90" width="70%" height="605px"/>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="sem3" role="tabpanel" aria-labelledby="sem3-tab">
-                    <div style="text-align: center">
-                        <embed src="/assets/dokumen/keputusanPeperiksaan/keputusanPeperiksaan.pdf#zoom=90" width="70%" height="605px"/>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="sem4" role="tabpanel" aria-labelledby="sem4-tab">
-                    <div style="text-align: center">
-                        <embed src="/assets/dokumen/keputusanPeperiksaan/keputusanPeperiksaan.pdf#zoom=90" width="70%" height="605px"/>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="sem5" role="tabpanel" aria-labelledby="sem5-tab">
-                    <div style="text-align: center">
-                        <embed src="/assets/dokumen/keputusanPeperiksaan/keputusanPeperiksaan.pdf#zoom=90" width="70%" height="605px"/>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="sem6" role="tabpanel" aria-labelledby="sem6-tab">
-                    <div style="text-align: center">
-                        <embed src="/assets/dokumen/keputusanPeperiksaan/keputusanPeperiksaan.pdf#zoom=90" width="70%" height="605px"/>
-                    </div>
-                </div>            
+                    @php
+                        $n++;
+                    @endphp
+                @endforeach
             </div>
         </div>
     </body>
 </html>
+<script>
+    $('.nav').find('.nav-link:first').addClass('active');
+    $('.tab-content').find('.tab-pane:first').addClass('active');
+</script>

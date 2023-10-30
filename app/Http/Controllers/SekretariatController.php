@@ -10,6 +10,7 @@ use App\Mail\TuntutanLayak;
 use App\Mail\TuntutanTidakLayak;
 use App\Models\DokumenESP;
 use App\Models\EmelKemaskini;
+use App\Models\Peperiksaan;
 use App\Models\Permohonan;
 use App\Models\Saringan;
 use App\Models\SaringanTuntutan;
@@ -685,8 +686,8 @@ class SekretariatController extends Controller
 
     //             // Save the file information to the database with the incremented id_dokumen
     //             $dokumenESP = new DokumenESP();
-    //             $dokumenESP->user_id = auth()->user()->id; 
-    //             $dokumenESP->institusi_id = $institusiId; 
+    //             $dokumenESP->user_id = auth()->user()->id;
+    //             $dokumenESP->institusi_id = $institusiId;
     //             $dokumenESP->no_rujukan = "{$institusiId}/{$currentYear}/{$nextIdDokumen}";
     //             $dokumenESP->id_dokumen = $nextIdDokumen;
     //             $dokumenESP->dokumen = $uniqueFilenameDokumen1;
@@ -718,8 +719,9 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status'));
     }
 
-    public function keputusanPeperiksaan(){
-        return view('tuntutan.sekretariat.saringan.keputusan_peperiksaan');
+    public function keputusanPeperiksaan($id){
+        $peperiksaan = Peperiksaan::where('permohonan_id',$id)->get();
+        return view('tuntutan.sekretariat.saringan.keputusan_peperiksaan',compact('peperiksaan'));
     }
 
     public function maklumatTuntutanKedua($id){

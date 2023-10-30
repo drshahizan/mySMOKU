@@ -213,7 +213,7 @@
                                                         <tr>
                                                             <td style="text-align:right;">1</td>
                                                             <td>
-                                                                <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan') }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                                <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan/'.$permohonan->id) }}" target="_blank">Keputusan Peperiksaan</a></span>
                                                             </td>
                                                             <td class="hidden-sm-down">
                                                                 <div class="form-group c_form_group">
