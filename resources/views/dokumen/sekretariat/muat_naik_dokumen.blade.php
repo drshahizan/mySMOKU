@@ -1,7 +1,7 @@
 <x-default-layout> 
 	<head>
 	<!-- MAIN CSS -->
-		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		{{-- <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" /> --}}
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -155,14 +155,43 @@
 									</tbody>
 								</table>
 
-								<div class="modal-footer text-center mt-3">
-									<button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
+								<div class="modal-footer mt-3">
+									<button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary" style="margin: 0 auto;">
 										<span class="indicator-label">Hantar</span>
 									</button>
 								</div>
 							</form>
 						</div>
 						<!--end::Card body 1-->
+
+						<!--begin::Card body 2-->
+						<div class="card-body p-20">
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th class="text-center" style="width: 5%">No</th>
+										<th class="text-center" style="width: 70%">Institusi</th>
+										<th class="text-center" style="width: 25%">Dokumen</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									@php
+										$i=0;
+									@endphp
+									<tr>
+										<td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
+										<td>nama institusi</td>
+										<td class="text-center">
+											<a href="#" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
+												Lihat <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!--end::Card body 2-->
 					</div>
 				</div>
 			</div>
@@ -209,5 +238,24 @@
 			});
 		});
 	</script>
-	
+
+	<script>
+		$(document).ready(function() {
+			var table = $('#sortTable1').DataTable({
+				"columnDefs": [
+					{
+						"targets": 'no-sort',
+						"orderable": false
+					}
+				],
+			});
+
+			// Disable sorting for the "No" column
+			table.on('order.dt', function() {
+				table.column(0, { order: 'applied' }).nodes().each(function(cell, i) {
+					cell.innerHTML = i + 1;
+				});
+			}).draw();
+		});
+	</script>
 </x-default-layout>
