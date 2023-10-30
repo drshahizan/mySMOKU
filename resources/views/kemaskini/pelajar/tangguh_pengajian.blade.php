@@ -26,7 +26,7 @@
 								<div class="d-flex flex-column align-items-start flex-xl-row">
 									<!--begin::Input group-->
 									<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
-										<span class="fs-3 fw-bold text-gray-800">Lapor Diri Tamat Pengajian</span>
+										<span class="fs-3 fw-bold text-gray-800">Tangguh Pengajian</span>
 									</div>
 								</div>
 								<!--end::Top-->
@@ -139,6 +139,27 @@
 	<script src="assets/js/custom/utilities/modals/users-search.js"></script>
 	<!--end::Custom Javascript-->
 	<!--end::Javascript-->
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	@if(session('success'))
+		Swal.fire({
+			icon: 'success',
+			title: 'Berjaya!',
+			text: ' {!! session('success') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+	@if(session('error'))
+		Swal.fire({
+			icon: 'error',
+			title: 'Tidak Berjaya!',
+			text: ' {!! session('error') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+</script>
+
 </body>
 <!--end::Body-->
 

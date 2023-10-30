@@ -23,6 +23,7 @@ use App\Models\Permohonan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PelajarController;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /*
@@ -60,8 +61,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/', [DashboardController::class, 'index']);
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [PelajarController::class, 'index'])->name('dashboard');
     //Route::post('/dashboard', [DashboardController::class, 'store'])->name('dashboard.store');
+    Route::get('lapor/tamat/pengajian', [PelajarController::class, 'tamatPengajian'])->name('tamat.pengajian');
+    Route::get('lapor/tangguh/pengajian', [PelajarController::class, 'tangguhPengajian'])->name('tangguh.pengajian');
+    Route::get('lapor/lanjut/pengajian', [PelajarController::class, 'lanjutPengajian'])->name('lanjut.pengajian');
+    Route::post('hantar/dokumen/tamat/pengajian', [PelajarController::class, 'hantarTamatPengajian'])->name('hantar.tamat.pengajian');
 
 
     Route::get('profildiri', [ProfilController::class, 'profildiri'])->name('profil-diri');
@@ -79,8 +84,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('statuspermohonan/{id}', [PermohonanController::class, 'delete'])->name('delete');
     Route::get('kemaskini/keputusan', [PermohonanController::class, 'kemaskiniKeputusan'])->name('kemaskini.keputusan');
     Route::post('kemaskini/keputusan', [PermohonanController::class, 'save'])->name('save');
-    Route::get('lapor/tamat/pengajian', [PermohonanController::class, 'tamatPengajian'])->name('tamat.pengajian');
-    Route::post('hantar/dokumen/tamat/pengajian', [PermohonanController::class, 'hantarTamatPengajian'])->name('hantar.tamat.pengajian');
     Route::get('permohonan/sejarah/sejarah-permohonan', [PermohonanController::class, 'sejarahPermohonan'])->name('pelajar.sejarah.permohonan');
 
     //Tuntutan Pelajar
