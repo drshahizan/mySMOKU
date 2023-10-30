@@ -306,6 +306,8 @@ class MaklumatESPController extends Controller
                     $formattedDate = $date->format('Y-m-d');
 
                     $nokpValues = $jsonData['nokp'];
+                    // Initialize an empty array to store responses
+                    $responses = [];
                     // Loop through each nokp value
                     foreach ($nokpValues as $nokp) {
 
