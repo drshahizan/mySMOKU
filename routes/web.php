@@ -158,6 +158,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('sekretariat/muat-naik/dokumen/sppb', [SekretariatController::class, 'muatNaikDokumenSPPB'])->name('sekretariat.muat-naik.SPPB');
     Route::post('sekretariat/hantar/dokumen/sppb', [SekretariatController::class, 'hantarDokumenSPPB'])->name('sekretariat.hantar.SPPB');
     Route::get('sekretariat/muat-turun/dokumen/sppb', [SekretariatController::class, 'muatTurunDokumenSPPB'])->name('sekretariat.muat-turun.SPPB');
+    Route::get('sekretariat/lihat/salinan-dokumen/{id}', [SekretariatController::class, 'salinanDokumenSPPB'])->name('dokumen.SPPB.id');
 
     //Permohonan - Sekretariat - Kelulusan
     Route::post('permohonan/sekretariat/hantar/semua', [SekretariatController::class, 'hantarSemuaKeputusanPermohonan'])->name('bulk.approval');
