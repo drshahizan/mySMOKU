@@ -52,7 +52,7 @@
                 @foreach($peperiksaan as $item)
                     <div class="tab-pane fadeshow" id="sem{{$n}}" role="tabpanel" aria-labelledby="sem{{$n}}-tab">
                         <div style="text-align: center">
-                            <embed src="/assets/dokumen/keputusanPeperiksaan/{{$item['kepPeperiksaan']}}#zoom=90" width="70%" height="605px"/>
+                            <embed src="/assets/dokumen/peperiksaan/{{$item['kepPeperiksaan']}}#zoom=90" width="70%" height="605px"/>
                         </div>
                     </div>
                     @php
