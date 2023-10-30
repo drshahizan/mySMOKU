@@ -342,7 +342,10 @@ class MaklumatESPController extends Controller
                         }
                         else {
                             
-                            $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku->id)->first();    
+                            $permohonan_id = Permohonan::orderBy('id', 'desc')
+                                    ->where('smoku_id',$smoku->id)
+                                    ->where('no_rujukan_permohonan', $jsonData['id_permohonan'])
+                                    ->first();    
                             
                                 $affectedRows = DB::table('tuntutan')
                                     ->where('smoku_id', $smoku->id)
