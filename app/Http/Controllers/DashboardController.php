@@ -23,26 +23,7 @@ class DashboardController extends Controller
 
         if(Auth::user()->tahap=='1')
         {
-            $user = User::all()->where('no_kp',Auth::user()->no_kp);
-            $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-            $permohonan = SejarahPermohonan::orderby("sejarah_permohonan.created_at","desc")
-            ->join('permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
-            ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
-            ->get(['sejarah_permohonan.*','permohonan.no_rujukan_permohonan','bk_status.status'])
-            ->where('smoku_id',$smoku_id->id)
-            ->where('status', '!=', 'DISOKONG');
-            //dd($permohonan);
-            $akademik = Akademik::all()->where('smoku_id',$smoku_id->id)->first();
-
-            $tuntutan = Tuntutan::orderby("sejarah_tuntutan.created_at","desc")
-            ->join('sejarah_tuntutan','sejarah_tuntutan.tuntutan_id','=','tuntutan.id')
-            ->join('bk_status','bk_status.kod_status','=','sejarah_tuntutan.status')
-            ->get(['sejarah_tuntutan.*','tuntutan.*','bk_status.status'])
-            ->where('smoku_id',$smoku_id->id)
-            ->where('status', '!=', 'DISOKONG');
-            //dd($tuntutan);
-            
-            return view('pages.dashboards.index', compact('user','permohonan','akademik','tuntutan'));
+            return redirect()->route('pelajar.dashboard');
         }
         else if(Auth::user()->tahap=='2')
         {
