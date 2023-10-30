@@ -305,91 +305,95 @@ class MaklumatESPController extends Controller
                     // Format the DateTime object as 'Y-m-d'
                     $formattedDate = $date->format('Y-m-d');
 
-                    $smoku = Smoku::where('no_kp', $jsonData['nokp'])->first();
-                    
-                    if ($smoku === null) {
-                        // No record found in Smoku table
-                        $responses[] = [
-                            'nokp' => $jsonData['nokp'],
-                            'id_permohonan' => $jsonData['id_permohonan'],
-                            'tarikh_transaksi' => $jsonData['tarikh_transaksi'],
-                            'id_tuntutan' => $jsonData['id_tuntutan'],
-                            'yuran_dibayar' => $jsonData['yuran_dibayar'],
-                            'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'],
-                            'status' => 'Tiada data dalam BKOKU'
-                        ];
-                    } else {
+                    // Loop through each nokp value
+                    foreach ($jsonData['nokp'] as $nokp) {
 
-                        if ($jsonData['id_tuntutan'] == null){
-                            // Record found in Smoku table, perform the update
-                            $affectedRows = DB::table('permohonan')
-                                ->where('smoku_id', $smoku->id)
-                                ->where('no_rujukan_permohonan', $jsonData['id_permohonan'])
-                                ->update([
-                                    'yuran_dibayar' => $jsonData['yuran_dibayar'] !== null ? number_format($jsonData['yuran_dibayar'], 2, '.', '') : null,
-                                    'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'] !== null ? number_format($jsonData['wang_saku_dibayar'], 2, '.', '') : null,
-                                    'tarikh_transaksi' => $formattedDate,
-                                    'status' => 8,
-                                ]);
-
-                            $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku->id)->first();    
-                            SejarahPermohonan::create([
-                                'smoku_id' => $smoku->id,
-                                'permohonan_id' => $permohonan_id->id,
-                                'status' => 8, 
-                            ]);
-
-                        }
-                        else {
-
-                            $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku->id)->first();    
-                            $affectedRows = DB::table('tuntutan')
-                                ->where('smoku_id', $smoku->id)
-                                ->where('permohonan_id', $permohonan_id->id)
-                                ->update([
-                                    'yuran_dibayar' => $jsonData['yuran_dibayar'] !== null ? number_format($jsonData['yuran_dibayar'], 2, '.', '') : null,
-                                    'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'] !== null ? number_format($jsonData['wang_saku_dibayar'], 2, '.', '') : null,
-                                    'tarikh_transaksi' => $formattedDate,
-                                    'status' => 8,
-                                ]);
-
-                            $tuntutan_id = Tuntutan::orderBy('id', 'desc')->where('smoku_id',$smoku->id)
-                                ->where('permohonan_id', $permohonan_id->id)
-                                ->first();    
-                            SejarahTuntutan::create([
-                                'smoku_id' => $smoku->id,
-                                'tuntutan_id' => $tuntutan_id->id,
-                                'status' => 8, 
-                            ]);
-
-                        }
+                        $smoku = Smoku::where('no_kp', $nokp)->first();
                         
-
-                        // Prepare the response based on the update result
-                        if ($affectedRows > 0) {
-                            // Data was updated successfully
+                        if ($smoku === null) {
+                            // No record found in Smoku table
                             $responses[] = [
-                                'nokp' => $jsonData['nokp'],
+                                'nokp' => $nokp,
                                 'id_permohonan' => $jsonData['id_permohonan'],
                                 'tarikh_transaksi' => $jsonData['tarikh_transaksi'],
                                 'id_tuntutan' => $jsonData['id_tuntutan'],
                                 'yuran_dibayar' => $jsonData['yuran_dibayar'],
                                 'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'],
-                                'status' => 'Data diterima dan update'
+                                'status' => 'Tiada data dalam BKOKU'
                             ];
                         } else {
-                            // Data was not updated
-                            $responses[] = [
-                                'nokp' => $jsonData['nokp'],
-                                'id_permohonan' => $jsonData['id_permohonan'],
-                                'tarikh_transaksi' => $jsonData['tarikh_transaksi'],
-                                'id_tuntutan' => $jsonData['id_tuntutan'],
-                                'yuran_dibayar' => $jsonData['yuran_dibayar'],
-                                'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'],
-                                'status' => 'Data tidak diupdate'
-                            ];
+
+                            if ($jsonData['id_tuntutan'] == null){
+                                // Record found in Smoku table, perform the update
+                                $affectedRows = DB::table('permohonan')
+                                    ->where('smoku_id', $smoku->id)
+                                    ->where('no_rujukan_permohonan', $jsonData['id_permohonan'])
+                                    ->update([
+                                        'yuran_dibayar' => $jsonData['yuran_dibayar'] !== null ? number_format($jsonData['yuran_dibayar'], 2, '.', '') : null,
+                                        'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'] !== null ? number_format($jsonData['wang_saku_dibayar'], 2, '.', '') : null,
+                                        'tarikh_transaksi' => $formattedDate,
+                                        'status' => 8,
+                                    ]);
+
+                                $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku->id)->first();    
+                                SejarahPermohonan::create([
+                                    'smoku_id' => $smoku->id,
+                                    'permohonan_id' => $permohonan_id->id,
+                                    'status' => 8, 
+                                ]);
+
+                            }
+                            else {
+
+                                $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku->id)->first();    
+                                $affectedRows = DB::table('tuntutan')
+                                    ->where('smoku_id', $smoku->id)
+                                    ->where('permohonan_id', $permohonan_id->id)
+                                    ->update([
+                                        'yuran_dibayar' => $jsonData['yuran_dibayar'] !== null ? number_format($jsonData['yuran_dibayar'], 2, '.', '') : null,
+                                        'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'] !== null ? number_format($jsonData['wang_saku_dibayar'], 2, '.', '') : null,
+                                        'tarikh_transaksi' => $formattedDate,
+                                        'status' => 8,
+                                    ]);
+
+                                $tuntutan_id = Tuntutan::orderBy('id', 'desc')->where('smoku_id',$smoku->id)
+                                    ->where('permohonan_id', $permohonan_id->id)
+                                    ->first();    
+                                SejarahTuntutan::create([
+                                    'smoku_id' => $smoku->id,
+                                    'tuntutan_id' => $tuntutan_id->id,
+                                    'status' => 8, 
+                                ]);
+
+                            }
+                            
+
+                            // Prepare the response based on the update result
+                            if ($affectedRows > 0) {
+                                // Data was updated successfully
+                                $responses[] = [
+                                    'nokp' => $nokp,
+                                    'id_permohonan' => $jsonData['id_permohonan'],
+                                    'tarikh_transaksi' => $jsonData['tarikh_transaksi'],
+                                    'id_tuntutan' => $jsonData['id_tuntutan'],
+                                    'yuran_dibayar' => $jsonData['yuran_dibayar'],
+                                    'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'],
+                                    'status' => 'Data diterima dan update'
+                                ];
+                            } else {
+                                // Data was not updated
+                                $responses[] = [
+                                    'nokp' => $nokp,
+                                    'id_permohonan' => $jsonData['id_permohonan'],
+                                    'tarikh_transaksi' => $jsonData['tarikh_transaksi'],
+                                    'id_tuntutan' => $jsonData['id_tuntutan'],
+                                    'yuran_dibayar' => $jsonData['yuran_dibayar'],
+                                    'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'],
+                                    'status' => 'Data tidak diupdate'
+                                ];
+                            }
                         }
-                    }
+                    }    
                 
             
         }
