@@ -637,71 +637,7 @@ class PermohonanController extends Controller
         return redirect()->route('kemaskini.keputusan');
     }
 
-    public function tamatPengajian()
-    {   
-        $user = Auth::user();
-        $smoku = Smoku::where('no_kp', $user->no_kp)->first();
-        $permohonan = Permohonan::where('smoku_id', $smoku->id)->first();
-
-        return view('permohonan.pelajar.lapor_tamat_pengajian',compact('permohonan'));
-    }
-
-    public function hantarTamatPengajian(Request $request)
-    {
-        $user = Auth::user();
-        $smoku = Smoku::where('no_kp', $user->no_kp)->first();
-        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->id)->first();
-
-        if (!$smoku || !$permohonan) {
-            return redirect()->route('tamat.pengajian')->with('error', 'Permohonan tidak ditemui.');
-        }
-
-        $sijilTamat = $request->file('sijilTamat');
-        $transkrip = $request->file('transkrip');
-        $uploadedSijilTamat = [];
-        $uploadedTranskrip = [];
-
-        // Check if a record already exists
-        $existingRecord = TamatPengajian::where('smoku_id', $smoku->id)
-            ->where('permohonan_id', $permohonan->id)
-            ->first();
-
-        if ($sijilTamat && $transkrip) {
-            foreach ($sijilTamat as $key => $sijil) {
-                $uniqueFilenameSijil = uniqid() . '_' . $sijil->getClientOriginalName();
-                $sijil->move('assets/dokumen/sijil_tamat', $uniqueFilenameSijil);
-                $uploadedSijilTamat[] = $uniqueFilenameSijil;
-
-                $uniqueFilenameTranskrip = uniqid() . '_' . $transkrip[$key]->getClientOriginalName();
-                $transkrip[$key]->move('assets/dokumen/salinan_transkrip', $uniqueFilenameTranskrip);
-                $uploadedTranskrip[] = $uniqueFilenameTranskrip;
-
-                if ($existingRecord) {
-                    // Update the existing record with the new file names
-                    $existingRecord->sijil_tamat = $uniqueFilenameSijil;
-                    $existingRecord->transkrip = $uniqueFilenameTranskrip;
-                    $existingRecord->perakuan = $request->perakuan;
-                    $existingRecord->save();
-                } else {
-                    // Create a new record
-                    $tamatPengajian = new TamatPengajian();
-                    $tamatPengajian->smoku_id = $smoku->id;
-                    $tamatPengajian->permohonan_id = $permohonan->id;
-                    $tamatPengajian->sijil_tamat = $uniqueFilenameSijil;
-                    $tamatPengajian->transkrip = $uniqueFilenameTranskrip;
-                    $tamatPengajian->perakuan = $request->perakuan;
-                    $tamatPengajian->save();
-                }
-            }
-        }
-
-        // Store the uploaded file names or URLs in the session
-        session()->put('uploadedSijilTamat', $uploadedSijilTamat);
-        session()->put('uploadedTranskrip', $uploadedTranskrip);
-        session()->put('perakuan', $request->input('perakuan'));
-
-        return redirect()->route('tamat.pengajian')->with('success', 'Dokumen lapor diri tamat pengajian telah dihantar.');
-    }
+    
 }
 
 
