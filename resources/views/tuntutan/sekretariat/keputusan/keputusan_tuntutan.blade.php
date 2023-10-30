@@ -93,7 +93,7 @@
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th style="width: 13%"><b>ID Tuntutan</b></th>
                                                         <th style="width: 40%"><b>Nama</b></th>
-                                                        <th style="width: 15%"><b>Peringkat Pengajian</b></th> 
+                                                        <th style="width: 15%"><b>Peringkat Pengajian</b></th>
                                                         <th class="text-center" style="width: 17%"><b>Tarikh Kemaskini Keputusan</b></th>
                                                         <th class="text-center" style="width: 15%">Status Tuntutan</th>
                                                     </tr>
@@ -129,7 +129,7 @@
                                                             <td>{{$no_ruj_tuntutan}}</td>
                                                             <td>{{$pemohon}}</td>
                                                             <td>{{ucwords(strtolower($nama_peringkat))}}</td>
-                                                            <td class="text-center">{{$item['created_at']->format('d-m-Y')}}</td>
+                                                            <td class="text-center">{{$item['created_at']->format('Y-m-d')}}</td>
                                                             @if($item['status'] == "6")
                                                                 <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=="5")
@@ -172,7 +172,7 @@
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th style="width: 13%"><b>ID Tuntutan</b></th>
                                                         <th style="width: 40%"><b>Nama</b></th>
-                                                        <th style="width: 15%"><b>Peringkat Pengajian</b></th> 
+                                                        <th style="width: 15%"><b>Peringkat Pengajian</b></th>
                                                         <th class="text-center" style="width: 17%"><b>Tarikh Kemaskini Keputusan</b></th>
                                                         <th class="text-center" style="width: 15%">Status Tuntutan</th>
                                                     </tr>
@@ -246,12 +246,23 @@
                         format: 'DD/MM/YYYY' // Set the desired format for the date range picker
                     }
                 }, function(start, end, label) {
-                    var startDate = start.format('YYYY-MM-DD'); // Convert to match your table format
-                    var endDate = end.format('YYYY-MM-DD');     // Convert to match your table format
+                    let startDate = start.format('DD/MM/YYYY'); // Convert to match your table format
+                    let endDate = end.format('DD/MM/YYYY');     // Convert to match your table format
 
-                    // Use column(3) if that's the column containing your date data.
-                    // Make sure the date format matches the format in your table.
-                    table.column(3).search(startDate + ' - ' + endDate).draw();
+                    DataTable.ext.search.push(function (settings, data, dataIndex) {
+                        let date = new Date(data[3]).toLocaleDateString('en-GB');
+
+                        if (
+                            (startDate === null && endDate === null) ||
+                            (startDate === null && date <= endDate) ||
+                            (startDate <= date && endDate === null) ||
+                            (startDate <= date && date <= endDate)
+                        ) {
+                            return true;
+                        }
+                        return false;
+                    });
+                    table.draw();
                 });
 
                 $('#status').on('change', function() {
@@ -260,6 +271,7 @@
                     // Use column(4) if that's the column containing your status data.
                     table.column(4).search(status).draw();
                 });
+
             });
         </script>
 
