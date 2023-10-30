@@ -626,8 +626,7 @@ class SekretariatController extends Controller
 
         if ($request->hasFile('dokumen1')) {
             foreach ($request->file('dokumen1') as $key => $doc1) {
-                $no_ruj = "{$institusiId}/{$currentYear}/{$nextIdDokumen}";
-                $uniqueFilenameDokumen1 = "$no_ruj" . '_' . $doc1->getClientOriginalName();
+                $uniqueFilenameDokumen1 = uniqid() . '_' . $doc1->getClientOriginalName();
                 $doc1->move('assets/dokumen/esp/dokumen1', $uniqueFilenameDokumen1);
                 $uploadedDokumen1[] = $uniqueFilenameDokumen1;
 

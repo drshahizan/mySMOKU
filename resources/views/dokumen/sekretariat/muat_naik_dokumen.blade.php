@@ -177,21 +177,21 @@
 									$i = 0;
 									@endphp
 
-									@foreach ($dokumen as $uni)
+									@foreach ($dokumen as $doc)
 										@php
-											$id = $uni->institusi_id;
+											$id = $doc->institusi_id;
 											$nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $id)->value('nama_institusi');
 										@endphp
 										<tr>
 											<td class="text-center" data-no="{{ $i++ }}">{{ $i }}</td>
 											<td>{{ $nama_institusi }}</td>
 											<td class="text-center">
-												<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $uni->dokumen) }}" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
+												<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $doc->dokumen) }}" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
 													Lihat <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
 												</a>
 											</td>
 										</tr>
-										@endforeach
+									@endforeach
 								</tbody>
 							</table>
 						</div>
