@@ -31,6 +31,7 @@ use App\Models\SejarahTuntutan;
 use App\Models\Kelulusan;
 use App\Models\Saringan;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class PenyelarasPPKController extends Controller
@@ -491,13 +492,28 @@ class PenyelarasPPKController extends Controller
         ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
         ->leftjoin('tuntutan','tuntutan.permohonan_id','=','permohonan.id')
         ->where('penyelaras_id','=', Auth::user()->id)
-        ->where('permohonan.status', 6) 
-        ->where(function ($query) {
-            $query->where('tuntutan.status', '<', '2')
-                ->orWhereNull('tuntutan.status');
-        })
-        ->get(['smoku.*', 'permohonan.no_rujukan_permohonan', 'permohonan.status as permohonan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
+        ->where('permohonan.status', 8) 
+        // ->where(function ($query) {
+        //     $query->where('tuntutan.status', '<', '2')
+        //         ->orWhereNull('tuntutan.status');
+        // })
+        ->get(['smoku.*', 'permohonan.no_rujukan_permohonan', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
         //dd($layak);
+
+        
+
+        // $currentDate = Carbon::now();
+        // $tarikhMula = Carbon::parse($akademik->tarikh_mula);
+        // $tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
+
+        // if($akademik->bil_bulan_per_sem == 6){
+        //     $bilSem = 2;
+        // } else {
+        //     $bilSem = 3;
+        // }
+            
+        // $semSemasa = $akademik->sem_semasa;
+        // $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
 
         return view('tuntutan.penyelaras_ppk.tuntutan_baharu', compact('layak'));
     }
@@ -506,9 +522,17 @@ class PenyelarasPPKController extends Controller
     {   
         $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
         $smoku_id = $id;
-        $peperiksaan = Peperiksaan::all()->where('permohonan_id', '=', $permohonan->id);
+        //$peperiksaan = Peperiksaan::all()->where('permohonan_id', '=', $permohonan->id);
+        if ($permohonan) {
+            
+            $peperiksaan = Peperiksaan::where('permohonan_id', $permohonan->id)->get();
 
-        return view('tuntutan.penyelaras_ppk.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id'));
+            return view('tuntutan.penyelaras_ppk.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id'));
+        } else {
+
+            return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
+        
+        }    
     }
 
     public function hantarKeputusanPeperiksaan(Request $request, $id)

@@ -18,7 +18,7 @@
 					<!--begin::Card body-->
 					<div class="card-body p-12">
 						<!--begin::Form-->
-						<form action="{{ route('bkoku.keputusan.hantar',$smoku_id) }}" method="post" enctype="multipart/form-data">
+						<form action="{{ route('ppk.keputusan.hantar',$smoku_id) }}" method="post" enctype="multipart/form-data">
 							@csrf
 							<div class="d-flex flex-column align-items-start flex-xxl-row">
 								<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
@@ -26,6 +26,55 @@
 								</div>
 							</div>
 							<br>
+							@php
+
+								$akademik = DB::table('smoku_akademik')->where('smoku_id', $smoku_id)
+										->where('smoku_akademik.status', 1)
+										->select('smoku_akademik.*')
+										->first();
+
+								$currentDate = Carbon::now();
+								$tarikhMula = Carbon::parse($akademik->tarikh_mula);
+								$tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
+								if($akademik->bil_bulan_per_sem == 6){
+									$bilSem = 2;
+								} else {
+									$bilSem = 3;
+								}
+								
+								$semSemasa = $akademik->sem_semasa;
+								$totalSemesters = $akademik->tempoh_pengajian * $bilSem;
+								$currentYear = date('Y');
+								$sesiSemasa = $currentYear . '/' . ($currentYear + 1);
+
+								$permohonan = DB::table('smoku_akademik')
+                                    ->where('smoku_id',$smoku_id)->first();
+
+								$result = DB::table('permohonan_peperiksaan')
+									->where('permohonan_id', $permohonan->id)
+									->where('sesi', $sesiSemasa)
+									->where('semester', $semSemasa)
+									->first();
+
+								if (!$result) {
+									// No record found, handle the case as needed
+
+								} else {
+									$ada = DB::table('permohonan_peperiksaan')
+										->where('permohonan_id', $permohonan->id)
+										->orderby('id', 'desc')
+										->first();
+
+									if ($ada->semester >= $bilSem) {
+										$sesiSemasa = ($currentYear + 1) . '/' . ($currentYear + 2);
+										$semSemasa = 1; // Reset semester for the next academic year
+									} else {
+										$semSemasa = $ada->semester + 1;
+									}
+
+								}
+
+							@endphp
 							<!--begin::Wrapper-->
 							<div class="mb-0">
 								<!--begin::Row-->
@@ -35,8 +84,8 @@
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 										<div class="mb-5">
 											<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true">
-												<option value="">Pilih</option>
-												@php
+												<option value={{$sesiSemasa}}>{{$sesiSemasa}}</option>
+												{{-- @php
 													$currentYear = date('Y');
 												@endphp
 												@for($year = ($currentYear - 1); $year <= ($currentYear + 1); $year++)
@@ -44,7 +93,7 @@
 														$sesi = $year . '/' . ($year + 1);
 													@endphp
 													<option value="{{ $sesi }}">{{ $sesi }}</option>
-												@endfor
+												@endfor --}}
 											</select>
 										</div>
 									</div>
@@ -52,10 +101,7 @@
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 										<div class="mb-5">
 											<select id="semester" name="semester" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-												<option></option>
-												<option value="1">1</option>
-												<option value="2">2</option>					
-												<option value="3">3</option>										
+												<option value={{$semSemasa}}>{{$semSemasa}}</option>																				
 											</select>
 										</div>
 									</div>

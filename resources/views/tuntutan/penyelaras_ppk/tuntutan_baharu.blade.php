@@ -64,7 +64,7 @@
                         <tbody>
                             @foreach ($layak as $layak)
                                 @php
-                                    $status = DB::table('bk_status')->where('kod_status', $layak->permohonan_status)->value('status');
+                                    $status = DB::table('bk_status')->where('kod_status', $layak->tuntutan_status)->value('status');
                                                 
                                     $text = ucwords(strtolower($layak->nama)); // Assuming you're sending the text as a POST parameter
                                     $conjunctions = ['bin', 'binti'];
@@ -93,6 +93,84 @@
                                     }
                                     $kursus = implode(' ', $result);
                                 @endphp
+                                @php
+
+                                $akademik = DB::table('smoku_akademik')
+                                    ->where('smoku_id',$layak->smoku_id)
+                                    ->where('smoku_akademik.status', 1)
+                                    ->first();
+                                //dd($layak->smoku_id);    
+
+                                $currentDate = Carbon::now();
+                                $tarikhMula = Carbon::parse($akademik->tarikh_mula);
+                                $tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
+                                if($akademik->bil_bulan_per_sem == 6){
+                                    $bilSem = 2;
+                                } else {
+                                    $bilSem = 3;
+                                }
+                                
+                                $semSemasa = $akademik->sem_semasa;
+                                $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
+                                $currentYear = date('Y');
+                                $sesiSemasa = $currentYear . '/' . ($currentYear + 1);
+                                
+                                
+
+                                // if (!$currentDate->greaterThan($tarikhNextSem)) {    
+                                //     //$alertMessage = 'tak habis sem lagii niiiii.';   
+                                    
+                                // } 
+                                // else{
+
+                                    $permohonan = DB::table('permohonan')
+                                    ->where('smoku_id',$layak->smoku_id)->first();
+                                    //dd($permohonan);
+
+                                    $tuntut = DB::table('tuntutan')
+                                        ->where('smoku_id', $layak->smoku_id)
+                                        ->where('permohonan_id', $permohonan->id)
+                                        ->orderBy('tuntutan.id', 'desc')
+                                        ->first(['tuntutan.*']);    
+    
+
+                                    if (!$tuntut) {
+                                        // No record found, handle the case as needed
+
+                                    } else {
+                                        $ada = DB::table('tuntutan')
+                                            ->where('permohonan_id', $permohonan->id)
+                                            ->orderBy('id', 'desc')
+                                            ->first();
+
+                                        //dd($ada);	
+
+                                        if ($ada->semester >= $bilSem) {
+                                            $sesiSemasa = ($currentYear + 1) . '/' . ($currentYear + 2);
+                                            $semSemasa = 1; // Reset semester for the next academic year
+                                        }else if ($ada->status != 8){
+                                            $semSemasa = $ada->semester;
+
+                                        }
+                                        else {
+                                            $semSemasa = $ada->semester + 1;
+                                        }
+
+                                    }
+                                       
+
+                                // }
+                                
+
+                                $result = DB::table('permohonan_peperiksaan')
+                                            ->where('permohonan_id', $permohonan->id)
+                                    ->where('sesi', $akademik->sesi)
+                                    ->where('semester', $semSemasa)
+                                    ->first();
+
+                                //dd($permohonan->id);    
+
+                            @endphp
                             <tr>
                                 <td class="text-center">{{ $layak->no_rujukan_permohonan}}</td>
                                 <td class="text-center">{{ $pemohon}}</td>
@@ -112,22 +190,35 @@
                                     <!--begin::Toolbar-->
                                     <div>
                                         <!--begin::Edit-->
-                                        <a href="{{ route('bkoku.kemaskini.keputusan', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3">
+                                        <a href="{{ route('ppk.kemaskini.keputusan', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3">
                                             <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Keputusan Peperiksaan">
                                                 <i class="ki-solid ki-pencil text-dark fs-2"></i>
                                             </span>
                                         </a>
-                                        <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_tuntutan{{$layak->smoku_id}}">
-                                            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Hantar Tuntutan">
+                                        <a href="{{ $currentDate->greaterThan($tarikhNextSem) && $semSemasa <= $totalSemesters && $result == null ? route('ppk.kemaskini.keputusan', $layak->smoku_id) : '#' }}" 
+                                            class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
+                                            @if($currentDate->greaterThan($tarikhNextSem) && $semSemasa <= $totalSemesters)
+                                                @if ($result == null)
+                                                    data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu."
+                                                @else
+                                                    data-bs-toggle="modal" data-bs-trigger="hover" title="Hantar Tuntutan" data-bs-target="#kt_modal_tuntutan{{$layak->smoku_id}}"
+                                                @endif
+                                            @else
+                                                data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sem tak habis lagi niii."
+                                            @endif
+                                        >
+                                            <span>
                                                 <i class="ki-solid ki-search-list text-dark fs-2"></i>
                                             </span>
                                         </a>
+                                        
+
                                         <!--end::Edit-->
                                     </div>
                                     <!--end::Toolbar-->
                                 </td>
                                 <!--begin::Modal Peperiksaan-->
-                                <div class="modal fade" id="kt_modal_peperiksaan{{$layak->smoku_id}}" tabindex="-1" aria-hidden="true">
+                                {{-- <div class="modal fade" id="kt_modal_peperiksaan{{$layak->smoku_id}}" tabindex="-1" aria-hidden="true">
                                     <!--begin::Modal dialog-->
                                     <div class="modal-dialog modal-dialog-centered mw-650px">
                                         <!--begin::Modal content-->
@@ -231,8 +322,10 @@
                                         <!--end::Modal content-->
                                     </div>
                                     <!--end::Modal dialog-->
-                                </div>
+                                </div> --}}
                                 <!--end::Modal Peperiksaan-->
+
+                                
 
                                 <!--begin::Modal Tuntutan-->
                                 <div class="modal fade" id="kt_modal_tuntutan{{$layak->smoku_id}}" tabindex="-1" aria-hidden="true">
@@ -269,8 +362,8 @@
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
                                                             <select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true">
-                                                                <option value="">Pilih</option>
-                                                                    @php
+                                                                <option value={{$sesiSemasa}}>{{$sesiSemasa}}</option>
+                                                                    {{-- @php
                                                                         $currentYear = date('Y');
                                                                     @endphp
                                                                     @for($year = $currentYear; $year <= ($currentYear + 1); $year++)
@@ -278,7 +371,7 @@
                                                                             $sesi = $year . '/' . ($year + 1);
                                                                         @endphp
                                                                         <option value="{{ $sesi }}">{{ $sesi }}</option>
-                                                                    @endfor
+                                                                    @endfor --}}
                                                             </select>
                                                             <!--end::Input-->
                                                         </div>
@@ -290,10 +383,7 @@
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
                                                             <select name="semester" id="semester" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
-                                                                <option value="">Pilih</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
+                                                                <option value={{$semSemasa}}>{{$semSemasa}}</option>
                                                             </select>
                                                             <!--end::Input-->
                                                         </div>
@@ -303,15 +393,19 @@
                                                             <label class="fs-6 fw-semibold form-label">
                                                                 Tuntut Elaun Wang Saku
                                                             </label>
-                                                        </div> 
+                                                        </div>
+                                                        <br> 
                                                         <!--begin::Input group-->
                                                         <div class="fv-row mb-7">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold mb-2">Amaun Wang Saku</label>
                                                             <!--end::Label-->
-                                                            <!--begin::Input-->
-                                                            <input type="text" name="amaun_wang_saku" class="form-control form-control-solid"  placeholder="RM" value= "{{3360}}" readonly/>
-                                                            <!--end::Input-->
+                                                            <div class="d-flex">
+                                                                <!--begin::Input-->
+                                                                <span class="input-group-text">RM</span>
+                                                                <input type="number" name="amaun_wang_saku" class="form-control form-control-solid" placeholder="RM" value="{{ '3360.00' }}" step="0.01" inputmode="decimal" readonly/>
+                                                                <!--end::Input-->
+                                                            </div>
                                                         </div>
                                                         <!--end::Input group-->    
                                                     </div>
@@ -354,6 +448,9 @@
 <script>
     $('#sortTable1').DataTable();
     $('#sortTable2').DataTable();
+</script>
+<script>
+ 
 </script>
 <!--end::Javascript-->     
 </x-default-layout>
