@@ -855,16 +855,11 @@ class PenyelarasController extends Controller
         return view('permohonan.penyelaras_bkoku.papar_kelulusan',compact('permohonan','kelulusan','smoku','sejarah_p'));
     }
 
-    public function muatTurunBorangSPPB()
-    {   
-        $dokumen = DokumenESP::all();
-        return view('dokumen.penyelaras.muat_turun_dokumen', compact('dokumen'));
-    }
-
     public function muatNaikBorangSPPB()
     {   
+        $institusiPengajian = InfoIpt::all();
         $dokumen = DokumenESP::all();
-        return view('dokumen.penyelaras.muat_naik_dokumen', compact('dokumen'));
+        return view('dokumen.penyelaras.dokumen_sppb', compact('institusiPengajian','dokumen'));
     }
 
     public function hantarBorangSPPB(Request $request, $id)

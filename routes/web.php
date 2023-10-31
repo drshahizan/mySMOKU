@@ -218,8 +218,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('tuntutan/sekretariat/sejarah/hantar-saringan/{id}', [SekretariatController::class, 'hantarSaringan'])->name('hantar.saringan.tuntutan.id');
 
     //Penyaluran - Penyelaras - Dokumen SPPB
-    Route::get('penyelaras/penyaluran/muat-turun/borang/spbb', [PenyelarasController::class, 'muatTurunBorangSPPB'])->name('penyelaras.muat-turun.SPPB');
-    Route::get('penyelaras/penyaluran/muat-naik/borang/spbb', [PenyelarasController::class, 'muatNaikBorangSPPB'])->name('penyelaras.muat-naik.SPPB');
+    Route::get('penyelaras/penyaluran/muat-naik/borang/spbb', [PenyelarasController::class, 'muatNaikBorangSPPB'])->name('penyelaras.borang.SPPB');
     Route::post('penyelaras/penyaluran/hantar/borang/spbb/{id}', [PenyelarasController::class, 'hantarBorangSPPB'])->name('penyelaras.kemaskini.SPPB');
 
     //Kemaskini - Penyelaras - Maklumat Bank
