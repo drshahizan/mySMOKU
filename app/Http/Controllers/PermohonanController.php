@@ -12,7 +12,7 @@ use App\Models\Akademik;
 use App\Models\Permohonan;
 use App\Models\User;
 use App\Models\Smoku;
-use App\Models\Infoipt;
+use App\Models\InfoIpt;
 use App\Models\PeringkatPengajian;
 use App\Models\Kursus;
 use App\Models\Mod;
