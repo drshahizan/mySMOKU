@@ -262,7 +262,7 @@
                                                 @endphp
                                                 @if($permohonan->program=="PPK")
                                                     <tr>
-                                                        <td>
+                                                        <td style="width: 10%">
                                                             <a href="{{ url('tuntutan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
 {{--                                                            @if($item['status']==6)--}}
 {{--                                                                <a href="{{ url('tuntutan/sekretariat/pembayaran/maklumat/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>--}}
@@ -270,15 +270,15 @@
 {{--                                                                <a href="{{ url('tuntutan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>--}}
 {{--                                                            @endif--}}
                                                         </td>
-                                                        <td>{{$pemohon}}</td>
-                                                        <td>{{$kursus}}</td>
-                                                        <td>{{$institusi}}</td>
-                                                        <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                                        <td class="text-center">{{date('d/m/Y', strtotime($item['tarikh_transaksi']))}}</td>
+                                                        <td style="width: 20%">{{$pemohon}}</td>
+                                                        <td style="width: 21%">{{$kursus}}</td>
+                                                        <td style="width: 25%">{{$institusi}}</td>
+                                                        <td class="text-center" style="width: 8%">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        <td class="text-center" style="width: 8%">{{date('d/m/Y', strtotime($item['tarikh_transaksi']))}}</td>
                                                         @if ($item['status']=='6')
-                                                            <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center" style="width: 8%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
-                                                            <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center" style="width: 8%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
                                                     </tr>
                                                 @endif

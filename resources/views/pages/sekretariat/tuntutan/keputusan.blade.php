@@ -189,10 +189,10 @@
                                             <table id="sortTable2" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 15%"><b>ID Tuntutan</b></th>
-                                                        <th style="width: 45%"><b>Nama</b></th>
-                                                        <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th>
-                                                        <th class="text-center" style="width: 15%">Status Tuntutan</th>
+                                                        <th style="width: 15%!important;"><b>ID Tuntutan</b></th>
+                                                        <th style="width: 37%!important;"><b>Nama</b></th>
+                                                        <th style="width: 13%!important;" class="text-center"><b>Tarikh Tuntutan</b></th>
+                                                        <th class="text-center" style="width: 15%!important;">Status Tuntutan</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -217,15 +217,15 @@
                                                             $pemohon = implode(' ', $result);
                                                         @endphp
                                                         <tr>
-                                                            <td>{{$id_permohonan}}</td>
-                                                            <td>{{$pemohon}}</td>
-                                                            <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                            <td style="width: 15%!important;">{{$id_permohonan}}</td>
+                                                            <td style="width: 37%!important;">{{$pemohon}}</td>
+                                                            <td class="text-center" style="width: 13%!important;">{{$item['created_at']->format('d/m/Y')}}</td>
                                                             @if($item['status'] == "6")
-                                                                <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                                <td class="text-center" style="width: 15%!important;"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=="5")
-                                                                <td class="text-center"><button type="button" class="btn bg-dikembalikan">{{ucwords(strtolower($status))}}</button></td>
+                                                                <td class="text-center" style="width: 15%!important;"><button type="button" class="btn bg-dikembalikan">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif($item['status'] == "7")
-                                                                <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                                <td class="text-center" style="width: 15%!important;"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                             @endif
                                                         </tr>
                                                     @endif
