@@ -427,7 +427,7 @@ class PermohonanController extends Controller
         //dd($emel);
         Mail::to($smoku_id->email)->cc($cc)->send(new PermohonanHantar($catatan,$emel));
             
-        return redirect()->route('dashboard')->with('message', 'Permohonan anda telah dihantar.');
+        return redirect()->route('pelajar.dashboard')->with('message', 'Permohonan anda telah dihantar.');
 
     }
 
@@ -531,7 +531,7 @@ class PermohonanController extends Controller
         if ($permohonan) {
             return view('permohonan.pelajar.sejarah_permohonan', compact('permohonan'));
         } else {
-            return redirect()->route('dashboard')->with('permohonan', 'Tiada permohonan lama.');
+            return redirect()->route('pelajar.dashboard')->with('permohonan', 'Tiada permohonan lama.');
         }
 
     }
@@ -596,7 +596,7 @@ class PermohonanController extends Controller
             
         } else {
 
-            return redirect()->route('dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
+            return redirect()->route('pelajar.dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
         
         }
 
