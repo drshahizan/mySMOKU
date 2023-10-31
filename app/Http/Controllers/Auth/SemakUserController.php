@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\Infoipt;
+use App\Models\InfoIpt;
 use App\Models\PeringkatPengajian;
 use App\Models\Kursus;
 use App\Models\Akademik;
