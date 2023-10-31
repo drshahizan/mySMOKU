@@ -1,4 +1,4 @@
-<x-default-layout> 
+{{-- <x-default-layout>  --}}
   <head>
   
   <!-- MAIN CSS -->
@@ -443,4 +443,4 @@ function toggleSelectAll(tab) {
 
 
 
-</x-default-layout>
+{{-- </x-default-layout> --}}
