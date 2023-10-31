@@ -59,7 +59,7 @@ class PelajarController extends Controller
                 var isValidChoice = false;
 
                 while (!isValidChoice) {
-                    userChoice = prompt('Tempoh pengajian telah tamat. Sila pilih satu opsyen:\\n\\n1. Lapar Tamat Pengajian\\n2. Tangguh Pengajian\\n3. Perlanjutan Pengajian');
+                    userChoice = prompt('Tempoh pengajian telah tamat. Sila pilih satu opsyen:\\n\\n1. Lapor Tamat Pengajian\\n2. Tangguh Pengajian\\n3. Perlanjutan Pengajian');
 
                     if (userChoice === null) {
                         // Handle the case when the user clicks cancel in the prompt
