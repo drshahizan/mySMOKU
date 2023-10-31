@@ -23,6 +23,7 @@ class TuntutanController extends Controller
     {   
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku_id->id)->first();
+        //dd($permohonan);
         $akademik = Akademik::where('smoku_id', $smoku_id->id)
         ->where('smoku_akademik.status', 1)
         ->select('smoku_akademik.*')
@@ -40,9 +41,9 @@ class TuntutanController extends Controller
          
         $semSemasa = $akademik->sem_semasa;
         $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
-
+        
         if ($permohonan && $permohonan->status ==8) {
-
+            //dd($tarikhNextSem);
             if ($currentDate->greaterThan($tarikhNextSem)) {
                 // dd('sini');
 
@@ -71,7 +72,7 @@ class TuntutanController extends Controller
                         $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
                     } 
                     else if ($tuntutan && $tuntutan->status != 8){
-                        return redirect()->route('dashboard')->with('sem', 'Tuntutan anda masih dalam semakan.');
+                        return redirect()->route('pelajar.dashboard')->with('sem', 'Tuntutan anda masih dalam semakan.');
                     }
                     else {
                         $tuntutan_item = collect(); // An empty collection
@@ -86,14 +87,14 @@ class TuntutanController extends Controller
 
             } else {
                 // dd('situ');
-                return redirect()->route('dashboard')->with('sem', 'tak habis sem lagii niiiii.');
+                return redirect()->route('pelajar.dashboard')->with('sem', 'tak habis sem lagii niiiii.');
             }
         
         } else if ($permohonan && $permohonan->status !=8) {
-            return redirect()->route('dashboard')->with('permohonan', 'Permohonan anda masih dalam semakan.');
+            return redirect()->route('pelajar.dashboard')->with('permohonan', 'Permohonan anda masih dalam semakan.');
         } else {
 
-            return redirect()->route('dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
+            return redirect()->route('pelajar.dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
         }
 
         
@@ -250,7 +251,7 @@ class TuntutanController extends Controller
         //dd($emel);
         Mail::to($smoku_id->email)->cc($cc)->send(new TuntutanHantar($catatan,$emel));
         
-        return redirect()->route('dashboard')->with('message', 'Tuntutan anda telah dihantar.');
+        return redirect()->route('pelajar.dashboard')->with('message', 'Tuntutan anda telah dihantar.');
 
     }
 
@@ -269,7 +270,7 @@ class TuntutanController extends Controller
 
             } else {
 
-                return redirect()->route('dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
+                return redirect()->route('pelajar.dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
 
             }
         }
