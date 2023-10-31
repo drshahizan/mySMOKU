@@ -61,7 +61,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/', [DashboardController::class, 'index']);
 
-    Route::get('/dashboard', [PelajarController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/pelajar/dashboard', [PelajarController::class, 'index'])->name('pelajar.dashboard');
     //Route::post('/dashboard', [DashboardController::class, 'store'])->name('dashboard.store');
     Route::get('lapor/tamat/pengajian', [PelajarController::class, 'tamatPengajian'])->name('tamat.pengajian');
     Route::get('lapor/tangguh/pengajian', [PelajarController::class, 'tangguhPengajian'])->name('tangguh.pengajian');
@@ -140,7 +141,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('permohonan/sekretariat/pembayaran/hantar/{id}', [SaringanController::class, 'hantarPembayaran'])->name('hantar.pembayaran.id');
 
     //Permohonan - Sekretariat - Dashboard
-    Route::get('dashboard/sekretariat', [SekretariatController::class, 'dashboard']);
+    Route::get('dashboard/sekretariat', [SekretariatController::class, 'dashboard'])->name('sekretariat.dashboard');
     Route::get('sekretariat/permohonan/BKOKU/keseluruhan', [SekretariatController::class, 'statusPermohonanBKOKU']);
     Route::get('sekretariat/permohonan/BKOKU/status/{status}', [SekretariatController::class, 'filterStatusPermohonanBKOKU'])->name('statusB.permohonan');
     Route::get('sekretariat/tuntutan/BKOKU/dibayar', [SekretariatController::class, 'bilanganTuntutanBKOKU']);

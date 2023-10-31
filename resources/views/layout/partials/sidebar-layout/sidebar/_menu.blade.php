@@ -214,14 +214,12 @@
 			</div>
 			<div class="menu-item">
 				<a class="menu-link" href="{{ url('tuntutan/sekretariat/saringan/senarai_tuntutan') }}">
-				<!-- "{{ route('dashboard') }}" -->
 						<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 						<span class="menu-title">Saringan</span>
 				</a>
 			</div>
 			<div class="menu-item">
 				<a class="menu-link" href="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}">
-				<!-- "{{ route('dashboard') }}" -->
 						<span class="menu-icon">{!! getIcon('check-square', 'fs-2') !!}</span>
 						<span class="menu-title">Keputusan</span>
 				</a>
