@@ -53,6 +53,7 @@ class TuntutanController extends Controller
                     ->where('sesi', $akademik->sesi)
                     ->where('semester', $semSemasa)
                     ->first();
+                    
                     if($result == null){
                         return redirect()->route('kemaskini.keputusan')->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
                     }

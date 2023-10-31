@@ -46,6 +46,7 @@
 
 								if (!$tuntutan) {
 									// No record found, handle the case as needed
+									$semSemasa = $semSemasa + 1;
 
 								} else {
 									$ada = DB::table('tuntutan')
