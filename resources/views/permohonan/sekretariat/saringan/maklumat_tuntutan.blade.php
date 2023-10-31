@@ -48,7 +48,7 @@
             font-weight: bold!important;
         }
         .space{
-            width: 15%;
+            width: 5%;
         }
         .red-color{
             color: red!important;
