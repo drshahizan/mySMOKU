@@ -88,7 +88,7 @@ class TuntutanController extends Controller
 
             } else {
                 // dd('situ');
-                return redirect()->route('pelajar.dashboard')->with('sem', 'tak habis sem lagii niiiii.');
+                return redirect()->route('pelajar.dashboard')->with('sem', 'Ralat. Tuntutan hanya boleh dikemukakan pada semester kedua dan seterusnya.');
             }
         
         } else if ($permohonan && $permohonan->status !=8) {
