@@ -23,7 +23,7 @@ class DashboardController extends Controller
 
         if(Auth::user()->tahap=='1')
         {
-            return redirect()->route('pelajar.dashboard');
+            return redirect()->route('dashboard');
         }
         else if(Auth::user()->tahap=='2')
         {
