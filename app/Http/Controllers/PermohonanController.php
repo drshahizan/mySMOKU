@@ -83,7 +83,7 @@ class PermohonanController extends Controller
         ->first();
         //dd($butiranPelajar);
 
-        if ($permohonan && $permohonan->status >= '1') {
+        if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
             $tamat_pengajian = TamatPengajian::orderBy('id', 'desc')->where('permohonan_id', $permohonan->id)->first();
             
             if ($tamat_pengajian) {
@@ -536,50 +536,61 @@ class PermohonanController extends Controller
 
     }
 
-    public function batalpermohonan(){
-        $permohonan = SejarahPermohonan::join('permohonan','statustransaksi.id_permohonan','=','permohonan.id_permohonan')
-        ->join('statusinfo','statusinfo.kodstatus','=','statustransaksi.status')
-        ->get(['permohonan.*', 'statustransaksi.*','statusinfo.*'])
-        ->where('nokp_pelajar', Auth::user()->nokpm);
-        return view('pages.permohonan.permohonan_sejarah', compact('permohonan'));
+    public function batalPermohonan($id)
+    {
+
+        DB::table('permohonan')->orderBy('id', 'asc')->where('smoku_id',$id)
+            ->update([
+                'status' => 9
+            ]);
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$id)->first();
+        SejarahPermohonan::create([
+            'smoku_id' => $id,
+            'permohonan_id' => $permohonan_id->id,
+            'status' => 9
+        ]);
+           
+            
+
+        return redirect()->route('pelajar.dashboard')->with('permohonan', 'Permohonan telah dibatalkan.');      
         
     }
 
-    public function delete($nokp){
+    public function delete($id)
+    {
+        
+        $smoku_id = Smoku::where('id', $id)->first();
+        $permohonan = DB::table('permohonan')->orderBy('id', 'asc')
+            ->where('smoku_id', $smoku_id->id)->first();
 
-        //$pelajar = Permohonan::find($nokp);
-        $pelajar = DB::table('pelajar')->where('nokp_pelajar', $nokp)->first();
-        $nokp = $pelajar->nokp_pelajar;
-        //$pelajar->delete(); //delete pelajar
-
-        $permohonan = DB::table('permohonan')->where('nokp_pelajar', $nokp)->first();
-        $id_permohonan = $permohonan->id_permohonan;
-        //$permohonan->delete();
-        DB::table('pelajar')->where('nokp_pelajar',$nokp)->delete();
-        DB::table('permohonan')->where('id_permohonan',$id_permohonan)->delete(); //delete permohonan
-        DB::table('waris')->where('nokp_pelajar',$nokp)->delete();
-        DB::table('maklumatakademik')->where('nokp_pelajar' ,$nokp)
+        DB::table('smoku_butiran_pelajar')->where('smoku_id',$smoku_id->id)->delete();
+        DB::table('smoku_waris')->where('smoku_id',$smoku_id->id)->delete();
+        DB::table('smoku_akademik')->where('smoku_id',$smoku_id->id)->where('status',1)
         ->update([
 
-            'no_pendaftaranpelajar' => NULL,
+            'no_pendaftaran_pelajar' => NULL,
             'sesi' => NULL,
-            'tkh_mula' => NULL,
-            'tkh_tamat' => NULL,
+            'tarikh_mula' => NULL,
+            'tarikh_tamat' => NULL,
             'sem_semasa' => NULL,
             'tempoh_pengajian' => NULL,
-            'bil_bulanpersem' => NULL,
+            'bil_bulan_per_sem' => NULL,
             'mod' => NULL,
-            'cgpa' => NULL,
             'sumber_biaya' => NULL,
+            'sumber_lain' => NULL,
             'nama_penaja' => NULL,
-            'status' => NULL,
+            'penaja_lain' => NULL,
 
         ]);
 
-        DB::table('dokumen')->where('id_permohonan',$id_permohonan)->delete();
-        DB::table('statustransaksi')->where('id_permohonan',$id_permohonan)->delete();
+        if ($permohonan) {
+
+            DB::table('permohonan')->where('id',$permohonan->id)->delete(); //delete permohonan
+            DB::table('permohonan_dokumen')->where('permohonan_id',$permohonan->id)->delete();
+            DB::table('sejarah_permohonan')->where('permohonan_id',$permohonan->id)->delete();
+        } 
         
-        return redirect()->route('permohonan.sejarah');
+        return redirect()->route('pelajar.sejarah.permohonan');
         
     }
 

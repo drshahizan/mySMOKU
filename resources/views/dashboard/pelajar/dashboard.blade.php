@@ -147,7 +147,7 @@
 							<div class="body">
 								<!--begin::Table-->
 								<div class="table-responsive">
-									<table id="sortTable2" class="table text-center table-striped table-hover dataTable js-exportable">
+									<table id="sortTable1" class="table text-center table-striped table-hover dataTable js-exportable">
 										<thead>
 											<tr>
 												<th class="text-center">ID Permohonan</th>
@@ -161,11 +161,11 @@
 												<td>{{$permohonan->no_rujukan_permohonan}}</td>
 												<td>{{$permohonan->created_at->format('d/m/Y')}}</td>
 												<td>
-													{{-- @if ($permohonan->status == "DERAF")
-														<a href="{{ route('permohonan') }}" class="btn btn-primary btn-sm">{{ ucwords(strtolower($permohonan->status)) }}</a>
-													@else --}}
+													@if ($permohonan->status_semasa == 1)
+														<a href="{{ route('permohonan') }}">{{ ucwords(strtolower($permohonan->status)) }}</a>
+													@else
 														{{ ucwords(strtolower($permohonan->status)) }}
-													{{-- @endif --}}
+													@endif
 												</td>												
 												{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
 											</tr>
@@ -222,6 +222,10 @@
 		</div>
 	<div>
 </div>
+<script>
+	$('#sortTable1').DataTable();
+	$('#sortTable2').DataTable();
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>

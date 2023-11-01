@@ -22,10 +22,10 @@ class PelajarController extends Controller
         $permohonan = SejarahPermohonan::orderby("sejarah_permohonan.created_at","desc")
         ->join('permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
         ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
-        ->get(['sejarah_permohonan.*','permohonan.no_rujukan_permohonan','bk_status.status'])
+        ->get(['sejarah_permohonan.*','permohonan.no_rujukan_permohonan','permohonan.status as status_semasa','bk_status.status'])
         ->where('smoku_id',$smoku_id->id)
         ->where('status', '!=', 'DISOKONG');
-        //dd($permohonan);
+        //dd($smoku_id);
         
         $tuntutan = Tuntutan::orderby("sejarah_tuntutan.created_at","desc")
         ->join('sejarah_tuntutan','sejarah_tuntutan.tuntutan_id','=','tuntutan.id')
