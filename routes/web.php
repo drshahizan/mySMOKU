@@ -70,7 +70,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('hantar/dokumen/tamat/pengajian', [PelajarController::class, 'hantarTamatPengajian'])->name('hantar.tamat.pengajian');
 
 
-    Route::get('profildiri', [ProfilController::class, 'profildiri'])->name('profil-diri');
+    Route::get('profil', [ProfilController::class, 'index'])->name('profil-diri');
     Route::post('profil/simpan', [ProfilController::class, 'simpanProfil'])->name('simpan.profil');
 
     //Permohonan Pelajar

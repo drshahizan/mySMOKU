@@ -93,10 +93,17 @@
 							<!--begin::Details item-->
 							<div class="fw-bold mt-5">Nama Kursus</div>
 							@if(!empty($akademik))
-							<div class="text-gray-600">{{$akademik->nama_kursus}}</div>
-								@else
+								<div class="text-gray-600">{{$akademik->nama_kursus}}</div>
+							@else
 								<div class="fs-5 fw-semibold text-muted mb-6">Tiada</div>
-								@endif
+							@endif
+							<!--begin::Details item-->
+							<div class="fw-bold mt-5">Nama Institusi</div>
+							@if(!empty($akademik))
+								<div class="text-gray-600">{{$akademik->nama_institusi}}</div>
+							@else
+								<div class="fs-5 fw-semibold text-muted mb-6">Tiada</div>
+							@endif
 							
 						</div>
 						<!--end::Details content-->

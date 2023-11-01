@@ -8,10 +8,10 @@ use App\Models\User;
 class ProfilController extends Controller
 {
     
-    public function profildiri()
+    public function index()
     {
         $user = User::all()->where('no_kp',Auth::user()->no_kp);
-        return view('pages.profil.profildiri', compact('user'));
+        return view('kemaskini.profil_diri', compact('user'));
         
     }
     public function simpanProfil(Request $request)

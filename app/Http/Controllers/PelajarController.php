@@ -35,7 +35,8 @@ class PelajarController extends Controller
         ->where('status', '!=', 'DISOKONG');
         //dd($tuntutan);
 
-        $akademik = Akademik::where('smoku_id',$smoku_id->id)
+        $akademik = Akademik::join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
+        ->where('smoku_id',$smoku_id->id)
         ->where('status',1)
         ->first();
 
