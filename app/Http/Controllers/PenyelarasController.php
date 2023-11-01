@@ -265,7 +265,7 @@ class PenyelarasController extends Controller
             [
                 'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar,
                 'yuran' => $request->yuran,
-                'yuran' => number_format($request->yuran, 2, '.', ''),
+                'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
                 'wang_saku' => $request->wang_saku,
                 'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
                 'perakuan' => $request->perakuan,
