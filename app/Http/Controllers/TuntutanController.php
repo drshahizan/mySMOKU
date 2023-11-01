@@ -86,9 +86,30 @@ class TuntutanController extends Controller
 
                 }
 
-            } else {
+            } else { // sebab tuntutan pun boleh kemukakan pada semester sama
                 // dd('situ');
-                return redirect()->route('pelajar.dashboard')->with('sem', 'Ralat. Tuntutan hanya boleh dikemukakan pada semester kedua dan seterusnya.');
+                $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
+                        ->where('permohonan_id', $permohonan->id)
+                        ->orderBy('tuntutan.id', 'desc')
+                        ->first(['tuntutan.*']);
+
+                //dd($tuntutan);    
+
+                if ($tuntutan && $tuntutan->status == 1) {
+                    $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
+                } 
+                else if ($tuntutan && $tuntutan->status != 8){
+                    return redirect()->route('pelajar.dashboard')->with('sem', 'Tuntutan anda masih dalam semakan.');
+                }
+                else {
+                    $tuntutan_item = collect(); // An empty collection
+                }
+                
+                $akademik = Akademik::where('smoku_id', $smoku_id->id)
+                    ->where('smoku_akademik.status', 1)->first();
+                
+                return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item', 'akademik'));
+                //return redirect()->route('pelajar.dashboard')->with('sem', 'Ralat. Tuntutan hanya boleh dikemukakan pada semester kedua dan seterusnya.');
             }
         
         } else if ($permohonan && $permohonan->status !=8) {

@@ -45,8 +45,13 @@
 								$sesiSemasa = $currentYear . '/' . ($currentYear + 1);
 
 								if (!$tuntutan) {
-									// No record found, handle the case as needed
-									$semSemasa = $semSemasa + 1;
+
+									if($currentDate->greaterThan($tarikhNextSem)){
+										$semSemasa = $semSemasa + 1;
+									}
+									// No record found, and  masih dalam sem sama
+									$semSemasa = $semSemasa;
+
 
 								} else {
 									$ada = DB::table('tuntutan')
@@ -61,7 +66,11 @@
 										$semSemasa = 1; // Reset semester for the next academic year
 									}
 									 else {
-										$semSemasa = $ada->semester + 1;
+										if($currentDate->greaterThan($tarikhNextSem)){
+											$semSemasa = $semSemasa + 1;
+										}
+											// No record found, and  masih dalam sem sama
+											$semSemasa = $semSemasa;
 									}
 
 								}
