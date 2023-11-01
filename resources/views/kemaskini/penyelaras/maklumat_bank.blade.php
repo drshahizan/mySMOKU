@@ -73,7 +73,7 @@
                         <div class="body">
                             <div class="col-md-6 col-sm-6">
                                 <br>
-                                <form method="POST" action="{{route('kemaskini.bank', ['id' => $bank->institusi_id ])}}">
+                                <form method="POST" action="{{route('kemaskini.bank', ['id' => $bank->institusi_id ])}}" enctype="multipart/form-data">
                                     {{csrf_field()}}
                                     <div class="table-responsive">
                                         @php
@@ -84,17 +84,33 @@
                                             <tr>
                                                 <td class="vertical-top w-13">Nama Institusi</td>
                                                 <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top"><input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{$nama_uni}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                <td class="vertical-top">
+                                                    <input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{$nama_uni}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="vertical-top w-13">Nama Akaun Bank</td>
                                                 <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top"><input type="text" class="form-control" id="nama_bank" name="nama_bank" value="{{$bank->nama_akaun}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                <td class="vertical-top">
+                                                    <input type="text" class="form-control" id="nama_bank" name="nama_bank" value="{{$bank->nama_akaun}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="vertical-top w-13">No. Akaun Bank Islam</td>
                                                 <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top"><input type="text" class="form-control" id="no_acc" name="no_acc" value="{{$bank->no_akaun}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required></td>
+                                                <td class="vertical-top">
+                                                    <input type="text" class="form-control" id="no_acc" name="no_acc" value="{{$bank->no_akaun}}" pattern="[0-9]{14}" title="Please enter a 14-digit number." oninvalid="this.setCustomValidity('Sila isi ruang ini dengan 14 digit')" oninput="setCustomValidity('')" required>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="vertical-top w-13">Penyata Bank</td>
+                                                <td class="vertical-top w-3">:</td>
+                                                <td class="vertical-top">
+                                                    <input type="file" name="penyata"/>
+                                                    @if(session()->has('uploadedPenyataBank'))
+                                                        <a href="{{ asset('assets/dokumen/penyata_bank_islam/' . session('uploadedPenyataBank')) }}" target="_blank">{{ session('uploadedPenyataBank') }}</a>
+                                                    @endif
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>

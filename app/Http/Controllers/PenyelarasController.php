@@ -979,25 +979,57 @@ class PenyelarasController extends Controller
     {
         // Check if a record with the specified institusi_id exists
         $bank = MaklumatBank::where('institusi_id', $id)->first();
+
         // Check the id of institusi for the respective user
         $user = auth()->user();
 
-        if ($bank) {
-            // If the record exists, update it
-            $bank->update([
-                'nama_akaun' => $request->input('nama_bank'),
-                'no_akaun' => $request->input('no_acc'),
-            ]);
+        // Validation rules for the 'penyata' file input
+        $rules = [
+            'penyata' => 'file|mimes:pdf,png',
+        ];
+        $messages = [
+            'penyata.file' => 'Invalid file format.',
+            'penyata.mimes' => 'The file must be a PDF or PNG.',
+        ];
+
+        // Handle file upload only if a new file is provided
+        if ($request->hasFile('penyata')) {
+            $this->validate($request, $rules, $messages);
+
+            $file = $request->file('penyata');
+            $fileName = uniqid() . '_' . $file->getClientOriginalName(); // Generate a unique filename
+
+            // Move the uploaded file to the desired directory
+            $file->move('assets/dokumen/penyata_bank_islam', $fileName);
+
+            // If the record exists, update it; otherwise, create a new one
+            if ($bank) {
+                $bank->update([
+                    'nama_akaun' => $request->input('nama_bank'),
+                    'no_akaun' => $request->input('no_acc'),
+                    'penyata_bank' => $fileName,
+                ]);
+            } else {
+                MaklumatBank::create([
+                    'institusi_id' => $id, 
+                    'nama_akaun' => $request->input('nama_bank'),
+                    'no_akaun' => $request->input('no_acc'),
+                    'penyata_bank' => $fileName,
+                ]);
+            }
+
+            // Store the relative path in a session variable
+            session()->put('uploadedPenyataBank', $fileName);
         } else {
-            // If the record doesn't exist, create a new one
-            MaklumatBank::create([
-                'institusi_id' => $id, 
-                'nama_akaun' => $request->input('nama_bank'),
-                'no_akaun' => $request->input('no_acc'),
-            ]);
+            // No new file uploaded, update other fields if necessary
+            if ($bank) {
+                $bank->update([
+                    'nama_akaun' => $request->input('nama_bank'),
+                    'no_akaun' => $request->input('no_acc'),
+                ]);
+            }
         }
 
-        return view('kemaskini.penyelaras.maklumat_bank', compact('bank','user'));
+        return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user'));
     }
-
 }
