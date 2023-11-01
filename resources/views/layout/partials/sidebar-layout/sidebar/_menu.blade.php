@@ -123,9 +123,15 @@
 				</div>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="{{ route('penyelaras.borang.SPPB')}}">
+				<a class="menu-link" href="{{ route('penyelaras.muat-turun.SPPB')}}">
 					<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
-					<span class="menu-title">Borang SPBB</span>
+					<span class="menu-title">Muat Turun SPBB</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a class="menu-link" href="{{ route('penyelaras.muat-naik.SPPB')}}">
+					<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
+					<span class="menu-title">Muat Naik SPBB</span>
 				</a>
 			</div>
 			
@@ -267,17 +273,17 @@
 				</div>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="{{ route('sekretariat.muat-turun.SPPB')}}">
-					<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
-					<span class="menu-title">Muat Turun SPBB</span>
-				</a>
-			</div>
-			<div class="menu-item">
 				<a class="menu-link" href="{{ route('sekretariat.muat-naik.SPPB')}}">
 					<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
 					<span class="menu-title">Muat Naik SPBB</span>
 				</a>
 			</div>	
+			<div class="menu-item">
+				<a class="menu-link" href="{{ route('sekretariat.muat-turun.SPPB')}}">
+					<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
+					<span class="menu-title">Muat Turun SPBB</span>
+				</a>
+			</div>
 		</div>
 		<!--end::Menu-->
 

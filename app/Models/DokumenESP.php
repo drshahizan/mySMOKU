@@ -9,13 +9,15 @@ class DokumenESP extends Model
 {
     use HasFactory;
     protected $table = 'dokumen_esp'; 
-    public $incrementing = true;
 
     protected $fillable = [
         'user_id',
         'institusi_id',
         'no_rujukan',
-        'id_dokumen',
-        'dokumen',
+        'dokumen1',
+        'dokumen1a',
+        'dokumen2',
+        'dokumen2a',
+        'dokumen3',
     ];
 }
