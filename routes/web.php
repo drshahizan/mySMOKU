@@ -72,6 +72,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('profil', [ProfilController::class, 'index'])->name('profil-diri');
     Route::post('profil/simpan', [ProfilController::class, 'simpanProfil'])->name('simpan.profil');
+    Route::post('katalaluan/simpan', [ProfilController::class, 'simpanKatalaluan'])->name('simpan.katalaluan');
 
     //Permohonan Pelajar
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
