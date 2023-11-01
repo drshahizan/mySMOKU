@@ -68,7 +68,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Senarai Pembayaran<br><small>Klik ID Permohonan untuk melakukan pembayaran</small></h2>
+                            <h2>Senarai Pembayaran<br><small>Klik ID Tuntutan untuk melihat maklumat pembayaran</small></h2>
                         </div>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
