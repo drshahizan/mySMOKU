@@ -65,10 +65,13 @@
                                         <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
-                                                <th style="width: 17%"><b>ID Permohonan</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Peringkat Pengajian</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
+                                                <th><b>ID Permohonan</b></th>
+                                                <th class="text-center"><b>Tarikh Permohonan</b></th>
+                                                <th class="text-center"><b>Peringkat Pengajian</b></th>
+                                                <th class="text-center"><b>Amaun Yuran Dibayar</b></th>
+                                                <th class="text-center"><b>Amaun Wang Saku Dibayar</b></th>
+                                                <th class="text-center"><b>Status Terkini</b></th>
+                                                <th class="text-center"><b>Surat Tawaran</b></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -93,6 +96,8 @@
                                                         <td>{{$item['no_rujukan_permohonan']}}</td>
                                                         <td class="text-center">{{$item['updated_at']->format('d/m/Y')}}</td>
                                                         <td class="text-center">{{ucwords(strtolower($peringkat))}}</td>
+                                                        <td class="text-center">RM {{$item['yuran_dibayar']}}</td>
+                                                        <td class="text-center">RM {{$item['wang_saku_dibayar']}}</td>
 
                                                         @if ($item['status']=='1')
                                                             <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
@@ -117,6 +122,11 @@
                                                         @elseif ($item['status']=='9')
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
+                                                        <td class="text-center">
+                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}">
+                                                                <i class="fa fa-download fa-sm custom-white-icon"></i>
+                                                            </a>
+                                                        </td>
                                                     </tr>
                                                 
                                             @endforeach
