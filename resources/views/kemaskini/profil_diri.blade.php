@@ -33,12 +33,16 @@
                     @foreach($user as $user)
                     <div class="mt-1">
                         <!--begin::Image input placeholder-->
-                        <style>.image-input-placeholder { background-image: url('assets/media/svg/files/blank-image.svg'); } [data-bs-theme="dark"] .image-input-placeholder { background-image: url('assets/media/svg/files/blank-image-dark.svg'); }</style>
+                        <style>.image-input-placeholder { background-image: url('/assets/media/svg/files/blank-image.svg'); } [data-bs-theme="dark"] .image-input-placeholder { background-image: url('/assets/media/svg/files/blank-image-dark.svg'); }</style>
                         <!--end::Image input placeholder-->
                         <!--begin::Image input-->
                         <div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
                             <!--begin::Preview existing avatar-->
-                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url('assets/profile_photo_path/{{$user->profile_photo_path}}')"></div>
+                            @if(Auth::user()->profile_photo_path !== null)
+                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url('/assets/profile_photo_path/{{$user->profile_photo_path}}')"></div>
+                            @else
+                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url('/assets/profile_photo_path/default.png')"></div>
+                            @endif
                             <!--end::Preview existing avatar-->
                             <!--begin::Edit-->
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Kemaskini gambar">
@@ -75,16 +79,25 @@
                     <!--end::Image input wrapper-->
                 </div>
                 <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                    <!--begin::Label-->
-                    <label class="fs-6 fw-semibold mb-2 required">Nama Pelajar</label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{ $user->nama}}" />
-                    <!--end::Input-->
-                </div>
                 <!--end::Input group-->
+                <!--begin::Row-->
+                <div class="row row-cols-1 row-cols-md-2">
+                    <!--begin::Col-->
+                    <div class="col">
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-semibold mb-2 required">Nama Pelajar</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" placeholder="" name="nama" value="{{ $user->nama}}" />
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Row-->
                 <!--begin::Row-->
                 <div class="row row-cols-1 row-cols-md-2">
                     <!--begin::Col-->
