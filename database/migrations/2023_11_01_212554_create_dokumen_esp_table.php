@@ -16,8 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('institusi_id');
             $table->string('no_rujukan');
-            $table->integer('id_dokumen');
-            $table->string('dokumen');
+            $table->string('dokumen1');
+            $table->string('dokumen1a');
+            $table->string('dokumen2');
+            $table->string('dokumen2a');
+            $table->string('dokumen3');
             $table->timestamps();
         });
     }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nama_akaun');
             $table->string('no_akaun')
               ->references('id_institusi')->on('bk_info_institusi')->onDelete('cascade');
+            $table->string('penyata_bank');
             $table->timestamps();
         });
     }
