@@ -20,13 +20,13 @@
 						<!--begin::Card body-->
 						<div class="card-body p-12">
 							<!--begin::Form-->
-							<form action="{{ route('hantar.tamat.pengajian') }}" method="post" enctype="multipart/form-data">
+							<form action="{{ route('hantar.lanjut.pengajian') }}" method="post" enctype="multipart/form-data">
 								@csrf
 								<!--begin::Wrapper-->
 								<div class="d-flex flex-column align-items-start flex-xl-row">
 									<!--begin::Input group-->
 									<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
-										<span class="fs-3 fw-bold text-gray-800">Lanjut Pengajian</span>
+										<span class="fs-3 fw-bold text-gray-800">Pelanjutan Pengajian</span>
 									</div>
 								</div>
 								<!--end::Top-->
@@ -36,19 +36,19 @@
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th colspan="2" class="text-center">Dokumen Lampiran Lapor Diri</th>
+											<th colspan="2" class="text-center">Dokumen Lampiran</th>
 										</tr>
 									</thead>
 							
 									<tbody>
 										{{-- SIJIL TAMAT / SENAT --}}
 										<tr>
-											<td>Sijil Tamat Pengajian / Surat Senat&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
+											<td>Surat Kelulusan Pelanjutan Universiti&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
 											<td>
-												<input type="file" id="sijilTamat" name="sijilTamat[]" required/>
-												@if(session()->has('uploadedSijilTamat'))
-													@foreach(session('uploadedSijilTamat') as $sijil)
-														<a href="{{ asset('assets/dokumen/sijil_tamat/' . $sijil) }}" target="_blank">{{ $sijil }}</a>
+												<input type="file" id="suratLanjut" name="suratLanjut[]" required/>
+												@if(session()->has('uploadedSuratLanjut'))
+													@foreach(session('uploadedSuratLanjut') as $surat)
+														<a href="{{ asset('assets/dokumen/surat_lanjut/' . $surat) }}" target="_blank">{{ $surat }}</a>
 													@endforeach
 												@endif
 											</td>
@@ -56,12 +56,25 @@
 							
 										{{-- TRANSKRIP --}}
 										<tr>
-											<td>Salinan Transkrip&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
+											<td>Cadangan Jadual Pengajian Baharu&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
 											<td>
-												<input type="file" id="transkrip" name="transkrip[]" required/>
-												@if(session()->has('uploadedTranskrip'))
-													@foreach(session('uploadedTranskrip') as $transkrip)
-														<a href="{{ asset('assets/dokumen/salinan_transkrip/' . $transkrip) }}" target="_blank">{{ $transkrip }}</a>
+												<input type="file" id="jadual" name="jadual[]" required/>
+												@if(session()->has('uploadedJadual'))
+													@foreach(session('uploadedJadual') as $jadual)
+														<a href="{{ asset('assets/dokumen/surat_lanjut/' . $jadual) }}" target="_blank">{{ $jadual }}</a>
+													@endforeach
+												@endif
+											</td>
+										</tr>
+
+										{{-- SOKONGAN --}}
+										<tr>
+											<td>Dokumen Sokongan&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
+											<td>
+												<input type="file" id="sokongan" name="sokongan[]" required/>
+												@if(session()->has('uploadedSokongan'))
+													@foreach(session('uploadedSokongan') as $sokongan)
+														<a href="{{ asset('assets/dokumen/surat_lanjut/' . $sokongan) }}" target="_blank">{{ $sokongan }}</a>
 													@endforeach
 												@endif
 											</td>
@@ -121,23 +134,6 @@
 	<!--end::Content-->
 
 	<!--begin::Javascript-->
-	<script>var hostUrl = "assets/";</script>
-	<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-	<script src="assets/plugins/global/plugins.bundle.js"></script>
-	<script src="assets/js/scripts.bundle.js"></script>
-	<!--end::Global Javascript Bundle-->
-	<!--begin::Vendors Javascript(used for this page only)-->
-	<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
-	<!--end::Vendors Javascript-->
-	<!--begin::Custom Javascript(used for this page only)-->
-	<script src="assets/js/custom/apps/invoices/create.js"></script>
-	<script src="assets/js/widgets.bundle.js"></script>
-	<script src="assets/js/custom/widgets.js"></script>
-	<script src="assets/js/custom/apps/chat/chat.js"></script>
-	<script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script>
-	<script src="assets/js/custom/utilities/modals/create-app.js"></script>
-	<script src="assets/js/custom/utilities/modals/users-search.js"></script>
-	<!--end::Custom Javascript-->
 	<!--end::Javascript-->
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

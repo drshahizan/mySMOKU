@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Akademik;
+use App\Models\LanjutPengajian;
 use App\Models\Permohonan;
 use App\Models\SejarahPermohonan;
 use App\Models\Smoku;
 use App\Models\TamatPengajian;
+use App\Models\TangguhPengajian;
 use App\Models\Tuntutan;
 use App\Models\User;
 use Carbon\Carbon;
@@ -175,6 +177,63 @@ class PelajarController extends Controller
         return view('kemaskini.pelajar.tangguh_pengajian',compact('permohonan'));
     }
 
+    public function hantarTangguhPengajian(Request $request)
+    {
+        $user = Auth::user();
+        $smoku = Smoku::where('no_kp', $user->no_kp)->first();
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->id)->first();
+
+        if (!$smoku || !$permohonan) {
+            return redirect()->route('tamat.pengajian')->with('error', 'Permohonan tidak ditemui.');
+        }
+
+        $suratTangguh = $request->file('suratTangguh');
+        $sokongan = $request->file('sokongan');
+        $uploadedsuratTangguh = [];
+        $uploadedSokongan = [];
+
+        // Check if a record already exists
+        $existingRecord = TangguhPengajian::where('smoku_id', $smoku->id)
+            ->where('permohonan_id', $permohonan->id)
+            ->first();
+
+        if ($suratTangguh && $sokongan) {
+            foreach ($suratTangguh as $key => $surat) {
+                $uniqueFilenameSurat = uniqid() . '_' . $surat->getClientOriginalName();
+                $surat->move('assets/dokumen/surat_tangguh', $uniqueFilenameSurat);
+                $uploadedsuratTangguh[] = $uniqueFilenameSurat;
+
+                $uniqueFilenameSokongan = uniqid() . '_' . $sokongan[$key]->getClientOriginalName();
+                $sokongan[$key]->move('assets/dokumen/surat_tangguh', $uniqueFilenameSokongan);
+                $uploadedSokongan[] = $uniqueFilenameSokongan;
+
+                if ($existingRecord) {
+                    // Update the existing record with the new file names
+                    $existingRecord->surat_tangguh = $uniqueFilenameSurat;
+                    $existingRecord->dokumen_sokongan = $uniqueFilenameSokongan;
+                    $existingRecord->perakuan = $request->perakuan;
+                    $existingRecord->save();
+                } else {
+                    // Create a new record
+                    $tamatPengajian = new TangguhPengajian();
+                    $tamatPengajian->smoku_id = $smoku->id;
+                    $tamatPengajian->permohonan_id = $permohonan->id;
+                    $tamatPengajian->surat_tangguh = $uniqueFilenameSurat;
+                    $tamatPengajian->dokumen_sokongan = $uniqueFilenameSokongan;
+                    $tamatPengajian->perakuan = $request->perakuan;
+                    $tamatPengajian->save();
+                }
+            }
+        }
+
+        // Store the uploaded file names or URLs in the session
+        session()->put('uploadedsuratTangguh', $uploadedsuratTangguh);
+        session()->put('uploadedSokongan', $uploadedSokongan);
+        session()->put('perakuan', $request->input('perakuan'));
+
+        return redirect()->route('tangguh.pengajian')->with('success', 'Dokumen penangguhan pengajian telah dihantar.');
+    }
+
     public function lanjutPengajian()
     {   
         $user = Auth::user();
@@ -182,5 +241,71 @@ class PelajarController extends Controller
         $permohonan = Permohonan::where('smoku_id', $smoku->id)->first();
 
         return view('kemaskini.pelajar.lanjut_pengajian',compact('permohonan'));
+    }
+
+    public function hantarLanjutPengajian(Request $request)
+    {
+        $user = Auth::user();
+        $smoku = Smoku::where('no_kp', $user->no_kp)->first();
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->id)->first();
+
+        if (!$smoku || !$permohonan) {
+            return redirect()->route('lanjut.pengajian')->with('error', 'Permohonan tidak ditemui.');
+        }
+
+        $suratLanjut = $request->file('suratLanjut');
+        $jadual = $request->file('jadual');
+        $sokongan = $request->file('sokongan');
+        $uploadedSuratLanjut = [];
+        $uploadedJadual = [];
+        $uploadedSokongan = [];
+
+        // Check if a record already exists
+        $existingRecord = LanjutPengajian::where('smoku_id', $smoku->id)
+            ->where('permohonan_id', $permohonan->id)
+            ->first();
+
+        if ($suratLanjut && $jadual && $sokongan) {
+            foreach ($suratLanjut as $key => $surat) {
+                $uniqueFilenameSurat = uniqid() . '_' . $surat->getClientOriginalName();
+                $surat->move('assets/dokumen/surat_lanjut', $uniqueFilenameSurat);
+                $uploadedSuratLanjut[] = $uniqueFilenameSurat;
+
+                $uniqueFilenameJadual = uniqid() . '_' . $jadual[$key]->getClientOriginalName();
+                $jadual[$key]->move('assets/dokumen/surat_lanjut', $uniqueFilenameJadual);
+                $uploadedJadual[] = $uniqueFilenameJadual;
+
+                $uniqueFilenameSokongan = uniqid() . '_' . $sokongan[$key]->getClientOriginalName();
+                $sokongan[$key]->move('assets/dokumen/surat_lanjut', $uniqueFilenameSokongan);
+                $uploadedSokongan[] = $uniqueFilenameSokongan;
+
+                if ($existingRecord) {
+                    // Update the existing record with the new file names
+                    $existingRecord->surat_lanjut = $uniqueFilenameSurat;
+                    $existingRecord->jadual = $uniqueFilenameJadual;
+                    $existingRecord->dokumen_sokongan = $uniqueFilenameSokongan;
+                    $existingRecord->perakuan = $request->perakuan;
+                    $existingRecord->save();
+                } else {
+                    // Create a new record
+                    $tamatPengajian = new LanjutPengajian();
+                    $tamatPengajian->smoku_id = $smoku->id;
+                    $tamatPengajian->permohonan_id = $permohonan->id;
+                    $tamatPengajian->surat_lanjut = $uniqueFilenameSurat;
+                    $tamatPengajian->jadual = $uniqueFilenameJadual;
+                    $tamatPengajian->dokumen_sokongan = $uniqueFilenameSokongan;
+                    $tamatPengajian->perakuan = $request->perakuan;
+                    $tamatPengajian->save();
+                }
+            }
+        }
+
+        // Store the uploaded file names or URLs in the session
+        session()->put('uploadedSuratLanjut', $uploadedSuratLanjut);
+        session()->put('uploadedJadual', $uploadedJadual);
+        session()->put('uploadedSokongan', $uploadedSokongan);
+        session()->put('perakuan', $request->input('perakuan'));
+
+        return redirect()->route('lanjut.pengajian')->with('success', 'Dokumen pelanjutan pengajian telah dihantar.');
     }
 }
