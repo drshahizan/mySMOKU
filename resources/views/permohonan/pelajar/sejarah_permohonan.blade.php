@@ -136,7 +136,7 @@
                                                         </td>
                                                         @if ($item['status']=='1')
                                                         <td class="text-center">
-                                                            <a href="{{ route('delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
+                                                            <a href="{{ route('permohonan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
                                                                 <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
                                                                     <i class="fa fa-trash fa-sm custom-white-icon"></i>
                                                                 </span>

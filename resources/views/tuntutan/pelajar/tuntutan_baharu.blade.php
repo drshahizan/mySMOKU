@@ -205,6 +205,7 @@
 							<label class="fs-3 fw-bold text-gray-800">Item Tuntutan</label>
 							<br>
 							<br>
+							<div class="body">
 							<div class="table-responsive">
 								<table id="itemtuntutan" class="table table-striped table-hover dataTable js-exportable">
 									<thead>
@@ -228,6 +229,7 @@
 										@endforeach	
 									</tbody>
 								</table>
+							</div>
 							</div>
 						</div>
 						@endif

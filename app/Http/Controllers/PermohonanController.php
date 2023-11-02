@@ -556,7 +556,7 @@ class PermohonanController extends Controller
         
     }
 
-    public function delete($id)
+    public function deletePermohonan($id)
     {
         
         $smoku_id = Smoku::where('id', $id)->first();

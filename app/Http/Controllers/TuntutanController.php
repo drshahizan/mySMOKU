@@ -15,6 +15,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class TuntutanController extends Controller
@@ -300,5 +301,42 @@ class TuntutanController extends Controller
         //dd($tuntutan);
 
         return view('tuntutan.pelajar.sejarah_tuntutan',compact('tuntutan'));
+    }
+
+    public function batalTuntutan($id)
+    {
+
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$id)->first();
+        DB::table('tuntutan')->orderBy('id', 'asc')->where('smoku_id',$id)->where('permohonan_id',$permohonan_id->id)
+            ->update([
+                'status' => 9
+            ]);
+        $tuntutan_id = Tuntutan::orderBy('id', 'desc')->where('smoku_id',$id)->where('permohonan_id',$permohonan_id->id)->first();
+        SejarahTuntutan::create([
+            'smoku_id' => $id,
+            'tuntutan_id' => $tuntutan_id->id,
+            'status' => 9
+        ]);
+           
+        return redirect()->route('pelajar.dashboard')->with('permohonan', 'Tuntutan telah dibatalkan.');      
+        
+    }
+
+    public function deleteTuntutan($id)
+    {
+        
+        $smoku_id = Smoku::where('id', $id)->first();
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$id)->first();
+        $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id',$id)->where('permohonan_id',$permohonan_id->id)->first();
+
+        if ($tuntutan) {
+
+            DB::table('tuntutan')->where('id',$tuntutan->id)->delete(); //delete permohonan
+            DB::table('tuntutan_item')->where('tuntutan_id',$tuntutan->id)->delete();
+            DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->delete();
+        } 
+        
+        return redirect()->route('pelajar.sejarah.tuntutan');
+        
     }
 }

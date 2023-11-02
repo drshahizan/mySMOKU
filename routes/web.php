@@ -83,7 +83,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('permohonan/hantar', [PermohonanController::class, 'hantarPermohonan'])->name('permohonan.hantar');
     Route::get('/download/{file}',[PermohonanController::class,'download']);
     Route::post('/permohonan', [PermohonanController::class, 'kemaskiniPermohonan'])->name('kemaskini.post');
-	Route::get('statuspermohonan/{id}', [PermohonanController::class, 'delete'])->name('delete');
+	Route::get('permohonan/delete/{id}', [PermohonanController::class, 'deletePermohonan'])->name('permohonan.delete');
 	Route::get('permohonan/batal/{id}', [PermohonanController::class, 'batalPermohonan'])->name('permohonan.batal');
     Route::get('kemaskini/keputusan', [PermohonanController::class, 'kemaskiniKeputusan'])->name('kemaskini.keputusan');
     Route::post('kemaskini/keputusan', [PermohonanController::class, 'save'])->name('save');
@@ -94,6 +94,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('tuntutan/baharu', [TuntutanController::class, 'simpanTuntutan'])->name('pelajar.simpan.tuntutan');
     Route::post('tuntutan/hantar', [TuntutanController::class, 'hantarTuntutan'])->name('hantar.tuntutan');
     Route::get('tuntutan/sejarah/sejarah-tuntutan', [TuntutanController::class, 'sejarahTuntutan'])->name('pelajar.sejarah.tuntutan');
+    Route::get('tuntutan/delete/{id}', [TuntutanController::class, 'deleteTuntutan'])->name('tuntutan.delete');
+	Route::get('tuntutan/batal/{id}', [TuntutanController::class, 'batalTuntutan'])->name('tuntutan.batal');
 
     //Kemaskini - Sekretariat - Emel
     Route::get('kemaskini/sekretariat/emel/senarai-emel', [KemaskiniController::class, 'senaraiEmel']);

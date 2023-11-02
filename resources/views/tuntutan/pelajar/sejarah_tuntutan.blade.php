@@ -62,18 +62,24 @@
                                 <br>
                                 <div class="body">
                                     <div class="table-responsive">
+                                        @foreach ($tuntutan as $item)
                                         <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
-                                                <th style="width: 17%"><b>ID Tuntutan</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Peringkat Pengajian</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
+                                                <th><b>ID Tuntutan</b></th>
+                                                <th class="text-center"><b>Tarikh Tuntutan</b></th>
+                                                <th class="text-center"><b>Peringkat Pengajian</b></th>
+                                                <th class="text-center"><b>Amaun Yuran Dibayar</b></th>
+                                                <th class="text-center"><b>Amaun Wang Saku Dibayar</b></th>
+                                                <th class="text-center"><b>Status Terkini</b></th>
+                                                @if (in_array($item['status'], ['1', '2']))
+                                                <th class="text-center"><b>Tindakan</b></th>
+                                                @endif
                                             </tr>
                                             </thead>
                                             <tbody>
                                                 
-                                                @foreach ($tuntutan as $item)
+                                                
                                                     @php
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
 
@@ -92,6 +98,8 @@
                                                         <td>{{$item['no_rujukan_tuntutan']}}</td>
                                                         <td class="text-center">{{$item['updated_at']->format('d/m/Y')}}</td>
                                                         <td class="text-center">{{ucwords(strtolower($peringkat))}}</td>
+                                                        <td class="text-center">RM {{$item['yuran_dibayar']}}</td>
+                                                        <td class="text-center">RM {{$item['wang_saku_dibayar']}}</td>
                                                         
                                                         @if ($item['status']=='1')
                                                             <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
@@ -112,11 +120,28 @@
                                                         @elseif ($item['status']=='9')
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
+
+                                                        @if ($item['status']=='1')
+                                                        <td class="text-center">
+                                                            <a href="{{ route('tuntutan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam tuntutan ini?')">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Tuntutan">
+                                                                    <i class="fa fa-trash fa-sm custom-white-icon"></i>
+                                                                </span>
+                                                            </a>
+                                                        </td>
+                                                        @elseif ($item['status']=='2')
+                                                        <td class="text-center">
+                                                            <a href="{{ route('tuntutan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan tuntutan ini?')">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Tuntutan">
+                                                                    <i class="fa fa-cancel fa-sm custom-white-icon"></i>
+                                                                </span>
+                                                            </a>
+                                                        </td>                                                         
+                                                        @endif
                                                     </tr>
-                                                
-                                                @endforeach
                                             </tbody>
                                         </table>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

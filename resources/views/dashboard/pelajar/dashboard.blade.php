@@ -207,7 +207,14 @@
 											<tr> 
 												<td>{{$tuntutan->no_rujukan_tuntutan}}</td>
 												<td>{{$tuntutan->created_at->format('d/m/Y')}}</td>
-												<td>{{ucwords(strtolower($tuntutan->status))}}</td>
+												<td>
+													@if ($tuntutan->status_semasa == 1)
+														<a href="{{ route('tuntutan.baharu') }}">{{ ucwords(strtolower($tuntutan->status)) }}</a>
+													@else
+														{{ ucwords(strtolower($tuntutan->status)) }}
+													@endif
+												</td>	
+												{{-- <td>{{ucwords(strtolower($tuntutan->status))}}</td> --}}
 												{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
 											</tr>
 											@endforeach
