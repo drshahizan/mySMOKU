@@ -76,7 +76,7 @@ class RegisteredUserController extends Controller
         $email = $request->email;
         $no_kp = $request->no_kp;
 
-        Mail::to($email)->send(new mailDaftarPengguna($email,$no_kp));
+        Mail::to($email)->send(new MaildaftarPengguna($email,$no_kp));
         return redirect()->route('login')->with('notifikasi', 'Sila semak emel '.$email.' untuk pengesahan akaun.');
     }
 }
