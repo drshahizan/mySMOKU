@@ -17,7 +17,7 @@
 					<span class="menu-title">Laman Utama</span>
 				</a>
 			</div>
-			@if($permohonan != null)
+			@if($permohonan != null && $permohonan->status ==8)
 			<div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
@@ -53,7 +53,7 @@
 					<span class="menu-title">Sejarah</span>
 				</a>
 			</div>
-			@if($permohonan != null)
+			@if($permohonan != null && $permohonan->status ==8)
 			<div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
@@ -384,7 +384,7 @@
 					<div class="menu-item">
 						<a class="menu-link" href="{{url('pentadbir/jumlah-tuntutan')}}">
 								<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
-								<span class="menu-title">Set Jumlah Tuntutan</span>
+								<span class="menu-title">Selenggara Had Maksima Tuntutan</span>
 						</a>
 					</div>
 

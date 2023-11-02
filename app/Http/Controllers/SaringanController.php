@@ -23,11 +23,13 @@ class SaringanController extends Controller
 {
     public function senaraiPermohonan()
     {
-        $permohonan = Permohonan::where('status', '2')
+        $permohonan = Permohonan::orderBy('created_at', 'desc')
+        ->where('status', '2')
         ->orWhere('status', '=','3')
         ->orWhere('status', '=','4')
         ->orWhere('status', '=','5')
         ->get();
+        //dd($permohonan);
         $status_kod=0;
         $status = null;
         return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status'));
