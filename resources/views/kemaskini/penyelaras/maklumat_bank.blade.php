@@ -29,6 +29,12 @@
         .vertical-top{
             vertical-align: top!important;
         }
+        /* CSS for the file input container */
+        .file-input {
+            display: flex; 
+            align-items: center;
+            padding-right: 250px; 
+        }
     </style>
 
     <!--begin::Page title-->
@@ -106,11 +112,13 @@
                                                 <td class="vertical-top w-13">Penyata Bank</td>
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
-                                                    <input type="file" name="penyata"/>
-                                                    @if(session()->has('uploadedPenyataBank'))
-                                                        <a href="{{ asset('assets/dokumen/penyata_bank_islam/' . session('uploadedPenyataBank')) }}" target="_blank">{{ session('uploadedPenyataBank') }}</a>
-                                                    @endif
-                                                </td>
+                                                    <div class="file-input">
+                                                        <input type="file" name="penyata" required />
+                                                        @if(isset($bank->penyata_bank) && !empty($bank->penyata_bank))
+                                                            <a href="{{ asset('assets/dokumen/penyata_bank_islam/' . $bank->penyata_bank) }}" target="_blank">{{ $bank->penyata_bank }}</a>
+                                                        @endif
+                                                    </div>
+                                                </td>                                                
                                             </tr>
                                         </table>
                                     </div>

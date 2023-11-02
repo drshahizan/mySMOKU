@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="/assets/css/sekretariat.css">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9">
 
         {{-- JAVASCRIPT --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,9 +17,14 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9">
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+        <style>
+            .nav{
+                margin-left: 20px!important;
+            }
+        </style>
     </head>
 
     <!--begin::Page title-->
@@ -104,7 +110,7 @@
                                             <table id="sortTable1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center" style="width:3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
+                                                        <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
                                                         <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
                                                         <th class="text-center" style="width: 20%"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
@@ -280,14 +286,14 @@
                                             <table id="sortTable2" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center" style="width:3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
-                                                        <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
-                                                        <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
-                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
-                                                        <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                        <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
-                                                        <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+                                                        <th class="text-center" style="width: 3% !important;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>ID Permohonan</b></th>                                                   
+                                                        <th class="text-center" style="width: 20% !important;"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Jenis Kecacatan</b></th>
+                                                        <th class="text-center" style="width: 17% !important;"><b>Nama Kursus</b></th>
+                                                        <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Tarikh Mula Pengajian</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Tarikh Tamat Pengajian</b></th>
                                                     </tr>
                                                 </thead>
 
@@ -296,7 +302,7 @@
                                                         $i=0;
                                                     @endphp
                                                     @php
-                                                        require_once app_path('helpers.php'); // Replace with the actual path to your helper file
+                                                        require_once app_path('helpers.php'); 
                                                     @endphp
                                                 
                                                     @foreach ($kelulusan as $item)
@@ -357,14 +363,14 @@
                                                             @endphp
                                                             
                                                             <tr>
-                                                                <td class="text-center"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
-                                                                <td><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
-                                                                <td>{{$pemohon}}</td>
-                                                                <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                <td>{{$namakursus}}</td>
-                                                                <td>{{$institusipengajian}}</td>
-                                                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                                                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                                                <td class="text-center" style="width:3% !important;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
+                                                                <td style="width: 10% !important;"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                                <td style="width: 20% !important;">{{$pemohon}}</td>
+                                                                <td style="width: 10% !important;">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
+                                                                <td style="width: 17% !important;">{{$namakursus}}</td>
+                                                                <td style="width: 20% !important;">{{$institusipengajian}}</td>
+                                                                <td class="text-center"  style="width: 10% !important;">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                                                <td class="text-center"  style="width: 10% !important;">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                             </tr>
                                                         @endif
                                                     @endforeach 

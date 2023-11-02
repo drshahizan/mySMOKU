@@ -1009,7 +1009,8 @@ class PenyelarasController extends Controller
                     'no_akaun' => $request->input('no_acc'),
                     'penyata_bank' => $fileName,
                 ]);
-            } else {
+            } 
+            else {
                 MaklumatBank::create([
                     'institusi_id' => $id, 
                     'nama_akaun' => $request->input('nama_bank'),
@@ -1017,10 +1018,8 @@ class PenyelarasController extends Controller
                     'penyata_bank' => $fileName,
                 ]);
             }
-
-            // Store the relative path in a session variable
-            session()->put('uploadedPenyataBank', $fileName);
-        } else {
+        } 
+        else {
             // No new file uploaded, update other fields if necessary
             if ($bank) {
                 $bank->update([
