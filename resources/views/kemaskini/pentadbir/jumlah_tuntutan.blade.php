@@ -151,7 +151,7 @@
 						</table>
 					</div>
 					<!--end::Table-->
-					<div style="font-size: 11px;"> Double click row untuk kemaskini jumlah tuntutan </div>
+					<div style="font-size: 11px;"> Double click row untuk kemaskini had maksima </div>
 				</div>
 				<!--end::Card body-->
 			</div>
