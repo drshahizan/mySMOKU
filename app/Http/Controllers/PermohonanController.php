@@ -524,7 +524,7 @@ class PermohonanController extends Controller
     {
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
         
-        $permohonan = Permohonan::orderBy('id', 'asc')
+        $permohonan = Permohonan::orderBy('id', 'desc')
             ->where('smoku_id', $smoku_id->id)
             ->get();
 
