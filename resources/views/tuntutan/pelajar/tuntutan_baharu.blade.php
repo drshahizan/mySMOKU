@@ -176,7 +176,7 @@
 								</div>
 								<br>
 								<div class="d-flex flex-center mt-15">
-									<button type="submit" class="btn btn-primary" @if ($tuntutan && $tuntutan->status >= 2) disabled @endif>
+									<button type="submit" class="btn btn-primary">
 										Simpan
 									</button>&nbsp;&nbsp;&nbsp;
 								</div>
