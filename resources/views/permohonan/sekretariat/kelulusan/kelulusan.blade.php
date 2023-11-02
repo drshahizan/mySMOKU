@@ -11,6 +11,9 @@
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9">
 
+         <!-- Bootstrap --> 
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
         {{-- JAVASCRIPT --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -65,7 +68,10 @@
                             {{-- top nav bar --}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="bkoku-tab" data-toggle="tab" data-target="#bkoku" type="button" role="tab" aria-controls="bkoku" aria-selected="true">BKOKU</button>
+                                    <button class="nav-link active" id="bkoku2-tab" data-toggle="tab" data-target="#bkoku2" type="button" role="tab" aria-controls="bkoku2" aria-selected="true">BKOKU</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="bkoku1-tab" data-toggle="tab" data-target="#bkoku1" type="button" role="tab" aria-controls="bkoku1" aria-selected="true">BKOKU UA</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
@@ -73,12 +79,12 @@
                             </ul>
 
                             <div class="tab-content" id="myTabContent">
-                                {{-- BKOKU --}}
-                                <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
+                                {{-- BKOKU IPTA --}}
+                                <div class="tab-pane fade" id="bkoku1" role="tabpanel" aria-labelledby="bkoku1-tab">
                                     <br>
                                     <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
                                         <div class="row">
-                                            <div class="col-md-5">
+                                            <div class="col-md-4">
                                                 <select name="institusi" class="form-select" style="margin-left: 20px;">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiPengajian as $institusi)
@@ -88,17 +94,20 @@
                                             </div>
                                     
                                             <div class="col-md-3" style="margin-left: 10px; margin-right:80px;">
-                                                <button type="submit" class="btn btn-primary" style="width: 12%; padding-left: 10px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 13%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-3" style="padding-left: 80px;">  
+                                            <div class="col-md-4" style="padding-left: 80px;">  
                                                 <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
                                                 <a href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
+                                                </a> 
+                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-excel" style="color: black;"></i> SPPB
                                                 </a>                                                
                                             </div>
                                         </div>
@@ -107,7 +116,7 @@
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
-                                            <table id="sortTable1" class="table table-bordered table-striped">
+                                            <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
@@ -202,16 +211,192 @@
                                             </table>
 
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU">
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU1">
                                                 Sahkan
                                             </button>
                                         
                                             {{-- Modal --}}
-                                            <div class="modal fade" id="pengesahanModalBKOKU" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU" aria-hidden="true">
+                                            <div class="modal fade" id="pengesahanModalBKOKU1" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU1" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU">Rekod Keputusan Permohonan</h1>
+                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Rekod Keputusan Permohonan</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
+                                                                <input type="text" class="form-control" id="noMesyuarat" name="noMesyuarat">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
+                                                                <input type="date" class="form-control" id="tarikhMesyuarat" name="tarikhMesyuarat">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
+                                                                <select onchange="select1()" class="form-control" id="keputusan" name="keputusan">
+                                                                    <option value="">Pilih Keputusan</option>
+                                                                    <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
+                                                                    <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Catatan:</label>
+                                                                <textarea class="form-control" id="catatan" name="catatan"></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div> 
+                                            <br><br>                                       
+                                        </form>
+                                    </div>
+                                </div>
+
+                                {{-- BKOKU IPTS --}}
+                                <div class="tab-pane fade show active" id="bkoku2" role="tabpanel" aria-labelledby="bkoku2-tab">
+                                    <br>
+                                    <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <select name="institusi" class="form-select" style="margin-left: 20px;">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                    @foreach ($institusiPengajian as $institusi)
+                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                    
+                                            <div class="col-md-4" style="margin-left: 10px; margin-right:80px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                </button>
+                                            </div>
+
+                                            <div class="col-md-3" style="padding-left: 80px;">  
+                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PDF
+                                                </a>
+                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-excel" style="color: black;"></i> Excel
+                                                </a>                                               
+                                            </div>
+                                        </div>
+                                    </form>  
+
+                                    <div class="body">
+                                        <form action="{{ route('bulk.approval') }}" method="POST">
+                                            {{csrf_field()}}
+                                            <table id="sortTable2" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
+                                                        <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
+                                                        <th class="text-center" style="width: 20%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
+                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    @php
+                                                        $i=0;
+                                                    @endphp
+                                                    @php
+                                                        require_once app_path('helpers.php'); // Replace with the actual path to your helper file
+                                                    @endphp
+                                                
+                                                    @foreach ($kelulusan as $item)
+                                                        @if ($item['program']=="BKOKU")
+                                                            @php
+                                                                $i++;
+                                                                $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                                $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
+                                                                $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                                                                $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
+                                                                $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                                $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
+                                                                $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
+                                                                
+                                                                // nama pemohon
+                                                                $text = ucwords(strtolower($nama_pemohon)); 
+                                                                $conjunctions = ['bin', 'binti'];
+                                                                $words = explode(' ', $text);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $pemohon = implode(' ', $result);
+
+                                                                //nama kursus
+                                                                $text2 = ucwords(strtolower($nama_kursus)); 
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text2);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $kursus = implode(' ', $result);
+                                                                $namakursus = transformBracketsToCapital($kursus);
+
+                                                                //institusi pengajian
+                                                                $text3 = ucwords(strtolower($institusi_pengajian)); 
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text3);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $institusi = implode(' ', $result);
+                                                                $institusipengajian = transformBracketsToUppercase($institusi);
+                                                            @endphp
+                                                            
+                                                            <tr>
+                                                                <td class="text-center"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
+                                                                <td><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                                <td>{{$pemohon}}</td>
+                                                                <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
+                                                                <td>{{$namakursus}}</td>
+                                                                <td>{{$institusipengajian}}</td>
+                                                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach 
+                                                </tbody>
+                                            </table>
+
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU2">
+                                                Sahkan
+                                            </button>
+                                        
+                                            {{-- Modal --}}
+                                            <div class="modal fade" id="pengesahanModalBKOKU2" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU2" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Rekod Keputusan Permohonan</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
 
@@ -250,11 +435,11 @@
                                 </div>
 
                                 {{-- PPK --}}
-                                <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
+                                <div class="tab-pane fade " id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <br>
                                     <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
                                         <div class="row">
-                                            <div class="col-md-5">
+                                            <div class="col-md-4">
                                                 <select name="institusi" class="form-select" style="margin-left: 20px;">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiPengajian as $institusi)
@@ -263,8 +448,8 @@
                                                 </select>
                                             </div>
                                     
-                                            <div class="col-md-3" style="margin-left: 10px; margin-right:80px;">
-                                                <button type="submit" class="btn btn-primary" style="width: 12%; padding-left: 10px;">
+                                            <div class="col-md-4" style="margin-left: 10px; margin-right:80px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
@@ -283,7 +468,7 @@
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
-                                            <table id="sortTable2" class="table table-bordered table-striped">
+                                            <table id="sortTable3" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" style="width: 3% !important;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
@@ -435,6 +620,7 @@
             //sorting function
             $('#sortTable1').DataTable();
             $('#sortTable2').DataTable();
+            $('#sortTable3').DataTable();
 
             // check all checkboxes at once
             function toggle(source) {
@@ -478,8 +664,5 @@
         <script src="assets/bundles/libscripts.bundle.js"></script>    
         <script src="assets/bundles/vendorscripts.bundle.js"></script>
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
-        <!-- Bootstrap --> 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     </body>
 </x-default-layout> 
