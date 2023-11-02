@@ -73,7 +73,7 @@ class TuntutanController extends Controller
                     if ($tuntutan && $tuntutan->status == 1) {
                         $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
                     } 
-                    else if ($tuntutan && $tuntutan->status != 8){
+                    else if ($tuntutan && $tuntutan->status != 8  && $tuntutan->status != 9){
                         return redirect()->route('pelajar.dashboard')->with('sem', 'Tuntutan anda masih dalam semakan.');
                     }
                     else {
@@ -99,7 +99,7 @@ class TuntutanController extends Controller
                 if ($tuntutan && $tuntutan->status == 1) {
                     $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
                 } 
-                else if ($tuntutan && $tuntutan->status != 8){
+                else if ($tuntutan && $tuntutan->status != 8 && $tuntutan->status != 9){
                     return redirect()->route('pelajar.dashboard')->with('sem', 'Tuntutan anda masih dalam semakan.');
                 }
                 else {
