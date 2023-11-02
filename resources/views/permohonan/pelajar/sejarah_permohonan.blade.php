@@ -62,6 +62,7 @@
                                 <br>
                                 <div class="body">
                                     <div class="table-responsive">
+                                        @foreach ($permohonan as $item)
                                         <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
@@ -72,12 +73,14 @@
                                                 <th class="text-center"><b>Amaun Wang Saku Dibayar</b></th>
                                                 <th class="text-center"><b>Status Terkini</b></th>
                                                 <th class="text-center"><b>Surat Tawaran</b></th>
+                                                @if (in_array($item['status'], ['1', '2']))
                                                 <th class="text-center"><b>Tindakan</b></th>
+                                                @endif
                                             </tr>
                                             </thead>
                                             <tbody>
                                                 
-                                                @foreach ($permohonan as $item)
+                                                
                                                 
                                                     @php
                                                         
@@ -139,22 +142,23 @@
                                                                 </span>
                                                             </a>
                                                         </td>
-                                                        @else
+                                                        @elseif ($item['status']=='2')
                                                         <td class="text-center">
                                                             <a href="{{ route('permohonan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan permohonan ini?')">
                                                                 <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Permohonan">
                                                                     <i class="fa fa-cancel fa-sm custom-white-icon"></i>
                                                                 </span>
                                                             </a>
-                                                        </td>                                                        
+                                                        </td>                                                         
                                                         @endif
                                                         {{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
 
                                                     </tr>
                                                 
-                                            @endforeach
+                                            
                                             </tbody>
                                         </table>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
