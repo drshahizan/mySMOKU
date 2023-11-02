@@ -179,7 +179,7 @@
                                                         </td>
                                                         <td>{{$pemohon}}</td>
                                                         <td>{{$kursus}}</td>
-                                                        <td>{{$institusi}}</td>
+                                                        <td>{{$nama_institusi}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                         <td class="text-center">{{date('d/m/Y', strtotime($item['tarikh_transaksi']))}}</td>
                                                         @if ($item['status']=='6')
@@ -290,7 +290,7 @@
                                                         </td>
                                                         <td style="width: 20%">{{$pemohon}}</td>
                                                         <td style="width: 21%">{{$kursus}}</td>
-                                                        <td style="width: 25%">{{$institusi}}</td>
+                                                        <td style="width: 25%">{{$$nama_institusi}}</td>
                                                         <td class="text-center" style="width: 8%">{{$item['created_at']->format('d/m/Y')}}</td>
                                                         <td class="text-center" style="width: 8%">{{date('d/m/Y', strtotime($item['tarikh_transaksi']))}}</td>
                                                         @if ($item['status']=='6')
