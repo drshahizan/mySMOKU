@@ -411,7 +411,7 @@ class SekretariatController extends Controller
                 // Retrieve the item and existing record
                 $existingRecord = Kelulusan::where('permohonan_id', $itemId)->first();
 
-                if ($item)
+                if ($existingRecord)
                 {
                     // Check if keputusan is "Lulus"
                     if($request->get('keputusan')=="Lulus")
@@ -422,7 +422,7 @@ class SekretariatController extends Controller
                         ]);
 
                         // Create a 'Kelulusan' record
-                        Kelulusan::create([
+                        $existingRecord->update([
                             'permohonan_id' => $item->id,
                             'no_mesyuarat' => $request->input('noMesyuarat'),
                             'tarikh_mesyuarat' => $request->input('tarikhMesyuarat'),
@@ -456,7 +456,7 @@ class SekretariatController extends Controller
                         ]);
 
                         // Create a 'Kelulusan' record
-                        Kelulusan::create([
+                        $existingRecord->update([
                             'permohonan_id' => $item->id,
                             'no_mesyuarat' => $request->input('noMesyuarat'),
                             'tarikh_mesyuarat' => $request->input('tarikhMesyuarat'),
@@ -498,7 +498,8 @@ class SekretariatController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $kelulusan = Kelulusan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+        $kelulusan = Kelulusan::orderBy('id', 'desc')
+        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('tarikh_mesyuarat', [$startDate, $endDate]);
         })
         ->when($request->status, function ($q) use ($request) {

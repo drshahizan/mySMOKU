@@ -630,39 +630,5 @@
                 }
             }
         </script>
-        
-        <!-- Vedor js file and create bundle with grunt  --> 
-        <script src="assets/bundles/flotscripts.bundle.js"></script><!-- flot charts Plugin Js -->
-        <script src="assets/bundles/c3.bundle.js"></script>
-        <script src="assets/bundles/apexcharts.bundle.js"></script>
-        <script src="assets/bundles/jvectormap.bundle.js"></script>
-        <script src="assets/vendor/toastr/toastr.js"></script>
-        
-        <!-- Project core js file minify with grunt --> 
-        <script src="assets/bundles/mainscripts.bundle.js"></script>
-        <script src="../js/index.js"></script>
-        
-        <!-- Vedor js file and create bundle with grunt  --> 
-        <script src="assets/bundles/morrisscripts.bundle.js"></script><!-- Morris Plugin Js -->
-        
-        <!-- Vedor js file and create bundle with grunt  -->    
-        <script src="assets/bundles/datatablescripts.bundle.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.html5.min.js"></script>
-        <script src="assets/vendor/jquery-datatable/buttons/buttons.print.min.js"></script>
-        <script src="assets/vendor/sweetalert/sweetalert.min.js"></script>
-
-        <!-- SweetAlert Plugin Js --> 
-        <script src="../js/pages/forms/form-wizard.js"></script>
-        <script src="../js/pages/tables/jquery-datatable.js"></script>
-        <script src="../js/pages/charts/morris.js"></script>
-        <script src="../js/pages/charts/c3.js"></script>
-
-        <!-- Javascript -->
-        <script src="assets/bundles/libscripts.bundle.js"></script>    
-        <script src="assets/bundles/vendorscripts.bundle.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     </body>
 </x-default-layout> 
