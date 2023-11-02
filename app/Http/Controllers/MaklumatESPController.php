@@ -20,7 +20,7 @@ class MaklumatESPController extends Controller
     public function permohonan()
     {
         $kelulusan = Permohonan::where('status', '=','6')->get();
-        // dd($kelulusan);
+        //dd($kelulusan);
 
         return view('esp.permohonan.permohonan_esp', compact('kelulusan'));     
         
