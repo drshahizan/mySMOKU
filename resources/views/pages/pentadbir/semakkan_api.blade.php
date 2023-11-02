@@ -52,29 +52,46 @@
 								<th class="min-w-100px">Status</th>
 							</tr>
 						</thead>
-						<tbody class="fw-semibold text-gray-600" >
+						<tbody class="fw-semibold text-gray-600">
 							<tr>
 								<td class="text-gray-800">SMOKU</td>
-								<td> 
-									@if(isset($error))
-										<p style="color: red;"> {{ $error }}</p>
+								<td>
+									@if(isset($error['smoku']))
+										<p style="color: red;"> {{ $error['smoku'] }}</p>
 									@endif
-						
-									@if(isset($success))
-										<p style="color: green;">Berjaya: {{ $success }}</p>
+					
+									@if(isset($success['smoku']))
+										<p style="color: green;">Berjaya: {{ $success['smoku'] }}</p>
 									@endif
 								</td>
 							</tr>
 							<tr>
 								<td class="text-gray-800">MQA</td>
-								<td></td>
+								<td>
+									@if(isset($error['mqa']))
+										<p style="color: red;"> {{ $error['mqa'] }}</p>
+									@endif
+					
+									@if(isset($success['mqa']))
+										<p style="color: green;">Berjaya: {{ $success['mqa'] }}</p>
+									@endif
+								</td>
 							</tr>
 							<tr>
 								<td class="text-gray-800">ESP</td>
-								<td></td>
+								<td>
+									@if(isset($error['esp']))
+										<p style="color: red;"> {{ $error['esp'] }}</p>
+									@endif
+					
+									@if(isset($success['esp']))
+										<p style="color: green;">Berjaya: {{ $success['esp'] }}</p>
+									@endif
+								</td>
 							</tr>
 						</tbody>
 					</table>
+					
 					<!--end::Table-->
 				</div>
 				<!--end::Card body-->

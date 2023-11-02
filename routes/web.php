@@ -297,7 +297,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('pentadbir/dashboard', [PentadbirController::class,'index'])->name('pentadbir.dashboard');
     Route::get('daftarpengguna', [PentadbirController::class, 'daftar'])->name('daftarpengguna');
     Route::post('daftarpengguna', [PentadbirController::class, 'store'])->name('daftarpengguna.post');
-    Route::get('pentadbir/api-connection', [PentadbirController::class, 'checkConnectionSmoku'])->name('smoku.api');
+    Route::get('pentadbir/api-connection', [PentadbirController::class, 'checkConnection'])->name('semak.api');
+    // Route::get('pentadbir/api-connection/esp', [PentadbirController::class, 'checkConnectionESP'])->name('esp.api');
+    // Route::get('pentadbir/api-connection/mqa', [PentadbirController::class, 'checkConnectionMQA'])->name('mqa.api');
     Route::get('pentadbir/alamat', [PentadbirController::class, 'alamat'])->name('alamat');
     Route::post('pentadbir/alamat', [PentadbirController::class, 'save'])->name('alamat.save');
     Route::get('pentadbir/tarikh', [PentadbirController::class, 'tarikh'])->name('tarikh');
