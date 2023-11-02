@@ -96,15 +96,15 @@
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th style="width: 25%">Item</th>
-											<th style="width: 75%">Pilih</th>
+											<th style="width: 45%">Item</th>
+											<th style="width: 55%">Pilih</th>
 										</tr>
 									</thead>
 
 									<tbody>
 										{{-- NAMA INSTITUSI --}}
 										<tr>
-											<td>Nama Institusi</td>
+											<td>Nama Institusi Pengajian</td>
 											<td>
 												<select name="institusi_id" style="padding: 5px;">
 													<option value="">Pilih Institusi Pengajian</option>
@@ -117,17 +117,76 @@
 											</td>
 										</tr>
 
-										{{-- DOKUMEN SPPB --}}
+										{{-- DOKUMEN SPPB 1 --}}
 										<tr>
-											<td>Dokumen SPBB</td>
+											<td>Borang SPBB 1 (Permohonan Salur Pelajar Sedia Ada)</td>
 											<td>
 												<div id="file-input-container">
 													<!-- File input fields for SPPB1 -->
 													<div class="d-flex">
 														<div class="file-input">
-															<input type="file" name="dokumen1[]" required multiple />
+															<input type="file" name="dokumen1[]" required/>
 														</div>
-														<button id="add-file-input" class="btn btn-warning btn-sm" style="font-size: 12px; padding: 4px 10px;">+</button>
+													</div>
+												</div>																						
+											</td>
+										</tr>
+
+										{{-- DOKUMEN SPPB 1a --}}
+										<tr>
+											<td>Borang SPBB 1a (Permohonan Salur Pelajar Baharu)</td>
+											<td>
+												<div id="file-input-container">
+													<!-- File input fields for SPPB1a -->
+													<div class="d-flex">
+														<div class="file-input">
+															<input type="file" name="dokumen1a[]" required/>
+														</div>
+													</div>
+												</div>																						
+											</td>
+										</tr>
+
+										{{-- DOKUMEN SPPB 2 --}}
+										<tr>
+											<td>Borang SPBB 2 (Laporan Bayaran)</td>
+											<td>
+												<div id="file-input-container">
+													<!-- File input fields for SPPB2 -->
+													<div class="d-flex">
+														<div class="file-input">
+															<input type="file" name="dokumen2[]" required/>
+														</div>
+													</div>
+												</div>																						
+											</td>
+										</tr>
+
+										{{-- DOKUMEN SPPB 2a --}}
+										<tr>
+											<td>Borang SPBB 2a (Laporan Tuntutan)</td>
+											<td>
+												<div id="file-input-container">
+													<!-- File input fields for SPPB2a -->
+													<div class="d-flex">
+														<div class="file-input">
+															<input type="file" name="dokumen2a[]" required/>
+														</div>
+													</div>
+												</div>																						
+											</td>
+										</tr>
+
+										{{-- DOKUMEN SPPB 3 --}}
+										<tr>
+											<td>Borang SPBB 3 (Penyata Terimaan)</td>
+											<td>
+												<div id="file-input-container">
+													<!-- File input fields for SPPB3 -->
+													<div class="d-flex">
+														<div class="file-input">
+															<input type="file" name="dokumen3[]" required/>
+														</div>
 													</div>
 												</div>																						
 											</td>
@@ -162,7 +221,7 @@
 						<!--end::Card body 1-->
 
 						<!--begin::Card body 2-->
-						<div class="card-body p-20 pt-0">
+						{{-- <div class="card-body p-20 pt-0">
 							<table id="sortTable1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -194,7 +253,7 @@
 									@endforeach
 								</tbody>
 							</table>
-						</div>
+						</div> --}}
 						<!--end::Card body 2-->
 					</div>
 					<!--end::Card-->

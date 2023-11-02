@@ -629,15 +629,37 @@ class SekretariatController extends Controller
     public function hantarDokumenSPPB(Request $request)
     {
         $institusiId = $request->input('institusi_id'); // Get the selected institution ID from the form
+        $currentYear = Carbon::now()->year;
 
-        // Validate the uploaded files
-        $validator = Validator::make($request->all(), [
+        $dokumen1 = $request->file('dokumen1');
+        $dokumen1a = $request->file('dokumen1a');
+        $dokumen2 = $request->file('dokumen2');
+        $dokumen2a = $request->file('dokumen2a');
+        $dokumen3 = $request->file('dokumen3');
+        $uploadedDokumen1 = [];
+        $uploadedDokumen1a = [];
+        $uploadedDokumen2 = [];
+        $uploadedDokumen2a = [];
+        $uploadedDokumen3 = [];
+
+        // Validation rules for each document column
+        $rules = [
             'dokumen1.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
-        ], [
-            'dokumen1.*.required' => 'Sila pilih fail untuk SPBB.',
-            'dokumen1.*.mimes' => 'Format fail bagi SPBB mestilah pdf, xls, atau xlsx sahaja.',
-            'dokumen1.*.max' => 'Saiz maksimum fail adalah 2 MB.',
-        ]);
+            'dokumen1a.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen2.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen2a.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen3.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
+        ];
+
+        // Custom error messages
+        $customMessages = [
+            'required' => 'Sila pilih fail untuk :attribute.',
+            'mimes' => 'Format fail bagi :attribute mestilah pdf, xls, atau xlsx sahaja.',
+            'max' => 'Saiz maksimum fail adalah 2 MB.',
+        ];
+
+        // Validate the request
+        $validator = Validator::make($request->all(), $rules, $customMessages);
 
         if ($validator->fails()) {
             return redirect()->back()
@@ -645,30 +667,39 @@ class SekretariatController extends Controller
                 ->withInput();
         }
 
-        // Process and store the uploaded files
-        $uploadedDokumen1 = [];
-        $idDokumenCounter = 1; // Initialize the counter
-
-        if ($request->hasFile('dokumen1')) {
-            foreach ($request->file('dokumen1') as $key => $doc1) {
-                $uniqueFilenameDokumen1 = uniqid() . '_' . $doc1->getClientOriginalName();
-                $doc1->move('assets/dokumen/esp/dokumen1', $uniqueFilenameDokumen1);
+        if ($dokumen1 && $dokumen1a && $dokumen2 && $dokumen2a && $dokumen3) {
+            foreach ($dokumen1 as $key => $sijil) {
+                $uniqueFilenameDokumen1 = uniqid() . '_' . $sijil->getClientOriginalName();
+                $sijil->move('assets/dokumen/sppb_1', $uniqueFilenameDokumen1);
                 $uploadedDokumen1[] = $uniqueFilenameDokumen1;
 
-                // Get the current year
-                $currentYear = Carbon::now()->year;
-                
-                // Save the file information to the database with the incremented id_dokumen
+                $uniqueFilenameDokumen1a = uniqid() . '_' . $dokumen1a[$key]->getClientOriginalName();
+                $dokumen1a[$key]->move('assets/dokumen/sppb_1a', $uniqueFilenameDokumen1a);
+                $uploadedDokumen1a[] = $uniqueFilenameDokumen1a;
+
+                $uniqueFilenameDokumen2 = uniqid() . '_' . $dokumen2[$key]->getClientOriginalName();
+                $dokumen2[$key]->move('assets/dokumen/sppb_2', $uniqueFilenameDokumen2);
+                $uploadedDokumen2[] = $uniqueFilenameDokumen2;
+
+                $uniqueFilenameDokumen2a = uniqid() . '_' . $dokumen2a[$key]->getClientOriginalName();
+                $dokumen2a[$key]->move('assets/dokumen/sppb_2a', $uniqueFilenameDokumen2a);
+                $uploadedDokumen2a[] = $uniqueFilenameDokumen2a;
+
+                $uniqueFilenameDokumen3 = uniqid() . '_' . $dokumen3[$key]->getClientOriginalName();
+                $dokumen3[$key]->move('assets/dokumen/sppb_3', $uniqueFilenameDokumen3);
+                $uploadedDokumen3[] = $uniqueFilenameDokumen3;
+
+                // Save the uploaded documents to the database with the specified no_rujukan
                 $dokumenESP = new DokumenESP();
                 $dokumenESP->user_id = auth()->user()->id; // or set the user_id as needed
                 $dokumenESP->institusi_id = $institusiId;
-                $dokumenESP->no_rujukan = "{$institusiId}/{$currentYear}/{$idDokumenCounter}"; // no rujukan tu kita buat id_institusi/tahun/bil
-                $dokumenESP->id_dokumen = $idDokumenCounter; // Set the id_dokumen
-                $dokumenESP->dokumen = $uniqueFilenameDokumen1;
+                $dokumenESP->no_rujukan = "{$institusiId}/{$currentYear}/1";
+                $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
+                $dokumenESP->dokumen1a = $uniqueFilenameDokumen1a;
+                $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
+                $dokumenESP->dokumen2a = $uniqueFilenameDokumen2a;
+                $dokumenESP->dokumen3 = $uniqueFilenameDokumen3;
                 $dokumenESP->save();
-
-                // Increment the counter for the next file
-                $idDokumenCounter++;
             }
         }
 
@@ -676,24 +707,17 @@ class SekretariatController extends Controller
         return redirect()->route('sekretariat.muat-naik.SPPB')->with('success', 'Semua fail SPBB telah berjaya dikemaskini.');
     }
 
+
     // public function hantarDokumenSPPB(Request $request)
     // {
-    //     // Get the institusi id
-    //     $institusiId = $request->input('institusi_id');
-
-    //     // Get the current year
-    //     $currentYear = Carbon::now()->year;
-
-    //     // Determine the next id_dokumen specifically for this institution
-    //     $nextIdDokumen = DokumenESP::where('institusi_id', $institusiId)->whereYear('created_at', $currentYear)->max('id_dokumen');
-    //     $nextIdDokumen = $nextIdDokumen ? $nextIdDokumen + 1 : 1;
+    //     $institusiId = $request->input('institusi_id'); // Get the selected institution ID from the form
 
     //     // Validate the uploaded files
     //     $validator = Validator::make($request->all(), [
     //         'dokumen1.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
     //     ], [
-    //         'dokumen1.*.required' => 'Sila pilih fail untuk SPBB1.',
-    //         'dokumen1.*.mimes' => 'Format fail bagi SPBB1 mestilah pdf, xls, atau xlsx sahaja.',
+    //         'dokumen1.*.required' => 'Sila pilih fail untuk SPBB.',
+    //         'dokumen1.*.mimes' => 'Format fail bagi SPBB mestilah pdf, xls, atau xlsx sahaja.',
     //         'dokumen1.*.max' => 'Saiz maksimum fail adalah 2 MB.',
     //     ]);
 
@@ -705,6 +729,7 @@ class SekretariatController extends Controller
 
     //     // Process and store the uploaded files
     //     $uploadedDokumen1 = [];
+    //     $idDokumenCounter = 1; // Initialize the counter
 
     //     if ($request->hasFile('dokumen1')) {
     //         foreach ($request->file('dokumen1') as $key => $doc1) {
@@ -712,20 +737,24 @@ class SekretariatController extends Controller
     //             $doc1->move('assets/dokumen/esp/dokumen1', $uniqueFilenameDokumen1);
     //             $uploadedDokumen1[] = $uniqueFilenameDokumen1;
 
+    //             // Get the current year
+    //             $currentYear = Carbon::now()->year;
+                
     //             // Save the file information to the database with the incremented id_dokumen
     //             $dokumenESP = new DokumenESP();
-    //             $dokumenESP->user_id = auth()->user()->id;
+    //             $dokumenESP->user_id = auth()->user()->id; // or set the user_id as needed
     //             $dokumenESP->institusi_id = $institusiId;
-    //             $dokumenESP->no_rujukan = "{$institusiId}/{$currentYear}/{$nextIdDokumen}";
-    //             $dokumenESP->id_dokumen = $nextIdDokumen;
+    //             $dokumenESP->no_rujukan = "{$institusiId}/{$currentYear}/{$idDokumenCounter}"; // no rujukan tu kita buat id_institusi/tahun/bil
+    //             $dokumenESP->id_dokumen = $idDokumenCounter; // Set the id_dokumen
     //             $dokumenESP->dokumen = $uniqueFilenameDokumen1;
     //             $dokumenESP->save();
 
-    //             // Increment the id_dokumen for the next file
-    //             $nextIdDokumen++;
+    //             // Increment the counter for the next file
+    //             $idDokumenCounter++;
     //         }
     //     }
 
+    //     // Store the uploaded file names in the session for display in your view
     //     return redirect()->route('sekretariat.muat-naik.SPPB')->with('success', 'Semua fail SPBB telah berjaya dikemaskini.');
     // }
 
