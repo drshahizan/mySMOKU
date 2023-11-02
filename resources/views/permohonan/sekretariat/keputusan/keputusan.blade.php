@@ -17,6 +17,12 @@
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+        <style>
+            .nav{
+                margin-left: 20px!important;
+            }
+        </style>
     </head>
 
     <!--begin::Page title-->
@@ -120,8 +126,9 @@
                                             <table id="sortTable1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 15%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 33%"><b>Nama</b></th>
+                                                        <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>
+                                                        <th style="width: 13%"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 30%"><b>Nama</b></th>
                                                         <th style="width: 15%"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
                                                         <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
@@ -129,6 +136,10 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @php
+                                                        $i=0;
+                                                    @endphp
+                                                        
                                                     @foreach ($kelulusan as $item)
                                                         @php
                                                             $no_rujukan_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
@@ -157,23 +168,21 @@
 
                                                         @if($program == "BKOKU")
                                                             <tr>
+                                                                <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
                                                                 <td>{{$no_rujukan_permohonan}}</td>
                                                                 <td>{{$pemohon}}</td>
                                                                 <td>{{ucwords(strtolower($nama_peringkat))}}</td>
                                                                 <td class="text-center">{{$item->no_mesyuarat}}</td>
                                                                 <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                                                                @if($item->keputusan == "Lulus")
-                                                                    <td class="text-center">
+                                                                <td class="text-center">
+                                                                    @if($item->keputusan == "Lulus")
                                                                         <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
                                                                             <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
                                                                         </a>
-                                                                    </td>
-                                                                @elseif($item->keputusan == "Tidak Lulus")
-                                                                    <td class="text-center">
+                                                                    @elseif($item->keputusan == "Tidak Lulus")
                                                                         <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
-                                                                    </td>
-                                                                @endif
-                                                                <td hidden>{{$item->created_at}}</td>
+                                                                    @endif
+                                                                </td>
                                                             </tr>
                                                         @endif
                                                     @endforeach
@@ -221,8 +230,9 @@
                                             <table id="sortTable2" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 15%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 33%"><b>Nama</b></th>
+                                                        <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>
+                                                        <th style="width: 13%"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 30%"><b>Nama</b></th>
                                                         <th style="width: 15%"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
                                                         <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
@@ -230,6 +240,10 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @php
+                                                        $i=0;
+                                                    @endphp
+                                                    
                                                     @foreach ($kelulusan as $item)
                                                         @php
                                                             $id_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
@@ -254,22 +268,21 @@
 
                                                         @if($program == "PPK")
                                                             <tr>
+                                                                <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
                                                                 <td>{{$id_permohonan}}</td>
                                                                 <td>{{$pemohon}}</td>
                                                                 <td>{{ucwords(strtolower($nama_peringkat))}}</td>
                                                                 <td class="text-center">{{$item->no_mesyuarat}}</td>
                                                                 <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                                                                @if($item->keputusan == "Lulus")
-                                                                    <td class="text-center">
+                                                                <td class="text-center">
+                                                                    @if($item->keputusan == "Lulus")
                                                                         <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
                                                                             <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
                                                                         </a>
-                                                                    </td>
-                                                                @elseif($item->keputusan == "Tidak Lulus")
-                                                                    <td class="text-center">
+                                                                    @elseif($item->keputusan == "Tidak Lulus")
                                                                         <div class="btn btn-danger btn-round btn-sm" style="width: 43%; padding-left:0%; padding-right:0%;">Tidak Layak</div>
-                                                                    </td>
-                                                                @endif
+                                                                    @endif
+                                                                </td>
                                                             </tr>
                                                         @endif
                                                     @endforeach
@@ -288,9 +301,44 @@
         <!-- Javascript -->
         <script src="assets/bundles/libscripts.bundle.js"></script>    
         <script src="assets/bundles/vendorscripts.bundle.js"></script>
-        
+
         <script>
-            $('#sortTable1').DataTable();
-            $('#sortTable2').DataTable();
+            $(document).ready(function() {
+                var table = $('#sortTable1').DataTable({
+                    "columnDefs": [
+                        {
+                            "targets": 'no-sort',
+                            "orderable": false
+                        }
+                    ],
+                });
+
+                // Disable sorting for the "No" column
+                table.on('order.dt', function() {
+                    table.column(0, { order: 'applied' }).nodes().each(function(cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                var table = $('#sortTable2').DataTable({
+                    "columnDefs": [
+                        {
+                            "targets": 'no-sort',
+                            "orderable": false
+                        }
+                    ],
+                });
+
+                // Disable sorting for the "No" column
+                table.on('order.dt', function() {
+                    table.column(0, { order: 'applied' }).nodes().each(function(cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
+            });
         </script>
 </x-default-layout> 
