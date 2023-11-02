@@ -62,7 +62,7 @@
                                 <br>
                                 <div class="body">
                                     <div class="table-responsive">
-                                        @foreach ($tuntutan as $item)
+                                        
                                         <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
@@ -72,13 +72,13 @@
                                                 <th class="text-center"><b>Amaun Yuran Dibayar</b></th>
                                                 <th class="text-center"><b>Amaun Wang Saku Dibayar</b></th>
                                                 <th class="text-center"><b>Status Terkini</b></th>
-                                                @if (in_array($item['status'], ['1', '2']))
+                                                {{-- @if (in_array($tuntutan_status->status, ['1', '2'])) --}}
                                                 <th class="text-center"><b>Tindakan</b></th>
-                                                @endif
+                                                {{-- @endif --}}
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                
+                                                @foreach ($tuntutan as $item)
                                                 
                                                     @php
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
@@ -139,9 +139,10 @@
                                                         </td>                                                         
                                                         @endif
                                                     </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
-                                        @endforeach
+                                        
                                     </div>
                                 </div>
                             </div>

@@ -144,7 +144,7 @@ class TuntutanController extends Controller
         $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
             ->where('permohonan_id', '=', $permohonan->id)
             ->first();
-        if ($tuntutan === null) {
+        // if ($tuntutan === null) {
             $tuntutan = Tuntutan::create([
                 'smoku_id' => $smoku_id->id,
                 'permohonan_id' => $permohonan->id,
@@ -154,7 +154,7 @@ class TuntutanController extends Controller
                 'yuran' => '1',
                 'status' => '1',
             ]);
-        }
+        // }
        /*else {
             Tuntutan::where('smoku_id', '=', $smoku_id->id)
                 ->where('permohonan_id', '=', $permohonan->id)
@@ -173,7 +173,7 @@ class TuntutanController extends Controller
         $tuntutan->save();
 
         //simpan dalam table tuntutan_item
-        $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
+        $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)
             ->where('permohonan_id', '=', $permohonan->id)
             ->first();
 
@@ -283,13 +283,23 @@ class TuntutanController extends Controller
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
 
         if ($smoku_id) {
-            $permohonan = Permohonan::where('smoku_id', '=', $smoku_id->id)->first();
+            $permohonan = Permohonan::orderBy('id', 'desc')
+                ->where('smoku_id', '=', $smoku_id->id)->first();
+            //dd($permohonan);    
 
             if ($permohonan) {
-                $tuntutan = Tuntutan::where('tuntutan.status', '!=', '4')
+                $tuntutan = Tuntutan::orderBy('id', 'desc')->where('tuntutan.status', '!=', '4')
                     ->where('tuntutan.smoku_id', '=', $smoku_id->id)
                     ->where('tuntutan.permohonan_id', '=', $permohonan->id)
                     ->get();
+
+                // $tuntutan_status = Tuntutan::where('tuntutan.status', '!=', '4')
+                //     ->where('tuntutan.smoku_id', '=', $smoku_id->id)
+                //     ->where('tuntutan.permohonan_id', '=', $permohonan->id)
+                //     ->first();    
+                //dd($tuntutan);    
+
+                return view('tuntutan.pelajar.sejarah_tuntutan',compact('tuntutan'));    
 
             } else {
 
@@ -300,7 +310,7 @@ class TuntutanController extends Controller
 
         //dd($tuntutan);
 
-        return view('tuntutan.pelajar.sejarah_tuntutan',compact('tuntutan'));
+       
     }
 
     public function batalTuntutan($id)
