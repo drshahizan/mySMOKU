@@ -167,105 +167,18 @@ class PentadbirController extends Controller
             $error['esp'] = 'Ralat dikesan: ' . $e->getMessage();
         }
 
-        return view('pages.pentadbir.semakkan_api', [
+        return view('kemaskini.pentadbir.semakkan_api', [
             'success' => $success,
             'error' => $error,
             'data' => $data, // You can pass $data to the view if needed
         ]);
     }
 
-
-    // public function checkConnectionESP()
-    // {
-    //     try {
-    //         $headers = [
-    //             'Cache-Control' => 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
-    //             'Content-Type' => 'application/json',
-    //             // 'Authorization' => 'Bearer knhnxYoATGLiN5WxErU6SVVw8c9xhw09vQ3KRPkOtcH3O0CYh21wDA4CsypX',
-    //         ];
-
-    //         $client = new Client();
-    //         $url = 'http://espbstg.mohe.gov.my/api/studentsInfo.php';
-    //         $response = $client->get($url, ['headers' => $headers]);
-
-    //         $statusCode = $response->getStatusCode();
-    //         $responseContent = $response->getBody()->getContents();
-    //         //dd($statusCode);
-
-    //         // Check if the status code indicates success (usually 2xx)
-    //         if ($statusCode >= 200 && $statusCode < 300) {
-    //             // API connection is successful
-    //             $data = json_decode($responseContent, true);
-
-    //             $success['esp'] = 'Sambungan API ESP berjaya';
-    //             return view('pages.pentadbir.semakkan_api', [
-    //                 'success' => $success,
-    //                 'data' => $data,
-    //             ]);
-    //         } else {
-    //             // Handle API error
-    //             $error['esp'] = 'Permintaan API ESP gagal dengan kod status: ' . $statusCode;
-    //             return view('pages.pentadbir.semakkan_api', [
-    //                 'error' => $error,
-    //             ]);
-    //         }
-    //     } catch (\Exception $e) {
-    //         // Handle other exceptions (e.g., network errors)
-    //         $error['esp'] = 'Ralat dikesan: ' . $e->getMessage();
-    //         return view('pages.pentadbir.semakkan_api', [
-    //             'error' => $error,
-    //         ]);
-    //     }
-    // }
-
-    // public function checkConnectionMQA()
-    // {
-    //     try {
-    //         // $headers = [
-    //         //     'Cache-Control' => 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
-    //         //     'Content-Type' => 'application/json',
-    //         //     // 'Authorization' => 'Bearer knhnxYoATGLiN5WxErU6SVVw8c9xhw09vQ3KRPkOtcH3O0CYh21wDA4CsypX',
-    //         // ];
-
-    //         $client = new Client();
-    //         $url = 'http://10.29.216.151/api/bkoku/request-MQR';
-    //         $response = $client->post($url);
-
-    //         $statusCode = $response->getStatusCode();
-    //         $responseContent = $response->getBody()->getContents();
-    //         //dd($statusCode);
-
-    //         // Check if the status code indicates success (usually 2xx)
-    //         if ($statusCode >= 200 && $statusCode < 300) {
-    //             // API connection is successful
-    //             $data = json_decode($responseContent, true);
-
-    //             $success['mqa'] = 'Sambungan API MQA berjaya';
-    //             return view('pages.pentadbir.semakkan_api', [
-    //                 'success' => $success,
-    //                 'data' => $data,
-    //             ]);
-    //         } else {
-    //             // Handle API error
-    //             $error['mqa'] = 'Permintaan API MQA gagal dengan kod status: ' . $statusCode;
-    //             return view('pages.pentadbir.semakkan_api', [
-    //                 'error' => $error,
-    //             ]);
-    //         }
-    //     } catch (\Exception $e) {
-    //         // Handle other exceptions (e.g., network errors)
-    //         $error['mqa'] = 'Ralat dikesan: ' . $e->getMessage();
-    //         return view('pages.pentadbir.semakkan_api', [
-    //             'error' => $error,
-    //         ]);
-    //     }
-    // }
-
     public function alamat()
     {
         $maklumat = MaklumatKementerian::get();
            
-        return view('pages.pentadbir.alamat', compact('maklumat'));
+        return view('kemaskini.pentadbir.alamat', compact('maklumat'));
     }
 
     public function save(Request $request)
