@@ -404,23 +404,31 @@ class SekretariatController extends Controller
             // Initialize an array to store student email addresses
             $studentEmails = [];
 
-            foreach ($selectedItemIds as $itemId) {
-
+            foreach ($selectedItemIds as $itemId) 
+            {
                 // item is find the permohonan id
                 $item = Permohonan::find($itemId);
                 // Retrieve the item and existing record
                 $existingRecord = Kelulusan::where('permohonan_id', $itemId)->first();
-
-                if ($existingRecord)
+                
+                // 1) Lulus
+                if($request->get('keputusan')=="Lulus")
                 {
-                    // Check if keputusan is "Lulus"
-                    if($request->get('keputusan')=="Lulus")
-                    {
-                        // Update the 'Permohonan' model's status
-                        $item->update([
-                            'status' => 6,
-                        ]);
+                    // Update the 'Permohonan' model's status
+                    $item->update([
+                        'status' => 6,
+                    ]);
 
+                    // Create a 'SejarahPermohonan' record
+                    SejarahPermohonan::create([
+                        'smoku_id' => $item->smoku_id,
+                        'permohonan_id' => $item->id,
+                        'status' => 6,
+                    ]);
+
+                    // Check if the record of respective permohonan_id already exists
+                    if ($existingRecord)
+                    {
                         // Create a 'Kelulusan' record
                         $existingRecord->update([
                             'permohonan_id' => $item->id,
@@ -429,32 +437,48 @@ class SekretariatController extends Controller
                             'keputusan' => $request->input('keputusan'),
                             'catatan' => $request->input('catatan'),
                         ]);
-
-                        // Create a 'SejarahPermohonan' record
-                        SejarahPermohonan::create([
-                            'smoku_id' => $item->smoku_id,
-                            'permohonan_id' => $item->id,
-                            'status' => 6,
-                        ]);
-
-                        // Send email notifications to all student email addresses
-                        $studentEmail = Smoku::where('id', $item->smoku_id)->value('email');
-                        $emailLulus = EmelKemaskini::where("emel_id",2)->first();
-                        if ($studentEmail) {
-                            $studentEmails[] = $studentEmail;
-                        }
-
-                        foreach ($studentEmails as $studentEmail) {
-                            Mail::to($studentEmail)->send(new KeputusanLayak($emailLulus));
-                        }
                     }
                     else
                     {
-                        // Update the 'Permohonan' model's status
-                        $item->update([
-                            'status' => 7,
+                        // Create a 'Kelulusan' record
+                        Kelulusan::create([
+                            'permohonan_id' => $item->id,
+                            'no_mesyuarat' => $request->input('noMesyuarat'),
+                            'tarikh_mesyuarat' => $request->input('tarikhMesyuarat'),
+                            'keputusan' => $request->input('keputusan'),
+                            'catatan' => $request->input('catatan'),
                         ]);
+                    }
 
+                    // Send email notifications to all student email addresses
+                    $studentEmail = Smoku::where('id', $item->smoku_id)->value('email');
+                    $emailLulus = EmelKemaskini::where("emel_id",2)->first();
+                    if ($studentEmail) {
+                        $studentEmails[] = $studentEmail;
+                    }
+
+                    foreach ($studentEmails as $studentEmail) {
+                        Mail::to($studentEmail)->send(new KeputusanLayak($emailLulus));
+                    }
+                }
+                // 2) Tidak Lulus
+                else
+                {
+                    // Update the 'Permohonan' model's status
+                    $item->update([
+                        'status' => 7,
+                    ]);
+
+                    // Create a 'SejarahPermohonan' record
+                    SejarahPermohonan::create([
+                        'smoku_id' => $item->smoku_id,
+                        'permohonan_id' => $item->id,
+                        'status' => 7,
+                    ]);
+
+                    // Check if the record of respective permohonan_id already exists
+                    if ($existingRecord)
+                    {
                         // Create a 'Kelulusan' record
                         $existingRecord->update([
                             'permohonan_id' => $item->id,
@@ -463,32 +487,39 @@ class SekretariatController extends Controller
                             'keputusan' => $request->input('keputusan'),
                             'catatan' => $request->input('catatan'),
                         ]);
-
-                        // Create a 'SejarahPermohonan' record
-                        SejarahPermohonan::create([
-                            'smoku_id' => $item->smoku_id,
+                    }
+                    else
+                    {
+                        // Create a 'Kelulusan' record
+                        Kelulusan::create([
                             'permohonan_id' => $item->id,
-                            'status' => 7,
+                            'no_mesyuarat' => $request->input('noMesyuarat'),
+                            'tarikh_mesyuarat' => $request->input('tarikhMesyuarat'),
+                            'keputusan' => $request->input('keputusan'),
+                            'catatan' => $request->input('catatan'),
                         ]);
+                    }
 
-                        // Send email notifications to all student email addresses
-                        $studentEmail = Smoku::where('id', $item->smoku_id)->value('email');
-                        if ($studentEmail) {
-                            $studentEmails[] = $studentEmail;
-                        }
+                    // Send email notifications to all student email addresses
+                    $studentEmail = Smoku::where('id', $item->smoku_id)->value('email');
+                    if ($studentEmail) {
+                        $studentEmails[] = $studentEmail;
+                    }
 
-                        // Check if $existingRecord is defined and not null
-                        if ($existingRecord) {
-                            $catatan = $existingRecord->catatan;
-                        }
+                    // Set a default value
+                    $catatan = ''; 
 
-                        // Split the comma-separated string into an array
-                        $catatanArray = explode(', ', $catatan);
+                    // Check if $existingRecord is defined and not null
+                    if ($existingRecord) {
+                        $catatan = $existingRecord->catatan;
+                    }
 
-                        foreach ($studentEmails as $studentEmail) {
-                            $emailTidakLulus = EmelKemaskini::where("emel_id",3)->first();
-                            Mail::to($studentEmail)->send(new KeputusanTidakLayak($emailTidakLulus, $catatanArray));
-                        }
+                    // Split the comma-separated string into an array
+                    $catatanArray = explode(', ', $catatan);
+
+                    foreach ($studentEmails as $studentEmail) {
+                        $emailTidakLulus = EmelKemaskini::where("emel_id",3)->first();
+                        Mail::to($studentEmail)->send(new KeputusanTidakLayak($emailTidakLulus, $catatanArray));
                     }
                 }
             }
