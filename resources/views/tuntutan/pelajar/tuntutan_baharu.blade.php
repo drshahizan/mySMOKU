@@ -205,8 +205,8 @@
 							<label class="fs-3 fw-bold text-gray-800">Item Tuntutan</label>
 							<br>
 							<br>
-							<div class="body">
-							<div class="table-responsive">
+							
+							
 								<table id="itemtuntutan" class="table table-striped table-hover dataTable js-exportable">
 									<thead>
 										<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
@@ -229,8 +229,8 @@
 										@endforeach	
 									</tbody>
 								</table>
-							</div>
-							</div>
+							
+							
 						</div>
 						@endif
 						<!--begin::Form-->
