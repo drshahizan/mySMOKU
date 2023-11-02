@@ -1,4 +1,9 @@
 @if(Auth::user()->tahap=='1')
+@php
+	$smoku_id = DB::table('smoku')->where('no_kp',Auth::user()->no_kp)->first();
+	$permohonan = DB::table('permohonan')->where('smoku_id', $smoku_id->id)->first();
+	//dd($permohonan);
+@endphp
 <!--begin::sidebar menu-->
 <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
 	<!--begin::Menu wrapper-->
@@ -12,6 +17,7 @@
 					<span class="menu-title">Laman Utama</span>
 				</a>
 			</div>
+			@if($permohonan != null)
 			<div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
@@ -29,7 +35,7 @@
 					<span class="menu-title">Lapor Tamat Pengajian</span>
 				</a>
 			</div>
-
+			@endif
 			<div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
@@ -47,7 +53,7 @@
 					<span class="menu-title">Sejarah</span>
 				</a>
 			</div>
-
+			@if($permohonan != null)
 			<div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
@@ -65,7 +71,9 @@
 					<span class="menu-title">Sejarah</span>
 				</a>
 			</div>
+			@endif
 		</div>
+		
 		<!--end::Menu-->
 
 @elseif(Auth::user()->tahap=='2')

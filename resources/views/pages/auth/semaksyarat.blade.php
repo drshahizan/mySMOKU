@@ -68,7 +68,7 @@
   
                 <div class="text-center mb-11">
             <h2 class="text-dark fw-bolder mb-3">
-                Semakan Sistem Maklumat Orang Kurang Upaya (SMOKU)
+                Semakan Agensi Kelayakan Malaysia (MQA)
             </h2>
         </div>
         <div class="text-center mb-11">
