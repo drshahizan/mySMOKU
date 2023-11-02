@@ -1,7 +1,7 @@
 <html>
     <body>
         <h3>{{ $emailLulus->subjek }}</h3>
-        <p><b>{{ $emailLulus->pendahuluan }}</b></p>
+        <p>{{ $emailLulus->pendahuluan }},</p>
         <br>
         <p>Tuan/Puan,</p>
         <br>

@@ -6,7 +6,7 @@
     </tr>
     <tr>
         <td>
-            <p><b>{{ $emailTidakLulus->pendahuluan }},</b></p>
+            <p>{{ $emailTidakLulus->pendahuluan }},</p>
         </td>
     </tr>
     <tr>
