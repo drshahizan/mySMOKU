@@ -142,6 +142,7 @@ var KTModalCustomersAdd = function () {
         });
 
         cancelButton.addEventListener('click', function (e) {
+            console.log("Cancel button:", cancelButton);
             e.preventDefault();
 
             Swal.fire({
@@ -174,6 +175,7 @@ var KTModalCustomersAdd = function () {
         });
 
 		closeButton.addEventListener('click', function(e){
+            console.log("Close button:", closeButton);
 			e.preventDefault();
 
             Swal.fire({

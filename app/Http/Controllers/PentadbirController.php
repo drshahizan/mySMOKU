@@ -32,11 +32,11 @@ class PentadbirController extends Controller
         ->get(['users.*', 'roles.name']);
 
         $tahap = Role::all()->sortBy('id');
-        $infoipt = InfoIpt::where('jenis_institusi', 'IPTA')->orderBy('nama_institusi')->get(); 
-        $infoppk = InfoIpt::where('jenis_institusi', 'PPK')->orderBy('nama_institusi')->get(); 
+        $infoipt = InfoIpt::where('jenis_institusi','!=', 'IPTS')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get(); 
+        $infoppk = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); 
                
 
-        return view('pages.pentadbir.daftarpengguna', compact('user', 'tahap', 'infoipt','infoppk'));
+        return view('kemaskini.pentadbir.daftar_pengguna', compact('user', 'tahap', 'infoipt','infoppk'));
     }
 
     public function store(Request $request)
