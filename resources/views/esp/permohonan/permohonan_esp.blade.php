@@ -276,32 +276,20 @@
           <!--begin::Card body-->
           <div class="card-body pt-0">
             <!--begin::Form-->
-            <form class="form" id="hantar_maklumat" action="http://espbstg.mohe.gov.my/api/studentsInfo.php" method="post">
+            <form class="form" id="hantar_maklumat">
               <textarea name="token" id="token" rows="10" cols="50">
-                
-[
-    {
-        "token" : "{{$token}}"
-    }
-]
-                
+                  [
+                      {
+                          "token": "{{$token}}"
+                      }
+                  ]
               </textarea>
-              <textarea name="data" id="data" rows="10" cols="50">
-                
-                </textarea>
-                
-                <!--begin::action-->
-                <div class="footer">
-                  <!--begin::Button-->
-                  <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
-                    <span class="indicator-label">Hantar</span>
-                    <span class="indicator-progress">Sila tunggu...
-                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                  </button>
-                  <!--end::Button-->
-                </div>
-                <!--end::action-->
-            </form>
+              <textarea name="data" id="data" rows="10" cols="50"></textarea>
+              <!-- ...other form elements... -->
+              <div class="footer">
+                  <input type="button" value="Send JSON" onclick="sendData()">
+              </div>
+          </form>
             <!--end::Form-->
           </div>
           <!--end::Card body-->
@@ -449,7 +437,30 @@ $(document).ready(function() {
 
 
 <!--begin::Javascript-->
+<script>
+  function sendData() {
+    var form = document.getElementById('hantar_maklumat');
+    var data = new FormData(form);
 
+    // Send the form data using AJAX
+    fetch('https://espbstg.mohe.gov.my/api/studentsInfo.php', {
+        method: 'POST',
+        body: data
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Log the API response to the console
+        // You can also perform other actions with the API response here
+    })
+    .catch(error => {
+        console.error('API Request failed:', error);
+    });
+}
+
+ 
+
+
+</script>
 <!--end::Javascript-->
 
 
