@@ -286,9 +286,9 @@
 ]
                 
               </textarea>
-              <textarea name="data" id="data" rows="10" cols="50">
+              {{-- <textarea name="data" id="data" rows="10" cols="50">
                 
-                </textarea>
+                </textarea> --}}
                 
                 <!--begin::action-->
                 <div class="footer">
@@ -439,9 +439,12 @@ $(document).ready(function() {
 
 </script>
 <style>
-  /* #data {
+  #token {
     display: none;
-  } */
+  }
+  #data {
+    display: none;
+  }
 </style>
 
 
