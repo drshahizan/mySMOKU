@@ -276,8 +276,8 @@
           <!--begin::Card body-->
           <div class="card-body pt-0">
             <!--begin::Form-->
-            <form class="form" id="hantar_maklumat" action="http://espbstg.mohe.gov.my/apiTest_rToken.php" method="post">
-              <textarea name="data" id="token" rows="10" cols="50">
+            <form class="form" id="hantar_maklumat" action="http://espbstg.mohe.gov.my/api/studentsInfo.php" method="post">
+              <textarea name="token" id="token" rows="10" cols="50">
                 
 [
     {
@@ -286,9 +286,9 @@
 ]
                 
               </textarea>
-              {{-- <textarea name="data" id="data" rows="10" cols="50">
+              <textarea name="data" id="data" rows="10" cols="50">
                 
-                </textarea> --}}
+                </textarea>
                 
                 <!--begin::action-->
                 <div class="footer">
@@ -439,16 +439,43 @@ $(document).ready(function() {
 
 </script>
 <style>
-  #token {
+  /* #token {
     display: none;
   }
   #data {
     display: none;
-  }
+  } */
 </style>
 
 
 <!--begin::Javascript-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#hantar_maklumat').submit(function(event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            // Make an AJAX request to the server
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    // Display the JSON response in an alert
+                    alert(JSON.stringify(response));
+
+                    // Alternatively, you can display the JSON response in a modal or any other custom popup
+                    // Update the code here to handle the response as per your requirements
+                },
+                error: function() {
+                    // Handle AJAX errors if any
+                    alert('Error occurred. Please try again.');
+                }
+            });
+        });
+    });
+</script>
 
 <!--end::Javascript-->
 
