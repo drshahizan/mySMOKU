@@ -275,10 +275,9 @@
           </div>      
           <!--begin::Card body-->
           <div class="card-body pt-0">
-
             <!--begin::Form-->
             <form class="form" id="hantar_maklumat" action="http://espbstg.mohe.gov.my/api/studentsInfo.php" method="post">
-              <textarea name="token" id="token" rows="10" cols="50">
+              <textarea name="data" id="token" rows="10" cols="50">
                 
 [
     {
