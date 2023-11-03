@@ -277,11 +277,19 @@
           <div class="card-body pt-0">
             <!--begin::Form-->
             <form class="form" id="hantar_maklumat" action="http://espbstg.mohe.gov.my/apiTest_rToken.php" method="post">
-              <input type="text" name="token" id="token" value="{{$token}}">
-              {{-- <textarea name="data" id="data" rows="10" cols="50">
+              <textarea name="data" id="token" rows="10" cols="50">
+                
+[
+    {
+        "token" : "{{$token}}"
+    }
+]
+                
+              </textarea>
+              <textarea name="data" id="data" rows="10" cols="50">
                 
                 </textarea>
-                 --}}
+                
                 <!--begin::action-->
                 <div class="footer">
                   <!--begin::Button-->
@@ -311,26 +319,7 @@
     $('#sortTable2').DataTable();
 
   </script>
-<script>
-  // Create a JSON object with the token
-var data = {
-  token: "a82dc96168a81ba20c1e9e2037b38c7798b04de25a8c005ac7f2f041b39e3245"
-};
 
-// Convert the JSON object to a string
-var jsonData = JSON.stringify(data);
-
-// Create a new XMLHttpRequest object
-var xhr = new XMLHttpRequest();
-
-// Configure the request
-xhr.open("POST", "http://espbstg.mohe.gov.my/apiTest_rToken.php", true);
-xhr.setRequestHeader("Content-Type", "application/json");
-
-// Send the JSON data as the request body
-xhr.send(jsonData);
-
-</script>
 <!-- Your existing JavaScript code -->
 <script>
 
@@ -385,10 +374,8 @@ function toggleSelectAll(tab) {
     }
 }
 
-
-
-  // jQuery script to handle checkbox selection and update textarea
-  $(document).ready(function() {
+// jQuery script to handle checkbox selection and update textarea
+$(document).ready(function() {
 
     // Event delegation for checkbox change
     $(document).on('change', '.select-checkbox', function() {
