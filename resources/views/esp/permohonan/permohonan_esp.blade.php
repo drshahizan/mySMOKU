@@ -422,35 +422,19 @@ $(document).ready(function() {
 
 });
 
-document.getElementById('hantar_maklumat').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
+// $(document).ready(function() {
+//     // Handle form submission
+//     $('#hantar_maklumat').submit(function(event) {
+//         // Prevent the form from submitting the traditional way
+//         event.preventDefault();
+        
+//         // Here you can perform any necessary form validation or data processing
+        
+//         // Display a popup message after form submission
+//         alert('Maklumat berjaya hantar ke ESP.');
+//     });
+// });
 
-    // Get form data
-    var token = document.getElementById('token').value;
-    var data = document.getElementById('data').value;
-
-    // Prepare form data for AJAX submission
-    var formData = new FormData();
-    formData.append('token', token);
-    formData.append('data', data);
-
-    // Send the form data using AJAX
-    fetch('http://espbstg.mohe.gov.my/api/studentsInfo.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        // Redirect to the desired page after successful form submission
-        window.location.href = 'http://example.com/redirect-page';
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        // Handle errors here if necessary
-    });
-});
 
 
 </script>
