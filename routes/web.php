@@ -39,16 +39,14 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 //api esp
 //Route::middleware('api.token')->group(function () {
 
-    Route::get('/permohonanESP', [MaklumatESPController::class, 'permohonan'])->name('permohonan.esp');
-    Route::post('/permohonanESP', [MaklumatESPController::class, 'hantar'])->name('maklumat.esp');
+    //nak test kat luar sistem
     Route::get('/kemaskiniESP', [MaklumatESPController::class, 'kemaskiniStatusESP']);
     Route::post('/statusESP', [MaklumatESPController::class, 'receiveData']);
     Route::get('/statusESP/dibayar', [MaklumatESPController::class, 'statusDibayar']);
     Route::get('/test/api', [MaklumatESPController::class, 'test']);
     Route::get('/requery', [MaklumatESPController::class, 'testrequery']);
 
-    Route::get('/tuntutanESP', [MaklumatESPController::class, 'tuntutan'])->name('tuntutan.esp');
-    Route::post('/tuntutanESP', [MaklumatESPController::class, 'hantarTuntutan'])->name('maklumat_tuntutan.esp');
+    
     Route::get('/statusESP/dibayar/tuntutan', [MaklumatESPController::class, 'statusDibayarTuntutan']);
 
     Route::get('/maklumat/MQR', [MaklumatKursusController::class, 'index']);
@@ -58,6 +56,11 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/permohonanESP', [MaklumatESPController::class, 'permohonan'])->name('permohonan.esp');
+    Route::post('/permohonanESP', [MaklumatESPController::class, 'hantar'])->name('maklumat.esp');
+    Route::get('/tuntutanESP', [MaklumatESPController::class, 'tuntutan'])->name('tuntutan.esp');
+    Route::post('/tuntutanESP', [MaklumatESPController::class, 'hantarTuntutan'])->name('maklumat_tuntutan.esp');
 
     Route::get('/', [DashboardController::class, 'index']);
 
