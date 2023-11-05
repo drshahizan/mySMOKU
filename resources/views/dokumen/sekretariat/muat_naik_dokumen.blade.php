@@ -46,7 +46,7 @@
 			</li>
 			<!--end::Item-->
 			<!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">Dokumen ESP</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Borang SPPB</li>
 			<!--end::Item-->
 		</ul>
 	<!--end::Breadcrumb-->
@@ -221,6 +221,42 @@
 						<!--end::Card body 1-->
 
 						<!--begin::Card body 2-->
+						<div class="card-body p-20 pt-0">
+							<table id="sortTable1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th class="text-center" style="width: 5%">No</th>
+										<th class="text-center" style="width: 70%">Institusi Pengajian</th>
+										<th class="text-center" style="width: 25%">Borang SPPB</th>
+									</tr>
+								</thead>
+								<tbody>
+									@php
+										$i = 0;
+									@endphp
+						
+									@foreach ($dokumen as $doc)
+										@php
+											$id = $doc->institusi_id;
+											$nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $id)->value('nama_institusi');
+										@endphp
+						
+										@if (str_ends_with($doc->no_rujukan, '/1'))
+											<tr>
+												<td class="text-center" data-no="{{ $i++ }}">{{ $i }}</td>
+												<td>{{ $nama_institusi }}</td>
+												<td class="text-center">
+													<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $doc->dokumen) }}" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
+														Lihat <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
+													</a>
+												</td>
+											</tr>
+										@endif
+									@endforeach
+								</tbody>
+							</table>
+						</div>						
+						
 						{{-- <div class="card-body p-20 pt-0">
 							<table id="sortTable1" class="table table-bordered table-striped">
 								<thead>

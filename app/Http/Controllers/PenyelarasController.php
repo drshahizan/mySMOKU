@@ -935,8 +935,7 @@ class PenyelarasController extends Controller
                 $uploadedDokumen3[] = $uniqueFilenameDokumen3;
 
                 // Update the uploaded documents to the database with the specified no_rujukan
-                if($existRecord)
-                {
+                if($existRecord){
                     $existRecord->update([
                         'user_id' => $user->id, // Use the arrow operator (=>) here, not the equal sign (=)
                         'institusi_id' => $institusiId,

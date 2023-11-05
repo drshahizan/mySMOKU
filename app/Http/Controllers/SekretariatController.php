@@ -618,7 +618,7 @@ class SekretariatController extends Controller
         return $pdf->stream('SuratTawaran_'.$permohonanId.'.pdf');
     }
 
-    //KEMASKINI
+    //PENYALURAN
     public function muatNaikDokumenSPPB()
     {
         $institusiPengajian = InfoIpt::all();
@@ -628,7 +628,9 @@ class SekretariatController extends Controller
 
     public function hantarDokumenSPPB(Request $request)
     {
+        $user = auth()->user();
         $institusiId = $request->input('institusi_id'); // Get the selected institution ID from the form
+        $existRecord = DokumenESP::where('institusi_id', $institusiId)->first();
         $currentYear = Carbon::now()->year;
 
         $dokumen1 = $request->file('dokumen1');
@@ -689,17 +691,30 @@ class SekretariatController extends Controller
                 $dokumen3[$key]->move('assets/dokumen/sppb_3', $uniqueFilenameDokumen3);
                 $uploadedDokumen3[] = $uniqueFilenameDokumen3;
 
-                // Save the uploaded documents to the database with the specified no_rujukan
-                $dokumenESP = new DokumenESP();
-                $dokumenESP->user_id = auth()->user()->id; // or set the user_id as needed
-                $dokumenESP->institusi_id = $institusiId;
-                $dokumenESP->no_rujukan = "{$institusiId}/{$currentYear}/1";
-                $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
-                $dokumenESP->dokumen1a = $uniqueFilenameDokumen1a;
-                $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
-                $dokumenESP->dokumen2a = $uniqueFilenameDokumen2a;
-                $dokumenESP->dokumen3 = $uniqueFilenameDokumen3;
-                $dokumenESP->save();
+                if($existRecord){
+                    $existRecord->update([
+                        'user_id' => $user->id, // Use the arrow operator (=>) here, not the equal sign (=)
+                        'institusi_id' => $institusiId,
+                        'no_rujukan' => "{$institusiId}/{$currentYear}/1",
+                        'dokumen1' => $uniqueFilenameDokumen1,
+                        'dokumen1a' => $uniqueFilenameDokumen1a,
+                        'dokumen2' => $uniqueFilenameDokumen2,
+                        'dokumen2a' => $uniqueFilenameDokumen2a,
+                        'dokumen3' => $uniqueFilenameDokumen3,
+                    ]);
+                }
+                else{
+                    $dokumenESP = new DokumenESP();
+                    $dokumenESP->user_id = auth()->user()->id;
+                    $dokumenESP->institusi_id = $institusiId;
+                    $dokumenESP->no_rujukan = "{$institusiId}/{$currentYear}/1";
+                    $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
+                    $dokumenESP->dokumen1a = $uniqueFilenameDokumen1a;
+                    $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
+                    $dokumenESP->dokumen2a = $uniqueFilenameDokumen2a;
+                    $dokumenESP->dokumen3 = $uniqueFilenameDokumen3;
+                    $dokumenESP->save();
+                }
             }
         }
 
