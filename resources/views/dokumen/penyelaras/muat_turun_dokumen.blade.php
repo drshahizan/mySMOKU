@@ -27,7 +27,7 @@
 			</li>
 			<!--end::Item-->
 			<!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">Dokumen ESP</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Borang SPPB</li>
 			<!--end::Item-->
 		</ul>
 	<!--end::Breadcrumb-->
@@ -51,35 +51,36 @@
 									<thead>
 										<tr>
 											<th class="text-center" style="width: 5%">No</th>
-											<th class="text-center" style="width: 60%">Institusi</th>
-											<th class="text-center" style="width: 20%">Tarikh Dokumen Dikemaskini</th>
-											<th class="text-center" style="width: 15%">Dokumen</th>
+											<th class="text-center" style="width: 60%">Nama Institusi Pengajian</th>
+											<th class="text-center" style="width: 20%">Tarikh Dikemaskini</th>
+											<th class="text-center" style="width: 15%">Borang SPPB</th>
 										</tr>
 									</thead>
-							
+								
 									<tbody>
 										@php
-										$i = 0;
+											$i = 0;
 										@endphp
-	
+								
 										@foreach ($dokumen as $doc)
 											@php
 												$id = $doc->institusi_id;
 												$nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $id)->value('nama_institusi');
 											@endphp
+											
 											<tr>
 												<td class="text-center" data-no="{{ $i++ }}">{{ $i }}</td>
 												<td>{{ $nama_institusi }}</td>
-												<td class="text-center">{{date('d/m/Y', strtotime($doc->updated_at))}}</td>
+												<td class="text-center">{{ date('d/m/Y', strtotime($doc->updated_at)) }}</td>
 												<td class="text-center">
-													<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $doc->dokumen) }}" class="btn btn-info btn-sm" style="width: 80%; margin: 0 auto;">
+													<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $doc->dokumen) }}" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
 														Lihat <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
 													</a>
 												</td>
 											</tr>
-											@endforeach
+										@endforeach
 									</tbody>
-								</table>
+								</table>								
 							</div>
 						</div>
 					</div>

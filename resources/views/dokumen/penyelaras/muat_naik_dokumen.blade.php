@@ -39,7 +39,6 @@
 			.file-input {
 				display: flex; 
 				align-items: center;
-				padding-right: 50px!important; 
 			}
 		</style>
 	</head>
