@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BorangSPPB;
 use App\Exports\SenaraiPendek;
 use App\Mail\KeputusanLayak;
 use App\Mail\KeputusanTidakLayak;
@@ -300,6 +301,25 @@ class SekretariatController extends Controller
         $kelulusan = $query->get();
 
         return Excel::download(new SenaraiPendek($programCode, $filters), 'PermohonanDisokong.xlsx');
+    }
+
+    public function cetakBorangSppbExcel(Request $request, $programCode)
+    {
+        $filters = $request->only(['institusi']);
+
+        $query = Permohonan::where('permohonan.status', '4')
+                            ->where('permohonan.program', $programCode);
+
+        if (isset($filters['institusi']) && !empty($filters['institusi'])) {
+            $selectedInstitusi = $filters['institusi'];
+            $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
+        }
+
+        $kelulusan = $query->get();
+
+        return Excel::download(new BorangSPPB($programCode, $filters), 'BorangSPPB.xlsx');
     }
 
     public function maklumatKelulusanPermohonan($id)
