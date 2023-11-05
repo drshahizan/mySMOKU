@@ -56,7 +56,16 @@ class BorangSPPB implements FromCollection,  WithHeadings, WithColumnWidths, Wit
 
     public function headings(): array
     {
-        return ["ID Permohonan","Nama Pemohon","No. Pendaftaran Pelajar", "Jenis Kecacatan", "Nama Kursus", "Institusi Pengajian", "Tarikh Mula Pengajian", "Tarikh Tamat Pengajian"];
+        return [
+            // Custom Rows
+            ['INSTITUSI:', strtoupper($this->filters['institusi'] ?? '')],
+            ['CAWANGAN:'],
+            ['NAMA PENERIMA:'],
+            ['BANK:'],
+            ['NO. AKAUN:'],
+            // Data Headers
+            array_map('strtoupper', ["ID Permohonan", "Nama Pemohon", "No. Pendaftaran Pelajar", "Jenis Kecacatan", "Nama Kursus", "Institusi Pengajian", "Tarikh Mula Pengajian", "Tarikh Tamat Pengajian"]),
+        ];
     }
 
     public function columnWidths(): array
@@ -83,8 +92,14 @@ class BorangSPPB implements FromCollection,  WithHeadings, WithColumnWidths, Wit
     public function map($row): array
     {
         return [
-            // Update this to match with column name in database
-            $row->no_rujukan_permohonan, 
+            // Custom Rows
+            '',
+            $this->filters['cawangan'] ?? '',
+            $this->filters['nama_penerima'] ?? '',
+            $this->filters['bank'] ?? '',
+            $this->filters['no_akaun'] ?? '',
+            // Data Rows
+            $row->no_rujukan_permohonan,
             $row->nama,
             $row->no_pendaftaran_pelajar,
             $row->kecacatan,
@@ -98,20 +113,58 @@ class BorangSPPB implements FromCollection,  WithHeadings, WithColumnWidths, Wit
     public function registerEvents(): array
     {
         return [
-            AfterSheet::class => function(AfterSheet $event) {
+            AfterSheet::class => function (AfterSheet $event) {
                 // Customize the style of the header row
-                $event->sheet->getStyle('A1:' . $event->sheet->getHighestColumn() . '1')->applyFromArray([
+                $event->sheet->getStyle('A6:' . $event->sheet->getHighestColumn() . '6')->applyFromArray([
                     'font' => [
                         'bold' => true,
                         'color' => ['rgb' => 'FFFFFF'], // Header font color 
-                        'size' => 12, // Header font size
+                        'size' => 11, // Header font size
                     ],
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                        'startColor' => ['rgb' => '808080'], // Header background color 
+                        'startColor' => ['rgb' => '808080'], // Header background color (gray)
                     ],
                 ]);
+
+                // Merge the user input cells (spanning one row and seven columns)
+                $this->mergeCells($event, 'B1:H1'); // For user input (Institusi)
+                $this->mergeCells($event, 'B2:H2'); // For user input (Cawangan)
+                $this->mergeCells($event, 'B3:H3'); // For user input (Nama Penerima)
+                $this->mergeCells($event, 'B4:H4'); // For user input (Bank)
+                $this->mergeCells($event, 'B5:H5'); // For user input (No. Akaun)
+
+                // Add borders to the custom header
+                $this->addBordersToCustomHeader($event);
+
+                // Insert a blank row as a separator
+                $event->sheet->insertNewRowBefore(6, 1);
             },
         ];
+    }
+
+    private function mergeCells(AfterSheet $event, $cellRange)
+    {
+        $event->sheet->mergeCells($cellRange);
+        
+        // Add borders to the merged cells
+        $event->sheet->getStyle($cellRange)->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                ],
+            ],
+        ]);
+    }
+
+    private function addBordersToCustomHeader(AfterSheet $event)
+    {
+        $event->sheet->getStyle('A1:H5')->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                ],
+            ],
+        ]);
     }
 }
