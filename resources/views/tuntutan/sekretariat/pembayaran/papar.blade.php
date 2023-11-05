@@ -269,13 +269,6 @@
                                         <td>:</td>
                                         <td>{{number_format($tuntutan->yuran_dibayar + $tuntutan->wang_saku_dibayar, 2)}}</td>
                                         </tr>
-                                        @if($tuntutan->catatan_dibayar!=null)
-                                            <tr>
-                                                <td>Catatan</td>
-                                                <td>:</td>
-                                                <td>{{$tuntutan->catatan_dibayar}}</td>
-                                            </tr>
-                                        @endif
                                     </table>
                                 </div>
                             @elseif($permohonan->program == "BKOKU" && $tuntutan->yuran == NULL)
@@ -315,13 +308,6 @@
                                         <td>:</td>
                                         <td>{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>
                                         </tr>
-                                        @if($tuntutan->catatan_dibayar!=null)
-                                            <tr>
-                                                <td>Catatan</td>
-                                                <td>:</td>
-                                                <td>{{$tuntutan->catatan_dibayar}}</td>
-                                            </tr>
-                                        @endif
                                     </table>
                                 </div>
                             @elseif($permohonan->program == "BKOKU" && $tuntutan->wang_saku == NULL)
@@ -371,17 +357,10 @@
                                             <td>{{number_format($tuntutan->yuran_disokong, 2)}}</td>
                                         </tr>
                                         <tr>
-                                        <td>Jumlah tuntutan yang dibayar (RM)</td>
-                                        <td>:</td>
-                                        <td>{{number_format($tuntutan->yuran_dibayar, 2)}}</td>
+                                            <td>Jumlah tuntutan yang dibayar (RM)</td>
+                                            <td>:</td>
+                                            <td>{{number_format($tuntutan->yuran_dibayar, 2)}}</td>
                                         </tr>
-                                        @if($tuntutan->catatan_dibayar!=null)
-                                            <tr>
-                                                <td>Catatan</td>
-                                                <td>:</td>
-                                                <td>{{$tuntutan->catatan_dibayar}}</td>
-                                            </tr>
-                                        @endif
                                     </table>
                                 </div>
                             @elseif($permohonan->program == "PPK")
@@ -421,13 +400,6 @@
                                         <td>:</td>
                                         <td>{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>
                                         </tr>
-                                        @if($tuntutan->catatan_dibayar!=null)
-                                            <tr>
-                                                <td>Catatan</td>
-                                                <td>:</td>
-                                                <td>{{$tuntutan->catatan_dibayar}}</td>
-                                            </tr>
-                                        @endif
                                     </table>
                                 </div>
                             @endif
