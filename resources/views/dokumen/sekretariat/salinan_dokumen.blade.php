@@ -1,41 +1,82 @@
-<x-default-layout>
-  <body>
-    <br>
-    <h3>Salinan Dokumen SPPB</h3>
-    <br>
-    <!--begin::Accordion-->
-    <div class="accordion" id="accordionPanelsStayOpenExample">
-        @php $i=1; $n=1;@endphp
-        @foreach($dokumen as $item)
-            @php
-              $dokumen_path = "/assets/dokumen/permohonan/".$item['dokumen'];
-              if ($item['id_dokumen'] == $n){
-                $dokumen_name = "SPPB" . $n;
-                $n++;
-              }
-
-              $i++;
-            @endphp
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-heading{{$i}}">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{$i}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{$i}}">
-                            <b style="color: black!important">{{$dokumen_name}}</b>
-                        </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading{{$i}}">
-                        <div class="accordion-body" style="text-align: center">
-                            <p>Catatan: {{$item['catatan']}}</p>
-                            <embed src="{{$dokumen_path}}" width="90%" height="650px"/>
-                        </div>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {!! printHtmlAttributes('html') !!}>
+<!--begin::Head-->
+<head>
+    <title>{{ config('app.name', 'SistemBKOKU') }}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:type" content="article"/>
+    <link rel="stylesheet" href="/assets/css/style.bundle.css">
+    <link rel="stylesheet" href="/assets/css/saringan.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+</head>
+<style>
+    .nav, h3{
+        margin: 10px!important;
+    }
+    body{
+        margin: 10px;
+    }
+    .border{
+        border: 1px solid black!important;
+    }
+</style>
+<body>
+    <h3>Muat Turun Borang SPPB</h3>
+    @php
+        $i=1;
+    @endphp
+    <div class="border">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            @foreach($dokumen as $doc)
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="doc{{$i}}-tab" data-toggle="tab" data-target="#doc{{$i}}" type="button" role="tab" aria-controls="doc{{$i}}" aria-selected="true">
+                        SPPB {{$i}}
+                    </button>
+                </li>
+                @php
+                    $i++;
+                @endphp
+            @endforeach
+        </ul>
+    @php
+        $n=1;
+    @endphp
+        <div class="tab-content" id="myTabContent">
+            @foreach($dokumen as $doc)
+                <div class="tab-pane fadeshow" id="doc{{$n}}" role="tabpanel" aria-labelledby="doc{{$n}}-tab">
+                    <div style="text-align: center">
+                        <embed src="{{ asset('assets/dokumen/esp/dokumen1/' . $doc->dokumen1) }}" width="90%" height="500px" />
+                        <embed src="{{ asset('assets/dokumen/esp/dokumen1a/' . $doc->dokumen1a) }}" width="90%" height="500px" />
+                        <embed src="{{ asset('assets/dokumen/esp/dokumen2/' . $doc->dokumen2) }}" width="90%" height="500px" />
+                        <embed src="{{ asset('assets/dokumen/esp/dokumen2a/' . $doc->dokumen2a) }}" width="90%" height="500px" />
+                        <embed src="{{ asset('assets/dokumen/esp/dokumen3/' . $doc->dokumen3) }}" width="90%" height="500px" />
                     </div>
                 </div>
+                @php
+                    $n++;
+                @endphp
             @endforeach
+        </div>
     </div>
-    <!--end::Accordion-->
-  </body>
-</x-default-layout>
+</body>
+</html>
 
+<script>
+      if (navigator.plugins && navigator.plugins.length > 0) {
+        // There are plugins installed, including PDF viewer plugins.
+        console.log('PDF viewer plugin detected.');
+    } else {
+        // No PDF viewer plugin detected.
+        console.log('No PDF viewer plugin detected.');
+    }
 
-
-
-
+    $('.nav').find('.nav-link:first').addClass('active');
+    $('.tab-content').find('.tab-pane:first').addClass('active');
+</script>
