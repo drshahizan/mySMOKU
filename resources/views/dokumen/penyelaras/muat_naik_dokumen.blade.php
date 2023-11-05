@@ -135,12 +135,12 @@
 													<div class="d-flex">
 														<div class="file-input">
 															<input type="file" name="dokumen1[]" required/>
-															@if(isset($dokumen->dokumen1) && !empty($dokumen->dokumen1))
-																<a href="{{ asset('assets/dokumen/sppb_1/' . $dokumen->dokumen1) }}" target="_blank">{{ $dokumen->dokumen1 }}</a>
+															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen1))
+																<a href="{{ asset('assets/dokumen/sppb_1/' . $dokumen->first()->dokumen1) }}" target="_blank">{{ $dokumen->first()->dokumen1 }}</a>
 															@endif
 														</div>
 													</div>
-												</div>																						
+												</div>                                                                                     
 											</td>
 										</tr>
 
@@ -153,12 +153,12 @@
 													<div class="d-flex">
 														<div class="file-input">
 															<input type="file" name="dokumen1a[]" required/>
-															@if(isset($dokumen->dokumen1a) && !empty($dokumen->dokumen1a))
-																<a href="{{ asset('assets/dokumen/sppb_1a/' . $dokumen->dokumen1a) }}" target="_blank">{{ $dokumen->dokumen1a }}</a>
+															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen1a))
+																<a href="{{ asset('assets/dokumen/sppb_1a/' . $dokumen->first()->dokumen1a) }}" target="_blank">{{ $dokumen->first()->dokumen1a }}</a>
 															@endif
 														</div>
 													</div>
-												</div>																						
+												</div>                                                                                     
 											</td>
 										</tr>
 
@@ -171,8 +171,8 @@
 													<div class="d-flex">
 														<div class="file-input">
 															<input type="file" name="dokumen2[]" required/>
-															@if(isset($dokumen->dokumen2) && !empty($dokumen->dokumen2))
-																<a href="{{ asset('assets/dokumen/sppb_2/' . $dokumen->dokumen2) }}" target="_blank">{{ $dokumen->dokumen2 }}</a>
+															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen2))
+																<a href="{{ asset('assets/dokumen/sppb_2/' . $dokumen->first()->dokumen2) }}" target="_blank">{{ $dokumen->first()->dokumen2 }}</a>
 															@endif
 														</div>
 													</div>
@@ -189,8 +189,8 @@
 													<div class="d-flex">
 														<div class="file-input">
 															<input type="file" name="dokumen2a[]" required/>
-															@if(isset($dokumen->dokumen2a) && !empty($dokumen->dokumen2a))
-																<a href="{{ asset('assets/dokumen/sppb_2a/' . $dokumen->dokumen2a) }}" target="_blank">{{ $dokumen->dokumen2a }}</a>
+															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen2a))
+																<a href="{{ asset('assets/dokumen/sppb_2a/' . $dokumen->first()->dokumen2a) }}" target="_blank">{{ $dokumen->first()->dokumen2a }}</a>
 															@endif
 														</div>
 													</div>
@@ -207,8 +207,8 @@
 													<div class="d-flex">
 														<div class="file-input">
 															<input type="file" name="dokumen3[]" required/>
-															@if(isset($dokumen->dokumen3) && !empty($dokumen->dokumen3))
-																<a href="{{ asset('assets/dokumen/sppb_3/' . $dokumen->dokumen3) }}" target="_blank">{{ $dokumen->dokumen3 }}</a>
+															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen3))
+																<a href="{{ asset('assets/dokumen/sppb_3/' . $dokumen->first()->dokumen3) }}" target="_blank">{{ $dokumen->first()->dokumen3 }}</a>
 															@endif
 														</div>
 													</div>

@@ -873,7 +873,12 @@ class PenyelarasController extends Controller
     {   
         $user = auth()->user();
         $institusiId = $user->id_institusi;
-        $dokumen = DokumenESP::where('institusi_id', $institusiId)->first();
+        
+        // Get documents for the user's 'institusi_id' and 'no_rujukan' ending in '/1'
+        $dokumen = DokumenESP::where('institusi_id', $institusiId)
+            ->where('no_rujukan', 'like', '%/2')
+            ->get();
+
         return view('dokumen.penyelaras.muat_naik_dokumen', compact('institusiId','dokumen'));
     }
 
