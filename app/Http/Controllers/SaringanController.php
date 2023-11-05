@@ -56,6 +56,29 @@ class SaringanController extends Controller
         return view('permohonan.sekretariat.saringan.maklumat_permohonan',compact('permohonan','pelajar','akademik','smoku'));
     }
 
+    public function maklumatPermohonanDiperbaharui($id)
+    {
+        Permohonan::where('id', $id)
+            ->update([
+                'status'   =>  3,
+            ]);
+
+        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+
+        $status_rekod = new SejarahPermohonan([
+            'smoku_id'      =>  $smoku_id,
+            'permohonan_id' =>  $id,
+            'status'        =>  3,
+        ]);
+        $status_rekod->save();
+
+        $permohonan = Permohonan::where('id', $id)->first();
+        $pelajar = ButiranPelajar::where('smoku_id', $smoku_id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        return view('permohonan.sekretariat.saringan.maklumat_permohonan_diperbaharui',compact('permohonan','pelajar','akademik','smoku'));
+    }
+
     public function maklumatProfilDiri($id)
     {
         $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
@@ -201,6 +224,78 @@ class SaringanController extends Controller
         }
     }
 
+    public function saringPermohonanDiperbaharui(Request $request,$id)
+    {
+        $permohonan = Permohonan::where('id', $id)->first();
+        $smoku_emel =Smoku::where('id', $permohonan->smoku_id)->value('email');
+        if($request->get('maklumat_akademik')=="lengkap"){
+
+            $permohonan = Permohonan::where('id', $id)->first();
+            $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+            $smoku = Smoku::where('id', $smoku_id)->first();
+            $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+            return view('permohonan.sekretariat.saringan.maklumat_tuntutan',compact('permohonan','smoku','akademik'));
+        }
+        else{
+            $catatan[]="";
+            $profil="";
+            $akademik = "";
+            $salinan="";
+            $n=0;
+
+            if($request->get('maklumat_akademik')=="tak_lengkap"){
+                $checked = $request->input('catatan_maklumat_akademik');
+                for($i=0; $i < count($checked); $i++){
+                    $catatan[$n]=$checked[$i];
+                    $akademik = $akademik . $checked[$i] . ",";
+                    $n++;
+                }
+            }
+            $program = Permohonan::where('id', $id)->value('program');
+
+            if($program=="BKOKU"){
+                $emel = EmelKemaskini::where('emel_id',1)->first();
+                Mail::to($smoku_emel)->send(new SaringanMail($catatan,$emel));
+            }
+            elseif($program=="PPK"){
+                $emel = EmelKemaskini::where('emel_id',7)->first();
+                Mail::to($smoku_emel)->send(new SaringanMail($catatan,$emel));
+            }
+
+            $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
+
+            $catatan = new Saringan([
+                'permohonan_id'            =>  $id,
+                'no_rujukan_saringan'      =>  $no_rujukan_permohonan,
+                'catatan_akademik'         =>  $akademik,
+            ]);
+            $catatan->save();
+
+            $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+            Permohonan::where('id', $id)
+                ->update([
+                    'status'   =>  5,
+                ]);
+
+            $status_rekod = new SejarahPermohonan([
+                'smoku_id'      =>  $smoku_id,
+                'permohonan_id' =>  $id,
+                'status'        =>  5,
+            ]);
+            $status_rekod->save();
+
+            $permohonan = Permohonan::where('status', '2')
+                ->orWhere('status', '=','3')
+                ->orWhere('status', '=','4')
+                ->orWhere('status', '=','5')
+                ->get();
+
+            $status_kod = 2;
+            $status = "Permohonan ".$no_rujukan_permohonan." telah dikembalikan.";
+            return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status'));
+        }
+    }
+
     public function paparPermohonan($id){
         $permohonan = Permohonan::where('id', $id)->first();
         $smoku_id = $permohonan->smoku_id;
@@ -208,6 +303,15 @@ class SaringanController extends Controller
         $catatan = Saringan::where('permohonan_id', $id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
         return view('permohonan.sekretariat.saringan.papar_permohonan',compact('permohonan','catatan','smoku','akademik'));
+    }
+
+    public function paparPermohonanDiperbaharui($id){
+        $permohonan = Permohonan::where('id', $id)->first();
+        $smoku_id = $permohonan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $catatan = Saringan::where('permohonan_id', $id)->first();
+        $akademik = Akademik::where('smoku_id', $smoku_id)->first();
+        return view('permohonan.sekretariat.saringan.papar_permohonan_diperbaharui',compact('permohonan','catatan','smoku','akademik'));
     }
 
     public function paparTuntutan($id){

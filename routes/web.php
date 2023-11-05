@@ -46,7 +46,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
     Route::get('/test/api', [MaklumatESPController::class, 'test']);
     Route::get('/requery', [MaklumatESPController::class, 'testrequery']);
 
-    
+
     Route::get('/statusESP/dibayar/tuntutan', [MaklumatESPController::class, 'statusDibayarTuntutan']);
 
     Route::get('/maklumat/MQR', [MaklumatKursusController::class, 'index']);
@@ -130,13 +130,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Permohonan - Sekretariat - Saringan
     Route::get('permohonan/sekretariat/saringan/senarai-permohonan', [SaringanController::class, 'senaraiPermohonan']);
     Route::get('permohonan/sekretariat/saringan/maklumat-permohonan/{id}', [SaringanController::class, 'maklumatPermohonan'])->name('maklumat.permohonan.id');
+    Route::get('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/{id}', [SaringanController::class, 'maklumatPermohonanDiperbaharui'])->name('maklumat.permohonan.diperbaharui.id');
     Route::get('permohonan/sekretariat/saringan/maklumat-profil-diri/{id}', [SaringanController::class, 'maklumatProfilDiri'])->name('maklumat.profil.diri.id');
     Route::get('permohonan/sekretariat/saringan/maklumat-akademik/{id}', [SaringanController::class, 'maklumatAkademik'])->name('maklumat.akademik.id');
     Route::get('permohonan/sekretariat/saringan/maklumat-tuntutan/{id}', [SaringanController::class, 'maklumatTuntutan'])->name('maklumat.tuntutan.id');
     Route::post('permohonan/sekretariat/saringan/saring-tuntutan/{id}', [SaringanController::class, 'saringTuntutan'])->name('saring.tuntutan.id');
     Route::get('permohonan/sekretariat/saringan/salinan-dokumen/{id}', [SaringanController::class, 'salinanDokumen'])->name('salinan.dokumen.id');
-    Route::post('permohonan/sekretariat/saringan/saring-permohonan/{id}', [SaringanController::class, 'saringPermohonan'])->name('saring.permohonan.id');;
+    Route::post('permohonan/sekretariat/saringan/saring-permohonan/{id}', [SaringanController::class, 'saringPermohonan'])->name('saring.permohonan.id');
+    Route::post('permohonan/sekretariat/saringan/saring-permohonan-diperbaharui/{id}', [SaringanController::class, 'saringPermohonanDiperbaharui'])->name('saring.permohonan.diperbaharui.id');;
     Route::get('permohonan/sekretariat/saringan/papar-permohonan/{id}', [SaringanController::class, 'paparPermohonan'])->name('papar.permohonan.id');
+    Route::get('permohonan/sekretariat/saringan/papar-permohonan-diperbaharui/{id}', [SaringanController::class, 'paparPermohonanDiperbaharui'])->name('papar.permohonan.diperbaharui.id');
     Route::get('permohonan/sekretariat/saringan/papar-tuntutan/{id}', [SaringanController::class, 'paparTuntutan'])->name('papar.tuntutan.id');
     Route::get('permohonan/sekretariat/saringan/kemaskini-saringan/{id}', [SaringanController::class, 'kemaskiniSaringanP'])->name('kemaskini.saringan.permohonan.id');
     Route::post('permohonan/sekretariat/saringan/hantar-saringan/{id}', [SaringanController::class, 'hantarSaringanP'])->name('hantar.saringan.permohonan.id');
