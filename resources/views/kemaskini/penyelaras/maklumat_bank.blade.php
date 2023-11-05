@@ -29,7 +29,6 @@
         .vertical-top{
             vertical-align: top!important;
         }
-        /* CSS for the file input container */
         .file-input {
             display: flex; 
             align-items: center;

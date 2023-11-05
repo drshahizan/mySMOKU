@@ -14,18 +14,32 @@
 				color: white!important;
 			}
 
-			#file-input-container {
-				display: flex;
-				flex-direction: column;
-				gap: 5px;
+			.maklumat{
+				width: 100%!important;
+				border: none!important;
+			}
+			.w-13{
+				width: 22% !important;
+			}
+			.w-3{
+				width: 3% !important;
+			}
+			.maklumat td{
+				padding: 5px!important;
+				border: none!important;
+			}
+			.white{
+				color: white!important;
+			}
+	
+			.vertical-top{
+				vertical-align: top!important;
 			}
 
 			.file-input {
-				display: flex;
-			}
-
-			.btn {
-				margin-left: 300px;
+				display: flex; 
+				align-items: center;
+				padding-right: 50px!important; 
 			}
 		</style>
 	</head>
@@ -46,7 +60,7 @@
 			</li>
 			<!--end::Item-->
 			<!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">Dokumen ESP</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Borang SPPB</li>
 			<!--end::Item-->
 		</ul>
 	<!--end::Breadcrumb-->
@@ -57,7 +71,7 @@
 	<!--begin::Content-->
 	<div id="kt_app_content" class="app-content flex-column-fluid">
 		<!--begin::Content container-->
-		<div id="kt_app_content_container" class="app-container container-xl" style="width:90%">
+		<div id="kt_app_content_container" class="app-container container-xl">
 			<!--begin::Layout-->
 			<div class="d-flex flex-column flex-lg-row">
 				<!--begin::Content-->
@@ -66,8 +80,7 @@
 					<div class="card">
 						<!--begin::Card body 1-->
 						<div class="card-body pt-10 p-20">
-							<!--begin::Form-->
-							<form action="{{ route('sekretariat.hantar.SPPB') }}" method="post" enctype="multipart/form-data">
+							<form action="{{ route('penyelaras.kemaskini.SPPB') }}" method="post" enctype="multipart/form-data">
 								@csrf
 								<div class="d-flex flex-column align-items-start flex-xl-row">
 									<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4"
@@ -96,38 +109,109 @@
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th style="width: 25%">Item</th>
-											<th style="width: 75%">Pilih</th>
+											<th style="width: 40%">Item</th>
+											<th style="width: 60%">Pilih</th>
 										</tr>
 									</thead>
+
+									@php
+										$nama_uni = DB::table('bk_info_institusi')->where('id_institusi', $institusiId)->value('nama_institusi');
+									@endphp
 
 									<tbody>
 										{{-- NAMA INSTITUSI --}}
 										<tr>
-											<td>Nama Institusi</td>
+											<td>Nama Institusi Pengajian</td>
 											<td>
-												<select name="institusi_id" style="padding: 5px;">
-													<option value="">Pilih Institusi Pengajian</option>
-													@foreach ($institusiPengajian as $institusi)
-														<option value="{{ $institusi->id_institusi }}" {{ old('institusi_id') == $institusi->id_institusi ? 'selected' : '' }}>
-															{{ $institusi->nama_institusi }}
-														</option>
-													@endforeach
-												</select>												
+												<input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{$nama_uni}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>												
 											</td>
 										</tr>
 
-										{{-- DOKUMEN SPPB --}}
+										{{-- DOKUMEN SPPB 1 --}}
 										<tr>
-											<td>Dokumen SPBB</td>
+											<td>Borang SPBB 1 (Permohonan Salur Pelajar Sedia Ada)</td>
 											<td>
 												<div id="file-input-container">
 													<!-- File input fields for SPPB1 -->
 													<div class="d-flex">
 														<div class="file-input">
-															<input type="file" name="dokumen1[]" required multiple />
+															<input type="file" name="dokumen1[]" required/>
+															@if(isset($dokumen->dokumen1) && !empty($dokumen->dokumen1))
+																<a href="{{ asset('assets/dokumen/sppb_1/' . $dokumen->dokumen1) }}" target="_blank">{{ $dokumen->dokumen1 }}</a>
+															@endif
 														</div>
-														<button id="add-file-input" class="btn btn-warning btn-sm" style="font-size: 12px; padding: 4px 10px;">+</button>
+													</div>
+												</div>																						
+											</td>
+										</tr>
+
+										{{-- DOKUMEN SPPB 1a --}}
+										<tr>
+											<td>Borang SPBB 1a (Permohonan Salur Pelajar Baharu)</td>
+											<td>
+												<div id="file-input-container">
+													<!-- File input fields for SPPB1a -->
+													<div class="d-flex">
+														<div class="file-input">
+															<input type="file" name="dokumen1a[]" required/>
+															@if(isset($dokumen->dokumen1a) && !empty($dokumen->dokumen1a))
+																<a href="{{ asset('assets/dokumen/sppb_1a/' . $dokumen->dokumen1a) }}" target="_blank">{{ $dokumen->dokumen1a }}</a>
+															@endif
+														</div>
+													</div>
+												</div>																						
+											</td>
+										</tr>
+
+										{{-- DOKUMEN SPPB 2 --}}
+										<tr>
+											<td>Borang SPBB 2 (Laporan Bayaran)</td>
+											<td>
+												<div id="file-input-container">
+													<!-- File input fields for SPPB2 -->
+													<div class="d-flex">
+														<div class="file-input">
+															<input type="file" name="dokumen2[]" required/>
+															@if(isset($dokumen->dokumen2) && !empty($dokumen->dokumen2))
+																<a href="{{ asset('assets/dokumen/sppb_2/' . $dokumen->dokumen2) }}" target="_blank">{{ $dokumen->dokumen2 }}</a>
+															@endif
+														</div>
+													</div>
+												</div>																						
+											</td>
+										</tr>
+
+										{{-- DOKUMEN SPPB 2a --}}
+										<tr>
+											<td>Borang SPBB 2a (Laporan Tuntutan)</td>
+											<td>
+												<div id="file-input-container">
+													<!-- File input fields for SPPB2a -->
+													<div class="d-flex">
+														<div class="file-input">
+															<input type="file" name="dokumen2a[]" required/>
+															@if(isset($dokumen->dokumen2a) && !empty($dokumen->dokumen2a))
+																<a href="{{ asset('assets/dokumen/sppb_2a/' . $dokumen->dokumen2a) }}" target="_blank">{{ $dokumen->dokumen2a }}</a>
+															@endif
+														</div>
+													</div>
+												</div>																						
+											</td>
+										</tr>
+
+										{{-- DOKUMEN SPPB 3 --}}
+										<tr>
+											<td>Borang SPBB 3 (Penyata Terimaan)</td>
+											<td>
+												<div id="file-input-container">
+													<!-- File input fields for SPPB3 -->
+													<div class="d-flex">
+														<div class="file-input">
+															<input type="file" name="dokumen3[]" required/>
+															@if(isset($dokumen->dokumen3) && !empty($dokumen->dokumen3))
+																<a href="{{ asset('assets/dokumen/sppb_3/' . $dokumen->dokumen3) }}" target="_blank">{{ $dokumen->dokumen3 }}</a>
+															@endif
+														</div>
 													</div>
 												</div>																						
 											</td>
@@ -160,42 +244,6 @@
 							</form>
 						</div>
 						<!--end::Card body 1-->
-
-						<!--begin::Card body 2-->
-						<div class="card-body p-20 pt-0">
-							<table id="sortTable1" class="table table-bordered table-striped">
-								<thead>
-									<tr>
-										<th class="text-center" style="width: 5%">No</th>
-										<th class="text-center" style="width: 70%">Institusi</th>
-										<th class="text-center" style="width: 25%">Dokumen</th>
-									</tr>
-								</thead>
-						
-								<tbody>
-									@php
-									$i = 0;
-									@endphp
-
-									@foreach ($dokumen as $doc)
-										@php
-											$id = $doc->institusi_id;
-											$nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $id)->value('nama_institusi');
-										@endphp
-										<tr>
-											<td class="text-center" data-no="{{ $i++ }}">{{ $i }}</td>
-											<td>{{ $nama_institusi }}</td>
-											<td class="text-center">
-												<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $doc->dokumen) }}" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
-													Lihat <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
-												</a>
-											</td>
-										</tr>
-									@endforeach
-								</tbody>
-							</table>
-						</div>
-						<!--end::Card body 2-->
 					</div>
 					<!--end::Card-->
 				</div>
