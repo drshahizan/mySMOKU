@@ -461,7 +461,7 @@ $(document).ready(function() {
         const time = {{ time() }};
         // Generate the token asynchronously
         const token = await hash('SHA-256', secretKey + time);
-        console.log("Token:", token);
+        // console.log("Token:", token);
 
         // Construct the JSON array with the token
         const tokenArray = [{ "token": token }];
@@ -469,7 +469,7 @@ $(document).ready(function() {
         // Set the JSON array in the textarea
         const tokenTextarea = document.getElementById('token');
         tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
-        console.log("Token JSON:", tokenTextarea.value);
+        // console.log("Token JSON:", tokenTextarea.value);
 
         const form = document.getElementById('hantar_maklumat');
         const data = new FormData(form);
