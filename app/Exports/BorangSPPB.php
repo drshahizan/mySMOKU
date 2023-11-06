@@ -29,10 +29,17 @@ class BorangSPPB implements FromCollection,  WithHeadings, WithColumnWidths, Wit
         $senarai_pendek = DB::table('permohonan as a')
             ->where('a.status', 4)
             ->where('a.program', $this->programCode);
-            
+
         if (isset($this->filters['institusi'])) {
             $senarai_pendek->where('c.id_institusi', $this->filters['institusi']);
         }
+
+        // Add a condition to check if jenis_institusi is 'UA'
+        $senarai_pendek->join('smoku_akademik as b', 'b.smoku_id', '=', 'a.smoku_id')
+            ->join('bk_info_institusi as c', 'c.id_institusi', '=', 'b.id_institusi')
+            ->join('smoku as d', 'd.id', '=', 'a.smoku_id')
+            ->join('bk_jenis_oku as e', 'e.kod_oku', '=', 'd.kategori')
+            ->where('c.jenis_institusi', 'UA');
 
         $senarai_pendek = $senarai_pendek
             ->select(
@@ -45,10 +52,6 @@ class BorangSPPB implements FromCollection,  WithHeadings, WithColumnWidths, Wit
                 'b.tarikh_mula',
                 'b.tarikh_tamat'
             )
-            ->join('smoku_akademik as b', 'b.smoku_id', '=', 'a.smoku_id')
-            ->join('bk_info_institusi as c', 'c.id_institusi', '=', 'b.id_institusi')
-            ->join('smoku as d', 'd.id', '=', 'a.smoku_id')
-            ->join('bk_jenis_oku as e', 'e.kod_oku', '=', 'd.kategori')
             ->get();
 
         return collect($senarai_pendek);

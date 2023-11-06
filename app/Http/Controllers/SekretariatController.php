@@ -323,25 +323,6 @@ class SekretariatController extends Controller
         return Excel::download(new BorangSPPB($programCode, $filters), 'Borang Permohonan Peruntukan BKOKU.xlsx');
     }
 
-    // public function cetakBorangSppbExcel(Request $request, $programCode)
-    // {
-    //     $filters = $request->only(['institusi']);
-
-    //     $query = Permohonan::where('permohonan.status', '4')
-    //                         ->where('permohonan.program', $programCode);
-
-    //     if (isset($filters['institusi']) && !empty($filters['institusi'])) {
-    //         $selectedInstitusi = $filters['institusi'];
-    //         $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
-    //             ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
-    //             ->where('smoku_akademik.id_institusi', $selectedInstitusi);
-    //     }
-
-    //     $kelulusan = $query->get();
-
-    //     return Excel::download(new BorangSPPB($programCode, $filters), 'Borang Permohonan Peruntukan.xlsx');
-    // }
-
     public function maklumatKelulusanPermohonan($id)
     {
         $permohonan = Permohonan::where('id', $id)->first();
