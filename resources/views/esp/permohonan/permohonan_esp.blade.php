@@ -443,7 +443,7 @@ $(document).ready(function() {
     var data = new FormData(form);
 
     // Send the form data using AJAX
-    fetch('https://espbstg.mohe.gov.my/api/studentsInfo.php', {
+    fetch('http://espbstg.mohe.gov.my/api/studentsInfo.php', {
         method: 'POST',
         body: data
     })
