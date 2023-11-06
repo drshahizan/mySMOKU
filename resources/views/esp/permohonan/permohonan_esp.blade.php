@@ -451,6 +451,7 @@ $(document).ready(function() {
       .then(response => response.json())
       .then(data => {
           console.log(data); // Log the API response to the console
+          alert ('Data berjaya di hantar ke ESP');
       })
       .catch(error => {
           console.error('API Request failed:', error);
