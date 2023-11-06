@@ -319,7 +319,7 @@ class SekretariatController extends Controller
 
         $kelulusan = $query->get();
 
-        return Excel::download(new BorangSPPB($programCode, $filters), 'BorangSPPB.xlsx');
+        return Excel::download(new BorangSPPB($programCode, $filters), 'Borang Permohonan Peruntukan BKOKU.xlsx');
     }
 
     public function maklumatKelulusanPermohonan($id)
