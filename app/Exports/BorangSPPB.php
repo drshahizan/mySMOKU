@@ -92,18 +92,16 @@ class BorangSPPB implements FromCollection,  WithHeadings, WithColumnWidths, Wit
     public function map($row): array
     {
         return [
-            // Data Rows
-            $row->no_rujukan_permohonan,
-            $row->nama,
-            $row->no_pendaftaran_pelajar,
-            $row->kecacatan,
-            $row->nama_kursus,
-            $row->nama_institusi,
-            \Carbon\Carbon::parse($row->tarikh_mula)->format('d/m/Y'),
-            \Carbon\Carbon::parse($row->tarikh_tamat)->format('d/m/Y'),
+            'ID Permohonan' => $row->no_rujukan_permohonan,
+            'Nama Pemohon' => mb_convert_case($row->nama, MB_CASE_TITLE, 'UTF-8'),
+            'No. Pendaftaran Pelajar' => strtoupper($row->no_pendaftaran_pelajar),
+            'Jenis Kecacatan' => mb_convert_case($row->kecacatan, MB_CASE_TITLE, 'UTF-8'),
+            'Nama Kursus' => $row->nama_kursus,
+            'Institusi Pengajian' => $row->nama_institusi,
+            'Tarikh Mula Pengajian' => \Carbon\Carbon::parse($row->tarikh_mula)->format('d/m/Y'),
+            'Tarikh Tamat Pengajian' => \Carbon\Carbon::parse($row->tarikh_tamat)->format('d/m/Y'),
         ];
     }
-
 
     public function registerEvents(): array
     {

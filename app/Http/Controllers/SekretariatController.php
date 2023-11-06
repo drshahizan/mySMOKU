@@ -308,19 +308,39 @@ class SekretariatController extends Controller
         $filters = $request->only(['institusi']);
 
         $query = Permohonan::where('permohonan.status', '4')
-                            ->where('permohonan.program', $programCode);
+            ->where('permohonan.program', $programCode);
 
-        if (isset($filters['institusi']) && !empty($filters['institusi'])) {
-            $selectedInstitusi = $filters['institusi'];
-            $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
-                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
-                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
-        }
+        // Join the necessary tables to access jenis_institusi
+        $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+              ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+              ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi');
+
+        // Add a condition to check if jenis_institusi is 'UA'
+        $query->where('bk_info_institusi.jenis_institusi', 'UA');
 
         $kelulusan = $query->get();
 
         return Excel::download(new BorangSPPB($programCode, $filters), 'Borang Permohonan Peruntukan BKOKU.xlsx');
     }
+
+    // public function cetakBorangSppbExcel(Request $request, $programCode)
+    // {
+    //     $filters = $request->only(['institusi']);
+
+    //     $query = Permohonan::where('permohonan.status', '4')
+    //                         ->where('permohonan.program', $programCode);
+
+    //     if (isset($filters['institusi']) && !empty($filters['institusi'])) {
+    //         $selectedInstitusi = $filters['institusi'];
+    //         $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+    //             ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+    //             ->where('smoku_akademik.id_institusi', $selectedInstitusi);
+    //     }
+
+    //     $kelulusan = $query->get();
+
+    //     return Excel::download(new BorangSPPB($programCode, $filters), 'Borang Permohonan Peruntukan.xlsx');
+    // }
 
     public function maklumatKelulusanPermohonan($id)
     {
