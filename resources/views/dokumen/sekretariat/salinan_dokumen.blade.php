@@ -29,40 +29,67 @@
 </style>
 <body>
     <h3>Muat Turun Borang SPPB</h3>
-    @php
-        $i=1;
-    @endphp
+    
     <div class="border">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-            @foreach($dokumen as $doc)
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="doc{{$i}}-tab" data-toggle="tab" data-target="#doc{{$i}}" type="button" role="tab" aria-controls="doc{{$i}}" aria-selected="true">
-                        SPPB {{$i}}
-                    </button>
-                </li>
-                @php
-                    $i++;
-                @endphp
-            @endforeach
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="dokumen1-tab" data-toggle="tab" data-target="#dokumen1" type="button" role="tab" aria-controls="dokumen1" aria-selected="true">
+                    SPPB 1
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="dokumen1a-tab" data-toggle="tab" data-target="#dokumen1a" type="button" role="tab" aria-controls="dokumen1a" aria-selected="true">
+                    SPPB 1a
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="dokumen2-tab" data-toggle="tab" data-target="#dokumen2" type="button" role="tab" aria-controls="dokumen2" aria-selected="true">
+                    SPPB 2
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="dokumen2a-tab" data-toggle="tab" data-target="#dokumen2a" type="button" role="tab" aria-controls="dokumen2a" aria-selected="true">
+                    SPPB 2a
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="dokumen3-tab" data-toggle="tab" data-target="#dokumen3" type="button" role="tab" aria-controls="dokumen3" aria-selected="true">
+                    SPPB 3
+                </button>
+            </li>  
         </ul>
-    @php
-        $n=1;
-    @endphp
+    
         <div class="tab-content" id="myTabContent">
-            @foreach($dokumen as $doc)
-                <div class="tab-pane fadeshow" id="doc{{$n}}" role="tabpanel" aria-labelledby="doc{{$n}}-tab">
-                    <div style="text-align: center">
-                        <embed src="{{ asset('assets/dokumen/esp/dokumen1/' . $doc->dokumen1) }}" width="90%" height="500px" />
-                        <embed src="{{ asset('assets/dokumen/esp/dokumen1a/' . $doc->dokumen1a) }}" width="90%" height="500px" />
-                        <embed src="{{ asset('assets/dokumen/esp/dokumen2/' . $doc->dokumen2) }}" width="90%" height="500px" />
-                        <embed src="{{ asset('assets/dokumen/esp/dokumen2a/' . $doc->dokumen2a) }}" width="90%" height="500px" />
-                        <embed src="{{ asset('assets/dokumen/esp/dokumen3/' . $doc->dokumen3) }}" width="90%" height="500px" />
-                    </div>
+            <div class="tab-pane fadeshow" id="dokumen1" role="tabpanel" aria-labelledby="dokumen1-tab">
+                <div style="text-align: center">
+                    <embed src="/assets/dokumen/sppb_1/{{$dokumen->dokumen1}}#zoom=90" width="70%" height="605px"/>
+                    {{-- <embed src="{{ asset('assets/dokumen/esp/dokumen1/' . $dokumen->dokumen1) }}" width="90%" height="500px" /> --}}
                 </div>
-                @php
-                    $n++;
-                @endphp
-            @endforeach
+            </div>
+            <div class="tab-pane fadeshow" id="dokumen1a" role="tabpanel" aria-labelledby="dokumen1a-tab">
+                <div style="text-align: center">
+                    <embed src="/assets/dokumen/sppb_1a/{{$dokumen->dokumen1a}}#zoom=90" width="70%" height="605px"/>
+                    {{-- <embed src="{{ asset('assets/dokumen/esp/dokumen1a' . $dokumen->dokumen1a) }}" width="90%" height="500px" /> --}}
+                </div>
+            </div>
+            <div class="tab-pane fadeshow" id="dokumen2" role="tabpanel" aria-labelledby="dokumen2-tab">
+                <div style="text-align: center">
+                    <embed src="/assets/dokumen/sppb_2/{{$dokumen->dokumen2}}#zoom=90" width="70%" height="605px"/>
+                    {{-- <embed src="{{ asset('assets/dokumen/esp/dokumen2' . $dokumen->dokumen2) }}" width="90%" height="500px" /> --}}
+                </div>
+            </div>
+            <div class="tab-pane fadeshow" id="dokumen2a" role="tabpanel" aria-labelledby="dokumen2a-tab">
+                <div style="text-align: center">
+                    <embed src="/assets/dokumen/sppb_2a/{{$dokumen->dokumen2a}}#zoom=90" width="70%" height="605px"/>
+                    {{-- <embed src="{{ asset('assets/dokumen/esp/dokumen2a' . $dokumen->dokumen2a) }}" width="90%" height="500px" /> --}}
+                </div>
+            </div>
+            <div class="tab-pane fadeshow" id="dokumen3" role="tabpanel" aria-labelledby="dokumen3-tab">
+                <div style="text-align: center">
+                    <embed src="/assets/dokumen/sppb_3/{{$dokumen->dokumen3}}#zoom=90" width="70%" height="605px"/>
+                    {{-- <embed src="{{ asset('assets/dokumen/esp/dokumen3' . $dokumen->dokumen3) }}" width="90%" height="500px" /> --}}
+                </div>
+            </div>
         </div>
     </div>
 </body>

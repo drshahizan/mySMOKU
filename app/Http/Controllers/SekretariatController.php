@@ -752,7 +752,7 @@ class SekretariatController extends Controller
 
     public function salinanDokumenSPPB($id)
     {
-        $dokumen = DokumenESP::where('institusi_id', $id)->get();
+        $dokumen = DokumenESP::where('institusi_id', $id)->first();
         return view('dokumen.sekretariat.salinan_dokumen',compact('dokumen'));
     }
 
