@@ -285,10 +285,12 @@
                   ]
               </textarea>
               <textarea name="data" id="data" rows="10" cols="50"></textarea>
-              <!-- ...other form elements... -->
+
+              <!--begin::Button-->
               <div class="footer">
-                  <input type="button" value="Send JSON" onclick="sendData()">
+                <input type="button" value="Hantar" onclick="sendData()" class="btn btn-primary">
               </div>
+              <!--end::Button-->
           </form>
             <!--end::Form-->
           </div>
@@ -439,27 +441,21 @@ $(document).ready(function() {
 <!--begin::Javascript-->
 <script>
   function sendData() {
-    var form = document.getElementById('hantar_maklumat');
-    var data = new FormData(form);
+      const form = document.getElementById('hantar_maklumat');
+      const data = new FormData(form);
 
-    // Send the form data using AJAX
-    fetch('http://espbstg.mohe.gov.my/api/studentsInfo.php', {
-        method: 'POST',
-        body: data
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data); // Log the API response to the console
-        // You can also perform other actions with the API response here
-    })
-    .catch(error => {
-        console.error('API Request failed:', error);
-    });
-}
-
- 
-
-
+      fetch('http://espbstg.mohe.gov.my/api/studentsInfo.php', {
+          method: 'POST',
+          body: data
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data); // Log the API response to the console
+      })
+      .catch(error => {
+          console.error('API Request failed:', error);
+      });
+  }
 </script>
 <!--end::Javascript-->
 
