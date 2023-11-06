@@ -92,12 +92,6 @@ class BorangSPPB implements FromCollection,  WithHeadings, WithColumnWidths, Wit
     public function map($row): array
     {
         return [
-            // Custom Rows
-            '',
-            $this->filters['cawangan'] ?? '',
-            $this->filters['nama_penerima'] ?? '',
-            $this->filters['bank'] ?? '',
-            $this->filters['no_akaun'] ?? '',
             // Data Rows
             $row->no_rujukan_permohonan,
             $row->nama,
@@ -109,6 +103,7 @@ class BorangSPPB implements FromCollection,  WithHeadings, WithColumnWidths, Wit
             \Carbon\Carbon::parse($row->tarikh_tamat)->format('d/m/Y'),
         ];
     }
+
 
     public function registerEvents(): array
     {
