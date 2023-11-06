@@ -21,12 +21,10 @@ class MaklumatESPController extends Controller
     {
         $kelulusan = Permohonan::where('status', '=','6')->get();
         //dd($kelulusan);
-        // Generate a token
-        $secretKey = '2z_JoT4dDCNe_bkT9y6kEhc_4plRkUW7Ci1hzoyH';
-        $time = time(); 
-        $token = hash('sha256', $secretKey . $time);
 
-        return view('esp.permohonan.permohonan_esp', compact('kelulusan','token','secretKey','time'));     
+        $secretKey = '2z_JoT4dDCNe_bkT9y6kEhc_4plRkUW7Ci1hzoyH';
+
+        return view('esp.permohonan.permohonan_esp', compact('kelulusan','secretKey'));     
         
     }
 

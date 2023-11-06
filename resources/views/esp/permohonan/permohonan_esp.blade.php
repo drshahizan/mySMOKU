@@ -276,14 +276,9 @@
           <!--begin::Card body-->
           <div class="card-body pt-0">
             <!--begin::Form-->
+            
             <form class="form" id="hantar_maklumat">
-              <textarea name="token" id="token" rows="10" cols="50">
-                  [
-                      {
-                          "token": "{{$token}}"
-                      }
-                  ]
-              </textarea>
+              <textarea name="token" id="token" rows="10" cols="50"></textarea>
               <textarea name="data" id="data" rows="10" cols="50"></textarea>
 
               <!--begin::Button-->
@@ -440,23 +435,80 @@ $(document).ready(function() {
 
 <!--begin::Javascript-->
 <script>
-  function sendData() {
-      const form = document.getElementById('hantar_maklumat');
-      const data = new FormData(form);
+  // function sendData() {
+  //     const form = document.getElementById('hantar_maklumat');
+  //     const data = new FormData(form);
 
-      fetch('http://espbstg.mohe.gov.my/api/studentsInfo.php', {
-          method: 'POST',
-          body: data
-      })
-      .then(response => response.json())
-      .then(data => {
-          console.log(data); // Log the API response to the console
-          alert ('Data berjaya di hantar ke ESP');
-      })
-      .catch(error => {
-          console.error('API Request failed:', error);
-      });
-  }
+  //     fetch('http://espbstg.mohe.gov.my/api/studentsInfo.php', {
+  //         method: 'POST',
+  //         body: data
+  //     })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //         console.log(data); // Log the API response to the console
+  //         //alert ('Data berjaya di hantar ke ESP');
+  //     })
+  //     .catch(error => {
+  //         console.error('API Request failed:', error);
+  //     });
+  // }
+
+  async function sendData() {
+
+    
+    try {
+        const secretKey = "{{ $secretKey }}"; 
+        const time = {{ time() }};
+        // Generate the token asynchronously
+        const token = await hash('SHA-256', secretKey + time);
+        console.log("Token:", token);
+
+        // Construct the JSON array with the token
+        const tokenArray = [{ "token": token }];
+
+        // Set the JSON array in the textarea
+        const tokenTextarea = document.getElementById('token');
+        tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
+        console.log("Token JSON:", tokenTextarea.value);
+
+        const form = document.getElementById('hantar_maklumat');
+        const data = new FormData(form);
+
+        fetch('http://espbstg.mohe.gov.my/api/studentsInfo.php', {
+            method: 'POST',
+            body: data
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Log the API response to the console
+
+            // Convert the API response to a string for display in the alert
+            const responseDataString = JSON.stringify(data, null, 2);
+
+            alert(`Data berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`); // Show success message and API response in alert
+
+            location.reload(); // Refresh the page
+        })
+
+        .catch(error => {
+            console.error('API Request failed:', error);
+            location.reload(); // Refresh the page
+        });
+    } catch (error) {
+        console.error('Error generating token:', error);
+    }
+}
+
+// Function to hash using SHA-256 (using async/await)
+async function hash(algorithm, data) {
+    const encoder = new TextEncoder();
+    const dataBuffer = encoder.encode(data);
+    const hashBuffer = await crypto.subtle.digest(algorithm, dataBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+}
+
 </script>
 <!--end::Javascript-->
 
