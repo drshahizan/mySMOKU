@@ -41,7 +41,7 @@
 
 						{{-- COUNT PERMOHONAN --}}
 						@php
-							$keseluruhanB = DB::table('permohonan')->where('program','=','BKOKU')->count();
+							$keseluruhanB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','!=','9')->count();
 							$derafB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','1')->count();
 							$baharuB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','2')->count();
 							$saringanB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','3')->count();
@@ -49,7 +49,7 @@
 							$dikembalikanB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','5')->count();
 							$layakB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','6')->count();
 							$tidaklayakB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','7')->count();
-							$dibayarB = DB::table('tuntutan')->join('permohonan', 'permohonan.smoku_id', '=', 'tuntutan.smoku_id')->where('tuntutan.status', '=', 8)->where('permohonan.program','=','BKOKU')->count();
+							$dibayarB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','8')->count();
 						@endphp
 
 						@php
@@ -61,10 +61,33 @@
 							$dikembalikanP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','5')->count();
 							$layakP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','6')->count();
 							$tidaklayakP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','7')->count();
-							$dibayarP = DB::table('tuntutan')->join('permohonan', 'permohonan.smoku_id', '=', 'tuntutan.smoku_id')->where('tuntutan.status', '=', 8)->where('permohonan.program','=','PPK')->count();
+							$dibayarP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','8')->count();
 						@endphp
 
 						{{-- COUNT TUNTUTAN --}}
+						@php
+							$keseluruhanTB = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '!=', 9)->where('permohonan.program','=','BKOKU')->count();
+							$derafTB = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 1)->where('permohonan.program','=','BKOKU')->count();
+							$baharuTB = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 2)->where('permohonan.program','=','BKOKU')->count();
+							$saringanTB = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 3)->where('permohonan.program','=','BKOKU')->count();
+							$disokongTB = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 4)->where('permohonan.program','=','BKOKU')->count();
+							$dikembalikanTB = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 5)->where('permohonan.program','=','BKOKU')->count();
+							$layakTB = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 6)->where('permohonan.program','=','BKOKU')->count();
+							$tidaklayakTB = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 7)->where('permohonan.program','=','BKOKU')->count();
+							$dibayarTB = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 8)->where('permohonan.program','=','BKOKU')->count();
+						@endphp
+
+						@php
+							$keseluruhanTP = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '!=', 9)->where('permohonan.program','=','PPK')->count();
+							$derafTP = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 1)->where('permohonan.program','=','PPK')->count();
+							$baharuTP = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 2)->where('permohonan.program','=','PPK')->count();
+							$saringanTP = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 3)->where('permohonan.program','=','PPK')->count();
+							$disokongTP = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 4)->where('permohonan.program','=','PPK')->count();
+							$dikembalikanTP = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 5)->where('permohonan.program','=','PPK')->count();
+							$layakTP = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 6)->where('permohonan.program','=','PPK')->count();
+							$tidaklayakTP = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 7)->where('permohonan.program','=','PPK')->count();
+							$dibayarTP = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 8)->where('permohonan.program','=','PPK')->count();
+						@endphp
 
 						{{-- top nav bar --}}
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -375,7 +398,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{url('sekretariat/permohonan/BKOKU/keseluruhan')}}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanB}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -404,7 +427,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.permohonan', ['status' => '1']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafB}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -432,7 +455,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.permohonan', ['status' => '2']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuB}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -462,7 +485,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.permohonan', ['status' => '3']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanB}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -489,7 +512,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.permohonan', ['status' => '4']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongB}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -516,7 +539,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.permohonan', ['status' => '5']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanB}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -548,7 +571,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{url('sekretariat/tuntutan/BKOKU/dibayar')}}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarB}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -576,7 +599,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.permohonan', ['status' => '6']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakB}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -605,7 +628,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.permohonan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakB}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakTB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1453,7 +1476,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{url('sekretariat/permohonan/PPK/keseluruhan')}}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1482,7 +1505,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '1']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1510,7 +1533,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '2']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1540,7 +1563,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '3']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1567,7 +1590,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '4']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1594,7 +1617,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '5']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1626,7 +1649,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{url('sekretariat/tuntutan/PPK/dibayar')}}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1654,7 +1677,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '6']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1683,7 +1706,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
