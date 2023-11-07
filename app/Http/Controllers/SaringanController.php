@@ -335,13 +335,14 @@ class SaringanController extends Controller
 
     public function paparTuntutan($id){
         $permohonan = Permohonan::where('id', $id)->first();
+        $j_tuntutan = JumlahTuntutan::where('jenis',"Yuran")->first();
         $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
         $smoku = Smoku::where('id', $smoku_id)->first();
         $sejarah_p = SejarahPermohonan::where('id', $id)->where('status',4)->first();
         $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
         $peringkat = $rujukan[1];
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
-        return view('permohonan.sekretariat.saringan.papar_tuntutan',compact('permohonan','akademik','smoku','sejarah_p'));
+        return view('permohonan.sekretariat.saringan.papar_tuntutan',compact('permohonan','akademik','smoku','sejarah_p','j_tuntutan'));
     }
 
     public function sejarahPermohonan(){
