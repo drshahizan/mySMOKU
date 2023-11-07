@@ -42,7 +42,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class SekretariatController extends Controller
 {
     //PERMOHONAN
-    public function dashboard()
+    public function dashboardSekretariat()
     {
         return view('dashboard.sekretariat.dashboard');
     }
