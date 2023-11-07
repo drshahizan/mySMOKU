@@ -36,9 +36,10 @@
 				<div class="row clearfix">
 					<div class="card">
 						<div class="header">
-							<h2>Bilangan Permohonan dan Tuntutan<br><small>Sila klik tab BKOKU atau PPK untuk lihat</small></h2>
+							<h2>Bilangan Permohonan dan Tuntutan<br><small>Sila klik tab BKOKU, BKOKU UA atau PPK untuk lihat</small></h2>
 						</div>
 
+						{{-- COUNT PERMOHONAN --}}
 						@php
 							$keseluruhanB = DB::table('permohonan')->where('program','=','BKOKU')->count();
 							$derafB = DB::table('permohonan')->where('program','=','BKOKU')->where('status','=','1')->count();
@@ -63,10 +64,15 @@
 							$dibayarP = DB::table('tuntutan')->join('permohonan', 'permohonan.smoku_id', '=', 'tuntutan.smoku_id')->where('tuntutan.status', '=', 8)->where('permohonan.program','=','PPK')->count();
 						@endphp
 
+						{{-- COUNT TUNTUTAN --}}
+
 						{{-- top nav bar --}}
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
 							<li class="nav-item" role="presentation">
-								<button class="nav-link active" id="bkoku-tab" data-toggle="tab" data-target="#bkoku" type="button" role="tab" aria-controls="bkoku" aria-selected="true">BKOKU</button>
+								<button class="nav-link active" id="bkoku1-tab" data-toggle="tab" data-target="#bkoku1" type="button" role="tab" aria-controls="bkoku1" aria-selected="true">BKOKU</button>
+							</li>
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="bkoku2-tab" data-toggle="tab" data-target="#bkoku2" type="button" role="tab" aria-controls="bkoku2" aria-selected="true">BKOKU UA</button>
 							</li>
 							<li class="nav-item" role="presentation">
 								<button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
@@ -75,7 +81,7 @@
 
 						<div class="tab-content" id="myTabContent">
 							{{-- BKOKU --}}
-							<div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
+							<div class="tab-pane fade show active" id="bkoku1" role="tabpanel" aria-labelledby="bkoku1-tab">
 								{{-- Permohonan --}}
 								<div class="header">
 									<h2>Permohonan BKOKU</h2>
@@ -84,7 +90,7 @@
 									<!--begin::First Row-->
 									<div class="row g-3 g-lg-6" style="text-align: center;">
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
@@ -112,7 +118,7 @@
 										<!--end::Col-->
 
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
@@ -141,7 +147,7 @@
 										<!--end::Col-->
 
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
@@ -167,9 +173,13 @@
 											<!--end::Items-->
 										</div>
 										<!--end::Col-->
+									</div>
+									<!--end::Row-->
 
+									<!--begin::Second Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-5 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
 												<!--begin::Symbol-->
@@ -193,13 +203,9 @@
 											<!--end::Items-->
 										</div>
 										<!--end::Col-->
-									</div>
-									<!--end::Row-->
 
-									<!--begin::Second Row-->
-									<div class="row g-3 g-lg-6" style="text-align: center;">
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
 												<!--begin::Symbol-->
@@ -226,7 +232,7 @@
 										<!--end::Col-->
 
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
 												<!--begin::Symbol-->
@@ -251,9 +257,41 @@
 											<!--end::Items-->
 										</div>
 										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+
+									<!--begin::Third Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{url('sekretariat/tuntutan/BKOKU/dibayar')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
 										
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
@@ -281,7 +319,7 @@
 										<!--end::Col-->
 
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
@@ -320,7 +358,180 @@
 									<!--begin::First Row-->
 									<div class="row g-3 g-lg-6" style="text-align: center;">
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{url('sekretariat/permohonan/BKOKU/keseluruhan')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '1']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '2']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+
+									<!--begin::Second Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-5 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fas fa-th-list text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom:5px; padding-left:5px; font-family:sans-serif;">Sedang Disaring</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '3']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Disokong</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '4']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fa-solid fa-reply-all text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dikembalikan</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '5']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+
+									<!--begin::Third Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
+										<!--begin::Col-->
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
 												<!--begin::Symbol-->
@@ -346,6 +557,602 @@
 											<!--end::Items-->
 										</div>
 										<!--end::Col-->
+										
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fas fa-user-check text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '6']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '7']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+								</div>
+							</div>
+
+							{{-- BKOKU UA --}}
+							<div class="tab-pane fade" id="bkoku2" role="tabpanel" aria-labelledby="bkoku2-tab">
+								{{-- Permohonan --}}
+								<div class="header">
+									<h2>Permohonan BKOKU</h2>
+								</div>
+								<div class="body">
+									<!--begin::First Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{url('sekretariat/permohonan/BKOKU/keseluruhan')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '1']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '2']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+
+									<!--begin::Second Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-5 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fas fa-th-list text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom:5px; padding-left:5px; font-family:sans-serif;">Sedang Disaring</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '3']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Disokong</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '4']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fa-solid fa-reply-all text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dikembalikan</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '5']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+
+									<!--begin::Third Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{url('sekretariat/tuntutan/BKOKU/dibayar')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+										
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fas fa-user-check text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '6']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '7']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+								</div>
+
+								{{-- Tuntutan --}}
+								<div class="header">
+									<h2>Tuntutan BKOKU</h2>
+								</div>
+								<div class="body">
+									<!--begin::First Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{url('sekretariat/permohonan/BKOKU/keseluruhan')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '1']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '2']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+
+									<!--begin::Second Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-5 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fas fa-th-list text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom:5px; padding-left:5px; font-family:sans-serif;">Sedang Disaring</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '3']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Disokong</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '4']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fa-solid fa-reply-all text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dikembalikan</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '5']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+
+									<!--begin::Third Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{url('sekretariat/tuntutan/BKOKU/dibayar')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+										
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fas fa-user-check text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '6']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusB.permohonan', ['status' => '7']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakB}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
 									</div>
 									<!--end::Row-->
 								</div>
@@ -361,7 +1168,7 @@
 									<!--begin::First Row-->
 									<div class="row g-3 g-lg-6" style="text-align: center;">
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
@@ -389,7 +1196,7 @@
 										<!--end::Col-->
 
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
@@ -418,7 +1225,7 @@
 										<!--end::Col-->
 
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
@@ -444,9 +1251,13 @@
 											<!--end::Items-->
 										</div>
 										<!--end::Col-->
+									</div>
+									<!--end::Row-->
 
+									<!--begin::Second Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
 												<!--begin::Symbol-->
@@ -470,13 +1281,9 @@
 											<!--end::Items-->
 										</div>
 										<!--end::Col-->
-									</div>
-									<!--end::Row-->
 
-									<!--begin::Second Row-->
-									<div class="row g-3 g-lg-6" style="text-align: center;">
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
 												<!--begin::Symbol-->
@@ -503,7 +1310,7 @@
 										<!--end::Col-->
 
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
 												<!--begin::Symbol-->
@@ -528,9 +1335,41 @@
 											<!--end::Items-->
 										</div>
 										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+
+									<!--begin::Third Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{url('sekretariat/tuntutan/PPK/dibayar')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
 										
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
@@ -558,7 +1397,7 @@
 										<!--end::Col-->
 
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
@@ -597,7 +1436,180 @@
 									<!--begin::First Row-->
 									<div class="row g-3 g-lg-6" style="text-align: center;">
 										<!--begin::Col-->
-										<div class="col-3">
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{url('sekretariat/permohonan/PPK/keseluruhan')}}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusP.permohonan', ['status' => '1']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusP.permohonan', ['status' => '2']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+
+									<!--begin::Second Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #ea40acdc">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fas fa-th-list text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Sedang Disaring</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusP.permohonan', ['status' => '3']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fa-solid fa-check-to-slot text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Disokong</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusP.permohonan', ['status' => '4']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body"  style="background-color: #d75b50">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+														<i class="fa-solid fa-reply-all text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dikembalikan</span>
+														</i>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusP.permohonan', ['status' => '5']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+
+									<!--begin::Third Row-->
+									<div class="row g-3 g-lg-6" style="text-align: center;">
+										<!--begin::Col-->
+										<div class="col-4">
 											<!--begin::Items-->
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
 												<!--begin::Symbol-->
@@ -615,6 +1627,63 @@
 												<div class="m-0">
 													<a href="{{url('sekretariat/tuntutan/PPK/dibayar')}}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+										
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fas fa-user-check text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusP.permohonan', ['status' => '6']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakP}}</span>
+														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+													</a>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Items-->
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-4">
+											<!--begin::Items-->
+											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+												<!--begin::Symbol-->
+												<div class="symbol symbol-30px me-0 mb-5">
+													{{-- <span class="symbol-label"> --}}
+														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
+														</i>
+													{{-- </span> --}}
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Stats-->
+												<div class="m-0">
+													<a href="{{ route('statusP.permohonan', ['status' => '7']) }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>

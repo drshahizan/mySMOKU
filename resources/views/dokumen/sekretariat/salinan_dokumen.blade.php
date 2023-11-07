@@ -60,7 +60,6 @@
         </ul>
     
         <div class="tab-content" id="myTabContent">
-            <!-- Replace these placeholders with your actual file names -->
             @php
                 $xlsxExtensions = ['xlsx'];
                 $pdfExtensions = ['pdf'];
@@ -140,7 +139,7 @@
                     @endif
                 </div>
             </div>
-            
+
         </div>
     </div>
 </body>
