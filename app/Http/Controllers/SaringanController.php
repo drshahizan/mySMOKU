@@ -17,6 +17,7 @@ use App\Models\Status;
 use App\Models\Waris;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -44,9 +45,10 @@ class SaringanController extends Controller
         $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
 
         $status_rekod = new SejarahPermohonan([
-            'smoku_id'      =>  $smoku_id,
-            'permohonan_id' =>  $id,
-            'status'        =>  3,
+            'smoku_id'          =>  $smoku_id,
+            'permohonan_id'     =>  $id,
+            'status'            =>  3,
+            'dilaksanakan_oleh'    =>  Auth::user()->id,
         ]);
         $status_rekod->save();
 
@@ -72,9 +74,10 @@ class SaringanController extends Controller
         $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
 
         $status_rekod = new SejarahPermohonan([
-            'smoku_id'      =>  $smoku_id,
-            'permohonan_id' =>  $id,
-            'status'        =>  3,
+            'smoku_id'          =>  $smoku_id,
+            'permohonan_id'     =>  $id,
+            'status'            =>  3,
+            'dilaksanakan_oleh'    =>  Auth::user()->id,
         ]);
         $status_rekod->save();
 
@@ -126,9 +129,10 @@ class SaringanController extends Controller
         $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
 
         $status_rekod = new SejarahPermohonan([
-            'smoku_id'      =>  $smoku_id,
-            'permohonan_id' =>  $id,
-            'status'        =>  4,
+            'smoku_id'          =>  $smoku_id,
+            'permohonan_id'     =>  $id,
+            'status'            =>  4,
+            'dilaksanakan_oleh'    =>  Auth::user()->id,
         ]);
         $status_rekod->save();
 
@@ -219,9 +223,10 @@ class SaringanController extends Controller
             ]);
 
             $status_rekod = new SejarahPermohonan([
-                'smoku_id'      =>  $smoku_id,
-                'permohonan_id' =>  $id,
-                'status'        =>  5,
+                'smoku_id'          =>  $smoku_id,
+                'permohonan_id'     =>  $id,
+                'status'            =>  5,
+                'dilaksanakan_oleh'    =>  Auth::user()->id,
             ]);
             $status_rekod->save();
 
@@ -293,9 +298,10 @@ class SaringanController extends Controller
                 ]);
 
             $status_rekod = new SejarahPermohonan([
-                'smoku_id'      =>  $smoku_id,
-                'permohonan_id' =>  $id,
-                'status'        =>  5,
+                'smoku_id'          =>  $smoku_id,
+                'permohonan_id'     =>  $id,
+                'status'            =>  5,
+                'dilaksanakan_oleh'    =>  Auth::user()->id,
             ]);
             $status_rekod->save();
 
@@ -503,9 +509,10 @@ class SaringanController extends Controller
         $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
 
         $status_rekod = new SejarahPermohonan([
-            'smoku_id'      =>  $smoku_id,
-            'permohonan_id' =>  $id,
-            'status'        =>  8,
+            'smoku_id'          =>  $smoku_id,
+            'permohonan_id'     =>  $id,
+            'status'            =>  8,
+            'dilaksanakan_oleh'    =>  Auth::user()->id,
         ]);
         $status_rekod->save();
 

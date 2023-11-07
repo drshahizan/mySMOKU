@@ -32,6 +32,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -793,9 +794,10 @@ class SekretariatController extends Controller
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
 
         $status_rekod = new SejarahTuntutan([
-            'smoku_id'      =>  $smoku_id,
-            'tuntutan_id'   =>  $id,
-            'status'        =>  3,
+            'smoku_id'          =>  $smoku_id,
+            'tuntutan_id'       =>  $id,
+            'status'            =>  3,
+            'dilaksanakan_oleh'    =>  Auth::user()->id,
         ]);
         $status_rekod->save();
 
@@ -843,9 +845,10 @@ class SekretariatController extends Controller
             $saringan->save();
 
             $status_rekod = new SejarahTuntutan([
-                'smoku_id'      =>  $smoku_id,
-                'tuntutan_id'   =>  $id,
-                'status'        =>  6,
+                'smoku_id'          =>  $smoku_id,
+                'tuntutan_id'       =>  $id,
+                'status'            =>  6,
+                'dilaksanakan_oleh'    =>  Auth::user()->id,
             ]);
             $status_rekod->save();
 
@@ -886,9 +889,10 @@ class SekretariatController extends Controller
             $saringan->save();
 
             $status_rekod = new SejarahTuntutan([
-                'smoku_id'      =>  $smoku_id,
-                'tuntutan_id'   =>  $id,
-                'status'        =>  7,
+                'smoku_id'          =>  $smoku_id,
+                'tuntutan_id'       =>  $id,
+                'status'            =>  7,
+                'dilaksanakan_oleh'    =>  Auth::user()->id,
             ]);
             $status_rekod->save();
 
@@ -936,6 +940,7 @@ class SekretariatController extends Controller
                 'smoku_id'      =>  $smoku_id,
                 'tuntutan_id'   =>  $id,
                 'status'        =>  5,
+                'dilaksanakan_oleh'    =>  Auth::user()->id,
             ]);
             $status_rekod->save();
 
@@ -1218,6 +1223,7 @@ class SekretariatController extends Controller
             'smoku_id'      =>  $smoku_id,
             'tuntutan_id'   =>  $id,
             'status'        =>  8,
+            'dilaksanakan_oleh'    =>  Auth::user()->id,
         ]);
         $status_rekod->save();
 
