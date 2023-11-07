@@ -87,9 +87,10 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 17%"><b>ID Tuntutan</b></th>
-                                                    <th><b>Nama</b></th>
-                                                    <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
-                                                    <th style="width: 15%" class="text-center"><b>Status Saringan</b></th>
+                                                    <th style="width: 30%"><b>Nama</b></th>
+                                                    <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th>
+                                                    <th style="width: 10%" class="text-center"><b>Status Saringan</b></th>
+                                                    <th style="width: 20%"><b>Disaring Oleh</b></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -98,6 +99,27 @@
                                                     $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
                                                     $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+                                                    $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
+
+                                                    if($user_id==null){
+                                                        $user_name = "Tiada Maklumat";
+                                                    }
+                                                    else{
+                                                        $user_name = DB::table('users')->where('id', $user_id)->value('nama');
+                                                        $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
+                                                        $conjunctions = ['bin', 'binti'];
+                                                        $words = explode(' ', $text);
+                                                        $result = [];
+                                                        foreach ($words as $word) {
+                                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                                $result[] = Str::lower($word);
+                                                            } else {
+                                                                $result[] = $word;
+                                                            }
+                                                        }
+                                                        $user_name = implode(' ', $result);
+                                                    }
+
                                                     if ($item['status']==2){
                                                         $status='Baharu';
                                                     }
@@ -140,6 +162,7 @@
                                                         @elseif ($item['status']=='7')
                                                             <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
+                                                        <td style="width: 20%">{{$user_name}}</td>
                                                     </tr>
                                                 @endif
                                                 @endforeach
@@ -154,12 +177,11 @@
                                         <br>
                                         <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
-                                                <tr>
-                                                    <th style="width: 17%"><b>ID Tuntutan</b></th>
-                                                    <th><b>Nama</b></th>
-                                                    <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
-                                                    <th style="width: 15%" class="text-center"><b>Status Saringan</b></th>
-                                                </tr>
+                                                <th style="width: 17%"><b>ID Tuntutan</b></th>
+                                                <th style="width: 30%"><b>Nama</b></th>
+                                                <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th>
+                                                <th style="width: 10%" class="text-center"><b>Status Saringan</b></th>
+                                                <th style="width: 20%"><b>Disaring Oleh</b></th>
                                             </thead>
                                             <tbody>
                                                 @foreach ($tuntutan as $item)
@@ -167,6 +189,27 @@
                                                     $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
                                                     $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+                                                    $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
+
+                                                    if($user_id==null){
+                                                        $user_name = "Tiada Maklumat";
+                                                    }
+                                                    else{
+                                                        $user_name = DB::table('users')->where('id', $user_id)->value('nama');
+                                                        $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
+                                                        $conjunctions = ['bin', 'binti'];
+                                                        $words = explode(' ', $text);
+                                                        $result = [];
+                                                        foreach ($words as $word) {
+                                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                                $result[] = Str::lower($word);
+                                                            } else {
+                                                                $result[] = $word;
+                                                            }
+                                                        }
+                                                        $user_name = implode(' ', $result);
+                                                    }
+
                                                     if ($item['status']==2){
                                                         $status='Baharu';
                                                     }
@@ -195,19 +238,20 @@
                                                                 <a href="{{ url('tuntutan/sekretariat/saringan/papar-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
                                                             @endif
                                                         </td>
-                                                        <td>{{$pemohon}}</td>
-                                                        <td class="text-center" style="width: 15%">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        <td style="width: 30%">{{$pemohon}}</td>
+                                                        <td class="text-center" style="width: 13%">{{$item['created_at']->format('d/m/Y')}}</td>
                                                         @if ($item['status']=='2')
-                                                        <td class="text-center" style="width: 15%"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        <td class="text-center" style="width: 10%"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='3')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center" style="width: 10%"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='5')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center" style="width: 10%"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='6')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center" style="width: 10%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='7')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center" style="width: 10%"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
+                                                        <td style="width: 20%">{{$user_name}}</td>
                                                     </tr>
                                                 @endif
                                                 @endforeach
