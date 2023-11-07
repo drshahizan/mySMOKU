@@ -14,5 +14,6 @@ class SejarahTuntutan extends Model
         'smoku_id',
         'tuntutan_id',
         'status',
+        'dilaksanakan_oleh',
     ];
 }

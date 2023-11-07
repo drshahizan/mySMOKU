@@ -51,7 +51,7 @@ class SaringanController extends Controller
             'dilaksanakan_oleh'    =>  Auth::user()->id,
         ]);
         $status_rekod->save();
-
+        
         $permohonan = Permohonan::where('id', $id)->first();
 
         $pelajar = ButiranPelajar::where('smoku_id', $smoku_id)->first();

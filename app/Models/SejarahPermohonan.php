@@ -14,5 +14,6 @@ class SejarahPermohonan extends Model
         'smoku_id',
         'permohonan_id',
         'status',
+        'dilaksanakan_oleh',
     ];
 }
