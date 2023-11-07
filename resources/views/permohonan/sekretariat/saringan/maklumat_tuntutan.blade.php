@@ -247,11 +247,12 @@
                                                 $permohonan->amaun_wang_saku = 0;
                                             }
                                             $jumlah = $permohonan->amaun_yuran + $permohonan->amaun_wang_saku;
-                                            $baki_y = 5000 - $jumlah;
+                                            $baki_y = $j_tuntutan->jumlah - $jumlah;
                                             if($permohonan->baki_disokong == null){
                                                 $permohonan->baki_disokong = $baki_y;
                                             }
                                         @endphp
+                                            <input type="hidden" name="j_tuntutan" id="j_tuntutan" value="{{$j_tuntutan->jumlah}}">
                                             <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
                                             <input type="hidden" name="baki_disokong" id="baki_disokong" value="{{$permohonan->baki_disokong}}">
 {{--                                            <input type="hidden" name="baki_dibayar" id="baki_dibayar" value="">--}}
@@ -317,27 +318,28 @@
                                             // document.getElementById("w_saku_dibayar").addEventListener("input", BayarY);
                                             function SokongY(){
                                                 var yuran = document.getElementById('yuran_disokong').value;
+                                                var j_tuntutan = document.getElementById('w_saku_disokong').value;
                                                 var w_saku = document.getElementById('w_saku_disokong').value;
-                                                var baki = 5000 - yuran - w_saku;
+                                                var baki = j_tuntutan - yuran - w_saku;
                                                 var jumlah = parseFloat(w_saku) + parseFloat(yuran);
                                                 baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                                                     minimumFractionDigits: 2
                                                 });
                                                 document.getElementById('y_baki_disokong').innerHTML = baki;
                                                 document.getElementById('jumlah_disokong').value= parseFloat(jumlah).toFixed(2);
-                                                document.getElementById('baki_disokong').value= 5000 - yuran - w_saku;
+                                                document.getElementById('baki_disokong').value= j_tuntutan - yuran - w_saku;
                                             }
                                             // function BayarY(){
                                             //     var yuran = document.getElementById('yuran_dibayar').value;
                                             //     var w_saku = document.getElementById('w_saku_dibayar').value;
-                                            //     var baki = 5000 - yuran - w_saku;
+                                            //     var baki = $j_tuntutan->jumlah - yuran - w_saku;
                                             //     var jumlah = parseFloat(yuran) + parseFloat(w_saku);
                                             //     baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                                             //         minimumFractionDigits: 2
                                             //     });
                                             //     document.getElementById('y_baki_dibayar').innerHTML = baki;
                                             //     document.getElementById('jumlah_dibayar').value= parseFloat(jumlah).toFixed(2);
-                                            //     document.getElementById('baki_dibayar').value= 5000 - yuran - w_saku;
+                                            //     document.getElementById('baki_dibayar').value= $j_tuntutan->jumlah - yuran - w_saku;
                                             // }
                                         </script>
                                     @elseif($permohonan->program == "BKOKU" && $permohonan->yuran == NULL)
@@ -410,11 +412,12 @@
                                                     $permohonan->amaun_wang_saku = 0;
                                                 }
                                                 $jumlah = $permohonan->amaun_yuran;
-                                                $baki_y = 5000 - $jumlah;
+                                                $baki_y = $j_tuntutan->jumlah - $jumlah;
                                                 if($permohonan->baki_disokong == null){
                                                     $permohonan->baki_disokong = $baki_y;
                                                 }
                                             @endphp
+                                            <input type="hidden" name="j_tuntutan" id="j_tuntutan" value="{{$j_tuntutan->jumlah}}">
                                             <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
                                             <input type="hidden" name="baki_disokong" id="baki_disokong_3" value="{{$permohonan->baki_disokong}}">
 {{--                                            <input type="hidden" name="baki_dibayar" id="baki_dibayar_3" value="">--}}
@@ -469,25 +472,26 @@
                                                 // document.getElementById("yuran_dibayar_3").addEventListener("input", BayarY);
                                                 function SokongY(){
                                                     var yuran = document.getElementById('yuran_disokong_3').value;
-                                                    var baki = 5000 - yuran;
+                                                    var j_tuntutan = document.getElementById('w_saku_disokong').value;
+                                                    var baki = j_tuntutan - yuran;
                                                     var jumlah = parseFloat(yuran);
                                                     baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                                                         minimumFractionDigits: 2
                                                     });
                                                     document.getElementById('y_baki_disokong_3').innerHTML = baki;
                                                     document.getElementById('jumlah_disokong_3').value= parseFloat(jumlah).toFixed(2);
-                                                    document.getElementById('baki_disokong_3').value= 5000 - yuran;
+                                                    document.getElementById('baki_disokong_3').value= j_tuntutan - yuran;
                                                 }
                                                 // function BayarY(){
                                                 //     var yuran = document.getElementById('yuran_dibayar_3').value;
-                                                //     var baki = 5000 - yuran;
+                                                //     var baki = $j_tuntutan->jumlah - yuran;
                                                 //     var jumlah = parseFloat(yuran);
                                                 //     baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
                                                 //         minimumFractionDigits: 2
                                                 //     });
                                                 //     document.getElementById('y_baki_dibayar_3').innerHTML = baki;
                                                 //     document.getElementById('jumlah_dibayar_3').value= parseFloat(jumlah).toFixed(2);
-                                                //     document.getElementById('baki_dibayar_3').value= 5000 - yuran;
+                                                //     document.getElementById('baki_dibayar_3').value= $j_tuntutan->jumlah - yuran;
                                                 // }
                                             </script>
                                     @elseif($permohonan->program == "PPK")

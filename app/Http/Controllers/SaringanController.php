@@ -6,6 +6,7 @@ use App\Models\Akademik;
 use App\Models\ButiranPelajar;
 use App\Models\Dokumen;
 use App\Models\EmelKemaskini;
+use App\Models\JumlahTuntutan;
 use App\Models\Kelulusan;
 use App\Models\Peperiksaan;
 use App\Models\Permohonan;
@@ -151,10 +152,11 @@ class SaringanController extends Controller
             $permohonan = Permohonan::where('id', $id)->first();
             $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
             $smoku = Smoku::where('id', $smoku_id)->first();
+            $j_tuntutan = JumlahTuntutan::where('jenis',"Yuran")->first();
             $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
             $peringkat = $rujukan[1];
             $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
-            return view('permohonan.sekretariat.saringan.maklumat_tuntutan',compact('permohonan','smoku','akademik'));
+            return view('permohonan.sekretariat.saringan.maklumat_tuntutan',compact('permohonan','smoku','akademik','j_tuntutan'));
         }
         else{
             $catatan[]="";
