@@ -12,6 +12,7 @@ class PeringkatPengajian extends Model
 
     protected $fillable = [
         'kod_peringkat',
+        'kod_esp',
         'peringkat',
         
     ];

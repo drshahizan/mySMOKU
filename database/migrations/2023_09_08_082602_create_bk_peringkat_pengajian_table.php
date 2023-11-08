@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('bk_peringkat_pengajian', function (Blueprint $table) {
             $table->id();
             $table->string('kod_peringkat');
+            $table->string('kod_esp');
             $table->string('peringkat');
             $table->timestamps();
         });
