@@ -116,6 +116,7 @@ class MaklumatKursusController extends Controller
                                 'id_institusi' => $item['IdAgensi'],
                                 'nama_institusi' => $item['NamaIPTBM'],
                                 'nama_institusi_bi' => $item['NamaIPTBI'],
+                                'poskod' => $item['Poskod'],
                                 'institusi_penganugerahan' => $item['InstitusiPenganugerahan']
                             ]
                         );
