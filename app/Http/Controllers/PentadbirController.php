@@ -32,8 +32,8 @@ class PentadbirController extends Controller
         ->get(['users.*', 'roles.name']);
 
         $tahap = Role::all()->sortBy('id');
-        $infoipt = InfoIpt::where('jenis_institusi','!=', 'IPTS')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get(); 
-        $infoppk = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); 
+        $infoipt = InfoIpt::where('jenis_institusi','!=', 'IPTS')->orderBy('nama_institusi')->get(); 
+        $infoppk = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get(); 
                
 
         return view('kemaskini.pentadbir.daftar_pengguna', compact('user', 'tahap', 'infoipt','infoppk'));
