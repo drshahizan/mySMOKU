@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('bk_info_institusi', function (Blueprint $table) {
             $table->id();
             $table->string('id_institusi');
-            $table->string('jenis_institusi');
+            $table->string('institusi_esp')->nullable();
             $table->string('nama_institusi');
+            $table->string('nama_institusi_bi')->nullable();
+            $table->string('poskod')->nullable();
+            $table->string('jenis_institusi')->nullable();
             $table->timestamps();
         });
     }
