@@ -26,10 +26,14 @@ var KTModalCustomersAdd = function () {
 					},
                     'email': {
 						validators: {
-							notEmpty: {
-								message: 'Emel diperlukan'
-							}
-						}
+                            regexp: {
+                                regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                message: 'Alamat Emel tidak sah',
+                            },
+                            notEmpty: {
+                                message: 'Alamat Emel diperlukan'
+                            }
+                        }
 					},
 					'no_kp': {
 						validators: {
@@ -49,7 +53,18 @@ var KTModalCustomersAdd = function () {
 						validators: {
 							notEmpty: {
 								message: 'Kata laluan diperlukan'
-							}
+							},
+                            callback: {
+                                message: 'Masukkan kata laluan yang sah',
+                                callback: function (input) {
+                                    if (input.value.length >= 12) {
+                                        return validatePassword();
+                                    } else {
+                                        // Password length is less than 12 characters, so it's not valid
+                                        return false;
+                                    }
+                                }
+                            }
 						}
 					},
 					
@@ -65,10 +80,11 @@ var KTModalCustomersAdd = function () {
 			}
 		);
 
-		// Revalidate country field. For more info, plase visit the official plugin site: https://select2.org/
-        $(form.querySelector('[name="country"]')).on('change', function() {
-            // Revalidate the field when an option is chosen
-            validator.revalidateField('country');
+		// Handle password input
+        form.querySelector('input[name="password"]').addEventListener('input', function () {
+            if (this.value.length >= 12) {
+                validator.updateFieldStatus('password', 'NotValidated');
+            }
         });
 
 		// Action buttons
@@ -94,7 +110,17 @@ var KTModalCustomersAdd = function () {
                             const redirectUrl = form.getAttribute('data-kt-redirect');
 
                             if (redirectUrl) {
+                                
                                 location.href = redirectUrl;
+                                Swal.fire({
+                                    text: "Emel notifikasi telah dihantar kepada pengguna",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary",
+                                    }
+                                });
                             }
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -159,7 +185,8 @@ var KTModalCustomersAdd = function () {
             }).then(function (result) {
                 if (result.value) {
                     form.reset(); // Reset form	
-                    modal.hide(); // Hide modal				
+                    modal.hide(); // Hide modal
+                    window.location.reload();				
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
                         text: "Belum dibatalkan.",
@@ -174,17 +201,22 @@ var KTModalCustomersAdd = function () {
             });
         });
 
+        // Password input validation
+    var validatePassword = function () {
+        return (passwordMeter.getScore() > 50);
+    }
+
 		closeButton.addEventListener('click', function(e){
             console.log("Close button:", closeButton);
 			e.preventDefault();
 
             Swal.fire({
-                text: "Are you sure you would like to cancel?",
+                text: "Pasti untuk batal?",
                 icon: "warning",
                 showCancelButton: true,
                 buttonsStyling: false,
-                confirmButtonText: "Yes, cancel it!",
-                cancelButtonText: "No, return",
+                confirmButtonText: "Ya",
+                cancelButtonText: "Tidak",
                 customClass: {
                     confirmButton: "btn btn-primary",
                     cancelButton: "btn btn-active-light"
@@ -192,13 +224,14 @@ var KTModalCustomersAdd = function () {
             }).then(function (result) {
                 if (result.value) {
                     form.reset(); // Reset form	
-                    modal.hide(); // Hide modal				
+                    modal.hide(); // Hide modal	
+                    window.location.reload();			
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
-                        text: "Your form has not been cancelled!.",
+                        text: "Sambung untuk pendaftaran pengguna",
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "Ok",
                         customClass: {
                             confirmButton: "btn btn-primary",
                         }

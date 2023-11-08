@@ -35,7 +35,6 @@ class PentadbirController extends Controller
         $infoipt = InfoIpt::where('jenis_institusi','!=', 'IPTS')->orderBy('nama_institusi')->get(); 
         $infoppk = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get(); 
                
-
         return view('kemaskini.pentadbir.daftar_pengguna', compact('user', 'tahap', 'infoipt','infoppk'));
     }
 
@@ -80,9 +79,9 @@ class PentadbirController extends Controller
 
         if($request->status == 1){
 
-            $email = $request->email;
-            $no_kp = $request->no_kp;
-            Mail::to($email)->send(new MailDaftarPengguna($email,$no_kp));
+            // $email = $request->email;
+            // $no_kp = $request->no_kp;
+            // Mail::to($email)->send(new MailDaftarPengguna($email,$no_kp));
             return redirect()->route('daftarpengguna')->with('message', 'Status pengguna ' .$request->nama. ' telah diaktifkan ');
         }
 
