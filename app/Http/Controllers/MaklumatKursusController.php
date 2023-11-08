@@ -3,11 +3,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MaklumatKursusMQA;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
-use Illuminate\Http\Request;
-
+use App\Models\Kursus;
 use Illuminate\Support\Facades\Http;
 
 class MaklumatKursusController extends Controller
@@ -26,7 +22,7 @@ class MaklumatKursusController extends Controller
                 foreach ($data['dataMQR'] as $item) {
                     //if ($counter < 1) {
 
-                        MaklumatKursusMQA::updateOrInsert(
+                        Kursus::updateOrInsert(
                             ['no_rujukan' => $item['NoRujProg']], // Condition to find the record
                             [
                                 'no_sijil' => $item['NoSiriSijil'],
@@ -100,7 +96,7 @@ class MaklumatKursusController extends Controller
                     
                     // if ($counter < 1) {
                         
-                        MaklumatKursusMQA::updateOrInsert(
+                        Kursus::updateOrInsert(
                             ['no_rujukan' => $item['NoRujProg']], // Condition to find the record
                             [
                                 'nama_kursus' => $item['NamaProgBM'],
@@ -146,7 +142,7 @@ class MaklumatKursusController extends Controller
 
     public function test(){
 
-        $kursus = MaklumatKursusMQA::all()->sortBy('NamaProgBM');
+        $kursus = Kursus::all()->sortBy('NamaProgBM');
         return view('mqa.maklumat_kursus', compact('kursus'));
     }
 
