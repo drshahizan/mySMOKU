@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('bk_info_institusi', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_institusi');
+            $table->string('id_institusi');
             $table->string('jenis_institusi');
             $table->string('nama_institusi');
             $table->timestamps();

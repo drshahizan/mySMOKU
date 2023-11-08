@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('dokumen_esp', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('institusi_id');
+            $table->string('institusi_id');
             $table->string('no_rujukan');
             $table->string('dokumen1');
             $table->string('dokumen1a');
