@@ -16,10 +16,13 @@ return new class extends Migration
             $table->unsignedBigInteger('smoku_id');
             $table->unsignedBigInteger('tuntutan_id');
             $table->integer('status');
+            $table->unsignedBigInteger('dilaksanakan_oleh')->nullable();
             $table->foreign('smoku_id')
               ->references('id')->on('smoku')->onDelete('cascade');
             $table->foreign('tuntutan_id')
               ->references('id')->on('tuntutan')->onDelete('cascade');
+            $table->foreign('dilaksanakan_oleh')
+              ->references('id')->on('users')->onDelete('cascade');  
             $table->timestamps();
         });
     }
