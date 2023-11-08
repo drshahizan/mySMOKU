@@ -43,6 +43,7 @@ class MaklumatKursusController extends Controller
                                 'id_institusi' => $item['IdAgensi'],
                                 'nama_institusi' => $item['NamaAgensiBM'],
                                 'nama_institusi_bi' => $item['NamaAgensiBI'],
+                                'poskod' => $item['Poskod'],
                                 'BilMingguPjg' => $item['BilMingguPjg'],
                                 'BilMingguPndk' => $item['BilMingguPndk'],
                                 'BilSemPjg' => $item['BilSemPjg'],
