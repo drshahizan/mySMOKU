@@ -75,6 +75,9 @@
                                     <button class="nav-link active" id="bkoku-tab" data-toggle="tab" data-target="#bkoku" type="button" role="tab" aria-controls="bkoku" aria-selected="true">BKOKU</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
                                 </li>
                             </ul>
@@ -97,6 +100,11 @@
                                                 @foreach ($tuntutan as $item)
                                                 @php
                                                     $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
+                                                    $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
+                                                    $peringkat = $rujukan[1];
+                                                    $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
+                                                    $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+
                                                     $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                     $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
@@ -138,9 +146,9 @@
                                                         }
                                                     }
                                                     $pemohon = implode(' ', $result);
-
                                                 @endphp
                                                 @if($permohonan->program=="BKOKU")
+                                                    @if ($jenis_institusi!="UA")
                                                     <tr>
                                                         <td>
                                                             @if($item['status']==2 || $item['status']==3)
@@ -164,11 +172,110 @@
                                                         @endif
                                                         <td style="width: 20%">{{$user_name}}</td>
                                                     </tr>
+                                                    @endif
                                                 @endif
                                                 @endforeach
                                             </tbody>
                                         </table>
                                     </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                                    <div class="body">
+                                        <div class="table-responsive">
+                                            <br>
+                                            <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+                                                <thead>
+                                                <tr>
+                                                    <th style="width: 17%"><b>ID Tuntutan</b></th>
+                                                    <th style="width: 30%"><b>Nama</b></th>
+                                                    <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th>
+                                                    <th style="width: 10%" class="text-center"><b>Status Saringan</b></th>
+                                                    <th style="width: 20%"><b>Disaring Oleh</b></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach ($tuntutan as $item)
+                                                    @php
+                                                        $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
+                                                        $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
+                                                        $peringkat = $rujukan[1];
+                                                        $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
+                                                        $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+
+                                                        $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
+                                                        $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+                                                        $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
+
+                                                        if($user_id==null){
+                                                            $user_name = "Tiada Maklumat";
+                                                        }
+                                                        else{
+                                                            $user_name = DB::table('users')->where('id', $user_id)->value('nama');
+                                                            $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
+                                                            $conjunctions = ['bin', 'binti'];
+                                                            $words = explode(' ', $text);
+                                                            $result = [];
+                                                            foreach ($words as $word) {
+                                                                if (in_array(Str::lower($word), $conjunctions)) {
+                                                                    $result[] = Str::lower($word);
+                                                                } else {
+                                                                    $result[] = $word;
+                                                                }
+                                                            }
+                                                            $user_name = implode(' ', $result);
+                                                        }
+
+                                                        if ($item['status']==2){
+                                                            $status='Baharu';
+                                                        }
+                                                        if ($item['status']==3){
+                                                            $status='Sedang Disaring';
+                                                        }
+                                                        $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                        $conjunctions = ['bin', 'binti'];
+                                                        $words = explode(' ', $text);
+                                                        $result = [];
+                                                        foreach ($words as $word) {
+                                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                                $result[] = Str::lower($word);
+                                                            } else {
+                                                                $result[] = $word;
+                                                            }
+                                                        }
+                                                        $pemohon = implode(' ', $result);
+                                                    @endphp
+                                                    @if($permohonan->program=="BKOKU")
+                                                        @if ($jenis_institusi=="UA")
+                                                            <tr>
+                                                                <td>
+                                                                    @if($item['status']==2 || $item['status']==3)
+                                                                        <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                                    @else
+                                                                        <a href="{{ url('tuntutan/sekretariat/saringan/papar-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                                    @endif
+                                                                </td>
+                                                                <td>{{$pemohon}}</td>
+                                                                <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                                @if ($item['status']=='2')
+                                                                    <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                @elseif ($item['status']=='3')
+                                                                    <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                @elseif ($item['status']=='5')
+                                                                    <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                @elseif ($item['status']=='6')
+                                                                    <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                @elseif ($item['status']=='7')
+                                                                    <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                @endif
+                                                                <td style="width: 20%">{{$user_name}}</td>
+                                                            </tr>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">

@@ -189,7 +189,7 @@
                                         </div>
                                         </div>
                                     </div>
-                            <div class="tab-pane fade show" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                            <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                 <br>
                                 <div class="body">
                                     <div class="table-responsive">
