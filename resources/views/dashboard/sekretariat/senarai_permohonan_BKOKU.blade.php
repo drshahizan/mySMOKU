@@ -93,6 +93,10 @@
                                         <tbody>
                                             @foreach ($permohonan as $item)
                                                 @php
+                                                    $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )
+                                                                           ->where('smoku_id', $item['smoku_id'])
+                                                                           ->value('bk_info_institusi.jenis_institusi');
+
                                                     // nama pemohon
                                                     $nama = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                     $text = ucwords(strtolower($nama));
@@ -112,7 +116,7 @@
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                 @endphp
 
-                                                @if($item['program']=="BKOKU")
+                                                @if ($jenis_institusi == "IPTS" || $jenis_institusi == "KK" || $jenis_institusi == "P")
                                                     <tr>
                                                         <td>{{$item->no_rujukan_permohonan}}</td>
                                                         <td>{{$pemohon}}</td>

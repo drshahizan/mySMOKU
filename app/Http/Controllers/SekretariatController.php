@@ -48,22 +48,6 @@ class SekretariatController extends Controller
         return view('dashboard.sekretariat.dashboard');
     }
 
-    // public function statusPermohonanBKOKU(Request $request)
-    // {
-    //     $startDate = $request->input('start_date');
-    //     $endDate = $request->input('end_date');
-
-    //     $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-    //         return $q->whereBetween('created_at', [$startDate, $endDate]);
-    //     })
-    //     ->when($request->status != null, function ($q) use ($request) {
-    //         return $q->where('status', $request->status);
-    //     })
-    //     ->get();
-
-    //     return view('dashboard.sekretariat.senarai_permohonan_BKOKU', compact('permohonan'));
-    // }
-
     public function statusPermohonanBKOKU(Request $request, $status)
     {
         $startDate = $request->input('start_date');
@@ -72,28 +56,15 @@ class SekretariatController extends Controller
         $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('created_at', [$startDate, $endDate]);
         })
-        ->when($request->status != null, function ($q) use ($request) {
+        ->when($status == '!=9', function ($q) {
+            return $q->where('status', '!=', 9);
+        })
+        ->when($request->status != null && $status != '!=9', function ($q) use ($request) {
             return $q->where('status', $request->status);
         })
-        ->get();
+        ->where('program', 'BKOKU')->get();
 
         return view('dashboard.sekretariat.senarai_permohonan_BKOKU', compact('permohonan'));
-    }
-
-    public function statusTuntutanBKOKU(Request $request, $status)
-    {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
-        $tuntutan = Tuntutan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('created_at', [$startDate, $endDate]);
-        })
-        ->when($request->status != null, function ($q) use ($request) {
-            return $q->where('status', $request->status);
-        })
-        ->get();
-
-        return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
     }
 
     public function statusPermohonanUA(Request $request, $status)
@@ -104,48 +75,169 @@ class SekretariatController extends Controller
         $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('created_at', [$startDate, $endDate]);
         })
-        ->when($request->status != null, function ($q) use ($request) {
+        ->when($status == '!=9', function ($q) {
+            return $q->where('status', '!=', 9);
+        })
+        ->when($request->status != null && $status != '!=9', function ($q) use ($request) {
             return $q->where('status', $request->status);
         })
-        ->get();
+        ->where('program', 'BKOKU')->get();
 
         return view('dashboard.sekretariat.senarai_permohonan_BKOKU_UA', compact('permohonan'));
     }
+
+    public function statusPermohonanPPK(Request $request, $status)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('created_at', [$startDate, $endDate]);
+        })
+        ->when($status == '!=9', function ($q) {
+            return $q->where('status', '!=', 9);
+        })
+        ->when($request->status != null && $status != '!=9', function ($q) use ($request) {
+            return $q->where('status', $request->status);
+        })
+        ->where('program', 'PPK')->get();
+
+        return view('dashboard.sekretariat.senarai_permohonan_PPK', compact('permohonan'));
+    }
+
+    public function statusTuntutanBKOKU(Request $request, $status)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $tuntutan = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+                    ->where('permohonan.program', '=', 'BKOKU')
+                    ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+                        return $q->whereBetween('tuntutan.created_at', [$startDate, $endDate]);
+                    })
+                    ->when($status === '!=9', function ($q) {
+                        return $q->where('tuntutan.status', '!=', 9);
+                    })
+                    ->when($request->status != null && $status !== '!=9', function ($q) use ($request) {
+                        return $q->where('tuntutan.status', $request->status);
+                    })
+                    ->get();
+
+        return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
+    }
+
 
     public function statusTuntutanUA(Request $request, $status)
     {
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $tuntutan = Tuntutan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+        $tuntutan = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+                    ->where('permohonan.program', '=', 'BKOKU')
+                    ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+                        return $q->whereBetween('tuntutan.created_at', [$startDate, $endDate]);
+                    })
+                    ->when($status === '!=9', function ($q) {
+                        return $q->where('tuntutan.status', '!=', 9);
+                    })
+                    ->when($request->status != null && $status !== '!=9', function ($q) use ($request) {
+                        return $q->where('tuntutan.status', $request->status);
+                    })
+                    ->get();
+
+        return view('dashboard.sekretariat.senarai_tuntutan_BKOKU_UA', compact('tuntutan'));
+    }
+
+    public function statusTuntutanPPK(Request $request, $status)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $tuntutan = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+                    ->where('permohonan.program', '=', 'PPK')
+                    ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+                        return $q->whereBetween('tuntutan.created_at', [$startDate, $endDate]);
+                    })
+                    ->when($status === '!=9', function ($q) {
+                        return $q->where('tuntutan.status', '!=', 9);
+                    })
+                    ->when($request->status != null && $status !== '!=9', function ($q) use ($request) {
+                        return $q->where('tuntutan.status', $request->status);
+                    })
+                    ->get();
+
+        return view('dashboard.sekretariat.senarai_tuntutan_PPK', compact('tuntutan'));
+    }
+
+    public function filterStatusPermohonanBKOKU(Request $request, $status)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('created_at', [$startDate, $endDate]);
         })
         ->when($request->status != null, function ($q) use ($request) {
             return $q->where('status', $request->status);
         })
-        ->get();
+        ->where('program','BKOKU')->get();
+
+        return view('dashboard.sekretariat.senarai_permohonan_BKOKU', compact('permohonan'));
+    }
+
+    public function filterStatusTuntutanBKOKU(Request $request, $status)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $tuntutan = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+                    ->where('permohonan.program', '=', 'BKOKU')
+                    ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+                        return $q->whereBetween('tuntutan.created_at', [$startDate, $endDate]);
+                    })
+                    ->when($request->status != null, function ($q) use ($request) {
+                        return $q->where('tuntutan.status', $request->status);
+                    })
+                    ->get();
+
+        return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
+    }
+
+    public function filterStatusPermohonanUA(Request $request, $status)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('created_at', [$startDate, $endDate]);
+        })
+        ->when($request->status != null, function ($q) use ($request) {
+            return $q->where('status', $request->status);
+        })
+        ->where('program','BKOKU')->get();
+
+        return view('dashboard.sekretariat.senarai_permohonan_BKOKU_UA', compact('permohonan'));
+    }
+
+    public function filterStatusTuntutanUA(Request $request, $status)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $tuntutan = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+                    ->where('permohonan.program', '=', 'BKOKU')
+                    ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+                        return $q->whereBetween('tuntutan.created_at', [$startDate, $endDate]);
+                    })
+                    ->when($request->status != null, function ($q) use ($request) {
+                        return $q->where('tuntutan.status', $request->status);
+                    })
+                    ->get();
 
         return view('dashboard.sekretariat.senarai_tuntutan_BKOKU_UA', compact('tuntutan'));
     }
 
-
-    // public function statusPermohonanPPK(Request $request)
-    // {
-    //     $startDate = $request->input('start_date');
-    //     $endDate = $request->input('end_date');
-
-    //     $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-    //         return $q->whereBetween('created_at', [$startDate, $endDate]);
-    //     })
-    //     ->when($request->status != null, function ($q) use ($request) {
-    //         return $q->where('status', $request->status);
-    //     })
-    //     ->get();
-
-    //     return view('dashboard.sekretariat.senarai_permohonan_PPK', compact('permohonan'));
-    // }
-
-    public function statusPermohonanPPK(Request $request, $status)
+    public function filterStatusPermohonanPPK(Request $request, $status)
     {
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
@@ -161,7 +253,7 @@ class SekretariatController extends Controller
         return view('dashboard.sekretariat.senarai_permohonan_PPK', compact('permohonan'));
     }
 
-    public function statusTuntutanPPK(Request $request, $status)
+    public function filterStatusTuntutanPPK(Request $request, $status)
     {
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
@@ -174,7 +266,7 @@ class SekretariatController extends Controller
         })
         ->get();
 
-        return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
+        return view('dashboard.sekretariat.senarai_tuntutan_PPK', compact('tuntutan'));
     }
 
     public function peringkatPengajian()

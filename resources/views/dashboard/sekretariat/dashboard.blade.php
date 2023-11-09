@@ -354,7 +354,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{url('sekretariat/permohonan/BKOKU/keseluruhan')}}">
+													<a href="{{ route('keseluruhanB.permohonan', ['status' => '!=9']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -527,7 +527,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{url('sekretariat/tuntutan/BKOKU/dibayar')}}">
+													<a href="{{ route('statusB.permohonan', ['status' => '8']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -622,7 +622,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '1']) }}">
+													<a href="{{ route('keseluruhanB.tuntutan', ['status' => '!=9']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTB-$UAtuntutanAll}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -651,7 +651,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '1']) }}">
+													<a href="{{ route('statusB.tuntutan', ['status' => '1']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTB-$UAtuntutan1}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -679,7 +679,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '2']) }}">
+													<a href="{{ route('statusB.tuntutan', ['status' => '2']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTB-$UAtuntutan2}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -709,7 +709,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '3']) }}">
+													<a href="{{ route('statusB.tuntutan', ['status' => '3']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTB-$UAtuntutan3}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -736,7 +736,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '4']) }}">
+													<a href="{{ route('statusB.tuntutan', ['status' => '4']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTB-$UAtuntutan4}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -763,7 +763,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '5']) }}">
+													<a href="{{ route('statusB.tuntutan', ['status' => '5']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTB-$UAtuntutan5}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -795,7 +795,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{url('sekretariat/tuntutan/BKOKU/dibayar')}}">
+													<a href="{{ route('statusB.tuntutan', ['status' => '8']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTB-$UAtuntutan8}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -823,7 +823,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '6']) }}">
+													<a href="{{ route('statusB.tuntutan', ['status' => '6']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTB-$UAtuntutan6}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -852,7 +852,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '7']) }}">
+													<a href="{{ route('statusB.tuntutan', ['status' => '7']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakTB-$UAtuntutan7}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -893,7 +893,7 @@
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
-														<a href="{{url('sekretariat/permohonan/BKOKU/keseluruhan')}}">
+														<a href="{{ route('keseluruhanUA.permohonan', ['status' => '!=9']) }}">
 															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{ $UApermohonanAll }}</span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
@@ -922,7 +922,7 @@
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
-														<a href="{{ route('statusB.permohonan', ['status' => '1']) }}">
+														<a href="{{ route('statusUA.permohonan', ['status' => '1']) }}">
 															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UApermohonan1}}</span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
@@ -950,7 +950,7 @@
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
-														<a href="{{ route('statusB.permohonan', ['status' => '2']) }}">
+														<a href="{{ route('statusUA.permohonan', ['status' => '2']) }}">
 															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UApermohonan2}}</span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
@@ -980,7 +980,7 @@
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
-														<a href="{{ route('statusB.permohonan', ['status' => '3']) }}">
+														<a href="{{ route('statusUA.permohonan', ['status' => '3']) }}">
 															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UApermohonan3}}</span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
@@ -1007,7 +1007,7 @@
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
-														<a href="{{ route('statusB.permohonan', ['status' => '4']) }}">
+														<a href="{{ route('statusUA.permohonan', ['status' => '4']) }}">
 															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UApermohonan4}}</span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
@@ -1034,7 +1034,7 @@
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
-														<a href="{{ route('statusB.permohonan', ['status' => '5']) }}">
+														<a href="{{ route('statusUA.permohonan', ['status' => '5']) }}">
 															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UApermohonan5}}</span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
@@ -1066,7 +1066,7 @@
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
-														<a href="{{url('sekretariat/tuntutan/BKOKU/dibayar')}}">
+														<a href="{{ route('statusUA.permohonan', ['status' => '8']) }}">
 															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UApermohonan8}}</span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
@@ -1094,7 +1094,7 @@
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
-														<a href="{{ route('statusB.permohonan', ['status' => '6']) }}">
+														<a href="{{ route('statusUA.permohonan', ['status' => '6']) }}">
 															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UApermohonan6}}</span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
@@ -1123,7 +1123,7 @@
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
-														<a href="{{ route('statusB.permohonan', ['status' => '7']) }}">
+														<a href="{{ route('statusUA.permohonan', ['status' => '7']) }}">
 															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UApermohonan7}}</span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
@@ -1161,7 +1161,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{url('sekretariat/permohonan/BKOKU/keseluruhan')}}">
+													<a href="{{ route('keseluruhanUA.tuntutan', ['status' => '!=9']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutanAll}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1190,7 +1190,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '1']) }}">
+													<a href="{{ route('statusUA.tuntutan', ['status' => '1']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan1}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1218,7 +1218,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '2']) }}">
+													<a href="{{ route('statusUA.tuntutan', ['status' => '2']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan2}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1248,7 +1248,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '3']) }}">
+													<a href="{{ route('statusUA.tuntutan', ['status' => '3']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan3}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1275,7 +1275,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '4']) }}">
+													<a href="{{ route('statusUA.tuntutan', ['status' => '4']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan4}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1302,7 +1302,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '5']) }}">
+													<a href="{{ route('statusUA.tuntutan', ['status' => '5']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan5}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1334,7 +1334,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{url('sekretariat/tuntutan/BKOKU/dibayar')}}">
+													<a href="{{ route('statusUA.tuntutan', ['status' => '8']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan8}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1362,7 +1362,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '6']) }}">
+													<a href="{{ route('statusUA.tuntutan', ['status' => '6']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan6}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1391,7 +1391,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '7']) }}">
+													<a href="{{ route('statusUA.tuntutan', ['status' => '7']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan7}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1432,7 +1432,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{url('sekretariat/permohonan/PPK/keseluruhan')}}">
+													<a href="{{ route('keseluruhanPPK.permohonan', ['status' => '!=9']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1605,7 +1605,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{url('sekretariat/tuntutan/PPK/dibayar')}}">
+													<a href="{{ route('statusP.permohonan', ['status' => '8']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1700,7 +1700,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{url('sekretariat/permohonan/PPK/keseluruhan')}}">
+													<a href="{{ route('keseluruhanP.tuntutan', ['status' => '!=9']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1729,7 +1729,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusP.permohonan', ['status' => '1']) }}">
+													<a href="{{ route('statusP.tuntutan', ['status' => '1']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1757,7 +1757,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusP.permohonan', ['status' => '2']) }}">
+													<a href="{{ route('statusP.tuntutan', ['status' => '2']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1787,7 +1787,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusP.permohonan', ['status' => '3']) }}">
+													<a href="{{ route('statusP.tuntutan', ['status' => '3']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1814,7 +1814,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusP.permohonan', ['status' => '4']) }}">
+													<a href="{{ route('statusP.tuntutan', ['status' => '4']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1841,7 +1841,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusP.permohonan', ['status' => '5']) }}">
+													<a href="{{ route('statusP.tuntutan', ['status' => '5']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1873,7 +1873,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{url('sekretariat/tuntutan/PPK/dibayar')}}">
+													<a href="{{ route('statusP.tuntutan', ['status' => '8']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1901,7 +1901,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusP.permohonan', ['status' => '6']) }}">
+													<a href="{{ route('statusP.tuntutan', ['status' => '6']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1930,7 +1930,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusP.permohonan', ['status' => '7']) }}">
+													<a href="{{ route('statusP.tuntutan', ['status' => '7']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakTP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
