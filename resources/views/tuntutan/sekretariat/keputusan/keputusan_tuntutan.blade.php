@@ -223,16 +223,16 @@
                                                     @if($permohonan->program=="BKOKU")
                                                         @if ($jenis_institusi=="UA")
                                                             <tr>
-                                                                <td>{{$no_ruj_tuntutan}}</td>
-                                                                <td>{{$pemohon}}</td>
-                                                                <td>{{ucwords(strtolower($nama_peringkat))}}</td>
-                                                                <td class="text-center">{{$item['created_at']->format('Y-m-d')}}</td>
+                                                                <td style="width: 13%">{{$no_ruj_tuntutan}}</td>
+                                                                <td style="width: 40%">{{$pemohon}}</td>
+                                                                <td style="width: 15%">{{ucwords(strtolower($nama_peringkat))}}</td>
+                                                                <td class="text-center" style="width: 17%">{{$item['created_at']->format('d/m/Y')}}</td>
                                                                 @if($item['status'] == "6")
-                                                                    <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                                    <td class="text-center" style="width: 15%"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif ($item['status']=="5")
-                                                                    <td class="text-center"><button type="button" class="btn bg-dikembalikan">{{ucwords(strtolower($status))}}</button></td>
+                                                                    <td class="text-center" style="width: 15%"><button type="button" class="btn bg-dikembalikan">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif($item['status'] == "7")
-                                                                    <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
+                                                                    <td class="text-center" style="width: 15%"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @endif
                                                             </tr>
                                                         @endif

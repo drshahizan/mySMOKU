@@ -262,25 +262,25 @@
                                                     @endphp
                                                     @if ($jenis_institusi=="UA")
                                                         <tr>
-                                                            <td>
+                                                            <td style="width: 17%!important;">
                                                                 @if($item['status']==4 || $item['status']==5)
                                                                     <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                                 @else
                                                                     <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                                 @endif
                                                             </td>
-                                                            <td>{{$pemohon}}</td>
-                                                            <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                            <td style="width: 30%!important">{{$pemohon}}</td>
+                                                            <td class="text-center" style="width: 13%!important;">{{$item['created_at']->format('d/m/Y')}}</td>
                                                             @if ($item['status']=='2')
-                                                                <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                <td class="text-center" style="width: 10%!important;"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=='3')
-                                                                <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                <td class="text-center" style="width: 10%!important;"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=='4')
-                                                                <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                <td class="text-center" style="width: 10%!important;"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=='5')
-                                                                <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                <td class="text-center" style="width: 10%!important;"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @endif
-                                                            <td>{{$user_name}}</td>
+                                                            <td style="width: 20%!important">{{$user_name}}</td>
                                                         </tr>
                                                     @endif
                                                 @endif

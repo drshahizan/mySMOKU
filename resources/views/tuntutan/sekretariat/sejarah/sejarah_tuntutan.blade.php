@@ -206,7 +206,7 @@
                                                     @if ($jenis_institusi=="UA")
                                                         <tr>
                                                             <td style="width: 17%">
-                                                                <a href="{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                                <a href="{{ url('tuntutan/sekretariat/saringan/rekod-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
                                                             </td>
                                                             <td style="width: 50%">{{$pemohon}}</td>
                                                             <td class="text-center" style="width: 15%">{{$item['created_at']->format('d/m/Y')}}</td>
