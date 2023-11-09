@@ -235,7 +235,7 @@ class SekretariatController extends Controller
 
     public function tangguhLanjutPengajian()
     {
-        $recordsBKOKU = TangguhPengajian::select('tangguh_pengajian.*', 'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
+        $recordsBKOKU = TangguhPengajian::select('tangguh_pengajian.*','tangguh_pengajian.status as status_tangguh', 'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
             ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tangguh_pengajian.smoku_id')
             ->join('smoku', 'tangguh_pengajian.smoku_id', '=', 'smoku.id')
             ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat')
@@ -247,6 +247,7 @@ class SekretariatController extends Controller
             ->where('smoku_akademik.status', 1)
             ->whereRaw('(tangguh_pengajian.created_at, smoku_akademik.smoku_id) IN (SELECT MAX(created_at), smoku_id FROM tangguh_pengajian GROUP BY smoku_id)')
             ->get();
+        //dd($recordsBKOKU);    
 
         return view('kemaskini.sekretariat.pengajian.kemaskini_tangguh_lanjut_pengajian', compact('recordsBKOKU'));
     }

@@ -106,13 +106,19 @@
                                                     <form action="{{ route('kemaskini.tarikh.pengajian', $items->smoku_id) }}" method="post" id="myForm">
                                                     @csrf
                                                         <td class="text-center">
-                                                            <input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat_baru" name="tarikh_tamat_baru" value="" />
+                                                            <input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat_baru" name="tarikh_tamat_baru" value="{{$items->tarikh_tamat}}" />
                                                         </td>
                                                         <td class="text-center">
                                                             <select id="status" name="status" style="padding: 6px;" onchange="submitForm()">
                                                                 <option value="">Pilih</option>
-                                                                <option value="1">Diluluskan</option>
-                                                                <option value="0">Tidak Diluluskan</option>
+                                                                @if(!empty($items->status_tangguh))
+                                                                    <option value="{{$items->status_tangguh}}" selected>
+                                                                        {{ $items->status_tangguh == '1' ? 'Diluluskan' : 'Tidak Diluluskan' }}
+                                                                    </option>
+                                                                @else
+                                                                    <option value="1">Diluluskan</option>
+                                                                    <option value="0">Tidak Diluluskan</option>
+                                                                @endif
                                                             </select>
                                                         </td>
                                                     </form>
