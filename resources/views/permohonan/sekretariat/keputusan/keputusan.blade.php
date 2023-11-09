@@ -79,7 +79,10 @@
                             {{-- Javascript Nav Bar --}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="bkoku-tab" data-toggle="tab" data-target="#bkoku" type="button" role="tab" aria-controls="bkoku" aria-selected="true">BKOKU</button>
+                                    <button class="nav-link active" id="bkoku1-tab" data-toggle="tab" data-target="#bkoku1" type="button" role="tab" aria-controls="bkoku1" aria-selected="true">BKOKU</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="bkoku2-tab" data-toggle="tab" data-target="#bkoku2" type="button" role="tab" aria-controls="bkoku2" aria-selected="true">BKOKU UA</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
@@ -89,7 +92,7 @@
                             {{-- Content Navigation Bar --}}
                             <div class="tab-content" id="myTabContent">
                                 {{-- BKOKU --}}
-                                <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
+                                <div class="tab-pane fade show active" id="bkoku1" role="tabpanel" aria-labelledby="bkoku1-tab">
                                     <br>
                                     <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
                                         <div class="row" style="margin-left: 15px;">
@@ -142,9 +145,15 @@
                                                         
                                                     @foreach ($kelulusan as $item)
                                                         @php
-                                                            $no_rujukan_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
-                                                            $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku.nama');
                                                             $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
+                                                            $no_rujukan_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
+                                                            $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+                                                                        ->where('permohonan.id', $item['permohonan_id'])
+                                                                        ->value('smoku.nama');
+                                                            $jenis_institusi = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+							                                                       ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                                                                                   ->where('permohonan.id', $item['permohonan_id'])
+                                                                                   ->value('bk_info_institusi.jenis_institusi');
 
                                                             //peringkat pengajian
                                                             preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches); // Extract peringkat pengajian value using regular expression
@@ -167,23 +176,137 @@
                                                         @endphp
 
                                                         @if($program == "BKOKU")
-                                                            <tr>
-                                                                <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
-                                                                <td>{{$no_rujukan_permohonan}}</td>
-                                                                <td>{{$pemohon}}</td>
-                                                                <td>{{ucwords(strtolower($nama_peringkat))}}</td>
-                                                                <td class="text-center">{{$item->no_mesyuarat}}</td>
-                                                                <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                                                                <td class="text-center">
-                                                                    @if($item->keputusan == "Lulus")
-                                                                        <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
-                                                                            <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
-                                                                        </a>
-                                                                    @elseif($item->keputusan == "Tidak Lulus")
-                                                                        <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
-                                                                    @endif
-                                                                </td>
-                                                            </tr>
+                                                            @if ($jenis_institusi == "IPTS" || $jenis_institusi == "KK" || $jenis_institusi == "P")
+                                                                <tr>
+                                                                    <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
+                                                                    <td>{{$no_rujukan_permohonan}}</td>
+                                                                    <td>{{$pemohon}}</td>
+                                                                    <td>{{ucwords(strtolower($nama_peringkat))}}</td>
+                                                                    <td class="text-center">{{$item->no_mesyuarat}}</td>
+                                                                    <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
+                                                                    <td class="text-center">
+                                                                        @if($item->keputusan == "Lulus")
+                                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
+                                                                                <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
+                                                                            </a>
+                                                                        @elseif($item->keputusan == "Tidak Lulus")
+                                                                            <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div> 
+
+                                {{-- BKOKU UA --}}
+                                <div class="tab-pane fade" id="bkoku2" role="tabpanel" aria-labelledby="bkoku2-tab">
+                                    <br>
+                                    <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
+                                        <div class="row" style="margin-left: 15px;">
+                                            <div class="col-md-2">
+                                                <label for="start_date">Dari:</label>
+                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
+                                            </div>
+                                    
+                                            <div class="col-md-2">
+                                                <label for="end_date">Hingga:</label>
+                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
+                                            </div>
+                                    
+                                            <div class="col-md-3">
+                                                <label for="end_date">Pilih Keputusan:</label>
+                                                <select name="status" class="form-select">
+                                                    <option value="">Semua Keputusan</option>
+                                                    <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
+                                                    <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
+                                                </select>
+                                            </div>
+                                    
+                                            <div class="col-md-4">
+                                                <br>
+                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>   
+                                    
+                                    <div class="body">
+                                        <div class="table-responsive" id="table-responsive">
+                                            <table id="sortTable2" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr style="color: white; background-color:rgb(35, 58, 108);">
+                                                        <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>
+                                                        <th style="width: 13%"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 30%"><b>Nama</b></th>
+                                                        <th style="width: 15%"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
+                                                        <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 15%">Status Permohonan</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @php
+                                                        $i=0;
+                                                    @endphp
+                                                        
+                                                    @foreach ($kelulusan as $item)
+                                                        @php
+                                                            $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
+                                                            $no_rujukan_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
+                                                            $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+                                                                        ->where('permohonan.id', $item['permohonan_id'])
+                                                                        ->value('smoku.nama');
+                                                            $jenis_institusi = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+							                                                       ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                                                                                   ->where('permohonan.id', $item['permohonan_id'])
+                                                                                   ->value('bk_info_institusi.jenis_institusi');
+
+                                                            //peringkat pengajian
+                                                            preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches); // Extract peringkat pengajian value using regular expression
+                                                            $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null; // $matches[1] will contain the extracted peringkat pengajian value
+                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
+                                                         
+                                                            //nama pelajar
+                                                            $text = ucwords(strtolower($nama));
+                                                            $conjunctions = ['bin', 'binti'];
+                                                            $words = explode(' ', $text);
+                                                            $result = [];
+                                                            foreach ($words as $word) {
+                                                                if (in_array(Str::lower($word), $conjunctions)) {
+                                                                    $result[] = Str::lower($word);
+                                                                } else {
+                                                                    $result[] = $word;
+                                                                }
+                                                            }
+                                                            $pemohon = implode(' ', $result);
+                                                        @endphp
+
+                                                        @if($program == "BKOKU")
+                                                            @if ($jenis_institusi == "UA")
+                                                                <tr>
+                                                                    <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
+                                                                    <td>{{$no_rujukan_permohonan}}</td>
+                                                                    <td>{{$pemohon}}</td>
+                                                                    <td>{{ucwords(strtolower($nama_peringkat))}}</td>
+                                                                    <td class="text-center">{{$item->no_mesyuarat}}</td>
+                                                                    <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
+                                                                    <td class="text-center">
+                                                                        @if($item->keputusan == "Lulus")
+                                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
+                                                                                <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
+                                                                            </a>
+                                                                        @elseif($item->keputusan == "Tidak Lulus")
+                                                                            <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
                                                         @endif
                                                     @endforeach
                                                 </tbody>
@@ -227,7 +350,7 @@
                 
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable2" class="table table-bordered table-striped">
+                                            <table id="sortTable3" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>
@@ -325,6 +448,26 @@
         <script>
             $(document).ready(function() {
                 var table = $('#sortTable2').DataTable({
+                    "columnDefs": [
+                        {
+                            "targets": 'no-sort',
+                            "orderable": false
+                        }
+                    ],
+                });
+
+                // Disable sorting for the "No" column
+                table.on('order.dt', function() {
+                    table.column(0, { order: 'applied' }).nodes().each(function(cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                var table = $('#sortTable3').DataTable({
                     "columnDefs": [
                         {
                             "targets": 'no-sort',
