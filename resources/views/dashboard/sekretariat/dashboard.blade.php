@@ -1432,7 +1432,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('keseluruhanPPK.permohonan', ['status' => '!=9']) }}">
+													<a href="{{ route('keseluruhanP.permohonan', ['status' => '!=9']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanP}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
