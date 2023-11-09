@@ -23,18 +23,23 @@
 			<!--begin::Item-->
 			<li class="breadcrumb-item text-dark" style="color:darkblue">Laman Utama</li>
 			<!--end::Item-->
+			<!--begin::Item-->
+			<li class="breadcrumb-item">
+				<span class="bullet bg-gray-400 w-5px h-2px"></span>
+			</li>
+			<!--end::Item-->
 
-            <!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">Senarai Tuntutan</li>
+			<!--begin::Item-->
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Senarai Permohonan</li>
 			<!--end::Item-->
             <!--begin::Item-->
 			<li class="breadcrumb-item">
 				<span class="bullet bg-gray-400 w-5px h-2px"></span>
 			</li>
 			<!--end::Item-->
-
+            
             <!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">PPK</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">BKOKU Universiti Awam</li>
 			<!--end::Item-->
 		</ul>
         <!--end::Breadcrumb-->
@@ -50,22 +55,22 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Permohonan PPK</h2>
+                                <h2>Senarai Permohonan BKOKU Universiti Awam</h2>
                             </div>
 
                             {{-- Filter section --}}
-                            <form action="{{url('sekretariat/tuntutan/PPK/dibayar')}}" method="GET">
+                            <form action="{{url('sekretariat/permohonan/BKOKU/keseluruhan')}}" method="GET">
                                 <div class="row" style="margin-left:15px;">
                                     <div class="col-md-2">
                                         <label for="start_date"><b>Dari:</b></label>
                                         <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                     </div>
-
+                            
                                     <div class="col-md-2">
                                         <label for="end_date"><b>Hingga:</b></label>
                                         <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                     </div>
-
+    
                                     <div class="col-md-4 right">
                                         <br>
                                         <button type="submit" class="btn btn-primary" style="width: 10%; padding-left:10px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
@@ -73,24 +78,24 @@
                                 </div>
                             </form>
 
-                            <div class="table-responsive">
-                                <div class="body">
+                            {{-- <div class="table-responsive"> --}}
+                                <div class="body">      
                                     <table id="sortTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                <th style="width: 15%"><b>ID Permohonan</b></th>
+                                                <th style="width: 15%"><b>ID Permohonan</b></th>                                        
                                                 <th style="width: 45%"><b>Nama</b></th>
-                                                <th style="width: 13%" class="text-center"><b>Tarikh Permohonan</b></th>
+                                                <th style="width: 13%" class="text-center"><b>Tarikh Permohonan</b></th> 
                                                 <th class="text-center" style="width: 15%">Status Permohonan</th>
                                             </tr>
                                         </thead>
-
+                                        
                                         <tbody>
-                                            @foreach ($tuntutan as $item)
+                                            @foreach ($permohonan as $item)
                                                 @php
                                                     // nama pemohon
                                                     $nama = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                    $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
+                                                    $text = ucwords(strtolower($nama));
                                                     $conjunctions = ['bin', 'binti'];
                                                     $words = explode(' ', $text);
                                                     $result = [];
@@ -107,7 +112,7 @@
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                 @endphp
 
-                                                @if($item['program']=="PPK")
+                                                @if($item['program']=="BKOKU")
                                                     <tr>
                                                         <td>{{$item->no_rujukan_permohonan}}</td>
                                                         <td>{{$pemohon}}</td>
@@ -135,16 +140,16 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            {{-- </div> --}}
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>   
+        </div> 
 
-
+        
         <!-- Javascript -->
-        <script src="assets/bundles/libscripts.bundle.js"></script>
+        <script src="assets/bundles/libscripts.bundle.js"></script>    
         <script src="assets/bundles/vendorscripts.bundle.js"></script>
 
         <script>
@@ -161,5 +166,5 @@
                 event.relatedTarget // previous active tab
             })
         </script>
-</x-default-layout>
+</x-default-layout> 
 
