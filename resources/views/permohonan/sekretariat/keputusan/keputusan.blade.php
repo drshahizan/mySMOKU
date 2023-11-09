@@ -290,13 +290,13 @@
                                                         @if($program == "BKOKU")
                                                             @if ($jenis_institusi == "UA")
                                                                 <tr>
-                                                                    <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
-                                                                    <td>{{$no_rujukan_permohonan}}</td>
-                                                                    <td>{{$pemohon}}</td>
-                                                                    <td>{{ucwords(strtolower($nama_peringkat))}}</td>
-                                                                    <td class="text-center">{{$item->no_mesyuarat}}</td>
-                                                                    <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                                                                    <td class="text-center">
+                                                                    <td class="text-center" style="width: 5%"  data-no="{{ $i++ }}">{{$i++}}</td>
+                                                                    <td style="width: 13%">{{$no_rujukan_permohonan}}</td>
+                                                                    <td style="width: 30%">{{$pemohon}}</td>
+                                                                    <td style="width: 15%">{{ucwords(strtolower($nama_peringkat))}}</td>
+                                                                    <td class="text-center" style="width: 10%">{{$item->no_mesyuarat}}</td>
+                                                                    <td class="text-center" style="width: 12%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
+                                                                    <td class="text-center" style="width: 15%">
                                                                         @if($item->keputusan == "Lulus")
                                                                             <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
                                                                                 <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
@@ -391,13 +391,13 @@
 
                                                         @if($program == "PPK")
                                                             <tr>
-                                                                <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
-                                                                <td>{{$id_permohonan}}</td>
-                                                                <td>{{$pemohon}}</td>
-                                                                <td>{{ucwords(strtolower($nama_peringkat))}}</td>
-                                                                <td class="text-center">{{$item->no_mesyuarat}}</td>
-                                                                <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                                                                <td class="text-center">
+                                                                <td class="text-center" style="width: 5%"  data-no="{{ $i++ }}">{{$i++}}</td>
+                                                                <td style="width: 13%">{{$id_permohonan}}</td>
+                                                                <td style="width: 30%">{{$pemohon}}</td>
+                                                                <td style="width: 15%">{{ucwords(strtolower($nama_peringkat))}}</td>
+                                                                <td class="text-center" style="width: 10%">{{$item->no_mesyuarat}}</td>
+                                                                <td class="text-center" style="width: 12%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
+                                                                <td class="text-center" style="width: 15%">
                                                                     @if($item->keputusan == "Lulus")
                                                                         <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
                                                                             <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak

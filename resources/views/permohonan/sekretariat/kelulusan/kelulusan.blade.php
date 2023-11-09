@@ -195,14 +195,14 @@
                                                             
                                                             @if ($jenis_institusi == "IPTS" || $jenis_institusi == "KK" || $jenis_institusi == "P")
                                                                 <tr>
-                                                                    <td class="text-center"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
-                                                                    <td><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
-                                                                    <td>{{$pemohon}}</td>
-                                                                    <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                    <td>{{$namakursus}}</td>
-                                                                    <td>{{$institusipengajian}}</td>
-                                                                    <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                                                                    <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                                                    <td class="text-center" style="width: 3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
+                                                                    <td style="width: 10%"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                                    <td style="width: 20%">{{$pemohon}}</td>
+                                                                    <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
+                                                                    <td style="width: 17%">{{$namakursus}}</td>
+                                                                    <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                    <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                                                    <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                                 </tr>
                                                             @endif  
                                                         @endif
@@ -211,16 +211,16 @@
                                             </table>
 
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU2">
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU1">
                                                 Sahkan
                                             </button>
                                         
                                             {{-- Modal --}}
-                                            <div class="modal fade" id="pengesahanModalBKOKU2" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU2" aria-hidden="true">
+                                            <div class="modal fade" id="pengesahanModalBKOKU1" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU1" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Rekod Keputusan Permohonan</h1>
+                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Rekod Keputusan Permohonan</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
 
@@ -377,14 +377,14 @@
                                                             
                                                             @if ($jenis_institusi == "UA")
                                                                 <tr>
-                                                                    <td class="text-center"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
-                                                                    <td><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
-                                                                    <td>{{$pemohon}}</td>
-                                                                    <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                    <td>{{$namakursus}}</td>
-                                                                    <td>{{$institusipengajian}}</td>
-                                                                    <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                                                                    <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                                                    <td class="text-center" style="width: 3%;><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
+                                                                    <td style="width: 10%"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                                    <td style="width: 20%">{{$pemohon}}</td>
+                                                                    <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
+                                                                    <td style="width: 17%">{{$namakursus}}</td>
+                                                                    <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                    <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                                                    <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                                 </tr>
                                                             @endif
                                                         @endif
@@ -393,16 +393,16 @@
                                             </table>
 
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU1">
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU2">
                                                 Sahkan
                                             </button>
                                         
                                             {{-- Modal --}}
-                                            <div class="modal fade" id="pengesahanModalBKOKU1" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU1" aria-hidden="true">
+                                            <div class="modal fade" id="pengesahanModalBKOKU2" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU2" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Rekod Keputusan Permohonan</h1>
+                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Rekod Keputusan Permohonan</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
 
@@ -554,14 +554,14 @@
                                                             @endphp
                                                             
                                                             <tr>
-                                                                <td class="text-center" style="width:3% !important;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
-                                                                <td style="width: 10% !important;"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
-                                                                <td style="width: 20% !important;">{{$pemohon}}</td>
-                                                                <td style="width: 10% !important;">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                <td style="width: 17% !important;">{{$namakursus}}</td>
-                                                                <td style="width: 20% !important;">{{$institusipengajian}}</td>
-                                                                <td class="text-center"  style="width: 10% !important;">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                                                                <td class="text-center"  style="width: 10% !important;">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                                                <td class="text-center" style="width:3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
+                                                                <td style="width: 10%;"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                                <td style="width: 20%;">{{$pemohon}}</td>
+                                                                <td style="width: 10%;">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
+                                                                <td style="width: 17%;">{{$namakursus}}</td>
+                                                                <td style="width: 20%;">{{$institusipengajian}}</td>
+                                                                <td class="text-center"  style="width: 10%;">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                                                <td class="text-center"  style="width: 10%;">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                             </tr>
                                                         @endif
                                                     @endforeach 
