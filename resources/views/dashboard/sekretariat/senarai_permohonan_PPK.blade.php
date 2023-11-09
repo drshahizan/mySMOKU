@@ -66,19 +66,6 @@
                                         <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                     </div>>
     
-                                    {{-- <div class="col-md-3">
-                                        <select name="status" class="form-select">
-                                            <option value="">Semua Status Permohonan</option>
-                                            <option value="1" {{Request::get('status') == '1' ? 'selected':'' }} >Deraf</option>
-                                            <option value="2" {{Request::get('status') == '2' ? 'selected':'' }} >Baharu</option>
-                                            <option value="3" {{Request::get('status') == '3' ? 'selected':'' }} >Saringan</option>
-                                            <option value="4" {{Request::get('status') == '4' ? 'selected':'' }} >Disokong</option>
-                                            <option value="5" {{Request::get('status') == '5' ? 'selected':'' }} >Dikembalikan</option>
-                                            <option value="6" {{Request::get('status') == '6' ? 'selected':'' }} >Layak</option>
-                                            <option value="7" {{Request::get('status') == '7' ? 'selected':'' }} >Tidak Layak</option>
-                                        </select>
-                                    </div> --}}
-
                                     <div class="col-md-4 right">
                                         <br>
                                         <button type="submit" class="btn btn-primary" style="width: 10%; padding-left:10px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
@@ -139,6 +126,8 @@
                                                             <td class="text-center"><button type="button" class="btn btn-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif($item['status'] == "7")
                                                             <td class="text-center"><button type="button" class="btn btn-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif($item['status'] == "8")
+                                                            <td class="text-center"><button type="button" class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
                                                     </tr>
                                                 @endif

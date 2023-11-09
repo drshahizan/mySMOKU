@@ -58,7 +58,7 @@ class SekretariatController extends Controller
         ->when($request->status != null, function ($q) use ($request) {
             return $q->where('status', $request->status);
         })
-        ->get();
+        ->where('status','!=',9)->get();
 
         return view('dashboard.sekretariat.senarai_permohonan_BKOKU', compact('permohonan'));
     }
