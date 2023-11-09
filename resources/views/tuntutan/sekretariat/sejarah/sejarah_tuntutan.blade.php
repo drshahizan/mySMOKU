@@ -62,6 +62,9 @@
                                 <button class="nav-link active" id="bkoku-tab" data-toggle="tab" data-target="#bkoku" type="button" role="tab" aria-controls="bkoku" aria-selected="true">BKOKU</button>
                             </li>
                             <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="true">BKOKU UA</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
                             </li>
                         </ul>
@@ -90,6 +93,11 @@
                                                     @php
                                                         $i++;
                                                         $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
+                                                        $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
+                                                        $peringkat = $rujukan[1];
+                                                        $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
+                                                        $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+
                                                         $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
@@ -112,32 +120,117 @@
                                                         $pemohon = implode(' ', $result);
                                                     @endphp
                                                     @if ($permohonan->program=="BKOKU")
-                                                    <tr>
-                                                        <td style="width: 17%">
-                                                            <a href="{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                        </td>
-                                                        <td style="width: 50%">{{$pemohon}}</td>
-                                                        <td class="text-center" style="width: 15%">{{$item['created_at']->format('d/m/Y')}}</td>
-                                                        @if ($item['status']=='1')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='2')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='3')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='4')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='5')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='6')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='7')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='8')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='9')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @if ($jenis_institusi!="UA")
+                                                        <tr>
+                                                            <td style="width: 17%">
+                                                                <a href="{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                            </td>
+                                                            <td style="width: 50%">{{$pemohon}}</td>
+                                                            <td class="text-center" style="width: 15%">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                            @if ($item['status']=='1')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='2')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='3')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='4')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='5')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='6')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='7')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='8')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='9')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @endif
+                                                        </tr>
                                                         @endif
-                                                    </tr>
+                                                    @endif
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                                <br>
+                                <div class="body">
+                                    <div class="table-responsive">
+                                        <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 17%"><b>ID Tuntutan</b></th>
+                                                <th style="width: 50%"><b>Nama</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @php
+                                                $i=0;
+                                            @endphp
+                                            @foreach ($tuntutan as $item)
+                                                @php
+                                                    $i++;
+                                                    $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
+                                                    $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
+                                                    $peringkat = $rujukan[1];
+                                                    $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
+                                                    $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+
+                                                    $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
+                                                    $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+                                                    if ($item['status']==2){
+                                                        $status='Baharu';
+                                                    }
+                                                    if ($item['status']==3){
+                                                        $status='Sedang Disaring';
+                                                    }
+                                                    $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                    $conjunctions = ['bin', 'binti'];
+                                                    $words = explode(' ', $text);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
+                                                        }
+                                                    }
+                                                    $pemohon = implode(' ', $result);
+                                                @endphp
+                                                @if ($permohonan->program=="BKOKU")
+                                                    @if ($jenis_institusi=="UA")
+                                                        <tr>
+                                                            <td style="width: 17%">
+                                                                <a href="{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                            </td>
+                                                            <td style="width: 50%">{{$pemohon}}</td>
+                                                            <td class="text-center" style="width: 15%">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                            @if ($item['status']=='1')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='2')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='3')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='4')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='5')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='6')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='7')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='8')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='9')
+                                                                <td class="text-center" style="width: 15%"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @endif
+                                                        </tr>
+                                                    @endif
                                                 @endif
                                             @endforeach
                                             </tbody>
@@ -145,7 +238,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                 <br>
                                 <div class="body">
