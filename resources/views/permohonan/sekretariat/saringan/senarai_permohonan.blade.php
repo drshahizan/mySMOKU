@@ -193,7 +193,7 @@
                                 <br>
                                 <div class="body">
                                     <div class="table-responsive">
-                                        <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+                                        <table id="sortTable1a" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
                                                 <th style="width: 17%"><b>ID Permohonan</b></th>
@@ -390,6 +390,10 @@
 </div>
     <script>
         $('#sortTable1').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+        $('#sortTable1a').DataTable({
             ordering: true, // Enable manual sorting
             order: [] // Disable initial sorting
         });

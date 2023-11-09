@@ -202,7 +202,7 @@
                                 <br>
                                 <div class="body">
                                     <div class="table-responsive">
-                                        <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+                                        <table id="sortTable1a" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
                                                 <th style="width: 10%"><b>ID Permohonan</b></th>
@@ -426,6 +426,7 @@
     </div>
     <script>
         $('#sortTable1').DataTable();
+        $('#sortTable1a').DataTable();
         $('#sortTable2').DataTable();
     </script>
 
