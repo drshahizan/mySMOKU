@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\URL;
 
-class maildaftarPengguna extends Mailable
+class MailDaftarPengguna extends Mailable
 {
     use Queueable, SerializesModels;
     public $email;
@@ -37,7 +37,7 @@ class maildaftarPengguna extends Mailable
 
         $subject = "Daftar Pengguna Sistem BKOKU";
         return $this->subject($subject)
-                    ->view('pages.pentadbir.emel-daftar')
+                    ->view('kemaskini.pentadbir.emel-daftar')
                     ->with([
                         'email' => $this->email,
                         'no_kp' => $this->no_kp,

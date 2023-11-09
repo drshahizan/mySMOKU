@@ -16,8 +16,7 @@
     <p>Nombor Kad Pengenalan : {{$no_kp}}
     <p>Alamat E-mel : {{$email}}
     <br>
-    <p>Sila klik <a href="{{$verificationUrl}}">disini</a> atau masukkan URL di bawah untuk mengaktifkan akaun
-        anda di {{$verificationUrl}}</p>
+    <p>Sila klik <a href="{{$verificationUrl}}">disini</a> untuk mengaktifkan akaun anda</p>
     <br>
     <p>Jika mempunyai sebarang pertanyaan, sila hubungi <i>hotline</i> BKOKU di talian 03-8888 1616 atau e-mel ke bkoku@mohe.gov.my. </p>
    

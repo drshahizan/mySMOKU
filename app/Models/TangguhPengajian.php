@@ -16,5 +16,6 @@ class TangguhPengajian extends Model
         'surat_tangguh',
         'dokumen_sokongan',
         'perakuan',
+        'status',
     ];
 }

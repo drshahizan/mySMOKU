@@ -28,7 +28,7 @@ class HebahanIklan extends Mailable
         
         $subject = "Hebahan Iklan";
         return $this->subject($subject)
-                    ->view('pages.pentadbir.hebahan_iklan')
+                    ->view('kemaskini.pentadbir.hebahan_iklan')
                     ->with([
                         'catatan' => $this->catatan,
                         

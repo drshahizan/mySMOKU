@@ -263,6 +263,12 @@
 				</a>
 			</div>
 			<div class="menu-item">
+				<a class="menu-link" href="{{ route('tangguh.lanjut.pengajian') }}">
+					<span class="menu-icon">{!! getIcon('time', 'fs-2') !!}</span>
+					<span class="menu-title">Pemohonan Penangguhan / Pelanjutan</span>
+				</a>
+			</div>
+			<div class="menu-item">
 				<a class="menu-link" href="{{ route('preview') }}">
 					<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
 					<span class="menu-title">Surat Tawaran</span>

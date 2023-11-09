@@ -26,6 +26,7 @@ use App\Models\Kelulusan;
 use App\Models\MaklumatKementerian;
 use App\Models\SuratTawaran;
 use App\Models\TamatPengajian;
+use App\Models\TangguhPengajian;
 use App\Models\Tuntutan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Dompdf;
@@ -230,6 +231,47 @@ class SekretariatController extends Controller
         $newRecord->save();
 
         return redirect()->back()->with('success', 'Peringkat Pengajian updated successfully.');
+    }
+
+    public function tangguhLanjutPengajian()
+    {
+        $recordsBKOKU = TangguhPengajian::select('tangguh_pengajian.*', 'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
+            ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tangguh_pengajian.smoku_id')
+            ->join('smoku', 'tangguh_pengajian.smoku_id', '=', 'smoku.id')
+            ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat')
+            ->whereIn('smoku_akademik.smoku_id', function ($query) {
+                $query->select('smoku_id')
+                    ->from('permohonan')
+                    ->where('program', 'BKOKU');
+            })
+            ->where('smoku_akademik.status', 1)
+            ->whereRaw('(tangguh_pengajian.created_at, smoku_akademik.smoku_id) IN (SELECT MAX(created_at), smoku_id FROM tangguh_pengajian GROUP BY smoku_id)')
+            ->get();
+
+        return view('kemaskini.sekretariat.pengajian.kemaskini_tangguh_lanjut_pengajian', compact('recordsBKOKU'));
+    }
+
+    public function kemaskiniTarikhPengajian(Request $request, $id)
+    {
+
+        $akademik = Akademik::where('smoku_id', $id)->where('status',1)
+            ->orderBy('created_at', 'desc') // Assuming you have a 'created_at' column
+            ->first();
+
+        if ($akademik) {
+            $akademik->update(['tarikh_tamat' => $request->tarikh_tamat_baru]);
+        }
+
+        $tangguh = TangguhPengajian::where('smoku_id', $id)
+            ->orderBy('id', 'desc') 
+            ->first();
+
+        if ($tangguh) {
+            $tangguh->update(['status' => $request->status]);
+        }
+
+
+        return redirect()->back()->with('success', 'Tarikh baru tamat pengajian dikemaskini');
     }
 
     //Step 1: Editing Data - Allow users to view and edit the current data.
