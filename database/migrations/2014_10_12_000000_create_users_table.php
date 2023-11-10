@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('profile_photo_path')->nullable();
             $table->integer('tahap');
             $table->string('jawatan')->nullable();
-            $table->integer('id_institusi')->nullable();
+            $table->string('id_institusi')->nullable();
             $table->string('status')->nullable();
             $table->rememberToken();
             $table->timestamps();

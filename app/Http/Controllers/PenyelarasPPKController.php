@@ -25,6 +25,7 @@ use App\Models\Permohonan;
 use App\Models\SejarahPermohonan;
 use App\Models\Dokumen;
 use App\Models\EmelKemaskini;
+use App\Models\JumlahTuntutan;
 use App\Models\Peperiksaan;
 use App\Models\Tuntutan;
 use App\Models\SejarahTuntutan;
@@ -110,10 +111,12 @@ class PenyelarasPPKController extends Controller
         $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri')->get();
         $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
         $agama = Agama::orderby("id","asc")->select('id','agama')->get();
-        $infoipt = InfoIpt::all()->where('jenis_permohonan','PPK')->sortBy('nama_institusi');
+        // $infoipt = InfoIpt::all()->whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->sortBy('nama_institusi');
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->get();
         $peringkat = PeringkatPengajian::all()->sortBy('kod_peringkat');
         $kursus = Kursus::all()->sortBy('nama_kursus');
         $mod = Mod::all()->sortBy('kod_mod');
+        
 
         $permohonan = Permohonan::where('smoku_id', $id)->first();
         $butiranPelajar = ButiranPelajar::join('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
@@ -134,6 +137,14 @@ class PenyelarasPPKController extends Controller
         } else {
             return view('permohonan.penyelaras_ppk.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','kursus','biaya','penaja','negeri','bandar','agama'));
         }
+    }
+
+    public function fetchAmaun(Request $request)
+    {
+        $sem_semasa = $request->input('sem_semasa');
+        $amaunModel = JumlahTuntutan::where('program', 'PPK')->where('semester', $sem_semasa)->first();
+
+        return response()->json(['amaun' => $amaunModel ? $amaunModel->jumlah : null]);
     }
 
     public function bandar($idnegeri)
@@ -322,6 +333,8 @@ class PenyelarasPPKController extends Controller
         Akademik::where('smoku_id' ,$id)
         ->update([
 
+            'peringkat_pengajian' => $request->peringkat_pengajian,
+            'nama_kursus' => $request->nama_kursus,
             'mod' => $request->mod,
             'tempoh_pengajian' => $request->tempoh_pengajian,
             'bil_bulan_per_sem' => $request->bil_bulan_per_sem,
@@ -342,10 +355,10 @@ class PenyelarasPPKController extends Controller
         ->update([
 
             'program' => 'PPK',
-            'yuran' => $request->yuran,
-            'amaun_yuran' => $request->amaun_yuran,
+            // 'yuran' => $request->yuran,
+            // 'amaun_yuran' => $request->amaun_yuran,
             'wang_saku' => $request->wang_saku,
-            'amaun_wang_saku' => $request->amaun_wang_saku,
+            'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
             'perakuan' => $request->perakuan,
 
         ]);
@@ -466,7 +479,7 @@ class PenyelarasPPKController extends Controller
 
         Mail::to($user->email)->cc($cc)->send(new PermohonanHantar($catatan,$emel));     
 
-        return redirect()->route('penyelaras.ppk.dashboard')->with('message', 'Permohonan pelajar telah dihantar.');
+        return redirect()->route('penyelaras.ppk.dashboard')->with('success', 'Permohonan pelajar telah dihantar.');
 
     }
 

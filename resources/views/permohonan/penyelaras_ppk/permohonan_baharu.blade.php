@@ -803,7 +803,6 @@
 								<!--end::Label-->
 								<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 									@foreach ($infoipt as $infoipt)
-										<option></option>
 										<option value="{{ $infoipt->id_institusi}}">{{ $infoipt->nama_institusi}}</option>
 									@endforeach
 								</select>
@@ -871,7 +870,7 @@
 								<!--begin::Input wrapper-->
 								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 									
-									<option value="1">SEPENUH MASA</option>
+									<option value="1">Sepenuh Masa</option>
 									
 								</select>
 								<!--end::Input wrapper-->
@@ -1070,6 +1069,15 @@
 									<!--begin::Input-->
 									<div class="d-flex">
 										<span class="input-group-text">RM</span>
+										@php
+											// $sem_semasa = request('sem_semasa'); 
+											
+											// $amaunModel = \App\Models\JumlahTuntutan::where('program', 'PPK')->where('semester', 1)->first();
+
+											// $amaun = $amaunModel ? $amaunModel->jumlah : null;
+
+										@endphp
+
 										<input type="number" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" step="0.01" inputmode="decimal" placeholder="" value="" readonly/>
 									</div>
 									<!--end::Input-->
@@ -1107,12 +1115,7 @@
 							</thead>
 							<tbody class="fw-semibold text-gray-600" >
 								<tr>
-									<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
-									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
-									<td><textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea></td>
-								</tr>
-								<tr>
-									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh salinan"><i class="fa-solid fa-circle-info"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
 								</tr>
@@ -1454,94 +1457,87 @@
 		<script type='text/javascript'>
 			$(document).ready(function(){
 	
-				// institusi Change
-				$('#id_institusi').change(function(){
-	
-					// institusi id
-					var id_institusi = $(this).val();
-					//alert (id_institusi);
-	
-					// Empty the dropdown
-					$('#peringkat_pengajian').find('option').not(':first').remove();
-					$('#nama_kursus').find('option').not(':first').remove();
-	
-					// AJAX request 
-					$.ajax({
-						url: '/peringkat/'+id_institusi,
-						type: 'get',
-						dataType: 'json',
-						success: function(response){
-							//alert('AJAX loaded something');
-	
-							var len = 0;
-							if(response['data'] != null){
-								len = response['data'].length;
-							}
-	
-							if(len > 0){
-								// Read data and create <option >
-								for(var i=0; i<len; i++){
-	
-									var id_institusi = response['data'][i].id_institusi;
-									var kod_peringkat = response['data'][i].kod_peringkat;
-									var peringkat = response['data'][i].peringkat;
-	
-									var option = "<option value='"+kod_peringkat+"'>"+peringkat+"</option>";
-	
-									$("#peringkat_pengajian").append(option); 
-								}
-							}
-	
-						},
-						error: function(){
-						alert('AJAX load did not work');
+				// institusi id
+				var id_institusi = document.getElementById("id_institusi").value; 
+				
+				// Empty the dropdown
+				$('#peringkat_pengajian').find('option').not(':first').remove();
+				$('#nama_kursus').find('option').not(':first').remove();
+
+				// AJAX request 
+				$.ajax({
+					url: '/peringkat/'+id_institusi,
+					type: 'get',
+					dataType: 'json',
+					success: function(response){
+						//alert('AJAX loaded something');
+
+						var len = 0;
+						if(response['data'] != null){
+							len = response['data'].length;
 						}
-					});
-	
+
+						if(len > 0){
+							// Read data and create <option >
+							for(var i=0; i<len; i++){
+
+								var id_institusi = response['data'][i].id_institusi;
+								var kod_peringkat = response['data'][i].kod_peringkat;
+								var peringkat = response['data'][i].peringkat;
+
+								var option = "<option value='"+kod_peringkat+"'>"+peringkat+"</option>";
+
+								$("#peringkat_pengajian").append(option); 
+							}
+						}
+
+					},
+					error: function(){
+					alert('AJAX load did not work');
+					}
 				});
 	
 				// peringkat Change
 				$('#peringkat_pengajian').change(function(){
 	
-				// institusi id
-				var idipt = $(id_institusi).val();
-				var kodperingkat = $(this).val();
+					// institusi id
+					var idipt = document.getElementById("id_institusi").value;
+					var kodperingkat = document.getElementById("peringkat_pengajian").value;
+					//alert(kodperingkat);
+		
+					// Empty the dropdown
+					$('#nama_kursus').find('option').not(':first').remove();
 	
-				// Empty the dropdown
-				$('#nama_kursus').find('option').not(':first').remove();
-				//alert(idipt);
-	
-	
-				// AJAX request 
-				$.ajax({
-					url: '/kursus/'+kodperingkat+'/'+idipt,
-					type: 'get',
-					dataType: 'json',
-				
-					success: function(response){
-	
-						var len = 0;
-						if(response['data'] != null){
-							len = response['data'].length;
-						}
-	
-						if(len > 0){
-							// Read data and create <option >
-							for(var i=0; i<len; i++){
-	
-								var id_institusi = response['data'][i].id_institusi;
-								var kod_peringkat = response['data'][i].kod_peringkat;
-								var nama_kursus = response['data'][i].nama_kursus;
-	
-								var option = "<option value='"+nama_kursus+"'>"+nama_kursus+"</option>";
-	
-								$("#nama_kursus").append(option); 
-								
+					// AJAX request 
+					$.ajax({
+						url: '/kursus/'+kodperingkat+'/'+idipt,
+						type: 'get',
+						dataType: 'json',
+					
+						success: function(response){
+		
+							var len = 0;
+							if(response['data'] != null){
+								len = response['data'].length;
 							}
+		
+							if(len > 0){
+								// Read data and create <option >
+								for(var i=0; i<len; i++){
+		
+									var id_institusi = response['data'][i].id_institusi;
+									var kod_peringkat = response['data'][i].kod_peringkat;
+									var nama_kursus = response['data'][i].nama_kursus;
+		
+									var option = "<option value='"+nama_kursus+"'>"+nama_kursus+"</option>";
+		
+									$("#nama_kursus").append(option); 
+									
+								}
+							}
+		
 						}
-	
-					}
-				});
+					});
 	
 				});
 		
@@ -1550,24 +1546,32 @@
 			</script>
 
 
-		<script>
-			function select1(){
-            var sem_semasa = document.getElementById('sem_semasa').value;
-			var amaunsem1 = "3660.00";
-			var amaunlain = "3360.00";
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+	function select1() {
+		var sem_semasa = document.getElementById('sem_semasa').value;
+		console.log('Selected Semester:', sem_semasa);
 
-            if(sem_semasa=="1"){
+		// Make an AJAX request to fetch data based on the selected semester
+		$.ajax({
+			type: 'GET',
+			url: '/fetch-amaun', // Replace with the actual route for fetching data
+			data: {sem_semasa: sem_semasa},
+			success: function(response) {
+				// Format the value to display with .00
+				var formattedAmaun = response.amaun ? response.amaun.toFixed(2) : '';
 
-				document.getElementById("amaun_wang_saku").value= amaunsem1;
-            }
+				// Update the value of 'amaun_wang_saku' input
+				document.getElementById("amaun_wang_saku").value = formattedAmaun;
 
-            else{
-                
-				document.getElementById("amaun_wang_saku").value= amaunlain;
-            }
-        }
+			},
+			error: function(error) {
+				console.error('Error fetching data:', error);
+			}
+		});
+	}
+</script>
 
-		</script>
 
 		
 
