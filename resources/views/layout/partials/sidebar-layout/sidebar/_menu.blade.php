@@ -158,6 +158,19 @@
 		<!--end::Menu-->
 
 @elseif(Auth::user()->tahap=='3')
+@php
+	$baharu = DB::table('permohonan')->where('status', '=', '2')->count();
+	$sokong = DB::table('permohonan')->where('status', '=', '4')->count();
+	$layak = DB::table('permohonan')->where('status', '=', '6')->count();
+	$bayar = DB::table('permohonan')->where('status', '=', '8')->count();
+	$total = DB::table('permohonan')->count();
+	//dd($baharu);
+	$baharuT = DB::table('tuntutan')->where('status', '=', '2')->count();
+	$layakT = DB::table('tuntutan')->where('status', '=', '6')->count();
+	$bayarT = DB::table('tuntutan')->where('status', '=', '8')->count();
+	$totalT = DB::table('tuntutan')->count();	
+
+@endphp
 <!--begin::sidebar menu-->
 <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
 	<!--begin::Menu wrapper-->
@@ -180,13 +193,13 @@
 			<div class="menu-item">
 				<a class="menu-link" href="{{url('permohonan/sekretariat/saringan/senarai-permohonan')}}">
 						<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
-						<span class="menu-title">Saringan</span>
+						<span class="menu-title">Saringan ({{$baharu}})</span>
 				</a>
 			</div>
 			<div class="menu-item">
 				<a class="menu-link" href="{{url('permohonan/sekretariat/kelulusan')}}">
 						<span class="menu-icon">{!! getIcon('loading', 'fs-2') !!}</span>
-						<span class="menu-title">Kelulusan</span>
+						<span class="menu-title">Kelulusan ({{$sokong}})</span>
 				</a>
 			</div>
 
@@ -199,19 +212,19 @@
 			<div class="menu-item">
 				<a class="menu-link" href="{{ route('permohonan.esp')}}">
 						<span class="menu-icon">{!! getIcon('square-brackets', 'fs-2') !!}</span>
-						<span class="menu-title">Maklumat ESP</span>
+						<span class="menu-title">Maklumat ESP ({{$layak}})</span>
 				</a>
 			</div>
 			<div class="menu-item">
 				<a class="menu-link" href="{{url('permohonan/sekretariat/pembayaran/senarai')}}">
 					<span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
-					<span class="menu-title">Pembayaran</span>
+					<span class="menu-title">Pembayaran ({{$bayar}})</span>
 				</a>
 			</div>
 			<div class="menu-item">
 				<a class="menu-link" href="{{url('permohonan/sekretariat/sejarah/sejarah-permohonan')}}">
 					<span class="menu-icon">{!! getIcon('watch', 'fs-2') !!}</span>
-					<span class="menu-title">Sejarah</span>
+					<span class="menu-title">Sejarah ({{$total}})</span>
 				</a>
 			</div>
 
@@ -223,7 +236,7 @@
 			<div class="menu-item">
 				<a class="menu-link" href="{{ url('tuntutan/sekretariat/saringan/senarai_tuntutan') }}">
 						<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
-						<span class="menu-title">Saringan</span>
+						<span class="menu-title">Saringan ({{$baharuT}})</span>
 				</a>
 			</div>
 			<div class="menu-item">
@@ -235,19 +248,19 @@
 			<div class="menu-item">
 				<a class="menu-link" href="{{ route('tuntutan.esp')}}">
 						<span class="menu-icon">{!! getIcon('square-brackets', 'fs-2') !!}</span>
-						<span class="menu-title">Maklumat ESP</span>
+						<span class="menu-title">Maklumat ESP ({{$layakT}})</span>
 				</a>
 			</div>
 			<div class="menu-item">
 				<a class="menu-link" href="{{url('tuntutan/sekretariat/pembayaran/senarai')}}">
 					<span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
-					<span class="menu-title">Pembayaran</span>
+					<span class="menu-title">Pembayaran ({{$bayarT}})</span>
 				</a>
 			</div>
 			<div class="menu-item">
 				<a class="menu-link" href="{{url('tuntutan/sekretariat/sejarah/sejarah-tuntutan')}}">
 					<span class="menu-icon">{!! getIcon('watch', 'fs-2') !!}</span>
-					<span class="menu-title">Sejarah</span>
+					<span class="menu-title">Sejarah ({{$totalT}})</span>
 				</a>
 			</div>
 
