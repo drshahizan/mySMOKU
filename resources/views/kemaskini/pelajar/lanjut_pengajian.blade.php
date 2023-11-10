@@ -48,7 +48,7 @@
 												<input type="file" id="suratLanjut" name="suratLanjut[]" required/>
 												@if(session()->has('uploadedSuratLanjut'))
 													@foreach(session('uploadedSuratLanjut') as $surat)
-														<a href="{{ asset('assets/dokumen/surat_lanjut/' . $surat) }}" target="_blank">{{ $surat }}</a>
+														<a href="{{ asset('assets/dokumen/surat_tangguh_lanjut/' . $surat) }}" target="_blank">{{ $surat }}</a>
 													@endforeach
 												@endif
 											</td>
@@ -61,7 +61,7 @@
 												<input type="file" id="jadual" name="jadual[]" required/>
 												@if(session()->has('uploadedJadual'))
 													@foreach(session('uploadedJadual') as $jadual)
-														<a href="{{ asset('assets/dokumen/surat_lanjut/' . $jadual) }}" target="_blank">{{ $jadual }}</a>
+														<a href="{{ asset('assets/dokumen/surat_tangguh_lanjut/' . $jadual) }}" target="_blank">{{ $jadual }}</a>
 													@endforeach
 												@endif
 											</td>
@@ -74,7 +74,7 @@
 												<input type="file" id="sokongan" name="sokongan[]" required/>
 												@if(session()->has('uploadedSokongan'))
 													@foreach(session('uploadedSokongan') as $sokongan)
-														<a href="{{ asset('assets/dokumen/surat_lanjut/' . $sokongan) }}" target="_blank">{{ $sokongan }}</a>
+														<a href="{{ asset('assets/dokumen/surat_tangguh_lanjut/' . $sokongan) }}" target="_blank">{{ $sokongan }}</a>
 													@endforeach
 												@endif
 											</td>

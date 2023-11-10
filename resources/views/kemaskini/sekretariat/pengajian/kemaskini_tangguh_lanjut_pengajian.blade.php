@@ -59,23 +59,21 @@
                                     <table id="sortTable1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>                                        
-                                                <th style="width: 35%"><b>Nama</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Peringkat Pengajian</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
-                                                <th class="text-center" style="width: 15%">Kemaskini Tarikh Baru Tamat Pengajian</th>
+                                                <th class="text-center no-sort"><b>No.</b></th>                                        
+                                                <th class="text-center" style="width: 25%"><b>Nama</b></th>
+                                                <th class="text-center"><b>Peringkat Pengajian</b></th>
+                                                <th class="text-center"><b>Surat Kelulusan</b></th>
+                                                <th class="text-center"><b>Cadangan Jadual Pengajian Baharu</b></th>
+                                                <th class="text-center"><b>Dokumen Sokongan</b></th> 
+                                                <th class="text-center">Kemaskini Tarikh Baru Tamat Pengajian</th>
                                                 <th class="text-center" style="width: 15%">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @php
-                                                $i=0;
-                                            @endphp
-
-                                            @foreach ($recordsBKOKU as $items)
+                                            
+                                            @foreach ($data as $items)
                                                 @php
-                                                    $text = ucwords(strtolower($items->nama));
+                                                    $text = ucwords(strtolower($items['nama']));
                                                     $conjunctions = ['bin', 'binti'];
                                                     $words = explode(' ', $text);
                                                     $result = [];
@@ -88,32 +86,37 @@
                                                     }
                                                     $pemohon = implode(' ', $result);
                                                 @endphp
-
+                                        
                                                 <tr>
-                                                    <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
-                                                    <td>{{$pemohon}}</td>
-                                                    <td>{{ucwords(strtolower($items->peringkat))}}</td>
+                                                    <td class="text-center" data-no="{{ $loop->iteration }}">{{ $loop->iteration }}</td>
+                                                    <td>{{ $pemohon }}</td>
+                                                    <td>{{ ucwords(strtolower($items['peringkat'])) }}</td>
                                                     <td class="text-center">
-                                                        <a href="{{ asset('assets/dokumen/surat_tangguh/' . $items->surat_tangguh) }}" target="_blank" class="btn btn-info btn-sm">
-                                                        Lihat
-                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
+                                                        <a href="{{ asset('assets/dokumen/surat_tangguh_lanjut/' . $items['surat']) }}" target="_blank" class="btn btn-info btn-sm">
+                                                        Papar
                                                     </td>
                                                     <td class="text-center">
-                                                        <a href="{{ asset('assets/dokumen/surat_tangguh/' . $items->dokumen_sokongan) }}" target="_blank" class="btn btn-info btn-sm">
-                                                        Lihat
-                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
+                                                        @if (array_key_exists('jadual', $items) && $items['jadual'] !== null)
+                                                            <a href="{{ asset('assets/dokumen/surat_tangguh_lanjut/' . $items['jadual']) }}" target="_blank" class="btn btn-info btn-sm">Papar</a>
+                                                        @else
+                                                            N/A
+                                                        @endif
                                                     </td>
-                                                    <form action="{{ route('kemaskini.tarikh.pengajian', $items->smoku_id) }}" method="post" id="myForm">
-                                                    @csrf
+                                                    <td class="text-center">
+                                                        <a href="{{ asset('assets/dokumen/surat_tangguh_lanjut/' . $items['dokumen_sokongan']) }}" target="_blank" class="btn btn-info btn-sm">
+                                                        Papar
+                                                    </td>
+                                                    <form action="{{ route('kemaskini.tarikh.pengajian', $items['smoku_id']) }}" method="post" id="myForm">
+                                                        @csrf
                                                         <td class="text-center">
-                                                            <input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat_baru" name="tarikh_tamat_baru" value="{{$items->tarikh_tamat}}" />
+                                                            <input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat_baru" name="tarikh_tamat_baru" value="{{ $items['tarikh_tamat'] }}" />
                                                         </td>
                                                         <td class="text-center">
-                                                            <select id="status" name="status" style="padding: 6px;" onchange="submitForm()">
+                                                            <select id="status" name="status" class="form-control" onchange="submitForm()">
                                                                 <option value="">Pilih</option>
-                                                                @if(!empty($items->status_tangguh))
-                                                                    <option value="{{$items->status_tangguh}}" selected>
-                                                                        {{ $items->status_tangguh == '1' ? 'Diluluskan' : 'Tidak Diluluskan' }}
+                                                                @if(!empty($items['status_tangguh_lanjut']))
+                                                                    <option value="{{$items['status_tangguh_lanjut']}}" selected>
+                                                                        {{ $items['status_tangguh_lanjut'] == '1' ? 'Diluluskan' : 'Tidak Diluluskan' }}
                                                                     </option>
                                                                 @else
                                                                     <option value="1">Diluluskan</option>
@@ -125,7 +128,7 @@
                                                 </tr>
                                             @endforeach
                                         </tbody>
-                                    </table>
+                                    </table>                                    
                                 </div>
                             </div>
                         </div>

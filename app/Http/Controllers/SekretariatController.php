@@ -23,6 +23,7 @@ use App\Models\Waris;
 use App\Models\Akademik;
 use App\Models\InfoIpt;
 use App\Models\Kelulusan;
+use App\Models\LanjutPengajian;
 use App\Models\MaklumatKementerian;
 use App\Models\SuratTawaran;
 use App\Models\TamatPengajian;
@@ -327,7 +328,8 @@ class SekretariatController extends Controller
 
     public function tangguhLanjutPengajian()
     {
-        $recordsBKOKU = TangguhPengajian::select('tangguh_pengajian.*','tangguh_pengajian.status as status_tangguh', 'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
+        $tangguh = TangguhPengajian::select('tangguh_pengajian.*','tangguh_pengajian.status as status_tangguh_lanjut','tangguh_pengajian.surat_tangguh as surat',
+            'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
             ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tangguh_pengajian.smoku_id')
             ->join('smoku', 'tangguh_pengajian.smoku_id', '=', 'smoku.id')
             ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat')
@@ -338,10 +340,25 @@ class SekretariatController extends Controller
             })
             ->where('smoku_akademik.status', 1)
             ->whereRaw('(tangguh_pengajian.created_at, smoku_akademik.smoku_id) IN (SELECT MAX(created_at), smoku_id FROM tangguh_pengajian GROUP BY smoku_id)')
-            ->get();
-        //dd($recordsBKOKU);    
+            ->get()->toArray();
 
-        return view('kemaskini.sekretariat.pengajian.kemaskini_tangguh_lanjut_pengajian', compact('recordsBKOKU'));
+        $lanjut = LanjutPengajian::select('lanjut_pengajian.*','lanjut_pengajian.status as status_tangguh_lanjut','lanjut_pengajian.surat_lanjut as surat',
+            'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
+            ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'lanjut_pengajian.smoku_id')
+            ->join('smoku', 'lanjut_pengajian.smoku_id', '=', 'smoku.id')
+            ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat')
+            ->whereIn('smoku_akademik.smoku_id', function ($query) {
+                $query->select('smoku_id')
+                    ->from('permohonan')
+                    ->where('program', 'BKOKU');
+            })
+            ->where('smoku_akademik.status', 1)
+            ->whereRaw('(lanjut_pengajian.created_at, smoku_akademik.smoku_id) IN (SELECT MAX(created_at), smoku_id FROM lanjut_pengajian GROUP BY smoku_id)')
+            ->get()->toArray();    
+        $data = array_merge($tangguh, $lanjut);   
+        //dd($data);
+
+        return view('kemaskini.sekretariat.pengajian.kemaskini_tangguh_lanjut_pengajian', compact('data'));
     }
 
     public function kemaskiniTarikhPengajian(Request $request, $id)

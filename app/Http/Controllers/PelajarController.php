@@ -200,11 +200,11 @@ class PelajarController extends Controller
         if ($suratTangguh && $sokongan) {
             foreach ($suratTangguh as $key => $surat) {
                 $uniqueFilenameSurat = uniqid() . '_' . $surat->getClientOriginalName();
-                $surat->move('assets/dokumen/surat_tangguh', $uniqueFilenameSurat);
+                $surat->move('assets/dokumen/surat_tangguh_lanjut', $uniqueFilenameSurat);
                 $uploadedsuratTangguh[] = $uniqueFilenameSurat;
 
                 $uniqueFilenameSokongan = uniqid() . '_' . $sokongan[$key]->getClientOriginalName();
-                $sokongan[$key]->move('assets/dokumen/surat_tangguh', $uniqueFilenameSokongan);
+                $sokongan[$key]->move('assets/dokumen/surat_tangguh_lanjut', $uniqueFilenameSokongan);
                 $uploadedSokongan[] = $uniqueFilenameSokongan;
 
                 if ($existingRecord) {
@@ -268,15 +268,15 @@ class PelajarController extends Controller
         if ($suratLanjut && $jadual && $sokongan) {
             foreach ($suratLanjut as $key => $surat) {
                 $uniqueFilenameSurat = uniqid() . '_' . $surat->getClientOriginalName();
-                $surat->move('assets/dokumen/surat_lanjut', $uniqueFilenameSurat);
+                $surat->move('assets/dokumen/surat_tangguh_lanjut', $uniqueFilenameSurat);
                 $uploadedSuratLanjut[] = $uniqueFilenameSurat;
 
                 $uniqueFilenameJadual = uniqid() . '_' . $jadual[$key]->getClientOriginalName();
-                $jadual[$key]->move('assets/dokumen/surat_lanjut', $uniqueFilenameJadual);
+                $jadual[$key]->move('assets/dokumen/surat_tangguh_lanjut', $uniqueFilenameJadual);
                 $uploadedJadual[] = $uniqueFilenameJadual;
 
                 $uniqueFilenameSokongan = uniqid() . '_' . $sokongan[$key]->getClientOriginalName();
-                $sokongan[$key]->move('assets/dokumen/surat_lanjut', $uniqueFilenameSokongan);
+                $sokongan[$key]->move('assets/dokumen/surat_tangguh_lanjut', $uniqueFilenameSokongan);
                 $uploadedSokongan[] = $uniqueFilenameSokongan;
 
                 if ($existingRecord) {
