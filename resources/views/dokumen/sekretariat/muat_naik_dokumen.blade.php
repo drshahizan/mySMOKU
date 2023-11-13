@@ -57,7 +57,7 @@
 	<!--begin::Content-->
 	<div id="kt_app_content" class="app-content flex-column-fluid">
 		<!--begin::Content container-->
-		<div id="kt_app_content_container" class="app-container container-xl" style="width:90%">
+		<div id="kt_app_content_container" class="app-container container-xl" style="width:90%; margin: 0 auto;">
 			<!--begin::Layout-->
 			<div class="d-flex flex-column flex-lg-row">
 				<!--begin::Content-->
@@ -96,15 +96,15 @@
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th style="width: 45%">Item</th>
-											<th style="width: 55%">Pilih</th>
+											<th style="width: 45% !important;">Item</th>
+											<th style="width: 55% !important;">Pilih</th>
 										</tr>
 									</thead>
 
 									<tbody>
 										{{-- NAMA INSTITUSI --}}
 										<tr>
-											<td>Nama Institusi Pengajian</td>
+											<td style="width: 45% !important;">Nama Institusi Pengajian</td>
 											<td>
 												<select name="institusi_id" style="padding: 5px;">
 													<option value="">Pilih Institusi Pengajian</option>
@@ -119,13 +119,13 @@
 
 										{{-- DOKUMEN SPPB 1 --}}
 										<tr>
-											<td>Borang SPBB 1 (Permohonan Salur Pelajar Sedia Ada)</td>
+											<td style="width: 45% !important;">Borang SPBB 1 (Permohonan Salur Pelajar Sedia Ada)</td>
 											<td>
 												<div id="file-input-container">
 													<!-- File input fields for SPPB1 -->
 													<div class="d-flex">
 														<div class="file-input">
-															<input type="file" name="dokumen1[]" required/>
+															<input type="file" name="dokumen1[]"/>
 														</div>
 													</div>
 												</div>																						
@@ -134,13 +134,13 @@
 
 										{{-- DOKUMEN SPPB 1a --}}
 										<tr>
-											<td>Borang SPBB 1a (Permohonan Salur Pelajar Baharu)</td>
+											<td style="width: 45% !important;">Borang SPBB 1a (Permohonan Salur Pelajar Baharu)</td>
 											<td>
 												<div id="file-input-container">
 													<!-- File input fields for SPPB1a -->
 													<div class="d-flex">
 														<div class="file-input">
-															<input type="file" name="dokumen1a[]" required/>
+															<input type="file" name="dokumen1a[]"/>
 														</div>
 													</div>
 												</div>																						
@@ -149,13 +149,13 @@
 
 										{{-- DOKUMEN SPPB 2 --}}
 										<tr>
-											<td>Borang SPBB 2 (Laporan Bayaran)</td>
+											<td style="width: 45% !important;">Borang SPBB 2 (Laporan Bayaran)</td>
 											<td>
 												<div id="file-input-container">
 													<!-- File input fields for SPPB2 -->
 													<div class="d-flex">
 														<div class="file-input">
-															<input type="file" name="dokumen2[]" required/>
+															<input type="file" name="dokumen2[]"/>
 														</div>
 													</div>
 												</div>																						
@@ -164,13 +164,13 @@
 
 										{{-- DOKUMEN SPPB 2a --}}
 										<tr>
-											<td>Borang SPBB 2a (Laporan Tuntutan)</td>
+											<td style="width: 45% !important;">Borang SPBB 2a (Laporan Tuntutan)</td>
 											<td>
 												<div id="file-input-container">
 													<!-- File input fields for SPPB2a -->
 													<div class="d-flex">
 														<div class="file-input">
-															<input type="file" name="dokumen2a[]" required/>
+															<input type="file" name="dokumen2a[]"/>
 														</div>
 													</div>
 												</div>																						
@@ -179,13 +179,13 @@
 
 										{{-- DOKUMEN SPPB 3 --}}
 										<tr>
-											<td>Borang SPBB 3 (Penyata Terimaan)</td>
+											<td style="width: 45% !important;">Borang SPBB 3 (Penyata Terimaan)</td>
 											<td>
 												<div id="file-input-container">
 													<!-- File input fields for SPPB3 -->
 													<div class="d-flex">
 														<div class="file-input">
-															<input type="file" name="dokumen3[]" required/>
+															<input type="file" name="dokumen3[]"/>
 														</div>
 													</div>
 												</div>																						
@@ -246,7 +246,7 @@
 												<td class="text-center" data-no="{{ $i++ }}">{{ $i }}</td>
 												<td>{{ $nama_institusi }}</td>
 												<td class="text-center">
-													<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $doc->dokumen) }}" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
+													<a href="{{ url('penyaluran/sekretariat/lihat/salinan-dokumen/sppb/'.$id) }}" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
 														Lihat <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
 													</a>
 												</td>
@@ -256,40 +256,6 @@
 								</tbody>
 							</table>
 						</div>						
-						
-						{{-- <div class="card-body p-20 pt-0">
-							<table id="sortTable1" class="table table-bordered table-striped">
-								<thead>
-									<tr>
-										<th class="text-center" style="width: 5%">No</th>
-										<th class="text-center" style="width: 70%">Institusi</th>
-										<th class="text-center" style="width: 25%">Dokumen</th>
-									</tr>
-								</thead>
-						
-								<tbody>
-									@php
-									$i = 0;
-									@endphp
-
-									@foreach ($dokumen as $doc)
-										@php
-											$id = $doc->institusi_id;
-											$nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $id)->value('nama_institusi');
-										@endphp
-										<tr>
-											<td class="text-center" data-no="{{ $i++ }}">{{ $i }}</td>
-											<td>{{ $nama_institusi }}</td>
-											<td class="text-center">
-												<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $doc->dokumen) }}" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
-													Lihat <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
-												</a>
-											</td>
-										</tr>
-									@endforeach
-								</tbody>
-							</table>
-						</div> --}}
 						<!--end::Card body 2-->
 					</div>
 					<!--end::Card-->
