@@ -145,31 +145,7 @@
                                                 <tr>
                                                     <td style="text-align:right;">1</td>
                                                     <td>
-                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$permohonan->id) }}" target="_blank">Maklumat Profil Diri</a></span>
-                                                    </td>
-                                                    <td class="hidden-sm-down">
-                                                        Lengkap
-                                                    </td>
-                                                    <td>
-                                                        &nbsp;
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align:right;">2</td>
-                                                    <td>
                                                         <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$permohonan->id) }}" target="_blank">Maklumat Akademik</a></span>
-                                                    </td>
-                                                    <td class="hidden-sm-down">
-                                                        Lengkap
-                                                    </td>
-                                                    <td>
-                                                        &nbsp;
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align:right;">3</td>
-                                                    <td>
-                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/salinan-dokumen/'.$permohonan->id) }}" target="_blank">Salinan Dokumen</a></span>
                                                     </td>
                                                     <td class="hidden-sm-down">
                                                         Lengkap

@@ -244,17 +244,34 @@ class SaringanController extends Controller
 
     public function saringPermohonanDiperbaharui(Request $request,$id)
     {
+        $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
         $permohonan = Permohonan::where('id', $id)->first();
         $smoku_emel =Smoku::where('id', $permohonan->smoku_id)->value('email');
         if($request->get('maklumat_akademik')=="lengkap"){
 
-            $permohonan = Permohonan::where('id', $id)->first();
             $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
-            $smoku = Smoku::where('id', $smoku_id)->first();
-            $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
-        $peringkat = $rujukan[1];
-        $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
-            return view('permohonan.sekretariat.saringan.maklumat_tuntutan',compact('permohonan','smoku','akademik'));
+            Permohonan::where('id', $id)
+                ->update([
+                    'status'   =>  4,
+                ]);
+
+            $status_rekod = new SejarahPermohonan([
+                'smoku_id'          =>  $smoku_id,
+                'permohonan_id'     =>  $id,
+                'status'            =>  4,
+                'dilaksanakan_oleh' =>  Auth::user()->id,
+            ]);
+            $status_rekod->save();
+
+            $permohonan = Permohonan::where('status', '2')
+                ->orWhere('status', '=','3')
+                ->orWhere('status', '=','4')
+                ->orWhere('status', '=','5')
+                ->get();
+
+            $status_kod = 3;
+            $status = "Permohonan ".$no_rujukan_permohonan." telah disokong.";
+            return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status'));
         }
         else{
             $catatan[]="";
