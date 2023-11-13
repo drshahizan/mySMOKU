@@ -54,13 +54,13 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="card">
-                            <div class="header">
+                            {{-- <div class="header">
                                 <h2>Senarai Permohonan BKOKU</h2>
-                            </div>
+                            </div> --}}
 
                             {{-- Filter section --}}
                             <form action="{{url('sekretariat/permohonan/BKOKU/keseluruhan')}}" method="GET">
-                                <div class="row" style="margin-left:15px;">
+                                <div class="row" style="margin-left:15px; margin-top:30px;">
                                     <div class="col-md-2">
                                         <label for="start_date"><b>Dari:</b></label>
                                         <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
