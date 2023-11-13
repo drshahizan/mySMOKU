@@ -169,6 +169,14 @@
                                                                 @else
                                                                     <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                                 @endif
+                                                            @elseif($item['status']==3 && $user_id==Auth::user()->id)
+                                                                @if($bil_akademik>1)
+                                                                    <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @else
+                                                                    <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @endif
+                                                            @elseif($item['status']==3 && $user_id!=Auth::user()->id)
+                                                                {{$item['no_rujukan_permohonan']}}
                                                             @else
                                                                 @if($bil_akademik>1)
                                                                     <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
@@ -273,9 +281,25 @@
                                                         <tr>
                                                             <td style="width: 17%!important;">
                                                                 @if($item['status']==4 || $item['status']==5)
-                                                                    <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                    @if($bil_akademik>1)
+                                                                        <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                    @else
+                                                                        <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                    @endif
+                                                                @elseif($item['status']==3 && $user_id==Auth::user()->id)
+                                                                    @if($bil_akademik>1)
+                                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                    @else
+                                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                    @endif
+                                                                @elseif($item['status']==3 && $user_id!=Auth::user()->id)
+                                                                    {{$item['no_rujukan_permohonan']}}
                                                                 @else
-                                                                    <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                    @if($bil_akademik>1)
+                                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                    @else
+                                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                    @endif
                                                                 @endif
                                                             </td>
                                                             <td style="width: 30%!important">{{$pemohon}}</td>
@@ -366,9 +390,25 @@
                                                     <tr>
                                                         <td style="width: 17%!important;">
                                                             @if($item['status']==4 || $item['status']==5)
-                                                                <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @if($bil_akademik>1)
+                                                                    <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @else
+                                                                    <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @endif
+                                                            @elseif($item['status']==3 && $user_id==Auth::user()->id)
+                                                                @if($bil_akademik>1)
+                                                                    <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @else
+                                                                    <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @endif
+                                                            @elseif($item['status']==3 && $user_id!=Auth::user()->id)
+                                                                {{$item['no_rujukan_permohonan']}}
                                                             @else
-                                                                <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @if($bil_akademik>1)
+                                                                    <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @else
+                                                                    <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @endif
                                                             @endif
                                                         </td>
                                                         <td style="width: 30%!important">{{$pemohon}}</td>
