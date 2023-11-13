@@ -76,95 +76,94 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="body">
-                                <div class="col-md-6 col-sm-6">
-                                    <br>
-                                    @php
-                                        // nama pemohon
-                                        $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
-                                        $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
-                                        $words = explode(' ', $text);
-                                        $result = [];
-                                        foreach ($words as $word) {
-                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                $result[] = Str::lower($word);
-                                            } else {
-                                                $result[] = $word;
-                                            }
-                                        }
-                                        $pemohon = implode(' ', $result);
-                                    @endphp
-                                    <table class="maklumat">
-                                        <tr>
-                                            <td><strong>ID Permohonan</strong></td>
-                                            <td>:</td>
-                                            <td>{{$permohonan->no_rujukan_permohonan}}</td>
-                                            <td class="space">&nbsp;</td>
-                                            <td><strong>Tarikh Permohonan</strong></td>
-                                            <td>:</td>
-                                            <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Nama</strong></td>
-                                            <td>:</td>
-                                            <td>{{$pemohon}}</td>
-                                            <td class="space">&nbsp;</td>
-                                            <td><strong>Sesi/Semester</strong></td>
-                                            <td>:</td>
-                                            <td>{{$akademik->sesi}}-0{{$akademik->sem_semasa}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>No. Kad Pengenalan</strong></td>
-                                            <td>:</td>
-                                            <td>{{$smoku->no_kp}}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <br>
-                            <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$permohonan->id) }}" id="saring">
-                                {{csrf_field()}}
+                        <div class="col-md-6 col-sm-6">
+                            <br>
+                            @php
+                                // nama pemohon
+                                $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
+                                $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
+                                $words = explode(' ', $text);
+                                $result = [];
+                                foreach ($words as $word) {
+                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                        $result[] = Str::lower($word);
+                                    } else {
+                                        $result[] = $word;
+                                    }
+                                }
+                                $pemohon = implode(' ', $result);
+                            @endphp
+                            <table class="maklumat">
+                                <tr>
+                                    <td><strong>ID Permohonan</strong></td>
+                                    <td>:</td>
+                                    <td>{{$permohonan->no_rujukan_permohonan}}</td>
+                                    <td class="space">&nbsp;</td>
+                                    <td><strong>Tarikh Permohonan</strong></td>
+                                    <td>:</td>
+                                    <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Nama</strong></td>
+                                    <td>:</td>
+                                    <td>{{$pemohon}}</td>
+                                    <td class="space">&nbsp;</td>
+                                    <td><strong>Sesi/Semester</strong></td>
+                                    <td>:</td>
+                                    <td>{{$akademik->sesi}}-0{{$akademik->sem_semasa}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>No. Kad Pengenalan</strong></td>
+                                    <td>:</td>
+                                    <td>{{$smoku->no_kp}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br>
+                        <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$permohonan->id) }}" id="saring">
+                            {{csrf_field()}}
                             <div class="row clearfix">
                                 <div class="col-md-12">
                                     <div class="table-responsive">
                                         <table class="table table-hover table-bordered mb-5">
                                             <thead class="table-primary">
-                                                <tr>
-                                                    <th style="width: 5%; text-align:right;">No.</th>
-                                                    <th style="width: 20%;">Item</th>
-                                                    <th style="width: 25%;">Keputusan Saringan</th>
-                                                    <th style="width: 50%;">Catatan</th>
-                                                </tr>
+                                            <tr>
+                                                <th style="width: 5%; text-align:right;">No.</th>
+                                                <th style="width: 20%;">Item</th>
+                                                <th style="width: 25%;">Keputusan Saringan</th>
+                                                <th style="width: 50%;">Catatan</th>
+                                            </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td style="text-align:right;">1</td>
-                                                    <td>
-                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$permohonan->id) }}" target="_blank">Maklumat Profil Diri</a></span>
-                                                    </td>
-                                                    <td class="hidden-sm-down">
-                                                        <div class="form-group c_form_group">
+                                            <tr>
+                                                <td style="text-align:right;">1</td>
+                                                <td>
+                                                    <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$permohonan->id) }}" target="_blank">Maklumat Profil Diri</a></span>
+                                                </td>
+                                                <td class="hidden-sm-down">
+                                                    <div class="form-group c_form_group">
                                                         <select id="maklumat_profil_diri" name="maklumat_profil_diri" class="form-control" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                             <option value="">Pilih</option>
                                                             <option value="lengkap">Lengkap</option>
                                                             <option value="tak_lengkap">Tidak Lengkap</option>
                                                         </select>
                                                     </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group c_form_group">
-                                                            <input class="checkbox1a" id="checkbox1a" type="checkbox" name="catatan_maklumat_profil_diri[]" value="Terdapat maklumat yang tidak benar pada Maklumat Profil Diri" disabled="disabled"><span> Terdapat maklumat yang tidak benar pada Maklumat Profil Diri</span><br>
-                                                            <input class="checkbox1b" id="checkbox1b" type="checkbox" name="catatan_maklumat_profil_diri[]" value="Terdapat maklumat yang tidak lengkap pada Maklumat Profil Diri" disabled="disabled"><span> Terdapat maklumat yang tidak lengkap pada Maklumat Profil Diri</span><br>
-                                                            <input class="checkbox1c" id="checkbox1c" type="checkbox" name="catatan_maklumat_profil_diri[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain1" id="lain1" disabled="disabled"></span><br>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align:right;">2</td>
-                                                    <td>
-                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$permohonan->id) }}" target="_blank">Maklumat Akademik</a></span>
-                                                    </td>
-                                                    <td class="hidden-sm-down">
-                                                        <div class="form-group c_form_group">
+                                                </td>
+                                                <td>
+                                                    <div class="form-group c_form_group">
+                                                        <input class="checkbox1a" id="checkbox1a" type="checkbox" name="catatan_maklumat_profil_diri[]" value="Terdapat maklumat yang tidak benar pada Maklumat Profil Diri" disabled="disabled"><span> Terdapat maklumat yang tidak benar pada Maklumat Profil Diri</span><br>
+                                                        <input class="checkbox1b" id="checkbox1b" type="checkbox" name="catatan_maklumat_profil_diri[]" value="Terdapat maklumat yang tidak lengkap pada Maklumat Profil Diri" disabled="disabled"><span> Terdapat maklumat yang tidak lengkap pada Maklumat Profil Diri</span><br>
+                                                        <input class="checkbox1c" id="checkbox1c" type="checkbox" name="catatan_maklumat_profil_diri[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain1" id="lain1" disabled="disabled"></span><br>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:right;">2</td>
+                                                <td>
+                                                    <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$permohonan->id) }}" target="_blank">Maklumat Akademik</a></span>
+                                                </td>
+                                                <td class="hidden-sm-down">
+                                                    <div class="form-group c_form_group">
                                                         <select id="maklumat_akademik" name="maklumat_akademik" class="form-control" onchange="select2()"  oninvalid="this.setCustomValidity('Sila tandakan sekurang-kurangnya satu kotak')" oninput="setCustomValidity('')" required>
                                                             {{-- oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')"  --}}
                                                             <option value="">Pilih</option>
@@ -172,54 +171,49 @@
                                                             <option value="tak_lengkap">Tidak Lengkap</option>
                                                         </select>
                                                     </div>
-                                                    <td>
+                                                <td>
                                                     <div class="checkbox-group">
                                                         <input class="checkbox2a" id="checkbox2a" type="checkbox" name="catatan_maklumat_akademik[]" value="Terdapat maklumat yang tidak benar pada Maklumat Akademik" disabled="disabled"><span> Terdapat maklumat yang tidak benar pada Maklumat Akademik</span><br>
                                                         <input class="checkbox2b" id="checkbox2b" type="checkbox" name="catatan_maklumat_akademik[]" value="Terdapat maklumat yang tidak lengkap pada Maklumat Akademik" disabled="disabled"><span> Terdapat maklumat yang tidak lengkap pada Maklumat Akademik</span><br>
                                                         <input class="checkbox2c" id="checkbox2c" type="checkbox" name="catatan_maklumat_akademik[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain2" id="lain2" disabled="disabled"></span><br>
                                                     </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align:right;">3</td>
-                                                    <td>
-                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/salinan-dokumen/'.$permohonan->id) }}" target="_blank">Salinan Dokumen</a></span>
-                                                    </td>
-                                                    <td class="hidden-sm-down">
-                                                        <!--<div class="col-lg-12 col-md-12">-->
-                                                        <div class="form-group c_form_group">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:right;">3</td>
+                                                <td>
+                                                    <span><a href="{{ url('permohonan/sekretariat/saringan/salinan-dokumen/'.$permohonan->id) }}" target="_blank">Salinan Dokumen</a></span>
+                                                </td>
+                                                <td class="hidden-sm-down">
+                                                    <!--<div class="col-lg-12 col-md-12">-->
+                                                    <div class="form-group c_form_group">
                                                         <select id="salinan_dokumen" name="salinan_dokumen" class="form-control" onchange="select3()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                             <option value="">Pilih</option>
                                                             <option value="lengkap">Lengkap</option>
                                                             <option value="tak_lengkap">Tidak Lengkap</option>
                                                         </select>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="checkbox-group">
-                                                            <input class="checkbox3a" id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada surat tawaran" disabled="disabled"><span> Ralat pada surat tawaran</span><br>
-                                                            <input class="checkbox3b" id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada penyata bank" disabled="disabled"><span> Ralat pada penyata bank</span><br>
-                                                            <input class="checkbox3c" id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada resit" disabled="disabled"><span> Ralat pada resit/invois</span><br>
-                                                            <input class="checkbox3d" id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada keputusan peperiksaan" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span><br>
-                                                            <input class="checkbox3e" id="checkbox3e" type="checkbox" name="catatan_salinan_dokumen[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain3" id="lain3" disabled="disabled"></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="checkbox-group">
+                                                        <input class="checkbox3a" id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada surat tawaran" disabled="disabled"><span> Ralat pada surat tawaran</span><br>
+                                                        <input class="checkbox3b" id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada penyata bank" disabled="disabled"><span> Ralat pada penyata bank</span><br>
+                                                        <input class="checkbox3c" id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada resit" disabled="disabled"><span> Ralat pada resit/invois</span><br>
+                                                        <input class="checkbox3d" id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada keputusan peperiksaan" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span><br>
+                                                        <input class="checkbox3e" id="checkbox3e" type="checkbox" name="catatan_salinan_dokumen[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain3" id="lain3" disabled="disabled"></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    </div>
-                                <div class="col-md-6 text-right">
-                                    <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan</button>
+                            <div class="col-md-6 text-right">
+                                <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan</button>
                                 </form>
                             </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

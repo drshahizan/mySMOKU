@@ -114,6 +114,7 @@
                                                     $rujukan = explode("/", $item['no_rujukan_permohonan']);
                                                     $peringkat = $rujukan[1];
                                                     $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
+                                                    $bil_akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->count();
                                                     $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
 
                                                     $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
@@ -163,9 +164,17 @@
                                                     <tr>
                                                         <td>
                                                             @if($item['status']==4 || $item['status']==5)
-                                                                <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @if($bil_akademik>1)
+                                                                    <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @else
+                                                                    <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @endif
                                                             @else
-                                                                <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @if($bil_akademik>1)
+                                                                    <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @else
+                                                                    <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                @endif
                                                             @endif
                                                         </td>
                                                         <td>{{$pemohon}}</td>

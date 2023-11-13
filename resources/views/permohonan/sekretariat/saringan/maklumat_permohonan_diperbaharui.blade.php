@@ -46,7 +46,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Maklumat Permohonan</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Maklumat Permohonan Diperbaharui</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -66,7 +66,7 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Permohonan</b></li>
+                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Permohonan Diperbaharui</b></li>
                             </ul>
                             {{-- <div class="ml-auto">
                                 <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank" class="btn btn-primary">Cetak</a>
@@ -137,7 +137,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td style="text-align:right;">2</td>
+                                                        <td style="text-align:right;">1</td>
                                                         <td>
                                                             <span><a href="{{ url('permohonan/sekretariat/saringan/permohonan-diperbaharui/'.$permohonan->id) }}" target="_blank">Maklumat Akademik</a></span>
                                                         </td>
@@ -163,14 +163,9 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="row clearfix">
-                                    <div class="col-md-6">
-                                        <div class="col-md-6 text-right">
-                                            <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan</button>
-                                        </div>
+                                    <div class="col-md-6 text-right">
+                                        <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan</button>
                                     </div>
-                                </div>
                             </form>
                         </div>
                     </div>
