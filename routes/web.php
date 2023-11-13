@@ -235,6 +235,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Tuntutan - Sekretariat - Keputusan
     Route::get('tuntutan/sekretariat/keputusan/keputusan-tuntutan', [SekretariatController::class, 'keputusanTuntutan'])->name('keputusan.tuntutan');
+    Route::get('tuntutan/sekretariat/keputusan/filter-tuntutan', [SekretariatController::class, 'filterTuntutan'])->name('filter.tuntutan');
 
     //Tuntutan - Sekretariat - Sejarah
     Route::get('tuntutan/sekretariat/sejarah/sejarah-tuntutan', [SekretariatController::class, 'sejarahTuntutan']);

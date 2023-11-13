@@ -354,8 +354,8 @@ class SekretariatController extends Controller
             })
             ->where('smoku_akademik.status', 1)
             ->whereRaw('(lanjut_pengajian.created_at, smoku_akademik.smoku_id) IN (SELECT MAX(created_at), smoku_id FROM lanjut_pengajian GROUP BY smoku_id)')
-            ->get()->toArray();    
-        $data = array_merge($tangguh, $lanjut);   
+            ->get()->toArray();
+        $data = array_merge($tangguh, $lanjut);
         //dd($data);
 
         return view('kemaskini.sekretariat.pengajian.kemaskini_tangguh_lanjut_pengajian', compact('data'));
@@ -373,7 +373,7 @@ class SekretariatController extends Controller
         }
 
         $tangguh = TangguhPengajian::where('smoku_id', $id)
-            ->orderBy('id', 'desc') 
+            ->orderBy('id', 'desc')
             ->first();
 
         if ($tangguh) {
@@ -1218,6 +1218,39 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan', compact('tuntutan'));
     }
 
+    public function filterTuntutan(Request $request)
+    {
+        $dateRange = $request->input('daterange');
+        $status = $request->input('status');
+
+        // You can update this query to filter by both date range and status
+        $tuntutanQuery = Tuntutan::where('status', '5')
+            ->orWhere('status', '6')
+            ->orWhere('status', '7');
+
+        if (!empty($dateRange)) {
+            // Convert the date range format to "YYYY-MM-DD"
+            list($start, $end) = explode(' - ', $dateRange);
+            $startDate = date('Y-m-d', strtotime(str_replace('/', '-', $start)));
+            $endDate = date('Y-m-d', strtotime(str_replace('/', '-', $end)));
+
+            // Log the SQL query and bindings
+            Log::info('Generated SQL query:', [
+                'query' => $tuntutanQuery->whereBetween('created_at', [$startDate, $endDate])->toSql(),
+                'bindings' => $tuntutanQuery->getBindings(),
+            ]);
+
+            $tuntutanQuery->whereBetween('created_at', [$startDate, $endDate]);
+        }
+
+        if (!empty($status)) {
+            $tuntutanQuery->where('status', $status);
+        }
+
+        $tuntutan = $tuntutanQuery->get();
+
+        return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan', compact('tuntutan'));
+    }
 
     //Papar Tuntutan Telah Disaring
     public function paparTuntutanKedua($id){
