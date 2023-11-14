@@ -92,7 +92,7 @@ class MaklumatESPController extends Controller
                 'b.no_rujukan_permohonan as id_permohonan',
                 DB::raw('"" as id_tuntutan'),
                 'a.email',
-                DB::raw('"J0307" as bidang'),
+                DB::raw('"Z0101" as bidang'),
             );
         
             // Define common conditions
