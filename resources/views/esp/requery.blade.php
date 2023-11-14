@@ -52,7 +52,7 @@
 [
   {
     "noic": "950623031212",
-    "id_permohonan": "B/2/950623031212",
+    "id_permohonan": "B/4/950623031212",
     "id_tuntutan": ""
   }
 ]
