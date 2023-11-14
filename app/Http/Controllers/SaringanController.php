@@ -29,6 +29,7 @@ class SaringanController extends Controller
         ->orWhere('status', '=','3')
         ->orWhere('status', '=','4')
         ->orWhere('status', '=','5')
+        ->orderBy('created_at', 'DESC')
         ->get();
         $status_kod=0;
         $status = null;
@@ -141,6 +142,7 @@ class SaringanController extends Controller
         ->orWhere('status', '=','3')
         ->orWhere('status', '=','4')
         ->orWhere('status', '=','5')
+        ->orderBy('created_at', 'DESC')
         ->get();
         $status_kod = 3;
         $status = "Permohonan dan tuntutan ".$no_rujukan_permohonan." telah disaring dan disokong.";
@@ -234,6 +236,7 @@ class SaringanController extends Controller
             ->orWhere('status', '=','3')
             ->orWhere('status', '=','4')
             ->orWhere('status', '=','5')
+            ->orderBy('created_at', 'DESC')
             ->get();
 
             $status_kod = 2;
@@ -267,6 +270,7 @@ class SaringanController extends Controller
                 ->orWhere('status', '=','3')
                 ->orWhere('status', '=','4')
                 ->orWhere('status', '=','5')
+                ->orderBy('created_at', 'DESC')
                 ->get();
 
             $status_kod = 3;
@@ -326,6 +330,7 @@ class SaringanController extends Controller
                 ->orWhere('status', '=','3')
                 ->orWhere('status', '=','4')
                 ->orWhere('status', '=','5')
+                ->orderBy('created_at', 'DESC')
                 ->get();
 
             $status_kod = 2;
@@ -491,7 +496,7 @@ class SaringanController extends Controller
     //pembayaran
     public function senaraiPembayaran()
     {
-        $permohonan = Permohonan::where('status', '8')->get();
+        $permohonan = Permohonan::where('status', '8')->orderBy('created_at', 'DESC')->get();
         $status_kod=0;
         $status = null;
         return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status'));
@@ -534,7 +539,7 @@ class SaringanController extends Controller
         $status_rekod->save();
 
         $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
-        $permohonan = Permohonan::where('status', '8')->get();
+        $permohonan = Permohonan::where('status', '8')->orderBy('created_at', 'DESC')->get();
         $status_kod = 3;
         $status = "Permohonan ".$no_rujukan_permohonan." telah dibayar.";
         return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status'));
@@ -574,7 +579,7 @@ class SaringanController extends Controller
             ]);
 
         $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
-        $permohonan = Permohonan::where('status', '8')->get();
+        $permohonan = Permohonan::where('status', '8')->orderBy('created_at', 'DESC')->get();
         $status_kod = 3;
         $status = "Pembayaran ".$no_rujukan_permohonan." telah dikemaskini.";
         return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status'));
