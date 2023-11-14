@@ -151,8 +151,12 @@
                                                     @if ($jenis_institusi!="UA")
                                                     <tr>
                                                         <td>
-                                                            @if($item['status']==2 || $item['status']==3)
+                                                            @if($item['status']==2)
                                                                 <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                            @elseif($item['status']==3 && $user_id==Auth::user()->id)
+                                                                <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                            @elseif($item['status']==3 && $user_id!=Auth::user()->id)
+                                                                {{$item['no_rujukan_tuntutan']}}
                                                             @else
                                                                 <a href="{{ url('tuntutan/sekretariat/saringan/papar-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
                                                             @endif
@@ -249,8 +253,12 @@
                                                         @if ($jenis_institusi=="UA")
                                                             <tr>
                                                                 <td style="width: 17%">
-                                                                    @if($item['status']==2 || $item['status']==3)
+                                                                    @if($item['status']==2)
                                                                         <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                                    @elseif($item['status']==3 && $user_id==Auth::user()->id)
+                                                                        <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                                    @elseif($item['status']==3 && $user_id!=Auth::user()->id)
+                                                                        {{$item['no_rujukan_tuntutan']}}
                                                                     @else
                                                                         <a href="{{ url('tuntutan/sekretariat/saringan/papar-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
                                                                     @endif
@@ -339,8 +347,12 @@
                                                 @if($permohonan->program=="PPK")
                                                     <tr>
                                                         <td style="width: 17%">
-                                                            @if($item['status']==2 || $item['status']==3)
+                                                            @if($item['status']==2)
                                                                 <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                            @elseif($item['status']==3 && $user_id==Auth::user()->id)
+                                                                <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                            @elseif($item['status']==3 && $user_id!=Auth::user()->id)
+                                                                {{$item['no_rujukan_tuntutan']}}
                                                             @else
                                                                 <a href="{{ url('tuntutan/sekretariat/saringan/papar-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
                                                             @endif
