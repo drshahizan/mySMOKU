@@ -501,13 +501,23 @@ $(document).ready(function() {
 
 // Function to hash using SHA-256 (using async/await)
 async function hash(algorithm, data) {
+    if (!crypto.subtle) {
+        throw new Error('Web Crypto API not supported in this environment.');
+    }
+
     const encoder = new TextEncoder();
     const dataBuffer = encoder.encode(data);
-    const hashBuffer = await crypto.subtle.digest(algorithm, dataBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    return hashHex;
+
+    try {
+        const hashBuffer = await crypto.subtle.digest(algorithm, dataBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        return hashHex;
+    } catch (error) {
+        throw new Error('Error generating hash: ' + error.message);
+    }
 }
+
 
 </script>
 <!--end::Javascript-->
