@@ -111,9 +111,7 @@ class SekretariatController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $tuntutan = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-                    ->where('permohonan.program', '=', 'BKOKU')
-                    ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+        $tuntutan = Tuntutan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
                         return $q->whereBetween('tuntutan.created_at', [$startDate, $endDate]);
                     })
                     ->when($status === '!=9', function ($q) {
@@ -133,9 +131,7 @@ class SekretariatController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $tuntutan = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-                    ->where('permohonan.program', '=', 'BKOKU')
-                    ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+        $tuntutan = Tuntutan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
                         return $q->whereBetween('tuntutan.created_at', [$startDate, $endDate]);
                     })
                     ->when($status === '!=9', function ($q) {
