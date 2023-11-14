@@ -11,10 +11,10 @@
             //$id_permohonan = str_replace('/', '-', $str);
               $dokumen_path = "/assets/dokumen/permohonan/".$item['dokumen'];
               if ($item['id_dokumen'] == 1){
-                $dokumen_name = "Surat Tawaran";
+                $dokumen_name = "No. Akaun Bank Islam";
               }
               elseif ($item['id_dokumen'] == 2){
-                $dokumen_name = "No. Akaun Bank Islam";
+                $dokumen_name = "Surat Tawaran";
               }
               elseif ($item['id_dokumen'] == 3){
                 $dokumen_name = "Invois/Resit";
