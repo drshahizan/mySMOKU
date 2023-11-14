@@ -54,13 +54,13 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="card">
-                            <div class="header">
+                            {{-- <div class="header">
                                 <h2>Senarai Permohonan BKOKU Universiti Awam</h2>
-                            </div>
+                            </div> --}}
 
                             {{-- Filter section --}}
                             <form action="{{url('sekretariat/tuntutan/BKOKU/dibayar')}}" method="GET">
-                                <div class="row" style="margin-left:15px;">
+                                <div class="row" style="margin-left:15px; margin-top:30px;">
                                     <div class="col-md-2">
                                         <label for="start_date"><b>Dari:</b></label>
                                         <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
@@ -83,10 +83,10 @@
                                     <table id="sortTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                <th style="width: 15%"><b>ID Permohonan</b></th>                                        
+                                                <th style="width: 15%"><b>ID Tuntutan</b></th>                                        
                                                 <th style="width: 45%"><b>Nama</b></th>
-                                                <th style="width: 13%" class="text-center"><b>Tarikh Permohonan</b></th> 
-                                                <th class="text-center" style="width: 15%">Status Permohonan</th>
+                                                <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th> 
+                                                <th class="text-center" style="width: 15%">Status Tuntutan</th>
                                             </tr>
                                         </thead>
                                         
@@ -113,13 +113,13 @@
                                                     }
                                                     $pemohon = implode(' ', $result);
 
-                                                    //status permohonan
+                                                    //status tuntutan
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                 @endphp
 
                                                 @if ($jenis_institusi == "UA")
                                                     <tr>
-                                                        <td>{{$item->no_rujukan_permohonan}}</td>
+                                                        <td>{{$item->no_rujukan_tuntutan}}</td>
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                         @if($item['status'] == "1")
