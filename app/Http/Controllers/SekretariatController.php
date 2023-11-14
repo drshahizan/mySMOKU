@@ -18,6 +18,7 @@ use App\Models\SaringanTuntutan;
 use App\Models\SejarahPermohonan;
 use App\Models\SejarahTuntutan;
 use App\Models\Smoku;
+use App\Models\Status;
 use App\Models\TuntutanItem;
 use App\Models\Waris;
 use App\Models\Akademik;
@@ -1178,34 +1179,20 @@ class SekretariatController extends Controller
 
     public function keputusanTuntutan(Request $request)
     {
-        $dateRange = $request->input('daterange');
-        $status = $request->input('status');
-
-        // You can update this query to filter by both date range and status
-        $tuntutanQuery = Tuntutan::where('status', '5')
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $tuntutan = Tuntutan::orderBy('created_at', 'desc')
+            ->where('status', '5')
             ->orWhere('status', '6')
-            ->orWhere('status', '7');
-
-        if (!empty($dateRange)) {
-            // Convert the date range format to "YYYY-MM-DD"
-            list($start, $end) = explode(' - ', $dateRange);
-            $startDate = date('Y-m-d', strtotime(str_replace('/', '-', $start)));
-            $endDate = date('Y-m-d', strtotime(str_replace('/', '-', $end)));
-
-            // Log the SQL query and bindings
-            Log::info('Generated SQL query:', [
-                'query' => $tuntutanQuery->whereBetween('created_at', [$startDate, $endDate])->toSql(),
-                'bindings' => $tuntutanQuery->getBindings(),
-            ]);
-
-            $tuntutanQuery->whereBetween('created_at', [$startDate, $endDate]);
-        }
-
-        if (!empty($status)) {
-            $tuntutanQuery->where('status', $status);
-        }
-
-        $tuntutan = $tuntutanQuery->get();
+            ->orWhere('status', '7')
+            ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+                return $q->whereBetween('created_at', [$startDate, $endDate]);
+            })
+            ->when($request->status, function ($q) use ($request) {
+                $n_status = Status::where('status', $request->status)->value('kod_status');
+                return $q->where('status', $n_status);
+            })
+            ->get();
 
         return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan', compact('tuntutan'));
     }

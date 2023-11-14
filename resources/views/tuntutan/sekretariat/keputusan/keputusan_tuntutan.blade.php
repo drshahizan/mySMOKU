@@ -70,21 +70,32 @@
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br><br>
-                                    <form action="{{route('keputusan.tuntutan')}}" method="GET">
-                                        <div class="row" style="margin-left:15px;">
-                                            <div class="col-md-3 black">
-                                                Pilih Julat Tarikh:
-                                                <input type="text" name="daterange" id="daterange" value="{{ Request::get('daterange') }}" class="form-control"/>
+                                    <form action="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}" method="GET">
+                                        <div class="row" style="margin-left: 15px;">
+                                            <div class="col-md-2">
+                                                <label for="start_date">Dari:</label>
+                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                             </div>
 
-                                            <div class="col-md-3 black">
-                                                Pilih Keputusan:
-                                                <select name="status" id="status" class="form-select">
-                                                    <option value="">Sila Pilih</option>
-                                                    <option value="Layak">Layak</option>
-                                                    <option value="Tidak Layak">Tidak Layak</option>
-                                                    <option value="Dikembalikan">Dikembalikan</option>
+                                            <div class="col-md-2">
+                                                <label for="end_date">Hingga:</label>
+                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label for="end_date">Pilih Keputusan:</label>
+                                                <select name="status" class="form-select">
+                                                    <option value="">Semua Keputusan</option>
+                                                    <option value="LAYAK" {{ Request::get('status') == 'LAYAK' ? 'selected' : '' }}>Layak</option>
+                                                    <option value="TIDAK LAYAK" {{ Request::get('status') == 'Tidak LAYAK' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <br>
+                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
@@ -109,8 +120,8 @@
                                                             $peringkat = $rujukan[1];
                                                             $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
                                                             $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat)->value('peringkat');
 
-                                                            $no_ruj_tuntutan = $item->no_rujukan_tuntutan;
                                                             $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                             $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                             $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
@@ -125,20 +136,15 @@
                                                                 }
                                                             }
                                                             $pemohon = implode(' ', $result);
-
-                                                            //peringkat pengajian
-                                                            preg_match('/\/(\d+)\//', $no_ruj_tuntutan, $matches); // Extract peringkat pengajian value using regular expression
-                                                            $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null; // $matches[1] will contain the extracted peringkat pengajian value
-                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
                                                         @endphp
 
                                                         @if($permohonan->program=="BKOKU")
                                                             @if ($jenis_institusi!="UA")
                                                             <tr>
-                                                                <td>{{$no_ruj_tuntutan}}</td>
+                                                                <td>{{$item->no_rujukan_tuntutan}}</td>
                                                                 <td>{{$pemohon}}</td>
                                                                 <td>{{ucwords(strtolower($nama_peringkat))}}</td>
-                                                                <td class="text-center">{{$item['created_at']->format('Y-m-d')}}</td>
+                                                                <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                                                 @if($item['status'] == "6")
                                                                     <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif ($item['status']=="5")
@@ -157,21 +163,32 @@
                                 </div>
                                 <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <br><br>
-                                    <form action="{{route('keputusan.tuntutan')}}" method="GET">
-                                        <div class="row" style="margin-left:15px;">
-                                            <div class="col-md-3 black">
-                                                Pilih Julat Tarikh:
-                                                <input type="text" name="daterange" id="daterange" value="{{ Request::get('daterange') }}" class="form-control"/>
+                                    <form action="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}" method="GET">
+                                        <div class="row" style="margin-left: 15px;">
+                                            <div class="col-md-2">
+                                                <label for="start_date">Dari:</label>
+                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                             </div>
 
-                                            <div class="col-md-3 black">
-                                                Pilih Keputusan:
-                                                <select name="status" id="status" class="form-select">
-                                                    <option value="">Sila Pilih</option>
-                                                    <option value="Layak">Layak</option>
-                                                    <option value="Tidak Layak">Tidak Layak</option>
-                                                    <option value="Dikembalikan">Dikembalikan</option>
+                                            <div class="col-md-2">
+                                                <label for="end_date">Hingga:</label>
+                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label for="end_date">Pilih Keputusan:</label>
+                                                <select name="status" class="form-select">
+                                                    <option value="">Semua Keputusan</option>
+                                                    <option value="LAYAK" {{ Request::get('status') == 'LAYAK' ? 'selected' : '' }}>Layak</option>
+                                                    <option value="TIDAK LAYAK" {{ Request::get('status') == 'Tidak LAYAK' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <br>
+                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
@@ -196,8 +213,8 @@
                                                         $peringkat = $rujukan[1];
                                                         $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
                                                         $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+                                                        $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat)->value('peringkat');
 
-                                                        $no_ruj_tuntutan = $item->no_rujukan_tuntutan;
                                                         $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
                                                         $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
@@ -213,17 +230,12 @@
                                                             }
                                                         }
                                                         $pemohon = implode(' ', $result);
-
-                                                        //peringkat pengajian
-                                                        preg_match('/\/(\d+)\//', $no_ruj_tuntutan, $matches); // Extract peringkat pengajian value using regular expression
-                                                        $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null; // $matches[1] will contain the extracted peringkat pengajian value
-                                                        $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
                                                     @endphp
 
                                                     @if($permohonan->program=="BKOKU")
                                                         @if ($jenis_institusi=="UA")
                                                             <tr>
-                                                                <td style="width: 13%">{{$no_ruj_tuntutan}}</td>
+                                                                <td style="width: 13%">{{$item->no_rujukan_tuntutan}}</td>
                                                                 <td style="width: 40%">{{$pemohon}}</td>
                                                                 <td style="width: 15%">{{ucwords(strtolower($nama_peringkat))}}</td>
                                                                 <td class="text-center" style="width: 17%">{{$item['created_at']->format('d/m/Y')}}</td>
@@ -246,18 +258,32 @@
                                 {{-- PKK --}}
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <br><br>
-                                    <form action="" method="GET">
-                                        <div class="row" style="margin-left:15px;">
-                                            <div class="col-md-3">
-                                                <input type="daterange" name="daterange" id="daterange" value="{{ Request::get('daterange') }}" class="form-control"/>
+                                    <form action="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}" method="GET">
+                                        <div class="row" style="margin-left: 15px;">
+                                            <div class="col-md-2">
+                                                <label for="start_date">Dari:</label>
+                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <label for="end_date">Hingga:</label>
+                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                             </div>
 
                                             <div class="col-md-3">
-                                                <select name="status2" class="form-select">
-                                                    <option value="">Pilih Keputusan</option>
-                                                    <option value="Layak" {{Request::get('status') == 'Layak' ? 'selected':'' }} >Layak</option>
-                                                    <option value="Tidak Layak" {{Request::get('status') == 'Tidak Layak' ? 'selected':'' }} >Tidak Layak</option>
+                                                <label for="end_date">Pilih Keputusan:</label>
+                                                <select name="status" class="form-select">
+                                                    <option value="">Semua Keputusan</option>
+                                                    <option value="LAYAK" {{ Request::get('status') == 'LAYAK' ? 'selected' : '' }}>Layak</option>
+                                                    <option value="TIDAK LAYAK" {{ Request::get('status') == 'Tidak LAYAK' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <br>
+                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
@@ -277,8 +303,13 @@
                                                 <tbody>
                                                     @foreach ($tuntutan as $item)
                                                         @php
-                                                            $no_ruj_tuntutan = $item->no_rujukan_tuntutan;
                                                             $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
+                                                            $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
+                                                            $peringkat = $rujukan[1];
+                                                            $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
+                                                            $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat)->value('peringkat');
+
                                                             $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                             $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                             $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
@@ -294,15 +325,11 @@
                                                             }
                                                             $pemohon = implode(' ', $result);
 
-                                                            //peringkat pengajian
-                                                            preg_match('/\/(\d+)\//', $no_ruj_tuntutan, $matches); // Extract peringkat pengajian value using regular expression
-                                                            $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null; // $matches[1] will contain the extracted peringkat pengajian value
-                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
                                                         @endphp
 
                                                         @if($permohonan->program=="PPK")
                                                         <tr>
-                                                            <td style="width: 13%">{{$no_ruj_tuntutan}}</td>
+                                                            <td style="width: 13%">{{$item->no_rujukan_tuntutan}}</td>
                                                             <td style="width: 40%">{{$pemohon}}</td>
                                                             <td style="width: 15%">{{ucwords(strtolower($nama_peringkat))}}</td>
                                                             <td class="text-center" style="width: 17%">{{$item['created_at']->format('d/m/Y')}}</td>
@@ -328,76 +355,14 @@
             </div>
         </div>
 
+        <!-- Javascript -->
+        <script src="assets/bundles/libscripts.bundle.js"></script>
+        <script src="assets/bundles/vendorscripts.bundle.js"></script>
+
         <script>
+            $('#sortTable1').DataTable();
             $('#sortTable1a').DataTable();
             $('#sortTable2').DataTable();
-            //$('input[name="daterange"]').daterangepicker();
         </script>
 
-        <script>
-            $(document).ready(function() {
-                var table = $('#sortTable1').DataTable();
-                $('#daterange').daterangepicker({
-                    opens: 'left',
-                    locale: {
-                        format: 'DD/MM/YYYY' // Set the desired format for the date range picker
-                    }
-                }, function(start, end, label) {
-                    let startDate = start.format('DD/MM/YYYY'); // Convert to match your table format
-                    let endDate = end.format('DD/MM/YYYY');     // Convert to match your table format
-
-                    DataTable.ext.search.push(function (settings, data, dataIndex) {
-                        let date = new Date(data[3]).toLocaleDateString('en-GB');
-
-                        if (
-                            (startDate === null && endDate === null) ||
-                            (startDate === null && date <= endDate) ||
-                            (startDate <= date && endDate === null) ||
-                            (startDate <= date && date <= endDate)
-                        ) {
-                            return true;
-                        }
-                        return false;
-                    });
-                    table.draw();
-                });
-
-                $('#status').on('change', function() {
-                    var status = $(this).val();
-
-                    // Use column(4) if that's the column containing your status data.
-                    table.column(4).search(status).draw();
-                });
-
-            });
-        </script>
-
-        {{-- <script>
-            $(document).ready(function() {
-                var table = $('#sortTable1').DataTable();
-
-                $('#daterange').daterangepicker({
-                    opens: 'left',
-                }, function(start, end, label) {
-                    var startDate = start.format('YYYY-MM-DD');
-                    var endDate = end.format('YYYY-MM-DD');
-
-                    console.log('startDate: ' + startDate); // Add this line
-                    console.log('endDate: ' + endDate);     // Add this line
-
-                    // Use column(3) if that's the column containing your date data.
-                    // Make sure the date format matches the format in your table.
-                    table.column(3).search(startDate + ' - ' + endDate).draw();
-                });
-
-                $('#status').on('change', function() {
-                    var status = $(this).val();
-
-                    console.log('status: ' + status); // Add this line
-
-                    // Use column(4) if that's the column containing your status data.
-                    table.column(4).search(status).draw();
-                });
-            });
-        </script>                       --}}
 </x-default-layout>
