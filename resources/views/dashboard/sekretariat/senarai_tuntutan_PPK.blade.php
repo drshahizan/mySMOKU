@@ -88,6 +88,9 @@
                                         <tbody>
                                             @foreach ($tuntutan as $item)
                                                 @php
+                                                    // program
+                                                    $program = DB::table('permohonan')->where('permohonan.id', $item['permohonan_id'])->value('permohonan.program');
+                                        
                                                     // nama pemohon
                                                     $nama = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                     $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
@@ -107,7 +110,7 @@
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                 @endphp
 
-                                                @if($item['program']=="PPK")
+                                                @if($program == "PPK")
                                                     <tr>
                                                         <td>{{$item->no_rujukan_tuntutan}}</td>
                                                         <td>{{$pemohon}}</td>
