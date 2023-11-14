@@ -161,11 +161,13 @@
 @php
 	$baharu = DB::table('permohonan')->where('status', '=', '2')->count();
 	$sokong = DB::table('permohonan')->where('status', '=', '4')->count();
+	// $keputusan = DB::table('permohonan')->whereIn('status', ['6', '7'])->count();
 	$layak = DB::table('permohonan')->where('status', '=', '6')->count();
 	$bayar = DB::table('permohonan')->where('status', '=', '8')->count();
 	$total = DB::table('permohonan')->count();
 	//dd($baharu);
 	$baharuT = DB::table('tuntutan')->where('status', '=', '2')->count();
+	// $keputusanT = DB::table('tuntutan')->whereIn('status', ['6', '7'])->count();
 	$layakT = DB::table('tuntutan')->where('status', '=', '6')->count();
 	$bayarT = DB::table('tuntutan')->where('status', '=', '8')->count();
 	$totalT = DB::table('tuntutan')->count();	
@@ -206,7 +208,7 @@
 			<div class="menu-item">
 				<a class="menu-link" href="{{url('permohonan/sekretariat/keputusan')}}">
 						<span class="menu-icon">{!! getIcon('check-square', 'fs-2') !!}</span>
-						<span class="menu-title">Keputusan</span>
+						<span class="menu-title">Keputusan </span>
 				</a>
 			</div>
 			<div class="menu-item">
@@ -242,7 +244,7 @@
 			<div class="menu-item">
 				<a class="menu-link" href="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}">
 						<span class="menu-icon">{!! getIcon('check-square', 'fs-2') !!}</span>
-						<span class="menu-title">Keputusan</span>
+						<span class="menu-title">Keputusan </span>
 				</a>
 			</div>
 			<div class="menu-item">
