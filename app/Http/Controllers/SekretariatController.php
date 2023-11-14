@@ -943,8 +943,7 @@ class SekretariatController extends Controller
         ->orWhere('status', '=','3')
         ->orWhere('status', '=','5')
         ->orWhere('status', '=','6')
-        ->orWhere('status', '=','7')
-        ->get();
+        ->orWhere('status', '=','7')->orderBy('created_at', 'DESC')->get();
         $status_kod=0;
         $status = null;
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status'));
@@ -1144,7 +1143,7 @@ class SekretariatController extends Controller
             ->orWhere('status', '=','5')
             ->orWhere('status', '=','6')
             ->orWhere('status', '=','7')
-            ->get();
+            ->orderBy('created_at', 'DESC')->get();
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status'));
     }
 
@@ -1298,7 +1297,7 @@ class SekretariatController extends Controller
 
     //Sejarah
     public function sejarahTuntutan(){
-        $tuntutan = Tuntutan::where('status', '!=','4')->get();
+        $tuntutan = Tuntutan::where('status', '!=','4')->orderBy('created_at', 'DESC')->get();
         return view('tuntutan.sekretariat.sejarah.sejarah_tuntutan',compact('tuntutan'));
     }
 
@@ -1393,7 +1392,7 @@ class SekretariatController extends Controller
     //Pembayaran
     public function senaraiPembayaran()
     {
-        $tuntutan = Tuntutan::where('status', '8')->get();
+        $tuntutan = Tuntutan::where('status', '8')->orderBy('created_at', 'DESC')->get();
         $status_kod=0;
         $status = null;
         return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status'));
@@ -1441,7 +1440,7 @@ class SekretariatController extends Controller
         $status_kod=1;
         $status = "Tuntutan ".$no_rujukan_tuntutan." telah dibayar.";
 
-        $tuntutan = Tuntutan::where('status', '8')->get();
+        $tuntutan = Tuntutan::where('status', '8')->orderBy('created_at', 'DESC')->get();
         return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status'));
     }
 
@@ -1484,7 +1483,7 @@ class SekretariatController extends Controller
         $status_kod=1;
         $status = "Tuntutan ".$no_rujukan_tuntutan." berjaya dikemaskini.";
 
-        $tuntutan = Tuntutan::where('status', '8')->get();
+        $tuntutan = Tuntutan::where('status', '8')->orderBy('created_at', 'DESC')->get();
         return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status'));
     }
 }
