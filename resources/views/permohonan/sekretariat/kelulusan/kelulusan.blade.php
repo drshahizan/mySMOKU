@@ -93,13 +93,13 @@
                                                 </select>
                                             </div>
                                     
-                                            <div class="col-md-4" style="margin-left: 10px; margin-right:80px;">
-                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
+                                            <div class="col-md-3" style="margin-left: 10px; margin-right:150px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-3" style="padding-left: 80px;">  
+                                            <div class="col-md-3" style="padding-left: 50px;">  
                                                 <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
@@ -271,14 +271,14 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                    
-                                            <div class="col-md-3" style="margin-left: 10px; margin-right:80px;">
-                                                <button type="submit" class="btn btn-primary" style="width: 13%; padding-left: 10px;">
+                                
+                                            <div class="col-md-2" style="margin-left: 10px; margin-right:140px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 22%; padding-left: 8px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-4" style="padding-left: 80px;">  
+                                            <div class="col-md-4" style="padding-left: 50px;">  
                                                 <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
@@ -454,13 +454,13 @@
                                                 </select>
                                             </div>
                                     
-                                            <div class="col-md-4" style="margin-left: 10px; margin-right:80px;">
-                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
+                                            <div class="col-md-3" style="margin-left: 10px; margin-right:150px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-3" style="padding-left: 80px;">
+                                            <div class="col-md-3" style="padding-left: 50px;">
                                                 <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'PPK'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>

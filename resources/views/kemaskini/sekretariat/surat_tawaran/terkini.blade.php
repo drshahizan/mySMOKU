@@ -184,21 +184,21 @@
                                 
                                 <p>Sekian, terima kasih.</p>
                                 <br>
-                                <p>{{$suratTawaran->penutup1}}</p>
-                                <p>{{$suratTawaran->penutup4_4}}</p>
+                                <p><b>{{$suratTawaran->penutup1}}</b></p>
+                                <p><b>{{$suratTawaran->penutup4_4}}</b></p>
                                 <br>
-                                <p>{{$suratTawaran->penutup2}}</p>
+                                <p><b>{{$suratTawaran->penutup2}}</b></p>
                                 <br>
                                 <p>Saya yang menjalankan amanah,</p>
                                 <p>
-                                    {{$suratTawaran->penutup3_1}} <br>
-                                    {{$suratTawaran->penutup3_2}} <br>
-                                    {{$suratTawaran->penutup3_3}} <br>
-                                    {{$suratTawaran->penutup3_4}} <br>
+                                    <b>{{$suratTawaran->penutup3_1}}</b> <br>
+                                    <b>{{$suratTawaran->penutup3_2}}</b> <br>
+                                    <b>{{$suratTawaran->penutup3_3}}</b> <br>
+                                    <b>{{$suratTawaran->penutup3_4}}</b> <br>
                                     
                                 </p>
                                 <br>
-                                <p><div style="text-align: center;">Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>
+                                <p><div style="text-align: center;">"Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>
                                 <br>
                                 <p>s.k :<br>
                                     {{$suratTawaran->penutup4_1}} <br>
