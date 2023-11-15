@@ -127,12 +127,12 @@ class PenyelarasController extends Controller
         ->where('smoku_id', $id);
         
 
-        // if ($permohonan && $permohonan->status >= '1') {
-        //     $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
-        //     return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen','agama'));
-        // } else {
+        if ($permohonan && $permohonan->status >= '1') {
+            $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
+            return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen','agama'));
+        } else {
             return view('permohonan.penyelaras_bkoku.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','mod','kursus','biaya','penaja','negeri','bandar','agama'));
-        // }
+        }
     }
 
     public function bandar($idnegeri)
