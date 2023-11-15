@@ -847,11 +847,11 @@ class SekretariatController extends Controller
 
         // Validation rules for each document column
         $rules = [
-            'dokumen1.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
-            'dokumen1a.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
-            'dokumen2.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
-            'dokumen2a.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
-            'dokumen3.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen1.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen1a.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen2.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen2a.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen3.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
         ];
 
         // Custom error messages
@@ -870,52 +870,70 @@ class SekretariatController extends Controller
                 ->withInput();
         }
 
-        if ($dokumen1 && $dokumen1a && $dokumen2 && $dokumen2a && $dokumen3) {
-            foreach ($dokumen1 as $key => $sijil) {
-                $uniqueFilenameDokumen1 = uniqid() . '_' . $sijil->getClientOriginalName();
-                $sijil->move('assets/dokumen/sppb_1', $uniqueFilenameDokumen1);
+        if ($dokumen1 || $dokumen1a || $dokumen2 || $dokumen2a || $dokumen3) {
+            // Check and process dokumen2a
+            $file1 = $dokumen1[0] ?? null;
+            if ($file1 && $file1->isValid()) {
+                $uniqueFilenameDokumen1 = uniqid() . '_' . $file1->getClientOriginalName();
+                $file1->move('assets/dokumen/sppb_1', $uniqueFilenameDokumen1);
                 $uploadedDokumen1[] = $uniqueFilenameDokumen1;
+            }
 
-                $uniqueFilenameDokumen1a = uniqid() . '_' . $dokumen1a[$key]->getClientOriginalName();
-                $dokumen1a[$key]->move('assets/dokumen/sppb_1a', $uniqueFilenameDokumen1a);
+            // Check and process dokumen2a
+            $file1a = $dokumen1a[0] ?? null;
+            if ($file1a && $file1a->isValid()) {
+                $uniqueFilenameDokumen1a = uniqid() . '_' . $file1a->getClientOriginalName();
+                $file1a->move('assets/dokumen/sppb_1a', $uniqueFilenameDokumen1a);
                 $uploadedDokumen1a[] = $uniqueFilenameDokumen1a;
-
-                $uniqueFilenameDokumen2 = uniqid() . '_' . $dokumen2[$key]->getClientOriginalName();
-                $dokumen2[$key]->move('assets/dokumen/sppb_2', $uniqueFilenameDokumen2);
+            }
+            
+            // Check and process dokumen2a
+            $file2 = $dokumen2[0] ?? null;
+            if ($file2 && $file2->isValid()) {
+                $uniqueFilenameDokumen2 = uniqid() . '_' . $file2->getClientOriginalName();
+                $file2->move('assets/dokumen/sppb_2', $uniqueFilenameDokumen2);
                 $uploadedDokumen2[] = $uniqueFilenameDokumen2;
+            }
 
-                $uniqueFilenameDokumen2a = uniqid() . '_' . $dokumen2a[$key]->getClientOriginalName();
-                $dokumen2a[$key]->move('assets/dokumen/sppb_2a', $uniqueFilenameDokumen2a);
+            // Check and process dokumen2a
+            $file2a = $dokumen2a[0] ?? null;
+            if ($file2a && $file2a->isValid()) {
+                $uniqueFilenameDokumen2a = uniqid() . '_' . $file2a->getClientOriginalName();
+                $file2a->move('assets/dokumen/sppb_2a', $uniqueFilenameDokumen2a);
                 $uploadedDokumen2a[] = $uniqueFilenameDokumen2a;
+            }
 
-                $uniqueFilenameDokumen3 = uniqid() . '_' . $dokumen3[$key]->getClientOriginalName();
-                $dokumen3[$key]->move('assets/dokumen/sppb_3', $uniqueFilenameDokumen3);
+            // Check and process dokumen3
+            $file3 = $dokumen3[0] ?? null;
+            if ($file3 && $file3->isValid()) {
+                $uniqueFilenameDokumen3 = uniqid() . '_' . $file3->getClientOriginalName();
+                $file3->move('assets/dokumen/sppb_3', $uniqueFilenameDokumen3);
                 $uploadedDokumen3[] = $uniqueFilenameDokumen3;
+            }
 
-                if($existRecord){
-                    $existRecord->update([
-                        'user_id' => $user->id, // Use the arrow operator (=>) here, not the equal sign (=)
-                        'institusi_id' => $institusiId,
-                        'no_rujukan' => "{$institusiId}/{$currentYear}/1",
-                        'dokumen1' => $uniqueFilenameDokumen1,
-                        'dokumen1a' => $uniqueFilenameDokumen1a,
-                        'dokumen2' => $uniqueFilenameDokumen2,
-                        'dokumen2a' => $uniqueFilenameDokumen2a,
-                        'dokumen3' => $uniqueFilenameDokumen3,
-                    ]);
-                }
-                else{
-                    $dokumenESP = new DokumenESP();
-                    $dokumenESP->user_id = auth()->user()->id;
-                    $dokumenESP->institusi_id = $institusiId;
-                    $dokumenESP->no_rujukan = "{$institusiId}/{$currentYear}/1";
-                    $dokumenESP->dokumen1 = $uniqueFilenameDokumen1;
-                    $dokumenESP->dokumen1a = $uniqueFilenameDokumen1a;
-                    $dokumenESP->dokumen2 = $uniqueFilenameDokumen2;
-                    $dokumenESP->dokumen2a = $uniqueFilenameDokumen2a;
-                    $dokumenESP->dokumen3 = $uniqueFilenameDokumen3;
-                    $dokumenESP->save();
-                }
+            // Update or create the record in the database after processing all files
+            if ($existRecord) {
+                $existRecord->update([
+                    'user_id' => $user->id,
+                    'institusi_id' => $institusiId,
+                    'no_rujukan' => "{$institusiId}/{$currentYear}/1",
+                    'dokumen1' => $uploadedDokumen1[0] ?? null,
+                    'dokumen1a' => $uploadedDokumen1a[0] ?? null,
+                    'dokumen2' => $uploadedDokumen2[0] ?? null,
+                    'dokumen2a' => $uploadedDokumen2a[0] ?? null,
+                    'dokumen3' => $uploadedDokumen3[0] ?? null,
+                ]);
+            } else {
+                $dokumenESP = new DokumenESP();
+                $dokumenESP->user_id = auth()->user()->id;
+                $dokumenESP->institusi_id = $institusiId;
+                $dokumenESP->no_rujukan = "{$institusiId}/{$currentYear}/1";
+                $dokumenESP->dokumen1 = $uploadedDokumen1[0] ?? null;
+                $dokumenESP->dokumen1a = $uploadedDokumen1a[0] ?? null;
+                $dokumenESP->dokumen2 = $uploadedDokumen2[0]  ?? null;
+                $dokumenESP->dokumen2a = $uploadedDokumen2a[0] ?? null;
+                $dokumenESP->dokumen3 = $uploadedDokumen3[0]  ?? null;
+                $dokumenESP->save();
             }
         }
 
