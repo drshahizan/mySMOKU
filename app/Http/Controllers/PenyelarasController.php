@@ -902,16 +902,15 @@ class PenyelarasController extends Controller
 
         // Validation rules for each document column
         $rules = [
-            'dokumen1.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
-            'dokumen1a.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
-            'dokumen2.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
-            'dokumen2a.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
-            'dokumen3.*' => 'required|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen1.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen1a.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen2.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen2a.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen3.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
         ];
 
         // Custom error messages
         $customMessages = [
-            'required' => 'Sila pilih fail untuk :attribute.',
             'mimes' => 'Format fail bagi :attribute mestilah pdf, xls, atau xlsx sahaja.',
             'max' => 'Saiz maksimum fail adalah 2 MB.',
         ];
@@ -977,6 +976,12 @@ class PenyelarasController extends Controller
 
         // Store the uploaded file names in the session for display in your view
         return redirect()->route('penyelaras.muat-naik.SPPB')->with('success', 'Semua fail SPBB telah berjaya dikemaskini.');
+    }
+
+    public function dokumenSPPB($id)
+    {
+        $dokumen = DokumenESP::where('institusi_id', $id)->first();
+        return view('dokumen.penyelaras.salinan_dokumen',compact('dokumen'));
     }
 
     public function maklumatBank()
@@ -1058,63 +1063,4 @@ class PenyelarasController extends Controller
         // Check if $bank is not null before passing it to the view
         return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user'));
     }
-
-    // public function kemaskiniMaklumatBank(Request $request, $id)
-    // {
-    //     // Check the id of institusi for the respective user
-    //     $user = auth()->user();
-
-    //     // Check if a record with the specified institusi_id exists
-    //     $bankExist = MaklumatBank::where('institusi_id', $id)->first();
-
-    //     // Validation rules for the 'penyata' file input
-    //     $rules = [
-    //         'penyata' => 'file|mimes:pdf,png',
-    //     ];
-    //     $messages = [
-    //         'penyata.file' => 'Invalid file format.',
-    //         'penyata.mimes' => 'The file must be a PDF or PNG.',
-    //     ];
-
-    //     // Handle file upload only if a new file is provided
-    //     if ($request->hasFile('penyata')) {
-    //         $this->validate($request, $rules, $messages);
-
-    //         $file = $request->file('penyata');
-    //         $fileName = uniqid() . '_' . $file->getClientOriginalName(); // Generate a unique filename
-
-    //         // Move the uploaded file to the desired directory
-    //         $file->move('assets/dokumen/penyata_bank_islam', $fileName);
-
-    //         // If the record exists, update it; otherwise, create a new one
-    //         if ($bankExist) {
-    //             $bankExist->update([
-    //                 'nama_akaun' => $request->input('nama_bank'),
-    //                 'no_akaun' => $request->input('no_acc'),
-    //                 'penyata_bank' => $fileName,
-    //             ]);
-    //         } else {
-    //             MaklumatBank::create([
-    //                 'institusi_id' => $id,
-    //                 'nama_akaun' => $request->input('nama_bank'),
-    //                 'no_akaun' => $request->input('no_acc'),
-    //                 'penyata_bank' => $fileName,
-    //             ]);
-    //         }
-    //     } else {
-    //         // No new file uploaded, update other fields if necessary
-    //         if ($bankExist) {
-    //             $bankExist->update([
-    //                 'nama_akaun' => $request->input('nama_bank'),
-    //                 'no_akaun' => $request->input('no_acc'),
-    //             ]);
-    //         }
-    //     }
-
-    //     // Fetch the updated $bank data from the database
-    //     $bank = MaklumatBank::where('institusi_id', $id)->first();
-
-    //     // Check if $updatedBank is not null before passing it to the view
-    //     return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user'));
-    // }
 }

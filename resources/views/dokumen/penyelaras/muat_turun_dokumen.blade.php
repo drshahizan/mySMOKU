@@ -73,7 +73,7 @@
 												<td>{{ $nama_institusi }}</td>
 												<td class="text-center">{{ date('d/m/Y', strtotime($doc->updated_at)) }}</td>
 												<td class="text-center">
-													<a href="{{ asset('assets/dokumen/esp/dokumen1/' . $doc->dokumen) }}" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
+													<a href="{{ url('penyelaras/penyaluran/lihat/salinan-dokumen/sppb/'.$id) }}" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
 														Lihat <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
 													</a>
 												</td>
