@@ -90,14 +90,14 @@
 								<br>
 
 								@if(session('success'))
-								<div class="alert alert-success" style="width: 90%; margin: 0 auto;">
+								<div class="alert alert-success" style="width: 80%; margin: 0 auto;">
 									{{ session('success') }}
 								</div>
 								<br>
 								@endif
 
 								@if ($errors->any())
-								<div class="alert alert-danger" style="width: 90%; margin: 0 auto;">
+								<div class="alert alert-danger" style="width: 80%; margin: 0 auto;">
 									@foreach ($errors->all() as $error)
 									<li>{{ $error }}</li>
 									@endforeach
