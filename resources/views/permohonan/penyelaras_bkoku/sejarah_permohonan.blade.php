@@ -143,10 +143,12 @@
         </div>
     </div>
     <script>
-        $('#sortTable1').DataTable();
-        $('#sortTable2').DataTable();
-        
-    </script>
+       
+        $('#sortTable2').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+    </script>	
     <style>
         .custom-width-btn {
             width: 130px; 

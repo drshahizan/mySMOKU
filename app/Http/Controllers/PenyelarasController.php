@@ -108,8 +108,9 @@ class PenyelarasController extends Controller
         $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri')->get();
         $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
         $agama = Agama::orderby("id","asc")->select('id','agama')->get();
-        $infoipt = InfoIpt::all()->where('jenis_institusi','IPTA')->sortBy('nama_institusi');
-        $peringkat = PeringkatPengajian::all()->sortBy('kod_peringkat');
+        // $infoipt = InfoIpt::all()->where('jenis_institusi','IPTA')->sortBy('nama_institusi');
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->get();
+        $peringkat = PeringkatPengajian::all()->sortBy('id');
         $kursus = Kursus::all()->sortBy('nama_kursus');
         $mod = Mod::all()->sortBy('kod_mod');
 
@@ -126,12 +127,12 @@ class PenyelarasController extends Controller
         ->where('smoku_id', $id);
         
 
-        if ($permohonan && $permohonan->status >= '1') {
-            $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
-            return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen','agama'));
-        } else {
+        // if ($permohonan && $permohonan->status >= '1') {
+        //     $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
+        //     return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen','agama'));
+        // } else {
             return view('permohonan.penyelaras_bkoku.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','mod','kursus','biaya','penaja','negeri','bandar','agama'));
-        }
+        // }
     }
 
     public function bandar($idnegeri)
@@ -155,6 +156,7 @@ class PenyelarasController extends Controller
             })
             ->where('id_institusi',$ipt)
             ->groupBy('bk_kursus.kod_peringkat','bk_peringkat_pengajian.peringkat')
+            ->orderBy('bk_peringkat_pengajian.kod_peringkat','desc')
             ->get();
 
         return response()->json($peringkatData);
@@ -751,6 +753,7 @@ class PenyelarasController extends Controller
         ->join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'tuntutan.smoku_id')
         ->where('smoku_penyelaras.penyelaras_id', '=', Auth::user()->id)
         ->select('tuntutan.*')
+        ->orderBy('created_at', 'DESC')
         ->get();
         //dd($tuntutan);
 
@@ -809,6 +812,7 @@ class PenyelarasController extends Controller
         ->join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'permohonan.smoku_id')
         ->where('smoku_penyelaras.penyelaras_id', '=', Auth::user()->id)
         ->select('permohonan.*')
+        ->orderBy('created_at', 'DESC')
         ->get();
 
         return view('permohonan.penyelaras_bkoku.sejarah_permohonan',compact('permohonan'));
