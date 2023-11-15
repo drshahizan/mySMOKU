@@ -86,8 +86,9 @@
                                                 <label for="end_date">Pilih Keputusan:</label>
                                                 <select name="status" class="form-select">
                                                     <option value="">Semua Keputusan</option>
-                                                    <option value="LAYAK" {{ Request::get('status') == 'LAYAK' ? 'selected' : '' }}>Layak</option>
-                                                    <option value="TIDAK LAYAK" {{ Request::get('status') == 'Tidak LAYAK' ? 'selected' : '' }}>Tidak Layak</option>
+                                                    <option value="5" {{ Request::get('status') == '5' ? 'selected' : '' }}>Dikembalikan</option>
+                                                    <option value="6" {{ Request::get('status') == '6' ? 'selected' : '' }}>Layak</option>
+                                                    <option value="7" {{ Request::get('status') == '7' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
                                             </div>
 
@@ -179,8 +180,9 @@
                                                 <label for="end_date">Pilih Keputusan:</label>
                                                 <select name="status" class="form-select">
                                                     <option value="">Semua Keputusan</option>
-                                                    <option value="LAYAK" {{ Request::get('status') == 'LAYAK' ? 'selected' : '' }}>Layak</option>
-                                                    <option value="TIDAK LAYAK" {{ Request::get('status') == 'Tidak LAYAK' ? 'selected' : '' }}>Tidak Layak</option>
+                                                    <option value="5" {{ Request::get('status') == '5' ? 'selected' : '' }}>Dikembalikan</option>
+                                                    <option value="6" {{ Request::get('status') == '6' ? 'selected' : '' }}>Layak</option>
+                                                    <option value="7" {{ Request::get('status') == '7' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
                                             </div>
 
@@ -274,8 +276,9 @@
                                                 <label for="end_date">Pilih Keputusan:</label>
                                                 <select name="status" class="form-select">
                                                     <option value="">Semua Keputusan</option>
-                                                    <option value="LAYAK" {{ Request::get('status') == 'LAYAK' ? 'selected' : '' }}>Layak</option>
-                                                    <option value="TIDAK LAYAK" {{ Request::get('status') == 'Tidak LAYAK' ? 'selected' : '' }}>Tidak Layak</option>
+                                                    <option value="5" {{ Request::get('status') == '5' ? 'selected' : '' }}>Dikembalikan</option>
+                                                    <option value="6" {{ Request::get('status') == '6' ? 'selected' : '' }}>Layak</option>
+                                                    <option value="7" {{ Request::get('status') == '7' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
                                             </div>
 
