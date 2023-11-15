@@ -99,4 +99,16 @@
     </form>
     <!--end::Form-->
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	@if(session('berjaya'))
+		Swal.fire({
+			icon: 'success',
+			title: 'Berjaya!',
+			text: ' {!! session('berjaya') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+</script>
+
 </x-auth-layout>

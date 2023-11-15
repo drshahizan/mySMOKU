@@ -93,6 +93,6 @@ class ProfilController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login')->with('berjaya', 'Berjaya tukar kata laluan, sila log masuk menggunakan kata laluan baru.');
     }
 }
