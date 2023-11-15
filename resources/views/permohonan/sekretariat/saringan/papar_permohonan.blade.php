@@ -83,6 +83,27 @@
                                             $tarikh_status = DB::table('sejarah_permohonan')->where('permohonan_id',$permohonan->id)->where('status', 5)->value('created_at');
                                         }
 
+                                        $user_id = DB::table('sejarah_permohonan')->where('permohonan_id', $permohonan->id)->where('status', $permohonan->status)->latest()->value('dilaksanakan_oleh');
+
+                                        if($user_id==null){
+                                            $user_name = "Tiada Maklumat";
+                                        }
+                                        else{
+                                            $user_name = DB::table('users')->where('id', $user_id)->value('nama');
+                                            $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
+                                            $conjunctions = ['bin', 'binti'];
+                                            $words = explode(' ', $text);
+                                            $result = [];
+                                            foreach ($words as $word) {
+                                                if (in_array(Str::lower($word), $conjunctions)) {
+                                                    $result[] = Str::lower($word);
+                                                } else {
+                                                    $result[] = $word;
+                                                }
+                                            }
+                                            $user_name = implode(' ', $result);
+                                        }
+
                                         $status = DB::table('bk_status')->where('kod_status', $permohonan->status)->value('status');
                                         $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
                                         $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
@@ -123,7 +144,7 @@
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Status</strong></td>
                                             <td>:</td>
-                                            <td>{{ucwords(strtolower($status))}} ({{date('d/m/Y', strtotime($tarikh_status))}})</td>
+                                            <td>{{ucwords(strtolower($status))}} ({{date('d/m/Y', strtotime($tarikh_status))}} oleh {{$user_name}})</td>
                                         </tr>
                                     </table>
                                 </div>
