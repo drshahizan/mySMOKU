@@ -112,7 +112,7 @@
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
                                                     <div class="file-input">
-                                                        <input type="file" name="penyata" required />
+                                                        <input type="file" name="penyata"/>
                                                         @if(isset($bank->penyata_bank) && !empty($bank->penyata_bank))
                                                             <a href="{{ asset('assets/dokumen/penyata_bank_islam/' . $bank->penyata_bank) }}" target="_blank">{{ $bank->penyata_bank }}</a>
                                                         @endif

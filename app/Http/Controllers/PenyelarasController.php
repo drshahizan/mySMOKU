@@ -1004,19 +1004,22 @@ class PenyelarasController extends Controller
         // Check if a record with the specified institusi_id exists
         $bankExist = MaklumatBank::where('institusi_id', $id)->first();
 
-        // Validation rules for the 'penyata' file input
+        // Determine the validation rules for the 'penyata' file input
         $rules = [
-            'penyata' => 'file|mimes:pdf,png',
+            'penyata' => $bankExist ? 'file|mimes:pdf,png' : 'required|file|mimes:pdf,png',
         ];
+
         $messages = [
+            'penyata.required' => 'The penyata file is required.',
             'penyata.file' => 'Invalid file format.',
             'penyata.mimes' => 'The file must be a PDF or PNG.',
         ];
 
+        // Validate the request
+        $this->validate($request, $rules, $messages);
+
         // Handle file upload only if a new file is provided
         if ($request->hasFile('penyata')) {
-            $this->validate($request, $rules, $messages);
-
             $file = $request->file('penyata');
             $fileName = uniqid() . '_' . $file->getClientOriginalName(); // Generate a unique filename
 
@@ -1031,6 +1034,7 @@ class PenyelarasController extends Controller
                     'penyata_bank' => $fileName,
                 ]);
             } else {
+                // If the record doesn't exist, create a new one with the file
                 MaklumatBank::create([
                     'institusi_id' => $id,
                     'nama_akaun' => $request->input('nama_bank'),
@@ -1051,7 +1055,66 @@ class PenyelarasController extends Controller
         // Fetch the updated $bank data from the database
         $bank = MaklumatBank::where('institusi_id', $id)->first();
 
-        // Check if $updatedBank is not null before passing it to the view
+        // Check if $bank is not null before passing it to the view
         return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user'));
     }
+
+    // public function kemaskiniMaklumatBank(Request $request, $id)
+    // {
+    //     // Check the id of institusi for the respective user
+    //     $user = auth()->user();
+
+    //     // Check if a record with the specified institusi_id exists
+    //     $bankExist = MaklumatBank::where('institusi_id', $id)->first();
+
+    //     // Validation rules for the 'penyata' file input
+    //     $rules = [
+    //         'penyata' => 'file|mimes:pdf,png',
+    //     ];
+    //     $messages = [
+    //         'penyata.file' => 'Invalid file format.',
+    //         'penyata.mimes' => 'The file must be a PDF or PNG.',
+    //     ];
+
+    //     // Handle file upload only if a new file is provided
+    //     if ($request->hasFile('penyata')) {
+    //         $this->validate($request, $rules, $messages);
+
+    //         $file = $request->file('penyata');
+    //         $fileName = uniqid() . '_' . $file->getClientOriginalName(); // Generate a unique filename
+
+    //         // Move the uploaded file to the desired directory
+    //         $file->move('assets/dokumen/penyata_bank_islam', $fileName);
+
+    //         // If the record exists, update it; otherwise, create a new one
+    //         if ($bankExist) {
+    //             $bankExist->update([
+    //                 'nama_akaun' => $request->input('nama_bank'),
+    //                 'no_akaun' => $request->input('no_acc'),
+    //                 'penyata_bank' => $fileName,
+    //             ]);
+    //         } else {
+    //             MaklumatBank::create([
+    //                 'institusi_id' => $id,
+    //                 'nama_akaun' => $request->input('nama_bank'),
+    //                 'no_akaun' => $request->input('no_acc'),
+    //                 'penyata_bank' => $fileName,
+    //             ]);
+    //         }
+    //     } else {
+    //         // No new file uploaded, update other fields if necessary
+    //         if ($bankExist) {
+    //             $bankExist->update([
+    //                 'nama_akaun' => $request->input('nama_bank'),
+    //                 'no_akaun' => $request->input('no_acc'),
+    //             ]);
+    //         }
+    //     }
+
+    //     // Fetch the updated $bank data from the database
+    //     $bank = MaklumatBank::where('institusi_id', $id)->first();
+
+    //     // Check if $updatedBank is not null before passing it to the view
+    //     return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user'));
+    // }
 }
