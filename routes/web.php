@@ -40,13 +40,12 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 //Route::middleware('api.token')->group(function () {
 
     //nak test kat luar sistem
-    Route::get('/kemaskiniESP', [MaklumatESPController::class, 'kemaskiniStatusESP']);
+    // Route::get('/kemaskiniESP', [MaklumatESPController::class, 'kemaskiniStatusESP']);
     Route::post('/statusESP', [MaklumatESPController::class, 'receiveData']);
     Route::get('/statusESP/dibayar', [MaklumatESPController::class, 'statusDibayar']);
     Route::get('/test/api', [MaklumatESPController::class, 'test']);
     Route::get('/requery', [MaklumatESPController::class, 'testrequery']);
-
-
+    Route::post('/requery', [MaklumatESPController::class, 'kemaskiniStatusESP'])->name('kemaskini.esp');
     Route::get('/statusESP/dibayar/tuntutan', [MaklumatESPController::class, 'statusDibayarTuntutan']);
 
     Route::get('/maklumat/MQR', [MaklumatKursusController::class, 'index']);

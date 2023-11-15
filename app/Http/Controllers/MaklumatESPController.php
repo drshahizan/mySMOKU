@@ -408,9 +408,53 @@ class MaklumatESPController extends Controller
     }
 
     public function testrequery(){
+        $bkokuUA = Permohonan::whereIn('status', ['6','8'])->orderBy('created_at', 'DESC')->get();
+        // dd($bkokuUA);
+
+        return view('esp.requery', compact('bkokuUA'));
+    }
+
+    public function kemaskiniStatusESP(Request $request)
+    {
+
+        $selectAll = $request->input('selectAll');
+        $selectedNokps = $request->input('selectedNokps');
+
+        $query = DB::table('smoku as a')
+            ->join('permohonan as b', 'b.smoku_id', '=', 'a.id')
+            ->join('smoku_akademik as c', 'c.smoku_id', '=', 'a.id')
+            ->select(
+                'a.no_kp as noic',
+                'b.no_rujukan_permohonan as id_permohonan',
+                DB::raw('"" as id_tuntutan'),
+            );
+        
+            // Define common conditions
+            $query = $query->where('c.status', '=', 1)
+            ->where('b.status', '=', 6);
+
+            if ($selectAll === true) {
+                // Fetch all relevant data without filtering by specific no_kp values
+                $data = $query->get();
+                
+            } else {
+                // Fetch data based on selected no_kp values
+                $data = $query->whereIn('a.no_kp', $selectedNokps)
+                ->get();
+                
+            }
+
+            $responseDataUA = [
+                'data' => $data
+            ];
+
+            return response()->json($responseDataUA);
 
 
-        return view('esp.requery');
+        //return response()->json(['data' => $data]);
+        
+            
+        
     }
 
     public function test(){
