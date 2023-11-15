@@ -204,34 +204,38 @@
                                 <div class="col-md-5 fv-row">
                                     <input class="form-control" type="text" id="penutup2" name="penutup2" style="font-weight:bold" value="{{$suratTawaran->penutup2}}">
                                 </div>
-                                {{-- <p><input type="text" id="penutup4_4" name="penutup1" style="width: 50%; font-weight:bold" value="{{$suratTawaran->penutup1}}"></p> --}}
-                                {{-- <p><input type="text" id="penutup4_4" name="penutup4_4" style="width: 50%; font-weight:bold" value="{{$suratTawaran->penutup4_4}}"></p>
-                                <br>
-                                <p><input type="text" id="penutup2" name="penutup2" style="width: 50%; font-weight:bold" value="{{$suratTawaran->penutup2}}"></p> --}}
                                 <br><br>
+
                                 <p>Saya yang menjalankan amanah,</p>
+                                
                                 <br>
-                                <div class="col-md-4 fv-row">
+                                <div class="col-md-5 fv-row">
                                     <input class="form-control" type="text" id="penutup3_1" name="penutup3_1" style="font-weight:bold" value="{{$suratTawaran->penutup3_1}}">
                                 </div>
-                                <div class="col-md-4 fv-row">
+                                <div class="col-md-5 fv-row">
                                     <input class="form-control" type="text" id="penutup3_2" name="penutup3_2" style="font-weight:bold" value="{{$suratTawaran->penutup3_2}}">
                                 </div>
-                                <div class="col-md-4 fv-row">
+                                <div class="col-md-5 fv-row">
                                     <input class="form-control" type="text" id="penutup3_3" name="penutup3_3" style="font-weight:bold" value="{{$suratTawaran->penutup3_3}}">
                                 </div>
-                                <div class="col-md-4 fv-row">
+                                <div class="col-md-5 fv-row">
                                     <input class="form-control" type="text" id="penutup4_3" name="penutup4_3" style="font-weight:bold" value="{{$suratTawaran->penutup4_3}}">
                                 </div>
                                 <br><br>
-                                <p><div style="text-align: center;">"Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>
-                                
-                                <p>s.k :<br>
-                                    <input type="text" id="penutup4_1" name="penutup4_1" style="width: 30%" value="{{$suratTawaran->penutup4_1}}"><br>
-                                    <input type="text" id="penutup4_2" name="penutup4_2" style="width: 30%" value="{{$suratTawaran->penutup4_2}}"><br>
-                                    <input type="text" id="penutup4_3" name="penutup4_3" style="width: 30%" value="{{$suratTawaran->penutup4_3}}">
-                                </p>
 
+                                <p><div style="text-align: center;">"Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>
+
+                                <p>s.k : </p>
+                                <div class="col-md-5 fv-row">
+                                    <input class="form-control" type="text" id="penutup4_1" name="penutup4_1" style="font-weight:bold" value="{{$suratTawaran->penutup4_1}}">
+                                </div> 
+                                <div class="col-md-5 fv-row">
+                                    <input class="form-control" type="text" id="penutup4_2" name="penutup4_2" style="font-weight:bold" value="{{$suratTawaran->penutup4_2}}">
+                                </div>
+                                <div class="col-md-5 fv-row">
+                                    <input class="form-control" type="text" id="penutup4_3" name="penutup4_3" style="font-weight:bold" value="{{$suratTawaran->penutup4_3}}">
+                                </div>
+                                
                                 <div class="d-flex flex-center mt-5 mb-5">
                                     <button type="submit" class="btn btn-primary btn-sm">Kemaskini</button>
                                 </div>
