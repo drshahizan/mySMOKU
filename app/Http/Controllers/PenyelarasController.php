@@ -998,11 +998,11 @@ class PenyelarasController extends Controller
 
     public function kemaskiniMaklumatBank(Request $request, $id)
     {
-        // Check if a record with the specified institusi_id exists
-        $bank = MaklumatBank::where('institusi_id', $id)->first();
-
         // Check the id of institusi for the respective user
         $user = auth()->user();
+
+        // Check if a record with the specified institusi_id exists
+        $bankExist = MaklumatBank::where('institusi_id', $id)->first();
 
         // Validation rules for the 'penyata' file input
         $rules = [
@@ -1024,32 +1024,34 @@ class PenyelarasController extends Controller
             $file->move('assets/dokumen/penyata_bank_islam', $fileName);
 
             // If the record exists, update it; otherwise, create a new one
-            if ($bank) {
-                $bank->update([
+            if ($bankExist) {
+                $bankExist->update([
                     'nama_akaun' => $request->input('nama_bank'),
                     'no_akaun' => $request->input('no_acc'),
                     'penyata_bank' => $fileName,
                 ]);
-            } 
-            else {
+            } else {
                 MaklumatBank::create([
-                    'institusi_id' => $id, 
+                    'institusi_id' => $id,
                     'nama_akaun' => $request->input('nama_bank'),
                     'no_akaun' => $request->input('no_acc'),
                     'penyata_bank' => $fileName,
                 ]);
             }
-        } 
-        else {
+        } else {
             // No new file uploaded, update other fields if necessary
-            if ($bank) {
-                $bank->update([
+            if ($bankExist) {
+                $bankExist->update([
                     'nama_akaun' => $request->input('nama_bank'),
                     'no_akaun' => $request->input('no_acc'),
                 ]);
             }
         }
 
+        // Fetch the updated $bank data from the database
+        $bank = MaklumatBank::where('institusi_id', $id)->first();
+
+        // Check if $updatedBank is not null before passing it to the view
         return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user'));
     }
 }
