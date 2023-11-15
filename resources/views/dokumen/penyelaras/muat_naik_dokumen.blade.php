@@ -78,7 +78,7 @@
 					<!--begin::Card-->
 					<div class="card">
 						<!--begin::Card body 1-->
-						<div class="card-body pt-10 p-20">
+						<div class="card-body pt-10 p-15">
 							<form action="{{ route('penyelaras.kemaskini.SPPB') }}" method="post" enctype="multipart/form-data">
 								@csrf
 								<div class="d-flex flex-column align-items-start flex-xl-row">

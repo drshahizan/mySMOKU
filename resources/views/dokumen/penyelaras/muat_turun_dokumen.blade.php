@@ -51,9 +51,9 @@
 									<thead>
 										<tr>
 											<th class="text-center" style="width: 5%">No</th>
-											<th class="text-center" style="width: 60%">Nama Institusi Pengajian</th>
+											<th class="text-center" style="width: 55%">Nama Institusi Pengajian</th>
 											<th class="text-center" style="width: 20%">Tarikh Dikemaskini</th>
-											<th class="text-center" style="width: 15%">Borang SPPB</th>
+											<th class="text-center" style="width: 20%">Borang SPPB</th>
 										</tr>
 									</thead>
 								
