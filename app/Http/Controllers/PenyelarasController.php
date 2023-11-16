@@ -1186,4 +1186,13 @@ class PenyelarasController extends Controller
 
         return response()->json(['maklumat' => $maklumat]);
     }
+
+
+    // public function maklumatPembayaran($id)
+    // {
+    //     // Retrieve data from the database based on the $id
+    //     $maklumat = Permohonan::where('no_rujukan_permohonan', $id)->first();
+
+    //     return response()->json(['maklumat' => $maklumat]);
+    // }
 }

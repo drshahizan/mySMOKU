@@ -161,27 +161,27 @@
                                                                         {{ csrf_field() }}
                                                                         <div class="mb-3">
                                                                             <label for="message-text" class="col-form-label">Yuran Dibayar :</label>
-                                                                            <input type="number" step="0.01" class="form-control" id="yuranDibayar" name="yuranDibayar">
+                                                                            <input type="number" step="0.01" class="form-control" id="yuranDibayar" name="yuranDibayar"  value="{{ $maklumat->yuran_dibayar ?? '' }}">
                                                                         </div>
 
                                                                         <div class="mb-3">
                                                                             <label for="message-text" class="col-form-label">Wang Saku Dibayar :</label>
-                                                                            <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar">
+                                                                            <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar"  value="{{ $maklumat->wang_saku_dibayar ?? '' }}">
                                                                         </div>
 
                                                                         <div class="mb-3">
                                                                             <label for="recipient-name" class="col-form-label">No Baucer :</label>
-                                                                            <input type="text" class="form-control" id="noBaucer" name="noBaucer">
+                                                                            <input type="text" class="form-control" id="noBaucer" name="noBaucer"  value="{{ $maklumat->no_baucer ?? '' }}">
                                                                         </div>
                                                                         
                                                                         <div class="mb-3">
                                                                             <label for="message-text" class="col-form-label">Perihal :</label>
-                                                                            <textarea class="form-control" id="perihal" name="perihal"></textarea>
+                                                                            <textarea class="form-control" id="perihal" name="perihal"  value="{{ $maklumat->perihal ?? '' }}"></textarea>
                                                                         </div>
 
                                                                         <div class="mb-3">
                                                                             <label for="message-text" class="col-form-label">Tarikh Baucer :</label>
-                                                                            <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer">
+                                                                            <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer"  value="{{ $maklumat->tarikh_baucer ?? '' }}">
                                                                         </div>
 
                                                                         <input type="hidden" id="clickedNoRujukan">
@@ -215,6 +215,7 @@
             $(document).ready(function () {
                 $('.open-modal-link').click(function () {
                     var permohonanId = $(this).data('no-rujukan');
+                    console.log('permohonanId:', permohonanId);
 
                     // Make an Ajax request to retrieve data
                     $.ajax({
@@ -232,6 +233,7 @@
                             console.error('Error fetching data:', error);
                         }
                     });
+
                 });
             });
         </script>
