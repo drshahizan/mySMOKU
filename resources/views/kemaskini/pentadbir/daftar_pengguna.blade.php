@@ -364,7 +364,7 @@
 												<!--begin::Input-->
 												<select name="id_institusibkoku" id="id_institusibkoku" aria-label="Pilih" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold">
 													@foreach ($infoipt as $infoipt1)
-														<option value="00139">{{ $infoipt1->id_institusi}}-{{ $infoipt1->nama_institusi}}</option>
+														<option value="{{ $infoipt1->id_institusi}}">{{ $infoipt1->nama_institusi}}</option>
 													@endforeach
 												</select>
 												<!--end::Input-->
