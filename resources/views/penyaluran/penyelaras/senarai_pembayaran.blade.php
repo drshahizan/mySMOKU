@@ -88,7 +88,7 @@
                                 </form>  
 
                                 <div class="body">
-                                    <form action="{{ route('bulk.approval') }}" method="POST">
+                                    <form action="{{ route('penyelaras.bulk.update') }}" method="POST">
                                         {{csrf_field()}}
                                         <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                             <thead>
@@ -97,7 +97,7 @@
                                                     <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
                                                     <th class="text-center" style="width: 40%"><b>Nama</b></th>
                                                     <th class="text-center" style="width: 10%"><b>Amaun Yuran</b></th>
-                                                    <th class="text-center" style="width: 15%"><b>Amaun Wang Suka</b></th>
+                                                    <th class="text-center" style="width: 15%"><b>Amaun Wang Saku</b></th>
                                                     <th class="text-center" style="width: 15%"><b>Tarikh Permohonan</b></th>
                                                 </tr>
                                             </thead>
@@ -134,11 +134,12 @@
                                                     
                                                     @if ($institusi_id == $instiusi_user)
                                                         <tr>
-                                                            <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
-                                                            <td style="width: 15%"><a href="#" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                            <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td> 
+                                                            <td style="width: 15%"><a href="#" class="open-modal-link" data-bs-toggle="modal" data-bs-target="#baucerPenyelaras" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>                                          
+                                                            {{-- <td style="width: 15%"><a href="#" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td> --}}
                                                             <td style="width: 40%">{{$pemohon}}</td>
-                                                            <td style="width: 10%">{{$item->yuran_dibayar}}</td>
-                                                            <td style="width: 15%">{{$item->wang_saku_dibayar}}</td>                                       
+                                                            <td class="text-center" style="width: 10%">{{$item->yuran_disokong}}</td>
+                                                            <td class="text-center" style="width: 15%">{{$item->wang_saku_disokong}}</td>                                       
                                                             <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->created_at))}}</td>
                                                         </tr>
                                                     @endif
@@ -146,40 +147,74 @@
                                             </tbody>
                                         </table>
 
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU2">
-                                            Sahkan
-                                        </button>
-                                    
-                                        {{-- Modal --}}
-                                        <div class="modal fade" id="pengesahanModalBKOKU2" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU2" aria-hidden="true">
+                                        {{-- Modal Baucer --}}
+                                        <div class="modal fade" id="baucerPenyelaras" tabindex="-1" aria-labelledby="baucerPenyelaras" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Rekod Keputusan Permohonan</h1>
+                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Kemaskini Maklumat Pembayaran</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
 
                                                     <div class="modal-body">
                                                         <div class="mb-3">
-                                                            <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
-                                                            <input type="text" class="form-control" id="noMesyuarat" name="noMesyuarat">
+                                                            <label for="message-text" class="col-form-label">Yuran Dibayar :</label>
+                                                            <input type="number" step="0.01" class="form-control" id="yuranDibayar" name="yuranDibayar">
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label">Wang Saku Dibayar :</label>
+                                                            <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar">
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="recipient-name" class="col-form-label">No Baucer :</label>
+                                                            <input type="text" class="form-control" id="noBaucer" name="noBaucer">
+                                                        </div>
+                                                        
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label">Perihal :</label>
+                                                            <textarea class="form-control" id="perihal" name="perihal"></textarea>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label">Tarikh Baucer :</label>
+                                                            <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer">
+                                                        </div>
+
+                                                        <input type="hidden" id="clickedNoRujukan">
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div> 
+
+                                        <!-- Button trigger modal --> 
+                                        <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#cekKPT">
+                                            Kemaskini
+                                        </button>
+
+                                        {{-- Modal Cek --}}
+                                        <div class="modal fade" id="cekKPT" tabindex="-1" aria-labelledby="cekKPT" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Kemaskini Maklumat Penyaluran</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label for="recipient-name" class="col-form-label">No Cek:</label>
+                                                            <input type="text" class="form-control" id="noCek" name="noCek">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
-                                                            <input type="date" class="form-control" id="tarikhMesyuarat" name="tarikhMesyuarat">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
-                                                            <select onchange="select1()" class="form-control" id="keputusan" name="keputusan">
-                                                                <option value="">Pilih Keputusan</option>
-                                                                <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
-                                                                <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="message-text" class="col-form-label">Catatan:</label>
-                                                            <textarea class="form-control" id="catatan" name="catatan"></textarea>
+                                                            <label for="message-text" class="col-form-label">Tarikh Transaksi:</label>
+                                                            <input type="date" class="form-control" id="tarikhTransaksi" name="tarikhTransaksi">
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -210,6 +245,17 @@
                     checkboxes[i].checked = source.checked;
                 }
             }
+
+            // Add a click event listener to the links with the "open-modal-link" class
+            document.querySelectorAll('.open-modal-link').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    // Get the value of the data-no-rujukan attribute
+                    var noRujukan = link.getAttribute('data-no-rujukan');
+
+                    // Set the value to the hidden input in the modal
+                    document.getElementById('clickedNoRujukan').value = noRujukan;
+                });
+            });
         </script>
     </body>
 </x-default-layout> 

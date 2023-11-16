@@ -1118,6 +1118,6 @@ class PenyelarasController extends Controller
         })
         ->where('permohonan.status', '=', '6')->get();
 
-        return view('penyaluran.penyelaras.baucer', compact('layak'));
+        return view('penyaluran.penyelaras.senarai_pembayaran', compact('layak'));
     }
 }
