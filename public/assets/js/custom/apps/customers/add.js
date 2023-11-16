@@ -110,8 +110,6 @@ var KTModalCustomersAdd = function () {
                             const redirectUrl = form.getAttribute('data-kt-redirect');
 
                             if (redirectUrl) {
-                                
-                                location.href = redirectUrl;
                                 Swal.fire({
                                     text: "Emel notifikasi telah dihantar kepada pengguna",
                                     icon: "success",
@@ -119,6 +117,10 @@ var KTModalCustomersAdd = function () {
                                     confirmButtonText: "Ok",
                                     customClass: {
                                         confirmButton: "btn btn-primary",
+                                    },
+                                    didClose: () => {
+                                        // Redirect the user after the Swal modal is closed
+                                        window.location.href = redirectUrl;
                                     }
                                 });
                             }
