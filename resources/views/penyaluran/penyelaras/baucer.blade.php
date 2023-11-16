@@ -67,18 +67,20 @@
 
                             <div class="tab-content" id="myTabContent">
                                 <form action="{{ url('penyelaras/penyaluran/baucer/permohonan') }}" method="GET">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <select name="institusi" class="form-select" style="margin-left: 20px;">
-                                                <option value="">Pilih Institusi Pengajian</option>
-                                                @foreach ($institusiPengajian as $institusi)
-                                                    <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
-                                                @endforeach
-                                            </select>
+                                    <div class="row" style="margin-left: 15px;">
+                                        <div class="col-md-2">
+                                            <label for="start_date"><b>Dari:</b></label>
+                                            <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                         </div>
-                            
-                                        <div class="col-md-2" style="margin-left: 10px; margin-right:140px;">
-                                            <button type="submit" class="btn btn-primary" style="width: 22%; padding-left: 8px;">
+                                
+                                        <div class="col-md-2">
+                                            <label for="end_date"><b>Hingga:</b></label>
+                                            <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
+                                        </div>
+                                
+                                        <div class="col-md-8 right">
+                                            <br>
+                                            <button type="submit" class="btn btn-primary" style="width: 5%; padding-left: 10px;">
                                                 <i class="fa fa-filter" style="font-size: 15px;"></i>
                                             </button>
                                         </div>
@@ -91,14 +93,12 @@
                                         <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
-                                                    <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
-                                                    <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                                                    <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
-                                                    <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
-                                                    <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                    <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
-                                                    <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+                                                    <th class="text-center" style="width: 5%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
+                                                    <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
+                                                    <th class="text-center" style="width: 40%"><b>Nama</b></th>
+                                                    <th class="text-center" style="width: 10%"><b>Amaun Yuran</b></th>
+                                                    <th class="text-center" style="width: 15%"><b>Amaun Wang Suka</b></th>
+                                                    <th class="text-center" style="width: 15%"><b>Tarikh Permohonan</b></th>
                                                 </tr>
                                             </thead>
 
@@ -111,75 +111,36 @@
                                                 @endphp
                                             
                                                 @foreach ($layak as $item)
-                                                    @if ($item['program']=="BKOKU")
-                                                        @php
-                                                            $i++;
-                                                            $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                            $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
-                                                            $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                                                            $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
-                                                            $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
-                                                            $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.jenis_institusi');
-                                                            $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
-                                                            $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
-                                                            
-                                                            // nama pemohon
-                                                            $text = ucwords(strtolower($nama_pemohon)); 
-                                                            $conjunctions = ['bin', 'binti'];
-                                                            $words = explode(' ', $text);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
-                                                            }
-                                                            $pemohon = implode(' ', $result);
+                                                    @php
+                                                        $i++;
+                                                        $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                        $institusi_id = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
+                                                        $instiusi_user = auth()->user()->id_institusi;
 
-                                                            //nama kursus
-                                                            $text2 = ucwords(strtolower($nama_kursus)); 
-                                                            $conjunctions = ['of', 'in', 'and'];
-                                                            $words = explode(' ', $text2);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
+                                                        // nama pemohon
+                                                        $text = ucwords(strtolower($nama_pemohon)); 
+                                                        $conjunctions = ['bin', 'binti'];
+                                                        $words = explode(' ', $text);
+                                                        $result = [];
+                                                        foreach ($words as $word) {
+                                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                                $result[] = Str::lower($word);
+                                                            } else {
+                                                                $result[] = $word;
                                                             }
-                                                            $kursus = implode(' ', $result);
-                                                            $namakursus = transformBracketsToCapital($kursus);
-
-                                                            //institusi pengajian
-                                                            $text3 = ucwords(strtolower($institusi_pengajian)); 
-                                                            $conjunctions = ['of', 'in', 'and'];
-                                                            $words = explode(' ', $text3);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
-                                                            }
-                                                            $institusi = implode(' ', $result);
-                                                            $institusipengajian = transformBracketsToUppercase($institusi);
-                                                        @endphp
-                                                        
-                                                        @if ($jenis_institusi == "UA")
-                                                            <tr>
-                                                                <td class="text-center" style="width: 3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
-                                                                <td style="width: 10%"><a href="#" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
-                                                                <td style="width: 20%">{{$pemohon}}</td>
-                                                                <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                <td style="width: 17%">{{$namakursus}}</td>
-                                                                <td style="width: 20%">{{$institusipengajian}}</td>
-                                                                <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                                                                <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
-                                                            </tr>
-                                                        @endif
+                                                        }
+                                                        $pemohon = implode(' ', $result);
+                                                    @endphp
+                                                    
+                                                    @if ($institusi_id == $instiusi_user)
+                                                        <tr>
+                                                            <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
+                                                            <td style="width: 15%"><a href="#" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                            <td style="width: 40%">{{$pemohon}}</td>
+                                                            <td style="width: 10%">{{$item->yuran_dibayar}}</td>
+                                                            <td style="width: 15%">{{$item->wang_saku_dibayar}}</td>                                       
+                                                            <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->created_at))}}</td>
+                                                        </tr>
                                                     @endif
                                                 @endforeach 
                                             </tbody>

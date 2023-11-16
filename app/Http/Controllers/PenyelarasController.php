@@ -1087,21 +1087,15 @@ class PenyelarasController extends Controller
 
     public function baucer(Request $request)
     {
-        $filters = $request->only(['institusi']); // Adjust the filter names as per your form
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
 
-        $query = Permohonan::select('permohonan.*')
-            ->where('permohonan.status', '=', '4');
+        $layak = Permohonan::orderBy('id', 'desc')
+        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('created_at', [$startDate, $endDate]);
+        })
+        ->where('permohonan.status', '=', '6')->get();
 
-        if (isset($filters['institusi'])) {
-            $selectedInstitusi = $filters['institusi'];
-            $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
-                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
-                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
-        }
-
-        $layak = $query->get();
-        $institusiPengajian = InfoIpt::all();
-
-        return view('penyaluran.penyelaras.baucer', compact('layak', 'institusiPengajian', 'filters'));
+        return view('penyaluran.penyelaras.baucer', compact('layak'));
     }
 }
