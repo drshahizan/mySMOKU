@@ -1084,4 +1084,24 @@ class PenyelarasController extends Controller
         // Check if $bank is not null before passing it to the view
         return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user'));
     }
+
+    public function baucer(Request $request)
+    {
+        $filters = $request->only(['institusi']); // Adjust the filter names as per your form
+
+        $query = Permohonan::select('permohonan.*')
+            ->where('permohonan.status', '=', '4');
+
+        if (isset($filters['institusi'])) {
+            $selectedInstitusi = $filters['institusi'];
+            $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
+        }
+
+        $layak = $query->get();
+        $institusiPengajian = InfoIpt::all();
+
+        return view('penyaluran.penyelaras.baucer', compact('layak', 'institusiPengajian', 'filters'));
+    }
 }
