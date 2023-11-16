@@ -306,6 +306,48 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <!-- Button trigger modal //syafiqah. kiv jap tak siap lagi--> 
+                                    <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#baucer">
+                                        Kemaskini
+                                    </button>
+                                    {{-- Modal --}}
+                                    <div class="modal fade" id="baucer" tabindex="-1" aria-labelledby="baucer" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Kemaskini Maklumat Penyaluran</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="recipient-name" class="col-form-label">No Baucer:</label>
+                                                        <input type="text" class="form-control" id="noBaucer" name="noBaucer">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="message-text" class="col-form-label">Tarikh Baucer:</label>
+                                                        <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="message-text" class="col-form-label">Perihal:</label>
+                                                        <textarea class="form-control" id="perihal" name="perihal"></textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="recipient-name" class="col-form-label">No Cek:</label>
+                                                        <input type="text" class="form-control" id="noCek" name="noCek">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="message-text" class="col-form-label">Tarikh Transaksi:</label>
+                                                        <input type="date" class="form-control" id="tarikhTransaksi" name="tarikhTransaksi">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                        <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div> 
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
