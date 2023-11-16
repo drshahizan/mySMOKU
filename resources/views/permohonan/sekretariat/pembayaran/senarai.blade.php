@@ -201,10 +201,12 @@
                             <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                 <br>
                                 <div class="body">
-                                    <div class="table-responsive">
+                                    <form action="{{ route('penyelaras.bulk.update') }}" method="POST">
+                                    {{csrf_field()}}
                                         <table id="sortTable1a" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
+                                                <th class="text-center" style="width: 5%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
                                                 <th style="width: 10%"><b>ID Permohonan</b></th>
                                                 <th style="width: 20%"><b>Nama</b></th>
                                                 <th style="width: 21%"><b>Nama Kursus</b></th>
@@ -281,13 +283,15 @@
                                                     @endphp
                                                     @if ($jenis_institusi=="UA")
                                                         <tr>
+                                                                                                            
+                                                            <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item['id'] }}" /></td> 
                                                             <td style="width: 10%">
                                                                 <a href="{{ url('permohonan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                                {{--                                                            @if($item['status']==6)--}}
-                                                                {{--                                                                <a href="{{ url('permohonan/sekretariat/pembayaran/maklumat/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>--}}
-                                                                {{--                                                            @else--}}
-                                                                {{--                                                                <a href="{{ url('permohonan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>--}}
-                                                                {{--                                                            @endif--}}
+                                                                {{--@if($item['status']==6)--}}
+                                                                {{--<a href="{{ url('permohonan/sekretariat/pembayaran/maklumat/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>--}}
+                                                                {{--@else--}}
+                                                                {{--<a href="{{ url('permohonan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>--}}
+                                                                {{--@endif--}}
                                                             </td>
                                                             <td style="width: 20%">{{$pemohon}}</td>
                                                             <td style="width: 21%">{{$kursus}}</td>
@@ -305,49 +309,50 @@
                                             @endforeach
                                             </tbody>
                                         </table>
-                                    </div>
-                                    <!-- Button trigger modal //syafiqah. kiv jap tak siap lagi--> 
-                                    <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#baucer">
-                                        Kemaskini
-                                    </button>
-                                    {{-- Modal --}}
-                                    <div class="modal fade" id="baucer" tabindex="-1" aria-labelledby="baucer" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Kemaskini Maklumat Penyaluran</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
 
-                                                <div class="modal-body">
-                                                    <div class="mb-3">
-                                                        <label for="recipient-name" class="col-form-label">No Baucer:</label>
-                                                        <input type="text" class="form-control" id="noBaucer" name="noBaucer">
+                                        <!-- Button trigger modal //syafiqah. kiv jap tak siap lagi--> 
+                                        <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#baucer">
+                                            Kemaskini
+                                        </button>
+                                        {{-- Modal --}}
+                                        <div class="modal fade" id="baucer" tabindex="-1" aria-labelledby="baucer" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Kemaskini Maklumat Penyaluran</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Tarikh Baucer:</label>
-                                                        <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer">
+
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label for="recipient-name" class="col-form-label">No Baucer:</label>
+                                                            <input type="text" class="form-control" id="noBaucer" name="noBaucer">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label">Tarikh Baucer:</label>
+                                                            <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label">Perihal:</label>
+                                                            <textarea class="form-control" id="perihal" name="perihal"></textarea>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="recipient-name" class="col-form-label">No Cek:</label>
+                                                            <input type="text" class="form-control" id="noCek" name="noCek">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label">Tarikh Transaksi:</label>
+                                                            <input type="date" class="form-control" id="tarikhTransaksi" name="tarikhTransaksi">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Perihal:</label>
-                                                        <textarea class="form-control" id="perihal" name="perihal"></textarea>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="recipient-name" class="col-form-label">No Cek:</label>
-                                                        <input type="text" class="form-control" id="noCek" name="noCek">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Tarikh Transaksi:</label>
-                                                        <input type="date" class="form-control" id="tarikhTransaksi" name="tarikhTransaksi">
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                        <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </div>
-                                    </div> 
+                                                </div> 
+                                            </div>
+                                        </div> 
+                                    </form>    
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
@@ -467,9 +472,28 @@
         </div>
     </div>
     <script>
-        $('#sortTable1').DataTable();
-        $('#sortTable1a').DataTable();
-        $('#sortTable2').DataTable();
+        $('#sortTable1').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+        $('#sortTable1a').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+        $('#sortTable2').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+
+
+        // check all checkboxes at once
+        function toggle(source) {
+            var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+
     </script>
 
     </body>
