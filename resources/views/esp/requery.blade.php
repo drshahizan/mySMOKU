@@ -262,7 +262,7 @@ function toggleSelectAll(tab) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response) {
-          alert('siniii');
+          //alert('siniii');
             // Handle the response from the controller here
             var jsonData = response.data;
             var jsonString = JSON.stringify(jsonData, null, 2);
