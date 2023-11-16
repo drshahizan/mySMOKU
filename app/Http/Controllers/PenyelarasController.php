@@ -20,7 +20,7 @@ use App\Models\InfoIpt;
 use App\Models\PeringkatPengajian;
 use App\Models\Kursus;
 use App\Models\Mod;
-use App\Models\Sumberbiaya;
+use App\Models\SumberBiaya;
 use App\Models\Penaja;
 use App\Models\Status;
 use App\Models\JenisOku;
