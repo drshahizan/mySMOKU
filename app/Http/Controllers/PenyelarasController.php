@@ -1121,20 +1121,6 @@ class PenyelarasController extends Controller
         return view('penyaluran.penyelaras.senarai_pembayaran', compact('layak'));
     }
 
-    // public function hantarSemuaInfoCek(Request $request)
-    // {
-    //     $startDate = $request->input('start_date');
-    //     $endDate = $request->input('end_date');
-
-    //     $layak = Permohonan::orderBy('id', 'desc')
-    //     ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-    //         return $q->whereBetween('created_at', [$startDate, $endDate]);
-    //     })
-    //     ->where('permohonan.status', '=', '6')->get();
-
-    //     return view('penyaluran.penyelaras.senarai_pembayaran', compact('layak'));
-    // }
-
     public function hantarSemuaInfoCek(Request $request, $id)
     {
         // Use $smoku_id to associate the data with a specific smoku_id
@@ -1191,5 +1177,13 @@ class PenyelarasController extends Controller
         ->where('permohonan.status', '=', '8')->get();
 
         return view('penyaluran.penyelaras.senarai_permohonan_dibayar', compact('dibayar'));
+    }
+
+    public function maklumatPembayaran($id)
+    {
+        // Retrieve data from the database based on the $id
+        $maklumat = Permohonan::where('no_rujukan_permohonan', $id)->first();
+
+        return response()->json(['maklumat' => $maklumat]);
     }
 }

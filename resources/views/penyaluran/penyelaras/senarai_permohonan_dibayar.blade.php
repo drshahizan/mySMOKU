@@ -132,7 +132,14 @@
                                                 @if ($institusi_id == $instiusi_user)
                                                     <!-- Table rows -->
                                                     <tr>
-                                                        <td style="width: 15%"><a href="#" class="open-modal-link" data-bs-toggle="modal" data-bs-target="#baucerPenyelaras" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>                                          
+                                                        <td style="width: 15%">
+                                                            <a href="#" class="open-modal-link" 
+                                                            data-bs-toggle="modal" 
+                                                            data-bs-target="#baucerPenyelaras_{{ $item['no_rujukan_permohonan'] }}" 
+                                                            data-no-rujukan="{{ $item['no_rujukan_permohonan'] }}">
+                                                            {{ $item['no_rujukan_permohonan'] }}
+                                                            </a>
+                                                        </td>
                                                         <td style="width: 40%">{{$pemohon}}</td>
                                                         <td class="text-center" style="width: 15%">RM {{$item->yuran_dibayar}}</td>
                                                         <td class="text-center" style="width: 15%"> RM {{$item->wang_saku_dibayar}}</td>                                       
@@ -140,7 +147,7 @@
                                                     </tr>
 
                                                     {{-- Modal Baucer --}}
-                                                    <div class="modal fade" id="baucerPenyelaras" tabindex="-1" aria-labelledby="baucerPenyelaras" aria-hidden="true">
+                                                    <div class="modal fade" id="baucerPenyelaras_{{ $item['no_rujukan_permohonan'] }}" tabindex="-1" aria-labelledby="baucerPenyelarasLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -150,7 +157,7 @@
 
                                                                 <div class="modal-body">
                                                                     <!-- Form for single submission -->
-                                                                    <form action="{{ route('penyelaras.modal.submit', ['permohonan_id' => $item['id']]) }}" method="POST" class="modal-form">
+                                                                    <form action="#" method="GET" class="modal-form">
                                                                         {{ csrf_field() }}
                                                                         <div class="mb-3">
                                                                             <label for="message-text" class="col-form-label">Yuran Dibayar :</label>
@@ -201,24 +208,33 @@
         </div>
 
         <script>
-            //sorting function
+            //sorting table
             $('#sortTable1').DataTable();
 
-            // Add a click event listener to the links with the "open-modal-link" class
-            document.querySelectorAll('.open-modal-link').forEach(function(link) {
-                link.addEventListener('click', function() {
-                    // Get the value of the data-no-rujukan attribute
-                    var noRujukan = link.getAttribute('data-no-rujukan');
+            //modal
+            $(document).ready(function () {
+                $('.open-modal-link').click(function () {
+                    var permohonanId = $(this).data('no-rujukan');
 
-                    // Set the value to the hidden input in the modal
-                    document.getElementById('clickedNoRujukan').value = noRujukan;
-
-                    // Set the permohonan id value in the form action URL
-                    var permohonanId = link.getAttribute('data-permohonan-id');
-                    var form = document.getElementById('modalForm');
-                    form.action = form.action.replace(/\/\d+$/, '/' + permohonanId);
+                    // Make an Ajax request to retrieve data
+                    $.ajax({
+                        url: '/penyelaras/maklumat/pembayaran/' + permohonanId,
+                        type: 'GET',
+                        success: function (response) {
+                            // Populate the modal with the retrieved data
+                            $('#yuranDibayar').val(response.maklumat.yuran_dibayar);
+                            $('#wangSakuDibayar').val(response.maklumat.wang_saku_dibayar);
+                            $('#noBaucer').val(response.maklumat.no_baucer);
+                            $('#perihal').val(response.maklumat.perihal);
+                            $('#tarikhBaucer').val(response.maklumat.tarikh_baucer);
+                        },
+                        error: function (error) {
+                            console.error('Error fetching data:', error);
+                        }
+                    });
                 });
             });
         </script>
     </body>
+
 </x-default-layout> 
