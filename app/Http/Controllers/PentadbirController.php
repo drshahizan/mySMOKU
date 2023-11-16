@@ -48,31 +48,42 @@ class PentadbirController extends Controller
                 'email' => $request->email,
                 'tahap' => $request->tahap,
                 'jawatan' => $request->jawatan,
-                'id_institusi' => $request->id_institusi,
+                //'id_institusi' => $request->id_institusi,
                 'password' => Hash::make($request->password),
                 'status' => '1',
         
             ]);
 
+            // Assuming you have two different select elements with unique names
+            if ($request->has('id_institusibkoku')) {
+                // Handle the case where the first select element is present
+                $user->id_institusi = $request->id_institusibkoku;
+            } elseif ($request->has('id_institusippk')) {
+                // Handle the case where the second select element is present
+                $user->id_institusi = $request->id_institusippk;
+            }
+
             $email = $request->email;
             $no_kp = $request->no_kp;
             Mail::to($email)->send(new MailDaftarPengguna($email,$no_kp));
-            return redirect()->route('daftarpengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' .$request->nama);    
+            //return redirect()->route('daftarpengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' .$request->nama);    
         
-        }else {
-
-            User::where('no_kp' ,$request->no_kp)
-                ->update([
-                    'nama' => $request->nama,
-                    'no_kp' => $request->no_kp,
-                    'email' => $request->email,
-                    'tahap' => $request->tahap,
-                    'jawatan' => $request->jawatan,
-                    'id_institusi' => $request->id_institusi,
-                    'password' => Hash::make($request->password),
-                    'status' => $request->status,
-                
+        } else {
+            // If the user exists, update their information
+            $user->update([
+                'nama' => $request->nama,
+                'email' => $request->email,
+                'tahap' => $request->tahap,
+                'jawatan' => $request->jawatan,
+                'status' => $request->status,
             ]);
+            
+            // Set the institution ID based on the selected option
+            if ($request->has('id_institusibkoku')) {
+                $user->id_institusi = $request->id_institusibkoku;
+            } elseif ($request->has('id_institusippk')) {
+                $user->id_institusi = $request->id_institusippk;
+            }
         }
 
         $user->save();

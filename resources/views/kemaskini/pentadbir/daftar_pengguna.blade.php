@@ -362,10 +362,9 @@
 												<label class="fs-6 fw-semibold mb-2">Nama Pusat Pengajian</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												<select name="id_institusi" id="id_institusi" aria-label="Pilih" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold">
-													<option value="">Pilih</option>
-													@foreach ($infoipt as $infoipt)
-														<option value="{{ $infoipt->id_institusi}}">{{ $infoipt->nama_institusi}}</option>
+												<select name="id_institusibkoku" id="id_institusibkoku" aria-label="Pilih" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold">
+													@foreach ($infoipt as $infoipt1)
+														<option value="00139">{{ $infoipt1->id_institusi}}-{{ $infoipt1->nama_institusi}}</option>
 													@endforeach
 												</select>
 												<!--end::Input-->
@@ -377,7 +376,7 @@
 												<label class="fs-6 fw-semibold mb-2">Nama Pusat Pengajian</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												<select name="id_institusi" id="id_institusippk" aria-label="Pilih" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold">
+												<select name="id_institusippk" id="id_institusippk" aria-label="Pilih" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold">
 													<option value="">Pilih</option>
 													@foreach ($infoppk as $infoppk)
 														<option value="{{ $infoppk->id_institusi}}">{{ $infoppk->nama_institusi}}</option>
