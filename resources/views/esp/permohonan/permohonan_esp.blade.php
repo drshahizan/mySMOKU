@@ -33,275 +33,387 @@
 </div>
 <!--end::Page title-->
 <br>
+
+<body>
   <!--end::Page title-->
-  <div class="table-responsive">
-    <!--begin::Content-->
-    <div id="kt_app_content" class="app-content flex-column-fluid">
-      <!--begin::Content container-->
-      <div id="kt_app_content_container" class="app-container container-xxl">
-        <!--begin::Card-->
-        <div class="card">
-          <!--begin::Card header-->
-          <div class="card-header border-0 pt-6">
-            <!--begin::Card title-->
-            <div class="card-title">
-              <!--begin::Search-->
-              <div class="d-flex align-items-center position-relative my-1">
-                <i>
-                  <span class="path1"></span>
-                  <span class="path2"></span>
-                </i>
-                
-              </div>
-              <!--end::Search-->
+  <div id="main-content">
+    <div class="container-fluid">
+      <!--begin::Content-->
+      <div class="block-header">
+        <!--begin::Content container-->
+        <div class="row clearfix">
+          <!--begin::Card-->
+          <div class="card">
+            <!--begin::Card header-->
+            <div class="header">
+              <h2>Senarai Permohonan Layak<br><small>xxx</small></h2>
             </div>
-            <!--begin::Card title-->
-          </div>
-          <!--end::Card header-->
-          {{-- Javascript Nav Bar --}}
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="bkoku-tab" data-toggle="tab" data-target="#bkoku" type="button" role="tab" aria-controls="bkoku" aria-selected="true">BKOKU</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
-            </li>
-          </ul>
-          {{-- Content Navigation Bar --}}
-          <div class="tab-content" id="myTabContent">
-            {{-- BKOKU --}}
-            <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
-              <br>
-                <!--begin::Card body-->
-                <div class="card-body pt-0">
-                  <!--begin::Table-->
-                  <div class="table-responsive">
-                    <table id="sortTable1" class="table table-bordered table-striped">
-                      <thead>
-                        <tr>
-                          <th class="text-center" style="width:3%;">
-                            <input type="checkbox" name="select-all" id="select-all-bkoku" onclick="toggleSelectAll('bkoku');" />
-                          </th>
-                          <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
-                          <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                          <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
-                          <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                          <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
-                          <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
-                        </tr>
-                      </thead>
-                      <tbody class="fw-semibold text-gray-600">
-                        @php
-                          $i=0;
-                        @endphp
-                        @foreach ($kelulusan as $bkoku)
-
+            <!--end::Card header-->
+            {{-- Javascript Nav Bar --}}
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="bkoku-tab" data-toggle="tab" data-target="#bkoku" type="button" role="tab" aria-controls="bkoku" aria-selected="true">BKOKU</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="true">BKOKU UA</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
+              </li>
+            </ul>
+            {{-- Content Navigation Bar --}}
+            <div class="tab-content" id="myTabContent">
+              {{-- BKOKU --}}
+              <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
+                <br>
+                  <!--begin::Card body-->
+                  <div class="card-body pt-0">
+                    <!--begin::Table-->
+                    <div class="table-responsive">
+                      <table id="sortTable1" class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th class="text-center" style="width:3%;">
+                              <input type="checkbox" name="select-all" id="select-all-bkoku" onclick="toggleSelectAll('bkoku');" />
+                            </th>
+                            <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
+                            <th class="text-center" style="width: 20%"><b>Nama</b></th>
+                            <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
+                            <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                            <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
+                            <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+                          </tr>
+                        </thead>
+                        <tbody>
                           @php
-                            $i++;
-                            $nama_pemohon = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('nama');
-                            $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('nama_kursus');
-                            $no_kp = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('no_kp');
-                            $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $bkoku['smoku_id'])->value('bk_jenis_oku.kecacatan');
-                            $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->value('bk_info_institusi.nama_institusi');
-                            $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_mula');
-                            $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_tamat');
-                            $program = DB::table('permohonan')->where('id',$bkoku['id'])->value('program');
-                            //dd($bkoku['smoku_id']);
-
-                            // nama pemohon
-                            $text = ucwords(strtolower($nama_pemohon)); 
-                            $conjunctions = ['bin', 'binti'];
-                            $words = explode(' ', $text);
-                            $result = [];
-                            foreach ($words as $word) {
-                                if (in_array(Str::lower($word), $conjunctions)) {
-                                    $result[] = Str::lower($word);
-                                } else {
-                                    $result[] = $word;
-                                }
-                            }
-                            $pemohon = implode(' ', $result);
-
-                            //nama kursus
-                            $text2 = ucwords(strtolower($nama_kursus)); 
-                            $conjunctions = ['of', 'in', 'and'];
-                            $words = explode(' ', $text2);
-                            $result = [];
-                            foreach ($words as $word) {
-                                if (in_array(Str::lower($word), $conjunctions)) {
-                                    $result[] = Str::lower($word);
-                                } else {
-                                    $result[] = $word;
-                                }
-                            }
-                            $kursus = implode(' ', $result);
-                            $namakursus = transformBracketsToCapital($kursus);
-
-                            //institusi pengajian
-                            $text3 = ucwords(strtolower($institusi_pengajian)); 
-                            $conjunctions = ['of', 'in', 'and'];
-                            $words = explode(' ', $text3);
-                            $result = [];
-                            foreach ($words as $word) {
-                                if (in_array(Str::lower($word), $conjunctions)) {
-                                    $result[] = Str::lower($word);
-                                } else {
-                                    $result[] = $word;
-                                }
-                            }
-                            $institusi = implode(' ', $result);
-                            $institusipengajian = transformBracketsToUppercase($institusi);
+                            $i=0;
                           @endphp
-                          @if($program == "BKOKU")  
-                            <tr>
-                              <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
-                              <td class="text-center">{{ $bkoku->no_rujukan_permohonan}}</td>
-                              <td class="text-center">{{$pemohon}}</td>
-                              <td class="text-center">{{$namakursus}}</td>
-                              <td class="text-center">{{$institusipengajian}}</td>
-                              <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                              <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
-                            </tr>
-                          @endif
-                        @endforeach
-                      </tbody>
-                    </table>
+                          @foreach ($kelulusan as $bkoku)
+
+                            @php
+                              $i++;
+                              $nama_pemohon = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('nama');
+                              $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('nama_kursus');
+                              $no_kp = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('no_kp');
+                              $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $bkoku['smoku_id'])->value('bk_jenis_oku.kecacatan');
+                              $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.nama_institusi');
+                              $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.jenis_institusi');
+                              $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_mula');
+                              $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_tamat');
+                              $program = DB::table('permohonan')->where('id',$bkoku['id'])->value('program');
+                              //dd($bkoku['smoku_id']);
+
+                              // nama pemohon
+                              $text = ucwords(strtolower($nama_pemohon)); 
+                              $conjunctions = ['bin', 'binti'];
+                              $words = explode(' ', $text);
+                              $result = [];
+                              foreach ($words as $word) {
+                                  if (in_array(Str::lower($word), $conjunctions)) {
+                                      $result[] = Str::lower($word);
+                                  } else {
+                                      $result[] = $word;
+                                  }
+                              }
+                              $pemohon = implode(' ', $result);
+
+                              //nama kursus
+                              $text2 = ucwords(strtolower($nama_kursus)); 
+                              $conjunctions = ['of', 'in', 'and'];
+                              $words = explode(' ', $text2);
+                              $result = [];
+                              foreach ($words as $word) {
+                                  if (in_array(Str::lower($word), $conjunctions)) {
+                                      $result[] = Str::lower($word);
+                                  } else {
+                                      $result[] = $word;
+                                  }
+                              }
+                              $kursus = implode(' ', $result);
+                              $namakursus = transformBracketsToCapital($kursus);
+
+                              //institusi pengajian
+                              $text3 = ucwords(strtolower($institusi_pengajian)); 
+                              $conjunctions = ['of', 'in', 'and'];
+                              $words = explode(' ', $text3);
+                              $result = [];
+                              foreach ($words as $word) {
+                                  if (in_array(Str::lower($word), $conjunctions)) {
+                                      $result[] = Str::lower($word);
+                                  } else {
+                                      $result[] = $word;
+                                  }
+                              }
+                              $institusi = implode(' ', $result);
+                              $institusipengajian = transformBracketsToUppercase($institusi);
+                            @endphp
+                            @if($program == "BKOKU") 
+                              @if ($jenis_institusi != "UA") 
+                                <tr>
+                                  <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
+                                  <td class="text-center">{{ $bkoku->no_rujukan_permohonan}}</td>
+                                  <td class="text-center">{{$pemohon}}</td>
+                                  <td class="text-center">{{$namakursus}}</td>
+                                  <td class="text-center">{{$institusipengajian}}</td>
+                                  <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                  <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                </tr>
+                              @endif  
+                            @endif
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--end::Table-->
                   </div>
-                  <!--end::Table-->
-                </div>
-                <!--end::Card body-->
-            </div>
-            {{-- PKK --}}
-            <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-              <br>
-                <!--begin::Card body-->
-                <div class="card-body pt-0">
-                  <!--begin::Table-->
-                  <div class="table-responsive">
-                    <table id="sortTable2"  class="table table-bordered table-striped">
-                      <thead>
-                        <tr>
-                          <th class="text-center" style="width:3%;">
-                            <input type="checkbox" name="select-all" id="select-all-ppk" onclick="toggleSelectAll('ppk');" />
-                          </th>
-                          <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
-                          <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                          <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
-                          <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                          <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
-                          <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
-                        </tr>
-                      </thead>
-                      <tbody class="fw-semibold text-gray-600">
-                        @php
-                          $i=0;
-                        @endphp
-                        @foreach ($kelulusan as $item)
-
-                          @php
-                            $i++;
-                            $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                            $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
-                            $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                            $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
-                            $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
-                            $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
-                            $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
-                            $program = DB::table('permohonan')->where('id',$item['id'])->value('program');
-
-                            // nama pemohon
-                            $text = ucwords(strtolower($nama_pemohon)); 
-                            $conjunctions = ['bin', 'binti'];
-                            $words = explode(' ', $text);
-                            $result = [];
-                            foreach ($words as $word) {
-                                if (in_array(Str::lower($word), $conjunctions)) {
-                                    $result[] = Str::lower($word);
-                                } else {
-                                    $result[] = $word;
-                                }
-                            }
-                            $pemohon = implode(' ', $result);
-
-                            //nama kursus
-                            $text2 = ucwords(strtolower($nama_kursus)); 
-                            $conjunctions = ['of', 'in', 'and'];
-                            $words = explode(' ', $text2);
-                            $result = [];
-                            foreach ($words as $word) {
-                                if (in_array(Str::lower($word), $conjunctions)) {
-                                    $result[] = Str::lower($word);
-                                } else {
-                                    $result[] = $word;
-                                }
-                            }
-                            $kursus = implode(' ', $result);
-                            $namakursus = transformBracketsToCapital($kursus);
-
-                            //institusi pengajian
-                            $text3 = ucwords(strtolower($institusi_pengajian)); 
-                            $conjunctions = ['of', 'in', 'and'];
-                            $words = explode(' ', $text3);
-                            $result = [];
-                            foreach ($words as $word) {
-                                if (in_array(Str::lower($word), $conjunctions)) {
-                                    $result[] = Str::lower($word);
-                                } else {
-                                    $result[] = $word;
-                                }
-                            }
-                            $institusi = implode(' ', $result);
-                            $institusipengajian = transformBracketsToUppercase($institusi);
-                          @endphp
-                          @if($program == "PPK")
-                            <tr>
-                              <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
-                              <td class="text-center">{{ $item->no_rujukan_permohonan}}</td>
-                              <td class="text-center">{{$pemohon}}</td>
-                              <td class="text-center">{{$namakursus}}</td>
-                              <td class="text-center">{{$institusipengajian}}</td>
-                              <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                              <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
-                            </tr>
-                          @endif  
-                        @endforeach
-                      </tbody>
-                    </table>
-                  </div>
-                  <!--end::Table-->
-                </div>
-                <!--end::Card body-->
-            </div>  
-          </div>      
-          <!--begin::Card body-->
-          <div class="card-body pt-0">
-            <!--begin::Form-->
-            
-            <form class="form" id="hantar_maklumat">
-              <textarea name="token" id="token" rows="10" cols="50"></textarea>
-              <textarea name="data" id="data" rows="10" cols="50"></textarea>
-
-              <!--begin::Button-->
-              <div class="footer">
-                <input type="button" value="Hantar" onclick="sendData()" class="btn btn-primary">
+                  <!--end::Card body-->
               </div>
-              <!--end::Button-->
-          </form>
-            <!--end::Form-->
+              {{-- BKOKU UA--}}
+              <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                <br>
+                  <!--begin::Card body-->
+                  <div class="card-body pt-0">
+                    <!--begin::Table-->
+                    <div class="table-responsive">
+                      <table id="sortTable1a" class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th class="text-center" style="width:3%;">
+                              <input type="checkbox" name="select-all" id="select-all-bkokuUA" onclick="toggleSelectAll('bkokuUA');" />
+                            </th>
+                            <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
+                            <th class="text-center" style="width: 20%"><b>Nama</b></th>
+                            <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
+                            <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                            <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
+                            <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @php
+                            $i=0;
+                          @endphp
+                          @foreach ($kelulusan as $bkoku)
+
+                            @php
+                              $i++;
+                              $nama_pemohon = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('nama');
+                              $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('nama_kursus');
+                              $no_kp = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('no_kp');
+                              $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $bkoku['smoku_id'])->value('bk_jenis_oku.kecacatan');
+                              $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.nama_institusi');
+                              $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.jenis_institusi');
+                              $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_mula');
+                              $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_tamat');
+                              $program = DB::table('permohonan')->where('id',$bkoku['id'])->value('program');
+                              //dd($bkoku['smoku_id']);
+
+                              // nama pemohon
+                              $text = ucwords(strtolower($nama_pemohon)); 
+                              $conjunctions = ['bin', 'binti'];
+                              $words = explode(' ', $text);
+                              $result = [];
+                              foreach ($words as $word) {
+                                  if (in_array(Str::lower($word), $conjunctions)) {
+                                      $result[] = Str::lower($word);
+                                  } else {
+                                      $result[] = $word;
+                                  }
+                              }
+                              $pemohon = implode(' ', $result);
+
+                              //nama kursus
+                              $text2 = ucwords(strtolower($nama_kursus)); 
+                              $conjunctions = ['of', 'in', 'and'];
+                              $words = explode(' ', $text2);
+                              $result = [];
+                              foreach ($words as $word) {
+                                  if (in_array(Str::lower($word), $conjunctions)) {
+                                      $result[] = Str::lower($word);
+                                  } else {
+                                      $result[] = $word;
+                                  }
+                              }
+                              $kursus = implode(' ', $result);
+                              $namakursus = transformBracketsToCapital($kursus);
+
+                              //institusi pengajian
+                              $text3 = ucwords(strtolower($institusi_pengajian)); 
+                              $conjunctions = ['of', 'in', 'and'];
+                              $words = explode(' ', $text3);
+                              $result = [];
+                              foreach ($words as $word) {
+                                  if (in_array(Str::lower($word), $conjunctions)) {
+                                      $result[] = Str::lower($word);
+                                  } else {
+                                      $result[] = $word;
+                                  }
+                              }
+                              $institusi = implode(' ', $result);
+                              $institusipengajian = transformBracketsToUppercase($institusi);
+                            @endphp
+                            @if($program == "BKOKU") 
+                              @if ($jenis_institusi=="UA") 
+                                <tr>
+                                  <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
+                                  <td class="text-center">{{ $bkoku->no_rujukan_permohonan}}</td>
+                                  <td class="text-center">{{$pemohon}}</td>
+                                  <td class="text-center">{{$namakursus}}</td>
+                                  <td class="text-center">{{$institusipengajian}}</td>
+                                  <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                  <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                </tr>
+                              @endif   
+                            @endif
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--end::Table-->
+                  </div>
+                  <!--end::Card body-->
+              </div>
+              {{-- PKK --}}
+              <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
+                <br>
+                  <!--begin::Card body-->
+                  <div class="card-body pt-0">
+                    <!--begin::Table-->
+                    <div class="table-responsive">
+                      <table id="sortTable2"  class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th class="text-center" style="width:3%;">
+                              <input type="checkbox" name="select-all" id="select-all-ppk" onclick="toggleSelectAll('ppk');" />
+                            </th>
+                            <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
+                            <th class="text-center" style="width: 20%"><b>Nama</b></th>
+                            <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
+                            <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                            <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
+                            <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @php
+                            $i=0;
+                          @endphp
+                          @foreach ($kelulusan as $item)
+
+                            @php
+                              $i++;
+                              $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                              $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
+                              $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                              $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
+                              $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                              $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
+                              $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
+                              $program = DB::table('permohonan')->where('id',$item['id'])->value('program');
+
+                              // nama pemohon
+                              $text = ucwords(strtolower($nama_pemohon)); 
+                              $conjunctions = ['bin', 'binti'];
+                              $words = explode(' ', $text);
+                              $result = [];
+                              foreach ($words as $word) {
+                                  if (in_array(Str::lower($word), $conjunctions)) {
+                                      $result[] = Str::lower($word);
+                                  } else {
+                                      $result[] = $word;
+                                  }
+                              }
+                              $pemohon = implode(' ', $result);
+
+                              //nama kursus
+                              $text2 = ucwords(strtolower($nama_kursus)); 
+                              $conjunctions = ['of', 'in', 'and'];
+                              $words = explode(' ', $text2);
+                              $result = [];
+                              foreach ($words as $word) {
+                                  if (in_array(Str::lower($word), $conjunctions)) {
+                                      $result[] = Str::lower($word);
+                                  } else {
+                                      $result[] = $word;
+                                  }
+                              }
+                              $kursus = implode(' ', $result);
+                              $namakursus = transformBracketsToCapital($kursus);
+
+                              //institusi pengajian
+                              $text3 = ucwords(strtolower($institusi_pengajian)); 
+                              $conjunctions = ['of', 'in', 'and'];
+                              $words = explode(' ', $text3);
+                              $result = [];
+                              foreach ($words as $word) {
+                                  if (in_array(Str::lower($word), $conjunctions)) {
+                                      $result[] = Str::lower($word);
+                                  } else {
+                                      $result[] = $word;
+                                  }
+                              }
+                              $institusi = implode(' ', $result);
+                              $institusipengajian = transformBracketsToUppercase($institusi);
+                            @endphp
+                            @if($program == "PPK")
+                              <tr>
+                                <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
+                                <td class="text-center">{{ $item->no_rujukan_permohonan}}</td>
+                                <td class="text-center">{{$pemohon}}</td>
+                                <td class="text-center">{{$namakursus}}</td>
+                                <td class="text-center">{{$institusipengajian}}</td>
+                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                              </tr>
+                            @endif  
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--end::Table-->
+                  </div>
+                  <!--end::Card body-->
+              </div>  
+            </div>      
+            <!--begin::Card body-->
+            <div class="card-body pt-0">
+              <!--begin::Form-->
+              
+              <form class="form" id="hantar_maklumat">
+                <textarea name="token" id="token" rows="10" cols="50"></textarea>
+                <textarea name="data" id="data" rows="10" cols="50"></textarea>
+
+                <!--begin::Button-->
+                <div class="footer">
+                  <input type="button" value="Hantar" onclick="sendData()" class="btn btn-primary">
+                </div>
+                <!--end::Button-->
+            </form>
+              <!--end::Form-->
+            </div>
+            <!--end::Card body-->
           </div>
-          <!--end::Card body-->
+          <!--end::Card-->	
         </div>
-        <!--end::Card-->	
+        <!--end::Content container-->
       </div>
-      <!--end::Content container-->
-    </div>
-    <!--end::Content-->
+      <!--end::Content-->
+    </div>  
   </div>
 
   <script>
-    //sorting function
-    $('#sortTable1').DataTable();
-    $('#sortTable2').DataTable();
+    $('#sortTable1').DataTable({
+        ordering: true, // Enable manual sorting
+        order: [] // Disable initial sorting
+    });
+    $('#sortTable1a').DataTable({
+        ordering: true, // Enable manual sorting
+        order: [] // Disable initial sorting
+    });
+    $('#sortTable2').DataTable({
+        ordering: true, // Enable manual sorting
+        order: [] // Disable initial sorting
+    });
 
   </script>
 
@@ -523,7 +635,7 @@ async function hash(algorithm, data) {
 <!--end::Javascript-->
 
 
-
+</body>
 
 
 </x-default-layout>
