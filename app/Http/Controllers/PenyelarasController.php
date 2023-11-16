@@ -577,8 +577,30 @@ class PenyelarasController extends Controller
 
                     return view('tuntutan.penyelaras_bkoku.borang_tuntutan', compact('permohonan','tuntut','tuntutan', 'tuntutan_item','smoku_id','akademik'));
                 }
-            } else {
-                return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('sem', 'tak habis sem lagii niiiii.');
+            } else { // sebab tuntutan pun boleh kemukakan pada semester sama
+                //return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('sem', 'tak habis sem lagii niiiii.');
+                $tuntut = Tuntutan::where('smoku_id', $id)
+                       ->where('permohonan_id', $permohonan->id)
+                       ->orderBy('tuntutan.id', 'desc')
+                       ->first(['tuntutan.*']);
+
+                   //dd($tuntutan);    
+
+                   if ($tuntut && $tuntut->status == 1) {
+                       $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntut->id)->get();
+                   } 
+                   else if ($tuntut && $tuntut->status != 8){
+                       return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('sem', 'Tuntutan pelajar masih dalam semakan.');
+                   }
+                   else {
+                       $tuntutan_item = collect(); // An empty collection
+                   }
+                   
+                   $akademik = Akademik::where('smoku_id', $id)
+                       ->where('smoku_akademik.status', 1)->first();
+
+                    return view('tuntutan.penyelaras_bkoku.borang_tuntutan', compact('permohonan','tuntut','tuntutan', 'tuntutan_item','smoku_id','akademik'));
+            
             }    
 
         } else if ($permohonan && $permohonan->status !=8) {
