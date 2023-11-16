@@ -131,9 +131,15 @@
 				</div>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="{{ route('penyelaras.baucer') }}">
+				<a class="menu-link" href="{{ route('senarai.layak') }}">
 					<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
-					<span class="menu-title">Baucer</span>
+					<span class="menu-title">Senarai Pembayaran</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a class="menu-link" href="{{ route('senarai.dibayar') }}">
+					<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
+					<span class="menu-title">Keputusan Pembayaran</span>
 				</a>
 			</div>
 			<div class="menu-item">

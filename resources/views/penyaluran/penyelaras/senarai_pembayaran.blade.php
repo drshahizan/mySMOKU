@@ -194,12 +194,12 @@
                                         </div> 
 
                                         <!-- Button trigger modal --> 
-                                        <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#cekKPT">
+                                        {{-- <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#cekKPT">
                                             Kemaskini
-                                        </button>
+                                        </button> --}}
 
                                         {{-- Modal Cek --}}
-                                        <div class="modal fade" id="cekKPT" tabindex="-1" aria-labelledby="cekKPT" aria-hidden="true">
+                                        {{-- <div class="modal fade" id="cekKPT" tabindex="-1" aria-labelledby="cekKPT" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -223,7 +223,7 @@
                                                     </div>
                                                 </div> 
                                             </div>
-                                        </div> 
+                                        </div>  --}}
                                         <br><br>                                       
                                     </form>
                                 </div>

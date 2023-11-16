@@ -1107,7 +1107,7 @@ class PenyelarasController extends Controller
         return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user'));
     }
 
-    public function baucer(Request $request)
+    public function senaraiPemohonLayak(Request $request)
     {
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
@@ -1117,6 +1117,34 @@ class PenyelarasController extends Controller
             return $q->whereBetween('created_at', [$startDate, $endDate]);
         })
         ->where('permohonan.status', '=', '6')->get();
+
+        return view('penyaluran.penyelaras.senarai_pembayaran', compact('layak'));
+    }
+
+    public function hantarSemuaInfoCek(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $layak = Permohonan::orderBy('id', 'desc')
+        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('created_at', [$startDate, $endDate]);
+        })
+        ->where('permohonan.status', '=', '6')->get();
+
+        return view('penyaluran.penyelaras.senarai_pembayaran', compact('layak'));
+    }
+
+    public function senaraiPemohonDibayar(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $layak = Permohonan::orderBy('id', 'desc')
+        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('created_at', [$startDate, $endDate]);
+        })
+        ->where('permohonan.status', '=', '8')->get();
 
         return view('penyaluran.penyelaras.senarai_pembayaran', compact('layak'));
     }
