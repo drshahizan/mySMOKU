@@ -251,7 +251,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     //Penyaluran - Penyelaras - Pembayaran
     Route::get('penyelaras/penyaluran/permohonan/layak', [PenyelarasController::class, 'senaraiPemohonLayak']);
-    Route::post('penyelaras/penyaluran/hantar/semua/cek', [PenyelarasController::class, 'hantarSemuaInfoCek'])->name('penyelaras.bulk.update');
+    Route::post('/penyelaras/hantar/info-baucer/{permohonan_id}', [PenyelarasController::class, 'hantarSemuaInfoCek'])->name('penyelaras.modal.submit');
     Route::get('penyelaras/penyaluran/permohonan/dibayar', [PenyelarasController::class, 'senaraiPemohonDibayar'])->name('penyelaras.senarai.dibayar');
 
     //Kemaskini - Penyelaras - Maklumat Bank

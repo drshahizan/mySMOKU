@@ -88,8 +88,9 @@
                                 </form>  
 
                                 <div class="body">
-                                    <form action="{{ route('penyelaras.bulk.update') }}" method="POST">
-                                        {{csrf_field()}}
+                                    {{-- <form action="{{ route('penyelaras.bulk.submit') }}" method="POST" id="modalForm">
+                                        {{csrf_field()}} --}}
+
                                         <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                             <thead>
                                                 <tr>
@@ -133,65 +134,69 @@
                                                     @endphp
                                                     
                                                     @if ($institusi_id == $instiusi_user)
+                                                        <!-- Table rows -->
                                                         <tr>
                                                             <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td> 
                                                             <td style="width: 15%"><a href="#" class="open-modal-link" data-bs-toggle="modal" data-bs-target="#baucerPenyelaras" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>                                          
-                                                            {{-- <td style="width: 15%"><a href="#" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td> --}}
                                                             <td style="width: 40%">{{$pemohon}}</td>
                                                             <td class="text-center" style="width: 10%">{{$item->yuran_disokong}}</td>
                                                             <td class="text-center" style="width: 15%">{{$item->wang_saku_disokong}}</td>                                       
                                                             <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->created_at))}}</td>
                                                         </tr>
+
+                                                        {{-- Modal Baucer --}}
+                                                        <div class="modal fade" id="baucerPenyelaras" tabindex="-1" aria-labelledby="baucerPenyelaras" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Kemaskini Maklumat Pembayaran</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+
+                                                                    <div class="modal-body">
+                                                                        <!-- Form for single submission -->
+                                                                        <form action="{{ route('penyelaras.modal.submit', ['permohonan_id' => $item['id']]) }}" method="POST" class="modal-form">
+                                                                            {{ csrf_field() }}
+                                                                            <div class="mb-3">
+                                                                                <label for="message-text" class="col-form-label">Yuran Dibayar :</label>
+                                                                                <input type="number" step="0.01" class="form-control" id="yuranDibayar" name="yuranDibayar">
+                                                                            </div>
+
+                                                                            <div class="mb-3">
+                                                                                <label for="message-text" class="col-form-label">Wang Saku Dibayar :</label>
+                                                                                <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar">
+                                                                            </div>
+
+                                                                            <div class="mb-3">
+                                                                                <label for="recipient-name" class="col-form-label">No Baucer :</label>
+                                                                                <input type="text" class="form-control" id="noBaucer" name="noBaucer">
+                                                                            </div>
+                                                                            
+                                                                            <div class="mb-3">
+                                                                                <label for="message-text" class="col-form-label">Perihal :</label>
+                                                                                <textarea class="form-control" id="perihal" name="perihal"></textarea>
+                                                                            </div>
+
+                                                                            <div class="mb-3">
+                                                                                <label for="message-text" class="col-form-label">Tarikh Baucer :</label>
+                                                                                <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer">
+                                                                            </div>
+
+                                                                            <input type="hidden" id="clickedNoRujukan">
+
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div> 
+                                                            </div>
+                                                        </div>
                                                     @endif
                                                 @endforeach 
                                             </tbody>
                                         </table>
-
-                                        {{-- Modal Baucer --}}
-                                        <div class="modal fade" id="baucerPenyelaras" tabindex="-1" aria-labelledby="baucerPenyelaras" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Kemaskini Maklumat Pembayaran</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-
-                                                    <div class="modal-body">
-                                                        <div class="mb-3">
-                                                            <label for="message-text" class="col-form-label">Yuran Dibayar :</label>
-                                                            <input type="number" step="0.01" class="form-control" id="yuranDibayar" name="yuranDibayar">
-                                                        </div>
-
-                                                        <div class="mb-3">
-                                                            <label for="message-text" class="col-form-label">Wang Saku Dibayar :</label>
-                                                            <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar">
-                                                        </div>
-
-                                                        <div class="mb-3">
-                                                            <label for="recipient-name" class="col-form-label">No Baucer :</label>
-                                                            <input type="text" class="form-control" id="noBaucer" name="noBaucer">
-                                                        </div>
-                                                        
-                                                        <div class="mb-3">
-                                                            <label for="message-text" class="col-form-label">Perihal :</label>
-                                                            <textarea class="form-control" id="perihal" name="perihal"></textarea>
-                                                        </div>
-
-                                                        <div class="mb-3">
-                                                            <label for="message-text" class="col-form-label">Tarikh Baucer :</label>
-                                                            <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer">
-                                                        </div>
-
-                                                        <input type="hidden" id="clickedNoRujukan">
-
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                            <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
-                                                        </div>
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                        </div> 
 
                                         <!-- Button trigger modal --> 
                                         {{-- <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#cekKPT">
@@ -224,8 +229,8 @@
                                                 </div> 
                                             </div>
                                         </div>  --}}
-                                        <br><br>                                       
-                                    </form>
+                                        {{-- <br><br>                                       
+                                    </form> --}}
                                 </div>
                             </div>
                         </div>
@@ -254,6 +259,11 @@
 
                     // Set the value to the hidden input in the modal
                     document.getElementById('clickedNoRujukan').value = noRujukan;
+
+                    // Set the permohonan id value in the form action URL
+                    var permohonanId = link.getAttribute('data-permohonan-id');
+                    var form = document.getElementById('modalForm');
+                    form.action = form.action.replace(/\/\d+$/, '/' + permohonanId);
                 });
             });
         </script>

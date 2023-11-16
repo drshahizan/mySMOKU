@@ -1121,18 +1121,62 @@ class PenyelarasController extends Controller
         return view('penyaluran.penyelaras.senarai_pembayaran', compact('layak'));
     }
 
-    public function hantarSemuaInfoCek(Request $request)
+    // public function hantarSemuaInfoCek(Request $request)
+    // {
+    //     $startDate = $request->input('start_date');
+    //     $endDate = $request->input('end_date');
+
+    //     $layak = Permohonan::orderBy('id', 'desc')
+    //     ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+    //         return $q->whereBetween('created_at', [$startDate, $endDate]);
+    //     })
+    //     ->where('permohonan.status', '=', '6')->get();
+
+    //     return view('penyaluran.penyelaras.senarai_pembayaran', compact('layak'));
+    // }
+
+    public function hantarSemuaInfoCek(Request $request, $id)
     {
+        // Use $smoku_id to associate the data with a specific smoku_id
+        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+        
+        // Retrieve and process the form data from $request
+        $existingRecord = Permohonan::where('id', $id)->first();
+
+        if ($existingRecord) {
+            // Update the respective row in permohonan_kelulusan table
+            $existingRecord->yuran_dibayar = $request->yuranDibayar;
+            $existingRecord->wang_saku_dibayar = $request->wangSakuDibayar;
+            $existingRecord->no_baucer = $request->noBaucer;
+            $existingRecord->perihal = $request->perihal;
+            $existingRecord->tarikh_baucer = $request->tarikhBaucer;
+            $existingRecord->save();
+
+            // Update permohonan table
+            Permohonan::where('id', $id)->update([
+                'status' => 8,
+            ]);
+
+            // Update sejarah_permohonan table
+            $sejarah = new SejarahPermohonan([
+                'smoku_id' => $smoku_id,
+                'permohonan_id' => $id,
+                'status' => 8,
+            ]);
+            $sejarah->save();
+        }
+
+        //filter for keputusan
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $layak = Permohonan::orderBy('id', 'desc')
+        $dibayar = Permohonan::orderBy('id', 'desc')
         ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('created_at', [$startDate, $endDate]);
         })
-        ->where('permohonan.status', '=', '6')->get();
+        ->where('permohonan.status', '=', '8')->get();
 
-        return view('penyaluran.penyelaras.senarai_pembayaran', compact('layak'));
+        return redirect()->route('penyelaras.senarai.dibayar', compact('dibayar'));
     }
 
     public function senaraiPemohonDibayar(Request $request)
@@ -1140,12 +1184,12 @@ class PenyelarasController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $layak = Permohonan::orderBy('id', 'desc')
+        $dibayar = Permohonan::orderBy('id', 'desc')
         ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('created_at', [$startDate, $endDate]);
         })
         ->where('permohonan.status', '=', '8')->get();
 
-        return view('penyaluran.penyelaras.senarai_pembayaran', compact('layak'));
+        return view('penyaluran.penyelaras.senarai_permohonan_dibayar', compact('dibayar'));
     }
 }
