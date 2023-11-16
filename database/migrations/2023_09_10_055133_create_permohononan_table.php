@@ -29,6 +29,10 @@ return new class extends Migration
             $table->string('baki_dibayar')->nullable();
             $table->string('catatan_disokong')->nullable();
             $table->string('catatan_dibayar')->nullable();
+            $table->string('no_baucer')->nullable();
+            $table->date('tarikh_baucer')->nullable();
+            $table->string('perihal')->nullable();
+            $table->string('no_cek')->nullable();
             $table->date('tarikh_transaksi')->nullable();
             $table->string('perakuan')->nullable();
             $table->integer('status')->nullable();
