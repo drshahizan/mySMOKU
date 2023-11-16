@@ -250,9 +250,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/penyaluran/lihat/salinan-dokumen/sppb/{id}', [PenyelarasController::class, 'dokumenSPPB'])->name('penyelaras.dokumen.SPPB.id');
     
     //Penyaluran - Penyelaras - Pembayaran
-    Route::get('penyelaras/penyaluran/baucer/permohonan', [PenyelarasController::class, 'senaraiPemohonLayak'])->name('senarai.layak');
+    Route::get('penyelaras/penyaluran/baucer/permohonan', [PenyelarasController::class, 'senaraiPemohonLayak'])->name('penyelaras.senarai.layak');
     Route::post('penyelaras/penyaluran/hantar/semua/cek', [PenyelarasController::class, 'hantarSemuaInfoCek'])->name('penyelaras.bulk.update');
-    Route::get('penyelaras/penyaluran/baucer/permohonan', [PenyelarasController::class, 'senaraiPemohonDibayar'])->name('senarai.dibayar');
+    Route::get('penyelaras/penyaluran/baucer/permohonan', [PenyelarasController::class, 'senaraiPemohonDibayar'])->name('penyelaras.senarai.dibayar');
 
     //Kemaskini - Penyelaras - Maklumat Bank
     Route::get('penyelaras/kemaskini/maklumat/bank', [PenyelarasController::class, 'maklumatBank'])->name('maklumat.bank');
