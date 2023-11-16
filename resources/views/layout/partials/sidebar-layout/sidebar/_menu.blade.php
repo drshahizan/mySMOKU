@@ -131,7 +131,7 @@
 				</div>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="{{ route('penyelaras.senarai.layak') }}">
+				<a class="menu-link" href="{{ url('penyelaras/penyaluran/permohonan/layak') }}">
 					<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
 					<span class="menu-title">Senarai Pembayaran</span>
 				</a>
