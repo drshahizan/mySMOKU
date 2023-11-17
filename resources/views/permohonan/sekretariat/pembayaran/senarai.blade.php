@@ -201,7 +201,7 @@
                             <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                 <br>
                                 <div class="body">
-                                    <form action="{{ route('penyelaras.bulk.update') }}" method="POST">
+                                    <form action="" method="POST">
                                     {{csrf_field()}}
                                         <table id="sortTable1a" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
