@@ -198,9 +198,10 @@ var KTSignupGeneral = function () {
                             const terimHLPValue = form.querySelector('input[name="terimHLP"]:checked').value;
                             const cutiValue = form.querySelector('input[name="cuti"]:checked').value;
 
-                            alert(terimHLPValue);
+                            console.log("Before if statement");
 
                             if (terimHLPValue === 'ya' || cutiValue === 'ya') {
+                                console.log("Inside if statement");
                                 let errorMessage = "Anda tidak layak daftar kerana anda penerima ";
                                 if (terimHLPValue === 'ya') {
                                     errorMessage += "HLP";
@@ -223,6 +224,7 @@ var KTSignupGeneral = function () {
                                     }
                                 });
                             } else {
+                                console.log("Inside else statement");
                                 form.reset();
 
                                 const redirectUrl = form.getAttribute('data-kt-redirect-url');
