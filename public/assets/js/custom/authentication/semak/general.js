@@ -278,7 +278,12 @@ var KTSignupGeneral = function () {
             });
         });
 
-
+        // Handle password input
+        form.querySelector('input[name="password"]').addEventListener('input', function () {
+            if (this.value.length > 0) {
+                validator.updateFieldStatus('password', 'NotValidated');
+            }
+        });
     }
 
 
