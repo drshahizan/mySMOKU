@@ -6,7 +6,6 @@ var KTSignupGeneral = function () {
     var form;
     var submitButton;
     var validator;
-    var passwordMeter;
 
     // Handle form
     var handleForm = function (e) {
@@ -34,25 +33,12 @@ var KTSignupGeneral = function () {
                         validators: {
                             notEmpty: {
                                 message: 'The password is required'
-                            },
-                            callback: {
-                                message: 'Please enter valid password',
-                                callback: function (input) {
-                                    if (input.value.length > 0) {
-                                        return validatePassword();
-                                    }
-                                }
                             }
                         }
                     },
                     
                 },
                 plugins: {
-                    trigger: new FormValidation.plugins.Trigger({
-                        event: {
-                            password: false
-                        }
-                    }),
                     bootstrap: new FormValidation.plugins.Bootstrap5({
                         rowSelector: '.fv-row',
                         eleInvalidClass: '',  // comment to enable invalid state icons
@@ -95,7 +81,6 @@ var KTSignupGeneral = function () {
                         }).then(function (result) {
                             if (result.isConfirmed) {
                                 form.reset();  // reset form
-                                passwordMeter.reset();  // reset password meter
                                 //form.submit();
 
                                 //form.submit(); // submit form
@@ -155,11 +140,6 @@ var KTSignupGeneral = function () {
                     
                 },
                 plugins: {
-                    trigger: new FormValidation.plugins.Trigger({
-                        event: {
-                            password: false
-                        }
-                    }),
                     bootstrap: new FormValidation.plugins.Bootstrap5({
                         rowSelector: '.fv-row',
                         eleInvalidClass: '',  // comment to enable invalid state icons
@@ -273,11 +253,6 @@ var KTSignupGeneral = function () {
     }
 
 
-    // Password input validation
-    var validatePassword = function () {
-        return (passwordMeter.getScore() > 50);
-    }
-
     var isValidUrl = function(url) {
         try {
             new URL(url);
@@ -294,7 +269,6 @@ var KTSignupGeneral = function () {
             // Elements
             form = document.querySelector('#kt_sign_up_form');
             submitButton = document.querySelector('#kt_sign_up_submit');
-            passwordMeter = KTPasswordMeter.getInstance(form.querySelector('[data-kt-password-meter="true"]'));
 
             if (isValidUrl(submitButton.closest('form').getAttribute('action'))) {
                 handleFormAjax();
