@@ -41,6 +41,7 @@ class SemakUserController extends Controller
                 $join->on('bk_kursus.kod_peringkat', '=', 'bk_peringkat_pengajian.kod_peringkat'); })
             ->where('id_institusi',$ipt)
             ->groupBy('bk_kursus.kod_peringkat','bk_peringkat_pengajian.peringkat')
+            ->orderBy('bk_kursus.kod_peringkat','asc')
             ->get();
             return response()->json($peringkatData);
 

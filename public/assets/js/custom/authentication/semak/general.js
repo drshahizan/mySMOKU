@@ -25,9 +25,8 @@ var KTSignupGeneral = function () {
                     
                     'peringkat_pengajian': {
                         validators: {
-                            regexp: {
-                                regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: 'The value is not a valid email address',
+                            notEmpty: {
+                                message: 'First Name is required'
                             }
                         }
                     },
@@ -195,13 +194,41 @@ var KTSignupGeneral = function () {
                     // Check axios library docs: https://axios-http.com/docs/intro
                     axios.post(submitButton.closest('form').getAttribute('action'), new FormData(form)).then(function (response) {
                         if (response) {
-                            form.reset();
+                            // Check if the user chose 'Ya'
+                            const terimHLPValue = form.querySelector('input[name="terimHLP"]:checked').value;
+                            const cutiValue = form.querySelector('input[name="cuti"]:checked').value;
 
-                            const redirectUrl = form.getAttribute('data-kt-redirect-url');
+                            if (terimHLPValue === 'ya' || cutiValue === 'ya') {
+                                let errorMessage = "Anda tidak layak daftar kerana anda penerima ";
+                                if (terimHLPValue === 'ya') {
+                                    errorMessage += "HLP";
+                                }
+                                if (cutiValue === 'ya') {
+                                    errorMessage += (terimHLPValue === 'ya' ? ' dan ' : '') + "Cuti Belajar Bergaji Penuh";
+                                }
+                            
+                                Swal.fire({
+                                    text: errorMessage,
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary",
+                                    },
+                                    didClose: () => {
+                                        // Redirect to the login page
+                                        window.location.href = '/login';
+                                    }
+                                });
+                            } else {
+                                form.reset();
 
-                            if (redirectUrl) {
-                                location.href = redirectUrl;
-                            }
+                                const redirectUrl = form.getAttribute('data-kt-redirect-url');
+
+                                if (redirectUrl) {
+                                    location.href = redirectUrl;
+                                }
+                            }    
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
@@ -216,7 +243,7 @@ var KTSignupGeneral = function () {
                         }
                     }).catch(function (error) {
                         Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again hahaha.",
+                            text: "Sorry, looks like there are some errors detected, please try again.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
