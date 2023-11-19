@@ -198,6 +198,8 @@ var KTSignupGeneral = function () {
                             const terimHLPValue = form.querySelector('input[name="terimHLP"]:checked').value;
                             const cutiValue = form.querySelector('input[name="cuti"]:checked').value;
 
+                            alert(terimHLPValue);
+
                             if (terimHLPValue === 'ya' || cutiValue === 'ya') {
                                 let errorMessage = "Anda tidak layak daftar kerana anda penerima ";
                                 if (terimHLPValue === 'ya') {
