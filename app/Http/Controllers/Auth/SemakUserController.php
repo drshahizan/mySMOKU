@@ -18,7 +18,7 @@ class SemakUserController extends Controller
 
     public function index(){
 
-        addJavascriptFile('assets/js/custom/authentication/semak/general.js');
+        addJavascriptFile('/assets/js/custom/authentication/semak/general.js');
         $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
         $catatan = $iklan->catatan ?? "";
 
