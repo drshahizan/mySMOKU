@@ -83,6 +83,7 @@ class SemakUserController extends Controller
         
             return redirect()->route('login')->with('message', $message);
         } else {
+            /*
             $user = Akademik::create([
                 'smoku_id' => $request->session()->get('id'),
                 'id_institusi' => $request->id_institusi,
@@ -92,6 +93,16 @@ class SemakUserController extends Controller
             ]);
         
             $user->save();
+            */
+            Akademik::updateOrCreate(
+                ['smoku_id' => $request->session()->get('id'), 'status' => 1], // Condition to find the record
+                [
+                    'id_institusi' => $request->id_institusi,
+                'peringkat_pengajian' => $request->peringkat_pengajian,
+                'nama_kursus' => $request->nama_kursus,
+                'status' => 1,
+                ]
+            );
         
             return redirect()->route('daftarlayak');
         }
