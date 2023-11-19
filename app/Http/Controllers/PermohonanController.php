@@ -28,6 +28,7 @@ use App\Models\Negeri;
 use App\Models\Bandar;
 use App\Models\Agama;
 use App\Models\EmelKemaskini;
+use App\Models\JumlahTuntutan;
 use App\Models\TamatPengajian;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -176,6 +177,18 @@ class PermohonanController extends Controller
         return response()->json($kursusData);
 
     }
+
+    public function fetchAmaun()
+    {
+        $amaun_yuran = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Yuran')->first();
+        $amaun_wang_saku = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Wang Saku')->first();
+
+        return response()->json([
+            'amaun_yuran' => $amaun_yuran ? $amaun_yuran->jumlah : null,
+            'amaun_wang_saku' => $amaun_wang_saku ? $amaun_wang_saku->jumlah : null
+        ]);
+    }
+
 
     public function simpanPermohonan(Request $request)
     {   
