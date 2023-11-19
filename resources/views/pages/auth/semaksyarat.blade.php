@@ -6,7 +6,7 @@
 @endsection      
 
     <!--begin::Form-->
-    <form class="form w-100" id="kt_semak_form" action="{{ route('semaksyarat') }}"  method="post">
+    <form class="form w-100" id="kt_semak_form" action="{{ route('semaksyarat') }}" data-kt-redirect-url="{{ route('daftarlayak') }}" method="post">
     @csrf
         @if (session('message'))
             <div class="alert alert-success" style="color:black; text-align: center;">{{ session('message') }}</div>
