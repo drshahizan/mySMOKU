@@ -81,6 +81,10 @@ class SemakUserController extends Controller
                 return redirect()->route('login')
                 ->with('message', 'Anda tidak layak daftar kerana anda penerima Cuti Belajar Bergaji Penuh');
                 
+            } else if ($terimHLP == 'ya' && $cuti == 'ya') {
+                return redirect()->route('login')
+                ->with('message', 'Anda tidak layak daftar kerana anda penerima HLP dan Cuti Belajar Bergaji Penuh');
+                
             } 
             
             else {
