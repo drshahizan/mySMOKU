@@ -69,16 +69,37 @@ class SemakUserController extends Controller
             
         ]);
 
-        $user = Akademik::create([
-            'smoku_id' => $request->session()->get('id'),
-            'id_institusi' => $request->id_institusi,
-            'peringkat_pengajian' => $request->peringkat_pengajian,
-            'nama_kursus' => $request->nama_kursus,
-            'status' => 1,
+            $terimHLP = $request->terimHLP;
+            $cuti = $request->cuti;
+
             
-        ]);
+            if ($terimHLP == 'ya') {
+                return redirect()->route('login')
+                ->with('message', 'Anda tidak layak daftar kerana anda penerima HLP');
+                
+            } else if ($cuti == 'ya') {
+                return redirect()->route('login')
+                ->with('message', 'Anda tidak layak daftar kerana anda penerima Cuti Belajar Bergaji Penuh');
+                
+            } 
+            
+            else {
+
+                $user = Akademik::create([
+                    'smoku_id' => $request->session()->get('id'),
+                    'id_institusi' => $request->id_institusi,
+                    'peringkat_pengajian' => $request->peringkat_pengajian,
+                    'nama_kursus' => $request->nama_kursus,
+                    'status' => 1,
+                    
+                ]);
+                
+                $user->save();
+
+                //return redirect()->route('daftarlayak');
+            }
+
         
-        $user->save();
 
         
     }
