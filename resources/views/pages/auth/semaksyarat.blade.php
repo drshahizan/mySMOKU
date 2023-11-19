@@ -6,7 +6,7 @@
 @endsection      
 
     <!--begin::Form-->
-    <form class="form w-100" id="kt_sign_up_form" action="{{ route('semaksyarat') }}"  method="post">
+    <form class="form w-100" id="kt_semak_form" action="{{ route('semaksyarat') }}"  method="post">
     @csrf
         @if (session('message'))
             <div class="alert alert-success" style="color:black; text-align: center;">{{ session('message') }}</div>
@@ -201,7 +201,7 @@
             {{--<button type="submit"  class="btn btn-primary">
                 Semak
             </button>--}}
-            <button type="submit" id="kt_sign_up_submit" class="btn btn-primary">
+            <button type="submit" id="kt_semak_submit" class="btn btn-primary">
                 @include('partials/general/_button-indicator', ['label' => 'Seterusnya'])
             </button>
         </div>

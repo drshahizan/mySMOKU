@@ -267,8 +267,8 @@ var KTSignupGeneral = function () {
         // Initialization
         init: function () {
             // Elements
-            form = document.querySelector('#kt_sign_up_form');
-            submitButton = document.querySelector('#kt_sign_up_submit');
+            form = document.querySelector('#kt_semak_form');
+            submitButton = document.querySelector('#kt_semak_submit');
 
             if (isValidUrl(submitButton.closest('form').getAttribute('action'))) {
                 handleFormAjax();
