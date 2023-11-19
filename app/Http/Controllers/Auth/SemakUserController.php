@@ -93,7 +93,7 @@ class SemakUserController extends Controller
         
             $user->save();
         
-            //return redirect()->route('daftarlayak');
+            return redirect()->route('daftarlayak');
         }
         
 
