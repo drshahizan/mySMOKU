@@ -69,7 +69,7 @@
         <!-- institusi Dropdown -->
         <div class="fv-row mb-10">													
             <label class="form-label">Nama Pusat Pengajian</label>
-            <select id="id_institusi" name="id_institusi" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+            <select id="id_institusi" name="id_institusi" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" required>
                 <option value="">Pilih</option>
                 @foreach ($ipt as $ipt)	
                 <option value="{{ $ipt->id_institusi}}">{{ $ipt->nama_institusi}}</option> 
@@ -79,7 +79,7 @@
 
         <div class="fv-row mb-10">
             <label class="form-label">Peringkat Pengajian</label>
-            <select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-hide-search="true">
+            <select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-hide-search="true" required>
                 <option value="">Pilih</option>
                 @foreach ($kod_peringkat as $kod_peringkat)	
                 <option value="{{ $kod_peringkat->kod_peringkat}}">{{ $kod_peringkat->peringkat}}</option> 
@@ -89,7 +89,7 @@
 
         <div class="fv-row mb-10">
             <label class="form-label">Nama Kursus</label>
-            <select id='nama_kursus'  name='nama_kursus' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+            <select id='nama_kursus'  name='nama_kursus' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" required>
                 <option value="">Pilih</option>
             </select>
         </div>
