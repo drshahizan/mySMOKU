@@ -69,39 +69,33 @@ class SemakUserController extends Controller
             
         ]);
 
-            $terimHLP = $request->terimHLP;
-            $cuti = $request->cuti;
-
-            
+        $terimHLP = $request->terimHLP;
+        $cuti = $request->cuti;
+        
+        if ($terimHLP == 'ya' || $cuti == 'ya') {
+            $message = 'Anda tidak layak daftar kerana anda penerima ';
             if ($terimHLP == 'ya') {
-                return redirect()->route('login')
-                ->with('message', 'Anda tidak layak daftar kerana anda penerima HLP');
-                
-            } else if ($cuti == 'ya') {
-                return redirect()->route('login')
-                ->with('message', 'Anda tidak layak daftar kerana anda penerima Cuti Belajar Bergaji Penuh');
-                
-            } else if ($terimHLP == 'ya' && $cuti == 'ya') {
-                return redirect()->route('login')
-                ->with('message', 'Anda tidak layak daftar kerana anda penerima HLP dan Cuti Belajar Bergaji Penuh');
-                
-            } 
-            
-            else {
-
-                $user = Akademik::create([
-                    'smoku_id' => $request->session()->get('id'),
-                    'id_institusi' => $request->id_institusi,
-                    'peringkat_pengajian' => $request->peringkat_pengajian,
-                    'nama_kursus' => $request->nama_kursus,
-                    'status' => 1,
-                    
-                ]);
-                
-                $user->save();
-
-                //return redirect()->route('daftarlayak');
+                $message .= 'HLP';
             }
+            if ($cuti == 'ya') {
+                $message .= ($terimHLP == 'ya' ? ' dan ' : '') . 'Cuti Belajar Bergaji Penuh';
+            }
+        
+            return redirect()->route('login')->with('message', $message);
+        } else {
+            $user = Akademik::create([
+                'smoku_id' => $request->session()->get('id'),
+                'id_institusi' => $request->id_institusi,
+                'peringkat_pengajian' => $request->peringkat_pengajian,
+                'nama_kursus' => $request->nama_kursus,
+                'status' => 1,
+            ]);
+        
+            $user->save();
+        
+            //return redirect()->route('daftarlayak');
+        }
+        
 
         
 
