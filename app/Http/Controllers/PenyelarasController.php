@@ -84,10 +84,10 @@ class PenyelarasController extends Controller
         ];
         $client = new Client();
         $url = 'https://oku-staging.jkm.gov.my/api/oku/' . $request->no_kp;
-        $request = $client->get($url, ['headers' => $headers]);
+        $guzzleRequest = $client->get($url, ['headers' => $headers]);
 
-        $response = $request ? $request->getBody()->getContents() : null;
-        $status = $request ? $request->getStatusCode() : 500;
+        $response = $guzzleRequest ? $guzzleRequest->getBody()->getContents() : null;
+        $status = $guzzleRequest ? $guzzleRequest->getStatusCode() : 500;
 
         // Parse the JSON string
         $data = json_decode($response, true);
@@ -170,8 +170,14 @@ class PenyelarasController extends Controller
                 
                
             }
+
+            $smoku = Smoku::where('no_kp', $no_kp)->first();
+            $id =  $smoku->id;
+            $no_kp =  $smoku->no_kp;
+            $smoku_id = $request->session()->put('id',$id);
+            $no_kp = $request->session()->put('no_kp',$no_kp);
             
-            return redirect()->route('penyelaras.dashboard')->with($no_kp)
+            return redirect()->route('penyelaras.dashboard')->with($smoku_id,$no_kp)
             ->with('success', $no_kp. ' Sah sebagai OKU berdaftar dengan JKM.');
 
         } else {
