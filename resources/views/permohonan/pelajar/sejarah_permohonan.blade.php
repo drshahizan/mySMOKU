@@ -72,7 +72,6 @@
                                                 <th class="text-center"><b>Amaun Yuran Dibayar</b></th>
                                                 <th class="text-center"><b>Amaun Wang Saku Dibayar</b></th>
                                                 <th class="text-center"><b>Status Terkini</b></th>
-                                                <th class="text-center"><b>Surat Tawaran</b></th>
                                                 {{-- @if (in_array($item['status'], ['1', '2'])) --}}
                                                 <th class="text-center"><b>Tindakan</b></th>
                                                 {{-- @endif --}}
@@ -122,18 +121,16 @@
                                                         @elseif ($item['status']=='7')
                                                             <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
-                                                            <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        <td class="text-center">
+                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
+                                                                <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar
+                                                            </a>
+                                                        </td>
                                                         @elseif ($item['status']=='9')
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
                                                         
-                                                        <td class="text-center">
-                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}">
-                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Cetak">
-                                                                    <i class="fa fa-download fa-sm custom-white-icon"></i>
-                                                                </span>    
-                                                            </a>
-                                                        </td>
+                                                        
                                                         @if ($item['status']=='1')
                                                         <td class="text-center">
                                                             <a href="{{ route('permohonan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
