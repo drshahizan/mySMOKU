@@ -41,6 +41,7 @@ class PentadbirController extends Controller
     public function store(Request $request)
     {   
         $user = User::where('no_kp', '=', $request->no_kp)->first();
+        $previousStatus = $user->status;
         if ($user === null) {
             $user = User::create([
                 'nama' => $request->nama,
@@ -88,12 +89,17 @@ class PentadbirController extends Controller
 
         $user->save();
 
-        if($request->status == 1){
+        if($user->status != $previousStatus){
 
             // $email = $request->email;
             // $no_kp = $request->no_kp;
             // Mail::to($email)->send(new MailDaftarPengguna($email,$no_kp));
-            return redirect()->route('daftarpengguna')->with('message', 'Status pengguna ' .$request->nama. ' telah diaktifkan ');
+            if($request->status == 1 ){
+                return redirect()->route('daftarpengguna')->with('message', 'Status pengguna ' .$request->nama. ' telah diaktifkan. ');
+            } else {
+                return redirect()->route('daftarpengguna')->with('message', 'Status pengguna ' .$request->nama. ' telah ditukar tidak aktif. ');
+            }
+            
         }
 
         return redirect()->route('daftarpengguna');
