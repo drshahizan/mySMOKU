@@ -133,7 +133,7 @@
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
 
-                                                        @if ($item['status']=='1' || $item['status']=='9')
+                                                        @if ($item['status']=='1')
                                                         <td class="text-center">
                                                             <a href="{{ route('bkoku.permohonan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
                                                                 <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">

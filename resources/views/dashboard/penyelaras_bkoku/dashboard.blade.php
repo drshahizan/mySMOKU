@@ -152,7 +152,7 @@
                                                     <i class="fa fa-trash fa-sm custom-white-icon"></i>
                                                 </span>
                                             </a>
-                                        @elseif ($smoku->status == 1 || $smoku->status == 9)
+                                        @elseif ($smoku->status == 1)
                                             <a href="{{ route('bkoku.permohonan.delete', ['id' => $smoku->smoku_id]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
                                                 <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
                                                     <i class="fa fa-trash fa-sm custom-white-icon"></i>
