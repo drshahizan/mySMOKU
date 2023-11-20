@@ -67,6 +67,7 @@
                                                 <th style="width: 33%"><b>Nama</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Tindakan</b></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -120,14 +121,39 @@
                                                                     <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak
                                                                 </a>
                                                             </td>
-                                                            {{-- <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td> --}}
                                                         @elseif ($item['status']=='7')
                                                             <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
-                                                            <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center">
+                                                                <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn bg-dibayar btn-round btn-sm custom-width-btn">
+                                                                    <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak
+                                                                </a>
+                                                            </td>
                                                         @elseif ($item['status']=='9')
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
+
+                                                        @if ($item['status']=='1')
+                                                        <td class="text-center">
+                                                            <a href="{{ route('bkoku.permohonan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
+                                                                    <i class="fa fa-trash fa-sm custom-white-icon"></i>
+                                                                </span>
+                                                            </a>
+                                                        </td>
+                                                        @elseif ($item['status']=='2')
+                                                        <td class="text-center">
+                                                            <a href="{{ route('bkoku.permohonan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan permohonan ini?')">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Permohonan">
+                                                                    <i class="fa fa-cancel fa-sm custom-white-icon"></i>
+                                                                </span>
+                                                            </a>
+                                                        </td> 
+                                                        @else
+                                                        <td class="text-center"></td> 
+
+                                                        @endif
+
                                                     </tr>
                                                 @endif
                                             @endforeach
@@ -143,6 +169,26 @@
         </div>
     </div>
     <script>
+        // Check if there is a flash message
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berjaya!',
+                text: ' {!! session('success') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+        @if(session('failed'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Tidak Berjaya!',
+                text: ' {!! session('failed') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+    </script>
+    <script>
        
         $('#sortTable2').DataTable({
             ordering: true, // Enable manual sorting
@@ -155,6 +201,7 @@
             height: 30px;
         }
     </style>
+
 
     </body>
 </x-default-layout>

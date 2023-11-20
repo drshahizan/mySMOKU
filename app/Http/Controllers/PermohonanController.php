@@ -562,9 +562,7 @@ class PermohonanController extends Controller
             'permohonan_id' => $permohonan_id->id,
             'status' => 9
         ]);
-           
-            
-
+  
         return redirect()->route('pelajar.dashboard')->with('permohonan', 'Permohonan telah dibatalkan.');      
         
     }

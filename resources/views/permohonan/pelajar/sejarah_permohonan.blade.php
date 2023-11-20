@@ -122,7 +122,7 @@
                                                             <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
                                                         <td class="text-center">
-                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
+                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn bg-dibayar btn-round btn-sm custom-width-btn">
                                                                 <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar
                                                             </a>
                                                         </td>
@@ -146,7 +146,9 @@
                                                                     <i class="fa fa-cancel fa-sm custom-white-icon"></i>
                                                                 </span>
                                                             </a>
-                                                        </td>                                                         
+                                                        </td>
+                                                        @else
+                                                        <td class="text-center"></td>                                                          
                                                         @endif
                                                         {{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
 

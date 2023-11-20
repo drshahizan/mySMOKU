@@ -840,6 +840,63 @@ class PenyelarasController extends Controller
         return view('permohonan.penyelaras_bkoku.sejarah_permohonan',compact('permohonan'));
     }
 
+    public function deletePermohonan($id)
+    {
+        //dd($id);
+        
+        $smoku_id = Smoku::where('id', $id)->first();
+        $permohonan = DB::table('permohonan')->orderBy('id', 'asc')
+            ->where('smoku_id', $smoku_id->id)->first();
+
+        DB::table('smoku_butiran_pelajar')->where('smoku_id',$smoku_id->id)->delete();
+        DB::table('smoku_waris')->where('smoku_id',$smoku_id->id)->delete();
+        DB::table('smoku_akademik')->where('smoku_id',$smoku_id->id)->where('status',1)
+        ->update([
+
+            'no_pendaftaran_pelajar' => NULL,
+            'sesi' => NULL,
+            'tarikh_mula' => NULL,
+            'tarikh_tamat' => NULL,
+            'sem_semasa' => NULL,
+            'tempoh_pengajian' => NULL,
+            'bil_bulan_per_sem' => NULL,
+            'mod' => NULL,
+            'sumber_biaya' => NULL,
+            'sumber_lain' => NULL,
+            'nama_penaja' => NULL,
+            'penaja_lain' => NULL,
+
+        ]);
+
+        if ($permohonan) {
+
+            DB::table('permohonan')->where('id',$permohonan->id)->delete(); //delete permohonan
+            DB::table('permohonan_dokumen')->where('permohonan_id',$permohonan->id)->delete();
+            DB::table('sejarah_permohonan')->where('permohonan_id',$permohonan->id)->delete();
+        } 
+        
+        return redirect()->route('bkoku.sejarah.permohonan');
+        
+    }
+
+    public function batalPermohonan($id)
+    {
+
+        DB::table('permohonan')->orderBy('id', 'asc')->where('smoku_id',$id)
+            ->update([
+                'status' => 9
+            ]);
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$id)->first();
+        SejarahPermohonan::create([
+            'smoku_id' => $id,
+            'permohonan_id' => $permohonan_id->id,
+            'status' => 9
+        ]);
+  
+        return redirect()->route('bkoku.sejarah.permohonan')->with('success', 'Permohonan telah dibatalkan.');      
+        
+    }
+
     public function rekodPermohonan($id)
     {
         $permohonan = Permohonan::where('id', $id)->first();
@@ -1195,4 +1252,5 @@ class PenyelarasController extends Controller
 
     //     return response()->json(['maklumat' => $maklumat]);
     // }
+    
 }

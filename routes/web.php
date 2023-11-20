@@ -269,6 +269,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/kursus/{kodperingkat}/{id}', [PenyelarasController::class, 'kursus']);
     Route::post('penyelarasbaharu', [PenyelarasController::class, 'simpan'])->name('simpan');
     Route::post('hantar', [PenyelarasController::class, 'hantar'])->name('hantar');
+    Route::get('penyelaras/permohonan/delete/{id}', [PenyelarasController::class, 'deletePermohonan'])->name('bkoku.permohonan.delete');
+	Route::get('penyelaras/permohonan/batal/{id}', [PenyelarasController::class, 'batalPermohonan'])->name('bkoku.permohonan.batal');
     Route::get('penyelaras/senarai/permohonan/baharu', [PenyelarasController::class, 'senaraiPermohonanBaharu'])->name('senarai.permohonanBaharu');
     Route::get('penyelaras/bkoku/sejarah/sejarah-permohonan', [PenyelarasController::class, 'sejarahPermohonan'])->name('bkoku.sejarah.permohonan');
     Route::get('penyelaras/bkoku/sejarah/rekod-permohonan/{id}', [PenyelarasController::class, 'rekodPermohonan'])->name('bkoku.rekod.permohonan');
