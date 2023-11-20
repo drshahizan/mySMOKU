@@ -259,17 +259,18 @@ var KTSignupGeneral = function () {
                             const redirectUrl = form.getAttribute('data-kt-redirect-url');
 
                             if (redirectUrl) {
-                                return Swal.fire({
-                                    text: "Sila semak emel untuk pengesahan akaun.",
+                                Swal.fire({
+                                    text: "Emel notifikasi telah dihantar kepada pengguna",
                                     icon: "success",
                                     buttonsStyling: false,
                                     confirmButtonText: "Ok",
                                     customClass: {
                                         confirmButton: "btn btn-primary",
                                     },
-                                }).then(() => {
-                                    // Redirect the user after the Swal modal is closed
-                                    window.location.href = redirectUrl;
+                                    didClose: () => {
+                                        // Redirect the user after the Swal modal is closed
+                                        window.location.href = redirectUrl;
+                                    }
                                 });
                             }
                         } else {
