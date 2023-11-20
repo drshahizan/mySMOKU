@@ -137,8 +137,19 @@ var KTModalCustomersAdd = function () {
                             });
                         }
                     }).catch(function (error) {
+                        if (error.response) {
+                            // The request was made and the server responded with a status code
+                            // that falls out of the range of 2xx
+                            console.error("Response error:", error.response.status, error.response.data);
+                        } else if (error.request) {
+                            // The request was made but no response was received
+                            console.error("Request error:", error.request);
+                        } else {
+                            // Something happened in setting up the request that triggered an Error
+                            console.error("Error:", error.message);
+                        }
                         Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again hahaha.",
+                            text: "Sorry, looks like there are some errors detected, please try again.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",

@@ -259,7 +259,7 @@ var KTSignupGeneral = function () {
                             const redirectUrl = form.getAttribute('data-kt-redirect-url');
 
                             if (redirectUrl) {
-                                Swal.fire({
+                                return Swal.fire({
                                     text: "Sila semak emel untuk pengesahan akaun.",
                                     icon: "success",
                                     buttonsStyling: false,
@@ -267,12 +267,10 @@ var KTSignupGeneral = function () {
                                     customClass: {
                                         confirmButton: "btn btn-primary",
                                     },
-                                    didClose: () => {
-                                        // Redirect the user after the Swal modal is closed
-                                        window.location.href = redirectUrl;
-                                    }
+                                }).then(() => {
+                                    // Redirect the user after the Swal modal is closed
+                                    window.location.href = redirectUrl;
                                 });
-                                //location.href = redirectUrl;
                             }
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/

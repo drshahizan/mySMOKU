@@ -41,7 +41,7 @@ class PentadbirController extends Controller
     public function store(Request $request)
     {   
         $user = User::where('no_kp', '=', $request->no_kp)->first();
-        $previousStatus = $user->status;
+        
         if ($user === null) {
             $user = User::create([
                 'nama' => $request->nama,
@@ -85,22 +85,25 @@ class PentadbirController extends Controller
             } elseif ($request->has('id_institusippk')) {
                 $user->id_institusi = $request->id_institusippk;
             }
+
+
+            if($request->has('status')){
+
+                // $email = $request->email;
+                // $no_kp = $request->no_kp;
+                // Mail::to($email)->send(new MailDaftarPengguna($email,$no_kp));
+                if($request->status == 1 ){
+                    return redirect()->route('daftarpengguna')->with('message', 'Status pengguna ' .$request->nama. ' telah diaktifkan. ');
+                } else {
+                    return redirect()->route('daftarpengguna')->with('tidak', 'Status pengguna ' .$request->nama. ' telah ditukar tidak aktif. ');
+                }
+                
+            }
         }
 
         $user->save();
 
-        if($user->status != $previousStatus){
-
-            // $email = $request->email;
-            // $no_kp = $request->no_kp;
-            // Mail::to($email)->send(new MailDaftarPengguna($email,$no_kp));
-            if($request->status == 1 ){
-                return redirect()->route('daftarpengguna')->with('message', 'Status pengguna ' .$request->nama. ' telah diaktifkan. ');
-            } else {
-                return redirect()->route('daftarpengguna')->with('message', 'Status pengguna ' .$request->nama. ' telah ditukar tidak aktif. ');
-            }
-            
-        }
+        
 
         return redirect()->route('daftarpengguna');
     }

@@ -525,6 +525,16 @@
 		});
 	@endif
 
+	// Check if there is a flash message
+	@if(session('tidak'))
+		Swal.fire({
+			icon: 'error',
+			title: 'Tidak Aktif!',
+			text: ' {!! session('tidak') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+
 
 
 		
