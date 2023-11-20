@@ -69,7 +69,7 @@ class PenyelarasController extends Controller
     {
 
         //using api smoku
-        /*
+        
         $request->validate([
             'no_kp' => ['required', 'string'],
             
@@ -179,10 +179,10 @@ class PenyelarasController extends Controller
             return redirect()->route('penyelaras.dashboard')
             ->with('failed', $nokp_in. ' Bukan OKU yang berdaftar dengan JKM.');
         }
-        */
+        
         
 
-        
+        /*
         $request->validate([
             'no_kp' => ['required', 'string'],
         ]);
@@ -210,6 +210,7 @@ class PenyelarasController extends Controller
                 return redirect()->route('penyelaras.dashboard')
                 ->with('failed', $nokp_in. ' Bukan OKU yang berdaftar dengan JKM.');
             }
+            */
 
         
     }
