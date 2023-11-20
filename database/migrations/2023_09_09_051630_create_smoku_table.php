@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('jantina');
             $table->date('tarikh_lahir');
             $table->integer('umur');
-            $table->string('keturunan');
+            $table->string('keturunan')->nullable();
             $table->string('tel_rumah')->nullable();
             $table->string('tel_bimbit')->nullable();
             $table->string('email')->nullable();
