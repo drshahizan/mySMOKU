@@ -67,7 +67,7 @@
 								$pemohon = implode(' ', $result);
 						
 								//institusi pengajian
-								$text3 = ucwords(strtolower($smoku->nama_institusi)); // Assuming you're sending the text as a POST parameter
+								$text3 = $smoku->nama_institusi; // Assuming you're sending the text as a POST parameter
 								$conjunctions = ['of', 'in', 'and'];
 								$words = explode(' ', $text3);
 								$result = [];
@@ -85,7 +85,7 @@
 								<td>{{ $pemohon}}</td>
 								<td>{{ $institusi}}</td>
 								<td class="text-center">{{ $smoku->created_at->format('d/m/Y h:i:sa')}}</td>
-								<td class="text-center"><button type="button" class="btn bg-info text-white">Baharu</button></td>
+								<td class="text-center"><button type="button" class="btn bg-baharu text-white">Baharu</button></td>
 							</tr>  
 							@endforeach	
 						</tbody>
