@@ -254,10 +254,11 @@ var KTSignupGeneral = function () {
                     // Check axios library docs: https://axios-http.com/docs/intro
                     axios.post(submitButton.closest('form').getAttribute('action'), new FormData(form)).then(function (response) {
                         if (response) {
+                            console.log(response);
                             form.reset();
 
                             const redirectUrl = form.getAttribute('data-kt-redirect-url');
-
+                            console.log(redirectUrl);
                             if (redirectUrl) {
                                 Swal.fire({
                                     text: "Sila semak emel untuk pengesahan akaun.",
