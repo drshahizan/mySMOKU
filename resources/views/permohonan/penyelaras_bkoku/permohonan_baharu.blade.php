@@ -547,7 +547,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$smoku->email}}" readonly/>
+									<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$smoku->email}}"/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -600,7 +600,7 @@
 				<!--end::Step 1-->
 
 				<!--begin::Step 2-->
-				<div data-kt-stepper-element="content">
+				{{-- <div data-kt-stepper-element="content">
 				@csrf	
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -773,12 +773,12 @@
 						<!--end::Input group-->
 					</div>
 					<!--end::Wrapper-->
-				</div>
+				</div> --}}
 				<!--end::Step 2-->
-				@endforeach
+				{{-- @endforeach --}}
 
 				<!--begin::Step 3-->
-				<div data-kt-stepper-element="content">
+				{{-- <div data-kt-stepper-element="content">
 				@csrf
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -1037,11 +1037,11 @@
 						<!--end::Input group-->
 					</div>
 					<!--end::Wrapper-->
-				</div>
+				</div> --}}
 				<!--end::Step 3-->
 
 				<!--begin::Step 4-->
-				<div data-kt-stepper-element="content">
+				{{-- <div data-kt-stepper-element="content">
 				@csrf
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -1106,11 +1106,11 @@
 						</div>
 					</div>
 					<!--end::Wrapper-->
-				</div>
+				</div> --}}
 				<!--end::Step 4-->
 
 				<!--begin::Step 5-->
-				<div data-kt-stepper-element="content">
+				{{-- <div data-kt-stepper-element="content">
 				@csrf
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -1202,11 +1202,11 @@
 						</div>
 					</div>
 					<!--end::Wrapper-->
-				</div>
+				</div> --}}
 				<!--end::Step 5-->
 
 				<!--begin::Step 6-->
-				<div data-kt-stepper-element="content">
+				{{-- <div data-kt-stepper-element="content">
 				@csrf	
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -1229,7 +1229,7 @@
 						</div>
 					</div>
 					<!--end::Wrapper-->
-				</div>
+				</div> --}}
 				<!--end::Step 6-->
 
 				<!--begin::Step 7-->

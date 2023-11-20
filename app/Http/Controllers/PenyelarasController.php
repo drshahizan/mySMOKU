@@ -226,13 +226,15 @@ class PenyelarasController extends Controller
 
     public function permohonanBaharu($id)
     {
+        set_time_limit(1200);
+        
         $smoku = Smoku:: join('bk_jantina','bk_jantina.kod_jantina','=','smoku.jantina')
             ->join('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
             ->join('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
             ->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
             ->where('smoku.id', $id)
             ->get(['smoku.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*']);
-
+        
         $biaya = SumberBiaya::all()->where('kod_biaya','!=','2')->sortBy('kod_biaya');
         $penaja = Penaja::all()->sortBy('kod_penaja');
         $hubungan = Hubungan::all()->sortBy('kod_hubungan');
@@ -317,6 +319,7 @@ class PenyelarasController extends Controller
             ['id' => $id],
             [
                 'umur' => $request->umur,
+                'email' => $request->emel,
             ]
         );
 
