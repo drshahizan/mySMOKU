@@ -260,7 +260,7 @@ var KTSignupGeneral = function () {
 
                             if (redirectUrl) {
                                 Swal.fire({
-                                    text: "Emel notifikasi telah dihantar kepada pengguna",
+                                    text: "Sila semak emel untuk pengesahan akaun.",
                                     icon: "success",
                                     buttonsStyling: false,
                                     confirmButtonText: "Ok",
