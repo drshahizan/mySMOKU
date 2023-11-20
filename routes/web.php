@@ -260,6 +260,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/kemaskini/maklumat/bank', [PenyelarasController::class, 'maklumatBank'])->name('maklumat.bank');
     Route::post('penyelaras/kemaskini/hantar/maklumat/bank/{id}', [PenyelarasController::class, 'kemaskiniMaklumatBank'])->name('kemaskini.bank');
 
+    //delete pendaftaran - Penyelaras
+    Route::get('penyelaras/pendaftaran/delete/{id}', [PenyelarasController::class, 'deletePendaftaran'])->name('pendaftaran.delete');
+
+    
     //Permohonan - Penyelaras BKOKU
     Route::get('penyelaras/dashboard', [PenyelarasController::class, 'index'])->name('penyelaras.dashboard');
     Route::post('penyelaras/dashboard', [PenyelarasController::class, 'store']);

@@ -50,7 +50,7 @@ class PenyelarasController extends Controller
             ->leftJoin('permohonan', 'permohonan.smoku_id', '=', 'smoku.id')
             ->where('penyelaras_id', '=', Auth::user()->id)
             ->where(function ($query) {
-                $query->where('permohonan.status', '<', '2')
+                $query->where('permohonan.status', '<', '2')->orWhere('permohonan.status','=','9')
                     ->orWhereNull('permohonan.status');
             })
             ->select('smoku.*', 'smoku_penyelaras.*', 'permohonan.status')
@@ -84,13 +84,22 @@ class PenyelarasController extends Controller
                 $smoku_id = $request->session()->put('id',$id);
                 $no_kp = $request->session()->put('no_kp',$no_kp);
                 return redirect()->route('penyelaras.dashboard')->with($smoku_id,$no_kp)
-                ->with('success', $no_kp. ' SAH SEBAGAI OKU BERDAFTAR DENGAN JKM');
+                ->with('success', $no_kp. ' Sah sebagai OKU berdaftar dengan JKM.');
             } 
             else {
                 $nokp_in = $request->nokp;
                 return redirect()->route('penyelaras.dashboard')
-                ->with('failed', $nokp_in. ' BUKAN OKU YANG BERDAFTAR DENGAN JKM');
+                ->with('failed', $nokp_in. ' Bukan OKU yang berdaftar dengan JKM.');
             }
+    }
+
+    public function deletePendaftaran($id)
+    {
+        
+        DB::table('smoku_penyelaras')->where('smoku_id',$id)->delete();
+        
+        return redirect()->route('penyelaras.dashboard')->with('success', 'Pendaftaran pelajar telah di padam.');
+        
     }
 
     public function permohonanBaharu($id)

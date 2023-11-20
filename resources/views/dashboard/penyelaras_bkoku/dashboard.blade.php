@@ -110,6 +110,7 @@
                                     <th class="text-center">No. Kad JKM</th>
                                     <th class="text-center">Nama</th>
                                     <th class="text-center">Status</th>
+                                    <th class="text-center"></th>
                                 </tr>
                             </thead>
                             <!--end::Table head-->
@@ -138,9 +139,26 @@
                                     <td class="text-center"><a href="{{route('penyelaras.permohonan.baharu',$smoku->smoku_id)}}">
                                         @if ($smoku->status == 1)
                                             <button class="btn bg-info text-white">Deraf</button></a>
+                                        @elseif ($smoku->status == 9)
+                                            <button class="btn bg-batal text-white">Batal</button></a>
                                         @else 
                                             <button class="btn bg-primary text-white">Belum Mohon</button></a>
                                         @endif
+                                    </td>
+                                    <td class="text-center">
+                                        @if ($smoku->status < 1)
+                                            <a href="{{ route('pendaftaran.delete', ['id' => $smoku->smoku_id]) }}" onclick="return confirm('Adakah anda pasti ingin padam pendaftaran ini?')">
+                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Pendaftaran">
+                                                    <i class="fa fa-trash fa-sm custom-white-icon"></i>
+                                                </span>
+                                            </a>
+                                        @elseif ($smoku->status == 1 || $smoku->status == 9)
+                                            <a href="{{ route('bkoku.permohonan.delete', ['id' => $smoku->smoku_id]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
+                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
+                                                    <i class="fa fa-trash fa-sm custom-white-icon"></i>
+                                                </span>
+                                            </a>    
+                                        @endif    
                                     </td>
                                 </tr>
                                 @endforeach	
