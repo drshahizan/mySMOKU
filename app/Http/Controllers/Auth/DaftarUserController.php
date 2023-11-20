@@ -26,7 +26,7 @@ class DaftarUserController extends Controller
     {
 
         //using api smoku
-        /*
+        
         $request->validate([
             'no_kp' => ['required', 'string'],
             
@@ -116,16 +116,16 @@ class DaftarUserController extends Controller
 
 
             return redirect()->route('semaksyarat')->with($no_kp)
-            ->with('message', $nokp_in. ' SAH SEBAGAI OKU BERDAFTAR DENGAN JKM');
+            ->with('message', $nokp_in. ' Sah sebagai OKU berdaftar dengan JKM.');
 
         } else {
 
             return redirect()->route('login')
-            ->with('message', $nokp_in. ' BUKAN OKU YANG BERDAFTAR DENGAN JKM');
+            ->with('message', $nokp_in. ' Bukan OKU yang berdaftar dengan JKM.');
         }
-        */
         
         
+        /*
         $request->validate([
             'no_kp' => ['required', 'string'],
             
@@ -151,7 +151,7 @@ class DaftarUserController extends Controller
                 ->with('message', $nokp_in. ' BUKAN OKU YANG BERDAFTAR DENGAN JKM');
             }
             
-
+        */
 
     }
 

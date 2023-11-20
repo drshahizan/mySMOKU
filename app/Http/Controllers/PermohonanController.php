@@ -199,6 +199,7 @@ class PermohonanController extends Controller
             ['id' => $smoku_id->id],
             [
                 'umur' => $request->umur,
+                'email' => $request->emel,
             ]
         );
 
