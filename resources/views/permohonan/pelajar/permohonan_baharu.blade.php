@@ -315,7 +315,8 @@
 											$currentDay = date('d');
 
 											// Calculate age
-											$age = $currentYear - $birthYear - (($currentMonth < $birthMonth || ($currentMonth == $birthMonth && $currentDay < $birthDay)) ? 1 : 0);
+											// $age = $currentYear - $birthYear - (($currentMonth < $birthMonth || ($currentMonth == $birthMonth && $currentDay < $birthDay)) ? 1 : 0); // YANG NI KIRA BULAN SEKALI
+											$age = $currentYear - $birthYear;
 										
 										@endphp
 										<!--begin::Input-->
@@ -377,33 +378,80 @@
 							</div>
 						</div>
 						<!--end::Input group-->
+						@php
+						
+							if (preg_match('/\b(\d{5})\b/', $smoku->alamat_tetap, $matches)) {
+								$postcode = $matches[1];
+							} else {
+								$postcode = '';
+							}
+
+							$selectedState = '';
+
+							foreach ($negeri as $state) {
+								$stateName = $state->negeri;
+
+								// Check if the state name is present in the address
+								if (stripos($smoku->alamat_tetap, $stateName) !== false) {
+									$selectedState = $stateName;
+									break; // Stop the loop once a match is found
+								}
+							}
+
+							// Split the address by the postcode
+							$addressParts = explode($postcode, $smoku->alamat_tetap, 2);
+
+							// Check if the second part (after the postcode) exists
+							if (isset($addressParts[1])) {
+								// Trim any leading or trailing spaces and set $selectedCity
+								$selectedCity = trim($addressParts[1]);
+
+								// Search for the city in your $bandar collection
+								foreach ($bandar as $city) {
+									$cityName = $city->bandar;
+
+									// Check if the city name is present in the extracted part of the address
+									if (stripos($selectedCity, $cityName) !== false) {
+										$selectedCity = $cityName;
+										break; // Stop the loop once a match is found
+									}
+								}
+							} else {
+								$selectedCity = '';
+							}
+
+
+							// Remove state and city from the address
+							$trimmedAddress = str_replace([$selectedState, $selectedCity, $postcode], '', $smoku->alamat_tetap);
+
+							// Trim any extra whitespaces
+							$trimmedAddress = trim($trimmedAddress);
+						@endphp
+
 						<!--begin::Input group-->
 						<div class="fv-row mb-10">
 							<!--end::Label-->
 							<label class="form-label">Alamat Tetap</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<textarea id="alamat_tetap" name="alamat_tetap" class="form-control form-control-lg form-control-solid" rows="2">{{$smoku->alamat_tetap}}</textarea>
+							<textarea id="alamat_tetap" name="alamat_tetap" class="form-control form-control-lg form-control-solid" rows="2">{{$trimmedAddress}}</textarea>
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
-							<div class="col-md-5 fv-row">
+							<div class="col-md-3 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
+								<label class=" fs-6 fw-semibold form-label mb-2">Poskod
+								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="alamat_tetap_negeri" name="alamat_tetap_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-										<option value="">Pilih</option>
-										@foreach ($negeri as $negeritetap)	
-										<option value="{{ $negeritetap->id}}">{{ $negeritetap->negeri}}</option> 
-										@endforeach
-									</select>
+									<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_tetap_poskod" name="alamat_tetap_poskod" placeholder="" value="{{$postcode}}"/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
 							</div>
+							
 							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Bandar
@@ -414,26 +462,83 @@
 									<!--begin::Input-->
 									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
 										<option value="">Pilih</option>
+										@foreach ($bandar as $bandartetap)	
+										<option value="{{$bandartetap->id}}" {{$bandartetap->bandar == $selectedCity ? 'selected' : ''}}>{{ $bandartetap->bandar}}</option>
+										@endforeach
 									</select>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-3 fv-row">
+							<div class="col-md-5 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Poskod
-								</label>
+								<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_tetap_poskod" name="alamat_tetap_poskod" placeholder="" value="{{$smoku->alamat_tetap_poskod}}"/>
+									<select id="alamat_tetap_negeri" name="alamat_tetap_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+										<option value="">Pilih</option>
+										@foreach ($negeri as $negeritetap)	
+										<option value="{{$negeritetap->id}}" {{$negeritetap->negeri == $selectedState ? 'selected' : ''}}>{{ $negeritetap->negeri}}</option>
+										@endforeach
+									</select>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
 							</div>
+							
 						</div>
 						<!--end::Input group-->
+						@php
+						
+							if (preg_match('/\b(\d{5})\b/', $smoku->alamat_surat_menyurat, $matches)) {
+								$postcode_surat = $matches[1];
+							} else {
+								$postcode_surat = '';
+							}
+
+							$selectedState_surat = '';
+
+							foreach ($negeri as $state_surat) {
+								$stateName_surat = $state_surat->negeri;
+
+								// Check if the state name is present in the address
+								if (stripos($smoku->alamat_surat_menyurat, $stateName_surat) !== false) {
+									$selectedState_surat = $stateName_surat;
+									break; // Stop the loop once a match is found
+								}
+							}
+
+							// Split the address by the postcode
+							$addressParts_surat = explode($postcode_surat, $smoku->alamat_surat_menyurat, 2);
+
+							// Check if the second part (after the postcode) exists
+							if (isset($addressParts_surat[1])) {
+								// Trim any leading or trailing spaces and set $selectedCity
+								$selectedCity_surat = trim($addressParts_surat[1]);
+
+								// Search for the city in your $bandar collection
+								foreach ($bandar as $city_surat) {
+									$cityName_surat = $city_surat->bandar;
+
+									// Check if the city name is present in the extracted part of the address
+									if (stripos($selectedCity_surat, $cityName_surat) !== false) {
+										$selectedCity_surat = $cityName_surat;
+										break; // Stop the loop once a match is found
+									}
+								}
+							} else {
+								$selectedCity_surat = '';
+							}
+
+
+							// Remove state and city from the address
+							$trimmedAddress_surat = str_replace([$selectedState_surat, $selectedCity_surat, $postcode_surat], '', $smoku->alamat_surat_menyurat);
+
+							// Trim any extra whitespaces
+							$trimmedAddress_surat = trim($trimmedAddress_surat);
+						@endphp
 							<!--begin::Alamat Surat-->
 							<div class="fv-row mb-10">
 								<!--end::Label-->
@@ -458,28 +563,23 @@
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input-->
-								<textarea id="alamat_surat_menyurat" name="alamat_surat_menyurat" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
+								<textarea id="alamat_surat_menyurat" name="alamat_surat_menyurat" class="form-control form-control-lg form-control-solid" rows="2">{{$trimmedAddress_surat}}</textarea>
 								<!--end::Input-->
 							</div>
 							<div class="row mb-10">
-								<div class="col-md-4 fv-row">
+								<div class="col-md-3 fv-row">
 									<!--begin::Label-->
-									<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
+									<label class=" fs-6 fw-semibold form-label mb-2">Poskod</label>
 									<!--end::Label-->
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<select id="alamat_surat_negeri" name="alamat_surat_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-											<option value="">Pilih</option>
-											@foreach ($negeri as $negerisurat)	
-											<option value="{{ $negerisurat->id}}">{{ $negerisurat->negeri}}</option> 
-											@endforeach
-										</select>
+										<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_surat_poskod" name="alamat_surat_poskod" placeholder="" value="{{$postcode_surat}}" />
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
 								</div>
-								<div class="col-md-5 fv-row">
+								<div class="col-md-4 fv-row">
 									<!--begin::Label-->
 									<label class=" fs-6 fw-semibold form-label mb-2">Bandar</label>
 									<!--end::Label-->
@@ -489,25 +589,31 @@
 										<select id='alamat_surat_bandar' name='alamat_surat_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
 											<option value="">Pilih</option>
 											@foreach ($bandar as $bandar)	
-											<option value="{{ $bandar->id}}">{{ $bandar->bandar}}</option> 
+											<option value="{{$bandar->id}}" {{$bandar->bandar == $selectedCity_surat ? 'selected' : ''}}>{{ $bandar->bandar}}</option>
 											@endforeach
 										</select>
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
 								</div>
-								<div class="col-md-3 fv-row">
+								<div class="col-md-5 fv-row">
 									<!--begin::Label-->
-									<label class=" fs-6 fw-semibold form-label mb-2">Poskod</label>
+									<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
 									<!--end::Label-->
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_surat_poskod" name="alamat_surat_poskod" placeholder="" value="" />
+										<select id="alamat_surat_negeri" name="alamat_surat_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+											<option value="">Pilih</option>
+											@foreach ($negeri as $negerisurat)	
+											<option value="{{$negerisurat->id}}" {{$negerisurat->negeri == $selectedState_surat ? 'selected' : ''}}>{{ $negerisurat->negeri}}</option>
+											@endforeach
+										</select>
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
 								</div>
+								
 							</div>
 						<!--end::Input group-->
 						<div class="row mb-10">
