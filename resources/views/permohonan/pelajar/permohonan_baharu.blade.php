@@ -491,6 +491,7 @@
 						</div>
 						<!--end::Input group-->
 						@php
+						if (!empty($smoku->alamat_surat_menyurat)) {
 						
 							if (preg_match('/\b(\d{5})\b/', $smoku->alamat_surat_menyurat, $matches)) {
 								$postcode_surat = $matches[1];
@@ -511,7 +512,9 @@
 							}
 
 							// Split the address by the postcode
-							$addressParts_surat = explode($postcode_surat, $smoku->alamat_surat_menyurat, 2);
+							if (!empty($postcode_surat)) {
+								$addressParts_surat = explode($postcode_surat, $smoku->alamat_surat_menyurat, 2);
+							}
 
 							// Check if the second part (after the postcode) exists
 							if (isset($addressParts_surat[1])) {
@@ -538,6 +541,13 @@
 
 							// Trim any extra whitespaces
 							$trimmedAddress_surat = trim($trimmedAddress_surat);
+						} else {
+							// Handle the case where the address is empty
+							$postcode_surat = '';
+							$selectedState_surat = '';
+							$selectedCity_surat = '';
+							$trimmedAddress_surat = '';
+						}	
 						@endphp
 							<!--begin::Alamat Surat-->
 							<div class="fv-row mb-10">
