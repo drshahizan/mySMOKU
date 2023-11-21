@@ -133,11 +133,19 @@
                                                         
                                                         @if ($item['status']=='1')
                                                         <td class="text-center">
-                                                            <a href="{{ route('permohonan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
+                                                            <div>
+                                                            <a href="{{ route('permohonan') }}" class="btn btn-icon btn-active-light-primary w-10px h-30px me-3">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Permohonan">
+                                                                    <i class="ki-solid ki-pencil text-dark fs-2"></i>
+                                                                </span>
+                                                            </a>
+                                                            <a href="{{ route('permohonan.delete', ['id' => $item['smoku_id']]) }}" class="btn btn-icon btn-active-light-primary w-10px h-30px me-3" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
                                                                 <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
                                                                     <i class="fa fa-trash fa-sm custom-white-icon"></i>
                                                                 </span>
                                                             </a>
+                                                        
+                                                        </div>
                                                         </td>
                                                         @elseif ($item['status']=='2')
                                                         <td class="text-center">
