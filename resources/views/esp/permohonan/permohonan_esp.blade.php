@@ -544,92 +544,57 @@ $(document).ready(function() {
   }
 </style>
 
-
 <!--begin::Javascript-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+
 <script>
-  // function sendData() {
-  //     const form = document.getElementById('hantar_maklumat');
-  //     const data = new FormData(form);
 
-  //     fetch('http://espbstg.mohe.gov.my/api/studentsInfo.php', {
-  //         method: 'POST',
-  //         body: data
-  //     })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //         console.log(data); // Log the API response to the console
-  //         //alert ('Data berjaya di hantar ke ESP');
-  //     })
-  //     .catch(error => {
-  //         console.error('API Request failed:', error);
-  //     });
-  // }
+  function sendData() {
+    const secretKey = "{{ $secretKey }}";
+    const time = {{ time() }}; 
+    const token = generateToken(secretKey, time);
 
-  async function sendData() {
+    // console.log("Token:", token);
 
+    // Construct the JSON array with the token
+    const tokenArray = [{ "token": token }];
+
+    // Set the JSON array in the textarea
+    const tokenTextarea = document.getElementById('token');
+    tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
+    // console.log("Token JSON:", tokenTextarea.value);
+
+    const form = document.getElementById('hantar_maklumat');
+    const data = new FormData(form);
+
+    fetch('http://espbstg.mohe.gov.my/api/studentsInfo.php', {
+        method: 'POST',
+        body: data
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Log the API response to the console
+
+        // Convert the API response to a string for display in the alert
+        const responseDataString = JSON.stringify(data, null, 2);
+
+        alert(`Data berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`); // Show success message and API response in alert
+
+        location.reload(); // Refresh the page
+    })
+
+    .catch(error => {
+        console.error('API Request failed:', error);
+        location.reload(); // Refresh the page
+    });
     
-    try {
-        const secretKey = "{{ $secretKey }}"; 
-        const time = {{ time() }};
-        // Generate the token asynchronously
-        const token = await hash('SHA-256', secretKey + time);
-        // console.log("Token:", token);
 
-        // Construct the JSON array with the token
-        const tokenArray = [{ "token": token }];
-
-        // Set the JSON array in the textarea
-        const tokenTextarea = document.getElementById('token');
-        tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
-        // console.log("Token JSON:", tokenTextarea.value);
-
-        const form = document.getElementById('hantar_maklumat');
-        const data = new FormData(form);
-
-        fetch('http://espbstg.mohe.gov.my/api/studentsInfo.php', {
-            method: 'POST',
-            body: data
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data); // Log the API response to the console
-
-            // Convert the API response to a string for display in the alert
-            const responseDataString = JSON.stringify(data, null, 2);
-
-            alert(`Data berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`); // Show success message and API response in alert
-
-            location.reload(); // Refresh the page
-        })
-
-        .catch(error => {
-            console.error('API Request failed:', error);
-            location.reload(); // Refresh the page
-        });
-    } catch (error) {
-        console.error('Error generating token:', error);
-    }
-}
-
-// Function to hash using SHA-256 (using async/await)
-async function hash(algorithm, data) {
-    if (!crypto.subtle) {
-        throw new Error('Web Crypto API not supported in this environment.');
-    }
-
-    const encoder = new TextEncoder();
-    const dataBuffer = encoder.encode(data);
-
-    try {
-        const hashBuffer = await crypto.subtle.digest(algorithm, dataBuffer);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        return hashHex;
-    } catch (error) {
-        throw new Error('Error generating hash: ' + error.message);
-    }
-}
-
+  }
+  function generateToken(secretKey, time) {
+    const dataToHash = secretKey + time;
+    const hash = CryptoJS.SHA256(dataToHash).toString(CryptoJS.enc.Hex);
+    return hash;
+  }
 
 </script>
 <!--end::Javascript-->
