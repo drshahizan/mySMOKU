@@ -20,6 +20,8 @@ class ButiranPelajar extends Model
         'alamat_tetap_negeri',
         'alamat_tetap_bandar',
         'alamat_tetap_poskod',
+        'parlimen',
+        'dun',
         'alamat_surat_menyurat',
         'alamat_surat_negeri',
         'alamat_surat_bandar',

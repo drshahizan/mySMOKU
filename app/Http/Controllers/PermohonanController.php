@@ -27,8 +27,10 @@ use App\Models\Hubungan;
 use App\Models\Negeri;
 use App\Models\Bandar;
 use App\Models\Agama;
+use App\Models\Dun;
 use App\Models\EmelKemaskini;
 use App\Models\JumlahTuntutan;
+use App\Models\Parlimen;
 use App\Models\TamatPengajian;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +65,8 @@ class PermohonanController extends Controller
         $hubungan = Hubungan::all()->sortBy('kod_hubungan');
         $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri')->get();
         $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
+        $parlimen = Parlimen::orderby("id","asc")->get();
+        $dun = Dun::orderby("id","asc")->get();
         $agama = Agama::orderby("id","asc")->select('id','agama')->get();
         $institusi = InfoIpt::orderby("id","asc")->select('id_institusi','nama_institusi')->get();
         $infoipt = InfoIpt::all()->where('jenis_institusi','IPTS')->sortBy('nama_institusi');
@@ -132,7 +136,7 @@ class PermohonanController extends Controller
             
         }else {
 
-            return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri','bandar','agama'));
+            return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri','bandar','agama','parlimen','dun'));
 
         }
 
@@ -147,6 +151,18 @@ class PermohonanController extends Controller
          ->get();
 
          return response()->json($bandarData);
+
+    }
+
+    public function getDun($idparlimen=0)
+    {
+
+        $dunData['data'] = Dun::orderby("id","asc")
+         ->select('id','kod_dun','dun')
+         ->where('parlimen_id',$idparlimen)
+         ->get();
+
+         return response()->json($dunData);
 
     }
 
@@ -211,6 +227,8 @@ class PermohonanController extends Controller
         $butiranPelajar->alamat_tetap_negeri = $request->alamat_tetap_negeri;
         $butiranPelajar->alamat_tetap_bandar = $request->alamat_tetap_bandar;
         $butiranPelajar->alamat_tetap_poskod = $request->alamat_tetap_poskod;
+        $butiranPelajar->parlimen = $request->parlimen;
+        $butiranPelajar->dun = $request->dun;
         $butiranPelajar->alamat_surat_menyurat = $request->alamat_surat_menyurat;
         $butiranPelajar->alamat_surat_negeri = $request->alamat_surat_negeri;
         $butiranPelajar->alamat_surat_bandar = $request->alamat_surat_bandar;
@@ -463,6 +481,8 @@ class PermohonanController extends Controller
                 'alamat_tetap_negeri' => $request->alamat_tetap_negeri,
                 'alamat_tetap_bandar' => $request->alamat_tetap_bandar,
                 'alamat_tetap_poskod' => $request->alamat_tetap_poskod,
+                'parlimen' => $request->parlimen,
+                'dun' => $request->dun,
                 'alamat_surat_menyurat' => $request->alamat_surat_menyurat,
                 'alamat_surat_negeri' => $request->alamat_surat_negeri,
                 'alamat_surat_bandar' => $request->alamat_surat_bandar,

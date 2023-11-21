@@ -185,6 +185,13 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
+					'parlimen': {
+						validators: {
+							notEmpty: {
+								message: 'Parlimen diperlukan'
+							}
+						}
+					},
 					'alamat_surat_bandar': {
 						validators: {
 							notEmpty: {
@@ -203,6 +210,20 @@ var KTCreateAccount = function () {
 						validators: {
 							notEmpty: {
 								message: 'Negeri Lahir diperlukan'
+							}
+						}
+					},
+					'keturunan': {
+						validators: {
+							notEmpty: {
+								message: 'Keturunan diperlukan'
+							}
+						}
+					},
+					'tel_bimbit': {
+						validators: {
+							notEmpty: {
+								message: 'No. Telefon Bimbit diperlukan'
 							}
 						}
 					},

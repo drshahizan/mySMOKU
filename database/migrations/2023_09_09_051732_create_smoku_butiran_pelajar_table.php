@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('alamat_tetap_poskod')->nullable();
             $table->string('alamat_tetap_bandar')->nullable();
             $table->string('alamat_tetap_negeri')->nullable();
+            $table->string('parlimen')->nullable();
+            $table->string('dun')->nullable();
             $table->string('alamat_surat_menyurat');
             $table->string('alamat_surat_poskod');
             $table->string('alamat_surat_bandar');

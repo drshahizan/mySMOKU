@@ -390,6 +390,7 @@
 
 							foreach ($negeri as $state) {
 								$stateName = $state->negeri;
+								$stateID = $state->id;
 
 								// Check if the state name is present in the address
 								if (stripos($smoku->alamat_tetap, $stateName) !== false) {
@@ -426,6 +427,11 @@
 
 							// Trim any extra whitespaces
 							$trimmedAddress = trim($trimmedAddress);
+
+							//parlimen dengan dun
+							$parlimen = DB::table('bk_parlimen')->where('negeri_id', $stateID)
+										->orderby("id","asc")->get();
+
 						@endphp
 
 						<!--begin::Input group-->
@@ -434,24 +440,27 @@
 							<label class="form-label">Alamat Tetap</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<textarea id="alamat_tetap" name="alamat_tetap" class="form-control form-control-lg form-control-solid" rows="2">{{$trimmedAddress}}</textarea>
+							<textarea id="alamat_tetap" name="alamat_tetap" class="form-control form-control-lg form-control-solid" rows="2" style="text-transform: uppercase;">{{$trimmedAddress}}</textarea>
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
-							<div class="col-md-3 fv-row">
+							<div class="col-md-5 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Poskod
-								</label>
+								<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_tetap_poskod" name="alamat_tetap_poskod" placeholder="" value="{{$postcode}}"/>
+									<select id="alamat_tetap_negeri" name="alamat_tetap_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+										<option value="">Pilih</option>
+										@foreach ($negeri as $negeritetap)	
+										<option value="{{$negeritetap->id}}" {{$negeritetap->negeri == $selectedState ? 'selected' : ''}}>{{ $negeritetap->negeri}}</option>
+										@endforeach
+									</select>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							
 							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Bandar
@@ -470,17 +479,49 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-5 fv-row">
+							<div class="col-md-3 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
+								<label class=" fs-6 fw-semibold form-label mb-2">Poskod
+								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="alamat_tetap_negeri" name="alamat_tetap_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+									<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_tetap_poskod" name="alamat_tetap_poskod" placeholder="" value="{{$postcode}}"/>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<div class="row mb-10">
+							<div class="col-md-7 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Parlimen</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id='parlimen' name='parlimen' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
 										<option value="">Pilih</option>
-										@foreach ($negeri as $negeritetap)	
-										<option value="{{$negeritetap->id}}" {{$negeritetap->negeri == $selectedState ? 'selected' : ''}}>{{ $negeritetap->negeri}}</option>
+										@foreach ($parlimen as $parlimen)	
+										<option value="{{$parlimen->id}}">{{ $parlimen->kod_parlimen}} - {{ strtoupper($parlimen->parlimen)}}</option>
+										@endforeach
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-5 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Dun</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id="dun" name="dun" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+										<option value="">Pilih</option>
+										@foreach ($dun as $dun)	
+										<option value="{{$dun->id}}">{{ $dun->kod_dun}} - {{ strtoupper($dun->dun)}}</option>
 										@endforeach
 									</select>
 									<!--end::Input-->
@@ -573,18 +614,23 @@
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input-->
-								<textarea id="alamat_surat_menyurat" name="alamat_surat_menyurat" class="form-control form-control-lg form-control-solid" rows="2">{{$trimmedAddress_surat}}</textarea>
+								<textarea id="alamat_surat_menyurat" name="alamat_surat_menyurat" class="form-control form-control-lg form-control-solid" rows="2" style="text-transform: uppercase;">{{$trimmedAddress_surat}}</textarea>
 								<!--end::Input-->
 							</div>
 							<div class="row mb-10">
-								<div class="col-md-3 fv-row">
+								<div class="col-md-5 fv-row">
 									<!--begin::Label-->
-									<label class=" fs-6 fw-semibold form-label mb-2">Poskod</label>
+									<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
 									<!--end::Label-->
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_surat_poskod" name="alamat_surat_poskod" placeholder="" value="{{$postcode_surat}}" />
+										<select id="alamat_surat_negeri" name="alamat_surat_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
+											<option value="">Pilih</option>
+											@foreach ($negeri as $negerisurat)	
+											<option value="{{$negerisurat->id}}" {{$negerisurat->negeri == $selectedState_surat ? 'selected' : ''}}>{{ $negerisurat->negeri}}</option>
+											@endforeach
+										</select>
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
@@ -606,24 +652,18 @@
 									</div>
 									<!--end::Input wrapper-->
 								</div>
-								<div class="col-md-5 fv-row">
+								<div class="col-md-3 fv-row">
 									<!--begin::Label-->
-									<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
+									<label class=" fs-6 fw-semibold form-label mb-2">Poskod</label>
 									<!--end::Label-->
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<select id="alamat_surat_negeri" name="alamat_surat_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-											<option value="">Pilih</option>
-											@foreach ($negeri as $negerisurat)	
-											<option value="{{$negerisurat->id}}" {{$negerisurat->negeri == $selectedState_surat ? 'selected' : ''}}>{{ $negerisurat->negeri}}</option>
-											@endforeach
-										</select>
+										<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_surat_poskod" name="alamat_surat_poskod" placeholder="" value="{{$postcode_surat}}" />
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
 								</div>
-								
 							</div>
 						<!--end::Input group-->
 						<div class="row mb-10">
@@ -1550,6 +1590,50 @@
 											var option = "<option value='"+id+"'>"+bandar+"</option>";
 
 											$("#alamat_tetap_bandar").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
+			//dun
+			$(document).ready(function(){
+				$('#parlimen').on('change', function() {
+					var idparlimen = $(this).val();
+					// alert(idparlimen);
+					// Empty the dropdown
+					$('#dun').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: 'getDun/'+idparlimen,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var kod_dun = response['data'][i].kod_dun;
+											var dun = response['data'][i].dun.toUpperCase();
+
+											var option = "<option value='"+id+"'>"+kod_dun+"-"+dun+"</option>";
+
+											$("#dun").append(option); 
 										}
 									}
 							}, 
