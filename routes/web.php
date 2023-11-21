@@ -147,6 +147,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Permohonan - Sekretariat - Pembayaran
     Route::get('permohonan/sekretariat/pembayaran/senarai', [SaringanController::class, 'senaraiPembayaran']);
+    Route::post('permohonan/sekretariat/hantar/info-cek/{permohonan_id}', [SaringanController::class, 'kemaskiniInfoCek'])->name('sekretariat.modal.submit');
     Route::get('permohonan/sekretariat/pembayaran/maklumat/{id}', [SaringanController::class, 'maklumatPembayaran'])->name('maklumat.pembayaran.id');
     Route::post('permohonan/sekretariat/pembayaran/saring/{id}', [SaringanController::class, 'saringPembayaran'])->name('saring.pembayaran.id');;
     Route::get('permohonan/sekretariat/pembayaran/papar/{id}', [SaringanController::class, 'paparPembayaran'])->name('papar.pembayaran.id');

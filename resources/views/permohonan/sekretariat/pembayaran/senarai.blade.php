@@ -201,8 +201,6 @@
                             <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                 <br>
                                 <div class="body">
-                                    <form action="" method="POST">
-                                    {{csrf_field()}}
                                         <table id="sortTable1a" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
@@ -325,18 +323,6 @@
 
                                                     <div class="modal-body">
                                                         <div class="mb-3">
-                                                            <label for="recipient-name" class="col-form-label">No Baucer:</label>
-                                                            <input type="text" class="form-control" id="noBaucer" name="noBaucer">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="message-text" class="col-form-label">Tarikh Baucer:</label>
-                                                            <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="message-text" class="col-form-label">Perihal:</label>
-                                                            <textarea class="form-control" id="perihal" name="perihal"></textarea>
-                                                        </div>
-                                                        <div class="mb-3">
                                                             <label for="recipient-name" class="col-form-label">No Cek:</label>
                                                             <input type="text" class="form-control" id="noCek" name="noCek">
                                                         </div>
@@ -352,7 +338,7 @@
                                                 </div> 
                                             </div>
                                         </div> 
-                                    </form>    
+                                       
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
