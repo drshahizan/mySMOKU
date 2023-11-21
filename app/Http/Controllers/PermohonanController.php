@@ -543,13 +543,13 @@ class PermohonanController extends Controller
 
         ]);
 
-        Permohonan::where('smoku_id' ,$smoku_id->id)->where('status'.'!=' ,6)
+        Permohonan::where('smoku_id' ,$smoku_id->id)->where('status','!=',6)
         ->update([
 
             'yuran' => $request->yuran,
             'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
             'wang_saku' => $request->wang_saku,
-            'amaun_wang_saku' => $request->amaun_wang_saku,
+            'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
             'perakuan' => $request->perakuan,
            
         ]);

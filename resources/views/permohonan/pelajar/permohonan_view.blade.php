@@ -365,7 +365,7 @@
 							<label class="form-label">Alamat Tetap</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<textarea id="alamat_tetap" name="alamat_tetap" class="form-control form-control-lg form-control-solid" rows="2" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>{{$butiranPelajar->alamat_tetap_baru}}</textarea>
+							<textarea id="alamat_tetap" name="alamat_tetap" class="form-control form-control-lg form-control-solid" rows="2" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }} style="text-transform: uppercase;">{{$butiranPelajar->alamat_tetap_baru}}</textarea>
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
@@ -1198,6 +1198,8 @@
 							<!--end::Label-->
 							<br>
 							<br>
+							<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
+							<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
 							<div class="row mb-10">
 								<br>
 								<br>
@@ -1212,7 +1214,7 @@
 									<!--begin::Input-->
 									<div class="d-flex">
 										<span class="input-group-text">RM</span>
-										<input type="number" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" onchange="select1()" placeholder="" value="{{$butiranPelajar->amaun_yuran}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+										<input type="number" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" step="0.01" inputmode="decimal" onchange="select1()" placeholder="" value="{{$butiranPelajar->amaun_yuran}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									</div>
 									<!--end::Input-->
 								</div>
@@ -1232,7 +1234,7 @@
 									<!--begin::Input-->
 									<div class="d-flex">
 										<span class="input-group-text">RM</span>
-										<input type="text" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" placeholder="" value="{{$butiranPelajar->amaun_wang_saku}}" readonly/>
+										<input type="number" class="form-control form-control-solid" name="amaun_wang_saku" id="amaun_wang_saku" step="0.01" inputmode="decimal" placeholder="" value="{{$butiranPelajar->amaun_wang_saku}}" readonly/>
 									</div>
 									<!--end::Input-->
 								</div>
@@ -1694,22 +1696,54 @@
 
 
 		<script>
+			var max_yuran; // Declare these variables in a higher scope
+    		var max_wang_saku;
+			// Make an AJAX request to fetch data based on the selected semester
+			$.ajax({
+				type: 'GET',
+				url: '/fetch-amaun/bkoku', // Replace with the actual route for fetching data
+				success: function(response) {
+					// Format the value to display with .00
+					var max_yuran = response.amaun_yuran;
+					var max_wang_saku = response.amaun_wang_saku;
+
+					document.getElementById("max_yuran").value = max_yuran;
+					document.getElementById("max_wang_saku").value = max_wang_saku;
+
+				},
+				error: function(error) {
+					console.error('Error fetching data:', error);
+				}
+			});
 			function select1(){
+				console.clear();
+
 				var sumber = document.getElementById('sumber_biaya').value;
 				var mod = document.getElementById('mod').value;
 				var bilbulan = document.getElementById('bil_bulan_per_sem').value;
+				
+
+				var max_yuran = parseFloat(document.getElementById('max_yuran').value).toFixed(2);
+				var max_wang_saku = parseFloat(document.getElementById('max_wang_saku').value).toFixed(2);
 				var yuranInput = document.getElementById('amaun_yuran');
 				var yuran = parseFloat(yuranInput.value).toFixed(2);
+				// console.log('max_limit:', max_yuran);
+
+    			// console.log('maxyuran:', max_wang_saku);
+				 console.log('yuran:', yuran);
+
 
 				// Define the maximum limit for 'amaun_yuran'
-				var maxLimit = 5000;
+				var maxLimit = max_yuran;
 
-				if (yuran > maxLimit) {
-					yuranInput.value = '';
-					alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' bagi satu sesi pengajian.' );
-					return;
+				if (!isNaN(yuran)) {
+					if (yuran > maxLimit) {
+						yuranInput.value = '';
+						alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' bagi satu sesi pengajian.' );
+						return;
+					}
 				}
-				var wang_saku_perbulan = "300";
+				var wang_saku_perbulan = max_wang_saku;
 				
 				var wang_saku = wang_saku_perbulan * bilbulan;
 				var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
@@ -1735,12 +1769,12 @@
 					document.getElementById("yuran").disabled = false;
 					document.getElementById("wang_saku").disabled = false;
 
-					if (total <= 5000) {
+					if (total <= max_yuran) {
 						document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
 						console.log("Total amount is within the limit: " + parseFloat(total));
 					} else {
 
-						var baki_wang_saku = 5000 - yuran;
+						var baki_wang_saku = max_yuran - yuran;
 						if (!isNaN(baki_wang_saku)) {
 							document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
 							console.log("Total amount exceeds the limit: " + parseFloat(total));
