@@ -418,6 +418,42 @@
 							</div>
 						</div>
 						<!--end::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-7 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Parlimen</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id='parlimen' name='parlimen' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+										<option value="">Pilih</option>
+										@foreach ($parlimen as $parlimen)	
+										<option value="{{$parlimen->id}}" {{$butiranPelajar->parlimen == $parlimen->id ? 'selected' : ''}}>{{ $parlimen->kod_parlimen}} - {{ strtoupper($parlimen->parlimen)}}</option>
+										@endforeach
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-5 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">DUN</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id="dun" name="dun" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+										<option value="">Pilih</option>
+										@foreach ($dun as $dun)	
+										<option value="{{$dun->id}}" {{$butiranPelajar->dun == $dun->id ? 'selected' : ''}}>{{ $dun->kod_dun}} - {{ strtoupper($dun->dun)}}</option>
+										@endforeach
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
 							<!--begin::Alamat Surat-->
 							<div class="fv-row mb-10">
 								<!--end::Label-->
@@ -495,19 +531,31 @@
 							</div>
 						<!--end::Input group-->
 						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Alamat emel</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$butiranPelajar->emel}}" readonly/>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">No. Tel Bimbit</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{$butiranPelajar->tel_bimbit}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="text" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{$butiranPelajar->tel_bimbit_baru}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-6 fv-row">
+							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">No. Tel Rumah
 								</label>
@@ -524,18 +572,53 @@
 						<!--end::Input group-->
 						<!--end::Input group-->
 						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
+							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Alamat emel</label>
+								<label class=" fs-6 fw-semibold form-label mb-2">Status Pekerjaan</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$butiranPelajar->emel}}" readonly/>
+									<select id="status_pekerjaan" name="status_pekerjaan" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+										<option></option>
+										<option value="TIDAK BEKERJA" {{$butiranPelajar->status_pekerjaan_baru == "TIDAK BEKERJA" ? 'selected' : ''}}>TIDAK BEKERJA</option>
+										<option value="BEKERJA" {{$butiranPelajar->status_pekerjaan_baru == "BEKERJA" ? 'selected' : ''}}>BEKERJA</option>
+									</select>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
 							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Pekerjaan
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="pekerjaan" name="pekerjaan" placeholder="" value="{{$butiranPelajar->pekerjaan_baru}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Pendapatan
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="number" class="form-control form-control-solid" id="pendapatan" name="pendapatan" placeholder="" value="{{$butiranPelajar->pendapatan_baru}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+						<!--end::Input group-->
+						<div class="row mb-10">
+							
 							<div class="separator my-14"></div>
 							<div class="pb-10 pb-lg-15">
 								<!--begin::Title-->

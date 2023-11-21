@@ -82,7 +82,13 @@ class PermohonanController extends Controller
         ->leftJoin('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
         ->leftJoin('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
         ->leftJoin('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
-        ->get(['smoku_butiran_pelajar.*','smoku_butiran_pelajar.alamat_tetap as alamat_tetap_baru','smoku_butiran_pelajar.alamat_surat_menyurat as alamat_surat_baru','smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*','smoku_akademik.status as akademik_status'])
+        ->get(['smoku_butiran_pelajar.*','smoku_butiran_pelajar.alamat_tetap as alamat_tetap_baru',
+            'smoku_butiran_pelajar.alamat_surat_menyurat as alamat_surat_baru',
+            'smoku_butiran_pelajar.tel_bimbit as tel_bimbit_baru',
+            'smoku_butiran_pelajar.status_pekerjaan as status_pekerjaan_baru',
+            'smoku_butiran_pelajar.pekerjaan as pekerjaan_baru',
+            'smoku_butiran_pelajar.pendapatan as pendapatan_baru',
+            'smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*','smoku_akademik.status as akademik_status'])
         ->where('smoku_id', $smoku_id->id)
         ->where('akademik_status', 1)
         ->first();
@@ -121,18 +127,18 @@ class PermohonanController extends Controller
                     //dd($butiranPelajar);
     
                     $dokumen = Dokumen::where('permohonan_id', $permohonan_baru->id)->get();
-                    return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan'));
+                    return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan','parlimen','dun'));
     
                 }else{
                      //dd('sini');
-                     return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri'));
+                     return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri','parlimen','dun'));
                 }
    
             }
 
 
             $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
-            return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','agama','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan'));
+            return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','agama','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan','parlimen','dun'));
             
         }else {
 
