@@ -237,6 +237,9 @@ class PermohonanController extends Controller
         $butiranPelajar->tel_rumah = $request->tel_rumah;
         $butiranPelajar->no_akaun_bank = $request->no_akaun_bank;
         $butiranPelajar->emel = $request->emel;
+        $butiranPelajar->status_pekerjaan = $request->status_pekerjaan;
+        $butiranPelajar->pekerjaan = $request->pekerjaan;
+        $butiranPelajar->pendapatan = $request->pendapatan;
 
         $butiranPelajar->save();
 
@@ -491,6 +494,9 @@ class PermohonanController extends Controller
                 'tel_rumah' => $request->tel_rumah,
                 'no_akaun_bank' => $request->no_akaun_bank,
                 'emel' => $request->emel,
+                'status_pekerjaan' => $request->status_pekerjaan,
+                'pekerjaan' => $request->pekerjaan,
+                'pendapatan' => $request->pendapatan,
 
         ]);
 

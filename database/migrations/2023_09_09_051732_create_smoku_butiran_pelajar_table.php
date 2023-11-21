@@ -30,6 +30,9 @@ return new class extends Migration
             $table->string('emel');
             $table->string('tel_bimbit');
             $table->string('tel_rumah')->nullable();
+            $table->string('status_pekerjaan')->nullable();
+            $table->string('pekerjaan')->nullable();
+            $table->string('pendapatan')->nullable();
             $table->foreign('smoku_id')
               ->references('id')->on('smoku')->onDelete('cascade');
             $table->timestamps();

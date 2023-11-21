@@ -513,7 +513,7 @@
 							</div>
 							<div class="col-md-5 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Dun</label>
+								<label class=" fs-6 fw-semibold form-label mb-2">DUN</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
@@ -667,7 +667,19 @@
 							</div>
 						<!--end::Input group-->
 						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
+							<div class="col-md-5 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Alamat emel</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$smoku->email}}"/>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">No. Tel Bimbit</label>
 								<!--end::Label-->
@@ -679,7 +691,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-6 fv-row">
+							<div class="col-md-3 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">No. Tel Rumah
 								</label>
@@ -692,22 +704,58 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
+							
 						</div>
 						<!--end::Input group-->
 						<!--end::Input group-->
 						<div class="row mb-10">
-							<div class="col-md-6 fv-row">
+							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Alamat emel</label>
+								<label class=" fs-6 fw-semibold form-label mb-2">Status Pekerjaan</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$smoku->email}}"/>
+									<select id="status_pekerjaan" name="status_pekerjaan" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
+										<option></option>
+										<option value="TIDAK BEKERJA" {{$smoku->status_pekerjaan == "TIDAK BEKERJA" ? 'selected' : ''}}>TIDAK BEKERJA</option>
+										<option value="BEKERJA" {{$smoku->status_pekerjaan == "BEKERJA" ? 'selected' : ''}}>BEKERJA</option>
+									</select>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
 							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Pekerjaan
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="pekerjaan" name="pekerjaan" placeholder="" value="{{$smoku->pekerjaan}}" />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Pendapatan
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="number" class="form-control form-control-solid" id="pendapatan" name="pendapatan" placeholder="" value="{{$smoku->pendapatan}}" />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+						<!--end::Input group-->
+						<div class="row mb-10">
+							
 							<div class="separator my-14"></div>
 							<div class="pb-10 pb-lg-15">
 								<!--begin::Title-->
