@@ -1544,11 +1544,11 @@
 <!--begin::Javascript-->
 
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-		<script src="../assets/js/scripts.bundle.js"></script>
+		<script src="/assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="../assets/js/custom/utilities/modals/create-account.js"></script>
+		<script src="/assets/js/custom/utilities/modals/create-account.js"></script>
 
 
 		<!--end::Custom Javascript-->
