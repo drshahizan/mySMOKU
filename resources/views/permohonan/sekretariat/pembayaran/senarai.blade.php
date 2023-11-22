@@ -268,12 +268,12 @@
                                                     <th class="text-center" style="width: 3% !important;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
                                                     <th style="width: 10%"><b>ID Permohonan</b></th>
                                                     <th style="width: 20%"><b>Nama</b></th>
-                                                    <th style="width: 25%"><b>Institusi Pengajian</b></th>
-                                                    <th style="width: 21%"><b>No Baucer</b></th>
+                                                    <th style="width: 25%" class="text-center"><b>Institusi Pengajian</b></th>
+                                                    <th style="width: 21%" class="text-center"><b>No Baucer</b></th>
                                                     <th style="width: 8%" class="text-center"><b>Tarikh Baucer</b></th>
                                                     <th style="width: 8%" class="text-center"><b>No Cek</b></th>
                                                     <th style="width: 8%" class="text-center"><b>Tarikh Dibayar</b></th>
-                                                    <th style="width: 8%" class="text-center"><b>Status</b></th>
+                                                    <th style="width: 5%" class="text-center"><b>Status</b></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -351,14 +351,14 @@
                                                                 </td>
                                                                 <td style="width: 20%">{{$pemohon}}</td>
                                                                 <td style="width: 25%">{{$nama_institusi}}</td>
-                                                                <td style="width: 21%">{{$item['no_baucer']}}</td>
+                                                                <td class="text-center" style="width: 21%">{{$item['no_baucer']}}</td>
                                                                 <td class="text-center" style="width: 8%">{{date('d/m/Y', strtotime($item['tarikh_baucer']))}}</td>
-                                                                <td style="width: 21%">{{$item['no_cek']}}</td>
+                                                                <td class="text-center" style="width: 21%">{{$item['no_cek']}}</td>
                                                                 <td class="text-center" style="width: 8%">{{date('d/m/Y', strtotime($item['tarikh_transaksi']))}}</td>
                                                                 @if ($item['status']=='6')
-                                                                    <td class="text-center" style="width: 8%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                    <td class="text-center" style="width: 5%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif ($item['status']=='8')
-                                                                    <td class="text-center" style="width: 8%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                    <td class="text-center" style="width: 5%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
                                                                 @endif
                                                             </tr>
                                                         @endif
