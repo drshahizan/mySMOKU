@@ -94,57 +94,57 @@ class PermohonanController extends Controller
         ->first();
         //dd($butiranPelajar);
 
-        // if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
-        //     $tamat_pengajian = TamatPengajian::orderBy('id', 'desc')->where('permohonan_id', $permohonan->id)->first();
+        if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
+            $tamat_pengajian = TamatPengajian::orderBy('id', 'desc')->where('permohonan_id', $permohonan->id)->first();
             
-        //     if ($tamat_pengajian) {
+            if ($tamat_pengajian) {
 
-        //         $permohonan_baru = Permohonan::orderBy('id', 'desc')
-        //                 ->where('smoku_id', $smoku_id->id)
-        //                 ->where('id','!=', $tamat_pengajian->permohonan_id)
-        //                 ->first();
+                $permohonan_baru = Permohonan::orderBy('id', 'desc')
+                        ->where('smoku_id', $smoku_id->id)
+                        ->where('id','!=', $tamat_pengajian->permohonan_id)
+                        ->first();
 
-        //         //dd($permohonan_baru);        
+                //dd($permohonan_baru);        
 
-        //         if ($permohonan_baru !== null){
-        //             //dd('situ');
+                if ($permohonan_baru !== null){
+                    //dd('situ');
 
-        //             $butiranPelajar = ButiranPelajar::orderBy('permohonan.id', 'desc')
-        //                 ->join('smoku', 'smoku.id', '=', 'smoku_butiran_pelajar.smoku_id')
-        //                 ->join('smoku_waris', 'smoku_waris.smoku_id', '=', 'smoku.id')
-        //                 ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku_butiran_pelajar.smoku_id')
-        //                 ->join('permohonan', 'permohonan.smoku_id', '=', 'smoku_butiran_pelajar.smoku_id')
-        //                 ->join('bk_jantina', 'bk_jantina.kod_jantina', '=', 'smoku.jantina')
-        //                 ->join('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
-        //                 ->join('bk_hubungan', 'bk_hubungan.kod_hubungan', '=', 'smoku.hubungan_waris')
-        //                 ->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')
-        //                 ->where('smoku.id', $smoku_id->id)
-        //                 ->where('smoku_akademik.status', 1)
-        //                 ->where('permohonan.status','!=', 6)
-        //                 ->select(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','bk_jantina.*', 'bk_keturunan.*','permohonan.*','bk_hubungan.*'])
-        //                 ->first();
+                    $butiranPelajar = ButiranPelajar::orderBy('permohonan.id', 'desc')
+                        ->join('smoku', 'smoku.id', '=', 'smoku_butiran_pelajar.smoku_id')
+                        ->join('smoku_waris', 'smoku_waris.smoku_id', '=', 'smoku.id')
+                        ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku_butiran_pelajar.smoku_id')
+                        ->join('permohonan', 'permohonan.smoku_id', '=', 'smoku_butiran_pelajar.smoku_id')
+                        ->join('bk_jantina', 'bk_jantina.kod_jantina', '=', 'smoku.jantina')
+                        ->join('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
+                        ->join('bk_hubungan', 'bk_hubungan.kod_hubungan', '=', 'smoku.hubungan_waris')
+                        ->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')
+                        ->where('smoku.id', $smoku_id->id)
+                        ->where('smoku_akademik.status', 1)
+                        ->where('permohonan.status','!=', 6)
+                        ->select(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','bk_jantina.*', 'bk_keturunan.*','permohonan.*','bk_hubungan.*'])
+                        ->first();
     
-        //             //dd($butiranPelajar);
+                    //dd($butiranPelajar);
     
-        //             $dokumen = Dokumen::where('permohonan_id', $permohonan_baru->id)->get();
-        //             return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan','parlimen','dun'));
+                    $dokumen = Dokumen::where('permohonan_id', $permohonan_baru->id)->get();
+                    return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan','parlimen','dun'));
     
-        //         }else{
-        //              //dd('sini');
-        //              return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri','parlimen','dun'));
-        //         }
+                }else{
+                     //dd('sini');
+                     return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri','parlimen','dun'));
+                }
    
-        //     }
+            }
 
 
-        //     $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
-        //     return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','agama','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan','parlimen','dun'));
+            $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
+            return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','agama','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan','parlimen','dun'));
             
-        // }else {
+        }else {
 
             return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri','bandar','agama','parlimen','dun'));
 
-        // }
+        }
 
     }
 
