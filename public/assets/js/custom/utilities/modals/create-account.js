@@ -130,6 +130,7 @@ var KTCreateAccount = function () {
 	var initValidation = function () {
 		// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
 		// Step 1
+		console.log('step 1');
 		validations.push(FormValidation.formValidation(
 			form,
 			{
@@ -192,6 +193,7 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
+					
 					'alamat_surat_bandar': {
 						validators: {
 							notEmpty: {
@@ -206,13 +208,13 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
-					// 'negeri_lahir': {
-					// 	validators: {
-					// 		notEmpty: {
-					// 			message: 'Negeri Lahir diperlukan'
-					// 		}
-					// 	}
-					// },
+					'negeri_lahir': {
+						validators: {
+							notEmpty: {
+								message: 'Negeri Lahir diperlukan'
+							}
+						}
+					},
 					'keturunan': {
 						validators: {
 							notEmpty: {
