@@ -518,49 +518,33 @@ class SaringanController extends Controller
         return Excel::download(new Penyaluran($programCode, $institusi), 'SenaraiPenyaluran.xlsx');
     }
 
-    public function kemaskiniInfoCek(Request $request, $id)
+    public function kemaskiniInfoCek(Request $request)
     {
-        // Use $smoku_id to associate the data with a specific smoku_id
-        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
-        
-        // Retrieve and process the form data from $request
-        $existingRecord = Permohonan::where('id', $id)->first();
+        // Get the selected item IDs from the form
+        $selectedItemIds = $request->input('selected_items');
+        // dd($selectedItemIds);
 
-        if ($existingRecord) {
-            // Update the respective row in permohonan_kelulusan table
-            $existingRecord->yuran_dibayar = $request->yuranDibayar;
-            $existingRecord->wang_saku_dibayar = $request->wangSakuDibayar;
-            $existingRecord->no_baucer = $request->noBaucer;
-            $existingRecord->perihal = $request->perihal;
-            $existingRecord->tarikh_baucer = $request->tarikhBaucer;
-            $existingRecord->save();
+        if ($selectedItemIds !== null)
+        {
 
-            // Update permohonan table
-            Permohonan::where('id', $id)->update([
-                'status' => 8,
-            ]);
+            foreach ($selectedItemIds as $itemId){
+                
+                $permohonan = Permohonan::orderBy('id', 'desc')->where('id', '=', $itemId)->first();
+                if ($permohonan != null) {
+                    Permohonan::where('id' ,$itemId)
+                    ->update([
+                        'no_cek' => $request->noCek,
+                        'tarikh_transaksi' => $request->tarikhTransaksi,
 
-            // Update sejarah_permohonan table
-            $sejarah = new SejarahPermohonan([
-                'smoku_id' => $smoku_id,
-                'permohonan_id' => $id,
-                'status' => 8,
-            ]);
-            $sejarah->save();
+                    ]);
+                    
+                }
+                // dd('okayyy');
+                
+            }
         }
 
-        //filter for keputusan
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
-        $dibayar = Permohonan::orderBy('id', 'desc')
-        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('created_at', [$startDate, $endDate]);
-        })
-        ->where('permohonan.status', '=', '8')->get();
-
-        //return redirect()->route('penyelaras.senarai.dibayar', compact('dibayar'));
-        return view('permohonan.sekretariat.pembayaran.senarai');
+        return back();
     }
 
     public function maklumatPembayaran($id)

@@ -268,9 +268,10 @@
                                                     <th class="text-center" style="width: 3% !important;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
                                                     <th style="width: 10%"><b>ID Permohonan</b></th>
                                                     <th style="width: 20%"><b>Nama</b></th>
-                                                    <th style="width: 21%"><b>Nama Kursus</b></th>
                                                     <th style="width: 25%"><b>Institusi Pengajian</b></th>
-                                                    <th style="width: 8%" class="text-center"><b>Tarikh Permohonan</b></th>
+                                                    <th style="width: 21%"><b>No Baucer</b></th>
+                                                    <th style="width: 8%" class="text-center"><b>Tarikh Baucer</b></th>
+                                                    <th style="width: 8%" class="text-center"><b>No Cek</b></th>
                                                     <th style="width: 8%" class="text-center"><b>Tarikh Dibayar</b></th>
                                                     <th style="width: 8%" class="text-center"><b>Status</b></th>
                                                 </tr>
@@ -349,9 +350,10 @@
                                                                     <a href="{{ url('permohonan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                                 </td>
                                                                 <td style="width: 20%">{{$pemohon}}</td>
-                                                                <td style="width: 21%">{{$kursus}}</td>
                                                                 <td style="width: 25%">{{$nama_institusi}}</td>
-                                                                <td class="text-center" style="width: 8%">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                                <td style="width: 21%">{{$item['no_baucer']}}</td>
+                                                                <td class="text-center" style="width: 8%">{{date('d/m/Y', strtotime($item['tarikh_baucer']))}}</td>
+                                                                <td style="width: 21%">{{$item['no_cek']}}</td>
                                                                 <td class="text-center" style="width: 8%">{{date('d/m/Y', strtotime($item['tarikh_transaksi']))}}</td>
                                                                 @if ($item['status']=='6')
                                                                     <td class="text-center" style="width: 8%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
