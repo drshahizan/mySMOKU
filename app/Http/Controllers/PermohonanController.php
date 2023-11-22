@@ -353,7 +353,7 @@ class PermohonanController extends Controller
         $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
         //UPLOAD DOKUMEN BY JAVASCRIPT
 
-        return redirect()->route('viewpermohonan');
+        //return redirect()->route('viewpermohonan');
 
     }
 
