@@ -11,11 +11,7 @@
 			font-size: 22px;
 		}
 	</style>
-	<script>
-	$(document).ready(function(){
-		$('[data-bs-toggle="tooltip"]').tooltip();
-	});
-	</script>	
+		
 
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
@@ -1548,11 +1544,11 @@
 <!--begin::Javascript-->
 
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-		<script src="/assets/js/scripts.bundle.js"></script>
+		<script src="../assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="/assets/js/custom/utilities/modals/create-account.js"></script>
+		<script src="../assets/js/custom/utilities/modals/create-account.js"></script>
 
 
 		<!--end::Custom Javascript-->
@@ -1575,6 +1571,11 @@
 				
 			});
 		</script> 
+		<script type='text/javascript'>
+			$(document).ready(function(){
+				$('[data-bs-toggle="tooltip"]').tooltip();
+			});
+			</script>
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
 			function myFunction() {
