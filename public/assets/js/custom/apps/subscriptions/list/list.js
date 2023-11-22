@@ -23,8 +23,9 @@ var KTSubscriptionsList = function () {
         datatable = $(table).DataTable({
             "info": false,
             'order': [],
-            "pageLength": 10,
             "lengthChange": false,
+            "paging": false, // Hide Previous and Next buttons
+            'dom': 'rti', // Customize the table controls (r - processing, t - table, i - information)
             'columnDefs': [
                 { orderable: false, targets: 0 }, // Disable ordering on column 0 (checkbox)
                 { orderable: false, targets: 6 }, // Disable ordering on column 6 (actions)                

@@ -6,6 +6,7 @@ use App\Models\Akademik;
 use App\Models\ButiranPelajar;
 use App\Models\Dokumen;
 use App\Models\EmelKemaskini;
+use App\Models\InfoIpt;
 use App\Models\JumlahTuntutan;
 use App\Models\Kelulusan;
 use App\Models\Peperiksaan;
@@ -494,12 +495,17 @@ class SaringanController extends Controller
     }
 
     //pembayaran
-    public function senaraiPembayaran()
+    public function senaraiPembayaran(Request $request)
     {
         $permohonan = Permohonan::where('status', '8')->orderBy('created_at', 'DESC')->get();
         $status_kod=0;
         $status = null;
-        return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status'));
+
+        
+        $institusiPengajian = InfoIpt::all()->where('jenis_institusi','UA')->sortBy('nama_institusi');
+
+
+        return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status', 'institusiPengajian'));
     }
 
     public function kemaskiniInfoCek(Request $request, $id)
