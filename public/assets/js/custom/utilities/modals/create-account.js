@@ -206,13 +206,13 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
-					'negeri_lahir': {
-						validators: {
-							notEmpty: {
-								message: 'Negeri Lahir diperlukan'
-							}
-						}
-					},
+					// 'negeri_lahir': {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'Negeri Lahir diperlukan'
+					// 		}
+					// 	}
+					// },
 					'keturunan': {
 						validators: {
 							notEmpty: {
