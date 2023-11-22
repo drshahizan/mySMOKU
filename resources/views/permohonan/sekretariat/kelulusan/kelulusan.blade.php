@@ -377,7 +377,7 @@
                                                             
                                                             @if ($jenis_institusi == "UA")
                                                                 <tr>
-                                                                    <td class="text-center" style="width: 3%;><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
+                                                                    <td class="text-center" style="width: 3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
                                                                     <td style="width: 10%"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
                                                                     <td style="width: 20%">{{$pemohon}}</td>
                                                                     <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       

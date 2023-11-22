@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Exports\Penyaluran;
 use App\Mail\SaringanMail;
 use App\Models\Akademik;
 use App\Models\ButiranPelajar;
@@ -20,7 +22,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 class SaringanController extends Controller
 {
@@ -504,8 +506,16 @@ class SaringanController extends Controller
         
         $institusiPengajian = InfoIpt::all()->where('jenis_institusi','UA')->sortBy('nama_institusi');
 
-
         return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status', 'institusiPengajian'));
+    }
+
+    public function cetakSenaraiPenyaluranExcel(Request $request, $programCode)
+    {
+        
+        $institusi = $request->input('institusi');
+        // dd($institusi);
+
+        return Excel::download(new Penyaluran($programCode, $institusi), 'SenaraiPenyaluran.xlsx');
     }
 
     public function kemaskiniInfoCek(Request $request, $id)

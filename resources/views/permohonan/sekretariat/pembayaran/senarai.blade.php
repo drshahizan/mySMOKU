@@ -216,17 +216,17 @@
                                         <div data-kt-subscription-table-filter="form">
                                             <!--begin::Input group-->
                                             <div class="row mb-10">
-                                                <div class="col-md-10 fv-row">
+                                                <div class="col-md-8 fv-row">
                                                     <select name="institusi" class="form-select custom-width-select js-example-basic-single">
                                                         <option value="">Pilih Institusi Pengajian</option>
                                                         @foreach ($institusiPengajian as $institusi)
-                                                            <option value="{{ $institusi->nama_institusi }}" {{ Request::get('institusi') == $institusi->nama_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                            <option value="{{ $institusi->nama_institusi }}" >{{ $institusi->nama_institusi }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="col-md-2 text-end fv-row">
+                                                <div class="col-md-2 fv-row">
                                                     <!--begin::Actions-->
-                                                    <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" style="height: 100%;">
+                                                    <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
                                                         <i class="ki-duotone ki-filter fs-2">
                                                             <span class="path1"></span>
                                                             <span class="path2"></span>
@@ -234,8 +234,15 @@
                                                     </button>
                                                     <!--end::Actions-->
                                                 </div>
+                                                <div class="col-md-2 text-end fv-row" >  
+                                                    <a id="exportLink" href="{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round" style=" width: 150%;">
+                                                        <i class="fa fa-file-excel" style="color: black;"></i> Excel
+                                                    </a> 
+                                                </div>
+                                                
                                             </div>
                                             <!--end::Input group-->
+                                            
                                         </div>
                                         <!--end::Content-->
                                         <!--end::Filter-->
@@ -534,6 +541,16 @@
             }
         }
 
+    </script>
+    <script>
+        function applyFilter() {
+            var selectedInstitusi = $('[name="institusi"]').val();
+            // alert(selectedInstitusi);
+            
+            // Update the export link with the selected institusi
+            var exportLink = document.getElementById('exportLink');
+            exportLink.href = "{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+        }
     </script>
     <!--begin::Javascript-->
 
