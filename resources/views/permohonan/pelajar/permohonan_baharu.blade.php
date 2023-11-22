@@ -915,7 +915,7 @@
 							<label class="form-label">Alamat Tetap</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<textarea id="alamat_waris" name="alamat_waris" class="form-control form-control-lg form-control-solid" rows="2"></textarea>
+							<textarea id="alamat_waris" name="alamat_waris" class="form-control form-control-lg form-control-solid" rows="2" style="text-transform: uppercase;"></textarea>
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
