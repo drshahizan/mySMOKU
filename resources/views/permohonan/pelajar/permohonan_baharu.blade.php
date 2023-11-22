@@ -423,7 +423,7 @@
 
 
 							// Remove state and city from the address
-							$trimmedAddress = str_replace([$selectedState, $selectedCity, $postcode], '', $smoku->alamat_tetap);
+							$trimmedAddress = str_replace([$selectedCity, $selectedState, $postcode], '', $smoku->alamat_tetap);
 
 							// Trim any extra whitespaces
 							$trimmedAddress = trim($trimmedAddress);
@@ -578,7 +578,7 @@
 
 
 							// Remove state and city from the address
-							$trimmedAddress_surat = str_replace([$selectedState_surat, $selectedCity_surat, $postcode_surat], '', $smoku->alamat_surat_menyurat);
+							$trimmedAddress_surat = str_replace([$selectedCity_surat, $selectedState_surat, $postcode_surat], '', $smoku->alamat_surat_menyurat);
 
 							// Trim any extra whitespaces
 							$trimmedAddress_surat = trim($trimmedAddress_surat);
