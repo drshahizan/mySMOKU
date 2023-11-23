@@ -334,7 +334,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="bangsa" name="bangsa" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true">
+									<select id="keturunan" name="keturunan" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true">
 										<option value="{{$butiranPelajar->kod_keturunan}}">{{$butiranPelajar->keturunan}}</option>
 									</select>
 									<!--end::Input-->
@@ -482,7 +482,7 @@
 								<!--end::Input-->
 							</div>
 							<div class="row mb-10">
-								<div class="col-md-4 fv-row">
+								<div class="col-md-5 fv-row">
 									<!--begin::Label-->
 									<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
 									<!--end::Label-->
@@ -499,7 +499,7 @@
 									</div>
 									<!--end::Input wrapper-->
 								</div>
-								<div class="col-md-5 fv-row">
+								<div class="col-md-4 fv-row">
 									<!--begin::Label-->
 									<label class=" fs-6 fw-semibold form-label mb-2">Bandar</label>
 									<!--end::Label-->
@@ -531,7 +531,7 @@
 							</div>
 						<!--end::Input group-->
 						<div class="row mb-10">
-							<div class="col-md-4 fv-row">
+							<div class="col-md-5 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Alamat emel</label>
 								<!--end::Label-->
@@ -555,7 +555,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-4 fv-row">
+							<div class="col-md-3 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">No. Tel Rumah
 								</label>
@@ -588,7 +588,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-4 fv-row">
+							<div class="col-md-4 fv-row" id="div_pekerjaan">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Pekerjaan
 								</label>
@@ -601,7 +601,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-4 fv-row">
+							<div class="col-md-4 fv-row" id="div_pendapatan">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Pendapatan
 								</label>
@@ -892,7 +892,7 @@
 							<!--end::Label-->
 							<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" disabled>
 								@foreach ($institusi as $institusi)
-								<option value="{{$institusi->id_institusi}}" {{$butiranPelajar->id_institusi == $institusi->id_institusi ? 'selected' : ''}}>{{ $institusi->nama_institusi}}</option>
+								<option value="{{$institusi->id_institusi}}" {{$butiranPelajar->id_institusi == $institusi->id_institusi ? 'selected' : ''}}>{{ strtoupper($institusi->nama_institusi)}}</option>
 								@endforeach
 							</select>
 						</div>
@@ -903,7 +903,7 @@
 							</label>
 							<!--end::Label-->
 							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" disabled>
-								<option value="{{ $butiranPelajar->nama_kursus}}">{{ $butiranPelajar->nama_kursus}}</option>
+								<option value="{{ $butiranPelajar->nama_kursus}}">{{ strtoupper($butiranPelajar->nama_kursus)}}</option>
 							</select>
 						</div>
 						<!--end::Input group-->
@@ -1612,6 +1612,31 @@
 		</script>
 
 		<script>
+			//BEKERJA
+			$(document).ready(function(){
+				var status_pekerjaan = document.getElementById('status_pekerjaan').value;
+				if ( this.value == "BEKERJA"){
+					$("#div_pekerjaan").show();
+					$("#div_pendapatan").show();
+				}
+				else {
+					$("#div_pekerjaan").hide();
+					$("#div_pendapatan").hide();
+				}
+				
+				$('#status_pekerjaan').on('change', function() {
+				if ( this.value == "BEKERJA"){
+					$("#div_pekerjaan").show();
+					$("#div_pendapatan").show();
+				}
+				else {
+					$("#div_pekerjaan").hide();
+					$("#div_pendapatan").hide();
+				}
+				});
+
+			});
+
 			//WARIS LAIN-LAIN
 			$(document).ready(function(){
 				$("#div_waris_lain").hide();

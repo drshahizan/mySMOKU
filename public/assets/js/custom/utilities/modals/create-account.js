@@ -314,6 +314,13 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
+					'pekerjaan_waris': {
+						validators: {
+							notEmpty: {
+								message: 'Pekerjaan Waris diperlukan'
+							}
+						}
+					},
 					'pendapatan_waris': {
 						validators: {
 							notEmpty: {
@@ -363,7 +370,7 @@ var KTCreateAccount = function () {
 					'tarikh_tamat': {
 						validators: {
 							notEmpty: {
-								message: 'Tarikh Mula diperlukan'
+								message: 'Tarikh Tamat diperlukan'
 							}
 						}
 					},
@@ -419,15 +426,22 @@ var KTCreateAccount = function () {
 		validations.push(FormValidation.formValidation(
 			form,
 			{
-				/*fields: {
-					'amaun': {
+				fields: {
+					'amaun_yuran': {
 						validators: {
 							notEmpty: {
-								message: 'Amaun diperlukan'
+								message: 'Amaun Yuran diperlukan'
+							}
+						}
+					},
+					'amaun_wang_saku': {
+						validators: {
+							notEmpty: {
+								message: 'Amaun Wang Saku diperlukan'
 							}
 						}
 					}
-				},*/
+				},
 
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),

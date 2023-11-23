@@ -280,8 +280,8 @@
 									<!--begin::Col-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<select id="negeri_lahir" name="negeri_lahir" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-											<option value="">Pilih</option>
+										<select id="negeri_lahir" name="negeri_lahir" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option></option>
 											@foreach ($negeri as $negerilahir)	
 											<option value="{{ $negerilahir->id}}">{{ $negerilahir->negeri}}</option> 
 											@endforeach
@@ -348,8 +348,11 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="bangsa" name="bangsa" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true">
-										<option value="{{$smoku->kod_keturunan}}">{{$smoku->keturunan}}</option>
+									<select id="keturunan" name="keturunan" class="form-select form-select-lg form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option></option>
+										@foreach ($keturunan as $keturunan)
+											<option value="{{$keturunan->id}}" {{$smoku->keturunan == $keturunan->id ? 'selected' : ''}}>{{ $keturunan->keturunan}}</option>
+										@endforeach
 									</select>
 									<!--end::Input-->
 								</div>
@@ -362,8 +365,8 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="agama" name="agama" class="form-select form-select-lg form-select-solid" data-control="select2" data-hide-search="true">
-										<option value="">Pilih</option>
+									<select id="agama" name="agama" class="form-select form-select-lg form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option></option>
 										@foreach ($agama as $agama)	
 										<option value="{{ $agama->id}}">{{ $agama->agama}}</option> 
 										@endforeach
@@ -447,8 +450,8 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="alamat_tetap_negeri" name="alamat_tetap_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-										<option value="">Pilih</option>
+									<select id="alamat_tetap_negeri" name="alamat_tetap_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option></option>
 										@foreach ($negeri as $negeritetap)	
 										<option value="{{$negeritetap->id}}" {{$negeritetap->negeri == $selectedState ? 'selected' : ''}}>{{ $negeritetap->negeri}}</option>
 										@endforeach
@@ -465,8 +468,8 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-										<option value="">Pilih</option>
+									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option></option>
 										@foreach ($bandar as $bandartetap)	
 										<option value="{{$bandartetap->id}}" {{$bandartetap->bandar == $selectedCity ? 'selected' : ''}}>{{ $bandartetap->bandar}}</option>
 										@endforeach
@@ -497,8 +500,8 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='parlimen' name='parlimen' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-										<option value="">Pilih</option>
+									<select id='parlimen' name='parlimen' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option></option>
 										@foreach ($parlimen as $parlimen)	
 										<option value="{{$parlimen->id}}">{{ $parlimen->kod_parlimen}} - {{ strtoupper($parlimen->parlimen)}}</option>
 										@endforeach
@@ -514,8 +517,8 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="dun" name="dun" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-										<option value="">Pilih</option>
+									<select id="dun" name="dun" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option></option>
 										@foreach ($dun as $dun)	
 										<option value="{{$dun->id}}">{{ $dun->kod_dun}} - {{ strtoupper($dun->dun)}}</option>
 										@endforeach
@@ -621,8 +624,8 @@
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<select id="alamat_surat_negeri" name="alamat_surat_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-											<option value="">Pilih</option>
+										<select id="alamat_surat_negeri" name="alamat_surat_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option></option>
 											@foreach ($negeri as $negerisurat)	
 											<option value="{{$negerisurat->id}}" {{$negerisurat->negeri == $selectedState_surat ? 'selected' : ''}}>{{ $negerisurat->negeri}}</option>
 											@endforeach
@@ -638,8 +641,8 @@
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<select id='alamat_surat_bandar' name='alamat_surat_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-											<option value="">Pilih</option>
+										<select id='alamat_surat_bandar' name='alamat_surat_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option></option>
 											@foreach ($bandar as $bandar)	
 											<option value="{{$bandar->id}}" {{$bandar->bandar == $selectedCity_surat ? 'selected' : ''}}>{{ $bandar->bandar}}</option>
 											@endforeach
@@ -721,7 +724,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-4 fv-row">
+							<div class="col-md-4 fv-row" id="div_pekerjaan">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Pekerjaan
 								</label>
@@ -729,12 +732,12 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="pekerjaan" name="pekerjaan" placeholder="" value="{{$smoku->pekerjaan}}" />
+									<input type="text" class="form-control form-control-solid" id="pekerjaan" name="pekerjaan" placeholder="" value="{{$smoku->pekerjaan}}" style="text-transform: uppercase;"/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-4 fv-row">
+							<div class="col-md-4 fv-row" id="div_pendapatan">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Pendapatan
 								</label>
@@ -882,6 +885,7 @@
 							<div class="col-md-6 fv-row">
 								<label class="form-label mb-6">Hubungan Waris</label>
 								<select id="hubungan_waris" name="hubungan_waris" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih">
+									<option></option>
 									@foreach ($hubungan as $hubungan)
 									<option value="{{$hubungan->kod_hubungan}}" {{$smoku->hubungan_waris == $hubungan->kod_hubungan ? 'selected' : ''}}>{{ $hubungan->hubungan}}</option>
 									@endforeach
@@ -904,7 +908,7 @@
 								<label class="form-label mb-6">(Jika Lain-lain) Sila Nyatakan:</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="text" class="form-control form-control-lg form-control-solid" id="hubungan_lain_waris" name="hubungan_lain_waris" placeholder="" value="" />
+								<input type="text" class="form-control form-control-lg form-control-solid" id="hubungan_lain_waris" name="hubungan_lain_waris" placeholder="" value="" style="text-transform: uppercase;"/>
 								<!--end::Input-->													
 							</div>
 							
@@ -921,14 +925,13 @@
 						<div class="row mb-10">
 							<div class="col-md-4 fv-row">
 								<!--begin::Label-->
-								<label class="fs-6 fw-semibold form-label mb-2">Negeri
-								</label>
+								<label class="fs-6 fw-semibold form-label mb-2">Negeri</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="alamat_negeri_waris" name="alamat_negeri_waris" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-										<option value="">Pilih</option>
+									<select id="alamat_negeri_waris" name="alamat_negeri_waris" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option></option>
 										@foreach ($negeri as $negeri)	
 										<option value="{{ $negeri->id}}">{{ $negeri->negeri}}</option> 
 										@endforeach
@@ -944,8 +947,8 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='alamat_bandar_waris' name='alamat_bandar_waris' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-										<option value="">Pilih</option>
+									<select id='alamat_bandar_waris' name='alamat_bandar_waris' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option></option>
 									</select>
 									<!--end::Input-->
 								</div>
@@ -975,7 +978,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="pekerjaan_waris" name="pekerjaan_waris" placeholder="" value="{{$smoku->pekerjaan_waris}}"  />
+									<input type="text" class="form-control form-control-solid" id="pekerjaan_waris" name="pekerjaan_waris" placeholder="" value="{{$smoku->pekerjaan_waris}}"  style="text-transform: uppercase;"/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -1024,11 +1027,11 @@
 							<!--end::Label-->
 							<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 								@if($akademikmqa && $akademikmqa->id_institusi)
-								   <option value="{{ $akademikmqa->id_institusi }}">{{ $akademikmqa->nama_institusi }}</option>
+								   <option value="{{ $akademikmqa->id_institusi }}">{{ strtoupper($akademikmqa->nama_institusi) }}</option>
 								@else
 								   @foreach ($infoipt as $infoipt)
 									  <option></option>
-									  <option value="{{ $infoipt->id_institusi }}">{{ $infoipt->nama_institusi }}</option>
+									  <option value="{{ $infoipt->id_institusi }}">{{ strtoupper($infoipt->nama_institusi) }}</option>
 								   @endforeach
 								@endif
 							 </select>							 
@@ -1041,7 +1044,7 @@
 							<!--end::Label-->
 							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 								@if($akademikmqa && $akademikmqa->nama_kursus)
-									<option value="{{ $akademikmqa->nama_kursus}}">{{ $akademikmqa->nama_kursus}}</option>
+									<option value="{{ $akademikmqa->nama_kursus}}">{{ strtoupper($akademikmqa->nama_kursus)}}</option>
 								@else
 									<option value=""></option>
 								@endif
@@ -1096,13 +1099,9 @@
 									<!--begin::Input wrapper-->
 									<select id="tempoh_pengajian" name="tempoh_pengajian" onchange=dateCheck() class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
 										<option></option>
-										<option value="1">1</option>
-										<option value="1.5">1.5</option>
-										<option value="2">2</option>
-										<option value="2.5">2.5</option>
-										<option value="3">3</option>
-										<option value="3.5">3.5</option>
-										<option value="4">4</option>
+										@for($i = 1; $i <= 4; $i += 0.5)
+											<option value="{{ ($i == (int)$i) ? (int)$i : $i }}">{{ ($i == (int)$i) ? (int)$i : number_format($i, 1) }}</option>
+										@endfor
 									</select>
 									<!--end::Input wrapper-->
 							</div>
@@ -1132,12 +1131,12 @@
 								</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true">
-										<option value="">Pilih</option>
+									<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option></option>
 											@php
 												$currentYear = date('Y');
 											@endphp
-											@for($year = $currentYear; $year <= ($currentYear + 1); $year++)
+											@for($year = $currentYear - 1; $year <= ($currentYear + 1); $year++)
 												@php
 													$sesi = $year . '/' . ($year + 1);
 												@endphp
@@ -1785,6 +1784,32 @@
 		</script>
 
 		<script>
+
+			//BEKERJA
+			$(document).ready(function(){
+				var status_pekerjaan = document.getElementById('status_pekerjaan').value;
+				if ( this.value == "BEKERJA"){
+					$("#div_pekerjaan").show();
+					$("#div_pendapatan").show();
+				}
+				else {
+					$("#div_pekerjaan").hide();
+					$("#div_pendapatan").hide();
+				}
+				
+				$('#status_pekerjaan').on('change', function() {
+				if ( this.value == "BEKERJA"){
+					$("#div_pekerjaan").show();
+					$("#div_pendapatan").show();
+				}
+				else {
+					$("#div_pekerjaan").hide();
+					$("#div_pendapatan").hide();
+				}
+				});
+
+			});
+
 			//WARIS LAIN-LAIN
 			$(document).ready(function(){
 				$("#div_waris_lain").hide();

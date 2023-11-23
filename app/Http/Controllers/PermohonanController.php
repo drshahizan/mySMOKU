@@ -30,6 +30,7 @@ use App\Models\Agama;
 use App\Models\Dun;
 use App\Models\EmelKemaskini;
 use App\Models\JumlahTuntutan;
+use App\Models\Keturunan;
 use App\Models\Parlimen;
 use App\Models\TamatPengajian;
 use Carbon\Carbon;
@@ -60,6 +61,7 @@ class PermohonanController extends Controller
         //dd($akademikmqa);
 
         $mod = Mod::all()->sortBy('kod_mod');
+        $keturunan = Keturunan::all()->sortBy('id');
         $biaya = SumberBiaya::all()->sortBy('kod_biaya');
         $penaja = Penaja::all()->sortBy('kod_penaja');
         $hubungan = Hubungan::all()->sortBy('kod_hubungan');
@@ -142,7 +144,7 @@ class PermohonanController extends Controller
             
         }else {
 
-            return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri','bandar','agama','parlimen','dun'));
+            return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri','bandar','agama','parlimen','dun','keturunan'));
 
         }
 
@@ -222,6 +224,7 @@ class PermohonanController extends Controller
             [
                 'umur' => $request->umur,
                 'email' => $request->emel,
+                'keturunan' => $request->keturunan,
             ]
         );
 
