@@ -933,8 +933,8 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
-									<option value="">Pilih</option>
+								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-placeholder="Pilih" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+									<option></option>
 									@foreach ($mod as $mod)
 									<option value="{{$mod->kod_mod}}" {{$butiranPelajar->mod == $mod->kod_mod ? 'selected' : ''}}>{{ $mod->mod}}</option>
 									@endforeach
@@ -950,8 +950,8 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<select id="tempoh_pengajian" name="tempoh_pengajian" onchange=dateCheck() class="form-select form-select-solid" data-control="select2" data-hide-search="true" required {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
-										<option value="">Pilih</option>
+									<select id="tempoh_pengajian" name="tempoh_pengajian" onchange=dateCheck() class="form-select form-select-solid" data-placeholder="Pilih" data-control="select2" data-hide-search="true" required {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+										<option></option>
 										@if(empty($butiranPelajar->tempoh_pengajian))
 											@for($i = 1; $i <= 4; $i += 0.5)
 												<option value="{{ ($i == (int)$i) ? (int)$i : $i }}">{{ ($i == (int)$i) ? (int)$i : number_format($i, 1) }}</option>
@@ -976,8 +976,8 @@
 								<!--begin::Row-->
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
-										<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
-											<option value="">Pilih</option>
+										<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+											<option></option>
 											@if(!empty($butiranPelajar->bil_bulan_per_sem))
 												<option value="{{$butiranPelajar->bil_bulan_per_sem}}" selected>{{$butiranPelajar->bil_bulan_per_sem}}</option>
 											@else
@@ -998,20 +998,20 @@
 								</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
-										<option value="">Pilih</option>
+									<select id="sesi" name="sesi" class="form-select form-select-solid" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+										<option></option>
 										@if(empty($butiranPelajar->sesi))
 											@php
 												$currentYear = date('Y');
 											@endphp
-											@for($year = $currentYear; $year <= ($currentYear + 1); $year++)
+											@for($year = $currentYear - 1; $year <= ($currentYear + 1); $year++)
 												@php
 													$sesi = $year . '/' . ($year + 1);
 												@endphp
 												<option value="{{ $sesi }}">{{ $sesi }}</option>
 											@endfor
 										@else
-											@for($year = date('Y'); $year <= (date('Y') + 1); $year++)
+											@for($year = date('Y') - 1; $year <= (date('Y') + 1); $year++)
 												@php
 													$sesi = $year . '/' . ($year + 1);
 												@endphp
@@ -1074,21 +1074,12 @@
 								<!--begin::Row-->
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
-										<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
-											<option value="">Pilih</option>
+										<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+											<option></option>
 											@if(empty($butiranPelajar->sem_semasa))
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5">5</option>
-												<option value="6">6</option>
-												<option value="7">7</option>
-												<option value="8">8</option>
-												<option value="9">9</option>
-												<option value="10">10</option>
-												<option value="11">11</option>
-												<option value="12">12</option>
+												@for($i = 1; $i <= 12; $i++)
+													<option value="{{ $i }}">{{ $i }}</option>
+												@endfor
 											@else
 												@for($i = 1; $i <= 12; $i++)
 													@if($butiranPelajar->sem_semasa == $i)
@@ -1116,8 +1107,8 @@
 								<!--begin::Row-->
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
-										<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
-											<option value="">Pilih</option>
+										<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" data-placeholder="Pilih" onchange="select1()" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+											<option></option>
 											@foreach ($biaya as $biaya)
 											<option value="{{$biaya->kod_biaya}}" {{$butiranPelajar->sumber_biaya == $biaya->kod_biaya ? 'selected' : ''}}>{{ $biaya->biaya}}</option>
 											@endforeach
@@ -1148,8 +1139,8 @@
 									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a>
 								</label>															
 								<!--end::Label-->
-								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
-									<option value="">Pilih</option>
+								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+									<option></option>
 									@foreach ($penaja as $penaja)
 									<option value="{{$penaja->kod_penaja}}" {{$butiranPelajar->nama_penaja == $penaja->kod_penaja ? 'selected' : ''}}>{{ $penaja->penaja}}</option>
 									@endforeach
