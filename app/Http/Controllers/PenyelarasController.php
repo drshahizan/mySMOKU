@@ -420,7 +420,7 @@ class PenyelarasController extends Controller
 
         // Update an Permohonan record based on smoku_id
         Permohonan::updateOrCreate(
-            ['smoku_id' => $id, 'status' => 1],
+            ['smoku_id' => $id],
             [
                 'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar,
                 'program' => 'BKOKU',

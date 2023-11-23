@@ -295,7 +295,7 @@ class PermohonanController extends Controller
         // Find the Permohonan record with the specified smoku_id
         //$permohonan = Permohonan::where('smoku_id', $smoku_id->id)->first();
         Permohonan::updateOrCreate(
-            ['smoku_id' => $smoku_id->id, 'status' => 1], // Condition to find the record
+            ['smoku_id' => $smoku_id->id], // Condition to find the record
             [
                 'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
                 'program' => 'BKOKU',
