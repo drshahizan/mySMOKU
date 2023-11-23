@@ -283,8 +283,8 @@
 									<!--begin::Col-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<select id="negeri_lahir" name="negeri_lahir" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true">
-											<option value="">Pilih</option>
+										<select id="negeri_lahir" name="negeri_lahir" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option></option>
 											@foreach ($negeri as $negerilahir)	
 											<option value="{{ $negerilahir->id}}">{{ $negerilahir->negeri}}</option> 
 											@endforeach

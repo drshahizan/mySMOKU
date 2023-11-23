@@ -235,8 +235,8 @@ class PenyelarasController extends Controller
         set_time_limit(1200);
         
         $smoku = Smoku:: join('bk_jantina','bk_jantina.kod_jantina','=','smoku.jantina')
-            ->join('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
-            ->join('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
+            ->leftJoin('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
+            ->leftJoin('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
             ->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
             ->where('smoku.id', $id)
             ->get(['smoku.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*']);
@@ -255,13 +255,13 @@ class PenyelarasController extends Controller
 
         $permohonan = Permohonan::where('smoku_id', $id)->first();
         $butiranPelajar = ButiranPelajar::join('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
-        ->join('smoku_waris','smoku_waris.smoku_id','=','smoku_butiran_pelajar.smoku_id')
-        ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku_butiran_pelajar.smoku_id')
-        ->join('permohonan','permohonan.smoku_id','=','smoku_butiran_pelajar.smoku_id')
-        ->join('bk_jantina','bk_jantina.kod_jantina','=','smoku.jantina')
-        ->join('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
-        ->join('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
-        ->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
+        ->leftJoin('smoku_waris','smoku_waris.smoku_id','=','smoku_butiran_pelajar.smoku_id')
+        ->leftJoin('smoku_akademik','smoku_akademik.smoku_id','=','smoku_butiran_pelajar.smoku_id')
+        ->leftJoin('permohonan','permohonan.smoku_id','=','smoku_butiran_pelajar.smoku_id')
+        ->leftJoin('bk_jantina','bk_jantina.kod_jantina','=','smoku.jantina')
+        ->leftJoin('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
+        ->leftJoin('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
+        ->leftJoin('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
         ->get(['smoku_butiran_pelajar.*','smoku_butiran_pelajar.alamat_tetap as alamat_tetap_baru','smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
         ->where('smoku_id', $id);
         
