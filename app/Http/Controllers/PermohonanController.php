@@ -294,19 +294,37 @@ class PermohonanController extends Controller
        
         // Find the Permohonan record with the specified smoku_id
         //$permohonan = Permohonan::where('smoku_id', $smoku_id->id)->first();
-        Permohonan::updateOrCreate(
-            ['smoku_id' => $smoku_id->id], // Condition to find the record
-            [
-                'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
-                'program' => 'BKOKU',
-                'yuran' => $request->yuran,
-                'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
-                'wang_saku' => $request->wang_saku,
-                'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
-                'perakuan' => $request->perakuan,
-                'status' => '1',
-            ]
-        );
+        // Permohonan::updateOrCreate(
+        //     ['smoku_id' => $smoku_id->id, 'status' => 1], // Condition to find the record
+        //     [
+        //         'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
+        //         'program' => 'BKOKU',
+        //         'yuran' => $request->yuran,
+        //         'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
+        //         'wang_saku' => $request->wang_saku,
+        //         'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
+        //         'perakuan' => $request->perakuan,
+        //         'status' => '1',
+        //     ]
+        // );
+         // // Retrieve or create a Permohonan record based on smoku_id
+         $permohonan = Permohonan::firstOrNew(['smoku_id' => $smoku_id->id]);
+
+         // Set the attributes
+         $permohonan->no_rujukan_permohonan = 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp;
+         $permohonan->program = 'BKOKU';
+         $permohonan->yuran = $request->yuran;
+         $permohonan->amaun_yuran = number_format($request->amaun_yuran, 2, '.', '');
+         $permohonan->wang_saku = $request->wang_saku;
+         $permohonan->amaun_wang_saku = number_format($request->amaun_wang_saku, 2, '.', '');
+         $permohonan->perakuan = $request->perakuan;
+         // Conditionally set the status
+         if ($permohonan->status == '1') {
+             $permohonan->status = '1';
+         }
+ 
+         // Save the record
+         $permohonan->save();
 
         // if ($permohonan) {
         //     // Check if the status is equal to 6

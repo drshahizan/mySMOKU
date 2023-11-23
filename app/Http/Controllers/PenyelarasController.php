@@ -419,35 +419,38 @@ class PenyelarasController extends Controller
         $akademik->save();
 
         // Update an Permohonan record based on smoku_id
-        Permohonan::updateOrCreate(
-            ['smoku_id' => $id],
-            [
-                'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar,
-                'program' => 'BKOKU',
-                'yuran' => $request->yuran,
-                'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
-                'wang_saku' => $request->wang_saku,
-                'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
-                'perakuan' => $request->perakuan,
-                'status' => '1',
-            ]
-        );
+        // Permohonan::updateOrCreate(
+        //     ['smoku_id' => $id, 'status' => 1],
+        //     [
+        //         'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar,
+        //         'program' => 'BKOKU',
+        //         'yuran' => $request->yuran,
+        //         'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
+        //         'wang_saku' => $request->wang_saku,
+        //         'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
+        //         'perakuan' => $request->perakuan,
+        //         'status' => '1',
+        //     ]
+        // );
        
         // // Retrieve or create a Permohonan record based on smoku_id
-        // $permohonan = Permohonan::firstOrNew(['smoku_id' => $id]);
+        $permohonan = Permohonan::firstOrNew(['smoku_id' => $id]);
 
-        // // Set the attributes
-        // $permohonan->no_rujukan_permohonan = 'B'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar;
-        // $permohonan->program = 'BKOKU';
-        // $permohonan->yuran = $request->yuran;
-        // $permohonan->amaun_yuran = number_format($request->amaun_yuran, 2, '.', '');
-        // $permohonan->wang_saku = $request->wang_saku;
-        // $permohonan->amaun_wang_saku = number_format($request->amaun_wang_saku, 2, '.', '');
-        // $permohonan->perakuan = $request->perakuan;
-        // $permohonan->status = '1';
+        // Set the attributes
+        $permohonan->no_rujukan_permohonan = 'B'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar;
+        $permohonan->program = 'BKOKU';
+        $permohonan->yuran = $request->yuran;
+        $permohonan->amaun_yuran = number_format($request->amaun_yuran, 2, '.', '');
+        $permohonan->wang_saku = $request->wang_saku;
+        $permohonan->amaun_wang_saku = number_format($request->amaun_wang_saku, 2, '.', '');
+        $permohonan->perakuan = $request->perakuan;
+        // Conditionally set the status
+        if ($permohonan->status == '1') {
+            $permohonan->status = '1';
+        }
 
-        // // Save the record
-        // $permohonan->save();
+        // Save the record
+        $permohonan->save();
 
         $permohonan_id = Permohonan::where('smoku_id',$id)->first();
         // Retrieve or create a SejarahPermohonan record based on smoku_id
