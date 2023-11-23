@@ -70,7 +70,7 @@
 								<td><a href="{{route('penyelaras.permohonan.baharu',$smoku->smoku_id)}}">{{ $smoku->no_rujukan_permohonan}}</a></td>
 								<td>{{ $pemohon}}</td>
 								<td>{{ $smoku->nama_kursus}}</td>
-								<td class="text-center">{{ $smoku->created_at->format('d/m/Y h:i:sa')}}</td>
+								<td class="text-center">{{ $smoku->created_at->format('d/m/Y')}}</td>
 								<td class="text-center"><button type="button" class="btn bg-baharu text-white">Baharu</button></td>
 							</tr>  
 							@endforeach	
