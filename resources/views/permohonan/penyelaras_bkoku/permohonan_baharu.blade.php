@@ -1588,6 +1588,50 @@
 
 			});
 
+			//dun
+			$(document).ready(function(){
+				$('#parlimen').on('change', function() {
+					var idparlimen = $(this).val();
+					// alert(idparlimen);
+					// Empty the dropdown
+					$('#dun').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: '/getDun/'+idparlimen,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var kod_dun = response['data'][i].kod_dun;
+											var dun = response['data'][i].dun.toUpperCase();
+
+											var option = "<option value='"+id+"'>"+kod_dun+"-"+dun+"</option>";
+
+											$("#dun").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
     		$(document).ready(function(){
 				$('#alamat_negeri_waris').on('change', function() {
 					var idnegeri = $(this).val();
