@@ -1197,18 +1197,9 @@
 									
 										<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 											<option></option>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-											<option value="7">7</option>
-											<option value="8">8</option>
-											<option value="9">9</option>
-											<option value="10">10</option>
-											<option value="11">11</option>
-											<option value="12">12</option>
+											@for ($i = 1; $i <= 12; $i++)
+												<option value="<?= $i ?>"><?= $i ?></option>
+											@endfor
 											
 										</select>
 									<!--end::Input wrapper-->
@@ -1928,8 +1919,9 @@
 						var id_institusi = response['data'][i].id_institusi;
 						var kod_peringkat = response['data'][i].kod_peringkat;
 						var nama_kursus = response['data'][i].nama_kursus;
+						var uppercaseValue  = response['data'][i].nama_kursus.toUpperCase();
 
-						var option = "<option value='"+nama_kursus+"'>"+nama_kursus+"</option>";
+						var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+"</option>";
 
 						$("#nama_kursus").append(option); 
 						

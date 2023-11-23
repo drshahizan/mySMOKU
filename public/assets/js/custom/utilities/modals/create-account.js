@@ -237,6 +237,17 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
+					'emel': {
+						validators: {
+							regexp: {
+                                regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                message: 'Bukan alamat emel yang sah',
+                            },
+							notEmpty: {
+								message: 'Alamat emel diperlukan'
+							}
+						}
+					},
 					'no_akaun_bank': {
 						validators: {
 							notEmpty: {
@@ -346,6 +357,20 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
+					'peringkat_pengajian': {
+						validators: {
+							notEmpty: {
+								message: 'Peringkat Pengajian diperlukan'
+							}
+						}
+					},
+					'nama_kursus': {
+						validators: {
+							notEmpty: {
+								message: 'Nama Kursus diperlukan'
+							}
+						}
+					},
 					'no_pendaftaran_pelajar': {
 						validators: {
 							notEmpty: {

@@ -29,6 +29,7 @@ use App\Models\Hubungan;
 use App\Models\Negeri;
 use App\Models\Bandar;
 use App\Models\DokumenESP;
+use App\Models\Dun;
 use App\Models\EmelKemaskini;
 use App\Models\Tuntutan;
 use App\Models\TuntutanItem;
@@ -38,6 +39,7 @@ use App\Models\Saringan;
 use App\Models\Kelulusan;
 use App\Models\Keturunan;
 use App\Models\MaklumatBank;
+use App\Models\Parlimen;
 use Carbon\Carbon;
 use DateTime;
 use GuzzleHttp\Client;
@@ -252,6 +254,9 @@ class PenyelarasController extends Controller
         $peringkat = PeringkatPengajian::all()->sortBy('id');
         $kursus = Kursus::all()->sortBy('nama_kursus');
         $mod = Mod::all()->sortBy('kod_mod');
+        $keturunan = Keturunan::all()->sortBy('id');
+        $parlimen = Parlimen::orderby("id","asc")->get();
+        $dun = Dun::orderby("id","asc")->get();
 
         $permohonan = Permohonan::where('smoku_id', $id)->first();
         $butiranPelajar = ButiranPelajar::join('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
@@ -268,9 +273,9 @@ class PenyelarasController extends Controller
 
         if ($permohonan && $permohonan->status >= '1') {
             $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
-            return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen','agama'));
+            return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen','agama','parlimen','dun','keturunan'));
         } else {
-            return view('permohonan.penyelaras_bkoku.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','mod','kursus','biaya','penaja','negeri','bandar','agama'));
+            return view('permohonan.penyelaras_bkoku.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','mod','kursus','biaya','penaja','negeri','bandar','agama','parlimen','dun','keturunan'));
         }
     }
 
@@ -326,15 +331,16 @@ class PenyelarasController extends Controller
             [
                 'umur' => $request->umur,
                 'email' => $request->emel,
+                'keturunan' => $request->keturunan,
             ]
         );
 
-        $permohonan = Permohonan::firstOrNew(['smoku_id' => $id]);
+        // $permohonan = Permohonan::firstOrNew(['smoku_id' => $id]);
 
-        $permohonan->program = 'BKOKU';
-        $permohonan->status = '1';
+        // $permohonan->program = 'BKOKU';
+        // $permohonan->status = '1';
 
-        $permohonan->save();
+        // $permohonan->save();
 
         $butiranPelajar = ButiranPelajar::firstOrNew(['smoku_id' => $id]);
 
@@ -344,6 +350,8 @@ class PenyelarasController extends Controller
         $butiranPelajar->alamat_tetap_negeri = $request->alamat_tetap_negeri;
         $butiranPelajar->alamat_tetap_bandar = $request->alamat_tetap_bandar;
         $butiranPelajar->alamat_tetap_poskod = $request->alamat_tetap_poskod;
+        $butiranPelajar->parlimen = $request->parlimen;
+        $butiranPelajar->dun = $request->dun;
         $butiranPelajar->alamat_surat_menyurat = $request->alamat_surat_menyurat;
         $butiranPelajar->alamat_surat_negeri = $request->alamat_surat_negeri;
         $butiranPelajar->alamat_surat_bandar = $request->alamat_surat_bandar;
@@ -352,6 +360,9 @@ class PenyelarasController extends Controller
         $butiranPelajar->tel_rumah = $request->tel_rumah;
         //$butiranPelajar->no_akaun_bank = $request->no_akaun_bank;
         $butiranPelajar->emel = $request->emel;
+        $butiranPelajar->status_pekerjaan = $request->status_pekerjaan;
+        $butiranPelajar->pekerjaan = $request->pekerjaan;
+        $butiranPelajar->pendapatan = $request->pendapatan;
 
         // Save the record
         $butiranPelajar->save();
@@ -403,14 +414,16 @@ class PenyelarasController extends Controller
 
         // Update an Permohonan record based on smoku_id
         Permohonan::updateOrCreate(
-            ['smoku_id' => $id],
+            ['smoku_id' => $id, 'status' => 1],
             [
                 'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar,
+                'program' => 'BKOKU',
                 'yuran' => $request->yuran,
                 'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
                 'wang_saku' => $request->wang_saku,
                 'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
                 'perakuan' => $request->perakuan,
+                'status' => '1',
             ]
         );
        
@@ -553,6 +566,10 @@ class PenyelarasController extends Controller
             } else {
                 // Handle cases where $dokumen or $catatan are not valid arrays
             }
+        
+        //emel kepada pelajar
+        $emel_pelajar = Smoku::where('id',$smoku_id->id)->first();
+        $cc_pelajar = $emel_pelajar->email;
 
         //emel kepada sekretariat
         $user_sekretariat = User::where('tahap',3)->first();
@@ -565,7 +582,7 @@ class PenyelarasController extends Controller
         $emel = EmelKemaskini::where('emel_id',13)->first();
         //dd($cc,$user->email);
 
-        Mail::to($user->email)->cc($cc)->send(new PermohonanHantar($catatan,$emel));    
+        Mail::to($user->email)->cc($cc, $cc_pelajar)->send(new PermohonanHantar($catatan,$emel));    
 
         return redirect()->route('penyelaras.dashboard')->with('success', 'Permohonan pelajar telah dihantar.');
 
