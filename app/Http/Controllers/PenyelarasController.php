@@ -606,6 +606,7 @@ class PenyelarasController extends Controller
         ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
         ->where('permohonan.status','=', '2')
         ->where('penyelaras_id','=', Auth::user()->id)
+        ->orderBy('permohonan.created_at', 'DESC')
         ->get(['smoku.*', 'permohonan.*', 'smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
 
         //dd($smoku);

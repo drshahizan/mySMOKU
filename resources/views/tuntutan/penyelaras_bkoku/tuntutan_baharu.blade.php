@@ -53,12 +53,12 @@
                     <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                         <thead>
                             <tr>
-                                <th class="text-center">ID Permohonan</th>
-                                <th class="text-center">Nama Pelajar</th>
-                                <th class="text-center">Nama Kursus</th>
-                                <th class="text-center">Tempoh Penajaan</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Tindakan</th>
+                                <th class="text-center"><b>ID Permohonan</b></th>                                        
+								<th class="text-center"><b>Nama</b></th>
+								<th class="text-center"><b>Nama Kursus</b></th>
+                                <th class="text-center"><b>Tempoh Penajaan</b></th>
+                                <th class="text-center"><b>Status</b></th>
+                                <th class="text-center"><b>Tindakan</b></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -95,14 +95,33 @@
                                 @endphp
                             <tr>
                                 <td class="text-center">{{ $layak->no_rujukan_permohonan}}</td>
-                                <td class="text-center">{{ $pemohon}}</td>
-                                <td class="text-center">{{ $kursus}}</td>
-                                <td class="text-center">
+                                <td>{{ $pemohon}}</td>
+                                <td>{{ $kursus}}</td>
+                                <td>
                                     {{ \Carbon\Carbon::createFromFormat('Y-m-d', $layak->tarikh_mula)->format('d/m/Y') }} - 
                                     {{ \Carbon\Carbon::createFromFormat('Y-m-d', $layak->tarikh_tamat)->format('d/m/Y') }}
                                 </td>
                                 @if($status != null)
+
+                                @if ($layak->tuntutan_status=='1')
+                                    <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
+                                @elseif ($layak->tuntutan_status=='2')
+                                    <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                @elseif ($layak->tuntutan_status=='3')
+                                    <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                @elseif ($layak->tuntutan_status=='4')
+                                    <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
+                                @elseif ($layak->tuntutan_status=='5')
+                                    <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                @elseif ($layak->tuntutan_status=='6')
                                     <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                @elseif ($layak->tuntutan_status=='7')
+                                    <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                @elseif ($layak->tuntutan_status=='8')
+                                    <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                @elseif ($layak->tuntutan_status=='9')
+                                    <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                @endif
                                 
                                 @else
                                     <td class="text-center"></td>
@@ -114,12 +133,12 @@
                                     <!--begin::Toolbar-->
                                     <div>
                                         <!--begin::Edit-->
-                                        <a href="{{ route('bkoku.kemaskini.keputusan', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3">
+                                        <a href="{{ route('bkoku.kemaskini.keputusan', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
                                             <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Keputusan Peperiksaan">
                                                 <i class="ki-solid ki-pencil text-dark fs-2"></i>
                                             </span>
                                         </a>
-                                        <a href="{{ route('bkoku.tuntutan.baharu', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3">
+                                        <a href="{{ route('bkoku.tuntutan.baharu', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
                                             <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Hantar Tuntutan">
                                                 <i class="ki-solid ki-search-list text-dark fs-2"></i>
                                             </span>
@@ -144,8 +163,14 @@
 
 <!--begin::Javascript-->
 <script>
-    $('#sortTable1').DataTable();
-    $('#sortTable2').DataTable();
+    $('#sortTable1').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+	$('#sortTable2').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
