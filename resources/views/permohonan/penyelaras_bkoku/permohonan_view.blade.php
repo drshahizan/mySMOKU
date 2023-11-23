@@ -1229,7 +1229,7 @@
 								</tr>
 							</thead>
 							<tbody class="fw-semibold text-gray-600">
-								@if (!$dokumen->isEmpty() && $dokumen->count() >= 3)
+								@if (!$dokumen->isEmpty() && $dokumen->count() >= 2)
 								@foreach($dokumen as $dok)
 									<tr>
 										<td class="text-gray-800">
