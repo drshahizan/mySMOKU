@@ -275,11 +275,11 @@ class PenyelarasController extends Controller
             'smoku_butiran_pelajar.pendapatan as pendapatan_baru',
             'smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
         ->where('smoku_id', $id);
-        
+        //dd($butiranPelajar);
 
         if ($permohonan && $permohonan->status >= '1') {
             $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
-            return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen','agama','parlimen','dun','keturunan'));
+            return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen','agama','parlimen','negeri','dun','keturunan'));
         } else {
             return view('permohonan.penyelaras_bkoku.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','mod','kursus','biaya','penaja','negeri','bandar','agama','parlimen','dun','keturunan'));
         }
@@ -589,7 +589,7 @@ class PenyelarasController extends Controller
         $emel = EmelKemaskini::where('emel_id',13)->first();
         //dd($cc,$user->email);
 
-        Mail::to($user->email)->cc($cc, $cc_pelajar)->send(new PermohonanHantar($catatan,$emel));    
+        Mail::to($user->email)->cc([$cc, $cc_pelajar])->send(new PermohonanHantar($catatan,$emel));    
 
         return redirect()->route('penyelaras.dashboard')->with('success', 'Permohonan pelajar telah dihantar.');
 
