@@ -1,4 +1,11 @@
 <x-default-layout>
+    <head>
+        <link rel="stylesheet" href="/assets/css/saringan.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    </head>
     <!--begin::Page title-->
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <!--begin::Title-->
@@ -22,13 +29,7 @@
         </ul>
         <!--end::Breadcrumb-->
     </div>
-    <head>
-        <link rel="stylesheet" href="/assets/css/saringan.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
-    </head>
+    
     <br>
                                  
     <!--begin::Row-->
@@ -87,7 +88,6 @@
                     <!--begin::Title-->
                     <h3 class="card-title align-items-start flex-column">
                         <span class="card-label fw-bold text-gray-800">Pendaftaran Pelajar PPK</span>
-                        <!--<span class="text-gray-400 pt-1 fw-semibold fs-6">Program BKOKU</span>-->
                     </h3>
                     <!--end::Title-->
                    
@@ -107,6 +107,7 @@
                                     <th class="text-center">No. Kad JKM</th>
                                     <th class="text-center">Nama</th>
                                     <th class="text-center">Status</th>
+                                    <th class="text-center"></th>
                                 </tr>
                             </thead>
                             <!--end::Table head-->
@@ -135,10 +136,26 @@
                                     <td class="text-center"><a href="{{route('penyelaras.ppk.permohonan.baharu',$smoku->smoku_id)}}">
                                         @if ($smoku->status == 1)
                                             <button class="btn bg-info text-white">Deraf</button></a>
+                                        @elseif ($smoku->status == 9)
+                                            <button class="btn bg-batal text-white">Batal</button></a>
                                         @else 
                                             <button class="btn bg-primary text-white">Belum Mohon</button></a>
                                         @endif
-                                        
+                                    </td>
+                                    <td class="text-center">
+                                        @if ($smoku->status < 1)
+                                            <a href="{{ route('ppk.pendaftaran.delete', ['id' => $smoku->smoku_id]) }}" onclick="return confirm('Adakah anda pasti ingin padam pendaftaran ini?')">
+                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Pendaftaran">
+                                                    <i class="fa fa-trash fa-sm custom-white-icon"></i>
+                                                </span>
+                                            </a>
+                                        @elseif ($smoku->status == 1)
+                                            <a href="{{ route('ppk.permohonan.delete', ['id' => $smoku->smoku_id]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
+                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
+                                                    <i class="fa fa-trash fa-sm custom-white-icon"></i>
+                                                </span>
+                                            </a>    
+                                        @endif    
                                     </td>
                                 </tr>
                                 @endforeach	

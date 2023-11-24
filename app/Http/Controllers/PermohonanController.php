@@ -319,7 +319,7 @@ class PermohonanController extends Controller
          $permohonan->amaun_wang_saku = number_format($request->amaun_wang_saku, 2, '.', '');
          $permohonan->perakuan = $request->perakuan;
          // Conditionally set the status
-         if ($permohonan->status == '1') {
+         if ($permohonan->status == '1' || $permohonan->status == null) {
              $permohonan->status = '1';
          }
  
