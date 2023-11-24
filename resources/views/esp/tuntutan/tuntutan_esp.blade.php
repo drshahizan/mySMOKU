@@ -310,9 +310,18 @@
   </div>
 
   <script>
-    //sorting function
-    $('#sortTable1').DataTable();
-    $('#sortTable2').DataTable();
+    $('#sortTable1').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+    $('#sortTable1a').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+	  $('#sortTable2').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
 
   </script>
 

@@ -363,9 +363,18 @@
         <script src="assets/bundles/vendorscripts.bundle.js"></script>
 
         <script>
-            $('#sortTable1').DataTable();
-            $('#sortTable1a').DataTable();
-            $('#sortTable2').DataTable();
+        $('#sortTable1').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+        $('#sortTable1a').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+	    $('#sortTable2').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
         </script>
 
 </x-default-layout>
