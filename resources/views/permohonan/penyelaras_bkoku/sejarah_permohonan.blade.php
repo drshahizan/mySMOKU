@@ -134,23 +134,23 @@
                                                         @endif
 
                                                         @if ($item['status']=='1')
-                                                        <td class="text-center">
-                                                            <a href="{{ route('bkoku.permohonan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
-                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
-                                                                    <i class="fa fa-trash fa-sm custom-white-icon"></i>
-                                                                </span>
-                                                            </a>
-                                                        </td>
-                                                        @elseif ($item['status']=='2')
-                                                        <td class="text-center">
-                                                            <a href="{{ route('bkoku.permohonan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan permohonan ini?')">
-                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Permohonan">
-                                                                    <i class="fa fa-cancel fa-sm custom-white-icon"></i>
-                                                                </span>
-                                                            </a>
-                                                        </td> 
-                                                        @else
-                                                        <td class="text-center"></td> 
+                                                            <td class="text-center">
+                                                                <a href="{{ route('bkoku.permohonan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
+                                                                        <i class="fa fa-trash fa-sm custom-white-icon"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td>
+                                                            @elseif ($item['status']=='2')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('bkoku.permohonan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan permohonan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Permohonan">
+                                                                        <i class="fa fa-cancel fa-sm custom-white-icon"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td> 
+                                                            @else
+                                                            <td class="text-center"></td> 
 
                                                         @endif
 

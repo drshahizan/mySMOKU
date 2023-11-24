@@ -281,7 +281,7 @@ class PenyelarasPPKController extends Controller
         ->where('smoku_id', $id);
         
 
-        if ($permohonan && $permohonan->status >= '1') {
+        if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
             $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
             return view('permohonan.penyelaras_ppk.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen','agama','parlimen','dun','keturunan'));
         } else {
@@ -670,6 +670,7 @@ class PenyelarasPPKController extends Controller
         ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
         ->where('permohonan.status','=', '2')
         ->where('penyelaras_id','=', Auth::user()->id)
+        ->orderBy('permohonan.created_at', 'DESC')
         ->get(['smoku.*', 'permohonan.*', 'smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
 
         //dd($smoku);
@@ -854,7 +855,13 @@ class PenyelarasPPKController extends Controller
 
     public function sejarahPermohonan()
     {
-        $permohonan = Permohonan::where('status', '!=','4')->get();
+        $permohonan = Permohonan::where('permohonan.status', '!=','4')
+        ->join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'permohonan.smoku_id')
+        ->where('smoku_penyelaras.penyelaras_id', '=', Auth::user()->id)
+        ->select('permohonan.*')
+        ->orderBy('created_at', 'DESC')
+        ->get();
+        
         return view('permohonan.penyelaras_ppk.sejarah_permohonan',compact('permohonan'));
     }
 
@@ -894,6 +901,24 @@ class PenyelarasPPKController extends Controller
         } 
         
         return back();
+        
+    }
+
+    public function batalPermohonan($id)
+    {
+
+        DB::table('permohonan')->orderBy('id', 'asc')->where('smoku_id',$id)
+            ->update([
+                'status' => 9
+            ]);
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$id)->first();
+        SejarahPermohonan::create([
+            'smoku_id' => $id,
+            'permohonan_id' => $permohonan_id->id,
+            'status' => 9
+        ]);
+  
+        return redirect()->route('ppk.sejarah.permohonan')->with('success', 'Permohonan telah dibatalkan.');      
         
     }
 

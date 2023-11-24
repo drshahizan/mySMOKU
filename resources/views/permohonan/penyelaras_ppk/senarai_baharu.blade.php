@@ -45,7 +45,7 @@
 							<tr>
 								<th style="width: 17%"><b>ID Permohonan</b></th>                                        
 								<th style="width: 33%"><b>Nama</b></th>
-								<th style="width: 33%"><b>Institusi</b></th>
+								<th style="width: 33%"><b>Nama Kursus</b></th>
 								<th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
 								<th style="width: 15%" class="text-center"><b>Status Permohonan</b></th>
 							</tr>
@@ -66,25 +66,12 @@
 								}
 								$pemohon = implode(' ', $result);
 						
-								//institusi pengajian
-								$text3 = ucwords(strtolower($smoku->nama_institusi)); // Assuming you're sending the text as a POST parameter
-								$conjunctions = ['of', 'in', 'and'];
-								$words = explode(' ', $text3);
-								$result = [];
-								foreach ($words as $word) {
-									if (in_array(Str::lower($word), $conjunctions)) {
-										$result[] = Str::lower($word);
-									} else {
-										$result[] = $word;
-									}
-								}
-								$institusi = implode(' ', $result);
 							@endphp
 							<tr>
 								<td><a href="{{route('penyelaras.ppk.permohonan.baharu',$smoku->smoku_id)}}">{{ $smoku->no_rujukan_permohonan}}</a></td>
 								<td>{{ $pemohon}}</td>
-								<td>{{ $institusi}}</td>
-								<td class="text-center">{{ $smoku->created_at->format('d/m/Y h:i:sa')}}</td>
+								<td>{{ $smoku->nama_kursus}}</td>
+								<td class="text-center">{{ $smoku->created_at->format('d/m/Y')}}</td>
 								<td class="text-center"><button type="button" class="btn bg-info text-white">Baharu</button></td>
 							</tr>  
 							@endforeach	
@@ -97,7 +84,13 @@
 	</div>
 </div>
 <script>
-	$('#sortTable1').DataTable();
-	$('#sortTable2').DataTable();
+	$('#sortTable1').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+	$('#sortTable2').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
 </script>		                             
 </x-default-layout> 

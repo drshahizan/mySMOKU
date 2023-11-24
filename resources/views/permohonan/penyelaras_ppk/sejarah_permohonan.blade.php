@@ -67,6 +67,7 @@
                                                 <th style="width: 33%"><b>Nama</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
+                                                <th style="width: 5%" class="text-center"><b>Tindakan</b></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -124,9 +125,34 @@
                                                         @elseif ($item['status']=='7')
                                                             <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
-                                                            <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        <td class="text-center">
+                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn btn-dibayar btn-round btn-sm custom-width-btn">
+                                                                <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar
+                                                            </a>
+                                                        </td>
                                                         @elseif ($item['status']=='9')
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @endif
+
+                                                        @if ($item['status']=='1')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('ppk.permohonan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
+                                                                        <i class="fa fa-trash fa-sm custom-white-icon"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td>
+                                                            @elseif ($item['status']=='2')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('ppk.permohonan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan permohonan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Permohonan">
+                                                                        <i class="fa fa-cancel fa-sm custom-white-icon"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td> 
+                                                            @else
+                                                            <td class="text-center"></td> 
+
                                                         @endif
                                                     </tr>
                                                 @endif
@@ -143,8 +169,10 @@
         </div>
     </div>
     <script>
-        $('#sortTable1').DataTable();
-        $('#sortTable2').DataTable();
+       $('#sortTable2').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
         
     </script>
     <style>

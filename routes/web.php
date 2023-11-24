@@ -314,6 +314,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/penyelaras/ppk/permohonan/baharu', [PenyelarasPPKController::class, 'kemaskini'])->name('ppk.kemaskini');
     Route::post('ppk/hantar', [PenyelarasPPKController::class, 'hantar'])->name('ppk.hantar');
     Route::get('penyelaras/ppk/permohonan/delete/{id}', [PenyelarasPPKController::class, 'deletePermohonan'])->name('ppk.permohonan.delete');
+    Route::get('penyelaras/ppk/permohonan/batal/{id}', [PenyelarasPPKController::class, 'batalPermohonan'])->name('ppk.permohonan.batal');
     Route::get('penyelaras/ppk/senarai/permohonan-baharu', [PenyelarasPPKController::class, 'senaraiPermohonanBaharu'])->name('senarai.ppk.permohonanBaharu');
     Route::get('penyelaras/ppk/sejarah/sejarah-permohonan', [PenyelarasPPKController::class, 'sejarahPermohonan'])->name('ppk.sejarah.permohonan');
     Route::get('penyelaras/ppk/sejarah/rekod-permohonan/{id}', [PenyelarasPPKController::class, 'rekodPermohonan'])->name('ppk.rekod.permohonan');
