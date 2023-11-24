@@ -34,29 +34,29 @@ class ProfilController extends Controller
             ->update([
                 'profile_photo_path' => $filename,
             ]);
-        
 
-            User::where('no_kp',Auth::user()->no_kp)
-                ->update([
-                    'nama' => $request->nama,
-                    'email' => $request->email
-                ]);
-            
-            Smoku::where('no_kp' ,Auth::user()->no_kp)
-                ->update([
-                    'nama' => $request->nama,
-                    'email' => $request->email
-                ]);
-
-            $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-            ButiranPelajar::where('smoku_id' ,$smoku_id->id)
-                ->update([
-                    'emel' => $request->email
-
-                ]);
-            
         }
-        return back()->with('success', 'Avatar updated successfully.');
+
+        
+        User::where('no_kp',Auth::user()->no_kp)
+        ->update([
+            'nama' => $request->nama,
+            'email' => $request->email
+        ]);
+    
+        Smoku::where('no_kp' ,Auth::user()->no_kp)
+            ->update([
+                'nama' => $request->nama,
+                'email' => $request->email
+            ]);
+
+        $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        ButiranPelajar::where('smoku_id' ,$smoku_id->id)
+            ->update([
+                'emel' => $request->email
+
+            ]);
+        return back()->with('success', 'Maklumat profil berjaya dikemaskini.');
     }
 
     public function simpanKatalaluan(Request $request)
