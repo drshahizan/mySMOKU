@@ -351,7 +351,7 @@
 									<select id="keturunan" name="keturunan" class="form-select form-select-lg form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 										<option></option>
 										@foreach ($keturunan as $keturunan)
-											<option value="{{$keturunan->id}}" {{$smoku->keturunan == $keturunan->id ? 'selected' : ''}}>{{ $keturunan->keturunan}}</option>
+											<option value="{{$keturunan->kod_keturunan}}" {{$smoku->kod_keturunan == $keturunan->id ? 'selected' : ''}}>{{ $keturunan->keturunan}}</option>
 										@endforeach
 									</select>
 									<!--end::Input-->
