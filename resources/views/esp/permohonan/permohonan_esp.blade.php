@@ -35,7 +35,6 @@
 <br>
 
 <body>
-  <!--end::Page title-->
   <div id="main-content">
     <div class="container-fluid">
       <!--begin::Content-->
@@ -46,7 +45,7 @@
           <div class="card">
             <!--begin::Card header-->
             <div class="header">
-              <h2>Senarai Permohonan Layak<br><small>xxx</small></h2>
+              <h2>Senarai Permohonan Layak<br></h2>
             </div>
             <!--end::Card header-->
             {{-- Javascript Nav Bar --}}
@@ -388,7 +387,7 @@
                   <input type="button" value="Hantar" onclick="sendData()" class="btn btn-primary">
                 </div>
                 <!--end::Button-->
-            </form>
+              </form>
               <!--end::Form-->
             </div>
             <!--end::Card body-->
@@ -518,20 +517,6 @@ $(document).ready(function() {
     });
 
 });
-
-// $(document).ready(function() {
-//     // Handle form submission
-//     $('#hantar_maklumat').submit(function(event) {
-//         // Prevent the form from submitting the traditional way
-//         event.preventDefault();
-        
-//         // Here you can perform any necessary form validation or data processing
-        
-//         // Display a popup message after form submission
-//         alert('Maklumat berjaya hantar ke ESP.');
-//     });
-// });
-
 
 
 </script>

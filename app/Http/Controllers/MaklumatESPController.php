@@ -34,7 +34,9 @@ class MaklumatESPController extends Controller
         ->where('tuntutan.status', '=','6')->get();
          //dd($kelulusan);
 
-        return view('esp.tuntutan.tuntutan_esp', compact('kelulusan'));     
+        $secretKey = '2z_JoT4dDCNe_bkT9y6kEhc_4plRkUW7Ci1hzoyH'; 
+
+        return view('esp.tuntutan.tuntutan_esp', compact('kelulusan','secretKey'));     
         
     }
 
