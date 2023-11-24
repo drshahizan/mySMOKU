@@ -51,11 +51,13 @@ class ProfilController extends Controller
             ]);
 
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        if($smoku_id != null) {
         ButiranPelajar::where('smoku_id' ,$smoku_id->id)
             ->update([
                 'emel' => $request->email
 
             ]);
+        }    
         return back()->with('success', 'Maklumat profil berjaya dikemaskini.');
     }
 
