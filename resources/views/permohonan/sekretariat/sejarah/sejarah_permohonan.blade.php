@@ -136,11 +136,21 @@
                                                         @elseif ($item['status']=='5')
                                                             <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='6')
-                                                            <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            {{-- <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td> --}}
+                                                            <td class="text-center">
+                                                                <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn bg-success btn-round btn-sm custom-width-btn text-white">
+                                                                    <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak
+                                                                </a>
+                                                            </td>
                                                         @elseif ($item['status']=='7')
                                                             <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
-                                                            <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            {{-- <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td> --}}
+                                                            <td class="text-center">
+                                                                <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn bg-dibayar btn-round btn-sm custom-width-btn">
+                                                                    <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar
+                                                                </a>
+                                                            </td>
                                                         @elseif ($item['status']=='9')
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
@@ -217,11 +227,21 @@
                                                             @elseif ($item['status']=='5')
                                                                 <td class="text-center" style="width: 15%"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=='6')
-                                                                <td class="text-center" style="width: 15%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                {{-- <td class="text-center" style="width: 15%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td> --}}
+                                                                <td class="text-center">
+                                                                    <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn bg-success btn-round btn-sm custom-width-btn text-white">
+                                                                        <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak
+                                                                    </a>
+                                                                </td>
                                                             @elseif ($item['status']=='7')
                                                                 <td class="text-center" style="width: 15%"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=='8')
-                                                                <td class="text-center" style="width: 15%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                {{-- <td class="text-center" style="width: 15%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td> --}}
+                                                                <td class="text-center">
+                                                                    <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn bg-dibayar btn-round btn-sm custom-width-btn">
+                                                                        <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar
+                                                                    </a>
+                                                                </td>
                                                             @elseif ($item['status']=='9')
                                                                 <td class="text-center" style="width: 15%"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @endif
@@ -293,11 +313,21 @@
                                                         @elseif ($item['status']=='5')
                                                             <td class="text-center" style="width: 15%"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='6')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            {{-- <td class="text-center" style="width: 15%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td> --}}
+                                                            <td class="text-center">
+                                                                <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn bg-success btn-round btn-sm custom-width-btn text-white">
+                                                                    <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak
+                                                                </a>
+                                                            </td>
                                                         @elseif ($item['status']=='7')
                                                             <td class="text-center" style="width: 15%"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
-                                                            <td class="text-center" style="width: 15%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            {{-- <td class="text-center" style="width: 15%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td> --}}
+                                                            <td class="text-center">
+                                                                <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn bg-dibayar btn-round btn-sm custom-width-btn">
+                                                                    <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar
+                                                                </a>
+                                                            </td>
                                                         @elseif ($item['status']=='9')
                                                             <td class="text-center" style="width: 15%"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
@@ -316,10 +346,25 @@
         </div>
     </div>
     <script>
-        $('#sortTable1').DataTable();
-        $('#sortTable1a').DataTable();
-        $('#sortTable2').DataTable();
+        $('#sortTable1').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+        $('#sortTable1a').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+        $('#sortTable2').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
     </script>
+    <style>
+        .custom-width-btn {
+            width: 130px; 
+            height: 30px;
+        }
+    </style>
 
     </body>
 </x-default-layout>

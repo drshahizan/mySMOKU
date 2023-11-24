@@ -126,7 +126,7 @@
                                                         @elseif ($item['status']=='8')
                                                             <td class="text-center">
                                                                 <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn bg-dibayar btn-round btn-sm custom-width-btn">
-                                                                    <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak
+                                                                    <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar
                                                                 </a>
                                                             </td>
                                                         @elseif ($item['status']=='9')
