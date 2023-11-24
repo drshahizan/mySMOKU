@@ -271,7 +271,13 @@ class PenyelarasPPKController extends Controller
         ->leftJoin('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
         ->leftJoin('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
         ->leftJoin('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
-        ->get(['smoku_butiran_pelajar.*','smoku_butiran_pelajar.alamat_tetap as alamat_tetap_baru','smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
+        ->get(['smoku_butiran_pelajar.*','smoku_butiran_pelajar.alamat_tetap as alamat_tetap_baru',
+            'smoku_butiran_pelajar.alamat_surat_menyurat as alamat_surat_baru',
+            'smoku_butiran_pelajar.tel_bimbit as tel_bimbit_baru',
+            'smoku_butiran_pelajar.status_pekerjaan as status_pekerjaan_baru',
+            'smoku_butiran_pelajar.pekerjaan as pekerjaan_baru',
+            'smoku_butiran_pelajar.pendapatan as pendapatan_baru',
+            'smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
         ->where('smoku_id', $id);
         
 
@@ -634,6 +640,11 @@ class PenyelarasPPKController extends Controller
                 // Handle cases where $dokumen or $catatan are not valid arrays
             }
 
+        //emel kepada pelajar
+        $emel_pelajar = Smoku::where('id',$smoku_id->id)->first();
+        $cc_pelajar = $emel_pelajar->email;
+        // dd($cc_pelajar);
+            
         //emel kepada sekretariat
         $user_sekretariat = User::where('tahap',3)->first();
         $cc = $user_sekretariat->email;
@@ -645,7 +656,7 @@ class PenyelarasPPKController extends Controller
         $emel = EmelKemaskini::where('emel_id',15)->first();
         //dd($cc,$user->email);
 
-        Mail::to($user->email)->cc($cc)->send(new PermohonanHantar($catatan,$emel));     
+        Mail::to($user->email)->cc([$cc, $cc_pelajar])->send(new PermohonanHantar($catatan,$emel));     
 
         return redirect()->route('penyelaras.ppk.dashboard')->with('success', 'Permohonan pelajar telah dihantar.');
 

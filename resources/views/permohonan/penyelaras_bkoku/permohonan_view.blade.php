@@ -391,8 +391,8 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
-										<option value="">Pilih</option>
+									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
+										<option></option>
 										@foreach ($bandar as $bandartetap)	
 										<option value="{{$bandartetap->id}}" {{$butiranPelajar->alamat_tetap_bandar == $bandartetap->id ? 'selected' : ''}}>{{ $bandartetap->bandar}}</option>
 										@endforeach
@@ -476,7 +476,7 @@
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input-->
-								<textarea id="alamat_surat_menyurat" name="alamat_surat_menyurat" class="form-control form-control-lg form-control-solid" rows="2" style="text-transform: uppercase;" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) && $butiranPelajar->alamat_surat_menyurat !== null ? 'readonly' : '' }}>{{$butiranPelajar->alamat_surat_baru}}</textarea>
+								<textarea id="alamat_surat_menyurat" name="alamat_surat_menyurat" class="form-control form-control-lg form-control-solid" rows="2" style="text-transform: uppercase;" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) && $butiranPelajar->alamat_surat_baru !== null ? 'readonly' : '' }}>{{$butiranPelajar->alamat_surat_baru}}</textarea>
 								<!--end::Input-->
 							</div>
 							<div class="row mb-10">
@@ -899,7 +899,7 @@
 							</label>
 							<!--end::Label-->
 							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
-								<option value="{{ $butiranPelajar->nama_kursus}}">{{ strtoupper($butiranPelajar->nama_kursus)}}</option>
+								<option value="{{ $butiranPelajar->nama_kursus}}">{{ $butiranPelajar->nama_kursus}}</option>
 							</select>
 						</div>
 						<!--end::Input group-->
@@ -926,7 +926,7 @@
 												<option value="{{ $sesi }}">{{ $sesi }}</option>
 											@endfor
 										@else
-											@for($year = date('Y') -1 ; $year <= (date('Y') + 1); $year++)
+											@for($year = date('Y') - 1; $year <= (date('Y') + 1); $year++)
 												@php
 													$sesi = $year . '/' . ($year + 1);
 												@endphp
@@ -1744,8 +1744,9 @@
 								var id_institusi = response['data'][i].id_institusi;
 								var kod_peringkat = response['data'][i].kod_peringkat;
 								var nama_kursus = response['data'][i].nama_kursus;
+								var uppercaseValue  = response['data'][i].nama_kursus.toUpperCase();
 	
-								var option = "<option value='"+nama_kursus+"'>"+nama_kursus+"</option>";
+								var option = "<option value='"+nama_kursus+"'>"+uppercaseValue +"</option>";
 	
 								$("#nama_kursus").append(option); 
 								
