@@ -136,12 +136,12 @@
 					<span class="menu-title">Senarai Pembayaran</span>
 				</a>
 			</div>
-			<div class="menu-item">
+			{{-- <div class="menu-item">
 				<a class="menu-link" href="{{ route('penyelaras.senarai.dibayar') }}">
 					<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
 					<span class="menu-title">Keputusan Pembayaran</span>
 				</a>
-			</div>
+			</div> --}}
 			<div class="menu-item">
 				<a class="menu-link" href="{{ route('penyelaras.muat-turun.SPPB')}}">
 					<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
