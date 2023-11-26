@@ -282,7 +282,7 @@
                                         @endphp
                                         <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
                                         <input type="hidden" name="baki_y" id="baki_y" value="{{$permohonan->baki_dibayar}}">
-                                        <input type="hidden" name="baki_disokong" id="baki_disokong" value="">
+                                        <input type="hidden" name="baki_disokong" id="baki_disokong" value="{{$baki_y}}">
                                         {{--                                    <input type="hidden" name="baki_dibayar" id="baki_dibayar" value="">--}}
                                         <div class="table-responsive">
                                             <table class="table">
@@ -460,7 +460,7 @@
                                         @endphp
                                         <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
                                         <input type="hidden" name="baki_y" id="baki_y_2" value="{{$permohonan->baki_dibayar}}">
-                                        <input type="hidden" name="baki_disokong" id="baki_disokong_3" value="">
+                                        <input type="hidden" name="baki_disokong" id="baki_disokong_3" value="{{$baki_y}}">
                                         {{--                                    <input type="hidden" name="baki_dibayar" id="baki_dibayar_3" value="">--}}
                                         <div class="table-responsive">
                                             <table class="table">

@@ -1296,7 +1296,7 @@ class SekretariatController extends Controller
         $t_id = SejarahTuntutan::where('id', $id)->value('tuntutan_id');
         Tuntutan::where('id', $t_id)
             ->update([
-                'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
+                'baki_disokong'         =>  $request->get('baki_disokong'),
                 'yuran_disokong'        =>  $request->get('yuran_disokong'),
                 'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
             ]);
@@ -1390,9 +1390,9 @@ class SekretariatController extends Controller
         $t_id = SejarahTuntutan::where('id', $id)->value('tuntutan_id');
         Tuntutan::where('id', $t_id)
             ->update([
-                'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
                 'yuran_disokong'        =>  $request->get('yuran_disokong'),
                 'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                'baki_disokong'         =>  $request->get('baki_disokong'),
             ]);
 
         $sejarah_t = SejarahTuntutan::where('id', $id)->first();
