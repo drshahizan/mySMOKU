@@ -1015,7 +1015,6 @@ class SekretariatController extends Controller
             $tuntutan_item =TuntutanItem::where('tuntutan_id', $id)->get();
         }
 
-
         if($request->get('submit')=="Layak"){
             Tuntutan::where('id', $id)
                 ->update([
@@ -1026,14 +1025,14 @@ class SekretariatController extends Controller
                 ->update([
                     'yuran_disokong'        =>  $request->get('yuran_disokong'),
                     'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
-                    'baki_disokong'         =>  $request->get('w_saku_disokong'),
+                    'baki_disokong'         =>  $request->get('baki_disokong'),
                     'status'                =>  6,
                 ]);
 
             $i=0;
 
             $invois = $request->get('invois');
-            
+
             if($count_item==1){
                 TuntutanItem::where('id', $tuntutan_item->id)
                     ->update([
@@ -1085,6 +1084,14 @@ class SekretariatController extends Controller
                     'status'   =>  7,
                 ]);
 
+            Tuntutan::where('id', $id)
+                ->update([
+                    'yuran_disokong'        =>  $request->get('yuran_disokong'),
+                    'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                    'baki_disokong'         =>  $request->get('baki_disokong'),
+                    'status'                =>  7,
+                ]);
+
             $i=0;
             $invois = $request->get('invois');
             foreach($tuntutan_item as $item){
@@ -1131,6 +1138,14 @@ class SekretariatController extends Controller
             Tuntutan::where('id', $id)
                 ->update([
                     'status'   =>  5,
+                ]);
+
+            Tuntutan::where('id', $id)
+                ->update([
+                    'yuran_disokong'        =>  $request->get('yuran_disokong'),
+                    'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                    'baki_disokong'         =>  $request->get('baki_disokong'),
+                    'status'                =>  5,
                 ]);
 
             $i=0;

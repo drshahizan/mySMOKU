@@ -293,7 +293,7 @@
                                         @endphp
                                         <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
                                         <input type="hidden" name="baki_y" id="baki_y" value="{{$permohonan->baki_dibayar}}">
-                                        <input type="hidden" name="baki_disokong" id="baki_disokong" value="">
+                                        <input type="hidden" name="baki_disokong" id="baki_disokong" value="{{$baki_y}}">
 {{--                                        <input type="hidden" name="baki_dibayar" id="baki_dibayar" value="">--}}
                                         <div class="table-responsive">
                                             <table class="table">
@@ -377,7 +377,7 @@
                                                 });
                                                 document.getElementById('y_baki_disokong').innerHTML = baki;
                                                 document.getElementById('jumlah_disokong').value= parseFloat(jumlah).toFixed(2);
-                                                document.getElementById('baki_disokong').value= 5000 - yuran - w_saku;
+                                                document.getElementById('baki_disokong').value= baki_y - yuran - w_saku;
                                             }
                                             // function BayarY(){
                                             //     var yuran = document.getElementById('yuran_dibayar').value;
@@ -485,7 +485,7 @@
                                         @endphp
                                         <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
                                         <input type="hidden" name="baki_y" id="baki_y_2" value="{{$permohonan->baki_dibayar}}">
-                                        <input type="hidden" name="baki_disokong" id="baki_disokong_3" value="">
+                                        <input type="hidden" name="baki_disokong" id="baki_disokong_3" value="{{$baki_y}}">
 {{--                                        <input type="hidden" name="baki_dibayar" id="baki_dibayar_3" value="">--}}
                                         <input type="hidden" name="baki_y" id="baki_y" value="{{$permohonan->baki_dibayar}}">
                                         <div class="table-responsive">
@@ -558,7 +558,7 @@
                                                 });
                                                 document.getElementById('y_baki_disokong_3').innerHTML = baki;
                                                 document.getElementById('jumlah_disokong_3').value= parseFloat(jumlah).toFixed(2);
-                                                document.getElementById('baki_disokong_3').value= 5000 - yuran;
+                                                document.getElementById('baki_disokong_3').value= baki_y - yuran;
                                             }
                                             // function BayarY(){
                                             //     var yuran = document.getElementById('yuran_dibayar_3').value;
