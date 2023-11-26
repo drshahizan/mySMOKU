@@ -252,7 +252,11 @@
                                 <form method="POST" action="{{ url('tuntutan/sekretariat/saringan/hantar-tuntutan/'.$sejarah_t->id) }}" id="saring">
                                     <h6>Pengiraan:</h6>
                                     <br>
-                                    <p>Baki Terdahulu: {{$permohonan->baki_dibayar}}</p>
+                                    @if($permohonan->baki_dibayar != null)
+                                        <p>Baki Terdahulu (RM) : {{number_format($permohonan->baki_dibayar, 2)}}</p>
+                                    @else
+                                        <p>Baki Terdahulu (RM) : 0.00</p>
+                                    @endif
                                     <!--begin: Invoice body-->
                                     {{csrf_field()}}
                                     <input type="hidden" value="{{$permohonan->baki_dibayar}}">

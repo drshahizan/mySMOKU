@@ -886,7 +886,7 @@ class SekretariatController extends Controller
                 $file1a->move('assets/dokumen/sppb_1a', $uniqueFilenameDokumen1a);
                 $uploadedDokumen1a[] = $uniqueFilenameDokumen1a;
             }
-            
+
             // Check and process dokumen2a
             $file2 = $dokumen2[0] ?? null;
             if ($file2 && $file2->isValid()) {
@@ -1006,7 +1006,15 @@ class SekretariatController extends Controller
         $permohonan_id = Tuntutan::where('id', $id)->value('permohonan_id');
         $smoku_id = Permohonan::where('id', $permohonan_id)->value('smoku_id');
         $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
-        $tuntutan_item =TuntutanItem::where('tuntutan_id', $id)->get();
+
+        $count_item =TuntutanItem::where('tuntutan_id', $id)->count();
+        if($count_item==1){
+            $tuntutan_item =TuntutanItem::where('tuntutan_id', $id)->first();
+        }
+        else{
+            $tuntutan_item =TuntutanItem::where('tuntutan_id', $id)->get();
+        }
+
 
         if($request->get('submit')=="Layak"){
             Tuntutan::where('id', $id)
@@ -1023,14 +1031,24 @@ class SekretariatController extends Controller
                 ]);
 
             $i=0;
+
             $invois = $request->get('invois');
-            foreach($tuntutan_item as $item){
-                TuntutanItem::where('tuntutan_id', $item['id'])
+            if($count_item==1){
+                TuntutanItem::where('tuntutan_id', $tuntutan_item->id)
                     ->update([
                         'kep_saringan'      =>  $invois[$i],
                     ]);
-                $i++;
             }
+            else{
+                foreach($tuntutan_item as $item){
+                    TuntutanItem::where('tuntutan_id', $item['id'])
+                        ->update([
+                            'kep_saringan'      =>  $invois[$i],
+                        ]);
+                    $i++;
+                }
+            }
+
 
             $saringan = new SaringanTuntutan([
                 'tuntutan_id'               =>  $id,
