@@ -78,18 +78,24 @@
                                             <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                         </div>
                                 
-                                        <div class="col-md-5 right">
+                                        <div class="col-md-2 right">
                                             <br>
-                                            <button type="submit" class="btn btn-primary" style="width: 9%; padding-left: 10px;">
+                                            <button type="submit" class="btn btn-primary" style="width: 5%; padding-left: 10px;">
                                                 <i class="fa fa-filter" style="font-size: 15px;"></i>
                                             </button>
                                         </div>
 
-                                        <div class="col-md-3" style="padding-left: 70px;">
+                                        <div class="col-md-6" style="padding-left: 70px;">
                                             <br>
                                             <a href="{{ route('penyelaras.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
                                                 <i class="fa fa-file-excel" style="color: black;"></i> Senarai Layak
-                                            </a>                         
+                                            </a>
+
+                                            <form action="{{ route('uploaded.file.pembayaran') }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="file" name="modified_excel_file" accept=".xlsx, .xls">
+                                                <button type="submit">Upload Modified File</button>
+                                            </form>                         
                                         </div>
                                     </div>
                                 </form>  

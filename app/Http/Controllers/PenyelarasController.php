@@ -41,6 +41,7 @@ use App\Models\Keturunan;
 use App\Models\MaklumatBank;
 use App\Models\Parlimen;
 use App\Exports\PermohonanLayakExport;
+use App\Imports\ModifiedPermohonanImport;
 use Carbon\Carbon;
 use DateTime;
 use GuzzleHttp\Client;
@@ -189,8 +190,6 @@ class PenyelarasController extends Controller
             ->with('failed', $nokp_in. ' Bukan OKU yang berdaftar dengan JKM.');
         }
         
-        
-
         /*
         $request->validate([
             'no_kp' => ['required', 'string'],
@@ -1350,6 +1349,49 @@ class PenyelarasController extends Controller
     public function exportPermohonanLayak()
     {
         return Excel::download(new PermohonanLayakExport, 'senarai_permohonan__layak.xlsx');
+    }
+
+    public function uploadedFilePembayaran(Request $request)
+    {
+        $request->validate([
+            'modified_excel_file' => 'required|mimes:xlsx,xls',
+        ]);
+
+        $file = $request->file('modified_excel_file');
+
+        // Use the Laravel Excel package to import data from the Excel file
+        $import = new ModifiedPermohonanImport();
+        $data = Excel::import($import, $file);
+
+        // Process the imported data and update the permohonan records
+        $this->updatePermohonanRecords($import->getModifiedData());
+
+        // You may add a success message or redirect to a success page
+        return redirect()->back()->with('success', 'File processed successfully');
+    }
+
+    // Method to update permohonan records based on modified data
+    private function updatePermohonanRecords($modifiedData)
+    {
+        // Iterate through $modifiedData and update permohonan records as needed
+        foreach ($modifiedData as $modifiedRecord) {
+            $noRujukan = $modifiedRecord['no_rujukan_permohonan'];
+            $yuranDibayar = $modifiedRecord['yuran_dibayar'];
+            $wangSakuDibayar = $modifiedRecord['wang_saku_dibayar'];
+            $noBaucer = $modifiedRecord['no_baucer'];
+            $perihal = $modifiedRecord['perihal'];
+            $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
+
+            // Example: Update permohonan record based on 'no_rujukan_permohonan'
+            Permohonan::where('no_rujukan_permohonan', $noRujukan)
+                ->update([
+                    'yuran_disokong' => $yuranDibayar,
+                    'wang_saku_disokong' => $wangSakuDibayar,
+                    'no_baucer' => $noBaucer,
+                    'perihal' => $perihal,
+                    'tarikh_baucer' => $tarikhBaucer,
+                ]);
+        }
     }
 
     public function hantarSemuaInfoCek(Request $request, $id)
