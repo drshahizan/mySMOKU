@@ -40,12 +40,13 @@ use App\Models\Kelulusan;
 use App\Models\Keturunan;
 use App\Models\MaklumatBank;
 use App\Models\Parlimen;
+use App\Exports\PermohonanLayakExport;
 use Carbon\Carbon;
 use DateTime;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 class PenyelarasController extends Controller
 {
@@ -1346,6 +1347,11 @@ class PenyelarasController extends Controller
         return view('penyaluran.penyelaras.senarai_pembayaran', compact('layak'));
     }
 
+    public function exportPermohonanLayak()
+    {
+        return Excel::download(new PermohonanLayakExport, 'senarai_permohonan__layak.xlsx');
+    }
+
     public function hantarSemuaInfoCek(Request $request, $id)
     {
         // Use $smoku_id to associate the data with a specific smoku_id
@@ -1412,13 +1418,4 @@ class PenyelarasController extends Controller
         return response()->json(['maklumat' => $maklumat]);
     }
 
-
-    // public function maklumatPembayaran($id)
-    // {
-    //     // Retrieve data from the database based on the $id
-    //     $maklumat = Permohonan::where('no_rujukan_permohonan', $id)->first();
-
-    //     return response()->json(['maklumat' => $maklumat]);
-    // }
-    
 }

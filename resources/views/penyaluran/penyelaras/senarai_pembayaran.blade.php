@@ -78,11 +78,18 @@
                                             <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                         </div>
                                 
-                                        <div class="col-md-8 right">
+                                        <div class="col-md-5 right">
                                             <br>
                                             <button type="submit" class="btn btn-primary" style="width: 5%; padding-left: 10px;">
                                                 <i class="fa fa-filter" style="font-size: 15px;"></i>
                                             </button>
+                                        </div>
+
+                                        <div class="col-md-3" style="padding-left: 70px;">
+                                            <br>
+                                            <a href="{{ route('penyelaras.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <i class="fa fa-file-excel" style="color: black;"></i> Senarai Layak
+                                            </a>                         
                                         </div>
                                     </div>
                                 </form>  
@@ -90,13 +97,12 @@
                                 <div class="body">
                                     {{-- <form action="{{ route('penyelaras.bulk.submit') }}" method="POST" id="modalForm">
                                         {{csrf_field()}} --}}
-
                                         <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center" style="width: 5%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
+                                                    {{-- <th class="text-center" style="width: 5%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th> --}}
                                                     <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
-                                                    <th class="text-center" style="width: 40%"><b>Nama</b></th>
+                                                    <th class="text-center" style="width: 45%"><b>Nama</b></th>
                                                     <th class="text-center" style="width: 10%"><b>Amaun Yuran</b></th>
                                                     <th class="text-center" style="width: 15%"><b>Amaun Wang Saku</b></th>
                                                     <th class="text-center" style="width: 15%"><b>Tarikh Permohonan</b></th>
@@ -136,7 +142,7 @@
                                                     @if ($institusi_id == $instiusi_user)
                                                         <!-- Table rows -->
                                                         <tr>
-                                                            <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td> 
+                                                            {{-- <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>  --}}
                                                             <td style="width: 15%"><a href="#" class="open-modal-link" data-bs-toggle="modal" data-bs-target="#baucerPenyelaras" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>                                          
                                                             <td style="width: 40%">{{$pemohon}}</td>
                                                             <td class="text-center" style="width: 10%">{{$item->yuran_disokong}}</td>
