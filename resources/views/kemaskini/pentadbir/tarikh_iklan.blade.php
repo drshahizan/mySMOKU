@@ -54,7 +54,7 @@
 								<label class="fs-6 fw-semibold mb-2">Tarikh Mula</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="date" class="form-control form-control-solid" name="tarikh_mula" value="" />
+								<input type="date" class="form-control form-control-solid" name="tarikh_mula" value="" required oninvalid="this.setCustomValidity('Masukkan tarikh mula.')" oninput="setCustomValidity('')"/>
 								<!--end::Input-->
 							</div>
 							<!--end::Input group-->
@@ -64,7 +64,7 @@
 								<label class="fs-6 fw-semibold mb-2">Masa Mula</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="time" class="form-control form-control-solid" name="masa_mula" value="" />
+								<input type="time" class="form-control form-control-solid" name="masa_mula" value="" required oninvalid="this.setCustomValidity('Masukkan masa mula.')" oninput="setCustomValidity('')"/>
 								<!--end::Input-->
 							</div>
 							<!--end::Input group-->
@@ -76,7 +76,7 @@
 								<label class="fs-6 fw-semibold mb-2">Tarikh Tamat</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="date" class="form-control form-control-solid" name="tarikh_tamat" value="" />
+								<input type="date" class="form-control form-control-solid" name="tarikh_tamat" value="" required oninvalid="this.setCustomValidity('Masukkan tarikh tamat.')" oninput="setCustomValidity('')"/>
 								<!--end::Input-->
 							</div>
 							<!--end::Input group-->
@@ -86,7 +86,7 @@
 								<label class="fs-6 fw-semibold mb-2">Masa Tamat</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="time" class="form-control form-control-solid" name="masa_tamat" value="" />
+								<input type="time" class="form-control form-control-solid" name="masa_tamat" value="" required oninvalid="this.setCustomValidity('Masukkan masa tamat.')" oninput="setCustomValidity('')"/>
 								<!--end::Input-->
 							</div>
 							<!--end::Input group-->
@@ -97,7 +97,7 @@
 							<label class="fs-6 fw-semibold mb-2">Catatan</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<textarea class="form-control form-control-solid" name="catatan" id="catatan"></textarea>
+							<textarea class="form-control form-control-solid" name="catatan" id="catatan" required></textarea>
 							<!--end::Input-->
 						</div>
 						<!--end::Input group-->
