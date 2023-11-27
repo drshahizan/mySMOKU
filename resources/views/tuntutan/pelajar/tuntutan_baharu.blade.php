@@ -393,19 +393,20 @@ function myFunction() {
 	var currentDate = Date.now();
 	var tarikhMulaTimestamp = new Date('<?php echo $akademik->tarikh_mula; ?>').getTime();
 	var tarikhTamatTimestamp = new Date('<?php echo $akademik->tarikh_tamat; ?>').getTime();
-	// alert(tarikhMulaTimestamp);
+	// alert('Is tarikhMula earlier than tarikhTamat? ' + (tarikhMulaTimestamp < tarikhTamatTimestamp));
 
-	// while (tarikhMulaTimestamp < tarikhTamatTimestamp) {
-	// 	var tarikhNextSem = new Date(tarikhMulaTimestamp);
-	// 	tarikhNextSem.setMonth(tarikhNextSem.getMonth() + bilbulan);
+	if (tarikhMulaTimestamp < tarikhTamatTimestamp) {
+	 	var tarikhNextSem = new Date(tarikhMulaTimestamp);
+	 	tarikhNextSem.setMonth(tarikhNextSem.getMonth() + bilbulan);
+	 	// alert('helll');
 
-	// 	if (currentDate > tarikhNextSem) {
-	// 		var wang_saku = wang_saku_perbulan * bilbulan;
+		if (currentDate > tarikhNextSem) {
+			var wang_saku = wang_saku_perbulan * bilbulan;
 	// 		break; // Exit the loop
-	// 	} else {
+		} else {
 			var wang_saku = 0.00;
-	// 	}
-	// }
+		}
+	}
 
 	// alert(wang_saku);
 
