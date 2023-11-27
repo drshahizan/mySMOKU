@@ -101,6 +101,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('tuntutan/hantar', [TuntutanController::class, 'hantarTuntutan'])->name('hantar.tuntutan');
     Route::get('tuntutan/sejarah/sejarah-tuntutan', [TuntutanController::class, 'sejarahTuntutan'])->name('pelajar.sejarah.tuntutan');
     Route::get('tuntutan/delete/{id}', [TuntutanController::class, 'deleteTuntutan'])->name('tuntutan.delete');
+    Route::get('tuntutan/item/delete/{id}', [TuntutanController::class, 'deleteItemTuntutan'])->name('tuntutan.item.delete');
 	Route::get('tuntutan/batal/{id}', [TuntutanController::class, 'batalTuntutan'])->name('tuntutan.batal');
 
     //Kemaskini - Sekretariat - Emel

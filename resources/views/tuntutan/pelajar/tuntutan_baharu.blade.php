@@ -42,15 +42,21 @@
 								$semSemasa = $akademik->sem_semasa;
 								$totalSemesters = $akademik->tempoh_pengajian * $bilSem;
 								$currentYear = date('Y');
-								$sesiSemasa = $currentYear . '/' . ($currentYear + 1);
+								$sesiSemasa = $akademik->sesi;
+								// dd($sesiSemasa);
 
 								if (!$tuntutan) {
 
 									if($currentDate->greaterThan($tarikhNextSem)){
 										$semSemasa = $semSemasa + 1;
+									}else{
+										// No record found, and  masih dalam sem sama
+										$semSemasa = $semSemasa;
+										$wang_saku = 0.00;
+									
+
 									}
-									// No record found, and  masih dalam sem sama
-									$semSemasa = $semSemasa;
+									
 
 
 								} else {
@@ -83,6 +89,8 @@
 
 							@endphp
 							<!--begin::Wrapper-->
+							<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
+							<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
 							<div class="mb-0">
 								<!--begin::Row-->
 								<div class="row gx-10 mb-5">
@@ -90,27 +98,14 @@
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 										<div class="mb-5">
-											<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
-												<option value={{$sesiSemasa}}>{{$sesiSemasa}}</option>
-													{{-- @php
-														$currentYear = date('Y');
-													@endphp
-													@for($year = $currentYear; $year <= ($currentYear + 1); $year++)
-														@php
-															$sesi = $year . '/' . ($year + 1);
-														@endphp
-														<option value="{{ $sesi }}">{{ $sesi }}</option>
-													@endfor --}}
-											</select>
+											<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 										<!--begin::Input group-->
 										<div class="mb-5">
-											<select id="semester" name="semester" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
-												<option value={{$semSemasa}}>{{$semSemasa}}</option>					
-											</select>
+											<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
 										</div>
 									</div>
 									<!--end::Col-->
@@ -215,6 +210,7 @@
 											<th class="text-center">No. Resit</th>
 											<th class="text-center">Perihal</th>
 											<th class="text-center">RM</th>
+											<th class="text-center"></th>
 										</tr>
 									</thead>
 									<tbody class="fw-semibold text-center text-gray-600">
@@ -225,6 +221,13 @@
 											<td><a href="/assets/dokumen/tuntutan/{{$tuntutan_item->resit}}" target="_blank">{{ $tuntutan_item->no_resit}}</a></td>
 											<td>{{ $tuntutan_item->nota_resit}}</td>
 											<td id="amaun" class="text-right">{{number_format($tuntutan_item->amaun, 2, '.', '')}}</td>
+											<td class="text-center">
+												<a href="{{ route('tuntutan.item.delete', ['id' => $tuntutan_item->tuntutan_id]) }}" onclick="return confirm('Adakah anda pasti ingin padam item tuntutan ini?')">
+													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam">
+														<i class="fa fa-trash fa-sm custom-white-icon"></i>
+													</span>
+												</a>
+											</td>
 										</tr>
 										@endforeach	
 									</tbody>
@@ -238,28 +241,31 @@
 						@csrf
 							<!--begin::Item-->
 							@if ($permohonan->wang_saku == '1')
-							<div class="d-flex flex-stack">
-								<div class="me-5">
-									<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1"/>
-									<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
-								</div>
-							</div>
-							<!--end::Item-->
-							<br>
-							<!--begin::Wrapper-->
-							<div class="d-flex flex-stack flex-grow-1">
-								<!--begin::Content-->
-								<div class="fw-semibold">
-									<div class="fs-6 text-dark">Jumlah Elaun Wang Saku </div>
-								</div>
-								<!--end::Content-->
-							</div>
-							<!--end::Wrapper-->
-							<div class="d-flex">
-								<span class="input-group-text">RM</span>
-								<input type="hidden" id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="input-group-text" style="width: 100%;" value="{{$akademik->bil_bulan_per_sem}}"/>
-								<input type="text" id="amaun_wang_saku" name="amaun_wang_saku" class="input-group-text" style="width: 100%;" value="" readonly/>
-							</div>
+								{{-- @if($currentDate->greaterThan($tarikhNextSem)) --}}
+									<div class="d-flex flex-stack">
+										<div class="me-5">
+											<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox"  @if ($permohonan->wang_saku == 1) value="1" checked @endif/>
+											<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
+										</div>
+									</div>
+								
+									<!--end::Item-->
+									<br>
+									<!--begin::Wrapper-->
+									<div class="d-flex flex-stack flex-grow-1">
+										<!--begin::Content-->
+										<div class="fw-semibold">
+											<div class="fs-6 text-dark">Jumlah Elaun Wang Saku </div>
+										</div>
+										<!--end::Content-->
+									</div>
+									<!--end::Wrapper-->
+									<div class="d-flex">
+										<span class="input-group-text">RM</span>
+										<input type="hidden" id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="input-group-text" style="width: 100%;" value="{{$akademik->bil_bulan_per_sem}}"/>
+										<input type="text" id="amaun_wang_saku" name="amaun_wang_saku" class="input-group-text" style="width: 100%;" value="" readonly/>
+									</div>
+								{{-- @endif	 --}}
 							@endif
 							<br>
 							<br>
@@ -302,14 +308,43 @@
 
 
 <script>
+var max_yuran; // Declare these variables in a higher scope
+var max_wang_saku;
+// Make an AJAX request to fetch data based on the selected semester
+$.ajax({
+	type: 'GET',
+	url: '/fetch-amaun/bkoku', // Replace with the actual route for fetching data
+	success: function(response) {
+		// Format the value to display with .00
+		var max_yuran = response.amaun_yuran;
+		var max_wang_saku = response.amaun_wang_saku;
+
+		document.getElementById("max_yuran").value = max_yuran;
+		document.getElementById("max_wang_saku").value = max_wang_saku;
+
+	},
+	error: function(error) {
+		console.error('Error fetching data:', error);
+	}
+});	
 
 function myFunction() {
 
     var checkBox = document.getElementById("wang_saku");
     var bilbulan = parseInt(document.getElementById('bil_bulan_per_sem').value); // Convert to integer
-	var wang_saku_perbulan = 300;
+	var wang_saku_perbulan = document.getElementById('max_wang_saku').value;
+	var currentDate = new Date();
+    var tarikhMula = new Date("your_start_date_here"); // Replace with your start date
+    var tarikhNextSem = new Date(tarikhMula);
+    tarikhNextSem.setMonth(tarikhNextSem.getMonth() + bilbulan);
+
+    if (currentDate > tarikhNextSem) {
+        var wang_saku = wang_saku_perbulan * bilbulan;
+    } else {
+        var wang_saku = 0.00;
+    }
 	
-	var wang_saku = wang_saku_perbulan * bilbulan;
+
 	
 
 	// Initialize a variable to store the total
@@ -328,6 +363,7 @@ function myFunction() {
 	}
 
 	var yuranInput = document.getElementById('amaun_yuran');
+	// console.log(yuranInput);
 	var yuran = parseFloat(yuranInput.value).toFixed(2);
 	var total_yuran = (parseFloat(yuran) + parseFloat(totalAmaun)).toFixed(2);
 

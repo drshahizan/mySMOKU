@@ -29,6 +29,7 @@ class TuntutanController extends Controller
         ->where('smoku_akademik.status', 1)
         ->select('smoku_akademik.*')
         ->first();
+        // dd($akademik);
 
         $currentDate = Carbon::now();
         $tarikhMula = Carbon::parse($akademik->tarikh_mula);
@@ -132,19 +133,25 @@ class TuntutanController extends Controller
 
         // $biltuntutan = Tuntutan::where('smoku_id', '<=', $smoku_id->id)
         $biltuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
+            ->where('sesi', '=', $request->sesi)
+            ->where('semester', '=', $request->semester)
             ->groupBy('no_rujukan_tuntutan')
             ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan') 
             ->get();
 
         $bil = $biltuntutan->count();
+        
         $running_num =  $bil + 1; //sebab nak guna satu id je
         $no_rujukan_tuntutan =  $no_rujukan_permohonan.'/'.$running_num; // try duluuu
-
+        
         //simpan dalam table tuntutan_item
         $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
             ->where('permohonan_id', '=', $permohonan->id)
+            ->where('sesi', '=', $request->sesi)
+            ->where('semester', '=', $request->semester)
             ->first();
-        // if ($tuntutan === null) {
+            //dd($tuntutan);
+        if(!$tuntutan){
             $tuntutan = Tuntutan::create([
                 'smoku_id' => $smoku_id->id,
                 'permohonan_id' => $permohonan->id,
@@ -154,23 +161,12 @@ class TuntutanController extends Controller
                 'yuran' => '1',
                 'status' => '1',
             ]);
-        // }
-       /*else {
-            Tuntutan::where('smoku_id', '=', $smoku_id->id)
-                ->where('permohonan_id', '=', $permohonan->id)
-                ->update([
-                'smoku_id' => $smoku_id->id,
-                'permohonan_id' => $permohonan->id,
-                'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
-                'sesi' => $request->sesi,
-                'semester' => $request->semester,
-                'status' => '1',
-                
-            ]);
+            
+            $tuntutan->save();
 
-        }*/
-
-        $tuntutan->save();
+        }    
+            
+        
 
         //simpan dalam table tuntutan_item
         $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)
@@ -347,6 +343,21 @@ class TuntutanController extends Controller
         } 
         
         return redirect()->route('pelajar.sejarah.tuntutan');
+        
+    }
+
+    public function deleteItemTuntutan($id)
+    {
+        // dd($id); // ni tuntutan id
+        $tuntutan = Tuntutan::orderBy('id', 'desc')->where('id',$id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->first();
+
+        if ($tuntutan_item) {
+
+            DB::table('tuntutan_item')->where('id',$tuntutan_item->id)->delete();
+        } 
+        
+        return redirect()->route('tuntutan.baharu');
         
     }
 }
