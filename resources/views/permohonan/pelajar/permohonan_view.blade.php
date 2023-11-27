@@ -1713,7 +1713,7 @@
 
 		<script>
 			var max_yuran; // Declare these variables in a higher scope
-    		var max_wang_saku;
+			var max_wang_saku;
 			// Make an AJAX request to fetch data based on the selected semester
 			$.ajax({
 				type: 'GET',
@@ -1733,21 +1733,16 @@
 			});
 			function select1(){
 				console.clear();
-
+				
 				var sumber = document.getElementById('sumber_biaya').value;
 				var mod = document.getElementById('mod').value;
 				var bilbulan = document.getElementById('bil_bulan_per_sem').value;
 				
 
-				var max_yuran = parseFloat(document.getElementById('max_yuran').value).toFixed(2);
-				var max_wang_saku = parseFloat(document.getElementById('max_wang_saku').value).toFixed(2);
+				var max_yuran = document.getElementById('max_yuran').value;
+				var max_wang_saku = document.getElementById('max_wang_saku').value;
 				var yuranInput = document.getElementById('amaun_yuran');
 				var yuran = parseFloat(yuranInput.value).toFixed(2);
-				// console.log('max_limit:', max_yuran);
-
-    			// console.log('maxyuran:', max_wang_saku);
-				 console.log('yuran:', yuran);
-
 
 				// Define the maximum limit for 'amaun_yuran'
 				var maxLimit = max_yuran;
@@ -1759,8 +1754,9 @@
 						return;
 					}
 				}
-				var wang_saku_perbulan = max_wang_saku;
 				
+				var wang_saku_perbulan = max_wang_saku;
+
 				var wang_saku = wang_saku_perbulan * bilbulan;
 				var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
 
@@ -1802,6 +1798,10 @@
 					}
 					
 				}
+
+
+
+				
 			}
 
 		</script>
