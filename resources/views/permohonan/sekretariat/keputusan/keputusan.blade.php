@@ -129,12 +129,12 @@
                                             <table id="sortTable1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>
-                                                        <th style="width: 13%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 30%"><b>Nama</b></th>
-                                                        <th style="width: 15%"><b>Peringkat Pengajian</b></th> 
+                                                        <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>
+                                                        <th style="width: 12%"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 33%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 12%"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 15%"><b>Tarikh Kemaskini Keputusan</b></th> 
                                                         <th class="text-center" style="width: 15%">Status Permohonan</th>
                                                     </tr>
                                                 </thead>
@@ -181,7 +181,7 @@
                                                                     <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
                                                                     <td>{{$no_rujukan_permohonan}}</td>
                                                                     <td>{{$pemohon}}</td>
-                                                                    <td>{{ucwords(strtolower($nama_peringkat))}}</td>
+                                                                    <td class="text-center">{{ucwords(strtolower($nama_peringkat))}}</td>
                                                                     <td class="text-center">{{$item->no_mesyuarat}}</td>
                                                                     <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
                                                                     <td class="text-center">
@@ -241,12 +241,12 @@
                                             <table id="sortTable2" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>
-                                                        <th style="width: 13%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 30%"><b>Nama</b></th>
-                                                        <th style="width: 15%"><b>Peringkat Pengajian</b></th> 
+                                                        <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>
+                                                        <th style="width: 12%"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 33%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 12%"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 15%"><b>Tarikh Kemaskini Keputusan</b></th> 
                                                         <th class="text-center" style="width: 15%">Status Permohonan</th>
                                                     </tr>
                                                 </thead>
@@ -290,12 +290,12 @@
                                                         @if($program == "BKOKU")
                                                             @if ($jenis_institusi == "UA")
                                                                 <tr>
-                                                                    <td class="text-center" style="width: 5%"  data-no="{{ $i++ }}">{{$i++}}</td>
-                                                                    <td style="width: 13%">{{$no_rujukan_permohonan}}</td>
-                                                                    <td style="width: 30%">{{$pemohon}}</td>
-                                                                    <td style="width: 15%">{{ucwords(strtolower($nama_peringkat))}}</td>
+                                                                    <td class="text-center" style="width: 3%"  data-no="{{ $i++ }}">{{$i++}}</td>
+                                                                    <td style="width: 12%">{{$no_rujukan_permohonan}}</td>
+                                                                    <td style="width: 33%">{{$pemohon}}</td>
+                                                                    <td class="text-center" style="width: 12%">{{ucwords(strtolower($nama_peringkat))}}</td>
                                                                     <td class="text-center" style="width: 10%">{{$item->no_mesyuarat}}</td>
-                                                                    <td class="text-center" style="width: 12%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
+                                                                    <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
                                                                     <td class="text-center" style="width: 15%">
                                                                         @if($item->keputusan == "Lulus")
                                                                             <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
@@ -353,12 +353,12 @@
                                             <table id="sortTable3" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>
-                                                        <th style="width: 13%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 30%"><b>Nama</b></th>
-                                                        <th style="width: 15%"><b>Peringkat Pengajian</b></th> 
+                                                        <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>
+                                                        <th style="width: 12%"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 33%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 12%"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 15%"><b>Tarikh Kemaskini Keputusan</b></th> 
                                                         <th class="text-center" style="width: 15%">Status Permohonan</th>
                                                     </tr>
                                                 </thead>
@@ -391,12 +391,12 @@
 
                                                         @if($program == "PPK")
                                                             <tr>
-                                                                <td class="text-center" style="width: 5%"  data-no="{{ $i++ }}">{{$i++}}</td>
-                                                                <td style="width: 13%">{{$id_permohonan}}</td>
-                                                                <td style="width: 30%">{{$pemohon}}</td>
-                                                                <td style="width: 15%">{{ucwords(strtolower($nama_peringkat))}}</td>
+                                                                <td class="text-center" style="width: 3%"  data-no="{{ $i++ }}">{{$i++}}</td>
+                                                                <td style="width: 12%">{{$id_permohonan}}</td>
+                                                                <td style="width: 33%">{{$pemohon}}</td>
+                                                                <td class="text-center" style="width: 12%">{{ucwords(strtolower($nama_peringkat))}}</td>
                                                                 <td class="text-center" style="width: 10%">{{$item->no_mesyuarat}}</td>
-                                                                <td class="text-center" style="width: 12%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
+                                                                <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
                                                                 <td class="text-center" style="width: 15%">
                                                                     @if($item->keputusan == "Lulus")
                                                                         <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">

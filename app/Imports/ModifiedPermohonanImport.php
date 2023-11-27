@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\Permohonan;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -27,6 +28,13 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
                 'tarikh_baucer' => $this->convertExcelDate($row['tarikh_baucer']),
             ];
         }
+        // Update the 'status' column in the permohonan table to 8
+        $this->updateStatus();
+    }
+
+    public function getModifiedData()
+    {
+        return $this->modifiedData;
     }
 
     protected function convertExcelDate($excelDate)
@@ -35,8 +43,13 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
         return Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($excelDate));
     }
 
-    public function getModifiedData()
+    private function updateStatus()
     {
-        return $this->modifiedData;
+        // Get an array of unique 'no_rujukan_permohonan' values from the modified data
+        $noRujukanArray = collect($this->modifiedData)->pluck('no_rujukan_permohonan')->unique()->toArray();
+
+        // Update the 'status' column to 8 for the permohonan records with matching 'no_rujukan_permohonan'
+        Permohonan::whereIn('no_rujukan_permohonan', $noRujukanArray)
+            ->update(['status' => 8]);
     }
 }
