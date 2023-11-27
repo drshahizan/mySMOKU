@@ -28,12 +28,14 @@ class PelajarController extends Controller
         ->where('smoku_id',$smoku_id->id)
         ->where('status', '!=', 'DISOKONG');
         //dd($smoku_id);
-        
+
+        $tuntutan_id = Tuntutan::orderby("id","desc")->where('smoku_id',$smoku_id->id)->first();
         $tuntutan = Tuntutan::orderby("sejarah_tuntutan.created_at","desc")
         ->join('sejarah_tuntutan','sejarah_tuntutan.tuntutan_id','=','tuntutan.id')
         ->join('bk_status','bk_status.kod_status','=','sejarah_tuntutan.status')
         ->get(['sejarah_tuntutan.*','tuntutan.*','bk_status.status','tuntutan.status as status_semasa'])
         ->where('smoku_id',$smoku_id->id)
+        ->where('tuntutan_id',$tuntutan_id->id)
         ->where('status', '!=', 'DISOKONG');
         //dd($tuntutan);
 

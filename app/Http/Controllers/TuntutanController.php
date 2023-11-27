@@ -149,8 +149,9 @@ class TuntutanController extends Controller
             ->where('permohonan_id', '=', $permohonan->id)
             ->where('sesi', '=', $request->sesi)
             ->where('semester', '=', $request->semester)
+            ->where('no_rujukan_tuntutan', '=', $no_rujukan_tuntutan)
             ->first();
-            //dd($tuntutan);
+        // dd($tuntutan);
         if(!$tuntutan){
             $tuntutan = Tuntutan::create([
                 'smoku_id' => $smoku_id->id,
@@ -161,7 +162,7 @@ class TuntutanController extends Controller
                 'yuran' => '1',
                 'status' => '1',
             ]);
-            
+
             $tuntutan->save();
 
         }    

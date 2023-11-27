@@ -56,7 +56,11 @@
 									
 
 									}
-									
+									//nak tahu baki sesi semasa
+									$yuran = $permohonan->yuran_dibayar;
+									$wang = $permohonan->wang_saku_dibayar;
+									$baki_total = 5000 - $yuran - $wang;
+									//dd($baki_total);		
 
 
 								} else {
@@ -71,7 +75,7 @@
 										$sesiSemasa = ($currentYear + 1) . '/' . ($currentYear + 2);
 										$semSemasa = 1; // Reset semester for the next academic year
 									}
-									 else {
+									else {
 										if($currentDate->greaterThan($tarikhNextSem)){
 											$semSemasa = $semSemasa + 1;
 										}
@@ -79,13 +83,13 @@
 											$semSemasa = $semSemasa;
 									}
 
+									$yuran = $permohonan->yuran_dibayar;
+									$wang = $permohonan->wang_saku_dibayar;
+									$baki_total = 5000 - $yuran - $wang - $ada->jumlah;
+
 								}
 
-								//nak tahu baki sesi semasa
-								$yuran = $permohonan->yuran_dibayar;
-								$wang = $permohonan->wang_saku_dibayar;
-								$baki_total = 5000 - $yuran - $wang;
-								//dd($baki_total);
+								
 
 							@endphp
 							<!--begin::Wrapper-->
