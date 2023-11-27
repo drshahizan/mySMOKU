@@ -66,8 +66,8 @@
                             </div>
 
                             <div class="tab-content" id="myTabContent">
-                                <form action="{{ url('penyelaras/penyaluran/permohonan/layak') }}" method="GET">
-                                    <div class="row" style="margin-left: 15px;">
+                                <div class="row" style="margin-left: 15px;">
+                                    <form action="{{ url('penyelaras/penyaluran/permohonan/layak') }}" method="GET">
                                         <div class="col-md-2">
                                             <label for="start_date"><b>Dari:</b></label>
                                             <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
@@ -84,21 +84,22 @@
                                                 <i class="fa fa-filter" style="font-size: 15px;"></i>
                                             </button>
                                         </div>
+                                    </form>
 
-                                        <div class="col-md-6" style="padding-left: 70px;">
-                                            <br>
-                                            <a href="{{ route('penyelaras.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
-                                                <i class="fa fa-file-excel" style="color: black;"></i> Senarai Layak
-                                            </a>
+                                    <div class="col-md-6" style="padding-left: 70px;">
+                                        <br>
+                                        <a href="{{ route('penyelaras.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
+                                            <i class="fa fa-file-excel" style="color: black;"></i> Senarai Layak
+                                        </a>
 
-                                            <form action="{{ route('modified.file.pembayaran') }}" method="POST" enctype="multipart/form-data">
-                                                @csrf
-                                                <input type="file" name="modified_excel_file" accept=".xlsx, .xls">
-                                                <button type="submit">Upload Modified File</button>
-                                            </form>                         
-                                        </div>
+                                        <form action="{{ route('modified.file.pembayaran') }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="file" name="modified_excel_file" accept=".xlsx, .xls">
+                                            <button type="submit">Upload Modified File</button>
+                                        </form>                         
                                     </div>
-                                </form>  
+                                </div>
+                                  
 
                                 <div class="body">
                                     {{-- <form action="{{ route('penyelaras.bulk.submit') }}" method="POST" id="modalForm">

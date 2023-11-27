@@ -1373,7 +1373,8 @@ class PenyelarasController extends Controller
 
     private function updatePermohonanRecords($modifiedData)
     {
-        foreach ($modifiedData as $modifiedRecord) {
+        foreach ($modifiedData as $modifiedRecord) 
+        {
             $noRujukan = $modifiedRecord['no_rujukan_permohonan'];
             $yuranDibayar = $modifiedRecord['yuran_dibayar'];
             $wangSakuDibayar = $modifiedRecord['wang_saku_dibayar'];
