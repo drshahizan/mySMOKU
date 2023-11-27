@@ -133,8 +133,8 @@ class TuntutanController extends Controller
 
         // $biltuntutan = Tuntutan::where('smoku_id', '<=', $smoku_id->id)
         $biltuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
-            ->where('sesi', '=', $request->sesi)
-            ->where('semester', '=', $request->semester)
+            // ->where('sesi', '=', $request->sesi)
+            // ->where('semester', '=', $request->semester)
             ->groupBy('no_rujukan_tuntutan')
             ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan') 
             ->get();
@@ -234,19 +234,21 @@ class TuntutanController extends Controller
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
         $permohonan = Permohonan::all()->where('smoku_id', '=', $smoku_id->id)->first();
 
-        $tuntutan = Tuntutan::orderby("id","desc")->where('smoku_id', '=', $smoku_id->id)->first();
-        if ($tuntutan != null) {
-            Tuntutan::where('smoku_id' ,$smoku_id->id)
-            ->update([
+        $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)->orderBy('id', 'desc')->first();
 
-            'wang_saku' => $request->wang_saku,
-            'amaun_wang_saku' => $request->amaun_wang_saku,
-            'jumlah' => $request->jumlah,
-            'status' => '2',
-            
-        ]);
+        if ($tuntutan !== null) {
+            $tuntutan->update([
+                'wang_saku' => $request->wang_saku,
+                'amaun_wang_saku' => $request->amaun_wang_saku,
+                'jumlah' => $request->jumlah,
+                'tarikh_hantar' => now()->format('Y-m-d'),
+                'status' => '2',
+            ]);
+
+            // Save the changes to the database
+            $tuntutan->save();
         }
-        $tuntutan->save();
+        
 
         //simpan dalam table tuntutan_item
         // $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
