@@ -82,8 +82,8 @@ class PermohonanLayakExport implements FromCollection, WithHeadings, WithColumnW
             // Update this to match with column name in database
             $row->no_rujukan_permohonan, 
             $row->nama,
-            $row->yuran_disokong,
-            $row->wang_saku_disokong,
+            number_format($row->yuran_disokong, 2, '.', ''), // Format 'Yuran Disokong' as numeric with two decimal places
+            number_format($row->wang_saku_disokong, 2, '.', ''), // Format 'Wang Saku Disokong' as numeric with two decimal places
             Carbon::parse($row->created_at)->format('d/m/Y'),
         ];
     }

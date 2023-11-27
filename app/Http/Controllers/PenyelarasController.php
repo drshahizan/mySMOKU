@@ -1381,7 +1381,7 @@ class PenyelarasController extends Controller
             $wangSakuDibayar = $modifiedRecord['wang_saku_dibayar'];
             $noBaucer = $modifiedRecord['no_baucer'];
             $perihal = $modifiedRecord['perihal'];
-            // $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
+            $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
 
             // Retrieve the corresponding database record based on no_rujukan_permohonan
             $permohonan = Permohonan::where('no_rujukan_permohonan', $noRujukan)->first();
@@ -1393,7 +1393,7 @@ class PenyelarasController extends Controller
                     'wang_saku_dibayar' => $wangSakuDibayar,
                     'no_baucer' => $noBaucer,
                     'perihal' => $perihal,
-                    // 'tarikh_baucer' => $tarikhBaucer,
+                    'tarikh_baucer' => $tarikhBaucer,
                 ]);
                 // Optionally, you can log a success message
                 Log::info("Record with no_rujukan_permohonan $noRujukan updated successfully.");
