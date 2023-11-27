@@ -66,7 +66,7 @@
                             </div>
 
                             <div class="tab-content" id="myTabContent">
-                                <form action="{{ url('penyelaras/penyaluran/baucer/permohonan') }}" method="GET">
+                                <form action="{{ url('penyelaras/penyaluran/permohonan/layak') }}" method="GET">
                                     <div class="row" style="margin-left: 15px;">
                                         <div class="col-md-2">
                                             <label for="start_date"><b>Dari:</b></label>
@@ -91,7 +91,7 @@
                                                 <i class="fa fa-file-excel" style="color: black;"></i> Senarai Layak
                                             </a>
 
-                                            <form action="{{ route('uploaded.file.pembayaran') }}" method="POST" enctype="multipart/form-data">
+                                            <form action="{{ route('modified.file.pembayaran') }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <input type="file" name="modified_excel_file" accept=".xlsx, .xls">
                                                 <button type="submit">Upload Modified File</button>

@@ -8,6 +8,7 @@ use App\Mail\TuntutanHantar;
 use App\Models\Agama;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\Smoku;
 use App\Models\ButiranPelajar;
@@ -1365,15 +1366,13 @@ class PenyelarasController extends Controller
 
         // Process the imported data and update the permohonan records
         $this->updatePermohonanRecords($import->getModifiedData());
-
+        
         // You may add a success message or redirect to a success page
         return redirect()->back()->with('success', 'File processed successfully');
     }
 
-    // Method to update permohonan records based on modified data
     private function updatePermohonanRecords($modifiedData)
     {
-        // Iterate through $modifiedData and update permohonan records as needed
         foreach ($modifiedData as $modifiedRecord) {
             $noRujukan = $modifiedRecord['no_rujukan_permohonan'];
             $yuranDibayar = $modifiedRecord['yuran_dibayar'];
@@ -1382,82 +1381,90 @@ class PenyelarasController extends Controller
             $perihal = $modifiedRecord['perihal'];
             $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
 
-            // Example: Update permohonan record based on 'no_rujukan_permohonan'
-            Permohonan::where('no_rujukan_permohonan', $noRujukan)
-                ->update([
+            // Retrieve the corresponding database record based on no_rujukan_permohonan
+            $permohonan = Permohonan::where('no_rujukan_permohonan', $noRujukan)->first();
+
+            if ($permohonan) {
+                // Update the retrieved database record with the modified data
+                $permohonan->update([
                     'yuran_disokong' => $yuranDibayar,
                     'wang_saku_disokong' => $wangSakuDibayar,
                     'no_baucer' => $noBaucer,
                     'perihal' => $perihal,
                     'tarikh_baucer' => $tarikhBaucer,
                 ]);
+
+                // Optionally, you can log a success message
+                Log::info("Record with no_rujukan_permohonan $noRujukan updated successfully.");
+            } else {
+                // Optionally, log a message or handle the case where no matching record is found
+                Log::warning("No record found for no_rujukan_permohonan $noRujukan.");
+            }
         }
     }
 
-    public function hantarSemuaInfoCek(Request $request, $id)
-    {
-        // Use $smoku_id to associate the data with a specific smoku_id
-        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+    // public function hantarSemuaInfoCek(Request $request, $id)
+    // {
+    //     // Use $smoku_id to associate the data with a specific smoku_id
+    //     $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
         
-        // Retrieve and process the form data from $request
-        $existingRecord = Permohonan::where('id', $id)->first();
+    //     // Retrieve and process the form data from $request
+    //     $existingRecord = Permohonan::where('id', $id)->first();
 
-        if ($existingRecord) {
-            // Update the respective row in permohonan_kelulusan table
-            $existingRecord->yuran_dibayar = $request->yuranDibayar;
-            $existingRecord->wang_saku_dibayar = $request->wangSakuDibayar;
-            $existingRecord->no_baucer = $request->noBaucer;
-            $existingRecord->perihal = $request->perihal;
-            $existingRecord->tarikh_baucer = $request->tarikhBaucer;
-            $existingRecord->save();
+    //     if ($existingRecord) {
+    //         // Update the respective row in permohonan_kelulusan table
+    //         $existingRecord->yuran_dibayar = $request->yuranDibayar;
+    //         $existingRecord->wang_saku_dibayar = $request->wangSakuDibayar;
+    //         $existingRecord->no_baucer = $request->noBaucer;
+    //         $existingRecord->perihal = $request->perihal;
+    //         $existingRecord->tarikh_baucer = $request->tarikhBaucer;
+    //         $existingRecord->save();
 
-            // Update permohonan table
-            Permohonan::where('id', $id)->update([
-                'status' => 8,
-            ]);
+    //         // Update permohonan table
+    //         Permohonan::where('id', $id)->update([
+    //             'status' => 8,
+    //         ]);
 
-            // Update sejarah_permohonan table
-            $sejarah = new SejarahPermohonan([
-                'smoku_id' => $smoku_id,
-                'permohonan_id' => $id,
-                'status' => 8,
-            ]);
-            $sejarah->save();
-        }
+    //         // Update sejarah_permohonan table
+    //         $sejarah = new SejarahPermohonan([
+    //             'smoku_id' => $smoku_id,
+    //             'permohonan_id' => $id,
+    //             'status' => 8,
+    //         ]);
+    //         $sejarah->save();
+    //     }
 
-        //filter for keputusan
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
+    //     //filter for keputusan
+    //     $startDate = $request->input('start_date');
+    //     $endDate = $request->input('end_date');
 
-        $dibayar = Permohonan::orderBy('id', 'desc')
-        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('created_at', [$startDate, $endDate]);
-        })
-        ->where('permohonan.status', '=', '8')->get();
+    //     $dibayar = Permohonan::orderBy('id', 'desc')
+    //     ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+    //         return $q->whereBetween('created_at', [$startDate, $endDate]);
+    //     })
+    //     ->where('permohonan.status', '=', '8')->get();
 
-        return redirect()->route('penyelaras.senarai.dibayar', compact('dibayar'));
-    }
+    //     return redirect()->route('penyelaras.senarai.dibayar', compact('dibayar'));
+    // }
 
-    public function senaraiPemohonDibayar(Request $request)
-    {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
+    // public function senaraiPemohonDibayar(Request $request)
+    // {
+    //     $startDate = $request->input('start_date');
+    //     $endDate = $request->input('end_date');
 
-        $dibayar = Permohonan::orderBy('id', 'desc')
-        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('created_at', [$startDate, $endDate]);
-        })
-        ->where('permohonan.status', '=', '8')->get();
+    //     $dibayar = Permohonan::orderBy('id', 'desc')
+    //     ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+    //         return $q->whereBetween('created_at', [$startDate, $endDate]);
+    //     })
+    //     ->where('permohonan.status', '=', '8')->get();
 
-        return view('penyaluran.penyelaras.senarai_permohonan_dibayar', compact('dibayar'));
-    }
+    //     return view('penyaluran.penyelaras.senarai_permohonan_dibayar', compact('dibayar'));
+    // }
+    // public function maklumatPembayaran($id)
+    // {
+    //     // Retrieve data from the database based on the $id
+    //     $maklumat = Permohonan::where('no_rujukan_permohonan', $id)->first();
 
-    public function maklumatPembayaran($id)
-    {
-        // Retrieve data from the database based on the $id
-        $maklumat = Permohonan::where('no_rujukan_permohonan', $id)->first();
-
-        return response()->json(['maklumat' => $maklumat]);
-    }
-
+    //     return response()->json(['maklumat' => $maklumat]);
+    // }
 }
