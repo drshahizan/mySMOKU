@@ -150,7 +150,7 @@
                                         <td class="space">&nbsp;</td>
                                         <td><strong>Tarikh Permohonan</strong></td>
                                         <td>:</td>
-                                        <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
+                                        <td>{{date('d/m/Y', strtotime($permohonan->tarikh_hantar))}}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Nama</strong></td>
@@ -420,7 +420,7 @@
                                 <tr>
                                     <td><strong>Tarikh Tuntutan</strong></td>
                                     <td>:</td>
-                                    <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
+                                    <td>{{date('d/m/Y', strtotime($permohonan->tarikh_hantar))}}</td>
                                     <td class="space">&nbsp;</td>
                                     <td><strong>Sesi/Semester</strong></td>
                                     <td>:</td>
