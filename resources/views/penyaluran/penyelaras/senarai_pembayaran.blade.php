@@ -62,37 +62,48 @@
 
                             <div class="tab-content" id="myTabContent">
                                 <div class="row" style="margin-left: 15px;">
-                                    <form action="{{ url('penyelaras/penyaluran/permohonan/layak') }}" method="GET">
-                                        <div class="col-md-2">
-                                            <label for="start_date"><b>Dari:</b></label>
-                                            <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
-                                        </div>
+                                    <form action="{{ url('penyelaras/penyaluran/permohonan/layak') }}" method="GET" class="col-md-5">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label for="start_date"><b>Dari:</b></label>
+                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
+                                            </div>
                                 
-                                        <div class="col-md-2">
-                                            <label for="end_date"><b>Hingga:</b></label>
-                                            <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                        </div>
+                                            <div class="col-md-5">
+                                                <label for="end_date"><b>Hingga:</b></label>
+                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
+                                            </div>
                                 
-                                        <div class="col-md-2 right">
-                                            <br>
-                                            <button type="submit" class="btn btn-primary" style="width: 5%; padding-left: 10px;">
-                                                <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                            </button>
+                                            <div class="col-md-2">
+                                                <br>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fa fa-filter" style="font-size: 12px;"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </form>
 
-                                    <div class="col-md-6" style="padding-left: 70px;">
+                                    <div class="col-md-7" style="padding-left: 260px;">
                                         <br>
-                                        <a href="{{ route('penyelaras.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
-                                            <i class="fa fa-file-excel" style="color: black;"></i> Senarai Layak
-                                        </a>                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <a href="{{ route('penyelaras.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
+                                                </a>
+                                            </div>
+                                    
+                                            <div class="col-md-6">
+                                                <form id="uploadForm" action="{{ route('modified.file.pembayaran') }}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <input type="file" name="modified_excel_file" accept=".xlsx, .xls" style="display: none" onchange="fileSelected(event)">
+                                                    <input type="hidden" name="form_submitted" id="formSubmitted" value="0">
+                                                    <button type="button" class="btn btn-secondary btn-round" onclick="uploadFile()"> 
+                                                        <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Muat Naik
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
-
-                                    <form action="{{ route('modified.file.pembayaran') }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        <input type="file" name="modified_excel_file" accept=".xlsx, .xls">
-                                        <button type="submit">Upload Modified File</button>
-                                    </form>  
                                 </div>
 
                                 <div class="body">
@@ -247,25 +258,38 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-        
+
         <script>
+            function uploadFile() {
+                // Trigger the click event of the hidden file input
+                document.querySelector('input[name="modified_excel_file"]').click();
+            }
+        
+            function fileSelected(event) {
+                // Set the hidden input value to 1 when a file is selected
+                document.getElementById('formSubmitted').value = 1;
+                // Submit the form
+                document.getElementById('uploadForm').submit();
+            }
+        
+            // Display SweetAlert for success and error messages after file import
             @if(session('success'))
                 Swal.fire({
                     icon: 'success',
                     title: 'Berjaya!',
-                    text: ' {!! session('success') !!}',
+                    text: '{!! session('success') !!}',
                     confirmButtonText: 'OK'
                 });
             @endif
+        
             @if(session('failed'))
                 Swal.fire({
                     icon: 'error',
                     title: 'Tidak Berjaya!',
-                    text: ' {!! session('failed') !!}',
+                    text: '{!! session('failed') !!}',
                     confirmButtonText: 'OK'
                 });
             @endif
-            
         </script>
 
         <script>
