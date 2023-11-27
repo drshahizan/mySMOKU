@@ -547,6 +547,7 @@ class PenyelarasPPKController extends Controller
             Permohonan::where('smoku_id' ,$smoku_id->id)
             ->update([
                 'perakuan' => $request->perakuan,
+                'tarikh_hantar' => now()->format('Y-m-d'),
                 'status' => '2',
 
             ]);
