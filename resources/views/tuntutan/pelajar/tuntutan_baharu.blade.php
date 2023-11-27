@@ -29,63 +29,106 @@
 							</div>
 							<br>
 							@php
-
-								$currentDate = Carbon::now();
-								$tarikhMula = Carbon::parse($akademik->tarikh_mula);
-								$tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
+								$semSemasa = $akademik->sem_semasa;
+								$sesiSemasa = $akademik->sesi;
 								if($akademik->bil_bulan_per_sem == 6){
 									$bilSem = 2;
 								} else {
 									$bilSem = 3;
 								}
-								
-								$semSemasa = $akademik->sem_semasa;
 								$totalSemesters = $akademik->tempoh_pengajian * $bilSem;
 								$currentYear = date('Y');
-								$sesiSemasa = $akademik->sesi;
-								// dd($sesiSemasa);
+
+								$currentDate = Carbon::now();
+								$tarikhMula = Carbon::parse($akademik->tarikh_mula);
+								$tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
+
+								while ($tarikhMula < $tarikhTamat) {
+									$tarikhNextSem = $tarikhMula->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
+									// echo $tarikhNextSem->format('Y-m-d') . PHP_EOL;
+									$tarikhNextSem = $tarikhNextSem->format('Y-m-d');
+									
+									if ($currentDate->greaterThan($tarikhNextSem)) {
+										$semSemasa = $semSemasa + 1;
+										// echo 'Semester Semasa: ' . $semSemasa . PHP_EOL;
+										break; // Exit the loop
+									
+									}
+									
+									
+								}
 
 								if (!$tuntutan) {
+									//dd('sini');
 
 									if($currentDate->greaterThan($tarikhNextSem)){
+										//dd('sini kee');
 										$semSemasa = $semSemasa + 1;
 									}else{
+										//dd('situuu');
 										// No record found, and  masih dalam sem sama
 										$semSemasa = $semSemasa;
 										$wang_saku = 0.00;
+										//nak tahu baki sesi semasa
+										$yuran = $permohonan->yuran_dibayar;
+										$wang = $permohonan->wang_saku_dibayar;
+										$baki_total = 5000 - $yuran - $wang;
+									// dd($baki_total);	
 									
 
 									}
-									//nak tahu baki sesi semasa
-									$yuran = $permohonan->yuran_dibayar;
-									$wang = $permohonan->wang_saku_dibayar;
-									$baki_total = 5000 - $yuran - $wang;
-									//dd($baki_total);		
+										
 
 
 								} else {
+									//dd('sini ke');
 									$ada = DB::table('tuntutan')
 										->where('permohonan_id', $tuntutan->permohonan_id)
 										->orderBy('id', 'desc')
 										->first();
+									
+									$jumlah_tuntut = DB::table('tuntutan')
+										->where('permohonan_id', $tuntutan->permohonan_id)
+										->get();
+									$sum = $jumlah_tuntut->sum('jumlah');		
 
-									//dd($ada);	
+									// dd($sum);	
 
-									if ($ada->semester >= $bilSem) {
-										$sesiSemasa = ($currentYear + 1) . '/' . ($currentYear + 2);
-										$semSemasa = 1; // Reset semester for the next academic year
+									if ($semSemasa > $bilSem) {
+										// dd('sini');
+										
+										$currentYear = intval(substr($sesiSemasa, 0, 4));
+										// Incrementing the current year by 1
+										$sesiSemasaYear = $currentYear + 1;
+
+										// Creating the new session format
+										$sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
+										// dd($semSemasa);
+										//$semSemasa = 1; // Reset semester for the next academic year
+										
+										$baki_total = 5000;
+										// dd('5000');
+									
+									
 									}
 									else {
-										if($currentDate->greaterThan($tarikhNextSem)){
-											$semSemasa = $semSemasa + 1;
-										}
-											// No record found, and  masih dalam sem sama
-											$semSemasa = $semSemasa;
-									}
-
+										// dd('situu');
+										// dd($semSemasa);
+										// if($currentDate->greaterThan($tarikhNextSem)){
+										// 	$semSemasa = $semSemasa + 1;
+										// }else{
+										// 	// No record found, and  masih dalam sem sama
+										// 	$semSemasa = $semSemasa;
+										// }
+											
 									$yuran = $permohonan->yuran_dibayar;
 									$wang = $permohonan->wang_saku_dibayar;
-									$baki_total = 5000 - $yuran - $wang - $ada->jumlah;
+									$baki_total = 5000 - $yuran - $wang - $sum;
+									// dd($baki_total);
+
+									}
+
+									
 
 								}
 
@@ -248,7 +291,8 @@
 								{{-- @if($currentDate->greaterThan($tarikhNextSem)) --}}
 									<div class="d-flex flex-stack">
 										<div class="me-5">
-											<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox"  @if ($permohonan->wang_saku == 1) value="1" checked @endif/>
+											{{-- <input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox"  @if ($permohonan->wang_saku == 1) value="1" checked @endif/> --}}
+											<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" required oninvalid="this.setCustomValidity('Sila tandakan.')" oninput="setCustomValidity('')"  @if ($permohonan->wang_saku == 1) value="1" @endif/>
 											<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
 										</div>
 									</div>
@@ -276,7 +320,7 @@
 							<div class="d-flex flex-stack flex-grow-1">
 								<!--begin::Content-->
 								<div class="fw-semibold">
-									<div class="fs-6 text-dark">Jumlah Keseluruhan Tuntutan</div>
+									<div class="fs-6 text-dark"><b>Jumlah Keseluruhan Tuntutan</b></div>
 								</div>
 								<!--end::Content-->
 							</div>
@@ -335,21 +379,27 @@ $.ajax({
 function myFunction() {
 
     var checkBox = document.getElementById("wang_saku");
-    var bilbulan = parseInt(document.getElementById('bil_bulan_per_sem').value); // Convert to integer
-	var wang_saku_perbulan = document.getElementById('max_wang_saku').value;
-	var currentDate = new Date();
-    var tarikhMula = new Date("your_start_date_here"); // Replace with your start date
-    var tarikhNextSem = new Date(tarikhMula);
-    tarikhNextSem.setMonth(tarikhNextSem.getMonth() + bilbulan);
+	var bilbulan = parseInt(document.getElementById('bil_bulan_per_sem').value); // Convert to integer
+	var wang_saku_perbulan = parseFloat(document.getElementById('max_wang_saku').value); // Convert to float
 
-    if (currentDate > tarikhNextSem) {
-        var wang_saku = wang_saku_perbulan * bilbulan;
-    } else {
-        var wang_saku = 0.00;
-    }
-	
+	var currentDate = new Date(); // JavaScript equivalent to Carbon::now() in PHP
+	var tarikhMula = new Date('<?php echo $akademik->tarikh_mula; ?>');
+	var tarikhTamat = new Date('<?php echo $akademik->tarikh_tamat; ?>');
 
-	
+	while (tarikhMula < tarikhTamat) {
+		var tarikhNextSem = new Date(tarikhMula);
+		tarikhNextSem.setMonth(tarikhNextSem.getMonth() + bilbulan);
+
+		if (currentDate > tarikhNextSem) {
+			var wang_saku = wang_saku_perbulan * bilbulan;
+			break; // Exit the loop
+		} else {
+			var wang_saku = 0.00;
+		}
+	}
+
+	console.log('Calculated wang_saku:', wang_saku);
+
 
 	// Initialize a variable to store the total
 	var totalAmaun = 0;
@@ -374,6 +424,7 @@ function myFunction() {
 	// Define the maximum limit for 'amaun_yuran'
 	var baki_total = document.getElementById('baki_total');
 	var maxLimit = parseFloat(baki_total.value);
+	console.log(maxLimit);
 
 
 	if (total_yuran > maxLimit) {
@@ -402,9 +453,7 @@ function myFunction() {
 				console.log("Invalid input. Cannot calculate total amount.");
 			}
 		}
-        //document.getElementById("amaun_wang_saku").value = total.toFixed(2);
-		// var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
-		// document.getElementById("jumlah").value = (amaun_wang_saku + totalAmaun).toFixed(2);
+        
     } else {
         document.getElementById("amaun_wang_saku").value = "";
 		document.getElementById("jumlah").value = totalAmaun.toFixed(2);
