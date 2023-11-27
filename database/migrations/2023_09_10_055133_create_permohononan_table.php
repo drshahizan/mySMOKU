@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('no_cek')->nullable();
             $table->date('tarikh_transaksi')->nullable();
             $table->string('perakuan')->nullable();
+            $table->date('tarikh_hantar')->nullable();
             $table->integer('status')->nullable();
             $table->foreign('smoku_id')
               ->references('id')->on('smoku')->onDelete('cascade');

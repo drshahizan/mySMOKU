@@ -29,6 +29,7 @@ class Permohonan extends Model
         'perihal',
         'no_cek',
         'perakuan',
+        'tarikh_hantar',
         'status',
     ];
 }

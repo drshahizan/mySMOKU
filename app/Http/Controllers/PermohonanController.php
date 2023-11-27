@@ -386,6 +386,7 @@ class PermohonanController extends Controller
             Permohonan::where('smoku_id' ,$smoku_id->id)->where('id' ,$permohonan->id)
             ->update([
                 'perakuan' => $request->perakuan,
+                'tarikh_hantar' => now()->format('Y-m-d'),
                 'status' => '2',
 
             ]);
