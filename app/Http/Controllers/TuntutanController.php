@@ -234,7 +234,7 @@ class TuntutanController extends Controller
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
         $permohonan = Permohonan::all()->where('smoku_id', '=', $smoku_id->id)->first();
 
-        $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)->first();
+        $tuntutan = Tuntutan::orderby("id","desc")->where('smoku_id', '=', $smoku_id->id)->first();
         if ($tuntutan != null) {
             Tuntutan::where('smoku_id' ,$smoku_id->id)
             ->update([
