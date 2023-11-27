@@ -186,7 +186,7 @@
                                                             @endif
                                                         </td>
                                                         <td>{{$pemohon}}</td>
-                                                        <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        <td class="text-center">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
                                                             @if ($item['status']=='2')
                                                                 <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=='3')
@@ -304,7 +304,7 @@
                                                                 @endif
                                                             </td>
                                                             <td style="width: 30%!important">{{$pemohon}}</td>
-                                                            <td class="text-center" style="width: 13%!important;">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                            <td class="text-center" style="width: 13%!important;">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
                                                             @if ($item['status']=='2')
                                                                 <td class="text-center" style="width: 10%!important;"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=='3')
@@ -419,7 +419,7 @@
                                                             @endif
                                                         </td>
                                                         <td style="width: 30%!important">{{$pemohon}}</td>
-                                                        <td class="text-center" style="width: 13%!important;">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        <td class="text-center" style="width: 13%!important;">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
                                                             @if ($item['status']=='2')
                                                                 <td class="text-center" style="width: 10%!important;"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=='3')
