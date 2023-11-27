@@ -129,18 +129,18 @@ class PermohonanController extends Controller
                     //dd($butiranPelajar);
     
                     $dokumen = Dokumen::where('permohonan_id', $permohonan_baru->id)->get();
-                    return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan','parlimen','dun'));
+                    return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan','parlimen','dun','keturunan'));
     
                 }else{
                      //dd('sini');
-                     return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri','parlimen','dun'));
+                     return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri','parlimen','dun','keturunan'));
                 }
    
             }
 
 
             $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
-            return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','agama','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan','parlimen','dun'));
+            return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','agama','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan','parlimen','dun','keturunan'));
             
         }else {
 
