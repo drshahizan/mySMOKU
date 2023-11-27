@@ -407,7 +407,7 @@ function myFunction() {
 	// 	}
 	// }
 
-	alert(wang_saku);
+	// alert(wang_saku);
 
 	console.log('Calculated wang_saku:', wang_saku);
 
