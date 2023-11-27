@@ -91,11 +91,11 @@
                                     <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                         <thead>
                                             <tr>
-                                                <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
-                                                <th class="text-center" style="width: 40%"><b>Nama</b></th>
+                                                <th style="width: 15%"><b>ID Permohonan</b></th>                                                   
+                                                <th style="width: 40%"><b>Nama</b></th>
                                                 <th class="text-center" style="width: 15%"><b>Amaun Yuran</b></th>
                                                 <th class="text-center" style="width: 15%"><b>Amaun Wang Saku</b></th>
-                                                <th class="text-center" style="width: 15%"><b>Tarikh Permohonan</b></th>
+                                                <th class="text-center" style="width: 15%"><b>Tarikh Transaksi</b></th>
                                             </tr>
                                         </thead>
 
@@ -132,18 +132,19 @@
                                                 @if ($institusi_id == $instiusi_user)
                                                     <!-- Table rows -->
                                                     <tr>
-                                                        <td style="width: 15%">
+                                                        {{-- <td style="width: 15%">
                                                             <a href="#" class="open-modal-link" 
                                                             data-bs-toggle="modal" 
                                                             data-bs-target="#baucerPenyelaras_{{ $item['no_rujukan_permohonan'] }}" 
                                                             data-no-rujukan="{{ $item['no_rujukan_permohonan'] }}">
                                                             {{ $item['no_rujukan_permohonan'] }}
                                                             </a>
-                                                        </td>
+                                                        </td> --}}
+                                                        <td style="width: 15%">{{$item['no_rujukan_permohonan']}}</td>
                                                         <td style="width: 40%">{{$pemohon}}</td>
                                                         <td class="text-center" style="width: 15%">RM {{$item->yuran_dibayar}}</td>
                                                         <td class="text-center" style="width: 15%"> RM {{$item->wang_saku_dibayar}}</td>                                       
-                                                        <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->created_at))}}</td>
+                                                        <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_baucer))}}</td>
                                                     </tr>
 
                                                     {{-- Modal Baucer --}}

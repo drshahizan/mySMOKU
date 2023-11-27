@@ -1449,19 +1449,20 @@ class PenyelarasController extends Controller
     //     return redirect()->route('penyelaras.senarai.dibayar', compact('dibayar'));
     // }
 
-    // public function senaraiPemohonDibayar(Request $request)
-    // {
-    //     $startDate = $request->input('start_date');
-    //     $endDate = $request->input('end_date');
+    public function senaraiPemohonDibayar(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
 
-    //     $dibayar = Permohonan::orderBy('id', 'desc')
-    //     ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-    //         return $q->whereBetween('created_at', [$startDate, $endDate]);
-    //     })
-    //     ->where('permohonan.status', '=', '8')->get();
+        $dibayar = Permohonan::orderBy('id', 'desc')
+        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('created_at', [$startDate, $endDate]);
+        })
+        ->where('permohonan.status', '=', '8')->get();
 
-    //     return view('penyaluran.penyelaras.senarai_permohonan_dibayar', compact('dibayar'));
-    // }
+        return view('penyaluran.penyelaras.senarai_permohonan_dibayar', compact('dibayar'));
+    }
+
     // public function maklumatPembayaran($id)
     // {
     //     // Retrieve data from the database based on the $id

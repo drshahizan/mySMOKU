@@ -83,7 +83,7 @@
                                         </div>
                                     </form>
 
-                                    <div class="col-md-7" style="padding-left: 260px;">
+                                    <div class="col-md-7" style="padding-left: 280px;">
                                         <br>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -113,8 +113,8 @@
                                             <thead>
                                                 <tr>
                                                     {{-- <th class="text-center" style="width: 5%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th> --}}
-                                                    <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
-                                                    <th class="text-center" style="width: 45%"><b>Nama</b></th>
+                                                    <th style="width: 15%"><b>ID Permohonan</b></th>                                                   
+                                                    <th style="width: 45%"><b>Nama</b></th>
                                                     <th class="text-center" style="width: 10%"><b>Amaun Yuran</b></th>
                                                     <th class="text-center" style="width: 15%"><b>Amaun Wang Saku</b></th>
                                                     <th class="text-center" style="width: 15%"><b>Tarikh Permohonan</b></th>
