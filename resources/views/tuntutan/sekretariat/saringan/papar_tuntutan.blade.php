@@ -210,7 +210,7 @@
                                 <tr>
                                     <td><strong>Tarikh Tuntutan</strong></td>
                                     <td>:</td>
-                                    <td>{{$tuntutan->created_at->format('d/m/Y')}}</td>
+                                    <td>{{date('d/m/Y', strtotime($tuntutan->tarikh_hantar))}}</td>
                                     <td class="space">&nbsp;</td>
                                     <td><strong>Sesi/Semester</strong></td>
                                     <td>:</td>
