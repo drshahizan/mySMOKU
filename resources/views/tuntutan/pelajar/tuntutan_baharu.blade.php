@@ -42,6 +42,7 @@
 								$currentDate = Carbon::now();
 								$tarikhMula = Carbon::parse($akademik->tarikh_mula);
 								$tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
+								
 
 								while ($tarikhMula < $tarikhTamat) {
 									$tarikhNextSem = $tarikhMula->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
@@ -57,6 +58,7 @@
 									
 									
 								}
+								
 
 								if (!$tuntutan) {
 									//dd('sini');
@@ -135,9 +137,11 @@
 								
 
 							@endphp
+							
 							<!--begin::Wrapper-->
-							<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
-							<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
+							<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" value=""/>
+							<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" value=""/>
+							
 							<div class="mb-0">
 								<!--begin::Row-->
 								<div class="row gx-10 mb-5">
@@ -240,6 +244,7 @@
 					<!--begin::Card body-->
 					<div class="card-body p-10">
 						
+						
 						<!--begin::Input group-->
 						@if ($permohonan->yuran == '1')
 						<div class="mb-10">
@@ -287,12 +292,13 @@
 						<form action="{{ route('hantar.tuntutan') }}" method="post" enctype="multipart/form-data">
 						@csrf
 							<!--begin::Item-->
+							
 							@if ($permohonan->wang_saku == '1')
 								{{-- @if($currentDate->greaterThan($tarikhNextSem)) --}}
 									<div class="d-flex flex-stack">
 										<div class="me-5">
 											{{-- <input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox"  @if ($permohonan->wang_saku == 1) value="1" checked @endif/> --}}
-											<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" required oninvalid="this.setCustomValidity('Sila tandakan.')" oninput="setCustomValidity('')"  @if ($permohonan->wang_saku == 1) value="1" @endif/>
+											<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" required oninvalid="this.setCustomValidity('Sila tandakan.')" oninput="setCustomValidity('')" value="1" />
 											<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
 										</div>
 									</div>
@@ -308,6 +314,7 @@
 										<!--end::Content-->
 									</div>
 									<!--end::Wrapper-->
+									
 									<div class="d-flex">
 										<span class="input-group-text">RM</span>
 										<input type="hidden" id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="input-group-text" style="width: 100%;" value="{{$akademik->bil_bulan_per_sem}}"/>
@@ -356,6 +363,7 @@
 
 
 <script>
+
 var max_yuran; // Declare these variables in a higher scope
 var max_wang_saku;
 // Make an AJAX request to fetch data based on the selected semester
@@ -380,23 +388,26 @@ function myFunction() {
 
     var checkBox = document.getElementById("wang_saku");
 	var bilbulan = parseInt(document.getElementById('bil_bulan_per_sem').value); // Convert to integer
-	var wang_saku_perbulan = parseFloat(document.getElementById('max_wang_saku').value); // Convert to float
+	var wang_saku_perbulan = parseInt(document.getElementById('max_wang_saku').value);
+	
+	var currentDate = Date.now();
+	var tarikhMulaTimestamp = new Date('<?php echo $akademik->tarikh_mula; ?>').getTime();
+	var tarikhTamatTimestamp = new Date('<?php echo $akademik->tarikh_tamat; ?>').getTime();
+	// alert(tarikhMulaTimestamp);
 
-	var currentDate = new Date(); // JavaScript equivalent to Carbon::now() in PHP
-	var tarikhMula = new Date('<?php echo $akademik->tarikh_mula; ?>');
-	var tarikhTamat = new Date('<?php echo $akademik->tarikh_tamat; ?>');
+	// while (tarikhMulaTimestamp < tarikhTamatTimestamp) {
+	// 	var tarikhNextSem = new Date(tarikhMulaTimestamp);
+	// 	tarikhNextSem.setMonth(tarikhNextSem.getMonth() + bilbulan);
 
-	while (tarikhMula < tarikhTamat) {
-		var tarikhNextSem = new Date(tarikhMula);
-		tarikhNextSem.setMonth(tarikhNextSem.getMonth() + bilbulan);
-
-		if (currentDate > tarikhNextSem) {
-			var wang_saku = wang_saku_perbulan * bilbulan;
-			break; // Exit the loop
-		} else {
+	// 	if (currentDate > tarikhNextSem) {
+	// 		var wang_saku = wang_saku_perbulan * bilbulan;
+	// 		break; // Exit the loop
+	// 	} else {
 			var wang_saku = 0.00;
-		}
-	}
+	// 	}
+	// }
+
+	alert(wang_saku);
 
 	console.log('Calculated wang_saku:', wang_saku);
 
