@@ -136,7 +136,9 @@
                                                                     <i class="fa fa-cancel fa-sm custom-white-icon"></i>
                                                                 </span>
                                                             </a>
-                                                        </td>                                                         
+                                                        </td>
+                                                        @else
+                                                        <td class="text-center"></td>                                                            
                                                         @endif
                                                     </tr>
                                                 @endforeach
