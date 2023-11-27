@@ -24,6 +24,10 @@ class Permohonan extends Model
         'wang_saku_dibayar',
         'catatan_disokong',
         'catatan_dibayar',
+        'no_baucer',
+        'tarikh_baucer',
+        'perihal',
+        'no_cek',
         'perakuan',
         'status',
     ];

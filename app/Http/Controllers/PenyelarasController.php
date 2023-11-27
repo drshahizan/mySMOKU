@@ -1373,31 +1373,36 @@ class PenyelarasController extends Controller
 
     private function updatePermohonanRecords($modifiedData)
     {
-        foreach ($modifiedData as $modifiedRecord) 
-        {
+        
+        foreach ($modifiedData as $modifiedRecord) {
+             
             $noRujukan = $modifiedRecord['no_rujukan_permohonan'];
             $yuranDibayar = $modifiedRecord['yuran_dibayar'];
             $wangSakuDibayar = $modifiedRecord['wang_saku_dibayar'];
             $noBaucer = $modifiedRecord['no_baucer'];
             $perihal = $modifiedRecord['perihal'];
             $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
+            
 
             // Retrieve the corresponding database record based on no_rujukan_permohonan
             $permohonan = Permohonan::where('no_rujukan_permohonan', $noRujukan)->first();
-
+            
             if ($permohonan) {
+                
                 // Update the retrieved database record with the modified data
                 $permohonan->update([
-                    'yuran_disokong' => $yuranDibayar,
-                    'wang_saku_disokong' => $wangSakuDibayar,
+                    'yuran_dibayar' => $yuranDibayar,
+                    'wang_saku_dibayar' => $wangSakuDibayar,
                     'no_baucer' => $noBaucer,
                     'perihal' => $perihal,
-                    'tarikh_baucer' => $tarikhBaucer,
+                    // 'tarikh_baucer' => $tarikhBaucer,
                 ]);
+                // dd('sini');
 
                 // Optionally, you can log a success message
                 Log::info("Record with no_rujukan_permohonan $noRujukan updated successfully.");
             } else {
+                dd('xupdate sini');
                 // Optionally, log a message or handle the case where no matching record is found
                 Log::warning("No record found for no_rujukan_permohonan $noRujukan.");
             }

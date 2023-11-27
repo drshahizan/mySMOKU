@@ -16,13 +16,15 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) {
+            // dd($row);
             // Extract specific columns
             $this->modifiedData[] = [
-                'yuran_dibayar' => $row['Yuran Dibayar'],
-                'wang_saku_dibayar' => $row['Wang Saku Dibayar'],
-                'no_baucer' => $row['No Baucer'],
-                'perihal' => $row['Perihal'],
-                'tarikh_baucer' => $row['Tarikh Baucer'],
+                'no_rujukan_permohonan' => $row['id_permohonan'],
+                'yuran_dibayar' => $row['yuran_dibayar'],
+                'wang_saku_dibayar' => $row['wang_saku_dibayar'],
+                'no_baucer' => $row['no_baucer'],
+                'perihal' => $row['perihal'],
+                'tarikh_baucer' => $row['tarikh_baucer'],
             ];
         }
     }
