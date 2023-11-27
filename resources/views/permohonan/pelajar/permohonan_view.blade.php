@@ -1426,7 +1426,7 @@
 					<!--end::Wrapper-->
 					<!--begin::Wrapper-->
 					<div>
-						@if (in_array($permohonan->status, [1, 5]))
+						@if (in_array($permohonan->status, [1, 5, 9]))
 						<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" onclick="if(!this.form.perakuan.checked){alert('Sila tandakan kotak untuk perakuan dan pengesahan.');return false}">
 							<span class="indicator-label">Hantar
 							<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
@@ -1439,22 +1439,13 @@
 						
 						@endif
 
-						@if (in_array($permohonan->status, [1, 5, 9]))
-							<button type="button" class="btn btn-lg btn-primary save-next-button" data-kt-stepper-action="next">Teruskan
+						<button type="button" class="btn btn-lg btn-primary{{ in_array($permohonan->status, [1, 5, 9]) ? ' save-next-button' : '' }}" data-kt-stepper-action="next">
+							Teruskan
 							<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
 								<span class="path1"></span>
 								<span class="path2"></span>
 							</i>
-							</button>
-						@else
-							<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Teruskan
-							<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
-								<span class="path1"></span>
-								<span class="path2"></span>
-							</i>
-							</button>
-
-						@endif
+						</button>
 					</div>
 					<!--end::Wrapper-->
 				</div>
