@@ -122,51 +122,57 @@
                         <div class="col-md-6 col-sm-6">
                             <br>
                             @php
-                                $status = DB::table('bk_status')->where('kod_status', $permohonan->status)->value('status');
-                                $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
-                                $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
-                                $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja)->value('penaja');
-                                // nama pemohon
-                                $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
-                                $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
-                                $words = explode(' ', $text);
-                                $result = [];
-                                foreach ($words as $word) {
-                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                        $result[] = Str::lower($word);
-                                    } else {
-                                        $result[] = $word;
+                                    if($permohonan->status==4){
+                                        $tarikh_status = DB::table('sejarah_permohonan')->where('permohonan_id', $permohonan->id)->where('status', 4)->value('created_at');
                                     }
-                                }
-                                $pemohon = implode(' ', $result);
+                                    elseif($permohonan->status==5){
+                                        $tarikh_status = DB::table('sejarah_permohonan')->where('permohonan_id',$permohonan->id)->where('status', 5)->value('created_at');
+                                    }
+                                    $status = DB::table('bk_status')->where('kod_status', $permohonan->status)->value('status');
+                                    $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
+                                    $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
+                                    $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja)->value('penaja');
+                                    // nama pemohon
+                                    $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
+                                    $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
+                                    $words = explode(' ', $text);
+                                    $result = [];
+                                    foreach ($words as $word) {
+                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                            $result[] = Str::lower($word);
+                                        } else {
+                                            $result[] = $word;
+                                        }
+                                    }
+                                    $pemohon = implode(' ', $result);
 
-                                //nama kursus
-                                $text2 = ucwords(strtolower($akademik->nama_kursus)); // Assuming you're sending the text as a POST parameter
-                                $conjunctions = ['of', 'in', 'and'];
-                                $words = explode(' ', $text2);
-                                $result = [];
-                                foreach ($words as $word) {
-                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                        $result[] = Str::lower($word);
-                                    } else {
-                                        $result[] = $word;
+                                    //nama kursus
+                                    $text2 = ucwords(strtolower($akademik->nama_kursus)); // Assuming you're sending the text as a POST parameter
+                                    $conjunctions = ['of', 'in', 'and'];
+                                    $words = explode(' ', $text2);
+                                    $result = [];
+                                    foreach ($words as $word) {
+                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                            $result[] = Str::lower($word);
+                                        } else {
+                                            $result[] = $word;
+                                        }
                                     }
-                                }
-                                $kursus = implode(' ', $result);
+                                    $kursus = implode(' ', $result);
 
-                                //institusi pengajian
-                                $text3 = ucwords(strtolower($nama_institusi)); // Assuming you're sending the text as a POST parameter
-                                $conjunctions = ['of', 'in', 'and'];
-                                $words = explode(' ', $text3);
-                                $result = [];
-                                foreach ($words as $word) {
-                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                        $result[] = Str::lower($word);
-                                    } else {
-                                        $result[] = $word;
+                                    //institusi pengajian
+                                    $text3 = ucwords(strtolower($nama_institusi)); // Assuming you're sending the text as a POST parameter
+                                    $conjunctions = ['of', 'in', 'and'];
+                                    $words = explode(' ', $text3);
+                                    $result = [];
+                                    foreach ($words as $word) {
+                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                            $result[] = Str::lower($word);
+                                        } else {
+                                            $result[] = $word;
+                                        }
                                     }
-                                }
-                                $institusi = implode(' ', $result);
+                                    $institusi = implode(' ', $result);
                             @endphp
                             <table class="maklumat">
                                 <tr>
@@ -216,7 +222,7 @@
                                     <td class="space">&nbsp;</td>
                                     <td><strong>Status</strong></td>
                                     <td>:</td>
-                                    <td>{{ucwords(strtolower($status))}} ({{date('d/m/Y', strtotime($permohonan->created_at))}})</td>
+                                    <td>{{ucwords(strtolower($status))}} ({{date('d/m/Y', strtotime($tarikh_status))}})</td>
                                 </tr>
                             </table>
                             <hr>

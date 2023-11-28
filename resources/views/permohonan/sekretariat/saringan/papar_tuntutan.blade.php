@@ -139,6 +139,12 @@
                                 <div class="col-md-6 col-sm-6">
                                     <br>
                                     @php
+                                        if($permohonan->status==4){
+                                            $tarikh_status = DB::table('sejarah_permohonan')->where('permohonan_id', $permohonan->id)->where('status', 4)->value('created_at');
+                                        }
+                                        elseif($permohonan->status==5){
+                                            $tarikh_status = DB::table('sejarah_permohonan')->where('permohonan_id',$permohonan->id)->where('status', 5)->value('created_at');
+                                        }
                                         $status = DB::table('bk_status')->where('kod_status', $permohonan->status)->value('status');
                                         $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                         $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
@@ -233,7 +239,7 @@
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Status</strong></td>
                                             <td>:</td>
-                                            <td>{{ucwords(strtolower($status))}} ({{date('d/m/Y', strtotime($permohonan->updated_at))}})</td>
+                                            <td>{{ucwords(strtolower($status))}} ({{date('d/m/Y', strtotime($tarikh_status))}})</td>
                                         </tr>
                                     </table>
                                 <hr>
