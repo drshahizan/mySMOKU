@@ -1410,6 +1410,10 @@ class PenyelarasController extends Controller
 
     public function hantarSemuaInfoCek(Request $request, $id)
     {
+        //fetch max yuran dan wang saku
+        $amaun_yuran = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Yuran')->first();
+        $amaun_wang_saku = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Wang Saku')->first();
+
         // Use $smoku_id to associate the data with a specific smoku_id
         $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
         
@@ -1418,8 +1422,9 @@ class PenyelarasController extends Controller
 
         if ($existingRecord) {
             // Update the respective row in permohonan_kelulusan table
-            $existingRecord->yuran_dibayar = $request->yuranDibayar;
-            $existingRecord->wang_saku_dibayar = $request->wangSakuDibayar;
+            $existingRecord->yuran_dibayar = number_format($request->yuranDibayar, 2, '.', '');
+            $existingRecord->wang_saku_dibayar = number_format($request->wangSakuDibayar, 2, '.', '');
+            $existingRecord->baki_dibayar = $amaun_yuran->jumlah - $request->yuranDibayar - $request->wangSakuDibayar;
             $existingRecord->no_baucer = $request->noBaucer;
             $existingRecord->perihal = $request->perihal;
             $existingRecord->tarikh_baucer = $request->tarikhBaucer;
