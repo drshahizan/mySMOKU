@@ -292,7 +292,7 @@
 			<div class="menu-item">
 				<a class="menu-link" href="{{ route('tangguh.lanjut.pengajian') }}">
 					<span class="menu-icon">{!! getIcon('time', 'fs-2') !!}</span>
-					<span class="menu-title">Pemohonan Penangguhan / Pelanjutan</span>
+					<span class="menu-title">Pemohonan Penangguhan / Perlanjutan</span>
 				</a>
 			</div>
 			<div class="menu-item">
