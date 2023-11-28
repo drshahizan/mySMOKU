@@ -32,10 +32,6 @@
     <!--end::Breadcrumb-->
 </div>  
 <br>
-@if (session('message'))
-    <div class="alert alert-success" style="color:black; text-align: center;">{{ session('message') }}</div>
-@endif
-    
 <div class="row clearfix">
     <!--begin::Content-->
     <div class="col-lg-12">
