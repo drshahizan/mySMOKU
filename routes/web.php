@@ -299,6 +299,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('bkoku/tuntutan/baharu/{id}',[PenyelarasController::class,'tuntutanBaharu'])->name('bkoku.tuntutan.baharu');
     Route::post('bkoku/simpan/{id}', [PenyelarasController::class, 'simpanTuntutan'])->name('bkoku.simpan.tuntutan');
     Route::post('bkoku/hantar/{id}', [PenyelarasController::class, 'hantarTuntutan'])->name('bkoku.hantar.tuntutan');
+    Route::get('penyelaras/bkoku/tuntutan/delete/{id}', [PenyelarasController::class, 'deleteTuntutan'])->name('bkoku.tuntutan.delete');
+	Route::get('penyelaras/bkoku/tuntutan/batal/{id}', [PenyelarasController::class, 'batalTuntutan'])->name('bkoku.tuntutan.batal');
     Route::get('penyelaras/bkoku/sejarah/sejarah-tuntutan', [PenyelarasController::class, 'sejarahTuntutan'])->name('bkoku.sejarah.tuntutan');
     Route::get('penyelaras/bkoku/sejarah/rekod-tuntutan/{id}', [PenyelarasController::class, 'rekodTuntutan'])->name('bkoku.rekod.tuntutan');
     Route::get('penyelaras/bkoku/sejarah/papar-tuntutan/{id}', [PenyelarasController::class, 'paparRekodTuntutan'])->name('bkoku.papar.rekod');

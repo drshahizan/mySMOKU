@@ -1474,4 +1474,42 @@ class PenyelarasController extends Controller
         return back();
         
     }
+
+    public function deleteTuntutan($id)
+    {
+        
+        $smoku_id = Smoku::where('id', $id)->first();
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$id)->first();
+        $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id',$id)->where('permohonan_id',$permohonan_id->id)->first();
+
+        if ($tuntutan) {
+
+            DB::table('tuntutan')->where('id',$tuntutan->id)->delete(); //delete permohonan
+            DB::table('tuntutan_item')->where('tuntutan_id',$tuntutan->id)->delete();
+            DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->delete();
+        } 
+        
+        return redirect()->route('bkoku.sejarah.tuntutan');
+        
+    }
+
+    public function batalTuntutan($id)
+    {
+
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$id)->first();
+        DB::table('tuntutan')->orderBy('id', 'asc')->where('smoku_id',$id)->where('permohonan_id',$permohonan_id->id)
+            ->update([
+                'status' => 9
+            ]);
+        $tuntutan_id = Tuntutan::orderBy('id', 'desc')->where('smoku_id',$id)->where('permohonan_id',$permohonan_id->id)->first();
+        SejarahTuntutan::create([
+            'smoku_id' => $id,
+            'tuntutan_id' => $tuntutan_id->id,
+            'status' => 9
+        ]);
+           
+        return redirect()->route('bkoku.sejarah.tuntutan')->with('permohonan', 'Tuntutan telah dibatalkan.');      
+        
+    }
+
 }

@@ -64,12 +64,13 @@
                                     <div class="table-responsive">
                                         <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
-                                            <tr>
-                                                <th style="width: 17%"><b>ID Tuntutan</b></th>
-                                                <th style="width: 33%"><b>Nama</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
-                                            </tr>
+                                                <tr>
+                                                    <th style="width: 17%"><b>ID Permohonan</b></th>
+                                                    <th style="width: 33%"><b>Nama</b></th>
+                                                    <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
+                                                    <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
+                                                    <th style="width: 5%" class="text-center"><b>Tindakan</b></th>
+                                                </tr>
                                             </thead>
                                             <tbody>
                                                 @php
@@ -126,6 +127,28 @@
                                                         @elseif ($item['status']=='9')
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
+
+                                                        @if ($item['status']=='1')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('bkoku.tuntutan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
+                                                                        <i class="fa fa-trash fa-sm custom-white-icon"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td>
+                                                            @elseif ($item['status']=='2')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('bkoku.tuntutan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan permohonan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Permohonan">
+                                                                        <i class="fa fa-cancel fa-sm custom-white-icon"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td> 
+                                                            @else
+                                                            <td class="text-center"></td> 
+
+                                                        @endif
+
                                                     </tr>
                                                 @endif
                                             @endforeach
@@ -141,14 +164,6 @@
         </div>
     </div>
     <script>
-        $('#sortTable1').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [] // Disable initial sorting
-        });
-        $('#sortTable1a').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [] // Disable initial sorting
-        });
         $('#sortTable2').DataTable({
             ordering: true, // Enable manual sorting
             order: [] // Disable initial sorting

@@ -155,8 +155,10 @@
         </div>
     </div>
     <script>
-        $('#sortTable1').DataTable();
-        $('#sortTable2').DataTable();
+        $('#sortTable2').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
     </script>
 
     </body>
