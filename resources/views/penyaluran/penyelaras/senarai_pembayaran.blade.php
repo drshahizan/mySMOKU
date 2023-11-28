@@ -176,12 +176,12 @@
                                                                         <form action="{{ route('penyelaras.modal.submit', ['permohonan_id' => $item['id']]) }}" method="POST" class="modal-form">
                                                                             {{ csrf_field() }}
                                                                             <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Yuran Dibayar :</label>
+                                                                                <label for="message-text" class="col-form-label">Yuran Dibayar (RM) :</label>
                                                                                 <input type="number" step="0.01" class="form-control" id="yuranDibayar" name="yuranDibayar">
                                                                             </div>
 
                                                                             <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Wang Saku Dibayar :</label>
+                                                                                <label for="message-text" class="col-form-label">Wang Saku Dibayar (RM) :</label>
                                                                                 <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar">
                                                                             </div>
 

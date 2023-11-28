@@ -49,11 +49,11 @@ class PermohonanLayakExport implements FromCollection, WithHeadings, WithColumnW
         return [
             'ID Permohonan',
             'Nama Pemohon',
-            'Yuran Disokong',
-            'Wang Saku Disokong',
+            'Yuran Disokong (RM)',
+            'Wang Saku Disokong (RM)',
             'Tarikh Permohonan',
-            'Yuran Dibayar',
-            'Wang Saku Dibayar',
+            'Yuran Dibayar (RM)',
+            'Wang Saku Dibayar (RM)',
             'No Baucer',
             'Perihal',
             'Tarikh Baucer',
@@ -67,12 +67,12 @@ class PermohonanLayakExport implements FromCollection, WithHeadings, WithColumnW
             'B' => 50,           
             'C' => 20,
             'D' => 25,
-            'E' => 25,
+            'E' => 20,
             'F' => 40,
             'G' => 40,
             'H' => 30,
             'I' => 50,
-            'J' => 30,
+            'J' => 20,
         ];
     }
 
