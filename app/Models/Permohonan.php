@@ -22,6 +22,7 @@ class Permohonan extends Model
         'yuran_dibayar',
         'wang_saku_disokong',
         'wang_saku_dibayar',
+        'baki_dibayar',
         'catatan_disokong',
         'catatan_dibayar',
         'no_baucer',
