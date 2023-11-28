@@ -68,9 +68,9 @@ class PermohonanLayakExport implements FromCollection, WithHeadings, WithColumnW
             'C' => 20,
             'D' => 25,
             'E' => 20,
-            'F' => 40,
-            'G' => 40,
-            'H' => 30,
+            'F' => 25,
+            'G' => 30,
+            'H' => 20,
             'I' => 50,
             'J' => 20,
         ];
