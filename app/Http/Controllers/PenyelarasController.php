@@ -754,7 +754,7 @@ class PenyelarasController extends Controller
                        ->orderBy('tuntutan.id', 'desc')
                        ->first(['tuntutan.*']);
 
-                   //dd($tuntutan);    
+                // dd($tuntutan);    
 
                    if ($tuntut && $tuntut->status == 1) {
                        $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntut->id)->get();
@@ -893,27 +893,20 @@ class PenyelarasController extends Controller
     {
         $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
 
-        $biltuntutan = Tuntutan::where('smoku_id', '=', $id)
-            ->groupBy('no_rujukan_tuntutan')
-            ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan') 
-            ->get();
-
-        $bil = $biltuntutan->count();
-        $running_num =  $bil + 1; //sebab nak guna satu id je
-        $no_rujukan_tuntutan =  $permohonan->no_rujukan_permohonan.'/'.$running_num; // try duluuu
-
         //update dalam table tuntutan
-        $tuntutan = Tuntutan::where('smoku_id', '=', $id)->first();
+        $tuntutan = Tuntutan::where('smoku_id', '=', $id)->orderBy('id', 'desc')->first();
         if ($tuntutan != null) {
-            Tuntutan::where('smoku_id' ,$id)
-            ->update([
+            $tuntutan->update([
                 'wang_saku' => $request->wang_saku,
                 'amaun_wang_saku' => $request->amaun_wang_saku,
                 'jumlah' => $request->jumlah,
+                'tarikh_hantar' => now()->format('Y-m-d'),
                 'status' => '2',
             ]);
+
+            $tuntutan->save();
         }
-        $tuntutan->save();
+        
 
         $sejarah = SejarahTuntutan::create([
             'tuntutan_id' => $tuntutan->id,
@@ -922,6 +915,10 @@ class PenyelarasController extends Controller
     
         ]);
         $sejarah->save();
+
+         //emel kepada pelajar
+         $emel_pelajar = Smoku::where('id',$id)->first();
+         $cc_pelajar = $emel_pelajar->email;
 
         //emel kepada sekretariat
         $user_sekretariat = User::where('tahap',3)->first();
@@ -934,7 +931,7 @@ class PenyelarasController extends Controller
         $emel = EmelKemaskini::where('emel_id',14)->first();
         //dd($cc);
         //dd($emel);
-        Mail::to($user->email)->cc($cc)->send(new TuntutanHantar($catatan,$emel));
+        Mail::to($user->email)->cc([$cc, $cc_pelajar])->send(new TuntutanHantar($catatan,$emel));
         
         return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('message', 'Tuntutan pelajar telah di hantar.');
     }
@@ -1463,11 +1460,18 @@ class PenyelarasController extends Controller
         return view('penyaluran.penyelaras.senarai_permohonan_dibayar', compact('dibayar'));
     }
 
-    // public function maklumatPembayaran($id)
-    // {
-    //     // Retrieve data from the database based on the $id
-    //     $maklumat = Permohonan::where('no_rujukan_permohonan', $id)->first();
+    public function deleteItemTuntutan($id)
+    {
+        // dd($id); // ni tuntutan id
+        $tuntutan = Tuntutan::orderBy('id', 'desc')->where('id',$id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->first();
 
-    //     return response()->json(['maklumat' => $maklumat]);
-    // }
+        if ($tuntutan_item) {
+
+            DB::table('tuntutan_item')->where('id',$tuntutan_item->id)->delete();
+        } 
+        
+        return back();
+        
+    }
 }

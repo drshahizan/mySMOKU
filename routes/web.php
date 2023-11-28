@@ -304,6 +304,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/bkoku/sejarah/papar-tuntutan/{id}', [PenyelarasController::class, 'paparRekodTuntutan'])->name('bkoku.papar.rekod');
     Route::get('penyelaras/bkoku/sejarah/keputusan-peperiksaan/{id}', [PenyelarasController::class, 'keputusanPeperiksaan'])->name('bkoku.papar.peperiksaan');
     Route::get('penyelaras/bkoku/sejarah/papar-saringan/{id}', [PenyelarasController::class, 'paparRekodSaringanTuntutan'])->name('bkoku.papar.saringan.tuntutan');
+    Route::get('penyelaras/bkoku/tuntutan/item/delete/{id}', [PenyelarasController::class, 'deleteItemTuntutan'])->name('bkoku.tuntutan.item.delete');
+	Route::get('penyelaras/bkoku/tuntutan/batal/{id}', [PenyelarasController::class, 'batalTuntutan'])->name('bkoku.tuntutan.batal');
+
 
     //Permohonan - Penyelaras PPK
     Route::get('penyelaras/ppk/dashboard', [PenyelarasPPKController::class,'index'])->name('penyelaras.ppk.dashboard');
