@@ -97,9 +97,42 @@
                             <div class="col-md-6 col-sm-6">
                                 <br>
                                 @php
+                                    if($tuntutan->status==5){
+                                        $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id', $tuntutan->id)->where('status', 4)->value('created_at');
+                                    }
+                                    elseif($tuntutan->status==6){
+                                        $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->where('status', 5)->value('created_at');
+                                    }
+                                    elseif($tuntutan->status==7){
+                                        $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->where('status', 5)->value('created_at');
+                                    }
+
                                     $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                     $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
                                     $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja)->value('penaja');
+
+                                    $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $tuntutan->id)->where('status', $tuntutan->status)->latest()->value('dilaksanakan_oleh');
+
+                                    if($user_id==null){
+                                        $user_name = "Tiada Maklumat";
+                                    }
+                                    else{
+                                        $user_name = DB::table('users')->where('id', $user_id)->value('nama');
+                                        $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
+                                        $conjunctions = ['bin', 'binti'];
+                                        $words = explode(' ', $text);
+                                        $result = [];
+                                        foreach ($words as $word) {
+                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                $result[] = Str::lower($word);
+                                            } else {
+                                                $result[] = $word;
+                                            }
+                                        }
+                                        $user_name = implode(' ', $result);
+                                    }
+
+                                    $status = DB::table('bk_status')->where('kod_status', $sejarah_t->status)->value('status');
                                     $status_tuntutan = DB::table('bk_status')->where('kod_status', $saringan->status)->value('status');
                                     // nama pemohon
                                     $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
@@ -188,6 +221,10 @@
                                         @else
                                             <td>Tidak Ditaja</td>
                                         @endif
+                                        <td class="space">&nbsp;</td>
+                                        <td><strong>Status</strong></td>
+                                        <td>:</td>
+                                        <td>{{ucwords(strtolower($tuntutan->status))}} ({{date('d/m/Y', strtotime($tarikh_status))}} oleh {{$user_name}})</td>
                                     </tr>
                                 </table>
                                 <hr>
