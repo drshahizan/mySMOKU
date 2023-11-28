@@ -437,7 +437,7 @@ class SekretariatController extends Controller
                 ->where('smoku_akademik.id_institusi', $selectedInstitusi);
         }
 
-        $kelulusan = $query->get();
+        $kelulusan = $query->orderBy('id', 'desc')->get();
         $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
 
         return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan', 'institusiPengajian', 'filters'));
