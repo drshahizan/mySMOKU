@@ -64,6 +64,7 @@
                         <tbody>
                             @foreach ($layak as $layak)
                                 @php
+                                // dd ($layak);
                                     $status = DB::table('bk_status')->where('kod_status', $layak->tuntutan_status)->value('status');
                                                 
                                     $text = ucwords(strtolower($layak->nama)); // Assuming you're sending the text as a POST parameter
@@ -79,24 +80,12 @@
                                     }
                                     $pemohon = implode(' ', $result);
                             
-                                    //institusi pengajian
-                                    $text3 = ucwords(strtolower($layak->nama_kursus)); // Assuming you're sending the text as a POST parameter
-                                    $conjunctions = ['of', 'in', 'and'];
-                                    $words = explode(' ', $text3);
-                                    $result = [];
-                                    foreach ($words as $word) {
-                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                            $result[] = Str::lower($word);
-                                        } else {
-                                            $result[] = $word;
-                                        }
-                                    }
-                                    $kursus = implode(' ', $result);
+                                    
                                 @endphp
                             <tr>
                                 <td class="text-center">{{ $layak->no_rujukan_permohonan}}</td>
                                 <td>{{ $pemohon}}</td>
-                                <td>{{ $kursus}}</td>
+                                <td>{{ $layak->nama_kursus}}</td>
                                 <td>
                                     {{ \Carbon\Carbon::createFromFormat('Y-m-d', $layak->tarikh_mula)->format('d/m/Y') }} - 
                                     {{ \Carbon\Carbon::createFromFormat('Y-m-d', $layak->tarikh_tamat)->format('d/m/Y') }}

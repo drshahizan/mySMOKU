@@ -760,7 +760,7 @@ class PenyelarasController extends Controller
                        $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntut->id)->get();
                    } 
                    else if ($tuntut && $tuntut->status != 8){
-                       return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('sem', 'Tuntutan pelajar masih dalam semakan.');
+                       return back()->with('sem', 'Tuntutan pelajar masih dalam semakan.');
                    }
                    else {
                        $tuntutan_item = collect(); // An empty collection
@@ -774,7 +774,7 @@ class PenyelarasController extends Controller
             }    
 
         } else if ($permohonan && $permohonan->status !=8) {
-            return redirect()->route('dashboard')->with('permohonan', 'Permohonan anda masih dalam semakan.');
+            return redirect()->route('dashboard')->with('permohonan', 'Permohonan pelajar masih dalam semakan.');
         } else {
             return redirect()->route('dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
         }
