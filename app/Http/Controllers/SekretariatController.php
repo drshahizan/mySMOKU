@@ -278,7 +278,6 @@ class SekretariatController extends Controller
             })
             ->where('smoku_akademik.status', 1)
             ->whereRaw('(tamat_pengajian.created_at, smoku_akademik.smoku_id) IN (SELECT MAX(created_at), smoku_id FROM tamat_pengajian GROUP BY smoku_id)')
-            ->orderBy('tamat_pengajian.updated_at', 'desc') 
             ->get();
 
         $peringkatPengajian = PeringkatPengajian::all();
