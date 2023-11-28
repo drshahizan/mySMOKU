@@ -514,6 +514,9 @@
         .custom-width-select {
             width: 400px !important; /* Important to override other styles */
         }
+        .form-select {
+                margin-left: 10px !important; 
+        }
     </style>
     <script>
         $('#sortTable1').DataTable({
