@@ -99,7 +99,7 @@
 							
 									<thead>
 										<tr>
-											<th colspan="2" class="text-center">Pengakuan Pelajar</th>
+											<th colspan="2" class="text-center">Perakuan Pelajar</th>
 										</tr>
 									</thead>
 									<tbody>
