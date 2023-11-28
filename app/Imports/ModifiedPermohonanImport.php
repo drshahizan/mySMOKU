@@ -39,9 +39,15 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
 
     protected function convertExcelDate($excelDate)
     {
-        // Convert Excel date to Carbon date
-        return Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($excelDate));
+        // Directly parse the formatted date string as a Carbon date
+        return Carbon::parse($excelDate);
     }
+
+    // protected function convertExcelDate($excelDate)
+    // {
+    //     // Convert Excel date to Carbon date
+    //     return Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($excelDate));
+    // }
 
     private function updateStatus()
     {
