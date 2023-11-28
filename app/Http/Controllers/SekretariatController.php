@@ -438,7 +438,7 @@ class SekretariatController extends Controller
         }
 
         $kelulusan = $query->get();
-        $institusiPengajian = InfoIpt::all();
+        $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
 
         return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan', 'institusiPengajian', 'filters'));
     }

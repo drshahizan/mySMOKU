@@ -85,7 +85,7 @@
                                     <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <select name="institusi" class="form-select" style="margin-left: 20px;">
+                                                <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiPengajian as $institusi)
                                                         <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
@@ -264,7 +264,7 @@
                                     <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <select name="institusi" class="form-select" style="margin-left: 20px;">
+                                                <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiPengajian as $institusi)
                                                         <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
@@ -446,7 +446,7 @@
                                     <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <select name="institusi" class="form-select" style="margin-left: 20px;">
+                                                <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiPengajian as $institusi)
                                                         <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
@@ -621,12 +621,26 @@
                 </div>
             </div>
         </div>
+        <style>
+            .form-select {
+                margin-left: 20px !important; 
+            }
+        </style>
 
         <script>
             //sorting function
-            $('#sortTable1').DataTable();
-            $('#sortTable2').DataTable();
-            $('#sortTable3').DataTable();
+            $('#sortTable1').DataTable({
+                ordering: true, // Enable manual sorting
+                order: [] // Disable initial sorting
+            });
+            $('#sortTable2').DataTable({
+                ordering: true, // Enable manual sorting
+                order: [] // Disable initial sorting
+            });
+            $('#sortTable3').DataTable({
+                ordering: true, // Enable manual sorting
+                order: [] // Disable initial sorting
+            });
 
             // check all checkboxes at once
             function toggle(source) {
@@ -635,6 +649,10 @@
                     checkboxes[i].checked = source.checked;
                 }
             }
+
+            $(document).ready(function() {
+			$('.js-example-basic-single').select2();
+			});
         </script>
     </body>
 </x-default-layout> 
