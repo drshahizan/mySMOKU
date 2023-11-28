@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JumlahTuntutan;
 use App\Models\Permohonan;
 use App\Models\SejarahPermohonan;
 use App\Models\SejarahTuntutan;
@@ -313,6 +314,10 @@ class MaklumatESPController extends Controller
                     $formattedDate = $date->format('Y-m-d');
 
                     $smoku = Smoku::where('no_kp', $jsonData['nokp'])->first();
+
+                    //fetch max yuran dan wang saku
+                    $amaun_yuran = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Yuran')->first();
+                    $amaun_wang_saku = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Wang Saku')->first();
                     
                     if ($smoku === null) {
                         // No record found in Smoku table
@@ -336,6 +341,7 @@ class MaklumatESPController extends Controller
                                     'yuran_dibayar' => $jsonData['yuran_dibayar'] !== null ? number_format($jsonData['yuran_dibayar'], 2, '.', '') : null,
                                     'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'] !== null ? number_format($jsonData['wang_saku_dibayar'], 2, '.', '') : null,
                                     'tarikh_transaksi' => $formattedDate,
+                                    'baki_dibayar' => $amaun_yuran->jumlah - $jsonData['yuran_dibayar'] - $jsonData['wang_saku_dibayar'],
                                     'status' => 8,
                                 ]);
 
@@ -361,6 +367,7 @@ class MaklumatESPController extends Controller
                                         'yuran_dibayar' => $jsonData['yuran_dibayar'] !== null ? number_format($jsonData['yuran_dibayar'], 2, '.', '') : null,
                                         'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'] !== null ? number_format($jsonData['wang_saku_dibayar'], 2, '.', '') : null,
                                         'tarikh_transaksi' => $formattedDate,
+                                        'baki_dibayar' => $amaun_yuran->jumlah - $jsonData['yuran_dibayar'] - $jsonData['wang_saku_dibayar'],
                                         'status' => 8,
                                     ]);
 
