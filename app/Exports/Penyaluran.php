@@ -67,19 +67,25 @@ class Penyaluran implements FromCollection, WithHeadings, WithColumnWidths, With
         $newRows = [];
 
         foreach ($originalResults as $originalRow) {
-            // Duplicate the original row for yuran
-            $yuranRow = clone $originalRow;
-            $yuranRow->debit = $originalRow->yuran_dibayar;
-            $yuranRow->urusniaga = 11601; // Set urusniaga to 11601 for yuran
-            unset($yuranRow->yuran_dibayar, $yuranRow->wang_saku_dibayar); // Remove yuran_dibayar and wang_saku_dibayar fields
-            $newRows[] = $yuranRow;
-        
-            // Duplicate the original row for wang saku
-            $wangSakuRow = clone $originalRow;
-            $wangSakuRow->debit = $originalRow->wang_saku_dibayar;
-            $wangSakuRow->urusniaga = 11912; // Set urusniaga to 11912 for wang_saku
-            unset($wangSakuRow->yuran_dibayar, $wangSakuRow->wang_saku_dibayar); // Remove yuran_dibayar and wang_saku_dibayar fields
-            $newRows[] = $wangSakuRow;
+            // Check if 'yuran_dibayar' is not null
+            if ($originalRow->yuran_dibayar !== null) {
+                // Duplicate the original row for yuran
+                $yuranRow = clone $originalRow;
+                $yuranRow->debit = $originalRow->yuran_dibayar;
+                $yuranRow->urusniaga = 11601; // Set urusniaga to 11601 for yuran
+                unset($yuranRow->yuran_dibayar, $yuranRow->wang_saku_dibayar); // Remove yuran_dibayar and wang_saku_dibayar fields
+                $newRows[] = $yuranRow;
+            }
+
+            // Check if 'wang_saku_dibayar' is not null
+            if ($originalRow->wang_saku_dibayar !== null) {
+                // Duplicate the original row for wang saku
+                $wangSakuRow = clone $originalRow;
+                $wangSakuRow->debit = $originalRow->wang_saku_dibayar;
+                $wangSakuRow->urusniaga = 11912; // Set urusniaga to 11912 for wang_saku
+                unset($wangSakuRow->yuran_dibayar, $wangSakuRow->wang_saku_dibayar); // Remove yuran_dibayar and wang_saku_dibayar fields
+                $newRows[] = $wangSakuRow;
+            }
         }
 
 
