@@ -110,6 +110,16 @@
                         <div class="col-md-6 col-sm-6">
                             <br>
                             @php
+                                if($tuntutan->status==5){
+                                    $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id', $tuntutan->id)->where('status', 4)->value('created_at');
+                                }
+                                elseif($tuntutan->status==6){
+                                    $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->where('status', 5)->value('created_at');
+                                }
+                                elseif($tuntutan->status==7){
+                                    $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->where('status', 5)->value('created_at');
+                                }
+
                                 $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                 $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
                                 $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja)->value('penaja');
@@ -227,7 +237,7 @@
                                     <td class="space">&nbsp;</td>
                                     <td><strong>Status</strong></td>
                                     <td>:</td>
-                                    <td>{{ucwords(strtolower($status))}} ({{date('d/m/Y', strtotime($sejarah_t->created_at))}} oleh {{$user_name}})</td>
+                                    <td>{{ucwords(strtolower($tuntutan->status))}} ({{date('d/m/Y', strtotime($tarikh_status))}} oleh {{$user_name}})</td>
                                 </tr>
                             </table>
                             <hr>
