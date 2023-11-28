@@ -40,26 +40,52 @@ class Penyaluran implements FromCollection, WithHeadings, WithColumnWidths, With
         }
 
         $penyaluran = $penyaluran
-            ->select(
-                'a.no_rujukan_permohonan', 
-                'd.nama',
-                'd.no_kp',
-                'b.peringkat_pengajian',
-                'a.no_baucer',
-                'a.tarikh_baucer',
-                'a.perihal',
-                'a.no_cek',
-                'a.tarikh_transaksi',
-                'a.yuran_dibayar',
-                'a.wang_saku_dibayar'
-            )
-            ->join('smoku_akademik as b', 'b.smoku_id', '=', 'a.smoku_id')
-            ->join('bk_info_institusi as c', 'c.id_institusi', '=', 'b.id_institusi')
-            ->join('smoku as d', 'd.id', '=', 'a.smoku_id')
-            ->join('bk_jenis_oku as e', 'e.kod_oku', '=', 'd.kategori')
-            ->get();
+        ->select(
+            'a.no_rujukan_permohonan', 
+            'd.nama',
+            'd.no_kp',
+            'p.kod_esp',
+            'a.no_baucer',
+            'a.tarikh_baucer',
+            'a.perihal',
+            'a.no_cek',
+            'a.tarikh_transaksi',
+            'a.yuran_dibayar',
+            'a.wang_saku_dibayar'
+        )
+        ->join('smoku_akademik as b', 'b.smoku_id', '=', 'a.smoku_id')
+        ->join('bk_peringkat_pengajian as p', 'p.kod_peringkat', '=', 'b.peringkat_pengajian')
+        ->join('bk_info_institusi as c', 'c.id_institusi', '=', 'b.id_institusi')
+        ->join('smoku as d', 'd.id', '=', 'a.smoku_id')
+        ->join('bk_jenis_oku as e', 'e.kod_oku', '=', 'd.kategori')
+        ->get();
 
-        return collect($penyaluran);
+        // Assuming $penyaluran is the result of your original query
+        $originalResults = $penyaluran;
+
+        // Initialize an empty array to store the new rows
+        $newRows = [];
+
+        foreach ($originalResults as $originalRow) {
+            // Duplicate the original row for yuran
+            $yuranRow = clone $originalRow;
+            $yuranRow->debit = $originalRow->yuran_dibayar;
+            $yuranRow->urusniaga = 11601; // Set urusniaga to 11601 for yuran
+            unset($yuranRow->yuran_dibayar, $yuranRow->wang_saku_dibayar); // Remove yuran_dibayar and wang_saku_dibayar fields
+            $newRows[] = $yuranRow;
+        
+            // Duplicate the original row for wang saku
+            $wangSakuRow = clone $originalRow;
+            $wangSakuRow->debit = $originalRow->wang_saku_dibayar;
+            $wangSakuRow->urusniaga = 11912; // Set urusniaga to 11912 for wang_saku
+            unset($wangSakuRow->yuran_dibayar, $wangSakuRow->wang_saku_dibayar); // Remove yuran_dibayar and wang_saku_dibayar fields
+            $newRows[] = $wangSakuRow;
+        }
+
+
+        // dd($newRows);    
+
+        return collect($newRows);
     }
 
     public function headings(): array
@@ -75,16 +101,16 @@ class Penyaluran implements FromCollection, WithHeadings, WithColumnWidths, With
             'A' => 10,
             'B' => 50,           
             'C' => 30,
-            'D' => 20,
-            'E' => 80,
-            'F' => 60,
+            'D' => 15,
+            'E' => 15,
+            'F' => 15,
             'G' => 25,
             'H' => 30,
-            'I' => 25,
-            'J' => 25,
-            'K' => 25,
-            'L' => 25,
-            'M' => 25,
+            'I' => 30,
+            'J' => 15,
+            'K' => 20,
+            'L' => 20,
+            'M' => 20,
         ];
     }
 
@@ -105,8 +131,8 @@ class Penyaluran implements FromCollection, WithHeadings, WithColumnWidths, With
             $this->bil++,  
             $row->nama,
             $row->no_kp,
-            $row->peringkat_pengajian,
-            11601,
+            $row->kod_esp,
+            $row->urusniaga,
             10,
             $row->no_baucer,
             \Carbon\Carbon::parse($row->tarikh_baucer)->format('d/m/Y'),
@@ -114,7 +140,7 @@ class Penyaluran implements FromCollection, WithHeadings, WithColumnWidths, With
             'BIMB',
             $row->no_cek,
             \Carbon\Carbon::parse($row->tarikh_transaksi)->format('d/m/Y'),
-            $row->yuran_dibayar,
+            $row->debit,
         ];
     }
 
@@ -122,6 +148,9 @@ class Penyaluran implements FromCollection, WithHeadings, WithColumnWidths, With
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
+                // Rename the sheet
+                $event->sheet->setTitle('UA');
+                
                 // Customize the style of the header row
                 $event->sheet->getStyle('A1:' . $event->sheet->getHighestColumn() . '1')->applyFromArray([
                     'font' => [
