@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Permohonan;
+use App\Models\SejarahPermohonan;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -50,6 +51,14 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
 
         // Update the 'status' column to 8 for the permohonan records with matching 'no_rujukan_permohonan'
         Permohonan::whereIn('no_rujukan_permohonan', $noRujukanArray)
+            ->update(['status' => 8]);
+
+        // Update the 'status' column to 8 for the corresponding rows in sejarah_permohonan table
+        SejarahPermohonan::whereIn('permohonan_id', function ($query) use ($noRujukanArray) {
+                $query->select('id')
+                    ->from('permohonan')
+                    ->whereIn('no_rujukan_permohonan', $noRujukanArray);
+            })
             ->update(['status' => 8]);
     }
 }
