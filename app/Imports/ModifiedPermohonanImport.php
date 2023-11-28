@@ -54,11 +54,27 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
             ->update(['status' => 8]);
 
         // Update the 'status' column to 8 for the corresponding rows in sejarah_permohonan table
-        SejarahPermohonan::whereIn('permohonan_id', function ($query) use ($noRujukanArray) {
-                $query->select('id')
-                    ->from('permohonan')
-                    ->whereIn('no_rujukan_permohonan', $noRujukanArray);
-            })
-            ->update(['status' => 8]);
+        // SejarahPermohonan::whereIn('permohonan_id', function ($query) use ($noRujukanArray) {
+        //         $query->select('id')
+        //             ->from('permohonan')
+        //             ->whereIn('no_rujukan_permohonan', $noRujukanArray);
+        //     })
+        //     ->create(['status' => 8]);
+        // create bukan update. 
+        // Fetch the corresponding rows from permohonan table
+        $permohonans = Permohonan::whereIn('no_rujukan_permohonan', $noRujukanArray)
+        ->select('id', 'smoku_id')
+        ->get();
+
+        // Create new records in sejarah_permohonan table based on the fetched rows
+        foreach ($permohonans as $permohonan) {
+        SejarahPermohonan::create([
+            'permohonan_id' => $permohonan->id,
+            'smoku_id' => $permohonan->smoku_id,
+            'status' => 8
+        ]);
+        }
+
+
     }
 }
