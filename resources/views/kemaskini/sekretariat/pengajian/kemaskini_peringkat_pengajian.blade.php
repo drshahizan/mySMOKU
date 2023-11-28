@@ -107,12 +107,9 @@
                                                             @csrf
                                                             <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
                                                                 <option value="">Kemaskini</option>
-                                                                <option value="1">Sijil</option>
-                                                                <option value="2">Diploma</option>
-                                                                <option value="3">Sarjana Muda</option>
-                                                                <option value="4">Diploma Lepasan Ijazah</option>
-                                                                <option value="5">Ijazah Sarjana</option>
-                                                                <option value="6">Doktor Falsafah</option>
+                                                                @foreach ($peringkatPengajian as $peringkat)
+                                                                    <option value="{{ $peringkat->kod_peringkat }}" {{ Request::get('peringkat_pengajian') == $peringkat->kod_peringkat ? 'selected' : '' }}>{{ $peringkat->peringkat }}</option>
+                                                                @endforeach
                                                             </select>
                                                         </form>
                                                     </td>

@@ -26,6 +26,7 @@ use App\Models\InfoIpt;
 use App\Models\Kelulusan;
 use App\Models\LanjutPengajian;
 use App\Models\MaklumatKementerian;
+use App\Models\PeringkatPengajian;
 use App\Models\SuratTawaran;
 use App\Models\TamatPengajian;
 use App\Models\TangguhPengajian;
@@ -277,9 +278,12 @@ class SekretariatController extends Controller
             })
             ->where('smoku_akademik.status', 1)
             ->whereRaw('(tamat_pengajian.created_at, smoku_akademik.smoku_id) IN (SELECT MAX(created_at), smoku_id FROM tamat_pengajian GROUP BY smoku_id)')
+            ->orderBy('tamat_pengajian.updated_at', 'desc') 
             ->get();
 
-        return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsBKOKU'));
+        $peringkatPengajian = PeringkatPengajian::all();
+
+        return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsBKOKU','peringkatPengajian'));
     }
 
     public function kemaskiniPeringkatPengajian(Request $request, $id)
