@@ -43,6 +43,7 @@ use App\Models\MaklumatBank;
 use App\Models\Parlimen;
 use App\Exports\PermohonanLayakExport;
 use App\Imports\ModifiedPermohonanImport;
+use App\Models\JumlahTuntutan;
 use Carbon\Carbon;
 use DateTime;
 use GuzzleHttp\Client;
@@ -1382,6 +1383,10 @@ class PenyelarasController extends Controller
 
             // Retrieve the corresponding database record based on no_rujukan_permohonan
             $permohonan = Permohonan::where('no_rujukan_permohonan', $noRujukan)->first();
+
+            //fetch max yuran dan wang saku
+            $amaun_yuran = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Yuran')->first();
+            $amaun_wang_saku = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Wang Saku')->first();
             
             if ($permohonan) {
                 // Update the retrieved database record with the modified data
@@ -1391,6 +1396,7 @@ class PenyelarasController extends Controller
                     'no_baucer' => $noBaucer,
                     'perihal' => $perihal,
                     'tarikh_baucer' => $tarikhBaucer,
+                    'baki_dibayar' => $amaun_yuran->jumlah - $yuranDibayar - $wangSakuDibayar,
                 ]);
                 // Optionally, you can log a success message
                 Log::info("Record with no_rujukan_permohonan $noRujukan updated successfully.");
