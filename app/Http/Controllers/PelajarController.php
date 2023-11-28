@@ -50,7 +50,8 @@ class PelajarController extends Controller
         ->where('status',1)
         ->first();
 
-        $currentDate = Carbon::now();
+        if($akademik !== null){
+            $currentDate = Carbon::now();
         $tarikhMula = Carbon::parse($akademik->tarikh_mula);
         $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
         $tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
@@ -107,6 +108,10 @@ class PelajarController extends Controller
 
             
         }
+
+        }
+
+        
         return view('dashboard.pelajar.dashboard', compact('user','permohonan','akademik','tuntutan'));
     }
 

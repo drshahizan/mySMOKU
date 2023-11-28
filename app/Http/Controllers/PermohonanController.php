@@ -129,11 +129,11 @@ class PermohonanController extends Controller
                     //dd($butiranPelajar);
     
                     $dokumen = Dokumen::where('permohonan_id', $permohonan_baru->id)->get();
-                    return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan','parlimen','dun','keturunan'));
+                    return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan','parlimen','dun','keturunan','agama'));
     
                 }else{
                      //dd('sini');
-                     return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri','parlimen','dun','keturunan'));
+                     return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri','parlimen','dun','keturunan','agama','bandar'));
                 }
    
             }
