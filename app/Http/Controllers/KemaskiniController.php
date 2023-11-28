@@ -49,12 +49,12 @@ class KemaskiniController extends Controller
 
     public function pKemaskiniLayakPPK(){
         $emel = EmelKemaskini::where('id',8)->first();
-        return view('kemaskini.sekretariat.emel.BKOKU.permohonan.kemaskini_layak',compact('emel'));
+        return view('kemaskini.sekretariat.emel.PPK.permohonan.kemaskini_layak',compact('emel'));
     }
 
     public function pKemaskiniTidakLayakPPK(){
         $emel = EmelKemaskini::where('id',9)->first();
-        return view('kemaskini.sekretariat.emel.BKOKU.permohonan.kemaskini_tidak_layak',compact('emel'));
+        return view('kemaskini.sekretariat.emel.PPK.permohonan.kemaskini_tidak_layak',compact('emel'));
     }
 
     public function kemaskiniDikembalikanPPK(){

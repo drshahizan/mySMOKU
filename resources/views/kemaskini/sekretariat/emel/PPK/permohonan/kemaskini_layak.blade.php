@@ -97,7 +97,7 @@
                     <nav class="navbar navbar-expand-lg navbar-light bg-light page_menu">
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Emel Permohonan Dikembalikan</b></li>
+                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Emel Permohonan Layak</b></li>
                             </ul>
                             <div class="ml-auto">
                                 <a href="{{url('kemaskini/sekretariat/emel/papar-emel/'.$emel->id)}}" target="_blank">

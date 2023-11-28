@@ -264,7 +264,7 @@
                                     <h2>Tuntutan</h2>
                                 </div>
                                 <div class="body">
-                                    <!--begin::First Row-->
+                                    <!--begin::Second Row-->
                                     <div class="row g-3 g-lg-6" style="text-align: center;">
                                         <!--begin::Col-->
                                         <div class="col-4">
