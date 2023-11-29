@@ -1332,18 +1332,25 @@ class PenyelarasController extends Controller
         return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user'));
     }
 
+    //PEMBAYARAN
     public function senaraiPemohonLayak(Request $request)
     {
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $layak = Permohonan::orderBy('id', 'desc')
+        $permohonanLayak = Permohonan::orderBy('id', 'desc')
         ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('created_at', [$startDate, $endDate]);
         })
         ->where('permohonan.status', '=', '6')->get();
 
-        return view('penyaluran.penyelaras.senarai_pembayaran', compact('layak'));
+        $tuntutanLayak = Tuntutan::orderBy('id', 'desc')
+        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('created_at', [$startDate, $endDate]);
+        })
+        ->where('tuntutan.status', '=', '6')->get();
+
+        return view('penyaluran.penyelaras.senarai_pembayaran', compact('permohonanLayak','tuntutanLayak'));
     }
 
     public function exportPermohonanLayak()
@@ -1462,13 +1469,19 @@ class PenyelarasController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $dibayar = Permohonan::orderBy('id', 'desc')
+        $permohonanDibayar = Permohonan::orderBy('id', 'desc')
         ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('created_at', [$startDate, $endDate]);
+            return $q->whereBetween('tarikh_baucer', [$startDate, $endDate]);
         })
         ->where('permohonan.status', '=', '8')->get();
 
-        return view('penyaluran.penyelaras.senarai_permohonan_dibayar', compact('dibayar'));
+        $tuntutanDibayar = Tuntutan::orderBy('id', 'desc')
+        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('tarikh_baucer', [$startDate, $endDate]);
+        })
+        ->where('tuntutan.status', '=', '8')->get();
+
+        return view('penyaluran.penyelaras.senarai_permohonan_dibayar', compact('permohonanDibayar','tuntutanDibayar'));
     }
 
     public function deleteItemTuntutan($id)

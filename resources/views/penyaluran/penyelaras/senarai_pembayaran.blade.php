@@ -41,7 +41,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Kemaskini Baucer</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Senarai Layak</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -72,6 +72,7 @@
                                     <div class="header">
                                         <h2>Senarai Permohonan yang Layak<br><small>Klik ID Permohonan atau muat turun excel fail senarai layak untuk kemaskini baucer pemohon.</small></h2>
                                     </div>
+
                                     <div class="row" style="margin-left: 15px;">
                                         <form action="{{ url('penyelaras/penyaluran/permohonan/layak') }}" method="GET" class="col-md-5">
                                             <div class="row">
@@ -140,7 +141,7 @@
                                                         require_once app_path('helpers.php'); // Replace with the actual path to your helper file
                                                     @endphp
                                                 
-                                                    @foreach ($layak as $item)
+                                                    @foreach ($permohonanLayak as $item)
                                                         @php
                                                             $i++;
                                                             $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
@@ -170,7 +171,7 @@
                                                                 <td style="width: 40%">{{$pemohon}}</td>
                                                                 <td class="text-center" style="width: 10%">RM {{$item->yuran_disokong}}</td>
                                                                 <td class="text-center" style="width: 15%">RM {{$item->wang_saku_disokong}}</td>                                       
-                                                                <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->created_at))}}</td>
+                                                                <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_hantar))}}</td>
                                                             </tr>
 
                                                             {{-- Modal Baucer --}}
@@ -265,10 +266,11 @@
                                 {{-- End of Permohonan --}}
 
                                 {{-- Tuntutan --}}
-                                <div class="tab-pane fade show active" id="tuntutan" role="tabpanel" aria-labelledby="tuntutan-tab">
+                                <div class="tab-pane fade" id="tuntutan" role="tabpanel" aria-labelledby="tuntutan-tab">
                                     <div class="header">
                                         <h2>Senarai Tuntutan yang Layak<br><small>Klik ID Tuntutan atau muat turun excel fail senarai layak untuk kemaskini baucer pemohon.</small></h2>
                                     </div>
+
                                     <div class="row" style="margin-left: 15px;">
                                         <form action="{{ url('penyelaras/penyaluran/permohonan/layak') }}" method="GET" class="col-md-5">
                                             <div class="row">
@@ -337,7 +339,7 @@
                                                         require_once app_path('helpers.php'); // Replace with the actual path to your helper file
                                                     @endphp
                                                 
-                                                    @foreach ($layak as $item)
+                                                    @foreach ($tuntutanLayak as $item)
                                                         @php
                                                             $i++;
                                                             $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
@@ -363,11 +365,11 @@
                                                             <!-- Table rows -->
                                                             <tr>
                                                                 {{-- <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>  --}}
-                                                                <td style="width: 15%"><a href="#" class="open-modal-link" data-bs-toggle="modal" data-bs-target="#baucerPenyelaras" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>                                          
+                                                                <td style="width: 15%"><a href="#" class="open-modal-link" data-bs-toggle="modal" data-bs-target="#baucerPenyelaras" data-no-rujukan="{{$item['no_rujukan_tuntutan']}}">{{$item['no_rujukan_tuntutan']}}</a></td>                                          
                                                                 <td style="width: 40%">{{$pemohon}}</td>
                                                                 <td class="text-center" style="width: 10%">RM {{$item->yuran_disokong}}</td>
                                                                 <td class="text-center" style="width: 15%">RM {{$item->wang_saku_disokong}}</td>                                       
-                                                                <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->created_at))}}</td>
+                                                                <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_hantar))}}</td>
                                                             </tr>
 
                                                             {{-- Modal Baucer --}}
@@ -473,7 +475,7 @@
             //sorting function
             $('#sortTable1').DataTable();
             $('#sortTable2').DataTable();
-            
+
             function uploadFile() {
                 // Trigger the click event of the hidden file input
                 document.querySelector('input[name="modified_excel_file"]').click();

@@ -46,7 +46,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Kemaskini Baucer</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Keputusan Pembayaran</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -61,145 +61,285 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="card">
-                            <div class="header">
-                                <h2>Senarai permohonan yang telah dibayar<br><small>Klik ID Permohonan untuk kemaskini baucer pemohon.</small></h2>
-                            </div>
-
+                            {{-- top nav bar --}}
+                            <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top:20px;">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="permohonan-tab" data-toggle="tab" data-target="#permohonan" type="button" role="tab" aria-controls="permohonan" aria-selected="true">Permohonan</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="tuntutan-tab" data-toggle="tab" data-target="#tuntutan" type="button" role="tab" aria-controls="tuntutan" aria-selected="true">Tuntutan</button>
+                                </li>
+                            </ul>
+                            
                             <div class="tab-content" id="myTabContent">
-                                <form action="{{ url('penyelaras/penyaluran/baucer/permohonan') }}" method="GET">
-                                    <div class="row" style="margin-left: 15px;">
-                                        <div class="col-md-2">
-                                            <label for="start_date"><b>Dari:</b></label>
-                                            <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
-                                        </div>
-                                
-                                        <div class="col-md-2">
-                                            <label for="end_date"><b>Hingga:</b></label>
-                                            <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                        </div>
-                                
-                                        <div class="col-md-8 right">
-                                            <br>
-                                            <button type="submit" class="btn btn-primary" style="width: 5%; padding-left: 10px;">
-                                                <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                            </button>
-                                        </div>
+                                {{-- Permohonan --}}
+                                <div class="tab-pane fade show active" id="permohonan" role="tabpanel" aria-labelledby="permohonan-tab">
+                                    <div class="header">
+                                        <h2>Senarai permohonan yang telah dibayar</h2>
                                     </div>
-                                </form>  
+        
+                                    <form action="{{ url('penyelaras/penyaluran/permohonan/dibayar') }}" method="GET">
+                                        <div class="row" style="margin-left: 15px;">
+                                            <div class="col-md-2">
+                                                <label for="start_date"><b>Dari:</b></label>
+                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
+                                            </div>
+                                    
+                                            <div class="col-md-2">
+                                                <label for="end_date"><b>Hingga:</b></label>
+                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
+                                            </div>
+                                    
+                                            <div class="col-md-8 right">
+                                                <br>
+                                                <button type="submit" class="btn btn-primary" style="width: 5%; padding-left: 10px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>  
 
-                                <div class="body">
-                                    <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 15%"><b>ID Permohonan</b></th>                                                   
-                                                <th style="width: 40%"><b>Nama</b></th>
-                                                <th class="text-center" style="width: 15%"><b>Amaun Yuran</b></th>
-                                                <th class="text-center" style="width: 15%"><b>Amaun Wang Saku</b></th>
-                                                <th class="text-center" style="width: 15%"><b>Tarikh Transaksi</b></th>
-                                            </tr>
-                                        </thead>
+                                    <div class="body">
+                                        <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 15%"><b>ID Permohonan</b></th>                                                   
+                                                    <th style="width: 40%"><b>Nama</b></th>
+                                                    <th class="text-center" style="width: 15%"><b>Amaun Yuran</b></th>
+                                                    <th class="text-center" style="width: 15%"><b>Amaun Wang Saku</b></th>
+                                                    <th class="text-center" style="width: 15%"><b>Tarikh Transaksi</b></th>
+                                                </tr>
+                                            </thead>
 
-                                        <tbody>
-                                            @php
-                                                $i=0;
-                                            @endphp
-                                            @php
-                                                require_once app_path('helpers.php'); // Replace with the actual path to your helper file
-                                            @endphp
-                                        
-                                            @foreach ($dibayar as $item)
+                                            <tbody>
                                                 @php
-                                                    $i++;
-                                                    $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                    $institusi_id = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
-                                                    $instiusi_user = auth()->user()->id_institusi;
-
-                                                    // nama pemohon
-                                                    $text = ucwords(strtolower($nama_pemohon)); 
-                                                    $conjunctions = ['bin', 'binti'];
-                                                    $words = explode(' ', $text);
-                                                    $result = [];
-                                                    foreach ($words as $word) {
-                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                            $result[] = Str::lower($word);
-                                                        } else {
-                                                            $result[] = $word;
-                                                        }
-                                                    }
-                                                    $pemohon = implode(' ', $result);
+                                                    $i=0;
                                                 @endphp
-                                                
-                                                @if ($institusi_id == $instiusi_user)
-                                                    <!-- Table rows -->
-                                                    <tr>
-                                                        {{-- <td style="width: 15%">
-                                                            <a href="#" class="open-modal-link" 
-                                                            data-bs-toggle="modal" 
-                                                            data-bs-target="#baucerPenyelaras_{{ $item['no_rujukan_permohonan'] }}" 
-                                                            data-no-rujukan="{{ $item['no_rujukan_permohonan'] }}">
-                                                            {{ $item['no_rujukan_permohonan'] }}
-                                                            </a>
-                                                        </td> --}}
-                                                        <td style="width: 15%">{{$item['no_rujukan_permohonan']}}</td>
-                                                        <td style="width: 40%">{{$pemohon}}</td>
-                                                        <td class="text-center" style="width: 15%">RM {{$item->yuran_dibayar}}</td>
-                                                        <td class="text-center" style="width: 15%"> RM {{$item->wang_saku_dibayar}}</td>                                       
-                                                        <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_baucer))}}</td>
-                                                    </tr>
+                                                @php
+                                                    require_once app_path('helpers.php'); // Replace with the actual path to your helper file
+                                                @endphp
+                                            
+                                                @foreach ($permohonanDibayar as $item)
+                                                    @php
+                                                        $i++;
+                                                        $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                        $institusi_id = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
+                                                        $instiusi_user = auth()->user()->id_institusi;
 
-                                                    {{-- Modal Baucer --}}
-                                                    <div class="modal fade" id="baucerPenyelaras_{{ $item['no_rujukan_permohonan'] }}" tabindex="-1" aria-labelledby="baucerPenyelarasLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Kemaskini Maklumat Pembayaran</h1>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
+                                                        // nama pemohon
+                                                        $text = ucwords(strtolower($nama_pemohon)); 
+                                                        $conjunctions = ['bin', 'binti'];
+                                                        $words = explode(' ', $text);
+                                                        $result = [];
+                                                        foreach ($words as $word) {
+                                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                                $result[] = Str::lower($word);
+                                                            } else {
+                                                                $result[] = $word;
+                                                            }
+                                                        }
+                                                        $pemohon = implode(' ', $result);
+                                                    @endphp
+                                                    
+                                                    @if ($institusi_id == $instiusi_user)
+                                                        <!-- Table rows -->
+                                                        <tr>
+                                                            <td style="width: 15%">{{$item['no_rujukan_permohonan']}}</td>
+                                                            <td style="width: 40%">{{$pemohon}}</td>
+                                                            <td class="text-center" style="width: 15%">RM {{$item->yuran_dibayar}}</td>
+                                                            <td class="text-center" style="width: 15%"> RM {{$item->wang_saku_dibayar}}</td>                                       
+                                                            <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_baucer))}}</td>
+                                                        </tr>
 
-                                                                <div class="modal-body">
-                                                                    <!-- Form for single submission -->
-                                                                    <form action="#" method="GET" class="modal-form">
-                                                                        {{ csrf_field() }}
-                                                                        <div class="mb-3">
-                                                                            <label for="message-text" class="col-form-label">Yuran Dibayar :</label>
-                                                                            <input type="number" step="0.01" class="form-control" id="yuranDibayar" name="yuranDibayar"  value="{{ $maklumat->yuran_dibayar ?? '' }}">
-                                                                        </div>
+                                                        {{-- Modal Baucer --}}
+                                                        {{-- <div class="modal fade" id="baucerPenyelaras_{{ $item['no_rujukan_permohonan'] }}" tabindex="-1" aria-labelledby="baucerPenyelarasLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Kemaskini Maklumat Pembayaran</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
 
-                                                                        <div class="mb-3">
-                                                                            <label for="message-text" class="col-form-label">Wang Saku Dibayar :</label>
-                                                                            <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar"  value="{{ $maklumat->wang_saku_dibayar ?? '' }}">
-                                                                        </div>
+                                                                    <div class="modal-body">
+                                                                        <!-- Form for single submission -->
+                                                                        <form action="#" method="GET" class="modal-form">
+                                                                            {{ csrf_field() }}
+                                                                            <div class="mb-3">
+                                                                                <label for="message-text" class="col-form-label">Yuran Dibayar :</label>
+                                                                                <input type="number" step="0.01" class="form-control" id="yuranDibayar" name="yuranDibayar"  value="{{ $maklumat->yuran_dibayar ?? '' }}">
+                                                                            </div>
 
-                                                                        <div class="mb-3">
-                                                                            <label for="recipient-name" class="col-form-label">No Baucer :</label>
-                                                                            <input type="text" class="form-control" id="noBaucer" name="noBaucer"  value="{{ $maklumat->no_baucer ?? '' }}">
-                                                                        </div>
-                                                                        
-                                                                        <div class="mb-3">
-                                                                            <label for="message-text" class="col-form-label">Perihal :</label>
-                                                                            <textarea class="form-control" id="perihal" name="perihal"  value="{{ $maklumat->perihal ?? '' }}"></textarea>
-                                                                        </div>
+                                                                            <div class="mb-3">
+                                                                                <label for="message-text" class="col-form-label">Wang Saku Dibayar :</label>
+                                                                                <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar"  value="{{ $maklumat->wang_saku_dibayar ?? '' }}">
+                                                                            </div>
 
-                                                                        <div class="mb-3">
-                                                                            <label for="message-text" class="col-form-label">Tarikh Baucer :</label>
-                                                                            <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer"  value="{{ $maklumat->tarikh_baucer ?? '' }}">
-                                                                        </div>
+                                                                            <div class="mb-3">
+                                                                                <label for="recipient-name" class="col-form-label">No Baucer :</label>
+                                                                                <input type="text" class="form-control" id="noBaucer" name="noBaucer"  value="{{ $maklumat->no_baucer ?? '' }}">
+                                                                            </div>
+                                                                            
+                                                                            <div class="mb-3">
+                                                                                <label for="message-text" class="col-form-label">Perihal :</label>
+                                                                                <textarea class="form-control" id="perihal" name="perihal"  value="{{ $maklumat->perihal ?? '' }}"></textarea>
+                                                                            </div>
 
-                                                                        <input type="hidden" id="clickedNoRujukan">
+                                                                            <div class="mb-3">
+                                                                                <label for="message-text" class="col-form-label">Tarikh Baucer :</label>
+                                                                                <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer"  value="{{ $maklumat->tarikh_baucer ?? '' }}">
+                                                                            </div>
 
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                                            <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div> 
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                            @endforeach 
-                                        </tbody>
-                                    </table>
+                                                                            <input type="hidden" id="clickedNoRujukan">
+
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div> 
+                                                            </div>
+                                                        </div> --}}
+                                                    @endif
+                                                @endforeach 
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                {{-- Tuntutan --}}
+                                <div class="tab-pane fade" id="tuntutan" role="tabpanel" aria-labelledby="tuntutan-tab">
+                                    <div class="header">
+                                        <h2>Senarai tuntutan yang telah dibayar</h2>
+                                    </div>
+        
+                                    <form action="{{ url('penyelaras/penyaluran/permohonan/dibayar') }}" method="GET">
+                                        <div class="row" style="margin-left: 15px;">
+                                            <div class="col-md-2">
+                                                <label for="start_date"><b>Dari:</b></label>
+                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
+                                            </div>
+                                    
+                                            <div class="col-md-2">
+                                                <label for="end_date"><b>Hingga:</b></label>
+                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
+                                            </div>
+                                    
+                                            <div class="col-md-8 right">
+                                                <br>
+                                                <button type="submit" class="btn btn-primary" style="width: 5%; padding-left: 10px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>  
+
+                                    <div class="body">
+                                        <table id="sortTable2" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 15%"><b>ID Tuntutan</b></th>                                                   
+                                                    <th style="width: 40%"><b>Nama</b></th>
+                                                    <th class="text-center" style="width: 15%"><b>Amaun Yuran</b></th>
+                                                    <th class="text-center" style="width: 15%"><b>Amaun Wang Saku</b></th>
+                                                    <th class="text-center" style="width: 15%"><b>Tarikh Transaksi</b></th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                @php
+                                                    $i=0;
+                                                @endphp
+                                                @php
+                                                    require_once app_path('helpers.php'); // Replace with the actual path to your helper file
+                                                @endphp
+                                            
+                                                @foreach ($tuntutanDibayar as $item)
+                                                    @php
+                                                        $i++;
+                                                        $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                        $institusi_id = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
+                                                        $instiusi_user = auth()->user()->id_institusi;
+
+                                                        // nama pemohon
+                                                        $text = ucwords(strtolower($nama_pemohon)); 
+                                                        $conjunctions = ['bin', 'binti'];
+                                                        $words = explode(' ', $text);
+                                                        $result = [];
+                                                        foreach ($words as $word) {
+                                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                                $result[] = Str::lower($word);
+                                                            } else {
+                                                                $result[] = $word;
+                                                            }
+                                                        }
+                                                        $pemohon = implode(' ', $result);
+                                                    @endphp
+                                                    
+                                                    @if ($institusi_id == $instiusi_user)
+                                                        <!-- Table rows -->
+                                                        <tr>
+                                                            <td style="width: 15%">{{$item['no_rujukan_tuntutan']}}</td>
+                                                            <td style="width: 40%">{{$pemohon}}</td>
+                                                            <td class="text-center" style="width: 15%">RM {{$item->yuran_dibayar}}</td>
+                                                            <td class="text-center" style="width: 15%"> RM {{$item->wang_saku_dibayar}}</td>                                       
+                                                            <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_baucer))}}</td>
+                                                        </tr>
+
+                                                        {{-- Modal Baucer --}}
+                                                        {{-- <div class="modal fade" id="baucerPenyelaras_{{ $item['no_rujukan_permohonan'] }}" tabindex="-1" aria-labelledby="baucerPenyelarasLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Kemaskini Maklumat Pembayaran</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+
+                                                                    <div class="modal-body">
+                                                                        <!-- Form for single submission -->
+                                                                        <form action="#" method="GET" class="modal-form">
+                                                                            {{ csrf_field() }}
+                                                                            <div class="mb-3">
+                                                                                <label for="message-text" class="col-form-label">Yuran Dibayar :</label>
+                                                                                <input type="number" step="0.01" class="form-control" id="yuranDibayar" name="yuranDibayar"  value="{{ $maklumat->yuran_dibayar ?? '' }}">
+                                                                            </div>
+
+                                                                            <div class="mb-3">
+                                                                                <label for="message-text" class="col-form-label">Wang Saku Dibayar :</label>
+                                                                                <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar"  value="{{ $maklumat->wang_saku_dibayar ?? '' }}">
+                                                                            </div>
+
+                                                                            <div class="mb-3">
+                                                                                <label for="recipient-name" class="col-form-label">No Baucer :</label>
+                                                                                <input type="text" class="form-control" id="noBaucer" name="noBaucer"  value="{{ $maklumat->no_baucer ?? '' }}">
+                                                                            </div>
+                                                                            
+                                                                            <div class="mb-3">
+                                                                                <label for="message-text" class="col-form-label">Perihal :</label>
+                                                                                <textarea class="form-control" id="perihal" name="perihal"  value="{{ $maklumat->perihal ?? '' }}"></textarea>
+                                                                            </div>
+
+                                                                            <div class="mb-3">
+                                                                                <label for="message-text" class="col-form-label">Tarikh Baucer :</label>
+                                                                                <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer"  value="{{ $maklumat->tarikh_baucer ?? '' }}">
+                                                                            </div>
+
+                                                                            <input type="hidden" id="clickedNoRujukan">
+
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div> 
+                                                            </div>
+                                                        </div> --}}
+                                                    @endif
+                                                @endforeach 
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -211,6 +351,7 @@
         <script>
             //sorting table
             $('#sortTable1').DataTable();
+            $('#sortTable2').DataTable();
 
             //modal
             $(document).ready(function () {
