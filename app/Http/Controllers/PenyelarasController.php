@@ -1332,7 +1332,7 @@ class PenyelarasController extends Controller
         return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user'));
     }
 
-    //PEMBAYARAN
+    //PENYALURAN - PEMBAYARAN
     public function senaraiPemohonLayak(Request $request)
     {
         $startDate = $request->input('start_date');
@@ -1353,6 +1353,7 @@ class PenyelarasController extends Controller
         return view('penyaluran.penyelaras.senarai_pembayaran', compact('permohonanLayak','tuntutanLayak'));
     }
 
+    //PENYALURAN - PEMBAYARAN - PERMOHONAN
     public function exportPermohonanLayak()
     {
         return Excel::download(new PermohonanLayakExport, 'senarai_permohonan__layak.xlsx');
@@ -1464,6 +1465,9 @@ class PenyelarasController extends Controller
         return redirect()->route('penyelaras.senarai.dibayar', compact('dibayar'));
     }
 
+    //PENYALURAN - PEMBAYARAN - TUNTUTAN
+
+    //PENYALURAN - DIBAYAR
     public function senaraiPemohonDibayar(Request $request)
     {
         $startDate = $request->input('start_date');

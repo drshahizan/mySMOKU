@@ -261,7 +261,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/penyaluran/permohonan/layak', [PenyelarasController::class, 'senaraiPemohonLayak']);
     Route::post('/penyelaras/hantar/info-baucer/{permohonan_id}', [PenyelarasController::class, 'hantarSemuaInfoCek'])->name('penyelaras.modal.submit');
     Route::get('penyelaras/penyaluran/permohonan/dibayar', [PenyelarasController::class, 'senaraiPemohonDibayar'])->name('penyelaras.senarai.dibayar');
-    Route::get('/penyelaras/maklumat/pembayaran/{id}', [PenyelarasController::class, 'maklumatPembayaran'])->name('penyelaras.get-maklumat');
     Route::get('/senarai-layak-excel', [PenyelarasController::class, 'exportPermohonanLayak'])->name('penyelaras.senarai.layak.excel');
     Route::post('/penyelaras/process-uploaded-file', [PenyelarasController::class, 'uploadedFilePembayaran'])->name('modified.file.pembayaran');
 

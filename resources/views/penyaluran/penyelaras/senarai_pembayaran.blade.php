@@ -169,8 +169,16 @@
                                                                 {{-- <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>  --}}
                                                                 <td style="width: 15%"><a href="#" class="open-modal-link" data-bs-toggle="modal" data-bs-target="#baucerPermohonan" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>                                          
                                                                 <td style="width: 40%">{{$pemohon}}</td>
-                                                                <td class="text-center" style="width: 10%">RM {{$item->yuran_disokong}}</td>
-                                                                <td class="text-center" style="width: 15%">RM {{$item->wang_saku_disokong}}</td>                                       
+                                                                <td class="text-center" style="width: 10%">
+                                                                    @if ($item->yuran_disokong !== null)
+                                                                        RM {{ number_format($item->yuran_disokong, 2) }}
+                                                                    @endif
+                                                                </td>
+                                                                <td class="text-center" style="width: 15%">
+                                                                    @if ($item->wang_saku_disokong !== null)
+                                                                        RM {{ number_format($item->wang_saku_disokong, 2) }}
+                                                                    @endif
+                                                                </td>
                                                                 <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_hantar))}}</td>
                                                             </tr>
 
