@@ -1492,23 +1492,23 @@ class PenyelarasController extends Controller
     {
         foreach ($modifiedData as $modifiedRecord)
         {
-            $noRujukan = $modifiedRecord['no_rujukan_permohonan'];
+            $noRujukan = $modifiedRecord['no_rujukan_tuntutan'];
             $yuranDibayar = $modifiedRecord['yuran_dibayar'];
             $wangSakuDibayar = $modifiedRecord['wang_saku_dibayar'];
             $noBaucer = $modifiedRecord['no_baucer'];
             $perihal = $modifiedRecord['perihal'];
             $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
 
-            // Retrieve the corresponding database record based on no_rujukan_permohonan
-            $permohonan = Permohonan::where('no_rujukan_permohonan', $noRujukan)->first();
+            // Retrieve the corresponding database record based on no_rujukan_tuntutan
+            $tuntutan = Tuntutan::where('no_rujukan_tuntutan', $noRujukan)->first();
 
             //fetch max yuran dan wang saku
             $amaun_yuran = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Yuran')->first();
             $amaun_wang_saku = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Wang Saku')->first();
             
-            if ($permohonan) {
+            if ($tuntutan) {
                 // Update the retrieved database record with the modified data
-                $permohonan->update([
+                $tuntutan->update([
                     'yuran_dibayar' => $yuranDibayar,
                     'wang_saku_dibayar' => $wangSakuDibayar,
                     'no_baucer' => $noBaucer,
@@ -1517,11 +1517,11 @@ class PenyelarasController extends Controller
                     'baki_dibayar' => $amaun_yuran->jumlah - $yuranDibayar - $wangSakuDibayar,
                 ]);
                 // Optionally, you can log a success message
-                Log::info("Record with no_rujukan_permohonan $noRujukan updated successfully.");
+                Log::info("Record with no_rujukan_tuntutan $noRujukan updated successfully.");
             } 
             else {
                 // Optionally, log a message or handle the case where no matching record is found
-                Log::warning("No record found for no_rujukan_permohonan $noRujukan.");
+                Log::warning("No record found for no_rujukan_tuntutan $noRujukan.");
             }
         }
     }

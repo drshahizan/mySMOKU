@@ -83,7 +83,7 @@ class PermohonanLayakExport implements FromCollection, WithHeadings, WithColumnW
             $row->nama,
             number_format($row->yuran_disokong, 2, '.', ''), // Format 'Yuran Disokong' as numeric with two decimal places
             number_format($row->wang_saku_disokong, 2, '.', ''), // Format 'Wang Saku Disokong' as numeric with two decimal places
-            Carbon::parse($row->created_at)->format('d/m/Y'),
+            Carbon::parse($row->tarikh_hantar)->format('d/m/Y'),
         ];
     }
 

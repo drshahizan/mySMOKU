@@ -8,6 +8,7 @@ use App\Models\SejarahTuntutan;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Facades\Log;
 
 class ModifiedTuntutanImport implements ToCollection, WithHeadingRow
 {
@@ -19,11 +20,14 @@ class ModifiedTuntutanImport implements ToCollection, WithHeadingRow
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) {
+            // Log or print $row to debug
+            Log::info('Row data:', $row->toArray());
+
             // Extract specific columns
             $this->modifiedData[] = [
                 'no_rujukan_tuntutan' => $row['id_tuntutan'],
-                'yuran_dibayar' => number_format($row['yuran_dibayar'], 2, '.', ''),
-                'wang_saku_dibayar' => number_format($row['wang_saku_dibayar'], 2, '.', ''),
+                'yuran_dibayar' => isset($row['yuran_dibayar']) ? number_format($row['yuran_dibayar'], 2, '.', '') : null,
+                'wang_saku_dibayar' => isset($row['wang_saku_dibayar']) ? number_format($row['wang_saku_dibayar'], 2, '.', '') : null,
                 'no_baucer' => $row['no_baucer'],
                 'perihal' => $row['perihal'],
                 'tarikh_baucer' => $this->convertExcelDate($row['tarikh_baucer']),
