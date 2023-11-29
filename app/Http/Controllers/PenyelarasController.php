@@ -611,7 +611,7 @@ class PenyelarasController extends Controller
         ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
         ->where('permohonan.status','=', '2')
         ->where('penyelaras_id','=', Auth::user()->id)
-        ->orderBy('permohonan.created_at', 'DESC')
+        ->orderBy('permohonan.tarikh_hantar', 'DESC')
         ->get(['smoku.*', 'permohonan.*', 'smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
 
         //dd($smoku);
@@ -627,10 +627,7 @@ class PenyelarasController extends Controller
         ->leftjoin('tuntutan','tuntutan.permohonan_id','=','permohonan.id')
         ->where('penyelaras_id','=', Auth::user()->id)
         ->where('permohonan.status', 8) 
-        // ->where(function ($query) {
-        //     $query->where('tuntutan.status', '<', '2')
-        //         ->orWhereNull('tuntutan.status');
-        // })
+        ->orderBy('permohonan.tarikh_hantar', 'DESC')
         ->get(['smoku.*', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
         //dd($layak);
 
@@ -790,21 +787,34 @@ class PenyelarasController extends Controller
         $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
         $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
 
-        // $biltuntutan = Tuntutan::where('smoku_id', '<=', $id)
-        $biltuntutan = Tuntutan::where('smoku_id', '=', $id)
-            ->groupBy('no_rujukan_tuntutan')
-            ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan') 
-            ->get();
+        $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', '=', $id)->first();
+        //dd($tuntutan->status); 
+        if(!$tuntutan || $tuntutan->status == 8 || $tuntutan->status == 9){
+            
+            $biltuntutan = Tuntutan::where('smoku_id', '=', $id)
+                ->groupBy('no_rujukan_tuntutan')
+                ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan') 
+                ->get();
+            $bil = $biltuntutan->count();
 
-        $bil = $biltuntutan->count();
-        $running_num =  $bil + 1; //sebab nak guna satu id je
-        $no_rujukan_tuntutan =  $no_rujukan_permohonan.'/'.$running_num; // try duluuu
+            $running_num =  $bil + 1; //sebab nak guna satu id je  
+            $no_rujukan_tuntutan =  $no_rujukan_permohonan.'/'.$running_num; // try duluuu  
+
+        } else {
+            
+            $no_rujukan_tuntutan = $tuntutan->no_rujukan_tuntutan;
+            //dd($no_rujukan_tuntutan);    
+
+        }
 
         //simpan dalam table tuntutan
         $tuntutan = Tuntutan::where('smoku_id', '=', $id)
             ->where('permohonan_id', '=', $permohonan->id)
+            ->where('sesi', '=', $request->sesi)
+            ->where('semester', '=', $request->semester)
+            ->where('no_rujukan_tuntutan', '=', $no_rujukan_tuntutan)
             ->first();
-        if ($tuntutan === null) {
+        if (!$tuntutan) {
             $tuntutan = Tuntutan::create([
                 'smoku_id' => $id,
                 'permohonan_id' => $permohonan->id,
@@ -814,26 +824,12 @@ class PenyelarasController extends Controller
                 'yuran' => '1',
                 'status' => '1',
             ]);
+
+            $tuntutan->save();
         }
-       /*else {
-            Tuntutan::where('smoku_id', '=', $smoku_id->id)
-                ->where('permohonan_id', '=', $permohonan->id)
-                ->update([
-                'smoku_id' => $smoku_id->id,
-                'permohonan_id' => $permohonan->id,
-                'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
-                'sesi' => $request->sesi,
-                'semester' => $request->semester,
-                'status' => '1',
-                
-            ]);
-
-        }*/
-
-        $tuntutan->save();
 
         //simpan dalam table tuntutan_item
-        $tuntutan = Tuntutan::where('smoku_id', '=', $id)
+        $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', '=', $id)
             ->where('permohonan_id', '=', $permohonan->id)
             ->first();
 

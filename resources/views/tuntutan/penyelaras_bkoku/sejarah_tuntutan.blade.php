@@ -130,6 +130,11 @@
 
                                                         @if ($item['status']=='1')
                                                             <td class="text-center">
+                                                                <a href="{{ route('bkoku.tuntutan.baharu', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
+                                                                        <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                    </span>
+                                                                </a>
                                                                 <a href="{{ route('bkoku.tuntutan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
                                                                     <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
                                                                         <i class="fa fa-trash fa-sm custom-white-icon"></i>
@@ -143,7 +148,15 @@
                                                                         <i class="fa fa-cancel fa-sm custom-white-icon"></i>
                                                                     </span>
                                                                 </a>
-                                                            </td> 
+                                                            </td>
+                                                            @elseif ($item['status']=='5')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('bkoku.tuntutan.baharu', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
+                                                                        <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td>
                                                             @else
                                                             <td class="text-center"></td> 
 
