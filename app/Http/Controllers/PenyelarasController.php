@@ -1414,7 +1414,7 @@ class PenyelarasController extends Controller
         }
     }
 
-    public function hantarSemuaInfoCek(Request $request, $id)
+    public function hantarInfoBaucerPermohonan(Request $request, $id)
     {
         //fetch max yuran dan wang saku
         $amaun_yuran = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Yuran')->first();
@@ -1524,6 +1524,55 @@ class PenyelarasController extends Controller
                 Log::warning("No record found for no_rujukan_tuntutan $noRujukan.");
             }
         }
+    }
+
+    public function hantarInfoBaucerTuntutan(Request $request, $id)
+    {
+        //fetch max yuran dan wang saku
+        $amaun_yuran = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Yuran')->first();
+        $amaun_wang_saku = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Wang Saku')->first();
+
+        // Use $smoku_id to associate the data with a specific smoku_id
+        $smoku_id = Tuntutan::where('id', $id)->value('smoku_id');
+        
+        // Retrieve and process the form data from $request
+        $existingRecord = Tuntutan::where('id', $id)->first();
+
+        if ($existingRecord) {
+            // Update the respective row in tuntutan_kelulusan table
+            $existingRecord->yuran_dibayar = number_format($request->yuranDibayar, 2, '.', '');
+            $existingRecord->wang_saku_dibayar = number_format($request->wangSakuDibayar, 2, '.', '');
+            $existingRecord->baki_dibayar = $amaun_yuran->jumlah - $request->yuranDibayar - $request->wangSakuDibayar;
+            $existingRecord->no_baucer = $request->noBaucer;
+            $existingRecord->perihal = $request->perihal;
+            $existingRecord->tarikh_baucer = $request->tarikhBaucer;
+            $existingRecord->save();
+
+            // Update tuntutan table
+            Tuntutan::where('id', $id)->update([
+                'status' => 8,
+            ]);
+
+            // Update sejarah_tuntutan table
+            $sejarah = new Sejarahtuntutan([
+                'smoku_id' => $smoku_id,
+                'tuntutan_id' => $id,
+                'status' => 8,
+            ]);
+            $sejarah->save();
+        }
+
+        //filter for keputusan
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $dibayar = tuntutan::orderBy('id', 'desc')
+        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
+        })
+        ->where('tuntutan.status', '=', '8')->get();
+
+        return redirect()->route('penyelaras.senarai.dibayar', compact('dibayar'));
     }
 
     //PENYALURAN - DIBAYAR
