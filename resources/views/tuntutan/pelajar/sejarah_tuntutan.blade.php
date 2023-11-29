@@ -137,6 +137,14 @@
                                                                 </span>
                                                             </a>
                                                         </td>
+                                                        @elseif ($item['status']=='5')
+                                                        <td class="text-center">
+                                                            <a href="{{ route('tuntutan.baharu') }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
+                                                                    <i class="fa fa-pen fa-sm custom-white-icon"></i>
+                                                                </span>
+                                                            </a>
+                                                        </td>
                                                         @else
                                                         <td class="text-center"></td>                                                            
                                                         @endif
