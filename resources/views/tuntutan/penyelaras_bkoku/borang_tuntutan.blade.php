@@ -88,6 +88,7 @@
 									// dd($ada);	
 									$jumlah_tuntut = DB::table('tuntutan')
 										->where('permohonan_id', $tuntut->permohonan_id)
+										->where('status','!=', 9)
 										->get();
 									$sum = $jumlah_tuntut->sum('jumlah');	
 
