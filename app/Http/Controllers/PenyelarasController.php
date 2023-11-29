@@ -44,6 +44,7 @@ use App\Models\Parlimen;
 use App\Exports\PermohonanLayakExport;
 use App\Exports\TuntutanLayak;
 use App\Imports\ModifiedPermohonanImport;
+use App\Imports\ModifiedTuntutanImport;
 use App\Models\JumlahTuntutan;
 use Carbon\Carbon;
 use DateTime;
@@ -1360,13 +1361,13 @@ class PenyelarasController extends Controller
         return Excel::download(new PermohonanLayakExport, 'senarai_permohonan__layak.xlsx');
     }
 
-    public function uploadedFilePembayaran(Request $request)
+    public function uploadedFilePembayaranPermohonan(Request $request)
     {
         $request->validate([
-            'modified_excel_file' => 'required|mimes:xlsx,xls',
+            'modified_excel_file1' => 'required|mimes:xlsx,xls',
         ]);
 
-        $file = $request->file('modified_excel_file');
+        $file = $request->file('modified_excel_file1');
 
         // Use the Laravel Excel package to import data from the Excel file
         $import = new ModifiedPermohonanImport();
@@ -1459,7 +1460,7 @@ class PenyelarasController extends Controller
 
         $dibayar = Permohonan::orderBy('id', 'desc')
         ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('created_at', [$startDate, $endDate]);
+            return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
         })
         ->where('permohonan.status', '=', '8')->get();
 
@@ -1470,6 +1471,63 @@ class PenyelarasController extends Controller
     public function exportTuntutanLayak()
     {
         return Excel::download(new TuntutanLayak, 'senarai_tuntutan__layak.xlsx');
+    }
+
+    public function uploadedFilePembayaranTuntutan(Request $request)
+    {
+        $request->validate([
+            'modified_excel_file2' => 'required|mimes:xlsx,xls',
+        ]);
+
+        $file = $request->file('modified_excel_file2');
+
+        // Use the Laravel Excel package to import data from the Excel file
+        $import = new ModifiedTuntutanImport();
+        $data = Excel::import($import, $file);
+
+        // Process the imported data and update the tuntutan records
+        $this->updateTuntutanRecords($import->getModifiedData());
+        
+        // You may add a success message or redirect to a success page
+        return redirect()->back()->with('success', 'File processed successfully');
+    }
+
+    private function updateTuntutanRecords($modifiedData)
+    {
+        foreach ($modifiedData as $modifiedRecord)
+        {
+            $noRujukan = $modifiedRecord['no_rujukan_permohonan'];
+            $yuranDibayar = $modifiedRecord['yuran_dibayar'];
+            $wangSakuDibayar = $modifiedRecord['wang_saku_dibayar'];
+            $noBaucer = $modifiedRecord['no_baucer'];
+            $perihal = $modifiedRecord['perihal'];
+            $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
+
+            // Retrieve the corresponding database record based on no_rujukan_permohonan
+            $permohonan = Permohonan::where('no_rujukan_permohonan', $noRujukan)->first();
+
+            //fetch max yuran dan wang saku
+            $amaun_yuran = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Yuran')->first();
+            $amaun_wang_saku = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Wang Saku')->first();
+            
+            if ($permohonan) {
+                // Update the retrieved database record with the modified data
+                $permohonan->update([
+                    'yuran_dibayar' => $yuranDibayar,
+                    'wang_saku_dibayar' => $wangSakuDibayar,
+                    'no_baucer' => $noBaucer,
+                    'perihal' => $perihal,
+                    'tarikh_baucer' => $tarikhBaucer,
+                    'baki_dibayar' => $amaun_yuran->jumlah - $yuranDibayar - $wangSakuDibayar,
+                ]);
+                // Optionally, you can log a success message
+                Log::info("Record with no_rujukan_permohonan $noRujukan updated successfully.");
+            } 
+            else {
+                // Optionally, log a message or handle the case where no matching record is found
+                Log::warning("No record found for no_rujukan_permohonan $noRujukan.");
+            }
+        }
     }
 
     //PENYALURAN - DIBAYAR

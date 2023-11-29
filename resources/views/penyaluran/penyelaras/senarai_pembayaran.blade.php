@@ -105,11 +105,11 @@
                                                 </div>
                                         
                                                 <div class="col-md-6">
-                                                    <form id="uploadForm" action="{{ route('modified.file.pembayaran') }}" method="POST" enctype="multipart/form-data">
+                                                    <form id="uploadForm1" action="{{ route('modified.file.pembayaran.permohonan') }}" method="POST" enctype="multipart/form-data">
                                                         @csrf
-                                                        <input type="file" name="modified_excel_file" accept=".xlsx, .xls" style="display: none" onchange="fileSelected(event)">
-                                                        <input type="hidden" name="form_submitted" id="formSubmitted" value="0">
-                                                        <button type="button" class="btn btn-secondary btn-round" onclick="uploadFile()"> 
+                                                        <input type="file" name="modified_excel_file1" accept=".xlsx, .xls" style="display: none" onchange="fileSelected1(event)">
+                                                        <input type="hidden" name="form_submitted1" id="formSubmitted1" value="0">
+                                                        <button type="button" class="btn btn-secondary btn-round" onclick="uploadFilePermohonan()"> 
                                                             <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Muat Naik
                                                         </button>
                                                     </form>
@@ -312,11 +312,11 @@
                                                 </div>
                                         
                                                 <div class="col-md-6">
-                                                    <form id="uploadForm" action="{{ route('modified.file.pembayaran') }}" method="POST" enctype="multipart/form-data">
+                                                    <form id="uploadForm2" action="{{ route('modified.file.pembayaran.tuntutan') }}" method="POST" enctype="multipart/form-data">
                                                         @csrf
-                                                        <input type="file" name="modified_excel_file" accept=".xlsx, .xls" style="display: none" onchange="fileSelected(event)">
-                                                        <input type="hidden" name="form_submitted" id="formSubmitted" value="0">
-                                                        <button type="button" class="btn btn-secondary btn-round" onclick="uploadFile()"> 
+                                                        <input type="file" name="modified_excel_file2" accept=".xlsx, .xls" style="display: none" onchange="fileSelected2(event)">
+                                                        <input type="hidden" name="form_submitted2" id="formSubmitted2" value="0">
+                                                        <button type="button" class="btn btn-secondary btn-round" onclick="uploadFileTuntutan()"> 
                                                             <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Muat Naik
                                                         </button>
                                                     </form>
@@ -374,7 +374,7 @@
                                                             <!-- Table rows -->
                                                             <tr>
                                                                 {{-- <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>  --}}
-                                                                <td style="width: 15%"><a href="#" class="open-modal-link" data-bs-toggle="modal" data-bs-target="#baucerPenyelaras" data-no-rujukan="{{$item['no_rujukan_tuntutan']}}">{{$item['no_rujukan_tuntutan']}}</a></td>                                          
+                                                                <td style="width: 15%"><a href="#" class="open-modal-link" data-bs-toggle="modal" data-bs-target="#baucerTuntutan" data-no-rujukan="{{$item['no_rujukan_tuntutan']}}">{{$item['no_rujukan_tuntutan']}}</a></td>                                          
                                                                 <td style="width: 40%">{{$pemohon}}</td>
                                                                 <td class="text-center" style="width: 10%">
                                                                     @if ($item->yuran_disokong !== null)
@@ -493,16 +493,30 @@
             $('#sortTable1').DataTable();
             $('#sortTable2').DataTable();
 
-            function uploadFile() {
+            //permohonan
+            function uploadFilePermohonan() {
                 // Trigger the click event of the hidden file input
-                document.querySelector('input[name="modified_excel_file"]').click();
+                document.querySelector('input[name="modified_excel_file1"]').click();
             }
         
-            function fileSelected(event) {
+            function fileSelected1(event) {
                 // Set the hidden input value to 1 when a file is selected
-                document.getElementById('formSubmitted').value = 1;
+                document.getElementById('formSubmitted1').value = 1;
                 // Submit the form
-                document.getElementById('uploadForm').submit();
+                document.getElementById('uploadForm1').submit();
+            }
+
+            //tuntutan
+            function uploadFileTuntutan() {
+                // Trigger the click event of the hidden file input
+                document.querySelector('input[name="modified_excel_file2"]').click();
+            }
+        
+            function fileSelected2(event) {
+                // Set the hidden input value to 1 when a file is selected
+                document.getElementById('formSubmitted2').value = 1;
+                // Submit the form
+                document.getElementById('uploadForm2').submit();
             }
         
             // Display SweetAlert for success and error messages after file import
