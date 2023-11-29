@@ -26,7 +26,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-dark" style="color:darkblue">Tuntutan Baharu</li>
+        <li class="breadcrumb-item text-dark" style="color:darkblue">Tuntutan Layak Mohon</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
@@ -39,7 +39,7 @@
         <div class="card">
             <!--begin::Header-->
             <div class="header">
-                <h2>Senarai Tuntutan Baharu</h2>
+                <h2>Senarai Tuntutan Layak Mohon</h2>
             </div>
             <!--end::Header-->
             <!--begin::Card body-->
