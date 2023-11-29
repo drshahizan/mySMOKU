@@ -220,7 +220,7 @@
                                                                                     <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer">
                                                                                 </div>
 
-                                                                                <input type="hidden" id="clickedNoRujukan">
+                                                                                <input type="hidden" id="clickedNoRujukan1">
 
                                                                                 <div class="modal-footer">
                                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -373,9 +373,8 @@
                                                         @if ($institusi_id == $instiusi_user)
                                                             <!-- Table rows -->
                                                             <tr>
-                                                                {{-- <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>  --}}
                                                                 <td style="width: 15%"><a href="#" class="open-modal-link" data-bs-toggle="modal" data-bs-target="#baucerTuntutan" data-no-rujukan="{{$item['no_rujukan_tuntutan']}}">{{$item['no_rujukan_tuntutan']}}</a></td>                                          
-                                                                <td style="width: 40%">{{$pemohon}}</td>
+                                                                <td style="width: 45%">{{$pemohon}}</td>
                                                                 <td class="text-center" style="width: 10%">
                                                                     @if ($item->yuran_disokong !== null)
                                                                         RM {{ number_format($item->yuran_disokong, 2) }}
@@ -427,7 +426,7 @@
                                                                                     <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer">
                                                                                 </div>
 
-                                                                                <input type="hidden" id="clickedNoRujukan">
+                                                                                <input type="hidden" id="clickedNoRujukan2">
 
                                                                                 <div class="modal-footer">
                                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -504,14 +503,6 @@
                     confirmButtonText: 'OK'
                 });
             @endif
-           
-            // check all checkboxes at once
-            function toggle(source) {
-                var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
-                for (var i = 0; i < checkboxes.length; i++) {
-                    checkboxes[i].checked = source.checked;
-                }
-            }
 
             // Add a click event listener to the links with the "open-modal-link" class
             document.querySelectorAll('.open-modal-link').forEach(function(link) {
@@ -520,7 +511,7 @@
                     var noRujukan = link.getAttribute('data-no-rujukan');
 
                     // Set the value to the hidden input in the modal
-                    document.getElementById('clickedNoRujukan').value = noRujukan;
+                    document.getElementById('clickedNoRujukan1').value = noRujukan;
 
                     // Set the permohonan id value in the form action URL
                     var permohonanId = link.getAttribute('data-permohonan-id');
@@ -528,6 +519,30 @@
                     form.action = form.action.replace(/\/\d+$/, '/' + permohonanId);
                 });
             });
+
+            // Add a click event listener to the links with the "open-modal-link" class
+            document.querySelectorAll('.open-modal-link').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    // Get the value of the data-no-rujukan attribute
+                    var noRujukan = link.getAttribute('data-no-rujukan');
+
+                    // Set the value to the hidden input in the modal
+                    document.getElementById('clickedNoRujukan2').value = noRujukan;
+
+                    // Set the tuntutan id value in the form action URL
+                    var tuntutanId = link.getAttribute('data-tuntutan-id');
+                    var form = document.getElementById('modalForm');
+                    form.action = form.action.replace(/\/\d+$/, '/' + tuntutanId);
+                });
+            });
+
+            // check all checkboxes at once
+            function toggle(source) {
+                var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
+                for (var i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].checked = source.checked;
+                }
+            }
         </script>
     </body>
 </x-default-layout> 
