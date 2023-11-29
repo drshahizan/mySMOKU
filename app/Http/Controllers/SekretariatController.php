@@ -1053,7 +1053,6 @@ class SekretariatController extends Controller
                 }
             }
 
-
             $saringan = new SaringanTuntutan([
                 'tuntutan_id'               =>  $id,
                 'saringan_kep_peperiksaan'  =>  $request->get('peperiksaan'),
@@ -1098,12 +1097,20 @@ class SekretariatController extends Controller
 
             $i=0;
             $invois = $request->get('invois');
-            foreach($tuntutan_item as $item){
-                TuntutanItem::where('id', $item['id'])
+            if($count_item==1){
+                TuntutanItem::where('id', $tuntutan_item->id)
                     ->update([
-                        'kep_saringan'      =>  $invois[$i],
+                        'kep_saringan'      =>  $invois[0],
                     ]);
-                $i++;
+            }
+            else{
+                foreach($tuntutan_item as $item){
+                    TuntutanItem::where('id', $item['id'])
+                        ->update([
+                            'kep_saringan'      =>  $invois[$i],
+                        ]);
+                    $i++;
+                }
             }
 
             $saringan = new SaringanTuntutan([
@@ -1154,12 +1161,20 @@ class SekretariatController extends Controller
 
             $i=0;
             $invois = $request->get('invois');
-            foreach($tuntutan_item as $item){
-                TuntutanItem::where('id', $item['id'])
+            if($count_item==1){
+                TuntutanItem::where('id', $tuntutan_item->id)
                     ->update([
-                        'kep_saringan'      =>  $invois[$i],
+                        'kep_saringan'      =>  $invois[0],
                     ]);
-                $i++;
+            }
+            else{
+                foreach($tuntutan_item as $item){
+                    TuntutanItem::where('id', $item['id'])
+                        ->update([
+                            'kep_saringan'      =>  $invois[$i],
+                        ]);
+                    $i++;
+                }
             }
 
             $saringan = new SaringanTuntutan([
@@ -1426,7 +1441,7 @@ class SekretariatController extends Controller
 
     public function cetakSenaraiPenyaluranExcel(Request $request, $programCode)
     {
-        
+
         $institusi = $request->input('institusi');
         // dd($institusi);
 
@@ -1443,7 +1458,7 @@ class SekretariatController extends Controller
         {
 
             foreach ($selectedItemIds as $itemId){
-                
+
                 $tuntutan = Tuntutan::orderBy('id', 'desc')->where('id', '=', $itemId)->first();
                 if ($tuntutan != null) {
                     Tuntutan::where('id' ,$itemId)
@@ -1452,10 +1467,10 @@ class SekretariatController extends Controller
                         'tarikh_transaksi' => $request->tarikhTransaksi,
 
                     ]);
-                    
+
                 }
                 // dd('okayyy');
-                
+
             }
         }
 
