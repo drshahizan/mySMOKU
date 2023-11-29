@@ -192,7 +192,7 @@
 
                                                                         <div class="modal-body">
                                                                             <!-- Form for single submission -->
-                                                                            <form action="{{ route('penyelaras.modal.submit', ['permohonan_id' => $item['id']]) }}" method="POST" class="modal-form">
+                                                                            <form action="{{ route('permohonan.modal.submit', ['permohonan_id' => $item['id']]) }}" method="POST" class="modal-form">
                                                                                 {{ csrf_field() }}
                                                                                 <div class="mb-3">
                                                                                     <label for="message-text" class="col-form-label">Yuran Dibayar (RM) :</label>
@@ -366,7 +366,7 @@
 
                                                                         <div class="modal-body">
                                                                             <!-- Form for single submission -->
-                                                                            <form action="{{ route('penyelaras.modal.submit', ['permohonan_id' => $item['id']]) }}" method="POST" class="modal-form">
+                                                                            <form action="{{ route('tuntutan.modal.submit', ['tuntutan_id' => $item['id']]) }}" method="POST" class="modal-form">
                                                                                 {{ csrf_field() }}
                                                                                 <div class="mb-3">
                                                                                     <label for="message-text" class="col-form-label">Yuran Dibayar (RM) :</label>
