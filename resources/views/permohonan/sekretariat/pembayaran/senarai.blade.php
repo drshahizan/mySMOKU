@@ -352,9 +352,13 @@
                                                                 <td style="width: 20%">{{$pemohon}}</td>
                                                                 <td style="width: 25%">{{$nama_institusi}}</td>
                                                                 <td class="text-center" style="width: 21%">{{$item['no_baucer']}}</td>
-                                                                <td class="text-center" style="width: 8%">{{date('d/m/Y', strtotime($item['tarikh_baucer']))}}</td>
+                                                                <td class="text-center" style="width: 8%">
+                                                                    {{ $item['tarikh_baucer'] ? date('d/m/Y', strtotime($item['tarikh_baucer'])) : '' }}
+                                                                </td>
                                                                 <td class="text-center" style="width: 21%">{{$item['no_cek']}}</td>
-                                                                <td class="text-center" style="width: 8%">{{date('d/m/Y', strtotime($item['tarikh_transaksi']))}}</td>
+                                                                <td class="text-center" style="width: 8%">
+                                                                    {{ $item['tarikh_baucer'] ? date('d/m/Y', strtotime($item['tarikh_transaksi'])) : '' }}
+                                                                </td>                                                                
                                                                 @if ($item['status']=='6')
                                                                     <td class="text-center" style="width: 5%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif ($item['status']=='8')
