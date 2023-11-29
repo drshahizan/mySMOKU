@@ -90,7 +90,7 @@
                                                 <td class="vertical-top w-13">Nama Institusi</td>
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
-                                                    <input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{$nama_uni}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>
+                                                    <input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{$nama_uni}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required readonly>
                                                 </td>
                                             </tr>
                                             <tr>
