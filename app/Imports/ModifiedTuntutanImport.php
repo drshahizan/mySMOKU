@@ -20,9 +20,6 @@ class ModifiedTuntutanImport implements ToCollection, WithHeadingRow
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) {
-            // Log or print $row to debug
-            Log::info('Row data:', $row->toArray());
-
             // Extract specific columns
             $this->modifiedData[] = [
                 'no_rujukan_tuntutan' => $row['id_tuntutan'],

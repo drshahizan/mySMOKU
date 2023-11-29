@@ -124,7 +124,6 @@
                                             <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
-                                                        {{-- <th class="text-center" style="width: 5%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th> --}}
                                                         <th style="width: 15%"><b>ID Permohonan</b></th>                                                   
                                                         <th style="width: 45%"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Amaun Yuran</b></th>
@@ -167,7 +166,7 @@
                                                             <!-- Table rows -->
                                                             <tr>
                                                                 {{-- <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>  --}}
-                                                                <td style="width: 15%"><a href="#" class="open-modal-link" data-bs-toggle="modal" data-bs-target="#baucerPermohonan" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>                                          
+                                                                <td style="width: 15%"><a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#baucerPermohonan" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>                                          
                                                                 <td style="width: 40%">{{$pemohon}}</td>
                                                                 <td class="text-center" style="width: 10%">
                                                                     @if ($item->yuran_disokong !== null)
@@ -220,7 +219,7 @@
                                                                                     <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer">
                                                                                 </div>
 
-                                                                                <input type="hidden" id="clickedNoRujukan">
+                                                                                <input type="hidden" id="clickedNoRujukan1">
 
                                                                                 <div class="modal-footer">
                                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -236,39 +235,8 @@
                                                 </tbody>
                                             </table>
 
-                                            <!-- Button trigger modal --> 
-                                            {{-- <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#cekKPT">
-                                                Kemaskini
-                                            </button> --}}
-
-                                            {{-- Modal Cek --}}
-                                            {{-- <div class="modal fade" id="cekKPT" tabindex="-1" aria-labelledby="cekKPT" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Kemaskini Maklumat Penyaluran</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-
-                                                        <div class="modal-body">
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">No Cek:</label>
-                                                                <input type="text" class="form-control" id="noCek" name="noCek">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="message-text" class="col-form-label">Tarikh Transaksi:</label>
-                                                                <input type="date" class="form-control" id="tarikhTransaksi" name="tarikhTransaksi">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
-                                                            </div>
-                                                        </div>
-                                                    </div> 
-                                                </div>
-                                            </div>  --}}
-                                            {{-- <br><br>                                       
-                                        </form> --}}
+                                                                              
+                                        {{-- </form> --}}
                                     </div>
                                 </div>
                                 {{-- End of Permohonan --}}
@@ -331,7 +299,6 @@
                                             <table id="sortTable2" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
-                                                        {{-- <th class="text-center" style="width: 5%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th> --}}
                                                         <th style="width: 15%"><b>ID Tuntutan</b></th>                                                   
                                                         <th style="width: 45%"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Amaun Yuran</b></th>
@@ -373,9 +340,8 @@
                                                         @if ($institusi_id == $instiusi_user)
                                                             <!-- Table rows -->
                                                             <tr>
-                                                                {{-- <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>  --}}
-                                                                <td style="width: 15%"><a href="#" class="open-modal-link" data-bs-toggle="modal" data-bs-target="#baucerTuntutan" data-no-rujukan="{{$item['no_rujukan_tuntutan']}}">{{$item['no_rujukan_tuntutan']}}</a></td>                                          
-                                                                <td style="width: 40%">{{$pemohon}}</td>
+                                                                <td style="width: 15%"><a href="#" class="open-modal-link-tuntutan" data-bs-toggle="modal" data-bs-target="#baucerTuntutan" data-no-rujukan="{{$item['no_rujukan_tuntutan']}}">{{$item['no_rujukan_tuntutan']}}</a></td>                                          
+                                                                <td style="width: 45%">{{$pemohon}}</td>
                                                                 <td class="text-center" style="width: 10%">
                                                                     @if ($item->yuran_disokong !== null)
                                                                         RM {{ number_format($item->yuran_disokong, 2) }}
@@ -427,7 +393,7 @@
                                                                                     <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer">
                                                                                 </div>
 
-                                                                                <input type="hidden" id="clickedNoRujukan">
+                                                                                <input type="hidden" id="clickedNoRujukan2">
 
                                                                                 <div class="modal-footer">
                                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -504,28 +470,36 @@
                     confirmButtonText: 'OK'
                 });
             @endif
-           
-            // check all checkboxes at once
-            function toggle(source) {
-                var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
-                for (var i = 0; i < checkboxes.length; i++) {
-                    checkboxes[i].checked = source.checked;
-                }
-            }
 
-            // Add a click event listener to the links with the "open-modal-link" class
-            document.querySelectorAll('.open-modal-link').forEach(function(link) {
+            // Add a click event listener to the links with the "open-modal-link" class for permohonan
+            document.querySelectorAll('.open-modal-link-permohonan').forEach(function(link) {
                 link.addEventListener('click', function() {
                     // Get the value of the data-no-rujukan attribute
                     var noRujukan = link.getAttribute('data-no-rujukan');
 
-                    // Set the value to the hidden input in the modal
-                    document.getElementById('clickedNoRujukan').value = noRujukan;
+                    // Set the value to the hidden input in the modal for permohonan
+                    document.getElementById('clickedNoRujukan1').value = noRujukan;
 
                     // Set the permohonan id value in the form action URL
                     var permohonanId = link.getAttribute('data-permohonan-id');
                     var form = document.getElementById('modalForm');
                     form.action = form.action.replace(/\/\d+$/, '/' + permohonanId);
+                });
+            });
+
+            // Add a click event listener to the links with the "open-modal-link" class for tuntutan
+            document.querySelectorAll('.open-modal-link-tuntutan').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    // Get the value of the data-no-rujukan attribute
+                    var noRujukan = link.getAttribute('data-no-rujukan');
+
+                    // Set the value to the hidden input in the modal for tuntutan
+                    document.getElementById('clickedNoRujukan2').value = noRujukan;
+
+                    // Set the tuntutan id value in the form action URL
+                    var tuntutanId = link.getAttribute('data-tuntutan-id');
+                    var form = document.getElementById('modalForm');
+                    form.action = form.action.replace(/\/\d+$/, '/' + tuntutanId);
                 });
             });
         </script>
