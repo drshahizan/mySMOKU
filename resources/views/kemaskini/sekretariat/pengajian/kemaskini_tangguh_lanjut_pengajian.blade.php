@@ -35,7 +35,7 @@
 			</li>
 			<!--end::Item-->
 			<!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">Penangguhan / Pelanjutan Pengajian</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Penangguhan / Perlanjutan Pengajian</li>
 			<!--end::Item-->
 		</ul>
 	<!--end::Breadcrumb-->
@@ -51,7 +51,7 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Permohonan BKOKU untuk Dikemaskini Permohonan Penangguhan / Pelanjutan Pengajian<br><small>Sila lihat dokumen yang dimuat naik sebagai pengesahan sebelum mengemaskini permohonan penangguhan / pelanjutan pengajian pemohon.</small></h2>
+                                <h2>Senarai Permohonan BKOKU untuk Dikemaskini Permohonan Penangguhan / Perlanjutan Pengajian<br><small>Sila lihat dokumen yang dimuat naik sebagai pengesahan sebelum mengemaskini permohonan penangguhan / perlanjutan pengajian pemohon.</small></h2>
                             </div>
 
                             <div class="body">
