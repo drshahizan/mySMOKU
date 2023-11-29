@@ -1444,9 +1444,9 @@ class SekretariatController extends Controller
 
             foreach ($selectedItemIds as $itemId){
                 
-                $permohonan = Permohonan::orderBy('id', 'desc')->where('id', '=', $itemId)->first();
-                if ($permohonan != null) {
-                    Permohonan::where('id' ,$itemId)
+                $tuntutan = Tuntutan::orderBy('id', 'desc')->where('id', '=', $itemId)->first();
+                if ($tuntutan != null) {
+                    Tuntutan::where('id' ,$itemId)
                     ->update([
                         'no_cek' => $request->noCek,
                         'tarikh_transaksi' => $request->tarikhTransaksi,
@@ -1459,7 +1459,7 @@ class SekretariatController extends Controller
             }
         }
 
-        return back();
+        return back()->with('success', 'No Cek dan Tarikh Transaksi berjaya dikemaskini');
     }
 
     public function maklumatPembayaran($id){

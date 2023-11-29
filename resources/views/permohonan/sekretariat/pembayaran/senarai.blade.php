@@ -360,11 +360,11 @@
                                                     <div class="modal-body">
                                                         <div class="mb-3">
                                                             <label for="recipient-name" class="col-form-label">No Cek:</label>
-                                                            <input type="text" class="form-control" id="noCek" name="noCek">
+                                                            <input type="text" class="form-control" id="noCek" name="noCek" required oninvalid="this.setCustomValidity('Sila isi no cek.')" oninput="setCustomValidity('')">
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="message-text" class="col-form-label">Tarikh Transaksi:</label>
-                                                            <input type="date" class="form-control" id="tarikhTransaksi" name="tarikhTransaksi">
+                                                            <input type="date" class="form-control" id="tarikhTransaksi" name="tarikhTransaksi" required oninvalid="this.setCustomValidity('Sila isi tarikh transaksi.')" oninput="setCustomValidity('')">
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -544,6 +544,26 @@
 		
 		<!--end::Custom Javascript-->
 	<!--end::Javascript-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berjaya!',
+                text: ' {!! session('success') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+        @if(session('failed'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Tiada Berjaya!',
+                text: ' {!! session('failed') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+    </script>
 
     </body>
 </x-default-layout>

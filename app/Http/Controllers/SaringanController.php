@@ -544,7 +544,7 @@ class SaringanController extends Controller
             }
         }
 
-        return back();
+        return back()->with('success', 'No Cek dan Tarikh Transaksi berjaya dikemaskini');
     }
 
     public function maklumatPembayaran($id)
