@@ -42,6 +42,7 @@ use App\Models\Keturunan;
 use App\Models\MaklumatBank;
 use App\Models\Parlimen;
 use App\Exports\PermohonanLayakExport;
+use App\Exports\TuntutanLayak;
 use App\Imports\ModifiedPermohonanImport;
 use App\Models\JumlahTuntutan;
 use Carbon\Carbon;
@@ -1340,13 +1341,13 @@ class PenyelarasController extends Controller
 
         $permohonanLayak = Permohonan::orderBy('id', 'desc')
         ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('created_at', [$startDate, $endDate]);
+            return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
         })
         ->where('permohonan.status', '=', '6')->get();
 
         $tuntutanLayak = Tuntutan::orderBy('id', 'desc')
         ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('created_at', [$startDate, $endDate]);
+            return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
         })
         ->where('tuntutan.status', '=', '6')->get();
 
@@ -1466,6 +1467,10 @@ class PenyelarasController extends Controller
     }
 
     //PENYALURAN - PEMBAYARAN - TUNTUTAN
+    public function exportTuntutanLayak()
+    {
+        return Excel::download(new TuntutanLayak, 'senarai_tuntutan__layak.xlsx');
+    }
 
     //PENYALURAN - DIBAYAR
     public function senaraiPemohonDibayar(Request $request)

@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Permohonan;
+use App\Models\Tuntutan;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Carbon\Carbon;
 
-class PermohonanLayakExport implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
+class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -25,17 +25,17 @@ class PermohonanLayakExport implements FromCollection, WithHeadings, WithColumnW
         $instiusi_user = Auth::user()->id_institusi;
 
         // Fetch data from the database based on the institusi ID
-        $senarai = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
-            ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
+        $senarai = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
+            ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tuntutan.smoku_id')
             ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
-            ->where('permohonan.status', 6)
+            ->where('tuntutan.status', 6)
             ->where('bk_info_institusi.id_institusi', $instiusi_user)
             ->select(
-                'permohonan.no_rujukan_permohonan',
+                'tuntutan.no_rujukan_tuntutan',
                 'b.nama',
-                'permohonan.yuran_disokong',
-                'permohonan.wang_saku_disokong',
-                'permohonan.tarikh_hantar'
+                'tuntutan.yuran_disokong',
+                'tuntutan.wang_saku_disokong',
+                'tuntutan.tarikh_hantar'
             )
             ->get();
         
@@ -46,11 +46,11 @@ class PermohonanLayakExport implements FromCollection, WithHeadings, WithColumnW
     {
         // Define column headings
         return [
-            'ID Permohonan',
+            'ID Tuntutan',
             'Nama Pemohon',
             'Yuran Disokong (RM)',
             'Wang Saku Disokong (RM)',
-            'Tarikh Permohonan',
+            'Tarikh Tuntutan',
             'Yuran Dibayar (RM)',
             'Wang Saku Dibayar (RM)',
             'No Baucer',
@@ -79,7 +79,7 @@ class PermohonanLayakExport implements FromCollection, WithHeadings, WithColumnW
     {
         return [
             // Update this to match with column name in database
-            $row->no_rujukan_permohonan, 
+            $row->no_rujukan_tuntutan, 
             $row->nama,
             number_format($row->yuran_disokong, 2, '.', ''), // Format 'Yuran Disokong' as numeric with two decimal places
             number_format($row->wang_saku_disokong, 2, '.', ''), // Format 'Wang Saku Disokong' as numeric with two decimal places
