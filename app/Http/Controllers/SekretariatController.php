@@ -1015,7 +1015,7 @@ class SekretariatController extends Controller
         if($count_item==1){
             $tuntutan_item =TuntutanItem::where('tuntutan_id', $id)->first();
         }
-        else{
+        elseif($count_item>1){
             $tuntutan_item =TuntutanItem::where('tuntutan_id', $id)->get();
         }
 
@@ -1043,7 +1043,7 @@ class SekretariatController extends Controller
                         'kep_saringan'      =>  $invois[0],
                     ]);
             }
-            else{
+            elseif($count_item>1){
                 foreach($tuntutan_item as $item){
                     TuntutanItem::where('id', $item['id'])
                         ->update([
@@ -1103,7 +1103,7 @@ class SekretariatController extends Controller
                         'kep_saringan'      =>  $invois[0],
                     ]);
             }
-            else{
+            elseif($count_item>1){
                 foreach($tuntutan_item as $item){
                     TuntutanItem::where('id', $item['id'])
                         ->update([
@@ -1167,7 +1167,7 @@ class SekretariatController extends Controller
                         'kep_saringan'      =>  $invois[0],
                     ]);
             }
-            else{
+            elseif($count_item>1){
                 foreach($tuntutan_item as $item){
                     TuntutanItem::where('id', $item['id'])
                         ->update([

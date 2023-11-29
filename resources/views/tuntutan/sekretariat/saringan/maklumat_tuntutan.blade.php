@@ -400,8 +400,8 @@
                                             }
                                             $jumlah = $tuntutan->amaun_wang_saku;
                                         @endphp
-                                        <input type="hidden" name="baki" id="baki" value="NULL">
-                                        <input type="hidden" name="baki_disokong" id="baki_disokong_2" value="NULL">
+                                        <input type="hidden" name="baki" id="baki" value="">
+                                        <input type="hidden" name="baki_disokong" id="baki_disokong_2" value="">
 {{--                                        <input type="hidden" name="baki_dibayar" id="baki_dibayar_2" value="NULL">--}}
                                         <div class="table-responsive">
                                             <table class="table">
@@ -580,8 +580,8 @@
                                             }
                                             $jumlah = $tuntutan->amaun_wang_saku;
                                         @endphp
-                                        <input type="hidden" name="baki" id="baki" value="NULL">
-                                        <input type="hidden" name="baki_disokong" id="baki_disokong_ppk" value="NULL">
+                                        <input type="hidden" name="baki" id="baki" value="">
+                                        <input type="hidden" name="baki_disokong" id="baki_disokong_ppk" value="">
 {{--                                        <input type="hidden" name="baki_dibayar" id="baki_dibayar_ppk" value="NULL">--}}
                                         <div class="table-responsive">
                                             <table class="table">
