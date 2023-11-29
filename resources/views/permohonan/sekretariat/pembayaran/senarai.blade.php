@@ -197,7 +197,6 @@
                             {{-- BKOKU UA--}}
                             <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                 <br>
-
                                 <!--begin::Card title-->
                                 <div class="card-title">
                                     <!--begin::Search-->
@@ -314,33 +313,6 @@
                                                             }
                                                             $pemohon = implode(' ', $result);
 
-                                                            //nama kursus
-                                                            $text2 = ucwords(strtolower($akademik->nama_kursus));
-                                                            $conjunctions = ['of', 'in', 'and'];
-                                                            $words = explode(' ', $text2);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
-                                                            }
-                                                            $kursus = implode(' ', $result);
-
-                                                            //institusi pengajian
-                                                            $text3 = ucwords(strtolower($nama_institusi));
-                                                            $conjunctions = ['of', 'in', 'and'];
-                                                            $words = explode(' ', $text3);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
-                                                            }
-                                                            $institusi = implode(' ', $result);
                                                         @endphp
                                                         @if ($jenis_institusi=="UA")
                                                             <tr>
@@ -372,7 +344,7 @@
                                         </table>
 										<!--end::Table-->
 
-                                        <!-- Button trigger modal //syafiqah. kiv jap tak siap lagi--> 
+                                        <!-- Button trigger modal --> 
                                         <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#baucer">
                                             Kemaskini
                                         </button>
