@@ -123,6 +123,11 @@
 
                                                         @if ($item['status']=='1')
                                                         <td class="text-center">
+                                                            <a href="{{ route('tuntutan.baharu') }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
+                                                                    <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                </span>
+                                                            </a>
                                                             <a href="{{ route('tuntutan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam tuntutan ini?')">
                                                                 <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Tuntutan">
                                                                     <i class="fa fa-trash fa-sm custom-white-icon"></i>
@@ -141,7 +146,7 @@
                                                         <td class="text-center">
                                                             <a href="{{ route('tuntutan.baharu') }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
                                                                 <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
-                                                                    <i class="fa fa-pen fa-sm custom-white-icon"></i>
+                                                                    <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
                                                                 </span>
                                                             </a>
                                                         </td>

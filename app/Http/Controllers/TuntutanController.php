@@ -134,19 +134,26 @@ class TuntutanController extends Controller
         $permohonan = Permohonan::all()->where('smoku_id', '=', $smoku_id->id)->first();
         $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
 
-        // $biltuntutan = Tuntutan::where('smoku_id', '<=', $smoku_id->id)
-        $biltuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
-            // ->where('sesi', '=', $request->sesi)
-            // ->where('semester', '=', $request->semester)
-            ->groupBy('no_rujukan_tuntutan')
-            ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan') 
-            ->get();
+        $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
+        //dd($tuntutan->status); 
+        if(!$tuntutan || $tuntutan->status == 8 || $tuntutan->status == 9){
+            
+            $biltuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
+                ->groupBy('no_rujukan_tuntutan')
+                ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan') 
+                ->get();
+            $bil = $biltuntutan->count();
 
-        $bil = $biltuntutan->count();
-        
-        $running_num =  $bil + 1; //sebab nak guna satu id je
-        $no_rujukan_tuntutan =  $no_rujukan_permohonan.'/'.$running_num; // try duluuu
-        
+            $running_num =  $bil + 1; //sebab nak guna satu id je  
+            $no_rujukan_tuntutan =  $no_rujukan_permohonan.'/'.$running_num; // try duluuu  
+
+        } else {
+            
+            $no_rujukan_tuntutan = $tuntutan->no_rujukan_tuntutan;
+            //dd($no_rujukan_tuntutan);    
+
+        }
+
         //simpan dalam table tuntutan_item
         $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
             ->where('permohonan_id', '=', $permohonan->id)
@@ -154,7 +161,7 @@ class TuntutanController extends Controller
             ->where('semester', '=', $request->semester)
             ->where('no_rujukan_tuntutan', '=', $no_rujukan_tuntutan)
             ->first();
-        // dd($tuntutan);
+        //dd($tuntutan);
         if(!$tuntutan){
             $tuntutan = Tuntutan::create([
                 'smoku_id' => $smoku_id->id,
