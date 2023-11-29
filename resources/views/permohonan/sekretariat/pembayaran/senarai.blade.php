@@ -543,7 +543,7 @@
 		<script src="/assets/js/custom/apps/subscriptions/list/list.js"></script>
 		
 		<!--end::Custom Javascript-->
-		<!--end::Javascript-->
+	<!--end::Javascript-->
 
     </body>
 </x-default-layout>

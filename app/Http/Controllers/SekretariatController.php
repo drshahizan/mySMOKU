@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\BorangSPPB;
+use App\Exports\PenyaluranTuntutan;
 use App\Exports\SenaraiPendek;
 use App\Mail\KeputusanLayak;
 use App\Mail\KeputusanTidakLayak;
@@ -1417,7 +1418,48 @@ class SekretariatController extends Controller
         $tuntutan = Tuntutan::where('status', '8')->orderBy('created_at', 'DESC')->get();
         $status_kod=0;
         $status = null;
-        return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status'));
+
+        $institusiPengajian = InfoIpt::all()->where('jenis_institusi','UA')->sortBy('nama_institusi');
+
+        return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status','institusiPengajian'));
+    }
+
+    public function cetakSenaraiPenyaluranExcel(Request $request, $programCode)
+    {
+        
+        $institusi = $request->input('institusi');
+        // dd($institusi);
+
+        return Excel::download(new PenyaluranTuntutan($programCode, $institusi), 'SenaraiPenyaluran.xlsx');
+    }
+
+    public function kemaskiniInfoCek(Request $request)
+    {
+        // Get the selected item IDs from the form
+        $selectedItemIds = $request->input('selected_items');
+        // dd($selectedItemIds);
+
+        if ($selectedItemIds !== null)
+        {
+
+            foreach ($selectedItemIds as $itemId){
+                
+                $permohonan = Permohonan::orderBy('id', 'desc')->where('id', '=', $itemId)->first();
+                if ($permohonan != null) {
+                    Permohonan::where('id' ,$itemId)
+                    ->update([
+                        'no_cek' => $request->noCek,
+                        'tarikh_transaksi' => $request->tarikhTransaksi,
+
+                    ]);
+                    
+                }
+                // dd('okayyy');
+                
+            }
+        }
+
+        return back();
     }
 
     public function maklumatPembayaran($id){
