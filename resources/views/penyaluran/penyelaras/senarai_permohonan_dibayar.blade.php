@@ -281,8 +281,16 @@
                                                         <tr>
                                                             <td style="width: 15%">{{$item['no_rujukan_tuntutan']}}</td>
                                                             <td style="width: 40%">{{$pemohon}}</td>
-                                                            <td class="text-center" style="width: 15%">RM {{$item->yuran_dibayar}}</td>
-                                                            <td class="text-center" style="width: 15%"> RM {{$item->wang_saku_dibayar}}</td>                                       
+                                                            <td class="text-center" style="width: 15%">
+                                                                @if ($item->yuran_dibayar !== null)
+                                                                    RM {{ number_format($item->yuran_dibayar, 2) }}
+                                                                @endif
+                                                            </td>
+                                                            <td class="text-center" style="width: 15%">
+                                                                @if ($item->wang_saku_dibayar !== null)
+                                                                    RM {{ number_format($item->wang_saku_dibayar, 2) }}
+                                                                @endif
+                                                            </td>       
                                                             <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_baucer))}}</td>
                                                         </tr>
 
