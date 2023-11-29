@@ -72,9 +72,9 @@
                                                 <th class="text-center"><b>Amaun Yuran Dibayar</b></th>
                                                 <th class="text-center"><b>Amaun Wang Saku Dibayar</b></th>
                                                 <th class="text-center"><b>Status Terkini</b></th>
-                                                {{-- @if (in_array($tuntutan_status->status, ['1', '2'])) --}}
+                                                @if ($institusi->jenis_institusi != 'UA')
                                                 <th class="text-center"><b>Tindakan</b></th>
-                                                {{-- @endif --}}
+                                                @endif
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -121,37 +121,39 @@
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
 
-                                                        @if ($item['status']=='1')
-                                                        <td class="text-center">
-                                                            <a href="{{ route('tuntutan.baharu') }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
-                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
-                                                                    <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
-                                                                </span>
-                                                            </a>
-                                                            <a href="{{ route('tuntutan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam tuntutan ini?')">
-                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Tuntutan">
-                                                                    <i class="fa fa-trash fa-sm custom-white-icon"></i>
-                                                                </span>
-                                                            </a>
-                                                        </td>
-                                                        @elseif ($item['status']=='2')
-                                                        <td class="text-center">
-                                                            <a href="{{ route('tuntutan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan tuntutan ini?')">
-                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Tuntutan">
-                                                                    <i class="fa fa-cancel fa-sm custom-white-icon"></i>
-                                                                </span>
-                                                            </a>
-                                                        </td>
-                                                        @elseif ($item['status']=='5')
-                                                        <td class="text-center">
-                                                            <a href="{{ route('tuntutan.baharu') }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
-                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
-                                                                    <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
-                                                                </span>
-                                                            </a>
-                                                        </td>
-                                                        @else
-                                                        <td class="text-center"></td>                                                            
+                                                        @if ($institusi->jenis_institusi != 'UA')
+                                                            @if ($item['status']=='1')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('tuntutan.baharu') }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
+                                                                        <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                    </span>
+                                                                </a>
+                                                                <a href="{{ route('tuntutan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam tuntutan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Tuntutan">
+                                                                        <i class="fa fa-trash fa-sm custom-white-icon"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td>
+                                                            @elseif ($item['status']=='2')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('tuntutan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan tuntutan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Tuntutan">
+                                                                        <i class="fa fa-cancel fa-sm custom-white-icon"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td>
+                                                            @elseif ($item['status']=='5')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('tuntutan.baharu') }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
+                                                                        <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td>
+                                                            @else
+                                                            <td class="text-center"></td>                                                            
+                                                            @endif
                                                         @endif
                                                     </tr>
                                                 @endforeach

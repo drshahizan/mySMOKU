@@ -72,9 +72,9 @@
                                                 <th class="text-center"><b>Amaun Yuran Dibayar</b></th>
                                                 <th class="text-center"><b>Amaun Wang Saku Dibayar</b></th>
                                                 <th class="text-center"><b>Status Terkini</b></th>
-                                                {{-- @if (in_array($item['status'], ['1', '2'])) --}}
+                                                @if ($institusi->jenis_institusi != 'UA')
                                                 <th class="text-center"><b>Tindakan</b></th>
-                                                {{-- @endif --}}
+                                                @endif
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -93,6 +93,9 @@
                                                         // $matches[1] will contain the extracted peringkat pengajian value
                                                         $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null;
                                                         $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
+
+                                                        
+                                                    
                                                     @endphp
                                                     
                                                     <tr>
@@ -130,34 +133,36 @@
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
                                                         
-                                                        
-                                                        @if ($item['status']=='1')
-                                                        <td class="text-center">
-                                                            <div>
-                                                            <a href="{{ route('permohonan') }}" class="btn btn-icon btn-active-light-primary w-10px h-30px me-3">
-                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Permohonan">
-                                                                    <i class="ki-solid ki-pencil text-dark fs-2"></i>
-                                                                </span>
-                                                            </a>
-                                                            <a href="{{ route('permohonan.delete', ['id' => $item['smoku_id']]) }}" class="btn btn-icon btn-active-light-primary w-10px h-30px me-3" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
-                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
-                                                                    <i class="fa fa-trash fa-sm custom-white-icon"></i>
-                                                                </span>
-                                                            </a>
-                                                        
-                                                        </div>
-                                                        </td>
-                                                        @elseif ($item['status']=='2')
-                                                        <td class="text-center">
-                                                            <a href="{{ route('permohonan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan permohonan ini?')">
-                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Permohonan">
-                                                                    <i class="fa fa-cancel fa-sm custom-white-icon"></i>
-                                                                </span>
-                                                            </a>
-                                                        </td>
-                                                        @else
-                                                        <td class="text-center"></td>                                                          
-                                                        @endif
+                                                        @if ($institusi->jenis_institusi != 'UA')
+
+                                                            @if ($item['status']=='1')
+                                                            <td class="text-center">
+                                                                <div>
+                                                                    <a href="{{ route('permohonan') }}" class="btn btn-icon btn-active-light-primary w-10px h-30px me-3">
+                                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Permohonan">
+                                                                            <i class="ki-solid ki-pencil text-dark fs-2"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                    <a href="{{ route('permohonan.delete', ['id' => $item['smoku_id']]) }}" class="btn btn-icon btn-active-light-primary w-10px h-30px me-3" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
+                                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
+                                                                            <i class="fa fa-trash fa-sm custom-white-icon"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                
+                                                                </div>
+                                                            </td>
+                                                            @elseif ($item['status']=='2')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('permohonan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan permohonan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Permohonan">
+                                                                        <i class="fa fa-cancel fa-sm custom-white-icon"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td>
+                                                            @else
+                                                            <td class="text-center"></td>                                                          
+                                                            @endif
+                                                        @endif    
                                                         {{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
 
                                                     </tr>

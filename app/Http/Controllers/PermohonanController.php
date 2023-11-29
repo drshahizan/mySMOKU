@@ -596,8 +596,11 @@ class PermohonanController extends Controller
             ->where('smoku_id', $smoku_id->id)
             ->get();
 
+        $akademik = Akademik::where('smoku_id', $smoku_id->id)->where('status', 1)->first();
+        $institusi = InfoIpt::where('id_institusi', $akademik->id_institusi)->first();    
+
         if ($permohonan) {
-            return view('permohonan.pelajar.sejarah_permohonan', compact('permohonan'));
+            return view('permohonan.pelajar.sejarah_permohonan', compact('permohonan','institusi'));
         } else {
             return redirect()->route('pelajar.dashboard')->with('permohonan', 'Tiada permohonan lama.');
         }

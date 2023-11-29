@@ -2,7 +2,9 @@
 @php
 	$smoku_id = DB::table('smoku')->where('no_kp',Auth::user()->no_kp)->first();
 	$permohonan = DB::table('permohonan')->where('smoku_id', $smoku_id->id)->first();
-	//dd($permohonan);
+	$akademik = DB::table('smoku_akademik')->where('smoku_id', $smoku_id->id)->where('status', 1)->first();
+	$institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->first();
+	// dd($institusi);
 @endphp
 <!--begin::sidebar menu-->
 <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
@@ -17,7 +19,7 @@
 					<span class="menu-title">Laman Utama</span>
 				</a>
 			</div>
-			@if($permohonan != null && $permohonan->status ==8)
+			@if($permohonan != null && $permohonan->status ==8 && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
 			<div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
@@ -36,42 +38,57 @@
 				</a>
 			</div>
 			@endif
-			<div class="menu-item pt-5">
-				<div class="menu-content">
-					<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
+
+			@if(in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
+				<div class="menu-item pt-5">
+					<div class="menu-content">
+						<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
+					</div>
 				</div>
-			</div>
-			<div class="menu-item">
-				<a class="menu-link" href="{{ route('permohonan') }}">
-					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-					<span class="menu-title">Baharu</span>
-				</a>
-			</div>
-			<div class="menu-item">
-				<a class="menu-link" href="{{ route('pelajar.sejarah.permohonan') }}">
-					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Sejarah</span>
-				</a>
-			</div>
-			@if($permohonan != null && $permohonan->status ==8)
-			<div class="menu-item pt-5">
-				<div class="menu-content">
-					<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
+
+				@if($institusi->jenis_institusi === 'IPTS')
+					<div class="menu-item">
+						<a class="menu-link" href="{{ route('permohonan') }}">
+							<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
+							<span class="menu-title">Baharu</span>
+						</a>
+					</div>
+				@endif
+
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('pelajar.sejarah.permohonan') }}">
+						<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
+						<span class="menu-title">Sejarah</span>
+					</a>
 				</div>
-			</div>
-			<div class="menu-item">
-				<a class="menu-link" href="{{ route('tuntutan.baharu') }}">
-					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-					<span class="menu-title">Baharu</span>
-				</a>
-			</div>
-			<div class="menu-item">
-				<a class="menu-link" href="{{ route('pelajar.sejarah.tuntutan') }}">
-					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-					<span class="menu-title">Sejarah</span>
-				</a>
-			</div>
 			@endif
+
+			@if($permohonan != null && $permohonan->status == 8)
+				@if(in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
+					<div class="menu-item pt-5">
+						<div class="menu-content">
+							<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
+						</div>
+					</div>
+
+					@if($institusi->jenis_institusi === 'IPTS')
+						<div class="menu-item">
+							<a class="menu-link" href="{{ route('tuntutan.baharu') }}">
+								<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
+								<span class="menu-title">Baharu</span>
+							</a>
+						</div>
+					@endif
+
+					<div class="menu-item">
+						<a class="menu-link" href="{{ route('pelajar.sejarah.tuntutan') }}">
+							<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
+							<span class="menu-title">Sejarah</span>
+						</a>
+					</div>
+				@endif
+			@endif
+
 		</div>
 		
 		<!--end::Menu-->

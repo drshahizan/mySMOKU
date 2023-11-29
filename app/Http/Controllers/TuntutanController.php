@@ -10,6 +10,7 @@ use App\Models\Smoku;
 use App\Models\SejarahTuntutan;
 use App\Models\Akademik;
 use App\Models\EmelKemaskini;
+use App\Models\InfoIpt;
 use App\Models\Peperiksaan;
 use App\Models\User;
 use Carbon\Carbon;
@@ -291,6 +292,9 @@ class TuntutanController extends Controller
     {
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
 
+        $akademik = Akademik::where('smoku_id', $smoku_id->id)->where('status', 1)->first();
+        $institusi = InfoIpt::where('id_institusi', $akademik->id_institusi)->first();   
+
         if ($smoku_id) {
             $permohonan = Permohonan::orderBy('id', 'desc')
                 ->where('smoku_id', '=', $smoku_id->id)->first();
@@ -308,7 +312,7 @@ class TuntutanController extends Controller
                 //     ->first();    
                 //dd($tuntutan);    
 
-                return view('tuntutan.pelajar.sejarah_tuntutan',compact('tuntutan'));    
+                return view('tuntutan.pelajar.sejarah_tuntutan',compact('tuntutan','institusi'));    
 
             } else {
 
