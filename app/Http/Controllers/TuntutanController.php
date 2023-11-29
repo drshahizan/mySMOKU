@@ -44,7 +44,7 @@ class TuntutanController extends Controller
         $semSemasa = $akademik->sem_semasa;
         $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
         
-        if ($permohonan && $permohonan->status == 8 || $permohonan->status == 5) {
+        if ($permohonan && $permohonan->status == 8) {
             //dd($tarikhNextSem);
             if ($currentDate->greaterThan($tarikhNextSem)) {
                 // dd('sini');
@@ -97,13 +97,16 @@ class TuntutanController extends Controller
 
                 //dd($tuntutan);    
 
-                if ($tuntutan && $tuntutan->status == 1 || $tuntutan->status == 5) {
+                if ($tuntutan && ($tuntutan->status == 1 || $tuntutan->status == 5)) {
+                   
                     $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
                 } 
                 else if ($tuntutan && $tuntutan->status != 8 && $tuntutan->status != 9){
+                    
                     return redirect()->route('pelajar.dashboard')->with('sem', 'Tuntutan anda masih dalam semakan.');
                 }
                 else {
+                    
                     $tuntutan_item = collect(); // An empty collection
                 }
                 
