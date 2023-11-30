@@ -105,13 +105,13 @@
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Peperiksaan&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
 										<div class="mb-5">
-											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan"/>
+											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan" required oninvalid="this.setCustomValidity('Muat naik salinan keputusan.')" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">CGPA</label>
 										<div class="mb-5">
-											<input type="text" name="cgpa" class="form-control form-control-solid"  placeholder="" />
+											<input type="text" name="cgpa" class="form-control form-control-solid"  placeholder="" required oninvalid="this.setCustomValidity('Isi CGPA.')" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 								</div>
@@ -149,19 +149,19 @@
 								<table id="sortTable" class="table table-striped table-hover dataTable js-exportable">
 									<thead>
 										<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
-											<th>Sesi</th>
-											<th>Semester</th>
-											<th>Keputusan (CGPA)</th>
-											<th>Salinan</th>
+											<th class="text-center">Sesi</th>
+											<th class="text-center">Semester</th>
+											<th class="text-center">Keputusan (CGPA)</th>
+											<th class="text-center">Salinan</th>
 										</tr>
 									</thead>
 									<tbody class="fw-semibold text-gray-600">
 										@foreach ($peperiksaan as $peperiksaan)
 										<tr>
-											<td>{{ $peperiksaan->sesi}}</td>
-											<td>{{ $peperiksaan->semester}}</td>
-											<td>{{ $peperiksaan->cgpa}}</td>
-											<td><a href="/assets/dokumen/peperiksaan/{{$peperiksaan->kepPeperiksaan}}" target="_blank">Papar</a></td>
+											<td class="text-center">{{ $peperiksaan->sesi}}</td>
+											<td class="text-center">{{ $peperiksaan->semester}}</td>
+											<td class="text-center">{{ $peperiksaan->cgpa}}</td>
+											<td class="text-center"><a href="/assets/dokumen/peperiksaan/{{$peperiksaan->kepPeperiksaan}}" target="_blank">Papar</a></td>
 										</tr>
 										@endforeach	
 									</tbody>
@@ -183,6 +183,25 @@
 						
 		
 <!--begin::Javascript-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	@if(session('success'))
+		Swal.fire({
+			icon: 'success',
+			title: 'Berjaya!',
+			text: ' {!! session('message') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+	@if(session('failed'))
+		Swal.fire({
+			icon: 'error',
+			title: 'Tidak Berjaya!',
+			text: ' {!! session('failed') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+</script>
 <!--end::Javascript-->
 
 

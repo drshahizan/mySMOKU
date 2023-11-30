@@ -771,7 +771,19 @@ class PenyelarasPPKController extends Controller
 
     public function hantarKeputusanPeperiksaan(Request $request, $id)
     {
-        $permohonan = Permohonan::orderBy('id', 'DESC')->where('smoku_id', '=', $id)->first();
+        $permohonan = Permohonan::orderBy('id', 'DESC')
+            ->where('smoku_id', '=', $id)
+            ->first();
+        $result = DB::table('permohonan_peperiksaan')
+            ->where('permohonan_id', $permohonan->id)
+            ->where('sesi', '=', $request->sesi)
+            ->where('semester', '=', $request->semester)
+			->first();
+
+
+        if($result){
+            return back()->with('failed', 'Keputusan peperiksaan semester terdahulu telah ada.');
+        }
 
         //simpan dalam table peperiksaan
         $kepPeperiksaan=$request->kepPeperiksaan;
