@@ -315,6 +315,9 @@ class MaklumatESPController extends Controller
 
                     $smoku = Smoku::where('no_kp', $jsonData['nokp'])->first();
 
+                    $rujukan = explode("/", $jsonData['id_permohonan']);
+                    $program = $rujukan[0]; 
+
                     //fetch max yuran dan wang saku
                     $amaun_yuran = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Yuran')->first();
                     $amaun_wang_saku = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Wang Saku')->first();
@@ -341,9 +344,8 @@ class MaklumatESPController extends Controller
                                     'yuran_dibayar' => $jsonData['yuran_dibayar'] !== null ? number_format($jsonData['yuran_dibayar'], 2, '.', '') : null,
                                     'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'] !== null ? number_format($jsonData['wang_saku_dibayar'], 2, '.', '') : null,
                                     'tarikh_transaksi' => $formattedDate,
-                                    'baki_dibayar' => $amaun_yuran->jumlah - $jsonData['yuran_dibayar'] - $jsonData['wang_saku_dibayar'],
                                     'status' => 8,
-                                ]);
+                                ] + ($program == 'B' ? ['baki_dibayar' => $amaun_yuran->jumlah - $jsonData['yuran_dibayar'] - $jsonData['wang_saku_dibayar']] : []));
 
                             $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku->id)->first();    
                             SejarahPermohonan::create([
@@ -367,9 +369,8 @@ class MaklumatESPController extends Controller
                                         'yuran_dibayar' => $jsonData['yuran_dibayar'] !== null ? number_format($jsonData['yuran_dibayar'], 2, '.', '') : null,
                                         'wang_saku_dibayar' => $jsonData['wang_saku_dibayar'] !== null ? number_format($jsonData['wang_saku_dibayar'], 2, '.', '') : null,
                                         'tarikh_transaksi' => $formattedDate,
-                                        'baki_dibayar' => $amaun_yuran->jumlah - $jsonData['yuran_dibayar'] - $jsonData['wang_saku_dibayar'],
                                         'status' => 8,
-                                    ]);
+                                        ] + ($program == 'B' ? ['baki_dibayar' => $amaun_yuran->jumlah - $jsonData['yuran_dibayar'] - $jsonData['wang_saku_dibayar']] : []));
 
                                 $tuntutan_id = Tuntutan::orderBy('id', 'desc')->where('smoku_id',$smoku->id)
                                     ->where('permohonan_id', $permohonan_id->id)
