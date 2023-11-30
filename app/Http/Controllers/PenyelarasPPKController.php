@@ -267,6 +267,7 @@ class PenyelarasPPKController extends Controller
         $butiranPelajar = ButiranPelajar::join('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
         ->leftJoin('smoku_waris','smoku_waris.smoku_id','=','smoku_butiran_pelajar.smoku_id')
         ->leftJoin('smoku_akademik','smoku_akademik.smoku_id','=','smoku_butiran_pelajar.smoku_id')
+        ->leftJoin('bk_peringkat_pengajian','smoku_akademik.peringkat_pengajian','=','bk_peringkat_pengajian.kod_peringkat')
         ->leftJoin('permohonan','permohonan.smoku_id','=','smoku_butiran_pelajar.smoku_id')
         ->leftJoin('bk_jantina','bk_jantina.kod_jantina','=','smoku.jantina')
         ->leftJoin('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
@@ -278,8 +279,9 @@ class PenyelarasPPKController extends Controller
             'smoku_butiran_pelajar.status_pekerjaan as status_pekerjaan_baru',
             'smoku_butiran_pelajar.pekerjaan as pekerjaan_baru',
             'smoku_butiran_pelajar.pendapatan as pendapatan_baru',
-            'smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
+            'smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*','bk_peringkat_pengajian.*'])
         ->where('smoku_id', $id);
+        // dd($butiranPelajar);
         
 
         if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {

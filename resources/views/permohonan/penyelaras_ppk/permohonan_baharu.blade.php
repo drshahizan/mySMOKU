@@ -863,6 +863,7 @@
 							<div class="col-md-6 fv-row">
 								<label class="form-label mb-6">Hubungan Waris</label>
 								<select id="hubungan_waris" name="hubungan_waris" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih">
+									<option></option>
 									@foreach ($hubungan as $hubungan)
 									<option value="{{$hubungan->kod_hubungan}}" {{$smoku->hubungan_waris == $hubungan->kod_hubungan ? 'selected' : ''}}>{{ $hubungan->hubungan}}</option>
 									@endforeach

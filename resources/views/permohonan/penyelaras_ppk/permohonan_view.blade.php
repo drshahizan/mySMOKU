@@ -725,6 +725,7 @@
 							<div class="col-md-6 fv-row">
 								<label class="form-label mb-6">Hubungan Waris</label>
 								<select id="hubungan_waris" name="hubungan_waris" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+									<option></option>
 									@foreach ($hubungan as $hubungan)
 									<option value="{{$hubungan->kod_hubungan}}" {{$butiranPelajar->hubungan_waris == $hubungan->kod_hubungan ? 'selected' : ''}}>{{ $hubungan->hubungan}}</option>
 									@endforeach
@@ -883,10 +884,7 @@
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
 									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
-										<option></option>
-										@foreach ($peringkat as $peringkat)
-										<option value="{{$peringkat->kod_peringkat}}" {{$butiranPelajar->peringkat_pengajian == $peringkat->kod_peringkat ? 'selected' : ''}}>{{ $peringkat->peringkat}}</option>
-										@endforeach
+										<option value="{{$butiranPelajar->peringkat_pengajian}}" ></option>
 									</select>
 									<!--end::Input wrapper-->
 								</div>
@@ -1658,34 +1656,34 @@
 	
 				// institusi id
 				var id_institusi = document.getElementById("id_institusi").value;
-				//alert (id_institusi);
-
-				// Empty the dropdown
-				// $('#peringkat_pengajian').find('option').not(':first').remove();
-				$('#nama_kursus').find('option').not(':first').remove();
+				var peringkat = document.getElementById("peringkat_pengajian").value;
+				
 
 				// AJAX request 
 				$.ajax({
-					url: '/peringkat/'+id_institusi,
+					url: '/ppk/peringkat/'+id_institusi,
 					type: 'get',
 					dataType: 'json',
 					success: function(response){
-						//alert('AJAX loaded something');
+						
 
 						var len = 0;
 						if(response['data'] != null){
 							len = response['data'].length;
 						}
-
+						
 						if(len > 0){
 							// Read data and create <option >
 							for(var i=0; i<len; i++){
 
 								var id_institusi = response['data'][i].id_institusi;
 								var kod_peringkat = response['data'][i].kod_peringkat;
-								var peringkat = response['data'][i].peringkat;
+								var peringkatValue = response['data'][i].peringkat;
+								
+								// Check if the current option value is equal to the selected peringkat
+								var selected = kod_peringkat === peringkat ? 'selected' : '';
 
-								var option = "<option value='"+kod_peringkat+"'>"+peringkat+"</option>";
+								var option = "<option value='" + kod_peringkat + "' " + selected + ">" + peringkatValue + "</option>";
 
 								$("#peringkat_pengajian").append(option); 
 							}
@@ -1706,7 +1704,7 @@
 		
 					// Empty the dropdown
 					$('#nama_kursus').find('option').not(':first').remove();
-					//alert(idipt);
+					// alert(idipt);
 		
 		
 					// AJAX request 
