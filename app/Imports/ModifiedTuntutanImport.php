@@ -23,8 +23,8 @@ class ModifiedTuntutanImport implements ToCollection, WithHeadingRow
             // Extract specific columns
             $this->modifiedData[] = [
                 'no_rujukan_tuntutan' => $row['id_tuntutan'],
-                'yuran_dibayar' => isset($row['yuran_dibayar']) ? number_format($row['yuran_dibayar'], 2, '.', '') : null,
-                'wang_saku_dibayar' => isset($row['wang_saku_dibayar']) ? number_format($row['wang_saku_dibayar'], 2, '.', '') : null,
+                'yuran_dibayar' => number_format($row['yuran_dibayar_rm'], 2, '.', ''),
+                'wang_saku_dibayar' => number_format($row['wang_saku_dibayar_rm'], 2, '.', ''),
                 'no_baucer' => $row['no_baucer'],
                 'perihal' => $row['perihal'],
                 'tarikh_baucer' => $this->convertExcelDate($row['tarikh_baucer']),
