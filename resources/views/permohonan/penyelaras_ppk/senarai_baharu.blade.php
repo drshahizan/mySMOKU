@@ -75,7 +75,7 @@
 								<td>{{ $pemohon}}</td>
 								<td>{{ $smoku->nama_kursus}}</td>
 								<td class="text-center">{{ $formattedDate}}</td>
-								<td class="text-center"><button type="button" class="btn bg-info text-white">Baharu</button></td>
+								<td class="text-center"><button type="button" class="btn bg-baharu text-white">Dihantar</button></td>
 							</tr>  
 							@endforeach	
 						</tbody>

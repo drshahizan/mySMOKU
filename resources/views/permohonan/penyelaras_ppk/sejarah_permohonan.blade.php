@@ -80,12 +80,12 @@
                                                         $i++;
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                        if ($item['status']==2){
-                                                            $status='Baharu';
-                                                        }
-                                                        if ($item['status']==3){
-                                                            $status='Sedang Disaring';
-                                                        }
+                                                        // if ($item['status']==2){
+                                                        //     $status='Baharu';
+                                                        // }
+                                                        // if ($item['status']==3){
+                                                        //     $status='Sedang Disaring';
+                                                        // }
                                                         $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
                                                         $conjunctions = ['bin', 'binti'];
                                                         $words = explode(' ', $text);
@@ -126,7 +126,7 @@
                                                             <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
                                                         <td class="text-center">
-                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn btn-dibayar btn-round btn-sm custom-width-btn">
+                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn bg-dibayar btn-round btn-sm custom-width-btn">
                                                                 <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar
                                                             </a>
                                                         </td>
@@ -142,7 +142,7 @@
                                                                     </span>
                                                                 </a>
                                                             </td>
-                                                            @elseif ($item['status']=='2')
+                                                        @elseif ($item['status']=='2')
                                                             <td class="text-center">
                                                                 <a href="{{ route('ppk.permohonan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan permohonan ini?')">
                                                                     <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Permohonan">
@@ -150,7 +150,15 @@
                                                                     </span>
                                                                 </a>
                                                             </td> 
-                                                            @else
+                                                        @elseif ($item['status']=='5')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('penyelaras.ppk.permohonan.baharu',$item['smoku_id']) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
+                                                                        <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td>
+                                                        @else
                                                             <td class="text-center"></td> 
 
                                                         @endif

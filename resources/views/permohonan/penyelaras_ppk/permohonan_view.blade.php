@@ -902,7 +902,7 @@
 							</label>
 							<!--end::Label-->
 							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
-								<option value="{{ $butiranPelajar->nama_kursus}}">{{ $butiranPelajar->nama_kursus}}</option>
+								<option value="{{ $butiranPelajar->nama_kursus}}">{{ strtoupper($butiranPelajar->nama_kursus)}}</option>
 							</select>
 						</div>
 						<!--end::Input group-->
@@ -1454,6 +1454,50 @@
 
 			});
 
+			//dun
+			$(document).ready(function(){
+				$('#parlimen').on('change', function() {
+					var idparlimen = $(this).val();
+					// alert(idparlimen);
+					// Empty the dropdown
+					$('#dun').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: '/getDun/'+idparlimen,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var kod_dun = response['data'][i].kod_dun;
+											var dun = response['data'][i].dun.toUpperCase();
+
+											var option = "<option value='"+id+"'>"+kod_dun+"-"+dun+"</option>";
+
+											$("#dun").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
     		$(document).ready(function(){
 				$('#alamat_negeri_waris').on('change', function() {
 					var idnegeri = $(this).val();
@@ -1687,7 +1731,7 @@
 									var nama_kursus = response['data'][i].nama_kursus;
 									var uppercaseValue  = response['data'][i].nama_kursus.toUpperCase();
 		
-									var option = "<option value='"+nama_kursus+"'>"+uppercaseValue +"</option>";
+									var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+"</option>";
 		
 									$("#nama_kursus").append(option); 
 									
