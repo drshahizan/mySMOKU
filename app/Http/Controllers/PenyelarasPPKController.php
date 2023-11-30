@@ -63,7 +63,7 @@ class PenyelarasPPKController extends Controller
     public function store(Request $request)
     {
         //using api smoku
-        /* //tutup dulu sebab takde data kod oku DE/DD
+        
         $request->validate([
             'no_kp' => ['required', 'string'],
             
@@ -184,9 +184,9 @@ class PenyelarasPPKController extends Controller
             return redirect()->route('penyelaras.ppk.dashboard')
             ->with('failed', $nokp_in. ' Bukan OKU yang berdaftar dengan JKM.');
         }
-        */
-
         
+
+        /*
         $request->validate([
             'no_kp' => ['required', 'string'],
         ]);
@@ -225,6 +225,7 @@ class PenyelarasPPKController extends Controller
             return redirect()->route('penyelaras.ppk.dashboard')
                 ->with('failed', $request->no_kp. ' Bukan OKU yang berdaftar dengan JKM');
         }
+        */
         
     }
 
