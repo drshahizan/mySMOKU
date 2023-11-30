@@ -75,7 +75,7 @@
                                 {{-- Permohonan --}}
                                 <div class="tab-pane fade show active" id="permohonan" role="tabpanel" aria-labelledby="permohonan-tab">
                                     <div class="header">
-                                        <h2>Senarai permohonan yang telah dibayar</h2>
+                                        <h2>Senarai Permohonan yang Telah Dibayar</h2>
                                     </div>
         
                                     <form action="{{ url('penyelaras/penyaluran/permohonan/dibayar') }}" method="GET">
@@ -218,7 +218,7 @@
                                 {{-- Tuntutan --}}
                                 <div class="tab-pane fade" id="tuntutan" role="tabpanel" aria-labelledby="tuntutan-tab">
                                     <div class="header">
-                                        <h2>Senarai tuntutan yang telah dibayar</h2>
+                                        <h2>Senarai Tuntutan yang Telah Dibayar</h2>
                                     </div>
         
                                     <form action="{{ url('penyelaras/penyaluran/permohonan/dibayar') }}" method="GET">
