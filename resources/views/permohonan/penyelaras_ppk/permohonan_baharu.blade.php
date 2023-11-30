@@ -1075,7 +1075,7 @@
 								<!--begin::Input wrapper-->
 								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 									
-									<option value="1">Sepenuh Masa</option>
+									<option value="1">SEPENUH MASA</option>
 									
 								</select>
 								<!--end::Input wrapper-->

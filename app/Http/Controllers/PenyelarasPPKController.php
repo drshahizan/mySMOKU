@@ -607,7 +607,7 @@ class PenyelarasPPKController extends Controller
         $mohon->save();
 
 
-        $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
 
         // Generate a running number (you can use your logic here)
         $runningNumber = rand(1000, 9999);
