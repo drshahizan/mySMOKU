@@ -438,6 +438,8 @@ class PenyelarasPPKController extends Controller
 
         // // Retrieve or create a Permohonan record based on smoku_id
         $permohonan = Permohonan::firstOrNew(['smoku_id' => $id]);
+        $peringkat = $request->peringkat_pengajian;
+        dd($peringkat);
 
         // Set the attributes
         $permohonan->no_rujukan_permohonan = 'P'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar;
