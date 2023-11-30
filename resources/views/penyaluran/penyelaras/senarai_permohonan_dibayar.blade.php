@@ -366,8 +366,14 @@
 
         <script>
             //sorting table
-            $('#sortTable1').DataTable();
-            $('#sortTable2').DataTable();
+            $('#sortTable1').DataTable({
+                ordering: true, // Enable manual sorting
+                order: [] // Disable initial sorting
+            });
+            $('#sortTable2').DataTable({
+                ordering: true, // Enable manual sorting
+                order: [] // Disable initial sorting
+            });
 
             //modal
             $(document).ready(function () {
