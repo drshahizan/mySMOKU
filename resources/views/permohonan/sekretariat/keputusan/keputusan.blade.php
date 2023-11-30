@@ -186,7 +186,7 @@
                                                                     <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
                                                                     <td class="text-center">
                                                                         @if($item->keputusan == "Lulus")
-                                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
+                                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
                                                                                 <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
                                                                             </a>
                                                                         @elseif($item->keputusan == "Tidak Lulus")
@@ -298,7 +298,7 @@
                                                                     <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
                                                                     <td class="text-center" style="width: 15%">
                                                                         @if($item->keputusan == "Lulus")
-                                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
+                                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
                                                                                 <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
                                                                             </a>
                                                                         @elseif($item->keputusan == "Tidak Lulus")
@@ -399,7 +399,7 @@
                                                                 <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
                                                                 <td class="text-center" style="width: 15%">
                                                                     @if($item->keputusan == "Lulus")
-                                                                        <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm">
+                                                                        <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
                                                                             <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
                                                                         </a>
                                                                     @elseif($item->keputusan == "Tidak Lulus")
@@ -420,6 +420,12 @@
                 </div>
             </div>
         </div>
+        <style>
+            .custom-width-btn {
+                width: 105px; 
+                height: 35px;
+            }
+        </style>
         
         <!-- Javascript -->
         <script src="assets/bundles/libscripts.bundle.js"></script>    
