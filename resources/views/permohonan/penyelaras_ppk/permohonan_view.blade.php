@@ -1077,6 +1077,7 @@
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
 										<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+											<option></option>
 											@foreach ($biaya as $biaya)
 											<option value="{{$biaya->kod_biaya}}" {{$butiranPelajar->sumber_biaya == $biaya->kod_biaya ? 'selected' : ''}}>{{ $biaya->biaya}}</option>
 											@endforeach
@@ -1108,6 +1109,7 @@
 								</label>															
 								<!--end::Label-->
 								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+									<option></option>
 									@foreach ($penaja as $penaja)
 									<option value="{{$penaja->kod_penaja}}" {{$butiranPelajar->nama_penaja == $penaja->kod_penaja ? 'selected' : ''}}>{{ $penaja->penaja}}</option>
 									@endforeach
