@@ -127,6 +127,7 @@
                                         }
                                     }
                                     $pemohon = implode(' ', $result);
+
                                     @endphp
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}.</td>
