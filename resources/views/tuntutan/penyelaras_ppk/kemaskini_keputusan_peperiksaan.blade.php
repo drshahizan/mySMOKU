@@ -33,21 +33,42 @@
 										->select('smoku_akademik.*')
 										->first();
 
-								$currentDate = Carbon::now();
-								$tarikhMula = Carbon::parse($akademik->tarikh_mula);
-								$tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
+								$semSemasa = $akademik->sem_semasa;
+								$sesiSemasa = $akademik->sesi;
 								if($akademik->bil_bulan_per_sem == 6){
 									$bilSem = 2;
 								} else {
 									$bilSem = 3;
 								}
-								
-								$semSemasa = $akademik->sem_semasa;
 								$totalSemesters = $akademik->tempoh_pengajian * $bilSem;
 								$currentYear = date('Y');
-								$sesiSemasa = $currentYear . '/' . ($currentYear + 1);
 
-								$permohonan = DB::table('smoku_akademik')
+                                $currentDate = Carbon::now();
+                                $tarikhMula = Carbon::parse($akademik->tarikh_mula);
+								$tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
+                                
+                                while ($tarikhMula < $tarikhTamat) {
+									$tarikhNextSem = $tarikhMula->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
+									// echo $tarikhNextSem->format('Y-m-d') . PHP_EOL;
+									$tarikhNextSem = $tarikhNextSem->format('Y-m-d');
+                                    // dd($tarikhNextSem);
+									
+									if ($currentDate->greaterThan($tarikhNextSem)) {
+										$semSemasa = $semSemasa; //sem sebelum
+										// echo 'Semester Semasa: ' . $semSemasa . PHP_EOL;
+                                        if ($semSemasa > $bilSem) {
+                                        $currentYear = intval(substr($sesiSemasa, 0, 4));
+                                        // Incrementing the current year by 1
+                                        $sesiSemasaYear = $currentYear + 1;
+                                        $sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
+                                        $semSemasa = 3; // Reset semester for the next academic year sem3 utk sesi lain
+                                    }
+										break; // Exit the loop
+									}
+									
+								}
+
+								$permohonan = DB::table('smoku_akademik')->orderBy('id', 'DESC')
                                     ->where('smoku_id',$smoku_id)->first();
 
 								$result = DB::table('permohonan_peperiksaan')
@@ -56,23 +77,7 @@
 									->where('semester', $semSemasa)
 									->first();
 
-								if (!$result) {
-									// No record found, handle the case as needed
-
-								} else {
-									$ada = DB::table('permohonan_peperiksaan')
-										->where('permohonan_id', $permohonan->id)
-										->orderby('id', 'desc')
-										->first();
-
-									if ($ada->semester >= $bilSem) {
-										$sesiSemasa = ($currentYear + 1) . '/' . ($currentYear + 2);
-										$semSemasa = 1; // Reset semester for the next academic year
-									} else {
-										$semSemasa = $ada->semester + 1;
-									}
-
-								}
+								
 
 							@endphp
 							<!--begin::Wrapper-->
@@ -83,26 +88,13 @@
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 										<div class="mb-5">
-											<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true">
-												<option value={{$sesiSemasa}}>{{$sesiSemasa}}</option>
-												{{-- @php
-													$currentYear = date('Y');
-												@endphp
-												@for($year = ($currentYear - 1); $year <= ($currentYear + 1); $year++)
-													@php
-														$sesi = $year . '/' . ($year + 1);
-													@endphp
-													<option value="{{ $sesi }}">{{ $sesi }}</option>
-												@endfor --}}
-											</select>
+											<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 										<div class="mb-5">
-											<select id="semester" name="semester" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-												<option value={{$semSemasa}}>{{$semSemasa}}</option>																				
-											</select>
+											<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
 										</div>
 									</div>
 									<!--end::Col-->

@@ -26,16 +26,13 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-dark" style="color:darkblue">Tuntutan Baharu</li>
+        <li class="breadcrumb-item text-dark" style="color:darkblue">Tuntutan Layak Mohon</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
 </div>  
 <br>
-@if (session('message'))
-    <div class="alert alert-success" style="color:black; text-align: center;">{{ session('message') }}</div>
-@endif
-    
+
 <div class="row clearfix">
     <!--begin::Content-->
     <div class="col-lg-12">
@@ -43,7 +40,7 @@
         <div class="card">
             <!--begin::Header-->
             <div class="header">
-                <h2>Senarai Tuntutan Baharu</h2>
+                <h2>Senarai Tuntutan Layak Mohon</h2>
             </div>
             <!--end::Header-->
             <!--begin::Card body-->
@@ -53,12 +50,12 @@
                     <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                         <thead>
                             <tr>
-                                <th class="text-center">ID Permohonan</th>
-                                <th class="text-center">Nama Pelajar</th>
-                                <th class="text-center">Nama Kursus</th>
-                                <th class="text-center">Tempoh Penajaan</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Tindakan</th>
+                                <th class="text-center"><b>ID Permohonan</b></th>                                        
+								<th class="text-center"><b>Nama</b></th>
+								<th class="text-center"><b>Nama Kursus</b></th>
+                                <th class="text-center"><b>Tempoh Penajaan</b></th>
+                                <th class="text-center"><b>Status</b></th>
+                                <th class="text-center"><b>Tindakan</b></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -99,92 +96,89 @@
                                     ->where('smoku_id',$layak->smoku_id)
                                     ->where('smoku_akademik.status', 1)
                                     ->first();
-                                //dd($layak->smoku_id);    
+                                //dd($layak->smoku_id);   
+                                
+                                $semSemasa = $akademik->sem_semasa;
+								$sesiSemasa = $akademik->sesi;
+								if($akademik->bil_bulan_per_sem == 6){
+									$bilSem = 2;
+								} else {
+									$bilSem = 3;
+								}
+								$totalSemesters = $akademik->tempoh_pengajian * $bilSem;
+								$currentYear = date('Y');
 
                                 $currentDate = Carbon::now();
                                 $tarikhMula = Carbon::parse($akademik->tarikh_mula);
-                                $tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
-                                if($akademik->bil_bulan_per_sem == 6){
-                                    $bilSem = 2;
-                                } else {
-                                    $bilSem = 3;
-                                }
+								$tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
                                 
-                                $semSemasa = $akademik->sem_semasa;
-                                $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
-                                $currentYear = date('Y');
-                                $sesiSemasa = $currentYear . '/' . ($currentYear + 1);
-                                
-                                
+                                while ($tarikhMula < $tarikhTamat) {
+									$tarikhNextSem = $tarikhMula->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
+									// echo $tarikhNextSem->format('Y-m-d') . PHP_EOL;
+									$tarikhNextSem = $tarikhNextSem->format('Y-m-d');
+                                    // dd($tarikhNextSem);
+									
+									if ($currentDate->greaterThan($tarikhNextSem)) {
+										
+										$permohonan = DB::table('permohonan')->orderBy('id', 'DESC')->where('smoku_id',$layak->smoku_id)->first();
+                                        
 
-                                // if (!$currentDate->greaterThan($tarikhNextSem)) {    
-                                //     //$alertMessage = 'tak habis sem lagii niiiii.';   
+                                        $result = DB::table('permohonan_peperiksaan')
+                                                    ->where('permohonan_id', $permohonan->id)
+                                                    ->where('sesi', $sesiSemasa)
+                                                    ->where('semester', $semSemasa)
+                                                    ->first();
+                                        // dd($result);    
+                                        
+                                        $semSemasa = $semSemasa + 1; //contoh kalau sem asal mohon 2 , next 3
+
+                                        if ($semSemasa > $bilSem) {
+                                            $currentYear = intval(substr($sesiSemasa, 0, 4));
+                                            // Incrementing the current year by 1
+                                            $sesiSemasaYear = $currentYear + 1;
+                                            $sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
+                                            $semSemasa = 3; // Reset semester for the next academic year sem3 utk sesi lain
+                                        }
+										break; // Exit the loop
+									}
+									
+								}
+                                
+                    
                                     
-                                // } 
-                                // else{
-
-                                    $permohonan = DB::table('permohonan')
-                                    ->where('smoku_id',$layak->smoku_id)->first();
-                                    //dd($permohonan);
-
-                                    $tuntut = DB::table('tuntutan')
-                                        ->where('smoku_id', $layak->smoku_id)
-                                        ->where('permohonan_id', $permohonan->id)
-                                        ->orderBy('tuntutan.id', 'desc')
-                                        ->first(['tuntutan.*']);    
-    
-
-                                    if (!$tuntut) {
-                                        // No record found, handle the case as needed
-
-                                    } else {
-                                        $ada = DB::table('tuntutan')
-                                            ->where('permohonan_id', $permohonan->id)
-                                            ->orderBy('id', 'desc')
-                                            ->first();
-
-                                        //dd($ada);	
-
-                                        if ($ada->semester >= $bilSem) {
-                                            $sesiSemasa = ($currentYear + 1) . '/' . ($currentYear + 2);
-                                            $semSemasa = 1; // Reset semester for the next academic year
-                                        }else if ($ada->status != 8){
-                                            $semSemasa = $ada->semester;
-
-                                        }
-                                        else {
-                                            $semSemasa = $ada->semester + 1;
-                                        }
-
-                                    }
-                                       
-
-                                // }
-                                
-
-                                $result = DB::table('permohonan_peperiksaan')
-                                            ->where('permohonan_id', $permohonan->id)
-                                    ->where('sesi', $akademik->sesi)
-                                    ->where('semester', $semSemasa)
-                                    ->first();
-
-                                //dd($permohonan->id);    
 
                             @endphp
                             <tr>
                                 <td class="text-center">{{ $layak->no_rujukan_permohonan}}</td>
-                                <td class="text-center">{{ $pemohon}}</td>
-                                <td class="text-center">{{ $kursus}}</td>
+                                <td>{{ $pemohon}}</td>
+                                <td>{{ $layak->nama_kursus}}</td>
                                 <td class="text-center">
                                     {{ \Carbon\Carbon::createFromFormat('Y-m-d', $layak->tarikh_mula)->format('d/m/Y') }} - 
                                     {{ \Carbon\Carbon::createFromFormat('Y-m-d', $layak->tarikh_tamat)->format('d/m/Y') }}
                                 </td>
                                 @if($status != null)
-                                    <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                    @if ($layak->tuntutan_status=='1')
+                                        <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
+                                    @elseif ($layak->tuntutan_status=='2')
+                                        <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                    @elseif ($layak->tuntutan_status=='3')
+                                        <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                    @elseif ($layak->tuntutan_status=='4')
+                                        <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
+                                    @elseif ($layak->tuntutan_status=='5')
+                                        <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                    @elseif ($layak->tuntutan_status=='6')
+                                        <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                    @elseif ($layak->tuntutan_status=='7')
+                                        <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                    @elseif ($layak->tuntutan_status=='8')
+                                        <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                    @elseif ($layak->tuntutan_status=='9')
+                                        <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                    @endif
                                 
                                 @else
-                                    <td class="text-center"></td>
-                                
+                                    <td class="text-center"><button class="btn bg-primary text-white">Belum Mohon</button></td>
                                 @endif
                                 <td class="text-center">
                                     <!--begin::Toolbar-->
@@ -204,129 +198,19 @@
                                                     data-bs-toggle="modal" data-bs-trigger="hover" title="Hantar Tuntutan" data-bs-target="#kt_modal_tuntutan{{$layak->smoku_id}}"
                                                 @endif
                                             @else
-                                                data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sem tak habis lagi niii."
+                                                data-bs-toggle="tooltip" data-bs-trigger="hover" title="Tuntutan hanya boleh dikemukakan pada semester seterusnya."
                                             @endif
                                         >
                                             <span>
-                                                <i class="ki-solid ki-search-list text-dark fs-2"></i>
+                                                <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;"></i>
                                             </span>
                                         </a>
-                                        
 
                                         <!--end::Edit-->
                                     </div>
                                     <!--end::Toolbar-->
                                 </td>
-                                <!--begin::Modal Peperiksaan-->
-                                {{-- <div class="modal fade" id="kt_modal_peperiksaan{{$layak->smoku_id}}" tabindex="-1" aria-hidden="true">
-                                    <!--begin::Modal dialog-->
-                                    <div class="modal-dialog modal-dialog-centered mw-650px">
-                                        <!--begin::Modal content-->
-                                        <div class="modal-content">
-                                            <!--begin::Modal header-->
-                                            <div class="modal-header">
-                                                <!--begin::Modal title-->
-                                                <h2>Keputusan Peperiksaan</h2>
-                                                <!--end::Modal title-->
-                                                <!--begin::Close-->
-                                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                                    <i class="ki-duotone ki-cross fs-1">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                </div>
-                                                <!--end::Close-->
-                                            </div>
-                                            <!--end::Modal header-->
-                                            <!--begin::Modal body-->
-                                            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                                                <!--begin::Form-->
-                                                <form class="form" id="kt_modal_new_card_form" action="{{ route('ppk.keputusan.hantar',$layak->smoku_id) }}" method="post" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <!--begin::Scroll-->
-                                                    <div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
-                                                        <!--begin::Input group-->
-                                                        <div class="fv-row mb-7">
-                                                            <!--begin::Label-->
-                                                            <label class="fs-6 fw-semibold mb-2">Sesi Pengajian</label>
-                                                            <!--end::Label-->
-                                                            <!--begin::Input-->
-                                                            <select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true">
-                                                                <option value="">Pilih</option>
-                                                                @php
-                                                                    $currentYear = date('Y');
-                                                                @endphp
-                                                                @for($year = ($currentYear - 1); $year <= ($currentYear + 1); $year++)
-                                                                    @php
-                                                                        $sesi = $year . '/' . ($year + 1);
-                                                                    @endphp
-                                                                    <option value="{{ $sesi }}">{{ $sesi }}</option>
-                                                                @endfor
-                                                            </select>
-                                                            <!--end::Input-->
-                                                        </div>
-                                                        <!--end::Input group-->
-                                                        <!--begin::Input group-->
-                                                        <div class="fv-row mb-7">
-                                                            <!--begin::Label-->
-                                                            <label class="fs-6 fw-semibold mb-2">Semester</label>
-                                                            <!--end::Label-->
-                                                            <!--begin::Input-->
-                                                            <select name="semester" id="semester" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
-                                                                <option value="">Pilih</option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                            </select>
-                                                            <!--end::Input-->
-                                                        </div>
-                                                        <!--end::Input group-->
-                                                        <!--begin::Input group-->
-                                                        <div class="fv-row mb-7">
-                                                            <!--begin::Label-->
-                                                            <label class="fs-6 fw-semibold mb-2">CGPA</label>
-                                                            <!--end::Label-->
-                                                            <!--begin::Input-->
-                                                            <input type="text" name="cgpa" class="form-control form-control-solid"  placeholder="" />
-                                                            <!--end::Input-->
-                                                        </div>
-                                                        <!--end::Input group-->
-                                                        <!--begin::Input group-->
-                                                        <div class="fv-row mb-7">
-                                                            <!--begin::Label-->
-                                                            <label class="fs-6 fw-semibold mb-2">Salinan Keputusan Pengajian</label>
-                                                            <!--end::Label-->
-                                                            <!--begin::Input-->
-                                                            <input type="file" class="form-control form-control-sm" id="kepPeperiksaan" name="kepPeperiksaan"/></td>
-                                                            <!--end::Input-->
-                                                        </div>
-                                                        <!--end::Input group-->
-                                                    </div>
-                                                    <!--end::Scroll-->
-                                                    
-                                                    <!--begin::Actions-->
-                                                    <div class="text-center pt-15">
-                                                        <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
-                                                            <span class="indicator-label">Simpan</span>
-                                                            <span class="indicator-progress">Sila tunggu...
-                                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                        </button>
-                                                    </div>
-                                                    <!--end::Actions-->
-                                                </form>
-                                                <!--end::Form-->
-                                            </div>
-                                            <!--end::Modal body-->
-                                        </div>
-                                        <!--end::Modal content-->
-                                    </div>
-                                    <!--end::Modal dialog-->
-                                </div> --}}
-                                <!--end::Modal Peperiksaan-->
-
                                 
-
                                 <!--begin::Modal Tuntutan-->
                                 <div class="modal fade" id="kt_modal_tuntutan{{$layak->smoku_id}}" tabindex="-1" aria-hidden="true">
                                     <!--begin::Modal dialog-->
@@ -361,18 +245,7 @@
                                                             <label class="fs-6 fw-semibold mb-2">Sesi Pengajian</label>
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
-                                                            <select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true">
-                                                                <option value={{$sesiSemasa}}>{{$sesiSemasa}}</option>
-                                                                    {{-- @php
-                                                                        $currentYear = date('Y');
-                                                                    @endphp
-                                                                    @for($year = $currentYear; $year <= ($currentYear + 1); $year++)
-                                                                        @php
-                                                                            $sesi = $year . '/' . ($year + 1);
-                                                                        @endphp
-                                                                        <option value="{{ $sesi }}">{{ $sesi }}</option>
-                                                                    @endfor --}}
-                                                            </select>
+                                                            <input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
                                                             <!--end::Input-->
                                                         </div>
                                                         <!--end::Input group-->
@@ -382,9 +255,7 @@
                                                             <label class="fs-6 fw-semibold mb-2">Semester</label>
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
-                                                            <select name="semester" id="semester" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
-                                                                <option value={{$semSemasa}}>{{$semSemasa}}</option>
-                                                            </select>
+                                                            <input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
                                                             <!--end::Input-->
                                                         </div>
                                                         <!--end::Input group-->
@@ -446,11 +317,41 @@
 
 <!--begin::Javascript-->
 <script>
-    $('#sortTable1').DataTable();
-    $('#sortTable2').DataTable();
+    $('#sortTable1').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+	$('#sortTable2').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
- 
+	@if(session('message'))
+		Swal.fire({
+			icon: 'success',
+			title: 'Berjaya!',
+			text: ' {!! session('message') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+	@if(session('permohonan'))
+		Swal.fire({
+			icon: 'error',
+			title: 'Tiada Permohonan!',
+			text: ' {!! session('permohonan') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+	@if(session('sem'))
+		Swal.fire({
+			icon: 'error',
+			title: 'Tidak Berjaya!',
+			text: ' {!! session('sem') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
 </script>
 <!--end::Javascript-->     
 </x-default-layout>

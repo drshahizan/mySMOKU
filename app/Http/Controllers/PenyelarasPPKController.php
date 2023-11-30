@@ -730,12 +730,9 @@ class PenyelarasPPKController extends Controller
         ->leftjoin('tuntutan','tuntutan.permohonan_id','=','permohonan.id')
         ->where('penyelaras_id','=', Auth::user()->id)
         ->where('permohonan.status', 8) 
-        // ->where(function ($query) {
-        //     $query->where('tuntutan.status', '<', '2')
-        //         ->orWhereNull('tuntutan.status');
-        // })
+        ->orderBy('permohonan.tarikh_hantar', 'DESC')
         ->get(['smoku.*', 'permohonan.no_rujukan_permohonan', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
-        //dd($layak);
+        // dd($layak);
 
         
 
@@ -757,7 +754,7 @@ class PenyelarasPPKController extends Controller
 
     public function kemaskiniKeputusan($id)
     {   
-        $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
+        $permohonan = Permohonan::orderBy('id', 'DESC')->where('smoku_id', '=', $id)->first();
         $smoku_id = $id;
         //$peperiksaan = Peperiksaan::all()->where('permohonan_id', '=', $permohonan->id);
         if ($permohonan) {
@@ -774,7 +771,7 @@ class PenyelarasPPKController extends Controller
 
     public function hantarKeputusanPeperiksaan(Request $request, $id)
     {
-        $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
+        $permohonan = Permohonan::orderBy('id', 'DESC')->where('smoku_id', '=', $id)->first();
 
         //simpan dalam table peperiksaan
         $kepPeperiksaan=$request->kepPeperiksaan;

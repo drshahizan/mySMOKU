@@ -63,7 +63,7 @@
 
 								if (!$tuntut) {
 									if($currentDate->greaterThan($tarikhNextSem)){
-										dd('sini kee');
+										// dd('sini kee');
 										$semSemasa = $semSemasa + 1;
 									}else{
 										// dd('situuu');
@@ -102,8 +102,7 @@
 										$baki_total = 5000;
 										
 										
-										}
-										else {
+									} else {
 											
 										$yuran = $permohonan->yuran_dibayar;
 										$wang = $permohonan->wang_saku_dibayar;
