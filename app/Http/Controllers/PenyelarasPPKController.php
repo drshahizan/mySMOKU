@@ -437,9 +437,8 @@ class PenyelarasPPKController extends Controller
         // );
 
         // // Retrieve or create a Permohonan record based on smoku_id
-        $permohonan = Permohonan::firstOrNew(['smoku_id' => $id]);
-        $peringkat = $request->peringkat_pengajian;
-        dd($peringkat);
+       
+        /*$permohonan = Permohonan::firstOrNew(['smoku_id' => $id]);
 
         // Set the attributes
         $permohonan->no_rujukan_permohonan = 'P'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar;
@@ -453,13 +452,47 @@ class PenyelarasPPKController extends Controller
         }
 
         // Save the record
-        $permohonan->save();
+        $permohonan->save();*/
+        $permohonan = Permohonan::orderBy('id', 'desc')
+            ->where('smoku_id', $id)
+            ->first();
+
+        if (!$permohonan || $permohonan->status == 9) {
+            $permohonan = Permohonan::create(
+                [   'smoku_id' => $id,
+                    'no_rujukan_permohonan' => 'P' . '/' . $request->peringkat_pengajian . '/' . $nokp_pelajar,
+                    'program' => 'PPK',
+                    'wang_saku' => $request->wang_saku,
+                    'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
+                    'perakuan' => $request->perakuan,
+                    'status' => 1,
+                ]
+            );
+        } elseif ($permohonan->status == 1) {
+            $permohonan = Permohonan::updateOrCreate(
+                ['smoku_id' => $id,'status' => 1],
+                [
+                    'no_rujukan_permohonan' => 'P' . '/' . $request->peringkat_pengajian . '/' . $nokp_pelajar,
+                    'program' => 'PPK',
+                    'wang_saku' => $request->wang_saku,
+                    'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
+                    'perakuan' => $request->perakuan,
+                    'status' => $permohonan->status == '1' || $permohonan->status == null ? '1' : $permohonan->status,
+                ]
+            );
+        }
+
+        
+        
 
 
-        $permohonan_id = Permohonan::where('smoku_id',$id)->first();
-        $sejarah = SejarahPermohonan::firstOrNew(['smoku_id' => $id]);
+        $permohonan = Permohonan::orderBy('id', 'desc')
+            ->where('smoku_id', $id)
+            ->first();
 
-        $sejarah->permohonan_id = $permohonan_id->id;
+        $sejarah = SejarahPermohonan::firstOrNew(['smoku_id' => $id,'permohonan_id'=> $permohonan->id]);
+
+        $sejarah->permohonan_id = $permohonan->id;
         $sejarah->status = '1';
 
         $sejarah->save();
@@ -547,19 +580,24 @@ class PenyelarasPPKController extends Controller
     public function hantar(Request $request)
     {
         $smoku_id = Smoku::where('no_kp',$request->no_kp)->first();
-        $permohonan = Permohonan::where('smoku_id', '=', $smoku_id->id)->first();
-        if ($permohonan != null) {
-            Permohonan::where('smoku_id' ,$smoku_id->id)
-            ->update([
-                'perakuan' => $request->perakuan,
-                'tarikh_hantar' => now()->format('Y-m-d'),
-                'status' => '2',
 
-            ]);
+        $permohonan = Permohonan::orderBy('id', 'desc')
+            ->where('smoku_id', $smoku_id->id)
+            ->first();
+
+        if (!$permohonan || $permohonan->status == 1) {
+            Permohonan::updateOrCreate(
+                ['smoku_id' => $smoku_id->id,'status' => 1],
+                [
+                    'perakuan' => $request->perakuan,
+                    'tarikh_hantar' => now()->format('Y-m-d'),
+                    'status' => '2',
+                ]
+            );
             
         }
 
-        $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
         $mohon = SejarahPermohonan::create([
             'permohonan_id' => $permohonan_id->id,
             'smoku_id' => $smoku_id->id,
@@ -867,6 +905,7 @@ class PenyelarasPPKController extends Controller
         ->select('permohonan.*')
         ->orderBy('created_at', 'DESC')
         ->get();
+        // dd($permohonan);
         
         return view('permohonan.penyelaras_ppk.sejarah_permohonan',compact('permohonan'));
     }
