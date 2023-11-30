@@ -69,6 +69,7 @@
                                                 <th style="width: 33%"><b>Nama</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Tindakan</b></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -121,6 +122,26 @@
                                                         @elseif ($item['status']=='9')
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
+
+                                                        @if ($item['status']=='2')
+                                                        <td class="text-center">
+                                                            <a href="{{ route('ppk.tuntutan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan tuntutan ini?')">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Tuntutan">
+                                                                    <i class="fa fa-cancel fa-sm custom-white-icon" style="color: #000000;"></i>
+                                                                </span>
+                                                            </a>
+                                                        </td>
+                                                        @elseif ($item['status']=='5')
+                                                        <td class="text-center">
+                                                            <a href="{{ route('senarai.ppk.tuntutanBaharu') }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
+                                                                    <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                </span>
+                                                            </a>
+                                                        </td>
+                                                        @else
+                                                        <td class="text-center"></td>                                                            
+                                                        @endif
                                                     </tr>
                                                 @endif
                                             @endforeach
@@ -144,6 +165,25 @@
             ordering: true, // Enable manual sorting
             order: [] // Disable initial sorting
         });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berjaya!',
+                text: ' {!! session('success') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+        @if(session('failed'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Tidak Berjaya!',
+                text: ' {!! session('failed') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
     </script>
 
     </body>
