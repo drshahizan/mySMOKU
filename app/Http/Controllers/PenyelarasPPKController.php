@@ -858,7 +858,7 @@ class PenyelarasPPKController extends Controller
     public function sejarahTuntutan()
     {
         $tuntutan = Tuntutan::where('status', '!=','4')->get();
-        //dd($tuntutan);
+        // dd($tuntutan);
         return view('tuntutan.penyelaras_ppk.sejarah_tuntutan',compact('tuntutan'));
     }
 

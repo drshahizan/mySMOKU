@@ -81,12 +81,7 @@
                                                         $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
                                                         $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                        if ($item['status']==2){
-                                                            $status='Baharu';
-                                                        }
-                                                        if ($item['status']==3){
-                                                            $status='Sedang Disaring';
-                                                        }
+                                                        
                                                         $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
                                                         $conjunctions = ['bin', 'binti'];
                                                         $words = explode(' ', $text);
@@ -106,7 +101,7 @@
                                                             <a href="{{ route('ppk.rekod.tuntutan', $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
                                                         </td>
                                                         <td>{{$pemohon}}</td>
-                                                        <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        <td class="text-center"> {{ \Carbon\Carbon::createFromFormat('Y-m-d', $item['tarikh_hantar'])->format('d/m/Y') }}</td>
                                                         @if ($item['status']=='1')
                                                             <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='2')
@@ -141,8 +136,14 @@
         </div>
     </div>
     <script>
-        $('#sortTable1').DataTable();
-        $('#sortTable2').DataTable();
+        $('#sortTable1').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
+        $('#sortTable2').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
     </script>
 
     </body>
