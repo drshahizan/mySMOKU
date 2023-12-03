@@ -1,13 +1,49 @@
 <x-default-layout> 
 
 <head>
-<!-- MAIN CSS -->
-	<link rel="stylesheet" href="/assets/css/sekretariat.css">
+	<!-- MAIN CSS -->
 	<script src="https://cdn.tiny.cloud/1/v736541al0ntzh14edk63z19dzyqs1xn2bkc5em78rv1yeis/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="/assets/css/sekretariat.css">
+
+	<style>
+		th{
+			padding-top: 12px!important;
+			padding-bottom: 12px!important;
+			background-color: rgb(35, 58, 108)!important;
+			color: white!important;
+		}
+
+		.maklumat{
+			width: 100%!important;
+			border: none!important;
+		}
+		.w-13{
+			width: 22% !important;
+		}
+		.w-3{
+			width: 3% !important;
+		}
+		.maklumat td{
+			padding: 5px!important;
+			border: none!important;
+		}
+		.white{
+			color: white!important;
+		}
+
+		.vertical-top{
+			vertical-align: top!important;
+		}
+
+		.file-input {
+			display: flex; 
+			align-items: center;
+		}
+	</style>
 </head>
 
 <body>
@@ -36,52 +72,97 @@
 	<br>
 
 	<!-- Main body part  -->
-	<div id="main-content">
-		<div class="container-fluid">
-			<div class="block-header">
-				<div class="row clearfix">
-					<div class="card p-10">
-						<div class="header">
-							<h2>Borang Salur Peruntukan Program BKOKU<br><small>Sila klik ikon lihat untuk lihat kesemua dokumen yang dimuat naik.</small></h2>
-						</div>
-
-						<div class="body">
-							<div class="table-responsive" id="table-responsive">
-								<table id="sortTable1" class="table table-bordered table-striped">
-									<thead>
-										<tr>
-											<th class="text-center" style="width: 5%">No</th>
-											<th class="text-center" style="width: 55%">Nama Institusi Pengajian</th>
-											<th class="text-center" style="width: 20%">Tarikh Dikemaskini</th>
-											<th class="text-center" style="width: 20%">Borang SPPB</th>
-										</tr>
-									</thead>
-								
-									<tbody>
-										@php
-											$i = 0;
-										@endphp
-								
-										@foreach ($dokumen as $doc)
-											@php
-												$id = $doc->institusi_id;
-												$nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $id)->value('nama_institusi');
-											@endphp
-											
-											<tr>
-												<td class="text-center" data-no="{{ $i++ }}">{{ $i }}</td>
-												<td>{{ $nama_institusi }}</td>
-												<td class="text-center">{{ date('d/m/Y', strtotime($doc->updated_at)) }}</td>
-												<td class="text-center">
-													<a href="{{ url('penyelaras/penyaluran/lihat/salinan-dokumen/sppb/'.$id) }}" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
-														Lihat <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
-													</a>
-												</td>
-											</tr>
-										@endforeach
-									</tbody>
-								</table>								
+	<!--begin::Content-->
+	<div id="kt_app_content" class="app-content flex-column-fluid">
+		<!--begin::Content container-->
+		<div id="kt_app_content_container" class="app-container container-xl">
+			<!--begin::Layout-->
+			<div class="d-flex flex-column flex-lg-row">
+				<!--begin::Content-->
+				<div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
+					<!--begin::Card-->
+					<div class="card">
+						<!--begin::Card body 1-->
+						<div class="card-body pt-10 p-15">
+							{{-- Header --}}
+							<div class="d-flex flex-column align-items-start flex-xl-row mb-10">
+								<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4"
+									data-bs-toggle="tooltip" data-bs-trigger="hover">
+									<span class="fs-3 fw-bold text-gray-800">Muat Turun Borang Salur Peruntukan Program BKOKU</span>
+								</div>
 							</div>
+
+							{{-- Table --}}
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th style="width: 40%">Item</th>
+										<th style="width: 60%">Muat Naik</th>
+									</tr>
+								</thead>
+
+								@php
+									$nama_uni = DB::table('bk_info_institusi')->where('id_institusi', $institusiId)->value('nama_institusi');
+								@endphp
+
+								<tbody>
+									{{-- NAMA INSTITUSI --}}
+									<tr>
+										<td>Nama Institusi Pengajian</td>
+										<td>
+											<input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{$nama_uni}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>												
+										</td>
+									</tr>
+
+									{{-- DOKUMEN SPPB 1 --}}
+									<tr>
+										<td>Borang SPBB 1 (Tuntutan Berstatus Layak)</td>
+										<td>
+											<div id="file-input-container">
+												<!-- File input fields for SPPB1 -->
+												<div class="d-flex">
+													<div class="file-input">
+														<input type="file" name="dokumen1[]"/>
+														@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen1))
+															<a href="{{ asset('assets/dokumen/sppb_1/' . $dokumen->first()->dokumen1) }}" target="_blank">{{ $dokumen->first()->dokumen1 }}</a>
+														@endif
+													</div>
+												</div>
+											</div>                                                                                     
+										</td>
+									</tr>
+
+									{{-- DOKUMEN SPPB 1a --}}
+									<tr>
+										<td>Borang SPBB 1a (Permohonan Berstatus Layak)</td>
+										<td>
+											<div id="file-input-container">
+												<!-- File input fields for SPPB1a -->
+												<div class="d-flex">
+													<div class="file-input">
+														<input type="file" name="dokumen1a[]"/>
+														@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen1a))
+															<a href="{{ asset('assets/dokumen/sppb_1a/' . $dokumen->first()->dokumen1a) }}" target="_blank">{{ $dokumen->first()->dokumen1a }}</a>
+														@endif
+													</div>
+												</div>
+											</div>                                                                                     
+										</td>
+									</tr>
+
+									<tr>
+										<td colspan="2">
+											<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp;
+												Sila klik ikon lihat untuk lihat kesemua dokumen yang dimuat naik.
+											</div> 
+
+											<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp;
+												Sila tandatangan dokumen yang telah dimuat turun.
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>

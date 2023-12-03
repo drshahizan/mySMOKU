@@ -1,11 +1,12 @@
 <x-default-layout> 
 	<head>
+		<!-- MAIN CSS -->
+		<script src="https://cdn.tiny.cloud/1/v736541al0ntzh14edk63z19dzyqs1xn2bkc5em78rv1yeis/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 		<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
-
+		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		
 		<style>
 			th{
 				padding-top: 12px!important;
@@ -84,7 +85,7 @@
 								<div class="d-flex flex-column align-items-start flex-xl-row">
 									<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4"
 										data-bs-toggle="tooltip" data-bs-trigger="hover">
-										<span class="fs-3 fw-bold text-gray-800">Borang Salur Peruntukan Program BKOKU</span>
+										<span class="fs-3 fw-bold text-gray-800">Muat Naik Borang Salur Peruntukan Program BKOKU</span>
 									</div>
 								</div>
 								<br>
@@ -109,7 +110,7 @@
 									<thead>
 										<tr>
 											<th style="width: 40%">Item</th>
-											<th style="width: 60%">Pilih</th>
+											<th style="width: 60%">Muat Naik</th>
 										</tr>
 									</thead>
 
@@ -128,7 +129,7 @@
 
 										{{-- DOKUMEN SPPB 1 --}}
 										<tr>
-											<td>Borang SPBB 1 (Permohonan Salur Pelajar Sedia Ada)</td>
+											<td>Borang SPBB 1 (Tuntutan Berstatus Layak)</td>
 											<td>
 												<div id="file-input-container">
 													<!-- File input fields for SPPB1 -->
@@ -146,7 +147,7 @@
 
 										{{-- DOKUMEN SPPB 1a --}}
 										<tr>
-											<td>Borang SPBB 1a (Permohonan Salur Pelajar Baharu)</td>
+											<td>Borang SPBB 1a (Permohonan Berstatus Layak)</td>
 											<td>
 												<div id="file-input-container">
 													<!-- File input fields for SPPB1a -->
