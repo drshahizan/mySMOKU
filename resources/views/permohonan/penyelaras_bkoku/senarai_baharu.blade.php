@@ -65,12 +65,14 @@
 									}
 								}
 								$pemohon = implode(' ', $result);
+								$smoku->tarikh_hantar = new DateTime($smoku->tarikh_hantar);
+								$formattedDate = $smoku->tarikh_hantar->format('d/m/Y');
 							@endphp
 							<tr>
 								<td><a href="{{route('penyelaras.permohonan.baharu',$smoku->smoku_id)}}">{{ $smoku->no_rujukan_permohonan}}</a></td>
 								<td>{{ $pemohon}}</td>
 								<td>{{ $smoku->nama_kursus}}</td>
-								<td class="text-center">{{ $smoku->created_at->format('d/m/Y')}}</td>
+								<td class="text-center">{{ $formattedDate}}</td>
 								<td class="text-center"><button type="button" class="btn bg-baharu text-white">Baharu</button></td>
 							</tr>  
 							@endforeach	
