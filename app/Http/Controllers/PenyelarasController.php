@@ -264,7 +264,7 @@ class PenyelarasController extends Controller
         $parlimen = Parlimen::orderby("id","asc")->get();
         $dun = Dun::orderby("id","asc")->get();
 
-        $permohonan = Permohonan::where('smoku_id', $id)->first();
+        $permohonan = Permohonan::orderby("id","desc")->where('smoku_id', $id)->first();
         $butiranPelajar = ButiranPelajar::join('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
         ->leftJoin('smoku_waris','smoku_waris.smoku_id','=','smoku_butiran_pelajar.smoku_id')
         ->leftJoin('smoku_akademik','smoku_akademik.smoku_id','=','smoku_butiran_pelajar.smoku_id')
