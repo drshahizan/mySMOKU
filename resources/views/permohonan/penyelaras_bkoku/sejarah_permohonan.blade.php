@@ -98,6 +98,9 @@
                                                             }
                                                         }
                                                         $pemohon = implode(' ', $result);
+
+                                                        $permohonan_latest = DB::table('permohonan')->orderBy('id', 'DESC')->first();
+
                                                     @endphp
                                                     <tr>
                                                         <td>
@@ -135,6 +138,11 @@
 
                                                         @if ($item['status']=='1')
                                                             <td class="text-center">
+                                                                <a href="{{ route('penyelaras.permohonan.baharu', $item['smoku_id']) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini permohonan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Permohonan">
+                                                                        <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                    </span>
+                                                                </a>
                                                                 <a href="{{ route('bkoku.permohonan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
                                                                     <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
                                                                         <i class="fa fa-trash fa-sm custom-white-icon"></i>
@@ -149,7 +157,15 @@
                                                                     </span>
                                                                 </a>
                                                             </td> 
-                                                            @else
+                                                            @elseif ($permohonan_latest->status=='9')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('penyelaras.permohonan.baharu', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin hantar permohonan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Hantar Semula Permohonan">
+                                                                        <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td>
+                                                             @else
                                                             <td class="text-center"></td> 
 
                                                         @endif

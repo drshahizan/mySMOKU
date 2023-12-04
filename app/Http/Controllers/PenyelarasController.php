@@ -265,7 +265,8 @@ class PenyelarasController extends Controller
         $dun = Dun::orderby("id","asc")->get();
 
         $permohonan = Permohonan::orderby("id","desc")->where('smoku_id', $id)->first();
-        $butiranPelajar = ButiranPelajar::join('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
+        $butiranPelajar = ButiranPelajar::orderBy('permohonan.id', 'desc')
+        ->join('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
         ->leftJoin('smoku_waris','smoku_waris.smoku_id','=','smoku_butiran_pelajar.smoku_id')
         ->leftJoin('smoku_akademik','smoku_akademik.smoku_id','=','smoku_butiran_pelajar.smoku_id')
         ->leftJoin('permohonan','permohonan.smoku_id','=','smoku_butiran_pelajar.smoku_id')
@@ -280,8 +281,9 @@ class PenyelarasController extends Controller
             'smoku_butiran_pelajar.pekerjaan as pekerjaan_baru',
             'smoku_butiran_pelajar.pendapatan as pendapatan_baru',
             'smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
-        ->where('smoku_id', $id);
-        //dd($butiranPelajar);
+        ->where('smoku_id', $id) 
+        ->first();
+        // dd($butiranPelajar);
 
         if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
             $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
