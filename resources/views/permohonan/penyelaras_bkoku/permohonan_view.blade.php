@@ -1801,7 +1801,7 @@
 		var maxLimit = max_yuran;
 
 		if (!isNaN(yuran)) {
-			if (yuran > maxLimit) {
+			if (parseFloat(yuran) > parseFloat(maxLimit)) {
 				yuranInput.value = '';
 				alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' bagi satu sesi pengajian.' );
 				return;
