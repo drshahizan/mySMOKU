@@ -272,22 +272,19 @@
                                                 </select>
                                             </div>
                                 
-                                            <div class="col-md-2" style="margin-left: 10px; margin-right:140px;">
-                                                <button type="submit" class="btn btn-primary" style="width: 22%; padding-left: 8px;">
+                                            <div class="col-md-3" style="margin-left: 10px; margin-right:150px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-4" style="padding-left: 50px;">  
+                                            <div class="col-md-3" style="padding-left: 50px;">  
                                                 <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
                                                 <a href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a> 
-                                                <a href="{{ route('borang.sppb.excel', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-excel" style="color: black;"></i> SPPB
-                                                </a>                                                
                                             </div>
                                         </div>
                                     </form>  

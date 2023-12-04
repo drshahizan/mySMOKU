@@ -11,7 +11,7 @@
 			th{
 				padding-top: 12px!important;
 				padding-bottom: 12px!important;
-				background-color: rgb(35, 58, 108)!important;
+				background-color: #3d0066!important;
 				color: white!important;
 			}
 
