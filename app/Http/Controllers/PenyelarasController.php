@@ -450,7 +450,7 @@ class PenyelarasController extends Controller
          if (!$permohonan || $permohonan->status == 9) {
             $permohonan = Permohonan::create(
                 [   'smoku_id' => $id,
-                    'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
+                    'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar,
                     'program' => 'BKOKU',
                     'yuran' => $request->yuran,
                     'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
@@ -464,7 +464,7 @@ class PenyelarasController extends Controller
             $permohonan = Permohonan::updateOrCreate(
                 ['smoku_id' => $id,'status' => 1],
                 [
-                    'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
+                    'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar,
                     'program' => 'BKOKU',
                     'yuran' => $request->yuran,
                     'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
