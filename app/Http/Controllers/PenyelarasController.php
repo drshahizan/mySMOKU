@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DokumenSPPB1;
+use App\Exports\DokumenSPPB1a;
 use App\Http\Controllers\Controller;
 use App\Mail\PermohonanHantar;
 use App\Mail\TuntutanHantar;
@@ -1248,6 +1250,16 @@ class PenyelarasController extends Controller
     {
         $dokumen = DokumenESP::where('institusi_id', $id)->first();
         return view('dokumen.penyelaras.salinan_dokumen',compact('dokumen'));
+    }
+
+    public function muatTurunDokumenSPPB1()
+    {
+        return Excel::download(new DokumenSPPB1, 'sppb1-export.xlsx');
+    }
+
+    public function muatTurunDokumenSPPB1a()
+    {
+        return Excel::download(new DokumenSPPB1a, 'sppb1a-export.xlsx');
     }
 
     public function maklumatBank()
