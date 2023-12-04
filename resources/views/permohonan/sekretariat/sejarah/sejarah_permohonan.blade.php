@@ -95,7 +95,9 @@
                                                         $i++;
                                                         $rujukan = explode("/", $item['no_rujukan_permohonan']);
                                                         $peringkat = $rujukan[1];
-                                                        $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
+                                                        // $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
+                                                        $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->first();
+                                                        // dd($akademik);
                                                         $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
