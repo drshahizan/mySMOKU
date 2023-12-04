@@ -168,6 +168,8 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <script>
         // Check if there is a flash message
         @if(session('success'))
