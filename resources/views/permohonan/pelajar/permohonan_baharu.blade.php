@@ -1967,16 +1967,19 @@
 				var bilbulan = document.getElementById('bil_bulan_per_sem').value;
 				
 
-				var max_yuran = document.getElementById('max_yuran').value;
-				var max_wang_saku = document.getElementById('max_wang_saku').value;
+				var max_yuran = parseFloat(document.getElementById('max_yuran').value).toFixed(2);
+				var max_wang_saku = parseFloat(document.getElementById('max_wang_saku').value).toFixed(2);
+
+				// var max_wang_saku = document.getElementById('max_wang_saku').value.toFixed(2);
 				var yuranInput = document.getElementById('amaun_yuran');
 				var yuran = parseFloat(yuranInput.value).toFixed(2);
 
 				// Define the maximum limit for 'amaun_yuran'
 				var maxLimit = max_yuran;
+				console.log(yuran > maxLimit);  // This will be false
 
 				if (!isNaN(yuran)) {
-					if (yuran > maxLimit) {
+					if (parseFloat(yuran) > parseFloat(maxLimit)) {
 						yuranInput.value = '';
 						alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' bagi satu sesi pengajian.' );
 						return;
