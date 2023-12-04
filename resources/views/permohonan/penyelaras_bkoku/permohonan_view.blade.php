@@ -973,7 +973,7 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-placeholder="Pilih" data-control="select2" data-hide-search="true" required {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+									<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-placeholder="Pilih" data-control="select2" onchange=dateCheck() data-hide-search="true" required {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
 										<option></option>
 										@if(empty($butiranPelajar->tempoh_pengajian))
 											@for($i = 1; $i <= 4; $i += 0.5)
@@ -1032,8 +1032,13 @@
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
 									<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
-										<option value="4" {{ $butiranPelajar->bil_bulan_per_sem == 4 ? 'selected' : '' }}>4</option>
-										<option value="6" {{ $butiranPelajar->bil_bulan_per_sem == 6 ? 'selected' : '' }}>6</option>
+										<option></option>
+										@if(!empty($butiranPelajar->bil_bulan_per_sem))
+											<option value="{{$butiranPelajar->bil_bulan_per_sem}}" selected>{{$butiranPelajar->bil_bulan_per_sem}}</option>
+										@else
+											<option value="4">4</option>
+											<option value="6">6</option>
+										@endif
 									</select>
 									<!--end::Input wrapper-->
 								</div>
@@ -1051,7 +1056,7 @@
 								</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" value="{{$butiranPelajar->tarikh_mula}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" onchange=dateCheck() value="{{$butiranPelajar->tarikh_mula}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
@@ -1063,7 +1068,7 @@
 								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" onchange=dateCheck() value="{{$butiranPelajar->tarikh_tamat}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" value="{{$butiranPelajar->tarikh_tamat}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 								<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
@@ -1080,6 +1085,7 @@
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
 										<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+											<option></option>
 											@foreach ($biaya as $biaya)
 											<option value="{{$biaya->kod_biaya}}" {{$butiranPelajar->sumber_biaya == $biaya->kod_biaya ? 'selected' : ''}}>{{ $biaya->biaya}}</option>
 											@endforeach
@@ -1165,6 +1171,8 @@
 								<div class="row mb-10">
 									<br>
 									<br>
+									<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
+									<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
 									<div class="col-6" id="divyuran">
 										<input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" onclick="return false" checked/>
 										<label class="fs-6 fw-semibold form-label">
@@ -1636,11 +1644,18 @@
 			function dateCheck(){
 				let startDate = new Date($("#tarikh_mula").val());
 				let endDate = new Date($("#tarikh_tamat").val());
+				var studyPeriod = parseFloat(document.getElementById("tempoh_pengajian").value);
 
-				if(startDate > endDate) {
-					alert("Tarikh Tamat Pengajian perlu lebih besar daripada Tarikh Mula Pengajian");
-					$("#tarikh_tamat").val('');
+				if (!isNaN(studyPeriod)) {
+				//alert(studyPeriod);
+				 	endDate.setFullYear(startDate.getFullYear() + Math.floor(studyPeriod));
+
+				 	var remainingMonths = (studyPeriod - Math.floor(studyPeriod)) * 12;
+				 	endDate.setMonth(startDate.getMonth() + Math.floor(remainingMonths));
+
+				 	document.getElementById("tarikh_tamat").valueAsDate = endDate;
 				}
+
 			}
 
 
