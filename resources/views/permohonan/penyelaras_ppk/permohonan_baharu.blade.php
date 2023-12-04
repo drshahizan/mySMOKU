@@ -1022,7 +1022,7 @@
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
 									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-										<option value="6">6</option>
+										<option></option>
 									</select>
 									<!--end::Input wrapper-->
 								</div>
