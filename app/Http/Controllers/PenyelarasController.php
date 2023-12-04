@@ -60,14 +60,15 @@ class PenyelarasController extends Controller
     public function index()
     {
         $smoku = Smoku::join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'smoku.id')
-            ->leftJoin('permohonan', 'permohonan.smoku_id', '=', 'smoku.id')
-            ->where('penyelaras_id', '=', Auth::user()->id)
-            ->where(function ($query) {
-                $query->where('permohonan.status', '<', '2')->orWhere('permohonan.status','=','9')
-                    ->orWhereNull('permohonan.status');
-            })
-            ->select('smoku.*', 'smoku_penyelaras.*', 'permohonan.status')
-            ->get();
+        ->leftJoin('permohonan', 'permohonan.smoku_id', '=', 'smoku.id')
+        ->where('penyelaras_id', '=', Auth::user()->id)
+        ->where(function ($query) {
+            $query->where('permohonan.status', '<', '2')
+                ->orWhereNull('permohonan.status');
+        })
+        ->OrwhereRaw('(SELECT status FROM permohonan WHERE smoku_id = smoku.id ORDER BY id DESC LIMIT 1) = 9')
+        ->select('smoku.*', 'smoku_penyelaras.*', 'permohonan.status', 'permohonan.id as permohonan_id')
+        ->get();
 
         //dd($smoku);    
 
