@@ -377,7 +377,7 @@ class SaringanController extends Controller
     }
 
     public function sejarahPermohonan(){
-        $permohonan = Permohonan::orderBy('created_at', 'DESC')->get();
+        $permohonan = Permohonan::orderBy('id', 'DESC')->get();
         return view('permohonan.sekretariat.sejarah.sejarah_permohonan',compact('permohonan'));
     }
 
