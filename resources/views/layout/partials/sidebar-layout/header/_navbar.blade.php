@@ -44,15 +44,15 @@
         @endphp
         <!--begin::Menu wrapper-->
         @if($fullname)
-            <div class="cursor-pointer symbol  symbol-35px symbol-2by3 fs-5 text-white" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold;">
+            <div class="cursor-pointer symbol  symbol-35px symbol-2by3 fs-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:#3d0066">
                 {{$fullname}}
             </div>
         @elseif($nama)
-            <div class="cursor-pointer symbol  symbol-35px symbol-2by3 fs-5 text-white" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold;">
+            <div class="cursor-pointer symbol  symbol-35px symbol-2by3 fs-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:#3d0066">
                 {{$nama}}
             </div>
         @else
-            <div class="cursor-pointer symbol  symbol-35px symbol-2by3 fs-5 text-white" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold;">
+            <div class="cursor-pointer symbol  symbol-35px symbol-2by3 fs-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:#3d0066">
                 {{Auth::user()->email}}
             </div>
         @endif

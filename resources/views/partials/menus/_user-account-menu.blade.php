@@ -10,15 +10,15 @@
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
                 @if($nama2)
-                    <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-primary text-primary', $nama2) }}">
+                    <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle($nama2) }}" style="color:#3d0066; background-color:#e2cfea">
                         {{ substr($nama2,0,1) }}
                     </div>
                 @elseif($nama)
-                    <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-primary text-primary', $nama) }}">
+                    <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle($nama) }}" style="color:#3d0066; background-color:#e2cfea">
                         {{ substr($nama,0,1) }}
                     </div>
                 @else
-                    <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-primary text-primary', Auth::user()->email) }}">
+                    <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle(Auth::user()->email) }}" style="color:#3d0066; background-color:#e2cfea">
                         {{ substr(Auth::user()->email,0,1) }}
                     </div>
                 @endif
