@@ -73,7 +73,7 @@ class PermohonanController extends Controller
         $institusi = InfoIpt::orderby("id","asc")->select('id_institusi','nama_institusi')->get();
         $infoipt = InfoIpt::all()->where('jenis_institusi','IPTS')->sortBy('nama_institusi');
         $peringkat = PeringkatPengajian::orderby("id","asc")->select('kod_peringkat','peringkat')->get();
-        $permohonan = Permohonan::where('smoku_id', $smoku_id->id)->first();
+        $permohonan = Permohonan::orderby("id","desc")->where('smoku_id', $smoku_id->id)->first();
         
         $butiranPelajar = ButiranPelajar::orderBy('permohonan.id', 'desc')
         ->leftJoin('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
@@ -96,9 +96,10 @@ class PermohonanController extends Controller
         ->first();
         //dd($butiranPelajar);
 
+        // dd($permohonan);
         if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
             $tamat_pengajian = TamatPengajian::orderBy('id', 'desc')->where('permohonan_id', $permohonan->id)->first();
-            
+           
             if ($tamat_pengajian) {
 
                 $permohonan_baru = Permohonan::orderBy('id', 'desc')
