@@ -46,32 +46,60 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
     {
         // Define column headings
         return [
-            'ID Tuntutan',
-            'Nama Pemohon',
-            'Yuran Disokong (RM)',
-            'Wang Saku Disokong (RM)',
-            'Tarikh Tuntutan',
-            'Yuran Dibayar (RM)',
-            'Wang Saku Dibayar (RM)',
-            'No Baucer',
-            'Perihal',
-            'Tarikh Baucer',
+            // Custom Rows
+            ['INSTITUSI:'],
+            ['CAWANGAN:'],
+            ['NAMA PENERIMA:'],
+            ['BANK:'],
+            ['NO. AKAUN:'],
+
+            // Data Headers
+            array_map('strtoupper', [
+                'BIL',
+                'NAMA PELAJAR',
+                'NO. KAD PENGENALAN',
+                'NO KAD MATRIKS',
+                'NO KAD JKM',
+                'TARIKH MULA PENGAJIAN',
+                'TARIKH TAMAT PENGAJIAN',
+                'NAMA KURSUS',
+                'PERINGKAT PENGAJIAN',
+                'STATUS PENGAJIAN (AKTIF/TIDAK AKTIF)',
+                'TAJAAN (SENDIRI/BIASISWA/PINJAMAN)',
+                'MOD PENGAJIAN (SEPENUH MASA/SEPARUH MASA/JARAK JAUH/ DALAM TALIAN)',
+                'BILANGAN BULAN PER SEMESTER (4/6 BULAN)',
+                'KOS SILING BKOKU (RM5,000 SETAHUN)',
+                'YURAN SEMESTER 1 (RM)',
+                'ELAUN SEMESTER 1 (RM)',
+                'BAKI KELAYAKAN (RM)',
+                'JENIS PERMOHONAN',
+                'CATATAN',
+            ]),
         ];
     }
 
     public function columnWidths(): array
     {
         return [
-            'A' => 20,
+            'A' => 5,
             'B' => 50,           
-            'C' => 20,
-            'D' => 25,
-            'E' => 20,
-            'F' => 25,
-            'G' => 30,
-            'H' => 20,
-            'I' => 50,
-            'J' => 20,
+            'C' => 15,
+            'D' => 15,
+            'E' => 15,
+            'F' => 15,
+            'G' => 15,
+            'H' => 15,
+            'I' => 15,
+            'J' => 15,
+            'K' => 15,
+            'L' => 15,
+            'M' => 15,
+            'N' => 15,
+            'O' => 15,
+            'P' => 15,
+            'Q' => 15,
+            'R' => 25,
+            'S' => 25,
         ];
     }
 
@@ -95,12 +123,12 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                 $event->sheet->getStyle('A1:' . $event->sheet->getHighestColumn() . '1')->applyFromArray([
                     'font' => [
                         'bold' => true,
-                        'color' => ['rgb' => 'FFFFFF'], // Header font color 
+                        'color' => ['rgb' => '#000000'], // Header font color 
                         'size' => 12, // Header font size
                     ],
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                        'startColor' => ['rgb' => '808080'], // Header background color 
+                        'startColor' => ['rgb' => 'B3B3B3'], // Header background color 
                     ],
                 ]);
             },
