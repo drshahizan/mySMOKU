@@ -308,7 +308,7 @@ class PermohonanController extends Controller
         //     ]
         // );
          // // Retrieve or create a Permohonan record based on smoku_id
-         $permohonan = Permohonan::firstOrNew(['smoku_id' => $smoku_id->id]);
+         /*$permohonan = Permohonan::firstOrNew(['smoku_id' => $smoku_id->id]);
 
          // Set the attributes
          $permohonan->no_rujukan_permohonan = 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp;
@@ -324,38 +324,42 @@ class PermohonanController extends Controller
          }
  
          // Save the record
-         $permohonan->save();
+         $permohonan->save();*/
 
-        // if ($permohonan) {
-        //     // Check if the status is equal to 6
-        //     if ($permohonan->status == 6) {
-                
-        //         $newPermohonan = new Permohonan();
-        //         $newPermohonan->smoku_id = $smoku_id->id;
-        //         $newPermohonan->no_rujukan_permohonan = 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp;
-        //         $newPermohonan->program = 'BKOKU';
-        //         $newPermohonan->yuran = $request->yuran;
-        //         $newPermohonan->amaun_yuran = number_format($request->amaun_yuran, 2, '.', '');
-        //         $newPermohonan->wang_saku = $request->wang_saku;
-        //         $newPermohonan->amaun_wang_saku = $request->amaun_wang_saku;
-        //         $newPermohonan->perakuan = $request->perakuan;
-        //         $newPermohonan->status = '1';
+        $permohonan = Permohonan::orderBy('id', 'desc')
+         ->where('smoku_id', $smoku_id->id)
+         ->first(); 
 
-        //         $newPermohonan->save();
-        //     } else {
-        //         // Update the existing Permohonan record if the status is not 6
-        //         $permohonan->no_rujukan_permohonan = 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp;
-        //         $permohonan->program = 'BKOKU';
-        //         $permohonan->yuran = $request->yuran;
-        //         $permohonan->amaun_yuran = number_format($request->amaun_yuran, 2, '.', '');
-        //         $permohonan->wang_saku = $request->wang_saku;
-        //         $permohonan->amaun_wang_saku = $request->amaun_wang_saku;
-        //         $permohonan->perakuan = $request->perakuan;
-        //         $permohonan->status = '1';
+         if (!$permohonan || $permohonan->status == 9) {
+            $permohonan = Permohonan::create(
+                [   'smoku_id' => $smoku_id->id,
+                    'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
+                    'program' => 'BKOKU',
+                    'yuran' => $request->yuran,
+                    'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
+                    'wang_saku' => $request->wang_saku,
+                    'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
+                    'perakuan' => $request->perakuan,
+                    'status' => 1,
+                ]
+            );
+        } elseif ($permohonan->status == 1) {
+            $permohonan = Permohonan::updateOrCreate(
+                ['smoku_id' => $smoku_id->id,'status' => 1],
+                [
+                    'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
+                    'program' => 'BKOKU',
+                    'yuran' => $request->yuran,
+                    'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
+                    'wang_saku' => $request->wang_saku,
+                    'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
+                    'perakuan' => $request->perakuan,
+                    'status' => $permohonan->status == '1' || $permohonan->status == null ? '1' : $permohonan->status,
+                ]
+            );
+        } 
 
-        //         $permohonan->save();
-        //     }
-        // }
+        
 
 
         $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
