@@ -520,14 +520,15 @@ class PenyelarasController extends Controller
     {   
         $smoku_id = Smoku::where('no_kp',$request->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
-        if ($permohonan != null) {
-            Permohonan::where('smoku_id' ,$smoku_id->id)
-            ->update([
-                'perakuan' => $request->perakuan,
-                'tarikh_hantar' => now()->format('Y-m-d'),
-                'status' => '2',
-
-            ]);
+        if (!$permohonan || $permohonan->status == 1) {
+            Permohonan::updateOrCreate(
+                ['smoku_id' => $smoku_id->id,'status' => 1],
+                [
+                    'perakuan' => $request->perakuan,
+                    'tarikh_hantar' => now()->format('Y-m-d'),
+                    'status' => '2',
+                ]
+            );
             
         }
 
@@ -541,7 +542,7 @@ class PenyelarasController extends Controller
         $mohon->save();
 
 
-        $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
 
         // Generate a running number (you can use your logic here)
         $runningNumber = rand(1000, 9999);
