@@ -21,13 +21,21 @@ class PelajarController extends Controller
     {
         $user = User::all()->where('no_kp',Auth::user()->no_kp);
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        $permohonan = SejarahPermohonan::orderby("sejarah_permohonan.created_at","desc")
-        ->join('permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
-        ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
-        ->get(['sejarah_permohonan.*','permohonan.no_rujukan_permohonan','permohonan.status as status_semasa','bk_status.status'])
-        ->where('smoku_id',$smoku_id->id)
-        ->where('status', '!=', 'DISOKONG');
-        //dd($smoku_id);
+
+        $permohonan_id = Permohonan::orderby("id","desc")->where('smoku_id',$smoku_id->id)->first();
+        // dd($permohonan_id);
+        if($permohonan_id !== null){
+            $permohonan = SejarahPermohonan::orderby("sejarah_permohonan.created_at","desc")
+            ->join('permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
+            ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
+            ->get(['sejarah_permohonan.*','permohonan.no_rujukan_permohonan','permohonan.status as status_semasa','bk_status.status'])
+            ->where('smoku_id',$smoku_id->id)
+            ->where('permohonan_id',$permohonan_id->id)
+            ->where('status', '!=', 'DISOKONG');
+            // dd($permohonan);
+        } else {
+            $permohonan = [];
+        }
 
         $tuntutan_id = Tuntutan::orderby("id","desc")->where('smoku_id',$smoku_id->id)->first();
         // dd($tuntutan_id);
