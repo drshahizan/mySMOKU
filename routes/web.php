@@ -255,8 +255,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/penyaluran/muat-turun/borang/spbb', [PenyelarasController::class, 'muatTurunBorangSPPB'])->name('penyelaras.muat-turun.SPPB');
     Route::get('penyelaras/penyaluran/muat-naik/borang/spbb', [PenyelarasController::class, 'muatNaikBorangSPPB'])->name('penyelaras.muat-naik.SPPB');
     Route::post('penyelaras/penyaluran/hantar/borang/spbb', [PenyelarasController::class, 'hantarBorangSPPB'])->name('penyelaras.kemaskini.SPPB');
-    Route::get('penyelaras/penyaluran/lihat/salinan-dokumen/sppb/{id}', [PenyelarasController::class, 'dokumenSPPB'])->name('penyelaras.dokumen.SPPB.id');
-    
+    Route::get('penyelaras/penyaluran/muat-turun/sppb1', [PenyelarasController::class, 'muatTurunDokumenSPPB1'])->name('penyelaras.dokumen.SPPB1');
+    Route::get('penyelaras/penyaluran/muat-turun/sppb1a', [PenyelarasController::class, 'muatTurunDokumenSPPB1a'])->name('penyelaras.dokumen.SPPB1a');
+
     //Penyaluran - Penyelaras - Pembayaran
     Route::get('penyelaras/penyaluran/permohonan-tuntutan/layak', [PenyelarasController::class, 'senaraiPemohonLayak']);
     Route::post('/penyelaras/hantar/permohonan/info-baucer/{permohonan_id}', [PenyelarasController::class, 'hantarInfoBaucerPermohonan'])->name('permohonan.modal.submit');

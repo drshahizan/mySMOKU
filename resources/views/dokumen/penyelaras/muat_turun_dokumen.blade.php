@@ -7,7 +7,6 @@
 	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="/assets/css/sekretariat.css">
 
 	<style>
 		th{
@@ -83,7 +82,7 @@
 					<!--begin::Card-->
 					<div class="card">
 						<!--begin::Card body 1-->
-						<div class="card-body pt-10 p-15">
+						<div class="card-body pt-10 p-20">
 							{{-- Header --}}
 							<div class="d-flex flex-column align-items-start flex-xl-row mb-10">
 								<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4"
@@ -96,8 +95,8 @@
 							<table class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th style="width: 40%">Item</th>
-										<th style="width: 60%">Muat Naik</th>
+										<th style="width: 45%">Item</th>
+										<th style="width: 55%">Muat Naik</th>
 									</tr>
 								</thead>
 
@@ -119,13 +118,11 @@
 										<td>Borang SPBB 1 (Tuntutan Berstatus Layak)</td>
 										<td>
 											<div id="file-input-container">
-												<!-- File input fields for SPPB1 -->
 												<div class="d-flex">
 													<div class="file-input">
-														<input type="file" name="dokumen1[]"/>
-														@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen1))
-															<a href="{{ asset('assets/dokumen/sppb_1/' . $dokumen->first()->dokumen1) }}" target="_blank">{{ $dokumen->first()->dokumen1 }}</a>
-														@endif
+														<a href="{{ route('penyelaras.dokumen.SPPB1') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
+															Lihat SPPB 1<i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
+														</a>
 													</div>
 												</div>
 											</div>                                                                                     
@@ -137,13 +134,11 @@
 										<td>Borang SPBB 1a (Permohonan Berstatus Layak)</td>
 										<td>
 											<div id="file-input-container">
-												<!-- File input fields for SPPB1a -->
 												<div class="d-flex">
 													<div class="file-input">
-														<input type="file" name="dokumen1a[]"/>
-														@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen1a))
-															<a href="{{ asset('assets/dokumen/sppb_1a/' . $dokumen->first()->dokumen1a) }}" target="_blank">{{ $dokumen->first()->dokumen1a }}</a>
-														@endif
+														<a href="{{ route('penyelaras.dokumen.SPPB1a') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
+															Lihat SPPB 1a<i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
+														</a>
 													</div>
 												</div>
 											</div>                                                                                     
