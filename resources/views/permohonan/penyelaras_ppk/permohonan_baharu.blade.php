@@ -1767,7 +1767,7 @@
 					// institusi id
 					var idipt = document.getElementById("id_institusi").value;
 					var kodperingkat = document.getElementById("peringkat_pengajian").value;
-					//alert(kodperingkat);
+					// alert(kodperingkat);
 		
 					// Empty the dropdown
 					$('#nama_kursus').find('option').not(':first').remove();
