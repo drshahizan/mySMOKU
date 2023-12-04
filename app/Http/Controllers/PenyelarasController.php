@@ -440,7 +440,39 @@ class PenyelarasController extends Controller
         // );
        
         // // Retrieve or create a Permohonan record based on smoku_id
-        $permohonan = Permohonan::firstOrNew(['smoku_id' => $id]);
+        $permohonan = Permohonan::orderBy('id', 'desc')
+         ->where('smoku_id', $id)
+         ->first(); 
+
+         if (!$permohonan || $permohonan->status == 9) {
+            $permohonan = Permohonan::create(
+                [   'smoku_id' => $id,
+                    'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
+                    'program' => 'BKOKU',
+                    'yuran' => $request->yuran,
+                    'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
+                    'wang_saku' => $request->wang_saku,
+                    'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
+                    'perakuan' => $request->perakuan,
+                    'status' => 1,
+                ]
+            );
+        } elseif ($permohonan->status == 1) {
+            $permohonan = Permohonan::updateOrCreate(
+                ['smoku_id' => $id,'status' => 1],
+                [
+                    'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
+                    'program' => 'BKOKU',
+                    'yuran' => $request->yuran,
+                    'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
+                    'wang_saku' => $request->wang_saku,
+                    'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
+                    'perakuan' => $request->perakuan,
+                    'status' => $permohonan->status == '1' || $permohonan->status == null ? '1' : $permohonan->status,
+                ]
+            );
+        }  
+        /*$permohonan = Permohonan::firstOrNew(['smoku_id' => $id]);
 
         // Set the attributes
         $permohonan->no_rujukan_permohonan = 'B'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar;
@@ -456,9 +488,9 @@ class PenyelarasController extends Controller
         }
 
         // Save the record
-        $permohonan->save();
+        $permohonan->save();*/
 
-        $permohonan_id = Permohonan::where('smoku_id',$id)->first();
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$id)->first();
         // Retrieve or create a SejarahPermohonan record based on smoku_id
         $sejarah = SejarahPermohonan::firstOrNew(['smoku_id' => $id]);
 
@@ -484,7 +516,7 @@ class PenyelarasController extends Controller
     public function hantar(Request $request)
     {   
         $smoku_id = Smoku::where('no_kp',$request->no_kp)->first();
-        $permohonan = Permohonan::where('smoku_id', '=', $smoku_id->id)->first();
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
         if ($permohonan != null) {
             Permohonan::where('smoku_id' ,$smoku_id->id)
             ->update([
@@ -496,7 +528,7 @@ class PenyelarasController extends Controller
             
         }
 
-        $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
+        $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
         $mohon = SejarahPermohonan::create([
             'permohonan_id' => $permohonan_id->id,
             'smoku_id' => $smoku_id->id,
