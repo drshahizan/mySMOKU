@@ -121,7 +121,7 @@
 												<div class="d-flex">
 													<div class="file-input">
 														<a href="{{ route('penyelaras.dokumen.SPPB1') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
-															Lihat SPBB 1<i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
+															Muat Turun SPBB 1<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
 														</a>
 													</div>
 												</div>
@@ -137,7 +137,7 @@
 												<div class="d-flex">
 													<div class="file-input">
 														<a href="{{ route('penyelaras.dokumen.SPPB1a') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
-															Lihat SPBB 1a<i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
+															Muat Turun SPBB 1a<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
 														</a>
 													</div>
 												</div>
