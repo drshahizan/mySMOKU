@@ -40,6 +40,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
             ->where('d.jenis', 'Yuran')
             ->where('f.id_institusi', $this->instiusi_user)
             ->select(
+                'b.id',
                 'b.nama',
                 'b.no_kp',
                 'c.no_pendaftaran_pelajar',
@@ -57,13 +58,15 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 'permohonan.wang_saku_disokong',
                 'permohonan.baki',
                 'permohonan.catatan_disokong',    
+                'permohonan.yuran',    
+                'permohonan.wang_saku',    
             )
             ->get();
 
         // Add the calculated "jenis_permohonan" column to the collection
         $senarai = $senarai->map(function ($item, $key) {
-            $sesi = Akademik::where('smoku_id', $item['smoku_id'])->value('sesi');
-            $jenis_permohonan = $this->calculateJenisPermohonan($item, $sesi);
+            $sesi = Akademik::where('smoku_id', $item['id'])->value('sesi');
+            $jenis_permohonan = $this->calculateJenisPermohonan($item);
             $item['jenis_permohonan'] = $jenis_permohonan;
 
             // Add the "BIL" column directly using $key
@@ -107,24 +110,32 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 'YURAN SEMESTER 1 (RM)',
                 'ELAUN SEMESTER 1 (RM)',
                 'BAKI KELAYAKAN (RM)',
-                'JENIS PERMOHONAN',
+                'JENIS TUNTUTAN',
                 'CATATAN',
             ]),
         ];
     }
 
     // Helper method to calculate "jenis_permohonan"
-    private function calculateJenisPermohonan($item, $sesi)
+    private function calculateJenisPermohonan($item)
     {
-        if ($item['yuran_disokong'] == 1 && $item['wang_saku_disokong'] == 1) {
-            // Check sesi and set jenis_permohonan accordingly
-            if ($sesi) {
-                return 'YURAN PENGAJIAN DAN ELAUN WANG SAKU SEM 1 DAN 2 TAHUN ' . $sesi;
-            }
+         // Fetch sesi from SMOKUAkademik table
+        $sesi = Akademik::where('smoku_id', $item['id'])->value('sesi');
+        // dd($sesi);
+ 
+        // dd($item['yuran']);
+        if ($item['yuran'] == 1 && $item['wang_saku'] == 1) {
+            $result = 'YURAN PENGAJIAN DAN ELAUN WANG SAKU';
+        } elseif ($item['yuran'] == 1) {
+            $result = 'YURAN PENGAJIAN';
+        } elseif ($item['wang_saku'] == 1) {
+            $result = 'ELAUN WANG SAKU';
+        } else {
+            $result = 'Other';
         }
-
-        // Default value if conditions are not met
-        return 'Other Jenis Permohonan';
+        
+        return $result . ' SEM 1 DAN 2 TAHUN ' . $sesi;
+        
     }
 
     public function columnWidths(): array
@@ -154,11 +165,8 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
 
     public function map($row): array
     {
-        // Fetch sesi from SMOKUAkademik table
-        $sesi = Akademik::where('smoku_id', $row->smoku_id)->value('sesi');
-
         // Calculate "jenis_permohonan" based on the fetched sesi
-        $jenis_permohonan = $this->calculateJenisPermohonan($row, $sesi);
+        $jenis_permohonan = $this->calculateJenisPermohonan($row);
 
         // Increment the counter for "BIL" column
         $this->counter++;
