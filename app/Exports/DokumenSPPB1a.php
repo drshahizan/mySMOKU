@@ -12,6 +12,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
 {
@@ -32,10 +33,11 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
         // Fetch data from the database based on the institusi ID
         $senarai = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
             ->join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
-            ->join('bk_jumlah_tuntutan as d','d.jenis','=','Yuran')
+            ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
             ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
             ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
             ->where('permohonan.status', 6)
+            ->where('d.jenis', 'Yuran')
             ->where('f.id_institusi', $this->instiusi_user)
             ->select(
                 'b.nama',
@@ -50,7 +52,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 'e.biaya',
                 'c.mod',
                 'c.bil_bulan_per_sem',
-                'd.jumlah',
+                DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
                 'permohonan.yuran_disokong',
                 'permohonan.wang_saku_disokong',
                 'permohonan.baki',
@@ -70,7 +72,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
             return $item;
         });
 
-        dd($senarai);
+        // dd($senarai);
         
         return $senarai;
     }
