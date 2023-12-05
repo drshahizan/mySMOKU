@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Permohonan;
+use App\Models\Akademik;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -18,26 +19,57 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
     * @return \Illuminate\Support\Collection
     */
     protected $dateFormat = 'd/m/Y';
+    protected $instiusi_user;
+    private $counter = 0;
+
+    public function __construct()
+    {
+        // Get the institusi ID of the logged-in user
+        $this->instiusi_user = Auth::user()->id_institusi;
+    }
 
     public function collection()
     {
-        // Get the institusi ID of the logged-in user
-        $instiusi_user = Auth::user()->id_institusi;
-
         // Fetch data from the database based on the institusi ID
         $senarai = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
-            ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
-            ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
+            ->join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
+            ->join('bk_jumlah_tuntutan as d','d.jenis','=','Yuran')
+            ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
+            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
             ->where('permohonan.status', 6)
-            ->where('bk_info_institusi.id_institusi', $instiusi_user)
+            ->where('f.id_institusi', $this->instiusi_user)
             ->select(
-                'permohonan.no_rujukan_permohonan',
                 'b.nama',
+                'b.no_kp',
+                'c.no_pendaftaran_pelajar',
+                'b.no_daftar_oku',
+                'c.tarikh_mula',
+                'c.tarikh_tamat',
+                'c.nama_kursus',
+                'c.peringkat_pengajian',
+                'c.status',
+                'e.biaya',
+                'c.mod',
+                'c.bil_bulan_per_sem',
+                'd.jumlah',
                 'permohonan.yuran_disokong',
                 'permohonan.wang_saku_disokong',
-                'permohonan.tarikh_hantar'
+                'permohonan.baki',
+                'permohonan.catatan_disokong',    
             )
             ->get();
+
+        // Add the calculated "jenis_permohonan" column to the collection
+        $senarai = $senarai->map(function ($item, $key) {
+            $sesi = Akademik::where('smoku_id', $item['smoku_id'])->value('sesi');
+            $jenis_permohonan = $this->calculateJenisPermohonan($item, $sesi);
+            $item['jenis_permohonan'] = $jenis_permohonan;
+
+            // Add the "BIL" column directly using $key
+            $item['bil'] = $key + 1;
+
+            return $item;
+        });
         
         return $senarai;
     }
@@ -78,6 +110,20 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
         ];
     }
 
+    // Helper method to calculate "jenis_permohonan"
+    private function calculateJenisPermohonan($item, $sesi)
+    {
+        if ($item['yuran_disokong'] == 1 && $item['wang_saku_disokong'] == 1) {
+            // Check sesi and set jenis_permohonan accordingly
+            if ($sesi) {
+                return 'YURAN PENGAJIAN DAN ELAUN WANG SAKU SEM 1 DAN 2 TAHUN ' . $sesi;
+            }
+        }
+
+        // Default value if conditions are not met
+        return 'Other Jenis Permohonan';
+    }
+
     public function columnWidths(): array
     {
         return [
@@ -105,18 +151,35 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
 
     public function map($row): array
     {
+        // Fetch sesi from SMOKUAkademik table
+        $sesi = Akademik::where('smoku_id', $row->smoku_id)->value('sesi');
+
+        // Calculate "jenis_permohonan" based on the fetched sesi
+        $jenis_permohonan = $this->calculateJenisPermohonan($row, $sesi);
+
+        // Increment the counter for "BIL" column
+        $this->counter++;
+
         return [
-             // Update this to match with column name in database
-             $row->no_rujukan_permohonan, 
+             $this->counter,
              $row->nama,
+             $row->no_kp,
              $row->no_pendaftaran_pelajar,
-             $row->kecacatan,
-             $row->nama_kursus,
-             $row->nama_institusi,
+             $row->no_daftar_oku,
              Carbon::parse($row->tarikh_mula)->format('d/m/Y'),
              Carbon::parse($row->tarikh_tamat)->format('d/m/Y'),
-            number_format($row->yuran_disokong, 2, '.', ''), // Format 'Yuran Disokong' as numeric with two decimal places
-            number_format($row->wang_saku_disokong, 2, '.', ''), // Format 'Wang Saku Disokong' as numeric with two decimal places
+             $row->nama_kursus,
+             $row->peringkat_pengajian,
+             $row->status,
+             $row->biaya,
+             $row->mod,
+             $row->bil_bulan_per_sem,
+             number_format($row->jumlah, 2, '.', ''), // Format 'Yuran Disokong' as numeric with two decimal places
+             number_format($row->yuran_disokong, 2, '.', ''), // Format 'Yuran Disokong' as numeric with two decimal places
+             number_format($row->wang_saku_disokong, 2, '.', ''), // Format 'Wang Saku Disokong' as numeric with two decimal places
+             number_format($row->baki, 2, '.', ''), // Format 'Yuran Disokong' as numeric with two decimal places
+             $jenis_permohonan,
+             $row->catatan_disokong,
         ];
     }
 

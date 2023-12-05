@@ -62,7 +62,7 @@
 			</li>
 			<!--end::Item-->
 			<!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">Borang SPPB</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Borang SPBB</li>
 			<!--end::Item-->
 		</ul>
 	<!--end::Breadcrumb-->
@@ -113,7 +113,7 @@
 										</td>
 									</tr>
 
-									{{-- DOKUMEN SPPB 1 --}}
+									{{-- DOKUMEN SPBB 1 --}}
 									<tr>
 										<td>Borang SPBB 1 (Tuntutan Berstatus Layak)</td>
 										<td>
@@ -121,7 +121,7 @@
 												<div class="d-flex">
 													<div class="file-input">
 														<a href="{{ route('penyelaras.dokumen.SPPB1') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
-															Lihat SPPB 1<i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
+															Lihat SPBB 1<i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
 														</a>
 													</div>
 												</div>
@@ -129,7 +129,7 @@
 										</td>
 									</tr>
 
-									{{-- DOKUMEN SPPB 1a --}}
+									{{-- DOKUMEN SPBB 1a --}}
 									<tr>
 										<td>Borang SPBB 1a (Permohonan Berstatus Layak)</td>
 										<td>
@@ -137,7 +137,7 @@
 												<div class="d-flex">
 													<div class="file-input">
 														<a href="{{ route('penyelaras.dokumen.SPPB1a') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
-															Lihat SPPB 1a<i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
+															Lihat SPBB 1a<i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
 														</a>
 													</div>
 												</div>

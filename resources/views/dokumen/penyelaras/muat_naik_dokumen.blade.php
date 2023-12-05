@@ -60,7 +60,7 @@
 			</li>
 			<!--end::Item-->
 			<!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">Borang SPPB</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Borang SPBB</li>
 			<!--end::Item-->
 		</ul>
 	<!--end::Breadcrumb-->
@@ -80,7 +80,7 @@
 					<div class="card">
 						<!--begin::Card body 1-->
 						<div class="card-body pt-10 p-15">
-							<form action="{{ route('penyelaras.kemaskini.SPPB') }}" method="post" enctype="multipart/form-data">
+							<form action="{{ route('penyelaras.kemaskini.SPBB') }}" method="post" enctype="multipart/form-data">
 								@csrf
 								<div class="d-flex flex-column align-items-start flex-xl-row">
 									<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4"
@@ -127,7 +127,7 @@
 											</td>
 										</tr>
 
-										{{-- DOKUMEN SPPB 1 --}}
+										{{-- DOKUMEN SPBB 1 --}}
 										<tr>
 											<td>Borang SPBB 1 (Tuntutan Berstatus Layak)</td>
 											<td>
@@ -145,7 +145,7 @@
 											</td>
 										</tr>
 
-										{{-- DOKUMEN SPPB 1a --}}
+										{{-- DOKUMEN SPBB 1a --}}
 										<tr>
 											<td>Borang SPBB 1a (Permohonan Berstatus Layak)</td>
 											<td>
@@ -163,7 +163,7 @@
 											</td>
 										</tr>
 
-										{{-- DOKUMEN SPPB 2 --}}
+										{{-- DOKUMEN SPBB 2 --}}
 										<tr>
 											<td>Borang SPBB 2 (Laporan Bayaran)</td>
 											<td>
@@ -181,7 +181,7 @@
 											</td>
 										</tr>
 
-										{{-- DOKUMEN SPPB 2a --}}
+										{{-- DOKUMEN SPBB 2a --}}
 										<tr>
 											<td>Borang SPBB 2a (Laporan Tuntutan)</td>
 											<td>
@@ -199,7 +199,7 @@
 											</td>
 										</tr>
 
-										{{-- DOKUMEN SPPB 3 --}}
+										{{-- DOKUMEN SPBB 3 --}}
 										<tr>
 											<td>Borang SPBB 3 (Penyata Terimaan)</td>
 											<td>
@@ -286,7 +286,7 @@
 		$(document).ready(function () {
 			$('#institusi_id').on('change', function () {
 				var selectedInstitusiId = $(this).val();
-				var formAction = "{{ route('sekretariat.hantar.SPPB') }}";
+				var formAction = "{{ route('sekretariat.hantar.SPBB') }}";
 				formAction = formAction.replace('selectedInstitusiId', selectedInstitusiId);
 				$('#sppbForm').attr('action', formAction);
 			});

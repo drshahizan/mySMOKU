@@ -46,7 +46,7 @@
 			</li>
 			<!--end::Item-->
 			<!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">Borang SPPB</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Borang SPBB</li>
 			<!--end::Item-->
 		</ul>
 	<!--end::Breadcrumb-->
@@ -67,7 +67,7 @@
 						<!--begin::Card body 1-->
 						<div class="card-body pt-10 p-15">
 							<!--begin::Form-->
-							<form action="{{ route('sekretariat.hantar.SPPB') }}" method="post" enctype="multipart/form-data">
+							<form action="{{ route('sekretariat.hantar.SPBB') }}" method="post" enctype="multipart/form-data">
 								@csrf
 								<div class="d-flex flex-column align-items-start flex-xl-row">
 									<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4"
@@ -117,7 +117,7 @@
 											</td>
 										</tr>
 
-										{{-- DOKUMEN SPPB 1 --}}
+										{{-- DOKUMEN SPBB 1 --}}
 										<tr>
 											<td style="width: 50% !important;">Borang SPBB 1 (Permohonan Salur Pelajar Sedia Ada)</td>
 											<td>
@@ -132,7 +132,7 @@
 											</td>
 										</tr>
 
-										{{-- DOKUMEN SPPB 1a --}}
+										{{-- DOKUMEN SPBB 1a --}}
 										<tr>
 											<td style="width: 50% !important;">Borang SPBB 1a (Permohonan Salur Pelajar Baharu)</td>
 											<td>
@@ -147,7 +147,7 @@
 											</td>
 										</tr>
 
-										{{-- DOKUMEN SPPB 2 --}}
+										{{-- DOKUMEN SPBB 2 --}}
 										<tr>
 											<td style="width: 50% !important;">Borang SPBB 2 (Laporan Bayaran)</td>
 											<td>
@@ -162,7 +162,7 @@
 											</td>
 										</tr>
 
-										{{-- DOKUMEN SPPB 2a --}}
+										{{-- DOKUMEN SPBB 2a --}}
 										<tr>
 											<td style="width: 50% !important;">Borang SPBB 2a (Laporan Tuntutan)</td>
 											<td>
@@ -177,7 +177,7 @@
 											</td>
 										</tr>
 
-										{{-- DOKUMEN SPPB 3 --}}
+										{{-- DOKUMEN SPBB 3 --}}
 										<tr>
 											<td style="width: 50% !important;">Borang SPBB 3 (Penyata Terimaan)</td>
 											<td>
@@ -228,7 +228,7 @@
 									<tr>
 										<th class="text-center" style="width: 5%">No</th>
 										<th class="text-center" style="width: 70%">Institusi Pengajian</th>
-										<th class="text-center" style="width: 25%">Borang SPPB</th>
+										<th class="text-center" style="width: 25%">Borang SPBB</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -247,7 +247,7 @@
 												<td class="text-center" data-no="{{ $i++ }}">{{ $i }}</td>
 												<td>{{ $nama_institusi }}</td>
 												<td class="text-center">
-													<a href="{{ url('penyaluran/sekretariat/lihat/salinan-dokumen/sppb/'.$id) }}" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
+													<a href="{{ url('penyaluran/sekretariat/lihat/salinan-dokumen/SPBB/'.$id) }}" class="btn btn-info btn-sm" style="width: 70%; margin: 0 auto;">
 														Lihat <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
 													</a>
 												</td>
@@ -300,7 +300,7 @@
 		$(document).ready(function () {
 			$('#institusi_id').on('change', function () {
 				var selectedInstitusiId = $(this).val();
-				var formAction = "{{ route('sekretariat.hantar.SPPB') }}";
+				var formAction = "{{ route('sekretariat.hantar.SPBB') }}";
 				formAction = formAction.replace('selectedInstitusiId', selectedInstitusiId);
 				$('#sppbForm').attr('action', formAction);
 			});
