@@ -172,7 +172,7 @@
 																		<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" placeholder="" name="no_kp" value="{{$user->no_kp}}"/>
+																		<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" name="no_kp" value="{{$user->no_kp}}"/>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -336,7 +336,7 @@
 												<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												<input type="text" class="form-control form-control-solid" placeholder="" name="no_kp" />
+												<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" name="no_kp" />
 												<!--end::Input-->
 											</div>
 											<!--end::Input group-->
@@ -380,7 +380,7 @@
 												<select name="id_institusippk" id="id_institusippk" aria-label="Pilih" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold">
 													<option value="">Pilih</option>
 													@foreach ($infoppk as $infoppk)
-														<option value="{{ $infoppk->id_institusi}}">{{ $infoppk->nama_institusi}}</option>
+														<option value="{{$infoppk->id_institusi}}">{{ $infoppk->nama_institusi}}</option>
 													@endforeach
 												</select>
 												<!--end::Input-->

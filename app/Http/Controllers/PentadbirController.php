@@ -43,26 +43,27 @@ class PentadbirController extends Controller
         $user = User::where('no_kp', '=', $request->no_kp)->first();
         
         if ($user === null) {
-            $user = User::create([
+
+            $userData = [
                 'nama' => $request->nama,
                 'no_kp' => $request->no_kp,
                 'email' => $request->email,
                 'tahap' => $request->tahap,
                 'jawatan' => $request->jawatan,
-                //'id_institusi' => $request->id_institusi,
                 'password' => Hash::make($request->password),
                 'status' => '1',
-        
-            ]);
-
-            // Assuming you have two different select elements with unique names
-            if ($request->has('id_institusibkoku')) {
-                // Handle the case where the first select element is present
-                $user->id_institusi = $request->id_institusibkoku;
-            } elseif ($request->has('id_institusippk')) {
-                // Handle the case where the second select element is present
-                $user->id_institusi = $request->id_institusippk;
+            ];
+            
+            if ($request->input('id_institusibkoku')) {
+                $userData['id_institusi'] = $request->id_institusibkoku;
+            } elseif ($request->input('id_institusippk')) {
+                $userData['id_institusi'] = $request->id_institusippk;
             }
+            
+            $user = User::create($userData);
+            
+
+            
 
             $email = $request->email;
             $no_kp = $request->no_kp;
@@ -73,9 +74,9 @@ class PentadbirController extends Controller
             
             
             // Set the institution ID based on the selected option
-            if ($request->has('id_institusibkoku')) {
+            if ($request->input('id_institusibkoku')) {
                 $user->id_institusi = $request->id_institusibkoku;
-            } elseif ($request->has('id_institusippk')) {
+            } elseif ($request->input('id_institusippk')) {
                 $user->id_institusi = $request->id_institusippk;
             }
 
