@@ -11,6 +11,8 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -21,6 +23,8 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
     */
     protected $instiusi_user;
     private $counter = 0;
+    private $totalYuran = 0;
+    private $totalWangSaku = 0;
 
     public function __construct()
     {
@@ -89,6 +93,9 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
             ['NAMA PENERIMA:'],
             ['BANK:'],
             ['NO. AKAUN:'],
+            ['(Sertakan salinan penyata akaun bank untuk rujukan pembayaran)***'], //want to become red color with ittalic font
+            [''], // Add a blank row
+            ['BORANG PERMOHONAN PERUNTUKAN PROGRAM BKOKU'], //want to placed at the center of data table and span all the 19 columns of data table
 
             // Data Headers
             array_map('strtoupper', [
@@ -137,7 +144,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
     public function columnWidths(): array
     {
         return [
-            'A' => 5,
+            'A' => 3,
             'B' => 50,           
             'C' => 20,
             'D' => 15,
@@ -154,7 +161,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
             'O' => 20,
             'P' => 20,
             'Q' => 20,
-            'R' => 35,
+            'R' => 50,
             'S' => 25,
         ];
     }
@@ -172,15 +179,19 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
         // Increment the counter for "BIL" column
         $this->counter++;
 
+        // Update total values
+        $this->totalYuran += $row->yuran_disokong;
+        $this->totalWangSaku += $row->wang_saku_disokong;
+
         return [
              $this->counter,
              $row->nama,
              $row->no_kp,
-             $row->no_pendaftaran_pelajar,
+             strtoupper($row->no_pendaftaran_pelajar),
              $row->no_daftar_oku,
              Carbon::parse($row->tarikh_mula)->format('d/m/Y'),
              Carbon::parse($row->tarikh_tamat)->format('d/m/Y'),
-             $row->nama_kursus,
+             strtoupper($row->nama_kursus),
              $row->peringkat,
              $status,
              $row->biaya,
@@ -191,7 +202,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
              number_format($row->wang_saku_disokong, 2, '.', ''), 
              number_format($row->baki, 2, '.', ''), 
              $jenis_permohonan,
-             $row->catatan_disokong,
+             strtoupper($row->catatan_disokong),
         ];
     }
 
@@ -199,18 +210,93 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
-                // Customize the style of the header row
-                $event->sheet->getStyle('A1:' . $event->sheet->getHighestColumn() . '1')->applyFromArray([
+                // Get the row number where the data headers start
+                $dataHeaderRow = 9; // Change this to the appropriate row number
+
+                // Customize the style of the data header row
+                $event->sheet->getStyle('A' . $dataHeaderRow . ':' . $event->sheet->getHighestColumn() . $dataHeaderRow)->applyFromArray([
                     'font' => [
                         'bold' => true,
-                        'color' => ['rgb' => '#000000'], // Header font color 
-                        'size' => 12, // Header font size
+                        'color' => ['rgb' => '#000000'], // Data header font color 
+                        'size' => 11, // Data header font size
                     ],
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                        'startColor' => ['rgb' => 'B3B3B3'], // Header background color 
+                        'startColor' => ['rgb' => 'B3B3B3'], // Data header background color 
                     ],
                 ]);
+
+                // Customize the style for the special rows
+                $event->sheet->getStyle('A6')->applyFromArray([
+                    'font' => [
+                        'color' => ['rgb' => 'FF0000'], // Red color
+                        'italic' => true, // Italic font
+                        'size' => 9,
+                    ],
+                ]);
+
+                // Center the "BORANG PERMOHONAN PERUNTUKAN PROGRAM BKOKU" row and make it span all columns
+                $event->sheet->mergeCells('A8:' . $event->sheet->getHighestColumn() . '8');
+                $event->sheet->getStyle('A8')->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                    ],
+                    'alignment' => [
+                        'horizontal' => Alignment::HORIZONTAL_CENTER,
+                    ],
+                ]);
+                
+                // Add borders to the data table
+                $startRow = 8; // Set the starting row for borders
+                $startColumn = 'A'; // Modify this based on your actual starting column
+                $endColumn = 'S'; // Modify this based on your actual ending column
+                $endRow = $event->sheet->getHighestRow(); // Get the last row dynamically
+
+                $event->sheet->getStyle($startColumn . $startRow . ':' . $endColumn . $endRow)->applyFromArray([
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'], // Border color
+                        ],
+                    ],
+                ]);
+
+                // Specify the row indices to be bold
+                $boldRows = [1, 2, 3, 4, 5, 6];
+
+                // Bold the specified rows
+                foreach ($boldRows as $rowIndex) {
+                    $event->sheet->getStyle('A' . $rowIndex . ':' . $event->sheet->getHighestColumn() . $rowIndex)->getFont()->setBold(true);
+                }
+
+                // Find the last row of the data
+                $lastRow = $event->sheet->getHighestRow();
+
+                // Add a row at the end to display the total values
+                $event->sheet->append([
+                    // Custom row for total
+                    ['JUMLAH', '', '', '', '', '', '', '', '', '', '', '', '','', $this->totalYuran, $this->totalWangSaku],
+                ]);
+
+                // Corrected code
+                $event->sheet->getStyle('A' . ($lastRow + 1) . ':S' . ($lastRow + 1))->applyFromArray([
+                    'fill' => [
+                        'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                        'startColor' => ['rgb' => 'D3D3D3'], // Choose your desired color
+                    ],
+                    'font' => [
+                        'bold' => true,
+                        'size' => 11, // Data header font size
+                    ],
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'], // Border color
+                        ],
+                    ],
+                ]);
+
+
             },
         ];
     }
