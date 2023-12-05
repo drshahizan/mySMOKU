@@ -187,11 +187,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('kemaskini/sekretariat/surat/tawaran/send/{suratTawaranId}', [SekretariatController::class, 'sendSuratTawaran'])->name('send');
     Route::get('kemaskini/sekretariat/surat/tawaran/update/{suratTawaranId}', [SekretariatController::class, 'updatedSuratTawaran'])->name('update');
 
-    //Penyaluran - Sekretariat - Dokumen SPPB
-    Route::get('penyaluran/sekretariat/muat-naik/dokumen/sppb', [SekretariatController::class, 'muatNaikDokumenSPPB'])->name('sekretariat.muat-naik.SPPB');
-    Route::post('penyaluran/sekretariat/hantar/dokumen/sppb', [SekretariatController::class, 'hantarDokumenSPPB'])->name('sekretariat.hantar.SPPB');
-    Route::get('penyaluran/sekretariat/muat-turun/dokumen/sppb', [SekretariatController::class, 'muatTurunDokumenSPPB'])->name('sekretariat.muat-turun.SPPB');
-    Route::get('penyaluran/sekretariat/lihat/salinan-dokumen/sppb/{id}', [SekretariatController::class, 'salinanDokumenSPPB'])->name('dokumen.SPPB.id');
+    //Penyaluran - Sekretariat - Dokumen SPBB
+    Route::get('penyaluran/sekretariat/muat-naik/dokumen/SPBB', [SekretariatController::class, 'muatNaikDokumenSPPB'])->name('sekretariat.muat-naik.SPBB');
+    Route::post('penyaluran/sekretariat/hantar/dokumen/SPBB', [SekretariatController::class, 'hantarDokumenSPPB'])->name('sekretariat.hantar.SPBB');
+    Route::get('penyaluran/sekretariat/muat-turun/dokumen/SPBB', [SekretariatController::class, 'muatTurunDokumenSPPB'])->name('sekretariat.muat-turun.SPBB');
+    Route::get('penyaluran/sekretariat/lihat/salinan-dokumen/SPBB/{id}', [SekretariatController::class, 'salinanDokumenSPPB'])->name('dokumen.SPBB.id');
 
     //Permohonan - Sekretariat - Kelulusan
     Route::post('permohonan/sekretariat/hantar/semua', [SekretariatController::class, 'hantarSemuaKeputusanPermohonan'])->name('bulk.approval');
@@ -200,7 +200,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('permohonan/sekretariat/hantar/keputusan/{permohonan_id}', [SekretariatController::class, 'hantarKeputusanPermohonan']);
     Route::get('senarai-permohonan-disokong-pdf/{programCode}', [SekretariatController::class, 'cetakSenaraiPemohonPDF'])->name('senarai.disokong.pdf');
     Route::get('senarai-permohonan-disokong-excel/{programCode}', [SekretariatController::class, 'cetakSenaraiPemohonExcel'])->name('senarai.disokong.excel');
-    Route::get('borang-sppb-excel/{programCode}', [SekretariatController::class, 'cetakBorangSppbExcel'])->name('borang.sppb.excel');
+    Route::get('borang-SPBB-excel/{programCode}', [SekretariatController::class, 'cetakBorangSppbExcel'])->name('borang.SPBB.excel');
 
 
     //Permohonan - Sekretariat - Keputusan
@@ -251,10 +251,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan/sekretariat/sejarah/kemaskini-saringan/{id}', [SekretariatController::class, 'kemaskiniSaringan'])->name('kemaskini.saringan.tuntutan.id');
     Route::post('tuntutan/sekretariat/sejarah/hantar-saringan/{id}', [SekretariatController::class, 'hantarSaringan'])->name('hantar.saringan.tuntutan.id');
 
-    //Penyaluran - Penyelaras - Dokumen SPPB
-    Route::get('penyelaras/penyaluran/muat-turun/borang/spbb', [PenyelarasController::class, 'muatTurunBorangSPPB'])->name('penyelaras.muat-turun.SPPB');
-    Route::get('penyelaras/penyaluran/muat-naik/borang/spbb', [PenyelarasController::class, 'muatNaikBorangSPPB'])->name('penyelaras.muat-naik.SPPB');
-    Route::post('penyelaras/penyaluran/hantar/borang/spbb', [PenyelarasController::class, 'hantarBorangSPPB'])->name('penyelaras.kemaskini.SPPB');
+    //Penyaluran - Penyelaras - Dokumen SPBB
+    Route::get('penyelaras/penyaluran/muat-turun/borang/spbb', [PenyelarasController::class, 'muatTurunBorangSPPB'])->name('penyelaras.muat-turun.SPBB');
+    Route::get('penyelaras/penyaluran/muat-naik/borang/spbb', [PenyelarasController::class, 'muatNaikBorangSPPB'])->name('penyelaras.muat-naik.SPBB');
+    Route::post('penyelaras/penyaluran/hantar/borang/spbb', [PenyelarasController::class, 'hantarBorangSPPB'])->name('penyelaras.kemaskini.SPBB');
     Route::get('penyelaras/penyaluran/muat-turun/sppb1', [PenyelarasController::class, 'muatTurunDokumenSPPB1'])->name('penyelaras.dokumen.SPPB1');
     Route::get('penyelaras/penyaluran/muat-turun/sppb1a', [PenyelarasController::class, 'muatTurunDokumenSPPB1a'])->name('penyelaras.dokumen.SPPB1a');
 
