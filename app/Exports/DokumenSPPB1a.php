@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\Models\Permohonan;
 use App\Models\Akademik;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
@@ -14,7 +15,6 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
 {
@@ -93,9 +93,9 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
             ['NAMA PENERIMA:'],
             ['BANK:'],
             ['NO. AKAUN:'],
-            ['(Sertakan salinan penyata akaun bank untuk rujukan pembayaran)***'], //want to become red color with ittalic font
+            ['(Sertakan salinan penyata akaun bank untuk rujukan pembayaran)***'], 
             [''], // Add a blank row
-            ['BORANG PERMOHONAN PERUNTUKAN PROGRAM BKOKU'], //want to placed at the center of data table and span all the 19 columns of data table
+            ['BORANG PERMOHONAN PERUNTUKAN PROGRAM BKOKU'], 
 
             // Data Headers
             array_map('strtoupper', [
@@ -272,10 +272,14 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 // Find the last row of the data
                 $lastRow = $event->sheet->getHighestRow();
 
+                // Format the total values with two decimal places
+                $totalYuranFormatted = number_format($this->totalYuran, 2, '.', '');
+                $totalWangSakuFormatted = number_format($this->totalWangSaku, 2, '.', '');
+
                 // Add a row at the end to display the total values
                 $event->sheet->append([
                     // Custom row for total
-                    ['JUMLAH', '', '', '', '', '', '', '', '', '', '', '', '','', $this->totalYuran, $this->totalWangSaku],
+                    ['JUMLAH', '', '', '', '', '', '', '', '', '', '', '', '','', $totalYuranFormatted, $totalWangSakuFormatted],
                 ]);
 
                 // Corrected code set background for jumlah
