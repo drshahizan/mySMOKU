@@ -104,30 +104,30 @@ var KTModalCustomersAdd = function () {
 
                     // Check axios library docs: https://axios-http.com/docs/intro
                     axios.post(submitButton.closest('form').getAttribute('action'), new FormData(form)).then(function (response) {
-                        if (response) {
+                        if (response.data.message) {
                             form.reset();
-
+                
                             const redirectUrl = form.getAttribute('data-kt-redirect');
-
-                            if (redirectUrl) {
-                                Swal.fire({
-                                    text: "Emel notifikasi telah dihantar kepada pengguna",
-                                    icon: "success",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok",
-                                    customClass: {
-                                        confirmButton: "btn btn-primary",
-                                    },
-                                    didClose: () => {
-                                        // Redirect the user after the Swal modal is closed
+                
+                            Swal.fire({
+                                text: response.data.message,
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    confirmButton: "btn btn-primary",
+                                },
+                                didClose: () => {
+                                    // Redirect the user after the Swal modal is closed
+                                    if (redirectUrl) {
                                         window.location.href = redirectUrl;
                                     }
-                                });
-                            }
+                                }
+                            });
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
-                                text: "Sorry, looks like there are some errors detected, please try again.",
+                                text: "Sorry, looks like there are some errors detected sini, please try again.",
                                 icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok, got it!",

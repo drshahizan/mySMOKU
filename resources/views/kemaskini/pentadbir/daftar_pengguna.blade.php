@@ -387,7 +387,7 @@
 											</div>
 											<!--end::Input group-->
 											<!--begin::Input group-->
-											<div class="fv-row mb-7">
+											<div class="fv-row mb-7" id="div_jawatan">
 												<!--begin::Label-->
 												<label class="fs-6 fw-semibold mb-2">Jawatan</label>
 												<!--end::Label-->
@@ -502,6 +502,10 @@
 				} else if (this.value == '6') {
 					$("#div_id_institusi").hide();
 					$("#div_id_institusippk").show();
+				} else if (this.value == '1') {
+					$("#div_jawatan").hide();
+					$("#div_id_institusi").hide();
+					$("#div_id_institusippk").hide();
 				} else {
 					$("#div_id_institusi").hide();
 					$("#div_id_institusippk").hide();
