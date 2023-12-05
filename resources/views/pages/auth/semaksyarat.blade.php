@@ -201,7 +201,7 @@
             {{--<button type="submit"  class="btn btn-primary">
                 Semak
             </button>--}}
-            <button type="submit" id="kt_semak_submit" class="btn btn-primary">
+            <button type="submit" id="kt_semak_submit" class="btn" style="background-color: #3d0066; color: #ffffff;">
                 @include('partials/general/_button-indicator', ['label' => 'Seterusnya'])
             </button>
         </div>

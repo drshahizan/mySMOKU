@@ -81,7 +81,7 @@
 
         <!--begin::Submit button-->
         <div class="d-grid mb-10">
-            <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
+            <button type="submit" id="kt_sign_in_submit" class="btn" style="background-color: #3d0066; color: #ffffff;">
                 @include('partials/general/_button-indicator', ['label' => 'Log Masuk'])
             </button>
         </div>

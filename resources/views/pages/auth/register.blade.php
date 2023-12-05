@@ -46,7 +46,7 @@
 
         <!--begin::Submit button-->
         <div class="d-grid mb-10">
-            <button type="submit"  class="btn btn-primary">
+            <button type="submit"  class="btn" style="background-color: #3d0066; color: #ffffff;">
                 Semak
             </button>
         </div>
