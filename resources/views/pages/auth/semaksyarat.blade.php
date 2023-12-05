@@ -72,7 +72,7 @@
             <select id="id_institusi" name="id_institusi" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" required>
                 <option value="">Pilih</option>
                 @foreach ($ipt as $ipt)	
-                <option value="{{ $ipt->id_institusi}}">{{ $ipt->nama_institusi}}</option> 
+                <option value="{{ $ipt->id_institusi}}">{{ strtoupper($ipt->nama_institusi)}}</option> 
                 @endforeach
             </select>
         </div>
@@ -175,8 +175,9 @@
                             var id_ins = response['data'][i].id_institusi;
                             var kod_peringkat = response['data'][i].kod_peringkat;
                             var nama_kursus = response['data'][i].nama_kursus;
+                            var uppercaseValue  = response['data'][i].nama_kursus.toUpperCase();
 
-                            var option = "<option value='"+nama_kursus+"'>"+nama_kursus+"</option>";
+                            var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+"</option>";
 
                             $("#nama_kursus").append(option); 
                             
