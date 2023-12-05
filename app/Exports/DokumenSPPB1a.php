@@ -278,7 +278,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                     ['JUMLAH', '', '', '', '', '', '', '', '', '', '', '', '','', $this->totalYuran, $this->totalWangSaku],
                 ]);
 
-                // Corrected code
+                // Corrected code set background for jumlah
                 $event->sheet->getStyle('A' . ($lastRow + 1) . ':S' . ($lastRow + 1))->applyFromArray([
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
@@ -296,7 +296,44 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                     ],
                 ]);
 
+                $event->sheet->getStyle('A' . ($lastRow + 3))->getFont()->setSize(9);
+                $event->sheet->setCellValue('A' . ($lastRow + 3), 'Disahkan data pelajar di atas adalah merupakan maklumat pelajar dalam senarai penawaran Program BKOKU yang diluluskan oleh Bahagian Biasiswa, Kementerian Pendidikan Tinggi.');
 
+                $event->sheet->getStyle('A' . ($lastRow + 5))->getFont()->setSize(9);
+                $event->sheet->setCellValue('A' . ($lastRow + 5), 'Catatan:');
+
+                $event->sheet->getStyle('A' . ($lastRow + 6))->getFont()->setSize(9);
+                $event->sheet->setCellValue('A' . ($lastRow + 6), 'i) Yuran mengikut semester');
+
+                $event->sheet->getStyle('A' . ($lastRow + 7))->getFont()->setSize(9);
+                $event->sheet->setCellValue('A' . ($lastRow + 7), 'ii) Elaun Wang Saku RM300/ bulan');
+
+                $event->sheet->getStyle('B' . ($lastRow + 9))->getFont()->setSize(9);
+                $event->sheet->setCellValue('B' . ($lastRow + 9), 'Disediakan oleh:');
+
+                $event->sheet->getStyle('B' . ($lastRow + 10))->getFont()->setSize(9);
+                $event->sheet->setCellValue('B' . ($lastRow + 10), 'Cop & tandatangan');
+
+                $event->sheet->getStyle('B' . ($lastRow + 12))->getFont()->setSize(9);
+                $event->sheet->setCellValue('B' . ($lastRow + 12), 'Tarikh:');
+
+                $event->sheet->getStyle('K' . ($lastRow + 9))->getFont()->setSize(9);
+                $event->sheet->setCellValue('K' . ($lastRow + 9), 'Disemak oleh:');
+
+                $event->sheet->getStyle('K' . ($lastRow + 10))->getFont()->setSize(9);
+                $event->sheet->setCellValue('K' . ($lastRow + 10), 'Cop & tandatangan');
+
+                $event->sheet->getStyle('K' . ($lastRow + 12))->getFont()->setSize(9);
+                $event->sheet->setCellValue('K' . ($lastRow + 12), 'Tarikh:');
+
+                $event->sheet->getStyle('O' . ($lastRow + 9))->getFont()->setSize(9);
+                $event->sheet->setCellValue('O' . ($lastRow + 9), 'Disemak oleh:');
+
+                $event->sheet->getStyle('O' . ($lastRow + 10))->getFont()->setSize(9);
+                $event->sheet->setCellValue('O' . ($lastRow + 10), 'Cop & tandatangan');
+
+                $event->sheet->getStyle('O' . ($lastRow + 12))->getFont()->setSize(9);
+                $event->sheet->setCellValue('O' . ($lastRow + 12), 'Tarikh:');
             },
         ];
     }
