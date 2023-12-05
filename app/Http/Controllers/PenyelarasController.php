@@ -1279,7 +1279,7 @@ class PenyelarasController extends Controller
         }
 
         // Store the uploaded file names in the session for display in your view
-        return redirect()->route('penyelaras.muat-naik.SPPB')->with('success', 'Semua fail SPBB telah berjaya dikemaskini.');
+        return redirect()->route('penyelaras.muat-naik.SPBB')->with('success', 'Semua fail SPBB telah berjaya dikemaskini.');
     }
 
     public function dokumenSPPB($id)

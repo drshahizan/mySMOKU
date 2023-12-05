@@ -18,7 +18,6 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
     /**
     * @return \Illuminate\Support\Collection
     */
-    protected $dateFormat = 'd/m/Y';
     protected $instiusi_user;
     private $counter = 0;
 
@@ -70,6 +69,8 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
 
             return $item;
         });
+
+        dd($senarai);
         
         return $senarai;
     }
