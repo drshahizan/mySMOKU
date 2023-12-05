@@ -68,16 +68,9 @@ class PentadbirController extends Controller
             $no_kp = $request->no_kp;
             Mail::to($email)->send(new MailDaftarPengguna($email,$no_kp));
             //return redirect()->route('daftarpengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' .$request->nama);    
-        
+            return response()->json(['message' => 'Emel notifikasi telah dihantar kepada ' . $request->nama]);
         } else {
-            // If the user exists, update their information
-            $user->update([
-                'nama' => $request->nama,
-                'email' => $request->email,
-                'tahap' => $request->tahap,
-                'jawatan' => $request->jawatan,
-                'status' => $request->status,
-            ]);
+            
             
             // Set the institution ID based on the selected option
             if ($request->has('id_institusibkoku')) {
@@ -89,15 +82,49 @@ class PentadbirController extends Controller
 
             if($request->has('status')){
 
-                // $email = $request->email;
-                // $no_kp = $request->no_kp;
-                // Mail::to($email)->send(new MailDaftarPengguna($email,$no_kp));
-                if($request->status == 1 ){
-                    return redirect()->route('daftarpengguna')->with('message', 'Status pengguna ' .$request->nama. ' telah diaktifkan. ');
+                // Check if the status is different from the current user status
+                if ($request->status != $user->status) {
+                    // dd('Status is different');
+                    // If the user exists, update their information with status change
+                    $user->update([
+                        'nama' => $request->nama,
+                        'email' => $request->email,
+                        'tahap' => $request->tahap,
+                        'jawatan' => $request->jawatan,
+                        'status' => $request->status,
+                    ]);
+                    if ($request->status == 1) {
+                        return redirect()->route('daftarpengguna')->with('message', 'Status pengguna ' . $request->nama . ' telah diaktifkan.');
+                    } elseif ($request->status == 0) {
+                        return redirect()->route('daftarpengguna')->with('tidak', 'Status pengguna ' . $request->nama . ' telah ditukar tidak aktif.');
+                    }
                 } else {
-                    return redirect()->route('daftarpengguna')->with('tidak', 'Status pengguna ' .$request->nama. ' telah ditukar tidak aktif. ');
+                    // dd('Status is the same');
+                    // If the user exists, update other information not status
+                    $user->update([
+                        'nama' => $request->nama,
+                        'email' => $request->email,
+                        'tahap' => $request->tahap,
+                        'jawatan' => $request->jawatan,
+                    ]);
+                    // Handle the case where the status is the same (no change)
+                    return redirect()->route('daftarpengguna');
                 }
                 
+            } else {
+                if ($user->status == 1) {
+                    $user->update([
+                        'nama' => $request->nama,
+                        'email' => $request->email,
+                        'tahap' => $request->tahap,
+                        'jawatan' => $request->jawatan,
+                    ]);
+                    
+                    return response()->json(['message' => 'Data pengguna ' . $request->nama . ' telah ada dan telah dikemaskini.']);
+                } elseif ($request->status == 0) {
+                    return response()->json(['message' => 'Data pengguna ' . $request->nama . ' telah ada tetapi berstatus tidak aktif.']);
+                }
+
             }
         }
 
