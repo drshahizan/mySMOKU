@@ -34,27 +34,27 @@
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="dokumen1-tab" data-toggle="tab" data-target="#dokumen1" type="button" role="tab" aria-controls="dokumen1" aria-selected="true">
-                    SPPB 1
+                    SPBB 1
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="dokumen1a-tab" data-toggle="tab" data-target="#dokumen1a" type="button" role="tab" aria-controls="dokumen1a" aria-selected="true">
-                    SPPB 1a
+                    SPBB 1a
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="dokumen2-tab" data-toggle="tab" data-target="#dokumen2" type="button" role="tab" aria-controls="dokumen2" aria-selected="true">
-                    SPPB 2
+                    SPBB 2
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="dokumen2a-tab" data-toggle="tab" data-target="#dokumen2a" type="button" role="tab" aria-controls="dokumen2a" aria-selected="true">
-                    SPPB 2a
+                    SPBB 2a
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="dokumen3-tab" data-toggle="tab" data-target="#dokumen3" type="button" role="tab" aria-controls="dokumen3" aria-selected="true">
-                    SPPB 3
+                    SPBB 3
                 </button>
             </li>  
         </ul>

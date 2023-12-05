@@ -36,6 +36,8 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
             ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
             ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
             ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+            ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
+            ->join('bk_mod as h','h.kod_mod','=','c.mod')
             ->where('permohonan.status', 6)
             ->where('d.jenis', 'Yuran')
             ->where('f.id_institusi', $this->instiusi_user)
@@ -48,10 +50,10 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 'c.tarikh_mula',
                 'c.tarikh_tamat',
                 'c.nama_kursus',
-                'c.peringkat_pengajian',
+                'g.peringkat',
                 'c.status',
                 'e.biaya',
-                'c.mod',
+                'h.mod',
                 'c.bil_bulan_per_sem',
                 DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
                 'permohonan.yuran_disokong',
@@ -74,15 +76,12 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
 
             return $item;
         });
-
-        // dd($senarai);
         
         return $senarai;
     }
 
     public function headings(): array
     {
-        // Define column headings
         return [
             // Custom Rows
             ['INSTITUSI:'],
@@ -116,14 +115,11 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
         ];
     }
 
-    // Helper method to calculate "jenis_permohonan"
     private function calculateJenisPermohonan($item)
     {
          // Fetch sesi from SMOKUAkademik table
         $sesi = Akademik::where('smoku_id', $item['id'])->value('sesi');
-        // dd($sesi);
  
-        // dd($item['yuran']);
         if ($item['yuran'] == 1 && $item['wang_saku'] == 1) {
             $result = 'YURAN PENGAJIAN DAN ELAUN WANG SAKU';
         } elseif ($item['yuran'] == 1) {
@@ -143,22 +139,22 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
         return [
             'A' => 5,
             'B' => 50,           
-            'C' => 15,
+            'C' => 20,
             'D' => 15,
-            'E' => 15,
-            'F' => 15,
-            'G' => 15,
-            'H' => 15,
-            'I' => 15,
-            'J' => 15,
-            'K' => 15,
-            'L' => 15,
-            'M' => 15,
-            'N' => 15,
-            'O' => 15,
-            'P' => 15,
-            'Q' => 15,
-            'R' => 25,
+            'E' => 20,
+            'F' => 20,
+            'G' => 20,
+            'H' => 50,
+            'I' => 20,
+            'J' => 20,
+            'K' => 35,
+            'L' => 20,
+            'M' => 20,
+            'N' => 20,
+            'O' => 20,
+            'P' => 20,
+            'Q' => 20,
+            'R' => 35,
             'S' => 25,
         ];
     }
@@ -167,6 +163,11 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
     {
         // Calculate "jenis_permohonan" based on the fetched sesi
         $jenis_permohonan = $this->calculateJenisPermohonan($row);
+
+        if($row->status == 1)
+            $status = 'AKTIF';
+        else
+            $status = 'TIDAK AKTIF';
 
         // Increment the counter for "BIL" column
         $this->counter++;
@@ -181,14 +182,14 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
              Carbon::parse($row->tarikh_tamat)->format('d/m/Y'),
              $row->nama_kursus,
              $row->peringkat_pengajian,
-             $row->status,
+             $status,
              $row->biaya,
              $row->mod,
              $row->bil_bulan_per_sem,
-             number_format($row->jumlah, 2, '.', ''), // Format 'Yuran Disokong' as numeric with two decimal places
-             number_format($row->yuran_disokong, 2, '.', ''), // Format 'Yuran Disokong' as numeric with two decimal places
-             number_format($row->wang_saku_disokong, 2, '.', ''), // Format 'Wang Saku Disokong' as numeric with two decimal places
-             number_format($row->baki, 2, '.', ''), // Format 'Yuran Disokong' as numeric with two decimal places
+             number_format($row->jumlah, 2, '.', ''), 
+             number_format($row->yuran_disokong, 2, '.', ''), 
+             number_format($row->wang_saku_disokong, 2, '.', ''), 
+             number_format($row->baki, 2, '.', ''), 
              $jenis_permohonan,
              $row->catatan_disokong,
         ];
