@@ -96,7 +96,7 @@
 								<thead>
 									<tr>
 										<th style="width: 45%">Item</th>
-										<th style="width: 55%">Muat Naik</th>
+										<th style="width: 55%">Muat Turun</th>
 									</tr>
 								</thead>
 

@@ -127,24 +127,6 @@
 											</td>
 										</tr>
 
-										{{-- DOKUMEN SPBB 1 --}}
-										<tr>
-											<td>Borang SPBB 1 (Tuntutan Berstatus Layak)</td>
-											<td>
-												<div id="file-input-container">
-													<!-- File input fields for SPPB1 -->
-													<div class="d-flex">
-														<div class="file-input">
-															<input type="file" name="dokumen1[]"/>
-															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen1))
-																<a href="{{ asset('assets/dokumen/sppb_1/' . $dokumen->first()->dokumen1) }}" target="_blank">{{ $dokumen->first()->dokumen1 }}</a>
-															@endif
-														</div>
-													</div>
-												</div>                                                                                     
-											</td>
-										</tr>
-
 										{{-- DOKUMEN SPBB 1a --}}
 										<tr>
 											<td>Borang SPBB 1a (Permohonan Berstatus Layak)</td>
@@ -156,6 +138,24 @@
 															<input type="file" name="dokumen1a[]"/>
 															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen1a))
 																<a href="{{ asset('assets/dokumen/sppb_1a/' . $dokumen->first()->dokumen1a) }}" target="_blank">{{ $dokumen->first()->dokumen1a }}</a>
+															@endif
+														</div>
+													</div>
+												</div>                                                                                     
+											</td>
+										</tr>
+
+										{{-- DOKUMEN SPBB 1 --}}
+										<tr>
+											<td>Borang SPBB 1 (Tuntutan Berstatus Layak)</td>
+											<td>
+												<div id="file-input-container">
+													<!-- File input fields for SPPB1 -->
+													<div class="d-flex">
+														<div class="file-input">
+															<input type="file" name="dokumen1[]"/>
+															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen1))
+																<a href="{{ asset('assets/dokumen/sppb_1/' . $dokumen->first()->dokumen1) }}" target="_blank">{{ $dokumen->first()->dokumen1 }}</a>
 															@endif
 														</div>
 													</div>
