@@ -42,6 +42,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
             ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
             ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
             ->join('bk_mod as h','h.kod_mod','=','c.mod')
+            ->join('tuntutan_saringan as a', 'a.tuntutan_id','=','tuntutan.id')
             ->where('tuntutan.status', 6)
             ->where('d.jenis', 'Yuran')
             ->where('f.id_institusi', $this->instiusi_user)
@@ -63,7 +64,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                 'tuntutan.yuran_disokong',
                 'tuntutan.wang_saku_disokong',
                 'tuntutan.baki',
-                'tuntutan.catatan_dibayar',    
+                'a.catatan',    
                 'tuntutan.yuran',    
                 'tuntutan.wang_saku',    
             )
@@ -71,7 +72,6 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
 
         // Add the calculated "jenis_permohonan" column to the collection
         $senarai = $senarai->map(function ($item, $key) {
-            $sesi = Akademik::where('smoku_id', $item['id'])->value('sesi');
             $jenis_permohonan = $this->calculateJenisPermohonan($item);
             $item['jenis_permohonan'] = $jenis_permohonan;
 
@@ -94,7 +94,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
             ['BANK:'],
             ['NO. AKAUN:'],
             ['(Sertakan salinan penyata akaun bank untuk rujukan pembayaran)***'], 
-            [''], // Add a blank row
+            [''], 
             ['BORANG tuntutan PERUNTUKAN PROGRAM BKOKU'], 
 
             // Data Headers
@@ -124,7 +124,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
 
     private function calculateJenisPermohonan($item)
     {
-         // Fetch sesi from SMOKUAkademik table
+        // Fetch sesi from Akademik table
         $sesi = Akademik::where('smoku_id', $item['id'])->value('sesi');
  
         if ($item['yuran'] == 1 && $item['wang_saku'] == 1) {
@@ -202,7 +202,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
              number_format($row->wang_saku_disokong, 2, '.', ''), 
              number_format($row->baki, 2, '.', ''), 
              $jenis_permohonan,
-             strtoupper($row->catatan_dibayar),
+             strtoupper($row->catatan),
         ];
     }
 
