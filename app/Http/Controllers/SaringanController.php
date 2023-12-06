@@ -33,7 +33,7 @@ class SaringanController extends Controller
         ->orWhere('status', '=','3')
         ->orWhere('status', '=','4')
         ->orWhere('status', '=','5')
-        ->orderBy('created_at', 'DESC')
+        ->orderBy('tarikh_hantar', 'DESC')
         ->get();
         $status_kod=0;
         $status = null;
