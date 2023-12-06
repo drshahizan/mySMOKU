@@ -14,6 +14,11 @@
         $jantina_p = DB::table('bk_jantina')->where('kod_jantina', $smoku->jantina)->value('jantina');
         $keturunan_p = DB::table('bk_keturunan')->where('kod_keturunan', $smoku->keturunan)->value('keturunan');
         $hubungan_w = DB::table('bk_hubungan')->where('kod_hubungan', $waris->hubungan_waris)->value('hubungan');
+        $alamat_tetap = DB::table('bk_negeri')->join('bk_bandar','bk_bandar.negeri_id','=','bk_negeri.id')->where('bk_negeri.id', $pelajar->alamat_tetap_negeri)->where('bk_bandar.id', $pelajar->alamat_tetap_bandar)->get(['bk_negeri.*','bk_bandar.*'])->first();
+        $alamat_surat = DB::table('bk_negeri')->join('bk_bandar','bk_bandar.negeri_id','=','bk_negeri.id')->where('bk_negeri.id', $pelajar->alamat_surat_negeri)->where('bk_bandar.id', $pelajar->alamat_surat_bandar)->get(['bk_negeri.*','bk_bandar.*'])->first();
+        $alamat_waris = DB::table('bk_negeri')->join('bk_bandar','bk_bandar.negeri_id','=','bk_negeri.id')->where('bk_negeri.id', $waris->alamat_negeri_waris)->where('bk_bandar.id', $waris->alamat_bandar_waris)->get(['bk_negeri.*','bk_bandar.*'])->first();
+        $negeri_lahir = DB::table('bk_negeri')->where('bk_negeri.id', $pelajar->negeri_lahir)->get(['bk_negeri.*'])->first();
+        $agama = DB::table('bk_agama')->where('id', $pelajar->agama)->value('agama');
     @endphp
     <table class="profile-form">
         <tr>
@@ -44,6 +49,11 @@
                 <td>{{date('d/m/Y', strtotime($smoku->tarikh_lahir))}}</td>
             </tr>
             <tr class="gap-left">
+                <td style="width: 16%">Negeri Lahir</td>
+                <td style="width: 2%">:</td>
+                <td>{{$negeri_lahir->negeri}}</td>
+            </tr>
+            <tr class="gap-left">
                 <td style="width: 16%">Umur</td>
                 <td style="width: 2%">:</td>
                 <td>{{$smoku->umur}}</td>
@@ -69,25 +79,63 @@
                 <td>{{$keturunan_p}}</td>
             </tr>
             <tr class="gap-left">
+                <td style="width: 16%">Agama</td>
+                <td style="width: 2%">:</td>
+                <td>{{$agama}}</td>
+            </tr>
+            <tr class="gap-left">
                 <td style="width: 16%">Alamat Tetap</td>
                 <td style="width: 2%">:</td>
-                <td>{{$smoku->alamat_tetap}}</td>
+                <td>{{$pelajar->alamat_tetap}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Poskod</td>
+                <td style="width: 2%">:</td>
+                <td>{{$pelajar->alamat_tetap_poskod}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Bandar</td>
+                <td style="width: 2%">:</td>
+                <td>{{$alamat_tetap->bandar}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Negeri</td>
+                <td style="width: 2%">:</td>
+                <td>{{$alamat_tetap->negeri}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Alamat Surat-menyurat</td>
                 <td style="width: 2%">:</td>
-                <td>{{$smoku->alamat_surat_menyurat}}</td>
+                <td>{{$pelajar->alamat_surat_menyurat}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Poskod</td>
+                <td style="width: 2%">:</td>
+                <td>{{$pelajar->alamat_surat_poskod}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Bandar</td>
+                <td style="width: 2%">:</td>
+                <td>{{$alamat_surat->bandar}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Negeri</td>
+                <td style="width: 2%">:</td>
+                <td>{{$alamat_surat->negeri}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">No. Tel (HP)</td>
                 <td style="width: 2%">:</td>
                 <td>{{$smoku->tel_bimbit}}</td>
             </tr>
-            <tr class="gap-left">
-                <td style="width: 16%">No. Tel Rumah</td>
-                <td style="width: 2%">:</td>
-                <td>{{$smoku->tel_rumah}}</td>
-            </tr>
+            @if ($smoku->tel_rumah != null) {
+                <tr class="gap-left">
+                    <td style="width: 16%">No. Tel Rumah</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$smoku->tel_rumah}}</td>
+                </tr>
+            }
+            @endif
             <tr class="gap-left">
                 <td style="width: 16%">Alamat Emel</td>
                 <td style="width: 2%">:</td>
@@ -113,20 +161,23 @@
             <td style="width: 2%">:</td>
             <td>{{$waris->no_kp_waris}}</td>
         </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">No Pasport</td>
-            <td style="width: 2%">:</td>
-            <td>{{$waris->no_pasport_waris}}</td>
-        </tr>
+        @if ($waris->no_pasport_waris != null) {
+            <tr class="gap-left">
+                <td style="width: 16%">No Pasport</td>
+                <td style="width: 2%">:</td>
+                <td>{{$waris->no_pasport_waris}}</td>
+            </tr>
+        }
+        @endif
         <tr class="gap-left">
             <td style="width: 16%">Hubungan Waris</td>
             <td style="width: 2%">:</td>
             <td>{{$hubungan_w}}</td>
         </tr>
         <tr class="gap-left">
-            <td style="width: 16%">Alamat Rumah</td>
+            <td style="width: 16%">Alamat Tetap</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->alamat_waris}}1</td>
+            <td>{{$waris->alamat_waris}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Poskod</td>
@@ -136,12 +187,12 @@
         <tr class="gap-left">
             <td style="width: 16%">Bandar</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->alamat_bandar_waris}}</td>
+            <td>{{$alamat_waris->bandar}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Negeri</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->alamat_negeri_waris}}</td>
+            <td>{{$alamat_waris->negeri}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">No. Tel (HP)</td>

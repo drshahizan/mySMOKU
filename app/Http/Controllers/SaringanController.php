@@ -11,6 +11,7 @@ use App\Models\EmelKemaskini;
 use App\Models\InfoIpt;
 use App\Models\JumlahTuntutan;
 use App\Models\Kelulusan;
+use App\Models\Negeri;
 use App\Models\Peperiksaan;
 use App\Models\Permohonan;
 use App\Models\Saringan;
@@ -96,7 +97,7 @@ class SaringanController extends Controller
 
     public function maklumatProfilDiri($id)
     {
-        $smoku_id = Permohonan::where('id', $id)->value('smoku_id');
+        $smoku_id = Permohonan::orderby("id","desc")->where('id', $id)->value('smoku_id');
         $waris = Waris::where('smoku_id', $smoku_id)->first();
         $pelajar = ButiranPelajar::where('smoku_id', $smoku_id)->first();
         $smoku = Smoku::where('id', $smoku_id)->first();
@@ -105,7 +106,7 @@ class SaringanController extends Controller
 
     public function maklumatAkademik($id)
     {
-        $permohonan = Permohonan::where('id', $id)->first();
+        $permohonan = Permohonan::orderby("id","desc")->where('id', $id)->first();
         $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
         $peringkat = $rujukan[1];
         $akademik = Akademik::where('smoku_id', $permohonan->smoku_id)->where('peringkat_pengajian', $peringkat)->first();
