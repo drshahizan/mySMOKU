@@ -42,7 +42,7 @@
 				<div class="row clearfix">
 					<div class="card p-10">
 						<div class="header">
-							<h2>Borang Salur Peruntukan Program BKOKU<br><small>Sila klik ikon lihat untuk lihat kesemua dokumen yang dimuat naik.</small></h2>
+							<h2>Borang Salur Peruntukan Bantuan BKOKU<br><small>Sila klik pada ikon "Lihat" untuk semak dokumen yang dimuat naik oleh penyelaras universiti awam.</small></h2>
 						</div>
 
 						<div class="body">
