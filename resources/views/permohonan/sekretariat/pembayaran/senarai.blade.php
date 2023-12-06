@@ -273,6 +273,7 @@
                                                     <th style="width: 8%" class="text-center"><b>No Cek</b></th>
                                                     <th style="width: 8%" class="text-center"><b>Tarikh Dibayar</b></th>
                                                     <th style="width: 5%" class="text-center"><b>Status</b></th>
+                                                    <th style="width: 8%" class="text-center"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -329,13 +330,18 @@
                                                                 </td>
                                                                 <td class="text-center" style="width: 21%">{{$item['no_cek']}}</td>
                                                                 <td class="text-center" style="width: 8%">
-                                                                    {{ $item['tarikh_baucer'] ? date('d/m/Y', strtotime($item['tarikh_transaksi'])) : '' }}
+                                                                    {{ $item['tarikh_transaksi'] ? date('d/m/Y', strtotime($item['tarikh_transaksi'])) : '' }}
                                                                 </td>                                                                
                                                                 @if ($item['status']=='6')
                                                                     <td class="text-center" style="width: 5%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif ($item['status']=='8')
                                                                     <td class="text-center" style="width: 5%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
                                                                 @endif
+                                                                <td class="text-center" data-id="{{ $item['id'] }}" data-action="return">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kembali Kepada Penyelaras" style="cursor: pointer;">
+                                                                        <i class="fa fa-undo fa-sm custom-white-icon" style="color: #000000;"></i>
+                                                                    </span>
+                                                                </td>
                                                             </tr>
                                                         @endif
                                                     @endif
@@ -521,6 +527,34 @@
                 checkboxes[i].checked = source.checked;
             }
         }
+
+
+        $(document).ready(function() {
+            $('td[data-action="return"]').click(function() {
+                var itemId = $(this).data('id');
+
+                if (confirm('Adakah anda pasti ingin kembalikan permohonan ini?')) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/permohonan/sekretariat/kembali/' + itemId,
+                        data: { item_id: itemId },
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        dataType: 'json',
+                        success: function(response) {
+                            alert(response.message);
+                            location.reload(); // Refresh the page
+                        },
+                        error: function(error) {
+                            console.error(error);
+                            alert('Something went wrong. Please try again.');
+                        }
+                    });
+                }
+            });
+        });
+
+
+
 
     </script>
     <script>
