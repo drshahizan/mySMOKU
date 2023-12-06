@@ -101,13 +101,16 @@
 
                                                         $permohonan_latest = DB::table('permohonan')->orderBy('id', 'DESC')->first();
 
+                                                        $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
+								                        $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
+
                                                     @endphp
                                                     <tr>
                                                         <td>
                                                             <a href="{{ route('ppk.rekod.permohonan', $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                         </td>
                                                         <td>{{$pemohon}}</td>
-                                                        <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        <td class="text-center">{{$formattedDate}}</td>
                                                         @if ($item['status']=='1')
                                                             <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='2')
