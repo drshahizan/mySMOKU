@@ -166,7 +166,7 @@
                                                             <!-- Table rows -->
                                                             <tr>
                                                                 {{-- <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>  --}}
-                                                                <td style="width: 15%"><a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#baucerPermohonan" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>                                          
+                                                                <td style="width: 15%"><a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#baucerPermohonan{{$item['id']}}" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>                                          
                                                                 <td style="width: 40%">{{$pemohon}}</td>
                                                                 <td class="text-center" style="width: 10%">
                                                                     @if ($item->yuran_disokong !== null)
@@ -182,7 +182,7 @@
                                                             </tr>
 
                                                             {{-- Modal Baucer --}}
-                                                            <div class="modal fade" id="baucerPermohonan" tabindex="-1" aria-labelledby="baucerPermohonan" aria-hidden="true">
+                                                            <div class="modal fade" id="baucerPermohonan{{$item['id']}}" tabindex="-1" aria-labelledby="baucerPermohonan" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
