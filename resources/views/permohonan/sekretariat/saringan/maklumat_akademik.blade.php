@@ -38,7 +38,7 @@
             <tr class="gap-left">
                 <td style="width: 16%">Nama Kursus</td>
                 <td style="width: 2%">:</td>
-                <td>{{$akademik->nama_kursus}}</td>
+                <td>{{strtoupper($akademik->nama_kursus)}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Peringkat Pengajian</td>
@@ -48,7 +48,7 @@
             <tr class="gap-left">
                 <td style="width: 16%">Nama Pusat Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>{{$nama_institusi}}</td>
+                <td>{{strtoupper($nama_institusi)}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Tarikh Mula Pengajian</td>
@@ -85,11 +85,15 @@
                 <td style="width: 2%">:</td>
                 <td>{{$sumber_biaya}}</td>
             </tr>
-            <tr class="gap-left">
-                <td class="gap-bottom" style="width: 16%">Nama Penaja</td>
-                <td class="gap-bottom" style="width: 2%">:</td>
-                <td class="gap-bottom">{{$nama_penaja}}</td>
-            </tr>
+            @if ($nama_penaja != null) {
+                <tr class="gap-left">
+                    <td class="gap-bottom" style="width: 16%">Nama Penaja</td>
+                    <td class="gap-bottom" style="width: 2%">:</td>
+                    <td class="gap-bottom">{{$nama_penaja}}</td>
+                </tr>
+            }
+            @endif
+            
         </div>
         </tr>
             <td class="header-part" colspan="3">B. PERAKUAN</td>
