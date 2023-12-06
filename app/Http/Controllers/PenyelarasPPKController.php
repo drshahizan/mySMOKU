@@ -379,7 +379,7 @@ class PenyelarasPPKController extends Controller
         $butiranPelajar->alamat_surat_poskod = $request->alamat_surat_poskod;
         $butiranPelajar->tel_bimbit = $request->tel_bimbit;
         $butiranPelajar->tel_rumah = $request->tel_rumah;
-        //$butiranPelajar->no_akaun_bank = $request->no_akaun_bank;
+        $butiranPelajar->no_akaun_bank = $request->no_akaun_bank;
         $butiranPelajar->emel = $request->emel;
         $butiranPelajar->status_pekerjaan = $request->status_pekerjaan;
         $butiranPelajar->pekerjaan = $request->pekerjaan;
