@@ -54,12 +54,8 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="card">
-                            {{-- <div class="header">
-                                <h2>Senarai Permohonan BKOKU</h2>
-                            </div> --}}
-
                             {{-- Filter section --}}
-                            <form action="{{url('sekretariat/tuntutan/BKOKU/dibayar')}}" method="GET">
+                            <form action="{{ route('keseluruhanB.tuntutan', ['status' => '!=9']) }}" method="GET">
                                 <div class="row" style="margin-left:15px; margin-top:30px;">
                                     <div class="col-md-2">
                                         <label for="start_date"><b>Dari:</b></label>
@@ -73,7 +69,7 @@
 
                                     <div class="col-md-4 right">
                                         <br>
-                                        <button type="submit" class="btn btn-primary" style="width: 10%; padding-left:10px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
+                                        <button type="submit" class="btn btn-primary" style="width: 12%; padding-left:11px;"><i class="fa fa-filter" style="font-size: 15px;"></i></button>
                                     </div>
                                 </div>
                             </form>

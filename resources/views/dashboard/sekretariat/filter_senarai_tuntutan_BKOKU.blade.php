@@ -39,7 +39,7 @@
 			<!--end::Item-->
             
             <!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">BKOKU Universiti Awam</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">BKOKU</li>
 			<!--end::Item-->
 		</ul>
         <!--end::Breadcrumb-->
@@ -55,7 +55,7 @@
                     <div class="row clearfix">
                         <div class="card">
                             {{-- Filter section --}}
-                            <form action="{{ route('keseluruhanUA.tuntutan', ['status' => '!=9']) }}" method="GET">
+                            <form action="{{ url('sekretariat/tuntutan/BKOKU/status/' . $status) }}" method="GET">
                                 <div class="row" style="margin-left:15px; margin-top:30px;">
                                     <div class="col-md-2">
                                         <label for="start_date"><b>Dari:</b></label>
@@ -96,7 +96,7 @@
                                                     
                                                     // program
                                                     $program = DB::table('permohonan')->where('permohonan.id', $item['permohonan_id'])->value('permohonan.program');
-
+                                                            
                                                     // nama pemohon
                                                     $nama = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                     $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
@@ -112,7 +112,7 @@
                                                     }
                                                     $pemohon = implode(' ', $result);
 
-                                                    //status tuntutan
+                                                    //status permohonan
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
 
                                                     //tarikh
@@ -121,7 +121,7 @@
                                                 @endphp
 
                                                 @if ($program == "BKOKU")
-                                                    @if ($jenis_institusi == "UA")
+                                                    @if ($jenis_institusi == "IPTS" || $jenis_institusi == "KK" || $jenis_institusi == "P")
                                                         <tr>
                                                             <td>{{$item->no_rujukan_tuntutan}}</td>
                                                             <td>{{$pemohon}}</td>

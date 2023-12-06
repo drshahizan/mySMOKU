@@ -79,7 +79,7 @@ class SekretariatController extends Controller
         $endDate = $request->input('end_date');
 
         $tuntutan = Tuntutan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-                        return $q->whereBetween('tuntutan.created_at', [$startDate, $endDate]);
+                        return $q->whereBetween('tuntutan.tarikh_hantar', [$startDate, $endDate]);
                     })
                     ->when($status === '!=9', function ($q) {
                         return $q->where('tuntutan.status', '!=', 9);
@@ -117,14 +117,14 @@ class SekretariatController extends Controller
         $endDate = $request->input('end_date');
 
         $tuntutan = Tuntutan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-                        return $q->whereBetween('tuntutan.created_at', [$startDate, $endDate]);
+                        return $q->whereBetween('tuntutan.tarikh_hantar', [$startDate, $endDate]);
                     })
                     ->when($request->status != null, function ($q) use ($request) {
                         return $q->where('tuntutan.status', $request->status);
                     })
                     ->get();
 
-        return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
+        return view('dashboard.sekretariat.filter_senarai_tuntutan_BKOKU', compact('tuntutan','status'));
     }
 
     //BKOKU UA
@@ -153,7 +153,7 @@ class SekretariatController extends Controller
         $endDate = $request->input('end_date');
 
         $tuntutan = Tuntutan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-                        return $q->whereBetween('tuntutan.created_at', [$startDate, $endDate]);
+                        return $q->whereBetween('tuntutan.tarikh_hantar', [$startDate, $endDate]);
                     })
                     ->when($status === '!=9', function ($q) {
                         return $q->where('tuntutan.status', '!=', 9);
@@ -188,14 +188,14 @@ class SekretariatController extends Controller
         $endDate = $request->input('end_date');
 
         $tuntutan = Tuntutan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-                        return $q->whereBetween('tuntutan.created_at', [$startDate, $endDate]);
+                        return $q->whereBetween('tuntutan.tarikh_hantar', [$startDate, $endDate]);
                     })
                     ->when($request->status != null, function ($q) use ($request) {
                         return $q->where('tuntutan.status', $request->status);
                     })
                     ->get();
 
-        return view('dashboard.sekretariat.senarai_tuntutan_BKOKU_UA', compact('tuntutan'));
+        return view('dashboard.sekretariat.filter_senarai_tuntutan_BKOKU_UA', compact('tuntutan','status'));
     }
 
     //PPK
@@ -224,7 +224,7 @@ class SekretariatController extends Controller
         $endDate = $request->input('end_date');
 
         $tuntutan = Tuntutan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-                        return $q->whereBetween('tuntutan.created_at', [$startDate, $endDate]);
+                        return $q->whereBetween('tuntutan.tarikh_hantar', [$startDate, $endDate]);
                     })
                     ->when($status === '!=9', function ($q) {
                         return $q->where('tuntutan.status', '!=', 9);
@@ -259,14 +259,14 @@ class SekretariatController extends Controller
         $endDate = $request->input('end_date');
 
         $tuntutan = Tuntutan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('tuntutan.created_at', [$startDate, $endDate]);
+            return $q->whereBetween('tuntutan.tarikh_hantar', [$startDate, $endDate]);
         })
         ->when($request->status != null, function ($q) use ($request) {
             return $q->where('status', $request->status);
         })
         ->get();
 
-        return view('dashboard.sekretariat.senarai_tuntutan_PPK', compact('tuntutan'));
+        return view('dashboard.sekretariat.filter_senarai_tuntutan_PPK', compact('tuntutan','status'));
     }
 
     //KEMASKINI PERINGKAT PENGAJIAN
