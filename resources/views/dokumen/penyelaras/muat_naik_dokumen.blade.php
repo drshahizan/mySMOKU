@@ -123,7 +123,7 @@
 										<tr>
 											<td>Nama Institusi Pengajian</td>
 											<td>
-												<input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{$nama_uni}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>												
+												<input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{$nama_uni}}" readonly>												
 											</td>
 										</tr>
 

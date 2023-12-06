@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="/assets/css/sekretariat.css">
+        <link rel="stylesheet" href="/assets/css/saringan.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
@@ -77,7 +77,7 @@
                             <div class="body">      
                                 <table id="sortTable" class="table table-bordered table-striped">
                                     <thead>
-                                        <tr style="color: white; background-color:rgb(35, 58, 108);">
+                                        <tr style="color: white;">
                                             <th style="width: 15%"><b>ID Permohonan</b></th>                                        
                                             <th style="width: 45%"><b>Nama</b></th>
                                             <th style="width: 13%" class="text-center"><b>Tarikh Permohonan</b></th> 
@@ -109,17 +109,21 @@
 
                                                 //status permohonan
                                                 $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+
+                                                //tarikh
+                                                $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
+								                $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
                                             @endphp
 
                                             @if ($jenis_institusi == "IPTS" || $jenis_institusi == "KK" || $jenis_institusi == "P")
                                                 <tr>
                                                     <td>{{$item->no_rujukan_permohonan}}</td>
                                                     <td>{{$pemohon}}</td>
-                                                    <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                    <td class="text-center">{{$formattedDate}}</td>
                                                     @if($item['status'] == "1")
                                                         <td class="text-center"><button type="button" class="btn btn-info text-white">{{ucwords(strtolower($status))}}</button></td>
                                                     @elseif($item['status'] == "2")
-                                                        <td class="text-center"><button type="button" class="btn btn-primary text-white">Baharu</button></td>
+                                                        <td class="text-center"><button type="button" class="btn bg-baharu text-white">Baharu</button></td>
                                                     @elseif($item['status'] == "3")
                                                         <td class="text-center"><button type="button" class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
                                                     @elseif($item['status'] == "4")

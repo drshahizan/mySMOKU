@@ -118,6 +118,10 @@
 
                                                     //status permohonan
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+
+                                                    //tarikh
+                                                    $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
+                                                    $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
                                                 @endphp
 
                                                 @if ($program == "BKOKU")
@@ -125,11 +129,11 @@
                                                         <tr>
                                                             <td>{{$item->no_rujukan_tuntutan}}</td>
                                                             <td>{{$pemohon}}</td>
-                                                            <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                            <td class="text-center">{{$formattedDate}}</td>
                                                             @if($item['status'] == "1")
                                                                 <td class="text-center"><button type="button" class="btn btn-info text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif($item['status'] == "2")
-                                                                <td class="text-center"><button type="button" class="btn btn-primary text-white">Baharu</button></td>
+                                                                <td class="text-center"><button type="button" class="btn bg-baharu text-white">Baharu</button></td>
                                                             @elseif($item['status'] == "3")
                                                                 <td class="text-center"><button type="button" class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif($item['status'] == "4")

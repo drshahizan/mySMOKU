@@ -55,10 +55,6 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="card">
-                            {{-- <div class="header">
-                                <h2>Senarai Permohonan PPK</h2>
-                            </div> --}}
-
                             {{-- Filter section --}}
                             <form action="{{url('sekretariat/permohonan/PPK/keseluruhan')}}" method="GET">
                                 <div class="row" style="margin-left:15px; margin-top:30px;">
@@ -83,7 +79,7 @@
                                 <div class="body">      
                                     <table id="sortTable" class="table table-bordered table-striped">
                                         <thead>
-                                            <tr style="color: white; background-color:rgb(35, 58, 108);">
+                                            <tr style="color: white;">
                                                 <th style="width: 15%"><b>ID Permohonan</b></th>                                        
                                                 <th style="width: 45%"><b>Nama</b></th>
                                                 <th style="width: 13%" class="text-center"><b>Tarikh Permohonan</b></th> 
@@ -111,17 +107,21 @@
 
                                                     //status permohonan
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+
+                                                    //tarikh
+                                                    $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
+                                                    $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
                                                 @endphp
 
                                                 @if($item['program']=="PPK")
                                                     <tr>
                                                         <td>{{$item->no_rujukan_permohonan}}</td>
                                                         <td>{{$pemohon}}</td>
-                                                        <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        <td class="text-center">{{$formattedDate}}</td>
                                                         @if($item['status'] == "1")
                                                             <td class="text-center"><button type="button" class="btn btn-info text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif($item['status'] == "2")
-                                                            <td class="text-center"><button type="button" class="btn btn-primary text-white">Baharu</button></td>
+                                                            <td class="text-center"><button type="button" class="btn bg-baharu text-white">Baharu</button></td>
                                                         @elseif($item['status'] == "3")
                                                             <td class="text-center"><button type="button" class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif($item['status'] == "4")
