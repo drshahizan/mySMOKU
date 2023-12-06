@@ -657,6 +657,29 @@
 								</div>
 							</div>
 							<!--end::Input group-->
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="separator my-14"></div>
+							<div class="pb-10 pb-lg-15">
+								<!--begin::Title-->
+								<h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
+								<!--end::Title-->
+								<!--begin::Notice-->
+								<div class="text-muted fw-semibold fs-6">Bank Islam</div>
+								<!--end::Notice-->
+							</div>
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="16113020138680"><i class="fa-solid fa-circle-info"></i></a>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaun_bank" name="no_akaun_bank" placeholder="" value="{{ $butiranPelajar->no_akaun_bank }}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
 							
 						</div>
 						<!--end::Input group-->

@@ -667,13 +667,12 @@
 							<!--begin::Input group-->
 							<div class="separator my-14"></div>
 							<div class="pb-10 pb-lg-15">
-							<!--begin::Title-->
-							<h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
-							<!--end::Title-->
-							<!--begin::Notice-->
-							<div class="text-muted fw-semibold fs-6">Bank Islam 
-							</div>
-							<!--end::Notice-->
+								<!--begin::Title-->
+								<h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
+								<!--end::Title-->
+								<!--begin::Notice-->
+								<div class="text-muted fw-semibold fs-6">Bank Islam</div>
+								<!--end::Notice-->
 							</div>
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
