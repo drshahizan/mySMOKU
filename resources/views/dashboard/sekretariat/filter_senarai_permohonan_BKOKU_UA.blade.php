@@ -23,14 +23,13 @@
 			<!--begin::Item-->
 			<li class="breadcrumb-item text-dark" style="color:darkblue">Laman Utama</li>
 			<!--end::Item-->
-            <!--begin::Item-->
+			<!--begin::Item-->
 			<li class="breadcrumb-item">
 				<span class="bullet bg-gray-400 w-5px h-2px"></span>
 			</li>
 			<!--end::Item-->
 
-			
-            <!--begin::Item-->
+			<!--begin::Item-->
 			<li class="breadcrumb-item text-dark" style="color:darkblue">Senarai Permohonan</li>
 			<!--end::Item-->
             <!--begin::Item-->
@@ -40,7 +39,7 @@
 			<!--end::Item-->
             
             <!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">PPK</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">BKOKU Universiti Awam</li>
 			<!--end::Item-->
 		</ul>
         <!--end::Breadcrumb-->
@@ -56,7 +55,7 @@
                     <div class="row clearfix">
                         <div class="card">
                             {{-- Filter section --}}
-                            <form action="{{ route('keseluruhanP.permohonan', ['status' => '!=9']) }}" method="GET">
+                            <form action="{{ url('sekretariat/permohonan/BKOKU/UA/status/' . $status) }}" method="GET">
                                 <div class="row" style="margin-left:15px; margin-top:30px;">
                                     <div class="col-md-2">
                                         <label for="start_date"><b>Dari:</b></label>
@@ -75,7 +74,7 @@
                                 </div>
                             </form>
 
-                            <div class="table-responsive">
+                            {{-- <div class="table-responsive"> --}}
                                 <div class="body">      
                                     <table id="sortTable" class="table table-bordered table-striped">
                                         <thead>
@@ -90,9 +89,12 @@
                                         <tbody>
                                             @foreach ($permohonan as $item)
                                                 @php
+                                                    $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )
+                                                                           ->where('smoku_id', $item['smoku_id'])
+                                                                           ->value('bk_info_institusi.jenis_institusi');
                                                     // nama pemohon
                                                     $nama = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                    $text = ucwords(strtolower($nama)); // Assuming you're sending the text as a POST parameter
+                                                    $text = ucwords(strtolower($nama));
                                                     $conjunctions = ['bin', 'binti'];
                                                     $words = explode(' ', $text);
                                                     $result = [];
@@ -107,13 +109,13 @@
 
                                                     //status permohonan
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-
+                                                    
                                                     //tarikh
                                                     $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
                                                     $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
                                                 @endphp
 
-                                                @if($item['program']=="PPK")
+                                                @if ($jenis_institusi == "UA")
                                                     <tr>
                                                         <td>{{$item->no_rujukan_permohonan}}</td>
                                                         <td>{{$pemohon}}</td>
@@ -141,7 +143,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            {{-- </div> --}}
                         </div>
                     </div>
                 </div>

@@ -58,7 +58,7 @@ class SekretariatController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $permohonan = Permohonan::orderBy('id', 'DESC')
+        $permohonan = Permohonan::orderBy('tarikh_hantar', 'DESC')
         ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
         })
@@ -98,35 +98,18 @@ class SekretariatController extends Controller
         $endDate = $request->input('end_date');
 
         $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            // Convert dates to Carbon instances for proper comparison
             $startDate = \Carbon\Carbon::parse($startDate)->startOfDay();
             $endDate = \Carbon\Carbon::parse($endDate)->endOfDay();
 
-            return $q->whereBetween('created_at', [$startDate, $endDate]);
+            return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
         })
         ->when($status !== null, function ($q) use ($status) {
             return $q->where('status', $status);
         })
         ->where('program', 'BKOKU')->get();
 
-        return view('dashboard.sekretariat.senarai_permohonan_BKOKU', compact('permohonan'));
+        return view('dashboard.sekretariat.filter_senarai_permohonan_BKOKU', compact('permohonan', 'status'));
     }
-
-    // public function filterStatusPermohonanBKOKU(Request $request, $status)
-    // {
-    //     $startDate = $request->input('start_date');
-    //     $endDate = $request->input('end_date');
-
-    //     $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-    //         return $q->whereBetween('created_at', [$startDate, $endDate]);
-    //     })
-    //     ->when($request->status != null, function ($q) use ($request) {
-    //         return $q->where('status', $request->status);
-    //     })
-    //     ->where('program','BKOKU')->get();
-
-    //     return view('dashboard.sekretariat.filter_senarai_permohonan_BKOKU', compact('permohonan'));
-    // }
 
     public function filterStatusTuntutanBKOKU(Request $request, $status)
     {
@@ -151,7 +134,7 @@ class SekretariatController extends Controller
         $endDate = $request->input('end_date');
 
         $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('created_at', [$startDate, $endDate]);
+            return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
         })
         ->when($status == '!=9', function ($q) {
             return $q->where('status', '!=', 9);
@@ -189,14 +172,14 @@ class SekretariatController extends Controller
         $endDate = $request->input('end_date');
 
         $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('created_at', [$startDate, $endDate]);
+            return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
         })
         ->when($request->status != null, function ($q) use ($request) {
             return $q->where('status', $request->status);
         })
         ->where('program','BKOKU')->get();
 
-        return view('dashboard.sekretariat.senarai_permohonan_BKOKU_UA', compact('permohonan'));
+        return view('dashboard.sekretariat.filter_senarai_permohonan_BKOKU_UA', compact('permohonan','status'));
     }
 
     public function filterStatusTuntutanUA(Request $request, $status)
@@ -222,7 +205,7 @@ class SekretariatController extends Controller
         $endDate = $request->input('end_date');
 
         $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('created_at', [$startDate, $endDate]);
+            return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
         })
         ->when($status == '!=9', function ($q) {
             return $q->where('status', '!=', 9);
@@ -260,14 +243,14 @@ class SekretariatController extends Controller
         $endDate = $request->input('end_date');
 
         $permohonan = Permohonan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('created_at', [$startDate, $endDate]);
+            return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
         })
         ->when($request->status != null, function ($q) use ($request) {
             return $q->where('status', $request->status);
         })
         ->get();
 
-        return view('dashboard.sekretariat.senarai_permohonan_PPK', compact('permohonan'));
+        return view('dashboard.sekretariat.filter_senarai_permohonan_PPK', compact('permohonan','status'));
     }
 
     public function filterStatusTuntutanPPK(Request $request, $status)
