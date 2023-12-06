@@ -109,23 +109,7 @@
 									<tr>
 										<td>Nama Institusi Pengajian</td>
 										<td>
-											<input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{$nama_uni}}" oninvalid="this.setCustomValidity('Sila isi ruang ini')" oninput="setCustomValidity('')" required>												
-										</td>
-									</tr>
-
-									{{-- DOKUMEN SPBB 1 --}}
-									<tr>
-										<td>Borang SPBB 1 (Tuntutan Berstatus Layak)</td>
-										<td>
-											<div id="file-input-container">
-												<div class="d-flex">
-													<div class="file-input">
-														<a href="{{ route('penyelaras.dokumen.SPPB1') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
-															Muat Turun SPBB 1<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
-														</a>
-													</div>
-												</div>
-											</div>                                                                                     
+											<input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{$nama_uni}}" readonly>												
 										</td>
 									</tr>
 
@@ -138,6 +122,22 @@
 													<div class="file-input">
 														<a href="{{ route('penyelaras.dokumen.SPPB1a') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
 															Muat Turun SPBB 1a<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
+														</a>
+													</div>
+												</div>
+											</div>                                                                                     
+										</td>
+									</tr>
+
+									{{-- DOKUMEN SPBB 1 --}}
+									<tr>
+										<td>Borang SPBB 1 (Tuntutan Berstatus Layak)</td>
+										<td>
+											<div id="file-input-container">
+												<div class="d-flex">
+													<div class="file-input">
+														<a href="{{ route('penyelaras.dokumen.SPPB1') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
+															Muat Turun SPBB 1<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
 														</a>
 													</div>
 												</div>
