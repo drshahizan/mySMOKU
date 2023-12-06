@@ -340,7 +340,7 @@
                                                         @if ($institusi_id == $instiusi_user)
                                                             <!-- Table rows -->
                                                             <tr>
-                                                                <td style="width: 15%"><a href="#" class="open-modal-link-tuntutan" data-bs-toggle="modal" data-bs-target="#baucerTuntutan" data-no-rujukan="{{$item['no_rujukan_tuntutan']}}">{{$item['no_rujukan_tuntutan']}}</a></td>                                          
+                                                                <td style="width: 15%"><a href="#" class="open-modal-link-tuntutan" data-bs-toggle="modal" data-bs-target="#baucerTuntutan" data-no-rujukan="{{$item['id']}}">{{$item['no_rujukan_tuntutan']}}</a></td>                                          
                                                                 <td style="width: 45%">{{$pemohon}}</td>
                                                                 <td class="text-center" style="width: 10%">
                                                                     @if ($item->yuran_disokong !== null)
@@ -356,7 +356,7 @@
                                                             </tr>
 
                                                             {{-- Modal Baucer --}}
-                                                            <div class="modal fade" id="baucerTuntutan" tabindex="-1" aria-labelledby="baucerTuntutan" aria-hidden="true">
+                                                            <div class="modal fade" id="baucerTuntutan{{$item['id']}}" tabindex="-1" aria-labelledby="baucerTuntutan" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
