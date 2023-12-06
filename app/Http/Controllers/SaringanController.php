@@ -378,12 +378,12 @@ class SaringanController extends Controller
     }
 
     public function sejarahPermohonan(){
-        $permohonan = Permohonan::orderBy('id', 'DESC')->get();
+        $permohonan = Permohonan::orderBy('tarikh_hantar', 'DESC')->get();
         return view('permohonan.sekretariat.sejarah.sejarah_permohonan',compact('permohonan'));
     }
 
     public function rekodPermohonan($id){
-        $permohonan = Permohonan::where('id', $id)->first();
+        $permohonan = Permohonan::orderBy('id', 'DESC')->where('id', $id)->first();
         $smoku_id = $permohonan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
         $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
