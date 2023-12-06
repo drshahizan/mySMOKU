@@ -159,7 +159,15 @@
                                                                         <i class="fa fa-cancel fa-sm custom-white-icon"></i>
                                                                     </span>
                                                                 </a>
-                                                            </td> 
+                                                            </td>
+                                                        @elseif ($item['status']=='5')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('penyelaras.permohonan.baharu', $item['smoku_id']) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini permohonan ini?')">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Permohonan">
+                                                                        <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td>         
                                                         @elseif ($permohonan_latest->status=='9')
                                                             <td class="text-center">
                                                                 <a href="{{ route('penyelaras.permohonan.baharu', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin hantar permohonan ini?')">
