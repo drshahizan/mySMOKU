@@ -630,4 +630,35 @@ class SaringanController extends Controller
         $status = "Pembayaran ".$no_rujukan_permohonan." telah dikemaskini.";
         return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status'));
     }
+
+
+
+    public function returnToPenyelaras(Request $request)
+    {
+        $itemId = $request->input('item_id'); // Assuming you send 'item_id' in your AJAX request
+
+        if ($itemId !== null) {
+            $permohonan = Permohonan::orderBy('id', 'desc')->where('id', '=', $itemId)->first();
+
+            if ($permohonan != null) {
+                Permohonan::where('id', $itemId)->update([
+                    'status' => 6,
+                ]);
+
+                $mohon = SejarahPermohonan::create([
+                    'permohonan_id' => $permohonan->id,
+                    'smoku_id' => $permohonan->smoku_id,
+                    'status' => 6,
+                ]);
+
+                $mohon->save();
+            }
+
+            return response()->json(['message' => 'Permohonan telah dikembalikan.']);
+        }
+
+        return response()->json(['message' => 'Invalid item ID.'], 400);
+    }
+
+
 }
