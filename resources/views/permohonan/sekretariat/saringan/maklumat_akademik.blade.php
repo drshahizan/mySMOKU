@@ -20,7 +20,7 @@
     <table class="profile-form">
         <tr>
             <td class="text-center" colspan="3">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/JATA_NEGARA_MALAYSIA.png/776px-JATA_NEGARA_MALAYSIA.png?18218224030856" alt="jata-negara-malaysia">
+                <img src="/assets/media/svg/jata_negara.svg" alt="jata-negara-malaysia">
                 <br><b class="title"> MAKLUMAT AKADEMIK</b>
                 <p><b class="description"> BANTUAN KEWANGAN ORANG KURANG UPAYA <br> (BKOKU)</b> </p>
                 <br><br>
