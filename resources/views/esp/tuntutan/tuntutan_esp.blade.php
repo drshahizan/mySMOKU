@@ -567,7 +567,14 @@ $(document).ready(function() {
         // Convert the API response to a string for display in the alert
         const responseDataString = JSON.stringify(data, null, 2);
 
-        alert(`Data berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`); // Show success message and API response in alert
+        if (data.status === 'error'){
+          alert(`Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.`);
+          // alert(`Data tidak berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`);
+          
+        }else{
+          alert(`Data berjaya di hantar ke ESP. Semak ESP`); // Show success message and API response in alert
+          // alert(`Data berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`); // Show success message and API response in alert
+        }
 
         location.reload(); // Refresh the page
     })
