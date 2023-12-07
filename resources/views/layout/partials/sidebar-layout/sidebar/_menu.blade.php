@@ -343,13 +343,13 @@
 				</div>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="https://biasiswa.mohe.gov.my/bk_oku/" target="_blank">
+				<a class="menu-link" href="{{ route('laporan.permohonan') }}" >
 					<span class="menu-icon">{!! getIcon('chart-simple', 'fs-2') !!}</span>
 					<span class="menu-title">Permohonan</span>
 				</a>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="https://biasiswa.mohe.gov.my/bk_oku/" target="_blank">
+				<a class="menu-link" href="{{ route('laporan.tuntutan') }}">
 					<span class="menu-icon">{!! getIcon('chart-line', 'fs-2') !!}</span>
 					<span class="menu-title">Tuntutan</span>
 				</a>
@@ -377,13 +377,13 @@
 				</div>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="https://biasiswa.mohe.gov.my/bk_oku/" target="_blank">
+				<a class="menu-link" href="{{ route('laporan.permohonan') }}">
 					<span class="menu-icon">{!! getIcon('chart-simple', 'fs-2') !!}</span>
 					<span class="menu-title">Permohonan</span>
 				</a>
 			</div>
 			<div class="menu-item">
-				<a class="menu-link" href="https://biasiswa.mohe.gov.my/bk_oku/" target="_blank">
+				<a class="menu-link" href="{{ route('laporan.tuntutan') }}">
 					<span class="menu-icon">{!! getIcon('chart-line', 'fs-2') !!}</span>
 					<span class="menu-title">Tuntutan</span>
 				</a>

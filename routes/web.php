@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\MaklumatESPController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KemaskiniController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MaklumatESP;
 use App\Http\Controllers\MaklumatKursusController;
 use App\Http\Controllers\PermohonanController;
@@ -56,6 +57,11 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
+    Route::get('/laporan/permohonan', [LaporanController::class, 'permohonan'])->name('laporan.permohonan');
+    Route::get('/laporan/tuntutan', [LaporanController::class, 'tuntutan'])->name('laporan.tuntutan');
+    
+    
+    
     Route::get('/permohonanESP', [MaklumatESPController::class, 'permohonan'])->name('permohonan.esp');
     Route::post('/permohonanESP', [MaklumatESPController::class, 'hantar'])->name('maklumat.esp');
     Route::get('/tuntutanESP', [MaklumatESPController::class, 'tuntutan'])->name('tuntutan.esp');
