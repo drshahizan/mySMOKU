@@ -11,11 +11,11 @@
 </head>
 <body>
     @php
-        $peringkat_pengajian = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
-        $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
-        $mod = DB::table('bk_mod')->where('kod_mod', $akademik->mod)->value('mod');
-        $sumber_biaya = DB::table('bk_sumber_biaya')->where('kod_biaya', $akademik->sumber_biaya)->value('biaya');
-        $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja)->value('penaja');
+        $peringkat_pengajian = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian ?? '')->value('peringkat');
+        $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi ?? '')->value('nama_institusi');
+        $mod = DB::table('bk_mod')->where('kod_mod', $akademik->mod ?? '')->value('mod');
+        $sumber_biaya = DB::table('bk_sumber_biaya')->where('kod_biaya', $akademik->sumber_biaya ?? '')->value('biaya');
+        $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja ?? '')->value('penaja');
     @endphp
     <table class="profile-form">
         <tr>
@@ -33,63 +33,64 @@
             <tr class="gap-left">
                 <td style="width: 16%" class="gap-top">No Pendaftaran Pelajar</td>
                 <td style="width: 2%" class="gap-top">:</td>
-                <td class="gap-top">{{$akademik->no_pendaftaran_pelajar}}</td>
+                <td class="gap-top">{{$akademik->no_pendaftaran_pelajar ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Nama Kursus</td>
                 <td style="width: 2%">:</td>
-                <td>{{strtoupper($akademik->nama_kursus)}}</td>
+                <td>{{strtoupper($akademik->nama_kursus ?? '')}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Peringkat Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>{{$peringkat_pengajian}}</td>
+                <td>{{$peringkat_pengajian ?? '' }}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Nama Pusat Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>{{strtoupper($nama_institusi)}}</td>
+                <td>{{strtoupper($nama_institusi) ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Tarikh Mula Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>{{date('d/m/Y', strtotime($akademik->tarikh_mula))}}</td>
+                <td>{{date('d/m/Y', strtotime($akademik->tarikh_mula ?? ''))}}</td>
+                
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Tarikh Tamat Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>{{date('d/m/Y', strtotime($akademik->tarikh_tamat))}}</td>
+                <td>{{date('d/m/Y', strtotime($akademik->tarikh_tamat ?? ''))}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Semester Semasa</td>
                 <td style="width: 2%">:</td>
-                <td>{{$akademik->sem_semasa}}</td>
+                <td>{{$akademik->sem_semasa ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Tempoh Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>{{$akademik->tempoh_pengajian}}</td>
+                <td>{{$akademik->tempoh_pengajian ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Bil Bulan Persemester</td>
                 <td style="width: 2%">:</td>
-                <td>{{$akademik->bil_bulan_per_sem}}</td>
+                <td>{{$akademik->bil_bulan_per_sem ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Mod Pengajian</td>
                 <td style="width: 2%">:</td>
-                <td>{{$mod}}</td>
+                <td>{{$mod ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Sumber Pembiayaan</td>
                 <td style="width: 2%">:</td>
-                <td>{{$sumber_biaya}}</td>
+                <td>{{$sumber_biaya ?? ''}}</td>
             </tr>
             @if ($nama_penaja != null) {
                 <tr class="gap-left">
                     <td class="gap-bottom" style="width: 16%">Nama Penaja</td>
                     <td class="gap-bottom" style="width: 2%">:</td>
-                    <td class="gap-bottom">{{$nama_penaja}}</td>
+                    <td class="gap-bottom">{{$nama_penaja ?? ''}}</td>
                 </tr>
             }
             @endif

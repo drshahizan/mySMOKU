@@ -301,12 +301,12 @@ class PenyelarasPPKController extends Controller
         // dd($butiranPelajar);
         
 
-        if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
-            $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
-            return view('permohonan.penyelaras_ppk.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen','agama','parlimen','dun','keturunan','permohonan'));
-        } else {
+        // if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
+        //     $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
+        //     return view('permohonan.penyelaras_ppk.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen','agama','parlimen','dun','keturunan','permohonan'));
+        // } else {
             return view('permohonan.penyelaras_ppk.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','kursus','biaya','penaja','negeri','bandar','agama','parlimen','dun','keturunan'));
-        }
+        // }
     }
 
     public function fetchAmaun(Request $request)
@@ -477,7 +477,7 @@ class PenyelarasPPKController extends Controller
         if (!$permohonan || $permohonan->status == 9) {
             $permohonan = Permohonan::create(
                 [   'smoku_id' => $id,
-                    'no_rujukan_permohonan' => 'P' . '/' . $request->peringkat_pengajian . '/' . $nokp_pelajar,
+                    'no_rujukan_permohonan' => 'P' . '/' . '3' . '/' . $nokp_pelajar,
                     'program' => 'PPK',
                     'wang_saku' => $request->wang_saku,
                     'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
@@ -489,7 +489,7 @@ class PenyelarasPPKController extends Controller
             $permohonan = Permohonan::updateOrCreate(
                 ['smoku_id' => $id,'status' => 1],
                 [
-                    'no_rujukan_permohonan' => 'P' . '/' . $request->peringkat_pengajian . '/' . $nokp_pelajar,
+                    'no_rujukan_permohonan' => 'P' . '/' . '3' . '/' . $nokp_pelajar,
                     'program' => 'PPK',
                     'wang_saku' => $request->wang_saku,
                     'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),

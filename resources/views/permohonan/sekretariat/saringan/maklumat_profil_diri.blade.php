@@ -154,12 +154,12 @@
         <tr class="gap-left">
             <td style="width: 16%" class="gap-top">Nama </td>
             <td style="width: 2%" class="gap-top">:</td>
-            <td class="gap-top">{{$waris->nama_waris}}</td>
+            <td class="gap-top">{{ $waris->nama_waris ?? '' }}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">No. Kad Pengenalan</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->no_kp_waris}}</td>
+            <td>{{ $waris->no_kp_waris ?? '' }}</td>
         </tr>
         @if ($waris->no_pasport_waris != null) {
             <tr class="gap-left">
@@ -172,42 +172,42 @@
         <tr class="gap-left">
             <td style="width: 16%">Hubungan Waris</td>
             <td style="width: 2%">:</td>
-            <td>{{$hubungan_w}}</td>
+            <td>{{ $hubungan_w ?? '' }}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Alamat Tetap</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->alamat_waris}}</td>
+            <td>{{ $waris->alamat_waris ?? '' }}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Poskod</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->alamat_poskod_waris}}</td>
+            <td>{{$waris->alamat_poskod_waris ?? ''}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Bandar</td>
             <td style="width: 2%">:</td>
-            <td>{{$alamat_waris->bandar}}</td>
+            <td>{{$alamat_waris->bandar ?? ''}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Negeri</td>
             <td style="width: 2%">:</td>
-            <td>{{$alamat_waris->negeri}}</td>
+            <td>{{$alamat_waris->negeri ?? ''}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">No. Tel (HP)</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->tel_bimbit_waris}}</td>
+            <td>{{$waris->tel_bimbit_waris ?? ''}}</td>
         </tr>
         <tr class="gap-left">
             <td style="width: 16%">Pekerjaan</td>
             <td style="width: 2%">:</td>
-            <td>{{$waris->pekerjaan_waris}}</td>
+            <td>{{$waris->pekerjaan_waris ?? ''}}</td>
         </tr>
         <tr class="gap-left">
             <td class="gap-bottom" style="width: 16%">Pendapatan Bulanan (RM)</td>
             <td class="gap-bottom" style="width: 2%">:</td>
-            <td class="gap-bottom">{{$waris->pendapatan_waris}}</td>
+            <td class="gap-bottom">{{$waris->pendapatan_waris ?? ''}}</td>
         </tr>
         </tr>
             <td class="header-part" colspan="3">C. PERAKUAN</td>
