@@ -152,32 +152,49 @@ class PenyelarasPPKController extends Controller
             );
 
             $smoku=Smoku::where([['no_kp', '=', $no_kp]])->first();
+            $penyelaras=DB::table('smoku_penyelaras')->where('smoku_id', '=', $smoku->id)
+            ->first();
+            $penyelaras_sama=DB::table('smoku_penyelaras')->where('smoku_id', '=', $smoku->id)
+            ->where([['penyelaras_id', '=', Auth::user()->id]])
+            ->first();
             $kodoku = $smoku->kategori;
 
             if ($smoku != null && ($kodoku ==='DE' || $kodoku ==='DD')) {
-                DB::table('smoku_penyelaras')->insert([
-                    'smoku_id' => $smoku->id,
-                    'penyelaras_id' => Auth::user()->id,
-                    'status' => '1',
-                    'created_at' => now(), // sebab tak guna model
-                    'updated_at' => now(),
-                ]);
+                if($penyelaras_sama == null){
+                    if ($penyelaras == null) {
+                        DB::table('smoku_penyelaras')->insert([
+                            'smoku_id' => $smoku->id,
+                            'penyelaras_id' => Auth::user()->id,
+                            'status' => '1',
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]);
 
-                $smoku = Smoku::where('no_kp', $no_kp)->first();
-                $id =  $smoku->id;
-                $no_kp =  $smoku->no_kp;
-                $smoku_id = $request->session()->put('id',$id);
-                $no_kp = $request->session()->put('no_kp',$no_kp);
-                
-                return redirect()->route('penyelaras.ppk.dashboard')->with($smoku_id,$no_kp)
-                ->with('success', $no_kp. ' Sah sebagai OKU berdaftar dengan JKM.');
+                        $smoku = Smoku::where('no_kp', $no_kp)->first();
+                        $id =  $smoku->id;
+                        $no_kp =  $smoku->no_kp;
+                        $smoku_id = $request->session()->put('id',$id);
+                        $no_kp = $request->session()->put('no_kp',$no_kp);
+                        
+                        return redirect()->route('penyelaras.ppk.dashboard')->with($smoku_id,$no_kp)
+                        ->with('success', $no_kp. ' Sah sebagai OKU berdaftar dengan JKM.');
+
+                    } else {
+                        return redirect()->route('penyelaras.ppk.dashboard')->with($no_kp)
+                            ->with('failed', $no_kp . ' Sudah didaftarkan di universiti lain.');
+                    }
+
+                }else {
+                    return redirect()->route('penyelaras.ppk.dashboard')->with($no_kp)
+                        ->with('failed', $no_kp . ' Sudah didaftarkan.');
+                }
                     
                
-            } else if ($kodoku !='DE' || $kodoku !='DD') {
+            } elseif ($kodoku !='DE' && $kodoku !='DD') {
 
                 return redirect()->route('penyelaras.ppk.dashboard')
                     ->with('failed', $request->no_kp. ' Bukan dalam kategori OKU pendengaran');
-            }
+            } 
 
         } else {
 

@@ -169,18 +169,30 @@ class PenyelarasController extends Controller
             );
 
             $smoku=Smoku::where([['no_kp', '=', $no_kp]])->first();
+            $penyelaras=DB::table('smoku_penyelaras')->where('smoku_id', '=', $smoku->id)
+            ->first();
+            $penyelaras_sama=DB::table('smoku_penyelaras')->where('smoku_id', '=', $smoku->id)
+            ->where([['penyelaras_id', '=', Auth::user()->id]])
+            ->first();
 
-            if ($smoku != null) {
-                DB::table('smoku_penyelaras')->insert([
-                    'smoku_id' => $smoku->id,
-                    'penyelaras_id' => Auth::user()->id,
-                    'status' => '1',
-                    'created_at' => now(), // sebab tak guna model
-                    'updated_at' => now(),
-                ]);
-                
-               
+            if ($smoku != null && $penyelaras_sama == null) {
+                if ($penyelaras == null) {
+                    DB::table('smoku_penyelaras')->insert([
+                        'smoku_id' => $smoku->id,
+                        'penyelaras_id' => Auth::user()->id,
+                        'status' => '1',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                } else {
+                    return redirect()->route('penyelaras.dashboard')->with($no_kp)
+                        ->with('failed', $no_kp . ' Sudah didaftarkan di universiti lain.');
+                }
+            } else {
+                return redirect()->route('penyelaras.dashboard')->with($no_kp)
+                    ->with('failed', $no_kp . ' Sudah didaftarkan.');
             }
+            
 
             $smoku = Smoku::where('no_kp', $no_kp)->first();
             $id =  $smoku->id;
