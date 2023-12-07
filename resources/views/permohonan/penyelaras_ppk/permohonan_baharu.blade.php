@@ -1819,9 +1819,11 @@
 									var id_institusi = response['data'][i].id_institusi;
 									var kod_peringkat = response['data'][i].kod_peringkat;
 									var nama_kursus = response['data'][i].nama_kursus;
+									var kod_nec = response['data'][i].kod_nec;
+									var bidang = response['data'][i].bidang.toUpperCase();
 									var uppercaseValue  = response['data'][i].nama_kursus.toUpperCase();
-		
-									var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+"</option>";
+
+									var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+" - "+kod_nec+" ( "+bidang+" )</option>";
 		
 									$("#nama_kursus").append(option); 
 									
