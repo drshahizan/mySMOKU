@@ -96,12 +96,12 @@
             <tr class="gap-left">
                 <td style="width: 16%">Bandar</td>
                 <td style="width: 2%">:</td>
-                <td>{{$alamat_tetap->bandar}}</td>
+                <td>{{ $alamat_tetap->bandar ?? '' }}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Negeri</td>
                 <td style="width: 2%">:</td>
-                <td>{{$alamat_tetap->negeri}}</td>
+                <td>{{ $alamat_tetap->negeri ?? '' }}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Alamat Surat-menyurat</td>
@@ -116,12 +116,12 @@
             <tr class="gap-left">
                 <td style="width: 16%">Bandar</td>
                 <td style="width: 2%">:</td>
-                <td>{{$alamat_surat->bandar}}</td>
+                <td>{{ $alamat_surat->bandar ?? '' }}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Negeri</td>
                 <td style="width: 2%">:</td>
-                <td>{{$alamat_surat->negeri}}</td>
+                <td>{{ $alamat_surat->negeri ?? '' }}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">No. Tel (HP)</td>

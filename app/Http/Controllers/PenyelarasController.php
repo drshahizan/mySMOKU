@@ -1052,6 +1052,7 @@ class PenyelarasController extends Controller
         ->select('permohonan.*')
         ->orderBy('created_at', 'DESC')
         ->get();
+        // dd($permohonan);
 
         return view('permohonan.penyelaras_bkoku.sejarah_permohonan',compact('permohonan'));
     }
