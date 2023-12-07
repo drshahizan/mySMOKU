@@ -530,6 +530,18 @@ class PenyelarasController extends Controller
                 ]
             );
             
+        }elseif ($permohonan->status == 5) {
+            
+            Permohonan::updateOrCreate(
+                ['smoku_id' => $smoku_id->id,'status' => 5],
+                [
+                    'perakuan' => $request->perakuan,
+                    'tarikh_hantar' => now()->format('Y-m-d'),
+                    'status' => '2',
+                ]
+            );
+            // dd('siniii');
+            
         }
 
         $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
