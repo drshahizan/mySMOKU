@@ -448,37 +448,37 @@ var KTCreateAccount = function () {
 		));
 
 		// Step 4
-		// validations.push(FormValidation.formValidation(
-		// 	form,
-		// 	{
-		// 		fields: {
-		// 			'amaun_yuran': {
-		// 				validators: {
-		// 					notEmpty: {
-		// 						message: 'Amaun Yuran diperlukan'
-		// 					}
-		// 				}
-		// 			},
-		// 			'amaun_wang_saku': {
-		// 				validators: {
-		// 					notEmpty: {
-		// 						message: 'Amaun Wang Saku diperlukan'
-		// 					}
-		// 				}
-		// 			}
-		// 		},
+		validations.push(FormValidation.formValidation(
+			form,
+			{
+				fields: {
+					// 'amaun_yuran': {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'Amaun Yuran diperlukan'
+					// 		}
+					// 	}
+					// },
+					// 'amaun_wang_saku': {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'Amaun Wang Saku diperlukan'
+					// 		}
+					// 	}
+					// }
+				},
 
-		// 		plugins: {
-		// 			trigger: new FormValidation.plugins.Trigger(),
-		// 			// Bootstrap Framework Integration
-		// 			bootstrap: new FormValidation.plugins.Bootstrap5({
-		// 				rowSelector: '.fv-row',
-        //                 eleInvalidClass: '',
-        //                 eleValidClass: ''
-		// 			})
-		// 		}
-		// 	}
-		// ));
+				plugins: {
+					trigger: new FormValidation.plugins.Trigger(),
+					// Bootstrap Framework Integration
+					bootstrap: new FormValidation.plugins.Bootstrap5({
+						rowSelector: '.fv-row',
+                        eleInvalidClass: '',
+                        eleValidClass: ''
+					})
+				}
+			}
+		));
 		// Step 5
 		validations.push(FormValidation.formValidation(
 			form,
