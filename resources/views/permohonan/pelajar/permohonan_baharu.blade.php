@@ -215,7 +215,7 @@
 			<form id="kt_create_account_form" action="{{ route('permohonan.hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
 			
 				<!--begin::Step 1-->
-				<div class="current" data-kt-stepper-element="content">
+				{{-- <div class="current" data-kt-stepper-element="content">
 				@csrf
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -821,11 +821,11 @@
 					</div>
 					
 					<!--end::Wrapper-->
-				</div>
+				</div> --}}
 				<!--end::Step 1-->
 
 				<!--begin::Step 2-->
-				<div data-kt-stepper-element="content">
+				{{-- <div data-kt-stepper-element="content">
 				@csrf	
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -998,12 +998,12 @@
 						<!--end::Input group-->
 					</div>
 					<!--end::Wrapper-->
-				</div>
+				</div> --}}
 				<!--end::Step 2-->
-				@endforeach
+				{{-- @endforeach --}}
 
 				<!--begin::Step 3-->
-				<div data-kt-stepper-element="content">
+				<div class="current" data-kt-stepper-element="content">
 				@csrf		
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -1213,7 +1213,13 @@
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label> <a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
+								<label class=" fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label> 
+								<a href="#" data-bs-toggle="tooltip" title="SENDIRI/TIADA PENAJA
+									BIASISWA (CONTOH:SIME DARBY)
+									PINJAMAN (CONTOH:PTPTN)
+									LAIN-LAIN (CONTOH:DERMASISWA)">
+									<i class="fa-solid fa-circle-info"></i>
+								</a>
 								<!--end::Label-->
 								<!--begin::Row-->
 								<div class="row fv-row">
@@ -1246,7 +1252,7 @@
 							<div class="col-md-6 fv-row" id="div_nama_penaja">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
+									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a>
 								</label>															
 								<!--end::Label-->
 								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
@@ -1966,6 +1972,7 @@
 				var sumber = document.getElementById('sumber_biaya').value;
 				var mod = document.getElementById('mod').value;
 				var bilbulan = document.getElementById('bil_bulan_per_sem').value;
+				// alert(sumber);
 				
 
 				var max_yuran = parseFloat(document.getElementById('max_yuran').value).toFixed(2);
