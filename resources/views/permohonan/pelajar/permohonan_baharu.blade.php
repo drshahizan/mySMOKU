@@ -215,7 +215,7 @@
 			<form id="kt_create_account_form" action="{{ route('permohonan.hantar') }}" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
 			
 				<!--begin::Step 1-->
-				{{-- <div class="current" data-kt-stepper-element="content">
+				<div class="current" data-kt-stepper-element="content">
 				@csrf
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -821,11 +821,11 @@
 					</div>
 					
 					<!--end::Wrapper-->
-				</div> --}}
+				</div>
 				<!--end::Step 1-->
 
 				<!--begin::Step 2-->
-				{{-- <div data-kt-stepper-element="content">
+				<div data-kt-stepper-element="content">
 				@csrf	
 					<!--begin::Wrapper-->
 					<div class="w-100">
@@ -998,12 +998,12 @@
 						<!--end::Input group-->
 					</div>
 					<!--end::Wrapper-->
-				</div> --}}
+				</div>
 				<!--end::Step 2-->
-				{{-- @endforeach --}}
+				@endforeach
 
 				<!--begin::Step 3-->
-				<div class="current" data-kt-stepper-element="content">
+				<div data-kt-stepper-element="content">
 				@csrf		
 					<!--begin::Wrapper-->
 					<div class="w-100">
