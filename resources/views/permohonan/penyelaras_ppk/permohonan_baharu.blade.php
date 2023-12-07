@@ -1044,7 +1044,7 @@
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
 									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-										<option></option>
+										<option value="3">SIJIL ASAS / SIJIL</option>
 									</select>
 									<!--end::Input wrapper-->
 								</div>
@@ -1756,40 +1756,40 @@
 				$('#nama_kursus').find('option').not(':first').remove();
 
 				// AJAX request 
-				$.ajax({
-					url: '/peringkat/'+id_institusi,
-					type: 'get',
-					dataType: 'json',
-					success: function(response){
-						//alert('AJAX loaded something');
+				// $.ajax({
+				// 	url: '/peringkat/'+id_institusi,
+				// 	type: 'get',
+				// 	dataType: 'json',
+				// 	success: function(response){
+				// 		//alert('AJAX loaded something');
 
-						var len = 0;
-						if(response['data'] != null){
-							len = response['data'].length;
-						}
+				// 		var len = 0;
+				// 		if(response['data'] != null){
+				// 			len = response['data'].length;
+				// 		}
 
-						if(len > 0){
-							// Read data and create <option >
-							for(var i=0; i<len; i++){
+				// 		if(len > 0){
+				// 			// Read data and create <option >
+				// 			for(var i=0; i<len; i++){
 
-								var id_institusi = response['data'][i].id_institusi;
-								var kod_peringkat = response['data'][i].kod_peringkat;
-								var peringkat = response['data'][i].peringkat;
+				// 				var id_institusi = response['data'][i].id_institusi;
+				// 				var kod_peringkat = response['data'][i].kod_peringkat;
+				// 				var peringkat = response['data'][i].peringkat;
 
-								var option = "<option value='"+kod_peringkat+"'>"+peringkat+"</option>";
+				// 				var option = "<option value='"+kod_peringkat+"'>"+peringkat+"</option>";
 
-								$("#peringkat_pengajian").append(option); 
-							}
-						}
+				// 				$("#peringkat_pengajian").append(option); 
+				// 			}
+				// 		}
 
-					},
-					error: function(){
-					alert('AJAX load did not work');
-					}
-				});
+				// 	},
+				// 	error: function(){
+				// 	alert('AJAX load did not work');
+				// 	}
+				// });
 	
 				// peringkat Change
-				$('#peringkat_pengajian').change(function(){
+				// $('#peringkat_pengajian').change(function(){
 	
 					// institusi id
 					var idipt = document.getElementById("id_institusi").value;
@@ -1801,7 +1801,7 @@
 	
 					// AJAX request 
 					$.ajax({
-						url: '/kursus/'+kodperingkat+'/'+idipt,
+						url: '/kursus/ppk/'+kodperingkat+'/'+idipt,
 						type: 'get',
 						dataType: 'json',
 					
@@ -1831,7 +1831,7 @@
 						}
 					});
 	
-				});
+				// });
 		
 			});
 

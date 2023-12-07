@@ -466,7 +466,7 @@
 										<!--begin::Label-->
 										<div class="me-5">
 											<!--begin::Input-->
-											<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1" @if($butiranPelajar->alamat_surat_menyurat == $butiranPelajar->alamat_tetap) checked @endif />
+											<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1" @if($butiranPelajar->alamat_surat_baru == $butiranPelajar->alamat_tetap_baru) checked @endif />
 											<!--end::Input-->
 											<!--begin::Label-->
 											<label class="form-label">Sama seperti Alamat Tetap</label>
@@ -762,7 +762,6 @@
 								<input type="text" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{$butiranPelajar->tel_bimbit_waris}}"  {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 								<!--end::Input-->
 							</div>
-							
 						</div>
 						<!--end::Input group-->
 						<div class="row mb-10">
@@ -774,7 +773,6 @@
 								<input type="text" class="form-control form-control-lg form-control-solid" id="hubungan_lain_waris" name="hubungan_lain_waris" placeholder="" value="{{$butiranPelajar->hubungan_lain_waris}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 								<!--end::Input-->													
 							</div>
-							
 						</div>
 						<!--begin::Input group-->
 						<div class="fv-row mb-10">
@@ -907,7 +905,7 @@
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
 									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
-										<option value="{{$butiranPelajar->peringkat_pengajian}}" ></option>
+										<option value="3">SIJIL ASAS / SIJIL</option>
 									</select>
 									<!--end::Input wrapper-->
 								</div>
@@ -1690,43 +1688,43 @@
 				
 
 				// AJAX request 
-				$.ajax({
-					url: '/ppk/peringkat/'+id_institusi,
-					type: 'get',
-					dataType: 'json',
-					success: function(response){
+				// $.ajax({
+				// 	url: '/ppk/peringkat/'+id_institusi,
+				// 	type: 'get',
+				// 	dataType: 'json',
+				// 	success: function(response){
 						
 
-						var len = 0;
-						if(response['data'] != null){
-							len = response['data'].length;
-						}
+				// 		var len = 0;
+				// 		if(response['data'] != null){
+				// 			len = response['data'].length;
+				// 		}
 						
-						if(len > 0){
-							// Read data and create <option >
-							for(var i=0; i<len; i++){
+				// 		if(len > 0){
+				// 			// Read data and create <option >
+				// 			for(var i=0; i<len; i++){
 
-								var id_institusi = response['data'][i].id_institusi;
-								var kod_peringkat = response['data'][i].kod_peringkat;
-								var peringkatValue = response['data'][i].peringkat;
+				// 				var id_institusi = response['data'][i].id_institusi;
+				// 				var kod_peringkat = response['data'][i].kod_peringkat;
+				// 				var peringkatValue = response['data'][i].peringkat;
 								
-								// Check if the current option value is equal to the selected peringkat
-								var selected = kod_peringkat === peringkat ? 'selected' : '';
+				// 				// Check if the current option value is equal to the selected peringkat
+				// 				var selected = kod_peringkat === peringkat ? 'selected' : '';
 
-								var option = "<option value='" + kod_peringkat + "' " + selected + ">" + peringkatValue + "</option>";
+				// 				var option = "<option value='" + kod_peringkat + "' " + selected + ">" + peringkatValue + "</option>";
 
-								$("#peringkat_pengajian").append(option); 
-							}
-						}
+				// 				$("#peringkat_pengajian").append(option); 
+				// 			}
+				// 		}
 
-					},
-					error: function(){
-					alert('AJAX load did not work');
-					}
-				});
+				// 	},
+				// 	error: function(){
+				// 	alert('AJAX load did not work');
+				// 	}
+				// });
 	
 				// peringkat Change
-				$('#peringkat_pengajian').change(function(){
+				// $('#peringkat_pengajian').change(function(){
 	
 					// institusi id
 					var idipt = document.getElementById("id_institusi").value;
@@ -1739,7 +1737,7 @@
 		
 					// AJAX request 
 					$.ajax({
-						url: '/kursus/'+kodperingkat+'/'+idipt,
+						url: '/kursus/ppk/'+kodperingkat+'/'+idipt,
 						type: 'get',
 						dataType: 'json',
 					
@@ -1769,7 +1767,7 @@
 						}
 					});
 	
-				});
+				// });
 		
 			});
 
