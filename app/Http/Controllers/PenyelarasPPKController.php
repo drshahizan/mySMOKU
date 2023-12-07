@@ -595,7 +595,18 @@ class PenyelarasPPKController extends Controller
                 ]
             );
             
+        }elseif ($permohonan->status == 5) {
+            Permohonan::updateOrCreate(
+                ['smoku_id' => $smoku_id->id,'status' => 5],
+                [
+                    'perakuan' => $request->perakuan,
+                    'tarikh_hantar' => now()->format('Y-m-d'),
+                    'status' => '5',
+                ]
+            );
+            
         }
+
 
         $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
         $mohon = SejarahPermohonan::create([
