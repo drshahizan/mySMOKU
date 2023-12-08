@@ -20,7 +20,7 @@
         
 		<div class="accordion-item">
 			
-			<iframe title="Report Section" width="1024" height="1060" src="https://app.powerbi.com/view?r=eyJrIjoiYjhmN2ExOWItMDk0Yi00NzkzLWFlNmMtYzM0M2I3ODQ0ZGZjIiwidCI6IjBlMGRiMmFkLWM0MTYtNDdjNy04OGVjLWNlYWM0ZWU3Njc2NyIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
+			<iframe title="BKOKUMohon" width="100%" height="1060" src="https://app.powerbi.com/view?r=eyJrIjoiNDdkYmViNTctMTU4Yy00YTM0LThkMDgtMTQyYzk1YmQ2YmQ1IiwidCI6IjBlMGRiMmFkLWM0MTYtNDdjNy04OGVjLWNlYWM0ZWU3Njc2NyIsImMiOjEwfQ%3D%3D&pageName=ReportSection" frameborder="0" allowFullScreen="true"></iframe>
 		</div>
 
 </div>
