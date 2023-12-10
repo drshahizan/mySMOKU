@@ -204,7 +204,6 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
         ];
     }
 
-    // Add functions to retrieve data from the database for each custom header
     private function getInstitusiData()
     {
         return DB::table('bk_info_institusi')->where('id_institusi', $this->instiusi_user)->value('nama_institusi');
@@ -258,20 +257,6 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                         }
                     }
                 }
-                
-                // foreach ($customHeaderData as $index => $rowData) {
-                //     $rowNumber = $index + 1;
-                //     foreach ($rowData as $columnIndex => $cellData) {
-                //         $columnLetter = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($columnIndex + 1);
-
-                //         // Merge cells for INSTITUSI, NAMA PENERIMA, BANK, and NO. AKAUN
-                //         if (in_array($cellData, ['INSTITUSI:', 'NAMA PENERIMA:', 'BANK:', 'NO. AKAUN:'])) {
-                //             $event->sheet->mergeCells("{$columnLetter}{$rowNumber}:B{$rowNumber}");
-                //         }
-
-                //         $event->sheet->setCellValue($columnLetter . $rowNumber, $cellData);
-                //     }
-                // }
 
                 // Get the row number where the table headers start
                 $dataHeaderRow = 8; 
