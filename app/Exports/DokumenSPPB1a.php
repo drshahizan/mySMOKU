@@ -204,12 +204,58 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
         ];
     }
 
+    // Add functions to retrieve data from the database for each custom header
+    private function getInstitusiData()
+    {
+        return DB::table('bk_info_institusi')->where('id_institusi', $this->instiusi_user)->value('nama_institusi');
+    }
+
+    private function getNamaPenerimaData()
+    {
+        return DB::table('maklumat_bank')->where('institusi_id', Auth::user()->id_institusi)->value('nama_akaun');
+    }
+
+    private function getBankData()
+    {
+        return DB::table('maklumat_bank')->where('institusi_id', Auth::user()->id_institusi)->value('nama_akaun');
+    }
+
+    private function getNoAkaunData()
+    {
+        return DB::table('maklumat_bank')->where('institusi_id', Auth::user()->id_institusi)->value('no_akaun');
+    }
+
     public function registerEvents(): array
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
-                // Get the row number where the data headers start
-                $dataHeaderRow = 9; // Change this to the appropriate row number
+                // Retrieve additional data for custom headers from the database
+                $customHeaderData = [
+                    ['INSTITUSI:', $this->getInstitusiData()], 
+                    ['NAMA PENERIMA:', $this->getNamaPenerimaData()], 
+                    ['BANK:', $this->getBankData()], 
+                    ['NO. AKAUN:', $this->getNoAkaunData()], 
+                    ['(Sertakan salinan penyata akaun bank untuk rujukan pembayaran)***'],
+                    [''],
+                    ['BORANG PERMOHONAN PERUNTUKAN PROGRAM BKOKU (SPBB 1a)'],
+                ];
+
+                foreach ($customHeaderData as $index => $rowData) {
+                    $rowNumber = $index + 1;
+                    foreach ($rowData as $columnIndex => $cellData) {
+                        $columnLetter = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($columnIndex + 1);
+
+                        // Merge cells for INSTITUSI, NAMA PENERIMA, BANK, and NO. AKAUN
+                        if (in_array($cellData, ['INSTITUSI:', 'NAMA PENERIMA:', 'BANK:', 'NO. AKAUN:'])) {
+                            $event->sheet->mergeCells("{$columnLetter}{$rowNumber}:B{$rowNumber}");
+                        }
+
+                        $event->sheet->setCellValue($columnLetter . $rowNumber, $cellData);
+                    }
+                }
+
+                // Get the row number where the table headers start
+                $dataHeaderRow = 8; 
 
                 // Customize the style of the data header row
                 $event->sheet->getStyle('A' . $dataHeaderRow . ':' . $event->sheet->getHighestColumn() . $dataHeaderRow)->applyFromArray([
@@ -225,7 +271,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 ]);
 
                 // Customize the style for the special rows
-                $event->sheet->getStyle('A6')->applyFromArray([
+                $event->sheet->getStyle('A5')->applyFromArray([
                     'font' => [
                         'color' => ['rgb' => 'FF0000'], // Red color
                         'italic' => true, // Italic font
@@ -234,8 +280,8 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 ]);
 
                 // Center the "BORANG PERMOHONAN PERUNTUKAN PROGRAM BKOKU" row and make it span all columns
-                $event->sheet->mergeCells('A8:' . $event->sheet->getHighestColumn() . '8');
-                $event->sheet->getStyle('A8')->applyFromArray([
+                $event->sheet->mergeCells('A7:' . $event->sheet->getHighestColumn() . '7');
+                $event->sheet->getStyle('A7')->applyFromArray([
                     'font' => [
                         'bold' => true,
                     ],
@@ -245,7 +291,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 ]);
                 
                 // Add borders to the data table
-                $startRow = 8; // Set the starting row for borders
+                $startRow = 7; // Set the starting row for borders
                 $startColumn = 'A'; // Modify this based on your actual starting column
                 $endColumn = 'S'; // Modify this based on your actual ending column
                 $endRow = $event->sheet->getHighestRow(); // Get the last row dynamically
@@ -260,7 +306,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 ]);
 
                 // Specify the row indices to be bold
-                $boldRows = [1, 2, 3, 4, 5, 6];
+                $boldRows = [1, 2, 3, 4, 5];
 
                 // Bold the specified rows
                 foreach ($boldRows as $rowIndex) {
