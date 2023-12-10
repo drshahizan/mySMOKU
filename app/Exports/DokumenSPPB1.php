@@ -87,6 +87,15 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
     public function headings(): array
     {
         return [
+            // Custom Rows
+            ['INSTITUSI:'],
+            ['NAMA PENERIMA:'],
+            ['BANK:'],
+            ['NO. AKAUN:'],
+            ['(Sertakan salinan penyata akaun bank untuk rujukan pembayaran)***'], 
+            [''],
+            ['BORANG PERMOHONAN PERUNTUKAN PROGRAM BKOKU (SPBB 1)'], 
+
             // Data Headers
             array_map('strtoupper', [
                 'BIL',
@@ -274,7 +283,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                     ],
                 ]);
 
-                // Center the "BORANG tuntutan PERUNTUKAN PROGRAM BKOKU" row and make it span all columns
+                // Center the "BORANG PERMOHONAN PERUNTUKAN PROGRAM BKOKU" row and make it span all columns
                 $event->sheet->mergeCells('A7:' . $event->sheet->getHighestColumn() . '7');
                 $event->sheet->getStyle('A7')->applyFromArray([
                     'font' => [
@@ -287,7 +296,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                 
                 // Add borders to the data table
                 $startRow = 7; 
-                $startColumn = 'A'; 
+                $startColumn = 'A';
                 $endColumn = 'S'; 
                 $endRow = $event->sheet->getHighestRow(); 
 
