@@ -89,13 +89,12 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
         return [
             // Custom Rows
             ['INSTITUSI:'],
-            ['CAWANGAN:'],
             ['NAMA PENERIMA:'],
             ['BANK:'],
             ['NO. AKAUN:'],
             ['(Sertakan salinan penyata akaun bank untuk rujukan pembayaran)***'], 
-            [''], // Add a blank row
-            ['BORANG PERMOHONAN PERUNTUKAN PROGRAM BKOKU'], 
+            [''],
+            ['BORANG PERMOHONAN PERUNTUKAN PROGRAM BKOKU (SPBB 1a)'], 
 
             // Data Headers
             array_map('strtoupper', [
@@ -138,7 +137,6 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
         }
         
         return $result . ' SEM 1 DAN 2 TAHUN ' . $sesi;
-        
     }
 
     public function columnWidths(): array
