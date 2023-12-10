@@ -242,17 +242,36 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
 
                 foreach ($customHeaderData as $index => $rowData) {
                     $rowNumber = $index + 1;
+                    
                     foreach ($rowData as $columnIndex => $cellData) {
                         $columnLetter = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($columnIndex + 1);
-
+                
                         // Merge cells for INSTITUSI, NAMA PENERIMA, BANK, and NO. AKAUN
                         if (in_array($cellData, ['INSTITUSI:', 'NAMA PENERIMA:', 'BANK:', 'NO. AKAUN:'])) {
+                            // Merge cells and apply data
                             $event->sheet->mergeCells("{$columnLetter}{$rowNumber}:B{$rowNumber}");
+                            $event->sheet->setCellValue($columnLetter . $rowNumber, $cellData);
+                            $event->sheet->setCellValue('C' . $rowNumber, $rowData[$columnIndex + 1]); // Add the data to the next column
+                        } else {
+                            // For other cells, just set the value
+                            $event->sheet->setCellValue($columnLetter . $rowNumber, $cellData);
                         }
-
-                        $event->sheet->setCellValue($columnLetter . $rowNumber, $cellData);
                     }
                 }
+                
+                // foreach ($customHeaderData as $index => $rowData) {
+                //     $rowNumber = $index + 1;
+                //     foreach ($rowData as $columnIndex => $cellData) {
+                //         $columnLetter = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($columnIndex + 1);
+
+                //         // Merge cells for INSTITUSI, NAMA PENERIMA, BANK, and NO. AKAUN
+                //         if (in_array($cellData, ['INSTITUSI:', 'NAMA PENERIMA:', 'BANK:', 'NO. AKAUN:'])) {
+                //             $event->sheet->mergeCells("{$columnLetter}{$rowNumber}:B{$rowNumber}");
+                //         }
+
+                //         $event->sheet->setCellValue($columnLetter . $rowNumber, $cellData);
+                //     }
+                // }
 
                 // Get the row number where the table headers start
                 $dataHeaderRow = 8; 
