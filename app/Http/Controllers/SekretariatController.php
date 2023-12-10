@@ -428,7 +428,25 @@ class SekretariatController extends Controller
         $suratTawaran = SuratTawaran::find($suratTawaranId);
         $maklumat_kementerian = MaklumatKementerian::first();
 
-        return view('kemaskini.sekretariat.surat_tawaran.terkini', compact('suratTawaran','maklumat_kementerian'));
+        return view('kemaskini.sekretariat.surat_tawaran.terkini', compact('suratTawaranId','suratTawaran','maklumat_kementerian'));
+    }
+
+    //Step 4: Download the updated "Surat Tawaran"
+    public function muatTurunKemaskiniSuratTawaran($suratTawaranId)
+    {
+        $suratTawaran = SuratTawaran::find($suratTawaranId);
+        $maklumat_kementerian = MaklumatKementerian::first();
+
+        $pdf = PDF::loadView('kemaskini.sekretariat.surat_tawaran.muat-turun', compact('suratTawaran', 'maklumat_kementerian'));
+        $pdfPath = public_path('Surat-Tawaran-Terkini.pdf');
+        
+        try {
+            $pdf->save($pdfPath);
+            return $pdf->stream('surat-tawaran-terkini.pdf');
+        } catch (\Exception $e) {
+            return response('Error: ' . $e->getMessage())->header('Content-Type', 'text/plain');
+        }
+        // return $pdf->stream('Surat-Tawaran-Terkini.pdf');
     }
 
     public function senaraiKelulusanPermohonan(Request $request)

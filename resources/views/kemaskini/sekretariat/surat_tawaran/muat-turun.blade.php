@@ -1,25 +1,13 @@
 <x-default-layout>
     <head>
-        <title>Sekretariat BKOKU KPT</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-
-        <!-- MAIN CSS -->
-        <link rel="stylesheet" href="/assets/css/sekretariat.css">
-
         <style>
             .card{
                 padding: 30px;
-                font-family: Arial, sans-serif;
-                font-size: 14px;
                 color: black;
             }
 
             .parentSpace {
                 width: 100%;
-                font-family: Arial, sans-serif;
-                font-size: 12px;
                 color: black;
                 line-height: 1.1 !important;
             }
@@ -40,38 +28,6 @@
             }
         </style>
     </head>
-
-    <!--begin::Page title-->
-    <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-        <!--begin::Title-->
-        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Permohonan</h1>
-        <!--end::Title-->
-        <!--begin::Breadcrumb-->
-        <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-            <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Permohonan</li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item">
-                <span class="bullet bg-gray-400 w-5px h-2px"></span>
-            </li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Kemaskini</li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item">
-                <span class="bullet bg-gray-400 w-5px h-2px"></span>
-            </li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Surat Tawaran</li>
-            <!--end::Item-->
-        </ul>
-    <!--end::Breadcrumb-->
-    </div>
-    <!--end::Page title-->
-    <br>
 
     <body>
         <!-- Main body part  -->
@@ -205,12 +161,6 @@
                                     {{$suratTawaran->penutup4_2}} <br>
                                     {{$suratTawaran->penutup4_3}} <br>
                                 </p>
-
-                                <div class="d-flex flex-center mt-5 mb-5">
-                                    <a href="{{ url('sekretatriat/muat-turun/kemaskini/surat-tawaran/'. $suratTawaranId) }}" class="btn btn-info btn-sm" style="width: 15%; margin: 0 auto;">
-                                        Muat Turun<i class='fas fa-download' style='color:white!important; padding-left:20px;'></i>
-                                    </a>
-                                </div>
                             </form>
                         </div>
                     </div>

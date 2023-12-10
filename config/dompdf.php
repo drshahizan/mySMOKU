@@ -45,7 +45,10 @@ return array(
          * Times-Roman, Times-Bold, Times-BoldItalic, Times-Italic,
          * Symbol, ZapfDingbats.
          */
-        "font_dir" => storage_path('fonts'), // advised by dompdf (https://github.com/dompdf/dompdf/pull/782)
+        // "font_dir" => storage_path('fonts'), // advised by dompdf (https://github.com/dompdf/dompdf/pull/782)
+        'fontDir' => base_path('storage/fonts/'),
+        'fontCache' => storage_path('fonts/'),
+        'defaultFont' => 'Arial',
 
         /**
          * The location of the DOMPDF font cache directory

@@ -60,8 +60,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/laporan/permohonan', [LaporanController::class, 'permohonan'])->name('laporan.permohonan');
     Route::get('/laporan/tuntutan', [LaporanController::class, 'tuntutan'])->name('laporan.tuntutan');
     
-    
-    
     Route::get('/permohonanESP', [MaklumatESPController::class, 'permohonan'])->name('permohonan.esp');
     Route::post('/permohonanESP', [MaklumatESPController::class, 'hantar'])->name('maklumat.esp');
     Route::get('/tuntutanESP', [MaklumatESPController::class, 'tuntutan'])->name('tuntutan.esp');
@@ -193,6 +191,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('kemaskini/sekretariat/surat/tawaran/preview', [SekretariatController::class, 'previewSuratTawaran'])->name('preview');
     Route::post('kemaskini/sekretariat/surat/tawaran/send/{suratTawaranId}', [SekretariatController::class, 'sendSuratTawaran'])->name('send');
     Route::get('kemaskini/sekretariat/surat/tawaran/update/{suratTawaranId}', [SekretariatController::class, 'updatedSuratTawaran'])->name('update');
+    Route::get('sekretatriat/muat-turun/kemaskini/surat-tawaran/{suratTawaranId}', [SekretariatController::class, 'muatTurunKemaskiniSuratTawaran'])->name('muat-turun.kemaskini.surat-tawaran');
 
     //Penyaluran - Sekretariat - Dokumen SPBB
     Route::get('penyaluran/sekretariat/muat-naik/dokumen/SPBB', [SekretariatController::class, 'muatNaikDokumenSPPB'])->name('sekretariat.muat-naik.SPBB');
@@ -208,7 +207,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('senarai-permohonan-disokong-pdf/{programCode}', [SekretariatController::class, 'cetakSenaraiPemohonPDF'])->name('senarai.disokong.pdf');
     Route::get('senarai-permohonan-disokong-excel/{programCode}', [SekretariatController::class, 'cetakSenaraiPemohonExcel'])->name('senarai.disokong.excel');
     Route::get('borang-SPBB-excel/{programCode}', [SekretariatController::class, 'cetakBorangSppbExcel'])->name('borang.SPBB.excel');
-
 
     //Permohonan - Sekretariat - Keputusan
     Route::get('permohonan/sekretariat/keputusan', [SekretariatController::class, 'senaraiKeputusanPermohonan']);
