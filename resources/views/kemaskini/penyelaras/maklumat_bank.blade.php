@@ -19,7 +19,7 @@
             color: white!important;
         }
         input{
-            width: 75%!important;
+            width: 80%!important;
         }
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -98,6 +98,20 @@
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
                                                     <input type="text" class="form-control" id="nama_bank" name="nama_bank" value="{{$bank->nama_akaun ?? ''}}" oninvalid="this.setCustomValidity('Sila isi ruang ini dengan nama akaun bank institusi anda.')" oninput="setCustomValidity('')" required>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="vertical-top w-13">Bank</td>
+                                                <td class="vertical-top w-3">:</td>
+                                                <td class="vertical-top">
+                                                    <select name="bank_id" class="form-control" style="width:80%;">
+                                                        <option value="">Pilih Bank</option>
+                                                        @foreach ($senarai_bank as $bank)
+                                                            <option value="{{ $bank->kod_bank }}" {{ old('bank_id') == $bank->kod_bank ? 'selected' : '' }}>
+                                                                {{ $bank->nama_bank }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>	
                                                 </td>
                                             </tr>
                                             <tr>

@@ -48,6 +48,7 @@ use App\Exports\TuntutanLayak;
 use App\Imports\ModifiedPermohonanImport;
 use App\Imports\ModifiedTuntutanImport;
 use App\Models\JumlahTuntutan;
+use App\Models\SenaraiBank;
 use Carbon\Carbon;
 use DateTime;
 use GuzzleHttp\Client;
@@ -1328,6 +1329,7 @@ class PenyelarasController extends Controller
         $user = auth()->user();
         $id = $user->id_institusi;
         $bank = MaklumatBank::where('institusi_id', $id)->first();
+        $senarai_bank = SenaraiBank::all();
 
         // Check if a record exists, and if not, create a new one
         if (!$bank) {
@@ -1337,7 +1339,7 @@ class PenyelarasController extends Controller
             $bank->no_akaun = '';  
         }
 
-        return view('kemaskini.penyelaras.maklumat_bank', compact('user','bank'));
+        return view('kemaskini.penyelaras.maklumat_bank', compact('user','bank','senarai_bank'));
     }
 
     public function kemaskiniMaklumatBank(Request $request, $id)
