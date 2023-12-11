@@ -359,14 +359,12 @@ class SekretariatController extends Controller
             ->whereRaw('(lanjut_pengajian.created_at, smoku_akademik.smoku_id) IN (SELECT MAX(created_at), smoku_id FROM lanjut_pengajian GROUP BY smoku_id)')
             ->get()->toArray();
         $data = array_merge($tangguh, $lanjut);
-        //dd($data);
 
         return view('kemaskini.sekretariat.pengajian.kemaskini_tangguh_lanjut_pengajian', compact('data'));
     }
 
     public function kemaskiniTarikhPengajian(Request $request, $id)
     {
-
         $akademik = Akademik::where('smoku_id', $id)->where('status',1)
             ->orderBy('created_at', 'desc') // Assuming you have a 'created_at' column
             ->first();
@@ -382,7 +380,6 @@ class SekretariatController extends Controller
         if ($tangguh) {
             $tangguh->update(['status' => $request->status]);
         }
-
 
         return redirect()->back()->with('success', 'Tarikh baru tamat pengajian dikemaskini');
     }
@@ -415,7 +412,7 @@ class SekretariatController extends Controller
             $existingRecord->penutup3_4 = $request->penutup3_4;
             $existingRecord->penutup4_1 = $request->penutup4_1;
             $existingRecord->penutup4_2 = $request->penutup4_2;
-            $existingRecord->penutup4_4 = $request->penutup4_3;
+            $existingRecord->penutup4_3 = $request->penutup4_3;
             $existingRecord->penutup4_4 = $request->penutup4_4;
             $existingRecord->save();
         }
@@ -433,21 +430,17 @@ class SekretariatController extends Controller
     }
 
     //Step 4: Download the updated "Surat Tawaran"
-    public function muatTurunKemaskiniSuratTawaran($suratTawaranId)
+    public function muatTurunKemaskiniSuratTawaran()
     {
-        $suratTawaran = SuratTawaran::find($suratTawaranId);
+        $suratTawaran = SuratTawaran::first();
         $maklumat_kementerian = MaklumatKementerian::first();
 
         $pdf = PDF::loadView('kemaskini.sekretariat.surat_tawaran.muat-turun', compact('suratTawaran', 'maklumat_kementerian'));
-        $pdfPath = public_path('Surat-Tawaran-Terkini.pdf');
+        $filePath = storage_path('app/surat-Tawaran-Terkini.pdf');
+        $pdf->save($filePath);
 
-        try {
-            $pdf->save($pdfPath);
-            return $pdf->stream('surat-tawaran-terkini.pdf');
-        } catch (\Exception $e) {
-            return response('Error: ' . $e->getMessage())->header('Content-Type', 'text/plain');
-        }
-        // return $pdf->stream('Surat-Tawaran-Terkini.pdf');
+        return response()->download($filePath);
+        // return $pdf->stream('surat-tawaran-dikemaskini.pdf');
     }
 
     public function senaraiKelulusanPermohonan(Request $request)

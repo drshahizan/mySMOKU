@@ -219,7 +219,7 @@
                                     <input class="form-control" type="text" id="penutup3_3" name="penutup3_3" style="font-weight:bold" value="{{$suratTawaran->penutup3_3}}">
                                 </div>
                                 <div class="col-md-5 fv-row">
-                                    <input class="form-control" type="text" id="penutup4_3" name="penutup4_3" style="font-weight:bold" value="{{$suratTawaran->penutup4_3}}">
+                                    <input class="form-control" type="text" id="penutup3_4" name="penutup3_4" style="font-weight:bold" value="{{$suratTawaran->penutup3_4}}">
                                 </div>
                                 <br><br>
 

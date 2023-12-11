@@ -11,13 +11,10 @@ class EmailVerificationNotificationController extends Controller
 {
     public function verify(Request $request, $id, $hash)
     {
-        
-        
         //$user = User::find($id);
         $user = User::where('no_kp', '=', $id)->first();
         // $test=sha1($user->email);
         // dd($test, $hash);
-
 
         if (!$user || sha1($user->email) !== $hash) {
             // Invalid verification link

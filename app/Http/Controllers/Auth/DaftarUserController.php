@@ -160,7 +160,4 @@ class DaftarUserController extends Controller
         */
 
     }
-
-    
-    
 }

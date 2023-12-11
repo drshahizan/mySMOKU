@@ -207,7 +207,7 @@
                                 </p>
 
                                 <div class="d-flex flex-center mt-5 mb-5">
-                                    <a href="{{ url('sekretatriat/muat-turun/kemaskini/surat-tawaran/'. $suratTawaranId) }}" class="btn btn-info btn-sm" style="width: 15%; margin: 0 auto;">
+                                    <a href="{{ url('sekretatriat/muat-turun/kemaskini/surat-tawaran') }}" class="btn btn-info btn-sm" style="width: 15%; margin: 0 auto;">
                                         Muat Turun<i class='fas fa-download' style='color:white!important; padding-left:20px;'></i>
                                     </a>
                                 </div>

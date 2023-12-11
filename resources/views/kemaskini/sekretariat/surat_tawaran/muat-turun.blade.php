@@ -151,7 +151,6 @@
                                     <b>{{$suratTawaran->penutup3_2}}</b> <br>
                                     <b>{{$suratTawaran->penutup3_3}}</b> <br>
                                     <b>{{$suratTawaran->penutup3_4}}</b> <br>
-                                    
                                 </p>
                                 <br>
                                 <p><div style="text-align: center;">"Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>

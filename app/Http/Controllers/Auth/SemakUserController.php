@@ -96,11 +96,6 @@ class SemakUserController extends Controller
         
             return redirect()->route('daftarlayak');
         }
-        
-
-        
-
-        
-    }
-    
+               
+    }  
 }
