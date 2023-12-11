@@ -410,9 +410,10 @@ class SaringanController extends Controller
         $smoku = Smoku::where('id', $smoku_id)->first();
         $catatan = Saringan::where('permohonan_id', $sejarah_p->permohonan_id)->first();
         $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
+        $j_tuntutan = JumlahTuntutan::where('jenis',"Yuran")->first();
         $peringkat = $rujukan[1];
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
-        return view('permohonan.sekretariat.sejarah.papar_saringan',compact('permohonan','catatan','smoku','akademik','sejarah_p'));
+        return view('permohonan.sekretariat.sejarah.papar_saringan',compact('j_tuntutan','permohonan','catatan','smoku','akademik','sejarah_p'));
     }
 
     public function paparRekodPembayaran($id){
@@ -504,7 +505,7 @@ class SaringanController extends Controller
         $status_kod=0;
         $status = null;
 
-        
+
         $institusiPengajian = InfoIpt::all()->where('jenis_institusi','UA')->sortBy('nama_institusi');
 
         return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status', 'institusiPengajian'));
@@ -512,7 +513,7 @@ class SaringanController extends Controller
 
     public function cetakSenaraiPenyaluranExcel(Request $request, $programCode)
     {
-        
+
         $institusi = $request->input('institusi');
         // dd($institusi);
 
@@ -529,7 +530,7 @@ class SaringanController extends Controller
         {
 
             foreach ($selectedItemIds as $itemId){
-                
+
                 $permohonan = Permohonan::orderBy('id', 'desc')->where('id', '=', $itemId)->first();
                 if ($permohonan != null) {
                     Permohonan::where('id' ,$itemId)
@@ -538,10 +539,10 @@ class SaringanController extends Controller
                         'tarikh_transaksi' => $request->tarikhTransaksi,
 
                     ]);
-                    
+
                 }
                 // dd('okayyy');
-                
+
             }
         }
 
