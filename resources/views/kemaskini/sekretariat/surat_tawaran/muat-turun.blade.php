@@ -1,4 +1,4 @@
-<x-default-layout>
+<html lang="en">
     <head>
         <style>
             .card{
@@ -11,12 +11,12 @@
                 color: black;
                 line-height: 1.1 !important;
             }
-    
+
             .left {
                 float: left;
                 width: 80%;
             }
-    
+
             .right {
                 float: right;
                 width: 20%;
@@ -74,11 +74,9 @@
                                     </table>
                                 </div>
                             </div>
-                               
+                                
                             <hr>
 
-                            <form action="#" method="GET">
-                                @csrf
                                 <p>
                                     <span style="float: right">
                                         No Rujukan Kami : KPT - xxxxxxxxx<br>
@@ -129,6 +127,7 @@
                                 </table>
                                 
                                 <br>
+
                                 <div class="main-content">
                                     <p>2. Bantuan ini berkuatkuasa mulai <b>xxxxxxxxx hingga xxxxxxxxx.</b> {{$suratTawaran->kandungan1}}</p>
                                     <br>
@@ -136,6 +135,7 @@
                                     <br>
                                     <p>4. {{$suratTawaran->kandungan3}}</p>
                                 </div>
+
                                 <br>
                                 
                                 <p>Sekian, terima kasih.</p>
@@ -160,11 +160,10 @@
                                     {{$suratTawaran->penutup4_2}} <br>
                                     {{$suratTawaran->penutup4_3}} <br>
                                 </p>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </body>
-</x-default-layout> 
+</html>

@@ -99,7 +99,10 @@
             $tarikh_kelulusan = DB::table('permohonan_kelulusan')->where('permohonan_id',$permohonan['id'])->value('tarikh_mesyuarat');
             $nama = DB::table('smoku')->where('id',$permohonan['smoku_id'])->value('smoku.nama');
             $no_kp = DB::table('smoku')->where('id',$permohonan['smoku_id'])->value('smoku.no_kp');
-            $alamat = DB::table('smoku')->where('id',$permohonan['smoku_id'])->value('smoku.alamat_tetap');
+            $alamat = DB::table('smoku_butiran_pelajar')->where('smoku_id',$permohonan['smoku_id'])->value('alamat_tetap');
+            $poskod = DB::table('smoku_butiran_pelajar')->where('smoku_id',$permohonan['smoku_id'])->value('alamat_tetap_poskod');
+            $bandar = DB::table('smoku_butiran_pelajar')->join('bk_bandar','bk_bandar.id','=','smoku_butiran_pelajar.alamat_tetap_bandar' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_bandar.bandar');
+            $negeri = DB::table('smoku_butiran_pelajar')->join('bk_negeri','bk_negeri.id','=','smoku_butiran_pelajar.alamat_tetap_negeri' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_negeri.negeri');
             $program = DB::table('smoku_akademik')->where('smoku_id', $permohonan['smoku_id'])->value('nama_kursus');
             $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $permohonan['smoku_id'])->value('tarikh_mula');
             $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $permohonan['smoku_id'])->value('tarikh_tamat');
@@ -120,6 +123,8 @@
             <b>{{$nama}}</b>
             <br><b>NO.KP : {{$no_kp}}</b>
             <br>{{$alamat}}
+            <br>{{$poskod}}, {{$bandar}}
+            <br>{{$negeri}}
         </div>
             
         <br>
