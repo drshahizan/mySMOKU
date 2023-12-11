@@ -95,7 +95,7 @@
                                         <!--begin::Input group-->
                                         <div class="fv-row mb-5">
                                             <!--begin::Label-->
-                                            <label class="fs-5 fw-semibold mb-2 required">Nama Pelajar</label>
+                                            <label class="fs-5 fw-semibold mb-2 required">Nama</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <input type="text" class="form-control form-control-solid" placeholder="" name="nama" value="{{ $user->nama}}" />
