@@ -72,16 +72,9 @@ class PentadbirController extends Controller
             return response()->json(['message' => 'Emel notifikasi telah dihantar kepada ' . $request->nama]);
         } else {
             
-            
-            // Set the institution ID based on the selected option
-            if ($request->input('id_institusibkoku')) {
-                $user->id_institusi = $request->id_institusibkoku;
-            } elseif ($request->input('id_institusippk')) {
-                $user->id_institusi = $request->id_institusippk;
-            }
-
-
-            if($request->has('status')){
+            if($request->input('status')){
+                // dd('sini');
+                
 
                 // Check if the status is different from the current user status
                 if ($request->status != $user->status) {
@@ -94,36 +87,62 @@ class PentadbirController extends Controller
                         'jawatan' => $request->jawatan,
                         'status' => $request->status,
                     ]);
+                    
+                    // Set the institution ID based on the selected option
+                    if ($request->input('id_institusibkoku')) {
+                        $user->id_institusi = $request->id_institusibkoku;
+                    } elseif ($request->input('id_institusippk')) {
+                        $user->id_institusi = $request->id_institusippk;
+                    }
+
+
+
                     if ($request->status == 1) {
                         return redirect()->route('daftarpengguna')->with('message', 'Status pengguna ' . $request->nama . ' telah diaktifkan.');
                     } elseif ($request->status == 0) {
                         return redirect()->route('daftarpengguna')->with('tidak', 'Status pengguna ' . $request->nama . ' telah ditukar tidak aktif.');
                     }
                 } else {
-                    // dd('Status is the same');
+                    //dd('Status is the same');
+                    // dd($request->id_institusi);
+
                     // If the user exists, update other information not status
                     $user->update([
                         'nama' => $request->nama,
                         'email' => $request->email,
                         'tahap' => $request->tahap,
                         'jawatan' => $request->jawatan,
+                        'id_institusi' => $request->id_institusi,
                     ]);
+                    
                     // Handle the case where the status is the same (no change)
                     return redirect()->route('daftarpengguna');
                 }
                 
             } else {
+
                 if ($user->status == 1) {
                     $user->update([
                         'nama' => $request->nama,
                         'email' => $request->email,
                         'tahap' => $request->tahap,
                         'jawatan' => $request->jawatan,
+                        'id_institusi' => $request->id_institusi,
                     ]);
                     
                     return response()->json(['message' => 'Data pengguna ' . $request->nama . ' telah ada dan telah dikemaskini.']);
                 } elseif ($request->status == 0) {
                     return response()->json(['message' => 'Data pengguna ' . $request->nama . ' telah ada tetapi berstatus tidak aktif.']);
+                }else{
+                    $user->update([
+                        'nama' => $request->nama,
+                        'email' => $request->email,
+                        'tahap' => $request->tahap,
+                        'jawatan' => $request->jawatan,
+                        'id_institusi' => $request->id_institusi,
+                    ]);
+                    
+
                 }
 
             }
