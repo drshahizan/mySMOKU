@@ -34,6 +34,19 @@
             align-items: center;
             padding-right: 250px; 
         }
+        .form-control-arrow {
+            position: relative;
+            width: 80%; 
+        }
+
+        .form-control-arrow::after {
+            content: '\25BC'; /* Unicode character for a black down-pointing triangle */
+            position: absolute;
+            top: 50%;
+            right: 20px; 
+            transform: translateY(-50%);
+            pointer-events: none; 
+        }
     </style>
 
     <!--begin::Page title-->
@@ -104,14 +117,16 @@
                                                 <td class="vertical-top w-13">Bank</td>
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
-                                                    <select name="bank_id" class="form-control" style="width:80%;">
-                                                        <option value="">Pilih Bank</option>
-                                                        @foreach ($senarai_bank as $bank)
-                                                            <option value="{{ $bank->kod_bank }}" {{ old('bank_id') == $bank->kod_bank ? 'selected' : '' }}>
-                                                                {{ $bank->nama_bank }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>	
+                                                    <div class="form-control-arrow">
+                                                        <select name="kod_bank" class="form-control" style="width:100%;">
+                                                            <option value="">Pilih Bank</option>
+                                                            @foreach ($senarai_bank->sortBy('nama_bank') as $senaraiBank)
+                                                                <option value="{{ $senaraiBank->kod_bank }}" {{ old('kod_bank', optional($bank)->bank_id) == $senaraiBank->kod_bank ? 'selected' : '' }}>
+                                                                    {{ $senaraiBank->nama_bank }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>

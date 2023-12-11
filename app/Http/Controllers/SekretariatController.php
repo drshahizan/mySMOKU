@@ -12,6 +12,7 @@ use App\Mail\TuntutanLayak;
 use App\Mail\TuntutanTidakLayak;
 use App\Models\DokumenESP;
 use App\Models\EmelKemaskini;
+use App\Models\JumlahTuntutan;
 use App\Models\Peperiksaan;
 use App\Models\Permohonan;
 use App\Models\Saringan;
@@ -439,7 +440,7 @@ class SekretariatController extends Controller
 
         $pdf = PDF::loadView('kemaskini.sekretariat.surat_tawaran.muat-turun', compact('suratTawaran', 'maklumat_kementerian'));
         $pdfPath = public_path('Surat-Tawaran-Terkini.pdf');
-        
+
         try {
             $pdf->save($pdfPath);
             return $pdf->stream('surat-tawaran-terkini.pdf');
@@ -1011,8 +1012,35 @@ class SekretariatController extends Controller
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
         $smoku_id = Permohonan::where('id', $tuntutan->permohonan_id)->value('smoku_id');
         $smoku = Smoku::where('id', $smoku_id)->first();
-        $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
+
+        $rujukan = explode("/", $tuntutan->no_rujukan_tuntutan);
         $peringkat = $rujukan[1];
+        $no_tuntutan = $rujukan[3];
+
+        $tuntutan_sebelum = Tuntutan::where('permohonan_id',$tuntutan->permohonan_id)->where('status', '6')->where('id', '<', $id)->orderBy('id','desc')->first();
+        if($tuntutan_sebelum!=null){
+            $sesi_sebelum = $tuntutan_sebelum->sesi;
+        }
+        else{
+            $sesi_sebelum = null;
+        }
+
+        $baki_terdahulu = 0;
+
+        if($no_tuntutan == 1){
+            $baki_terdahulu = $permohonan->baki_dibayar;
+        }
+        elseif ($tuntutan_sebelum==null){
+            $baki_terdahulu = $permohonan->baki_dibayar;
+        }
+        elseif($tuntutan->sesi == $sesi_sebelum){
+            $baki_terdahulu = $tuntutan_sebelum->baki_dibayar;
+        }
+        elseif($tuntutan->sesi != $sesi_sebelum){
+            $j_tuntutan = JumlahTuntutan::where('jenis',"Yuran")->first();
+            $baki_terdahulu = $j_tuntutan;
+        }
+
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
 
         $status_rekod = new SejarahTuntutan([
@@ -1023,7 +1051,7 @@ class SekretariatController extends Controller
         ]);
         $status_rekod->save();
 
-        return view('tuntutan.sekretariat.saringan.maklumat_tuntutan',compact('permohonan','smoku','akademik','tuntutan','tuntutan_item'));
+        return view('tuntutan.sekretariat.saringan.maklumat_tuntutan',compact('baki_terdahulu','permohonan','smoku','akademik','tuntutan','tuntutan_item'));
     }
 
     public function saringTuntutanKedua(Request $request, $id)
