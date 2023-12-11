@@ -379,19 +379,6 @@
                                                 document.getElementById('jumlah_disokong').value= parseFloat(jumlah).toFixed(2);
                                                 document.getElementById('baki_disokong').value= baki_y - yuran - w_saku;
                                             }
-                                            // function BayarY(){
-                                            //     var yuran = document.getElementById('yuran_dibayar').value;
-                                            //     var w_saku = document.getElementById('w_saku_dibayar').value;
-                                            //     var baki_y = document.getElementById('baki_y').value;
-                                            //     var baki = baki_y - yuran - w_saku;
-                                            //     var jumlah = parseFloat(yuran) + parseFloat(w_saku);
-                                            //     baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
-                                            //         minimumFractionDigits: 2
-                                            //     });
-                                            //     document.getElementById('y_baki_dibayar').innerHTML = baki;
-                                            //     document.getElementById('jumlah_dibayar').value= parseFloat(jumlah).toFixed(2);
-                                            //     document.getElementById('baki_dibayar').value= 5000 - yuran - w_saku;
-                                            // }
                                         </script>
                                     @elseif($permohonan->program == "BKOKU" && $tuntutan->yuran == NULL)
                                         @php
@@ -560,18 +547,6 @@
                                                 document.getElementById('jumlah_disokong_3').value= parseFloat(jumlah).toFixed(2);
                                                 document.getElementById('baki_disokong_3').value= baki_y - yuran;
                                             }
-                                            // function BayarY(){
-                                            //     var yuran = document.getElementById('yuran_dibayar_3').value;
-                                            //     var baki_y = document.getElementById('baki_y_2').value;
-                                            //     var baki = baki_y - yuran;
-                                            //     var jumlah = parseFloat(yuran);
-                                            //     baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
-                                            //         minimumFractionDigits: 2
-                                            //     });
-                                            //     document.getElementById('y_baki_dibayar_3').innerHTML = baki;
-                                            //     document.getElementById('jumlah_dibayar_3').value= parseFloat(jumlah).toFixed(2);
-                                            //     document.getElementById('baki_dibayar_3').value= 5000 - yuran;
-                                            // }
                                         </script>
                                     @elseif($permohonan->program == "PPK")
                                         @php
