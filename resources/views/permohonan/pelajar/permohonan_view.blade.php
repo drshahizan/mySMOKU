@@ -335,7 +335,7 @@
 								<div class="col-12">
 									<!--begin::Input-->
 									<select id='keturunan' name='keturunan' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
-										<option></option>
+										<option value="">Pilih</option>
 										@foreach ($keturunan as $keturunan)	
 										<option value="{{$keturunan->id}}" {{$butiranPelajar->kod_keturunan == $keturunan->id ? 'selected' : ''}}>{{ strtoupper($keturunan->keturunan)}}</option>
 										@endforeach
@@ -432,8 +432,8 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='parlimen' name='parlimen' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
-										<option></option>
+									<select id='parlimen' name='parlimen' class="form-select form-select-lg form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+										<option value="">Pilih</option>
 										@foreach ($parlimen as $parlimen)	
 										<option value="{{$parlimen->id}}" {{$butiranPelajar->parlimen == $parlimen->id ? 'selected' : ''}}>{{ $parlimen->kod_parlimen}} - {{ strtoupper($parlimen->parlimen)}}</option>
 										@endforeach
@@ -556,7 +556,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{$butiranPelajar->tel_bimbit_baru}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="text" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{str_replace('-', '', $butiranPelajar->tel_bimbit_baru)}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -569,7 +569,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{$butiranPelajar->tel_rumah_baru}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="text" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{str_replace('-', '', $butiranPelajar->tel_rumah_baru)}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -714,7 +714,7 @@
 							<label class="form-label mb-3">Nama</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" placeholder="" value="{{$butiranPelajar->nama_waris}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+							<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" style="text-transform: uppercase;" placeholder="" value="{{strtoupper($butiranPelajar->nama_waris)}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
@@ -763,7 +763,7 @@
 								<label class="form-label mb-6">No. Tel Bimbit</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="text" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{$butiranPelajar->tel_bimbit_waris}}"  {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+								<input type="text" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{str_replace('-', '', $butiranPelajar->tel_bimbit_waris)}}"  {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 								<!--end::Input-->
 							</div>
 							
@@ -1549,6 +1549,94 @@
 											var option = "<option value='"+id+"'>"+bandar+"</option>";
 
 											$("#alamat_tetap_bandar").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
+			//parlimen
+			$(document).ready(function(){
+				$('#alamat_tetap_negeri').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#parlimen').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: 'getParlimen/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var kod = response['data'][i].kod_parlimen;
+											var parlimen = response['data'][i].parlimen.toUpperCase();
+
+											var option = "<option value='"+id+"'>"+kod+" - "+parlimen+"</option>";
+
+											$("#parlimen").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
+			//dun
+			$(document).ready(function(){
+				$('#parlimen').on('change', function() {
+					var idparlimen = $(this).val();
+					// alert(idparlimen);
+					// Empty the dropdown
+					$('#dun').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: 'getDun/'+idparlimen,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var kod_dun = response['data'][i].kod_dun;
+											var dun = response['data'][i].dun.toUpperCase();
+
+											var option = "<option value='"+id+"'>"+kod_dun+"-"+dun+"</option>";
+
+											$("#dun").append(option); 
 										}
 									}
 							}, 

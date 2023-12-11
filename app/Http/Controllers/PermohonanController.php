@@ -163,6 +163,18 @@ class PermohonanController extends Controller
 
     }
 
+    public function getParlimen($idnegeri=0)
+    {
+
+        $parlimenData['data'] = Parlimen::orderby("parlimen","asc")
+         ->select('id','kod_parlimen','parlimen','negeri_id')
+         ->where('negeri_id',$idnegeri)
+         ->get();
+
+         return response()->json($parlimenData);
+
+    }
+
     public function getDun($idparlimen=0)
     {
 
@@ -243,8 +255,8 @@ class PermohonanController extends Controller
         $butiranPelajar->alamat_surat_negeri = $request->alamat_surat_negeri;
         $butiranPelajar->alamat_surat_bandar = $request->alamat_surat_bandar;
         $butiranPelajar->alamat_surat_poskod = $request->alamat_surat_poskod;
-        $butiranPelajar->tel_bimbit = $request->tel_bimbit;
-        $butiranPelajar->tel_rumah = $request->tel_rumah;
+        $butiranPelajar->tel_bimbit = str_replace('-', '', $request->tel_bimbit);
+        $butiranPelajar->tel_rumah = str_replace('-', '', $request->tel_rumah);
         $butiranPelajar->no_akaun_bank = $request->no_akaun_bank;
         $butiranPelajar->emel = $request->emel;
         $butiranPelajar->status_pekerjaan = $request->status_pekerjaan;
@@ -260,7 +272,7 @@ class PermohonanController extends Controller
         $waris->no_pasport_waris = $request->no_pasport_waris;
         $waris->hubungan_waris = $request->hubungan_waris;
         $waris->hubungan_lain_waris = $request->hubungan_lain_waris;
-        $waris->tel_bimbit_waris = $request->tel_bimbit_waris;
+        $waris->tel_bimbit_waris = str_replace('-', '', $request->tel_bimbit_waris);
         $waris->alamat_waris = $request->alamat_waris;
         $waris->alamat_negeri_waris = $request->alamat_negeri_waris;
         $waris->alamat_bandar_waris = $request->alamat_bandar_waris;
