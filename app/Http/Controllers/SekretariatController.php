@@ -1038,7 +1038,7 @@ class SekretariatController extends Controller
         }
         elseif($tuntutan->sesi != $sesi_sebelum){
             $j_tuntutan = JumlahTuntutan::where('jenis',"Yuran")->first();
-            $baki_terdahulu = $j_tuntutan;
+            $baki_terdahulu = $j_tuntutan->jumlah;
         }
 
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();

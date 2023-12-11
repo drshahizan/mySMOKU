@@ -285,10 +285,10 @@
                                                 $tuntutan->amaun_wang_saku = 0;
                                             }
                                             $jumlah = $yuran + $tuntutan->amaun_wang_saku;
-                                            $baki_y = $permohonan->baki_dibayar - $jumlah;
+                                            $baki_y = $baki_terdahulu - $jumlah;
                                         @endphp
                                         <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
-                                        <input type="hidden" name="baki_y" id="baki_y" value="{{$permohonan->baki_dibayar}}">
+                                        <input type="hidden" name="baki_y" id="baki_y" value="{{$baki_terdahulu}}">
                                         <input type="hidden" name="baki_disokong" id="baki_disokong" value="{{$baki_y}}">
 {{--                                        <input type="hidden" name="baki_dibayar" id="baki_dibayar" value="">--}}
                                         <div class="table-responsive">
@@ -464,13 +464,13 @@
                                                 }
                                             }
                                             $jumlah = $yuran;
-                                            $baki_y = $permohonan->baki_dibayar - $jumlah;
+                                            $baki_y = $baki_terdahulu - $jumlah;
                                         @endphp
                                         <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
-                                        <input type="hidden" name="baki_y" id="baki_y_2" value="{{$permohonan->baki_dibayar}}">
+                                        <input type="hidden" name="baki_y" id="baki_y_2" value="{{$baki_terdahulu}}">
                                         <input type="hidden" name="baki_disokong" id="baki_disokong_3" value="{{$baki_y}}">
 {{--                                        <input type="hidden" name="baki_dibayar" id="baki_dibayar_3" value="">--}}
-                                        <input type="hidden" name="baki_y" id="baki_y" value="{{$permohonan->baki_dibayar}}">
+                                        <input type="hidden" name="baki_y" id="baki_y" value="{{$baki_terdahulu}}">
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
