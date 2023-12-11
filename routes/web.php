@@ -85,6 +85,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Permohonan Pelajar
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
     Route::get('/getBandar/{id}', [PermohonanController::class, 'getBandar']);
+    Route::get('/getParlimen/{id}', [PermohonanController::class, 'getParlimen']);
     Route::get('/getDun/{id}', [PermohonanController::class, 'getDun']);
     Route::get('/peringkat/{id}', [PermohonanController::class, 'peringkat']);
     Route::get('/kursus/{kodperingkat}/{id}', [PermohonanController::class, 'kursus']);
