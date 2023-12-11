@@ -389,6 +389,7 @@
 
 							// Split the address by the postcode
 							$addressParts = explode($postcode, $smoku->alamat_tetap, 2);
+							// dd($addressParts);
 
 							// Check if the second part (after the postcode) exists
 							if (isset($addressParts[1])) {
@@ -1097,7 +1098,7 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+								<select name="mod" id="mod" class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 									@foreach ($mod as $mod)
 									<option></option>
 									<option value="{{$mod->kod_mod}}">{{$mod->mod}}</option>
@@ -1125,7 +1126,7 @@
 							<!--end::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Bil Bulan Persemester</label>
+								<label class=" fs-6 fw-semibold form-label mb-2">Bilangan Bulan Persemester</label>
 								<!--end::Label-->
 								<!--begin::Row-->
 								<div class="row fv-row">
@@ -1324,16 +1325,16 @@
 							<br>
 							<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
 							<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
-							<div class="row mb-10">
+							<div class="row mb-10" id="divyuran">
 								<br>
 								<br>
-								<div class="col-6" id="divyuran">
+								<div class="col-6">
 									<input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" onclick="return false" checked/>
 									<label class="fs-6 fw-semibold form-label">
 										Yuran
 									</label>
 								</div>
-								<div class="col-6" id="divamaun">
+								<div class="col-6">
 									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
 									<!--begin::Input-->
 									<div class="d-flex">
@@ -1344,16 +1345,16 @@
 								</div>
 							</div>
 							<br>
-							<div class="row mb-10">
+							<div class="row mb-10" id="divelaun">
 								<br>
 								<br>
-								<div class="col-6" id="divelaun">
+								<div class="col-6" >
 									<input class="form-check-input" type="checkbox" value="1" id="wang_saku"  name="wang_saku" onclick="return false" checked/>
 									<label class="fs-6 fw-semibold form-label">
 										Elaun Wang Saku
 									</label>
 								</div>
-								<div class="col-6" id="divamaunelaun">
+								<div class="col-6">
 									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
 									<!--begin::Input-->
 									<div class="d-flex">
@@ -1847,9 +1848,21 @@
 				if ( this.value == '5'){
 					$("#div_biaya_lain").show();
 				}
+				else if (this.value == '2'){
+					$("#div_nama_penaja").hide();
+					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+				}
+				else if (this.value == '3'){
+					$("#div_nama_penaja").hide();
+					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+				}
 				else if (this.value == '4'){
 					$("#div_nama_penaja").hide();
+					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
 				}
+				// else if (this.value != '1'){
+				// 	$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+				// }
 				else {
 					$("#div_biaya_lain").hide();
 					$("#div_nama_penaja").show();
@@ -1987,13 +2000,31 @@
 					console.error('Error fetching data:', error);
 				}
 			});
+			
+
 			function select1(){
 				console.clear();
 				
-				var sumber = document.getElementById('sumber_biaya').value;
-				var mod = document.getElementById('mod').value;
+				// var sumber = document.getElementById('sumber_biaya').value;
+				// var mod = document.getElementById('mod').value;
+				// $('#mod').on('change', function() {
+					// Store the value of 'sumber_biaya' element in sessionStorage with key 'mod'
+					sessionStorage.setItem('mod', document.getElementById('mod').value);
+
+				// });
+				// $('#sumber_biaya').on('change', function() {
+					// sessionStorage.setItem('sumber', $(this).val());
+					// Store the value of 'sumber_biaya' element in sessionStorage with key 'mod'
+					sessionStorage.setItem('sumber', document.getElementById('sumber_biaya').value);
+
+				// });
+				
+
+				var mod = sessionStorage.getItem('mod');
+				var sumber = sessionStorage.getItem('sumber');
 				var bilbulan = document.getElementById('bil_bulan_per_sem').value;
-				// alert(sumber);
+				console.log("Debug - mod: ", mod);
+				console.log("Debug - sumber: ", sumber);
 				
 
 				var max_yuran = parseFloat(document.getElementById('max_yuran').value).toFixed(2);
@@ -2010,37 +2041,47 @@
 				if (!isNaN(yuran)) {
 					if (parseFloat(yuran) > parseFloat(maxLimit)) {
 						yuranInput.value = '';
-						alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' bagi satu sesi pengajian.' );
+						alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' / tahun kalendar akademik.' );
 						return;
 					}
 				}
 				
-				var wang_saku_perbulan = max_wang_saku;
+				
+				
+				
+				
+				if (mod === '1' && sumber === '1') { //sepenuh masa && biasiswa
+					// console.log("Condition mod==='1' && sumber==='1' is met.");
+					// console.log("Debug - mod: ", mod);
+					// console.log("Debug - sumber: ", sumber);
+					// console.log("Debug - bil bulan: ", bilbulan);
+					// console.log("wang_saku_perbulan: ", wang_saku_perbulan);
+					// console.log("wang_saku: ", wang_saku);
+					var wang_saku_perbulan = max_wang_saku;
 
-				var wang_saku = wang_saku_perbulan * bilbulan;
-				var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
+					var wang_saku = wang_saku_perbulan * bilbulan;
 
-				if(sumber=="1" && mod=="1"){
 					document.getElementById("divyuran").style.display = "none";
-					document.getElementById("divamaun").style.display = "none";
+					document.getElementById("divelaun").style.display = "";
 					document.getElementById("wang_saku").disabled = false;
-					document.getElementById("amaun_wang_saku").value= wang_saku;
+					document.getElementById("yuran").value = '';
+					document.getElementById("amaun_yuran").value = '';
+					document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
 				}
-				else if(sumber!="1" && mod=="2"){
-					document.getElementById("yuran").disabled = false;
-					document.getElementById("divelaun").style.display = "none";
-					document.getElementById("divamaunelaun").style.display = "none";
-				}
-				else if(sumber=="1" && mod=="2"){
-					document.getElementById("divyuran").style.display = "none";
-					document.getElementById("divelaun").style.display = "none";
-					document.getElementById("divamaun").style.display = "none";
-					document.getElementById("divamaunelaun").style.display = "none";
-				}
-				else{
-					document.getElementById("yuran").disabled = false;
-					document.getElementById("wang_saku").disabled = false;
+				else if(mod === '1' && sumber === '4'){
+					console.log("Condition mod==='1' && sumber==='4' is met.");
+					console.log("Debug - mod: ", mod);
+					console.log("Debug - sumber: ", sumber);
 
+					var wang_saku_perbulan = max_wang_saku;
+
+					var wang_saku = wang_saku_perbulan * bilbulan;
+
+					console.log("Total amount yuran: " + parseFloat(yuran));
+					if (isNaN(yuran)) {
+						yuran = 0; // Set yuran to 0 or handle it as needed
+					}
+					var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
 					if (total <= max_yuran) {
 						document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
 						console.log("Total amount is within the limit: " + parseFloat(total));
@@ -2050,14 +2091,90 @@
 						if (!isNaN(baki_wang_saku)) {
 							document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
 							console.log("Total amount exceeds the limit: " + parseFloat(total));
-						} else {
+						} 
+						else {
 							document.getElementById("amaun_wang_saku").value = "";
 							console.log("Invalid input. Cannot calculate total amount.");
 						}
 
 					}
+					document.getElementById("yuran").value = '1';
+					document.getElementById("divyuran").style.display = "";
+					document.getElementById("yuran").disabled = false;
+					document.getElementById("divelaun").style.display = "";
+					document.getElementById("wang_saku").value = '1';
+					document.getElementById("wang_saku").disabled = false;
 					
 				}
+				else if(mod === '1' && sumber === '3'){
+					console.log("Condition mod==='1' && sumber==='3' is met.");
+					console.log("Debug - mod: ", mod);
+					console.log("Debug - sumber: ", sumber);
+
+					var wang_saku_perbulan = max_wang_saku;
+
+					var wang_saku = wang_saku_perbulan * bilbulan;
+
+					console.log("Total amount yuran: " + parseFloat(yuran));
+					if (isNaN(yuran)) {
+						yuran = 0; // Set yuran to 0 or handle it as needed
+					}
+					var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
+					if (total <= max_yuran) {
+						document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
+						console.log("Total amount is within the limit: " + parseFloat(total));
+					} else {
+
+						var baki_wang_saku = max_yuran - yuran;
+						if (!isNaN(baki_wang_saku)) {
+							document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
+							console.log("Total amount exceeds the limit: " + parseFloat(total));
+						} 
+						else {
+							document.getElementById("amaun_wang_saku").value = "";
+							console.log("Invalid input. Cannot calculate total amount.");
+						}
+
+					}
+					document.getElementById("yuran").value = '1';
+					document.getElementById("divyuran").style.display = "";
+					document.getElementById("yuran").disabled = false;
+					document.getElementById("divelaun").style.display = "";
+					document.getElementById("wang_saku").value = '1';
+					document.getElementById("wang_saku").disabled = false;
+
+					
+				}
+				else if(mod === '2' && sumber !== '1'){
+					console.log("Condition mod ==='2' && sumber !=='1' is met.");
+					document.getElementById("yuran").value = '1';
+					document.getElementById("divyuran").style.display = "";
+					document.getElementById("yuran").disabled = false;
+					document.getElementById("wang_saku").value = '';
+					document.getElementById("amaun_wang_saku").value = '';
+
+
+				}
+				else if(mod === '2' && sumber === '1'){
+					console.log("Condition mod ==='2' && sumber ==='1' is met.");
+					document.getElementById("divyuran").style.display = "none";
+					document.getElementById("divelaun").style.display = "none";
+				}
+				else{
+					var wang_saku_perbulan = max_wang_saku;
+
+					var wang_saku = wang_saku_perbulan * bilbulan;
+
+					document.getElementById("divyuran").style.display = "none";
+					document.getElementById("yuran").value = '';
+					document.getElementById("amaun_yuran").value = '';
+					document.getElementById("divelaun").style.display = "";
+					document.getElementById("wang_saku").disabled = false;
+					document.getElementById("wang_saku").value = '1';
+					document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
+					
+				}
+				
 	
 
 
