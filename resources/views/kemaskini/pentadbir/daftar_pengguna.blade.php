@@ -198,7 +198,7 @@
 																		<label class="fs-6 fw-semibold mb-2">Nama Pusat Pengajian</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<select name="id_institusi" id="id_institusi" class="form-select form-select-solid" data-placeholder="Pilih">
+																		<select name="id_institusi" id="id_institusi" class="form-select form-select-solid js-example-basic-single" data-placeholder="Pilih">
 																			@foreach ($infoipt as $infoipt2)
 																			<option value="{{ $infoipt2->id_institusi}}" {{$user->id_institusi == $infoipt2->id_institusi ? 'selected' : ''}}>{{ strtoupper($infoipt2->nama_institusi)}}</option>
 																			@endforeach
@@ -481,6 +481,9 @@
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 	<script>
+		$(document).ready(function() {
+			$('.js-example-basic-single').select2();
+			});
 		// $(document).ready(function(){
 			console.log("Document is ready!");
 			$('#tahap').on('change', function() {
