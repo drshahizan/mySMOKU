@@ -12,6 +12,7 @@ class MaklumatBank extends Model
 
     protected $fillable = [
         'institusi_id',
+        'bank_id',
         'nama_akaun',
         'no_akaun',
         'penyata_bank',

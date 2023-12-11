@@ -1375,6 +1375,7 @@ class PenyelarasController extends Controller
             // If the record exists, update it; otherwise, create a new one
             if ($bankExist) {
                 $bankExist->update([
+                    'bank_id' => $request->input('kod_bank'),
                     'nama_akaun' => $request->input('nama_bank'),
                     'no_akaun' => $request->input('no_acc'),
                     'penyata_bank' => $fileName,
@@ -1383,6 +1384,7 @@ class PenyelarasController extends Controller
                 // If the record doesn't exist, create a new one with the file
                 MaklumatBank::create([
                     'institusi_id' => $id,
+                    'bank_id' => $request->input('kod_bank'),
                     'nama_akaun' => $request->input('nama_bank'),
                     'no_akaun' => $request->input('no_acc'),
                     'penyata_bank' => $fileName,
@@ -1392,6 +1394,7 @@ class PenyelarasController extends Controller
             // No new file uploaded, update other fields if necessary
             if ($bankExist) {
                 $bankExist->update([
+                    'bank_id' => $request->input('kod_bank'),
                     'nama_akaun' => $request->input('nama_bank'),
                     'no_akaun' => $request->input('no_acc'),
                 ]);
@@ -1401,8 +1404,11 @@ class PenyelarasController extends Controller
         // Fetch the updated $bank data from the database
         $bank = MaklumatBank::where('institusi_id', $id)->first();
 
+        // Pass senarai bank
+        $senarai_bank = SenaraiBank::all();
+
         // Check if $bank is not null before passing it to the view
-        return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user'));
+        return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user','senarai_bank'));
     }
 
     //PENYALURAN - PEMBAYARAN
