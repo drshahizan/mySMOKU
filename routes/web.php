@@ -374,8 +374,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Pegawai
     Route::get('pegawai/dashboard', [PegawaiController::class,'index'])->name('pegawai.dashboard');
-
-
  });
 
 Route::get('/error', function () {

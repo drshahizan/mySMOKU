@@ -118,7 +118,7 @@
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
                                                     <div class="form-control-arrow">
-                                                        <select name="kod_bank" class="form-control" style="width:100%;">
+                                                        <select name="kod_bank" class="form-control">
                                                             <option value="">Pilih Bank</option>
                                                             @foreach ($senarai_bank->sortBy('nama_bank') as $senaraiBank)
                                                                 <option value="{{ $senaraiBank->kod_bank }}" {{ old('kod_bank', optional($bank)->bank_id) == $senaraiBank->kod_bank ? 'selected' : '' }}>
@@ -140,7 +140,7 @@
                                                 <td class="vertical-top w-13">Penyata Bank</td>
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
-                                                    <div class="file-input">
+                                                    <div class="file-input" style="width:100%;">
                                                         <input type="file" name="penyata"/>
                                                         @if(isset($bank->penyata_bank) && !empty($bank->penyata_bank))
                                                             <a href="{{ asset('assets/dokumen/penyata_bank_islam/' . $bank->penyata_bank) }}" target="_blank">{{ $bank->penyata_bank }}</a>
