@@ -192,7 +192,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('kemaskini/sekretariat/surat/tawaran/preview', [SekretariatController::class, 'previewSuratTawaran'])->name('preview');
     Route::post('kemaskini/sekretariat/surat/tawaran/send/{suratTawaranId}', [SekretariatController::class, 'sendSuratTawaran'])->name('send');
     Route::get('kemaskini/sekretariat/surat/tawaran/update/{suratTawaranId}', [SekretariatController::class, 'updatedSuratTawaran'])->name('update');
-    Route::get('sekretatriat/muat-turun/kemaskini/surat-tawaran', [SekretariatController::class, 'muatTurunKemaskiniSuratTawaran']);
+    Route::get('sekretariat/muat-turun/surat-tawaran/dikemaskini', [SekretariatController::class, 'muatTurunKemaskiniSuratTawaran']);
 
     //Penyaluran - Sekretariat - Dokumen SPBB
     Route::get('penyaluran/sekretariat/muat-naik/dokumen/SPBB', [SekretariatController::class, 'muatNaikDokumenSPPB'])->name('sekretariat.muat-naik.SPBB');

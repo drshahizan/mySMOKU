@@ -436,11 +436,11 @@ class SekretariatController extends Controller
         $maklumat_kementerian = MaklumatKementerian::first();
 
         $pdf = PDF::loadView('kemaskini.sekretariat.surat_tawaran.muat-turun', compact('suratTawaran', 'maklumat_kementerian'));
-        $filePath = storage_path('app/surat-Tawaran-Terkini.pdf');
-        $pdf->save($filePath);
+        // $filePath = storage_path('app/surat-Tawaran-Terkini.pdf');
+        // $pdf->save($filePath);
 
-        return response()->download($filePath);
-        // return $pdf->stream('surat-tawaran-dikemaskini.pdf');
+        // return response()->download($filePath);
+        return $pdf->stream('surat-tawaran-dikemaskini.pdf');
     }
 
     public function senaraiKelulusanPermohonan(Request $request)

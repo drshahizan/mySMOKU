@@ -159,8 +159,8 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
             'O' => 20,
             'P' => 20,
             'Q' => 20,
-            'R' => 50,
-            'S' => 25,
+            'R' => 60,
+            'S' => 40,
         ];
     }
 
@@ -216,7 +216,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
 
     private function getBankData()
     {
-        return DB::table('maklumat_bank')->where('institusi_id', Auth::user()->id_institusi)->value('nama_akaun');
+        return DB::table('maklumat_bank')->join('senarai_bank','senarai_bank.kod_bank','=','maklumat_bank.bank_id' )->where('institusi_id', Auth::user()->id_institusi)->value('senarai_bank.nama_bank');
     }
 
     private function getNoAkaunData()
