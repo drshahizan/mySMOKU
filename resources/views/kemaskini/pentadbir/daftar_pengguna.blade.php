@@ -184,14 +184,14 @@
 																		<!--begin::Input-->
 																		<select name="tahap" id="tahap" class="form-select form-select-solid" data-placeholder="Pilih">
 																			@foreach($tahap as $tahap1)
-																				<option value="{{ $tahap1->id }}" {{$user->tahap == $tahap1->id  ? 'selected' : ''}}>{{ $tahap1->name}}</option>
+																				<option value="{{ $tahap1->id }}" {{$user->tahap == $tahap1->id  ? 'selected' : ''}}>{{ strtoupper($tahap1->name)}}</option>
 																			@endforeach
 																		</select>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
 
-																	@if ($user->tahap =='2')
+																	@if ($user->tahap =='2' || $user->tahap =='6')
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7" id="div_ipt">
 																		<!--begin::Label-->
@@ -200,28 +200,14 @@
 																		<!--begin::Input-->
 																		<select name="id_institusi" id="id_institusi" class="form-select form-select-solid" data-placeholder="Pilih">
 																			@foreach ($infoipt as $infoipt2)
-																			<option value="{{ $infoipt2->id_institusi}}" {{$user->id_institusi == $infoipt2->id_institusi ? 'selected' : ''}}>{{ $infoipt2->nama_institusi}}</option>
+																			<option value="{{ $infoipt2->id_institusi}}" {{$user->id_institusi == $infoipt2->id_institusi ? 'selected' : ''}}>{{ strtoupper($infoipt2->nama_institusi)}}</option>
 																			@endforeach
 																		</select>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
 																	@endif
-
-																	<script>
-																		$(document).ready(function(){
-																			$('#tahap').on('change', function() {
-																			if ( this.value == '2'){
-																				$("#div_ipt").show();
-																			}
-																			else {
-																				$("#div_ipt").hide();
-																			}
-																			});
-																		});
-																		
-
-																	</script>
+																	
 
 																	@if ($user->tahap !='1')
 																	<!--begin::Input group-->
@@ -492,6 +478,23 @@
 	<script src="assets/js/custom/apps/customers/add.js"></script>
 	<!--end::Custom Javascript-->
 	<!--end::Javascript-->
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+	<script>
+		// $(document).ready(function(){
+			console.log("Document is ready!");
+			$('#tahap').on('change', function() {
+			if ( this.value == '2'){
+				$("#div_ipt").show();
+			}
+			else {
+				$("#div_ipt").hide();
+			}
+			});
+		// });
+		
+
+	</script>
 
 	<script>
 		$(document).ready(function(){
