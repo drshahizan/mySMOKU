@@ -263,10 +263,10 @@
                             <form method="POST" action="{{ url('tuntutan/sekretariat/sejarah/hantar-saringan/'.$sejarah_t->id) }}" id="saring">
                                 <h6>Pengiraan:</h6>
                                 <br>
-                                <p>Baki Terdahulu: {{$permohonan->baki_dibayar}}</p>
+                                <p>Baki Terdahulu: {{$baki_terdahulu}}</p>
                                 <!--begin: Invoice body-->
                                 {{csrf_field()}}
-                                <input type="hidden" value="{{$permohonan->baki_dibayar}}">
+                                <input type="hidden" value="{{$baki_terdahulu}}">
                                 @if($permohonan->program == "BKOKU" && $tuntutan->yuran == "1" && $tuntutan->wang_saku == "1")
                                     <!--begin: Invoice body-->
                                     @php
@@ -285,10 +285,10 @@
                                             $tuntutan->amaun_wang_saku = 0;
                                         }
                                         $jumlah = $yuran + $tuntutan->amaun_wang_saku;
-                                        $baki_y = $permohonan->baki_dibayar - $jumlah;
+                                        $baki_y = $baki_terdahulu - $jumlah;
                                     @endphp
                                     <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
-                                    <input type="hidden" name="baki_y" id="baki_y" value="{{$permohonan->baki_dibayar}}">
+                                    <input type="hidden" name="baki_y" id="baki_y" value="{{$baki_terdahulu}}">
                                     <input type="hidden" name="baki_disokong" id="baki_disokong" value="">
 {{--                                    <input type="hidden" name="baki_dibayar" id="baki_dibayar" value="">--}}
                                     <div class="table-responsive">
@@ -463,10 +463,10 @@
                                             }
                                         }
                                         $jumlah = $yuran;
-                                        $baki_y = $permohonan->baki_dibayar - $jumlah;
+                                        $baki_y = $baki_terdahulu - $jumlah;
                                     @endphp
                                     <input type="hidden" name="baki" id="baki" value="{{$baki_y}}">
-                                    <input type="hidden" name="baki_y" id="baki_y_2" value="{{$permohonan->baki_dibayar}}">
+                                    <input type="hidden" name="baki_y" id="baki_y_2" value="{{$baki_terdahulu}}">
                                     <input type="hidden" name="baki_disokong" id="baki_disokong_3" value="">
 {{--                                    <input type="hidden" name="baki_dibayar" id="baki_dibayar_3" value="">--}}
                                     <div class="table-responsive">

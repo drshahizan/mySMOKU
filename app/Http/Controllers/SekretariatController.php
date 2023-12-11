@@ -1477,7 +1477,7 @@ class SekretariatController extends Controller
         $peringkat = $rujukan[1];
         $no_tuntutan = $rujukan[3];
 
-        $tuntutan_sebelum = Tuntutan::where('permohonan_id',$tuntutan->permohonan_id)->where('status', '6')->where('id', '<', $id)->orderBy('id','desc')->first();
+        $tuntutan_sebelum = Tuntutan::where('permohonan_id',$tuntutan->permohonan_id)->where('status', '6')->where('id', '<', $sejarah_t->tuntutan_id)->orderBy('id','desc')->first();
         if($tuntutan_sebelum!=null){
             $sesi_sebelum = $tuntutan_sebelum->sesi;
         }
@@ -1526,10 +1526,35 @@ class SekretariatController extends Controller
         $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
         $smoku_id = $tuntutan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
-        $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
+        $rujukan = explode("/", $tuntutan->no_rujukan_tuntutan);
         $peringkat = $rujukan[1];
+        $no_tuntutan = $rujukan[3];
+
+        $tuntutan_sebelum = Tuntutan::where('permohonan_id',$tuntutan->permohonan_id)->where('status', '6')->where('id', '<', $sejarah_t->tuntutan_id)->orderBy('id','desc')->first();
+        if($tuntutan_sebelum!=null){
+            $sesi_sebelum = $tuntutan_sebelum->sesi;
+        }
+        else{
+            $sesi_sebelum = null;
+        }
+
+        $baki_terdahulu = 0;
+
+        if($no_tuntutan == 1){
+            $baki_terdahulu = $permohonan->baki_dibayar;
+        }
+        elseif ($tuntutan_sebelum==null){
+            $baki_terdahulu = $permohonan->baki_dibayar;
+        }
+        elseif($tuntutan->sesi == $sesi_sebelum){
+            $baki_terdahulu = $tuntutan_sebelum->baki_dibayar;
+        }
+        elseif($tuntutan->sesi != $sesi_sebelum){
+            $j_tuntutan = JumlahTuntutan::where('jenis',"Yuran")->first();
+            $baki_terdahulu = $j_tuntutan->jumlah;
+        }
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
-        return view('tuntutan.sekretariat.sejarah.kemaskini_saringan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
+        return view('tuntutan.sekretariat.sejarah.kemaskini_saringan',compact('baki_terdahulu','permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
     }
 
     public function hantarSaringan(Request $request, $id){
