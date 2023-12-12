@@ -335,7 +335,7 @@
                                                     <select name="status" class="form-select">
                                                         <option value="">Semua Institusi</option>
                                                         @foreach($institusi as $item)
-                                                            <option value="{{$item['id_institusi']}}" {{ Request::get('institusi') == '' ? 'selected' : '' }}>{{$item['nama_institusi']}}</option>
+                                                            <option value="{{$item['id_institusi']}}" {{ Request::get('institusi') == $item['id_institusi'] ? 'selected' : '' }}>{{$item['nama_institusi']}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
