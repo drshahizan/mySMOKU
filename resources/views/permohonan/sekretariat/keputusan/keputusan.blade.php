@@ -128,14 +128,15 @@
                                         <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable1" class="table table-bordered table-striped">
                                                 <thead>
-                                                    <tr style="color: white; background-color:rgb(35, 58, 108);">
+                                                    <tr style="color: white;">
                                                         <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>
-                                                        <th style="width: 12%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 33%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 12%"><b>Peringkat Pengajian</b></th> 
+                                                        <th style="width: 10%"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 30%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 15%"><b>Tarikh Kemaskini Keputusan</b></th> 
-                                                        <th class="text-center" style="width: 15%">Status Permohonan</th>
+                                                        <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>Status Permohonan</b></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -154,6 +155,10 @@
 							                                                       ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
                                                                                    ->where('permohonan.id', $item['permohonan_id'])
                                                                                    ->value('bk_info_institusi.jenis_institusi');
+                                                            $institusi_pengajian = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                                                            ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                                                            ->where('permohonan.id', $item['permohonan_id'])
+                                                            ->value('bk_info_institusi.nama_institusi');
 
                                                             //peringkat pengajian
                                                             preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches); // Extract peringkat pengajian value using regular expression
@@ -173,6 +178,21 @@
                                                                 }
                                                             }
                                                             $pemohon = implode(' ', $result);
+
+                                                            //institusi pengajian
+                                                            $text3 = ucwords(strtolower($institusi_pengajian)); 
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text3);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                            $institusi = implode(' ', $result);
+                                                            $nama_institusi = transformBracketsToUppercase($institusi);
                                                         @endphp
 
                                                         @if($program == "BKOKU")
@@ -181,6 +201,7 @@
                                                                     <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
                                                                     <td>{{$no_rujukan_permohonan}}</td>
                                                                     <td>{{$pemohon}}</td>
+                                                                    <td>{{$nama_institusi}}</td>
                                                                     <td class="text-center">{{ucwords(strtolower($nama_peringkat))}}</td>
                                                                     <td class="text-center">{{$item->no_mesyuarat}}</td>
                                                                     <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
@@ -240,14 +261,15 @@
                                         <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable2" class="table table-bordered table-striped">
                                                 <thead>
-                                                    <tr style="color: white; background-color:rgb(35, 58, 108);">
+                                                    <tr style="color: white;">
                                                         <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>
-                                                        <th style="width: 12%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 33%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 12%"><b>Peringkat Pengajian</b></th> 
+                                                        <th style="width: 10%"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 30%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 15%"><b>Tarikh Kemaskini Keputusan</b></th> 
-                                                        <th class="text-center" style="width: 15%">Status Permohonan</th>
+                                                        <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>Status Permohonan</b></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -266,6 +288,10 @@
 							                                                       ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
                                                                                    ->where('permohonan.id', $item['permohonan_id'])
                                                                                    ->value('bk_info_institusi.jenis_institusi');
+                                                            $institusi_pengajian = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                                                                                    ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                                                                                    ->where('permohonan.id', $item['permohonan_id'])
+                                                                                    ->value('bk_info_institusi.nama_institusi');
 
                                                             //peringkat pengajian
                                                             preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches); // Extract peringkat pengajian value using regular expression
@@ -285,18 +311,34 @@
                                                                 }
                                                             }
                                                             $pemohon = implode(' ', $result);
+
+                                                            //institusi pengajian
+                                                            $text3 = ucwords(strtolower($institusi_pengajian)); 
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text3);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                            $institusi = implode(' ', $result);
+                                                            $nama_institusi = transformBracketsToUppercase($institusi);
                                                         @endphp
 
                                                         @if($program == "BKOKU")
                                                             @if ($jenis_institusi == "UA")
                                                                 <tr>
                                                                     <td class="text-center" style="width: 3%"  data-no="{{ $i++ }}">{{$i++}}</td>
-                                                                    <td style="width: 12%">{{$no_rujukan_permohonan}}</td>
-                                                                    <td style="width: 33%">{{$pemohon}}</td>
-                                                                    <td class="text-center" style="width: 12%">{{ucwords(strtolower($nama_peringkat))}}</td>
+                                                                    <td style="width: 10%">{{$no_rujukan_permohonan}}</td>
+                                                                    <td style="width: 30%">{{$pemohon}}</td>
+                                                                    <td style="width: 15%">{{$nama_institusi}}</td>
+                                                                    <td class="text-center" style="width: 10%">{{ucwords(strtolower($nama_peringkat))}}</td>
                                                                     <td class="text-center" style="width: 10%">{{$item->no_mesyuarat}}</td>
-                                                                    <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                                                                    <td class="text-center" style="width: 15%">
+                                                                    <td class="text-center" style="width: 12%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
+                                                                    <td class="text-center" style="width: 10%">
                                                                         @if($item->keputusan == "Lulus")
                                                                             <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
                                                                                 <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
@@ -352,14 +394,15 @@
                                         <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable3" class="table table-bordered table-striped">
                                                 <thead>
-                                                    <tr style="color: white; background-color:rgb(35, 58, 108);">
+                                                    <tr style="color: white;">
                                                         <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>
-                                                        <th style="width: 12%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 33%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 12%"><b>Peringkat Pengajian</b></th> 
+                                                        <th style="width: 10%"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 30%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 15%"><b>Tarikh Kemaskini Keputusan</b></th> 
-                                                        <th class="text-center" style="width: 15%">Status Permohonan</th>
+                                                        <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>Status Permohonan</b></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -374,7 +417,12 @@
                                                             $peringkat = DB::table('permohonan')->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku_akademik.peringkat_pengajian');
                                                             $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat',$peringkat)->value('peringkat');
                                                             $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
+                                                            $institusi_pengajian = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                                                                                    ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                                                                                    ->where('permohonan.id', $item['permohonan_id'])
+                                                                                    ->value('bk_info_institusi.nama_institusi');
 
+                                                            // nama pemohon
                                                             $text = ucwords(strtolower($nama));
                                                             $conjunctions = ['bin', 'binti'];
                                                             $words = explode(' ', $text);
@@ -387,23 +435,39 @@
                                                                 }
                                                             }
                                                             $pemohon = implode(' ', $result);
+
+                                                            //institusi pengajian
+                                                            $text3 = ucwords(strtolower($institusi_pengajian)); 
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text3);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                            $institusi = implode(' ', $result);
+                                                            $nama_institusi = transformBracketsToUppercase($institusi);
                                                         @endphp
 
                                                         @if($program == "PPK")
                                                             <tr>
                                                                 <td class="text-center" style="width: 3%"  data-no="{{ $i++ }}">{{$i++}}</td>
-                                                                <td style="width: 12%">{{$id_permohonan}}</td>
-                                                                <td style="width: 33%">{{$pemohon}}</td>
-                                                                <td class="text-center" style="width: 12%">{{ucwords(strtolower($nama_peringkat))}}</td>
+                                                                <td style="width: 10%">{{$no_rujukan_permohonan}}</td>
+                                                                <td style="width: 30%">{{$pemohon}}</td>
+                                                                <td style="width: 15%">{{$nama_institusi}}</td>
+                                                                <td class="text-center" style="width: 10%">{{ucwords(strtolower($nama_peringkat))}}</td>
                                                                 <td class="text-center" style="width: 10%">{{$item->no_mesyuarat}}</td>
-                                                                <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                                                                <td class="text-center" style="width: 15%">
+                                                                <td class="text-center" style="width: 12%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
+                                                                <td class="text-center" style="width: 10%">
                                                                     @if($item->keputusan == "Lulus")
                                                                         <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
                                                                             <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
                                                                         </a>
                                                                     @elseif($item->keputusan == "Tidak Lulus")
-                                                                        <div class="btn btn-danger btn-round btn-sm" style="width: 43%; padding-left:0%; padding-right:0%;">Tidak Layak</div>
+                                                                        <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
                                                                     @endif
                                                                 </td>
                                                             </tr>
