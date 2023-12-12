@@ -383,12 +383,11 @@
 											</div>
 											<!--end::Input group-->
 											<!--begin::Input group-->
-											<div class="fv-row mb-7">
+											{{-- <div class="fv-row mb-7">
 												<!--begin::Label-->
 												<label class="fs-6 fw-semibold mb-2">Kata Laluan</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												{{-- <input type="text" class="form-control form-control-solid" placeholder="" name="password" /> --}}
 												<div class="fv-row mb-8" data-kt-password-meter="true">
 													<!--begin::Wrapper-->
 													<div class="mb-1">
@@ -421,7 +420,7 @@
 													<!--end::Hint-->
 												</div>
 												<!--end::Input-->
-											</div>
+											</div> --}}
 											<!--end::Input group-->
 										</div>
 										<!--end::Scroll-->

@@ -14,6 +14,7 @@ use App\Models\JumlahTuntutan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailDaftarPengguna;
+use App\Mail\MailDaftarPentadbir;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 
@@ -41,6 +42,16 @@ class PentadbirController extends Controller
     public function store(Request $request)
     {   
         $user = User::where('no_kp', '=', $request->no_kp)->first();
+
+        $characters = 'abcdef12345!@#$%^&';
+        $password_length = 12;
+
+        // Generate the random password
+        $password = '';
+        for ($i = 0; $i < $password_length; $i++) {
+            $password .= $characters[random_int(0, strlen($characters) - 1)];
+        }
+        // dd($password);
         
         if ($user === null) {
 
@@ -50,7 +61,7 @@ class PentadbirController extends Controller
                 'email' => $request->email,
                 'tahap' => $request->tahap,
                 'jawatan' => $request->jawatan,
-                'password' => Hash::make($request->password),
+                'password' => Hash::make($password),
                 'status' => '1',
             ];
             
@@ -67,7 +78,7 @@ class PentadbirController extends Controller
 
             $email = $request->email;
             $no_kp = $request->no_kp;
-            Mail::to($email)->send(new MailDaftarPengguna($email,$no_kp));
+            Mail::to($email)->send(new MailDaftarPentadbir($email,$no_kp,$password));
             //return redirect()->route('daftarpengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' .$request->nama);    
             return response()->json(['message' => 'Emel notifikasi telah dihantar kepada ' . $request->nama]);
         } else {

@@ -49,24 +49,24 @@ var KTModalCustomersAdd = function () {
 							}
 						}
 					},
-					'password': {
-						validators: {
-							notEmpty: {
-								message: 'Kata laluan diperlukan'
-							},
-                            callback: {
-                                message: 'Masukkan kata laluan yang sah',
-                                callback: function (input) {
-                                    if (input.value.length >= 12) {
-                                        return validatePassword();
-                                    } else {
-                                        // Password length is less than 12 characters, so it's not valid
-                                        return false;
-                                    }
-                                }
-                            }
-						}
-					},
+					// 'password': {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'Kata laluan diperlukan'
+					// 		},
+                    //         callback: {
+                    //             message: 'Masukkan kata laluan yang sah',
+                    //             callback: function (input) {
+                    //                 if (input.value.length >= 12) {
+                    //                     return validatePassword();
+                    //                 } else {
+                    //                     // Password length is less than 12 characters, so it's not valid
+                    //                     return false;
+                    //                 }
+                    //             }
+                    //         }
+					// 	}
+					// },
 					
 				},
 				plugins: {
@@ -81,17 +81,17 @@ var KTModalCustomersAdd = function () {
 		);
 
 		// Handle password input
-        form.querySelector('input[name="password"]').addEventListener('input', function () {
-            if (this.value.length >= 12) {
-                validator.updateFieldStatus('password', 'NotValidated');
-            }
-        });
+        // form.querySelector('input[name="password"]').addEventListener('input', function () {
+        //     if (this.value.length >= 12) {
+        //         validator.updateFieldStatus('password', 'NotValidated');
+        //     }
+        // });
 
 		// Action buttons
 		submitButton.addEventListener('click', function (e) {
             e.preventDefault();
 
-            validator.revalidateField('password');
+            // validator.revalidateField('password');
 
             validator.validate().then(function (status) {
                 if (status == 'Valid') {
