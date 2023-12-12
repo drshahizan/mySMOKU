@@ -80,13 +80,15 @@
         {{-- Table --}}
         <table class="table table-striped">
             <thead>
-                <tr style="color: white; background-color:rgb(35, 58, 108);">
-                    <th class="text-center" style="width: 5%">No.</th>
-                    <th style="width: 15%"><b>ID Permohonan</b></th>                                        
-                    <th style="width: 40%"><b>Nama</b></th>
-                    <th style="width: 10%" class="text-center"><b>No. Mesyuarat</b></th>
-                    <th style="width: 15%" class="text-center"><b>Tarikh Kemaskini Keputusan</b></th> 
-                    <th class="text-center" style="width: 15%">Status Permohonan</th>
+                <tr style="color: white; background-color: #3d0066;">
+                    <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>
+                    <th style="width: 10%"><b>ID Permohonan</b></th>                                        
+                    <th style="width: 30%"><b>Nama</b></th>
+                    <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
+                    <th class="text-center" style="width: 10%"><b>Peringkat Pengajian</b></th> 
+                    <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
+                    <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
+                    <th class="text-center" style="width: 10%"><b>Status Permohonan</b></th>
                 </tr>
             </thead>
             <tbody>
