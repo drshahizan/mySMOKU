@@ -92,6 +92,25 @@
                                 <br>
                                 <div class="body">
                                     <div class="table-responsive">
+                                        <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
+                                            <div class="row" style="margin-left: 10px;">
+                                                <div class="col-md-4">
+                                                    <label for="end_date">Pilih Institusi:</label>
+                                                    <select name="status" class="form-select">
+                                                        <option value="">Semua Institusi</option>
+                                                        @foreach($institusi as $item)
+                                                            <option value="{{$item['id_institusi']}}" {{ Request::get('institusi') == $item['id_institusi'] ? 'selected' : '' }}>{{$item['nama_institusi']}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <br>
+                                                    <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
+                                                        <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
                                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
@@ -210,6 +229,25 @@
                                 <br>
                                 <div class="body">
                                     <div class="table-responsive">
+                                        <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
+                                            <div class="row" style="margin-left: 10px;">
+                                                <div class="col-md-4">
+                                                    <label for="end_date">Pilih Institusi:</label>
+                                                    <select name="status" class="form-select">
+                                                        <option value="">Semua Institusi</option>
+                                                        @foreach($institusi as $item)
+                                                            <option value="{{$item['id_institusi']}}" {{ Request::get('institusi') == $item['id_institusi'] ? 'selected' : '' }}>{{$item['nama_institusi']}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <br>
+                                                    <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
+                                                        <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
                                         <table id="sortTable1a" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
@@ -328,6 +366,25 @@
                                         <br>
                                         <div class="body">
                                         <div class="table-responsive">
+                                            <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
+                                                <div class="row" style="margin-left: 10px;">
+                                                    <div class="col-md-4">
+                                                        <label for="end_date">Pilih Institusi:</label>
+                                                        <select name="status" class="form-select">
+                                                            <option value="">Semua Institusi</option>
+                                                            @foreach($institusi as $item)
+                                                                <option value="{{$item['id_institusi']}}" {{ Request::get('institusi') == $item['id_institusi'] ? 'selected' : '' }}>{{$item['nama_institusi']}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <br>
+                                                        <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
+                                                            <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                             <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                                 <thead>
                                                     <tr>
