@@ -75,7 +75,7 @@
         <div class="tittle" style="text-align: center; font-size: 14px;">
             <b>SENARAI KEPUTUSAN PERMOHONAN BKOKU</b>
         </div>
-        
+
         {{-- Table --}}
         <table class="table table-striped" style="margin: 10px;">
             <thead>
@@ -93,7 +93,7 @@
             <tbody>
                 @php
                     $i = 1;
-                    require_once app_path('helpers.php'); // Replace with the actual path to your helper file
+                    require_once app_path('helpers.php'); 
                 @endphp
 
                 @foreach ($permohonan as $item)
@@ -111,7 +111,7 @@
                         $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null; // $matches[1] will contain the extracted peringkat pengajian value
                         $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
 
-                        //nama pemohona
+                        //nama pemohon
                         $text = ucwords(strtolower($nama));
                         $conjunctions = ['bin', 'binti'];
                         $words = explode(' ', $text);
