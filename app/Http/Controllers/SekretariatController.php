@@ -976,16 +976,30 @@ class SekretariatController extends Controller
 
 
     //TUNTUTAN
-    public function senaraiTuntutanKedua()
+    public function senaraiTuntutanKedua(Request $request)
     {
-        $tuntutan = Tuntutan::where('status', '2')
-        ->orWhere('status', '=','3')
-        ->orWhere('status', '=','5')
-        ->orWhere('status', '=','6')
-        ->orWhere('status', '=','7')->orderBy('created_at', 'DESC')->get();
-        $status_kod=0;
+        $status_kod = 0;
         $status = null;
-        $institusi = InfoIpt::orderBy('created_at', 'ASC')->get();
+
+        $filters = $request->get('institusi'); // Adjust the filter names as per your form
+
+        $query = Tuntutan::select('tuntutan.*')
+                ->where('status', '2')
+                ->orWhere('status', '=','3')
+                ->orWhere('status', '=','5')
+                ->orWhere('status', '=','6')
+                ->orWhere('status', '=','7');
+
+        if (isset($filters)){
+            $selectedInstitusi = $filters;
+            $query->join('smoku', 'smoku.id', '=', 'tuntutan.smoku_id')
+                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
+        }
+
+        $tuntutan = $query->orderBy('id', 'desc')->get();
+        $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusi','tuntutan','status_kod','status'));
     }
 

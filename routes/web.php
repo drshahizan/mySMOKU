@@ -59,7 +59,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/laporan/permohonan', [LaporanController::class, 'permohonan'])->name('laporan.permohonan');
     Route::get('/laporan/tuntutan', [LaporanController::class, 'tuntutan'])->name('laporan.tuntutan');
-    
+
     Route::get('/permohonanESP', [MaklumatESPController::class, 'permohonan'])->name('permohonan.esp');
     Route::post('/permohonanESP', [MaklumatESPController::class, 'hantar'])->name('maklumat.esp');
     Route::get('/tuntutanESP', [MaklumatESPController::class, 'tuntutan'])->name('tuntutan.esp');
@@ -226,7 +226,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('permohonan/sekretariat/sejarah/hantar-saringan/{id}', [SaringanController::class, 'hantarSaringan'])->name('hantar.saringan.id');
 
     //Tuntutan - Sekretariat - Saringan
-    Route::get('tuntutan/sekretariat/saringan/senarai_tuntutan', [SekretariatController::class, 'senaraiTuntutanKedua']);
+    Route::get('tuntutan/sekretariat/saringan/senarai-tuntutan', [SekretariatController::class, 'senaraiTuntutanKedua']);
     Route::get('tuntutan/sekretariat/saringan/keputusan-peperiksaan/{id}', [SekretariatController::class, 'keputusanPeperiksaan'])->name('maklumat.tuntutan.peperiksaan.id');
     Route::get('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/{id}', [SekretariatController::class, 'maklumatTuntutanKedua'])->name('maklumat.tuntutan.kedua.id');
     Route::post('tuntutan/sekretariat/saringan/saring-tuntutan-kedua/{id}', [SekretariatController::class, 'saringTuntutanKedua'])->name('saring.tuntutan.kedua.id');
@@ -281,7 +281,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //delete pendaftaran - Penyelaras
     Route::get('penyelaras/pendaftaran/delete/{id}', [PenyelarasController::class, 'deletePendaftaran'])->name('pendaftaran.delete');
 
-    
+
     //Permohonan - Penyelaras BKOKU
     Route::get('penyelaras/dashboard', [PenyelarasController::class, 'index'])->name('penyelaras.dashboard');
     Route::post('penyelaras/dashboard', [PenyelarasController::class, 'store']);

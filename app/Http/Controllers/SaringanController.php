@@ -27,17 +27,30 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class SaringanController extends Controller
 {
-    public function senaraiPermohonan()
+    public function senaraiPermohonan(Request $request)
     {
-        $permohonan = Permohonan::where('status', '2')
-        ->orWhere('status', '=','3')
-        ->orWhere('status', '=','4')
-        ->orWhere('status', '=','5')
-        ->orderBy('tarikh_hantar', 'DESC')
-        ->get();
         $status_kod=0;
         $status = null;
-        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status'));
+
+        $filters = $request->only(['institusi']); // Adjust the filter names as per your form
+
+        $query = Permohonan::select('permohonan.*')
+            ->where('status', '2')
+            ->orWhere('status', '=','3')
+            ->orWhere('status', '=','4')
+            ->orWhere('status', '=','5');
+
+        if (isset($filters['institusi'])) {
+            $selectedInstitusi = $filters['institusi'];
+            $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
+        }
+
+        $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
+        $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+
+        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusi','permohonan','status_kod','status'));
     }
 
     public function maklumatPermohonan($id)
