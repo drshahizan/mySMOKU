@@ -319,7 +319,7 @@ class PentadbirController extends Controller
         ->where('status', 1)
         ->whereNotNull('email_verified_at')
         ->get();        
-        $email = "wsyafiqah4@gmail.com";
+        $emailmain = "bkoku@mohe.gov.my";
         $bcc = $users->pluck('email')->toArray();
         
         // Validate each email address
@@ -333,8 +333,8 @@ class PentadbirController extends Controller
         
         if (empty($invalidEmails)) {
             // $bcc = $users->pluck('email')->toArray();
-            // dd($bcc);
-            Mail::to($email)->bcc($bcc)->send(new HebahanIklan($catatan)); 
+            // dd($emailmain);
+            Mail::to($emailmain)->bcc($bcc)->send(new HebahanIklan($catatan)); 
         } else {
             // dd('sini kee');
             foreach ($invalidEmails as $invalidEmail) {
