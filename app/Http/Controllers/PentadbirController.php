@@ -324,15 +324,15 @@ class PentadbirController extends Controller
         
         // Validate each email address
         $invalidEmails = [];
-        foreach ($bcc as $bcc) {
-            if (!filter_var($bcc, FILTER_VALIDATE_EMAIL)) {
-                $invalidEmails[] = $bcc;
+        foreach ($bcc as $email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $invalidEmails[] = $email;
             }
         }
 
         
         if (empty($invalidEmails)) {
-            $bcc = $users->pluck('email')->toArray();
+            // $bcc = $users->pluck('email')->toArray();
             // dd($bcc);
             Mail::to($email)->bcc($bcc)->send(new HebahanIklan($catatan)); 
         } else {
