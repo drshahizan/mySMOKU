@@ -26,7 +26,7 @@ class HebahanIklan extends Mailable
     public function build()
     {
         
-        $subject = "Hebahan Iklan";
+        $subject = "HEBAHAN IKLAN PERMOHONAN BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU)/ PROGRAM PENDIDIKAN KHAS (PPK)";
         return $this->subject($subject)
                     ->view('kemaskini.pentadbir.hebahan_iklan')
                     ->with([

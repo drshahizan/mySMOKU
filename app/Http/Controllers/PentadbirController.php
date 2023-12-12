@@ -321,6 +321,7 @@ class PentadbirController extends Controller
         ->get();        
         $email = "wsyafiqah4@gmail.com";
         $bcc = $users->pluck('email')->toArray();
+        
         // Validate each email address
         $invalidEmails = [];
         foreach ($bcc as $bcc) {
@@ -328,9 +329,14 @@ class PentadbirController extends Controller
                 $invalidEmails[] = $bcc;
             }
         }
+
+        
         if (empty($invalidEmails)) {
+            $bcc = $users->pluck('email')->toArray();
+            // dd($bcc);
             Mail::to($email)->bcc($bcc)->send(new HebahanIklan($catatan)); 
         } else {
+            // dd('sini kee');
             foreach ($invalidEmails as $invalidEmail) {
                  Log::error('Invalid email address: ' . $invalidEmail);
             }
