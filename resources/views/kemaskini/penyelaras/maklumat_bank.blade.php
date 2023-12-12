@@ -118,7 +118,7 @@
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
                                                     <div class="form-control-arrow">
-                                                        <select name="kod_bank" class="form-control">
+                                                        <select name="kod_bank" class="form-control search" data-control="select2" data-hide-search="true" data-placeholder="Pilih Bank">
                                                             <option value="">Pilih Bank</option>
                                                             @foreach ($senarai_bank->sortBy('nama_bank') as $senaraiBank)
                                                                 <option value="{{ $senaraiBank->kod_bank }}" {{ old('kod_bank', optional($bank)->bank_id) == $senaraiBank->kod_bank ? 'selected' : '' }}>
@@ -162,4 +162,10 @@
             </div>
         </div>
     </div>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script> 
+        $(document).ready(function() {
+            $('.search').select2();
+        });
+    </script>    
 </x-default-layout>
