@@ -97,7 +97,7 @@
 							<label class="fs-6 fw-semibold mb-2">Catatan</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<textarea class="form-control form-control-solid" name="catatan" id="catatan" required></textarea>
+							<textarea class="form-control form-control-solid" name="catatan" id="catatan"></textarea>
 							<!--end::Input-->
 						</div>
 						<!--end::Input group-->
