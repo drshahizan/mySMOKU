@@ -94,6 +94,11 @@
 		<!--end::Menu-->
 
 @elseif(Auth::user()->tahap=='2')
+@php
+	$user = DB::table('users')->where('no_kp',Auth::user()->no_kp)->first();
+	$institusi = DB::table('bk_info_institusi')->where('id_institusi', $user->id_institusi)->first();
+	// dd($institusi->jenis_institusi);
+@endphp
 <!--begin::sidebar menu-->
 <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
 	<!--begin::Menu wrapper-->
@@ -141,37 +146,37 @@
 					<span class="menu-title">Sejarah</span>
 				</a>
 			</div>
-
-			<div class="menu-item pt-5">
-				<div class="menu-content">
-					<span class="menu-heading fw-bold text-uppercase fs-7">Penyaluran</span>
+			@if($institusi->jenis_institusi === 'UA')
+				<div class="menu-item pt-5">
+					<div class="menu-content">
+						<span class="menu-heading fw-bold text-uppercase fs-7">Penyaluran</span>
+					</div>
 				</div>
-			</div>
-			<div class="menu-item">
-				<a class="menu-link" href="{{ route('penyelaras.muat-turun.SPBB')}}">
-					<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
-					<span class="menu-title">Muat Turun SPBB</span>
-				</a>
-			</div>
-			<div class="menu-item">
-				<a class="menu-link" href="{{ route('penyelaras.muat-naik.SPBB')}}">
-					<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
-					<span class="menu-title">Muat Naik SPBB</span>
-				</a>
-			</div>
-			<div class="menu-item">
-				<a class="menu-link" href="{{ url('penyelaras/penyaluran/permohonan-tuntutan/layak') }}">
-					<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
-					<span class="menu-title">Senarai Pembayaran</span>
-				</a>
-			</div>
-			<div class="menu-item">
-				<a class="menu-link" href="{{ route('penyelaras.senarai.dibayar') }}">
-					<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
-					<span class="menu-title">Keputusan Pembayaran</span>
-				</a>
-			</div>
-			
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('penyelaras.muat-turun.SPBB')}}">
+						<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
+						<span class="menu-title">Muat Turun SPBB</span>
+					</a>
+				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('penyelaras.muat-naik.SPBB')}}">
+						<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
+						<span class="menu-title">Muat Naik SPBB</span>
+					</a>
+				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ url('penyelaras/penyaluran/permohonan-tuntutan/layak') }}">
+						<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
+						<span class="menu-title">Senarai Pembayaran</span>
+					</a>
+				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('penyelaras.senarai.dibayar') }}">
+						<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
+						<span class="menu-title">Keputusan Pembayaran</span>
+					</a>
+				</div>
+			@endif
 			<div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
