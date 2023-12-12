@@ -985,7 +985,8 @@ class SekretariatController extends Controller
         ->orWhere('status', '=','7')->orderBy('created_at', 'DESC')->get();
         $status_kod=0;
         $status = null;
-        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status'));
+        $institusi = InfoIpt::orderBy('created_at', 'ASC')->get();
+        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusi','tuntutan','status_kod','status'));
     }
 
     public function keputusanPeperiksaan($id){
