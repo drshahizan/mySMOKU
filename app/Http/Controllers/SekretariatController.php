@@ -19,6 +19,7 @@ use App\Models\Saringan;
 use App\Models\SaringanTuntutan;
 use App\Models\SejarahPermohonan;
 use App\Models\SejarahTuntutan;
+use App\Models\ButiranPelajar;
 use App\Models\Smoku;
 use App\Models\Status;
 use App\Models\TuntutanItem;
@@ -607,7 +608,7 @@ class SekretariatController extends Controller
         $catatanArray = explode(', ', $catatan);
 
         // Email notification
-        $studentEmail = Smoku::where('id', $smoku_id)->value('email');
+        $studentEmail = ButiranPelajar::where('smoku_id', $smoku_id)->value('emel');
         $emailLulus = EmelKemaskini::where("emel_id",2)->first();
         $emailTidakLulus = EmelKemaskini::where("emel_id",3)->first();
         Mail::to($studentEmail)->send($keputusan == "Lulus" ? new KeputusanLayak($emailLulus) : new KeputusanTidakLayak($emailTidakLulus,$catatanArray));
@@ -616,7 +617,8 @@ class SekretariatController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $kelulusan = Kelulusan::when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+        $kelulusan = Kelulusan::orderBy('updated_at', 'desc')
+        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('tarikh_mesyuarat', [$startDate, $endDate]);
         })
         ->when($keputusan, function ($q) use ($keputusan) {
@@ -688,7 +690,7 @@ class SekretariatController extends Controller
                     }
 
                     // Send email notifications to all student email addresses
-                    $studentEmail = Smoku::where('id', $item->smoku_id)->value('email');
+                    $studentEmail = ButiranPelajar::where('smoku_id',  $item->smoku_id)->value('emel');
                     $emailLulus = EmelKemaskini::where("emel_id",2)->first();
                     if ($studentEmail) {
                         $studentEmails[] = $studentEmail;
@@ -738,7 +740,7 @@ class SekretariatController extends Controller
                     }
 
                     // Send email notifications to all student email addresses
-                    $studentEmail = Smoku::where('id', $item->smoku_id)->value('email');
+                    $studentEmail = ButiranPelajar::where('smoku_id',  $item->smoku_id)->value('emel');
                     if ($studentEmail) {
                         $studentEmails[] = $studentEmail;
                     }
@@ -766,7 +768,7 @@ class SekretariatController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $kelulusan = Kelulusan::orderBy('id', 'desc')
+        $kelulusan = Kelulusan::orderBy('updated_at', 'desc')
         ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('tarikh_mesyuarat', [$startDate, $endDate]);
         })
