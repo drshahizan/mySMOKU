@@ -56,11 +56,11 @@ class PentadbirController extends Controller
         if ($user === null) {
 
             $userData = [
-                'nama' => $request->nama,
+                'nama' => strtoupper($request->nama),
                 'no_kp' => $request->no_kp,
                 'email' => $request->email,
                 'tahap' => $request->tahap,
-                'jawatan' => $request->jawatan,
+                'jawatan' => strtoupper($request->jawatan),
                 'password' => Hash::make($password),
                 'status' => '1',
             ];
@@ -92,10 +92,10 @@ class PentadbirController extends Controller
                     // dd('Status is different');
                     // If the user exists, update their information with status change
                     $user->update([
-                        'nama' => $request->nama,
+                        'nama' => strtoupper($request->nama),
                         'email' => $request->email,
                         'tahap' => $request->tahap,
-                        'jawatan' => $request->jawatan,
+                        'jawatan' => strtoupper($request->jawatan),
                         'status' => $request->status,
                     ]);
                     
@@ -119,10 +119,10 @@ class PentadbirController extends Controller
 
                     // If the user exists, update other information not status
                     $user->update([
-                        'nama' => $request->nama,
+                        'nama' => strtoupper($request->nama),
                         'email' => $request->email,
                         'tahap' => $request->tahap,
-                        'jawatan' => $request->jawatan,
+                        'jawatan' => strtoupper($request->jawatan),
                         'id_institusi' => $request->id_institusi,
                     ]);
                     
@@ -134,10 +134,10 @@ class PentadbirController extends Controller
 
                 if ($user->status == 1) {
                     $user->update([
-                        'nama' => $request->nama,
+                        'nama' => strtoupper($request->nama),
                         'email' => $request->email,
                         'tahap' => $request->tahap,
-                        'jawatan' => $request->jawatan,
+                        'jawatan' => strtoupper($request->jawatan),
                         'id_institusi' => $request->id_institusi,
                     ]);
                     
@@ -146,10 +146,10 @@ class PentadbirController extends Controller
                     return response()->json(['message' => 'Data pengguna ' . $request->nama . ' telah ada tetapi berstatus tidak aktif.']);
                 }else{
                     $user->update([
-                        'nama' => $request->nama,
+                        'nama' => strtoupper($request->nama),
                         'email' => $request->email,
                         'tahap' => $request->tahap,
-                        'jawatan' => $request->jawatan,
+                        'jawatan' => strtoupper($request->jawatan),
                         'id_institusi' => $request->id_institusi,
                     ]);
                     
