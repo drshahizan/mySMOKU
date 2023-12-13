@@ -769,8 +769,8 @@
 							
 						</div>
 						<!--end::Input group-->
-						<div class="row mb-10">
-							<div class="col-md-6 fv-row" id="div_waris_lain">
+						<div class="row mb-10" id="div_waris_lain">
+							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
 								<label class="form-label mb-6">(Jika Lain-lain) Sila Nyatakan:</label>
 								<!--end::Label-->
