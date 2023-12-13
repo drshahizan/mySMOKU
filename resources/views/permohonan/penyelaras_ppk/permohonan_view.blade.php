@@ -1480,6 +1480,50 @@
 
 			});
 
+			//parlimen
+			$(document).ready(function(){
+				$('#alamat_tetap_negeri').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#parlimen').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: '/getParlimen/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var kod = response['data'][i].kod_parlimen;
+											var parlimen = response['data'][i].parlimen.toUpperCase();
+
+											var option = "<option value='"+id+"'>"+kod+" - "+parlimen+"</option>";
+
+											$("#parlimen").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
 			//dun
 			$(document).ready(function(){
 				$('#parlimen').on('change', function() {
