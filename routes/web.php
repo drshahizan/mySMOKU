@@ -78,6 +78,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('hantar/dokumen/lanjut/pengajian', [PelajarController::class, 'hantarLanjutPengajian'])->name('hantar.lanjut.pengajian');
     
     Route::get('profil/pelajar', [PelajarController::class, 'profilPelajar'])->name('profil.pelajar');
+    Route::post('profil/pelajar/simpan', [PelajarController::class, 'simpanProfilPelajar'])->name('simpan.profil.pelajar');
 
     Route::get('profil', [ProfilController::class, 'index'])->name('tukar.katalaluan');
     Route::post('profil/simpan', [ProfilController::class, 'simpanProfil'])->name('simpan.profil');

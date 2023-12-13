@@ -2,8 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agama;
 use App\Models\Akademik;
+use App\Models\Bandar;
+use App\Models\ButiranPelajar;
+use App\Models\Dun;
+use App\Models\Hubungan;
+use App\Models\Keturunan;
 use App\Models\LanjutPengajian;
+use App\Models\Negeri;
+use App\Models\Parlimen;
 use App\Models\Permohonan;
 use App\Models\SejarahPermohonan;
 use App\Models\Smoku;
@@ -11,6 +19,7 @@ use App\Models\TamatPengajian;
 use App\Models\TangguhPengajian;
 use App\Models\Tuntutan;
 use App\Models\User;
+use App\Models\Waris;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -332,8 +341,52 @@ class PelajarController extends Controller
 
     public function profilPelajar()
     {   
-        $smoku = Smoku::where('no_kp', Auth::user()->no_kp)->first();
+        $smoku = Smoku::leftJoin('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
+            ->leftJoin('bk_jantina','bk_jantina.kod_jantina','=','smoku.jantina')
+            ->leftJoin('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
+            ->where('no_kp', Auth::user()->no_kp)
+            ->get(['smoku.*','smoku.id as smoku_id','bk_jenis_oku.*','bk_jantina.*','bk_keturunan.*'])
+            ->first();
+        // dd($smoku);    
+        $butiranPelajar = ButiranPelajar::where('smoku_id', $smoku->smoku_id)->first();
+        // dd($butiranPelajar);
+        $negeri = Negeri::all()->sortBy('id');
+        $bandar = Bandar::all()->sortBy('id');
+        $keturunan = Keturunan::all()->sortBy('id');
+        $agama = Agama::all()->sortBy('id');
+        $parlimen = Parlimen::all()->sortBy('id');
+        $dun = Dun::all()->sortBy('id');
 
-        return view('kemaskini.pelajar.profil_pelajar');
+        $waris = Waris::where('smoku_id', $smoku->smoku_id)->first();
+        $hubungan = Hubungan::all()->sortBy('kod_hubungan');
+
+        return view('kemaskini.pelajar.profil_pelajar',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','waris','hubungan'));
+    }
+
+    public function simpanProfilPelajar(Request $request)
+    {  
+
+        User::where('no_kp',Auth::user()->no_kp)
+        ->update([
+            'nama' => strtoupper($request->nama_pelajar),
+            'email' => $request->emel
+        ]);
+    
+        Smoku::where('no_kp' ,Auth::user()->no_kp)
+            ->update([
+                'nama' => strtoupper($request->nama_pelajar),
+                'email' => $request->emel
+            ]);
+
+        $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        $butiran_pelajar = ButiranPelajar::where('smoku_id',$smoku_id->id)->first();
+        if($butiran_pelajar != null) {
+        ButiranPelajar::where('smoku_id' ,$smoku_id->id)
+            ->update([
+                'emel' => $request->emel
+
+            ]);
+        }    
+        return back()->with('success', 'Maklumat profil berjaya dikemaskini.');
     }
 }

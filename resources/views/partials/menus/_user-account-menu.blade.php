@@ -40,9 +40,11 @@
     <!--end::Menu item-->
     @php
         $user = DB::table('users')->where('no_kp',Auth::user()->no_kp)->first();
+        $smoku = DB::table('smoku')->where('no_kp',Auth::user()->no_kp)->first();
+        $permohonan = DB::table('permohonan')->where('smoku_id',$smoku->id)->first();
     @endphp
     <!--begin::Menu item-->
-    @if($user->tahap == 1)
+    @if($user->tahap == 1 && ($permohonan != null && $permohonan->status >= 2))
         <div class="menu-item px-5">
             <a href="{{ route('profil.pelajar') }}" class="menu-link px-5">Profil Diri</a>
         </div>
