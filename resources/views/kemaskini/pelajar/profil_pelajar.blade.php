@@ -140,7 +140,7 @@
 									<!--begin::Col-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" id="tkh_lahir" name="tkh_lahir" value="{{$smoku->tarikh_lahir}}" />
+										<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" id="tarikh_lahir" name="tarikh_lahir" value="{{$smoku->tarikh_lahir}}" />
 										<!--end::Input-->
 									</div>
 								</div>	
@@ -171,7 +171,7 @@
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<input type="text" class="form-control form-control-solid" id="umur" name="umur" placeholder="" value="{{$smoku->umur}}" readonly/>
+										<input type="int" class="form-control form-control-solid" id="umur" name="umur" placeholder="" value="{{$smoku->umur}}" readonly/>
 										<!--end::Input-->
 									</div>
 									<!--end::Input wrapper-->
@@ -655,7 +655,7 @@
 							<label class="form-label">Alamat Tetap</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<textarea id="alamat_waris" name="alamat_waris" class="form-control form-control-lg form-control-solid" rows="2" style="text-transform: uppercase;" >{{$waris->alamat_waris}}</textarea>
+							<textarea id="alamat_waris" name="alamat_waris" class="form-control form-control-lg form-control-solid" rows="2" style="text-transform: uppercase;" >{{strtoupper($waris->alamat_waris)}}</textarea>
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">

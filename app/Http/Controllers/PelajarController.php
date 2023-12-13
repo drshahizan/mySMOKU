@@ -365,28 +365,157 @@ class PelajarController extends Controller
 
     public function simpanProfilPelajar(Request $request)
     {  
+        $smoku = Smoku::where('no_kp', Auth::user()->no_kp)->first();
+        $butiran_pelajar = ButiranPelajar::where('smoku_id',$smoku->id)->first();
+        $waris = Waris::where('smoku_id',$smoku->id)->first();
+        // dd($waris);
+
+        // Get the current values
+        $currentValues = [
+            'nama' => $smoku->nama,
+            'no_kp' => $smoku->no_kp,
+            'tarikh_lahir' => $smoku->tarikh_lahir,
+            'umur' => $smoku->umur,
+            'keturunan' => $smoku->keturunan,
+            'email' => $smoku->email,
+            'no_akaun_bank' => $butiran_pelajar->no_akaun_bank,
+            'negeri_lahir' => $butiran_pelajar->negeri_lahir,
+            'agama' => $butiran_pelajar->agama,
+            'alamat_tetap' => $butiran_pelajar->alamat_tetap,
+            'alamat_tetap_negeri' => $butiran_pelajar->alamat_tetap_negeri,
+            'alamat_tetap_bandar' => $butiran_pelajar->alamat_tetap_bandar,
+            'alamat_tetap_poskod' => $butiran_pelajar->alamat_tetap_poskod,
+            'parlimen' => $butiran_pelajar->parlimen,
+            'dun' => $butiran_pelajar->dun,
+            'alamat_surat_menyurat' => $butiran_pelajar->alamat_surat_menyurat,
+            'alamat_surat_negeri' => $butiran_pelajar->alamat_surat_negeri,
+            'alamat_surat_bandar' => $butiran_pelajar->alamat_surat_bandar,
+            'alamat_surat_poskod' => $butiran_pelajar->alamat_surat_poskod,
+            'tel_bimbit' => $butiran_pelajar->tel_bimbit,
+            'tel_rumah' => $butiran_pelajar->tel_rumah,
+            'status_pekerjaan' => $butiran_pelajar->status_pekerjaan,
+            'pekerjaan' => $butiran_pelajar->pekerjaan,
+            'pendapatan' => $butiran_pelajar->pendapatan,
+            'nama_waris' => $waris->nama_waris,
+            'no_kp_waris' => $waris->no_kp_waris,
+            'no_pasport_waris' => $waris->no_pasport_waris,
+            'tel_bimbit_waris' => $waris->tel_bimbit_waris,
+            'hubungan_lain_waris' => $waris->hubungan_lain_waris,
+            'alamat_waris' => $waris->alamat_waris,
+            'alamat_negeri_waris' => $waris->alamat_negeri_waris,
+            'alamat_bandar_waris' => $waris->alamat_bandar_waris,
+            'alamat_poskod_waris' => $waris->alamat_poskod_waris,
+            'pekerjaan_waris' => $waris->pekerjaan_waris,
+            'pendapatan_waris' => $waris->pendapatan_waris
+        ];
+        
+
+        // Update the values
+        $smoku->update([
+            'nama' => strtoupper($request->nama_pelajar),
+            'email' => $request->emel,
+        ]);
 
         User::where('no_kp',Auth::user()->no_kp)
         ->update([
             'nama' => strtoupper($request->nama_pelajar),
+            'no_kp' => $request->no_kp,
             'email' => $request->emel
         ]);
-    
-        Smoku::where('no_kp' ,Auth::user()->no_kp)
-            ->update([
-                'nama' => strtoupper($request->nama_pelajar),
-                'email' => $request->emel
-            ]);
 
-        $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        $butiran_pelajar = ButiranPelajar::where('smoku_id',$smoku_id->id)->first();
         if($butiran_pelajar != null) {
-        ButiranPelajar::where('smoku_id' ,$smoku_id->id)
-            ->update([
-                'emel' => $request->emel
+            ButiranPelajar::where('smoku_id' ,$smoku->id)
+                ->update([
+                    'emel' => $request->emel,
+                    'no_akaun_bank' => $request->no_akaun_bank,
+                    'negeri_lahir' => $request->negeri_lahir,
+                    'agama' => $request->agama,
+                    'alamat_tetap' => strtoupper($request->alamat_tetap),
+                    'alamat_tetap_negeri' => $request->alamat_tetap_negeri,
+                    'alamat_tetap_bandar' => $request->alamat_tetap_bandar,
+                    'alamat_tetap_poskod' => $request->alamat_tetap_poskod,
+                    'parlimen' => $request->parlimen,
+                    'dun' => $request->dun,
+                    'alamat_surat_menyurat' => strtoupper($request->alamat_surat_menyurat),
+                    'alamat_surat_negeri' => $request->alamat_surat_negeri,
+                    'alamat_surat_bandar' => $request->alamat_surat_bandar,
+                    'alamat_surat_poskod' => $request->alamat_surat_poskod,
+                    'tel_bimbit' => str_replace('-', '', $request->tel_bimbit),
+                    'tel_rumah' => str_replace('-', '', $request->tel_rumah),
+                    'status_pekerjaan' => $request->status_pekerjaan,
+                    'pekerjaan' => strtoupper($request->pekerjaan),
+                    'pendapatan' => $request->pendapatan
+    
+                ]);
+        }
 
-            ]);
-        }    
-        return back()->with('success', 'Maklumat profil berjaya dikemaskini.');
+        if($waris != null) {
+            Waris::where('smoku_id' ,$smoku->id)
+                ->update([
+                    'nama_waris' => strtoupper($request->nama_waris),
+                    'no_kp_waris' => $request->no_kp_waris,
+                    'no_pasport_waris' => $request->no_pasport_waris,
+                    'tel_bimbit_waris' => str_replace('-', '', $request->tel_bimbit_waris),
+                    'hubungan_lain_waris' => $request->hubungan_lain_waris,
+                    'alamat_waris' => strtoupper($request->alamat_waris),
+                    'alamat_negeri_waris' => $request->alamat_negeri_waris,
+                    'alamat_bandar_waris' => $request->alamat_bandar_waris,
+                    'alamat_poskod_waris' => $request->alamat_poskod_waris,
+                    'pekerjaan_waris' => strtoupper($request->pekerjaan_waris),
+                    'pendapatan_waris' => $request->pendapatan_waris
+    
+                ]);
+        }
+    
+        // Check if any updates were made
+        $updatedValues = [
+            'nama' => $request->nama_pelajar,
+            'no_kp' => $request->no_kp,
+            'tarikh_lahir' => $request->tarikh_lahir,
+            'umur' => intval($request->umur),
+            'keturunan' => $request->keturunan,
+            'email' => $request->emel,
+            'no_akaun_bank' => $request->no_akaun_bank,
+            'negeri_lahir' => $request->negeri_lahir,
+            'agama' => $request->agama,
+            'alamat_tetap' => $request->alamat_tetap,
+            'alamat_tetap_negeri' => $request->alamat_tetap_negeri,
+            'alamat_tetap_bandar' => $request->alamat_tetap_bandar,
+            'alamat_tetap_poskod' => $request->alamat_tetap_poskod,
+            'parlimen' => $request->parlimen,
+            'dun' => $request->dun,
+            'alamat_surat_menyurat' => $request->alamat_surat_menyurat,
+            'alamat_surat_negeri' => $request->alamat_surat_negeri,
+            'alamat_surat_bandar' => $request->alamat_surat_bandar,
+            'alamat_surat_poskod' => $request->alamat_surat_poskod,
+            'tel_bimbit' => $request->tel_bimbit,
+            'tel_rumah' => $request->tel_rumah ?? "",
+            'status_pekerjaan' => $request->status_pekerjaan,
+            'pekerjaan' => $request->pekerjaan ?? "",
+            'pendapatan' => $request->pendapatan,
+            'nama_waris' => $request->nama_waris,
+            'no_kp_waris' => $request->no_kp_waris,
+            'no_pasport_waris' => $request->no_pasport_waris,
+            'tel_bimbit_waris' => $request->tel_bimbit_waris,
+            'hubungan_lain_waris' => $request->hubungan_lain_waris,
+            'alamat_waris' => $request->alamat_waris,
+            'alamat_negeri_waris' => $request->alamat_negeri_waris,
+            'alamat_bandar_waris' => $request->alamat_bandar_waris,
+            'alamat_poskod_waris' => $request->alamat_poskod_waris,
+            'pekerjaan_waris' => $request->pekerjaan_waris,
+            'pendapatan_waris' => $request->pendapatan_waris
+        ];
+
+        
+        
+
+        // dd($currentValues );
+        // dd($updatedValues );
+        if ($currentValues !== $updatedValues) {    
+            return back()->with('success', 'Maklumat profil berjaya dikemaskini.');
+        }
+
+        // No updates were made
+        return back();
     }
 }
