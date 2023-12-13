@@ -550,24 +550,40 @@ class SekretariatController extends Controller
         }
 
         // Create an array to store catatan values
-        $catatanArray = $request->get('catatan');
+        $catatanArray = $request->has('catatan') ? $request->get('catatan') : [];
 
         if ($existingRecord) {
             // Update the respective row in permohonan_kelulusan table
             $existingRecord->no_mesyuarat = $request->noMesyuarat;
             $existingRecord->tarikh_mesyuarat = $request->tarikhMesyuarat;
             $existingRecord->keputusan = $keputusan;
-            $existingRecord->catatan = implode(', ', $catatanArray); // Save catatan values as a comma-separated string
+        
+            // Check if 'catatan' key exists in the request
+            if ($request->has('catatan')) {
+                $existingRecord->catatan = implode(', ', $catatanArray); // Save catatan values as a comma-separated string
+            } 
+            else {
+                $existingRecord->catatan = null; // Or any default value you want for catatan when it's not provided
+            }
+        
             $existingRecord->save();
-        } else {
+        } 
+        else {
             // Create a new row in permohonan_kelulusan table
             $info_mesyuarat = new Kelulusan([
                 'permohonan_id' => $id,
                 'no_mesyuarat' => $request->get('noMesyuarat'),
                 'tarikh_mesyuarat' => $request->get('tarikhMesyuarat'),
                 'keputusan' => $keputusan,
-                'catatan' => implode(', ', $catatanArray), // Save catatan values as a comma-separated string
             ]);
+
+            // Check if 'catatan' key exists in the request
+            if ($request->has('catatan')) {
+                $info_mesyuarat->catatan = implode(', ', $catatanArray);
+            } 
+            else {
+                $info_mesyuarat->catatan = null; // Or any default value you want for catatan when it's not provided
+            }
             $info_mesyuarat->save();
         }
 
@@ -763,7 +779,7 @@ class SekretariatController extends Controller
         $keputusan = $request->get('keputusan');
         $notifikasi = "Emel notifikasi telah dihantar kepada semua pemohon.";
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'))->with('error', 'An error occurred while processing the request.');
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'));
     }
 
     public function senaraiKeputusanPermohonan(Request $request)
