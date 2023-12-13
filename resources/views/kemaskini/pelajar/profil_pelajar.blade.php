@@ -635,11 +635,10 @@
 								<input type="text" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{str_replace('-', '', $waris->tel_bimbit_waris)}}"  />
 								<!--end::Input-->
 							</div>
-							
 						</div>
 						<!--end::Input group-->
-						<div class="row mb-10">
-							<div class="col-md-6 fv-row" id="div_waris_lain">
+						<div class="row mb-10" id="div_waris_lain">
+							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
 								<label class="form-label mb-6">(Jika Lain-lain) Sila Nyatakan:</label>
 								<!--end::Label-->
@@ -647,7 +646,6 @@
 								<input type="text" class="form-control form-control-lg form-control-solid" id="hubungan_lain_waris" name="hubungan_lain_waris" style="text-transform: uppercase;" placeholder="" value="{{$waris->hubungan_lain_waris}}" />
 								<!--end::Input-->													
 							</div>
-							
 						</div>
 						<!--begin::Input group-->
 						<div class="fv-row mb-10">
