@@ -245,13 +245,13 @@ class PermohonanController extends Controller
 
         $butiranPelajar->negeri_lahir = $request->negeri_lahir;
         $butiranPelajar->agama = $request->agama;
-        $butiranPelajar->alamat_tetap = $request->alamat_tetap;
+        $butiranPelajar->alamat_tetap = strtoupper($request->alamat_tetap);
         $butiranPelajar->alamat_tetap_negeri = $request->alamat_tetap_negeri;
         $butiranPelajar->alamat_tetap_bandar = $request->alamat_tetap_bandar;
         $butiranPelajar->alamat_tetap_poskod = $request->alamat_tetap_poskod;
         $butiranPelajar->parlimen = $request->parlimen;
         $butiranPelajar->dun = $request->dun;
-        $butiranPelajar->alamat_surat_menyurat = $request->alamat_surat_menyurat;
+        $butiranPelajar->alamat_surat_menyurat = strtoupper($request->alamat_surat_menyurat);
         $butiranPelajar->alamat_surat_negeri = $request->alamat_surat_negeri;
         $butiranPelajar->alamat_surat_bandar = $request->alamat_surat_bandar;
         $butiranPelajar->alamat_surat_poskod = $request->alamat_surat_poskod;
@@ -260,24 +260,24 @@ class PermohonanController extends Controller
         $butiranPelajar->no_akaun_bank = $request->no_akaun_bank;
         $butiranPelajar->emel = $request->emel;
         $butiranPelajar->status_pekerjaan = $request->status_pekerjaan;
-        $butiranPelajar->pekerjaan = $request->pekerjaan;
+        $butiranPelajar->pekerjaan = strtoupper($request->pekerjaan);
         $butiranPelajar->pendapatan = $request->pendapatan;
 
         $butiranPelajar->save();
 
         $waris = Waris::firstOrNew(['smoku_id' => $smoku_id->id]);
 
-        $waris->nama_waris = $request->nama_waris;
+        $waris->nama_waris = strtoupper($request->nama_waris);
         $waris->no_kp_waris = $request->no_kp_waris;
         $waris->no_pasport_waris = $request->no_pasport_waris;
         $waris->hubungan_waris = $request->hubungan_waris;
         $waris->hubungan_lain_waris = $request->hubungan_lain_waris;
         $waris->tel_bimbit_waris = str_replace('-', '', $request->tel_bimbit_waris);
-        $waris->alamat_waris = $request->alamat_waris;
+        $waris->alamat_waris = strtoupper($request->alamat_waris);
         $waris->alamat_negeri_waris = $request->alamat_negeri_waris;
         $waris->alamat_bandar_waris = $request->alamat_bandar_waris;
         $waris->alamat_poskod_waris = $request->alamat_poskod_waris;
-        $waris->pekerjaan_waris = $request->pekerjaan_waris;
+        $waris->pekerjaan_waris = strtoupper($request->pekerjaan_waris);
         $waris->pendapatan_waris = $request->pendapatan_waris;
 
         $waris->save();
