@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\MailDaftarPentadbir;
 use App\Mail\PermohonanHantar;
 use App\Models\Agama;
 use Illuminate\Http\Request;
@@ -39,6 +40,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class PenyelarasPPKController extends Controller
@@ -734,6 +736,37 @@ class PenyelarasPPKController extends Controller
         //dd($cc,$user->email);
 
         Mail::to($user->email)->cc([$cc, $cc_pelajar])->send(new PermohonanHantar($catatan,$emel));     
+
+        //CREATE USER ID TERUS UNTUK PELAJAR
+        $user = User::where('no_kp', '=', $smoku_id->no_kp)->first();
+        $characters = 'abcdefghijklmn123456789!@#$%^&';
+        $password_length = 12;
+
+        // Generate the random password
+        $password = '';
+        for ($i = 0; $i < $password_length; $i++) {
+            $password .= $characters[random_int(0, strlen($characters) - 1)];
+        }
+
+        if ($user === null) {
+
+            $userData = [
+                'nama' => $request->nama_pelajar,
+                'no_kp' => $request->no_kp,
+                'email' => $request->emel,
+                'tahap' => 1,
+                'password' => Hash::make($password),
+                'status' => 1,
+            ];
+            
+            $user = User::create($userData);
+            
+
+            $email = $request->emel;
+            $no_kp = $request->no_kp;
+            Mail::to($email)->send(new MailDaftarPentadbir($email,$no_kp,$password));
+            
+        }    
 
         return redirect()->route('penyelaras.ppk.dashboard')->with('success', 'Permohonan pelajar telah dihantar.');
 
