@@ -72,6 +72,7 @@
                                 <h2>Senarai Keputusan Permohonan<br><small>Sila gunakan fungsi filter untuk menapis data yang ingin dipaparkan sahaja.</small></h2>
                                 <ul class="header-dropdown dropdown" style="color: black;">
                                     <li><a href="{{ route('senarai.keputusan.BKOKU.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> BKOKU</a></li>
+                                    <li><a href="{{ route('senarai.keputusan.BKOKU.UA.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> BKOKU UA</a></li>
                                     <li><a href="{{ route('senarai.keputusan.PPK.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> PPK</a></li>
                                 </ul>
                             </div>
@@ -155,10 +156,6 @@
 							                                                       ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
                                                                                    ->where('permohonan.id', $item['permohonan_id'])
                                                                                    ->value('bk_info_institusi.jenis_institusi');
-                                                            $institusi_pengajian = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-                                                            ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-                                                            ->where('permohonan.id', $item['permohonan_id'])
-                                                            ->value('bk_info_institusi.nama_institusi');
 
                                                             //peringkat pengajian
                                                             preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches); // Extract peringkat pengajian value using regular expression
@@ -180,6 +177,11 @@
                                                             $pemohon = implode(' ', $result);
 
                                                             //institusi pengajian
+                                                            $institusi_pengajian = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                                                                                    ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                                                                                    ->where('permohonan.id', $item['permohonan_id'])
+                                                                                    ->value('bk_info_institusi.nama_institusi');
+
                                                             $text3 = ucwords(strtolower($institusi_pengajian)); 
                                                                 $conjunctions = ['of', 'in', 'and'];
                                                                 $words = explode(' ', $text3);

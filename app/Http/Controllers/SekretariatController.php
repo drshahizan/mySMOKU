@@ -810,6 +810,13 @@ class SekretariatController extends Controller
         return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU.pdf');
     }
 
+    public function cetakKeputusanPermohonanUA()
+    {
+        $permohonan = Kelulusan::all();
+        $pdf = PDF::loadView('permohonan.sekretariat.keputusan.senarai_keputusan_BKOKU_UA_pdf', compact('permohonan'))->setPaper('A4', 'landscape');
+        return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU-UA.pdf');
+    }
+
     public function cetakKeputusanPermohonanPPK()
     {
         $permohonan = Kelulusan::all();

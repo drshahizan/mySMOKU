@@ -13,7 +13,7 @@
         th{
             padding-top: 6px!important;
             padding-bottom: 6px!important;
-            background-color: rgb(35, 58, 108)!important;
+            background-color: #3d0066;!important;
             color: white!important;
         }
         th,td{
@@ -101,10 +101,10 @@
                         $no_rujukan_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
                         $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku.nama');
                         $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
-                        $institusi_pengajian = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-                                                ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-                                                ->where('permohonan.id', $item['permohonan_id'])
-                                                ->value('bk_info_institusi.nama_institusi');
+                        $jenis_institusi = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                                                            ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                                                            ->where('permohonan.id', $item['permohonan_id'])
+                                                            ->value('bk_info_institusi.jenis_institusi');
 
                         //peringkat pengajian
                         preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches); // Extract peringkat pengajian value using regular expression
@@ -126,6 +126,11 @@
                         $pemohon = implode(' ', $result);
 
                         //institusi pengajian
+                        $institusi_pengajian = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                                                ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                                                ->where('permohonan.id', $item['permohonan_id'])
+                                                ->value('bk_info_institusi.nama_institusi');
+
                         $text3 = ucwords(strtolower($institusi_pengajian)); 
                             $conjunctions = ['of', 'in', 'and'];
                             $words = explode(' ', $text3);
@@ -142,20 +147,22 @@
                     @endphp
 
                     @if($program == "BKOKU")
-                        <tr>
-                            <td class="text-center">{{$i++}}</td>
-                            <td>{{$no_rujukan_permohonan}}</td>
-                            <td>{{$pemohon}}</td>
-                            <td>{{$nama_institusi}}</td>
-                            <td class="text-center">{{ucwords(strtolower($nama_peringkat))}}</td>
-                            <td class="text-center">{{$item->no_mesyuarat}}</td>
-                            <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                            @if($item->keputusan == "Lulus")
-                                <td class="text-center">Layak</td>
-                            @elseif($item->keputusan == "Tidak Lulus")
-                                <td class="text-center">Tidak Layak</td>
-                            @endif
-                        </tr>
+                        @if ($jenis_institusi == "IPTS" || $jenis_institusi == "KK" || $jenis_institusi == "P")
+                            <tr>
+                                <td class="text-center">{{$i++}}</td>
+                                <td>{{$no_rujukan_permohonan}}</td>
+                                <td>{{$pemohon}}</td>
+                                <td>{{$nama_institusi}}</td>
+                                <td class="text-center">{{ucwords(strtolower($nama_peringkat))}}</td>
+                                <td class="text-center">{{$item->no_mesyuarat}}</td>
+                                <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
+                                @if($item->keputusan == "Lulus")
+                                    <td class="text-center">Layak</td>
+                                @elseif($item->keputusan == "Tidak Lulus")
+                                    <td class="text-center">Tidak Layak</td>
+                                @endif
+                            </tr>
+                        @endif
                     @endif
                 @endforeach            
             </tbody>
