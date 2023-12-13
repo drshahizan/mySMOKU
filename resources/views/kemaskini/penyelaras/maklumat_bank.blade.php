@@ -32,7 +32,7 @@
         .file-input {
             display: flex; 
             align-items: center;
-            padding-right: 150px; 
+            padding-right: 200px; 
         }
         .form-control-arrow {
             position: relative;
@@ -75,20 +75,20 @@
     <div id="main-content" style="width:80%;  margin: 0 auto;">
         <div class="container-fluid">
             @if(session('success'))
-                    <div class="alert alert-success" style="width: 60%; margin: 0 auto;">
-                        {{ session('success') }}
-                    </div>
-                    <br>
-                @endif
+                <div class="alert alert-success" style="width: 60%; margin: 0 auto; text-align:center;">
+                    {{ session('success') }}
+                </div>
+                <br>
+            @endif
 
-                @if ($errors->any())
-                    <div class="alert alert-danger" style="width: 60%; margin: 0 auto;">
-                        @foreach ($errors->all() as $error)
+            @if ($errors->any())
+                <div class="alert alert-danger" style="width: 60%; margin: 0 auto;">
+                    @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
-                        @endforeach
-                    </div>
-                    <br>
-                @endif
+                    @endforeach
+                </div>
+                <br>
+            @endif
 
             <!-- Page header section  -->
             <div class="row clearfix">
@@ -178,6 +178,7 @@
             </div>
         </div>
     </div>
+
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script> 
         $(document).ready(function() {
