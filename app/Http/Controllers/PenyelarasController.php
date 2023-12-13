@@ -1442,8 +1442,8 @@ class PenyelarasController extends Controller
         // Pass senarai bank
         $senarai_bank = SenaraiBank::all();
 
-        // Check if $bank is not null before passing it to the view
-        return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user','senarai_bank'))->with('success', 'Semua maklumat telah berjaya dikemaskini.');
+        session()->flash('success', 'Semua maklumat bank telah berjaya dikemaskini.');
+        return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user','senarai_bank'));
     }
 
     //PENYALURAN - PEMBAYARAN
