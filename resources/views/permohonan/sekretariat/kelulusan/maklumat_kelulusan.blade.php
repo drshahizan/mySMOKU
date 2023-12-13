@@ -128,7 +128,7 @@
                                             <td>
                                                 <div id="catatan-container">
                                                     <div class="catatan-row">
-                                                        <input type="text" id="catatan" name="catatan[]" style="padding: 5px; width:300px; margin-right:4px;" required>
+                                                        <input type="text" id="catatan" name="catatan[]" style="padding: 5px; width:300px; margin-right:4px;">
                                                         <button type="button" class="add-catatan-button" onclick="addCatatanField(this)">+</button>
                                                     </div>
                                                 </div>

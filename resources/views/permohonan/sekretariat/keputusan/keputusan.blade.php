@@ -135,7 +135,7 @@
                                                         <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 12%"><b>Tarikh Mesyuarat</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>Status Permohonan</b></th>
                                                     </tr>
                                                 </thead>
@@ -268,7 +268,7 @@
                                                         <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 12%"><b>Tarikh Mesyuarat</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>Status Permohonan</b></th>
                                                     </tr>
                                                 </thead>
@@ -401,7 +401,7 @@
                                                         <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 12%"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 12%"><b>Tarikh Mesyuarat</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>Status Permohonan</b></th>
                                                     </tr>
                                                 </thead>
@@ -412,15 +412,18 @@
                                                     
                                                     @foreach ($kelulusan as $item)
                                                         @php
-                                                            $id_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
+                                                            $no_rujukan_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
                                                             $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku.nama');
-                                                            $peringkat = DB::table('permohonan')->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku_akademik.peringkat_pengajian');
-                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat',$peringkat)->value('peringkat');
                                                             $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
                                                             $institusi_pengajian = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                                                                                     ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
                                                                                     ->where('permohonan.id', $item['permohonan_id'])
                                                                                     ->value('bk_info_institusi.nama_institusi');
+
+                                                            //peringkat pengajian
+                                                            preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches); // Extract peringkat pengajian value using regular expression
+                                                            $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null; // $matches[1] will contain the extracted peringkat pengajian value
+                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
 
                                                             // nama pemohon
                                                             $text = ucwords(strtolower($nama));

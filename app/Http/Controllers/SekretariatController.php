@@ -771,7 +771,7 @@ class SekretariatController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $kelulusan = Kelulusan::orderBy('id', 'desc')
+        $kelulusan = Kelulusan::orderBy('updated_at', 'desc')
         ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('tarikh_mesyuarat', [$startDate, $endDate]);
         })
