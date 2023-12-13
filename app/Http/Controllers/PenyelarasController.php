@@ -1391,9 +1391,9 @@ class PenyelarasController extends Controller
         ];
 
         $messages = [
-            'penyata.required' => 'The penyata file is required.',
-            'penyata.file' => 'Invalid file format.',
-            'penyata.mimes' => 'The file must be a PDF or PNG.',
+            'penyata.required' => 'Sila pilih penyata bank.',
+            'penyata.file' => 'Fail yang boleh dimuat naik mestilah format PDF atau PNG.',
+            'penyata.mimes' => 'Fail yang boleh dimuat naik mestilah format PDF atau PNG.',
         ];
 
         // Validate the request
@@ -1443,7 +1443,7 @@ class PenyelarasController extends Controller
         $senarai_bank = SenaraiBank::all();
 
         // Check if $bank is not null before passing it to the view
-        return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user','senarai_bank'));
+        return view('kemaskini.penyelaras.maklumat_bank', compact('bank', 'user','senarai_bank'))->with('success', 'Semua maklumat telah berjaya dikemaskini.');
     }
 
     //PENYALURAN - PEMBAYARAN

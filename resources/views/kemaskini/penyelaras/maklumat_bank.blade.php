@@ -32,7 +32,7 @@
         .file-input {
             display: flex; 
             align-items: center;
-            padding-right: 250px; 
+            padding-right: 150px; 
         }
         .form-control-arrow {
             position: relative;
@@ -74,8 +74,23 @@
 
     <div id="main-content" style="width:80%;  margin: 0 auto;">
         <div class="container-fluid">
+            @if(session('success'))
+                    <div class="alert alert-success" style="width: 60%; margin: 0 auto;">
+                        {{ session('success') }}
+                    </div>
+                    <br>
+                @endif
+
+                @if ($errors->any())
+                    <div class="alert alert-danger" style="width: 60%; margin: 0 auto;">
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </div>
+                    <br>
+                @endif
+
             <!-- Page header section  -->
-            <br>
             <div class="row clearfix">
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light page_menu">
@@ -86,6 +101,7 @@
                         </div>
                     </nav>
                 </div>
+
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="body">
@@ -116,7 +132,7 @@
                                             <tr>
                                                 <td class="vertical-top w-13">Bank</td>
                                                 <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top">
+                                                <td class="vertical-top w-100">
                                                     <div class="form-control-arrow">
                                                         <select name="kod_bank" class="form-control search" data-control="select2" data-hide-search="true" data-placeholder="Pilih Bank">
                                                             <option value="">Pilih Bank</option>
