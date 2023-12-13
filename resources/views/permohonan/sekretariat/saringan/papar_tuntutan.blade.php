@@ -274,21 +274,21 @@
                                                     <tbody>
                                                     <tr class="font-weight-bolder font-size-lg">
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->yuran_disokong)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($j_tuntutan->jumlah - $permohonan->yuran_disokong - $permohonan->wang_saku_disokong)}}</td>
-{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->yuran_dibayar)}}</td>--}}
-{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($j_tuntutan->jumlah - $permohonan->yuran_dibayar - $permohonan->wang_saku_dibayar)}}</td>--}}
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->yuran_disokong, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($j_tuntutan->jumlah - $permohonan->yuran_disokong - $permohonan->wang_saku_disokong, 2)}}</td>
+{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->yuran_dibayar, 2)}}</td>--}}
+{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($j_tuntutan->jumlah - $permohonan->yuran_dibayar - $permohonan->wang_saku_dibayar, 2)}}</td>--}}
                                                     </tr>
                                                     <tr class="font-weight-bolder font-size-lg">
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->wang_saku_disokong)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0)}}</td>
-{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->wang_saku_dibayar)}}</td>--}}
-{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0)}}</td>--}}
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->wang_saku_disokong, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>
+{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->wang_saku_dibayar, 2)}}</td>--}}
+{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(0, 2)}}</td>--}}
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -296,12 +296,12 @@
                                                     <tr>
                                                         <td>Jumlah tuntutan yang disokong (RM)</td>
                                                         <td>:</td>
-                                                        <td>{{number_format($permohonan->yuran_disokong + $permohonan->wang_saku_disokong)}}</td>
+                                                        <td>{{number_format($permohonan->yuran_disokong + $permohonan->wang_saku_disokong, 2)}}</td>
                                                     </tr>
 {{--                                                    <tr>--}}
 {{--                                                        <td>Jumlah tuntutan yang dibayar (RM)</td>--}}
 {{--                                                        <td>:</td>--}}
-{{--                                                        <td>{{number_format($permohonan->yuran_dibayar + $permohonan->wang_saku_dibayar)}}</td>--}}
+{{--                                                        <td>{{number_format($permohonan->yuran_dibayar + $permohonan->wang_saku_dibayar, 2)}}</td>--}}
 {{--                                                    </tr>--}}
                                                     <tr>
                                                         <td class="vertical-top">Catatan</td>
@@ -333,9 +333,9 @@
                                                     <tbody>
                                                     <tr class="font-weight-bolder font-size-lg">
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->wang_saku_disokong)}}</td>
-{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->wang_saku_dibayar)}}</td>--}}
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->wang_saku_disokong, 2)}}</td>
+{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->wang_saku_dibayar, 2)}}</td>--}}
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -343,12 +343,12 @@
                                                     <tr>
                                                         <td>Jumlah tuntutan yang disokong (RM)</td>
                                                         <td>:</td>
-                                                        <td>{{number_format($permohonan->wang_saku_disokong)}}</td>
+                                                        <td>{{number_format($permohonan->wang_saku_disokong, 2)}}</td>
                                                     </tr>
 {{--                                                    <tr>--}}
 {{--                                                        <td>Jumlah tuntutan yang dibayar (RM)</td>--}}
 {{--                                                        <td>:</td>--}}
-{{--                                                        <td>{{number_format($permohonan->wang_saku_dibayar)}}</td>--}}
+{{--                                                        <td>{{number_format($permohonan->wang_saku_dibayar, 2)}}</td>--}}
 {{--                                                    </tr>--}}
                                                     <tr>
                                                         <td class="vertical-top">Catatan</td>
@@ -384,12 +384,12 @@
                                                     <tbody>
                                                     <tr class="font-weight-bolder font-size-lg">
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->yuran_disokong)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($j_tuntutan->jumlah - $permohonan->yuran_disokong)}}</td>
-{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->yuran_dibayar)}}</td>--}}
-{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($j_tuntutan->jumlah - $permohonan->yuran_dibayar)}}</td>--}}
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_yuran, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->yuran_disokong, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($j_tuntutan->jumlah - $permohonan->yuran_disokong, 2)}}</td>
+{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->yuran_dibayar, 2)}}</td>--}}
+{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($j_tuntutan->jumlah - $permohonan->yuran_dibayar, 2)}}</td>--}}
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -397,12 +397,12 @@
                                                     <tr>
                                                         <td>Jumlah tuntutan yang disokong (RM)</td>
                                                         <td>:</td>
-                                                        <td>{{number_format($permohonan->yuran_disokong)}}</td>
+                                                        <td>{{number_format($permohonan->yuran_disokong, 2)}}</td>
                                                     </tr>
 {{--                                                    <tr>--}}
 {{--                                                        <td>Jumlah tuntutan yang dibayar (RM)</td>--}}
 {{--                                                        <td>:</td>--}}
-{{--                                                        <td>{{number_format($permohonan->yuran_dibayar)}}</td>--}}
+{{--                                                        <td>{{number_format($permohonan->yuran_dibayar, 2)}}</td>--}}
 {{--                                                    </tr>--}}
                                                     <tr>
                                                         <td class="vertical-top">Catatan</td>
@@ -434,9 +434,9 @@
                                                     <tbody>
                                                     <tr class="font-weight-bolder font-size-lg">
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->wang_saku_disokong)}}</td>
-{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->wang_saku_dibayar)}}</td>--}}
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->amaun_wang_saku, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->wang_saku_disokong, 2)}}</td>
+{{--                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($permohonan->wang_saku_dibayar, 2)}}</td>--}}
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -444,12 +444,12 @@
                                                     <tr>
                                                         <td>Jumlah tuntutan yang disokong (RM)</td>
                                                         <td>:</td>
-                                                        <td>{{number_format($permohonan->wang_saku_disokong)}}</td>
+                                                        <td>{{number_format($permohonan->wang_saku_disokong, 2)}}</td>
                                                     </tr>
 {{--                                                    <tr>--}}
 {{--                                                        <td>Jumlah tuntutan yang dibayar (RM)</td>--}}
 {{--                                                        <td>:</td>--}}
-{{--                                                        <td>{{number_format($permohonan->wang_saku_dibayar)}}</td>--}}
+{{--                                                        <td>{{number_format($permohonan->wang_saku_dibayar, 2)}}</td>--}}
 {{--                                                    </tr>--}}
                                                     <tr>
                                                         <td class="vertical-top">Catatan</td>
