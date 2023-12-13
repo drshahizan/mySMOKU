@@ -76,9 +76,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('hantar/dokumen/tamat/pengajian', [PelajarController::class, 'hantarTamatPengajian'])->name('hantar.tamat.pengajian');
     Route::post('hantar/dokumen/tangguh/pengajian', [PelajarController::class, 'hantarTangguhPengajian'])->name('hantar.tangguh.pengajian');
     Route::post('hantar/dokumen/lanjut/pengajian', [PelajarController::class, 'hantarLanjutPengajian'])->name('hantar.lanjut.pengajian');
+    
+    Route::get('profil/pelajar', [PelajarController::class, 'profilPelajar'])->name('profil.pelajar');
 
-
-    Route::get('profil', [ProfilController::class, 'index'])->name('profil-diri');
+    Route::get('profil', [ProfilController::class, 'index'])->name('tukar.katalaluan');
     Route::post('profil/simpan', [ProfilController::class, 'simpanProfil'])->name('simpan.profil');
     Route::post('katalaluan/simpan', [ProfilController::class, 'simpanKatalaluan'])->name('simpan.katalaluan');
 

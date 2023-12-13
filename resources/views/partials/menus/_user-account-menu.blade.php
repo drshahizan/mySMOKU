@@ -38,10 +38,17 @@
         </div>
     </div>
     <!--end::Menu item-->
-    
+    @php
+        $user = DB::table('users')->where('no_kp',Auth::user()->no_kp)->first();
+    @endphp
     <!--begin::Menu item-->
+    @if($user->tahap == 1)
+        <div class="menu-item px-5">
+            <a href="{{ route('profil.pelajar') }}" class="menu-link px-5">Profil Diri</a>
+        </div>
+    @endif
     <div class="menu-item px-5">
-        <a href="{{ route('profil-diri') }}" class="menu-link px-5">Profil Diri</a>
+        <a href="{{ route('tukar.katalaluan') }}" class="menu-link px-5">Tukar Kata Laluan</a>
     </div>
     <div class="separator my-2"></div>
     <div class="menu-item px-5">

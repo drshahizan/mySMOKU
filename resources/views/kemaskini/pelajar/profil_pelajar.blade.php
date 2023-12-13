@@ -1,0 +1,1042 @@
+<x-default-layout> 
+	<style>
+		/* Some custom styles to beautify this example */
+		.bs-example{
+			margin: 60px 0;
+		}
+		a, button{
+			margin-right: 30px;
+		  }
+		i{
+			font-size: 22px;
+		}
+	</style>
+	
+	<script>
+	$(document).ready(function(){
+		$('[data-bs-toggle="tooltip"]').tooltip();
+	});
+	</script>	
+
+<!--begin::Page title-->
+<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+	<!--begin::Title-->
+	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Profil Pelajar</h1>
+	<!--end::Title-->
+	
+</div>
+<!--end::Page title-->
+<br>
+<div class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid gap-10" id="kt_create_account_stepper">
+	<!--begin::Aside-->
+	<div class="card d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px">
+		<!--begin::Wrapper-->
+		<div class="card-body px-6 px-lg-10 px-xxl-15 py-20">
+			<!--begin::Nav-->
+			<div class="stepper-nav">
+				<!--begin::Step 1-->
+				<div class="stepper-item" data-kt-stepper-element="nav">
+					<!--begin::Wrapper-->
+					<div class="stepper-wrapper">
+						<!--begin::Icon-->
+						<div class="stepper-icon w-40px h-40px">
+							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+							<span class="stepper-number">1</span>
+						</div>
+						<!--end::Icon-->
+						<!--begin::Label-->
+						<div class="stepper-label">
+							<h3 class="stepper-title">Maklumat Peribadi</h3>
+							<div class="stepper-desc fw-semibold">Profil Peribadi Diri</div>
+						</div>
+						<!--end::Label-->
+					</div>
+					<!--end::Wrapper-->
+					<!--begin::Line-->
+					<div class="stepper-line h-40px"></div>
+					<!--end::Line-->
+				</div>
+				<!--end::Step 1-->
+				<!--begin::Step 2-->
+				<div class="stepper-item" data-kt-stepper-element="nav">
+					<!--begin::Wrapper-->
+					<div class="stepper-wrapper">
+						<!--begin::Icon-->
+						<div class="stepper-icon w-40px h-40px">
+							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+							<span class="stepper-number">2</span>
+						</div>
+						<!--end::Icon-->
+						<!--begin::Label-->
+						<div class="stepper-label">
+							<h3 class="stepper-title">Maklumat Waris</h3>
+							<div class="stepper-desc fw-semibold">Profil Waris</div>
+						</div>
+						<!--end::Label-->
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Step 2-->
+				
+			</div>
+			<!--end::Nav-->
+		</div>
+		<!--end::Wrapper-->
+	</div>
+	<!--end::Aside-->
+		<!--begin::Content-->
+		<div class="card d-flex flex-row-fluid flex-center">
+			<!--begin::Form-->
+			<form id="kt_create_account_form" action="" method="post" class="card-body py-20 w-100 mw-xl-700px px-9" enctype="multipart/form-data">
+				
+				<!--begin::Step 1-->
+				<div class="current" data-kt-stepper-element="content">
+				@csrf
+					<!--begin::Wrapper-->
+					<div class="w-100">
+						<!--begin::Heading-->
+						<div class="pb-10 pb-lg-15">
+							<!--begin::Title-->
+							<h2 class="fw-bold text-dark">Maklumat Peribadi</h2>
+							<!--end::Title-->
+							<!--begin::Notice-->
+							<div class="text-muted fw-semibold fs-6">Profil Diri</div>
+							<!--end::Notice-->
+						</div>
+						<!--end::Heading-->
+						<!--begin::Input group-->
+						<div class="mb-10 fv-row">
+							<!--begin::Label-->
+							<label class="form-label mb-3">Nama</label>
+							<!--end::Label-->
+							<!--begin::Input-->
+							<input type="text" class="form-control form-control-lg form-control-solid"  id="nama_pelajar" name="nama_pelajar" placeholder="" value="" readonly/>
+							<!--end::Input-->
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="row mb-10">
+							<!--begin::Col-->
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Kad Pengenalan</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Col-->
+									<div class="col-12">
+										<input type="text" class="form-control form-control-lg form-control-solid" maxlength="12" id="no_kp" name="no_kp" placeholder="" value="" readonly/>
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<div class="col-md-3 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Tarikh Lahir</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Col-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="date" data-date-autoclose="true" class="form-control form-control-solid" placeholder="" id="tkh_lahir" name="tkh_lahir" value="" readonly/>
+										<!--end::Input-->
+									</div>
+								</div>	
+							</div>
+							<div class="col-md-3 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Negeri Lahir</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Col-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<select id="negeri_lahir" name="negeri_lahir" class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+											
+											<option value=""></option>
+											
+										</select>
+										
+										<!--end::Input-->
+									</div>
+								</div>	
+							</div>
+							<div class="col-md-2 fv-row">
+								<label class=" fs-6 fw-semibold form-label mb-2">Umur</label>
+								<!--end::Label-->
+								<div class="row fv-row">
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="text" class="form-control form-control-solid" id="umur" name="umur" placeholder="" value="" readonly/>
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+							</div>	
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Jantina</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id="jantina" name="jantina" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true" >
+										<option value=""></option>
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">Keturunan</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id='keturunan' name='keturunan' class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true">
+										<option value="">Pilih</option>
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Agama</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id="agama" name="agama" class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+										
+										<option value="" ></option>
+										
+									</select>
+									
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="fv-row mb-10">
+							<!--end::Label-->
+							<label class="form-label">Alamat Tetap</label>
+							<!--end::Label-->
+							<!--begin::Input-->
+							<textarea id="alamat_tetap" name="alamat_tetap" class="form-control form-control-lg form-control-solid" rows="2" style="text-transform: uppercase;"  style="text-transform: uppercase;"></textarea>
+							<!--end::Input-->
+						</div>
+						<div class="row mb-10">
+							<div class="col-md-5 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id="alamat_tetap_negeri" name="alamat_tetap_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+
+										<option value="" ></option>
+
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Bandar
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+										<option value="">Pilih</option>
+										
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-3 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Poskod
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_tetap_poskod" name="alamat_tetap_poskod" placeholder="" value=""/>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-7 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Parlimen</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id='parlimen' name='parlimen' class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+										<option value="">Pilih</option>
+										
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-5 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">DUN</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id="dun" name="dun" class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+										<option value="">Pilih</option>
+										
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+							<!--begin::Alamat Surat-->
+							<div class="fv-row mb-10">
+								<!--end::Label-->
+								<label class="form-label">Alamat Surat Menyurat</label>
+								<!--end::Label-->
+								<!--begin::Input group-->
+								<div class="fv-row mb-7">
+									<!--begin::Wrapper-->
+									<div class="d-flex flex-stack">
+										<!--begin::Label-->
+										<div class="me-5">
+											<!--begin::Input-->
+											<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-label">Sama seperti Alamat Tetap</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Label-->
+									</div>
+									<!--begin::Wrapper-->
+								</div>
+								<!--end::Input group-->
+								<!--begin::Input-->
+								<textarea id="alamat_surat_menyurat" name="alamat_surat_menyurat" class="form-control form-control-lg form-control-solid" rows="2" style="text-transform: uppercase;"></textarea>
+								<!--end::Input-->
+							</div>
+							<div class="row mb-10">
+								<div class="col-md-5 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">Negeri</label>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<select id="alamat_surat_negeri" name="alamat_surat_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+											<option value="">Pilih</option>
+											
+										</select>
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+								<div class="col-md-4 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">Bandar</label>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<select id='alamat_surat_bandar' name='alamat_surat_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+											<option value="">Pilih</option>
+										</select>
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+								<div class="col-md-3 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">Poskod</label>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_surat_poskod" name="alamat_surat_poskod" placeholder="" value=""/>
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+							</div>
+						<!--end::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-5 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Alamat emel</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="" readonly/>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Tel Bimbit</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="" />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-3 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Tel Rumah
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="" />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+						<!--end::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Status Pekerjaan</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id="status_pekerjaan" name="status_pekerjaan" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" >
+										<option></option>
+										<option value="TIDAK BEKERJA" >TIDAK BEKERJA</option>
+										<option value="BEKERJA" >BEKERJA</option>
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row" id="div_pekerjaan">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Pekerjaan
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="pekerjaan" name="pekerjaan" placeholder="" value="" />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row" id="div_pendapatan">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Pendapatan
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="number" class="form-control form-control-solid" id="pendapatan" name="pendapatan" placeholder="" value="" />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+						<!--end::Input group-->
+						<div class="row mb-10">
+							
+							<div class="separator my-14"></div>
+							<div class="pb-10 pb-lg-15">
+								<!--begin::Title-->
+								<h2 class="fw-bold text-dark">Maklumat Sistem Maklumat Orang Kurang Upaya (SMOKU)</h2>
+								<!--end::Title-->
+								<!--begin::Notice-->
+								<div class="text-muted fw-semibold fs-6">Jabatan Kebajikan Malaysia</div>
+								<!--end::Notice-->
+							</div>
+							<div class="row mb-10">
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">No. JKM
+									</label>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="text" class="form-control form-control-solid" id="no_daftar_oku" name="no_daftar_oku" placeholder="" value=""  readonly/>
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="fs-6 fw-semibold form-label mb-2">Kategori Kecacatan
+									</label>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="text" class="form-control form-control-solid" placeholder="" value="" readonly/>
+										<input type="hidden" class="form-control form-control-solid" id="kecacatan" name="kecacatan" placeholder="" value="" readonly/>
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="separator my-14"></div>
+							<div class="pb-10 pb-lg-15">
+								<!--begin::Title-->
+								<h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
+								<!--end::Title-->
+								<!--begin::Notice-->
+								<div class="text-muted fw-semibold fs-6">Bank Islam</div>
+								<!--end::Notice-->
+							</div>
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="16113020138680"><i class="fa-solid fa-circle-info"></i></a>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaun_bank" name="no_akaun_bank" placeholder="" value="" />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Step 1-->
+
+				<!--begin::Step 2-->
+				<div data-kt-stepper-element="content">
+				@csrf	
+					<!--begin::Wrapper-->
+					<div class="w-100">
+						<!--begin::Heading-->
+						<div class="pb-10 pb-lg-15">
+							<!--begin::Title-->
+							<h2 class="fw-bold text-dark">Maklumat Waris</h2>
+							<!--end::Title-->
+							<!--begin::Notice-->
+							<div class="text-muted fw-semibold fs-6">Profil Waris</div>
+							<!--end::Notice-->
+						</div>
+						<!--end::Heading-->
+						<!--begin::Input group-->
+						<div class="mb-10 fv-row">
+							<!--begin::Label-->
+							<label class="form-label mb-3">Nama</label>
+							<!--end::Label-->
+							<!--begin::Input-->
+							<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" style="text-transform: uppercase;" placeholder="" value="" />
+							<!--end::Input-->
+						</div>
+						<div class="row mb-10">
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Kad Pengenalan</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Col-->
+									<div class="col-12">
+										<input type="text" class="form-control form-control-lg form-control-solid" maxlength="12" id="no_kp_waris" name="no_kp_waris" placeholder="" value="" />
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">No Pasport</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Col-->
+									<div class="col-12">
+										<input type="text" class="form-control form-control-lg form-control-solid" id="no_pasport_waris" name="no_pasport_waris" placeholder="" value="" />
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+							</div>
+						</div>
+						<div class="row mb-10">
+							<!--begin::Label-->
+							<div class="col-md-6 fv-row">
+								<label class="form-label mb-6">Hubungan Waris</label>
+								<select id="hubungan_waris" name="hubungan_waris" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" >
+									
+									<option value="" ></option>
+									
+								</select>
+							</div>
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="form-label mb-6">No. Tel Bimbit</label>
+								<!--end::Label-->
+								<!--begin::Input-->
+								<input type="text" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value=""  />
+								<!--end::Input-->
+							</div>
+							
+						</div>
+						<!--end::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-6 fv-row" id="div_waris_lain">
+								<!--begin::Label-->
+								<label class="form-label mb-6">(Jika Lain-lain) Sila Nyatakan:</label>
+								<!--end::Label-->
+								<!--begin::Input-->
+								<input type="text" class="form-control form-control-lg form-control-solid" id="hubungan_lain_waris" name="hubungan_lain_waris" placeholder="" value="" />
+								<!--end::Input-->													
+							</div>
+							
+						</div>
+						<!--begin::Input group-->
+						<div class="fv-row mb-10">
+							<!--end::Label-->
+							<label class="form-label">Alamat Tetap</label>
+							<!--end::Label-->
+							<!--begin::Input-->
+							<textarea id="alamat_waris" name="alamat_waris" class="form-control form-control-lg form-control-solid" rows="2" style="text-transform: uppercase;" ></textarea>
+							<!--end::Input-->
+						</div>
+						<div class="row mb-10">
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">Negeri
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id="alamat_negeri_waris" name="alamat_negeri_waris" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" >
+										<option value="">Pilih</option>
+								
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">Bandar</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<select id='alamat_bandar_waris' name='alamat_bandar_waris' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" >
+										<option value="">Pilih</option>
+										
+									</select>
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-4 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">Poskod</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" maxlength="5" class="form-control form-control-solid" id="alamat_poskod_waris" name="alamat_poskod_waris" placeholder="" value="" />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+						
+						<div class="row mb-10">
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">Pekerjaan Waris
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" id="pekerjaan_waris" name="pekerjaan_waris" placeholder="" value="" />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">Pendapatan Bulanan Waris</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Nilai tanpa .00"><i class="fa-solid fa-circle-info"></i></a>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<div class="col-12">
+									<!--begin::Input-->
+									<input type="number" class="form-control form-control-solid" id="pendapatan_waris" name="pendapatan_waris" placeholder="RM" value="" />
+									<!--end::Input-->
+								</div>
+								<!--end::Input wrapper-->
+							</div>
+						</div>
+						<!--end::Input group-->
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Step 2-->
+
+				<!--begin::Actions-->
+				<div class="d-flex flex-stack pt-10">
+					<!--begin::Wrapper-->
+					<div class="mr-2">
+						<button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
+						<i class="ki-duotone ki-arrow-left fs-4 me-1">
+							<span class="path1"></span>
+							<span class="path2"></span>
+						</i>Kembali</button>
+					</div>
+					<!--end::Wrapper-->
+					<!--begin::Wrapper-->
+					<div>
+						{{-- @if (in_array($permohonan->status, [1, 5, 9])) --}}
+						<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" >
+							<span class="indicator-label">Hantar
+							<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
+								<span class="path1"></span>
+								<span class="path2"></span>
+							</i></span>
+							<span class="indicator-progress">Sila tunggu...
+							<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+						</button>
+						
+						{{-- @endif --}}
+
+						{{-- <button type="button" class="btn btn-lg btn-primary{{ in_array($permohonan->status, [1, 5, 9]) ? ' save-next-button' : '' }}" data-kt-stepper-action="next"> --}}
+						<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">
+							Teruskan
+							<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
+								<span class="path1"></span>
+								<span class="path2"></span>
+							</i>
+						</button>
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Actions-->
+			</form>
+			<!--end::Form-->
+		</div>
+		<!--end::Content-->
+									
+
+</div>
+
+
+
+<!--begin::Javascript-->
+
+		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+		<script src="../assets/js/scripts.bundle.js"></script>
+		<!--end::Global Javascript Bundle-->
+
+		<!--begin::Custom Javascript(used for this page only)-->
+		<script src="../assets/js/custom/utilities/modals/create-account.js"></script>
+		<script src="../assets/js/custom/apps/file-manager/list.js"></script>
+		<script src="../assets/js/custom/utilities/modals/create-app.js"></script>
+		<!--end::Custom Javascript-->
+		<!--end::Javascript-->
+
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script>
+			function myFunction() {
+			var checkBox = document.getElementById("sama");  
+			var alamat_tetap = document.getElementById("alamat_tetap");
+			var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
+			var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
+			var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
+
+			var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
+			var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
+			var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
+			var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
+			if (checkBox.checked == true){
+				alamat_surat_menyurat.value=alamat_tetap.value; 
+				alamat_surat_negeri.value=alamat_tetap_negeri.value;
+				alamat_surat_bandar.value=alamat_tetap_bandar.value;
+				alamat_surat_poskod.value=alamat_tetap_poskod.value;
+				// Trigger select2 update
+				$(alamat_surat_negeri).trigger('change.select2');
+        		$(alamat_surat_bandar).trigger('change.select2');
+			} else {
+				alamat_surat_menyurat.value="";
+				alamat_surat_negeri.value="";
+				alamat_surat_bandar.value="";
+				alamat_surat_poskod.value="";
+				// Trigger select2 update
+				$(alamat_surat_negeri).trigger('change.select2');
+        		$(alamat_surat_bandar).trigger('change.select2');
+			}
+		}	
+
+			$(document).ready(function(){
+				$('#alamat_tetap_negeri').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#alamat_tetap_bandar').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: 'getBandar/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var bandar = response['data'][i].bandar;
+
+											var option = "<option value='"+id+"'>"+bandar+"</option>";
+
+											$("#alamat_tetap_bandar").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
+			//parlimen
+			$(document).ready(function(){
+				$('#alamat_tetap_negeri').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#parlimen').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: 'getParlimen/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var kod = response['data'][i].kod_parlimen;
+											var parlimen = response['data'][i].parlimen.toUpperCase();
+
+											var option = "<option value='"+id+"'>"+kod+" - "+parlimen+"</option>";
+
+											$("#parlimen").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
+			//dun
+			$(document).ready(function(){
+				$('#parlimen').on('change', function() {
+					var idparlimen = $(this).val();
+					// alert(idparlimen);
+					// Empty the dropdown
+					$('#dun').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: 'getDun/'+idparlimen,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var kod_dun = response['data'][i].kod_dun;
+											var dun = response['data'][i].dun.toUpperCase();
+
+											var option = "<option value='"+id+"'>"+kod_dun+"-"+dun+"</option>";
+
+											$("#dun").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
+    		$(document).ready(function(){
+				$('#alamat_negeri_waris').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#alamat_bandar_waris').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: 'getBandar/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var bandar = response['data'][i].bandar;
+
+											var option = "<option value='"+id+"'>"+bandar+"</option>";
+
+											$("#alamat_bandar_waris").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
+			$(document).ready(function() {
+			$('.js-example-basic-single').select2();
+			});
+		</script>
+
+		<script>
+			//BEKERJA
+			$(document).ready(function(){
+				var status_pekerjaan = document.getElementById('status_pekerjaan').value;
+				if ( this.value == "BEKERJA"){
+					$("#div_pekerjaan").show();
+					$("#div_pendapatan").show();
+				}
+				else {
+					$("#div_pekerjaan").hide();
+					$("#div_pendapatan").hide();
+				}
+				
+				$('#status_pekerjaan').on('change', function() {
+				if ( this.value == "BEKERJA"){
+					$("#div_pekerjaan").show();
+					$("#div_pendapatan").show();
+				}
+				else {
+					$("#div_pekerjaan").hide();
+					$("#div_pendapatan").hide();
+				}
+				});
+
+			});
+
+			//WARIS LAIN-LAIN
+			$(document).ready(function(){
+				$("#div_waris_lain").hide();
+				$('#hubungan_waris').on('change', function() {
+				if ( this.value == '6'){
+					$("#div_waris_lain").show();
+				}
+				else {
+					$("#div_waris_lain").hide();
+				}
+				});
+			});
+
+
+		</script>
+
+		
+<!--end::Javascript-->	
+
+</x-default-layout>

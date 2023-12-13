@@ -329,4 +329,11 @@ class PelajarController extends Controller
 
         return redirect()->route('lanjut.pengajian')->with('success', 'Dokumen pelanjutan pengajian telah dihantar.');
     }
+
+    public function profilPelajar()
+    {   
+        $smoku = Smoku::where('no_kp', Auth::user()->no_kp)->first();
+
+        return view('kemaskini.pelajar.profil_pelajar');
+    }
 }

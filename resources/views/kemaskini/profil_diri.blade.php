@@ -158,7 +158,7 @@
                         <div class="card-header border-0">
                             <!--begin::Card title-->
                             <div class="card-title">
-                                <h2>Set Semula Kata Laluan</h2>
+                                <h2>Tukar Kata Laluan</h2>
                             </div>
                             <!--end::Card title-->
                         </div>
@@ -253,6 +253,8 @@
                                     </div>
                                     <!--end::Col-->
                                 </div>
+                                <br>
+                                <br>
                                 <!--end::Row-->
                                 <div class="d-flex">
                                     <!--begin::Button-->
