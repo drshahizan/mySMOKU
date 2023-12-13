@@ -388,47 +388,60 @@
 								$postcode = '';
 							}
 
-							$selectedState = '';
+							
 
+							// Split the address by the postcode
+							$addressParts = explode($postcode, $smoku->alamat_tetap, 2);
+							// dd($addressParts);
+
+							// Check if the second part (after the postcode) exists
+							if (isset($addressParts[1])) {
+
+							// Extract state from the second part
+							$statePart = trim($addressParts[1]);
+
+							// Initialize variables
+							$selectedState = '';
+							$selectedCity = '';
+
+							// Search for the state in your $negeri collection
 							foreach ($negeri as $state) {
 								$stateName = $state->negeri;
 								$stateID = $state->id;
 
 								// Check if the state name is present in the address
-								if (stripos($smoku->alamat_tetap, $stateName) !== false) {
+								if (stripos($statePart, $stateName) !== false) {
 									$selectedState = $stateName;
 									break; // Stop the loop once a match is found
 								}
 							}
 
-							// Split the address by the postcode
-							$addressParts = explode($postcode, $smoku->alamat_tetap, 2);
+							// Trim any leading or trailing spaces in $statePart
+							$statePart = trim($statePart);
 
-							// Check if the second part (after the postcode) exists
-							if (isset($addressParts[1])) {
-								// Trim any leading or trailing spaces and set $selectedCity
-								$selectedCity = trim($addressParts[1]);
+							// Search for the city in your $bandar collection
+							$bandar_city = DB::table('bk_bandar')->where("negeri_id", $stateID)->orderBy("id", "asc")->select('id', 'bandar')->get();
 
-								// Search for the city in your $bandar collection
-								foreach ($bandar as $city) {
-									$cityName = $city->bandar;
+							foreach ($bandar_city as $city) {
+								$cityName = $city->bandar;
 
-									// Check if the city name is present in the extracted part of the address
-									if (stripos($selectedCity, $cityName) !== false) {
-										$selectedCity = $cityName;
-										break; // Stop the loop once a match is found
-									}
+								// Check if the city name is present in the extracted part of the address
+								if (stripos($statePart, $cityName) !== false) {
+									$selectedCity = $cityName;
+									break; // Stop the loop once a match is found
 								}
+							}
 							} else {
-								$selectedCity = '';
+							$selectedState = '';
+							$selectedCity = '';
 							}
 
 
 							// Remove state and city from the address
 							$trimmedAddress = str_replace([$selectedCity, $selectedState, $postcode], '', $smoku->alamat_tetap);
 
-							// Trim any extra whitespaces
-							$trimmedAddress = trim($trimmedAddress);
+							// Remove "W.P." and extra spaces
+							$trimmedAddress = trim(str_replace(['W.P.', 'WILAYAH PERSEKUTUAN'], '', $trimmedAddress));
 
 							//parlimen dengan dun
 							$parlimen = DB::table('bk_parlimen')->where('negeri_id', $stateID)
@@ -540,17 +553,7 @@
 								$postcode_surat = '';
 							}
 
-							$selectedState_surat = '';
-
-							foreach ($negeri as $state_surat) {
-								$stateName_surat = $state_surat->negeri;
-
-								// Check if the state name is present in the address
-								if (stripos($smoku->alamat_surat_menyurat, $stateName_surat) !== false) {
-									$selectedState_surat = $stateName_surat;
-									break; // Stop the loop once a match is found
-								}
-							}
+							
 
 							// Split the address by the postcode
 							if (!empty($postcode_surat)) {
@@ -559,11 +562,26 @@
 
 							// Check if the second part (after the postcode) exists
 							if (isset($addressParts_surat[1])) {
+								$selectedState_surat = '';
+								$selectedCity_surat = '';
+
+								foreach ($negeri as $state_surat) {
+									$stateName_surat = $state_surat->negeri;
+									$stateID_surat = $state_surat->id;
+
+									// Check if the state name is present in the address
+									if (stripos($smoku->alamat_surat_menyurat, $stateName_surat) !== false) {
+										$selectedState_surat = $stateName_surat;
+										break; // Stop the loop once a match is found
+									}
+								}
 								// Trim any leading or trailing spaces and set $selectedCity
 								$selectedCity_surat = trim($addressParts_surat[1]);
 
 								// Search for the city in your $bandar collection
-								foreach ($bandar as $city_surat) {
+								$bandar_city_surat = DB::table('bk_bandar')->where("negeri_id", $stateID_surat)->orderBy("id", "asc")->select('id', 'bandar')->get();
+
+								foreach ($bandar_city_surat as $city_surat) {
 									$cityName_surat = $city_surat->bandar;
 
 									// Check if the city name is present in the extracted part of the address
@@ -573,6 +591,7 @@
 									}
 								}
 							} else {
+								$selectedState_surat = '';
 								$selectedCity_surat = '';
 							}
 
@@ -580,8 +599,8 @@
 							// Remove state and city from the address
 							$trimmedAddress_surat = str_replace([$selectedCity_surat, $selectedState_surat, $postcode_surat], '', $smoku->alamat_surat_menyurat);
 
-							// Trim any extra whitespaces
-							$trimmedAddress_surat = trim($trimmedAddress_surat);
+							// Remove "W.P." and extra spaces
+							$trimmedAddress_surat = trim(str_replace(['W.P.', 'WILAYAH PERSEKUTUAN'], '', $trimmedAddress_surat));
 						} else {
 							// Handle the case where the address is empty
 							$postcode_surat = '';
@@ -1535,6 +1554,50 @@
 											var option = "<option value='"+id+"'>"+bandar+"</option>";
 
 											$("#alamat_tetap_bandar").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
+			//parlimen
+			$(document).ready(function(){
+				$('#alamat_tetap_negeri').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#parlimen').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: '/getParlimen/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var kod = response['data'][i].kod_parlimen;
+											var parlimen = response['data'][i].parlimen.toUpperCase();
+
+											var option = "<option value='"+id+"'>"+kod+" - "+parlimen+"</option>";
+
+											$("#parlimen").append(option); 
 										}
 									}
 							}, 
