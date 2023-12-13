@@ -289,6 +289,20 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
+					'hubungan_waris': {
+						validators: {
+							notEmpty: {
+								message: 'Hubungan Waris diperlukan'
+							}
+						}
+					},
+					'tel_bimbit_waris': {
+						validators: {
+							notEmpty: {
+								message: 'No. Tel Bimbit diperlukan'
+							}
+						}
+					},
 					'alamat_waris': {
 						validators: {
 							notEmpty: {

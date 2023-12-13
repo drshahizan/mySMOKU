@@ -388,47 +388,60 @@
 								$postcode = '';
 							}
 
-							$selectedState = '';
+							
 
+							// Split the address by the postcode
+							$addressParts = explode($postcode, $smoku->alamat_tetap, 2);
+							// dd($addressParts);
+
+							// Check if the second part (after the postcode) exists
+							if (isset($addressParts[1])) {
+
+							// Extract state from the second part
+							$statePart = trim($addressParts[1]);
+
+							// Initialize variables
+							$selectedState = '';
+							$selectedCity = '';
+
+							// Search for the state in your $negeri collection
 							foreach ($negeri as $state) {
 								$stateName = $state->negeri;
 								$stateID = $state->id;
 
 								// Check if the state name is present in the address
-								if (stripos($smoku->alamat_tetap, $stateName) !== false) {
+								if (stripos($statePart, $stateName) !== false) {
 									$selectedState = $stateName;
 									break; // Stop the loop once a match is found
 								}
 							}
 
-							// Split the address by the postcode
-							$addressParts = explode($postcode, $smoku->alamat_tetap, 2);
+							// Trim any leading or trailing spaces in $statePart
+							$statePart = trim($statePart);
 
-							// Check if the second part (after the postcode) exists
-							if (isset($addressParts[1])) {
-								// Trim any leading or trailing spaces and set $selectedCity
-								$selectedCity = trim($addressParts[1]);
+							// Search for the city in your $bandar collection
+							$bandar_city = DB::table('bk_bandar')->where("negeri_id", $stateID)->orderBy("id", "asc")->select('id', 'bandar')->get();
 
-								// Search for the city in your $bandar collection
-								foreach ($bandar as $city) {
-									$cityName = $city->bandar;
+							foreach ($bandar_city as $city) {
+								$cityName = $city->bandar;
 
-									// Check if the city name is present in the extracted part of the address
-									if (stripos($selectedCity, $cityName) !== false) {
-										$selectedCity = $cityName;
-										break; // Stop the loop once a match is found
-									}
+								// Check if the city name is present in the extracted part of the address
+								if (stripos($statePart, $cityName) !== false) {
+									$selectedCity = $cityName;
+									break; // Stop the loop once a match is found
 								}
+							}
 							} else {
-								$selectedCity = '';
+							$selectedState = '';
+							$selectedCity = '';
 							}
 
 
 							// Remove state and city from the address
 							$trimmedAddress = str_replace([$selectedCity, $selectedState, $postcode], '', $smoku->alamat_tetap);
 
-							// Trim any extra whitespaces
-							$trimmedAddress = trim($trimmedAddress);
+							// Remove "W.P." and extra spaces
+							$trimmedAddress = trim(str_replace(['W.P.', 'WILAYAH PERSEKUTUAN'], '', $trimmedAddress));
 
 							//parlimen dengan dun
 							$parlimen = DB::table('bk_parlimen')->where('negeri_id', $stateID)
@@ -540,17 +553,7 @@
 								$postcode_surat = '';
 							}
 
-							$selectedState_surat = '';
-
-							foreach ($negeri as $state_surat) {
-								$stateName_surat = $state_surat->negeri;
-
-								// Check if the state name is present in the address
-								if (stripos($smoku->alamat_surat_menyurat, $stateName_surat) !== false) {
-									$selectedState_surat = $stateName_surat;
-									break; // Stop the loop once a match is found
-								}
-							}
+							
 
 							// Split the address by the postcode
 							if (!empty($postcode_surat)) {
@@ -559,11 +562,26 @@
 
 							// Check if the second part (after the postcode) exists
 							if (isset($addressParts_surat[1])) {
+								$selectedState_surat = '';
+								$selectedCity_surat = '';
+
+								foreach ($negeri as $state_surat) {
+									$stateName_surat = $state_surat->negeri;
+									$stateID_surat = $state_surat->id;
+
+									// Check if the state name is present in the address
+									if (stripos($smoku->alamat_surat_menyurat, $stateName_surat) !== false) {
+										$selectedState_surat = $stateName_surat;
+										break; // Stop the loop once a match is found
+									}
+								}
 								// Trim any leading or trailing spaces and set $selectedCity
 								$selectedCity_surat = trim($addressParts_surat[1]);
 
 								// Search for the city in your $bandar collection
-								foreach ($bandar as $city_surat) {
+								$bandar_city_surat = DB::table('bk_bandar')->where("negeri_id", $stateID_surat)->orderBy("id", "asc")->select('id', 'bandar')->get();
+
+								foreach ($bandar_city_surat as $city_surat) {
 									$cityName_surat = $city_surat->bandar;
 
 									// Check if the city name is present in the extracted part of the address
@@ -573,6 +591,7 @@
 									}
 								}
 							} else {
+								$selectedState_surat = '';
 								$selectedCity_surat = '';
 							}
 
@@ -580,8 +599,8 @@
 							// Remove state and city from the address
 							$trimmedAddress_surat = str_replace([$selectedCity_surat, $selectedState_surat, $postcode_surat], '', $smoku->alamat_surat_menyurat);
 
-							// Trim any extra whitespaces
-							$trimmedAddress_surat = trim($trimmedAddress_surat);
+							// Remove "W.P." and extra spaces
+							$trimmedAddress_surat = trim(str_replace(['W.P.', 'WILAYAH PERSEKUTUAN'], '', $trimmedAddress_surat));
 						} else {
 							// Handle the case where the address is empty
 							$postcode_surat = '';
@@ -686,7 +705,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{$smoku->tel_bimbit}}" />
+									<input type="text" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{str_replace('-', '', $smoku->tel_bimbit)}}" />
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -699,7 +718,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{$smoku->tel_rumah}}" />
+									<input type="text" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{str_replace('-', '', $smoku->tel_rumah)}}" />
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -794,6 +813,35 @@
 								</div>
 							</div>
 							<!--end::Input group-->
+							@php
+								$user = DB::table('users')->where('no_kp',Auth::user()->no_kp)->first();
+								$institusi = DB::table('bk_info_institusi')->where('id_institusi', $user->id_institusi)->first();
+							@endphp
+							@if($institusi->jenis_institusi != 'UA')
+								<!--begin::maklumat bank-->
+								<div class="separator my-14"></div>
+								<div class="pb-10 pb-lg-15">
+									<!--begin::Title-->
+									<h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
+									<!--end::Title-->
+									<!--begin::Notice-->
+									<div class="text-muted fw-semibold fs-6">Bank Islam</div>
+									<!--end::Notice-->
+								</div>
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="16113020138680"><i class="fa-solid fa-circle-info"></i></a>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaun_bank" name="no_akaun_bank" placeholder="" value=""/>
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+								<!--end::maklumat bank-->
+							@endif	
 						</div>
 						<!--end::Input group-->
 					</div>
@@ -820,10 +868,10 @@
 						<!--begin::Input group-->
 						<div class="mb-10 fv-row">
 							<!--begin::Label-->
-							<label class="form-label mb-3">Nama</label>
+							<label class="form-label mb-3">Nama Waris</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" placeholder="" value="{{$smoku->nama_waris}}"  />
+							<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" style="text-transform: uppercase;" placeholder="" value="{{strtoupper($smoku->nama_waris)}}"  />
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
@@ -873,7 +921,7 @@
 								<label class="form-label mb-6">No. Tel Bimbit</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="text" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{$smoku->tel_bimbit_waris}}"  />
+								<input type="text" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{str_replace('-', '', $smoku->tel_bimbit_waris)}}"  />
 								<!--end::Input-->
 							</div>
 							
@@ -1072,7 +1120,7 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+								<select name="mod" id="mod" class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 									@foreach ($mod as $mod)
 									<option></option>
 									<option value="{{$mod->kod_mod}}">{{$mod->mod}}</option>
@@ -1264,16 +1312,16 @@
 							<br>
 							<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
 							<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
-							<div class="row mb-10">
+							<div class="row mb-10" id="divyuran">
 								<br>
 								<br>
-								<div class="col-6" id="divyuran">
+								<div class="col-6">
 									<input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" onclick="return false" checked/>
 									<label class="fs-6 fw-semibold form-label">
 										Yuran
 									</label>
 								</div>
-								<div class="col-6" id="divamaun">
+								<div class="col-6">
 									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
 									<!--begin::Input-->
 									<div class="d-flex">
@@ -1284,16 +1332,16 @@
 								</div>
 							</div>
 							<br>
-							<div class="row mb-10">
+							<div class="row mb-10" id="divelaun">
 								<br>
 								<br>
-								<div class="col-6" id="divelaun">
+								<div class="col-6">
 									<input class="form-check-input" type="checkbox" value="1" id="wang_saku"  name="wang_saku" onclick="return false" checked/>
 									<label class="fs-6 fw-semibold form-label">
 										Elaun Wang Saku
 									</label>
 								</div>
-								<div class="col-6" id="divamaunelaun">
+								<div class="col-6">
 									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
 									<!--begin::Input-->
 									<div class="d-flex">
@@ -1334,6 +1382,17 @@
 								</tr>
 							</thead>
 							<tbody class="fw-semibold text-gray-600" >
+								@php
+									$user = DB::table('users')->where('no_kp',Auth::user()->no_kp)->first();
+									$institusi = DB::table('bk_info_institusi')->where('id_institusi', $user->id_institusi)->first();
+								@endphp
+								@if($institusi->jenis_institusi != 'UA')
+								<tr>
+									<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
+									<td><textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea></td>
+								</tr>
+								@endif
 								<tr>
 									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar Contoh"><i class="fa-solid fa-circle-info"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
@@ -1589,6 +1648,50 @@
 
 			});
 
+			//parlimen
+			$(document).ready(function(){
+				$('#alamat_tetap_negeri').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#parlimen').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: '/getParlimen/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var kod = response['data'][i].kod_parlimen;
+											var parlimen = response['data'][i].parlimen.toUpperCase();
+
+											var option = "<option value='"+id+"'>"+kod+" - "+parlimen+"</option>";
+
+											$("#parlimen").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
 			//dun
 			$(document).ready(function(){
 				$('#parlimen').on('change', function() {
@@ -1726,9 +1829,21 @@
 				if ( this.value == '5'){
 					$("#div_biaya_lain").show();
 				}
+				else if (this.value == '2'){
+					$("#div_nama_penaja").hide();
+					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+				}
+				else if (this.value == '3'){
+					$("#div_nama_penaja").hide();
+					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+				}
 				else if (this.value == '4'){
 					$("#div_nama_penaja").hide();
+					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
 				}
+				// else if (this.value != '1'){
+				// 	$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+				// }
 				else {
 					$("#div_biaya_lain").hide();
 					$("#div_nama_penaja").show();
@@ -1868,9 +1983,11 @@
 								var id_institusi = response['data'][i].id_institusi;
 								var kod_peringkat = response['data'][i].kod_peringkat;
 								var nama_kursus = response['data'][i].nama_kursus;
+								var kod_nec = response['data'][i].kod_nec;
+								var bidang = response['data'][i].bidang.toUpperCase();
 								var uppercaseValue  = response['data'][i].nama_kursus.toUpperCase();
 	
-								var option = "<option value='"+nama_kursus+"'>"+uppercaseValue +"</option>";
+								var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+" - "+kod_nec+" ( "+bidang+" )</option>";
 	
 								$("#nama_kursus").append(option); 
 								
@@ -1887,100 +2004,207 @@
 			</script>
 
 
-<script>
-	var max_yuran; // Declare these variables in a higher scope
-	var max_wang_saku;
-	// Make an AJAX request to fetch data based on the selected semester
-	$.ajax({
-		type: 'GET',
-		url: '/fetch-amaun/bkoku', // Replace with the actual route for fetching data
-		success: function(response) {
-			// Format the value to display with .00
-			var max_yuran = response.amaun_yuran;
-			var max_wang_saku = response.amaun_wang_saku;
+	<script>
+		var max_yuran; // Declare these variables in a higher scope
+		var max_wang_saku;
+		// Make an AJAX request to fetch data based on the selected semester
+		$.ajax({
+			type: 'GET',
+			url: '/fetch-amaun/bkoku', // Replace with the actual route for fetching data
+			success: function(response) {
+				// Format the value to display with .00
+				var max_yuran = response.amaun_yuran;
+				var max_wang_saku = response.amaun_wang_saku;
 
-			document.getElementById("max_yuran").value = max_yuran;
-			document.getElementById("max_wang_saku").value = max_wang_saku;
+				document.getElementById("max_yuran").value = max_yuran;
+				document.getElementById("max_wang_saku").value = max_wang_saku;
 
-		},
-		error: function(error) {
-			console.error('Error fetching data:', error);
-		}
-	});
-	function select1(){
-		console.clear();
-		
-		var sumber = document.getElementById('sumber_biaya').value;
-		var mod = document.getElementById('mod').value;
-		var bilbulan = document.getElementById('bil_bulan_per_sem').value;
-		
-
-		var max_yuran = parseFloat(document.getElementById('max_yuran').value).toFixed(2);
-		var max_wang_saku = parseFloat(document.getElementById('max_wang_saku').value).toFixed(2);
-		var yuranInput = document.getElementById('amaun_yuran');
-		var yuran = parseFloat(yuranInput.value).toFixed(2);
-
-		// Define the maximum limit for 'amaun_yuran'
-		var maxLimit = max_yuran;
-
-		if (!isNaN(yuran)) {
-			if (parseFloat(yuran) > parseFloat(maxLimit)) {
-				yuranInput.value = '';
-				alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' bagi satu sesi pengajian.' );
-				return;
+			},
+			error: function(error) {
+				console.error('Error fetching data:', error);
 			}
-		}
+		});
 		
-		var wang_saku_perbulan = max_wang_saku;
+		function select1(){
+			console.clear();
+			
+			// var sumber = document.getElementById('sumber_biaya').value;
+			// var mod = document.getElementById('mod').value;
+			// $('#mod').on('change', function() {
+				// Store the value of 'sumber_biaya' element in sessionStorage with key 'mod'
+				sessionStorage.setItem('mod', document.getElementById('mod').value);
 
-		var wang_saku = wang_saku_perbulan * bilbulan;
-		var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
+			// });
+			// $('#sumber_biaya').on('change', function() {
+				// sessionStorage.setItem('sumber', $(this).val());
+				// Store the value of 'sumber_biaya' element in sessionStorage with key 'mod'
+				sessionStorage.setItem('sumber', document.getElementById('sumber_biaya').value);
 
-		if(sumber=="1" && mod=="1"){
-			document.getElementById("divyuran").style.display = "none";
-			document.getElementById("divamaun").style.display = "none";
-			document.getElementById("wang_saku").disabled = false;
-			document.getElementById("amaun_wang_saku").value= wang_saku;
-		}
-		else if(sumber!="1" && mod=="2"){
-			document.getElementById("yuran").disabled = false;
-			document.getElementById("divelaun").style.display = "none";
-			document.getElementById("divamaunelaun").style.display = "none";
-		}
-		else if(sumber=="1" && mod=="2"){
-			document.getElementById("divyuran").style.display = "none";
-			document.getElementById("divelaun").style.display = "none";
-			document.getElementById("divamaun").style.display = "none";
-			document.getElementById("divamaunelaun").style.display = "none";
-		}
-		else{
-			document.getElementById("yuran").disabled = false;
-			document.getElementById("wang_saku").disabled = false;
+			// });
+			
 
-			if (total <= max_yuran) {
-				document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
-				console.log("Total amount is within the limit: " + parseFloat(total));
-			} else {
+			var mod = sessionStorage.getItem('mod');
+			var sumber = sessionStorage.getItem('sumber');
+			var bilbulan = document.getElementById('bil_bulan_per_sem').value;
+			console.log("Debug - mod: ", mod);
+			console.log("Debug - sumber: ", sumber);
+			
 
-				var baki_wang_saku = max_yuran - yuran;
-				if (!isNaN(baki_wang_saku)) {
-					document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
-					console.log("Total amount exceeds the limit: " + parseFloat(total));
-				} else {
-					document.getElementById("amaun_wang_saku").value = "";
-					console.log("Invalid input. Cannot calculate total amount.");
+			var max_yuran = parseFloat(document.getElementById('max_yuran').value).toFixed(2);
+			var max_wang_saku = parseFloat(document.getElementById('max_wang_saku').value).toFixed(2);
+
+			// var max_wang_saku = document.getElementById('max_wang_saku').value.toFixed(2);
+			var yuranInput = document.getElementById('amaun_yuran');
+			var yuran = parseFloat(yuranInput.value).toFixed(2);
+
+			// Define the maximum limit for 'amaun_yuran'
+			var maxLimit = max_yuran;
+			console.log(yuran > maxLimit);  // This will be false
+
+			if (!isNaN(yuran)) {
+				if (parseFloat(yuran) > parseFloat(maxLimit)) {
+					yuranInput.value = '';
+					alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' / tahun kalendar akademik.' );
+					return;
 				}
+			}
+			
+			
+			
+			
+			
+			if (mod === '1' && sumber === '1') { //sepenuh masa && biasiswa
+				// console.log("Condition mod==='1' && sumber==='1' is met.");
+				// console.log("Debug - mod: ", mod);
+				// console.log("Debug - sumber: ", sumber);
+				// console.log("Debug - bil bulan: ", bilbulan);
+				// console.log("wang_saku_perbulan: ", wang_saku_perbulan);
+				// console.log("wang_saku: ", wang_saku);
+				var wang_saku_perbulan = max_wang_saku;
+
+				var wang_saku = wang_saku_perbulan * bilbulan;
+
+				document.getElementById("divyuran").style.display = "none";
+				document.getElementById("divelaun").style.display = "";
+				document.getElementById("wang_saku").disabled = false;
+				document.getElementById("yuran").value = '';
+				document.getElementById("amaun_yuran").value = '';
+				document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
+			}
+			else if(mod === '1' && sumber === '4'){
+				console.log("Condition mod==='1' && sumber==='4' is met.");
+				console.log("Debug - mod: ", mod);
+				console.log("Debug - sumber: ", sumber);
+
+				var wang_saku_perbulan = max_wang_saku;
+
+				var wang_saku = wang_saku_perbulan * bilbulan;
+
+				console.log("Total amount yuran: " + parseFloat(yuran));
+				if (isNaN(yuran)) {
+					yuran = 0; // Set yuran to 0 or handle it as needed
+				}
+				var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
+				if (total <= max_yuran) {
+					document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
+					console.log("Total amount is within the limit: " + parseFloat(total));
+				} else {
+
+					var baki_wang_saku = max_yuran - yuran;
+					if (!isNaN(baki_wang_saku)) {
+						document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
+						console.log("Total amount exceeds the limit: " + parseFloat(total));
+					} 
+					else {
+						document.getElementById("amaun_wang_saku").value = "";
+						console.log("Invalid input. Cannot calculate total amount.");
+					}
+
+				}
+				document.getElementById("yuran").value = '1';
+				document.getElementById("divyuran").style.display = "";
+				document.getElementById("yuran").disabled = false;
+				document.getElementById("divelaun").style.display = "";
+				document.getElementById("wang_saku").value = '1';
+				document.getElementById("wang_saku").disabled = false;
+				
+			}
+			else if(mod === '1' && sumber === '3'){
+				console.log("Condition mod==='1' && sumber==='3' is met.");
+				console.log("Debug - mod: ", mod);
+				console.log("Debug - sumber: ", sumber);
+
+				var wang_saku_perbulan = max_wang_saku;
+
+				var wang_saku = wang_saku_perbulan * bilbulan;
+
+				console.log("Total amount yuran: " + parseFloat(yuran));
+				if (isNaN(yuran)) {
+					yuran = 0; // Set yuran to 0 or handle it as needed
+				}
+				var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
+				if (total <= max_yuran) {
+					document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
+					console.log("Total amount is within the limit: " + parseFloat(total));
+				} else {
+
+					var baki_wang_saku = max_yuran - yuran;
+					if (!isNaN(baki_wang_saku)) {
+						document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
+						console.log("Total amount exceeds the limit: " + parseFloat(total));
+					} 
+					else {
+						document.getElementById("amaun_wang_saku").value = "";
+						console.log("Invalid input. Cannot calculate total amount.");
+					}
+
+				}
+				document.getElementById("yuran").value = '1';
+				document.getElementById("divyuran").style.display = "";
+				document.getElementById("yuran").disabled = false;
+				document.getElementById("divelaun").style.display = "";
+				document.getElementById("wang_saku").value = '1';
+				document.getElementById("wang_saku").disabled = false;
+
+				
+			}
+			else if(mod === '2' && sumber !== '1'){
+				console.log("Condition mod ==='2' && sumber !=='1' is met.");
+				document.getElementById("yuran").value = '1';
+				document.getElementById("divyuran").style.display = "";
+				document.getElementById("yuran").disabled = false;
+				document.getElementById("wang_saku").value = '';
+				document.getElementById("amaun_wang_saku").value = '';
+
 
 			}
+			else if(mod === '2' && sumber === '1'){
+				console.log("Condition mod ==='2' && sumber ==='1' is met.");
+				document.getElementById("divyuran").style.display = "none";
+				document.getElementById("divelaun").style.display = "none";
+			}
+			else{
+				var wang_saku_perbulan = max_wang_saku;
+
+				var wang_saku = wang_saku_perbulan * bilbulan;
+
+				document.getElementById("divyuran").style.display = "none";
+				document.getElementById("yuran").value = '';
+				document.getElementById("amaun_yuran").value = '';
+				document.getElementById("divelaun").style.display = "";
+				document.getElementById("wang_saku").disabled = false;
+				document.getElementById("wang_saku").value = '1';
+				document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
+				
+			}
+			
+
+
+
 			
 		}
 
-
-
-		
-	}
-
-</script>
+	</script>
 
 		
 

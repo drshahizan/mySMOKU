@@ -47,11 +47,13 @@ use App\Exports\PermohonanLayakExport;
 use App\Exports\TuntutanLayak;
 use App\Imports\ModifiedPermohonanImport;
 use App\Imports\ModifiedTuntutanImport;
+use App\Mail\MailDaftarPentadbir;
 use App\Models\JumlahTuntutan;
 use App\Models\SenaraiBank;
 use Carbon\Carbon;
 use DateTime;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
@@ -339,9 +341,10 @@ class PenyelarasController extends Controller
     {
 
         $kursusData['data'] = Kursus::orderby("nama_kursus","asc")
-            ->select('id_institusi','kod_peringkat','nama_kursus')
             ->where('kod_peringkat',$kodperingkat)
             ->where('id_institusi',$ipt)
+            ->groupBy(['nama_kursus', 'kod_nec', 'bidang'])
+            ->select('nama_kursus', 'kod_nec', 'bidang')
             ->get();
 
         return response()->json($kursusData);
@@ -386,7 +389,7 @@ class PenyelarasController extends Controller
         $butiranPelajar->alamat_surat_poskod = $request->alamat_surat_poskod;
         $butiranPelajar->tel_bimbit = $request->tel_bimbit;
         $butiranPelajar->tel_rumah = $request->tel_rumah;
-        //$butiranPelajar->no_akaun_bank = $request->no_akaun_bank;
+        $butiranPelajar->no_akaun_bank = $request->no_akaun_bank;
         $butiranPelajar->emel = $request->emel;
         $butiranPelajar->status_pekerjaan = $request->status_pekerjaan;
         $butiranPelajar->pekerjaan = $request->pekerjaan;
@@ -661,6 +664,38 @@ class PenyelarasController extends Controller
         //dd($cc,$user->email);
 
         Mail::to($user->email)->cc([$cc, $cc_pelajar])->send(new PermohonanHantar($catatan,$emel));    
+
+        //CREATE USER ID TERUS UNTUK PELAJAR
+        $user = User::where('no_kp', '=', $smoku_id->no_kp)->first();
+        $characters = 'abcdefghijklmn123456789!@#$%^&';
+        $password_length = 12;
+
+        // Generate the random password
+        $password = '';
+        for ($i = 0; $i < $password_length; $i++) {
+            $password .= $characters[random_int(0, strlen($characters) - 1)];
+        }
+
+        if ($user === null) {
+
+            $userData = [
+                'nama' => $request->nama_pelajar,
+                'no_kp' => $request->no_kp,
+                'email' => $request->emel,
+                'tahap' => 1,
+                'password' => Hash::make($password),
+                'status' => 1,
+            ];
+            
+            $user = User::create($userData);
+            
+
+            $email = $request->emel;
+            $no_kp = $request->no_kp;
+            Mail::to($email)->send(new MailDaftarPentadbir($email,$no_kp,$password));
+            
+        }
+
 
         return redirect()->route('penyelaras.dashboard')->with('success', 'Permohonan pelajar telah dihantar.');
 

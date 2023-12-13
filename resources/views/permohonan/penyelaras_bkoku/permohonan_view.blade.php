@@ -655,6 +655,35 @@
 								</div>
 							</div>
 							<!--end::Input group-->
+							@php
+								$user = DB::table('users')->where('no_kp',Auth::user()->no_kp)->first();
+								$institusi = DB::table('bk_info_institusi')->where('id_institusi', $user->id_institusi)->first();
+							@endphp
+							@if($institusi->jenis_institusi != 'UA')
+								<!--begin::maklumat bank-->
+								<div class="separator my-14"></div>
+								<div class="pb-10 pb-lg-15">
+									<!--begin::Title-->
+									<h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
+									<!--end::Title-->
+									<!--begin::Notice-->
+									<div class="text-muted fw-semibold fs-6">Bank Islam</div>
+									<!--end::Notice-->
+								</div>
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="16113020138680"><i class="fa-solid fa-circle-info"></i></a>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaun_bank" name="no_akaun_bank" placeholder="" value="{{ $butiranPelajar->no_akaun_bank }}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+								<!--end::maklumat bank-->
+							@endif	
 						</div>
 						<!--end::Input group-->
 					</div>
@@ -899,7 +928,7 @@
 							</label>
 							<!--end::Label-->
 							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
-								<option value="{{ $butiranPelajar->nama_kursus}}">{{ $butiranPelajar->nama_kursus}}</option>
+								<option value="{{ $butiranPelajar->nama_kursus}}">{{ strtoupper($butiranPelajar->nama_kursus)}}</option>
 							</select>
 						</div>
 						<!--end::Input group-->
@@ -947,7 +976,7 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+								<select name="mod" id="mod" class="form-select form-select-solid" onchange="select1()" data-control="select2" data-hide-search="true" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
 									<option></option>
 									@foreach ($mod as $mod)
 									<option value="{{$mod->kod_mod}}" {{$butiranPelajar->mod == $mod->kod_mod ? 'selected' : ''}}>{{ $mod->mod}}</option>
@@ -1165,38 +1194,38 @@
 							<!--end::Label-->
 							<br>
 							<br>
-							<div class="row mb-10">
+							<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
+							<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
+							<div class="row mb-10" id="divyuran">
 								<br>
 								<br>
-								<div class="row mb-10">
-									<br>
-									<br>
-									<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
-									<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
-									<div class="col-6" id="divyuran">
-										<input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" onclick="return false" checked/>
-										<label class="fs-6 fw-semibold form-label">
-											Yuran
-										</label>
-									</div>
-									<div class="col-6" id="divamaun">
-										<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
-										<!--begin::Input-->
-										<div class="d-flex">
-											<span class="input-group-text">RM</span>
-											<input type="number" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" onchange="select1()" placeholder="" value="{{$butiranPelajar->amaun_yuran}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
-										</div>
-										<!--end::Input-->
-									</div>
+								<div class="col-6">
+									<input class="form-check-input" type="checkbox" value="1" id="yuran"  name="yuran" onclick="return false" checked/>
+									<label class="fs-6 fw-semibold form-label">
+										Yuran
+									</label>
 								</div>
+								<div class="col-6">
+									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Yuran</label>
+									<!--begin::Input-->
+									<div class="d-flex">
+										<span class="input-group-text">RM</span>
+										<input type="number" class="form-control form-control-solid" id="amaun_yuran" name="amaun_yuran" onchange="select1()" placeholder="" value="{{$butiranPelajar->amaun_yuran}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									</div>
+									<!--end::Input-->
+								</div>
+							</div>
+							<br>
+							<div class="row mb-10" id="divelaun">
 								<br>
-								<div class="col-6" id="divelaun">
+								<br>
+								<div class="col-6">
 									<input class="form-check-input" type="checkbox" value="1" id="wang_saku"  name="wang_saku" onclick="return false" checked/>
 									<label class="fs-6 fw-semibold form-label">
 										Elaun Wang Saku
 									</label>
 								</div>
-								<div class="col-6" id="divamaunelaun">
+								<div class="col-6">
 									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Amaun Wang Saku</label>
 									<!--begin::Input-->
 									<div class="d-flex">
@@ -1205,7 +1234,7 @@
 									</div>
 									<!--end::Input-->
 								</div>
-							</div>
+							</div>	
 						</div>
 					</div>
 					<!--end::Wrapper-->
@@ -1237,7 +1266,12 @@
 								</tr>
 							</thead>
 							<tbody class="fw-semibold text-gray-600">
-								@if (!$dokumen->isEmpty() && $dokumen->count() >= 2)
+								@php
+									$user = DB::table('users')->where('no_kp',Auth::user()->no_kp)->first();
+									$institusi = DB::table('bk_info_institusi')->where('id_institusi', $user->id_institusi)->first();
+								@endphp
+
+								@if (!$dokumen->isEmpty() && ($institusi->jenis_institusi == 'UA' && $dokumen->count() >= 2) || ($institusi->jenis_institusi != 'UA' && $dokumen->count() >= 3))
 								@foreach($dokumen as $dok)
 									<tr>
 										<td class="text-gray-800">
@@ -1261,6 +1295,13 @@
 									</tr>
 								@endforeach	
 								@else
+								@if($institusi->jenis_institusi != 'UA')
+								<tr>
+									<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
+									<td><textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea></td>
+								</tr>
+								@endif
 								<tr>
 									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
@@ -1525,6 +1566,94 @@
 
 			});
 
+			//parlimen
+			$(document).ready(function(){
+				$('#alamat_tetap_negeri').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#parlimen').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: '/getParlimen/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var kod = response['data'][i].kod_parlimen;
+											var parlimen = response['data'][i].parlimen.toUpperCase();
+
+											var option = "<option value='"+id+"'>"+kod+" - "+parlimen+"</option>";
+
+											$("#parlimen").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
+			//dun
+			$(document).ready(function(){
+				$('#parlimen').on('change', function() {
+					var idparlimen = $(this).val();
+					// alert(idparlimen);
+					// Empty the dropdown
+					$('#dun').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						
+						url: '/getDun/'+idparlimen,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var kod_dun = response['data'][i].kod_dun;
+											var dun = response['data'][i].dun.toUpperCase();
+
+											var option = "<option value='"+id+"'>"+kod_dun+"-"+dun+"</option>";
+
+											$("#dun").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
     		$(document).ready(function(){
 				$('#alamat_negeri_waris').on('change', function() {
 					var idnegeri = $(this).val();
@@ -1618,9 +1747,21 @@
 				if ( this.value == '5'){
 					$("#div_biaya_lain").show();
 				}
+				else if (this.value == '2'){
+					$("#div_nama_penaja").hide();
+					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+				}
+				else if (this.value == '3'){
+					$("#div_nama_penaja").hide();
+					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+				}
 				else if (this.value == '4'){
 					$("#div_nama_penaja").hide();
+					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
 				}
+				// else if (this.value != '1'){
+				// 	$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+				// }
 				else {
 					$("#div_biaya_lain").hide();
 					$("#div_nama_penaja").show();
@@ -1760,9 +1901,11 @@
 								var id_institusi = response['data'][i].id_institusi;
 								var kod_peringkat = response['data'][i].kod_peringkat;
 								var nama_kursus = response['data'][i].nama_kursus;
+								var kod_nec = response['data'][i].kod_nec;
+								var bidang = response['data'][i].bidang.toUpperCase();
 								var uppercaseValue  = response['data'][i].nama_kursus.toUpperCase();
 	
-								var option = "<option value='"+nama_kursus+"'>"+uppercaseValue +"</option>";
+								var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+" - "+kod_nec+" ( "+bidang+" )</option>";
 	
 								$("#nama_kursus").append(option); 
 								
@@ -1802,53 +1945,83 @@
 	function select1(){
 		console.clear();
 		
-		var sumber = document.getElementById('sumber_biaya').value;
-		var mod = document.getElementById('mod').value;
-		var bilbulan = document.getElementById('bil_bulan_per_sem').value;
+		// var sumber = document.getElementById('sumber_biaya').value;
+		// var mod = document.getElementById('mod').value;
+		// $('#mod').on('change', function() {
+			// Store the value of 'sumber_biaya' element in sessionStorage with key 'mod'
+			sessionStorage.setItem('mod', document.getElementById('mod').value);
+
+		// });
+		// $('#sumber_biaya').on('change', function() {
+			// sessionStorage.setItem('sumber', $(this).val());
+			// Store the value of 'sumber_biaya' element in sessionStorage with key 'mod'
+			sessionStorage.setItem('sumber', document.getElementById('sumber_biaya').value);
+
+		// });
 		
 
-		var max_yuran = document.getElementById('max_yuran').value;
-		var max_wang_saku = document.getElementById('max_wang_saku').value;
+		var mod = sessionStorage.getItem('mod');
+		var sumber = sessionStorage.getItem('sumber');
+		var bilbulan = document.getElementById('bil_bulan_per_sem').value;
+		console.log("Debug - mod: ", mod);
+		console.log("Debug - sumber: ", sumber);
+		
+
+		var max_yuran = parseFloat(document.getElementById('max_yuran').value).toFixed(2);
+		var max_wang_saku = parseFloat(document.getElementById('max_wang_saku').value).toFixed(2);
+
+		// var max_wang_saku = document.getElementById('max_wang_saku').value.toFixed(2);
 		var yuranInput = document.getElementById('amaun_yuran');
 		var yuran = parseFloat(yuranInput.value).toFixed(2);
 
 		// Define the maximum limit for 'amaun_yuran'
 		var maxLimit = max_yuran;
+		console.log(yuran > maxLimit);  // This will be false
 
 		if (!isNaN(yuran)) {
 			if (parseFloat(yuran) > parseFloat(maxLimit)) {
 				yuranInput.value = '';
-				alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' bagi satu sesi pengajian.' );
+				alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' / tahun kalendar akademik.' );
 				return;
 			}
 		}
 		
-		var wang_saku_perbulan = max_wang_saku;
+		
+		
+		
+		
+		if (mod === '1' && sumber === '1') { //sepenuh masa && biasiswa
+			// console.log("Condition mod==='1' && sumber==='1' is met.");
+			// console.log("Debug - mod: ", mod);
+			// console.log("Debug - sumber: ", sumber);
+			// console.log("Debug - bil bulan: ", bilbulan);
+			// console.log("wang_saku_perbulan: ", wang_saku_perbulan);
+			// console.log("wang_saku: ", wang_saku);
+			var wang_saku_perbulan = max_wang_saku;
 
-		var wang_saku = wang_saku_perbulan * bilbulan;
-		var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
+			var wang_saku = wang_saku_perbulan * bilbulan;
 
-		if(sumber=="1" && mod=="1"){
 			document.getElementById("divyuran").style.display = "none";
-			document.getElementById("divamaun").style.display = "none";
+			document.getElementById("divelaun").style.display = "";
 			document.getElementById("wang_saku").disabled = false;
-			document.getElementById("amaun_wang_saku").value= wang_saku;
+			document.getElementById("yuran").value = '';
+			document.getElementById("amaun_yuran").value = '';
+			document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
 		}
-		else if(sumber!="1" && mod=="2"){
-			document.getElementById("yuran").disabled = false;
-			document.getElementById("divelaun").style.display = "none";
-			document.getElementById("divamaunelaun").style.display = "none";
-		}
-		else if(sumber=="1" && mod=="2"){
-			document.getElementById("divyuran").style.display = "none";
-			document.getElementById("divelaun").style.display = "none";
-			document.getElementById("divamaun").style.display = "none";
-			document.getElementById("divamaunelaun").style.display = "none";
-		}
-		else{
-			document.getElementById("yuran").disabled = false;
-			document.getElementById("wang_saku").disabled = false;
+		else if(mod === '1' && sumber === '4'){
+			console.log("Condition mod==='1' && sumber==='4' is met.");
+			console.log("Debug - mod: ", mod);
+			console.log("Debug - sumber: ", sumber);
 
+			var wang_saku_perbulan = max_wang_saku;
+
+			var wang_saku = wang_saku_perbulan * bilbulan;
+
+			console.log("Total amount yuran: " + parseFloat(yuran));
+			if (isNaN(yuran)) {
+				yuran = 0; // Set yuran to 0 or handle it as needed
+			}
+			var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
 			if (total <= max_yuran) {
 				document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
 				console.log("Total amount is within the limit: " + parseFloat(total));
@@ -1858,14 +2031,91 @@
 				if (!isNaN(baki_wang_saku)) {
 					document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
 					console.log("Total amount exceeds the limit: " + parseFloat(total));
-				} else {
+				} 
+				else {
 					document.getElementById("amaun_wang_saku").value = "";
 					console.log("Invalid input. Cannot calculate total amount.");
 				}
 
 			}
+			document.getElementById("yuran").value = '1';
+			document.getElementById("divyuran").style.display = "";
+			document.getElementById("yuran").disabled = false;
+			document.getElementById("divelaun").style.display = "";
+			document.getElementById("wang_saku").value = '1';
+			document.getElementById("wang_saku").disabled = false;
 			
 		}
+		else if(mod === '1' && sumber === '3'){
+			console.log("Condition mod==='1' && sumber==='3' is met.");
+			console.log("Debug - mod: ", mod);
+			console.log("Debug - sumber: ", sumber);
+
+			var wang_saku_perbulan = max_wang_saku;
+
+			var wang_saku = wang_saku_perbulan * bilbulan;
+
+			console.log("Total amount yuran: " + parseFloat(yuran));
+			if (isNaN(yuran)) {
+				yuran = 0; // Set yuran to 0 or handle it as needed
+			}
+			var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
+			if (total <= max_yuran) {
+				document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
+				console.log("Total amount is within the limit: " + parseFloat(total));
+			} else {
+
+				var baki_wang_saku = max_yuran - yuran;
+				if (!isNaN(baki_wang_saku)) {
+					document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
+					console.log("Total amount exceeds the limit: " + parseFloat(total));
+				} 
+				else {
+					document.getElementById("amaun_wang_saku").value = "";
+					console.log("Invalid input. Cannot calculate total amount.");
+				}
+
+			}
+			document.getElementById("yuran").value = '1';
+			document.getElementById("divyuran").style.display = "";
+			document.getElementById("yuran").disabled = false;
+			document.getElementById("divelaun").style.display = "";
+			document.getElementById("wang_saku").value = '1';
+			document.getElementById("wang_saku").disabled = false;
+
+			
+		}
+		else if(mod === '2' && sumber !== '1'){
+			console.log("Condition mod ==='2' && sumber !=='1' is met.");
+			document.getElementById("yuran").value = '1';
+			document.getElementById("divyuran").style.display = "";
+			document.getElementById("yuran").disabled = false;
+			document.getElementById("divelaun").style.display = "none";
+			document.getElementById("wang_saku").value = '';
+			document.getElementById("amaun_wang_saku").value = '';
+
+
+		}
+		else if(mod === '2' && sumber === '1'){
+			console.log("Condition mod ==='2' && sumber ==='1' is met.");
+			document.getElementById("divyuran").style.display = "none";
+			document.getElementById("divelaun").style.display = "none";
+		}
+		else{
+			var wang_saku_perbulan = max_wang_saku;
+
+			var wang_saku = wang_saku_perbulan * bilbulan;
+
+			document.getElementById("divyuran").style.display = "none";
+			document.getElementById("yuran").value = '';
+			document.getElementById("amaun_yuran").value = '';
+			document.getElementById("divelaun").style.display = "";
+			document.getElementById("wang_saku").disabled = false;
+			document.getElementById("wang_saku").value = '1';
+			document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
+			
+		}
+		
 
 
 

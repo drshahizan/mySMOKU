@@ -417,9 +417,9 @@
 							$statePart = trim($statePart);
 
 							// Search for the city in your $bandar collection
-							$bandar = DB::table('bk_bandar')->where("negeri_id", $stateID)->orderBy("id", "asc")->select('id', 'bandar')->get();
+							$bandar_city = DB::table('bk_bandar')->where("negeri_id", $stateID)->orderBy("id", "asc")->select('id', 'bandar')->get();
 
-							foreach ($bandar as $city) {
+							foreach ($bandar_city as $city) {
 								$cityName = $city->bandar;
 
 								// Check if the city name is present in the extracted part of the address
@@ -578,9 +578,9 @@
 								$selectedCity_surat = trim($addressParts_surat[1]);
 
 								// Search for the city in your $bandar collection
-								$bandar = DB::table('bk_bandar')->where("negeri_id", $stateID_surat)->orderBy("id", "asc")->select('id', 'bandar')->get();
+								$bandar_city_surat = DB::table('bk_bandar')->where("negeri_id", $stateID_surat)->orderBy("id", "asc")->select('id', 'bandar')->get();
 
-								foreach ($bandar as $city_surat) {
+								foreach ($bandar_city_surat as $city_surat) {
 									$cityName_surat = $city_surat->bandar;
 
 									// Check if the city name is present in the extracted part of the address
@@ -861,7 +861,7 @@
 						<!--begin::Input group-->
 						<div class="mb-10 fv-row">
 							<!--begin::Label-->
-							<label class="form-label mb-3">Nama</label>
+							<label class="form-label mb-3">Nama Waris</label>
 							<!--end::Label-->
 							<!--begin::Input-->
 							<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" style="text-transform: uppercase;" placeholder="" value="{{strtoupper($smoku->nama_waris)}}"  />

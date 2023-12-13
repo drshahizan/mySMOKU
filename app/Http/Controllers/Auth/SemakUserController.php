@@ -52,6 +52,8 @@ class SemakUserController extends Controller
         $kursusData['data'] = Kursus::orderby("nama_kursus","asc")
             ->where('kod_peringkat',$kodperingkat)
             ->where('id_institusi',$ipt)
+            ->groupBy(['nama_kursus', 'kod_nec', 'bidang'])
+            ->select('nama_kursus', 'kod_nec', 'bidang')
             ->get();
     
             return response()->json($kursusData);
