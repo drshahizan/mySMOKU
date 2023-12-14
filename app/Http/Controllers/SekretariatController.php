@@ -625,7 +625,7 @@ class SekretariatController extends Controller
                         return $q->where('permohonan_kelulusan.keputusan', $request->status);
                     })
                     ->when($request->institusi, function ($q) use ($request) {
-                        return $q->where('bk_info_institusi.nama_institusi', $request->institusi);
+                        return $q->where('bk_info_institusi.id_institusi', $request->institusi);
                     })
                     ->select('permohonan_kelulusan.*') // You can customize the columns you want to select
                     ->get();
