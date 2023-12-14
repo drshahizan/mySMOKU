@@ -107,7 +107,7 @@
                                                 <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                             </div>
                                     
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <label for="end_date">Pilih Keputusan:</label>
                                                 <select name="status" class="form-select">
                                                     <option value="">Semua Keputusan</option>
@@ -115,8 +115,17 @@
                                                     <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
                                             </div>
-                                    
+
                                             <div class="col-md-4">
+                                                <select name="institusi" class="form-select js-example-basic-single">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                    @foreach ($institusiPengajian as $institusi)
+                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                    
+                                            <div class="col-md-2">
                                                 <br>
                                                 <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
@@ -156,6 +165,11 @@
 							                                                       ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
                                                                                    ->where('permohonan.id', $item['permohonan_id'])
                                                                                    ->value('bk_info_institusi.jenis_institusi');
+
+                                                            $institusi_pengajian = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                                                            ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                                                            ->where('permohonan.id', $item['permohonan_id'])
+                                                            ->value('bk_info_institusi.nama_institusi');
 
                                                             //peringkat pengajian
                                                             preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches); // Extract peringkat pengajian value using regular expression
