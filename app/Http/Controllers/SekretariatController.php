@@ -437,7 +437,7 @@ class SekretariatController extends Controller
         $maklumat_kementerian = MaklumatKementerian::first();
 
         $pdf = PDF::loadView('kemaskini.sekretariat.surat_tawaran.muat-turun', compact('suratTawaran', 'maklumat_kementerian'));
-    
+
         return $pdf->stream('surat-tawaran-dikemaskini.pdf');
     }
 
@@ -555,17 +555,17 @@ class SekretariatController extends Controller
             $existingRecord->no_mesyuarat = $request->noMesyuarat;
             $existingRecord->tarikh_mesyuarat = $request->tarikhMesyuarat;
             $existingRecord->keputusan = $keputusan;
-        
+
             // Check if 'catatan' key exists in the request
             if ($request->has('catatan')) {
                 $existingRecord->catatan = implode(', ', $catatanArray); // Save catatan values as a comma-separated string
-            } 
+            }
             else {
                 $existingRecord->catatan = null; // Or any default value you want for catatan when it's not provided
             }
-        
+
             $existingRecord->save();
-        } 
+        }
         else {
             // Create a new row in permohonan_kelulusan table
             $info_mesyuarat = new Kelulusan([
@@ -578,7 +578,7 @@ class SekretariatController extends Controller
             // Check if 'catatan' key exists in the request
             if ($request->has('catatan')) {
                 $info_mesyuarat->catatan = implode(', ', $catatanArray);
-            } 
+            }
             else {
                 $info_mesyuarat->catatan = null; // Or any default value you want for catatan when it's not provided
             }
@@ -629,7 +629,7 @@ class SekretariatController extends Controller
                     })
                     ->select('permohonan_kelulusan.*') // You can customize the columns you want to select
                     ->get();
-                
+
         $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
 
         // Pop up notification
@@ -789,7 +789,7 @@ class SekretariatController extends Controller
                     })
                     ->select('permohonan_kelulusan.*') // You can customize the columns you want to select
                     ->get();
-                
+
         $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
 
         // Pop up notification
@@ -819,7 +819,7 @@ class SekretariatController extends Controller
                     })
                     ->select('permohonan_kelulusan.*') // You can customize the columns you want to select
                     ->get();
-                
+
         $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
 
         $notifikasi = null;
@@ -1323,7 +1323,9 @@ class SekretariatController extends Controller
             ->orWhere('status', '=','6')
             ->orWhere('status', '=','7')
             ->orderBy('created_at', 'DESC')->get();
-        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status'));
+
+        $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusi','tuntutan','status_kod','status'));
     }
 
     //Keputusan
