@@ -76,7 +76,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('hantar/dokumen/tamat/pengajian', [PelajarController::class, 'hantarTamatPengajian'])->name('hantar.tamat.pengajian');
     Route::post('hantar/dokumen/tangguh/pengajian', [PelajarController::class, 'hantarTangguhPengajian'])->name('hantar.tangguh.pengajian');
     Route::post('hantar/dokumen/lanjut/pengajian', [PelajarController::class, 'hantarLanjutPengajian'])->name('hantar.lanjut.pengajian');
-    
+
     Route::get('profil/pelajar', [PelajarController::class, 'profilPelajar'])->name('profil.pelajar');
     Route::post('profil/pelajar/simpan', [PelajarController::class, 'simpanProfilPelajar'])->name('simpan.profil.pelajar');
 
@@ -152,6 +152,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('permohonan/sekretariat/saringan/papar-tuntutan/{id}', [SaringanController::class, 'paparTuntutan'])->name('papar.tuntutan.id');
     Route::get('permohonan/sekretariat/saringan/kemaskini-saringan/{id}', [SaringanController::class, 'kemaskiniSaringanP'])->name('kemaskini.saringan.permohonan.id');
     Route::post('permohonan/sekretariat/saringan/hantar-saringan/{id}', [SaringanController::class, 'hantarSaringanP'])->name('hantar.saringan.permohonan.id');
+    Route::get('permohonan/sekretariat/saringan/set-semula-status/{id}', [SaringanController::class, 'setSemulaStatus'])->name('kemaskini.saringan.set.semula.status.id');
 
     //Permohonan - Sekretariat - Pembayaran
     Route::get('permohonan/sekretariat/pembayaran/senarai', [SaringanController::class, 'senaraiPembayaran']);

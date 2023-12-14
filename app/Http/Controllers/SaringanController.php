@@ -108,6 +108,35 @@ class SaringanController extends Controller
         return view('permohonan.sekretariat.saringan.maklumat_permohonan_diperbaharui',compact('permohonan','pelajar','akademik','smoku'));
     }
 
+    public function setSemulaStatus($id){
+        Permohonan::where('id', $id)
+            ->update([
+                'status'   =>  2,
+            ]);
+
+        $permohonan = Permohonan::where('id',$id)->first();
+        $status_rekod = new SejarahPermohonan([
+            'smoku_id'          =>  $permohonan->smoku_id,
+            'permohonan_id'     =>  $id,
+            'status'            =>  2,
+        ]);
+        $status_rekod->save();
+
+        $status_kod=0;
+        $status = null;
+
+        $query = Permohonan::select('permohonan.*')
+            ->where('permohonan.status', '=','2')
+            ->orWhere('permohonan.status', '=','3')
+            ->orWhere('permohonan.status', '=','4')
+            ->orWhere('permohonan.status', '=','5');
+
+        $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
+        $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+
+        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusi','permohonan','status_kod','status'));
+    }
+
     public function maklumatProfilDiri($id)
     {
         $smoku_id = Permohonan::orderby("id","desc")->where('id', $id)->value('smoku_id');
