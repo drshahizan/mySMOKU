@@ -35,10 +35,10 @@ class SaringanController extends Controller
         $filters = $request->only(['institusi']); // Adjust the filter names as per your form
 
         $query = Permohonan::select('permohonan.*')
-            ->where('status', '2')
-            ->orWhere('status', '=','3')
-            ->orWhere('status', '=','4')
-            ->orWhere('status', '=','5');
+            ->where('permohonan.status', '=','2')
+            ->orWhere('permohonan.status', '=','3')
+            ->orWhere('permohonan.status', '=','4')
+            ->orWhere('permohonan.status', '=','5');
 
         if (isset($filters['institusi'])) {
             $selectedInstitusi = $filters['institusi'];
