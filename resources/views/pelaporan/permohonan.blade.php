@@ -20,10 +20,15 @@
         
 		<div class="accordion-item">
 			
-			<iframe title="BKOKUMohon" width="100%" height="1060" src="https://app.powerbi.com/view?r=eyJrIjoiNDdkYmViNTctMTU4Yy00YTM0LThkMDgtMTQyYzk1YmQ2YmQ1IiwidCI6IjBlMGRiMmFkLWM0MTYtNDdjNy04OGVjLWNlYWM0ZWU3Njc2NyIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
+			<iframe id="myIframe" title="BKOKUMohon" width="100%" height="1060" frameborder="0" allowFullScreen="true"></iframe>
 		</div>
 
-</div>
-<!--end::Accordion-->
+	</div>
+	<!--end::Accordion-->
+	
+	<script>
+		// Set the iframe source dynamically using JavaScript
+		document.getElementById('myIframe').src = 'https://app.powerbi.com/view?r=eyJrIjoiNDdkYmViNTctMTU4Yy00YTM0LThkMDgtMTQyYzk1YmQ2YmQ1IiwidCI6IjBlMGRiMmFkLWM0MTYtNDdjNy04OGVjLWNlYWM0ZWU3Njc2NyIsImMiOjEwfQ%3D%3D';
+	</script>
 
 </x-default-layout>
