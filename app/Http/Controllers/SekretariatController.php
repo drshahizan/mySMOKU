@@ -1030,23 +1030,23 @@ class SekretariatController extends Controller
         $status_kod = 0;
         $status = null;
 
-        $filters = $request->get('institusi'); // Adjust the filter names as per your form
+        $filters = $request->only(['institusi']);; // Adjust the filter names as per your form
 
         $query = Tuntutan::select('tuntutan.*')
-                ->where('status', '2')
-                ->orWhere('status', '=','3')
-                ->orWhere('status', '=','5')
-                ->orWhere('status', '=','6')
-                ->orWhere('status', '=','7');
+                ->where('tuntutan.status', '=', '2')
+                ->orWhere('tuntutan.status', '=','3')
+                ->orWhere('tuntutan.status', '=','5')
+                ->orWhere('tuntutan.status', '=','6')
+                ->orWhere('tuntutan.status', '=','7');
 
-        if (isset($filters)){
-            $selectedInstitusi = $filters;
+        if (isset($filters['institusi'])){
+            $selectedInstitusi = $filters['institusi'];
             $query->join('smoku', 'smoku.id', '=', 'tuntutan.smoku_id')
                 ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
                 ->where('smoku_akademik.id_institusi', $selectedInstitusi);
         }
 
-        $tuntutan = $query->orderBy('id', 'desc')->get();
+        $tuntutan = $query->orderBy('tarikh_hantar', 'desc')->get();
         $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
 
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusi','tuntutan','status_kod','status'));

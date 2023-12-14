@@ -90,10 +90,10 @@
                                             <div class="row" style="margin-left: 10px;">
                                                 <div class="col-md-4">
                                                     <label for="end_date">Pilih Institusi:</label>
-                                                    <select name="status" class="form-select">
-                                                        <option value="">Semua Institusi</option>
+                                                    <select name="institusi" class="form-select">
+                                                        <option value="">Sila Pilih</option>
                                                         @foreach($institusi as $item)
-                                                            <option value="{{$item['id_institusi']}}" {{ Request::get('institusi') == '' ? 'selected' : '' }}>{{$item['nama_institusi']}}</option>
+                                                            <option value="{{$item['id_institusi']}}" {{ Request::get('institusi') == $item['id_institusi'] ? 'selected' : '' }}>{{$item['nama_institusi']}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -211,10 +211,10 @@
                                                 <div class="row" style="margin-left: 10px;">
                                                     <div class="col-md-4">
                                                         <label for="end_date">Pilih Institusi:</label>
-                                                        <select name="status" class="form-select">
-                                                            <option value="">Semua Institusi</option>
+                                                        <select name="institusi" class="form-select">
+                                                            <option value="">Sila Pilih</option>
                                                             @foreach($institusi as $item)
-                                                                <option value="{{$item['id_institusi']}}" {{ Request::get('institusi') == '' ? 'selected' : '' }}>{{$item['nama_institusi']}}</option>
+                                                                <option value="{{$item['id_institusi']}}" {{ Request::get('institusi') == $item['id_institusi'] ? 'selected' : '' }}>{{$item['nama_institusi']}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -332,8 +332,8 @@
                                             <div class="row" style="margin-left: 10px;">
                                                 <div class="col-md-4">
                                                     <label for="end_date">Pilih Institusi:</label>
-                                                    <select name="status" class="form-select">
-                                                        <option value="">Semua Institusi</option>
+                                                    <select name="institusi" class="form-select">
+                                                        <option value="">Sila Pilih</option>
                                                         @foreach($institusi as $item)
                                                             <option value="{{$item['id_institusi']}}" {{ Request::get('institusi') == $item['id_institusi'] ? 'selected' : '' }}>{{$item['nama_institusi']}}</option>
                                                         @endforeach
