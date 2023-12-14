@@ -13,8 +13,11 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
+    'no_kp' => 'No. Kad Pengenalan yang dimasukkan tidak betul.',
+    'password' => 'Kata laluan yang dimasukkan tidak betul.',
+    'email_not_verified' => 'Sila semak emel untutk pengesahan pendaftaran.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed_fields' => 'Authentication failed for the following fields: :fields.',
+    'both_incorrect' => 'Tiada maklumat pendaftaran.',
 
 ];

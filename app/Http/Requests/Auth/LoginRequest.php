@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -44,27 +45,53 @@ class LoginRequest extends FormRequest
     public function authenticate()
     {
         $this->ensureIsNotRateLimited();
-
-        if (! Auth::attempt($this->only('no_kp', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
-
+    
+        $credentials = $this->only('no_kp', 'password');
+    
+        if (empty($credentials['no_kp']) || empty($credentials['password'])) {
+            // If either 'no_kp' or 'password' is not provided, throw an exception or handle it as needed.
             throw ValidationException::withMessages([
-                'no_kp' => trans('auth.failed'),
+                'both' => trans('auth.credentials_not_provided'),
             ]);
         }
 
-         // Check if the user's email is verified
+        $user = User::where('no_kp', $credentials['no_kp'])->first();
+    
+        if ($user && Auth::attempt(['no_kp' => $credentials['no_kp'], 'password' => $credentials['password']])) {
+            // Authentication succeeded for both 'no_kp' and 'password'
             $user = Auth::user();
-
+    
+            // Check if the user's email is verified
             if (!$user->email_verified_at) {
                 Auth::logout(); // Log the user out if email is not verified
                 throw ValidationException::withMessages([
-                    'no_kp' => trans('auth.email_not_verified'),
+                    'email_verified_at' => trans('auth.email_not_verified'),
                 ]);
             }
+    
+            RateLimiter::clear($this->throttleKey());
+    
 
-        RateLimiter::clear($this->throttleKey());
+        } else {
+            // Authentication failed for 'no_kp' and 'password' or 'no_kp' doesn't exist
+            RateLimiter::hit($this->throttleKey());
+        
+            // Check if 'no_kp' exists in the table
+            if ($user) {
+                // 'no_kp' exists, but the password is incorrect
+                throw ValidationException::withMessages([
+                    'password' => trans('auth.password'),
+                ]);
+            } else {
+                // 'no_kp' doesn't exist in the table
+                throw ValidationException::withMessages([
+                    'both' => trans('auth.both_incorrect'),
+                ]);
+            }
+        }
     }
+    
+
 
     /**
      * Ensure the login request is not rate limited.
@@ -89,6 +116,7 @@ class LoginRequest extends FormRequest
                 'minutes' => ceil($seconds / 60),
             ]),
             'email_verified_at' => trans('auth.email_not_verified'), // Add this line
+            'password' => trans('auth.password'),
         ]);
     }
 

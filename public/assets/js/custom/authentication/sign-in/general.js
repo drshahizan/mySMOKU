@@ -152,15 +152,37 @@ var KTSigninGeneral = function () {
                             });
                         }
                     }).catch(function (error) {
-                        Swal.fire({
-                            text: "Tiada Maklumat Pendaftaran",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
+                       
+                        
+                        if (error.response && error.response.data && error.response.data.errors) {
+                            // Extract validation errors
+                            const validationErrors = error.response.data.errors;
+                            // console.log("Validation Errors No_kp: ", validationErrors.no_kp);
+                            // console.log("Validation Errors Password: ", validationErrors.password);
+                    
+                            if (validationErrors.password) {
+                                showError(validationErrors.password[0]);
+                            } 
+                            else {
+                                showError(validationErrors.both[0]);
                             }
-                        });
+                            
+                            function showError(errorMessage) {
+                                Swal.fire({
+                                    text: `Ralat: ${errorMessage}`,
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                });
+                            }
+                            
+                            
+                            
+                            
+                        } 
                     }).then(() => {
                         // Hide loading indication
                         submitButton.removeAttribute('data-kt-indicator');
