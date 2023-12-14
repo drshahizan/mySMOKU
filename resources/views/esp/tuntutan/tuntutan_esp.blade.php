@@ -74,13 +74,13 @@
                             <th class="text-center" style="width:3%;">
                               <input type="checkbox" name="select-all" id="select-all-bkoku" onclick="toggleSelectAll('bkoku');" />
                             </th>
-                            <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
+                            <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
                             <th class="text-center" style="width: 10%"><b>ID Tuntutan</b></th>                                                   
-                            <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                            <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
-                            <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                            <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
-                            <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+                            <th class="text-center" style="width: 15%"><b>Nama</b></th>
+                            <th class="text-center" style="width: 15%"><b>Nama Kursus</b></th>
+                            <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th>
+                            <th class="text-center" style="width: 15%"><b>Yuran Disokong (RM)</b></th>
+                            <th class="text-center" style="width: 15%"><b>Wang Saku Disokong (RM)</b></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -152,11 +152,11 @@
                                   <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
                                   <td class="text-center">{{ $bkoku->no_rujukan_permohonan}}</td>
                                   <td class="text-center">{{ $bkoku->no_rujukan_tuntutan}}</td>
-                                  <td class="text-center">{{$pemohon}}</td>
-                                  <td class="text-center">{{$namakursus}}</td>
-                                  <td class="text-center">{{$institusipengajian}}</td>
-                                  <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                                  <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                  <td>{{$pemohon}}</td>
+                                  <td>{{$namakursus}}</td>
+                                  <td>{{$institusipengajian}}</td>
+                                  <td class="text-right">{{ $bkoku->yuran_disokong}}</td>
+                                  <td class="text-right">{{ $bkoku->wang_saku_disokong}}</td>
                                 </tr>
                               @endif   
                             @endif
@@ -181,14 +181,13 @@
                             <th class="text-center" style="width:3%;">
                               <input type="checkbox" name="select-all" id="select-all-bkokuUA" onclick="toggleSelectAll('bkokuUA');" />
                             </th>
-                            <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
+                            <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
                             <th class="text-center" style="width: 10%"><b>ID Tuntutan</b></th>                                                   
-                            <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                            <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
-                            <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                            <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
-                            <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
-                          </tr>
+                            <th class="text-center" style="width: 15%"><b>Nama</b></th>
+                            <th class="text-center" style="width: 15%"><b>Nama Kursus</b></th>
+                            <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th>
+                            <th class="text-center" style="width: 15%"><b>Yuran Disokong (RM)</b></th>
+                            <th class="text-center" style="width: 15%"><b>Wang Saku Disokong (RM)</b></th>
                         </thead>
                         <tbody>
                           @php
@@ -259,11 +258,11 @@
                                   <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
                                   <td class="text-center">{{ $bkoku->no_rujukan_permohonan}}</td>
                                   <td class="text-center">{{ $bkoku->no_rujukan_tuntutan}}</td>
-                                  <td class="text-center">{{$pemohon}}</td>
-                                  <td class="text-center">{{$namakursus}}</td>
-                                  <td class="text-center">{{$institusipengajian}}</td>
-                                  <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                                  <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                  <td>{{$pemohon}}</td>
+                                  <td>{{$namakursus}}</td>
+                                  <td>{{$institusipengajian}}</td>
+                                  <td class="text-right">{{ $bkoku->yuran_disokong}}</td>
+                                  <td class="text-right">{{ $bkoku->wang_saku_disokong}}</td>
                                 </tr>
                               @endif  
                             @endif
@@ -293,8 +292,7 @@
                             <th class="text-center" style="width: 20%"><b>Nama</b></th>
                             <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                             <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                            <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
-                            <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+                            <th class="text-center" style="width: 10%"><b>Wang Saku Disokong (RM)</b></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -363,11 +361,10 @@
                                 <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
                                 <td class="text-center">{{ $item->no_rujukan_permohonan}}</td>
                                 <td class="text-center">{{ $item->no_rujukan_tuntutan}}</td>
-                                <td class="text-center">{{$pemohon}}</td>
-                                <td class="text-center">{{$namakursus}}</td>
-                                <td class="text-center">{{$institusipengajian}}</td>
-                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                <td>{{$pemohon}}</td>
+                                <td>{{$namakursus}}</td>
+                                <td>{{$institusipengajian}}</td>
+                                <td class="text-right">{{ $item->wang_saku_disokong}}</td>
                               </tr>
                             @endif  
                           @endforeach

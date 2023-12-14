@@ -55,6 +55,7 @@ class MaklumatESPController extends Controller
             ->join('bk_peringkat_pengajian as e', 'e.kod_peringkat', '=', 'c.peringkat_pengajian')
             ->leftJoin('bk_agama as f', 'f.id', '=', 'd.agama')
             ->leftJoin('maklumat_bank as h', 'g.id_institusi', '=', 'h.institusi_id')
+            ->leftJoin('senarai_bank as l', 'h.bank_id', '=', 'l.kod_bank')
             ->leftJoin('bk_negeri as i', 'i.id', '=', 'd.negeri_lahir')
             ->leftJoin('bk_bandar as j', 'j.id', '=', 'd.alamat_tetap_bandar')
             ->leftJoin('bk_negeri as k', 'k.id', '=', 'd.alamat_tetap_negeri')
@@ -90,8 +91,8 @@ class MaklumatESPController extends Controller
                 DB::raw('DATE_FORMAT(c.tarikh_tamat, "%d/%m/%Y") AS tarikh_tamat'),
                 DB::raw('IF(g.jenis_institusi = "UA", h.no_akaun, d.no_akaun_bank) as no_akaun'),
                 DB::raw('IF(g.jenis_institusi = "UA", h.nama_akaun, a.nama) as nama_akaun'),
-                DB::raw('"45" as kod_bank'),
-                DB::raw('"BANK ISLAM MALAYSIA BERHAD" as nama_bank'),
+                DB::raw('IF(g.jenis_institusi = "UA", h.bank_id, "45") as kod_bank'),
+                DB::raw('IF(g.jenis_institusi = "UA", l.nama_bank, "BANK ISLAM MALAYSIA BERHAD") as nama_bank'),
                 'b.no_rujukan_permohonan as id_permohonan',
                 DB::raw('"" as id_tuntutan'),
                 'a.email',
@@ -141,6 +142,7 @@ class MaklumatESPController extends Controller
             ->join('bk_peringkat_pengajian as e', 'e.kod_peringkat', '=', 'c.peringkat_pengajian')
             ->leftJoin('bk_agama as f', 'f.id', '=', 'd.agama')
             ->leftJoin('maklumat_bank as h', 'g.id_institusi', '=', 'h.institusi_id')
+            ->leftJoin('senarai_bank as l', 'h.bank_id', '=', 'l.kod_bank')
             ->leftJoin('bk_negeri as i', 'i.id', '=', 'd.negeri_lahir')
             ->leftJoin('bk_bandar as j', 'j.id', '=', 'd.alamat_tetap_bandar')
             ->leftJoin('bk_negeri as k', 'k.id', '=', 'd.alamat_tetap_negeri')
@@ -176,8 +178,8 @@ class MaklumatESPController extends Controller
                 DB::raw('DATE_FORMAT(c.tarikh_tamat, "%d/%m/%Y") AS tarikh_tamat'),
                 DB::raw('IF(g.jenis_institusi = "UA", h.no_akaun, d.no_akaun_bank) as no_akaun'),
                 DB::raw('IF(g.jenis_institusi = "UA", h.nama_akaun, a.nama) as nama_akaun'),
-                DB::raw('"45" as kod_bank'),
-                DB::raw('"BANK ISLAM MALAYSIA BERHAD" as nama_bank'),
+                DB::raw('IF(g.jenis_institusi = "UA", h.bank_id, "45") as kod_bank'),
+                DB::raw('IF(g.jenis_institusi = "UA", l.nama_bank, "BANK ISLAM MALAYSIA BERHAD") as nama_bank'),
                 'b.no_rujukan_permohonan as id_permohonan',
                 'bb.no_rujukan_tuntutan as id_tuntutan',
                 'a.email',
