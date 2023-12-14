@@ -118,18 +118,12 @@
 
                                             <div class="col-md-4">
                                                 <label for="end_date">Institusi Pengajian:</label>
-                                                <select name="institusi" class="form-select js-example-basic-single">
+                                                <select name="institusi" class="form-control search" data-control="select2" data-hide-search="true" data-placeholder="Pilih Institusi Pengajian">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiPengajian as $institusi)
                                                         <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
                                                     @endforeach
                                                 </select>
-                                                {{-- <select name="institusi" class="form-control search" data-control="select2" data-hide-search="true" data-placeholder="Pilih Institusi Pengajian">
-                                                    <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiPengajian as $institusi)
-                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
-                                                    @endforeach
-                                                </select> --}}
                                             </div>
                                     
                                             <div class="col-md-2">
