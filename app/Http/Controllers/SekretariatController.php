@@ -765,20 +765,29 @@ class SekretariatController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $kelulusan = Kelulusan::orderBy('updated_at', 'desc')
-        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('tarikh_mesyuarat', [$startDate, $endDate]);
-        })
-        ->when($request->status, function ($q) use ($request) {
-            return $q->where('keputusan', $request->status);
-        })
-        ->get();
+        $kelulusan = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
+                    ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                    ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                    ->orderBy('permohonan_kelulusan.updated_at', 'desc')
+                    ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+                        return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
+                    })
+                    ->when($request->status, function ($q) use ($request) {
+                        return $q->where('permohonan_kelulusan.keputusan', $request->status);
+                    })
+                    ->when($request->institusi, function ($q) use ($request) {
+                        return $q->where('bk_info_institusi.nama_institusi', $request->institusi);
+                    })
+                    ->select('permohonan_kelulusan.*') // You can customize the columns you want to select
+                    ->get();
+                
+        $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
 
         // Pop up notification
         $keputusan = $request->get('keputusan');
         $notifikasi = "Emel notifikasi telah dihantar kepada semua pemohon.";
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan','institusiPengajian'));
     }
 
     public function senaraiKeputusanPermohonan(Request $request)
