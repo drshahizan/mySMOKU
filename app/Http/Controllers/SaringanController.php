@@ -547,7 +547,7 @@ class SaringanController extends Controller
     //pembayaran
     public function senaraiPembayaran(Request $request)
     {
-        $permohonan = Permohonan::where('status', '8')->orderBy('created_at', 'DESC')->get();
+        $permohonan = Permohonan::where('status', '8')->orderBy('tarikh_hantar', 'desc')->get();
         $status_kod=0;
         $status = null;
 

@@ -29,7 +29,8 @@ var KTSubscriptionsList = function () {
             'columnDefs': [
                 { orderable: false, targets: 0 }, // Disable ordering on column 0 (checkbox)
                 { orderable: false, targets: 6 }, // Disable ordering on column 6 (actions)                
-            ]
+            ],
+            "paging": true, // Enable pagination
         });
 
         // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
@@ -38,6 +39,8 @@ var KTSubscriptionsList = function () {
             handleRowDeletion();
             toggleToolbars();
         });
+
+        
     }
 
     // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()

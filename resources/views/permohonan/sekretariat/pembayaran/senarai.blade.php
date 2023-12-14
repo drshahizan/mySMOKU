@@ -264,7 +264,7 @@
                                         <table class="table table-striped table-hover dataTable js-exportable" id="kt_subscriptions_table">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center" style="width: 3% !important;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
+                                                    <th class="text-center" style="width: 3% !important;"><input type="checkbox" name="select-all" id="select-all-bkokuUA" onclick="toggle('bkokuUA');" /></th>
                                                     <th style="width: 10%"><b>ID Permohonan</b></th>
                                                     <th style="width: 20%"><b>Nama</b></th>
                                                     <th style="width: 25%" class="text-center"><b>Institusi Pengajian</b></th>
@@ -505,11 +505,7 @@
             ordering: true, // Enable manual sorting
             order: [] // Disable initial sorting
         });
-        $('#kt_subscriptions_table').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [], // Disable initial sorting
-            
-        });
+        
         $('#sortTable2').DataTable({
             ordering: true, // Enable manual sorting
             order: [] // Disable initial sorting
@@ -521,11 +517,33 @@
 
 
         // check all checkboxes at once
-        function toggle(source) {
-            var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
-            for (var i = 0; i < checkboxes.length; i++) {
-                checkboxes[i].checked = source.checked;
-            }
+        // function toggle(source) {
+        //     var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
+        //     for (var i = 0; i < checkboxes.length; i++) {
+        //         checkboxes[i].checked = source.checked;
+        //     }
+        // }
+        function toggle(tab) {
+            var selectAllCheckbox = document.getElementById('select-all-' + tab);
+            var isChecked = selectAllCheckbox.checked;
+
+            // Get all checkboxes in the active tab
+            var checkboxes = document.querySelectorAll('#' + tab + ' input[name="selected_items[]"]');
+            
+            // Set the checked property of all checkboxes to match the "Select All" checkbox
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = isChecked;
+            });
+
+            // Prepare an array to hold selected no_kp values
+            var selectedid = [];
+
+            // Loop through all checkboxes and get selected nokp values
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    selectedid.push(checkbox.value);
+                }
+            });
         }
 
 
@@ -558,15 +576,49 @@
 
     </script>
     <script>
+        // Declare datatable in a higher scope to make it accessible
+        var datatable;
+    
+        $(document).ready(function() {
+            // Check if the datatable is already initialized
+            if ($.fn.DataTable.isDataTable('#kt_subscriptions_table')) {
+                // Destroy the existing DataTable instance
+                $('#kt_subscriptions_table').DataTable().destroy();
+            }
+    
+            // Initialize the datatable and assign it to the global variable
+            datatable = $('#kt_subscriptions_table').DataTable({
+                ordering: true, // Enable manual sorting
+                order: [], // Disable initial sorting
+                columnDefs: [
+                    { orderable: false, targets: [0] } 
+                ]
+            });
+            // console.log('Table Data:', datatable.data().toArray());
+        });
+    
         function applyFilter() {
             var selectedInstitusi = $('[name="institusi"]').val();
-            // alert(selectedInstitusi);
-            
+    
+            // Apply search filter to the column
+            datatable.column(3).search(selectedInstitusi).draw();
+    
+            // Log filtered data
+            console.log('Filtered Data:', datatable.rows({ search: 'applied' }).data().toArray());
+    
+            // Go to the first page
+            datatable.page(0).draw(false);
+    
+            // Log the data of visible rows on the first page
+            console.log('Data on Visible Rows (First Page):', datatable.rows({ page: 'current' }).data().toArray());
+    
             // Update the export link with the selected institusi
             var exportLink = document.getElementById('exportLink');
             exportLink.href = "{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
         }
     </script>
+    
+    
     <!--begin::Javascript-->
 
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->

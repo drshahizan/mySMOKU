@@ -142,11 +142,11 @@ class PenyaluranTuntutan implements FromCollection, WithHeadings, WithColumnWidt
             $row->urusniaga,
             10,
             $row->no_baucer,
-            \Carbon\Carbon::parse($row->tarikh_baucer)->format('d/m/Y'),
+            \Carbon\Carbon::parse($row->tarikh_baucer)->format('d-M-Y'),
             $row->perihal,
             'BIMB',
             $row->no_cek,
-            \Carbon\Carbon::parse($row->tarikh_transaksi)->format('d/m/Y'),
+            \Carbon\Carbon::parse($row->tarikh_transaksi)->format('d-M-Y'),
             $row->debit,
         ];
     }
