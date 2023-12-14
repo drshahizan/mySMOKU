@@ -117,7 +117,8 @@
                                             </div>
 
                                             <div class="col-md-4">
-                                                <select name="institusi" class="form-select js-example-basic-single">
+                                                <label for="end_date">Institusi Pengajian:</label>
+                                                <select name="institusi" class="form-control search" data-control="select2" data-hide-search="true" data-placeholder="Pilih Institusi Pengajian">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiPengajian as $institusi)
                                                         <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
@@ -127,7 +128,7 @@
                                     
                                             <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 12%; padding-left: 11px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
@@ -503,13 +504,7 @@
                 </div>
             </div>
         </div>
-        <style>
-            .custom-width-btn {
-                width: 105px; 
-                height: 35px;
-            }
-        </style>
-        
+
         <!-- Javascript -->
         <script src="assets/bundles/libscripts.bundle.js"></script>    
         <script src="assets/bundles/vendorscripts.bundle.js"></script>
@@ -573,4 +568,17 @@
                 }).draw();
             });
         </script>
+
+        <script> 
+            $(document).ready(function() {
+                $('.search').select2();
+            });
+        </script>   
+
+        <style>
+            .custom-width-btn {
+                width: 105px; 
+                height: 35px;
+            }
+        </style>
 </x-default-layout> 
