@@ -84,9 +84,9 @@
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item vivify swoopInTop delay-150 active"><b>Saring Tuntutan</b></li>
                             </ul>
-                            {{-- <div class="ml-auto">
-                                <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank" class="btn btn-primary">Cetak</a>
-                            </div> --}}
+                            <div class="ml-auto">
+                                <a href="{{ url('tuntutan/sekretariat/saringan/set-semula-status/'.$tuntutan->id) }}" class="btn btn-primary">Set Semula Saringan</a>
+                            </div>
                         </div>
                     </nav>
                 </div>

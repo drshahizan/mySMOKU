@@ -1111,6 +1111,36 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.saringan.maklumat_tuntutan',compact('baki_terdahulu','permohonan','smoku','akademik','tuntutan','tuntutan_item'));
     }
 
+    public function setSemulaStatus($id){
+        Tuntutan::where('id', $id)
+            ->update([
+                'status'   =>  2,
+            ]);
+
+        $tuntutan = Tuntutan::where('id',$id)->first();
+        $status_rekod = new SejarahTuntutan([
+            'smoku_id'          =>  $tuntutan->smoku_id,
+            'tuntutan_id'       =>  $id,
+            'status'            =>  2,
+        ]);
+        $status_rekod->save();
+
+        $status_kod=0;
+        $status = null;
+
+        $query = Tuntutan::select('tuntutan.*')
+            ->where('tuntutan.status', '=', '2')
+            ->orWhere('tuntutan.status', '=','3')
+            ->orWhere('tuntutan.status', '=','5')
+            ->orWhere('tuntutan.status', '=','6')
+            ->orWhere('tuntutan.status', '=','7');
+
+        $tuntutan = $query->orderBy('tarikh_hantar', 'desc')->get();
+        $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+
+        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusi','tuntutan','status_kod','status'));
+    }
+
     public function saringTuntutanKedua(Request $request, $id)
     {
         $no_rujukan_tuntutan= Tuntutan::where('id', $id)->value('no_rujukan_tuntutan');

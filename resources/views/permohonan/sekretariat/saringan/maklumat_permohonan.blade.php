@@ -69,7 +69,7 @@
                                 <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Permohonan</b></li>
                             </ul>
                              <div class="ml-auto">
-                                <a href="{{ url('permohonan/sekretariat/saringan/set-semula-status/'.$permohonan->id) }}" target="_blank" class="btn btn-primary">Set Semula Saringan</a>
+                                <a href="{{ url('permohonan/sekretariat/saringan/set-semula-status/'.$permohonan->id) }}" class="btn btn-primary">Set Semula Saringan</a>
                             </div>
                         </div>
                     </nav>

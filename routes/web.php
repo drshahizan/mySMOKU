@@ -152,7 +152,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('permohonan/sekretariat/saringan/papar-tuntutan/{id}', [SaringanController::class, 'paparTuntutan'])->name('papar.tuntutan.id');
     Route::get('permohonan/sekretariat/saringan/kemaskini-saringan/{id}', [SaringanController::class, 'kemaskiniSaringanP'])->name('kemaskini.saringan.permohonan.id');
     Route::post('permohonan/sekretariat/saringan/hantar-saringan/{id}', [SaringanController::class, 'hantarSaringanP'])->name('hantar.saringan.permohonan.id');
-    Route::get('permohonan/sekretariat/saringan/set-semula-status/{id}', [SaringanController::class, 'setSemulaStatus'])->name('kemaskini.saringan.set.semula.status.id');
+    Route::get('permohonan/sekretariat/saringan/set-semula-status/{id}', [SaringanController::class, 'setSemulaStatus'])->name('kemaskini.saringan.set.status.permohonan.id');
 
     //Permohonan - Sekretariat - Pembayaran
     Route::get('permohonan/sekretariat/pembayaran/senarai', [SaringanController::class, 'senaraiPembayaran']);
@@ -237,7 +237,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan/sekretariat/saringan/papar-tuntutan/{id}', [SekretariatController::class, 'paparTuntutanKedua'])->name('papar.tuntutan.kedua.id');
     Route::get('tuntutan/sekretariat/saringan/kemaskini-tuntutan/{id}', [SekretariatController::class, 'kemaskiniTuntutan'])->name('kemaskini.tuntutan.id');
     Route::post('tuntutan/sekretariat/saringan/hantar-tuntutan/{id}', [SekretariatController::class, 'hantarTuntutan'])->name('hantar.tuntutan.id');
-
+    Route::get('tuntutan/sekretariat/saringan/set-semula-status/{id}', [SekretariatController::class, 'setSemulaStatus'])->name('kemaskini.saringan.set.status.tuntutan.id');
     //Tuntutan - Sekretariat - Pembayaran
     Route::get('tuntutan/sekretariat/pembayaran/senarai', [SekretariatController::class, 'senaraiPembayaran']);
     Route::get('tuntutan/sekretariat/pembayaran/maklumat/{id}', [SekretariatController::class, 'maklumatPembayaran'])->name('t.maklumat.pembayaran.id');
