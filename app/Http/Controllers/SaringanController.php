@@ -163,7 +163,8 @@ class SaringanController extends Controller
         ->get();
         $status_kod = 3;
         $status = "Permohonan dan tuntutan ".$no_rujukan_permohonan." telah disaring dan disokong.";
-        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status'));
+        $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusi','permohonan','status_kod','status'));
     }
 
     public function saringPermohonan(Request $request,$id)
@@ -258,7 +259,8 @@ class SaringanController extends Controller
 
             $status_kod = 2;
             $status = "Permohonan ".$no_rujukan_permohonan." telah dikembalikan.";
-            return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status'));
+            $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+            return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusi','permohonan','status_kod','status'));
         }
     }
 
@@ -292,7 +294,8 @@ class SaringanController extends Controller
 
             $status_kod = 3;
             $status = "Permohonan ".$no_rujukan_permohonan." telah disokong.";
-            return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status'));
+            $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+            return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusi','permohonan','status_kod','status'));
         }
         else{
             $catatan[]="";
@@ -352,7 +355,8 @@ class SaringanController extends Controller
 
             $status_kod = 2;
             $status = "Permohonan ".$no_rujukan_permohonan." telah dikembalikan.";
-            return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status'));
+            $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+            return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusi','permohonan','status_kod','status'));
         }
     }
 
