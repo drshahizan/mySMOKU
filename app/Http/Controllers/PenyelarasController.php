@@ -905,7 +905,7 @@ class PenyelarasController extends Controller
                 if ($currentDate->greaterThan($tarikhNextSem)) {
                     // semak dah upload result ke belum
                     $result = Peperiksaan::where('permohonan_id', $permohonan->id)
-                    ->where('semester', $semSemasa)
+                    ->where('semester', $semSemasa - 1)
                     ->first();
                     if($result == null){
                         return redirect()->route('bkoku.kemaskini.keputusan', ['id' => $id])->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
