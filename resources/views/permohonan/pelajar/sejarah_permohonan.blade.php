@@ -71,6 +71,7 @@
                                                 <th class="text-center"><b>Peringkat Pengajian</b></th>
                                                 <th class="text-center"><b>Amaun Yuran Dibayar</b></th>
                                                 <th class="text-center"><b>Amaun Wang Saku Dibayar</b></th>
+                                                <th class="text-center"><b>Tarikh Dibayar</b></th>
                                                 <th class="text-center"><b>Status Terkini</b></th>
                                                 @if ($institusi->jenis_institusi != 'UA')
                                                 <th class="text-center"><b>Tindakan</b></th>
@@ -107,6 +108,7 @@
                                                         <td class="text-center">{{ucwords(strtolower($peringkat))}}</td>
                                                         <td class="text-center">RM {{$item['yuran_dibayar']}}</td>
                                                         <td class="text-center">RM {{$item['wang_saku_dibayar']}}</td>
+                                                        <td class="text-center">{{\Carbon\Carbon::parse($item['tarikh_transaksi'])->format('d/m/Y')}}</td>
 
                                                         @if ($item['status']=='1')
                                                             <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
