@@ -1436,7 +1436,7 @@ class SekretariatController extends Controller
         $peringkat = $rujukan[1];
         $no_tuntutan = $rujukan[3];
 
-        $tuntutan_sebelum = Tuntutan::where('permohonan_id',$tuntutan->permohonan_id)->where('status', '6')->where('id', '<', $id)->orderBy('id','desc')->first();
+        $tuntutan_sebelum = Tuntutan::where('permohonan_id',$tuntutan->permohonan_id)->where('status', '8')->where('id', '<', $id)->orderBy('id','desc')->first();
         if($tuntutan_sebelum!=null){
             $sesi_sebelum = $tuntutan_sebelum->sesi;
         }
