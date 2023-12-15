@@ -567,8 +567,13 @@ $(document).ready(function() {
             icon: 'error',
             title: 'Tidak Berjaya',
             text: 'Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.',
+          }).then((result) => {
+              // Check if the user clicked OK
+              if (result.isConfirmed) {
+                  // Reload the page
+                  location.reload();
+              }
           });
-		      location.reload(); // Refresh the page
           // alert(`Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.`);
           // alert(`Data tidak berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`);
           
@@ -577,15 +582,19 @@ $(document).ready(function() {
             icon: 'success',
             title: 'Berjaya',
             text: 'Data berjaya di hantar ke ESP. Semak ESP',
+          }).then((result) => {
+              // Check if the user clicked OK
+              if (result.isConfirmed) {
+                  // Reload the page
+                  location.reload();
+              }
           });
-          
-          location.reload(); // Refresh the page
 
           // alert(`Data berjaya di hantar ke ESP. Semak ESP`); // Show success message and API response in alert
           // alert(`Data berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`); // Show success message and API response in alert
         }
 
-        location.reload(); // Refresh the page
+        // location.reload(); // Refresh the page
     })
 
     .catch(error => {
