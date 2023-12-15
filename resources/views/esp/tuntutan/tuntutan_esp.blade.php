@@ -5,9 +5,12 @@
   <link rel="stylesheet" href="/assets/css/sekretariat.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
   <meta name="csrf-token" content="{{ csrf_token() }}">
+
   
   </head>
   <!--begin::Page title-->
@@ -565,11 +568,25 @@ $(document).ready(function() {
         const responseDataString = JSON.stringify(data, null, 2);
 
         if (data.status === 'error'){
-          alert(`Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.`);
+          Swal.fire({
+            icon: 'error',
+            title: 'Tidak Berjaya',
+            text: 'Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.',
+          });
+		      location.reload(); // Refresh the page
+          
+          // alert(`Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.`);
           // alert(`Data tidak berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`);
           
         }else{
-          alert(`Data berjaya di hantar ke ESP. Semak ESP`); // Show success message and API response in alert
+          Swal.fire({
+            icon: 'success',
+            title: 'Berjaya',
+            text: 'Data berjaya di hantar ke ESP. Semak ESP',
+          });
+          
+          location.reload(); // Refresh the page
+          // alert(`Data berjaya di hantar ke ESP. Semak ESP`); // Show success message and API response in alert
           // alert(`Data berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`); // Show success message and API response in alert
         }
 
