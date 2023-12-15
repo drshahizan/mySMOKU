@@ -806,8 +806,12 @@ class PenyelarasController extends Controller
         if ($permohonan) {
             
             $peperiksaan = Peperiksaan::where('permohonan_id', $permohonan->id)->get();
+            $result = Peperiksaan::where('permohonan_id', $permohonan->id)
+									->where('sesi', $sesiSemasa)
+									->where('semester', $semSemasa)
+									->first();
 
-            return view('tuntutan.penyelaras_bkoku.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan','sesiSemasa','semSemasa'));
+            return view('tuntutan.penyelaras_bkoku.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan','sesiSemasa','semSemasa','result'));
         
         } else {
 

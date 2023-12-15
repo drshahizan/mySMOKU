@@ -63,11 +63,17 @@
 								</div>
 								<!--end::Row-->
 								<!--begin::Action-->
+								@if(!$result)
 								<div class="d-flex flex-center mt-15">
 									<button type="submit"  class="btn btn-primary">
 										Simpan
 									</button>
 								</div>
+								@else
+									<div class="alert alert-warning mt-15" role="alert" style="color: black;">
+										Keputusan peperiksaan lepas sudah dikemaskini.
+									</div>
+								@endif
 								<!--end::Action-->
 							</div>
 							<!--end::Wrapper-->
