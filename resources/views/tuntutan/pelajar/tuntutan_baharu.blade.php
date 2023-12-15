@@ -218,8 +218,6 @@
 				<div class="card">
 					<!--begin::Card body-->
 					<div class="card-body p-10">
-						
-						
 						<!--begin::Input group-->
 						@if ($permohonan->yuran == '1')
 						<div class="mb-10">
@@ -227,8 +225,7 @@
 							<label class="fs-3 fw-bold text-gray-800">Item Tuntutan</label>
 							<br>
 							<br>
-							
-							
+							<div class="table-responsive">
 								<table id="itemtuntutan" class="table table-striped table-hover dataTable js-exportable">
 									<thead>
 										<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
@@ -259,8 +256,7 @@
 										@endforeach	
 									</tbody>
 								</table>
-							
-							
+							</div>
 						</div>
 						@endif
 						<!--begin::Form-->

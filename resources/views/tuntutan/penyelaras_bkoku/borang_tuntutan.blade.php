@@ -4,6 +4,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <!--begin::Content-->
 <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -29,6 +31,15 @@
 							</div>
 							<br>
 							@php
+								$akademik = DB::table('smoku_akademik')
+                                    ->where('smoku_id',$permohonan->smoku_id)
+                                    ->where('smoku_akademik.status', 1)
+                                    ->first();
+								$maxLimit = DB::table('bk_jumlah_tuntutan')
+                                    ->where('program','BKOKU')
+                                    ->where('jenis', 'Yuran')
+                                    ->first();	
+								// dd($maxLimit);	
 
 								$semSemasa = $akademik->sem_semasa;
 								$sesiSemasa = $akademik->sesi;
@@ -43,76 +54,63 @@
 								$currentDate = Carbon::now();
 								$tarikhMula = Carbon::parse($akademik->tarikh_mula);
 								$tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
-								
 
-								while ($tarikhMula < $tarikhTamat) {
-									$tarikhNextSem = $tarikhMula->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
-									// echo $tarikhNextSem->format('Y-m-d') . PHP_EOL;
-									$tarikhNextSem = $tarikhNextSem->format('Y-m-d');
-									
-									if ($currentDate->greaterThan($tarikhNextSem)) {
-										$semSemasa = $semSemasa + 1;
-										// echo 'Semester Semasa: ' . $semSemasa . PHP_EOL;
-										break; // Exit the loop
-									
-									}
-									
-									
+								$tarikhNextSem = clone $tarikhMula; // Clone to avoid modifying the original date
+								$nextSemesterDates = [];
+
+								while ($tarikhNextSem < $tarikhTamat) {
+									$nextSemesterDates[] = [
+										'date' => $tarikhNextSem->format('Y-m-d'),
+										'semester' => $semSemasa,
+									];
+
+									// Increment $semSemasa and calculate the next semester date
+									$semSemasa += 1;
+									$tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
 								}
   
 
-								if (!$tuntut) {
-									if($currentDate->greaterThan($tarikhNextSem)){
-										// dd('sini kee');
-										$semSemasa = $semSemasa + 1;
-									}else{
-										// dd('situuu');
-										// No record found, and  masih dalam sem sama
-										$semSemasa = $semSemasa;
-										$wang_saku = 0.00;
-										//nak tahu baki sesi semasa
-										$yuran = $permohonan->yuran_dibayar;
-										$wang = $permohonan->wang_saku_dibayar;
-										$baki_total = 5000 - $yuran - $wang;
-									//  dd($baki_total);	
-									
-
-									}
-
-								} else {
-									$ada = DB::table('tuntutan')
-										->where('permohonan_id', $permohonan->id)
-										->orderBy('id', 'desc')
-										->first();
-
-									// dd($ada);	
-									$jumlah_tuntut = DB::table('tuntutan')
-										->where('permohonan_id', $tuntut->permohonan_id)
-										->where('status','!=', 9)
-										->get();
-									$sum = $jumlah_tuntut->sum('jumlah');	
-
-									if ($semSemasa > $bilSem) {
-										// dd('sini');
-										
-										$currentYear = intval(substr($sesiSemasa, 0, 4));
-										// Incrementing the current year by 1
-										$sesiSemasaYear = $currentYear + 1;
-										$sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
-										$baki_total = 5000;
-										
-										
-									} else {
+								// Display all $tarikhNextSem dates
+								foreach ($nextSemesterDates as $data) {
+									// echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . PHP_EOL;
+								
+									$dateOfSemester = \Carbon\Carbon::parse($data['date']);
+									if ($currentDate->greaterThan($dateOfSemester)) {
+										$semSemasa = $data['semester'];
+										if ($semSemasa > $bilSem) {
+											$currentYear = intval(substr($sesiSemasa, 0, 4));
+											// Incrementing the current year by 1
+											$sesiSemasaYear = $currentYear + 1;
+											$sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
 											
-										$yuran = $permohonan->yuran_dibayar;
-										$wang = $permohonan->wang_saku_dibayar;
-										$baki_total = 5000 - $yuran - $wang - $sum;
+											$baki_total = $maxLimit->jumlah;
+										}
+										else {
+											if (!$tuntutan) {
+												$wang_saku = 0.00;
+												//nak tahu baki sesi semasa permohonan lepas
+												$baki_total = $permohonan->baki_dibayar;
+											}
+											else{
+												$ada = DB::table('tuntutan')
+													->where('permohonan_id', $tuntutan->permohonan_id)
+													->orderBy('id', 'desc')
+													->first();
+												
+												$jumlah_tuntut = DB::table('tuntutan')
+													->where('permohonan_id', $tuntutan->permohonan_id)
+													->where('status','!=', 9)
+													->get();
+												$sum = $jumlah_tuntut->sum('jumlah');	
+												$baki_total = $permohonan->baki_dibayar - $sum;	
 
+											}	
+
+										}
 
 									}
-
+									
 								}
-
 
 							@endphp
 							<!--begin::Wrapper-->
@@ -221,7 +219,6 @@
 				<div class="card">
 					<!--begin::Card body-->
 					<div class="card-body p-10">
-						
 						<!--begin::Input group-->
 						@if ($permohonan->yuran == '1')
 						<div class="mb-10">
@@ -409,7 +406,12 @@
 	
 		if (total_yuran > maxLimit) {
 			yuranInput.value = '';
-			alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM '+ maxLimit +' bagi satu sesi pengajian. ' );
+			Swal.fire({
+				icon: 'error',
+				title: 'Ralat',
+				text: 'Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM' + maxLimit + ' / tahun kalendar akademik.',
+			});
+
 			return;
 		}
 	
