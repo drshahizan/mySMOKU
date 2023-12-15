@@ -20,7 +20,7 @@ class MaklumatESPController extends Controller
 {
     public function permohonan()
     {
-        $kelulusan = Permohonan::orderBy('id', 'desc')->where('status', '=','6')->get();
+        $kelulusan = Permohonan::orderBy('tarikh_hantar', 'desc')->where('status', '=','6')->get();
         //dd($kelulusan);
 
         $secretKey = '2z_JoT4dDCNe_bkT9y6kEhc_4plRkUW7Ci1hzoyH';
@@ -31,7 +31,7 @@ class MaklumatESPController extends Controller
 
     public function tuntutan()
     {
-        $kelulusan = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
+        $kelulusan = Tuntutan::orderBy('tuntutan.tarikh_hantar', 'desc')->join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
         ->where('tuntutan.status', '=','6')->get();
          //dd($kelulusan);
 
