@@ -34,6 +34,7 @@ use App\Models\Keturunan;
 use App\Models\Parlimen;
 use App\Models\TamatPengajian;
 use Carbon\Carbon;
+use DateInterval;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -684,12 +685,82 @@ class PermohonanController extends Controller
     {
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku_id->id)->first();
+        $akademik = Akademik::where('smoku_id',$smoku_id->id)
+            ->where('smoku_akademik.status', 1)
+            ->first();
+        
+        $semSemasa = $akademik->sem_semasa;
+        
+        $sesiSemasa = $akademik->sesi;
+        if($akademik->bil_bulan_per_sem == 6){
+            $bilSem = 2;
+        } else {
+            $bilSem = 3;
+        }
+        $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
+        $currentYear = date('Y');
+
+        $currentDate = Carbon::now();
+        $tarikhMula = Carbon::parse($akademik->tarikh_mula);
+        $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
+
+        $tarikhNextSem = clone $tarikhMula; // Clone to avoid modifying the original date
+        $nextSemesterDates = [];
+        $semSemasa = null;
+        
+
+        while ($tarikhNextSem < $tarikhTamat) {
+            $nextSemesterDates[] = [
+                'date' => $tarikhNextSem->format('Y-m-d'),
+                'semester' => $semSemasa,
+            ];
+            // dd($semSemasa);
+
+            // Increment $semSemasa and calculate the next semester date
+            $semSemasa += 1;
+            $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
+            
+        }
+        
+        // Display all $tarikhNextSem dates
+        foreach ($nextSemesterDates as $data) {
+            // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . PHP_EOL;
+        
+            $dateOfSemester = \Carbon\Carbon::parse($data['date']);
+            
+            if ($currentDate->greaterThan($dateOfSemester)) {
+                // dd($data['semester']);
+
+                $semSemasa = $data['semester'];
+                
+                
+                if ($semSemasa > $bilSem) {
+                    $currentYear = intval(substr($sesiSemasa, 0, 4));
+                    // Incrementing the current year by 1
+                    $sesiSemasaYear = $currentYear + 1;
+                    $sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
+                    
+                }
+
+            } else {
+                // Break the loop when you reach the current or future semester
+                break;
+            }
+            
+            
+        }
+        // dd($semSemasa);
+
 
         if ($permohonan) {
             
             $peperiksaan = Peperiksaan::where('permohonan_id', $permohonan->id)->get();
+            $result = Peperiksaan::where('permohonan_id', $permohonan->id)
+									->where('sesi', $sesiSemasa)
+									->where('semester', $semSemasa)
+									->first();
      
-            return view('tuntutan.pelajar.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan'));
+            return view('tuntutan.pelajar.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan','sesiSemasa','semSemasa','result'));
             
         } else {
 

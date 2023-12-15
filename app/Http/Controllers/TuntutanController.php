@@ -14,6 +14,7 @@ use App\Models\InfoIpt;
 use App\Models\Peperiksaan;
 use App\Models\User;
 use Carbon\Carbon;
+use DateInterval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,11 +27,17 @@ class TuntutanController extends Controller
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku_id->id)->first();
         //dd($permohonan);
-        $akademik = Akademik::where('smoku_id', $smoku_id->id)
-        ->where('smoku_akademik.status', 1)
-        ->select('smoku_akademik.*')
-        ->first();
-        // dd($akademik);
+        $akademik = DB::table('smoku_akademik')
+            ->where('smoku_id',$permohonan->smoku_id)
+            ->where('smoku_akademik.status', 1)
+            ->first();
+        $maxLimit = DB::table('bk_jumlah_tuntutan')
+            ->where('program','BKOKU')
+            ->where('jenis', 'Yuran')
+            ->first();	
+        // dd($maxLimit);	
+
+        
         
         if ($permohonan && $permohonan->status == 8) {
 
@@ -39,7 +46,86 @@ class TuntutanController extends Controller
                     ->orderBy('tuntutan.id', 'desc')
                     ->first(['tuntutan.*']);
 
-            //dd($tuntutan);    
+            $semSemasa = $akademik->sem_semasa;
+            $sesiSemasa = $akademik->sesi;
+            if($akademik->bil_bulan_per_sem == 6){
+                $bilSem = 2;
+            } else {
+                $bilSem = 3;
+            }
+            $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
+            $currentYear = date('Y');
+    
+            $currentDate = Carbon::now();
+            $tarikhMula = Carbon::parse($akademik->tarikh_mula);
+            $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
+    
+            $tarikhNextSem = clone $tarikhMula; // Clone to avoid modifying the original date
+            $nextSemesterDates = [];
+    
+            while ($tarikhNextSem < $tarikhTamat) {
+                $nextSemesterDates[] = [
+                    'date' => $tarikhNextSem->format('Y-m-d'),
+                    'semester' => $semSemasa,
+                ];
+    
+                // Increment $semSemasa and calculate the next semester date
+                $semSemasa += 1;
+                $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
+
+                if ($currentDate->greaterThan($tarikhNextSem)) {
+                    // semak dah upload result ke belum
+                    $result = Peperiksaan::where('permohonan_id', $permohonan->id)
+                    ->where('semester', $semSemasa - 1)
+                    ->first();
+                    if($result == null){
+                        return redirect()->route('kemaskini.keputusan')->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
+                    }
+
+                }
+            }
+    
+            // Display all $tarikhNextSem dates
+            foreach ($nextSemesterDates as $data) {
+                // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . PHP_EOL;
+            
+                $dateOfSemester = \Carbon\Carbon::parse($data['date']);
+                if ($currentDate->greaterThan($dateOfSemester)) {
+                    $semSemasa = $data['semester'];
+                    if ($semSemasa > $bilSem) {
+                        $currentYear = intval(substr($sesiSemasa, 0, 4));
+                        // Incrementing the current year by 1
+                        $sesiSemasaYear = $currentYear + 1;
+                        $sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
+                        
+                        $baki_total = $maxLimit->jumlah;
+                    }
+                    else {
+                        if (!$tuntutan) {
+                            $wang_saku = 0.00;
+                            //nak tahu baki sesi semasa permohonan lepas
+                            $baki_total = $permohonan->baki_dibayar;
+                        }
+                        else{
+                            $ada = DB::table('tuntutan')
+                                ->where('permohonan_id', $tuntutan->permohonan_id)
+                                ->orderBy('id', 'desc')
+                                ->first();
+                            
+                            $jumlah_tuntut = DB::table('tuntutan')
+                                ->where('permohonan_id', $tuntutan->permohonan_id)
+                                ->where('status','!=', 9)
+                                ->get();
+                            $sum = $jumlah_tuntut->sum('jumlah');	
+                            $baki_total = $permohonan->baki_dibayar - $sum;	
+    
+                        }	
+    
+                    }
+    
+                }
+                
+            }    
 
             if ($tuntutan && ($tuntutan->status == 1 || $tuntutan->status == 5)) {
                 
@@ -54,11 +140,11 @@ class TuntutanController extends Controller
                 $tuntutan_item = collect(); // An empty collection
             }
             
-            return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item'));
+            return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item','akademik','smoku_id','sesiSemasa','semSemasa','baki_total'));
                 
         
         } else if ($permohonan && $permohonan->status !=8) {
-            
+
             return redirect()->route('pelajar.dashboard')->with('permohonan', 'Permohonan anda masih dalam semakan.');
         } else {
 
