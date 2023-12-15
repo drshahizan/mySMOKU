@@ -35,6 +35,7 @@
                                     ->where('smoku_id',$permohonan->smoku_id)
                                     ->where('smoku_akademik.status', 1)
                                     ->first();
+								// dd($akademik);	
 
 								$semSemasa = $akademik->sem_semasa;
 								$sesiSemasa = $akademik->sesi;
@@ -56,6 +57,7 @@
 									$tarikhNextSem = $tarikhNextSem->format('Y-m-d');
 									// dd($tarikhNextSem);
 									if (!$tuntutan) {
+										// dd('sini');
 									
 										if ($currentDate->greaterThan($tarikhNextSem)) {
 											$semSemasa = $semSemasa + 1;
@@ -81,17 +83,39 @@
 										}
 									}
 									else {
-										$ada = DB::table('tuntutan')
-										->where('permohonan_id', $tuntutan->permohonan_id)
-										->orderBy('id', 'desc')
-										->first();
-									
-										$jumlah_tuntut = DB::table('tuntutan')
+										if ($currentDate->greaterThan($tarikhNextSem)) {
+											
+											$semSemasa = $semSemasa + 1;
+											
+
+											if ($semSemasa > $bilSem) {
+												dd('sini keee');
+												$currentYear = intval(substr($sesiSemasa, 0, 4));
+												// Incrementing the current year by 1
+												$sesiSemasaYear = $currentYear + 1;
+												$sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
+												$semSemasa = 3; // Reset semester for the next academic year sem3 utk sesi lain
+												
+												$baki_total = 5000;
+											}
+											// dd('sini');
+											// dd($semSemasa);
+											$ada = DB::table('tuntutan')
 											->where('permohonan_id', $tuntutan->permohonan_id)
-											->where('status','!=', 9)
-											->get();
-										$sum = $jumlah_tuntut->sum('jumlah');	
-										$baki_total = $permohonan->baki_dibayar - $sum;	
+											->orderBy('id', 'desc')
+											->first();
+										
+											$jumlah_tuntut = DB::table('tuntutan')
+												->where('permohonan_id', $tuntutan->permohonan_id)
+												->where('status','!=', 9)
+												->get();
+											$sum = $jumlah_tuntut->sum('jumlah');	
+											$baki_total = $permohonan->baki_dibayar - $sum;	
+											break; // Exit the loop
+											
+										
+										}
+										
 
 									}	
 									
