@@ -26,52 +26,6 @@
 								</div>
 							</div>
 							<br>
-							@php
-
-								$akademik = DB::table('smoku_akademik')->where('smoku_id', $smoku_id)
-										->where('smoku_akademik.status', 1)
-										->select('smoku_akademik.*')
-										->first();
-
-								$currentDate = Carbon::now();
-								$tarikhMula = Carbon::parse($akademik->tarikh_mula);
-								$tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
-								if($akademik->bil_bulan_per_sem == 6){
-									$bilSem = 2;
-								} else {
-									$bilSem = 3;
-								}
-								
-								$semSemasa = $akademik->sem_semasa;
-								$totalSemesters = $akademik->tempoh_pengajian * $bilSem;
-								$currentYear = date('Y');
-								$sesiSemasa = $currentYear . '/' . ($currentYear + 1);
-
-								$result = DB::table('permohonan_peperiksaan')
-									->where('permohonan_id', $permohonan->id)
-									->where('sesi', $sesiSemasa)
-									->where('semester', $semSemasa)
-									->first();
-
-								if (!$result) {
-									// No record found, handle the case as needed
-
-								} else {
-									$ada = DB::table('permohonan_peperiksaan')
-										->where('permohonan_id', $permohonan->id)
-										->orderby('id', 'desc')
-										->first();
-
-									if ($ada->semester >= $bilSem) {
-										$sesiSemasa = ($currentYear + 1) . '/' . ($currentYear + 2);
-										$semSemasa = 1; // Reset semester for the next academic year
-									} else {
-										$semSemasa = $ada->semester + 1;
-									}
-
-								}
-
-							@endphp
 							<!--begin::Wrapper-->
 							<div class="mb-0">
 								<!--begin::Row-->
@@ -80,26 +34,13 @@
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 										<div class="mb-5">
-											<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true">
-												<option value={{$sesiSemasa}}>{{$sesiSemasa}}</option>
-												{{-- @php
-													$currentYear = date('Y');
-												@endphp
-												@for($year = ($currentYear - 1); $year <= ($currentYear + 1); $year++)
-													@php
-														$sesi = $year . '/' . ($year + 1);
-													@endphp
-													<option value="{{ $sesi }}">{{ $sesi }}</option>
-												@endfor --}}
-											</select>
+											<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 										<div class="mb-5">
-											<select id="semester" name="semester" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-												<option value={{$semSemasa}}>{{$semSemasa}}</option>										
-											</select>
+											<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
 										</div>
 									</div>
 									<!--end::Col-->
@@ -108,15 +49,15 @@
 								<!--begin::Row-->
 								<div class="row gx-10 mb-5">
 									<div class="col-lg-6">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Peperiksaan&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Peperiksaan&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="Contoh"><i class="fa-solid fa-circle-info"></i></a></label>
 										<div class="mb-5">
-											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan"/>
+											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan" required/>
 										</div>
 									</div>
 									<div class="col-lg-6">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">CGPA</label>
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">CGPA&nbsp;<a href="#" data-bs-toggle="tooltip" title="3.50"><i class="fa-solid fa-circle-info"></i></a></label>
 										<div class="mb-5">
-											<input type="text" name="cgpa" class="form-control form-control-solid"  placeholder="" />
+											<input type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="" required/>
 										</div>
 									</div>
 								</div>

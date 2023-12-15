@@ -51,6 +51,7 @@ use App\Mail\MailDaftarPentadbir;
 use App\Models\JumlahTuntutan;
 use App\Models\SenaraiBank;
 use Carbon\Carbon;
+use DateInterval;
 use DateTime;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Hash;
@@ -736,12 +737,77 @@ class PenyelarasController extends Controller
     {   
         $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
         $smoku_id = $id;
-        //$peperiksaan = Peperiksaan::all()->where('permohonan_id', '=', $permohonan->id);
+
+        $akademik = Akademik::where('smoku_id',$id)
+            ->where('smoku_akademik.status', 1)
+            ->first();
+        
+        $semSemasa = $akademik->sem_semasa;
+            $sesiSemasa = $akademik->sesi;
+            if($akademik->bil_bulan_per_sem == 6){
+                $bilSem = 2;
+            } else {
+                $bilSem = 3;
+            }
+            $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
+            $currentYear = date('Y');
+
+            $currentDate = Carbon::now();
+            $tarikhMula = Carbon::parse($akademik->tarikh_mula);
+            $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
+
+            $tarikhNextSem = clone $tarikhMula; // Clone to avoid modifying the original date
+            $nextSemesterDates = [];
+            $semSemasa = null;
+            
+
+            while ($tarikhNextSem < $tarikhTamat) {
+                $nextSemesterDates[] = [
+                    'date' => $tarikhNextSem->format('Y-m-d'),
+                    'semester' => $semSemasa,
+                ];
+
+                // Increment $semSemasa and calculate the next semester date
+                $semSemasa += 1;
+                $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
+                
+            }
+            // dd($nextSemesterDates);
+
+            // Display all $tarikhNextSem dates
+            foreach ($nextSemesterDates as $data) {
+                // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . PHP_EOL;
+            
+                $dateOfSemester = \Carbon\Carbon::parse($data['date']);
+                
+                if ($currentDate->greaterThan($dateOfSemester)) {
+                    // dd($data['semester']);
+
+                    $semSemasa = $data['semester'];
+                    
+                    
+                    if ($semSemasa > $bilSem) {
+                        $currentYear = intval(substr($sesiSemasa, 0, 4));
+                        // Incrementing the current year by 1
+                        $sesiSemasaYear = $currentYear + 1;
+                        $sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
+                        
+                    }
+
+                } else {
+                    // Break the loop when you reach the current or future semester
+                    break;
+                }
+                
+                
+            }
+            // dd($semSemasa);
+
         if ($permohonan) {
             
             $peperiksaan = Peperiksaan::where('permohonan_id', $permohonan->id)->get();
 
-            return view('tuntutan.penyelaras_bkoku.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan'));
+            return view('tuntutan.penyelaras_bkoku.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan','sesiSemasa','semSemasa'));
         
         } else {
 
@@ -785,15 +851,16 @@ class PenyelarasController extends Controller
     public function tuntutanBaharu($id)
     {   
         $permohonan = Permohonan::where('smoku_id',$id)->first();
-        $tuntutan = Tuntutan::join('tuntutan_item','tuntutan_item.tuntutan_id','=','tuntutan.id')
-        ->get(['tuntutan.*', 'tuntutan_item.*'])
-        ->where('smoku_id', $id)
-        ->where('status', 1);
 
         $smoku_id = $id;
         $akademik = Akademik::where('smoku_id',$id)
             ->where('smoku_akademik.status', 1)
             ->first();
+
+        $maxLimit = DB::table('bk_jumlah_tuntutan')
+        ->where('program','BKOKU')
+        ->where('jenis', 'Yuran')
+        ->first();	    
 
         if ($permohonan && $permohonan->status ==8) {  
 
@@ -802,7 +869,94 @@ class PenyelarasController extends Controller
                 ->orderBy('tuntutan.id', 'desc')
                 ->first(['tuntutan.*']);
 
-            // dd($tuntutan);    
+            $semSemasa = $akademik->sem_semasa;
+            $sesiSemasa = $akademik->sesi;
+            if($akademik->bil_bulan_per_sem == 6){
+                $bilSem = 2;
+            } else {
+                $bilSem = 3;
+            }
+            $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
+            $currentYear = date('Y');
+
+            $currentDate = Carbon::now();
+            $tarikhMula = Carbon::parse($akademik->tarikh_mula);
+            $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
+
+            $tarikhNextSem = clone $tarikhMula; // Clone to avoid modifying the original date
+            $nextSemesterDates = [];
+            $firstIteration = true;
+            
+
+            while ($tarikhNextSem < $tarikhTamat) {
+                $nextSemesterDates[] = [
+                    'date' => $tarikhNextSem->format('Y-m-d'),
+                    'semester' => $semSemasa,
+                ];
+
+                // Increment $semSemasa and calculate the next semester date
+                $semSemasa += 1;
+                $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
+                
+                if ($currentDate->greaterThan($tarikhNextSem)) {
+                    // semak dah upload result ke belum
+                    $result = Peperiksaan::where('permohonan_id', $permohonan->id)
+                    ->where('semester', $semSemasa)
+                    ->first();
+                    if($result == null){
+                        return redirect()->route('bkoku.kemaskini.keputusan', ['id' => $id])->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
+                    }
+
+                }
+                
+            }
+
+            // Display all $tarikhNextSem dates
+            foreach ($nextSemesterDates as $data) {
+                // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . PHP_EOL;
+            
+                $dateOfSemester = \Carbon\Carbon::parse($data['date']);
+                if ($currentDate->greaterThan($dateOfSemester)) {
+
+                    $semSemasa = $data['semester'];
+                    
+                    if ($semSemasa > $bilSem) {
+                        $currentYear = intval(substr($sesiSemasa, 0, 4));
+                        // Incrementing the current year by 1
+                        $sesiSemasaYear = $currentYear + 1;
+                        $sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
+                        
+                        $baki_total = $maxLimit->jumlah;
+                    }
+                    else {
+                        if (!$tuntutan) {
+                            $wang_saku = 0.00;
+                            //nak tahu baki sesi semasa permohonan lepas
+                            $baki_total = $permohonan->baki_dibayar;
+                        }
+                        else{
+                            $ada = DB::table('tuntutan')
+                                ->where('permohonan_id', $tuntutan->permohonan_id)
+                                ->orderBy('id', 'desc')
+                                ->first();
+                            
+                            $jumlah_tuntut = DB::table('tuntutan')
+                                ->where('permohonan_id', $tuntutan->permohonan_id)
+                                ->where('status','!=', 9)
+                                ->get();
+                            $sum = $jumlah_tuntut->sum('jumlah');	
+                            $baki_total = $permohonan->baki_dibayar - $sum;	
+
+                        }	
+
+                    }
+
+                }
+                
+            }
+
+            
+    
 
             if ($tuntutan && ($tuntutan->status == 1 || $tuntutan->status == 5)) {
 
@@ -817,7 +971,7 @@ class PenyelarasController extends Controller
                 $tuntutan_item = collect(); // An empty collection
             }
 
-            return view('tuntutan.penyelaras_bkoku.borang_tuntutan', compact('permohonan','tuntutan','tuntutan_item','smoku_id'));
+            return view('tuntutan.penyelaras_bkoku.borang_tuntutan', compact('permohonan','tuntutan','tuntutan_item','akademik','smoku_id','sesiSemasa','semSemasa','baki_total'));
             
         } else if ($permohonan && $permohonan->status !=8) {
 

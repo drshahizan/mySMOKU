@@ -412,13 +412,13 @@ function myFunction() {
 
 	if (total_yuran > maxLimit) {
 		yuranInput.value = '';
-		Swal.fire({
-			icon: 'error',
-			title: 'Ralat',
-			text: 'Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM' + maxLimit + ' / tahun kalendar akademik.',
-		});
+			Swal.fire({
+				icon: 'error',
+				title: 'Ralat',
+				text: 'Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM' + maxLimit + ' / tahun kalendar akademik.',
+			});
 
-		return;
+			return;
 	}
 
 	var total = (parseFloat(wang_saku) + parseFloat(totalAmaun)).toFixed(2);
