@@ -111,10 +111,9 @@ class TuntutanController extends Controller
                     $tuntutan_item = collect(); // An empty collection
                 }
                 
-                $akademik = Akademik::where('smoku_id', $smoku_id->id)
-                    ->where('smoku_akademik.status', 1)->first();
                 
-                return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item', 'akademik'));
+                
+                return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item'));
                 //return redirect()->route('pelajar.dashboard')->with('sem', 'Ralat. Tuntutan hanya boleh dikemukakan pada semester kedua dan seterusnya.');
             }
         
