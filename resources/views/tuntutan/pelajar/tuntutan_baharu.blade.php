@@ -35,7 +35,11 @@
                                     ->where('smoku_id',$permohonan->smoku_id)
                                     ->where('smoku_akademik.status', 1)
                                     ->first();
-								// dd($akademik);	
+								$maxLimit = DB::table('bk_jumlah_tuntutan')
+                                    ->where('program','BKOKU')
+                                    ->where('jenis', 'Yuran')
+                                    ->first();	
+								// dd($maxLimit);	
 
 								$semSemasa = $akademik->sem_semasa;
 								$sesiSemasa = $akademik->sesi;
@@ -50,77 +54,62 @@
 								$currentDate = Carbon::now();
 								$tarikhMula = Carbon::parse($akademik->tarikh_mula);
 								$tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
-								
-								while ($tarikhMula < $tarikhTamat) {
-									$tarikhNextSem = $tarikhMula->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
-									// echo $tarikhNextSem->format('Y-m-d') . PHP_EOL;
-									$tarikhNextSem = $tarikhNextSem->format('Y-m-d');
-									// dd($tarikhNextSem);
-									if (!$tuntutan) {
-										// dd('sini');
-									
-										if ($currentDate->greaterThan($tarikhNextSem)) {
-											$semSemasa = $semSemasa + 1;
 
-											if ($semSemasa > $bilSem) {
-												$currentYear = intval(substr($sesiSemasa, 0, 4));
-												// Incrementing the current year by 1
-												$sesiSemasaYear = $currentYear + 1;
-												$sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
-												$semSemasa = 3; // Reset semester for the next academic year sem3 utk sesi lain
-												
-												$baki_total = 5000;
-											}
-											break; // Exit the loop
-										
+								$tarikhNextSem = clone $tarikhMula; // Clone to avoid modifying the original date
+								$nextSemesterDates = [];
+
+								while ($tarikhNextSem < $tarikhTamat) {
+									$nextSemesterDates[] = [
+										'date' => $tarikhNextSem->format('Y-m-d'),
+										'semester' => $semSemasa,
+									];
+
+									// Increment $semSemasa and calculate the next semester date
+									$semSemasa += 1;
+									$tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
+								}
+
+								// Display all $tarikhNextSem dates
+								foreach ($nextSemesterDates as $data) {
+									// echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . PHP_EOL;
+								
+									$dateOfSemester = \Carbon\Carbon::parse($data['date']);
+									if ($currentDate->greaterThan($dateOfSemester)) {
+										$semSemasa = $data['semester'];
+										if ($semSemasa > $bilSem) {
+											$currentYear = intval(substr($sesiSemasa, 0, 4));
+											// Incrementing the current year by 1
+											$sesiSemasaYear = $currentYear + 1;
+											$sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
+											
+											$baki_total = $maxLimit->jumlah;
 										}
 										else {
-											$semSemasa = $semSemasa;
-											$wang_saku = 0.00;
-											//nak tahu baki sesi semasa permohonan lepas
-											$baki_total = $permohonan->baki_dibayar;
-
-										}
-									}
-									else {
-										if ($currentDate->greaterThan($tarikhNextSem)) {
-											
-											$semSemasa = $semSemasa + 1;
-											
-
-											if ($semSemasa > $bilSem) {
-												dd('sini keee');
-												$currentYear = intval(substr($sesiSemasa, 0, 4));
-												// Incrementing the current year by 1
-												$sesiSemasaYear = $currentYear + 1;
-												$sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
-												$semSemasa = 3; // Reset semester for the next academic year sem3 utk sesi lain
-												
-												$baki_total = 5000;
+											if (!$tuntutan) {
+												$wang_saku = 0.00;
+												//nak tahu baki sesi semasa permohonan lepas
+												$baki_total = $permohonan->baki_dibayar;
 											}
-											// dd('sini');
-											// dd($semSemasa);
-											$ada = DB::table('tuntutan')
-											->where('permohonan_id', $tuntutan->permohonan_id)
-											->orderBy('id', 'desc')
-											->first();
-										
-											$jumlah_tuntut = DB::table('tuntutan')
-												->where('permohonan_id', $tuntutan->permohonan_id)
-												->where('status','!=', 9)
-												->get();
-											$sum = $jumlah_tuntut->sum('jumlah');	
-											$baki_total = $permohonan->baki_dibayar - $sum;	
-											break; // Exit the loop
-											
-										
-										}
-										
+											else{
+												$ada = DB::table('tuntutan')
+													->where('permohonan_id', $tuntutan->permohonan_id)
+													->orderBy('id', 'desc')
+													->first();
+												
+												$jumlah_tuntut = DB::table('tuntutan')
+													->where('permohonan_id', $tuntutan->permohonan_id)
+													->where('status','!=', 9)
+													->get();
+												$sum = $jumlah_tuntut->sum('jumlah');	
+												$baki_total = $permohonan->baki_dibayar - $sum;	
 
-									}	
+											}	
+
+										}
+
+									}
 									
 								}
-								
 
 							@endphp
 							

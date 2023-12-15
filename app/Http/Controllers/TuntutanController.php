@@ -46,50 +46,50 @@ class TuntutanController extends Controller
         $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
         
         if ($permohonan && $permohonan->status == 8) {
-            //dd($tarikhNextSem);
-            if ($currentDate->greaterThan($tarikhNextSem)) {
-                // dd('sini');
+            // dd($tarikhNextSem);
+            // if ($currentDate->greaterThan($tarikhNextSem)) {
+            //     dd('sini');
 
-                while ($semSemasa <= $totalSemesters) {
-                     //semak dah upload result ke belum
-                    $result = Peperiksaan::where('permohonan_id', $permohonan->id)
-                    ->where('sesi', $akademik->sesi)
-                    ->where('semester', $semSemasa)
-                    ->first();
+            //     while ($semSemasa <= $totalSemesters) {
+            //          //semak dah upload result ke belum
+            //         $result = Peperiksaan::where('permohonan_id', $permohonan->id)
+            //         ->where('sesi', $akademik->sesi)
+            //         ->where('semester', $semSemasa)
+            //         ->first();
                     
-                    if($result == null){
-                        return redirect()->route('kemaskini.keputusan')->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
-                    }
-                    //dd('hehe');
+            //         if($result == null){
+            //             return redirect()->route('kemaskini.keputusan')->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
+            //         }
+            //         //dd('hehe');
                 
-                    // Increment $semSemasa for the next iteration
-                    $semSemasa = $semSemasa + 1;
+            //         // Increment $semSemasa for the next iteration
+            //         $semSemasa = $semSemasa + 1;
 
-                    $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
-                        ->where('permohonan_id', $permohonan->id)
-                        ->orderBy('tuntutan.id', 'desc')
-                        ->first(['tuntutan.*']);
+            //         $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
+            //             ->where('permohonan_id', $permohonan->id)
+            //             ->orderBy('tuntutan.id', 'desc')
+            //             ->first(['tuntutan.*']);
 
-                    //dd($tuntutan);    
+            //         //dd($tuntutan);    
 
-                    if ($tuntutan && $tuntutan->status == 1) {
-                        $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
-                    } 
-                    else if ($tuntutan && $tuntutan->status != 8  && $tuntutan->status != 9){
-                        return redirect()->route('pelajar.dashboard')->with('sem', 'Tuntutan anda masih dalam semakan.');
-                    }
-                    else {
-                        $tuntutan_item = collect(); // An empty collection
-                    }
+            //         if ($tuntutan && $tuntutan->status == 1) {
+            //             $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
+            //         } 
+            //         else if ($tuntutan && $tuntutan->status != 8  && $tuntutan->status != 9){
+            //             return redirect()->route('pelajar.dashboard')->with('sem', 'Tuntutan anda masih dalam semakan.');
+            //         }
+            //         else {
+            //             $tuntutan_item = collect(); // An empty collection
+            //         }
                     
-                    $akademik = Akademik::where('smoku_id', $smoku_id->id)
-                        ->where('smoku_akademik.status', 1)->first();
+            //         $akademik = Akademik::where('smoku_id', $smoku_id->id)
+            //             ->where('smoku_akademik.status', 1)->first();
                     
-                    return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item', 'akademik'));
+            //         return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item', 'akademik'));
 
-                }
+            //     }
 
-            } else { // sebab tuntutan pun boleh kemukakan pada semester sama
+            // } else { // sebab tuntutan pun boleh kemukakan pada semester sama
                 // dd('situ');
                 $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
                         ->where('permohonan_id', $permohonan->id)
@@ -115,7 +115,7 @@ class TuntutanController extends Controller
                 
                 return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item'));
                 //return redirect()->route('pelajar.dashboard')->with('sem', 'Ralat. Tuntutan hanya boleh dikemukakan pada semester kedua dan seterusnya.');
-            }
+            // }
         
         } else if ($permohonan && $permohonan->status !=8) {
             return redirect()->route('pelajar.dashboard')->with('permohonan', 'Permohonan anda masih dalam semakan.');
