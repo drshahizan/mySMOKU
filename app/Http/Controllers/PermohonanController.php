@@ -731,7 +731,7 @@ class PermohonanController extends Controller
             $counter++;
         }    
 
-        return redirect()->route('kemaskini.keputusan');
+        return redirect()->route('kemaskini.keputusan')->with('success', 'Keputusan peperiksaan pelajar telah di simpan.');
     }
 
     
