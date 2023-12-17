@@ -90,7 +90,7 @@
 
     <div id="main-content">
         <div class="container-fluid">
-            <!-- Page header section  -->
+            @include('sweetalert::alert')
             <br>
             <div class="row clearfix">
                 <div class="col-12">

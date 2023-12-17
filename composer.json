@@ -17,6 +17,7 @@
         "maatwebsite/excel": "^3.1.48",
         "phpoffice/phpspreadsheet": "^1.29.0",
         "psr/simple-cache": "1.0.0",
+        "realrashid/sweet-alert": "^7.1",
         "simplesoftwareio/simple-qrcode": "^4.2.0",
         "spatie/laravel-permission": "^5.10",
         "yajra/laravel-datatables": "^10.0"
