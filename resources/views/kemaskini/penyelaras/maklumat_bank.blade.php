@@ -6,7 +6,7 @@
             border: none!important;
         }
         .w-13{
-            width: 22% !important;
+            width: 20% !important;
         }
         .w-3{
             width: 3% !important;
@@ -32,7 +32,7 @@
         .file-input {
             display: flex; 
             align-items: center;
-            padding-right: 200px; 
+            padding-right: 150px; 
         }
         .form-control-arrow {
             position: relative;
@@ -75,14 +75,14 @@
     <div id="main-content" style="width:80%;  margin: 0 auto;">
         <div class="container-fluid">
             @if(session('success'))
-                <div class="alert alert-success" style="width: 60%; margin: 0 auto; text-align:center;">
+                <div class="alert alert-success" style="width: 50%; margin: 0 auto; text-align:center;">
                     {{ session('success') }}
                 </div>
                 <br>
             @endif
 
             @if ($errors->any())
-                <div class="alert alert-danger" style="width: 60%; margin: 0 auto;">
+                <div class="alert alert-danger" style="width: 50%; margin: 0 auto;">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
@@ -162,6 +162,7 @@
                                                             <a href="{{ asset('assets/dokumen/penyata_bank_islam/' . $bank->penyata_bank) }}" target="_blank">{{ $bank->penyata_bank }}</a>
                                                         @endif
                                                     </div>
+                                                    <small style="font-size: 10px; font-style:italic; color: red!important;">**Format fail yang boleh dimuat naik adalah '.pdf' dan '.png' sahaja.</small>
                                                 </td>                                                
                                             </tr>
                                         </table>
