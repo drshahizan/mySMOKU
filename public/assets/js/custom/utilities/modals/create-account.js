@@ -510,7 +510,7 @@ var KTCreateAccount = function () {
 								message: {
 									extension: 'Format fail tidak sah',
 									type: 'Format fail tidak sah',
-									maxSize: 'Saiz file yang dipilih telah melebihi saiz maksima',
+									maxSize: 'Saiz fail yang dipilih telah melebihi saiz maksima',
 								},
 							},
 						}
@@ -528,7 +528,7 @@ var KTCreateAccount = function () {
 								message: {
 									extension: 'Format fail tidak sah',
 									type: 'Format fail tidak sah',
-									maxSize: 'Saiz file yang dipilih telah melebihi saiz maksima',
+									maxSize: 'Saiz fail yang dipilih telah melebihi saiz maksima',
 								},
 							},
 						}
@@ -546,7 +546,7 @@ var KTCreateAccount = function () {
 								message: {
 									extension: 'Format fail tidak sah',
 									type: 'Format fail tidak sah',
-									maxSize: 'Saiz file yang dipilih telah melebihi saiz maksima',
+									maxSize: 'Saiz fail yang dipilih telah melebihi saiz maksima',
 								},
 							},
 						}
