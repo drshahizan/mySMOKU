@@ -215,7 +215,7 @@
                                                 @endif
                                             @else
 
-                                            data-bs-toggle="tooltip" data-bs-trigger="hover" title="tuntutan dalam semakan."  
+                                            data-bs-toggle="tooltip" data-bs-trigger="hover" title="Tuntutan masih dalam semakan."  
                                           
                                             @endif
                                         >

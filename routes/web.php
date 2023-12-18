@@ -347,6 +347,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/ppk/maklumat-profil-diri/{id}', [SaringanController::class, 'maklumatProfilDiri'])->name('ppk.papar.maklumat.diri');
     Route::get('penyelaras/ppk/maklumat-akademik/{id}', [SaringanController::class, 'maklumatAkademik'])->name('ppk.papar.maklumat.akademik');
     Route::get('penyelaras/ppk/salinan-dokumen/{id}', [SaringanController::class, 'salinanDokumen'])->name('ppk.papar.salinan.dokumen');
+    Route::get('penyelaras/ppk/senarai/permohonan-dibayar', [PenyelarasPPKController::class, 'senaraiDibayar'])->name('senarai.ppk.permohonanDibayar');
+
 
     //delete pendaftaran - Penyelaras PPK
     Route::get('penyelaras/ppk/pendaftaran/delete/{id}', [PenyelarasPPKController::class, 'deletePendaftaran'])->name('ppk.pendaftaran.delete');
@@ -362,6 +364,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/ppk/sejarah/keputusan-peperiksaan/{id}', [PenyelarasPPKController::class, 'keputusanPeperiksaan'])->name('ppk.papar.peperiksaan');
     Route::get('penyelaras/ppk/sejarah/papar-saringan/{id}', [PenyelarasPPKController::class, 'paparRekodSaringanTuntutan'])->name('ppk.papar.saringan.tuntutan');
     Route::get('penyelaras/ppk/tuntutan/batal/{id}', [PenyelarasPPKController::class, 'batalTuntutan'])->name('ppk.tuntutan.batal');
+    
 
     //Pentadbir
     Route::get('pentadbir/dashboard', [PentadbirController::class,'index'])->name('pentadbir.dashboard');

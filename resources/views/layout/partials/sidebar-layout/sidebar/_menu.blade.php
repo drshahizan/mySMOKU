@@ -479,6 +479,12 @@
 				</a>
 			</div>
 			<div class="menu-item">
+				<a class="menu-link" href="{{ route('senarai.ppk.permohonanDibayar')}}">
+						<span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
+						<span class="menu-title">Pembayaran</span>
+				</a>
+			</div>
+			<div class="menu-item">
 				<a class="menu-link" href="{{route('ppk.sejarah.permohonan')}}">
 					<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 					<span class="menu-title">Sejarah</span>
