@@ -854,7 +854,7 @@ class PenyelarasController extends Controller
 
     public function tuntutanBaharu($id)
     {   
-        $permohonan = Permohonan::where('smoku_id',$id)->first();
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id',$id)->first();
 
         $smoku_id = $id;
         $akademik = Akademik::where('smoku_id',$id)
@@ -1096,7 +1096,8 @@ class PenyelarasController extends Controller
 
     public function hantarTuntutan(Request $request, $id)
     {
-        $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
+        $permohonan = Permohonan::orderBy('id', 'DESC')
+        ->where('smoku_id', '=', $id)->first();
 
         //update dalam table tuntutan
         $tuntutan = Tuntutan::where('smoku_id', '=', $id)->orderBy('id', 'desc')->first();

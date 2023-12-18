@@ -908,7 +908,7 @@ class PenyelarasPPKController extends Controller
             return view('tuntutan.penyelaras_ppk.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','sesiSemasa','semSemasa','result'));
         } else {
 
-            return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
+            return redirect()->route('senarai.ppk.tuntutanBaharu')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
         
         }    
     }
@@ -959,7 +959,8 @@ class PenyelarasPPKController extends Controller
 
     public function hantarTuntutan(Request $request, $id)
     {
-        $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
+        $permohonan = Permohonan::orderBy('id', 'DESC')
+        ->where('smoku_id', '=', $id)->first();
 
         $biltuntutan = Tuntutan::where('smoku_id', '=', $id)
             ->groupBy('no_rujukan_tuntutan')
@@ -983,6 +984,7 @@ class PenyelarasPPKController extends Controller
                 'semester' => $request->semester,    
                 'wang_saku' => $request->wang_saku,
                 'amaun_wang_saku' => $request->amaun_wang_saku,
+                'tarikh_hantar' => now()->format('Y-m-d'),
                 'status' => '2',
             ]);
         }

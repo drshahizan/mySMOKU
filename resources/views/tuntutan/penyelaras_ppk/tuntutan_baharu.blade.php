@@ -92,11 +92,21 @@
                                 @endphp
                                 @php
 
+                                $permohonan = DB::table('permohonan')
+                                    ->orderBy('id', 'desc')->where('smoku_id',$layak->smoku_id)->first();
+
                                 $akademik = DB::table('smoku_akademik')
                                     ->where('smoku_id',$layak->smoku_id)
                                     ->where('smoku_akademik.status', 1)
                                     ->first();
-                                //dd($layak->smoku_id);   
+                                //dd($layak->smoku_id);
+                                
+                                $tuntutan = DB::table('tuntutan')
+                                    ->where('smoku_id', $layak->smoku_id)
+                                    ->where('permohonan_id', $layak->id)
+                                    ->orderBy('tuntutan.id', 'desc')
+                                    ->first(['tuntutan.*']);
+                                // dd($tuntutan);    
                                 
                                 $semSemasa = $akademik->sem_semasa;
 								$sesiSemasa = $akademik->sesi;
@@ -191,16 +201,22 @@
                                         </a>
                                         <a href="{{ $currentDate->greaterThan($tarikhNextSem) && $semSemasa <= $totalSemesters && $result == null && $currentDate < ($tarikhTamat) ? route('ppk.kemaskini.keputusan', $layak->smoku_id) : '#' }}" 
                                             class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
-                                            @if($currentDate->greaterThan($tarikhNextSem) && $semSemasa <= $totalSemesters && $currentDate < ($tarikhTamat))
-                                                @if ($result == null)
-                                                    data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu."
+                                            @if(!$tuntutan || ($tuntutan && $tuntutan->status == 8))
+                                                @if($currentDate->greaterThan($tarikhNextSem) && $semSemasa <= $totalSemesters && $currentDate < ($tarikhTamat))
+                                                    @if ($result == null)
+                                                        data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu."
+                                                    @else
+                                                        data-bs-toggle="modal" data-bs-trigger="hover" title="Hantar Tuntutan" data-bs-target="#kt_modal_tuntutan{{$layak->smoku_id}}"
+                                                    @endif
+                                                @elseif($currentDate->greaterThan($tarikhTamat))  
+                                                    data-bs-toggle="tooltip" data-bs-trigger="hover" title="Pelajar telah tamat pengajian."
                                                 @else
-                                                    data-bs-toggle="modal" data-bs-trigger="hover" title="Hantar Tuntutan" data-bs-target="#kt_modal_tuntutan{{$layak->smoku_id}}"
+                                                    data-bs-toggle="tooltip" data-bs-trigger="hover" title="Tuntutan hanya boleh dikemukakan pada semester seterusnya."
                                                 @endif
-                                            @elseif($currentDate->greaterThan($tarikhTamat))  
-                                                data-bs-toggle="tooltip" data-bs-trigger="hover" title="Pelajar telah tamat pengajian."
                                             @else
-                                                data-bs-toggle="tooltip" data-bs-trigger="hover" title="Tuntutan hanya boleh dikemukakan pada semester seterusnya."
+
+                                            data-bs-toggle="tooltip" data-bs-trigger="hover" title="tuntutan dalam semakan."  
+                                          
                                             @endif
                                         >
                                             <span>
