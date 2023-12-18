@@ -35,10 +35,12 @@ class SaringanController extends Controller
         $filters = $request->only(['institusi']); // Adjust the filter names as per your form
 
         $query = Permohonan::select('permohonan.*')
-            ->where('permohonan.status', '=','2')
-            ->orWhere('permohonan.status', '=','3')
-            ->orWhere('permohonan.status', '=','4')
-            ->orWhere('permohonan.status', '=','5');
+            ->where(function ($query) {
+                $query->where('permohonan.status', '=', '2')
+                    ->orWhere('permohonan.status', '=', '3')
+                    ->orWhere('permohonan.status', '=', '4')
+                    ->orWhere('permohonan.status', '=', '5');
+            });
 
         if (isset($filters['institusi'])) {
             $selectedInstitusi = $filters['institusi'];
@@ -46,6 +48,8 @@ class SaringanController extends Controller
                 ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
                 ->where('smoku_akademik.id_institusi', $selectedInstitusi);
         }
+
+       
 
         $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
         $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
