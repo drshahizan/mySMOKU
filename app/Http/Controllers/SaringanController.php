@@ -554,9 +554,11 @@ class SaringanController extends Controller
         $status = null;
 
 
-        $institusiPengajian = InfoIpt::all()->where('jenis_institusi','UA')->sortBy('nama_institusi');
-
-        return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status', 'institusiPengajian'));
+        $institusiPengajian = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get(); 
+        // dd($institusiPengajianPPK);
+        return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status', 'institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
     public function cetakSenaraiPenyaluranExcel(Request $request, $programCode)

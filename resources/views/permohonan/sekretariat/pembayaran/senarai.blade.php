@@ -86,6 +86,69 @@
                             </li>
                         </ul>
 
+                         <!--begin::Card title-->
+                         <div class="card-title">
+                            <!--begin::Search-->
+                            <div class="d-flex align-items-center position-relative my-1">
+                                <input type="hidden" data-kt-subscription-table-filter="search" >
+                            </div>
+                            <!--end::Search-->
+                        </div>
+                        <!--begin::Card title-->
+                        <!--begin::Card toolbar-->
+                        <div class="card-toolbar">
+                            <!--begin::Toolbar-->
+                            <div class="d-flex justify-content-between" style="margin-left: 20px;" data-kt-subscription-table-toolbar="base">
+                                <!--begin::Filter-->
+                                <!--begin::Content-->
+                                <div data-kt-subscription-table-filter="form">
+                                    <!--begin::Input group-->
+                                    <div class="row mb-10">
+                                        <div class="col-md-8 fv-row">
+                                            <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
+                                                <option value="">Pilih Institusi Pengajian</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 fv-row none-container"> 
+                                            
+                                        </div>
+                                        <div class="col-md-2 fv-row">
+                                            <!--begin::Actions-->
+                                            <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
+                                                <i class="ki-duotone ki-filter fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </button>
+                                            <!--end::Actions-->
+                                        </div>
+                                        
+                                      
+                                        <div class="col-md-2 fv-row export-container"> 
+                                            <a id="exportLink" href="{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round" style=" width: 150%;">
+                                                <i class="fa fa-file-excel" style="color: black;"></i> Excel
+                                            </a> 
+                                        </div>
+                                        
+                                    </div>
+                                    <!--end::Input group-->
+                                    
+                                </div>
+                                <!--end::Content-->
+                                <!--end::Filter-->
+                            </div>
+                            
+                            <!--end::Toolbar-->
+                            <!--begin::Group actions-->
+                            <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
+                                <div class="fw-bold me-5">
+                                <span class="me-2" data-kt-subscription-table-select="selected_count"></span>Selected</div>
+                                <button type="button" class="btn btn-danger" data-kt-subscription-table-select="delete_selected">Delete Selected</button>
+                            </div>
+                            <!--end::Group actions-->
+                        </div>
+                        <!--end::Card toolbar-->
+
 
                         <div class="tab-content" id="myTabContent">
                             {{-- BKOKU --}}
@@ -197,66 +260,7 @@
                             {{-- BKOKU UA--}}
                             <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                 <br>
-                                <!--begin::Card title-->
-                                <div class="card-title">
-                                    <!--begin::Search-->
-                                    <div class="d-flex align-items-center position-relative my-1">
-                                        <input type="hidden" data-kt-subscription-table-filter="search" >
-                                    </div>
-                                    <!--end::Search-->
-                                </div>
-                                <!--begin::Card title-->
-                                <!--begin::Card toolbar-->
-                                <div class="card-toolbar">
-                                    <!--begin::Toolbar-->
-                                    <div class="d-flex justify-content-between" style="margin-left: 20px;" data-kt-subscription-table-toolbar="base">
-                                        <!--begin::Filter-->
-                                        <!--begin::Content-->
-                                        <div data-kt-subscription-table-filter="form">
-                                            <!--begin::Input group-->
-                                            <div class="row mb-10">
-                                                <div class="col-md-8 fv-row">
-                                                    <select name="institusi" class="form-select custom-width-select js-example-basic-single">
-                                                        <option value="">Pilih Institusi Pengajian</option>
-                                                        @foreach ($institusiPengajian as $institusi)
-                                                            <option value="{{ $institusi->nama_institusi }}" >{{ $institusi->nama_institusi }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-2 fv-row">
-                                                    <!--begin::Actions-->
-                                                    <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
-                                                        <i class="ki-duotone ki-filter fs-2">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                        </i>
-                                                    </button>
-                                                    <!--end::Actions-->
-                                                </div>
-                                                <div class="col-md-2 text-end fv-row" >  
-                                                    <a id="exportLink" href="{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round" style=" width: 150%;">
-                                                        <i class="fa fa-file-excel" style="color: black;"></i> Excel
-                                                    </a> 
-                                                </div>
-                                                
-                                            </div>
-                                            <!--end::Input group-->
-                                            
-                                        </div>
-                                        <!--end::Content-->
-                                        <!--end::Filter-->
-                                    </div>
-                                    
-                                    <!--end::Toolbar-->
-                                    <!--begin::Group actions-->
-                                    <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
-                                        <div class="fw-bold me-5">
-                                        <span class="me-2" data-kt-subscription-table-select="selected_count"></span>Selected</div>
-                                        <button type="button" class="btn btn-danger" data-kt-subscription-table-select="delete_selected">Delete Selected</button>
-                                    </div>
-                                    <!--end::Group actions-->
-                                </div>
-                                <!--end::Card toolbar-->
+                               
                                 <div class="card-body pt-0">
                                     <form action="{{ route('sekretariat.infocek.submit') }}" method="POST">
                                     {{csrf_field()}}
@@ -500,16 +504,9 @@
                 margin-left: 10px !important; 
         }
     </style>
+    
+    
     <script>
-        $('#sortTable1').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [] // Disable initial sorting
-        });
-        
-        $('#sortTable2').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [] // Disable initial sorting
-        });
 
         $(document).ready(function() {
 			$('.js-example-basic-single').select2();
@@ -575,48 +572,133 @@
 
 
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        // Declare datatable in a higher scope to make it accessible
-        var datatable;
+        // Initialize JavaScript variables with data from Blade
+        // Initialize JavaScript variables with data from Blade
+        var bkokuList = @json($institusiPengajian);
+        var bkokuUAList = @json($institusiPengajianUA);
+        var ppkList = @json($institusiPengajianPPK);
+
+        $(document).ready(function() {
+            $('.export-container').hide(); // Hide export elements
+            $('.none-container').show(); // Hide export elements
+
+            // Add an event listener for tab clicks
+            $('.nav-link').on('click', function() {
+                // Get the ID of the active tab
+                var activeTabId = $(this).attr('id');
+
+                // Check if the active tab is bkokuUA-tab
+                if (activeTabId === 'bkokuUA-tab') {
+                    $('.export-container').show(); // Show export elements
+                    $('.none-container').hide(); // Hide export elements
+
+                } else {
+                    $('.export-container').hide(); // Hide export elements
+                    $('.none-container').show(); // Hide export elements
+                }
+
+                // Update the institution dropdown based on the active tab
+                switch (activeTabId) {
+                    case 'bkoku-tab':
+                        updateInstitusiDropdown(bkokuList);
+                        break;
+                    case 'bkokuUA-tab':
+                        updateInstitusiDropdown(bkokuUAList);
+                        break;
+                    case 'ppk-tab':
+                        updateInstitusiDropdown(ppkList);
+                        break;
+                    // Add more cases if you have additional tabs
+                }
+            });
+
+            // Trigger the function for the default active tab (bkoku-tab)
+            updateInstitusiDropdown(bkokuList);
+            
+            // Function to update the institution dropdown
+            function updateInstitusiDropdown(institusiList) {
+                // Clear existing options
+                $('#institusiDropdown').empty();
+
+                // Add default option
+                $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
+
+                // Add options based on the selected tab
+                for (var i = 0; i < institusiList.length; i++) {
+                    $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
+                }
+            }
+        });
+
+    </script>
+     <script>
+        // Declare datatables in a higher scope to make them accessible
+        var datatable1, datatable, datatable2;
     
         $(document).ready(function() {
+            // Initialize DataTables
+            initDataTable('#sortTable1', 'datatable1');
+            initDataTable('#kt_subscriptions_table', 'datatable');
+            initDataTable('#sortTable2', 'datatable2');
+    
+            // Log data for all tables
+            logTableData('Table 1 Data:', datatable1);
+            logTableData('Table 2 Data:', datatable);
+            logTableData('Table 3 Data:', datatable2);
+        });
+    
+        function initDataTable(tableId, variableName) {
             // Check if the datatable is already initialized
-            if ($.fn.DataTable.isDataTable('#kt_subscriptions_table')) {
+            if ($.fn.DataTable.isDataTable(tableId)) {
                 // Destroy the existing DataTable instance
-                $('#kt_subscriptions_table').DataTable().destroy();
+                $(tableId).DataTable().destroy();
             }
     
             // Initialize the datatable and assign it to the global variable
-            datatable = $('#kt_subscriptions_table').DataTable({
+            window[variableName] = $(tableId).DataTable({
                 ordering: true, // Enable manual sorting
                 order: [], // Disable initial sorting
                 columnDefs: [
-                    { orderable: false, targets: [0] } 
+                    { orderable: false, targets: [0] }
                 ]
             });
-            // console.log('Table Data:', datatable.data().toArray());
-        });
+        }
     
         function applyFilter() {
             var selectedInstitusi = $('[name="institusi"]').val();
     
-            // Apply search filter to the column
-            datatable.column(3).search(selectedInstitusi).draw();
+            // Apply search filter and log data for all tables
+            applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
+            applyAndLogFilter('Table 2', datatable, selectedInstitusi);
+            applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
     
-            // Log filtered data
-            console.log('Filtered Data:', datatable.rows({ search: 'applied' }).data().toArray());
-    
-            // Go to the first page
-            datatable.page(0).draw(false);
-    
-            // Log the data of visible rows on the first page
-            console.log('Data on Visible Rows (First Page):', datatable.rows({ page: 'current' }).data().toArray());
-    
-            // Update the export link with the selected institusi
+            // Update the export link with the selected institusi for Table 2
             var exportLink = document.getElementById('exportLink');
             exportLink.href = "{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
         }
+    
+        function applyAndLogFilter(tableName, table, filterValue) {
+            // Apply search filter to the table
+            table.column(3).search(filterValue).draw();
+    
+            // Log filtered data
+            console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
+    
+            // Go to the first page for the table
+            table.page(0).draw(false);
+    
+            // Log the data of visible rows on the first page for the table
+            console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
+        }
+    
+        function logTableData(message, table) {
+            console.log(message, table.rows().data().toArray());
+        }
     </script>
+    
+    
     
     
     <!--begin::Javascript-->
