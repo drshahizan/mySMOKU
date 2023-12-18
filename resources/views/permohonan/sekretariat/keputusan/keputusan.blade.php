@@ -128,8 +128,8 @@
                                     
                                             <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 20%;">
-                                                    <i class="fa fa-filter" style="font-size: 15px; padding-left: 10px;"></i>
+                                                <button type="submit" class="btn btn-primary" style="width: 20%; padding-left: 10px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -277,8 +277,8 @@
                                     
                                             <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 20%;">
-                                                    <i class="fa fa-filter" style="font-size: 15px; padding-left: 10px;"></i>
+                                                <button type="submit" class="btn btn-primary" style="width: 20%;  padding-left: 10px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -420,8 +420,8 @@
                                     
                                             <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 20%;">
-                                                    <i class="fa fa-filter" style="font-size: 15px; padding-left: 10px;"></i>
+                                                <button type="submit" class="btn btn-primary" style="width: 20%; padding-left: 10px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
                                         </div>

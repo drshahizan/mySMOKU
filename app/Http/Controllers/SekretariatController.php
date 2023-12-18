@@ -461,7 +461,7 @@ class SekretariatController extends Controller
         $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get(); 
 
-        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan', 'filters', 'institusiBKOKU','institusiUA','institusiPPK'));
+        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan','filters','institusiBKOKU','institusiUA','institusiPPK'));
     }
 
     public function cetakSenaraiPemohonPDF(Request $request, $programCode)
