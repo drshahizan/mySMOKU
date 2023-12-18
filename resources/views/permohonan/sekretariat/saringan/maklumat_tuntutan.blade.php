@@ -318,7 +318,7 @@
                                             // document.getElementById("w_saku_dibayar").addEventListener("input", BayarY);
                                             function SokongY(){
                                                 var yuran = document.getElementById('yuran_disokong').value;
-                                                var j_tuntutan = document.getElementById('w_saku_disokong').value;
+                                                var j_tuntutan = document.getElementById('j_tuntutan').value;
                                                 var w_saku = document.getElementById('w_saku_disokong').value;
                                                 var baki = j_tuntutan - yuran - w_saku;
                                                 var jumlah = parseFloat(w_saku) + parseFloat(yuran);
@@ -472,7 +472,7 @@
                                                 // document.getElementById("yuran_dibayar_3").addEventListener("input", BayarY);
                                                 function SokongY(){
                                                     var yuran = document.getElementById('yuran_disokong_3').value;
-                                                    var j_tuntutan = document.getElementById('w_saku_disokong').value;
+                                                    var j_tuntutan = document.getElementById('j_tuntutan').value;
                                                     var baki = j_tuntutan - yuran;
                                                     var jumlah = parseFloat(yuran);
                                                     baki = Number(parseFloat(baki).toFixed(2)).toLocaleString('en', {
