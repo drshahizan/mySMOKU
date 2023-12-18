@@ -109,7 +109,7 @@
                                     @endif
                                 
                                 @else
-                                    <td class="text-center"><button class="btn bg-primary text-white">Belum Mohon</button></td>
+                                    <td class="text-center"><button class="btn bg-primary text-white">Belum Tuntut</button></td>
                                 
                                 @endif
                                 
