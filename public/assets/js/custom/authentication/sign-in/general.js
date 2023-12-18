@@ -149,6 +149,12 @@ var KTSigninGeneral = function () {
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 }
+                            }).then((result) => {
+                                // Check if the user clicked the "Ok" button
+                                if (result.isConfirmed) {
+                                    // Reload the page
+                                    location.reload();
+                                }
                             });
                         }
                     }).catch(function (error) {
@@ -176,6 +182,12 @@ var KTSigninGeneral = function () {
                                     customClass: {
                                         confirmButton: "btn btn-primary"
                                     }
+                                }).then((result) => {
+                                    // Check if the user clicked the "Ok" button
+                                    if (result.isConfirmed) {
+                                        // Reload the page
+                                        location.reload();
+                                    }
                                 });
                             }
                             
@@ -189,11 +201,13 @@ var KTSigninGeneral = function () {
 
                         // Enable button
                         submitButton.disabled = false;
+                    
+                       
                     });
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "Sila masukkan No Kad Pengenalan dengan Katalaluan.",
+                        text: "Sila masukkan No. Kad Pengenalan dengan Kata Laluan.",
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "Ok",
@@ -203,7 +217,10 @@ var KTSigninGeneral = function () {
                     });
                 }
             });
+            
         });
+
+        
     }
 
     var isValidUrl = function(url) {
