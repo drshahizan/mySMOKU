@@ -193,7 +193,11 @@
                                 <h6>Maklumat tuntutan:</h6>
                                 <br>
                                 @php
+                                if ($sama_semester==false)
                                     $i = 2;
+                                else{
+                                    $i=1;
+                                }
                                 @endphp
                                 <form method="POST" action="{{ url('tuntutan/sekretariat/saringan/saring-tuntutan-kedua/'.$tuntutan->id) }}" id="saring">
                                     <div class="row clearfix">
@@ -210,6 +214,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                    @if($sama_semester==false)
                                                         <tr>
                                                             <td style="text-align:right;">1</td>
                                                             <td>
@@ -231,6 +236,7 @@
                                                                 Keseluruhan keputusan peperiksaan
                                                             </td>
                                                         </tr>
+                                                    @endif
                                                         @foreach($tuntutan_item as $item)
                                                             @php
                                                                 $invoisResit = "/assets/dokumen/tuntutan/".$item['resit'];

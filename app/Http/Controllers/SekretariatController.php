@@ -627,7 +627,7 @@ class SekretariatController extends Controller
                     ->when($request->institusi, function ($q) use ($request) {
                         return $q->where('bk_info_institusi.id_institusi', $request->institusi);
                     })
-                    ->select('permohonan_kelulusan.*') 
+                    ->select('permohonan_kelulusan.*')
                     ->get();
 
         $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
@@ -787,7 +787,7 @@ class SekretariatController extends Controller
                     ->when($request->institusi, function ($q) use ($request) {
                         return $q->where('bk_info_institusi.id_institusi', $request->institusi);
                     })
-                    ->select('permohonan_kelulusan.*') 
+                    ->select('permohonan_kelulusan.*')
                     ->get();
 
         $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
@@ -817,7 +817,7 @@ class SekretariatController extends Controller
                     ->when($request->institusi, function ($q) use ($request) {
                         return $q->where('bk_info_institusi.id_institusi', $request->institusi);
                     })
-                    ->select('permohonan_kelulusan.*') 
+                    ->select('permohonan_kelulusan.*')
                     ->get();
 
         $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
@@ -1081,9 +1081,11 @@ class SekretariatController extends Controller
         }
         else{
             $sesi_sebelum = null;
+            $sama_semester = true;
         }
 
         $baki_terdahulu = 0;
+        $sama_semester = false;
 
         if($no_tuntutan == 1){
             $baki_terdahulu = $permohonan->baki_dibayar;
@@ -1093,6 +1095,9 @@ class SekretariatController extends Controller
         }
         elseif($tuntutan->sesi == $sesi_sebelum){
             $baki_terdahulu = $tuntutan_sebelum->baki_dibayar;
+            if ($tuntutan_sebelum->semester != $tuntutan->semester){
+                $sama_semester = true;
+            }
         }
         elseif($tuntutan->sesi != $sesi_sebelum){
             $j_tuntutan = JumlahTuntutan::where('jenis',"Yuran")->first();
@@ -1109,7 +1114,7 @@ class SekretariatController extends Controller
         ]);
         $status_rekod->save();
 
-        return view('tuntutan.sekretariat.saringan.maklumat_tuntutan',compact('baki_terdahulu','permohonan','smoku','akademik','tuntutan','tuntutan_item'));
+        return view('tuntutan.sekretariat.saringan.maklumat_tuntutan',compact('sama_semester','baki_terdahulu','permohonan','smoku','akademik','tuntutan','tuntutan_item'));
     }
 
     public function setSemulaStatus($id){
