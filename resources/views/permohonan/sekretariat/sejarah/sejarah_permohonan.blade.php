@@ -13,13 +13,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-    </head>
 
-    <style>
-        .nav{
-            margin-left: 10px!important;
-        }
-    </style>
+        <style>
+            .nav{
+                margin-left: 20px!important;
+            }
+        </style>
+    </head>
 
     <!--begin::Page title-->
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
@@ -85,7 +85,7 @@
                                             </select>
                                         </div>
                                 
-                                        <div class="col-md-3" style="margin-left: 10px; margin-right:150px;">
+                                        <div class="col-md-3" style="margin-right:150px;">
                                             <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
                                                 <i class="fa fa-filter" style="font-size: 15px;"></i>
                                             </button>
@@ -215,7 +215,7 @@
                                             </select>
                                         </div>
                                 
-                                        <div class="col-md-3" style="margin-left: 10px; margin-right:150px;">
+                                        <div class="col-md-3" style="margin-right:150px;">
                                             <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
                                                 <i class="fa fa-filter" style="font-size: 15px;"></i>
                                             </button>
@@ -345,7 +345,7 @@
                                             </select>
                                         </div>
                                 
-                                        <div class="col-md-3" style="margin-left: 10px; margin-right:150px;">
+                                        <div class="col-md-3" style="margin-right:150px;">
                                             <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
                                                 <i class="fa fa-filter" style="font-size: 15px;"></i>
                                             </button>
