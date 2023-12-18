@@ -98,7 +98,7 @@
                                                     <div class="col-md-4">
                                                         <select name="institusi" class="form-select js-example-basic-single">
                                                             <option value="">Pilih Institusi Pengajian</option>
-                                                            @foreach ($institusiPengajian as $institusi)
+                                                            @foreach ($institusiBKOKU as $institusi)
                                                                 <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
                                                             @endforeach
                                                         </select>
@@ -116,8 +116,8 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" style="width: 12%"><b>ID Permohonan</b></th>
-                                                        <th class="text-center" style="width: 30%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 18%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 25%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 23%"><b>Institusi Pengajian</b></th>
                                                         <th class="text-center" style="width: 17%"><b>Tarikh Permohonan</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Status Saringan</b></th>
                                                         <th class="text-center" style="width: 13%!important;"><b>Disaring Oleh</b></th>
@@ -257,7 +257,7 @@
                                                     <div class="col-md-4">
                                                         <select name="institusi" class="form-select js-example-basic-single">
                                                             <option value="">Pilih Institusi Pengajian</option>
-                                                            @foreach ($institusiPengajian as $institusi)
+                                                            @foreach ($institusiUA as $institusi)
                                                                 <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
                                                             @endforeach
                                                         </select>
@@ -275,8 +275,8 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" style="width: 12%"><b>ID Permohonan</b></th>
-                                                        <th class="text-center" style="width: 30%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 18%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 25%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 23%"><b>Institusi Pengajian</b></th>
                                                         <th class="text-center" style="width: 17%"><b>Tarikh Permohonan</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Status Saringan</b></th>
                                                         <th class="text-center" style="width: 13%!important;"><b>Disaring Oleh</b></th>
@@ -383,8 +383,8 @@
                                                                         @endif
                                                                     @endif
                                                                 </td>
-                                                                <td style="width: 30%!important">{{$pemohon}}</td>
-                                                                <td style="width: 18%!important">{{$institusipengajian}}</td>
+                                                                <td style="width: 25%!important">{{$pemohon}}</td>
+                                                                <td style="width: 23%!important">{{$institusipengajian}}</td>
                                                                 <td class="text-center" style="width: 17%!important;">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
                                                                 @if ($item['status']=='2')
                                                                     <td class="text-center" style="width: 10%!important;"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
@@ -416,7 +416,7 @@
                                                     <div class="col-md-4">
                                                         <select name="institusi" class="form-select js-example-basic-single">
                                                             <option value="">Pilih Institusi Pengajian</option>
-                                                            @foreach ($institusiPengajian as $institusi)
+                                                            @foreach ($institusiPPK as $institusi)
                                                                 <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
                                                             @endforeach
                                                         </select>
@@ -539,8 +539,8 @@
                                                                 @endif
                                                             @endif
                                                         </td>
-                                                        <td style="width: 30%!important">{{$pemohon}}</td>
-                                                        <td style="width: 18%!important">{{$institusipengajian}}</td>
+                                                        <td style="width: 25%!important">{{$pemohon}}</td>
+                                                        <td style="width: 23%!important">{{$institusipengajian}}</td>
                                                         <td class="text-center" style="width: 17%!important;">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
                                                             @if ($item['status']=='2')
                                                                 <td class="text-center" style="width: 10%!important;"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>

@@ -50,9 +50,11 @@ class SaringanController extends Controller
         }
 
         $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
-        $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+        $institusiBKOKU = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get(); 
 
-        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusiPengajian','permohonan','status_kod','status'));
+        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status','institusiBKOKU','institusiUA','institusiPPK'));
     }
 
     public function maklumatPermohonan($id)
@@ -146,9 +148,11 @@ class SaringanController extends Controller
         }
 
         $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
-        $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+        $institusiBKOKU = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get(); 
 
-        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusiPengajian','permohonan','status_kod','status'));
+        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status','institusiBKOKU','institusiUA','institusiPPK'));
     }
 
     public function maklumatProfilDiri($id)
@@ -200,29 +204,29 @@ class SaringanController extends Controller
         //filter
         $filters = $request->only(['institusi']); 
         $query = Permohonan::select('permohonan.*')
-            ->where(function ($query) {
-                $query->where('permohonan.status', '=', '2')
-                    ->orWhere('permohonan.status', '=', '3')
-                    ->orWhere('permohonan.status', '=', '4')
-                    ->orWhere('permohonan.status', '=', '5');
-            });
-
+                    ->where(function ($query) {
+                        $query->where('permohonan.status', '=', '2')
+                            ->orWhere('permohonan.status', '=', '3')
+                            ->orWhere('permohonan.status', '=', '4')
+                            ->orWhere('permohonan.status', '=', '5');
+                    });
         if (isset($filters['institusi'])) {
             $selectedInstitusi = $filters['institusi'];
             $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
                 ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
                 ->where('smoku_akademik.id_institusi', $selectedInstitusi);
         }
-
         $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
-        $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+        $institusiBKOKU = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get(); 
 
         //notifikasi
         $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
         $status_kod = 3;
         $status = "Permohonan dan tuntutan ".$no_rujukan_permohonan." telah disaring dan disokong.";
 
-        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusiPengajian','permohonan','status_kod','status'));
+        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status','institusiBKOKU','institusiUA','institusiPPK'));
     }
 
     public function saringPermohonan(Request $request,$id)
@@ -330,9 +334,11 @@ class SaringanController extends Controller
             }
 
             $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
-            $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+            $institusiBKOKU = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+            $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+            $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get(); 
 
-            return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusiPengajian','permohonan','status_kod','status'));
+            return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status','institusiBKOKU','institusiUA','institusiPPK'));
         }
     }
 
@@ -378,9 +384,12 @@ class SaringanController extends Controller
                     ->where('smoku_akademik.id_institusi', $selectedInstitusi);
             }
             $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
-            $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
 
-            return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusiPengajian','permohonan','status_kod','status'));
+            $institusiBKOKU = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+            $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+            $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get(); 
+
+            return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status','institusiBKOKU','institusiUA','institusiPPK'));
         }
         else{
             $catatan[]="";
@@ -452,9 +461,12 @@ class SaringanController extends Controller
                     ->where('smoku_akademik.id_institusi', $selectedInstitusi);
             }
             $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
-            $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
 
-            return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusiPengajian','permohonan','status_kod','status'));
+            $institusiBKOKU = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+            $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+            $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get(); 
+
+            return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status','institusiBKOKU','institusiUA','institusiPPK'));
         }
     }
 
