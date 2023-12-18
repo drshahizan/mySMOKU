@@ -844,7 +844,12 @@ class PenyelarasPPKController extends Controller
 
         $tarikhNextSem = clone $tarikhMula; // Clone to avoid modifying the original date
         $nextSemesterDates = [];
-        $semSemasa = null;
+        if ($semSemasa != 1) {
+            $semSemasa = 1;
+        } else {
+            $semSemasa = null;
+        }
+        
         
 
         while ($tarikhNextSem < $tarikhTamat) {
@@ -852,7 +857,7 @@ class PenyelarasPPKController extends Controller
                 'date' => $tarikhNextSem->format('Y-m-d'),
                 'semester' => $semSemasa,
             ];
-
+           
             // Increment $semSemasa and calculate the next semester date
             $semSemasa += 1;
             $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
