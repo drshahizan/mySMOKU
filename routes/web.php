@@ -364,7 +364,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/ppk/sejarah/keputusan-peperiksaan/{id}', [PenyelarasPPKController::class, 'keputusanPeperiksaan'])->name('ppk.papar.peperiksaan');
     Route::get('penyelaras/ppk/sejarah/papar-saringan/{id}', [PenyelarasPPKController::class, 'paparRekodSaringanTuntutan'])->name('ppk.papar.saringan.tuntutan');
     Route::get('penyelaras/ppk/tuntutan/batal/{id}', [PenyelarasPPKController::class, 'batalTuntutan'])->name('ppk.tuntutan.batal');
-    
+    Route::get('penyelaras/ppk/senarai/tuntutan-dibayar', [PenyelarasPPKController::class, 'tuntutanDibayar'])->name('senarai.ppk.tuntutanDibayar');
 
     //Pentadbir
     Route::get('pentadbir/dashboard', [PentadbirController::class,'index'])->name('pentadbir.dashboard');
