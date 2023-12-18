@@ -128,7 +128,7 @@
                                     
                                             <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 20%; padding-left: 10px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 25%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
@@ -277,7 +277,7 @@
                                     
                                             <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 20%;  padding-left: 10px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 25%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
@@ -420,7 +420,7 @@
                                     
                                             <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 20%; padding-left: 10px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 25%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
