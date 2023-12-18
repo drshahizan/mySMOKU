@@ -49,8 +49,6 @@ class SaringanController extends Controller
                 ->where('smoku_akademik.id_institusi', $selectedInstitusi);
         }
 
-       
-
         $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
         $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
 
