@@ -117,6 +117,7 @@
                                                         $peringkat = $rujukan[1];
                                                         $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('status', 1)->first();
                                                         $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+                                                        $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
@@ -250,6 +251,7 @@
                                                         $peringkat = $rujukan[1];
                                                         $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('status', 1)->first();
                                                         $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+                                                        $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
@@ -295,7 +297,7 @@
                                                             </td>
                                                             <td style="width: 35%">{{$pemohon}}</td>
                                                             <td style="width: 20%">{{$institusipengajian}}</td>
-                                                            <td class="text-center" style="width: 15%">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                            <td class="text-center" style="width: 15%">{{$item['tarikh_hantar']->format('d/m/Y')}}</td>
                                                             @if ($item['status']=='1')
                                                                 <td class="text-center" style="width: 15%"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=='2')
@@ -375,6 +377,7 @@
                                                 @if ($item['program']=="PPK")
                                                     @php
                                                         $i++;
+                                                        $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
@@ -419,7 +422,7 @@
                                                         </td>
                                                         <td style="width: 35%">{{$pemohon}}</td>
                                                         <td style="width: 20%">{{$institusipengajian}}</td>
-                                                        <td class="text-center" style="width: 15%">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        <td class="text-center" style="width: 15%">{{$item['tarikh_hantar']->format('d/m/Y')}}</td>
                                                         @if ($item['status']=='1')
                                                             <td class="text-center" style="width: 15%"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='2')
