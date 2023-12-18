@@ -197,7 +197,7 @@
                                                             }
                                                         }
                                                         $institusi = implode(' ', $result);
-                                                        $institusiPengajian = transformBracketsToUppercase($institusi);
+                                                        $institusipengajian = transformBracketsToUppercase($institusi);
                                                     @endphp
                                                         @if ($jenis_institusi!="UA")
                                                         <tr>
@@ -225,7 +225,7 @@
                                                                 @endif
                                                             </td>
                                                             <td>{{$pemohon}}</td>
-                                                            <td>{{$institusiPengajian}}</td>
+                                                            <td>{{$institusipengajian}}</td>
                                                             <td class="text-center">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
                                                                 @if ($item['status']=='2')
                                                                     <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
@@ -356,7 +356,7 @@
                                                                 }
                                                             }
                                                             $institusi = implode(' ', $result);
-                                                            $institusiPengajian = transformBracketsToUppercase($institusi);
+                                                            $institusipengajian = transformBracketsToUppercase($institusi);
                                                         @endphp
                                                         @if ($jenis_institusi=="UA")
                                                             <tr>
@@ -384,7 +384,7 @@
                                                                     @endif
                                                                 </td>
                                                                 <td style="width: 30%!important">{{$pemohon}}</td>
-                                                                <td style="width: 20%!important">{{$institusiPengajian}}</td>
+                                                                <td style="width: 20%!important">{{$institusipengajian}}</td>
                                                                 <td class="text-center" style="width: 18%!important;">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
                                                                 @if ($item['status']=='2')
                                                                     <td class="text-center" style="width: 10%!important;"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
@@ -513,7 +513,7 @@
                                                             }
                                                         }
                                                         $institusi = implode(' ', $result);
-                                                        $institusiPengajian = transformBracketsToUppercase($institusi);
+                                                        $institusipengajian = transformBracketsToUppercase($institusi);
                                                     @endphp
                                                     <tr>
                                                         <td style="width: 12%!important;">
@@ -540,7 +540,7 @@
                                                             @endif
                                                         </td>
                                                         <td style="width: 30%!important">{{$pemohon}}</td>
-                                                        <td style="width: 20%!important">{{$institusiPengajian}}</td>
+                                                        <td style="width: 20%!important">{{$institusipengajian}}</td>
                                                         <td class="text-center" style="width: 18%!important;">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
                                                             @if ($item['status']=='2')
                                                                 <td class="text-center" style="width: 10%!important;"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
