@@ -141,10 +141,6 @@
                                                         }
                                                         $pemohon = implode(' ', $result);
 
-                                                        //tarikh
-                                                        $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
-								                        $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
-
                                                         //institusi pengajian
                                                         $text3 = ucwords(strtolower($institusi_pengajian)); 
                                                         $conjunctions = ['of', 'in', 'and'];
@@ -167,7 +163,7 @@
                                                         </td>
                                                         <td>{{$pemohon}}</td>
                                                         <td>{{$institusipengajian}}</td>
-                                                        <td class="text-center">{{$formattedDate}}</td>
+                                                        <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_hantar))}}</td>
                                                         @if ($item['status']=='1')
                                                             <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='2')
@@ -261,10 +257,6 @@
                                                             $status='Sedang Disaring';
                                                         }
 
-                                                        //tarikh
-                                                        $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
-								                        $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
-
                                                         //nama pemohon
                                                         $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
                                                         $conjunctions = ['bin', 'binti'];
@@ -301,7 +293,7 @@
                                                             </td>
                                                             <td style="width: 35%">{{$pemohon}}</td>
                                                             <td style="width: 20%">{{$institusipengajian}}</td>
-                                                            <td class="text-center" style="width: 15%">{{$formattedDate}}</td>
+                                                            <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_hantar))}}</td>
                                                             @if ($item['status']=='1')
                                                                 <td class="text-center" style="width: 15%"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=='2')
@@ -391,10 +383,6 @@
                                                             $status='Sedang Disaring';
                                                         }
 
-                                                        //tarikh
-                                                        $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
-								                        $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
-
                                                         //nama pemohon
                                                         $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
                                                         $conjunctions = ['bin', 'binti'];
@@ -430,7 +418,7 @@
                                                         </td>
                                                         <td style="width: 35%">{{$pemohon}}</td>
                                                         <td style="width: 20%">{{$institusipengajian}}</td>
-                                                        <td class="text-center" style="width: 15%">{{$formattedDate}}</td>
+                                                        <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_hantar))}}</td>
                                                         @if ($item['status']=='1')
                                                             <td class="text-center" style="width: 15%"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='2')
