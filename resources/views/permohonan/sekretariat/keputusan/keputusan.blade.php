@@ -128,7 +128,7 @@
                                     
                                             <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 20%; padding-left: 12px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
@@ -256,7 +256,7 @@
                                                 <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                             </div>
                                     
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <label for="end_date">Pilih Keputusan:</label>
                                                 <select name="status" class="form-select">
                                                     <option value="">Semua Keputusan</option>
@@ -264,15 +264,25 @@
                                                     <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
                                             </div>
-                                    
+
                                             <div class="col-md-4">
+                                                <label for="end_date">Institusi Pengajian:</label>
+                                                <select name="institusi" class="form-control search" data-control="select2" data-hide-search="true" data-placeholder="Pilih Institusi Pengajian">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                    @foreach ($institusiPengajian as $institusi)
+                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                    
+                                            <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 20%; padding-left: 12px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                    </form>   
+                                    </form>      
                                     
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
@@ -380,32 +390,42 @@
                                     <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
                                         <div class="row" style="margin-left: 15px;">
                                             <div class="col-md-2">
-                                                <label for="start_date"><b>Dari:</b></label>
+                                                <label for="start_date">Dari:</label>
                                                 <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                             </div>
                                     
                                             <div class="col-md-2">
-                                                <label for="end_date"><b>Hingga:</b></label>
+                                                <label for="end_date">Hingga:</label>
                                                 <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                             </div>
                                     
-                                            <div class="col-md-3">
-                                                <label for="end_date"><b>Keputusan:</b></label>
+                                            <div class="col-md-2">
+                                                <label for="end_date">Pilih Keputusan:</label>
                                                 <select name="status" class="form-select">
-                                                    <option value="">Pilih Semua Keputusan</option>
+                                                    <option value="">Semua Keputusan</option>
                                                     <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
                                                     <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
                                             </div>
+
+                                            <div class="col-md-4">
+                                                <label for="end_date">Institusi Pengajian:</label>
+                                                <select name="institusi" class="form-control search" data-control="select2" data-hide-search="true" data-placeholder="Pilih Institusi Pengajian">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                    @foreach ($institusiPengajian as $institusi)
+                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                     
-                                            <div class="col-md-4 right">
+                                            <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 20%; padding-left: 12px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                    </form>  
+                                    </form>     
                 
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
