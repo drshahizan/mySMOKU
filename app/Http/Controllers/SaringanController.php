@@ -197,7 +197,7 @@ class SaringanController extends Controller
             'smoku_id'          =>  $smoku_id,
             'permohonan_id'     =>  $id,
             'status'            =>  4,
-            'dilaksanakan_oleh'    =>  Auth::user()->id,
+            'dilaksanakan_oleh' =>  Auth::user()->id,
         ]);
         $status_rekod->save();
 
@@ -308,7 +308,7 @@ class SaringanController extends Controller
                 'smoku_id'          =>  $smoku_id,
                 'permohonan_id'     =>  $id,
                 'status'            =>  5,
-                'dilaksanakan_oleh'    =>  Auth::user()->id,
+                'dilaksanakan_oleh' =>  Auth::user()->id,
             ]);
             $status_rekod->save();
 
@@ -436,7 +436,7 @@ class SaringanController extends Controller
                 'smoku_id'          =>  $smoku_id,
                 'permohonan_id'     =>  $id,
                 'status'            =>  5,
-                'dilaksanakan_oleh'    =>  Auth::user()->id,
+                'dilaksanakan_oleh' =>  Auth::user()->id,
             ]);
             $status_rekod->save();
 
@@ -710,7 +710,7 @@ class SaringanController extends Controller
             'smoku_id'          =>  $smoku_id,
             'permohonan_id'     =>  $id,
             'status'            =>  8,
-            'dilaksanakan_oleh'    =>  Auth::user()->id,
+            'dilaksanakan_oleh' =>  Auth::user()->id,
         ]);
         $status_rekod->save();
 
