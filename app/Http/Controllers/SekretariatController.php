@@ -615,8 +615,8 @@ class SekretariatController extends Controller
         $endDate = $request->input('end_date');
 
         $kelulusan = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
-                    ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-                    ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                    ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                    ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
                     ->orderBy('permohonan_kelulusan.updated_at', 'desc')
                     ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
                         return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
@@ -627,7 +627,7 @@ class SekretariatController extends Controller
                     ->when($request->institusi, function ($q) use ($request) {
                         return $q->where('bk_info_institusi.id_institusi', $request->institusi);
                     })
-                    ->select('permohonan_kelulusan.*') // You can customize the columns you want to select
+                    ->select('permohonan_kelulusan.*') 
                     ->get();
 
         $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
@@ -775,8 +775,8 @@ class SekretariatController extends Controller
         $endDate = $request->input('end_date');
 
         $kelulusan = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
-                    ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-                    ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                    ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                    ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
                     ->orderBy('permohonan_kelulusan.updated_at', 'desc')
                     ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
                         return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
@@ -787,7 +787,7 @@ class SekretariatController extends Controller
                     ->when($request->institusi, function ($q) use ($request) {
                         return $q->where('bk_info_institusi.id_institusi', $request->institusi);
                     })
-                    ->select('permohonan_kelulusan.*') // You can customize the columns you want to select
+                    ->select('permohonan_kelulusan.*') 
                     ->get();
 
         $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
@@ -826,30 +826,6 @@ class SekretariatController extends Controller
 
         return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi','institusiPengajian'));
     }
-
-    // public function senaraiKeputusanPermohonan(Request $request)
-    // {
-    //     $startDate = $request->input('start_date');
-    //     $endDate = $request->input('end_date');
-
-    //     $kelulusan = Kelulusan::with(['permohonan' => function ($query) use ($startDate, $endDate, $request) {
-    //             $query->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-    //                 $q->whereBetween('tarikh_mesyuarat', [$startDate, $endDate]);
-    //             })
-    //             ->when($request->status, function ($q) use ($request) {
-    //                 $q->where('keputusan', $request->status);
-    //             })
-    //             ->whereHas('smokuAkademik.bkInfoInstitusi', function ($q) use ($request) {
-    //                 $q->where('nama_institusi', $request->institusi);
-    //             });
-    //         }])
-    //         ->orderBy('updated_at', 'desc')
-    //         ->get();
-
-    //     $notifikasi = null;
-
-    //     return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi'));
-    // }
 
     public function cetakKeputusanPermohonanBKOKU()
     {
