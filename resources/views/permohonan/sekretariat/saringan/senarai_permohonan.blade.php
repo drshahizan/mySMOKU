@@ -93,7 +93,7 @@
                                     <br>
                                     <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-4" style="padding-left: 30px;">
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiBKOKU as $institusi)
@@ -252,7 +252,7 @@
                                     <br>
                                     <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-4" style="padding-left: 30px;">
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiUA as $institusi)
@@ -411,7 +411,7 @@
                                     <br>
                                     <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-4" style="padding-left: 30px;">
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiPPK as $institusi)
@@ -427,7 +427,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                    
+
                                     <div class="body">
                                         <div class="table-responsive">
                                             <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
