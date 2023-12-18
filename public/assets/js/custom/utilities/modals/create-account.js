@@ -460,6 +460,7 @@ var KTCreateAccount = function () {
 				}
 			}
 		));
+		
 
 		// Step 4
 		validations.push(FormValidation.formValidation(

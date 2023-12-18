@@ -1138,21 +1138,21 @@
 						<!--end::Input group-->
 						<!--begin::Input group-->
 						<div class="row mb-10">
-							@if ($butiranPelajar->sumber_biaya != '4')
+							{{-- @if ($butiranPelajar->sumber_biaya == '1') --}}
 							<div class="col-md-6 fv-row" id="div_nama_penaja">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a>
+									<span class="">Nama Penajaaa</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a>
 								</label>															
 								<!--end::Label-->
 								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
 									<option></option>
 									@foreach ($penaja as $penaja)
-									<option value="{{$penaja->kod_penaja}}" {{$butiranPelajar->nama_penaja == $penaja->kod_penaja ? 'selected' : ''}}>{{ $penaja->penaja}}</option>
+									<option value="{{$penaja->kod_penaja}}"{{$butiranPelajar->nama_penaja == $penaja->kod_penaja ? 'selected' : ''}}>{{ $penaja->penaja}}</option>
 									@endforeach
 								</select>
 							</div>
-							@endif
+							{{-- @endif --}}
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row" id="div_penaja_lain">
 								<!--begin::Label-->
@@ -1741,33 +1741,52 @@
 			});
 
 			//SUMBER BIAYA LAIN-LAIN
-			$(document).ready(function(){
+			$(document).ready(function () {
 				$("#div_biaya_lain").hide();
-				$('#sumber_biaya').on('change', function() {
-				if ( this.value == '5'){
-					$("#div_biaya_lain").show();
+				// $("#div_nama_penaja").hide();
+
+				var penajaOptions = {!! json_encode($penajaArray) !!};
+				// console.log("nama_penaja value:", {!! json_encode($butiranPelajar->nama_penaja) !!});
+
+				// Ensure penajaOptions is an array before attempting to iterate
+				if (Array.isArray(penajaOptions)) {
+					$('#sumber_biaya').on('change', function () {
+						var selectedValue = this.value;
+
+						if (selectedValue == '5') {
+							$("#div_biaya_lain").show();
+							$("#div_nama_penaja").hide();
+							$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+						} else if (selectedValue == '2' || selectedValue == '3' || selectedValue == '4') {
+							$("#div_nama_penaja").hide();
+							$("#div_biaya_lain").hide();
+							$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+						} else {
+							$("#div_biaya_lain").hide();
+							$("#div_nama_penaja").show();
+
+							// Update options based on the selected value
+							$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+							var preSelectedValue = {!! json_encode($butiranPelajar->nama_penaja) !!};
+							// console.log("Pre-selected Value:", preSelectedValue);
+
+							penajaOptions.forEach(function (penaja) {
+								// console.log("Comparing:", preSelectedValue, penaja.kod_penaja);
+
+								// Check if the option matches the pre-selected value
+								var isSelected = preSelectedValue == penaja.kod_penaja;
+
+								// console.log("Is Selected:", isSelected);
+
+								$('#nama_penaja').append('<option value="' + penaja.kod_penaja + '"' + (isSelected ? ' selected' : '') + '>' + penaja.penaja + '</option>');
+							});
+						}
+					});
+				} else {
+					console.error("Error: penajaOptions is not an array");
 				}
-				else if (this.value == '2'){
-					$("#div_nama_penaja").hide();
-					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
-				}
-				else if (this.value == '3'){
-					$("#div_nama_penaja").hide();
-					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
-				}
-				else if (this.value == '4'){
-					$("#div_nama_penaja").hide();
-					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
-				}
-				// else if (this.value != '1'){
-				// 	$('#nama_penaja').empty().append('<option value="">Pilih</option>');
-				// }
-				else {
-					$("#div_biaya_lain").hide();
-					$("#div_nama_penaja").show();
-				}
-				});
 			});
+
 
 			//PENAJA LAIN-LAIN
 			$(document).ready(function(){

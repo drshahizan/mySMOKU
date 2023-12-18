@@ -1259,13 +1259,13 @@
 							<div class="col-md-6 fv-row" id="div_nama_penaja">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
+									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Contoh"><i class="fa-solid fa-circle-info"></i></a>
 								</label>															
 								<!--end::Label-->
 								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 									@foreach ($penaja as $penaja)
 										<option></option>
-										<option value="{{ $penaja->kod_penaja}}">{{ $penaja->penaja}}</option>
+										<option value="{{$penaja->kod_penaja}}">{{$penaja->penaja}}</option>
 									@endforeach
 								</select>
 							</div>

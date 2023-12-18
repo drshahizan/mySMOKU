@@ -268,6 +268,7 @@ class PenyelarasController extends Controller
         
         $biaya = SumberBiaya::all()->where('kod_biaya','!=','2')->sortBy('kod_biaya');
         $penaja = Penaja::all()->sortBy('kod_penaja');
+        $penajaArray = $penaja->toArray();
         $hubungan = Hubungan::all()->sortBy('kod_hubungan');
         $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri')->get();
         $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
@@ -304,9 +305,9 @@ class PenyelarasController extends Controller
 
         if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
             $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
-            return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','dokumen','agama','parlimen','dun','keturunan','permohonan'));
+            return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','penajaArray','dokumen','agama','parlimen','dun','keturunan','permohonan'));
         } else {
-            return view('permohonan.penyelaras_bkoku.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','mod','kursus','biaya','penaja','negeri','bandar','agama','parlimen','dun','keturunan'));
+            return view('permohonan.penyelaras_bkoku.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','mod','kursus','biaya','penaja','penajaArray','negeri','bandar','agama','parlimen','dun','keturunan'));
         }
     }
 
