@@ -26,60 +26,6 @@
 								</div>
 							</div>
 							<br>
-							@php
-
-								$akademik = DB::table('smoku_akademik')->where('smoku_id', $smoku_id)
-										->where('smoku_akademik.status', 1)
-										->select('smoku_akademik.*')
-										->first();
-
-								$semSemasa = $akademik->sem_semasa;
-								$sesiSemasa = $akademik->sesi;
-								if($akademik->bil_bulan_per_sem == 6){
-									$bilSem = 2;
-								} else {
-									$bilSem = 3;
-								}
-								$totalSemesters = $akademik->tempoh_pengajian * $bilSem;
-								$currentYear = date('Y');
-
-                                $currentDate = Carbon::now();
-                                $tarikhMula = Carbon::parse($akademik->tarikh_mula);
-								$tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
-                                
-                                while ($tarikhMula < $tarikhTamat) {
-									$tarikhNextSem = $tarikhMula->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
-									// echo $tarikhNextSem->format('Y-m-d') . PHP_EOL;
-									$tarikhNextSem = $tarikhNextSem->format('Y-m-d');
-                                    // dd($tarikhNextSem);
-									
-									if ($currentDate->greaterThan($tarikhNextSem)) {
-										$semSemasa = $semSemasa; //sem sebelum
-										// echo 'Semester Semasa: ' . $semSemasa . PHP_EOL;
-                                        if ($semSemasa > $bilSem) {
-                                        $currentYear = intval(substr($sesiSemasa, 0, 4));
-                                        // Incrementing the current year by 1
-                                        $sesiSemasaYear = $currentYear + 1;
-                                        $sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
-                                        $semSemasa = 3; // Reset semester for the next academic year sem3 utk sesi lain
-                                    }
-										break; // Exit the loop
-									}
-									
-								}
-
-								$permohonan = DB::table('smoku_akademik')->orderBy('id', 'DESC')
-                                    ->where('smoku_id',$smoku_id)->first();
-
-								$result = DB::table('permohonan_peperiksaan')
-									->where('permohonan_id', $permohonan->id)
-									->where('sesi', $sesiSemasa)
-									->where('semester', $semSemasa)
-									->first();
-
-								
-
-							@endphp
 							<!--begin::Wrapper-->
 							<div class="mb-0">
 								<!--begin::Row-->
@@ -117,11 +63,17 @@
 								</div>
 								<!--end::Row-->
 								<!--begin::Action-->
+								@if(!$result)
 								<div class="d-flex flex-center mt-15">
 									<button type="submit"  class="btn btn-primary">
 										Simpan
 									</button>
 								</div>
+								@else
+									<div class="alert alert-warning mt-15" role="alert" style="color: black;">
+										Keputusan peperiksaan lepas sudah dikemaskini.
+									</div>
+								@endif
 								<!--end::Action-->
 							</div>
 							<!--end::Wrapper-->
