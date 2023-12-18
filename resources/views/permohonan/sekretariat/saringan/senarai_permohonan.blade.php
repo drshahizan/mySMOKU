@@ -13,13 +13,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-    </head>
 
-    <style>
-        .nav{
-            margin-left: 10px!important;
-        }
-    </style>
+        <style>
+            .nav{
+                margin-left: 20px!important;
+            }
+        </style>
+    </head>
 
     <!--begin::Page title-->
 	<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
@@ -94,7 +94,7 @@
                                     <div class="body">
                                         <div class="table-responsive">
                                             <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
-                                                <div class="row" style="margin-left: 10px;">
+                                                <div class="row">
                                                     <div class="col-md-4">
                                                         <select name="institusi" class="form-select js-example-basic-single">
                                                             <option value="">Pilih Institusi Pengajian</option>
@@ -104,7 +104,7 @@
                                                         </select>
                                                     </div>
 
-                                                    <div class="col-md-3" style="margin-left: 10px; margin-right:150px;">
+                                                    <div class="col-md-3" style="margin-right:150px;">
                                                         <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
                                                             <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                         </button>
@@ -117,10 +117,10 @@
                                                     <tr>
                                                         <th class="text-center" style="width: 12%"><b>ID Permohonan</b></th>
                                                         <th class="text-center" style="width: 30%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                        <th class="text-center" style="width: 18%"><b>Tarikh Permohonan</b></th>
+                                                        <th class="text-center" style="width: 18%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 17%"><b>Tarikh Permohonan</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Status Saringan</b></th>
-                                                        <th class="text-center" style="width: 10%!important;"><b>Disaring Oleh</b></th>
+                                                        <th class="text-center" style="width: 13%!important;"><b>Disaring Oleh</b></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -253,7 +253,7 @@
                                     <div class="body">
                                         <div class="table-responsive">
                                             <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
-                                                <div class="row" style="margin-left: 10px;">
+                                                <div class="row">
                                                     <div class="col-md-4">
                                                         <select name="institusi" class="form-select js-example-basic-single">
                                                             <option value="">Pilih Institusi Pengajian</option>
@@ -263,7 +263,7 @@
                                                         </select>
                                                     </div>
 
-                                                    <div class="col-md-3" style="margin-left: 10px; margin-right:150px;">
+                                                    <div class="col-md-3" style="margin-right:150px;">
                                                         <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
                                                             <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                         </button>
@@ -276,10 +276,10 @@
                                                     <tr>
                                                         <th class="text-center" style="width: 12%"><b>ID Permohonan</b></th>
                                                         <th class="text-center" style="width: 30%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                        <th class="text-center" style="width: 18%"><b>Tarikh Permohonan</b></th>
+                                                        <th class="text-center" style="width: 18%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 17%"><b>Tarikh Permohonan</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Status Saringan</b></th>
-                                                        <th class="text-center" style="width: 10%!important;"><b>Disaring Oleh</b></th>
+                                                        <th class="text-center" style="width: 13%!important;"><b>Disaring Oleh</b></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -384,8 +384,8 @@
                                                                     @endif
                                                                 </td>
                                                                 <td style="width: 30%!important">{{$pemohon}}</td>
-                                                                <td style="width: 20%!important">{{$institusipengajian}}</td>
-                                                                <td class="text-center" style="width: 18%!important;">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
+                                                                <td style="width: 18%!important">{{$institusipengajian}}</td>
+                                                                <td class="text-center" style="width: 17%!important;">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
                                                                 @if ($item['status']=='2')
                                                                     <td class="text-center" style="width: 10%!important;"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif ($item['status']=='3')
@@ -395,7 +395,7 @@
                                                                 @elseif ($item['status']=='5')
                                                                     <td class="text-center" style="width: 10%!important;"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                                 @endif
-                                                                <td style="width: 20%!important">{{$user_name}}</td>
+                                                                <td style="width: 13%!important">{{$user_name}}</td>
                                                             </tr>
                                                         @endif
                                                     @endif
@@ -412,7 +412,7 @@
                                     <div class="body">
                                         <div class="table-responsive">
                                             <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
-                                                <div class="row" style="margin-left: 10px;">
+                                                <div class="row">
                                                     <div class="col-md-4">
                                                         <select name="institusi" class="form-select js-example-basic-single">
                                                             <option value="">Pilih Institusi Pengajian</option>
@@ -422,7 +422,7 @@
                                                         </select>
                                                     </div>
 
-                                                    <div class="col-md-3" style="margin-left: 10px; margin-right:150px;">
+                                                    <div class="col-md-3" style="margin-right:150px;">
                                                         <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
                                                             <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                         </button>
@@ -435,10 +435,10 @@
                                                     <tr>
                                                         <th class="text-center" style="width: 12%"><b>ID Permohonan</b></th>
                                                         <th class="text-center" style="width: 30%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                        <th class="text-center" style="width: 18%"><b>Tarikh Permohonan</b></th>
+                                                        <th class="text-center" style="width: 18%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 17%"><b>Tarikh Permohonan</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Status Saringan</b></th>
-                                                        <th class="text-center" style="width: 10%!important;"><b>Disaring Oleh</b></th>
+                                                        <th class="text-center" style="width: 13%!important;"><b>Disaring Oleh</b></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -540,8 +540,8 @@
                                                             @endif
                                                         </td>
                                                         <td style="width: 30%!important">{{$pemohon}}</td>
-                                                        <td style="width: 20%!important">{{$institusipengajian}}</td>
-                                                        <td class="text-center" style="width: 18%!important;">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
+                                                        <td style="width: 18%!important">{{$institusipengajian}}</td>
+                                                        <td class="text-center" style="width: 17%!important;">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
                                                             @if ($item['status']=='2')
                                                                 <td class="text-center" style="width: 10%!important;"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=='3')
@@ -551,7 +551,7 @@
                                                             @elseif ($item['status']=='5')
                                                                 <td class="text-center" style="width: 10%!important;"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                             @endif
-                                                        <td style="width: 20%!important">{{$user_name}}</td>
+                                                        <td style="width: 13%!important">{{$user_name}}</td>
                                                     </tr>
                                                     @endif
                                                     @endforeach
