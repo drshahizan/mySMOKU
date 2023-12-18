@@ -127,7 +127,8 @@ class SaringanController extends Controller
         $status_kod=0;
         $status = null;
 
-        $filters = $request->only(['institusi']); // Adjust the filter names as per your form
+        //filter
+        $filters = $request->only(['institusi']); 
 
         $query = Permohonan::select('permohonan.*')
             ->where(function ($query) {
@@ -196,18 +197,8 @@ class SaringanController extends Controller
         ]);
         $status_rekod->save();
 
-        $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
-        $permohonan = Permohonan::where('status', '2')
-        ->orWhere('status', '=','3')
-        ->orWhere('status', '=','4')
-        ->orWhere('status', '=','5')
-        ->orderBy('tarikh_hantar', 'DESC')
-        ->get();
-        $status_kod = 3;
-        $status = "Permohonan dan tuntutan ".$no_rujukan_permohonan." telah disaring dan disokong.";
-
-        $filters = $request->only(['institusi']); // Adjust the filter names as per your form
-
+        //filter
+        $filters = $request->only(['institusi']); 
         $query = Permohonan::select('permohonan.*')
             ->where(function ($query) {
                 $query->where('permohonan.status', '=', '2')
@@ -225,6 +216,11 @@ class SaringanController extends Controller
 
         $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
         $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+
+        //notifikasi
+        $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
+        $status_kod = 3;
+        $status = "Permohonan dan tuntutan ".$no_rujukan_permohonan." telah disaring dan disokong.";
 
         return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusiPengajian','permohonan','status_kod','status'));
     }
@@ -312,19 +308,12 @@ class SaringanController extends Controller
             ]);
             $status_rekod->save();
 
-            $permohonan = Permohonan::where('status', '2')
-            ->orWhere('status', '=','3')
-            ->orWhere('status', '=','4')
-            ->orWhere('status', '=','5')
-            ->orderBy('tarikh_hantar', 'DESC')
-            ->get();
-
+            //notifikasi
             $status_kod = 2;
             $status = "Permohonan ".$no_rujukan_permohonan." telah dikembalikan.";
             
             //filter
             $filters = $request->only(['institusi']); // Adjust the filter names as per your form
-
             $query = Permohonan::select('permohonan.*')
                 ->where(function ($query) {
                     $query->where('permohonan.status', '=', '2')
@@ -368,15 +357,27 @@ class SaringanController extends Controller
             ]);
             $status_rekod->save();
 
-            $permohonan = Permohonan::where('status', '2')
-                ->orWhere('status', '=','3')
-                ->orWhere('status', '=','4')
-                ->orWhere('status', '=','5')
-                ->orderBy('tarikh_hantar', 'DESC')
-                ->get();
-
+            //notifikasi
             $status_kod = 3;
             $status = "Permohonan ".$no_rujukan_permohonan." telah disokong.";
+
+            //filter table
+            $filters = $request->only(['institusi']); // Adjust the filter names as per your form
+            $query = Permohonan::select('permohonan.*')
+                ->where(function ($query) {
+                    $query->where('permohonan.status', '=', '2')
+                        ->orWhere('permohonan.status', '=', '3')
+                        ->orWhere('permohonan.status', '=', '4')
+                        ->orWhere('permohonan.status', '=', '5');
+                });
+
+            if (isset($filters['institusi'])) {
+                $selectedInstitusi = $filters['institusi'];
+                $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+                    ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+                    ->where('smoku_akademik.id_institusi', $selectedInstitusi);
+            }
+            $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
             $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
 
             return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusiPengajian','permohonan','status_kod','status'));
@@ -430,15 +431,27 @@ class SaringanController extends Controller
             ]);
             $status_rekod->save();
 
-            $permohonan = Permohonan::where('status', '2')
-                ->orWhere('status', '=','3')
-                ->orWhere('status', '=','4')
-                ->orWhere('status', '=','5')
-                ->orderBy('tarikh_hantar', 'DESC')
-                ->get();
-
+            //notifikasi
             $status_kod = 2;
             $status = "Permohonan ".$no_rujukan_permohonan." telah dikembalikan.";
+
+            //filter table
+            $filters = $request->only(['institusi']); // Adjust the filter names as per your form
+            $query = Permohonan::select('permohonan.*')
+                ->where(function ($query) {
+                    $query->where('permohonan.status', '=', '2')
+                        ->orWhere('permohonan.status', '=', '3')
+                        ->orWhere('permohonan.status', '=', '4')
+                        ->orWhere('permohonan.status', '=', '5');
+                });
+
+            if (isset($filters['institusi'])) {
+                $selectedInstitusi = $filters['institusi'];
+                $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+                    ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+                    ->where('smoku_akademik.id_institusi', $selectedInstitusi);
+            }
+            $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
             $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
 
             return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusiPengajian','permohonan','status_kod','status'));
