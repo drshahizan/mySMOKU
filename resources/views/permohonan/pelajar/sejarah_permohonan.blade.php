@@ -69,7 +69,9 @@
                                                 <th><b>ID Permohonan</b></th>
                                                 <th class="text-center"><b>Tarikh Permohonan</b></th>
                                                 <th class="text-center"><b>Peringkat Pengajian</b></th>
+                                                @if ($program->program == 'BKOKU')
                                                 <th class="text-center"><b>Amaun Yuran Dibayar</b></th>
+                                                @endif
                                                 <th class="text-center"><b>Amaun Wang Saku Dibayar</b></th>
                                                 <th class="text-center"><b>Tarikh Dibayar</b></th>
                                                 <th class="text-center"><b>Status Terkini</b></th>
@@ -106,7 +108,9 @@
                                                         <td>{{$item['no_rujukan_permohonan']}}</td>
                                                         <td class="text-center">{{$formattedDate}}</td>
                                                         <td class="text-center">{{ucwords(strtolower($peringkat))}}</td>
+                                                        @if ($program->program == 'BKOKU')
                                                         <td class="text-center">RM {{$item['yuran_dibayar']}}</td>
+                                                        @endif
                                                         <td class="text-center">RM {{$item['wang_saku_dibayar']}}</td>
                                                         <td class="text-center">{{\Carbon\Carbon::parse($item['tarikh_transaksi'])->format('d/m/Y')}}</td>
 
@@ -200,8 +204,10 @@
         </div>
     </div>
     <script>
-        $('#sortTable1').DataTable();
-        $('#sortTable2').DataTable();
+        $('#sortTable2').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [] // Disable initial sorting
+        });
     </script>
 
 <style>

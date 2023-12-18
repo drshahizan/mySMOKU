@@ -609,7 +609,10 @@ class PermohonanController extends Controller
     public function sejarahPermohonan()
     {
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
-        
+        $program = Permohonan::orderBy('id', 'desc')
+            ->where('smoku_id', $smoku_id->id)
+            ->first();
+
         $permohonan = Permohonan::orderBy('id', 'desc')
             ->where('smoku_id', $smoku_id->id)
             ->get();
@@ -618,7 +621,7 @@ class PermohonanController extends Controller
         $institusi = InfoIpt::where('id_institusi', $akademik->id_institusi)->first();    
 
         if ($permohonan) {
-            return view('permohonan.pelajar.sejarah_permohonan', compact('permohonan','institusi'));
+            return view('permohonan.pelajar.sejarah_permohonan', compact('permohonan','institusi','program'));
         } else {
             return redirect()->route('pelajar.dashboard')->with('permohonan', 'Tiada permohonan lama.');
         }

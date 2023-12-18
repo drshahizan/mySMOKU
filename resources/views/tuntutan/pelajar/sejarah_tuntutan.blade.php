@@ -73,7 +73,7 @@
                                                 <th class="text-center"><b>Amaun Wang Saku Dibayar</b></th>
                                                 <th class="text-center"><b>Tarikh Dibayar</b></th>
                                                 <th class="text-center"><b>Status Terkini</b></th>
-                                                @if ($institusi->jenis_institusi != 'UA')
+                                                @if ($institusi->jenis_institusi == 'IPTS')
                                                 <th class="text-center"><b>Tindakan</b></th>
                                                 @endif
                                             </tr>
@@ -123,7 +123,7 @@
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
 
-                                                        @if ($institusi->jenis_institusi != 'UA')
+                                                        @if ($institusi->jenis_institusi == 'IPTS')
                                                             @if ($item['status']=='1')
                                                             <td class="text-center">
                                                                 <a href="{{ route('tuntutan.baharu') }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
