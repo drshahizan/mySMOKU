@@ -87,7 +87,7 @@
                                             <div class="col-md-4">
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiPengajian as $institusi)
+                                                    @foreach ($institusiBKOKU as $institusi)
                                                         <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
                                                     @endforeach
                                                 </select>
@@ -266,7 +266,7 @@
                                             <div class="col-md-4">
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiPengajian as $institusi)
+                                                    @foreach ($institusiUA as $institusi)
                                                         <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
                                                     @endforeach
                                                 </select>
@@ -445,7 +445,7 @@
                                             <div class="col-md-4">
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiPengajian as $institusi)
+                                                    @foreach ($institusiPPK as $institusi)
                                                         <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
                                                     @endforeach
                                                 </select>
