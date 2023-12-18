@@ -91,27 +91,27 @@
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br>
+                                    <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <select name="institusi" class="form-select js-example-basic-single">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                    @foreach ($institusiBKOKU as $institusi)
+                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-3" style="margin-right:150px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
                                     <div class="body">
                                         <div class="table-responsive">
-                                            <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <select name="institusi" class="form-select js-example-basic-single">
-                                                            <option value="">Pilih Institusi Pengajian</option>
-                                                            @foreach ($institusiBKOKU as $institusi)
-                                                                <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-md-3" style="margin-right:150px;">
-                                                        <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
-                                                            <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            
                                             <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                                 <thead>
                                                     <tr>
@@ -250,27 +250,27 @@
                                 {{-- BKOKU UA --}}
                                 <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <br>
+                                    <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <select name="institusi" class="form-select js-example-basic-single">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                    @foreach ($institusiUA as $institusi)
+                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-3" style="margin-right:150px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
                                     <div class="body">
                                         <div class="table-responsive">
-                                            <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <select name="institusi" class="form-select js-example-basic-single">
-                                                            <option value="">Pilih Institusi Pengajian</option>
-                                                            @foreach ($institusiUA as $institusi)
-                                                                <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-md-3" style="margin-right:150px;">
-                                                        <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
-                                                            <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-
                                             <table id="sortTable1a" class="table table-striped table-hover dataTable js-exportable">
                                                 <thead>
                                                     <tr>
@@ -409,27 +409,27 @@
                                 {{-- PPK --}}
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <br>
+                                    <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <select name="institusi" class="form-select js-example-basic-single">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                    @foreach ($institusiPPK as $institusi)
+                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-3" style="margin-right:150px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
+                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    
                                     <div class="body">
                                         <div class="table-responsive">
-                                            <form action="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" method="GET">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <select name="institusi" class="form-select js-example-basic-single">
-                                                            <option value="">Pilih Institusi Pengajian</option>
-                                                            @foreach ($institusiPPK as $institusi)
-                                                                <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-md-3" style="margin-right:150px;">
-                                                        <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
-                                                            <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-
                                             <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                                 <thead>
                                                     <tr>

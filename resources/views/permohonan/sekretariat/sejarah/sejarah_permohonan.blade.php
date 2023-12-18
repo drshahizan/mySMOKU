@@ -76,7 +76,7 @@
                                 <br>
                                 <form action="{{ url('permohonan/sekretariat/sejarah/sejarah-permohonan') }}" method="GET">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-4" style="padding-left: 20px;">
                                             <select name="institusi" class="form-select js-example-basic-single">
                                                 <option value="">Pilih Institusi Pengajian</option>
                                                 @foreach ($institusiBKOKU as $institusi)
@@ -206,7 +206,7 @@
                                 <br>
                                 <form action="{{ url('permohonan/sekretariat/sejarah/sejarah-permohonan') }}" method="GET">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-4" style="padding-left: 20px;">
                                             <select name="institusi" class="form-select js-example-basic-single">
                                                 <option value="">Pilih Institusi Pengajian</option>
                                                 @foreach ($institusiBKOKU as $institusi)
@@ -336,7 +336,7 @@
                                 <br>
                                 <form action="{{ url('permohonan/sekretariat/sejarah/sejarah-permohonan') }}" method="GET">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-4" style="padding-left: 20px;">
                                             <select name="institusi" class="form-select js-example-basic-single">
                                                 <option value="">Pilih Institusi Pengajian</option>
                                                 @foreach ($institusiBKOKU as $institusi)
