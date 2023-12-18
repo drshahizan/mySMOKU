@@ -48,7 +48,7 @@ class SaringanController extends Controller
         }
 
         $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
-        $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+        $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
 
         return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('institusi','permohonan','status_kod','status'));
     }
