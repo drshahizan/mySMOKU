@@ -182,12 +182,6 @@ var KTSigninGeneral = function () {
                                     customClass: {
                                         confirmButton: "btn btn-primary"
                                     }
-                                }).then((result) => {
-                                    // Check if the user clicked the "Ok" button
-                                    if (result.isConfirmed) {
-                                        // Reload the page
-                                        location.reload();
-                                    }
                                 });
                             }
                             
