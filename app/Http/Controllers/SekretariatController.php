@@ -630,13 +630,15 @@ class SekretariatController extends Controller
                     ->select('permohonan_kelulusan.*')
                     ->get();
 
-        $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+        $institusiBKOKU = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get(); 
 
         // Pop up notification
         $id_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
         $notifikasi = "Emel notifikasi telah dihantar kepada " . $id_permohonan;
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan', 'notifikasi', 'kelulusan','institusiPengajian'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan', 'notifikasi', 'kelulusan','institusiBKOKU','institusiUA','institusiPPK'));
     }
 
     public function hantarSemuaKeputusanPermohonan(Request $request)
@@ -790,13 +792,15 @@ class SekretariatController extends Controller
                     ->select('permohonan_kelulusan.*')
                     ->get();
 
-        $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+        $institusiBKOKU = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get(); 
 
         // Pop up notification
         $keputusan = $request->get('keputusan');
         $notifikasi = "Emel notifikasi telah dihantar kepada semua pemohon.";
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan','institusiPengajian'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan','institusiBKOKU','institusiUA','institusiPPK'));
     }
 
     public function senaraiKeputusanPermohonan(Request $request)
@@ -820,11 +824,13 @@ class SekretariatController extends Controller
                     ->select('permohonan_kelulusan.*')
                     ->get();
 
-        $institusiPengajian = InfoIpt::orderBy('nama_institusi', 'asc')->get();
+        $institusiBKOKU = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get(); 
 
         $notifikasi = null;
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi','institusiPengajian'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi','institusiBKOKU','institusiUA','institusiPPK'));
     }
 
     public function cetakKeputusanPermohonanBKOKU()

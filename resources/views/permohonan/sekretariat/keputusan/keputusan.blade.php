@@ -120,7 +120,7 @@
                                                 <label for="end_date">Institusi Pengajian:</label>
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiPengajian as $institusi)
+                                                    @foreach ($institusiBKOKU as $institusi)
                                                         <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
                                                     @endforeach
                                                 </select>
@@ -128,8 +128,8 @@
                                     
                                             <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 20%; padding-left: 12px;">
-                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                <button type="submit" class="btn btn-primary" style="width: 20%;">
+                                                    <i class="fa fa-filter" style="font-size: 15px; padding-left: 10px;"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -225,7 +225,7 @@
                                                                     <td class="text-center">
                                                                         @if($item->keputusan == "Lulus")
                                                                             <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
-                                                                                <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
+                                                                                <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:7px;"></i> Layak
                                                                             </a>
                                                                         @elseif($item->keputusan == "Tidak Lulus")
                                                                             <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
@@ -269,7 +269,7 @@
                                                 <label for="end_date">Institusi Pengajian:</label>
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiPengajian as $institusi)
+                                                    @foreach ($institusiUA as $institusi)
                                                         <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
                                                     @endforeach
                                                 </select>
@@ -277,8 +277,8 @@
                                     
                                             <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 20%; padding-left: 12px;">
-                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                <button type="submit" class="btn btn-primary" style="width: 20%;">
+                                                    <i class="fa fa-filter" style="font-size: 15px; padding-left: 10px;"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -368,7 +368,7 @@
                                                                     <td class="text-center" style="width: 10%">
                                                                         @if($item->keputusan == "Lulus")
                                                                             <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
-                                                                                <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
+                                                                                <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:7px;"></i> Layak
                                                                             </a>
                                                                         @elseif($item->keputusan == "Tidak Lulus")
                                                                             <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
@@ -412,7 +412,7 @@
                                                 <label for="end_date">Institusi Pengajian:</label>
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiPengajian as $institusi)
+                                                    @foreach ($institusiPPK as $institusi)
                                                         <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
                                                     @endforeach
                                                 </select>
@@ -420,8 +420,8 @@
                                     
                                             <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 20%; padding-left: 12px;">
-                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
+                                                <button type="submit" class="btn btn-primary" style="width: 20%;">
+                                                    <i class="fa fa-filter" style="font-size: 15px; padding-left: 10px;"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -504,7 +504,7 @@
                                                                 <td class="text-center" style="width: 10%">
                                                                     @if($item->keputusan == "Lulus")
                                                                         <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
-                                                                            <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:5px;"></i> Layak
+                                                                            <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:7px;"></i> Layak
                                                                         </a>
                                                                     @elseif($item->keputusan == "Tidak Lulus")
                                                                         <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
