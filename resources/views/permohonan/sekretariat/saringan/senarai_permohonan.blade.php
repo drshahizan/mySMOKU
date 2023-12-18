@@ -434,8 +434,8 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" style="width: 12%"><b>ID Permohonan</b></th>
-                                                        <th class="text-center" style="width: 30%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 18%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 25%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 23%"><b>Institusi Pengajian</b></th>
                                                         <th class="text-center" style="width: 17%"><b>Tarikh Permohonan</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Status Saringan</b></th>
                                                         <th class="text-center" style="width: 13%!important;"><b>Disaring Oleh</b></th>

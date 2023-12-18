@@ -504,9 +504,33 @@ class SaringanController extends Controller
         return view('permohonan.sekretariat.saringan.papar_tuntutan',compact('permohonan','akademik','smoku','sejarah_p','j_tuntutan'));
     }
 
-    public function sejarahPermohonan(){
+    public function sejarahPermohonan(Request $request)
+    {
         $permohonan = Permohonan::orderBy('tarikh_hantar', 'DESC')->get();
-        return view('permohonan.sekretariat.sejarah.sejarah_permohonan',compact('permohonan'));
+
+        //filter table
+        $filters = $request->only(['institusi']); // Adjust the filter names as per your form
+        $query = Permohonan::select('permohonan.*')
+            ->where(function ($query) {
+                $query->where('permohonan.status', '=', '2')
+                    ->orWhere('permohonan.status', '=', '3')
+                    ->orWhere('permohonan.status', '=', '4')
+                    ->orWhere('permohonan.status', '=', '5');
+            });
+
+        if (isset($filters['institusi'])) {
+            $selectedInstitusi = $filters['institusi'];
+            $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
+        }
+        $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
+
+        $institusiBKOKU = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get(); 
+
+        return view('permohonan.sekretariat.sejarah.sejarah_permohonan',compact('permohonan','institusiBKOKU','institusiUA','institusiPPK'));
     }
 
     public function rekodPermohonan($id){
