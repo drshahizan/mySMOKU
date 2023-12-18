@@ -69,7 +69,7 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Keputusan Permohonan<br><small>Sila gunakan fungsi filter untuk menapis data yang ingin dipaparkan sahaja.</small></h2>
+                                <h2>Senarai Keputusan Permohonan<br><small>Surat tawaran bagi permohonan berstatus layak boleh dimuat turun dengan klik pada kotak "Layak".</small></h2>
                                 <ul class="header-dropdown dropdown" style="color: black;">
                                     <li><a href="{{ route('senarai.keputusan.BKOKU.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> BKOKU</a></li>
                                     <li><a href="{{ route('senarai.keputusan.BKOKU.UA.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> BKOKU UA</a></li>

@@ -62,7 +62,7 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Permohonan untuk Kelulusan JKKBKOKU<br><small>Klik ID Permohonan untuk meluluskan permohonan</small></h2>
+                                <h2>Senarai Permohonan untuk Kelulusan JKKBKOKU<br><small>Klik ID Permohonan untuk meluluskan permohonan pelajar tersebut.</small></h2>
                             </div>
 
                             {{-- top nav bar --}}
