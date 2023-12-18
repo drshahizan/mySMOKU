@@ -506,8 +506,12 @@ var KTCreateAccount = function () {
 							file: {
 								extension: 'jpeg,jpg,png,pdf',
 								type: 'image/jpeg,image/png,application/pdf',
-								maxSize: 2048, // 2048 * 1024
-								message: 'Fail yang dipilih tidak sah',
+								maxSize: 2048,
+								message: {
+									extension: 'Format fail tidak sah',
+									type: 'Format fail tidak sah',
+									maxSize: 'Saiz file yang dipilih telah melebihi saiz maksima',
+								},
 							},
 						}
 					},
@@ -520,8 +524,12 @@ var KTCreateAccount = function () {
 							file: {
 								extension: 'jpeg,jpg,png,pdf',
 								type: 'image/jpeg,image/png,application/pdf',
-								maxSize: 2048, // 2048 * 1024
-								message: 'Fail yang dipilih tidak sah',
+								maxSize: 2048,
+								message: {
+									extension: 'Format fail tidak sah',
+									type: 'Format fail tidak sah',
+									maxSize: 'Saiz file yang dipilih telah melebihi saiz maksima',
+								},
 							},
 						}
 					},
@@ -534,8 +542,12 @@ var KTCreateAccount = function () {
 							file: {
 								extension: 'jpeg,jpg,png,pdf',
 								type: 'image/jpeg,image/png,application/pdf',
-								maxSize: 2048, // 2048 * 1024
-								message: 'Fail yang dipilih tidak sah',
+								maxSize: 2048,
+								message: {
+									extension: 'Format fail tidak sah',
+									type: 'Format fail tidak sah',
+									maxSize: 'Saiz file yang dipilih telah melebihi saiz maksima',
+								},
 							},
 						}
 					}
