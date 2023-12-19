@@ -44,7 +44,7 @@
 				<!--begin::Card body-->
 				<div class="card-body pt-0">	
 					<!--begin::Form-->
-					<form class="form" id="iklan" action="{{ route('simpan.tarikh') }}" method="post">
+					<form class="form" id="iklan" onsubmit="return validateForm()" action="{{ route('simpan.tarikh') }}" method="post">
 						@csrf
 						
 						<div class="row mb-10">
@@ -111,7 +111,7 @@
 								<span class="indicator-progress">Sila tunggu...
 								<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 							</button> --}}
-							<button type="button" onclick="validateForm()" class="btn btn-primary">
+							<button type="submit" class="btn btn-primary">
 								<span class="indicator-label">Simpan</span>
 								<span class="indicator-progress">Sila tunggu...
 								<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -179,10 +179,11 @@
 		if (editorContent.trim().length === 0) {
 			alert('Masukkan maklumat iklan.');
 		} 
-		// else {
-		// 	// Form is valid, you can proceed with further actions
-		// 	alert('Iklan telah dikemaskini.');
-		// }
+		else {
+			// Form is valid, you can proceed with further actions
+			// alert('Iklan telah dikemaskini.');
+			return true; // Allow form submission
+		}
 	}
 </script>
 
