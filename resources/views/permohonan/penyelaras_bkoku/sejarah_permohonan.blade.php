@@ -71,13 +71,11 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @php
-                                                $i=0;
-                                            @endphp
+                                            
                                             @foreach ($permohonan as $item)
                                                 @if ($item['program']=="BKOKU")
                                                     @php
-                                                        $i++;
+                                                        
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
@@ -104,6 +102,8 @@
                                                         $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
 								                        $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
 
+                                                        // dd($item['id']);
+
                                                     @endphp
                                                     <tr>
                                                         <td>
@@ -120,7 +120,48 @@
                                                         @elseif ($item['status']=='4')
                                                             <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='5')
-                                                            <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        <td class="text-center"><button class="btn bg-dikembalikan text-white" data-bs-toggle="modal" data-bs-target="#dikembalikan{{$item['id']}}">
+                                                            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Papar sebab dikembalikan">
+                                                            {{ucwords(strtolower($status))}}</span>
+                                                        </button></td>
+                                                        {{-- Modal --}}
+                                                        <div class="modal fade" id="dikembalikan{{$item['id']}}" tabindex="-1" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Permohonan anda tidak lengkap disebabkan oleh perkara berikut:</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+
+                                                                    <div class="modal-body">
+                                                                        @php
+                                                                            $catatan = DB::table('permohonan_saringan')->orderBy('id', 'desc')
+                                                                            ->where('permohonan_id', $item['id'])
+                                                                            ->first();
+                                                                            // dd($item['id']);
+                                                                            function generateOrderedList($str) {
+                                                                                $strArr = explode(",", $str);
+                                                                                for ($i = 0; $i < count($strArr) - 1; $i++) {
+                                                                                    echo "<li>" . $strArr[$i] . "</li>";
+                                                                                }
+                                                                            }
+                                                                        @endphp
+
+                                                                        <ol type="1">
+                                                                            @php generateOrderedList($catatan->catatan_profil_diri); @endphp
+                                                                            @php generateOrderedList($catatan->catatan_akademik); @endphp
+                                                                            @php generateOrderedList($catatan->catatan_salinan_dokumen); @endphp
+                                                                        </ol>
+
+
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+                                                            </div>
+                                                        </div> 
+                                                        {{-- Modal --}}
                                                         @elseif ($item['status']=='6')
                                                             <td class="text-center">
                                                                 <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
@@ -139,6 +180,7 @@
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
 
+                                                         
                                                         @if ($item['status']=='1')
                                                             <td class="text-center">
                                                                 <a href="{{ route('penyelaras.permohonan.baharu', $item['smoku_id']) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini permohonan ini?')">
@@ -181,11 +223,18 @@
 
                                                         @endif
 
+                                                       
+
+
                                                     </tr>
+                                                   
                                                 @endif
+
+                                               
                                             @endforeach
                                             </tbody>
                                         </table>
+                                       
                                     </div>
                                 </div>
                             </div>
