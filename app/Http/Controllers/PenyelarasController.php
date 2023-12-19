@@ -654,8 +654,17 @@ class PenyelarasController extends Controller
         // dd($cc_pelajar);
 
         //emel kepada sekretariat
-        $user_sekretariat = User::where('tahap',3)->first();
-        $cc = $user_sekretariat->email;
+        // $user_sekretariat = User::where('tahap',3)->first();
+        // $cc = $user_sekretariat->email;
+        //emel kepada sekretariat -ada ramai sekretariat
+        $user_sekretariat = User::where('tahap',3)->get();
+        $cc = $user_sekretariat->pluck('email')->toArray();
+        $invalidEmails = [];
+        foreach ($cc as $email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $invalidEmails[] = $email;
+            }
+        }
 
         //emel kepada penyelaras
         $user = User::where('no_kp',Auth::user()->no_kp)->first();
@@ -663,9 +672,14 @@ class PenyelarasController extends Controller
         $catatan = "testing";
         $emel = EmelKemaskini::where('emel_id',13)->first();
         //dd($cc,$user->email);
-
-        Mail::to($user->email)->cc([$cc, $cc_pelajar])->send(new PermohonanHantar($catatan,$emel));    
-
+        if (empty($invalidEmails)) {
+            Mail::to($user->email)->cc([$cc, $cc_pelajar])->send(new PermohonanHantar($catatan,$emel));    
+        } else {
+            // dd('sini kee');
+            foreach ($invalidEmails as $invalidEmail) {
+                Log::error('Invalid email address: ' . $invalidEmail);
+            }
+        }
         //CREATE USER ID TERUS UNTUK PELAJAR
         $user = User::where('no_kp', '=', $smoku_id->no_kp)->first();
         $characters = 'abcdefghijklmn123456789!@#$%^&';
