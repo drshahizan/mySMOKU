@@ -102,7 +102,7 @@
                                             </div>
                                             
                                             <div class="col-md-1" style="text-align: center;">
-                                                <span style="display: inline-block; width: 10px;">-</span>
+                                                <span style="border-bottom: 1px solid #000; display: inline-block; width: 20px;"></span>
                                             </div>
                                             
                                             <div class="col-md-2">
@@ -110,16 +110,16 @@
                                             </div>
                                     
                                             <div class="col-md-2">
-                                                <label for="end_date">Pilih Keputusan:</label>
+                                                {{-- <label for="end_date">Pilih Keputusan:</label> --}}
                                                 <select name="status" class="form-select">
-                                                    <option value="">Semua Keputusan</option>
+                                                    <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
                                                     <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label for="end_date">Institusi Pengajian:</label>
+                                                {{-- <label for="end_date">Institusi Pengajian:</label> --}}
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiBKOKU as $institusi)
