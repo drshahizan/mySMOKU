@@ -18,6 +18,10 @@
             .nav{
                 margin-left: 20px!important;
             }
+            .custom-width-btn {
+                width: 130px; 
+                height: 30px;
+            }
         </style>
     </head>
 
@@ -473,13 +477,9 @@
             ordering: true, // Enable manual sorting
             order: [] // Disable initial sorting
         });
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
     </script>
-    <style>
-        .custom-width-btn {
-            width: 130px; 
-            height: 30px;
-        }
-    </style>
-
     </body>
 </x-default-layout>
