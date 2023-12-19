@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class KemaskiniController extends Controller
 {
     public function senaraiJumlahPeruntukan(){
-        $peruntukan = JumlahPeruntukan::orderBy('updated_at','desc');
+        $peruntukan = JumlahPeruntukan::orderBy('updated_at','desc')->get();
         return view('kemaskini.sekretariat.peruntukan.kemaskini_peruntukan', compact('peruntukan'));
     }
 

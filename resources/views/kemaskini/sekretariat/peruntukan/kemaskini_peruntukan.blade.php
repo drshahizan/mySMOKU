@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="/assets/css/saringan.css">
         <!-- Javascript -->
         <script src="https://cdn.tiny.cloud/1/v736541al0ntzh14edk63z19dzyqs1xn2bkc5em78rv1yeis/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
 
     <!--begin::Page title-->
@@ -110,11 +111,10 @@
                                 <tbody class="fw-semibold text-gray-600">
                                     @foreach ($peruntukan as $item)
                                         <tr>
-                                            <td>{{ date('d/m/Y', strtotime($item->tarikh_mula))}}</td>
-                                            <td>{{ date('d/m/Y', strtotime($item->tarikh_tamat))}}</td>
-                                            <td>RM {{ $item->jumlah}}</td>
-                                            <td>{{ $item->updated_at->format('d/m/Y')}}</td>
-            
+                                            <td>{{ date('d/m/Y', strtotime($item->tarikh_mula)) }}</td>
+                                            <td>{{ date('d/m/Y', strtotime($item->tarikh_tamat)) }}</td>
+                                            <td>RM {{ number_format($item->jumlah, 2) }}</td>
+                                            <td>{{ $item->updated_at->format('d/m/Y') }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -132,28 +132,23 @@
         <!--end::Content-->  
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#myTable tbody tr').on('dblclick', function () {
-                // Handle double-click event here
-                var rowData = $(this).find('td'); // Get the data from the clicked row
+                var rowData = $(this).find('td');
 
-                // Extract data for the Program and Jenis fields (adjust column indices as needed)
-                var mulaValue = $(rowData[0]).text(); // Assuming Program data is in the first column
-                var tamatValue = $(rowData[1]).text(); // Assuming Jenis data is in the second column
-                var jumlahValue = $(rowData[2]).text().replace('RM ', ''); // Assuming Jenis data is in the second column
-                
+                var mulaValue = $(rowData[0]).text();
+                var tamatValue = $(rowData[1]).text();
+                var jumlahValue = $(rowData[2]).text().replace('RM ', '');
 
-                // Set the selected options in the <select> elements
                 $('#tarikh_mula').val(mulaValue);
                 $('#tarikh_tamat').val(tamatValue);
                 $('#jumlah').val(jumlahValue);
 
                 $('#tarikh_mula').trigger('change');
-                $('#jenis').trigger('change');
+                $('#tarikh_tamat').trigger('change');
                 $('#jumlah').trigger('change');
-                // Show the form
+
                 $('#dataForm').show();
             });
         });
