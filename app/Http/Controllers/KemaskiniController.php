@@ -3,13 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Models\EmelKemaskini;
+use App\Models\JumlahPeruntukan;
 use App\Models\Permohonan;
 use Illuminate\Http\Request;
 
 class KemaskiniController extends Controller
 {
-    public function kemaskiniPeruntukan(){
-        return view('kemaskini.sekretariat.peruntukan.kemaskini_peruntukan');
+    public function senaraiJumlahPeruntukan(){
+        $peruntukan = JumlahPeruntukan::orderBy('updated_at','desc');
+        return view('kemaskini.sekretariat.peruntukan.kemaskini_peruntukan', compact('peruntukan'));
+    }
+
+    public function kemaskiniJumlahPeruntukan(Request $request){
+
+        $peruntukan = JumlahPeruntukan::where('tarikh_mula', $request->tarikh_mula)
+        ->where('tarikh_tamat', $request->tarikh_tamat)
+        ->where('jumlah', $request->jumlah)
+        ->first();
+
+        if ($peruntukan === null) {
+            $peruntukan = JumlahPeruntukan::create([
+                'tarikh_mula' => $request->tarikh_mula,
+                'tarikh_tamat' => $request->tarikh_tamat,
+                'jumlah' => $request->jumlah,
+            ]);
+        } 
+        else {
+            $peruntukan->update([
+                'tarikh_mula' => $request->tarikh_mula,
+                'tarikh_tamat' => $request->tarikh_tamat,
+                'jumlah' => $request->jumlah,
+            ]);
+        }
+        return redirect()->route('senarai.amaun.peruntukan');
     }
 
     public function senaraiEmel(){

@@ -2,7 +2,6 @@
     <head>
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="/assets/css/saringan.css">
-
         <!-- Javascript -->
         <script src="https://cdn.tiny.cloud/1/v736541al0ntzh14edk63z19dzyqs1xn2bkc5em78rv1yeis/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     </head>
@@ -39,26 +38,10 @@
             <div id="kt_app_content_container" class="app-container container-xxl">
                 <!--begin::Card-->
                 <div class="card">
-                    <!--begin::Card header-->
-                    <div class="card-header border-0 pt-6">
-                        <!--begin::Card title-->
-                        <div class="card-title">
-                            <!--begin::Search-->
-                            <div class="d-flex align-items-center position-relative my-1">
-                                <i>
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                            </div>
-                            <!--end::Search-->
-                        </div>
-                        <!--begin::Card title-->
-                    </div>
-                    <!--end::Card header-->
                     <!--begin::Card body-->
-                    <div class="card-body pt-0">	
+                    <div class="card-body pt-10">	
                         <!--begin::Form-->
-                        <form id="dataForm" class="form" action="#" method="POST">
+                        <form id="dataForm" class="form" action="{{url('kemaskini/sekretariat/kemaskini/jumlah-peruntukan')}}" method="POST">
                             @csrf
                             <div class="row mb-10">
                                 <!--begin::Input group-->
@@ -86,20 +69,19 @@
                                 <!--begin::Input group-->
                                 <div class="col-md-4 fv-row">
                                     <!--begin::Label-->
-                                    <label class="fs-4 fw-semibold mb-2">Jumlah</label>
+                                    <label class="fs-4 fw-semibold mb-2">Jumlah (RM)</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="jumlah" id="jumlah" value="" required oninvalid="this.setCustomValidity('Masukkan jumlah peruntukan.')" oninput="setCustomValidity('')"/>
+                                    <input type="number" class="form-control form-control-solid" name="jumlah" id="jumlah" placeholder="Jumlah Peruntukan" value="" required step="0.01" oninvalid="this.setCustomValidity('Masukkan jumlah peruntukan.')" oninput="setCustomValidity('')"/>
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
                             </div>
                             
-                            <br>
                             <!--begin::action-->
                             <div class="modal-footer flex-center">
                                 <!--begin::Button-->
-                                <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
+                                <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary btn-sm">
                                     <span class="indicator-label">Simpan</span>
                                     <span class="indicator-progress">Sila tunggu...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -113,30 +95,28 @@
                     <!--end::Card body-->
 
                     <!--begin::Card body-->
-                    <div class="card-body pt-0">
+                    <div class="card-body pt-10">
                         <!--begin::Table-->
                         <div class="table-responsive">
                             <table class="table align-center table-row-dashed fs-6 gy-5" id="myTable">
                                 <thead>
                                     <tr class="text-start align-center text-gray-400 fw-bold fs-7 gs-0">
-                                        <th class="min-w-125px align-center">Program</th>
-                                        <th class="min-w-125px align-center">Jenis</th>
-                                        <th class="min-w-125px align-center">Semester</th>
+                                        <th class="min-w-125px align-center">Tarikh Mula</th>
+                                        <th class="min-w-125px align-center">Tarikh Tamat</th>
                                         <th class="min-w-125px align-center">Jumlah</th>
                                         <th class="min-w-125px align-center">Tarikh Kemaskini</th>
                                     </tr>
                                 </thead>
                                 <tbody class="fw-semibold text-gray-600">
-                                    {{-- @foreach ($jumlah as $jumlah)
-                                    <tr>
-                                        <td>{{ $jumlah->program}}</td>
-                                        <td>{{ $jumlah->jenis}}</td>
-                                        <td>{{ $jumlah->semester}}</td>
-                                        <td>RM {{ $jumlah->jumlah}}</td>
-                                        <td>{{ $jumlah->updated_at->format('d/m/Y')}}</td>
-        
-                                    </tr>
-                                    @endforeach --}}
+                                    @foreach ($peruntukan as $item)
+                                        <tr>
+                                            <td>{{ date('d/m/Y', strtotime($item->tarikh_mula))}}</td>
+                                            <td>{{ date('d/m/Y', strtotime($item->tarikh_tamat))}}</td>
+                                            <td>RM {{ $item->jumlah}}</td>
+                                            <td>{{ $item->updated_at->format('d/m/Y')}}</td>
+            
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -151,4 +131,31 @@
         </div>
         <!--end::Content-->  
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable tbody tr').on('dblclick', function () {
+                // Handle double-click event here
+                var rowData = $(this).find('td'); // Get the data from the clicked row
+
+                // Extract data for the Program and Jenis fields (adjust column indices as needed)
+                var mulaValue = $(rowData[0]).text(); // Assuming Program data is in the first column
+                var tamatValue = $(rowData[1]).text(); // Assuming Jenis data is in the second column
+                var jumlahValue = $(rowData[2]).text().replace('RM ', ''); // Assuming Jenis data is in the second column
+                
+
+                // Set the selected options in the <select> elements
+                $('#tarikh_mula').val(mulaValue);
+                $('#tarikh_tamat').val(tamatValue);
+                $('#jumlah').val(jumlahValue);
+
+                $('#tarikh_mula').trigger('change');
+                $('#jenis').trigger('change');
+                $('#jumlah').trigger('change');
+                // Show the form
+                $('#dataForm').show();
+            });
+        });
+    </script>
 </x-default-layout>
