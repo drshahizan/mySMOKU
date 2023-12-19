@@ -44,7 +44,7 @@
 				<!--begin::Card body-->
 				<div class="card-body pt-0">	
 					<!--begin::Form-->
-					<form class="form" action="{{ route('simpan.tarikh') }}" method="post">
+					<form class="form" id="iklan" action="{{ route('simpan.tarikh') }}" method="post">
 						@csrf
 						
 						<div class="row mb-10">
@@ -106,7 +106,12 @@
 						<!--begin::action-->
 						<div class="modal-footer flex-center">
 							<!--begin::Button-->
-							<button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
+							{{-- <button type="submit" onclick="validateForm()" id="kt_modal_add_customer_submit" class="btn btn-primary">
+								<span class="indicator-label">Simpan</span>
+								<span class="indicator-progress">Sila tunggu...
+								<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+							</button> --}}
+							<button type="button" onclick="validateForm()" class="btn btn-primary">
 								<span class="indicator-label">Simpan</span>
 								<span class="indicator-progress">Sila tunggu...
 								<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -155,15 +160,30 @@
 
 <!--begin::Javascript-->
 <script>
+	// Initialize TinyMCE
 	tinymce.init({
-	  selector: '#catatan', // Replace with the ID or class of your textarea
-	  plugins: 'autolink lists link image charmap print preview',
-	  toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-	  height: 300 // Set the height of the editor
+		selector: '#catatan',
+		plugins: 'autolink lists link image charmap print preview',
+		toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+		height: 300,
+		setup: function (editor) {
+			// You can perform additional setup here if needed
+		}
 	});
 
-	var editorContent = tinymce.get('catatan').getContent();
+	function validateForm() {
+		// Get the content of TinyMCE editor
+		var editorContent = tinymce.get('catatan').getContent();
 
+		// Check if the content is not empty
+		if (editorContent.trim().length === 0) {
+			alert('Masukkan maklumat iklan.');
+		} 
+		// else {
+		// 	// Form is valid, you can proceed with further actions
+		// 	alert('Iklan telah dikemaskini.');
+		// }
+	}
 </script>
 
 <!--end::Javascript-->
