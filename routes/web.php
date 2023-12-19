@@ -136,6 +136,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-layak', [KemaskiniController::class, 'kemaskiniLayakPPK']);
     Route::get('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-dikembalikan', [KemaskiniController::class, 'kemaskiniDikembalikanPPK']);
 
+    //Kemaskini - Sekretariat - Peruntukan
+    Route::get('kemaskini/sekretariat/jumlah-peruntukan', [KemaskiniController::class, 'kemaskiniPeruntukan']);
+
     //Permohonan - Sekretariat - Saringan
     Route::get('permohonan/sekretariat/saringan/senarai-permohonan', [SaringanController::class, 'senaraiPermohonan']);
     Route::get('permohonan/sekretariat/saringan/maklumat-permohonan/{id}', [SaringanController::class, 'maklumatPermohonan'])->name('maklumat.permohonan.id');

@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class KemaskiniController extends Controller
 {
+    public function kemaskiniPeruntukan(){
+        return view('kemaskini.sekretariat.peruntukan.kemaskini_peruntukan');
+    }
+
     public function senaraiEmel(){
         return view('kemaskini.sekretariat.emel.senarai_emel');
     }
