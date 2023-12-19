@@ -1497,13 +1497,14 @@ class PenyelarasController extends Controller
 
         // Determine the validation rules for the 'penyata' file input
         $rules = [
-            'penyata' => $bankExist ? 'file|mimes:pdf,png' : 'required|file|mimes:pdf,png',
+            'penyata' => $bankExist ? 'file|mimes:pdf,png|max:2048' : 'required|file|mimes:pdf,png|max:2048',
         ];
 
         $messages = [
             'penyata.required' => 'Sila pilih penyata bank.',
             'penyata.file' => 'Fail yang boleh dimuat naik mestilah format PDF atau PNG.',
             'penyata.mimes' => 'Fail yang boleh dimuat naik mestilah format PDF atau PNG.',
+            'penyata.max' => 'Saiz fail tidak boleh melebihi 2 MB / 2048 KB.',
         ];
 
         // Validate the request
