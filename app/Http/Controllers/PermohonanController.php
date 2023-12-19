@@ -65,6 +65,7 @@ class PermohonanController extends Controller
         $keturunan = Keturunan::all()->sortBy('id');
         $biaya = SumberBiaya::all()->sortBy('kod_biaya');
         $penaja = Penaja::all()->sortBy('kod_penaja');
+        $penajaArray = $penaja->toArray();
         $hubungan = Hubungan::all()->sortBy('kod_hubungan');
         $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri')->get();
         $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
@@ -131,22 +132,22 @@ class PermohonanController extends Controller
                     //dd($butiranPelajar);
     
                     $dokumen = Dokumen::where('permohonan_id', $permohonan_baru->id)->get();
-                    return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan','parlimen','dun','keturunan','agama'));
+                    return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','penajaArray','dokumen','permohonan','parlimen','dun','keturunan','agama'));
     
                 }else{
                      //dd('sini');
-                     return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','hubungan','negeri','parlimen','dun','keturunan','agama','bandar'));
+                     return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','penajaArray','hubungan','negeri','parlimen','dun','keturunan','agama','bandar'));
                 }
    
             }
 
 
             $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
-            return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','agama','institusi','peringkat','mod','biaya','penaja','dokumen','permohonan','parlimen','dun','keturunan'));
+            return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','agama','institusi','peringkat','mod','biaya','penaja','penajaArray','dokumen','permohonan','parlimen','dun','keturunan'));
             
         }else {
 
-            return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','mod','biaya','penaja','hubungan','negeri','bandar','agama','parlimen','dun','keturunan'));
+            return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','mod','biaya','penaja','penajaArray','hubungan','negeri','bandar','agama','parlimen','dun','keturunan'));
 
         }
 
