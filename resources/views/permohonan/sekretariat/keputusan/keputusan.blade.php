@@ -97,35 +97,25 @@
                                     <br>
                                     <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
                                         <div class="row" style="margin-left: 15px;">
-                                            {{-- <div class="col-md-2">
-                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
-                                            </div>
-                                            
-                                            <span style="border-bottom: 1px solid #000; display: inline-block; width: 20px;"></span>
-                                            
-                                            <div class="col-md-2">
-                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                            </div> --}}
-
                                             <div class="col-md-4" style="display: flex; align-items: center;">
                                                 <div class="flex-grow-1">
                                                     <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                                 </div>
                                             
-                                                <span style="border-bottom: 1px solid #000; display: inline-block; margin: 0 5px; width: 15px;"></span>
+                                                <div style="border-bottom: 1px solid #000; flex-grow: 0; margin: 0 5px; width: 15px;"></div>
                                             
                                                 <div class="flex-grow-1">
                                                     <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                                 </div>
                                             </div>
-                                    
+                                            
                                             <div class="col-md-2">
                                                 <select name="status" class="form-select">
                                                     <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
                                                     <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
-                                            </div>
+                                            </div>                                            
 
                                             <div class="col-md-4">
                                                 <select name="institusi" class="form-select js-example-basic-single">
