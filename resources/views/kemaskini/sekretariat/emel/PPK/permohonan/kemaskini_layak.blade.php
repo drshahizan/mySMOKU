@@ -90,7 +90,6 @@
 
     <div id="main-content">
         <div class="container-fluid">
-            @include('sweetalert::alert')
             <br>
             <div class="row clearfix">
                 <div class="col-12">
@@ -154,4 +153,23 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berjaya!',
+                text: ' {!! session('success') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+        @if(session('failed'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Tidak Berjaya!',
+                text: ' {!! session('failed') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+    </script>
 </x-default-layout>
