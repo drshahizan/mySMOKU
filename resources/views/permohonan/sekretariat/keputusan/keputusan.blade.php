@@ -98,12 +98,14 @@
                                     <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
                                         <div class="row" style="margin-left: 15px;">
                                             <div class="col-md-2">
-                                                <label for="start_date">Dari:</label>
-                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" /> - 
+                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                             </div>
-                                    
+                                            
+                                            <div class="col-md-1" style="text-align: center;">
+                                                <span style="display: inline-block; width: 10px;">-</span>
+                                            </div>
+                                            
                                             <div class="col-md-2">
-                                                <label for="end_date">Hingga:</label>
                                                 <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                             </div>
                                     
