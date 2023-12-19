@@ -303,12 +303,12 @@ class PenyelarasController extends Controller
         ->first();
         // dd($butiranPelajar);
 
-        // if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
-        //     $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
-        //     return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','penajaArray','dokumen','agama','parlimen','dun','keturunan','permohonan'));
-        // } else {
+        if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
+            $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
+            return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','penajaArray','dokumen','agama','parlimen','dun','keturunan','permohonan'));
+        } else {
             return view('permohonan.penyelaras_bkoku.permohonan_baharu', compact('smoku','hubungan','infoipt','peringkat','mod','kursus','biaya','penaja','penajaArray','negeri','bandar','agama','parlimen','dun','keturunan'));
-        //}
+        }
     }
 
     public function bandar($idnegeri)
