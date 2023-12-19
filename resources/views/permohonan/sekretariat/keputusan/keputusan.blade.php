@@ -22,6 +22,12 @@
             .nav{
                 margin-left: 20px!important;
             }
+
+            .dash {
+                width: 15px;
+                border-bottom: 1px solid #000;
+                margin: 0 5px;
+            }
         </style>
     </head>
 
@@ -102,7 +108,7 @@
                                                     <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                                 </div>
                                             
-                                                <div style="width: 15px; border-bottom: 1px solid #000; margin: 0 5px;"></div>
+                                                <div class="dash"></div>
                                             
                                                 <div class="flex-grow-1">
                                                     <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
@@ -127,7 +133,7 @@
                                             </div>
                                     
                                             <div class="col-md-1">
-                                                <button type="submit" class="btn btn-primary" style="width: 25%; padding-left: 10px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 30%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
@@ -245,24 +251,25 @@
                                     <br>
                                     <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
                                         <div class="row" style="margin-left: 15px;">
-                                            <div class="col-md-2">
-                                                <label for="start_date">Dari:</label>
-                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
+                                            <div class="col-md-4" style="display: flex; align-items: center;">
+                                                <div class="flex-grow-1">
+                                                    <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
+                                                </div>
+                                            
+                                                <div class="dash"></div>
+                                            
+                                                <div class="flex-grow-1">
+                                                    <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
+                                                </div>
                                             </div>
-                                    
-                                            <div class="col-md-2">
-                                                <label for="end_date">Hingga:</label>
-                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                            </div>
-                                    
-                                            <div class="col-md-2">
-                                                <label for="end_date">Pilih Keputusan:</label>
+                                            
+                                            <div class="col-md-3">
                                                 <select name="status" class="form-select">
-                                                    <option value="">Semua Keputusan</option>
+                                                    <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
                                                     <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
-                                            </div>
+                                            </div>     
 
                                             <div class="col-md-4">
                                                 <label for="end_date">Institusi Pengajian:</label>
@@ -276,7 +283,7 @@
                                     
                                             <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 25%; padding-left: 10px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 30%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
@@ -388,24 +395,25 @@
                                     <br>
                                     <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
                                         <div class="row" style="margin-left: 15px;">
-                                            <div class="col-md-2">
-                                                <label for="start_date">Dari:</label>
-                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
+                                            <div class="col-md-4" style="display: flex; align-items: center;">
+                                                <div class="flex-grow-1">
+                                                    <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
+                                                </div>
+                                            
+                                                <div class="dash"></div>
+                                            
+                                                <div class="flex-grow-1">
+                                                    <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
+                                                </div>
                                             </div>
-                                    
-                                            <div class="col-md-2">
-                                                <label for="end_date">Hingga:</label>
-                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                            </div>
-                                    
-                                            <div class="col-md-2">
-                                                <label for="end_date">Pilih Keputusan:</label>
+                                            
+                                            <div class="col-md-3">
                                                 <select name="status" class="form-select">
-                                                    <option value="">Semua Keputusan</option>
+                                                    <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
                                                     <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
-                                            </div>
+                                            </div>     
 
                                             <div class="col-md-4">
                                                 <label for="end_date">Institusi Pengajian:</label>
@@ -419,7 +427,7 @@
                                     
                                             <div class="col-md-2">
                                                 <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 25%; padding-left: 10px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 30%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
