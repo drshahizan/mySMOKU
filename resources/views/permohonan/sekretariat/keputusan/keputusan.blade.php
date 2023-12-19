@@ -107,14 +107,14 @@
                                                 <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                             </div> --}}
 
-                                            <div class="col-md-4">
-                                                <div class="col-md-4">
+                                            <div class="col-md-4" style="display: flex; align-items: center;">
+                                                <div class="flex-grow-1">
                                                     <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                                 </div>
                                             
                                                 <span style="border-bottom: 1px solid #000; display: inline-block; margin: 0 5px; width: 15px;"></span>
                                             
-                                                <div class="col-md-4">
+                                                <div class="flex-grow-1">
                                                     <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                                 </div>
                                             </div>
