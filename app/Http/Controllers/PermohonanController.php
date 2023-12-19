@@ -37,6 +37,7 @@ use Carbon\Carbon;
 use DateInterval;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class PermohonanController extends Controller
@@ -500,14 +501,30 @@ class PermohonanController extends Controller
             }
 
         //emel kepada sekretariat
-        $user_sekretariat = User::where('tahap',3)->first();
-        $cc = $user_sekretariat->email;
-
+        // $user_sekretariat = User::where('tahap',3)->first();
+        // $cc = $user_sekretariat->email;
+        //emel kepada sekretariat -ada ramai sekretariat
+        $user_sekretariat = User::where('tahap',3)->get();
+        $cc = $user_sekretariat->pluck('email')->toArray();
+        $invalidEmails = [];
+        foreach ($cc as $email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $invalidEmails[] = $email;
+            }
+        }
         $catatan = "testing";
         $emel = EmelKemaskini::where('emel_id',13)->first();
-        //dd($cc);
-        //dd($emel);
-        Mail::to($smoku_id->email)->cc($cc)->send(new PermohonanHantar($catatan,$emel));
+
+        if (empty($invalidEmails)) {
+ 
+            Mail::to($smoku_id->email)->cc($cc)->send(new PermohonanHantar($catatan,$emel));
+        } else {
+            // dd('sini kee');
+            foreach ($invalidEmails as $invalidEmail) {
+                 Log::error('Invalid email address: ' . $invalidEmail);
+            }
+        }
+        // Mail::to($smoku_id->email)->cc($cc)->send(new PermohonanHantar($catatan,$emel));
             
         return redirect()->route('pelajar.dashboard')->with('message', 'Permohonan anda telah dihantar.');
 
