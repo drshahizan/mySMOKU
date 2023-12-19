@@ -63,6 +63,7 @@
                                         <th style="width: 50%"><b>ID Permohonan</b></th>
                                         <th style="width: 15%" class="text-center"><b>Tarikh</b></th>
                                         <th style="width: 15%" class="text-center"><b>Status</b></th>
+                                        <th style="width: 15%" class="text-center"><b>Dilaksanakan Oleh</b></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -78,6 +79,24 @@
                                                 }
                                                 if ($item['status']==3){
                                                     $status='Sedang Disaring';
+                                                }
+                                                if($item['dilaksanakan_oleh']==null){
+                                                    $oleh = "Tiada Maklumat";
+                                                }
+                                                else{
+                                                    $user_name = DB::table('users')->where('id', $item['dilaksanakan_oleh'])->value('nama');
+                                                    $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
+                                                    $conjunctions = ['bin', 'binti'];
+                                                    $words = explode(' ', $text);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
+                                                        }
+                                                    }
+                                                    $oleh = implode(' ', $result);
                                                 }
                                             @endphp
                                             <tr>
@@ -120,6 +139,7 @@
                                                 @elseif ($item['status']=='9')
                                                     <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                 @endif
+                                                <td>{{$oleh}}</td>
                                             </tr>
                                     @endforeach
                                     </tbody>
