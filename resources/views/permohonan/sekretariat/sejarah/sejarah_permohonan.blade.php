@@ -19,7 +19,7 @@
                 margin-left: 20px!important;
             }
             .custom-width-btn {
-                width: 130px; 
+                width: 130px;
                 height: 30px;
             }
         </style>
@@ -88,14 +88,14 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                
+
                                         <div class="col-md-3" style="margin-right:150px;">
                                             <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
                                                 <i class="fa fa-filter" style="font-size: 15px;"></i>
                                             </button>
                                         </div>
                                     </div>
-                                </form> 
+                                </form>
 
                                 <div class="body">
                                     <div class="table-responsive">
@@ -119,9 +119,9 @@
                                                         $i++;
                                                         $rujukan = explode("/", $item['no_rujukan_permohonan']);
                                                         $peringkat = $rujukan[1];
-                                                        $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('status', 1)->first();
+                                                        $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->where('status', 1)->first();
                                                         $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
-                                                        $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                        $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
@@ -146,7 +146,7 @@
                                                         $pemohon = implode(' ', $result);
 
                                                         //institusi pengajian
-                                                        $text3 = ucwords(strtolower($institusi_pengajian)); 
+                                                        $text3 = ucwords(strtolower($institusi_pengajian));
                                                         $conjunctions = ['of', 'in', 'and'];
                                                         $words = explode(' ', $text3);
                                                         $result = [];
@@ -218,7 +218,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                
+
                                         <div class="col-md-3" style="margin-right:150px;">
                                             <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
                                                 <i class="fa fa-filter" style="font-size: 15px;"></i>
@@ -251,7 +251,7 @@
                                                         $peringkat = $rujukan[1];
                                                         $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('status', 1)->first();
                                                         $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
-                                                        $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                        $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
@@ -276,7 +276,7 @@
                                                         $pemohon = implode(' ', $result);
 
                                                         //institusi pengajian
-                                                        $text3 = ucwords(strtolower($institusi_pengajian)); 
+                                                        $text3 = ucwords(strtolower($institusi_pengajian));
                                                         $conjunctions = ['of', 'in', 'and'];
                                                         $words = explode(' ', $text3);
                                                         $result = [];
@@ -348,7 +348,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                
+
                                         <div class="col-md-3" style="margin-right:150px;">
                                             <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
                                                 <i class="fa fa-filter" style="font-size: 15px;"></i>
@@ -377,7 +377,11 @@
                                                 @if ($item['program']=="PPK")
                                                     @php
                                                         $i++;
-                                                        $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                        $rujukan = explode("/", $item['no_rujukan_permohonan']);
+                                                        $peringkat = $rujukan[1];
+                                                        $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('status', 1)->first();
+                                                        $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+                                                        $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
@@ -402,7 +406,7 @@
                                                         $pemohon = implode(' ', $result);
 
                                                         //institusi pengajian
-                                                        $text3 = ucwords(strtolower($institusi_pengajian)); 
+                                                        $text3 = ucwords(strtolower($institusi_pengajian));
                                                         $conjunctions = ['of', 'in', 'and'];
                                                         $words = explode(' ', $text3);
                                                         $result = [];

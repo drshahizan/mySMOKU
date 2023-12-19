@@ -81,6 +81,7 @@
                                             <tr>
                                                 <th style="width: 17%"><b>ID Tuntutan</b></th>
                                                 <th style="width: 50%"><b>Nama</b></th>
+                                                <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
                                             </tr>
@@ -93,11 +94,11 @@
                                                     @php
                                                         $i++;
                                                         $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
-                                                        $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
+                                                        $rujukan = explode("/", $item['no_rujukan_tuntutan']);
                                                         $peringkat = $rujukan[1];
-                                                        $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
+                                                        $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->where('status', 1)->first();
                                                         $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
-
+                                                        $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
                                                         $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
@@ -118,6 +119,21 @@
                                                             }
                                                         }
                                                         $pemohon = implode(' ', $result);
+
+                                                        //institusi pengajian
+                                                        $text3 = ucwords(strtolower($institusi_pengajian));
+                                                        $conjunctions = ['of', 'in', 'and'];
+                                                        $words = explode(' ', $text3);
+                                                        $result = [];
+                                                        foreach ($words as $word) {
+                                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                                $result[] = Str::lower($word);
+                                                            } else {
+                                                                $result[] = $word;
+                                                            }
+                                                        }
+                                                        $institusi = implode(' ', $result);
+                                                        $institusipengajian = transformBracketsToUppercase($institusi);
                                                     @endphp
                                                     @if ($permohonan->program=="BKOKU")
                                                         @if ($jenis_institusi!="UA")
@@ -125,7 +141,8 @@
                                                             <td style="width: 17%">
                                                                 <a href="{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
                                                             </td>
-                                                            <td style="width: 50%">{{$pemohon}}</td>
+                                                            <td style="width: 35%">{{$pemohon}}</td>
+                                                            <td style="width: 20%">{{$institusipengajian}}</td>
                                                             <td class="text-center" style="width: 15%">{{$item['created_at']->format('d/m/Y')}}</td>
                                                             @if ($item['status']=='1')
                                                                 <td class="text-center" style="width: 15%"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
@@ -164,6 +181,7 @@
                                             <tr>
                                                 <th style="width: 17%"><b>ID Tuntutan</b></th>
                                                 <th style="width: 50%"><b>Nama</b></th>
+                                                <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
                                             </tr>
@@ -176,10 +194,11 @@
                                                 @php
                                                     $i++;
                                                     $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
-                                                    $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
+                                                    $rujukan = explode("/", $item['no_rujukan_tuntutan']);
                                                     $peringkat = $rujukan[1];
-                                                    $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
+                                                    $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->where('status', 1)->first();
                                                     $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+                                                    $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
 
                                                     $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
@@ -201,6 +220,21 @@
                                                         }
                                                     }
                                                     $pemohon = implode(' ', $result);
+
+                                                    //institusi pengajian
+                                                    $text3 = ucwords(strtolower($institusi_pengajian));
+                                                    $conjunctions = ['of', 'in', 'and'];
+                                                    $words = explode(' ', $text3);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
+                                                        }
+                                                    }
+                                                    $institusi = implode(' ', $result);
+                                                    $institusipengajian = transformBracketsToUppercase($institusi);
                                                 @endphp
                                                 @if ($permohonan->program=="BKOKU")
                                                     @if ($jenis_institusi=="UA")
@@ -208,7 +242,8 @@
                                                             <td style="width: 17%">
                                                                 <a href="{{ url('tuntutan/sekretariat/saringan/rekod-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
                                                             </td>
-                                                            <td style="width: 50%">{{$pemohon}}</td>
+                                                            <td style="width: 35%">{{$pemohon}}</td>
+                                                            <td style="width: 20%">{{$institusipengajian}}</td>
                                                             <td class="text-center" style="width: 15%">{{$item['created_at']->format('d/m/Y')}}</td>
                                                             @if ($item['status']=='1')
                                                                 <td class="text-center" style="width: 15%"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
@@ -247,6 +282,7 @@
                                             <tr>
                                                 <th style="width: 17%"><b>ID Tuntutan</b></th>
                                                 <th style="width: 50%"><b>Nama</b></th>
+                                                <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Tarikh Tuntutan</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
                                             </tr>
@@ -259,6 +295,11 @@
                                                     @php
                                                         $i++;
                                                         $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
+                                                        $rujukan = explode("/", $item['no_rujukan_tuntutan']);
+                                                        $peringkat = $rujukan[1];
+                                                        $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->where('status', 1)->first();
+                                                        $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+                                                        $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
                                                         $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
@@ -279,13 +320,29 @@
                                                             }
                                                         }
                                                         $pemohon = implode(' ', $result);
+
+                                                        //institusi pengajian
+                                                        $text3 = ucwords(strtolower($institusi_pengajian));
+                                                        $conjunctions = ['of', 'in', 'and'];
+                                                        $words = explode(' ', $text3);
+                                                        $result = [];
+                                                        foreach ($words as $word) {
+                                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                                $result[] = Str::lower($word);
+                                                            } else {
+                                                                $result[] = $word;
+                                                            }
+                                                        }
+                                                        $institusi = implode(' ', $result);
+                                                        $institusipengajian = transformBracketsToUppercase($institusi);
                                                     @endphp
                                                     @if ($permohonan->program=="PPK")
                                                     <tr>
                                                         <td style="width: 17%">
                                                             <a href="{{ url('tuntutan/sekretariat/saringan/rekod-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
                                                         </td>
-                                                        <td style="width: 50%">{{$pemohon}}</td>
+                                                        <td style="width: 35%">{{$pemohon}}</td>
+                                                        <td style="width: 20%">{{$institusipengajian}}</td>
                                                         <td class="text-center" style="width: 15%">{{$item['created_at']->format('d/m/Y')}}</td>
                                                         @if ($item['status']=='1')
                                                             <td class="text-center" style="width: 15%"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
