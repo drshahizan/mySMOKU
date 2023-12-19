@@ -200,13 +200,11 @@
 	$layak = DB::table('permohonan')->where('status', '=', '6')->count();
 	$bayar = DB::table('permohonan')->where('status', '=', '8')->count();
 	$total = DB::table('permohonan')->count();
-	//dd($baharu);
 	$baharuT = DB::table('tuntutan')->where('status', '=', '2')->count();
 	// $keputusanT = DB::table('tuntutan')->whereIn('status', ['6', '7'])->count();
 	$layakT = DB::table('tuntutan')->where('status', '=', '6')->count();
 	$bayarT = DB::table('tuntutan')->where('status', '=', '8')->count();
 	$totalT = DB::table('tuntutan')->count();
-
 @endphp
 <!--begin::sidebar menu-->
 <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
@@ -328,6 +326,12 @@
 				<a class="menu-link" href="{{url('kemaskini/sekretariat/emel/senarai-emel')}}">
 					<span class="menu-icon">{!! getIcon('send', 'fs-2') !!}</span>
 					<span class="menu-title">Emel</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a class="menu-link" href="{{url('kemaskini/sekretariat/jumlah-peruntukan')}}">
+					<span class="menu-icon">{!! getIcon('send', 'fs-2') !!}</span>
+					<span class="menu-title">Peruntukan</span>
 				</a>
 			</div>
 
