@@ -213,7 +213,7 @@
                                         <div class="col-md-4" style="padding-left: 30px;">
                                             <select name="institusi" class="form-select js-example-basic-single">
                                                 <option value="">Pilih Institusi Pengajian</option>
-                                                @foreach ($institusiBKOKU as $institusi)
+                                                @foreach ($institusiUA as $institusi)
                                                     <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
                                                 @endforeach
                                             </select>
@@ -343,7 +343,7 @@
                                         <div class="col-md-4" style="padding-left: 30px;">
                                             <select name="institusi" class="form-select js-example-basic-single">
                                                 <option value="">Pilih Institusi Pengajian</option>
-                                                @foreach ($institusiBKOKU as $institusi)
+                                                @foreach ($institusiPPK as $institusi)
                                                     <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
                                                 @endforeach
                                             </select>

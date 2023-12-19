@@ -99,7 +99,7 @@
                                         <div class="row" style="margin-left: 15px;">
                                             <div class="col-md-2">
                                                 <label for="start_date">Dari:</label>
-                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
+                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" /> - 
                                             </div>
                                     
                                             <div class="col-md-2">
