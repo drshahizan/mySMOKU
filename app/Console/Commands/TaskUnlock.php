@@ -32,6 +32,7 @@ class TaskUnlock extends Command
     public function handle()
     {
         $permohonan = Permohonan::where('status', 3)->get();
+        $tuntutan = Tuntutan::where('status', 3)->get();
         $now = Carbon::now();
         foreach ($permohonan as $item){
             $time_passed = $now->diffInMinutes($item['updated_at']);
@@ -50,11 +51,9 @@ class TaskUnlock extends Command
             }
         }
 
-        $tuntutan = Tuntutan::where('status', 3)->get();
-        $now = Carbon::now();
         foreach ($tuntutan as $item){
-            $time_passed = $now->diffInHours($item['updated_at']);
-            if($time_passed > 24){
+            $time_passed = $now->diffInMinutes($item['updated_at']);
+            if($time_passed > 1440){
                 Tuntutan::where('id', $item['id'])
                     ->update([
                         'status'   =>  2,
