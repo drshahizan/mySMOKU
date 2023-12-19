@@ -26,11 +26,10 @@
             .dash {
                 width: 15px;
                 height: 1px;
-                background-image: black;
-                background-size: 2px 100%;
+                background: black;
                 margin: 0 5px;
                 display: inline-block;
-                background-color: #fff; 
+                background-color: #fff; /* Set background color to white or your container's background color */
             }
         </style>
     </head>

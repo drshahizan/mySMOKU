@@ -938,7 +938,7 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-								<select name="mod" id="mod" class="form-select form-select-solid" onchange="select1()" data-control="select2" data-placeholder="Pilih" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+								<select name="mod" id="mod" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
 									<option></option>
 									@foreach ($mod as $mod)
 									<option value="{{$mod->kod_mod}}" {{$butiranPelajar->mod == $mod->kod_mod ? 'selected' : ''}}>{{ $mod->mod}}</option>
@@ -1112,7 +1112,7 @@
 								<!--begin::Row-->
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
-										<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" data-placeholder="Pilih" onchange="select1()" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+										<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
 											<option></option>
 											@foreach ($biaya as $biaya)
 											<option value="{{$biaya->kod_biaya}}" {{$butiranPelajar->sumber_biaya == $biaya->kod_biaya ? 'selected' : ''}}>{{ $biaya->biaya}}</option>
@@ -1137,7 +1137,7 @@
 						<!--end::Input group-->
 						<!--begin::Input group-->
 						<div class="row mb-10">
-							@if ($butiranPelajar->sumber_biaya == '1')
+							{{-- @if ($butiranPelajar->sumber_biaya == '1') --}}
 							<div class="col-md-6 fv-row" id="div_nama_penaja">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
@@ -1151,7 +1151,7 @@
 									@endforeach
 								</select>
 							</div>
-							@endif
+							{{-- @endif --}}
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row" id="div_penaja_lain">
 								<!--begin::Label-->
@@ -1736,33 +1736,50 @@
 			});
 
 			//SUMBER BIAYA LAIN-LAIN
-			//SUMBER BIAYA LAIN-LAIN
-			$(document).ready(function(){
+			$(document).ready(function () {
 				$("#div_biaya_lain").hide();
-				$('#sumber_biaya').on('change', function() {
-				if ( this.value == '5'){
-					$("#div_biaya_lain").show();
+				// $("#div_nama_penaja").hide();
+
+				var penajaOptions = {!! json_encode($penajaArray) !!};
+				// console.log("nama_penaja value:", {!! json_encode($butiranPelajar->nama_penaja) !!});
+
+				// Ensure penajaOptions is an array before attempting to iterate
+				if (Array.isArray(penajaOptions)) {
+					$('#sumber_biaya').on('change', function () {
+						var selectedValue = this.value;
+
+						if (selectedValue == '5') {
+							$("#div_biaya_lain").show();
+							$("#div_nama_penaja").hide();
+							$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+						} else if (selectedValue == '2' || selectedValue == '3' || selectedValue == '4') {
+							$("#div_nama_penaja").hide();
+							$("#div_biaya_lain").hide();
+							$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+						} else {
+							$("#div_biaya_lain").hide();
+							$("#div_nama_penaja").show();
+
+							// Update options based on the selected value
+							$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+							var preSelectedValue = {!! json_encode($butiranPelajar->nama_penaja) !!};
+							// console.log("Pre-selected Value:", preSelectedValue);
+
+							penajaOptions.forEach(function (penaja) {
+								// console.log("Comparing:", preSelectedValue, penaja.kod_penaja);
+
+								// Check if the option matches the pre-selected value
+								var isSelected = preSelectedValue == penaja.kod_penaja;
+
+								// console.log("Is Selected:", isSelected);
+
+								$('#nama_penaja').append('<option value="' + penaja.kod_penaja + '"' + (isSelected ? ' selected' : '') + '>' + penaja.penaja + '</option>');
+							});
+						}
+					});
+				} else {
+					console.error("Error: penajaOptions is not an array");
 				}
-				else if (this.value == '2'){
-					$("#div_nama_penaja").hide();
-					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
-				}
-				else if (this.value == '3'){
-					$("#div_nama_penaja").hide();
-					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
-				}
-				else if (this.value == '4'){
-					$("#div_nama_penaja").hide();
-					$('#nama_penaja').empty().append('<option value="">Pilih</option>');
-				}
-				// else if (this.value != '1'){
-				// 	$('#nama_penaja').empty().append('<option value="">Pilih</option>');
-				// }
-				else {
-					$("#div_biaya_lain").hide();
-					$("#div_nama_penaja").show();
-				}
-				});
 			});
 
 
@@ -1820,42 +1837,151 @@
 
 
 		<script>
-			var max_yuran; // Declare these variables in a higher scope
-			var max_wang_saku;
-			// Make an AJAX request to fetch data based on the selected semester
-			$.ajax({
-				type: 'GET',
-				url: '/fetch-amaun/bkoku', // Replace with the actual route for fetching data
-				success: function(response) {
-					// Format the value to display with .00
-					var max_yuran = response.amaun_yuran;
-					var max_wang_saku = response.amaun_wang_saku;
+			$(document).ready(function(){
+				var max_yuran; // Declare these variables in a higher scope
+				var max_wang_saku;
+				// Make an AJAX request to fetch data based on the selected semester
+				$.ajax({
+					type: 'GET',
+					url: '/fetch-amaun/bkoku', // Replace with the actual route for fetching data
+					success: function(response) {
+						// Format the value to display with .00
+						var max_yuran = response.amaun_yuran;
+						var max_wang_saku = response.amaun_wang_saku;
 
-					document.getElementById("max_yuran").value = max_yuran;
-					document.getElementById("max_wang_saku").value = max_wang_saku;
+						$('#max_yuran').val(max_yuran);
+						$('#max_wang_saku').val(max_wang_saku);
 
-				},
-				error: function(error) {
-					console.error('Error fetching data:', error);
+						console.log("yuran: ", max_yuran);
+						console.log("max_wang_saku: ", max_wang_saku);
+						
+						updateDisplay();
+
+					},
+					error: function(error) {
+						console.error('Error fetching da.ta:', error);
+					}
+				});
+			
+				// console.clear();
+				function updateDisplay() {
+					var mod, sumber;
+					var mod = document.getElementById('mod').value;
+					var sumber = document.getElementById('sumber_biaya').value;
+					var bilbulan = document.getElementById('bil_bulan_per_sem').value;
+
+					// Log raw values
+					console.log('Raw max_yuran value:', $('#max_yuran').val());
+					console.log('Raw max_wang_saku value:', $('#max_wang_saku').val());
+
+					// Convert and round values to two decimal places
+					var parsed_max_yuran = parseFloat($('#max_yuran').val().trim()) || 0;
+					var parsed_max_wang_saku = parseFloat($('#max_wang_saku').val().trim()) || 0;
+
+					console.log('yurannnn: ', parsed_max_yuran.toFixed(2));
+					console.log('amaunwang: ', parsed_max_wang_saku.toFixed(2));
+					var wang_saku_perbulan = parsed_max_wang_saku;
+					var wang_saku = wang_saku_perbulan * bilbulan;
+
+						
+					if (mod === '1' && sumber === '1') {
+						
+						// console.log("wang: ", wang_saku);
+
+						document.getElementById("divyuran").style.display = "none";
+						document.getElementById("divelaun").style.display = "";
+						document.getElementById("wang_saku").disabled = false;
+						document.getElementById("yuran").value = '';
+						document.getElementById("amaun_yuran").value = '';
+						document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
+					} else if (mod === '1' && sumber === '4') {
+						console.log("Condition mod==='1' && sumber==='4' is met.");
+						console.log("Debug - mod: ", mod);
+						console.log("Debug - sumber: ", sumber);
+
+						// var wang_saku_perbulan = max_wang_saku;
+						// var wang_saku = wang_saku_perbulan * bilbulan;
+
+						document.getElementById("yuran").value = '1';
+						document.getElementById("divyuran").style.display = "";
+						document.getElementById("yuran").disabled = false;
+						document.getElementById("divelaun").style.display = "";
+						document.getElementById("wang_saku").value = '1';
+						document.getElementById("wang_saku").disabled = false;
+
+					} else if (mod === '1' && sumber === '3') {
+						console.log("Condition mod==='1' && sumber==='3' is met.");
+						console.log("Debug - mod: ", mod);
+						console.log("Debug - sumber: ", sumber);
+
+						// var wang_saku_perbulan = max_wang_saku;
+						// var wang_saku = wang_saku_perbulan * bilbulan;
+
+						document.getElementById("yuran").value = '1';
+						document.getElementById("divyuran").style.display = "";
+						document.getElementById("yuran").disabled = false;
+						document.getElementById("divelaun").style.display = "";
+						document.getElementById("wang_saku").value = '1';
+						document.getElementById("wang_saku").disabled = false;
+
+					} else if (mod === '2' && sumber !== '1') {
+						console.log("Condition mod ==='2' && sumber !=='1' is met.");
+						document.getElementById("yuran").value = '1';
+						document.getElementById("divyuran").style.display = "";
+						document.getElementById("yuran").disabled = false;
+						document.getElementById("divelaun").style.display = "none";
+						document.getElementById("wang_saku").value = '';
+						document.getElementById("amaun_wang_saku").value = '';
+
+					} else if (mod === '2' && sumber === '1') {
+						console.log("Condition mod ==='2' && sumber ==='1' is met.");
+						document.getElementById("divyuran").style.display = "none";
+						document.getElementById("divelaun").style.display = "none";
+						// Swal.fire({
+						// 	icon: 'error',
+						// 	title: 'Ralat',
+						// 	text: 'TAK LAYAKKKKKKKKKKKK',
+						// });
+
+						// document.querySelector('.save-next-button').style.display = "none";
+						return;
+						
+					} else {
+						// var wang_saku_perbulan = max_wang_saku;
+						// var wang_saku = wang_saku_perbulan * bilbulan;
+
+						document.getElementById("divyuran").style.display = "none";
+						document.getElementById("yuran").value = '';
+						document.getElementById("amaun_yuran").value = '';
+						document.getElementById("divelaun").style.display = "";
+						document.getElementById("wang_saku").disabled = false;
+						document.getElementById("wang_saku").value = '1';
+						document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
+					}
+
 				}
+
+				// Trigger the function initially based on the initial values of mod and sumber
+				updateDisplay();
+
+				// Add event listeners to mod and sumber elements
+				$('#mod').on('change', function () {
+					mod = this.value;
+					updateDisplay(); // Call the function when mod changes
+				});
+
+				$('#sumber_biaya').on('change', function () {
+					sumber = this.value;
+					updateDisplay(); // Call the function when sumber changes
+				});
+
 			});
+
 			function select1(){
 				console.clear();
 				
-				// var sumber = document.getElementById('sumber_biaya').value;
-				// var mod = document.getElementById('mod').value;
-				// $('#mod').on('change', function() {
-					// Store the value of 'sumber_biaya' element in sessionStorage with key 'mod'
-					sessionStorage.setItem('mod', document.getElementById('mod').value);
-
-				// });
-				// $('#sumber_biaya').on('change', function() {
-					// sessionStorage.setItem('sumber', $(this).val());
-					// Store the value of 'sumber_biaya' element in sessionStorage with key 'mod'
-					sessionStorage.setItem('sumber', document.getElementById('sumber_biaya').value);
-
-				// });
-				
+				sessionStorage.setItem('mod', document.getElementById('mod').value);
+				sessionStorage.setItem('sumber', document.getElementById('sumber_biaya').value);
 
 				var mod = sessionStorage.getItem('mod');
 				var sumber = sessionStorage.getItem('sumber');
@@ -1863,7 +1989,6 @@
 				console.log("Debug - mod: ", mod);
 				console.log("Debug - sumber: ", sumber);
 				
-
 				var max_yuran = parseFloat(document.getElementById('max_yuran').value).toFixed(2);
 				var max_wang_saku = parseFloat(document.getElementById('max_wang_saku').value).toFixed(2);
 
@@ -1878,24 +2003,21 @@
 				if (!isNaN(yuran)) {
 					if (parseFloat(yuran) > parseFloat(maxLimit)) {
 						yuranInput.value = '';
-						alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' / tahun kalendar akademik.' );
+						// alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' / tahun kalendar akademik.' );
+						// return;
+						Swal.fire({
+							icon: 'error',
+							title: 'Ralat',
+							text: 'Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM' + maxLimit + ' / tahun kalendar akademik.',
+						});
+
 						return;
 					}
 				}
 				
-				
-				
-				
-				
 				if (mod === '1' && sumber === '1') { //sepenuh masa && biasiswa
-					// console.log("Condition mod==='1' && sumber==='1' is met.");
-					// console.log("Debug - mod: ", mod);
-					// console.log("Debug - sumber: ", sumber);
-					// console.log("Debug - bil bulan: ", bilbulan);
-					// console.log("wang_saku_perbulan: ", wang_saku_perbulan);
-					// console.log("wang_saku: ", wang_saku);
+					
 					var wang_saku_perbulan = max_wang_saku;
-
 					var wang_saku = wang_saku_perbulan * bilbulan;
 
 					document.getElementById("divyuran").style.display = "none";
@@ -1906,15 +2028,10 @@
 					document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
 				}
 				else if(mod === '1' && sumber === '4'){
-					console.log("Condition mod==='1' && sumber==='4' is met.");
-					console.log("Debug - mod: ", mod);
-					console.log("Debug - sumber: ", sumber);
 
 					var wang_saku_perbulan = max_wang_saku;
-
 					var wang_saku = wang_saku_perbulan * bilbulan;
 
-					console.log("Total amount yuran: " + parseFloat(yuran));
 					if (isNaN(yuran)) {
 						yuran = 0; // Set yuran to 0 or handle it as needed
 					}
@@ -1987,6 +2104,7 @@
 					document.getElementById("yuran").value = '1';
 					document.getElementById("divyuran").style.display = "";
 					document.getElementById("yuran").disabled = false;
+					document.getElementById("divelaun").style.display = "none";
 					document.getElementById("wang_saku").value = '';
 					document.getElementById("amaun_wang_saku").value = '';
 
@@ -2011,11 +2129,7 @@
 					document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
 					
 				}
-				
-	
-
-
-				
+			
 			}
 
 		</script>
