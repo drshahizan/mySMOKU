@@ -8,16 +8,15 @@ use App\Models\SejarahTuntutan;
 use App\Models\Tuntutan;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Auth;
 
-class TaskUnlock extends Command
+class ResetSaringan extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'task:unlock';
+    protected $signature = 'reset:saringan';
 
     /**
      * The console command description.
