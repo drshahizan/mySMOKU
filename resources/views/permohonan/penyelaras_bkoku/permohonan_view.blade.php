@@ -1262,6 +1262,9 @@
 								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 									<th class="min-w-100px">Nama</th>
 									<th class="min-w-100px">Dokumen</th>
+									@if($butiranPelajar->status == 5)
+									<th class="min-w-100px"></th>
+									@endif
 									<th class="w-110px">Catatan</th>
 								</tr>
 							</thead>
@@ -1286,6 +1289,26 @@
 											@endif
 										</td>
 										@if($dok->id_dokumen == '1' || $dok->id_dokumen == '2' || $dok->id_dokumen == '3')
+											@if($butiranPelajar->status == 5)
+												@php
+												$id = ''; // Initialize $id variable
+												@endphp
+										
+												@if($dok->id_dokumen == '1')
+													@php
+														$id='akaunBank';
+													@endphp
+												@elseif($dok->id_dokumen == '2')
+													@php
+														$id='suratTawaran';
+													@endphp
+												@elseif($dok->id_dokumen == '3')
+													@php
+														$id='invoisResit';
+													@endphp
+												@endif
+												<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
+											@endif
 											<td><a href="/assets/dokumen/permohonan/{{ $dok->dokumen }}" target="_blank">{{ $dok->dokumen }}</a></td>
 											<td><textarea type="text" class="form-control form-control-sm" id="catatan" rows="1" name="catatan" readonly>{{ $dok->catatan }}</textarea></td>
 										@else

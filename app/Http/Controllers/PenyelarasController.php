@@ -492,7 +492,20 @@ class PenyelarasController extends Controller
                     'status' => $permohonan->status == '1' || $permohonan->status == null ? '1' : $permohonan->status,
                 ]
             );
-        }  
+        } elseif ($permohonan->status == 5) {
+            $permohonan = Permohonan::updateOrCreate(
+                ['smoku_id' => $id,'status' => 5],
+                [
+                    'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.$nokp_pelajar,
+                    'program' => 'BKOKU',
+                    'yuran' => $request->yuran,
+                    'amaun_yuran' => number_format($request->amaun_yuran, 2, '.', ''),
+                    'wang_saku' => $request->wang_saku,
+                    'amaun_wang_saku' => number_format($request->amaun_wang_saku, 2, '.', ''),
+                    'perakuan' => $request->perakuan,
+                ]
+            );
+        }   
         /*$permohonan = Permohonan::firstOrNew(['smoku_id' => $id]);
 
         // Set the attributes
@@ -538,27 +551,14 @@ class PenyelarasController extends Controller
     {   
         $smoku_id = Smoku::where('no_kp',$request->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
-        if (!$permohonan || $permohonan->status == 1) {
-            Permohonan::updateOrCreate(
-                ['smoku_id' => $smoku_id->id,'status' => 1],
-                [
-                    'perakuan' => $request->perakuan,
-                    'tarikh_hantar' => now()->format('Y-m-d'),
-                    'status' => '2',
-                ]
-            );
-            
-        }elseif ($permohonan->status == 5) {
-            
-            Permohonan::updateOrCreate(
-                ['smoku_id' => $smoku_id->id,'status' => 5],
-                [
-                    'perakuan' => $request->perakuan,
-                    'tarikh_hantar' => now()->format('Y-m-d'),
-                    'status' => '2',
-                ]
-            );
-            // dd('siniii');
+        if ($permohonan != null) {
+            Permohonan::where('smoku_id' ,$smoku_id->id)->where('id' ,$permohonan->id)
+            ->update([
+                'perakuan' => $request->perakuan,
+                'tarikh_hantar' => now()->format('Y-m-d'),
+                'status' => '2',
+
+            ]);
             
         }
 
@@ -584,39 +584,38 @@ class PenyelarasController extends Controller
             'invoisResit' => 3,
         ];
 
-        $dataArray = [];
-
         foreach ($documentTypes as $inputName => $idDokumen) {
             $file = $request->file($inputName);
 
             if ($file) {
                 $originalFilename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();
-                
-                // Remove the extension from the original filename
                 $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                
-                // Generate the new filename
                 $newFilename = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
-                
-                // Move the file to the destination directory
                 $file->move('assets/dokumen/permohonan', $newFilename);
-                
-                // Create a new instance of dokumen and set its properties
-                $data = new dokumen();
-                $data->permohonan_id = $permohonan_id->id;
-                $data->id_dokumen = $idDokumen;
-                $data->dokumen = $newFilename;
-                $data->catatan = $request->input("nota_$inputName");
-                
-                // Add the data to the array
-                $dataArray[] = $data;
-            }
-        }
 
-        // Save all instances to the database in a loop
-        foreach ($dataArray as $data) {
-            $data->save();
+                // Check if the document already exists
+                $existingDocument = Dokumen::where('permohonan_id', $permohonan_id->id)
+                    ->where('id_dokumen', $idDokumen)
+                    ->first();
+
+                if ($existingDocument) {
+                    // Update the existing document
+                    $existingDocument->dokumen = $newFilename;
+                    $existingDocument->catatan = $request->input("nota_$inputName");
+                    $existingDocument->save();
+                } else {
+                    // Create a new instance of dokumen and set its properties
+                    $data = new Dokumen();
+                    $data->permohonan_id = $permohonan_id->id;
+                    $data->id_dokumen = $idDokumen;
+                    $data->dokumen = $newFilename;
+                    $data->catatan = $request->input("nota_$inputName");
+
+                    // Save the new instance to the database
+                    $data->save();
+                }
+            }
         }
 
 
