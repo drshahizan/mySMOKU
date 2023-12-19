@@ -25,8 +25,11 @@
 
             .dash {
                 width: 15px;
-                border-bottom: 1px solid #000;
+                height: 1px;
+                background-image: linear-gradient(to right, #000 50%, transparent 50%);
+                background-size: 2px 100%;
                 margin: 0 5px;
+                display: inline-block;
             }
         </style>
     </head>
@@ -272,7 +275,6 @@
                                             </div>     
 
                                             <div class="col-md-4">
-                                                <label for="end_date">Institusi Pengajian:</label>
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiUA as $institusi)
@@ -281,9 +283,8 @@
                                                 </select>
                                             </div>
                                     
-                                            <div class="col-md-2">
-                                                <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 30%; padding-left: 10px;">
+                                            <div class="col-md-1">
+                                                <button type="submit" class="btn btn-primary" style="width: 35%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
@@ -416,7 +417,6 @@
                                             </div>     
 
                                             <div class="col-md-4">
-                                                <label for="end_date">Institusi Pengajian:</label>
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiPPK as $institusi)
@@ -425,9 +425,8 @@
                                                 </select>
                                             </div>
                                     
-                                            <div class="col-md-2">
-                                                <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 30%; padding-left: 10px;">
+                                            <div class="col-md-1">
+                                                <button type="submit" class="btn btn-primary" style="width: 35%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
