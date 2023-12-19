@@ -42,6 +42,7 @@ use DateInterval;
 use DateTime;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class PenyelarasPPKController extends Controller
@@ -606,32 +607,16 @@ class PenyelarasPPKController extends Controller
             ->where('smoku_id', $smoku_id->id)
             ->first();
 
-        // dd($permohonan);    
+        if ($permohonan != null) {
+            Permohonan::where('smoku_id' ,$smoku_id->id)->where('id' ,$permohonan->id)
+            ->update([
+                'perakuan' => $request->perakuan,
+                'tarikh_hantar' => now()->format('Y-m-d'),
+                'status' => '2',
 
-        if (!$permohonan || $permohonan->status == 1) {
-            Permohonan::updateOrCreate(
-                ['smoku_id' => $smoku_id->id,'status' => 1],
-                [
-                    'perakuan' => $request->perakuan,
-                    'tarikh_hantar' => now()->format('Y-m-d'),
-                    'status' => '2',
-                ]
-            );
-            
-        }elseif ($permohonan->status == 5) {
-            
-            Permohonan::updateOrCreate(
-                ['smoku_id' => $smoku_id->id,'status' => 5],
-                [
-                    'perakuan' => $request->perakuan,
-                    'tarikh_hantar' => now()->format('Y-m-d'),
-                    'status' => '2',
-                ]
-            );
-            // dd('siniii');
+            ]);
             
         }
-
 
         $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
         $mohon = SejarahPermohonan::create([
@@ -655,39 +640,38 @@ class PenyelarasPPKController extends Controller
             'invoisResit' => 3,
         ];
 
-        $dataArray = [];
-
         foreach ($documentTypes as $inputName => $idDokumen) {
             $file = $request->file($inputName);
 
             if ($file) {
                 $originalFilename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();
-                
-                // Remove the extension from the original filename
                 $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                
-                // Generate the new filename
                 $newFilename = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
-                
-                // Move the file to the destination directory
                 $file->move('assets/dokumen/permohonan', $newFilename);
-                
-                // Create a new instance of dokumen and set its properties
-                $data = new dokumen();
-                $data->permohonan_id = $permohonan_id->id;
-                $data->id_dokumen = $idDokumen;
-                $data->dokumen = $newFilename;
-                $data->catatan = $request->input("nota_$inputName");
-                
-                // Add the data to the array
-                $dataArray[] = $data;
-            }
-        }
 
-        // Save all instances to the database in a loop
-        foreach ($dataArray as $data) {
-            $data->save();
+                // Check if the document already exists
+                $existingDocument = Dokumen::where('permohonan_id', $permohonan_id->id)
+                    ->where('id_dokumen', $idDokumen)
+                    ->first();
+
+                if ($existingDocument) {
+                    // Update the existing document
+                    $existingDocument->dokumen = $newFilename;
+                    $existingDocument->catatan = $request->input("nota_$inputName");
+                    $existingDocument->save();
+                } else {
+                    // Create a new instance of dokumen and set its properties
+                    $data = new Dokumen();
+                    $data->permohonan_id = $permohonan_id->id;
+                    $data->id_dokumen = $idDokumen;
+                    $data->dokumen = $newFilename;
+                    $data->catatan = $request->input("nota_$inputName");
+
+                    // Save the new instance to the database
+                    $data->save();
+                }
+            }
         }
 
 
@@ -726,8 +710,17 @@ class PenyelarasPPKController extends Controller
         // dd($cc_pelajar);
             
         //emel kepada sekretariat
-        $user_sekretariat = User::where('tahap',3)->first();
-        $cc = $user_sekretariat->email;
+        // $user_sekretariat = User::where('tahap',3)->first();
+        // $cc = $user_sekretariat->email;
+        //emel kepada sekretariat -ada ramai sekretariat
+        $user_sekretariat = User::where('tahap',3)->get();
+        $cc = $user_sekretariat->pluck('email')->toArray();
+        $invalidEmails = [];
+        foreach ($cc as $email_cc) {
+            if (!filter_var($email_cc, FILTER_VALIDATE_EMAIL)) {
+                $invalidEmails[] = $email_cc;
+            }
+        }
 
         //emel kepada penyelaras
         $user = User::where('no_kp',Auth::user()->no_kp)->first();
@@ -735,9 +728,15 @@ class PenyelarasPPKController extends Controller
         $catatan = "testing";
         $emel = EmelKemaskini::where('emel_id',15)->first();
         //dd($cc,$user->email);
-
-        Mail::to($user->email)->cc([$cc, $cc_pelajar])->send(new PermohonanHantar($catatan,$emel));     
-
+        if (empty($invalidEmails)) {
+            $ccRecipients = array_merge($cc, [$cc_pelajar]);
+            Mail::to($user->email)->cc($ccRecipients)->send(new PermohonanHantar($catatan,$emel));     
+        } else {
+            // dd('sini kee');
+            foreach ($invalidEmails as $invalidEmail) {
+                Log::error('Invalid email address: ' . $invalidEmail);
+            }
+        }
         //CREATE USER ID TERUS UNTUK PELAJAR
         $user = User::where('no_kp', '=', $smoku_id->no_kp)->first();
         $characters = 'abcdefghijklmn123456789!@#$%^&';
