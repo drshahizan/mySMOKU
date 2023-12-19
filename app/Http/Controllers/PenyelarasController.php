@@ -671,9 +671,10 @@ class PenyelarasController extends Controller
 
         $catatan = "testing";
         $emel = EmelKemaskini::where('emel_id',13)->first();
-        //dd($cc,$user->email);
+        // dd($cc,$user->email,$cc_pelajar);
         if (empty($invalidEmails)) {
-            Mail::to($user->email)->cc([$cc, $cc_pelajar])->send(new PermohonanHantar($catatan,$emel));    
+            $ccRecipients = array_merge($cc, [$cc_pelajar]);
+            Mail::to($user->email)->cc($ccRecipients)->send(new PermohonanHantar($catatan, $emel));
         } else {
             // dd('sini kee');
             foreach ($invalidEmails as $invalidEmail) {
