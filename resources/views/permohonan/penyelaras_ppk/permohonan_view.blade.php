@@ -730,7 +730,7 @@
 							</div>
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">No Pasport</label>
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Pasport (Jika Ada)</label>
 								<!--end::Label-->
 								<!--begin::Row-->
 								<div class="row fv-row">
