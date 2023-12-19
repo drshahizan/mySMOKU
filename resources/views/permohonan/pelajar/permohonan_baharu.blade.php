@@ -1455,14 +1455,13 @@
 						<div class="pb-10 pb-lg-15">
 							<!--begin::Notice-->
 							<div class="text-dark fw-semibold fs-6">
-								<i class='fas fa-exclamation-triangle' style='color:orange;'></i>&nbsp;
-								Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a>
-								untuk mengurangkan saiz fail sebelum memuat naik fail.
+								<i class='fas fa-exclamation-triangle' style='color:orange;'></i>&nbsp; Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a> untuk mengurangkan saiz fail sebelum memuat naik fail.
 							</div>
 
 							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; Format fail yang boleh dimuat naik adalah format 
 							'.pdf', '.jpg', '.png' dan '.jpeg'
 							</div>
+							
 							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; Saiz maksimum fail adalah 2 MB.
 							</div>
 							<!--end::Notice-->

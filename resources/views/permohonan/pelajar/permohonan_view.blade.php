@@ -1382,6 +1382,7 @@
 							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; Format fail yang boleh dimuat naik adalah format 
 							'.pdf', '.jpg', '.png' dan '.jpeg'
 							</div>
+							
 							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; Saiz maksimum fail adalah 2 MB.
 							</div>
 							<!--end::Notice-->

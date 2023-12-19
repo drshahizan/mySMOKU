@@ -509,7 +509,16 @@ var KTCreateAccount = function () {
 								extension: 'jpeg,jpg,png,pdf',
 								type: 'image/jpeg,image/png,application/pdf',
 								maxSize: 2 * 1024 * 1024, // Convert maxSize to bytes
-								message: 'Fail tidak sah. Sila semak format dan saiz fail.',
+								message: {
+									extension: 'Fail yang boleh dimuat naik mestilah format PDF atau PNG.',
+									type: 'Fail yang boleh dimuat naik mestilah format PDF atau PNG.',
+									maxSize: 'Saiz fail tidak boleh melebihi 2 MB / 2048 KB.'
+								}
+								message: {
+                            extension: 'Fail yang boleh dimuat naik mestilah format PDF atau PNG.',
+                            type: 'Fail yang boleh dimuat naik mestilah format PDF atau PNG.',
+                            maxSize: 'Saiz fail tidak boleh melebihi 2 MB / 2048 KB.'
+                        }
 							}
 						}
 					},
@@ -523,7 +532,11 @@ var KTCreateAccount = function () {
 								extension: 'jpeg,jpg,png,pdf',
 								type: 'image/jpeg,image/png,application/pdf',
 								maxSize: 2 * 1024 * 1024, // Convert maxSize to bytes
-								message: 'Fail tidak sah. Sila semak format dan saiz fail.',
+								message: {
+									extension: 'Fail yang boleh dimuat naik mestilah format PDF atau PNG.',
+									type: 'Fail yang boleh dimuat naik mestilah format PDF atau PNG.',
+									maxSize: 'Saiz fail tidak boleh melebihi 2 MB / 2048 KB.'
+								}
 							}
 						}
 					},
@@ -537,7 +550,11 @@ var KTCreateAccount = function () {
 								extension: 'jpeg,jpg,png,pdf',
 								type: 'image/jpeg,image/png,application/pdf',
 								maxSize: 2 * 1024 * 1024, // Convert maxSize to bytes
-								message: 'Fail tidak sah. Sila semak format dan saiz fail.',
+								message: {
+									extension: 'Fail yang boleh dimuat naik mestilah format PDF atau PNG.',
+									type: 'Fail yang boleh dimuat naik mestilah format PDF atau PNG.',
+									maxSize: 'Saiz fail tidak boleh melebihi 2 MB / 2048 KB.'
+								}
 							}
 						}
 					}
