@@ -660,9 +660,9 @@ class PenyelarasController extends Controller
         $user_sekretariat = User::where('tahap',3)->get();
         $cc = $user_sekretariat->pluck('email')->toArray();
         $invalidEmails = [];
-        foreach ($cc as $email) {
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $invalidEmails[] = $email;
+        foreach ($cc as $email_cc) {
+            if (!filter_var($email_cc, FILTER_VALIDATE_EMAIL)) {
+                $invalidEmails[] = $email_cc;
             }
         }
 
