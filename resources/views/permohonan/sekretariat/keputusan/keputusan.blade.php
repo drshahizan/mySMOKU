@@ -107,12 +107,12 @@
                                                 <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                             </div> --}}
 
-                                            <div class="col-md-4" style="display: flex; align-items: center;">
+                                            <div class="col-md-4">
                                                 <div class="col-md-4">
                                                     <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                                 </div>
                                             
-                                                <span style="border-bottom: 1px solid #000; display: inline-block; margin: 0 5px; width: 20px;"></span>
+                                                <span style="border-bottom: 1px solid #000; display: inline-block; margin: 0 5px; width: 15px;"></span>
                                             
                                                 <div class="col-md-4">
                                                     <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
@@ -120,7 +120,6 @@
                                             </div>
                                     
                                             <div class="col-md-2">
-                                                {{-- <label for="end_date">Pilih Keputusan:</label> --}}
                                                 <select name="status" class="form-select">
                                                     <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
@@ -129,7 +128,6 @@
                                             </div>
 
                                             <div class="col-md-4">
-                                                {{-- <label for="end_date">Institusi Pengajian:</label> --}}
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiBKOKU as $institusi)
@@ -139,7 +137,6 @@
                                             </div>
                                     
                                             <div class="col-md-2">
-                                                <br>
                                                 <button type="submit" class="btn btn-primary" style="width: 25%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
