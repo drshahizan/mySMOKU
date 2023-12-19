@@ -137,7 +137,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('kemaskini/sekretariat/emel/PPK/tuntutan/kemaskini-dikembalikan', [KemaskiniController::class, 'kemaskiniDikembalikanPPK']);
 
     //Kemaskini - Sekretariat - Peruntukan
-    Route::get('kemaskini/sekretariat/jumlah-peruntukan', [KemaskiniController::class, 'kemaskiniPeruntukan']);
+    Route::get('kemaskini/sekretariat/jumlah-peruntukan', [KemaskiniController::class, 'senaraiJumlahPeruntukan'])->name('senarai.amaun.peruntukan');
+    Route::post('kemaskini/sekretariat/kemaskini/jumlah-peruntukan', [KemaskiniController::class, 'kemaskiniJumlahPeruntukan'])->name('kemaskini.peruntukan');
 
     //Permohonan - Sekretariat - Saringan
     Route::get('permohonan/sekretariat/saringan/senarai-permohonan', [SaringanController::class, 'senaraiPermohonan']);
