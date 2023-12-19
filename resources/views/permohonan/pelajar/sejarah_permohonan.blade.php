@@ -123,7 +123,10 @@
                                                         @elseif ($item['status']=='4')
                                                             <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='5')
-                                                            <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><button class="btn bg-dikembalikan text-white" data-bs-toggle="modal" data-bs-target="#dikembalikan">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Papar sebab dikembalikan">
+                                                                {{ucwords(strtolower($status))}}</span>
+                                                            </button></td>
                                                         @elseif ($item['status']=='6')
                                                             <td class="text-center">
                                                                 <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
@@ -194,6 +197,42 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
+
+                                        
+                                        {{-- Modal --}}
+                                        <div class="modal fade" id="dikembalikan" tabindex="-1" aria-labelledby="dikembalikan" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Permohonan anda tidak lengkap disebabkan oleh perkara berikut:</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        @php
+                                                            function generateOrderedList($str) {
+                                                                $strArr = explode(",", $str);
+                                                                for ($i = 0; $i < count($strArr) - 1; $i++) {
+                                                                    echo "<li>" . $strArr[$i] . "</li>";
+                                                                }
+                                                            }
+                                                        @endphp
+
+                                                        <ol type="1">
+                                                            @php generateOrderedList($catatan->catatan_profil_diri); @endphp
+                                                            @php generateOrderedList($catatan->catatan_akademik); @endphp
+                                                            @php generateOrderedList($catatan->catatan_salinan_dokumen); @endphp
+                                                        </ol>
+
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div> 
+                                        <!--modal -->
                                     </div>
                                 </div>
                             </div>

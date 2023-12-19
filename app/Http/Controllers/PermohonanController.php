@@ -32,6 +32,7 @@ use App\Models\EmelKemaskini;
 use App\Models\JumlahTuntutan;
 use App\Models\Keturunan;
 use App\Models\Parlimen;
+use App\Models\Saringan;
 use App\Models\TamatPengajian;
 use Carbon\Carbon;
 use DateInterval;
@@ -39,6 +40,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class PermohonanController extends Controller
 {
@@ -425,17 +427,13 @@ class PermohonanController extends Controller
 
         $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
 
-        // Generate a running number (you can use your logic here)
         $runningNumber = rand(1000, 9999);
 
-        // Create an array to store the document types and their respective IDs
         $documentTypes = [
             'akaunBank' => 1,
             'suratTawaran' => 2,
             'invoisResit' => 3,
         ];
-
-        $dataArray = [];
 
         foreach ($documentTypes as $inputName => $idDokumen) {
             $file = $request->file($inputName);
@@ -443,31 +441,32 @@ class PermohonanController extends Controller
             if ($file) {
                 $originalFilename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();
-                
-                // Remove the extension from the original filename
                 $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                
-                // Generate the new filename
                 $newFilename = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
-                
-                // Move the file to the destination directory
                 $file->move('assets/dokumen/permohonan', $newFilename);
-                
-                // Create a new instance of dokumen and set its properties
-                $data = new dokumen();
-                $data->permohonan_id = $permohonan_id->id;
-                $data->id_dokumen = $idDokumen;
-                $data->dokumen = $newFilename;
-                $data->catatan = $request->input("nota_$inputName");
-                
-                // Add the data to the array
-                $dataArray[] = $data;
-            }
-        }
 
-        // Save all instances to the database in a loop
-        foreach ($dataArray as $data) {
-            $data->save();
+                // Check if the document already exists
+                $existingDocument = Dokumen::where('permohonan_id', $permohonan_id->id)
+                    ->where('id_dokumen', $idDokumen)
+                    ->first();
+
+                if ($existingDocument) {
+                    // Update the existing document
+                    $existingDocument->dokumen = $newFilename;
+                    $existingDocument->catatan = $request->input("nota_$inputName");
+                    $existingDocument->save();
+                } else {
+                    // Create a new instance of dokumen and set its properties
+                    $data = new Dokumen();
+                    $data->permohonan_id = $permohonan_id->id;
+                    $data->id_dokumen = $idDokumen;
+                    $data->dokumen = $newFilename;
+                    $data->catatan = $request->input("nota_$inputName");
+
+                    // Save the new instance to the database
+                    $data->save();
+                }
+            }
         }
 
 
@@ -635,11 +634,17 @@ class PermohonanController extends Controller
             ->where('smoku_id', $smoku_id->id)
             ->get();
 
+        $catatan = Saringan::orderBy('id', 'desc')
+        ->where('permohonan_id', $program->id)
+        ->first();
+        // dd($catatan);
+
+
         $akademik = Akademik::where('smoku_id', $smoku_id->id)->where('status', 1)->first();
         $institusi = InfoIpt::where('id_institusi', $akademik->id_institusi)->first();    
 
         if ($permohonan) {
-            return view('permohonan.pelajar.sejarah_permohonan', compact('permohonan','institusi','program'));
+            return view('permohonan.pelajar.sejarah_permohonan', compact('permohonan','institusi','program','catatan'));
         } else {
             return redirect()->route('pelajar.dashboard')->with('permohonan', 'Tiada permohonan lama.');
         }
