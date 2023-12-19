@@ -26,10 +26,11 @@
             .dash {
                 width: 15px;
                 height: 1px;
-                background-image: linear-gradient(to right, #000 50%, transparent 50%);
+                background-image: black;
                 background-size: 2px 100%;
                 margin: 0 5px;
                 display: inline-block;
+                background-color: #fff; 
             }
         </style>
     </head>
