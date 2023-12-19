@@ -39,6 +39,7 @@ var KTCreateAccount = function () {
 		// Validation before going to next page
 		stepperObj.on('kt.stepper.next', function (stepper) {
 			console.log('stepper.next');
+			
 
 			// Validate form before change stepper step
 			var validator = validations[stepper.getCurrentStepIndex() - 1]; // get validator for currnt step
@@ -507,13 +508,9 @@ var KTCreateAccount = function () {
 							file: {
 								extension: 'jpeg,jpg,png,pdf',
 								type: 'image/jpeg,image/png,application/pdf',
-								maxSize: 2048,
-								message: {
-									extension: 'Format fail tidak sah',
-									type: 'Format fail tidak sah',
-									maxSize: 'Saiz fail yang dipilih telah melebihi saiz maksima',
-								},
-							},
+								maxSize: 2 * 1024 * 1024, // Convert maxSize to bytes
+								message: 'Fail tidak sah. Sila semak format dan saiz fail.',
+							}
 						}
 					},
 				
@@ -525,16 +522,12 @@ var KTCreateAccount = function () {
 							file: {
 								extension: 'jpeg,jpg,png,pdf',
 								type: 'image/jpeg,image/png,application/pdf',
-								maxSize: 2048,
-								message: {
-									extension: 'Format fail tidak sah',
-									type: 'Format fail tidak sah',
-									maxSize: 'Saiz fail yang dipilih telah melebihi saiz maksima',
-								},
-							},
+								maxSize: 2 * 1024 * 1024, // Convert maxSize to bytes
+								message: 'Fail tidak sah. Sila semak format dan saiz fail.',
+							}
 						}
 					},
-				
+					
 					'invoisResit': {
 						validators: {
 							notEmpty: {
@@ -543,13 +536,9 @@ var KTCreateAccount = function () {
 							file: {
 								extension: 'jpeg,jpg,png,pdf',
 								type: 'image/jpeg,image/png,application/pdf',
-								maxSize: 2048,
-								message: {
-									extension: 'Format fail tidak sah',
-									type: 'Format fail tidak sah',
-									maxSize: 'Saiz fail yang dipilih telah melebihi saiz maksima',
-								},
-							},
+								maxSize: 2 * 1024 * 1024, // Convert maxSize to bytes
+								message: 'Fail tidak sah. Sila semak format dan saiz fail.',
+							}
 						}
 					}
 				},
