@@ -69,7 +69,7 @@
                                 <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Permohonan</b></li>
                             </ul>
                              <div class="ml-auto">
-                                <a href="{{ url('permohonan/sekretariat/saringan/set-semula-status/'.$permohonan->id) }}" class="btn btn-primary">Set Semula Saringan</a>
+                                <a href="{{ url('permohonan/sekretariat/saringan/set-semula-status/'.$permohonan->id) }}" class="btn btn-primary btn-sm">Set Semula Saringan</a>
                             </div>
                         </div>
                     </nav>
@@ -122,7 +122,7 @@
                         <br>
                         <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$permohonan->id) }}" id="saring">
                             {{csrf_field()}}
-                            <div class="row clearfix">
+                            {{-- <div class="row clearfix"> --}}
                                 <div class="col-md-12">
                                     <div class="table-responsive">
                                         <table class="table table-hover table-bordered mb-5" style="margin: 10px;">
@@ -208,12 +208,12 @@
                                         </table>
                                     </div>
                                 </div>
-                            </div>
+                            {{-- </div> --}}
 
-                            <div class="col-md-6 text-right">
-                                <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan</button>
-                                </form>
+                            <div class="col-md-6 mb-10 text-right">
+                                <button type="submit" name="submit" class="btn btn-primary btn-sm theme-bg gradient action-btn" value="Simpan" id="check">Teruskan</button>
                             </div>
+                        </form>
                 </div>
             </div>
         </div>
