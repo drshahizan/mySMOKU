@@ -293,10 +293,10 @@
                               <input type="checkbox" name="select-all" id="select-all-ppk" onclick="toggleSelectAll('ppk');" />
                             </th>
                             <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
-                            <th class="text-center" style="width: 30%"><b>Nama</b></th>
-                            <th class="text-center" style="width: 20%"><b>Nama Kursus</b></th>
-                            <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th>
-                            <th class="text-center" style="width: 16%"><b>Wang Saku Disokong (RM)</b></th>
+                            <th class="text-center" style="width: 25%"><b>Nama</b></th>
+                            <th class="text-center" style="width: 25%"><b>Nama Kursus</b></th>
+                            <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                            <th class="text-center" style="width: 12%"><b>Wang Saku Disokong (RM)</b></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -364,10 +364,10 @@
                               <tr>
                                 <td class="text-center" style="width: 4%"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
                                 <td class="text-center" style="width: 15%">{{ $item->no_rujukan_permohonan}}</td>
-                                <td style="width: 30%">{{$pemohon}}</td>
-                                <td style="width: 20%">{{$namakursus}}</td>
-                                <td style="width: 15%">{{$institusipengajian}}</td>
-                                <td class="text-right" style="width: 16%">{{$item->wang_saku_disokong}}</td>
+                                <td style="width: 25%">{{$pemohon}}</td>
+                                <td style="width: 25%">{{$namakursus}}</td>
+                                <td style="width: 20%">{{$institusipengajian}}</td>
+                                <td class="text-right" style="width: 12%">{{$item->wang_saku_disokong}}</td>
                               </tr>
                             @endif  
                           @endforeach
