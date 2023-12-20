@@ -114,26 +114,39 @@ var KTAuthResetPassword = function () {
                     // Check axios library docs: https://axios-http.com/docs/intro
                     axios.post(submitButton.closest('form').getAttribute('action'), new FormData(form)).then(function (response) {
                         if (response) {
-                            form.reset();
+                            if (response.data.success) {
+                                form.reset();
 
-                            const redirectUrl = form.getAttribute('data-kt-redirect-url');
+                                const redirectUrl = form.getAttribute('data-kt-redirect-url');
 
-                            if (redirectUrl) {
-                                // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                if (redirectUrl) {
+                                    // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                    Swal.fire({
+                                        text: "Kami telah menghantar pautan set semula kata laluan ke emel anda.",
+                                        icon: "success",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        },
+                                        didClose: () => {
+                                            // Redirect the user after the Swal modal is closed
+                                            window.location.href = redirectUrl;
+                                        }
+                                    });
+                                }
+                            } else {
+                                // Reset request failed, show error message
                                 Swal.fire({
-                                    text: "Kami telah menghantar pautan set semula kata laluan ke emel anda.",
-                                    icon: "success",
+                                    text: "Alamat emel tidak wujud.",  // Use the error message from the server response
+                                    icon: "error",
                                     buttonsStyling: false,
                                     confirmButtonText: "Ok",
                                     customClass: {
-                                        confirmButton: "btn btn-primary"
-                                    },
-                                    didClose: () => {
-                                        // Redirect the user after the Swal modal is closed
-                                        window.location.href = redirectUrl;
+                                        confirmButton: "btn btn-danger"
                                     }
                                 });
-                            }
+                            }    
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({

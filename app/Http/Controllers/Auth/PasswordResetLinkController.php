@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use App\Mail\ResetPassword; 
+use App\Mail\ResetPassword;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
 class PasswordResetLinkController extends Controller
@@ -26,17 +27,25 @@ class PasswordResetLinkController extends Controller
 
     public function store(Request $request)
     {
-        $token = Str::random(64); // Generate a unique token
-        DB::table('password_resets')->insert([
-            'email' => $request->email,
-            'token' => $token,
-            'created_at' => now(),
-        ]);
-        
-        $resetLink = route('password.reset', ['token' => $token]);
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
 
-        // Send the email with the reset link and token
-        Mail::to($request->email)->send(new ResetPassword($token));
+            $token = Str::random(64); // Generate a unique token
+            DB::table('password_resets')->insert([
+                'email' => $request->email,
+                'token' => $token,
+                'created_at' => now(),
+            ]);
+            
+            $resetLink = route('password.reset', ['token' => $token]);
+
+            // Send the email with the reset link and token
+            Mail::to($request->email)->send(new ResetPassword($token));
+        }
+        else{
+            return back()->with('failed', 'Alamat emel tidak wujud.');
+
+        }    
                             
     }
 }
