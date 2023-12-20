@@ -4,7 +4,7 @@
     <title>SistemBKOKU: Lupa Kata Laluan</title>
 </head>
 <body>
-    <h3>KATALALUAN PENDAFTARAN SISTEM BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU)/ PROGRAM PENDIDIKAN KHAS (PPK)</h3>
+    <h3>TUKAR KATA LALUAN PENDAFTARAN SISTEM BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU)/ PROGRAM PENDIDIKAN KHAS (PPK)</h3>
     <p>Assalamualaikum WBT & Salam Sejahtera,</p>
     <br>
     <p>Tuan/Puan,</p>
