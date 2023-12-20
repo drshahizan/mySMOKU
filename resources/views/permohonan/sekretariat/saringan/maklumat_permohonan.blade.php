@@ -58,7 +58,7 @@
         <div class="container-fluid">
             <!-- Page header section  -->
             <div class="row clearfix">
-                <div class="col-md-12">
+                <div class="col-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light page_menu">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-bars text-muted"></i>
@@ -182,7 +182,6 @@
                                             <span><a href="{{ url('permohonan/sekretariat/saringan/salinan-dokumen/'.$permohonan->id) }}" target="_blank">Salinan Dokumen</a></span>
                                         </td>
                                         <td class="hidden-sm-down">
-                                            <!--<div class="col-lg-12 col-md-12">-->
                                             <div class="form-group c_form_group">
                                                 <select id="salinan_dokumen" name="salinan_dokumen" class="form-control" onchange="select3()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
                                                     <option value="">Pilih</option>
@@ -205,8 +204,8 @@
                                 </table>
                             </div>
 
-                            <div class="col-md-6 text-right" style="margin-bottom: 20px; margin-right:20px;">
-                                <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan</button>
+                            <div class="col-md-6 text-right">
+                                <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check" style="margin-bottom: 10px; margin-right:10px;">Teruskan</button>
                             </div>
                         </form>
                 </div>
