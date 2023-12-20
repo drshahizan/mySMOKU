@@ -58,7 +58,7 @@
         <div class="container-fluid">
             <!-- Page header section  -->
             <div class="row clearfix">
-                <div class="col-lg-12">
+                <div class="col-sm-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light page_menu">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-bars text-muted"></i>
@@ -121,7 +121,7 @@
                         <br>
                         <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$permohonan->id) }}" id="saring">
                             {{csrf_field()}}
-                            <div class="row clearfix">
+                            {{-- <div class="row clearfix"> --}}
                                 <div class="col-md-12 col-sm-12" style="padding: 15px;">
                                     <table class="table table-bordered">
                                         <thead class="table-primary">
@@ -208,7 +208,7 @@
                                 <div class="col-md-6 text-right">
                                     <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check" style="margin-bottom: 20px; margin-right:10px;">Teruskan</button>
                                 </div>
-                            </div>
+                            {{-- </div> --}}
                         </form>
                     </div>
                 </div>
