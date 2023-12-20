@@ -88,7 +88,7 @@
                                     
                                                 <div class="col-md-2">
                                                     <br>
-                                                    <button type="submit" class="btn btn-primary">
+                                                    <button type="submit" class="btn btn-primary w-50">
                                                         <i class="fa fa-filter" style="font-size: 12px;"></i>
                                                     </button>
                                                 </div>
