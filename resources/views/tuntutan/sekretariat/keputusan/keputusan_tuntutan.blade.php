@@ -93,6 +93,16 @@
                                             </div>
 
                                             <div class="col-md-4">
+                                                <label for="institusi">Pilih Institusi:</label>
+                                                <select name="institusi" class="form-select js-example-basic-single">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                    @foreach ($institusiBKOKU as $institusi)
+                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-1">
                                                 <br>
                                                 <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
@@ -164,7 +174,7 @@
                                                                 <td style="width: 25%">{{$pemohon}}</td>
                                                                 <td style="width: 20%">{{$institusipengajian}}</td>
                                                                 <td>{{ucwords(strtolower($nama_peringkat))}}</td>
-                                                                <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                                <td class="text-center"> {{ \Carbon\Carbon::parse($item['tarikh_keputusan'])->format('d/m/Y') }}</td>
                                                                 @if($item['status'] == "6")
                                                                     <td class="text-center"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif ($item['status']=="5")
@@ -181,6 +191,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                 {{-- BKOKU UA--}}
                                 <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <br><br>
                                     <form action="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}" method="GET">
@@ -206,6 +217,16 @@
                                             </div>
 
                                             <div class="col-md-4">
+                                                <label for="institusi">Pilih Institusi:</label>
+                                                <select name="institusi" class="form-select js-example-basic-single">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                    @foreach ($institusiUA as $institusi)
+                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-1">
                                                 <br>
                                                 <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
@@ -278,7 +299,7 @@
                                                                 <td style="width: 25%">{{$pemohon}}</td>
                                                                 <td style="width: 20%">{{$institusipengajian}}</td>
                                                                 <td style="width: 15%">{{ucwords(strtolower($nama_peringkat))}}</td>
-                                                                <td class="text-center" style="width: 17%">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                                <td class="text-center" style="width: 17%"> {{ \Carbon\Carbon::parse($item['tarikh_keputusan'])->format('d/m/Y') }}</td>
                                                                 @if($item['status'] == "6")
                                                                     <td class="text-center" style="width: 15%"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif ($item['status']=="5")
@@ -319,8 +340,17 @@
                                                     <option value="7" {{ Request::get('status') == '7' ? 'selected' : '' }}>Tidak Layak</option>
                                                 </select>
                                             </div>
-
                                             <div class="col-md-4">
+                                                <label for="institusi">Pilih Institusi:</label>
+                                                <select name="institusi" class="form-select js-example-basic-single">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                    @foreach ($institusiPPK as $institusi)
+                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-1">
                                                 <br>
                                                 <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
@@ -390,7 +420,7 @@
                                                             <td style="width: 25%">{{$pemohon}}</td>
                                                             <td style="width: 20%">{{$institusipengajian}}</td>
                                                             <td style="width: 15%">{{ucwords(strtolower($nama_peringkat))}}</td>
-                                                            <td class="text-center" style="width: 17%">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                            <td class="text-center" style="width: 17%"> {{ \Carbon\Carbon::parse($item['tarikh_keputusan'])->format('d/m/Y') }}</td>
                                                             @if($item['status'] == "6")
                                                                 <td class="text-center" style="width: 15%"><button type="button" class="btn btn-success btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                             @elseif ($item['status']=="5")
@@ -431,5 +461,10 @@
             order: [] // Disable initial sorting
         });
         </script>
+        <script> 
+            $(document).ready(function() {
+                 $('.js-example-basic-single').select2();
+             });
+         </script> 
 
 </x-default-layout>

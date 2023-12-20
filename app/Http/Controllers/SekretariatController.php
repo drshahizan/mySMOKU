@@ -1395,7 +1395,29 @@ class SekretariatController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        if(($startDate==null||$endDate==null)&&$request->status==null){
+        $tuntutan = Tuntutan::join('sejarah_tuntutan', function ($join) {
+                        $join->on('sejarah_tuntutan.tuntutan_id', '=', 'tuntutan.id')
+                            ->on('sejarah_tuntutan.status', '=', 'tuntutan.status')
+                            ->whereIn('sejarah_tuntutan.status', ['5','6','7']);
+                    })
+                    ->leftJoin('smoku_akademik', 'tuntutan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                    ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                    ->orderBy('tuntutan.updated_at', 'desc')
+                    ->whereIn('tuntutan.status', ['5','6','7'])
+                    ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+                        return $q->whereBetween('sejarah_tuntutan.created_at', [$startDate, $endDate]);
+                    })
+                    ->when($request->status, function ($q) use ($request) {
+                        return $q->where('tuntutan.status', $request->status);
+                    })
+                    ->when($request->institusi, function ($q) use ($request) {
+                        return $q->where('bk_info_institusi.id_institusi', $request->institusi);
+                    })
+                    ->select('tuntutan.*','sejarah_tuntutan.created_at as tarikh_keputusan')
+                    ->get();
+                    // dd($tuntutan);
+
+        /*if(($startDate==null||$endDate==null)&&$request->status==null&&$request->institusi==null){
             $tuntutan = Tuntutan::orderBy('created_at', 'desc')
                 ->where('status', '5')
                 ->orWhere('status', '6')
@@ -1415,13 +1437,22 @@ class SekretariatController extends Controller
                 ->get();
             $tuntutan = $tuntutan->whereBetween('created_at', [$startDate, $endDate]);
         }
+        elseif(($startDate==null||$endDate==null)&&$request->status==null&&$request->institusi!=null){
+            $tuntutan = Tuntutan::orderBy('created_at', 'desc')
+                ->where('status', $request->status)
+                ->get();
+        }
         else{
             $tuntutan = Tuntutan::orderBy('created_at', 'desc')
                 ->whereBetween('created_at', [$startDate, $endDate])
                 ->where('status', $request->status)
                 ->get();
-        }
-        return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan', compact('tuntutan'));
+        }*/
+
+        $institusiBKOKU = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
+        return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan', compact('tuntutan','institusiBKOKU','institusiUA','institusiPPK'));
     }
 
     //Papar Tuntutan Telah Disaring
