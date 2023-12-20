@@ -75,6 +75,7 @@
                             <div class="tab-content" id="myTabContent">
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
+                                    <br>
                                     <form action="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}" method="GET">
                                         <div class="row" style="margin-left: 15px;">
                                             <div class="col-md-2">
@@ -198,7 +199,7 @@
                                 </div>
                                  {{-- BKOKU UA--}}
                                 <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
-                                    <br><br>
+                                    <br>
                                     <form action="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}" method="GET">
                                         <div class="row" style="margin-left: 15px;">
                                             <div class="col-md-2">
@@ -323,7 +324,7 @@
                                 </div>
                                 {{-- PKK --}}
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-                                    <br><br>
+                                    <br>
                                     <form action="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}" method="GET">
                                         <div class="row" style="margin-left: 15px;">
                                             <div class="col-md-2">
