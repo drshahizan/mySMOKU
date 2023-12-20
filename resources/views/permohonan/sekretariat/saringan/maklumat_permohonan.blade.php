@@ -125,7 +125,7 @@
                             <div class="row clearfix">
                                 <div class="col-md-12">
                                     <div class="table-responsive">
-                                        <table class="table table-hover table-bordered mb-5">
+                                        <table class="table table-hover table-bordered mb-5" style="margin: 10px;">
                                             <thead class="table-primary">
                                             <tr>
                                                 <th style="width: 5%; text-align:right;">No.</th>
