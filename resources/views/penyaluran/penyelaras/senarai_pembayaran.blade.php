@@ -88,8 +88,8 @@
                                     
                                                 <div class="col-md-2">
                                                     <br>
-                                                    <button type="submit" class="btn btn-primary w-50">
-                                                        <i class="fa fa-filter" style="font-size: 12px;"></i>
+                                                    <button type="submit" class="btn btn-primary w-40">
+                                                        <i class="fa fa-filter" style="font-size: 15px; padding-right:10px;"></i>
                                                     </button>
                                                 </div>
                                             </div>
@@ -234,8 +234,6 @@
                                                     @endforeach 
                                                 </tbody>
                                             </table>
-
-                                                                              
                                         {{-- </form> --}}
                                     </div>
                                 </div>
@@ -263,8 +261,8 @@
                                     
                                                 <div class="col-md-2">
                                                     <br>
-                                                    <button type="submit" class="btn btn-primary">
-                                                        <i class="fa fa-filter" style="font-size: 12px;"></i>
+                                                    <button type="submit" class="btn btn-primary w-40">
+                                                        <i class="fa fa-filter" style="font-size: 12px; padding-right:10px;"></i>
                                                     </button>
                                                 </div>
                                             </div>
