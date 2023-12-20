@@ -76,7 +76,7 @@
 
                 <div class="col-12">
                     <div class="card">
-                        <div class="body">
+                        {{-- <div class="body"> --}}
                             <div class="col-md-6 col-sm-6">
                                 <br>
                                 @php
@@ -216,7 +216,7 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
+                        {{-- </div> --}}
                     </div>
                 </div>
             </div>
