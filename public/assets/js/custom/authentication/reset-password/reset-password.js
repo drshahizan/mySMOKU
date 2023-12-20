@@ -67,17 +67,19 @@ var KTAuthResetPassword = function () {
                             confirmButtonText: "Ok",
                             customClass: {
                                 confirmButton: "btn btn-primary"
-                            },
-                            didClose: () => {
+                            }
+                        }).then(function (result) {
+                            if (result.isConfirmed) {
                                 form.querySelector('[name="email"]').value = "";
-                        
+                                //form.submit();
+
                                 var redirectUrl = form.getAttribute('data-kt-redirect-url');
                                 if (redirectUrl) {
-                                    window.location.href = redirectUrl;
+                                    location.href = redirectUrl;
                                 }
                             }
                         });
-                    }, 2000);
+                    }, 1500);
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
@@ -114,21 +116,23 @@ var KTAuthResetPassword = function () {
                         if (response) {
                             form.reset();
 
-                            // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                            Swal.fire({
-                                text: "Kami telah menghantar pautan set semula kata laluan ke emel anda.",
-                                icon: "success",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok",
-                                customClass: {
-                                    confirmButton: "btn btn-primary"
-                                }
-                            });
-
                             const redirectUrl = form.getAttribute('data-kt-redirect-url');
 
                             if (redirectUrl) {
-                                location.href = redirectUrl;
+                                // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                Swal.fire({
+                                    text: "Kami telah menghantar pautan set semula kata laluan ke emel anda.",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    },
+                                    didClose: () => {
+                                        // Redirect the user after the Swal modal is closed
+                                        window.location.href = redirectUrl;
+                                    }
+                                });
                             }
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
