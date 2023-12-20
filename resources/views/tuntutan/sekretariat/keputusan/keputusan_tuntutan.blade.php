@@ -75,7 +75,6 @@
                             <div class="tab-content" id="myTabContent">
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
-                                    <br><br>
                                     <form action="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}" method="GET">
                                         <div class="row" style="margin-left: 15px;">
                                             <div class="col-md-2">

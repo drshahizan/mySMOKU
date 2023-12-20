@@ -93,7 +93,7 @@
                         </div>
                         <!--begin::Card title-->
                         <!--begin::Card toolbar-->
-                        <div class="card-toolbar" style="margin-bottom: 0px!important;">
+                        <div class="card-toolbar" style="margin-bottom: 0px!important; margin-top: 5px!important;">
                             <!--begin::Toolbar-->
                             <div class="d-flex justify-content-between" style="margin-left: 20px;" data-kt-subscription-table-toolbar="base">
                                 <!--begin::Filter-->
