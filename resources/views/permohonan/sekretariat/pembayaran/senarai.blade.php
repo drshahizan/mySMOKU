@@ -103,8 +103,8 @@
                                 <!--begin::Content-->
                                 <div data-kt-subscription-table-filter="form">
                                     <!--begin::Input group-->
-                                    <div class="row mb-12">
-                                        <div class="col-md-8 fv-row">
+                                    <div class="row mb-10">
+                                        <div class="col-md-6 fv-row">
                                             <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
                                                 <option value="">Pilih Institusi Pengajian</option>
                                             </select>
