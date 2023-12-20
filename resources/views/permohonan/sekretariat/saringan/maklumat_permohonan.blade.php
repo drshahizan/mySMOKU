@@ -57,10 +57,9 @@
     <div id="main-content">
         <div class="container-fluid">
             <!-- Page header section  -->
-            <div class="row clearfix">
+            {{-- <div class="row clearfix"> --}}
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light page_menu">
-                        <!--<a class="navbar-brand" href="#">M.</a>-->
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-bars text-muted"></i>
                         </button>
@@ -74,7 +73,7 @@
                         </div>
                     </nav>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-12">
                     <div class="card">
                         <div class="col-md-6 col-sm-6">
                             <br>
@@ -122,7 +121,7 @@
                         <br>
                         <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$permohonan->id) }}" id="saring">
                             {{csrf_field()}}
-                            <div class="row clearfix">
+                            {{-- <div class="row clearfix"> --}}
                                 <div class="col-md-12">
                                     <div class="table-responsive">
                                         <table class="table table-bordered" style="margin: 10px;">
@@ -215,7 +214,7 @@
                             </div>
                         </form>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
     </div>
     <script>
