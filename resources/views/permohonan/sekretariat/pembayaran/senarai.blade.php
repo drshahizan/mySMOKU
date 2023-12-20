@@ -104,14 +104,14 @@
                                 <div data-kt-subscription-table-filter="form">
                                     <!--begin::Input group-->
                                     <div class="row mb-12">
-                                        <div class="col-md-6 fv-row">
+                                        <div class="col-md-8 fv-row">
                                             <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
                                                 <option value="">Pilih Institusi Pengajian</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-2 fv-row none-container"> 
-                                            
-                                        </div>
+
+                                        <div class="col-md-2 fv-row none-container"> </div>
+
                                         <div class="col-md-4 fv-row">
                                             <!--begin::Actions-->
                                             <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
