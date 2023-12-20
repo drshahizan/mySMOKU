@@ -1039,26 +1039,15 @@ class SekretariatController extends Controller
         $status_kod = 0;
         $status = null;
 
-        $filters = $request->only(['institusi']);; // Adjust the filter names as per your form
+        $tuntutan = Tuntutan::select('tuntutan.*')
+                ->whereIn('tuntutan.status', ['2','3','4','5'])
+                ->orderBy('tarikh_hantar', 'desc')->get();
 
-        $query = Tuntutan::select('tuntutan.*')
-                ->where('tuntutan.status', '=', '2')
-                ->orWhere('tuntutan.status', '=','3')
-                ->orWhere('tuntutan.status', '=','5')
-                ->orWhere('tuntutan.status', '=','6')
-                ->orWhere('tuntutan.status', '=','7');
+        $institusiPengajian = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
 
-        if (isset($filters['institusi'])){
-            $selectedInstitusi = $filters['institusi'];
-            $query->join('smoku', 'smoku.id', '=', 'tuntutan.smoku_id')
-                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
-                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
-        }
-
-        $tuntutan = $query->orderBy('tarikh_hantar', 'desc')->get();
-        $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
-
-        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusi','tuntutan','status_kod','status'));
+        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status', 'institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
     public function keputusanPeperiksaan($id){

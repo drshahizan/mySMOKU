@@ -255,7 +255,6 @@
                             {{-- BKOKU UA--}}
                             <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                 <br>
-                               
                                 <div class="card-body pt-0">
                                     <form action="{{ route('sekretariat.infocek.submit') }}" method="POST">
                                     {{csrf_field()}}
