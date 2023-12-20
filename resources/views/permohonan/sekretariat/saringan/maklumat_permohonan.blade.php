@@ -76,7 +76,7 @@
 
                 <div class="col-12">
                     <div class="card">
-                        {{-- <div class="body"> --}}
+                        <div class="body">
                             <div class="col-md-6 col-sm-6">
                                 <br>
                                 @php
@@ -126,7 +126,7 @@
                             <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$permohonan->id) }}" id="saring">
                                 {{csrf_field()}}
                                 <div class="row clearfix">
-                                    <div class="col-md-12" style="padding: 15px;">
+                                    <div class="col-md-12">
                                         <div class="table-responsive">
                                             <table class="table table-bordered">
                                                 <thead class="table-primary">
@@ -211,12 +211,12 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 text-right">
+                                    <div class="col-md-12 text-right">
                                         <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check" style="margin-bottom: 20px; margin-right:10px;">Teruskan</button>
                                     </div>
                                 </div>
                             </form>
-                        {{-- </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
