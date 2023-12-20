@@ -112,70 +112,67 @@ var KTAuthResetPassword = function () {
                     submitButton.disabled = true;
 
                     // Check axios library docs: https://axios-http.com/docs/intro
-                    axios.post(submitButton.closest('form').getAttribute('action'), new FormData(form)).then(function (response) {
-                        if (response) {
-                            if (response.data.success) {
-                                form.reset();
+                    // const form = document.querySelector('#yourFormId'); // Replace with the actual form ID
 
-                                const redirectUrl = form.getAttribute('data-kt-redirect-url');
+axios.post(submitButton.closest('form').getAttribute('action'), new FormData(form))
+    .then(function (response) {
+        console.log(response);
+        // Successful response
+        if (response.data.success) {
+            form.reset();
 
-                                if (redirectUrl) {
-                                    // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                                    Swal.fire({
-                                        text: "Kami telah menghantar pautan set semula kata laluan ke emel anda.",
-                                        icon: "success",
-                                        buttonsStyling: false,
-                                        confirmButtonText: "Ok",
-                                        customClass: {
-                                            confirmButton: "btn btn-primary"
-                                        },
-                                        didClose: () => {
-                                            // Redirect the user after the Swal modal is closed
-                                            window.location.href = redirectUrl;
-                                        }
-                                    });
-                                }
-                            } else {
-                                // Reset request failed, show error message
-                                Swal.fire({
-                                    text: "Alamat emel tidak wujud.",  // Use the error message from the server response
-                                    icon: "error",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok",
-                                    customClass: {
-                                        confirmButton: "btn btn-danger"
-                                    }
-                                });
-                            }    
-                        } else {
-                            // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                            Swal.fire({
-                                text: "Maaf, emel ini tidak betul. Sila cuba lagi.",
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok",
-                                customClass: {
-                                    confirmButton: "btn btn-primary"
-                                }
-                            });
-                        }
-                    }).catch(function (error) {
-                        Swal.fire({
-                            text: "Maaf, nampaknya terdapat beberapa ralat yang dikesan. Sila cuba lagi.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        });
-                    }).then(() => {
-                        // Hide loading indication
-                        submitButton.removeAttribute('data-kt-indicator');
+            const redirectUrl = form.getAttribute('data-kt-redirect-url');
 
-                        // Enable button
-                        submitButton.disabled = false;
-                    });
+            if (redirectUrl) {
+                Swal.fire({
+                    text: "Kami telah menghantar pautan set semula kata laluan ke emel anda.",
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    },
+                    didClose: () => {
+                        window.location.href = redirectUrl;
+                    }
+                });
+            }
+        } else {
+            // Server returned a success:false response
+            Swal.fire({
+                text: response.data.message || "An error occurred.", // Use the error message from the server response, or a default message
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok",
+                customClass: {
+                    confirmButton: "btn btn-danger"
+                }
+            });
+        }
+    })
+    .catch(function (error) {
+        // Error occurred during the request
+        console.error('Error submitting reset request:', error);
+
+        Swal.fire({
+            text: "Maaf, nampaknya terdapat beberapa ralat yang dikesan. Sila cuba lagi.",
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: "Ok",
+            customClass: {
+                confirmButton: "btn btn-primary"
+            }
+        });
+    })
+    .then(() => {
+        // This block runs regardless of success or error
+        // Hide loading indication
+        submitButton.removeAttribute('data-kt-indicator');
+
+        // Enable button
+        submitButton.disabled = false;
+    });
+
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({

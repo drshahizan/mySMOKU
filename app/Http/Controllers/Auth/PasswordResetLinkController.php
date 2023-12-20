@@ -41,9 +41,12 @@ class PasswordResetLinkController extends Controller
 
             // Send the email with the reset link and token
             Mail::to($request->email)->send(new ResetPassword($token));
+            return response()->json(['success' => true, 'message' => 'Password reset email sent successfully.'], 200);
+
         }
         else{
-            return back()->with('failed', 'Alamat emel tidak wujud.');
+
+            return response()->json(['success' => false, 'message' => 'Alamat emel tidak wujud.'], 200);
 
         }    
                             
