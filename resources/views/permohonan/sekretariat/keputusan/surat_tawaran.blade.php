@@ -132,7 +132,7 @@
         <br>
         <h3>{{ strtoupper($kandungan_surat->tajuk) }}</h3>
         <br>
-        <p>{{$kandungan_surat->tujuan}} :-</p>
+        <p>{{ $kandungan_surat->tujuan }}</p>
         <br>
 
         <table>

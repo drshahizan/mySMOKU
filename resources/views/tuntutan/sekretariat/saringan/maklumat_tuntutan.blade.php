@@ -85,7 +85,7 @@
                                 <li class="nav-item vivify swoopInTop delay-150 active"><b>Saring Tuntutan</b></li>
                             </ul>
                             <div class="ml-auto">
-                                <a href="{{ url('tuntutan/sekretariat/saringan/set-semula-status/'.$tuntutan->id) }}" class="btn btn-primary">Set Semula Saringan</a>
+                                <a href="{{ url('tuntutan/sekretariat/saringan/set-semula-status/'.$tuntutan->id) }}" class="btn btn-primary btn-sm">Set Semula Saringan</a>
                             </div>
                         </div>
                     </nav>
