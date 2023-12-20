@@ -219,8 +219,11 @@
                                 <h6>Maklumat tuntutan:</h6>
                                 <br>
                                 @php
-                                    $i = 2;
-                                    $invoisResit = "/assets/dokumen/tuntutan/salinan_invoisResit_KPTBKOKU-2-989876543210.pdf";
+                                    if ($sama_semester==false)
+                                        $i = 2;
+                                    else{
+                                        $i=1;
+                                    }
                                 @endphp
                                     <div class="row clearfix">
                                         <div class="col-md-12">
@@ -236,22 +239,27 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td style="text-align:right;">1</td>
-                                                        <td>
-                                                            <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan') }}" target="_blank">Keputusan Peperiksaan</a></span>
-                                                        </td>
-                                                        <td>
-                                                            {{$saringan->saringan_kep_peperiksaan}}
-                                                        </td>
-                                                        <td>
-                                                            -
-                                                        </td>
-                                                        <td>
-                                                            Keseluruhan keputusan peperiksaan
-                                                        </td>
-                                                    </tr>
+                                                    @if($sama_semester==false)
+                                                        <tr>
+                                                            <td style="text-align:right;">1</td>
+                                                            <td>
+                                                                <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan') }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                            </td>
+                                                            <td>
+                                                                {{$saringan->saringan_kep_peperiksaan}}
+                                                            </td>
+                                                            <td>
+                                                                -
+                                                            </td>
+                                                            <td>
+                                                                Keseluruhan keputusan peperiksaan
+                                                            </td>
+                                                        </tr>
+                                                    @endif
                                                     @foreach($tuntutan_item as $item)
+                                                        @php
+                                                            $invoisResit = "/assets/dokumen/tuntutan/".$item['resit'];
+                                                        @endphp
                                                         <tr>
                                                             <td style="text-align:right;">{{$i++}}</td>
                                                             <td>
