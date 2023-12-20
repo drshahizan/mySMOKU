@@ -58,7 +58,7 @@
                         <div class="body p-5">
                             <div class="row clearfix">
                                 <div class="col-md-12 col-sm-12">
-                                    <div class="header" style="background-color: rgb(35, 58, 108)!important; padding:10px; width:100%;">
+                                    <div class="header" style="background-color: #3d0066!important; padding:10px; width:100%;">
                                         <div class="nav-item vivify swoopInTop active text-white"><b>Rekod Keputusan Permohonan</b></div>
                                     </div>
 
