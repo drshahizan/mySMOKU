@@ -51,7 +51,7 @@
           <div class="card">
             <!--begin::Card header-->
             <div class="header">
-                <h2>Senarai Permohonan Layak</h2><br><small>Sila tanda pada kotak kecik dan klik "Hantar" untuk menyerahkan data pemohon kepada ESP.</small>
+                <h2>Senarai Permohonan Layak<br><small>Sila tanda pada kotak kecik dan klik "Hantar" untuk menyerahkan data pemohon kepada ESP.</small></h2>
             </div>
             <!--end::Card header-->
 
