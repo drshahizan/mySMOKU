@@ -18,7 +18,7 @@
 
     <style>
         .nav{
-            margin-left: 10px!important;
+            margin-left: 20px!important;
         }
     </style>
 
