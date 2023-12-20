@@ -468,7 +468,8 @@ class SekretariatController extends Controller
     {
         $filters = $request->only(['institusi']); // Adjust the filter names as per your form
 
-        $query = Permohonan::where('permohonan.status', '4')
+        $query = Permohonan::orderBy('updated_at', 'desc')
+                            ->where('permohonan.status', '4')
                             ->where('permohonan.program', $programCode);
 
         if (isset($filters['institusi']) ) {
