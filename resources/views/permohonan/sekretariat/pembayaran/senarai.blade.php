@@ -70,7 +70,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Senarai Pembayaran<br><small>Klik ID Permohonan untuk melihat maklumat pembayaran</small></h2>
+                            <h2>Senarai Pembayaran<br><small>Klik ID Permohonan untuk melihat maklumat pembayaran.</small></h2>
                         </div>
 
                         {{-- top nav bar --}}
@@ -105,7 +105,7 @@
                                 <div data-kt-subscription-table-filter="form">
                                     <!--begin::Input group-->
                                     <div class="row mb-10">
-                                        <div class="col-md-6 fv-row">
+                                        <div class="col-md-8 fv-row">
                                             <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
                                                 <option value="">Pilih Institusi Pengajian</option>
                                             </select>
@@ -115,7 +115,7 @@
                                         <div class="col-md-2 fv-row">
                                             <!--begin::Actions-->
                                             <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
-                                                <i class="ki-filter fs-3">
+                                                <i class="ki-filter fs-2">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                 </i>
