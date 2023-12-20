@@ -125,7 +125,7 @@
                             {{-- <div class="row clearfix"> --}}
                                 <div class="col-md-12">
                                     <div class="table-responsive">
-                                        <table class="table table-hover table-bordered mb-5" style="margin: 10px;">
+                                        <table class="table table-bordered" style="margin: 10px;">
                                             <thead class="table-primary">
                                             <tr>
                                                 <th style="width: 5%; text-align:right;">No.</th>
@@ -210,8 +210,8 @@
                                 </div>
                             {{-- </div> --}}
 
-                            <div class="col-md-6 mb-10 text-right">
-                                <button type="submit" name="submit" class="btn btn-primary btn-sm theme-bg gradient action-btn" value="Simpan" id="check">Teruskan</button>
+                            <div class="col-md-6 m-5 text-right">
+                                <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan</button>
                             </div>
                         </form>
                 </div>
