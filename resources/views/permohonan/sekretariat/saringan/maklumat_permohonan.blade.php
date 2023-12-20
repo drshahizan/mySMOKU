@@ -212,7 +212,7 @@
                                     </div>
 
                                     <div class="col-md-12 text-right">
-                                        <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check" style="margin-bottom: 20px; margin-right:10px;">Teruskan</button>
+                                        <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check" style="margin-bottom: 10px;">Teruskan</button>
                                     </div>
                                 </div>
                             </form>
