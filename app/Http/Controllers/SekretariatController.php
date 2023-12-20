@@ -1778,9 +1778,11 @@ class SekretariatController extends Controller
         $status_kod=0;
         $status = null;
 
-        $institusiPengajian = InfoIpt::all()->where('jenis_institusi','UA')->sortBy('nama_institusi');
+        $institusiPengajian = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
 
-        return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status','institusiPengajian'));
+        return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
     public function cetakSenaraiPenyaluranExcel(Request $request, $programCode)

@@ -86,8 +86,8 @@
                             </li>
                         </ul>
 
-                         <!--begin::Card title-->
-                         <div class="card-title">
+                        <!--begin::Card title-->
+                        <div class="card-title">
                             <!--begin::Search-->
                             <div class="d-flex align-items-center position-relative my-1">
                                 <input type="hidden" data-kt-subscription-table-filter="search" >
