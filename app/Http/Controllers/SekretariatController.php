@@ -1559,7 +1559,12 @@ class SekretariatController extends Controller
     //Sejarah
     public function sejarahTuntutan(){
         $tuntutan = Tuntutan::where('status', '!=','4')->orderBy('created_at', 'DESC')->get();
-        return view('tuntutan.sekretariat.sejarah.sejarah_tuntutan',compact('tuntutan'));
+
+        $institusiPengajian = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
+        
+        return view('tuntutan.sekretariat.sejarah.sejarah_tuntutan',compact('tuntutan','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
     public function rekodTuntutan($id){
