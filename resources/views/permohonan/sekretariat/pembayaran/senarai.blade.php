@@ -18,7 +18,7 @@
 
     <style>
         .nav{
-            margin-left: 10px!important;
+            margin-left: 20px!important;
         }
     </style>
 
@@ -86,14 +86,6 @@
                             </li>
                         </ul>
 
-                         <!--begin::Card title-->
-                         <div class="card-title">
-                            <!--begin::Search-->
-                            <div class="d-flex align-items-center position-relative my-1">
-                                <input type="hidden" data-kt-subscription-table-filter="search" >
-                            </div>
-                            <!--end::Search-->
-                        </div>
                         <!--begin::Card title-->
                         <!--begin::Card toolbar-->
                         <div class="card-toolbar">
@@ -104,32 +96,29 @@
                                 <div data-kt-subscription-table-filter="form">
                                     <!--begin::Input group-->
                                     <div class="row mb-10">
-                                        <div class="col-md-8 fv-row">
+                                        <div class="col-md-6 fv-row">
                                             <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
                                                 <option value="">Pilih Institusi Pengajian</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-2 fv-row none-container"> 
                                             
                                         </div>
                                         <div class="col-md-2 fv-row">
                                             <!--begin::Actions-->
                                             <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
-                                                <i class="ki-duotone ki-filter fs-2">
+                                                <i class="ki-filter fs-3">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                 </i>
                                             </button>
                                             <!--end::Actions-->
                                         </div>
-                                        
                                       
                                         <div class="col-md-2 fv-row export-container"> 
                                             <a id="exportLink" href="{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round" style=" width: 150%;">
                                                 <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                             </a> 
                                         </div>
-                                        
                                     </div>
                                     <!--end::Input group-->
                                     
@@ -137,8 +126,8 @@
                                 <!--end::Content-->
                                 <!--end::Filter-->
                             </div>
-                            
                             <!--end::Toolbar-->
+                            
                             <!--begin::Group actions-->
                             <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
                                 <div class="fw-bold me-5">

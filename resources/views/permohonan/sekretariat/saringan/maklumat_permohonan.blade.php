@@ -58,7 +58,7 @@
         <div class="container-fluid">
             <!-- Page header section  -->
             <div class="row clearfix">
-                <div class="col-md-12 col-sm-12">
+                <div class="col-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light page_menu">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-bars text-muted"></i>
@@ -73,8 +73,8 @@
                         </div>
                     </nav>
                 </div>
-                
-                <div class="col-md-12 col-sm-12">
+
+                <div class="col-12">
                     <div class="card">
                         <div class="col-md-6 col-sm-6">
                             <br>
