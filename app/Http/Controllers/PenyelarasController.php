@@ -1384,7 +1384,7 @@ class PenyelarasController extends Controller
         // Custom error messages
         $customMessages = [
             'mimes' => 'Format fail bagi :attribute mestilah pdf, xls, atau xlsx sahaja.',
-            'max' => 'Saiz maksimum fail adalah 2 MB.',
+            'max' => 'Saiz maksimum bagi :attribute adalah 2 MB.',
         ];
 
         // Validate the request
