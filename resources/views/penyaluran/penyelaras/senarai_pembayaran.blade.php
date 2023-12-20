@@ -88,7 +88,7 @@
                                     
                                                 <div class="col-md-2">
                                                     <br>
-                                                    <button type="submit" class="btn btn-primary w-40" style="padding-right:10px;">
+                                                    <button type="submit" class="btn btn-primary w-30" style="padding-right:15px;">
                                                         <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                     </button>
                                                 </div>
@@ -249,7 +249,7 @@
 
                                     <div class="row" style="margin-left: 15px;">
                                         <form action="{{ url('penyelaras/penyaluran/permohonan-tuntutan/layak') }}" method="GET" class="col-md-5">
-                                            <div class="row">
+                                            <div class="row" style="margin-bottom:0px!important">
                                                 <div class="col-md-5">
                                                     <label for="start_date"><b>Dari:</b></label>
                                                     <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
@@ -262,7 +262,7 @@
                                     
                                                 <div class="col-md-2">
                                                     <br>
-                                                    <button type="submit" class="btn btn-primary">
+                                                    <button type="submit" class="btn btn-primary w-30" style="padding-right:15px;">
                                                         <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                     </button>
                                                 </div>
@@ -271,7 +271,7 @@
 
                                         <div class="col-md-7" style="padding-left: 280px;">
                                             <br>
-                                            <div class="row">
+                                            <div class="row" style="margin-bottom:0px!important">
                                                 <div class="col-md-6">
                                                     <a href="{{ route('penyelaras.tuntutan.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
                                                         <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
