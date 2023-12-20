@@ -86,7 +86,16 @@
                             </li>
                         </ul>
 
+                         <!--begin::Card title-->
+                         <div class="card-title">
+                            <!--begin::Search-->
+                            <div class="d-flex align-items-center position-relative my-1">
+                                <input type="hidden" data-kt-subscription-table-filter="search" >
+                            </div>
+                            <!--end::Search-->
+                        </div>
                         <!--begin::Card title-->
+
                         <!--begin::Card toolbar-->
                         <div class="card-toolbar">
                             <!--begin::Toolbar-->
@@ -127,7 +136,7 @@
                                 <!--end::Filter-->
                             </div>
                             <!--end::Toolbar-->
-                            
+
                             <!--begin::Group actions-->
                             <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
                                 <div class="fw-bold me-5">
