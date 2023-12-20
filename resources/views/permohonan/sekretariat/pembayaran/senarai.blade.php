@@ -103,16 +103,16 @@
                                 <!--begin::Content-->
                                 <div data-kt-subscription-table-filter="form">
                                     <!--begin::Input group-->
-                                    <div class="row mb-10">
-                                        <div class="col-md-8 fv-row">
+                                    <div class="row mb-12">
+                                        <div class="col-md-6 fv-row">
                                             <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
                                                 <option value="">Pilih Institusi Pengajian</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-2 fv-row none-container"> 
+                                        {{-- <div class="col-md-2 fv-row none-container">  --}}
                                             
                                         </div>
-                                        <div class="col-md-2 fv-row">
+                                        <div class="col-md-4 fv-row">
                                             <!--begin::Actions-->
                                             <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
                                                 <i class="ki-duotone ki-filter fs-2">
@@ -122,7 +122,6 @@
                                             </button>
                                             <!--end::Actions-->
                                         </div>
-                                        
                                       
                                         <div class="col-md-2 fv-row export-container"> 
                                             <a id="exportLink" href="{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round" style=" width: 150%;">
