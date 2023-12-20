@@ -66,20 +66,6 @@
         </div>
         <!--end::Input group--->
 
-        <!--begin::Input group--->
-        <div class="fv-row mb-10">
-            <div class="form-check form-check-custom form-check-solid form-check-inline">
-                <input class="form-check-input" type="checkbox" name="toc" value="1"/>
-
-                <label class="form-check-label fw-semibold text-gray-700 fs-6">
-                    Saya Setuju &
-
-                    <a href="#" class="ms-1 link-primary">Terma & syarat.</a>.
-                </label>
-            </div>
-        </div>
-        <!--end::Input group--->
-
         <!--begin::Actions-->
         <div class="d-flex flex-wrap justify-content-center pb-lg-0">
             <button type="submit" id="kt_new_password_submit" class="btn btn-primary me-4">

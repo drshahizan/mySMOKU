@@ -31,7 +31,7 @@ class ResetPassword extends Mailable
     public function build()
     {
         return $this->view('pages.auth.email_reset-password')
-            ->subject('Reset Your Password');
+            ->subject('LUPA KATA LALUAN');
     }
 }
 
