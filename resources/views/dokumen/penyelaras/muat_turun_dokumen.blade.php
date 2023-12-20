@@ -92,7 +92,7 @@
 							</div>
 
 							{{-- Table --}}
-							<table class="table table-bordered table-striped">
+							<table class="table table-bordered table-striped pt-0">
 								<thead>
 									<tr>
 										<th style="width: 45%">Item</th>
@@ -148,7 +148,7 @@
 									<tr>
 										<td colspan="2">
 											<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp;
-												Sila klik ikon lihat untuk lihat kesemua dokumen yang dimuat naik.
+												Sila klik pada button untuk memuat turun dokumen SPBB. 
 											</div> 
 
 											<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp;

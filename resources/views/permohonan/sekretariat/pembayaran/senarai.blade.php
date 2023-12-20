@@ -70,7 +70,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h3>Senarai Pembayaran<br><small>Klik ID Permohonan untuk melihat maklumat pembayaran.</small></h3>
+                            <h2>Senarai Pembayaran<br><small>Klik ID Permohonan untuk melihat maklumat pembayaran.</small></h2>
                         </div>
 
                         {{-- top nav bar --}}
@@ -102,7 +102,7 @@
                                 <!--begin::Filter-->
                                 <div data-kt-subscription-table-filter="form">
                                     <!--begin::Input group-->
-                                    <div class="row">
+                                    <div class="row mb-0">
                                         <div class="col-md-8 fv-row">
                                             <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
                                                 <option value="">Pilih Institusi Pengajian</option>
@@ -133,7 +133,7 @@
                                 <!--end::Filter-->
                             </div>
                             <!--end::Toolbar-->
-                            
+
                             <!--begin::Group actions-->
                             <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
                                 <div class="fw-bold me-5">
@@ -145,7 +145,7 @@
                         <!--end::Card toolbar-->
 
 
-                        <div class="tab-content" id="myTabContent">
+                        <div class="tab-content mt-0" id="myTabContent">
                             {{-- BKOKU --}}
                             <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                 <br>
