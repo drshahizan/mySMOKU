@@ -4,7 +4,7 @@
     <title>SistemBKOKU: Daftar Pengguna Sistem</title>
 </head>
 <body>
-    <h3>PENDAFTARAN AKAUN PENGGUNA BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU) / PROGRAM PENDIDIKAN KHAS (PPK) </h3>
+    <h3>PENDAFTARAN AKAUN PENGGUNA SISTEM BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU) / PROGRAM PENDIDIKAN KHAS (PPK) </h3>
     <p>Assalamualaikum WBT & Salam Sejahtera,</p>
     <br>
     <p>Tuan/Puan,</p>
