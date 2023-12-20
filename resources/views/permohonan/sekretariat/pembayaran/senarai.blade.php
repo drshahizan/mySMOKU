@@ -112,7 +112,7 @@
 
                                         <div class="col-md-2 fv-row none-container"> </div>
 
-                                        <div class="col-md-4 fv-row">
+                                        <div class="col-md-2 fv-row">
                                             <!--begin::Actions-->
                                             <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
                                                 <i class="ki-duotone ki-filter fs-2">

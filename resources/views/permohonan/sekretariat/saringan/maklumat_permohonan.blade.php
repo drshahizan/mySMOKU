@@ -126,7 +126,7 @@
                             <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$permohonan->id) }}" id="saring">
                                 {{csrf_field()}}
                                 <div class="row clearfix">
-                                    <div class="col-md-12 col-sm-12" style="padding: 15px;">
+                                    <div class="col-md-12" style="padding: 15px;">
                                         <div class="table-responsive">
                                             <table class="table table-bordered">
                                                 <thead class="table-primary">
