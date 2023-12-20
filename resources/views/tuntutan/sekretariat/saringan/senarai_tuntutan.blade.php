@@ -265,7 +265,7 @@
                                     <div class="body">
                                         <div class="table-responsive">
                                             <br>
-                                            <table id="kt_subscriptions_table" class="table table-striped table-hover dataTable js-exportable">
+                                            <table id="sortTable1a" class="table table-striped table-hover dataTable js-exportable">
                                                 <thead>
                                                 <tr>
                                                     <th style="width: 15%"><b>ID Tuntutan</b></th>
@@ -594,7 +594,7 @@
         $(document).ready(function() {
             // Initialize DataTables
             initDataTable('#sortTable1', 'datatable1');
-            initDataTable('#kt_subscriptions_table', 'datatable');
+            initDataTable('#sortTable1a', 'datatable');
             initDataTable('#sortTable2', 'datatable2');
     
             // Log data for all tables
