@@ -573,32 +573,34 @@
 
     </script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
     <script>
-        // Initialize JavaScript variables with data from Blade
         // Initialize JavaScript variables with data from Blade
         var bkokuList = @json($institusiPengajian);
         var bkokuUAList = @json($institusiPengajianUA);
         var ppkList = @json($institusiPengajianPPK);
-
+    
         $(document).ready(function() {
             $('.export-container').hide(); // Hide export elements
             $('.none-container').show(); // Hide export elements
-
+    
             // Add an event listener for tab clicks
             $('.nav-link').on('click', function() {
                 // Get the ID of the active tab
                 var activeTabId = $(this).attr('id');
-
+    
+                // Clear filters when changing tabs
+                clearFilters();
+    
                 // Check if the active tab is bkokuUA-tab
                 if (activeTabId === 'bkokuUA-tab') {
                     $('.export-container').show(); // Show export elements
                     $('.none-container').hide(); // Hide export elements
-
                 } else {
                     $('.export-container').hide(); // Hide export elements
                     $('.none-container').show(); // Hide export elements
                 }
-
+    
                 // Update the institution dropdown based on the active tab
                 switch (activeTabId) {
                     case 'bkoku-tab':
@@ -613,27 +615,41 @@
                     // Add more cases if you have additional tabs
                 }
             });
-
+    
             // Trigger the function for the default active tab (bkoku-tab)
             updateInstitusiDropdown(bkokuList);
-            
+    
+            // Function to clear filters for all tables
+            function clearFilters() {
+                if (datatable1) {
+                    datatable1.search('').columns().search('').draw();
+                }
+                if (datatable) {
+                    datatable.search('').columns().search('').draw();
+                }
+                if (datatable2) {
+                    datatable2.search('').columns().search('').draw();
+                }
+            }
+    
+    
             // Function to update the institution dropdown
             function updateInstitusiDropdown(institusiList) {
                 // Clear existing options
                 $('#institusiDropdown').empty();
-
+    
                 // Add default option
                 $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
-
+    
                 // Add options based on the selected tab
                 for (var i = 0; i < institusiList.length; i++) {
                     $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
                 }
             }
         });
-
     </script>
-     <script>
+    
+    <script>
         // Declare datatables in a higher scope to make them accessible
         var datatable1, datatable, datatable2;
     
@@ -697,7 +713,6 @@
             console.log(message, table.rows().data().toArray());
         }
     </script>
-    
     
     
     
