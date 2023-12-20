@@ -70,7 +70,7 @@
                                 {{-- Permohonan --}}
                                 <div class="tab-pane fade show active" id="permohonan" role="tabpanel" aria-labelledby="permohonan-tab">
                                     <div class="header">
-                                        <h2>Senarai Permohonan yang Layak<br><small>Klik ID Permohonan atau muat turun excel fail senarai layak untuk kemaskini baucer pemohon.</small></h2>
+                                        <h2>Senarai Permohonan yang Layak<br><small>Sila muat turun excel fail senarai permohonan layak untuk isi maklumat baucer dan muat naik ke dalam sistem untuk dikemaskini.</small></h2>
                                     </div>
 
                                     <div class="row" style="margin-left: 15px;">
@@ -88,8 +88,8 @@
                                     
                                                 <div class="col-md-2">
                                                     <br>
-                                                    <button type="submit" class="btn btn-primary w-40">
-                                                        <i class="fa fa-filter" style="font-size: 15px; padding-right:10px;"></i>
+                                                    <button type="submit" class="btn btn-primary w-40" style="padding-right:10px;">
+                                                        <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                     </button>
                                                 </div>
                                             </div>
@@ -166,7 +166,8 @@
                                                             <!-- Table rows -->
                                                             <tr>
                                                                 {{-- <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>  --}}
-                                                                <td style="width: 15%"><a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#baucerPermohonan{{$item['id']}}" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>                                          
+                                                                {{-- <td style="width: 15%"><a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#baucerPermohonan{{$item['id']}}" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>                                           --}}
+                                                                <td style="width: 15%">{{$item['no_rujukan_permohonan']}}</td>                                          
                                                                 <td style="width: 40%">{{$pemohon}}</td>
                                                                 <td class="text-center" style="width: 10%">
                                                                     @if ($item->yuran_disokong !== null)
@@ -243,7 +244,7 @@
                                 {{-- Tuntutan --}}
                                 <div class="tab-pane fade" id="tuntutan" role="tabpanel" aria-labelledby="tuntutan-tab">
                                     <div class="header">
-                                        <h2>Senarai Tuntutan yang Layak<br><small>Klik ID Tuntutan atau muat turun excel fail senarai layak untuk kemaskini baucer pemohon.</small></h2>
+                                        <h2>Senarai Tuntutan yang Layak<br><small>Sila muat turun excel fail senarai tuntutan layak untuk isi maklunat baucer dan sila muat naik ke dalam sistem untuk dikemaskini.</small></h2>
                                     </div>
 
                                     <div class="row" style="margin-left: 15px;">
@@ -261,8 +262,8 @@
                                     
                                                 <div class="col-md-2">
                                                     <br>
-                                                    <button type="submit" class="btn btn-primary w-40">
-                                                        <i class="fa fa-filter" style="font-size: 12px; padding-right:10px;"></i>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                     </button>
                                                 </div>
                                             </div>
@@ -338,7 +339,8 @@
                                                         @if ($institusi_id == $instiusi_user)
                                                             <!-- Table rows -->
                                                             <tr>
-                                                                <td style="width: 15%"><a href="#" class="open-modal-link-tuntutan" data-bs-toggle="modal" data-bs-target="#baucerTuntutan" data-no-rujukan="{{$item['id']}}">{{$item['no_rujukan_tuntutan']}}</a></td>                                          
+                                                                {{-- <td style="width: 15%"><a href="#" class="open-modal-link-tuntutan" data-bs-toggle="modal" data-bs-target="#baucerTuntutan" data-no-rujukan="{{$item['id']}}">{{$item['no_rujukan_tuntutan']}}</a></td>                                           --}}
+                                                                <td style="width: 15%">{{$item['no_rujukan_tuntutan']}}</td>                                          
                                                                 <td style="width: 45%">{{$pemohon}}</td>
                                                                 <td class="text-center" style="width: 10%">
                                                                     @if ($item->yuran_disokong !== null)
