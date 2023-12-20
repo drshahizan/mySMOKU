@@ -70,7 +70,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Senarai Pembayaran<br><small>Klik ID Permohonan untuk melihat maklumat pembayaran.</small></h2>
+                            <h3>Senarai Pembayaran<br><small>Klik ID Permohonan untuk melihat maklumat pembayaran.</small></h3>
                         </div>
 
                         {{-- top nav bar --}}
@@ -95,7 +95,6 @@
                             <!--end::Search-->
                         </div>
                         <!--begin::Card title-->
-
                         <!--begin::Card toolbar-->
                         <div class="card-toolbar">
                             <!--begin::Toolbar-->
@@ -110,24 +109,27 @@
                                                 <option value="">Pilih Institusi Pengajian</option>
                                             </select>
                                         </div>
+                                        <div class="col-md-2 fv-row none-container"> 
                                             
                                         </div>
                                         <div class="col-md-2 fv-row">
                                             <!--begin::Actions-->
                                             <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
-                                                <i class="ki-filter fs-2">
+                                                <i class="ki-duotone ki-filter fs-2">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                 </i>
                                             </button>
                                             <!--end::Actions-->
                                         </div>
+                                        
                                       
                                         <div class="col-md-2 fv-row export-container"> 
                                             <a id="exportLink" href="{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round" style=" width: 150%;">
                                                 <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                             </a> 
                                         </div>
+                                        
                                     </div>
                                     <!--end::Input group-->
                                     
@@ -135,8 +137,8 @@
                                 <!--end::Content-->
                                 <!--end::Filter-->
                             </div>
+                            
                             <!--end::Toolbar-->
-
                             <!--begin::Group actions-->
                             <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
                                 <div class="fw-bold me-5">
