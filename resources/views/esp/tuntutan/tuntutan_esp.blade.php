@@ -1,17 +1,20 @@
 <x-default-layout> 
   <head>
-  
-  <!-- MAIN CSS -->
-  <link rel="stylesheet" href="/assets/css/sekretariat.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/css/sekretariat.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  
+    <style>
+      .nav{
+          margin-left: 20px!important;
+      }
+    </style>
   </head>
   <!--begin::Page title-->
   <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
@@ -47,7 +50,7 @@
           <div class="card">
             <!--begin::Card header-->
             <div class="header">
-              <h2>Senarai Tuntutan Layak<br></h2>
+              <h2>Senarai Tuntutan Layak<br><small>Sila tanda pada kotak kecik dan klik "Hantar" untuk menyerahkan data pemohon kepada ESP.</small></h2>
             </div>
             <!--end::Card header-->
             {{-- Javascript Nav Bar --}}

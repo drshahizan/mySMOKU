@@ -14,12 +14,13 @@
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+
+        <style>
+            .nav{
+                margin-left: 20px!important;
+            }
+        </style>
     </head>
-    <style>
-        .nav{
-            margin-left: 10px!important;
-        }
-    </style>
 
     <!--begin::Page title-->
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
@@ -92,22 +93,22 @@
                         </div>
                         <!--begin::Card title-->
                         <!--begin::Card toolbar-->
-                        <div class="card-toolbar">
+                        <div class="card-toolbar" style="margin-bottom: 0px!important; margin-top: 10px!important;">
                             <!--begin::Toolbar-->
                             <div class="d-flex justify-content-between" style="margin-left: 20px;" data-kt-subscription-table-toolbar="base">
                                 <!--begin::Filter-->
                                 <!--begin::Content-->
                                 <div data-kt-subscription-table-filter="form">
                                     <!--begin::Input group-->
-                                    <div class="row mb-10">
+                                    <div class="row mb-0">
                                         <div class="col-md-8 fv-row">
                                             <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
                                                 <option value="">Pilih Institusi Pengajian</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-2 fv-row none-container"> 
-                                            
-                                        </div>
+
+                                        <div class="col-md-2 fv-row none-container"> </div>
+
                                         <div class="col-md-2 fv-row">
                                             <!--begin::Actions-->
                                             <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
@@ -119,16 +120,13 @@
                                             <!--end::Actions-->
                                         </div>
                                         
-                                      
                                         <div class="col-md-2 fv-row export-container"> 
                                             <a id="exportLink" href="{{ route('t.senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round" style=" width: 150%;">
                                                 <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                             </a> 
                                         </div>
-                                        
                                     </div>
                                     <!--end::Input group-->
-                                    
                                 </div>
                                 <!--end::Content-->
                                 <!--end::Filter-->

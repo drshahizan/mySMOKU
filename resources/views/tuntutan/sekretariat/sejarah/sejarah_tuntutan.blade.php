@@ -18,7 +18,7 @@
 
     <style>
         .nav{
-            margin-left: 10px!important;
+            margin-left: 20px!important;
         }
     </style>
 
@@ -79,14 +79,14 @@
                         </div>
                         <!--begin::Card title-->
                         <!--begin::Card toolbar-->
-                        <div class="card-toolbar">
+                        <div class="card-toolbar" style="margin-bottom: 0px!important; margin-top: 10px!important;">
                             <!--begin::Toolbar-->
                             <div class="d-flex justify-content-between" style="margin-left: 20px;" data-kt-subscription-table-toolbar="base">
                                 <!--begin::Filter-->
                                 <!--begin::Content-->
                                 <div data-kt-subscription-table-filter="form">
                                     <!--begin::Input group-->
-                                    <div class="row mb-10">
+                                    <div class="row mb-0">
                                         <div class="col-md-8 fv-row">
                                             <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
                                                 <option value="">Pilih Institusi Pengajian</option>
