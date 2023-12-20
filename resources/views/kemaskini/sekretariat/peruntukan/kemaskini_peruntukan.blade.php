@@ -4,7 +4,6 @@
         <link rel="stylesheet" href="/assets/css/saringan.css">
         <!-- Javascript -->
         <script src="https://cdn.tiny.cloud/1/v736541al0ntzh14edk63z19dzyqs1xn2bkc5em78rv1yeis/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
 
     <!--begin::Page title-->
@@ -42,7 +41,7 @@
                     <!--begin::Card body-->
                     <div class="card-body pt-10">	
                         <!--begin::Form-->
-                        <form id="dataForm" class="form" action="{{url('kemaskini/sekretariat/kemaskini/jumlah-peruntukan')}}" method="POST">
+                        <form id="recordForm" class="form" action="{{url('kemaskini/sekretariat/kemaskini/jumlah-peruntukan')}}" method="POST">
                             @csrf
                             <div class="row mb-10">
                                 <!--begin::Input group-->
@@ -132,6 +131,8 @@
         <!--end::Content-->  
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $('#myTable tbody tr').on('dblclick', function () {
@@ -149,7 +150,7 @@
                 $('#tarikh_tamat').trigger('change');
                 $('#jumlah').trigger('change');
 
-                $('#dataForm').show();
+                $('#recordForm').show();
             });
         });
     </script>

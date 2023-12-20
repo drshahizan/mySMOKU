@@ -1807,7 +1807,7 @@ class PenyelarasController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $dibayar = tuntutan::orderBy('id', 'desc')
+        $dibayar = Tuntutan::orderBy('id', 'desc')
         ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
         })
