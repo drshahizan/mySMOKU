@@ -122,7 +122,7 @@
                         <br>
                         <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$permohonan->id) }}" id="saring">
                             {{csrf_field()}}
-                            {{-- <div class="row clearfix"> --}}
+                            <div class="row clearfix">
                                 <div class="col-md-12">
                                     <div class="table-responsive">
                                         <table class="table table-bordered" style="margin: 10px;">
