@@ -122,8 +122,8 @@
                         <br>
                         <form method="POST" action="{{ url('permohonan/sekretariat/saringan/saring-permohonan/'.$permohonan->id) }}" id="saring">
                             {{csrf_field()}}
-                            {{-- <div class="row clearfix"> --}}
-                                <div class="col-md-12">
+                            <div class="row clearfix">
+                                <div class="col-md-10">
                                     <div class="table-responsive">
                                         <table class="table table-bordered" style="margin: 10px;">
                                             <thead class="table-primary">
@@ -208,9 +208,9 @@
                                         </table>
                                     </div>
                                 </div>
-                            {{-- </div> --}}
+                            </div>
 
-                            <div class="col-md-6 m-5 text-right">
+                            <div class="col-md-6 text-right" style="margin-bottom: 10px; margin-right:10px;">
                                 <button type="submit" name="submit" class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan</button>
                             </div>
                         </form>
