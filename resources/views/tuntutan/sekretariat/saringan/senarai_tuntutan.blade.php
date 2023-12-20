@@ -83,61 +83,61 @@
                                 </li>
                             </ul>
                             <!--begin::Card title-->
-                        <div class="card-title">
-                            <!--begin::Search-->
-                            <div class="d-flex align-items-center position-relative my-1">
-                                <input type="hidden" data-kt-subscription-table-filter="search" >
+                            <div class="card-title">
+                                <!--begin::Search-->
+                                <div class="d-flex align-items-center position-relative my-1">
+                                    <input type="hidden" data-kt-subscription-table-filter="search" >
+                                </div>
+                                <!--end::Search-->
                             </div>
-                            <!--end::Search-->
-                        </div>
-                        <!--begin::Card title-->
-                        <!--begin::Card toolbar-->
-                        <div class="card-toolbar">
-                            <!--begin::Toolbar-->
-                            <div class="d-flex justify-content-between" style="margin-left: 20px;" data-kt-subscription-table-toolbar="base">
-                                <!--begin::Filter-->
-                                <!--begin::Content-->
-                                <div data-kt-subscription-table-filter="form">
-                                    <!--begin::Input group-->
-                                    <div class="row mb-10">
-                                        <div class="col-md-8 fv-row">
-                                            <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
-                                                <option value="">Pilih Institusi Pengajian</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-2 fv-row none-container"> 
+                            <!--begin::Card title-->
+                            <!--begin::Card toolbar-->
+                            <div class="card-toolbar">
+                                <!--begin::Toolbar-->
+                                <div class="d-flex justify-content-between" style="margin-left: 20px;" data-kt-subscription-table-toolbar="base">
+                                    <!--begin::Filter-->
+                                    <!--begin::Content-->
+                                    <div data-kt-subscription-table-filter="form">
+                                        <!--begin::Input group-->
+                                        <div class="row mb-10">
+                                            <div class="col-md-8 fv-row">
+                                                <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2 fv-row none-container"> 
+                                                
+                                            </div>
+                                            <div class="col-md-2 fv-row">
+                                                <!--begin::Actions-->
+                                                <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
+                                                    <i class="ki-duotone ki-filter fs-2">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                    </i>
+                                                </button>
+                                                <!--end::Actions-->
+                                            </div>
+                                            
                                             
                                         </div>
-                                        <div class="col-md-2 fv-row">
-                                            <!--begin::Actions-->
-                                            <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
-                                                <i class="ki-duotone ki-filter fs-2">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                            </button>
-                                            <!--end::Actions-->
-                                        </div>
-                                        
+                                        <!--end::Input group-->
                                         
                                     </div>
-                                    <!--end::Input group-->
-                                    
+                                    <!--end::Content-->
+                                    <!--end::Filter-->
                                 </div>
-                                <!--end::Content-->
-                                <!--end::Filter-->
+                                
+                                <!--end::Toolbar-->
+                                <!--begin::Group actions-->
+                                <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
+                                    <div class="fw-bold me-5">
+                                    <span class="me-2" data-kt-subscription-table-select="selected_count"></span>Selected</div>
+                                    <button type="button" class="btn btn-danger" data-kt-subscription-table-select="delete_selected">Delete Selected</button>
+                                </div>
+                                <!--end::Group actions-->
                             </div>
-                            
-                            <!--end::Toolbar-->
-                            <!--begin::Group actions-->
-                            <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
-                                <div class="fw-bold me-5">
-                                <span class="me-2" data-kt-subscription-table-select="selected_count"></span>Selected</div>
-                                <button type="button" class="btn btn-danger" data-kt-subscription-table-select="delete_selected">Delete Selected</button>
-                            </div>
-                            <!--end::Group actions-->
-                        </div>
-                        <!--end::Card toolbar-->
+                            <!--end::Card toolbar-->
                             <div class="tab-content" id="myTabContent">
                                 {{-- BKOKU--}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
