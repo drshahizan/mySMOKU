@@ -633,11 +633,14 @@ class PermohonanController extends Controller
         $permohonan = Permohonan::orderBy('id', 'desc')
             ->where('smoku_id', $smoku_id->id)
             ->get();
-
-        $catatan = Saringan::orderBy('id', 'desc')
-        ->where('permohonan_id', $program->id)
-        ->first();
+        if ($program) {
+            $catatan = Saringan::orderBy('id', 'desc')
+            ->where('permohonan_id', $program->id)
+            ->first();
         // dd($catatan);
+        } else {
+            $catatan = '';
+        }
 
 
         $akademik = Akademik::where('smoku_id', $smoku_id->id)->where('status', 1)->first();

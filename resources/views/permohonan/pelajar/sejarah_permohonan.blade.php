@@ -69,7 +69,7 @@
                                                 <th><b>ID Permohonan</b></th>
                                                 <th class="text-center"><b>Tarikh Permohonan</b></th>
                                                 <th class="text-center"><b>Peringkat Pengajian</b></th>
-                                                @if ($program->program == 'BKOKU')
+                                                @if (!$program || $program->program == 'BKOKU')
                                                 <th class="text-center"><b>Amaun Yuran Dibayar</b></th>
                                                 @endif
                                                 <th class="text-center"><b>Amaun Wang Saku Dibayar</b></th>
