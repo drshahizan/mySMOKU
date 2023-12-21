@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InfoIpt;
 use App\Models\JumlahTuntutan;
 use App\Models\Permohonan;
 use App\Models\SejarahPermohonan;
@@ -25,7 +26,11 @@ class MaklumatESPController extends Controller
 
         $secretKey = '2z_JoT4dDCNe_bkT9y6kEhc_4plRkUW7Ci1hzoyH';
 
-        return view('esp.permohonan.permohonan_esp', compact('kelulusan','secretKey'));     
+        $institusiPengajian = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
+
+        return view('esp.permohonan.permohonan_esp', compact('kelulusan','secretKey','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));     
         
     }
 
@@ -37,7 +42,11 @@ class MaklumatESPController extends Controller
 
         $secretKey = '2z_JoT4dDCNe_bkT9y6kEhc_4plRkUW7Ci1hzoyH'; 
 
-        return view('esp.tuntutan.tuntutan_esp', compact('kelulusan','secretKey'));     
+        $institusiPengajian = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
+
+        return view('esp.tuntutan.tuntutan_esp', compact('kelulusan','secretKey','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));     
         
     }
 

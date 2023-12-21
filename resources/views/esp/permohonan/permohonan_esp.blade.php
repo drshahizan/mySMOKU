@@ -1,13 +1,15 @@
 <x-default-layout> 
   <head>
       <!-- MAIN CSS -->
-      <link rel="stylesheet" href="/assets/css/sekretariat.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+      <link rel="stylesheet" href="/assets/css/saringan.css">
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
       <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+      <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
       <meta name="csrf-token" content="{{ csrf_token() }}">
 
       <style>
@@ -67,6 +69,59 @@
                   <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
               </li>
             </ul>
+            <!--begin::Card title-->
+            <div class="card-title">
+              <!--begin::Search-->
+              <div class="d-flex align-items-center position-relative my-1">
+                  <input type="hidden" data-kt-subscription-table-filter="search" >
+              </div>
+              <!--end::Search-->
+            </div>
+            <!--begin::Card title-->
+            <!--begin::Card toolbar-->
+            <div class="card-toolbar" style="margin-bottom: 0px!important; margin-top: 10px!important;">
+                <!--begin::Toolbar-->
+                <div class="d-flex justify-content-between" style="margin-left: 20px;" data-kt-subscription-table-toolbar="base">
+                    <!--begin::Filter-->
+                    <!--begin::Content-->
+                    <div data-kt-subscription-table-filter="form">
+                        <!--begin::Input group-->
+                        <div class="row mb-0">
+                            <div class="col-md-8 fv-row">
+                                <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
+                                    <option value="">Pilih Institusi Pengajian</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-2 fv-row none-container"> </div>
+
+                            <div class="col-md-2 fv-row">
+                                <!--begin::Actions-->
+                                <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
+                                    <i class="ki-duotone ki-filter fs-2">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                </button>
+                                <!--end::Actions-->
+                            </div>
+                        </div>
+                        <!--end::Input group-->
+                    </div>
+                    <!--end::Content-->
+                    <!--end::Filter-->
+                </div>
+                
+                <!--end::Toolbar-->
+                <!--begin::Group actions-->
+                <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
+                    <div class="fw-bold me-5">
+                    <span class="me-2" data-kt-subscription-table-select="selected_count"></span>Selected</div>
+                    <button type="button" class="btn btn-danger" data-kt-subscription-table-select="delete_selected">Delete Selected</button>
+                </div>
+                <!--end::Group actions-->
+            </div>
+            <!--end::Card toolbar-->
 
             {{-- Content Navigation Bar --}}
             <div class="tab-content" id="myTabContent">
@@ -404,23 +459,20 @@
       <!--end::Content-->
     </div>  
   </div>
+  <style>
+    .custom-width-select {
+        width: 400px !important; /* Important to override other styles */
+    }
+    .form-select {
+            margin-left: 10px !important; 
+    }
+  </style>
 
   <script>
-      $('#sortTable1').DataTable({
-          ordering: true, // Enable manual sorting
-          order: [] // Disable initial sorting
-      });
-      $('#sortTable1a').DataTable({
-          ordering: true, // Enable manual sorting
-          order: [] // Disable initial sorting
-      });
-      $('#sortTable2').DataTable({
-          ordering: true, // Enable manual sorting
-          order: [] // Disable initial sorting
-      });
-  </script>
+    $(document).ready(function() {
+			$('.js-example-basic-single').select2();
+		});
 
-  <script>
     function toggleSelectAll(tab) {
         var selectAllCheckbox = document.getElementById('select-all-' + tab);
         var isChecked = selectAllCheckbox.checked;
@@ -528,6 +580,136 @@
       display: none;
     }
   </style>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+<script>
+    // Initialize JavaScript variables with data from Blade
+    var bkokuList = @json($institusiPengajian);
+    var bkokuUAList = @json($institusiPengajianUA);
+    var ppkList = @json($institusiPengajianPPK);
+
+    $(document).ready(function() {
+        $('.none-container').show(); // Hide export elements
+
+        // Add an event listener for tab clicks
+        $('.nav-link').on('click', function() {
+            // Get the ID of the active tab
+            var activeTabId = $(this).attr('id');
+
+            // Clear filters when changing tabs
+            clearFilters();
+
+            // Update the institution dropdown based on the active tab
+            switch (activeTabId) {
+                case 'bkoku-tab':
+                    updateInstitusiDropdown(bkokuList);
+                    break;
+                case 'bkokuUA-tab':
+                    updateInstitusiDropdown(bkokuUAList);
+                    break;
+                case 'ppk-tab':
+                    updateInstitusiDropdown(ppkList);
+                    break;
+                // Add more cases if you have additional tabs
+            }
+        });
+
+        // Trigger the function for the default active tab (bkoku-tab)
+        updateInstitusiDropdown(bkokuList);
+
+        // Function to clear filters for all tables
+        function clearFilters() {
+            if (datatable1) {
+                datatable1.search('').columns().search('').draw();
+            }
+            if (datatable) {
+                datatable.search('').columns().search('').draw();
+            }
+            if (datatable2) {
+                datatable2.search('').columns().search('').draw();
+            }
+        }
+
+
+        // Function to update the institution dropdown
+        function updateInstitusiDropdown(institusiList) {
+            // Clear existing options
+            $('#institusiDropdown').empty();
+
+            // Add default option
+            $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
+
+            // Add options based on the selected tab
+            for (var i = 0; i < institusiList.length; i++) {
+                $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
+            }
+        }
+    });
+</script>
+
+<script>
+    // Declare datatables in a higher scope to make them accessible
+    var datatable1, datatable, datatable2;
+
+    $(document).ready(function() {
+        // Initialize DataTables
+        initDataTable('#sortTable1', 'datatable1');
+        initDataTable('#sortTable1a', 'datatable');
+        initDataTable('#sortTable2', 'datatable2');
+
+        // Log data for all tables
+        logTableData('Table 1 Data:', datatable1);
+        logTableData('Table 2 Data:', datatable);
+        logTableData('Table 3 Data:', datatable2);
+    });
+
+    function initDataTable(tableId, variableName) {
+        // Check if the datatable is already initialized
+        if ($.fn.DataTable.isDataTable(tableId)) {
+            // Destroy the existing DataTable instance
+            $(tableId).DataTable().destroy();
+        }
+
+        // Initialize the datatable and assign it to the global variable
+        window[variableName] = $(tableId).DataTable({
+            ordering: true, // Enable manual sorting
+            order: [], // Disable initial sorting
+            columnDefs: [
+                { orderable: false, targets: [0] }
+            ]
+        });
+    }
+
+    function applyFilter() {
+        var selectedInstitusi = $('[name="institusi"]').val();
+
+        // Apply search filter and log data for all tables
+        applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
+        applyAndLogFilter('Table 2', datatable, selectedInstitusi);
+        applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
+
+    }
+
+    function applyAndLogFilter(tableName, table, filterValue) {
+        // Apply search filter to the table
+        table.column(4).search(filterValue).draw();
+
+        // Log filtered data
+        console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
+
+        // Go to the first page for the table
+        table.page(0).draw(false);
+
+        // Log the data of visible rows on the first page for the table
+        console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
+    }
+
+    function logTableData(message, table) {
+        console.log(message, table.rows().data().toArray());
+    }
+</script>
+
 
   <!--begin::Javascript-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
