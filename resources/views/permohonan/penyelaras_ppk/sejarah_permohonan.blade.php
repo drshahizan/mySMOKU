@@ -135,25 +135,20 @@
 
                                                                         <div class="modal-body">
                                                                             @php
-                                                                                $catatan = DB::table('permohonan_saringan')->orderBy('id', 'desc')
-                                                                                ->where('permohonan_id', $item['id'])
-                                                                                ->first();
-                                                                                // dd($item['id']);
-                                                                                function generateOrderedList($str) {
-                                                                                    $strArr = explode(",", $str);
-                                                                                    for ($i = 0; $i < count($strArr) - 1; $i++) {
-                                                                                        echo "<li>" . $strArr[$i] . "</li>";
-                                                                                    }
-                                                                                }
+                                                                                $catatanList = DB::table('permohonan_saringan')
+                                                                                    ->orderBy('id', 'desc')
+                                                                                    ->where('permohonan_id', $item['id'])
+                                                                                    ->get();
                                                                             @endphp
 
-                                                                            <ol type="1">
-                                                                                @php generateOrderedList($catatan->catatan_profil_diri); @endphp
-                                                                                @php generateOrderedList($catatan->catatan_akademik); @endphp
-                                                                                @php generateOrderedList($catatan->catatan_salinan_dokumen); @endphp
-                                                                            </ol>
-
-
+                                                                            @foreach ($catatanList as $catatan)
+                                                                                <ol type="1">
+                                                                                    <li>{!! $catatan->catatan_profil_diri !!}</li>
+                                                                                    <li>{!! $catatan->catatan_akademik !!}</li>
+                                                                                    <li>{!! $catatan->catatan_salinan_dokumen !!}</li>
+                                                                                </ol>
+                                                                            @endforeach
+                                                                            
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
                                                                             </div>
