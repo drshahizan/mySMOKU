@@ -219,9 +219,9 @@
                                                         @endphp
 
                                                         <ol type="1">
-                                                            @php generateOrderedList($catatan->catatan_profil_diri); @endphp
-                                                            @php generateOrderedList($catatan->catatan_akademik); @endphp
-                                                            @php generateOrderedList($catatan->catatan_salinan_dokumen); @endphp
+                                                            @php generateOrderedList($catatan->catatan_profil_diri ?? ''); @endphp
+                                                            @php generateOrderedList($catatan->catatan_akademik  ?? ''); @endphp
+                                                            @php generateOrderedList($catatan->catatan_salinan_dokumen  ?? ''); @endphp
                                                         </ol>
 
 
