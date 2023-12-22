@@ -66,11 +66,11 @@ class PermohonanController extends Controller
 
         $mod = Mod::all()->sortBy('kod_mod');
         $keturunan = Keturunan::all()->sortBy('id');
-        $biaya = SumberBiaya::all()->sortBy('kod_biaya');
-        $penaja = Penaja::all()->sortBy('kod_penaja');
+        $biaya = SumberBiaya::all()->sortBy('id');
+        $penaja = Penaja::orderby("penaja","asc")->get();
         $penajaArray = $penaja->toArray();
         $hubungan = Hubungan::all()->sortBy('kod_hubungan');
-        $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri')->get();
+        $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri','kod_negeri')->get();
         $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
         $parlimen = Parlimen::orderby("id","asc")->get();
         $dun = Dun::orderby("id","asc")->get();
@@ -218,6 +218,25 @@ class PermohonanController extends Controller
 
         return response()->json($kursusData);
 
+    }
+
+    public function getPenaja($sumber)
+    {
+        $penajaData['data'] = Penaja::orderby("penaja", "asc")
+            ->select('id', 'sumber_id', 'penaja')
+            ->where('sumber_id', $sumber)
+            ->get();
+
+        // Add "LAIN-LAIN" option to the penaja data
+        $lainLainOption = [
+            'id' => 99, // Replace with an appropriate ID
+            'sumber_id' => $sumber, // Adjust as needed
+            'penaja' => 'LAIN-LAIN',
+        ];
+
+        $penajaData['data']->push($lainLainOption);
+
+        return response()->json($penajaData);
     }
 
     public function fetchAmaun()
@@ -502,21 +521,16 @@ class PermohonanController extends Controller
         //emel kepada sekretariat
         // $user_sekretariat = User::where('tahap',3)->first();
         // $cc = $user_sekretariat->email;
-        //emel kepada sekretariat -ada ramai sekretariat
-        $user_sekretariat = User::where('tahap',3)->get();
-        $cc = $user_sekretariat->pluck('email')->toArray();
-        $invalidEmails = [];
-        foreach ($cc as $email) {
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $invalidEmails[] = $email;
-            }
-        }
+
+        //taknak emel sekretariat
+
+        
         $catatan = "testing";
         $emel = EmelKemaskini::where('emel_id',13)->first();
 
         if (empty($invalidEmails)) {
  
-            Mail::to($smoku_id->email)->cc($cc)->send(new PermohonanHantar($catatan,$emel));
+            Mail::to($smoku_id->email)->send(new PermohonanHantar($catatan,$emel));
         } else {
             // dd('sini kee');
             foreach ($invalidEmails as $invalidEmail) {

@@ -228,7 +228,10 @@ var KTCreateAccount = function () {
 						validators: {
 							notEmpty: {
 								message: 'No. Telefon Bimbit diperlukan'
-							}
+							},
+							digits: {
+								message: 'No. Telefon Bimbit mesti mengandungi digit sahaja'
+							},
 						}
 					},
 					'agama': {

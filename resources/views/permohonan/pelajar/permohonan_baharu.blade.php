@@ -11,7 +11,9 @@
 			font-size: 22px;
 		}
 	</style>
-		
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
 
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
@@ -278,12 +280,27 @@
 								<!--begin::Row-->
 								<div class="row fv-row">
 									<!--begin::Col-->
+									@php
+						
+										if (preg_match('/^.{6}(.)(.)/', $smoku->no_kp, $matches)) {
+											$kod = $matches[1] . $matches[2];
+										} else {
+											$kod = '';
+										}
+
+									@endphp
 									<div class="col-12">
 										<!--begin::Input-->
 										<select id="negeri_lahir" name="negeri_lahir" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 											<option></option>
-											@foreach ($negeri as $negerilahir)	
-											<option value="{{ $negerilahir->id}}">{{ $negerilahir->negeri}}</option> 
+											@foreach ($negeri as $negerilahir)
+												@php
+													$kodArray = explode(',', $negerilahir->kod_negeri);
+												@endphp
+
+												<option value="{{ $negerilahir->id }}" {{ in_array($kod, $kodArray) ? 'selected' : '' }}>
+													{{ $negerilahir->negeri }}
+												</option>
 											@endforeach
 										</select>
 										<!--end::Input-->
@@ -523,7 +540,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-5 fv-row">
+							<div class="col-md-5 fv-row" id="divdun">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">DUN</label>
 								<!--end::Label-->
@@ -582,6 +599,7 @@
 
 								foreach ($bandar_city_surat as $city_surat) {
 									$cityName_surat = $city_surat->bandar;
+									$cityID_surat = $city_surat->id;
 
 									// Check if the city name is present in the extracted part of the address
 									if (stripos($selectedCity_surat, $cityName_surat) !== false) {
@@ -592,6 +610,8 @@
 							} else {
 								$selectedState_surat = '';
 								$selectedCity_surat = '';
+								$stateID_surat = '';
+								$cityID_surat = '';
 							}
 
 
@@ -606,6 +626,8 @@
 							$selectedState_surat = '';
 							$selectedCity_surat = '';
 							$trimmedAddress_surat = '';
+							$stateID_surat = '';
+							$cityID_surat = '';
 						}	
 						@endphp
 							<!--begin::Alamat Surat-->
@@ -704,7 +726,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{str_replace('-', '', $smoku->tel_bimbit)}}" />
+									<input type="text" maxlength="12" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{str_replace('-', '', $smoku->tel_bimbit)}}" />
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -717,7 +739,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{str_replace('-', '', $smoku->tel_rumah)}}" />
+									<input type="text" maxlength="12" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{str_replace('-', '', $smoku->tel_rumah)}}" />
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -825,7 +847,12 @@
 							</div>
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="16113020138680"><i class="fa-solid fa-circle-info"></i></a>
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;
+								<td>
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="16113020138680">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</td>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
@@ -891,7 +918,7 @@
 								<div class="row fv-row">
 									<!--begin::Col-->
 									<div class="col-12">
-										<input type="text" class="form-control form-control-lg form-control-solid" id="no_pasport_waris" name="no_pasport_waris" placeholder="" value="" />
+										<input type="text" maxlength="9" class="form-control form-control-lg form-control-solid" id="no_pasport_waris" name="no_pasport_waris" placeholder="" value="" />
 									</div>
 									<!--end::Col-->
 								</div>
@@ -914,7 +941,7 @@
 								<label class="form-label mb-6">No. Tel Bimbit</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="text" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{str_replace('-', '', $smoku->tel_bimbit_waris)}}"  />
+								<input type="text" maxlength="12" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{str_replace('-', '', $smoku->tel_bimbit_waris)}}"  />
 								<!--end::Input-->
 							</div>
 							
@@ -1003,7 +1030,12 @@
 							</div>
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="fs-6 fw-semibold form-label mb-2">Pendapatan Bulanan Waris</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Nilai tanpa .00"><i class="fa-solid fa-circle-info"></i></a>
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Pendapatan Bulanan Waris&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Nilai tanpa .00">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
@@ -1144,8 +1176,11 @@
 						<div class="row mb-10">
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-								<span class="">Sesi Pengajian Semasa</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Sesi Pengajian Semasa&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="2023/2024">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
 								</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
@@ -1180,7 +1215,10 @@
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
 								<label class="fs-6 fw-semibold form-label mb-2">
-									<span class="">Tarikh Mula Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
+									Tarikh Mula Pengajian&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sama seperti dalam surat tawaran">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
 								</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
@@ -1191,8 +1229,11 @@
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">Tarikh Tamat Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Tarikh Tamat Pengajian&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sama seperti dalam surat tawaran">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
 								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
@@ -1232,13 +1273,15 @@
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label> 
-								<a href="#" data-bs-toggle="tooltip" title="SENDIRI/TIADA PENAJA
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Sumber Pembiayaan&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="SENDIRI/TIADA PENAJA
 									BIASISWA (CONTOH:SIME DARBY)
 									PINJAMAN (CONTOH:PTPTN)
 									LAIN-LAIN (CONTOH:DERMASISWA)">
-									<i class="fa-solid fa-circle-info"></i>
-								</a>
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</label>
 								<!--end::Label-->
 								<!--begin::Row-->
 								<div class="row fv-row">
@@ -1246,7 +1289,7 @@
 										<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 											@foreach ($biaya as $biaya)
 											<option></option>
-											<option value="{{ $biaya->kod_biaya}}">{{ $biaya->biaya}}</option>
+											<option value="{{ $biaya->id}}">{{ $biaya->biaya}}</option>
 											@endforeach
 										</select>
 									<!--end::Input wrapper-->
@@ -1271,13 +1314,13 @@
 							<div class="col-md-6 fv-row" id="div_nama_penaja">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a>
+									<span class="">Nama Penaja</span>
 								</label>															
 								<!--end::Label-->
-								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 									@foreach ($penaja as $penaja)
 										<option></option>
-										<option value="{{ $penaja->kod_penaja}}">{{ $penaja->penaja}}</option>
+										<option value="{{ $penaja->id}}">{{ $penaja->penaja}}</option>
 									@endforeach
 								</select>
 							</div>
@@ -1396,17 +1439,17 @@
 							</thead>
 							<tbody class="fw-semibold text-gray-600" >
 								<tr>
-									<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/penyata_bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/penyata_bank.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea></td>
 								</tr>
 								<tr>
-									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
 								</tr>
 								<tr>
-									<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="invoisResit" name="invoisResit"/></td>
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_invoisResit" rows="1" name="nota_invoisResit"></textarea></td>
 								</tr>
@@ -1594,34 +1637,43 @@
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
 			function myFunction() {
-			var checkBox = document.getElementById("sama");  
-			var alamat_tetap = document.getElementById("alamat_tetap");
-			var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
-			var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
-			var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
+				var checkBox = document.getElementById("sama");  
+				var alamat_tetap = document.getElementById("alamat_tetap");
+				var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
+				var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
+				var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
 
-			var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
-			var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
-			var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
-			var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
-			if (checkBox.checked == true){
-				alamat_surat_menyurat.value=alamat_tetap.value; 
-				alamat_surat_negeri.value=alamat_tetap_negeri.value;
-				alamat_surat_bandar.value=alamat_tetap_bandar.value;
-				alamat_surat_poskod.value=alamat_tetap_poskod.value;
-				// Trigger select2 update
-				$(alamat_surat_negeri).trigger('change.select2');
-        		$(alamat_surat_bandar).trigger('change.select2');
-			} else {
-				alamat_surat_menyurat.value="";
-				alamat_surat_negeri.value="";
-				alamat_surat_bandar.value="";
-				alamat_surat_poskod.value="";
-				// Trigger select2 update
-				$(alamat_surat_negeri).trigger('change.select2');
-        		$(alamat_surat_bandar).trigger('change.select2');
-			}
-		}	
+				var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
+				var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
+				var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
+				var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
+
+				var postcode_surat = "{{$postcode_surat}}";
+				var stateID_surat = "{{$stateID_surat}}";
+				var cityID_surat = "{{$cityID_surat}}";
+				var trimmedAddress_surat = "{{$trimmedAddress_surat}}";
+				console.log('stateID_surat:', stateID_surat);
+				console.log('cityID_surat:', cityID_surat);
+
+				if (checkBox.checked == true){
+					alamat_surat_menyurat.value=alamat_tetap.value; 
+					alamat_surat_negeri.value=alamat_tetap_negeri.value;
+					alamat_surat_bandar.value=alamat_tetap_bandar.value;
+					alamat_surat_poskod.value=alamat_tetap_poskod.value;
+					// Trigger select2 update
+					$(alamat_surat_negeri).trigger('change.select2');
+					$(alamat_surat_bandar).trigger('change.select2');
+				} else {
+					alamat_surat_menyurat.value = trimmedAddress_surat;
+					alamat_surat_negeri.value = stateID_surat;
+					alamat_surat_bandar.value = cityID_surat;
+					alamat_surat_poskod.value = postcode_surat;
+
+					// Trigger select2 update
+					$(alamat_surat_negeri).trigger('change.select2');
+					$(alamat_surat_bandar).trigger('change.select2');
+				}
+			}	
 
 
 			$(document).ready(function(){
@@ -1710,6 +1762,16 @@
 
 			});
 
+			//negeri takde dun
+			$(document).ready(function(){
+				$('#alamat_tetap_negeri').on('change', function() {
+					if (['14', '15', '16', '17'].includes(this.value)) {
+						$("#divdun").hide();
+					} else {
+						$("#divdun").show();
+					}
+				});
+			});
 
 			//dun
 			$(document).ready(function(){
@@ -1842,35 +1904,74 @@
 				});
 			});
 
-			//SUMBER BIAYA LAIN-LAIN
+			//SUMBER BIAYA DAN PENAJA
 			$(document).ready(function () {
+				// Initialize hidden divs
 				$("#div_biaya_lain").hide();
+				$("#div_penaja_lain").hide();
 
 				var penajaOptions = {!! json_encode($penajaArray) !!};
 
 				// Ensure penajaOptions is an array before attempting to iterate
 				if (Array.isArray(penajaOptions)) {
+					// Event handler for sumber_biaya change
 					$('#sumber_biaya').on('change', function () {
+						$("#div_penaja_lain").hide();
 						var selectedValue = this.value;
 
-						if (selectedValue == '5') {
-							$("#div_biaya_lain").show();
-							$("#div_nama_penaja").hide();
-							$('#nama_penaja').empty().append('<option value="">Pilih</option>');
-						} else if (selectedValue == '2' || selectedValue == '3' || selectedValue == '4') {
+						// Update options based on the selected value
+						$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+
+						// Display "LAIN-LAIN" option for each sumber
+						$('#nama_penaja').append('<option value="99">LAIN-LAIN</option>');
+
+						// Show or hide div elements based on the selected value
+						if (selectedValue == '2' || selectedValue == '4') {
 							$("#div_nama_penaja").hide();
 							$("#div_biaya_lain").hide();
-							$('#nama_penaja').empty().append('<option value="">Pilih</option>');
 						} else {
-							$("#div_biaya_lain").hide();
-							$("#div_nama_penaja").show();
+							if (selectedValue == '5') {
+								$("#div_biaya_lain").show();
+								$("#div_nama_penaja").show();
+							} else {
+								$("#div_biaya_lain").hide();
+								$("#div_nama_penaja").show();
+							}
 
-							// Update options based on the selected value
-							$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+							// Fetch penaja options based on sumber_biaya
+							$.ajax({
+								url: 'getPenaja/' + selectedValue,
+								type: 'get',
+								dataType: 'json',
+								success: function (response) {
+									// Empty the dropdown
+									$('#nama_penaja').find('option').not(':first').remove();
 
-							penajaOptions.forEach(function (penaja) {
-								$('#nama_penaja').append('<option value="' + penaja.kod_penaja + '"' + '>' + penaja.penaja + '</option>');
+									var len = response['data'] ? response['data'].length : 0;
+
+									if (len > 0) {
+										// Read data and create <option>
+										for (var i = 0; i < len; i++) {
+											var id = response['data'][i].id;
+											var penaja = response['data'][i].penaja;
+											var option = "<option value='" + id + "'>" + penaja + "</option>";
+											$("#nama_penaja").append(option);
+										}
+									}
+								},
+								error: function () {
+									alert('AJAX load did not work');
+								}
 							});
+						}
+					});
+
+					// Event handler for nama_penaja change
+					$('#nama_penaja').on('change', function () {
+						if (this.value == '99') {
+							$("#div_penaja_lain").show();
+						} else {
+							$("#div_penaja_lain").hide();
 						}
 					});
 				} else {
@@ -1878,18 +1979,6 @@
 				}
 			});
 
-			//PENAJA LAIN-LAIN
-			$(document).ready(function(){
-				$("#div_penaja_lain").hide();
-				$('#nama_penaja').on('change', function() {
-				if ( this.value == '9'){
-					$("#div_penaja_lain").show();
-				}
-				else {
-					$("#div_penaja_lain").hide();
-				}
-				});
-			});
 
 
 			function dateCheck(){
@@ -2035,7 +2124,7 @@
 					var wang_saku_perbulan = parsed_max_wang_saku;
 					var wang_saku = wang_saku_perbulan * bilbulan;
 
-						
+					//sepenuh masa && biasiswa	
 					if (mod === '1' && sumber === '1') {
 						
 						// console.log("wang: ", wang_saku);
@@ -2046,7 +2135,9 @@
 						document.getElementById("yuran").value = '';
 						document.getElementById("amaun_yuran").value = '';
 						document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
-					} else if (mod === '1' && sumber === '4') {
+					} 
+					//sepenuh masa && pembiayaan sendiri@tiada penaja
+					else if (mod === '1' && sumber === '4') {
 						console.log("Condition mod==='1' && sumber==='4' is met.");
 						console.log("Debug - mod: ", mod);
 						console.log("Debug - sumber: ", sumber);
@@ -2061,7 +2152,9 @@
 						document.getElementById("wang_saku").value = '1';
 						document.getElementById("wang_saku").disabled = false;
 
-					} else if (mod === '1' && sumber === '3') {
+					}
+					//sepenuh masa && pinjaman pelajaran
+					else if (mod === '1' && sumber === '3') {
 						console.log("Condition mod==='1' && sumber==='3' is met.");
 						console.log("Debug - mod: ", mod);
 						console.log("Debug - sumber: ", sumber);
@@ -2076,7 +2169,9 @@
 						document.getElementById("wang_saku").value = '1';
 						document.getElementById("wang_saku").disabled = false;
 
-					} else if (mod === '2' && sumber !== '1') {
+					} 
+					//separuh masa/jarak jauh/dalam talian && pinjaman pelajaran/ pembiayaan sendiri@tiada penaja
+					else if ((mod === '2' || mod === '3' || mod === '4') && (sumber === '3' || sumber === '4')) {
 						console.log("Condition mod ==='2' && sumber !=='1' is met.");
 						document.getElementById("yuran").value = '1';
 						document.getElementById("divyuran").style.display = "";
@@ -2085,7 +2180,9 @@
 						document.getElementById("wang_saku").value = '';
 						document.getElementById("amaun_wang_saku").value = '';
 
-					} else if (mod === '2' && sumber === '1') {
+					} 
+					//separuh masa/jarak jauh/dalam talian && biasiswa
+					else if ((mod === '2' || mod === '3' || mod === '4') && sumber === '1') {
 						console.log("Condition mod ==='2' && sumber ==='1' is met.");
 						document.getElementById("divyuran").style.display = "none";
 						document.getElementById("divelaun").style.display = "none";
@@ -2098,17 +2195,20 @@
 						// document.querySelector('.save-next-button').style.display = "none";
 						return;
 						
-					} else {
-						// var wang_saku_perbulan = max_wang_saku;
-						// var wang_saku = wang_saku_perbulan * bilbulan;
-
+					} 
+					//selain tu tak layak semua
+					else {
 						document.getElementById("divyuran").style.display = "none";
-						document.getElementById("yuran").value = '';
-						document.getElementById("amaun_yuran").value = '';
-						document.getElementById("divelaun").style.display = "";
-						document.getElementById("wang_saku").disabled = false;
-						document.getElementById("wang_saku").value = '1';
-						document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
+						document.getElementById("divelaun").style.display = "none";
+						// Swal.fire({
+						// 	icon: 'error',
+						// 	title: 'Ralat',
+						// 	text: 'TAK LAYAKKKKKKKKKKKK',
+						// });
+
+						// document.querySelector('.save-next-button').style.display = "none";
+						return;
+
 					}
 
 				}
