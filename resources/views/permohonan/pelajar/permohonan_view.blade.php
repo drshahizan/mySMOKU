@@ -1802,6 +1802,11 @@
 
 			//SUMBER BIAYA DAN PENAJA
 			$(document).ready(function () {
+				var sumber = document.getElementById("sumber_biaya").value;
+				if (sumber == '4') {
+					$("#div_nama_penaja").hide();
+				}
+
 				// Initialize hidden divs
 				$("#div_biaya_lain").hide();
 				$("#div_penaja_lain").hide();
