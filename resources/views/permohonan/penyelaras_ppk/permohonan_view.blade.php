@@ -741,7 +741,7 @@
 								<div class="row fv-row">
 									<!--begin::Col-->
 									<div class="col-12">
-										<input type="text" class="form-control form-control-lg form-control-solid" id="no_pasport_waris" name="no_pasport_waris" placeholder="" value="{{$butiranPelajar->no_pasport_waris}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+										<input type="text" maxlength="9" class="form-control form-control-lg form-control-solid" id="no_pasport_waris" name="no_pasport_waris" placeholder="" value="{{$butiranPelajar->no_pasport_waris}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									</div>
 									<!--end::Col-->
 								</div>
@@ -1480,10 +1480,10 @@
 				$(alamat_surat_negeri).trigger('change.select2');
         		$(alamat_surat_bandar).trigger('change.select2');
 			} else {
-				alamat_surat_menyurat.value="";
-				alamat_surat_negeri.value="";
-				alamat_surat_bandar.value="";
-				alamat_surat_poskod.value="";
+				alamat_surat_menyurat.value="{{$butiranPelajar->alamat_surat_baru}}";
+				alamat_surat_negeri.value="{{$butiranPelajar->alamat_surat_negeri}}";
+				alamat_surat_bandar.value="{{$butiranPelajar->alamat_surat_bandar}}";
+				alamat_surat_poskod.value="{{$butiranPelajar->alamat_surat_poskod}}";
 				// Trigger select2 update
 				$(alamat_surat_negeri).trigger('change.select2');
         		$(alamat_surat_bandar).trigger('change.select2');

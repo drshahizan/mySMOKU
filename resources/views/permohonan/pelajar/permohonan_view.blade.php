@@ -1064,9 +1064,9 @@
 									</span>
 								</label>
 								<!--end::Label-->
-									<!--begin::Input wrapper-->
-									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" onchange=dateCheck() value="{{$butiranPelajar->tarikh_mula}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
-									<!--end::Input wrapper-->
+								<!--begin::Input wrapper-->
+								<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" onchange=dateCheck() value="{{$butiranPelajar->tarikh_mula}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+								<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
 							<!--begin::Col-->
@@ -1539,7 +1539,7 @@
 			$(document).ready(function(){
 				$('[data-bs-toggle="tooltip"]').tooltip();
 			});
-			</script>	
+		</script>	
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
 			function myFunction() {

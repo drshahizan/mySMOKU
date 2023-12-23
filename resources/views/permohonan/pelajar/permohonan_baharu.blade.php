@@ -578,6 +578,10 @@
 
 							// Check if the second part (after the postcode) exists
 							if (isset($addressParts_surat[1])) {
+
+								// Extract state from the second part
+								$statePart_surat = trim($addressParts_surat[1]);
+
 								$selectedState_surat = '';
 								$selectedCity_surat = '';
 
@@ -586,13 +590,13 @@
 									$stateID_surat = $state_surat->id;
 
 									// Check if the state name is present in the address
-									if (stripos($smoku->alamat_surat_menyurat, $stateName_surat) !== false) {
+									if (stripos($statePart_surat, $stateName_surat) !== false) {
 										$selectedState_surat = $stateName_surat;
-										break; // Stop the loop once a match is found
+										break; // Stop the loop o.nce a match is found
 									}
 								}
-								// Trim any leading or trailing spaces and set $selectedCity
-								$selectedCity_surat = trim($addressParts_surat[1]);
+								// Trim any leading or trailing spaces in $statePart
+								$statePart_surat = trim($statePart_surat);
 
 								// Search for the city in your $bandar collection
 								$bandar_city_surat = DB::table('bk_bandar')->where("negeri_id", $stateID_surat)->orderBy("id", "asc")->select('id', 'bandar')->get();
@@ -602,7 +606,7 @@
 									$cityID_surat = $city_surat->id;
 
 									// Check if the city name is present in the extracted part of the address
-									if (stripos($selectedCity_surat, $cityName_surat) !== false) {
+									if (stripos($statePart_surat, $cityName_surat) !== false) {
 										$selectedCity_surat = $cityName_surat;
 										break; // Stop the loop once a match is found
 									}

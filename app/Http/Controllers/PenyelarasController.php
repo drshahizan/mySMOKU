@@ -270,7 +270,7 @@ class PenyelarasController extends Controller
         $penaja = Penaja::all()->sortBy('kod_penaja');
         $penajaArray = $penaja->toArray();
         $hubungan = Hubungan::all()->sortBy('kod_hubungan');
-        $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri')->get();
+        $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri','kod_negeri')->get();
         $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
         $agama = Agama::orderby("id","asc")->select('id','agama')->get();
         // $infoipt = InfoIpt::all()->where('jenis_institusi','IPTA')->sortBy('nama_institusi');
