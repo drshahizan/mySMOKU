@@ -657,14 +657,15 @@ class PenyelarasController extends Controller
         // $user_sekretariat = User::where('tahap',3)->first();
         // $cc = $user_sekretariat->email;
         //emel kepada sekretariat -ada ramai sekretariat
-        $user_sekretariat = User::where('tahap',3)->get();
-        $cc = $user_sekretariat->pluck('email')->toArray();
-        $invalidEmails = [];
-        foreach ($cc as $email_cc) {
-            if (!filter_var($email_cc, FILTER_VALIDATE_EMAIL)) {
-                $invalidEmails[] = $email_cc;
-            }
-        }
+        // $user_sekretariat = User::where('tahap',3)->get();
+        // $cc = $user_sekretariat->pluck('email')->toArray();
+        // $invalidEmails = [];
+        // foreach ($cc as $email_cc) {
+        //     if (!filter_var($email_cc, FILTER_VALIDATE_EMAIL)) {
+        //         $invalidEmails[] = $email_cc;
+        //     }
+        // }
+        //taknak emel sekretariat
 
         //emel kepada penyelaras
         $user = User::where('no_kp',Auth::user()->no_kp)->first();
@@ -673,8 +674,8 @@ class PenyelarasController extends Controller
         $emel = EmelKemaskini::where('emel_id',13)->first();
         // dd($cc,$user->email,$cc_pelajar);
         if (empty($invalidEmails)) {
-            $ccRecipients = array_merge($cc, [$cc_pelajar]);
-            Mail::to($user->email)->cc($ccRecipients)->send(new PermohonanHantar($catatan, $emel));
+
+            Mail::to($user->email)->cc($cc_pelajar)->send(new PermohonanHantar($catatan, $emel));
         } else {
             // dd('sini kee');
             foreach ($invalidEmails as $invalidEmail) {
