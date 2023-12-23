@@ -11,12 +11,10 @@
 			font-size: 22px;
 		}
 	</style>
-	<script>
-	$(document).ready(function(){
-		$('[data-bs-toggle="tooltip"]').tooltip();
-	});
-	</script>	
-
+	
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->
@@ -281,12 +279,27 @@
 								<!--begin::Row-->
 								<div class="row fv-row">
 									<!--begin::Col-->
+									@php
+						
+										if (preg_match('/^.{6}(.)(.)/', $smoku->no_kp, $matches)) {
+											$kod = $matches[1] . $matches[2];
+										} else {
+											$kod = '';
+										}
+
+									@endphp
 									<div class="col-12">
 										<!--begin::Input-->
 										<select id="negeri_lahir" name="negeri_lahir" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 											<option></option>
-											@foreach ($negeri as $negerilahir)	
-											<option value="{{ $negerilahir->id}}">{{ $negerilahir->negeri}}</option> 
+											@foreach ($negeri as $negerilahir)
+												@php
+													$kodArray = explode(',', $negerilahir->kod_negeri);
+												@endphp
+
+												<option value="{{ $negerilahir->id }}" {{ in_array($kod, $kodArray) ? 'selected' : '' }}>
+													{{ $negerilahir->negeri }}
+												</option>
 											@endforeach
 										</select>
 										<!--end::Input-->
@@ -525,7 +538,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-5 fv-row">
+							<div class="col-md-5 fv-row" id="divdun">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">DUN</label>
 								<!--end::Label-->
@@ -583,6 +596,7 @@
 
 								foreach ($bandar_city_surat as $city_surat) {
 									$cityName_surat = $city_surat->bandar;
+									$cityID_surat = $city_surat->id;
 
 									// Check if the city name is present in the extracted part of the address
 									if (stripos($selectedCity_surat, $cityName_surat) !== false) {
@@ -593,6 +607,8 @@
 							} else {
 								$selectedState_surat = '';
 								$selectedCity_surat = '';
+								$stateID_surat = '';
+								$cityID_surat = '';
 							}
 
 
@@ -607,6 +623,8 @@
 							$selectedState_surat = '';
 							$selectedCity_surat = '';
 							$trimmedAddress_surat = '';
+							$stateID_surat = '';
+							$cityID_surat = '';
 						}	
 						@endphp
 							<!--begin::Alamat Surat-->
@@ -705,7 +723,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{$smoku->tel_bimbit}}" />
+									<input type="text" maxlength="12" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{str_replace('-', '', $smoku->tel_bimbit)}}" />
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -718,7 +736,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{$smoku->tel_rumah}}" />
+									<input type="text" maxlength="12" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{str_replace('-', '', $smoku->tel_rumah)}}" />
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -825,7 +843,12 @@
 							</div>
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="16113020138680"><i class="fa-solid fa-circle-info"></i></a>
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;
+								<td>
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="16113020138680">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</td>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
@@ -915,7 +938,7 @@
 								<label class="form-label mb-6">No. Tel Bimbit</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="text" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{$smoku->tel_bimbit_waris}}"  />
+								<input type="text" maxlength="12" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{str_replace('-', '', $smoku->tel_bimbit_waris)}}"  />
 								<!--end::Input-->
 							</div>
 							
@@ -944,8 +967,7 @@
 						<div class="row mb-10">
 							<div class="col-md-5 fv-row">
 								<!--begin::Label-->
-								<label class="fs-6 fw-semibold form-label mb-2">Negeri
-								</label>
+								<label class="fs-6 fw-semibold form-label mb-2">Negeri</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
@@ -992,8 +1014,7 @@
 						<div class="row mb-10">
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="fs-6 fw-semibold form-label mb-2">Pekerjaan Waris
-								</label>
+								<label class="fs-6 fw-semibold form-label mb-2">Pekerjaan Waris</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
@@ -1005,7 +1026,12 @@
 							</div>
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="fs-6 fw-semibold form-label mb-2">Pendapatan Bulanan Waris</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Nilai tanpa .00"><i class="fa-solid fa-circle-info"></i></a>
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Pendapatan Bulanan Waris&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Nilai tanpa .00">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</label>								
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
@@ -1088,8 +1114,11 @@
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-								<span class="">Sesi Pengajian Semasa</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Sesi Pengajian Semasa&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="2023/2024">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
 								</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
@@ -1115,9 +1144,7 @@
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<select name="mod" id="mod" class="form-select form-select-solid" onchange=select1() data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-									
 									<option value="1">SEPENUH MASA</option>
-									
 								</select>
 								<!--end::Input wrapper-->
 							</div>
@@ -1129,7 +1156,6 @@
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
 									<span class="">No Pendaftaran Pelajar</span>
-									
 								</label>
 								<!--end::Label-->
 								<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="" />
@@ -1189,7 +1215,10 @@
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
 								<label class="fs-6 fw-semibold form-label mb-2">
-									<span class="">Tarikh Mula Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
+									Tarikh Mula Pengajian&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sama seperti dalam surat tawaran">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
 								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
@@ -1200,8 +1229,11 @@
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">Tarikh Tamat Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Tarikh Tamat Pengajian&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sama seperti dalam surat tawaran">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
 								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
@@ -1216,7 +1248,15 @@
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label> <a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Sumber Pembiayaan&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="SENDIRI/TIADA PENAJA
+									BIASISWA (CONTOH:SIME DARBY)
+									PINJAMAN (CONTOH:PTPTN)
+									LAIN-LAIN (CONTOH:DERMASISWA)">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</label>
 								<!--end::Label-->
 								<!--begin::Row-->
 								<div class="row fv-row">
@@ -1246,10 +1286,10 @@
 						<!--end::Input group-->
 						<!--begin::Input group-->
 						<div class="row mb-10">
-							<div class="col-md-6 fv-row"  id="div_nama_penaja">
+							<div class="col-md-6 fv-row" id="div_nama_penaja">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a>
+									<span class="">Nama Penaja</span>
 								</label>															
 								<!--end::Label-->
 								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
@@ -1351,12 +1391,12 @@
 							</thead>
 							<tbody class="fw-semibold text-gray-600" >
 								<tr>
-									<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/penyata_bank.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea></td>
 								</tr>
 								<tr>
-									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh salinan"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
 								</tr>
@@ -1475,7 +1515,11 @@
 		<script src="/assets/js/custom/utilities/modals/create-account.js"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
-
+		<script>
+			$(document).ready(function(){
+				$('[data-bs-toggle="tooltip"]').tooltip();
+			});
+		</script>	
 		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 		<script type="text/javascript">
    
@@ -1505,6 +1549,14 @@
 			var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
 			var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
 			var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
+
+			var postcode_surat = "{{$postcode_surat}}";
+			var stateID_surat = "{{$stateID_surat}}";
+			var cityID_surat = "{{$cityID_surat}}";
+			var trimmedAddress_surat = "{{$trimmedAddress_surat}}";
+			console.log('stateID_surat:', stateID_surat);
+			console.log('cityID_surat:', cityID_surat);
+
 			if (checkBox.checked == true){
 				alamat_surat_menyurat.value=alamat_tetap.value; 
 				alamat_surat_negeri.value=alamat_tetap_negeri.value;
@@ -1514,10 +1566,10 @@
 				$(alamat_surat_negeri).trigger('change.select2');
         		$(alamat_surat_bandar).trigger('change.select2');
 			} else {
-				alamat_surat_menyurat.value="";
-				alamat_surat_negeri.value="";
-				alamat_surat_bandar.value="";
-				alamat_surat_poskod.value="";
+				alamat_surat_menyurat.value = trimmedAddress_surat;
+				alamat_surat_negeri.value = stateID_surat;
+				alamat_surat_bandar.value = cityID_surat;
+				alamat_surat_poskod.value = postcode_surat;
 				// Trigger select2 update
 				$(alamat_surat_negeri).trigger('change.select2');
         		$(alamat_surat_bandar).trigger('change.select2');
@@ -1608,6 +1660,17 @@
 					});
 				});
 
+			});
+
+			//negeri takde dun
+			$(document).ready(function(){
+				$('#alamat_tetap_negeri').on('change', function() {
+					if (['14', '15', '16', '17'].includes(this.value)) {
+						$("#divdun").hide();
+					} else {
+						$("#divdun").show();
+					}
+				});
 			});
 
 			//dun
@@ -1740,34 +1803,79 @@
 				});
 			});
 
-			//SUMBER BIAYA LAIN-LAIN
-			$(document).ready(function(){
+			//SUMBER BIAYA DAN PENAJA
+			$(document).ready(function () {
+				// Initialize hidden divs
 				$("#div_biaya_lain").hide();
-				$('#sumber_biaya').on('change', function() {
-				if ( this.value == '5'){
-					$("#div_biaya_lain").show();
-				}
-				else if (this.value == '4'){
-					$("#div_nama_penaja").hide();
-				}
-				else {
-					$("#div_biaya_lain").hide();
-					$("#div_nama_penaja").show();
-				}
-				});
-			});
-
-			//PENAJA LAIN-LAIN
-			$(document).ready(function(){
 				$("#div_penaja_lain").hide();
-				$('#nama_penaja').on('change', function() {
-				if ( this.value == '9'){
-					$("#div_penaja_lain").show();
+
+				var penajaOptions = {!! json_encode($penajaArray) !!};
+
+				// Ensure penajaOptions is an array before attempting to iterate
+				if (Array.isArray(penajaOptions)) {
+					// Event handler for sumber_biaya change
+					$('#sumber_biaya').on('change', function () {
+						$("#div_penaja_lain").hide();
+						var selectedValue = this.value;
+
+						// Update options based on the selected value
+						$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+
+						// Display "LAIN-LAIN" option for each sumber
+						$('#nama_penaja').append('<option value="99">LAIN-LAIN</option>');
+
+						// Show or hide div elements based on the selected value
+						if (selectedValue == '2' || selectedValue == '4') {
+							$("#div_nama_penaja").hide();
+							$("#div_biaya_lain").hide();
+						} else {
+							if (selectedValue == '5') {
+								$("#div_biaya_lain").show();
+								$("#div_nama_penaja").show();
+							} else {
+								$("#div_biaya_lain").hide();
+								$("#div_nama_penaja").show();
+							}
+
+							// Fetch penaja options based on sumber_biaya
+							$.ajax({
+								url: '/getPenaja/' + selectedValue,
+								type: 'get',
+								dataType: 'json',
+								success: function (response) {
+									// Empty the dropdown
+									$('#nama_penaja').find('option').not(':first').remove();
+
+									var len = response['data'] ? response['data'].length : 0;
+
+									if (len > 0) {
+										// Read data and create <option>
+										for (var i = 0; i < len; i++) {
+											var id = response['data'][i].id;
+											var penaja = response['data'][i].penaja;
+											var option = "<option value='" + id + "'>" + penaja + "</option>";
+											$("#nama_penaja").append(option);
+										}
+									}
+								},
+								error: function () {
+									alert('AJAX load did not work');
+								}
+							});
+						}
+					});
+
+					// Event handler for nama_penaja change
+					$('#nama_penaja').on('change', function () {
+						if (this.value == '99') {
+							$("#div_penaja_lain").show();
+						} else {
+							$("#div_penaja_lain").hide();
+						}
+					});
+				} else {
+					console.error("Error: penajaOptions is not an array");
 				}
-				else {
-					$("#div_penaja_lain").hide();
-				}
-				});
 			});
 
 			function dateCheck(){

@@ -891,7 +891,7 @@
 							<label class="form-label mb-3">Nama Waris</label>
 							<!--end::Label-->
 							<!--begin::Input-->
-							<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" style="text-transform: uppercase;" placeholder="" value="{{strtoupper($smoku->nama_waris)}}"  />
+							<input type="text" class="form-control form-control-lg form-control-solid" id="nama_waris" name="nama_waris" placeholder="" value="{{strtoupper($smoku->nama_waris)}}" style="text-transform: uppercase;"/>
 							<!--end::Input-->
 						</div>
 						<div class="row mb-10">
@@ -1669,7 +1669,7 @@
 					alamat_surat_bandar.value = cityID_surat;
 					alamat_surat_poskod.value = postcode_surat;
 
-					// Trigger select2 update
+					// Trigger select2 update.
 					$(alamat_surat_negeri).trigger('change.select2');
 					$(alamat_surat_bandar).trigger('change.select2');
 				}

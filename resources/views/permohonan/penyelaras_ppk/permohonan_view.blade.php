@@ -11,13 +11,10 @@
 			font-size: 22px;
 		}
 	</style>
-	
-	<script>
-	$(document).ready(function(){
-		$('[data-bs-toggle="tooltip"]').tooltip();
-	});
-	</script>	
-
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>	
+		
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->
@@ -334,8 +331,11 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="bangsa" name="bangsa" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true">
-										<option value="{{$butiranPelajar->kod_keturunan}}">{{$butiranPelajar->keturunan}}</option>
+									<select id='keturunan' name='keturunan' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+										<option value="">Pilih</option>
+										@foreach ($keturunan as $keturunan)	
+										<option value="{{$keturunan->id}}" {{$butiranPelajar->kod_keturunan == $keturunan->id ? 'selected' : ''}}>{{ strtoupper($keturunan->keturunan)}}</option>
+										@endforeach
 									</select>
 									<!--end::Input-->
 								</div>
@@ -436,7 +436,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-5 fv-row">
+							<div class="col-md-5 fv-row" id="divdun">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">DUN</label>
 								<!--end::Label-->
@@ -550,7 +550,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{$butiranPelajar->tel_bimbit_baru}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="text" maxlength="12" class="form-control form-control-solid" id="tel_bimbit" name="tel_bimbit" placeholder="" value="{{$butiranPelajar->tel_bimbit_baru}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -563,7 +563,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{$butiranPelajar->tel_rumah_baru}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+									<input type="text" maxlength="12" class="form-control form-control-solid" id="tel_rumah" name="tel_rumah" placeholder="" value="{{$butiranPelajar->tel_rumah_baru}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -670,7 +670,12 @@
 							</div>
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="16113020138680"><i class="fa-solid fa-circle-info"></i></a>
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;
+								<td>
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="16113020138680">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</td>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
@@ -759,7 +764,7 @@
 								<label class="form-label mb-6">No. Tel Bimbit</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input type="text" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{$butiranPelajar->tel_bimbit_waris}}"  {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+								<input type="text" maxlength="12" class="form-control form-control-solid" id="tel_bimbit_waris" name="tel_bimbit_waris" placeholder="" value="{{$butiranPelajar->tel_bimbit_waris}}"  {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 								<!--end::Input-->
 							</div>
 						</div>
@@ -850,7 +855,12 @@
 							</div>
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="fs-6 fw-semibold form-label mb-2">Pendapatan Bulanan Waris</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Nilai tanpa .00"><i class="fa-solid fa-circle-info"></i></a>
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Pendapatan Bulanan Waris&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Nilai tanpa .00">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
@@ -930,8 +940,11 @@
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-								<span class="">Sesi Pengajian Semasa</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="2023/2024"><i class="fa-solid fa-circle-info"></i></a>
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Sesi Pengajian Semasa&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="2023/2024">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
 								</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
@@ -1065,23 +1078,29 @@
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
 								<label class="fs-6 fw-semibold form-label mb-2">
-									<span class="">Tarikh Mula Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
+									Tarikh Mula Pengajian&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sama seperti dalam surat tawaran">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
 								</label>
 								<!--end::Label-->
-									<!--begin::Input wrapper-->
-									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" onchange=dateCheck() value="{{$butiranPelajar->tarikh_mula}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
-									<!--end::Input wrapper-->
+								<!--begin::Input wrapper-->
+								<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" onchange=dateCheck() value="{{$butiranPelajar->tarikh_mula}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+								<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">Tarikh Tamat Pengajian</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Ikut Surat Tawaran"><i class="fa-solid fa-circle-info"></i></a>
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Tarikh Tamat Pengajian&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sama seperti dalam surat tawaran">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
 								</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
-									<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" value="{{$butiranPelajar->tarikh_tamat}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+								<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" value="{{$butiranPelajar->tarikh_tamat}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 								<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
@@ -1092,7 +1111,15 @@
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Sumber Pembiayaan</label> <a href="#" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a>
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Sumber Pembiayaan&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="SENDIRI/TIADA PENAJA
+									BIASISWA (CONTOH:SIME DARBY)
+									PINJAMAN (CONTOH:PTPTN)
+									LAIN-LAIN (CONTOH:DERMASISWA)">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</label>
 								<!--end::Label-->
 								<!--begin::Row-->
 								<div class="row fv-row">
@@ -1126,13 +1153,13 @@
 							<div class="col-md-6 fv-row" id="div_nama_penaja">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">Nama Penaja</span>&nbsp;<a href="#" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a>
+									<span class="">Nama Penaja</span>
 								</label>															
 								<!--end::Label-->
-								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
-									<option></option>
+								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+									<option value="">Pilih</option>
 									@foreach ($penaja as $penaja)
-									<option value="{{$penaja->kod_penaja}}" {{$butiranPelajar->nama_penaja == $penaja->kod_penaja ? 'selected' : ''}}>{{ $penaja->penaja}}</option>
+									<option value="{{$penaja->id}}" {{$butiranPelajar->nama_penaja == $penaja->id ? 'selected' : ''}}>{{ $penaja->penaja}}</option>
 									@endforeach
 								</select>
 							</div>
@@ -1273,12 +1300,12 @@
 								@endforeach	
 								@else
 								<tr>
-									<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/penyata_bank.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea></td>
 								</tr>
 								<tr>
-									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></td>
+									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
 								</tr>
@@ -1425,6 +1452,11 @@
 				});
 				
 			});
+		</script>
+		<script>
+			$(document).ready(function(){
+				$('[data-bs-toggle="tooltip"]').tooltip();
+			});
 		</script> 
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
@@ -1468,7 +1500,7 @@
 					// AJAX request 
 					$.ajax({
 						
-						url: 'getBandar/'+idnegeri,
+						url: '/bandar/'+idnegeri,
 						type: 'get',
 						dataType: 'json',
 						success: function(response){
@@ -1542,6 +1574,17 @@
 					});
 				});
 
+			});
+
+			//negeri takde dun
+			$(document).ready(function(){
+				$('#alamat_tetap_negeri').on('change', function() {
+					if (['14', '15', '16', '17'].includes(this.value)) {
+						$("#divdun").hide();
+					} else {
+						$("#divdun").show();
+					}
+				});
 			});
 
 			//dun
@@ -1675,34 +1718,84 @@
 				});
 			});
 
-			//SUMBER BIAYA LAIN-LAIN
-			$(document).ready(function(){
-				$("#div_biaya_lain").hide();
-				$('#sumber_biaya').on('change', function() {
-				if ( this.value == '5'){
-					$("#div_biaya_lain").show();
-				}
-				else if (this.value == '4'){
+			//SUMBER BIAYA DAN PENAJA
+			$(document).ready(function () {
+				var sumber = document.getElementById("sumber_biaya").value;
+				if (sumber == '4') {
 					$("#div_nama_penaja").hide();
 				}
-				else {
-					$("#div_biaya_lain").hide();
-					$("#div_nama_penaja").show();
-				}
-				});
-			});
 
-			//PENAJA LAIN-LAIN
-			$(document).ready(function(){
+				// Initialize hidden divs
+				$("#div_biaya_lain").hide();
 				$("#div_penaja_lain").hide();
-				$('#nama_penaja').on('change', function() {
-				if ( this.value == '9'){
-					$("#div_penaja_lain").show();
+
+				var penajaOptions = {!! json_encode($penajaArray) !!};
+
+				// Ensure penajaOptions is an array before attempting to iterate
+				if (Array.isArray(penajaOptions)) {
+					// Event handler for sumber_biaya change
+					$('#sumber_biaya').on('change', function () {
+						$("#div_penaja_lain").hide();
+						var selectedValue = this.value;
+
+						// Update options based on the selected value
+						$('#nama_penaja').empty().append('<option value="">Pilih</option>');
+
+						// Display "LAIN-LAIN" option for each sumber
+						$('#nama_penaja').append('<option value="99">LAIN-LAIN</option>');
+
+						// Show or hide div elements based on the selected value
+						if (selectedValue == '2' || selectedValue == '4') {
+							$("#div_nama_penaja").hide();
+							$("#div_biaya_lain").hide();
+						} else {
+							if (selectedValue == '5') {
+								$("#div_biaya_lain").show();
+								$("#div_nama_penaja").show();
+							} else {
+								$("#div_biaya_lain").hide();
+								$("#div_nama_penaja").show();
+							}
+
+							// Fetch penaja options based on sumber_biaya
+							$.ajax({
+								url: '/getPenaja/' + selectedValue,
+								type: 'get',
+								dataType: 'json',
+								success: function (response) {
+									// Empty the dropdown
+									$('#nama_penaja').find('option').not(':first').remove();
+
+									var len = response['data'] ? response['data'].length : 0;
+
+									if (len > 0) {
+										// Read data and create <option>
+										for (var i = 0; i < len; i++) {
+											var id = response['data'][i].id;
+											var penaja = response['data'][i].penaja;
+											var option = "<option value='" + id + "'>" + penaja + "</option>";
+											$("#nama_penaja").append(option);
+										}
+									}
+								},
+								error: function () {
+									alert('AJAX load did not work');
+								}
+							});
+						}
+					});
+
+					// Event handler for nama_penaja change
+					$('#nama_penaja').on('change', function () {
+						if (this.value == '99') {
+							$("#div_penaja_lain").show();
+						} else {
+							$("#div_penaja_lain").hide();
+						}
+					});
+				} else {
+					console.error("Error: penajaOptions is not an array");
 				}
-				else {
-					$("#div_penaja_lain").hide();
-				}
-				});
 			});
 
 			function dateCheck(){

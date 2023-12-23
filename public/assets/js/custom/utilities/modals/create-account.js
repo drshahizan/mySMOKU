@@ -234,6 +234,13 @@ var KTCreateAccount = function () {
 							},
 						}
 					},
+					'tel_rumah': {
+						validators: {
+							digits: {
+								message: 'No. Telefon Rumah mesti mengandungi digit sahaja'
+							},
+						}
+					},
 					'agama': {
 						validators: {
 							notEmpty: {
@@ -286,6 +293,13 @@ var KTCreateAccount = function () {
 			form,
 			{
 				fields: {
+					'nama_waris': {
+						validators: {
+							notEmpty: {
+								message: 'Nama Waris diperlukan'
+							}
+						}
+					},
 					'no_kp_waris': {
 						validators: {
 							notEmpty: {
@@ -304,7 +318,10 @@ var KTCreateAccount = function () {
 						validators: {
 							notEmpty: {
 								message: 'No. Tel Bimbit diperlukan'
-							}
+							},
+							digits: {
+								message: 'No. Telefon Bimbit mesti mengandungi digit sahaja'
+							},
 						}
 					},
 					'alamat_waris': {
