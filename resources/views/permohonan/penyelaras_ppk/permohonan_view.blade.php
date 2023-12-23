@@ -1496,6 +1496,8 @@
 					//alert(id);
 					// Empty the dropdown
 					$('#alamat_tetap_bandar').find('option').not(':first').remove();
+					$('#alamat_tetap_poskod').val('');
+
 
 					// AJAX request 
 					$.ajax({
@@ -1619,6 +1621,49 @@
 											var option = "<option value='"+id+"'>"+kod_dun+"-"+dun+"</option>";
 
 											$("#dun").append(option); 
+										}
+									}
+							}, 
+							error: function(){
+							alert('AJAX load did not work');
+							}
+
+					});
+				});
+
+			});
+
+			//negeri surat
+			$(document).ready(function(){
+				$('#alamat_surat_negeri').on('change', function() {
+					var idnegeri = $(this).val();
+					//alert(id);
+					// Empty the dropdown
+					$('#alamat_surat_bandar').find('option').not(':first').remove();
+					$('#alamat_surat_poskod').val('');
+					// AJAX request 
+					$.ajax({
+						
+						url: '/getBandar/'+idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+							var len = 0;
+									if(response['data'] != null){
+										len = response['data'].length;
+									}
+
+									if(len > 0){
+										// Read data and create <option >
+										for(var i=0; i<len; i++){
+
+											var id = response['data'][i].id;
+											var bandar = response['data'][i].bandar;
+
+											var option = "<option value='"+id+"'>"+bandar+"</option>";
+
+											$("#alamat_surat_bandar").append(option); 
 										}
 									}
 							}, 
