@@ -1058,7 +1058,7 @@ class PenyelarasPPKController extends Controller
         ->join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'permohonan.smoku_id')
         ->where('smoku_penyelaras.penyelaras_id', '=', Auth::user()->id)
         ->select('permohonan.*')
-        ->orderBy('created_at', 'DESC')
+        ->orderBy('permohonan.tarikh_hantar', 'DESC')
         ->get();
         // dd($permohonan);
         
