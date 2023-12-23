@@ -32,29 +32,12 @@ class SaringanController extends Controller
         $status_kod=0;
         $status = null;
 
-        $filters = $request->only(['institusi']);
+        $permohonan = Permohonan::whereIn('status', ['2','3','4','5'])->orderBy('tarikh_hantar', 'desc')->get();
+        $institusiPengajian = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
 
-        $query = Permohonan::select('permohonan.*')
-            ->where(function ($query) {
-                $query->where('permohonan.status', '=', '2')
-                    ->orWhere('permohonan.status', '=', '3')
-                    ->orWhere('permohonan.status', '=', '4')
-                    ->orWhere('permohonan.status', '=', '5');
-            });
-
-        if (isset($filters['institusi'])) {
-            $selectedInstitusi = $filters['institusi'];
-            $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
-                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
-                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
-        }
-
-        $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
-        $institusiBKOKU = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
-        $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
-
-        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status','institusiBKOKU','institusiUA','institusiPPK'));
+        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status', 'institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
     public function maklumatPermohonan($id)
