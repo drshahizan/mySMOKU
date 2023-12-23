@@ -135,19 +135,33 @@
 
                                                                         <div class="modal-body">
                                                                             @php
-                                                                                $catatanList = DB::table('permohonan_saringan')
+                                                                                $catatan = DB::table('permohonan_saringan')
                                                                                     ->orderBy('id', 'desc')
                                                                                     ->where('permohonan_id', $item['id'])
-                                                                                    ->get();
+                                                                                    ->first();
+
+                                                                                if (!function_exists('generateOrderedList')) {
+                                                                                    function generateOrderedList($str) {
+                                                                                        $strArr = explode(",", $str);
+                                                                                        $html = '';
+
+                                                                                        foreach ($strArr as $item) {
+                                                                                            $trimmedItem = trim($item);
+                                                                                            if (!empty($trimmedItem)) {
+                                                                                                $html .= "<li>" . $trimmedItem . "</li>";
+                                                                                            }
+                                                                                        }
+
+                                                                                        return $html;
+                                                                                    }
+                                                                                }
                                                                             @endphp
 
-                                                                            @foreach ($catatanList as $catatan)
-                                                                                <ol type="1">
-                                                                                    <li>{!! $catatan->catatan_profil_diri !!}</li>
-                                                                                    <li>{!! $catatan->catatan_akademik !!}</li>
-                                                                                    <li>{!! $catatan->catatan_salinan_dokumen !!}</li>
-                                                                                </ol>
-                                                                            @endforeach
+                                                                            <ol type="1">
+                                                                                {!! generateOrderedList($catatan->catatan_profil_diri ?? '') !!}
+                                                                                {!! generateOrderedList($catatan->catatan_akademik ?? '') !!}
+                                                                                {!! generateOrderedList($catatan->catatan_salinan_dokumen ?? '') !!}
+                                                                            </ol>
                                                                             
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
