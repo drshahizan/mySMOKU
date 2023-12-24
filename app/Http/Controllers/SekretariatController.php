@@ -1032,7 +1032,7 @@ class SekretariatController extends Controller
     {
         $penyata =  MaklumatBank::where('institusi_id', $id)->first();
         $dokumen = DokumenESP::where('institusi_id', $id)->first();
-        return view('spbb.sekretariat.salinan_dokumen',compact('dokumen'));
+        return view('spbb.sekretariat.salinan_dokumen',compact('dokumen','penyata'));
     }
 
 
