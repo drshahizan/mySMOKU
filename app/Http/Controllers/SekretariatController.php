@@ -34,6 +34,7 @@ use App\Models\SuratTawaran;
 use App\Models\TamatPengajian;
 use App\Models\TangguhPengajian;
 use App\Models\Tuntutan;
+use App\Models\MaklumatBank;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -898,12 +899,12 @@ class SekretariatController extends Controller
         return $pdf->stream('SuratTawaran_'.$permohonanId.'.pdf');
     }
 
-    //PENYALURAN
+    //PENYALURAN SPBB
     public function muatNaikDokumenSPPB()
     {
         $institusiPengajian = InfoIpt::all();
         $dokumen = DokumenESP::orderBy('created_at', 'desc')->get();
-        return view('dokumen.sekretariat.muat_naik_dokumen', compact('institusiPengajian','dokumen'));
+        return view('spbb.sekretariat.muat_naik_dokumen', compact('institusiPengajian','dokumen'));
     }
 
     public function hantarDokumenSPPB(Request $request)
@@ -1023,14 +1024,15 @@ class SekretariatController extends Controller
     public function muatTurunDokumenSPPB()
     {
         // Order by created date in descending order
-        $dokumen = DokumenESP::orderBy('created_at', 'desc')->get();
-        return view('dokumen.sekretariat.muat_turun_dokumen', compact('dokumen'));
+        $dokumen = DokumenESP::orderBy('updated_at', 'desc')->get();
+        return view('spbb.sekretariat.muat_turun_dokumen', compact('dokumen'));
     }
 
     public function salinanDokumenSPPB($id)
     {
+        $penyata =  MaklumatBank::where('institusi_id', $id)->first();
         $dokumen = DokumenESP::where('institusi_id', $id)->first();
-        return view('dokumen.sekretariat.salinan_dokumen',compact('dokumen'));
+        return view('spbb.sekretariat.salinan_dokumen',compact('dokumen'));
     }
 
 

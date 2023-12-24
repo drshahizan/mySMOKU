@@ -1328,6 +1328,7 @@ class PenyelarasController extends Controller
         return view('permohonan.penyelaras_bkoku.papar_kelulusan',compact('permohonan','kelulusan','smoku','sejarah_p'));
     }
 
+    //DOKUMEN SPBB
     public function muatTurunBorangSPPB()
     {   
         $user = auth()->user();
@@ -1339,7 +1340,7 @@ class PenyelarasController extends Controller
             ->orderBy('created_at', 'desc')
             ->get(); 
         
-        return view('dokumen.penyelaras.muat_turun_dokumen', compact('dokumen','institusiId'));
+        return view('spbb.penyelaras.muat_turun_dokumen', compact('dokumen','institusiId'));
     }
 
     public function muatNaikBorangSPPB()
@@ -1352,7 +1353,7 @@ class PenyelarasController extends Controller
             ->where('no_rujukan', 'like', '%/2')
             ->get();
 
-        return view('dokumen.penyelaras.muat_naik_dokumen', compact('institusiId','dokumen'));
+        return view('spbb.penyelaras.muat_naik_dokumen', compact('institusiId','dokumen'));
     }
 
     public function hantarBorangSPPB(Request $request)
@@ -1471,7 +1472,7 @@ class PenyelarasController extends Controller
     public function dokumenSPPB($id)
     {
         $dokumen = DokumenESP::where('institusi_id', $id)->first();
-        return view('dokumen.penyelaras.salinan_dokumen',compact('dokumen'));
+        return view('spbb.penyelaras.salinan_dokumen',compact('dokumen'));
     }
 
     public function muatTurunDokumenSPPB1()
@@ -1484,6 +1485,7 @@ class PenyelarasController extends Controller
         return Excel::download(new DokumenSPPB1a, 'sppb1a-export.xlsx');
     }
 
+    //KEMASKINI BANK
     public function maklumatBank()
     {   
         $user = auth()->user();

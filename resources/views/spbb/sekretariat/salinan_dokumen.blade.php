@@ -59,6 +59,16 @@
                     SPBB 3
                 </button>
             </li>  
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="dokumen4-tab" data-toggle="tab" data-target="#dokumen4" type="button" role="tab" aria-controls="dokumen4" aria-selected="true">
+                    SPBB 4
+                </button>
+            </li>  
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="penyata-tab" data-toggle="tab" data-target="#penyata" type="button" role="tab" aria-controls="penyata" aria-selected="true">
+                    Penyata Bank
+                </button>
+            </li>  
         </ul>
     
         <div class="tab-content" id="myTabContent">
@@ -151,6 +161,38 @@
                     @endif
                 </div>
             </div>
+
+            <div class="tab-pane fadeshow" id="dokumen4" role="tabpanel" aria-labelledby="dokumen4-tab">
+                <div style="text-align: center">
+                    @php
+                        $fileExtension = pathinfo($dokumen->dokumen4, PATHINFO_EXTENSION);
+                    @endphp
+
+                    @if (in_array($fileExtension, $xlsxExtensions))
+                        <p>Sila klik link di bawah untuk muat turun Dokumen Surat Iringan Universiti</p>
+                        <a href="/assets/dokumen/sppb_4/{{$dokumen->dokumen4}}" download>Klik Sini</a><br>
+                    @elseif (in_array($fileExtension, $pdfExtensions))
+                        <embed src="/assets/dokumen/sppb_4/{{$dokumen->dokumen4}}#zoom=90" width="70%" height="605px" />
+                    @else
+                        <p>Dokumen Surat Iringan Universiti tidak dimuat naik oleh penyelaras.</p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="tab-pane fadeshow" id="penyata" role="tabpanel" aria-labelledby="penyata-tab">
+                <div style="text-align: center">
+                    @php
+                        $fileExtension = pathinfo($penyata->penyata_bank, PATHINFO_EXTENSION);
+                    @endphp
+                    
+                    @if (in_array($fileExtension, $pdfExtensions))
+                        <embed src="/assets/dokumen/penyata_bank_islam/{{$penyata->penyata_bank}}#zoom=90" width="70%" height="605px" />
+                    @else
+                        <p>Penyata bank tidak dimuat naik oleh penyelaras.</p>
+                    @endif
+                </div>
+            </div>
+
         </div>
     </div>
 </body>
