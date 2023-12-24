@@ -106,13 +106,17 @@
             $program = DB::table('smoku_akademik')->where('smoku_id', $permohonan['smoku_id'])->value('nama_kursus');
             $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $permohonan['smoku_id'])->value('tarikh_mula');
             $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $permohonan['smoku_id'])->value('tarikh_tamat');
-            $institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_info_institusi.nama_institusi');
             $mod = DB::table('smoku_akademik')->join('bk_mod','bk_mod.kod_mod','=','smoku_akademik.mod' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_mod.mod');
+            $institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_info_institusi.nama_institusi');
         @endphp
 
         <p>
             <span style="float: right">
-                Rujukan Kami : KPT - {{$no_kp}}<br>
+                @if ($permohonan->program == "BKOKU")
+                    Rujukan Kami : KPT.BKOKU-{{$no_kp}}<br>
+                @else
+                    Rujukan Kami : KPT.PPK-{{$no_kp}}<br>
+                @endif
                 Tarikh : {{date('d/m/Y', strtotime($tarikh_kelulusan))}}<br>
             </span>
         </p>
@@ -187,7 +191,7 @@
         <p>s.k :<br>
             {{$kandungan_surat->penutup4_1}} <br>
             {{$kandungan_surat->penutup4_2}} <br>
-            {{$kandungan_surat->penutup4_3}} <br>
+            {{strtoupper($institusi)}} <br>
         </p>
     </body>
 </html>
