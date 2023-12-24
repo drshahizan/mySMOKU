@@ -343,7 +343,7 @@
 			<div class="menu-item">
 				<a class="menu-link" href="{{ route('sekretariat.muat-turun.SPBB')}}">
 					<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
-					<span class="menu-title">Muat Turun SPBB</span>
+					<span class="menu-title">Muat Turun SPBB & Penyata Bank</span>
 				</a>
 			</div>
 

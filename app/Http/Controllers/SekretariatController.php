@@ -1035,7 +1035,6 @@ class SekretariatController extends Controller
         return view('spbb.sekretariat.salinan_dokumen',compact('dokumen','penyata'));
     }
 
-
     //TUNTUTAN
     public function senaraiTuntutanKedua(Request $request)
     {
