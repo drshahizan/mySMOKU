@@ -173,7 +173,7 @@
         <p>s.k :<br>
             {{ $suratTawaran->penutup4_1}} <br>
             {{ $suratTawaran->penutup4_2}} <br>
-            XXXXXXXXXXXXXXX <br>
+            XXXXXXXXXXXXXXXXXXX <br>
         </p>
     </body>
 </html>

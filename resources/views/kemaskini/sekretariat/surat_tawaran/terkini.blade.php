@@ -203,7 +203,7 @@
                                 <p>s.k :<br>
                                     {{$suratTawaran->penutup4_1}} <br>
                                     {{$suratTawaran->penutup4_2}} <br>
-                                    XXXXXXXXXXXXXXX <br>
+                                    XXXXXXXXXXXXXXXXXXX <br>
                                 </p>
 
                                 <div class="d-flex flex-center mt-5 mb-5">

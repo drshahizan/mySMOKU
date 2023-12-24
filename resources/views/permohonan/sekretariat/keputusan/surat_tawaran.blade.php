@@ -186,7 +186,7 @@
             {{$kandungan_surat->penutup3_4}} <br>
         </p>
         <br>
-        <p><div style="text-align: center;">Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>
+        <div style="text-align: center;">Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div>
         <br>
         <p>s.k :<br>
             {{$kandungan_surat->penutup4_1}} <br>

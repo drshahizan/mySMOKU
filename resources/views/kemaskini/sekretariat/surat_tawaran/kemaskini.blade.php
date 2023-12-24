@@ -224,7 +224,6 @@
                                 <div class="col-md-5 fv-row">
                                     <input class="form-control" type="text" id="penutup4_2" name="penutup4_2" style="font-weight:bold" value="{{$suratTawaran->penutup4_2}}">
                                 </div>
-                                <div class="col-md-5 fv-row">XXXXXXXXXXXXXXX</div>
                                 
                                 <div class="d-flex flex-center mt-5 mb-5">
                                     <button type="submit" class="btn btn-primary btn-sm">Kemaskini</button>
