@@ -203,7 +203,7 @@
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Institusi</strong></td>
                                             <td>:</td>
-                                            <td>{{$institusi}}</td>
+                                            <td>{{$nama_institusi}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>No. Kad Pengenalan</strong></td>
