@@ -201,16 +201,16 @@ class SaringanController extends Controller
                 ->where('smoku_akademik.id_institusi', $selectedInstitusi);
         }
         $permohonan = $query->orderBy('tarikh_hantar', 'desc')->get();
-        $institusiBKOKU = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
-        $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
+        $institusiPengajian = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
 
         //notifikasi
         $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
         $status_kod = 3;
         $status = "Permohonan dan tuntutan ".$no_rujukan_permohonan." telah disaring dan disokong.";
 
-        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status','institusiBKOKU','institusiUA','institusiPPK'));
+        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status', 'institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
     public function saringPermohonan(Request $request,$id)
