@@ -1232,7 +1232,6 @@ class PenyelarasController extends Controller
 
     public function deletePermohonan($id)
     {
-        //dd($id);
         
         $smoku_id = Smoku::where('id', $id)->first();
         $permohonan = DB::table('permohonan')->orderBy('id', 'asc')
@@ -1348,7 +1347,7 @@ class PenyelarasController extends Controller
         $user = auth()->user();
         $institusiId = $user->id_institusi;
         
-        // Get documents for the user's 'institusi_id' and 'no_rujukan' ending in '/1'
+        // Get documents for the user's 'institusi_id' and 'no_rujukan' ending in '/2'
         $dokumen = DokumenESP::where('institusi_id', $institusiId)
             ->where('no_rujukan', 'like', '%/2')
             ->get();
@@ -1467,12 +1466,6 @@ class PenyelarasController extends Controller
 
         // Store the uploaded file names in the session for display in your view
         return redirect()->route('penyelaras.muat-naik.SPBB')->with('success', 'Semua fail SPBB telah berjaya dikemaskini.');
-    }
-
-    public function dokumenSPPB($id)
-    {
-        $dokumen = DokumenESP::where('institusi_id', $id)->first();
-        return view('spbb.penyelaras.salinan_dokumen',compact('dokumen'));
     }
 
     public function muatTurunDokumenSPPB1()
