@@ -152,15 +152,15 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
             'H' => 30,
             'I' => 20,
             'J' => 20,
-            'K' => 35,
-            'L' => 20,
-            'M' => 20,
+            'K' => 20,
+            'L' => 25,
+            'M' => 15,
             'N' => 20,
             'O' => 20,
             'P' => 20,
             'Q' => 20,
-            'R' => 40,
-            'S' => 40,
+            'R' => 30,
+            'S' => 30,
         ];
     }
 
@@ -272,7 +272,12 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                         'startColor' => ['rgb' => 'B3B3B3'], // Data header background color 
                     ],
-                ]);
+                ])
+                ->getAlignment()
+                ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+                ->setVertical(Alignment::VERTICAL_CENTER)
+                ->setTextRotation(0) // Optional: Set text rotation to 0 degrees
+                ->setWrapText(true);
 
                 // Customize the style for the special rows
                 $event->sheet->getStyle('A5')->applyFromArray([
@@ -387,9 +392,15 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                 $event->sheet->getStyle('O' . ($lastRow + 12))->getFont()->setSize(9);
                 $event->sheet->setCellValue('O' . ($lastRow + 12), 'Tarikh:');
 
-                // Add the following lines to apply wrap text format
-                $event->sheet->getStyle('A1:' . $event->sheet->getHighestColumn() . $event->sheet->getHighestRow())
-                             ->getAlignment()->setWrapText(true);
+                // Set "Wrap Text" for the data table rows (from row 8 to the last row)
+                $lastRow = $event->sheet->getHighestRow();
+                $dataTableStartRow = 8;
+
+                for ($row = $dataTableStartRow; $row <= $lastRow; $row++) {
+                    $event->sheet->getStyle('A' . $row . ':' . $event->sheet->getHighestColumn() . $row)
+                        ->getAlignment()
+                        ->setWrapText(true);
+                }
             },
         ];
     }
