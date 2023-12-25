@@ -142,14 +142,14 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
     public function columnWidths(): array
     {
         return [
-            'A' => 3,
-            'B' => 50,           
+            'A' => 5,
+            'B' => 30,           
             'C' => 20,
             'D' => 15,
             'E' => 20,
             'F' => 25,
             'G' => 25,
-            'H' => 50,
+            'H' => 30,
             'I' => 20,
             'J' => 20,
             'K' => 35,
@@ -159,7 +159,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
             'O' => 20,
             'P' => 20,
             'Q' => 20,
-            'R' => 60,
+            'R' => 40,
             'S' => 40,
         ];
     }
@@ -379,13 +379,17 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 $event->sheet->setCellValue('K' . ($lastRow + 12), 'Tarikh:');
 
                 $event->sheet->getStyle('O' . ($lastRow + 9))->getFont()->setSize(9);
-                $event->sheet->setCellValue('O' . ($lastRow + 9), 'Disemak oleh:');
+                $event->sheet->setCellValue('O' . ($lastRow + 9), 'Disahkan oleh:');
 
                 $event->sheet->getStyle('O' . ($lastRow + 10))->getFont()->setSize(9);
                 $event->sheet->setCellValue('O' . ($lastRow + 10), 'Cop & tandatangan');
 
                 $event->sheet->getStyle('O' . ($lastRow + 12))->getFont()->setSize(9);
                 $event->sheet->setCellValue('O' . ($lastRow + 12), 'Tarikh:');
+
+                // Add the following lines to apply wrap text format
+                $event->sheet->getStyle('A1:' . $event->sheet->getHighestColumn() . $event->sheet->getHighestRow())
+                             ->getAlignment()->setWrapText(true);
             },
         ];
     }
