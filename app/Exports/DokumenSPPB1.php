@@ -152,7 +152,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
             'H' => 30,
             'I' => 20,
             'J' => 20,
-            'K' => 23,
+            'K' => 21,
             'L' => 20,
             'M' => 12,
             'N' => 20,
