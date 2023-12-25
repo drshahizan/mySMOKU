@@ -248,7 +248,7 @@
 												</div>
 
 												<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp;
-													Saiz maksimum fail adalah 2 MB.
+													Saiz maksimum fail adalah 2 MB / 2048 KB.
 												</div>
 											</td>
 										</tr>

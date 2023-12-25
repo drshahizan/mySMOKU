@@ -1445,7 +1445,7 @@ class PenyelarasController extends Controller
             $file4 = $dokumen4[0] ?? null;
             if ($file4 && $file4->isValid()) {
                 $uniqueFilenameDokumen4 = uniqid() . '_' . $file4->getClientOriginalName();
-                $file3->move('assets/dokumen/sppb_4', $uniqueFilenameDokumen4);
+                $file4->move('assets/dokumen/sppb_4', $uniqueFilenameDokumen4);
                 $uploadedDokumen4[] = $uniqueFilenameDokumen4;
             }
 
