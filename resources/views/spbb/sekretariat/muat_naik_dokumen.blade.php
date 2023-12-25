@@ -191,6 +191,24 @@
 												</div>																						
 											</td>
 										</tr>
+
+										{{-- DOKUMEN SPBB 4 --}}
+										<tr>
+											<td>Borang SPBB 4 (Surat Iringan Universiti)</td>
+											<td>
+												<div id="file-input-container">
+													<!-- File input fields for SPPB3 -->
+													<div class="d-flex">
+														<div class="file-input">
+															<input type="file" name="dokumen4[]"/>
+															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen4))
+																<a href="{{ asset('assets/dokumen/sppb_4/' . $dokumen->first()->dokumen4) }}" target="_blank">{{ $dokumen->first()->dokumen4 }}</a>
+															@endif
+														</div>
+													</div>
+												</div>																						
+											</td>
+										</tr>
 										
 										<tr>
 											<td colspan="2">

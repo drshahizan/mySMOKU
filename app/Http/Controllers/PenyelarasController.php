@@ -1367,11 +1367,13 @@ class PenyelarasController extends Controller
         $dokumen2 = $request->file('dokumen2');
         $dokumen2a = $request->file('dokumen2a');
         $dokumen3 = $request->file('dokumen3');
+        $dokumen4 = $request->file('dokumen4');
         $uploadedDokumen1 = [];
         $uploadedDokumen1a = [];
         $uploadedDokumen2 = [];
         $uploadedDokumen2a = [];
         $uploadedDokumen3 = [];
+        $uploadedDokumen4 = [];
 
         // Validation rules for each document column
         $rules = [
@@ -1380,6 +1382,7 @@ class PenyelarasController extends Controller
             'dokumen2.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
             'dokumen2a.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
             'dokumen3.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen4.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
         ];
 
         // Custom error messages
@@ -1397,8 +1400,8 @@ class PenyelarasController extends Controller
                 ->withInput();
         }
 
-        if ($dokumen1 || $dokumen1a || $dokumen2 || $dokumen2a || $dokumen3) {
-            // Check and process dokumen2a
+        if ($dokumen1 || $dokumen1a || $dokumen2 || $dokumen2a || $dokumen3 || $dokumen4) {
+            // Check and process dokumen1
             $file1 = $dokumen1[0] ?? null;
             if ($file1 && $file1->isValid()) {
                 $uniqueFilenameDokumen1 = uniqid() . '_' . $file1->getClientOriginalName();
@@ -1406,7 +1409,7 @@ class PenyelarasController extends Controller
                 $uploadedDokumen1[] = $uniqueFilenameDokumen1;
             }
 
-            // Check and process dokumen2a
+            // Check and process dokumen1a
             $file1a = $dokumen1a[0] ?? null;
             if ($file1a && $file1a->isValid()) {
                 $uniqueFilenameDokumen1a = uniqid() . '_' . $file1a->getClientOriginalName();
@@ -1414,7 +1417,7 @@ class PenyelarasController extends Controller
                 $uploadedDokumen1a[] = $uniqueFilenameDokumen1a;
             }
             
-            // Check and process dokumen2a
+            // Check and process dokumen2
             $file2 = $dokumen2[0] ?? null;
             if ($file2 && $file2->isValid()) {
                 $uniqueFilenameDokumen2 = uniqid() . '_' . $file2->getClientOriginalName();
@@ -1438,6 +1441,14 @@ class PenyelarasController extends Controller
                 $uploadedDokumen3[] = $uniqueFilenameDokumen3;
             }
 
+            // Check and process dokumen4
+            $file4 = $dokumen4[0] ?? null;
+            if ($file4 && $file4->isValid()) {
+                $uniqueFilenameDokumen4 = uniqid() . '_' . $file4->getClientOriginalName();
+                $file3->move('assets/dokumen/sppb_4', $uniqueFilenameDokumen4);
+                $uploadedDokumen4[] = $uniqueFilenameDokumen4;
+            }
+
             // Update or create the record in the database after processing all files
             if ($existRecord) {
                 $existRecord->update([
@@ -1449,6 +1460,7 @@ class PenyelarasController extends Controller
                     'dokumen2' => $uploadedDokumen2[0] ?? null,
                     'dokumen2a' => $uploadedDokumen2a[0] ?? null,
                     'dokumen3' => $uploadedDokumen3[0] ?? null,
+                    'dokumen4' => $uploadedDokumen4[0] ?? null,
                 ]);
             } else {
                 $dokumenESP = new DokumenESP();
@@ -1460,6 +1472,7 @@ class PenyelarasController extends Controller
                 $dokumenESP->dokumen2 = $uploadedDokumen2[0]  ?? null;
                 $dokumenESP->dokumen2a = $uploadedDokumen2a[0] ?? null;
                 $dokumenESP->dokumen3 = $uploadedDokumen3[0]  ?? null;
+                $dokumenESP->dokumen4 = $uploadedDokumen4[0]  ?? null;
                 $dokumenESP->save();
             }
         }
