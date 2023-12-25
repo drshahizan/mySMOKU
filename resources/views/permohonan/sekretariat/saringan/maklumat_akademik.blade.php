@@ -15,7 +15,7 @@
         $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi ?? '')->value('nama_institusi');
         $mod = DB::table('bk_mod')->where('kod_mod', $akademik->mod ?? '')->value('mod');
         $sumber_biaya = DB::table('bk_sumber_biaya')->where('kod_biaya', $akademik->sumber_biaya ?? '')->value('biaya');
-        $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja ?? '')->value('penaja');
+        $nama_penaja = DB::table('bk_penaja')->where('id', $akademik->nama_penaja ?? '')->value('penaja');
     @endphp
     <table class="profile-form">
         <tr>
