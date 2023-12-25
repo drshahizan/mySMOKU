@@ -19,5 +19,6 @@ class DokumenESP extends Model
         'dokumen2',
         'dokumen2a',
         'dokumen3',
+        'dokumen4',
     ];
 }

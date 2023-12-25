@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('dokumen2');
             $table->string('dokumen2a');
             $table->string('dokumen3');
+            $table->string('dokumen4');
             $table->timestamps();
         });
     }
