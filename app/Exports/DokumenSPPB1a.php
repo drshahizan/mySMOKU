@@ -152,9 +152,9 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
             'H' => 30,
             'I' => 20,
             'J' => 20,
-            'K' => 20,
-            'L' => 25,
-            'M' => 15,
+            'K' => 23,
+            'L' => 20,
+            'M' => 12,
             'N' => 20,
             'O' => 20,
             'P' => 20,
@@ -312,7 +312,12 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                             'color' => ['rgb' => '000000'], // Border color
                         ],
                     ],
-                ]);
+                ])
+                ->getAlignment()
+                ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+                ->setVertical(Alignment::VERTICAL_CENTER)
+                ->setTextRotation(0) // Optional: Set text rotation to 0 degrees
+                ->setWrapText(true);
 
                 // Specify the row indices to be bold
                 $boldRows = [1, 2, 3, 4, 5];
@@ -392,15 +397,6 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 $event->sheet->getStyle('O' . ($lastRow + 12))->getFont()->setSize(9);
                 $event->sheet->setCellValue('O' . ($lastRow + 12), 'Tarikh:');
 
-                // Set "Wrap Text" for the data table rows (from row 8 to the last row)
-                $lastRow = $event->sheet->getHighestRow();
-                $dataTableStartRow = 8;
-
-                for ($row = $dataTableStartRow; $row <= $lastRow; $row++) {
-                    $event->sheet->getStyle('A' . $row . ':' . $event->sheet->getHighestColumn() . $row)
-                        ->getAlignment()
-                        ->setWrapText(true);
-                }
             },
         ];
     }
