@@ -102,7 +102,7 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
         return [
             AfterSheet::class => function(AfterSheet $event) {
                 // Customize the style of the header row
-                $event->sheet->getStyle('A1:I1')->applyFromArray([
+                $event->sheet->getStyle('A1:H1')->applyFromArray([
                     'font' => [
                         'bold' => true,
                         'color' => ['rgb' => '#000000'], // Header font color 
@@ -125,7 +125,7 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
                             'borderStyle' => Border::BORDER_THIN,
                             'color' => ['rgb' => '000000'],
                         ],
-                        'allBorders' => [
+                        'outline' => [
                             'borderStyle' => Border::BORDER_THIN,
                             'color' => ['rgb' => '000000'],
                         ],
@@ -143,7 +143,7 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
                 }
     
                 // Customize the style of the data rows
-                $event->sheet->getStyle('A2:I' . $event->sheet->getHighestRow())
+                $event->sheet->getStyle('A2:H' . $event->sheet->getHighestRow())
                     ->getAlignment()
                     ->setHorizontal(Alignment::HORIZONTAL_CENTER)
                     ->setVertical(Alignment::VERTICAL_CENTER)
@@ -151,7 +151,7 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
                     ->setWrapText(true);
     
                 // Add borders to data rows
-                $event->sheet->getStyle('A2:I' . $event->sheet->getHighestRow())
+                $event->sheet->getStyle('A2:H' . $event->sheet->getHighestRow())
                     ->applyFromArray([
                         'borders' => [
                             'allBorders' => [

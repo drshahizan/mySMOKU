@@ -30,11 +30,11 @@ class SenaraiPendekUA implements FromCollection, WithHeadings, WithColumnWidths,
     {
         $senarai_pendek = DB::table('permohonan as a')
             ->where('a.status', 4)
-            ->where('a.program', $this->programCode)
+            ->where('a.program', '=', 'BKOKU')
             ->join('smoku_akademik as b', 'b.smoku_id', '=', 'a.smoku_id')
             ->join('bk_info_institusi as c', function ($join) {
                 $join->on('c.id_institusi', '=', 'b.id_institusi')
-                    ->where('c.jenis_institusi', '=', 'UA');
+                    ->where('c.jenis_institusi', $this->programCode);
             })
             ->join('smoku as d', 'd.id', '=', 'a.smoku_id')
             ->join('bk_jenis_oku as e', 'e.kod_oku', '=', 'd.kategori')
@@ -102,7 +102,7 @@ class SenaraiPendekUA implements FromCollection, WithHeadings, WithColumnWidths,
         return [
             AfterSheet::class => function(AfterSheet $event) {
                 // Customize the style of the header row
-                $event->sheet->getStyle('A1:I1')->applyFromArray([
+                $event->sheet->getStyle('A1:H1')->applyFromArray([
                     'font' => [
                         'bold' => true,
                         'color' => ['rgb' => '#000000'], // Header font color 
@@ -125,7 +125,7 @@ class SenaraiPendekUA implements FromCollection, WithHeadings, WithColumnWidths,
                             'borderStyle' => Border::BORDER_THIN,
                             'color' => ['rgb' => '000000'],
                         ],
-                        'allBorders' => [
+                        'outline' => [
                             'borderStyle' => Border::BORDER_THIN,
                             'color' => ['rgb' => '000000'],
                         ],
@@ -143,7 +143,7 @@ class SenaraiPendekUA implements FromCollection, WithHeadings, WithColumnWidths,
                 }
     
                 // Customize the style of the data rows
-                $event->sheet->getStyle('A2:I' . $event->sheet->getHighestRow())
+                $event->sheet->getStyle('A2:H' . $event->sheet->getHighestRow())
                     ->getAlignment()
                     ->setHorizontal(Alignment::HORIZONTAL_CENTER)
                     ->setVertical(Alignment::VERTICAL_CENTER)
@@ -151,7 +151,7 @@ class SenaraiPendekUA implements FromCollection, WithHeadings, WithColumnWidths,
                     ->setWrapText(true);
     
                 // Add borders to data rows
-                $event->sheet->getStyle('A2:I' . $event->sheet->getHighestRow())
+                $event->sheet->getStyle('A2:H' . $event->sheet->getHighestRow())
                     ->applyFromArray([
                         'borders' => [
                             'allBorders' => [
