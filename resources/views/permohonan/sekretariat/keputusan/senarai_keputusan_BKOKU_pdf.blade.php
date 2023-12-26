@@ -40,7 +40,15 @@
                 text-align: right;
             }
             .page-break-table {
-                margin-top: 20px; /* Adjust the margin as needed */
+                margin-bottom: 20px; /* Adjust the margin as needed between tables */
+            }
+
+            @page :first {
+                margin-top: 0; /* No top margin for the first page */
+            }
+
+            @page :not(:first) {
+                margin-top: 20px; /* Add top margin for the second page onwards */
             }
         </style>
     </head>
