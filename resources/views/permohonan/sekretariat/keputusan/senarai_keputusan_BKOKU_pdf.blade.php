@@ -39,6 +39,9 @@
             td.no{
                 text-align: right;
             }
+            .page-break-table {
+                margin-top: 20px; /* Adjust the margin as needed */
+            }
         </style>
     </head>
 
@@ -69,9 +72,9 @@
             <div class="tittle" style="text-align: center; font-size: 14px;">
                 <b>SENARAI KEPUTUSAN PERMOHONAN BKOKU</b>
             </div>
-            
+
             {{-- Table --}}
-            <table class="table table-striped" style="padding-top:10px; padding-bottom:20px;">
+            <table class="table table-striped page-break-table" style="padding-top: 10px; padding-bottom: 20px;">
                 <thead>
                     <tr style="color: white; background-color: #3d0066;">
                         <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>
