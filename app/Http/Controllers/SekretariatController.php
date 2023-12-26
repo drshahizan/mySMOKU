@@ -465,11 +465,11 @@ class SekretariatController extends Controller
         return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan','filters','institusiBKOKU','institusiUA','institusiPPK'));
     }
 
-    public function cetakSenaraiPemohonPDF(Request $request, $programCode)
+    public function cetakSenaraiDisokongPDF(Request $request, $programCode)
     {
         $filters = $request->only(['institusi']); // Adjust the filter names as per your form
-
-        $query = Permohonan::orderBy('id', 'desc')
+        
+        $query = Permohonan::orderBy('permohonan.updated_at', 'desc')
                             ->where('permohonan.status', '4');
 
         if (isset($filters['institusi']) ) {
@@ -493,7 +493,7 @@ class SekretariatController extends Controller
         return $pdf->stream('Senarai-Permohonan-Disokong.pdf');
     }
 
-    public function cetakSenaraiPemohonExcel(Request $request, $programCode)
+    public function cetakSenaraiDisokongExcel(Request $request, $programCode)
     {
         $filters = $request->only(['institusi']);
 
