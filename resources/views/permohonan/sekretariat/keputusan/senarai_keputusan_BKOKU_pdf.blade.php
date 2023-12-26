@@ -75,7 +75,7 @@
         <div class="tittle" style="text-align: center; font-size: 14px;">
             <b>SENARAI KEPUTUSAN PERMOHONAN BKOKU</b>
         </div>
-        <br><br>
+        <br>
         {{-- Table --}}
         <table class="table table-striped">
             <thead>

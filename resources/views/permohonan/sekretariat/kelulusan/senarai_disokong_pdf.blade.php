@@ -42,7 +42,7 @@
         .page-number-container {
             position: absolute;
             bottom: 10px; 
-            right: 550px; 
+            right: 560px; 
             font-size: 12px;
         }
     </style>
@@ -86,13 +86,13 @@
             <thead class="text-center">
                 <tr>
                     <th style="width: 3%"><b>No.</b></th>
-                    <th style="width: 12%"><b>ID Permohonan</b></th>
+                    <th style="width: 10%"><b>ID Permohonan</b></th>
                     <th style="width: 20%"><b>Nama</b></th>
                     <th style="width: 10%"><b>Jenis Kecacatan</b></th>                                        
                     <th style="width: 20%"><b>Nama Kursus</b></th>
-                    <th style="width: 15%"><b>Institusi Pengajian</b></th>
-                    <th style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
-                    <th style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+                    <th style="width: 20%"><b>Institusi Pengajian</b></th>
+                    <th style="width: 8%"><b>Tarikh Mula Pengajian</b></th>
+                    <th style="width: 9%"><b>Tarikh Tamat Pengajian</b></th>
                 </tr>
             </thead>
             <tbody>
@@ -179,7 +179,7 @@
 
         <!-- Page number container -->
         <div class="page-number-container">
-            Muka Surat {{ $pageNumber }}
+            {{ $pageNumber }}
         </div>
 
         <?php
