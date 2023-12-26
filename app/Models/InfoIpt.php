@@ -17,5 +17,6 @@ class InfoIpt extends Model
         'nama_institusi_bi',
         'poskod',
         'jenis_institusi',
+        'jenis_permohonan',
     ];
 }

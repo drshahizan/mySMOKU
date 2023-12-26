@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nama_institusi_bi')->nullable();
             $table->string('poskod')->nullable();
             $table->string('jenis_institusi')->nullable();
+            $table->string('jenis_permohonan')->nullable();
             $table->timestamps();
         });
     }
