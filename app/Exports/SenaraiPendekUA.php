@@ -146,7 +146,7 @@ class SenaraiPendekUA implements FromCollection, WithHeadings, WithColumnWidths,
                 $event->sheet->getStyle('A2:H' . $event->sheet->getHighestRow())
                     ->applyFromArray([
                         'borders' => [
-                            'outline' => [
+                            'allBorders' => [
                                 'borderStyle' => Border::BORDER_THIN,
                                 'color' => ['rgb' => '000000'],
                             ],
