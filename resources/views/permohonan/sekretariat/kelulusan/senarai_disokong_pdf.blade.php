@@ -41,7 +41,7 @@
         }
         .page-number-container {
             position: absolute;
-            bottom: 10px; 
+            bottom: 20px; 
             right: 560px; 
             font-size: 12px;
         }
