@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
 {
@@ -69,8 +70,8 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
             'D' => 20,
             'E' => 40,
             'F' => 30,
-            'G' => 10,
-            'H' => 10,
+            'G' => 15,
+            'H' => 15,
         ];
     }
 
@@ -101,7 +102,7 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
         return [
             AfterSheet::class => function(AfterSheet $event) {
                 // Customize the style of the header row
-                $event->sheet->getStyle('A1:' . $event->sheet->getHighestColumn() . '1')->applyFromArray([
+                $event->sheet->getStyle('A1:H1')->applyFromArray([
                     'font' => [
                         'bold' => true,
                         'color' => ['rgb' => '#000000'], // Header font color 
@@ -115,17 +116,21 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
                         'horizontal' => Alignment::HORIZONTAL_CENTER,
                         'vertical' => Alignment::VERTICAL_CENTER,
                     ],
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ],
                 ])
                 ->getAlignment()
-                ->setTextRotation(0) // Optional: Set text rotation to 0 degrees
+                ->setTextRotation(0) 
                 ->setWrapText(true);
     
                 // Optional: Change header text to uppercase
-                $highestColumn = $event->sheet->getHighestColumn();
-                $headerRange = 'A1:' . $highestColumn . '1';
                 foreach ($event->sheet->getRowIterator(1) as $row) {
                     foreach ($row->getCellIterator() as $cell) {
-                        if ($cell->getColumn() === $highestColumn) {
+                        if ($cell->getColumn() === 'H') {
                             break;
                         }
                         $cell->setValue(strtoupper($cell->getValue()));
@@ -133,12 +138,23 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
                 }
     
                 // Customize the style of the data rows
-                $event->sheet->getStyle('A2:' . $event->sheet->getHighestColumn() . $event->sheet->getHighestRow())
+                $event->sheet->getStyle('A2:H' . $event->sheet->getHighestRow())
                     ->getAlignment()
                     ->setHorizontal(Alignment::HORIZONTAL_CENTER)
                     ->setVertical(Alignment::VERTICAL_CENTER)
                     ->setTextRotation(0) 
                     ->setWrapText(true);
+                
+                // Add borders to data rows
+                $event->sheet->getStyle('A2:H' . $event->sheet->getHighestRow())
+                ->applyFromArray([
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ],
+                ]);
             }
         ];
     }
