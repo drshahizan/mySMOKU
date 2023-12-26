@@ -106,7 +106,7 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
                     'font' => [
                         'bold' => true,
                         'color' => ['rgb' => '#000000'], // Header font color 
-                        'size' => 12, // Header font size
+                        'size' => 11, // Header font size
                     ],
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,

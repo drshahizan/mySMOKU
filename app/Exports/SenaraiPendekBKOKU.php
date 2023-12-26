@@ -65,13 +65,13 @@ class SenaraiPendekBKOKU implements FromCollection, WithHeadings, WithColumnWidt
     {
         return [
             'A' => 20,
-            'B' => 50,           
+            'B' => 40,           
             'C' => 30,
             'D' => 20,
-            'E' => 60,
-            'F' => 50,
-            'G' => 25,
-            'H' => 25,
+            'E' => 40,
+            'F' => 30,
+            'G' => 15,
+            'H' => 15,
         ];
     }
 
@@ -102,22 +102,56 @@ class SenaraiPendekBKOKU implements FromCollection, WithHeadings, WithColumnWidt
         return [
             AfterSheet::class => function(AfterSheet $event) {
                 // Customize the style of the header row
-                $event->sheet->getStyle('A1:' . $event->sheet->getHighestColumn() . '1')->applyFromArray([
+                $event->sheet->getStyle('A1:H1')->applyFromArray([
                     'font' => [
                         'bold' => true,
                         'color' => ['rgb' => '#000000'], // Header font color 
-                        'size' => 12, // Header font size
+                        'size' => 11, // Header font size
                     ],
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                         'startColor' => ['rgb' => 'B3B3B3'], // Header background color 
                     ],
+                    'alignment' => [
+                        'horizontal' => Alignment::HORIZONTAL_CENTER,
+                        'vertical' => Alignment::VERTICAL_CENTER,
+                    ],
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ],
                 ])
                 ->getAlignment()
-                ->setHorizontal(Alignment::HORIZONTAL_CENTER)
-                ->setVertical(Alignment::VERTICAL_CENTER)
                 ->setTextRotation(0) // Optional: Set text rotation to 0 degrees
                 ->setWrapText(true);
+    
+                // Optional: Change header text to uppercase
+                foreach ($event->sheet->getRowIterator(1) as $row) {
+                    foreach ($row->getCellIterator() as $cell) {
+                        $cell->setValue(strtoupper($cell->getValue()));
+                    }
+                }
+    
+                // Customize the style of the data rows
+                $event->sheet->getStyle('A2:H' . $event->sheet->getHighestRow())
+                    ->getAlignment()
+                    ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+                    ->setVertical(Alignment::VERTICAL_CENTER)
+                    ->setTextRotation(0) // Optional: Set text rotation to 0 degrees
+                    ->setWrapText(true);
+    
+                // Add borders to data rows
+                $event->sheet->getStyle('A2:H' . $event->sheet->getHighestRow())
+                    ->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => Border::BORDER_THIN,
+                                'color' => ['rgb' => '000000'],
+                            ],
+                        ],
+                    ]);
             },
         ];
     }
