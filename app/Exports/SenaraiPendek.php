@@ -86,7 +86,7 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
             // Update this to match with column name in database
             $row->no_rujukan_permohonan, 
             $row->nama,
-            $row->no_pendaftaran_pelajar,
+            strtoupper($row->no_pendaftaran_pelajar),
             $row->kecacatan,
             $row->nama_kursus,
             $row->nama_institusi,
@@ -103,12 +103,12 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
                 $event->sheet->getStyle('A1:' . $event->sheet->getHighestColumn() . '1')->applyFromArray([
                     'font' => [
                         'bold' => true,
-                        'color' => ['rgb' => 'FFFFFF'], // Header font color 
+                        'color' => ['rgb' => '#000000'], // Header font color 
                         'size' => 12, // Header font size
                     ],
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                        'startColor' => ['rgb' => '00094B'], // Header background color 
+                        'startColor' => ['rgb' => 'B3B3B3'], // Header background color 
                     ],
                 ]);
             },
