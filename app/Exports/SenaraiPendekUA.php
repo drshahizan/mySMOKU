@@ -117,7 +117,7 @@ class SenaraiPendekUA implements FromCollection, WithHeadings, WithColumnWidths,
                         'vertical' => Alignment::VERTICAL_CENTER,
                     ],
                     'borders' => [
-                        'outline' => [
+                        'allBorders' => [
                             'borderStyle' => Border::BORDER_THIN,
                             'color' => ['rgb' => '000000'],
                         ],
