@@ -124,15 +124,12 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
                     ],
                 ])
                 ->getAlignment()
-                ->setTextRotation(0) 
+                ->setTextRotation(0) // Optional: Set text rotation to 0 degrees
                 ->setWrapText(true);
     
                 // Optional: Change header text to uppercase
                 foreach ($event->sheet->getRowIterator(1) as $row) {
                     foreach ($row->getCellIterator() as $cell) {
-                        if ($cell->getColumn() === 'H') {
-                            break;
-                        }
                         $cell->setValue(strtoupper($cell->getValue()));
                     }
                 }
@@ -142,20 +139,20 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
                     ->getAlignment()
                     ->setHorizontal(Alignment::HORIZONTAL_CENTER)
                     ->setVertical(Alignment::VERTICAL_CENTER)
-                    ->setTextRotation(0) 
+                    ->setTextRotation(0) // Optional: Set text rotation to 0 degrees
                     ->setWrapText(true);
-                
+    
                 // Add borders to data rows
                 $event->sheet->getStyle('A2:H' . $event->sheet->getHighestRow())
-                ->applyFromArray([
-                    'borders' => [
-                        'allBorders' => [
-                            'borderStyle' => Border::BORDER_THIN,
-                            'color' => ['rgb' => '000000'],
+                    ->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => Border::BORDER_THIN,
+                                'color' => ['rgb' => '000000'],
+                            ],
                         ],
-                    ],
-                ]);
-            }
+                    ]);
+            },
         ];
     }
 }
