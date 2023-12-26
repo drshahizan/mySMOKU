@@ -469,9 +469,8 @@ class SekretariatController extends Controller
     {
         $filters = $request->only(['institusi']); // Adjust the filter names as per your form
 
-        $query = Permohonan::orderBy('updated_at', 'desc')
-                            ->where('permohonan.status', '4')
-                            ->where('permohonan.program', $programCode);
+        $query = Permohonan::orderBy('id', 'desc')
+                            ->where('permohonan.status', '4');
 
         if (isset($filters['institusi']) ) {
             $selectedInstitusi = $filters['institusi'];
@@ -482,8 +481,15 @@ class SekretariatController extends Controller
 
         $kelulusan = $query->get();
 
-        $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
-
+        //check programCode
+        if ($programCode == 'BKOKU')
+            $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_bkoku_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
+        elseif ($programCode == 'UA')
+            $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_ua_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
+        else
+            $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_ppk_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
+        
+        //stream pdf
         return $pdf->stream('Senarai-Permohonan-Disokong.pdf');
     }
 

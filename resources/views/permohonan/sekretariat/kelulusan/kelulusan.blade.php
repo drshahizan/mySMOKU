@@ -193,7 +193,7 @@
                                                                 $institusipengajian = transformBracketsToUppercase($institusi);
                                                             @endphp
                                                             
-                                                            @if ($jenis_institusi == "IPTS" || $jenis_institusi == "KK" || $jenis_institusi == "P")
+                                                            @if ($jenis_institusi != "UA")
                                                                 <tr>
                                                                     <td class="text-center" style="width: 3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
                                                                     <td style="width: 10%"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
@@ -279,10 +279,10 @@
                                             </div>
 
                                             <div class="col-md-3" style="padding-left: 50px;">  
-                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'UA'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
-                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'UA'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a> 
                                             </div>

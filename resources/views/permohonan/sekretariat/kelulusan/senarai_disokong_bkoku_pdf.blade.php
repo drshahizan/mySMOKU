@@ -104,6 +104,7 @@
                 @endphp
             
                 @foreach ($kelulusan as $item)
+                    @if ($item['program']=="BKOKU")
                         @php
                             $i++;
                             $pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
@@ -111,6 +112,7 @@
                             $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
                             $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
                             $institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                            $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.jenis_institusi');
                             $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
                             $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
                             
@@ -159,16 +161,19 @@
                             $institusi_pengajian = transformBracketsToUppercase($institusiPengajian);
                         @endphp
                         
-                        <tr>
-                            <td class="text-center">{{$i}}</td>                                           
-                            <td>{{$item['no_rujukan_permohonan']}}</td>
-                            <td>{{$nama_pemohon}}</td>
-                            <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                            <td>{{$nama_kursus}}</td>
-                            <td>{{$institusi_pengajian}}</td>
-                            <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                            <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
-                        </tr>
+                        @if ($jenis_institusi != "UA")
+                            <tr>
+                                <td class="text-center">{{$i}}</td>                                           
+                                <td>{{$item['no_rujukan_permohonan']}}</td>
+                                <td>{{$nama_pemohon}}</td>
+                                <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
+                                <td>{{$nama_kursus}}</td>
+                                <td>{{$institusi_pengajian}}</td>
+                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                            </tr>
+                        @endif
+                    @endif
                 @endforeach 
             </tbody>
         </table>
