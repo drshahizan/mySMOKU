@@ -69,9 +69,9 @@
             <div class="tittle" style="text-align: center; font-size: 14px;">
                 <b>SENARAI KEPUTUSAN PERMOHONAN BKOKU</b>
             </div>
-            <br>
+            
             {{-- Table --}}
-            <table class="table table-striped">
+            <table class="table table-striped" style="padding-top:10px; padding-bottom:20px;">
                 <thead>
                     <tr style="color: white; background-color: #3d0066;">
                         <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>

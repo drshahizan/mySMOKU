@@ -868,7 +868,7 @@ class SekretariatController extends Controller
         $totalPages = $pdf->getCanvas()->get_page_count();
     
         // Add page numbers using CSS
-        $pdf->getCanvas()->page_text(520, 570, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
+        $pdf->getCanvas()->page_text(390, 570, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
     
         // Save the PDF to a file or stream it
         return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU.pdf');
@@ -903,7 +903,7 @@ class SekretariatController extends Controller
         $totalPages = $pdf->getCanvas()->get_page_count();
     
         // Add page numbers using CSS
-        $pdf->getCanvas()->page_text(520, 570, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
+        $pdf->getCanvas()->page_text(390, 570, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
     
         return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU-UA.pdf');
     }
@@ -937,7 +937,7 @@ class SekretariatController extends Controller
         $totalPages = $pdf->getCanvas()->get_page_count();
     
         // Add page numbers using CSS
-        $pdf->getCanvas()->page_text(520, 570, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
+        $pdf->getCanvas()->page_text(390, 570, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
 
         return $pdf->stream('Senarai-Keputusan-Permohonan-PPK.pdf');
     }
