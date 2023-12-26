@@ -27,14 +27,18 @@ class SenaraiPendekBKOKU implements FromCollection, WithHeadings, WithColumnWidt
     public function collection()
     {
         $senarai_pendek = DB::table('permohonan as a')
-                            ->where('a.status', 4)
-                            ->where('a.program', $this->programCode);
-            
-        if (isset($this->filters['institusi'])) {
-            $senarai_pendek->where('c.id_institusi', $this->filters['institusi']);
-        }
-
-        $senarai_pendek = $senarai_pendek
+            ->where('a.status', 4)
+            ->where('a.program', $this->programCode)
+            ->join('smoku_akademik as b', 'b.smoku_id', '=', 'a.smoku_id')
+            ->join('bk_info_institusi as c', function ($join) {
+                $join->on('c.id_institusi', '=', 'b.id_institusi')
+                    ->where('c.jenis_institusi', '!=', 'UA');
+            })
+            ->join('smoku as d', 'd.id', '=', 'a.smoku_id')
+            ->join('bk_jenis_oku as e', 'e.kod_oku', '=', 'd.kategori')
+            ->when(isset($this->filters['institusi']), function ($query) {
+                return $query->where('c.id_institusi', $this->filters['institusi']);
+            })
             ->select(
                 'a.no_rujukan_permohonan', 
                 'd.nama',
@@ -45,10 +49,6 @@ class SenaraiPendekBKOKU implements FromCollection, WithHeadings, WithColumnWidt
                 'b.tarikh_mula',
                 'b.tarikh_tamat'
             )
-            ->join('smoku_akademik as b', 'b.smoku_id', '=', 'a.smoku_id')
-            ->join('bk_info_institusi as c', 'c.id_institusi', '=', 'b.id_institusi')
-            ->join('smoku as d', 'd.id', '=', 'a.smoku_id')
-            ->join('bk_jenis_oku as e', 'e.kod_oku', '=', 'd.kategori')
             ->get();
 
         return collect($senarai_pendek);
