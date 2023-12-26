@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
 class SenaraiPendekBKOKU implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
 {
@@ -62,12 +63,12 @@ class SenaraiPendekBKOKU implements FromCollection, WithHeadings, WithColumnWidt
     public function columnWidths(): array
     {
         return [
-            'A' => 30,
+            'A' => 20,
             'B' => 50,           
             'C' => 30,
             'D' => 20,
-            'E' => 80,
-            'F' => 60,
+            'E' => 60,
+            'F' => 50,
             'G' => 25,
             'H' => 25,
         ];
@@ -110,7 +111,12 @@ class SenaraiPendekBKOKU implements FromCollection, WithHeadings, WithColumnWidt
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                         'startColor' => ['rgb' => 'B3B3B3'], // Header background color 
                     ],
-                ]);
+                ])
+                ->getAlignment()
+                ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+                ->setVertical(Alignment::VERTICAL_CENTER)
+                ->setTextRotation(0) // Optional: Set text rotation to 0 degrees
+                ->setWrapText(true);
             },
         ];
     }

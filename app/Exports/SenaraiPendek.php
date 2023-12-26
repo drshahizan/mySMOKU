@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
 class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
 {
@@ -62,14 +63,14 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
     public function columnWidths(): array
     {
         return [
-            'A' => 30,
-            'B' => 50,           
+            'A' => 20,
+            'B' => 40,           
             'C' => 30,
             'D' => 20,
-            'E' => 80,
-            'F' => 60,
-            'G' => 25,
-            'H' => 25,
+            'E' => 40,
+            'F' => 30,
+            'G' => 10,
+            'H' => 10,
         ];
     }
 
@@ -110,8 +111,35 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                         'startColor' => ['rgb' => 'B3B3B3'], // Header background color 
                     ],
-                ]);
-            },
+                    'alignment' => [
+                        'horizontal' => Alignment::HORIZONTAL_CENTER,
+                        'vertical' => Alignment::VERTICAL_CENTER,
+                    ],
+                ])
+                ->getAlignment()
+                ->setTextRotation(0) // Optional: Set text rotation to 0 degrees
+                ->setWrapText(true);
+    
+                // Optional: Change header text to uppercase
+                $highestColumn = $event->sheet->getHighestColumn();
+                $headerRange = 'A1:' . $highestColumn . '1';
+                foreach ($event->sheet->getRowIterator(1) as $row) {
+                    foreach ($row->getCellIterator() as $cell) {
+                        if ($cell->getColumn() === $highestColumn) {
+                            break;
+                        }
+                        $cell->setValue(strtoupper($cell->getValue()));
+                    }
+                }
+    
+                // Customize the style of the data rows
+                $event->sheet->getStyle('A2:' . $event->sheet->getHighestColumn() . $event->sheet->getHighestRow())
+                    ->getAlignment()
+                    ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+                    ->setVertical(Alignment::VERTICAL_CENTER)
+                    ->setTextRotation(0) 
+                    ->setWrapText(true);
+            }
         ];
     }
 }
