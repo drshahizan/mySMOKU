@@ -117,15 +117,11 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
                         'vertical' => Alignment::VERTICAL_CENTER,
                     ],
                     'borders' => [
-                        'top' => [
-                            'borderStyle' => Border::BORDER_THIN,
-                            'color' => ['rgb' => '000000'],
-                        ],
-                        'bottom' => [
-                            'borderStyle' => Border::BORDER_THIN,
-                            'color' => ['rgb' => '000000'],
-                        ],
                         'outline' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                        'allBorders' => [
                             'borderStyle' => Border::BORDER_THIN,
                             'color' => ['rgb' => '000000'],
                         ],
