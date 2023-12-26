@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
+class SenaraiPendekUA implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
 {
     /**
     * @return \Illuminate\Support\Collection

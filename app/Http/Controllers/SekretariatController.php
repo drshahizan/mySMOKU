@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Exports\BorangSPPB;
 use App\Exports\PenyaluranTuntutan;
 use App\Exports\SenaraiPendek;
+use App\Exports\SenaraiPendekBKOKU;
+use App\Exports\SenaraiPendekUA;
 use App\Mail\KeputusanLayak;
 use App\Mail\KeputusanTidakLayak;
 use App\Mail\TuntutanDikembalikan;
@@ -472,11 +474,12 @@ class SekretariatController extends Controller
         $query = Permohonan::orderBy('permohonan.updated_at', 'desc')
                             ->where('permohonan.status', '4');
 
-        if (isset($filters['institusi']) ) {
+        if (isset($filters['institusi']) ) 
+        {
             $selectedInstitusi = $filters['institusi'];
             $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
-                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
-                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
+                  ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+                  ->where('smoku_akademik.id_institusi', $selectedInstitusi);
         }
 
         $kelulusan = $query->get();
@@ -497,19 +500,26 @@ class SekretariatController extends Controller
     {
         $filters = $request->only(['institusi']);
 
-        $query = Permohonan::where('permohonan.status', '4')
-                            ->where('permohonan.program', $programCode);
+        $query = Permohonan::orderBy('permohonan.updated_at', 'desc')
+                            ->where('permohonan.status', '4');
 
-        if (isset($filters['institusi']) && !empty($filters['institusi'])) {
+        if (isset($filters['institusi']) && !empty($filters['institusi'])) 
+        {
             $selectedInstitusi = $filters['institusi'];
             $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
-                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
-                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
+                  ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+                  ->where('smoku_akademik.id_institusi', $selectedInstitusi);
         }
 
         $kelulusan = $query->get();
 
-        return Excel::download(new SenaraiPendek($programCode, $filters), 'PermohonanDisokong.xlsx');
+        //check programCode
+        if ($programCode == 'BKOKU')
+            return Excel::download(new SenaraiPendekBKOKU($programCode, $filters), 'Permohonan_BKOKU_Disokong.xlsx');
+        elseif ($programCode == 'UA')
+            return Excel::download(new SenaraiPendekUA($programCode, $filters), 'Permohonan_BKOKU_UA_Disokong.xlsx');
+        else        
+            return Excel::download(new SenaraiPendek($programCode, $filters), 'Permohonan_PPK_Disokong.xlsx');
     }
 
     public function cetakBorangSppbExcel(Request $request, $programCode)
@@ -814,6 +824,7 @@ class SekretariatController extends Controller
         return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan','institusiBKOKU','institusiUA','institusiPPK'));
     }
 
+    //PERMOHONAN - KEPUTUSAN
     public function senaraiKeputusanPermohonan(Request $request)
     {
         $startDate = $request->input('start_date');
