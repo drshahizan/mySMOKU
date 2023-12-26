@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Senarai Permohonan Disokong</title>
+    <title>Senarai Permohonan PPK Layak</title>
     <link rel="stylesheet" href="assets/css/style.bundle.css">
     <link rel="stylesheet" href="assets/css/saringan.css">
     <style>
@@ -13,7 +13,7 @@
         th{
             padding-top: 6px!important;
             padding-bottom: 6px!important;
-            background-color: #3d0066;!important;
+            background-color: #3d0066!important;
             color: white!important;
         }
         th,td{
@@ -41,8 +41,8 @@
         }
         .page-number-container {
             position: absolute;
-            bottom: 20px; 
-            right: 390px; 
+            bottom: 10px; 
+            right: 550px; 
             font-size: 12px;
         }
     </style>
@@ -71,13 +71,13 @@
 
     <br><br><br>
 
-    <div style="padding-top: 20px;  display: block;">
+    <div style="margin: 15px; display: block;">
         <div class="tittle" style="text-align: center; font-size: 14px;">
             <b>SENARAI KEPUTUSAN PERMOHONAN PPK</b>
         </div>
 
         {{-- Table --}}
-        <table class="table table-striped" style="margin: 10px;">
+        <table class="table table-striped">
             <thead>
                 <tr style="color: white; background-color: #3d0066;">
                     <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>

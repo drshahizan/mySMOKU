@@ -50,7 +50,7 @@
 								<table id="sortTable1" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th class="text-center" style="width: 5%">No</th>
+											<th class="text-center" style="width: 5%">No.</th>
 											<th class="text-center" style="width: 50%">Nama Institusi Pengajian</th>
 											<th class="text-center" style="width: 20%">Tarikh Kemaskini Dokumen</th>
 											<th class="text-center" style="width: 25%">Borang SPBB & Penyata Bank</th>

@@ -13,7 +13,7 @@
         th{
             padding-top: 6px!important;
             padding-bottom: 6px!important;
-            background-color: rgb(35, 58, 108)!important;
+            background-color: #3d0066!important;
             color: white!important;
         }
         th,td{
@@ -75,6 +75,7 @@
     </div>
 
     <br><br><br><br><br>
+
     <div style="margin: 10px; display: block;">
         <div class="tittle" style="text-align: center; font-size: 14px;">
             <b>SENARAI PERMOHONAN BKOKU/PPK YANG DISOKONG</b>
@@ -160,7 +161,7 @@
                         
                         <tr>
                             <td class="text-center">{{$i}}</td>                                           
-                            <td><a href="{{ url('kemaskini/kelulusan/'. $nokp) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                            <td>{{$item['no_rujukan_permohonan']}}</td>
                             <td>{{$nama_pemohon}}</td>
                             <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                             <td>{{$nama_kursus}}</td>
@@ -178,7 +179,7 @@
 
         <!-- Page number container -->
         <div class="page-number-container">
-            Page: {{ $pageNumber }}
+            Muka Surat {{ $pageNumber }}
         </div>
 
         <?php
