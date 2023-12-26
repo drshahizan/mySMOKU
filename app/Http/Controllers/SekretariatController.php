@@ -842,13 +842,7 @@ class SekretariatController extends Controller
     {
         // Fetch your data (in this case, $permohonan)
         $permohonan = Kelulusan::all();
-
-        // Initialize Dompdf
-        $options = new Options();
-        $options->set('isHtml5ParserEnabled', true);
-        $options->set('isPhpEnabled', true);
-        $dompdf = new Dompdf($options);
-
+    
         // Load your HTML content
         $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_BKOKU_pdf', compact('permohonan'))->render();
         
@@ -856,32 +850,30 @@ class SekretariatController extends Controller
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
         $options->set('isPhpEnabled', true);
-
-        // Set the chroot to the public directory
         $options->set('chroot', public_path());
-
+    
         // Create Dompdf instance with options
         $pdf = new Dompdf($options);
-
+    
         // Load HTML into Dompdf
         $pdf->loadHtml($html);
-
+    
         // Set paper size and orientation
         $pdf->setPaper('A4', 'portrait');
-
+    
         // Render the PDF
         $pdf->render();
-
+    
         // Get the total number of pages
         $totalPages = $pdf->getCanvas()->get_page_count();
-
+    
         // Add page numbers using CSS
         $pdf->getCanvas()->page_text(290, 800, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
-
+    
         // Save the PDF to a file or stream it
-        return $dompdf->stream('Senarai-Keputusan-Permohonan-BKOKU.pdf');
+        return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU.pdf');
     }
-
+    
     public function cetakKeputusanPermohonanUA()
     {
         $permohonan = Kelulusan::all();
