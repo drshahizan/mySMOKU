@@ -42,7 +42,7 @@
         .page-number-container {
             position: absolute;
             bottom: 10px; 
-            right: 550px; 
+            right: 560px; 
             font-size: 12px;
         }
     </style>
@@ -69,13 +69,13 @@
         </div>     
     </div>
 
-    <br><br><br>
+    <br><br><br><br>
 
     <div style="margin: 15px; display: block;">
         <div class="tittle" style="text-align: center; font-size: 14px;">
             <b>SENARAI KEPUTUSAN PERMOHONAN PPK</b>
         </div>
-
+        <br>
         {{-- Table --}}
         <table class="table table-striped">
             <thead>
