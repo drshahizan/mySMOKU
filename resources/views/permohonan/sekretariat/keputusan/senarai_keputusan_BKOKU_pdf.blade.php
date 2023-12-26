@@ -39,12 +39,6 @@
             td.no{
                 text-align: right;
             }
-            /* .page-number-container {
-                position: absolute;
-                bottom: 10px; 
-                right: 560px; 
-                font-size: 12px;
-            } */
         </style>
     </head>
 
@@ -167,7 +161,6 @@
                     @endforeach            
                 </tbody>
             </table>
-
         </div>
 
         {{-- <script>

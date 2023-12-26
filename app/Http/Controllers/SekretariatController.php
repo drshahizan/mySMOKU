@@ -859,7 +859,7 @@ class SekretariatController extends Controller
         $pdf->loadHtml($html);
     
         // Set paper size and orientation
-        $pdf->setPaper('A4', 'portrait');
+        $pdf->setPaper('A4', 'landscape');
     
         // Render the PDF
         $pdf->render();
@@ -868,23 +868,77 @@ class SekretariatController extends Controller
         $totalPages = $pdf->getCanvas()->get_page_count();
     
         // Add page numbers using CSS
-        $pdf->getCanvas()->page_text(290, 800, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
+        $pdf->getCanvas()->page_text(290, 810, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
     
         // Save the PDF to a file or stream it
         return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU.pdf');
     }
-    
+
     public function cetakKeputusanPermohonanUA()
     {
         $permohonan = Kelulusan::all();
-        $pdf = PDF::loadView('permohonan.sekretariat.keputusan.senarai_keputusan_BKOKU_UA_pdf', compact('permohonan'))->setPaper('A4', 'landscape');
+
+        // Load your HTML content
+        $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_BKOKU_UA_pdf', compact('permohonan'))->render();
+        
+        // Create Dompdf options
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $options->set('chroot', public_path());
+    
+        // Create Dompdf instance with options
+        $pdf = new Dompdf($options);
+    
+        // Load HTML into Dompdf
+        $pdf->loadHtml($html);
+    
+        // Set paper size and orientation
+        $pdf->setPaper('A4', 'landscape');
+    
+        // Render the PDF
+        $pdf->render();
+    
+        // Get the total number of pages
+        $totalPages = $pdf->getCanvas()->get_page_count();
+    
+        // Add page numbers using CSS
+        $pdf->getCanvas()->page_text(290, 810, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
+    
         return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU-UA.pdf');
     }
 
     public function cetakKeputusanPermohonanPPK()
     {
         $permohonan = Kelulusan::all();
-        $pdf = PDF::loadView('permohonan.sekretariat.keputusan.senarai_keputusan_PPK_pdf', compact('permohonan'))->setPaper('A4', 'landscape');
+        
+        // Load your HTML content
+        $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_PPK_pdf', compact('permohonan'))->render();
+        
+        // Create Dompdf options
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $options->set('chroot', public_path());
+    
+        // Create Dompdf instance with options
+        $pdf = new Dompdf($options);
+    
+        // Load HTML into Dompdf
+        $pdf->loadHtml($html);
+    
+        // Set paper size and orientation
+        $pdf->setPaper('A4', 'landscape');
+    
+        // Render the PDF
+        $pdf->render();
+    
+        // Get the total number of pages
+        $totalPages = $pdf->getCanvas()->get_page_count();
+    
+        // Add page numbers using CSS
+        $pdf->getCanvas()->page_text(290, 810, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
+
         return $pdf->stream('Senarai-Keputusan-Permohonan-PPK.pdf');
     }
 
