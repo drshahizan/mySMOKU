@@ -102,7 +102,7 @@ class SenaraiPendekBKOKU implements FromCollection, WithHeadings, WithColumnWidt
         return [
             AfterSheet::class => function(AfterSheet $event) {
                 // Customize the style of the header row
-                $event->sheet->getStyle('A1:H1')->applyFromArray([
+                $event->sheet->getStyle('A1:I1')->applyFromArray([
                     'font' => [
                         'bold' => true,
                         'color' => ['rgb' => '#000000'], // Header font color 
@@ -117,6 +117,14 @@ class SenaraiPendekBKOKU implements FromCollection, WithHeadings, WithColumnWidt
                         'vertical' => Alignment::VERTICAL_CENTER,
                     ],
                     'borders' => [
+                        'top' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                        'bottom' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
                         'allBorders' => [
                             'borderStyle' => Border::BORDER_THIN,
                             'color' => ['rgb' => '000000'],
@@ -135,7 +143,7 @@ class SenaraiPendekBKOKU implements FromCollection, WithHeadings, WithColumnWidt
                 }
     
                 // Customize the style of the data rows
-                $event->sheet->getStyle('A2:H' . $event->sheet->getHighestRow())
+                $event->sheet->getStyle('A2:I' . $event->sheet->getHighestRow())
                     ->getAlignment()
                     ->setHorizontal(Alignment::HORIZONTAL_CENTER)
                     ->setVertical(Alignment::VERTICAL_CENTER)
@@ -143,7 +151,7 @@ class SenaraiPendekBKOKU implements FromCollection, WithHeadings, WithColumnWidt
                     ->setWrapText(true);
     
                 // Add borders to data rows
-                $event->sheet->getStyle('A2:H' . $event->sheet->getHighestRow())
+                $event->sheet->getStyle('A2:I' . $event->sheet->getHighestRow())
                     ->applyFromArray([
                         'borders' => [
                             'allBorders' => [
