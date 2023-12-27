@@ -859,6 +859,8 @@ class SekretariatController extends Controller
     {
         $filters = $request->only(['start_date', 'end_date', 'status', 'institusi']);
 
+        dd($filters);
+
         $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
             ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
             ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
