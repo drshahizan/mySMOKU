@@ -857,26 +857,24 @@ class SekretariatController extends Controller
 
     public function cetakKeputusanPermohonanBKOKU(Request $request)
     {
-        $filters = $request->only(['start_date', 'end_date', 'status', 'institusi']);
-
-        dd($filters);
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $status = $request->input('status');
+        $institusi = $request->input('institusi');
 
         $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
             ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
             ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+            ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+                return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
+            })
+            ->when($status, function ($q) use ($status) {
+                return $q->where('permohonan_kelulusan.keputusan', $status);
+            })
+            ->when($institusi, function ($q) use ($institusi) {
+                return $q->where('bk_info_institusi.id_institusi', $institusi);
+            })
             ->orderBy('permohonan_kelulusan.updated_at', 'desc');
-
-        if (isset($filters['start_date']) && isset($filters['end_date'])) {
-            $query->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$filters['start_date'], $filters['end_date']]);
-        }
-
-        if (isset($filters['status'])) {
-            $query->where('permohonan_kelulusan.keputusan', $filters['status']);
-        }
-
-        if (isset($filters['institusi'])) {
-            $query->where('bk_info_institusi.id_institusi', $filters['institusi']);
-        }
 
         $permohonan = $query->get();
     
