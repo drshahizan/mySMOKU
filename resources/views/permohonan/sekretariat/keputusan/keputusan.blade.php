@@ -28,6 +28,7 @@
                 height: 1px;
                 background: black;
                 margin: 0 5px;
+                margin-bottom: 10px;
                 display: inline-block;
                 background-color: #fff; /* Set background color to white or your container's background color */
             }
@@ -111,7 +112,7 @@
                                                     <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                                 </div>
                                             
-                                                <div class="dash">-></div>
+                                                <div class="dash">-</div>
                                             
                                                 <div class="flex-grow-1">
                                                     <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
@@ -136,12 +137,12 @@
                                             </div>
                                     
                                             <div class="col-md-1">
-                                                <button type="submit" class="btn btn-primary" style="width: 30%; padding-left: 10px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 50%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-2" style="padding-left: 20px;"> 
                                                 <a href="{{ route('senarai.keputusan.BKOKU.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU
                                                 </a>
@@ -265,7 +266,7 @@
                                                     <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                                 </div>
                                             
-                                                <div class="dash">-></div>
+                                                <div class="dash">-</div>
                                             
                                                 <div class="flex-grow-1">
                                                     <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
@@ -290,12 +291,12 @@
                                             </div>
                                     
                                             <div class="col-md-1">
-                                                <button type="submit" class="btn btn-primary" style="width: 35%; padding-left: 10px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 50%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-2" style="padding-left: 10px;">
                                                 <a href="{{ route('senarai.keputusan.BKOKU.UA.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU UA
                                                 </a>
@@ -438,12 +439,12 @@
                                             </div>
                                     
                                             <div class="col-md-1">
-                                                <button type="submit" class="btn btn-primary" style="width: 35%; padding-left: 10px;">
+                                                <button type="submit" class="btn btn-primary" style="width: 50%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-2" style="padding-left: 30px;">
                                                 <a href="{{ route('senarai.keputusan.PPK.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PPK
                                                 </a>
