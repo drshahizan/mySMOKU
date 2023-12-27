@@ -865,13 +865,13 @@ class SekretariatController extends Controller
         $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
             ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
             ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-            ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            ->when($startDate !== '' && $endDate !== '', function ($q) use ($startDate, $endDate) {
                 return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
             })
-            ->when($status, function ($q) use ($status) {
+            ->when($status !== '', function ($q) use ($status) {
                 return $q->where('permohonan_kelulusan.keputusan', $status);
             })
-            ->when($institusi, function ($q) use ($institusi) {
+            ->when($institusi !== '', function ($q) use ($institusi) {
                 return $q->where('bk_info_institusi.id_institusi', $institusi);
             })
             ->orderBy('permohonan_kelulusan.updated_at', 'desc');
@@ -911,7 +911,26 @@ class SekretariatController extends Controller
 
     public function cetakKeputusanPermohonanUA(Request $request)
     {
-        $permohonan = Kelulusan::all();
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $status = $request->input('status');
+        $institusi = $request->input('institusi');
+
+        $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
+            ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+            ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+            ->when($startDate !== '' && $endDate !== '', function ($q) use ($startDate, $endDate) {
+                return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
+            })
+            ->when($status !== '', function ($q) use ($status) {
+                return $q->where('permohonan_kelulusan.keputusan', $status);
+            })
+            ->when($institusi !== '', function ($q) use ($institusi) {
+                return $q->where('bk_info_institusi.id_institusi', $institusi);
+            })
+            ->orderBy('permohonan_kelulusan.updated_at', 'desc');
+
+        $permohonan = $query->get();
 
         // Load your HTML content
         $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_BKOKU_UA_pdf', compact('permohonan'))->render();
@@ -945,7 +964,26 @@ class SekretariatController extends Controller
 
     public function cetakKeputusanPermohonanPPK(Request $request)
     {
-        $permohonan = Kelulusan::all();
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $status = $request->input('status');
+        $institusi = $request->input('institusi');
+
+        $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
+            ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+            ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+            ->when($startDate !== '' && $endDate !== '', function ($q) use ($startDate, $endDate) {
+                return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
+            })
+            ->when($status !== '', function ($q) use ($status) {
+                return $q->where('permohonan_kelulusan.keputusan', $status);
+            })
+            ->when($institusi !== '', function ($q) use ($institusi) {
+                return $q->where('bk_info_institusi.id_institusi', $institusi);
+            })
+            ->orderBy('permohonan_kelulusan.updated_at', 'desc');
+
+        $permohonan = $query->get();
         
         // Load your HTML content
         $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_PPK_pdf', compact('permohonan'))->render();
