@@ -857,10 +857,11 @@ class SekretariatController extends Controller
 
     public function cetakKeputusanPermohonanBKOKU(Request $request)
     {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-        $status = $request->input('status');
-        $institusi = $request->input('institusi');
+        // Retrieve filter parameters from the request
+        $startDate = $request->query('start_date');
+        $endDate = $request->query('end_date');
+        $status = $request->query('status');
+        $institusi = $request->query('institusi');
 
         $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
             ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')

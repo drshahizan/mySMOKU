@@ -79,7 +79,9 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Keputusan Permohonan<br><small>Surat tawaran bagi permohonan berstatus layak boleh dimuat turun dengan klik pada kotak "Layak".</small></h2>
+                                <h2>Senarai Keputusan Permohonan
+                                    <br><small>Surat tawaran bagi permohonan berstatus layak boleh dimuat turun dengan klik pada kotak "Layak".</small>
+                                </h2>
                             </div>
 
                             {{-- Javascript Nav Bar --}}
@@ -138,7 +140,12 @@
                                             </div>
 
                                             <div class="col-md-2" style="padding-left: 30px;"> 
-                                                <a href="{{ route('senarai.keputusan.BKOKU.pdf') }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a href="{{ route('senarai.keputusan.BKOKU.pdf', [
+                                                    'start_date' => Request::get('start_date'),
+                                                    'end_date' => Request::get('end_date'),
+                                                    'status' => Request::get('status'),
+                                                    'institusi' => Request::get('institusi'),]) }}" 
+                                                    target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU
                                                 </a>
                                             </div>
@@ -291,7 +298,7 @@
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-2" style="padding-left: 20px;">
+                                            <div class="col-md-2" style="padding-left: 10px;">
                                                 <a href="{{ route('senarai.keputusan.BKOKU.UA.pdf') }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU UA
                                                 </a>
