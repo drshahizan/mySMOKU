@@ -46,9 +46,9 @@
         {{-- Header --}}
         <div class="header">
             <div class="image">
-                <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="width:10%; height:5%; float: left;">
+                <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="width:10%; height:10%; float: left;">
             </div>
-            <div class="alignleft" style="padding-left: 25px; padding-top:15px; font-size: 12px;">
+            <div class="alignleft" style="padding-left: 30px; padding-top:15px; font-size: 12px;">
                 <b>KEMENTERIAN PENDIDIKAN TINGGI</b>
                 <br>MINISTRY OF HIGHER EDUCATION<br>
             </div>

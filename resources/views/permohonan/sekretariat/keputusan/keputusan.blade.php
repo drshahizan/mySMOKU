@@ -28,7 +28,7 @@
                 height: 1px;
                 background: black;
                 margin: 0 5px;
-                margin-bottom: 10px;
+                margin-bottom: 20px;
                 display: inline-block;
                 background-color: #fff; /* Set background color to white or your container's background color */
             }
@@ -80,11 +80,6 @@
                         <div class="card">
                             <div class="header">
                                 <h2>Senarai Keputusan Permohonan<br><small>Surat tawaran bagi permohonan berstatus layak boleh dimuat turun dengan klik pada kotak "Layak".</small></h2>
-                                {{-- <ul class="header-dropdown dropdown" style="color: black;">
-                                    <li><a href="{{ route('senarai.keputusan.BKOKU.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> BKOKU</a></li>
-                                    <li><a href="{{ route('senarai.keputusan.BKOKU.UA.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> BKOKU UA</a></li>
-                                    <li><a href="{{ route('senarai.keputusan.PPK.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> PPK</a></li>
-                                </ul> --}}
                             </div>
 
                             {{-- Javascript Nav Bar --}}
@@ -142,8 +137,8 @@
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-2" style="padding-left: 20px;"> 
-                                                <a href="{{ route('senarai.keputusan.BKOKU.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm">
+                                            <div class="col-md-2" style="padding-left: 30px;"> 
+                                                <a href="{{ route('senarai.keputusan.BKOKU.pdf') }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU
                                                 </a>
                                             </div>
@@ -296,8 +291,8 @@
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-2" style="padding-left: 10px;">
-                                                <a href="{{ route('senarai.keputusan.BKOKU.UA.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm">
+                                            <div class="col-md-2" style="padding-left: 20px;">
+                                                <a href="{{ route('senarai.keputusan.BKOKU.UA.pdf') }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU UA
                                                 </a>
                                             </div>
@@ -414,7 +409,7 @@
                                                     <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                                 </div>
                                             
-                                                <div class="dash">-></div>
+                                                <div class="dash">-</div>
                                             
                                                 <div class="flex-grow-1">
                                                     <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
@@ -444,8 +439,8 @@
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-2" style="padding-left: 30px;">
-                                                <a href="{{ route('senarai.keputusan.PPK.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm">
+                                            <div class="col-md-2" style="padding-left: 50px;">
+                                                <a href="{{ route('senarai.keputusan.PPK.pdf') }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PPK
                                                 </a>
                                             </div>
