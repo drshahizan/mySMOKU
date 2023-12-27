@@ -969,10 +969,7 @@ class SekretariatController extends Controller
         $status = $request->input('status');
         $institusi = $request->input('institusi');
 
-        $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
-            ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-            ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-            ->when($startDate !== '' && $endDate !== '', function ($q) use ($startDate, $endDate) {
+        $query = Kelulusan::when($startDate !== '' && $endDate !== '', function ($q) use ($startDate, $endDate) {
                 return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
             })
             ->when($status !== '', function ($q) use ($status) {
