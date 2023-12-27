@@ -806,7 +806,7 @@ class PenyelarasController extends Controller
             $sesiSemasa = null; // Initialize a variable to store the current session
 
             foreach ($nextSemesterDates as $key => $data) {
-                echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'];
+                // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'];
 
                 $dateOfSemester = \Carbon\Carbon::parse($data['date']);
                 
