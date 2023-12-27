@@ -876,10 +876,6 @@ class SekretariatController extends Controller
             })
             ->orderBy('permohonan_kelulusan.updated_at', 'desc');
         
-        dd($startDate, $endDate, $status, $institusi);
-        dd($query->toSql());
-
-
         $permohonan = $query->get();
     
         // Load your HTML content
