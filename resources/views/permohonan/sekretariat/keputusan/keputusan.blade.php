@@ -305,7 +305,7 @@
                                                     'status' => Request::get('status'),
                                                     'institusi' => Request::get('institusi'),]) }}" 
                                                     target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU
+                                                    <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU UA
                                                 </a>
                                             </div>
                                         </div>
@@ -458,7 +458,7 @@
                                                     'status' => Request::get('status'),
                                                     'institusi' => Request::get('institusi'),]) }}" 
                                                     target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU
+                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PPK
                                                 </a>
                                             </div>
                                         </div>
