@@ -79,11 +79,11 @@
                         <div class="card">
                             <div class="header">
                                 <h2>Senarai Keputusan Permohonan<br><small>Surat tawaran bagi permohonan berstatus layak boleh dimuat turun dengan klik pada kotak "Layak".</small></h2>
-                                <ul class="header-dropdown dropdown" style="color: black;">
+                                {{-- <ul class="header-dropdown dropdown" style="color: black;">
                                     <li><a href="{{ route('senarai.keputusan.BKOKU.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> BKOKU</a></li>
                                     <li><a href="{{ route('senarai.keputusan.BKOKU.UA.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> BKOKU UA</a></li>
                                     <li><a href="{{ route('senarai.keputusan.PPK.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm"><i class="fa fa-file-pdf" style="color: black;"></i> PPK</a></li>
-                                </ul>
+                                </ul> --}}
                             </div>
 
                             {{-- Javascript Nav Bar --}}
@@ -111,14 +111,14 @@
                                                     <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                                 </div>
                                             
-                                                <div class="dash"></div>
+                                                <div class="dash">-></div>
                                             
                                                 <div class="flex-grow-1">
                                                     <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                                 </div>
                                             </div>
                                             
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <select name="status" class="form-select">
                                                     <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
@@ -126,7 +126,7 @@
                                                 </select>
                                             </div>                                            
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiBKOKU as $institusi)
@@ -139,6 +139,12 @@
                                                 <button type="submit" class="btn btn-primary" style="width: 30%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <a href="{{ route('senarai.keputusan.BKOKU.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm">
+                                                    <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU
+                                                </a>
                                             </div>
                                         </div>
                                     </form>   
@@ -259,14 +265,14 @@
                                                     <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                                 </div>
                                             
-                                                <div class="dash"></div>
+                                                <div class="dash">-></div>
                                             
                                                 <div class="flex-grow-1">
                                                     <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                                 </div>
                                             </div>
                                             
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <select name="status" class="form-select">
                                                     <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
@@ -274,7 +280,7 @@
                                                 </select>
                                             </div>     
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiUA as $institusi)
@@ -287,6 +293,12 @@
                                                 <button type="submit" class="btn btn-primary" style="width: 35%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <a href="{{ route('senarai.keputusan.BKOKU.UA.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm">
+                                                    <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU UA
+                                                </a>
                                             </div>
                                         </div>
                                     </form>      
@@ -401,14 +413,14 @@
                                                     <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
                                                 </div>
                                             
-                                                <div class="dash"></div>
+                                                <div class="dash">-></div>
                                             
                                                 <div class="flex-grow-1">
                                                     <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
                                                 </div>
                                             </div>
                                             
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <select name="status" class="form-select">
                                                     <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
@@ -416,7 +428,7 @@
                                                 </select>
                                             </div>     
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <select name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                     @foreach ($institusiPPK as $institusi)
@@ -429,6 +441,12 @@
                                                 <button type="submit" class="btn btn-primary" style="width: 35%; padding-left: 10px;">
                                                     <i class="fa fa-filter" style="font-size: 15px;"></i>
                                                 </button>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <a href="{{ route('senarai.keputusan.PPK.pdf') }}" target="_blank" class="btn btn-secondary btn-round btn-sm">
+                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PPK
+                                                </a>
                                             </div>
                                         </div>
                                     </form>     
