@@ -857,21 +857,26 @@ class SekretariatController extends Controller
 
     public function cetakKeputusanPermohonanBKOKU(Request $request)
     {
-        // Retrieve filtered data based on user input
-        $permohonan = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
-        ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-        ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-        ->when($request->has('start_date') && $request->has('end_date'), function ($query) use ($request) {
-            $query->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$request->input('start_date'), $request->input('end_date')]);
-        })
-        ->when($request->has('status'), function ($query) use ($request) {
-            $query->where('permohonan_kelulusan.keputusan', $request->input('status'));
-        })
-        ->when($request->has('institusi'), function ($query) use ($request) {
-            $query->where('bk_info_institusi.id_institusi', $request->input('institusi'));
-        })
-        ->orderBy('permohonan_kelulusan.updated_at', 'desc')
-        ->get();
+        $filters = $request->only(['start_date', 'end_date', 'status', 'institusi']);
+
+        $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
+            ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+            ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+            ->orderBy('permohonan_kelulusan.updated_at', 'desc');
+
+        if (isset($filters['start_date']) && isset($filters['end_date'])) {
+            $query->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$filters['start_date'], $filters['end_date']]);
+        }
+
+        if (isset($filters['status'])) {
+            $query->where('permohonan_kelulusan.keputusan', $filters['status']);
+        }
+
+        if (isset($filters['institusi'])) {
+            $query->where('bk_info_institusi.id_institusi', $filters['institusi']);
+        }
+
+        $permohonan = $query->get();
     
         // Load your HTML content
         $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_BKOKU_pdf', compact('permohonan'))->render();
