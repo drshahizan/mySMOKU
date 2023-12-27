@@ -806,6 +806,8 @@ class PenyelarasController extends Controller
             $sesiSemasa = null; // Initialize a variable to store the current session
 
             foreach ($nextSemesterDates as $key => $data) {
+                echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'];
+
                 $dateOfSemester = \Carbon\Carbon::parse($data['date']);
                 
                 // Set the end date to be just before the start of the next semester
@@ -817,11 +819,12 @@ class PenyelarasController extends Controller
                     $currentSesi = $data['sesi'];
                     // $semSemasa = $data['semester'];
                     $semSemasa = $data['semester'] - 1;
-                    $sesiSemasa = $data['sesi'];
-                    $previousSesi = isset($nextSemesterDates[$key - 1]) ? $nextSemesterDates[$key - 1]['sesi'] : null;
+                    // $sesiSemasa = $data['sesi'];
+                    $sesiSemasa = isset($nextSemesterDates[$key - 1]) ? $nextSemesterDates[$key - 1]['sesi'] : null;
                 }
                
             }
+
             if ($semSemasa === 0 ) {
                 return back()->with('sem', 'Semester semasa belum tamat.');
             }
