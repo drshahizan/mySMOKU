@@ -232,14 +232,14 @@
                                                         @if($program == "BKOKU")
                                                             @if ($jenis_institusi == "IPTS" || $jenis_institusi == "KK" || $jenis_institusi == "P")
                                                                 <tr>
-                                                                    <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
-                                                                    <td>{{$no_rujukan_permohonan}}</td>
-                                                                    <td>{{$pemohon}}</td>
-                                                                    <td>{{$nama_institusi}}</td>
-                                                                    <td class="text-center">{{ucwords(strtolower($nama_peringkat))}}</td>
-                                                                    <td class="text-center">{{$item->no_mesyuarat}}</td>
-                                                                    <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                                                                    <td class="text-center">
+                                                                    <td class="text-center no-sort" style="width: 3%" data-no="{{ $i++ }}">{{$i++}}</td>
+                                                                    <td style="width: 10%">{{$no_rujukan_permohonan}}</td>
+                                                                    <td style="width: 30%">{{$pemohon}}</td>
+                                                                    <td style="width: 15%">{{$nama_institusi}}</td>
+                                                                    <td class="text-center" style="width: 10%">{{ucwords(strtolower($nama_peringkat))}}</td>
+                                                                    <td class="text-center" style="width: 10%">{{$item->no_mesyuarat}}</td>
+                                                                    <td class="text-center" style="width: 12%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
+                                                                    <td class="text-center" style="width: 10%">
                                                                         @if($item->keputusan == "Lulus")
                                                                             <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
                                                                                 <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:7px;"></i> Layak
@@ -298,9 +298,14 @@
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-2" style="padding-left: 10px;">
-                                                <a href="{{ route('senarai.keputusan.BKOKU.UA.pdf') }}" target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU UA
+                                            <div class="col-md-2" style="padding-left: 5px;">
+                                                <a href="{{ route('senarai.keputusan.BKOKU.UA.pdf', [
+                                                    'start_date' => Request::get('start_date'),
+                                                    'end_date' => Request::get('end_date'),
+                                                    'status' => Request::get('status'),
+                                                    'institusi' => Request::get('institusi'),]) }}" 
+                                                    target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU
                                                 </a>
                                             </div>
                                         </div>
@@ -447,8 +452,13 @@
                                             </div>
 
                                             <div class="col-md-2" style="padding-left: 50px;">
-                                                <a href="{{ route('senarai.keputusan.PPK.pdf') }}" target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PPK
+                                                <a href="{{ route('senarai.keputusan.PPK.pdf', [
+                                                    'start_date' => Request::get('start_date'),
+                                                    'end_date' => Request::get('end_date'),
+                                                    'status' => Request::get('status'),
+                                                    'institusi' => Request::get('institusi'),]) }}" 
+                                                    target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU
                                                 </a>
                                             </div>
                                         </div>
