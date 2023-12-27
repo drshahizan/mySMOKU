@@ -855,10 +855,23 @@ class SekretariatController extends Controller
         return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi','institusiBKOKU','institusiUA','institusiPPK'));
     }
 
-    public function cetakKeputusanPermohonanBKOKU()
+    public function cetakKeputusanPermohonanBKOKU(Request $request)
     {
-        // Fetch your data (in this case, $permohonan)
-        $permohonan = Kelulusan::all();
+        // Retrieve filtered data based on user input
+        $permohonan = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
+        ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+        ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+        ->when($request->has('start_date') && $request->has('end_date'), function ($query) use ($request) {
+            $query->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$request->input('start_date'), $request->input('end_date')]);
+        })
+        ->when($request->has('status'), function ($query) use ($request) {
+            $query->where('permohonan_kelulusan.keputusan', $request->input('status'));
+        })
+        ->when($request->has('institusi'), function ($query) use ($request) {
+            $query->where('bk_info_institusi.id_institusi', $request->input('institusi'));
+        })
+        ->orderBy('permohonan_kelulusan.updated_at', 'desc')
+        ->get();
     
         // Load your HTML content
         $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_BKOKU_pdf', compact('permohonan'))->render();
@@ -891,7 +904,7 @@ class SekretariatController extends Controller
         return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU.pdf');
     }
 
-    public function cetakKeputusanPermohonanUA()
+    public function cetakKeputusanPermohonanUA(Request $request)
     {
         $permohonan = Kelulusan::all();
 
@@ -925,7 +938,7 @@ class SekretariatController extends Controller
         return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU-UA.pdf');
     }
 
-    public function cetakKeputusanPermohonanPPK()
+    public function cetakKeputusanPermohonanPPK(Request $request)
     {
         $permohonan = Kelulusan::all();
         
