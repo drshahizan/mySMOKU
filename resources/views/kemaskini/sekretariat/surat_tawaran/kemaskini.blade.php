@@ -115,7 +115,7 @@
                                 @csrf
                                 <p>
                                     <span style="float: right">
-                                        Rujukan Kami : KPT - xxxxxxxxx<br>
+                                        Ruj. Kami : KPT.BKOKU-xxxxxxxxx<br>
                                         Tarikh : xxxxxxxxx <br>
                                     </span>
                                 </p>

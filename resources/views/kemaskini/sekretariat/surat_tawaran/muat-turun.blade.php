@@ -97,7 +97,7 @@
 
         <p>
             <span style="float: right">
-                Rujukan Kami : KPT - XXXXXXXXXX <br>
+                Ruj. Kami : KPT.BKOKU-XXXXXXXXXX <br>
                 Tarikh : XXXXXXXXXX <br>
             </span>
         </p>
@@ -164,6 +164,7 @@
         <p> {{ $suratTawaran->penutup3_1}} <br>
             {{ $suratTawaran->penutup3_2}} <br>
             {{ $suratTawaran->penutup3_3}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             {{ $suratTawaran->penutup3_4}} <br>
         </p>
         <br>

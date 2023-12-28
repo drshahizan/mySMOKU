@@ -125,7 +125,7 @@
                                 @csrf
                                 <p>
                                     <span style="float: right">
-                                        No Rujukan Kami : KPT - xxxxxxxxx<br>
+                                        No Rujukan Kami : KPT.BKOKU-xxxxxxxxx<br>
                                         Tarikh : xxxxxxxxx <br>
                                     </span>
                                 </p>
@@ -193,6 +193,7 @@
                                     <b>{{$suratTawaran->penutup3_1}}</b> <br>
                                     <b>{{$suratTawaran->penutup3_2}}</b> <br>
                                     <b>{{$suratTawaran->penutup3_3}}</b> <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <b>{{$suratTawaran->penutup3_4}}</b> <br>
                                     
                                 </p>

@@ -93,7 +93,9 @@
             </div>
         </div>
            
-        <br><br><br><br><br><br><br><br><hr>
+        <br><br><br><br><br><br><br><br><br>
+        
+        <hr>
 
         @php
             $tarikh_kelulusan = DB::table('permohonan_kelulusan')->where('permohonan_id',$permohonan['id'])->value('tarikh_mesyuarat');
@@ -159,7 +161,7 @@
             <tr>
                 <td><strong>Tempoh Penajaan </strong></td>
                 <td><b>:</b></td>
-                <td>{{ \Carbon\Carbon::parse($tarikh_mula)->format('j F Y') }} hingga {{ \Carbon\Carbon::parse($tarikh_tamat)->format('j F Y') }}
+                <td>{{ \Carbon\Carbon::parse($tarikh_mula)->isoFormat('D MMMM Y') }} hingga {{ \Carbon\Carbon::parse($tarikh_tamat)->isoFormat('D MMMM Y') }}</td>
             </tr>
 
             <tr>
@@ -171,10 +173,10 @@
         
         <br>
         <div class="main-content" style="text-align:justify;">
-            <p>2. Bantuan ini berkuatkuasa mulai <b>{{ \Carbon\Carbon::parse($tarikh_mula)->format('j F Y') }} hingga {{ \Carbon\Carbon::parse($tarikh_tamat)->format('j F Y') }}.</b>
+            <p>2.  Bantuan ini berkuatkuasa mulai <b>{{ \Carbon\Carbon::parse($tarikh_mula)->isoFormat('D MMMM Y') }} hingga {{ \Carbon\Carbon::parse($tarikh_tamat)->isoFormat('D MMMM Y') }}.</b>
                   {{$kandungan_surat->kandungan1}}</p><br>
-            <p>3. {{$kandungan_surat->kandungan2}}</p><br>
-            <p>4. {{$kandungan_surat->kandungan3}}</p><br>
+            <p>3.  {{$kandungan_surat->kandungan2}}</p><br>
+            <p>4.  {{$kandungan_surat->kandungan3}}</p><br>
         </div>
         
         <p>Sekian, terima kasih.</p>
@@ -189,7 +191,7 @@
         <p> {{$kandungan_surat->penutup3_1}} <br>
             {{$kandungan_surat->penutup3_2}} <br>
             {{$kandungan_surat->penutup3_3}} <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             {{$kandungan_surat->penutup3_4}} <br>
         </p>
         <br>
