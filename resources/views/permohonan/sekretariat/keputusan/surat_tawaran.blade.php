@@ -46,7 +46,7 @@
                 float: right;
                 width: 20%;
                 font-size: 11px; 
-                margin-top:75px;
+                margin-top: 70px;
                 line-height: 1;
             }
         </style>
@@ -111,7 +111,7 @@
         @endphp
 
         @php
-            Carbon::setLocale('ms');
+            \Carbon\Carbon::setLocale('ms');
         @endphp
 
         <p>
@@ -159,7 +159,7 @@
             <tr>
                 <td><strong>Tempoh Penajaan </strong></td>
                 <td><b>:</b></td>
-                <td>{{ Carbon::parse($tarikh_mula)->format('j F Y') }} hingga {{ Carbon::parse($tarikh_tamat)->format('j F Y') }}</td>
+                <td>{{ \Carbon\Carbon::parse($tarikh_mula)->format('j F Y') }} hingga {{ \Carbon\Carbon::parse($tarikh_tamat)->format('j F Y') }}
             </tr>
 
             <tr>
@@ -171,7 +171,7 @@
         
         <br>
         <div class="main-content" style="text-align:justify;">
-            <p>2. Bantuan ini berkuatkuasa mulai <b>{{ Carbon::parse($tarikh_mula)->format('j F Y') }} hingga {{ Carbon::parse($tarikh_tamat)->format('j F Y') }}.</b>
+            <p>2. Bantuan ini berkuatkuasa mulai <b>{{ \Carbon\Carbon::parse($tarikh_mula)->format('j F Y') }} hingga {{ \Carbon\Carbon::parse($tarikh_tamat)->format('j F Y') }}.</b>
                   {{$kandungan_surat->kandungan1}}</p><br>
             <p>3. {{$kandungan_surat->kandungan2}}</p><br>
             <p>4. {{$kandungan_surat->kandungan3}}</p><br>
@@ -184,15 +184,16 @@
         <p><b>{{$kandungan_surat->penutup4_4}}</b></p>
         <br>
         <p><b>{{$kandungan_surat->penutup2}}</b></p>
-        <br>
-        <p>Saya yang menjalankan amanah,</p>
+        
+        <p> Saya yang menjalankan amanah,</p><br>
         <p> {{$kandungan_surat->penutup3_1}} <br>
             {{$kandungan_surat->penutup3_2}} <br>
             {{$kandungan_surat->penutup3_3}} <br>
-            &emsp;&emsp;&emsp;{{$kandungan_surat->penutup3_4}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {{$kandungan_surat->penutup3_4}} <br>
         </p>
         <br>
-        <div style="text-align: center;">Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div>
+        <div style="text-align: center; font-style: italic;">"Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div>
         <br>
         <p>s.k :<br>
             {{$kandungan_surat->penutup4_1}} <br>
