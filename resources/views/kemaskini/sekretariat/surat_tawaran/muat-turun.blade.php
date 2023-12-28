@@ -158,7 +158,6 @@
         <br>
         <p><b>{{ $suratTawaran->penutup1}}</b></p>
         <p><b>{{$suratTawaran->penutup4_4}}</b></p>
-        <br>
         <p><b>{{ $suratTawaran->penutup2}}</b></p>
         <br>
         <p>Saya yang menjalankan amanah,</p>

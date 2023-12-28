@@ -4,7 +4,7 @@
             @page {
                 size: A4;
                 font-family: Arial, sans-serif;
-                font-size: 14px;
+                font-size: 12px;
                 line-height: 1.15;
             }
     
@@ -110,12 +110,16 @@
             $institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_info_institusi.nama_institusi');
         @endphp
 
+        @php
+            Carbon::setLocale('ms');
+        @endphp
+
         <p>
             <span style="float: right">
                 @if ($permohonan->program == "BKOKU")
-                    Rujukan Kami : KPT.BKOKU-{{$no_kp}}<br>
+                    Ruj. Kami : KPT.BKOKU-{{$no_kp}}<br>
                 @else
-                    Rujukan Kami : KPT.PPK-{{$no_kp}}<br>
+                    Ruj. Kami : KPT.PPK-{{$no_kp}}<br>
                 @endif
                 Tarikh : {{date('d/m/Y', strtotime($tarikh_kelulusan))}}<br>
             </span>
@@ -177,13 +181,15 @@
         <br>
         <p><b>{{$kandungan_surat->penutup1}}</b></p>
         <br>
+        <p><b>{{$kandungan_surat->penutup4_4}}</b></p>
+        <br>
         <p><b>{{$kandungan_surat->penutup2}}</b></p>
         <br>
         <p>Saya yang menjalankan amanah,</p>
         <p> {{$kandungan_surat->penutup3_1}} <br>
             {{$kandungan_surat->penutup3_2}} <br>
             {{$kandungan_surat->penutup3_3}} <br>
-            {{$kandungan_surat->penutup3_4}} <br>
+            &emsp;&emsp;&emsp;{{$kandungan_surat->penutup3_4}} <br>
         </p>
         <br>
         <div style="text-align: center;">Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div>
