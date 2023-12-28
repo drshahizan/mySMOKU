@@ -132,7 +132,7 @@
         <div class="penerima" style="width: 50%">
             <b>{{$nama}}</b>
             <br><b>NO.KP : {{$no_kp}}</b>
-            <br>{{$alamat}}
+            <br>{{$alamat}},
             <br>{{$poskod}}, {{$bandar}}
             <br>{{$negeri}}
         </div>
