@@ -1083,10 +1083,10 @@ class SekretariatController extends Controller
                 ->whereIn('tuntutan.status', ['2','3','4','5'])
                 ->orderBy('tarikh_hantar', 'desc')->get();
 
-        $institusiPengajian = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPengajianPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
-
+        $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status', 'institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
@@ -1455,7 +1455,6 @@ class SekretariatController extends Controller
                     })
                     ->select('tuntutan.*','sejarah_tuntutan.created_at as tarikh_keputusan')
                     ->get();
-                    // dd($tuntutan);
 
         /*if(($startDate==null||$endDate==null)&&$request->status==null&&$request->institusi==null){
             $tuntutan = Tuntutan::orderBy('created_at', 'desc')
@@ -1489,9 +1488,10 @@ class SekretariatController extends Controller
                 ->get();
         }*/
 
-        $institusiBKOKU = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiBKOKU = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
         $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
+        $institusiPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+
         return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan', compact('tuntutan','institusiBKOKU','institusiUA','institusiPPK'));
     }
 
@@ -1536,7 +1536,9 @@ class SekretariatController extends Controller
             $j_tuntutan = JumlahTuntutan::where('jenis',"Yuran")->first();
             $baki_terdahulu = $j_tuntutan->jumlah;
         }
+
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+
         return view('tuntutan.sekretariat.saringan.papar_tuntutan',compact('sama_semester','baki_terdahulu','permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
     }
 
@@ -1575,7 +1577,9 @@ class SekretariatController extends Controller
             $j_tuntutan = JumlahTuntutan::where('jenis',"Yuran")->first();
             $baki_terdahulu = $j_tuntutan->jumlah;
         }
+
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+
         return view('tuntutan.sekretariat.saringan.kemaskini_tuntutan',compact('baki_terdahulu','permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
     }
 
@@ -1631,9 +1635,9 @@ class SekretariatController extends Controller
     public function sejarahTuntutan(){
         $tuntutan = Tuntutan::where('status', '!=','4')->orderBy('created_at', 'DESC')->get();
 
-        $institusiPengajian = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPengajianPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
         
         return view('tuntutan.sekretariat.sejarah.sejarah_tuntutan',compact('tuntutan','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
@@ -1843,18 +1847,16 @@ class SekretariatController extends Controller
         $status_kod=0;
         $status = null;
 
-        $institusiPengajian = InfoIpt::where('jenis_institusi','!=','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPengajianPPK = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
 
         return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
     public function cetakSenaraiPenyaluranExcel(Request $request, $programCode)
     {
-
         $institusi = $request->input('institusi');
-        // dd($institusi);
 
         return Excel::download(new PenyaluranTuntutan($programCode, $institusi), 'SenaraiPenyaluran.xlsx');
     }
@@ -1863,11 +1865,9 @@ class SekretariatController extends Controller
     {
         // Get the selected item IDs from the form
         $selectedItemIds = $request->input('selected_items');
-        // dd($selectedItemIds);
 
         if ($selectedItemIds !== null)
         {
-
             foreach ($selectedItemIds as $itemId){
 
                 $tuntutan = Tuntutan::orderBy('id', 'desc')->where('id', '=', $itemId)->first();
@@ -1880,8 +1880,6 @@ class SekretariatController extends Controller
                     ]);
 
                 }
-                // dd('okayyy');
-
             }
         }
 
