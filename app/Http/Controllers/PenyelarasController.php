@@ -1087,62 +1087,62 @@ class PenyelarasController extends Controller
 
         //simpan dalam table tuntutan_item
         $tuntutan = Tuntutan::orderBy('id', 'desc')
-    ->where('smoku_id', '=', $id)
-    ->where('permohonan_id', '=', $permohonan->id)
-    ->first();
+            ->where('smoku_id', '=', $id)
+            ->where('permohonan_id', '=', $permohonan->id)
+            ->first();
 
-$resit = $request->resit;
-$counter = 1;
+        $resit = $request->resit;
+        $counter = 1;
 
-// Check if $request->resit is not null before iterating
-if ($resit !== null) {
-    foreach ($resit as $resitItem) {
-        $filenameresit = $resitItem->getClientOriginalName();
-        $uniqueFilename = $counter . '_' . $filenameresit;
+        // Check if $request->resit is not null before iterating
+        if ($resit !== null) {
+            foreach ($resit as $resitItem) {
+                $filenameresit = $resitItem->getClientOriginalName();
+                $uniqueFilename = $counter . '_' . $filenameresit;
 
-        // Append increment to the filename until it's unique
-        while (file_exists('assets/dokumen/tuntutan/' . $uniqueFilename)) {
-            $counter++;
-            $uniqueFilename = $counter . '_' . $filenameresit;
+                // Append increment to the filename until it's unique
+                while (file_exists('assets/dokumen/tuntutan/' . $uniqueFilename)) {
+                    $counter++;
+                    $uniqueFilename = $counter . '_' . $filenameresit;
+                }
+
+                $resitItem->move('assets/dokumen/tuntutan', $uniqueFilename);
+
+                // Create an array with all data
+                $data = [
+                    'tuntutan_id' => $tuntutan->id,
+                    'jenis_yuran' => $request->jenis_yuran,
+                    'no_resit' => $request->no_resit,
+                    'nota_resit' => $request->nota_resit,
+                    'amaun' => $request->amaun_yuran,
+                    'resit' => $uniqueFilename,
+                ];
+
+                // Update or create the record
+                TuntutanItem::updateOrCreate(
+                    [
+                        'tuntutan_id' => $tuntutan->id,
+                        'jenis_yuran' => $request->jenis_yuran,
+                    ],
+                    $data
+                );
+
+                $counter++;
+            }
+        } else {
+            // If $request->resit is null, update other data without updating resit
+            TuntutanItem::updateOrCreate(
+                [
+                    'tuntutan_id' => $tuntutan->id,
+                    'jenis_yuran' => $request->jenis_yuran,
+                ],
+                [
+                    'no_resit' => $request->no_resit,
+                    'nota_resit' => $request->nota_resit,
+                    'amaun' => $request->amaun_yuran,
+                ]
+            );
         }
-
-        $resitItem->move('assets/dokumen/tuntutan', $uniqueFilename);
-
-        // Create an array with all data
-        $data = [
-            'tuntutan_id' => $tuntutan->id,
-            'jenis_yuran' => $request->jenis_yuran,
-            'no_resit' => $request->no_resit,
-            'nota_resit' => $request->nota_resit,
-            'amaun' => $request->amaun_yuran,
-            'resit' => $uniqueFilename,
-        ];
-
-        // Update or create the record
-        TuntutanItem::updateOrCreate(
-            [
-                'tuntutan_id' => $tuntutan->id,
-                'jenis_yuran' => $request->jenis_yuran,
-            ],
-            $data
-        );
-
-        $counter++;
-    }
-} else {
-    // If $request->resit is null, update other data without updating resit
-    TuntutanItem::updateOrCreate(
-        [
-            'tuntutan_id' => $tuntutan->id,
-            'jenis_yuran' => $request->jenis_yuran,
-        ],
-        [
-            'no_resit' => $request->no_resit,
-            'nota_resit' => $request->nota_resit,
-            'amaun' => $request->amaun_yuran,
-        ]
-    );
-}
 
 
 
@@ -1206,10 +1206,6 @@ if ($resit !== null) {
          $emel_pelajar = Smoku::where('id',$id)->first();
          $cc_pelajar = $emel_pelajar->email;
 
-        //emel kepada sekretariat
-        $user_sekretariat = User::where('tahap',3)->first();
-        $cc = $user_sekretariat->email;
-
         //emel kepada penyelaras
         $user = User::where('no_kp',Auth::user()->no_kp)->first();
 
@@ -1217,7 +1213,7 @@ if ($resit !== null) {
         $emel = EmelKemaskini::where('emel_id',14)->first();
         //dd($cc);
         //dd($emel);
-        Mail::to($user->email)->cc([$cc, $cc_pelajar])->send(new TuntutanHantar($catatan,$emel));
+        Mail::to($user->email)->cc($cc_pelajar)->send(new TuntutanHantar($catatan,$emel));
         
         return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('message', 'Tuntutan pelajar telah di hantar.');
     }
