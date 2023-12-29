@@ -81,7 +81,7 @@
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No resit/ invois</label>
 										<!--begin::Input group-->
 										<div class="mb-5">
-											<input type="text" id="no_resit" name="no_resit" class="form-control form-control-solid" placeholder=""  />
+											<input type="text" id="no_resit" name="no_resit" class="form-control form-control-solid" placeholder=""  required oninvalid="this.setCustomValidity('Sila isi no. resit.')" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 								</div>
@@ -89,7 +89,7 @@
 									<div class="col-lg-12">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Perihal</label>
 										<div class="mb-5">
-											<input type="text" id="nota_resit" name="nota_resit" class="form-control form-control-solid" placeholder="Yuran Pengajian Semester 1 2023/2024" />
+											<input type="text" id="nota_resit" name="nota_resit" class="form-control form-control-solid" placeholder="Yuran Pengajian Semester 1 2023/2024" required oninvalid="this.setCustomValidity('Sila isi perihal.')" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 								</div>
@@ -100,7 +100,7 @@
 										<div class="d-flex">
 											<span class="input-group-text">RM</span>
 											<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
-											<input type="number" id="amaun_yuran" name="amaun_yuran" onchange="myFunction()" class="form-control form-control-solid" placeholder="" step="0.01" inputmode="decimal" required/>
+											<input type="number" id="amaun_yuran" name="amaun_yuran" onchange="myFunction()" class="form-control form-control-solid" placeholder="" step="0.01" inputmode="decimal" required oninvalid="this.setCustomValidity('Sila isi amaun yuran.')" oninput="setCustomValidity('')" />
 										</div>
 									</div>
 								</div>
@@ -166,7 +166,7 @@
 											<td>{{ $tuntutan_item->nota_resit}}</td>
 											<td id="amaun" class="text-right">{{number_format($tuntutan_item->amaun, 2, '.', '')}}</td>
 											<td class="text-center">
-												<a href="{{ route('bkoku.tuntutan.item.delete', ['id' => $tuntutan_item->tuntutan_id]) }}" onclick="return confirm('Adakah anda pasti ingin padam item tuntutan ini?')">
+												<a href="{{ route('bkoku.tuntutan.item.delete', ['id' => $tuntutan_item->id]) }}" onclick="return confirm('Adakah anda pasti ingin padam item tuntutan ini?')">
 													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam">
 														<i class="fa fa-trash fa-sm custom-white-icon"></i>
 													</span>

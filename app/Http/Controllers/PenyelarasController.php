@@ -1093,9 +1093,9 @@ class PenyelarasController extends Controller
 
         $resit = $request->resit;
         $counter = 1;
-
+        // dd($resit);
         // Check if $request->resit is not null before iterating
-        if ($resit !== null) {
+        if ($resit !== null && is_array($resit) && isset($resit[0]) && $resit[0] !== null) {
             foreach ($resit as $resitItem) {
                 $filenameresit = $resitItem->getClientOriginalName();
                 $uniqueFilename = $counter . '_' . $filenameresit;
@@ -1908,9 +1908,10 @@ class PenyelarasController extends Controller
 
     public function deleteItemTuntutan($id)
     {
-        // dd($id); // ni tuntutan id
-        $tuntutan = Tuntutan::orderBy('id', 'desc')->where('id',$id)->first();
-        $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->first();
+        // dd($id); // ni tuntutan item id
+        // $tuntutan = Tuntutan::orderBy('id', 'desc')->where('id',$id)->first();
+        $tuntutan_item = TuntutanItem::where('id', $id)->first();
+        // dd($tuntutan_item->id);
 
         if ($tuntutan_item) {
 
