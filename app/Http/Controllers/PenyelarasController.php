@@ -1086,36 +1086,65 @@ class PenyelarasController extends Controller
         }
 
         //simpan dalam table tuntutan_item
-        $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', '=', $id)
-            ->where('permohonan_id', '=', $permohonan->id)
-            ->first();
+        $tuntutan = Tuntutan::orderBy('id', 'desc')
+    ->where('smoku_id', '=', $id)
+    ->where('permohonan_id', '=', $permohonan->id)
+    ->first();
 
-        $resit = $request->resit;
-        $counter = 1; 
+$resit = $request->resit;
+$counter = 1;
 
-        foreach($resit as $resit) {
-                     
-            $filenameresit =$resit->getClientOriginalName();
-            $uniqueFilename = $counter . '_' . $filenameresit;
+// Check if $request->resit is not null before iterating
+if ($resit !== null) {
+    foreach ($resit as $resitItem) {
+        $filenameresit = $resitItem->getClientOriginalName();
+        $uniqueFilename = $counter . '_' . $filenameresit;
 
-            // Append increment to the filename until it's unique
-            while (file_exists('assets/dokumen/tuntutan/' . $uniqueFilename)) {
-                $counter++;
-                $uniqueFilename = $counter . '_' . $filenameresit;
-            }
-            $resit->move('assets/dokumen/tuntutan',$uniqueFilename);
-
-            $data=new tuntutanitem();
-            $data->tuntutan_id=$tuntutan->id;
-            $data->jenis_yuran=$request->jenis_yuran;
-            $data->no_resit=$request->no_resit;
-            $data->resit=$uniqueFilename;
-            $data->nota_resit=$request->nota_resit;
-            $data->amaun=$request->amaun_yuran;
-            $data->save();
-
+        // Append increment to the filename until it's unique
+        while (file_exists('assets/dokumen/tuntutan/' . $uniqueFilename)) {
             $counter++;
+            $uniqueFilename = $counter . '_' . $filenameresit;
         }
+
+        $resitItem->move('assets/dokumen/tuntutan', $uniqueFilename);
+
+        // Create an array with all data
+        $data = [
+            'tuntutan_id' => $tuntutan->id,
+            'jenis_yuran' => $request->jenis_yuran,
+            'no_resit' => $request->no_resit,
+            'nota_resit' => $request->nota_resit,
+            'amaun' => $request->amaun_yuran,
+            'resit' => $uniqueFilename,
+        ];
+
+        // Update or create the record
+        TuntutanItem::updateOrCreate(
+            [
+                'tuntutan_id' => $tuntutan->id,
+                'jenis_yuran' => $request->jenis_yuran,
+            ],
+            $data
+        );
+
+        $counter++;
+    }
+} else {
+    // If $request->resit is null, update other data without updating resit
+    TuntutanItem::updateOrCreate(
+        [
+            'tuntutan_id' => $tuntutan->id,
+            'jenis_yuran' => $request->jenis_yuran,
+        ],
+        [
+            'no_resit' => $request->no_resit,
+            'nota_resit' => $request->nota_resit,
+            'amaun' => $request->amaun_yuran,
+        ]
+    );
+}
+
+
 
             
         //simpan dalam table sejarah_tuntutan
