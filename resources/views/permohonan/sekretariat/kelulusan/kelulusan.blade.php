@@ -106,7 +106,7 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-md-3 fv-row" style="margin-left: 20px;">
+                                            <div class="col-md-2 fv-row" style="margin-left: 20px;">
                                                 <!--begin::Actions-->
                                                 <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
                                                     <i class="ki-duotone ki-filter fs-2">
@@ -117,16 +117,8 @@
                                                 <!--end::Actions-->
                                             </div>
                                         
-                                            {{-- <div class="col-md-4 fv-row export-container">
-                                                <a id="exportPDF" href="#" target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PDF
-                                                </a>
-                                                <a id="exportExcel" href="#" target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-excel" style="color: black;"></i> Excel
-                                                </a>
-                                            </div> --}}
 
-                                            <div class="col-md-4 fv-row exportBKOKU-container">
+                                            <div class="col-md-4 fv-row export-container" data-program-code="BKOKU">
                                                 <a id="exportBKOKU" href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
@@ -135,7 +127,7 @@
                                                 </a>
                                             </div>
                                             
-                                            <div class="col-md-4 fv-row exportUA-container">
+                                            <div class="col-md-4 fv-row export-container" data-program-code="UA">
                                                 <a id="exportUA" href="{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
@@ -144,7 +136,7 @@
                                                 </a>
                                             </div>
                                             
-                                            <div class="col-md-4 fv-row exportPPK-container">
+                                            <div class="col-md-4 fv-row export-container" data-program-code="PPK">
                                                 <a id="exportPPK" href="{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
@@ -152,6 +144,7 @@
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a>
                                             </div>
+                                            
                                         </div>
                                         <!--end::Input group-->
                                     </div>
@@ -177,6 +170,7 @@
                                                         <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
                                                         <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
                                                     </tr>
@@ -199,6 +193,7 @@
                                                                 $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
                                                                 $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
                                                                 $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                                $id_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
                                                                 $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.jenis_institusi');
                                                                 $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
@@ -256,6 +251,7 @@
                                                                     <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                                                                     <td style="width: 17%">{{$namakursus}}</td>
                                                                     <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                    <td style="width: 20%">{{$id_institusi}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                                 </tr>
@@ -327,6 +323,7 @@
                                                         <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
                                                         <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
                                                     </tr>
@@ -349,6 +346,7 @@
                                                                 $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
                                                                 $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
                                                                 $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                                $id_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
                                                                 $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.jenis_institusi');
                                                                 $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
@@ -406,6 +404,7 @@
                                                                     <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                                                                     <td style="width: 17%">{{$namakursus}}</td>
                                                                     <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                    <td style="width: 20%">{{$id_institusi}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                                 </tr>
@@ -477,6 +476,7 @@
                                                         <th class="text-center" style="width: 10% !important;"><b>Jenis Kecacatan</b></th>
                                                         <th class="text-center" style="width: 17% !important;"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 20% !important;"><b>ID Institusi</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Mula Pengajian</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Tamat Pengajian</b></th>
                                                     </tr>
@@ -499,6 +499,7 @@
                                                                 $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
                                                                 $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
                                                                 $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                                $id_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
                                                                 $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
                                                                 
@@ -554,6 +555,7 @@
                                                                 <td style="width: 10%;">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                                                                 <td style="width: 17%;">{{$namakursus}}</td>
                                                                 <td style="width: 20%;">{{$institusipengajian}}</td>
+                                                                <td style="width: 20%;">{{$id_institusi}}</td>
                                                                 <td class="text-center"  style="width: 10%;">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                 <td class="text-center"  style="width: 10%;">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                             </tr>
@@ -618,6 +620,7 @@
 
         {{-- // check all checkboxes at once for bulk approval "kelulusan" --}}
         <script>
+            
             function toggle(source) {
                 var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
                 for (var i = 0; i < checkboxes.length; i++) {
@@ -630,198 +633,180 @@
 			});
         </script>
 
-        <!-- Example script tag loading jQuery from a CDN -->
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        
+    <script>
+        // Initialize JavaScript variables with data from Blade
+        var bkokuList = @json($institusiPengajian);
+        var bkokuUAList = @json($institusiPengajianUA);
+        var ppkList = @json($institusiPengajianPPK);
 
-        {{-- filter --}}
-        <script>
-            // Initialize JavaScript variables with data from Blade
-            var bkokuList = @json($institusiBKOKU);
-            var bkokuUAList = @json($institusiUA);
-            var ppkList = @json($institusiPPK);
+        $(document).ready(function() {
+            $('.export-container[data-program-code="BKOKU"]').show();
+            $('.export-container[data-program-code="UA"]').hide();
+            $('.export-container[data-program-code="PPK"]').hide();
 
-            $(document).ready(function() {
-                // Add an event listener for tab clicks
-                $('.nav-link').on('click', function() 
-                {
-                    // Get the ID of the active tab
-                    var activeTabId = $(this).attr('id');
-                    dd(activeTabId);
+            $('.none-container').show(); // Hide export elements
 
-                    // Clear filters when changing tabs
-                    clearFilters();
+            // Add an event listener for tab clicks
+            $('.nav-link').on('click', function() {
+                // Get the ID of the active tab
+                var activeTabId = $(this).attr('id');
 
-                    // Check if the active tab is bkokuUA-tab
-                    if (activeTabId === 'bkoku-tab') {
-                        $('.exportBKOKU-container').show(); // Show export elements
-                        $('.none-container').hide(); // Hide export elements
-                    } 
-                    if (activeTabId === 'bkokuUA-tab') {
-                        $('.exportUA-container').show(); // Show export elements
-                        $('.none-container').hide(); // Hide export elements
-                    }
-                    if (activeTabId === 'ppk-tab') {
-                        $('.exportPPK-container').show(); // Show export elements
-                        $('.none-container').hide(); // Hide export elements
-                    } 
+                // Clear filters when changing tabs
+                clearFilters();
 
-                    // Update the institution dropdown based on the active tab
-                    switch (activeTabId) {
-                        case 'bkoku-tab':
-                            updateInstitusiDropdown(bkokuList);
-                            break;
-                        case 'bkokuUA-tab':
-                            updateInstitusiDropdown(bkokuUAList);
-                            break;
-                        case 'ppk-tab':
-                            updateInstitusiDropdown(ppkList);
-                            break;
-                    }
-                });
+                updateExportContainers(activeTabId);
 
-                // Trigger the function for the default active tab (bkoku-tab)
-                updateInstitusiDropdown(bkokuList);
-
-                // Function to clear filters for all tables
-                function clearFilters() {
-                    if (datatable1) {
-                        datatable1.search('').columns().search('').draw();
-                    }
-                    if (datatable) {
-                        datatable.search('').columns().search('').draw();
-                    }
-                    if (datatable2) {
-                        datatable2.search('').columns().search('').draw();
-                    }
-                }
-
-                // Function to update the institution dropdown
-                function updateInstitusiDropdown(institusiList) {
-                    // Clear existing options
-                    $('#institusiDropdown').empty();
-
-                    // Add default option
-                    $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
-
-                    // Add options based on the selected tab
-                    for (var i = 0; i < institusiList.length; i++) {
-                        $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
-                    }
+                // Update the institution dropdown based on the active tab
+                switch (activeTabId) {
+                    case 'bkoku-tab':
+                        updateInstitusiDropdown(bkokuList);
+                        break;
+                    case 'bkokuUA-tab':
+                        updateInstitusiDropdown(bkokuUAList);
+                        break;
+                    case 'ppk-tab':
+                        updateInstitusiDropdown(ppkList);
+                        break;
+                    // Add more cases if you have additional tabs
                 }
             });
-        </script>
 
-        <script>
-            // Declare datatables in a higher scope to make them accessible
-            var datatable1, datatable, datatable2;
+            // Trigger the function for the default active tab (bkoku-tab)
+            updateInstitusiDropdown(bkokuList);
 
-            $(document).ready(function() {
-                // Initialize DataTables
-                initDataTable('#sortTable1', 'datatable1');
-                initDataTable('#kt_subscriptions_table', 'datatable');
-                initDataTable('#sortTable2', 'datatable2');
-
-                // Log data for all tables
-                logTableData('Table 1 Data:', datatable1);
-                logTableData('Table 2 Data:', datatable);
-                logTableData('Table 3 Data:', datatable2);
-            });
-
-            function initDataTable(tableId, variableName) {
-                // Check if the datatable is already initialized
-                if ($.fn.DataTable.isDataTable(tableId)) {
-                    // Destroy the existing DataTable instance
-                    $(tableId).DataTable().destroy();
+            // Function to clear filters for all tables
+            function clearFilters() {
+                if (datatable1) {
+                    datatable1.search('').columns().search('').draw();
                 }
-
-                // Initialize the datatable and assign it to the global variable
-                window[variableName] = $(tableId).DataTable({
-                    ordering: true, // Enable manual sorting
-                    order: [], // Disable initial sorting
-                    columnDefs: [
-                        { orderable: false, targets: [0] }
-                    ]
-                });
+                if (datatable) {
+                    datatable.search('').columns().search('').draw();
+                }
+                if (datatable2) {
+                    datatable2.search('').columns().search('').draw();
+                }
             }
 
-            function applyFilter() 
-            {
-                var selectedInstitusi = $('[name="institusi"]').val();
+            function updateExportContainers(activeTabId) {
+                // Hide all export containers initially
+                $('.export-container').hide();
 
-                // Apply search filter and log data for all tables
-                applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
-                applyAndLogFilter('Table 2', datatable, selectedInstitusi);
-                applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
-
-                // Update the export link with the selected institusi for Table 1
-                var exportBKOKU = document.getElementById('exportBKOKU');
-                exportBKOKU.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
-
-                var exportBKOKUExcel = document.getElementById('exportBKOKUExcel');
-                exportBKOKUExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
-
-                // Update the export link with the selected institusi for Table 2
-                var exportUA = document.getElementById('exportUA');
-                exportUA.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
-
-                var exportUAExcel = document.getElementById('exportUAExcel');
-                exportUAExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
-
-                // Update the export link with the selected institusi for Table 3
-                var exportPPK = document.getElementById('exportPPK');
-                exportPPK.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
-
-                var exportPPKExcel = document.getElementById('exportPPKExcel');
-                exportPPKExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
+                // Show the export container based on the active tab
+                var programCode = getProgramCode(activeTabId);
+                $('.export-container[data-program-code="' + programCode + '"]').show();
             }
 
-            // function applyFilter() {
-            //     var selectedInstitusi = $('[name="institusi"]').val();
-
-            //     // Apply search filter and log data for all tables
-            //     applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
-            //     applyAndLogFilter('Table 2', datatable, selectedInstitusi);
-            //     applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
-
-            //     // Update the export link with the selected institusi for Table 1
-            //     var exportBKOKU = document.getElementById('exportBKOKU');
-            //     exportBKOKU.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
-
-            //     var exportBKOKU = document.getElementById('exportBKOKU');
-            //     exportBKOKU.href = "{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
-
-            //     // Update the export link with the selected institusi for Table 2
-            //     var exportUA = document.getElementById('exportUA');
-            //     exportUA.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
-
-            //     var exportUA = document.getElementById('exportUA');
-            //     exportUA.href = "{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
-
-            //     // Update the export link with the selected institusi for Table 3
-            //     var exportPPK = document.getElementById('exportPPK');
-            //     exportPPK.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
-
-            //     var exportPPK = document.getElementById('exportPPK');
-            //     exportPPK.href = "{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
-            // }
-
-            function applyAndLogFilter(tableName, table, filterValue) {
-                // Apply search filter to the table
-                table.column(3).search(filterValue).draw();
-
-                // Log filtered data
-                console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
-
-                // Go to the first page for the table
-                table.page(0).draw(false);
-
-                // Log the data of visible rows on the first page for the table
-                console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
+            function getProgramCode(activeTabId) {
+                switch (activeTabId) {
+                    case 'bkoku-tab':
+                        return 'BKOKU';
+                    case 'bkokuUA-tab':
+                        return 'UA';
+                    case 'ppk-tab':
+                        return 'PPK';
+                    // Add more cases if you have additional tabs
+                    default:
+                        return '';
+                }
             }
 
-            function logTableData(message, table) {
-                console.log(message, table.rows().data().toArray());
+
+            // Function to update the institution dropdown
+            function updateInstitusiDropdown(institusiList) {
+                // Clear existing options
+                $('#institusiDropdown').empty();
+
+                // Add default option
+                $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
+
+                // Add options based on the selected tab
+                for (var i = 0; i < institusiList.length; i++) {
+                    $('#institusiDropdown').append('<option value="' + institusiList[i].id_institusi + '">' + institusiList[i].nama_institusi + '</option>');
+                }
             }
-        </script>
+        });
+    </script>
+
+    <script>
+        
+
+        // Declare datatables in a higher scope to make them accessible
+        var datatable1, datatable, datatable2;
+
+        $(document).ready(function() {
+            // Initialize DataTables
+            initDataTable('#sortTable1', 'datatable1');
+            initDataTable('#kt_subscriptions_table', 'datatable');
+            initDataTable('#sortTable2', 'datatable2');
+
+            // Log data for all tables
+            logTableData('Table 1 Data:', datatable1);
+            logTableData('Table 2 Data:', datatable);
+            logTableData('Table 3 Data:', datatable2);
+        });
+
+        function initDataTable(tableId, variableName) {
+            // Check if the datatable is already initialized
+            if ($.fn.DataTable.isDataTable(tableId)) {
+                // Destroy the existing DataTable instance
+                $(tableId).DataTable().destroy();
+            }
+
+            // Initialize the datatable and assign it to the global variable
+            window[variableName] = $(tableId).DataTable({
+                ordering: true, // Enable manual sorting
+                order: [], // Disable initial sorting
+                columnDefs: [
+                    { orderable: false, targets: [0] },
+                    { targets: [6], visible: false } // Hide the seventh column (index 6)
+                ]
+            });
+        }
+
+        function applyFilter() {
+            var selectedInstitusi = $('[name="institusi"]').val();
+
+            // Apply search filter and log data for all tables
+            applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
+            applyAndLogFilter('Table 2', datatable, selectedInstitusi);
+            applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
+
+            // Update the export link with the selected institusi for Table 2
+            var exportBKOKU = document.getElementById('exportBKOKU');
+            exportBKOKU.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+            var exportBKOKUExcel = document.getElementById('exportBKOKUExcel');
+            exportBKOKUExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+
+            var exportUA = document.getElementById('exportUA');
+            exportUA.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
+            var exportUAExcel = document.getElementById('exportUAExcel');
+            exportUAExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
+
+            var exportPPK = document.getElementById('exportPPK');
+            exportPPK.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
+            var exportPPKExcel = document.getElementById('exportPPKExcel');
+            exportPPKExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
+        }
+
+        function applyAndLogFilter(tableName, table, filterValue) {
+            // Apply search filter to the table
+            table.column(6).search(filterValue).draw();
+
+            // Log filtered data
+            console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
+
+            // Go to the first page for the table
+            table.page(0).draw(false);
+
+            // Log the data of visible rows on the first page for the table
+            console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
+        }
+
+        function logTableData(message, table) {
+            console.log(message, table.rows().data().toArray());
+        }
+    </script>
     </body>
 </x-default-layout> 

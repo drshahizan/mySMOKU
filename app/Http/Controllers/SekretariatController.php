@@ -447,25 +447,16 @@ class SekretariatController extends Controller
     //PERMOHONAN - KELULUSAN
     public function senaraiKelulusanPermohonan(Request $request)
     {
-        $filters = $request->only(['institusi']); // Adjust the filter names as per your form
 
-        $query = Permohonan::select('permohonan.*')
-            ->where('permohonan.status', '=', '4');
+        $kelulusan = Permohonan::select('permohonan.*')
+            ->where('permohonan.status', '=', '4')
+            ->orderBy('id', 'desc')->get();
 
-        if (isset($filters['institusi'])) {
-            $selectedInstitusi = $filters['institusi'];
-            $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
-                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
-                ->where('smoku_akademik.id_institusi', $selectedInstitusi);
-        }
-
-        $kelulusan = $query->orderBy('id', 'desc')->get();
-
-        $institusiBKOKU = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
-        $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
         
-        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan','filters','institusiBKOKU','institusiUA','institusiPPK'));
+        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan', 'institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
     public function cetakSenaraiDisokongPDF(Request $request, $programCode)
