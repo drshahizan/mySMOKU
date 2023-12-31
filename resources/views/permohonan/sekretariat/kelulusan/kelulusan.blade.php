@@ -117,34 +117,34 @@
                                                 <!--end::Actions-->
                                             </div>
                                         
-                                            <div class="col-md-4 fv-row exportBKOKU-container"> 
+                                            <div class="col-md-4 fv-row exportBKOKU-container">
                                                 {{-- BKOKU --}}
                                                 <a id="exportBKOKU" href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
-                                                <a id="exportBKOKU" href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a id="exportBKOKUExcel" href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
-                                                </a>   
+                                                </a>
                                             </div>
-
-                                            <div class="col-md-4 fv-row exportUA-container"> 
+                                            
+                                            <div class="col-md-4 fv-row exportUA-container">
                                                 {{-- BKOKU UA --}}
                                                 <a id="exportUA" href="{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
-                                                <a id="exportUA" href="{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a id="exportUAExcel" href="{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
-                                                </a> 
+                                                </a>
                                             </div>
-
-                                            <div class="col-md-4 fv-row exportPPK-container"> 
+                                            
+                                            <div class="col-md-4 fv-row exportPPK-container">
                                                 {{-- PPK --}}
                                                 <a id="exportPPK" href="{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
-                                                <a id="exportPPK" href="{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a id="exportPPKExcel" href="{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
-                                                </a>  
+                                                </a>
                                             </div>
                                         </div>
                                         <!--end::Input group-->
@@ -159,34 +159,6 @@
                             <div class="tab-content mt-0" id="myTabContent">
                                 {{-- BKOKU IPTS, KK, P --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
-                                    {{-- <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <select name="institusi" class="form-select js-example-basic-single">
-                                                    <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiBKOKU as $institusi)
-                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                    
-                                            <div class="col-md-3" style="margin-left: 10px; margin-right:150px;">
-                                                <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
-                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                </button>
-                                            </div>
-
-                                            <div class="col-md-3" style="padding-left: 50px;">  
-                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PDF
-                                                </a>
-                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-excel" style="color: black;"></i> Excel
-                                                </a>                                               
-                                            </div>
-                                        </div>
-                                    </form>   --}}
-
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
@@ -337,34 +309,6 @@
 
                                 {{-- BKOKU UA --}}
                                 <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
-                                    {{-- <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <select name="institusi" class="form-select js-example-basic-single">
-                                                    <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiUA as $institusi)
-                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                
-                                            <div class="col-md-3" style="margin-left: 10px; margin-right:150px;">
-                                                <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
-                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                </button>
-                                            </div>
-
-                                            <div class="col-md-3" style="padding-left: 50px;">  
-                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'UA'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PDF
-                                                </a>
-                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'UA'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-excel" style="color: black;"></i> Excel
-                                                </a> 
-                                            </div>
-                                        </div>
-                                    </form>   --}}
-
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
@@ -515,34 +459,6 @@
 
                                 {{-- PPK --}}
                                 <div class="tab-pane fade " id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-                                    {{-- <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <select name="institusi" class="form-select js-example-basic-single">
-                                                    <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiPPK as $institusi)
-                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                    
-                                            <div class="col-md-3" style="margin-left: 10px; margin-right:150px;">
-                                                <button type="submit" class="btn btn-primary" style="width: 15%; padding-left: 10px;">
-                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                </button>
-                                            </div>
-
-                                            <div class="col-md-3" style="padding-left: 50px;">
-                                                <a href="{{ route('senarai.disokong.pdf', ['programCode' => 'PPK'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PDF
-                                                </a>
-                                                <a href="{{ route('senarai.disokong.excel', ['programCode' => 'PPK'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-excel" style="color: black;"></i> Excel
-                                                </a>                         
-                                            </div>
-                                        </div>
-                                    </form>   --}}
-
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
@@ -727,19 +643,31 @@
                     // Clear filters when changing tabs
                     clearFilters();
 
-                    // Check if the active tab is bkokuUA-tab
-                    if (activeTabId === 'bkoku-tab') {
-                        $('.exportBKOKU-container').show(); // Show export elements
-                        $('.none-container').hide(); // Hide export elements
-                    } 
-                    if (activeTabId === 'bkokuUA-tab') {
-                        $('.exportUA-container').show(); // Show export elements
-                        $('.none-container').hide(); // Hide export elements
+                    // // Check if the active tab is bkokuUA-tab
+                    // if (activeTabId === 'bkoku-tab') {
+                    //     $('.exportBKOKU-container').show(); // Show export elements
+                    //     $('.none-container').hide(); // Hide export elements
+                    // } 
+                    // if (activeTabId === 'bkokuUA-tab') {
+                    //     $('.exportUA-container').show(); // Show export elements
+                    //     $('.none-container').hide(); // Hide export elements
+                    // }
+                    // if (activeTabId === 'ppk-tab') {
+                    //     $('.exportPPK-container').show(); // Show export elements
+                    //     $('.none-container').hide(); // Hide export elements
+                    // } 
+
+                    switch (activeTabId) {
+                        case 'bkoku-tab':
+                            $('.exportBKOKU-container').show(); // Show export elements
+                            break;
+                        case 'bkokuUA-tab':
+                            $('.exportUA-container').show(); // Show export elements
+                            break;
+                        case 'ppk-tab':
+                            $('.exportPPK-container').show(); // Show export elements
+                            break;
                     }
-                    if (activeTabId === 'ppk-tab') {
-                        $('.exportPPK-container').show(); // Show export elements
-                        $('.none-container').hide(); // Hide export elements
-                    } 
 
                     // Update the institution dropdown based on the active tab
                     switch (activeTabId) {
@@ -752,7 +680,6 @@
                         case 'ppk-tab':
                             updateInstitusiDropdown(ppkList);
                             break;
-                        // Add more cases if you have additional tabs
                     }
                 });
 
@@ -821,25 +748,35 @@
                 });
             }
 
-            function applyFilter() {
+            function applyFilter() 
+            {
                 var selectedInstitusi = $('[name="institusi"]').val();
-
-                // Update the export link with the selected institusi for Table 1
-                $('#exportBKOKU').attr('href', "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi);
-                $('#exportBKOKUExcel').attr('href', "{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi);
-
-                // Update the export link with the selected institusi for Table 2
-                $('#exportUA').attr('href', "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi);
-                $('#exportUAExcel').attr('href', "{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi);
-
-                // Update the export link with the selected institusi for Table 3
-                $('#exportPPK').attr('href', "{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi);
-                $('#exportPPKExcel').attr('href', "{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi);
 
                 // Apply search filter and log data for all tables
                 applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
                 applyAndLogFilter('Table 2', datatable, selectedInstitusi);
                 applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
+
+                // Update the export link with the selected institusi for Table 1
+                var exportBKOKU = document.getElementById('exportBKOKU');
+                exportBKOKU.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+
+                var exportBKOKUExcel = document.getElementById('exportBKOKUExcel');
+                exportBKOKUExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+
+                // Update the export link with the selected institusi for Table 2
+                var exportUA = document.getElementById('exportUA');
+                exportUA.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
+
+                var exportUAExcel = document.getElementById('exportUAExcel');
+                exportUAExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
+
+                // Update the export link with the selected institusi for Table 3
+                var exportPPK = document.getElementById('exportPPK');
+                exportPPK.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
+
+                var exportPPKExcel = document.getElementById('exportPPKExcel');
+                exportPPKExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
             }
 
             // function applyFilter() {
