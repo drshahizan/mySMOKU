@@ -117,16 +117,16 @@
                                                 <!--end::Actions-->
                                             </div>
                                         
-                                            <div class="col-md-4 fv-row export-container">
+                                            {{-- <div class="col-md-4 fv-row export-container">
                                                 <a id="exportPDF" href="#" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
                                                 <a id="exportExcel" href="#" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a>
-                                            </div>
+                                            </div> --}}
 
-                                            {{-- <div class="col-md-4 fv-row exportBKOKU-container">
+                                            <div class="col-md-4 fv-row exportBKOKU-container">
                                                 <a id="exportBKOKU" href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
@@ -151,7 +151,7 @@
                                                 <a id="exportPPKExcel" href="{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a>
-                                            </div> --}}
+                                            </div>
                                         </div>
                                         <!--end::Input group-->
                                     </div>
@@ -646,35 +646,24 @@
                 {
                     // Get the ID of the active tab
                     var activeTabId = $(this).attr('id');
+                    dd(activeTabId);
 
                     // Clear filters when changing tabs
                     clearFilters();
 
-                    // // Check if the active tab is bkokuUA-tab
-                    // if (activeTabId === 'bkoku-tab') {
-                    //     $('.exportBKOKU-container').show(); // Show export elements
-                    //     $('.none-container').hide(); // Hide export elements
-                    // } 
-                    // if (activeTabId === 'bkokuUA-tab') {
-                    //     $('.exportUA-container').show(); // Show export elements
-                    //     $('.none-container').hide(); // Hide export elements
-                    // }
-                    // if (activeTabId === 'ppk-tab') {
-                    //     $('.exportPPK-container').show(); // Show export elements
-                    //     $('.none-container').hide(); // Hide export elements
-                    // } 
-
-                    // switch (activeTabId) {
-                    //     case 'bkoku-tab':
-                    //         $('.exportBKOKU-container').show(); // Show export elements
-                    //         break;
-                    //     case 'bkokuUA-tab':
-                    //         $('.exportUA-container').show(); // Show export elements
-                    //         break;
-                    //     case 'ppk-tab':
-                    //         $('.exportPPK-container').show(); // Show export elements
-                    //         break;
-                    // }
+                    // Check if the active tab is bkokuUA-tab
+                    if (activeTabId === 'bkoku-tab') {
+                        $('.exportBKOKU-container').show(); // Show export elements
+                        $('.none-container').hide(); // Hide export elements
+                    } 
+                    if (activeTabId === 'bkokuUA-tab') {
+                        $('.exportUA-container').show(); // Show export elements
+                        $('.none-container').hide(); // Hide export elements
+                    }
+                    if (activeTabId === 'ppk-tab') {
+                        $('.exportPPK-container').show(); // Show export elements
+                        $('.none-container').hide(); // Hide export elements
+                    } 
 
                     // Update the institution dropdown based on the active tab
                     switch (activeTabId) {
@@ -682,43 +671,13 @@
                             updateInstitusiDropdown(bkokuList);
                             break;
                         case 'bkokuUA-tab':
-                            $('.exportUA-container').show(); // Show export elements
                             updateInstitusiDropdown(bkokuUAList);
                             break;
                         case 'ppk-tab':
-                            $('.exportPPK-container').show(); // Show export elements
                             updateInstitusiDropdown(ppkList);
                             break;
                     }
-
-                    // Update the export links with the selected programCode for each tab
-                    var programCode = getProgramCodeForTab(activeTabId);
-                    updateExportLinks(programCode);
                 });
-
-                // Function to get the programCode based on the active tab
-                function getProgramCodeForTab(activeTabId) {
-                    switch (activeTabId) {
-                        case 'bkoku-tab':
-                            return 'BKOKU';
-                        case 'bkokuUA-tab':
-                            return 'UA';
-                        case 'ppk-tab':
-                            return 'PPK';
-                        default:
-                            return '';
-                    }
-                }
-
-                // Function to update the export links
-                function updateExportLinks(programCode) {
-                    // dd(programCode);
-                    var exportPDF = document.getElementById('exportPDF');
-                    exportPDF.href = "{{ route('senarai.disokong.pdf') }}?programCode=" + programCode;
-
-                    var exportExcel = document.getElementById('exportExcel');
-                    exportExcel.href = "{{ route('senarai.disokong.excel') }}?programCode=" + programCode;
-                }
 
                 // Trigger the function for the default active tab (bkoku-tab)
                 updateInstitusiDropdown(bkokuList);
@@ -794,32 +753,26 @@
                 applyAndLogFilter('Table 2', datatable, selectedInstitusi);
                 applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
 
-                var exportPDF = document.getElementById('exportPDF');
-                exportPDF.href = "/senarai-permohonan-disokong-pdf/" + programCode;
-
-                var exportExcel = document.getElementById('exportExcel');
-                exportExcel.href = "/senarai-permohonan-disokong-excel/" + programCode;
-
                 // Update the export link with the selected institusi for Table 1
-                // var exportBKOKU = document.getElementById('exportBKOKU');
-                // exportBKOKU.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+                var exportBKOKU = document.getElementById('exportBKOKU');
+                exportBKOKU.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
 
-                // var exportBKOKUExcel = document.getElementById('exportBKOKUExcel');
-                // exportBKOKUExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+                var exportBKOKUExcel = document.getElementById('exportBKOKUExcel');
+                exportBKOKUExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
 
-                // // Update the export link with the selected institusi for Table 2
-                // var exportUA = document.getElementById('exportUA');
-                // exportUA.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
+                // Update the export link with the selected institusi for Table 2
+                var exportUA = document.getElementById('exportUA');
+                exportUA.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
 
-                // var exportUAExcel = document.getElementById('exportUAExcel');
-                // exportUAExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
+                var exportUAExcel = document.getElementById('exportUAExcel');
+                exportUAExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
 
-                // // Update the export link with the selected institusi for Table 3
-                // var exportPPK = document.getElementById('exportPPK');
-                // exportPPK.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
+                // Update the export link with the selected institusi for Table 3
+                var exportPPK = document.getElementById('exportPPK');
+                exportPPK.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
 
-                // var exportPPKExcel = document.getElementById('exportPPKExcel');
-                // exportPPKExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
+                var exportPPKExcel = document.getElementById('exportPPKExcel');
+                exportPPKExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
             }
 
             // function applyFilter() {
