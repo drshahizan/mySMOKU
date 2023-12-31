@@ -107,7 +107,7 @@
 									<div class="col-lg-12">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Resit/ Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></label>
 										<div class="input-group control-group img_div form-group col-md-11" >
-											<input type="file" name="resit[]" required/>
+											<input type="file" id="resit" name="resit[]" />
 											<br>
 										</div>
 										<div id="fileLinkContainer" class="input-group control-group img_div form-group col-md-11" >
