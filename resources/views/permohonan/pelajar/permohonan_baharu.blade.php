@@ -2035,8 +2035,17 @@
 				let endDate = new Date($("#tarikh_tamat").val());
 				var studyPeriod = parseFloat(document.getElementById("tempoh_pengajian").value);
 
+				// Get the current date
+				var currentDate = new Date();
+
 				if (!isNaN(studyPeriod)) {
-				//alert(studyPeriod);
+					// alert(currentDate);
+					// Check if the start date is not more than the current date
+					if (startDate >= currentDate) {
+						alert("Tarikh mula pengajian tidak boleh lebih daripada tarikh hari ini.");
+						document.getElementById("tarikh_mula").value = "";
+						return;
+					}
 				 	endDate.setFullYear(startDate.getFullYear() + Math.floor(studyPeriod));
 
 				 	var remainingMonths = (studyPeriod - Math.floor(studyPeriod)) * 12;
