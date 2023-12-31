@@ -103,59 +103,86 @@
                                 
                                 $tuntutan = DB::table('tuntutan')
                                     ->where('smoku_id', $layak->smoku_id)
-                                    ->where('permohonan_id', $layak->id)
+                                    ->where('permohonan_id', $layak->permohonan_id)
                                     ->orderBy('tuntutan.id', 'desc')
                                     ->first(['tuntutan.*']);
-                                // dd($tuntutan);    
                                 
-                                $semSemasa = $akademik->sem_semasa;
-								$sesiSemasa = $akademik->sesi;
-								if($akademik->bil_bulan_per_sem == 6){
-									$bilSem = 2;
-								} else {
-									$bilSem = 3;
-								}
-								$totalSemesters = $akademik->tempoh_pengajian * $bilSem;
-								$currentYear = date('Y');
+                                $semSemasa = 1;
+
+                                if($akademik->bil_bulan_per_sem == 6){
+                                    $bilSem = 2;
+                                } else {
+                                    $bilSem = 3;
+                                }
+                                $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
+                                $currentYear = date('Y');
 
                                 $currentDate = Carbon::now();
                                 $tarikhMula = Carbon::parse($akademik->tarikh_mula);
-								$tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
-                                
-                                while ($tarikhMula < $tarikhTamat) {
-									$tarikhNextSem = $tarikhMula->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
-									// echo $tarikhNextSem->format('Y-m-d') . PHP_EOL;
-									$tarikhNextSem = $tarikhNextSem->format('Y-m-d');
-                                    // dd($tarikhNextSem);
-									
-									if ($currentDate->greaterThan($tarikhNextSem)) {
-										
-										$permohonan = DB::table('permohonan')->orderBy('id', 'DESC')->where('smoku_id',$layak->smoku_id)->first();
-                                        
+                                $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
+                                $sesiMula = $tarikhMula->format('Y') . '/' . ($tarikhMula->format('Y') + 1);
 
-                                        $result = DB::table('permohonan_peperiksaan')
-                                                    ->where('permohonan_id', $permohonan->id)
-                                                    ->where('sesi', $sesiSemasa)
-                                                    ->where('semester', $semSemasa)
-                                                    ->first();
-                                        // dd($result);    
-                                        
-                                        $semSemasa = $semSemasa + 1; //contoh kalau sem asal mohon 2 , next 3
+                                $tarikhNextSem = clone $tarikhMula; // Clone to avoid modifying the original date
+                                $nextSemesterDates = [];
+                                $firstIteration = true;
 
-                                        if ($semSemasa > $bilSem) {
-                                            $currentYear = intval(substr($sesiSemasa, 0, 4));
-                                            // Incrementing the current year by 1
-                                            $sesiSemasaYear = $currentYear + 1;
-                                            $sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
-                                            $semSemasa = 3; // Reset semester for the next academic year sem3 utk sesi lain
-                                        }
-										break; // Exit the loop
-									}
-									
-								}
-                                
-                    
+                                while ($tarikhNextSem < $tarikhTamat) {
                                     
+
+                                    $nextSemesterDates[] = [
+                                        'date' => $tarikhNextSem->format('Y-m-d'),
+                                        'semester' => $semSemasa,
+                                        'sesi' => $sesiMula,
+                                    ];
+
+                                    $semSemasa++;
+                                    $awal = $tarikhNextSem->format('Y');
+                                    
+                                    $akhir = $tarikhNextSem->format('Y') + 1;
+                                    
+                                    $sesiMula = $awal . '/' . $akhir;
+
+                                    $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
+
+                                }
+                                
+                            
+
+                                $currentSesi = null; // Initialize a variable to store the current session
+                                $previousSesi = null; // Initialize a variable to store the previous session
+                                $semSemasa = null; // Initialize a variable to store the current semester
+                                $sesiSemasa = null; // Initialize a variable to store the current session
+
+                                foreach ($nextSemesterDates as $key => $data) {
+                                    $dateOfSemester = \Carbon\Carbon::parse($data['date']);
+                                    
+                                    // Set the end date to be just before the start of the next semester
+                                    $nextSemesterStartDate = isset($nextSemesterDates[$key + 1]) ? \Carbon\Carbon::parse($nextSemesterDates[$key + 1]['date']) : null;
+                                    // $semesterEndDate = $nextSemesterStartDate ? $nextSemesterStartDate->subSecond() : $dateOfSemester->endOfDay();
+                                    $semesterEndDate = $nextSemesterStartDate ? $nextSemesterStartDate->subSecond() : ($tarikhTamat ? $tarikhTamat->endOfDay()->subSecond() : $dateOfSemester->endOfDay()->subSecond());
+
+                                    // Check if the current date is within the range of the semester
+                                    if ($currentDate->between($dateOfSemester->startOfDay(), $semesterEndDate)) {
+                                        $currentSesi = $data['sesi'];
+                                        $semSemasa = $data['semester'];
+                                        $semLepas = $data['semester'] - 1;
+                                        $sesiSemasa = $data['sesi'];
+                                        $previousSesi = isset($nextSemesterDates[$key - 1]) ? $nextSemesterDates[$key - 1]['sesi'] : null;
+                                    }
+                                
+                                }
+                                if ($semLepas != 0 ) {
+                                    if($semSemasa != $semLepas){
+                                        // semak dah upload result ke belum
+                                        $result = DB::table('permohonan_peperiksaan')->where('permohonan_id', $permohonan->id)
+                                        ->where('semester', $semLepas)
+                                        ->first();
+                                        // if($result == null){
+                                        //     return redirect()->route('bkoku.kemaskini.keputusan', ['id' => $id])->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
+                                        // }
+                                    }
+                                    
+                                }
 
                             @endphp
                             <tr>
@@ -199,10 +226,10 @@
                                                 <i class="ki-solid ki-pencil text-dark fs-2"></i>
                                             </span>
                                         </a>
-                                        <a href="{{ $currentDate->greaterThan($tarikhNextSem) && $semSemasa <= $totalSemesters && $result == null && $currentDate < ($tarikhTamat) ? route('ppk.kemaskini.keputusan', $layak->smoku_id) : '#' }}" 
+                                        <a href="{{ $currentDate->greaterThan($dateOfSemester) && $semSemasa <= $totalSemesters && $result == null && $currentDate < ($tarikhTamat) ? route('ppk.kemaskini.keputusan', $layak->smoku_id) : '#' }}" 
                                             class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
                                             @if(!$tuntutan || ($tuntutan && $tuntutan->status == 8))
-                                                @if($currentDate->greaterThan($tarikhNextSem) && $semSemasa <= $totalSemesters && $currentDate < ($tarikhTamat))
+                                                @if($currentDate->greaterThan($dateOfSemester) && $semSemasa <= $totalSemesters && $currentDate < ($tarikhTamat))
                                                     @if ($result == null)
                                                         data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu."
                                                     @else

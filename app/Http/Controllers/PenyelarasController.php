@@ -812,7 +812,7 @@ class PenyelarasController extends Controller
                 
                 // Set the end date to be just before the start of the next semester
                 $nextSemesterStartDate = isset($nextSemesterDates[$key + 1]) ? \Carbon\Carbon::parse($nextSemesterDates[$key + 1]['date']) : null;
-                $semesterEndDate = $nextSemesterStartDate ? $nextSemesterStartDate->subSecond() : $dateOfSemester->endOfDay();
+                $semesterEndDate = $nextSemesterStartDate ? $nextSemesterStartDate->subSecond() : ($tarikhTamat ? $tarikhTamat->endOfDay()->subSecond() : $dateOfSemester->endOfDay()->subSecond());
                 
                 // Check if the current date is within the range of the semester
                 if ($currentDate->between($dateOfSemester->startOfDay(), $semesterEndDate)) {
@@ -951,8 +951,9 @@ class PenyelarasController extends Controller
                 
                 // Set the end date to be just before the start of the next semester
                 $nextSemesterStartDate = isset($nextSemesterDates[$key + 1]) ? \Carbon\Carbon::parse($nextSemesterDates[$key + 1]['date']) : null;
-                $semesterEndDate = $nextSemesterStartDate ? $nextSemesterStartDate->subSecond() : $dateOfSemester->endOfDay();
-                
+                // $semesterEndDate = $nextSemesterStartDate ? $nextSemesterStartDate->subSecond() : $dateOfSemester->endOfDay();
+                $semesterEndDate = $nextSemesterStartDate ? $nextSemesterStartDate->subSecond() : ($tarikhTamat ? $tarikhTamat->endOfDay()->subSecond() : $dateOfSemester->endOfDay()->subSecond());
+
                 // Check if the current date is within the range of the semester
                 if ($currentDate->between($dateOfSemester->startOfDay(), $semesterEndDate)) {
                     $currentSesi = $data['sesi'];

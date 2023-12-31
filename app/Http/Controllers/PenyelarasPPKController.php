@@ -798,7 +798,7 @@ class PenyelarasPPKController extends Controller
         ->where('penyelaras_id','=', Auth::user()->id)
         ->where('permohonan.status', 8) 
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
-        ->get(['smoku.*', 'permohonan.no_rujukan_permohonan', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
+        ->get(['smoku.*', 'permohonan.no_rujukan_permohonan', 'permohonan.id as permohonan_id', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
         // dd($layak);
 
         
@@ -828,8 +828,9 @@ class PenyelarasPPKController extends Controller
             ->where('smoku_akademik.status', 1)
             ->first();
         
-        $semSemasa = $akademik->sem_semasa;
-        $sesiSemasa = $akademik->sesi;
+        $semSemasa = 1;
+        // $sesiSemasa = $akademik->sesi;
+
         if($akademik->bil_bulan_per_sem == 6){
             $bilSem = 2;
         } else {
@@ -841,62 +842,66 @@ class PenyelarasPPKController extends Controller
         $currentDate = Carbon::now();
         $tarikhMula = Carbon::parse($akademik->tarikh_mula);
         $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
+        $sesiMula = $tarikhMula->format('Y') . '/' . ($tarikhMula->format('Y') + 1);
 
         $tarikhNextSem = clone $tarikhMula; // Clone to avoid modifying the original date
         $nextSemesterDates = [];
-        if ($semSemasa != 1) {
-            $semSemasa = 1;
-        } else {
-            $semSemasa = null;
-        }
-        
-        
+        $firstIteration = true;
 
         while ($tarikhNextSem < $tarikhTamat) {
+            
+
             $nextSemesterDates[] = [
                 'date' => $tarikhNextSem->format('Y-m-d'),
                 'semester' => $semSemasa,
+                'sesi' => $sesiMula,
             ];
-           
-            // Increment $semSemasa and calculate the next semester date
-            $semSemasa += 1;
+
+            $semSemasa++;
+            $awal = $tarikhNextSem->format('Y');
+            
+            $akhir = $tarikhNextSem->format('Y') + 1;
+            
+            $sesiMula = $awal . '/' . $akhir;
+
             $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
+
+        }
+
+        $currentSesi = null; // Initialize a variable to store the current session
+        $previousSesi = null; // Initialize a variable to store the previous session
+        $semSemasa = null; // Initialize a variable to store the current semester
+        $sesiSemasa = null; // Initialize a variable to store the current session
+        foreach ($nextSemesterDates as $key => $data) {
+            // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'];
+
+            $dateOfSemester = \Carbon\Carbon::parse($data['date']);
+            
+            // Set the end date to be just before the start of the next semester
+            $nextSemesterStartDate = isset($nextSemesterDates[$key + 1]) ? \Carbon\Carbon::parse($nextSemesterDates[$key + 1]['date']) : null;
+            $semesterEndDate = $nextSemesterStartDate ? $nextSemesterStartDate->subSecond() : ($tarikhTamat ? $tarikhTamat->endOfDay()->subSecond() : $dateOfSemester->endOfDay()->subSecond());
+            // var_dump('Formatted Current Date: ' . $currentDate->format('Y-m-d H:i:s'));
+            // var_dump('Formatted Start Date: ' . $dateOfSemester->startOfDay()->format('Y-m-d H:i:s'));
+            // var_dump('Formatted End Date: ' . $semesterEndDate->format('Y-m-d H:i:s'));
+            // Check if the current date is within the range of the semester
+            if ($currentDate->between($dateOfSemester->startOfDay(), $semesterEndDate)) {
+                $currentSesi = $data['sesi'];
+                // $semSemasa = $data['semester'];
+                $semSemasa = $data['semester'] - 1;
+                // $sesiSemasa = $data['sesi'];
+                $sesiSemasa = isset($nextSemesterDates[$key - 1]) ? $nextSemesterDates[$key - 1]['sesi'] : null;
+            }
+            
+            // var_dump($semSemasa);
             
         }
         // dd($semSemasa);
-        // dd($nextSemesterDates);
 
-        // Display all $tarikhNextSem dates
-        foreach ($nextSemesterDates as $data) {
-            // dd($data);
-
-            // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . PHP_EOL;
-        
-            $dateOfSemester = \Carbon\Carbon::parse($data['date']);
-            
-            if ($currentDate->greaterThan($dateOfSemester)) {
-                // dd($data['semester']);
-
-                $semSemasa = $data['semester'];
-                
-                
-                if ($semSemasa > $bilSem) {
-                    $currentYear = intval(substr($sesiSemasa, 0, 4));
-                    // Incrementing the current year by 1
-                    $sesiSemasaYear = $currentYear + 1;
-                    $sesiSemasa = $sesiSemasaYear . '/' . ($sesiSemasaYear + 1);
-                    
-                }
-
-            } else {
-                // Break the loop when you reach the current or future semester
-                break;
-            }
-            
-            
+        if ($semSemasa === 0 ) {
+            return back()->with('sem', 'Semester semasa belum tamat.');
         }
 
-
+        
         if ($permohonan) {
             
             $peperiksaan = Peperiksaan::where('permohonan_id', $permohonan->id)->get();
