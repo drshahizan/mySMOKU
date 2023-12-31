@@ -148,7 +148,7 @@
                         <div class="tab-content mt-0" id="myTabContent">
                             {{-- BKOKU --}}
                             <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
-                                <br>
+                                <br><br>
                                 <div class="body">
                                     <div class="table-responsive">
                                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
