@@ -636,9 +636,12 @@
 
             $(document).ready(function() {
                 // Add an event listener for tab clicks
-                $('.nav-link').on('click', function() {
+                $('.nav-link').on('click', function() 
+                {
                     // Get the ID of the active tab
                     var activeTabId = $(this).attr('id');
+
+                    console.log('Active Tab ID:', activeTabId);
 
                     // Clear filters when changing tabs
                     clearFilters();
@@ -657,27 +660,30 @@
                     //     $('.none-container').hide(); // Hide export elements
                     // } 
 
-                    switch (activeTabId) {
-                        case 'bkoku-tab':
-                            $('.exportBKOKU-container').show(); // Show export elements
-                            break;
-                        case 'bkokuUA-tab':
-                            $('.exportUA-container').show(); // Show export elements
-                            break;
-                        case 'ppk-tab':
-                            $('.exportPPK-container').show(); // Show export elements
-                            break;
-                    }
+                    // switch (activeTabId) {
+                    //     case 'bkoku-tab':
+                            
+                    //         break;
+                    //     case 'bkokuUA-tab':
+                    //         $('.exportUA-container').show(); // Show export elements
+                    //         break;
+                    //     case 'ppk-tab':
+                    //         $('.exportPPK-container').show(); // Show export elements
+                    //         break;
+                    // }
 
                     // Update the institution dropdown based on the active tab
                     switch (activeTabId) {
                         case 'bkoku-tab':
+                            $('.exportBKOKU-container').show(); // Show export elements
                             updateInstitusiDropdown(bkokuList);
                             break;
                         case 'bkokuUA-tab':
+                            $('.exportUA-container').show(); // Show export elements
                             updateInstitusiDropdown(bkokuUAList);
                             break;
                         case 'ppk-tab':
+                            $('.exportPPK-container').show(); // Show export elements
                             updateInstitusiDropdown(ppkList);
                             break;
                     }
