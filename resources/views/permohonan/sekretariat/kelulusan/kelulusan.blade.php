@@ -27,6 +27,10 @@
             .nav{
                 margin-left: 20px!important;
             }
+
+            .form-select {
+                margin-left: 20px !important; 
+            }
         </style>
     </head>
 
@@ -93,9 +97,9 @@
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-between" data-kt-subscription-table-toolbar="base">
                                     <!--begin::Filter-->
-                                    <div data-kt-subscription-table-filter="form">
+                                    <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <!--begin::Input group-->
-                                        <div class="row mb-0">
+                                        <div class="row">
                                             <div class="col-md-6">
                                                 <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
@@ -341,7 +345,7 @@
                                         </div>
                                     </form>   --}}
 
-                                    <div class="body">
+                                    <div class="card-body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
                                             <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
@@ -671,30 +675,10 @@
             </div>
         </div>
 
-        {{-- search in filter --}}
-        <style>
-            .form-select {
-                margin-left: 20px !important; 
-            }
-        </style>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-        {{-- sort table --}}
+        {{-- // check all checkboxes at once for bulk approval "kelulusan" --}}
         <script>
-            //sorting function
-            $('#sortTable1').DataTable({
-                ordering: true, // Enable manual sorting
-                order: [] // Disable initial sorting
-            });
-            $('#sortTable2').DataTable({
-                ordering: true, // Enable manual sorting
-                order: [] // Disable initial sorting
-            });
-            $('#sortTable3').DataTable({
-                ordering: true, // Enable manual sorting
-                order: [] // Disable initial sorting
-            });
-
-            // check all checkboxes at once for bulk approval "kelulusan"
             function toggle(source) {
                 var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
                 for (var i = 0; i < checkboxes.length; i++) {
@@ -707,9 +691,8 @@
 			});
         </script>
 
+        
         {{-- filter --}}
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-            
         <script>
             // Initialize JavaScript variables with data from Blade
             var bkokuList = @json($institusiBKOKU);
