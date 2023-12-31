@@ -95,7 +95,7 @@
                             <!--begin::Card toolbar-->
                             <div class="card-toolbar">
                                 <!--begin::Toolbar-->
-                                <div class="d-flex justify-content-between" data-kt-subscription-table-toolbar="base">
+                                <div class="d-flex justify-content-between mt-10 mb-0" data-kt-subscription-table-toolbar="base">
                                     <!--begin::Filter-->
                                     <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <!--begin::Input group-->
@@ -117,7 +117,7 @@
                                                 <!--end::Actions-->
                                             </div>
                                         
-                                            <div class="col-md-4 fv-row export-container"> 
+                                            <div class="col-md-4 fv-row exportBKOKU-container"> 
                                                 {{-- BKOKU --}}
                                                 <a id="exportBKOKU" href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
@@ -125,7 +125,9 @@
                                                 <a id="exportBKOKU" href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a>   
+                                            </div>
 
+                                            <div class="col-md-4 fv-row exportUA-container"> 
                                                 {{-- BKOKU UA --}}
                                                 <a id="exportUA" href="{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
@@ -133,7 +135,9 @@
                                                 <a id="exportUA" href="{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a> 
+                                            </div>
 
+                                            <div class="col-md-4 fv-row exportPPK-container"> 
                                                 {{-- PPK --}}
                                                 <a id="exportPPK" href="{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
@@ -155,7 +159,6 @@
                             <div class="tab-content mt-0" id="myTabContent">
                                 {{-- BKOKU IPTS, KK, P --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
-                                    <br>
                                     {{-- <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -334,7 +337,6 @@
 
                                 {{-- BKOKU UA --}}
                                 <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
-                                    <br>
                                     {{-- <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -513,7 +515,6 @@
 
                                 {{-- PPK --}}
                                 <div class="tab-pane fade " id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-                                    <br>
                                     {{-- <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -718,8 +719,8 @@
             var ppkList = @json($institusiPPK);
 
             $(document).ready(function() {
-                $('.export-container').hide(); // Hide export elements
-                $('.none-container').show(); // Hide export elements
+                // $('.export-container').hide(); // Hide export elements
+                // $('.none-container').show(); // Hide export elements
 
                 // Add an event listener for tab clicks
                 $('.nav-link').on('click', function() {
