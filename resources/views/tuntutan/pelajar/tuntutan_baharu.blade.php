@@ -59,7 +59,7 @@
 									<div class="col-lg-12">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Jenis Yuran</label>
 										<!--begin::Input group-->
-										<select id="jenis_yuran" name="jenis_yuran" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
+										<select id="jenis_yuran" name="jenis_yuran" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih jenis yuran.')" oninput="setCustomValidity('')">
 											<option></option>
 											<option value="Yuran Pengajian">Yuran Pengajian</option>
 											<option value="Yuran Pendaftaran Pengajian">Yuran Pendaftaran Pengajian</option>
@@ -80,7 +80,7 @@
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No. resit/ invois</label>
 										<!--begin::Input group-->
 										<div class="mb-5">
-											<input type="text" id="no_resit" name="no_resit" class="form-control form-control-solid" placeholder="" required/>
+											<input type="text" id="no_resit" name="no_resit" class="form-control form-control-solid" placeholder="" required oninvalid="this.setCustomValidity('Sila isi no. resit.')" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 								</div>
@@ -88,7 +88,7 @@
 									<div class="col-lg-12">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Perihal</label>
 										<div class="mb-5">
-											<input type="text" id="nota_resit" name="nota_resit" class="form-control form-control-solid" placeholder="Yuran Pengajian Semester 1 2023/2024" required/>
+											<input type="text" id="nota_resit" name="nota_resit" class="form-control form-control-solid" placeholder="Yuran Pengajian Semester 1 2023/2024" required oninvalid="this.setCustomValidity('Sila isi perihal.')" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 								</div>
@@ -99,7 +99,7 @@
 										<div class="d-flex">
 											<span class="input-group-text">RM</span>
 											<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
-											<input type="number" id="amaun_yuran" name="amaun_yuran" onchange="myFunction()" class="form-control form-control-solid" placeholder="" step="0.01" inputmode="decimal" required/>
+											<input type="number" id="amaun_yuran" name="amaun_yuran" onchange="myFunction()" class="form-control form-control-solid" placeholder="" step="0.01" inputmode="decimal" required oninvalid="this.setCustomValidity('Sila isi amaun yuran.')" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 								</div>

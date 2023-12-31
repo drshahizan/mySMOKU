@@ -60,7 +60,7 @@
 									<div class="col-lg-12">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Jenis Yuran</label>
 										<!--begin::Input group-->
-										<select id="jenis_yuran" name="jenis_yuran" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<select id="jenis_yuran" name="jenis_yuran" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih jenis yuran.')" oninput="setCustomValidity('')">
 											<option></option>
 											<option value="Yuran Pengajian">Yuran Pengajian</option>
 											<option value="Yuran Pendaftaran Pengajian">Yuran Pendaftaran Pengajian</option>
