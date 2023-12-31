@@ -57,7 +57,10 @@ class PenyelarasPPKController extends Controller
                 $query->where('permohonan.status', '<', '2')
                     ->orWhereNull('permohonan.status');
             })
-            ->OrwhereRaw('(SELECT status FROM permohonan WHERE smoku_id = smoku.id ORDER BY id DESC LIMIT 1) = 9')
+            ->orWhereRaw("(SELECT permohonan.status FROM permohonan 
+                JOIN smoku_penyelaras ON smoku_penyelaras.smoku_id = permohonan.smoku_id 
+                WHERE permohonan.smoku_id = smoku.id AND penyelaras_id = " . Auth::user()->id . " 
+                ORDER BY permohonan.id DESC LIMIT 1) = 9")
             ->select('smoku.*', 'smoku_penyelaras.*', 'permohonan.status', 'permohonan.id as permohonan_id')
             ->get();
         
