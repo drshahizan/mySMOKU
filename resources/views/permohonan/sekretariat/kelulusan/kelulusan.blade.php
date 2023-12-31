@@ -68,21 +68,83 @@
                             {{-- top nav bar --}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="bkoku1-tab" data-toggle="tab" data-target="#bkoku1" type="button" role="tab" aria-controls="bkoku1" aria-selected="true">BKOKU</button>
+                                    <button class="nav-link active" id="bkoku-tab" data-toggle="tab" data-target="#bkoku" type="button" role="tab" aria-controls="bkoku" aria-selected="true">BKOKU</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="bkoku2-tab" data-toggle="tab" data-target="#bkoku2" type="button" role="tab" aria-controls="bkoku2" aria-selected="true">BKOKU UA</button>
+                                    <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
                                 </li>
                             </ul>
 
+                             <!--begin::Card title-->
+                            <div class="card-title">
+                                <!--begin::Search-->
+                                <div class="d-flex align-items-center position-relative my-1">
+                                    <input type="hidden" data-kt-subscription-table-filter="search" >
+                                </div>
+                                <!--end::Search-->
+                            </div>
+                            <!--begin::Card title-->
+
+                            <!--begin::Card toolbar-->
+                            <div class="card-toolbar">
+                                <!--begin::Toolbar-->
+                                <div class="d-flex justify-content-between" style="margin-left: 20px;" data-kt-subscription-table-toolbar="base">
+                                    <!--begin::Filter-->
+                                    <div data-kt-subscription-table-filter="form">
+                                        <!--begin::Input group-->
+                                        <div class="row mb-0">
+                                            <div class="col-md-8 fv-row">
+                                                <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-2 fv-row none-container"> </div>
+
+                                            <div class="col-md-2 fv-row">
+                                                <!--begin::Actions-->
+                                                <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
+                                                    <i class="ki-duotone ki-filter fs-2">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                    </i>
+                                                </button>
+                                                <!--end::Actions-->
+                                            </div>
+                                        
+                                            <div class="col-md-2 fv-row export-container"> 
+                                                <a id="exportLink" href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PDF
+                                                </a>
+                                                <a id="exportLink" href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU'] + $filters) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-excel" style="color: black;"></i> Excel
+                                                </a>   
+                                            </div>
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+                                    <!--end::Filter-->
+                                </div>
+                                <!--end::Toolbar-->
+
+                                <!--begin::Group actions-->
+                                <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
+                                    <div class="fw-bold me-5">
+                                    <span class="me-2" data-kt-subscription-table-select="selected_count"></span>Selected</div>
+                                    <button type="button" class="btn btn-danger" data-kt-subscription-table-select="delete_selected">Delete Selected</button>
+                                </div>
+                                <!--end::Group actions-->
+                            </div>
+                            <!--end::Card toolbar-->
+
                             <div class="tab-content" id="myTabContent">
                                 {{-- BKOKU IPTS, KK, P --}}
-                                <div class="tab-pane fade show active" id="bkoku1" role="tabpanel" aria-labelledby="bkoku1-tab">
+                                <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br>
-                                    <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
+                                    {{-- <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <select name="institusi" class="form-select js-example-basic-single">
@@ -108,7 +170,7 @@
                                                 </a>                                               
                                             </div>
                                         </div>
-                                    </form>  
+                                    </form>   --}}
 
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
@@ -259,9 +321,9 @@
                                 </div>
 
                                 {{-- BKOKU UA --}}
-                                <div class="tab-pane fade" id="bkoku2" role="tabpanel" aria-labelledby="bkoku2-tab">
+                                <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <br>
-                                    <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
+                                    {{-- <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <select name="institusi" class="form-select js-example-basic-single">
@@ -287,7 +349,7 @@
                                                 </a> 
                                             </div>
                                         </div>
-                                    </form>  
+                                    </form>   --}}
 
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
@@ -440,7 +502,7 @@
                                 {{-- PPK --}}
                                 <div class="tab-pane fade " id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <br>
-                                    <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
+                                    {{-- <form action="{{ url('permohonan/sekretariat/kelulusan') }}" method="GET">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <select name="institusi" class="form-select js-example-basic-single">
@@ -466,7 +528,7 @@
                                                 </a>                         
                                             </div>
                                         </div>
-                                    </form>  
+                                    </form>   --}}
 
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
@@ -618,12 +680,15 @@
                 </div>
             </div>
         </div>
+
+        {{-- search in filter --}}
         <style>
             .form-select {
                 margin-left: 20px !important; 
             }
         </style>
 
+        {{-- sort table --}}
         <script>
             //sorting function
             $('#sortTable1').DataTable({
@@ -639,7 +704,7 @@
                 order: [] // Disable initial sorting
             });
 
-            // check all checkboxes at once
+            // check all checkboxes at once for bulk approval "kelulusan"
             function toggle(source) {
                 var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
                 for (var i = 0; i < checkboxes.length; i++) {
@@ -650,6 +715,152 @@
             $(document).ready(function() {
 			    $('.js-example-basic-single').select2();
 			});
+        </script>
+
+        {{-- filter --}}
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            
+        <script>
+            // Initialize JavaScript variables with data from Blade
+            var bkokuList = @json($institusiBKOKU);
+            var bkokuUAList = @json($institusiUA);
+            var ppkList = @json($institusiPPK);
+
+            $(document).ready(function() {
+                $('.export-container').hide(); // Hide export elements
+                $('.none-container').show(); // Hide export elements
+
+                // Add an event listener for tab clicks
+                $('.nav-link').on('click', function() {
+                    // Get the ID of the active tab
+                    var activeTabId = $(this).attr('id');
+
+                    // Clear filters when changing tabs
+                    clearFilters();
+
+                    // Check if the active tab is bkokuUA-tab
+                    if (activeTabId === 'bkokuUA-tab') {
+                        $('.export-container').show(); // Show export elements
+                        $('.none-container').hide(); // Hide export elements
+                    } else {
+                        $('.export-container').hide(); // Hide export elements
+                        $('.none-container').show(); // Hide export elements
+                    }
+
+                    // Update the institution dropdown based on the active tab
+                    switch (activeTabId) {
+                        case 'bkoku-tab':
+                            updateInstitusiDropdown(bkokuList);
+                            break;
+                        case 'bkokuUA-tab':
+                            updateInstitusiDropdown(bkokuUAList);
+                            break;
+                        case 'ppk-tab':
+                            updateInstitusiDropdown(ppkList);
+                            break;
+                        // Add more cases if you have additional tabs
+                    }
+                });
+
+                // Trigger the function for the default active tab (bkoku-tab)
+                updateInstitusiDropdown(bkokuList);
+
+                // Function to clear filters for all tables
+                function clearFilters() {
+                    if (datatable1) {
+                        datatable1.search('').columns().search('').draw();
+                    }
+                    if (datatable) {
+                        datatable.search('').columns().search('').draw();
+                    }
+                    if (datatable2) {
+                        datatable2.search('').columns().search('').draw();
+                    }
+                }
+
+
+                // Function to update the institution dropdown
+                function updateInstitusiDropdown(institusiList) {
+                    // Clear existing options
+                    $('#institusiDropdown').empty();
+
+                    // Add default option
+                    $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
+
+                    // Add options based on the selected tab
+                    for (var i = 0; i < institusiList.length; i++) {
+                        $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
+                    }
+                }
+            });
+        </script>
+
+        <script>
+            // Declare datatables in a higher scope to make them accessible
+            var datatable1, datatable, datatable2;
+
+            $(document).ready(function() {
+                // Initialize DataTables
+                initDataTable('#sortTable1', 'datatable1');
+                initDataTable('#kt_subscriptions_table', 'datatable');
+                initDataTable('#sortTable2', 'datatable2');
+
+                // Log data for all tables
+                logTableData('Table 1 Data:', datatable1);
+                logTableData('Table 2 Data:', datatable);
+                logTableData('Table 3 Data:', datatable2);
+            });
+
+            function initDataTable(tableId, variableName) {
+                // Check if the datatable is already initialized
+                if ($.fn.DataTable.isDataTable(tableId)) {
+                    // Destroy the existing DataTable instance
+                    $(tableId).DataTable().destroy();
+                }
+
+                // Initialize the datatable and assign it to the global variable
+                window[variableName] = $(tableId).DataTable({
+                    ordering: true, // Enable manual sorting
+                    order: [], // Disable initial sorting
+                    columnDefs: [
+                        { orderable: false, targets: [0] }
+                    ]
+                });
+            }
+
+            function applyFilter() {
+                var selectedInstitusi = $('[name="institusi"]').val();
+
+                // Apply search filter and log data for all tables
+                applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
+                applyAndLogFilter('Table 2', datatable, selectedInstitusi);
+                applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
+
+                // Update the export link with the selected institusi for Table 2
+                var exportLink = document.getElementById('exportLink');
+                exportLink.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+
+                var exportLink = document.getElementById('exportLink');
+                exportLink.href = "{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+            }
+
+            function applyAndLogFilter(tableName, table, filterValue) {
+                // Apply search filter to the table
+                table.column(3).search(filterValue).draw();
+
+                // Log filtered data
+                console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
+
+                // Go to the first page for the table
+                table.page(0).draw(false);
+
+                // Log the data of visible rows on the first page for the table
+                console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
+            }
+
+            function logTableData(message, table) {
+                console.log(message, table.rows().data().toArray());
+            }
         </script>
     </body>
 </x-default-layout> 

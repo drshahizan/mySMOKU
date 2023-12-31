@@ -444,6 +444,7 @@ class SekretariatController extends Controller
         return $pdf->stream('surat-tawaran-dikemaskini.pdf');
     }
 
+    //PERMOHONAN - KELULUSAN
     public function senaraiKelulusanPermohonan(Request $request)
     {
         $filters = $request->only(['institusi']); // Adjust the filter names as per your form
