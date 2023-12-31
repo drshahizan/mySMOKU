@@ -117,7 +117,7 @@
                                                 <!--end::Actions-->
                                             </div>
                                         
-                                            <div class="col-md-5 fv-row exportBKOKU-container"> 
+                                            <div class="col-md-4 fv-row export-container"> 
                                                 {{-- BKOKU --}}
                                                 <a id="exportBKOKU" href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
@@ -125,9 +125,7 @@
                                                 <a id="exportBKOKU" href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a>   
-                                            </div>
 
-                                            <div class="col-md-5 fv-row exportUA-container"> 
                                                 {{-- BKOKU UA --}}
                                                 <a id="exportUA" href="{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
@@ -135,9 +133,7 @@
                                                 <a id="exportUA" href="{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a> 
-                                            </div>
 
-                                            <div class="col-md-5 fv-row exportPPK-container"> 
                                                 {{-- PPK --}}
                                                 <a id="exportPPK" href="{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
@@ -367,7 +363,7 @@
                                         </div>
                                     </form>   --}}
 
-                                    <div class="card-body">
+                                    <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
                                             <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
@@ -722,8 +718,8 @@
             var ppkList = @json($institusiPPK);
 
             $(document).ready(function() {
-                // $('.export-container').hide(); // Hide export elements
-                // $('.none-container').show(); // Hide export elements
+                $('.export-container').hide(); // Hide export elements
+                $('.none-container').show(); // Hide export elements
 
                 // Add an event listener for tab clicks
                 $('.nav-link').on('click', function() {
@@ -734,7 +730,7 @@
                     clearFilters();
 
                     // Check if the active tab is bkokuUA-tab
-                    if (activeTabId === 'bkokuBKOKU-tab') {
+                    if (activeTabId === 'bkoku-tab') {
                         $('.exportBKOKU-container').show(); // Show export elements
                         $('.none-container').hide(); // Hide export elements
                     } 
@@ -742,7 +738,7 @@
                         $('.exportUA-container').show(); // Show export elements
                         $('.none-container').hide(); // Hide export elements
                     }
-                    if (activeTabId === 'bkokuPPK-tab') {
+                    if (activeTabId === 'ppk-tab') {
                         $('.exportPPK-container').show(); // Show export elements
                         $('.none-container').hide(); // Hide export elements
                     } 
