@@ -78,7 +78,7 @@
 								</div>
 								<div class="row gx-10 mb-5">
 									<div class="col-lg-12">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No resit/ invois</label>
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No. resit/ invois</label>
 										<!--begin::Input group-->
 										<div class="mb-5">
 											<input type="text" id="no_resit" name="no_resit" class="form-control form-control-solid" placeholder=""  required oninvalid="this.setCustomValidity('Sila isi no. resit.')" oninput="setCustomValidity('')"/>

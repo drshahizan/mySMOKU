@@ -77,10 +77,10 @@
 								</div>
 								<div class="row gx-10 mb-5">
 									<div class="col-lg-12">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No resit/ invois</label>
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No. resit/ invois</label>
 										<!--begin::Input group-->
 										<div class="mb-5">
-											<input type="text" name="no_resit" class="form-control form-control-solid" placeholder="" required/>
+											<input type="text" id="no_resit" name="no_resit" class="form-control form-control-solid" placeholder="" required/>
 										</div>
 									</div>
 								</div>
@@ -88,7 +88,7 @@
 									<div class="col-lg-12">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Perihal</label>
 										<div class="mb-5">
-											<input type="text" name="nota_resit" class="form-control form-control-solid" placeholder="Yuran Pengajian Semester 1 2023/2024" required/>
+											<input type="text" id="nota_resit" name="nota_resit" class="form-control form-control-solid" placeholder="Yuran Pengajian Semester 1 2023/2024" required/>
 										</div>
 									</div>
 								</div>
@@ -105,10 +105,14 @@
 								</div>
 								<div class="row gx-10 mb-5">
 									<div class="col-lg-12">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Resit/ Invois&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH"><i class="fa-solid fa-circle-info"></i></a></label>
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Resit/ Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></label>
 										<div class="input-group control-group img_div form-group col-md-11" >
 											<input type="file" name="resit[]" required/>
 											<br>
+										</div>
+										<div id="fileLinkContainer" class="input-group control-group img_div form-group col-md-11" >
+											<input type="hidden" id="resit" name="resit[]" />
+											<span id="fileNameDisplay"></span>
 										</div>
 									</div>
 								</div>
@@ -154,7 +158,7 @@
 											<th class="text-center"></th>
 										</tr>
 									</thead>
-									<tbody class="fw-semibold text-center text-gray-600">
+									<tbody class="fw-semibold text-gray-600">
 										@foreach ($tuntutan_item as $tuntutan_item)
 										<tr>
 											<td>{{ $loop->iteration }}.</td>
@@ -163,7 +167,7 @@
 											<td>{{ $tuntutan_item->nota_resit}}</td>
 											<td id="amaun" class="text-right">{{number_format($tuntutan_item->amaun, 2, '.', '')}}</td>
 											<td class="text-center">
-												<a href="{{ route('tuntutan.item.delete', ['id' => $tuntutan_item->tuntutan_id]) }}" onclick="return confirm('Adakah anda pasti ingin padam item tuntutan ini?')">
+												<a href="{{ route('tuntutan.item.delete', ['id' => $tuntutan_item->id]) }}" onclick="return confirm('Adakah anda pasti ingin padam item tuntutan ini?')">
 													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam">
 														<i class="fa fa-trash fa-sm custom-white-icon"></i>
 													</span>
@@ -173,6 +177,7 @@
 										@endforeach	
 									</tbody>
 								</table>
+								<div style="font-size: 11px;"> Double click row untuk kemaskini item tuntutan. </div>
 							</div>
 						</div>
 						@endif
@@ -186,7 +191,7 @@
 									<div class="d-flex flex-stack">
 										<div class="me-5">
 											{{-- <input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox"  @if ($permohonan->wang_saku == 1) value="1" checked @endif/> --}}
-											<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" required oninvalid="this.setCustomValidity('Sila tandakan.')" oninput="setCustomValidity('')" value="1" />
+											<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" value="1" />
 											<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
 										</div>
 									</div>
@@ -385,6 +390,61 @@ document.getElementById("jumlah").value = totalAmaun.toFixed(2);
 
 myFunction();
 </script>
+<script>
+    $(document).ready(function () {
+        $('#itemtuntutan tbody tr').on('dblclick', function () {
+            // Handle double-click event here
+            var rowData = $(this).find('td'); // Get the data from the clicked row
+    		console.log('rowData:', rowData);
 
+            // Extract data 
+            var jenisValue = $(rowData[1]).text(); 
+			var noresitValue = $(rowData[2]).text().trim();
+            var notaresitValue = $(rowData[3]).text().trim(); 
+            var amaunyuranValue = $(rowData[4]).text(); 
+
+			var linkElement = $(rowData[2]).find('a');
+        var hrefValue = linkElement.attr('href');
+
+        // Assuming the <span> has an id of "fileNameDisplay"
+        var fileNameDisplay = $('#fileNameDisplay');
+
+        // Assuming the <div> has an id of "fileLinkContainer"
+        var fileLinkContainer = $('#fileLinkContainer');
+
+        // Create an anchor element dynamically
+        var fileLink = $('<a>');
+
+        // Set the href attribute to the file URL
+        fileLink.attr('href', hrefValue);
+
+        // Set the text content to the filename
+        var fileName = hrefValue.split('/').pop(); // Assumes the file name is at the end of the URL
+        fileLink.text(fileName);
+
+        // Clear previous content in the container
+        fileLinkContainer.empty();
+
+        // Append the anchor element to the container
+        fileLinkContainer.append(fileLink);
+
+			
+            // Set the selected options in the <select> elements
+            $('#jenis_yuran').val(jenisValue);
+            $('#no_resit').val(noresitValue);
+            $('#nota_resit').val(notaresitValue);
+            $('#amaun_yuran').val(amaunyuranValue);
+
+			$('#jenis_yuran').trigger('change');
+			$('#no_resit').trigger('change');
+			$('#nota_resit').trigger('change');
+			$('#amaun_yuran').trigger('change');
+            // Show the form
+            $('#dataForm').show();
+        });
+
+    });
+
+</script>
 
 </x-default-layout> 
