@@ -49,15 +49,20 @@
 								<!--begin::Row-->
 								<div class="row gx-10 mb-5">
 									<div class="col-lg-6">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Peperiksaan&nbsp;<a href="/assets/contoh/bank.pdf" target="_blank" data-bs-toggle="tooltip" title="CONTOH NYA MACAM NI"><i class="fa-solid fa-circle-info"></i></a></label>
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Peperiksaan&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></label>
 										<div class="mb-5">
-											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan" required oninvalid="this.setCustomValidity('Muat naik salinan keputusan.')" oninput="setCustomValidity('')"/>
+											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan[]" required oninvalid="this.setCustomValidity('Sila muat naik salinan keputusan.')" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 									<div class="col-lg-6">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">CGPA</label>
+										<label class="fs-6 fw-semibold form-label mb-2">
+											CGPA&nbsp;
+											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="3.50">
+												<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+											</span>
+										</label>
 										<div class="mb-5">
-											<input type="text" name="cgpa" class="form-control form-control-solid"  placeholder="" required oninvalid="this.setCustomValidity('Isi CGPA.')" oninput="setCustomValidity('')"/>
+											<input type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="" required oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 								</div>
