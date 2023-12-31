@@ -117,7 +117,7 @@
 									</div>
 								</div>
 								<div class="d-flex flex-center mt-15">
-									<button type="submit"  class="btn btn-primary">
+									<button type="submit" class="btn btn-primary">
 										Simpan
 									</button>&nbsp;&nbsp;&nbsp;
 								</div>

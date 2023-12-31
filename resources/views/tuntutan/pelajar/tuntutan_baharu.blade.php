@@ -116,7 +116,6 @@
 										</div>
 									</div>
 								</div>
-								<br>
 								<div class="d-flex flex-center mt-15">
 									<button type="submit" class="btn btn-primary">
 										Simpan
