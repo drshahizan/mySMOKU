@@ -819,32 +819,39 @@ class SekretariatController extends Controller
     //PERMOHONAN - KEPUTUSAN
     public function senaraiKeputusanPermohonan(Request $request)
     {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
+        // $startDate = $request->input('start_date');
+        // $endDate = $request->input('end_date');
 
+        // $kelulusan = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
+        //             ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+        //             ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+        //             ->orderBy('permohonan_kelulusan.updated_at', 'desc')
+        //             ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+        //                 return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
+        //             })
+        //             ->when($request->status, function ($q) use ($request) {
+        //                 return $q->where('permohonan_kelulusan.keputusan', $request->status);
+        //             })
+        //             ->when($request->institusi, function ($q) use ($request) {
+        //                 return $q->where('bk_info_institusi.id_institusi', $request->institusi);
+        //             })
+        //             ->select('permohonan_kelulusan.*')
+        //             ->get();
         $kelulusan = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
                     ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                     ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
                     ->orderBy('permohonan_kelulusan.updated_at', 'desc')
-                    ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-                        return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
-                    })
-                    ->when($request->status, function ($q) use ($request) {
-                        return $q->where('permohonan_kelulusan.keputusan', $request->status);
-                    })
-                    ->when($request->institusi, function ($q) use ($request) {
-                        return $q->where('bk_info_institusi.id_institusi', $request->institusi);
-                    })
-                    ->select('permohonan_kelulusan.*')
+                    ->select('permohonan_kelulusan.*','smoku_akademik.id_institusi')
                     ->get();
+                    // dd($kelulusan);
 
-        $institusiBKOKU = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
-        $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
 
         $notifikasi = null;
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi','institusiBKOKU','institusiUA','institusiPPK'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi', 'institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
     public function cetakKeputusanPermohonanBKOKU(Request $request)
