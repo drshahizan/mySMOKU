@@ -124,8 +124,8 @@
                                             </span>
                                         </a>
                                         <a href="{{ route('bkoku.tuntutan.baharu', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
-                                            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Hantar Tuntutan">
-                                                <i class="ki-solid ki-search-list text-dark fs-2"></i>
+                                            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
+                                                <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;"></i>
                                             </span>
                                         </a>
                                         <!--end::Edit-->
