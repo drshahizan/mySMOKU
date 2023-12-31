@@ -79,7 +79,7 @@
                                     
                                 @endphp
                             <tr>
-                                <td class="text-center">{{ $layak->no_rujukan_permohonan}}</td>
+                                <td>{{ $layak->no_rujukan_permohonan}}</td>
                                 <td>{{ $pemohon}}</td>
                                 <td>{{ $layak->nama_kursus}}</td>
                                 <td>
