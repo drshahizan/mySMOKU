@@ -95,7 +95,7 @@
                             <!--begin::Card toolbar-->
                             <div class="card-toolbar">
                                 <!--begin::Toolbar-->
-                                <div class="d-flex justify-content-between mt-10 mb-0" data-kt-subscription-table-toolbar="base">
+                                <div class="d-flex justify-content-between mt-5 mb-0" data-kt-subscription-table-toolbar="base">
                                     <!--begin::Filter-->
                                     <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <!--begin::Input group-->
@@ -190,7 +190,7 @@
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
-                                            <table id="sortTable2" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                            <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
@@ -368,7 +368,7 @@
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
-                                            <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                            <table id="kt_subscriptions_table" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
@@ -546,7 +546,7 @@
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
-                                            <table id="sortTable3" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                            <table id="sortTable2" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" style="width: 3% !important;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
@@ -719,9 +719,6 @@
             var ppkList = @json($institusiPPK);
 
             $(document).ready(function() {
-                // $('.export-container').hide(); // Hide export elements
-                // $('.none-container').show(); // Hide export elements
-
                 // Add an event listener for tab clicks
                 $('.nav-link').on('click', function() {
                     // Get the ID of the active tab
@@ -775,7 +772,6 @@
                     }
                 }
 
-
                 // Function to update the institution dropdown
                 function updateInstitusiDropdown(institusiList) {
                     // Clear existing options
@@ -828,32 +824,53 @@
             function applyFilter() {
                 var selectedInstitusi = $('[name="institusi"]').val();
 
+                // Update the export link with the selected institusi for Table 1
+                $('#exportBKOKU').attr('href', "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi);
+                $('#exportBKOKUExcel').attr('href', "{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi);
+
+                // Update the export link with the selected institusi for Table 2
+                $('#exportUA').attr('href', "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi);
+                $('#exportUAExcel').attr('href', "{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi);
+
+                // Update the export link with the selected institusi for Table 3
+                $('#exportPPK').attr('href', "{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi);
+                $('#exportPPKExcel').attr('href', "{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi);
+
                 // Apply search filter and log data for all tables
                 applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
                 applyAndLogFilter('Table 2', datatable, selectedInstitusi);
                 applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
-
-                // Update the export link with the selected institusi for Table 1
-                var exportBKOKU = document.getElementById('exportBKOKU');
-                exportBKOKU.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
-
-                var exportBKOKU = document.getElementById('exportBKOKU');
-                exportBKOKU.href = "{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
-
-                // Update the export link with the selected institusi for Table 2
-                var exportUA = document.getElementById('exportUA');
-                exportUA.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
-
-                var exportUA = document.getElementById('exportUA');
-                exportUA.href = "{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
-
-                // Update the export link with the selected institusi for Table 3
-                var exportPPK = document.getElementById('exportPPK');
-                exportPPK.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
-
-                var exportPPK = document.getElementById('exportPPK');
-                exportPPK.href = "{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
             }
+
+            // function applyFilter() {
+            //     var selectedInstitusi = $('[name="institusi"]').val();
+
+            //     // Apply search filter and log data for all tables
+            //     applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
+            //     applyAndLogFilter('Table 2', datatable, selectedInstitusi);
+            //     applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
+
+            //     // Update the export link with the selected institusi for Table 1
+            //     var exportBKOKU = document.getElementById('exportBKOKU');
+            //     exportBKOKU.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+
+            //     var exportBKOKU = document.getElementById('exportBKOKU');
+            //     exportBKOKU.href = "{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+
+            //     // Update the export link with the selected institusi for Table 2
+            //     var exportUA = document.getElementById('exportUA');
+            //     exportUA.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
+
+            //     var exportUA = document.getElementById('exportUA');
+            //     exportUA.href = "{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
+
+            //     // Update the export link with the selected institusi for Table 3
+            //     var exportPPK = document.getElementById('exportPPK');
+            //     exportPPK.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
+
+            //     var exportPPK = document.getElementById('exportPPK');
+            //     exportPPK.href = "{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
+            // }
 
             function applyAndLogFilter(tableName, table, filterValue) {
                 // Apply search filter to the table
