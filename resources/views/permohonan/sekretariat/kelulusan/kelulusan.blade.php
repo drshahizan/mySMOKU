@@ -712,6 +712,7 @@
 
                 // Function to update the export links
                 function updateExportLinks(programCode) {
+                    // dd(programCode);
                     var exportPDF = document.getElementById('exportPDF');
                     exportPDF.href = "{{ route('senarai.disokong.pdf') }}?programCode=" + programCode;
 
@@ -793,26 +794,32 @@
                 applyAndLogFilter('Table 2', datatable, selectedInstitusi);
                 applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
 
+                var exportPDF = document.getElementById('exportPDF');
+                exportPDF.href = "/senarai-permohonan-disokong-pdf/" + programCode;
+
+                var exportExcel = document.getElementById('exportExcel');
+                exportExcel.href = "/senarai-permohonan-disokong-excel/" + programCode;
+
                 // Update the export link with the selected institusi for Table 1
-                var exportBKOKU = document.getElementById('exportBKOKU');
-                exportBKOKU.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+                // var exportBKOKU = document.getElementById('exportBKOKU');
+                // exportBKOKU.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
 
-                var exportBKOKUExcel = document.getElementById('exportBKOKUExcel');
-                exportBKOKUExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+                // var exportBKOKUExcel = document.getElementById('exportBKOKUExcel');
+                // exportBKOKUExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
 
-                // Update the export link with the selected institusi for Table 2
-                var exportUA = document.getElementById('exportUA');
-                exportUA.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
+                // // Update the export link with the selected institusi for Table 2
+                // var exportUA = document.getElementById('exportUA');
+                // exportUA.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
 
-                var exportUAExcel = document.getElementById('exportUAExcel');
-                exportUAExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
+                // var exportUAExcel = document.getElementById('exportUAExcel');
+                // exportUAExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
 
-                // Update the export link with the selected institusi for Table 3
-                var exportPPK = document.getElementById('exportPPK');
-                exportPPK.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
+                // // Update the export link with the selected institusi for Table 3
+                // var exportPPK = document.getElementById('exportPPK');
+                // exportPPK.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
 
-                var exportPPKExcel = document.getElementById('exportPPKExcel');
-                exportPPKExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
+                // var exportPPKExcel = document.getElementById('exportPPKExcel');
+                // exportPPKExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}?institusi=" + selectedInstitusi;
             }
 
             // function applyFilter() {
