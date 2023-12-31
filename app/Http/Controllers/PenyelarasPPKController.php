@@ -1191,7 +1191,7 @@ class PenyelarasPPKController extends Controller
         ->where('permohonan.status','=', '8')
         ->where('penyelaras_id','=', Auth::user()->id)
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
-        ->get(['smoku.*', 'permohonan.*', 'smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
+        ->get(['smoku.*', 'permohonan.*', 'permohonan.id as permohonan_id', 'smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
 
         // dd($smoku);
         return view('permohonan.penyelaras_ppk.senarai_dibayar', compact('smoku'));

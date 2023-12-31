@@ -80,7 +80,7 @@
 								<td class="text-center"> RM {{ $smoku->wang_saku_dibayar}}</td>
 								<td class="text-center">{{ $tarikh_transaksi}}</td>
 								<td class="text-center">
-									<a href="{{ route('generate-pdf', ['permohonanId' => $smoku->id]) }}" class="btn bg-dibayar btn-round btn-sm custom-width-btn">
+									<a href="{{ route('generate-pdf', ['permohonanId' => $smoku->permohonan_id]) }}" class="btn bg-dibayar btn-round btn-sm custom-width-btn">
 										<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar
 									</a>
 								</td>
