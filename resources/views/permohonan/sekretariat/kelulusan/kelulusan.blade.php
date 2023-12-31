@@ -117,8 +117,16 @@
                                                 <!--end::Actions-->
                                             </div>
                                         
-                                            <div class="col-md-4 fv-row exportBKOKU-container">
-                                                {{-- BKOKU --}}
+                                            <div class="col-md-4 fv-row export-container">
+                                                <a id="exportPDF" href="#" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PDF
+                                                </a>
+                                                <a id="exportExcel" href="#" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-excel" style="color: black;"></i> Excel
+                                                </a>
+                                            </div>
+
+                                            {{-- <div class="col-md-4 fv-row exportBKOKU-container">
                                                 <a id="exportBKOKU" href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
@@ -128,7 +136,6 @@
                                             </div>
                                             
                                             <div class="col-md-4 fv-row exportUA-container">
-                                                {{-- BKOKU UA --}}
                                                 <a id="exportUA" href="{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
@@ -138,14 +145,13 @@
                                             </div>
                                             
                                             <div class="col-md-4 fv-row exportPPK-container">
-                                                {{-- PPK --}}
                                                 <a id="exportPPK" href="{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
                                                 <a id="exportPPKExcel" href="{{ route('senarai.disokong.excel', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <!--end::Input group-->
                                     </div>
@@ -610,8 +616,6 @@
             </div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
         {{-- // check all checkboxes at once for bulk approval "kelulusan" --}}
         <script>
             function toggle(source) {
@@ -626,7 +630,9 @@
 			});
         </script>
 
-        
+        <!-- Example script tag loading jQuery from a CDN -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
         {{-- filter --}}
         <script>
             // Initialize JavaScript variables with data from Blade
@@ -640,8 +646,6 @@
                 {
                     // Get the ID of the active tab
                     var activeTabId = $(this).attr('id');
-
-                    console.log('Active Tab ID:', activeTabId);
 
                     // Clear filters when changing tabs
                     clearFilters();
@@ -662,7 +666,7 @@
 
                     // switch (activeTabId) {
                     //     case 'bkoku-tab':
-                            
+                    //         $('.exportBKOKU-container').show(); // Show export elements
                     //         break;
                     //     case 'bkokuUA-tab':
                     //         $('.exportUA-container').show(); // Show export elements
@@ -675,7 +679,6 @@
                     // Update the institution dropdown based on the active tab
                     switch (activeTabId) {
                         case 'bkoku-tab':
-                            $('.exportBKOKU-container').show(); // Show export elements
                             updateInstitusiDropdown(bkokuList);
                             break;
                         case 'bkokuUA-tab':
@@ -687,7 +690,34 @@
                             updateInstitusiDropdown(ppkList);
                             break;
                     }
+
+                    // Update the export links with the selected programCode for each tab
+                    var programCode = getProgramCodeForTab(activeTabId);
+                    updateExportLinks(programCode);
                 });
+
+                // Function to get the programCode based on the active tab
+                function getProgramCodeForTab(activeTabId) {
+                    switch (activeTabId) {
+                        case 'bkoku-tab':
+                            return 'BKOKU';
+                        case 'bkokuUA-tab':
+                            return 'UA';
+                        case 'ppk-tab':
+                            return 'PPK';
+                        default:
+                            return '';
+                    }
+                }
+
+                // Function to update the export links
+                function updateExportLinks(programCode) {
+                    var exportPDF = document.getElementById('exportPDF');
+                    exportPDF.href = "{{ route('senarai.disokong.pdf') }}?programCode=" + programCode;
+
+                    var exportExcel = document.getElementById('exportExcel');
+                    exportExcel.href = "{{ route('senarai.disokong.excel') }}?programCode=" + programCode;
+                }
 
                 // Trigger the function for the default active tab (bkoku-tab)
                 updateInstitusiDropdown(bkokuList);
