@@ -82,7 +82,7 @@
                                 </li>
                             </ul>
 
-                             <!--begin::Card title-->
+                            <!--begin::Card title-->
                             <div class="card-title">
                                 <!--begin::Search-->
                                 <div class="d-flex align-items-center position-relative my-1">
