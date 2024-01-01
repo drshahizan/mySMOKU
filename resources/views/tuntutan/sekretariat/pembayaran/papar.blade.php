@@ -104,7 +104,7 @@
                             @php
                                 $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                 $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
-                                $nama_penaja = DB::table('bk_penaja')->where('kod_penaja', $akademik->nama_penaja)->value('penaja');
+                                $nama_penaja = DB::table('bk_penaja')->where('id', $akademik->nama_penaja)->value('penaja');
                                 $status_tuntutan = DB::table('bk_status')->where('kod_status', $saringan->status)->value('status');
                                 // nama pemohon
                                 $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
