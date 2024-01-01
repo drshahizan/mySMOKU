@@ -168,7 +168,7 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <!-- Form for single submission -->
-                                                                        <form action="{{ route('update.maklumat.baucer') }}" method="POST" class="modal-form">
+                                                                        <form action="{{ route('update.maklumat.baucer', ['permohonanId' => $item['id']]) }}" method="POST" class="modal-form">
                                                                             @csrf
                                                                             <div class="mb-3">
                                                                                 <label for="yuranDibayar" class="col-form-label">Yuran Dibayar :</label>
