@@ -56,6 +56,10 @@
                 <div class="block-header">
                     <div class="row clearfix">
                         <div class="card">
+                            <div class="header">
+                                <h2>Senarai Permohonan dan Tuntutan yang Layak<br><small>Sila muat turun excel fail untuk mengisi maklumat baucer dan muat naik kembali ke dalam sistem untuk dikemaskini.</small></h2>
+                            </div>
+
                             {{-- top nav bar --}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top:20px;">
                                 <li class="nav-item" role="presentation">
@@ -75,7 +79,7 @@
                             <!--begin::Card title-->
 
                             <!--begin::Card toolbar-->
-                            <div class="card-toolbar">
+                            <div class="card-toolbar" style="margin-left: 15px;">
                                 <div class="d-flex justify-content-between mt-5 mb-0" data-kt-subscription-table-toolbar="base">
                                     <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <div class="row form-filter" >
@@ -91,14 +95,53 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="col-md-1 fv-row">
+                                            <div class="col-md-2 fv-row">
                                                 <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
                                                     <i class="ki-duotone ki-filter fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
                                                     </i>
                                                 </button>
-                                            </div>                                            
+                                            </div>
+                                            
+                                            <div class="col-md-6 export-container" data-program-code="permohonan"> 
+                                                <div class="col-md-3">
+                                                    <a href="{{ route('penyelaras.permohonan.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
+                                                        <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
+                                                    </a>
+                                                </div>
+                                        
+                                                <div class="col-md-3">
+                                                    <form id="uploadForm1" action="{{ route('modified.file.pembayaran.permohonan') }}" method="POST" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="file" name="modified_excel_file1" accept=".xlsx, .xls" style="display: none" onchange="fileSelected1(event)">
+                                                        <input type="hidden" name="form_submitted1" id="formSubmitted1" value="0">
+                                                        <button type="button" class="btn btn-secondary btn-round" onclick="uploadFilePermohonan()"> 
+                                                            <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Muat Naik
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 export-container" data-program-code="tuntutan"> 
+                                                <div class="col-md-3">
+                                                    <a href="{{ route('penyelaras.tuntutan.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
+                                                        <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
+                                                    </a>
+                                                </div>
+                                        
+                                                <div class="col-md-3">
+                                                    <form id="uploadForm2" action="{{ route('modified.file.pembayaran.tuntutan') }}" method="POST" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="file" name="modified_excel_file2" accept=".xlsx, .xls" style="display: none" onchange="fileSelected2(event)">
+                                                        <input type="hidden" name="form_submitted2" id="formSubmitted2" value="0">
+                                                        <button type="button" class="btn btn-secondary btn-round" onclick="uploadFileTuntutan()"> 
+                                                            <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Muat Naik
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -108,10 +151,6 @@
                             <div class="tab-content" id="myTabContent">
                                 {{-- Permohonan --}}
                                 <div class="tab-pane fade show active" id="permohonan" role="tabpanel" aria-labelledby="permohonan-tab">
-                                    <div class="header">
-                                        <h2>Senarai Permohonan yang Layak<br><small>Sila muat turun excel fail senarai permohonan layak untuk isi maklumat baucer dan muat naik ke dalam sistem untuk dikemaskini.</small></h2>
-                                    </div>
-
                                     {{-- <div class="row" style="margin-left: 15px;">
                                         <form action="{{ url('penyelaras/penyaluran/permohonan-tuntutan/layak') }}" method="GET" class="col-md-5">
                                             <div class="row" style="margin-bottom:0px!important">
@@ -282,10 +321,6 @@
 
                                 {{-- Tuntutan --}}
                                 <div class="tab-pane fade" id="tuntutan" role="tabpanel" aria-labelledby="tuntutan-tab">
-                                    <div class="header">
-                                        <h2>Senarai Tuntutan yang Layak<br><small>Sila muat turun excel fail senarai tuntutan layak untuk isi maklunat baucer dan sila muat naik ke dalam sistem untuk dikemaskini.</small></h2>
-                                    </div>
-
                                     {{-- <div class="row" style="margin-left: 15px;">
                                         <form action="{{ url('penyelaras/penyaluran/permohonan-tuntutan/layak') }}" method="GET" class="col-md-5">
                                             <div class="row" style="margin-bottom:0px!important">
@@ -522,7 +557,6 @@
                 logTableData('Table 2 Data:', datatable2);
             });
 
-
             function initDataTable(tableId, variableName) 
             {
                 // Check if the datatable is already initialized
@@ -541,7 +575,6 @@
                     ]
                 });
             }
-
 
             function applyFilter() 
             {
@@ -602,7 +635,6 @@
                 // Log the data of visible rows on the first page for the table
                 console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
             }
-
 
             function logTableData(message, table) 
             {
