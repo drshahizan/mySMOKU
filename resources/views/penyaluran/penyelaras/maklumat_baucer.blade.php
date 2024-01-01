@@ -112,7 +112,6 @@
             <div class="row clearfix">
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light page_menu">
-                        <!--<a class="navbar-brand" href="#">M.</a>-->
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <i class="fa fa-bars text-muted"></i>
                         </button>
@@ -120,9 +119,6 @@
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Tuntutan</b></li>
                             </ul>
-                            {{-- <div class="ml-auto">
-                                <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank" class="btn btn-primary">Cetak</a>
-                            </div> --}}
                         </div>
                     </nav>
                 </div>
