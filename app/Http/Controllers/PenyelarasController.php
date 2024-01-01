@@ -1915,16 +1915,16 @@ class PenyelarasController extends Controller
 
     public function maklumatBaucerDibayar($id)
     {
-        $tuntutan = Tuntutan::where('id', $id)->first();
-        $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
-        $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
-        $smoku_id = $tuntutan->smoku_id;
+        // $tuntutan = Tuntutan::where('id', $id)->first();
+        $permohonan = Permohonan::where('id', $id)->first();
+        // $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
+        $smoku_id = $permohonan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
         $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
         $peringkat = $rujukan[1];
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
 
-        return view('penyaluran.penyelaras.maklumat_baucer',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik'));
+        return view('penyaluran.penyelaras.maklumat_baucer',compact('permohonan','akademik','smoku'));
     }
 
     public function deleteItemTuntutan($id)
