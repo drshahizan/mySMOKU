@@ -187,7 +187,7 @@
                                                                             
                                                                             <div class="mb-3">
                                                                                 <label for="message-text" class="col-form-label">Perihal :</label>
-                                                                                <textarea class="form-control" id="perihal" name="perihal{{$item['id']}}"  value="{{ $item->perihal ?? '' }}"></textarea>
+                                                                                <textarea class="form-control" id="perihal" name="perihal{{$item['id']}}"  value="{{ $item->perihal ?? '' }}">{{$item->perihal}}</textarea>
                                                                             </div>
 
                                                                             <div class="mb-3">
@@ -312,6 +312,8 @@
             </div>
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        
         <script>
             //sorting table
             $('#sortTable1').DataTable({
