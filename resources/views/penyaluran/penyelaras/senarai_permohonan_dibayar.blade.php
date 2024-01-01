@@ -171,12 +171,12 @@
                                                                         <form action="{{ route('update.maklumat.baucer', ['permohonanId' => $item['id']]) }}" method="POST" class="modal-form">
                                                                             @csrf
                                                                             <div class="mb-3">
-                                                                                <label for="yuranDibayar" class="col-form-label">Yuran Dibayar :</label>
+                                                                                <label for="yuranDibayar" class="col-form-label">Yuran Dibayar (RM) :</label>
                                                                                 <input type="number" step="0.01" class="form-control" id="yuranDibayar{{$item['id']}}" name="yuranDibayar" value="{{ $item->yuran_dibayar ?? '' }}">
                                                                             </div>
 
                                                                             <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Wang Saku Dibayar :</label>
+                                                                                <label for="message-text" class="col-form-label">Wang Saku Dibayar (RM) :</label>
                                                                                 <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar"  value="{{ $item->wang_saku_dibayar ?? '' }}">
                                                                             </div>
 
@@ -384,7 +384,7 @@
                             yuranDibayar: $('#yuranDibayar' + permohonanId).val(),
                             wangSakuDibayar: $('#wangSakuDibayar' + permohonanId).val(),
                             noBaucer: $('#noBaucer' + permohonanId).val(),
-                            perihal: $('#perihal' + permohonanId).val(),
+                            perihal: $('[name="perihal"]' + permohonanId).text(),
                             tarikhBaucer: $('#tarikhBaucer' + permohonanId).val(),
                         },
                         error: function (error) {
@@ -394,32 +394,6 @@
                 });
             });
 
-            //modal
-            // $(document).ready(function () {
-            //     $('.open-modal-link').click(function () {
-            //         var permohonanId = $(this).data('no-rujukan');
-            //         console.log('permohonanId:', permohonanId);
-
-            //         // Make an Ajax request to retrieve data
-            //         $.ajax({
-            //             url: '/penyelaras/maklumat/pembayaran/' + permohonanId,
-            //             type: 'GET',
-            //             success: function (response) {
-            //                 // Populate the modal with the retrieved data
-            //                 $('#yuranDibayar').val(response.maklumat.yuran_dibayar);
-            //                 $('#wangSakuDibayar').val(response.maklumat.wang_saku_dibayar);
-            //                 $('#noBaucer').val(response.maklumat.no_baucer);
-            //                 $('#perihal').val(response.maklumat.perihal);
-            //                 $('#tarikhBaucer').val(response.maklumat.tarikh_baucer);
-            //             },
-            //             error: function (error) {
-            //                 console.error('Error fetching data:', error);
-            //             }
-            //         });
-
-            //     });
-            // });
         </script>
     </body>
-
 </x-default-layout> 

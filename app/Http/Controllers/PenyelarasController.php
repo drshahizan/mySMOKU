@@ -1914,17 +1914,22 @@ class PenyelarasController extends Controller
     }
 
     // Modal view maklumat baucer
-    public function updateMaklumatBaucer($permohonanId)
+    public function updateMaklumatBaucer(Request $request, $permohonanId)
     {
         $permohonan = Permohonan::find($permohonanId);
 
-        // You might want to customize the data structure based on your needs
+        $permohonan->yuran_dibayar = $request->input('yuranDibayar');
+        $permohonan->wang_saku_dibayar = $request->input('wangSakuDibayar');
+        $permohonan->no_baucer = $request->input('noBaucer');
+        $permohonan->perihal = $request->input('perihal');
+        $permohonan->tarikh_baucer = $request->input('tarikhBaucer');
+
+        $permohonan->save();
+
+        // You might want to customize the response based on your needs
         $response = [
-            'yuran_dibayar' => $permohonan->yuran_dibayar,
-            'wang_saku_dibayar' => $permohonan->wang_saku_dibayar,
-            'no_baucer' => $permohonan->no_baucer,
-            'perihal' => $permohonan->perihal,
-            'tarikh_baucer' => $permohonan->tarikh_baucer,
+            'status' => 'success',
+            'message' => 'Data updated successfully',
         ];
 
         return response()->json($response);
