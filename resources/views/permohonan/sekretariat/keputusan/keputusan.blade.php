@@ -210,7 +210,7 @@
                                             <table id="sortTable1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white;">
-                                                        <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>
+                                                        {{-- <th style="width: 3%" class="text-center no-sort"><b>No.</b></th> --}}
                                                         <th style="width: 10%"><b>ID Permohonan</b></th>                                        
                                                         <th style="width: 30%"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
@@ -224,7 +224,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @php
-                                                        $i=0;
+                                                        $i = 1;
                                                     @endphp
                                                         
                                                     @foreach ($kelulusan as $item)
@@ -270,7 +270,7 @@
                                                         @if($program == "BKOKU")
                                                             @if ($jenis_institusi == "IPTS" || $jenis_institusi == "KK" || $jenis_institusi == "P")
                                                                 <tr>
-                                                                    <td class="text-center no-sort" style="width: 3%" data-no="{{ $i++ }}">{{$i++}}</td>
+                                                                    {{-- <td class="text-center no-sort" style="width: 3%">{{$i++}}</td> --}}
                                                                     <td style="width: 10%">{{$no_rujukan_permohonan}}</td>
                                                                     <td style="width: 30%">{{$pemohon}}</td>
                                                                     <td style="width: 15%">{{$institusi_pengajian}}</td>
@@ -306,7 +306,7 @@
                                             <table id="sortTable2" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white;">
-                                                        <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>
+                                                        {{-- <th style="width: 3%" class="text-center no-sort"><b>No.</b></th> --}}
                                                         <th style="width: 10%"><b>ID Permohonan</b></th>                                        
                                                         <th style="width: 30%"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
@@ -320,7 +320,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @php
-                                                        $i=0;
+                                                        $i = 1;
                                                     @endphp
                                                         
                                                     @foreach ($kelulusan as $item)
@@ -364,7 +364,7 @@
                                                         @if($program == "BKOKU")
                                                             @if ($jenis_institusi == "UA")
                                                                 <tr>
-                                                                    <td class="text-center" style="width: 3%"  data-no="{{ $i++ }}">{{$i++}}</td>
+                                                                    {{-- <td class="text-center" style="width: 3%">{{$i++}}</td> --}}
                                                                     <td style="width: 10%">{{$no_rujukan_permohonan}}</td>
                                                                     <td style="width: 30%">{{$pemohon}}</td>
                                                                     <td style="width: 15%">{{$institusi_pengajian}}</td>
@@ -400,7 +400,7 @@
                                             <table id="sortTable3" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white;">
-                                                        <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>
+                                                        {{-- <th style="width: 3%" class="text-center no-sort"><b>No.</b></th> --}}
                                                         <th style="width: 10%"><b>ID Permohonan</b></th>                                        
                                                         <th style="width: 30%"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
@@ -414,7 +414,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @php
-                                                        $i=0;
+                                                        $i = 1;
                                                     @endphp
                                                     
                                                     @foreach ($kelulusan as $item)
@@ -451,7 +451,7 @@
 
                                                         @if($program == "PPK")
                                                             <tr>
-                                                                <td class="text-center" style="width: 3%"  data-no="{{ $i++ }}">{{$i++}}</td>
+                                                                {{-- <td class="text-center" style="width: 3%">{{$i++}}</td> --}}
                                                                 <td style="width: 10%">{{$no_rujukan_permohonan}}</td>
                                                                 <td style="width: 30%">{{$pemohon}}</td>
                                                                 <td style="width: 15%">{{$institusi_pengajian}}</td>
@@ -612,9 +612,9 @@
                 order: [], // Disable initial sorting
                 columnDefs: [
                     { orderable: false, targets: [0] },
-                    { targets: [4], visible: false }, // Hide column (index 4)
-                    { type: 'date', targets: [7] },
-                    { targets: [9], visible: false } // Hide column (index 9)
+                    { targets: [3], visible: false }, // Hide column (index 4)
+                    { type: 'date', targets: [6] },
+                    { targets: [8], visible: false } // Hide column (index 9)
                 ]
             });
         }
@@ -663,7 +663,7 @@
                         let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
                         let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
 
-                        let dateAdded = moment(data[7], 'DD/MM/YYYY');
+                        let dateAdded = moment(data[6], 'DD/MM/YYYY');
 
                         // Check if the date falls within the specified range
                         let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
@@ -688,12 +688,12 @@
 
             // Apply search filter for institusi
             if (institusi) {
-                table.column(4).search(institusi).draw();
+                table.column(3).search(institusi).draw();
             }
 
             // Apply search filter for status
             if (status) {
-                table.column(9).search(status).draw();
+                table.column(8).search(status).draw();
             }
 
             // Log filtered data
