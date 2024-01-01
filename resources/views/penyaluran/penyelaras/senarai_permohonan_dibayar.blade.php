@@ -143,7 +143,7 @@
                                                     
                                                     @if ($institusi_id == $instiusi_user)
                                                         <tr>
-                                                            <td style="width: 15%">{{$item['no_rujukan_permohonan']}}</td>
+                                                            <td style="width: 15%"><a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#baucerPermohonan{{$item['id']}}" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>
                                                             <td style="width: 40%">{{$pemohon}}</td>
                                                             <td class="text-center" style="width: 15%">
                                                                 @if ($item->yuran_dibayar !== null)
@@ -158,45 +158,44 @@
                                                             <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_baucer))}}</td>
                                                         </tr>
 
-                                                        {{-- Modal Baucer --}}
-                                                        {{-- <div class="modal fade" id="baucerPenyelaras_{{ $item['no_rujukan_permohonan'] }}" tabindex="-1" aria-labelledby="baucerPenyelarasLabel" aria-hidden="true">
+                                                        <!-- Modal for Baucer -->
+                                                        <div class="modal fade" id="baucerPermohonan{{$item['id']}}" tabindex="-1" aria-labelledby="baucerPermohonanLabel{{$item['id']}}" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Kemaskini Maklumat Pembayaran</h1>
+                                                                        <h1 class="modal-title fs-5" id="baucerPermohonanLabel{{$item['id']}}">Kemaskini Maklumat Pembayaran</h1>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
-
                                                                     <div class="modal-body">
                                                                         <!-- Form for single submission -->
-                                                                        <form action="#" method="GET" class="modal-form">
-                                                                            {{ csrf_field() }}
+                                                                        <form action="{{ route('update.maklumat.baucer') }}" method="POST" class="modal-form">
+                                                                            @csrf
                                                                             <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Yuran Dibayar :</label>
-                                                                                <input type="number" step="0.01" class="form-control" id="yuranDibayar" name="yuranDibayar"  value="{{ $maklumat->yuran_dibayar ?? '' }}">
+                                                                                <label for="yuranDibayar" class="col-form-label">Yuran Dibayar :</label>
+                                                                                <input type="number" step="0.01" class="form-control" id="yuranDibayar{{$item['id']}}" name="yuranDibayar" value="{{ $item->yuran_dibayar ?? '' }}">
                                                                             </div>
 
                                                                             <div class="mb-3">
                                                                                 <label for="message-text" class="col-form-label">Wang Saku Dibayar :</label>
-                                                                                <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar"  value="{{ $maklumat->wang_saku_dibayar ?? '' }}">
+                                                                                <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar"  value="{{ $item->wang_saku_dibayar ?? '' }}">
                                                                             </div>
 
                                                                             <div class="mb-3">
                                                                                 <label for="recipient-name" class="col-form-label">No Baucer :</label>
-                                                                                <input type="text" class="form-control" id="noBaucer" name="noBaucer"  value="{{ $maklumat->no_baucer ?? '' }}">
+                                                                                <input type="text" class="form-control" id="noBaucer" name="noBaucer"  value="{{ $item->no_baucer ?? '' }}">
                                                                             </div>
                                                                             
                                                                             <div class="mb-3">
                                                                                 <label for="message-text" class="col-form-label">Perihal :</label>
-                                                                                <textarea class="form-control" id="perihal" name="perihal"  value="{{ $maklumat->perihal ?? '' }}"></textarea>
+                                                                                <textarea class="form-control" id="perihal" name="perihal"  value="{{ $item->perihal ?? '' }}"></textarea>
                                                                             </div>
 
                                                                             <div class="mb-3">
                                                                                 <label for="message-text" class="col-form-label">Tarikh Baucer :</label>
-                                                                                <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer"  value="{{ $maklumat->tarikh_baucer ?? '' }}">
+                                                                                <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer"  value="{{ $item->tarikh_baucer ?? '' }}">
                                                                             </div>
 
-                                                                            <input type="hidden" id="clickedNoRujukan">
+                                                                            <input type="hidden" name="permohonan_id" value="{{ $item['id'] }}">
 
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -204,9 +203,9 @@
                                                                             </div>
                                                                         </form>
                                                                     </div>
-                                                                </div> 
+                                                                </div>
                                                             </div>
-                                                        </div> --}}
+                                                        </div>
                                                     @endif
                                                 @endforeach 
                                             </tbody>
@@ -369,35 +368,57 @@
                 order: [] // Disable initial sorting
             });
             $('#sortTable2').DataTable({
-                ordering: true, // Enable manual sorting
-                order: [] // Disable initial sorting
+                ordering: true, 
+                order: [] 
             });
 
-            //modal
             $(document).ready(function () {
-                $('.open-modal-link').click(function () {
+                $('.open-modal-link-permohonan').on('click', function () {
                     var permohonanId = $(this).data('no-rujukan');
-                    console.log('permohonanId:', permohonanId);
-
-                    // Make an Ajax request to retrieve data
-                    $.ajax({
-                        url: '/penyelaras/maklumat/pembayaran/' + permohonanId,
-                        type: 'GET',
-                        success: function (response) {
-                            // Populate the modal with the retrieved data
-                            $('#yuranDibayar').val(response.maklumat.yuran_dibayar);
-                            $('#wangSakuDibayar').val(response.maklumat.wang_saku_dibayar);
-                            $('#noBaucer').val(response.maklumat.no_baucer);
-                            $('#perihal').val(response.maklumat.perihal);
-                            $('#tarikhBaucer').val(response.maklumat.tarikh_baucer);
+                     // Make an Ajax request to retrieve data
+                     $.ajax({
+                        url: '/penyelaras/maklumat/baucer/' + permohonanId,
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            yuranDibayar: $('#yuranDibayar' + permohonanId).val(),
+                            wangSakuDibayar: $('#wangSakuDibayar' + permohonanId).val(),
+                            noBaucer: $('#noBaucer' + permohonanId).val(),
+                            perihal: $('#perihal' + permohonanId).val(),
+                            tarikhBaucer: $('#tarikhBaucer' + permohonanId).val(),
                         },
                         error: function (error) {
                             console.error('Error fetching data:', error);
                         }
                     });
-
                 });
             });
+
+            //modal
+            // $(document).ready(function () {
+            //     $('.open-modal-link').click(function () {
+            //         var permohonanId = $(this).data('no-rujukan');
+            //         console.log('permohonanId:', permohonanId);
+
+            //         // Make an Ajax request to retrieve data
+            //         $.ajax({
+            //             url: '/penyelaras/maklumat/pembayaran/' + permohonanId,
+            //             type: 'GET',
+            //             success: function (response) {
+            //                 // Populate the modal with the retrieved data
+            //                 $('#yuranDibayar').val(response.maklumat.yuran_dibayar);
+            //                 $('#wangSakuDibayar').val(response.maklumat.wang_saku_dibayar);
+            //                 $('#noBaucer').val(response.maklumat.no_baucer);
+            //                 $('#perihal').val(response.maklumat.perihal);
+            //                 $('#tarikhBaucer').val(response.maklumat.tarikh_baucer);
+            //             },
+            //             error: function (error) {
+            //                 console.error('Error fetching data:', error);
+            //             }
+            //         });
+
+            //     });
+            // });
         </script>
     </body>
 

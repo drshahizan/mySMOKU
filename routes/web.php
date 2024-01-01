@@ -276,15 +276,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Penyaluran - Penyelaras - Pembayaran
     Route::get('penyelaras/penyaluran/permohonan-tuntutan/layak', [PenyelarasController::class, 'senaraiPemohonLayak']);
-    Route::post('/penyelaras/hantar/permohonan/info-baucer/{permohonan_id}', [PenyelarasController::class, 'hantarInfoBaucerPermohonan'])->name('permohonan.modal.submit');
-    Route::post('/penyelaras/hantar/tuntutan/info-baucer/{tuntutan_id}', [PenyelarasController::class, 'hantarInfoBaucerTuntutan'])->name('tuntutan.modal.submit');
     Route::get('penyelaras/penyaluran/permohonan/dibayar', [PenyelarasController::class, 'senaraiPemohonDibayar'])->name('penyelaras.senarai.dibayar');
     Route::get('/permohonan/senarai-layak-excel', [PenyelarasController::class, 'exportPermohonanLayak'])->name('penyelaras.permohonan.senarai.layak.excel');
     Route::post('/permohonan/process-uploaded-file', [PenyelarasController::class, 'uploadedFilePembayaranPermohonan'])->name('modified.file.pembayaran.permohonan');
     Route::get('/tuntutan/senarai-layak-excel', [PenyelarasController::class, 'exportTuntutanLayak'])->name('penyelaras.tuntutan.senarai.layak.excel');
     Route::post('/tuntutan/process-uploaded-file', [PenyelarasController::class, 'uploadedFilePembayaranTuntutan'])->name('modified.file.pembayaran.tuntutan');
-    Route::get('penyaluran/penyelaras/permohonan/maklumat-baucer/{permohonan_id}', [PenyelarasController::class, 'maklumatBaucerPermohonan']);
-    Route::get('penyaluran/penyelaras/tuntutan/maklumat-baucer/{tuntutan_id}', [PenyelarasController::class, 'maklumatBaucerTuntutan']);
+    Route::post('/penyelaras/maklumat/baucer/{permohonanId}', [PenyelarasController::class, 'updateMaklumatBaucer'])->name('update.maklumat.baucer');
+
+    // Route::post('/penyelaras/hantar/permohonan/info-baucer/{permohonan_id}', [PenyelarasController::class, 'hantarInfoBaucerPermohonan'])->name('permohonan.modal.submit');
+    // Route::post('/penyelaras/hantar/tuntutan/info-baucer/{tuntutan_id}', [PenyelarasController::class, 'hantarInfoBaucerTuntutan'])->name('tuntutan.modal.submit');
+    // Route::get('penyaluran/penyelaras/permohonan/maklumat-baucer/{permohonan_id}', [PenyelarasController::class, 'maklumatBaucerPermohonan']);
+    // Route::get('penyaluran/penyelaras/tuntutan/maklumat-baucer/{tuntutan_id}', [PenyelarasController::class, 'maklumatBaucerTuntutan']);
 
     //Kemaskini - Penyelaras - Maklumat Bank
     Route::get('penyelaras/kemaskini/maklumat/bank', [PenyelarasController::class, 'maklumatBank'])->name('maklumat.bank');

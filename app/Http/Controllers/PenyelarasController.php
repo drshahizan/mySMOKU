@@ -1691,7 +1691,6 @@ class PenyelarasController extends Controller
         return redirect()->back()->with('success', 'Fail telah berjaya dihantar.');
     }
 
-    // modal penyaluran - permohonan
     private function updatePermohonanRecords($modifiedData)
     {
         foreach ($modifiedData as $modifiedRecord)
@@ -1730,6 +1729,7 @@ class PenyelarasController extends Controller
         }
     }
 
+    // modal penyaluran - permohonan
     public function hantarInfoBaucerPermohonan(Request $request, $id)
     {
         //fetch max yuran dan wang saku
@@ -1912,6 +1912,24 @@ class PenyelarasController extends Controller
 
         return view('penyaluran.penyelaras.senarai_permohonan_dibayar', compact('permohonanDibayar','tuntutanDibayar'));
     }
+
+    // Modal view maklumat baucer
+    public function updateMaklumatBaucer($permohonanId)
+    {
+        $permohonan = Permohonan::find($permohonanId);
+
+        // You might want to customize the data structure based on your needs
+        $response = [
+            'yuran_dibayar' => $permohonan->yuran_dibayar,
+            'wang_saku_dibayar' => $permohonan->wang_saku_dibayar,
+            'no_baucer' => $permohonan->no_baucer,
+            'perihal' => $permohonan->perihal,
+            'tarikh_baucer' => $permohonan->tarikh_baucer,
+        ];
+
+        return response()->json($response);
+    }
+
 
     public function maklumatBaucerPermohonan($id)
     {
