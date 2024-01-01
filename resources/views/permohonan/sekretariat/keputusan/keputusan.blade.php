@@ -139,13 +139,14 @@
                                                     <option value="Tidak Lulus">Tidak Layak</option>
                                                 </select>
                                             </div> 
-                                            <div class="col-md-2">
+
+                                            <div class="col-md-3">
                                                 <select id="institusiDropdown" name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                 </select>
                                             </div>
 
-                                            <div class="col-md-1 fv-row" style="margin-left: 20px;">
+                                            <div class="col-md-1 fv-row">
                                                 <!--begin::Actions-->
                                                 <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
                                                     <i class="ki-duotone ki-filter fs-2">
@@ -156,7 +157,7 @@
                                                 <!--end::Actions-->
                                             </div>
                                         
-                                            <div class="col-md-2 export-container" data-program-code="BKOKU"> 
+                                            <div class="col-md-1 export-container" data-program-code="BKOKU"> 
                                                 <a id="exportBKOKU" href="{{ route('senarai.keputusan.BKOKU.pdf', [
                                                     'start_date' => Request::get('start_date'),
                                                     'end_date' => Request::get('end_date'),
@@ -167,7 +168,7 @@
                                                 </a>
                                             </div>
 
-                                            <div class="col-md-2 export-container" data-program-code="UA">
+                                            <div class="col-md-1 export-container" data-program-code="UA">
                                                 <a id="exportUA" href="{{ route('senarai.keputusan.BKOKU.UA.pdf', [
                                                     'start_date' => Request::get('start_date'),
                                                     'end_date' => Request::get('end_date'),
@@ -178,7 +179,7 @@
                                                 </a>
                                             </div>
                     
-                                            <div class="col-md-2 export-container" data-program-code="PPK">
+                                            <div class="col-md-1 export-container" data-program-code="PPK">
                                                 <a id="exportPPK" href="{{ route('senarai.keputusan.PPK.pdf', [
                                                     'start_date' => '" + startDate + "',
                                                     'end_date' => '" + endDate + "',
