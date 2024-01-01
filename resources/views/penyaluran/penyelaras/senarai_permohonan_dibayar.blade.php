@@ -94,7 +94,7 @@
                             <!--begin::Card title-->
 
                             <!--begin::Card toolbar-->
-                            <div class="card-toolbar" style="margin-left: 17px;">
+                            <div class="card-toolbar">
                                 <div class="d-flex justify-content-between mt-5 mb-0" data-kt-subscription-table-toolbar="base">
                                     <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <div class="row form-filter" >

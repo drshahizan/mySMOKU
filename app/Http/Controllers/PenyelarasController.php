@@ -1883,20 +1883,8 @@ class PenyelarasController extends Controller
     //PENYALURAN - DIBAYAR
     public function senaraiPemohonDibayar(Request $request)
     {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
-        $permohonanDibayar = Permohonan::orderBy('id', 'desc')
-        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('tarikh_baucer', [$startDate, $endDate]);
-        })
-        ->where('permohonan.status', '=', '8')->get();
-
-        $tuntutanDibayar = Tuntutan::orderBy('id', 'desc')
-        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('tarikh_baucer', [$startDate, $endDate]);
-        })
-        ->where('tuntutan.status', '=', '8')->get();
+        $permohonanDibayar = Permohonan::orderBy('id', 'desc')->where('permohonan.status', '=', '8')->get();
+        $tuntutanDibayar = Tuntutan::orderBy('id', 'desc')->where('tuntutan.status', '=', '8')->get();
 
         return view('penyaluran.penyelaras.senarai_permohonan_dibayar', compact('permohonanDibayar','tuntutanDibayar'));
     }
