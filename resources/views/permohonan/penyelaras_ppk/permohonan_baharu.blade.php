@@ -1299,7 +1299,7 @@
 								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 									@foreach ($penaja as $penaja)
 										<option></option>
-										<option value="{{ $penaja->kod_penaja}}">{{ $penaja->penaja}}</option>
+										<option value="{{ $penaja->id}}">{{ $penaja->penaja}}</option>
 									@endforeach
 								</select>
 							</div>
