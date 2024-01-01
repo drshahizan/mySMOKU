@@ -142,7 +142,6 @@
                                                     @endphp
                                                     
                                                     @if ($institusi_id == $instiusi_user)
-                                                        <!-- Table rows -->
                                                         <tr>
                                                             <td style="width: 15%">{{$item['no_rujukan_permohonan']}}</td>
                                                             <td style="width: 40%">{{$pemohon}}</td>
@@ -285,7 +284,6 @@
                                                     @endphp
                                                     
                                                     @if ($institusi_id == $instiusi_user)
-                                                        <!-- Table rows -->
                                                         <tr>
                                                             <td style="width: 15%">{{$item['no_rujukan_tuntutan']}}</td>
                                                             <td style="width: 40%">{{$pemohon}}</td>

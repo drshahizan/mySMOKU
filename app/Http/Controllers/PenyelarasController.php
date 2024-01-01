@@ -1913,18 +1913,29 @@ class PenyelarasController extends Controller
         return view('penyaluran.penyelaras.senarai_permohonan_dibayar', compact('permohonanDibayar','tuntutanDibayar'));
     }
 
-    public function maklumatBaucerDibayar($id)
+    public function maklumatBaucerPermohonan($id)
     {
-        // $tuntutan = Tuntutan::where('id', $id)->first();
         $permohonan = Permohonan::where('id', $id)->first();
-        // $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
         $smoku_id = $permohonan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
         $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
         $peringkat = $rujukan[1];
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
 
-        return view('penyaluran.penyelaras.maklumat_baucer',compact('permohonan','akademik','smoku'));
+        return view('penyaluran.penyelaras.maklumat_baucer_permohonan',compact('permohonan','akademik','smoku'));
+    }
+
+    public function maklumatBaucerTuntutan($id)
+    {
+        $tuntutan = Tuntutan::where('id', $id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
+        $smoku_id = $tuntutan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $rujukan = explode("/", $tuntutan->no_rujukan_tuntutan);
+        $peringkat = $rujukan[1];
+        $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+
+        return view('penyaluran.penyelaras.maklumat_baucer_tuntutan',compact('tuntutan','akademik','smoku'));
     }
 
     public function deleteItemTuntutan($id)

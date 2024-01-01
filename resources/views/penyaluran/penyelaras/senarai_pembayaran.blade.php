@@ -166,10 +166,8 @@
                                                             <!-- Table rows -->
                                                             <tr>
                                                                 {{-- <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>  --}}
-                                                                {{-- <td style="width: 15%"><a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#baucerPermohonan{{$item['id']}}" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>--}}
-                                                                <td style="width: 15%">
-                                                                    <a href="{{ url('penyaluran/penyelaras/maklumat-baucer/'. $item['id']) }}">{{$item['no_rujukan_permohonan']}}</a>   
-                                                                </td>                                          
+                                                                {{-- <td style="width: 15%"><a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#baucerPermohonan{{$item['id']}}" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td>--}}                                   
+                                                                <td style="width: 15%">{{$item['no_rujukan_permohonan']}}</td>                                          
                                                                 <td style="width: 40%">{{$pemohon}}</td>
                                                                 <td class="text-center" style="width: 10%">
                                                                     @if ($item->yuran_disokong !== null)
@@ -342,9 +340,7 @@
                                                             <!-- Table rows -->
                                                             <tr>
                                                                 {{-- <td style="width: 15%"><a href="#" class="open-modal-link-tuntutan" data-bs-toggle="modal" data-bs-target="#baucerTuntutan" data-no-rujukan="{{$item['id']}}">{{$item['no_rujukan_tuntutan']}}</a></td>                                           --}}
-                                                                <td style="width: 15%">
-                                                                    <a href="{{ url('penyaluran/penyelaras/maklumat-baucer/'. $item['id']) }}">{{$item['no_rujukan_tuntutan']}}</a>   
-                                                                </td>                                          
+                                                                <td style="width: 15%">{{$item['no_rujukan_tuntutan']}}</td>                                          
                                                                 <td style="width: 45%">{{$pemohon}}</td>
                                                                 <td class="text-center" style="width: 10%">
                                                                     @if ($item->yuran_disokong !== null)

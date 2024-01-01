@@ -283,7 +283,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/permohonan/process-uploaded-file', [PenyelarasController::class, 'uploadedFilePembayaranPermohonan'])->name('modified.file.pembayaran.permohonan');
     Route::get('/tuntutan/senarai-layak-excel', [PenyelarasController::class, 'exportTuntutanLayak'])->name('penyelaras.tuntutan.senarai.layak.excel');
     Route::post('/tuntutan/process-uploaded-file', [PenyelarasController::class, 'uploadedFilePembayaranTuntutan'])->name('modified.file.pembayaran.tuntutan');
-    Route::get('penyaluran/penyelaras/maklumat-baucer/{id}', [PenyelarasController::class, 'maklumatBaucerDibayar']);
+    Route::get('penyaluran/penyelaras/permohonan/maklumat-baucer/{permohonan_id}', [PenyelarasController::class, 'maklumatBaucerPermohonan']);
+    Route::get('penyaluran/penyelaras/tuntutan/maklumat-baucer/{tuntutan_id}', [PenyelarasController::class, 'maklumatBaucerTuntutan']);
 
     //Kemaskini - Penyelaras - Maklumat Bank
     Route::get('penyelaras/kemaskini/maklumat/bank', [PenyelarasController::class, 'maklumatBank'])->name('maklumat.bank');
