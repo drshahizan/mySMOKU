@@ -265,6 +265,12 @@
                                                     <div id="panelsStayOpen-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading{{$i}}">
                                                         <div class="accordion-body" style="text-align: center">
                                                             <p>Catatan: {{$item->catatan}}</p>
+                                                            <!-- Display Download link for PNG only if it's not a PDF -->
+                                                            @if (pathinfo($dokumen_path, PATHINFO_EXTENSION) != 'pdf')
+                                                              <a href="{{$dokumen_path}}" download="{{$dokumen_name}}.png">
+                                                                  <img src="{{$dokumen_path}}" alt="Muat Turun" width="90%" height="650px"/>
+                                                              </a>
+                                                            @endif
                                                             <embed src="{{$dokumen_path}}" width="90%" height="650px"/>
                                                         </div>
                                                     </div>
@@ -428,6 +434,12 @@
                                                     <div id="panelsStayOpen-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading{{$i}}">
                                                         <div class="accordion-body" style="text-align: center">
                                                             <p>Catatan: {{$item->catatan}}</p>
+                                                            <!-- Display Download link for PNG only if it's not a PDF -->
+                                                            @if (pathinfo($dokumen_path, PATHINFO_EXTENSION) != 'pdf')
+                                                              <a href="{{$dokumen_path}}" download="{{$dokumen_name}}.png">
+                                                                  <img src="{{$dokumen_path}}" alt="Muat Turun" width="90%" height="650px"/>
+                                                              </a>
+                                                            @endif
                                                             <embed src="{{$dokumen_path}}" width="90%" height="650px"/>
                                                         </div>
                                                     </div>
@@ -614,12 +626,6 @@
               </div>  
             </div> 
             
-             
-            
-            
-
-
-
             <!--begin::Card body-->
             <div class="card-body pt-0">
               <!--begin::Form-->
