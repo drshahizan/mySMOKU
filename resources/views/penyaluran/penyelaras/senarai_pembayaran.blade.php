@@ -120,13 +120,13 @@
                                             
                                             <div class="col-md-6 export-container" data-program-code="permohonan">
                                                 <div class="row" style="margin-bottom:0px!important"> 
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-6">
                                                         <a href="{{ route('penyelaras.permohonan.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
                                                             <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
                                                         </a>
                                                     </div>
                                         
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-6">
                                                         <form id="uploadForm1" action="{{ route('modified.file.pembayaran.permohonan') }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             <input type="file" name="modified_excel_file1" accept=".xlsx, .xls" style="display: none" onchange="fileSelected1(event)">
@@ -140,22 +140,24 @@
                                             </div>
 
                                             <div class="col-md-6 export-container" data-program-code="tuntutan"> 
-                                                {{-- <div class="col-md-3"> --}}
-                                                    <a href="{{ route('penyelaras.tuntutan.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
-                                                        <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
-                                                    </a>
-                                                {{-- </div> --}}
-                                        
-                                                {{-- <div class="col-md-3"> --}}
-                                                    <form id="uploadForm2" action="{{ route('modified.file.pembayaran.tuntutan') }}" method="POST" enctype="multipart/form-data">
-                                                        @csrf
-                                                        <input type="file" name="modified_excel_file2" accept=".xlsx, .xls" style="display: none" onchange="fileSelected2(event)">
-                                                        <input type="hidden" name="form_submitted2" id="formSubmitted2" value="0">
-                                                        <button type="button" class="btn btn-secondary btn-round" onclick="uploadFileTuntutan()"> 
-                                                            <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Muat Naik
-                                                        </button>
-                                                    </form>
-                                                {{-- </div> --}}
+                                                <div class="row" style="margin-bottom:0px!important"> 
+                                                    <div class="col-md-6">
+                                                        <a href="{{ route('penyelaras.tuntutan.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
+                                                            <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
+                                                        </a>
+                                                    </div>
+                                            
+                                                    <div class="col-md-6">
+                                                        <form id="uploadForm2" action="{{ route('modified.file.pembayaran.tuntutan') }}" method="POST" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <input type="file" name="modified_excel_file2" accept=".xlsx, .xls" style="display: none" onchange="fileSelected2(event)">
+                                                            <input type="hidden" name="form_submitted2" id="formSubmitted2" value="0">
+                                                            <button type="button" class="btn btn-secondary btn-round" onclick="uploadFileTuntutan()"> 
+                                                                <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Muat Naik
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
