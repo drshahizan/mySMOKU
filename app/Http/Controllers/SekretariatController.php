@@ -642,15 +642,15 @@ class SekretariatController extends Controller
                     ->select('permohonan_kelulusan.*')
                     ->get();
 
-        $institusiBKOKU = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
-        $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
 
         // Pop up notification
         $id_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
         $notifikasi = "Emel notifikasi telah dihantar kepada " . $id_permohonan;
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan', 'notifikasi', 'kelulusan','institusiBKOKU','institusiUA','institusiPPK'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan', 'notifikasi', 'kelulusan','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
     public function hantarSemuaKeputusanPermohonan(Request $request)
@@ -804,15 +804,15 @@ class SekretariatController extends Controller
                     ->select('permohonan_kelulusan.*')
                     ->get();
 
-        $institusiBKOKU = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
-        $institusiUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
 
         // Pop up notification
         $keputusan = $request->get('keputusan');
         $notifikasi = "Emel notifikasi telah dihantar kepada semua pemohon.";
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan','institusiBKOKU','institusiUA','institusiPPK'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
     //PERMOHONAN - KEPUTUSAN
