@@ -1691,6 +1691,7 @@ class PenyelarasController extends Controller
         return redirect()->back()->with('success', 'Fail telah berjaya dihantar.');
     }
 
+    // modal penyaluran - permohonan
     private function updatePermohonanRecords($modifiedData)
     {
         foreach ($modifiedData as $modifiedRecord)
@@ -1841,7 +1842,7 @@ class PenyelarasController extends Controller
         }
     }
 
-    //modal tuntutan
+    //modal penyaluran - tuntutan
     public function hantarInfoBaucerTuntutan(Request $request, $id)
     {
         //fetch max yuran dan wang saku
@@ -1910,6 +1911,20 @@ class PenyelarasController extends Controller
         ->where('tuntutan.status', '=', '8')->get();
 
         return view('penyaluran.penyelaras.senarai_permohonan_dibayar', compact('permohonanDibayar','tuntutanDibayar'));
+    }
+
+    public function maklumatBaucerDibayar($id)
+    {
+        $tuntutan = Tuntutan::where('id', $id)->first();
+        $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
+        $smoku_id = $tuntutan->smoku_id;
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
+        $peringkat = $rujukan[1];
+        $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+
+        return view('penyaluran.penyelaras.maklumat_baucer',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik'));
     }
 
     public function deleteItemTuntutan($id)
