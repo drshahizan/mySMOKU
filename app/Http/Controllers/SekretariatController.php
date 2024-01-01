@@ -447,7 +447,6 @@ class SekretariatController extends Controller
     //PERMOHONAN - KELULUSAN
     public function senaraiKelulusanPermohonan(Request $request)
     {
-
         $kelulusan = Permohonan::select('permohonan.*')
             ->where('permohonan.status', '=', '4')
             ->orderBy('id', 'desc')->get();
