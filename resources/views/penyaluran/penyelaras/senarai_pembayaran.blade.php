@@ -109,7 +109,7 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="col-md-2 fv-row">
+                                            <div class="col-md-4 fv-row">
                                                 <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
                                                     <i class="ki-duotone ki-filter fs-2">
                                                         <span class="path1"></span>
@@ -118,7 +118,7 @@
                                                 </button>
                                             </div>
                                             
-                                            <div class="col-md-6 export-container" data-program-code="permohonan">
+                                            <div class="col-md-4 export-container" data-program-code="permohonan">
                                                 <div class="row" style="margin-bottom:0px!important"> 
                                                     <div class="col-md-6">
                                                         <a href="{{ route('penyelaras.permohonan.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
@@ -139,7 +139,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 export-container" data-program-code="tuntutan"> 
+                                            <div class="col-md-4 export-container" data-program-code="tuntutan"> 
                                                 <div class="row" style="margin-bottom:0px!important"> 
                                                     <div class="col-md-6">
                                                         <a href="{{ route('penyelaras.tuntutan.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
