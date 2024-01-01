@@ -13,17 +13,29 @@
 
         {{-- JAVASCRIPT --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
         <style>
             .nav{
                 margin-left: 20px!important;
+            }
+
+            .dash {
+                width: 15px;
+                height: 1px;
+                background: black;
+                margin: 0 5px;
+                margin-bottom: 20px;
+                display: inline-block;
+                background-color: #fff; 
+            }
+
+            .form-filter {
+                margin-left: 20px !important; 
             }
         </style>
     </head>
@@ -64,7 +76,7 @@
                             </div>
 
                             {{-- top nav bar --}}
-                            <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top:20px;">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="permohonan-tab" data-toggle="tab" data-target="#permohonan" type="button" role="tab" aria-controls="permohonan" aria-selected="true">Permohonan</button>
                                 </li>
@@ -82,7 +94,7 @@
                             <!--begin::Card title-->
 
                             <!--begin::Card toolbar-->
-                            <div class="card-toolbar" style="margin-left: 15px;">
+                            <div class="card-toolbar" style="margin-left: 17px;">
                                 <div class="d-flex justify-content-between mt-5 mb-0" data-kt-subscription-table-toolbar="base">
                                     <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <div class="row form-filter" >
@@ -352,6 +364,7 @@
         </div>
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
         <script>
             $(document).ready(function () {

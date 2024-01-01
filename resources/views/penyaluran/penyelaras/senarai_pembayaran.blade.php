@@ -22,6 +22,20 @@
             .nav{
                 margin-left: 20px!important;
             }
+
+            .dash {
+                width: 15px;
+                height: 1px;
+                background: black;
+                margin: 0 5px;
+                margin-bottom: 20px;
+                display: inline-block;
+                background-color: #fff; /* Set background color to white or your container's background color */
+            }
+
+            .form-filter {
+                margin-left: 20px !important; 
+            }
         </style>
     </head>
 
@@ -61,7 +75,7 @@
                             </div>
 
                             {{-- top nav bar --}}
-                            <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top:20px;">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="permohonan-tab" data-toggle="tab" data-target="#permohonan" type="button" role="tab" aria-controls="permohonan" aria-selected="true">Permohonan</button>
                                 </li>
@@ -79,7 +93,7 @@
                             <!--begin::Card title-->
 
                             <!--begin::Card toolbar-->
-                            <div class="card-toolbar" style="margin-left: 15px;">
+                            <div class="card-toolbar" style="margin-left: 17px;">
                                 <div class="d-flex justify-content-between mt-5 mb-0" data-kt-subscription-table-toolbar="base">
                                     <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <div class="row form-filter" >
@@ -141,7 +155,6 @@
                                                     </form>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -641,5 +654,7 @@
                 console.log(message, table.rows().data().toArray());
             }
         </script>
+
+        
     </body>
 </x-default-layout> 
