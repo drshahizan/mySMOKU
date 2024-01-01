@@ -1926,36 +1926,12 @@ class PenyelarasController extends Controller
 
         $permohonan->save();
 
-        // You might want to customize the response based on your needs
-        $response = [
-            'status' => 'success',
-            'message' => 'Data updated successfully',
-        ];
+        // Flash a success message to the session
+        session()->flash('success', 'Data updated successfully');
 
-        return response()->json($response);
+        // Redirect to the original page
+        return redirect('/penyelaras/penyaluran/permohonan/dibayar');
     }
-
-    // public function updateMaklumatBaucer(Request $request, $permohonanId)
-    // {
-    //     $permohonan = Permohonan::find($permohonanId);
-
-    //     $permohonan->yuran_dibayar = $request->input('yuranDibayar');
-    //     $permohonan->wang_saku_dibayar = $request->input('wangSakuDibayar');
-    //     $permohonan->no_baucer = $request->input('noBaucer');
-    //     $permohonan->perihal = $request->input('perihal');
-    //     $permohonan->tarikh_baucer = $request->input('tarikhBaucer');
-
-    //     $permohonan->save();
-
-    //     // You might want to customize the response based on your needs
-    //     $response = [
-    //         'status' => 'success',
-    //         'message' => 'Maklumat Baucer telah berjaya dikemaskini.',
-    //     ];
-
-    //     return response()->json($response);
-    // }
-
 
     public function maklumatBaucerPermohonan($id)
     {

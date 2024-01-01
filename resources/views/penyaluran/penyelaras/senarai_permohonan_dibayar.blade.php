@@ -340,6 +340,22 @@
                             perihal: $('[name="perihal' + permohonanId + '"]').val(),
                             tarikhBaucer: $('#tarikhBaucer' + permohonanId).val(),
                         },
+                        success: function (response) {
+                            if (response.status === 'success') {
+                                // Display sweet alert on success
+                                swal({
+                                    title: 'Success!',
+                                    text: 'Maklumat baucer telah berjaya dikemaskini.',
+                                    icon: 'success',
+                                }).then((value) => {
+                                    // Redirect to the original page
+                                    window.location.href = '/penyelaras/penyaluran/permohonan/dibayar';
+                                });
+                            } else {
+                                // Handle other cases if needed
+                                console.error('Error updating data:', response);
+                            }
+                        },
                         error: function (error) {
                             console.error('Error fetching data:', error);
                         }
