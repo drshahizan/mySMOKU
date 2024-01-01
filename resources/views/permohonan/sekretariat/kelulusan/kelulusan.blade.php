@@ -117,7 +117,7 @@
                                                 <!--end::Actions-->
                                             </div>
                                         
-                                            <div class="col-md-3 fv-row export-container" data-program-code="BKOKU" style="margin-left:60px;">
+                                            <div class="col-md-3 fv-row export-container" data-program-code="BKOKU" style="margin-left:70px;">
                                                 <a id="exportBKOKU" href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
@@ -126,7 +126,7 @@
                                                 </a>
                                             </div>
                                             
-                                            <div class="col-md-3 fv-row export-container" data-program-code="UA" style="margin-left:60px;">
+                                            <div class="col-md-3 fv-row export-container" data-program-code="UA" style="margin-left:70px;">
                                                 <a id="exportUA" href="{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
@@ -135,7 +135,7 @@
                                                 </a>
                                             </div>
                                             
-                                            <div class="col-md-3 fv-row export-container" data-program-code="PPK" style="margin-left:60px;">
+                                            <div class="col-md-3 fv-row export-container" data-program-code="PPK" style="margin-left:70px;">
                                                 <a id="exportPPK" href="{{ route('senarai.disokong.pdf', ['programCode' => 'PPK']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>

@@ -120,7 +120,7 @@
                                     <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <!--begin::Input group-->
                                         <div class="row form-filter" >
-                                            <div class="col-md-4" style="display: flex; align-items: center;">
+                                            <div class="col-md-3" style="display: flex; align-items: center;">
                                                 <div class="flex-grow-1">
                                                     <input type="date" name="start_date" id="start_date" value="" class="form-control" />
                                                 </div>
@@ -157,7 +157,7 @@
                                                 <!--end::Actions-->
                                             </div>
                                         
-                                            <div class="col-md-1 export-container" data-program-code="BKOKU" style="width:100%"> 
+                                            <div class="col-md-2 export-container" data-program-code="BKOKU" style="width:100%"> 
                                                 <a id="exportBKOKU" href="{{ route('senarai.keputusan.BKOKU.pdf', [
                                                     'start_date' => Request::get('start_date'),
                                                     'end_date' => Request::get('end_date'),
@@ -168,7 +168,7 @@
                                                 </a>
                                             </div>
 
-                                            <div class="col-md-1 export-container" data-program-code="UA" style="width:100%">
+                                            <div class="col-md-2 export-container" data-program-code="UA" style="width:100%">
                                                 <a id="exportUA" href="{{ route('senarai.keputusan.BKOKU.UA.pdf', [
                                                     'start_date' => Request::get('start_date'),
                                                     'end_date' => Request::get('end_date'),
@@ -179,7 +179,7 @@
                                                 </a>
                                             </div>
                     
-                                            <div class="col-md-1 export-container" data-program-code="PPK" style="width:100%">
+                                            <div class="col-md-2 export-container" data-program-code="PPK" style="width:100%">
                                                 <a id="exportPPK" href="{{ route('senarai.keputusan.PPK.pdf', [
                                                     'start_date' => '" + startDate + "',
                                                     'end_date' => '" + endDate + "',
