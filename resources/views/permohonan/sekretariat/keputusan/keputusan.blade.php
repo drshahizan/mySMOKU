@@ -487,247 +487,245 @@
         <!-- Javascript -->
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         
-    <script>
-        // Initialize JavaScript variables with data from Blade
-        var bkokuList = @json($institusiPengajian);
-        var bkokuUAList = @json($institusiPengajianUA);
-        var ppkList = @json($institusiPengajianPPK);
+        <script>
+            // Initialize JavaScript variables with data from Blade
+            var bkokuList = @json($institusiPengajian);
+            var bkokuUAList = @json($institusiPengajianUA);
+            var ppkList = @json($institusiPengajianPPK);
 
-        $(document).ready(function() {
-            $('.export-container[data-program-code="BKOKU"]').show();
-            $('.export-container[data-program-code="UA"]').hide();
-            $('.export-container[data-program-code="PPK"]').hide();
+            $(document).ready(function() {
+                $('.export-container[data-program-code="BKOKU"]').show();
+                $('.export-container[data-program-code="UA"]').hide();
+                $('.export-container[data-program-code="PPK"]').hide();
 
-            $('.none-container').show(); // Hide export elements
+                $('.none-container').show(); // Hide export elements
 
-            // Add an event listener for tab clicks
-            $('.nav-link').on('click', function() {
-                // Get the ID of the active tab
-                var activeTabId = $(this).attr('id');
+                // Add an event listener for tab clicks
+                $('.nav-link').on('click', function() {
+                    // Get the ID of the active tab
+                    var activeTabId = $(this).attr('id');
 
-                // Clear filters when changing tabs
-                clearFilters();
+                    // Clear filters when changing tabs
+                    clearFilters();
 
-                updateExportContainers(activeTabId);
+                    updateExportContainers(activeTabId);
 
-                // Update the institution dropdown based on the active tab
-                switch (activeTabId) {
-                    case 'bkoku-tab':
-                        updateInstitusiDropdown(bkokuList);
-                        break;
-                    case 'bkokuUA-tab':
-                        updateInstitusiDropdown(bkokuUAList);
-                        break;
-                    case 'ppk-tab':
-                        updateInstitusiDropdown(ppkList);
-                        break;
-                    // Add more cases if you have additional tabs
-                }
-            });
-
-            // Trigger the function for the default active tab (bkoku-tab)
-            updateInstitusiDropdown(bkokuList);
-
-            // Function to clear filters for all tables
-            function clearFilters() {
-                if (datatable1) {
-                    datatable1.search('').columns().search('').draw();
-                }
-                if (datatable) {
-                    datatable.search('').columns().search('').draw();
-                }
-                if (datatable2) {
-                    datatable2.search('').columns().search('').draw();
-                }
-            }
-
-            function updateExportContainers(activeTabId) {
-                // Hide all export containers initially
-                $('.export-container').hide();
-
-                // Show the export container based on the active tab
-                var programCode = getProgramCode(activeTabId);
-                $('.export-container[data-program-code="' + programCode + '"]').show();
-            }
-
-            function getProgramCode(activeTabId) {
-                switch (activeTabId) {
-                    case 'bkoku-tab':
-                        return 'BKOKU';
-                    case 'bkokuUA-tab':
-                        return 'UA';
-                    case 'ppk-tab':
-                        return 'PPK';
-                    // Add more cases if you have additional tabs
-                    default:
-                        return '';
-                }
-            }
-
-
-            // Function to update the institution dropdown
-            function updateInstitusiDropdown(institusiList) {
-                // Clear existing options
-                $('#institusiDropdown').empty();
-
-                // Add default option
-                $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
-
-                // Add options based on the selected tab
-                for (var i = 0; i < institusiList.length; i++) {
-                    $('#institusiDropdown').append('<option value="' + institusiList[i].id_institusi + '">' + institusiList[i].nama_institusi + '</option>');
-                }
-            }
-        });
-    </script>
-
-    <script>
-        
-
-        // Declare datatables in a higher scope to make them accessible
-        var datatable1, datatable, datatable2;
-
-        $(document).ready(function() {
-            // Initialize DataTables
-            initDataTable('#sortTable1', 'datatable1');
-            initDataTable('#sortTable2', 'datatable');
-            initDataTable('#sortTable3', 'datatable2');
-
-            // Log data for all tables
-            logTableData('Table 1 Data:', datatable1);
-            logTableData('Table 2 Data:', datatable);
-            logTableData('Table 3 Data:', datatable2);
-        });
-
-        function initDataTable(tableId, variableName) {
-            // Check if the datatable is already initialized
-            if ($.fn.DataTable.isDataTable(tableId)) {
-                // Destroy the existing DataTable instance
-                $(tableId).DataTable().destroy();
-            }
-
-            // Initialize the datatable and assign it to the global variable
-            window[variableName] = $(tableId).DataTable({
-                ordering: true, // Enable manual sorting
-                order: [], // Disable initial sorting
-                columnDefs: [
-                    { orderable: false, targets: [0] },
-                    { targets: [3], visible: false }, // Hide column (index 4)
-                    { type: 'date', targets: [6] },
-                    { targets: [8], visible: false } // Hide column (index 9)
-                ]
-            });
-        }
-
-        function applyFilter() {
-            var selectedInstitusi = $('[name="institusi"]').val();
-            var startDate = $('#start_date').val();
-            var endDate = $('#end_date').val();
-            var status = $('[name="status"]').val();
-            console.log(selectedInstitusi);
-            console.log(startDate);
-            console.log(endDate);
-            console.log(status);
-            
-            // Apply search filter and log data for all tables
-            applyAndLogFilter('Table 1', datatable1, selectedInstitusi, startDate, endDate, status);
-            applyAndLogFilter('Table 2', datatable, selectedInstitusi, startDate, endDate, status);
-            applyAndLogFilter('Table 3', datatable2, selectedInstitusi, startDate, endDate, status);
-           
-
-            
-            var exportBKOKU = document.getElementById('exportBKOKU');
-            exportBKOKU.href = "{{ route('senarai.keputusan.BKOKU.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
-            
-
-            var exportUA = document.getElementById('exportUA');
-            exportUA.href = "{{ route('senarai.keputusan.BKOKU.UA.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
-
-
-            var exportPPK = document.getElementById('exportPPK');
-            exportPPK.href = "{{ route('senarai.keputusan.PPK.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
-           
-        }
-
-        function applyAndLogFilter(tableName, table, institusi, startDate, endDate, status) {
-            // Reset the search for all columns to ensure a clean filter
-            table.columns().search('').draw();
-
-            // Clear the previous search functions
-            $.fn.dataTable.ext.search = [];
-
-            // Apply date range filter
-            if (startDate || endDate) {
-                $.fn.dataTable.ext.search.push(
-                    function (settings, data, dataIndex) {
-                        let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
-                        let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
-
-                        let dateAdded = moment(data[6], 'DD/MM/YYYY');
-
-                        // Check if the date falls within the specified range
-                        let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
-                                    (!endDateObj || dateAdded.isSameOrBefore(endDateObj));
-
-                        if (result) {
-                            console.log('Date Range Filter Result: true');
-                            console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
-                            console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
-                            console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
-                        } else {
-                            console.log('Date Range Filter Result: false');
-                            console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
-                            console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
-                            console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
-                        }
-
-                        return result;
+                    // Update the institution dropdown based on the active tab
+                    switch (activeTabId) {
+                        case 'bkoku-tab':
+                            updateInstitusiDropdown(bkokuList);
+                            break;
+                        case 'bkokuUA-tab':
+                            updateInstitusiDropdown(bkokuUAList);
+                            break;
+                        case 'ppk-tab':
+                            updateInstitusiDropdown(ppkList);
+                            break;
+                        // Add more cases if you have additional tabs
                     }
-                );
+                });
+
+                // Trigger the function for the default active tab (bkoku-tab)
+                updateInstitusiDropdown(bkokuList);
+
+                // Function to clear filters for all tables
+                function clearFilters() {
+                    if (datatable1) {
+                        datatable1.search('').columns().search('').draw();
+                    }
+                    if (datatable) {
+                        datatable.search('').columns().search('').draw();
+                    }
+                    if (datatable2) {
+                        datatable2.search('').columns().search('').draw();
+                    }
+                }
+
+                function updateExportContainers(activeTabId) {
+                    // Hide all export containers initially
+                    $('.export-container').hide();
+
+                    // Show the export container based on the active tab
+                    var programCode = getProgramCode(activeTabId);
+                    $('.export-container[data-program-code="' + programCode + '"]').show();
+                }
+
+                function getProgramCode(activeTabId) {
+                    switch (activeTabId) {
+                        case 'bkoku-tab':
+                            return 'BKOKU';
+                        case 'bkokuUA-tab':
+                            return 'UA';
+                        case 'ppk-tab':
+                            return 'PPK';
+                        // Add more cases if you have additional tabs
+                        default:
+                            return '';
+                    }
+                }
+
+                // Function to update the institution dropdown
+                function updateInstitusiDropdown(institusiList) {
+                    // Clear existing options
+                    $('#institusiDropdown').empty();
+
+                    // Add default option
+                    $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
+
+                    // Add options based on the selected tab
+                    for (var i = 0; i < institusiList.length; i++) {
+                        $('#institusiDropdown').append('<option value="' + institusiList[i].id_institusi + '">' + institusiList[i].nama_institusi + '</option>');
+                    }
+                }
+            });
+        </script>
+
+        <script>
+            // Declare datatables in a higher scope to make them accessible
+            var datatable1, datatable, datatable2;
+
+            $(document).ready(function() {
+                // Initialize DataTables
+                initDataTable('#sortTable1', 'datatable1');
+                initDataTable('#sortTable2', 'datatable');
+                initDataTable('#sortTable3', 'datatable2');
+
+                // Log data for all tables
+                logTableData('Table 1 Data:', datatable1);
+                logTableData('Table 2 Data:', datatable);
+                logTableData('Table 3 Data:', datatable2);
+            });
+
+            function initDataTable(tableId, variableName) {
+                // Check if the datatable is already initialized
+                if ($.fn.DataTable.isDataTable(tableId)) {
+                    // Destroy the existing DataTable instance
+                    $(tableId).DataTable().destroy();
+                }
+
+                // Initialize the datatable and assign it to the global variable
+                window[variableName] = $(tableId).DataTable({
+                    ordering: true, // Enable manual sorting
+                    order: [], // Disable initial sorting
+                    columnDefs: [
+                        { orderable: false, targets: [0] },
+                        { targets: [3], visible: false }, // Hide column (index 4)
+                        { type: 'date', targets: [6] },
+                        { targets: [8], visible: false } // Hide column (index 9)
+                    ]
+                });
             }
 
-            // Apply search filter for institusi
-            if (institusi) {
-                table.column(3).search(institusi).draw();
+            function applyFilter() {
+                var selectedInstitusi = $('[name="institusi"]').val();
+                var startDate = $('#start_date').val();
+                var endDate = $('#end_date').val();
+                var status = $('[name="status"]').val();
+                console.log(selectedInstitusi);
+                console.log(startDate);
+                console.log(endDate);
+                console.log(status);
+                
+                // Apply search filter and log data for all tables
+                applyAndLogFilter('Table 1', datatable1, selectedInstitusi, startDate, endDate, status);
+                applyAndLogFilter('Table 2', datatable, selectedInstitusi, startDate, endDate, status);
+                applyAndLogFilter('Table 3', datatable2, selectedInstitusi, startDate, endDate, status);
+            
+
+                
+                var exportBKOKU = document.getElementById('exportBKOKU');
+                exportBKOKU.href = "{{ route('senarai.keputusan.BKOKU.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
+                
+
+                var exportUA = document.getElementById('exportUA');
+                exportUA.href = "{{ route('senarai.keputusan.BKOKU.UA.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
+
+
+                var exportPPK = document.getElementById('exportPPK');
+                exportPPK.href = "{{ route('senarai.keputusan.PPK.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
+            
             }
 
-            // Apply search filter for status
-            if (status) {
-                table.column(8).search(status).draw();
+            function applyAndLogFilter(tableName, table, institusi, startDate, endDate, status) {
+                // Reset the search for all columns to ensure a clean filter
+                table.columns().search('').draw();
+
+                // Clear the previous search functions
+                $.fn.dataTable.ext.search = [];
+
+                // Apply date range filter
+                if (startDate || endDate) {
+                    $.fn.dataTable.ext.search.push(
+                        function (settings, data, dataIndex) {
+                            let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
+                            let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
+
+                            let dateAdded = moment(data[6], 'DD/MM/YYYY');
+
+                            // Check if the date falls within the specified range
+                            let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
+                                        (!endDateObj || dateAdded.isSameOrBefore(endDateObj));
+
+                            if (result) {
+                                console.log('Date Range Filter Result: true');
+                                console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
+                                console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
+                                console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
+                            } else {
+                                console.log('Date Range Filter Result: false');
+                                console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
+                                console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
+                                console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
+                            }
+
+                            return result;
+                        }
+                    );
+                }
+
+                // Apply search filter for institusi
+                if (institusi) {
+                    table.column(3).search(institusi).draw();
+                }
+
+                // Apply search filter for status
+                if (status) {
+                    table.column(8).search(status).draw();
+                }
+
+                // Log filtered data
+                console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
+
+                // Go to the first page for the table
+                table.page(0).draw(false);
+
+                // Log the data of visible rows on the first page for the table
+                console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
             }
 
-            // Log filtered data
-            console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
 
-            // Go to the first page for the table
-            table.page(0).draw(false);
+            function logTableData(message, table) {
+                console.log(message, table.rows().data().toArray());
+            }
+        </script>
 
-            // Log the data of visible rows on the first page for the table
-            console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
-        }
+        <script> 
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
+        </script>   
 
-
-        function logTableData(message, table) {
-            console.log(message, table.rows().data().toArray());
-        }
-    </script>
-
-    <script> 
-        $(document).ready(function() {
-            $('.js-example-basic-single').select2();
-        });
-    </script>   
-
-    <style>
-        .custom-width-btn {
-            width: 105px; 
-            height: 35px;
-        }
-        .custom-width-select {
-            width: 400px !important; /* Important to override other styles */
-        }
-        .form-select {
-            margin-left: 10px !important; 
-        }
-    </style>
+        <style>
+            .custom-width-btn {
+                width: 105px; 
+                height: 35px;
+            }
+            .custom-width-select {
+                width: 400px !important; /* Important to override other styles */
+            }
+            .form-select {
+                margin-left: 10px !important; 
+            }
+        </style>
+    </body>
 </x-default-layout> 

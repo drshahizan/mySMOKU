@@ -66,6 +66,45 @@
                                 </li>
                             </ul>
 
+                            <!--begin::Card title-->
+                            <div class="card-title">
+                                <div class="d-flex align-items-center position-relative my-1">
+                                    <input type="hidden" data-kt-subscription-table-filter="search" >
+                                </div>
+                            </div>
+                            <!--begin::Card title-->
+
+                            <!--begin::Card toolbar-->
+                            <div class="card-toolbar">
+                                <div class="d-flex justify-content-between mt-5 mb-0" data-kt-subscription-table-toolbar="base">
+                                    <div class="col-md-12" data-kt-subscription-table-filter="form">
+                                        <div class="row form-filter" >
+                                            <div class="col-md-4" style="display: flex; align-items: center;">
+                                                <div class="flex-grow-1">
+                                                    <input type="date" name="start_date" id="start_date" value="" class="form-control" />
+                                                </div>
+                                            
+                                                <div class="dash">-</div>
+                                            
+                                                <div class="flex-grow-1">
+                                                    <input type="date" name="end_date" id="end_date" value="" class="form-control" />
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-1 fv-row">
+                                                <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
+                                                    <i class="ki-duotone ki-filter fs-2">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                    </i>
+                                                </button>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Card toolbar-->
+
                             <div class="tab-content" id="myTabContent">
                                 {{-- Permohonan --}}
                                 <div class="tab-pane fade show active" id="permohonan" role="tabpanel" aria-labelledby="permohonan-tab">
@@ -73,7 +112,7 @@
                                         <h2>Senarai Permohonan yang Layak<br><small>Sila muat turun excel fail senarai permohonan layak untuk isi maklumat baucer dan muat naik ke dalam sistem untuk dikemaskini.</small></h2>
                                     </div>
 
-                                    <div class="row" style="margin-left: 15px;">
+                                    {{-- <div class="row" style="margin-left: 15px;">
                                         <form action="{{ url('penyelaras/penyaluran/permohonan-tuntutan/layak') }}" method="GET" class="col-md-5">
                                             <div class="row" style="margin-bottom:0px!important">
                                                 <div class="col-md-5">
@@ -116,7 +155,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="body">
                                         {{-- <form action="{{ route('penyelaras.bulk.submit') }}" method="POST" id="modalForm">
@@ -247,7 +286,7 @@
                                         <h2>Senarai Tuntutan yang Layak<br><small>Sila muat turun excel fail senarai tuntutan layak untuk isi maklunat baucer dan sila muat naik ke dalam sistem untuk dikemaskini.</small></h2>
                                     </div>
 
-                                    <div class="row" style="margin-left: 15px;">
+                                    {{-- <div class="row" style="margin-left: 15px;">
                                         <form action="{{ url('penyelaras/penyaluran/permohonan-tuntutan/layak') }}" method="GET" class="col-md-5">
                                             <div class="row" style="margin-bottom:0px!important">
                                                 <div class="col-md-5">
@@ -290,7 +329,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="body">
                                         {{-- <form action="{{ route('penyelaras.bulk.submit') }}" method="POST" id="modalForm">
@@ -420,12 +459,9 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
         <script>
-            //sorting function
-            $('#sortTable1').DataTable();
-            $('#sortTable2').DataTable();
-
             //permohonan
             function uploadFilePermohonan() {
                 // Trigger the click event of the hidden file input
@@ -470,38 +506,108 @@
                     confirmButtonText: 'OK'
                 });
             @endif
+        </script>
 
-            // Add a click event listener to the links with the "open-modal-link" class for permohonan
-            // document.querySelectorAll('.open-modal-link-permohonan').forEach(function(link) {
-            //     link.addEventListener('click', function() {
-            //         // Get the value of the data-no-rujukan attribute
-            //         var noRujukan = link.getAttribute('data-no-rujukan');
+        <script>
+            var datatable1, datatable2;
 
-            //         // Set the value to the hidden input in the modal for permohonan
-            //         document.getElementById('clickedNoRujukan1').value = noRujukan;
+            $(document).ready(function() 
+            {
+                // Initialize DataTables
+                initDataTable('#sortTable1', 'datatable1');
+                initDataTable('#sortTable2', 'datatable2');
 
-            //         // Set the permohonan id value in the form action URL
-            //         var permohonanId = link.getAttribute('data-permohonan-id');
-            //         var form = document.getElementById('modalForm');
-            //         form.action = form.action.replace(/\/\d+$/, '/' + permohonanId);
-            //     });
-            // });
+                // Log data for all tables
+                logTableData('Table 1 Data:', datatable1);
+                logTableData('Table 2 Data:', datatable2);
+            });
 
-            // Add a click event listener to the links with the "open-modal-link" class for tuntutan
-            // document.querySelectorAll('.open-modal-link-tuntutan').forEach(function(link) {
-            //     link.addEventListener('click', function() {
-            //         // Get the value of the data-no-rujukan attribute
-            //         var noRujukan = link.getAttribute('data-no-rujukan');
 
-            //         // Set the value to the hidden input in the modal for tuntutan
-            //         document.getElementById('clickedNoRujukan2').value = noRujukan;
+            function initDataTable(tableId, variableName) 
+            {
+                // Check if the datatable is already initialized
+                if ($.fn.DataTable.isDataTable(tableId)) {
+                    // Destroy the existing DataTable instance
+                    $(tableId).DataTable().destroy();
+                }
 
-            //         // Set the tuntutan id value in the form action URL
-            //         var tuntutanId = link.getAttribute('data-tuntutan-id');
-            //         var form = document.getElementById('modalForm');
-            //         form.action = form.action.replace(/\/\d+$/, '/' + tuntutanId);
-            //     });
-            // });
+                // Initialize the datatable and assign it to the global variable
+                window[variableName] = $(tableId).DataTable({
+                    ordering: true, // Enable manual sorting
+                    order: [], // Disable initial sorting
+                    columnDefs: [
+                        { orderable: false, targets: [0] },
+                        { type: 'date', targets: [4] },
+                    ]
+                });
+            }
+
+
+            function applyFilter() 
+            {
+                var startDate = $('#start_date').val();
+                var endDate = $('#end_date').val();
+                console.log(startDate);
+                console.log(endDate);
+                
+                // Apply search filter and log data for all tables
+                applyAndLogFilter('Table 1', datatable1, startDate, endDate);
+                applyAndLogFilter('Table 2', datatable2, startDate, endDate);
+            }
+
+            function applyAndLogFilter(tableName, table, startDate, endDate) 
+            {
+                // Reset the search for all columns to ensure a clean filter
+                table.columns().search('').draw();
+
+                // Clear the previous search functions
+                $.fn.dataTable.ext.search = [];
+
+                // Apply date range filter
+                if (startDate || endDate) {
+                    $.fn.dataTable.ext.search.push(
+                        function (settings, data, dataIndex) {
+                            let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
+                            let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
+
+                            let dateAdded = moment(data[4], 'DD/MM/YYYY');
+
+                            // Check if the date falls within the specified range
+                            let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
+                                        (!endDateObj || dateAdded.isSameOrBefore(endDateObj));
+
+                            if (result) {
+                                console.log('Date Range Filter Result: true');
+                                console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
+                                console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
+                                console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
+                            } else {
+                                console.log('Date Range Filter Result: false');
+                                console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
+                                console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
+                                console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
+                            }
+
+                            return result;
+                        }
+                    );
+                }
+
+                // Log filtered data
+                console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
+
+                // Go to the first page for the table
+                table.page(0).draw(false);
+
+                // Log the data of visible rows on the first page for the table
+                console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
+            }
+
+
+            function logTableData(message, table) 
+            {
+                console.log(message, table.rows().data().toArray());
+            }
         </script>
     </body>
 </x-default-layout> 

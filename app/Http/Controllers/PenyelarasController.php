@@ -1648,20 +1648,8 @@ class PenyelarasController extends Controller
     //PENYALURAN - PEMBAYARAN
     public function senaraiPemohonLayak(Request $request)
     {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
-        $permohonanLayak = Permohonan::orderBy('id', 'desc')
-        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
-        })
-        ->where('permohonan.status', '=', '6')->get();
-
-        $tuntutanLayak = Tuntutan::orderBy('id', 'desc')
-        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
-        })
-        ->where('tuntutan.status', '=', '6')->get();
+        $permohonanLayak = Permohonan::orderBy('id', 'desc')->where('permohonan.status', '=', '6')->get();
+        $tuntutanLayak = Tuntutan::orderBy('id', 'desc')->where('tuntutan.status', '=', '6')->get();
 
         return view('penyaluran.penyelaras.senarai_pembayaran', compact('permohonanLayak','tuntutanLayak'));
     }
