@@ -1841,6 +1841,7 @@ class PenyelarasController extends Controller
         }
     }
 
+    //modal tuntutan
     public function hantarInfoBaucerTuntutan(Request $request, $id)
     {
         //fetch max yuran dan wang saku

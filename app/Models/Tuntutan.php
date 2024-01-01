@@ -17,6 +17,7 @@ class Tuntutan extends Model
         'no_rujukan_tuntutan',
         'sesi',
         'semester',
+        'status',
         'yuran',
         'wang_saku',
         'amaun_wang_saku',
@@ -29,8 +30,11 @@ class Tuntutan extends Model
         'baki_disokong',
         'baki_dibayar',
         'catatan_dibayar',
+        'no_baucer',
+        'tarikh_baucer',
+        'perihal',
+        'no_cek',
+        'tarikh_transaksi',
         'tarikh_hantar',
-        'status',
-
     ];
 }
