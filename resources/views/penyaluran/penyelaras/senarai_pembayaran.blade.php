@@ -655,6 +655,57 @@
             }
         </script>
 
+        <script>
+            $(document).ready(function() {
+                $('.export-container[data-program-code="permohonan"]').show();
+                $('.export-container[data-program-code="tuntutan"]').hide();
 
+                $('.none-container').show(); // Hide export elements
+
+                $('.nav-link').on('click', function() 
+                {
+                    // Get the ID of the active tab
+                    var activeTabId = $(this).attr('id');
+
+                    // Clear filters when changing tabs
+                    clearFilters();
+
+                    updateExportContainers(activeTabId);
+                });
+
+                // Function to clear filters for all tables
+                function clearFilters() 
+                {
+                    if (datatable1) {
+                        datatable1.search('').columns().search('').draw();
+                    }
+                    if (datatable2) {
+                        datatable2.search('').columns().search('').draw();
+                    }
+                }
+
+                function updateExportContainers(activeTabId) 
+                {
+                    // Hide all export containers initially
+                    $('.export-container').hide();
+
+                    // Show the export container based on the active tab
+                    var programCode = getProgramCode(activeTabId);
+                    $('.export-container[data-program-code="' + programCode + '"]').show();
+                }
+
+                function getProgramCode(activeTabId) 
+                {
+                    switch (activeTabId) {
+                        case 'permohonan-tab':
+                            return 'permohonan';
+                        case 'tuntutan-tab':
+                            return 'tuntutan';
+                        default:
+                            return '';
+                    }
+                }
+            });
+        </script>
     </body>
 </x-default-layout> 
