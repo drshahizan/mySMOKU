@@ -1395,8 +1395,11 @@ class SekretariatController extends Controller
             ->orWhere('status', '=','7')
             ->orderBy('created_at', 'DESC')->get();
 
-        $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
-        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusi','tuntutan','status_kod','status'));
+        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+
+        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusiPengajian','institusiPengajianUA','institusiPengajianPPK','tuntutan','status_kod','status'));
     }
 
     //Keputusan
