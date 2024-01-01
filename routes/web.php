@@ -281,7 +281,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/permohonan/process-uploaded-file', [PenyelarasController::class, 'uploadedFilePembayaranPermohonan'])->name('modified.file.pembayaran.permohonan');
     Route::get('/tuntutan/senarai-layak-excel', [PenyelarasController::class, 'exportTuntutanLayak'])->name('penyelaras.tuntutan.senarai.layak.excel');
     Route::post('/tuntutan/process-uploaded-file', [PenyelarasController::class, 'uploadedFilePembayaranTuntutan'])->name('modified.file.pembayaran.tuntutan');
-    Route::post('/penyelaras/maklumat/baucer/{permohonanId}', [PenyelarasController::class, 'updateMaklumatBaucer'])->name('update.maklumat.baucer');
+    Route::post('/penyelaras/permohonan/maklumat-baucer/{permohonanId}', [PenyelarasController::class, 'updateMaklumatBaucerPermohonan'])->name('update.maklumat.baucer.permohonan');
+    Route::post('/penyelaras/tuntutan/maklumat-baucer/{tuntutanId}', [PenyelarasController::class, 'updateMaklumatBaucerTuntutan'])->name('update.maklumat.baucer.tuntutan');
 
     // Route::post('/penyelaras/hantar/permohonan/info-baucer/{permohonan_id}', [PenyelarasController::class, 'hantarInfoBaucerPermohonan'])->name('permohonan.modal.submit');
     // Route::post('/penyelaras/hantar/tuntutan/info-baucer/{tuntutan_id}', [PenyelarasController::class, 'hantarInfoBaucerTuntutan'])->name('tuntutan.modal.submit');

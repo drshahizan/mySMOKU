@@ -1914,7 +1914,7 @@ class PenyelarasController extends Controller
     }
 
     // Modal view maklumat baucer
-    public function updateMaklumatBaucer(Request $request, $permohonanId)
+    public function updateMaklumatBaucerPermohonan(Request $request, $permohonanId)
     {
         $permohonan = Permohonan::find($permohonanId);
 
@@ -1927,35 +1927,29 @@ class PenyelarasController extends Controller
         $permohonan->save();
 
         // Flash a success message to the session
-        session()->flash('success', 'Data updated successfully');
+        session()->flash('success', 'Maklumat Baucer telah berjaya dikemaskini.');
 
         // Redirect to the original page
         return redirect('/penyelaras/penyaluran/permohonan/dibayar');
     }
 
-    public function maklumatBaucerPermohonan($id)
+    public function updateMaklumatBaucerTuntutan(Request $request, $tuntutanId)
     {
-        $permohonan = Permohonan::where('id', $id)->first();
-        $smoku_id = $permohonan->smoku_id;
-        $smoku = Smoku::where('id', $smoku_id)->first();
-        $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
-        $peringkat = $rujukan[1];
-        $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+        $tuntutan = Tuntutan::find($tuntutanId);
 
-        return view('penyaluran.penyelaras.maklumat_baucer_permohonan',compact('permohonan','akademik','smoku'));
-    }
+        $tuntutan->yuran_dibayar = $request->input('yuranDibayar');
+        $tuntutan->wang_saku_dibayar = $request->input('wangSakuDibayar');
+        $tuntutan->no_baucer = $request->input('noBaucer');
+        $tuntutan->perihal = $request->input('perihal');
+        $tuntutan->tarikh_baucer = $request->input('tarikhBaucer');
 
-    public function maklumatBaucerTuntutan($id)
-    {
-        $tuntutan = Tuntutan::where('id', $id)->first();
-        $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
-        $smoku_id = $tuntutan->smoku_id;
-        $smoku = Smoku::where('id', $smoku_id)->first();
-        $rujukan = explode("/", $tuntutan->no_rujukan_tuntutan);
-        $peringkat = $rujukan[1];
-        $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+        $tuntutan->save();
 
-        return view('penyaluran.penyelaras.maklumat_baucer_tuntutan',compact('tuntutan','akademik','smoku'));
+        // Flash a success message to the session
+        session()->flash('success', 'Maklumat Baucer telah berjaya dikemaskini.');
+
+        // Redirect to the original page
+        return redirect('/penyelaras/penyaluran/permohonan/dibayar');
     }
 
     public function deleteItemTuntutan($id)
