@@ -145,7 +145,7 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-md-2 fv-row" style="margin-left: 20px;">
+                                            <div class="col-md-1 fv-row" style="margin-left: 20px;">
                                                 <!--begin::Actions-->
                                                 <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
                                                     <i class="ki-duotone ki-filter fs-2">
