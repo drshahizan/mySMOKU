@@ -1433,7 +1433,7 @@ class SekretariatController extends Controller
 
     public function keputusanTuntutan(Request $request)
     {
-        $startDate = $request->input('start_date');
+        /*$startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
         $tuntutan = Tuntutan::join('sejarah_tuntutan', function ($join) {
@@ -1456,38 +1456,16 @@ class SekretariatController extends Controller
                     })
                     ->select('tuntutan.*','sejarah_tuntutan.created_at as tarikh_keputusan')
                     ->get();
-
-        /*if(($startDate==null||$endDate==null)&&$request->status==null&&$request->institusi==null){
-            $tuntutan = Tuntutan::orderBy('created_at', 'desc')
-                ->where('status', '5')
-                ->orWhere('status', '6')
-                ->orWhere('status', '7')
-                ->get();
-        }
-        elseif(($startDate==null||$endDate==null)&&$request->status!=null){
-            $tuntutan = Tuntutan::orderBy('created_at', 'desc')
-                ->where('status', $request->status)
-                ->get();
-        }
-        elseif(($startDate!=null&&$endDate!=null)&&$request->status==null){
-            $tuntutan = Tuntutan::orderBy('created_at', 'desc')
-                ->where('status', '5')
-                ->orWhere('status', '6')
-                ->orWhere('status', '7')
-                ->get();
-            $tuntutan = $tuntutan->whereBetween('created_at', [$startDate, $endDate]);
-        }
-        elseif(($startDate==null||$endDate==null)&&$request->status==null&&$request->institusi!=null){
-            $tuntutan = Tuntutan::orderBy('created_at', 'desc')
-                ->where('status', $request->status)
-                ->get();
-        }
-        else{
-            $tuntutan = Tuntutan::orderBy('created_at', 'desc')
-                ->whereBetween('created_at', [$startDate, $endDate])
-                ->where('status', $request->status)
-                ->get();
-        }*/
+        */
+        $tuntutan = Tuntutan::leftJoin('smoku_akademik', 'tuntutan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                    ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                    ->leftJoin('bk_status', 'tuntutan.status', '=', 'bk_status.kod_status')
+                    ->whereIn('tuntutan.status', ['5','6','7'])
+                    ->orderBy('tuntutan.updated_at', 'desc')
+                    ->select('tuntutan.*','smoku_akademik.id_institusi','bk_status.status as keputusan')
+                    ->get();
+        // dd($tuntutan);
+        
 
         $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();

@@ -22,6 +22,19 @@
             .nav{
                 margin-left: 20px!important;
             }
+            .dash {
+                width: 15px;
+                height: 1px;
+                background: black;
+                margin: 0 5px;
+                margin-bottom: 20px;
+                display: inline-block;
+                background-color: #fff; /* Set background color to white or your container's background color */
+            }
+
+            .form-filter {
+                margin-left: 20px !important; 
+            }
         </style>
     </head>
 
@@ -71,52 +84,76 @@
                                     <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
                                 </li>
                             </ul>
+
+                            <!--begin::Card title-->
+                            <div class="card-title">
+                                <!--begin::Search-->
+                                <div class="d-flex align-items-center position-relative my-1">
+                                    <input type="hidden" data-kt-subscription-table-filter="search" >
+                                </div>
+                                <!--end::Search-->
+                            </div>
+                            <!--begin::Card title-->
+
+                            <!--begin::Card toolbar-->
+                            <div class="card-toolbar">
+                                <!--begin::Toolbar-->
+                                <div class="d-flex justify-content-between mt-5 mb-0" data-kt-subscription-table-toolbar="base">
+                                    <!--begin::Filter-->
+                                    <div class="col-md-12" data-kt-subscription-table-filter="form">
+                                        <!--begin::Input group-->
+                                        <div class="row form-filter" >
+                                            <div class="col-md-4" style="display: flex; align-items: center;">
+                                                <div class="flex-grow-1">
+                                                    <input type="date" name="start_date" id="start_date" value="" class="form-control" />
+                                                </div>
+                                            
+                                                <div class="dash">-</div>
+                                            
+                                                <div class="flex-grow-1">
+                                                    <input type="date" name="end_date" id="end_date" value="" class="form-control" />
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-2">
+                                                <select name="status" class="form-select">
+                                                    <option value="">Pilih Keputusan</option>
+                                                    <option value="Lulus">Layak</option>
+                                                    <option value="Tidak Lulus">Tidak Layak</option>
+                                                </select>
+                                            </div> 
+
+                                            <div class="col-md-5">
+                                                <select id="institusiDropdown" name="institusi" class="form-select js-example-basic-single">
+                                                    <option value="">Pilih Institusi Pengajian</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-1 fv-row">
+                                                <!--begin::Actions-->
+                                                <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
+                                                    <i class="ki-duotone ki-filter fs-2">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                    </i>
+                                                </button>
+                                                <!--end::Actions-->
+                                            </div>
+                                        
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+                                    <!--end::Filter-->
+                                </div>
+                                <!--end::Toolbar-->
+                            </div>
+                            <!--end::Card toolbar-->
+
                             {{-- Content Navigation Bar --}}
                             <div class="tab-content" id="myTabContent">
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br>
-                                    <form action="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}" method="GET">
-                                        <div class="row" style="margin-left: 15px;">
-                                            <div class="col-md-2">
-                                                <label for="start_date">Dari:</label>
-                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
-                                            </div>
-
-                                            <div class="col-md-2">
-                                                <label for="end_date">Hingga:</label>
-                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <label for="end_date">Pilih Keputusan:</label>
-                                                <select name="status" class="form-select">
-                                                    <option value="">Semua Keputusan</option>
-                                                    <option value="5" {{ Request::get('status') == '5' ? 'selected' : '' }}>Dikembalikan</option>
-                                                    <option value="6" {{ Request::get('status') == '6' ? 'selected' : '' }}>Layak</option>
-                                                    <option value="7" {{ Request::get('status') == '7' ? 'selected' : '' }}>Tidak Layak</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <label for="institusi">Pilih Institusi:</label>
-                                                <select name="institusi" class="form-select js-example-basic-single">
-                                                    <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiBKOKU as $institusi)
-                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                            <div class="col-md-1">
-                                                <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
-                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable1" class="table table-bordered table-striped">
@@ -125,9 +162,11 @@
                                                         <th style="width: 15%"><b>ID Tuntutan</b></th>
                                                         <th style="width: 25%"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th style="width: 15%"><b>Peringkat Pengajian</b></th>
                                                         <th class="text-center" style="width: 17%"><b>Tarikh Kemaskini Keputusan</b></th>
                                                         <th class="text-center" style="width: 15%">Status Tuntutan</th>
+                                                        <th class="text-center" style="width: 15%">Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -139,6 +178,7 @@
                                                             $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->where('status', 1)->first();
                                                             $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
                                                             $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
+                                                            $id_institusi = $item['id_institusi'];
 
                                                             $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat)->value('peringkat');
 
@@ -179,6 +219,7 @@
                                                                 <td>{{$item->no_rujukan_tuntutan}}</td>
                                                                 <td style="width: 25%">{{$pemohon}}</td>
                                                                 <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                <td style="width: 20%">{{$id_institusi}}</td>
                                                                 <td>{{ucwords(strtolower($nama_peringkat))}}</td>
                                                                 <td class="text-center"> {{ \Carbon\Carbon::parse($item['tarikh_keputusan'])->format('d/m/Y') }}</td>
                                                                 @if($item['status'] == "6")
@@ -188,6 +229,8 @@
                                                                 @elseif($item['status'] == "7")
                                                                     <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @endif
+                                                                <td style="width: 15%">{{$item->keputusan}}</td>
+
                                                             </tr>
                                                             @endif
                                                        @endif
@@ -200,58 +243,19 @@
                                  {{-- BKOKU UA--}}
                                 <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <br>
-                                    <form action="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}" method="GET">
-                                        <div class="row" style="margin-left: 15px;">
-                                            <div class="col-md-2">
-                                                <label for="start_date">Dari:</label>
-                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
-                                            </div>
-
-                                            <div class="col-md-2">
-                                                <label for="end_date">Hingga:</label>
-                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <label for="end_date">Pilih Keputusan:</label>
-                                                <select name="status" class="form-select">
-                                                    <option value="">Semua Keputusan</option>
-                                                    <option value="5" {{ Request::get('status') == '5' ? 'selected' : '' }}>Dikembalikan</option>
-                                                    <option value="6" {{ Request::get('status') == '6' ? 'selected' : '' }}>Layak</option>
-                                                    <option value="7" {{ Request::get('status') == '7' ? 'selected' : '' }}>Tidak Layak</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <label for="institusi">Pilih Institusi:</label>
-                                                <select name="institusi" class="form-select js-example-basic-single">
-                                                    <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiUA as $institusi)
-                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                            <div class="col-md-1">
-                                                <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
-                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable1a" class="table table-bordered table-striped">
+                                            <table id="sortTable2" class="table table-bordered table-striped">
                                                 <thead>
                                                 <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                     <th style="width: 15%"><b>ID Tuntutan</b></th>
                                                     <th style="width: 25%"><b>Nama</b></th>
                                                     <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                    <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                     <th style="width: 15%"><b>Peringkat Pengajian</b></th>
                                                     <th class="text-center" style="width: 17%"><b>Tarikh Kemaskini Keputusan</b></th>
                                                     <th class="text-center" style="width: 15%">Status Tuntutan</th>
+                                                    <th class="text-center" style="width: 15%">Status</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -263,6 +267,7 @@
                                                         $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->where('status', 1)->first();
                                                         $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
                                                         $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
+                                                        $id_institusi = $item['id_institusi'];
 
                                                         $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat)->value('peringkat');
 
@@ -304,6 +309,7 @@
                                                                 <td style="width: 13%">{{$item->no_rujukan_tuntutan}}</td>
                                                                 <td style="width: 25%">{{$pemohon}}</td>
                                                                 <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                <td style="width: 20%">{{$id_institusi}}</td>
                                                                 <td style="width: 15%">{{ucwords(strtolower($nama_peringkat))}}</td>
                                                                 <td class="text-center" style="width: 17%"> {{ \Carbon\Carbon::parse($item['tarikh_keputusan'])->format('d/m/Y') }}</td>
                                                                 @if($item['status'] == "6")
@@ -313,6 +319,8 @@
                                                                 @elseif($item['status'] == "7")
                                                                     <td class="text-center" style="width: 15%"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @endif
+                                                                <td style="width: 13%">{{$item->keputusan}}</td>
+
                                                             </tr>
                                                         @endif
                                                     @endif
@@ -325,57 +333,19 @@
                                 {{-- PKK --}}
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <br>
-                                    <form action="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}" method="GET">
-                                        <div class="row" style="margin-left: 15px;">
-                                            <div class="col-md-2">
-                                                <label for="start_date">Dari:</label>
-                                                <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
-                                            </div>
-
-                                            <div class="col-md-2">
-                                                <label for="end_date">Hingga:</label>
-                                                <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <label for="end_date">Pilih Keputusan:</label>
-                                                <select name="status" class="form-select">
-                                                    <option value="">Semua Keputusan</option>
-                                                    <option value="5" {{ Request::get('status') == '5' ? 'selected' : '' }}>Dikembalikan</option>
-                                                    <option value="6" {{ Request::get('status') == '6' ? 'selected' : '' }}>Layak</option>
-                                                    <option value="7" {{ Request::get('status') == '7' ? 'selected' : '' }}>Tidak Layak</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="institusi">Pilih Institusi:</label>
-                                                <select name="institusi" class="form-select js-example-basic-single">
-                                                    <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiPPK as $institusi)
-                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                            <div class="col-md-1">
-                                                <br>
-                                                <button type="submit" class="btn btn-primary" style="width: 10%; padding-left: 10px;">
-                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-
                                     <div class="body">
                                         <div class="table-responsive">
-                                            <table id="sortTable2" class="table table-bordered table-striped">
+                                            <table id="sortTable3" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th style="width: 15%"><b>ID Tuntutan</b></th>
                                                         <th style="width: 25%"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th style="width: 15%"><b>Peringkat Pengajian</b></th>
                                                         <th class="text-center" style="width: 17%"><b>Tarikh Kemaskini Keputusan</b></th>
                                                         <th class="text-center" style="width: 15%">Status Tuntutan</th>
+                                                        <th class="text-center" style="width: 15%">Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -388,6 +358,7 @@
                                                             $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
                                                             $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
                                                             $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat)->value('peringkat');
+                                                            $id_institusi = $item['id_institusi'];
 
                                                             $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                             $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
@@ -425,6 +396,7 @@
                                                             <td style="width: 13%">{{$item->no_rujukan_tuntutan}}</td>
                                                             <td style="width: 25%">{{$pemohon}}</td>
                                                             <td style="width: 20%">{{$institusipengajian}}</td>
+                                                            <td style="width: 20%">{{$id_institusi}}</td>
                                                             <td style="width: 15%">{{ucwords(strtolower($nama_peringkat))}}</td>
                                                             <td class="text-center" style="width: 17%"> {{ \Carbon\Carbon::parse($item['tarikh_keputusan'])->format('d/m/Y') }}</td>
                                                             @if($item['status'] == "6")
@@ -434,6 +406,7 @@
                                                             @elseif($item['status'] == "7")
                                                                 <td class="text-center" style="width: 15%"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                             @endif
+                                                            <td style="width: 13%">{{$item->keputusan}}</td>
                                                         </tr>
                                                     @endif
                                                     @endforeach
@@ -450,27 +423,250 @@
         </div>
 
         <!-- Javascript -->
-        <script src="assets/bundles/libscripts.bundle.js"></script>
-        <script src="assets/bundles/vendorscripts.bundle.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        
+    <script>
+        // Initialize JavaScript variables with data from Blade
+        var bkokuList = @json($institusiPengajian);
+        var bkokuUAList = @json($institusiPengajianUA);
+        var ppkList = @json($institusiPengajianPPK);
 
-        <script>
-        $('#sortTable1').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [] // Disable initial sorting
+        $(document).ready(function() {
+            $('.export-container[data-program-code="BKOKU"]').show();
+            $('.export-container[data-program-code="UA"]').hide();
+            $('.export-container[data-program-code="PPK"]').hide();
+
+            $('.none-container').show(); // Hide export elements
+
+            // Add an event listener for tab clicks
+            $('.nav-link').on('click', function() {
+                // Get the ID of the active tab
+                var activeTabId = $(this).attr('id');
+
+                // Clear filters when changing tabs
+                clearFilters();
+
+                updateExportContainers(activeTabId);
+
+                // Update the institution dropdown based on the active tab
+                switch (activeTabId) {
+                    case 'bkoku-tab':
+                        updateInstitusiDropdown(bkokuList);
+                        break;
+                    case 'bkokuUA-tab':
+                        updateInstitusiDropdown(bkokuUAList);
+                        break;
+                    case 'ppk-tab':
+                        updateInstitusiDropdown(ppkList);
+                        break;
+                    // Add more cases if you have additional tabs
+                }
+            });
+
+            // Trigger the function for the default active tab (bkoku-tab)
+            updateInstitusiDropdown(bkokuList);
+
+            // Function to clear filters for all tables
+            function clearFilters() {
+                if (datatable1) {
+                    datatable1.search('').columns().search('').draw();
+                }
+                if (datatable) {
+                    datatable.search('').columns().search('').draw();
+                }
+                if (datatable2) {
+                    datatable2.search('').columns().search('').draw();
+                }
+            }
+
+            function updateExportContainers(activeTabId) {
+                // Hide all export containers initially
+                $('.export-container').hide();
+
+                // Show the export container based on the active tab
+                var programCode = getProgramCode(activeTabId);
+                $('.export-container[data-program-code="' + programCode + '"]').show();
+            }
+
+            function getProgramCode(activeTabId) {
+                switch (activeTabId) {
+                    case 'bkoku-tab':
+                        return 'BKOKU';
+                    case 'bkokuUA-tab':
+                        return 'UA';
+                    case 'ppk-tab':
+                        return 'PPK';
+                    // Add more cases if you have additional tabs
+                    default:
+                        return '';
+                }
+            }
+
+
+            // Function to update the institution dropdown
+            function updateInstitusiDropdown(institusiList) {
+                // Clear existing options
+                $('#institusiDropdown').empty();
+
+                // Add default option
+                $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
+
+                // Add options based on the selected tab
+                for (var i = 0; i < institusiList.length; i++) {
+                    $('#institusiDropdown').append('<option value="' + institusiList[i].id_institusi + '">' + institusiList[i].nama_institusi + '</option>');
+                }
+            }
         });
-        $('#sortTable1a').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [] // Disable initial sorting
+    </script>
+
+    <script>
+        
+
+        // Declare datatables in a higher scope to make them accessible
+        var datatable1, datatable, datatable2;
+
+        $(document).ready(function() {
+            // Initialize DataTables
+            initDataTable('#sortTable1', 'datatable1');
+            initDataTable('#sortTable2', 'datatable');
+            initDataTable('#sortTable3', 'datatable2');
+
+            // Log data for all tables
+            logTableData('Table 1 Data:', datatable1);
+            logTableData('Table 2 Data:', datatable);
+            logTableData('Table 3 Data:', datatable2);
         });
-	    $('#sortTable2').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [] // Disable initial sorting
+
+        function initDataTable(tableId, variableName) {
+            // Check if the datatable is already initialized
+            if ($.fn.DataTable.isDataTable(tableId)) {
+                // Destroy the existing DataTable instance
+                $(tableId).DataTable().destroy();
+            }
+
+            // Initialize the datatable and assign it to the global variable
+            window[variableName] = $(tableId).DataTable({
+                ordering: true, // Enable manual sorting
+                order: [], // Disable initial sorting
+                columnDefs: [
+                    { orderable: false, targets: [0] },
+                    { targets: [3], visible: false }, // Hide column (index 4)
+                    { type: 'date', targets: [5] },
+                    { targets: [7], visible: false } // Hide column (index 9)
+                ]
+            });
+        }
+
+        function applyFilter() {
+            var selectedInstitusi = $('[name="institusi"]').val();
+            var startDate = $('#start_date').val();
+            var endDate = $('#end_date').val();
+            var status = $('[name="status"]').val();
+            console.log(selectedInstitusi);
+            console.log(startDate);
+            console.log(endDate);
+            console.log(status);
+            
+            // Apply search filter and log data for all tables
+            applyAndLogFilter('Table 1', datatable1, selectedInstitusi, startDate, endDate, status);
+            applyAndLogFilter('Table 2', datatable, selectedInstitusi, startDate, endDate, status);
+            applyAndLogFilter('Table 3', datatable2, selectedInstitusi, startDate, endDate, status);
+           
+
+            
+            // var exportBKOKU = document.getElementById('exportBKOKU');
+            // exportBKOKU.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+            
+
+            // var exportUA = document.getElementById('exportUA');
+            // exportUA.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
+           
+
+            // var exportPPK = document.getElementById('exportPPK');
+            // exportPPK.href = "{{ route('senarai.keputusan.PPK.pdf', ['start_date' =>'" + startDate + "', 'end_date' =>'" + endDate + "', 'status' =>'" + status + "', 'institusi' =>'" + selectedInstitusi + "']) }}";
+           
+        }
+
+        function applyAndLogFilter(tableName, table, institusi, startDate, endDate, status) {
+            // Reset the search for all columns to ensure a clean filter
+            table.columns().search('').draw();
+
+            // Clear the previous search functions
+            $.fn.dataTable.ext.search = [];
+
+            // Apply date range filter
+            if (startDate || endDate) {
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
+                        let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
+
+                        let dateAdded = moment(data[5], 'DD/MM/YYYY');
+
+                        // Check if the date falls within the specified range
+                        let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
+                                    (!endDateObj || dateAdded.isSameOrBefore(endDateObj));
+
+                        if (result) {
+                            console.log('Date Range Filter Result: true');
+                            console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
+                            console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
+                            console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
+                        } else {
+                            console.log('Date Range Filter Result: false');
+                            console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
+                            console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
+                            console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
+                        }
+
+                        return result;
+                    }
+                );
+            }
+
+            // Apply search filter for institusi
+            if (institusi) {
+                table.column(3).search(institusi).draw();
+            }
+
+            // Apply search filter for status
+            if (status) {
+                table.column(7).search(status).draw();
+            }
+
+            // Log filtered data
+            console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
+
+            // Go to the first page for the table
+            table.page(0).draw(false);
+
+            // Log the data of visible rows on the first page for the table
+            console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
+        }
+
+
+        function logTableData(message, table) {
+            console.log(message, table.rows().data().toArray());
+        }
+    </script>
+
+    <script> 
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
         });
-        </script>
-        <script> 
-            $(document).ready(function() {
-                 $('.js-example-basic-single').select2();
-             });
-         </script> 
+    </script>   
+
+    <style>
+        .custom-width-btn {
+            width: 105px; 
+            height: 35px;
+        }
+        .custom-width-select {
+            width: 400px !important; /* Important to override other styles */
+        }
+        .form-select {
+            margin-left: 10px !important; 
+        }
+    </style>
 
 </x-default-layout>
