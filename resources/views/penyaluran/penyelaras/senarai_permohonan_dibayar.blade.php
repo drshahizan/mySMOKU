@@ -172,27 +172,27 @@
                                                                             @csrf
                                                                             <div class="mb-3">
                                                                                 <label for="yuranDibayar" class="col-form-label">Yuran Dibayar (RM) :</label>
-                                                                                <input type="number" step="0.01" class="form-control" id="yuranDibayar{{$item['id']}}" name="yuranDibayar" value="{{ $item->yuran_dibayar ?? '' }}">
+                                                                                <input type="number" step="0.01" class="form-control" id="yuranDibayar" name="yuranDibayar" value="{{ $item->yuran_dibayar ?? '' }}">
                                                                             </div>
 
                                                                             <div class="mb-3">
                                                                                 <label for="message-text" class="col-form-label">Wang Saku Dibayar (RM) :</label>
-                                                                                <input type="number" step="0.01" class="form-control" id="wangSakuDibayar{{$item['id']}}" name="wangSakuDibayar"  value="{{ $item->wang_saku_dibayar ?? '' }}">
+                                                                                <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar"  value="{{ $item->wang_saku_dibayar ?? '' }}">
                                                                             </div>
 
                                                                             <div class="mb-3">
                                                                                 <label for="recipient-name" class="col-form-label">No Baucer :</label>
-                                                                                <input type="text" class="form-control" id="noBaucer" name="noBaucer{{$item['id']}}"  value="{{ $item->no_baucer ?? '' }}">
+                                                                                <input type="text" class="form-control" id="noBaucer" name="noBaucer"  value="{{ $item->no_baucer ?? '' }}">
                                                                             </div>
                                                                             
                                                                             <div class="mb-3">
                                                                                 <label for="message-text" class="col-form-label">Perihal :</label>
-                                                                                <textarea class="form-control" id="perihal" name="perihal{{$item['id']}}"  value="{{ $item->perihal ?? '' }}">{{$item->perihal}}</textarea>
+                                                                                <textarea class="form-control" id="perihal" name="perihal"  value="{{ $item->perihal ?? '' }}">{{$item->perihal}}</textarea>
                                                                             </div>
 
                                                                             <div class="mb-3">
                                                                                 <label for="message-text" class="col-form-label">Tarikh Baucer :</label>
-                                                                                <input type="date" class="form-control" id="tarikhBaucer{{$item['id']}}" name="tarikhBaucer"  value="{{ $item->tarikh_baucer ?? '' }}">
+                                                                                <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer"  value="{{ $item->tarikh_baucer ?? '' }}">
                                                                             </div>
 
                                                                             <input type="hidden" name="permohonan_id" value="{{ $item['id'] }}">
@@ -313,7 +313,7 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-        
+
         <script>
             //sorting table
             $('#sortTable1').DataTable({
@@ -337,24 +337,8 @@
                             yuranDibayar: $('#yuranDibayar' + permohonanId).val(),
                             wangSakuDibayar: $('#wangSakuDibayar' + permohonanId).val(),
                             noBaucer: $('#noBaucer' + permohonanId).val(),
-                            perihal: $('[name="perihal' + permohonanId + '"]').text(),
+                            perihal: $('[name="perihal' + permohonanId + '"]').val(),
                             tarikhBaucer: $('#tarikhBaucer' + permohonanId).val(),
-                        },
-                        success: function (response) {
-                            if (response.status === 'success') {
-                                // Display sweet alert on success
-                                swal({
-                                    title: 'Success!',
-                                    text: response.message,
-                                    icon: 'success',
-                                }).then((value) => {
-                                    // Redirect to the original page
-                                    window.location.href = '/penyelaras/penyaluran/permohonan/dibayar';
-                                });
-                            } else {
-                                // Handle other cases if needed
-                                console.error('Error updating data:', response);
-                            }
                         },
                         error: function (error) {
                             console.error('Error fetching data:', error);
