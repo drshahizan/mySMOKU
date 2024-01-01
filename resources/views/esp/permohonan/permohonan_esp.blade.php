@@ -215,10 +215,8 @@
                                   <tr>
                                     <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
                                     <td class="text-center">
-                                      <a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#baucer{{$bkoku['id']}}" data-no-rujukan="{{$bkoku['no_rujukan_permohonan']}}">{{ $bkoku->no_rujukan_permohonan}}</a>
+                                      <a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#dokumenBKOKU{{$bkoku['id']}}" data-no-rujukan="{{$bkoku['no_rujukan_permohonan']}}">{{ $bkoku->no_rujukan_permohonan}}</a>
                                     </td>
-                                    {{-- <td style="width: 15%"><a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#baucer{{$item['id']}}" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{$item['no_rujukan_permohonan']}}</a></td> --}}
-                                    
                                     <td>{{$pemohon}}</td>
                                     <td>{{$namakursus}}</td>
                                     <td>{{$institusipengajian}}</td>
@@ -228,14 +226,13 @@
                                 @endif  
                               @endif
                               {{-- Modal --}}
-                              <div class="modal fade" id="baucer{{$bkoku['id']}}" tabindex="-1" aria-labelledby="baucer{{$bkoku['id']}}" aria-hidden="true">
+                              <div class="modal fade" id="dokumenBKOKU{{$bkoku['id']}}" tabindex="-1" aria-labelledby="dokumenBKOKU{{$bkoku['id']}}" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="modaldokumen{{$bkoku['id']}}">Salinan Dokumen Pemohon</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-
                                         <div class="modal-body">
                                           <!--begin::Accordion-->
                                           <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -330,6 +327,8 @@
                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_tamat');
                                 $program = DB::table('permohonan')->where('id',$bkoku['id'])->value('program');
 
+                                $dokumen = DB::table('permohonan_dokumen')->where('permohonan_id', $bkoku['id'])->get();
+
                                 // nama pemohon
                                 $text = ucwords(strtolower($nama_pemohon)); 
                                 $conjunctions = ['bin', 'binti'];
@@ -378,7 +377,9 @@
                                 @if ($jenis_institusi=="UA") 
                                   <tr>
                                     <td class="text-center" style="width: 4%"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
-                                    <td class="text-center" style="width: 15%">{{ $bkoku->no_rujukan_permohonan}}</td>
+                                    <td class="text-center">
+                                      <a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#dokumenUA{{$bkoku['id']}}" data-no-rujukan="{{$bkoku['no_rujukan_permohonan']}}">{{ $bkoku->no_rujukan_permohonan}}</a>
+                                    </td>
                                     <td style="width: 20%">{{$pemohon}}</td>
                                     <td style="width: 20%">{{$namakursus}}</td>
                                     <td style="width: 15%">{{$institusipengajian}}</td>
@@ -387,6 +388,60 @@
                                   </tr>
                                 @endif   
                               @endif
+                              {{-- Modal --}}
+                              <div class="modal fade" id="dokumenUA{{$bkoku['id']}}" tabindex="-1" aria-labelledby="dokumenUA{{$bkoku['id']}}" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="modaldokumen{{$bkoku['id']}}">Salinan Dokumen Pemohon</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <!--begin::Accordion-->
+                                          <div class="accordion" id="accordionPanelsStayOpenExample">
+                                              @php 
+                                                $i=1; $n=1;
+                                              @endphp
+                                              @foreach($dokumen as $item)
+                                                @php
+                                                  $dokumen_path = "/assets/dokumen/permohonan/".$item->dokumen;
+                                                  
+                                                  if ($item->id_dokumen == 1) {
+                                                      $dokumen_name = "No. Akaun Bank Islam";
+                                                  } elseif ($item->id_dokumen == 2) {
+                                                      $dokumen_name = "Surat Tawaran";
+                                                  } elseif ($item->id_dokumen == 3) {
+                                                      $dokumen_name = "Invois/Resit";
+                                                  } elseif ($item->id_dokumen == 4) {
+                                                      $dokumen_name = "Dokumen Tambahan " . $n;
+                                                      $n++;
+                                                  }
+                                              
+                                                  $i++;
+                                                @endphp
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="panelsStayOpen-heading{{$i}}">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{$i}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{$i}}">
+                                                            <b style="color: black!important">{{$dokumen_name}}</b>
+                                                        </button>
+                                                    </h2>
+                                                    <div id="panelsStayOpen-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading{{$i}}">
+                                                        <div class="accordion-body" style="text-align: center">
+                                                            <p>Catatan: {{$item->catatan}}</p>
+                                                            <embed src="{{$dokumen_path}}" width="90%" height="650px"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              @endforeach
+                                          </div>
+                                          <!--end::Accordion-->
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                          </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                              </div> 
                           @endforeach
                         </tbody>
                       </table>
@@ -431,6 +486,7 @@
                               $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
                               $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
                               $program = DB::table('permohonan')->where('id',$item['id'])->value('program');
+                              $dokumen = DB::table('permohonan_dokumen')->where('permohonan_id', $item['id'])->get();
 
                               // nama pemohon
                               $text = ucwords(strtolower($nama_pemohon)); 
@@ -479,13 +535,69 @@
                             @if($program == "PPK")
                               <tr>
                                 <td class="text-center" style="width: 4%"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
-                                <td class="text-center" style="width: 15%">{{ $item->no_rujukan_permohonan}}</td>
+                                <td class="text-center">
+                                  <a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#dokumenPPK{{$item['id']}}" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{ $item->no_rujukan_permohonan}}</a>
+                                </td>                                
                                 <td style="width: 25%">{{$pemohon}}</td>
                                 <td style="width: 25%">{{$namakursus}}</td>
                                 <td style="width: 20%">{{$institusipengajian}}</td>
                                 <td class="text-right" style="width: 12%">{{$item->wang_saku_disokong}}</td>
                               </tr>
-                            @endif  
+                            @endif
+                            {{-- Modal --}}
+                            <div class="modal fade" id="dokumenPPK{{$item['id']}}" tabindex="-1" aria-labelledby="dokumenPPK{{$item['id']}}" aria-hidden="true">
+                              <div class="modal-dialog modal-lg">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h1 class="modal-title fs-5" id="modaldokumen{{$item['id']}}">Salinan Dokumen Pemohon</h1>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <!--begin::Accordion-->
+                                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                                            @php 
+                                              $i=1; $n=1;
+                                            @endphp
+                                            @foreach($dokumen as $itemdokumen)
+                                              @php
+                                                $dokumen_path = "/assets/dokumen/permohonan/".$itemdokumen->dokumen;
+                                                
+                                                if ($itemdokumen->id_dokumen == 1) {
+                                                    $dokumen_name = "No. Akaun Bank Islam";
+                                                } elseif ($itemdokumen->id_dokumen == 2) {
+                                                    $dokumen_name = "Surat Tawaran";
+                                                } elseif ($itemdokumen->id_dokumen == 3) {
+                                                    $dokumen_name = "Invois/Resit";
+                                                } elseif ($itemdokumen->id_dokumen == 4) {
+                                                    $dokumen_name = "Dokumen Tambahan " . $n;
+                                                    $n++;
+                                                }
+                                            
+                                                $i++;
+                                              @endphp
+                                              <div class="accordion-item">
+                                                  <h2 class="accordion-header" id="panelsStayOpen-heading{{$i}}">
+                                                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{$i}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{$i}}">
+                                                          <b style="color: black!important">{{$dokumen_name}}</b>
+                                                      </button>
+                                                  </h2>
+                                                  <div id="panelsStayOpen-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading{{$i}}">
+                                                      <div class="accordion-body" style="text-align: center">
+                                                          <p>Catatan: {{$itemdokumen->catatan}}</p>
+                                                          <embed src="{{$dokumen_path}}" width="90%" height="650px"/>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                            @endforeach
+                                        </div>
+                                        <!--end::Accordion-->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                        </div>
+                                      </div>
+                                  </div> 
+                              </div>
+                            </div>  
                           @endforeach
                         </tbody>
                       </table>
