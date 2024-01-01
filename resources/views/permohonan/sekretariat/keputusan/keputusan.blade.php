@@ -140,7 +140,7 @@
                                                 </select>
                                             </div> 
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <select id="institusiDropdown" name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                 </select>
@@ -205,56 +205,6 @@
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br>
-                                    {{-- <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
-                                        <div class="row" style="margin-left: 15px;">
-                                            <div class="col-md-4" style="display: flex; align-items: center;">
-                                                <div class="flex-grow-1">
-                                                    <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
-                                                </div>
-                                            
-                                                <div class="dash">-</div>
-                                            
-                                                <div class="flex-grow-1">
-                                                    <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-2">
-                                                <select name="status" class="form-select">
-                                                    <option value="">Pilih Keputusan</option>
-                                                    <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
-                                                    <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
-                                                </select>
-                                            </div>                                            
-
-                                            <div class="col-md-3">
-                                                <select name="institusi" class="form-select js-example-basic-single">
-                                                    <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiBKOKU as $institusi)
-                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                    
-                                            <div class="col-md-1">
-                                                <button type="submit" class="btn btn-primary" style="width: 50%; padding-left: 10px;">
-                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                </button>
-                                            </div>
-
-                                            <div class="col-md-2" style="padding-left: 30px;"> 
-                                                <a href="{{ route('senarai.keputusan.BKOKU.pdf', [
-                                                    'start_date' => Request::get('start_date'),
-                                                    'end_date' => Request::get('end_date'),
-                                                    'status' => Request::get('status'),
-                                                    'institusi' => Request::get('institusi'),]) }}" 
-                                                    target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </form>    --}}
-                                    
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable1" class="table table-bordered table-striped">
@@ -351,56 +301,6 @@
                                 {{-- BKOKU UA --}}
                                 <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <br>
-                                    {{-- <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
-                                        <div class="row" style="margin-left: 15px;">
-                                            <div class="col-md-4" style="display: flex; align-items: center;">
-                                                <div class="flex-grow-1">
-                                                    <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
-                                                </div>
-                                            
-                                                <div class="dash">-</div>
-                                            
-                                                <div class="flex-grow-1">
-                                                    <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-2">
-                                                <select name="status" class="form-select">
-                                                    <option value="">Pilih Keputusan</option>
-                                                    <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
-                                                    <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
-                                                </select>
-                                            </div>     
-
-                                            <div class="col-md-3">
-                                                <select name="institusi" class="form-select js-example-basic-single">
-                                                    <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiUA as $institusi)
-                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                    
-                                            <div class="col-md-1">
-                                                <button type="submit" class="btn btn-primary" style="width: 50%; padding-left: 10px;">
-                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                </button>
-                                            </div>
-
-                                            <div class="col-md-2" style="padding-left: 5px;">
-                                                <a href="{{ route('senarai.keputusan.BKOKU.UA.pdf', [
-                                                    'start_date' => Request::get('start_date'),
-                                                    'end_date' => Request::get('end_date'),
-                                                    'status' => Request::get('status'),
-                                                    'institusi' => Request::get('institusi'),]) }}" 
-                                                    target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU UA
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </form>       --}}
-                                    
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable2" class="table table-bordered table-striped">
@@ -495,56 +395,6 @@
                                 {{-- PKK --}}
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <br>
-                                    {{-- <form action="{{ url('permohonan/sekretariat/keputusan') }}" method="GET">
-                                        <div class="row" style="margin-left: 15px;">
-                                            <div class="col-md-4" style="display: flex; align-items: center;">
-                                                <div class="flex-grow-1">
-                                                    <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
-                                                </div>
-                                            
-                                                <div class="dash">-</div>
-                                            
-                                                <div class="flex-grow-1">
-                                                    <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-2">
-                                                <select name="status" class="form-select">
-                                                    <option value="">Pilih Keputusan</option>
-                                                    <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Layak</option>
-                                                    <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Layak</option>
-                                                </select>
-                                            </div>     
-
-                                            <div class="col-md-3">
-                                                <select name="institusi" class="form-select js-example-basic-single">
-                                                    <option value="">Pilih Institusi Pengajian</option>
-                                                    @foreach ($institusiPPK as $institusi)
-                                                        <option value="{{ $institusi->id_institusi }}" {{ Request::get('institusi') == $institusi->id_institusi ? 'selected' : '' }}>{{ $institusi->nama_institusi }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                    
-                                            <div class="col-md-1">
-                                                <button type="submit" class="btn btn-primary" style="width: 50%; padding-left: 10px;">
-                                                    <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                </button>
-                                            </div>
-
-                                            <div class="col-md-2" style="padding-left: 50px;">
-                                                <a href="{{ route('senarai.keputusan.PPK.pdf', [
-                                                    'start_date' => Request::get('start_date'),
-                                                    'end_date' => Request::get('end_date'),
-                                                    'status' => Request::get('status'),
-                                                    'institusi' => Request::get('institusi'),]) }}" 
-                                                    target="_blank" class="btn btn-secondary btn-round">
-                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PPK
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </form>      --}}
-                
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable3" class="table table-bordered table-striped">
@@ -774,6 +624,10 @@
             var startDate = $('#start_date').val();
             var endDate = $('#end_date').val();
             var status = $('[name="status"]').val();
+            console.log(selectedInstitusi);
+            console.log(startDate);
+            console.log(endDate);
+            console.log(status);
             
             // Apply search filter and log data for all tables
             applyAndLogFilter('Table 1', datatable1, selectedInstitusi, startDate, endDate, status);
@@ -783,15 +637,15 @@
 
             
             var exportBKOKU = document.getElementById('exportBKOKU');
-            exportBKOKU.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+            exportBKOKU.href = "{{ route('senarai.keputusan.BKOKU.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
             
 
             var exportUA = document.getElementById('exportUA');
-            exportUA.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
-           
+            exportUA.href = "{{ route('senarai.keputusan.BKOKU.UA.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
+
 
             var exportPPK = document.getElementById('exportPPK');
-            exportPPK.href = "{{ route('senarai.keputusan.PPK.pdf', ['start_date' =>'" + startDate + "', 'end_date' =>'" + endDate + "', 'status' =>'" + status + "', 'institusi' =>'" + selectedInstitusi + "']) }}";
+            exportPPK.href = "{{ route('senarai.keputusan.PPK.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
            
         }
 
@@ -858,22 +712,22 @@
         }
     </script>
 
-        <script> 
-           $(document).ready(function() {
-			    $('.js-example-basic-single').select2();
-			});
-        </script>   
+    <script> 
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>   
 
-        <style>
-            .custom-width-btn {
-                width: 105px; 
-                height: 35px;
-            }
-            .custom-width-select {
-                width: 400px !important; /* Important to override other styles */
-            }
-            .form-select {
-                margin-left: 10px !important; 
-            }
-        </style>
+    <style>
+        .custom-width-btn {
+            width: 105px; 
+            height: 35px;
+        }
+        .custom-width-select {
+            width: 400px !important; /* Important to override other styles */
+        }
+        .form-select {
+            margin-left: 10px !important; 
+        }
+    </style>
 </x-default-layout> 
