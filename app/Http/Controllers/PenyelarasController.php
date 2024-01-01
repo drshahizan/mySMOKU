@@ -1927,7 +1927,7 @@ class PenyelarasController extends Controller
         $permohonan->save();
 
         // Flash a success message to the session
-        session()->flash('success', 'Maklumat Baucer telah berjaya dikemaskini.');
+        session()->flash('success', 'Maklumat baucer telah berjaya dikemaskini.');
 
         // Redirect to the original page
         return redirect('/penyelaras/penyaluran/permohonan/dibayar');
@@ -1946,7 +1946,7 @@ class PenyelarasController extends Controller
         $tuntutan->save();
 
         // Flash a success message to the session
-        session()->flash('success', 'Maklumat Baucer telah berjaya dikemaskini.');
+        session()->flash('success', 'Maklumat baucer telah berjaya dikemaskini.');
 
         // Redirect to the original page
         return redirect('/penyelaras/penyaluran/permohonan/dibayar');

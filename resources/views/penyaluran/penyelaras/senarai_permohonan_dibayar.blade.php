@@ -387,7 +387,7 @@
                         success: function (response) {
                             if (response.status === 'success') {
                                 // Display sweet alert on success
-                                swal({
+                                Swal.fire({
                                     title: 'Success!',
                                     text: 'Maklumat baucer telah berjaya dikemaskini.',
                                     icon: 'success',
@@ -425,7 +425,7 @@
                         success: function (response) {
                             if (response.status === 'success') {
                                 // Display sweet alert on success
-                                swal({
+                                Swal.fire({
                                     title: 'Success!',
                                     text: 'Maklumat baucer telah berjaya dikemaskini.',
                                     icon: 'success',

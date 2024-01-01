@@ -183,7 +183,7 @@
                                                             </tr>
 
                                                             {{-- Modal Baucer --}}
-                                                            <div class="modal fade" id="baucerPermohonan{{$item['id']}}" tabindex="-1" aria-labelledby="baucerPermohonan" aria-hidden="true">
+                                                            {{-- <div class="modal fade" id="baucerPermohonan{{$item['id']}}" tabindex="-1" aria-labelledby="baucerPermohonan" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -230,7 +230,7 @@
                                                                         </div>
                                                                     </div> 
                                                                 </div>
-                                                            </div>
+                                                            </div> --}}
                                                         @endif
                                                     @endforeach 
                                                 </tbody>
@@ -356,7 +356,7 @@
                                                             </tr>
 
                                                             {{-- Modal Baucer --}}
-                                                            <div class="modal fade" id="baucerTuntutan{{$item['id']}}" tabindex="-1" aria-labelledby="baucerTuntutan" aria-hidden="true">
+                                                            {{-- <div class="modal fade" id="baucerTuntutan{{$item['id']}}" tabindex="-1" aria-labelledby="baucerTuntutan" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -403,7 +403,7 @@
                                                                         </div>
                                                                     </div> 
                                                                 </div>
-                                                            </div>
+                                                            </div> --}}
                                                         @endif
                                                     @endforeach 
                                                 </tbody>
@@ -472,36 +472,36 @@
             @endif
 
             // Add a click event listener to the links with the "open-modal-link" class for permohonan
-            document.querySelectorAll('.open-modal-link-permohonan').forEach(function(link) {
-                link.addEventListener('click', function() {
-                    // Get the value of the data-no-rujukan attribute
-                    var noRujukan = link.getAttribute('data-no-rujukan');
+            // document.querySelectorAll('.open-modal-link-permohonan').forEach(function(link) {
+            //     link.addEventListener('click', function() {
+            //         // Get the value of the data-no-rujukan attribute
+            //         var noRujukan = link.getAttribute('data-no-rujukan');
 
-                    // Set the value to the hidden input in the modal for permohonan
-                    document.getElementById('clickedNoRujukan1').value = noRujukan;
+            //         // Set the value to the hidden input in the modal for permohonan
+            //         document.getElementById('clickedNoRujukan1').value = noRujukan;
 
-                    // Set the permohonan id value in the form action URL
-                    var permohonanId = link.getAttribute('data-permohonan-id');
-                    var form = document.getElementById('modalForm');
-                    form.action = form.action.replace(/\/\d+$/, '/' + permohonanId);
-                });
-            });
+            //         // Set the permohonan id value in the form action URL
+            //         var permohonanId = link.getAttribute('data-permohonan-id');
+            //         var form = document.getElementById('modalForm');
+            //         form.action = form.action.replace(/\/\d+$/, '/' + permohonanId);
+            //     });
+            // });
 
             // Add a click event listener to the links with the "open-modal-link" class for tuntutan
-            document.querySelectorAll('.open-modal-link-tuntutan').forEach(function(link) {
-                link.addEventListener('click', function() {
-                    // Get the value of the data-no-rujukan attribute
-                    var noRujukan = link.getAttribute('data-no-rujukan');
+            // document.querySelectorAll('.open-modal-link-tuntutan').forEach(function(link) {
+            //     link.addEventListener('click', function() {
+            //         // Get the value of the data-no-rujukan attribute
+            //         var noRujukan = link.getAttribute('data-no-rujukan');
 
-                    // Set the value to the hidden input in the modal for tuntutan
-                    document.getElementById('clickedNoRujukan2').value = noRujukan;
+            //         // Set the value to the hidden input in the modal for tuntutan
+            //         document.getElementById('clickedNoRujukan2').value = noRujukan;
 
-                    // Set the tuntutan id value in the form action URL
-                    var tuntutanId = link.getAttribute('data-tuntutan-id');
-                    var form = document.getElementById('modalForm');
-                    form.action = form.action.replace(/\/\d+$/, '/' + tuntutanId);
-                });
-            });
+            //         // Set the tuntutan id value in the form action URL
+            //         var tuntutanId = link.getAttribute('data-tuntutan-id');
+            //         var form = document.getElementById('modalForm');
+            //         form.action = form.action.replace(/\/\d+$/, '/' + tuntutanId);
+            //     });
+            // });
         </script>
     </body>
 </x-default-layout> 
