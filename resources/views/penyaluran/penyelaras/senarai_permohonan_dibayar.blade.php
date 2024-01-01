@@ -177,22 +177,22 @@
 
                                                                             <div class="mb-3">
                                                                                 <label for="message-text" class="col-form-label">Wang Saku Dibayar (RM) :</label>
-                                                                                <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar"  value="{{ $item->wang_saku_dibayar ?? '' }}">
+                                                                                <input type="number" step="0.01" class="form-control" id="wangSakuDibayar{{$item['id']}}" name="wangSakuDibayar"  value="{{ $item->wang_saku_dibayar ?? '' }}">
                                                                             </div>
 
                                                                             <div class="mb-3">
                                                                                 <label for="recipient-name" class="col-form-label">No Baucer :</label>
-                                                                                <input type="text" class="form-control" id="noBaucer" name="noBaucer"  value="{{ $item->no_baucer ?? '' }}">
+                                                                                <input type="text" class="form-control" id="noBaucer" name="noBaucer{{$item['id']}}"  value="{{ $item->no_baucer ?? '' }}">
                                                                             </div>
                                                                             
                                                                             <div class="mb-3">
                                                                                 <label for="message-text" class="col-form-label">Perihal :</label>
-                                                                                <textarea class="form-control" id="perihal" name="perihal"  value="{{ $item->perihal ?? '' }}"></textarea>
+                                                                                <textarea class="form-control" id="perihal" name="perihal{{$item['id']}}"  value="{{ $item->perihal ?? '' }}"></textarea>
                                                                             </div>
 
                                                                             <div class="mb-3">
                                                                                 <label for="message-text" class="col-form-label">Tarikh Baucer :</label>
-                                                                                <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer"  value="{{ $item->tarikh_baucer ?? '' }}">
+                                                                                <input type="date" class="form-control" id="tarikhBaucer{{$item['id']}}" name="tarikhBaucer"  value="{{ $item->tarikh_baucer ?? '' }}">
                                                                             </div>
 
                                                                             <input type="hidden" name="permohonan_id" value="{{ $item['id'] }}">
@@ -299,55 +299,6 @@
                                                             <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_baucer))}}</td>
                                                         </tr>
 
-                                                        {{-- Modal Baucer --}}
-                                                        {{-- <div class="modal fade" id="baucerPenyelaras_{{ $item['no_rujukan_permohonan'] }}" tabindex="-1" aria-labelledby="baucerPenyelarasLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Kemaskini Maklumat Pembayaran</h1>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div>
-
-                                                                    <div class="modal-body">
-                                                                        <!-- Form for single submission -->
-                                                                        <form action="#" method="GET" class="modal-form">
-                                                                            {{ csrf_field() }}
-                                                                            <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Yuran Dibayar :</label>
-                                                                                <input type="number" step="0.01" class="form-control" id="yuranDibayar" name="yuranDibayar"  value="{{ $maklumat->yuran_dibayar ?? '' }}">
-                                                                            </div>
-
-                                                                            <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Wang Saku Dibayar :</label>
-                                                                                <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar"  value="{{ $maklumat->wang_saku_dibayar ?? '' }}">
-                                                                            </div>
-
-                                                                            <div class="mb-3">
-                                                                                <label for="recipient-name" class="col-form-label">No Baucer :</label>
-                                                                                <input type="text" class="form-control" id="noBaucer" name="noBaucer"  value="{{ $maklumat->no_baucer ?? '' }}">
-                                                                            </div>
-                                                                            
-                                                                            <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Perihal :</label>
-                                                                                <textarea class="form-control" id="perihal" name="perihal"  value="{{ $maklumat->perihal ?? '' }}"></textarea>
-                                                                            </div>
-
-                                                                            <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Tarikh Baucer :</label>
-                                                                                <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer"  value="{{ $maklumat->tarikh_baucer ?? '' }}">
-                                                                            </div>
-
-                                                                            <input type="hidden" id="clickedNoRujukan">
-
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div> 
-                                                            </div>
-                                                        </div> --}}
                                                     @endif
                                                 @endforeach 
                                             </tbody>
@@ -384,8 +335,24 @@
                             yuranDibayar: $('#yuranDibayar' + permohonanId).val(),
                             wangSakuDibayar: $('#wangSakuDibayar' + permohonanId).val(),
                             noBaucer: $('#noBaucer' + permohonanId).val(),
-                            perihal: $('[name="perihal"]' + permohonanId).text(),
+                            perihal: $('[name="perihal' + permohonanId + '"]').text(),
                             tarikhBaucer: $('#tarikhBaucer' + permohonanId).val(),
+                        },
+                        success: function (response) {
+                            if (response.status === 'success') {
+                                // Display sweet alert on success
+                                swal({
+                                    title: 'Success!',
+                                    text: response.message,
+                                    icon: 'success',
+                                }).then((value) => {
+                                    // Redirect to the original page
+                                    window.location.href = '/penyelaras/penyaluran/permohonan/dibayar';
+                                });
+                            } else {
+                                // Handle other cases if needed
+                                console.error('Error updating data:', response);
+                            }
                         },
                         error: function (error) {
                             console.error('Error fetching data:', error);

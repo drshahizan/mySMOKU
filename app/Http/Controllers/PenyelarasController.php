@@ -1929,7 +1929,7 @@ class PenyelarasController extends Controller
         // You might want to customize the response based on your needs
         $response = [
             'status' => 'success',
-            'message' => 'Data updated successfully',
+            'message' => 'Maklumat Baucer telah berjaya dikemaskini.',
         ];
 
         return response()->json($response);
