@@ -157,7 +157,7 @@
                                                 <!--end::Actions-->
                                             </div>
                                         
-                                            <div class="col-md-1 export-container" data-program-code="BKOKU"> 
+                                            <div class="col-md-1 export-container" data-program-code="BKOKU" style="width:100%"> 
                                                 <a id="exportBKOKU" href="{{ route('senarai.keputusan.BKOKU.pdf', [
                                                     'start_date' => Request::get('start_date'),
                                                     'end_date' => Request::get('end_date'),
@@ -168,7 +168,7 @@
                                                 </a>
                                             </div>
 
-                                            <div class="col-md-1 export-container" data-program-code="UA">
+                                            <div class="col-md-1 export-container" data-program-code="UA" style="width:100%">
                                                 <a id="exportUA" href="{{ route('senarai.keputusan.BKOKU.UA.pdf', [
                                                     'start_date' => Request::get('start_date'),
                                                     'end_date' => Request::get('end_date'),
@@ -179,7 +179,7 @@
                                                 </a>
                                             </div>
                     
-                                            <div class="col-md-1 export-container" data-program-code="PPK">
+                                            <div class="col-md-1 export-container" data-program-code="PPK" style="width:100%">
                                                 <a id="exportPPK" href="{{ route('senarai.keputusan.PPK.pdf', [
                                                     'start_date' => '" + startDate + "',
                                                     'end_date' => '" + endDate + "',
