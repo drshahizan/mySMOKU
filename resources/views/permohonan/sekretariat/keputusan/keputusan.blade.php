@@ -120,7 +120,7 @@
                                     <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <!--begin::Input group-->
                                         <div class="row form-filter" >
-                                            <div class="col-md-3" style="display: flex; align-items: center;">
+                                            <div class="col-md-4" style="display: flex; align-items: center;">
                                                 <div class="flex-grow-1">
                                                     <input type="date" name="start_date" id="start_date" value="" class="form-control" />
                                                 </div>
@@ -140,7 +140,7 @@
                                                 </select>
                                             </div> 
 
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <select id="institusiDropdown" name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                 </select>
