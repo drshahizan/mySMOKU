@@ -8,10 +8,12 @@ use App\Models\Bandar;
 use App\Models\ButiranPelajar;
 use App\Models\Dun;
 use App\Models\Hubungan;
+use App\Models\InfoIpt;
 use App\Models\Keturunan;
 use App\Models\LanjutPengajian;
 use App\Models\Negeri;
 use App\Models\Parlimen;
+use App\Models\PeringkatPengajian;
 use App\Models\Permohonan;
 use App\Models\SejarahPermohonan;
 use App\Models\Smoku;
@@ -349,6 +351,7 @@ class PelajarController extends Controller
             ->first();
         // dd($smoku);    
         $butiranPelajar = ButiranPelajar::where('smoku_id', $smoku->smoku_id)->first();
+        
         // dd($butiranPelajar);
         $negeri = Negeri::all()->sortBy('id');
         $bandar = Bandar::all()->sortBy('id');
@@ -360,7 +363,11 @@ class PelajarController extends Controller
         $waris = Waris::where('smoku_id', $smoku->smoku_id)->first();
         $hubungan = Hubungan::all()->sortBy('kod_hubungan');
 
-        return view('kemaskini.pelajar.profil_pelajar',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','waris','hubungan'));
+        $akademik = Akademik::where('smoku_id', $smoku->smoku_id)->where('status', 1)->first();
+        $institusi = InfoIpt::orderby("id","asc")->select('id_institusi','nama_institusi')->get();
+
+
+        return view('kemaskini.pelajar.profil_pelajar',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','waris','hubungan','akademik','institusi'));
     }
 
     public function simpanProfilPelajar(Request $request)
@@ -368,6 +375,7 @@ class PelajarController extends Controller
         $smoku = Smoku::where('no_kp', Auth::user()->no_kp)->first();
         $butiran_pelajar = ButiranPelajar::where('smoku_id',$smoku->id)->first();
         $waris = Waris::where('smoku_id',$smoku->id)->first();
+        $akademik = Akademik::where('smoku_id',$smoku->id)->where('status', 1)->first();
         // dd($waris);
 
         // Get the current values
@@ -406,7 +414,12 @@ class PelajarController extends Controller
             'alamat_bandar_waris' => $waris->alamat_bandar_waris,
             'alamat_poskod_waris' => $waris->alamat_poskod_waris,
             'pekerjaan_waris' => $waris->pekerjaan_waris,
-            'pendapatan_waris' => $waris->pendapatan_waris
+            'pendapatan_waris' => $waris->pendapatan_waris,
+            'no_pendaftaran_pelajar' => $akademik->no_pendaftaran_pelajar,
+            'peringkat_pengajian' => $akademik->peringkat_pengajian,
+            'nama_kursus' => $akademik->nama_kursus,
+            'tempoh_pengajian' => $akademik->tempoh_pengajian,
+            'bil_bulan_per_sem' => $akademik->bil_bulan_per_sem,
         ];
         
 
@@ -466,6 +479,18 @@ class PelajarController extends Controller
     
                 ]);
         }
+
+        if($akademik != null) {
+            Akademik::where('smoku_id' ,$smoku->id)->where('status', 1)
+                ->update([
+                    'no_pendaftaran_pelajar' => $request->no_pendaftaran_pelajar,
+                    'peringkat_pengajian' => $request->peringkat_pengajian,
+                    'nama_kursus' => $request->nama_kursus,
+                    'tempoh_pengajian' => $request->tempoh_pengajian,
+                    'bil_bulan_per_sem' => $request->bil_bulan_per_sem
+    
+                ]);
+        }
     
         // Check if any updates were made
         $updatedValues = [
@@ -503,7 +528,12 @@ class PelajarController extends Controller
             'alamat_bandar_waris' => $request->alamat_bandar_waris,
             'alamat_poskod_waris' => $request->alamat_poskod_waris,
             'pekerjaan_waris' => $request->pekerjaan_waris,
-            'pendapatan_waris' => $request->pendapatan_waris
+            'pendapatan_waris' => $request->pendapatan_waris,
+            'no_pendaftaran_pelajar' => $request->no_pendaftaran_pelajar,
+            'peringkat_pengajian' => $request->peringkat_pengajian,
+            'nama_kursus' => $request->nama_kursus,
+            'tempoh_pengajian' => $request->tempoh_pengajian,
+            'bil_bulan_per_sem' => $request->bil_bulan_per_sem
         ];
 
         

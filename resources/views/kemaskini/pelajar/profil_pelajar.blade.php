@@ -11,12 +11,6 @@
 			font-size: 22px;
 		}
 	</style>
-	
-	<script>
-	$(document).ready(function(){
-		$('[data-bs-toggle="tooltip"]').tooltip();
-	});
-	</script>	
 
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
@@ -75,9 +69,31 @@
 						<!--end::Label-->
 					</div>
 					<!--end::Wrapper-->
+					<!--begin::Line-->
+					<div class="stepper-line h-40px"></div>
+					<!--end::Line-->
 				</div>
 				<!--end::Step 2-->
-				
+				<!--begin::Step 3-->
+				<div class="stepper-item" data-kt-stepper-element="nav">
+					<!--begin::Wrapper-->
+					<div class="stepper-wrapper">
+						<!--begin::Icon-->
+						<div class="stepper-icon w-40px h-40px">
+							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+							<span class="stepper-number">3</span>
+						</div>
+						<!--end::Icon-->
+						<!--begin::Label-->
+						<div class="stepper-label">
+							<h3 class="stepper-title">Maklumat Akademik</h3>
+							<div class="stepper-desc fw-semibold">Profil Akademik</div>
+						</div>
+						<!--end::Label-->
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Step 3-->
 			</div>
 			<!--end::Nav-->
 		</div>
@@ -545,7 +561,12 @@
 							</div>
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="16113020138680"><i class="fa-solid fa-circle-info"></i></a>
+								<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;
+								<td>
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="16113020138680">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</td>								
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
@@ -723,7 +744,12 @@
 							</div>
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="fs-6 fw-semibold form-label mb-2">Pendapatan Bulanan Waris</label>&nbsp;<a href="#" data-bs-toggle="tooltip" title="Nilai tanpa .00"><i class="fa-solid fa-circle-info"></i></a>
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Pendapatan Bulanan Waris&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Nilai tanpa .00">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</label>								
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
@@ -739,6 +765,115 @@
 					<!--end::Wrapper-->
 				</div>
 				<!--end::Step 2-->
+
+				<!--begin::Step 3-->
+				<div data-kt-stepper-element="content">
+					@csrf		
+						<!--begin::Wrapper-->
+						<div class="w-100">
+							<!--begin::Heading-->
+							<div class="pb-10 pb-lg-15">
+								<!--begin::Title-->
+								<h2 class="fw-bold text-dark">Maklumat Akademik</h2>
+								<!--end::Title-->
+								<!--begin::Notice-->
+								<div class="text-muted fw-semibold fs-6">Profil Akademik</div>
+								<!--end::Notice-->
+							</div>
+							<!--end::Heading-->
+							<!--begin::Input group-->
+							<div class="d-flex flex-column mb-7 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+									<span class="">Nama Pusat Pengajian</span>
+								</label>
+								<!--end::Label-->
+								<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" disabled>
+									@foreach ($institusi as $institusi)
+										<option value="{{$institusi->id_institusi}}" {{$akademik->id_institusi == $institusi->id_institusi ? 'selected' : ''}}>{{ strtoupper($institusi->nama_institusi)}}</option>
+									@endforeach
+								 </select>							 
+							</div>
+							<!--begin::Input group-->
+							<div class="row mb-10">
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+										<span class="">No Pendaftaran Pelajar</span>
+									</label>
+									<!--end::Label-->
+									<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="{{$akademik->no_pendaftaran_pelajar}}" />
+								</div>
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
+									<!--end::Label-->
+									<!--begin::Row-->
+									<div class="row fv-row">
+										<!--begin::Input wrapper-->
+										<input type="hidden" class="form-control form-control-solid" placeholder="" id="peringkat" name="peringkat" value="{{$akademik->peringkat_pengajian}}" />
+										<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option value=""></option>
+										</select>
+										<!--end::Input wrapper-->
+									</div>
+									<!--end::Row-->
+								</div>
+								<!--end::Col-->
+							</div>
+							<!--end::Input group-->
+							<div class="d-flex flex-column mb-7 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+									<span class="">Nama Kursus</span>
+								</label>
+								<!--end::Label-->
+								<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+									<option value="{{ $akademik->nama_kursus}}">{{ strtoupper($akademik->nama_kursus)}}</option>
+								</select>
+							</div>
+							<!--end::Input group-->
+							<div class="row mb-10">
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
+									<!--end::Label-->
+										<!--begin::Input wrapper-->
+										<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
+											<option></option>
+											@for($i = 1; $i <= 4; $i += 0.5)
+												@if($akademik->tempoh_pengajian == ($i == (int)$i ? (int)$i : number_format($i, 1)))
+													<option value="{{ ($i == (int)$i) ? (int)$i : $i }}" selected>{{ ($i == (int)$i) ? (int)$i : number_format($i, 1) }}</option>
+												@else
+													<option value="{{ ($i == (int)$i) ? (int)$i : $i }}">{{ ($i == (int)$i) ? (int)$i : number_format($i, 1) }}</option>
+												@endif
+											@endfor
+										</select>
+										<!--end::Input wrapper-->
+								</div>
+								<!--end::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">Bilangan Bulan Persemester</label>
+									<!--end::Label-->
+									<!--begin::Row-->
+									<div class="row fv-row">
+										<!--begin::Input wrapper-->
+											<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option value="4" {{$akademik->bil_bulan_per_sem == "4" ? 'selected' : ''}}>4</option>
+											<option value="6" {{$akademik->bil_bulan_per_sem == "6" ? 'selected' : ''}}>6</option>
+											</select>
+										<!--end::Input wrapper-->
+									</div>
+									<!--end::Row-->
+								</div>
+							</div>
+						</div>
+						<!--end::Wrapper-->
+						
+					</div>
+					<!--end::Step 3-->
 
 				<!--begin::Actions-->
 				<div class="d-flex flex-stack pt-10">
@@ -1052,6 +1187,110 @@
 				});
 			});
 
+
+		</script>
+		<script type='text/javascript'>
+			$(document).ready(function(){
+
+				// institusi Change
+				//$('#id_institusi').change(function(){
+
+					// institusi id
+					var id_institusi = document.getElementById("id_institusi").value; 
+					//alert (id_institusi);
+
+					// Empty the dropdown
+					$('#peringkat_pengajian').find('option').not(':first').remove();
+					$('#nama_kursus').find('option').not(':first').remove();
+
+					// AJAX request 
+					$.ajax({
+						url: '/peringkat/'+id_institusi,
+						type: 'get',
+						dataType: 'json',
+						success: function(response){
+							//alert('AJAX loaded something');
+
+							var len = 0;
+							if(response['data'] != null){
+								len = response['data'].length;
+							}
+
+							if(len > 0){
+								var selectedValue = document.getElementById("peringkat").value; 
+								// alert(selectedValue);
+								// Read data and create <option >
+								for(var i=0; i<len; i++){
+
+									var id_institusi = response['data'][i].id_institusi;
+									var kod_peringkat = response['data'][i].kod_peringkat;
+									var peringkat = response['data'][i].peringkat;
+
+									var isSelected = (kod_peringkat === selectedValue);
+
+    								var option = "<option value='" + kod_peringkat + "'" + (isSelected ? " selected" : "") + ">" + peringkat + "</option>";
+
+									$("#peringkat_pengajian").append(option); 
+								}
+							}
+
+						},
+						error: function(){
+						alert('AJAX load did not work');
+						}
+					});
+
+				//});
+
+				// peringkat Change
+				$('#peringkat_pengajian').change(function(){
+
+				// institusi id
+				var idipt = document.getElementById("id_institusi").value;
+				var kodperingkat = document.getElementById("peringkat_pengajian").value;
+
+				// Empty the dropdown
+				$('#nama_kursus').find('option').not(':first').remove();
+				//alert(idipt);
+
+
+				// AJAX request 
+				$.ajax({
+					url: '/kursus/'+kodperingkat+'/'+idipt,
+					type: 'get',
+					dataType: 'json',
+				
+					success: function(response){
+
+						var len = 0;
+						if(response['data'] != null){
+							len = response['data'].length;
+						}
+
+						if(len > 0){
+							// Read data and create <option >
+							for(var i=0; i<len; i++){
+
+								var id_institusi = response['data'][i].id_institusi;
+								var kod_peringkat = response['data'][i].kod_peringkat;
+								var nama_kursus = response['data'][i].nama_kursus;
+								var kod_nec = response['data'][i].kod_nec;
+								var bidang = response['data'][i].bidang.toUpperCase();
+								var uppercaseValue  = response['data'][i].nama_kursus.toUpperCase();
+
+								var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+" - "+kod_nec+" ( "+bidang+" )</option>";
+
+								$("#nama_kursus").append(option); 
+								
+							}
+						}
+
+					}
+				});
+
+				});
+		
+			});
 
 		</script>
 
