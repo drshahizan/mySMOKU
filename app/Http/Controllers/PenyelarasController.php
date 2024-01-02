@@ -1661,6 +1661,7 @@ class PenyelarasController extends Controller
         $endDate = $request->query('end_date');
         // $startDate = $request->input('start_date');
         // $endDate = $request->input('end_date');
+        dd($startDate, $endDate);
 
         return Excel::download(new PermohonanLayak($startDate, $endDate), 'senarai_permohonan__layak.xlsx');
     }
