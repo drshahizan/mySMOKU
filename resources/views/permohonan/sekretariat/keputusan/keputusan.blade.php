@@ -184,13 +184,11 @@
                                                     'start_date' => '" + startDate + "',
                                                     'end_date' => '" + endDate + "',
                                                     'status' => '" + status + "',
-                                                    'institusi' => '" + selectedInstitusi + "'
-                                                ]) }}" 
+                                                    'institusi' => '" + selectedInstitusi + "']) }}" 
                                                     target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PPK
                                                 </a>
                                             </div>
-                                            
                                         </div>
                                         <!--end::Input group-->
                                     </div>

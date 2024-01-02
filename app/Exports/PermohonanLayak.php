@@ -63,6 +63,9 @@ class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths,
             $query->whereBetween('permohonan.tarikh_hantar', [$startDateFormat, $endDateFormat]);
         }
 
+         // Add debugging statements
+        dd($query->toSql(), $query->getBindings());
+
         return $query->select(
             'permohonan.no_rujukan_permohonan',
             'b.nama',
