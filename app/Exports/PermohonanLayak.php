@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\Permohonan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
@@ -56,12 +57,13 @@ class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths,
             ->where('bk_info_institusi.id_institusi', $instiusi_user);
 
         if ($this->startDate && $this->endDate) {
-            // Format dates to 'Y-m-d' if needed
+            // Manually format dates
             $startDateFormat = Carbon::parse($this->startDate)->format('Y-m-d');
             $endDateFormat = Carbon::parse($this->endDate)->format('Y-m-d');
-
-            $query->whereBetween('permohonan.tarikh_hantar', [$startDateFormat, $endDateFormat]);
+        
+            $query->whereBetween(DB::raw('DATE(permohonan.tarikh_hantar)'), [$startDateFormat, $endDateFormat]);
         }
+            
 
          // Add debugging statements
         dd($query->toSql(), $query->getBindings());
