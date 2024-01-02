@@ -579,6 +579,62 @@
             $(document).ready(function() {
                 $('.export-container[data-program-code="permohonan"]').show();
                 $('.export-container[data-program-code="tuntutan"]').hide();
+                $('.none-container').show(); // Hide export elements
+
+                $('.nav-link').on('click', function() {
+                    var activeTabId = $(this).attr('id');
+                    clearFilters();
+                    updateExportContainers(activeTabId);
+                });
+
+                function clearFilters() {
+                    if (datatable1) {
+                        datatable1.search('').columns().search('').draw();
+                    }
+                    if (datatable2) {
+                        datatable2.search('').columns().search('').draw();
+                    }
+                }
+
+                function updateExportContainers(activeTabId) {
+                    $('.export-container').hide();
+                    var programCode = getProgramCode(activeTabId);
+                    $('.export-container[data-program-code="' + programCode + '"]').show();
+                }
+
+                function getProgramCode(activeTabId) {
+                    switch (activeTabId) {
+                        case 'permohonan-tab':
+                            return 'permohonan';
+                        case 'tuntutan-tab':
+                            return 'tuntutan';
+                        default:
+                            return '';
+                    }
+                }
+
+                // Add this script for the "Muat Turun" button
+                $('.export-container[data-program-code="permohonan"] form').on('submit', function() {
+                    var startDate = $('#start_date').val();
+                    var endDate = $('#end_date').val();
+                    console.log('Start Date:', startDate);
+                    console.log('End Date:', endDate);
+
+                    // Format the dates as "YYYY-MM-DD"
+                    startDate = moment(startDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
+                    endDate = moment(endDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
+
+                    // Set the hidden inputs with filter values before form submission
+                    $('#hidden_start_date').val(startDate);
+                    $('#hidden_end_date').val(endDate);
+                });
+            });
+        </script>
+
+        {{-- <script>
+            $(document).ready(function() {
+                $('.export-container[data-program-code="permohonan"]').show();
+                $('.export-container[data-program-code="tuntutan"]').hide();
 
                 $('.none-container').show(); // Hide export elements
 
@@ -642,6 +698,6 @@
                     });
                 }
             });
-        </script>
+        </script> --}}
     </body>
 </x-default-layout> 
