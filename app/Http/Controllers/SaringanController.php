@@ -493,7 +493,9 @@ class SaringanController extends Controller
 
     public function sejarahPermohonan(Request $request)
     {
-        $permohonan = Permohonan::whereIn('status', ['2','3','4','5'])->orderBy('tarikh_hantar', 'desc')->get();
+        // $permohonan = Permohonan::whereIn('status', ['2','3','4','5'])->orderBy('tarikh_hantar', 'desc')->get();
+        $permohonan = Permohonan::where('status', '!=','1')->orderBy('tarikh_hantar', 'desc')->get();
+        // dd($permohonan);
 
         $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();

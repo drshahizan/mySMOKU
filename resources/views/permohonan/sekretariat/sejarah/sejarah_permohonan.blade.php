@@ -145,19 +145,18 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @php
-                                                $i=0;
-                                            @endphp
+                                            
                                             @foreach ($permohonan as $item)
                                                 @if ($item['program']=="BKOKU")
                                                     @php
-                                                        $i++;
                                                         $rujukan = explode("/", $item['no_rujukan_permohonan']);
                                                         $peringkat = $rujukan[1];
                                                         $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->where('status', 1)->first();
-                                                        
-                                                        $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
-                                                       
+
+                                                        if ($akademik) {
+                                                            $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+                                                        }
+                                                      
                                                         $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
@@ -200,6 +199,7 @@
                                                         
                                                     @endphp
                                                     @if ($jenis_institusi!="UA")
+                                                    
                                                     <tr>
                                                         <td>
                                                             <a href="{{ url('permohonan/sekretariat/sejarah/rekod-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
@@ -223,6 +223,7 @@
                                                                     <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak
                                                                 </a>
                                                             </td>
+                                                           
                                                         @elseif ($item['status']=='7')
                                                             <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='8')
@@ -234,15 +235,20 @@
                                                         @elseif ($item['status']=='9')
                                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @endif
+                                                        
                                                     </tr>
                                                     @endif
+                                                    
                                                 @endif
+                                                
                                             @endforeach
+                                            
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
+                            
                             {{-- BKOKU UA --}}
                             <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                 <br>
@@ -469,6 +475,10 @@
         </div>
     </div>
     <style>
+        .custom-width-btn {
+                width: 131px; 
+                height: 30px;
+        }
         .custom-width-select {
             width: 400px !important; /* Important to override other styles */
         }
