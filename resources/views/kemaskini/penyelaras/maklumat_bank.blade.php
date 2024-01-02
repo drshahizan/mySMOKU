@@ -19,7 +19,7 @@
             color: white!important;
         }
         input{
-            width: 80%!important;
+            width: 100%!important;
         }
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -38,7 +38,6 @@
             position: relative;
             width: 80%; 
         }
-
         .form-control-arrow::after {
             content: '\25BC'; /* Unicode character for a black down-pointing triangle */
             position: absolute;
@@ -156,10 +155,10 @@
                                                 <td class="vertical-top w-13">Penyata Bank</td>
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
-                                                    <div class="file-input" style="width:100%;">
+                                                    <div class="file-input" style="width:50%;">
                                                         <input type="file" name="penyata"/>
                                                         @if(isset($bank->penyata_bank) && !empty($bank->penyata_bank))
-                                                            <a href="{{ asset('assets/dokumen/penyata_bank_islam/' . $bank->penyata_bank) }}" target="_blank">{{ $bank->penyata_bank }}</a>
+                                                            <a href="{{ asset('assets/dokumen/penyata_bank_islam/' . $bank->penyata_bank) }}" target="_blank" style="width:50%;">{{ $bank->penyata_bank }}</a>
                                                         @endif
                                                     </div>
                                                     <small style="font-size: 10px; font-style:italic; color: red!important;">**Format fail yang boleh dimuat naik adalah '.pdf' dan '.png' sahaja.</small>
