@@ -624,19 +624,23 @@
                         default:
                             return '';
                     }
+
+                    // Add this script for the "Muat Turun" button
+                    $('.export-container[data-program-code="permohonan"] button[type="submit"]').on('click', function() {
+                        var startDate = $('#start_date').val();
+                        var endDate = $('#end_date').val();
+                        console.log('Start Date:', startDate);
+                        console.log('End Date:', endDate);
+
+                        // Format the dates as "YYYY-MM-DD"
+                        startDate = moment(startDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
+                        endDate = moment(endDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
+
+                        // Set the hidden inputs with filter values before form submission
+                        $('#hidden_start_date').val(startDate);
+                        $('#hidden_end_date').val(endDate);
+                    });
                 }
-
-                // Add this script for the "Muat Turun" button
-                $('.export-container[data-program-code="permohonan"] a').on('click', function() {
-                    var startDate = $('#start_date').val();
-                    var endDate = $('#end_date').val();
-                    console.log('Start Date:', startDate);
-                    console.log('End Date:', endDate);
-
-                    // Set the hidden inputs with filter values
-                    $('#hidden_start_date').val(startDate);
-                    $('#hidden_end_date').val(endDate);
-                });
             });
         </script>
     </body>
