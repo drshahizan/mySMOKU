@@ -201,7 +201,7 @@
                             <!--end::Card toolbar-->
 
                             {{-- Content Navigation Bar --}}
-                            <div class="tab-content" id="myTabContent">
+                            <div class="tab-content mt-0" id="myTabContent">
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br>

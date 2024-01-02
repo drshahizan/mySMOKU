@@ -168,51 +168,6 @@
                             <div class="tab-content" id="myTabContent">
                                 {{-- Permohonan --}}
                                 <div class="tab-pane fade show active" id="permohonan" role="tabpanel" aria-labelledby="permohonan-tab">
-                                    {{-- <div class="row" style="margin-left: 15px;">
-                                        <form action="{{ url('penyelaras/penyaluran/permohonan-tuntutan/layak') }}" method="GET" class="col-md-5">
-                                            <div class="row" style="margin-bottom:0px!important">
-                                                <div class="col-md-5">
-                                                    <label for="start_date"><b>Dari:</b></label>
-                                                    <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
-                                                </div>
-                                    
-                                                <div class="col-md-5">
-                                                    <label for="end_date"><b>Hingga:</b></label>
-                                                    <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                                </div>
-                                    
-                                                <div class="col-md-2">
-                                                    <br>
-                                                    <button type="submit" class="btn btn-primary w-30" style="padding-right:15px;">
-                                                        <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                        <div class="col-md-7" style="padding-left: 280px;">
-                                            <br>
-                                            <div class="row" style="margin-bottom:0px!important">
-                                                <div class="col-md-6">
-                                                    <a href="{{ route('penyelaras.permohonan.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
-                                                        <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
-                                                    </a>
-                                                </div>
-                                        
-                                                <div class="col-md-6">
-                                                    <form id="uploadForm1" action="{{ route('modified.file.pembayaran.permohonan') }}" method="POST" enctype="multipart/form-data">
-                                                        @csrf
-                                                        <input type="file" name="modified_excel_file1" accept=".xlsx, .xls" style="display: none" onchange="fileSelected1(event)">
-                                                        <input type="hidden" name="form_submitted1" id="formSubmitted1" value="0">
-                                                        <button type="button" class="btn btn-secondary btn-round" onclick="uploadFilePermohonan()"> 
-                                                            <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Muat Naik
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-
                                     <div class="body">
                                         {{-- <form action="{{ route('penyelaras.bulk.submit') }}" method="POST" id="modalForm">
                                             {{csrf_field()}} --}}
@@ -338,51 +293,6 @@
 
                                 {{-- Tuntutan --}}
                                 <div class="tab-pane fade" id="tuntutan" role="tabpanel" aria-labelledby="tuntutan-tab">
-                                    {{-- <div class="row" style="margin-left: 15px;">
-                                        <form action="{{ url('penyelaras/penyaluran/permohonan-tuntutan/layak') }}" method="GET" class="col-md-5">
-                                            <div class="row" style="margin-bottom:0px!important">
-                                                <div class="col-md-5">
-                                                    <label for="start_date"><b>Dari:</b></label>
-                                                    <input type="date" name="start_date" id="start_date" value="{{ Request::get('start_date') }}" class="form-control" />
-                                                </div>
-                                    
-                                                <div class="col-md-5">
-                                                    <label for="end_date"><b>Hingga:</b></label>
-                                                    <input type="date" name="end_date" id="end_date" value="{{ Request::get('end_date') }}" class="form-control" />
-                                                </div>
-                                    
-                                                <div class="col-md-2">
-                                                    <br>
-                                                    <button type="submit" class="btn btn-primary w-30" style="padding-right:15px;">
-                                                        <i class="fa fa-filter" style="font-size: 15px;"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                        <div class="col-md-7" style="padding-left: 280px;">
-                                            <br>
-                                            <div class="row" style="margin-bottom:0px!important">
-                                                <div class="col-md-6">
-                                                    <a href="{{ route('penyelaras.tuntutan.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
-                                                        <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
-                                                    </a>
-                                                </div>
-                                        
-                                                <div class="col-md-6">
-                                                    <form id="uploadForm2" action="{{ route('modified.file.pembayaran.tuntutan') }}" method="POST" enctype="multipart/form-data">
-                                                        @csrf
-                                                        <input type="file" name="modified_excel_file2" accept=".xlsx, .xls" style="display: none" onchange="fileSelected2(event)">
-                                                        <input type="hidden" name="form_submitted2" id="formSubmitted2" value="0">
-                                                        <button type="button" class="btn btn-secondary btn-round" onclick="uploadFileTuntutan()"> 
-                                                            <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Muat Naik
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-
                                     <div class="body">
                                         {{-- <form action="{{ route('penyelaras.bulk.submit') }}" method="POST" id="modalForm">
                                             {{csrf_field()}} --}}

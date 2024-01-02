@@ -115,7 +115,7 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <select name="status" class="form-select">
                                                     <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus">Layak</option>
@@ -123,7 +123,7 @@
                                                 </select>
                                             </div> 
 
-                                            <div class="col-md-5">
+                                            <div class="col-md-3">
                                                 <select id="institusiDropdown" name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                 </select>
@@ -150,7 +150,7 @@
                             <!--end::Card toolbar-->
 
                             {{-- Content Navigation Bar --}}
-                            <div class="tab-content" id="myTabContent">
+                            <div class="tab-content mt-0" id="myTabContent">
                                 {{-- BKOKU --}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
                                     <br>
