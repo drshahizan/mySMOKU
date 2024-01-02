@@ -121,12 +121,15 @@
                                             <div class="col-md-4 export-container" data-program-code="permohonan">
                                                 <div class="row" style="margin-bottom:0px!important"> 
                                                     <div class="col-md-6">
-                                                        <a href="{{ route('penyelaras.permohonan.senarai.layak.excel', ['start_date' => request('start_date'), 'end_date' => request('end_date')]) }}" target="_blank" class="btn btn-secondary btn-round">
-                                                            <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
-                                                        </a>
-                                                        {{-- <a href="{{ route('penyelaras.permohonan.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
-                                                            <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
-                                                        </a> --}}
+                                                        <form action="{{ route('penyelaras.permohonan.senarai.layak.excel') }}" method="GET" target="_blank">
+                                                            @csrf
+                                                            <input type="hidden" name="start_date" id="hidden_start_date">
+                                                            <input type="hidden" name="end_date" id="hidden_end_date">
+                                                                                                                
+                                                            <button type="submit" class="btn btn-secondary btn-round">
+                                                                <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
+                                                            </button>
+                                                        </form>
                                                     </div>
                                         
                                                     <div class="col-md-6">
@@ -622,6 +625,18 @@
                             return '';
                     }
                 }
+
+                // Add this script for the "Muat Turun" button
+                $('.export-container[data-program-code="permohonan"] a').on('click', function() {
+                    var startDate = $('#start_date').val();
+                    var endDate = $('#end_date').val();
+                    console.log('Start Date:', startDate);
+                    console.log('End Date:', endDate);
+
+                    // Set the hidden inputs with filter values
+                    $('#hidden_start_date').val(startDate);
+                    $('#hidden_end_date').val(endDate);
+                });
             });
         </script>
     </body>
