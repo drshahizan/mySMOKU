@@ -149,7 +149,7 @@
                                                 <td class="vertical-top w-13">No. Akaun Bank</td>
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
-                                                    <input type="text" class="form-control" id="no_acc" name="no_acc" value="{{$bank->no_akaun ?? ''}}" oninvalid="this.setCustomValidity('Sila isi ruang ini dengan nombor akaun bank institusi anda.')" oninput="setCustomValidity('')" required>
+                                                    <input type="text" class="form-control" id="no_acc" name="no_acc" value="{{$bank->no_akaun ?? ''}}" pattern="\d+" title="Sila masukkan nombor sahaja." oninvalid="this.setCustomValidity('Sila isi ruang ini dengan nombor akaun bank institusi anda.')" oninput="setCustomValidity('')" required>
                                                 </td>
                                             </tr>
                                             <tr>
