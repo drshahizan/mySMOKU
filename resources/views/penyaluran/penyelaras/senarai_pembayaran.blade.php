@@ -123,9 +123,9 @@
                                                     <div class="col-md-6">
                                                         <form action="{{ route('penyelaras.permohonan.senarai.layak.excel') }}" method="GET" target="_blank">
                                                             @csrf
-                                                            <input type="hidden" name="start_date" id="hidden_start_date">
-                                                            <input type="hidden" name="end_date" id="hidden_end_date">
-                                                                                                                
+                                                            <input type="hidden" name="start_date" id="permohonan_hidden_start_date">
+                                                            <input type="hidden" name="end_date" id="permohonan_hidden_end_date">
+
                                                             <button type="submit" class="btn btn-secondary btn-round">
                                                                 <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
                                                             </button>
@@ -150,9 +150,9 @@
                                                     <div class="col-md-6">
                                                         <form action="{{ route('penyelaras.tuntutan.senarai.layak.excel') }}" method="GET" target="_blank">
                                                             @csrf
-                                                            <input type="hidden" name="start_date" id="hidden_start_date">
-                                                            <input type="hidden" name="end_date" id="hidden_end_date">
-                                                                                                                
+                                                            <input type="hidden" name="start_date" id="tuntutan_hidden_start_date">
+                                                            <input type="hidden" name="end_date" id="tuntutan_hidden_end_date">
+
                                                             <button type="submit" class="btn btn-secondary btn-round">
                                                                 <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
                                                             </button>
@@ -619,7 +619,6 @@
                     }
                 }
 
-
                 // Add this script for the "Muat Turun" button permohonan
                 $('.export-container[data-program-code="permohonan"] form').on('submit', function() {
                     var startDate = $('#start_date').val();
@@ -632,13 +631,12 @@
                     endDate = moment(endDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
 
                     // Set the hidden inputs with filter values before form submission
-                    $('#hidden_start_date').val(startDate);
-                    $('#hidden_end_date').val(endDate);
+                    $('#permohonan_hidden_start_date').val(startDate);
+                    $('#permohonan_hidden_end_date').val(endDate);
                 });
 
-
                 // Add this script for the "Muat Turun" button tuntutan
-                 $('.export-container[data-program-code="tuntutan"] form').on('submit', function() {
+                $('.export-container[data-program-code="tuntutan"] form').on('submit', function() {
                     var startDate = $('#start_date').val();
                     var endDate = $('#end_date').val();
                     console.log('Start Date:', startDate);
@@ -649,9 +647,10 @@
                     endDate = moment(endDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
 
                     // Set the hidden inputs with filter values before form submission
-                    $('#hidden_start_date').val(startDate);
-                    $('#hidden_end_date').val(endDate);
+                    $('#tuntutan_hidden_start_date').val(startDate);
+                    $('#tuntutan_hidden_end_date').val(endDate);
                 });
+
             });
         </script>
     </body>
