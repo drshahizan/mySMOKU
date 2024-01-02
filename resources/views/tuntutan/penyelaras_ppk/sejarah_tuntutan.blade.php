@@ -127,7 +127,7 @@
                                                         <td class="text-center">
                                                             <a href="{{ route('ppk.tuntutan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan tuntutan ini?')">
                                                                 <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Tuntutan">
-                                                                    <i class="fa fa-cancel fa-sm custom-white-icon" style="color: #000000;"></i>
+                                                                    <i class="fa fa-times-circle fa-sm custom-white-icon" style="color: red"></i>
                                                                 </span>
                                                             </a>
                                                         </td>

@@ -415,7 +415,7 @@ class TuntutanController extends Controller
 
         $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$id)->first();
         $tuntutan_id = Tuntutan::orderBy('id', 'desc')->where('smoku_id',$id)->where('permohonan_id',$permohonan_id->id)->first();
-        DB::table('tuntutan')->orderBy('id', 'desc')->where('smoku_id',$id)->where('permohonan_id',$permohonan_id->id)->where('id',$tuntutan_id->id)
+        DB::table('tuntutan')->orderBy('id', 'asc')->where('smoku_id',$id)->where('permohonan_id',$permohonan_id->id)->where('id',$tuntutan_id->id)
             ->update([
                 'status' => 9
             ]);
