@@ -15,14 +15,11 @@ use Carbon\Carbon;
 
 class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
     protected $dateFormat = 'd/m/Y';
     protected $startDate;
     protected $endDate;
 
-    public function __construct($startDate, $endDate)
+    public function __construct($startDate = null, $endDate = null)
     {
         $this->startDate = $startDate;
         $this->endDate = $endDate;
@@ -56,17 +53,25 @@ class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths,
             ->where('permohonan.status', 6)
             ->where('bk_info_institusi.id_institusi', $instiusi_user);
 
+        // if ($this->startDate && $this->endDate) {
+        //     // Manually format dates
+        //     $startDateFormat = Carbon::parse($this->startDate)->format('Y-m-d');
+        //     $endDateFormat = Carbon::parse($this->endDate)->format('Y-m-d');
+        
+        //     $query->whereBetween(DB::raw('DATE(permohonan.tarikh_hantar)'), [$startDateFormat, $endDateFormat]);
+        // }
+            
         if ($this->startDate && $this->endDate) {
             // Manually format dates
             $startDateFormat = Carbon::parse($this->startDate)->format('Y-m-d');
             $endDateFormat = Carbon::parse($this->endDate)->format('Y-m-d');
         
-            $query->whereBetween(DB::raw('DATE(permohonan.tarikh_hantar)'), [$startDateFormat, $endDateFormat]);
-        }
-            
+            $query->where('permohonan.tarikh_hantar', '>=', $startDateFormat)
+                  ->where('permohonan.tarikh_hantar', '<=', $endDateFormat);
+        }        
 
          // Add debugging statements
-        dd($query->toSql(), $query->getBindings());
+        // dd($query->toSql(), $query->getBindings());
 
         return $query->select(
             'permohonan.no_rujukan_permohonan',

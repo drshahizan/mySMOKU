@@ -1657,8 +1657,10 @@ class PenyelarasController extends Controller
     //PENYALURAN - PEMBAYARAN - PERMOHONAN
     public function exportPermohonanLayak(Request $request)
     {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
+        $startDate = $request->query('start_date');
+        $endDate = $request->query('end_date');
+        // $startDate = $request->input('start_date');
+        // $endDate = $request->input('end_date');
 
         return Excel::download(new PermohonanLayak($startDate, $endDate), 'senarai_permohonan__layak.xlsx');
     }
