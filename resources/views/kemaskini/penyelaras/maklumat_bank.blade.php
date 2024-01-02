@@ -32,7 +32,7 @@
         .file-input {
             display: flex; 
             align-items: center;
-            padding-right: 50px; 
+            padding-right: 200px; 
         }
         .form-control-arrow {
             position: relative;
