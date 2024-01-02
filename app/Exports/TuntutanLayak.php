@@ -18,6 +18,14 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
     * @return \Illuminate\Support\Collection
     */
     protected $dateFormat = 'd/m/Y';
+    protected $startDate;
+    protected $endDate;
+
+    public function __construct($startDate = null, $endDate = null)
+    {
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
+    }
 
     public function collection()
     {
@@ -25,12 +33,17 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
         $instiusi_user = Auth::user()->id_institusi;
 
         // Fetch data from the database based on the institusi ID
-        $senarai = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
+        $query = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
             ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tuntutan.smoku_id')
             ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
             ->where('tuntutan.status', 6)
-            ->where('bk_info_institusi.id_institusi', $instiusi_user)
-            ->select(
+            ->where('bk_info_institusi.id_institusi', $instiusi_user);
+
+        if ($this->startDate && $this->endDate) {
+            $query->whereBetween('permohonan.tarikh_hantar', [$this->startDate, $this->endDate]);
+        }
+    
+        return $query->select(
                 'tuntutan.no_rujukan_tuntutan',
                 'b.nama',
                 'tuntutan.yuran_disokong',
@@ -38,8 +51,6 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
                 'tuntutan.tarikh_hantar'
             )
             ->get();
-        
-        return $senarai;
     }
 
     public function headings(): array

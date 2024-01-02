@@ -148,9 +148,15 @@
                                             <div class="col-md-4 export-container" data-program-code="tuntutan"> 
                                                 <div class="row" style="margin-bottom:0px!important"> 
                                                     <div class="col-md-6">
-                                                        <a href="{{ route('penyelaras.tuntutan.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
-                                                            <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
-                                                        </a>
+                                                        <form action="{{ route('penyelaras.tuntutan.senarai.layak.excel') }}" method="GET" target="_blank">
+                                                            @csrf
+                                                            <input type="hidden" name="start_date" id="hidden_start_date">
+                                                            <input type="hidden" name="end_date" id="hidden_end_date">
+                                                                                                                
+                                                            <button type="submit" class="btn btn-secondary btn-round">
+                                                                <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
+                                                            </button>
+                                                        </form>
                                                     </div>
                                             
                                                     <div class="col-md-6">
@@ -613,8 +619,26 @@
                     }
                 }
 
-                // Add this script for the "Muat Turun" button
+
+                // Add this script for the "Muat Turun" button permohonan
                 $('.export-container[data-program-code="permohonan"] form').on('submit', function() {
+                    var startDate = $('#start_date').val();
+                    var endDate = $('#end_date').val();
+                    console.log('Start Date:', startDate);
+                    console.log('End Date:', endDate);
+
+                    // Format the dates as "YYYY-MM-DD"
+                    startDate = moment(startDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
+                    endDate = moment(endDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
+
+                    // Set the hidden inputs with filter values before form submission
+                    $('#hidden_start_date').val(startDate);
+                    $('#hidden_end_date').val(endDate);
+                });
+
+
+                // Add this script for the "Muat Turun" button tuntutan
+                 $('.export-container[data-program-code="tuntutan"] form').on('submit', function() {
                     var startDate = $('#start_date').val();
                     var endDate = $('#end_date').val();
                     console.log('Start Date:', startDate);
@@ -630,74 +654,5 @@
                 });
             });
         </script>
-
-        {{-- <script>
-            $(document).ready(function() {
-                $('.export-container[data-program-code="permohonan"]').show();
-                $('.export-container[data-program-code="tuntutan"]').hide();
-
-                $('.none-container').show(); // Hide export elements
-
-                $('.nav-link').on('click', function() 
-                {
-                    // Get the ID of the active tab
-                    var activeTabId = $(this).attr('id');
-
-                    // Clear filters when changing tabs
-                    clearFilters();
-
-                    updateExportContainers(activeTabId);
-                });
-
-                // Function to clear filters for all tables
-                function clearFilters() 
-                {
-                    if (datatable1) {
-                        datatable1.search('').columns().search('').draw();
-                    }
-                    if (datatable2) {
-                        datatable2.search('').columns().search('').draw();
-                    }
-                }
-
-                function updateExportContainers(activeTabId) 
-                {
-                    // Hide all export containers initially
-                    $('.export-container').hide();
-
-                    // Show the export container based on the active tab
-                    var programCode = getProgramCode(activeTabId);
-                    $('.export-container[data-program-code="' + programCode + '"]').show();
-                }
-
-                function getProgramCode(activeTabId) 
-                {
-                    switch (activeTabId) {
-                        case 'permohonan-tab':
-                            return 'permohonan';
-                        case 'tuntutan-tab':
-                            return 'tuntutan';
-                        default:
-                            return '';
-                    }
-
-                    // Add this script for the "Muat Turun" button
-                    $('.export-container[data-program-code="permohonan"] button[type="submit"]').on('click', function() {
-                        var startDate = $('#start_date').val();
-                        var endDate = $('#end_date').val();
-                        console.log('Start Date:', startDate);
-                        console.log('End Date:', endDate);
-
-                        // Format the dates as "YYYY-MM-DD"
-                        startDate = moment(startDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
-                        endDate = moment(endDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
-
-                        // Set the hidden inputs with filter values before form submission
-                        $('#hidden_start_date').val(startDate);
-                        $('#hidden_end_date').val(endDate);
-                    });
-                }
-            });
-        </script> --}}
     </body>
 </x-default-layout> 

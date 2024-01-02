@@ -1771,9 +1771,12 @@ class PenyelarasController extends Controller
     }
 
     //PENYALURAN - PEMBAYARAN - TUNTUTAN
-    public function exportTuntutanLayak()
+    public function exportTuntutanLayak(Request $request)
     {
-        return Excel::download(new TuntutanLayak, 'senarai_tuntutan__layak.xlsx');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        
+        return Excel::download(new TuntutanLayak($startDate, $endDate), 'senarai_tuntutan__layak.xlsx');
     }
 
     public function uploadedFilePembayaranTuntutan(Request $request)

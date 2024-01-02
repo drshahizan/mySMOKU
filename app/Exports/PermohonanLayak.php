@@ -30,23 +30,6 @@ class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths,
         // Get the institusi ID of the logged-in user
         $instiusi_user = Auth::user()->id_institusi;
 
-        // // Fetch data from the database based on the institusi ID
-        // $senarai = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
-        //     ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
-        //     ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
-        //     ->where('permohonan.status', 6)
-        //     ->where('bk_info_institusi.id_institusi', $instiusi_user)
-        //     ->select(
-        //         'permohonan.no_rujukan_permohonan',
-        //         'b.nama',
-        //         'permohonan.yuran_disokong',
-        //         'permohonan.wang_saku_disokong',
-        //         'permohonan.tarikh_hantar'
-        //     )
-        //     ->get();
-        
-        // return $senarai;
-
         $query = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
             ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
             ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
@@ -58,12 +41,12 @@ class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths,
         }
 
         return $query->select(
-            'permohonan.no_rujukan_permohonan',
-            'b.nama',
-            'permohonan.yuran_disokong',
-            'permohonan.wang_saku_disokong',
-            'permohonan.tarikh_hantar'
-        )->get();
+                'permohonan.no_rujukan_permohonan',
+                'b.nama',
+                'permohonan.yuran_disokong',
+                'permohonan.wang_saku_disokong',
+                'permohonan.tarikh_hantar'
+            )->get();
     }
 
     public function headings(): array
