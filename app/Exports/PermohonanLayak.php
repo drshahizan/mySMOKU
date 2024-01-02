@@ -12,34 +12,60 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Carbon\Carbon;
 
-class PermohonanLayakExport implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
+class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     protected $dateFormat = 'd/m/Y';
+    protected $startDate;
+    protected $endDate;
+
+    public function __construct($startDate, $endDate)
+    {
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
+    }
 
     public function collection()
     {
         // Get the institusi ID of the logged-in user
         $instiusi_user = Auth::user()->id_institusi;
 
-        // Fetch data from the database based on the institusi ID
-        $senarai = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
+        // // Fetch data from the database based on the institusi ID
+        // $senarai = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
+        //     ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
+        //     ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
+        //     ->where('permohonan.status', 6)
+        //     ->where('bk_info_institusi.id_institusi', $instiusi_user)
+        //     ->select(
+        //         'permohonan.no_rujukan_permohonan',
+        //         'b.nama',
+        //         'permohonan.yuran_disokong',
+        //         'permohonan.wang_saku_disokong',
+        //         'permohonan.tarikh_hantar'
+        //     )
+        //     ->get();
+        
+        // return $senarai;
+
+        $query = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
             ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
             ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
             ->where('permohonan.status', 6)
-            ->where('bk_info_institusi.id_institusi', $instiusi_user)
-            ->select(
-                'permohonan.no_rujukan_permohonan',
-                'b.nama',
-                'permohonan.yuran_disokong',
-                'permohonan.wang_saku_disokong',
-                'permohonan.tarikh_hantar'
-            )
-            ->get();
-        
-        return $senarai;
+            ->where('bk_info_institusi.id_institusi', $instiusi_user);
+
+        if ($this->startDate && $this->endDate) {
+            $query->whereBetween('permohonan.tarikh_hantar', [$this->startDate, $this->endDate]);
+        }
+
+        return $query->select(
+            'permohonan.no_rujukan_permohonan',
+            'b.nama',
+            'permohonan.yuran_disokong',
+            'permohonan.wang_saku_disokong',
+            'permohonan.tarikh_hantar'
+        )->get();
     }
 
     public function headings(): array

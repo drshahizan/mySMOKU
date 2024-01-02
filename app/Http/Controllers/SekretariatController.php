@@ -842,7 +842,6 @@ class SekretariatController extends Controller
                     ->orderBy('permohonan_kelulusan.updated_at', 'desc')
                     ->select('permohonan_kelulusan.*','smoku_akademik.id_institusi')
                     ->get();
-                    // dd($kelulusan);
 
         $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();

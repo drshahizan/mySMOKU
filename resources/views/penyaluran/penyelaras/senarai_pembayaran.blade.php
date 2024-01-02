@@ -121,9 +121,12 @@
                                             <div class="col-md-4 export-container" data-program-code="permohonan">
                                                 <div class="row" style="margin-bottom:0px!important"> 
                                                     <div class="col-md-6">
-                                                        <a href="{{ route('penyelaras.permohonan.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
+                                                        <a href="{{ route('penyelaras.permohonan.senarai.layak.excel', ['start_date' => request('start_date'), 'end_date' => request('end_date')]) }}" target="_blank" class="btn btn-secondary btn-round">
                                                             <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
                                                         </a>
+                                                        {{-- <a href="{{ route('penyelaras.permohonan.senarai.layak.excel') }}" target="_blank" class="btn btn-secondary btn-round">
+                                                            <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
+                                                        </a> --}}
                                                     </div>
                                         
                                                     <div class="col-md-6">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\DokumenSPPB1;
 use App\Exports\DokumenSPPB1a;
+use App\Exports\PermohonanLayak;
 use App\Http\Controllers\Controller;
 use App\Mail\PermohonanHantar;
 use App\Mail\TuntutanHantar;
@@ -43,7 +44,6 @@ use App\Models\Kelulusan;
 use App\Models\Keturunan;
 use App\Models\MaklumatBank;
 use App\Models\Parlimen;
-use App\Exports\PermohonanLayakExport;
 use App\Exports\TuntutanLayak;
 use App\Imports\ModifiedPermohonanImport;
 use App\Imports\ModifiedTuntutanImport;
@@ -1655,9 +1655,12 @@ class PenyelarasController extends Controller
     }
 
     //PENYALURAN - PEMBAYARAN - PERMOHONAN
-    public function exportPermohonanLayak()
+    public function exportPermohonanLayak(Request $request)
     {
-        return Excel::download(new PermohonanLayakExport, 'senarai_permohonan__layak.xlsx');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        return Excel::download(new PermohonanLayak($startDate, $endDate), 'senarai_permohonan__layak.xlsx');
     }
 
     public function uploadedFilePembayaranPermohonan(Request $request)
