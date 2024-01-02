@@ -40,7 +40,7 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
             ->where('bk_info_institusi.id_institusi', $instiusi_user);
 
         if ($this->startDate && $this->endDate) {
-            $query->whereBetween('permohonan.tarikh_hantar', [$this->startDate, $this->endDate]);
+            $query->whereBetween('tuntutan.tarikh_hantar', [$this->startDate, $this->endDate]);
         }
     
         return $query->select(
