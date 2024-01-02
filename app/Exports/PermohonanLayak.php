@@ -56,7 +56,11 @@ class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths,
             ->where('bk_info_institusi.id_institusi', $instiusi_user);
 
         if ($this->startDate && $this->endDate) {
-            $query->whereBetween('permohonan.tarikh_hantar', [$this->startDate, $this->endDate]);
+            // Format dates to 'Y-m-d' if needed
+            $startDateFormat = Carbon::parse($this->startDate)->format('Y-m-d');
+            $endDateFormat = Carbon::parse($this->endDate)->format('Y-m-d');
+
+            $query->whereBetween('permohonan.tarikh_hantar', [$startDateFormat, $endDateFormat]);
         }
 
         return $query->select(
