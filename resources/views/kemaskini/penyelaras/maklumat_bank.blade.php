@@ -36,7 +36,7 @@
         }
         .form-control-arrow {
             position: relative;
-            width: 80%; 
+            width: 100%; 
         }
         .form-control-arrow::after {
             content: '\25BC'; /* Unicode character for a black down-pointing triangle */
@@ -103,7 +103,7 @@
 
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="body">
+                        <div class="body" style="padding: 20px;">
                             <div class="col-md-6 col-sm-6">
                                 <br>
                                 <form method="POST" action="{{route('kemaskini.bank', ['id' => $user->id_institusi ])}}" enctype="multipart/form-data">
@@ -131,7 +131,7 @@
                                             <tr>
                                                 <td class="vertical-top w-13">Bank</td>
                                                 <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top w-100">
+                                                <td class="vertical-top">
                                                     <div class="form-control-arrow">
                                                         <select name="kod_bank" class="form-control search" data-control="select2" data-hide-search="true" data-placeholder="Pilih Bank">
                                                             <option value="">Pilih Bank</option>
@@ -155,10 +155,10 @@
                                                 <td class="vertical-top w-13">Penyata Bank</td>
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
-                                                    <div class="file-input" style="width:50%;">
+                                                    <div class="file-input">
                                                         <input type="file" name="penyata"/>
                                                         @if(isset($bank->penyata_bank) && !empty($bank->penyata_bank))
-                                                            <a href="{{ asset('assets/dokumen/penyata_bank_islam/' . $bank->penyata_bank) }}" target="_blank" style="width:50%;">{{ $bank->penyata_bank }}</a>
+                                                            <a href="{{ asset('assets/dokumen/penyata_bank_islam/' . $bank->penyata_bank) }}" target="_blank">{{ $bank->penyata_bank }}</a>
                                                         @endif
                                                     </div>
                                                     <small style="font-size: 10px; font-style:italic; color: red!important;">**Format fail yang boleh dimuat naik adalah '.pdf' dan '.png' sahaja.</small>
