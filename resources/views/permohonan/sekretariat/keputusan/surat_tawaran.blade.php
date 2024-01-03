@@ -45,7 +45,7 @@
             .right {
                 float: right;
                 width: 30%;
-                font-size: 11pt; 
+                font-size: 10pt; 
                 margin-top: 70px;
                 line-height: 1;
             }
@@ -59,7 +59,7 @@
                     <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="height: 100px; width: 150px;">
                 </div>
 
-                <div class="address" style="padding-left: 150px; font-size: 12pt; margin-top:0%;">
+                <div class="address" style="padding-left: 150px; font-size: 11pt; margin-top:0%;">
                     <b>{{$maklumat_kementerian->nama_kementerian_bm}}</b>
                     <br>{{$maklumat_kementerian->nama_kementerian_bi}}
                     <br>
