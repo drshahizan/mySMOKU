@@ -27,7 +27,7 @@
 			</li>
 			<!--end::Item-->
 			<!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">Borang SPBB</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">Salur Peruntukan Bantuan BKOKU</li>
 			<!--end::Item-->
 		</ul>
 	<!--end::Breadcrumb-->
@@ -40,7 +40,7 @@
 		<div class="container-fluid">
 			<div class="block-header">
 				<div class="row clearfix">
-					<div class="card p-10">
+					<div class="card p-5">
 						<div class="header">
 							<h2>Borang Salur Peruntukan Bantuan BKOKU<br><small>Sila klik pada ikon "Lihat" untuk semak dokumen yang dimuat naik oleh penyelaras universiti awam.</small></h2>
 						</div>
@@ -52,8 +52,8 @@
 										<tr>
 											<th class="text-center" style="width: 5%">No.</th>
 											<th class="text-center" style="width: 50%">Nama Institusi Pengajian</th>
-											<th class="text-center" style="width: 20%">Tarikh Kemaskini Dokumen</th>
-											<th class="text-center" style="width: 25%">Borang SPBB & Penyata Bank</th>
+											<th class="text-center" style="width: 22%">Tarikh Kemaskini Dokumen</th>
+											<th class="text-center" style="width: 23%">Borang SPBB & Penyata Bank</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -69,7 +69,7 @@
 							
 											@if (str_ends_with($doc->no_rujukan, '/2'))
 												<tr>
-													<td class="text-center" data-no="{{ $i++ }}">{{ $i }}</td>
+													<td class="text-center" data-no="{{ $i++ }}">{{ $i }}.</td>
 													<td>{{ $nama_institusi }}</td>
 													<td class="text-center">{{date('d/m/Y', strtotime($doc->updated_at))}}</td>
 													<td class="text-center">
