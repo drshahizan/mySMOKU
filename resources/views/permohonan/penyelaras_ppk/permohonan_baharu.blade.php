@@ -1603,7 +1603,7 @@
 				});
 
 				function getBandarData(idnegeri) {
-					$("#alamat_tetap_bandar").empty();
+					// $("#alamat_tetap_bandar").empty();
 
 					// AJAX request 
 					$.ajax({

@@ -376,7 +376,9 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
+									<input type="hidden" class="form-control form-control-solid" placeholder="" id="alamat_negeri" name="alamat_negeri" value="{{$butiranPelajar->alamat_tetap_negeri}}" />
 									<select id="alamat_tetap_negeri" name="alamat_tetap_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>{{$butiranPelajar->alamat_tetap_baru}}>
+										<option></option>
 										@foreach ($negeri as $negeritetap)	
 										<option value="{{$negeritetap->id}}" {{$butiranPelajar->alamat_tetap_negeri == $negeritetap->id ? 'selected' : ''}}>{{ $negeritetap->negeri}}</option>
 										@endforeach
@@ -393,11 +395,12 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+									<input type="hidden" class="form-control form-control-solid" placeholder="" id="alamat_bandar" name="alamat_bandar" value="{{$butiranPelajar->alamat_tetap_bandar}}" />
+									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
 										<option></option>
-										@foreach ($bandar as $bandartetap)	
+										{{-- @foreach ($bandar as $bandartetap)	
 										<option value="{{$bandartetap->id}}" {{$butiranPelajar->alamat_tetap_bandar == $bandartetap->id ? 'selected' : ''}}>{{ $bandartetap->bandar}}</option>
-										@endforeach
+										@endforeach --}}
 									</select>
 									<!--end::Input-->
 								</div>
@@ -426,11 +429,9 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='parlimen' name='parlimen' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
-										<option value="{{$butiranPelajar->id_parlimen}}">{{$butiranPelajar->kod_parlimen}} - {{strtoupper($butiranPelajar->parlimen)}}</option>
-										{{-- @foreach ($parlimen as $parlimen)	
-										<option value="{{$parlimen->id}}" {{$butiranPelajar->parlimen == $parlimen->id ? 'selected' : ''}}>{{ $parlimen->kod_parlimen}} - {{ strtoupper($parlimen->parlimen)}}</option>
-										@endforeach --}}
+									<input type="hidden" class="form-control form-control-solid" placeholder="" id="parlimen_asal" name="parlimen_asal" value="{{$butiranPelajar->id_parlimen}}" />
+									<select id='parlimen' name='parlimen' class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+										<option></option>
 									</select>
 									<!--end::Input-->
 								</div>
@@ -1491,52 +1492,25 @@
 				}
 			}
 
-			//negeri bandar alamat tetap
 			$(document).ready(function () {
-				var previousIdNegeri = $('#alamat_tetap_negeri').val();
-
-				// Initial AJAX request
-				getBandarData(previousIdNegeri);
-
-				$('#alamat_tetap_negeri').on('change', function () {
-					var idnegeri = $(this).val();
-
-					// Update the previous value
-					previousIdNegeri = idnegeri;
-
-					// Clear existing options
-					$("#alamat_tetap_bandar").empty();
-					$('#alamat_tetap_poskod').val('');
-
-
-					// Trigger AJAX request
-					getBandarData(idnegeri);
-				});
+				var previousIdNegeri = $('#alamat_negeri').val();
 
 				function getBandarData(idnegeri) {
 					$("#alamat_tetap_bandar").empty();
+					$("#parlimen").empty();
 
-					// AJAX request 
 					$.ajax({
 						url: '/getBandar/' + idnegeri,
 						type: 'get',
 						dataType: 'json',
 						success: function (response) {
-							var len = 0;
-							if (response['data'] != null) {
-								len = response['data'].length;
-							}
+							if (response['data']) {
+								var selectedValue = $("#alamat_bandar").val();
 
-							if (len > 0) {
-								var selectedValue = $("#alamat_tetap_bandar").val();
-
-								// Read data and create <option >
-								for (var i = 0; i < len; i++) {
+								for (var i = 0; i < response['data'].length; i++) {
 									var id = response['data'][i].id;
 									var bandar = response['data'][i].bandar;
-
-									var isSelected = (id === selectedValue);
-
+									var isSelected = (id == selectedValue);
 
 									var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + bandar + "</option>";
 
@@ -1549,143 +1523,102 @@
 						}
 					});
 				}
-			});
-
-			//parlimen
-			$(document).ready(function(){
-				var previousIdNegeri = $('#alamat_tetap_negeri').val();
-				// Initial AJAX request
-				getParlimenData(previousIdNegeri);
-
-				$('#alamat_tetap_negeri').on('change', function() {
-					var idnegeri = $(this).val();
-					//alert(id);
-
-					// Update the previous value
-					previousIdNegeri = idnegeri;
-					// Empty the dropdown
-					$('#parlimen').find('option').not(':first').remove();
-					$('#dun').find('option').not(':first').remove();
-
-					getParlimenData(previousIdNegeri);
-
-					
-				});
 
 				function getParlimenData(idnegeri) {
+					$('#parlimen').empty().append('<option value="" selected></option>');
+					$("#dun").empty();
 
-					// AJAX request 
 					$.ajax({
-						
-						url: '/getParlimen/'+idnegeri,
+						url: '/getParlimen/' + idnegeri,
 						type: 'get',
 						dataType: 'json',
-						success: function(response){
-							//alert('AJAX loaded something');
-							var len = 0;
-									if(response['data'] != null){
-										len = response['data'].length;
-									}
+						success: function (response) {
+							if (response['data']) {
+								var selectedValue = $("#parlimen_asal").val();
 
-									if(len > 0){
-										// Read data and create <option >
-										for(var i=0; i<len; i++){
+								for (var i = 0; i < response['data'].length; i++) {
+									var id = response['data'][i].id;
+									var kod = response['data'][i].kod_parlimen;
+									var parlimen = response['data'][i].parlimen.toUpperCase();
+									var isSelected = (id == selectedValue);
 
-											var id = response['data'][i].id;
-											var kod = response['data'][i].kod_parlimen;
-											var parlimen = response['data'][i].parlimen.toUpperCase();
+									var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + kod + "-" + parlimen + "</option>";
 
-											var option = "<option value='"+id+"'>"+kod+" - "+parlimen+"</option>";
-
-											$("#parlimen").append(option); 
-										}
-									}
-							}, 
-							error: function(){
-							alert('AJAX load did not work');
+									$("#parlimen").append(option);
+								}
 							}
-
+						},
+						error: function () {
+							alert('AJAX load did not work');
+						}
 					});
 				}
 
-			});
+				// Initial AJAX requests
+				getBandarData(previousIdNegeri);
+				getParlimenData(previousIdNegeri);
 
-			//negeri takde dun
-			$(document).ready(function(){
-				$('#alamat_tetap_negeri').on('change', function() {
-					if (['14', '15', '16', '17'].includes(this.value)) {
-						$("#divdun").hide();
-					} else {
-						$("#divdun").show();
-					}
-				});
-			});
-
-			//dun
-			$(document).ready(function(){
-				var previousParlimen = $('#parlimen').val();
-				
-				// Initial AJAX request
-				getDunData(previousParlimen);
-				$('#parlimen').on('change', function() {
-					var idparlimen = $(this).val();
-
-					// Update the previous value
-					previousParlimen = idparlimen;
-					// Empty the dropdown
-					$("#dun").empty();
-
-					// Trigger AJAX request
-					getDunData(idparlimen);
-
+				$('#alamat_tetap_negeri').on('change', function () {
+					var idnegeri = $(this).val();
+					// alert(previousIdNegeri);
+					// alert(idnegeri);
 					
+					previousIdNegeri = idnegeri;
+					$("#parlimen").empty();
+					$('#alamat_tetap_poskod').val('');
+
+
+					getBandarData(idnegeri);
+					getParlimenData(idnegeri);
 				});
+
+				// Negeri takde dun
+				$('#alamat_tetap_negeri').on('change', function () {
+					var hideDun = ['14', '15', '16', '17'].includes(this.value);
+					$("#divdun").toggle(!hideDun);
+				});
+
+				// Dun
+				var previousParlimen = $('#parlimen_asal').val();
 
 				function getDunData(idparlimen) {
 					$("#dun").empty();
 
-					// AJAX request 
 					$.ajax({
-						
-						url: '/getDun/'+idparlimen,
+						url: '/getDun/' + idparlimen,
 						type: 'get',
 						dataType: 'json',
-						success: function(response){
-							//alert('AJAX loaded something');
-							var len = 0;
-								if(response['data'] != null){
-									len = response['data'].length;
+						success: function (response) {
+							if (response['data']) {
+								var selectedValue = $("#dunn").val();
+
+								for (var i = 0; i < response['data'].length; i++) {
+									var id = response['data'][i].id;
+									var kod_dun = response['data'][i].kod_dun;
+									var dun = response['data'][i].dun.toUpperCase();
+									var isSelected = (id == selectedValue);
+
+									var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + kod_dun + "-" + dun + "</option>";
+
+									$("#dun").append(option);
 								}
-
-								if(len > 0){
-									var selectedValue = $("#dunn").val();
-									// alert(selectedValue);
-
-									// Read data and create <option >
-									for(var i=0; i<len; i++){
-
-										var id = response['data'][i].id;
-										var kod_dun = response['data'][i].kod_dun;
-										var dun = response['data'][i].dun.toUpperCase();
-
-										var isSelected = (id == selectedValue);
-										// alert(isSelected);
-
-										var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">"+kod_dun+"-"+dun+"</option>";
-
-										// var option = "<option value='"+id+"'>"+kod_dun+"-"+dun+"</option>";
-
-										$("#dun").append(option); 
-									}
-								}
-							}, 
-							error: function(){
-							alert('AJAX load did not work');
 							}
-
+						},
+						error: function () {
+							alert('AJAX load did not work');
+						}
 					});
 				}
 
+				// Initial AJAX request
+				getDunData(previousParlimen);
+
+				$('#parlimen').on('change', function () {
+					var idparlimen = $(this).val();
+					previousParlimen = idparlimen;
+
+					getDunData(idparlimen);
+				});
 			});
 
 			//negeri surat
