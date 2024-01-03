@@ -29,11 +29,6 @@
         .vertical-top{
             vertical-align: top!important;
         }
-        .file-input {
-            display: flex; 
-            align-items: center;
-            padding-right: 200px; 
-        }
         .form-control-arrow {
             position: relative;
             width: 100%; 
@@ -45,6 +40,21 @@
             right: 20px; 
             transform: translateY(-50%);
             pointer-events: none; 
+        }
+        .file-input {
+            display: flex;
+            align-items: center;
+        }
+
+        .file-input input {
+            flex: 1; /* Take up remaining space */
+        }
+
+        .file-input a {
+            width: 60%; /* Set the width of the link to 50% of the column */
+            text-overflow: ellipsis; /* Add ellipsis for long file names */
+            white-space: nowrap;
+            overflow: hidden;
         }
     </style>
 
