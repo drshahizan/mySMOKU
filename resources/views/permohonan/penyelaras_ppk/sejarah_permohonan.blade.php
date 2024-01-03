@@ -80,12 +80,9 @@
                                                         $i++;
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                        // if ($item['status']==2){
-                                                        //     $status='Baharu';
-                                                        // }
-                                                        // if ($item['status']==3){
-                                                        //     $status='Sedang Disaring';
-                                                        // }
+                                                        if ($item['status']==3){
+                                                            $status='Sedang Disaring';
+                                                        }
                                                         $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
                                                         $conjunctions = ['bin', 'binti'];
                                                         $words = explode(' ', $text);
