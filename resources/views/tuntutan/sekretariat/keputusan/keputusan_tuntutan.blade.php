@@ -228,16 +228,12 @@
                                                                 @elseif($item['status'] == "7")
                                                                     <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @endif
-<<<<<<< Updated upstream
-                                                                <td style="width: 15%">{{$item->keputusan}}</td>
-=======
                                                                 @if($item->keputusan == "LAYAK")
                                                                     <td style="width: 15%">Ya Lulus</td>
                                                                 @elseif($item->keputusan == "TIDAK LAYAK")
                                                                     <td style="width: 15%">Tidak Lulus</td>
                                                                 @endif
 
->>>>>>> Stashed changes
                                                             </tr>
                                                             @endif
                                                        @endif
