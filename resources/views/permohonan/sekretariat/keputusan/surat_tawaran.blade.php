@@ -44,9 +44,9 @@
     
             .right {
                 float: right;
-                width: 25%;
+                width: 22%;
                 font-size: 10pt; 
-                margin-top: 80px;
+                margin-top: 100px;
                 line-height: 1;
             }
         </style>
@@ -93,7 +93,7 @@
             </div>
         </div>
            
-        <br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br>
         
         <hr>
 
@@ -127,7 +127,7 @@
             </span>
         </p>
 
-        <br>
+        <br><br>
 
         <div class="penerima" style="width: 50%">
             <b>{{$nama}}</b>
