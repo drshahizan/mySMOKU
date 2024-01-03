@@ -177,7 +177,7 @@
                                         </table>
                                     </div>
 
-                                    <div class="d-flex flex-center mt-5 mb-5">
+                                    <div class="d-flex flex-center mt-5">
                                         <button type="submit" class="btn btn-primary btn-sm">Kemaskini</button>
                                     </div>
                                 </form>

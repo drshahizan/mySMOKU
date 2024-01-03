@@ -44,22 +44,20 @@
     </div>
     <!--end::Page title-->
     <br>
+
     <body>
-    <!-- Main body part  -->
-    <div id="main-content">
-        <div class="container-fluid">
-            <!-- Page header section  -->
-            <div class="row clearfix">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>Sejarah Tuntutan<br><small>Klik ID Tuntutan untuk melihat rekod tuntutan</small></h2>
-                        </div>
+        <!-- Main body part  -->
+        <div id="main-content">
+            <div class="container-fluid">
+                <!-- Page header section  -->
+                <div class="row clearfix">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>Sejarah Tuntutan<br><small>Klik ID Tuntutan untuk melihat rekod tuntutan</small></h2>
+                            </div>
 
-                        <div class="tab-content" id="myTabContent">
-
-                            <div class="tab-pane fade show active" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-                                <br>
+                            <div class="tab-content" id="myTabContent">
                                 <div class="body">
                                     <div class="table-responsive">
                                         <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
@@ -175,13 +173,11 @@
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        $('#sortTable2').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [] // Disable initial sorting
-        });
-    </script>
-
+        <script>
+            $('#sortTable2').DataTable({
+                ordering: true, // Enable manual sorting
+                order: [] // Disable initial sorting
+            });
+        </script>
     </body>
 </x-default-layout>

@@ -56,195 +56,192 @@
                             <h2>Sejarah Permohonan<br><small>Klik ID Permohonan untuk melakukan melihat rekod permohonan</small></h2>
                         </div>
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-                                <br>
-                                <div class="body">
-                                    <div class="table-responsive">
-                                        <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
-                                            <thead>
-                                            <tr>
-                                                <th style="width: 17%"><b>ID Permohonan</b></th>
-                                                <th style="width: 33%"><b>Nama</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
-                                                <th style="width: 5%" class="text-center"><b>Tindakan</b></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            
-                                            @foreach ($permohonan as $item)
-                                                @if ($item['program']=="BKOKU")
-                                                    @php
-                                                        
-                                                        $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                        $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                        if ($item['status']==2){
-                                                            $status='Baharu';
+                            <div class="body">
+                                <div class="table-responsive">
+                                    <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 17%"><b>ID Permohonan</b></th>
+                                            <th style="width: 33%"><b>Nama</b></th>
+                                            <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
+                                            <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
+                                            <th style="width: 5%" class="text-center"><b>Tindakan</b></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        
+                                        @foreach ($permohonan as $item)
+                                            @if ($item['program']=="BKOKU")
+                                                @php
+                                                    
+                                                    $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                    $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+                                                    if ($item['status']==2){
+                                                        $status='Baharu';
+                                                    }
+                                                    if ($item['status']==3){
+                                                        $status='Sedang Disaring';
+                                                    }
+                                                    $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                    $conjunctions = ['bin', 'binti'];
+                                                    $words = explode(' ', $text);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
                                                         }
-                                                        if ($item['status']==3){
-                                                            $status='Sedang Disaring';
-                                                        }
-                                                        $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
-                                                        $conjunctions = ['bin', 'binti'];
-                                                        $words = explode(' ', $text);
-                                                        $result = [];
-                                                        foreach ($words as $word) {
-                                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                                $result[] = Str::lower($word);
-                                                            } else {
-                                                                $result[] = $word;
-                                                            }
-                                                        }
-                                                        $pemohon = implode(' ', $result);
+                                                    }
+                                                    $pemohon = implode(' ', $result);
 
-                                                        $permohonan_latest = DB::table('permohonan')->orderBy('id', 'DESC')->first();
+                                                    $permohonan_latest = DB::table('permohonan')->orderBy('id', 'DESC')->first();
 
-                                                        $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
-								                        $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
+                                                    $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
+                                                    $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
 
-                                                        // dd($item['id']);
+                                                    // dd($item['id']);
 
-                                                    @endphp
-                                                    <tr>
-                                                        <td>
-                                                            <a href="{{ route('bkoku.rekod.permohonan', $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                        </td>
-                                                        <td>{{$pemohon}}</td>
-                                                        <td class="text-center">{{$formattedDate}}</td>
-                                                        @if ($item['status']=='1')
-                                                            <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='2')
-                                                            <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='3')
-                                                            <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='4')
-                                                            <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='5')
-                                                        <td class="text-center"><button class="btn bg-dikembalikan text-white" data-bs-toggle="modal" data-bs-target="#dikembalikan{{$item['id']}}">
-                                                            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Papar sebab dikembalikan">
-                                                            {{ucwords(strtolower($status))}}</span>
-                                                        </button></td>
-                                                        {{-- Modal --}}
-                                                        <div class="modal fade" id="dikembalikan{{$item['id']}}" tabindex="-1" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Permohonan anda tidak lengkap disebabkan oleh perkara berikut:</h1>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div>
+                                                @endphp
+                                                <tr>
+                                                    <td>
+                                                        <a href="{{ route('bkoku.rekod.permohonan', $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                    </td>
+                                                    <td>{{$pemohon}}</td>
+                                                    <td class="text-center">{{$formattedDate}}</td>
+                                                    @if ($item['status']=='1')
+                                                        <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                    @elseif ($item['status']=='2')
+                                                        <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                    @elseif ($item['status']=='3')
+                                                        <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                    @elseif ($item['status']=='4')
+                                                        <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                    @elseif ($item['status']=='5')
+                                                    <td class="text-center"><button class="btn bg-dikembalikan text-white" data-bs-toggle="modal" data-bs-target="#dikembalikan{{$item['id']}}">
+                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Papar sebab dikembalikan">
+                                                        {{ucwords(strtolower($status))}}</span>
+                                                    </button></td>
+                                                    {{-- Modal --}}
+                                                    <div class="modal fade" id="dikembalikan{{$item['id']}}" tabindex="-1" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Permohonan anda tidak lengkap disebabkan oleh perkara berikut:</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
 
-                                                                    <div class="modal-body">
-                                                                        @php
-                                                                            $catatan = DB::table('permohonan_saringan')
-                                                                                ->orderBy('id', 'desc')
-                                                                                ->where('permohonan_id', $item['id'])
-                                                                                ->first();
+                                                                <div class="modal-body">
+                                                                    @php
+                                                                        $catatan = DB::table('permohonan_saringan')
+                                                                            ->orderBy('id', 'desc')
+                                                                            ->where('permohonan_id', $item['id'])
+                                                                            ->first();
 
-                                                                            if (!function_exists('generateOrderedList')) {
-                                                                                function generateOrderedList($str) {
-                                                                                    $strArr = explode(",", $str);
-                                                                                    $html = '';
+                                                                        if (!function_exists('generateOrderedList')) {
+                                                                            function generateOrderedList($str) {
+                                                                                $strArr = explode(",", $str);
+                                                                                $html = '';
 
-                                                                                    foreach ($strArr as $item) {
-                                                                                        $trimmedItem = trim($item);
-                                                                                        if (!empty($trimmedItem)) {
-                                                                                            $html .= "<li>" . $trimmedItem . "</li>";
-                                                                                        }
+                                                                                foreach ($strArr as $item) {
+                                                                                    $trimmedItem = trim($item);
+                                                                                    if (!empty($trimmedItem)) {
+                                                                                        $html .= "<li>" . $trimmedItem . "</li>";
                                                                                     }
-
-                                                                                    return $html;
                                                                                 }
+
+                                                                                return $html;
                                                                             }
-                                                                        @endphp
+                                                                        }
+                                                                    @endphp
 
-                                                                        <ol type="1">
-                                                                            {!! generateOrderedList($catatan->catatan_profil_diri ?? '') !!}
-                                                                            {!! generateOrderedList($catatan->catatan_akademik ?? '') !!}
-                                                                            {!! generateOrderedList($catatan->catatan_salinan_dokumen ?? '') !!}
-                                                                        </ol>
+                                                                    <ol type="1">
+                                                                        {!! generateOrderedList($catatan->catatan_profil_diri ?? '') !!}
+                                                                        {!! generateOrderedList($catatan->catatan_akademik ?? '') !!}
+                                                                        {!! generateOrderedList($catatan->catatan_salinan_dokumen ?? '') !!}
+                                                                    </ol>
 
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
-                                                                        </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
                                                                     </div>
-                                                                </div> 
-                                                            </div>
-                                                        </div> 
-                                                        {{-- Modal --}}
-                                                        @elseif ($item['status']=='6')
-                                                            <td class="text-center">
-                                                                <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
-                                                                    <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak
-                                                                </a>
-                                                            </td>
-                                                        @elseif ($item['status']=='7')
-                                                            <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='8')
-                                                            <td class="text-center">
-                                                                <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn bg-dibayar btn-round btn-sm custom-width-btn">
-                                                                    <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar
-                                                                </a>
-                                                            </td>
-                                                        @elseif ($item['status']=='9')
-                                                            <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @endif
+                                                                </div>
+                                                            </div> 
+                                                        </div>
+                                                    </div> 
+                                                    {{-- Modal --}}
+                                                    @elseif ($item['status']=='6')
+                                                        <td class="text-center">
+                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
+                                                                <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak
+                                                            </a>
+                                                        </td>
+                                                    @elseif ($item['status']=='7')
+                                                        <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                    @elseif ($item['status']=='8')
+                                                        <td class="text-center">
+                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn bg-dibayar btn-round btn-sm custom-width-btn">
+                                                                <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar
+                                                            </a>
+                                                        </td>
+                                                    @elseif ($item['status']=='9')
+                                                        <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                    @endif
 
-                                                         
-                                                        @if ($item['status']=='1')
-                                                            <td class="text-center">
-                                                                <a href="{{ route('penyelaras.permohonan.baharu', $item['smoku_id']) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini permohonan ini?')">
-                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Permohonan">
-                                                                        <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
-                                                                    </span>
-                                                                </a>
-                                                                <a href="{{ route('bkoku.permohonan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
-                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
-                                                                        <i class="fa fa-trash fa-sm custom-white-icon"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </td>
-                                                        @elseif ($item['status']=='2')
-                                                            <td class="text-center">
-                                                                <a href="{{ route('bkoku.permohonan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan permohonan ini?')">
-                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Permohonan">
-                                                                        <i class="fa fa-times-circle fa-sm custom-white-icon" style="color: red"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </td>
-                                                        @elseif ($item['status']=='5')
-                                                            <td class="text-center">
-                                                                <a href="{{ route('penyelaras.permohonan.baharu', $item['smoku_id']) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini permohonan ini?')">
-                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Permohonan">
-                                                                        <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </td>         
-                                                        @elseif ($permohonan_latest->status=='9')
-                                                            <td class="text-center">
-                                                                <a href="{{ route('penyelaras.permohonan.baharu', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin hantar permohonan ini?')">
-                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Hantar Semula Permohonan">
-                                                                        <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </td>
-                                                        @else
-                                                            <td class="text-center"></td> 
+                                                        
+                                                    @if ($item['status']=='1')
+                                                        <td class="text-center">
+                                                            <a href="{{ route('penyelaras.permohonan.baharu', $item['smoku_id']) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini permohonan ini?')">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Permohonan">
+                                                                    <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                </span>
+                                                            </a>
+                                                            <a href="{{ route('bkoku.permohonan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
+                                                                    <i class="fa fa-trash fa-sm custom-white-icon"></i>
+                                                                </span>
+                                                            </a>
+                                                        </td>
+                                                    @elseif ($item['status']=='2')
+                                                        <td class="text-center">
+                                                            <a href="{{ route('bkoku.permohonan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan permohonan ini?')">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Permohonan">
+                                                                    <i class="fa fa-times-circle fa-sm custom-white-icon" style="color: red"></i>
+                                                                </span>
+                                                            </a>
+                                                        </td>
+                                                    @elseif ($item['status']=='5')
+                                                        <td class="text-center">
+                                                            <a href="{{ route('penyelaras.permohonan.baharu', $item['smoku_id']) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini permohonan ini?')">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Permohonan">
+                                                                    <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                </span>
+                                                            </a>
+                                                        </td>         
+                                                    @elseif ($permohonan_latest->status=='9')
+                                                        <td class="text-center">
+                                                            <a href="{{ route('penyelaras.permohonan.baharu', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin hantar permohonan ini?')">
+                                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Hantar Semula Permohonan">
+                                                                    <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                </span>
+                                                            </a>
+                                                        </td>
+                                                    @else
+                                                        <td class="text-center"></td> 
 
-                                                        @endif
+                                                    @endif
 
-                                                       
+                                                    
 
 
-                                                    </tr>
-                                                   
-                                                @endif
+                                                </tr>
+                                                
+                                            @endif
 
-                                               
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                       
-                                    </div>
+                                            
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                    
                                 </div>
                             </div>
                         </div>
