@@ -44,7 +44,7 @@
     
             .right {
                 float: right;
-                width: 20%;
+                width: 25%;
                 font-size: 10pt; 
                 margin-top: 80px;
                 line-height: 1;
