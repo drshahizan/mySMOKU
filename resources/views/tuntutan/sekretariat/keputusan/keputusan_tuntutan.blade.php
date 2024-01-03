@@ -229,7 +229,6 @@
                                                                     <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @endif
                                                                 <td style="width: 15%">{{$item->keputusan}}</td>
-
                                                             </tr>
                                                             @endif
                                                        @endif
