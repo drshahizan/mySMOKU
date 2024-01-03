@@ -78,9 +78,6 @@
                                                         
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                        if ($item['status']==2){
-                                                            $status='Baharu';
-                                                        }
                                                         if ($item['status']==3){
                                                             $status='Sedang Disaring';
                                                         }
