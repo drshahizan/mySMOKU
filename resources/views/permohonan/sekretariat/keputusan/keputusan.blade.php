@@ -133,9 +133,9 @@
                                             </div>
                                             
                                             <div class="col-md-2">
-                                                <select name="status" class="form-select">
+                                                <select id="status" name="status" class="form-select">
                                                     <option value="">Pilih Keputusan</option>
-                                                    <option value="Lulus">Layak</option>
+                                                    <option value="Ya Lulus">Layak</option>
                                                     <option value="Tidak Lulus">Tidak Layak</option>
                                                 </select>
                                             </div> 
@@ -284,7 +284,11 @@
                                                                             <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
                                                                         @endif
                                                                     </td>
-                                                                    <td style="width: 15%">{{$item->keputusan}}</td>
+                                                                    @if($item->keputusan == "Lulus")
+                                                                        <td style="width: 15%">Ya Lulus</td>
+                                                                    @elseif($item->keputusan == "Tidak Lulus")
+                                                                        <td style="width: 15%">Tidak Lulus</td>
+                                                                    @endif
                                                                 </tr>
                                                             @endif
                                                         @endif
@@ -377,7 +381,11 @@
                                                                             <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
                                                                         @endif
                                                                     </td>
-                                                                    <td style="width: 15%">{{$item->keputusan}}</td>
+                                                                    @if($item->keputusan == "Lulus")
+                                                                        <td style="width: 15%">Ya Lulus</td>
+                                                                    @elseif($item->keputusan == "Tidak Lulus")
+                                                                        <td style="width: 15%">Tidak Lulus</td>
+                                                                    @endif
                                                                 </tr>
                                                             @endif
                                                         @endif
@@ -463,7 +471,11 @@
                                                                         <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
                                                                     @endif
                                                                 </td>
-                                                                <td style="width: 15%">{{$item->keputusan}}</td>
+                                                                @if($item->keputusan == "Lulus")
+                                                                    <td style="width: 15%">Ya Lulus</td>
+                                                                @elseif($item->keputusan == "Tidak Lulus")
+                                                                    <td style="width: 15%">Tidak Lulus</td>
+                                                                @endif
                                                             </tr>
                                                         @endif
                                                     @endforeach
@@ -615,7 +627,7 @@
                 var selectedInstitusi = $('[name="institusi"]').val();
                 var startDate = $('#start_date').val();
                 var endDate = $('#end_date').val();
-                var status = $('[name="status"]').val();
+                var status = $('#status').val();
                 console.log(selectedInstitusi);
                 console.log(startDate);
                 console.log(endDate);
@@ -685,7 +697,10 @@
 
                 // Apply search filter for status
                 if (status) {
+                    console.log('Applying Status Filter:', status);
                     table.column(8).search(status).draw();
+                } else {
+                    console.log('No Status Filter Applied');
                 }
 
                 // Log filtered data
