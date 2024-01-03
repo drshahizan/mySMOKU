@@ -340,7 +340,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('penyelaras/ppk/dashboard', [PenyelarasPPKController::class, 'store']);
     Route::get('penyelaras/ppk/permohonan/baharu/{id}', [PenyelarasPPKController::class, 'permohonanBaharu'])->name('penyelaras.ppk.permohonan.baharu');
     Route::get('/fetch-amaun', [PenyelarasPPKController::class, 'fetchAmaun']);
-    Route::get('/bandar/{idnegeri}', [PenyelarasPPKController::class, 'bandar']);
     Route::get('/ppk/peringkat/{id}', [PenyelarasPPKController::class, 'peringkat']);
     Route::get('/kursus/ppk/{kodperingkat}/{id}', [PenyelarasPPKController::class, 'kursus']);
     Route::post('penyelaras/ppk/baharu', [PenyelarasPPKController::class, 'simpan'])->name('ppk.simpan');

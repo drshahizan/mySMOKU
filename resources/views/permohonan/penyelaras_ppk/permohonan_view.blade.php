@@ -427,10 +427,10 @@
 								<div class="col-12">
 									<!--begin::Input-->
 									<select id='parlimen' name='parlimen' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
-										<option value="">Pilih</option>
-										@foreach ($parlimen as $parlimen)	
+										<option value="{{$butiranPelajar->id_parlimen}}">{{$butiranPelajar->kod_parlimen}} - {{strtoupper($butiranPelajar->parlimen)}}</option>
+										{{-- @foreach ($parlimen as $parlimen)	
 										<option value="{{$parlimen->id}}" {{$butiranPelajar->parlimen == $parlimen->id ? 'selected' : ''}}>{{ $parlimen->kod_parlimen}} - {{ strtoupper($parlimen->parlimen)}}</option>
-										@endforeach
+										@endforeach --}}
 									</select>
 									<!--end::Input-->
 								</div>
@@ -443,11 +443,12 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="dun" name="dun" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
-										<option value="">Pilih</option>
-										@foreach ($dun as $dun)	
+									<input type="hidden" class="form-control form-control-solid" placeholder="" id="dunn" name="dunn" value="{{$butiranPelajar->dun}}" />
+									<select id="dun" name="dun" class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+										<option></option>
+										{{-- @foreach ($dun as $dun)	
 										<option value="{{$dun->id}}" {{$butiranPelajar->dun == $dun->id ? 'selected' : ''}}>{{ $dun->kod_dun}} - {{ strtoupper($dun->dun)}}</option>
-										@endforeach
+										@endforeach --}}
 									</select>
 									<!--end::Input-->
 								</div>
@@ -1461,86 +1462,117 @@
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
 			function myFunction() {
-			var checkBox = document.getElementById("sama");  
-			var alamat_tetap = document.getElementById("alamat_tetap");
-			var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
-			var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
-			var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
+				var checkBox = document.getElementById("sama");  
+				var alamat_tetap = document.getElementById("alamat_tetap");
+				var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
+				var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
+				var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
 
-			var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
-			var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
-			var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
-			var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
-			if (checkBox.checked == true){
-				alamat_surat_menyurat.value=alamat_tetap.value; 
-				alamat_surat_negeri.value=alamat_tetap_negeri.value;
-				alamat_surat_bandar.value=alamat_tetap_bandar.value;
-				alamat_surat_poskod.value=alamat_tetap_poskod.value;
-				// Trigger select2 update
-				$(alamat_surat_negeri).trigger('change.select2');
-        		$(alamat_surat_bandar).trigger('change.select2');
-			} else {
-				alamat_surat_menyurat.value="{{$butiranPelajar->alamat_surat_baru}}";
-				alamat_surat_negeri.value="{{$butiranPelajar->alamat_surat_negeri}}";
-				alamat_surat_bandar.value="{{$butiranPelajar->alamat_surat_bandar}}";
-				alamat_surat_poskod.value="{{$butiranPelajar->alamat_surat_poskod}}";
-				// Trigger select2 update
-				$(alamat_surat_negeri).trigger('change.select2');
-        		$(alamat_surat_bandar).trigger('change.select2');
+				var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
+				var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
+				var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
+				var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
+				if (checkBox.checked == true){
+					alamat_surat_menyurat.value=alamat_tetap.value; 
+					alamat_surat_negeri.value=alamat_tetap_negeri.value;
+					alamat_surat_bandar.value=alamat_tetap_bandar.value;
+					alamat_surat_poskod.value=alamat_tetap_poskod.value;
+					// Trigger select2 update
+					$(alamat_surat_negeri).trigger('change.select2');
+					$(alamat_surat_bandar).trigger('change.select2');
+				} else {
+					alamat_surat_menyurat.value="{{$butiranPelajar->alamat_surat_baru}}";
+					alamat_surat_negeri.value="{{$butiranPelajar->alamat_surat_negeri}}";
+					alamat_surat_bandar.value="{{$butiranPelajar->alamat_surat_bandar}}";
+					alamat_surat_poskod.value="{{$butiranPelajar->alamat_surat_poskod}}";
+					// Trigger select2 update
+					$(alamat_surat_negeri).trigger('change.select2');
+					$(alamat_surat_bandar).trigger('change.select2');
+				}
 			}
-		}
 
-			$(document).ready(function(){
-				$('#alamat_tetap_negeri').on('change', function() {
+			//negeri bandar alamat tetap
+			$(document).ready(function () {
+				var previousIdNegeri = $('#alamat_tetap_negeri').val();
+
+				// Initial AJAX request
+				getBandarData(previousIdNegeri);
+
+				$('#alamat_tetap_negeri').on('change', function () {
 					var idnegeri = $(this).val();
-					//alert(id);
-					// Empty the dropdown
-					$('#alamat_tetap_bandar').find('option').not(':first').remove();
+
+					// Update the previous value
+					previousIdNegeri = idnegeri;
+
+					// Clear existing options
+					$("#alamat_tetap_bandar").empty();
 					$('#alamat_tetap_poskod').val('');
 
 
-					// AJAX request 
-					$.ajax({
-						
-						url: '/bandar/'+idnegeri,
-						type: 'get',
-						dataType: 'json',
-						success: function(response){
-							//alert('AJAX loaded something');
-							var len = 0;
-									if(response['data'] != null){
-										len = response['data'].length;
-									}
-
-									if(len > 0){
-										// Read data and create <option >
-										for(var i=0; i<len; i++){
-
-											var id = response['data'][i].id;
-											var bandar = response['data'][i].bandar;
-
-											var option = "<option value='"+id+"'>"+bandar+"</option>";
-
-											$("#alamat_tetap_bandar").append(option); 
-										}
-									}
-							}, 
-							error: function(){
-							alert('AJAX load did not work');
-							}
-
-					});
+					// Trigger AJAX request
+					getBandarData(idnegeri);
 				});
 
+				function getBandarData(idnegeri) {
+					$("#alamat_tetap_bandar").empty();
+
+					// AJAX request 
+					$.ajax({
+						url: '/getBandar/' + idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function (response) {
+							var len = 0;
+							if (response['data'] != null) {
+								len = response['data'].length;
+							}
+
+							if (len > 0) {
+								var selectedValue = $("#alamat_tetap_bandar").val();
+
+								// Read data and create <option >
+								for (var i = 0; i < len; i++) {
+									var id = response['data'][i].id;
+									var bandar = response['data'][i].bandar;
+
+									var isSelected = (id === selectedValue);
+
+
+									var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + bandar + "</option>";
+
+									$("#alamat_tetap_bandar").append(option);
+								}
+							}
+						},
+						error: function () {
+							alert('AJAX load did not work');
+						}
+					});
+				}
 			});
 
 			//parlimen
 			$(document).ready(function(){
+				var previousIdNegeri = $('#alamat_tetap_negeri').val();
+				// Initial AJAX request
+				getParlimenData(previousIdNegeri);
+
 				$('#alamat_tetap_negeri').on('change', function() {
 					var idnegeri = $(this).val();
 					//alert(id);
+
+					// Update the previous value
+					previousIdNegeri = idnegeri;
 					// Empty the dropdown
 					$('#parlimen').find('option').not(':first').remove();
+					$('#dun').find('option').not(':first').remove();
+
+					getParlimenData(previousIdNegeri);
+
+					
+				});
+
+				function getParlimenData(idnegeri) {
 
 					// AJAX request 
 					$.ajax({
@@ -1574,7 +1606,7 @@
 							}
 
 					});
-				});
+				}
 
 			});
 
@@ -1591,11 +1623,26 @@
 
 			//dun
 			$(document).ready(function(){
+				var previousParlimen = $('#parlimen').val();
+				
+				// Initial AJAX request
+				getDunData(previousParlimen);
 				$('#parlimen').on('change', function() {
 					var idparlimen = $(this).val();
-					// alert(idparlimen);
+
+					// Update the previous value
+					previousParlimen = idparlimen;
 					// Empty the dropdown
-					$('#dun').find('option').not(':first').remove();
+					$("#dun").empty();
+
+					// Trigger AJAX request
+					getDunData(idparlimen);
+
+					
+				});
+
+				function getDunData(idparlimen) {
+					$("#dun").empty();
 
 					// AJAX request 
 					$.ajax({
@@ -1606,30 +1653,38 @@
 						success: function(response){
 							//alert('AJAX loaded something');
 							var len = 0;
-									if(response['data'] != null){
-										len = response['data'].length;
+								if(response['data'] != null){
+									len = response['data'].length;
+								}
+
+								if(len > 0){
+									var selectedValue = $("#dunn").val();
+									// alert(selectedValue);
+
+									// Read data and create <option >
+									for(var i=0; i<len; i++){
+
+										var id = response['data'][i].id;
+										var kod_dun = response['data'][i].kod_dun;
+										var dun = response['data'][i].dun.toUpperCase();
+
+										var isSelected = (id == selectedValue);
+										// alert(isSelected);
+
+										var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">"+kod_dun+"-"+dun+"</option>";
+
+										// var option = "<option value='"+id+"'>"+kod_dun+"-"+dun+"</option>";
+
+										$("#dun").append(option); 
 									}
-
-									if(len > 0){
-										// Read data and create <option >
-										for(var i=0; i<len; i++){
-
-											var id = response['data'][i].id;
-											var kod_dun = response['data'][i].kod_dun;
-											var dun = response['data'][i].dun.toUpperCase();
-
-											var option = "<option value='"+id+"'>"+kod_dun+"-"+dun+"</option>";
-
-											$("#dun").append(option); 
-										}
-									}
+								}
 							}, 
 							error: function(){
 							alert('AJAX load did not work');
 							}
 
 					});
-				});
+				}
 
 			});
 

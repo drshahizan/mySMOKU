@@ -497,10 +497,10 @@
 								<div class="col-12">
 									<!--begin::Input-->
 									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-										<option></option>
-										@foreach ($bandar as $bandartetap)	
+										<option>{{$selectedCity}}</option>
+										{{-- @foreach ($bandar as $bandartetap)	
 										<option value="{{$bandartetap->id}}" {{$bandartetap->bandar == $selectedCity ? 'selected' : ''}}>{{ $bandartetap->bandar}}</option>
-										@endforeach
+										@endforeach --}}
 									</select>
 									<!--end::Input-->
 								</div>
@@ -1543,85 +1543,101 @@
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
 			function myFunction() {
-			var checkBox = document.getElementById("sama");  
-			var alamat_tetap = document.getElementById("alamat_tetap");
-			var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
-			var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
-			var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
+				var checkBox = document.getElementById("sama");  
+				var alamat_tetap = document.getElementById("alamat_tetap");
+				var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
+				var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
+				var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
 
-			var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
-			var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
-			var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
-			var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
+				var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
+				var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
+				var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
+				var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
 
-			var postcode_surat = "{{$postcode_surat}}";
-			var stateID_surat = "{{$stateID_surat}}";
-			var cityID_surat = "{{$cityID_surat}}";
-			var trimmedAddress_surat = "{{$trimmedAddress_surat}}";
-			console.log('stateID_surat:', stateID_surat);
-			console.log('cityID_surat:', cityID_surat);
+				var postcode_surat = "{{$postcode_surat}}";
+				var stateID_surat = "{{$stateID_surat}}";
+				var cityID_surat = "{{$cityID_surat}}";
+				var trimmedAddress_surat = "{{$trimmedAddress_surat}}";
+				console.log('stateID_surat:', stateID_surat);
+				console.log('cityID_surat:', cityID_surat);
 
-			if (checkBox.checked == true){
-				alamat_surat_menyurat.value=alamat_tetap.value; 
-				alamat_surat_negeri.value=alamat_tetap_negeri.value;
-				alamat_surat_bandar.value=alamat_tetap_bandar.value;
-				alamat_surat_poskod.value=alamat_tetap_poskod.value;
-				// Trigger select2 update
-				$(alamat_surat_negeri).trigger('change.select2');
-        		$(alamat_surat_bandar).trigger('change.select2');
-			} else {
-				alamat_surat_menyurat.value = trimmedAddress_surat;
-				alamat_surat_negeri.value = stateID_surat;
-				alamat_surat_bandar.value = cityID_surat;
-				alamat_surat_poskod.value = postcode_surat;
-				// Trigger select2 update
-				$(alamat_surat_negeri).trigger('change.select2');
-        		$(alamat_surat_bandar).trigger('change.select2');
-			}
-		}	
+				if (checkBox.checked == true){
+					alamat_surat_menyurat.value=alamat_tetap.value; 
+					alamat_surat_negeri.value=alamat_tetap_negeri.value;
+					alamat_surat_bandar.value=alamat_tetap_bandar.value;
+					alamat_surat_poskod.value=alamat_tetap_poskod.value;
+					// Trigger select2 update
+					$(alamat_surat_negeri).trigger('change.select2');
+					$(alamat_surat_bandar).trigger('change.select2');
+				} else {
+					alamat_surat_menyurat.value = trimmedAddress_surat;
+					alamat_surat_negeri.value = stateID_surat;
+					alamat_surat_bandar.value = cityID_surat;
+					alamat_surat_poskod.value = postcode_surat;
+					// Trigger select2 update
+					$(alamat_surat_negeri).trigger('change.select2');
+					$(alamat_surat_bandar).trigger('change.select2');
+				}
+			}	
 
-			$(document).ready(function(){
-				$('#alamat_tetap_negeri').on('change', function() {
+			//negeri bandar alamat tetap
+			$(document).ready(function () {
+				var previousIdNegeri = $('#alamat_tetap_negeri').val();
+
+				// Initial AJAX request
+				getBandarData(previousIdNegeri);
+
+				$('#alamat_tetap_negeri').on('change', function () {
 					var idnegeri = $(this).val();
-					//alert(id);
-					// Empty the dropdown
-					$('#alamat_tetap_bandar').find('option').not(':first').remove();
+
+					// Update the previous value
+					previousIdNegeri = idnegeri;
+
+					// Clear existing options
+					$("#alamat_tetap_bandar").empty();
 					$('#alamat_tetap_poskod').val('');
 
 
-					// AJAX request 
-					$.ajax({
-						
-						url: '/bandar/'+idnegeri,
-						type: 'get',
-						dataType: 'json',
-						success: function(response){
-							//alert('AJAX loaded something');
-							var len = 0;
-									if(response['data'] != null){
-										len = response['data'].length;
-									}
-
-									if(len > 0){
-										// Read data and create <option >
-										for(var i=0; i<len; i++){
-
-											var id = response['data'][i].id;
-											var bandar = response['data'][i].bandar;
-
-											var option = "<option value='"+id+"'>"+bandar+"</option>";
-
-											$("#alamat_tetap_bandar").append(option); 
-										}
-									}
-							}, 
-							error: function(){
-							alert('AJAX load did not work');
-							}
-
-					});
+					// Trigger AJAX request
+					getBandarData(idnegeri);
 				});
 
+				function getBandarData(idnegeri) {
+					$("#alamat_tetap_bandar").empty();
+
+					// AJAX request 
+					$.ajax({
+						url: '/getBandar/' + idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function (response) {
+							var len = 0;
+							if (response['data'] != null) {
+								len = response['data'].length;
+							}
+
+							if (len > 0) {
+								var selectedValue = $("#alamat_tetap_bandar").val();
+
+								// Read data and create <option >
+								for (var i = 0; i < len; i++) {
+									var id = response['data'][i].id;
+									var bandar = response['data'][i].bandar;
+
+									var isSelected = (id === selectedValue);
+
+
+									var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + bandar + "</option>";
+
+									$("#alamat_tetap_bandar").append(option);
+								}
+							}
+						},
+						error: function () {
+							alert('AJAX load did not work');
+						}
+					});
+				}
 			});
 
 			//parlimen

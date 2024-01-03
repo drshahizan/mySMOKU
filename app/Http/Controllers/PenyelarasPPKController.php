@@ -298,13 +298,14 @@ class PenyelarasPPKController extends Controller
         ->leftJoin('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
         ->leftJoin('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
         ->leftJoin('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
+        ->leftJoin('bk_parlimen','bk_parlimen.id','=','smoku_butiran_pelajar.parlimen')
         ->get(['smoku_butiran_pelajar.*','smoku_butiran_pelajar.alamat_tetap as alamat_tetap_baru',
             'smoku_butiran_pelajar.alamat_surat_menyurat as alamat_surat_baru',
             'smoku_butiran_pelajar.tel_bimbit as tel_bimbit_baru',
             'smoku_butiran_pelajar.status_pekerjaan as status_pekerjaan_baru',
             'smoku_butiran_pelajar.pekerjaan as pekerjaan_baru',
             'smoku_butiran_pelajar.pendapatan as pendapatan_baru',
-            'smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*','bk_peringkat_pengajian.*'])
+            'smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*','bk_peringkat_pengajian.*', 'bk_parlimen.*', 'bk_parlimen.id as id_parlimen'])
         ->where('smoku_id', $id);
         // dd($butiranPelajar);
         
@@ -323,18 +324,6 @@ class PenyelarasPPKController extends Controller
         $amaunModel = JumlahTuntutan::where('program', 'PPK')->where('semester', $sem_semasa)->first();
 
         return response()->json(['amaun' => $amaunModel ? $amaunModel->jumlah : null]);
-    }
-
-    public function bandar($idnegeri)
-    {
-
-        $dataBandar['data'] = Bandar::orderby("bandar","asc")
-            ->select('id','bandar','negeri_id')
-            ->where('negeri_id',$idnegeri)
-            ->get();
-
-        return response()->json($dataBandar);
-
     }
 
     public function peringkat($ipt=0)
