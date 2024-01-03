@@ -116,9 +116,9 @@
                                             </div>
                                             
                                             <div class="col-md-2">
-                                                <select name="status" class="form-select">
+                                                <select id="status" name="status" class="form-select">
                                                     <option value="">Pilih Keputusan</option>
-                                                    <option value="Lulus">Layak</option>
+                                                    <option value="Ya Lulus">Layak</option>
                                                     <option value="Tidak Lulus">Tidak Layak</option>
                                                 </select>
                                             </div> 
@@ -228,7 +228,16 @@
                                                                 @elseif($item['status'] == "7")
                                                                     <td class="text-center"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @endif
+<<<<<<< Updated upstream
                                                                 <td style="width: 15%">{{$item->keputusan}}</td>
+=======
+                                                                @if($item->keputusan == "LAYAK")
+                                                                    <td style="width: 15%">Ya Lulus</td>
+                                                                @elseif($item->keputusan == "TIDAK LAYAK")
+                                                                    <td style="width: 15%">Tidak Lulus</td>
+                                                                @endif
+
+>>>>>>> Stashed changes
                                                             </tr>
                                                             @endif
                                                        @endif
@@ -316,7 +325,11 @@
                                                                 @elseif($item['status'] == "7")
                                                                     <td class="text-center" style="width: 15%"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                                 @endif
-                                                                <td style="width: 13%">{{$item->keputusan}}</td>
+                                                                @if($item->keputusan == "LAYAK")
+                                                                    <td style="width: 15%">Ya Lulus</td>
+                                                                @elseif($item->keputusan == "TIDAK LAYAK")
+                                                                    <td style="width: 15%">Tidak Lulus</td>
+                                                                @endif
 
                                                             </tr>
                                                         @endif
@@ -402,7 +415,11 @@
                                                             @elseif($item['status'] == "7")
                                                                 <td class="text-center" style="width: 15%"><button type="button" class="btn btn-danger btn-sm">{{ucwords(strtolower($status))}}</button></td>
                                                             @endif
-                                                            <td style="width: 13%">{{$item->keputusan}}</td>
+                                                            @if($item->keputusan == "LAYAK")
+                                                                <td style="width: 15%">Ya Lulus</td>
+                                                            @elseif($item->keputusan == "TIDAK LAYAK")
+                                                                <td style="width: 15%">Tidak Lulus</td>
+                                                            @endif
                                                         </tr>
                                                     @endif
                                                     @endforeach
@@ -555,7 +572,7 @@
                 var selectedInstitusi = $('[name="institusi"]').val();
                 var startDate = $('#start_date').val();
                 var endDate = $('#end_date').val();
-                var status = $('[name="status"]').val();
+                var status = $('#status').val();
                 console.log(selectedInstitusi);
                 console.log(startDate);
                 console.log(endDate);
