@@ -449,6 +449,9 @@
 							$selectedState = '';
 							$selectedCity = '';
 							}
+							if ($selectedCity === '') {
+								$cityID = '';
+							}
 							
 
 							// Remove state and city from the address
@@ -1715,7 +1718,7 @@
 									var id = response['data'][i].id;
 									var bandar = response['data'][i].bandar;
 
-									var isSelected = (bandar === selectedValue);
+									var isSelected = (id == selectedValue);
 
 
 									var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + bandar + "</option>";

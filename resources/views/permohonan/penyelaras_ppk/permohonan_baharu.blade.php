@@ -437,6 +437,7 @@
 
 							foreach ($bandar_city as $city) {
 								$cityName = $city->bandar;
+								$cityID = $city->id;
 
 								// Check if the city name is present in the extracted part of the address
 								if (stripos($statePart, $cityName) !== false) {
@@ -447,6 +448,9 @@
 							} else {
 							$selectedState = '';
 							$selectedCity = '';
+							}
+							if ($selectedCity === '') {
+								$cityID = '';
 							}
 
 
@@ -497,7 +501,7 @@
 								<div class="col-12">
 									<!--begin::Input-->
 									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-										<option>{{$selectedCity}}</option>
+										<option value="{{$cityID}}">{{$selectedCity}}</option>
 										{{-- @foreach ($bandar as $bandartetap)	
 										<option value="{{$bandartetap->id}}" {{$bandartetap->bandar == $selectedCity ? 'selected' : ''}}>{{ $bandartetap->bandar}}</option>
 										@endforeach --}}
@@ -1624,7 +1628,7 @@
 									var id = response['data'][i].id;
 									var bandar = response['data'][i].bandar;
 
-									var isSelected = (id === selectedValue);
+									var isSelected = (id == selectedValue);
 
 
 									var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + bandar + "</option>";

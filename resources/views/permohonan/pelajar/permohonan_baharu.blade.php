@@ -438,6 +438,7 @@
 
 							foreach ($bandar_city as $city) {
 								$cityName = $city->bandar;
+								$cityID = $city->id;
 
 								// Check if the city name is present in the extracted part of the address
 								if (stripos($statePart, $cityName) !== false) {
@@ -449,7 +450,9 @@
 							$selectedState = '';
 							$selectedCity = '';
 							}
-
+							if ($selectedCity === '') {
+								$cityID = '';
+							}
 
 							// Remove state and city from the address
 							$trimmedAddress = str_replace([$selectedCity, $selectedState, $postcode], '', $smoku->alamat_tetap);
@@ -499,10 +502,7 @@
 								<div class="col-12">
 									<!--begin::Input-->
 									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-										<option></option>
-										@foreach ($bandar as $bandartetap)	
-										<option value="{{$bandartetap->id}}" {{$bandartetap->bandar == $selectedCity ? 'selected' : ''}}>{{ $bandartetap->bandar}}</option>
-										@endforeach
+										<option value="{{$cityID}}">{{$selectedCity}}</option>
 									</select>
 									<!--end::Input-->
 								</div>
@@ -1680,48 +1680,66 @@
 			}	
 
 
-			$(document).ready(function(){
-				$('#alamat_tetap_negeri').on('change', function() {
+			//negeri bandar alamat tetap
+			$(document).ready(function () {
+				var previousIdNegeri = $('#alamat_tetap_negeri').val();
+				// alert(previousIdNegeri);
+
+				// Initial AJAX request
+				getBandarData(previousIdNegeri);
+
+				$('#alamat_tetap_negeri').on('change', function () {
 					var idnegeri = $(this).val();
-					//alert(id);
-					// Empty the dropdown
-					$('#alamat_tetap_bandar').find('option').not(':first').remove();
+
+					// Update the previous value
+					previousIdNegeri = idnegeri;
+
+					// Clear existing options
+					$("#alamat_tetap_bandar").empty();
 					$('#alamat_tetap_poskod').val('');
 
 
-					// AJAX request 
-					$.ajax({
-						
-						url: 'getBandar/'+idnegeri,
-						type: 'get',
-						dataType: 'json',
-						success: function(response){
-							//alert('AJAX loaded something');
-							var len = 0;
-									if(response['data'] != null){
-										len = response['data'].length;
-									}
-
-									if(len > 0){
-										// Read data and create <option >
-										for(var i=0; i<len; i++){
-
-											var id = response['data'][i].id;
-											var bandar = response['data'][i].bandar;
-
-											var option = "<option value='"+id+"'>"+bandar+"</option>";
-
-											$("#alamat_tetap_bandar").append(option); 
-										}
-									}
-							}, 
-							error: function(){
-							alert('AJAX load did not work');
-							}
-
-					});
+					// Trigger AJAX request
+					getBandarData(idnegeri);
 				});
 
+				function getBandarData(idnegeri) {
+					// $("#alamat_tetap_bandar").empty();
+
+					// AJAX request 
+					$.ajax({
+						url: 'getBandar/' + idnegeri,
+						type: 'get',
+						dataType: 'json',
+						success: function (response) {
+							var len = 0;
+							if (response['data'] != null) {
+								len = response['data'].length;
+							}
+
+							if (len > 0) {
+								var selectedValue = $("#alamat_tetap_bandar").val();
+								// alert(selectedValue);
+
+								// Read data and create <option >
+								for (var i = 0; i < len; i++) {
+									var id = response['data'][i].id;
+									var bandar = response['data'][i].bandar;
+
+									var isSelected = (id == selectedValue);
+
+
+									var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + bandar + "</option>";
+
+									$("#alamat_tetap_bandar").append(option);
+								}
+							}
+						},
+						error: function () {
+							alert('AJAX load did not work');
+						}
+					});
+				}
 			});
 
 			//parlimen
@@ -1735,7 +1753,7 @@
 					// AJAX request 
 					$.ajax({
 						
-						url: 'getParlimen/'+idnegeri,
+						url: '/getParlimen/'+idnegeri,
 						type: 'get',
 						dataType: 'json',
 						success: function(response){
@@ -1790,7 +1808,7 @@
 					// AJAX request 
 					$.ajax({
 						
-						url: 'getDun/'+idparlimen,
+						url: '/getDun/'+idparlimen,
 						type: 'get',
 						dataType: 'json',
 						success: function(response){
@@ -1822,6 +1840,7 @@
 				});
 
 			});
+
 
 			//negeri surat
 			$(document).ready(function(){
