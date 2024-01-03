@@ -606,7 +606,7 @@
                         { orderable: false, targets: [0] },
                         { targets: [3], visible: false }, // Hide column (index 4)
                         { type: 'date', targets: [6] },
-                        { targets: [7], visible: false } // Hide column (index 9)
+                        { targets: [8], visible: false } // Hide column (index 9)
                     ]
                 });
             }
@@ -685,7 +685,7 @@
 
                 // Apply search filter for status
                 if (status) {
-                    table.column(7).search(status).draw();
+                    table.column(8).search(status).draw();
                 }
 
                 // Log filtered data
