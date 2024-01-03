@@ -44,9 +44,9 @@
     
             .right {
                 float: right;
-                width: 30%;
+                width: 20%;
                 font-size: 10pt; 
-                margin-top: 70px;
+                margin-top: 80px;
                 line-height: 1;
             }
         </style>
@@ -55,7 +55,7 @@
     <body>
         <div class="parentSpace">
             <div class="left">
-                <div class="logo" style="margin-top:10px; float: left;">
+                <div class="logo" style="margin-top:20px; float: left;">
                     <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="height: 100px; width: 150px;">
                 </div>
 
