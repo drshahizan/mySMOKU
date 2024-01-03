@@ -34,12 +34,10 @@ class PelajarController extends Controller
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
 
         $permohonan_id = Permohonan::orderby("id","desc")->where('smoku_id',$smoku_id->id)->first();
-        // dd($permohonan_id);
         if($permohonan_id !== null){
             $permohonan = SejarahPermohonan::orderby("sejarah_permohonan.created_at","desc")
-            ->join('permohonan','sejarah_permohonan.permohonan_id','=','permohonan.id')
             ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
-            ->get(['sejarah_permohonan.*','permohonan.no_rujukan_permohonan','permohonan.status as status_semasa','bk_status.status'])
+            ->get(['sejarah_permohonan.*','bk_status.status','sejarah_permohonan.status as kod_status'])
             ->where('smoku_id',$smoku_id->id)
             ->where('permohonan_id',$permohonan_id->id)
             ->where('status', '!=', 'DISOKONG');
@@ -131,7 +129,7 @@ class PelajarController extends Controller
         }
 
         
-        return view('dashboard.pelajar.dashboard', compact('user','permohonan','akademik','tuntutan'));
+        return view('dashboard.pelajar.dashboard', compact('user','permohonan','permohonan_id','akademik','tuntutan'));
     }
 
     public function tamatPengajian()

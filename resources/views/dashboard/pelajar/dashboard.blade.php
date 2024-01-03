@@ -147,6 +147,7 @@
 							<div class="body">
 								<!--begin::Table-->
 								<div class="table-responsive">
+									
 									<table id="sortTable1" class="table text-center table-striped table-hover dataTable js-exportable">
 										<thead>
 											<tr>
@@ -157,17 +158,22 @@
 										</thead>
 										<tbody>
 											@foreach($permohonan as $permohonan)
+											@php
+												$jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik['id_institusi'])->value('jenis_institusi');
+												
+											@endphp
 											<tr> 
-												<td>{{$permohonan->no_rujukan_permohonan}}</td>
+												<td>{{$permohonan_id->no_rujukan_permohonan}}</td>
 												<td>{{$permohonan->created_at->format('d/m/Y')}}</td>
 												<td>
-													@if ($permohonan->status_semasa == 1)
+													@if ($permohonan_id->status == 1)
 														<a href="{{ route('permohonan') }}">{{ ucwords(strtolower($permohonan->status)) }}</a>
+													@elseif (($permohonan->kod_status === $permohonan_id->status && $jenis_institusi == 'IPTS'))
+														<a href="{{ route('pelajar.sejarah.permohonan') }}">{{ ucwords(strtolower($permohonan->status)) }}</a>
 													@else
 														{{ ucwords(strtolower($permohonan->status)) }}
 													@endif
 												</td>												
-												{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
 											</tr>
 											@endforeach
 										</tbody>
