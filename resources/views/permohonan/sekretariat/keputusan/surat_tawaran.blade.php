@@ -4,7 +4,7 @@
             @page {
                 size: A4;
                 font-family: Arial, sans-serif;
-                font-size: 12px;
+                font-size: 12pt;
                 line-height: 1.15;
             }
     
@@ -45,7 +45,7 @@
             .right {
                 float: right;
                 width: 20%;
-                font-size: 11px; 
+                font-size: 11pt; 
                 margin-top: 70px;
                 line-height: 1;
             }
@@ -59,7 +59,7 @@
                     <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="height: 100px; width: 150px;">
                 </div>
 
-                <div class="address" style="padding-left: 150px; font-size: 12px; margin-top:0%;">
+                <div class="address" style="padding-left: 150px; font-size: 12pt; margin-top:0%;">
                     <b>{{$maklumat_kementerian->nama_kementerian_bm}}</b>
                     <br>{{$maklumat_kementerian->nama_kementerian_bi}}
                     <br>
