@@ -168,8 +168,7 @@
 												<td>
 													@if ($permohonan_id->status == 1)
 														<a href="{{ route('permohonan') }}">{{ ucwords(strtolower($permohonan->status)) }}</a>
-													@elseif (($permohonan->kod_status === $permohonan_id->status && $jenis_institusi == 'IPTS'))
-														<a href="{{ route('pelajar.sejarah.permohonan') }}">{{ ucwords(strtolower($permohonan->status)) }}</a>
+													@elseif (($permohonan_id->status == 5) && ($permohonan->kod_status === $permohonan_id->status) && ($jenis_institusi == 'IPTS'))														<a href="{{ route('pelajar.sejarah.permohonan') }}">{{ ucwords(strtolower($permohonan->status)) }}</a>
 													@else
 														{{ ucwords(strtolower($permohonan->status)) }}
 													@endif
