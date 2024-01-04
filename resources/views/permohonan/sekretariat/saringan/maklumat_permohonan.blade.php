@@ -298,6 +298,7 @@
         //enable input text 'lain-lain'
         document.getElementById("checkbox1c").addEventListener('click', function() {
             if(document.getElementById("checkbox1c").checked){
+                document.getElementById("lain1").required = true;
                 document.getElementById("lain1").disabled = false;
             }
             else{
@@ -306,6 +307,7 @@
         })
         document.getElementById("checkbox2c").addEventListener('click', function() {
             if(document.getElementById("checkbox2c").checked){
+                document.getElementById("lain2").required = true;
                 document.getElementById("lain2").disabled = false;
             }
             else{
@@ -314,6 +316,7 @@
         })
         document.getElementById("checkbox3e").addEventListener('click', function() {
             if(document.getElementById("checkbox3e").checked){
+                document.getElementById("lain3").required = true;
                 document.getElementById("lain3").disabled = false;
             }
             else{
