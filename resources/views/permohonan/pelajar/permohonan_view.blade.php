@@ -1292,13 +1292,16 @@
 							<!--end::Notice-->
 						</div>
 						<!--end::Heading-->
+						@php
+							$saringan = DB::table('permohonan_saringan')->where('permohonan_id', $permohonan->id)->value('catatan_salinan_dokumen');
+						@endphp
 						<!--begin::Table-->
 						<table class="table table-row-dashed fs-6 gy-5">
 							<thead>
 								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 									<th class="min-w-100px">Nama</th>
 									<th class="min-w-100px">Dokumen</th>
-									@if($butiranPelajar->status == 5)
+									@if($butiranPelajar->status == 5 && $saringan !=null)
 									<th class="min-w-100px"></th>
 									@endif
 									<th class="w-110px">Catatan</th>
@@ -1320,7 +1323,7 @@
 											@endif
 										</td>
 										@if($dok->id_dokumen == '1' || $dok->id_dokumen == '2' || $dok->id_dokumen == '3')
-											@if($butiranPelajar->status == 5)
+											@if($butiranPelajar->status == 5 && $saringan !=null)
 												@php
 												$id = ''; // Initialize $id variable
 												@endphp

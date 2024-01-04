@@ -100,7 +100,7 @@ class PermohonanController extends Controller
         ->where('smoku_id', $smoku_id->id)
         ->where('akademik_status', 1)
         ->first();
-        //dd($butiranPelajar);
+        // dd($butiranPelajar);
 
         // dd($permohonan);
         if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
