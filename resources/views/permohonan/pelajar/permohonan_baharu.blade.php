@@ -2279,7 +2279,7 @@
 						console.log("Condition mod ==='2' && sumber ==='1' is met.");
 						document.getElementById("divyuran").style.display = "none";
 						document.getElementById("divelaun").style.display = "none";
-						document.getElementById("tidaklayak").style.display = "none";
+						document.getElementById("tidaklayak").style.display = "";
 
 						
 					} 
@@ -2287,7 +2287,7 @@
 					else {
 						document.getElementById("divyuran").style.display = "none";
 						document.getElementById("divelaun").style.display = "none";
-						document.getElementById("tidaklayak").style.display = "none";
+						document.getElementById("tidaklayak").style.display = "";
 
 
 					}
