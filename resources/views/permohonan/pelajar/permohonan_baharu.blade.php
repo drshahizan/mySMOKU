@@ -1411,6 +1411,17 @@
 									<!--end::Input-->
 								</div>
 							</div>
+
+							<div class="row mb-10" id="tidaklayak">
+								<br>
+								<br>
+								<div class="col-12">
+									{{-- <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-6">Tidak memenuhi syarat untuk memohon. Sila rujuk syarat-syarat kelayakan di pautan: #letak link web</label> --}}
+									{{-- <img src="/assets/contoh/pembiayaan.jpeg" alt="pembiayaan" width="500" height="350"> --}}
+									<div class="alert alert-danger" style="color:black; text-align: center;">Tidak memenuhi syarat untuk memohon. Sila rujuk syarat-syarat kelayakan di pautan: ###</div>
+
+								</div>
+							</div>
 						</div>
 					</div>
 					<!--end::Wrapper-->
@@ -2200,6 +2211,7 @@
 					console.log('amaunwang: ', parsed_max_wang_saku.toFixed(2));
 					var wang_saku_perbulan = parsed_max_wang_saku;
 					var wang_saku = wang_saku_perbulan * bilbulan;
+					document.getElementById("tidaklayak").style.display = "none";
 
 					//sepenuh masa && biasiswa	
 					if (mod === '1' && sumber === '1') {
@@ -2263,28 +2275,16 @@
 						console.log("Condition mod ==='2' && sumber ==='1' is met.");
 						document.getElementById("divyuran").style.display = "none";
 						document.getElementById("divelaun").style.display = "none";
-						// Swal.fire({
-						// 	icon: 'error',
-						// 	title: 'Ralat',
-						// 	text: 'TAK LAYAKKKKKKKKKKKK',
-						// });
+						document.getElementById("tidaklayak").style.display = "none";
 
-						// document.querySelector('.save-next-button').style.display = "none";
-						return;
 						
 					} 
 					//selain tu tak layak semua
 					else {
 						document.getElementById("divyuran").style.display = "none";
 						document.getElementById("divelaun").style.display = "none";
-						// Swal.fire({
-						// 	icon: 'error',
-						// 	title: 'Ralat',
-						// 	text: 'TAK LAYAKKKKKKKKKKKK',
-						// });
+						document.getElementById("tidaklayak").style.display = "none";
 
-						// document.querySelector('.save-next-button').style.display = "none";
-						return;
 
 					}
 

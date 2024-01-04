@@ -692,7 +692,7 @@
 					</div>
 					<!--end::Wrapper-->
 				</div>
-				<!--end::Step 1-->
+				<!--e.nd::Step 1-->
 
 				<!--begin::Step 2-->
 				<div data-kt-stepper-element="content">
@@ -1256,6 +1256,17 @@
 									<!--end::Input-->
 								</div>
 							</div>
+
+							<div class="row mb-10" id="tidaklayak">
+								<br>
+								<br>
+								<div class="col-12">
+									{{-- <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-6">Tidak memenuhi syarat untuk memohon. Sila rujuk syarat-syarat kelayakan di pautan: #letak link web</label> --}}
+									{{-- <img src="/assets/contoh/pembiayaan.jpeg" alt="pembiayaan" width="500" height="350"> --}}
+									<div class="alert alert-danger" style="color:black; text-align: center;">Tidak memenuhi syarat untuk memohon. Sila rujuk syarat-syarat kelayakan di pautan: ###</div>
+
+								</div>
+							</div>
 						</div>
 					</div>
 					<!--end::Wrapper-->
@@ -1484,7 +1495,7 @@
 						
 						@endif
 
-						<button type="button" class="btn btn-lg btn-primary{{ in_array($permohonan->status, [1, 5, 9]) ? ' save-next-button' : '' }}" data-kt-stepper-action="next">
+						<button type="button" class="btn btn-lg btn-primary{{ in_array($permohonan->status, [1, 5, 9]) ? ' save-next-button' : '' }}" data-kt-stepper-action="next" id="test">
 							Teruskan
 							<i class="ki-duotone ki-arrow-right fs-4 ms-1 me-0">
 								<span class="path1"></span>
@@ -2001,6 +2012,7 @@
 					console.log('amaunwang: ', parsed_max_wang_saku.toFixed(2));
 					var wang_saku_perbulan = parsed_max_wang_saku;
 					var wang_saku = wang_saku_perbulan * bilbulan;
+					document.getElementById("tidaklayak").style.display = "none";
 
 					//sepenuh masa && biasiswa	
 					if (mod === '1' && sumber === '1') {
@@ -2061,31 +2073,17 @@
 					} 
 					//separuh masa/jarak jauh/dalam talian && biasiswa
 					else if ((mod === '2' || mod === '3' || mod === '4') && sumber === '1') {
-						console.log("Condition mod ==='2' && sumber ==='1' is met.");
+						console.log("Condition mod === '2' && sumber === '1' is met.");
 						document.getElementById("divyuran").style.display = "none";
 						document.getElementById("divelaun").style.display = "none";
-						// Swal.fire({
-						// 	icon: 'error',
-						// 	title: 'Ralat',
-						// 	text: 'TAK LAYAKKKKKKKKKKKK',
-						// });
+						document.getElementById("tidaklayak").style.display = "";
+					}
 
-						// document.querySelector('.save-next-button').style.display = "none";
-						return;
-						
-					} 
 					//selain tu tak layak semua
 					else {
 						document.getElementById("divyuran").style.display = "none";
 						document.getElementById("divelaun").style.display = "none";
-						// Swal.fire({
-						// 	icon: 'error',
-						// 	title: 'Ralat',
-						// 	text: 'TAK LAYAKKKKKKKKKKKK',
-						// });
-
-						// document.querySelector('.save-next-button').style.display = "none";
-						return;
+						document.getElementById("tidaklayak").style.display = "";
 
 					}
 
