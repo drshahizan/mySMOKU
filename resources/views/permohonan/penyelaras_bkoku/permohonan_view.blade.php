@@ -1257,6 +1257,21 @@
 									<!--end::Input-->
 								</div>
 							</div>	
+
+							<div class="row mb-10" id="tidaklayak">
+								<br>
+								<br>
+								<div class="col-12">
+									{{-- <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-6">Tidak memenuhi syarat untuk memohon. Sila rujuk syarat-syarat kelayakan di pautan: #letak link web</label> --}}
+									{{-- <img src="/assets/contoh/pembiayaan.jpeg" alt="pembiayaan" width="500" height="350"> --}}
+									<div class="alert alert-danger" style="color:black; text-align: center;">
+										Tidak memenuhi syarat untuk memohon. 
+										Sila rujuk syarat-syarat kelayakan di pautan: 
+										<a href="http://bkokudev.mohe.gov.my/landing" target="_blank">Maklumat Pembiayaan</a>
+									</div>
+
+								</div>
+							</div>
 						</div>
 					</div>
 					<!--end::Wrapper-->
@@ -1545,34 +1560,34 @@
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
 			function myFunction() {
-			var checkBox = document.getElementById("sama");  
-			var alamat_tetap = document.getElementById("alamat_tetap");
-			var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
-			var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
-			var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
+				var checkBox = document.getElementById("sama");  
+				var alamat_tetap = document.getElementById("alamat_tetap");
+				var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
+				var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
+				var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
 
-			var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
-			var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
-			var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
-			var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
-			if (checkBox.checked == true){
-				alamat_surat_menyurat.value=alamat_tetap.value; 
-				alamat_surat_negeri.value=alamat_tetap_negeri.value;
-				alamat_surat_bandar.value=alamat_tetap_bandar.value;
-				alamat_surat_poskod.value=alamat_tetap_poskod.value;
-				// Trigger select2 update
-				$(alamat_surat_negeri).trigger('change.select2');
-        		$(alamat_surat_bandar).trigger('change.select2');
-			} else {
-				alamat_surat_menyurat.value="{{$butiranPelajar->alamat_surat_baru}}";
-				alamat_surat_negeri.value="{{$butiranPelajar->alamat_surat_negeri}}";
-				alamat_surat_bandar.value="{{$butiranPelajar->alamat_surat_bandar}}";
-				alamat_surat_poskod.value="{{$butiranPelajar->alamat_surat_poskod}}";
-				// Trigger select2 update
-				$(alamat_surat_negeri).trigger('change.select2');
-        		$(alamat_surat_bandar).trigger('change.select2');
-			}
-		}	
+				var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
+				var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
+				var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
+				var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
+				if (checkBox.checked == true){
+					alamat_surat_menyurat.value=alamat_tetap.value; 
+					alamat_surat_negeri.value=alamat_tetap_negeri.value;
+					alamat_surat_bandar.value=alamat_tetap_bandar.value;
+					alamat_surat_poskod.value=alamat_tetap_poskod.value;
+					// Trigger select2 update
+					$(alamat_surat_negeri).trigger('change.select2');
+					$(alamat_surat_bandar).trigger('change.select2');
+				} else {
+					alamat_surat_menyurat.value="{{$butiranPelajar->alamat_surat_baru}}";
+					alamat_surat_negeri.value="{{$butiranPelajar->alamat_surat_negeri}}";
+					alamat_surat_bandar.value="{{$butiranPelajar->alamat_surat_bandar}}";
+					alamat_surat_poskod.value="{{$butiranPelajar->alamat_surat_poskod}}";
+					// Trigger select2 update
+					$(alamat_surat_negeri).trigger('change.select2');
+					$(alamat_surat_bandar).trigger('change.select2');
+				}
+			}	
 
 			$(document).ready(function () {
 				var previousIdNegeri = $('#alamat_negeri').val();
@@ -2107,8 +2122,8 @@
 					console.log('amaunwang: ', parsed_max_wang_saku.toFixed(2));
 					var wang_saku_perbulan = parsed_max_wang_saku;
 					var wang_saku = wang_saku_perbulan * bilbulan;
+					document.getElementById("tidaklayak").style.display = "none";
 
-						
 					//sepenuh masa && biasiswa	
 					if (mod === '1' && sumber === '1') {
 						
@@ -2171,28 +2186,16 @@
 						console.log("Condition mod ==='2' && sumber ==='1' is met.");
 						document.getElementById("divyuran").style.display = "none";
 						document.getElementById("divelaun").style.display = "none";
-						// Swal.fire({
-						// 	icon: 'error',
-						// 	title: 'Ralat',
-						// 	text: 'TAK LAYAKKKKKKKKKKKK',
-						// });
+						document.getElementById("tidaklayak").style.display = "";
 
-						// document.querySelector('.save-next-button').style.display = "none";
-						return;
 						
 					} 
 					//selain tu tak layak semua
 					else {
 						document.getElementById("divyuran").style.display = "none";
 						document.getElementById("divelaun").style.display = "none";
-						// Swal.fire({
-						// 	icon: 'error',
-						// 	title: 'Ralat',
-						// 	text: 'TAK LAYAKKKKKKKKKKKK',
-						// });
+						document.getElementById("tidaklayak").style.display = "";
 
-						// document.querySelector('.save-next-button').style.display = "none";
-						return;
 
 					}
 
