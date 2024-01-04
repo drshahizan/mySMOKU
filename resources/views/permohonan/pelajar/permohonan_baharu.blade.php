@@ -1418,7 +1418,11 @@
 								<div class="col-12">
 									{{-- <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-6">Tidak memenuhi syarat untuk memohon. Sila rujuk syarat-syarat kelayakan di pautan: #letak link web</label> --}}
 									{{-- <img src="/assets/contoh/pembiayaan.jpeg" alt="pembiayaan" width="500" height="350"> --}}
-									<div class="alert alert-danger" style="color:black; text-align: center;">Tidak memenuhi syarat untuk memohon. Sila rujuk syarat-syarat kelayakan di pautan: ###</div>
+									<div class="alert alert-danger" style="color:black; text-align: center;">
+										Tidak memenuhi syarat untuk memohon. 
+										Sila rujuk syarat-syarat kelayakan di pautan: 
+										<a href="http://bkokudev.mohe.gov.my/landing" target="_blank">Maklumat Pembiayaan</a>
+									</div>
 
 								</div>
 							</div>
@@ -1513,7 +1517,7 @@
 						<div class="pb-10 pb-lg-15">
 							<!--begin::Notice-->
 							<div class="text-dark fw-semibold fs-6">
-								<i class='fas fa-exclamation-triangle' style='color:orange;'></i>&nbsp; Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a> untuk mengurangkan saiz fail sebelum memuat naik fail.
+								<i class='fas fa-exclamation-triangle' style='color:orange;'></i>&nbsp; Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a>untuk mengurangkan saiz fail sebelum memuat naik fail.
 							</div>
 
 							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; Format fail yang boleh dimuat naik adalah format 
