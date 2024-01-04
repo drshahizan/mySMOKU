@@ -1293,7 +1293,11 @@
 						</div>
 						<!--end::Heading-->
 						@php
-							$saringan = DB::table('permohonan_saringan')->where('permohonan_id', $permohonan->id)->value('catatan_salinan_dokumen');
+							$saringan = DB::table('permohonan_saringan')->where('permohonan_id', $permohonan->id)->orderBy('id', 'DESC')->value('catatan_salinan_dokumen');
+							$saring_bank = Str::contains($saringan, 'Ralat pada penyata bank');
+							$saring_surat = Str::contains($saringan, 'Ralat pada surat tawaran');
+							$saring_resit = Str::contains($saringan, 'Ralat pada resit');
+							
 						@endphp
 						<!--begin::Table-->
 						<table class="table table-row-dashed fs-6 gy-5">
@@ -1341,7 +1345,15 @@
 														$id='invoisResit';
 													@endphp
 												@endif
-												<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
+												@if($id == 'akaunBank' && $saring_bank)
+													<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
+												@elseif($id == 'suratTawaran' && $saring_surat)
+													<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
+												@elseif($id == 'invoisResit' && $saring_resit)
+													<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
+												@else
+													<td class="fv-row"></td>
+												@endif
 											@endif
 											<td><a href="/assets/dokumen/permohonan/{{ $dok->dokumen }}" target="_blank">{{ $dok->dokumen }}</a></td>
 											<td><textarea type="text" class="form-control form-control-sm" id="catatan" rows="1" name="catatan" readonly>{{ $dok->catatan }}</textarea></td>
