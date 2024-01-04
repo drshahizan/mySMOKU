@@ -1247,12 +1247,21 @@
 							<!--end::Notice-->
 						</div>
 						<!--end::Heading-->
+						@php
+							$saringan = DB::table('permohonan_saringan')->where('permohonan_id', $permohonan->id)->orderBy('id', 'DESC')->value('catatan_salinan_dokumen');
+							$saring_bank = Str::contains($saringan, 'Ralat pada penyata bank');
+							$saring_surat = Str::contains($saringan, 'Ralat pada surat tawaran');
+							$saring_resit = Str::contains($saringan, 'Ralat pada resit');
+						@endphp
 						<!--begin::Table-->
 						<table class="table table-row-dashed fs-6 gy-5">
 							<thead>
 								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 									<th class="min-w-100px">Nama</th>
 									<th class="min-w-100px">Dokumen</th>
+									@if($butiranPelajar->status == 5 && $saringan !=null)
+									<th class="min-w-100px"></th>
+									@endif
 									<th class="w-110px">Catatan</th>
 								</tr>
 							</thead>
@@ -1272,7 +1281,7 @@
 											@endif
 										</td>
 										@if($dok->id_dokumen == '1' || $dok->id_dokumen == '2' || $dok->id_dokumen == '3')
-											@if($butiranPelajar->status == 5)
+											@if($butiranPelajar->status == 5 && $saringan !=null)
 												@php
 												$id = ''; // Initialize $id variable
 												@endphp
@@ -1290,11 +1299,19 @@
 														$id='invoisResit';
 													@endphp
 												@endif
-												<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
-											@endif
-											<td><a href="/assets/dokumen/permohonan/{{ $dok->dokumen }}" target="_blank">{{ $dok->dokumen }}</a></td>
-											<td><textarea type="text" class="form-control form-control-sm" id="catatan" rows="1" name="catatan" readonly>{{ $dok->catatan }}</textarea></td>
-										@else
+												@if($id == 'akaunBank' && $saring_bank)
+													<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
+													@elseif($id == 'suratTawaran' && $saring_surat)
+														<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
+													@elseif($id == 'invoisResit' && $saring_resit)
+														<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
+													@else
+														<td class="fv-row"></td>
+													@endif
+												@endif
+												<td><a href="/assets/dokumen/permohonan/{{ $dok->dokumen }}" target="_blank">{{ $dok->dokumen }}</a></td>
+												<td><textarea type="text" class="form-control form-control-sm" id="catatan" rows="1" name="catatan" readonly>{{ $dok->catatan }}</textarea></td>
+											@else
 											<td><a href="/assets/dokumen/permohonan/{{ $dok->dokumen }}" target="_blank">{{ $dok->dokumen }}</a></td>
 											<td><textarea type="text" class="form-control form-control-sm" id="catatan" rows="1" name="catatan" readonly>{{ $dok->catatan }}</textarea></td>
 										@endif
