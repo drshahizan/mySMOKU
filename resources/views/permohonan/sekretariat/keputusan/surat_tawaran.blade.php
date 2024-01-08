@@ -44,8 +44,8 @@
     
             .right {
                 float: right;
-                width: 22%;
-                font-size: 10pt; 
+                width: 20%;
+                font-size: 9pt; 
                 margin-top: 100px;
                 line-height: 1;
             }
@@ -59,12 +59,12 @@
                     <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="height: 100px; width: 150px;">
                 </div>
 
-                <div class="address" style="padding-left: 150px; font-size: 11pt; margin-top:0%;">
-                    <b>{{$maklumat_kementerian->nama_kementerian_bm}}</b>
-                    <br>{{$maklumat_kementerian->nama_kementerian_bi}}
+                <div class="address" style="padding-left: 150px; font-size: 10pt; margin-top:0%;">
+                    <b>{{ strtoupper ($maklumat_kementerian->nama_kementerian_bm)}}</b>
+                    <br><span style="font-style: italic;">{{ strtoupper($maklumat_kementerian->nama_kementerian_bi) }}</span>
                     <br>
                     <br>{{$maklumat_kementerian->nama_bahagian_bm}}
-                    <br>{{$maklumat_kementerian->nama_bahagian_bi}}
+                    <br><span style="font-style: italic;">{{$maklumat_kementerian->nama_bahagian_bi}}</span>
                     <br>{{$maklumat_kementerian->alamat1}}
                     <br>{{$maklumat_kementerian->alamat2}}
                     <br>{{$maklumat_kementerian->poskod}} {{$maklumat_kementerian->negeri}}

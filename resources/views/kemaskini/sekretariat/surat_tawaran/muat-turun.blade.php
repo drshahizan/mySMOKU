@@ -44,9 +44,9 @@
     
             .right {
                 float: right;
-                width: 20%;
-                font-size: 11px; 
-                margin-top: 75px;
+                width: 22%;
+                font-size: 9pt; 
+                margin-top: 100px;
                 line-height: 1;
             }
         </style>
@@ -55,11 +55,11 @@
     <body>
         <div class="parentSpace">
             <div class="left">
-                <div class="logo" style="margin-top:10px; float: left;">
+                <div class="logo" style="margin-top:20px; float: left;">
                     <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="height: 100px; width: 150px;">
                 </div>
 
-                <div class="address" style="padding-left: 150px; font-size: 11pt; margin-top:0%;">
+                <div class="address" style="padding-left: 150px; font-size: 10pt; margin-top:0%;">
                     <b>{{$maklumat_kementerian->nama_kementerian_bm}}</b>
                     <br>{{$maklumat_kementerian->nama_kementerian_bi}}
                     <br>
