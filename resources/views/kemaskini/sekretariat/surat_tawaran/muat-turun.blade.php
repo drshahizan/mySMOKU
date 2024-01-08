@@ -4,7 +4,7 @@
             @page {
                 size: A4;
                 font-family: Arial, sans-serif;
-                font-size: 14px;
+                font-size: 12pt;
                 line-height: 1.15;
             }
     
@@ -46,7 +46,7 @@
                 float: right;
                 width: 20%;
                 font-size: 11px; 
-                margin-top:75px;
+                margin-top: 75px;
                 line-height: 1;
             }
         </style>
@@ -59,7 +59,7 @@
                     <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="height: 100px; width: 150px;">
                 </div>
 
-                <div class="address" style="padding-left: 150px; font-size: 12px; margin-top:0%;">
+                <div class="address" style="padding-left: 150px; font-size: 11pt; margin-top:0%;">
                     <b>{{$maklumat_kementerian->nama_kementerian_bm}}</b>
                     <br>{{$maklumat_kementerian->nama_kementerian_bi}}
                     <br>
@@ -93,7 +93,9 @@
             </div>
         </div>
            
-        <br><br><br><br><br><br><br><br><hr>
+        <br><br><br><br><br><br><br><br>
+        
+        <hr>
 
         <p>
             <span style="float: right">
@@ -168,7 +170,7 @@
             {{ $suratTawaran->penutup3_4}} <br>
         </p>
         <br>
-        <p><div style="text-align: center;">Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>
+        <p><div style="text-align: center;  font-style: italic;">Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>
         <br>
         <p>s.k :<br>
             {{ $suratTawaran->penutup4_1}} <br>
