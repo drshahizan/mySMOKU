@@ -44,8 +44,8 @@
     
             .right {
                 float: right;
-                width: 22%;
-                font-size: 10pt; 
+                width: 20%;
+                font-size: 9pt; 
                 margin-top: 100px;
                 line-height: 1;
             }
@@ -59,12 +59,12 @@
                     <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="height: 100px; width: 150px;">
                 </div>
 
-                <div class="address" style="padding-left: 150px; font-size: 11pt; margin-top:0%;">
-                    <b>{{$maklumat_kementerian->nama_kementerian_bm}}</b>
-                    <br>{{$maklumat_kementerian->nama_kementerian_bi}}
+                <div class="address" style="padding-left: 150px; font-size: 10pt; margin-top:0%;">
+                    <b>{{ strtoupper ($maklumat_kementerian->nama_kementerian_bm)}}</b>
+                    <br><span style="font-style: italic;">{{ strtoupper($maklumat_kementerian->nama_kementerian_bi) }}</span>
                     <br>
                     <br>{{$maklumat_kementerian->nama_bahagian_bm}}
-                    <br>{{$maklumat_kementerian->nama_bahagian_bi}}
+                    <br><span style="font-style: italic;">{{$maklumat_kementerian->nama_bahagian_bi}}</span>
                     <br>{{$maklumat_kementerian->alamat1}}
                     <br>{{$maklumat_kementerian->alamat2}}
                     <br>{{$maklumat_kementerian->poskod}} {{$maklumat_kementerian->negeri}}
@@ -175,8 +175,8 @@
         <div class="main-content" style="text-align:justify;">
             <p>2.  Bantuan ini berkuatkuasa mulai <b>{{ \Carbon\Carbon::parse($tarikh_mula)->isoFormat('D MMMM Y') }} hingga {{ \Carbon\Carbon::parse($tarikh_tamat)->isoFormat('D MMMM Y') }}.</b>
                   {{$kandungan_surat->kandungan1}}</p><br>
-            <p>3.  {{$kandungan_surat->kandungan2}}</p><br>
-            <p>4.  {{$kandungan_surat->kandungan3}}</p><br>
+            <p>3.   {{$kandungan_surat->kandungan2}}</p><br>
+            <p>4.   {{$kandungan_surat->kandungan3}}</p><br>
         </div>
         
         <p>Sekian, terima kasih.</p>
@@ -194,9 +194,9 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             {{$kandungan_surat->penutup3_4}} <br>
         </p>
-        <br>
+        <br><br>
         <div style="text-align: center; font-style: italic;">"Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div>
-        <br>
+        <br><br>
         <p>s.k :<br>
             {{$kandungan_surat->penutup4_1}} <br>
             {{$kandungan_surat->penutup4_2}} <br>
