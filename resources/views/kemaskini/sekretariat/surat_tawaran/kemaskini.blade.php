@@ -90,20 +90,20 @@
                     
                                 <div class="right">
                                     <table style="margin: 0; padding: 0; border-collapse: collapse;">
-                                        <tr>
-                                            <td style="line-height: 1;">Tel</td>
-                                            <td style="line-height: 1;">:</td>
-                                            <td style="line-height: 1;">{{$maklumat_kementerian->tel}}</td>
+                                        <tr style="line-height: 0.5cm;">
+                                            <td>Tel</td>
+                                            <td>:</td>
+                                            <td>{{$maklumat_kementerian->tel}}</td>
                                         </tr>
-                                        <tr>
-                                            <td style="line-height: 1;">Hotline</td>
-                                            <td style="line-height: 1;">:</td>
-                                            <td style="line-height: 1;">{{$maklumat_kementerian->hotline}}</td>
+                                        <tr style="line-height: 0.5cm;">
+                                            <td>Hotline</td>
+                                            <td>:</td>
+                                            <td>{{$maklumat_kementerian->hotline}}</td>
                                         </tr>
-                                        <tr>
-                                            <td style="line-height: 1;">Faks</td>
-                                            <td style="line-height: 1;">:</td>
-                                            <td style="line-height: 1;">{{$maklumat_kementerian->faks}}</td>
+                                        <tr style="line-height: 0.5cm;">
+                                            <td>Faks</td>
+                                            <td>:</td>
+                                            <td>{{$maklumat_kementerian->faks}}</td>
                                         </tr>
                                     </table>
                                 </div>
