@@ -90,17 +90,17 @@
                     
                                 <div class="right">
                                     <table style="margin: 0; padding: 0; border-collapse: collapse;">
-                                        <tr style="line-height: 0.5cm;">
+                                        <tr style="line-height: 0;">
                                             <td>Tel</td>
                                             <td>:</td>
                                             <td>{{$maklumat_kementerian->tel}}</td>
                                         </tr>
-                                        <tr style="line-height: 0.5cm;">
+                                        <tr style="line-height: 0;">
                                             <td>Hotline</td>
                                             <td>:</td>
                                             <td>{{$maklumat_kementerian->hotline}}</td>
                                         </tr>
-                                        <tr style="line-height: 0.5cm;">
+                                        <tr style="line-height: 0;">
                                             <td>Faks</td>
                                             <td>:</td>
                                             <td>{{$maklumat_kementerian->faks}}</td>
