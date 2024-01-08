@@ -175,8 +175,8 @@
         <div class="main-content" style="text-align:justify;">
             <p>2.  Bantuan ini berkuatkuasa mulai <b>{{ \Carbon\Carbon::parse($tarikh_mula)->isoFormat('D MMMM Y') }} hingga {{ \Carbon\Carbon::parse($tarikh_tamat)->isoFormat('D MMMM Y') }}.</b>
                   {{$kandungan_surat->kandungan1}}</p><br>
-            <p>3.  {{$kandungan_surat->kandungan2}}</p><br>
-            <p>4.  {{$kandungan_surat->kandungan3}}</p><br>
+            <p>3.   {{$kandungan_surat->kandungan2}}</p><br>
+            <p>4.   {{$kandungan_surat->kandungan3}}</p><br>
         </div>
         
         <p>Sekian, terima kasih.</p>
@@ -194,9 +194,9 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             {{$kandungan_surat->penutup3_4}} <br>
         </p>
-        <br>
+        <br><br>
         <div style="text-align: center; font-style: italic;">"Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div>
-        <br>
+        <br><br>
         <p>s.k :<br>
             {{$kandungan_surat->penutup4_1}} <br>
             {{$kandungan_surat->penutup4_2}} <br>
