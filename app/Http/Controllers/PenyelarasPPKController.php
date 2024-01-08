@@ -932,37 +932,29 @@ class PenyelarasPPKController extends Controller
 
         // Check if files were uploaded
         if (!empty($kepPeperiksaan)) {
-            foreach ($kepPeperiksaan as $file) {
-                // Check if a valid file was uploaded
-                if ($file->isValid()) {
-                    $filenamekepP = $file->getClientOriginalName();  
-                    $uniqueFilename = $counter . '_' . $filenamekepP;
-        
-                    // Append increment to the filename until it's unique
-                    while (file_exists('assets/dokumen/peperiksaan/' . $uniqueFilename)) {
-                        $counter++;
-                        $uniqueFilename = $counter . '_' . $filenamekepP;
-                    }
-        
-                    $file->move('assets/dokumen/peperiksaan', $uniqueFilename);
-        
-                    $data = new peperiksaan();
-                    $data->permohonan_id = $permohonan->id;
-                    $data->sesi = $request->sesi;
-                    $data->semester = $request->semester;
-                    $data->cgpa = $request->cgpa;
-                    $data->kepPeperiksaan = $uniqueFilename;
-                    $data->save();
-        
-                    // Increment counter after successful database save
+           
+                $filenamekepP = $kepPeperiksaan->getClientOriginalName();  
+                $uniqueFilename = $counter . '_' . $filenamekepP;
+
+                while (file_exists('assets/dokumen/peperiksaan/' . $uniqueFilename)) {
                     $counter++;
-                    return redirect()->route('senarai.ppk.tuntutanBaharu')->with('message', 'Keputusan peperiksaan pelajar telah di simpan.');
-                } else {
-                    // Handle the case where a file is not valid
-                    // You might want to redirect back with an error message
-                    return redirect()->back()->with('error', 'Invalid file upload.');
+                    $uniqueFilename = $counter . '_' . $filenamekepP;
                 }
-            }
+    
+                $kepPeperiksaan->move('assets/dokumen/peperiksaan', $uniqueFilename);
+    
+                $data = new peperiksaan();
+                $data->permohonan_id = $permohonan->id;
+                $data->sesi = $request->sesi;
+                $data->semester = $request->semester;
+                $data->cgpa = $request->cgpa;
+                $data->kepPeperiksaan = $uniqueFilename;
+                $data->save();
+    
+                // Increment counter after successful database save
+                $counter++;
+                return redirect()->route('senarai.ppk.tuntutanBaharu')->with('message', 'Keputusan peperiksaan pelajar telah di simpan.');
+                
         } else {
             // Handle the case where no files were uploaded
             // You might want to redirect back with an error message
