@@ -43,7 +43,7 @@
 									<tbody>
 										{{-- SIJIL TAMAT / SENAT --}}
 										<tr>
-											<td>Sijil Tamat Pengajian / Surat Senat&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
+											<td style="width: ">Sijil Tamat Pengajian / Surat Senat&nbsp;<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a></td>
 											<td>
 												<input type="file" id="sijilTamat" name="sijilTamat[]" required/>
 												@if(session()->has('uploadedSijilTamat'))
@@ -100,7 +100,7 @@
 									</tbody>
 								</table>
 							
-								<div class="d-flex flex-center mt-15">
+								<div class="d-flex flex-center mt-10">
 									<button type="submit" class="btn btn-primary btn-sm">
 										Simpan
 									</button>
