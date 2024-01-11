@@ -57,7 +57,6 @@
                         </div>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-                                <br>
                                 <div class="body">
                                     <div class="table-responsive">
                                         <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
