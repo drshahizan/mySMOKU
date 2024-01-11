@@ -40,174 +40,226 @@
 	<!--end::Breadcrumb-->
 </div>
 <!--end::Page title-->
-<br>
+<br>    
+<!--begin::Stepper-->
 <div class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid gap-10" id="kt_create_account_stepper">
 	<!--begin::Aside-->
 	<div class="card d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px">
 		<!--begin::Wrapper-->
 		<div class="card-body px-6 px-lg-10 px-xxl-15 py-20">
 			<!--begin::Nav-->
-			<div class="stepper-nav">
-				<!--begin::Step 1-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
-					<!--begin::Wrapper-->
-					<div class="stepper-wrapper">
-						<!--begin::Icon-->
-						<div class="stepper-icon w-40px h-40px">
-							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
-							<span class="stepper-number">1</span>
-						</div>
-						<!--end::Icon-->
-						<!--begin::Label-->
-						<div class="stepper-label">
-							<h3 class="stepper-title">Maklumat Peribadi</h3>
-							<div class="stepper-desc fw-semibold">Profil Peribadi Diri</div>
-						</div>
-						<!--end::Label-->
-					</div>
-					<!--end::Wrapper-->
-					<!--begin::Line-->
-					<div class="stepper-line h-40px"></div>
-					<!--end::Line-->
-				</div>
-				<!--end::Step 1-->
-				<!--begin::Step 2-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
-					<!--begin::Wrapper-->
-					<div class="stepper-wrapper">
-						<!--begin::Icon-->
-						<div class="stepper-icon w-40px h-40px">
-							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
-							<span class="stepper-number">2</span>
-						</div>
-						<!--end::Icon-->
-						<!--begin::Label-->
-						<div class="stepper-label">
-							<h3 class="stepper-title">Maklumat Waris</h3>
-							<div class="stepper-desc fw-semibold">Profil Waris</div>
-						</div>
-						<!--end::Label-->
-					</div>
-					<!--end::Wrapper-->
-					<!--begin::Line-->
-					<div class="stepper-line h-40px"></div>
-					<!--end::Line-->
-				</div>
-				<!--end::Step 2-->
-				<!--begin::Step 3-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
-					<!--begin::Wrapper-->
-					<div class="stepper-wrapper">
-						<!--begin::Icon-->
-						<div class="stepper-icon w-40px h-40px">
-							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
-							<span class="stepper-number">3</span>
-						</div>
-						<!--end::Icon-->
-						<!--begin::Label-->
-						<div class="stepper-label">
-							<h3 class="stepper-title">Maklumat Akademik</h3>
-							<div class="stepper-desc fw-semibold">Pembelajaran Akademik</div>
-						</div>
-						<!--end::Label-->
-					</div>
-					<!--end::Wrapper-->
-					<!--begin::Line-->
-					<div class="stepper-line h-40px"></div>
-					<!--end::Line-->
-				</div>
-				<!--end::Step 3-->
-				<!--begin::Step 4-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
-					<!--begin::Wrapper-->
-					<div class="stepper-wrapper">
-						<!--begin::Icon-->
-						<div class="stepper-icon w-40px h-40px">
-							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
-							<span class="stepper-number">4</span>
-						</div>
-						<!--end::Icon-->
-						<!--begin::Label-->
-						<div class="stepper-label">
-							<h3 class="stepper-title">Maklumat Tuntutan</h3>
-							<div class="stepper-desc fw-semibold">Tuntutan Yuran dan Elaun Wang Saku</div>
-						</div>
-						<!--end::Label-->
-						
-					</div>
-					<!--end::Wrapper-->
-					<div class="stepper-line h-40px"></div>
-				</div>
-				<!--end::Step 4-->
-				<!--begin::Step 5-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
-					<!--begin::Wrapper-->
-					<div class="stepper-wrapper">
-						<!--begin::Icon-->
-						<div class="stepper-icon w-40px h-40px">
-							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
-							<span class="stepper-number">5</span>
-						</div>
-						<!--end::Icon-->
-						<!--begin::Label-->
-						<div class="stepper-label">
-							<h3 class="stepper-title">Dokumen</h3>
-							<div class="stepper-desc fw-semibold">Salinan Dokumen</div>
-						</div>
-						<!--end::Label-->
-						
-					</div>
-					<!--end::Wrapper-->
-					<div class="stepper-line h-40px"></div>
-				</div>
-				<!--end::Step 5-->
-				<!--begin::Step 6-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
-					<!--begin::Wrapper-->
-					<div class="stepper-wrapper">
-						<!--begin::Icon-->
-						<div class="stepper-icon w-40px h-40px">
-							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
-							<span class="stepper-number">6</span>
-						</div>
-						<!--end::Icon-->
-						<!--begin::Label-->
-						<div class="stepper-label">
-							<h3 class="stepper-title">Perakuan</h3>
-							<div class="stepper-desc fw-semibold">Pengesahan Semua Maklumat</div>
-						</div>
-						<!--end::Label-->
-					</div>
-					<!--end::Wrapper-->
-					<!--begin::Line-->
-					<div class="stepper-line h-40px"></div>
-					<!--end::Line-->
-				</div>
-				<!--end::Step 6-->
-				<!--begin::Step 7-->
-				<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
-					<!--begin::Wrapper-->
-					<div class="stepper-wrapper">
-						<!--begin::Icon-->
-						<div class="stepper-icon w-40px h-40px">
-							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
-							<span class="stepper-number">7</span>
-						</div>
-						<!--end::Icon-->
-						<!--begin::Label-->
-						<div class="stepper-label">
-							<h3 class="stepper-title">Hantar</h3>
-							<div class="stepper-desc fw-semibold">Selesai</div>
-						</div>
-						<!--end::Label-->
-					</div>
-					<!--end::Wrapper-->
-					<!--begin::Line-->
-					<!--end::Line-->
-				</div>
-				<!--end::Step 7-->
-			</div>
-			<!--end::Nav-->
+            <div class="stepper-nav flex-center flex-wrap mb-10">
+                <!--begin::Step 1-->
+                <div class="stepper-item mx-8 my-4 current" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                    <!--begin::Wrapper-->
+                    <div class="stepper-wrapper d-flex align-items-center">
+                        <!--begin::Icon-->
+                        <div class="stepper-icon w-40px h-40px">
+                            <i class="stepper-check fas fa-check"></i>
+                            <span class="stepper-number">1</span>
+                        </div>
+                        <!--end::Icon-->
+
+                        <!--begin::Label-->
+                        <div class="stepper-label">
+                            <h3 class="stepper-title">
+                                Maklumat Peribadi
+                            </h3>
+
+                            <div class="stepper-desc">
+                                Profil Peribadi Diri
+                            </div>
+                        </div>
+                        <!--end::Label-->
+                    </div>
+                    <!--end::Wrapper-->
+
+                    <!--begin::Line-->
+                    <div class="stepper-line h-40px"></div>
+                    <!--end::Line-->
+                </div>
+                <!--end::Step 1-->
+
+                <!--begin::Step 2-->
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                    <!--begin::Wrapper-->
+                    <div class="stepper-wrapper d-flex align-items-center">
+                            <!--begin::Icon-->
+                        <div class="stepper-icon w-40px h-40px">
+                            <i class="stepper-check fas fa-check"></i>
+                            <span class="stepper-number">2</span>
+                        </div>
+                        <!--begin::Icon-->
+
+                        <!--begin::Label-->
+                        <div class="stepper-label">
+                            <h3 class="stepper-title">
+                                Maklumat Waris
+                            </h3>
+
+                            <div class="stepper-desc">
+                                Profil Waris
+                            </div>
+                        </div>
+                        <!--end::Label-->
+                    </div>
+                    <!--end::Wrapper-->
+
+                    <!--begin::Line-->
+                    <div class="stepper-line h-40px"></div>
+                    <!--end::Line-->
+                </div>
+                <!--end::Step 2-->
+
+                <!--begin::Step 3-->
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                    <!--begin::Wrapper-->
+                    <div class="stepper-wrapper d-flex align-items-center">
+                        <!--begin::Icon-->
+                        <div class="stepper-icon w-40px h-40px">
+                            <i class="stepper-check fas fa-check"></i>
+                            <span class="stepper-number">3</span>
+                        </div>
+                        <!--begin::Icon-->
+
+                        <!--begin::Label-->
+                        <div class="stepper-label">
+                            <h3 class="stepper-title">
+                                Maklumat Akademik
+                            </h3>
+
+                            <div class="stepper-desc">
+                                Profil Akademik
+                            </div>
+                        </div>
+                        <!--end::Label-->
+                    </div>
+                    <!--end::Wrapper-->
+
+                    <!--begin::Line-->
+                    <div class="stepper-line h-40px"></div>
+                    <!--end::Line-->
+                </div>
+                <!--end::Step 3-->
+
+                <!--begin::Step 4-->
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                    <!--begin::Wrapper-->
+                    <div class="stepper-wrapper d-flex align-items-center">
+                        <!--begin::Icon-->
+                        <div class="stepper-icon w-40px h-40px">
+                            <i class="stepper-check fas fa-check"></i>
+                            <span class="stepper-number">4</span>
+                        </div>
+                        <!--begin::Icon-->
+
+                        <!--begin::Label-->
+                        <div class="stepper-label">
+                            <h3 class="stepper-title">
+                                Maklumat Tuntutan
+                            </h3>
+
+                            <div class="stepper-desc">
+                                Tuntutan Yuran dan Elaun Wang Saku
+                            </div>
+                        </div>
+                        <!--end::Label-->
+                    </div>
+                    <!--end::Wrapper-->
+                    <!--begin::Line-->
+                    <div class="stepper-line h-40px"></div>
+                    <!--end::Line-->
+                </div>
+                <!--end::Step 4-->
+
+                <!--begin::Step 5-->
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                    <!--begin::Wrapper-->
+                    <div class="stepper-wrapper d-flex align-items-center">
+                        <!--begin::Icon-->
+                        <div class="stepper-icon w-40px h-40px">
+                            <i class="stepper-check fas fa-check"></i>
+                            <span class="stepper-number">5</span>
+                        </div>
+                        <!--begin::Icon-->
+
+                        <!--begin::Label-->
+                        <div class="stepper-label">
+                            <h3 class="stepper-title">
+                                Dokumen
+                            </h3>
+
+                            <div class="stepper-desc">
+                                Salinan Dokumen
+                            </div>
+                        </div>
+                        <!--end::Label-->
+                    </div>
+                    <!--end::Wrapper-->
+                    <!--begin::Line-->
+                    <div class="stepper-line h-40px"></div>
+                    <!--end::Line-->
+                </div>
+                <!--end::Step 5-->
+
+                <!--begin::Step 6-->
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                    <!--begin::Wrapper-->
+                    <div class="stepper-wrapper d-flex align-items-center">
+                        <!--begin::Icon-->
+                        <div class="stepper-icon w-40px h-40px">
+                            <i class="stepper-check fas fa-check"></i>
+                            <span class="stepper-number">6</span>
+                        </div>
+                        <!--begin::Icon-->
+
+                        <!--begin::Label-->
+                        <div class="stepper-label">
+                            <h3 class="stepper-title">
+                                Perakuan
+                            </h3>
+
+                            <div class="stepper-desc">
+                                Pengesahan Semua Maklumat
+                            </div>
+                        </div>
+                        <!--end::Label-->
+                    </div>
+                    <!--end::Wrapper-->
+                    <!--begin::Line-->
+                    <div class="stepper-line h-40px"></div>
+                    <!--end::Line-->
+                </div>
+                <!--end::Step 6-->
+
+                    <!--begin::Step 7-->
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                    <!--begin::Wrapper-->
+                    <div class="stepper-wrapper d-flex align-items-center">
+                        <!--begin::Icon-->
+                        <div class="stepper-icon w-40px h-40px">
+                            <i class="stepper-check fas fa-check"></i>
+                            <span class="stepper-number">7</span>
+                        </div>
+                        <!--begin::Icon-->
+
+                        <!--begin::Label-->
+                        <div class="stepper-label">
+                            <h3 class="stepper-title">
+                                Hantar
+                            </h3>
+
+                            <div class="stepper-desc">
+                                Selesai
+                            </div>
+                        </div>
+                        <!--end::Label-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Step 7-->
+            </div>
+            <!--end::Nav-->
 		</div>
 		<!--end::Wrapper-->
 	</div>
@@ -1532,7 +1584,7 @@
 									
 
 </div>
-
+<!--end::Stepper-->
 
 
 <!--begin::Javascript-->
