@@ -36,9 +36,9 @@
 	<div class="col-lg-12">
 		<div class="card">
 			<div class="header">
-				<h2>Senarai Permohonan yang telah Dibayar</h2>
+				<h2>Senarai Tuntutan yang telah Dibayar</h2>
 			</div>
-			
+
 			<div class="body">
 				<div class="table-responsive">
 					<table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
