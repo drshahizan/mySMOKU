@@ -57,8 +57,6 @@ var KTCreateAccount = function () {
 
 		// Validation before going to next page
 		stepperObj.on('kt.stepper.next', function (stepper) {
-			console.log('stepper.next');
-			
 
 			// Validate form before change stepper step
 			var validator = validations[stepper.getCurrentStepIndex() - 1]; // get validator for currnt step
@@ -499,8 +497,7 @@ var KTCreateAccount = function () {
 					})
 				}
 			}
-		));
-		
+		));	
 
 		// Step 4
 		validations.push(FormValidation.formValidation(
@@ -534,6 +531,7 @@ var KTCreateAccount = function () {
 				}
 			}
 		));
+		
 		// Step 5
 		validations.push(FormValidation.formValidation(
 			form,
