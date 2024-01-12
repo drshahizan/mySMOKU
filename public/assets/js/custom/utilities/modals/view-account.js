@@ -588,21 +588,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 validator.validate().then(function (status) {
                     if (status === "Valid") {
                         stepper.goNext();
-                    } 
-                    // else {
-                    //     // Handle validation error
-                    //     Swal.fire({
-                    //         text: "Please complete the required information.",
-                    //         icon: "error",
-                    //         buttonsStyling: false,
-                    //         confirmButtonText: "Ok",
-                    //         customClass: {
-                    //             confirmButton: "btn btn-light",
-                    //         },
-                    //     }).then(function () {
-                    //         KTUtil.scrollTop();
-                    //     });
-                    // }
+                    } else {
+						Swal.fire({
+							text: "Sila lengkapkan maklumat yang diperlukan.",
+							icon: "error",
+							buttonsStyling: false,
+							confirmButtonText: "Ok",
+							customClass: {
+								confirmButton: "btn btn-light"
+							}
+						}).then(function () {
+							KTUtil.scrollTop();
+						});
+					}
                 });
             } else {
                 stepper.goNext();
@@ -617,22 +615,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (validator) {
                 validator.validate().then(function (status) {
-                    if (status === 'Valid') {
+					// console.log(status);
+                    // if (status === 'Valid') {
                         stepper.goPrevious();
                         KTUtil.scrollTop();
-                    } else {
-                        Swal.fire({
-                            text: "Please complete the required information.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok",
-                            customClass: {
-                                confirmButton: "btn btn-light",
-                            },
-                        }).then(function () {
-                            KTUtil.scrollTop();
-                        });
-                    }
+                    // } else {
+                    //     Swal.fire({
+                    //         text: "Please complete the required information.",
+                    //         icon: "error",
+                    //         buttonsStyling: false,
+                    //         confirmButtonText: "Ok",
+                    //         customClass: {
+                    //             confirmButton: "btn btn-light",
+                    //         },
+                    //     }).then(function () {
+                    //         KTUtil.scrollTop();
+                    //     });
+                    // }
                 });
             } else {
                 stepper.goPrevious();
