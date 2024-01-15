@@ -45,9 +45,9 @@
 		<!--begin::Wrapper-->
 		<div class="card-body px-6 px-lg-10 px-xxl-15 py-20">
 			<!--begin::Nav-->
-			<div class="stepper-nav">
+            <div class="stepper-nav flex-center flex-wrap mb-10">
 				<!--begin::Step 1-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
+                <div class="stepper-item mx-8 my-4 current" data-kt-stepper-element="nav" data-kt-stepper-action="step">
 					<!--begin::Wrapper-->
 					<div class="stepper-wrapper">
 						<!--begin::Icon-->
@@ -70,7 +70,7 @@
 				</div>
 				<!--end::Step 1-->
 				<!--begin::Step 2-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
 					<!--begin::Wrapper-->
 					<div class="stepper-wrapper">
 						<!--begin::Icon-->
@@ -93,7 +93,7 @@
 				</div>
 				<!--end::Step 2-->
 				<!--begin::Step 3-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
 					<!--begin::Wrapper-->
 					<div class="stepper-wrapper">
 						<!--begin::Icon-->
@@ -116,7 +116,7 @@
 				</div>
 				<!--end::Step 3-->
 				<!--begin::Step 4-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
 					<!--begin::Wrapper-->
 					<div class="stepper-wrapper">
 						<!--begin::Icon-->
@@ -138,7 +138,7 @@
 				</div>
 				<!--end::Step 4-->
 				<!--begin::Step 5-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
 					<!--begin::Wrapper-->
 					<div class="stepper-wrapper">
 						<!--begin::Icon-->
@@ -160,7 +160,7 @@
 				</div>
 				<!--end::Step 5-->
 				<!--begin::Step 6-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
 					<!--begin::Wrapper-->
 					<div class="stepper-wrapper">
 						<!--begin::Icon-->
@@ -183,7 +183,7 @@
 				</div>
 				<!--end::Step 6-->
 				<!--begin::Step 7-->
-				<div class="stepper-item  mark-completed" data-kt-stepper-element="nav">
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
 					<!--begin::Wrapper-->
 					<div class="stepper-wrapper">
 						<!--begin::Icon-->
@@ -1547,7 +1547,7 @@
 		<!--end::Global Javascript Bundle-->
 
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="/assets/js/custom/utilities/modals/create-account.js"></script>
+		<script src="/assets/js/custom/utilities/modals/view-account.js"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 
@@ -1788,7 +1788,7 @@
 					// AJAX request 
 					$.ajax({
 						
-						url: 'getBandar/'+idnegeri,
+						url: '/getBandar/'+idnegeri,
 						type: 'get',
 						dataType: 'json',
 						success: function(response){
