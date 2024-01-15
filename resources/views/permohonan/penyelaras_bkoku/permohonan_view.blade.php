@@ -105,7 +105,7 @@
 						<!--begin::Label-->
 						<div class="stepper-label">
 							<h3 class="stepper-title">Maklumat Akademik</h3>
-							<div class="stepper-desc fw-semibold">Pembelajaran Akademik</div>
+							<div class="stepper-desc fw-semibold">Profil Akademik</div>
 						</div>
 						<!--end::Label-->
 					</div>
