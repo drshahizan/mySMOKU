@@ -486,129 +486,10 @@ document.addEventListener("DOMContentLoaded", function () {
         var stepper = new KTStepper(element);
 
         // Click event
-        // stepper.on("kt.stepper.click", function (stepper) {
-        //     // Get the current step index
-        //     var currentStepIndex = stepper.getCurrentStepIndex();
-        //     console.log(currentStepIndex);
-
-
-        //     // Get the clicked step index
-        //     var clickedStepIndex = stepper.getClickedStepIndex();
-        //     console.log(clickedStepIndex);
-
-        //     // Validate form only when moving to the next step
-        //     var validationStatus = {};  // Object to store validation status for each step
-
-        //     var validator = validations[currentStepIndex - 1];
-        
-        //     // Validate the form for the current step
-        //     // if (validator) {
-        //     //     validator.validate().then(function (status) {
-        //     //         validationStatus[currentStepIndex] = status;  // Store validation status for the current step
-        //     //         // Check validation status for all steps
-		// 	// 		for (var i = 1; i <= 7; i++) {
-		// 	// 			console.log("Step " + i + " - Validation Status:", validationStatus[i]);
-		// 	// 		}
-		// 	// 		// Find the first step with invalid validation
-        //     //             if (status !== "Valid") {
-        //     //                 Swal.fire({
-        //     //                     text: "Sila isi maklumat langkah " + currentStepIndex,
-        //     //                     icon: "error",
-        //     //                     buttonsStyling: false,
-        //     //                     confirmButtonText: "Ok",
-        //     //                     customClass: {
-        //     //                         confirmButton: "btn btn-light",
-        //     //                     },
-        //     //                 });
-        //     //             }
-        //     //             else {
-        //     //                 if (clickedStepIndex === 5 || clickedStepIndex === 6 || clickedStepIndex === 7) {
-        //     //                     var mod = form.querySelector('[name="mod"]').value;
-        //     //                     var sumber = form.querySelector('[name="sumber_biaya"]').value;
-        //     //                     // Check conditions for proceeding or showing an error
-        //     //                     if (mod === '1' && sumber === '1') {
-        //     //                         stepper.goTo(clickedStepIndex);
-        //     //                     } else if (mod === '1' && sumber === '4') {
-        //     //                         stepper.goTo(clickedStepIndex);
-        //     //                     } else if (mod === '1' && sumber === '3') {
-        //     //                         stepper.goTo(clickedStepIndex);
-        //     //                     } else if ((mod === '2' || mod === '3' || mod === '4') && (sumber === '3' || sumber === '4')) {
-        //     //                         stepper.goTo(clickedStepIndex);                                
-        //     //                     } else if ((mod === '2' || mod === '3' || mod === '4') && sumber === '1') {
-        //     //                         // Handle validation error
-        //     //                         Swal.fire({
-        //     //                             text: "Tidak layakkk.",
-        //     //                             icon: "error",
-        //     //                             buttonsStyling: false,
-        //     //                             confirmButtonText: "Ok",
-        //     //                             customClass: {
-        //     //                                 confirmButton: "btn btn-light",
-        //     //                             },
-        //     //                         }).then(function () {
-        //     //                             stepper.goTo(currentStepIndex); // Go back to the current step
-        //     //                             KTUtil.scrollTop();
-        //     //                         });
-                         
-        //     //                     } else {
-        //     //                         // Handle validation error
-        //     //                         Swal.fire({
-        //     //                             text: "Tidak layakkk.",
-        //     //                             icon: "error",
-        //     //                             buttonsStyling: false,
-        //     //                             confirmButtonText: "Ok",
-        //     //                             customClass: {
-        //     //                                 confirmButton: "btn btn-light",
-        //     //                             },
-        //     //                         }).then(function () {
-        //     //                             stepper.goTo(currentStepIndex); // Go back to the current step
-        //     //                             KTUtil.scrollTop();
-        //     //                         });
-        //     //                     }
-
-        //     //                 } else {
-        //     //                     // For other steps, proceed to the next step
-        //     //                     stepper.goTo(clickedStepIndex);
-        //     //                 }
-        //     //             }
-					
-        //     //         KTUtil.scrollTop();
-                        
-        //     //     });
-        //     // }
-        //     // else {
-        //     //     stepper.goTo(clickedStepIndex);
-        //     // } 
-		// 	// Function to validate each step asynchronously
-		// 	async function validateSteps() {
-		// 		for (var i = 1; i <= 6; i++) {
-		// 			var validator = validations[i - 1];
-
-		// 			if (validator) {
-		// 				try {
-		// 					// Wait for the validation promise to resolve
-		// 					var status = await validator.validate();
-		// 					validationStatus[i] = status;
-		// 					console.log("Step " + i + " - Validation Status:", status);
-		// 				} catch (error) {
-		// 					// Handle any errors that occur during validation
-		// 					validationStatus[i] = "Error";
-		// 					console.error("Step " + i + " - Validation Error:", error);
-		// 				}
-		// 			} else {
-		// 				validationStatus[i] = "Undefined";  // or handle the case where validator is not defined
-		// 				console.log("Step " + i + " - Validation Status: Undefined");
-		// 			}
-		// 		}
-		// 	}
-
-		// 	// Call the function to start validation
-		// 	validateSteps();
-            
-        // });
 		stepper.on("kt.stepper.click", async function (stepper) {
 			// Get the current step index
 			var currentStepIndex = stepper.getCurrentStepIndex();
-			console.log("Current Step: " + currentStepIndex);
+			// console.log("Current Step: " + currentStepIndex);
 		
 			// Validate form only when moving to the next step
 			var validationStatus = {};  // Object to store validation status for each step
@@ -644,8 +525,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 			// If the clicked step is valid or it is a step before the first invalid step, proceed
 			var clickedStepIndex = stepper.getClickedStepIndex();
-			console.log("Clicked Step: " + clickedStepIndex);
-			console.log("firstInvalid Step: " + firstInvalidStep);
+			// console.log("Clicked Step: " + clickedStepIndex);
+			// console.log("firstInvalid Step: " + firstInvalidStep);
 		
 			if (validationStatus[clickedStepIndex] === "Valid" || (firstInvalidStep !== null && clickedStepIndex < firstInvalidStep)) {
 				stepper.goTo(clickedStepIndex);
@@ -665,7 +546,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			
 		});
 		
-        
         // Next event
         stepper.on("kt.stepper.next", function (stepper) {
             // Validate form before change stepper step
