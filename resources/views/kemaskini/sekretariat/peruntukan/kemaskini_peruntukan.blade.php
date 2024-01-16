@@ -148,12 +148,28 @@
                 $('#tarikh_tamat').val(tamatValue);
                 $('#jumlah').val(jumlahValue);
 
-                $('#tarikh_mula').trigger('change');
-                $('#tarikh_tamat').trigger('change');
-                $('#jumlah').trigger('change');
-
                 $('#recordForm').show();
             });
         });
+
+        // $(document).ready(function () {
+        //     $('#myTable tbody tr').on('dblclick', function () {
+        //         var rowData = $(this).find('td');
+
+        //         var mulaValue = $(rowData[0]).text();
+        //         var tamatValue = $(rowData[1]).text();
+        //         var jumlahValue = $(rowData[2]).text().replace('RM ', '');
+
+        //         $('#tarikh_mula').val(mulaValue);
+        //         $('#tarikh_tamat').val(tamatValue);
+        //         $('#jumlah').val(jumlahValue);
+
+        //         $('#tarikh_mula').trigger('change');
+        //         $('#tarikh_tamat').trigger('change');
+        //         $('#jumlah').trigger('change');
+
+        //         $('#recordForm').show();
+        //     });
+        // });
     </script>
 </x-default-layout>
