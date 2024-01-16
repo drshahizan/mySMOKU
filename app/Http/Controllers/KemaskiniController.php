@@ -15,7 +15,6 @@ class KemaskiniController extends Controller
     }
 
     public function kemaskiniJumlahPeruntukan(Request $request){
-
         $peruntukan = JumlahPeruntukan::where('tarikh_mula', $request->tarikh_mula)
         ->where('tarikh_tamat', $request->tarikh_tamat)
         ->where('jumlah', $request->jumlah)

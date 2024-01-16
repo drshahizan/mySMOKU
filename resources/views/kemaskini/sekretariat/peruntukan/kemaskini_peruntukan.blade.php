@@ -25,7 +25,7 @@
             <li class="breadcrumb-item text-dark" style="color:darkblue">Jumlah Peruntukan</li>
             <!--end::Item-->
         </ul>
-    <!--end::Breadcrumb-->
+        <!--end::Breadcrumb-->
     </div>
     <!--end::Page title-->
 
@@ -50,7 +50,7 @@
                                     <label class="fs-4 fw-semibold mb-2">Tarikh Mula</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="date" class="form-control form-control-solid" name="tarikh_mula" value="" required oninvalid="this.setCustomValidity('Masukkan tarikh mula.')" oninput="setCustomValidity('')"/>
+                                    <input type="date" class="form-control form-control-solid" name="tarikh_mula" id="tarikh_mula" value="" required oninvalid="this.setCustomValidity('Masukkan tarikh mula.')" oninput="setCustomValidity('')"/>
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
@@ -61,7 +61,7 @@
                                     <label class="fs-4 fw-semibold mb-2">Tarikh Tamat</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="date" class="form-control form-control-solid" name="tarikh_tamat" value="" required oninvalid="this.setCustomValidity('Masukkan tarikh tamat.')" oninput="setCustomValidity('')"/>
+                                    <input type="date" class="form-control form-control-solid" name="tarikh_tamat" id="tarikh_tamat" value="" required oninvalid="this.setCustomValidity('Masukkan tarikh tamat.')" oninput="setCustomValidity('')"/>
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
