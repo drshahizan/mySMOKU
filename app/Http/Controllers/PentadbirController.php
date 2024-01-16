@@ -348,7 +348,6 @@ class PentadbirController extends Controller
     public function jumlahTuntutan()
     {
         $jumlah = JumlahTuntutan::get();
-           
         return view('kemaskini.pentadbir.jumlah_tuntutan', compact('jumlah'));
     }
 
@@ -359,13 +358,14 @@ class PentadbirController extends Controller
         ->where('semester', $request->semester)
         ->first();
         if ($jumlah === null) {
-        $jumlah = JumlahTuntutan::create([
-            'program' => $request->program,
-            'jenis' => $request->jenis,
-            'semester' => $request->semester,
-            'jumlah' => $request->jumlah,
-        ]);
-        } else {
+            $jumlah = JumlahTuntutan::create([
+                'program' => $request->program,
+                'jenis' => $request->jenis,
+                'semester' => $request->semester,
+                'jumlah' => $request->jumlah,
+            ]);
+        } 
+        else {
             $jumlah->update([
                 'program' => $request->program,
                 'jenis' => $request->jenis,

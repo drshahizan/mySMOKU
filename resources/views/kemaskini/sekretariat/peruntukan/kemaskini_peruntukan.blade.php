@@ -2,8 +2,9 @@
     <head>
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="/assets/css/saringan.css">
-        <!-- Javascript -->
-        <script src="https://cdn.tiny.cloud/1/v736541al0ntzh14edk63z19dzyqs1xn2bkc5em78rv1yeis/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     </head>
 
     <!--begin::Page title-->
@@ -25,7 +26,7 @@
             <li class="breadcrumb-item text-dark" style="color:darkblue">Jumlah Peruntukan</li>
             <!--end::Item-->
         </ul>
-    <!--end::Breadcrumb-->
+        <!--end::Breadcrumb-->
     </div>
     <!--end::Page title-->
 
@@ -50,7 +51,7 @@
                                     <label class="fs-4 fw-semibold mb-2">Tarikh Mula</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="date" class="form-control form-control-solid" name="tarikh_mula" value="" required oninvalid="this.setCustomValidity('Masukkan tarikh mula.')" oninput="setCustomValidity('')"/>
+                                    <input type="date" name="tarikh_mula" id="tarikh_mula"  value="" class="form-control form-control-solid" required oninvalid="this.setCustomValidity('Masukkan tarikh mula.')" oninput="setCustomValidity('')"/>
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
@@ -61,7 +62,7 @@
                                     <label class="fs-4 fw-semibold mb-2">Tarikh Tamat</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="date" class="form-control form-control-solid" name="tarikh_tamat" value="" required oninvalid="this.setCustomValidity('Masukkan tarikh tamat.')" oninput="setCustomValidity('')"/>
+                                    <input type="date" name="tarikh_tamat" id="tarikh_tamat" value="" class="form-control form-control-solid" required oninvalid="this.setCustomValidity('Masukkan tarikh tamat.')" oninput="setCustomValidity('')"/>
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
@@ -72,7 +73,7 @@
                                     <label class="fs-4 fw-semibold mb-2">Jumlah (RM)</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="number" class="form-control form-control-solid" name="jumlah" id="jumlah" placeholder="Jumlah Peruntukan" value="" required step="0.01" oninvalid="this.setCustomValidity('Masukkan jumlah peruntukan.')" oninput="setCustomValidity('')"/>
+                                    <input type="number" name="jumlah" id="jumlah" class="form-control form-control-solid" placeholder="Jumlah Peruntukan" value="" required step="0.01" oninvalid="this.setCustomValidity('Masukkan jumlah peruntukan.')" oninput="setCustomValidity('')"/>
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
@@ -138,20 +139,29 @@
             $('#myTable tbody tr').on('dblclick', function () {
                 var rowData = $(this).find('td');
 
+                // Extract data for the Tarikh Mula, Tarikh Tamat, and Jumlah fields (adjust column indices as needed)
                 var mulaValue = $(rowData[0]).text();
                 var tamatValue = $(rowData[1]).text();
-                var jumlahValue = $(rowData[2]).text().replace('RM ', '');
+                var jumlahValue = $(rowData[2]).text().replace('RM ', '').replace(',', ''); // Remove commas from numeric value
 
-                $('#tarikh_mula').val(mulaValue);
-                $('#tarikh_tamat').val(tamatValue);
+                // Format date values
+                var formattedMulaValue = formatDate(mulaValue);
+                var formattedTamatValue = formatDate(tamatValue);
+
+                // Set the values in the input fields
+                $('#tarikh_mula').val(formattedMulaValue);
+                $('#tarikh_tamat').val(formattedTamatValue);
                 $('#jumlah').val(jumlahValue);
 
-                $('#tarikh_mula').trigger('change');
-                $('#tarikh_tamat').trigger('change');
-                $('#jumlah').trigger('change');
-
-                $('#recordForm').show();
+                // Toggle the visibility of the form
+                $('#recordForm').css('display', 'block');
             });
+
+            // Function to format date as "yyyy-MM-dd"
+            function formatDate(inputDate) {
+                var dateParts = inputDate.split("/");
+                return dateParts[2] + "-" + dateParts[1] + "-" + dateParts[0];
+            }
         });
     </script>
 </x-default-layout>
