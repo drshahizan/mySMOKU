@@ -136,21 +136,35 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function () 
+        {
             $('#myTable tbody tr').on('dblclick', function () {
-                var rowData = $(this).find('td');
+                // Handle double-click event here
+                var rowData = $(this).find('td'); // Get the data from the clicked row
 
+                // Extract data for the Tarikh Mula, Tarikh Tamat, and Jumlah fields (adjust column indices as needed)
                 var mulaValue = $(rowData[0]).text();
                 var tamatValue = $(rowData[1]).text();
-                var jumlahValue = $(rowData[2]).text();
+                var jumlahValue = $(rowData[2]).text().replace('RM ', '');
 
+                // Log the extracted values to the console for debugging
+                console.log("mulaValue: " + mulaValue);
+                console.log("tamatValue: " + tamatValue);
+                console.log("jumlahValue: " + jumlahValue);
+
+                // Set the values in the input fields
                 $('#tarikh_mula').val(mulaValue);
                 $('#tarikh_tamat').val(tamatValue);
                 $('#jumlah').val(jumlahValue);
 
+                // Log a message to confirm that the values are being set
+                console.log("Form fields updated");
+
+                // Show the form
                 $('#recordForm').show();
             });
         });
+
 
         // $(document).ready(function () {
         //     $('#myTable tbody tr').on('dblclick', function () {
