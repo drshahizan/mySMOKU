@@ -15,61 +15,33 @@ class KemaskiniController extends Controller
     }
 
     public function kemaskiniJumlahPeruntukan(Request $request){
-        // Debugging statement to check the received request data
-        dd($request->all());
-    
         $request->validate([
             'tarikh_mula' => 'required|date',
             'tarikh_tamat' => 'required|date',
             'jumlah' => 'required|numeric',
         ]);
     
-        // Debugging statement to check the conditions and values used in updateOrInsert
-        dd([
-            'conditions' => [
-                'tarikh_mula' => $request->tarikh_mula,
-                'tarikh_tamat' => $request->tarikh_tamat,
-            ],
-            'values' => [
-                'jumlah' => $request->jumlah,
-            ],
-        ]);
+        // Find the record or create a new one
+        $peruntukan = JumlahPeruntukan::where('tarikh_mula', $request->tarikh_mula)
+            ->where('tarikh_tamat', $request->tarikh_tamat)
+            ->first();
     
-        JumlahPeruntukan::updateOrInsert(
-            [
+        if ($peruntukan === null) {
+            JumlahPeruntukan::create([
                 'tarikh_mula' => $request->tarikh_mula,
                 'tarikh_tamat' => $request->tarikh_tamat,
-            ],
-            [
                 'jumlah' => $request->jumlah,
-            ]
-        );
+            ]);
+        } else {
+            $peruntukan->update([
+                'tarikh_mula' => $request->tarikh_mula,
+                'tarikh_tamat' => $request->tarikh_tamat,
+                'jumlah' => $request->jumlah,
+            ]);
+        }
     
         return redirect()->route('senarai.amaun.peruntukan');
     }
-    
-    // public function kemaskiniJumlahPeruntukan(Request $request){
-    //     $peruntukan = JumlahPeruntukan::where('tarikh_mula', $request->tarikh_mula)
-    //     ->where('tarikh_tamat', $request->tarikh_tamat)
-    //     ->where('jumlah', $request->jumlah)
-    //     ->first();
-
-    //     if ($peruntukan === null) {
-    //         $peruntukan = JumlahPeruntukan::create([
-    //             'tarikh_mula' => $request->tarikh_mula,
-    //             'tarikh_tamat' => $request->tarikh_tamat,
-    //             'jumlah' => $request->jumlah,
-    //         ]);
-    //     } 
-    //     else {
-    //         $peruntukan->update([
-    //             'tarikh_mula' => $request->tarikh_mula,
-    //             'tarikh_tamat' => $request->tarikh_tamat,
-    //             'jumlah' => $request->jumlah,
-    //         ]);
-    //     }
-    //     return redirect()->route('senarai.amaun.peruntukan');
-    // }
 
     public function senaraiEmel(){
         return view('kemaskini.sekretariat.emel.senarai_emel');
