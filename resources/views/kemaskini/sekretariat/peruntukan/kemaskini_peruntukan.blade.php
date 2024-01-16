@@ -142,35 +142,38 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        $(document).ready(function () 
-        {
+        $(document).ready(function () {
             $('#myTable tbody tr').on('dblclick', function () {
-                // Handle double-click event here
-                var rowData = $(this).find('td'); // Get the data from the clicked row
+                var rowData = $(this).find('td');
 
                 // Extract data for the Tarikh Mula, Tarikh Tamat, and Jumlah fields (adjust column indices as needed)
                 var mulaValue = $(rowData[0]).text();
                 var tamatValue = $(rowData[1]).text();
                 var jumlahValue = $(rowData[2]).text().replace('RM ', '');
 
-                // Log the extracted values to the console for debugging
-                console.log("mulaValue: " + mulaValue);
-                console.log("tamatValue: " + tamatValue);
-                console.log("jumlahValue: " + jumlahValue);
+                // Format date values
+                var formattedMulaValue = formatDate(mulaValue);
+                var formattedTamatValue = formatDate(tamatValue);
 
                 // Set the values in the input fields
-                $('#tarikh_mula').val(mulaValue);
-                $('#tarikh_tamat').val(tamatValue);
+                $('#tarikh_mula').val(formattedMulaValue);
+                $('#tarikh_tamat').val(formattedTamatValue);
                 $('#jumlah').val(jumlahValue);
 
-                // Log a message to confirm that the values are being set
+                // Toggle the visibility of the form
+                $('#recordForm').css('display', 'block');
+
+                // Log a message to confirm that the values are being set and the form is displayed
                 console.log("Form fields updated");
-
-                // Show the form
-                $('#recordForm').show();
+                console.log("Form shown");
             });
-        });
 
+            // Function to format date as "yyyy-MM-dd"
+            function formatDate(inputDate) {
+                var dateParts = inputDate.split("/");
+                return dateParts[2] + "-" + dateParts[1] + "-" + dateParts[0];
+            }
+        });
 
         // $(document).ready(function () {
         //     $('#myTable tbody tr').on('dblclick', function () {
