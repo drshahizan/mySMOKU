@@ -1,21 +1,22 @@
 <x-default-layout> 
 <head>
-
-<!-- MAIN CSS -->
-<link rel="stylesheet" href="/assets/css/saringan.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="/assets/css/saringan.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 </head>
+
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->
 	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Selenggara Had Maksima Tuntutan</h1>
 	<!--end::Title-->
 </div>
+
 <br>
+
 <!--end::Page title-->
 <div class="table-responsive">
 	<!--begin::Content-->
