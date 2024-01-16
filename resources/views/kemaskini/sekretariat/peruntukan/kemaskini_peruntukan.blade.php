@@ -142,7 +142,7 @@
 
                 var mulaValue = $(rowData[0]).text();
                 var tamatValue = $(rowData[1]).text();
-                var jumlahValue = $(rowData[2]).text().replace('RM ', '');
+                var jumlahValue = $(rowData[2]).text();
 
                 $('#tarikh_mula').val(mulaValue);
                 $('#tarikh_tamat').val(tamatValue);
