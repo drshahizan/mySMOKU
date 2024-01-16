@@ -5,7 +5,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     </head>
 
     <!--begin::Page title-->
@@ -156,10 +155,6 @@
 
                 // Toggle the visibility of the form
                 $('#recordForm').css('display', 'block');
-
-                // Log a message to confirm that the values are being set and the form is displayed
-                console.log("Form fields updated");
-                console.log("Form shown");
             });
 
             // Function to format date as "yyyy-MM-dd"
