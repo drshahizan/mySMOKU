@@ -15,19 +15,35 @@ class KemaskiniController extends Controller
     }
 
     public function kemaskiniJumlahPeruntukan(Request $request){
-        // Find the record or create a new one
-        $peruntukan = JumlahPeruntukan::firstOrNew([
-            'tarikh_mula' => $request->tarikh_mula,
-            'tarikh_tamat' => $request->tarikh_tamat,
-            'jumlah' => $request->jumlah,
+        // Debugging statement to check the received request data
+        dd($request->all());
+    
+        $request->validate([
+            'tarikh_mula' => 'required|date',
+            'tarikh_tamat' => 'required|date',
+            'jumlah' => 'required|numeric',
         ]);
     
-        // Update the attributes and save the record
-        $peruntukan->update([
-            'tarikh_mula' => $request->tarikh_mula,
-            'tarikh_tamat' => $request->tarikh_tamat,
-            'jumlah' => $request->jumlah,
+        // Debugging statement to check the conditions and values used in updateOrInsert
+        dd([
+            'conditions' => [
+                'tarikh_mula' => $request->tarikh_mula,
+                'tarikh_tamat' => $request->tarikh_tamat,
+            ],
+            'values' => [
+                'jumlah' => $request->jumlah,
+            ],
         ]);
+    
+        JumlahPeruntukan::updateOrInsert(
+            [
+                'tarikh_mula' => $request->tarikh_mula,
+                'tarikh_tamat' => $request->tarikh_tamat,
+            ],
+            [
+                'jumlah' => $request->jumlah,
+            ]
+        );
     
         return redirect()->route('senarai.amaun.peruntukan');
     }
