@@ -1,21 +1,21 @@
 <x-default-layout> 
-    <style>
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+	<style>
 		/* Some custom styles to beautify this example */
 		.bs-example{
 			margin: 60px 0;
 		}
-		a, button{
+		button{
 			margin-right: 30px;
 		  }
 		i{
 			font-size: 22px;
 		}
 	</style>
-	
-	
-<head>
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
+
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->

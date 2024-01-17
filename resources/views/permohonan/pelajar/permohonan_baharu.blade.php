@@ -1,18 +1,19 @@
 <x-default-layout> 
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 	<style>
 		/* Some custom styles to beautify this example */
 		.bs-example{
 			margin: 60px 0;
 		}
 		button{
-			margin-right: 20px;
+			margin-right: 30px;
 		  }
 		i{
 			font-size: 22px;
 		}
 	</style>
-<head>
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <!--begin::Page title-->
