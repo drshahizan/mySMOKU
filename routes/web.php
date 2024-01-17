@@ -52,6 +52,10 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
     Route::get('/testmqa/api', [MaklumatKursusController::class, 'test']);
 //});
 
+Route::get('/', function () {
+    return view('pages.landing'); 
+})->name('home');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -63,7 +67,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/tuntutanESP', [MaklumatESPController::class, 'tuntutan'])->name('tuntutan.esp');
     Route::post('/tuntutanESP', [MaklumatESPController::class, 'hantarTuntutan'])->name('maklumat_tuntutan.esp');
 
-    Route::get('/', [DashboardController::class, 'index']);
+    // Route::get('/', [DashboardController::class, 'index']);
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/pelajar/dashboard', [PelajarController::class, 'index'])->name('pelajar.dashboard');
