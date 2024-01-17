@@ -1,19 +1,21 @@
 <x-default-layout> 
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 	<style>
 		/* Some custom styles to beautify this example */
 		.bs-example{
 			margin: 60px 0;
 		}
-		a, button{
+		button{
 			margin-right: 30px;
-		  }
+		}
 		i{
 			font-size: 22px;
 		}
 	</style>
-<head>
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>	
+
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->
@@ -1409,7 +1411,7 @@
 										<button class="btn btn-success btn-sm btn-add-more" type="button">+</button>
 										<!-- End -->
 									</td>
-									<td class="input-group control-group img_div form-group col-md-10">
+									<td class="input-group control-group img_div form-group col-md-10 mt-2">
 										Resit/Invois Tambahan (Jika Ada)
 									</td>
 								</tr>
@@ -1436,12 +1438,15 @@
 							<!--begin::Notice-->
 							<div class="text-dark fw-semibold fs-6">
 								<i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp;
-								Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a>untuk mengurangkan saiz fail sebelum memuat naik fail.
-							</div>							
-							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; Format fail yang boleh dimuat naik adalah format 
-							'.pdf', '.jpg', '.png' dan '.jpeg'
+								Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini </a>untuk mengurangkan saiz fail sebelum memuat naik fail.
+							</div>	
+
+							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; 
+								Format fail yang boleh dimuat naik adalah format '.pdf', '.jpg', '.png' dan '.jpeg'.
 							</div>
-							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; Saiz maksimum fail adalah 2 MB.
+
+							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; 
+								Saiz maksimum fail adalah 2 MB.
 							</div>
 							<!--end::Notice-->
 						</div>

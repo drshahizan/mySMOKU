@@ -1454,7 +1454,7 @@
 										<button class="btn btn-success btn-sm btn-add-more" type="button">+</button>
 										<!-- End -->
 									</td>
-									<td class="input-group control-group img_div form-group col-md-10 pt-5 pb-5">
+									<td class="input-group control-group img_div form-group col-md-10 mt-2">
 										Resit/Invois Tambahan (Jika Ada)
 									</td>
 								</tr>
