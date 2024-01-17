@@ -4,8 +4,8 @@
 		.bs-example{
 			margin: 60px 0;
 		}
-		a, button{
-			margin-right: 30px;
+		button{
+			margin-right: 20px;
 		  }
 		i{
 			font-size: 22px;
