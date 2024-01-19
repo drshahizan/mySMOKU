@@ -24,6 +24,7 @@
 		<script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
 	</head>
 	<!--end::Head-->
+
 	<!--begin::Body-->
 	<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative app-blank">
 		<!--begin::Theme mode setup on page load-->
@@ -330,10 +331,10 @@
 					<!--begin::Container-->
 					<div class="container">
 						<!--begin::Plans-->
-						<div class="d-flex flex-column container pt-lg-20">
+						<div class="d-flex flex-column container pt-lg-15">
 							<!--begin::Heading-->
 							<div class="mb-13 text-center">
-								<h1 class="fs-2hx fw-bold text-white mb-5" id="syarat" data-kt-scroll-offset="{default: 100, lg: 150}">SYARAT-SYARAT BANTUAN KEWANGAN PELAJAR OKU</h1>
+								<h1 class="fs-2hx fw-bold text-dark" id="syarat" data-kt-scroll-offset="{default: 100, lg: 150}">SYARAT-SYARAT BANTUAN KEWANGAN PELAJAR OKU</h1>
 							</div>
 							<!--end::Heading-->
 							<!--begin::Syarat-->
@@ -344,7 +345,7 @@
 									<div class="col-xl-12">
 										<div class="d-flex h-100 align-items-center">
 											<!--begin::Option-->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-15 px-10">
+											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-10 px-10">
 												<!--begin::Features-->
 												<div class="w-100 mb-10">
 													<!--begin::Item-->
@@ -460,10 +461,10 @@
 					<!--begin::Container-->
 					<div class="container">
 						<!--begin::Plans-->
-						<div class="d-flex flex-column container pt-lg-20">
+						<div class="d-flex flex-column container pt-lg-15">
 							<!--begin::Heading-->
 							<div class="mb-13 text-center">
-								<h1 class="fs-2hx fw-bold text-white mb-5" id="bayaran" data-kt-scroll-offset="{default: 100, lg: 150}">MAKLUMAT PEMBIAYAAN</h1>
+								<h1 class="fs-2hx fw-bold text-dark" id="bayaran" data-kt-scroll-offset="{default: 100, lg: 150}">MAKLUMAT PEMBIAYAAN</h1>
 							</div>
 							<!--end::Heading-->
 							<!--begin::Bayaran-->
@@ -474,7 +475,7 @@
 									<div class="col-xl-12">
 										<div class="d-flex h-100 align-items-center">
 											<!--begin::Option-->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-15 px-10">
+											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-10 px-10">
 												<!--begin::Features-->
 												<div class="w-100 mb-10">
 													<!--begin::Item-->
@@ -510,11 +511,11 @@
 			</div>
 			<!--end::Bayaran Section-->
 			<!--begin::Hubungi Section-->
-			<div class="mt-20 mb-n20 position-relative z-index-2">
+			<div class="mb-n20 mb-lg-n20 z-index-2">
 				<!--begin::Container-->
 				<div class="container">
 					<!--begin::Heading-->
-					<div class="text-center mb-17">
+					<div class="text-center mb-15">
 						<!--begin::Title-->
 						<h3 class="fs-2hx text-dark mb-5" id="hubungi" data-kt-scroll-offset="{default: 125, lg: 150}">PERMOHONAN / PERTANYAAN</h3>
 						<!--end::Title-->
@@ -524,7 +525,7 @@
 					</div>
 					<!--end::Heading-->
 					<!--begin::Row-->
-					<div class="row g-lg-10 mb-10 mb-lg-20">
+					<div class="row g-lg-12 mb-20 mb-lg-20 justify-content-between">
 						<!--begin::Col-->
 						<div class="col-lg-4">
 							<!--begin::Hubungi-->
@@ -564,10 +565,10 @@
 									<!--end::Telefon-->
 									<br />
 									<!--begin::Title-->
-									<div class="fs-4 fw-bold text-dark mb-3">Emel :</div>
+									<div class="fs-4 fw-bold text-dark mb-3">Emel Unit BKOKU :</div>
 									<!--end::Title-->
 									<!--begin::Emel-->
-									<div class="text-gray-500 fw-semibold fs-4">Unit BKOKU : bkoku@mohe.gov.my
+									<div class="text-gray-500 fw-semibold fs-4">bkoku@mohe.gov.my
 									</div>
 									<!--end::Emel-->
 								</div>
@@ -624,35 +625,24 @@
 					</svg>
 				</div>
 				<!--end::Curve top-->
+
 				<!--begin::Wrapper-->
-				<div class="landing-dark-bg pt-20">
-					
-					<!--begin::Separator-->
-					<div class="landing-dark-separator"></div>
-					<!--end::Separator-->
+				<div class="landing-dark-bg">
 					<!--begin::Container-->
 					<div class="container">
 						<!--begin::Wrapper-->
-						<div class="d-flex flex-column flex-md-row flex-stack py-7 py-lg-10">
-							<!--begin::Copyright-->
-							<div class="d-flex align-items-center order-2 order-md-1">
-								<!--begin::Logo-->
-								<a href="/landing">
-									<img alt="Logo" src="assets/media/logos/bkoku.svg" class="h-15px h-md-25px" />
-								</a>
-								<!--end::Logo image-->
-								<!--begin::Logo image-->
-								<span class="mx-5 fs-6 fw-semibold text-gray-600 pt-1">
-									&copy; Sistem BKOKU, Kementerian Pendidikan Tinggi <span id="currentYear"></span>© Hak Cipta Terpelihara.
+						<div class="app-container container-fluid d-flex flex-column flex-md-row flex-center py-3">
+							<!--begin::Footer-->
+							<div class="d-flex align-items-center flex-center order-2 order-md-1">
+								<span class="mx-5 fs-7 fw-semibold text-dark">
+									Sistem BKOKU, Kementerian Pendidikan Tinggi <span id="currentYear"></span> © Hak Cipta Terpelihara
 								</span>
 
 								<script>
 									document.getElementById('currentYear').innerText = new Date().getFullYear();
 								</script>
-
-								<!--end::Logo image-->
 							</div>
-							<!--end::Copyright-->
+							<!--end::Footer-->
 						</div>
 						<!--end::Wrapper-->
 					</div>
@@ -695,5 +685,4 @@
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 	</body>
-	<!--end::Body-->
 </html>
