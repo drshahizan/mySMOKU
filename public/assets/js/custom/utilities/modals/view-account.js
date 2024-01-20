@@ -496,7 +496,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			var firstInvalidStep = null;  // Variable to store the first invalid step
 		
 			// Validate each step asynchronously
-			for (var i = 1; i <= 7; i++) {
+			for (var i = 1; i <= 6; i++) {
 				var validator = validations[i - 1];
 		
 				if (validator) {
