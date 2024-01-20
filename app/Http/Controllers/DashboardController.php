@@ -9,6 +9,7 @@ use App\Models\Permohonan;
 use App\Models\SejarahPermohonan;
 use App\Models\Tuntutan;
 use App\Models\Akademik;
+use App\Models\MaklumatBank;
 use App\Models\TuntutanPermohonan;
 use App\Models\Smoku;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +28,14 @@ class DashboardController extends Controller
         }
         else if(Auth::user()->tahap=='2')
         {
-            return redirect()->route('penyelaras.dashboard');
+            $bank = MaklumatBank::where('institusi_id', Auth::user()->id_institusi)->first();
+            if($bank){
+                return redirect()->route('penyelaras.dashboard');
+            }
+            else{
+                return redirect()->route('maklumat.bank')->with('notifikasi', 'Sila kemaskini maklumat bank institusi terlebih dahulu.');
+            }
+            
         }
         else if(Auth::user()->tahap=='3')
         {

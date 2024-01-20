@@ -84,14 +84,14 @@
     <div id="main-content" style="width:80%;  margin: 0 auto;">
         <div class="container-fluid">
             @if(session('success'))
-                <div class="alert alert-success" style="width: 50%; margin: 0 auto; text-align:center;">
+                <div class="alert alert-success" style="color:black; width: 50%; margin: 0 auto; text-align:center;">
                     {{ session('success') }}
                 </div>
                 <br>
             @endif
 
             @if ($errors->any())
-                <div class="alert alert-danger" style="width: 50%; margin: 0 auto;">
+                <div class="alert alert-danger" style="color:black; width: 50%; margin: 0 auto;">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
@@ -188,6 +188,17 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	@if(session('notifikasi'))
+		Swal.fire({
+			icon: 'warning',
+			title: 'Maklumat Bank',
+			text: ' {!! session('notifikasi') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+</script>
 
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script> 
