@@ -59,12 +59,13 @@
                                     <table id="sortTable1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                <th style="width: 5%" class="text-center no-sort"><b>No.</b></th>                                        
-                                                <th style="width: 35%"><b>Nama</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Peringkat Pengajian</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
-                                                <th class="text-center" style="width: 15%">Kemaskini</th>
+                                                <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>                                        
+                                                <th style="width: 32%"><b>Nama</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Peringkat Pengajian Terdahulu</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Peringkat Pengajian Terkini</b></th>
+                                                <th style="width: 13%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
+                                                <th style="width: 12%" class="text-center"><b>Salinan Transkrip</b></th> 
+                                                <th class="text-center" style="width: 10%">Kemaskini</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -89,17 +90,17 @@
                                                 @endphp
 
                                                 <tr>
-                                                    <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
+                                                    <td class="text-center" data-no="{{ $i++ }}">{{$i++}}.</td>
                                                     <td>{{$pemohon}}</td>
                                                     <td>{{ucwords(strtolower($items->peringkat))}}</td>
                                                     <td class="text-center">
                                                         <a href="{{ asset('assets/dokumen/sijil_tamat/' . $items->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
-                                                        Lihat
+                                                        Muat Turun
                                                         <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
                                                     </td>
                                                     <td class="text-center">
                                                         <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $items->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
-                                                        Lihat
+                                                        Muat Turun
                                                         <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
                                                     </td>
                                                     <td class="text-center">
