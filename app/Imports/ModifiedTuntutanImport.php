@@ -47,25 +47,34 @@ class ModifiedTuntutanImport implements ToCollection, WithHeadingRow
 
     private function updateStatus()
     {
-        // Get an array of unique 'no_rujukan_tuntutan' values from the modified data
-        $noRujukanArray = collect($this->modifiedData)->pluck('no_rujukan_tuntutan')->unique()->toArray();
+        foreach ($this->modifiedData as $modifiedRecord) {
+            $noRujukan = $modifiedRecord['no_rujukan_tuntutan'];
+            $yuranDibayar = $modifiedRecord['yuran_dibayar'];
+            $wangSakuDibayar = $modifiedRecord['wang_saku_dibayar'];
+            $noBaucer = $modifiedRecord['no_baucer'];
+            $perihal = $modifiedRecord['perihal'];
+            $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
 
-        // Update the 'status' column to 8 for the tuntutan records with matching 'no_rujukan_tuntutan'
-        Tuntutan::whereIn('no_rujukan_tuntutan', $noRujukanArray)
-            ->update(['status' => 8]);
+            // Check if the required attributes are filled
+            if (!empty($yuranDibayar) && !empty($wangSakuDibayar) && !empty($noBaucer) && !empty($perihal) && !empty($tarikhBaucer)) {
+                // Update the 'status' column to 8 for the tuntutan record with matching 'no_rujukan_tuntutan'
+                Tuntutan::where('no_rujukan_tuntutan', $noRujukan)
+                    ->update(['status' => 8]);
 
-        // Fetch the corresponding rows from tuntutan table
-        $tuntutans = Tuntutan::whereIn('no_rujukan_tuntutan', $noRujukanArray)
-        ->select('id', 'smoku_id')
-        ->get();
+                // Fetch the corresponding row from tuntutan table
+                $tuntutan = Tuntutan::where('no_rujukan_tuntutan', $noRujukan)
+                    ->select('id', 'smoku_id')
+                    ->first();
 
-        // Create new records in sejarah_tuntutan table based on the fetched rows
-        foreach ($tuntutans as $tuntutan) {
-            SejarahTuntutan::create([
-                'tuntutan_id' => $tuntutan->id,
-                'smoku_id' => $tuntutan->smoku_id,
-                'status' => 8
-            ]);
+                // Create a new record in sejarah_tuntutan table based on the fetched row
+                if ($tuntutan) {
+                    SejarahTuntutan::create([
+                        'tuntutan_id' => $tuntutan->id,
+                        'smoku_id' => $tuntutan->smoku_id,
+                        'status' => 8
+                    ]);
+                }
+            }
         }
     }
 }

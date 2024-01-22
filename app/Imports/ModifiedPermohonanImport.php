@@ -19,8 +19,6 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) {
-            // dd($row);
-            // Extract specific columns
             $this->modifiedData[] = [
                 'no_rujukan_permohonan' => $row['id_permohonan'],
                 'yuran_dibayar' => number_format($row['yuran_dibayar_rm'], 2, '.', ''),
@@ -47,25 +45,34 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
 
     private function updateStatus()
     {
-        // Get an array of unique 'no_rujukan_permohonan' values from the modified data
-        $noRujukanArray = collect($this->modifiedData)->pluck('no_rujukan_permohonan')->unique()->toArray();
+        foreach ($this->modifiedData as $modifiedRecord) {
+            $noRujukan = $modifiedRecord['no_rujukan_permohonan'];
+            $yuranDibayar = $modifiedRecord['yuran_dibayar'];
+            $wangSakuDibayar = $modifiedRecord['wang_saku_dibayar'];
+            $noBaucer = $modifiedRecord['no_baucer'];
+            $perihal = $modifiedRecord['perihal'];
+            $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
 
-        // Update the 'status' column to 8 for the permohonan records with matching 'no_rujukan_permohonan'
-        Permohonan::whereIn('no_rujukan_permohonan', $noRujukanArray)
-            ->update(['status' => 8]);
+            // Check if the required attributes are filled
+            if (!empty($yuranDibayar) && !empty($wangSakuDibayar) && !empty($noBaucer) && !empty($perihal) && !empty($tarikhBaucer)) {
+                // Update the 'status' column to 8 for the permohonan record with matching 'no_rujukan_permohonan'
+                Permohonan::where('no_rujukan_permohonan', $noRujukan)
+                    ->update(['status' => 8]);
 
-        // Fetch the corresponding rows from permohonan table
-        $permohonans = Permohonan::whereIn('no_rujukan_permohonan', $noRujukanArray)
-        ->select('id', 'smoku_id')
-        ->get();
+                // Fetch the corresponding row from permohonan table
+                $permohonan = Permohonan::where('no_rujukan_permohonan', $noRujukan)
+                    ->select('id', 'smoku_id')
+                    ->first();
 
-        // Create new records in sejarah_permohonan table based on the fetched rows
-        foreach ($permohonans as $permohonan) {
-            SejarahPermohonan::create([
-                'permohonan_id' => $permohonan->id,
-                'smoku_id' => $permohonan->smoku_id,
-                'status' => 8
-            ]);
+                // Create a new record in sejarah_permohonan table based on the fetched row
+                if ($permohonan) {
+                    SejarahPermohonan::create([
+                        'permohonan_id' => $permohonan->id,
+                        'smoku_id' => $permohonan->smoku_id,
+                        'status' => 8
+                    ]);
+                }
+            }
         }
     }
 }
