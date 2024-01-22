@@ -550,7 +550,8 @@
 							</div>
 							<!--end::Input group-->
 							<!--begin::Input group-->
-							<div class="separator my-14"></div>
+							<!--komen dulu sebab nak test ua sahaja-->
+							{{-- <div class="separator my-14"></div>
 							<div class="pb-10 pb-lg-15">
 								<!--begin::Title-->
 								<h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
@@ -575,7 +576,7 @@
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
-							</div>
+							</div> --}}
 						</div>
 						<!--end::Input group-->
 					</div>
