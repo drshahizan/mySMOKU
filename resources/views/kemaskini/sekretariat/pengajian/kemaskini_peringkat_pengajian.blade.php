@@ -60,11 +60,11 @@
                                         <thead>
                                             <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                 <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>                                        
-                                                <th style="width: 32%"><b>Nama</b></th>
+                                                <th style="width: 27%"><b>Nama</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Peringkat Pengajian Terdahulu</b></th>
                                                 <th style="width: 15%" class="text-center"><b>Peringkat Pengajian Terkini</b></th>
-                                                <th style="width: 13%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
-                                                <th style="width: 12%" class="text-center"><b>Salinan Transkrip</b></th> 
+                                                <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
+                                                <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
                                                 <th class="text-center" style="width: 10%">Kemaskini</th>
                                             </tr>
                                         </thead>
@@ -75,6 +75,9 @@
 
                                             @foreach ($recordsBKOKU as $items)
                                                 @php
+                                                    // $terdahulu = $items->peringkat->where('status', 0)->first();
+                                                    // $terkini = $items->peringkat_terkini->where('status', 1)->first();
+                                                                    
                                                     $text = ucwords(strtolower($items->nama));
                                                     $conjunctions = ['bin', 'binti'];
                                                     $words = explode(' ', $text);
@@ -90,28 +93,35 @@
                                                 @endphp
 
                                                 <tr>
-                                                    <td class="text-center" data-no="{{ $i++ }}">{{$i++}}.</td>
+                                                    <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
                                                     <td>{{$pemohon}}</td>
-                                                    <td>{{ucwords(strtolower($items->peringkat))}}</td>
+                                                    <td>{{ ucwords(strtolower($items->peringkat)) }}</td>
+                                                    <td>{{ ucwords(strtolower($items->peringkat_terkini)) }}</td>
                                                     <td class="text-center">
                                                         <a href="{{ asset('assets/dokumen/sijil_tamat/' . $items->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
                                                         Muat Turun
-                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
+                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:2px;'></i>
                                                     </td>
                                                     <td class="text-center">
                                                         <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $items->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
                                                         Muat Turun
-                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:20px;'></i>
+                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:2px;'></i>
                                                     </td>
                                                     <td class="text-center">
                                                         <form action="{{ route('kemaskini.peringkat.pengajian', $items->smoku_id) }}" method="post">
                                                             @csrf
                                                             <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
-                                                                <option value="">Kemaskini</option>
+                                                                <option value="" {{ $items->peringkat_terkini ? 'disabled' : '' }}>Kemaskini</option>
                                                                 @foreach ($peringkatPengajian as $peringkat)
                                                                     <option value="{{ $peringkat->kod_peringkat }}" {{ Request::get('peringkat_pengajian') == $peringkat->kod_peringkat ? 'selected' : '' }}>{{ $peringkat->peringkat }}</option>
                                                                 @endforeach
                                                             </select>
+                                                            {{-- <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
+                                                                <option value="">Kemaskini</option>
+                                                                @foreach ($peringkatPengajian as $peringkat)
+                                                                    <option value="{{ $peringkat->kod_peringkat }}" {{ Request::get('peringkat_pengajian') == $peringkat->kod_peringkat ? 'selected' : '' }}>{{ $peringkat->peringkat }}</option>
+                                                                @endforeach
+                                                            </select> --}}
                                                         </form>
                                                     </td>
                                                 </tr>
