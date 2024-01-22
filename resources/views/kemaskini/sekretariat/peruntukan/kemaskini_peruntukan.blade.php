@@ -23,7 +23,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Jumlah Peruntukan</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Jumlah Peruntukan Tahunan</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -104,7 +104,7 @@
                                     <tr class="text-start align-center text-gray-400 fw-bold fs-7 gs-0">
                                         <th class="min-w-125px align-center">Tarikh Mula</th>
                                         <th class="min-w-125px align-center">Tarikh Tamat</th>
-                                        <th class="min-w-125px align-center">Jumlah</th>
+                                        <th class="min-w-125px align-center">Jumlah Peruntukan Tahunan</th>
                                         <th class="min-w-125px align-center">Tarikh Kemaskini</th>
                                     </tr>
                                 </thead>
