@@ -121,7 +121,7 @@
                             </table>
                         </div>
                         <!--end::Table-->
-                        <div style="font-size: 11px;">Sila klik dua kali pada baris untuk mengemas kini maklumat bagi baris berkenaan.</div>
+                        <div style="font-size: 11px;">Sila klik dua kali pada baris untuk mengemas kini jumalah peruntukan bagi tahun bekenaan.</div>
                     </div>
                     <!--end::Card body-->
                 </div>
