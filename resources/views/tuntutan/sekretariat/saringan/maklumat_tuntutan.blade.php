@@ -127,19 +127,6 @@
                                         }
                                         $kursus = implode(' ', $result);
 
-                                        //institusi pengajian
-                                        $text3 = ucwords(strtolower($nama_institusi)); // Assuming you're sending the text as a POST parameter
-                                        $conjunctions = ['of', 'in', 'and'];
-                                        $words = explode(' ', $text3);
-                                        $result = [];
-                                        foreach ($words as $word) {
-                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                $result[] = Str::lower($word);
-                                            } else {
-                                                $result[] = $word;
-                                            }
-                                        }
-                                        $institusi = implode(' ', $result);
                                     @endphp
                                     <table class="maklumat">
                                         <tr>
@@ -158,7 +145,7 @@
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Institusi</strong></td>
                                             <td>:</td>
-                                            <td>{{$institusi}}</td>
+                                            <td>{{$nama_institusi}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>No. Kad Pengenalan</strong></td>
@@ -193,11 +180,7 @@
                                 <h6>Maklumat tuntutan:</h6>
                                 <br>
                                 @php
-                                if ($sama_semester==false)
-                                    $i = 2;
-                                else{
                                     $i=1;
-                                }
                                 @endphp
                                 <form method="POST" action="{{ url('tuntutan/sekretariat/saringan/saring-tuntutan-kedua/'.$tuntutan->id) }}" id="saring">
                                     <div class="row clearfix">
@@ -214,9 +197,13 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @if($sama_semester==false)
+                                                        @php
+                                                            $keputusan = DB::table('permohonan_peperiksaan')->where('permohonan_id', $permohonan->id)->get();
+                                                            // dd($keputusan);
+                                                        @endphp
+                                                    @if ($keputusan->isNotEmpty())
                                                         <tr>
-                                                            <td style="text-align:right;">1</td>
+                                                            <td style="text-align:right;">{{$i++}}</td>
                                                             <td>
                                                                 <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan/'.$permohonan->id) }}" target="_blank">Keputusan Peperiksaan</a></span>
                                                             </td>

@@ -859,28 +859,37 @@ class PenyelarasController extends Controller
         $kepPeperiksaan=$request->kepPeperiksaan;
         $counter = 1; 
 
-        $filenamekepP =$kepPeperiksaan->getClientOriginalName();  
-        $uniqueFilename = $counter . '_' . $filenamekepP;
+        // Check if files were uploaded
+        if (!empty($kepPeperiksaan)) {
 
-        // Append increment to the filename until it's unique
-        while (file_exists('assets/dokumen/peperiksaan/' . $uniqueFilename)) {
-            $counter++;
+            $filenamekepP =$kepPeperiksaan->getClientOriginalName();  
             $uniqueFilename = $counter . '_' . $filenamekepP;
+
+            // Append increment to the filename until it's unique
+            while (file_exists('assets/dokumen/peperiksaan/' . $uniqueFilename)) {
+                $counter++;
+                $uniqueFilename = $counter . '_' . $filenamekepP;
+            }
+            $kepPeperiksaan->move('assets/dokumen/peperiksaan',$uniqueFilename);
+
+            
+            $data=new peperiksaan();
+            $data->permohonan_id=$permohonan->id;
+            $data->sesi=$request->sesi;
+            $data->semester=$request->semester;
+            $data->cgpa=$request->cgpa;
+            $data->kepPeperiksaan=$uniqueFilename;
+            $data->save();
+
+            $counter++;
+            
+            return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('message', 'Keputusan peperiksaan pelajar telah di simpan.');
+        } else {
+            // Handle the case where no files were uploaded
+            // You might want to redirect back with an error message
+            return redirect()->back()->with('error', 'No files uploaded.');
         }
-        $kepPeperiksaan->move('assets/dokumen/peperiksaan',$uniqueFilename);
-
-        
-        $data=new peperiksaan();
-        $data->permohonan_id=$permohonan->id;
-        $data->sesi=$request->sesi;
-        $data->semester=$request->semester;
-        $data->cgpa=$request->cgpa;
-        $data->kepPeperiksaan=$uniqueFilename;
-        $data->save();
-
-        $counter++;
-        
-        return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('message', 'Keputusan peperiksaan pelajar telah di simpan.');
+    
     }
 
     public function tuntutanBaharu($id)

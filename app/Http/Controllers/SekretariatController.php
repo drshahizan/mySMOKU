@@ -1120,18 +1120,22 @@ class SekretariatController extends Controller
         }
 
         $baki_terdahulu = 0;
-        $sama_semester = false;
+        $sama_semester = false; //semester sama
 
         if($no_tuntutan == 1){
+            // dd('sini');
             $baki_terdahulu = $permohonan->baki_dibayar;
         }
         elseif ($tuntutan_sebelum==null){
+            // dd('sini ke');
             $baki_terdahulu = $permohonan->baki_dibayar;
         }
         elseif($tuntutan->sesi == $sesi_sebelum){
+            // dd('siniiii keee');
+
             $baki_terdahulu = $tuntutan_sebelum->baki_dibayar;
             if ($tuntutan_sebelum->semester != $tuntutan->semester){
-                $sama_semester = true;
+                $sama_semester = true; //semester lain
             }
         }
         elseif($tuntutan->sesi != $sesi_sebelum){
