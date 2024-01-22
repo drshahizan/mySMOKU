@@ -125,7 +125,7 @@
                                       
                                         <div class="col-md-2 fv-row export-container"> 
                                             <a id="exportLink" href="{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round" style=" width: 150%;">
-                                                <i class="fa fa-file-excel" style="color: black;"></i> Excel
+                                                <i class="fa fa-file-excel" style="color: black;"></i> Muat Turun
                                             </a> 
                                         </div>
                                     </div>
@@ -363,7 +363,7 @@
 
                                                     <div class="modal-body">
                                                         <div class="mb-3">
-                                                            <label for="recipient-name" class="col-form-label">No Cek:</label>
+                                                            <label for="recipient-name" class="col-form-label">No Cek / No EFT:</label>
                                                             <input type="text" class="form-control" id="noCek" name="noCek" required oninvalid="this.setCustomValidity('Sila isi no cek.')" oninput="setCustomValidity('')">
                                                         </div>
                                                         <div class="mb-3">
