@@ -331,7 +331,7 @@
 			<div class="menu-item">
 				<a class="menu-link" href="{{url('kemaskini/sekretariat/jumlah-peruntukan')}}">
 					<span class="menu-icon">{!! getIcon('send', 'fs-2') !!}</span>
-					<span class="menu-title">Peruntukan</span>
+					<span class="menu-title">Peruntukan Tahunan</span>
 				</a>
 			</div>
 

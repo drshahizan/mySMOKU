@@ -70,10 +70,10 @@
                                 <!--begin::Input group-->
                                 <div class="col-md-4 fv-row">
                                     <!--begin::Label-->
-                                    <label class="fs-4 fw-semibold mb-2">Jumlah (RM)</label>
+                                    <label class="fs-4 fw-semibold mb-2">Jumlah Peruntukan Tahunan (RM)</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="number" name="jumlah" id="jumlah" class="form-control form-control-solid" placeholder="Jumlah Peruntukan" value="" required step="0.01" oninvalid="this.setCustomValidity('Masukkan jumlah peruntukan.')" oninput="setCustomValidity('')"/>
+                                    <input type="number" name="jumlah" id="jumlah" class="form-control form-control-solid" placeholder="9000000" value="" required step="0.01" oninvalid="this.setCustomValidity('Masukkan jumlah peruntukan.')" oninput="setCustomValidity('')"/>
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
