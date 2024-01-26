@@ -77,7 +77,10 @@
                                     $pemohon = implode(' ', $result);
                                     
                                     // dd($pelajar->jenis_institusi);
-                                                                    
+                                    $tukar_institusi = DB::table('tukar_institusi')
+                                        ->orderBy('id', 'desc')
+                                        ->where('smoku_id', $pelajar['id'])
+                                        ->first();                                
                                     
                                 @endphp
                             <tr>
@@ -92,9 +95,12 @@
                                     <td class="text-center">
                                         @if($pelajar->status == 1)
 											<div class="badge badge-light-success fw-bold">Aktif</div>
-											@else
+										@else
 											<div class="badge badge-light-danger fw-bold">Tidak Aktif</div>
-											@endif
+										@endif
+                                        @if($tukar_institusi != null)
+											<div class="badge badge-light-warning fw-bold">Tukar Institusi</div>
+										@endif
                                     </td>
                                 
                                 
