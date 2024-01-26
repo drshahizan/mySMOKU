@@ -79,7 +79,7 @@
                                     // dd($pelajar->jenis_institusi);
                                     $tukar_institusi = DB::table('tukar_institusi')
                                         ->orderBy('id', 'desc')
-                                        ->where('smoku_id', $pelajar['id'])
+                                        ->where('smoku_id', $pelajar['smoku_id'])
                                         ->first();                                
                                     
                                 @endphp
@@ -138,7 +138,7 @@
                                                 <!--begin::Modal body-->
                                                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                                     <!--begin::Form-->
-                                                    <form class="form" id="kt_modal_new_card_form" action="{{route('tukar.institusi', ['id' => $pelajar->id ])}}" method="post">
+                                                    <form class="form" id="kt_modal_new_card_form" action="{{route('tukar.institusi', ['id' => $pelajar->smoku_id ])}}" method="post">
                                                         @csrf
                                                         <!--begin::Scroll-->
 

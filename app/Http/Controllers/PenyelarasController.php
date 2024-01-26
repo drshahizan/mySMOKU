@@ -2008,7 +2008,7 @@ class PenyelarasController extends Controller
         ->join('users','users.no_kp','=','smoku.no_kp')
         ->where('smoku_akademik.id_institusi','=', Auth::user()->id_institusi)
         ->orderBy('smoku.id', 'DESC')
-        ->get(['smoku.*','smoku_akademik.*', 'bk_info_institusi.id_institusi', 'bk_info_institusi.nama_institusi', 'bk_info_institusi.jenis_institusi','users.created_at as tarikh_daftar']);
+        ->get(['smoku.*','smoku.id as smoku_id','smoku_akademik.*', 'bk_info_institusi.id_institusi', 'bk_info_institusi.nama_institusi', 'bk_info_institusi.jenis_institusi','users.created_at as tarikh_daftar']);
         // dd($pelajar);
 
         $infoipt = InfoIpt::where('jenis_institusi', 'UA')->orderBy('nama_institusi')->get();
