@@ -2006,9 +2006,14 @@ class PenyelarasController extends Controller
         ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
         ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
         ->join('users','users.no_kp','=','smoku.no_kp')
-        ->where('smoku_akademik.id_institusi','=', Auth::user()->id_institusi)
+        ->leftJoin('tukar_institusi', 'tukar_institusi.smoku_id', '=', 'smoku.id')
+        ->where(function($query) {
+            $query->where('smoku_akademik.id_institusi', '=', Auth::user()->id_institusi)
+                ->orWhere('tukar_institusi.id_institusi_baru', '=', Auth::user()->id_institusi)
+                ->where('tukar_institusi.status', '=', 1);
+        })
         ->orderBy('smoku.id', 'DESC')
-        ->get(['smoku.*','smoku.id as smoku_id','smoku_akademik.*', 'bk_info_institusi.id_institusi', 'bk_info_institusi.nama_institusi', 'bk_info_institusi.jenis_institusi','users.created_at as tarikh_daftar']);
+        ->get(['smoku.*','tukar_institusi.*','smoku.id as smoku_id','smoku_akademik.*', 'bk_info_institusi.id_institusi', 'bk_info_institusi.nama_institusi', 'bk_info_institusi.jenis_institusi','users.created_at as tarikh_daftar']);
         // dd($pelajar);
 
         $infoipt = InfoIpt::where('jenis_institusi', 'UA')->orderBy('nama_institusi')->get();
@@ -2035,6 +2040,54 @@ class PenyelarasController extends Controller
 
         // Redirect to the original page
         return redirect()->back()->with('success', 'Tukar institusi berjaya, untuk semakan sekretariat.');
+    }
+
+    public function terimaPelajar(Request $request, $id)
+    {
+        // dd($id);
+        Akademik::updateOrCreate(['smoku_id' => $id, 'status' => 1],
+        [
+            'id_institusi' => $request->id_baru,
+            'nama_kursus' => NULL,
+            'mod' => NULL,
+            'tempoh_pengajian' => NULL,
+            'bil_bulan_per_sem' => NULL,
+            'sesi' => NULL,
+            'no_pendaftaran_pelajar' => NULL,
+            'tarikh_mula' => NULL,
+            'tarikh_tamat' => NULL,
+            'sem_semasa' => NULL,
+            'sumber_biaya' => NULL,
+            'sumber_lain' => NULL,
+            'nama_penaja' => NULL,
+            'penaja_lain' => NULL,
+        ]);
+
+        DB::table('smoku_penyelaras')
+        ->updateOrInsert(
+            ['smoku_id' => $id],
+            [
+                'penyelaras_id' => Auth::user()->id,
+                'status' => '1',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
+
+        $permohonan = Permohonan::where('smoku_id', $id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if ($permohonan) {
+            $permohonan->update([
+                'perakuan' => NULL,
+                'status' => '1',
+            ]);
+        }
+
+        // Redirect to the original page
+        return redirect()->back()->with('success', 'Tukar institusi berjaya.');
     }
 
 }

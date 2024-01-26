@@ -78,7 +78,7 @@
                                                                    
                                     $institusi_asal = DB::table('bk_info_institusi')->where('id_institusi', $pelajar->id_institusi)->value('nama_institusi');
                                     // dd($institusi_asal);
-                                    $institusi_baru = DB::table('bk_info_institusi')->where('id_institusi', $pelajar->id_institusi_baru)->value('nama_institusi');;
+                                    $institusi_baru = DB::table('bk_info_institusi')->where('id_institusi', $pelajar->id_institusi_baru)->value('nama_institusi');
 
                                 @endphp
                             <tr>

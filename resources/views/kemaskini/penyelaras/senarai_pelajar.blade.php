@@ -80,7 +80,8 @@
                                     $tukar_institusi = DB::table('tukar_institusi')
                                         ->orderBy('id', 'desc')
                                         ->where('smoku_id', $pelajar['smoku_id'])
-                                        ->first();                                
+                                        ->first(); 
+                                                                     
                                     
                                 @endphp
                             <tr>
@@ -98,23 +99,109 @@
 										@else
 											<div class="badge badge-light-danger fw-bold">Tidak Aktif</div>
 										@endif
-                                        @if($tukar_institusi != null)
+                                        @if($tukar_institusi != null && $tukar_institusi->status == 0)
 											<div class="badge badge-light-warning fw-bold">Tukar Institusi</div>
-										@endif
+                                        @elseif($tukar_institusi != null && $tukar_institusi->status == 1 && $tukar_institusi->id_institusi_baru != $pelajar->id_institusi)
+											<div class="badge badge-light-warning fw-bold">Terima Pelajar</div>
+                                        @endif
                                     </td>
                                 
                                 
                                 
                                 <td class="text-center">
                                     <!--begin::Edit-->
+                                    @if ($tukar_institusi != null && $tukar_institusi->status == 1 && $tukar_institusi->id_institusi_baru != $pelajar->id_institusi)
+                                    <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_terima{{$pelajar->no_kp}}">
+                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Terima Pelajar">
+                                            <i class="ki-solid ki-pencil text-dark fs-2"></i>
+                                        </span>
+                                    </a>
+                                    @else
                                     <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card{{$pelajar->no_kp}}">
                                         <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Tukar Institusi">
                                             <i class="ki-solid ki-pencil text-dark fs-2"></i>
                                         </span>
                                     </a>
+                                    @endif
                                     <!--end::Edit-->
                                 </td>
-                                <!--begin::Modal - Customers - Edit-->
+                                <!--begin::Modal - terima-->
+                                <div class="modal fade" id="kt_modal_terima{{$pelajar->no_kp}}" tabindex="-1" aria-hidden="true">
+                                    <!--begin::Modal dialog-->
+                                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                                        <!--begin::Modal content-->
+                                        <div class="modal-content">
+                                            <!--begin::Modal header-->
+                                            <div class="modal-header">
+                                                <!--begin::Modal title-->
+                                                <h2>Terima Pelajar</h2>
+                                                <!--end::Modal title-->
+                                                <!--begin::Close-->
+                                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                                    <i class="ki-duotone ki-cross fs-1">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                    </i>
+                                                </div>
+                                                <!--end::Close-->
+                                            </div>
+                                            <!--end::Modal header-->
+                                            @php
+                                            $institusi_asal = DB::table('bk_info_institusi')->where('id_institusi', $pelajar->id_institusi)->value('nama_institusi');
+                                            // dd($institusi_asal);
+                                            $institusi_baru = DB::table('bk_info_institusi')->where('id_institusi', $pelajar->id_institusi_baru)->value('nama_institusi');
+                                            @endphp
+                                            <!--begin::Modal body-->
+                                            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                                                <!--begin::Form-->
+                                                <form class="form" id="kt_modal_terima_form" action="{{route('terima.pelajar', ['id' => $pelajar->smoku_id ])}}" method="post">
+                                                    @csrf
+                                                    <!--begin::Scroll-->
+
+                                                    <div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+                                                        <!--begin::Input group-->
+                                                        <div class="fv-row mb-7">
+                                                            <!--begin::Label-->
+                                                            <label class="fs-6 fw-semibold mb-2">Nama Institusi Asal</label>
+                                                            <!--end::Label-->
+                                                            <!--begin::Input-->
+                                                            <input type="hidden" class="form-control form-control-solid" placeholder="" id="id_asal" name="id_asal" value="{{ $pelajar->id_institusi }}"  readonly/>
+                                                            <input type="text" class="form-control form-control-solid" placeholder="" id="id_institusi_lama" name="id_institusi_lama" value="{{ $institusi_asal }}"  readonly/>
+                                                            <!--end::Input-->
+                                                        </div>
+                                                        <!--end::Input group-->
+                                                        <!--begin::Input group-->
+                                                        <div class="fv-row mb-7">
+                                                            <label class="fs-6 fw-semibold mb-2">Nama Institusi Baru</label>
+                                                            <input type="hidden" class="form-control form-control-solid" placeholder="" id="id_baru" name="id_baru" value="{{ $pelajar->id_institusi_baru }}"  readonly/>
+                                                            <input type="text" class="form-control form-control-solid" placeholder="" id="id_institusi_baru" name="id_institusi_baru" value="{{ $institusi_baru }}"  readonly/>
+                                                        </div>
+                                                        <!--end::Input group-->
+
+                                                    </div>
+                                                    <!--end::Scroll-->
+
+                                                    <!--begin::Actions-->
+                                                    <div class="text-center pt-15">
+                                                        <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+                                                            <span class="indicator-label">Terima</span>
+                                                            <span class="indicator-progress">Sila tunggu...
+                                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                        </button>
+                                                    </div>
+                                                    <!--end::Actions-->
+                                                </form>
+                                                <!--end::Form-->
+                                            </div>
+                                            <!--end::Modal body-->
+                                        </div>
+                                        <!--end::Modal content-->
+                                    </div>
+                                    <!--end::Modal dialog-->
+                                </div>
+                                <!--end::Modal - terima-->
+
+                                <!--begin::Modal - Tukar-->
                                     <div class="modal fade" id="kt_modal_new_card{{$pelajar->no_kp}}" tabindex="-1" aria-hidden="true">
                                         <!--begin::Modal dialog-->
                                         <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -196,7 +283,7 @@
                                         </div>
                                         <!--end::Modal dialog-->
                                     </div>
-                                <!--end::Modal - Customers - Edit-->
+                                <!--end::Modal - Tukar-->
                                 <script>
                                     $(document).ready(function () {
                                     

@@ -294,6 +294,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('penyelaras/kemaskini/hantar/maklumat/bank/{id}', [PenyelarasController::class, 'kemaskiniMaklumatBank'])->name('kemaskini.bank');
     Route::get('penyelaras/kemaskini/senarai/pelajar', [PenyelarasController::class, 'senaraiPelajar'])->name('senarai.pelajar.ua');
     Route::post('penyelaras/kemaskini/hantar/maklumat/institusi/{id}', [PenyelarasController::class, 'tukarInstitusi'])->name('tukar.institusi');
+    Route::post('penyelaras/kemaskini/hantar/terima/pelajar/{id}', [PenyelarasController::class, 'terimaPelajar'])->name('terima.pelajar');
+
 
 
     //delete pendaftaran - Penyelaras
