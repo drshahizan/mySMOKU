@@ -323,6 +323,12 @@
 				</a>
 			</div>
 			<div class="menu-item">
+				<a class="menu-link" href="{{ route('senarai.tukar.institusi')}}">
+					<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
+					<span class="menu-title">Tukar Institusi</span>
+				</a>
+			</div>
+			<div class="menu-item">
 				<a class="menu-link" href="{{ route('preview') }}">
 					<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
 					<span class="menu-title">Surat Tawaran</span>

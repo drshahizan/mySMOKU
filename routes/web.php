@@ -197,6 +197,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('sekretariat/kemaskini/pengajian', [SekretariatController::class, 'tangguhLanjutPengajian'])->name('tangguh.lanjut.pengajian');
     Route::post('sekretariat/kemaskini/pengajian/{id}', [SekretariatController::class, 'kemaskiniTarikhPengajian'])->name('kemaskini.tarikh.pengajian');
 
+    //Kemaskini - Sekretariat - Tukar Institusi
+    Route::get('sekretariat/kemaskini/senarai/pelajar', [SekretariatController::class, 'senaraiTukarInstitusi'])->name('senarai.tukar.institusi');
+    Route::post('sekretariat/kemaskini/hantar/maklumat/institusi/{id}', [SekretariatController::class, 'kemaskiniTukarInstitusi'])->name('kemaskini.tukar.institusi');
+
     //Kemaskini - Sekretariat - Surat Tawaran
     Route::get('kemaskini/sekretariat/surat/tawaran/preview', [SekretariatController::class, 'previewSuratTawaran'])->name('preview');
     Route::post('kemaskini/sekretariat/surat/tawaran/send/{suratTawaranId}', [SekretariatController::class, 'sendSuratTawaran'])->name('send');

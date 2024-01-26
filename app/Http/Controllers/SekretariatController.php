@@ -37,6 +37,7 @@ use App\Models\TamatPengajian;
 use App\Models\TangguhPengajian;
 use App\Models\Tuntutan;
 use App\Models\MaklumatBank;
+use App\Models\TukarInstitusi;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -1978,5 +1979,35 @@ class SekretariatController extends Controller
 
         $tuntutan = Tuntutan::where('status', '8')->orderBy('created_at', 'DESC')->get();
         return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status'));
+    }
+
+    public function senaraiTukarInstitusi()
+    {
+        $tukar_institusi = TukarInstitusi::join('smoku','smoku.id','=','tukar_institusi.smoku_id')
+        ->orderBy('tukar_institusi.id', 'DESC')
+        ->get(['smoku.*','tukar_institusi.*']);
+        // dd($tukar_institusi);
+
+        // $infoipt = InfoIpt::where('jenis_institusi', 'UA')->orderBy('nama_institusi')->get();
+        // $infoiptIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get();
+        // $infoiptP = InfoIpt::where('jenis_institusi', 'P')->orderBy('nama_institusi')->get();
+        // $infoiptKK = InfoIpt::where('jenis_institusi', 'KK')->orderBy('nama_institusi')->get();
+        // dd($infoipt); 
+
+
+        return view('kemaskini.sekretariat.pengajian.kemaskini_tukar_institusi', compact('tukar_institusi'));
+    }
+
+    public function kemaskiniTukarInstitusi(Request $request, $id)
+    {
+        // dd($id);
+        $tukar_institusi = TukarInstitusi::updateOrCreate(['smoku_id' => $id]);
+
+        $tukar_institusi->status = $request->input('status');
+
+        $tukar_institusi->save();
+
+        // Redirect to the original page
+        return redirect()->back()->with('success', 'Tukar institusi berjaya.');
     }
 }
