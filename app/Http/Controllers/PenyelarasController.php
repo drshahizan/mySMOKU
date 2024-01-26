@@ -50,6 +50,7 @@ use App\Imports\ModifiedTuntutanImport;
 use App\Mail\MailDaftarPentadbir;
 use App\Models\JumlahTuntutan;
 use App\Models\SenaraiBank;
+use App\Models\TukarInstitusi;
 use Carbon\Carbon;
 use DateInterval;
 use DateTime;
@@ -1997,6 +1998,43 @@ class PenyelarasController extends Controller
            
         return redirect()->route('bkoku.sejarah.tuntutan')->with('permohonan', 'Tuntutan telah dibatalkan.');      
         
+    }
+
+    public function senaraiPelajar()
+    {
+        $pelajar = Smoku::join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
+        ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
+        ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
+        ->join('users','users.no_kp','=','smoku.no_kp')
+        ->where('smoku_akademik.id_institusi','=', Auth::user()->id_institusi)
+        ->orderBy('smoku.id', 'DESC')
+        ->get(['smoku.*','smoku_akademik.*', 'bk_info_institusi.id_institusi', 'bk_info_institusi.nama_institusi', 'bk_info_institusi.jenis_institusi','users.created_at as tarikh_daftar']);
+        // dd($pelajar);
+
+        $infoipt = InfoIpt::where('jenis_institusi', 'UA')->orderBy('nama_institusi')->get();
+        $infoiptIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get();
+        $infoiptP = InfoIpt::where('jenis_institusi', 'P')->orderBy('nama_institusi')->get();
+        $infoiptKK = InfoIpt::where('jenis_institusi', 'KK')->orderBy('nama_institusi')->get();
+        // dd($infoipt); 
+
+
+        return view('kemaskini.penyelaras.senarai_pelajar', compact('pelajar','infoipt','infoiptIPTS','infoiptP','infoiptKK'));
+    }
+
+    public function tukarInstitusi(Request $request, $id)
+    {
+        // dd($id);
+        $tukar_institusi = TukarInstitusi::updateOrCreate(['smoku_id' => $id]);
+
+        $tukar_institusi->smoku_id = $id;
+        $tukar_institusi->id_institusi = $request->input('id_institusi_asal');
+        $tukar_institusi->id_institusi_baru = $request->input('id_institusi');
+        $tukar_institusi->status = 0;
+
+        $tukar_institusi->save();
+
+        // Redirect to the original page
+        return redirect()->back()->with('success', 'Tukar institusi berjaya, untuk semakan sekretariat.');
     }
 
 }
