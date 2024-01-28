@@ -122,86 +122,52 @@ class KemaskiniController extends Controller
 
         if($emel->id == 1){
             $emel = EmelKemaskini::where('id',1)->first();
-            // Alert::success('Berjaya','Emel permohonan BKOKU yang dikemabalikan telah berjaya dikemaskini.');
-            // return view('kemaskini.sekretariat.emel.BKOKU.permohonan.kemaskini_dikembalikan',compact('emel'));
             return back()->with('success', 'Emel permohonan BKOKU yang dikembalikan telah berjaya dikemaskini.');
-
         }
         if($emel->id == 2){
             $emel = EmelKemaskini::where('id',2)->first();
-            // Alert::success('Berjaya','Emel permohonan BKOKU yang layak telah berjaya dikemaskini.');
-            // return view('kemaskini.sekretariat.emel.BKOKU.permohonan.kemaskini_layak',compact('emel'));
             return back()->with('success', 'Emel permohonan BKOKU yang layak telah berjaya dikemaskini.');
-
         }
         if($emel->id == 3){
             $emel = EmelKemaskini::where('id',3)->first();
-            // Alert::success('Berjaya','Emel permohonan BKOKU yang tidak layak telah berjaya dikemaskini.');
-            // return view('kemaskini.sekretariat.emel.BKOKU.permohonan.kemaskini_tidak_layak',compact('emel'));
             return back()->with('success', 'Emel permohonan BKOKU yang tidak layak telah berjaya dikemaskini.');
         }
         if($emel->id == 4){
             $emel = EmelKemaskini::where('id',4)->first();
-            // Alert::success('Berjaya','Emel tuntutan BKOKU yang dikemabalikan telah berjaya dikemaskini.');
-            // return view('kemaskini.sekretariat.emel.BKOKU.tuntutan.kemaskini_dikembalikan',compact('emel'));
             return back()->with('success', 'Emel tuntutan BKOKU yang dikemabalikan telah berjaya dikemaskini.');
 
         }
         if($emel->id == 5){
             $emel = EmelKemaskini::where('id',5)->first();
-            // Alert::success('Berjaya','Emel tuntutan BKOKU yang layak telah berjaya dikemaskini.');
-            // return view('kemaskini.sekretariat.emel.BKOKU.tuntutan.kemaskini_layak',compact('emel'));
             return back()->with('success', 'Emel tuntutan BKOKU yang layak telah berjaya dikemaskini.');
-
         }
         if($emel->id == 6){
             $emel = EmelKemaskini::where('id',6)->first();
-            // Alert::success('Berjaya','Emel tuntutan BKOKU yang tidak layak telah berjaya dikemaskini.');
-            // return view('kemaskini.sekretariat.emel.BKOKU.tuntutan.kemaskini_tidak_layak',compact('emel'));
             return back()->with('success', 'Emel tuntutan BKOKU yang tidak layak telah berjaya dikemaskini.');
-
         }
         if($emel->id == 7){
             $emel = EmelKemaskini::where('id',7)->first();
-            // Alert::success('Berjaya','Emel permohonan PPK yang dikembalikan telah berjaya dikemaskini.');
-            // return view('kemaskini.sekretariat.emel.PPK.permohonan.kemaskini_dikembalikan',compact('emel'));
             return back()->with('success', 'Emel permohonan PPK yang dikembalikan telah berjaya dikemaskini.');
-
         }
         if($emel->id == 8){
             $emel = EmelKemaskini::where('id',8)->first();
-            // Alert::success('Berjaya','Emel permohonan PPK yang layak telah berjaya dikemaskini.');
-            // return view('kemaskini.sekretariat.emel.PPK.permohonan.kemaskini_layak',compact('emel'));
             return back()->with('success', 'Emel permohonan PPK yang layak telah berjaya dikemaskini.');
-
         }
         if($emel->id == 9){
             $emel = EmelKemaskini::where('id',9)->first();
-            // Alert::success('Berjaya','Emel permohonan PPK yang tidak layak telah berjaya dikemaskini.');
-            // return view('kemaskini.sekretariat.emel.PPK.permohonan.kemaskini_tidak_layak',compact('emel'));
             return back()->with('success', 'Emel permohonan PPK yang tidak layak telah berjaya dikemaskini.');
-
         }
         if($emel->id == 10){
             $emel = EmelKemaskini::where('id',10)->first();
-            // Alert::success('Berjaya','Emel tuntutan PPK yang dikembalikan telah berjaya dikemaskini.');
-            // return view('kemaskini.sekretariat.emel.PPK.tuntutan.kemaskini_dikembalikan',compact('emel'));
             return back()->with('success', 'Emel tuntutan PPK yang dikembalikan telah berjaya dikemaskini.');
-
         }
         if($emel->id == 11){
             $emel = EmelKemaskini::where('id',11)->first();
-            // Alert::success('Berjaya','Emel tuntutan PPK yang layak telah berjaya dikemaskini.');
-            // return view('kemaskini.sekretariat.emel.PPK.tuntutan.kemaskini_layak',compact('emel'));
             return back()->with('success', 'Emel tuntutan PPK yang layak telah berjaya dikemaskini.');
-
         }
         if($emel->id == 12){
             $emel = EmelKemaskini::where('id',12)->first();
-            // Alert::success('Berjaya','Emel tuntutan PPK yang tidak layak telah berjaya dikemaskini.');
-            // return view('kemaskini.sekretariat.emel.PPK.tuntutan.kemaskini_tidak_layak',compact('emel'));
             return back()->with('success', 'Emel tuntutan PPK yang tidak layak telah berjaya dikemaskini.');
-
         }     
     }
 

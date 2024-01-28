@@ -136,15 +136,14 @@
 					confirmButtonText: 'OK'
 				});
 			@endif
-			@if(session('error'))
+			@if(session('failed'))
 				Swal.fire({
 					icon: 'error',
 					title: 'Tidak Berjaya!',
-					text: ' {!! session('error') !!}',
+					text: ' {!! session('failed') !!}',
 					confirmButtonText: 'OK'
 				});
 			@endif
 		</script>
-		
 	</body>
 </x-default-layout> 
