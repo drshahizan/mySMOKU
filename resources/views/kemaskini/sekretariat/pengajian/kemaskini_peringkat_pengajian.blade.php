@@ -61,11 +61,11 @@
                                             <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                 <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>                                        
                                                 <th style="width: 27%"><b>Nama</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Peringkat Pengajian Terdahulu</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Peringkat Pengajian Terkini</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Salinan Transkrip</b></th> 
-                                                <th class="text-center" style="width: 10%">Kemaskini</th>
+                                                <th style="width: 18%" class="text-center"><b>Peringkat Pengajian Terdahulu</b></th>
+                                                <th style="width: 17%" class="text-center"><b>Peringkat Pengajian Terkini</b></th>
+                                                <th style="width: 13%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
+                                                <th style="width: 12%" class="text-center"><b>Salinan Transkrip</b></th> 
+                                                <th style="width: 10%" class="text-center">Kemaskini</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -99,13 +99,13 @@
                                                     <td>{{ ucwords(strtolower($items->peringkat_terkini)) }}</td>
                                                     <td class="text-center">
                                                         <a href="{{ asset('assets/dokumen/sijil_tamat/' . $items->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
-                                                        Muat Turun
-                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:2px;'></i>
+                                                        Lihat
+                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:5px;'></i>
                                                     </td>
                                                     <td class="text-center">
                                                         <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $items->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
-                                                        Muat Turun
-                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:2px;'></i>
+                                                        Lihat
+                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:5px;'></i>
                                                     </td>
                                                     <td class="text-center">
                                                         <form action="{{ route('kemaskini.peringkat.pengajian', $items->smoku_id) }}" method="post">

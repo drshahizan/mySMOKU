@@ -9,12 +9,14 @@ use Illuminate\Http\Request;
 
 class KemaskiniController extends Controller
 {
-    public function senaraiJumlahPeruntukan(){
+    public function senaraiJumlahPeruntukan()
+    {
         $peruntukan = JumlahPeruntukan::orderBy('updated_at','desc')->get();
         return view('kemaskini.sekretariat.peruntukan.kemaskini_peruntukan', compact('peruntukan'));
     }
 
-    public function kemaskiniJumlahPeruntukan(Request $request){
+    public function kemaskiniJumlahPeruntukan(Request $request)
+    {
         $request->validate([
             'tarikh_mula' => 'required|date',
             'tarikh_tamat' => 'required|date',

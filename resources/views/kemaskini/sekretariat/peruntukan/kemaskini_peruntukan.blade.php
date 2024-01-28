@@ -133,7 +133,6 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script>
         $(document).ready(function () {
             $('#myTable tbody tr').on('dblclick', function () {
@@ -142,7 +141,7 @@
                 // Extract data for the Tarikh Mula, Tarikh Tamat, and Jumlah fields (adjust column indices as needed)
                 var mulaValue = $(rowData[0]).text();
                 var tamatValue = $(rowData[1]).text();
-                var jumlahValue = $(rowData[2]).text().replace('RM ', '').replace(',', ''); // Remove commas from numeric value
+                var jumlahValue = $(rowData[2]).text().replace('RM ', '').replace(/,/g, ''); // Remove commas from numeric value
 
                 // Format date values
                 var formattedMulaValue = formatDate(mulaValue);
