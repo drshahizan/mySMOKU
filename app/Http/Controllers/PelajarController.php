@@ -151,6 +151,12 @@ class PelajarController extends Controller
             return redirect()->route('tamat.pengajian')->with('error', 'Permohonan tidak ditemui.');
         }
 
+        // Validate incoming file uploads
+        $request->validate([
+            'sijilTamat.*' => 'required|mimes:pdf,jpg,jpeg,png|max:2048', // Maximum size in kilobytes (2 MB = 2048 KB)
+            'transkrip.*' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
+        ]);
+
         $sijilTamat = $request->file('sijilTamat');
         $transkrip = $request->file('transkrip');
         $uploadedSijilTamat = [];
