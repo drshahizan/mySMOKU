@@ -329,6 +329,12 @@
 				</a>
 			</div>
 			<div class="menu-item">
+				<a class="menu-link" href="{{url('kemaskini/sekretariat/jumlah-peruntukan')}}">
+					<span class="menu-icon">{!! getIcon('send', 'fs-2') !!}</span>
+					<span class="menu-title">Peruntukan Tahunan</span>
+				</a>
+			</div>
+			<div class="menu-item">
 				<a class="menu-link" href="{{ route('preview') }}">
 					<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
 					<span class="menu-title">Surat Tawaran</span>
@@ -338,12 +344,6 @@
 				<a class="menu-link" href="{{url('kemaskini/sekretariat/emel/senarai-emel')}}">
 					<span class="menu-icon">{!! getIcon('send', 'fs-2') !!}</span>
 					<span class="menu-title">Emel</span>
-				</a>
-			</div>
-			<div class="menu-item">
-				<a class="menu-link" href="{{url('kemaskini/sekretariat/jumlah-peruntukan')}}">
-					<span class="menu-icon">{!! getIcon('send', 'fs-2') !!}</span>
-					<span class="menu-title">Peruntukan Tahunan</span>
 				</a>
 			</div>
 
