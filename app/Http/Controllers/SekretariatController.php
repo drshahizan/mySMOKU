@@ -276,28 +276,11 @@ class SekretariatController extends Controller
     }
 
     //KEMASKINI PERINGKAT PENGAJIAN
-    // public function peringkatPengajian()
-    // {
-    //     $recordsBKOKU = TamatPengajian::select('tamat_pengajian.*', 'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat')
-    //         ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
-    //         ->join('smoku', 'tamat_pengajian.smoku_id', '=', 'smoku.id')
-    //         ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat')
-    //         ->whereIn('smoku_akademik.smoku_id', function ($query) {
-    //             $query->select('smoku_id')
-    //                 ->from('permohonan')
-    //                 ->where('program', 'BKOKU');
-    //         })
-    //         ->where('smoku_akademik.status', 1)
-    //         ->whereRaw('(tamat_pengajian.created_at, smoku_akademik.smoku_id) IN (SELECT MAX(created_at), smoku_id FROM tamat_pengajian GROUP BY smoku_id)')
-    //         ->get();
-
-    //     $peringkatPengajian = PeringkatPengajian::all();
-
-    //     return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsBKOKU','peringkatPengajian'));
-    // }
     public function peringkatPengajian()
     {
-        $recordsBKOKU = TamatPengajian::select(
+        $peringkatPengajian = PeringkatPengajian::all();
+        
+        $recordsTerkini = TamatPengajian::select(
             'tamat_pengajian.*', 'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat',
             DB::raw('(SELECT peringkat_pengajian FROM smoku_akademik WHERE smoku_id = smoku_akademik.smoku_id AND status = 1 ORDER BY created_at DESC LIMIT 1) as peringkat_terkini')
         )
@@ -313,9 +296,23 @@ class SekretariatController extends Controller
         ->whereRaw('(tamat_pengajian.created_at, smoku_akademik.smoku_id) IN (SELECT MAX(created_at), smoku_id FROM tamat_pengajian GROUP BY smoku_id)')
         ->get();
 
-        $peringkatPengajian = PeringkatPengajian::all();
+        $recordsTerdahulu = TamatPengajian::select(
+            'tamat_pengajian.*', 'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat',
+            DB::raw('(SELECT peringkat_pengajian FROM smoku_akademik WHERE smoku_id = smoku_akademik.smoku_id AND status = 1 ORDER BY created_at DESC LIMIT 1) as peringkat_terkini')
+        )
+        ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
+        ->join('smoku', 'tamat_pengajian.smoku_id', '=', 'smoku.id')
+        ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat')
+        ->whereIn('smoku_akademik.smoku_id', function ($query) {
+            $query->select('smoku_id')
+                ->from('permohonan')
+                ->where('program', 'BKOKU');
+        })
+        ->where('smoku_akademik.status', 0)
+        ->whereRaw('(tamat_pengajian.created_at, smoku_akademik.smoku_id) IN (SELECT MAX(created_at), smoku_id FROM tamat_pengajian GROUP BY smoku_id)')
+        ->get();
 
-        return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsBKOKU', 'peringkatPengajian'));
+        return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsTerkini', 'recordsTerdahulu', 'peringkatPengajian'));
     }
 
     public function kemaskiniPeringkatPengajian(Request $request, $id)

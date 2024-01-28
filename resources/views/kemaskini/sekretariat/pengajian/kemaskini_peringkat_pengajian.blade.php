@@ -73,11 +73,8 @@
                                                 $i=0;
                                             @endphp
 
-                                            @foreach ($recordsBKOKU as $items)
+                                            @foreach ($recordsTerkini as $items)
                                                 @php
-                                                    // $terdahulu = $items->peringkat->where('status', 0)->first();
-                                                    // $terkini = $items->peringkat_terkini->where('status', 1)->first();
-                                                                    
                                                     $text = ucwords(strtolower($items->nama));
                                                     $conjunctions = ['bin', 'binti'];
                                                     $words = explode(' ', $text);
@@ -95,33 +92,68 @@
                                                 <tr>
                                                     <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
                                                     <td>{{$pemohon}}</td>
-                                                    <td>{{ ucwords(strtolower($items->peringkat)) }}</td>
-                                                    <td>{{ ucwords(strtolower($items->peringkat_terkini)) }}</td>
+                                                    <td>
+                                                        @if ($recordsTerdahulu->isNotEmpty() && $recordsTerkini->isNotEmpty())
+                                                            @foreach ($recordsTerdahulu as $item)
+                                                                @php
+                                                                    $pp_terkini = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $item->peringkat_pengajian)->value('peringkat');
+                                                                @endphp
+
+                                                                @if ($item->smoku_id === $items->smoku_id)
+                                                                    {{ ucwords(strtolower($pp_terkini)) }}
+                                                                @endif
+                                                            @endforeach
+                                                        @else
+                                                            @php
+                                                                $pp_terdahulu = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $items->peringkat_pengajian)->value('peringkat');
+                                                            @endphp
+                                                            {{ ucwords(strtolower($pp_terdahulu)) }}
+                                                        @endif
+                                                    </td>
+
+                                                    <td>
+                                                        @if ($recordsTerdahulu->isNotEmpty() && $recordsTerkini->isNotEmpty())
+                                                            @php
+                                                                $pp_terkini = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $items->peringkat_pengajian)->value('peringkat');
+                                                            @endphp
+
+                                                            @foreach ($recordsTerkini as $item)
+                                                                @if ($item->smoku_id === $items->smoku_id)
+                                                                    {{ ucwords(strtolower($pp_terkini)) }}
+                                                                @endif
+                                                            @endforeach
+                                                        @else
+                                                            Belum dikemaskini
+                                                        @endif
+                                                    </td>
+            
                                                     <td class="text-center">
                                                         <a href="{{ asset('assets/dokumen/sijil_tamat/' . $items->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
                                                         Lihat
                                                         <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:5px;'></i>
                                                     </td>
+
                                                     <td class="text-center">
                                                         <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $items->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
                                                         Lihat
                                                         <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:5px;'></i>
                                                     </td>
+                                                    
                                                     <td class="text-center">
                                                         <form action="{{ route('kemaskini.peringkat.pengajian', $items->smoku_id) }}" method="post">
                                                             @csrf
-                                                            <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
-                                                                <option value="" {{ $items->peringkat_terkini ? 'disabled' : '' }}>Kemaskini</option>
-                                                                @foreach ($peringkatPengajian as $peringkat)
-                                                                    <option value="{{ $peringkat->kod_peringkat }}" {{ Request::get('peringkat_pengajian') == $peringkat->kod_peringkat ? 'selected' : '' }}>{{ $peringkat->peringkat }}</option>
-                                                                @endforeach
-                                                            </select>
                                                             {{-- <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
-                                                                <option value="">Kemaskini</option>
+                                                                <option value="" {{ $items->peringkat_terkini ? 'disabled' : '' }}>Pilih Peringkat Pengajian</option>
                                                                 @foreach ($peringkatPengajian as $peringkat)
                                                                     <option value="{{ $peringkat->kod_peringkat }}" {{ Request::get('peringkat_pengajian') == $peringkat->kod_peringkat ? 'selected' : '' }}>{{ $peringkat->peringkat }}</option>
                                                                 @endforeach
                                                             </select> --}}
+                                                            <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
+                                                                <option value="">Pilih Peringkat Pengajian</option>
+                                                                @foreach ($peringkatPengajian as $peringkat)
+                                                                    <option value="{{ $peringkat->kod_peringkat }}" {{ Request::get('peringkat_pengajian') == $peringkat->kod_peringkat ? 'selected' : '' }}>{{ $peringkat->peringkat }}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </form>
                                                     </td>
                                                 </tr>
