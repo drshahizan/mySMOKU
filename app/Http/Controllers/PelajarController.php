@@ -136,14 +136,14 @@ class PelajarController extends Controller
     {   
         $user = Auth::user();
         $smoku = Smoku::where('no_kp', $user->no_kp)->first();
-        $permohonan = Permohonan::where('smoku_id', $smoku->id)->first();
+        $tamat_pengajian = TamatPengajian::where('smoku_id', $smoku->id)->first();
 
         // Retrieve uploaded file information from session, if available
-        $uploadedSijilTamat = session()->has('uploadedSijilTamat') ? session('uploadedSijilTamat') : null;
-        $uploadedTranskrip = session()->has('uploadedTranskrip') ? session('uploadedTranskrip') : null;
-        $perakuan = session()->has('perakuan') ? session('perakuan') : null;
+        $uploadedSijilTamat = $tamat_pengajian->sijil_tamat;
+        $uploadedTranskrip = $tamat_pengajian->transkrip;
+        $perakuan = $tamat_pengajian->perakuan;
 
-        return view('kemaskini.pelajar.lapor_tamat_pengajian', compact('permohonan', 'uploadedSijilTamat', 'uploadedTranskrip', 'perakuan'));
+        return view('kemaskini.pelajar.lapor_tamat_pengajian', compact('uploadedSijilTamat', 'uploadedTranskrip', 'perakuan'));
     }
 
     public function hantarTamatPengajian(Request $request)
@@ -206,7 +206,7 @@ class PelajarController extends Controller
         session()->put('uploadedTranskrip', $uploadedTranskrip);
         session()->put('perakuan', $request->input('perakuan'));
 
-        return redirect()->route('tamat.pengajian')->with('success', 'Dokumen lapor diri tamat pengajian telah dihantar.');
+        return redirect()->route('tamat.pengajian')->with('success', 'Dokumen lapor diri tamat pengajian telah berjaya dihantar.');
     }
 
     public function tangguhPengajian()
