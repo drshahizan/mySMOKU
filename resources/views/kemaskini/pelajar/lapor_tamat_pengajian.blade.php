@@ -20,7 +20,7 @@
 							<!--begin::Card body-->
 							<div class="card-body p-10">
 								<!--begin::Form-->
-								<form action="{{ route('hantar.tamat.pengajian') }}" method="post" enctype="multipart/form-data">
+								<form action="{{ route('hantar.tamat.pengajian') }}" method="post" enctype="multipart/form-data" id="tamatPengajianForm">
 									@csrf
 									<!--begin::Wrapper-->
 									<div class="d-flex flex-column align-items-start flex-xl-row">
@@ -30,8 +30,6 @@
 										</div>
 									</div>
 									<!--end::Top-->
-								
-									<br>
 								
 									<table class="table table-bordered table-striped">
 										<thead>
@@ -54,11 +52,6 @@
 															<a href="{{ asset('assets/dokumen/sijil_tamat/' . $sijil) }}" target="_blank">{{ $sijil }}</a>
 														@endforeach
 													@endif
-													{{-- @if(session()->has('uploadedSijilTamat'))
-														@foreach(session('uploadedSijilTamat') as $sijil)
-															<a href="{{ asset('assets/dokumen/sijil_tamat/' . $sijil) }}" target="_blank">{{ $sijil }}</a>
-														@endforeach
-													@endif --}}
 												</td>
 											</tr>
 								
@@ -76,11 +69,6 @@
 															<a href="{{ asset('assets/dokumen/salinan_transkrip/' . $transkrip) }}" target="_blank">{{ $transkrip }}</a>
 														@endforeach
 													@endif
-													{{-- @if(session()->has('uploadedTranskrip'))
-														@foreach(session('uploadedTranskrip') as $transkrip)
-															<a href="{{ asset('assets/dokumen/salinan_transkrip/' . $transkrip) }}" target="_blank">{{ $transkrip }}</a>
-														@endforeach
-													@endif --}}
 												</td>
 											</tr>
 								
@@ -109,7 +97,7 @@
 										<tbody>
 											<tr>
 												<td colspan="2" style="text-align: justify;">
-													<input type="checkbox" value="1" id="perakuan" name="perakuan" @if(session('perakuan') == 1) checked @endif required/>
+													<input type="checkbox" value="1" id="perakuan" name="perakuan" @if($perakuan) checked @endif required/>
 													Saya mengaku bahawa maklumat dan dokumen yang disertakan adalah betul dan benar dan bertanggungjawab ke atas maklumat dan dokumen tersebut. 
 													Saya memahami bahawa saya boleh dikenakan tindakan sekiranya mana-mana maklumat dan/atau dokumen yang disertakan adalah tidak benar.
 												</td>											
@@ -139,6 +127,11 @@
 
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 		<script>
+			// Submit the form using JavaScript
+			function submitForm() {
+				document.getElementById('tamatPengajianForm').submit();
+			}
+		
 			@if(session('success'))
 				Swal.fire({
 					icon: 'success',
@@ -147,10 +140,12 @@
 					confirmButtonText: 'OK'
 				});
 			@endif
-			@if(session('failed'))
+
+			// Display SweetAlert error message
+			@if ($errors->any())
 				Swal.fire({
 					icon: 'error',
-					title: 'Tidak Berjaya!',
+					title: 'Tidak Berjaya! Sila semak format dan saiz fail yang dimuat naik.',
 					text: ' {!! session('failed') !!}',
 					confirmButtonText: 'OK'
 				});

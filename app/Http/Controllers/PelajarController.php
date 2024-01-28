@@ -141,7 +141,7 @@ class PelajarController extends Controller
         // Retrieve uploaded file information from the TamatPengajian model
         $uploadedSijilTamat = is_array($tamat_pengajian->sijil_tamat) ? $tamat_pengajian->sijil_tamat : [$tamat_pengajian->sijil_tamat];
         $uploadedTranskrip = is_array($tamat_pengajian->transkrip) ? $tamat_pengajian->transkrip : [$tamat_pengajian->transkrip];
-        $perakuan = $tamat_pengajian->perakuan;
+        $perakuan = session('perakuan', 1);
 
         return view('kemaskini.pelajar.lapor_tamat_pengajian', compact('uploadedSijilTamat', 'uploadedTranskrip', 'perakuan'));
     }
@@ -152,12 +152,8 @@ class PelajarController extends Controller
         $smoku = Smoku::where('no_kp', $user->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->id)->first();
 
-        if (!$smoku || !$permohonan) {
-            return redirect()->route('tamat.pengajian')->with('error', 'Permohonan tidak ditemui.');
-        }
-
-        // Validate incoming file uploads
-        $request->validate([
+       // Validate incoming file uploads
+        $validatedData = $request->validate([
             'sijilTamat.*' => 'required|mimes:pdf,jpg,jpeg,png|max:2048', // Maximum size in kilobytes (2 MB = 2048 KB)
             'transkrip.*' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
@@ -208,7 +204,6 @@ class PelajarController extends Controller
 
         return redirect()->route('tamat.pengajian')->with('success', 'Dokumen lapor diri tamat pengajian telah berjaya dihantar.');
     }
-
     public function tangguhPengajian()
     {   
         $user = Auth::user();
