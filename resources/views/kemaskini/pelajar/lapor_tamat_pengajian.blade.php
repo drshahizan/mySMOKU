@@ -49,11 +49,16 @@
 												</td>
 												<td style="width: 55% !important;">
 													<input type="file" id="sijilTamat" name="sijilTamat[]" required/>
-													@if(session()->has('uploadedSijilTamat'))
-														@foreach(session('uploadedSijilTamat') as $sijil)
+													@if($uploadedSijilTamat)
+														@foreach($uploadedSijilTamat as $sijil)
 															<a href="{{ asset('assets/dokumen/sijil_tamat/' . $sijil) }}" target="_blank">{{ $sijil }}</a>
 														@endforeach
 													@endif
+													{{-- @if(session()->has('uploadedSijilTamat'))
+														@foreach(session('uploadedSijilTamat') as $sijil)
+															<a href="{{ asset('assets/dokumen/sijil_tamat/' . $sijil) }}" target="_blank">{{ $sijil }}</a>
+														@endforeach
+													@endif --}}
 												</td>
 											</tr>
 								
@@ -63,13 +68,19 @@
 													Salinan Transkrip &nbsp;
 													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a>
 												</td>
+												
 												<td style="width: 55% !important;">
 													<input type="file" id="transkrip" name="transkrip[]" required/>
-													@if(session()->has('uploadedTranskrip'))
-														@foreach(session('uploadedTranskrip') as $transkrip)
+													@if($uploadedTranskrip)
+														@foreach($uploadedTranskrip as $transkrip)
 															<a href="{{ asset('assets/dokumen/salinan_transkrip/' . $transkrip) }}" target="_blank">{{ $transkrip }}</a>
 														@endforeach
 													@endif
+													{{-- @if(session()->has('uploadedTranskrip'))
+														@foreach(session('uploadedTranskrip') as $transkrip)
+															<a href="{{ asset('assets/dokumen/salinan_transkrip/' . $transkrip) }}" target="_blank">{{ $transkrip }}</a>
+														@endforeach
+													@endif --}}
 												</td>
 											</tr>
 								

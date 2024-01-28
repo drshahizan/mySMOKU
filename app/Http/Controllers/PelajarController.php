@@ -138,7 +138,12 @@ class PelajarController extends Controller
         $smoku = Smoku::where('no_kp', $user->no_kp)->first();
         $permohonan = Permohonan::where('smoku_id', $smoku->id)->first();
 
-        return view('kemaskini.pelajar.lapor_tamat_pengajian',compact('permohonan'));
+        // Retrieve uploaded file information from session, if available
+        $uploadedSijilTamat = session()->has('uploadedSijilTamat') ? session('uploadedSijilTamat') : null;
+        $uploadedTranskrip = session()->has('uploadedTranskrip') ? session('uploadedTranskrip') : null;
+        $perakuan = session()->has('perakuan') ? session('perakuan') : null;
+
+        return view('kemaskini.pelajar.lapor_tamat_pengajian', compact('permohonan', 'uploadedSijilTamat', 'uploadedTranskrip', 'perakuan'));
     }
 
     public function hantarTamatPengajian(Request $request)
