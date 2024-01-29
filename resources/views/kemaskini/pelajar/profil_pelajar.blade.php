@@ -27,9 +27,9 @@
 		<!--begin::Wrapper-->
 		<div class="card-body px-6 px-lg-10 px-xxl-15 py-20">
 			<!--begin::Nav-->
-			<div class="stepper-nav">
+            <div class="stepper-nav flex-center flex-wrap mb-10">
 				<!--begin::Step 1-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
+                <div class="stepper-item mx-8 my-4 current" data-kt-stepper-element="nav" data-kt-stepper-action="step">
 					<!--begin::Wrapper-->
 					<div class="stepper-wrapper">
 						<!--begin::Icon-->
@@ -52,7 +52,7 @@
 				</div>
 				<!--end::Step 1-->
 				<!--begin::Step 2-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
 					<!--begin::Wrapper-->
 					<div class="stepper-wrapper">
 						<!--begin::Icon-->
@@ -75,7 +75,7 @@
 				</div>
 				<!--end::Step 2-->
 				<!--begin::Step 3-->
-				<div class="stepper-item" data-kt-stepper-element="nav">
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
 					<!--begin::Wrapper-->
 					<div class="stepper-wrapper">
 						<!--begin::Icon-->
@@ -549,34 +549,39 @@
 								</div>
 							</div>
 							<!--end::Input group-->
-							<!--begin::Input group-->
-							<!--komen dulu sebab nak test ua sahaja-->
-							{{-- <div class="separator my-14"></div>
-							<div class="pb-10 pb-lg-15">
-								<!--begin::Title-->
-								<h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
-								<!--end::Title-->
-								<!--begin::Notice-->
-								<div class="text-muted fw-semibold fs-6">Bank Islam</div>
-								<!--end::Notice-->
-							</div>
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;
-								<td>
-									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="16113020138680">
-										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
-									</span>
-								</td>								
-								<!--end::Label-->
-								<!--begin::Input wrapper-->
-								<div class="col-12">
-									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaun_bank" name="no_akaun_bank" placeholder="" value="{{ $butiranPelajar->no_akaun_bank }}" />
-									<!--end::Input-->
+							@php
+								$smoku_id = DB::table('smoku')->where('no_kp',Auth::user()->no_kp)->first();
+								$akademik_id = DB::table('smoku_akademik')->where('smoku_id',$smoku_id->id)->first();
+								$institusi_id = DB::table('bk_info_institusi')->where('id_institusi', $akademik_id->id_institusi)->first();
+							@endphp
+							@if($institusi_id->jenis_institusi != 'UA')
+								<div class="separator my-14"></div>
+								<div class="pb-10 pb-lg-15">
+									<!--begin::Title-->
+									<h2 class="fw-bold text-dark">Maklumat Perbankan</h2>
+									<!--end::Title-->
+									<!--begin::Notice-->
+									<div class="text-muted fw-semibold fs-6">Bank Islam</div>
+									<!--end::Notice-->
 								</div>
-								<!--end::Input wrapper-->
-							</div> --}}
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class=" fs-6 fw-semibold form-label mb-2">No. Akaun Bank</label>&nbsp;
+									<td>
+										<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="16113020138680">
+											<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+										</span>
+									</td>								
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="col-12">
+										<!--begin::Input-->
+										<input type="text" class="form-control form-control-solid" maxlength="14" id="no_akaun_bank" name="no_akaun_bank" placeholder="" value="{{ $butiranPelajar->no_akaun_bank }}" />
+										<!--end::Input-->
+									</div>
+									<!--end::Input wrapper-->
+								</div>
+							@endif
 						</div>
 						<!--end::Input group-->
 					</div>
@@ -887,20 +892,25 @@
 						</i>Kembali</button>
 					</div>
 					<!--end::Wrapper-->
+					@php
+						$smoku_id = DB::table('smoku')->where('no_kp',Auth::user()->no_kp)->first();
+						$permohonan = DB::table('permohonan')->orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
+					@endphp
+							
 					<!--begin::Wrapper-->
 					<div>
-						{{-- @if (in_array($permohonan->status, [1, 5, 9])) --}}
-						<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" >
-							<span class="indicator-label">Simpan
-							<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
-								<span class="path1"></span>
-								<span class="path2"></span>
-							</i></span>
-							<span class="indicator-progress">Sila tunggu...
-							<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-						</button>
+						@if (in_array($permohonan->status, [1, 2, 5, 6, 7, 8]))
+							<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" >
+								<span class="indicator-label">Simpan
+								<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
+									<span class="path1"></span>
+									<span class="path2"></span>
+								</i></span>
+								<span class="indicator-progress">Sila tunggu...
+								<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+							</button>
 						
-						{{-- @endif --}}
+						@endif
 
 						{{-- <button type="button" class="btn btn-lg btn-primary{{ in_array($permohonan->status, [1, 5, 9]) ? ' save-next-button' : '' }}" data-kt-stepper-action="next"> --}}
 						<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">
@@ -931,7 +941,7 @@
 		<!--end::Global Javascript Bundle-->
 
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="../assets/js/custom/utilities/modals/create-account.js"></script>
+		<script src="../assets/js/custom/utilities/modals/view-account.js"></script>
 		<script src="../assets/js/custom/apps/file-manager/list.js"></script>
 		<script src="../assets/js/custom/utilities/modals/create-app.js"></script>
 		<!--end::Custom Javascript-->
