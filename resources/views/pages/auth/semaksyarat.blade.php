@@ -146,48 +146,48 @@
             // peringkat Change
             $('#peringkat_pengajian').change(function(){
 
-            // institusi id
-            var id_ins = $(id_institusi).val();
-            var kod_peringkat = $(this).val();
+                // institusi id
+                var id_ins = $(id_institusi).val();
+                var kod_peringkat = $(this).val();
 
-            // Empty the dropdown
-        // $('#peringkat_pengajian').find('option').not(':first').remove();
-            $('#nama_kursus').find('option').not(':first').remove();
-            //alert(idipt);
+                // Empty the dropdown
+                // $('#peringkat_pengajian').find('option').not(':first').remove();
+                $('#nama_kursus').find('option').not(':first').remove();
+                //alert(idipt);
 
-            // AJAX request 
-            $.ajax({
-                url: 'getKursus/'+kod_peringkat+'/'+id_ins,
-                type: 'get',
-                dataType: 'json',
-            
-                success: function(response){
+                // AJAX request 
+                $.ajax({
+                    url: 'getKursus/'+kod_peringkat+'/'+id_ins,
+                    type: 'get',
+                    dataType: 'json',
+                
+                    success: function(response){
 
-                    var len = 0;
-                    if(response['data'] != null){
-                        len = response['data'].length;
-                    }
-
-                    if(len > 0){
-                        // Read data and create <option >
-                        for(var i=0; i<len; i++){
-
-                            var id_ins = response['data'][i].id_institusi;
-                            var kod_peringkat = response['data'][i].kod_peringkat;
-                            var nama_kursus = response['data'][i].nama_kursus;
-                            var kod_nec = response['data'][i].kod_nec;
-                            var bidang = response['data'][i].bidang.toUpperCase();
-                            var uppercaseValue  = response['data'][i].nama_kursus.toUpperCase();
-
-                            var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+" - "+kod_nec+" ( "+bidang+" )</option>";
-
-                            $("#nama_kursus").append(option); 
-                            
+                        var len = 0;
+                        if(response['data'] != null){
+                            len = response['data'].length;
                         }
-                    }
 
-                }
-            });
+                        if(len > 0){
+                            // Read data and create <option >
+                            for(var i=0; i<len; i++){
+
+                                var id_ins = response['data'][i].id_institusi;
+                                var kod_peringkat = response['data'][i].kod_peringkat;
+                                var nama_kursus = response['data'][i].nama_kursus;
+                                var kod_nec = response['data'][i].kod_nec;
+                                var bidang = response['data'][i].bidang.toUpperCase();
+                                var uppercaseValue  = response['data'][i].nama_kursus.toUpperCase();
+
+                                var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+" - "+kod_nec+" ( "+bidang+" )</option>";
+
+                                $("#nama_kursus").append(option); 
+                                
+                            }
+                        }
+
+                    }
+                });
 
             });
 
