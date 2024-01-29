@@ -102,6 +102,12 @@
                                                         $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
 								                        $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
 
+                                                        if ($item['tarikh_transaksi'] !== null) {
+                                                            $item['tarikh_transaksi'] = new DateTime($item['tarikh_transaksi']);
+                                                            $tarikh_transaksi = $item['tarikh_transaksi']->format('d/m/Y');
+                                                        } else {
+                                                            $tarikh_transaksi = 'Dalam Proses';
+                                                        }
                                                     @endphp
                                                     
                                                     <tr>
@@ -112,7 +118,7 @@
                                                         <td class="text-center">RM {{$item['yuran_dibayar']}}</td>
                                                         @endif
                                                         <td class="text-center">RM {{$item['wang_saku_dibayar']}}</td>
-                                                        <td class="text-center">{{\Carbon\Carbon::parse($item['tarikh_transaksi'])->format('d/m/Y')}}</td>
+                                                        <td class="text-center">{{$tarikh_transaksi}}</td>
 
                                                         @if ($item['status']=='1')
                                                             <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
