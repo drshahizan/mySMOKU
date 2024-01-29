@@ -527,22 +527,58 @@ document.addEventListener("DOMContentLoaded", function () {
 			var clickedStepIndex = stepper.getClickedStepIndex();
 			// console.log("Clicked Step: " + clickedStepIndex);
 			// console.log("firstInvalid Step: " + firstInvalidStep);
-		
+
 			if (validationStatus[clickedStepIndex] === "Valid" || (firstInvalidStep !== null && clickedStepIndex < firstInvalidStep)) {
 				stepper.goTo(clickedStepIndex);
 			} else {
-				// Show an error message if the clicked step is invalid
-				Swal.fire({
-					text: "Sila isi maklumat langkah " + (firstInvalidStep !== null ? firstInvalidStep : clickedStepIndex),
-					icon: "error",
-					buttonsStyling: false,
-					confirmButtonText: "Ok",
-					customClass: {
-						confirmButton: "btn btn-light",
-					},
-				});
-				stepper.goTo(firstInvalidStep);
+				var mod = form.querySelector('[name="mod"]').value;
+				var sumber = form.querySelector('[name="sumber_biaya"]').value;
+			
+				if (mod === '1' && sumber === '1') {
+					validationStatus[clickedStepIndex] = "Valid";
+				} else if (mod === '1' && sumber === '4') {
+					validationStatus[clickedStepIndex] = "Valid";
+				} else if (mod === '1' && sumber === '3') {
+					validationStatus[clickedStepIndex] = "Valid";
+				} else if ((mod === '2' || mod === '3' || mod === '4') && (sumber === '3' || sumber === '4')) {
+					validationStatus[clickedStepIndex] = "Valid";
+				} else if ((mod === '2' || mod === '3' || mod === '4') && sumber === '1') {
+					validationStatus[clickedStepIndex] = "Invalid";
+				} else {
+					validationStatus[clickedStepIndex] = "Invalid";
+				}
+			
+				// console.log("firstInvalid Step: " + firstInvalidStep);
+
+				if (validationStatus[clickedStepIndex] === "Invalid") {
+					// Handle validation error for specific case
+					Swal.fire({
+						text: "Tidak layak.",
+						icon: "error",
+						buttonsStyling: false,
+						confirmButtonText: "Ok",
+						customClass: {
+							confirmButton: "btn btn-light",
+						},
+					}).then(function () {
+						stepper.goTo(3); // Go back to step 3                    
+						KTUtil.scrollTop();
+					});
+				} else {
+					// Show a general error message for other cases
+					Swal.fire({
+						text: "Sila isi maklumat langkah " + (firstInvalidStep !== null ? firstInvalidStep : clickedStepIndex),
+						icon: "error",
+						buttonsStyling: false,
+						confirmButtonText: "Ok",
+						customClass: {
+							confirmButton: "btn btn-light",
+						},
+					});
+					stepper.goTo(firstInvalidStep);
+				}
 			}
+			
 			
 		});
 		
@@ -655,31 +691,76 @@ document.addEventListener("DOMContentLoaded", function () {
                     formContinueButton.classList.remove('d-none'); // show the continue button
                 } else if ((mod === '2' || mod === '3' || mod === '4') && sumber === '1') {
                     formContinueButton.classList.add('d-none'); // hide the continue button
-         
+					if (stepper.getCurrentStepIndex() === 5 || stepper.getCurrentStepIndex() === 6 || stepper.getCurrentStepIndex() === 7) {
+                
+						if (formContinueButton.classList.contains('d-none')) {
+							// Handle validation error
+							Swal.fire({
+								text: "Tidak layak.",
+								icon: "error",
+								buttonsStyling: false,
+								confirmButtonText: "Ok",
+								customClass: {
+									confirmButton: "btn btn-light",
+								},
+							}).then(function () {
+								stepper.goPrevious();
+								KTUtil.scrollTop();
+							});
+							
+						   
+						}
+					}
                 } else {
                     formContinueButton.classList.add('d-none'); // hide the continue button
-                }
-            } else if (stepper.getCurrentStepIndex() === 5 || stepper.getCurrentStepIndex() === 6 || stepper.getCurrentStepIndex() === 7) {
+					if (stepper.getCurrentStepIndex() === 5 || stepper.getCurrentStepIndex() === 6 || stepper.getCurrentStepIndex() === 7) {
                 
-                if (formContinueButton.classList.contains('d-none')) {
-                    // Handle validation error
-                    Swal.fire({
-                        text: "Tidak layak.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok",
-                        customClass: {
-                            confirmButton: "btn btn-light",
-                        },
-                    }).then(function () {
-                        stepper.goPrevious();
-                        KTUtil.scrollTop();
-                    });
+						if (formContinueButton.classList.contains('d-none')) {
+							// Handle validation error
+							Swal.fire({
+								text: "Tidak layak.",
+								icon: "error",
+								buttonsStyling: false,
+								confirmButtonText: "Ok",
+								customClass: {
+									confirmButton: "btn btn-light",
+								},
+							}).then(function () {
+								stepper.goPrevious();
+								KTUtil.scrollTop();
+							});
+							
+						   
+						}
+					}
+				}
+            } 
+			// else if (stepper.getCurrentStepIndex() === 5 || stepper.getCurrentStepIndex() === 6 || stepper.getCurrentStepIndex() === 7) {
+                
+            //     if (formContinueButton.classList.contains('d-none')) {
+            //         // Handle validation error
+            //         Swal.fire({
+            //             text: "Tidak layak.",
+            //             icon: "error",
+            //             buttonsStyling: false,
+            //             confirmButtonText: "Ok",
+            //             customClass: {
+            //                 confirmButton: "btn btn-light",
+            //             },
+            //         }).then(function () {
+            //             stepper.goPrevious();
+            //             KTUtil.scrollTop();
+            //         });
                     
                    
-                }
-            }
-            else {
+            //     }
+            // }
+            // else if (stepper.getCurrentStepIndex() === 7) {
+            //     formSubmitButton.classList.remove('d-inline-block');
+            //     formSubmitButton.classList.remove('d-none');
+            //     formContinueButton.classList.remove('d-none');
+            // }
+			else {
                 formSubmitButton.classList.remove('d-inline-block');
                 formSubmitButton.classList.remove('d-none');
                 formContinueButton.classList.remove('d-none');
