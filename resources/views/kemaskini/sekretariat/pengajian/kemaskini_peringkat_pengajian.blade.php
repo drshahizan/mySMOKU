@@ -140,9 +140,8 @@
                                                     </td>
 
                                                     <td class="text-center">
-                                                        <form id="kemaskiniForm_{{ $items->smoku_id }}" action="{{ route('kemaskini.peringkat.pengajian', $items->smoku_id) }}" method="post">
-                                                            @csrf
-                                                            <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this, {{ $items->smoku_id }})" {{ session()->has('kemaskini_success_' . $items->smoku_id) ? 'disabled' : '' }}>
+                                                        @if($recordsTerdahulu->isNotEmpty() && $recordsTerkini->isNotEmpty())
+                                                            <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this, {{ $items->smoku_id }})" disabled>
                                                                 <option value="">Pilih Peringkat Pengajian</option>
                                                                 @foreach ($peringkatPengajian as $peringkat)
                                                                     @if ($peringkat->kod_peringkat > $items->peringkat_pengajian)
@@ -150,8 +149,20 @@
                                                                     @endif
                                                                 @endforeach
                                                             </select>
-                                                        </form>
-                                                    </td>                                                    
+                                                        @else
+                                                            <form id="kemaskiniForm_{{ $items->smoku_id }}" action="{{ route('kemaskini.peringkat.pengajian', $items->smoku_id) }}" method="post">
+                                                                @csrf
+                                                                <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this, {{ $items->smoku_id }}) {{ session()->has('kemaskini_success_' . $items->smoku_id) ? 'disabled' : '' }}">
+                                                                    <option value="">Pilih Peringkat Pengajian</option>
+                                                                    @foreach ($peringkatPengajian as $peringkat)
+                                                                        @if ($peringkat->kod_peringkat > $items->peringkat_pengajian)
+                                                                            <option value="{{ $peringkat->kod_peringkat }}">{{ $peringkat->peringkat }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
+                                                            </form>
+                                                        @endif
+                                                    </td>                                                                                                      
                                                 </tr>
                                             @endforeach
                                         </tbody>
