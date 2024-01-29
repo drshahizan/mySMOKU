@@ -138,24 +138,20 @@
                                                         Lihat
                                                         <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:5px;'></i>
                                                     </td>
-                                                    
+
                                                     <td class="text-center">
-                                                        <form action="{{ route('kemaskini.peringkat.pengajian', $items->smoku_id) }}" method="post">
+                                                        <form id="kemaskiniForm_{{ $items->smoku_id }}" action="{{ route('kemaskini.peringkat.pengajian', $items->smoku_id) }}" method="post">
                                                             @csrf
-                                                            {{-- <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
-                                                                <option value="" {{ $items->peringkat_terkini ? 'disabled' : '' }}>Pilih Peringkat Pengajian</option>
-                                                                @foreach ($peringkatPengajian as $peringkat)
-                                                                    <option value="{{ $peringkat->kod_peringkat }}" {{ Request::get('peringkat_pengajian') == $peringkat->kod_peringkat ? 'selected' : '' }}>{{ $peringkat->peringkat }}</option>
-                                                                @endforeach
-                                                            </select> --}}
-                                                            <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this)">
+                                                            <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this, {{ $items->smoku_id }})" {{ session()->has('kemaskini_success_' . $items->smoku_id) ? 'disabled' : '' }}>
                                                                 <option value="">Pilih Peringkat Pengajian</option>
                                                                 @foreach ($peringkatPengajian as $peringkat)
-                                                                    <option value="{{ $peringkat->kod_peringkat }}" {{ Request::get('peringkat_pengajian') == $peringkat->kod_peringkat ? 'selected' : '' }}>{{ $peringkat->peringkat }}</option>
+                                                                    @if ($peringkat->kod_peringkat > $items->peringkat_pengajian)
+                                                                        <option value="{{ $peringkat->kod_peringkat }}">{{ $peringkat->peringkat }}</option>
+                                                                    @endif
                                                                 @endforeach
                                                             </select>
                                                         </form>
-                                                    </td>
+                                                    </td>                                                    
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -171,24 +167,28 @@
         <!-- Javascript -->
         <script src="assets/bundles/libscripts.bundle.js"></script>    
         <script src="assets/bundles/vendorscripts.bundle.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
         <script>
-            function submitForm(selectElement) {
+            function submitForm(selectElement, smokuId) {
                 // Get the selected value
                 const selectedValue = selectElement.value;
-        
+
                 // Find the associated form
-                const form = selectElement.closest('form');
-        
+                const form = document.getElementById('kemaskiniForm_' + smokuId);
+
                 // Set the selected value as a hidden input
                 const input = document.createElement('input');
                 input.type = 'hidden';
                 input.name = 'peringkat_pengajian'; // Change to your desired input name
                 input.value = selectedValue;
                 form.appendChild(input);
-        
+
                 // Submit the form
                 form.submit();
+
+                // Disable the select element after successful submission
+                selectElement.disabled = true;
             }
         </script>
         
@@ -210,6 +210,25 @@
                     });
                 }).draw();
             });
+        </script>
+
+        <script>
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berjaya!',
+                    text: ' {!! session('success') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+            @if(session('failed'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Tidak Berjaya!',
+                    text: ' {!! session('failed') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
         </script>
     </body>
 </x-default-layout> 

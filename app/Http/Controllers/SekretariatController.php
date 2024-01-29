@@ -350,7 +350,9 @@ class SekretariatController extends Controller
         ]);
         $newRecord->save();
 
-        return redirect()->back()->with('success', 'Peringkat Pengajian updated successfully.');
+        session()->put('kemaskini_success_' . $id, true);
+
+        return redirect()->back()->with('success', 'Peringkat pengajian telah berjaya dikemaskini.');
     }
 
     public function tangguhLanjutPengajian()
