@@ -39,7 +39,7 @@
       </li>
       <!--end::Item-->
       <!--begin::Item-->
-      <li class="breadcrumb-item text-dark" style="color:darkblue">Senarai Pelajar</li>
+      <li class="breadcrumb-item text-dark" style="color:darkblue">Institusi Pengajian</li>
       <!--end::Item-->
   </ul>
   <!--end::Breadcrumb-->
@@ -53,7 +53,7 @@
       <div class="card">
           <!--begin::Header-->
           <div class="header">
-              <h2>Senarai Pelajar</h2>
+              <h2>Senarai Pelajar<br><small>Sila klik pada ikon pensil di kolum "Tindakan" untuk membuat pertukaran institusi pengajian bagi pelajar tersebut.</small></h2>
           </div>
           <!--end::Header-->
           <!--begin::Card body-->
@@ -64,8 +64,8 @@
                       <thead>
                           <tr>
                               <th class="text-center"><b>Nama</b></th>                                        
-              <th class="text-center"><b>No. Kad Pengenalan</b></th>
-              <th class="text-center"><b>Nama Kursus</b></th>
+                              <th class="text-center"><b>No. Kad Pengenalan</b></th>
+                              <th class="text-center"><b>Nama Kursus</b></th>
                               <th class="text-center"><b>Tarikh Daftar</b></th>
                               <th class="text-center"><b>Status</b></th>
                               <th class="text-center"><b>Tindakan</b></th>

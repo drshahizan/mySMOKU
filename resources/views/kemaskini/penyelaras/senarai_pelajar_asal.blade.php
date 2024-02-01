@@ -27,7 +27,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-dark" style="color:darkblue">Senarai Pelajar</li>
+        <li class="breadcrumb-item text-dark" style="color:darkblue">Institusi Pengajian</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->

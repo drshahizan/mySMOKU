@@ -191,7 +191,7 @@
 				<div class="menu-item">
 					<a class="menu-link" href="{{ route('senarai.pelajar.ua')}}">
 						<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
-						<span class="menu-title">Senarai Pelajar</span>
+						<span class="menu-title">Institusi Pengajian</span>
 					</a>
 				</div>
 			@endif
