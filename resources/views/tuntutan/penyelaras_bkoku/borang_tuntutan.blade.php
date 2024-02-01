@@ -185,8 +185,43 @@
 						@csrf
 							<!--begin::Item-->
 							@if ($permohonan->wang_saku == '1')
+								@if ($permohonan->yuran != '1')
+									<!--begin::Wrapper-->
+									<div class="d-flex flex-column align-items-start flex-xxl-row">
+										<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
+											<span class="fs-3 fw-bold text-gray-800">Borang Tuntutan</span>
+										</div>
+									</div>
+									<br>
+									<!--begin::Wrapper-->
+									<!--begin::Wrapper-->
+									<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" value=""/>
+									<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" value=""/>
+									<!--begin::Row-->
+									<div class="row gx-10 mb-5">
+										<!--begin::Col-->
+										<div class="col-lg-6">
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
+											<div class="mb-5">
+												<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
+											<!--begin::Input group-->
+											<div class="mb-5">
+												<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
+											</div>
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+								@endif
+
 							<div class="d-flex flex-stack">
 								<div class="me-5">
+									<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
+
 									<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" value="1" />
 									<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
 								</div>
@@ -197,7 +232,7 @@
 							<div class="d-flex flex-stack flex-grow-1">
 								<!--begin::Content-->
 								<div class="fw-semibold">
-									<div class="fs-6 text-dark">Jumlah Elaun Wang Saku </div>
+									<div class="fs-6 text-dark">Amaun Wang Saku </div>
 								</div>
 								<!--end::Content-->
 							</div>
@@ -213,7 +248,7 @@
 							<div class="d-flex flex-stack flex-grow-1">
 								<!--begin::Content-->
 								<div class="fw-semibold">
-									<div class="fs-6 text-dark"><b>Jumlah Keseluruhan Tuntutan</b></div>
+									<div class="fs-6 text-dark"><b>Jumlah Tuntutan</b></div>
 								</div>
 								<!--end::Content-->
 							</div>
@@ -274,7 +309,7 @@
 		var checkBox = document.getElementById("wang_saku");
 		var bilbulan = parseInt(document.getElementById('bil_bulan_per_sem').value); // Convert to integer
 		var wang_saku_perbulan = parseInt(document.getElementById('max_wang_saku').value);
-		
+		// alert(wang_saku_perbulan);
 		var currentDate = Date.now();
 		var tarikhMulaTimestamp = new Date('<?php echo $akademik->tarikh_mula; ?>').getTime();
 		var tarikhTamatTimestamp = new Date('<?php echo $akademik->tarikh_tamat; ?>').getTime();
@@ -283,7 +318,7 @@
 		if (tarikhMulaTimestamp < tarikhTamatTimestamp) {
 			 var tarikhNextSem = new Date(tarikhMulaTimestamp);
 			 tarikhNextSem.setMonth(tarikhNextSem.getMonth() + bilbulan);
-			 // alert('helll');
+			//  alert(tarikhNextSem);
 	
 			if (currentDate > tarikhNextSem) {
 				var wang_saku = wang_saku_perbulan * bilbulan;
@@ -315,14 +350,19 @@
 	
 		var yuranInput = document.getElementById('amaun_yuran');
 		// console.log(yuranInput);
-		var yuran = parseFloat(yuranInput.value).toFixed(2);
+		if (yuranInput !== null) {
+			var yuran = parseFloat(yuranInput.value).toFixed(2);
+		} else {
+			// Set yuran to 0.00 if yuranInput is null
+			var yuran = '0.00';
+		}
 		var total_yuran = (parseFloat(yuran) + parseFloat(totalAmaun)).toFixed(2);
+		
 	
 		// Define the maximum limit for 'amaun_yuran'
 		var baki_total = document.getElementById('baki_total');
 		var maxLimit = parseFloat(baki_total.value);
 		console.log(maxLimit);
-	
 	
 		if (total_yuran > maxLimit) {
 			yuranInput.value = '';

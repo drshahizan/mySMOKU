@@ -905,6 +905,10 @@ class PenyelarasController extends Controller
         $maxLimit = DB::table('bk_jumlah_tuntutan')
         ->where('program','BKOKU')
         ->where('jenis', 'Yuran')
+        ->first();	
+        $limitWangSaku = DB::table('bk_jumlah_tuntutan')
+        ->where('program','BKOKU')
+        ->where('jenis', 'Wang Saku')
         ->first();	    
 
         if ($permohonan && $permohonan->status ==8) {  
@@ -945,14 +949,13 @@ class PenyelarasController extends Controller
                 ];
 
                 $semSemasa++;
+                
+                $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
                 $awal = $tarikhNextSem->format('Y');
                 
                 $akhir = $tarikhNextSem->format('Y') + 1;
                 
                 $sesiMula = $awal . '/' . $akhir;
-
-                $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
-
             }
            
 
@@ -962,6 +965,8 @@ class PenyelarasController extends Controller
             $sesiSemasa = null; // Initialize a variable to store the current session
 
             foreach ($nextSemesterDates as $key => $data) {
+                // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'] . '<br>';
+
                 $dateOfSemester = \Carbon\Carbon::parse($data['date']);
                 
                 // Set the end date to be just before the start of the next semester
@@ -977,15 +982,14 @@ class PenyelarasController extends Controller
                     $sesiSemasa = $data['sesi'];
                     $previousSesi = isset($nextSemesterDates[$key - 1]) ? $nextSemesterDates[$key - 1]['sesi'] : null;
                 }
-               
+
             }
             // Output the results
             // echo 'Current Session: ' . $currentSesi . PHP_EOL;
             // echo 'Previous Session: ' . $previousSesi . PHP_EOL;
             // echo 'Current Semester: ' . $semSemasa . PHP_EOL;
             // echo 'Current Session: ' . $sesiSemasa . PHP_EOL;
-            // dd($semLepas);
-            // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'];
+            // dd($sesiSemasa);
             if ($semLepas != 0 ) {
                 if($semSemasa != $semLepas){
                     // semak dah upload result ke belum
@@ -993,10 +997,17 @@ class PenyelarasController extends Controller
                     ->where('semester', $semLepas)
                     ->first();
                     if($result == null){
+                        if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
+                            return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
+                        }
                         return redirect()->route('bkoku.kemaskini.keputusan', ['id' => $id])->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
                     }
                 }
                 
+            }
+
+            if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
+                return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
             }
        
             if (($currentSesi === $previousSesi) || $previousSesi === null) {
@@ -1023,8 +1034,21 @@ class PenyelarasController extends Controller
 
             }
             else {
-                // dd('sini');
-                $baki_total = $maxLimit->jumlah;
+                if ($permohonan->yuran == null && $permohonan->wang_saku == '1') {
+                    if($semSemasa != $semLepas && $semSemasa != $akademik->sem_semasa){
+                        // dd($akademik->bil_bulan_per_sem);
+                        $baki_total = $limitWangSaku->jumlah * $akademik->bil_bulan_per_sem; 
+                    }
+                    else {
+                        $baki_total = '0'; 
+                    }
+                   
+                }
+                else {
+                    $baki_total = $maxLimit->jumlah;
+                }
+                
+                // dd($baki_total);
             }
             
             
