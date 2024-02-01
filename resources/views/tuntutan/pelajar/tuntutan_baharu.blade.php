@@ -94,7 +94,7 @@
 								</div>
 								<div class="row gx-10 mb-5">
 									<div class="col-lg-12">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Jumlah Amaun</label>
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Amaun Yuran</label>
 										<!--begin::Input group-->
 										<div class="d-flex">
 											<span class="input-group-text">RM</span>
