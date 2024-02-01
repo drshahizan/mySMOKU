@@ -131,8 +131,10 @@
                                         <!--end::Input group-->
                                     </div>
                                     <!--end::Col-->
-                                    
                                 </div>
+                                
+                                <br>
+                                
                                 <!--end::Row-->
                                 <div class="d-flex">
                                     <!--begin::Button-->
@@ -242,10 +244,35 @@
                                             <!--end::Input group--->
 
                                             <!--end::Input group--->
-                                            <div class="fv-row mb-8">
-                                                <!--begin::Repeat Password-->
-                                                <input placeholder="Pengesahan Katalaluan" name="password_confirmation" type="password" autocomplete="off" class="form-control bg-transparent"/>
-                                                <!--end::Repeat Password-->
+                                            <div class="fv-row mb-8" data-kt-password-meter="true">
+                                                <!--begin::Wrapper-->
+                                                <div class="mb-1">
+                                                    <!--begin::Input wrapper-->
+                                                    <div class="position-relative mb-3">
+                                                        <!--begin::Repeat Password-->
+                                                        <input placeholder="Pengesahan Katalaluan" name="password_confirmation" type="password" autocomplete="off" class="form-control bg-transparent"/>
+                                                        <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
+                                                            <i class="bi bi-eye-slash fs-2"></i>
+                                                            <i class="bi bi-eye fs-2 d-none"></i>
+                                                        </span>
+                                                        <!--end::Repeat Password-->
+                                                    </div>
+
+                                                    <!--begin::Meter-->
+                                                    <div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+                                                        <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                                        <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                                        <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                                        <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+                                                    </div>
+                                                    <!--end::Meter-->
+
+                                                    <!--begin::Hint-->
+                                                    <div class="text-muted">
+                                                        Gunakan 12 atau lebih aksara dengan gabungan huruf, nombor, & simbol.
+                                                    </div>
+                                                    <!--end::Hint-->
+                                                </div>
                                             </div>
                                             <!--end::Input group--->
                                         </div>
@@ -253,8 +280,7 @@
                                     </div>
                                     <!--end::Col-->
                                 </div>
-                                <br>
-                                <br>
+                                
                                 <!--end::Row-->
                                 <div class="d-flex">
                                     <!--begin::Button-->

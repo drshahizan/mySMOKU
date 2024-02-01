@@ -60,9 +60,9 @@ class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths,
             'Tarikh Permohonan',
             'Yuran Dibayar (RM)',
             'Wang Saku Dibayar (RM)',
-            'No Baucer',
+            'No Baucar',
             'Perihal',
-            'Tarikh Baucer',
+            'Tarikh Baucar',
         ];
     }
 

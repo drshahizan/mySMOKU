@@ -71,7 +71,7 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Permohonan dan Tuntutan yang Layak<br><small>Sila muat turun excel fail untuk mengisi maklumat baucer dan muat naik kembali ke dalam sistem untuk dikemaskini.</small></h2>
+                                <h2>Senarai Permohonan dan Tuntutan yang Layak<br><small>Sila muat turun excel fail untuk mengisi maklumat baucar dan muat naik kembali ke dalam sistem untuk simpan maklumat berkenaan.</small></h2>
                             </div>
 
                             {{-- top nav bar --}}

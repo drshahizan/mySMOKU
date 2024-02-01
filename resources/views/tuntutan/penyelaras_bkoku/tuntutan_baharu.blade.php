@@ -39,7 +39,7 @@
         <div class="card">
             <!--begin::Header-->
             <div class="header">
-                <h2>Senarai Tuntutan Layak Mohon</h2>
+                <h2>Senarai Tuntutan Layak Mohon<br><small>Sila klik pada ikon-ikon di kolum "Tindakan" untuk mengisi keputusan peperiksaan dan membuat tuntutan baharu bagi pelajar tersebut.</small></h2>
             </div>
             <!--end::Header-->
             <!--begin::Card body-->

@@ -148,11 +148,11 @@
 									<tr>
 										<td colspan="2">
 											<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp;
-												Sila klik pada button untuk memuat turun dokumen SPBB. 
+												Sila klik pada butang  untuk memuat turun dokumen SPBB berkenaan. 
 											</div> 
 
 											<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp;
-												Sila tandatangan dokumen yang telah dimuat turun.
+												Sila semak dan tandatangan dokumen yang telah dimuat turun.
 											</div>
 										</td>
 									</tr>

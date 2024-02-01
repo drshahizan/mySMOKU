@@ -54,7 +54,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="header">
-                                <h2>Sejarah Tuntutan<br><small>Klik ID Tuntutan untuk melihat rekod tuntutan</small></h2>
+                                <h2>Sejarah Tuntutan<br><small>Klik ID Tuntutan untuk melihat rekod tuntutan bagi pelajar tersebut.</small></h2>
                             </div>
 
                             <div class="tab-content" id="myTabContent">

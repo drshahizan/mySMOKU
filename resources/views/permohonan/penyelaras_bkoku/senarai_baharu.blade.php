@@ -36,7 +36,7 @@
 	<div class="col-lg-12">
 		<div class="card">
 			<div class="header">
-				<h2>Senarai Permohonan<br><small>Klik ID Permohonan untuk melakukan melihat rekod permohonan</small></h2>
+				<h2>Senarai Permohonan<br><small>Klik ID Permohonan untuk melihat rekod permohonan bagi pelajar tersebut.</small></h2>
 			</div>
 			<div class="body">
 				<div class="table-responsive">

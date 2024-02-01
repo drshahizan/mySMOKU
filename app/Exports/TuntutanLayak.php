@@ -64,9 +64,9 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
             'Tarikh Tuntutan',
             'Yuran Dibayar (RM)',
             'Wang Saku Dibayar (RM)',
-            'No Baucer',
+            'No Baucar',
             'Perihal',
-            'Tarikh Baucer',
+            'Tarikh Baucar',
         ];
     }
 
