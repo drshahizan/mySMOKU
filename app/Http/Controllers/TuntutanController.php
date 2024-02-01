@@ -35,10 +35,11 @@ class TuntutanController extends Controller
             ->where('program','BKOKU')
             ->where('jenis', 'Yuran')
             ->first();	
-        // dd($maxLimit);	
+        $limitWangSaku = DB::table('bk_jumlah_tuntutan')
+            ->where('program','BKOKU')
+            ->where('jenis', 'Wang Saku')
+            ->first();	   	
 
-        
-        
         if ($permohonan && $permohonan->status == 8) {
 
             $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
@@ -77,13 +78,14 @@ class TuntutanController extends Controller
                 ];
 
                 $semSemasa++;
+                $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
+
                 $awal = $tarikhNextSem->format('Y');
                 
                 $akhir = $tarikhNextSem->format('Y') + 1;
                 
                 $sesiMula = $awal . '/' . $akhir;
 
-                $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
 
             }
            
@@ -94,6 +96,8 @@ class TuntutanController extends Controller
             $sesiSemasa = null; // Initialize a variable to store the current session
 
             foreach ($nextSemesterDates as $key => $data) {
+                // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'] . '<br>';
+
                 $dateOfSemester = \Carbon\Carbon::parse($data['date']);
                 
                 // Set the end date to be just before the start of the next semester
@@ -125,11 +129,17 @@ class TuntutanController extends Controller
                     ->where('semester', $semLepas)
                     ->first();
                     if($result == null){
+                        if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
+                            return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
+                        }
                         return redirect()->route('kemaskini.keputusan')->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
                     }
                 }
                 
             }
+            // if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
+            //     return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
+            // }
        
             if (($currentSesi === $previousSesi) || $previousSesi === null) {
                 
@@ -155,8 +165,21 @@ class TuntutanController extends Controller
 
             }
             else {
-                // dd('sini');
-                $baki_total = $maxLimit->jumlah;
+                if ($permohonan->yuran == null && $permohonan->wang_saku == '1') {
+                    if($semSemasa != $semLepas && $semSemasa != $akademik->sem_semasa){
+                        // dd($akademik->bil_bulan_per_sem);
+                        $baki_total = $limitWangSaku->jumlah * $akademik->bil_bulan_per_sem; 
+                    }
+                    else {
+                        $baki_total = '0'; 
+                    }
+                   
+                }
+                else {
+                    $baki_total = $maxLimit->jumlah;
+                }
+                
+                // dd($baki_total);
             }   
 
             if ($tuntutan && ($tuntutan->status == 1 || $tuntutan->status == 5)) {

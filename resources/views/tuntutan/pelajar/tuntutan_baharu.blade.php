@@ -4,7 +4,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <!--begin::Content-->
@@ -186,10 +186,42 @@
 							<!--begin::Item-->
 							
 							@if ($permohonan->wang_saku == '1')
-								{{-- @if($currentDate->greaterThan($tarikhNextSem)) --}}
+								@if ($permohonan->yuran != '1')
+									<!--begin::Wrapper-->
+									<div class="d-flex flex-column align-items-start flex-xxl-row">
+										<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
+											<span class="fs-3 fw-bold text-gray-800">Borang Tuntutan</span>
+										</div>
+									</div>
+									<br>
+									<!--begin::Wrapper-->
+									<!--begin::Wrapper-->
+									<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" value=""/>
+									<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" value=""/>
+									<!--begin::Row-->
+									<div class="row gx-10 mb-5">
+										<!--begin::Col-->
+										<div class="col-lg-6">
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
+											<div class="mb-5">
+												<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
+											<!--begin::Input group-->
+											<div class="mb-5">
+												<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
+											</div>
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+								@endif
 									<div class="d-flex flex-stack">
 										<div class="me-5">
-											{{-- <input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox"  @if ($permohonan->wang_saku == 1) value="1" checked @endif/> --}}
+											<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
+
 											<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" value="1" />
 											<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
 										</div>
@@ -212,7 +244,6 @@
 										<input type="hidden" id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="input-group-text" style="width: 100%;" value="{{$akademik->bil_bulan_per_sem}}"/>
 										<input type="text" id="amaun_wang_saku" name="amaun_wang_saku" class="input-group-text" style="width: 100%;" value="" readonly/>
 									</div>
-								{{-- @endif	 --}}
 							@endif
 							<br>
 							<br>
@@ -322,7 +353,12 @@ function myFunction() {
 
 	var yuranInput = document.getElementById('amaun_yuran');
 	// console.log(yuranInput);
-	var yuran = parseFloat(yuranInput.value).toFixed(2);
+	if (yuranInput !== null) {
+		var yuran = parseFloat(yuranInput.value).toFixed(2);
+	} else {
+		// Set yuran to 0.00 if yuranInput is null
+		var yuran = '0.00';
+	}
 	var total_yuran = (parseFloat(yuran) + parseFloat(totalAmaun)).toFixed(2);
 
 	// Define the maximum limit for 'amaun_yuran'
