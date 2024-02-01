@@ -72,7 +72,7 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Permohonan dan Tuntutan yang telah Dibayar<br><small>Sila klik pada ID Permohonan untuk mengemaskini maklumat baucer bagi pelajar tersebut.</small></h2>
+                                <h2>Senarai Permohonan dan Tuntutan yang telah Dibayar<br><small>Sila klik pada ID Permohonan untuk mengemaskini maklumat baucar bagi pelajar tersebut.</small></h2>
                             </div>
 
                             {{-- top nav bar --}}

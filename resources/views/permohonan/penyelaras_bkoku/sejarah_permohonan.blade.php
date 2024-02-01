@@ -53,7 +53,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Sejarah Permohonan<br><small>Klik ID Permohonan untuk melakukan melihat rekod permohonan</small></h2>
+                            <h2>Sejarah Permohonan<br><small>Klik ID Permohonan untuk melihat sejarah permohonan dan sila klik pada butang "Layak" untuk memuat turun surat tawaran bagi pelajar tersebut.</small></h2>
                         </div>
                         <div class="tab-content" id="myTabContent">
                             <div class="body">
