@@ -248,7 +248,7 @@
 							<div class="d-flex flex-stack flex-grow-1">
 								<!--begin::Content-->
 								<div class="fw-semibold">
-									<div class="fs-6 text-dark"><b>Jumlah Tuntutan</b></div>
+									<div class="fs-6 text-dark"><b>Jumlah Keseluruhan Tuntutan</b></div>
 								</div>
 								<!--end::Content-->
 							</div>

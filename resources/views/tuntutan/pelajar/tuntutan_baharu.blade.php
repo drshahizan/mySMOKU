@@ -233,7 +233,7 @@
 									<div class="d-flex flex-stack flex-grow-1">
 										<!--begin::Content-->
 										<div class="fw-semibold">
-											<div class="fs-6 text-dark">Jumlah Elaun Wang Saku </div>
+											<div class="fs-6 text-dark">Amaun Wang Saku </div>
 										</div>
 										<!--end::Content-->
 									</div>
