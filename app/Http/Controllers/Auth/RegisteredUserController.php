@@ -13,6 +13,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\Smoku;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailDaftarPengguna;
+use App\Models\TarikhIklan;
 
 class RegisteredUserController extends Controller
 {
@@ -25,12 +26,14 @@ class RegisteredUserController extends Controller
     {
         
         addJavascriptFile('assets/js/custom/authentication/sign-up/general.js');
+        $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
+        $catatan = $iklan->catatan ?? "";
 
         $nokp = $request->session()->get('no_kp');
         $smoku = Smoku::all()->where('no_kp', $nokp);
         //dd($smoku);
 
-        return view('pages.auth.daftarlayak', compact('smoku'));
+        return view('pages.auth.daftarlayak', compact('smoku','catatan'));
     }
 
     /**

@@ -1,5 +1,8 @@
 <x-auth-layout>
-
+@section('announcement')
+    <h2>Hebahan</h2>
+    <p>{!! $catatan !!}</p> 
+@endsection   
     <!--begin::Form-->
     <form class="form" novalidate="novalidate" id="kt_sign_up_form" data-kt-redirect-url="{{ route('login') }}" action="{{ route('daftarlayak') }}">
     @csrf
