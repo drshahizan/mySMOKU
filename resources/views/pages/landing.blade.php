@@ -97,7 +97,7 @@
 											<!--begin::Menu item-->
 											<div class="menu-item">
 												<!--begin::Menu link-->
-												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="http://bkokudev.mohe.gov.my/login" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Permohonan</a>
+												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="http://bkoku.mohe.gov.my/login" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Permohonan</a>
 												<!--end::Menu link-->
 											</div>
 											<!--end::Menu item-->
