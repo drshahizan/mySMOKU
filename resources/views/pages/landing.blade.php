@@ -35,7 +35,7 @@
 			<!--begin::Header Section-->
 			<div class="mb-0" id="home">
 				<!--begin::Wrapper-->
-				<div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg" style="background-image: url(assets/media/KPT1.jpg)">
+				<div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom" style="background-image: url(assets/media/KPT1.jpg)">
 					<!--begin::Header-->
 					<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
 							
@@ -69,7 +69,7 @@
 											<!--begin::Menu item-->
 											<div class="menu-item">
 												<!--begin::Menu link-->
-												<a class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#kt_body" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Laman Utama</a>
+												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#kt_body" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Laman Utama</a>
 												<!--end::Menu link-->
 											</div>
 											<!--end::Menu item-->
@@ -128,7 +128,7 @@
 					</div>
 					<!--end::Header-->
 					<!--begin::Landing hero-->
-					<div class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-400px">
+					<div class="d-flex flex-column flex-center w-100 min-h-400px min-h-lg-400px">
 						
 						
 					</div>
