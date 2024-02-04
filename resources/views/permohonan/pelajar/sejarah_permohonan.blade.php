@@ -53,16 +53,13 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Sejarah Permohonan</h2>
+                            <h2>Sejarah Permohonan<br><small>Sila klik pada butang untuk memuat turun surat tawaran bagi permohonan berstatus "Layak" atau "Dibayar".</small></h2>
                         </div>
 
                         <div class="tab-content" id="myTabContent">
-
                             <div class="tab-pane fade show active" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-                                <br>
                                 <div class="body">
                                     <div class="table-responsive">
-                                        
                                         <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
@@ -81,13 +78,9 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                
                                                 @foreach ($permohonan as $item)
-                                                
                                                     @php
-                                                        
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-
                                                         $no_rujukan_permohonan = $item['no_rujukan_permohonan'];
 
                                                         // Extract peringkat pengajian value using regular expression
@@ -198,13 +191,11 @@
                                                             @endif
                                                         @endif    
                                                         {{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
-
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
 
-                                        
                                         {{-- Modal --}}
                                         <div class="modal fade" id="dikembalikan" tabindex="-1" aria-labelledby="dikembalikan" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -248,6 +239,7 @@
             </div>
         </div>
     </div>
+
     <script>
         $('#sortTable2').DataTable({
             ordering: true, // Enable manual sorting
@@ -255,12 +247,11 @@
         });
     </script>
 
-<style>
-    .custom-width-btn {
-        width: 130px; 
-        height: 30px;
-    }
-</style>
-
+    <style>
+        .custom-width-btn {
+            width: 130px; 
+            height: 30px;
+        }
+    </style>
     </body>
 </x-default-layout>
