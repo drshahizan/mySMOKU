@@ -1,5 +1,5 @@
-
 <head>
+    <title>{{ config('app.name', 'SistemBKOKU') }}</title>
     <link rel="stylesheet" href="/assets/css/style.bundle.css">
     <link rel="stylesheet" href="/assets/css/sekretariat.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
