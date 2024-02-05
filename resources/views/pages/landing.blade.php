@@ -97,17 +97,15 @@
 											<!--begin::Menu item-->
 											<div class="menu-item">
 												<!--begin::Menu link-->
-												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="http://bkoku.mohe.gov.my/login" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Permohonan</a>
-												<!--end::Menu link-->
-											</div>
-											<!--end::Menu item-->
-											<!--begin::Menu item-->
-											<div class="menu-item">
-												<!--begin::Menu link-->
 												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#hubungi" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Hubungi Kami</a>
 												<!--end::Menu link-->
 											</div>
 											<!--end::Menu item-->
+											<!--begin::Toolbar-->
+											<div class="flex-equal text-end ms-1">
+												<a href="http://bkoku.mohe.gov.my/login" class="btn btn-primary">Permohonan</a>
+											</div>
+											<!--end::Toolbar-->
 											
 										</div>
 										<!--end::Menu-->
