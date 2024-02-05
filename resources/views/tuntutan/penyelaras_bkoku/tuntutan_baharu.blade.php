@@ -60,7 +60,6 @@
                         <tbody>
                             @foreach ($layak as $layak)
                                 @php
-                                // dd ($layak);
                                     $status = DB::table('bk_status')->where('kod_status', $layak->tuntutan_status)->value('status');
                                                 
                                     $text = ucwords(strtolower($layak->nama)); // Assuming you're sending the text as a POST parameter
@@ -75,8 +74,6 @@
                                         }
                                     }
                                     $pemohon = implode(' ', $result);
-                            
-                                    
                                 @endphp
                             <tr>
                                 <td>{{ $layak->no_rujukan_permohonan}}</td>
