@@ -296,8 +296,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('penyelaras/kemaskini/hantar/maklumat/institusi/{id}', [PenyelarasController::class, 'tukarInstitusi'])->name('tukar.institusi');
     Route::post('penyelaras/kemaskini/hantar/terima/pelajar/{id}', [PenyelarasController::class, 'terimaPelajar'])->name('terima.pelajar');
 
-
-
     //delete pendaftaran - Penyelaras
     Route::get('penyelaras/pendaftaran/delete/{id}', [PenyelarasController::class, 'deletePendaftaran'])->name('pendaftaran.delete');
 
@@ -393,6 +391,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('pentadbir/tarikh', [PentadbirController::class, 'simpanTarikh'])->name('simpan.tarikh');
     Route::get('pentadbir/jumlah-tuntutan', [PentadbirController::class, 'jumlahTuntutan'])->name('jumlah.tuntutan');
     Route::post('pentadbir/jumlah-tuntutan', [PentadbirController::class, 'simpanJumlah'])->name('simpan.jumlah');
+    Route::get('pentadbir/kemaskini/kod-esp/institusi', [PentadbirController::class, 'kemaskiniESPInstitusi'])->name('esp.institusi');
 
     //Pegawai
     Route::get('pegawai/dashboard', [PegawaiController::class,'index'])->name('pegawai.dashboard');

@@ -518,13 +518,7 @@
 				<div class="menu-item">
 					<a class="menu-link" href="{{url('pentadbir/api-connection')}}">
 							<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
-							<span class="menu-title">Semak API</span>
-					</a>
-				</div>
-				<div class="menu-item">
-					<a class="menu-link" href="{{url('pentadbir/alamat')}}">
-							<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
-							<span class="menu-title">Kemaskini Alamat Kementerian</span>
+							<span class="menu-title">Semakan API</span>
 					</a>
 				</div>
 				<div class="menu-item">
@@ -537,6 +531,18 @@
 					<a class="menu-link" href="{{url('pentadbir/jumlah-tuntutan')}}">
 							<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 							<span class="menu-title">Selenggara Had Maksima Tuntutan</span>
+					</a>
+				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{url('pentadbir/alamat')}}">
+							<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
+							<span class="menu-title">Kemaskini Alamat Kementerian</span>
+					</a>
+				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{url('esp.institusi')}}">
+							<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
+							<span class="menu-title">Kemaskini Kod Institusi</span>
 					</a>
 				</div>
 			</div>

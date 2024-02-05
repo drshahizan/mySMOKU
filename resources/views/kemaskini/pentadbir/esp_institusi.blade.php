@@ -75,7 +75,15 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark" style="color:darkblue">Bank</li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Kod ESP</li>
+            <!--end::Item-->
+            <!--begin::Item-->
+            <li class="breadcrumb-item">
+                <span class="bullet bg-gray-400 w-5px h-2px"></span>
+            </li>
+            <!--end::Item-->
+            <!--begin::Item-->
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Institusi Pengajian</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -106,7 +114,7 @@
                     <nav class="navbar navbar-expand-lg navbar-light bg-light page_menu">
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Bank Universiti</b></li>
+                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Institusi Pengajian</b></li>
                             </ul>
                         </div>
                     </nav>
@@ -117,38 +125,20 @@
                         <div class="body" style="padding: 20px;">
                             <div class="col-md-6 col-sm-6">
                                 <br>
-                                <form method="POST" action="{{route('kemaskini.bank', ['id' => $user->id_institusi ])}}" enctype="multipart/form-data">
+                                <form method="POST" action="{{route('kemaskini.esp')}}" enctype="multipart/form-data">
                                     {{csrf_field()}}
                                     <div class="table-responsive">
-                                        @php
-                                            $id_uni = $user->id_institusi;
-                                            $nama_uni = DB::table('bk_info_institusi')->where('id_institusi', $id_uni)->value('nama_institusi');
-                                        @endphp
                                         <table class="maklumat">
                                             <tr>
                                                 <td class="vertical-top w-13">Nama Institusi</td>
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
-                                                    <input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{$nama_uni}}" readonly>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="vertical-top w-13">Nama Akaun Bank</td>
-                                                <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top">
-                                                    <input type="text" class="form-control" id="nama_bank" name="nama_bank" value="{{$bank->nama_akaun ?? ''}}" oninvalid="this.setCustomValidity('Sila isi ruang ini dengan nama akaun bank institusi anda.')" oninput="setCustomValidity('')" required>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="vertical-top w-13">Bank</td>
-                                                <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top">
                                                     <div class="form-control-arrow">
                                                         <select name="kod_bank" class="form-control search" data-control="select2" data-hide-search="true" data-placeholder="Pilih Bank">
                                                             <option value="">Pilih Bank</option>
-                                                            @foreach ($institusi->nama_institusi->sortBy('nama_bank') as $senaraiBank)
-                                                                <option value="{{ $senaraiBank->kod_bank }}" {{ old('kod_bank', optional($bank)->bank_id) == $senaraiBank->kod_bank ? 'selected' : '' }}>
-                                                                    {{ $senaraiBank->nama_bank }}
+                                                            @foreach ($institusi->sortBy('nama_institusi') as $nama)
+                                                                <option value="{{ $nama->nama_institusi }}">
+                                                                    {{ $nama->nama_bank }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -156,24 +146,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="vertical-top w-13">No. Akaun Bank</td>
+                                                <td class="vertical-top w-13">Kod ESP</td>
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
-                                                    <input type="number" class="form-control" id="no_acc" name="no_acc" value="{{$bank->no_akaun ?? ''}}" oninvalid="this.setCustomValidity('Sila isi ruang ini dengan nombor akaun bank institusi anda.')" oninput="setCustomValidity('')" required>
+                                                    <input type="number" class="form-control" id="no_acc" name="no_acc" value="{{$institusi->institusi_esp ?? ''}}" oninvalid="this.setCustomValidity('Sila isi ruang ini dengan nombor akaun bank institusi anda.')" oninput="setCustomValidity('')" required>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="vertical-top w-13">Penyata Bank</td>
-                                                <td class="vertical-top w-3">:</td>
-                                                <td class="vertical-top">
-                                                    <div class="file-input">
-                                                        <input type="file" name="penyata"/>
-                                                        @if(isset($bank->penyata_bank) && !empty($bank->penyata_bank))
-                                                            <a href="{{ asset('assets/dokumen/penyata_bank_islam/' . $bank->penyata_bank) }}" target="_blank">{{ $bank->penyata_bank }}</a>
-                                                        @endif
-                                                    </div>
-                                                    <small style="font-size: 10px; font-style:italic; color: red!important;">**Format fail yang boleh dimuat naik adalah '.pdf' dan '.png' sahaja.</small>
-                                                </td>                                                
                                             </tr>
                                         </table>
                                     </div>

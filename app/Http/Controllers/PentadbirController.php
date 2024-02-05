@@ -376,4 +376,9 @@ class PentadbirController extends Controller
         
         return redirect()->route('jumlah.tuntutan');
     }
+
+    public function kemaskiniESPInstitusi(){
+        $institusi = InfoIpt::get();
+        return view('kemaskini.pentadbir.esp_institusi', compact('institusi'));
+    }
 }
