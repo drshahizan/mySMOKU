@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/assets/css/style.bundle.css">
     <link rel="stylesheet" href="/assets/css/saringan.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-</head>
+
     <style>
         body{
             margin: 20px!important;
@@ -76,13 +76,9 @@
         .vertical-top{
             vertical-align: top!important;
         }
-        /* .th-yellow{
-            background-color: #a27a00!important;
-        }
-        .th-green{
-            background-color: #007842!important;
-        } */
     </style>
+</head>
+    
 <body>
     <!-- Main body part  -->
     <div id="main-content">
@@ -91,7 +87,6 @@
             <div class="row clearfix">
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light page_menu">
-                        <!--<a class="navbar-brand" href="#">M.</a>-->
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <i class="fa fa-bars text-muted"></i>
                         </button>
@@ -99,9 +94,6 @@
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item vivify swoopInTop delay-150 active"><b>Saring Tuntutan</b></li>
                             </ul>
-                            {{-- <div class="ml-auto">
-                                <a href="{{ url('cetak-maklumat-pemohon') }}" target="_blank" class="btn btn-primary">Cetak</a>
-                            </div> --}}
                         </div>
                     </nav>
                 </div>
@@ -114,6 +106,7 @@
                                     $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                     $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
                                     $nama_penaja = DB::table('bk_penaja')->where('id', $akademik->nama_penaja)->value('penaja');
+
                                     // nama pemohon
                                     $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
                                     $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
@@ -127,35 +120,8 @@
                                         }
                                     }
                                     $pemohon = implode(' ', $result);
-
-                                    //nama kursus
-                                    $text2 = ucwords(strtolower($akademik->nama_kursus)); // Assuming you're sending the text as a POST parameter
-                                    $conjunctions = ['of', 'in', 'and'];
-                                    $words = explode(' ', $text2);
-                                    $result = [];
-                                    foreach ($words as $word) {
-                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                            $result[] = Str::lower($word);
-                                        } else {
-                                            $result[] = $word;
-                                        }
-                                    }
-                                    $kursus = implode(' ', $result);
-
-                                    //institusi pengajian
-                                    $text3 = ucwords(strtolower($nama_institusi)); // Assuming you're sending the text as a POST parameter
-                                    $conjunctions = ['of', 'in', 'and'];
-                                    $words = explode(' ', $text3);
-                                    $result = [];
-                                    foreach ($words as $word) {
-                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                            $result[] = Str::lower($word);
-                                        } else {
-                                            $result[] = $word;
-                                        }
-                                    }
-                                    $institusi = implode(' ', $result);
                                 @endphp
+                                
                                 <table class="maklumat">
                                     <tr>
                                         <td><strong>ID Tuntutan</strong></td>
@@ -164,7 +130,7 @@
                                         <td class="space">&nbsp;</td>
                                         <td><strong>Kursus</strong></td>
                                         <td>:</td>
-                                        <td>{{$kursus}}</td>
+                                        <td>{{$akademik->nama_kursus}}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Nama</strong></td>
@@ -173,7 +139,7 @@
                                         <td class="space">&nbsp;</td>
                                         <td><strong>Institusi</strong></td>
                                         <td>:</td>
-                                        <td>{{$institusi}}</td>
+                                        <td>{{$nama_institusi}}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>No. Kad Pengenalan</strong></td>
