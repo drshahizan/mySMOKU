@@ -26,7 +26,7 @@
 	<!--end::Head-->
 
 	<!--begin::Body-->
-	<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative app-blank">
+	<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative app-blank" >
 		<!--begin::Theme mode setup on page load-->
 		<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
 		<!--end::Theme mode setup on page load-->
@@ -35,7 +35,7 @@
 			<!--begin::Header Section-->
 			<div class="mb-0" id="home">
 				<!--begin::Wrapper-->
-				<div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom" style="background-image: url(assets/media/KPT1.jpg)">
+				<div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom" style="background-image: url(assets/media/KPT1.jpg);">
 					<!--begin::Header-->
 					<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
 							
@@ -62,8 +62,8 @@
 								</div>
 								<!--end::Logo-->
 								<!--begin::Menu wrapper-->
-								<div class="d-lg-block" id="kt_header_nav_wrapper">
-									<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav_wrapper'}">
+								<div class="d-lg-block" id="kt_header_nav_wrapper" >
+									<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav_wrapper'}" >
 										<!--begin::Menu-->
 										<div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-title-gray-600 menu-state-title-primary nav nav-flush fs-5 fw-semibold" id="kt_landing_menu">
 											<!--begin::Menu item-->
@@ -97,17 +97,15 @@
 											<!--begin::Menu item-->
 											<div class="menu-item">
 												<!--begin::Menu link-->
-												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="http://bkoku.mohe.gov.my/login" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Permohonan</a>
-												<!--end::Menu link-->
-											</div>
-											<!--end::Menu item-->
-											<!--begin::Menu item-->
-											<div class="menu-item">
-												<!--begin::Menu link-->
 												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#hubungi" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Hubungi Kami</a>
 												<!--end::Menu link-->
 											</div>
 											<!--end::Menu item-->
+											<!--begin::Toolbar-->
+											<div class="flex-equal text-end ms-1">
+												<a href="http://bkoku.mohe.gov.my/login" class="btn btn-primary">Permohonan</a>
+											</div>
+											<!--end::Toolbar-->
 											
 										</div>
 										<!--end::Menu-->
@@ -320,21 +318,21 @@
 			<!--begin::Syarat Section-->
 			<div class="py-10 py-lg-20">
 				<!--begin::Curve top-->
-				<div class="landing-curve landing-dark-color">
+				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
 					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
 					</svg>
 				</div>
 				<!--end::Curve top-->
 				<!--begin::Wrapper-->
-				<div class="py-1 landing-dark-bg">
+				<div class="py-1 landing-dark-bg" style="background-color: rgb(2, 2, 55);">
 					<!--begin::Container-->
 					<div class="container">
 						<!--begin::Plans-->
 						<div class="d-flex flex-column container pt-lg-15">
 							<!--begin::Heading-->
 							<div class="mb-13 text-center">
-								<h1 class="fs-2hx fw-bold text-dark" id="syarat" data-kt-scroll-offset="{default: 100, lg: 150}">SYARAT-SYARAT BANTUAN KEWANGAN PELAJAR OKU</h1>
+								<h1 class="fs-2hx fw-bold" style="color: white;" id="syarat" data-kt-scroll-offset="{default: 100, lg: 150}">SYARAT-SYARAT BANTUAN KEWANGAN PELAJAR OKU</h1>
 							</div>
 							<!--end::Heading-->
 							<!--begin::Syarat-->
@@ -439,7 +437,7 @@
 				</div>
 				<!--end::Wrapper-->
 				<!--begin::Curve bottom-->
-				<div class="landing-curve landing-dark-color">
+				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
 					<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
 					</svg>
@@ -447,54 +445,233 @@
 				<!--end::Curve bottom-->
 			</div>
 			<!--end::Syarat Section-->
+			
 			<!--begin::Bayaran Section-->
 			<div class="py-10 py-lg-20">
 				<!--begin::Curve top-->
-				<div class="landing-curve landing-dark-color">
+				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
 					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
 					</svg>
 				</div>
 				<!--end::Curve top-->
 				<!--begin::Wrapper-->
-				<div class="py-1 landing-dark-bg">
+				<div class="py-10 landing-dark-bg" style="background-color: rgb(2, 2, 55);">
 					<!--begin::Container-->
 					<div class="container">
 						<!--begin::Plans-->
 						<div class="d-flex flex-column container pt-lg-15">
 							<!--begin::Heading-->
-							<div class="mb-13 text-center">
-								<h1 class="fs-2hx fw-bold text-dark" id="bayaran" data-kt-scroll-offset="{default: 100, lg: 150}">MAKLUMAT PEMBIAYAAN</h1>
+							<div class="mb-15 text-center">
+								<h1 class="fs-2hx fw-bold text-white mb-5" id="bayaran" data-kt-scroll-offset="{default: 100, lg: 150}">Maklumat Pembiayaan</h1>
 							</div>
 							<!--end::Heading-->
-							<!--begin::Bayaran-->
+							<!--begin::Pricing-->
 							<div class="text-center" id="kt_pricing">
 								<!--begin::Row-->
 								<div class="row g-10">
 									<!--begin::Col-->
-									<div class="col-xl-12">
-										<div class="d-flex h-100 align-items-center">
-											<!--begin::Option-->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-10 px-10">
-												<!--begin::Features-->
-												<div class="w-100 mb-10">
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<img alt="Table" src="assets/media/table_bayaran.jpeg" class="logo-default h-500px h-lg-500px" />
-													</div>
-													<!--end::Item-->
-												</div>
-												<!--end::Features-->
-												
+									<div class="col-xl-4">
+										<div class="d-flex h-100 flex-column align-items-center">
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-6 px-6 mb-8" >
+												<!-- begin::Heading -->
+												<!-- end::Heading -->
 											</div>
-											<!--end::Option-->
+											<!-- begin::Option for Sepenuh Masa -->
+											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-6 px-6 mb-8">
+												<!-- begin::Heading -->
+												<div class="mb-4">
+													<!-- begin::Title -->
+													<div class="text-dark fw-bold" style="font-size:24px;">Sepenuh Masa</div>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+											</div>
+											<!-- end::Option for Sepenuh Masa -->
+
+											<!-- begin::Option for Separuh Masa -->
+											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-primary py-6 px-6">
+												<!-- begin::Heading -->
+												<div class="mb-4">
+													<!-- begin::Title -->
+													<div class="text-white fw-bold" style="font-size:24px;">Separuh Masa</div>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+											</div>
+											<!-- end::Option for Separuh Masa -->
+										</div>
+									</div>
+									<!--end::Col-->
+									<!--begin::Col-->
+									<div class="col-xl-4">
+										<div class="d-flex h-100 flex-column align-items-center">
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-6 px-6 mb-8">
+												<!-- begin::Heading -->
+												<!-- end::Heading -->
+											</div>
+											<!-- begin::Option for Sepenuh Masa -->
+											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-2 px-6 mb-2">
+												<!-- begin::Heading -->
+												<div class="mb-2">
+													<!-- begin::Title -->
+													<div class="text-dark fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+											</div>
+											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-2 px-6 mb-8">
+												<!-- begin::Heading -->
+												<div class="mb-2">
+													<!-- begin::Title -->
+													<div class="text-dark fw-bold" style="font-size:14px;">Biasiswa</div>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+											</div>
+											<!-- end::Option for Sepenuh Masa -->
+
+											<!-- begin::Option for Separuh Masa -->
+											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-primary py-2 px-6 mb-2">
+												<!-- begin::Heading -->
+												<div class="mb-2">
+													<!-- begin::Title -->
+													<div class="text-white fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+											</div>
+											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-primary py-2 px-6 mb-8">
+												<!-- begin::Heading -->
+												<div class="mb-2">
+													<!-- begin::Title -->
+													<div class="text-white fw-bold" style="font-size:14px;">Biasiswa</div>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+											</div>
+											<!-- end::Option for Separuh Masa -->
+										</div>
+									</div>
+									<!--end::Col-->
+									<!--begin::Col-->
+									<div class="col-xl-2">
+										<div class="d-flex h-100 flex-column align-items-center">
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-4 px-6 mb-5" style="background-color: grey;">
+												<!-- begin::Heading -->
+												<div class="mb-2">
+													<!-- begin::Title -->
+													<div class="text-dark fw-bold" style="font-size:14px;">Yuran </div>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+											</div>
+											<!-- begin::Option for Sepenuh Masa -->
+												<!-- begin::Heading -->
+												<div class="mb-2">
+													<!-- begin::Title -->
+													<i class="ki-duotone ki-check-circle text-success"  style="font-size: 3em;">
+														<span class="path1"></span>
+														<span class="path2"></span>
+													</i>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+												<div class="mb-2">
+													<!-- begin::Title -->
+													<i class="ki-duotone ki-cross-circle text-danger  mb-6" style="font-size: 3em; ">
+														<span class="path1"></span>
+														<span class="path2"></span>
+													</i>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+											<!-- end::Option for Sepenuh Masa -->
+
+											<!-- begin::Option for Separuh Masa -->
+												<!-- begin::Heading -->
+												<div class="mb-2">
+													<!-- begin::Title -->
+													<i class="ki-duotone ki-check-circle text-success"  style="font-size: 3em;">
+														<span class="path1"></span>
+														<span class="path2"></span>
+													</i>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+												<div class="mb-2">
+													<!-- begin::Title -->
+													<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
+														<span class="path1"></span>
+														<span class="path2"></span>
+													</i>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+											<!-- end::Option for Separuh Masa -->
+										</div>
+									</div>
+									<!--end::Col-->
+									<!--begin::Col-->
+									<div class="col-xl-2">
+										<div class="d-flex h-100 flex-column align-items-center">
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-4 px-6 mb-5" style="background-color: grey;">
+												<div class="mb-2">
+													<!-- begin::Title -->
+													<div class="text-dark fw-bold" style="font-size:14px;">Wang Saku</div>
+													<!-- end::Title -->
+												</div>
+											</div>
+											<!-- begin::Option for Sepenuh Masa -->
+												<!-- begin::Heading -->
+												<div class="mb-2">
+													<!-- begin::Title -->
+													<i class="ki-duotone ki-check-circle text-success"  style="font-size: 3em;">
+														<span class="path1"></span>
+														<span class="path2"></span>
+													</i>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+												<div class="mb-2">
+													<!-- begin::Title -->
+													<i class="ki-duotone ki-check-circle text-success  mb-6" style="font-size: 3em; ">
+														<span class="path1"></span>
+														<span class="path2"></span>
+													</i>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+											<!-- end::Option for Sepenuh Masa -->
+
+											<!-- begin::Option for Separuh Masa -->
+												<!-- begin::Heading -->
+												<div class="mb-2">
+													<!-- begin::Title -->
+													<i class="ki-duotone ki-cross-circle text-danger"  style="font-size: 3em;">
+														<span class="path1"></span>
+														<span class="path2"></span>
+													</i>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+												<div class="mb-2">
+													<!-- begin::Title -->
+													<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
+														<span class="path1"></span>
+														<span class="path2"></span>
+													</i>
+													<!-- end::Title -->
+												</div>
+												<!-- end::Heading -->
+											<!-- end::Option for Separuh Masa -->
 										</div>
 									</div>
 									<!--end::Col-->
 								</div>
 								<!--end::Row-->
 							</div>
-							<!--end::Bayaran-->
+							<!--end::Pricing-->
 						</div>
 						<!--end::Plans-->
 					</div>
@@ -502,7 +679,7 @@
 				</div>
 				<!--end::Wrapper-->
 				<!--begin::Curve bottom-->
-				<div class="landing-curve landing-dark-color">
+				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
 					<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
 					</svg>
@@ -560,16 +737,16 @@
 									<div class="fs-4 fw-bold text-dark mb-3">No. Untuk Dihubungi :</div>
 									<!--end::Title-->
 									<!--begin::Telefon-->
-									<div class="text-gray-500 fw-semibold fs-4">Encik Yusri Bin Yusuf : 03-8870 6373
-									<br />Cik Nur Dayana Binti Rozaini : 03-8870 6347</div>
+									<div class="text-gray-500 fw-semibold fs-4">Cik Nur Dayana binti Rozaini : 03-8870 6373
+									<br />Cik Nurul Atiqah Noor Azmir binti Abdul Muhaymin : 03-8870 6347</div>
 									<!--end::Telefon-->
 									<br />
 									<!--begin::Title-->
 									<div class="fs-4 fw-bold text-dark mb-3">Emel Unit BKOKU :</div>
 									<!--end::Title-->
 									<!--begin::Emel-->
-									<div class="text-gray-500 fw-semibold fs-4">bkoku@mohe.gov.my
-									</div>
+									<div class="text-gray-500 fw-semibold fs-4">bkoku@mohe.gov.my</div>
+									<div class="text-gray-500 fw-semibold fs-4">iptabkoku@mohe.gov.my</div>
 									<!--end::Emel-->
 								</div>
 								<!--end::Wrapper-->
@@ -581,7 +758,7 @@
 						<!--begin::Col-->
 						<div class="col-lg-4">
 							<!--begin::Testimonial-->
-							<div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+							<div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-10 mb-lg-0">
 								<!--begin::Wrapper-->
 								<div class="mb-7">
 									<!--begin::Title-->
@@ -619,7 +796,7 @@
 			<!--begin::Footer Section-->
 			<div class="mb-0">
 				<!--begin::Curve top-->
-				<div class="landing-curve landing-dark-color">
+				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
 					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
 					</svg>
@@ -627,14 +804,14 @@
 				<!--end::Curve top-->
 
 				<!--begin::Wrapper-->
-				<div class="landing-dark-bg">
+				<div class="landing-dark-bg" style="background-color: rgb(2, 2, 55);">
 					<!--begin::Container-->
 					<div class="container">
 						<!--begin::Wrapper-->
 						<div class="app-container container-fluid d-flex flex-column flex-md-row flex-center py-3">
 							<!--begin::Footer-->
 							<div class="d-flex align-items-center flex-center order-2 order-md-1">
-								<span class="mx-5 fs-7 fw-semibold text-dark">
+								<span class="mx-5 fs-7 fw-semibold text-light">
 									Sistem BKOKU, Kementerian Pendidikan Tinggi <span id="currentYear"></span> © Hak Cipta Terpelihara
 								</span>
 
