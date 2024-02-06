@@ -7,7 +7,7 @@
 		$institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->first();
 
 		// Retrieve data from bk_tarikh_iklan table
-		$bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->first();
+		$bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->latest()->first();
 
 		// Get current date and time
 		$currentDateTime = now();
@@ -131,7 +131,7 @@
 		$institusi = DB::table('bk_info_institusi')->where('id_institusi', $user->id_institusi)->first();
 
 		// Retrieve data from bk_tarikh_iklan table
-		$bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->first();
+		$bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->latest()->first();
 
 		// Get current date and time
 		$currentDateTime = now();
@@ -553,7 +553,7 @@
 @elseif(Auth::user()->tahap=='6')
 	@php
 		// Retrieve data from bk_tarikh_iklan table
-		$bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->first();
+		$bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->latest()->first();
 
 		// Get current date and time
 		$currentDateTime = now();
