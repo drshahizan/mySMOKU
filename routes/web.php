@@ -392,6 +392,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('pentadbir/jumlah-tuntutan', [PentadbirController::class, 'jumlahTuntutan'])->name('jumlah.tuntutan');
     Route::post('pentadbir/jumlah-tuntutan', [PentadbirController::class, 'simpanJumlah'])->name('simpan.jumlah');
     Route::get('pentadbir/kemaskini/kod-esp/institusi', [PentadbirController::class, 'kemaskiniESPInstitusi'])->name('esp.institusi');
+    Route::get('/fetch-institusi-esp', [PentadbirController::class, 'fetchInstitusiEsp']);
 
     //Pegawai
     Route::get('pegawai/dashboard', [PegawaiController::class,'index'])->name('pegawai.dashboard');

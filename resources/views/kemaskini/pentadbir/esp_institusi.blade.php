@@ -90,7 +90,7 @@
     </div>
     <!--end::Page title-->
 
-    <div id="main-content" style="width:80%;  margin: 0 auto;">
+    <div id="main-content" style="width:70%;  margin: 0 auto; margin-top: 30px;">
         <div class="container-fluid">
             @if(session('success'))
                 <div class="alert alert-success" style="color:black; width: 50%; margin: 0 auto; text-align:center;">
@@ -122,9 +122,9 @@
 
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="body" style="padding: 20px;">
+                        <div class="body" style="padding: 15px;">
                             <div class="col-md-6 col-sm-6">
-                                <br>
+                               <!-- Inside your blade file -->
                                 <form method="POST" action="{{route('kemaskini.esp')}}" enctype="multipart/form-data">
                                     {{csrf_field()}}
                                     <div class="table-responsive">
@@ -134,11 +134,11 @@
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
                                                     <div class="form-control-arrow">
-                                                        <select name="kod_bank" class="form-control search" data-control="select2" data-hide-search="true" data-placeholder="Pilih Bank">
-                                                            <option value="">Pilih Bank</option>
-                                                            @foreach ($institusi->sortBy('nama_institusi') as $nama)
-                                                                <option value="{{ $nama->nama_institusi }}">
-                                                                    {{ $nama->nama_bank }}
+                                                        <select name="nama_institusi" id="nama_institusi" class="form-control search" data-control="select2" data-hide-search="true" data-placeholder="Pilih Institusi Pengajian">
+                                                            <option value="">Pilih Institusi Pengajian</option>
+                                                            @foreach ($institusi as $info)
+                                                                <option value="{{ $info->nama_institusi }}">
+                                                                    {{ $info->nama_institusi }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -149,7 +149,7 @@
                                                 <td class="vertical-top w-13">Kod ESP</td>
                                                 <td class="vertical-top w-3">:</td>
                                                 <td class="vertical-top">
-                                                    <input type="number" class="form-control" id="no_acc" name="no_acc" value="{{$institusi->institusi_esp ?? ''}}" oninvalid="this.setCustomValidity('Sila isi ruang ini dengan nombor akaun bank institusi anda.')" oninput="setCustomValidity('')" required>
+                                                    <input type="text" class="form-control" id="institusi_esp" name="institusi_esp" value="" oninvalid="this.setCustomValidity('Sila isi ruang ini dengan kod esp bagi institusi yang dipilih.')" oninput="setCustomValidity('')" required>
                                                 </td>
                                             </tr>
                                         </table>
@@ -167,20 +167,53 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script>
-        @if(session('notifikasi'))
-            Swal.fire({
-                icon: 'warning',
-                title: 'Maklumat Bank',
-                text: ' {!! session('notifikasi') !!}',
-                confirmButtonText: 'OK'
-            });
-        @endif
-    </script>
     <script> 
         $(document).ready(function() {
             $('.search').select2();
+        });
+    </script>    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM content loaded');
+            var namaInstitusiSelect = document.getElementById('nama_institusi');
+            var institusiEspInput = document.getElementById('institusi_esp');
+    
+            
+            // Fetch institusi_esp when the page loads
+            updateInstitusiEsp();
+            console.log('Event listener attached');
+    
+            // Add event listener to the select dropdown for change event
+            namaInstitusiSelect.addEventListener('change', function() {
+                console.log('Dropdown selection changed');
+                updateInstitusiEsp();
+            });
+
+            // Add event listener to the select dropdown for click event
+            namaInstitusiSelect.addEventListener('click', function() {
+                console.log('Dropdown clicked');
+            });
+
+    
+            function updateInstitusiEsp() {
+                var selectedNamaInstitusi = namaInstitusiSelect.value;
+    
+                // Make AJAX request to fetch institusi_esp
+                $.ajax({
+                    url: '/fetch-institusi-esp',
+                    method: 'GET',
+                    data: {
+                        nama_institusi: selectedNamaInstitusi
+                    },
+                    success: function(response) {
+                        institusiEspInput.value = response.institusi_esp || ''; // Use empty string if institusi_esp is undefined
+                    },
+                    error: function(xhr) {
+                        console.error(xhr);
+                        institusiEspInput.value = 'Error fetching data';
+                    }
+                });
+            }
         });
     </script>    
 </x-default-layout>

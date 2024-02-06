@@ -378,7 +378,18 @@ class PentadbirController extends Controller
     }
 
     public function kemaskiniESPInstitusi(){
-        $institusi = InfoIpt::get();
+        $institusi = InfoIpt::orderBy('nama_institusi')->get();
         return view('kemaskini.pentadbir.esp_institusi', compact('institusi'));
     }
+
+    public function fetchInstitusiEsp(Request $request) {
+        $namaInstitusi = $request->input('nama_institusi');
+        $infoIpt = InfoIpt::where('nama_institusi', $namaInstitusi)->first();
+        if ($infoIpt) {
+            return response()->json(['institusi_esp' => $infoIpt->institusi_esp]);
+        } else {
+            return response()->json(['error' => 'Institusi ESP tiada.']);
+        }
+    }
+    
 }
