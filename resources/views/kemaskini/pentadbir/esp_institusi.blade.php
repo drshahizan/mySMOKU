@@ -92,22 +92,6 @@
 
     <div id="main-content" style="width:70%;  margin: 0 auto; margin-top: 30px;">
         <div class="container-fluid">
-            @if(session('success'))
-                <div class="alert alert-success" style="color:black; width: 50%; margin: 0 auto; text-align:center;">
-                    {{ session('success') }}
-                </div>
-                <br>
-            @endif
-
-            @if ($errors->any())
-                <div class="alert alert-danger" style="color:black; width: 50%; margin: 0 auto;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </div>
-                <br>
-            @endif
-
             <!-- Page header section  -->
             <div class="row clearfix">
                 <div class="col-12">
@@ -125,7 +109,7 @@
                         <div class="body" style="padding: 15px;">
                             <div class="col-md-6 col-sm-6">
                                <!-- Inside your blade file -->
-                                <form method="POST" action="{{route('kemaskini.esp')}}" enctype="multipart/form-data">
+                                <form method="POST" action="{{route('kemaskini.esp.institusi')}}" enctype="multipart/form-data">
                                     {{csrf_field()}}
                                     <div class="table-responsive">
                                         <table class="maklumat">
@@ -171,33 +155,16 @@
         $(document).ready(function() {
             $('.search').select2();
         });
-    </script>    
+    </script> 
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM content loaded');
-            var namaInstitusiSelect = document.getElementById('nama_institusi');
-            var institusiEspInput = document.getElementById('institusi_esp');
-    
-            
-            // Fetch institusi_esp when the page loads
-            updateInstitusiEsp();
-            console.log('Event listener attached');
-    
-            // Add event listener to the select dropdown for change event
-            namaInstitusiSelect.addEventListener('change', function() {
-                console.log('Dropdown selection changed');
-                updateInstitusiEsp();
-            });
+        $(document).ready(function() {
+            console.log('Document ready');
 
-            // Add event listener to the select dropdown for click event
-            namaInstitusiSelect.addEventListener('click', function() {
-                console.log('Dropdown clicked');
-            });
+            // Bind change event to dropdown select
+            $('#nama_institusi').on('change', function() {
+                var selectedNamaInstitusi = $(this).val();
 
-    
-            function updateInstitusiEsp() {
-                var selectedNamaInstitusi = namaInstitusiSelect.value;
-    
                 // Make AJAX request to fetch institusi_esp
                 $.ajax({
                     url: '/fetch-institusi-esp',
@@ -206,14 +173,40 @@
                         nama_institusi: selectedNamaInstitusi
                     },
                     success: function(response) {
-                        institusiEspInput.value = response.institusi_esp || ''; // Use empty string if institusi_esp is undefined
+                        $('#institusi_esp').val(response.institusi_esp || '');
                     },
                     error: function(xhr) {
                         console.error(xhr);
-                        institusiEspInput.value = 'Error fetching data';
+                        $('#institusi_esp').val('Error fetching data');
                     }
                 });
+            });
+
+            // Trigger change event when the page loads if an option is already selected
+            if ($('#nama_institusi').val()) {
+                $('#nama_institusi').trigger('change');
             }
         });
-    </script>    
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berjaya!',
+                text: ' {!! session('success') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+        @if(session('failed'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Tidak Berjaya!',
+                text: ' {!! session('failed') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+    </script>
 </x-default-layout>

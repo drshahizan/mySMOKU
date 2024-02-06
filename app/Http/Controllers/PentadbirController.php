@@ -377,18 +377,38 @@ class PentadbirController extends Controller
         return redirect()->route('jumlah.tuntutan');
     }
 
-    public function kemaskiniESPInstitusi(){
+    public function viewESPInstitusi()
+    {
         $institusi = InfoIpt::orderBy('nama_institusi')->get();
         return view('kemaskini.pentadbir.esp_institusi', compact('institusi'));
     }
 
-    public function fetchInstitusiEsp(Request $request) {
+    public function fetchInstitusiEsp(Request $request) 
+    {
         $namaInstitusi = $request->input('nama_institusi');
         $infoIpt = InfoIpt::where('nama_institusi', $namaInstitusi)->first();
         if ($infoIpt) {
             return response()->json(['institusi_esp' => $infoIpt->institusi_esp]);
         } else {
             return response()->json(['error' => 'Institusi ESP tiada.']);
+        }
+    }
+
+    public function kemaskiniESPInstitusi(Request $request)
+    {
+        $namaInstitusi = $request->input('nama_institusi');
+        $institusiEsp = $request->input('institusi_esp');
+
+        // Update the database record
+        $infoIpt = InfoIpt::where('nama_institusi', $namaInstitusi)->first();
+
+        if ($infoIpt) {
+            $infoIpt->institusi_esp = $institusiEsp;
+            $infoIpt->save();
+            return redirect()->back()->with('success', 'Kod ESP telah berjaya dikemaskini.');
+        } 
+        else {
+            return redirect()->back()->with('error', 'Institusi tidak dijumpai.');
         }
     }
     

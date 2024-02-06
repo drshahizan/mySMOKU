@@ -509,7 +509,7 @@
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{url('pentadbir/kemaskini/kod-esp/institusi')}}">
+					<a class="menu-link" href="{{url('pentadbir/kod-esp/institusi')}}">
 							<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 							<span class="menu-title">Kemaskini Kod Institusi</span>
 					</a>
