@@ -334,7 +334,7 @@
 							</div>
 							<!--end::Heading-->
 							<!--begin::Syarat-->
-							<div class="text-center" id="kt_pricing">
+							<div class="text-center">
 								<!--begin::Row-->
 								<div class="row g-10">
 									<!--begin::Col-->
@@ -465,7 +465,7 @@
 							</div>
 							<!--end::Heading-->
 							<!--begin::Pricing-->
-							<div class="text-center" id="kt_pricing">
+							<div class="text-center">
 								<!--begin::Row-->
 								<div class="row g-10">
 									<!--begin::Col-->
