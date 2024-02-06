@@ -128,6 +128,7 @@
                                         }
                                         $pemohon = implode(' ', $result);
                                     @endphp
+
                                     @php
                                         // Retrieve data from bk_tarikh_iklan table
                                         $bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
@@ -162,7 +163,7 @@
                                     @else
                                         <td class="text-center">
                                             @if ($smoku->status == 1)
-                                                <button class="btn bg-info text-white">Deraf</button>
+                                                <button class="btn bg-info text-white" onclick="showAlert()">Deraf</button>
                                             @elseif ($smoku->status == 9)
                                                 <button class="btn bg-batal text-white">Batal</button>
                                             @else 
@@ -229,17 +230,7 @@
         {
             Swal.fire({
             icon: 'error',
-            title: 'Permohonan ditutup pada masa sekarang.',
-            text: ' {!! session('failed') !!}',
-            confirmButtonText: 'OK'
-            });
-        }
-    
-        function showAlertTuntutan() 
-        {
-            Swal.fire({
-            icon: 'error',
-            title: 'Tuntutan ditutup pada masa sekarang.',
+            title: 'Permohonan telah ditutup.',
             text: ' {!! session('failed') !!}',
             confirmButtonText: 'OK'
             });

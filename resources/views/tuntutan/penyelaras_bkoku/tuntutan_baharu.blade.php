@@ -75,6 +75,21 @@
                                     }
                                     $pemohon = implode(' ', $result);
                                 @endphp
+
+                                @php
+                                    // Retrieve data from bk_tarikh_iklan table
+                                    $bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
+
+                                    // Get current date and time
+                                    $currentDateTime = now();
+
+                                    // Check if current date and time fall within the allowed range
+                                    $tarikhMula = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_mula . ' ' . $bk_tarikh_iklan->masa_mula);
+                                    $tarikhTamat = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat);
+
+                                    // Check if current date and time fall within the allowed range
+                                    $isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
+                                @endphp
                             <tr>
                                 <td>{{ $layak->no_rujukan_permohonan}}</td>
                                 <td>{{ $pemohon}}</td>
@@ -104,15 +119,11 @@
                                     @elseif ($layak->tuntutan_status=='9')
                                         <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                     @endif
-                                
                                 @else
                                     <td class="text-center"><button class="btn bg-primary text-white">Belum Tuntut</button></td>
-                                
                                 @endif
                                 
                                 <td class="text-center">
-
-                                    <!--begin::Toolbar-->
                                     <div>
                                         <!--begin::Edit-->
                                         <a href="{{ route('bkoku.kemaskini.keputusan', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
@@ -120,14 +131,22 @@
                                                 <i class="ki-solid ki-pencil text-dark fs-2"></i>
                                             </span>
                                         </a>
-                                        <a href="{{ route('bkoku.tuntutan.baharu', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
-                                            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
-                                                <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;"></i>
-                                            </span>
-                                        </a>
+
+                                        @if($isWithinRange)
+                                            <a href="{{ route('bkoku.tuntutan.baharu', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
+                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
+                                                    <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;"></i>
+                                                </span>
+                                            </a>
+                                        @else
+                                            <a href="#" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
+                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
+                                                    <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;" onclick="showAlertTuntutan()"></i>
+                                                </span>
+                                            </a>
+                                        @endif
                                         <!--end::Edit-->
                                     </div>
-                                    <!--end::Toolbar-->
                                 </td>
                             </tr>
                             @endforeach
@@ -182,6 +201,16 @@
 		});
 	@endif
 </script>
-
+<script>
+    function showAlertTuntutan() 
+    {
+        Swal.fire({
+        icon: 'error',
+        title: 'Tuntutan telah ditutup.',
+        text: ' {!! session('failed') !!}',
+        confirmButtonText: 'OK'
+        });
+    }
+</script>
 <!--end::Javascript-->     
 </x-default-layout>

@@ -61,7 +61,6 @@
                         <tbody>
                             @foreach ($layak as $layak)
                                 @php
-                                
                                     $status = DB::table('bk_status')->where('kod_status', $layak->tuntutan_status)->value('status');
                                                 
                                     $text = ucwords(strtolower($layak->nama)); // Assuming you're sending the text as a POST parameter
@@ -91,8 +90,8 @@
                                     }
                                     $kursus = implode(' ', $result);
                                 @endphp
-                                @php
 
+                                @php
                                     $permohonan = DB::table('permohonan')
                                         ->orderBy('id', 'desc')->where('smoku_id',$layak->smoku_id)->first();
 
@@ -146,8 +145,6 @@
                                         $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
 
                                     }
-                                    
-                                
 
                                     $currentSesi = null; // Initialize a variable to store the current session
                                     $previousSesi = null; // Initialize a variable to store the previous session
@@ -198,14 +195,24 @@
                                         }
                                         
                                     }
-                                    
+                                @endphp
 
-                                    
+                                @php
+                                    // Retrieve data from bk_tarikh_iklan table
+                                    $bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
 
+                                    // Get current date and time
+                                    $currentDateTime = now();
+
+                                    // Check if current date and time fall within the allowed range
+                                    $tarikhMula = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_mula . ' ' . $bk_tarikh_iklan->masa_mula);
+                                    $tarikhTamat = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat);
+
+                                    // Check if current date and time fall within the allowed range
+                                    $isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
                                 @endphp
 
                                 <tr>
-                                    
                                     <td class="text-center">{{ $layak->no_rujukan_permohonan}}</td>
                                     <td>{{ $pemohon}}</td>
                                     <td>{{ $layak->nama_kursus}}</td>
@@ -233,12 +240,11 @@
                                         @elseif ($layak->tuntutan_status=='9')
                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
                                         @endif
-                                    
                                     @else
                                         <td class="text-center"><button class="btn bg-primary text-white">Belum Tuntut</button></td>
                                     @endif
+
                                     <td class="text-center">
-                                        <!--begin::Toolbar-->
                                         <div>
                                             <!--begin::Edit-->
                                             <a href="{{ route('ppk.kemaskini.keputusan', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3">
@@ -246,35 +252,53 @@
                                                     <i class="ki-solid ki-pencil text-dark fs-2"></i>
                                                 </span>
                                             </a>
-                                            <a href="{{ $isInNextSemester === true && $semSemasa <= $totalSemesters && $result == null && $currentDate < ($tarikhTamat) ? route('ppk.kemaskini.keputusan', $layak->smoku_id) : '#' }}" 
-                                                class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
-                                               
-                                                @if(!$tuntutan || ($tuntutan && $tuntutan->status == 8))
-                                                    @if($isInNextSemester === true && $semSemasa <= $totalSemesters && $currentDate < ($tarikhTamat))
-                                                        @if ($result == null)
-                                                            data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu."
-                                                        @else
-                                                            data-bs-toggle="modal" data-bs-trigger="hover" title="Hantar Tuntutan" data-bs-target="#kt_modal_tuntutan{{$layak->smoku_id}}"
+                                            @if($isWithinRange)
+                                                <a href="{{ route('bkoku.tuntutan.baharu', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
+                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
+                                                        <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;"></i>
+                                                    </span>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('bkoku.tuntutan.baharu', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1" onclick="showAlertTuntutan()">
+                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
+                                                        <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;"></i>
+                                                    </span>
+                                                </a>
+                                            @endif
+
+                                            @if($isWithinRange)
+                                                <a href="{{ $isInNextSemester === true && $semSemasa <= $totalSemesters && $result == null && $currentDate < ($tarikhTamat) ? route('ppk.kemaskini.keputusan', $layak->smoku_id) : '#' }}" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
+                                        
+                                                    @if(!$tuntutan || ($tuntutan && $tuntutan->status == 8))
+                                                        @if($isInNextSemester === true && $semSemasa <= $totalSemesters && $currentDate < ($tarikhTamat))
+                                                            @if ($result == null)
+                                                                data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu."
+                                                            @else
+                                                                data-bs-toggle="modal" data-bs-trigger="hover" title="Hantar Tuntutan" data-bs-target="#kt_modal_tuntutan{{$layak->smoku_id}}"
+                                                            @endif
+                                                        @elseif($currentDate->greaterThan($tarikhTamat))  
+                                                            data-bs-toggle="tooltip" data-bs-trigger="hover" title="Pelajar telah tamat pengajian."
+                                                        @elseif($isInNextSemester === false)
+                                                            data-bs-toggle="tooltip" data-bs-trigger="hover" title="Tuntutan hanya boleh dikemukakan pada semester seterusnya."
                                                         @endif
-                                                    @elseif($currentDate->greaterThan($tarikhTamat))  
-                                                        data-bs-toggle="tooltip" data-bs-trigger="hover" title="Pelajar telah tamat pengajian."
-                                                    @elseif($isInNextSemester === false)
-                                                        data-bs-toggle="tooltip" data-bs-trigger="hover" title="Tuntutan hanya boleh dikemukakan pada semester seterusnya."
+                                                    @else
+                                                        data-bs-toggle="tooltip" data-bs-trigger="hover" title="Tuntutan masih dalam semakan."  
                                                     @endif
-                                                @else
 
-                                                data-bs-toggle="tooltip" data-bs-trigger="hover" title="Tuntutan masih dalam semakan."  
-                                            
-                                                @endif
-                                            >
-                                                <span>
-                                                    <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;"></i>
-                                                </span>
-                                            </a>
-
+                                                >
+                                                    <span>
+                                                        <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;"></i>
+                                                    </span>
+                                                </a>
+                                            @else
+                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3">
+                                                    <span>
+                                                        <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;" onclick="showAlertTuntutan()"></i>
+                                                    </span>
+                                                </a>
+                                            @endif
                                             <!--end::Edit-->
                                         </div>
-                                        <!--end::Toolbar-->
                                     </td>
                                     
                                     <!--begin::Modal Tuntutan-->
@@ -418,6 +442,17 @@
 			confirmButtonText: 'OK'
 		});
 	@endif
+</script>
+<script>
+    function showAlertTuntutan() 
+    {
+        Swal.fire({
+        icon: 'error',
+        title: 'Tuntutan telah ditutup.',
+        text: ' {!! session('failed') !!}',
+        confirmButtonText: 'OK'
+        });
+    }
 </script>
 <!--end::Javascript-->     
 </x-default-layout>
