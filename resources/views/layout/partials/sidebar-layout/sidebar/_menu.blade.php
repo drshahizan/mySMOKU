@@ -129,19 +129,6 @@
 	@php
 		$user = DB::table('users')->where('no_kp',Auth::user()->no_kp)->first();
 		$institusi = DB::table('bk_info_institusi')->where('id_institusi', $user->id_institusi)->first();
-
-		// Retrieve data from bk_tarikh_iklan table
-		$bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
-
-		// Get current date and time
-		$currentDateTime = now();
-
-		// Check if current date and time fall within the allowed range
-		$tarikhMula = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_mula . ' ' . $bk_tarikh_iklan->masa_mula);
-		$tarikhTamat = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat);
-
-		// Check if current date and time fall within the allowed range
-		$isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
 	@endphp
 
 	<!--begin::sidebar menu-->
@@ -164,22 +151,13 @@
 					</div>
 				</div>
 
-				@if($isWithinRange)
-					<div class="menu-item">
-						<a class="menu-link" href="{{ route('senarai.permohonanBaharu')}}">
-							<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
-							<span class="menu-title">Baharu</span>
-						</a>
-					</div>
-				@else
-					<div class="menu-item">
-						<a class="menu-link" href="#" onclick="showAlert()">
-							<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-							<span class="menu-title">Baharu</span>
-						</a>
-					</div>
-				@endif
-
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('senarai.permohonanBaharu')}}">
+						<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
+						<span class="menu-title">Baharu</span>
+					</a>
+				</div>
+					
 				<div class="menu-item">
 					<a class="menu-link" href="{{ route('bkoku.sejarah.permohonan')}}">
 						<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
@@ -193,21 +171,12 @@
 						</div>
 				</div>
 
-				@if($isWithinRange)
-					<div class="menu-item">
-						<a class="menu-link" href="{{route('senarai.bkoku.tuntutanBaharu')}}">
-							<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
-							<span class="menu-title">Baharu</span>
-						</a>
-					</div>
-				@else
-					<div class="menu-item">
-						<a class="menu-link" href="#" onclick="showAlert()">
-							<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-							<span class="menu-title">Baharu</span>
-						</a>
-					</div>
-				@endif
+				<div class="menu-item">
+					<a class="menu-link" href="{{route('senarai.bkoku.tuntutanBaharu')}}">
+						<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
+						<span class="menu-title">Baharu</span>
+					</a>
+				</div>
 					
 				<div class="menu-item">
 					<a class="menu-link" href="{{route('bkoku.sejarah.tuntutan')}}">
@@ -551,21 +520,6 @@
 			
 {{-- PENYELARAS PPK --}}
 @elseif(Auth::user()->tahap=='6')
-	@php
-		// Retrieve data from bk_tarikh_iklan table
-		$bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
-
-		// Get current date and time
-		$currentDateTime = now();
-
-		// Check if current date and time fall within the allowed range
-		$tarikhMula = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_mula . ' ' . $bk_tarikh_iklan->masa_mula);
-		$tarikhTamat = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat);
-
-		// Check if current date and time fall within the allowed range
-		$isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
-	@endphp
-
 	<!--begin::sidebar menu-->
 	<div class="app-sidebar-menu overflow-hidden flex-column-fluid">
 		<!--begin::Menu wrapper-->
@@ -584,23 +538,12 @@
 						<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
 					</div>
 				</div>
-
-				@if($isWithinRange)
-					<div class="menu-item">
-						<a class="menu-link" href="{{ route('senarai.ppk.permohonanBaharu')}}">
-								<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
-								<span class="menu-title">Baharu</span>
-						</a>
-					</div>
-				@else
-					<div class="menu-item">
-						<a class="menu-link" href="#" onclick="showAlert()">
-							<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('senarai.ppk.permohonanBaharu')}}">
+							<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
 							<span class="menu-title">Baharu</span>
-						</a>
-					</div>
-				@endif
-
+					</a>
+				</div>
 				<div class="menu-item">
 					<a class="menu-link" href="{{ route('senarai.ppk.permohonanDibayar')}}">
 							<span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
@@ -618,23 +561,12 @@
 						<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
 					</div>
 				</div>
-
-				@if($isWithinRange)
-					<div class="menu-item">
-						<a class="menu-link" href="{{route('senarai.ppk.tuntutanBaharu')}}">
-							<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
-							<span class="menu-title">Baharu</span>
-						</a>
-					</div>
-				@else
-					<div class="menu-item">
-						<a class="menu-link" href="#" onclick="showAlert()">
-							<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-							<span class="menu-title">Baharu</span>
-						</a>
-					</div>
-				@endif
-
+				<div class="menu-item">
+					<a class="menu-link" href="{{route('senarai.ppk.tuntutanBaharu')}}">
+						<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
+						<span class="menu-title">Baharu</span>
+					</a>
+				</div>
 				<div class="menu-item">
 					<a class="menu-link" href="{{ route('senarai.ppk.tuntutanDibayar')}}">
 						<span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>

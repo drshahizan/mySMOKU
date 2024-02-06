@@ -115,34 +115,61 @@
                             <tbody>
                                 @foreach ($smoku as $smoku)
                                     @php
-                                    $text = ucwords(strtolower($smoku->nama)); 
-                                    $conjunctions = ['bin', 'binti'];
-                                    $words = explode(' ', $text);
-                                    $result = [];
-                                    foreach ($words as $word) {
-                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                            $result[] = Str::lower($word);
-                                        } else {
-                                            $result[] = $word;
+                                        $text = ucwords(strtolower($smoku->nama)); 
+                                        $conjunctions = ['bin', 'binti'];
+                                        $words = explode(' ', $text);
+                                        $result = [];
+                                        foreach ($words as $word) {
+                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                $result[] = Str::lower($word);
+                                            } else {
+                                                $result[] = $word;
+                                            }
                                         }
-                                    }
-                                    $pemohon = implode(' ', $result);
-
+                                        $pemohon = implode(' ', $result);
+                                    @endphp
+                                    @php
+                                        // Retrieve data from bk_tarikh_iklan table
+                                        $bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
+                                
+                                        // Get current date and time
+                                        $currentDateTime = now();
+                                
+                                        // Check if current date and time fall within the allowed range
+                                        $tarikhMula = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_mula . ' ' . $bk_tarikh_iklan->masa_mula);
+                                        $tarikhTamat = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat);
+                                
+                                        // Check if current date and time fall within the allowed range
+                                        $isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
                                     @endphp
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}.</td>
                                     <td class="text-center">{{ $smoku->no_kp}}</td>
                                     <td class="text-center">{{ $smoku->no_daftar_oku}}</td>
                                     <td class="text-center">{{$pemohon}}</td>
-                                    <td class="text-center"><a href="{{route('penyelaras.ppk.permohonan.baharu',$smoku->smoku_id)}}">
-                                        @if ($smoku->status == 1)
-                                            <button class="btn bg-info text-white">Deraf</button></a>
-                                        @elseif ($smoku->status == 9)
-                                            <button class="btn bg-batal text-white">Batal</button></a>
-                                        @else 
-                                            <button class="btn bg-primary text-white">Belum Mohon</button></a>
-                                        @endif
-                                    </td>
+                                    @if($isWithinRange)
+                                        <td class="text-center">
+                                            <a href="{{route('penyelaras.ppk.permohonan.baharu',$smoku->smoku_id)}}">
+                                                @if ($smoku->status == 1)
+                                                    <button class="btn bg-info text-white">Deraf</button>
+                                                @elseif ($smoku->status == 9)
+                                                    <button class="btn bg-batal text-white">Batal</button>
+                                                @else 
+                                                    <button class="btn bg-primary text-white">Belum Mohon</button>
+                                                @endif
+                                            </a>
+                                        </td>
+                                    @else
+                                        <td class="text-center">
+                                            @if ($smoku->status == 1)
+                                                <button class="btn bg-info text-white">Deraf</button>
+                                            @elseif ($smoku->status == 9)
+                                                <button class="btn bg-batal text-white">Batal</button>
+                                            @else 
+                                                <button class="btn bg-primary text-white" onclick="showAlert()">Belum Mohon</button>
+                                            @endif
+                                        </td>
+                                    @endif
                                     <td class="text-center">
                                         @if ($smoku->status < 1)
                                             <a href="{{ route('ppk.pendaftaran.delete', ['id' => $smoku->smoku_id]) }}" onclick="return confirm('Adakah anda pasti ingin padam pendaftaran ini?')">
@@ -197,6 +224,26 @@
             });
         @endif
     </script>
+    <script>
+        function showAlert() 
+        {
+            Swal.fire({
+            icon: 'error',
+            title: 'Permohonan ditutup pada masa sekarang.',
+            text: ' {!! session('failed') !!}',
+            confirmButtonText: 'OK'
+            });
+        }
     
-    </x-default-layout>
+        function showAlertTuntutan() 
+        {
+            Swal.fire({
+            icon: 'error',
+            title: 'Tuntutan ditutup pada masa sekarang.',
+            text: ' {!! session('failed') !!}',
+            confirmButtonText: 'OK'
+            });
+        }
+    </script>
+</x-default-layout>
     
