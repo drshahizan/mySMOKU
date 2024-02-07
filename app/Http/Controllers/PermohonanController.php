@@ -46,7 +46,6 @@ class PermohonanController extends Controller
 {
     public function permohonan()
     {
-
         $smoku = Smoku::join('bk_jantina','bk_jantina.kod_jantina','=','smoku.jantina')
         ->leftJoin('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
         ->leftJoin('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
@@ -55,14 +54,13 @@ class PermohonanController extends Controller
         ->where('no_kp', Auth::user()->no_kp);
         
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+
         $akademikmqa = Akademik::leftJoin('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
         ->leftJoin('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')
         ->where('smoku_id', $smoku_id->id)
         ->where('smoku_akademik.status', 1)
         ->select('smoku_akademik.*', 'bk_info_institusi.*', 'bk_peringkat_pengajian.*', 'smoku_akademik.status as akademik_status')
         ->first();
-
-        //dd($akademikmqa);
 
         $mod = Mod::all()->sortBy('kod_mod');
         $keturunan = Keturunan::all()->sortBy('id');
@@ -100,9 +98,7 @@ class PermohonanController extends Controller
         ->where('smoku_id', $smoku_id->id)
         ->where('akademik_status', 1)
         ->first();
-        // dd($butiranPelajar);
-
-        // dd($permohonan);
+        
         if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
             $tamat_pengajian = TamatPengajian::orderBy('id', 'desc')->where('permohonan_id', $permohonan->id)->first();
            
@@ -113,11 +109,8 @@ class PermohonanController extends Controller
                         ->where('id','!=', $tamat_pengajian->permohonan_id)
                         ->first();
 
-                //dd($permohonan_baru);        
-
-                if ($permohonan_baru !== null){
-                    //dd('situ');
-
+                if ($permohonan_baru !== null)
+                {
                     $butiranPelajar = ButiranPelajar::orderBy('permohonan.id', 'desc')
                         ->join('smoku', 'smoku.id', '=', 'smoku_butiran_pelajar.smoku_id')
                         ->join('smoku_waris', 'smoku_waris.smoku_id', '=', 'smoku.id')
@@ -132,27 +125,21 @@ class PermohonanController extends Controller
                         ->where('permohonan.status','!=', 6)
                         ->select(['smoku_butiran_pelajar.*', 'smoku.*','smoku_waris.*','smoku_akademik.*','bk_jantina.*', 'bk_keturunan.*','permohonan.*','bk_hubungan.*'])
                         ->first();
-    
-                    //dd($butiranPelajar);
-    
+        
                     $dokumen = Dokumen::where('permohonan_id', $permohonan_baru->id)->get();
                     return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','penajaArray','dokumen','permohonan','parlimen','dun','keturunan','agama'));
-    
-                }else{
-                     //dd('sini');
+                }
+                else{
                      return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','penajaArray','hubungan','negeri','parlimen','dun','keturunan','agama','bandar'));
                 }
    
             }
 
-
             $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
             return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','agama','institusi','peringkat','mod','biaya','penaja','penajaArray','dokumen','permohonan','parlimen','dun','keturunan'));
-            
-        }else {
-
+        }
+        else {
             return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','mod','biaya','penaja','penajaArray','hubungan','negeri','bandar','agama','parlimen','dun','keturunan'));
-
         }
 
     }
@@ -251,10 +238,8 @@ class PermohonanController extends Controller
         ]);
     }
 
-
     public function simpanPermohonan(Request $request)
     {   
-
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
 
         Smoku::updateOrCreate(
@@ -306,7 +291,6 @@ class PermohonanController extends Controller
         $waris->pendapatan_waris = $request->pendapatan_waris;
 
         $waris->save();
-
 
         // Update or create an Akademik record based on smoku_id
         Akademik::updateOrCreate(
@@ -397,8 +381,6 @@ class PermohonanController extends Controller
             );
         } 
 
-        
-
 
         $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
         SejarahPermohonan::updateOrCreate(
@@ -409,21 +391,14 @@ class PermohonanController extends Controller
             ]
         );
 
-
-
-
-        //$dokumen = Dokumen::where('smoku_id', '=', $smoku_id->id)->first();
         $permohonan_id = Permohonan::where('smoku_id',$smoku_id->id)->first();
-        //UPLOAD DOKUMEN BY JAVASCRIPT
-
-        //return redirect()->route('viewpermohonan');
-
     }
 
     public function hantarPermohonan(Request $request)
     {   
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
+        
         if ($permohonan != null) {
             Permohonan::where('smoku_id' ,$smoku_id->id)->where('id' ,$permohonan->id)
             ->update([
@@ -432,7 +407,6 @@ class PermohonanController extends Controller
                 'status' => '2',
 
             ]);
-            
         }
 
         $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
@@ -489,66 +463,62 @@ class PermohonanController extends Controller
             }
         }
 
+        //TAMBAHAN FILE
+        $dokumen = $request->file('dokumen'); 
+        $catatan = $request->input('catatan'); 
 
-            //TAMBAHAN FILE
-            $dokumen = $request->file('dokumen'); 
-            $catatan = $request->input('catatan'); 
-
-            // Check if $dokumen is a valid array and $catatan is an array
-            if (is_array($dokumen) && is_array($catatan)) {
-                foreach ($dokumen as $key => $img) {
-                    $originalFilename = $img->getClientOriginalName();
-                    $extension = $img->getClientOriginalExtension();
-                    
-                    $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                    $runningNumber = rand(1000, 9999);
-                    $profileImage = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
-                    $img->move('assets/dokumen/permohonan/', $profileImage);
-                    
-                    $tambahan = new dokumen();
-                    $tambahan->permohonan_id = $permohonan_id->id;
-                    $tambahan->id_dokumen = 4;
-                    $tambahan->dokumen = $profileImage;
-                    
-                    // Check if the corresponding catatan exists, otherwise, set it to null
-                    $tambahan->catatan = isset($catatan[$key]) ? $catatan[$key] : null;
-                    
-                    $tambahan->save();
-                }
-            } else {
-                // Handle cases where $dokumen or $catatan are not valid arrays
+        // Check if $dokumen is a valid array and $catatan is an array
+        if (is_array($dokumen) && is_array($catatan)) {
+            foreach ($dokumen as $key => $img) {
+                $originalFilename = $img->getClientOriginalName();
+                $extension = $img->getClientOriginalExtension();
+                
+                $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
+                $runningNumber = rand(1000, 9999);
+                $profileImage = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
+                $img->move('assets/dokumen/permohonan/', $profileImage);
+                
+                $tambahan = new dokumen();
+                $tambahan->permohonan_id = $permohonan_id->id;
+                $tambahan->id_dokumen = 4;
+                $tambahan->dokumen = $profileImage;
+                
+                // Check if the corresponding catatan exists, otherwise, set it to null
+                $tambahan->catatan = isset($catatan[$key]) ? $catatan[$key] : null;
+                
+                $tambahan->save();
             }
+        } else {
+            // Handle cases where $dokumen or $catatan are not valid arrays
+        }
 
         //emel kepada sekretariat
         // $user_sekretariat = User::where('tahap',3)->first();
         // $cc = $user_sekretariat->email;
 
-        //taknak emel sekretariat
 
+        // COMMENT PROD
+        // $catatan = "testing";
+        // $emel = EmelKemaskini::where('emel_id',13)->first();
+
+        // if (empty($invalidEmails)) 
+        // {
+        //     Mail::to($smoku_id->email)->send(new PermohonanHantar($catatan,$emel));
+        // } 
+        // else {
+        //     foreach ($invalidEmails as $invalidEmail) {
+        //          Log::error('Invalid email address: ' . $invalidEmail);
+        //     }
+        // }
         
-        $catatan = "testing";
-        $emel = EmelKemaskini::where('emel_id',13)->first();
-
-        if (empty($invalidEmails)) {
- 
-            Mail::to($smoku_id->email)->send(new PermohonanHantar($catatan,$emel));
-        } else {
-            // dd('sini kee');
-            foreach ($invalidEmails as $invalidEmail) {
-                 Log::error('Invalid email address: ' . $invalidEmail);
-            }
-        }
-        // Mail::to($smoku_id->email)->cc($cc)->send(new PermohonanHantar($catatan,$emel));
             
         return redirect()->route('pelajar.dashboard')->with('message', 'Permohonan anda telah dihantar.');
-
     }
 
     public function download(Request $request,$file)
     {   
         return response()->download(public_path('assets/dokumen/permohonan/'.$file));
     }
-
 
     public function kemaskiniPermohonan(Request $request)
     {   
@@ -635,7 +605,6 @@ class PermohonanController extends Controller
             'status' => '1',
 
         ]);*/
-        
     }
  
     public function sejarahPermohonan()
@@ -652,7 +621,6 @@ class PermohonanController extends Controller
             $catatan = Saringan::orderBy('id', 'desc')
             ->where('permohonan_id', $program->id)
             ->first();
-        // dd($catatan);
         } else {
             $catatan = '';
         }
@@ -666,12 +634,10 @@ class PermohonanController extends Controller
         } else {
             return redirect()->route('pelajar.dashboard')->with('permohonan', 'Tiada permohonan lama.');
         }
-
     }
 
     public function batalPermohonan($id)
     {
-
         DB::table('permohonan')->orderBy('id', 'asc')->where('smoku_id',$id)
             ->update([
                 'status' => 9
@@ -684,7 +650,6 @@ class PermohonanController extends Controller
         ]);
   
         return redirect()->route('pelajar.dashboard')->with('permohonan', 'Permohonan telah dibatalkan.');      
-        
     }
 
     public function deletePermohonan($id)
@@ -769,9 +734,7 @@ class PermohonanController extends Controller
             $sesiMula = $awal . '/' . $akhir;
 
             $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
-
         }
-       
 
         $currentSesi = null; // Initialize a variable to store the current session
         $previousSesi = null; // Initialize a variable to store the previous session
@@ -803,8 +766,8 @@ class PermohonanController extends Controller
         }
 
 
-        if ($permohonan) {
-            
+        if ($permohonan) 
+        {
             $peperiksaan = Peperiksaan::where('permohonan_id', $permohonan->id)->get();
             $result = Peperiksaan::where('permohonan_id', $permohonan->id)
 									->where('sesi', $sesiSemasa)
@@ -812,11 +775,9 @@ class PermohonanController extends Controller
 									->first();
      
             return view('tuntutan.pelajar.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan','sesiSemasa','semSemasa','result'));
-            
-        } else {
-
+        } 
+        else {
             return redirect()->route('pelajar.dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
-        
         }
 
     }
@@ -856,7 +817,6 @@ class PermohonanController extends Controller
         return redirect()->route('kemaskini.keputusan')->with('success', 'Keputusan peperiksaan telah di simpan.');
     }
 
-    
 }
 
 

@@ -41,13 +41,13 @@ class PelajarController extends Controller
             ->where('smoku_id',$smoku_id->id)
             ->where('permohonan_id',$permohonan_id->id)
             ->where('status', '!=', 'DISOKONG');
-            // dd($permohonan);
-        } else {
+        } 
+        else {
             $permohonan = [];
         }
 
+
         $tuntutan_id = Tuntutan::orderby("id","desc")->where('smoku_id',$smoku_id->id)->first();
-        // dd($tuntutan_id);
         if($tuntutan_id !== null){
             $tuntutan = Tuntutan::orderby("sejarah_tuntutan.created_at","desc")
                 ->join('sejarah_tuntutan','sejarah_tuntutan.tuntutan_id','=','tuntutan.id')
@@ -56,10 +56,10 @@ class PelajarController extends Controller
                 ->where('smoku_id',$smoku_id->id)
                 ->where('tuntutan_id',$tuntutan_id->id)
                 ->where('status', '!=', 'DISOKONG');
-        } else {
+        } 
+        else {
             $tuntutan = [];
         }
-        
         
 
         $akademik = Akademik::join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
@@ -67,68 +67,63 @@ class PelajarController extends Controller
         ->where('status',1)
         ->first();
 
-        if($akademik !== null){
+        if($akademik !== null)
+        {
             $currentDate = Carbon::now();
-        $tarikhMula = Carbon::parse($akademik->tarikh_mula);
-        $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
-        $tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
+            $tarikhMula = Carbon::parse($akademik->tarikh_mula);
+            $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
+            $tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
 
-        if($akademik->bil_bulan_per_sem == 6){
-            $bilSem = 2;
-        } else {
-            $bilSem = 3;
-        }
-            
-        $semSemasa = $akademik->sem_semasa;
-        $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
+            if($akademik->bil_bulan_per_sem == 6){
+                $bilSem = 2;
+            } else {
+                $bilSem = 3;
+            }
+                
+            $semSemasa = $akademik->sem_semasa;
+            $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
 
-        if ($currentDate->greaterThan($tarikhTamat)) {
-            echo "<script>
-                var userChoice;
-                var isValidChoice = false;
+            if ($currentDate->greaterThan($tarikhTamat)) {
+                echo "<script>
+                    var userChoice;
+                    var isValidChoice = false;
 
-                while (!isValidChoice) {
-                    userChoice = prompt('Tempoh pengajian telah tamat. Sila pilih satu opsyen:\\n\\n1. Lapor Tamat Pengajian\\n2. Tangguh Pengajian\\n3. Perlanjutan Pengajian');
+                    while (!isValidChoice) {
+                        userChoice = prompt('Tempoh pengajian telah tamat. Sila pilih satu opsyen:\\n\\n1. Lapor Tamat Pengajian\\n2. Tangguh Pengajian\\n3. Perlanjutan Pengajian');
 
-                    if (userChoice === null) {
-                        // Handle the case when the user clicks cancel in the prompt
-                        alert('Pilihan dibatalkan. Sila pilih satu opsyen.');
-                    } else if (userChoice === '1') {
-                        // Handle option 1
-                        var confirmOption1 = confirm('Adakah anda pasti mahu lapor tamat pengajian?');
-                        if (confirmOption1) {
-                            window.location.href = '" . route('tamat.pengajian') . "'; // Redirect to option 1 route 
-                            isValidChoice = true;
+                        if (userChoice === null) {
+                            // Handle the case when the user clicks cancel in the prompt
+                            alert('Pilihan dibatalkan. Sila pilih satu opsyen.');
+                        } else if (userChoice === '1') {
+                            // Handle option 1
+                            var confirmOption1 = confirm('Adakah anda pasti mahu lapor tamat pengajian?');
+                            if (confirmOption1) {
+                                window.location.href = '" . route('tamat.pengajian') . "'; // Redirect to option 1 route 
+                                isValidChoice = true;
+                            }
+                        } else if (userChoice === '2') {
+                            // Handle option 2
+                            var confirmOption2 = confirm('Adakah anda pasti mahu tangguh pengajian?');
+                            if (confirmOption2) {
+                                window.location.href = '" . route('tangguh.pengajian') . "'; // Redirect to option 2 route 
+                                isValidChoice = true;
+                            }
+                        } else if (userChoice === '3') {
+                            // Handle option 3
+                            var confirmOption3 = confirm('Adakah anda pasti mahu perlanjutan pengajian?');
+                            if (confirmOption3) {
+                                window.location.href = '" . route('lanjut.pengajian') . "'; // Redirect to option 3 route 
+                                isValidChoice = true;
+                            }
+                        } else {
+                            // Handle invalid input
+                            alert('Pilihan tidak sah. Sila pilih antara 1, 2, atau 3.');
                         }
-                    } else if (userChoice === '2') {
-                        // Handle option 2
-                        var confirmOption2 = confirm('Adakah anda pasti mahu tangguh pengajian?');
-                        if (confirmOption2) {
-                            window.location.href = '" . route('tangguh.pengajian') . "'; // Redirect to option 2 route 
-                            isValidChoice = true;
-                        }
-                    } else if (userChoice === '3') {
-                        // Handle option 3
-                        var confirmOption3 = confirm('Adakah anda pasti mahu perlanjutan pengajian?');
-                        if (confirmOption3) {
-                            window.location.href = '" . route('lanjut.pengajian') . "'; // Redirect to option 3 route 
-                            isValidChoice = true;
-                        }
-                    } else {
-                        // Handle invalid input
-                        alert('Pilihan tidak sah. Sila pilih antara 1, 2, atau 3.');
                     }
-                }
-            </script>";
-
-
-
-            
+                </script>";
+            }
         }
 
-        }
-
-        
         return view('dashboard.pelajar.dashboard', compact('user','permohonan','permohonan_id','akademik','tuntutan'));
     }
 
@@ -204,6 +199,7 @@ class PelajarController extends Controller
 
         return redirect()->route('tamat.pengajian')->with('success', 'Dokumen lapor diri tamat pengajian telah berjaya dihantar.');
     }
+
     public function tangguhPengajian()
     {   
         $user = Auth::user();
@@ -353,10 +349,8 @@ class PelajarController extends Controller
             ->where('no_kp', Auth::user()->no_kp)
             ->get(['smoku.*','smoku.id as smoku_id','bk_jenis_oku.*','bk_jantina.*','bk_keturunan.*'])
             ->first();
-        // dd($smoku);    
         $butiranPelajar = ButiranPelajar::where('smoku_id', $smoku->smoku_id)->first();
         
-        // dd($butiranPelajar);
         $negeri = Negeri::all()->sortBy('id');
         $bandar = Bandar::all()->sortBy('id');
         $keturunan = Keturunan::all()->sortBy('id');
@@ -370,7 +364,6 @@ class PelajarController extends Controller
         $akademik = Akademik::where('smoku_id', $smoku->smoku_id)->where('status', 1)->first();
         $institusi = InfoIpt::orderby("id","asc")->select('id_institusi','nama_institusi')->get();
 
-
         return view('kemaskini.pelajar.profil_pelajar',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','waris','hubungan','akademik','institusi'));
     }
 
@@ -380,7 +373,6 @@ class PelajarController extends Controller
         $butiran_pelajar = ButiranPelajar::where('smoku_id',$smoku->id)->first();
         $waris = Waris::where('smoku_id',$smoku->id)->first();
         $akademik = Akademik::where('smoku_id',$smoku->id)->where('status', 1)->first();
-        // dd($waris);
 
         // Get the current values
         $currentValues = [
@@ -492,7 +484,6 @@ class PelajarController extends Controller
                     'nama_kursus' => $request->nama_kursus,
                     'tempoh_pengajian' => $request->tempoh_pengajian,
                     'bil_bulan_per_sem' => $request->bil_bulan_per_sem
-    
                 ]);
         }
     
@@ -541,10 +532,6 @@ class PelajarController extends Controller
         ];
 
         
-        
-
-        // dd($currentValues );
-        // dd($updatedValues );
         if ($currentValues !== $updatedValues) {    
             return back()->with('success', 'Maklumat profil berjaya dikemaskini.');
         }

@@ -72,21 +72,16 @@ class PentadbirController extends Controller
             }
             
             $user = User::create($userData);
-            
-
-            
 
             $email = $request->email;
             $no_kp = $request->no_kp;
             Mail::to($email)->send(new MailDaftarPentadbir($email,$no_kp,$password));
-            //return redirect()->route('daftarpengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' .$request->nama);    
-            return response()->json(['message' => 'Emel notifikasi telah dihantar kepada ' . $request->nama]);
-        } else {
             
-            if($request->input('status')){
-                // dd('sini');
-                
-
+            return response()->json(['message' => 'Emel notifikasi telah dihantar kepada ' . $request->nama]);
+        } 
+        else {  
+            if($request->input('status'))
+            {
                 // Check if the status is different from the current user status
                 if ($request->status != $user->status) {
                     // dd('Status is different');
@@ -106,17 +101,13 @@ class PentadbirController extends Controller
                         $user->id_institusi = $request->id_institusippk;
                     }
 
-
-
                     if ($request->status == 1) {
                         return redirect()->route('daftarpengguna')->with('message', 'Status pengguna ' . $request->nama . ' telah diaktifkan.');
                     } elseif ($request->status == 0) {
                         return redirect()->route('daftarpengguna')->with('tidak', 'Status pengguna ' . $request->nama . ' telah ditukar tidak aktif.');
                     }
-                } else {
-                    //dd('Status is the same');
-                    // dd($request->id_institusi);
-
+                } 
+                else {
                     // If the user exists, update other information not status
                     $user->update([
                         'nama' => strtoupper($request->nama),
@@ -130,8 +121,8 @@ class PentadbirController extends Controller
                     return redirect()->route('daftarpengguna');
                 }
                 
-            } else {
-
+            } 
+            else {
                 if ($user->status == 1) {
                     $user->update([
                         'nama' => strtoupper($request->nama),
@@ -142,9 +133,11 @@ class PentadbirController extends Controller
                     ]);
                     
                     return response()->json(['message' => 'Data pengguna ' . $request->nama . ' telah ada dan telah dikemaskini.']);
-                } elseif ($request->status == 0) {
+                } 
+                elseif ($request->status == 0) {
                     return response()->json(['message' => 'Data pengguna ' . $request->nama . ' telah ada tetapi berstatus tidak aktif.']);
-                }else{
+                }
+                else{
                     $user->update([
                         'nama' => strtoupper($request->nama),
                         'email' => $request->email,
@@ -152,16 +145,10 @@ class PentadbirController extends Controller
                         'jawatan' => strtoupper($request->jawatan),
                         'id_institusi' => $request->id_institusi,
                     ]);
-                    
-
                 }
-
             }
         }
-
         $user->save();
-
-        
 
         return redirect()->route('daftarpengguna');
     }
@@ -330,13 +317,10 @@ class PentadbirController extends Controller
             }
         }
 
-        
         if (empty($invalidEmails)) {
-            // $bcc = $users->pluck('email')->toArray();
-            // dd($emailmain);
             Mail::to($emailmain)->bcc($bcc)->send(new HebahanIklan($catatan)); 
-        } else {
-            // dd('sini kee');
+        } 
+        else {
             foreach ($invalidEmails as $invalidEmail) {
                  Log::error('Invalid email address: ' . $invalidEmail);
             }

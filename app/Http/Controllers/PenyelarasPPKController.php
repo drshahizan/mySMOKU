@@ -49,7 +49,6 @@ class PenyelarasPPKController extends Controller
 {
     public function index()
     {
-        
         $smoku = Smoku::join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'smoku.id')
             ->leftJoin('permohonan', 'permohonan.smoku_id', '=', 'smoku.id')
             ->where('penyelaras_id', '=', Auth::user()->id)
@@ -70,7 +69,6 @@ class PenyelarasPPKController extends Controller
     public function store(Request $request)
     {
         //using api smoku
-        
         $request->validate([
             'no_kp' => ['required', 'string'],
             
@@ -125,7 +123,6 @@ class PenyelarasPPKController extends Controller
             } else {
                 $kod_hubungan = null;
             }
-            //dd($kod_hubungan);
 
             Smoku::updateOrInsert(
                 ['no_kp' => $dataField['NO_ID']], // Condition to find the record
@@ -203,8 +200,8 @@ class PenyelarasPPKController extends Controller
                     ->with('failed', $request->no_kp. ' Bukan dalam kategori OKU pendengaran');
             } 
 
-        } else {
-
+        } 
+        else {
             return redirect()->route('penyelaras.ppk.dashboard')
             ->with('failed', $nokp_in. ' Bukan OKU yang berdaftar dengan JKM.');
         }
@@ -250,16 +247,13 @@ class PenyelarasPPKController extends Controller
                 ->with('failed', $request->no_kp. ' Bukan OKU yang berdaftar dengan JKM');
         }
         */
-        
     }
 
     public function deletePendaftaran($id)
     {
-        
         DB::table('smoku_penyelaras')->where('smoku_id',$id)->delete();
         
         return redirect()->route('penyelaras.ppk.dashboard')->with('success', 'Pendaftaran pelajar telah di padam.');
-        
     }
 
     public function permohonanBaharu($id)
@@ -278,7 +272,6 @@ class PenyelarasPPKController extends Controller
         $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri','kod_negeri')->get();
         $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
         $agama = Agama::orderby("id","asc")->select('id','agama')->get();
-        // $infoipt = InfoIpt::all()->whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->sortBy('nama_institusi');
         $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->get();
         $peringkat = PeringkatPengajian::all()->sortBy('kod_peringkat');
         $kursus = Kursus::all()->sortBy('nama_kursus');
@@ -307,7 +300,6 @@ class PenyelarasPPKController extends Controller
             'smoku_butiran_pelajar.pendapatan as pendapatan_baru',
             'smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*','bk_peringkat_pengajian.*', 'bk_parlimen.*', 'bk_parlimen.id as id_parlimen'])
         ->where('smoku_id', $id);
-        // dd($butiranPelajar);
         
 
         if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
@@ -328,7 +320,6 @@ class PenyelarasPPKController extends Controller
 
     public function peringkat($ipt=0)
     {
-
         $peringkatData['data'] = Kursus::select('bk_kursus.kod_peringkat','bk_peringkat_pengajian.peringkat')
             ->join('bk_peringkat_pengajian', function ($join) {
                 $join->on('bk_kursus.kod_peringkat', '=', 'bk_peringkat_pengajian.kod_peringkat');
@@ -338,12 +329,10 @@ class PenyelarasPPKController extends Controller
             ->get();
 
         return response()->json($peringkatData);
-
     }
 
     public function kursus($kodperingkat=0,$ipt=0)
     {
-
         $kursusData['data'] = Kursus::orderby("nama_kursus","asc")
             ->select('id_institusi','kod_peringkat','nama_kursus')
             ->where('kod_peringkat',$kodperingkat)
@@ -352,7 +341,6 @@ class PenyelarasPPKController extends Controller
             ->get();
 
         return response()->json($kursusData);
-
     }
 
     public function simpan(Request $request)
@@ -468,6 +456,7 @@ class PenyelarasPPKController extends Controller
 
         // Save the record
         $permohonan->save();*/
+
         $permohonan = Permohonan::orderBy('id', 'desc')
             ->where('smoku_id', $id)
             ->first();
@@ -497,10 +486,6 @@ class PenyelarasPPKController extends Controller
             );
         }
 
-        
-        
-
-
         $permohonan = Permohonan::orderBy('id', 'desc')
             ->where('smoku_id', $id)
             ->first();
@@ -512,19 +497,14 @@ class PenyelarasPPKController extends Controller
 
         $sejarah->save();
 
-
-        //$dokumen = Dokumen::where('smoku_id', '=', $smoku_id->id)->first();
-        //UPLOAD DOKUMEN BY JAVASCRIPT
-
-
         return redirect()->route('penyelaras.ppk.dashboard');
-
     }
 
     public function kemaskini(Request $request)
     {   
         $smoku = Smoku::where('no_kp', '=', $request->no_kp)->first();
         $id = $smoku->id;
+
         ButiranPelajar::where('smoku_id' ,$id)
         ->update([
 
@@ -589,7 +569,6 @@ class PenyelarasPPKController extends Controller
             'perakuan' => $request->perakuan,
 
         ]);
-        
     }
 
     public function hantar(Request $request)
@@ -606,7 +585,6 @@ class PenyelarasPPKController extends Controller
                 'perakuan' => $request->perakuan,
                 'tarikh_hantar' => now()->format('Y-m-d'),
                 'status' => '2',
-
             ]);
             
         }
@@ -616,10 +594,8 @@ class PenyelarasPPKController extends Controller
             'permohonan_id' => $permohonan_id->id,
             'smoku_id' => $smoku_id->id,
             'status' => '2',
-    
         ]);
         $mohon->save();
-
 
         $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
 
@@ -667,40 +643,34 @@ class PenyelarasPPKController extends Controller
             }
         }
 
+        //TAMBAHAN FILE
+        $dokumen = $request->file('dokumen'); 
+        $catatan = $request->input('catatan'); 
 
-            //TAMBAHAN FILE
-            $dokumen = $request->file('dokumen'); 
-            $catatan = $request->input('catatan'); 
-
-            // Check if $dokumen is a valid array and $catatan is an array
-            if (is_array($dokumen) && is_array($catatan)) {
-                foreach ($dokumen as $key => $img) {
-                    $originalFilename = $img->getClientOriginalName();
-                    $extension = $img->getClientOriginalExtension();
-                    
-                    $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                    $runningNumber = rand(1000, 9999);
-                    $profileImage = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
-                    $img->move('assets/dokumen/permohonan/', $profileImage);
-                    
-                    $tambahan = new dokumen();
-                    $tambahan->permohonan_id = $permohonan_id->id;
-                    $tambahan->id_dokumen = 4;
-                    $tambahan->dokumen = $profileImage;
-                    
-                    // Check if the corresponding catatan exists, otherwise, set it to null
-                    $tambahan->catatan = isset($catatan[$key]) ? $catatan[$key] : null;
-                    
-                    $tambahan->save();
-                }
-            } else {
-                // Handle cases where $dokumen or $catatan are not valid arrays
+        // Check if $dokumen is a valid array and $catatan is an array
+        if (is_array($dokumen) && is_array($catatan)) {
+            foreach ($dokumen as $key => $img) {
+                $originalFilename = $img->getClientOriginalName();
+                $extension = $img->getClientOriginalExtension();
+                
+                $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
+                $runningNumber = rand(1000, 9999);
+                $profileImage = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
+                $img->move('assets/dokumen/permohonan/', $profileImage);
+                
+                $tambahan = new dokumen();
+                $tambahan->permohonan_id = $permohonan_id->id;
+                $tambahan->id_dokumen = 4;
+                $tambahan->dokumen = $profileImage;
+                
+                // Check if the corresponding catatan exists, otherwise, set it to null
+                $tambahan->catatan = isset($catatan[$key]) ? $catatan[$key] : null;
+                
+                $tambahan->save();
             }
-
-        //emel kepada pelajar
-        $emel_pelajar = Smoku::where('id',$smoku_id->id)->first();
-        $cc_pelajar = $emel_pelajar->email;
-        // dd($cc_pelajar);
+        } else {
+            // Handle cases where $dokumen or $catatan are not valid arrays
+        }
             
         //emel kepada sekretariat
         // $user_sekretariat = User::where('tahap',3)->first();
@@ -716,20 +686,28 @@ class PenyelarasPPKController extends Controller
         // }
         //taknak emel sekretariat
 
-        //emel kepada penyelaras
-        $user = User::where('no_kp',Auth::user()->no_kp)->first();
 
-        $catatan = "testing";
-        $emel = EmelKemaskini::where('emel_id',15)->first();
-        //dd($cc,$user->email);
-        if (empty($invalidEmails)) {
-            Mail::to($user->email)->cc($cc_pelajar)->send(new PermohonanHantar($catatan,$emel));     
-        } else {
-            // dd('sini kee');
-            foreach ($invalidEmails as $invalidEmail) {
-                Log::error('Invalid email address: ' . $invalidEmail);
-            }
-        }
+        // COMMENT PROD
+        // //emel kepada pelajar
+        // $emel_pelajar = Smoku::where('id',$smoku_id->id)->first();
+        // $cc_pelajar = $emel_pelajar->email;
+
+        // //emel kepada penyelaras
+        // $user = User::where('no_kp',Auth::user()->no_kp)->first();
+
+        // $catatan = "testing";
+        // $emel = EmelKemaskini::where('emel_id',15)->first();
+
+        // if (empty($invalidEmails)) {
+        //     Mail::to($user->email)->cc($cc_pelajar)->send(new PermohonanHantar($catatan,$emel));     
+        // } 
+        // else {
+        //     foreach ($invalidEmails as $invalidEmail) {
+        //         Log::error('Invalid email address: ' . $invalidEmail);
+        //     }
+        // }
+
+
         //CREATE USER ID TERUS UNTUK PELAJAR
         $user = User::where('no_kp', '=', $smoku_id->no_kp)->first();
         $characters = 'abcdefghijklmn123456789!@#$%^&';
@@ -741,8 +719,8 @@ class PenyelarasPPKController extends Controller
             $password .= $characters[random_int(0, strlen($characters) - 1)];
         }
 
-        if ($user === null) {
-
+        if ($user === null) 
+        {
             $userData = [
                 'nama' => $request->nama_pelajar,
                 'no_kp' => $request->no_kp,
@@ -751,18 +729,15 @@ class PenyelarasPPKController extends Controller
                 'password' => Hash::make($password),
                 'status' => 1,
             ];
-            
             $user = User::create($userData);
-            
 
-            $email = $request->emel;
-            $no_kp = $request->no_kp;
-            Mail::to($email)->send(new MailDaftarPentadbir($email,$no_kp,$password));
-            
+            // COMMENT PROD
+            // $email = $request->emel;
+            // $no_kp = $request->no_kp;
+            // Mail::to($email)->send(new MailDaftarPentadbir($email,$no_kp,$password));
         }    
 
         return redirect()->route('penyelaras.ppk.dashboard')->with('success', 'Permohonan pelajar telah dihantar.');
-
     }
 
     public function senaraiPermohonanBaharu()
@@ -776,7 +751,6 @@ class PenyelarasPPKController extends Controller
         ->orderBy('permohonan.created_at', 'DESC')
         ->get(['smoku.*', 'permohonan.*', 'smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
 
-        //dd($smoku);
         return view('permohonan.penyelaras_ppk.senarai_baharu', compact('smoku'));
     }
 
@@ -791,8 +765,6 @@ class PenyelarasPPKController extends Controller
         ->where('permohonan.status', 8) 
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
         ->get(['smoku.*', 'permohonan.no_rujukan_permohonan', 'permohonan.id as permohonan_id', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
-        // dd($layak);
-
         
 
         // $currentDate = Carbon::now();
@@ -840,9 +812,8 @@ class PenyelarasPPKController extends Controller
         $nextSemesterDates = [];
         $firstIteration = true;
 
-        while ($tarikhNextSem < $tarikhTamat) {
-            
-
+        while ($tarikhNextSem < $tarikhTamat) 
+        {
             $nextSemesterDates[] = [
                 'date' => $tarikhNextSem->format('Y-m-d'),
                 'semester' => $semSemasa,
@@ -864,9 +835,9 @@ class PenyelarasPPKController extends Controller
         $previousSesi = null; // Initialize a variable to store the previous session
         $semSemasa = null; // Initialize a variable to store the current semester
         $sesiSemasa = null; // Initialize a variable to store the current session
-        foreach ($nextSemesterDates as $key => $data) {
-            // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'];
 
+        foreach ($nextSemesterDates as $key => $data) 
+        {
             $dateOfSemester = \Carbon\Carbon::parse($data['date']);
             
             // Set the end date to be just before the start of the next semester
@@ -883,16 +854,11 @@ class PenyelarasPPKController extends Controller
                 // $sesiSemasa = $data['sesi'];
                 $sesiSemasa = isset($nextSemesterDates[$key - 1]) ? $nextSemesterDates[$key - 1]['sesi'] : null;
             }
-            
-            // var_dump($semSemasa);
-            
         }
-        // dd($semSemasa);
 
         if ($semSemasa === 0 ) {
             return back()->with('sem', 'Semester semasa belum tamat.');
         }
-
         
         if ($permohonan) {
             
@@ -903,10 +869,10 @@ class PenyelarasPPKController extends Controller
 									->first();
 
             return view('tuntutan.penyelaras_ppk.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','sesiSemasa','semSemasa','result'));
-        } else {
+        } 
+        else {
 
             return redirect()->route('senarai.ppk.tuntutanBaharu')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
-        
         }    
     }
 
@@ -920,7 +886,6 @@ class PenyelarasPPKController extends Controller
             ->where('sesi', '=', $request->sesi)
             ->where('semester', '=', $request->semester)
 			->first();
-
 
         if($result){
             return back()->with('failed', 'Keputusan peperiksaan semester terdahulu telah ada.');
@@ -960,9 +925,6 @@ class PenyelarasPPKController extends Controller
             // You might want to redirect back with an error message
             return redirect()->back()->with('error', 'No files uploaded.');
         }
-        
-        
-        
     }
 
     public function hantarTuntutan(Request $request, $id)
@@ -1012,7 +974,7 @@ class PenyelarasPPKController extends Controller
     public function sejarahTuntutan()
     {
         $tuntutan = Tuntutan::where('status', '!=','4')->get();
-        // dd($tuntutan);
+
         return view('tuntutan.penyelaras_ppk.sejarah_tuntutan',compact('tuntutan'));
     }
 
@@ -1030,7 +992,6 @@ class PenyelarasPPKController extends Controller
     public function paparRekodTuntutan($id)
     {
         $sejarah_t = SejarahTuntutan::where('id', $id)->first();
-        //dd($sejarah_t);
         $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
         $smoku_id = $tuntutan->smoku_id;
@@ -1044,7 +1005,6 @@ class PenyelarasPPKController extends Controller
         $permohonan = Permohonan::where('smoku_id', $id)->first();
         $akademik = Akademik::where('smoku_id', $id)->first();
         $peperiksaan = Peperiksaan::where('permohonan_id', $permohonan->id)->get();
-        //dd($peperiksaan);
 
         return view('tuntutan.penyelaras_ppk.keputusan_peperiksaan',compact('akademik','permohonan','peperiksaan'));
     }
@@ -1068,15 +1028,12 @@ class PenyelarasPPKController extends Controller
         ->select('permohonan.*')
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
         ->get();
-        // dd($permohonan);
         
         return view('permohonan.penyelaras_ppk.sejarah_permohonan',compact('permohonan'));
     }
 
     public function deletePermohonan($id)
-    {
-        //dd($id);
-        
+    {        
         $smoku_id = Smoku::where('id', $id)->first();
         $permohonan = DB::table('permohonan')->orderBy('id', 'asc')
             ->where('smoku_id', $smoku_id->id)->first();
@@ -1109,12 +1066,10 @@ class PenyelarasPPKController extends Controller
         } 
         
         return back();
-        
     }
 
     public function batalPermohonan($id)
     {
-
         DB::table('permohonan')->orderBy('id', 'asc')->where('smoku_id',$id)
             ->update([
                 'status' => 9
@@ -1127,7 +1082,6 @@ class PenyelarasPPKController extends Controller
         ]);
   
         return redirect()->route('ppk.sejarah.permohonan')->with('success', 'Permohonan telah dibatalkan.');      
-        
     }
 
     public function rekodPermohonan($id)
@@ -1173,7 +1127,6 @@ class PenyelarasPPKController extends Controller
 
     public function batalTuntutan($id)
     {
-
         $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$id)->first();
         $tuntutan_id = Tuntutan::orderBy('id', 'desc')->where('smoku_id',$id)->where('permohonan_id',$permohonan_id->id)->first();
 
@@ -1187,8 +1140,7 @@ class PenyelarasPPKController extends Controller
             'status' => 9
         ]);
            
-        return redirect()->route('ppk.sejarah.tuntutan')->with('success', 'Tuntutan telah dibatalkan.');      
-        
+        return redirect()->route('ppk.sejarah.tuntutan')->with('success', 'Tuntutan telah dibatalkan.');       
     }
 
     public function senaraiDibayar()
@@ -1202,7 +1154,6 @@ class PenyelarasPPKController extends Controller
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
         ->get(['smoku.*', 'permohonan.*', 'permohonan.id as permohonan_id', 'smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
 
-        // dd($smoku);
         return view('permohonan.penyelaras_ppk.senarai_dibayar', compact('smoku'));
     }
 
@@ -1218,9 +1169,7 @@ class PenyelarasPPKController extends Controller
         ->orderBy('tuntutan.tarikh_hantar', 'DESC')
         ->get(['smoku.*', 'permohonan.no_rujukan_permohonan', 'tuntutan.*', 'smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
 
-        // dd($smoku);
         return view('tuntutan.penyelaras_ppk.tuntutan_dibayar', compact('smoku'));
     }
-
 
 }

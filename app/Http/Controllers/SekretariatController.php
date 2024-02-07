@@ -584,7 +584,8 @@ class SekretariatController extends Controller
         // Create an array to store catatan values
         $catatanArray = $request->has('catatan') ? $request->get('catatan') : [];
 
-        if ($existingRecord) {
+        if ($existingRecord) 
+        {
             // Update the respective row in permohonan_kelulusan table
             $existingRecord->no_mesyuarat = $request->noMesyuarat;
             $existingRecord->tarikh_mesyuarat = $request->tarikhMesyuarat;
@@ -597,10 +598,10 @@ class SekretariatController extends Controller
             else {
                 $existingRecord->catatan = null; // Or any default value you want for catatan when it's not provided
             }
-
             $existingRecord->save();
         }
-        else {
+        else 
+        {
             // Create a new row in permohonan_kelulusan table
             $info_mesyuarat = new Kelulusan([
                 'permohonan_id' => $id,
@@ -638,11 +639,12 @@ class SekretariatController extends Controller
         // Split the comma-separated string into an array
         $catatanArray = explode(', ', $catatan);
 
+        // COMMENT PROD
         // Email notification
-        $studentEmail = ButiranPelajar::where('smoku_id', $smoku_id)->value('emel');
-        $emailLulus = EmelKemaskini::where("emel_id",2)->first();
-        $emailTidakLulus = EmelKemaskini::where("emel_id",3)->first();
-        Mail::to($studentEmail)->send($keputusan == "Lulus" ? new KeputusanLayak($emailLulus) : new KeputusanTidakLayak($emailTidakLulus,$catatanArray));
+        // $studentEmail = ButiranPelajar::where('smoku_id', $smoku_id)->value('emel');
+        // $emailLulus = EmelKemaskini::where("emel_id",2)->first();
+        // $emailTidakLulus = EmelKemaskini::where("emel_id",3)->first();
+        // Mail::to($studentEmail)->send($keputusan == "Lulus" ? new KeputusanLayak($emailLulus) : new KeputusanTidakLayak($emailTidakLulus,$catatanArray));
 
         // Filter kelulusan
         $startDate = $request->input('start_date');
@@ -731,16 +733,17 @@ class SekretariatController extends Controller
                         ]);
                     }
 
+                    // COMMENT PROD
                     // Send email notifications to all student email addresses
-                    $studentEmail = ButiranPelajar::where('smoku_id',  $item->smoku_id)->value('emel');
-                    $emailLulus = EmelKemaskini::where("emel_id",2)->first();
-                    if ($studentEmail) {
-                        $studentEmails[] = $studentEmail;
-                    }
+                    // $studentEmail = ButiranPelajar::where('smoku_id',  $item->smoku_id)->value('emel');
+                    // $emailLulus = EmelKemaskini::where("emel_id",2)->first();
+                    // if ($studentEmail) {
+                    //     $studentEmails[] = $studentEmail;
+                    // }
 
-                    foreach ($studentEmails as $studentEmail) {
-                        Mail::to($studentEmail)->send(new KeputusanLayak($emailLulus));
-                    }
+                    // foreach ($studentEmails as $studentEmail) {
+                    //     Mail::to($studentEmail)->send(new KeputusanLayak($emailLulus));
+                    // }
                 }
                 // 2) Tidak Lulus
                 else
@@ -781,27 +784,28 @@ class SekretariatController extends Controller
                         ]);
                     }
 
-                    // Send email notifications to all student email addresses
-                    $studentEmail = ButiranPelajar::where('smoku_id',  $item->smoku_id)->value('emel');
-                    if ($studentEmail) {
-                        $studentEmails[] = $studentEmail;
-                    }
+                    // COMMENT PROD
+                    // // Send email notifications to all student email addresses
+                    // $studentEmail = ButiranPelajar::where('smoku_id',  $item->smoku_id)->value('emel');
+                    // if ($studentEmail) {
+                    //     $studentEmails[] = $studentEmail;
+                    // }
 
-                    // Set a default value
-                    $catatan = '';
+                    // // Set a default value
+                    // $catatan = '';
 
-                    // Check if $existingRecord is defined and not null
-                    if ($existingRecord) {
-                        $catatan = $existingRecord->catatan;
-                    }
+                    // // Check if $existingRecord is defined and not null
+                    // if ($existingRecord) {
+                    //     $catatan = $existingRecord->catatan;
+                    // }
 
-                    // Split the comma-separated string into an array
-                    $catatanArray = explode(', ', $catatan);
+                    // // Split the comma-separated string into an array
+                    // $catatanArray = explode(', ', $catatan);
 
-                    foreach ($studentEmails as $studentEmail) {
-                        $emailTidakLulus = EmelKemaskini::where("emel_id",3)->first();
-                        Mail::to($studentEmail)->send(new KeputusanTidakLayak($emailTidakLulus, $catatanArray));
-                    }
+                    // foreach ($studentEmails as $studentEmail) {
+                    //     $emailTidakLulus = EmelKemaskini::where("emel_id",3)->first();
+                    //     Mail::to($studentEmail)->send(new KeputusanTidakLayak($emailTidakLulus, $catatanArray));
+                    // }
                 }
             }
         }
@@ -840,24 +844,6 @@ class SekretariatController extends Controller
     //PERMOHONAN - KEPUTUSAN
     public function senaraiKeputusanPermohonan(Request $request)
     {
-        // $startDate = $request->input('start_date');
-        // $endDate = $request->input('end_date');
-
-        // $kelulusan = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
-        //             ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-        //             ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-        //             ->orderBy('permohonan_kelulusan.updated_at', 'desc')
-        //             ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-        //                 return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
-        //             })
-        //             ->when($request->status, function ($q) use ($request) {
-        //                 return $q->where('permohonan_kelulusan.keputusan', $request->status);
-        //             })
-        //             ->when($request->institusi, function ($q) use ($request) {
-        //                 return $q->where('bk_info_institusi.id_institusi', $request->institusi);
-        //             })
-        //             ->select('permohonan_kelulusan.*')
-        //             ->get();
         $kelulusan = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
                     ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                     ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
@@ -1110,13 +1096,14 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status', 'institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
-    public function keputusanPeperiksaan($id){
+    public function keputusanPeperiksaan($id)
+    {
         $peperiksaan = Peperiksaan::where('permohonan_id',$id)->get();
         return view('tuntutan.sekretariat.saringan.keputusan_peperiksaan',compact('peperiksaan'));
     }
 
-    public function maklumatTuntutanKedua($id){
-
+    public function maklumatTuntutanKedua($id)
+    {
         Tuntutan::where('id', $id)
             ->update([
                 'status'   =>  3,
@@ -1133,7 +1120,7 @@ class SekretariatController extends Controller
         $no_tuntutan = $rujukan[3];
 
         $tuntutan_sebelum = Tuntutan::where('permohonan_id',$tuntutan->permohonan_id)->where('status', '8')->where('id', '<', $id)->orderBy('id','desc')->first();
-        // dd($tuntutan_sebelum);
+
         if($tuntutan_sebelum!=null){
             $sesi_sebelum = $tuntutan_sebelum->sesi;
         }
@@ -1178,7 +1165,8 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.saringan.maklumat_tuntutan',compact('sama_semester','baki_terdahulu','permohonan','smoku','akademik','tuntutan','tuntutan_item'));
     }
 
-    public function setSemulaStatus($id){
+    public function setSemulaStatus($id)
+    {
         Tuntutan::where('id', $id)
             ->update([
                 'status'   =>  2,
@@ -1217,7 +1205,6 @@ class SekretariatController extends Controller
         $no_rujukan_tuntutan= Tuntutan::where('id', $id)->value('no_rujukan_tuntutan');
         $permohonan_id = Tuntutan::where('id', $id)->value('permohonan_id');
         $smoku_id = Permohonan::where('id', $permohonan_id)->value('smoku_id');
-        $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
 
         $count_item =TuntutanItem::where('tuntutan_id', $id)->count();
         if($count_item==1){
@@ -1309,15 +1296,18 @@ class SekretariatController extends Controller
             ]);
             $status_rekod->save();
 
-            $program = Permohonan::where('id', $permohonan_id)->value('program');
-            if($program=="BKOKU"){
-                $emel = EmelKemaskini::where('emel_id',5)->first();
-                Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
-            }
-            elseif($program=="PPK"){
-                $emel = EmelKemaskini::where('emel_id',11)->first();
-                Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
-            }
+            // COMMENT PROD
+            // $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
+            // $program = Permohonan::where('id', $permohonan_id)->value('program');
+            // if($program=="BKOKU"){
+            //     $emel = EmelKemaskini::where('emel_id',5)->first();
+            //     Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
+            // }
+            // elseif($program=="PPK"){
+            //     $emel = EmelKemaskini::where('emel_id',11)->first();
+            //     Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
+            // }
+
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Layak'.";
         }
@@ -1399,7 +1389,6 @@ class SekretariatController extends Controller
                 $saringan->save();
             }
 
-
             $status_rekod = new SejarahTuntutan([
                 'smoku_id'          =>  $smoku_id,
                 'tuntutan_id'       =>  $id,
@@ -1411,15 +1400,17 @@ class SekretariatController extends Controller
             $saringan = SaringanTuntutan::where('tuntutan_id',$id)->first();
             $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
 
-            $program = Permohonan::where('id', $permohonan_id)->value('program');
-            if($program=="BKOKU"){
-                $emel = EmelKemaskini::where('emel_id',6)->first();
-                Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
-            }
-            elseif($program=="PPK"){
-                $emel = EmelKemaskini::where('emel_id',12)->first();
-                Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
-            }
+            // COMMENT PROD
+            // $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
+            // $program = Permohonan::where('id', $permohonan_id)->value('program');
+            // if($program=="BKOKU"){
+            //     $emel = EmelKemaskini::where('emel_id',6)->first();
+            //     Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+            // }
+            // elseif($program=="PPK"){
+            //     $emel = EmelKemaskini::where('emel_id',12)->first();
+            //     Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+            // }
 
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Tidak Layak'.";
@@ -1506,15 +1497,17 @@ class SekretariatController extends Controller
             $saringan = SaringanTuntutan::where('tuntutan_id',$id)->first();
             $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
 
-            $program = Permohonan::where('id', $permohonan_id)->value('program');
-            if($program=="BKOKU"){
-                $emel = EmelKemaskini::where('emel_id',4)->first();
-                Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
-            }
-            elseif($program=="PPK"){
-                $emel = EmelKemaskini::where('emel_id',10)->first();
-                Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
-            }
+            // COMMENT PROD
+            // $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
+            // $program = Permohonan::where('id', $permohonan_id)->value('program');
+            // if($program=="BKOKU"){
+            //     $emel = EmelKemaskini::where('emel_id',4)->first();
+            //     Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+            // }
+            // elseif($program=="PPK"){
+            //     $emel = EmelKemaskini::where('emel_id',10)->first();
+            //     Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+            // }
 
             $status_kod=2;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah dikembalikan.";
@@ -1536,30 +1529,6 @@ class SekretariatController extends Controller
 
     public function keputusanTuntutan(Request $request)
     {
-        /*$startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
-        $tuntutan = Tuntutan::join('sejarah_tuntutan', function ($join) {
-                        $join->on('sejarah_tuntutan.tuntutan_id', '=', 'tuntutan.id')
-                            ->on('sejarah_tuntutan.status', '=', 'tuntutan.status')
-                            ->whereIn('sejarah_tuntutan.status', ['5','6','7']);
-                    })
-                    ->leftJoin('smoku_akademik', 'tuntutan.smoku_id', '=', 'smoku_akademik.smoku_id')
-                    ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-                    ->orderBy('tuntutan.updated_at', 'desc')
-                    ->whereIn('tuntutan.status', ['5','6','7'])
-                    ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-                        return $q->whereBetween('sejarah_tuntutan.created_at', [$startDate, $endDate]);
-                    })
-                    ->when($request->status, function ($q) use ($request) {
-                        return $q->where('tuntutan.status', $request->status);
-                    })
-                    ->when($request->institusi, function ($q) use ($request) {
-                        return $q->where('bk_info_institusi.id_institusi', $request->institusi);
-                    })
-                    ->select('tuntutan.*','sejarah_tuntutan.created_at as tarikh_keputusan')
-                    ->get();
-        */
         $tuntutan = Tuntutan::leftJoin('smoku_akademik', 'tuntutan.smoku_id', '=', 'smoku_akademik.smoku_id')
                     ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
                     ->leftJoin('bk_status', 'tuntutan.status', '=', 'bk_status.kod_status')
@@ -1712,7 +1681,8 @@ class SekretariatController extends Controller
     }
 
     //Sejarah
-    public function sejarahTuntutan(){
+    public function sejarahTuntutan()
+    {
         $tuntutan = Tuntutan::where('status', '!=','4')->orderBy('created_at', 'DESC')->get();
 
         $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
@@ -1722,7 +1692,8 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.sejarah.sejarah_tuntutan',compact('tuntutan','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
-    public function rekodTuntutan($id){
+    public function rekodTuntutan($id)
+    {
         $tuntutan = Tuntutan::where('id', $id)->first();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
         $smoku_id = $tuntutan->smoku_id;
@@ -1734,7 +1705,8 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.sejarah.rekod_tuntutan',compact('tuntutan','akademik','smoku','sejarah_t','permohonan'));
     }
 
-    public function paparRekodTuntutan($id){
+    public function paparRekodTuntutan($id)
+    {
         $sejarah_t = SejarahTuntutan::where('id', $id)->first();
         $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
         $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
@@ -1773,7 +1745,8 @@ class SekretariatController extends Controller
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
         return view('tuntutan.sekretariat.sejarah.papar_tuntutan',compact('baki_terdahulu','permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
     }
-    public function paparRekodSaringanTuntutan($id){
+    public function paparRekodSaringanTuntutan($id)
+    {
         $sejarah_t = SejarahTuntutan::where('id', $id)->first();
         $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
@@ -1813,10 +1786,12 @@ class SekretariatController extends Controller
             $baki_terdahulu = $j_tuntutan->jumlah;
         }
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+
         return view('tuntutan.sekretariat.sejarah.papar_saringan',compact('sama_semester','baki_terdahulu','permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
     }
 
-    public function paparRekodPembayaran($id){
+    public function paparRekodPembayaran($id)
+    {
         $sejarah_t = SejarahTuntutan::where('id', $id)->first();
         $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
@@ -1827,10 +1802,12 @@ class SekretariatController extends Controller
         $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
         $peringkat = $rujukan[1];
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+
         return view('tuntutan.sekretariat.sejarah.papar_pembayaran',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','saringan','sejarah_t'));
     }
 
-    public function kemaskiniSaringan($id){
+    public function kemaskiniSaringan($id)
+    {
         $sejarah_t = SejarahTuntutan::where('id', $id)->first();
         $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
@@ -1866,10 +1843,12 @@ class SekretariatController extends Controller
             $baki_terdahulu = $j_tuntutan->jumlah;
         }
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+
         return view('tuntutan.sekretariat.sejarah.kemaskini_saringan',compact('baki_terdahulu','permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
     }
 
-    public function hantarSaringan(Request $request, $id){
+    public function hantarSaringan(Request $request, $id)
+    {
         $t_id = SejarahTuntutan::where('id', $id)->value('tuntutan_id');
         Tuntutan::where('id', $t_id)
             ->update([
@@ -1917,6 +1896,7 @@ class SekretariatController extends Controller
             $baki_terdahulu = $j_tuntutan->jumlah;
         }
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+
         return view('tuntutan.sekretariat.sejarah.papar_saringan',compact('sama_semester','baki_terdahulu','permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
     }
 
@@ -1980,7 +1960,8 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.pembayaran.maklumat',compact('permohonan','smoku','akademik','tuntutan','tuntutan_item'));
     }
 
-    public function saringPembayaran(Request $request, $id){
+    public function saringPembayaran(Request $request, $id)
+    {
         $no_rujukan_tuntutan= Tuntutan::where('id', $id)->value('no_rujukan_tuntutan');
         $permohonan_id = Tuntutan::where('id', $id)->value('permohonan_id');
         $smoku_id = Permohonan::where('id', $permohonan_id)->value('smoku_id');
@@ -2007,12 +1988,13 @@ class SekretariatController extends Controller
 
         $status_kod=1;
         $status = "Tuntutan ".$no_rujukan_tuntutan." telah dibayar.";
-
         $tuntutan = Tuntutan::where('status', '8')->orderBy('created_at', 'DESC')->get();
+
         return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status'));
     }
 
-    public function paparPembayaran($id){
+    public function paparPembayaran($id)
+    {
         $tuntutan = Tuntutan::where('id', $id)->first();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
         $saringan = SaringanTuntutan::where('tuntutan_id', $id)->first();
@@ -2022,10 +2004,12 @@ class SekretariatController extends Controller
         $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
         $peringkat = $rujukan[1];
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+
         return view('tuntutan.sekretariat.pembayaran.papar',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','saringan'));
     }
 
-    public function kemaskiniPembayaran($id){
+    public function kemaskiniPembayaran($id)
+    {
         $tuntutan = Tuntutan::where('id', $id)->first();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
         $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
@@ -2034,10 +2018,12 @@ class SekretariatController extends Controller
         $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
         $peringkat = $rujukan[1];
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+
         return view('tuntutan.sekretariat.pembayaran.kemaskini',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik'));
     }
 
-    public function hantarPembayaran(Request $request, $id){
+    public function hantarPembayaran(Request $request, $id)
+    {
         Tuntutan::where('id', $id)
             ->update([
                 'yuran_dibayar'         =>  $request->get('yuran_dibayar'),
@@ -2052,6 +2038,7 @@ class SekretariatController extends Controller
         $status = "Tuntutan ".$no_rujukan_tuntutan." berjaya dikemaskini.";
 
         $tuntutan = Tuntutan::where('status', '8')->orderBy('created_at', 'DESC')->get();
+
         return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status'));
     }
 
@@ -2060,7 +2047,6 @@ class SekretariatController extends Controller
         $tukar_institusi = TukarInstitusi::join('smoku','smoku.id','=','tukar_institusi.smoku_id')
         ->orderBy('tukar_institusi.id', 'DESC')
         ->get(['smoku.*','tukar_institusi.*']);
-        // dd($tukar_institusi);
 
         // $infoipt = InfoIpt::where('jenis_institusi', 'UA')->orderBy('nama_institusi')->get();
         // $infoiptIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get();
@@ -2068,17 +2054,13 @@ class SekretariatController extends Controller
         // $infoiptKK = InfoIpt::where('jenis_institusi', 'KK')->orderBy('nama_institusi')->get();
         // dd($infoipt); 
 
-
         return view('kemaskini.sekretariat.pengajian.kemaskini_tukar_institusi', compact('tukar_institusi'));
     }
 
     public function kemaskiniTukarInstitusi(Request $request, $id)
     {
-        // dd($id);
         $tukar_institusi = TukarInstitusi::updateOrCreate(['smoku_id' => $id]);
-
         $tukar_institusi->status = $request->input('status');
-
         $tukar_institusi->save();
 
         // Redirect to the original page
