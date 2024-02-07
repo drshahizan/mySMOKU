@@ -24,7 +24,10 @@ class DashboardController extends Controller
 
         if(Auth::user()->tahap=='1')
         {
-            return redirect()->route('pelajar.dashboard');
+            if (Auth::user()->data_migrate == '1')
+                return redirect()->route('kemaskini.emel.katalaluan');
+            else
+                return redirect()->route('pelajar.dashboard');
         }
         else if(Auth::user()->tahap=='2')
         {
@@ -34,8 +37,7 @@ class DashboardController extends Controller
             }
             else{
                 return redirect()->route('maklumat.bank')->with('notifikasi', 'Sila kemaskini maklumat bank institusi terlebih dahulu.');
-            }
-            
+            }  
         }
         else if(Auth::user()->tahap=='3')
         {
@@ -56,22 +58,18 @@ class DashboardController extends Controller
 
     public function store(Request $request)
     {  
-
-        if($request->hasFile('profile_photo_path')){
-            
+        if($request->hasFile('profile_photo_path'))
+        {
             $filename = strval(Auth::user()->nokp) . "_" . $request->profile_photo_path->getClientOriginalName();
-            //dd($filename);
             //$request->profile_photo_path->storeAs('profile_photo_path',$filename,'public');
             $request->profile_photo_path->move('assets/profile_photo_path',$filename);
             //Auth()->user()->update(['profile_photo_path'=>$filename]);
             DB::table('users')->where('nokp',Auth::user()->nokp)
             ->update([
-            'profile_photo_path' => $filename,
-            
-            
-        ]);
-            
+                'profile_photo_path' => $filename,
+            ]); 
         }
+
         return back()->with('success', 'Avatar updated successfully.');
     }
 }

@@ -79,7 +79,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('profil', [ProfilController::class, 'index'])->name('tukar.katalaluan');
     Route::post('profil/simpan', [ProfilController::class, 'simpanProfil'])->name('simpan.profil');
     Route::post('katalaluan/simpan', [ProfilController::class, 'simpanKatalaluan'])->name('simpan.katalaluan');
-    Route::get('kemaskini/emel-katalaluan', [ProfilController::class, 'kemaskiniEmelKatalaluan']);
+    Route::get('kemaskini/emel-katalaluan', [ProfilController::class, 'kemaskiniEmelKatalaluan'])->name('kemaskini.emel.katalaluan');
     Route::post('simpan/kemaskini/emel-katalaluan', [ProfilController::class, 'simpanEmelKatalaluan'])->name('hantar.emel.katalaluan');
 
     //Permohonan Pelajar

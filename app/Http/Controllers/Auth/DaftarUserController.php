@@ -25,9 +25,7 @@ class DaftarUserController extends Controller
 
     public function semak(Request $request)
     {
-
         //using api smoku
-        
         $request->validate([
             'no_kp' => ['required', 'string'],
             
