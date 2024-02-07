@@ -12,18 +12,14 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfilController extends Controller
 {
-    
     public function index()
     {
         $user = User::all()->where('no_kp',Auth::user()->no_kp);
-        //dd($user);
         return view('kemaskini.profil_diri', compact('user'));
-        
     }
 
     public function simpanProfil(Request $request)
     {  
-
         if($request->hasFile('profile_photo_path')){
             
             $filename = strval(Auth::user()->no_kp) . "_" . $request->profile_photo_path->getClientOriginalName();
@@ -63,7 +59,6 @@ class ProfilController extends Controller
 
     public function simpanKatalaluan(Request $request)
     {  
-        //dd('sini');
         $customMessages = [
             'password.required' => 'Medan kata laluan diperlukan.',
             'password_old.required' => 'Medan kata laluan lama diperlukan.',
@@ -96,5 +91,11 @@ class ProfilController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login')->with('berjaya', 'Berjaya tukar kata laluan, sila log masuk menggunakan kata laluan baru.');
+    }
+
+    public function kemaskiniEmelKatalaluan()
+    {
+        $user = User::all()->where('no_kp',Auth::user()->no_kp);
+        return view('kemaskini.emel_password', compact('user'));
     }
 }

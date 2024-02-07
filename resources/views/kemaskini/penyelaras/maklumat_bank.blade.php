@@ -1,6 +1,7 @@
 <x-default-layout>
     <link rel="stylesheet" href="/assets/css/saringan.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    
     <style>
         .maklumat{
             width: 100%!important;

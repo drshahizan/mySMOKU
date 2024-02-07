@@ -20,10 +20,7 @@ use App\Http\Controllers\TuntutanController;
 use App\Http\Controllers\PentadbirController;
 use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Mail;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\PelajarController;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,8 +64,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/tuntutanESP', [MaklumatESPController::class, 'tuntutan'])->name('tuntutan.esp');
     Route::post('/tuntutanESP', [MaklumatESPController::class, 'hantarTuntutan'])->name('maklumat_tuntutan.esp');
 
-    // Route::get('/', [DashboardController::class, 'index']);
-
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/pelajar/dashboard', [PelajarController::class, 'index'])->name('pelajar.dashboard');
     Route::get('lapor/tamat/pengajian', [PelajarController::class, 'tamatPengajian'])->name('tamat.pengajian');
@@ -84,6 +79,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('profil', [ProfilController::class, 'index'])->name('tukar.katalaluan');
     Route::post('profil/simpan', [ProfilController::class, 'simpanProfil'])->name('simpan.profil');
     Route::post('katalaluan/simpan', [ProfilController::class, 'simpanKatalaluan'])->name('simpan.katalaluan');
+    Route::get('kemaskini/emel-katalaluan', [ProfilController::class, 'kemaskiniEmelKatalaluan']);
 
     //Permohonan Pelajar
     Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
