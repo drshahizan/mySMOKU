@@ -1205,7 +1205,11 @@ class SekretariatController extends Controller
         $tuntutan = $query->orderBy('tarikh_hantar', 'desc')->get();
         $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
 
-        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusi','tuntutan','status_kod','status'));
+        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+
+        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusiPengajian','institusiPengajianUA','institusiPengajianPPK','institusi','tuntutan','status_kod','status'));
     }
 
     public function saringTuntutanKedua(Request $request, $id)
@@ -1223,6 +1227,7 @@ class SekretariatController extends Controller
             $tuntutan_item =TuntutanItem::where('tuntutan_id', $id)->get();
         }
 
+        // 1) LAYAK
         if($request->get('submit')=="Layak"){
             Tuntutan::where('id', $id)
                 ->update([
@@ -1257,13 +1262,44 @@ class SekretariatController extends Controller
                 }
             }
 
-            $saringan = new SaringanTuntutan([
-                'tuntutan_id'               =>  $id,
-                'saringan_kep_peperiksaan'  =>  $request->get('peperiksaan'),
-                'catatan'                   =>  $request->get('catatan'),
-                'status'                    =>  6,
-            ]);
-            $saringan->save();
+
+            // Check if 'saringan_kep_peperiksaan' is present in the request
+            if ($request->has('peperiksaan')) {
+                // Check if a record with the provided 'tuntutan_id' and 'saringan_kep_peperiksaan' already exists
+                $existingTuntutan = SaringanTuntutan::where('tuntutan_id', $id)
+                    ->where('saringan_kep_peperiksaan', $request->get('peperiksaan'))
+                    ->first();
+
+                if (!$existingTuntutan) {
+                    // Create a new SaringanTuntutan instance with null saringan_kep_peperiksaan
+                    $saringan = new SaringanTuntutan([
+                        'tuntutan_id'               =>  $id,
+                        'saringan_kep_peperiksaan'  =>  null,
+                        'catatan'                   =>  $request->get('catatan'),
+                        'status'                    =>  6,
+                    ]);
+                    $saringan->save();
+                } else {
+                    // Create a new SaringanTuntutan instance with the provided values
+                    $saringan = new SaringanTuntutan([
+                        'tuntutan_id'               =>  $id,
+                        'saringan_kep_peperiksaan'  =>  $request->get('peperiksaan'),
+                        'catatan'                   =>  $request->get('catatan'),
+                        'status'                    =>  6,
+                    ]);
+                    $saringan->save();
+                }
+            } else {
+                // Create a new SaringanTuntutan instance with null saringan_kep_peperiksaan
+                $saringan = new SaringanTuntutan([
+                    'tuntutan_id'               =>  $id,
+                    'saringan_kep_peperiksaan'  =>  null,
+                    'catatan'                   =>  $request->get('catatan'),
+                    'status'                    =>  6,
+                ]);
+                $saringan->save();
+            }
+
 
             $status_rekod = new SejarahTuntutan([
                 'smoku_id'          =>  $smoku_id,
@@ -1285,6 +1321,7 @@ class SekretariatController extends Controller
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Layak'.";
         }
+        // 2) TIDAK LAYAK
         elseif($request->get('submit')=="TidakLayak"){
             Tuntutan::where('id', $id)
                 ->update([
@@ -1317,19 +1354,57 @@ class SekretariatController extends Controller
                 }
             }
 
-            $saringan = new SaringanTuntutan([
-                'tuntutan_id'               =>  $id,
-                'saringan_kep_peperiksaan'  =>  $request->get('peperiksaan'),
-                'catatan'                   =>  $request->get('catatan'),
-                'status'                    =>  7,
-            ]);
-            $saringan->save();
+            // $saringan = new SaringanTuntutan([
+            //     'tuntutan_id'               =>  $id,
+            //     'saringan_kep_peperiksaan'  =>  $request->get('peperiksaan'),
+            //     'catatan'                   =>  $request->get('catatan'),
+            //     'status'                    =>  7,
+            // ]);
+            // $saringan->save();
+
+            // Check if 'saringan_kep_peperiksaan' is present in the request
+            if ($request->has('peperiksaan')) {
+                // Check if a record with the provided 'tuntutan_id' and 'saringan_kep_peperiksaan' already exists
+                $existingTuntutan = SaringanTuntutan::where('tuntutan_id', $id)
+                    ->where('saringan_kep_peperiksaan', $request->get('peperiksaan'))
+                    ->first();
+
+                if (!$existingTuntutan) {
+                    // Create a new SaringanTuntutan instance with null saringan_kep_peperiksaan
+                    $saringan = new SaringanTuntutan([
+                        'tuntutan_id'               =>  $id,
+                        'saringan_kep_peperiksaan'  =>  null,
+                        'catatan'                   =>  $request->get('catatan'),
+                        'status'                    =>  7,
+                    ]);
+                    $saringan->save();
+                } else {
+                    // Create a new SaringanTuntutan instance with the provided values
+                    $saringan = new SaringanTuntutan([
+                        'tuntutan_id'               =>  $id,
+                        'saringan_kep_peperiksaan'  =>  $request->get('peperiksaan'),
+                        'catatan'                   =>  $request->get('catatan'),
+                        'status'                    =>  7,
+                    ]);
+                    $saringan->save();
+                }
+            } else {
+                // Create a new SaringanTuntutan instance with null saringan_kep_peperiksaan
+                $saringan = new SaringanTuntutan([
+                    'tuntutan_id'               =>  $id,
+                    'saringan_kep_peperiksaan'  =>  null,
+                    'catatan'                   =>  $request->get('catatan'),
+                    'status'                    =>  7,
+                ]);
+                $saringan->save();
+            }
+
 
             $status_rekod = new SejarahTuntutan([
                 'smoku_id'          =>  $smoku_id,
                 'tuntutan_id'       =>  $id,
                 'status'            =>  7,
-                'dilaksanakan_oleh'    =>  Auth::user()->id,
+                'dilaksanakan_oleh' =>  Auth::user()->id,
             ]);
             $status_rekod->save();
 
@@ -1349,6 +1424,7 @@ class SekretariatController extends Controller
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Tidak Layak'.";
         }
+        // 3) DIKEMBALIKAN
         elseif($request->get('submit')=="Kembalikan"){
             Tuntutan::where('id', $id)
                 ->update([
@@ -1381,19 +1457,49 @@ class SekretariatController extends Controller
                 }
             }
 
-            $saringan = new SaringanTuntutan([
-                'tuntutan_id'               =>  $id,
-                'saringan_kep_peperiksaan'  =>  $request->get('peperiksaan'),
-                'catatan'                   =>  $request->get('catatan'),
-                'status'                    =>  5,
-            ]);
-            $saringan->save();
+            // Check if 'saringan_kep_peperiksaan' is present in the request
+            if ($request->has('peperiksaan')) {
+                // Check if a record with the provided 'tuntutan_id' and 'saringan_kep_peperiksaan' already exists
+                $existingTuntutan = SaringanTuntutan::where('tuntutan_id', $id)
+                    ->where('saringan_kep_peperiksaan', $request->get('peperiksaan'))
+                    ->first();
+
+                if (!$existingTuntutan) {
+                    // Create a new SaringanTuntutan instance with null saringan_kep_peperiksaan
+                    $saringan = new SaringanTuntutan([
+                        'tuntutan_id'               =>  $id,
+                        'saringan_kep_peperiksaan'  =>  null,
+                        'catatan'                   =>  $request->get('catatan'),
+                        'status'                    =>  5,
+                    ]);
+                    $saringan->save();
+                } else {
+                    // Create a new SaringanTuntutan instance with the provided values
+                    $saringan = new SaringanTuntutan([
+                        'tuntutan_id'               =>  $id,
+                        'saringan_kep_peperiksaan'  =>  $request->get('peperiksaan'),
+                        'catatan'                   =>  $request->get('catatan'),
+                        'status'                    =>  5,
+                    ]);
+                    $saringan->save();
+                }
+            } else {
+                // Create a new SaringanTuntutan instance with null saringan_kep_peperiksaan
+                $saringan = new SaringanTuntutan([
+                    'tuntutan_id'               =>  $id,
+                    'saringan_kep_peperiksaan'  =>  null,
+                    'catatan'                   =>  $request->get('catatan'),
+                    'status'                    =>  5,
+                ]);
+                $saringan->save();
+            }
+
 
             $status_rekod = new SejarahTuntutan([
-                'smoku_id'      =>  $smoku_id,
-                'tuntutan_id'   =>  $id,
-                'status'        =>  5,
-                'dilaksanakan_oleh'    =>  Auth::user()->id,
+                'smoku_id'          =>  $smoku_id,
+                'tuntutan_id'       =>  $id,
+                'status'            =>  5,
+                'dilaksanakan_oleh' =>  Auth::user()->id,
             ]);
             $status_rekod->save();
 
@@ -1428,35 +1534,6 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusiPengajian','institusiPengajianUA','institusiPengajianPPK','tuntutan','status_kod','status'));
     }
 
-    //Keputusan
-    // public function keputusanTuntutan(Request $request)
-    // {
-    //     $dateRange = $request->input('daterange');
-    //     $status = $request->input('status');
-
-    //     // You can update this query to filter by both date range and status
-    //     $tuntutanQuery = Tuntutan::where('status', '5')
-    //         ->orWhere('status', '6')
-    //         ->orWhere('status', '7');
-
-    //     if (!empty($dateRange)) {
-    //         // Convert the date range format to "YYYY-MM-DD"
-    //         list($start, $end) = explode(' - ', $dateRange);
-    //         $startDate = date('Y-m-d', strtotime(str_replace('/', '-', $start)));
-    //         $endDate = date('Y-m-d', strtotime(str_replace('/', '-', $end)));
-
-    //         $tuntutanQuery->whereBetween('created_at', [$startDate, $endDate]);
-    //     }
-
-    //     if (!empty($status)) {
-    //         $tuntutanQuery->where('status', $status);
-    //     }
-
-    //     $tuntutan = $tuntutanQuery->get();
-
-    //     return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan', compact('tuntutan'));
-    // }
-
     public function keputusanTuntutan(Request $request)
     {
         /*$startDate = $request->input('start_date');
@@ -1489,9 +1566,7 @@ class SekretariatController extends Controller
                     ->whereIn('tuntutan.status', ['5','6','7'])
                     ->orderBy('tuntutan.updated_at', 'desc')
                     ->select('tuntutan.*','smoku_akademik.id_institusi','bk_status.status as keputusan')
-                    ->get();
-        // dd($tuntutan);
-        
+                    ->get();        
 
         $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();

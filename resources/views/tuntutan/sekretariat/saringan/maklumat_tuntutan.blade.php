@@ -99,6 +99,7 @@
                                         $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                         $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
                                         $nama_penaja = DB::table('bk_penaja')->where('id', $akademik->nama_penaja)->value('penaja');
+                                        
                                         // nama pemohon
                                         $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
                                         $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
@@ -126,8 +127,8 @@
                                             }
                                         }
                                         $kursus = implode(' ', $result);
-
                                     @endphp
+
                                     <table class="maklumat">
                                         <tr>
                                             <td><strong>ID Tuntutan</strong></td>
@@ -190,7 +191,7 @@
                                                     <thead class="table-primary">
                                                         <tr>
                                                             <th style="width: 5%;">No.</th>
-                                                            <th style="width: 20%;">Item</th>
+                                                            <th style="width: 20%;">Invois</th>
                                                             <th style="width: 15%;">Keputusan Saringan</th>
                                                             <th style="width: 20%;">No. Resit</th>
                                                             <th style="width: 40%;">Perihal</th>

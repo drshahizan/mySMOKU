@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tuntutan_saringan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tuntutan_id');
-            $table->string('saringan_kep_peperiksaan');
+            $table->string('saringan_kep_peperiksaan')->nullable();
             $table->string('status');
             $table->string('catatan');
             $table->foreign('tuntutan_id')
