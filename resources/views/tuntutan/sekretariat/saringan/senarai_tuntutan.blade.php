@@ -1,25 +1,27 @@
 <x-default-layout>
     <head>
-    <title>Sekretariat BKOKU KPT | Saringan Tuntutan</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <title>Sekretariat BKOKU KPT | Saringan Tuntutan</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="/assets/css/saringan.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-    <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+        <!-- MAIN CSS -->
+        <link rel="stylesheet" href="/assets/css/saringan.css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+
+        <style>
+            .nav{
+                margin-left: 20px!important;
+            }
+        </style>
     </head>
-    <style>
-        .nav{
-            margin-left: 20px!important;
-        }
-    </style>
 
     <!--begin::Page title-->
 	<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
@@ -60,17 +62,19 @@
         </div>
     @endif
     {{-- end alert --}}
+
     <body>
     <!-- Main body part  -->
-    <div id="main-content">
-        <div class="container-fluid">
-            <!-- Page header section  -->
-            <div class="row clearfix">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>Senarai Saringan Tuntutan<br><small>Klik ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
-                        </div>
+        <div id="main-content">
+            <div class="container-fluid">
+                <!-- Page header section  -->
+                <div class="row clearfix">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>Senarai Saringan Tuntutan<br><small>Klik ID Permohonan untuk melakukan saringan selanjutnya</small></h2>
+                            </div>
+
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="bkoku-tab" data-toggle="tab" data-target="#bkoku" type="button" role="tab" aria-controls="bkoku" aria-selected="true">BKOKU</button>
@@ -82,6 +86,7 @@
                                     <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
                                 </li>
                             </ul>
+
                             <!--begin::Card title-->
                             <div class="card-title">
                                 <!--begin::Search-->
@@ -91,6 +96,7 @@
                                 <!--end::Search-->
                             </div>
                             <!--begin::Card title-->
+
                             <!--begin::Card toolbar-->
                             <div class="card-toolbar" style="margin-bottom: 0px!important; margin-top: 10px!important;">
                                 <!--begin::Toolbar-->
@@ -138,6 +144,7 @@
                                 <!--end::Group actions-->
                             </div>
                             <!--end::Card toolbar-->
+
                             <div class="tab-content" id="myTabContent">
                                 {{-- BKOKU--}}
                                 <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
@@ -499,158 +506,155 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
-    <style>
-        .custom-width-select {
-            width: 400px !important; /* Important to override other styles */
-        }
-        .form-select {
-                margin-left: 10px !important; 
-        }
-    </style>
-    <script>
 
-        $(document).ready(function() {
-			$('.js-example-basic-single').select2();
-		});
+        <style>
+            .custom-width-select {
+                width: 400px !important; /* Important to override other styles */
+            }
+            .form-select {
+                    margin-left: 10px !important; 
+            }
+        </style>
 
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
-    <script>
-        // Initialize JavaScript variables with data from Blade
-        var bkokuList = @json($institusiPengajian);
-        var bkokuUAList = @json($institusiPengajianUA);
-        var ppkList = @json($institusiPengajianPPK);
-    
-        $(document).ready(function() {
-            $('.none-container').show(); // Hide export elements
-    
-            // Add an event listener for tab clicks
-            $('.nav-link').on('click', function() {
-                // Get the ID of the active tab
-                var activeTabId = $(this).attr('id');
-    
-                // Clear filters when changing tabs
-                clearFilters();
-    
-                // Update the institution dropdown based on the active tab
-                switch (activeTabId) {
-                    case 'bkoku-tab':
-                        updateInstitusiDropdown(bkokuList);
-                        break;
-                    case 'bkokuUA-tab':
-                        updateInstitusiDropdown(bkokuUAList);
-                        break;
-                    case 'ppk-tab':
-                        updateInstitusiDropdown(ppkList);
-                        break;
-                    // Add more cases if you have additional tabs
+        <script>
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
+        </script>
+        
+        <script>
+            // Initialize JavaScript variables with data from Blade
+            var bkokuList = @json($institusiPengajian);
+            var bkokuUAList = @json($institusiPengajianUA);
+            var ppkList = @json($institusiPengajianPPK);
+        
+            $(document).ready(function() {
+                $('.none-container').show(); // Hide export elements
+        
+                // Add an event listener for tab clicks
+                $('.nav-link').on('click', function() {
+                    // Get the ID of the active tab
+                    var activeTabId = $(this).attr('id');
+        
+                    // Clear filters when changing tabs
+                    clearFilters();
+        
+                    // Update the institution dropdown based on the active tab
+                    switch (activeTabId) {
+                        case 'bkoku-tab':
+                            updateInstitusiDropdown(bkokuList);
+                            break;
+                        case 'bkokuUA-tab':
+                            updateInstitusiDropdown(bkokuUAList);
+                            break;
+                        case 'ppk-tab':
+                            updateInstitusiDropdown(ppkList);
+                            break;
+                        // Add more cases if you have additional tabs
+                    }
+                });
+        
+                // Trigger the function for the default active tab (bkoku-tab)
+                updateInstitusiDropdown(bkokuList);
+        
+                // Function to clear filters for all tables
+                function clearFilters() {
+                    if (datatable1) {
+                        datatable1.search('').columns().search('').draw();
+                    }
+                    if (datatable) {
+                        datatable.search('').columns().search('').draw();
+                    }
+                    if (datatable2) {
+                        datatable2.search('').columns().search('').draw();
+                    }
+                }
+        
+        
+                // Function to update the institution dropdown
+                function updateInstitusiDropdown(institusiList) {
+                    // Clear existing options
+                    $('#institusiDropdown').empty();
+        
+                    // Add default option
+                    $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
+        
+                    // Add options based on the selected tab
+                    for (var i = 0; i < institusiList.length; i++) {
+                        $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
+                    }
                 }
             });
-    
-            // Trigger the function for the default active tab (bkoku-tab)
-            updateInstitusiDropdown(bkokuList);
-    
-            // Function to clear filters for all tables
-            function clearFilters() {
-                if (datatable1) {
-                    datatable1.search('').columns().search('').draw();
-                }
-                if (datatable) {
-                    datatable.search('').columns().search('').draw();
-                }
-                if (datatable2) {
-                    datatable2.search('').columns().search('').draw();
-                }
-            }
-    
-    
-            // Function to update the institution dropdown
-            function updateInstitusiDropdown(institusiList) {
-                // Clear existing options
-                $('#institusiDropdown').empty();
-    
-                // Add default option
-                $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
-    
-                // Add options based on the selected tab
-                for (var i = 0; i < institusiList.length; i++) {
-                    $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
-                }
-            }
-        });
-    </script>
-     
-    <script>
-        // Declare datatables in a higher scope to make them accessible
-        var datatable1, datatable, datatable2;
-    
-        $(document).ready(function() {
-            // Initialize DataTables
-            initDataTable('#sortTable1', 'datatable1');
-            initDataTable('#sortTable1a', 'datatable');
-            initDataTable('#sortTable2', 'datatable2');
-    
-            // Log data for all tables
-            logTableData('Table 1 Data:', datatable1);
-            logTableData('Table 2 Data:', datatable);
-            logTableData('Table 3 Data:', datatable2);
-        });
-    
-        function initDataTable(tableId, variableName) {
-            // Check if the datatable is already initialized
-            if ($.fn.DataTable.isDataTable(tableId)) {
-                // Destroy the existing DataTable instance
-                $(tableId).DataTable().destroy();
-            }
-    
-            // Initialize the datatable and assign it to the global variable
-            window[variableName] = $(tableId).DataTable({
-                ordering: true, // Enable manual sorting
-                order: [], // Disable initial sorting
-                columnDefs: [
-                    { orderable: false, targets: [0] }
-                ]
+        </script>
+        
+        <script>
+            // Declare datatables in a higher scope to make them accessible
+            var datatable1, datatable, datatable2;
+        
+            $(document).ready(function() {
+                // Initialize DataTables
+                initDataTable('#sortTable1', 'datatable1');
+                initDataTable('#sortTable1a', 'datatable');
+                initDataTable('#sortTable2', 'datatable2');
+        
+                // Log data for all tables
+                logTableData('Table 1 Data:', datatable1);
+                logTableData('Table 2 Data:', datatable);
+                logTableData('Table 3 Data:', datatable2);
             });
-        }
-    
-        function applyFilter() {
-            var selectedInstitusi = $('[name="institusi"]').val();
-    
-            // Apply search filter and log data for all tables
-            applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
-            applyAndLogFilter('Table 2', datatable, selectedInstitusi);
-            applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
-    
-            // Update the export link with the selected institusi for Table 2
-            var exportLink = document.getElementById('exportLink');
-            exportLink.href = "{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
-        }
-    
-        function applyAndLogFilter(tableName, table, filterValue) {
-            // Apply search filter to the table
-            table.column(2).search(filterValue).draw();
-    
-            // Log filtered data
-            console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
-    
-            // Go to the first page for the table
-            table.page(0).draw(false);
-    
-            // Log the data of visible rows on the first page for the table
-            console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
-        }
-    
-        function logTableData(message, table) {
-            console.log(message, table.rows().data().toArray());
-        }
-    </script>
-
+        
+            function initDataTable(tableId, variableName) {
+                // Check if the datatable is already initialized
+                if ($.fn.DataTable.isDataTable(tableId)) {
+                    // Destroy the existing DataTable instance
+                    $(tableId).DataTable().destroy();
+                }
+        
+                // Initialize the datatable and assign it to the global variable
+                window[variableName] = $(tableId).DataTable({
+                    ordering: true, // Enable manual sorting
+                    order: [], // Disable initial sorting
+                    columnDefs: [
+                        { orderable: false, targets: [0] }
+                    ]
+                });
+            }
+        
+            function applyFilter() {
+                var selectedInstitusi = $('[name="institusi"]').val();
+        
+                // Apply search filter and log data for all tables
+                applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
+                applyAndLogFilter('Table 2', datatable, selectedInstitusi);
+                applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
+        
+                // Update the export link with the selected institusi for Table 2
+                var exportLink = document.getElementById('exportLink');
+                exportLink.href = "{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+            }
+        
+            function applyAndLogFilter(tableName, table, filterValue) {
+                // Apply search filter to the table
+                table.column(2).search(filterValue).draw();
+        
+                // Log filtered data
+                console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
+        
+                // Go to the first page for the table
+                table.page(0).draw(false);
+        
+                // Log the data of visible rows on the first page for the table
+                console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
+            }
+        
+            function logTableData(message, table) {
+                console.log(message, table.rows().data().toArray());
+            }
+        </script>
     </body>
 </x-default-layout>

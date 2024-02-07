@@ -29,6 +29,7 @@ class User extends Authenticatable
         'jawatan',
         'id_institusi',
         'status',
+        'data_migrate'.
         'remember_token',
         'profile_photo_path',
     ];

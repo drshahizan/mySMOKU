@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('jawatan')->nullable();
             $table->string('id_institusi')->nullable();
             $table->string('status')->nullable();
+            $table->string('data_migrate')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
