@@ -98,4 +98,25 @@ class ProfilController extends Controller
         $user = User::all()->where('no_kp',Auth::user()->no_kp);
         return view('kemaskini.emel_password', compact('user'));
     }
+
+    public function simpanEmelKatalaluan(Request $request)
+    {
+        $user = User::where('no_kp', Auth::user()->no_kp)->first();
+
+        // Update email
+        $user->email = $request->input('email');
+
+        // Update password if provided
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+
+        //Update data migrate
+        $user->data_migrate = 2;
+
+        $user->save();
+
+        return redirect('/login')->with('success', 'Maklumat emel dan kata laluan telah dikemaskini.');
+    }
+
 }

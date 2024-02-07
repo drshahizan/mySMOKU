@@ -27,7 +27,7 @@
                             <!--begin::Card body-->
                             <div class="card-body pt-0 pb-5">
                                 <!--begin::Form-->
-                                <form action="{{route('simpan.katalaluan')}}" method="POST">
+                                <form action="{{route('hantar.emel.katalaluan')}}" method="POST">
                                 @csrf
                                     @foreach($user as $user)
                                         <!--begin::Row-->
@@ -41,7 +41,7 @@
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <div class="position-relative mb-3">
-                                                        <input min="12" class="form-control bg-transparent" type="text" placeholder="No Kad Pengenalan" id="no_ic" name="no_ic" value="{{ $user->no_kp }}"/>
+                                                        <input min="12" class="form-control bg-transparent" type="text" placeholder="No Kad Pengenalan" id="no_ic" name="no_ic" value="{{ $user->no_kp }}" readonly/>
                                                     </div>
                                                     <!--end::Input-->
                                                 </div>
@@ -70,7 +70,7 @@
                                                     </label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
-                                                    <input type="email" class="form-control form-control-solid" placeholder="" name="email" value="{{ $user->email }}" />
+                                                    <input type="email" class="form-control form-control-solid" placeholder="" name="email" value="{{ $user->email }}" required/>
                                                     <!--end::Input-->
                                                 </div>
                                                 <!--end::Input group-->
@@ -94,8 +94,7 @@
                                                         <div class="mb-1">
                                                             <!--begin::Input wrapper-->
                                                             <div class="position-relative mb-3">
-                                                                <input min="12" class="form-control bg-transparent" type="password" placeholder="Katalaluan" name="password" autocomplete="off"/>
-
+                                                                <input min="12" class="form-control bg-transparent" type="password" placeholder="Katalaluan" name="password" autocomplete="off" required/>
                                                                 <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
                                                                     <i class="bi bi-eye-slash fs-2"></i>
                                                                     <i class="bi bi-eye fs-2 d-none"></i>
@@ -129,7 +128,7 @@
                                                             <!--begin::Input wrapper-->
                                                             <div class="position-relative mb-3">
                                                                 <!--begin::Repeat Password-->
-                                                                <input placeholder="Pengesahan Katalaluan" name="password_confirmation" type="password" autocomplete="off" class="form-control bg-transparent"/>
+                                                                <input placeholder="Pengesahan Katalaluan" name="password_confirmation" type="password" autocomplete="off" class="form-control bg-transparent" required/>
                                                                 <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
                                                                     <i class="bi bi-eye-slash fs-2"></i>
                                                                     <i class="bi bi-eye fs-2 d-none"></i>
