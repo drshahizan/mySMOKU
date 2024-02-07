@@ -147,7 +147,7 @@
                                                     <div class="form-control-arrow">
                                                         <select name="kod_bank" class="form-control search" data-control="select2" data-hide-search="true" data-placeholder="Pilih Bank">
                                                             <option value="">Pilih Bank</option>
-                                                            @foreach ($institusi->nama_institusi->sortBy('nama_bank') as $senaraiBank)
+                                                            @foreach ($senarai_bank->sortBy('nama_bank') as $senaraiBank)
                                                                 <option value="{{ $senaraiBank->kod_bank }}" {{ old('kod_bank', optional($bank)->bank_id) == $senaraiBank->kod_bank ? 'selected' : '' }}>
                                                                     {{ $senaraiBank->nama_bank }}
                                                                 </option>
