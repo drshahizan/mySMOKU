@@ -207,7 +207,7 @@ class PentadbirController extends Controller
 
         try {
             $client = new Client();
-            $url = 'http://espbstg.mohe.gov.my/api/studentsInfo.php';
+            $url = 'https://espbstg.mohe.gov.my/api/studentsInfo.php';
             // $url = 'http://espbdev.mohe.gov.my/api/studentsInfo.php';
             $response = $client->get($url);
 
