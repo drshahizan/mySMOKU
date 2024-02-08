@@ -185,7 +185,7 @@ class PentadbirController extends Controller
 
         try {
             $client = new Client();
-            $url = 'https://10.29.216.151/api/bkoku/request-MQR';
+            $url = '10.29.216.151/api/bkoku/request-MQR';
             $response = $client->post($url);
 
             $statusCode = $response->getStatusCode();
