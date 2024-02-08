@@ -173,7 +173,8 @@ class KemaskiniController extends Controller
         }     
     }
 
-    public function paparEmel($id){
+    public function paparEmel($id)
+    {
         $emel = EmelKemaskini::where('id',$id)->first();
         return view('kemaskini.sekretariat.emel.papar_emel',compact('emel'));
     }

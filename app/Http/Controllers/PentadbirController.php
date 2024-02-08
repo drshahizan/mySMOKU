@@ -71,16 +71,11 @@ class PentadbirController extends Controller
             }
             $user = User::create($userData);
 
-
-            // ADD FOR PROD
-            return redirect()->route('daftarpengguna');
-
-            // COMMENT PROD
-            // $email = $request->email;
-            // $no_kp = $request->no_kp;
-            // Mail::to($email)->send(new MailDaftarPentadbir($email,$no_kp,$password));
+            $email = $request->email;
+            $no_kp = $request->no_kp;
+            Mail::to($email)->send(new MailDaftarPentadbir($email,$no_kp,$password));
             
-            // return response()->json(['message' => 'Emel notifikasi telah dihantar kepada ' . $request->nama]);
+            return response()->json(['message' => 'Emel notifikasi telah dihantar kepada ' . $request->nama]);
         } 
         else {  
             if($request->input('status'))
@@ -308,26 +303,25 @@ class PentadbirController extends Controller
         ->whereNotNull('email_verified_at')
         ->get(); 
         
-        // COMMENT PROD
-        // $emailmain = "bkoku@mohe.gov.my";
-        // $bcc = $users->pluck('email')->toArray();
+        $emailmain = "bkoku@mohe.gov.my";
+        $bcc = $users->pluck('email')->toArray();
         
-        // // Validate each email address
-        // $invalidEmails = [];
-        // foreach ($bcc as $email) {
-        //     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        //         $invalidEmails[] = $email;
-        //     }
-        // }
+        // Validate each email address
+        $invalidEmails = [];
+        foreach ($bcc as $email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $invalidEmails[] = $email;
+            }
+        }
 
-        // if (empty($invalidEmails)) {
-        //     Mail::to($emailmain)->bcc($bcc)->send(new HebahanIklan($catatan)); 
-        // } 
-        // else {
-        //     foreach ($invalidEmails as $invalidEmail) {
-        //          Log::error('Invalid email address: ' . $invalidEmail);
-        //     }
-        // }
+        if (empty($invalidEmails)) {
+            Mail::to($emailmain)->bcc($bcc)->send(new HebahanIklan($catatan)); 
+        } 
+        else {
+            foreach ($invalidEmails as $invalidEmail) {
+                 Log::error('Invalid email address: ' . $invalidEmail);
+            }
+        }
   
         return redirect()->route('tarikh');
     }
@@ -376,7 +370,7 @@ class PentadbirController extends Controller
     {
         $namaInstitusi = $request->input('nama_institusi');
         $infoIpt = InfoIpt::where('nama_institusi', $namaInstitusi)->first();
-        
+
         if ($infoIpt) {
             return response()->json(['institusi_esp' => $infoIpt->institusi_esp]);
         } else {

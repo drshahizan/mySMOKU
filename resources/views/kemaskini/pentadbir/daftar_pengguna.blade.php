@@ -445,20 +445,10 @@
 							</div>
 						</div>
 					</div>
-					<!--end::Modal - Customers - Add-->
-					
-					<!--end::Modals-->
 				</div>
 				<!--end::Content container-->
 			</div>
 			<!--end::Content-->
-				
-
-
-			
-
-
-
 		</div>
 	</div>
 
@@ -494,8 +484,6 @@
 			}
 			});
 		// });
-		
-
 	</script>
 
 	<script>
@@ -517,36 +505,28 @@
 				}
 			});
 		});
-	
-		
-	
 	</script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script>
-	// Check if there is a flash message
-	@if(session('message'))
-		Swal.fire({
-			icon: 'success',
-			title: 'Berjaya!',
-			text: ' {!! session('message') !!}',
-			confirmButtonText: 'OK'
-		});
-	@endif
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script>
+		// Check if there is a flash message
+		@if(session('message'))
+			Swal.fire({
+				icon: 'success',
+				title: 'Berjaya!',
+				text: ' {!! session('message') !!}',
+				confirmButtonText: 'OK'
+			});
+		@endif
 
-	// Check if there is a flash message
-	@if(session('tidak'))
-		Swal.fire({
-			icon: 'error',
-			title: 'Tidak Aktif!',
-			text: ' {!! session('tidak') !!}',
-			confirmButtonText: 'OK'
-		});
-	@endif
-
-
-
-		
-</script>
-
+		// Check if there is a flash message
+		@if(session('tidak'))
+			Swal.fire({
+				icon: 'error',
+				title: 'Tidak Aktif!',
+				text: ' {!! session('tidak') !!}',
+				confirmButtonText: 'OK'
+			});
+		@endif	
+	</script>
 </x-default-layout>
