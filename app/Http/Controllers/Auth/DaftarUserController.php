@@ -20,6 +20,7 @@ class DaftarUserController extends Controller
     {   
         $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
         $catatan = $iklan->catatan ?? "";
+
         return view('pages.auth.register', compact('catatan'));
     }
 
@@ -31,12 +32,11 @@ class DaftarUserController extends Controller
             
         ]);
 
-
         $nokp_in = $request->no_kp;
         $user = User::where('no_kp', $nokp_in)->first();
-        if (!$user) {
-        
 
+        if (!$user) 
+        {
             $headers = [
                 'Cache-Control' => 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
                 'Content-Type' => 'application/json',
@@ -84,7 +84,6 @@ class DaftarUserController extends Controller
                 } else {
                     $kod_hubungan = null;
                 }
-                //dd($kod_hubungan);
 
                 Smoku::updateOrInsert(
                     ['no_kp' => $dataField['NO_ID']], // Condition to find the record
@@ -133,11 +132,9 @@ class DaftarUserController extends Controller
                 ->with('message', $nokp_in. ' Bukan OKU yang berdaftar dengan JKM.');
             }
 
-        }else{
-
-            return redirect()->route('login')
-                ->with('message',  ' Maklumat pendaftaran '.$nokp_in.' telah wujud.');
-
+        }
+        else{
+            return redirect()->route('login')->with('message',  ' Maklumat pendaftaran '.$nokp_in.' telah wujud.');
         } 
         
         /*
@@ -167,6 +164,5 @@ class DaftarUserController extends Controller
             }
             
         */
-
     }
 }

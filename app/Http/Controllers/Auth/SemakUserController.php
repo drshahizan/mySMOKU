@@ -11,11 +11,8 @@ use App\Models\Kursus;
 use App\Models\Akademik;
 use App\Models\TarikhIklan;
 
-
-
 class SemakUserController extends Controller
 {
-
     public function index(){
 
         addJavascriptFile('/assets/js/custom/authentication/semak/general.js');
@@ -34,8 +31,8 @@ class SemakUserController extends Controller
    }
 
 
-   public function getPeringkat($ipt=0){
-
+   public function getPeringkat($ipt=0)
+   {
         $peringkatData['data'] = Kursus::select('bk_kursus.kod_peringkat','bk_peringkat_pengajian.peringkat')
             ->join('bk_peringkat_pengajian', function ($join) {
                 $join->on('bk_kursus.kod_peringkat', '=', 'bk_peringkat_pengajian.kod_peringkat'); })
@@ -44,11 +41,10 @@ class SemakUserController extends Controller
             ->orderBy('bk_kursus.kod_peringkat','asc')
             ->get();
             return response()->json($peringkatData);
-
     }
 
-    public function getKursus($kodperingkat=0,$ipt=0){
-
+    public function getKursus($kodperingkat=0,$ipt=0)
+    {
         $kursusData['data'] = Kursus::orderby("nama_kursus","asc")
             ->where('kod_peringkat',$kodperingkat)
             ->where('id_institusi',$ipt)
@@ -56,8 +52,7 @@ class SemakUserController extends Controller
             ->select('nama_kursus', 'kod_nec', 'bidang')
             ->get();
     
-            return response()->json($kursusData);
-    
+            return response()->json($kursusData); 
     }
 
     public function store(Request $request)
@@ -84,7 +79,8 @@ class SemakUserController extends Controller
             }
         
             return redirect()->route('login')->with('message', $message);
-        } else {
+        } 
+        else {
             
             Akademik::updateOrCreate(
                 ['smoku_id' => $request->session()->get('id'), 'status' => 1], // Condition to find the record
@@ -97,7 +93,6 @@ class SemakUserController extends Controller
             );
         
             return redirect()->route('daftarlayak');
-        }
-               
+        }  
     }  
 }

@@ -24,14 +24,12 @@ class RegisteredUserController extends Controller
      */
     public function create(Request $request)
     {
-        
         addJavascriptFile('assets/js/custom/authentication/sign-up/general.js');
         $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
         $catatan = $iklan->catatan ?? "";
 
         $nokp = $request->session()->get('no_kp');
         $smoku = Smoku::all()->where('no_kp', $nokp);
-        //dd($smoku);
 
         return view('pages.auth.daftarlayak', compact('smoku','catatan'));
     }
@@ -65,9 +63,7 @@ class RegisteredUserController extends Controller
         //UPDATE EMAIL IF EMAIL SMOKU NULL
             Smoku::where('no_kp' ,$request->no_kp)
             ->update([
-
             'email' => $request->email,
-            
         ]);
         
         //TUTUP NI SEBAB NANTI DIA REDIRECT TO DASHBOARD
@@ -75,11 +71,11 @@ class RegisteredUserController extends Controller
         // Auth::login($user);
         // return redirect(RouteServiceProvider::HOME);
 
-        //$user->save();
-        $email = $request->email;
-        $no_kp = $request->no_kp;
+        // COMMENT PROD
+        // $email = $request->email;
+        // $no_kp = $request->no_kp;
+        // Mail::to($email)->send(new MaildaftarPengguna($email,$no_kp));
 
-        Mail::to($email)->send(new MaildaftarPengguna($email,$no_kp));
         //return redirect()->route('login')->with('berjaya', 'Sila semak emel '.$email.' untuk pengesahan akaun.');
     }
 }

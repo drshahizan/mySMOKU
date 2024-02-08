@@ -14,7 +14,6 @@ class EmailVerificationNotificationController extends Controller
         //$user = User::find($id);
         $user = User::where('no_kp', '=', $id)->first();
         // $test=sha1($user->email);
-        // dd($test, $hash);
 
         if (!$user || sha1($user->email) !== $hash) {
             // Invalid verification link
@@ -28,5 +27,4 @@ class EmailVerificationNotificationController extends Controller
         // Optionally, show a success message
         return redirect('/login')->with('success', 'Emel berjaya disahkan. Anda boleh log masuk sekarang.');
     }
-
 }
