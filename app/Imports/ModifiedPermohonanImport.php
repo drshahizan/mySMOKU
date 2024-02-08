@@ -28,7 +28,7 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
                 'tarikh_baucer' => $this->convertExcelDate($row['tarikh_baucar']),
             ];
         }
-        // Update the 'status' column in the permohonan table to 8
+        // Go to private function to update the 'status' column in the permohonan table to 8
         $this->updateStatus();
     }
 
@@ -39,7 +39,6 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
 
     protected function convertExcelDate($excelDate)
     {
-        // Convert Excel date to Carbon date
         return Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($excelDate));
     }
 
@@ -54,7 +53,8 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
             $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
 
             // Check if the required attributes are filled
-            if (!empty($yuranDibayar) && !empty($wangSakuDibayar) && !empty($noBaucer) && !empty($perihal) && !empty($tarikhBaucer)) {
+            if (!empty($yuranDibayar) && !empty($wangSakuDibayar) && !empty($noBaucer) && !empty($perihal) && !empty($tarikhBaucer)) 
+            {
                 // Update the 'status' column to 8 for the permohonan record with matching 'no_rujukan_permohonan'
                 Permohonan::where('no_rujukan_permohonan', $noRujukan)
                     ->update(['status' => 8]);

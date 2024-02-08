@@ -51,7 +51,6 @@ class PentadbirController extends Controller
         for ($i = 0; $i < $password_length; $i++) {
             $password .= $characters[random_int(0, strlen($characters) - 1)];
         }
-        // dd($password);
         
         if ($user === null) {
 
@@ -70,21 +69,24 @@ class PentadbirController extends Controller
             } elseif ($request->input('id_institusippk')) {
                 $userData['id_institusi'] = $request->id_institusippk;
             }
-            
             $user = User::create($userData);
 
-            $email = $request->email;
-            $no_kp = $request->no_kp;
-            Mail::to($email)->send(new MailDaftarPentadbir($email,$no_kp,$password));
+
+            // ADD FOR PROD
+            return redirect()->route('daftarpengguna');
+
+            // COMMENT PROD
+            // $email = $request->email;
+            // $no_kp = $request->no_kp;
+            // Mail::to($email)->send(new MailDaftarPentadbir($email,$no_kp,$password));
             
-            return response()->json(['message' => 'Emel notifikasi telah dihantar kepada ' . $request->nama]);
+            // return response()->json(['message' => 'Emel notifikasi telah dihantar kepada ' . $request->nama]);
         } 
         else {  
             if($request->input('status'))
             {
                 // Check if the status is different from the current user status
                 if ($request->status != $user->status) {
-                    // dd('Status is different');
                     // If the user exists, update their information with status change
                     $user->update([
                         'nama' => strtoupper($request->nama),
@@ -241,7 +243,7 @@ class PentadbirController extends Controller
     public function alamat()
     {
         $maklumat = MaklumatKementerian::get();
-           
+
         return view('kemaskini.pentadbir.alamat', compact('maklumat'));
     }
 
@@ -280,7 +282,6 @@ class PentadbirController extends Controller
                 'faks' => $request->faks,
             ]);
         }
- 
         return redirect()->route('alamat');
     }
 
@@ -305,26 +306,28 @@ class PentadbirController extends Controller
         $users = User::whereIn('tahap', [1, 2, 6])
         ->where('status', 1)
         ->whereNotNull('email_verified_at')
-        ->get();        
-        $emailmain = "bkoku@mohe.gov.my";
-        $bcc = $users->pluck('email')->toArray();
+        ->get(); 
         
-        // Validate each email address
-        $invalidEmails = [];
-        foreach ($bcc as $email) {
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $invalidEmails[] = $email;
-            }
-        }
+        // COMMENT PROD
+        // $emailmain = "bkoku@mohe.gov.my";
+        // $bcc = $users->pluck('email')->toArray();
+        
+        // // Validate each email address
+        // $invalidEmails = [];
+        // foreach ($bcc as $email) {
+        //     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        //         $invalidEmails[] = $email;
+        //     }
+        // }
 
-        if (empty($invalidEmails)) {
-            Mail::to($emailmain)->bcc($bcc)->send(new HebahanIklan($catatan)); 
-        } 
-        else {
-            foreach ($invalidEmails as $invalidEmail) {
-                 Log::error('Invalid email address: ' . $invalidEmail);
-            }
-        }
+        // if (empty($invalidEmails)) {
+        //     Mail::to($emailmain)->bcc($bcc)->send(new HebahanIklan($catatan)); 
+        // } 
+        // else {
+        //     foreach ($invalidEmails as $invalidEmail) {
+        //          Log::error('Invalid email address: ' . $invalidEmail);
+        //     }
+        // }
   
         return redirect()->route('tarikh');
     }
@@ -332,6 +335,7 @@ class PentadbirController extends Controller
     public function jumlahTuntutan()
     {
         $jumlah = JumlahTuntutan::get();
+
         return view('kemaskini.pentadbir.jumlah_tuntutan', compact('jumlah'));
     }
 
@@ -364,6 +368,7 @@ class PentadbirController extends Controller
     public function viewESPInstitusi()
     {
         $institusi = InfoIpt::orderBy('nama_institusi')->get();
+
         return view('kemaskini.pentadbir.esp_institusi', compact('institusi'));
     }
 
@@ -371,6 +376,7 @@ class PentadbirController extends Controller
     {
         $namaInstitusi = $request->input('nama_institusi');
         $infoIpt = InfoIpt::where('nama_institusi', $namaInstitusi)->first();
+        
         if ($infoIpt) {
             return response()->json(['institusi_esp' => $infoIpt->institusi_esp]);
         } else {
