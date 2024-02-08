@@ -23,9 +23,9 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
                 'no_rujukan_permohonan' => $row['id_permohonan'],
                 'yuran_dibayar' => number_format($row['yuran_dibayar_rm'], 2, '.', ''),
                 'wang_saku_dibayar' => number_format($row['wang_saku_dibayar_rm'], 2, '.', ''),
-                'no_baucer' => $row['no_baucer'],
+                'no_baucer' => $row['no_baucar'],
                 'perihal' => $row['perihal'],
-                'tarikh_baucer' => $this->convertExcelDate($row['tarikh_baucer']),
+                'tarikh_baucer' => $this->convertExcelDate($row['tarikh_baucar']),
             ];
         }
         // Update the 'status' column in the permohonan table to 8
