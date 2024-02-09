@@ -205,28 +205,28 @@ class PentadbirController extends Controller
             $error['mqa'] = 'Ralat dikesan: ' . $e->getMessage();
         }
 
-        try {
-            $client = new Client();
-            $url = 'https://espbstg.mohe.gov.my/api/studentsInfo.php';
-            // $url = 'http://espbdev.mohe.gov.my/api/studentsInfo.php';
-            $response = $client->get($url);
+        // try {
+        //     $client = new Client();
+        //     $url = 'https://espbstg.mohe.gov.my/api/studentsInfo.php';
+        //     // $url = 'http://espbdev.mohe.gov.my/api/studentsInfo.php';
+        //     $response = $client->get($url);
 
-            $statusCode = $response->getStatusCode();
-            $responseContent = $response->getBody()->getContents();
+        //     $statusCode = $response->getStatusCode();
+        //     $responseContent = $response->getBody()->getContents();
 
-            // Check if the status code indicates success (usually 2xx)
-            if ($statusCode >= 200 && $statusCode < 300) {
-                // API connection is successful
-                $data = json_decode($responseContent, true);
-                $success['esp'] = 'Sambungan API ESP berjaya';
-            } else {
-                // Handle API error
-                $error['esp'] = 'Permintaan API ESP gagal dengan kod status: ' . $statusCode;
-            }
-        } catch (\Exception $e) {
-            // Handle exceptions
-            $error['esp'] = 'Ralat dikesan: ' . $e->getMessage();
-        }
+        //     // Check if the status code indicates success (usually 2xx)
+        //     if ($statusCode >= 200 && $statusCode < 300) {
+        //         // API connection is successful
+        //         $data = json_decode($responseContent, true);
+        //         $success['esp'] = 'Sambungan API ESP berjaya';
+        //     } else {
+        //         // Handle API error
+        //         $error['esp'] = 'Permintaan API ESP gagal dengan kod status: ' . $statusCode;
+        //     }
+        // } catch (\Exception $e) {
+        //     // Handle exceptions
+        //     $error['esp'] = 'Ralat dikesan: ' . $e->getMessage();
+        // }
 
         return view('kemaskini.pentadbir.semakkan_api', [
             'success' => $success,
