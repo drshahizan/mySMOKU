@@ -363,9 +363,9 @@ class TuntutanController extends Controller
         // $cc = $user_sekretariat->email;
 
         // COMMENT PROD
-        $catatan = "testing";
-        $emel = EmelKemaskini::where('emel_id',14)->first();
-        Mail::to($smoku_id->email)->send(new TuntutanHantar($catatan,$emel));
+        // $catatan = "testing";
+        // $emel = EmelKemaskini::where('emel_id',14)->first();
+        // Mail::to($smoku_id->email)->send(new TuntutanHantar($catatan,$emel));
         
         return redirect()->route('pelajar.dashboard')->with('message', 'Tuntutan anda telah dihantar.');
     }

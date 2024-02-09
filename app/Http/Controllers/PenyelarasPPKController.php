@@ -688,24 +688,24 @@ class PenyelarasPPKController extends Controller
 
 
         // COMMENT PROD
-        //emel kepada pelajar
-        $emel_pelajar = Smoku::where('id',$smoku_id->id)->first();
-        $cc_pelajar = $emel_pelajar->email;
+        // //emel kepada pelajar
+        // $emel_pelajar = Smoku::where('id',$smoku_id->id)->first();
+        // $cc_pelajar = $emel_pelajar->email;
 
-        //emel kepada penyelaras
-        $user = User::where('no_kp',Auth::user()->no_kp)->first();
+        // //emel kepada penyelaras
+        // $user = User::where('no_kp',Auth::user()->no_kp)->first();
 
-        $catatan = "testing";
-        $emel = EmelKemaskini::where('emel_id',15)->first();
+        // $catatan = "testing";
+        // $emel = EmelKemaskini::where('emel_id',15)->first();
 
-        if (empty($invalidEmails)) {
-            Mail::to($user->email)->cc($cc_pelajar)->send(new PermohonanHantar($catatan,$emel));     
-        } 
-        else {
-            foreach ($invalidEmails as $invalidEmail) {
-                Log::error('Invalid email address: ' . $invalidEmail);
-            }
-        }
+        // if (empty($invalidEmails)) {
+        //     Mail::to($user->email)->cc($cc_pelajar)->send(new PermohonanHantar($catatan,$emel));     
+        // } 
+        // else {
+        //     foreach ($invalidEmails as $invalidEmail) {
+        //         Log::error('Invalid email address: ' . $invalidEmail);
+        //     }
+        // }
 
 
         //CREATE USER ID TERUS UNTUK PELAJAR
@@ -732,9 +732,9 @@ class PenyelarasPPKController extends Controller
             $user = User::create($userData);
 
             // COMMENT PROD
-            $email = $request->emel;
-            $no_kp = $request->no_kp;
-            Mail::to($email)->send(new MailDaftarPentadbir($email,$no_kp,$password));
+            // $email = $request->emel;
+            // $no_kp = $request->no_kp;
+            // Mail::to($email)->send(new MailDaftarPentadbir($email,$no_kp,$password));
         }    
 
         return redirect()->route('penyelaras.ppk.dashboard')->with('success', 'Permohonan pelajar telah dihantar.');

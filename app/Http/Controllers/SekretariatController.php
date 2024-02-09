@@ -641,10 +641,10 @@ class SekretariatController extends Controller
 
         // COMMENT PROD
         // Email notification
-        $studentEmail = ButiranPelajar::where('smoku_id', $smoku_id)->value('emel');
-        $emailLulus = EmelKemaskini::where("emel_id",2)->first();
-        $emailTidakLulus = EmelKemaskini::where("emel_id",3)->first();
-        Mail::to($studentEmail)->send($keputusan == "Lulus" ? new KeputusanLayak($emailLulus) : new KeputusanTidakLayak($emailTidakLulus,$catatanArray));
+        // $studentEmail = ButiranPelajar::where('smoku_id', $smoku_id)->value('emel');
+        // $emailLulus = EmelKemaskini::where("emel_id",2)->first();
+        // $emailTidakLulus = EmelKemaskini::where("emel_id",3)->first();
+        // Mail::to($studentEmail)->send($keputusan == "Lulus" ? new KeputusanLayak($emailLulus) : new KeputusanTidakLayak($emailTidakLulus,$catatanArray));
 
         // Filter kelulusan
         $startDate = $request->input('start_date');
@@ -735,15 +735,15 @@ class SekretariatController extends Controller
 
                     // COMMENT PROD
                     // Send email notifications to all student email addresses
-                    $studentEmail = ButiranPelajar::where('smoku_id',  $item->smoku_id)->value('emel');
-                    $emailLulus = EmelKemaskini::where("emel_id",2)->first();
-                    if ($studentEmail) {
-                        $studentEmails[] = $studentEmail;
-                    }
+                    // $studentEmail = ButiranPelajar::where('smoku_id',  $item->smoku_id)->value('emel');
+                    // $emailLulus = EmelKemaskini::where("emel_id",2)->first();
+                    // if ($studentEmail) {
+                    //     $studentEmails[] = $studentEmail;
+                    // }
 
-                    foreach ($studentEmails as $studentEmail) {
-                        Mail::to($studentEmail)->send(new KeputusanLayak($emailLulus));
-                    }
+                    // foreach ($studentEmails as $studentEmail) {
+                    //     Mail::to($studentEmail)->send(new KeputusanLayak($emailLulus));
+                    // }
                 }
                 // 2) Tidak Lulus
                 else
@@ -786,10 +786,10 @@ class SekretariatController extends Controller
 
                     // COMMENT PROD
                     // Send email notifications to all student email addresses
-                    $studentEmail = ButiranPelajar::where('smoku_id',  $item->smoku_id)->value('emel');
-                    if ($studentEmail) {
-                        $studentEmails[] = $studentEmail;
-                    }
+                    // $studentEmail = ButiranPelajar::where('smoku_id',  $item->smoku_id)->value('emel');
+                    // if ($studentEmail) {
+                    //     $studentEmails[] = $studentEmail;
+                    // }
 
                     // Set a default value
                     $catatan = '';
@@ -1297,16 +1297,16 @@ class SekretariatController extends Controller
             $status_rekod->save();
 
             // COMMENT PROD
-            $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
-            $program = Permohonan::where('id', $permohonan_id)->value('program');
-            if($program=="BKOKU"){
-                $emel = EmelKemaskini::where('emel_id',5)->first();
-                Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
-            }
-            elseif($program=="PPK"){
-                $emel = EmelKemaskini::where('emel_id',11)->first();
-                Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
-            }
+            // $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
+            // $program = Permohonan::where('id', $permohonan_id)->value('program');
+            // if($program=="BKOKU"){
+            //     $emel = EmelKemaskini::where('emel_id',5)->first();
+            //     Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
+            // }
+            // elseif($program=="PPK"){
+            //     $emel = EmelKemaskini::where('emel_id',11)->first();
+            //     Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
+            // }
 
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Layak'.";
@@ -1401,16 +1401,16 @@ class SekretariatController extends Controller
             $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
 
             // COMMENT PROD
-            $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
-            $program = Permohonan::where('id', $permohonan_id)->value('program');
-            if($program=="BKOKU"){
-                $emel = EmelKemaskini::where('emel_id',6)->first();
-                Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
-            }
-            elseif($program=="PPK"){
-                $emel = EmelKemaskini::where('emel_id',12)->first();
-                Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
-            }
+            // $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
+            // $program = Permohonan::where('id', $permohonan_id)->value('program');
+            // if($program=="BKOKU"){
+            //     $emel = EmelKemaskini::where('emel_id',6)->first();
+            //     Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+            // }
+            // elseif($program=="PPK"){
+            //     $emel = EmelKemaskini::where('emel_id',12)->first();
+            //     Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+            // }
 
             $status_kod=1;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Tidak Layak'.";
@@ -1498,16 +1498,16 @@ class SekretariatController extends Controller
             $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
 
             // COMMENT PROD
-            $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
-            $program = Permohonan::where('id', $permohonan_id)->value('program');
-            if($program=="BKOKU"){
-                $emel = EmelKemaskini::where('emel_id',4)->first();
-                Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
-            }
-            elseif($program=="PPK"){
-                $emel = EmelKemaskini::where('emel_id',10)->first();
-                Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
-            }
+            // $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
+            // $program = Permohonan::where('id', $permohonan_id)->value('program');
+            // if($program=="BKOKU"){
+            //     $emel = EmelKemaskini::where('emel_id',4)->first();
+            //     Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+            // }
+            // elseif($program=="PPK"){
+            //     $emel = EmelKemaskini::where('emel_id',10)->first();
+            //     Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+            // }
 
             $status_kod=2;
             $status = "Tuntutan ".$no_rujukan_tuntutan." telah dikembalikan.";
