@@ -150,10 +150,95 @@ class PentadbirController extends Controller
         return redirect()->route('daftarpengguna');
     }
 
+    // public function checkConnection()
+    // {
+    //     $error = [];
+    //     $success = [];
+
+    //     try {
+    //         $headers = [
+    //             'Cache-Control' => 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
+    //             'Content-Type' => 'application/json',
+    //             'Authorization' => 'Bearer knhnxYoATGLiN5WxErU6SVVw8c9xhw09vQ3KRPkOtcH3O0CYh21wDA4CsypX',
+    //         ];
+
+    //         $client = new Client();
+    //         $url = 'https://oku-staging.jkm.gov.my/api/oku/000212101996';
+    //         $response = $client->get($url, ['headers' => $headers]);
+
+    //         $statusCode = $response->getStatusCode();
+    //         $responseContent = $response->getBody()->getContents();
+
+    //         // Check if the status code indicates success (usually 2xx)
+    //         if ($statusCode >= 200 && $statusCode < 300) {
+    //             // API connection is successful
+    //             $data = json_decode($responseContent, true);
+    //             $success['smoku'] = 'Sambungan API SMOKU berjaya';
+    //         } else {
+    //             // Handle API error
+    //             $error['smoku'] = 'Permintaan API SMOKU gagal dengan kod status: ' . $statusCode;
+    //         }
+    //     } catch (\Exception $e) {
+    //         // Handle exceptions
+    //         $error['smoku'] = 'Ralat dikesan: ' . $e->getMessage();
+    //     }
+
+    //     // try {
+    //     //     $client = new Client();
+    //     //     $url = 'http://10.29.216.151/api/bkoku/request-MQR';
+    //     //     $response = $client->post($url);
+
+    //     //     $statusCode = $response->getStatusCode();
+    //     //     $responseContent = $response->getBody()->getContents();
+
+    //     //     // Check if the status code indicates success (usually 2xx)
+    //     //     if ($statusCode >= 200 && $statusCode < 300) {
+    //     //         // API connection is successful
+    //     //         $data = json_decode($responseContent, true);
+    //     //         $success['mqa'] = 'Sambungan API MQA berjaya';
+    //     //     } else {
+    //     //         // Handle API error
+    //     //         $error['mqa'] = 'Permintaan API MQA gagal dengan kod status: ' . $statusCode;
+    //     //     }
+    //     // } catch (\Exception $e) {
+    //     //     // Handle exceptions
+    //     //     $error['mqa'] = 'Ralat dikesan: ' . $e->getMessage();
+    //     // }
+
+    //     try {
+    //         $client = new Client();
+    //         $url = 'https://espbstg.mohe.gov.my/api/studentsInfo.php';
+    //         // $url = 'http://espbdev.mohe.gov.my/api/studentsInfo.php';
+    //         $response = $client->get($url);
+
+    //         $statusCode = $response->getStatusCode();
+    //         $responseContent = $response->getBody()->getContents();
+
+    //         // Check if the status code indicates success (usually 2xx)
+    //         if ($statusCode >= 200 && $statusCode < 300) {
+    //             // API connection is successful
+    //             $data = json_decode($responseContent, true);
+    //             $success['esp'] = 'Sambungan API ESP berjaya';
+    //         } else {
+    //             // Handle API error
+    //             $error['esp'] = 'Permintaan API ESP gagal dengan kod status: ' . $statusCode;
+    //         }
+    //     } catch (\Exception $e) {
+    //         // Handle exceptions
+    //         $error['esp'] = 'Ralat dikesan: ' . $e->getMessage();
+    //     }
+
+    //     return view('kemaskini.pentadbir.semakkan_api', [
+    //         'success' => $success,
+    //         'error' => $error,
+    //         'data' => $data, // You can pass $data to the view if needed
+    //     ]);
+    // }
     public function checkConnection()
     {
         $error = [];
         $success = [];
+        $data = [];
 
         try {
             $headers = [
@@ -183,27 +268,28 @@ class PentadbirController extends Controller
             $error['smoku'] = 'Ralat dikesan: ' . $e->getMessage();
         }
 
-        // try {
-        //     $client = new Client();
-        //     $url = 'http://10.29.216.151/api/bkoku/request-MQR';
-        //     $response = $client->post($url);
+        // Add code to check the status of the API from the non-secure site
+        try {
+            $client = new Client();
+            $url = 'http://10.29.216.151/api/bkoku/request-MQR';
+            $response = $client->get($url);
 
-        //     $statusCode = $response->getStatusCode();
-        //     $responseContent = $response->getBody()->getContents();
+            $statusCode = $response->getStatusCode();
+            $responseContent = $response->getBody()->getContents();
 
-        //     // Check if the status code indicates success (usually 2xx)
-        //     if ($statusCode >= 200 && $statusCode < 300) {
-        //         // API connection is successful
-        //         $data = json_decode($responseContent, true);
-        //         $success['mqa'] = 'Sambungan API MQA berjaya';
-        //     } else {
-        //         // Handle API error
-        //         $error['mqa'] = 'Permintaan API MQA gagal dengan kod status: ' . $statusCode;
-        //     }
-        // } catch (\Exception $e) {
-        //     // Handle exceptions
-        //     $error['mqa'] = 'Ralat dikesan: ' . $e->getMessage();
-        // }
+            // Check if the status code indicates success (usually 2xx)
+            if ($statusCode >= 200 && $statusCode < 300) {
+                // API connection is successful
+                $data = json_decode($responseContent, true);
+                $success['mqa'] = 'Sambungan API MQA berjaya';
+            } else {
+                // Handle API error
+                $error['mqa'] = 'Permintaan API MQA gagal dengan kod status: ' . $statusCode;
+            }
+        } catch (\Exception $e) {
+            // Handle exceptions
+            $error['mqa'] = 'Ralat dikesan: ' . $e->getMessage();
+        }
 
         try {
             $client = new Client();
@@ -234,6 +320,7 @@ class PentadbirController extends Controller
             'data' => $data, // You can pass $data to the view if needed
         ]);
     }
+
 
     public function alamat()
     {
