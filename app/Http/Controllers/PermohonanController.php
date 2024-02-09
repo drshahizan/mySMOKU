@@ -498,18 +498,18 @@ class PermohonanController extends Controller
 
 
         // COMMENT PROD
-        // $catatan = "testing";
-        // $emel = EmelKemaskini::where('emel_id',13)->first();
+        $catatan = "testing";
+        $emel = EmelKemaskini::where('emel_id',13)->first();
 
-        // if (empty($invalidEmails)) 
-        // {
-        //     Mail::to($smoku_id->email)->send(new PermohonanHantar($catatan,$emel));
-        // } 
-        // else {
-        //     foreach ($invalidEmails as $invalidEmail) {
-        //          Log::error('Invalid email address: ' . $invalidEmail);
-        //     }
-        // }
+        if (empty($invalidEmails)) 
+        {
+            Mail::to($smoku_id->email)->send(new PermohonanHantar($catatan,$emel));
+        } 
+        else {
+            foreach ($invalidEmails as $invalidEmail) {
+                 Log::error('Invalid email address: ' . $invalidEmail);
+            }
+        }
         
             
         return redirect()->route('pelajar.dashboard')->with('message', 'Permohonan anda telah dihantar.');
