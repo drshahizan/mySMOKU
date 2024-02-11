@@ -555,7 +555,7 @@
                                 <td>{{$pemohon}}</td>
                                 <td>{{$namakursus}}</td>
                                 <td>{{$institusipengajian}}</td>
-                                <td class="text-right">{{ $item->wang_saku_disokong}}</td>
+                                <td class="text-right">{{ $item->wang_saku_disokong}}.00</td>
                               </tr>
                             @endif
                             {{-- Modal --}}

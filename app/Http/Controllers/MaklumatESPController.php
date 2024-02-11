@@ -35,8 +35,11 @@ class MaklumatESPController extends Controller
 
     public function tuntutan()
     {
-        $kelulusan = Tuntutan::orderBy('tuntutan.tarikh_hantar', 'desc')->join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
-        ->where('tuntutan.status', '=','6')->get();
+        $kelulusan = Tuntutan::orderBy('tuntutan.tarikh_hantar', 'desc')
+        ->join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
+        ->where('tuntutan.status', '=','6')
+        ->get(['permohonan.no_rujukan_permohonan','tuntutan.*']);
+        // dd($kelulusan);
 
         $secretKey = '2z_JoT4dDCNe_bkT9y6kEhc_4plRkUW7Ci1hzoyH'; 
 
