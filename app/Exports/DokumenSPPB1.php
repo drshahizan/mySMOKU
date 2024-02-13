@@ -94,7 +94,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
             ['NO. AKAUN:'],
             ['(Sertakan salinan penyata akaun bank untuk rujukan pembayaran)***'], 
             [''],
-            ['BORANG PERMOHONAN PERUNTUKAN PROGRAM BKOKU (SPBB 1)'], 
+            ['BORANG TUNTUTAN PERUNTUKAN PROGRAM BKOKU (SPBB 1)'], 
 
             // Data Headers
             array_map('strtoupper', [
