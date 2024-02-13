@@ -236,7 +236,7 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                     ['NO. AKAUN:', $this->getNoAkaunData()], 
                     ['(Sertakan salinan penyata akaun bank untuk rujukan pembayaran)***'],
                     [''],
-                    ['BORANG PERMOHONAN PERUNTUKAN PROGRAM BKOKU (SPBB 1)'],
+                    ['LAPORAN BAYARAN PROGRAM BKOKU (SPBB 2)'],
                 ];
 
                 foreach ($customHeaderData as $index => $rowData) {
