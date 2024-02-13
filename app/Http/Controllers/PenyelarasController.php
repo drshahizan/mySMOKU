@@ -1374,51 +1374,51 @@ class PenyelarasController extends Controller
     }
 
     //DOKUMEN SPBB
-    // public function muatTurunBorangSPPB()
-    // {   
-    //     $user = auth()->user();
-    //     $institusiId = $user->id_institusi;
+    public function muatTurunBorangSPBB()
+    {   
+        $user = auth()->user();
+        $institusiId = $user->id_institusi;
         
-    //     // Get documents for the user's 'institusi_id' and 'no_rujukan' ending in '/1'
-    //     $dokumen = DokumenESP::where('institusi_id', $institusiId)
-    //         ->where('no_rujukan', 'like', '%/1')
-    //         ->orderBy('created_at', 'desc')
-    //         ->get(); 
+        // Get documents for the user's 'institusi_id' and 'no_rujukan' ending in '/1'
+        $dokumen = DokumenESP::where('institusi_id', $institusiId)
+            ->where('no_rujukan', 'like', '%/1')
+            ->orderBy('created_at', 'desc')
+            ->get(); 
         
-    //     return view('spbb.penyelaras.muat_turun_dokumen', compact('dokumen','institusiId'));
-    // }
+        return view('spbb.penyelaras.muat_turun_dokumen', compact('dokumen','institusiId'));
+    }
 
-    public function muatTurunDokumenSPPB1()
+    public function muatTurunDokumenSPBB1()
     {
         return Excel::download(new DokumenSPPB1, 'spbb1-export.xlsx');
     }
 
-    public function muatTurunDokumenSPPB1a()
+    public function muatTurunDokumenSPBB1a()
     {
         return Excel::download(new DokumenSPPB1a, 'spbb1a-export.xlsx');
     }
 
-    public function muatTurunDokumenSPPB2()
+    public function muatTurunDokumenSPBB2()
     {
         return Excel::download(new DokumenSPBB2, 'spbb2-export.xlsx');
     }
 
-    public function muatTurunDokumenSPPB2a()
+    public function muatTurunDokumenSPBB2a()
     {
         return Excel::download(new DokumenSPBB2a, 'spbb2a-export.xlsx');
     }
 
-    public function muatTurunDokumenSPPB3()
+    public function muatTurunDokumenSPBB3()
     {
         return Excel::download(new DokumenSPBB3, 'spbb3-export.xlsx');
     }
 
-    public function muatTurunDokumenSPPB4()
+    public function muatTurunDokumenSPBB4()
     {
         return Excel::download(new DokumenSPBB4, 'spbb4-export.xlsx');
     }
 
-    public function muatNaikBorangSPPB()
+    public function muatNaikBorangSPBB()
     {   
         $user = auth()->user();
         $institusiId = $user->id_institusi;
@@ -1431,7 +1431,7 @@ class PenyelarasController extends Controller
         return view('spbb.penyelaras.muat_naik_dokumen', compact('institusiId','dokumen'));
     }
 
-    public function hantarBorangSPPB(Request $request)
+    public function hantarBorangSPBB(Request $request)
     {
         $user = auth()->user();
         $institusiId = $user->id_institusi;

@@ -270,15 +270,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('tuntutan/sekretariat/sejarah/hantar-saringan/{id}', [SekretariatController::class, 'hantarSaringan'])->name('hantar.saringan.tuntutan.id');
 
     //Penyaluran - Penyelaras - Dokumen SPBB
-    Route::get('penyelaras/penyaluran/muat-turun/borang/spbb', [PenyelarasController::class, 'muatTurunBorangSPPB'])->name('penyelaras.muat-turun.SPBB');
-    Route::get('penyelaras/penyaluran/muat-naik/borang/spbb', [PenyelarasController::class, 'muatNaikBorangSPPB'])->name('penyelaras.muat-naik.SPBB');
-    Route::post('penyelaras/penyaluran/hantar/borang/spbb', [PenyelarasController::class, 'hantarBorangSPPB'])->name('penyelaras.kemaskini.SPBB');
-    Route::get('penyelaras/penyaluran/muat-turun/sppb1', [PenyelarasController::class, 'muatTurunDokumenSPPB1'])->name('penyelaras.dokumen.SPPB1');
-    Route::get('penyelaras/penyaluran/muat-turun/sppb1a', [PenyelarasController::class, 'muatTurunDokumenSPPB1a'])->name('penyelaras.dokumen.SPPB1a');
-    Route::get('penyelaras/penyaluran/muat-turun/sppb2', [PenyelarasController::class, 'muatTurunDokumenSPPB2'])->name('penyelaras.dokumen.SPPB2');
-    Route::get('penyelaras/penyaluran/muat-turun/sppb2a', [PenyelarasController::class, 'muatTurunDokumenSPPB2a'])->name('penyelaras.dokumen.SPPB2a');
-    Route::get('penyelaras/penyaluran/muat-turun/sppb3', [PenyelarasController::class, 'muatTurunDokumenSPPB3'])->name('penyelaras.dokumen.SPPB3');
-    Route::get('penyelaras/penyaluran/muat-turun/sppb4', [PenyelarasController::class, 'muatTurunDokumenSPPB4'])->name('penyelaras.dokumen.SPPB4');
+    Route::get('penyelaras/penyaluran/muat-turun/borang/spbb', [PenyelarasController::class, 'muatTurunBorangSPBB'])->name('penyelaras.muat-turun.SPBB');
+    Route::get('penyelaras/penyaluran/muat-naik/borang/spbb', [PenyelarasController::class, 'muatNaikBorangSPBB'])->name('penyelaras.muat-naik.SPBB');
+    Route::post('penyelaras/penyaluran/hantar/borang/spbb', [PenyelarasController::class, 'hantarBorangSPBB'])->name('penyelaras.kemaskini.SPBB');
+    Route::get('penyelaras/penyaluran/muat-turun/spbb1', [PenyelarasController::class, 'muatTurunDokumenSPBB1'])->name('penyelaras.dokumen.SPBB1');
+    Route::get('penyelaras/penyaluran/muat-turun/spbb1a', [PenyelarasController::class, 'muatTurunDokumenSPBB1a'])->name('penyelaras.dokumen.SPBB1a');
+    Route::get('penyelaras/penyaluran/muat-turun/spbb2', [PenyelarasController::class, 'muatTurunDokumenSPBB2'])->name('penyelaras.dokumen.SPBB2');
+    Route::get('penyelaras/penyaluran/muat-turun/spbb2a', [PenyelarasController::class, 'muatTurunDokumenSPBB2a'])->name('penyelaras.dokumen.SPBB2a');
+    Route::get('penyelaras/penyaluran/muat-turun/spbb3', [PenyelarasController::class, 'muatTurunDokumenSPBB3'])->name('penyelaras.dokumen.SPBB3');
+    Route::get('penyelaras/penyaluran/muat-turun/spbb4', [PenyelarasController::class, 'muatTurunDokumenSPBB4'])->name('penyelaras.dokumen.SPBB4');
 
     //Penyaluran - Penyelaras - Pembayaran
     Route::get('penyelaras/penyaluran/senarai/permohonan-tuntutan/layak', [PenyelarasController::class, 'senaraiPemohonLayak']);

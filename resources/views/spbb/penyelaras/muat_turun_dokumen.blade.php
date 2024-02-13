@@ -120,7 +120,7 @@
 											<div id="file-input-container">
 												<div class="d-flex">
 													<div class="file-input">
-														<a href="{{ route('penyelaras.dokumen.SPPB1a') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
+														<a href="{{ route('penyelaras.dokumen.SPBB1a') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
 															Muat Turun SPBB 1a<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
 														</a>
 													</div>
@@ -136,7 +136,7 @@
 											<div id="file-input-container">
 												<div class="d-flex">
 													<div class="file-input">
-														<a href="{{ route('penyelaras.dokumen.SPPB1') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
+														<a href="{{ route('penyelaras.dokumen.SPBB1') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
 															Muat Turun SPBB 1<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
 														</a>
 													</div>
@@ -152,7 +152,7 @@
 											<div id="file-input-container">
 												<div class="d-flex">
 													<div class="file-input">
-														<a href="{{ route('penyelaras.dokumen.SPPB2') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
+														<a href="{{ route('penyelaras.dokumen.SPBB2') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
 															Muat Turun SPBB 2<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
 														</a>
 													</div>
@@ -168,7 +168,7 @@
 											<div id="file-input-container">
 												<div class="d-flex">
 													<div class="file-input">
-														<a href="{{ route('penyelaras.dokumen.SPPB2a') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
+														<a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
 															Muat Turun SPBB 2a<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
 														</a>
 													</div>
@@ -184,7 +184,7 @@
 											<div id="file-input-container">
 												<div class="d-flex">
 													<div class="file-input">
-														<a href="{{ route('penyelaras.dokumen.SPPB3') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
+														<a href="{{ route('penyelaras.dokumen.SPBB3') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
 															Muat Turun SPBB 3<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
 														</a>
 													</div>
@@ -200,7 +200,7 @@
 											<div id="file-input-container">
 												<div class="d-flex">
 													<div class="file-input">
-														<a href="{{ route('penyelaras.dokumen.SPPB4') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
+														<a href="{{ route('penyelaras.dokumen.SPBB4') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
 															Muat Turun SPBB 4<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
 														</a>
 													</div>
