@@ -275,10 +275,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('penyelaras/penyaluran/hantar/borang/spbb', [PenyelarasController::class, 'hantarBorangSPPB'])->name('penyelaras.kemaskini.SPBB');
     Route::get('penyelaras/penyaluran/muat-turun/sppb1', [PenyelarasController::class, 'muatTurunDokumenSPPB1'])->name('penyelaras.dokumen.SPPB1');
     Route::get('penyelaras/penyaluran/muat-turun/sppb1a', [PenyelarasController::class, 'muatTurunDokumenSPPB1a'])->name('penyelaras.dokumen.SPPB1a');
+    Route::get('penyelaras/penyaluran/muat-turun/sppb2', [PenyelarasController::class, 'muatTurunDokumenSPPB2'])->name('penyelaras.dokumen.SPPB2');
+    Route::get('penyelaras/penyaluran/muat-turun/sppb2a', [PenyelarasController::class, 'muatTurunDokumenSPPB2a'])->name('penyelaras.dokumen.SPPB2a');
+    Route::get('penyelaras/penyaluran/muat-turun/sppb3', [PenyelarasController::class, 'muatTurunDokumenSPPB3'])->name('penyelaras.dokumen.SPPB3');
+    Route::get('penyelaras/penyaluran/muat-turun/sppb4', [PenyelarasController::class, 'muatTurunDokumenSPPB4'])->name('penyelaras.dokumen.SPPB4');
 
     //Penyaluran - Penyelaras - Pembayaran
-    Route::get('penyelaras/penyaluran/permohonan-tuntutan/layak', [PenyelarasController::class, 'senaraiPemohonLayak']);
-    Route::get('penyelaras/penyaluran/permohonan/dibayar', [PenyelarasController::class, 'senaraiPemohonDibayar'])->name('penyelaras.senarai.dibayar');
+    Route::get('penyelaras/penyaluran/senarai/permohonan-tuntutan/layak', [PenyelarasController::class, 'senaraiPemohonLayak']);
+    Route::get('penyelaras/penyaluran/permohonan-tuntutan/dibayar', [PenyelarasController::class, 'senaraiPemohonDibayar'])->name('penyelaras.senarai.dibayar');
     Route::get('/permohonan/senarai-layak-excel', [PenyelarasController::class, 'exportPermohonanLayak'])->name('penyelaras.permohonan.senarai.layak.excel');
     Route::post('/permohonan/process-uploaded-file', [PenyelarasController::class, 'uploadedFilePembayaranPermohonan'])->name('modified.file.pembayaran.permohonan');
     Route::get('/tuntutan/senarai-layak-excel', [PenyelarasController::class, 'exportTuntutanLayak'])->name('penyelaras.tuntutan.senarai.layak.excel');

@@ -145,6 +145,70 @@
 										</td>
 									</tr>
 
+									{{-- DOKUMEN SPBB 2 --}}
+									<tr>
+										<td>Borang SPBB 2 (Laporan Bayaran)</td>
+										<td>
+											<div id="file-input-container">
+												<div class="d-flex">
+													<div class="file-input">
+														<a href="{{ route('penyelaras.dokumen.SPPB2') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
+															Muat Turun SPBB 2<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
+														</a>
+													</div>
+												</div>
+											</div>                                                                                     
+										</td>
+									</tr>
+
+									{{-- DOKUMEN SPBB 2a --}}
+									<tr>
+										<td>Borang SPBB 2a (Laporan Tuntutan)</td>
+										<td>
+											<div id="file-input-container">
+												<div class="d-flex">
+													<div class="file-input">
+														<a href="{{ route('penyelaras.dokumen.SPPB2a') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
+															Muat Turun SPBB 2a<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
+														</a>
+													</div>
+												</div>
+											</div>                                                                                     
+										</td>
+									</tr>
+
+									{{-- DOKUMEN SPBB 3 --}}
+									<tr>
+										<td>Borang SPBB 3 (Penyata Terimaan)</td>
+										<td>
+											<div id="file-input-container">
+												<div class="d-flex">
+													<div class="file-input">
+														<a href="{{ route('penyelaras.dokumen.SPPB3') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
+															Muat Turun SPBB 3<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
+														</a>
+													</div>
+												</div>
+											</div>                                                                                     
+										</td>
+									</tr>
+
+									{{-- DOKUMEN SPBB 4 --}}
+									<tr>
+										<td>Borang SPBB 4 (Surat Iringan Universiti)</td>
+										<td>
+											<div id="file-input-container">
+												<div class="d-flex">
+													<div class="file-input">
+														<a href="{{ route('penyelaras.dokumen.SPPB4') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
+															Muat Turun SPBB 4<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
+														</a>
+													</div>
+												</div>
+											</div>                                                                                     
+										</td>
+									</tr>
+
 									<tr>
 										<td colspan="2">
 											<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp;

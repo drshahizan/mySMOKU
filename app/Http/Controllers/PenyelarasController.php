@@ -1533,6 +1533,26 @@ class PenyelarasController extends Controller
         return Excel::download(new DokumenSPPB1a, 'sppb1a-export.xlsx');
     }
 
+    public function muatTurunDokumenSPPB2()
+    {
+        return Excel::download(new DokumenSPPB1a, 'sppb1a-export.xlsx');
+    }
+
+    public function muatTurunDokumenSPPB2a()
+    {
+        return Excel::download(new DokumenSPPB1a, 'sppb1a-export.xlsx');
+    }
+
+    public function muatTurunDokumenSPPB3()
+    {
+        return Excel::download(new DokumenSPPB1a, 'sppb1a-export.xlsx');
+    }
+
+    public function muatTurunDokumenSPPB4()
+    {
+        return Excel::download(new DokumenSPPB1a, 'sppb1a-export.xlsx');
+    }
+
     //KEMASKINI BANK
     public function maklumatBank()
     {   
