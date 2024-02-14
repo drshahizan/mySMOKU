@@ -198,9 +198,9 @@ class DokumenSPBB3 implements WithEvents
             AfterSheet::class => function(AfterSheet $event) {
                 // Retrieve additional data for custom headers from the database
                 $customHeaderData = [
-                    ['INSTITUSI:', $this->getInstitusiData()],
-                    ['CAWANGAN:'],
-                    ['BULAN:', $this->getBulanData()],
+                    ['', 'INSTITUSI:', $this->getInstitusiData()],
+                    ['', 'CAWANGAN:'],
+                    ['', 'BULAN:', $this->getBulanData()],
                     [''],
                     ['LAPORAN KUTIPAN BALIK BAGI PELAJAR BKOKU YANG TARIK DIRI/ BERHENTI'],
                 ];
@@ -214,11 +214,12 @@ class DokumenSPBB3 implements WithEvents
                         // Merge cells for custom headers
                         if (in_array($cellData, ['INSTITUSI:', 'CAWANGAN:', 'BULAN:'])) {
                             // Merge cells and apply data
-                            $event->sheet->mergeCells("{$columnLetter}{$rowNumber}:B{$rowNumber}");
+                            $event->sheet->mergeCells("{$columnLetter}{$rowNumber}:C{$rowNumber}");
                             $event->sheet->setCellValue($columnLetter . $rowNumber, $cellData);
                             // Check if the next column's data exists before accessing it
                             if (isset($rowData[$columnIndex + 1])) {
-                                $event->sheet->setCellValue('C' . $rowNumber, $rowData[$columnIndex + 1]);
+                                $event->sheet->mergeCells("{$columnLetter}{$rowNumber}:C{$rowNumber}");
+                                $event->sheet->setCellValue('D' . $rowNumber, $rowData[$columnIndex + 1]);
                             }
                         } 
                         else {
@@ -227,6 +228,31 @@ class DokumenSPBB3 implements WithEvents
                         }
                     }
                 }
+
+                // Set alignment and style for the entire header row
+                $headerRange = 'B1:' . $event->sheet->getHighestColumn() . '3'; // Assuming the header row is from B1 to the last column in row 3
+                $event->sheet->getStyle($headerRange)->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                        'size' => 14, // Font size (14)
+                    ],
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                        ],
+                    ],
+                ]);
+
+                // // Set alignment and style for the "LAPORAN KUTIPAN BALIK BAGI PELAJAR BKOKU YANG TARIK DIRI/ BERHENTI" row
+                // $headerTittle = 'B5:' . $event->sheet->getHighestColumn() . '5';
+                // $event->sheet->getStyle($headerTittle)->applyFromArray([
+                //     'font' => [
+                //         'bold' => true,
+                //     ],
+                //     'alignment' => [
+                //         'horizontal' => Alignment::HORIZONTAL_CENTER,
+                //     ],
+                // ]);
 
 
                 // Merge cells for "TERIMAAN" and "BAYARAN" sections
@@ -280,41 +306,27 @@ class DokumenSPBB3 implements WithEvents
                 // Center-align section headers horizontally and vertically
                 $event->sheet->getStyle('B7:I7')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
                 $event->sheet->getStyle('B7:I7')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+
+                // Apply styles to the section headers
+                $event->sheet->getStyle('B8:I8')->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                    ],
+                    'fill' => [
+                        'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                        'startColor' => ['rgb' => 'D3D3D3'], // Background colour
+                    ],
+                    'alignment' => [
+                        'horizontal' => Alignment::HORIZONTAL_CENTER,
+                        'vertical' => Alignment::VERTICAL_CENTER,
+                    ],
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                        ],
+                    ],
+                ]);
             
-
-                // // Get the row number where the table headers start
-                // $dataHeaderRow = 7; 
-
-                // // Customize the style of the data header row
-                // $event->sheet->getStyle('B' . $dataHeaderRow . ':' . $event->sheet->getHighestColumn() . $dataHeaderRow)->applyFromArray([
-                //     'font' => [
-                //         'bold' => true,
-                //         'color' => ['rgb' => '#000000'], // Data header font color 
-                //         'size' => 11, // Data header font size
-                //     ],
-                //     'fill' => [
-                //         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                //         'startColor' => ['rgb' => 'B3B3B3'], // Data header background color 
-                //     ],
-                // ])
-                // ->getAlignment()
-                // ->setHorizontal(Alignment::HORIZONTAL_CENTER)
-                // ->setVertical(Alignment::VERTICAL_CENTER)
-                // ->setTextRotation(0) // Optional: Set text rotation to 0 degrees
-                // ->setWrapText(true);
-
-
-                // Center the "LAPORAN BAYARAN PROGRAM BKOKU (SPBB 2)" row and make it span all columns
-                // $event->sheet->mergeCells('B7:' . $event->sheet->getHighestColumn() . '7');
-                // $event->sheet->getStyle('B7')->applyFromArray([
-                //     'font' => [
-                //         'bold' => true,
-                //     ],
-                //     'alignment' => [
-                //         'horizontal' => Alignment::HORIZONTAL_CENTER,
-                //     ],
-                // ]);
-                
 
                 // Add borders and align to the data table
                 $startRow = 8; 
@@ -345,12 +357,29 @@ class DokumenSPBB3 implements WithEvents
 
                 // Add a row at the end to display the total values
                 $event->sheet->append([
+                    ['', 'JUMLAH TERIMAAN (i)', '', $totalBayaranFormatted, '', 'JUMLAH BAYARAN (ii)', '', $totalBayaranFormatted],
+                    ['','','','','','BAKI PERUNTUKAN [(iii) = (i) - (ii)]', $totalBayaranFormatted],
+                    [''],
                     // Custom row for total
-                    ['', 'JUMLAH (RM)', '', $totalBayaranFormatted],
+                    ['', 'JUMLAH (RM)', '', $totalBayaranFormatted, '', 'JUMLAH (RM)', '', $totalBayaranFormatted],
+                ]);
+
+                // Set the border for custom footer
+                $event->sheet->getStyle('B' . ($lastRow + 1) . ':I' . ($lastRow + 3))->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                        'size' => 11, 
+                    ],
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ],
                 ]);
 
                 // Corrected code set background for jumlah
-                $event->sheet->getStyle('B' . ($lastRow + 1) . ':I' . ($lastRow + 1))->applyFromArray([
+                $event->sheet->getStyle('B' . ($lastRow + 4) . ':I' . ($lastRow + 4))->applyFromArray([
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                         'startColor' => ['rgb' => 'D3D3D3'], // Background colour
@@ -367,44 +396,45 @@ class DokumenSPBB3 implements WithEvents
                     ],
                 ]);
 
-                $event->sheet->getStyle('B' . ($lastRow + 2))->getFont()->setSize(10)->setBold(true);
-                $event->sheet->setCellValue('B' . ($lastRow + 2), "* LAMPIRAN adalah maklumat lengkap bayaran seperti di Borang SPBB2");
 
-                $event->sheet->getStyle('B' . ($lastRow + 3))->getFont()->setSize(10)->setBold(true);
-                $event->sheet->setCellValue('B' . ($lastRow + 3), "i)  Disahkan maklumat diatas adalah benar dan bayaran telah dibuat sewajarnya. ");
+                $event->sheet->getStyle('B' . ($lastRow + 6))->getFont()->setSize(10)->setBold(true);
+                $event->sheet->setCellValue('B' . ($lastRow + 6), "* LAMPIRAN adalah maklumat lengkap bayaran seperti di Borang SPBB2");
 
-                $event->sheet->getStyle('B' . ($lastRow + 4))->getFont()->setSize(10)->setBold(true);
-                $event->sheet->setCellValue('B' . ($lastRow + 4), "ii) Disahkan telah menerima sejumlah peruntukan berjumlah RM64,885.00  dan wang tersebut telah direkodkan sebagai …Akaun Amanah/Akaun Peruntukan/ ");
+                $event->sheet->getStyle('B' . ($lastRow + 7))->getFont()->setSize(10)->setBold(true);
+                $event->sheet->setCellValue('B' . ($lastRow + 7), "i)  Disahkan maklumat diatas adalah benar dan bayaran telah dibuat sewajarnya. ");
 
-                $event->sheet->getStyle('B' . ($lastRow + 5))->getFont()->setSize(10)->setBold(true);
-                $event->sheet->setCellValue('B' . ($lastRow + 5), "iii)Disahkan sehingga 31/12/2023  peruntukan telah berbaki RM 0.00");
+                $event->sheet->getStyle('B' . ($lastRow + 8))->getFont()->setSize(10)->setBold(true);
+                $event->sheet->setCellValue('B' . ($lastRow + 8), "ii) Disahkan telah menerima sejumlah peruntukan berjumlah RM64,885.00  dan wang tersebut telah direkodkan sebagai …Akaun Amanah/Akaun Peruntukan/ ");
 
-                $event->sheet->getStyle('C' . ($lastRow + 7))->getFont()->setSize(10);
-                $event->sheet->setCellValue('C' . ($lastRow + 7), 'Disediakan oleh:');
+                $event->sheet->getStyle('B' . ($lastRow + 9))->getFont()->setSize(10)->setBold(true);
+                $event->sheet->setCellValue('B' . ($lastRow + 9), "iii)Disahkan sehingga 31/12/2023  peruntukan telah berbaki RM 0.00");
 
-                $event->sheet->getStyle('C' . ($lastRow + 8))->getFont()->setSize(10);
-                $event->sheet->setCellValue('C' . ($lastRow + 8), 'Cop & tandatangan');
+                $event->sheet->getStyle('C' . ($lastRow + 11))->getFont()->setSize(10);
+                $event->sheet->setCellValue('C' . ($lastRow + 11), 'Disediakan oleh:');
 
-                $event->sheet->getStyle('C' . ($lastRow + 10))->getFont()->setSize(10);
-                $event->sheet->setCellValue('C' . ($lastRow + 10), 'Tarikh:');
+                $event->sheet->getStyle('C' . ($lastRow + 12))->getFont()->setSize(10);
+                $event->sheet->setCellValue('C' . ($lastRow + 12), 'Cop & tandatangan');
 
-                $event->sheet->getStyle('E' . ($lastRow + 7))->getFont()->setSize(10);
-                $event->sheet->setCellValue('E' . ($lastRow + 7), 'Disemak oleh:');
+                $event->sheet->getStyle('C' . ($lastRow + 14))->getFont()->setSize(10);
+                $event->sheet->setCellValue('C' . ($lastRow + 14), 'Tarikh:');
 
-                $event->sheet->getStyle('E' . ($lastRow + 8))->getFont()->setSize(10);
-                $event->sheet->setCellValue('E' . ($lastRow + 8), 'Cop & tandatangan');
+                $event->sheet->getStyle('E' . ($lastRow + 11))->getFont()->setSize(10);
+                $event->sheet->setCellValue('E' . ($lastRow + 11), 'Disemak oleh:');
 
-                $event->sheet->getStyle('E' . ($lastRow + 10))->getFont()->setSize(10);
-                $event->sheet->setCellValue('E' . ($lastRow + 10), 'Tarikh:');
+                $event->sheet->getStyle('E' . ($lastRow + 12))->getFont()->setSize(10);
+                $event->sheet->setCellValue('E' . ($lastRow + 12), 'Cop & tandatangan');
 
-                $event->sheet->getStyle('H' . ($lastRow + 7))->getFont()->setSize(10);
-                $event->sheet->setCellValue('H' . ($lastRow + 7), 'Disahkan oleh:');
+                $event->sheet->getStyle('E' . ($lastRow + 14))->getFont()->setSize(10);
+                $event->sheet->setCellValue('E' . ($lastRow + 14), 'Tarikh:');
 
-                $event->sheet->getStyle('H' . ($lastRow + 8))->getFont()->setSize(10);
-                $event->sheet->setCellValue('H' . ($lastRow + 8), 'Cop & tandatangan');
+                $event->sheet->getStyle('H' . ($lastRow + 11))->getFont()->setSize(10);
+                $event->sheet->setCellValue('H' . ($lastRow + 11), 'Disahkan oleh:');
 
-                $event->sheet->getStyle('H' . ($lastRow + 10))->getFont()->setSize(10);
-                $event->sheet->setCellValue('H' . ($lastRow + 10), 'Tarikh:');
+                $event->sheet->getStyle('H' . ($lastRow + 12))->getFont()->setSize(10);
+                $event->sheet->setCellValue('H' . ($lastRow + 12), 'Cop & tandatangan');
+
+                $event->sheet->getStyle('H' . ($lastRow + 14))->getFont()->setSize(10);
+                $event->sheet->setCellValue('H' . ($lastRow + 14), 'Tarikh:');
             },
         ];
     }
