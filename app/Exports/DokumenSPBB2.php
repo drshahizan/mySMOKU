@@ -190,13 +190,15 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
         // Set the Carbon locale to Malay (Malaysia)
         Carbon::setLocale('ms');
 
-        // Get the current month in Malay
+        // Get the current month in Malay and the current year
         $currentMonth = Carbon::now()->translatedFormat('F');
+        $currentYear = Carbon::now()->year;
 
-        // Convert the month name to uppercase
+        // Convert the month name to uppercase and concatenate with the year
         $currentMonth = strtoupper($currentMonth);
+        $bulanTahun = $currentMonth . ' ' . $currentYear;
 
-        return $currentMonth;
+        return $bulanTahun;
     }
 
     public function registerEvents(): array

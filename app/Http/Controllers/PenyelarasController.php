@@ -1390,27 +1390,27 @@ class PenyelarasController extends Controller
 
     public function muatTurunDokumenSPBB1()
     {
-        return Excel::download(new DokumenSPPB1, 'spbb1-export.xlsx');
+        return Excel::download(new DokumenSPPB1, 'SPBB1-BKOKU.xlsx');
     }
 
     public function muatTurunDokumenSPBB1a()
     {
-        return Excel::download(new DokumenSPPB1a, 'spbb1a-export.xlsx');
+        return Excel::download(new DokumenSPPB1a, 'SPBB1a-BKOKU.xlsx');
     }
 
     public function muatTurunDokumenSPBB2()
     {
-        return Excel::download(new DokumenSPBB2, 'spbb2-export.xlsx');
+        return Excel::download(new DokumenSPBB2, 'SPBB2-BKOKU.xlsx');
     }
 
     public function muatTurunDokumenSPBB2a()
     {
-        return Excel::download(new DokumenSPBB2a, 'spbb2a-export.xlsx');
+        return Excel::download(new DokumenSPBB2a, 'SPBB2a-BKOKU.xlsx');
     }
 
     public function muatTurunDokumenSPBB3()
     {
-        return Excel::download(new DokumenSPBB3, 'spbb3-export.xlsx');
+        return Excel::download(new DokumenSPBB3, 'SPBB3-BKOKU.xlsx');
     }
 
     public function muatNaikBorangSPBB()
