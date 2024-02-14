@@ -6,7 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
 </head>
 		<!--begin::Page title-->
@@ -211,15 +211,15 @@
 <!--begin::Javascript-->
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
 
-<script src="assets/js/scripts.bundle.js"></script>
+<script src="/assets/js/scripts.bundle.js"></script>
 <!--end::Global Javascript Bundle-->
 
 <!--begin::Custom Javascript(used for this page only)-->
-<script src="assets/js/custom/apps/customers/list/export.js"></script>
+{{-- <script src="assets/js/custom/apps/customers/list/export.js"></script>
 <script src="assets/js/custom/apps/customers/list/list.js"></script>
 <script src="assets/js/custom/apps/customers/add.js"></script>
 <script src="assets/js/custom/utilities/modals/new-card.js"></script>
-<script src="assets/js/custom/utilities/modals/users-search.js"></script>
+<script src="assets/js/custom/utilities/modals/users-search.js"></script> --}}
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 	
