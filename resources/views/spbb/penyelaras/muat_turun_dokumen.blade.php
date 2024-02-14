@@ -193,22 +193,6 @@
 										</td>
 									</tr>
 
-									{{-- DOKUMEN SPBB 4 --}}
-									<tr>
-										<td>Borang SPBB 4 (Surat Iringan Universiti)</td>
-										<td>
-											<div id="file-input-container">
-												<div class="d-flex">
-													<div class="file-input">
-														<a href="{{ route('penyelaras.dokumen.SPBB4') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
-															Muat Turun SPBB 4<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
-														</a>
-													</div>
-												</div>
-											</div>                                                                                     
-										</td>
-									</tr>
-
 									<tr>
 										<td colspan="2">
 											<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp;

@@ -1413,11 +1413,6 @@ class PenyelarasController extends Controller
         return Excel::download(new DokumenSPBB3, 'spbb3-export.xlsx');
     }
 
-    public function muatTurunDokumenSPBB4()
-    {
-        return Excel::download(new DokumenSPBB4, 'spbb4-export.xlsx');
-    }
-
     public function muatNaikBorangSPBB()
     {   
         $user = auth()->user();
