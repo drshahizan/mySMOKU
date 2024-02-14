@@ -204,7 +204,7 @@
 						</a>
 					</div>
 					<div class="menu-item">
-						<a class="menu-link" href="{{ url('penyelaras/penyaluran/permohonan-tuntutan/layak') }}">
+						<a class="menu-link" href="{{ url('penyelaras/penyaluran/senarai/permohonan-tuntutan/layak') }}">
 							<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
 							<span class="menu-title">Senarai Pembayaran</span>
 						</a>
