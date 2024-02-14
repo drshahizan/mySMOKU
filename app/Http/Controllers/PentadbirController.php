@@ -248,7 +248,8 @@ class PentadbirController extends Controller
             ];
 
             $client = new Client();
-            $url = 'https://oku.jkm.gov.my/api/oku/051123030366';
+            // $url = 'https://oku.jkm.gov.my/api/oku/051123030366';
+            $url = 'https://oku-staging.jkm.gov.my/api/oku/000212101996';
             $response = $client->get($url, ['headers' => $headers]);
 
             $statusCode = $response->getStatusCode();
