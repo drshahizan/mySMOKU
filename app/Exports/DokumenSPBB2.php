@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Tuntutan;
-use App\Models\Akademik;
+use App\Models\Permohonan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -33,8 +33,8 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
 
     public function collection()
     {
-        // Fetch data from the database based on the institusi ID
-        $senarai = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
+        // Fetch data from Tuntutan table
+        $senaraiTuntutan = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
             ->join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
             ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
             ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
@@ -42,7 +42,7 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
             ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
             ->join('bk_mod as h','h.kod_mod','=','c.mod')
             ->join('tuntutan_saringan as a', 'a.tuntutan_id','=','tuntutan.id')
-            ->where('tuntutan.status', 8)
+            ->where('tuntutan.status', 8) // Apply status condition to Tuntutan table
             ->where('d.jenis', 'Yuran')
             ->where('f.id_institusi', $this->instiusi_user)
             ->select(
@@ -59,8 +59,37 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                 'tuntutan.no_baucer',
                 'tuntutan.tarikh_transaksi',  
                 'tuntutan.perihal',  
-            )
-            ->get();
+            );
+
+        // Fetch data from Permohonan table
+        $senaraiPermohonan = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
+            ->join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
+            ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
+            ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
+            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+            ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
+            ->join('bk_mod as h','h.kod_mod','=','c.mod')
+            ->where('permohonan.status', 8) // Apply status condition to Permohonan table
+            ->where('d.jenis', 'Yuran')
+            ->where('f.id_institusi', $this->instiusi_user)
+            ->select(
+                'b.id',
+                'b.nama',
+                'b.no_kp',
+                'c.tarikh_mula',
+                'c.tarikh_tamat',
+                'c.nama_kursus',
+                'c.status',
+                DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
+                'permohonan.yuran_dibayar',
+                'permohonan.wang_saku_dibayar',
+                'permohonan.no_baucer',
+                'permohonan.tarikh_transaksi',    
+                'permohonan.perihal',    
+            );
+
+        // Combine the results of both queries
+        $senarai = $senaraiTuntutan->union($senaraiPermohonan)->get();
 
         return $senarai;
     }
@@ -270,7 +299,7 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                 // Add a row at the end to display the total values
                 $event->sheet->append([
                     // Custom row for total
-                    ['JUMLAH', '', '', '', '', '', $totalBayaranFormatted],
+                    ['JUMLAH (RM)', '', '', '', '', '', $totalBayaranFormatted],
                 ]);
 
                 // Corrected code set background for jumlah
