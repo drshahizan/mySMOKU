@@ -82,7 +82,8 @@ class PenyelarasPPKController extends Controller
             'Authorization' => 'Bearer knhnxYoATGLiN5WxErU6SVVw8c9xhw09vQ3KRPkOtcH3O0CYh21wDA4CsypX',
         ];
         $client = new Client();
-        $url = 'https://oku.jkm.gov.my/api/oku/' . $request->no_kp;
+        // $url = 'https://oku.jkm.gov.my/api/oku/' . $request->no_kp;
+        $url = 'https://oku-staging.jkm.gov.my/api/oku/' . $request->no_kp;
         $guzzleRequest = $client->get($url, ['headers' => $headers]);
 
         $response = $guzzleRequest ? $guzzleRequest->getBody()->getContents() : null;
