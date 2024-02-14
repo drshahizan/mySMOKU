@@ -270,27 +270,27 @@ class PentadbirController extends Controller
         }
 
         // Add code to check the status of the API from the non-secure site
-        try {
-            $client = new Client();
-            $url = 'http://10.29.216.151/api/bkoku/request-MQR';
-            $response = $client->get($url);
+        // try {
+        //     $client = new Client();
+        //     $url = 'http://10.29.216.151/api/bkoku/request-MQR';
+        //     $response = $client->get($url);
 
-            $statusCode = $response->getStatusCode();
-            $responseContent = $response->getBody()->getContents();
+        //     $statusCode = $response->getStatusCode();
+        //     $responseContent = $response->getBody()->getContents();
 
-            // Check if the status code indicates success (usually 2xx)
-            if ($statusCode >= 200 && $statusCode < 300) {
-                // API connection is successful
-                $data = json_decode($responseContent, true);
-                $success['mqa'] = 'Sambungan API MQA berjaya';
-            } else {
-                // Handle API error
-                $error['mqa'] = 'Permintaan API MQA gagal dengan kod status: ' . $statusCode;
-            }
-        } catch (\Exception $e) {
-            // Handle exceptions
-            $error['mqa'] = 'Ralat dikesan: ' . $e->getMessage();
-        }
+        //     // Check if the status code indicates success (usually 2xx)
+        //     if ($statusCode >= 200 && $statusCode < 300) {
+        //         // API connection is successful
+        //         $data = json_decode($responseContent, true);
+        //         $success['mqa'] = 'Sambungan API MQA berjaya';
+        //     } else {
+        //         // Handle API error
+        //         $error['mqa'] = 'Permintaan API MQA gagal dengan kod status: ' . $statusCode;
+        //     }
+        // } catch (\Exception $e) {
+        //     // Handle exceptions
+        //     $error['mqa'] = 'Ralat dikesan: ' . $e->getMessage();
+        // }
 
         try {
             $client = new Client();
