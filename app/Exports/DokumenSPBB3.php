@@ -16,7 +16,7 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use Carbon\Carbon;
 
-class DokumenSPBB3 implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
+class DokumenSPBB3 implements WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -31,146 +31,139 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithColumnWidths, Wi
         $this->instiusi_user = Auth::user()->id_institusi;
     }
 
-    public function collection()
-    {
-        // Fetch data from Tuntutan table
-        $senaraiTuntutan = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
-            ->join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
-            ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
-            ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
-            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-            ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
-            ->join('bk_mod as h','h.kod_mod','=','c.mod')
-            ->join('tuntutan_saringan as a', 'a.tuntutan_id','=','tuntutan.id')
-            ->where('tuntutan.status', 8) // Apply status condition to Tuntutan table
-            ->where('d.jenis', 'Yuran')
-            ->where('f.id_institusi', $this->instiusi_user)
-            ->select(
-                'b.id',
-                'b.nama',
-                'b.no_kp',
-                'c.tarikh_mula',
-                'c.tarikh_tamat',
-                'c.nama_kursus',
-                'c.status',
-                DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
-                'tuntutan.yuran_dibayar',
-                'tuntutan.wang_saku_dibayar',
-                'tuntutan.no_baucer',
-                'tuntutan.tarikh_transaksi',  
-                'tuntutan.perihal',  
-            );
+    // public function collection()
+    // {
+    //     // Fetch data from Tuntutan table
+    //     $senaraiTuntutan = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
+    //         ->join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
+    //         ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
+    //         ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
+    //         ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+    //         ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
+    //         ->join('bk_mod as h','h.kod_mod','=','c.mod')
+    //         ->join('tuntutan_saringan as a', 'a.tuntutan_id','=','tuntutan.id')
+    //         ->where('tuntutan.status', 8) // Apply status condition to Tuntutan table
+    //         ->where('d.jenis', 'Yuran')
+    //         ->where('f.id_institusi', $this->instiusi_user)
+    //         ->select(
+    //             'b.id',
+    //             'b.nama',
+    //             'b.no_kp',
+    //             'c.tarikh_mula',
+    //             'c.tarikh_tamat',
+    //             'c.nama_kursus',
+    //             'c.status',
+    //             DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
+    //             'tuntutan.yuran_dibayar',
+    //             'tuntutan.wang_saku_dibayar',
+    //             'tuntutan.no_baucer',
+    //             'tuntutan.tarikh_transaksi',  
+    //             'tuntutan.perihal',  
+    //         );
 
-        // Fetch data from Permohonan table
-        $senaraiPermohonan = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
-            ->join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
-            ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
-            ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
-            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-            ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
-            ->join('bk_mod as h','h.kod_mod','=','c.mod')
-            ->where('permohonan.status', 8) // Apply status condition to Permohonan table
-            ->where('d.jenis', 'Yuran')
-            ->where('f.id_institusi', $this->instiusi_user)
-            ->select(
-                'b.id',
-                'b.nama',
-                'b.no_kp',
-                'c.tarikh_mula',
-                'c.tarikh_tamat',
-                'c.nama_kursus',
-                'c.status',
-                DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
-                'permohonan.yuran_dibayar',
-                'permohonan.wang_saku_dibayar',
-                'permohonan.no_baucer',
-                'permohonan.tarikh_transaksi',    
-                'permohonan.perihal',    
-            );
+    //     // Fetch data from Permohonan table
+    //     $senaraiPermohonan = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
+    //         ->join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
+    //         ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
+    //         ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
+    //         ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+    //         ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
+    //         ->join('bk_mod as h','h.kod_mod','=','c.mod')
+    //         ->where('permohonan.status', 8) // Apply status condition to Permohonan table
+    //         ->where('d.jenis', 'Yuran')
+    //         ->where('f.id_institusi', $this->instiusi_user)
+    //         ->select(
+    //             'b.id',
+    //             'b.nama',
+    //             'b.no_kp',
+    //             'c.tarikh_mula',
+    //             'c.tarikh_tamat',
+    //             'c.nama_kursus',
+    //             'c.status',
+    //             DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
+    //             'permohonan.yuran_dibayar',
+    //             'permohonan.wang_saku_dibayar',
+    //             'permohonan.no_baucer',
+    //             'permohonan.tarikh_transaksi',    
+    //             'permohonan.perihal',    
+    //         );
 
-        // Combine the results of both queries
-        $senarai = $senaraiTuntutan->union($senaraiPermohonan)->get();
+    //     // Combine the results of both queries
+    //     $senarai = $senaraiTuntutan->union($senaraiPermohonan)->get();
 
-        return $senarai;
-    }
+    //     return $senarai;
+    // }
 
-    public function headings(): array
-    {
-        return [
-            // Custom Rows
-            ['INSTITUSI:'],
-            ['CAWANGAN:'],
-            ['BULAN:'],
-            [''],
-            ['LAPORAN PENYATA TERIMAAN DAN BAYARAN PROGRAM BKOKU'], 
+    // public function headings(): array
+    // {
+    //     return [
+    //         // Custom Rows
+    //         ['INSTITUSI:'],
+    //         ['CAWANGAN:'],
+    //         ['BULAN:'],
+    //         [''],
+    //         ['LAPORAN PENYATA TERIMAAN DAN BAYARAN PROGRAM BKOKU'], 
+    //         [''],
 
-            // Data Headers
-            array_map('strtoupper', [
-                'TARIKH',
-                'PERKARA',
-                'RUJUKAN',
-                'RM',
-                'TARIKH',
-                'PERKARA',
-                'RUJUKAN',
-                'RM',
-            ]),
-        ];
-    }
+    //         // Section headers
+    //         ['TARIKH', 'PERKARA', 'RUJUKAN', 'RM'], // Headers for the "TERIMAAN" section
+    //         ['TARIKH', 'PERKARA', 'RUJUKAN', 'RM'], // Headers for the "BAYARAN" section
+    //     ];
+    // }
 
-    public function columnWidths(): array
-    {
-        return [
-            'A' => 5,
-            'B' => 40,           
-            'C' => 20,
-            'D' => 30,
-            'E' => 25,
-            'F' => 15,
-            'G' => 20,
-            'H' => 20,
-            'I' => 30,
-            'J' => 20,
-        ];
-    }
+    // public function columnWidths(): array
+    // {
+    //     return [
+    //         'A' => 5,
+    //         'B' => 40,           
+    //         'C' => 20,
+    //         'D' => 30,
+    //         'E' => 25,
+    //         'F' => 15,
+    //         'G' => 20,
+    //         'H' => 20,
+    //         'I' => 30,
+    //         'J' => 20,
+    //     ];
+    // }
 
-    public function map($row): array
-    {
-        // Retrive tarikh mula & tamat pengajian
-        $tarikh_mula = Carbon::parse($row->tarikh_mula)->format('d/m/Y');
-        $tarikh_tamat = Carbon::parse($row->tarikh_tamat)->format('d/m/Y');
+    // public function map($row): array
+    // {
+    //     // Retrive tarikh mula & tamat pengajian
+    //     $tarikh_mula = Carbon::parse($row->tarikh_mula)->format('d/m/Y');
+    //     $tarikh_tamat = Carbon::parse($row->tarikh_tamat)->format('d/m/Y');
 
-        // Concatenate the formatted dates with the desired format
-        $tempoh_tajaan = $tarikh_mula . ' - ' . $tarikh_tamat;
+    //     // Concatenate the formatted dates with the desired format
+    //     $tempoh_tajaan = $tarikh_mula . ' - ' . $tarikh_tamat;
 
-        // Calculate the total of yuran dibayar & want saki dibayar
-        $bayaran = number_format($row->yuran_dibayar, 2, '.', '') + number_format($row->wang_saku_dibayar, 2, '.', '');
+    //     // Calculate the total of yuran dibayar & want saki dibayar
+    //     $bayaran = number_format($row->yuran_dibayar, 2, '.', '') + number_format($row->wang_saku_dibayar, 2, '.', '');
 
-        // Checking for status
-        if($row->status == 1)
-            $status = 'AKTIF';
-        else
-            $status = 'TIDAK AKTIF';
+    //     // Checking for status
+    //     if($row->status == 1)
+    //         $status = 'AKTIF';
+    //     else
+    //         $status = 'TIDAK AKTIF';
 
-        // Increment the counter for "BIL" column
-        $this->counter++;
+    //     // Increment the counter for "BIL" column
+    //     $this->counter++;
 
-        // Update total values
-        $this->totalBayaran += $bayaran;
+    //     // Update total values
+    //     $this->totalBayaran += $bayaran;
 
-        return [
-             $this->counter,
-             $row->nama,
-             $row->no_kp,
-             strtoupper($row->nama_kursus),
-             $tempoh_tajaan,
-             $status,
-             number_format($bayaran, 2, '.', ''), 
-             $row->no_baucer,
-             strtoupper($row->perihal),
-             Carbon::parse($row->tarikh_transaksi)->format('d/m/Y'),
-        ];
-    }
+    //     return [
+    //          $this->counter,
+    //          $row->nama,
+    //          $row->no_kp,
+    //          strtoupper($row->nama_kursus),
+    //          $tempoh_tajaan,
+    //          $status,
+    //          number_format($bayaran, 2, '.', ''), 
+    //          $row->no_baucer,
+    //          strtoupper($row->perihal),
+    //          Carbon::parse($row->tarikh_transaksi)->format('d/m/Y'),
+    //     ];
+    // }
 
     private function getInstitusiData()
     {
@@ -209,7 +202,7 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                     ['CAWANGAN:'],
                     ['BULAN:', $this->getBulanData()],
                     [''],
-                    ['LAPORAN PENYATA TERIMAAN DAN BAYARAN PROGRAM BKOKU'],
+                    ['LAPORAN KUTIPAN BALIK BAGI PELAJAR BKOKU YANG TARIK DIRI/ BERHENTI'],
                 ];
 
                 foreach ($customHeaderData as $index => $rowData) {
@@ -235,42 +228,96 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                     }
                 }
 
-                // Get the row number where the table headers start
-                $dataHeaderRow = 6; 
 
-                // Customize the style of the data header row
-                $event->sheet->getStyle('B' . $dataHeaderRow . ':' . $event->sheet->getHighestColumn() . $dataHeaderRow)->applyFromArray([
+                // Merge cells for "TERIMAAN" and "BAYARAN" sections
+                $event->sheet->mergeCells('B7:E7'); // Merge "TERIMAAN" cells
+                $event->sheet->mergeCells('F7:I7'); // Merge "BAYARAN" cells
+    
+                // Custom section headers
+                $event->sheet->setCellValue('B7', 'TERIMAAN');
+                $event->sheet->setCellValue('F7', 'BAYARAN');
+    
+                // Apply styles to the section headers
+                $event->sheet->getStyle('B7:I7')->applyFromArray([
                     'font' => [
                         'bold' => true,
-                        'color' => ['rgb' => '#000000'], // Data header font color 
-                        'size' => 11, // Data header font size
                     ],
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                        'startColor' => ['rgb' => 'B3B3B3'], // Data header background color 
-                    ],
-                ])
-                ->getAlignment()
-                ->setHorizontal(Alignment::HORIZONTAL_CENTER)
-                ->setVertical(Alignment::VERTICAL_CENTER)
-                ->setTextRotation(0) // Optional: Set text rotation to 0 degrees
-                ->setWrapText(true);
-
-
-                // Center the "LAPORAN BAYARAN PROGRAM BKOKU (SPBB 2)" row and make it span all columns
-                $event->sheet->mergeCells('B5:' . $event->sheet->getHighestColumn() . '5');
-                $event->sheet->getStyle('B5')->applyFromArray([
-                    'font' => [
-                        'bold' => true,
+                        'startColor' => ['rgb' => 'D3D3D3'], // Background colour
                     ],
                     'alignment' => [
                         'horizontal' => Alignment::HORIZONTAL_CENTER,
+                        'vertical' => Alignment::VERTICAL_CENTER,
+                    ],
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                        ],
                     ],
                 ]);
+    
+                // Set column widths
+                $event->sheet->getColumnDimension('B')->setWidth(15);
+                $event->sheet->getColumnDimension('C')->setWidth(25);
+                $event->sheet->getColumnDimension('D')->setWidth(25);
+                $event->sheet->getColumnDimension('E')->setWidth(15);
+                $event->sheet->getColumnDimension('F')->setWidth(15);
+                $event->sheet->getColumnDimension('G')->setWidth(25);
+                $event->sheet->getColumnDimension('H')->setWidth(25);
+                $event->sheet->getColumnDimension('I')->setWidth(15);
+
+                // Custom section headers
+                $event->sheet->setCellValue('B8', 'TARIKH');
+                $event->sheet->setCellValue('C8', 'PERKARA');
+                $event->sheet->setCellValue('D8', 'RUJUKAN');
+                $event->sheet->setCellValue('E8', 'RM');
+                $event->sheet->setCellValue('F8', 'TARIKH');
+                $event->sheet->setCellValue('G8', 'PERKARA');
+                $event->sheet->setCellValue('H8', 'RUJUKAN');
+                $event->sheet->setCellValue('I8', 'RM');
+
+                // Center-align section headers horizontally and vertically
+                $event->sheet->getStyle('B7:I7')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                $event->sheet->getStyle('B7:I7')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+            
+
+                // // Get the row number where the table headers start
+                // $dataHeaderRow = 7; 
+
+                // // Customize the style of the data header row
+                // $event->sheet->getStyle('B' . $dataHeaderRow . ':' . $event->sheet->getHighestColumn() . $dataHeaderRow)->applyFromArray([
+                //     'font' => [
+                //         'bold' => true,
+                //         'color' => ['rgb' => '#000000'], // Data header font color 
+                //         'size' => 11, // Data header font size
+                //     ],
+                //     'fill' => [
+                //         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                //         'startColor' => ['rgb' => 'B3B3B3'], // Data header background color 
+                //     ],
+                // ])
+                // ->getAlignment()
+                // ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+                // ->setVertical(Alignment::VERTICAL_CENTER)
+                // ->setTextRotation(0) // Optional: Set text rotation to 0 degrees
+                // ->setWrapText(true);
+
+
+                // Center the "LAPORAN BAYARAN PROGRAM BKOKU (SPBB 2)" row and make it span all columns
+                // $event->sheet->mergeCells('B7:' . $event->sheet->getHighestColumn() . '7');
+                // $event->sheet->getStyle('B7')->applyFromArray([
+                //     'font' => [
+                //         'bold' => true,
+                //     ],
+                //     'alignment' => [
+                //         'horizontal' => Alignment::HORIZONTAL_CENTER,
+                //     ],
+                // ]);
                 
 
                 // Add borders and align to the data table
-                $startRow = 5; 
+                $startRow = 8; 
                 $startColumn = 'B';
                 $endColumn = 'I'; 
                 $endRow = $event->sheet->getHighestRow(); 
@@ -299,14 +346,14 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                 // Add a row at the end to display the total values
                 $event->sheet->append([
                     // Custom row for total
-                    ['JUMLAH (RM)', '', '', '', '', '', $totalBayaranFormatted],
+                    ['', 'JUMLAH (RM)', '', $totalBayaranFormatted],
                 ]);
 
                 // Corrected code set background for jumlah
                 $event->sheet->getStyle('B' . ($lastRow + 1) . ':I' . ($lastRow + 1))->applyFromArray([
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                        'startColor' => ['rgb' => 'D3D3D3'], // Choose your desired color
+                        'startColor' => ['rgb' => 'D3D3D3'], // Background colour
                     ],
                     'font' => [
                         'bold' => true,
