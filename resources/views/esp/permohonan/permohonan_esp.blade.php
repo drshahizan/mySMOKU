@@ -923,7 +923,7 @@
       const form = document.getElementById('hantar_maklumat');
       const data = new FormData(form);
 
-      fetch('https://espbstg.mohe.gov.my/api/studentsInfo.php', {
+      fetch('https://espb.mohe.gov.my/api/studentsInfo.php', {
           method: 'POST',
           body: data
       })
