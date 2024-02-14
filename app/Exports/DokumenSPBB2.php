@@ -124,9 +124,9 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
     {
         return [
             'A' => 5,
-            'B' => 30,           
+            'B' => 40,           
             'C' => 20,
-            'D' => 40,
+            'D' => 30,
             'E' => 25,
             'F' => 15,
             'G' => 20,
