@@ -6,7 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
 </head>
 		<!--begin::Page title-->
