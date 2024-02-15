@@ -192,6 +192,12 @@
 						</div>
 					</div>
 					<div class="menu-item">
+						<a class="menu-link" href="{{ route('penyelaras.senarai.layak') }}">
+							<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
+							<span class="menu-title">Senarai Pembayaran</span>
+						</a>
+					</div>
+					<div class="menu-item">
 						<a class="menu-link" href="{{ route('penyelaras.muat-turun.SPBB')}}">
 							<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
 							<span class="menu-title">Muat Turun SPBB</span>
@@ -201,12 +207,6 @@
 						<a class="menu-link" href="{{ route('penyelaras.muat-naik.SPBB')}}">
 							<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
 							<span class="menu-title">Muat Naik SPBB</span>
-						</a>
-					</div>
-					<div class="menu-item">
-						<a class="menu-link" href="{{ url('penyelaras/penyaluran/senarai/permohonan-tuntutan/layak') }}">
-							<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
-							<span class="menu-title">Senarai Pembayaran</span>
 						</a>
 					</div>
 					<div class="menu-item">
