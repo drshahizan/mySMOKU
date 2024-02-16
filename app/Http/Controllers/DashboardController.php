@@ -24,9 +24,10 @@ class DashboardController extends Controller
 
         if(Auth::user()->tahap=='1')
         {
-            if (Auth::user()->data_migrate == '1')
-                return redirect()->route('kemaskini.emel.katalaluan');
-            else
+            //TUTUP. SEBAB TAKNAK SET PASSWORD UTK USER LAMA
+            // if (Auth::user()->data_migrate == '1')
+            //     return redirect()->route('kemaskini.emel.katalaluan');
+            // else
                 return redirect()->route('pelajar.dashboard');
         }
         else if(Auth::user()->tahap=='2')
