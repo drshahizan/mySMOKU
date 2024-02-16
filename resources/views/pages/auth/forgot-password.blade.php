@@ -1,5 +1,8 @@
 <x-auth-layout>
-
+    @section('announcement')
+        <h2>Hebahan</h2>
+        <p>{!! $catatan !!}</p> 
+    @endsection
     <!--begin::Form-->
     <form class="form w-100" novalidate="novalidate" id="kt_password_reset_form" data-kt-redirect-url="{{ route('login') }}" action="{{ route('password.request') }}">
         @csrf
@@ -13,7 +16,7 @@
 
             <!--begin::Link-->
             <div class="text-gray-500 fw-semibold fs-6">
-                Masukkan alamat emel anda untuk menetapkan semula kata laluan anda.
+                Masukkan No. Kad Pengenalan anda untuk menetapkan semula kata laluan.
             </div>
             <!--end::Link-->
         </div>
@@ -22,7 +25,7 @@
         <!--begin::Input group--->
         <div class="fv-row mb-8">
             <!--begin::Email-->
-            <input type="text" placeholder="Emel" name="email" autocomplete="off" class="form-control bg-transparent" value=""/>
+            <input type="text" placeholder="Masukkan No. Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" class="form-control bg-transparent" value=""/>
             <!--end::Email-->
         </div>
 

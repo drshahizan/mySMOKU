@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Mail\ResetPassword;
+use App\Models\TarikhIklan;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
@@ -21,18 +22,41 @@ class PasswordResetLinkController extends Controller
     public function create()
     {
         addJavascriptFile('assets/js/custom/authentication/reset-password/reset-password.js');
-        return view('pages.auth.forgot-password');
+        $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
+        $catatan = $iklan->catatan ?? "";
+        
+
+        return view('pages.auth.forgot-password', compact('catatan'));
+    }
+
+    public function getEmail($no_kp)
+    {
+        // Retrieve the user by 'no_kp'
+        $user = User::where('no_kp', $no_kp)->first();
+
+        // Check if user exists and get the email
+        if ($user) {
+            $email = $user->email;
+            $success = true;
+        } else {
+            $email = null;
+            $success = false;
+        }
+        
+        // Return JSON response with success flag and email data
+        return response()->json(['success' => $success, 'email' => $email]);
     }
 
 
     public function store(Request $request)
     {
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('no_kp', $request->no_kp)->first();
+        $emel = $user->email;
         if ($user) {
 
             $token = Str::random(64); // Generate a unique token
             DB::table('password_resets')->insert([
-                'email' => $request->email,
+                'email' => $emel,
                 'token' => $token,
                 'created_at' => now(),
             ]);
@@ -40,7 +64,7 @@ class PasswordResetLinkController extends Controller
             $resetLink = route('password.reset', ['token' => $token]);
 
             // Send the email with the reset link and token
-            Mail::to($request->email)->send(new ResetPassword($token));
+            Mail::to($emel)->send(new ResetPassword($token));
             return response()->json(['success' => true, 'message' => 'Password reset email sent successfully.'], 200);
 
         }
