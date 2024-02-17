@@ -544,13 +544,14 @@ document.addEventListener("DOMContentLoaded", function () {
 					validationStatus[clickedStepIndex] = "Valid";
 				} else if ((mod === '2' || mod === '3' || mod === '4') && sumber === '1') {
 					validationStatus[clickedStepIndex] = "Invalid";
+					status = "Tidak";
 				} else {
 					validationStatus[clickedStepIndex] = "Invalid";
 				}
 			
 				// console.log("firstInvalid Step: " + firstInvalidStep);
 
-				if (validationStatus[clickedStepIndex] === "Invalid") {
+				if ((validationStatus[clickedStepIndex] === "Invalid") && status === "Tidak") {
 					// Handle validation error for specific case
 					Swal.fire({
 						text: "Tidak layak.",
@@ -561,7 +562,7 @@ document.addEventListener("DOMContentLoaded", function () {
 							confirmButton: "btn btn-light",
 						},
 					}).then(function () {
-						stepper.goTo(3); // Go back to step 3                    
+						stepper.goTo(4); // Go back to step 4                    
 						KTUtil.scrollTop();
 					});
 				} else {
@@ -667,8 +668,9 @@ document.addEventListener("DOMContentLoaded", function () {
         var formSubmitButton = document.querySelector('[data-kt-stepper-action="submit"]');
         var formContinueButton = document.querySelector('[data-kt-stepper-action="next"]');
     
-        if (validationStatus === 'Valid') {
+        // if (validationStatus === 'Valid') {
             // Validation successful
+		console.log("Current Step: " + stepper.getCurrentStepIndex());
             if (stepper.getCurrentStepIndex() === 6) {
                 formSubmitButton.classList.remove('d-none');
                 formSubmitButton.classList.add('d-inline-block');
@@ -711,7 +713,8 @@ document.addEventListener("DOMContentLoaded", function () {
 						   
 						}
 					}
-                } else {
+                } 
+				else {
                     formContinueButton.classList.add('d-none'); // hide the continue button
 					if (stepper.getCurrentStepIndex() === 5 || stepper.getCurrentStepIndex() === 6 || stepper.getCurrentStepIndex() === 7) {
                 
@@ -735,37 +738,12 @@ document.addEventListener("DOMContentLoaded", function () {
 					}
 				}
             } 
-			// else if (stepper.getCurrentStepIndex() === 5 || stepper.getCurrentStepIndex() === 6 || stepper.getCurrentStepIndex() === 7) {
-                
-            //     if (formContinueButton.classList.contains('d-none')) {
-            //         // Handle validation error
-            //         Swal.fire({
-            //             text: "Tidak layak.",
-            //             icon: "error",
-            //             buttonsStyling: false,
-            //             confirmButtonText: "Ok",
-            //             customClass: {
-            //                 confirmButton: "btn btn-light",
-            //             },
-            //         }).then(function () {
-            //             stepper.goPrevious();
-            //             KTUtil.scrollTop();
-            //         });
-                    
-                   
-            //     }
-            // }
-            // else if (stepper.getCurrentStepIndex() === 7) {
-            //     formSubmitButton.classList.remove('d-inline-block');
-            //     formSubmitButton.classList.remove('d-none');
-            //     formContinueButton.classList.remove('d-none');
-            // }
 			else {
                 formSubmitButton.classList.remove('d-inline-block');
                 formSubmitButton.classList.remove('d-none');
                 formContinueButton.classList.remove('d-none');
             }
-        } 
+        // } 
         // else {
         //     // Validation failed
         //     Swal.fire({
