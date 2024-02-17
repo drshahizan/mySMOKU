@@ -281,7 +281,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/penyaluran/muat-turun/spbb4', [PenyelarasController::class, 'muatTurunDokumenSPBB4'])->name('penyelaras.dokumen.SPBB4');
 
     //Penyaluran - Penyelaras - Pembayaran
-    Route::get('penyelaras/penyaluran/senarai/permohonan-tuntutan/layak', [PenyelarasController::class, 'senaraiPemohonLayak'])->name('penyelaras.senarai.layak');;
+    Route::get('penyelaras/penyaluran/kemaskini/permohonan-tuntutan/layak', [PenyelarasController::class, 'senaraiPemohonLayak'])->name('penyelaras.kemaskini.layak');;
     Route::get('penyelaras/penyaluran/permohonan-tuntutan/dibayar', [PenyelarasController::class, 'senaraiPemohonDibayar'])->name('penyelaras.senarai.dibayar');
     Route::get('/permohonan/senarai-layak-excel', [PenyelarasController::class, 'exportPermohonanLayak'])->name('penyelaras.permohonan.senarai.layak.excel');
     Route::post('/permohonan/process-uploaded-file', [PenyelarasController::class, 'uploadedFilePembayaranPermohonan'])->name('modified.file.pembayaran.permohonan');

@@ -192,9 +192,9 @@
 						</div>
 					</div>
 					<div class="menu-item">
-						<a class="menu-link" href="{{ route('penyelaras.senarai.layak') }}">
+						<a class="menu-link" href="{{ route('penyelaras.kemaskini.layak') }}">
 							<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
-							<span class="menu-title">Senarai Pembayaran</span>
+							<span class="menu-title">Kemaskini Pembayaran</span>
 						</a>
 					</div>
 					<div class="menu-item">
