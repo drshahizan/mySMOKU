@@ -13,15 +13,14 @@ var KTAuthResetPassword = function () {
             form,
             {
                 fields: {
-                    'email': {
+                    'no_kp': {
                         validators: {
-                            regexp: {
-                                regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: 'Bukan alamat emel yang sah.',
-                            },
                             notEmpty: {
-                                message: 'Alamat emel diperlukan.'
-                            }
+                                message: 'No Kad Pengenalan diperlukan'
+                            },
+							digits: {
+								message: 'No Kad Pengenalan mesti mengandungi digit sahaja'
+							}
                         }
                     }
                 },
@@ -119,24 +118,63 @@ axios.post(submitButton.closest('form').getAttribute('action'), new FormData(for
         console.log(response);
         // Successful response
         if (response.data.success) {
-            form.reset();
 
-            const redirectUrl = form.getAttribute('data-kt-redirect-url');
-
-            if (redirectUrl) {
-                Swal.fire({
-                    text: "Kami telah menghantar pautan set semula kata laluan ke emel anda.",
-                    icon: "success",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    },
-                    didClose: () => {
-                        window.location.href = redirectUrl;
+            var no_kp = form.querySelector('[name="no_kp"]').value;
+            $.ajax({
+                url: 'getEmail/' + no_kp,
+                type: 'GET', // Set the request type to GET
+                data: { no_kp: no_kp },
+                dataType: 'json', // Expect JSON response
+                success: function(response) {
+                    if (response.success) {
+                        var email = response.email;
+                        var parts = email.split('@');
+                        var maskedUsername = parts[0].slice(0, -4) + '****';
+                        var maskedEmail = maskedUsername + '@' + parts[1];
+        
+                        const redirectUrl = form.getAttribute('data-kt-redirect-url');
+        
+                        if (redirectUrl) {
+                            Swal.fire({
+                                text: "Kami telah menghantar pautan set semula kata laluan ke emel " + maskedEmail,
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                },
+                                didClose: () => {
+                                    window.location.href = redirectUrl;
+                                }
+                            });
+                        }
+                    } else {
+                        // Handle the case where no user was found with the provided 'no_kp'
+                        Swal.fire({
+                            text: "User not found",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok",
+                            customClass: {
+                                confirmButton: "btn btn-primary"
+                            }
+                        });
                     }
-                });
-            }
+                },
+                error: function(xhr, status, error) {
+                    // Handle AJAX errors
+                    console.error(error);
+                    Swal.fire({
+                        text: "An error occurred while retrieving the email address",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            });
         } else {
             // Server returned a success:false response
             Swal.fire({
