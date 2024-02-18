@@ -14,6 +14,7 @@ class JumlahPeruntukan extends Model
     protected $fillable = [
         'tarikh_mula',
         'tarikh_tamat',
-        'jumlah',
+        'jumlahBKOKU',
+        'jumlahPPK',
     ];
 }

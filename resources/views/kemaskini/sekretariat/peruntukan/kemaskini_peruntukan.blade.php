@@ -46,7 +46,7 @@
                             @csrf
                             <div class="row mb-10">
                                 <!--begin::Input group-->
-                                <div class="col-md-4 fv-row">
+                                <div class="col-md-5 fv-row">
                                     <!--begin::Label-->
                                     <label class="fs-4 fw-semibold mb-2">Tarikh Mula</label>
                                     <!--end::Label-->
@@ -57,7 +57,7 @@
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div class="col-md-4 fv-row">
+                                <div class="col-md-5 fv-row">
                                     <!--begin::Label-->
                                     <label class="fs-4 fw-semibold mb-2">Tarikh Tamat</label>
                                     <!--end::Label-->
@@ -66,14 +66,25 @@
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
-                                
+                            </div>
+                            <div class="row mb-10">
                                 <!--begin::Input group-->
-                                <div class="col-md-4 fv-row">
+                                <div class="col-md-5 fv-row">
                                     <!--begin::Label-->
-                                    <label class="fs-4 fw-semibold mb-2">Jumlah Peruntukan Tahunan (RM)</label>
+                                    <label class="fs-4 fw-semibold mb-2">Jumlah Peruntukan Tahunan BKOKU (RM)</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="number" name="jumlah" id="jumlah" class="form-control form-control-solid" placeholder="9000000" value="" required step="0.01" oninvalid="this.setCustomValidity('Masukkan jumlah peruntukan.')" oninput="setCustomValidity('')"/>
+                                    <input type="number" name="jumlahBKOKU" id="jumlahBKOKU" class="form-control form-control-solid" placeholder="9000000" value="" required step="0.01" oninvalid="this.setCustomValidity('Masukkan jumlah peruntukan BKOKU.')" oninput="setCustomValidity('')"/>
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+                                 <!--begin::Input group-->
+                                 <div class="col-md-5 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="fs-4 fw-semibold mb-2">Jumlah Peruntukan Tahunan PPK (RM)</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input type="number" name="jumlahPPK" id="jumlahPPK" class="form-control form-control-solid" placeholder="9000000" value="" required step="0.01" oninvalid="this.setCustomValidity('Masukkan jumlah peruntukan PPK.')" oninput="setCustomValidity('')"/>
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
@@ -104,7 +115,8 @@
                                     <tr class="text-start align-center text-gray-400 fw-bold fs-7 gs-0">
                                         <th class="min-w-125px align-center">Tarikh Mula</th>
                                         <th class="min-w-125px align-center">Tarikh Tamat</th>
-                                        <th class="min-w-125px align-center">Jumlah Peruntukan Tahunan</th>
+                                        <th class="min-w-125px align-center">Jumlah Peruntukan Tahunan BKOKU</th>
+                                        <th class="min-w-125px align-center">Jumlah Peruntukan Tahunan PPK</th>
                                         <th class="min-w-125px align-center">Tarikh Kemaskini</th>
                                     </tr>
                                 </thead>
@@ -113,7 +125,8 @@
                                         <tr>
                                             <td>{{ date('d/m/Y', strtotime($item->tarikh_mula)) }}</td>
                                             <td>{{ date('d/m/Y', strtotime($item->tarikh_tamat)) }}</td>
-                                            <td>RM {{ number_format($item->jumlah, 2) }}</td>
+                                            <td>RM {{ number_format($item->jumlahBKOKU, 2) }}</td>
+                                            <td>RM {{ number_format($item->jumlahPPK, 2) }}</td>
                                             <td>{{ $item->updated_at->format('d/m/Y') }}</td>
                                         </tr>
                                     @endforeach
@@ -141,7 +154,8 @@
                 // Extract data for the Tarikh Mula, Tarikh Tamat, and Jumlah fields (adjust column indices as needed)
                 var mulaValue = $(rowData[0]).text();
                 var tamatValue = $(rowData[1]).text();
-                var jumlahValue = $(rowData[2]).text().replace('RM ', '').replace(/,/g, ''); // Remove commas from numeric value
+                var jumlahBKOKUValue = $(rowData[2]).text().replace('RM ', '').replace(/,/g, ''); // Remove commas from numeric value
+                var jumlahPPKValue = $(rowData[3]).text().replace('RM ', '').replace(/,/g, ''); // Remove commas from numeric value
 
                 // Format date values
                 var formattedMulaValue = formatDate(mulaValue);
@@ -150,7 +164,8 @@
                 // Set the values in the input fields
                 $('#tarikh_mula').val(formattedMulaValue);
                 $('#tarikh_tamat').val(formattedTamatValue);
-                $('#jumlah').val(jumlahValue);
+                $('#jumlahBKOKU').val(jumlahBKOKUValue);
+                $('#jumlahPPK').val(jumlahPPKValue);
 
                 // Toggle the visibility of the form
                 $('#recordForm').css('display', 'block');

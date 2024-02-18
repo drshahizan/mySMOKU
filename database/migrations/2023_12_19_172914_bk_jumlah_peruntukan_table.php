@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->date('tarikh_mula');
             $table->date('tarikh_tamat');
-            $table->float('jumlah');
+            $table->float('jumlahBKOKU');
+            $table->float('jumlahPPK');
             $table->timestamps();
         });
     }

@@ -20,7 +20,8 @@ class KemaskiniController extends Controller
         $request->validate([
             'tarikh_mula' => 'required|date',
             'tarikh_tamat' => 'required|date',
-            'jumlah' => 'required|numeric',
+            'jumlahBKOKU' => 'required|numeric',
+            'jumlahPPK' => 'required|numeric',
         ]);
     
         // Find the record or create a new one
@@ -32,13 +33,15 @@ class KemaskiniController extends Controller
             JumlahPeruntukan::create([
                 'tarikh_mula' => $request->tarikh_mula,
                 'tarikh_tamat' => $request->tarikh_tamat,
-                'jumlah' => $request->jumlah,
+                'jumlahBKOKU' => $request->jumlahBKOKU,
+                'jumlahPPK' => $request->jumlahPPK,
             ]);
         } else {
             $peruntukan->update([
                 'tarikh_mula' => $request->tarikh_mula,
                 'tarikh_tamat' => $request->tarikh_tamat,
-                'jumlah' => $request->jumlah,
+                'jumlahBKOKU' => $request->jumlahBKOKU,
+                'jumlahPPK' => $request->jumlahPPK,
             ]);
         }
     
