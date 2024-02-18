@@ -139,22 +139,29 @@
 <!--begin::Javascript-->
 <script>
     function submitForm(selectElement) {
-        // Get the selected value
-        const selectedValue = selectElement.value;
+        // Show confirmation dialog
+        const confirmation = confirm("Teruskan untuk kemaskini pertukaran institusi pelajar?");
+        
+        // If user confirms, proceed to submit the form
+        if (confirmation) {
+            // Get the selected value
+            const selectedValue = selectElement.value;
 
-        // Find the associated form
-        const form = selectElement.closest('form');
+            // Find the associated form
+            const form = selectElement.closest('form');
 
-        // Set the selected value as a hidden input
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'status'; // Change to your desired input name
-        input.value = selectedValue;
-        form.appendChild(input);
+            // Set the selected value as a hidden input
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'status'; // Change to your desired input name
+            input.value = selectedValue;
+            form.appendChild(input);
 
-        // Submit the form
-        form.submit();
+            // Submit the form
+            form.submit();
+        }
     }
+
 </script>
 <script>
     $('#sortTable1').DataTable({
@@ -173,7 +180,7 @@
 	@if(session('success'))
 		Swal.fire({
 			icon: 'success',
-			title: 'Berjaya!',
+			title: 'Lulus!',
 			text: ' {!! session('success') !!}',
 			confirmButtonText: 'OK'
 		});
@@ -181,7 +188,7 @@
 	@if(session('failed'))
 		Swal.fire({
 			icon: 'error',
-			title: 'Tidak Berjaya!',
+			title: 'Tidak Lulus!',
 			text: ' {!! session('failed') !!}',
 			confirmButtonText: 'OK'
 		});

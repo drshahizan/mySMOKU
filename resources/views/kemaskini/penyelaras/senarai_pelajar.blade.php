@@ -112,7 +112,7 @@
                                     @else
                                         <div class="badge badge-light-danger fw-bold">Tidak Aktif</div>
                                     @endif
-                                    @if($tukar_institusi != null && $tukar_institusi->status == 0)
+                                    @if(($tukar_institusi != null && $tukar_institusi->status == 0) || ($tukar_institusi != null && $tukar_institusi->status == 1 && $tukar_institusi->id_institusi_baru != Auth::user()->id_institusi))
                                         <div class="badge badge-light-warning fw-bold">Tukar Institusi</div>
                                     @elseif($tukar_institusi != null && $tukar_institusi->status == 1 && $tukar_institusi->id_institusi_baru != $pelajar->id_institusi)
                                         <div class="badge badge-light-warning fw-bold">Terima Pelajar</div>
@@ -123,9 +123,15 @@
                               
                               <td class="text-center">
                                   <!--begin::Edit-->
-                                  @if ($tukar_institusi != null && $tukar_institusi->status == 1 && $tukar_institusi->id_institusi_baru != $pelajar->id_institusi)
+                                  @if ($tukar_institusi != null && $tukar_institusi->status == 1 && $tukar_institusi->id_institusi_baru != $pelajar->id_institusi && $tukar_institusi->id_institusi_baru == Auth::user()->id_institusi)
                                   <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_terima{{$pelajar->no_kp}}">
                                       <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Terima Pelajar">
+                                          <i class="ki-solid ki-pencil text-dark fs-2"></i>
+                                      </span>
+                                  </a>
+                                  @elseif ($tukar_institusi != null && $tukar_institusi->status == 1 && $tukar_institusi->id_institusi_baru != Auth::user()->id_institusi)
+                                  <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3">
+                                      <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Pertukaran institusi pelajar dalam semakan Sekretariat BKOKU KPT">
                                           <i class="ki-solid ki-pencil text-dark fs-2"></i>
                                       </span>
                                   </a>

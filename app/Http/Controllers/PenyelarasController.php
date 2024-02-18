@@ -2009,7 +2009,7 @@ class PenyelarasController extends Controller
         $tukar_institusi->save();
 
         // Redirect to the original page
-        return redirect()->back()->with('success', 'Tukar institusi berjaya, untuk semakan sekretariat.');
+        return redirect()->back()->with('success', 'Permohonan tukar institusi berjaya dihantar untuk semakan Sekretariat BKOKU KPT.');
     }
 
     public function terimaPelajar(Request $request, $id)

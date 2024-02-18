@@ -230,7 +230,7 @@
 					<div class="menu-item">
 						<a class="menu-link" href="{{ route('senarai.pelajar.ua')}}">
 							<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
-							<span class="menu-title">Institusi Pengajian</span>
+							<span class="menu-title">Tukar Institusi</span>
 						</a>
 					</div>
 				@endif
@@ -252,6 +252,9 @@
 		$layakT = DB::table('tuntutan')->where('status', '=', '6')->count();
 		$bayarT = DB::table('tuntutan')->where('status', '=', '8')->count();
 		$totalT = DB::table('tuntutan')->count();
+
+		//tukar institusi
+		$tukarInstitusi = DB::table('tukar_institusi')->where('status', '=', '0')->count();
 	@endphp
 
 	<!--begin::sidebar menu-->
@@ -367,7 +370,7 @@
 				<div class="menu-item">
 					<a class="menu-link" href="{{ route('senarai.tukar.institusi')}}">
 						<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
-						<span class="menu-title">Tukar Institusi</span>
+						<span class="menu-title">Tukar Institusi ({{$tukarInstitusi}}) </span>
 					</a>
 				</div>
 				<div class="menu-item">

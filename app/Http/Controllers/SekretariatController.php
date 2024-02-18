@@ -2063,7 +2063,19 @@ class SekretariatController extends Controller
         $tukar_institusi->status = $request->input('status');
         $tukar_institusi->save();
 
-        // Redirect to the original page
-        return redirect()->back()->with('success', 'Tukar institusi berjaya.');
+        if ($request->input('status') === '1') {
+            // Redirect to the original page
+            return redirect()->back()->with('success', 'Tukar institusi diluluskan.');
+        }
+        else if ($request->input('status') === '2') {
+            // Redirect to the original page
+            return redirect()->back()->with('failed', 'Tukar institusi tidak diluluskan.');
+        }
+        else {
+            // Redirect to the original page
+            return redirect()->back();
+        }
+
+        
     }
 }
