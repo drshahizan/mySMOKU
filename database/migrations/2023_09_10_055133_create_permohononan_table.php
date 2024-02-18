@@ -32,11 +32,13 @@ return new class extends Migration
             $table->string('no_baucer')->nullable();
             $table->date('tarikh_baucer')->nullable();
             $table->string('perihal')->nullable();
+            $table->string('sesi_bayaran')->nullable();
             $table->string('no_cek')->nullable();
             $table->date('tarikh_transaksi')->nullable();
             $table->string('perakuan')->nullable();
             $table->date('tarikh_hantar')->nullable();
             $table->integer('status')->nullable();
+            $table->string('status_pemohon')->nullable();
             $table->foreign('smoku_id')
               ->references('id')->on('smoku')->onDelete('cascade');
             $table->timestamps();
