@@ -7,7 +7,7 @@
 
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="/assets/css/sekretariat.css">
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
         
         {{-- JAVASCRIPT --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -432,69 +432,55 @@
                                 {{-- Kutipan Balik --}}
                                 <div class="tab-pane fade" id="kutipan" role="tabpanel" aria-labelledby="kutipan-tab">
                                     <div class="body">
-                                        <table id="sortTable3" class="table table-bordered table-striped" style="margin-top: 0 !important;">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 15%"><b>ID Tuntutan</b></th>                                                   
-                                                    <th style="width: 45%"><b>Nama</b></th>
-                                                    <th class="text-center" style="width: 10%"><b>Amaun Yuran</b></th>
-                                                    <th class="text-center" style="width: 15%"><b>Amaun Wang Saku</b></th>
-                                                    <th class="text-center" style="width: 15%"><b>Tarikh Tuntutan</b></th>
-                                                </tr>
-                                            </thead>
+                                        <div class="card-body">
+                                            {{-- Header --}}
+                                            <div class="d-flex flex-column align-items-start flex-xl-row mb-10">
+                                                <div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xl-2 me-4"
+                                                    data-bs-toggle="tooltip" data-bs-trigger="hover">
+                                                    <span class="fs-3 fw-bold text-gray-800">Muat Turun Borang Laporan Kutipan Balik Pelajar BKOKU yang Tarik Diri/ Berhenti</span>
+                                                </div>
+                                            </div>
 
-                                            <tbody>
-                                                @php
-                                                    $i=0;
-                                                @endphp
-                                                @php
-                                                    require_once app_path('helpers.php');
-                                                @endphp
-                                            
-                                                @foreach ($tuntutanLayak as $item)
-                                                    @php
-                                                        $i++;
-                                                        $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                        $institusi_id = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
-                                                        $instiusi_user = auth()->user()->id_institusi;
+                                            {{-- Table --}}
+                                            <table class="table table-bordered table-striped pt-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 45%">Item</th>
+                                                        <th style="width: 55%">Muat Turun</th>
+                                                    </tr>
+                                                </thead>
 
-                                                        // nama pemohon
-                                                        $text = ucwords(strtolower($nama_pemohon)); 
-                                                        $conjunctions = ['bin', 'binti'];
-                                                        $words = explode(' ', $text);
-                                                        $result = [];
-                                                        foreach ($words as $word) {
-                                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                                $result[] = Str::lower($word);
-                                                            } else {
-                                                                $result[] = $word;
-                                                            }
-                                                        }
-                                                        $pemohon = implode(' ', $result);
-                                                    @endphp
-                                                    
-                                                    @if ($institusi_id == $instiusi_user)
-                                                        <!-- Table rows -->
-                                                        <tr>
-                                                            {{-- <td style="width: 15%"><a href="#" class="open-modal-link-tuntutan" data-bs-toggle="modal" data-bs-target="#baucerTuntutan" data-no-rujukan="{{$item['id']}}">{{$item['no_rujukan_tuntutan']}}</a></td>                                           --}}
-                                                            <td style="width: 15%">{{$item['no_rujukan_tuntutan']}}</td>                                          
-                                                            <td style="width: 45%">{{$pemohon}}</td>
-                                                            <td class="text-center" style="width: 10%">
-                                                                @if ($item->yuran_disokong !== null)
-                                                                    RM {{ number_format($item->yuran_disokong, 2) }}
-                                                                @endif
-                                                            </td>
-                                                            <td class="text-center" style="width: 15%">
-                                                                @if ($item->wang_saku_disokong !== null)
-                                                                    RM {{ number_format($item->wang_saku_disokong, 2) }}
-                                                                @endif
-                                                            </td>
-                                                            <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_hantar))}}</td>
-                                                        </tr>
-                                                    @endif
-                                                @endforeach 
-                                            </tbody>
-                                        </table>      
+                                                @php
+                                                    $nama_uni = DB::table('bk_info_institusi')->where('id_institusi', $institusiId)->value('nama_institusi');
+                                                @endphp
+
+                                                <tbody>
+                                                    {{-- NAMA INSTITUSI --}}
+                                                    <tr>
+                                                        <td>Nama Institusi Pengajian</td>
+                                                        <td>
+                                                            <input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{$nama_uni}}" readonly>												
+                                                        </td>
+                                                    </tr>
+
+                                                    {{-- DOKUMEN SPBB 2a --}}
+                                                    <tr>
+                                                        <td>Borang SPBB 2a (Laporan Kutipan Balik)</td>
+                                                        <td>
+                                                            <div id="file-input-container">
+                                                                <div class="d-flex">
+                                                                    <div class="file-input">
+                                                                        <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
+                                                                            Muat Turun SPBB 2a<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                                                     
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>      
                                     </div>
                                 </div>
                                 {{-- End of Kutipan Balik --}}
@@ -555,7 +541,104 @@
             @endif
         </script>
 
-        <script>
+       <script>
+            $(document).ready(function() {
+                // Initialize DataTables
+                initDataTable('#sortTable1', 'datatable1');
+                initDataTable('#sortTable2', 'datatable2');
+
+                // Log data for all tables
+                logTableData('Table 1 Data:', datatable1);
+                logTableData('Table 2 Data:', datatable2);
+
+                // Attach event listener to tab change
+                $('#myTab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                    var targetTabId = $(e.target).attr('id');
+                    console.log('Active Tab ID:', targetTabId); // Log the active tab ID
+                    if (targetTabId !== 'kutipan') {
+                        showFilterToolbar();
+                        applyFilter();
+                    } else {
+                        hideFilterToolbarForKutipanTab();
+                    }
+                });
+            });
+
+            function initDataTable(tableId, variableName) {
+                // Check if the datatable is already initialized
+                if ($.fn.DataTable.isDataTable(tableId)) {
+                    // Destroy the existing DataTable instance
+                    $(tableId).DataTable().destroy();
+                }
+
+                // Initialize the datatable and assign it to the global variable
+                window[variableName] = $(tableId).DataTable({
+                    ordering: true, // Enable manual sorting
+                    order: [], // Disable initial sorting
+                    columnDefs: [
+                        { orderable: false, targets: [0] },
+                    ]
+                });
+            }
+
+            function applyFilter() {
+                // Apply filter only for Permohonan and Tuntutan tabs
+                var startDate = $('#start_date').val();
+                var endDate = $('#end_date').val();
+                
+                applyAndLogFilter('Table 1', datatable1, startDate, endDate);
+                applyAndLogFilter('Table 2', datatable2, startDate, endDate);
+            }
+
+            function applyAndLogFilter(tableName, table, startDate, endDate) {
+                // Reset the search for all columns to ensure a clean filter
+                table.columns().search('').draw();
+
+                // Clear the previous search functions
+                $.fn.dataTable.ext.search = [];
+
+                // Apply date range filter for Permohonan and Tuntutan tabs only
+                if (startDate || endDate) {
+                    $.fn.dataTable.ext.search.push(
+                        function (settings, data, dataIndex) {
+                            let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
+                            let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
+
+                            let dateAdded = moment(data[4], 'DD/MM/YYYY');
+
+                            // Check if the date falls within the specified range
+                            let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
+                                        (!endDateObj || dateAdded.isSameOrBefore(endDateObj));
+
+                            return result;
+                        }
+                    );
+                }
+
+                // Log filtered data only for Permohonan and Tuntutan tabs
+                console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
+
+                // Go to the first page for the table
+                table.page(0).draw(false);
+
+                // Log the data of visible rows on the first page for the table
+                console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
+            }
+
+            function logTableData(message, table) {
+                console.log(message, table.rows().data().toArray());
+            }
+
+            function hideFilterToolbarForKutipanTab() {
+                $('#kutipan-tab .card-toolbar').hide(); // Hide the filter toolbar for Kutipan Balik tab
+            }
+
+            function showFilterToolbar() {
+                $('.card-toolbar').show(); // Show the filter toolbar
+            }
+       </script>
+
+        {{-- <script>
             var datatable1, datatable2;
 
             $(document).ready(function() 
@@ -563,12 +646,10 @@
                 // Initialize DataTables
                 initDataTable('#sortTable1', 'datatable1');
                 initDataTable('#sortTable2', 'datatable2');
-                initDataTable('#sortTable3', 'datatable3');
 
                 // Log data for all tables
                 logTableData('Table 1 Data:', datatable1);
                 logTableData('Table 2 Data:', datatable2);
-                logTableData('Table 3 Data:', datatable3);
             });
 
             function initDataTable(tableId, variableName) 
@@ -654,7 +735,7 @@
             {
                 console.log(message, table.rows().data().toArray());
             }
-        </script>
+        </script> --}}
 
         <script>
             $(document).ready(function() {

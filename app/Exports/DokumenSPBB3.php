@@ -202,7 +202,7 @@ class DokumenSPBB3 implements WithEvents
                     ['', 'CAWANGAN:'],
                     ['', 'BULAN:', $this->getBulanData()],
                     [''],
-                    ['LAPORAN KUTIPAN BALIK BAGI PELAJAR BKOKU YANG TARIK DIRI/ BERHENTI'],
+                    ['LAPORAN PENYATA TERIMAAN DAN BAYARAN PROGRAM BKOKU'],
                 ];
 
                 foreach ($customHeaderData as $index => $rowData) {
@@ -242,17 +242,6 @@ class DokumenSPBB3 implements WithEvents
                         ],
                     ],
                 ]);
-
-                // // Set alignment and style for the "LAPORAN KUTIPAN BALIK BAGI PELAJAR BKOKU YANG TARIK DIRI/ BERHENTI" row
-                // $headerTittle = 'B5:' . $event->sheet->getHighestColumn() . '5';
-                // $event->sheet->getStyle($headerTittle)->applyFromArray([
-                //     'font' => [
-                //         'bold' => true,
-                //     ],
-                //     'alignment' => [
-                //         'horizontal' => Alignment::HORIZONTAL_CENTER,
-                //     ],
-                // ]);
 
 
                 // Merge cells for "TERIMAAN" and "BAYARAN" sections

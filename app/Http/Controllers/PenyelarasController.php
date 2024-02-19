@@ -1644,10 +1644,12 @@ class PenyelarasController extends Controller
     //PENYALURAN - PEMBAYARAN
     public function senaraiPemohonLayak(Request $request)
     {
+        $user = auth()->user();
+        $institusiId = $user->id_institusi;
         $permohonanLayak = Permohonan::orderBy('id', 'desc')->where('permohonan.status', '=', '6')->get();
         $tuntutanLayak = Tuntutan::orderBy('id', 'desc')->where('tuntutan.status', '=', '6')->get();
 
-        return view('penyaluran.penyelaras.senarai_pembayaran', compact('permohonanLayak','tuntutanLayak'));
+        return view('penyaluran.penyelaras.senarai_pembayaran', compact('permohonanLayak','tuntutanLayak','institusiId'));
     }
 
     //PENYALURAN - PEMBAYARAN - PERMOHONAN

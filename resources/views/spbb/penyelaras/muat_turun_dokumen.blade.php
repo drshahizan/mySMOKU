@@ -161,22 +161,6 @@
 										</td>
 									</tr>
 
-									{{-- DOKUMEN SPBB 2a --}}
-									<tr>
-										<td>Borang SPBB 2a (Laporan Tuntutan)</td>
-										<td>
-											<div id="file-input-container">
-												<div class="d-flex">
-													<div class="file-input">
-														<a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
-															Muat Turun SPBB 2a<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
-														</a>
-													</div>
-												</div>
-											</div>                                                                                     
-										</td>
-									</tr>
-
 									{{-- DOKUMEN SPBB 3 --}}
 									<tr>
 										<td>Borang SPBB 3 (Penyata Terimaan)</td>
