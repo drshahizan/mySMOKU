@@ -30,7 +30,7 @@
                 margin: 0 5px;
                 margin-bottom: 20px;
                 display: inline-block;
-                background-color: #fff; /* Set background color to white or your container's background color */
+                background-color: #fff;
             }
 
             .form-filter {
@@ -493,72 +493,26 @@
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
-        <script>
-            //permohonan
-            function uploadFilePermohonan() {
-                // Trigger the click event of the hidden file input
-                document.querySelector('input[name="modified_excel_file1"]').click();
-            }
-        
-            function fileSelected1(event) {
-                // Set the hidden input value to 1 when a file is selected
-                document.getElementById('formSubmitted1').value = 1;
-                // Submit the form
-                document.getElementById('uploadForm1').submit();
-            }
+       {{-- <script>
+          var datatable1, datatable2;
 
-            //tuntutan
-            function uploadFileTuntutan() {
-                // Trigger the click event of the hidden file input
-                document.querySelector('input[name="modified_excel_file2"]').click();
-            }
-        
-            function fileSelected2(event) {
-                // Set the hidden input value to 1 when a file is selected
-                document.getElementById('formSubmitted2').value = 1;
-                // Submit the form
-                document.getElementById('uploadForm2').submit();
-            }
-        
-            // Display SweetAlert for success and error messages after file import
-            @if(session('success'))
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berjaya!',
-                    text: '{!! session('success') !!}',
-                    confirmButtonText: 'OK'
-                });
-            @endif
-        
-            @if(session('failed'))
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Tidak Berjaya!',
-                    text: '{!! session('failed') !!}',
-                    confirmButtonText: 'OK'
-                });
-            @endif
-        </script>
-
-       <script>
             $(document).ready(function() {
-                // Initialize DataTables
-                initDataTable('#sortTable1', 'datatable1');
-                initDataTable('#sortTable2', 'datatable2');
-
-                // Log data for all tables
-                logTableData('Table 1 Data:', datatable1);
-                logTableData('Table 2 Data:', datatable2);
-
-                // Attach event listener to tab change
                 $('#myTab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                    var targetTabId = $(e.target).attr('id');
+                    console.log('Tab clicked'); // Log when a tab is clicked
+                    var targetTabId = $(e.target).attr('id'); // Get the ID of the active tab
                     console.log('Active Tab ID:', targetTabId); // Log the active tab ID
-                    if (targetTabId !== 'kutipan') {
+                    if (targetTabId !== 'kutipan-tab') {
+                        // Code to execute when the active tab is not Kutipan Balik
+                        console.log('Active tab is not Kutipan Balik');
+                        // Show or hide filter toolbar as needed
                         showFilterToolbar();
                         applyFilter();
                     } else {
+                        // Code to execute when the active tab is Kutipan Balik
+                        console.log('Active tab is Kutipan Balik');
+                        // Hide filter toolbar for Kutipan Balik tab
                         hideFilterToolbarForKutipanTab();
                     }
                 });
@@ -590,6 +544,7 @@
                 applyAndLogFilter('Table 2', datatable2, startDate, endDate);
             }
 
+            // Other functions remain unchanged...
             function applyAndLogFilter(tableName, table, startDate, endDate) {
                 // Reset the search for all columns to ensure a clean filter
                 table.columns().search('').draw();
@@ -630,15 +585,17 @@
             }
 
             function hideFilterToolbarForKutipanTab() {
-                $('#kutipan-tab .card-toolbar').hide(); // Hide the filter toolbar for Kutipan Balik tab
+                console.log('Hiding filter toolbar for Kutipan Balik tab');
+                $('#kutipan .card-toolbar').hide(); // Hide the filter toolbar for Kutipan Balik tab
             }
 
             function showFilterToolbar() {
+                console.log('Showing filter toolbar');
                 $('.card-toolbar').show(); // Show the filter toolbar
             }
-       </script>
+       </script> --}}
 
-        {{-- <script>
+        <script>
             var datatable1, datatable2;
 
             $(document).ready(function() 
@@ -670,6 +627,24 @@
                     ]
                 });
             }
+
+            $('.nav-link').on('click', function() {
+                var activeTabId = $(this).attr('id');
+                
+                if (activeTabId !== 'kutipan-tab') {
+                    // Code to execute when the active tab is not Kutipan Balik
+                    console.log('Active tab is not Kutipan Balik');
+                    // Show or hide filter toolbar as needed
+                    showFilterToolbar();
+                    applyFilter();
+                } 
+                else {
+                    // Code to execute when the active tab is Kutipan Balik
+                    console.log('Active tab is Kutipan Balik');
+                    // Hide filter toolbar for Kutipan Balik tab
+                    hideFilterToolbarForKutipanTab();
+                }
+            });
 
             function applyFilter() 
             {
@@ -735,7 +710,17 @@
             {
                 console.log(message, table.rows().data().toArray());
             }
-        </script> --}}
+
+            function hideFilterToolbarForKutipanTab() {
+                console.log('Hiding filter toolbar for Kutipan Balik tab');
+                $('#kutipan-tab .card-toolbar').hide(); // Hide the filter toolbar for Kutipan Balik tab
+            }
+
+            function showFilterToolbar() {
+                console.log('Showing filter toolbar');
+                $('.card-toolbar').show(); // Show the filter toolbar
+            }
+        </script>
 
         <script>
             $(document).ready(function() {
@@ -808,6 +793,53 @@
                 });
 
             });
+        </script>
+
+        <script>
+            //permohonan
+            function uploadFilePermohonan() {
+                // Trigger the click event of the hidden file input
+                document.querySelector('input[name="modified_excel_file1"]').click();
+            }
+
+            function fileSelected1(event) {
+                // Set the hidden input value to 1 when a file is selected
+                document.getElementById('formSubmitted1').value = 1;
+                // Submit the form
+                document.getElementById('uploadForm1').submit();
+            }
+
+            //tuntutan
+            function uploadFileTuntutan() {
+                // Trigger the click event of the hidden file input
+                document.querySelector('input[name="modified_excel_file2"]').click();
+            }
+
+            function fileSelected2(event) {
+                // Set the hidden input value to 1 when a file is selected
+                document.getElementById('formSubmitted2').value = 1;
+                // Submit the form
+                document.getElementById('uploadForm2').submit();
+            }
+
+            // Display SweetAlert for success and error messages after file import
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berjaya!',
+                    text: '{!! session('success') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            @if(session('failed'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Tidak Berjaya!',
+                    text: '{!! session('failed') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
         </script>
     </body>
 </x-default-layout> 
