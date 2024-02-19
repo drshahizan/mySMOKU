@@ -471,7 +471,7 @@
                                                                 <div class="d-flex">
                                                                     <div class="file-input">
                                                                         <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-sm" style="width: 100%; margin: 0 auto;">
-                                                                            Muat Turun SPBB 2a<i class='fas fa-download' style='color:white; padding-left:20px;'></i>
+                                                                            Muat Turun SPBB 2a<i class='fas fa-download' style='color:white !important; padding-left:20px;'></i>
                                                                         </a>
                                                                     </div>
                                                                 </div>
@@ -630,7 +630,7 @@
 
             $('.nav-link').on('click', function() {
                 var activeTabId = $(this).attr('id');
-                
+
                 if (activeTabId !== 'kutipan-tab') {
                     // Code to execute when the active tab is not Kutipan Balik
                     console.log('Active tab is not Kutipan Balik');
