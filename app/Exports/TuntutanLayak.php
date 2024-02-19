@@ -67,6 +67,7 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
             'No Baucar',
             'Perihal',
             'Tarikh Baucar',
+            'Status (Aktif/Tidak Aktif)'
         ];
     }
 
@@ -83,6 +84,7 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
             'H' => 20,
             'I' => 50,
             'J' => 20,
+            'K' => 30,
         ];
     }
 
