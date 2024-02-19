@@ -26,6 +26,7 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
                 'no_baucer' => $row['no_baucar'],
                 'perihal' => $row['perihal'],
                 'tarikh_baucer' => $this->convertExcelDate($row['tarikh_baucar']),
+                'status_pemohon' => $row['status_aktiftidak_aktif'],
             ];
         }
         // Go to private function to update the 'status' column in the permohonan table to 8
@@ -51,13 +52,22 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
             $noBaucer = $modifiedRecord['no_baucer'];
             $perihal = $modifiedRecord['perihal'];
             $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
+            $statusPemohon = $modifiedRecord['status_pemohon'];
 
             // Check if the required attributes are filled
             if (!empty($yuranDibayar) && !empty($wangSakuDibayar) && !empty($noBaucer) && !empty($perihal) && !empty($tarikhBaucer)) 
             {
-                // Update the 'status' column to 8 for the permohonan record with matching 'no_rujukan_permohonan'
+                // Update the fields for the permohonan record with matching 'no_rujukan_permohonan'
                 Permohonan::where('no_rujukan_permohonan', $noRujukan)
-                    ->update(['status' => 8]);
+                            ->update([
+                                'status' => 8, 
+                                'yuran_dibayar' => $yuranDibayar,
+                                'wang_saku_dibayar' => $wangSakuDibayar,
+                                'no_baucer' => $noBaucer,
+                                'perihal' => $perihal,
+                                'tarikh_baucer' => $tarikhBaucer,
+                                'status_pemohon' => $statusPemohon
+                            ]);
 
                 // Fetch the corresponding row from permohonan table
                 $permohonan = Permohonan::where('no_rujukan_permohonan', $noRujukan)
