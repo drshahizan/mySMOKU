@@ -33,10 +33,10 @@ class Tuntutan extends Model
         'no_baucer',
         'tarikh_baucer',
         'perihal',
-        'sesi_bayaran',
         'no_cek',
         'tarikh_transaksi',
         'tarikh_hantar',
         'status_pemohon',
+        'sesi_spbb',
     ];
 }

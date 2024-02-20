@@ -28,11 +28,11 @@ class Permohonan extends Model
         'no_baucer',
         'tarikh_baucer',
         'perihal',
-        'sesi_bayaran',
         'no_cek',
         'perakuan',
         'tarikh_hantar',
         'status',
         'status_pemohon',
+        'sesi_spbb',
     ];
 }
