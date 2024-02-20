@@ -96,9 +96,6 @@
 
                                                     $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
                                                     $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
-
-                                                    // dd($item['id']);
-
                                                 @endphp
                                                 <tr>
                                                     <td>
@@ -115,10 +112,12 @@
                                                     @elseif ($item['status']=='4')
                                                         <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
                                                     @elseif ($item['status']=='5')
-                                                    <td class="text-center"><button class="btn bg-dikembalikan text-white" data-bs-toggle="modal" data-bs-target="#dikembalikan{{$item['id']}}">
-                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Papar sebab dikembalikan">
-                                                        {{ucwords(strtolower($status))}}</span>
-                                                    </button></td>
+                                                    <td class="text-center">
+                                                        <button class="btn bg-dikembalikan text-white" data-bs-toggle="modal" data-bs-target="#dikembalikan{{$item['id']}}">
+                                                            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Papar sebab dikembalikan">{{ucwords(strtolower($status))}}</span>
+                                                        </button>
+                                                    </td>
+
                                                     {{-- Modal --}}
                                                     <div class="modal fade" id="dikembalikan{{$item['id']}}" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog">
@@ -166,6 +165,7 @@
                                                         </div>
                                                     </div> 
                                                     {{-- Modal --}}
+
                                                     @elseif ($item['status']=='6')
                                                         <td class="text-center">
                                                             <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
@@ -173,7 +173,7 @@
                                                             </a>
                                                         </td>
                                                     @elseif ($item['status']=='7')
-                                                        <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        <td class="text-center"><button class="btn bg-danger btn-round btn-sm custom-width-btn">{{ucwords(strtolower($status))}}</button></td>
                                                     @elseif ($item['status']=='8')
                                                         <td class="text-center">
                                                             <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn bg-dibayar btn-round btn-sm custom-width-btn">
@@ -181,7 +181,9 @@
                                                             </a>
                                                         </td>
                                                     @elseif ($item['status']=='9')
-                                                        <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        <td class="text-center"><button class="btn bg-batal btn-round btn-sm custom-width-btn">{{ucwords(strtolower($status))}}</button></td>
+                                                    @elseif ($item['status']=='10')
+                                                        <td class="text-center"><button class="btn btn-round btn-sm custom-width-btn text-white" style="background-color: #488BCD">{{ucwords(strtolower($status))}}</button></td>
                                                     @endif
 
                                                         
@@ -224,21 +226,12 @@
                                                         </td>
                                                     @else
                                                         <td class="text-center"></td> 
-
                                                     @endif
-
-                                                    
-
-
-                                                </tr>
-                                                
+                                                </tr>  
                                             @endif
-
-                                            
                                         @endforeach
                                         </tbody>
                                     </table>
-                                    
                                 </div>
                             </div>
                         </div>
