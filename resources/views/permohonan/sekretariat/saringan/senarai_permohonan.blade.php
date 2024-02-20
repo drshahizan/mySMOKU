@@ -67,8 +67,8 @@
         <div id="main-content">
             <div class="container-fluid">
                 <!-- Page header section  -->
-                <div class="row clearfix">
-                    <div class="col-lg-12">
+                <div class="block-header">
+                    <div class="row clearfix">
                         <div class="card">
                             <div class="header">
                                 <h2>Senarai Saringan Permohonan<br><small>Klik ID Permohonan untuk melakukan saringan selanjutnya.</small></h2>

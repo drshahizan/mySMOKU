@@ -58,34 +58,81 @@ class ModifiedTuntutanImport implements ToCollection, WithHeadingRow
             $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
             $statusPemohon = $modifiedRecord['status_pemohon'];
 
-            // Check if the required attributes are filled
-            if (!empty($yuranDibayar) && !empty($wangSakuDibayar) && !empty($noBaucer) && !empty($perihal) && !empty($tarikhBaucer) && !empty($statusPemohon)) {
-                // Update the fields for the tuntutan record that matching 'no_rujukan_tuntutan'
-                Tuntutan::where('no_rujukan_tuntutan', $noRujukan)
-                        ->update([
-                            'status' => 8, 
-                            'yuran_dibayar' => $yuranDibayar,
-                            'wang_saku_dibayar' => $wangSakuDibayar,
-                            'no_baucer' => $noBaucer,
-                            'perihal' => $perihal,
-                            'tarikh_baucer' => $tarikhBaucer,
-                            'status_pemohon' => $statusPemohon
-                        ]);
+            // Condition : yuran_dibayar and wang_saku_dibayar are not NULL and not equal to zero
+            if ((!is_null($yuranDibayar) || $yuranDibayar != 0) && (!is_null($wangSakuDibayar) || $wangSakuDibayar != 0) && !is_null($noBaucer)) {
+                $status = 8;
+            } else {
+                $status = 10;
+            }
 
-                // Fetch the corresponding row from tuntutan table
-                $tuntutan = Tuntutan::where('no_rujukan_tuntutan', $noRujukan)
-                    ->select('id', 'smoku_id')
-                    ->first();
-
-                // Create a new record in sejarah_tuntutan table based on the fetched row
-                if ($tuntutan) {
-                    SejarahTuntutan::create([
-                        'tuntutan_id' => $tuntutan->id,
-                        'smoku_id' => $tuntutan->smoku_id,
-                        'status' => 8
+            // Update the fields for the tuntutan record that matching 'no_rujukan_tuntutan'
+            Tuntutan::where('no_rujukan_tuntutan', $noRujukan)
+                    ->update([
+                        'status' => $status, 
+                        'yuran_dibayar' => $yuranDibayar,
+                        'wang_saku_dibayar' => $wangSakuDibayar,
+                        'no_baucer' => $noBaucer,
+                        'perihal' => $perihal,
+                        'tarikh_baucer' => $tarikhBaucer,
+                        'status_pemohon' => $statusPemohon
                     ]);
-                }
+
+            // Fetch the corresponding row from tuntutan table
+            $tuntutan = Tuntutan::where('no_rujukan_tuntutan', $noRujukan)
+                ->select('id', 'smoku_id')
+                ->first();
+
+            // Create a new record in sejarah_tuntutan table based on the fetched row
+            if ($tuntutan) {
+                SejarahTuntutan::create([
+                    'tuntutan_id' => $tuntutan->id,
+                    'smoku_id' => $tuntutan->smoku_id,
+                    'status' => $status
+                ]);
             }
         }
     }
+
+
+    // private function updateStatus()
+    // {
+    //     foreach ($this->modifiedData as $modifiedRecord) {
+    //         $noRujukan = $modifiedRecord['no_rujukan_tuntutan'];
+    //         $yuranDibayar = $modifiedRecord['yuran_dibayar'];
+    //         $wangSakuDibayar = $modifiedRecord['wang_saku_dibayar'];
+    //         $noBaucer = $modifiedRecord['no_baucer'];
+    //         $perihal = $modifiedRecord['perihal'];
+    //         $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
+    //         $statusPemohon = $modifiedRecord['status_pemohon'];
+
+    //         // Check if the required attributes are filled
+    //         if (!empty($yuranDibayar) && !empty($wangSakuDibayar) && !empty($noBaucer) && !empty($perihal) && !empty($tarikhBaucer) && !empty($statusPemohon)) {
+    //             // Update the fields for the tuntutan record that matching 'no_rujukan_tuntutan'
+    //             Tuntutan::where('no_rujukan_tuntutan', $noRujukan)
+    //                     ->update([
+    //                         'status' => 8, 
+    //                         'yuran_dibayar' => $yuranDibayar,
+    //                         'wang_saku_dibayar' => $wangSakuDibayar,
+    //                         'no_baucer' => $noBaucer,
+    //                         'perihal' => $perihal,
+    //                         'tarikh_baucer' => $tarikhBaucer,
+    //                         'status_pemohon' => $statusPemohon
+    //                     ]);
+
+    //             // Fetch the corresponding row from tuntutan table
+    //             $tuntutan = Tuntutan::where('no_rujukan_tuntutan', $noRujukan)
+    //                 ->select('id', 'smoku_id')
+    //                 ->first();
+
+    //             // Create a new record in sejarah_tuntutan table based on the fetched row
+    //             if ($tuntutan) {
+    //                 SejarahTuntutan::create([
+    //                     'tuntutan_id' => $tuntutan->id,
+    //                     'smoku_id' => $tuntutan->smoku_id,
+    //                     'status' => 8
+    //                 ]);
+    //             }
+    //         }
+    //     }
+    // }
 }
