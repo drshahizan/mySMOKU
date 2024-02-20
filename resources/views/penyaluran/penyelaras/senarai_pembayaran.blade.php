@@ -101,19 +101,19 @@
                                     <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <div class="row form-filter" >
                                             <div class="col-md-4" style="display: flex; align-items: center;">
-                                                <div class="flex-grow-1">
+                                                <div class="col-md-6">
                                                     <input type="date" name="start_date" id="start_date" value="" class="form-control" />
                                                 </div>
                                             
                                                 <div class="dash">-</div>
                                             
-                                                <div class="flex-grow-1">
+                                                <div class="col-md-6">
                                                     <input type="date" name="end_date" id="end_date" value="" class="form-control" />
                                                 </div>
                                             </div>
                                             
-                                            <div class="col-md-4 fv-row">
-                                                <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
+                                            <div class="col-md-1">
+                                                <button type="submit" class="btn btn-primary fw-semibold" style="margin-left: 20px;" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
                                                     <i class="ki-duotone ki-filter fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
@@ -121,54 +121,66 @@
                                                 </button>
                                             </div>
                                             
-                                            <div class="col-md-4 export-container" data-program-code="permohonan">
-                                                <div class="row" style="margin-bottom:0px!important"> 
-                                                    <div class="col-md-6">
+                                            <div class="col-md-7 export-container" data-program-code="permohonan">
+                                                <div class="row" style="margin-bottom:0px!important; margin-left:30px;"> 
+                                                    <div class="col-md-3">
+                                                        <a href="{{ route('penyelaras.dokumen.SPBB1a') }}" class="btn btn-info btn-round" style="width: 100%; margin: 0 auto;">
+															<i class='fas fa-download' style='color:white !important;'></i>SPBB 1a
+														</a>
+                                                    </div>
+
+                                                    <div class="col-md-4" style="padding-left:30px;">
                                                         <form action="{{ route('penyelaras.permohonan.senarai.layak.excel') }}" method="GET" target="_blank">
                                                             @csrf
                                                             <input type="hidden" name="start_date" id="permohonan_hidden_start_date">
                                                             <input type="hidden" name="end_date" id="permohonan_hidden_end_date">
 
                                                             <button type="submit" class="btn btn-secondary btn-round">
-                                                                <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
+                                                                <i class="fas fa-download" style="color: black; padding-right:5px;"></i>Kemaskini
                                                             </button>
                                                         </form>
                                                     </div>
                                         
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-5">
                                                         <form id="uploadForm1" action="{{ route('modified.file.pembayaran.permohonan') }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             <input type="file" name="modified_excel_file1" accept=".xlsx, .xls" style="display: none" onchange="fileSelected1(event)">
                                                             <input type="hidden" name="form_submitted1" id="formSubmitted1" value="0">
                                                             <button type="button" class="btn btn-secondary btn-round" onclick="uploadFilePermohonan()"> 
-                                                                <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Muat Naik
+                                                                <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Maklumat Baucer
                                                             </button>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4 export-container" data-program-code="tuntutan"> 
-                                                <div class="row" style="margin-bottom:0px!important"> 
-                                                    <div class="col-md-6">
+                                            <div class="col-md-7 export-container" data-program-code="tuntutan"> 
+                                                <div class="row" style="margin-bottom:0px!important; margin-left:40px;"> 
+                                                    <div class="col-md-3">
+                                                        <a href="{{ route('penyelaras.dokumen.SPBB1') }}" class="btn btn-info btn-round">
+															<i class='fas fa-download' style='color:white !important;'></i>SPBB 1
+														</a>
+                                                    </div>
+
+                                                    <div class="col-md-4" style="padding-left:30px;">
                                                         <form action="{{ route('penyelaras.tuntutan.senarai.layak.excel') }}" method="GET" target="_blank">
                                                             @csrf
                                                             <input type="hidden" name="start_date" id="tuntutan_hidden_start_date">
                                                             <input type="hidden" name="end_date" id="tuntutan_hidden_end_date">
 
                                                             <button type="submit" class="btn btn-secondary btn-round">
-                                                                <i class="fa fa-file-excel" style="color: black; padding-right:5px;"></i>Muat Turun
+                                                                <i class="fas fa-download" style="color: black; padding-right:5px;"></i>Kemaskini
                                                             </button>
                                                         </form>
                                                     </div>
                                             
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-5">
                                                         <form id="uploadForm2" action="{{ route('modified.file.pembayaran.tuntutan') }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             <input type="file" name="modified_excel_file2" accept=".xlsx, .xls" style="display: none" onchange="fileSelected2(event)">
                                                             <input type="hidden" name="form_submitted2" id="formSubmitted2" value="0">
                                                             <button type="button" class="btn btn-secondary btn-round" onclick="uploadFileTuntutan()"> 
-                                                                <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Muat Naik
+                                                                <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Maklumat Baucer
                                                             </button>
                                                         </form>
                                                     </div>
