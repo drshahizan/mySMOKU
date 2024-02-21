@@ -33,60 +33,75 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
 
     public function collection()
     {
+        // Get the current month and year
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        // Determine the sesi_bayaran based on the current month and year
+        if ($currentMonth == 2) {
+            $sesiBayaran = '1/' . $currentYear;
+        } elseif ($currentMonth == 4) {
+            $sesiBayaran = '2/' . $currentYear;
+        } elseif ($currentMonth == 10) {
+            $sesiBayaran = '3/' . $currentYear;
+        }
+
         // Fetch data from Tuntutan table
         $senaraiTuntutan = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
-            ->join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
-            ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
-            ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
-            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-            ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
-            ->join('bk_mod as h','h.kod_mod','=','c.mod')
-            ->join('tuntutan_saringan as a', 'a.tuntutan_id','=','tuntutan.id')
-            ->where('tuntutan.status', 8) // Apply status condition to Tuntutan table
-            ->where('d.jenis', 'Yuran')
-            ->where('f.id_institusi', $this->instiusi_user)
-            ->select(
-                'b.id',
-                'b.nama',
-                'b.no_kp',
-                'c.tarikh_mula',
-                'c.tarikh_tamat',
-                'c.nama_kursus',
-                'c.status',
-                DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
-                'tuntutan.yuran_dibayar',
-                'tuntutan.wang_saku_dibayar',
-                'tuntutan.no_baucer',
-                'tuntutan.tarikh_transaksi',  
-                'tuntutan.perihal',  
-            );
+                            ->join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
+                            ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
+                            ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
+                            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+                            ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
+                            ->join('bk_mod as h','h.kod_mod','=','c.mod')
+                            ->join('tuntutan_saringan as a', 'a.tuntutan_id','=','tuntutan.id')
+                            ->where('tuntutan.status', 8)
+                            ->where('tuntutan.sesi_bayaran', $sesiBayaran)
+                            ->where('d.jenis', 'Yuran')
+                            ->where('f.id_institusi', $this->instiusi_user)
+                            ->select(
+                                'b.nama',
+                                'b.no_kp',
+                                'c.tarikh_mula',
+                                'c.tarikh_tamat',
+                                'c.nama_kursus',
+                                'c.status',
+                                DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
+                                'tuntutan.yuran_dibayar',
+                                'tuntutan.wang_saku_dibayar',
+                                'tuntutan.no_baucer',
+                                'tuntutan.tarikh_transaksi',  
+                                'tuntutan.perihal',  
+                            )
+                            ->groupBy('tuntutan.smoku_id', 'b.nama', 'b.no_kp', 'c.tarikh_mula', 'c.tarikh_tamat', 'c.nama_kursus', 'c.status', 'tuntutan.yuran_dibayar', 'tuntutan.wang_saku_dibayar', 'tuntutan.no_baucer', 'tuntutan.tarikh_transaksi', 'tuntutan.perihal', 'd.jumlah');
 
         // Fetch data from Permohonan table
         $senaraiPermohonan = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
-            ->join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
-            ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
-            ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
-            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-            ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
-            ->join('bk_mod as h','h.kod_mod','=','c.mod')
-            ->where('permohonan.status', 8) // Apply status condition to Permohonan table
-            ->where('d.jenis', 'Yuran')
-            ->where('f.id_institusi', $this->instiusi_user)
-            ->select(
-                'b.id',
-                'b.nama',
-                'b.no_kp',
-                'c.tarikh_mula',
-                'c.tarikh_tamat',
-                'c.nama_kursus',
-                'c.status',
-                DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
-                'permohonan.yuran_dibayar',
-                'permohonan.wang_saku_dibayar',
-                'permohonan.no_baucer',
-                'permohonan.tarikh_transaksi',    
-                'permohonan.perihal',    
-            );
+                            ->join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
+                            ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
+                            ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
+                            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+                            ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
+                            ->join('bk_mod as h','h.kod_mod','=','c.mod')
+                            ->where('permohonan.status', 8) 
+                            ->where('permohonan.sesi_bayaran', $sesiBayaran)
+                            ->where('d.jenis', 'Yuran')
+                            ->where('f.id_institusi', $this->instiusi_user)
+                            ->select(
+                                'b.nama',
+                                'b.no_kp',
+                                'c.tarikh_mula',
+                                'c.tarikh_tamat',
+                                'c.nama_kursus',
+                                'c.status',
+                                DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
+                                'permohonan.yuran_dibayar',
+                                'permohonan.wang_saku_dibayar',
+                                'permohonan.no_baucer',
+                                'permohonan.tarikh_transaksi',    
+                                'permohonan.perihal',    
+                            )
+                            ->groupBy('permohonan.smoku_id', 'b.nama', 'b.no_kp', 'c.tarikh_mula', 'c.tarikh_tamat', 'c.nama_kursus', 'c.status', 'permohonan.yuran_dibayar', 'permohonan.wang_saku_dibayar', 'permohonan.no_baucer', 'permohonan.tarikh_transaksi', 'permohonan.perihal', 'd.jumlah');
 
         // Combine the results of both queries
         $senarai = $senaraiTuntutan->union($senaraiPermohonan)->get();
@@ -148,12 +163,6 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
         // Calculate the total of yuran dibayar & want saki dibayar
         $bayaran = number_format($row->yuran_dibayar, 2, '.', '') + number_format($row->wang_saku_dibayar, 2, '.', '');
 
-        // Checking for status
-        if($row->status == 1)
-            $status = 'AKTIF';
-        else
-            $status = 'TIDAK AKTIF';
-
         // Increment the counter for "BIL" column
         $this->counter++;
 
@@ -166,7 +175,7 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
              $row->no_kp,
              strtoupper($row->nama_kursus),
              $tempoh_tajaan,
-             $status,
+             $row->status,
              number_format($bayaran, 2, '.', ''), 
              $row->no_baucer,
              strtoupper($row->perihal),
