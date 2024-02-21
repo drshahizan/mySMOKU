@@ -38,7 +38,7 @@ return new class extends Migration
             $table->date('tarikh_hantar')->nullable();
             $table->integer('status')->nullable();
             $table->string('status_pemohon')->nullable();
-            $table->string('sesi_spbb',)->nullable();
+            $table->string('sesi_bayaran',)->nullable();
             $table->foreign('smoku_id')
               ->references('id')->on('smoku')->onDelete('cascade');
             $table->timestamps();
