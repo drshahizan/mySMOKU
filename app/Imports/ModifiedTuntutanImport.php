@@ -49,6 +49,21 @@ class ModifiedTuntutanImport implements ToCollection, WithHeadingRow
 
     private function updateStatus()
     {
+        // Determine the sesi bayaran based on the current date
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        if ($currentMonth == 2) {
+            $sesiBayaran = '1/' . $currentYear;
+        } elseif ($currentMonth == 4) {
+            $sesiBayaran = '2/' . $currentYear;
+        } elseif ($currentMonth == 10) {
+            $sesiBayaran = '3/' . $currentYear;
+        } else {
+            // Default to current month and year if not February, April, or October
+            $sesiBayaran = $currentMonth . '/' . $currentYear;
+        }
+
         foreach ($this->modifiedData as $modifiedRecord) {
             $noRujukan = $modifiedRecord['no_rujukan_tuntutan'];
             $yuranDibayar = $modifiedRecord['yuran_dibayar'];
@@ -74,7 +89,8 @@ class ModifiedTuntutanImport implements ToCollection, WithHeadingRow
                         'no_baucer' => $noBaucer,
                         'perihal' => $perihal,
                         'tarikh_baucer' => $tarikhBaucer,
-                        'status_pemohon' => $statusPemohon
+                        'status_pemohon' => $statusPemohon,
+                        'sesi_bayaran' => $sesiBayaran
                     ]);
 
             // Fetch the corresponding row from tuntutan table
@@ -92,7 +108,6 @@ class ModifiedTuntutanImport implements ToCollection, WithHeadingRow
             }
         }
     }
-
 
     // private function updateStatus()
     // {
