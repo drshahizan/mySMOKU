@@ -51,15 +51,9 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
         // Fetch data from Tuntutan table
         $senaraiTuntutan = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
                             ->join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
-                            ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
-                            ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
                             ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-                            ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
-                            ->join('bk_mod as h','h.kod_mod','=','c.mod')
-                            ->join('tuntutan_saringan as a', 'a.tuntutan_id','=','tuntutan.id')
                             ->where('tuntutan.status', 8)
                             ->where('tuntutan.sesi_bayaran', $sesiBayaran)
-                            ->where('d.jenis', 'Yuran')
                             ->where('f.id_institusi', $this->instiusi_user)
                             ->select(
                                 'b.nama',
@@ -67,27 +61,21 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                                 'c.tarikh_mula',
                                 'c.tarikh_tamat',
                                 'c.nama_kursus',
-                                'c.status',
-                                DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
                                 'tuntutan.yuran_dibayar',
                                 'tuntutan.wang_saku_dibayar',
                                 'tuntutan.no_baucer',
                                 'tuntutan.tarikh_transaksi',  
                                 'tuntutan.perihal',  
+                                'tuntutan.status_pemohon',
                             )
-                            ->groupBy('tuntutan.smoku_id', 'b.nama', 'b.no_kp', 'c.tarikh_mula', 'c.tarikh_tamat', 'c.nama_kursus', 'c.status', 'tuntutan.yuran_dibayar', 'tuntutan.wang_saku_dibayar', 'tuntutan.no_baucer', 'tuntutan.tarikh_transaksi', 'tuntutan.perihal', 'd.jumlah');
+                            ->groupBy('tuntutan.smoku_id', 'b.nama', 'b.no_kp', 'c.tarikh_mula', 'c.tarikh_tamat', 'c.nama_kursus', 'c.status', 'tuntutan.yuran_dibayar', 'tuntutan.wang_saku_dibayar', 'tuntutan.no_baucer', 'tuntutan.tarikh_transaksi', 'tuntutan.perihal', 'tuntutan.status_pemohon');
 
         // Fetch data from Permohonan table
         $senaraiPermohonan = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
                             ->join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
-                            ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
-                            ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
                             ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-                            ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
-                            ->join('bk_mod as h','h.kod_mod','=','c.mod')
                             ->where('permohonan.status', 8) 
                             ->where('permohonan.sesi_bayaran', $sesiBayaran)
-                            ->where('d.jenis', 'Yuran')
                             ->where('f.id_institusi', $this->instiusi_user)
                             ->select(
                                 'b.nama',
@@ -95,15 +83,14 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                                 'c.tarikh_mula',
                                 'c.tarikh_tamat',
                                 'c.nama_kursus',
-                                'c.status',
-                                DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
                                 'permohonan.yuran_dibayar',
                                 'permohonan.wang_saku_dibayar',
                                 'permohonan.no_baucer',
                                 'permohonan.tarikh_transaksi',    
                                 'permohonan.perihal',    
+                                'permohonan.status_pemohon', 
                             )
-                            ->groupBy('permohonan.smoku_id', 'b.nama', 'b.no_kp', 'c.tarikh_mula', 'c.tarikh_tamat', 'c.nama_kursus', 'c.status', 'permohonan.yuran_dibayar', 'permohonan.wang_saku_dibayar', 'permohonan.no_baucer', 'permohonan.tarikh_transaksi', 'permohonan.perihal', 'd.jumlah');
+                            ->groupBy('permohonan.smoku_id', 'b.nama', 'b.no_kp', 'c.tarikh_mula', 'c.tarikh_tamat', 'c.nama_kursus', 'c.status', 'permohonan.yuran_dibayar', 'permohonan.wang_saku_dibayar', 'permohonan.no_baucer', 'permohonan.tarikh_transaksi', 'permohonan.perihal', 'permohonan.status_pemohon');
 
         // Combine the results of both queries
         $senarai = $senaraiTuntutan->union($senaraiPermohonan)->get();
@@ -270,17 +257,13 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
         // Update total values
         $this->totalBayaran += $bayaran;
 
-        // Checking for status
-        if($row->status == 1)
-            $status = 'AKTIF';
-
         return [
              $this->counter,
              $row->nama,
              $row->no_kp,
              strtoupper($row->nama_kursus),
              $tempoh_tajaan,
-             $status,
+             strtoupper($row->status_pemohon),
              number_format($bayaran, 2, '.', ''), 
              $row->no_baucer,
              strtoupper($row->perihal),
