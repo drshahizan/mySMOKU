@@ -273,11 +273,11 @@ class PentadbirController extends Controller
         try {
             $client = new Client();
             $url = 'http://10.29.216.151/api/bkoku/request-MQR';
-            $response = $client->get($url);
-
+            $response = $client->post($url);
+        
             $statusCode = $response->getStatusCode();
             $responseContent = $response->getBody()->getContents();
-
+        
             // Check if the status code indicates success (usually 2xx)
             if ($statusCode >= 200 && $statusCode < 300) {
                 // API connection is successful
@@ -291,6 +291,7 @@ class PentadbirController extends Controller
             // Handle exceptions
             $error['mqa'] = 'Ralat dikesan: ' . $e->getMessage();
         }
+        
 
         try {
             $client = new Client();
