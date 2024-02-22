@@ -1690,6 +1690,7 @@ class PenyelarasController extends Controller
             $noBaucer = $modifiedRecord['no_baucer'];
             $perihal = $modifiedRecord['perihal'];
             $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
+            $statusPemohon = $modifiedRecord['status_pemohon'];
 
             // Retrieve the corresponding database record based on no_rujukan_permohonan
             $permohonan = Permohonan::where('no_rujukan_permohonan', $noRujukan)->first();
@@ -1707,6 +1708,7 @@ class PenyelarasController extends Controller
                     'perihal' => $perihal,
                     'tarikh_baucer' => $tarikhBaucer,
                     'baki_dibayar' => $amaun_yuran->jumlah - $yuranDibayar - $wangSakuDibayar,
+                    'status_pemohon' => $statusPemohon
                 ]);
                 // Optionally, you can log a success message
                 Log::info("Record with no_rujukan_permohonan $noRujukan updated successfully.");
@@ -1732,7 +1734,7 @@ class PenyelarasController extends Controller
         $existingRecord = Permohonan::where('id', $id)->first();
 
         if ($existingRecord) {
-            // Update the respective row in permohonan_kelulusan table
+            // Update the respective row in permohonan table
             $existingRecord->yuran_dibayar = number_format($request->yuranDibayar, 2, '.', '');
             $existingRecord->wang_saku_dibayar = number_format($request->wangSakuDibayar, 2, '.', '');
             $existingRecord->baki_dibayar = $amaun_yuran->jumlah - $request->yuranDibayar - $request->wangSakuDibayar;
@@ -1806,6 +1808,7 @@ class PenyelarasController extends Controller
             $noBaucer = $modifiedRecord['no_baucer'];
             $perihal = $modifiedRecord['perihal'];
             $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
+            $statusPemohon = $modifiedRecord['status_pemohon'];
 
             // Retrieve the corresponding database record based on no_rujukan_tuntutan
             $tuntutan = Tuntutan::where('no_rujukan_tuntutan', $noRujukan)->first();
@@ -1823,6 +1826,7 @@ class PenyelarasController extends Controller
                     'perihal' => $perihal,
                     'tarikh_baucer' => $tarikhBaucer,
                     'baki_dibayar' => $amaun_yuran->jumlah - $yuranDibayar - $wangSakuDibayar,
+                    'status_pemohon' => $statusPemohon
                 ]);
                 // Optionally, you can log a success message
                 Log::info("Record with no_rujukan_tuntutan $noRujukan updated successfully.");
@@ -1908,7 +1912,7 @@ class PenyelarasController extends Controller
 
         session()->flash('success', 'Maklumat baucer telah berjaya dikemaskini.');
 
-        return redirect('/penyelaras/penyaluran/permohonan/dibayar');
+        return redirect('/penyelaras/penyaluran/permohonan-tuntutan/dibayar');
     }
 
     public function updateMaklumatBaucerTuntutan(Request $request, $tuntutanId)
@@ -1925,7 +1929,7 @@ class PenyelarasController extends Controller
 
         session()->flash('success', 'Maklumat baucer telah berjaya dikemaskini.');
 
-        return redirect('/penyelaras/penyaluran/permohonan/dibayar');
+        return redirect('/penyelaras/penyaluran/permohonan-tuntutan/dibayar');
     }
 
     public function deleteItemTuntutan($id)

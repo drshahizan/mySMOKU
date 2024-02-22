@@ -37,6 +37,6 @@ class Tuntutan extends Model
         'tarikh_transaksi',
         'tarikh_hantar',
         'status_pemohon',
-        'sesi_spbb',
+        'sesi_bayaran',
     ];
 }

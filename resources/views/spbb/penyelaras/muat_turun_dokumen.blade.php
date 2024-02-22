@@ -114,7 +114,7 @@
 									</tr>
 
 									{{-- DOKUMEN SPBB 1a --}}
-									<tr>
+									{{-- <tr>
 										<td>Borang SPBB 1a (Permohonan Berstatus Layak)</td>
 										<td>
 											<div id="file-input-container">
@@ -127,10 +127,10 @@
 												</div>
 											</div>                                                                                     
 										</td>
-									</tr>
+									</tr> --}}
 
 									{{-- DOKUMEN SPBB 1 --}}
-									<tr>
+									{{-- <tr>
 										<td>Borang SPBB 1 (Tuntutan Berstatus Layak)</td>
 										<td>
 											<div id="file-input-container">
@@ -143,7 +143,7 @@
 												</div>
 											</div>                                                                                     
 										</td>
-									</tr>
+									</tr> --}}
 
 									{{-- DOKUMEN SPBB 2 --}}
 									<tr>

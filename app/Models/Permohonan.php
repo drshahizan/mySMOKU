@@ -33,6 +33,6 @@ class Permohonan extends Model
         'tarikh_hantar',
         'status',
         'status_pemohon',
-        'sesi_spbb',
+        'sesi_bayaran',
     ];
 }
