@@ -121,6 +121,7 @@
                                                 </button>
                                             </div>
                                             
+                                            {{-- PERMOHONAN --}}
                                             <div class="col-md-7 export-container" data-program-code="permohonan">
                                                 <div class="row" style="margin-bottom:0px!important; margin-left:30px;"> 
                                                     <div class="col-md-3">
@@ -154,6 +155,7 @@
                                                 </div>
                                             </div>
 
+                                            {{-- TUNTUTAN --}}
                                             <div class="col-md-7 export-container" data-program-code="tuntutan"> 
                                                 <div class="row" style="margin-bottom:0px!important; margin-left:40px;"> 
                                                     <div class="col-md-3">
@@ -181,6 +183,29 @@
                                                             <input type="hidden" name="form_submitted2" id="formSubmitted2" value="0">
                                                             <button type="button" class="btn btn-secondary btn-round" onclick="uploadFileTuntutan()"> 
                                                                 <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Maklumat Baucer
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {{-- KUTIPAN BALIK --}}
+                                            <div class="col-md-12 export-container" data-program-code="kutipan"> 
+                                                <div class="row" style="margin-bottom:0px!important; margin-left:40px;"> 
+                                                    <div class="col-md-3">
+                                                        <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round">
+															<i class='fas fa-download' style='color:white !important;'></i>SPBB 1
+														</a>
+                                                    </div>
+
+                                                    <div class="col-md-4" style="padding-left:30px;">
+                                                        <form action="{{ route('penyelaras.tuntutan.senarai.layak.excel') }}" method="GET" target="_blank">
+                                                            @csrf
+                                                            <input type="hidden" name="start_date" id="tuntutan_hidden_start_date">
+                                                            <input type="hidden" name="end_date" id="tuntutan_hidden_end_date">
+
+                                                            <button type="submit" class="btn btn-secondary btn-round">
+                                                                <i class="fas fa-download" style="color: black; padding-right:5px;"></i>Kemaskini
                                                             </button>
                                                         </form>
                                                     </div>
@@ -643,19 +668,11 @@
             $('.nav-link').on('click', function() {
                 var activeTabId = $(this).attr('id');
 
-                if (activeTabId !== 'kutipan-tab') {
-                    // Code to execute when the active tab is not Kutipan Balik
-                    console.log('Active tab is not Kutipan Balik');
+                if (activeTabId) {
                     // Show or hide filter toolbar as needed
                     showFilterToolbar();
                     applyFilter();
                 } 
-                else {
-                    // Code to execute when the active tab is Kutipan Balik
-                    console.log('Active tab is Kutipan Balik');
-                    // Hide filter toolbar for Kutipan Balik tab
-                    hideFilterToolbarForKutipanTab();
-                }
             });
 
             function applyFilter() 
