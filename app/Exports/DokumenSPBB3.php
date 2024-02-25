@@ -16,14 +16,14 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use Carbon\Carbon;
 
-class DokumenSPBB3 implements WithEvents
+class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapping
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     protected $instiusi_user;
-    private $counter = 0;
-    private $totalBayaran  = 0;
+    private $totalBayaran = 0;
+    private $totalDisokong = 0;
 
     public function __construct()
     {
@@ -31,85 +31,84 @@ class DokumenSPBB3 implements WithEvents
         $this->instiusi_user = Auth::user()->id_institusi;
     }
 
-    // public function collection()
-    // {
-    //     // Fetch data from Tuntutan table
-    //     $senaraiTuntutan = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
-    //         ->join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
-    //         ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
-    //         ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
-    //         ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-    //         ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
-    //         ->join('bk_mod as h','h.kod_mod','=','c.mod')
-    //         ->join('tuntutan_saringan as a', 'a.tuntutan_id','=','tuntutan.id')
-    //         ->where('tuntutan.status', 8) // Apply status condition to Tuntutan table
-    //         ->where('d.jenis', 'Yuran')
-    //         ->where('f.id_institusi', $this->instiusi_user)
-    //         ->select(
-    //             'b.id',
-    //             'b.nama',
-    //             'b.no_kp',
-    //             'c.tarikh_mula',
-    //             'c.tarikh_tamat',
-    //             'c.nama_kursus',
-    //             'c.status',
-    //             DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
-    //             'tuntutan.yuran_dibayar',
-    //             'tuntutan.wang_saku_dibayar',
-    //             'tuntutan.no_baucer',
-    //             'tuntutan.tarikh_transaksi',  
-    //             'tuntutan.perihal',  
-    //         );
+    public function collection()
+    {
+        // Get the current month and year
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
 
-    //     // Fetch data from Permohonan table
-    //     $senaraiPermohonan = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
-    //         ->join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
-    //         ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
-    //         ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
-    //         ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-    //         ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
-    //         ->join('bk_mod as h','h.kod_mod','=','c.mod')
-    //         ->where('permohonan.status', 8) // Apply status condition to Permohonan table
-    //         ->where('d.jenis', 'Yuran')
-    //         ->where('f.id_institusi', $this->instiusi_user)
-    //         ->select(
-    //             'b.id',
-    //             'b.nama',
-    //             'b.no_kp',
-    //             'c.tarikh_mula',
-    //             'c.tarikh_tamat',
-    //             'c.nama_kursus',
-    //             'c.status',
-    //             DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
-    //             'permohonan.yuran_dibayar',
-    //             'permohonan.wang_saku_dibayar',
-    //             'permohonan.no_baucer',
-    //             'permohonan.tarikh_transaksi',    
-    //             'permohonan.perihal',    
-    //         );
+        // Determine the sesi_bayaran based on the current month and year
+        if ($currentMonth == 2) {
+            $sesiBayaran = '1/' . $currentYear;
+        } elseif ($currentMonth == 4) {
+            $sesiBayaran = '2/' . $currentYear;
+        } elseif ($currentMonth == 10) {
+            $sesiBayaran = '3/' . $currentYear;
+        }
 
-    //     // Combine the results of both queries
-    //     $senarai = $senaraiTuntutan->union($senaraiPermohonan)->get();
+        // Fetch data from Tuntutan table
+        $senaraiTuntutan = Tuntutan::join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
+                            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+                            ->where('tuntutan.status', 8)
+                            ->where('tuntutan.sesi_bayaran', $sesiBayaran)
+                            ->where('f.id_institusi', $this->instiusi_user)
+                            ->select(
+                                'tuntutan.tarikh_transaksi',
+                                'tuntutan.no_cek',
+                                'tuntutan.yuran_disokong',
+                                'tuntutan.wang_saku_disokong',
+                                'tuntutan.tarikh_baucer',
+                                'tuntutan.perihal',
+                                'tuntutan.no_baucer',
+                                'tuntutan.yuran_dibayar',
+                                'tuntutan.wang_saku_dibayar',
+                            )
+                            ->groupBy('tuntutan.smoku_id', 'tuntutan.tarikh_transaksi', 'tuntutan.no_cek', 'tuntutan.yuran_disokong', 'tuntutan.wang_saku_disokong', 
+                            'tuntutan.tarikh_baucer', 'tuntutan.perihal', 'tuntutan.no_baucer',  'tuntutan.yuran_dibayar', 'tuntutan.wang_saku_dibayar');
 
-    //     return $senarai;
-    // }
+        // Fetch data from Permohonan table
+        $senaraiPermohonan = Permohonan::join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
+                            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+                            ->where('permohonan.status', 8) 
+                            ->where('permohonan.sesi_bayaran', $sesiBayaran)
+                            ->where('f.id_institusi', $this->instiusi_user)
+                            ->select(
+                                'permohonan.tarikh_transaksi',
+                                'permohonan.catatan_disokong', 
+                                'permohonan.no_cek',
+                                'permohonan.yuran_disokong',
+                                'permohonan.wang_saku_disokong',
+                                'permohonan.tarikh_baucer',
+                                'permohonan.perihal',
+                                'permohonan.no_baucer',
+                                'permohonan.yuran_dibayar',
+                                'permohonan.wang_saku_dibayar',
+                            )
+                            ->groupBy('permohonan.smoku_id', 'permohonan.tarikh_transaksi', 'permohonan.catatan_disokong', 'permohonan.no_cek', 'permohonan.yuran_disokong', 'permohonan.wang_saku_disokong',
+                            'permohonan.tarikh_baucer', 'permohonan.perihal', 'permohonan.no_baucer', 'permohonan.yuran_dibayar', 'permohonan.wang_saku_dibayar',);
 
-    // public function headings(): array
-    // {
-    //     return [
-    //         // Custom Rows
-    //         ['INSTITUSI:'],
-    //         ['CAWANGAN:'],
-    //         ['BULAN:'],
-    //         [''],
-    //         ['LAPORAN PENYATA TERIMAAN DAN BAYARAN PROGRAM BKOKU'], 
-    //         [''],
+        // Combine the results of both queries
+        $senarai = $senaraiTuntutan->union($senaraiPermohonan)->get();
 
-    //         // Section headers
-    //         ['TARIKH', 'PERKARA', 'RUJUKAN', 'RM'], // Headers for the "TERIMAAN" section
-    //         ['TARIKH', 'PERKARA', 'RUJUKAN', 'RM'], // Headers for the "BAYARAN" section
-    //     ];
-    // }
+        return $senarai;
+    }
+
+    public function headings(): array
+    {
+        return [
+            // Custom Rows
+            ['INSTITUSI:'],
+            ['CAWANGAN:'],
+            ['BULAN:'],
+            [''],
+            ['LAPORAN PENYATA TERIMAAN DAN BAYARAN PROGRAM BKOKU'], 
+            [''],
+
+            // Section headers
+            ['TARIKH', 'PERKARA', 'RUJUKAN', 'RM'], // Headers for the "TERIMAAN" section
+            ['TARIKH', 'PERKARA', 'RUJUKAN', 'RM'], // Headers for the "BAYARAN" section
+        ];
+    }
 
     // public function columnWidths(): array
     // {
@@ -127,43 +126,27 @@ class DokumenSPBB3 implements WithEvents
     //     ];
     // }
 
-    // public function map($row): array
-    // {
-    //     // Retrive tarikh mula & tamat pengajian
-    //     $tarikh_mula = Carbon::parse($row->tarikh_mula)->format('d/m/Y');
-    //     $tarikh_tamat = Carbon::parse($row->tarikh_tamat)->format('d/m/Y');
+    public function map($row): array
+    {
+        // Calculate the total of yuran dibayar & want saki dibayar
+        $dibayar = number_format($row->yuran_dibayar, 2, '.', '') + number_format($row->wang_saku_dibayar, 2, '.', '');
+        $disokong = number_format($row->yuran_disokong, 2, '.', '') + number_format($row->wang_saku_disokong, 2, '.', '');
 
-    //     // Concatenate the formatted dates with the desired format
-    //     $tempoh_tajaan = $tarikh_mula . ' - ' . $tarikh_tamat;
+        // Update total values
+        $this->totalBayaran += $dibayar;
+        $this->totalDisokong += $disokong;
 
-    //     // Calculate the total of yuran dibayar & want saki dibayar
-    //     $bayaran = number_format($row->yuran_dibayar, 2, '.', '') + number_format($row->wang_saku_dibayar, 2, '.', '');
-
-    //     // Checking for status
-    //     if($row->status == 1)
-    //         $status = 'AKTIF';
-    //     else
-    //         $status = 'TIDAK AKTIF';
-
-    //     // Increment the counter for "BIL" column
-    //     $this->counter++;
-
-    //     // Update total values
-    //     $this->totalBayaran += $bayaran;
-
-    //     return [
-    //          $this->counter,
-    //          $row->nama,
-    //          $row->no_kp,
-    //          strtoupper($row->nama_kursus),
-    //          $tempoh_tajaan,
-    //          $status,
-    //          number_format($bayaran, 2, '.', ''), 
-    //          $row->no_baucer,
-    //          strtoupper($row->perihal),
-    //          Carbon::parse($row->tarikh_transaksi)->format('d/m/Y'),
-    //     ];
-    // }
+        return [
+             Carbon::parse($row->tarikh_transaksi)->format('d/m/Y'),
+             strtoupper($row->catatan_disokong),
+             $row->no_cek,
+             number_format($disokong, 2, '.', ''), 
+             Carbon::parse($row->tarikh_baucer)->format('d/m/Y'),
+             strtoupper($row->perihal),
+             $row->no_baucer,
+             number_format($dibayar, 2, '.', ''), 
+        ];
+    }
 
     private function getInstitusiData()
     {
@@ -343,6 +326,7 @@ class DokumenSPBB3 implements WithEvents
 
                 // Format the total values with two decimal places
                 $totalBayaranFormatted = number_format($this->totalBayaran , 2, '.', '');
+                $totalDisokongFormatted = number_format($this->totalDisokong , 2, '.', '');
 
                 // Add a row at the end to display the total values
                 $event->sheet->append([
@@ -350,7 +334,7 @@ class DokumenSPBB3 implements WithEvents
                     ['','','','','','BAKI PERUNTUKAN [(iii) = (i) - (ii)]', $totalBayaranFormatted],
                     [''],
                     // Custom row for total
-                    ['', 'JUMLAH (RM)', '', $totalBayaranFormatted, '', 'JUMLAH (RM)', '', $totalBayaranFormatted],
+                    ['', 'JUMLAH (RM)', '', $totalDisokongFormatted, '', 'JUMLAH (RM)', '', $totalBayaranFormatted],
                 ]);
 
                 // Set the border for custom footer
