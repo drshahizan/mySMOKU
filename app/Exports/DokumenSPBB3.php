@@ -296,7 +296,7 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
                 $event->sheet->getColumnDimension('D')->setWidth(25);
                 $event->sheet->getColumnDimension('E')->setWidth(15);
                 $event->sheet->getColumnDimension('F')->setWidth(15);
-                $event->sheet->getColumnDimension('G')->setWidth(25);
+                $event->sheet->getColumnDimension('G')->setWidth(35);
                 $event->sheet->getColumnDimension('H')->setWidth(25);
                 $event->sheet->getColumnDimension('I')->setWidth(15);
 
@@ -341,7 +341,7 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
                 $endColumn = 'I'; 
                 $endRow = $event->sheet->getHighestRow(); 
 
-                $event->sheet->getStyle($startColumn . $startRow . ':' . $endColumn . $endRow)->applyFromArray([
+                $event->sheet->getStyle($startColumn . $startRow . ':' . $endColumn . $endRow+3)->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => Border::BORDER_THIN,
