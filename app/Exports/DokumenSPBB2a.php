@@ -34,15 +34,28 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
 
     public function collection()
     {
-        // Fetch data from Tuntutan table
+         // Get the current month and year
+         $currentMonth = Carbon::now()->month;
+         $currentYear = Carbon::now()->year;
+ 
+         // Determine the sesi_bayaran based on the current month and year
+         if ($currentMonth == 2) {
+             $sesiBayaran = '1/' . $currentYear;
+         } elseif ($currentMonth == 4) {
+             $sesiBayaran = '2/' . $currentYear;
+         } elseif ($currentMonth == 10) {
+             $sesiBayaran = '3/' . $currentYear;
+         }
+
+        // Fetch data from Tuntutan table with status 10
         $senaraiTuntutan = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
             ->join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
             ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
             ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
             ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
             ->join('bk_mod as h','h.kod_mod','=','c.mod')
-            ->join('tuntutan_saringan as a', 'a.tuntutan_id','=','tuntutan.id')
-            ->where('tuntutan.status', 10) // Apply status condition to Tuntutan table
+            ->where('tuntutan.status', 10)
+            ->where('tuntutan.sesi_bayaran', $sesiBayaran)
             ->where('f.id_institusi', $this->instiusi_user)
             ->select(
                 'b.id',
@@ -60,16 +73,17 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
                 'tuntutan.tarikh_transaksi',  
                 'tuntutan.status_pemohon',  
                 'tuntutan.perihal',  
-            );
+            );;
 
-        // Fetch data from Permohonan table
+        // Fetch data from Permohonan table with status 10
         $senaraiPermohonan = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
             ->join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
             ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
             ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
             ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
             ->join('bk_mod as h','h.kod_mod','=','c.mod')
-            ->where('permohonan.status', 10) // Apply status condition to Permohonan table
+            ->where('permohonan.status', 10)
+            ->where('permohonan.sesi_bayaran', $sesiBayaran)
             ->where('f.id_institusi', $this->instiusi_user)
             ->select(
                 'b.id',
@@ -89,11 +103,80 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
                 'permohonan.perihal',    
             );
 
-        // Combine the results of both queries
-        $senarai = $senaraiTuntutan->union($senaraiPermohonan)->get();
+        // Fetch data from Tuntutan table with status 8 and additional conditions
+        $senaraiTuntutanStatus8 = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
+            ->join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
+            ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
+            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+            ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
+            ->join('bk_mod as h','h.kod_mod','=','c.mod')
+            ->join('tuntutan_saringan as a', 'a.tuntutan_id','=','tuntutan.id')
+            ->where('tuntutan.status', 8)
+            ->where('tuntutan.sesi_bayaran', $sesiBayaran)
+            ->where(function($query) {
+                $query->whereColumn('tuntutan.yuran_dibayar', '!=', 'tuntutan.yuran_disokong')
+                    ->orWhereColumn('tuntutan.wang_saku_dibayar', '!=', 'tuntutan.wang_saku_disokong');
+            })
+            ->where('f.id_institusi', $this->instiusi_user)
+            ->select(
+                'b.id',
+                'b.nama',
+                'b.no_kp',
+                'c.tarikh_mula',
+                'c.tarikh_tamat',
+                'c.nama_kursus',
+                'g.peringkat',
+                'tuntutan.yuran_dibayar',
+                'tuntutan.wang_saku_dibayar',
+                'tuntutan.yuran_disokong',
+                'tuntutan.wang_saku_disokong',
+                'tuntutan.no_baucer',
+                'tuntutan.tarikh_transaksi',  
+                'tuntutan.status_pemohon',  
+                'tuntutan.perihal',  
+            );;
+
+        // Fetch data from Permohonan table with status 8 and additional conditions
+        $senaraiPermohonanStatus8 = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
+            ->join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
+            ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
+            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+            ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
+            ->join('bk_mod as h','h.kod_mod','=','c.mod')
+            ->where('permohonan.status', 8)
+            ->where('permohonan.sesi_bayaran', $sesiBayaran)
+            ->where(function($query) {
+                $query->whereColumn('permohonan.yuran_dibayar', '!=', 'permohonan.yuran_disokong')
+                    ->orWhereColumn('permohonan.wang_saku_dibayar', '!=', 'permohonan.wang_saku_disokong');
+            })
+            ->where('f.id_institusi', $this->instiusi_user)
+            ->select(
+                'b.id',
+                'b.nama',
+                'b.no_kp',
+                'c.tarikh_mula',
+                'c.tarikh_tamat',
+                'c.nama_kursus',
+                'g.peringkat',
+                'permohonan.yuran_dibayar',
+                'permohonan.wang_saku_dibayar',
+                'permohonan.yuran_disokong',
+                'permohonan.wang_saku_disokong',
+                'permohonan.no_baucer',
+                'permohonan.tarikh_transaksi', 
+                'permohonan.status_pemohon',   
+                'permohonan.perihal',    
+            );
+
+        // Combine the results of all queries
+        $senarai = $senaraiTuntutan->union($senaraiPermohonan)
+            ->union($senaraiTuntutanStatus8)
+            ->union($senaraiPermohonanStatus8)
+            ->get();
 
         return $senarai;
     }
+
 
     public function headings(): array
     {
