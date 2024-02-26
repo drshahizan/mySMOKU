@@ -48,44 +48,37 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
 
         // Fetch data from Tuntutan table
         $senaraiTuntutan = Tuntutan::join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
-                            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-                            ->where('tuntutan.status', 8)
-                            ->where('tuntutan.sesi_bayaran', $sesiBayaran)
-                            ->where('f.id_institusi', $this->instiusi_user)
-                            ->select(
-                                'tuntutan.tarikh_transaksi',
-                                'tuntutan.no_cek',
-                                'tuntutan.yuran_disokong',
-                                'tuntutan.wang_saku_disokong',
-                                'tuntutan.tarikh_baucer',
-                                'tuntutan.perihal',
-                                'tuntutan.no_baucer',
-                                'tuntutan.yuran_dibayar',
-                                'tuntutan.wang_saku_dibayar',
-                            )
-                            ->groupBy('tuntutan.smoku_id', 'tuntutan.tarikh_transaksi', 'tuntutan.no_cek', 'tuntutan.yuran_disokong', 'tuntutan.wang_saku_disokong', 
-                            'tuntutan.tarikh_baucer', 'tuntutan.perihal', 'tuntutan.no_baucer',  'tuntutan.yuran_dibayar', 'tuntutan.wang_saku_dibayar');
+        ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+        ->where('tuntutan.status', 8)
+        ->where('tuntutan.sesi_bayaran', $sesiBayaran)
+        ->where('f.id_institusi', $this->instiusi_user)
+        ->select(
+            'tuntutan.tarikh_transaksi',
+            'tuntutan.no_cek',
+            'tuntutan.yuran_disokong',
+            'tuntutan.wang_saku_disokong',
+            'tuntutan.tarikh_baucer',
+            'tuntutan.no_baucer',
+            'tuntutan.yuran_dibayar',
+            'tuntutan.wang_saku_dibayar',
+        );
 
         // Fetch data from Permohonan table
         $senaraiPermohonan = Permohonan::join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
-                            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-                            ->where('permohonan.status', 8) 
-                            ->where('permohonan.sesi_bayaran', $sesiBayaran)
-                            ->where('f.id_institusi', $this->instiusi_user)
-                            ->select(
-                                'permohonan.tarikh_transaksi',
-                                'permohonan.catatan_disokong', 
-                                'permohonan.no_cek',
-                                'permohonan.yuran_disokong',
-                                'permohonan.wang_saku_disokong',
-                                'permohonan.tarikh_baucer',
-                                'permohonan.perihal',
-                                'permohonan.no_baucer',
-                                'permohonan.yuran_dibayar',
-                                'permohonan.wang_saku_dibayar',
-                            )
-                            ->groupBy('permohonan.smoku_id', 'permohonan.tarikh_transaksi', 'permohonan.catatan_disokong', 'permohonan.no_cek', 'permohonan.yuran_disokong', 'permohonan.wang_saku_disokong',
-                            'permohonan.tarikh_baucer', 'permohonan.perihal', 'permohonan.no_baucer', 'permohonan.yuran_dibayar', 'permohonan.wang_saku_dibayar',);
+        ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+        ->where('permohonan.status', 8) 
+        ->where('permohonan.sesi_bayaran', $sesiBayaran)
+        ->where('f.id_institusi', $this->instiusi_user)
+        ->select(
+            'permohonan.tarikh_transaksi',
+            'permohonan.no_cek',
+            'permohonan.yuran_disokong',
+            'permohonan.wang_saku_disokong',
+            'permohonan.tarikh_baucer',
+            'permohonan.no_baucer',
+            'permohonan.yuran_dibayar',
+            'permohonan.wang_saku_dibayar',
+        );
 
         // Combine the results of both queries
         $senarai = $senaraiTuntutan->union($senaraiPermohonan)->get();
@@ -105,29 +98,26 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
             [''],
 
             // Section headers
-            ['TARIKH', 'PERKARA', 'RUJUKAN', 'RM'], // Headers for the "TERIMAAN" section
-            ['TARIKH', 'PERKARA', 'RUJUKAN', 'RM'], // Headers for the "BAYARAN" section
+            ['', 'TARIKH', 'PERKARA', 'RUJUKAN', 'RM'], // Headers for the "TERIMAAN" section
+            ['', 'TARIKH', 'PERKARA', 'RUJUKAN', 'RM'], // Headers for the "BAYARAN" section
         ];
     }
 
-    // public function columnWidths(): array
-    // {
-    //     return [
-    //         'A' => 5,
-    //         'B' => 40,           
-    //         'C' => 20,
-    //         'D' => 30,
-    //         'E' => 25,
-    //         'F' => 15,
-    //         'G' => 20,
-    //         'H' => 20,
-    //         'I' => 30,
-    //         'J' => 20,
-    //     ];
-    // }
-
     public function map($row): array
     {
+        // Get the current month and year
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        // Determine the sesi_bayaran based on the current month and year
+        if ($currentMonth == 2) {
+            $sesiBayaran = '1 ' . $currentYear . '/'. $currentYear+1;
+        } elseif ($currentMonth == 4) {
+            $sesiBayaran = '2 ' . $currentYear . '/'. $currentYear+1;
+        } elseif ($currentMonth == 10) {
+            $sesiBayaran = '3 ' . $currentYear . '/'. $currentYear+1;
+        }
+
         // Calculate the total of yuran dibayar & want saki dibayar
         $dibayar = number_format($row->yuran_dibayar, 2, '.', '') + number_format($row->wang_saku_dibayar, 2, '.', '');
         $disokong = number_format($row->yuran_disokong, 2, '.', '') + number_format($row->wang_saku_disokong, 2, '.', '');
@@ -136,17 +126,24 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
         $this->totalBayaran += $dibayar;
         $this->totalDisokong += $disokong;
 
+        //perkara
+        $perkaraTerimaan = 'PERUNTUKAN DARIPADA BAHAGIAN BIASISWA';
+        $perkaraBayaran = 'BAYARAN YURAN PENGAJIAN DAN ELAUN WANG SAKU SESI '. $sesiBayaran;
+
+        // Prepare array elements
         return [
-             Carbon::parse($row->tarikh_transaksi)->format('d/m/Y'),
-             strtoupper($row->catatan_disokong),
-             $row->no_cek,
-             number_format($disokong, 2, '.', ''), 
-             Carbon::parse($row->tarikh_baucer)->format('d/m/Y'),
-             strtoupper($row->perihal),
-             $row->no_baucer,
-             number_format($dibayar, 2, '.', ''), 
+            '',
+            Carbon::parse($row->tarikh_transaksi)->format('d/m/Y'),
+            $perkaraTerimaan,
+            $row->no_cek,
+            number_format($disokong, 2, '.', ''), 
+            Carbon::parse($row->tarikh_baucer)->format('d/m/Y'),
+            $perkaraBayaran,
+            'SPBB2',
+            number_format($dibayar, 2, '.', ''), 
         ];
     }
+
 
     private function getInstitusiData()
     {
@@ -179,13 +176,16 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
+                $currentYear = Carbon::now()->year;
+                $sesiBayaran = $currentYear . '/'. $currentYear+1;
+
                 // Retrieve additional data for custom headers from the database
                 $customHeaderData = [
                     ['', 'INSTITUSI:', $this->getInstitusiData()],
                     ['', 'CAWANGAN:'],
                     ['', 'BULAN:', $this->getBulanData()],
                     [''],
-                    ['LAPORAN PENYATA TERIMAAN DAN BAYARAN PROGRAM BKOKU'],
+                    ['', 'LAPORAN PENYATA TERIMAAN DAN BAYARAN PROGRAM BKOKU BAGI SESI '. $sesiBayaran],
                 ];
 
                 foreach ($customHeaderData as $index => $rowData) {
@@ -217,7 +217,42 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
                 $event->sheet->getStyle($headerRange)->applyFromArray([
                     'font' => [
                         'bold' => true,
-                        'size' => 14, // Font size (14)
+                        'size' => 14,
+                    ],
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                        ],
+                    ],
+                ]);
+
+
+                // Retrieve additional data for tittle
+                $customTittle = [
+                    ['', 'LAPORAN PENYATA TERIMAAN DAN BAYARAN PROGRAM BKOKU BAGI SESI '. $sesiBayaran],
+                ];
+
+                foreach ($customTittle as $index => $rowData) {
+                    $rowNumber = $index + 5; // Adjust the row number to start from 5
+                    
+                    // Assuming the title is in the second cell of the row (index 1)
+                    $title = $rowData[1]; // Accessing the second element of the array
+                    
+                    // Merge cells for custom title
+                    $event->sheet->mergeCells("B{$rowNumber}:I{$rowNumber}"); // Merge from column B to column I
+                    
+                    // Apply data to the merged cell
+                    $event->sheet->setCellValue("B{$rowNumber}", $title); // Set the title in column B
+                }
+
+                $event->sheet->getStyle('B5:I5')->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                        'size' => 14, 
+                    ],
+                    'alignment' => [
+                        'horizontal' => Alignment::HORIZONTAL_CENTER,
+                        'vertical' => Alignment::VERTICAL_CENTER,
                     ],
                     'borders' => [
                         'allBorders' => [
@@ -327,11 +362,13 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
                 // Format the total values with two decimal places
                 $totalBayaranFormatted = number_format($this->totalBayaran , 2, '.', '');
                 $totalDisokongFormatted = number_format($this->totalDisokong , 2, '.', '');
+                $baki = $totalDisokongFormatted - $totalBayaranFormatted;
+                $bakiFormatted = number_format($baki , 2, '.', '');
 
                 // Add a row at the end to display the total values
                 $event->sheet->append([
-                    ['', 'JUMLAH TERIMAAN (i)', '', $totalBayaranFormatted, '', 'JUMLAH BAYARAN (ii)', '', $totalBayaranFormatted],
-                    ['','','','','','BAKI PERUNTUKAN [(iii) = (i) - (ii)]', $totalBayaranFormatted],
+                    ['', 'JUMLAH TERIMAAN (i)', '', $totalDisokongFormatted, '', 'JUMLAH BAYARAN (ii)', '', $totalBayaranFormatted],
+                    ['','','','','','BAKI PERUNTUKAN [(iii) = (i) - (ii)]', '', $bakiFormatted],
                     [''],
                     // Custom row for total
                     ['', 'JUMLAH (RM)', '', $totalDisokongFormatted, '', 'JUMLAH (RM)', '', $totalBayaranFormatted],
@@ -369,6 +406,8 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
                     ],
                 ]);
 
+                //get current date
+                $currentDate =  Carbon::now()->format('d/m/Y');
 
                 $event->sheet->getStyle('B' . ($lastRow + 6))->getFont()->setSize(10)->setBold(true);
                 $event->sheet->setCellValue('B' . ($lastRow + 6), "* LAMPIRAN adalah maklumat lengkap bayaran seperti di Borang SPBB2");
@@ -377,10 +416,10 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
                 $event->sheet->setCellValue('B' . ($lastRow + 7), "i)  Disahkan maklumat diatas adalah benar dan bayaran telah dibuat sewajarnya. ");
 
                 $event->sheet->getStyle('B' . ($lastRow + 8))->getFont()->setSize(10)->setBold(true);
-                $event->sheet->setCellValue('B' . ($lastRow + 8), "ii) Disahkan telah menerima sejumlah peruntukan berjumlah RM64,885.00  dan wang tersebut telah direkodkan sebagai …Akaun Amanah/Akaun Peruntukan/ ");
+                $event->sheet->setCellValue('B' . ($lastRow + 8), "ii) Disahkan telah menerima sejumlah peruntukan berjumlah RM " . $totalDisokongFormatted . " dan wang tersebut telah direkodkan sebagai …Akaun Amanah/Akaun Peruntukan/ ");
 
                 $event->sheet->getStyle('B' . ($lastRow + 9))->getFont()->setSize(10)->setBold(true);
-                $event->sheet->setCellValue('B' . ($lastRow + 9), "iii)Disahkan sehingga 31/12/2023  peruntukan telah berbaki RM 0.00");
+                $event->sheet->setCellValue('B' . ($lastRow + 9), "iii)Disahkan sehingga ". $currentDate . " peruntukan telah berbaki RM " . $bakiFormatted);
 
                 $event->sheet->getStyle('C' . ($lastRow + 11))->getFont()->setSize(10);
                 $event->sheet->setCellValue('C' . ($lastRow + 11), 'Disediakan oleh:');
