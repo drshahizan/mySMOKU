@@ -297,7 +297,7 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
                 $event->sheet->getColumnDimension('E')->setWidth(15);
                 $event->sheet->getColumnDimension('F')->setWidth(15);
                 $event->sheet->getColumnDimension('G')->setWidth(35);
-                $event->sheet->getColumnDimension('H')->setWidth(25);
+                $event->sheet->getColumnDimension('H')->setWidth(15);
                 $event->sheet->getColumnDimension('I')->setWidth(15);
 
                 // Custom section headers

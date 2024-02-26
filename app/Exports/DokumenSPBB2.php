@@ -310,13 +310,14 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
         // Concatenate the formatted dates with the desired format
         $tempoh_tajaan = $tarikh_mula . ' - ' . $tarikh_tamat;
 
+        // Concatenate the no_baucer 
         $baucer = $row->no_baucer_permohonan . '&' . $row->no_baucer_tuntutan;
+
         // Calculate the total of yuran dibayar & want saki dibayar
-        // Note: Assuming $row->yuran_dibayar and $row->wang_saku_dibayar already include combined values
-        // $bayaran = number_format($row->yuran_dibayar, 2, '.', '') + number_format($row->wang_saku_dibayar, 2, '.', '');
+        $dibayar = number_format($row->yuran_dibayar, 2, '.', '') + number_format($row->wang_saku_dibayar, 2, '.', '');
 
         // Update total values
-        // $this->totalBayaran += $bayaran;
+        $this->totalBayaran += $dibayar;
 
         return [
              $this->counter,
@@ -363,13 +364,16 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
+                $currentYear = Carbon::now()->year;
+                $sesiBayaran = $currentYear . '/'. $currentYear+1;
+
                 // Retrieve additional data for custom headers from the database
                 $customHeaderData = [
                     ['INSTITUSI:', $this->getInstitusiData()],
                     ['CAWANGAN:'],
                     ['BULAN:', $this->getBulanData()],
                     [''],
-                    ['LAPORAN BAYARAN PROGRAM BKOKU (SPBB 2)'],
+                    ['LAPORAN BAYARAN PROGRAM BKOKU BAGI SESI ' . $sesiBayaran . ' (SPBB 2)'],
                 ];
 
                 foreach ($customHeaderData as $index => $rowData) {
@@ -395,6 +399,21 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                     }
                 }
 
+                // Set alignment and style for the entire header row
+                $headerRange = 'A1:' . $event->sheet->getHighestColumn() . '3'; // Assuming the header row is from B1 to the last column in row 3
+                $event->sheet->getStyle($headerRange)->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                        'size' => 12,
+                    ],
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                        ],
+                    ],
+                ]);
+
+
                 // Get the row number where the table headers start
                 $dataHeaderRow = 6; 
 
@@ -403,7 +422,6 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                     'font' => [
                         'bold' => true,
                         'color' => ['rgb' => '#000000'], // Data header font color 
-                        'size' => 11, // Data header font size
                     ],
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
@@ -422,6 +440,7 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                 $event->sheet->getStyle('A5')->applyFromArray([
                     'font' => [
                         'bold' => true,
+                        'size' => 12, // Data header font size
                     ],
                     'alignment' => [
                         'horizontal' => Alignment::HORIZONTAL_CENTER,
@@ -481,7 +500,8 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                 ]);
 
                 $event->sheet->getStyle('A' . ($lastRow + 3))->getFont()->setSize(10)->setBold(true);
-                $event->sheet->setCellValue('A' . ($lastRow + 3), "i) Disahkan maklumat diatas adalah benar dan bayaran telah dibuat sewajarnya. (Salinan baucar bayaran hendaklah difailkan Khas untuk SALUR PERUNTUKAN BKOKU di setiap UA - Kementerian Pendidikan Tinggi akan membuat pemantauan/semakan dari semasa ke semasa)");
+                $event->sheet->setCellValue('A' . ($lastRow + 3), "i) Disahkan maklumat diatas adalah benar dan bayaran telah dibuat sewajarnya." . "\n" .
+                " (Salinan baucar bayaran hendaklah difailkan Khas untuk SALUR PERUNTUKAN BKOKU di setiap UA - Kementerian Pendidikan Tinggi akan membuat pemantauan/semakan dari semasa ke semasa)");
 
                 $event->sheet->getStyle('B' . ($lastRow + 6))->getFont()->setSize(10);
                 $event->sheet->setCellValue('B' . ($lastRow + 6), 'Disediakan oleh:');
